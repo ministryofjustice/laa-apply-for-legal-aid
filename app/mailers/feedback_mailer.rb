@@ -1,19 +1,18 @@
 class FeedbackMailer < BaseApplyMailer
-  self.delivery_job = GovukNotifyMailerJob
-
   require_relative 'concerns/notify_template_methods'
   include NotifyTemplateMethods
 
-  def notify(feedback, legal_aid_application_id, to = support_email_address)
+  def notify(feedback_id, legal_aid_application_id, to = support_email_address)
     template_name :feedback_notification
     legal_aid_application(legal_aid_application_id)
-    personalise feedback
+    personalise feedback_id
     mail to: to
   end
 
   private
 
-  def personalise(feedback) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def personalise(feedback_id) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    feedback = Feedback.find(feedback_id)
     set_personalisation(
       created_at: feedback.created_at&.to_s(:rfc822),
       user_data: user_data(feedback),

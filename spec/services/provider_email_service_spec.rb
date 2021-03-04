@@ -10,27 +10,24 @@ RSpec.describe ProviderEmailService do
   subject { described_class.new(application) }
 
   describe '#send_email' do
-    it 'sends an email' do
-      message_delivery = instance_double(ActionMailer::MessageDelivery)
-      expect(CitizenCompletedMeansMailer).to receive(:notify_provider)
-        .with(application, provider.name, applicant.full_name, application_url, provider.email)
-        .and_return(message_delivery)
-      expect(message_delivery).to receive(:deliver_later!)
-
-      subject.send_email
+    let(:mailer_args) do
+      [
+        application.id,
+        provider.name,
+        applicant.full_name,
+        provider.email
+      ]
     end
+    it 'schedules a mail for immediate delivery' do
+      expect { subject.send_email }.to change { ScheduledMailing.count }.by(1)
 
-    context 'sending the email', :vcr do
-      let(:mail) { CitizenCompletedMeansMailer.notify_provider(application, provider.name, applicant.full_name, application_url, provider.email) }
-      it 'sends an email with the right parameters' do
-        expect(mail.govuk_notify_personalisation).to eq(
-          email: provider.email,
-          provider_name: provider.name,
-          applicant_name: applicant.full_name,
-          ref_number: application.application_ref,
-          application_url: application_url
-        )
-      end
+      rec = ScheduledMailing.first
+      expect(rec.legal_aid_application_id).to eq application.id
+      expect(rec.mailer_klass).to eq 'CitizenCompletedMeansMailer'
+      expect(rec.mailer_method).to eq 'notify_provider'
+      expect(rec.scheduled_at).to have_been_in_the_past
+      expect(rec.status).to eq 'waiting'
+      expect(rec.addressee).to eq provider.email
     end
   end
 end

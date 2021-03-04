@@ -1,4 +1,6 @@
 class SubmitApplicationReminderService
+  attr_reader :application
+
   def initialize(application)
     @application = application
   end
@@ -9,18 +11,22 @@ class SubmitApplicationReminderService
     scheduled_mail.map(&:cancel!) if scheduled_mail.present?
 
     [five_days_before_deadline, nine_am_deadline_day].each do |scheduled_time|
-      application.scheduled_mailings.create!(
-        mailer_klass: 'SubmitApplicationReminderMailer',
-        mailer_method: 'notify_provider',
-        arguments: mailer_args,
-        scheduled_at: scheduled_time
+      ScheduledMailing.send_later!(
+        mailer_klass: SubmitApplicationReminderMailer,
+        mailer_method: :notify_provider,
+        legal_aid_application_id: application.id,
+        addressee: addressee,
+        scheduled_at: scheduled_time,
+        arguments: mailer_args
       )
     end
   end
 
   private
 
-  attr_reader :application
+  def addressee
+    HostEnv.staging? ? Rails.configuration.x.support_email_address : application.provider.email
+  end
 
   def scheduled_mail
     application.scheduled_mailings.where(mailer_klass: 'SubmitApplicationReminderMailer')
@@ -30,7 +36,7 @@ class SubmitApplicationReminderService
     [
       application.id,
       application.provider.name,
-      application.provider.email
+      addressee
     ]
   end
 

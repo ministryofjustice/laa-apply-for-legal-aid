@@ -1,104 +1,112 @@
 require 'rails_helper'
 
 RSpec.describe ScheduledMailing do
-  describe '.due_now' do
-    before do
-      create_list :scheduled_mailing, 2
-      create_list :scheduled_mailing, 2, :sent
-      create :scheduled_mailing, :cancelled
+  let(:mailer_klass) { 'NotifyMailer' }
+  let(:mailer_method) { 'notify' }
+  let(:legal_aid_application) { create :legal_aid_application }
+  let(:addressee) { Faker::Internet.safe_email }
+  let(:mailer_args) { [:one, :two, 'three'] }
+  let(:frozen_time) { Time.zone.now }
+  let(:future_time) { 2.hours.from_now }
+
+  describe '.send_now' do
+    subject do
+      described_class.send_now!(mailer_klass: mailer_klass,
+                                mailer_method: mailer_method,
+                                legal_aid_application_id: legal_aid_application.id,
+                                addressee: addressee,
+                                arguments: mailer_args)
     end
 
-    context 'only mails that are due in the past and sent and due in the future and unsent' do
-      it 'returns and empty array' do
-        expect(ScheduledMailing.due_now).to be_empty
+    it 'creates a record in waiting state' do
+      travel_to frozen_time
+
+      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      rec = ScheduledMailing.first
+      expect(rec.mailer_klass).to eq mailer_klass
+      expect(rec.legal_aid_application_id).to eq legal_aid_application.id
+      expect(rec.mailer_method).to eq mailer_method
+      expect(rec.arguments).to eq mailer_args
+      expect(rec.addressee).to eq addressee
+      expect(rec.scheduled_at.to_i).to eq frozen_time.to_i
+      expect(rec.status).to eq 'waiting'
+
+      travel_back
+    end
+  end
+
+  describe '.send_later!' do
+    subject do
+      described_class.send_later!(mailer_klass: mailer_klass,
+                                  mailer_method: mailer_method,
+                                  legal_aid_application_id: legal_aid_application.id,
+                                  addressee: addressee,
+                                  arguments: mailer_args,
+                                  scheduled_at: future_time)
+    end
+
+    it 'creates a record in waiting state with a scheduled time' do
+      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      rec = ScheduledMailing.first
+      expect(rec.mailer_klass).to eq mailer_klass
+      expect(rec.mailer_method).to eq mailer_method
+      expect(rec.legal_aid_application_id).to eq legal_aid_application.id
+      expect(rec.arguments).to eq mailer_args
+      expect(rec.addressee).to eq addressee
+      expect(rec.scheduled_at.to_i).to eq future_time.to_i
+      expect(rec.status).to eq 'waiting'
+    end
+  end
+
+  describe '#cancel' do
+    let(:rec) { create :scheduled_mailing }
+    it 'updates the cancelled at column' do
+      travel_to frozen_time
+      rec.cancel!
+      expect(rec.cancelled_at.to_i).to eq frozen_time.to_i
+      travel_back
+    end
+  end
+
+  describe '#waiting?' do
+    context 'waiting' do
+      it 'returns true' do
+        rec = create :scheduled_mailing, :due
+        expect(rec.waiting?).to be true
       end
     end
 
-    context 'mails that are unsent and in the past' do
-      before { create_list :scheduled_mailing, 3, :due }
-      it 'returns a collection of three records' do
-        expect(ScheduledMailing.due_now.size).to eq 3
+    context 'not waiting' do
+      it 'returns true' do
+        rec = create :scheduled_mailing, :delivered
+        expect(rec.waiting?).to be false
       end
     end
   end
 
-  describe '#deliver!' do
-    let(:mail_message) { double 'mail message' }
-    let(:now) { Time.zone.now }
+  describe 'scopes' do
+    let!(:waiting_due) { create :scheduled_mailing, :due }
+    let!(:waiting_due_later) { create :scheduled_mailing, :due_later }
+    let!(:processing) { create :scheduled_mailing, :processing }
+    let!(:failed) { create :scheduled_mailing, :failed }
+    let!(:created) { create :scheduled_mailing, :created }
+    let!(:sending) { create :scheduled_mailing, :sending }
 
-    context 'mailer class does not override #eligible_for_delivery?' do
-      let(:scheduled_mail) { create :scheduled_mailing, :due, :always_eligible_for_delivery }
-      it 'delivers the mail' do
-        travel_to(now) do
-          expect(ResendLinkRequestMailer)
-            .to receive(:notify)
-            .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
-            .and_return(mail_message)
-          expect(mail_message).to receive(:deliver_now)
-          scheduled_mail.deliver!
-          expect(scheduled_mail.reload.sent_at.to_s).to eq now.to_s
-        end
+    describe 'waiting' do
+      it 'picks only waiting status' do
+        expect(ScheduledMailing.waiting).to match_array [waiting_due, waiting_due_later]
       end
     end
 
-    context 'mailer_class does override #eligble for delivery' do
-      let(:scheduled_mail) { create :scheduled_mailing, :due, legal_aid_application: legal_aid_application }
-      context 'the mail is eligible' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details }
-
-        it 'delivers the mail' do
-          travel_to(now) do
-            expect(SubmitApplicationReminderMailer)
-              .to receive(:notify_provider)
-              .with(scheduled_mail.legal_aid_application_id, 'Bob Marley', 'bob@wailing.jm')
-              .and_return(mail_message)
-            expect(mail_message).to receive(:deliver_now)
-            scheduled_mail.deliver!
-            expect(scheduled_mail.reload.sent_at.to_s).to eq now.to_s
-          end
-        end
-      end
-
-      context 'the mail is not eligible' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_use_ccms }
-        it 'does not deliver the mail' do
-          expect_any_instance_of(SubmitApplicationReminderMailer).not_to receive(:notify_provider)
-          scheduled_mail.deliver!
-          expect(scheduled_mail.reload.sent_at).to be_nil
-        end
-
-        it 'cancels the mail' do
-          travel_to(now) do
-            scheduled_mail.deliver!
-            expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
-          end
-        end
+    describe :past_due do
+      it 'picks only records where scheduled at is in the past' do
+        expect(ScheduledMailing.past_due).to match_array [waiting_due]
       end
     end
-  end
 
-  context 'when it tries to send mail with no attached application' do
-    let(:application) { create :legal_aid_application }
-    let!(:scheduled_mail) { create :scheduled_mailing, :invalid, legal_aid_application: application }
-
-    it 'captures error' do
-      expect(Sentry).to receive(:capture_exception).with(message_contains("Couldn't find LegalAidApplication with 'id"))
-      scheduled_mail.deliver!
-    end
-
-    it 'returns nil' do
-      expect(scheduled_mail.deliver!).to eq nil
-    end
-  end
-
-  describe '#cancel!' do
-    let(:scheduled_mail) { create :scheduled_mailing }
-    let(:now) { Time.zone.now }
-
-    it 'updates the record as cancelled' do
-      travel_to(now) do
-        scheduled_mail.cancel!
-        expect(scheduled_mail.reload.cancelled_at.to_s).to eq now.to_s
+    describe 'monitored' do
+      it 'picks only records in processing, created, sending states' do
+        expect(ScheduledMailing.monitored).to match_array [processing, created, sending]
       end
     end
   end

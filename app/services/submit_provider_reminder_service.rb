@@ -6,11 +6,13 @@ class SubmitProviderReminderService
   end
 
   def send_email
-    application.scheduled_mailings.create!(
-      mailer_klass: 'SubmitProviderFinancialReminderMailer',
-      mailer_method: 'notify_provider',
-      arguments: mailer_args,
-      scheduled_at: two_days_after_initial
+    ScheduledMailing.send_later!(
+      mailer_klass: SubmitProviderFinancialReminderMailer,
+      mailer_method: :notify_provider,
+      legal_aid_application_id: @application.id,
+      addressee: @application.provider.email,
+      scheduled_at: two_days_after_initial,
+      arguments: mailer_args
     )
   end
 

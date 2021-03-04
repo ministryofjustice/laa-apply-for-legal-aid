@@ -4,15 +4,23 @@ module Citizens
     def show; end
 
     def update
-      ResendLinkRequestMailer.notify(
+      ScheduledMailing.send_now!(mailer_klass: ResendLinkRequestMailer,
+                                 mailer_method: :notify,
+                                 legal_aid_application_id: legal_aid_application.id,
+                                 addressee: legal_aid_application.applicant.email_address,
+                                 arguments: mailer_args)
+    end
+
+    private
+
+    def mailer_args
+      [
         legal_aid_application.application_ref,
         legal_aid_application.applicant.email_address,
         application_url,
         legal_aid_application.applicant.full_name
-      ).deliver_later!
+      ]
     end
-
-    private
 
     def legal_aid_application
       @legal_aid_application ||= SecureApplicationFinder.new(params[:id]).legal_aid_application

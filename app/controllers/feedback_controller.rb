@@ -10,9 +10,13 @@ class FeedbackController < ApplicationController
   def create
     initialize_feedback
     @display_close_tab_msg = params['signed_out'].present?
-    # must use bang version `deliver_later!` or failures won't be retried by sidekiq
+
     if @feedback.save
-      FeedbackMailer.notify(@feedback, application_id).deliver_later!
+      ScheduledMailing.send_now!(mailer_klass: FeedbackMailer,
+                                 mailer_method: :notify,
+                                 legal_aid_application_id: application_id,
+                                 addressee: Rails.configuration.x.support_email_address,
+                                 arguments: [@feedback.id, application_id])
       render :show
     else
       render :new

@@ -1,3 +1,4 @@
+
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master.svg?style=svg)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
 
 # LAA Apply for legal aid
@@ -393,6 +394,23 @@ For clarity, here is a table representing the two API keys and the environments 
   | ------------------- | ----------------- | ----------------------------------------------------- |
   | Development/UAT/STG |      Testing      | Local Development / UAT Branch / UAT Master / Staging |
   | live                |      Live         | Production                                            |
+
+
+## The mail lifecycle
+
+Mails are enqueued for immediate or later delivery by putting a record in the scheduled_mailings table, using either
+`ScheduledMailing.send_now!` or `ScheduledMailing.send_later!` passing in the name of the mailer and the mailer method and arguments to use,
+as well as audit information such as legal aid application id, and addressee.  These methods will create a record, then schedule 
+a `ScheduledMailingDeliveryJob` to run, which will look at all the records waiting to be sent, and call `GovukEmails::DeliveryMan` for each,
+finally sheduling `EmailMonitorJob`. 
+
+`GovukEmails::DeliveryMan` sends the mail, updates the status, and records the govuk_message_id whch will be used later to monitor the mail.
+
+`EmailMonitorJob` will call `GovukEmails::Monitor` for each mail which has been passed to GOVUK Notify but not yet confirmed as delivered, and 
+query its status, and update the `ScheduledMailing` record.
+
+If the delivery has failed, and we are in Proudction, an Undeliverable email alert will be sent to Sentry and the team email.
+
 
 ## Databases
 

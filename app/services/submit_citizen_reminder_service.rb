@@ -7,11 +7,13 @@ class SubmitCitizenReminderService
 
   def send_email
     [one_day_after_initial, nine_am_deadline_day].each do |scheduled_time|
-      application.scheduled_mailings.create!(
-        mailer_klass: 'SubmitCitizenFinancialReminderMailer',
-        mailer_method: 'notify_citizen',
-        arguments: mailer_args,
-        scheduled_at: scheduled_time
+      ScheduledMailing.send_later!(
+        mailer_klass: SubmitCitizenFinancialReminderMailer,
+        mailer_method: :notify_citizen,
+        legal_aid_application_id: application.id,
+        addressee: applicant.email,
+        scheduled_at: scheduled_time,
+        arguments: mailer_args
       )
     end
   end

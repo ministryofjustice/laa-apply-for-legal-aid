@@ -8,10 +8,6 @@ RSpec.describe NotifyMailer, type: :mailer do
   let(:application_url) { "/applications/#{app_id}/citizen/start" }
   let(:citizen_start_application_template) { Rails.configuration.govuk_notify_templates[:citizen_start_application] }
 
-  it 'uses GovukNotifyMailerJob' do
-    expect(described_class.delivery_job).to eq(GovukNotifyMailerJob)
-  end
-
   describe '#citizen_start_email' do
     let(:mail) { described_class.citizen_start_email(app_id, email, application_url, client_name, provider_firm) }
 
