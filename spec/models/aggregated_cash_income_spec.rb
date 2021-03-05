@@ -425,9 +425,9 @@ RSpec.describe AggregatedCashIncome, type: :model do
     describe '#period' do
       context 'locale :en' do
         it 'displays the start and end dates of the period' do
-          expect(aci.period(1)).to eq '1 Dec 2020 - 31 Dec 2020'
-          expect(aci.period(2)).to eq '1 Nov 2020 - 30 Nov 2020'
-          expect(aci.period(3)).to eq '1 Oct 2020 - 31 Oct 2020'
+          expect(aci.period(1)).to eq 'December 2020'
+          expect(aci.period(2)).to eq 'November 2020'
+          expect(aci.period(3)).to eq 'October 2020'
         end
       end
       context 'locale :cy' do
@@ -438,9 +438,9 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it 'displays period in faux Welsh' do
-          expect(aci.period(1)).to eq '1 ceD 2020 - 31 ceD 2020'
-          expect(aci.period(2)).to eq '1 voN 2020 - 30 voN 2020'
-          expect(aci.period(3)).to eq '1 tcO 2020 - 31 tcO 2020'
+          expect(aci.period(1)).to eq 'rebmeceD 2020'
+          expect(aci.period(2)).to eq 'rebmevoN 2020'
+          expect(aci.period(3)).to eq 'rebotcO 2020'
         end
       end
     end
