@@ -2,7 +2,7 @@
 
   <div class="govuk-!-padding-bottom-4"></div>
 
-  <h2 class="govuk-heading-m"><%= t('.cash_heading') %> <%= t(".#{type}") %></h2>
+  <h2 class="govuk-heading-m"><%= t('.cash_heading') %> <%= t(".#{type}").downcase %></h2>
 
   <span class="govuk-hint"><% t('.cash_hint') %></span>
 
@@ -17,7 +17,7 @@
     <tbody class="govuk-table__body">
     <% @cash_transactions.select {|i| i.transaction_type.name == type}.each do |transaction| %>
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><%= t('.dates', date_start: l(transaction.transaction_date.at_beginning_of_month, format: '%B %Y')) %></td>
+        <td class="govuk-table__cell"><%= l(transaction.transaction_date, format: '%B %Y') %></td>
         <td class="govuk-table__cell govuk-table__cell--numeric"><%= gds_number_to_currency(transaction.amount) %></td>
       </tr>
     <% end %>
