@@ -1,27 +1,16 @@
-<div class="govuk-checkboxes__item revealing-checkbox">
+<% field_name="check_box_#{name}"
+   model.__send__("#{field_name}=", model.send(field_name).present?) %>
 
-  <%= form.check_box "check_box_#{name}", {
-    class: 'govuk-checkboxes__input',
-    'data-aria-controls' => "conditional_#{name}",
-    checked: model.__send__("check_box_#{name}") == 'true' },
-    'true',
-    '' %>
-
-  <%= form.label "check_box_#{name}", controller_t("check_box_#{name}"), class: 'govuk-label govuk-checkboxes__label' %>
-</div>
-
-<div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional_<%= name %>">
-  <span class="govuk-hint"><%= t(".#{journey_type}.#{controller_name}.hint") %></span>
-
+<%= form.govuk_check_box field_name, true, '', multiple: false, label: {text: controller_t("check_box_#{name}")} do %>
+  <span class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint") %></span>
   <% (1..number_of_fields).each do |number| %>
-    <%= govuk_form_group show_error_if: model.errors.messages["#{name}#{number}".to_sym][0] do %>
-      <label class="govuk-label" for="<%= "#{name}#{number}" %>"><%= model.period(number) %></label>
+    <% if model.errors.messages["#{name}#{number}".to_sym][0] %>
       <span class='govuk-error-message' id="base"><%= model.errors.messages["#{name}#{number}".to_sym][0] %></span>
-      <%= form.govuk_text_field "#{name}#{number}",
-        label: nil,
-        value: gds_number_to_currency(model.__send__("#{name}#{number}"), unit: ''),
-        input_prefix: defined?(input_prefix) ? input_prefix : nil,
-        class: "govuk-!-width-one-third #{model.errors.messages["#{name}#{number}".to_sym][0] ? 'govuk-input--error' : ''}" %>
     <% end %>
+    <%= form.govuk_text_field "#{name}#{number}",
+      label: {text: model.period(number)},
+      value: gds_number_to_currency(model.__send__("#{name}#{number}"), unit: ''),
+      prefix_text: defined?(input_prefix) ? input_prefix : nil,
+      width: 'one-third' %>
   <% end %>
-</div>
+<% end %>

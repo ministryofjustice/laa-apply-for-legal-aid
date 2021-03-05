@@ -3,7 +3,7 @@ module Citizens
     before_action :aggregated_cash_income, only: %i[show update]
 
     def show
-      return go_forward unless Setting.allow_cash_payment?
+      go_forward unless Setting.allow_cash_payment?
     end
 
     def update
@@ -23,9 +23,10 @@ module Citizens
     def form_params
       params
         .require(:aggregated_cash_income)
+        .except(:cash_income)
         .merge({
                  legal_aid_application_id: legal_aid_application[:id],
-                 none_selected: params[:none_selected]
+                 none_selected: params[:aggregated_cash_income][:none_selected]
                })
     end
   end
