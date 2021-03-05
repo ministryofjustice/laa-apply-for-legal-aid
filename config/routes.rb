@@ -236,6 +236,9 @@ Rails.application.routes.draw do
       resource :merits_report, only: :show
       resource :means_report, only: :show
       resource :non_passported_client_instructions, only: :show
+      resource :check_client_details, only: :show
+      resource :received_benefit_confirmation, only: :show
+      resource :evidence_of_benefit, only: :show
     end
   end
 
