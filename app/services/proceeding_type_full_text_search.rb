@@ -1,47 +1,42 @@
 class ProceedingTypeFullTextSearch
-  Result = Struct.new(:id, :meaning, :description, :rank)
+  Result = Struct.new(:meaning, :code, :description, :category_law, :matter)
+
+  SEARCH_FIELDS = %i[
+    meaning
+    description
+    ccms_category_law
+    ccms_matter
+    additional_search_terms
+  ].freeze
 
   def self.call(search_terms)
     new(search_terms).call
   end
 
   def initialize(search_terms)
-    @ts_query = ts_query_transform(search_terms)
+    @ts_queries = search_terms.downcase.split.map { |val| "%#{val}%" }
   end
 
   def call
-    result_set = ProceedingType.connection.exec_query(query_string,
-                                                      '-- PROCEEDING TYPE FULL TEXT SEARCH ---',
-                                                      [[nil, @ts_query]],
-                                                      prepare: true)
+    result_set = ProceedingType.where(fields_contain_substr_query, *substr_query_args).order(:meaning).limit(8)
     result_set.map { |row| instantiate_result(row) }
   end
 
   private
 
   def instantiate_result(row)
-    Result.new(row['id'], row['meaning'].strip, row['description'].strip, row['rank'])
+    Result.new(row['meaning'].strip, row['code'], row['description'].strip, row['ccms_category_law'].strip, row['ccms_matter'])
   end
 
-  def ts_query_transform(search_terms)
-    # transform the query into a form suitable for postgres to_tsquery function
-    #
-    # "An owl & a pussycat went to sea" => "An & owl & a & pussycat & went & to & sea"
-    #
-    search_terms.split(/\s+/).join(' & ').gsub('& & &', '&')
+  def fields_contain_substr_query
+    SEARCH_FIELDS.each_with_object('') do |field, str|
+      str << "lower(#{field}) ILIKE ALL ( array[?] )"
+      str << ' OR ' unless field == SEARCH_FIELDS.last
+      str
+    end
   end
 
-  def query_string
-    <<~END_OF_QUERY
-      SELECT id,#{' '}
-        meaning,
-        description,
-        ts_rank(textsearchable, query) AS rank
-      FROM proceeding_types, to_tsquery($1) AS query
-      WHERE query @@ textsearchable
-      ORDER BY rank DESC
-      LIMIT 10;
-
-    END_OF_QUERY
+  def substr_query_args
+    Array.new(SEARCH_FIELDS.count, @ts_queries)
   end
 end

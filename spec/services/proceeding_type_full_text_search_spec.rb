@@ -61,8 +61,8 @@ RSpec.describe ProceedingTypeFullTextSearch do
 
       it 'only returns results matching both terms' do
         result_set = subject
-        expect(result_set.map(&:meaning)).to eq ['Forced marriage protection order',
-                                                 'FGM Protection Order',
+        expect(result_set.map(&:meaning)).to eq ['FGM Protection Order',
+                                                 'Forced marriage protection order',
                                                  'Variation or discharge under section 5 protection from harassment act 1997']
       end
     end
