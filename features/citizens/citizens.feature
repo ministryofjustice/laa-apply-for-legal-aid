@@ -109,7 +109,7 @@ Feature: Citizen journey
     And I select 'Benefits'
     Then I click 'Save and continue'
     Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
-    Then I select 'aggregated_cash_income_check_box_benefits'
+    Then I select 'Benefits'
     Then I enter benefits1 '100'
     Then I enter benefits2 '100'
     Then I enter benefits3 '100'
@@ -124,7 +124,7 @@ Feature: Citizen journey
     Then I select "Housing payments"
     Then I click 'Save and continue'
     Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
-    Then I select 'aggregated_cash_outgoings_check_box_rent_or_mortgage'
+    Then I select 'Housing payments'
     Then I enter rent_or_mortgage1 '100'
     Then I enter rent_or_mortgage2 '100'
     Then I enter rent_or_mortgage3 '100'
