@@ -761,18 +761,6 @@ global_means:
     br100_meaning: 'RESULT: Disposable income - Income contribution'
     response_type: currency
     user_defined: false
-  LAND_INPUT_B_5WP2_26A:
-    user_defined: true
-    br100_meaning: 'Land: The client owns land?'
-    response_type: boolean
-    generate_block?: true
-    value: '#applicant_owns_land?'
-  LAND_INPUT_C_5WP2_13A:
-    user_defined: true
-    br100_meaning: 'Land: Current market value'
-    response_type: currency
-    generate_block?: '#applicant_owns_land?'
-    value: '#applicant_land_value'
   MONEYDUE_INPUT_C_15WP2_14A:
     user_defined: true
     br100_meaning: 'Money due: The value'
@@ -1377,6 +1365,18 @@ land:
     response_type: boolean
     user_defined: true
     generate_block?: '#applicant_owns_land?'
+  LAND_INPUT_B_5WP2_26A:
+    user_defined: true
+    br100_meaning: 'Land: The client owns land?'
+    response_type: boolean
+    generate_block?: true
+    value: '#applicant_owns_land?'
+  LAND_INPUT_C_5WP2_13A:
+    user_defined: true
+    br100_meaning: 'Land: Current market value'
+    response_type: currency
+    generate_block?: '#applicant_owns_land?'
+    value: '#applicant_land_value'
   LAND_INPUT_N_3WP2_18A:
     value: '100'
     br100_meaning: 'Land: % Client'
