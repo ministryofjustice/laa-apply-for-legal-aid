@@ -17,14 +17,20 @@ module Providers
     def save_continue_or_draft_and_update_scope_limitations
       return false unless save_continue_or_draft(@form)
 
+      remove_delegated_scope_limitations unless @form.model.used_delegated_functions?
 
-      unless @form.model.used_delegated_functions?
-        remove_delegated_scope_limitations
-        return true
-      end
+      add_delegated_scope_limitations if @form.model.used_delegated_functions?
 
-      add_delegated_scope_limitations
+      submit_application_reminder if @form.model&.used_delegated_functions_on && @form.model.used_delegated_functions_on >= 1.month.ago
+
       true
+    end
+
+    def submit_application_reminder
+      return if legal_aid_application.awaiting_applicant?
+      return if legal_aid_application.applicant_entering_means?
+
+      SubmitApplicationReminderService.new(legal_aid_application).send_email
     end
 
     def proceeding_types
