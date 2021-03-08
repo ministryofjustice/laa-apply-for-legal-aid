@@ -142,7 +142,7 @@ module CFE
     private
 
     def manual_check_required?
-      CCMS::ManualReviewDeterminer.call(legal_aid_application)
+      CCMS::ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
     end
 
     def determine_type_of_contribution

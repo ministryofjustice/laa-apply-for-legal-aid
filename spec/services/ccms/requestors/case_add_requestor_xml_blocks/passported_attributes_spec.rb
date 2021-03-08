@@ -1510,9 +1510,13 @@ module CCMS
 
         context 'APPLY_CASE_MEANS_REVIEW' do
           context 'in global means and global merits' do
+            let(:determiner) { double ManualReviewDeterminer }
+
+            before { allow(ManualReviewDeterminer).to receive(:new).and_return(determiner) }
+
             context 'Manual review required' do
               it 'set the attribute to false' do
-                allow(ManualReviewDeterminer).to receive(:call).with(legal_aid_application).times.and_return(true)
+                allow(determiner).to receive(:manual_review_required?).and_return(true)
                 block = XmlExtractor.call(xml, :global_means, 'APPLY_CASE_MEANS_REVIEW')
                 expect(block).to have_boolean_response false
                 block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')
@@ -1522,7 +1526,7 @@ module CCMS
 
             context 'Manual review not required' do
               it 'sets the attribute to true' do
-                allow(ManualReviewDeterminer).to receive(:call).with(legal_aid_application).times.and_return(false)
+                allow(determiner).to receive(:manual_review_required?).and_return(false)
                 block = XmlExtractor.call(xml, :global_means, 'APPLY_CASE_MEANS_REVIEW')
                 expect(block).to have_boolean_response true
                 block = XmlExtractor.call(xml, :global_merits, 'APPLY_CASE_MEANS_REVIEW')

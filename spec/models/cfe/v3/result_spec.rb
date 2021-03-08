@@ -15,6 +15,7 @@ module CFE
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v3_result }
       let(:contribution_and_restriction_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+      let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
       describe '#overview' do
         subject { cfe_result.overview }
@@ -22,7 +23,7 @@ module CFE
         let(:application) { cfe_result.legal_aid_application }
 
         context 'manual check not required' do
-          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(false) }
+          before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(false) }
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v3_result, :eligible }
@@ -61,7 +62,7 @@ module CFE
         end
 
         context 'manual check IS required and restrictions do not exist' do
-          before { allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(true) }
+          before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(true) }
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v3_result, :eligible }
@@ -101,7 +102,7 @@ module CFE
 
         context 'manual check IS required and restrictions exist' do
           before do
-            allow(CCMS::ManualReviewDeterminer).to receive(:call).with(application).and_return(true)
+            allow(manual_review_determiner).to receive(:manual_review_required?).and_return(true)
             application.has_restrictions = true
           end
 

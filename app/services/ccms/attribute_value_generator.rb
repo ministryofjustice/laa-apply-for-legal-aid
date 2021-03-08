@@ -406,7 +406,7 @@ module CCMS
     end
 
     def manual_case_review_required?
-      ManualReviewDeterminer.call(legal_aid_application)
+      ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
     end
   end
 end
