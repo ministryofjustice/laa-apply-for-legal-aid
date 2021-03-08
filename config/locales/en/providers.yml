@@ -140,6 +140,17 @@ en:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
         change_client_details_prefix: "Change your client's details"
         change_client_details_suffix: " if you entered them incorrectly."
+      positive_result:
+        must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
+        provide_details: provide details of the case
+        tab_title: Your client receives benefits that qualify for legal aid
+        title: "%{name} receives benefits that qualify for legal aid"
+        what_happens_next: What happens next
+        you_need_to: "You'll need to:"
+      negative_result:
+        'no': No, my client receives a passporting benefit
+        tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
+        title: DWP records show that your client does not receive a passporting benefit – is this correct?
       applicant_details:
         <<: *how_we_checked
       use_ccms:
@@ -262,6 +273,9 @@ en:
       show:
         h1-heading: Details of the latest domestic abuse incident
         details_label: What happened during the incident?
+    dwp_override:
+      show:
+        error: Select yes if your client does not receive a passporting benefit.
     end_of_applications:
       show:
         heading: Application complete

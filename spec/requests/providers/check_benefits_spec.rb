@@ -95,131 +95,288 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:application_id/check_benefit' do
-    before { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
-
-    subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
-
-    before do
-      login
-      subject
-    end
-
-    context 'Form submitted with Continue button' do
-      let(:params) do
-        {
-          continue_button: 'Continue'
-        }
+    context 'DWP override feature flag is not enabled' do
+      subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
+      before do
+        patch providers_legal_aid_application_check_benefit_path(application.id), params: params
+        login
+        subject
       end
 
-      context 'when the check_benefit_results is positive' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+      context 'Form submitted with Continue button' do
+        let(:params) do
+          {
+            continue_button: 'Continue'
+          }
+        end
 
-        it 'displays the capital introduction page' do
-          expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+          it 'displays the capital introduction page' do
+            expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
+          end
+        end
+
+        context 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+          it 'displays the open banking consent page' do
+            expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
+          end
+        end
+
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+
+          it 'displays the open banking consent page' do
+            expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
+          end
+        end
+
+        context 'when delegated functions used' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
+
+          it 'displays the substantive application page' do
+            expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
+          end
         end
       end
 
-      context 'when the check benefit result is negative' do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-
-        it 'displays the open banking consent page' do
-          expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
-        end
-      end
-
-      context 'when the check benefit result is undetermined' do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
-
-        it 'displays the open banking consent page' do
-          expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
-        end
-      end
-
-      context 'when delegated functions used' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
-
-        it 'displays the substantive application page' do
-          expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
-        end
-      end
-    end
-
-    context 'Form submitted with Save as draft button' do
-      let(:params) do
-        {
-          draft_button: 'Save as draft'
-        }
-      end
-
-      context 'when the check_benefit_results is positive' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-
-        it 'displays the providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+      context 'Form submitted with Save as draft button' do
+        let(:params) do
+          {
+            draft_button: 'Save as draft'
+          }
         end
 
-        it 'sets the application as draft' do
-          expect(application.reload).to be_draft
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+          it 'displays the providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+
+          it 'sets the application as draft' do
+            expect(application.reload).to be_draft
+          end
         end
-      end
 
-      context 'when the check benefit result is negative' do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        context 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
-        it 'displays providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
         end
-      end
 
-      context 'when the check benefit result is undetermined' do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
 
-        it 'displays providers applications page' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
-        end
-      end
-    end
-  end
-
-  describe 'allowed to continue or use ccms?' do
-    before { login_as provider }
-
-    context 'application passported' do
-      let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
-
-      context 'permissions passported' do
-        let(:provider) { create :provider, :with_passported_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('receives benefits that qualify for legal aid')
-        end
-      end
-
-      context 'no permissions' do
-        let(:provider) { create :provider, :with_no_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('receives benefits that qualify for legal aid')
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
         end
       end
     end
 
-    context 'application non-passported' do
-      let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+    context 'DWP override feature flag is enabled' do
+      subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
+      before do
+        Setting.setting.update!(override_dwp_results: true)
+        patch providers_legal_aid_application_check_benefit_path(application.id), params: params
+        login
+        subject
+      end
+      after { Setting.setting.update!(override_dwp_results: false) }
 
-      context 'permissions passported' do
-        let(:provider) { create :provider, :with_passported_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('CCMS')
+      context 'Form submitted with Continue button' do
+        let(:params) do
+          {
+            continue_button: 'Continue'
+          }
+        end
+
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+          it 'displays the capital introduction page' do
+            expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
+          end
+        end
+
+        shared_examples_for 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+          context 'the results are correct' do
+            let(:params) do
+              {
+                continue_button: 'Continue',
+                dwp_results_correct: 'true'
+              }
+            end
+            it 'displays the open banking consent page' do
+              expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
+            end
+          end
+
+          context 'the solicitor wants to override the results' do
+            let(:params) do
+              {
+                continue_button: 'Continue',
+                dwp_results_correct: 'false'
+              }
+            end
+            it 'displays the check_client_details page' do
+              expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
+            end
+          end
+
+          context 'the solicitor does not select a radio button' do
+            it 'displays an error' do
+              expect(response.body).to include(I18n.t('providers.dwp_override.show.error'))
+            end
+          end
+        end
+
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+
+          it_behaves_like 'when the check benefit result is negative'
+        end
+
+        context 'when delegated functions used' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
+
+          it 'displays the substantive application page' do
+            expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)
+          end
         end
       end
 
-      context 'no permissions' do
-        let(:provider) { create :provider, :with_non_passported_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include(html_compare("We need to check your client's financial eligibility"))
+      context 'Form submitted with Save as draft button' do
+        let(:params) do
+          {
+            draft_button: 'Save as draft'
+          }
+        end
+
+        context 'when the check_benefit_results is positive' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
+          it 'displays the providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+
+          it 'sets the application as draft' do
+            expect(application.reload).to be_draft
+          end
+        end
+
+        context 'when the check benefit result is negative' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+
+        context 'when the check benefit result is undetermined' do
+          let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+
+          it 'displays providers applications page' do
+            expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+        end
+      end
+    end
+
+    describe 'allowed to continue or use ccms?' do
+      before { login_as provider }
+
+      context 'DWP override feature flag is not enabled' do
+        context 'application passported' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+
+          context 'permissions passported' do
+            let(:provider) { create :provider, :with_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('receives benefits that qualify for legal aid')
+            end
+          end
+
+          context 'no permissions' do
+            let(:provider) { create :provider, :with_no_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('receives benefits that qualify for legal aid')
+            end
+          end
+        end
+
+        context 'application non-passported' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+
+          context 'permissions passported' do
+            let(:provider) { create :provider, :with_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('CCMS')
+            end
+          end
+
+          context 'no permissions' do
+            let(:provider) { create :provider, :with_non_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include(html_compare("We need to check your client's financial eligibility"))
+            end
+          end
+        end
+      end
+
+      context 'DWP override feature flag is enabled' do
+        before { Setting.setting.update!(override_dwp_results: true) }
+        after { Setting.setting.update!(override_dwp_results: false) }
+        context 'application passported' do
+          let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+
+          context 'permissions passported' do
+            let(:provider) { create :provider, :with_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('receives benefits that qualify for legal aid')
+            end
+          end
+
+          context 'no permissions' do
+            let(:provider) { create :provider, :with_no_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('receives benefits that qualify for legal aid')
+            end
+          end
+        end
+
+        context 'application non-passported' do
+          let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+
+          context 'permissions passported' do
+            let(:provider) { create :provider, :with_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include('CCMS')
+            end
+          end
+
+          context 'no permissions' do
+            let(:provider) { create :provider, :with_non_passported_permissions }
+            it 'allows us to continue' do
+              get "/providers/applications/#{application.id}/check_benefits"
+              expect(response.body).to include(html_compare('DWP records show that your client does not receive a passporting benefit – is this correct?'))
+            end
+          end
         end
       end
     end

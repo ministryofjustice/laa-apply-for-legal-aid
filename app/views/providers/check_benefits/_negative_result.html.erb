@@ -1,0 +1,27 @@
+<%= render partial: 'shared/error' if @error %>
+<div class="interruption-panel">
+  <%= page_template(page_title: t('.tab_title'), column_width: :full, template: :basic) do %>
+    <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+          model: @form,
+          url: providers_legal_aid_application_check_benefit_path,
+          method: :patch,
+          local: true
+        ) do |form| %>
+
+      <%= form.govuk_radio_buttons_fieldset(:dwp_results_correct, legend: {text: t('.title'), tag: 'h1', size: 'l'}) do %>
+        <%= form.govuk_radio_button(:dwp_results_correct, true, label: {text: t('generic.yes')} ) %>
+        <%= form.govuk_radio_button(:dwp_results_correct, false, label: {text:  t('.no')} ) %>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+
+      <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_check_benefit_path,
+            method: :patch,
+            show_draft: true,
+            continue_button_text: t('generic.continue')
+          ) %>
+    <% end %>
+  <% end %>
+</div>

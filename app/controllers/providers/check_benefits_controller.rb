@@ -13,7 +13,16 @@ module Providers
     end
 
     def update
-      continue_or_draft
+      continue_or_draft and return unless Setting.override_dwp_results? # TODO: remove this when DWP Override is released
+
+      continue_or_draft and return if no_override_required
+
+      if params[:dwp_results_correct].present?
+        go_forward(params[:dwp_results_correct] == 'true')
+      else
+        @error = { 'dwp_override-error' => I18n.t('providers.dwp_override.show.error') }
+        render :index
+      end
     end
 
     private
@@ -42,6 +51,10 @@ module Providers
 
     def provider
       legal_aid_application.provider
+    end
+
+    def no_override_required
+      (params[:dwp_results_correct].nil? && legal_aid_application.applicant_receives_benefit?) || draft_selected?
     end
   end
 end

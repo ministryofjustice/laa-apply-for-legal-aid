@@ -1,5 +1,9 @@
 <% if should_use_ccms? %>
   <%= render 'use_ccms' %>
 <% else %>
-  <%= render 'check_benefits_result' %>
+  <% if Setting.override_dwp_results? %>
+    <%= render 'check_benefits_result_with_override' %>
+  <% else %>
+    <%= render 'check_benefits_result' %>
+  <% end %>
 <% end %>

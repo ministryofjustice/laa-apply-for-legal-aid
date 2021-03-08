@@ -65,18 +65,22 @@ module Flow
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: ->(application) do
-            next_step = :open_banking_consents
-            if application.applicant_receives_benefit?
-              application.change_state_machine_type('PassportedStateMachine')
+          forward: ->(application, dwp_results_correct) do
+            if dwp_results_correct == false
+              :check_client_details
             else
-              application.change_state_machine_type('NonPassportedStateMachine')
-              next_step = :applicant_employed
+              next_step = :open_banking_consents
+              if application.applicant_receives_benefit?
+                application.change_state_machine_type('PassportedStateMachine')
+              else
+                application.change_state_machine_type('NonPassportedStateMachine')
+                next_step = :applicant_employed
+              end
+
+              return :substantive_applications if application.used_delegated_functions? && application.passported?
+
+              application.applicant_receives_benefit? ? :capital_introductions : next_step
             end
-
-            return :substantive_applications if application.used_delegated_functions? && application.passported?
-
-            application.applicant_receives_benefit? ? :capital_introductions : next_step
           end
         },
         substantive_applications: {
@@ -128,6 +132,9 @@ module Flow
         non_passported_client_instructions: {
           path: ->(application) { urls.providers_legal_aid_application_non_passported_client_instructions_path(application) },
           forward: :email_addresses
+        },
+        check_client_details: {
+          path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) }
         }
       }.freeze
     end

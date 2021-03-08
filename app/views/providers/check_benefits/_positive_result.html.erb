@@ -1,0 +1,25 @@
+<div class="interruption-panel">
+  <%= page_template(page_title: t('.tab_title'), template: :basic) do %>
+    <h1 class="govuk-heading-l">
+      <%= t('.title', name: @legal_aid_application.applicant.full_name) %>
+    </h1>
+    <div class="maximize-text-width">
+      <h2 class="govuk-heading-m">
+        <%= t '.what_happens_next' %>
+      </h2>
+      <p class="govuk-body">
+        <%= t '.you_need_to' %>
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><%= t '.must_answer_financial_questions' %></li>
+        <li><%= t '.provide_details' %></li>
+      </ul>
+    </div>
+    <%= next_action_buttons_with_form(
+          url: providers_legal_aid_application_check_benefit_path,
+          method: :patch,
+          show_draft: true,
+          continue_button_text: t('generic.continue')
+        ) %>
+  <% end %>
+</div>
