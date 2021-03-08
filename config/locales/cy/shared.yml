@@ -462,10 +462,16 @@ cy:
             kroW
       types_of_income_form:
         hints:
-          friends_or_family: ".sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe
-            roF"
-          benefits: ".stiderc xat ro tifeneB dlihC ,elpmaxe roF"
-          pension: ".snoisnep lanosrep dna ecalpkrow ,etatS edulcnI"
+          citizens:
+            friends_or_family: ".stnemyap ffo-eno edulcni ton oD .stsoc gnivil htiw pleh ot yenom uoy sevig ylraluger evitaler ro dneirf a fi tceleS"
+            benefits: .stiderc xat ro tifeneB dlihC ,elpmaxe roF
+            maintenance_in: .ecnanetniam dlihc sedulcni sihT
+            pension: .snoisnep lanosrep dna ecalpkrow ,etatS edulcnI
+          providers:
+            friends_or_family: .sllib ro tner rof rebmem ylimaf a morf yenom ,elpmaxe roF
+            benefits: .stiderc xat ro tifeneB dlihC ,elpmaxe roF
+            maintenance_in: .ecnanetniam dlihc sedulcni sihT
+            pension: .snoisnep lanosrep dna ecalpkrow ,etatS edulcnI
         expanded_explanation:
           heading: "?siht deksa gnieb I ma yhW"
           list: |2-
