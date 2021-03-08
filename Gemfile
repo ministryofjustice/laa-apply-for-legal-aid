@@ -119,7 +119,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
 
   # Available in dev env for generators
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec-rails', '~> 4.1'
 end
 
 group :development do
