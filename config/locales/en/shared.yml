@@ -426,9 +426,16 @@ en:
             not_known: Work still needs to be done to determine the likelihood of success
       types_of_income_form:
         hints:
-          friends_or_family: For example, money from a family member for rent or bills.
-          benefits: For example, Child Benefit or tax credits.
-          pension: Include State, workplace and personal pensions.
+          citizens:
+            friends_or_family: "Select if a friend or relative regularly gives you money to help with living costs. Do not include one-off payments."
+            benefits: For example, Child Benefit or tax credits.
+            maintenance_in: This includes child maintenance.
+            pension: Include State, workplace and personal pensions.
+          providers:
+            friends_or_family: For example, money from a family member for rent or bills.
+            benefits: For example, Child Benefit or tax credits.
+            maintenance_in: This includes child maintenance.
+            pension: Include State, workplace and personal pensions.
         expanded_explanation:
           heading: Why am I being asked this?
           list: |
