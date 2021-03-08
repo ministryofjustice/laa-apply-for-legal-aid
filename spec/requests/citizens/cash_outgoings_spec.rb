@@ -89,9 +89,9 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
     def nothing_selected
       {
         aggregated_cash_outgoings: {
-          check_box_child_care: ''
-        },
-        none_selected: 'true'
+          check_box_child_care: '',
+          none_selected: 'true'
+        }
       }
     end
 

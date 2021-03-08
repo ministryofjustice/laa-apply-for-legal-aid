@@ -1,43 +1,31 @@
 <%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @aggregated_cash_income,
       url: form_path,
       method: :patch,
       local: true
     ) do |form| %>
 
-  <%= govuk_form_group show_error_if: @aggregated_cash_income.errors.include?(:none_selected) do %>
-    <fieldset class="govuk-fieldset" aria-describedby="select-all-that-apply-hint">
-
-      <%= govuk_fieldset_header page_title %>
+    <%= form.govuk_check_boxes_fieldset :cash_income, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
       <p><%= t('.info') %></p>
       <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
-      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-        <div class="deselect-group" data-deselect-ctrl="#none_selected">
-          <% @legal_aid_application.transaction_types.not_children.credits.each do |transaction_type| %>
-            <%= render(
-                  'shared/partials/revealing_checkbox',
-                  name: transaction_type.name,
-                  form: form,
-                  number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
-                  model: @aggregated_cash_income,
-                  input_prefix: t('currency.gbp')
-                ) %>
-          <% end %>
-        </div>
+      <div class="deselect-group" data-deselect-ctrl="#aggregated-cash-income-none-selected-true-field">
+        <% @legal_aid_application.transaction_types.not_children.credits.each do |transaction_type| %>
+          <%= render(
+                'shared/partials/revealing_checkbox',
+                name: transaction_type.name,
+                form: form,
+                number_of_fields: AggregatedCashIncome::NUMBER_OF_FIELDS,
+                model: @aggregated_cash_income,
+                input_prefix: t('currency.gbp')
+              ) %>
+        <% end %>
       </div>
 
-      <div class="govuk-radios__divider tickbox_divider"><%= t('generic.or') %></div>
-
-      <div class="govuk-checkboxes">
-        <div class="govuk-checkboxes__item">
-          <%= check_box_tag :none_selected, 'true', @aggregated_cash_income.none_selected, class: 'govuk-checkboxes__input' %>
-          <%= label_tag :none_selected, t('.none_selected'), class: 'govuk-label govuk-checkboxes__label' %>
-        </div>
-      </div>
-
-    </fieldset>
-  <% end %>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_selected')} %>
+    <% end %>
 
   <%= next_action_buttons(
         form: form,

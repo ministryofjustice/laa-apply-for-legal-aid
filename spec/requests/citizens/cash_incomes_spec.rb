@@ -89,9 +89,9 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
     def nothing_selected
       {
         aggregated_cash_income: {
-          check_box_benefits: ''
-        },
-        none_selected: 'true'
+          check_box_benefits: '',
+          none_selected: 'true'
+        }
       }
     end
 
