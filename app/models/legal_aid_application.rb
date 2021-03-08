@@ -324,14 +324,8 @@ class LegalAidApplication < ApplicationRecord
 
   def clear_scopes!
     application_proceeding_types.map(&:clear_scopes!)
-    # scope_limitations.clear
     reset_delegated_functions
   end
-  #
-  # def delete_assigned_scope!(id)
-  #   scopes_to_clear = ApplicationProceedingTypesScopeLimitation.where(application_proceeding_type_id: id)
-  #   scopes_to_clear.each(&:delete)
-  # end
 
   def receives_student_finance?
     student_finance?

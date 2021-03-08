@@ -41,6 +41,7 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 - [**Troubleshooting**](#troubleshooting)
 
 
+
 ## Architecture Diagram
 
 View the [architecture diagram](https://structurizr.com/share/55246/diagrams#apply-container) for this project.
@@ -461,7 +462,7 @@ A Cron Job takes hourly snapshots of the production database between 6am and 9pm
   scope limitation is the default substantive or default delegated function scope limitation for a particular proceeding type.
 
 A `LegalAidApplication` has 1 or more ProceedingTypes, these relations are held in the `ApplicationProceedingTypes` table, and created when a proceeding type is added to 
-and application.
+an application.
 
 
 An `ApplicationProceedingType` has at least one assigned `ScopeLimitation` (i.e. one of the eligible scope limitation for that proceeding type which has been 
