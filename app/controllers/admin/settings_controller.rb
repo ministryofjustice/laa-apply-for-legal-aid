@@ -21,7 +21,8 @@ module Admin
                                       :manually_review_all_cases,
                                       :allow_welsh_translation,
                                       :allow_cash_payment,
-                                      :allow_multiple_proceedings)
+                                      :allow_multiple_proceedings,
+                                      :override_dwp_results)
     end
 
     def setting

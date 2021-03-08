@@ -23,6 +23,10 @@ class Setting < ApplicationRecord
     setting.allow_multiple_proceedings
   end
 
+  def self.override_dwp_results?
+    setting.override_dwp_results
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

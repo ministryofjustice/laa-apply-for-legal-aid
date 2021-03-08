@@ -37,7 +37,8 @@ RSpec.describe Admin::SettingsController, type: :request do
           mock_true_layer_data: 'true',
           allow_welsh_translation: 'true',
           allow_cash_payment: 'true',
-          allow_multiple_proceedings: 'true'
+          allow_multiple_proceedings: 'true',
+          override_dwp_results: 'true'
         }
       }
     end
@@ -51,6 +52,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.allow_welsh_translation?).to eq(true)
       expect(setting.allow_cash_payment?).to eq(true)
       expect(setting.allow_multiple_proceedings?).to eq(true)
+      expect(setting.override_dwp_results?).to eq(true)
     end
 
     it 'create settings if they do not exist' do

@@ -1,0 +1,2 @@
+class DWPOverride < ApplicationRecord
+end

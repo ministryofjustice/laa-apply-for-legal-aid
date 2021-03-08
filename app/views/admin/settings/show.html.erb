@@ -56,6 +56,16 @@
         title: { size: :m, text: t('.labels.allow_multiple_proceedings') }
     ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+        :override_dwp_results,
+        form.yes_no_radio_button_array,
+        :value,
+        :label,
+        inline: true,
+        hint: t('.hints.override_dwp_results'),
+        title: { size: :m, text: t('.labels.override_dwp_results') }
+    ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

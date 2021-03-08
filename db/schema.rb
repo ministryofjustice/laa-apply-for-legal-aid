@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_134124) do
+ActiveRecord::Schema.define(version: 2021_03_05_145638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -339,6 +339,15 @@ ActiveRecord::Schema.define(version: 2021_02_23_134124) do
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
+  create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.text "passporting_benefit"
+    t.boolean "evidence_available"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id"
+  end
+
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "done_all_needed"
     t.integer "satisfaction"
@@ -657,6 +666,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_134124) do
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "allow_cash_payment", default: false, null: false
     t.boolean "allow_multiple_proceedings", default: false, null: false
+    t.boolean "override_dwp_results", default: false, null: false
   end
 
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -724,6 +734,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_134124) do
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"
+  add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
