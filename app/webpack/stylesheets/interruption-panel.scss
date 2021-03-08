@@ -2,12 +2,8 @@
   background-color:#1d70b8;
   padding:30px;
 
-  p,h1,h2,ul {
-    color: #fff;
-  }
-
-  a, a:link, a:visited {
-    color: #fff;
+  p,h1,h2,ul,label,a,a:link,a:visited {
+    color: govuk-colour("white");
   }
 
   h2 {
@@ -38,6 +34,12 @@
     }
   }
 
+  .govuk-radios__label::before,
+  & ::after {
+    color: govuk-colour("black");
+    border-color: govuk-colour("black");
+    background-color: govuk-colour("white");
+  }
 }
 @media (min-width: 769px) {
   .interruption-panel {
