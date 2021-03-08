@@ -96,6 +96,10 @@ Given('the setting to allow multiple proceedings is enabled') do
   Setting.setting.update!(allow_multiple_proceedings: true)
 end
 
+Given('the setting to allow DWP overrides is enabled') do
+  Setting.setting.update!(override_dwp_results: true)
+end
+
 Then('I choose a {string} radio button') do |radio_button_name|
   choose(radio_button_name, allow_label_click: true)
 end
@@ -412,6 +416,37 @@ Given('I complete the passported journey as far as check your answers') do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_passported_state_machine,
+    :at_entering_applicant_details,
+    :with_substantive_scope_limitation,
+    applicant: applicant,
+    used_delegated_functions_on: 1.day.ago
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
+Given('I complete the non-passported journey as far as check your answers') do
+  applicant = create(
+    :applicant,
+    first_name: 'Test',
+    last_name: 'Test',
+    national_insurance_number: 'JA123456A',
+    date_of_birth: '01-01-1970',
+    email: 'test@test.com'
+  )
+  create(
+    :address,
+    address_line_one: 'Transport For London',
+    address_line_two: '98 Petty France',
+    city: 'London',
+    postcode: 'SW1H 9EA',
+    lookup_used: true,
+    applicant: applicant
+  )
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_non_passported_state_machine,
     :at_entering_applicant_details,
     :with_substantive_scope_limitation,
     applicant: applicant,
