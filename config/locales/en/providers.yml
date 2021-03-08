@@ -92,17 +92,17 @@ en:
         title: Income
         benefits: Benefits
         friends_or_family: Financial help from friends or family
-        maintenance: Maintenance payments
+        maintenance: Maintenance payments from a former partner
         property_or_lodger: Income from property or lodger
-        student_loan_or_grant: Student loan or grant
+        student_loan_or_grant: Student finance
         pension: Pension
         total_income: Total income
       outgoings:
         title: Outgoings
-        housing_costs: Housing costs
-        childcare_costs: Childcare costs
-        maintenance_out: Maintenance payments
-        legal_aid: Legal aid payments
+        housing_costs: Housing payments
+        childcare_costs: Childcare payments
+        maintenance_out: Maintenance payments to a former partner
+        legal_aid: Payments towards legal aid in a criminal case
         total_outgoings: Total outgoings
 
     capital_introductions:
