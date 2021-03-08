@@ -5,6 +5,7 @@ module Providers
     # GET /provider/applications/:legal_aid_application_id/proceedings_types
     def index
       proceeding_types
+      @selectable_proceeding_types = @proceeding_types - legal_aid_application.proceeding_types
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types
