@@ -103,7 +103,7 @@ gem 'govuk_design_system_formbuilder'
 gem 'sprockets', '< 4'
 
 group :development, :test do
-  gem 'awesome_print', '~> 1.8.0'
+  gem 'awesome_print', '~> 1.9.2'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '>= 2.7.5'
   gem 'erb_lint', '0.0.37', require: false

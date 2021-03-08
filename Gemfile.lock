@@ -93,7 +93,7 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     ast (2.4.2)
-    awesome_print (1.8.0)
+    awesome_print (1.9.2)
     aws-eventstream (1.1.0)
     aws-partitions (1.429.0)
     aws-sdk-core (3.112.0)
@@ -676,7 +676,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.12)
   addressable
   after_commit_everywhere (~> 1.0)
-  awesome_print (~> 1.8.0)
+  awesome_print (~> 1.9.2)
   aws-sdk-s3
   axe-core-cucumber
   bootsnap (>= 1.1.0)
