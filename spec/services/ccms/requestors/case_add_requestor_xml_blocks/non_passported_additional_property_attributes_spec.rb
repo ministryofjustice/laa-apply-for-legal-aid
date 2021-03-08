@@ -33,7 +33,7 @@ module CCMS
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
 

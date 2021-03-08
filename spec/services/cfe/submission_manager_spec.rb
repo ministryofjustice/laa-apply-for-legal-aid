@@ -6,8 +6,6 @@ module CFE
     let(:submission_manager) { described_class.new(application.id) }
     let(:submission) { submission_manager.submission }
     let(:call_result) { true }
-    before { Setting.setting.update!(allow_cash_payment: false) }
-    after { Setting.setting.delete }
 
     describe '.call', vcr: { record: :new_episodes } do
       let(:staging_host) { 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk' }
@@ -18,7 +16,6 @@ module CFE
 
       context 'when the application is passported' do
         let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-
         it 'completes process' do
           described_class.call(application.id)
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
@@ -27,31 +24,9 @@ module CFE
 
       context 'when the application is non-passported' do
         let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-
         it 'completes process' do
           described_class.call(application.id)
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
-        end
-      end
-
-      context 'allow_cash_payment setting is true' do
-        before { Setting.setting.update!(allow_cash_payment: true) }
-        after { Setting.setting.delete }
-
-        context 'when the application is passported' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-          it 'completes process' do
-            described_class.call(application.id)
-            expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
-          end
-        end
-
-        context 'when the application is non-passported' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-          it 'completes process' do
-            described_class.call(application.id)
-            expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
-          end
         end
       end
     end
@@ -147,6 +122,7 @@ module CFE
             expect(CreateOtherIncomeService).to receive(:call).and_return(true)
             expect(CreateExplicitRemarksService).to receive(:call).and_return(true)
             expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
+            expect(CreateCashTransactionsService).to receive(:call).and_return(true)
 
             submission_manager.call
           end
@@ -161,43 +137,6 @@ module CFE
             it 'associates the application with the submission' do
               expect(submission.legal_aid_application_id).to eq application.id
             end
-          end
-        end
-      end
-
-      context 'allow_cash_payment setting is true' do
-        before { Setting.setting.update!(allow_cash_payment: true) }
-        after { Setting.setting.delete }
-
-        context 'when the application is passported' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-
-          it 'does not call CreateCashTransactionsService' do
-            expect(CreateCashTransactionsService).not_to receive(:call)
-
-            submission_manager.call
-          end
-        end
-
-        context 'when the application is non-passported' do
-          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
-
-          it 'calls all the services it manages' do
-            expect(CreateAssessmentService).to receive(:call).and_return(true)
-            expect(CreateApplicantService).to receive(:call).and_return(true)
-            expect(CreateCapitalsService).to receive(:call).and_return(true)
-            expect(CreatePropertiesService).to receive(:call).and_return(true)
-            expect(CreateVehiclesService).to receive(:call).and_return(true)
-            expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
-            expect(CreateStateBenefitsService).to receive(:call).and_return(true)
-            expect(CreateDependantsService).to receive(:call).and_return(true)
-            expect(CreateOutgoingsService).to receive(:call).and_return(true)
-            expect(CreateOtherIncomeService).to receive(:call).and_return(true)
-            expect(CreateExplicitRemarksService).to receive(:call).and_return(true)
-            expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
-            expect(CreateCashTransactionsService).to receive(:call).and_return(true)
-
-            submission_manager.call
           end
         end
       end

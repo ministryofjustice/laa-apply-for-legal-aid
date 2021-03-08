@@ -5,17 +5,10 @@ module CFE
     private
 
     def headers
-      if Setting.allow_cash_payment?
-        {
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/json;version=3'
-        }
-      else
-        {
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/json;version=2'
-        }
-      end
+      {
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json;version=3'
+      }
     end
 
     def cfe_url_path
@@ -43,19 +36,6 @@ module CFE
     end
 
     def write_cfe_result
-      Setting.allow_cash_payment? ? result_v3 : result_v2
-    end
-
-    def result_v2
-      CFE::V2::Result.create!(
-        legal_aid_application_id: legal_aid_application.id,
-        submission_id: @submission.id,
-        result: @response.body,
-        type: 'CFE::V2::Result'
-      )
-    end
-
-    def result_v3
       CFE::V3::Result.create!(
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,

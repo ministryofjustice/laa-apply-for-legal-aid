@@ -10,8 +10,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
 
     let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, application_ref: 'L-XYZ-999' }
     let(:submission) { create :cfe_submission, aasm_state: 'explicit_remarks_created', legal_aid_application: application }
-    let(:expected_v2_response) { expected_v2_response_hash.to_json }
-    let(:expected_v3_response) { expected_v3_response_hash.to_json }
+    let(:expected_response) { expected_response_hash.to_json }
     let(:service) { described_class.new(submission) }
 
     describe '#cfe_url' do
@@ -22,89 +21,43 @@ module CFE # rubocop:disable Metrics/ModuleLength
     end
 
     describe 'private method #headers' do
-      context 'cash payments are not enabled' do
-        it 'includes version=2 in the Accept header' do
-          expect(service.__send__(:headers))
-            .to eq(
-              {
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json;version=2'
-              }
-            )
-        end
+      it 'includes version=3 in the Accept header' do
+        expect(service.__send__(:headers))
+          .to eq(
+            {
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json;version=3'
+            }
+          )
       end
 
-      context 'cash payments are enabled' do
-        before { Setting.setting.update!(allow_cash_payment: true) }
-        after { Setting.setting.update!(allow_cash_payment: false) }
-
-        it 'includes version=3 in the Accept header' do
-          expect(service.__send__(:headers))
-            .to eq(
-              {
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json;version=3'
-              }
-            )
+      context 'success' do
+        before do
+          stub_request(:get, service.cfe_url)
+            .to_return(body: expected_response)
         end
 
-        context 'success for v3' do
-          before do
-            stub_request(:get, service.cfe_url)
-              .to_return(body: expected_v3_response)
-          end
-
-          it 'updates the submission state to results_obtained' do
-            ObtainAssessmentResultService.call(submission)
-            expect(submission.aasm_state).to eq 'results_obtained'
-          end
-
-          it 'stores the response in the submission cfe_result field' do
-            ObtainAssessmentResultService.call(submission)
-            expect(submission.cfe_result).to eq expected_v3_response
-          end
-
-          it 'writes a history record' do
-            ObtainAssessmentResultService.call(submission)
-            history = submission.submission_histories.first
-            expect(history.url).to eq service.cfe_url
-            expect(history.http_method).to eq 'GET'
-            expect(history.request_payload).to be_nil
-            expect(history.http_response_status).to eq 200
-            expect(history.response_payload).to eq expected_v3_response
-            expect(history.error_message).to be_nil
-            expect(history.error_backtrace).to be_nil
-          end
+        it 'updates the submission state to results_obtained' do
+          ObtainAssessmentResultService.call(submission)
+          expect(submission.aasm_state).to eq 'results_obtained'
         end
-      end
-    end
 
-    context 'success for v2' do
-      before do
-        stub_request(:get, service.cfe_url)
-          .to_return(body: expected_v2_response)
-      end
+        it 'stores the response in the submission cfe_result field' do
+          ObtainAssessmentResultService.call(submission)
+          expect(submission.cfe_result).to eq expected_response
+        end
 
-      it 'updates the submission state to results_obtained' do
-        ObtainAssessmentResultService.call(submission)
-        expect(submission.aasm_state).to eq 'results_obtained'
-      end
-
-      it 'stores the response in the submission cfe_result field' do
-        ObtainAssessmentResultService.call(submission)
-        expect(submission.cfe_result).to eq expected_v2_response
-      end
-
-      it 'writes a history record' do
-        ObtainAssessmentResultService.call(submission)
-        history = submission.submission_histories.first
-        expect(history.url).to eq service.cfe_url
-        expect(history.http_method).to eq 'GET'
-        expect(history.request_payload).to be_nil
-        expect(history.http_response_status).to eq 200
-        expect(history.response_payload).to eq expected_v2_response
-        expect(history.error_message).to be_nil
-        expect(history.error_backtrace).to be_nil
+        it 'writes a history record' do
+          ObtainAssessmentResultService.call(submission)
+          history = submission.submission_histories.first
+          expect(history.url).to eq service.cfe_url
+          expect(history.http_method).to eq 'GET'
+          expect(history.request_payload).to be_nil
+          expect(history.http_response_status).to eq 200
+          expect(history.response_payload).to eq expected_response
+          expect(history.error_message).to be_nil
+          expect(history.error_backtrace).to be_nil
+        end
       end
     end
 
@@ -227,119 +180,7 @@ module CFE # rubocop:disable Metrics/ModuleLength
       }
     end
 
-    def expected_v2_response_hash # rubocop:disable Metrics/MethodLength
-      hash = default_response_hash
-      hash[:version] = '2'
-      hash[:assessment][:gross_income] = {
-        monthly_other_income: '75.0',
-        monthly_state_benefits: '75.0',
-        total_gross_income: '150.0',
-        upper_threshold: '999999999999.0',
-        assessment_result: 'eligible',
-        state_benefits: [
-          {
-            name: 'benefit_type_1',
-            monthly_value: '75.0',
-            excluded_from_income_assessment: true,
-            state_benefit_payments: [
-              {
-                payment_date: '2020-01-28',
-                amount: '75.0'
-              },
-              {
-                payment_date: '2019-12-28',
-                amount: '75.0'
-              },
-              {
-                payment_date: '2019-11-28',
-                amount: '75.0'
-              }
-            ]
-          }
-        ],
-        other_income: [
-          {
-            name: 'Trust fund',
-            monthly_income: '75.0',
-            payments: [
-              {
-                payment_date: '2020-01-28',
-                amount: '75.0'
-              },
-              {
-                payment_date: '2019-12-28',
-                amount: '75.0'
-              },
-              {
-                payment_date: '2019-11-28',
-                amount: '75.0'
-              }
-            ]
-          }
-        ]
-      }
-      hash[:assessment][:disposable_income] = {
-        outgoings: {
-          childcare_costs: [
-            {
-              payment_date: '2020-01-28',
-              amount: '100.0'
-            },
-            {
-              payment_date: '2019-12-28',
-              amount: '100.0'
-            },
-            {
-              payment_date: '2019-11-28',
-              amount: '100.0'
-            }
-          ],
-          housing_costs: [
-            {
-              payment_date: '2020-01-28',
-              amount: '125.0'
-            },
-            {
-              payment_date: '2019-12-28',
-              amount: '125.0'
-            },
-            {
-              payment_date: '2019-11-28',
-              amount: '125.0'
-            }
-          ],
-          maintenance_costs: [
-            {
-              payment_date: '2020-01-28',
-              amount: '50.0'
-            },
-            {
-              payment_date: '2019-12-28',
-              amount: '50.0'
-            },
-            {
-              payment_date: '2019-11-28',
-              amount: '50.0'
-            }
-          ]
-        },
-        childcare_allowance: '0.0',
-        dependant_allowance: '0.0',
-        maintenance_allowance: '50.0',
-        gross_housing_costs: '125.0',
-        housing_benefit: '0.0',
-        net_housing_costs: '125.0',
-        total_outgoings_and_allowances: '175.0',
-        total_disposable_income: '0.0',
-        lower_threshold: '315.0',
-        upper_threshold: '733.0',
-        assessment_result: 'eligible',
-        income_contribution: '0.0'
-      }
-      hash
-    end
-
-    def expected_v3_response_hash
+    def expected_response_hash
       hash = default_response_hash
       hash[:version] = '3'
       hash[:assessment][:gross_income] = {

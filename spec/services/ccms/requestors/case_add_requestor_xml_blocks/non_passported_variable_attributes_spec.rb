@@ -34,7 +34,7 @@ module CCMS
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:merits_assessment) { legal_aid_application.merits_assessment }
@@ -514,7 +514,7 @@ module CCMS
             subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
 
             describe 'are received by the applicant ' do
-              let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_received, submission: cfe_submission }
+              let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
               context 'GB_INPUT_C_8WP3_303A' do
                 let(:attribute) { 'GB_INPUT_C_8WP3_303A' }
@@ -602,7 +602,7 @@ module CCMS
 
         context 'GB_INPUT_C_13WP3_3A' do
           context 'when the applicant pays a mortgage' do
-            let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
             let(:rent_or_mortgage_payment) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
 
             before do
@@ -628,7 +628,7 @@ module CCMS
 
         describe 'PUI_CLIENT_INCOME_CONT' do
           context 'when the applicant has to make an income contribution' do
-            let!(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required, submission: cfe_submission }
 
             it 'returns the expected values' do
               block = XmlExtractor.call(xml, :global_means, 'PUI_CLIENT_INCOME_CONT')
@@ -648,7 +648,7 @@ module CCMS
 
         describe 'OUT_INCOME_CONT' do
           context 'when the applicant has to make an income contribution' do
-            let!(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required, submission: cfe_submission }
+            let!(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required, submission: cfe_submission }
 
             it 'returns the expected values' do
               block = XmlExtractor.call(xml, :global_means, 'OUT_INCOME_CONT')

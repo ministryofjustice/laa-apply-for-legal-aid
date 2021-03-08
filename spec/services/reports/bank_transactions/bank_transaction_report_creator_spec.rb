@@ -9,7 +9,7 @@ module Reports
                :with_everything,
                :with_benefits_transactions,
                :with_uncategorised_credit_transactions,
-               :with_cfe_v2_result,
+               :with_cfe_v3_result,
                :generating_reports
       end
 

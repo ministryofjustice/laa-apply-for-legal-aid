@@ -74,12 +74,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
         expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
       end
 
-      it 'should redirect to the student finance step' do
-        expect(subject).to redirect_to(flow_forward_path)
-      end
-
-      it 'should redirect to the cash income step if allow_cash_payment set to true' do
-        allow(Setting).to receive(:allow_cash_payment?).and_return(true)
+      it 'redirects to the cash income step' do
         expect(subject).to redirect_to(citizens_cash_income_path)
       end
 
@@ -98,8 +93,8 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       end
       let(:transaction_type_ids) { income_types.map(&:id) }
 
-      it 'should redirect to the next step' do
-        expect(subject).to redirect_to(citizens_student_finance_path)
+      it 'redirects to the next step' do
+        expect(subject).to redirect_to(citizens_cash_income_path)
       end
     end
 
@@ -176,7 +171,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       context 'change to none selected' do
         let(:params) { { legal_aid_application: { none_selected: 'true' } } }
 
-        it 'should redirect to the check answers page' do
+        it 'redirects to the check answers page' do
           expect(response).to redirect_to(citizens_check_answers_path)
         end
       end
@@ -184,8 +179,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       context 'when a different income is selected' do
         let(:params) { { legal_aid_application: { none_selected: 'false' } } }
 
-        it 'should redirect to the cash income step if allow_cash_payment set to true' do
-          allow(Setting).to receive(:allow_cash_payment?).and_return(true)
+        it 'redirects to the cash income step' do
           expect(subject).to redirect_to(citizens_cash_income_path)
         end
       end

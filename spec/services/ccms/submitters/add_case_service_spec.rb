@@ -7,7 +7,7 @@ module CCMS
         create :legal_aid_application,
                :with_proceeding_types,
                :with_everything_and_address,
-               :with_cfe_v2_result,
+               :with_cfe_v3_result,
                :with_positive_benefit_check_result,
                :with_substantive_scope_limitation,
                office_id: office.id,

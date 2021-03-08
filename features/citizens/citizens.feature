@@ -38,7 +38,6 @@ Feature: Citizen journey
   @javascript @vcr
   Scenario: Follow citizen journey from Accounts page selecting no income or outgoing categories
     Given An application has been created
-    And the setting to allow cash payments is enabled
     Then I visit the start of the financial assessment
     Then I visit the accounts page
     Then I click link 'Continue'
@@ -83,7 +82,6 @@ Feature: Citizen journey
   @javascript @vcr
   Scenario: Follow citizen journey from Accounts page selecting both income and outgoing categories
     Given An application has been created
-    And the setting to allow cash payments is enabled
     Then I visit the start of the financial assessment
     Then I visit the accounts page
     Then I click link 'Continue'
@@ -139,7 +137,6 @@ Feature: Citizen journey
 
   @javascript
   Scenario: I want to change income types via the check your answers page
-    Given the setting to allow cash payments is enabled
     Given I have completed an application
     And I complete the citizen journey as far as check your answers
     Then I should be on a page showing 'Check your answers'

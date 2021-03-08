@@ -5,18 +5,10 @@ module Flow
         identify_types_of_incomes: {
           path: ->(_) { urls.citizens_identify_types_of_income_path(locale: I18n.locale) },
           forward: ->(application) do
-            if Setting.allow_cash_payment? && application.transaction_types.credits.any?
-              :cash_incomes
-            else
-              :student_finances
-            end
+            application.transaction_types.credits.any? ? :cash_incomes : :student_finances
           end,
           check_answers: ->(application) do
-            if Setting.allow_cash_payment? && application.transaction_types.credits.any?
-              :cash_incomes
-            else
-              :check_answers
-            end
+            application.transaction_types.credits.any? ? :cash_incomes : :check_answers
           end
         },
         cash_incomes: {
@@ -41,11 +33,7 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(_) { urls.citizens_identify_types_of_outgoing_path(locale: I18n.locale) },
           forward: ->(application) do
-            if Setting.allow_cash_payment? && application.transaction_types.debits.any?
-              :cash_outgoings
-            else
-              :check_answers
-            end
+            application.transaction_types.debits.any? ? :cash_outgoings : :check_answers
           end
         },
         cash_outgoings: {

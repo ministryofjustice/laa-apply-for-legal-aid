@@ -156,7 +156,7 @@ class LegalAidApplication < ApplicationRecord
   def transactions_total_by_category(category_id)
     bank_trx_total = transactions_total_by_type(:bank, category_id).abs
     cash_trx_total = transactions_total_by_type(:cash, category_id).abs
-    Setting.allow_cash_payment? ? cash_trx_total + bank_trx_total : bank_trx_total
+    cash_trx_total + bank_trx_total
   end
 
   def applicant_employed?

@@ -49,7 +49,7 @@ module CCMS
         let(:respondent) { create :respondent, police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-        let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:office) { create :office, ccms_id: '4727432767' }
         let(:savings_amount) { create :savings_amount, :all_nil }
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }

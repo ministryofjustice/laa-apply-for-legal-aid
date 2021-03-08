@@ -29,10 +29,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:has_restrictions) { true }
   let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:secure_id) { legal_aid_application.generate_secure_id }
-  before do
-    Setting.setting.update(allow_cash_payment: true)
-    get citizens_legal_aid_application_path(secure_id)
-  end
+  before { get citizens_legal_aid_application_path(secure_id) }
 
   describe 'GET /citizens/check_answers' do
     subject { get '/citizens/check_answers' }

@@ -130,7 +130,7 @@ RSpec.describe Applicant, type: :model do
       subject { legal_aid_application.applicant.receives_maintenance? }
 
       context 'when they receive maintenance' do
-        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_received, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
         it { is_expected.to be true }
       end
@@ -144,7 +144,7 @@ RSpec.describe Applicant, type: :model do
       subject { legal_aid_application.applicant.maintenance_per_month }
 
       context 'when they receive maintenance' do
-        let!(:cfe_result) { create :cfe_v2_result, :with_maintenance_received, submission: cfe_submission }
+        let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
         it { is_expected.to eq '150.00' }
       end
@@ -161,7 +161,7 @@ RSpec.describe Applicant, type: :model do
     subject { legal_aid_application.applicant.mortgage_per_month }
 
     context 'when they pay a mortgage' do
-      let!(:cfe_result) { create :cfe_v2_result, submission: cfe_submission }
+      let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
       it { is_expected.to eq '125.00' }
     end

@@ -7,7 +7,7 @@ RSpec.describe ResultsPanelSelector do
 
   describe '.call' do
     context 'eligible no restrictions no policy disregards' do
-      let(:cfe_result) { double CFE::V2::Result, overview: 'eligible' }
+      let(:cfe_result) { double CFE::V3::Result, overview: 'eligible' }
 
       it 'returns the eligible partial name' do
         expect(described_class.call(legal_aid_application)).to eq 'shared/assessment_results/eligible'
@@ -15,7 +15,7 @@ RSpec.describe ResultsPanelSelector do
     end
 
     context 'income_contribution_with no restrictions but with disregards' do
-      let(:cfe_result) { double CFE::V2::Result, overview: 'income_contribution_required' }
+      let(:cfe_result) { double CFE::V3::Result, overview: 'income_contribution_required' }
 
       before do
         allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
@@ -28,7 +28,7 @@ RSpec.describe ResultsPanelSelector do
     end
 
     context 'invalid decision tree key' do
-      let(:cfe_result) { double CFE::V2::Result, overview: 'xxxx' }
+      let(:cfe_result) { double CFE::V3::Result, overview: 'xxxx' }
 
       it 'raises' do
         expect { described_class.call(legal_aid_application) }.to raise_error KeyError, 'key not found: :xxxx_no_restrictions_no_disregards'

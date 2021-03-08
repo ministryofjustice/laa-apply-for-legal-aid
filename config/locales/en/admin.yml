@@ -34,7 +34,6 @@ en:
           mock_true_layer_data: Mock TrueLayer Data
           manually_review_all_cases: Manually review all non-passported applications
           allow_welsh_translation: Allow Welsh translation
-          allow_cash_payment: Allow Cash Payments to be submitted
           allow_multiple_proceedings: Allow multiple proceedings
           override_dwp_results: Allow DWP results to be overriden
         hints:
@@ -43,7 +42,6 @@ en:
             All applications with capital contributions AND restrictions on assets will be routed to caseworker for review.
             Select Yes to additionally route all non-passported applications to caseworker for review.
           allow_welsh_translation: Select Yes to translate the service into Welsh
-          allow_cash_payment: Select Yes to include the cash payment process in the user journey
           allow_multiple_proceedings: Select Yes to allow solicitors to select multiple proceeding types
           override_dwp_results: Select Yes to allow solicitors to override results from benefit checker
     submitted_applications_reports:

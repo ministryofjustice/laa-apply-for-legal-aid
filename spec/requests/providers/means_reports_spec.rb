@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Providers::MeansReportsController, type: :request do
   include ActionView::Helpers::NumberHelper
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v2_result, :passported, :assessment_submitted }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :assessment_submitted }
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
   let(:cfe_result) { legal_aid_application.cfe_result }
@@ -23,81 +23,47 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       subject
     end
 
-    context 'assessment v2 response' do
-      it 'renders successfully' do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'displays the application ref number' do
-        expect(unescaped_response_body).to include(legal_aid_application.application_ref)
-      end
-
-      it 'displays the CCMS case reference' do
-        expect(unescaped_response_body).to include(submission.case_ccms_reference)
-      end
-
-      it 'displays the total capital assessed' do
-        expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.total_capital))
-      end
-
-      it 'displays the capital lower limit' do
-        expect(unescaped_response_body).to include('£3,000')
-      end
-
-      it 'displays the capital upper limit' do
-        expect(unescaped_response_body).to include('£8,000')
-      end
-
-      it 'displays the capital contribution' do
-        expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
-      end
+    it 'renders successfully' do
+      expect(response).to have_http_status(:ok)
     end
 
-    context 'assessment v3 response' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :assessment_submitted }
+    it 'displays all sources for Benefits' do
+      expect(unescaped_response_body).to include('Benefits')
+      expect(unescaped_response_body).to include('£75')
+    end
 
-      it 'renders successfully' do
-        expect(response).to have_http_status(:ok)
-      end
+    it 'displays all sources for Housing Costs' do
+      expect(unescaped_response_body).to include('Housing costs')
+      expect(unescaped_response_body).to include('£125')
+    end
 
-      it 'displays all sources for Benefits' do
-        expect(unescaped_response_body).to include('Benefits')
-        expect(unescaped_response_body).to include('£75')
-      end
+    it 'displays student loan' do
+      expect(unescaped_response_body).to include('Student loan or grant')
+      expect(unescaped_response_body).to include('£0')
+    end
 
-      it 'displays all sources for Housing Costs' do
-        expect(unescaped_response_body).to include('Housing costs')
-        expect(unescaped_response_body).to include('£125')
-      end
+    it 'displays the application ref number' do
+      expect(unescaped_response_body).to include(legal_aid_application.application_ref)
+    end
 
-      it 'displays student loan' do
-        expect(unescaped_response_body).to include('Student loan or grant')
-        expect(unescaped_response_body).to include('£0')
-      end
+    it 'displays the CCMS case reference' do
+      expect(unescaped_response_body).to include(submission.case_ccms_reference)
+    end
 
-      it 'displays the application ref number' do
-        expect(unescaped_response_body).to include(legal_aid_application.application_ref)
-      end
+    it 'displays the total capital assessed' do
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.total_capital))
+    end
 
-      it 'displays the CCMS case reference' do
-        expect(unescaped_response_body).to include(submission.case_ccms_reference)
-      end
+    it 'displays the capital lower limit' do
+      expect(unescaped_response_body).to include('£3,000')
+    end
 
-      it 'displays the total capital assessed' do
-        expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.total_capital))
-      end
+    it 'displays the capital upper limit' do
+      expect(unescaped_response_body).to include('£8,000')
+    end
 
-      it 'displays the capital lower limit' do
-        expect(unescaped_response_body).to include('£3,000')
-      end
-
-      it 'displays the capital upper limit' do
-        expect(unescaped_response_body).to include('£8,000')
-      end
-
-      it 'displays the capital contribution' do
-        expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
-      end
+    it 'displays the capital contribution' do
+      expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
     end
 
     context 'when not authenticated' do
