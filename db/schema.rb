@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_145638) do
+ActiveRecord::Schema.define(version: 2021_03_09_111908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -345,7 +345,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_145638) do
     t.boolean "evidence_available"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id"
+    t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id", unique: true
   end
 
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
