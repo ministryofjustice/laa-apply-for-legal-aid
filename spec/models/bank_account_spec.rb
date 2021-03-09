@@ -72,4 +72,28 @@ RSpec.describe BankAccount, type: :model do
       expect(bank_account.has_tax_credits?).to eq true
     end
   end
+
+  describe '#latest_balance' do
+    let(:bank_account) { create :bank_account }
+
+    context 'transactions exist' do
+      before { create_transactions }
+      it 'returns the running balance of the latest transaction' do
+        expect(bank_account.latest_balance).to eq 415.26
+      end
+    end
+
+    context 'no bank transactions' do
+      it 'returns zero' do
+        expect(bank_account.bank_transactions.size).to eq 0
+        expect(bank_account.latest_balance).to eq 0.0
+      end
+    end
+
+    def create_transactions
+      create :bank_transaction, bank_account: bank_account, happened_at: 2.days.ago, running_balance: 300.44
+      create :bank_transaction, bank_account: bank_account, happened_at: 2.days.ago, running_balance: 400.44
+      create :bank_transaction, bank_account: bank_account, happened_at: Date.current, running_balance: 415.26
+    end
+  end
 end
