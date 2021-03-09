@@ -95,6 +95,5 @@ RSpec.describe BankAccount, type: :model do
       create :bank_transaction, bank_account: bank_account, happened_at: 2.days.ago, running_balance: 400.44
       create :bank_transaction, bank_account: bank_account, happened_at: Date.current, running_balance: 415.26
     end
-
   end
 end
