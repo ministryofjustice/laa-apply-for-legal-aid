@@ -211,6 +211,39 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         expect(CleanupCapitalAttributes).to receive(:call).with(application)
         subject
       end
+
+      context 'allow dwp override' do
+        before do
+          allow(Setting).to receive(:override_dwp_results?).and_return(true)
+          subject
+        end
+
+        context 'non passported' do
+          it 'redirects to the confirm dwp non passported applications page' do
+            expect(response).to redirect_to(providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application))
+          end
+        end
+
+        context 'passported' do
+          let(:application) do
+            create(
+              :legal_aid_application,
+              :with_passported_state_machine,
+              :at_entering_applicant_details,
+              :with_proceeding_types,
+              :with_substantive_scope_limitation,
+              :with_delegated_functions_scope_limitation,
+              used_delegated_functions: used_delegated_functions,
+              used_delegated_functions_on: used_delegated_functions_on,
+              applicant: applicant
+            )
+          end
+
+          it 'redirects to the check benefits page' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+          end
+        end
+      end
     end
 
     context 'Save as draft' do

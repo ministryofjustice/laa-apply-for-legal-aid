@@ -61,7 +61,13 @@ module Flow
         },
         check_provider_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
-          forward: :check_benefits
+          forward: ->(application) do
+            if Setting.override_dwp_results?
+              application.non_passported? ? :confirm_dwp_non_passported_applications : :check_benefits
+            else
+              :check_benefits
+            end
+          end
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },

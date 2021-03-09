@@ -1,0 +1,11 @@
+<%= page_template page_title: '', template: :basic do %>
+  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+                url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path, method: :patch, local: true) do |form| %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
+    <%= next_action_buttons(
+          show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
+          form: form
+        ) %>
+  <% end %>
+<% end %>
