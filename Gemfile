@@ -65,7 +65,7 @@ gem 'addressable'
 # File storage
 gem 'aws-sdk-s3'
 
-# convert documnents to PDF
+# convert documents to PDF
 gem 'libreconv'
 
 # Used for working day calculations
