@@ -57,11 +57,11 @@ Feature: Non-passported applicant journeys
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
-    Then I select 'Housing costs'
+    Then I select 'Housing payments'
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     When I click link 'Add another type of regular payment'
-    And I select 'Childcare costs'
+    And I select 'Childcare payments'
     Then I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click 'Save and continue'
