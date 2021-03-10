@@ -314,6 +314,15 @@ en:
               national_emergencies_trust: National Emergencies Trust (NET)
               we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
               london_emergencies_trust: The London Emergencies Trust
+      received_benefit_confirmation:
+        form:
+          providers:
+            received_benefit_confirmations:
+              universal_credit: Universal Credit
+              guarantee_credit_element_of_pension_credit: Guarantee Credit element of Pension Credit
+              income_based_job_seekers_allowance: Income-based Jobseeker’s Allowance (JSA)
+              income_related_employment_and_support_allowance: Income-related Employment and Support Allowance (ESA)
+              income_support: Income Support
       revealing_checkbox:
         attribute:
           citizens:
