@@ -32,8 +32,8 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       expect(unescaped_response_body).to include('£75')
     end
 
-    it 'displays all sources for Housing Costs' do
-      expect(unescaped_response_body).to include('Housing costs')
+    it 'displays all sources for Housing Payments' do
+      expect(unescaped_response_body).to include('Housing payments')
       expect(unescaped_response_body).to include('£125')
     end
 

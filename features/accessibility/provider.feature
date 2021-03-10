@@ -112,7 +112,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
     And the page is accessible
-    Then I select 'Housing costs'
+    Then I select 'Housing payments'
     Then I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click the first link 'View statements and add transactions'

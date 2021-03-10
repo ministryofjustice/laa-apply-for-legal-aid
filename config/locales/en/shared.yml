@@ -100,10 +100,10 @@ en:
           student_loan: Student loan or grant
           pension: Pension
         outgoing:
-          housing: Housing costs
-          childcare: Childcare costs
-          maintenance_out: Maintenance payments
-          legal_aid: Legal aid payments
+          housing: Housing payments
+          childcare: Childcare payments
+          maintenance_out: Maintenance payments to a former partner
+          legal_aid: Payments towards legal aid in a criminal case
       total:
         total_income: Total income
         total_outgoings: Total outgoings
@@ -113,7 +113,7 @@ en:
       cash_heading: 'Physical cash:'
       cash_hint: For example, banknotes and coins.
       dates: "%{date_start}"
-      month: Calendar month
+      month: Month
       benefits: Benefits
       child_care: Childcare payments
       excluded_benefits: Disregarded benefits

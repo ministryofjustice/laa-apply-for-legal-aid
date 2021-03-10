@@ -61,9 +61,9 @@ en:
           property_or_lodger: Income from property or lodger
           student_loan: Student loan or grant
           pension: Pension
-          rent_or_mortgage: Housing costs
-          child_care: Childcare costs
-          maintenance_out: Maintenance payments
+          rent_or_mortgage: Housing payments
+          child_care: Childcare payments
+          maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case
       vehicle:
         purchased_on_day: Day

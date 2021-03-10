@@ -408,7 +408,7 @@ en:
         category:
           state_benefit_payment: State benefits
           other_income_payment: Other income
-          outgoings_housing_cost: Housing costs
+          outgoings_housing_cost: Housing payments
           outgoings_maintenance: Maintenance payments
           outgoings_legal_aid: Legal aid payments
           outgoings_childcare: Childcare payments
@@ -459,8 +459,8 @@ en:
         subheading:
           text: "Your client has told us they do not pay:"
           list: |
-            housing costs
-            childcare costs
+            housing payments
+            childcare payments
             spousal or child maintenance
             for legal aid in a criminal case
         is_this_correct: Is this correct?
