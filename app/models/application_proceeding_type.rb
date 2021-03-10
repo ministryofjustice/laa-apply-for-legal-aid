@@ -23,6 +23,7 @@ class ApplicationProceedingType < ApplicationRecord
 
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
+    self.lead_proceeding = true if proceedings.empty?
   end
 
   def add_default_substantive_scope_limitation
@@ -46,5 +47,9 @@ class ApplicationProceedingType < ApplicationRecord
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
     rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
+  end
+
+  def proceedings
+    ApplicationProceedingType.where(legal_aid_application_id: legal_aid_application.id)
   end
 end
