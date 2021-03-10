@@ -5,7 +5,8 @@ let typingTimer; // timer identifier
 let ariaText;
 
 async function searchResults (searchTerm) {
-  const url = '/v1/proceeding_types?search_term=' + searchTerm;
+  var currentUrl = window.location.href
+  const url = '/v1/proceeding_types?search_term=' + searchTerm + '&sourceUrl=' + currentUrl;
   const response = await axios.get(url);
   return response.data;
 }
