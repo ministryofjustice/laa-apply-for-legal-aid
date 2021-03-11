@@ -23,9 +23,10 @@ module CCMS
     end
 
     def manual_review_required?
-      return true if dwp_override
-
-      manually_review_all_non_passported? || capital_contribution_required? || has_restrictions?
+      dwp_override.present? ||
+        manually_review_all_non_passported? ||
+        capital_contribution_required? ||
+        has_restrictions?
     end
 
     def review_reasons
