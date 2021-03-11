@@ -23,7 +23,7 @@ describe('ProceedingsTypes.searchResults', () => {
   })
 
   it('polls the correct endpoint', done => {
-    let endpoint = '/v1/proceeding_types?search_term=' + searchTerm;
+    let endpoint = '/v1/proceeding_types?search_term=' + searchTerm + '&sourceUrl=http://localhost/';
     expect(axios.get.mock.calls).toEqual([[endpoint]]);
     done();
   })
