@@ -317,6 +317,9 @@ module CCMS
       application_proceeding_type = options[:appl_proceeding_type]
       return 'MULTIPLE' if application_proceeding_type.assigned_scope_limitations.size > 1
 
+      puts 11111111
+      pp application_proceeding_type.assigned_scope_limitations.size
+
       application_proceeding_type.assigned_scope_limitations.first.code
     end
 
