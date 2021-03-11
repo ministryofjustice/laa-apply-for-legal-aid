@@ -425,7 +425,6 @@ FactoryBot.define do
     trait :with_everything do
       with_applicant
       with_non_passported_state_machine
-      with_proceeding_types
       applicant_entering_means
       with_savings_amount
       with_own_home_mortgaged
