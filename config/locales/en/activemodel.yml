@@ -166,6 +166,10 @@ en:
               not_a_number: Value must be an amount of money, like 1,000
               too_many_decimals: Value must not include more than 2 decimal numbers
               less_than_threshold: Select no if they have assets worth less than £8,000
+        dwp_override:
+          attributes:
+            passporting_benefit:
+              blank: Select if your client has received any of these benefits
         incident:
           attributes:
             told_on:

@@ -12,6 +12,8 @@
     <%= form.govuk_radio_divider %>
     <%= form.govuk_radio_button(:passporting_benefit, false, label: {text:  t('generic.none_selected')}) %>
 
+  <div class="govuk-!-padding-bottom-3"></div>
+
   <%= next_action_buttons(
         show_draft: local_assigns.key?(:show_draft) ? show_draft : false,
         form: form
