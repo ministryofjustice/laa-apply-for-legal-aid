@@ -426,6 +426,10 @@ en:
             Your solicitor will look at your bank statements and put your transactions into the categories you select.
             We need this information to check if you qualify financially for legal aid.
       types_of_outgoings_form:
+        hints:
+          rent_or_mortgage: For example, rent, mortgage or board and lodging.
+          child_care: For example, to a childminder, nanny or nursery.
+          maintenance_out: This includes child maintenance.
         expanded_explanation:
           heading: Why am I being asked this?
           list: |
