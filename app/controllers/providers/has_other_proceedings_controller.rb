@@ -53,9 +53,9 @@ module Providers
     end
 
     def set_new_lead_proceeding
-      new_lead = ApplicationProceedingType.find_by(legal_aid_application_id: legal_aid_application.id)
+      new_lead = ApplicationProceedingType.where(lead_proceeding: false).find_by(legal_aid_application_id: legal_aid_application.id)
       new_lead.lead_proceeding = true
-      new_lead.save
+      new_lead.save!
     end
 
     def form_params

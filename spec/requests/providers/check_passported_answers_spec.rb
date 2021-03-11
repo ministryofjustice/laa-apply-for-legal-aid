@@ -74,14 +74,18 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant does not have any other assets' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_proceeding_types, :with_no_other_assets, :with_passported_state_machine, :provider_entering_means }
+        let(:application) do
+          create :legal_aid_application, :with_everything, :with_proceeding_types, :with_no_other_assets, :with_passported_state_machine, :provider_entering_means
+        end
         it 'displays that no other assets have been declared' do
           expect(response.body).to include(I18n.t('.generic.none_declared'))
         end
       end
 
       context 'applicant does not have any capital restrictions' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_proceeding_types, :with_passported_state_machine, :provider_entering_means, has_restrictions: false }
+        let(:application) do
+          create :legal_aid_application, :with_everything, :with_proceeding_types, :with_passported_state_machine, :provider_entering_means, has_restrictions: false
+        end
         it 'displays that no capital restrictions have been declared' do
           expect(response.body).to include(I18n.t('.generic.no'))
         end
@@ -142,7 +146,9 @@ RSpec.describe 'check passported answers requests', type: :request do
       end
 
       context 'applicant owns home without mortgage' do
-        let(:application) { create :legal_aid_application, :with_everything, :with_proceeding_types, :with_own_home_owned_outright, :with_passported_state_machine, :provider_entering_means }
+        let(:application) do
+          create :legal_aid_application, :with_everything, :with_proceeding_types, :with_own_home_owned_outright, :with_passported_state_machine, :provider_entering_means
+        end
         it 'does not display property value' do
           expect(response.body).not_to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
           expect(response.body).not_to include('Outstanding mortgage')
