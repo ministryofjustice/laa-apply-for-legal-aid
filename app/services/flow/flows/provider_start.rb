@@ -61,28 +61,18 @@ module Flow
         },
         check_provider_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
-          forward: ->(application) do
-            if Setting.override_dwp_results?
-              application.non_passported? ? :confirm_dwp_non_passported_applications : :check_benefits
-            else
-              :check_benefits
-            end
-          end
+          forward: :check_benefits
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: ->(application) do
-            next_step = :open_banking_consents
+          forward: ->(application, dwp_override_non_passported) do
             if application.applicant_receives_benefit?
               application.change_state_machine_type('PassportedStateMachine')
+              application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
               application.change_state_machine_type('NonPassportedStateMachine')
-              next_step = :applicant_employed
+              dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :applicant_employed
             end
-
-            return :substantive_applications if application.used_delegated_functions? && application.passported?
-
-            application.applicant_receives_benefit? ? :capital_introductions : next_step
           end
         },
         substantive_applications: {
