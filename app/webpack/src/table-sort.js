@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', event => {
       }
     }
 
-    const tableHeaders = document.querySelectorAll('th')
+    const tableHeaders = document.querySelectorAll('th.sort')
 
     function resetTableHeaders() {
       tableHeaders.forEach((header) => {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', event => {
     tableHeaders.forEach((th) => {
       th.classList.add('js-sortable'); // this class used to style as links, if JS not enabled, titles won't look clickable.
       th.setAttribute('tabindex', 0);
-      let index = Array.from(tableHeaders).indexOf(th);
+      let index = Array.from(document.querySelectorAll('th')).indexOf(th); // need to select all table headers including hidden cell to get index
       let inverse = false;
 
       th.addEventListener('click', (event) => {
