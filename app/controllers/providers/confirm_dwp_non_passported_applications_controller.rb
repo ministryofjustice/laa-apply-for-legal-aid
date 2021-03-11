@@ -3,6 +3,8 @@ module Providers
     def show; end
 
     def update
+      return continue_or_draft if draft_selected?
+
       if dwp_results_correct.present?
         go_forward(dwp_results_correct == 'true')
       else
