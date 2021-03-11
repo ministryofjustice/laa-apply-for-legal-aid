@@ -82,6 +82,7 @@ Given('I previously created a passported application with no assets and left on 
     :application,
     :with_applicant,
     :without_own_home,
+    :with_proceeding_types,
     :with_no_other_assets,
     :with_policy_disregards,
     :with_passported_state_machine,
