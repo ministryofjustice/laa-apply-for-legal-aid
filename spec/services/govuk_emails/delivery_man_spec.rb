@@ -60,6 +60,23 @@ RSpec.describe GovukEmails::DeliveryMan do
           expect(scheduled_mailing.cancelled_at).to have_been_in_the_past
         end
       end
+
+      context 'mail raises an exception' do
+        let(:message) { double 'MailMessage', govuk_notify_response: govuk_response }
+        let(:govuk_response) { double 'GovukResponse', id: govuk_message_id }
+        let(:govuk_message_id) { SecureRandom.uuid }
+        let(:time_now) { Time.current }
+
+        before do
+          allow(mailer_klass.constantize).to receive(mailer_method).and_raise('Mailing job failed')
+          allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(true)
+        end
+
+        it 'is captured by Sentry' do
+          expect(Sentry).to receive(:capture_exception).with(message_contains('Mailing job failed'))
+          subject
+        end
+      end
     end
   end
 end
