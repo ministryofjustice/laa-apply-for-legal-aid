@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_145638) do
+ActiveRecord::Schema.define(version: 2021_03_12_150401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -342,7 +342,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_145638) do
   create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "passporting_benefit"
-    t.boolean "evidence_available"
+    t.boolean "has_evidence_of_benefit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id"

@@ -17,6 +17,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :attachments, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result, dependent: :destroy
+  has_one :dwp_override, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
   has_one :merits_assessment, dependent: :destroy
