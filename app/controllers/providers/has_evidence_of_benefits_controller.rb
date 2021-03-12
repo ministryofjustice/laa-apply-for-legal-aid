@@ -8,13 +8,14 @@ module Providers
 
     def update
       @form = LegalAidApplications::HasEvidenceOfBenefitForm.new(form_params)
-      update_state_machine_type
+      update_state
+
       render :show unless save_continue_or_draft(@form)
     end
 
     private
 
-    def update_state_machine_type
+    def update_state
       return if @form.has_evidence_of_benefit.nil?
 
       if @form.has_evidence_of_benefit == 'true'
@@ -22,6 +23,8 @@ module Providers
       else
         legal_aid_application.change_state_machine_type('NonPassportedStateMachine')
       end
+
+      legal_aid_application.applicant_details_checked! unless legal_aid_application.applicant_details_checked?
     end
 
     def dwp_override

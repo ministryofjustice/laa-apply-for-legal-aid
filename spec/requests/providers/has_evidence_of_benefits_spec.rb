@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override }
+  let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :checking_applicant_details }
   let(:login) { login_as legal_aid_application.provider }
 
   before do
@@ -24,6 +24,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
   end
 
   describe 'PATCH /providers/:application_id/has_evidence_of_benefit' do
+    let(:has_evidence_of_benefit) { 'true' }
     let(:params) do
       {
         dwp_override: {
@@ -34,21 +35,29 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
 
     subject { patch providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application), params: params }
 
-    context 'choose yes' do
-      let(:has_evidence_of_benefit) { 'true' }
+    it 'updates the state' do
+      expect(legal_aid_application.reload.state).to eq 'applicant_details_checked'
+    end
 
-      it 'updates the dwp_override model' do
-        dwp_override = legal_aid_application.reload.dwp_override
-        expect(dwp_override.has_evidence_of_benefit).to be true
-      end
+    context 'application state is already applicant_details_checked' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :applicant_details_checked }
 
-      it 'redirects to the upload evidence_of_benefit page' do
-        expect(response).to redirect_to(providers_legal_aid_application_evidence_of_benefit_path(legal_aid_application))
+      it 'does not update the state' do
+        expect(legal_aid_application).not_to receive(:applicant_details_checked!)
       end
+    end
 
-      it 'updates the state machine type' do
-        expect(legal_aid_application.reload.state_machine).to be_a_kind_of PassportedStateMachine
-      end
+    it 'updates the dwp_override model' do
+      dwp_override = legal_aid_application.reload.dwp_override
+      expect(dwp_override.has_evidence_of_benefit).to be true
+    end
+
+    it 'redirects to the upload evidence_of_benefit page' do
+      expect(response).to redirect_to(providers_legal_aid_application_evidence_of_benefit_path(legal_aid_application))
+    end
+
+    it 'updates the state machine type' do
+      expect(legal_aid_application.reload.state_machine).to be_a_kind_of PassportedStateMachine
     end
 
     context 'choose no' do
