@@ -209,30 +209,18 @@ FactoryBot.define do
       end
 
       after(:create) do |application, evaluator|
-        application.proceeding_types = create_list(:proceeding_type, evaluator.proceeding_types_count)
-        application.application_proceeding_types.each do |apt|
-          pt = apt.proceeding_type
-          default_subst_sl = pt.default_substantive_scope_limitation || create(:scope_limitation, :substantive, joined_proceeding_type: pt)
-          default_df_sl = pt.default_delegated_functions_scope_limitation || create(:scope_limitation, :delegated_functions, joined_proceeding_type: pt)
-          apt.application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_subst_sl)
-          apt.application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_df_sl)
-        end
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
+        application.save
       end
     end
 
     trait :with_multiple_proceeding_types do
       after(:create) do |application, evaluator|
-        if evaluator.proceeding_types.presence
-          application.proceeding_types = evaluator.proceeding_types
-        else
-          application.proceeding_types << create(:proceeding_type, :with_real_data)
-          application.proceeding_types << create(:proceeding_type, :as_occupation_order)
-        end
+        application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1, :with_real_data)
+        application.proceeding_types << create(:proceeding_type, :as_occupation_order)
         pt = application.lead_proceeding_type
-        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                   scope_limitation_id: sl.id)
+        create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        AddScopeLimitationService.call(application, :substantive)
       end
     end
 
@@ -240,10 +228,8 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
-        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                   scope_limitation_id: sl.id)
+        create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        AddScopeLimitationService.call(application, :substantive)
       end
     end
 
@@ -251,47 +237,8 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         application.proceeding_types = evaluator.proceeding_types.presence || create_list(:proceeding_type, 1)
         pt = application.lead_proceeding_type
-        sl = create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-        AssignedDfScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                          scope_limitation_id: sl.id)
-      end
-    end
-
-    # usage:
-    #
-    #   create :legal_aid_application,
-    #          :with_proceeding_type_and_scope_limtiations,
-    #          this_proceeding_type: pt1,
-    #          substantive_scope_limitation: sl1,
-    #          df_scope_limitation: sl2
-    #
-    # The proceeding type pt1 and the scope limitations sl1 and sl2 must already exist.  This
-    # trait will ensure that sl1 is the default substantive scope limitation for pt1, and sl2 is the default
-    # delegated functions scope limitation, and add the proceeding type to the application.  Any existing
-    # default scope limitations for the proceeding type will be deleted.
-    #
-    # sl2 may be nil, or the df_scope_limitation attribute omitted if no df scope limitaion is required.
-    #
-    trait :with_proceeding_type_and_scope_limitations do
-      transient do
-        this_proceeding_type { nil }
-        substantive_scope_limitation { nil }
-        df_scope_limitation { nil }
-      end
-      after(:create) do |application, evaluator|
-        pt1 = evaluator.this_proceeding_type
-        sl1 = evaluator.substantive_scope_limitation
-        sl2 = evaluator.df_scope_limitation
-
-        # destroy any eligible scope limitations and build from scratch
-        ProceedingTypeScopeLimitation.where(proceeding_type_id: pt1.id).map(&:destroy!)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :substantive_default, scope_limitation: sl1)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :delegated_functions_default, scope_limitation: sl2) if sl2.present?
-        application.proceeding_types << pt1
-        apt = application.application_proceeding_types.first
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
-        AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
+        create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
+        AddScopeLimitationService.call(application, :delegated)
       end
     end
 

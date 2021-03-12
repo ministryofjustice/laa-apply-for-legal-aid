@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_195130) do
+ActiveRecord::Schema.define(version: 2021_03_05_145638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -122,8 +122,7 @@ ActiveRecord::Schema.define(version: 2021_03_09_195130) do
     t.uuid "scope_limitation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "type"
-    t.index ["application_proceeding_type_id", "scope_limitation_id"], name: "index_application_proceeding_scope_limitation", unique: true
+    t.index ["application_proceeding_type_id", "scope_limitation_id"], name: "index_application_proceeding_scope_limitation"
     t.index ["scope_limitation_id", "application_proceeding_type_id"], name: "index_scope_limitation_application_proceeding"
   end
 
@@ -743,6 +742,8 @@ ActiveRecord::Schema.define(version: 2021_03_09_195130) do
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "policy_disregards", "legal_aid_applications"
+  add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
+  add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"

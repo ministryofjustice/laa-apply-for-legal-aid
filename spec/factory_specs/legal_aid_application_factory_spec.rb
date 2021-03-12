@@ -48,238 +48,76 @@ RSpec.describe 'LegalAidApplication factory' do
     end
   end
 
-  describe 'with_proceeding_types' do
-    context 'proceeding type count not specified' do
-      it 'creates an application with one proceeding type with two scope limitations' do
-        laa = create :legal_aid_application, :with_proceeding_types
-        expect(laa.proceeding_types.count).to eq 1
-        expect(ProceedingType.count).to eq 1
-        expect(ScopeLimitation.count).to eq 2
-      end
-    end
-
-    context 'proceeding type count more than 1' do
-      let(:laa) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 3 }
-
-      before { laa }
-
-      it 'creates an application with three proceeding type' do
-        expect(laa.proceeding_types.count).to eq 3
-        expect(ProceedingType.count).to eq 3
-      end
-
-      it 'creates a substantive and df scope limitation for each proceeding type' do
-        expect(laa.application_proceeding_types.count).to eq 3
-        laa.application_proceeding_types.each do |apt|
-          expect(apt.assigned_scope_limitations.count).to eq 2
-          expect(apt.substantive_scope_limitation).not_to be_nil
-          expect(apt.delegated_functions_scope_limitation).not_to be_nil
+  describe ':with scope limitations' do
+    context "don't specify proceeding types" do
+      context "don't specify the number of proceeding types" do
+        it 'creates one proceeding type' do
+          application = create :application, :with_substantive_scope_limitation
+          expect(ProceedingType.count).to eq 1
+          proceeding_type = ProceedingType.first
+          expect(application.proceeding_types).to eq [proceeding_type]
         end
-      end
-    end
-  end
-
-  describe ':with_multiple_proceeding_types' do
-    context 'not specifying the proceeding types' do
-      let(:laa) { create :legal_aid_application, :with_multiple_proceeding_types }
-      subject { laa }
-
-      it 'seeds Proceeding Types with two real items' do
-        subject
-        expect(ProceedingType.order(:code).pluck(:code)).to eq %w[PR0208 PR0214]
-      end
-
-      it 'attached both real items to the application' do
-        expect(laa.proceeding_types.order(:code).map(&:code)).to eq %w[PR0208 PR0214]
-      end
-
-      it 'populates scope limitations table with one dummy scope limitation' do
-        expect(ScopeLimitation.count).to eq 0
-        subject
-        expect(ScopeLimitation.count).to eq 1
-      end
-
-      it 'attaches the scope limitation to the lead proceeding type as the default substantive' do
-        subject
-        expect(ProceedingTypeScopeLimitation.count).to eq 1
-        expect(laa.proceeding_types.first.default_substantive_scope_limitation).to eq ScopeLimitation.first
-      end
-
-      it 'assigns the scope limitation to the application_proceeding_type' do
-        expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-        lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-        aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-        expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
-        expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
       end
     end
 
     context 'specifying the proceeding types' do
-      let!(:pt1) { create :proceeding_type }
-      let!(:pt2) { create :proceeding_type }
-      let(:laa) { create :legal_aid_application, :with_multiple_proceeding_types, proceeding_types: [pt1, pt2] }
-
-      subject { laa }
-
-      it 'does not create any more proceeding type records' do
-        expect(ProceedingType.count).to eq 2
-        expect { subject }.not_to change { ProceedingType.count }
-      end
-
-      it 'creates one scope limitation and adds it to the lead proceeding types eligible scope limitaions' do
-        expect(ScopeLimitation.count).to be 0
-        expect { subject }.to change { ScopeLimitation.count }.by(1)
-        expect(laa.lead_proceeding_type.eligible_scope_limitations.first).to eq ScopeLimitation.first
-      end
-
-      it 'assigns the scope to the application  lead processing type' do
-        expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-        lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-        aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-        expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
-        expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-      end
-    end
-  end
-
-  describe ':with_substantive_scope_limitation' do
-    context 'without specifying proceeding type' do
-      let(:laa) { create :legal_aid_application, :with_substantive_scope_limitation }
-
-      subject { laa }
-
-      it 'creates a proceeding type and adds it to the application' do
-        expect(ProceedingType.count).to eq 0
-        expect { subject }.to change { ProceedingType.count }.by(1)
-        expect(laa.lead_proceeding_type).to eq ProceedingType.first
-      end
-
-      it 'creates a default scope limitation and adds to the lead proceeding type' do
-        expect(ScopeLimitation.count).to eq 0
-        expect { subject }.to change { ScopeLimitation.count }.by(1)
-        expect(laa.lead_proceeding_type.eligible_scope_limitations).to eq [ScopeLimitation.first]
-        expect(laa.lead_proceeding_type.default_substantive_scope_limitation).to eq ScopeLimitation.first
-      end
-
-      it 'assigns the scope limtiation to the lead proceeding type' do
-        expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-        lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-        aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-        expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
-        expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-      end
-    end
-  end
-
-  describe ':with_delegated_functions_scope_limitation' do
-    let(:laa) { create :legal_aid_application, :with_delegated_functions_scope_limitation }
-
-    subject { laa }
-
-    it 'creates a proceeding type and adds it to the application' do
-      expect(ProceedingType.count).to eq 0
-      expect { subject }.to change { ProceedingType.count }.by(1)
-      expect(laa.lead_proceeding_type).to eq ProceedingType.first
-    end
-
-    it 'creates a default scope DF limitation and adds to the lead proceeding type' do
-      expect(ScopeLimitation.count).to eq 0
-      expect { subject }.to change { ScopeLimitation.count }.by(1)
-      expect(laa.lead_proceeding_type.eligible_scope_limitations).to eq [ScopeLimitation.first]
-      expect(laa.lead_proceeding_type.default_delegated_functions_scope_limitation).to eq ScopeLimitation.first
-    end
-
-    it 'assigns the scope limtiation to the lead proceeding type' do
-      expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-      lead_pt = laa.lead_proceeding_type
-      apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-      aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-      expect(aptsl).to be_instance_of(AssignedDfScopeLimitation)
-      expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-    end
-  end
-
-  describe ':with_proceeding_type_and_scope_limitations' do
-    let(:pt1) { create :proceeding_type }
-    let(:sl1) { create :scope_limitation }
-    let(:sl2) { create :scope_limitation }
-
-    let(:apt) { laa.application_proceeding_types.first }
-
-    context 'initial state' do
-      before { [pt1, sl1, sl2] }
-      it 'has no links between the proceeding types and scope limitations' do
-        expect(ProceedingType.count).to eq 1
-        expect(ProceedingType.first).to eq pt1
-
-        expect(ScopeLimitation.count).to eq 2
-        expect(ScopeLimitation.pluck(:id)).to match_array [sl1.id, sl2.id]
-
-        expect(ProceedingTypeScopeLimitation.count).to be 0
+      it 'creates the an application with the specified proceeding types' do
+        pt1 = create :proceeding_type
+        pt2 = create :proceeding_type
+        application = create :legal_aid_application, :with_substantive_scope_limitation, proceeding_types: [pt1, pt2]
+        expect(application.proceeding_types).to eq [pt1, pt2]
       end
     end
 
-    context 'specifying both substantive and df scope limitations' do
-      let(:laa) do
-        create :legal_aid_application,
-               :with_proceeding_type_and_scope_limitations,
-               this_proceeding_type: pt1,
-               substantive_scope_limitation: sl1,
-               df_scope_limitation: sl2
-      end
-      before { laa }
+    context 'scope_limitations' do
+      context 'without delegated functions' do
+        let(:application) { create :application, :with_substantive_scope_limitation }
+        let!(:proceeding_type) { application.lead_proceeding_type }
+        it 'creates a default substantive scope limitation for the first proceeding type' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(substantive_default_sl_for_pt).not_to be_nil
+        end
 
-      it 'attaches the subst scope limitation to the proceeding type as a default' do
-        expect(pt1.default_substantive_scope_limitation).to eq sl1
-      end
+        it 'creates adds the default substantive scope limitation for the first proceeding type to the application' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+        end
 
-      it 'attaches the df scope limtation as the proceeding type as a default' do
-        expect(pt1.default_delegated_functions_scope_limitation).to eq sl2
-      end
-
-      it 'assigns both scope limtations to the application proceeding type' do
-        expect(apt.assigned_scope_limitations).to match_array [sl1, sl2]
+        it 'does not add a delegated function scope limitation to the application' do
+          expect(application.delegated_functions_scope_limitation).to be_nil
+        end
       end
 
-      it 'assigns the substantive scope limtitation to the application_proceeding_type' do
-        expect(apt.substantive_scope_limitation).to eq sl1
-      end
+      context 'with delegated functions' do
+        let(:application) do
+          create :application,
+                 :with_delegated_functions,
+                 :with_substantive_scope_limitation,
+                 :with_delegated_functions_scope_limitation
+        end
+        let!(:proceeding_type) { application.lead_proceeding_type }
 
-      it 'assigns the df scope limitation to the application proceeding type' do
-        expect(apt.delegated_functions_scope_limitation).to eq sl2
-      end
-    end
+        it 'creates default substantive and delegated functions scope limitations for the first proceeding type' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          delegated_functions_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(substantive_default_sl_for_pt).not_to be_nil
+          expect(delegated_functions_default_sl_for_pt).not_to be_nil
+        end
 
-    context 'specifying only substantive scope limitation' do
-      let(:laa) do
-        create :legal_aid_application,
-               :with_proceeding_type_and_scope_limitations,
-               this_proceeding_type: pt1,
-               substantive_scope_limitation: sl1
-      end
-      before { laa }
+        it 'adds the default substantive scope limitation for the first proceeding type to the application' do
+          substantive_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, substantive_default: true)
+          expect(application.substantive_scope_limitation).to eq substantive_default_sl_for_pt.scope_limitation
+        end
 
-      it 'attaches the subst scope limitation to the proceeding type as a default' do
-        expect(pt1.default_substantive_scope_limitation).to eq sl1
-      end
+        it 'adds the default delegated_functions scope limitation for the first proceeding type to the application' do
+          delegated_functions_default_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(application.delegated_functions_scope_limitation).to eq delegated_functions_default_sl_for_pt.scope_limitation
+        end
 
-      it 'does not attach a default delegated fucntions scope limitation to the proceeding type' do
-        expect(pt1.default_delegated_functions_scope_limitation).to be_nil
-      end
-
-      it 'assigns the substantive scope limtations to the application proceeding type' do
-        expect(apt.assigned_scope_limitations).to match_array [sl1]
-      end
-
-      it 'assigns the substantive scope limtitation to the application_proceeding_type' do
-        expect(apt.substantive_scope_limitation).to eq sl1
-      end
-
-      it 'does not assign the df scope limitation to the application proceeding type' do
-        expect(apt.delegated_functions_scope_limitation).to be nil
+        it 'adds a delegated function scope limitation to the application' do
+          substantive_delegated_functions_sl_for_pt = ProceedingTypeScopeLimitation.find_by(proceeding_type_id: proceeding_type.id, delegated_functions_default: true)
+          expect(application.delegated_functions_scope_limitation).to eq substantive_delegated_functions_sl_for_pt.scope_limitation
+        end
       end
     end
   end

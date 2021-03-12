@@ -28,9 +28,6 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 - [**Notifications - GOV.UK Notify**](#notifications---govuk-notify)
 - [**Databases**](#databases)
   - [Staging and Production](#staging-and-production)
-- [**Legal Framework Model Associations**](#legal-framework-model-associations)
-  - [Glossary](#glossary)
-  - [Models and associations](#model-and-associations)
 - [**3rd party integrations**](#3rd-party-integrations)
   - [True Layer](#true-layer)
 - [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
@@ -39,7 +36,6 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
   - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
   - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
 - [**Troubleshooting**](#troubleshooting)
-
 
 
 ## Architecture Diagram
@@ -434,48 +430,31 @@ This will then allow you to connect to the database, eg:
 - Change `staging` to `production` in the above commands to access production.
 - Port 5433 is used in the above examples instead of the usual 5432 for postgres, as 5432 will not work if postgres is running locally.
 
+### Model Relationships
+[Diagram LegalAidApplication - ProceedingType - ScopeLimitation Relationship](docs/ApplicationProceedingTypesORM.png)
+Glossary:
+ProceedingType - The type of legal proceedings being undertaken on a LegalAidApplication
+ScopeLimitation - The type of work a legal advisor can undertake, each Proceeding type has its own ScopeLimitations.
+
+A LegalAidApplication has 1 or more ProceedingTypes, these relations are held in the `ApplicationProceedingTypes` table.
+
+An ApplicationProceedingType has 1 ScopeLimitation `:substantive`, unless delegated_functions have been used, in which case an ApplicationProceedingType will have 2 ScopeLimitations `:delegated` and `:substantive`. These are stored in `ApplicationProceedingTypesScopeLimitations` table.
+
+`ProceedingTypeScopeLimitations` is a join table representing all possible ProceedingType/ScopeLimitation combinations.
+
+An ApplicationProceedingTypesScopeLimitation represents all of the ScopeLimitations assigned to a specific ApplicationProceedingType
+
+If delegated_functions have been used `:delegated` ScopeLimitations are applied to all ProceedingTypes on the LegalAidApplication, so a new record is created in `ApplicationProceedingTypesScopeLimitations` for each ApplicationProceedingType
+
+Removing a ProceedingType will remove all `ApplicationProceedingTypes` and `ApplicationProceedingTypesScopeLimitations` associated with that ProceedingType.
+
+Removing delegated_functions will only remove the associated entry for `:delegated` ScopeLimitation from `ApplicationProceedingTypesScopeLimitations`
+
 ### Backups
 
 Backups are taken daily at 5:40am and stored for 7 days, these are automated backups and cannot be deleted. The retention date can be changed.
 
 A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am.
-
-
-## Legal Framework Model Associations
-[Legal Framework Model diagram](docs/ApplicationProceedingTypesORM.png)
-
-### Glossary:
-* ProceedingType - The type of legal proceedings being undertaken on a LegalAidApplication
-  
-* ScopeLimitation - The type of work a legal advisor can undertake.  Each Proceeding may have many scope limitations that can be used with it 
-  (eligible scope limitations), some specifically for substantive applications only, some for delegated functions.  Each proceeding type has 
-  a default substantive scope limitation and a default delegated functions scope limitation
-  
-### Model and Associations
-
-* `ProceedingType`s are seeded to the database and are fixed.
-
-* `ScopeLimitation`s are seeded to the database and are fixed.
-
-* A `ProceedingType` has many eligble scope limitations (i.e a scope limitation that can be selected when a proceeding type is specified for an application). 
-  The eligible scope limitations is fixed data, and held in the `proceeding_types_scope_limitations` table. This table also holds details of whether a particular
-  scope limitation is the default substantive or default delegated function scope limitation for a particular proceeding type.
-
-A `LegalAidApplication` has 1 or more ProceedingTypes, these relations are held in the `ApplicationProceedingTypes` table, and created when a proceeding type is added to 
-an application.
-
-
-An `ApplicationProceedingType` has at least one assigned `ScopeLimitation` (i.e. one of the eligible scope limitation for that proceeding type which has been 
-selected for this applicaiton/proceeding type combination. The assigned scope limitations are stored in the `application_proceeding_types_scope_limitations` table 
-(a Single Table Inheritance table)
-and will either be an `AssignedSubstantiveScopeLimitation` or an `AssignedDfScopeLimitation` model depending on whether it is a substantive or delegated functions
-scope limitation. Currently, only the default scope limitations are used, and so the `AssignedSubstantiveScopeLimitation` record is created when the proceeding type is added
-to the application, and an `AssignedDfScopeLimitation` record is created when and if delegated functions ares specified for the application.
-
-Removing a ProceedingType will remove all `AssignedSubstantiveScopeLimitation` and `AssignedDfScopeLimitation` associated with that ProceedingType.
-
-Removing delegated_functions will only remove `AssignedDfScopeLimitation` record.
-
 
 ## 3rd party integrations
 
