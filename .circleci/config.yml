@@ -343,6 +343,11 @@ workflows:
       - integration_tests:
           requires:
           - lint_checks
+      - deploy_staging:
+          requires:
+            - integration_tests
+            - unit_tests
+            - build_and_push
 
   merge_pr:
     jobs:
