@@ -1,0 +1,2 @@
+class AssignedDfScopeLimitation < ApplicationProceedingTypesScopeLimitation
+end

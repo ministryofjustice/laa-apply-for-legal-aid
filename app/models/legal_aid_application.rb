@@ -63,7 +63,6 @@ class LegalAidApplication < ApplicationRecord
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
-  delegate :substantive_scope_limitation, :delegated_functions_scope_limitation, to: :application_scope_limitations
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
   delegate :applicant_enter_means!,
            :await_applicant!,
@@ -324,13 +323,8 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def clear_scopes!
-    scope_limitations.clear
+    application_proceeding_types.map(&:clear_scopes!)
     reset_delegated_functions
-  end
-
-  def delete_assigned_scope!(id)
-    scopes_to_clear = ApplicationProceedingTypesScopeLimitation.where(application_proceeding_type_id: id)
-    scopes_to_clear.each(&:delete)
   end
 
   def receives_student_finance?

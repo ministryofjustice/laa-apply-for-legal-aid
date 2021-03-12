@@ -36,7 +36,7 @@ module Providers
     end
 
     def proceeding_types_service
-      ProceedingTypesService.new(legal_aid_application)
+      LegalFramework::ProceedingTypesService.new(legal_aid_application)
     end
 
     def form_params
