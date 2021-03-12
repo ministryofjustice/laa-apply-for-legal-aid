@@ -155,6 +155,12 @@ en:
             Universal Credit
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         we_checked: "We checked with the DWP and your client does not receive:"
+    confirm_dwp_non_passported_applications:
+      show:
+        error: Select yes if your client does not receive a passporting benefit.
+        'no': No, my client receives a passporting benefit
+        tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
+        title: DWP records show that your client does not receive a passporting benefit – is this correct?
     check_merits_answers:
       show:
         h1-heading: Check your answers and submit application

@@ -92,6 +92,29 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
+
+    context 'when dwp override is enabled' do
+      before(:all) { Setting.setting.update!(override_dwp_results: true) }
+      after(:all) { Setting.setting.update!(override_dwp_results: false) }
+
+      before { subject }
+
+      context 'when the check benefit result is positive' do
+        let(:application) { create :legal_aid_application, :with_applicant, :with_positive_benefit_check_result, :at_checking_applicant_details }
+
+        it 'displays the passported result page' do
+          expect(response.body).to include 'receives benefits that qualify for legal aid'
+        end
+      end
+
+      context 'when the check benefit result is negative' do
+        let(:application) { create :legal_aid_application, :with_applicant, :with_negative_benefit_check_result, :at_checking_applicant_details }
+
+        it 'displays the confirm dwp non passported_applications page' do
+          expect(response).to redirect_to providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application)
+        end
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:application_id/check_benefit' do

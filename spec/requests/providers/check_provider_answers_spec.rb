@@ -219,8 +219,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         end
 
         context 'non passported' do
-          it 'redirects to the confirm dwp non passported applications page' do
-            expect(response).to redirect_to(providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application))
+          it 'redirects to the check benefits page' do
+            expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
           end
         end
 

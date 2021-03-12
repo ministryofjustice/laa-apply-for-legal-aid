@@ -886,3 +886,30 @@ Feature: Civil application journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
+
+  @javascript @vcr
+  Scenario: When the DWP override is enabled, a positive benefit check result behaves as usual
+    Given the setting to allow DWP overrides is enabled
+    And I complete the passported journey as far as check your answers
+    When I click 'Save and continue'
+    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+
+  @javascript @vcr
+  Scenario: When the DWP override is enabled, a negative benefit check allows the solicitor to continue without overriding the result
+    Given the setting to allow DWP overrides is enabled
+    And I complete the non-passported journey as far as check your answers
+    When I click 'Save and continue'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I choose 'Yes'
+    And I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+
+  @javascript @vcr
+  Scenario: When the DWP override is enabled, a negative benefit check allows the solicitor to override the result
+    Given the setting to allow DWP overrides is enabled
+    And I complete the non-passported journey as far as check your answers
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I choose 'No'
+    And I click 'Continue'
+    Then I should be on a page showing 'check_client_detail page under construction'
