@@ -239,6 +239,7 @@ Rails.application.routes.draw do
       resource :confirm_dwp_non_passported_applications, only: %i[show update]
       resource :check_client_details, only: :show
       resource :received_benefit_confirmation, only: :show
+      resource :has_evidence_of_benefit, only: %i[show update]
       resource :evidence_of_benefit, only: :show
     end
   end
