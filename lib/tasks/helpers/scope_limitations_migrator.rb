@@ -1,3 +1,4 @@
+# :nocov:
 class ScopeLimitationsMigrator
   def initialize(dummy_run, verbose)
     @dummy_run = dummy_run
@@ -53,3 +54,4 @@ class ScopeLimitationsMigrator
     end
   end
 end
+# :nocov:
