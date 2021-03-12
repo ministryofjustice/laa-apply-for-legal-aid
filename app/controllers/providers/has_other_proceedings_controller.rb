@@ -35,35 +35,23 @@ module Providers
       @proceeding_types ||= legal_aid_application.proceeding_types
     end
 
-    def proceeding_type_id
-      proceeding_types.find_by(code: params.require(:id))&.id
-    end
-
     def proceeding_type
-      ApplicationProceedingType.find_by(
-        legal_aid_application_id: legal_aid_application.id,
-        proceeding_type_id: proceeding_type_id
-      )
+      proceeding_types.find_by(code: form_params[:id])
     end
 
     def remove_proceeding
-      ActiveRecord::Base.transaction do
-        remove_scope_limitation
-        proceeding_type&.destroy!
-        legal_aid_application.clear_scopes! # This will be removed in ap-2047
-        AddScopeLimitationService.call(legal_aid_application, :substantive) if proceeding_types.any?
-      end
-    end
-
-    def remove_scope_limitation
-      scope_for_deletion = ApplicationProceedingType.find_by(
-        legal_aid_application_id: legal_aid_application.id,
-        proceeding_type_id: proceeding_type_id
-      )
-      legal_aid_application.delete_assigned_scope!(scope_for_deletion.id)
+      LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
     end
 
     def form_params
+      params[:action] == 'destroy' ? destroy_form_params : update_form_params
+    end
+
+    def destroy_form_params
+      params.permit(:id)
+    end
+
+    def update_form_params
       params.require(:providers_has_other_proceedings_form).permit(:has_other_proceedings)
     end
   end
