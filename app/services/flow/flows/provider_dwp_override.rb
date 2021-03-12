@@ -16,14 +16,14 @@ module Flow
         },
         check_client_details: {
           path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
-          forward: :received_benefit_confirmation
+          forward: :received_benefit_confirmations
         },
         # check_client_details: {
         #   path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
-        #   forward: :received_benefit_confirmation
+        #   forward: :received_benefit_confirmations
         # },
-        received_benefit_confirmation: {
-          path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
+        received_benefit_confirmations: {
+          path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmations_path(application) },
           forward: ->(_application, has_benefit) do
             if has_benefit
               # this needs to be moved to the last step in the override flow
