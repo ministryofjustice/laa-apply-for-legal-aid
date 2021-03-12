@@ -387,8 +387,7 @@ Given('I complete the journey as far as check your answers') do
     proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
   )
-  AddScopeLimitationService.call(@legal_aid_application, :substantive)
-  AddScopeLimitationService.call(@legal_aid_application, :delegated) if @legal_aid_application.used_delegated_functions?
+  add_scope_limitations(@legal_aid_application, proceeding_type)
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -514,8 +513,8 @@ Given('I complete the application and view the check your answers page') do
     applicant: applicant,
     proceeding_types: [proceeding_type]
   )
-  AddScopeLimitationService.call(@legal_aid_application, :substantive)
-  AddScopeLimitationService.call(@legal_aid_application, :delegated) if @legal_aid_application.used_delegated_functions?
+  add_scope_limitations(@legal_aid_application, proceeding_type)
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
 end
@@ -791,4 +790,9 @@ end
 
 When('I click the browser back button') do
   page.go_back
+end
+
+def add_scope_limitations(laa, ptype)
+  LegalFramework::AddAssignedScopeLimitationService.call(laa, ptype, :substantive)
+  LegalFramework::AddAssignedScopeLimitationService.call(laa, ptype, :delegated) if laa.used_delegated_functions?
 end

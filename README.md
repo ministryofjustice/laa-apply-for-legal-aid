@@ -5,36 +5,36 @@
 
 The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
 
-## Table of Contents  
-- [**Architecture Diagram**](#architecture-diagram)  
-- [**Documentation for developers**](#documentation-for-developers)  
-- [**Dependencies**](#dependencies)  
-- [**Initial setup**](#initial-setup)  
-  - [Encrypting sensitive data](#encrypting-sensitive-data)  
-    - [Adding a new encrypted file](#adding-a-new-encrypted-file)
-- [**Deployment**](#deployment)  
-  - [UAT Deployments](#uat-deployments)  
+## Table of Contents
+- [**Architecture Diagram**](#architecture-diagram)
+- [**Documentation for developers**](#documentation-for-developers)
+- [**Dependencies**](#dependencies)
+- [**Initial setup**](#initial-setup)
+    - [Encrypting sensitive data](#encrypting-sensitive-data)
+        - [Adding a new encrypted file](#adding-a-new-encrypted-file)
+- [**Deployment**](#deployment)
+    - [UAT Deployments](#uat-deployments)
 - [**Dev: running locally**](#dev-running-locally)
-  - [LAA Portal Authentication dev setup](#laa-portal-authentication-dev-setup)
-  - [Authentication](#authentication)
-    - [Live](#live)
-    - [Development](#development)
-  - [Post-authentication provider details retrieval](#post-authentication-provider-details-retrieval)
-  - [Signing out of the application](#signing-out-of-the-application)
-  - [How to set up localhost to use the portal](#how-to-set-up-localhost-to-use-the-portal)
-  - [Benefits checker](#benefits-checker)
-  - [Mock TrueLayer Data](#mock-trueLayer-data)
+    - [LAA Portal Authentication dev setup](#laa-portal-authentication-dev-setup)
+    - [Authentication](#authentication)
+        - [Live](#live)
+        - [Development](#development)
+    - [Post-authentication provider details retrieval](#post-authentication-provider-details-retrieval)
+    - [Signing out of the application](#signing-out-of-the-application)
+    - [How to set up localhost to use the portal](#how-to-set-up-localhost-to-use-the-portal)
+    - [Benefits checker](#benefits-checker)
+    - [Mock TrueLayer Data](#mock-trueLayer-data)
 - [**Admin Portal**](#admin-portal)
 - [**Monitoring & Debugging**](#monitoring--debugging)
 - [**Databases**](#databases)
-  - [Staging and Production](#staging-and-production)
+    - [Staging and Production](#staging-and-production)
 - [**3rd party integrations**](#3rd-party-integrations)
-  - [True Layer](#true-layer)
+    - [True Layer](#true-layer)
 - [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
 - [**Geckoboard Dashboard**](#geckoboard-dashboard)
-  - [1. Create a widget data provider](#1-create-a-widget-data-provider)
-  - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
-  - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
+    - [1. Create a widget data provider](#1-create-a-widget-data-provider)
+    - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
+    - [3. Add the widget to the Geckoboard dashboard](#3-add-the-widget-to-the-geckoboard-dashboard)
 - [**Troubleshooting**](#troubleshooting)
 
 
@@ -133,7 +133,7 @@ This can be a bit tricky, so follow these steps:
   ```git comit -m '<message>```
 
 - Lock the repo
-   ```git-crypt lock```
+  ```git-crypt lock```
 
 You should now check by looking at the file either in your editor or on the command line to ensure the
 file you've just added is in fact encrypted.
@@ -379,13 +379,13 @@ Staging and UAT environments.
   Credentials are the same as in the Admin Portal.
 
 - To monitor Slack alerts from our service:
-  - [UAT](https://mojdt.slack.com/messages/GGW4FCZBL)
-  - [Staging](https://mojdt.slack.com/messages/GGWMW7M0F)
-  - [Production](https://mojdt.slack.com/messages/GGWE9V9BP)
+    - [UAT](https://mojdt.slack.com/messages/GGW4FCZBL)
+    - [Staging](https://mojdt.slack.com/messages/GGWMW7M0F)
+    - [Production](https://mojdt.slack.com/messages/GGWE9V9BP)
 
 ## Logging
 
-To enable full logs in the test environment, `ENV['RAILS_ENABLE_TEST_LOG']` must return "true". 
+To enable full logs in the test environment, `ENV['RAILS_ENABLE_TEST_LOG']` must return "true".
 
 `ENV['RAILS_ENABLE_TEST_LOG']` defaults to nil (falsey) in order to reduce log pollution during testing.
 
