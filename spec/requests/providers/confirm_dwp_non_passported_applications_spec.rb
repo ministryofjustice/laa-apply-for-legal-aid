@@ -1,23 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :request do
-  let(:used_delegated_functions) { false }
-  let(:used_delegated_functions_on) { nil }
-  let(:address) { create :address }
-  let(:applicant) { create :applicant, address: address }
-  let(:application) do
-    create(
-      :legal_aid_application,
-      :with_non_passported_state_machine,
-      :at_entering_applicant_details,
-      :with_proceeding_types,
-      :with_substantive_scope_limitation,
-      :with_delegated_functions_scope_limitation,
-      used_delegated_functions: used_delegated_functions,
-      used_delegated_functions_on: used_delegated_functions_on,
-      applicant: applicant
-    )
-  end
+  let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address) }
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications' do
