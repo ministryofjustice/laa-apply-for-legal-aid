@@ -6,7 +6,9 @@ module Providers
 
     def update
       return continue_or_draft if draft_selected?
+
       @form = Providers::ReceivedBenefitConfirmationForm.new(form_params)
+
       if @form.valid?
         go_forward(form_params[:passporting_benefit] != 'none_selected')
       else
