@@ -24,7 +24,11 @@ module Flowable
     def go_forward(flow_param = nil)
       path = forward_path(flow_param)
 
-      redirect_to path if path?(path)
+      if path?(path)
+        redirect_to path
+      else
+        render plain: path
+      end
     end
 
     def forward_path(flow_param = nil)
