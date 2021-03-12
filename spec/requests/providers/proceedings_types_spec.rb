@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Providers::ProceedingsTypesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
 
   describe 'index: GET /providers/applications/:legal_aid_application_id/proceedings_types' do
@@ -121,11 +120,11 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
       end
 
       context 'with setting.allow_multiple_proceedings set to true' do
-        let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
+        let(:proceeding_type_service) { double(ProceedingTypesService, add: true) }
 
         before do
           allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-          allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+          allow(ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
         end
 
         it 'redirects to next step' do
@@ -138,11 +137,11 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
           subject
         end
 
-        context 'LegalFramework::ProceedingTypesService call returns false' do
-          let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
+        context 'ProceedingTypesService call returns false' do
+          let(:proceeding_type_service) { double(ProceedingTypesService, add: false) }
 
           before do
-            allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+            allow(ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
           end
 
           it 'renders index' do
@@ -208,8 +207,8 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
       expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
     end
 
-    it 'adds the default substantive scope limitation to the application proceedig type' do
-      expect(application_proceeding_type.assigned_scope_limitations).to eq [default_substantive_scope_limitation]
+    it 'adds the default substantive scope limitation to the application' do
+      expect(legal_aid_application.reload.scope_limitations).to eq [default_substantive_scope_limitation]
     end
   end
 end

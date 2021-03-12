@@ -1255,19 +1255,6 @@ module CCMS
           end
 
           context 'there is one scope limitation' do
-            let(:legal_aid_application) do
-              create :legal_aid_application,
-                     :with_everything,
-                     :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     populate_vehicle: true,
-                     with_bank_accounts: 2,
-                     provider: provider,
-                     office: office,
-                     used_delegated_functions: true,
-                     used_delegated_functions_on: Time.zone.today
-            end
             it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
@@ -1276,7 +1263,7 @@ module CCMS
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
                 block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response legal_aid_application.application_proceeding_types.first.assigned_scope_limitations.first.code
+                expect(block).to have_text_response legal_aid_application.scope_limitations.first.code
               end
             end
           end

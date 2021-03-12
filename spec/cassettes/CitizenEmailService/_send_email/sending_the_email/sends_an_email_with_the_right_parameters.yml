@@ -5,16 +5,15 @@ http_interactions:
     uri: https://api.notifications.service.gov.uk/v2/notifications/email
     body:
       encoding: UTF-8
-      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"1ad50d58-ab76-4583-8c31-258d7c8304a4","personalisation":{"application_url":"http://www.example.com/citizens/legal_aid_applications/3fb45c13-b3ec-4a87-abb2-1362c5483d28?locale=en","client_name":"John
-        Doe","provider_firm":"Vandervort, Crona and Bechtelar","ref_number":"L-LF7-0KL","expiry_date":"9
-        March 2021"}}'
+      string: '{"email_address":"simulate-delivered@notifications.service.gov.uk","template_id":"570e1b9d-6238-45fd-b75c-96f2f39db8e9","personalisation":{"application_url":"http://www.example.com/citizens/legal_aid_applications/2049a858-ba8b-43bd-b613-03ca6da157c9","client_name":"John
+        Doe","ref_number":"L-YKU-YJ9"}}'
     headers:
       User-Agent:
-      - NOTIFY-API-RUBY-CLIENT/5.3.0
+      - NOTIFY-API-RUBY-CLIENT/2.9.0
       Content-Type:
       - application/json
       Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZjgxNmEzNC1mMmJkLTQxMjItOTQ0ZS00YjY4MjhhM2UzNTIiLCJpYXQiOjE2MTQ3MDQ1NTl9.23situ-0EOJVvPfWf-PWRWkPDNn0tm8lBSWxwgKy6Og
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxNjNkZTE0My0yZDM0LTQ0NTQtYjFmYy0yZjQxNjI0ZjI3NzEiLCJpYXQiOjE1NjAxNjMxNTh9.qFSXWroZCEuFS_-S3u2R7cqjeJ8TALyvd7QTsK1VtH4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -33,54 +32,38 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Mar 2021 17:02:39 GMT
+      - Mon, 10 Jun 2019 10:39:18 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains
       X-B3-Spanid:
-      - 829c4191a1ac3715
+      - a15f1cf154bc4e46
       X-B3-Traceid:
-      - 829c4191a1ac3715
+      - a15f1cf154bc4e46
       X-Vcap-Request-Id:
-      - 8c721e86-7a89-42b7-6d06-7129bfab534f
+      - 6cf69047-ad73-41a2-45c2-07d93bfa04dc
       Content-Length:
-      - '2803'
+      - '1503'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"content":{"body":"# Your legal aid application\r\n\r\nDear John Doe,\r\n\r\nYour
-        solicitor at Vandervort, Crona and Bechtelar has started your legal aid application
-        with the Legal Aid Agency (LAA).\r\n\r\nYour case reference is L-LF7-0KL.\r\n\r\n#
-        What is the LAA?\r\n \r\nWe are a government body providing civil and criminal
-        legal aid and advice to help people deal with their legal problems.\r\n \r\n#
-        What happens next\r\n\r\nWe need to check if you qualify financially for legal
-        aid.\r\n\r\n# How we do this\r\n\r\nWe check 3 months of your bank statements
-        to see the kinds of payments you make and receive. This helps us work out
-        if you can get legal aid or you need to pay towards the costs.\r\n\r\nWith
-        your permission, we securely collect your bank statements online using a third-party
-        service called TrueLayer. This means you do not need to gather physical bank
-        statements and send them to your solicitor.\r\n\r\n# What you need to do\r\n
-        \r\nAccess the ''Apply for legal aid'' service using the link below. You can
-        do this on any device.\r\n\r\nYou\u2019ll then be redirected to your bank\u2019s
-        website or app where you can:\r\n\r\n* sign in to your online banking\r\n*
-        give TrueLayer permission to collect 3 months of bank statements on behalf
-        of the LAA\r\n\r\nYou\u2019ll also need to answer questions about the types
-        of payments you make and receive.\r\n\r\nIf you do not agree to this, or you
-        need more information, contact your solicitor.\r\n\r\n# What is TrueLayer?\r\n\r\nTrueLayer
-        is a trusted third-party financial service provider that acts as a messenger
-        between your client''s bank and the LAA.\r\n\r\nTrueLayer is regulated by
-        the Financial Conduct Authority (FCA) and will not:\r\n\r\n* store your bank
-        account details\r\n* see your online banking sign-in details\r\n* share your
-        details with anyone other than the LAA\r\n* have any ongoing access to your
-        bank account details\r\n\r\n# Access the service\r\n\r\nhttp://www.example.com/citizens/legal_aid_applications/3fb45c13-b3ec-4a87-abb2-1362c5483d28?locale=en\r\n\r\nThis
-        link will expire after 9 March 2021 for security reasons. You can request
-        a new link if you access the service after this date.\r\n\r\nFrom,\r\nThe
-        Legal Aid Agency\r\n\r\nThis message is automatically generated; please do
-        not reply to this email.","from_email":"apply.for.legal.aid@notifications.service.gov.uk","subject":"Your
-        legal aid application"},"id":"49de323c-2879-42a2-a5a6-b31be0aaf064","reference":null,"scheduled_for":null,"template":{"id":"1ad50d58-ab76-4583-8c31-258d7c8304a4","uri":"https://api.notifications.service.gov.uk/services/cf816a34-f2bd-4122-944e-4b6828a3e352/templates/1ad50d58-ab76-4583-8c31-258d7c8304a4","version":2},"uri":"https://api.notifications.service.gov.uk/v2/notifications/49de323c-2879-42a2-a5a6-b31be0aaf064"}
+      string: '{"content":{"body":"# Complete your legal aid financial assessment\r\n\r\nDear
+        John Doe,\r\n \r\n^ Legal Aid Agency case reference: L-YKU-YJ9\r\n\r\nYou
+        need to answer questions about your financial situation as part of your legal
+        aid application.\r\n\r\nYou might not have to pay legal costs if you are on
+        certain benefits, a low income or have little or no savings.\r\n\r\n# What
+        you need to do\r\n \r\nSign in securely to your online banking and allow temporary
+        access to your bank accounts.\r\n\r\nWe\u2019ll download 3 months of bank
+        statements to support your legal aid application. We will not use the information
+        for anything else.\r\n\r\n# Start your financial assessment now\r\n http://www.example.com/citizens/legal_aid_applications/2049a858-ba8b-43bd-b613-03ca6da157c9\r\n\r\nThis
+        link will only remain active for 7 days for security reasons.\r\n\r\nFrom
+        the Legal Aid Agency\r\n\r\nThis message is automatically generated; please
+        do not reply to this email.","from_email":"apply.for.legal.aid.development@notifications.service.gov.uk","subject":"Complete
+        your legal aid financial assessment"},"id":"2c74dfd0-32a4-463e-862a-b1546b69a19a","reference":null,"scheduled_for":null,"template":{"id":"570e1b9d-6238-45fd-b75c-96f2f39db8e9","uri":"https://api.notifications.service.gov.uk/services/163de143-2d34-4454-b1fc-2f41624f2771/templates/570e1b9d-6238-45fd-b75c-96f2f39db8e9","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/2c74dfd0-32a4-463e-862a-b1546b69a19a"}
 
-'
-  recorded_at: Tue, 02 Mar 2021 17:02:39 GMT
-recorded_with: VCR 6.0.0
+        '
+    http_version: 
+  recorded_at: Mon, 10 Jun 2019 10:39:19 GMT
+recorded_with: VCR 5.0.0
