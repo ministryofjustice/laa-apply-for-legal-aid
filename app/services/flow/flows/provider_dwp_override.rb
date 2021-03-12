@@ -15,7 +15,7 @@ module Flow
           end
         },
         check_client_details: {
-          path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) }
+          path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
           forward: :received_benefit_confirmation
         },
         # check_client_details: {

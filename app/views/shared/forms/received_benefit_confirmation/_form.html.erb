@@ -10,7 +10,7 @@
                                           legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) %>
 
     <%= form.govuk_radio_divider %>
-    <%= form.govuk_radio_button(:passporting_benefit, false, label: {text:  t('generic.none_selected')}) %>
+    <%= form.govuk_radio_button(:passporting_benefit, :none_selected, label: {text:  t('generic.none_selected')}) %>
 
   <div class="govuk-!-padding-bottom-3"></div>
 
