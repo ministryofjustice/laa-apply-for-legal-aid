@@ -237,7 +237,7 @@ Rails.application.routes.draw do
       resource :means_report, only: :show
       resource :non_passported_client_instructions, only: :show
       resource :confirm_dwp_non_passported_applications, only: %i[show update]
-      resource :check_client_details, only: :show
+      resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: :show
       resource :evidence_of_benefit, only: :show
     end

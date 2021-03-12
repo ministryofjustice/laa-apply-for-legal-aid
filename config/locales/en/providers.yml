@@ -161,6 +161,15 @@ en:
         'no': No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
         title: DWP records show that your client does not receive a passporting benefit – is this correct?
+    check_client_details:
+      show:
+        error: Select if your client's details are correct or not
+        title: Check your client's details
+        details_correct: These details are correct
+        details_incorrect: I need to change these details
+        name: Name
+        date_of_birth: Date of birth
+        national_insurance_number: National Insurance number
     check_merits_answers:
       show:
         h1-heading: Check your answers and submit application
