@@ -31,6 +31,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
+  has_one :dwp_override, dependent: :destroy
 
   # The relationship below needs to be removed in ap-2047
   has_many :application_scope_limitations, dependent: :destroy

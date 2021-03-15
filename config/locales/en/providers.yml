@@ -584,6 +584,9 @@ en:
         page_title: Your profile
         role: Permission
         username: Username
+    received_benefit_confirmations:
+      show:
+        h1-heading: Which passporting benefit does your client receive?
     respondents:
       show:
         h1-heading: Opponent details

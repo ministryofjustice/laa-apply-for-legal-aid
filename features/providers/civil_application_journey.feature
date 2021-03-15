@@ -919,4 +919,11 @@ Feature: Civil application journeys
     When I click link "Back"
     Then I choose 'These details are correct'
     And I click 'Save and continue'
+    Then I should be on a page showing 'Which passporting benefit does your client receive?'
+    Then I choose 'None of these'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'Is your client employed?'
+    When I click link "Back"
+    Then I choose 'Universal Credit'
+    And I click 'Save and continue'
     Then I should be on a page showing "Before you continue"
