@@ -7,6 +7,7 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 
 ## Table of Contents  
 - [**Architecture Diagram**](#architecture-diagram)  
+- [**Documentation for developers**](#documentation-for-developers)  
 - [**Dependencies**](#dependencies)  
 - [**Initial setup**](#initial-setup)  
   - [Encrypting sensitive data](#encrypting-sensitive-data)  
@@ -42,6 +43,13 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 
 View the [architecture diagram](https://structurizr.com/share/55246/diagrams#apply-container) for this project.
 It's defined as code and [can be edited](https://github.com/ministryofjustice/laa-architecture-as-code/blob/main/src/main/kotlin/model/Apply.kt) by anyone.
+
+## Documentation for developers.
+
+Documentation of certain parts of the system which are particularly complex can be found [here](https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/3020752222/Application+Development+Documentation)
+* [GOVUK Notify and sending emails from Apply](https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/3028877542/Sending+emails+from+Apply)
+* [ProceedingType Full Text search](https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/3028811988/Proceeding+Type+Full+Text+Search)
+* [Legal Framework model associations](https://dsdmoj.atlassian.net/wiki/spaces/ATPPB/pages/3024847884/Legal+Framework+model+associations)
 
 ## Dependencies
 
@@ -381,74 +389,6 @@ Staging and UAT environments.
 To enable full logs in the test environment, `ENV['RAILS_ENABLE_TEST_LOG']` must return "true". 
 
 `ENV['RAILS_ENABLE_TEST_LOG']` defaults to nil (falsey) in order to reduce log pollution during testing.
-
-## Notifications - GOV.UK Notify
-
-[GOV.UK Notify](https://www.notifications.service.gov.uk/ "GOV.UK Notify") is a government service that allows teams across government to send emails, text messages and sometimes paper at a considerably lower cost than standard providers.
-
-The LAA Apply service has a single production account which utilises both a testing and a production API Key. Other government teams may have a Development and Production Notify account. The former being limited to whitelisted emails and the latter having the ability to freely send emails to anyone. By having a single production account, we have replicated this same behaviour using restrictions on our Development API Key, whilst removing the need to monitor and duplicate the same Notify email templates into two accounts.
-
-For clarity, here is a table representing the two API keys and the environments for which they are used:
-
-  | API Key Name        | Used For          | Associated Environments                               |
-  | ------------------- | ----------------- | ----------------------------------------------------- |
-  | Development/UAT/STG |      Testing      | Local Development / UAT Branch / UAT Master / Staging |
-  | live                |      Live         | Production                                            |
-
-
-## The mail lifecycle
-
-Mails are enqueued for immediate or later delivery by putting a record in the scheduled_mailings table, using either
-`ScheduledMailing.send_now!` or `ScheduledMailing.send_later!` passing in the name of the mailer and the mailer method and arguments to use,
-as well as audit information such as legal aid application id, and addressee.  These methods will create a record, then schedule 
-a `ScheduledMailingDeliveryJob` to run, which will look at all the records waiting to be sent, and call `GovukEmails::DeliveryMan` for each,
-finally sheduling `EmailMonitorJob`. 
-
-`GovukEmails::DeliveryMan` sends the mail, updates the status, and records the govuk_message_id whch will be used later to monitor the mail.
-
-`EmailMonitorJob` will call `GovukEmails::Monitor` for each mail which has been passed to GOVUK Notify but not yet confirmed as delivered, and 
-query its status, and update the `ScheduledMailing` record.
-
-If the delivery has failed, and we are in Proudction, an Undeliverable email alert will be sent to Sentry and the team email.
-
-
-## Databases
-
-### Staging and Production
-
-Staging and production databases are RDS instances on the MOJ Cloud Platform. Connection details are held in LastPass.
-
-These databases are within the AWS VPC and are not publicly available. In order to connect
-to an RDS database from a local client, first run:
-
-`kubectl -n laa-apply-for-legalaid-staging port-forward port-forward-rds 5433:80`
-
-This will then allow you to connect to the database, eg:
-
-`psql --host=localhost --port=5433 --username=<username> --password --dbname=apply_for_legal_aid_staging`
-
-- Change `staging` to `production` in the above commands to access production.
-- Port 5433 is used in the above examples instead of the usual 5432 for postgres, as 5432 will not work if postgres is running locally.
-
-### Model Relationships
-[Diagram LegalAidApplication - ProceedingType - ScopeLimitation Relationship](docs/ApplicationProceedingTypesORM.png)
-Glossary:
-ProceedingType - The type of legal proceedings being undertaken on a LegalAidApplication
-ScopeLimitation - The type of work a legal advisor can undertake, each Proceeding type has its own ScopeLimitations.
-
-A LegalAidApplication has 1 or more ProceedingTypes, these relations are held in the `ApplicationProceedingTypes` table.
-
-An ApplicationProceedingType has 1 ScopeLimitation `:substantive`, unless delegated_functions have been used, in which case an ApplicationProceedingType will have 2 ScopeLimitations `:delegated` and `:substantive`. These are stored in `ApplicationProceedingTypesScopeLimitations` table.
-
-`ProceedingTypeScopeLimitations` is a join table representing all possible ProceedingType/ScopeLimitation combinations.
-
-An ApplicationProceedingTypesScopeLimitation represents all of the ScopeLimitations assigned to a specific ApplicationProceedingType
-
-If delegated_functions have been used `:delegated` ScopeLimitations are applied to all ProceedingTypes on the LegalAidApplication, so a new record is created in `ApplicationProceedingTypesScopeLimitations` for each ApplicationProceedingType
-
-Removing a ProceedingType will remove all `ApplicationProceedingTypes` and `ApplicationProceedingTypesScopeLimitations` associated with that ProceedingType.
-
-Removing delegated_functions will only remove the associated entry for `:delegated` ScopeLimitation from `ApplicationProceedingTypesScopeLimitations`
 
 ### Backups
 
