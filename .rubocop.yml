@@ -15,6 +15,7 @@ AllCops:
   - 'ccms_integration/*'
   - 'tmp/**/*'
   - 'log/**/*'
+  - 'lib/tasks/helpers/scope_limitations_migrator.rb'
 
 Layout/LineLength:
   Max: 180
