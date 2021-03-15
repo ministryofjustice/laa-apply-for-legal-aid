@@ -4,6 +4,7 @@ RSpec.describe Admin::SettingsController, type: :request do
   let(:admin_user) { create :admin_user }
 
   before do
+    Setting.delete_all
     sign_in admin_user
   end
 
