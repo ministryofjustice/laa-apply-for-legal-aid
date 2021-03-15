@@ -912,4 +912,11 @@ Feature: Civil application journeys
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'No'
     And I click 'Continue'
-    Then I should be on a page showing 'check_client_detail page under construction'
+    Then I should be on a page showing "Check your client's details"
+    Then I choose 'I need to change these details'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Enter your client's details"
+    When I click link "Back"
+    Then I choose 'These details are correct'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Before you continue"

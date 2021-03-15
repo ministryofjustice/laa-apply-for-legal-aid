@@ -51,6 +51,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         end
 
         it 'uses the non-passported state machine' do
+          application.reload
           expect(application.state_machine_proxy.type).to eq 'NonPassportedStateMachine'
         end
       end
@@ -67,7 +68,8 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         end
 
         it 'uses the passported state machine' do
-          expect(application.state_machine_proxy.type).to eq 'NonPassportedStateMachine'
+          application.reload
+          expect(application.state_machine_proxy.type).to eq 'PassportedStateMachine'
         end
       end
 
