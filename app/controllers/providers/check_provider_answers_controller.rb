@@ -15,7 +15,6 @@ module Providers
     end
 
     def continue
-      legal_aid_application.applicant_details_checked! unless draft_selected?
       continue_or_draft
     end
 

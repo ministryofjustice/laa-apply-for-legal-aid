@@ -50,23 +50,8 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
     context 'correct client details' do
       let(:params) { { providers_check_client_details_form: { check_client_details: 'true' } } }
 
-      context 'delegated functions' do
-        let(:application) do
-          create :legal_aid_application,
-                 :with_proceeding_types,
-                 :with_applicant_and_address,
-                 used_delegated_functions: true
-        end
-
-        it 'continue to the substantive applications page' do
-          expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(application))
-        end
-      end
-
-      context 'no delegated functions' do
-        it 'continue to the capital introductions page' do
-          expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(application))
-        end
+      it 'continue to the received benefit confirmations page' do
+        expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
       end
     end
 

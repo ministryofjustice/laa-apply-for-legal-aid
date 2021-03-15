@@ -202,16 +202,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      it 'changes the state to "applicant_details_checked"' do
-        subject
-        expect(application.reload.applicant_details_checked?).to be_truthy
-      end
-
-      it 'syncs the application' do
-        expect(CleanupCapitalAttributes).to receive(:call).with(application)
-        subject
-      end
-
       context 'allow dwp override' do
         before do
           allow(Setting).to receive(:override_dwp_results?).and_return(true)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :request do
-  let(:application) { create(:legal_aid_application, :with_proceeding_types, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_proceeding_types, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications' do
@@ -36,7 +36,6 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
       before do
         login_as application.provider
-        subject
       end
 
       context 'the results are correct' do
@@ -46,13 +45,25 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
             dwp_results_correct: 'true'
           }
         end
+
+        it 'transitions the application state to applicant details checked' do
+          subject
+          expect(application.reload.state).to eq 'applicant_details_checked'
+        end
+
+        it 'syncs the application' do
+          expect(CleanupCapitalAttributes).to receive(:call).with(application)
+          subject
+        end
+
         it 'displays the applicant_employed page' do
+          subject
           expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
         end
 
         it 'uses the non-passported state machine' do
-          application.reload
-          expect(application.state_machine_proxy.type).to eq 'NonPassportedStateMachine'
+          subject
+          expect(application.reload.state_machine_proxy.type).to eq 'NonPassportedStateMachine'
         end
       end
 
@@ -63,18 +74,25 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
             dwp_results_correct: 'false'
           }
         end
+
+        before { subject }
+
+        it 'keeps the application state to checking applicant details' do
+          expect(application.reload.state).to eq 'checking_applicant_details'
+        end
+
         it 'displays the check_client_details page' do
           expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
         end
 
         it 'uses the passported state machine' do
-          application.reload
-          expect(application.state_machine_proxy.type).to eq 'PassportedStateMachine'
+          expect(application.reload.state_machine_proxy.type).to eq 'PassportedStateMachine'
         end
       end
 
       context 'the solicitor does not select a radio button' do
         it 'displays an error' do
+          subject
           expect(response.body).to include(I18n.t('providers.confirm_dwp_non_passported_applications.show.error'))
         end
       end
