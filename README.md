@@ -26,7 +26,6 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
   - [Mock TrueLayer Data](#mock-trueLayer-data)
 - [**Admin Portal**](#admin-portal)
 - [**Monitoring & Debugging**](#monitoring--debugging)
-- [**Notifications - GOV.UK Notify**](#notifications---govuk-notify)
 - [**Databases**](#databases)
   - [Staging and Production](#staging-and-production)
 - [**3rd party integrations**](#3rd-party-integrations)
