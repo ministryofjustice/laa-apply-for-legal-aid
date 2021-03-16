@@ -46,6 +46,8 @@ RSpec.describe Admin::SettingsController, type: :request do
 
     subject { patch admin_settings_path, params: params }
 
+    after { Setting.delete_all }
+
     it 'change settings values' do
       subject
       expect(setting.mock_true_layer_data?).to eq(true)

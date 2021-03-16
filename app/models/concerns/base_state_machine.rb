@@ -65,6 +65,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
         provider_entering_means
         applicant_details_checked
         delegated_functions_used
+        checking_applicant_details
         provider_confirming_applicant_eligibility
       ],
                   to: :delegated_functions_used
