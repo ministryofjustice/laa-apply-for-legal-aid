@@ -102,6 +102,10 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Search for legal proceedings'
+    Then I search for proceeding 'non'
+    Then proceeding suggestions has results
+    Then I should be on a page showing 'Harassment - injunction'
+    And I should be on a page not showing 'Non-molestation order'
     Then I search for proceeding 'Occupation order'
     Then proceeding suggestions has results
     Then I choose a 'Occupation order' radio button

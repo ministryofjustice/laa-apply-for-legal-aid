@@ -18,28 +18,27 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
     end
 
     context 'when there are proceeding types' do
-      let!(:proceeding_types) do
-        [
-          create(:proceeding_type,
-                 :with_real_data,
-                 code: 'PH0001',
-                 ccms_category_law: 'Family',
-                 ccms_matter: 'Public Law - Family',
-                 ccms_matter_code: 'KPBLB',
-                 meaning: 'Application for a care order',
-                 description: 'to be represented on an application for a care order.',
-                 additional_search_terms: ''),
-          create(:proceeding_type,
-                 :with_real_data,
-                 code: 'PH0002',
-                 ccms_code: 'PBM24',
-                 ccms_category_law: 'Other',
-                 ccms_matter: 'Public Law - Other',
-                 ccms_matter_code: 'APBLB',
-                 meaning: 'Not an application for a care order',
-                 description: 'Not to be represented on an application for a care order.',
-                 additional_search_terms: 'injunction')
-        ]
+      before do
+        create(:proceeding_type,
+               :with_real_data,
+               code: 'PH0001',
+               ccms_category_law: 'Family',
+               ccms_matter: 'Public Law - Family',
+               ccms_matter_code: 'KPBLB',
+               meaning: 'Application for a care order',
+               description: 'to be represented on an application for a care order.',
+               additional_search_terms: '')
+        create(:proceeding_type,
+               :with_real_data,
+               code: 'PH0002',
+               ccms_code: 'PBM24',
+               ccms_category_law: 'Other',
+               ccms_matter: 'Public Law - Other',
+               ccms_matter_code: 'APBLB',
+               meaning: 'Not an application for a care order',
+               description: 'Not to be represented on an application for a care order.',
+               additional_search_terms: 'injunction')
+        ProceedingType.refresh_textsearchable
       end
 
       context 'no search term is given' do
@@ -77,8 +76,10 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
 
       context 'a search term is given and there are results' do
         search_term = 'injunction'
+        let(:legal_aid_application) { create :legal_aid_application }
+        let(:source_url) { providers_legal_aid_application_proceedings_types_path(legal_aid_application) }
         let(:get_request) do
-          -> { get "/v1/proceeding_types?search_term=#{search_term}" }
+          -> { get "/v1/proceeding_types?search_term=#{search_term}&sourceUrl=#{source_url}" }
         end
 
         it 'returns a successful response with just the proceeding types matching the search term' do
