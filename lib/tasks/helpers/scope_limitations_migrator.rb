@@ -9,7 +9,7 @@ class ScopeLimitationsMigrator
 
   def call
     LegalAidApplication.pluck(:id).each { |laa_id| process(laa_id) }
-    @verbose_log.each { |vl| puts vl }
+    @verbose_log.each { |vl| puts vl } unless Rails.env.test?
   end
 
   private
