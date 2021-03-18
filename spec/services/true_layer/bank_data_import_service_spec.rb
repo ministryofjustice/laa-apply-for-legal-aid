@@ -7,6 +7,7 @@ RSpec.describe TrueLayer::BankDataImportService do
   let(:applicant) { legal_aid_application.applicant }
 
   before do
+    Setting.delete_all
     applicant.store_true_layer_token(token: token, expires: token_expires_at)
   end
 
