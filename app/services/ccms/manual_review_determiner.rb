@@ -10,29 +10,45 @@ module CCMS
     attr_reader :legal_aid_application
 
     delegate :cfe_result,
+             :dwp_override,
              :passported?,
              :non_passported?,
              :has_restrictions?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
-    def self.call(legal_aid_application)
-      new(legal_aid_application).call
-    end
-
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
       raise 'Unable to determine whether Manual review is required before means assessment' if legal_aid_application.cfe_result.nil?
     end
 
-    def call
-      needs_review?
+    def manual_review_required?
+      dwp_override.present? ||
+        manually_review_all_non_passported? ||
+        capital_contribution_required? ||
+        has_restrictions?
+    end
+
+    def review_reasons
+      cfe_review_reasons + application_review_reasons
+    end
+
+    def review_categories_by_reason
+      cfe_result.remarks.review_categories_by_reason
     end
 
     private
 
-    def needs_review?
-      manually_review_all_non_passported? || capital_contribution_required? || has_restrictions?
+    def cfe_result
+      @cfe_result ||= @legal_aid_application.cfe_result
+    end
+
+    def cfe_review_reasons
+      cfe_result.remarks.review_reasons
+    end
+
+    def application_review_reasons
+      dwp_override ? [:dwp_override] : []
     end
 
     def manually_review_all_non_passported?

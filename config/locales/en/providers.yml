@@ -440,6 +440,7 @@ en:
           residual_balance: Capital Contribution - Residual Balance Check
           policy_disregards: Discretionary disregards selected
           multi_benefit: Multiple benefits in single bank transaction
+          dwp_override: Provider disagrees with DWP result
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review
