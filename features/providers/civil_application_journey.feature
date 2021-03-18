@@ -579,7 +579,7 @@ Feature: Civil application journeys
     And I should not see "Client received legal help"
     And I should not see "Proceedings currently before court"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement of case statement field" with "Statement of case"
+    Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -697,7 +697,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     And I should not see "Client received legal help"
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "Statement of case statement field" with "Statement of case"
+    Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I upload a pdf file
     Then I click 'Upload'
     Then I should not see "There was a problem uploading your file"
@@ -714,7 +714,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
-    Then I enter the statement of case statement field 'This is some test data for the statement of case'
+    Then I enter the application merits task statement of case statement field 'This is some test data for the statement of case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'

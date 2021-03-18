@@ -32,6 +32,9 @@ cy:
         first_name: eman tsriF
         last_name: eman tsaL
         national_insurance_number: rebmun ecnarusnI lanoitaN
+      application_merits_task/statement_of_case:
+        file_uploaded: "%{file_name} dedaolpu evah uoY"
+        file_deleted: "%{file_name} deteled evah uoY"
       dependant:
         dob_day: yaD
         dob_month: htnoM
@@ -49,9 +52,6 @@ cy:
         used_delegated_functions_day: yaD
         used_delegated_functions_month: htnoM
         used_delegated_functions_year: raeY
-      statement_of_case:
-        file_uploaded: "%{file_name} dedaolpu evah uoY"
-        file_deleted: "%{file_name} deteled evah uoY"
       transaction_types:
         name:
           benefits: stifeneB
@@ -152,6 +152,17 @@ cy:
                 derrucco tnedicni eht etaD
             details:
               blank: tnedicni eht fo sliated retnE
+        application_merits_task/statement_of_case:
+          attributes:
+            original_file:
+              content_type_invalid: FDP ro FIT ,GNP ,PMB ,GPJ ,TDO ,FTR ,XCOD ,COD
+                a eb tsum elif detceles ehT
+              file_empty: ytpme si elif detceles ehT
+              file_too_big: BM%{size} naht rellams eb tsum elif detceles ehT
+              file_virus: suriv a sniatnoc elif detceles ehT
+              system_down: niaga yrt - elif ruoy gnidaolpu melborp a saw erehT
+              no_file_chosen: elif eno tsael ta esoohc tsum uoY
+              blank: txet retne ro elif a hcattA
         applications/proceedings_form:
           attributes:
             code:
@@ -456,17 +467,6 @@ cy:
           attributes:
             mock_true_layer_data:
               blank: knalb eb t'nac ataD reyaLeurT kcoM
-        statement_of_case:
-          attributes:
-            original_file:
-              content_type_invalid: FDP ro FIT ,GNP ,PMB ,GPJ ,TDO ,FTR ,XCOD ,COD
-                a eb tsum elif detceles ehT
-              file_empty: ytpme si elif detceles ehT
-              file_too_big: BM%{size} naht rellams eb tsum elif detceles ehT
-              file_virus: suriv a sniatnoc elif detceles ehT
-              system_down: niaga yrt - elif ruoy gnidaolpu melborp a saw erehT
-              no_file_chosen: elif eno tsael ta esoohc tsum uoY
-              blank: txet retne ro elif a hcattA
         vehicle:
           attributes:
             estimated_value:

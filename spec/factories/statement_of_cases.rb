@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :statement_of_case do
+  factory :statement_of_case, class: 'ApplicationMeritsTask::StatementOfCase' do
     legal_aid_application
 
     statement { Faker::Lorem.paragraph }

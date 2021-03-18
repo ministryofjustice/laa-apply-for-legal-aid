@@ -44,13 +44,13 @@ module Providers
     end
 
     def files_deleted_message(deleted_file_name)
-      I18n.t('activemodel.attributes.statement_of_case.file_deleted', file_name: deleted_file_name)
+      I18n.t('activemodel.attributes.application_merits_task/statement_of_case.file_deleted', file_name: deleted_file_name)
     end
 
     def successful_upload
       return if form.errors.present?
 
-      I18n.t('activemodel.attributes.statement_of_case.file_uploaded', file_name: form.original_file.original_filename)
+      I18n.t('activemodel.attributes.application_merits_task/statement_of_case.file_uploaded', file_name: form.original_file.original_filename)
     end
 
     def convert_new_files_to_pdf
@@ -68,9 +68,9 @@ module Providers
     end
 
     def statement_of_case_params
-      params[:statement_of_case] = { original_file: [], statement: nil } unless params.key?(:statement_of_case)
+      params[:application_merits_task_statement_of_case] = { original_file: [], statement: nil } unless params.key?(:application_merits_task_statement_of_case)
       merge_with_model(statement_of_case, provider_uploader: current_provider) do
-        params.require(:statement_of_case).permit(:statement, :original_file)
+        params.require(:application_merits_task_statement_of_case).permit(:statement, :original_file)
       end
     end
 

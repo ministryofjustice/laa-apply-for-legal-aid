@@ -228,7 +228,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     And the page is accessible
-    Then I fill "Statement of case statement field" with "Statement of case"
+    Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     And the page is accessible

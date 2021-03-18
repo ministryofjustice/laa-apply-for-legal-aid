@@ -2,7 +2,7 @@ module StatementOfCases
   class StatementOfCaseForm # rubocop:disable Metrics/ClassLength
     include BaseForm
 
-    form_for StatementOfCase
+    form_for ApplicationMeritsTask::StatementOfCase
 
     attr_accessor :statement, :original_file, :provider_uploader, :upload_button_pressed
 
@@ -129,7 +129,7 @@ module StatementOfCases
     end
 
     def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.statement_of_case.attributes.original_file.#{error_type}", **options)
+      I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.#{error_type}", **options)
     end
 
     def create_attachment(original_file)
