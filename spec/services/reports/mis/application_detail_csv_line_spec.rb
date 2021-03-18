@@ -17,7 +17,7 @@ module Reports
                benefit_check_result: benefit_check_result,
                savings_amount: savings_amount,
                other_assets_declaration: other_assets_declaration,
-               respondent: respondent,
+               opponent: opponent,
                proceeding_types: proceeding_types,
                ccms_submission: ccms_submission,
                merits_assessment: merits_assessment,
@@ -76,8 +76,8 @@ module Reports
                none_selected: none_selected
       end
 
-      let(:respondent) do
-        create :respondent,
+      let(:opponent) do
+        create :opponent,
                understands_terms_of_court_order: understands_terms_of_court_order,
                understands_terms_of_court_order_details: understands_terms_of_court_order_details,
                warning_letter_sent: warning_letter_sent,
@@ -384,10 +384,10 @@ module Reports
           end
         end
 
-        context 'respondent' do
-          context 'no respondent record' do
+        context 'opponent' do
+          context 'no opponent record' do
             it 'generates blanks' do
-              legal_aid_application.update! respondent: nil
+              legal_aid_application.update! opponent: nil
               expect(value_for('Opponent can understand?')).to eq ''
               expect(value_for('Ability to understand details')).to eq ''
               expect(value_for('Warning letter sent?')).to eq ''
@@ -399,16 +399,16 @@ module Reports
             end
           end
 
-          context 'respondent record exists' do
+          context 'opponent record exists' do
             it 'generates the values' do
               expect(value_for('Opponent can understand?')).to eq 'Yes'
-              expect(value_for('Ability to understand details')).to eq respondent.understands_terms_of_court_order_details
+              expect(value_for('Ability to understand details')).to eq opponent.understands_terms_of_court_order_details
               expect(value_for('Warning letter sent?')).to eq 'Yes'
-              expect(value_for('Warning letter details')).to eq respondent.warning_letter_sent_details
+              expect(value_for('Warning letter details')).to eq opponent.warning_letter_sent_details
               expect(value_for('Police notified?')).to eq 'Yes'
-              expect(value_for('Police notification details')).to eq respondent.police_notified_details
+              expect(value_for('Police notification details')).to eq opponent.police_notified_details
               expect(value_for('Bail conditions set?')).to eq 'Yes'
-              expect(value_for('Bail details')).to eq respondent.bail_conditions_set_details
+              expect(value_for('Bail details')).to eq opponent.bail_conditions_set_details
             end
           end
 

@@ -152,6 +152,28 @@ cy:
                 derrucco tnedicni eht etaD
             details:
               blank: tnedicni eht fo sliated retnE
+        application_merits_task/opponent:
+          attributes:
+            full_name:
+              blank: eman s'tnenoppo eht retnE
+            understands_terms_of_court_order:
+              blank: redro truoc a fo smret eht dnatsrednu ot yticapac latnem eht
+                sah tnenoppo eht fi sey tceleS
+            warning_letter_sent:
+              blank: tnenoppo eht ot tnes neeb sah rettel gninraw a fi sey tceleS
+            police_notified:
+              blank: deifiton neeb evah ecilop eht fi sey tceleS
+            bail_conditions_set:
+              blank: tes neeb evah snoitidnoc liab fi sey tceleS
+            understands_terms_of_court_order_details:
+              blank: redro na fo hcaerb a ecrofne dluow truoc eht kniht uoy yhw su
+                lleT
+            warning_letter_sent_details:
+              blank: tnes neeb ton sah rettel gninraw a yhw su lleT
+            police_notified_details:
+              blank: nekat evah ecilop eht noitca tahw su lleT
+            bail_conditions_set_details:
+              blank: snoitidnoc liab eht fo sliated eviG
         application_merits_task/statement_of_case:
           attributes:
             original_file:
@@ -372,28 +394,6 @@ cy:
               blank: rebmun tnuocca na tceleS
             username:
               already_exists: emanresu taht htiw resu a ydaerla si erehT
-        respondent:
-          attributes:
-            full_name:
-              blank: eman s'tnenoppo eht retnE
-            understands_terms_of_court_order:
-              blank: redro truoc a fo smret eht dnatsrednu ot yticapac latnem eht
-                sah tnenoppo eht fi sey tceleS
-            warning_letter_sent:
-              blank: tnenoppo eht ot tnes neeb sah rettel gninraw a fi sey tceleS
-            police_notified:
-              blank: deifiton neeb evah ecilop eht fi sey tceleS
-            bail_conditions_set:
-              blank: tes neeb evah snoitidnoc liab fi sey tceleS
-            understands_terms_of_court_order_details:
-              blank: redro na fo hcaerb a ecrofne dluow truoc eht kniht uoy yhw su
-                lleT
-            warning_letter_sent_details:
-              blank: tnes neeb ton sah rettel gninraw a yhw su lleT
-            police_notified_details:
-              blank: nekat evah ecilop eht noitca tahw su lleT
-            bail_conditions_set_details:
-              blank: snoitidnoc liab eht fo sliated eviG
         savings_amount:
           attributes:
             base:

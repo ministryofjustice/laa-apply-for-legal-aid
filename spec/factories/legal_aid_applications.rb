@@ -393,8 +393,8 @@ FactoryBot.define do
       end
     end
 
-    trait :with_respondent do
-      respondent { build :respondent }
+    trait :with_opponent do
+      opponent { build :opponent }
     end
 
     trait :with_restrictions do
@@ -434,7 +434,7 @@ FactoryBot.define do
       percentage_home { rand(1...99.0).round(2) }
       with_merits_assessment
       with_merits_statement_of_case
-      with_respondent
+      with_opponent
       with_restrictions
       with_incident
       with_vehicle
@@ -458,7 +458,7 @@ FactoryBot.define do
       percentage_home { rand(1...99.0).round(2) }
       with_merits_assessment
       with_merits_statement_of_case
-      with_respondent
+      with_opponent
       with_restrictions
       with_incident
       with_vehicle

@@ -4644,11 +4644,11 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   WARNING_LETTER_SENT:
-    value: "#respondent_warning_letter_sent"
+    value: "#opponent_warning_letter_sent"
     response_type: boolean
     user_defined: true
   POLICE_NOTIFIED:
-    value: "#respondent_police_notified?"
+    value: "#opponent_police_notified?"
     response_type: boolean
     user_defined: true
   SMOD_APPLICABLE:
@@ -4675,7 +4675,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   INJ_RESPONDENT_CAPACITY:
-    value: "#respondent_understands_terms_of_court_order?"
+    value: "#opponent_understands_terms_of_court_order?"
     br100_meaning: 'Inj: The Respondent Or Proposed Respondent Has Capacity'
     response_type: boolean
     user_defined: true
@@ -4757,7 +4757,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   BAIL_CONDITIONS_SET:
-    value: "#respondent_bail_conditions_set?"
+    value: "#opponent_bail_conditions_set?"
     response_type: boolean
     user_defined: true
   ROUTING_FOR_PROCEEDING:

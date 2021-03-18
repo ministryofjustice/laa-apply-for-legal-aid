@@ -5,7 +5,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
     create :legal_aid_application,
            :with_applicant,
            :with_proceeding_types,
-           :with_respondent,
+           :with_opponent,
            :with_merits_assessment,
            :with_transaction_period,
            :with_means_report,

@@ -1,23 +1,23 @@
 module Providers
-  class RespondentsController < ProviderBaseController
+  class OpponentsController < ProviderBaseController
     def show
-      @form = Respondents::RespondentForm.new(model: respondent)
+      @form = Opponents::OpponentForm.new(model: opponent)
     end
 
     def update
-      @form = Respondents::RespondentForm.new(form_params)
+      @form = Opponents::OpponentForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end
 
     private
 
-    def respondent
-      @respondent ||= legal_aid_application.respondent || legal_aid_application.build_respondent
+    def opponent
+      @opponent ||= legal_aid_application.opponent || legal_aid_application.build_opponent
     end
 
     def form_params
-      merge_with_model(respondent) do
-        params.require(:respondent).permit(
+      merge_with_model(opponent) do
+        params.require(:application_merits_task_opponent).permit(
           :understands_terms_of_court_order, :understands_terms_of_court_order_details,
           :warning_letter_sent, :warning_letter_sent_details,
           :police_notified, :police_notified_details_true, :police_notified_details_false,

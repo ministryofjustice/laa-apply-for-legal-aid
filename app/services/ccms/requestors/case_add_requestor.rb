@@ -382,7 +382,7 @@ module CCMS
                                            appl_proceeding_type: application_proceeding_type,
                                            proceeding: application_proceeding_type.proceeding_type,
                                            merits_assessment: @legal_aid_application.merits_assessment,
-                                           respondent: @legal_aid_application.respondent)
+                                           opponent: @legal_aid_application.opponent)
           end
         end
       end

@@ -28,7 +28,7 @@ module CCMS
         end
 
         let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
-        let(:respondent) { legal_aid_application.respondent }
+        let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -505,7 +505,7 @@ module CCMS
 
         context 'POLICE_NOTIFIED block' do
           context 'police notified' do
-            before { respondent.update(police_notified: true) }
+            before { opponent.update(police_notified: true) }
             it 'is true' do
               block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
               expect(block).to have_boolean_response true
@@ -513,7 +513,7 @@ module CCMS
           end
 
           context 'police NOT notified' do
-            before { respondent.update(police_notified: false) }
+            before { opponent.update(police_notified: false) }
             it 'is false' do
               block = XmlExtractor.call(xml, :global_merits, 'POLICE_NOTIFIED')
               expect(block).to have_boolean_response false
@@ -535,7 +535,7 @@ module CCMS
           end
 
           context 'letter has been sent' do
-            before { respondent.update(warning_letter_sent: true) }
+            before { opponent.update(warning_letter_sent: true) }
             it 'generates WARNING_LETTER_SENT block with true value' do
               block = XmlExtractor.call(xml, :global_merits, 'WARNING_LETTER_SENT')
               expect(block).to have_boolean_response true
@@ -549,16 +549,16 @@ module CCMS
         end
 
         context 'INJ_RESPONDENT_CAPACITY' do
-          context 'respondent has capacity' do
-            before { respondent.understands_terms_of_court_order = true }
+          context 'opponent has capacity' do
+            before { opponent.understands_terms_of_court_order = true }
             it 'is true' do
               block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
               expect(block).to have_boolean_response true
             end
           end
 
-          context 'respondent does not have capacity' do
-            before { respondent.understands_terms_of_court_order = false }
+          context 'opponent does not have capacity' do
+            before { opponent.understands_terms_of_court_order = false }
             it 'is false' do
               block = XmlExtractor.call(xml, :global_merits, 'INJ_RESPONDENT_CAPACITY')
               expect(block).to have_boolean_response false
@@ -729,7 +729,7 @@ module CCMS
 
         context 'BAIL_CONDITIONS_SET' do
           context 'bail conditions set' do
-            before { respondent.bail_conditions_set = true }
+            before { opponent.bail_conditions_set = true }
             it 'is true' do
               block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
               expect(block).to have_boolean_response true
@@ -737,7 +737,7 @@ module CCMS
           end
 
           context 'bail conditions NOT set' do
-            before { respondent.bail_conditions_set = false }
+            before { opponent.bail_conditions_set = false }
             it 'is false' do
               block = XmlExtractor.call(xml, :global_merits, 'BAIL_CONDITIONS_SET')
               expect(block).to have_boolean_response false

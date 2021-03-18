@@ -236,9 +236,9 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
   describe 'govuk_radio_button' do
     let(:attribute) { 'understands_terms_of_court_order' }
-    let(:resource_form) { Respondents::RespondentForm.new }
+    let(:resource_form) { Opponents::OpponentForm.new }
     let(:hint_copy) { 'hint hint' }
-    let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.respondent.#{attribute}.true") }
+    let(:label_copy) { CGI.escapeHTML I18n.t("helpers.label.application_merits_task/opponent.#{attribute}.true") }
     let(:input) { parsed_html.at_css("input##{resource}_#{attribute}_true") }
     let(:value) { true }
     let(:params) { [:understands_terms_of_court_order, value, { hint: hint_copy }] }
@@ -296,7 +296,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
 
   describe 'govuk_collection_radio_buttons' do
     let(:attribute) { 'understands_terms_of_court_order' }
-    let(:resource_form) { Respondents::RespondentForm.new }
+    let(:resource_form) { Opponents::OpponentForm.new }
     let(:options) { [true, false] }
     let(:params) { [:understands_terms_of_court_order, options] }
     let(:inputs) { options.map { |option| parsed_html.at_css("input##{resource}_#{attribute}_#{option}") } }
@@ -373,7 +373,7 @@ RSpec.describe GovukElementsFormBuilder::FormBuilder do
     end
 
     context 'when validation error on object' do
-      let(:error_message) { I18n.t("activemodel.errors.models.respondent.attributes.#{attribute}.blank") }
+      let(:error_message) { I18n.t("activemodel.errors.models.application_merits_task/opponent.attributes.#{attribute}.blank") }
       let(:span_error) { parsed_html.at_css('span.govuk-error-message') }
 
       before { resource_form.valid? }

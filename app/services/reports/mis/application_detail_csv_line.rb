@@ -18,7 +18,7 @@ module Reports
                :proceeding_types,
                :property_value,
                :provider,
-               :respondent,
+               :opponent,
                :savings_amount,
                :shared_ownership,
                :used_delegated_functions?,
@@ -51,7 +51,7 @@ module Reports
                :police_notified?,
                :police_notified_details,
                :bail_conditions_set?,
-               :bail_conditions_set_details, to: :respondent
+               :bail_conditions_set_details, to: :opponent
 
       delegate :application_purpose,
                :proceedings_before_the_court,
@@ -154,7 +154,7 @@ module Reports
         savings_and_investment_details
         other_assets_details
         restrictions
-        respondent_details
+        opponent_details
         merits
         sanitise
       end
@@ -275,11 +275,11 @@ module Reports
         @line << (laa.has_restrictions? ? laa.restrictions_details : '')
       end
 
-      def respondent_details
-        respondent.present? ? respondent_attrs : 8.times { @line << '' }
+      def opponent_details
+        opponent.present? ? opponent_attrs : 8.times { @line << '' }
       end
 
-      def respondent_attrs # rubocop:disable Metrics/AbcSize
+      def opponent_attrs # rubocop:disable Metrics/AbcSize
         @line << yesno(understands_terms_of_court_order?)
         @line << understands_terms_of_court_order_details
         @line << yesno(warning_letter_sent?)

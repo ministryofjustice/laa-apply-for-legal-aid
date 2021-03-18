@@ -39,7 +39,7 @@ en:
       legal_aid_application:
         own_vehicle:
           <<: *true_false
-      respondent:
+      application_merits_task/opponent: &opponent
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
         bail_conditions_set_details: Give details of the bail conditions, including the date they're likely to end
@@ -52,6 +52,8 @@ en:
           <<: *true_false
         bail_conditions_set:
           <<: *true_false
+      application_merits_task_opponent:
+        <<: *opponent
       setting:
         mock_true_layer_data:
           <<: *true_false

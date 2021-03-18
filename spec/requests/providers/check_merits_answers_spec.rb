@@ -47,7 +47,7 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'displays the correct URLs for changing values' do
         expect(response.body).to have_change_link(:incident_details, providers_legal_aid_application_date_client_told_incident_path)
-        expect(response.body).to have_change_link(:respondent_details, providers_legal_aid_application_respondent_path)
+        expect(response.body).to have_change_link(:opponent_details, providers_legal_aid_application_opponent_path)
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
         expect(response.body).to have_change_link(:success_likely, providers_legal_aid_application_success_likely_index_path)
       end
@@ -62,20 +62,20 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
-      it 'displays the details of whether the respondent understands the terms of court order' do
-        expect(response.body).to include(application.respondent.understands_terms_of_court_order_details)
+      it 'displays the details of whether the opponent understands the terms of court order' do
+        expect(response.body).to include(application.opponent.understands_terms_of_court_order_details)
       end
 
       it 'displays the details of whether a warning letter has been sent' do
-        expect(response.body).to include(application.respondent.warning_letter_sent_details)
+        expect(response.body).to include(application.opponent.warning_letter_sent_details)
       end
 
       it 'displays the details of whether the police has been notified' do
-        expect(response.body).to include(application.respondent.police_notified_details)
+        expect(response.body).to include(application.opponent.police_notified_details)
       end
 
       it 'displays the details of whether the bail conditions have been set' do
-        expect(response.body).to include(application.respondent.bail_conditions_set_details)
+        expect(response.body).to include(application.opponent.bail_conditions_set_details)
       end
 
       it 'displays the statement of case' do

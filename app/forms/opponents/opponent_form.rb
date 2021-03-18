@@ -1,8 +1,8 @@
-module Respondents
-  class RespondentForm
+module Opponents
+  class OpponentForm
     include BaseForm
 
-    form_for Respondent
+    form_for ApplicationMeritsTask::Opponent
 
     attr_accessor :understands_terms_of_court_order, :understands_terms_of_court_order_details,
                   :warning_letter_sent, :warning_letter_sent_details,
@@ -53,7 +53,7 @@ module Respondents
       value = __send__("police_notified_details_#{police_notified}")
       return if value.present? || draft?
 
-      translation_path = "activemodel.errors.models.respondent.attributes.police_notified_details_#{police_notified}.blank"
+      translation_path = "activemodel.errors.models.opponent.attributes.police_notified_details_#{police_notified}.blank"
       errors.add("police_notified_details_#{police_notified}".to_sym, I18n.t(translation_path))
     end
 

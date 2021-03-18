@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Respondents::RespondentForm, type: :form do
-  let(:respondent) { create :respondent }
-  let(:i18n_scope) { 'activemodel.errors.models.respondent.attributes' }
+RSpec.describe Opponents::OpponentForm, type: :form do
+  let(:opponent) { create :opponent }
   let(:custom_params) { {} }
   let(:sample_params) do
     {
@@ -17,10 +16,10 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       'full_name' => 'Hiram Schulist'
     }
   end
-  let(:i18n_scope) { 'activemodel.errors.models.respondent.attributes' }
+  let(:i18n_scope) { 'activemodel.errors.models.application_merits_task/opponent.attributes' }
   let(:custom_params) { {} }
 
-  subject { described_class.new(sample_params.merge(custom_params).merge(model: respondent)) }
+  subject { described_class.new(sample_params.merge(custom_params).merge(model: opponent)) }
 
   describe 'extrapolate_police_notified_details' do
     context 'when loaded via params' do
@@ -66,18 +65,18 @@ RSpec.describe Respondents::RespondentForm, type: :form do
   describe '#save' do
     before do
       subject.save
-      respondent.reload
+      opponent.reload
     end
 
-    it 'updates the respondent' do
-      expect(respondent.understands_terms_of_court_order).to eq(false)
-      expect(respondent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
-      expect(respondent.warning_letter_sent).to eq(false)
-      expect(respondent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
-      expect(respondent.police_notified).to eq(true)
-      expect(respondent.police_notified_details).to eq(sample_params['police_notified_details_true'])
-      expect(respondent.bail_conditions_set).to eq(true)
-      expect(respondent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
+    it 'updates the opponent' do
+      expect(opponent.understands_terms_of_court_order).to eq(false)
+      expect(opponent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
+      expect(opponent.warning_letter_sent).to eq(false)
+      expect(opponent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
+      expect(opponent.police_notified).to eq(true)
+      expect(opponent.police_notified_details).to eq(sample_params['police_notified_details_true'])
+      expect(opponent.bail_conditions_set).to eq(true)
+      expect(opponent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
     end
 
     context "details are empty but they don't have to be entered" do
@@ -90,11 +89,11 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         }
       end
 
-      it 'updates the respondent' do
-        expect(respondent.understands_terms_of_court_order).to eq(true)
-        expect(respondent.warning_letter_sent).to eq(true)
-        expect(respondent.understands_terms_of_court_order_details).to eq('')
-        expect(respondent.warning_letter_sent_details).to eq('')
+      it 'updates the opponent' do
+        expect(opponent.understands_terms_of_court_order).to eq(true)
+        expect(opponent.warning_letter_sent).to eq(true)
+        expect(opponent.understands_terms_of_court_order_details).to eq('')
+        expect(opponent.warning_letter_sent_details).to eq('')
       end
     end
 
@@ -152,7 +151,7 @@ RSpec.describe Respondents::RespondentForm, type: :form do
       it 'generates errors' do
         expect(subject.errors[:understands_terms_of_court_order_details].join).to eq(I18n.t('understands_terms_of_court_order_details.blank', scope: i18n_scope))
         expect(subject.errors[:warning_letter_sent_details].join).to eq(I18n.t('warning_letter_sent_details.blank', scope: i18n_scope))
-        expect(subject.errors[:police_notified_details_true].join).to eq(I18n.t('activemodel.errors.models.respondent.attributes.police_notified_details_true.blank'))
+        expect(subject.errors[:police_notified_details_true].join).to eq(I18n.t('activemodel.errors.models.opponent.attributes.police_notified_details_true.blank'))
         expect(subject.errors[:bail_conditions_set_details].join).to eq(I18n.t('bail_conditions_set_details.blank', scope: i18n_scope))
       end
 
@@ -172,18 +171,18 @@ RSpec.describe Respondents::RespondentForm, type: :form do
   describe '#save_as_draft' do
     before do
       subject.save_as_draft
-      respondent.reload
+      opponent.reload
     end
 
-    it 'updates the respondent' do
-      expect(respondent.understands_terms_of_court_order).to eq(false)
-      expect(respondent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
-      expect(respondent.warning_letter_sent).to eq(false)
-      expect(respondent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
-      expect(respondent.police_notified).to eq(true)
-      expect(respondent.police_notified_details).to eq(sample_params['police_notified_details_true'])
-      expect(respondent.bail_conditions_set).to eq(true)
-      expect(respondent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
+    it 'updates the opponent' do
+      expect(opponent.understands_terms_of_court_order).to eq(false)
+      expect(opponent.understands_terms_of_court_order_details).to eq(sample_params['understands_terms_of_court_order_details'])
+      expect(opponent.warning_letter_sent).to eq(false)
+      expect(opponent.warning_letter_sent_details).to eq(sample_params['warning_letter_sent_details'])
+      expect(opponent.police_notified).to eq(true)
+      expect(opponent.police_notified_details).to eq(sample_params['police_notified_details_true'])
+      expect(opponent.bail_conditions_set).to eq(true)
+      expect(opponent.bail_conditions_set_details).to eq(sample_params['bail_conditions_set_details'])
     end
 
     context 'radio button are empty' do
@@ -196,11 +195,11 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         }
       end
 
-      it 'updates the respondent' do
-        expect(respondent.understands_terms_of_court_order).to eq(nil)
-        expect(respondent.warning_letter_sent).to eq(nil)
-        expect(respondent.police_notified).to eq(nil)
-        expect(respondent.bail_conditions_set).to eq(nil)
+      it 'updates the opponent' do
+        expect(opponent.understands_terms_of_court_order).to eq(nil)
+        expect(opponent.warning_letter_sent).to eq(nil)
+        expect(opponent.police_notified).to eq(nil)
+        expect(opponent.bail_conditions_set).to eq(nil)
       end
     end
 
@@ -217,14 +216,14 @@ RSpec.describe Respondents::RespondentForm, type: :form do
         }
       end
 
-      it 'updates the respondent' do
-        expect(respondent.understands_terms_of_court_order).to eq(false)
-        expect(respondent.warning_letter_sent).to eq(false)
-        expect(respondent.police_notified).to eq(false)
-        expect(respondent.understands_terms_of_court_order_details).to eq(nil)
-        expect(respondent.warning_letter_sent_details).to eq(nil)
-        expect(respondent.police_notified_details).to eq(nil)
-        expect(respondent.bail_conditions_set_details).to eq(nil)
+      it 'updates the opponent' do
+        expect(opponent.understands_terms_of_court_order).to eq(false)
+        expect(opponent.warning_letter_sent).to eq(false)
+        expect(opponent.police_notified).to eq(false)
+        expect(opponent.understands_terms_of_court_order_details).to eq(nil)
+        expect(opponent.warning_letter_sent_details).to eq(nil)
+        expect(opponent.police_notified_details).to eq(nil)
+        expect(opponent.bail_conditions_set_details).to eq(nil)
       end
     end
   end

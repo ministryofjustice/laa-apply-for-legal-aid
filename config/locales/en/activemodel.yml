@@ -148,6 +148,30 @@ en:
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
             details:
               blank: Enter details of the incident
+        application_merits_task/opponent:
+          attributes:
+            full_name:
+              blank: Enter the opponent's name
+            understands_terms_of_court_order:
+              blank: Select yes if the opponent has the mental capacity to understand the terms of a court order
+            warning_letter_sent:
+              blank: Select yes if a warning letter has been sent to the opponent
+            police_notified:
+              blank: Select yes if the police have been notified
+            police_notified_details:
+              blank: Select yes if the police have been notified
+            bail_conditions_set:
+              blank: Select yes if bail conditions have been set
+            understands_terms_of_court_order_details:
+              blank: Tell us why you think the court would enforce a breach of an order
+            warning_letter_sent_details:
+              blank: Tell us why a warning letter has not been sent
+            police_notified_details_true:
+              blank: Tell us what action the police have taken
+            police_notified_details_false:
+              blank: Tell us why the police have not been notified
+            bail_conditions_set_details:
+              blank: Give details of the bail conditions
         application_merits_task/statement_of_case:
           attributes:
             original_file:
@@ -348,30 +372,6 @@ en:
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only
-        respondent:
-          attributes:
-            full_name:
-              blank: Enter the opponent's name
-            understands_terms_of_court_order:
-              blank: Select yes if the opponent has the mental capacity to understand the terms of a court order
-            warning_letter_sent:
-              blank: Select yes if a warning letter has been sent to the opponent
-            police_notified:
-              blank: Select yes if the police have been notified
-            police_notified_details:
-              blank: Select yes if the police have been notified
-            bail_conditions_set:
-              blank: Select yes if bail conditions have been set
-            understands_terms_of_court_order_details:
-              blank: Tell us why you think the court would enforce a breach of an order
-            warning_letter_sent_details:
-              blank: Tell us why a warning letter has not been sent
-            police_notified_details_true:
-              blank: Tell us what action the police have taken
-            police_notified_details_false:
-              blank: Tell us why the police have not been notified
-            bail_conditions_set_details:
-              blank: Give details of the bail conditions
         savings_amount:
           attributes:
             base:

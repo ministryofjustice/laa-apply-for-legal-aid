@@ -32,8 +32,8 @@ module CCMS
                                 |other_assets_declaration
                                 |other_party
                                 |proceeding
+                                |opponent
                                 |outgoing
-                                |respondent
                                 |savings_amount
                                 |income_type
                                 |vehicle
@@ -49,7 +49,6 @@ module CCMS
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
     PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
-    RESPONDENT = /^respondent_(\S+)$/.freeze
     SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
     INCOME_TYPE_REGEX = /^income_type_(\S+)$/.freeze
     VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
@@ -239,7 +238,7 @@ module CCMS
     end
 
     def no_warning_letter_sent?(_options)
-      !legal_aid_application.respondent.warning_letter_sent
+      !legal_aid_application.opponent.warning_letter_sent
     end
 
     def applicant_owns_main_home?(_options)
@@ -384,8 +383,6 @@ module CCMS
         options[:opponent].__send__(Regexp.last_match(1))
       when OUTGOING
         legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
-      when RESPONDENT
-        options[:respondent].__send__(Regexp.last_match(1))
       when MERITS_ASSESSMENT
         options[:merits_assessment].__send__(Regexp.last_match(1))
       when SAVINGS_AMOUNT
