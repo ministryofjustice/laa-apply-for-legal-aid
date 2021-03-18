@@ -31,7 +31,7 @@
 - predicate: true
   method: generate_entity
   entity_name: CHANGE_IN_CIRCUMSTANCE
-  instance_label: the change in circumstance
+  instance_label: the change in circumstance1
   yaml_section: :change_in_circumstance
 
 - predicate: :vehicles_present?
@@ -43,7 +43,7 @@
 - predicate: :applicant_has_access_to_other_person_account?
   method: :generate_entity
   entity_name: THIRDPARTACC
-  instance_label: the car and motor vehicle
+  instance_label: the third party bank account1
   yaml_section: :third_party_accounts
 
 - predicate: applicant_has_premium_bonds?
@@ -65,7 +65,7 @@
 - predicate: applicant_has_capital_bonds?
   method: :generate_entity
   entity_name: CLICAPITAL
-  instance_label: the money due1
+  instance_label: the client's capital bond1
   yaml_section: :cli_capital
 
 - method: :generate_entity
@@ -75,7 +75,7 @@
 
 - method: :generate_entity
   entity_name: LAND
-  instance_label: the land
+  instance_label: the land1
   yaml_section: :land
 
 - method: :generate_entity
@@ -96,7 +96,7 @@
 - predicate: :vehicles_present?
   method: :generate_entity
   entity_name: CAR_USED
-  instance_label: the car used
+  instance_label: the car used1
   yaml_section: :car_used
 
 - predicate: applicant_has_second_home?
@@ -114,7 +114,7 @@
 - predicate: applicant_has_life_assurance?
   method: :generate_entity
   entity_name: LIFE_ASSURANCE
-  instance_label: the client's life assurance
+  instance_label: life assurance & endowment policy1
   yaml_section: :life_assurance
 
 - predicate: applicant_owns_share_of_property?
@@ -138,5 +138,5 @@
 - predicate: applicant_is_beneficiary_of_trust?
   method: :generate_entity
   entity_name: TRUST
-  instance_label: the trust
+  instance_label: the trust1
   yaml_section: :trust

@@ -29,6 +29,10 @@ class BankAccount < ApplicationRecord
     "#{bank_provider.name} Acct #{account_number}"
   end
 
+  def ccms_instance_name(count)
+    "the bank account#{count}"
+  end
+
   def bank_and_account_name
     "#{bank_provider.name} #{name}"
   end
