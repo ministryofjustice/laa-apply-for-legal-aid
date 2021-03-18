@@ -69,7 +69,11 @@ Rails.application.routes.draw do
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
     resources :ccms_connectivity_tests, only: [:show]
-    resources :reports, only: [:index]
+    resources :reports, only: %i[index create] do
+      member do
+        get 'download_custom_report'
+      end
+    end
     get 'user_dashboard', to: 'user_dashboard#index', as: 'user_dashboard'
     resources :roles, only: %i[index create update]
     namespace :roles do

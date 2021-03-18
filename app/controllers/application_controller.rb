@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
   def update_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
+
+  def convert_date_params(params)
+    # gsub finds ([digit]i) and replaces with _[digit]i
+    params.transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
+  end
 end

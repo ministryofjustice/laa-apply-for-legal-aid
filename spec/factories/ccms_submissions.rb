@@ -66,5 +66,16 @@ FactoryBot.define do
         create(:ccms_submission_document, submission: submission)
       end
     end
+
+    trait :case_completed do
+      case_ccms_reference { Faker::Number.number(digits: 12) }
+      applicant_ccms_reference { Faker::Number.number(digits: 8) }
+      aasm_state { 'completed' }
+
+      after(:create) do |submission|
+        create(:ccms_submission_history, :with_xml, to_state: 'case_submitted', submission: submission)
+        create(:ccms_submission_document, submission: submission)
+      end
+    end
   end
 end

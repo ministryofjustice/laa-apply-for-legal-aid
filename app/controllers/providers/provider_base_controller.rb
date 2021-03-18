@@ -6,10 +6,5 @@ module Providers
     include ApplicationDependable
     include Draftable
     include Authorizable
-
-    def convert_date_params(params)
-      # gsub finds ([digit]i) and replaces with _[digit]i
-      params.transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
-    end
   end
 end

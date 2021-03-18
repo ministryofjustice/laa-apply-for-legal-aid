@@ -4,24 +4,73 @@
   back_link: :none
   ) do %>
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col"><%= 'Report name' %></th>
-          <th class="govuk-table__header" scope="col"><%= 'Action' %></th>
-        </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-        <% @reports.each do |_key, report| %>
+  <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: @reports_types_creator,
+        url: admin_reports_path,
+        method: :post,
+        local: true
+      ) do |form| %>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell case-full-name"><%= report[:report_title] %></td>
-            <td class="govuk-table__cell"><%= link_to_accessible(report[:path_text], __send__(report[:path], format: :csv)) %></td>
+            <th class="govuk-table__header" scope="col">Report name</th>
+            <th class="govuk-table__header" scope="col">Action</th>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="govuk-table__body">
+          <% @reports.each do |_key, report| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell case-full-name"><%= report[:report_title] %></td>
+              <td class="govuk-table__cell"><%= link_to_accessible(report[:path_text], __send__(report[:path], format: :csv)) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+
+    <%= form.govuk_collection_radio_buttons :application_type,
+                                            [OpenStruct.new(value: 'A', label: t("admin.reports.application_type.all")),
+                                             OpenStruct.new(value: 'P', label: t("admin.reports.application_type.passported")),
+                                             OpenStruct.new(value: 'NP', label: t("admin.reports.application_type.non_passported"))],
+                                            :value,
+                                            :label,
+                                            inline: true,
+                                            hint: { text: '' },
+                                            legend: { text: t("admin.reports.application_type.heading"), tag: 'h1', size: 'm' } %>
+
+    <%= form.govuk_collection_radio_buttons :submitted_to_ccms,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            inline: true,
+                                            hint: { text: '' },
+                                            legend: { text: t("admin.reports.submitted_to_ccms.heading"), tag: 'h1', size: 'm' } %>
+
+    <%= form.govuk_collection_check_boxes :capital_assessment_result,
+                                          [OpenStruct.new(id: 'pending', name: t("admin.reports.capital_assessment_result.pending")),
+                                          OpenStruct.new(id: 'eligible', name: t("admin.reports.capital_assessment_result.eligible")),
+                                          OpenStruct.new(id: 'ineligible', name: t("admin.reports.capital_assessment_result.not_eligible")),
+                                          OpenStruct.new(id: 'contribution_required', name: t("admin.reports.capital_assessment_result.contribution_required"))],
+                                          :id,
+                                          :name,
+                                          hint: { text: '(Optional)' },
+                                          legend: { text: t("admin.reports.capital_assessment_result.heading")} %>
+
+    <%= form.govuk_date_field :records_from, legend: { text: t("admin.reports.date_input_fields.records_from.heading") },
+                              hint: { text: t("admin.reports.date_input_fields.records_from.hint")} %>
+
+    <%= form.govuk_date_field :records_to, legend: { text: t("admin.reports.date_input_fields.records_to.heading") },
+                              hint: { text: t("admin.reports.date_input_fields.records_to.hint")} %>
+
+    <%= form.govuk_fieldset legend: {size: 'm', tag: 'h1', text: 'Collate XML Payload Attributes'} do %>
+      <%= form.govuk_text_area :payload_attrs, label: {text: '(Optional)'}, hint: {text: 'Separate attribute names with a comma, space or newline'}, rows: 15 %>
+    <% end %>
+
+    <input type="submit" name="commit" value="Submit" class="govuk-button form-button">
+  <% end %>
 <% end %>
