@@ -1,4 +1,4 @@
-<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
   <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title } do %>
 

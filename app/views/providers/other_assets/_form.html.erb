@@ -1,4 +1,4 @@
-<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: model, url: url, method: :patch, local: true) do |form| %>
+<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
 
     <%= form.govuk_check_boxes_fieldset :other_assets,
                                         legend: { text: page_title, size: "xl", tag: 'h1'},

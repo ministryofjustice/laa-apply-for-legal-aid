@@ -476,7 +476,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_155950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

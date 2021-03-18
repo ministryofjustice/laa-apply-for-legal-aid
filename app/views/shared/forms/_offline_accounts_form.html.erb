@@ -1,7 +1,6 @@
 <%= render 'accounts_summary', bank_accounts: bank_accounts if bank_accounts.any? %>
 
 <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: form_path,
         method: :patch,

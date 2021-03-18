@@ -88,8 +88,8 @@ module LaaApplyForLegalAid
 
     config.x.geckoboard.api_key = ENV['GECKOBOARD_API_KEY']
 
-    require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
-    ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
+    # require Rails.root.join 'app/lib/govuk_elements_form_builder/form_builder'
+    ActionView::Base.default_form_builder = GOVUKDesignSystemFormBuilder::FormBuilder
 
     config.x.google_oauth2.client_id      = ENV['GOOGLE_CLIENT_ID']
     config.x.google_oauth2.client_secret = ENV['GOOGLE_CLIENT_SECRET']

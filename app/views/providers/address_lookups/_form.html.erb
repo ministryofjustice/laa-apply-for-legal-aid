@@ -4,7 +4,6 @@
     ) do %>
 
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         scope: :address_lookup,
         url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),

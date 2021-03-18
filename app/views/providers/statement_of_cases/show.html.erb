@@ -14,7 +14,6 @@
     ) do %>
 
   <%= form_with(
-          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
@@ -61,13 +60,12 @@
     <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
   </div>
 
-  <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-        model: @form,
-        url: providers_legal_aid_application_statement_of_case_path,
-        method: :patch,
-        local: true
-    ) do |form| %>
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
 
     <%= form.govuk_radio_divider %>
 

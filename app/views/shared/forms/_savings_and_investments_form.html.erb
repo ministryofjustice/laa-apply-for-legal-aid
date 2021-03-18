@@ -1,6 +1,6 @@
 <%= render 'accounts_summary', bank_accounts: bank_accounts if bank_accounts.any? %>
 
-<%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, model: @form, url: form_path, method: :patch, local: true) do |form| %>
+<%= form_with(model: @form, url: form_path, method: :patch, local: true) do |form| %>
 
   <%= form.govuk_check_boxes_fieldset :bank_accounts,
                                       legend: { text: page_title, size: "xl", tag: 'h1'},

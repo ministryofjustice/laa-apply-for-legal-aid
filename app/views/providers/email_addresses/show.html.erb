@@ -4,7 +4,6 @@
     ) do %>
 
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_email_address_path,
         method: :patch,

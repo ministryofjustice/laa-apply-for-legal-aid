@@ -1,6 +1,4 @@
-<%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-        model: model, url: url, method: :patch, local: true) do |form| %>
+<%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
 
   <%= form.govuk_radio_buttons_fieldset(:has_restrictions,
                                         legend: { size: 'xl', tag: 'h1', text: page_title},

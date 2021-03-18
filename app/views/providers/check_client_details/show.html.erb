@@ -1,6 +1,5 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_check_client_details_path(@legal_aid_application),
         method: :patch,
