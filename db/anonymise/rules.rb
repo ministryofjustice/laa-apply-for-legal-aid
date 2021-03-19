@@ -30,6 +30,9 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   application_proceeding_types_scope_limitations: {},
   application_scope_limitations: {},
   attachments: {},
+  attempts_to_settles: {
+    attempts_made: -> { Faker::Lorem.sentence }
+  },
   bank_account_holders: {
     true_layer_response: nil,
     full_name: -> { Faker::Name.name },

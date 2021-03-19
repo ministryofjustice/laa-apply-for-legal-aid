@@ -23,6 +23,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :statement_of_case, dependent: :destroy
   has_one :respondent, dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: :Incident, inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', dependent: :destroy
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
