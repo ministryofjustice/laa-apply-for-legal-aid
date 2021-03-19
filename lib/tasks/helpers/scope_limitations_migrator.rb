@@ -1,3 +1,4 @@
+# :nocov
 class ScopeLimitationsMigrator
   def initialize
     @verbose_log = []

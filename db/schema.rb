@@ -752,8 +752,6 @@ ActiveRecord::Schema.define(version: 2021_03_19_110509) do
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "policy_disregards", "legal_aid_applications"
-  add_foreign_key "proceeding_type_scope_limitations", "proceeding_types"
-  add_foreign_key "proceeding_type_scope_limitations", "scope_limitations"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "respondents", "legal_aid_applications"
