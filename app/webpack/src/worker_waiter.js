@@ -7,7 +7,7 @@ async function checkWorkerStatus() {
 }
 
 function waitForWorker() {
-  if (document.querySelectorAll('.worker-waiter').length) {
+  if (!document.querySelectorAll('.worker-waiter').length) {
     return;
   }
 
