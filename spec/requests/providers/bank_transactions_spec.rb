@@ -36,6 +36,15 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
       expect { subject }.to change { bank_transaction.reload.transaction_type }.to(nil)
     end
 
+    it 'removes the meta data on the transaction' do
+      bank_transaction.update(meta_data: { code: 'XXXX',
+                                           label: 'manually_chosen',
+                                           name: 'Maintenance In',
+                                           category: 'Maintenance In',
+                                           selected_by: 'Provider' })
+      expect { subject }.to change { bank_transaction.reload.meta_data }.to(nil)
+    end
+
     context 'bank_transaction does not belong to this application' do
       let(:bank_account) { create :bank_account }
 
