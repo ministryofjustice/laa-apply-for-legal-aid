@@ -114,7 +114,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     email: -> { Faker::Internet.email }
   },
   respondents: {
-    full_name: -> { Faker::Name.name },
+    full_name: -> { "#{Faker::Name.name}\n" },
     understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
     warning_letter_sent_details: -> { Faker::Lorem.sentence },
     police_notified_details: -> { Faker::Lorem.sentence },
