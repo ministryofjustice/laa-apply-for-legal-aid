@@ -11,13 +11,12 @@
           local: true
         ) do |form| %>
 
-      <div class=<%="#{error_class}"%>>
+      <div class="<%= "#{error_class}" %>">
         <%= form.govuk_radio_buttons_fieldset(:dwp_results_correct, legend: {text: t('.title'), tag: 'h1', size: 'l'} ) do %>
           <%= form.govuk_radio_button(:dwp_results_correct, true, label: {text: t('generic.yes')} ) %>
           <%= form.govuk_radio_button(:dwp_results_correct, false, label: {text:  t('.no')} ) %>
         <% end %>
       </div>
-
 
       <% if @error %>
         <%= link_to_accessible @error.values.first, "#dwp-results-correct-true-field", class: 'govuk-heading-s' %>
