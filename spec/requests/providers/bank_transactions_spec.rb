@@ -37,6 +37,11 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
     end
 
     it 'removes the meta data on the transaction' do
+      bank_transaction.update(meta_data: { code: 'XXXX',
+                                           label: 'manually_chosen',
+                                           name: 'Maintenance In',
+                                           category: 'Maintenance In',
+                                           selected_by: 'Provider' })
       expect { subject }.to change { bank_transaction.reload.meta_data }.to(nil)
     end
 
