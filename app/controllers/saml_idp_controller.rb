@@ -18,10 +18,10 @@ class SamlIdpController < SamlIdp::IdpController
   def idp_authenticate(email, password)
     return unless config.password == password
 
-    user = config.users.find { |u| u[:email] == email }
+    user = Provider.find_by(email: email)
     return unless user
 
-    Provider.find_by(username: user.username)
+    user
   end
 
   def idp_make_saml_response(provider, email)
