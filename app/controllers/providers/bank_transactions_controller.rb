@@ -1,7 +1,7 @@
 module Providers
   class BankTransactionsController < ProviderBaseController
     def remove_transaction_type
-      bank_transaction.update!(transaction_type: nil)
+      bank_transaction.update!(transaction_type: nil, meta_data: nil)
       head :ok
     end
 
