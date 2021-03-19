@@ -395,6 +395,34 @@ Backups are taken daily at 5:40am and stored for 7 days, these are automated bac
 
 A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am.
 
+## Anonymised database export and restore
+
+In order to create an anonymised dump of an environments database you can:
+
+```bash
+$ ./scripts/db_export.sh [environment]
+```
+Where environment is `production`, `staging` or a branch name from uat, e.g. `ap-1234`
+
+It requires that you have kubectl authenticated and your context set to the current live context
+
+It will connect to the required kubernetes namespace and pod and run the `rake db:export` task this will generate a filename of `[environment].anon.sql`
+
+It will then copy the compressed restore file to the `tmp` folder in the project and de-compress it
+
+If a file from the same environment exists, it will prompt you to overwrite the local copy
+
+It will then output a restore command to enable you to restore it to your local psql instance at your convenience
+
+A typical output for uat should resemble:
+```
+Finding pod for uat
+Connecting to apply-ap-1234-apply-for-legal-aid-1234567890abc, anonymizing, compressing and exporting DB
+Success
+You can restore this locally by running:
+ psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/uat.anon.sql
+```
+
 ## 3rd party integrations
 
 ### True Layer
