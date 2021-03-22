@@ -22,8 +22,18 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
           forward: ->(application, has_benefit) do
             if has_benefit
-              # this needs to be moved to the last step in the override flow
-              # and replaced here with the next :confirm_benefits steps
+              application.change_state_machine_type('PassportedStateMachine')
+              :has_evidence_of_benefits
+            else
+              application.change_state_machine_type('NonPassportedStateMachine')
+              :applicant_employed
+            end
+          end
+        },
+        has_evidence_of_benefits: {
+          path: ->(application) { urls.providers_legal_aid_application_has_evidence_of_benefit_path(application) },
+          forward: ->(application, has_evidence_of_benefit) do
+            if has_evidence_of_benefit
               application.change_state_machine_type('PassportedStateMachine')
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
