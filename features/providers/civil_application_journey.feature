@@ -938,5 +938,6 @@ Feature: Civil application journeys
     When I click link "Back"
     Then I should be on a page showing 'Do you have evidence that your client receives Income Support?'
     Then I choose 'No'
+    Then I scroll down
     Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
