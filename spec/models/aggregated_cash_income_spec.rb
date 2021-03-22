@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AggregatedCashIncome, type: :model do
-  let(:aci) { AggregatedCashIncome.new }
+  let(:aci) { AggregatedCashIncome.new(legal_aid_application_id: application.id) }
   let(:application) { create :legal_aid_application }
   let(:categories) { %i[benefits maintenance_in] }
   let!(:benefits) { create :transaction_type, :benefits }
@@ -19,7 +19,15 @@ RSpec.describe AggregatedCashIncome, type: :model do
   let(:month2_name) { month2_tx_date.strftime('%B') }
   let(:month3_name) { month3_tx_date.strftime('%B') }
 
+  before { application.set_transaction_period }
+
   describe '#find_by' do
+    around do |example|
+      travel_to Date.parse('2021-03-12')
+      example.run
+      travel_back
+    end
+
     context 'no cash income transaction records' do
       it 'returns an empty model' do
         aci = AggregatedCashIncome.find_by(legal_aid_application_id: application.id)
@@ -46,6 +54,30 @@ RSpec.describe AggregatedCashIncome, type: :model do
         expect(aci.month1).to eq month1_tx_date
         expect(aci.month2).to eq month2_tx_date
         expect(aci.month3).to eq month3_tx_date
+      end
+
+      context 'delegated functions not used' do
+        it 'sets the months based on the transaction period end date' do
+          expect(application.used_delegated_functions?).to be false
+          expect(application.transaction_period_finish_on).to eq Date.parse('2021-03-12')
+          expect(aci.month1).to eq Date.parse('2021-02-01')
+          expect(aci.month2).to eq Date.parse('2021-01-01')
+          expect(aci.month3).to eq Date.parse('2020-12-01')
+        end
+      end
+
+      context 'delegated fucntions are used' do
+        before do
+          application.update!(used_delegated_functions: true,
+                              used_delegated_functions_on: Date.parse('2021-01-28'))
+        end
+        it 'sets the months based on the delegated functions date' do
+          expect(application.used_delegated_functions?).to be true
+          expect(application.transaction_period_finish_on).to eq Date.parse('2021-03-12')
+          expect(aci.month1).to eq Date.parse('2020-12-01')
+          expect(aci.month2).to eq Date.parse('2020-11-01')
+          expect(aci.month3).to eq Date.parse('2020-10-01')
+        end
       end
     end
 

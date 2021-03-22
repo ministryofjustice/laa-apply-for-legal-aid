@@ -9,6 +9,7 @@ let typingTimer,
   previousSearchTerm = null,
   containSimilarWords = false;
 
+
 async function searchResults (searchTerm) {
   const currentUrl = window.location.href;
   const url = `/v1/proceeding_types?search_term=${searchTerm}&sourceUrl=${currentUrl}`;

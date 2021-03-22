@@ -6,6 +6,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
   let!(:maintenance_in) { create :transaction_type, :maintenance_in }
   let(:next_flow_step) { flow_forward_path }
 
+  before { legal_aid_application.set_transaction_period }
+
   describe 'GET /citizens/cash_income' do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
