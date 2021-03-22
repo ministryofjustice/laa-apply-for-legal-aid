@@ -51,7 +51,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     let(:told_on_3i) { told_on.day }
     let(:params) do
       {
-        incident: {
+        application_merits_task_incident: {
           'told_on(3i)': told_on_3i,
           'told_on(2i)': told_on.month,
           'told_on(1i)': told_on.year,
@@ -75,7 +75,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
     before { login_provider }
 
     it 'creates a new incident with the values entered' do
-      expect { subject }.to change { Incident.count }.by(1)
+      expect { subject }.to change { ApplicationMeritsTask::Incident.count }.by(1)
       expect(incident.told_on).to eq(told_on)
       expect(incident.occurred_on).to eq(occurred_on)
     end
@@ -111,7 +111,7 @@ RSpec.describe Providers::DateClientToldIncidentsController, type: :request do
       it 'contains error message' do
         subject
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t('activemodel.errors.models.incident.attributes.told_on.date_not_valid'))
+        expect(response.body).to include(I18n.t('activemodel.errors.models.application_merits_task/incident.attributes.told_on.date_not_valid'))
       end
     end
 

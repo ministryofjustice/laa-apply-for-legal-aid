@@ -4,7 +4,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
   let(:incident) { create :incident }
   let(:told_on) { 3.days.ago.to_date }
   let(:occurred_on) { 5.days.ago.to_date }
-  let(:i18n_scope) { 'activemodel.errors.models.incident.attributes' }
+  let(:i18n_scope) { 'activemodel.errors.models.application_merits_task/incident.attributes' }
   let(:error_locale) { :defined_in_spec }
   let(:message) { I18n.t(error_locale, scope: i18n_scope) }
 

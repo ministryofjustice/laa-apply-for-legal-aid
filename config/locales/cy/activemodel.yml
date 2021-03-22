@@ -137,6 +137,21 @@ cy:
           attributes:
             address:
               blank: tsil eht morf sserdda na tceles esaelP
+        application_merits_task/incident:
+          attributes:
+            told_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum tnedicni tsetal eht tuoba
+                uoy dlot tneilc ruoy etaD
+              blank: tnedicni tsetal eht tuoba uoy dlot tneilc ruoy etad eht retnE
+            occurred_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum derrucco tnedicni eht etaD
+              blank: derrucco tnedicni eht etad eht retnE
+              invalid_timeline: ti tuoba uoy dlot tneilc ruoy etad eht erofeb eb tsum
+                derrucco tnedicni eht etaD
+            details:
+              blank: tnedicni eht fo sliated retnE
         applications/proceedings_form:
           attributes:
             code:
@@ -168,21 +183,6 @@ cy:
               not_a_number: 000,1 ekil ,yenom fo tnuoma na eb tsum eulaV
               too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulaV
               less_than_threshold: 000,8£ naht ssel htrow stessa evah yeht fi on tceleS
-        incident:
-          attributes:
-            told_on:
-              date_not_valid: etad dilav a retnE
-              date_is_in_the_future: tsap eht ni eb tsum tnedicni tsetal eht tuoba
-                uoy dlot tneilc ruoy etaD
-              blank: tnedicni tsetal eht tuoba uoy dlot tneilc ruoy etad eht retnE
-            occurred_on:
-              date_not_valid: etad dilav a retnE
-              date_is_in_the_future: tsap eht ni eb tsum derrucco tnedicni eht etaD
-              blank: derrucco tnedicni eht etad eht retnE
-              invalid_timeline: ti tuoba uoy dlot tneilc ruoy etad eht erofeb eb tsum
-                derrucco tnedicni eht etaD
-            details:
-              blank: tnedicni eht fo sliated retnE
         irregular_income:
           attributes:
             amount:
