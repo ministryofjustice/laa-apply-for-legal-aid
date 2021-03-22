@@ -569,6 +569,10 @@ Then('the result list on page returns a {string} message') do |string|
   expect(page).to have_content(string)
 end
 
+Then('I visit received benefit confirmation page') do
+  visit providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application)
+end
+
 And('I search for proceeding {string}') do |proceeding_search|
   fill_in('proceeding-search-input', with: proceeding_search)
   wait_for_ajax

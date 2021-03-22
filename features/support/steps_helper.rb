@@ -43,6 +43,10 @@ Then('I click {string}') do |button_name|
   click_button(button_name)
 end
 
+Then('I scroll down') do
+  page.execute_script 'window.scrollBy(0,10000)'
+end
+
 # Search name and id attributes of input and textarea elements which contain the field string
 # Match examples:
 # <input name=field ... >
