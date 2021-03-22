@@ -306,6 +306,11 @@ FactoryBot.define do
       end
     end
 
+    trait :with_dwp_override do
+      dwp_override { build :dwp_override }
+      with_non_passported_state_machine
+    end
+
     trait :with_own_home_mortgaged do
       own_home { 'mortgage' }
     end
