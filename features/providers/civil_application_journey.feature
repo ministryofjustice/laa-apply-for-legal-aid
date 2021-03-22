@@ -928,6 +928,15 @@ Feature: Civil application journeys
     And I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     When I click link "Back"
-    Then I choose 'Universal Credit'
+    Then I choose 'Income Support'
     And I click 'Save and continue'
-    Then I should be on a page showing "Before you continue"
+    Then I should be on a page showing 'Do you have evidence that your client receives Income Support?'
+    Then I choose "Yes"
+    Then I scroll down
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Before you continue'
+    When I click link "Back"
+    Then I should be on a page showing 'Do you have evidence that your client receives Income Support?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Is your client employed?'
