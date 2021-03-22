@@ -374,6 +374,10 @@ en:
         warning: You cannot undo this action.
         yes_button: Yes, delete it
         no_button: No, do not delete it
+    has_evidence_of_benefits:
+      show:
+        page_title: "Do you have evidence that your client receives %{passporting_benefit}?"
+        hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
     limitations:
       show:
         h1-heading: What you're applying for

@@ -193,6 +193,21 @@ en:
           attributes:
             passporting_benefit:
               blank: Select if your client has received any of these benefits
+            has_evidence_of_benefit:
+              blank: Select yes if you have evidence that your client receives %{passporting_benefit}
+        incident:
+          attributes:
+            told_on:
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: Date your client told you about the latest incident must be in the past
+              blank: Enter the date your client told you about the latest incident
+            occurred_on:
+              date_not_valid: Enter a valid date
+              date_is_in_the_future: Date the incident occurred must be in the past
+              blank: Enter the date the incident occurred
+              invalid_timeline: Date the incident occurred must be before the date your client told you about it
+            details:
+              blank: Enter details of the incident
         irregular_income:
           attributes:
             amount:
