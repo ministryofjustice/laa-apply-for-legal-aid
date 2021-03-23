@@ -23,57 +23,57 @@
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
-    <p class="govuk-body"><%= t('generic.tell_us') %></p>
-    <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
-      <% (1..5).each do |bullet_number| %>
-        <li><%= t(".bullet-#{bullet_number}") %></li>
+      <p class="govuk-body"><%= t('generic.tell_us') %></p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
+        <% (1..5).each do |bullet_number| %>
+          <li><%= t(".bullet-#{bullet_number}") %></li>
+        <% end %>
+      </ul>
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
+          <%= t('.warning_text') %>
+        </strong>
+      </div>
+
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
+                                hint: {text: t('.size_hint')} %>
+      <%= form.submit(
+              t('generic.upload'),
+              id: 'upload',
+              name: 'upload_button',
+              class: 'govuk-button form-button'
+          ) %>
+
+      <% #  Customised accessibility alerts within this span below %>
+      <% if @successfully_deleted %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
       <% end %>
-    </ul>
-
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
-        <%= t('.warning_text') %>
-      </strong>
-    </div>
-
-    <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
-                              hint: {text: t('.size_hint')} %>
-    <%= form.submit(
-            t('generic.upload'),
-            id: 'upload',
-            name: 'upload_button',
-            class: 'govuk-button form-button'
-        ) %>
-
-    <% #  Customised accessibility alerts within this span below %>
-    <% if @successfully_deleted %>
-      <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+      <% if @error_message || @successful_upload %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
+      <% end %>
     <% end %>
-    <% if @error_message || @successful_upload %>
-      <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
-    <% end %>
+  <% end %>
 
-    <div id="uploaded-files-table-container">
-      <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-    </div>
-    <% end %>
+  <div id="uploaded-files-table-container">
+    <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+  </div>
 
-    <%= form_with(
-          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-          model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
-          method: :patch,
-          local: true
-      ) do |form| %>
+  <%= form_with(
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        model: @form,
+        url: providers_legal_aid_application_statement_of_case_path,
+        method: :patch,
+        local: true
+    ) do |form| %>
 
-      <%= form.govuk_radio_divider %>
+    <%= form.govuk_radio_divider %>
 
-      <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
+    <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
 
-      <%= next_action_buttons(show_draft: true, form: form) %>
-    <% end %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>
 
