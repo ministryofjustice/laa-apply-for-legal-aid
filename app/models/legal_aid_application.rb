@@ -33,11 +33,6 @@ class LegalAidApplication < ApplicationRecord
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
   has_one :dwp_override, dependent: :destroy
-
-  # The relationship below needs to be removed in ap-2047
-  has_many :application_scope_limitations, dependent: :destroy
-  has_many :scope_limitations, through: :application_scope_limitations
-
   has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
   has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
