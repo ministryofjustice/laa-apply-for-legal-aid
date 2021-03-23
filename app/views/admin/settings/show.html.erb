@@ -8,52 +8,52 @@
 
     <%= form.govuk_collection_radio_buttons(
           :mock_true_layer_data,
-          form.yes_no_radio_button_array,
+          yes_no_options,
           :value,
           :label,
           inline: true,
-          hint: t('.hints.mock_true_layer_data', bank_transaction_filename: Setting.bank_transaction_filename),
-          title: { size: :m, text: t('.labels.mock_true_layer_data') }
+          hint: { text: t('.hints.mock_true_layer_data', bank_transaction_filename: Setting.bank_transaction_filename)},
+          legend: { text: t('.labels.mock_true_layer_data') }
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
       :manually_review_all_cases,
-      form.yes_no_radio_button_array,
+      yes_no_options,
       :value,
       :label,
       inline: true,
-      hint: t('.hints.manually_review_all_cases'),
-      title: { size: :m, text: t('.labels.manually_review_all_cases') }
+      hint: { text: t('.hints.manually_review_all_cases')},
+      legend: { text: t('.labels.manually_review_all_cases') }
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
       :allow_welsh_translation,
-      form.yes_no_radio_button_array,
+      yes_no_options,
       :value,
       :label,
       inline: true,
-      hint: t('.hints.allow_welsh_translation'),
-      title: { size: :m, text: t('.labels.allow_welsh_translation') }
+      hint: { text: t('.hints.allow_welsh_translation')},
+      legend: { text: t('.labels.allow_welsh_translation') }
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
         :allow_multiple_proceedings,
-        form.yes_no_radio_button_array,
+        yes_no_options,
         :value,
         :label,
         inline: true,
-        hint: t('.hints.allow_multiple_proceedings'),
-        title: { size: :m, text: t('.labels.allow_multiple_proceedings') }
+        hint: { text: t('.hints.allow_multiple_proceedings')},
+        legend: { text: t('.labels.allow_multiple_proceedings') }
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
         :override_dwp_results,
-        form.yes_no_radio_button_array,
+        yes_no_options,
         :value,
         :label,
         inline: true,
-        hint: t('.hints.override_dwp_results'),
-        title: { size: :m, text: t('.labels.override_dwp_results') }
+        hint: { text: t('.hints.override_dwp_results')},
+        legend: { text: t('.labels.override_dwp_results') }
     ) %>
 
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>

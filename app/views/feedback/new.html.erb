@@ -3,11 +3,12 @@
     <% applicant_email_hint = @journey == :citizen ? t('.applicant_email_hint') : '' %>
     <%= form.govuk_collection_radio_buttons(
             :done_all_needed,
-            [true, false],
+            yes_no_options,
+            :value,
+            :label,
             inline: true,
-            title: {
+            legend: {
               text: t('.done_all_needed'),
-              size: :m
             }
         ) %>
 
@@ -15,9 +16,8 @@
             form, :difficulty,
             order: :reverse,
             args: {
-                title: {
+                legend: {
                   text: t('.difficulty'),
-                  size: :m
                 }
             }
         ) %>
@@ -26,27 +26,24 @@
             form, :satisfaction,
             order: :reverse,
             args: {
-                title: {
+                legend: {
                   text: t('.satisfaction'),
-                  size: :m
                 }
             }
         ) %>
 
     <%= form.govuk_text_area(
             :improvement_suggestion,
-            label: {
-              size: :m
-            },
-            hint: applicant_email_hint,
+            label: {text: t('.improvement_suggestion'), size: 'm'},
+            hint: {text: applicant_email_hint},
             rows: 4,
-            class: 'govuk-!-width-full'
+            width: 'full'
         ) %>
 
     <%= hidden_field_tag 'signed_out', @signed_out %>
     <%= hidden_field_tag 'application_id', @application_id %>
 
-    <%= form.submit t('generic.send'), class: 'govuk-button' %>
+    <%= form.govuk_submit t('generic.send') %>
 
   <% end %>
 <% end %>

@@ -28,10 +28,10 @@ module TranslatableModelAttribute
     #     <%= Feedback.enum_radio_buttons(form, :satisfaction, order: :reverse) %>
     def enum_radio_buttons(form, attribute, order: :normal, args: nil)
       collection = enum_ts(attribute).map do |option, translation|
-        { attribute.to_sym => option.to_s, label: translation }
+        OpenStruct.new(name: option.to_s, label: translation)
       end
       collection.reverse! if order == :reverse
-      form.govuk_collection_radio_buttons(attribute, collection, attribute, :label, args)
+      form.govuk_collection_radio_buttons(attribute, collection, :name, :label, args)
     end
 
     def enum_ts(attribute)
