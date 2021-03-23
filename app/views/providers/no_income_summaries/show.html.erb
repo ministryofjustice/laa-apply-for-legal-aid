@@ -8,31 +8,34 @@
         local: true
       ) do |form| %>
 
-    <fieldset class="govuk-fieldset">
-      <%= govuk_fieldset_header t('.page_heading') %>
+      <h1 class="govuk-heading-xl"><%= page_title %></h1>
 
       <p class="gov-body"><%= t('.subheading.text') %></p>
       <%= list_from_translation_path('.no_income_summaries.show.subheading') %>
 
-      <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
+      <div class="govuk-!-padding-bottom-2"></div>
 
-      <%= form.govuk_collection_radio_buttons :no_income_summaries,
-                                              yes_no_options,
-                                              :value,
-                                              :label,
-                                              legend: {text: '', size: 'l', tag: 'h2'} %>
+      <%= form.govuk_collection_radio_buttons(
+              :no_income_summaries,
+              yes_no_options,
+              :value,
+              :label,
+              legend: { text: t('.is_this_correct'), size: 'l', tag: 'h2' }) %>
 
-    <% if @student_finance %>
-      <h2 class="govuk-heading-l"><%= t('.student_finance.heading') %></h2>
+    <div class="govuk-!-padding-bottom-2"></div>
 
-      <p><%= t('.student_finance.info', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
-    <% end %>
+      <% if @student_finance %>
+        <h2 class="govuk-heading-l"><%= t('.student_finance.heading') %></h2>
+
+        <p><%= t('.student_finance.info', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
 
       <%= next_action_buttons_with_form(
               url: providers_legal_aid_application_no_income_summary_path,
               show_draft: true
           ) %>
 
-    </fieldset>
   <% end %>
 <% end %>
