@@ -1,6 +1,8 @@
-<%= render partial: 'shared/error' if @error %>
+<% error_class = @error ? 'alternative-error-style' : '' %>
+
 <div class="interruption-panel">
   <%= page_template(page_title: t('.tab_title'), column_width: :full, template: :basic) do %>
+
     <%= form_with(
           builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           model: @form,
@@ -9,9 +11,15 @@
           local: true
         ) do |form| %>
 
-      <%= form.govuk_radio_buttons_fieldset(:dwp_results_correct, legend: {text: t('.title'), tag: 'h1', size: 'l'}) do %>
-        <%= form.govuk_radio_button(:dwp_results_correct, true, label: {text: t('generic.yes')} ) %>
-        <%= form.govuk_radio_button(:dwp_results_correct, false, label: {text:  t('.no')} ) %>
+      <div class="<%= "#{error_class}" %>">
+        <%= form.govuk_radio_buttons_fieldset(:dwp_results_correct, legend: {text: t('.title'), tag: 'h1', size: 'l'} ) do %>
+          <%= form.govuk_radio_button(:dwp_results_correct, true, label: {text: t('generic.yes')} ) %>
+          <%= form.govuk_radio_button(:dwp_results_correct, false, label: {text:  t('.no')} ) %>
+        <% end %>
+      </div>
+
+      <% if @error %>
+        <%= link_to_accessible @error.values.first, "#dwp-results-correct-true-field", class: 'govuk-heading-s' %>
       <% end %>
 
       <div class="govuk-!-padding-bottom-4"></div>
