@@ -5,33 +5,50 @@ jest.mock('axios');
 
 beforeEach(() => jest.resetAllMocks());
 
-afterEach(() => {
-  jest.restoreAllMocks();
-})
+afterEach(() => jest.restoreAllMocks());
 
 describe('ProceedingsTypes.searchResults', () => {
   const searchTerm = 'family';
+  let result;
 
-  beforeEach(() => {
-    axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
-    ProceedingsTypes.searchResults(searchTerm);
-  })
+  beforeEach(async () => {
+    axios.get
+      .mockResolvedValue({ data: [] })
+      .mockResolvedValueOnce({ data: ['proceeding_type1', 'proceeding_type2'] });
 
-  it('calls axios.get once', done => {
+    result = await ProceedingsTypes.searchResults(searchTerm);
+  });
+
+  it('calls axios.get once', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    done();
-  })
+  });
 
-  it('polls the correct endpoint', done => {
-    let endpoint = '/v1/proceeding_types?search_term=' + searchTerm + '&sourceUrl=http://localhost/';
+  it('polls the correct endpoint', () => {
+    let endpoint = `/v1/proceeding_types?search_term=${searchTerm}&sourceUrl=http://localhost/`;
     expect(axios.get.mock.calls).toEqual([[endpoint]]);
-    done();
-  })
+  });
 
   it('returns correct values', () => {
-    axios.get.mockResolvedValueOnce({ data: { code: 'data' } })
-    return ProceedingsTypes.searchResults().then((result) => {
-      expect(result).toEqual({ code: 'data' });
-    })
-  })
-})
+    expect(result).toEqual(['proceeding_type1', 'proceeding_type2']);
+  });
+
+  describe('returns successful values for up to 3 failed match attempts before resetting', () => {
+    const searchResultValues = [
+      [searchTerm, 1, ['proceeding_type1', 'proceeding_type2']],
+      [searchTerm, 2, ['proceeding_type1', 'proceeding_type2']],
+      [searchTerm, 3, ['proceeding_type1', 'proceeding_type2']],
+      [searchTerm, 4, []]
+    ];
+
+    test.each(searchResultValues)(
+      'Call searchResults %number of times',
+      (term, number, expected) => {
+        Array.from(Array(number)).forEach(() => {
+          result = ProceedingsTypes.searchResults(term);
+        });
+
+        return expect(result).resolves.toEqual(expected);
+      }
+    );
+  });
+});

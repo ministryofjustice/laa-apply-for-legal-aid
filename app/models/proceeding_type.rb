@@ -19,9 +19,12 @@ class ProceedingType < ApplicationRecord
     query = <<~EOSQL
       UPDATE proceeding_types
       SET textsearchable =
-            setweight(to_tsvector(coalesce(meaning,'')), 'B')    ||
-            setweight(to_tsvector(coalesce(description, '')), 'C')  ||
-            setweight(to_tsvector(coalesce(additional_search_terms,'')), 'A') ;
+            setweight(to_tsvector(coalesce(meaning,'')), 'A')    ||
+            setweight(to_tsvector(coalesce(ccms_category_law, '')), 'B')  ||
+            setweight(to_tsvector(coalesce(ccms_matter, '')), 'C')  ||
+            setweight(to_tsvector(coalesce(code, '')), 'D')  ||
+            setweight(to_tsvector(coalesce(description, '')), 'D')  ||
+            setweight(to_tsvector(coalesce(additional_search_terms,'')), 'D');
     EOSQL
 
     connection.execute(query)
