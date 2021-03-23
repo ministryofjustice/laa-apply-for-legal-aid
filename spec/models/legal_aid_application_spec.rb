@@ -517,7 +517,7 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(OtherAssetsDeclaration.count).not_to be_zero
       expect(SavingsAmount.count).not_to be_zero
       expect(MeritsAssessment.count).not_to be_zero
-      expect(StatementOfCase.count).not_to be_zero
+      expect(ApplicationMeritsTask::StatementOfCase.count).not_to be_zero
       expect(Applicant.count).not_to be_zero
       expect(BankAccount.count).not_to be_zero
       expect(BankTransaction.count).not_to be_zero
@@ -531,7 +531,7 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero
       expect(MeritsAssessment.count).to be_zero
-      expect(StatementOfCase.count).to be_zero
+      expect(ApplicationMeritsTask::StatementOfCase.count).to be_zero
       expect(Applicant.count).to be_zero
       expect(BankAccount.count).to be_zero
       expect(BankTransaction.count).to be_zero

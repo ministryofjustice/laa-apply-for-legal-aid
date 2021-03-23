@@ -5,6 +5,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:provider) { legal_aid_application.provider }
   let(:soc) { nil }
+  let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
 
   describe 'GET /providers/applications/:legal_aid_application_id/statement_of_case' do
     subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
@@ -26,20 +27,20 @@ RSpec.describe 'provider statement of case requests', type: :request do
       end
 
       it 'does not display error' do
-        expect(response.body).not_to match 'id="statement-of-case-original-file-error"'
+        expect(response.body).not_to match 'id="application-merits-task-statement-of-case-original-file-error"'
       end
 
       context 'no statement of case record exists for the application' do
         it 'displays an empty text box' do
           expect(legal_aid_application.statement_of_case).to be nil
-          expect(response.body).to have_text_area_with_id_and_content('statement-of-case-statement-field', '')
+          expect(response.body).to have_text_area_with_id_and_content('application-merits-task-statement-of-case-statement-field', '')
         end
       end
 
       context 'statement of case record already exists for the application' do
         let(:soc) { legal_aid_application.create_statement_of_case(statement: 'This is my case statement') }
         it 'displays the details of the statement on the page' do
-          expect(response.body).to have_text_area_with_id_and_content('statement-of-case-statement-field', soc.statement)
+          expect(response.body).to have_text_area_with_id_and_content('application-merits-task-statement-of-case-statement-field', soc.statement)
         end
       end
     end
@@ -58,7 +59,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
     let(:draft_button) { { draft_button: 'Save as draft' } }
     let(:upload_button) { { upload_button: 'Upload' } }
     let(:button_clicked) { {} }
-    let(:params) { { statement_of_case: params_statement_of_case }.merge(button_clicked) }
+    let(:params) { { application_merits_task_statement_of_case: params_statement_of_case }.merge(button_clicked) }
 
     subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
@@ -124,7 +125,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
         it 'returns error message' do
           subject
-          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid')
+          error = I18n.t("#{i18n_error_path}.content_type_invalid")
           expect(response.body).to include(error)
         end
 
@@ -138,7 +139,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'returns error message' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.blank')
+            error = I18n.t("#{i18n_error_path}.blank")
             expect(response.body).to include(error)
           end
         end
@@ -151,7 +152,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
         it 'returns error message' do
           subject
-          error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.system_down')
+          error = I18n.t("#{i18n_error_path}.system_down")
           expect(response.body).to include(error)
         end
       end
@@ -169,7 +170,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
           it 'fails' do
             subject
             expect(response.body).to include('There is a problem')
-            expect(response.body).to include(I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.blank'))
+            expect(response.body).to include(I18n.t("#{i18n_error_path}.blank"))
           end
         end
 
@@ -202,7 +203,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid', file_name: original_file.original_filename)
+            error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -216,7 +217,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.content_type_invalid', file_name: original_file.original_filename)
+            error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -227,7 +228,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_too_big', size: 0, file_name: original_file.original_filename)
+            error = I18n.t("#{i18n_error_path}.file_too_big", size: 0, file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -238,7 +239,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'does not save the object and raise an error' do
             subject
-            error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_empty', file_name: original_file.original_filename)
+            error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
             expect(response.body).to include(error)
             expect(statement_of_case).to be_nil
           end
@@ -255,7 +256,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
           it 'displays error' do
             subject
-            expect(response.body).to match 'id="statement-of-case-original-file-error"'
+            expect(response.body).to match 'id="application-merits-task-statement-of-case-original-file-error"'
           end
 
           context 'file contains a malware' do
@@ -263,7 +264,7 @@ RSpec.describe 'provider statement of case requests', type: :request do
 
             it 'does not save the object and raise an error' do
               subject
-              error = I18n.t('activemodel.errors.models.statement_of_case.attributes.original_file.file_virus', file_name: original_file.original_filename)
+              error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
               expect(response.body).to include(error)
               expect(statement_of_case).to be_nil
             end
