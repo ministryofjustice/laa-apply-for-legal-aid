@@ -13,3 +13,12 @@ export function pluralize(val, word, plural = word + 's') {
     if (typeof val === 'object') return (num, word) => _pluralize(num, word, val[word]);
     return _pluralize(val, word, plural);
 }
+
+export function addSpaceEvent(elem) { // click on button using space key
+    elem.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Spacebar' || e.keyCode === 32) { // space key
+            e.preventDefault(); // prevent scroll
+            elem.click();
+        }
+    })
+}

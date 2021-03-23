@@ -1,12 +1,10 @@
-document.addEventListener('DOMContentLoaded', event => {
-    const link = document.getElementById("start");
+import { addSpaceEvent } from "./helpers";
 
-    if (link != null) {
-        link.addEventListener('keydown', (e) => {
-            if (e.key === ' ' || e.key === 'Spacebar' || e.keyCode === 32) { // space key
-                e.preventDefault();
-                link.click();
-            }
-        })
-    }
+document.addEventListener('DOMContentLoaded', event => {
+    const startLink = document.getElementById("start");
+    const continueLink = document.getElementById("continue");
+
+    // enable link click using space key
+    if (startLink != null) { addSpaceEvent(startLink) }
+    if (continueLink != null) { addSpaceEvent(continueLink) }
 });
