@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
   function cancelDeleteButton (clickedButton) {
     document.querySelector('#confirm-delete').setAttribute('hidden', 'true'); // restore hidden status to box
-    confirmDeleteButton.setAttribute('disabled', 'true'); // restore disabled status to button
+    confirmDeleteButton.disabled = true; // restore disabled status to button
     confirmDeleteButton.removeAttribute('data-application-id');// remove the attribute ID from the button - this is used for comparison - the if statement we are currently in
     confirmDeleteButton.closest('form').setAttribute('action', ''); // tells confirm button not to delete anything
     clickedButton.classList.add('govuk-button--warning'); // add the red button style to the button (it will currently be green)
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', event => {
     const deleteCaseRef = document.querySelector('#delete-case-ref');
     deleteCaseName.textContent = ''; // removes any hangover content
     deleteCaseRef.textContent = ''; // removes any hangover content
-    confirmDeleteButton.removeAttribute('disabled'); // enable button
+    confirmDeleteButton.disabled = false; // enable button
     confirmDeleteButton.setAttribute('data-application-id', applicationID); // set the delete button to reference the specific case (this is for comparison, so another click on the same button will remove the box)
     confirmDeleteButton.closest('form').setAttribute('action', action); // tells confirm button what to delete
     document.querySelector('#delete-message').textContent = deleteTitle; // changes title of error box

@@ -12,11 +12,11 @@
 //   Note, that the order is important - the `no-script` code needs to be
 //   after the default entry for it to override the behaviour.
 //
-$(function() {
-  $('.no-script').each(function() {
-    $(this).removeClass('no-script');
-    $(this).find('input:disabled').each(function() {
-      $(this).prop('disabled', false);
+document.addEventListener('DOMContentLoaded', event => {
+  document.querySelectorAll('.no-script').forEach(function(obj) {
+    obj.classList.remove('no-script');
+    obj.querySelectorAll('input:disabled').forEach(function(input) {
+      input.disabled = false;
     });
   });
 });

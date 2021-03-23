@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as Worker from 'worker_waiter'
+import * as Worker from 'worker_waiter';
 
 jest.mock('axios')
 
@@ -22,7 +22,7 @@ describe('worker is complete after 2 API calls', () => {
     axios.get
     .mockResolvedValueOnce({ data: { status: 'working' } })
     .mockResolvedValueOnce({ data: { status: 'complete' } })
-    jest.spyOn(Worker, 'checkWorkerStatus')
+    jest.spyOn(Worker, 'checkWorkerStatus');
     document.body.innerHTML = `<div class="worker-waiter" data-worker-id="${worker_id}"></div>`
   })
 
