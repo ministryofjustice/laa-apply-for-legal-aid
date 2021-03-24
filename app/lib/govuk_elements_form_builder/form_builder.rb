@@ -39,23 +39,23 @@ module GovukElementsFormBuilder
     # Use :field_with_error to have the input be marked as erroneous when an other attribute has an error.
     # e.g., <%= form.govuk_text_field :address_line_two, field_with_error: :address_line_one %>
     #
-    %w[text_field file_field text_area].each do |text_input|
-      define_method("govuk_#{text_input}") do |attribute, options = {}|
-        options[:text_input] = text_input
-        options[:class] = input_classes(attribute, options)
-        suffix = options.delete(:suffix)
-        input_form_group(attribute, options) do
-          input_prefix = options[:input_prefix]
-          tag_options = options.except(*CUSTOM_OPTIONS)
-          tag_options[:id] = attribute
-          tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
-          tag = __send__(text_input, attribute, tag_options)
-
-          tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
-          tag = suffix ? suffix_span_tag(suffix) { tag } : tag
-        end
-      end
-    end
+    # %w[text_field file_field text_area].each do |text_input|
+    #   define_method("govuk_#{text_input}") do |attribute, options = {}|
+    #     options[:text_input] = text_input
+    #     options[:class] = input_classes(attribute, options)
+    #     suffix = options.delete(:suffix)
+    #     input_form_group(attribute, options) do
+    #       input_prefix = options[:input_prefix]
+    #       tag_options = options.except(*CUSTOM_OPTIONS)
+    #       tag_options[:id] = attribute
+    #       tag_options[:'aria-describedby'] = aria_describedby(attribute, options)
+    #       tag = __send__(text_input, attribute, tag_options)
+    #
+    #       tag = input_prefix ? input_prefix_group(input_prefix) { tag } : tag
+    #       tag = suffix ? suffix_span_tag(suffix) { tag } : tag
+    #     end
+    #   end
+    # end
 
     # Usage:
     # <%= form.govuk_radio_button(:gender, 'm')
@@ -64,21 +64,21 @@ module GovukElementsFormBuilder
     # If label is not specified, it will be grabbed from the locale file at:
     # 'helpers.label.user.gender.f'
     #
-    def govuk_radio_button(attribute, value, *args)
-      options = args.extract_options!.symbolize_keys!
-
-      radio_classes = [options[:class]]
-      options[:class] = radio_classes.unshift('govuk-radios__input').compact.join(' ')
-      radio_html = radio_button(attribute, value, options.except(*CUSTOM_OPTIONS))
-
-      label_options = { value: value.to_s, class: 'govuk-label govuk-radios__label' }
-      label_html = label(attribute, options[:label], label_options)
-      hint_html = hint_tag(attribute, options.merge(radio_button_value: value))
-
-      content_tag(:div, class: 'govuk-radios__item') do
-        concat_tags(radio_html, label_html, hint_html)
-      end
-    end
+    # def govuk_radio_button(attribute, value, *args)
+    #   options = args.extract_options!.symbolize_keys!
+    #
+    #   radio_classes = [options[:class]]
+    #   options[:class] = radio_classes.unshift('govuk-radios__input').compact.join(' ')
+    #   radio_html = radio_button(attribute, value, options.except(*CUSTOM_OPTIONS))
+    #
+    #   label_options = { value: value.to_s, class: 'govuk-label govuk-radios__label' }
+    #   label_html = label(attribute, options[:label], label_options)
+    #   hint_html = hint_tag(attribute, options.merge(radio_button_value: value))
+    #
+    #   content_tag(:div, class: 'govuk-radios__item') do
+    #     concat_tags(radio_html, label_html, hint_html)
+    #   end
+    # end
 
     # Usage:
     # Labels of each radio buttons can be either passed as parameters or defined in the locale file.
@@ -109,30 +109,30 @@ module GovukElementsFormBuilder
     # e.g., <%= form.govuk_collection_radio_buttons(:gender, ['f', 'm'], inline: true) %>
     #
     # TODO: Refactor this method and remove the rubocop:disable
-    def govuk_collection_radio_buttons(attribute, collection, *args, &block) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      options = args.extract_options!.symbolize_keys!
-      value_attr, label_attr = extract_value_and_label_attributes(args)
-
-      content_tag(:div, class: collection_radio_buttons_classes(attribute, options)) do
-        fieldset(attribute, options) do
-          classes = ['govuk-radios']
-          classes << (options[:inline] ? 'govuk-radios--inline' : 'govuk-!-padding-top-2')
-          concat_tags(
-            hint_and_error_tags(attribute, options),
-            content_tag(:div, &block),
-            content_tag(:div, class: classes.join(' ')) do
-              inputs = collection.map do |obj|
-                value = value_attr ? obj[value_attr] : obj
-                label = label_attr ? obj[label_attr] : nil
-                input_attributes = options.dig(:input_attributes, value.to_s) || {}
-                govuk_radio_button(attribute, value, options.merge(input_attributes).merge(label: label, collection: true))
-              end
-              concat_tags(inputs)
-            end
-          )
-        end
-      end
-    end
+    # def govuk_collection_radio_buttons(attribute, collection, *args, &block) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    #   options = args.extract_options!.symbolize_keys!
+    #   value_attr, label_attr = extract_value_and_label_attributes(args)
+    #
+    #   content_tag(:div, class: collection_radio_buttons_classes(attribute, options)) do
+    #     fieldset(attribute, options) do
+    #       classes = ['govuk-radios']
+    #       classes << (options[:inline] ? 'govuk-radios--inline' : 'govuk-!-padding-top-2')
+    #       concat_tags(
+    #         hint_and_error_tags(attribute, options),
+    #         content_tag(:div, &block),
+    #         content_tag(:div, class: classes.join(' ')) do
+    #           inputs = collection.map do |obj|
+    #             value = value_attr ? obj[value_attr] : obj
+    #             label = label_attr ? obj[label_attr] : nil
+    #             input_attributes = options.dig(:input_attributes, value.to_s) || {}
+    #             govuk_radio_button(attribute, value, options.merge(input_attributes).merge(label: label, collection: true))
+    #           end
+    #           concat_tags(inputs)
+    #         end
+    #       )
+    #     end
+    #   end
+    # end
 
     private
 

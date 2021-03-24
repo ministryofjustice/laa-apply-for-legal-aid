@@ -13,6 +13,9 @@ en:
         warning:
           delete_all: Are you sure you want to delete all applications?
           delete_consequence: This action can't be undone
+        search:
+          label: 'Application search:'
+          hint: You can search by Application Reference, ccms_reference, client's name or application_id
       legal_aid_applications:
         warning:
           delete: Are you sure you want to delete this case?

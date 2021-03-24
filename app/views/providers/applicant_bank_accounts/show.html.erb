@@ -46,8 +46,12 @@
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            legend: {text: t('.offline_savings_accounts'), size: 'l', tag: 'h2'},
-                                            hint: {text: t('.hints.offline_savings_accounts')} %>
+                                            hint: {text: t('.hints.offline_savings_accounts')},
+                                            legend: {
+                                              text: t('.offline_savings_accounts'),
+                                              tag: 'h2',
+                                              size: 'l'
+                                            } %>
 
     <%= next_action_buttons(
             show_draft: true,

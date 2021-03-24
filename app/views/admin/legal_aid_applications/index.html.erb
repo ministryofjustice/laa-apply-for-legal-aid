@@ -50,14 +50,16 @@
       local: true
     ) do |form| %>
 
-  <%= govuk_form_group(show_error_if: @error)  do %>
-    <%= form.govuk_text_field :search, class: 'govuk-input--width-20', value: params['search'] || '' %>
-    <%= form.submit(t('generic.search'), class: 'govuk-button form-button', name: 'search_button') %>
-  <% end %>
+    <%= form.govuk_text_field :search,
+                              label: {text: t('.search.label')},
+                              hint: {text: t('.search.hint')},
+                              width: 20,
+                              value: params['search'] || '' %>
+    <%= form.govuk_submit t('generic.search') %>
 <% end %>
 
 <% if @applications.present? %>
   <%= render 'legal_aid_applications', pagy: @pagy %>
 <% else %>
-  <h2><%= t('.no_applications') %></h2>
+  <h2 class="govuk-heading-m"><%= t('.no_applications') %></h2>
 <% end %>
