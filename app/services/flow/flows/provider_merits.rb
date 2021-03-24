@@ -9,16 +9,16 @@ module Flow
         },
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
-          forward: :respondent_names,
+          forward: :opponent_names,
           check_answers: :check_merits_answers
         },
-        respondent_names: {
-          path: ->(application) { urls.providers_legal_aid_application_respondent_name_path(application) },
-          forward: :respondents,
+        opponent_names: {
+          path: ->(application) { urls.providers_legal_aid_application_opponent_name_path(application) },
+          forward: :opponents,
           check_answers: :check_merits_answers
         },
-        respondents: {
-          path: ->(application) { urls.providers_legal_aid_application_respondent_path(application) },
+        opponents: {
+          path: ->(application) { urls.providers_legal_aid_application_opponent_path(application) },
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
         },

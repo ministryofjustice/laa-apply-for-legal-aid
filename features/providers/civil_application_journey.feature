@@ -569,10 +569,10 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True field"
-    Then I choose option "Respondent warning letter sent True field"
-    Then I choose option "Respondent police notified True field"
-    Then I choose option "Respondent bail conditions set True field"
+    Then I choose option "Application merits task opponent understands terms of court order True field"
+    Then I choose option "Application merits task opponent warning letter sent True field"
+    Then I choose option "Application merits task opponent police notified True field"
+    Then I choose option "Application merits task opponent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'
@@ -688,10 +688,10 @@ Feature: Civil application journeys
     Then I fill "Full Name" with "John Doe"
     Then I click 'Save and continue'
     Then I should be on a page showing "Opponent details"
-    Then I choose option "Respondent understands terms of court order True field"
-    Then I choose option "Respondent warning letter sent True field"
-    Then I choose option "Respondent police notified True field"
-    Then I choose option "Respondent bail conditions set True field"
+    Then I choose option "Application merits task opponent understands terms of court order True field"
+    Then I choose option "Application merits task opponent warning letter sent True field"
+    Then I choose option "Application merits task opponent police notified True field"
+    Then I choose option "Application merits task opponent bail conditions set True field"
     Then I fill "Bail conditions set details" with "Foo bar"
     Then I fill "Police notified details" with "Foo bar"
     Then I click 'Save and continue'

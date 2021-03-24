@@ -1,8 +1,8 @@
-module Respondents
-  class RespondentNameForm
+module Opponents
+  class OpponentNameForm
     include BaseForm
 
-    form_for Respondent
+    form_for ApplicationMeritsTask::Opponent
 
     attr_accessor :full_name
 

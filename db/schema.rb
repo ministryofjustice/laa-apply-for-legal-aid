@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_110509) do
+ActiveRecord::Schema.define(version: 2021_03_22_122007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -494,6 +494,22 @@ ActiveRecord::Schema.define(version: 2021_03_19_110509) do
     t.index ["provider_id"], name: "index_offices_providers_on_provider_id"
   end
 
+  create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "understands_terms_of_court_order"
+    t.text "understands_terms_of_court_order_details"
+    t.boolean "warning_letter_sent"
+    t.text "warning_letter_sent_details"
+    t.boolean "police_notified"
+    t.text "police_notified_details"
+    t.boolean "bail_conditions_set"
+    t.text "bail_conditions_set_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
+  end
+
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value"
@@ -591,22 +607,6 @@ ActiveRecord::Schema.define(version: 2021_03_19_110509) do
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
-  end
-
-  create_table "respondents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
-    t.boolean "understands_terms_of_court_order"
-    t.text "understands_terms_of_court_order_details"
-    t.boolean "warning_letter_sent"
-    t.text "warning_letter_sent_details"
-    t.boolean "police_notified"
-    t.text "police_notified_details"
-    t.boolean "bail_conditions_set"
-    t.text "bail_conditions_set_details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "full_name"
-    t.index ["legal_aid_application_id"], name: "index_respondents_on_legal_aid_application_id"
   end
 
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -751,10 +751,10 @@ ActiveRecord::Schema.define(version: 2021_03_19_110509) do
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
+  add_foreign_key "opponents", "legal_aid_applications"
   add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
-  add_foreign_key "respondents", "legal_aid_applications"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "scheduled_mailings", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade

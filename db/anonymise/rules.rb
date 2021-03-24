@@ -106,6 +106,13 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     code: -> { Faker::Base.regexify(/^[0-9][A-Z][0-9]{3}[A-Z]$/) }
   },
   offices_providers: {},
+  opponents: {
+    full_name: -> { "#{Faker::Name.name}\n" },
+    understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
+    warning_letter_sent_details: -> { Faker::Lorem.sentence },
+    police_notified_details: -> { Faker::Lorem.sentence },
+    bail_conditions_set_details: -> { Faker::Lorem.sentence }
+  },
   other_assets_declarations: {},
   permissions: {},
   policy_disregards: {},
@@ -115,13 +122,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     username: -> { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" },
     name: -> { Faker::Name.name },
     email: -> { Faker::Internet.email }
-  },
-  respondents: {
-    full_name: -> { "#{Faker::Name.name}\n" },
-    understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
-    warning_letter_sent_details: -> { Faker::Lorem.sentence },
-    police_notified_details: -> { Faker::Lorem.sentence },
-    bail_conditions_set_details: -> { Faker::Lorem.sentence }
   },
   savings_amounts: {},
   scheduled_mailings: {

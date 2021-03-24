@@ -45,7 +45,7 @@ cy:
         own_vehicle:
           'false': 'oN'
           'true': seY
-      respondent:
+      application_merits_task_opponent:
         understands_terms_of_court_order_details: redro na fo hcaerb a ecrofne dluow
           truoc eht kniht uoy yhw su lleT
         warning_letter_sent_details: tnes neeb ton sah rettel gninraw a yhw su lleT

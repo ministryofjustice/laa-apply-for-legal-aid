@@ -28,17 +28,17 @@
 <section class="print-no-break">
 
   <%= check_answer_change_link(
-        name: :respondent_name_change,
-        url: providers_legal_aid_application_respondent_name_path(@legal_aid_application),
-        question: t('.items.respondent_name_title'),
+        name: :opponent_name_change,
+        url: providers_legal_aid_application_opponent_name_path(@legal_aid_application),
+        question: t('.items.opponent_name_title'),
         read_only: read_only
       ) %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link(
-          name: :respondent_name,
-          question: t('.items.respondent_name'),
-          answer: respondent.full_name,
+          name: :opponent_name,
+          question: t('.items.opponent_name'),
+          answer: opponent.full_name,
           read_only: read_only
         ) %>
   </dl>
@@ -48,9 +48,9 @@
 <section class="print-no-break">
 
   <%= check_answer_change_link(
-        name: :respondent_details,
-        url: providers_legal_aid_application_respondent_path(@legal_aid_application),
-        question: t('.respondent-heading'),
+        name: :opponent_details,
+        url: providers_legal_aid_application_opponent_path(@legal_aid_application),
+        question: t('.opponent-heading'),
         read_only: read_only
       ) %>
 
@@ -58,38 +58,38 @@
     <%= check_answer_no_link(
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
-          answer: yes_no(respondent.understands_terms_of_court_order),
-          no_border: !respondent.understands_terms_of_court_order,
+          answer: yes_no(opponent.understands_terms_of_court_order),
+          no_border: !opponent.understands_terms_of_court_order,
           read_only: read_only
         ) %>
   </dl>
-  <div class='govuk-body'><%= respondent.understands_terms_of_court_order_details %></div>
+  <div class='govuk-body'><%= opponent.understands_terms_of_court_order_details %></div>
 
-  <%= render 'shared/check_answers/section_break' unless respondent.understands_terms_of_court_order %>
+  <%= render 'shared/check_answers/section_break' unless opponent.understands_terms_of_court_order %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link(
           name: :warning_letter_sent,
           question: t('.items.warning_letter_sent'),
-          answer: yes_no(respondent.warning_letter_sent),
-          no_border: !respondent.warning_letter_sent,
+          answer: yes_no(opponent.warning_letter_sent),
+          no_border: !opponent.warning_letter_sent,
           read_only: read_only
         ) %>
   </dl>
-  <div class='govuk-body'><%= respondent.warning_letter_sent_details %></div>
+  <div class='govuk-body'><%= opponent.warning_letter_sent_details %></div>
 
-  <%= render 'shared/check_answers/section_break' unless respondent.warning_letter_sent %>
+  <%= render 'shared/check_answers/section_break' unless opponent.warning_letter_sent %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link(
           name: :police_notified,
           question: t('.items.police_notified'),
-          answer: yes_no(respondent.police_notified),
+          answer: yes_no(opponent.police_notified),
           no_border: true,
           read_only: read_only
         ) %>
   </dl>
-  <div class='govuk-body'><%= respondent.police_notified_details %></div>
+  <div class='govuk-body'><%= opponent.police_notified_details %></div>
 
   <%= render 'shared/check_answers/section_break' %>
 
@@ -97,14 +97,14 @@
     <%= check_answer_no_link(
           name: :bail_conditions_set,
           question: t('.items.bail_conditions_set'),
-          answer: yes_no(respondent.bail_conditions_set),
-          no_border: respondent.bail_conditions_set,
+          answer: yes_no(opponent.bail_conditions_set),
+          no_border: opponent.bail_conditions_set,
           read_only: read_only
         ) %>
   </dl>
-  <div class='govuk-body'><%= respondent.bail_conditions_set_details %></div>
+  <div class='govuk-body'><%= opponent.bail_conditions_set_details %></div>
 
-  <%= render 'shared/check_answers/section_break' if respondent.bail_conditions_set %>
+  <%= render 'shared/check_answers/section_break' if opponent.bail_conditions_set %>
 </section>
 <div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">

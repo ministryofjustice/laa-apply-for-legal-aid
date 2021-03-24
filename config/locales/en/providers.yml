@@ -251,10 +251,6 @@ en:
     date_client_told_incidents:
       show:
         h1-heading: Latest incident details
-    respondent_names:
-      show:
-        h1-heading: What is the opponent's name?
-        hint_text: Full name
     declarations:
       show:
         h1-heading: Declaration
@@ -509,6 +505,22 @@ en:
         list_3: is not employed
         radio_no: No, I do not agree
         radio_yes: Yes, I agree
+    opponents:
+      show:
+        h1-heading: Opponent details
+        opponent_name: Opponent's name
+        understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
+        warning_letter_sent: Has a warning letter been sent to the opponent?
+        police_notified: Have the police been notified?
+        bail_conditions_set: Have bail conditions been set?
+        bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
+        police_notified_no: Tell us why the police have not been notified
+        police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
+        police_notified_blank: Tell us what action the police have taken
+    opponent_names:
+      show:
+        h1-heading: What is the opponent's name?
+        hint_text: Full name
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
@@ -588,18 +600,6 @@ en:
     received_benefit_confirmations:
       show:
         h1-heading: Which passporting benefit does your client receive?
-    respondents:
-      show:
-        h1-heading: Opponent details
-        respondent_name: Opponent's name
-        understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
-        warning_letter_sent: Has a warning letter been sent to the opponent?
-        police_notified: Have the police been notified?
-        bail_conditions_set: Have bail conditions been set?
-        bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
-        police_notified_no: Tell us why the police have not been notified
-        police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
-        police_notified_blank: Tell us what action the police have taken
     restrictions:
       show:
         h1-heading: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
