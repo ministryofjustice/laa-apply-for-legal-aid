@@ -8,7 +8,7 @@
 # method.
 #
 class ProceedingTypeFullTextSearch
-  Result = Struct.new(:meaning, :code, :description, :category_law, :matter)
+  Result = Struct.new(:meaning, :code, :description, :ccms_category_law, :ccms_matter)
 
   def self.call(search_terms, source_url)
     new(search_terms, source_url).call

@@ -90,8 +90,8 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
               code: 'PH0002',
               meaning: 'Not an application for a care order',
               description: 'Not to be represented on an application for a care order.',
-              category_law: 'Other',
-              matter: 'Public Law - Other'
+              ccms_category_law: 'Other',
+              ccms_matter: 'Public Law - Other'
             }
           ]
 

@@ -54,9 +54,9 @@ RSpec.describe ProceedingTypeFullTextSearch do
           expect(result_set.size).to eq 2
         end
 
-        it 'returns the one with the search ter in additional search terms first' do
+        it 'returns the one with the search term in meaning first' do
           result_set = subject
-          expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Non-molestation order']
+          expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
         end
       end
 
@@ -100,7 +100,7 @@ RSpec.describe ProceedingTypeFullTextSearch do
           end
         end
 
-        context 'searching for a term which occures in more than one proceeding' do
+        context 'searching for a term which occurs in more than one proceeding' do
           let(:search_term) { 'molestation' }
 
           it 'returns two results' do
@@ -108,9 +108,9 @@ RSpec.describe ProceedingTypeFullTextSearch do
             expect(result_set.size).to eq 2
           end
 
-          it 'returns the one with the search ter in additional search terms first' do
+          it 'returns the one with the search term in meaning first' do
             result_set = subject
-            expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Non-molestation order']
+            expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
           end
         end
 
@@ -122,9 +122,9 @@ RSpec.describe ProceedingTypeFullTextSearch do
             expect(result_set.map(&:meaning)).to match_array(['Non-molestation order', 'Harassment - injunction'])
           end
 
-          it 'returns the item with the search terms in additional_search_terms first' do
+          it 'returns the item with the search terms in meaning first' do
             result_set = subject
-            expect(result_set.first.meaning).to eq 'Non-molestation order'
+            expect(result_set.first.meaning).to eq 'Harassment - injunction'
           end
         end
       end
