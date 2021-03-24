@@ -1,26 +1,4 @@
 module GovUkFormHelper
-  # Wrapper for form elements:
-  #   <%= govuk_form_group do %>
-  #      ... input and label etc. ...
-  #   <% end %>
-  #
-  # If `show_error_if` is passed a truthy object, GOV-UK error message styling
-  # will be applied.
-  #
-  # Passing the ids of the hint and input elements will generate an
-  # aria-describedby declaration for them within the form group statement.
-  #
-  def govuk_form_group(show_error_if: nil, hint_id: nil, input: nil, &block)
-    content = capture(&block)
-    error_class = show_error_if ? 'govuk-form-group--error' : ''
-    render(
-      'shared/forms/form_group',
-      content: content,
-      error_class: error_class,
-      aria_describedby: aria_describedby(hint_id, input)
-    )
-  end
-
   # Creates a template variable for yes/no options for radio buttons in a form
 
   def yes_no_options
