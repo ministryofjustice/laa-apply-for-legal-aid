@@ -5,24 +5,48 @@ const doneTypingInterval = 500; // time in ms, 500ms to make search work fairly 
 let typingTimer,
   ariaText,
   proceedingMatches = [],
-  noMatchCount = 0;
+  noMatchCount = 0,
+  previousSearchTerm = null,
+  containSimilarWords = false;
 
 async function searchResults (searchTerm) {
   const currentUrl = window.location.href;
   const url = `/v1/proceeding_types?search_term=${searchTerm}&sourceUrl=${currentUrl}`;
   const response = await axios.get(url);
   const data = response.data;
+  return updateMatchCounters(data, searchTerm);
+}
 
-  if (data.length) {
-    noMatchCount = 0;
-    proceedingMatches = data;
+function setMatchAndCount (data = [], searchTerm = null) {
+  noMatchCount = 0;
+  proceedingMatches = data;
+  previousSearchTerm = searchTerm;
+}
+
+function substrInArrayOfWords (wordArray1, wordArray2) {
+  const matches1 = wordArray1.map(substr => !!wordArray2.find(w => w.includes(substr)));
+  const matches2 = wordArray2.map(substr => !!wordArray1.find(w => w.includes(substr)));
+  return matches1.includes(true) || matches2.includes(true);
+}
+
+function checkSimilarWords (searchTerm) {
+  if (searchTerm && previousSearchTerm) {
+    const inputLower = searchTerm.toLowerCase().split(/\s+/);
+    const previousLower = previousSearchTerm.toLowerCase().split(/\s+/);
+    containSimilarWords = substrInArrayOfWords(inputLower, previousLower);
+  }
+}
+
+function updateMatchCounters (data, searchTerm) {
+  checkSimilarWords(searchTerm);
+
+  if (data && data.length) {
+    setMatchAndCount(data, searchTerm);
+  } else if (!data || !containSimilarWords) {
+    setMatchAndCount();
   } else if (proceedingMatches.length) {
     noMatchCount++;
-  }
-
-  if (noMatchCount > 3) {
-    proceedingMatches = [];
-    noMatchCount = 0;
+    if (noMatchCount > 3) setMatchAndCount();
   }
 
   return proceedingMatches;
@@ -32,11 +56,13 @@ async function searchResults (searchTerm) {
 async function doneTyping () {
   document.querySelector('#screen-reader-messages').innerHTML = ariaText;
   const inputText = document.querySelector('#proceeding-search-input').value.trim();
+
   if (inputText.length > 2) {
     hideProceeedingsItems();
     const results = await searchResults(inputText);
     showResults(results, inputText);
-  } else if (inputText.length === 0) {
+  } else {
+    updateMatchCounters();
     hideProceeedingsItems();
   }
 }
