@@ -351,7 +351,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_122007) do
   create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "passporting_benefit"
-    t.boolean "evidence_available"
+    t.boolean "has_evidence_of_benefit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id", unique: true

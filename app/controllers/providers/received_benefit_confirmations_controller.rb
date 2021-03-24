@@ -11,7 +11,7 @@ module Providers
 
       if @form.valid?
         benefit? ? @form.save : dwp_override.destroy!
-        details_checked! unless details_checked?
+        details_checked! unless details_checked? || benefit?
         go_forward(benefit?)
       else
         render :show
@@ -34,6 +34,8 @@ module Providers
 
     def form_params
       merge_with_model(dwp_override) do
+        return {} unless params[:dwp_override]
+
         params.require(:dwp_override).permit(:passporting_benefit)
       end
     end

@@ -71,41 +71,9 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
         end
       end
 
-      context 'delegated functions' do
-        let(:application) do
-          create :legal_aid_application,
-                 :with_proceeding_types,
-                 :at_checking_applicant_details,
-                 :with_applicant_and_address,
-                 used_delegated_functions: true
-        end
-
-        before { subject }
-
-        it 'continue to the substantive applications page' do
-          expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(application))
-        end
-
-        it 'transitions the application state to applicant details checked' do
-          expect(application.reload.state).to eq 'applicant_details_checked'
-        end
-      end
-
-      context 'no delegated functions' do
-        it 'continue to the capital introductions page' do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(application))
-        end
-
-        it 'transitions the application state to applicant details checked' do
-          subject
-          expect(application.reload.state).to eq 'applicant_details_checked'
-        end
-
-        it 'syncs the application' do
-          expect(CleanupCapitalAttributes).to receive(:call).with(application)
-          subject
-        end
+      it 'continue to the has_evidence_of_benefit page' do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_application_has_evidence_of_benefit_path(application))
       end
     end
 

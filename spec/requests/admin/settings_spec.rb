@@ -46,7 +46,9 @@ RSpec.describe Admin::SettingsController, type: :request do
 
     subject { patch admin_settings_path, params: params }
 
-    after { Setting.delete_all }
+    after do
+      Setting.delete_all
+    end
 
     it 'change settings values' do
       subject
@@ -69,7 +71,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       before { Setting.create! }
 
       it 'does not add another Setting object' do
-        expect { subject }.not_to change { Setting.count }
         expect(Setting.count).to eq(1)
       end
     end

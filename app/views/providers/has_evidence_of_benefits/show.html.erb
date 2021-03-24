@@ -1,0 +1,22 @@
+<%= page_template page_title: t('.page_title', passporting_benefit: @passporting_benefit), template: :basic do %>
+    <%= form_with(
+          builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+          model: @form,
+          url: providers_legal_aid_application_has_evidence_of_benefit_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: { text: content_for(:page_title), tag: 'h1', size: 'xl' },
+                                            hint: { text: t('.hint') } %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+  <% end %>
+<% end %>
