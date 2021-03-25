@@ -19,8 +19,10 @@ require 'highline/import'
 
 SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
