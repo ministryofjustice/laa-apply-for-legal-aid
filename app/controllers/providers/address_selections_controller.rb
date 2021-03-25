@@ -20,6 +20,7 @@ module Providers
 
     def update
       @addresses = build_addresses_from_form_data
+      @address_collection = collect_addresses
       @form = Addresses::AddressSelectionForm.new(permitted_params)
 
       render :show unless save_continue_or_draft(@form)
@@ -28,7 +29,7 @@ module Providers
     private
 
     def collect_addresses
-      count = OpenStruct.new(id: nil, address: t('.addresses_found_text', count: @addresses.size))
+      count = OpenStruct.new(id: nil, address: t('.show.addresses_found_text', count: @addresses.size))
       [count] + @addresses.collect { |a| OpenStruct.new(id: a.lookup_id, address: a.full_address) }
     end
 
