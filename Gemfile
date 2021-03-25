@@ -140,6 +140,7 @@ group :test do
   gem 'axe-core-cucumber'
   gem 'capybara', '>= 3.32.2', '< 4.0'
   gem 'climate_control' # Allows environment variables to be modified within specs
+  gem 'codecov', '~> 0.5.1'
   gem 'cucumber', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'

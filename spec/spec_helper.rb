@@ -17,6 +17,11 @@ require 'simplecov'
 require 'webmock/rspec'
 require 'highline/import'
 
+SimpleCov.start
+
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
