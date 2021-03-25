@@ -32,20 +32,11 @@
       <% end %>
 
       <div class="govuk-!-padding-bottom-2"></div>
-
-      <%# group_error_class = @form.errors[:lookup_id].any? ? 'govuk-form-group--error' : '' %>
-<!--      <div class="govuk-form-group <%#= group_error_class %>">-->
-        <%# if @form.errors[:lookup_id].any? %>
-          <%#= content_tag(:span, @form.errors[:lookup_id].first, class: 'govuk-error-message') do %>
-            <%#= content_tag(:span, I18n.translate('helpers.accessibility.error'), class: 'govuk-visually-hidden') + @form.errors[:lookup_id].first %>
-          <%# end %>
-        <%# end %>
-        <%= form.govuk_collection_select :lookup_id,
-                                         @address_collection,
-                                         :id,
-                                         :address,
-                                         label: {text: t('.select_address_label')} %>
-<!--      </div>-->
+      <%= form.govuk_collection_select :lookup_id,
+                                       @address_collection,
+                                       :id,
+                                       :address,
+                                       label: {text: t('.select_address_label')} %>
 
       <p><%= link_to_accessible t('.link_text'), providers_legal_aid_application_address_path(@legal_aid_application), class: 'govuk-link' %></p>
 

@@ -29,7 +29,7 @@ module Providers
     private
 
     def collect_addresses
-      count = OpenStruct.new(id: nil, address: t('.show.addresses_found_text', count: @addresses.size))
+      count = OpenStruct.new(id: nil, address: t('providers.address_selections.show.addresses_found_text', count: @addresses.size))
       [count] + @addresses.collect { |a| OpenStruct.new(id: a.lookup_id, address: a.full_address) }
     end
 

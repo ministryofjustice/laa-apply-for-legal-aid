@@ -54,11 +54,4 @@ module GovUkFormHelper
     class_text.flatten!
     args.merge!(class: class_text.join(' '))
   end
-
-  def aria_describedby(*elements)
-    elements.compact!
-    return if elements.empty?
-
-    %(aria-describedby="#{elements.join(' ')}")
-  end
 end
