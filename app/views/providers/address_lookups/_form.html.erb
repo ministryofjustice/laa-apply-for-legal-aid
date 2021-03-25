@@ -11,11 +11,7 @@
         local: true
       ) do |form| %>
 
-    <%= govuk_form_group show_error_if: @form.errors.present? do %>
-      <%= govuk_fieldset_header page_title %>
-
-      <%= form.govuk_text_field :postcode, width: 10 %>
-    <% end %>
+    <%= form.govuk_text_field :postcode, label: {text: page_title, tag: 'h1', size: 'xl'}, width: 10 %>
 
     <%= next_action_buttons(
           form: form,
