@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_122007) do
+ActiveRecord::Schema.define(version: 2021_03_23_113558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -125,15 +125,6 @@ ActiveRecord::Schema.define(version: 2021_03_22_122007) do
     t.string "type"
     t.index ["scope_limitation_id", "application_proceeding_type_id"], name: "index_scope_limitation_application_proceeding"
     t.index ["type", "application_proceeding_type_id", "scope_limitation_id"], name: "index_application_proceeding_scope_limitation", unique: true
-  end
-
-  create_table "application_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id"
-    t.uuid "scope_limitation_id"
-    t.boolean "substantive", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["legal_aid_application_id"], name: "index_application_scope_limitations_on_legal_aid_application_id"
   end
 
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

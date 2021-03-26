@@ -1264,9 +1264,7 @@ module CCMS
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
-                     office: office,
-                     used_delegated_functions: true,
-                     used_delegated_functions_on: Time.zone.today
+                     office: office
             end
             it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
               attributes = [
@@ -1282,8 +1280,18 @@ module CCMS
           end
 
           context 'there are multiple scope limitations' do
-            let(:scope_limitation) { create :scope_limitation }
-            before { legal_aid_application.scope_limitations << scope_limitation }
+            let(:legal_aid_application) do
+              create :legal_aid_application,
+                     :with_everything,
+                     :with_applicant_and_address,
+                     :with_substantive_scope_limitation,
+                     :with_delegated_functions_scope_limitation,
+                     populate_vehicle: true,
+                     provider: provider,
+                     office: office,
+                     used_delegated_functions: true,
+                     used_delegated_functions_on: Time.zone.today
+            end
             it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
