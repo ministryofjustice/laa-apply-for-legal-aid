@@ -15,7 +15,7 @@ module TrueLayer
           errors.add(:import_transactions, true_layer_error)
         else
           bank_account.bank_transactions.clear
-          ActiveRecord::Base.logger.silence do
+          ActiveSupport::Logger.logger.silence do
             bank_account.bank_transactions.create!(mapped_resources)
           end
         end
