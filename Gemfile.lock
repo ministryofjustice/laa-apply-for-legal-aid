@@ -690,7 +690,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.32.2, < 4.0)
   climate_control
-  codecov (~> 0.5.1)
+  codecov
   cucumber
   cucumber-rails
   database_cleaner
