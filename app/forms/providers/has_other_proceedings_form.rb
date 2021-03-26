@@ -6,6 +6,8 @@ module Providers
 
     validate :other_proceedings_present?
 
+    private
+
     def other_proceedings_present?
       errors.add :has_other_proceedings, error_message if has_other_proceedings.blank?
     end

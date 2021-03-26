@@ -30,6 +30,8 @@ en:
       new:
         hint: Do not include savings accounts
         field_set_header: Do you have current accounts you cannot access online?
+    has_offline_accounts:
+      new:
         error: Select yes if you have current accounts you cannot access online
     banks:
       index:

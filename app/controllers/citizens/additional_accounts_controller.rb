@@ -1,42 +1,75 @@
 module Citizens
   class AdditionalAccountsController < CitizenBaseController
+
     def index
       legal_aid_application.update!(has_offline_accounts: nil)
       legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
       legal_aid_application.applicant_enter_means! unless legal_aid_application.applicant_entering_means?
+      additional_account_form
     end
 
     def create
-      case params[:additional_account]
-      when 'true'
-        redirect_to new_citizens_additional_account_path
-      when 'false'
-        go_forward
-      else
-        error('additional_account', 'index')
-        render :index
+      if additional_account_form.valid?
+        return additional_account? ? go_additional_account : go_forward
       end
+
+      render :index
     end
 
     def new
       legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
+      has_offline_account_form
     end
 
     def update
-      case params[:has_offline_accounts]
-      when 'false'
-        online_accounts_update
-        redirect_to citizens_banks_path
-      when 'true'
-        offline_accounts_update
-        go_forward
-      else
-        error('has_online_accounts', 'new')
-        render :new
+      if has_offline_account_form.valid?
+        if has_offline_accounts?
+          offline_accounts_update
+          return go_forward
+        else
+          online_accounts_update
+          return go_citizen_banks
+        end
       end
+
+      render :new
     end
 
     private
+
+    def additional_account_form
+      @form ||= BinaryChoiceForm.call(
+        journey: :citizen,
+        radio_buttons_input_name: :additional_account,
+        action: :index,
+        form_params: form_params
+      )
+    end
+
+    def has_offline_account_form
+      @form ||= BinaryChoiceForm.call(
+        journey: :citizen,
+        radio_buttons_input_name: :has_offline_accounts,
+        action: :new,
+        form_params: form_params
+      )
+    end
+
+    def go_citizen_banks
+      redirect_to citizens_banks_path
+    end
+
+    def go_additional_account
+      redirect_to new_citizens_additional_account_path
+    end
+
+    def additional_account?
+      @form.additional_account == 'true'
+    end
+
+    def has_offline_accounts?
+      @form.has_offline_accounts == 'true'
+    end
 
     def online_accounts_update
       legal_aid_application.update!(has_offline_accounts: false)
@@ -47,8 +80,10 @@ module Citizens
       legal_aid_application.use_ccms!(:offline_accounts) unless legal_aid_application.use_ccms?
     end
 
-    def error(id, action)
-      @error = { "#{id}-error": I18n.t("citizens.additional_accounts.#{action}.error") }
+    def form_params
+      return {} unless params[:binary_choice_form]
+
+      params.require(:binary_choice_form).permit(:additional_account, :has_offline_accounts)
     end
   end
 end
