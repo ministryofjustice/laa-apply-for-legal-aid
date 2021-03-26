@@ -1,20 +1,33 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
-    def show; end
+    def show
+      confirm_non_passported_form
+    end
 
     def update
       return continue_or_draft if draft_selected?
 
-      if dwp_results_correct.present?
+      if confirm_non_passported_form.valid?
         details_checked! if correct_dwp_result? && !details_checked?
-        go_forward(correct_dwp_result?)
-      else
-        @error = { 'confirm_dwp_non_passported_applications-error' => I18n.t('providers.confirm_dwp_non_passported_applications.show.error') }
-        render :show
+        return go_forward(correct_dwp_result?)
       end
+
+      render :show
     end
 
     private
+
+    def correct_dwp_result?
+      confirm_non_passported_form.confirm_dwp_non_passported_application?
+    end
+
+    def confirm_non_passported_form
+      @form ||= BinaryChoiceForm.call(
+        journey: :provider,
+        radio_buttons_input_name: :confirm_dwp_non_passported_application,
+        form_params: form_params
+      )
+    end
 
     def details_checked!
       legal_aid_application.applicant_details_checked!
@@ -24,12 +37,10 @@ module Providers
       legal_aid_application.applicant_details_checked?
     end
 
-    def correct_dwp_result?
-      dwp_results_correct == 'true'
-    end
+    def form_params
+      return {} unless params[:binary_choice_form]
 
-    def dwp_results_correct
-      @dwp_results_correct ||= params[:dwp_results_correct]
+      params.require(:binary_choice_form).permit(:confirm_dwp_non_passported_application)
     end
   end
 end

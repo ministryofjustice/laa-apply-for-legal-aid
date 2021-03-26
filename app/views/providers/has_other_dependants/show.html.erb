@@ -34,11 +34,12 @@
   <%= form_with(
           builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           url: providers_legal_aid_application_has_other_dependants_path,
+          model: @form,
           method: :patch,
           local: true
       ) do |form| %>
 
-      <%= form.govuk_collection_radio_buttons :other_dependant,
+      <%= form.govuk_collection_radio_buttons :has_other_dependant,
                                               yes_no_options,
                                               :value,
                                               :label,

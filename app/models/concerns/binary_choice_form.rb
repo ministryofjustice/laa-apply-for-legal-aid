@@ -3,10 +3,19 @@ class BinaryChoiceForm
 
   validate :input_present?
 
-  def self.call(journey:, radio_buttons_input_name:, action: :show, form_params: nil)
-    attr_accessor radio_buttons_input_name.to_sym
+  class << self
+    def call(journey:, radio_buttons_input_name:, action: :show, form_params: nil)
+      attr_accessor radio_buttons_input_name.to_sym
 
-    new(journey, radio_buttons_input_name, action, form_params)
+      define_input_conditional(radio_buttons_input_name, form_params) if form_params
+      new(journey, radio_buttons_input_name, action, form_params)
+    end
+
+    def define_input_conditional(input_name, form_params)
+      define_method "#{input_name}?" do
+        form_params[input_name] == 'true'
+      end
+    end
   end
 
   def initialize(journey, radio_buttons_input_name, action, form_params)

@@ -1,14 +1,29 @@
 module Providers
   class HasOtherDependantsController < ProviderBaseController
-    def show; end
+    def show
+      other_dependant_form
+    end
 
     def update
-      if params[:other_dependant].in?(%w[true false])
-        go_forward(params[:other_dependant] == 'true')
-      else
-        @error = { 'other_dependant-error' => I18n.t('providers.has_other_dependants.show.error') }
-        render :show
-      end
+      return go_forward(other_dependant_form.has_other_dependant?) if additional_account_form.valid?
+
+      render :show
+    end
+
+    private
+
+    def other_dependant_form
+      @form ||= BinaryChoiceForm.call(
+        journey: :provider,
+        radio_buttons_input_name: :has_other_dependant,
+        form_params: form_params
+      )
+    end
+
+    def form_params
+      return {} unless params[:binary_choice_form]
+
+      params.require(:binary_choice_form).permit(:has_other_dependant)
     end
   end
 end
