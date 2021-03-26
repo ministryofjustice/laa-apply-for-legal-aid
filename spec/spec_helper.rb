@@ -13,14 +13,10 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'codecov'
 require 'simplecov'
 require 'webmock/rspec'
 require 'highline/import'
-
-SimpleCov.start
-
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
@@ -30,6 +26,9 @@ unless ENV['NOCOVERAGE']
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
   end
+
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CODECOV_TOKEN']
+
   SimpleCov.at_exit do
     say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
     SimpleCov.result.format!
