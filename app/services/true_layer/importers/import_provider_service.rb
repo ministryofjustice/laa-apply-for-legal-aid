@@ -26,9 +26,7 @@ module TrueLayer
         bank_provider = applicant.bank_providers.find_or_create_by!(
           true_layer_provider_id: provider[:provider][:provider_id]
         )
-        ActiveRecord::Base.logger.silence do
-          bank_provider.update!(mapped_resource)
-        end
+        bank_provider.update!(mapped_resource)
         bank_provider
       end
 
