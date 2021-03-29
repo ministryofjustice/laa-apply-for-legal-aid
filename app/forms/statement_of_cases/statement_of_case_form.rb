@@ -94,7 +94,7 @@ module StatementOfCases
     end
 
     def disallowed_content_type(original_file)
-      return if MimeMagic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
+      return if Marcel::Magic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
       return if original_file.content_type == WORD_DOCUMENT
 
       errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
