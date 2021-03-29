@@ -27,7 +27,9 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
   describe 'PATCH /providers/:application_id/remove_dependants/:dependant_id' do
     let(:params) do
       {
-        remove_dependant: remove_dependant
+        binary_choice_form: {
+          remove_dependant: remove_dependant
+        }
       }
     end
 

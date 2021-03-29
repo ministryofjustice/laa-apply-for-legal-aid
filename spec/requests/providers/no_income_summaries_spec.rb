@@ -31,11 +31,13 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/no_income_summary' do
-    let(:confirm_no_income) { 'true' }
+    let(:no_income_summaries) { 'true' }
     let(:submit_button) { {} }
     let(:params) do
       {
-        confirm_no_income: confirm_no_income
+        binary_choice_form: {
+          no_income_summaries: no_income_summaries
+        }
       }
     end
 
@@ -65,7 +67,7 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
       end
 
       context 'The NO option is chosen' do
-        let(:confirm_no_income) { 'false' }
+        let(:no_income_summaries) { 'false' }
 
         it 'redirects to the identify income types page' do
           expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_income_path(legal_aid_application))

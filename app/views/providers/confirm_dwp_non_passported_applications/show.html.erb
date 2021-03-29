@@ -18,10 +18,12 @@
         ) do |form| %>
 
       <div class="<%= "#{error_class}" %>">
-        <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_non_passported_application, legend: {text: t('.title'), tag: 'h1', size: 'l'} ) do %>
-          <%= form.govuk_radio_button(:confirm_dwp_non_passported_application, true, label: {text: t('generic.yes')} ) %>
-          <%= form.govuk_radio_button(:confirm_dwp_non_passported_application, false, label: {text:  t('.no')} ) %>
-        <% end %>
+        <%= form.govuk_collection_radio_buttons :correct_dwp_result,
+                                                [OpenStruct.new(value: true, label: t('generic.yes')),
+                                                 OpenStruct.new(value: false, label: t('.no'))],
+                                                :value,
+                                                :label,
+                                                legend: {text: content_for(:page_title), tag: 'h1', size: 'l'} %>
       </div>
 
       <% if @form.errors.any? %>

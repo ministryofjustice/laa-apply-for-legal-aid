@@ -28,7 +28,15 @@ class BinaryChoiceForm
   private
 
   def input_present?
-    errors.add @input_name.to_sym, error_message if __send__(@input_name).blank?
+    errors.add @input_name.to_sym, error_message if blank_value? || bad_value?
+  end
+
+  def blank_value?
+    __send__(@input_name).blank?
+  end
+
+  def bad_value?
+    %w[true false].exclude? __send__(@input_name)
   end
 
   def error_message

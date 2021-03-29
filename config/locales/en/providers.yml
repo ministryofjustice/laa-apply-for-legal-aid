@@ -157,10 +157,12 @@ en:
         we_checked: "We checked with the DWP and your client does not receive:"
     confirm_dwp_non_passported_applications:
       show:
-        error: Select yes if your client does not receive a passporting benefit.
         'no': No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
         title: DWP records show that your client does not receive a passporting benefit – is this correct?
+    correct_dwp_results:
+      show:
+        error: Select yes if your client does not receive a passporting benefit.
     check_client_details:
       show:
         error: Select if your client's details are correct or not
