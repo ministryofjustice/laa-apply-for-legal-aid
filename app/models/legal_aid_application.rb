@@ -19,7 +19,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
-  has_one :merits_assessment, dependent: :destroy
+  has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
   has_one :statement_of_case, class_name: 'ApplicationMeritsTask::StatementOfCase', dependent: :destroy
   has_one :opponent, class_name: 'ApplicationMeritsTask::Opponent', dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: 'ApplicationMeritsTask::Incident', inverse_of: :legal_aid_application, dependent: :destroy
@@ -390,7 +390,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def summary_state
-    return :submitted if merits_assessment&.submitted_at
+    return :submitted if chances_of_success&.submitted_at
 
     :in_progress
   end

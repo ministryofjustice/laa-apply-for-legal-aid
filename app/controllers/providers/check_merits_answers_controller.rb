@@ -8,7 +8,7 @@ module Providers
     def continue
       unless draft_selected?
         legal_aid_application.generate_reports! if legal_aid_application.may_generate_reports?
-        merits_assessment.submit!
+        chances_of_success.submit!
       end
       continue_or_draft
     end
@@ -20,8 +20,8 @@ module Providers
 
     private
 
-    def merits_assessment
-      @merits_assessment ||= legal_aid_application.merits_assessment || legal_aid_application.build_merits_assessment
+    def chances_of_success
+      @chances_of_success ||= legal_aid_application.chances_of_success || legal_aid_application.build_chances_of_success
     end
   end
 end

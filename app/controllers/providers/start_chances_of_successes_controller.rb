@@ -1,5 +1,5 @@
 module Providers
-  class StartMeritsAssessmentsController < ProviderBaseController
+  class StartChancesOfSuccessesController < ProviderBaseController
     def show; end
 
     def update
