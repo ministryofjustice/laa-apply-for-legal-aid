@@ -1,13 +1,13 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     def show
-      confirm_non_passported_form
+      form
     end
 
     def update
       return continue_or_draft if draft_selected?
 
-      if confirm_non_passported_form.valid?
+      if form.valid?
         details_checked! if correct_dwp_result? && !details_checked?
         return go_forward(correct_dwp_result?)
       end
@@ -18,10 +18,10 @@ module Providers
     private
 
     def correct_dwp_result?
-      confirm_non_passported_form.confirm_dwp_non_passported_application?
+      form.confirm_dwp_non_passported_application?
     end
 
-    def confirm_non_passported_form
+    def form
       @form ||= BinaryChoiceForm.call(
         journey: :provider,
         radio_buttons_input_name: :confirm_dwp_non_passported_application,
