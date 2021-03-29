@@ -4,8 +4,6 @@
                   url: citizens_additional_accounts_path,
                   method: :post, local: true) do |form| %>
 
-        <%= render partial: 'shared/error' if @error %>
-
         <%= form.govuk_collection_radio_buttons :additional_account,
                                                 yes_no_options,
                                                 :value,

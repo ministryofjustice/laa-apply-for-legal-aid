@@ -1,10 +1,9 @@
 <%= page_template page_title: t('.field_set_header'), template: :basic do %>
   <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-                model: @form, url: citizens_additional_account_path(id: :update),
+                model: @form,
+                url: citizens_additional_account_path(id: :update),
                 method: :patch,
                 local: true) do |form| %>
-
-    <%= render partial: 'shared/error' if @error %>
 
     <%= form.govuk_collection_radio_buttons :has_offline_accounts,
                                             yes_no_options,

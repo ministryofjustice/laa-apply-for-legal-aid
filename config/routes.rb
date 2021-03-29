@@ -160,7 +160,7 @@ Rails.application.routes.draw do
       resource :outstanding_mortgage, only: %i[show update]
       resource :has_dependants, only: %i[show update]
       resources :dependants, only: %i[new show update]
-      resources :remove_dependant, only: %i[show update]
+      resources :remove_dependants, only: %i[show update]
       resource :has_other_dependants, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]

@@ -10,7 +10,7 @@ module Citizens
 
     def create
       if additional_account_form.valid?
-        return additional_account? ? go_additional_account : go_forward
+        return additional_account_form.additional_account? ? go_additional_account : go_forward
       end
 
       render :index
@@ -23,7 +23,7 @@ module Citizens
 
     def update
       if has_offline_account_form.valid?
-        if has_offline_accounts?
+        if has_offline_account_form.has_offline_accounts?
           offline_accounts_update
           return go_forward
         else
@@ -61,14 +61,6 @@ module Citizens
 
     def go_additional_account
       redirect_to new_citizens_additional_account_path
-    end
-
-    def additional_account?
-      @form.additional_account == 'true'
-    end
-
-    def has_offline_accounts?
-      @form.has_offline_accounts == 'true'
     end
 
     def online_accounts_update

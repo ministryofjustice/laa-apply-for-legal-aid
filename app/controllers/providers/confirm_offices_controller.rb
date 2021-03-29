@@ -6,25 +6,42 @@ module Providers
     def show
       initialize_page_history
       next_page = determine_where_next
+      form
       redirect_to next_page unless next_page.nil?
     end
 
     def update
-      case params[:correct]
-      when 'true'
-        redirect_to providers_legal_aid_applications_path
-      when 'false'
-        current_provider.update!(selected_office: nil)
-        redirect_to providers_select_office_path
-      else
-        @error = I18n.t('providers.confirm_offices.show.error')
-        render :show
+      if form.valid?
+        if form.confirm_office?
+          return redirect_to providers_legal_aid_applications_path
+        else
+          current_provider.update!(selected_office: nil)
+          return redirect_to providers_select_office_path
+        end
       end
+
+      render :show
     end
 
-    def invalid_login; end
+    def invalid_login
+      form
+    end
 
     private
+
+    def form
+      @form ||= BinaryChoiceForm.call(
+        journey: :provider,
+        radio_buttons_input_name: :confirm_office,
+        form_params: form_params
+      )
+    end
+
+    def form_params
+      return {} unless params[:binary_choice_form]
+
+      params.require(:binary_choice_form).permit(:confirm_office)
+    end
 
     def determine_where_next
       return providers_invalid_login_path if current_provider.invalid_login?

@@ -40,7 +40,7 @@ module Flow
             has_other_dependant ? :dependants : :means_summaries
           }
         },
-        remove_dependant: {
+        remove_dependants: {
           path: ->(application, dependant) { urls.providers_legal_aid_application_remove_dependant_path(application, dependant) },
           forward: :has_other_dependants
         }

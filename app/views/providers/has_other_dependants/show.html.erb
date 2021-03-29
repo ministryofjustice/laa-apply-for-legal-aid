@@ -1,7 +1,5 @@
 <%= page_template page_title: t('.page_title'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
   <% if @legal_aid_application.has_dependants? %>
     <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
     <div class="govuk-summary-list">

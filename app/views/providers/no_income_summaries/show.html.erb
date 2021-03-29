@@ -1,13 +1,13 @@
 <%= page_template page_title: t('.page_heading'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
   <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_no_income_summary_path,
-          method: :patch,
-          local: true
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        url: providers_legal_aid_application_no_income_summary_path,
+        model: @form,
+        method: :patch,
+        local: true
       ) do |form| %>
+
     <fieldset class="govuk-fieldset">
       <%= govuk_fieldset_header t('.page_heading') %>
 
@@ -16,29 +16,11 @@
 
       <h2 class="govuk-heading-l"><%= t('.is_this_correct') %></h2>
 
-      <%= govuk_form_group(
-              show_error_if: @error,
-              input: :confirm_no_income
-          ) do %>
-
-        <%= govuk_error_message(@error&.values&.first, id: 'confirm_no_income-error') %>
-
-        <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-          <%= form.govuk_radio_button(
-                  :confirm_no_income,
-                  true,
-                  label: t('generic.yes'),
-                  error: @error&.values&.first
-              ) %>
-
-          <%= form.govuk_radio_button(
-                  :confirm_no_income,
-                  false,
-                  label: t('generic.no'),
-                  error: @error&.values&.first
-              ) %>
-        </div>
-      <% end %>
+      <%= form.govuk_collection_radio_buttons :no_income_summaries,
+                                              yes_no_options,
+                                              :value,
+                                              :label,
+                                              legend: {text: '', size: 'l', tag: 'h2'} %>
 
     <% if @student_finance %>
       <h2 class="govuk-heading-l"><%= t('.student_finance.heading') %></h2>

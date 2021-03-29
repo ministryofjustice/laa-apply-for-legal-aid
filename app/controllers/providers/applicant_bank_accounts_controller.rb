@@ -2,13 +2,13 @@ module Providers
   class ApplicantBankAccountsController < ProviderBaseController
     def show
       applicant_accounts
-      applicant_bank_account_form
+      form
     end
 
     def update
-      if applicant_bank_account_form.valid?
-        reset_account_balance unless applicant_bank_account_form.applicant_bank_account?
-        return go_forward(applicant_bank_account_form.applicant_bank_account?)
+      if form.valid?
+        reset_account_balance unless form.applicant_bank_account?
+        return go_forward(form.applicant_bank_account?)
       end
       applicant_accounts
       render :show
@@ -16,7 +16,7 @@ module Providers
 
     private
 
-    def applicant_bank_account_form
+    def form
       @form ||= BinaryChoiceForm.call(
         journey: :provider,
         radio_buttons_input_name: :applicant_bank_account,
