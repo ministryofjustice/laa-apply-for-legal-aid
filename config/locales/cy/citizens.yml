@@ -32,7 +32,6 @@ cy:
       new:
         hint: stnuocca sgnivas edulcni ton oD
         field_set_header: "?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD"
-        error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
     banks:
       index:
         title: knab ruoy tceleS
@@ -150,6 +149,9 @@ cy:
         info: ".troppus laicnanif rof uoy no sdneped dna uoy htiw sevil ohw tluda
           ro dlihc a eb dluoc tnadneped A"
         extra_info: ".eno evah uoy fi rentrap ruoy edulcni ton oD"
+    has_offline_accounts:
+      new:
+        error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
     has_other_dependants:
       show:
         heading: "?stnadneped rehto yna evah uoy oD"

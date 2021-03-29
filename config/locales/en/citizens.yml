@@ -30,9 +30,6 @@ en:
       new:
         hint: Do not include savings accounts
         field_set_header: Do you have current accounts you cannot access online?
-    has_offline_accounts:
-      new:
-        error: Select yes if you have current accounts you cannot access online
     banks:
       index:
         title: Select your bank
@@ -141,6 +138,9 @@ en:
         page_heading: Do you have any dependants?
         info: A dependant could be a child or adult who lives with you and depends on you for financial support.
         extra_info: Do not include your partner if you have one.
+    has_offline_accounts:
+      new:
+        error: Select yes if you have current accounts you cannot access online
     has_other_dependants:
       show:
         heading: Do you have any other dependants?
