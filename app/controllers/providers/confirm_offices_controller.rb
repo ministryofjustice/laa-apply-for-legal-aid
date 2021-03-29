@@ -12,12 +12,10 @@ module Providers
 
     def update
       if form.valid?
-        if form.confirm_office?
-          return redirect_to providers_legal_aid_applications_path
-        else
-          current_provider.update!(selected_office: nil)
-          return redirect_to providers_select_office_path
-        end
+        return redirect_to providers_legal_aid_applications_path if form.confirm_office?
+
+        current_provider.update!(selected_office: nil)
+        return redirect_to providers_select_office_path
       end
 
       render :show

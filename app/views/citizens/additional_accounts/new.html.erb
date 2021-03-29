@@ -1,6 +1,6 @@
-<%= page_template page_title: t('.field_set_header'), template: :basic do %>
+<%= page_template page_title: t('.field_set_header'), template: :basic, show_errors_for: @offline_account_form do %>
   <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-                model: @form,
+                model: @offline_account_form,
                 url: citizens_additional_account_path(id: :update),
                 method: :patch,
                 local: true) do |form| %>

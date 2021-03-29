@@ -1,16 +1,17 @@
-  <%= page_template page_title: t('.header'), template: :basic do %>
-    <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-                  model: @form,
-                  url: citizens_additional_accounts_path,
-                  method: :post, local: true) do |form| %>
+<%= page_template page_title: t('.header'), template: :basic, show_errors_for: @additional_account_form do %>
+  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+                model: @additional_account_form,
+                url: citizens_additional_accounts_path,
+                method: :post,
+                local: true) do |form| %>
 
-        <%= form.govuk_collection_radio_buttons :additional_account,
-                                                yes_no_options,
-                                                :value,
-                                                :label,
-                                                hint: {text: t('.hint')},
-                                                legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
+    <%= form.govuk_collection_radio_buttons :additional_account,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            hint: {text: t('.hint')},
+                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
 
-      <%= next_action_buttons(form: form) %>
-    <% end %>
+    <%= next_action_buttons(form: form) %>
   <% end %>
+<% end %>

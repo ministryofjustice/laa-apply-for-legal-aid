@@ -1,6 +1,5 @@
 module Citizens
   class AdditionalAccountsController < CitizenBaseController
-
     def index
       legal_aid_application.update!(has_offline_accounts: nil)
       legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
@@ -18,12 +17,12 @@ module Citizens
 
     def new
       legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
-      has_offline_account_form
+      offline_account_form
     end
 
     def update
-      if has_offline_account_form.valid?
-        if has_offline_account_form.has_offline_accounts?
+      if offline_account_form.valid?
+        if offline_account_form.has_offline_accounts?
           offline_accounts_update
           return go_forward
         else
@@ -38,7 +37,7 @@ module Citizens
     private
 
     def additional_account_form
-      @form ||= BinaryChoiceForm.call(
+      @additional_account_form ||= BinaryChoiceForm.call(
         journey: :citizen,
         radio_buttons_input_name: :additional_account,
         action: :index,
@@ -46,8 +45,8 @@ module Citizens
       )
     end
 
-    def has_offline_account_form
-      @form ||= BinaryChoiceForm.call(
+    def offline_account_form
+      @offline_account_form ||= BinaryChoiceForm.call(
         journey: :citizen,
         radio_buttons_input_name: :has_offline_accounts,
         action: :new,
