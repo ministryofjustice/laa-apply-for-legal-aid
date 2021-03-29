@@ -92,9 +92,6 @@ gem 'rails_admin', '~> 2.1'
 # Manage security headers
 gem 'secure_headers'
 
-# Identify file types before uploads
-gem 'mimemagic'
-
 # DFE formbuilder
 gem 'govuk_design_system_formbuilder'
 
