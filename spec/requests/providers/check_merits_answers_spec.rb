@@ -122,8 +122,8 @@ RSpec.describe 'check merits answers requests', type: :request do
         let(:submit_button) { { continue_button: 'Continue' } }
 
         it 'updates the record' do
-          application.create_merits_assessment!
-          expect { subject }.to change { application.merits_assessment.reload.submitted_at }.from(nil)
+          application.create_chances_of_success!
+          expect { subject }.to change { application.chances_of_success.reload.submitted_at }.from(nil)
           expect(application.reload).to be_generating_reports
         end
       end

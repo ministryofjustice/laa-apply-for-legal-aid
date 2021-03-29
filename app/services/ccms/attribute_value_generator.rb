@@ -27,7 +27,7 @@ module CCMS
                                 |application
                                 |bank_account
                                 |lead_proceeding_type
-                                |merits_assessment
+                                |chances_of_success
                                 |opponent
                                 |other_assets_declaration
                                 |other_party
@@ -44,7 +44,7 @@ module CCMS
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
-    MERITS_ASSESSMENT = /^merits_assessment_(\S+)$/.freeze
+    CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
@@ -66,7 +66,7 @@ module CCMS
 
     attr_reader :legal_aid_application
 
-    delegate :merits_assessment,
+    delegate :chances_of_success,
              :vehicle,
              :used_delegated_functions?, to: :legal_aid_application
 
@@ -276,17 +276,17 @@ module CCMS
     def ccms_equivalent_prospects_of_success(_options)
       return unless ccms_equivalent_prospects_of_success_valid?
 
-      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:text]
+      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:text]
     end
 
     def ccms_code_prospects_of_success(_options)
       return unless ccms_equivalent_prospects_of_success_valid?
 
-      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym][:code]
+      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:code]
     end
 
     def ccms_equivalent_prospects_of_success_valid?
-      PROSPECTS_OF_SUCCESS[merits_assessment.success_prospect.to_sym].present?
+      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym].present?
     end
 
     def client_eligibility(_options)
@@ -371,6 +371,8 @@ module CCMS
         options[:appl_proceeding_type].__send__(Regexp.last_match(1))
       when BANK_REGEX
         options[:bank_acct].__send__(Regexp.last_match(1))
+      when CHANCES_OF_SUCCESS
+        options[:chances_of_success].__send__(Regexp.last_match(1))
       when VEHICLE_REGEX
         options[:vehicle].__send__(Regexp.last_match(1))
       when WAGE_SLIP_REGEX
@@ -383,8 +385,6 @@ module CCMS
         options[:opponent].__send__(Regexp.last_match(1))
       when OUTGOING
         legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
-      when MERITS_ASSESSMENT
-        options[:merits_assessment].__send__(Regexp.last_match(1))
       when SAVINGS_AMOUNT
         legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
       when OTHER_ASSETS_DECLARATION

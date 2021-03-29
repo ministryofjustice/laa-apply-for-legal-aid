@@ -9,7 +9,7 @@ module Reports
                :benefit_check_result,
                :ccms_submission,
                :created_at,
-               :merits_assessment,
+               :chances_of_success,
                :office,
                :other_assets_declaration,
                :outstanding_mortgage_amount,
@@ -59,7 +59,7 @@ module Reports
                :pretty_success_prospect,
                :success_prospect_details,
                :statement_of_case_uploaded?,
-               :submitted_at, to: :merits_assessment
+               :submitted_at, to: :chances_of_success
 
       delegate :firm,
                :username, to: :provider

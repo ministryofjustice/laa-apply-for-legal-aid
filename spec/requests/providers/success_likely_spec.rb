@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Providers::SuccessLikelyController, type: :request do
-  let(:merits_assessment) { create :merits_assessment }
-  let(:legal_aid_application) { create :legal_aid_application, merits_assessment: merits_assessment }
+  let(:chances_of_success) { create :chances_of_success }
+  let(:legal_aid_application) { create :legal_aid_application, chances_of_success: chances_of_success }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
@@ -24,10 +24,10 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
 
   describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
     let(:success_prospect) { :poor }
-    let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
+    let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
     let(:success_likely) { 'true' }
     let(:params) do
-      { merits_assessment: { success_likely: success_likely } }
+      { proceeding_merits_task_chances_of_success: { success_likely: success_likely } }
     end
     let(:submit_button) { {} }
     let(:next_url) { providers_legal_aid_application_check_merits_answers_path(legal_aid_application) }
@@ -40,15 +40,15 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
     end
 
     it 'sets success_likely to true' do
-      expect { subject }.to change { merits_assessment.reload.success_likely }.to(true)
+      expect { subject }.to change { chances_of_success.reload.success_likely }.to(true)
     end
 
     it 'sets success_prospect to likely' do
-      expect { subject }.to change { merits_assessment.reload.success_prospect }.to('likely')
+      expect { subject }.to change { chances_of_success.reload.success_prospect }.to('likely')
     end
 
     it 'sets success_prospect_details to nil' do
-      expect { subject }.to change { merits_assessment.reload.success_prospect_details }.to(nil)
+      expect { subject }.to change { chances_of_success.reload.success_prospect_details }.to(nil)
     end
 
     it 'redirects to next page' do
@@ -61,15 +61,15 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
       let(:success_likely) { 'false' }
 
       it 'sets success_likely to false' do
-        expect { subject }.to change { merits_assessment.reload.success_likely }.to(false)
+        expect { subject }.to change { chances_of_success.reload.success_likely }.to(false)
       end
 
       it 'does not change success_prospect' do
-        expect { subject }.not_to change { merits_assessment.reload.success_prospect }
+        expect { subject }.not_to change { chances_of_success.reload.success_prospect }
       end
 
       it 'does not change success_prospect_details' do
-        expect { subject }.not_to change { merits_assessment.reload.success_prospect_details }
+        expect { subject }.not_to change { chances_of_success.reload.success_prospect_details }
       end
 
       it 'redirects to next page' do
@@ -81,7 +81,7 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
         let(:success_prospect) { :likely }
 
         it 'sets success_prospect to nil' do
-          expect { subject }.to change { merits_assessment.reload.success_prospect }.to(nil)
+          expect { subject }.to change { chances_of_success.reload.success_prospect }.to(nil)
         end
       end
     end
@@ -97,6 +97,11 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
       it 'displays error' do
         subject
         expect(response.body).to include('govuk-error-summary')
+      end
+
+      it 'the response includes the error message' do
+        subject
+        expect(response.body).to include(I18n.t('activemodel.errors.models.proceeding_merits_task/chances_of_success.attributes.success_likely.blank'))
       end
     end
 
@@ -114,9 +119,9 @@ RSpec.describe Providers::SuccessLikelyController, type: :request do
 
       it 'updates the model' do
         subject
-        merits_assessment.reload
-        expect(merits_assessment.success_likely).to eq(true)
-        expect(merits_assessment.success_prospect).to eq('likely')
+        chances_of_success.reload
+        expect(chances_of_success.success_likely).to eq(true)
+        expect(chances_of_success.success_prospect).to eq('likely')
       end
     end
   end

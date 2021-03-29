@@ -193,8 +193,8 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's capital
-        merits_assessment_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
-        merits_assessment_h2: What happens next
+        chances_of_success_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
+        chances_of_success_h2: What happens next
         property: Property
     check_provider_answers:
       standard:
@@ -641,7 +641,7 @@ en:
             is single (unless their partner is the opponent in the case)
           title: "You can only use this service if your client:"
         use_ccms_para_html: Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications.
-    start_merits_assessments:
+    start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
         do_merits_of_case_qualify: |

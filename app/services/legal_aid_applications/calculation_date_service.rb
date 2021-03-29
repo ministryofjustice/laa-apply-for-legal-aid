@@ -3,7 +3,7 @@ module LegalAidApplications
     attr_accessor :legal_aid_application
 
     delegate(
-      :used_delegated_functions_on, :used_delegated_functions?, :merits_assessment, :applicant_receives_benefit?, :transaction_period_finish_on,
+      :used_delegated_functions_on, :used_delegated_functions?, :chances_of_success, :applicant_receives_benefit?, :transaction_period_finish_on,
       to: :legal_aid_application
     )
 
@@ -18,7 +18,7 @@ module LegalAidApplications
     def call
       return used_delegated_functions_on if used_delegated_functions?
 
-      return merits_assessment&.submitted_at&.to_date || Time.zone.today if applicant_receives_benefit?
+      return chances_of_success&.submitted_at&.to_date || Time.zone.today if applicant_receives_benefit?
 
       transaction_period_finish_on
     end

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :merits_assessment do
+  factory :chances_of_success, class: 'ProceedingMeritsTask::ChancesOfSuccess' do
     legal_aid_application
 
     trait :with_optional_text do

@@ -20,7 +20,7 @@ module Reports
                opponent: opponent,
                proceeding_types: proceeding_types,
                ccms_submission: ccms_submission,
-               merits_assessment: merits_assessment,
+               chances_of_success: chances_of_success,
                used_delegated_functions: used_delegated_functions,
                used_delegated_functions_on: used_delegated_functions_on,
                used_delegated_functions_reported_on: used_delegated_functions_reported_on,
@@ -88,8 +88,8 @@ module Reports
                bail_conditions_set_details: bail_conditions_set_details
       end
 
-      let(:merits_assessment) do
-        create :merits_assessment,
+      let(:chances_of_success) do
+        create :chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
                submitted_at: submitted_at

@@ -100,7 +100,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     # this has the potential to leak the applicant name
     # e.g. jane_smith_statement_of_case.doc, etc
   },
-  merits_assessments: {},
+  chances_of_successes: {},
   offices: {
     code: -> { Faker::Base.regexify(/^[0-9][A-Z][0-9]{3}[A-Z]$/) }
   },

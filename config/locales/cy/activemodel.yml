@@ -304,7 +304,7 @@ cy:
               blank: snoitcnuf detageled desu uoy etad eht retnE
               date_not_in_range: "%{months} erofeb eb tonnac snoitcnuf detageled desu
                 uoy etad ehT"
-        merits_assessment:
+        chances_of_success:
           attributes:
             application_purpose:
               blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE

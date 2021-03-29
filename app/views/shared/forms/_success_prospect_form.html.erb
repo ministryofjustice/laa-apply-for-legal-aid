@@ -7,7 +7,7 @@
     ) do |form| %>
 
   <%= form.govuk_radio_buttons_fieldset(:success_prospect, legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) do %>
-    <% MeritsAssessment.prospects_unlikely_to_succeed.each do |prospect| %>
+    <% ProceedingMeritsTask::ChancesOfSuccess.prospects_unlikely_to_succeed.each do |prospect| %>
       <%= form.govuk_radio_button :success_prospect, prospect,
                                   label: {text: t("shared.forms.success_prospect.#{prospect}")},
                                   hint: {text: t("shared.forms.success_prospect.hint.#{prospect}")} do %>

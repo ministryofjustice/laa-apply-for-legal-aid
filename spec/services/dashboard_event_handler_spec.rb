@@ -100,7 +100,7 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context 'merits_assessment_submitted' do
+  context 'chances_of_success_submitted' do
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)
       allow_any_instance_of(DashboardEventHandler).to receive(:provider_updated).and_call_original
@@ -109,8 +109,8 @@ RSpec.describe DashboardEventHandler do
     it 'fires the submitted applications job' do
       expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with('Applications').at_least(1).times
-      merits_assessment = create :merits_assessment
-      merits_assessment.submit!
+      chances_of_success = create :chances_of_success
+      chances_of_success.submit!
     end
   end
 

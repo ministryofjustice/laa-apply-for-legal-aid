@@ -4,12 +4,12 @@
     ) do %>
   <%= simple_format t('.do_merits_of_case_qualify') %>
 
-  <%= list_from_translation_path '.start_merits_assessments.show.do_merits_of_case_qualify_list' %>
+  <%= list_from_translation_path '.start_chances_of_successes.show.do_merits_of_case_qualify_list' %>
 
   <div class="govuk-!-padding-bottom-4"></div>
 
   <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_start_merits_assessment_path,
+        url: providers_legal_aid_application_start_chances_of_success_path,
         method: :patch,
         show_draft: true,
         continue_button_text: t('generic.continue')

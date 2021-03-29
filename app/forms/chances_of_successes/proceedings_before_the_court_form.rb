@@ -1,8 +1,8 @@
-module MeritsAssessments
+module ChancesOfSuccesses
   class ProceedingsBeforeTheCourtForm
     include BaseForm
 
-    form_for MeritsAssessment
+    form_for ProceedingMeritsTask::ChancesOfSuccess
 
     attr_accessor :proceedings_before_the_court, :details_of_proceedings_before_the_court
 

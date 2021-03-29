@@ -30,7 +30,7 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
     let(:success_prospect_details) { Faker::Lorem.paragraph }
     let(:params) do
       {
-        merits_assessment: {
+        proceeding_merits_task_chances_of_success: {
           success_prospect: success_prospect.to_s,
           success_prospect_details: success_prospect_details
         }
@@ -51,8 +51,8 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
         end
 
         it 'updates the record' do
-          expect(legal_aid_application.merits_assessment.reload.success_prospect).to eq(success_prospect)
-          expect(legal_aid_application.merits_assessment.reload.success_prospect_details).to eq(success_prospect_details)
+          expect(legal_aid_application.chances_of_success.reload.success_prospect).to eq(success_prospect)
+          expect(legal_aid_application.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
         end
 
         it 'redirects to the next page' do
@@ -68,8 +68,8 @@ RSpec.describe Providers::SuccessProspectsController, type: :request do
         end
 
         it 'updates the record' do
-          expect(legal_aid_application.merits_assessment.reload.success_prospect).to eq(success_prospect)
-          expect(legal_aid_application.merits_assessment.reload.success_prospect_details).to eq(success_prospect_details)
+          expect(legal_aid_application.chances_of_success.reload.success_prospect).to eq(success_prospect)
+          expect(legal_aid_application.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
         end
 
         it 'redirects to provider applications home page' do
