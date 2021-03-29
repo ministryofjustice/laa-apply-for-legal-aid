@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_113558) do
+ActiveRecord::Schema.define(version: 2021_03_23_153440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -309,6 +309,20 @@ ActiveRecord::Schema.define(version: 2021_03_23_113558) do
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
+  create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "application_purpose"
+    t.boolean "proceedings_before_the_court"
+    t.text "details_of_proceedings_before_the_court"
+    t.string "success_prospect"
+    t.text "success_prospect_details"
+    t.datetime "submitted_at"
+    t.boolean "success_likely"
+    t.index ["legal_aid_application_id"], name: "index_chances_of_successes_on_legal_aid_application_id"
+  end
+
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "debug_type"
     t.string "legal_aid_application_id"
@@ -453,20 +467,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_113558) do
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
     t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
-  end
-
-  create_table "merits_assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "application_purpose"
-    t.boolean "proceedings_before_the_court"
-    t.text "details_of_proceedings_before_the_court"
-    t.string "success_prospect"
-    t.text "success_prospect_details"
-    t.datetime "submitted_at"
-    t.boolean "success_likely"
-    t.index ["legal_aid_application_id"], name: "index_merits_assessments_on_legal_aid_application_id"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -733,12 +733,12 @@ ActiveRecord::Schema.define(version: 2021_03_23_113558) do
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
+  add_foreign_key "chances_of_successes", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
-  add_foreign_key "merits_assessments", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"

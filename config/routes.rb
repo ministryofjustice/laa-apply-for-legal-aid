@@ -211,7 +211,7 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
-      resource :start_merits_assessment, only: %i[show update]
+      resource :start_chances_of_success, only: %i[show update]
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
       resource :no_income_summary, only: %i[show update]
