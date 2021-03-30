@@ -1,6 +1,7 @@
 module Providers
   class RemoveDependantsController < ProviderBaseController
     def show
+      form
       dependant
     end
 
