@@ -112,7 +112,7 @@
                       <ns0:SequenceNumber>2</ns0:SequenceNumber>
                       <ns0:EntityName>CARS_AND_MOTOR_VEHICLES</ns0:EntityName>
                       <ns0:Instances>
-                        <ns0:InstanceLabel>the car and motor vehicle</ns0:InstanceLabel>
+                        <ns0:InstanceLabel>the cars &amp; motor vehicle1</ns0:InstanceLabel>
                         <ns0:Attributes>
                           <ns0:Attribute>
                             <ns0:Attribute>CARANDVEH_INPUT_B_14WP2_28A</ns0:Attribute>

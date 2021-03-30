@@ -277,12 +277,12 @@ module CCMS
       def generate_bank_accounts_entity(xml, sequence_no, config)
         xml.__send__('ns0:SequenceNumber', sequence_no)
         xml.__send__('ns0:EntityName', config[:entity_name])
-        bank_accounts.each { |acct| generate_bank_account_instance(xml, acct, config) }
+        bank_accounts.each_with_index { |acct, index| generate_bank_account_instance(xml, acct, config, index) }
       end
 
-      def generate_bank_account_instance(xml, bank_account, config)
+      def generate_bank_account_instance(xml, bank_account, config, index)
         xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', bank_account.display_name)
+          xml.__send__('ns0:InstanceLabel', bank_account.ccms_instance_name(index))
           xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], bank_acct: bank_account) }
           # xml.__send__('ns0:Attributes') { generate_attributes_for(xml, config[:yaml_section], bank_acct: bank_account) }
         end

@@ -145,6 +145,12 @@ module CCMS
             it 'creates the entity' do
               expect(xml).to have_means_entity 'BANKACC'
             end
+
+            it 'adds the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "BANKACC"]/Instances/InstanceLabel').text
+              expect(instance_label).to include 'the bank account1'
+            end
           end
 
           context 'no bank accounts present' do
@@ -203,12 +209,24 @@ module CCMS
             block = XmlExtractor.call(xml, :change_in_circumstance, 'CHANGE_CIRC_INPUT_T_33WP3_6A')
             expect(block).to have_text_response '.'
           end
+
+          it 'includes the correct ccms instance label ' do
+            doc = Nokogiri::XML(xml).remove_namespaces!
+            instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CHANGE_IN_CIRCUMSTANCE"]/Instances/InstanceLabel').text
+            expect(instance_label).to eq 'the change in circumstance1'
+          end
         end
 
         context 'entity CARS_AND_MOTOR_VEHICLES' do
           context 'the applicant has a car' do
             it 'generates the entity' do
               expect(xml).to have_means_entity 'CARS_AND_MOTOR_VEHICLES'
+            end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CARS_AND_MOTOR_VEHICLES"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'the cars & motor vehicle1'
             end
           end
 
@@ -229,6 +247,12 @@ module CCMS
             before { legal_aid_application.savings_amount.update! other_person_account: 3_663_377 }
             it 'generates the entity' do
               expect(xml).to have_means_entity 'THIRDPARTACC'
+            end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "THIRDPARTACC"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'the third party bank account1'
             end
           end
 
@@ -287,6 +311,12 @@ module CCMS
             it 'generates the entity block' do
               expect(xml).to have_means_entity 'CLICAPITAL'
             end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CLICAPITAL"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq "the client's capital bond1"
+            end
           end
 
           context 'applicant does not have capital bonds' do
@@ -307,6 +337,12 @@ module CCMS
           context 'applicant has land' do
             it 'generates entity block' do
               expect(xml).to have_means_entity 'LAND'
+            end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "LAND"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'the land1'
             end
           end
 
@@ -347,6 +383,12 @@ module CCMS
           context 'applicant has vehicle' do
             it 'generates the entity block' do
               expect(xml).to have_means_entity 'CAR_USED'
+            end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "CAR_USED"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'the car used1'
             end
           end
 
@@ -403,6 +445,12 @@ module CCMS
           context 'applicant has life assurance' do
             it 'generates entity block' do
               expect(xml).to have_means_entity 'LIFE_ASSURANCE'
+            end
+
+            it 'adds the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "LIFE_ASSURANCE"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'life assurance & endowment policy1'
             end
           end
 
@@ -462,6 +510,12 @@ module CCMS
           context 'applicant is the beneficiary of a trust' do
             it 'generates the entity block' do
               expect(xml).to have_means_entity 'TRUST'
+            end
+
+            it 'includes the correct ccms instance label ' do
+              doc = Nokogiri::XML(xml).remove_namespaces!
+              instance_label = doc.xpath(' //MeansAssesments//AssesmentDetails//Entity[EntityName = "TRUST"]/Instances/InstanceLabel').text
+              expect(instance_label).to eq 'the trust1'
             end
           end
 
