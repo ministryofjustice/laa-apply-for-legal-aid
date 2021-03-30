@@ -181,7 +181,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   end
 
   def calculated_date(month_number)
-    Time.zone.today.at_beginning_of_month - month_number.months
+    __send__("month#{month_number}".to_sym)
   end
 
   def checkbox_for(category)

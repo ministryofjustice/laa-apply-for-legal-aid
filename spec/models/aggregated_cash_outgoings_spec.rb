@@ -375,7 +375,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
           expect { subject }.to change { CashTransaction.count }.by(0)
         end
 
-        it 'updates the three previous months according to current date' do
+        it 'updates the three previous months according to applicaiton calculation date' do
           subject
 
           categories.each do |category|
@@ -383,7 +383,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
             transactions.each_with_index do |transaction, i|
               date = transaction.transaction_date
-              historical_date = Time.zone.today.at_beginning_of_month - (i + 1).months
+              historical_date = application.calculation_date.at_beginning_of_month - (i + 1).months
               expect(date).to eq historical_date
             end
           end
