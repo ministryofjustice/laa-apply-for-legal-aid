@@ -21,9 +21,7 @@ module Providers
       render :show
     end
 
-    def invalid_login
-      form
-    end
+    def invalid_login; end
 
     private
 

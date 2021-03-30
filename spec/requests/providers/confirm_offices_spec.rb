@@ -14,6 +14,19 @@ RSpec.describe 'provider confirm office', type: :request do
       it_behaves_like 'a provider not authenticated'
     end
 
+    context 'invalid login' do
+      let(:provider) { create :provider, invalid_login_details: 'role' }
+
+      before do
+        login_as provider
+        subject
+      end
+
+      it 'redirects to the invalid login page' do
+        expect(response).to redirect_to providers_invalid_login_path
+      end
+    end
+
     context 'when the provider is authenticated' do
       before do
         login_as provider
