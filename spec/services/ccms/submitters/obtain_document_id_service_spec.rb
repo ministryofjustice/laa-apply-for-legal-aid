@@ -8,7 +8,7 @@ module CCMS
                :with_applicant,
                :with_proceeding_types,
                :with_opponent,
-               :with_merits_assessment,
+               :with_chances_of_success,
                :with_transaction_period,
                :with_cfe_v3_result
       end

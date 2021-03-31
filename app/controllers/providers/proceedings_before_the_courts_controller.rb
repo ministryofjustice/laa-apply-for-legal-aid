@@ -1,11 +1,11 @@
 module Providers
   class ProceedingsBeforeTheCourtsController < ProviderBaseController
     def show
-      @form = MeritsAssessments::ProceedingsBeforeTheCourtForm.new(model: merits_assessment)
+      @form = ChancesOfSuccesses::ProceedingsBeforeTheCourtForm.new(model: chances_of_success)
     end
 
     def update
-      @form = MeritsAssessments::ProceedingsBeforeTheCourtForm.new(proceedings_before_the_court_params)
+      @form = ChancesOfSuccesses::ProceedingsBeforeTheCourtForm.new(proceedings_before_the_court_params)
 
       render :show unless save_continue_or_draft(@form)
     end
@@ -13,13 +13,13 @@ module Providers
     private
 
     def proceedings_before_the_court_params
-      merge_with_model(merits_assessment) do
-        params.require(:merits_assessment).permit(:proceedings_before_the_court, :details_of_proceedings_before_the_court)
+      merge_with_model(chances_of_success) do
+        params.require(:proceeding_merits_task_chances_of_success).permit(:proceedings_before_the_court, :details_of_proceedings_before_the_court)
       end
     end
 
-    def merits_assessment
-      @merits_assessment ||= legal_aid_application.merits_assessment || legal_aid_application.build_merits_assessment
+    def chances_of_success
+      @chances_of_success ||= legal_aid_application.chances_of_success || legal_aid_application.build_chances_of_success
     end
   end
 end

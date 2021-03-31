@@ -260,16 +260,16 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#summary_state' do
-    let(:merits_assessment) { nil }
-    subject(:legal_aid_application) { create :legal_aid_application, merits_assessment: merits_assessment }
+    let(:chances_of_success) { nil }
+    subject(:legal_aid_application) { create :legal_aid_application, chances_of_success: chances_of_success }
 
     it 'returns :in_progress summary state' do
       expect(legal_aid_application.summary_state).to eq(:in_progress)
     end
 
-    context 'with merits_assessment object' do
+    context 'with chances_of_success object' do
       let(:submitted_at) { nil }
-      let(:merits_assessment) { create :merits_assessment, submitted_at: submitted_at }
+      let(:chances_of_success) { create :chances_of_success, submitted_at: submitted_at }
 
       it 'still returns :in_progress summary state' do
         expect(legal_aid_application.summary_state).to eq(:in_progress)
@@ -516,8 +516,8 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BenefitCheckResult.count).not_to be_zero
       expect(OtherAssetsDeclaration.count).not_to be_zero
       expect(SavingsAmount.count).not_to be_zero
-      expect(MeritsAssessment.count).not_to be_zero
       expect(ApplicationMeritsTask::StatementOfCase.count).not_to be_zero
+      expect(ProceedingMeritsTask::ChancesOfSuccess.count).not_to be_zero
       expect(Applicant.count).not_to be_zero
       expect(BankAccount.count).not_to be_zero
       expect(BankTransaction.count).not_to be_zero
@@ -530,8 +530,8 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BenefitCheckResult.count).to be_zero
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero
-      expect(MeritsAssessment.count).to be_zero
       expect(ApplicationMeritsTask::StatementOfCase.count).to be_zero
+      expect(ProceedingMeritsTask::ChancesOfSuccess.count).to be_zero
       expect(Applicant.count).to be_zero
       expect(BankAccount.count).to be_zero
       expect(BankTransaction.count).to be_zero

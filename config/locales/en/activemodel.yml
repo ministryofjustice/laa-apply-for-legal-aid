@@ -213,6 +213,20 @@ en:
               not_a_number: Value must be an amount of money, like 1,000
               too_many_decimals: Value must not include more than 2 decimal numbers
               less_than_threshold: Select no if they have assets worth less than £8,000
+        chances_of_success:
+          attributes:
+            application_purpose:
+              blank: Enter details of why your client is applying for legal aid
+            details_of_proceedings_before_the_court:
+              blank: Enter details of the proceedings currently before the court
+            proceedings_before_the_court:
+              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+            success_prospect:
+              blank: Select the chance of a successful outcome
+            success_likely:
+              blank: Select yes if the chance of a successful outcome is 50% or better
+            success_prospect_details:
+              blank: Tell us why legal aid should be granted
         dwp_override:
           attributes:
             passporting_benefit:
@@ -308,20 +322,6 @@ en:
               date_is_in_the_future: The date you used delegated functions must be in the past
               blank: Enter the date you used delegated functions
               date_not_in_range: "The date you used delegated functions cannot be before %{months}"
-        merits_assessment:
-          attributes:
-            application_purpose:
-              blank: Enter details of why your client is applying for legal aid
-            details_of_proceedings_before_the_court:
-              blank: Enter details of the proceedings currently before the court
-            proceedings_before_the_court:
-              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
-            success_prospect:
-              blank: Select the chance of a successful outcome
-            success_likely:
-              blank: Select yes if the chance of a successful outcome is 50% or better
-            success_prospect_details:
-              blank: Tell us why legal aid should be granted
         other_assets_declaration:
           attributes:
             valuable_items_value:
@@ -338,6 +338,7 @@ en:
               blank: Enter the estimated value of estate
               greater_than_or_equal_to: Estimated money assets value must be 0 or more
               not_a_number: Estimated estate value must be an amount of money, like 60,000
+
               too_many_decimals: Estimated money assets value must not include more than 2 decimal numbers
             money_owed_value:
               blank: Enter the estimated value of money owed
@@ -378,6 +379,20 @@ en:
           attributes:
             base:
               none_selected: Select if your client has received any of these payments
+        proceeding_merits_task/chances_of_success:
+          attributes:
+            application_purpose:
+              blank: Enter details of why your client is applying for legal aid
+            details_of_proceedings_before_the_court:
+              blank: Enter details of the proceedings currently before the court
+            proceedings_before_the_court:
+              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
+            success_prospect:
+              blank: Select the chance of a successful outcome
+            success_likely:
+              blank: Select yes if the chance of a successful outcome is 50% or better
+            success_prospect_details:
+              blank: Tell us why legal aid should be granted
         provider:
           attributes:
             selected_office_id:

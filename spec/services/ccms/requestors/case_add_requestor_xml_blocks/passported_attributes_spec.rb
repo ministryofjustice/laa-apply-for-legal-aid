@@ -36,7 +36,7 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
-        let(:merits_assessment) { create :merits_assessment, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
@@ -387,7 +387,7 @@ module CCMS
 
         context 'FAMILY_PROSPECTS_OF_SUCCESS' do
           it 'returns the ccms equivalent prospect of success for likely' do
-            allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('likely')
+            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('likely')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Good'
           end
@@ -398,19 +398,19 @@ module CCMS
           end
 
           it 'returns the ccms equivalent prospect of success for uncertain' do
-            allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('uncertain')
+            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('uncertain')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Uncertain'
           end
 
           it 'returns the ccms equivalent prospect of success for poor' do
-            allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('poor')
+            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('poor')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Poor'
           end
 
           it 'returns the ccms equivalent prospect of success for borderline' do
-            allow(legal_aid_application.merits_assessment).to receive(:success_prospect).and_return('borderline')
+            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('borderline')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Borderline'
           end

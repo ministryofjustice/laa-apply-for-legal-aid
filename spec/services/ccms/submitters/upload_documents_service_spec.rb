@@ -6,7 +6,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService do
            :with_applicant,
            :with_proceeding_types,
            :with_opponent,
-           :with_merits_assessment,
+           :with_chances_of_success,
            :with_transaction_period,
            :with_means_report,
            :with_merits_report,

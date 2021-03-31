@@ -28,7 +28,7 @@ en:
         done_all_needed:
           <<: *true_false
         improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
-      merits_assessment:
+      chances_of_success:
         application_purpose: Please give details of why your client is applying for legal aid
         details_of_proceedings_before_the_court: Please give details.
         proceedings_before_the_court:

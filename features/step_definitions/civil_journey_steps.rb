@@ -228,7 +228,7 @@ Given('I have completed the non-passported means assessment and start the merits
     :with_benefits_transactions
   )
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_start_merits_assessment_path(@legal_aid_application))
+  visit(providers_legal_aid_application_start_chances_of_success_path(@legal_aid_application))
 end
 
 Given('I start the merits application') do

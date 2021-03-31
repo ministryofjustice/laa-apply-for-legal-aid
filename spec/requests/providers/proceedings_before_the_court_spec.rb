@@ -30,7 +30,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
     let(:details_of_proceedings_before_the_court) { Faker::Lorem.paragraph }
     let(:params) do
       {
-        merits_assessment: {
+        proceeding_merits_task_chances_of_success: {
           proceedings_before_the_court: proceedings_before_the_court.to_s,
           details_of_proceedings_before_the_court: details_of_proceedings_before_the_court
         }
@@ -51,8 +51,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         end
 
         it 'updates the record' do
-          expect(legal_aid_application.merits_assessment.reload.proceedings_before_the_court).to eq(proceedings_before_the_court)
-          expect(legal_aid_application.merits_assessment.reload.details_of_proceedings_before_the_court).to eq(details_of_proceedings_before_the_court)
+          expect(legal_aid_application.chances_of_success.reload.proceedings_before_the_court).to eq(proceedings_before_the_court)
+          expect(legal_aid_application.chances_of_success.reload.details_of_proceedings_before_the_court).to eq(details_of_proceedings_before_the_court)
         end
 
         it 'redirects to the next page' do
@@ -68,8 +68,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
         end
 
         it 'updates the record' do
-          expect(legal_aid_application.merits_assessment.reload.proceedings_before_the_court).to eq(proceedings_before_the_court)
-          expect(legal_aid_application.merits_assessment.reload.details_of_proceedings_before_the_court).to eq(details_of_proceedings_before_the_court)
+          expect(legal_aid_application.chances_of_success.reload.proceedings_before_the_court).to eq(proceedings_before_the_court)
+          expect(legal_aid_application.chances_of_success.reload.details_of_proceedings_before_the_court).to eq(details_of_proceedings_before_the_court)
         end
 
         it 'redirects to provider applications home page' do
@@ -94,7 +94,7 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
           end
 
           it 'the response includes the error message' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.merits_assessment.attributes.details_of_proceedings_before_the_court.blank'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.proceeding_merits_task/chances_of_success.attributes.details_of_proceedings_before_the_court.blank'))
           end
         end
       end

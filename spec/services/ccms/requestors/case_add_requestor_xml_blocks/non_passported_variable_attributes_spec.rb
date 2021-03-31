@@ -37,13 +37,13 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let(:merits_assessment) { legal_aid_application.merits_assessment }
+        let(:chances_of_success) { legal_aid_application.chances_of_success }
         let(:applicant) { legal_aid_application.applicant }
         let(:percentage_home) { rand(1...99.0).round(2) }
 
         context 'family prospects' do
           context '50% or better' do
-            before { merits_assessment.update! success_prospect: 'likely' }
+            before { chances_of_success.update! success_prospect: 'likely' }
             let(:expected_results) do
               [
                 ['FAM_PROSP_50_OR_BETTER', true],
@@ -64,7 +64,7 @@ module CCMS
           end
 
           context 'marginal' do
-            before { merits_assessment.update! success_prospect: 'marginal' }
+            before { chances_of_success.update! success_prospect: 'marginal' }
             let(:expected_results) do
               [
                 ['FAM_PROSP_50_OR_BETTER', false],
@@ -85,7 +85,7 @@ module CCMS
           end
 
           context 'poor' do
-            before { merits_assessment.update! success_prospect: 'poor' }
+            before { chances_of_success.update! success_prospect: 'poor' }
             let(:expected_results) do
               [
                 ['FAM_PROSP_50_OR_BETTER', false],
@@ -106,7 +106,7 @@ module CCMS
           end
 
           context 'borderline' do
-            before { merits_assessment.update! success_prospect: 'borderline' }
+            before { chances_of_success.update! success_prospect: 'borderline' }
             let(:expected_results) do
               [
                 ['FAM_PROSP_50_OR_BETTER', false],
@@ -127,7 +127,7 @@ module CCMS
           end
 
           context 'not_known' do
-            before { merits_assessment.update! success_prospect: 'not_known' }
+            before { chances_of_success.update! success_prospect: 'not_known' }
             let(:expected_results) do
               [
                 ['FAM_PROSP_50_OR_BETTER', false],
@@ -742,7 +742,7 @@ module CCMS
 
           examples.each do |test|
             context "is set to #{test[:input]}" do
-              before { merits_assessment.update! success_prospect: test[:input] }
+              before { chances_of_success.update! success_prospect: test[:input] }
 
               it { is_expected.to have_text_response test[:result] }
               it { is_expected.to_not be_user_defined }

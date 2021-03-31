@@ -381,8 +381,8 @@ module CCMS
                                            :proceeding_merits,
                                            appl_proceeding_type: application_proceeding_type,
                                            proceeding: application_proceeding_type.proceeding_type,
-                                           merits_assessment: @legal_aid_application.merits_assessment,
-                                           opponent: @legal_aid_application.opponent)
+                                           opponent: @legal_aid_application.opponent,
+                                           chances_of_success: @legal_aid_application.chances_of_success)
           end
         end
       end

@@ -2,8 +2,8 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps
       STEPS = {
-        start_merits_assessments: {
-          path: ->(application) { urls.providers_legal_aid_application_start_merits_assessment_path(application) },
+        start_chances_of_successes: {
+          path: ->(application) { urls.providers_legal_aid_application_start_chances_of_success_path(application) },
           forward: :date_client_told_incidents,
           check_answers: :check_merits_answers
         },
@@ -34,7 +34,7 @@ module Flow
         },
         success_likely: {
           path: ->(application) { urls.providers_legal_aid_application_success_likely_index_path(application) },
-          forward: ->(application) { application.merits_assessment.success_likely? ? :check_merits_answers : :success_prospects }
+          forward: ->(application) { application.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects }
         },
         success_prospects: {
           path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },

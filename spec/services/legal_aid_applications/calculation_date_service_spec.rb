@@ -4,7 +4,7 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   let(:used_delegated_functions_on) { Faker::Date.backward }
   let(:transaction_period_finish_on) { Faker::Date.backward }
   let(:merits_submitted_at) { Faker::Date.backward }
-  let(:merits_assessment) { create :merits_assessment, submitted_at: merits_submitted_at }
+  let(:chances_of_success) { create :chances_of_success, submitted_at: merits_submitted_at }
   let(:applicant_receives_benefit) { Faker::Boolean.boolean }
   let(:benefit_check_result) { create :benefit_check_result, result: applicant_receives_benefit ? 'yes' : 'no' }
   let(:legal_aid_application) do
@@ -12,7 +12,7 @@ RSpec.describe LegalAidApplications::CalculationDateService do
            used_delegated_functions_on: used_delegated_functions_on,
            used_delegated_functions: used_delegated_functions,
            transaction_period_finish_on: transaction_period_finish_on,
-           merits_assessment: merits_assessment,
+           chances_of_success: chances_of_success,
            benefit_check_result: benefit_check_result
   end
 

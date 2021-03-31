@@ -1,8 +1,8 @@
-module MeritsAssessments
+module ChancesOfSuccesses
   class SuccessProspectForm
     include BaseForm
 
-    form_for MeritsAssessment
+    form_for ProceedingMeritsTask::ChancesOfSuccess
 
     SUCCESS_PROSPECT_DETAILS = %i[
       success_prospect_details_marginal

@@ -112,7 +112,7 @@
     <%= t '.case-details-heading' %>
   </h2>
 
-  <div class='govuk-body'><%= merits_assessment.details_of_proceedings_before_the_court %></div>
+  <div class='govuk-body'><%= chances_of_success.details_of_proceedings_before_the_court %></div>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
     <%= check_answer_link(
@@ -132,7 +132,7 @@
           name: :success_likely,
           url: providers_legal_aid_application_success_likely_index_path(@legal_aid_application),
           question: t('.items.prospects_of_success'),
-          answer: yes_no(merits_assessment.success_likely),
+          answer: yes_no(chances_of_success.success_likely),
           read_only: read_only
         ) %>
   </dl>
@@ -142,10 +142,10 @@
           name: :success_prospect,
           url: providers_legal_aid_application_success_likely_index_path(@legal_aid_application),
           question: t('.items.success_prospect'),
-          answer: t("shared.forms.success_prospect.#{merits_assessment.success_prospect}"),
+          answer: t("shared.forms.success_prospect.#{chances_of_success.success_prospect}"),
           read_only: read_only
-        ) unless merits_assessment.success_likely? %>
+        ) unless chances_of_success.success_likely? %>
   </dl>
 
-  <div class='govuk-body'><%= merits_assessment.success_prospect_details %></div>
+  <div class='govuk-body'><%= chances_of_success.success_prospect_details %></div>
 </section>

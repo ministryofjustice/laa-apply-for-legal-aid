@@ -190,7 +190,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
         it 'redirects to next page' do
-          expect(subject).to redirect_to(providers_legal_aid_application_start_merits_assessment_path)
+          expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
         end
       end
 

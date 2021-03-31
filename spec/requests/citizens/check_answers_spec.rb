@@ -94,7 +94,7 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
-    it 'changes the provider step to start_merits_assessment' do
+    it 'changes the provider step to start_chances_of_success' do
       subject
       expect(legal_aid_application.reload.provider_step).to eq('client_completed_means')
     end

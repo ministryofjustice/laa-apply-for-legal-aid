@@ -380,15 +380,15 @@ FactoryBot.define do
       other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
-    trait :with_merits_assessment do
+    trait :with_chances_of_success do
       after(:create) do |application|
-        create(:merits_assessment, :with_optional_text, legal_aid_application: application)
+        create(:chances_of_success, :with_optional_text, legal_aid_application: application)
       end
     end
 
-    trait :with_merits_assessment_submitted_today do
+    trait :with_chances_of_success_submitted_today do
       after(:create) do |application|
-        create(:merits_assessment, :with_optional_text, submitted_at: Time.zone.today, legal_aid_application: application)
+        create(:chances_of_success, :with_optional_text, submitted_at: Time.zone.today, legal_aid_application: application)
       end
     end
 
@@ -437,7 +437,7 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_merits_assessment
+      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -461,7 +461,7 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_merits_assessment
+      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -580,7 +580,7 @@ FactoryBot.define do
 
     trait :at_checking_merits_answers do
       with_proceeding_types
-      with_merits_assessment
+      with_chances_of_success
       with_merits_statement_of_case
 
       before(:create) do |application|
