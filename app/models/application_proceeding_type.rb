@@ -26,11 +26,18 @@ class ApplicationProceedingType < ApplicationRecord
   end
 
   def add_default_substantive_scope_limitation
-    application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_substantive_scope_limitation)
+    new_scope_limitation = AssignedSubstantiveScopeLimitation.new(scope_limitation: default_substantive_scope_limitation)
+    add_scope_limitation_unless_duplicate new_scope_limitation
   end
 
   def add_default_delegated_functions_scope_limitation
-    application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_delegated_functions_scope_limitation)
+    new_scope_limitation = AssignedDfScopeLimitation.new(scope_limitation: default_delegated_functions_scope_limitation)
+    add_scope_limitation_unless_duplicate new_scope_limitation
+  end
+
+  def add_scope_limitation_unless_duplicate(new_scope_limitation)
+    duplicated = application_proceeding_types_scope_limitations.map(&:scope_limitation_id).include?(new_scope_limitation.scope_limitation_id)
+    application_proceeding_types_scope_limitations << new_scope_limitation unless duplicated
   end
 
   def remove_default_delegated_functions_scope_limitation
