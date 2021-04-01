@@ -941,3 +941,28 @@ Feature: Civil application journeys
     Then I scroll down
     Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
+
+  @javascript @vcr
+  Scenario: Allows return to, and proceed from, Delegated Function date view
+    Given I start the journey as far as the applicant page
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    Then I enter a postcode 'SW1H 9EA'
+    Then I click find address
+    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Non-molestation order'
+    Then proceeding suggestions has results
+    Then I select a proceeding type and continue
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose 'Yes'
+    Then I enter the 'used delegated functions on' date of 5 days ago
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    When I click link "Back"
+    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
