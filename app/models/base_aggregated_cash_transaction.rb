@@ -16,9 +16,10 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
   attr_accessor :month1, :month2, :month3
 
-  def initialize
+  def initialize(legal_aid_application_id:)
     super
-    @month1 = Time.zone.today.beginning_of_month - 1.month
+    legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
+    @month1 = legal_aid_application.calculation_date.beginning_of_month - 1.month
     @month2 = month1 - 1.month
     @month3 = month2 - 1.month
   end
@@ -52,7 +53,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
     def find_by(legal_aid_application_id:)
       transactions = find_transactions(legal_aid_application_id)
-      model = new
+      model = new(legal_aid_application_id: legal_aid_application_id)
       model.none_selected = true
       transactions.each { |trx| populate_attribute(model, trx) }
       model
@@ -180,7 +181,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   end
 
   def calculated_date(month_number)
-    Time.zone.today.at_beginning_of_month - month_number.months
+    __send__("month#{month_number}".to_sym)
   end
 
   def checkbox_for(category)
