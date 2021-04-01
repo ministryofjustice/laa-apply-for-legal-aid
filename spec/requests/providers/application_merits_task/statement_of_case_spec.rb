@@ -75,7 +75,7 @@ module Providers
 
         it 'redirects to the next page' do
           subject
-          expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path(legal_aid_application)
+          expect(response).to redirect_to providers_legal_aid_application_chances_of_success_index_path(legal_aid_application)
         end
 
         context 'uploading a file' do

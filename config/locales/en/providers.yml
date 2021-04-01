@@ -250,6 +250,10 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
+    proceeding_merits_task:
+      chances_of_success:
+        index:
+          h1-heading: Is the chance of a successful outcome 50% or better?
     application_merits_task:
       date_client_told_incidents:
         show:
@@ -713,9 +717,6 @@ en:
     success_prospects:
       show:
         h1-heading: What is the chance of a successful outcome?
-    success_likely:
-      index:
-        h1-heading: Is the chance of a successful outcome 50% or better?
     transactions:
       disregarded_list:
         disregarded_list: Benefits disregarded from the financial eligibility calculation

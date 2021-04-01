@@ -205,7 +205,7 @@ Rails.application.routes.draw do
       resource :opponent_name, only: %i[show update]
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :proceedings_before_the_court, only: %i[show update]
-      resources :success_likely, only: %i[index create]
+      resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
       resource :success_prospects, only: %i[show update]
       resource :check_merits_answers, only: [:show] do
         patch :continue

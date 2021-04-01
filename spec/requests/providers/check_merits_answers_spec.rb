@@ -49,7 +49,7 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(response.body).to have_change_link(:incident_details, providers_legal_aid_application_date_client_told_incident_path)
         expect(response.body).to have_change_link(:opponent_details, providers_legal_aid_application_opponent_path)
         expect(response.body).to have_change_link(:statement_of_case, providers_legal_aid_application_statement_of_case_path(application))
-        expect(response.body).to have_change_link(:success_likely, providers_legal_aid_application_success_likely_index_path)
+        expect(response.body).to have_change_link(:success_likely, providers_legal_aid_application_chances_of_success_index_path)
       end
 
       it 'displays the question When did your client tell you about the latest domestic abuse incident' do
@@ -198,8 +198,8 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       describe 'redirection' do
-        it 'redirects to success_likely page' do
-          expect(response).to redirect_to providers_legal_aid_application_success_likely_index_path
+        it 'redirects to chances_of_success page' do
+          expect(response).to redirect_to providers_legal_aid_application_chances_of_success_index_path
         end
       end
     end
