@@ -266,6 +266,24 @@ en:
           police_notified_no: Tell us why the police have not been notified
           police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
           police_notified_blank: Tell us what action the police have taken
+      statement_of_cases:
+        show:
+          bullet-1: details of the latest domestic abuse incident
+          bullet-2: what's happened in the case so far
+          bullet-3: if any other parties are involved and their relationship to your client
+          bullet-4: why the proceedings are necessary
+          bullet-5: if anyone else might be able to fund the case
+          h1-heading: Provide a statement of case
+          size_hint: The maximum file size is 7MB. You can attach more than one file.
+          warning: Warning
+          warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
+        uploaded_files:
+          delete: Delete
+          filename: Filename
+          size: Size
+          status: Status
+          uploaded: Uploaded
+          title: Uploaded files
     declarations:
       show:
         h1-heading: Declaration
@@ -657,24 +675,7 @@ en:
             information about the opponent
             a statement of case
             the chances of a successful outcome
-    statement_of_cases:
-      show:
-        bullet-1: details of the latest domestic abuse incident
-        bullet-2: what's happened in the case so far
-        bullet-3: if any other parties are involved and their relationship to your client
-        bullet-4: why the proceedings are necessary
-        bullet-5: if anyone else might be able to fund the case
-        h1-heading: Provide a statement of case
-        size_hint: The maximum file size is 7MB. You can attach more than one file.
-        warning: Warning
-        warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
-      uploaded_files:
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
-        title: Uploaded files
+
     submitted_applications:
       show:
         back_home: Back to your applications

@@ -166,7 +166,7 @@ Rails.application.routes.draw do
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
-      resource :statement_of_case, only: %i[show update destroy]
+      resource :statement_of_case, only: %i[show update destroy], controller: 'application_merits_task/statement_of_cases'
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
