@@ -250,9 +250,10 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
-    date_client_told_incidents:
-      show:
-        h1-heading: Latest incident details
+    application_merits_task:
+      date_client_told_incidents:
+        show:
+          h1-heading: Latest incident details
     declarations:
       show:
         h1-heading: Declaration
