@@ -60,6 +60,30 @@ RSpec.describe ApplicationProceedingType do
       expect(assigned_scope_limitation).to eq(default_df_scope_limitation)
     end
 
+    context 'when the defaults have already been created' do
+      # simulates the user pushing the back button and re-submitting the DF page
+      before do
+        application_proceeding_type.add_default_substantive_scope_limitation
+        application_proceeding_type.add_default_delegated_functions_scope_limitation
+      end
+
+      context 'and add_default_substantive_scope_limitation is called again' do
+        before { application_proceeding_type.add_default_substantive_scope_limitation }
+
+        it 'ignores the duplicate request' do
+          expect(application_proceeding_type.assigned_scope_limitations).to eq [default_scope_limitation, default_df_scope_limitation]
+        end
+      end
+
+      context 'and add_default_delegated_functions_scope_limitation is called again' do
+        before { application_proceeding_type.add_default_delegated_functions_scope_limitation }
+
+        it 'ignores the duplicate request' do
+          expect(application_proceeding_type.assigned_scope_limitations).to eq [default_scope_limitation, default_df_scope_limitation]
+        end
+      end
+    end
+
     context 'deleting default delegated functions scope' do
       context 'when delegated functions exist' do
         before do
