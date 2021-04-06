@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_140533) do
+ActiveRecord::Schema.define(version: 2021_04_01_155950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -395,6 +395,15 @@ ActiveRecord::Schema.define(version: 2021_03_24_140533) do
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
 
+  create_table "involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "full_name"
+    t.date "date_of_birth"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
+  end
+
   create_table "irregular_incomes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
     t.string "income_type"
@@ -737,6 +746,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_140533) do
   add_foreign_key "chances_of_successes", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
+  add_foreign_key "involved_children", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
