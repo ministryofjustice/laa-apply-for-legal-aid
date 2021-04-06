@@ -35,12 +35,27 @@ module Providers
       @proceeding_types ||= legal_aid_application.proceeding_types
     end
 
+    def application_proceeding_type
+      ApplicationProceedingType.find_by(
+        legal_aid_application_id: legal_aid_application.id,
+        proceeding_type_id: proceeding_type.id
+      )
+    end
+
     def proceeding_type
       proceeding_types.find_by(code: form_params[:id])
     end
 
     def remove_proceeding
+      set_new_lead_proceeding if application_proceeding_type.lead_proceeding? && proceeding_types.count > 1
+
       LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
+    end
+
+    def set_new_lead_proceeding
+      new_lead = ApplicationProceedingType.where(lead_proceeding: false).find_by(legal_aid_application_id: legal_aid_application.id)
+      new_lead.lead_proceeding = true
+      new_lead.save!
     end
 
     def form_params
