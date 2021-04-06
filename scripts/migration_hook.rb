@@ -29,7 +29,8 @@ if rules_without_tables.any?
 end
 
 if tables_without_rules.any?
-  puts "Tables missing from rules: #{tables_without_rules.join(', ')}"
+  puts "Tables missing rules: #{tables_without_rules.join(', ')}"
+  puts 'You can find rules at db/anonymise/rules.rb'
   exit_status = 1
 end
 
