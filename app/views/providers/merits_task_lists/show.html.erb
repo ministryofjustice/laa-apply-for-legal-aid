@@ -1,0 +1,15 @@
+<%= page_template(
+    page_title: 'Hello',
+    back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) }
+    ) do %>
+
+  <h1><% page_title %></h1>
+  <div class="govuk-!-padding-bottom-4"></div>
+
+  <%= next_action_buttons_with_form(
+        url: providers_legal_aid_application_check_merits_answers_path,
+        method: :patch,
+        show_draft: true,
+        continue_button_text: t('generic.continue')
+      ) %>
+<% end %>

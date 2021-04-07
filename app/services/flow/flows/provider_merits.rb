@@ -40,6 +40,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },
           forward: :check_merits_answers
         },
+        merits_task_list: {
+          path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
+          forward: :check_merits_answers
+        },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
           forward: :end_of_applications
