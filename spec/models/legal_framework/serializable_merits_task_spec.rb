@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe SerializableMeritsTask, type: :model do
-    let(:serialized_merits_task) { described_class.new(:proceeding_children, [:application_children]) }
+    let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: [:application_children]) }
 
     describe '.new' do
       it 'instantiates a new object' do
@@ -12,7 +12,7 @@ module LegalFramework
       end
 
       context 'no dependencies' do
-        let(:serialized_merits_task) { described_class.new(:proceeding_children, []) }
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
 
         it ' stores empty array for dependencies' do
           expect(serialized_merits_task.dependencies).to be_empty
@@ -40,7 +40,7 @@ module LegalFramework
       end
 
       context 'successful' do
-        let(:serialized_merits_task) { described_class.new(:proceeding_children, []) }
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
 
         it 'marks the task as complete' do
           serialized_merits_task.mark_as_complete!

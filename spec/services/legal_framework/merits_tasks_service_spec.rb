@@ -21,6 +21,17 @@ module LegalFramework
         expect { service }.to change { Submission.count }.by(1)
       end
 
+      it 'adds a merits task list record' do
+        expect { service }.to change { MeritsTaskList.count }.by(1)
+      end
+
+      context 'merits task list exist' do
+        it 'does not add a new merits task list record' do
+          service
+          expect { service }.not_to change { MeritsTaskList.count }
+        end
+      end
+
       context 'error is raised' do
         before do
           allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_raise(SubmissionError, 'failed submission')
