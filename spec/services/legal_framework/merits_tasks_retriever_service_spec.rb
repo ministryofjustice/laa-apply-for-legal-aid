@@ -21,6 +21,12 @@ module LegalFramework
     end
 
     describe '.call' do
+      around do |example|
+        VCR.turn_off!
+        example.run
+        VCR.turn_on!
+      end
+
       context 'response received from Legal Framework API' do
         describe 'successful post' do
           before do
