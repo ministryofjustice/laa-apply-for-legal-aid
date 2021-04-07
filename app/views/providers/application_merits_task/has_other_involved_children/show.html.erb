@@ -1,0 +1,51 @@
+<%= page_template page_title: t('.page_title', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}"), template: :basic do %>
+
+  <% if @legal_aid_application.involved_children.count > 0 %>
+    <%= govuk_fieldset_header(size: 'l') { t('.existing', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}")} %>
+    <div class="govuk-summary-list">
+      <table class="govuk-table">
+        <thead class="goveuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header">Name</th>
+            <th class="govuk-table__header" colspan="3">Date of birth</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @legal_aid_application.involved_children.order(:created_at).each do |involved_child| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" id="involved_child<%= involved_child.id %>"><%= involved_child.full_name %></td>
+              <td class="govuk-table__cell"><%= involved_child.date_of_birth %></td>
+              <td class="govuk-table__cell"><%= link_to_accessible(
+                        t('generic.change'),
+                        providers_legal_aid_application_involved_child_path(@legal_aid_application, involved_child),
+                        class: 'govuk-link change-link',
+                        suffix: involved_child.full_name
+                      ) %></td>
+              <td class="govuk-table__cell"><%= link_to_accessible(
+                        t('.remove'),
+                        providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
+                        class: 'govuk-link change-link',
+                        suffix: involved_child.full_name) %></td>
+            </tr>
+          <% end %>
+          <body>
+      </table>
+    </div>
+  <% end %>
+
+  <%= form_with(
+        url: providers_legal_aid_application_has_other_involved_children_path,
+        model: @form,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <%= form.govuk_collection_radio_buttons :has_other_involved_child,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: {text: t(".add_another"), size: 'l', tag: 'h1'} %>
+
+    <%= next_action_buttons(form: form) %>
+  <% end %>
+<% end %>

@@ -255,6 +255,23 @@ en:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
     application_merits_task:
+      involved_children:
+        new:
+          page_title: Enter details of the children involved in this application
+        form:
+          name: Full name
+          date_of_birth: Date of birth
+        show:
+          page_title: Edit the details for %{name}
+      has_other_involved_children:
+        show:
+          page_title: You have added %{count}
+          existing: You have added %{count}
+          remove: Remove
+          add_another: Do you need to add another child?
+      remove_involved_child:
+        show:
+          page_title: Do you want to remove %{name} from the application?
       date_client_told_incidents:
         show:
           h1-heading: Latest incident details
@@ -288,6 +305,9 @@ en:
           status: Status
           uploaded: Uploaded
           title: Uploaded files
+    has_other_involved_children:
+      show:
+        error: Select either yes or no
     declarations:
       show:
         h1-heading: Declaration
