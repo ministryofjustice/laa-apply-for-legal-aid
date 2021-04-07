@@ -2,7 +2,7 @@ module LegalFramework
   class SerializableMeritsTask
     attr_reader :name, :state, :dependencies
 
-    def initialize(name, dependencies)
+    def initialize(name, dependencies: [])
       @name = name
       @dependencies = dependencies
       @state = @dependencies.any? ? :waiting_for_dependency : :not_started

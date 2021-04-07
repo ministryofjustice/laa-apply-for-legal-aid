@@ -1,7 +1,5 @@
 module LegalFramework
   class MeritsTasksRetrieverService < BaseService
-    include SimpleCommand
-
     ENDPOINT = '/merits_tasks'.freeze
 
     def url_path

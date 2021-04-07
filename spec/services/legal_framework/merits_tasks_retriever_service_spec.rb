@@ -31,10 +31,7 @@ module LegalFramework
 
           it 'returns a list of merits tasks' do
             outcome = service.call
-            expect(outcome).to be_success
-            expect(outcome.errors).to be_empty
-            expect(outcome.request_id).to eq submission.id
-            expect(outcome.result).to eq dummy_response_hash
+            expect(outcome).to eq dummy_response_hash
           end
         end
       end

@@ -36,7 +36,7 @@ module LegalFramework
 
     def serialize_application_tasks
       @lfa_response[:application][:tasks].each do |task_name, dependencies|
-        @tasks[:application] << SerializableMeritsTask.new(task_name, dependencies)
+        @tasks[:application] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
       end
     end
 
@@ -45,7 +45,7 @@ module LegalFramework
         ccms_code = proceeding_type_hash[:ccms_code].to_sym
         @tasks[ccms_code] = []
         proceeding_type_hash[:tasks].each do |task_name, dependencies|
-          @tasks[ccms_code] << SerializableMeritsTask.new(task_name, dependencies)
+          @tasks[ccms_code] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
         end
       end
     end
