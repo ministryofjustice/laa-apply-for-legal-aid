@@ -166,7 +166,7 @@ Rails.application.routes.draw do
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
-      resource :statement_of_case, only: %i[show update destroy]
+      resource :statement_of_case, only: %i[show update destroy], controller: 'application_merits_task/statement_of_cases'
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
@@ -201,11 +201,11 @@ Rails.application.routes.draw do
       resource :capital_income_assessment_result, only: %i[show update]
       resource :identify_types_of_income, only: %i[show update]
       resource :identify_types_of_outgoing, only: %i[show update]
-      resource :opponent, only: %i[show update]
+      resource :opponent, only: %i[show update], controller: 'application_merits_task/opponents'
       resource :opponent_name, only: %i[show update]
-      resource :date_client_told_incident, only: %i[show update]
+      resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :proceedings_before_the_court, only: %i[show update]
-      resources :success_likely, only: %i[index create]
+      resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
       resource :success_prospects, only: %i[show update]
       resource :check_merits_answers, only: [:show] do
         patch :continue

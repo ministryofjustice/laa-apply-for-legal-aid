@@ -29,11 +29,11 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: :success_likely,
+          forward: :chances_of_success,
           check_answers: :check_merits_answers
         },
-        success_likely: {
-          path: ->(application) { urls.providers_legal_aid_application_success_likely_index_path(application) },
+        chances_of_success: {
+          path: ->(application) { urls.providers_legal_aid_application_chances_of_success_index_path(application) },
           forward: ->(application) { application.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects }
         },
         success_prospects: {

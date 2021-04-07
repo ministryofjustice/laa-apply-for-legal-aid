@@ -250,9 +250,44 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
-    date_client_told_incidents:
-      show:
-        h1-heading: Latest incident details
+    proceeding_merits_task:
+      chances_of_success:
+        index:
+          h1-heading: Is the chance of a successful outcome 50% or better?
+    application_merits_task:
+      date_client_told_incidents:
+        show:
+          h1-heading: Latest incident details
+      opponents:
+        show:
+          h1-heading: Opponent details
+          opponent_name: Opponent's name
+          understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
+          warning_letter_sent: Has a warning letter been sent to the opponent?
+          police_notified: Have the police been notified?
+          bail_conditions_set: Have bail conditions been set?
+          bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
+          police_notified_no: Tell us why the police have not been notified
+          police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
+          police_notified_blank: Tell us what action the police have taken
+      statement_of_cases:
+        show:
+          bullet-1: details of the latest domestic abuse incident
+          bullet-2: what's happened in the case so far
+          bullet-3: if any other parties are involved and their relationship to your client
+          bullet-4: why the proceedings are necessary
+          bullet-5: if anyone else might be able to fund the case
+          h1-heading: Provide a statement of case
+          size_hint: The maximum file size is 7MB. You can attach more than one file.
+          warning: Warning
+          warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
+        uploaded_files:
+          delete: Delete
+          filename: Filename
+          size: Size
+          status: Status
+          uploaded: Uploaded
+          title: Uploaded files
     declarations:
       show:
         h1-heading: Declaration
@@ -336,7 +371,6 @@ en:
           html: Email <a href="mailto:%{team_email}">%{team_email}</a> if you think you do have permission to view this page.
         api_details_user_not_found:
           html: Your login details were not found on the CCMS system.  Please check your credentials and try again.  If the issue persists, please email <a href="mailto:%{team_email}">%{team_email}</a>
-
     legal_aid_applications:
       index:
         heading_1: Your applications
@@ -511,18 +545,7 @@ en:
         list_3: is not employed
         radio_no: No, I do not agree
         radio_yes: Yes, I agree
-    opponents:
-      show:
-        h1-heading: Opponent details
-        opponent_name: Opponent's name
-        understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
-        warning_letter_sent: Has a warning letter been sent to the opponent?
-        police_notified: Have the police been notified?
-        bail_conditions_set: Have bail conditions been set?
-        bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
-        police_notified_no: Tell us why the police have not been notified
-        police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
-        police_notified_blank: Tell us what action the police have taken
+
     opponent_names:
       show:
         h1-heading: What is the opponent's name?
@@ -656,24 +679,7 @@ en:
             information about the opponent
             a statement of case
             the chances of a successful outcome
-    statement_of_cases:
-      show:
-        bullet-1: details of the latest domestic abuse incident
-        bullet-2: what's happened in the case so far
-        bullet-3: if any other parties are involved and their relationship to your client
-        bullet-4: why the proceedings are necessary
-        bullet-5: if anyone else might be able to fund the case
-        h1-heading: Provide a statement of case
-        size_hint: The maximum file size is 7MB. You can attach more than one file.
-        warning: Warning
-        warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
-      uploaded_files:
-        delete: Delete
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
-        title: Uploaded files
+
     submitted_applications:
       show:
         back_home: Back to your applications
@@ -711,9 +717,6 @@ en:
     success_prospects:
       show:
         h1-heading: What is the chance of a successful outcome?
-    success_likely:
-      index:
-        h1-heading: Is the chance of a successful outcome 50% or better?
     transactions:
       disregarded_list:
         disregarded_list: Benefits disregarded from the financial eligibility calculation
