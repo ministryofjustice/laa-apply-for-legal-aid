@@ -20,14 +20,16 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
   describe 'PATCH /providers/:application_id/has_other_dependants' do
     let(:params) do
       {
-        other_dependant: other_dependant
+        binary_choice_form: {
+          has_other_dependant: has_other_dependant
+        }
       }
     end
 
     subject { patch providers_legal_aid_application_has_other_dependants_path(legal_aid_application), params: params }
 
     context 'choose yes' do
-      let(:other_dependant) { 'true' }
+      let(:has_other_dependant) { 'true' }
 
       it 'redirects to the page to add another dependant' do
         expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
@@ -35,7 +37,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     end
 
     context 'choose no' do
-      let(:other_dependant) { 'false' }
+      let(:has_other_dependant) { 'false' }
 
       it 'redirects to the outgoings summary page' do
         expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
@@ -43,7 +45,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     end
 
     context 'choose something else' do
-      let(:other_dependant) { 'not sure' }
+      let(:has_other_dependant) { 'not sure' }
 
       it 'show errors' do
         expect(response.body).to include(I18n.t('providers.has_other_dependants.show.error'))
@@ -60,7 +62,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
 
     context 'while provider checking answers of citizen and more dependants' do
       let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
-      let(:other_dependant) { 'true' }
+      let(:has_other_dependant) { 'true' }
 
       it 'redirects to the page to add another dependant' do
         expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
@@ -69,7 +71,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
 
     context 'while provider checking answers of citizen and no more dependants' do
       let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
-      let(:other_dependant) { 'false' }
+      let(:has_other_dependant) { 'false' }
 
       it 'redirects to the means summary page' do
         expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))

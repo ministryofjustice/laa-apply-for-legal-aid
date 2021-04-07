@@ -48,7 +48,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
     end
 
     context 'correct client details' do
-      let(:params) { { providers_check_client_details_form: { check_client_details: 'true' } } }
+      let(:params) { { binary_choice_form: { check_client_details: 'true' } } }
 
       it 'continue to the received benefit confirmations page' do
         expect(response).to redirect_to(providers_legal_aid_application_received_benefit_confirmation_path(application))
@@ -56,7 +56,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
     end
 
     context 'incorrect client details' do
-      let(:params) { { providers_check_client_details_form: { check_client_details: 'false' } } }
+      let(:params) { { binary_choice_form: { check_client_details: 'false' } } }
 
       it 'continue to the applicant details page' do
         expect(response).to redirect_to(providers_legal_aid_application_applicant_details_path(application))
@@ -64,7 +64,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
     end
 
     context 'validation error' do
-      let(:params) { { providers_check_client_details_form: { check_client_details: nil } } }
+      let(:params) { { binary_choice_form: { check_client_details: nil } } }
 
       it 'displays an error if nothing selected' do
         expect(response).to have_http_status(:ok)

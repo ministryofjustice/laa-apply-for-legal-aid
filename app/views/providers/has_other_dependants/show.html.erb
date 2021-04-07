@@ -1,7 +1,5 @@
 <%= page_template page_title: t('.page_title'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
   <% if @legal_aid_application.has_dependants? %>
     <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
     <div class="govuk-summary-list">
@@ -34,11 +32,12 @@
   <%= form_with(
           builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           url: providers_legal_aid_application_has_other_dependants_path,
+          model: @form,
           method: :patch,
           local: true
       ) do |form| %>
 
-      <%= form.govuk_collection_radio_buttons :other_dependant,
+      <%= form.govuk_collection_radio_buttons :has_other_dependant,
                                               yes_no_options,
                                               :value,
                                               :label,

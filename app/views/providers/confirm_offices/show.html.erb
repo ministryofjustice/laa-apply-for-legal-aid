@@ -1,23 +1,17 @@
 <%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), template: :basic do %>
+
   <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-                url: providers_confirm_office_path, method: :patch, local: true) do |form| %>
+                url: providers_confirm_office_path,
+                model: @form,
+                method: :patch,
+                local: true) do |form| %>
 
-    <%= render partial: 'shared/error' if @error %>
-
-    <%= form.govuk_radio_buttons_fieldset :correct, legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
-    <div class="govuk-!-padding-bottom-4"></div>
-    <%= form.govuk_radio_button(
-            :correct,
-            true,
-            label: {text: t('generic.yes')}
-        ) %>
-
-    <%= form.govuk_radio_button(
-            :correct,
-            false,
-            label: {text: t('.no_another_office')}
-        ) %>
-    <% end %>
+    <%= form.govuk_collection_radio_buttons :confirm_office,
+                                            [OpenStruct.new(value: true, label: t('generic.yes')),
+                                             OpenStruct.new(value: false, label: t('.no_another_office'))],
+                                            :value,
+                                            :label,
+                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
 
     <div class="govuk-!-padding-bottom-2"></div>
     <%= next_action_buttons(form: form) %>

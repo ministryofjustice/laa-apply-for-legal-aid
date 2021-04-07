@@ -26,7 +26,7 @@
                 method: :patch,
                 local: true) do |form| %>
 
-      <%= form.govuk_collection_radio_buttons :has_other_proceedings, yes_no_options, :value, :label,
+      <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
                                               legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
 
     <%= next_action_buttons(

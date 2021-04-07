@@ -42,7 +42,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         let(:params) do
           {
             continue_button: 'Continue',
-            dwp_results_correct: 'true'
+            binary_choice_form: {
+              correct_dwp_result: 'true'
+            }
           }
         end
 
@@ -71,7 +73,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         let(:params) do
           {
             continue_button: 'Continue',
-            dwp_results_correct: 'false'
+            binary_choice_form: {
+              correct_dwp_result: 'false'
+            }
           }
         end
 
@@ -93,7 +97,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
       context 'the solicitor does not select a radio button' do
         it 'displays an error' do
           subject
-          expect(response.body).to include(I18n.t('providers.confirm_dwp_non_passported_applications.show.error'))
+          expect(response.body).to include(I18n.t('providers.correct_dwp_results.show.error'))
         end
       end
     end

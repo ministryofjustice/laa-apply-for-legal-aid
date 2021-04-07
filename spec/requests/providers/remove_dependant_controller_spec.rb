@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Providers::RemoveDependantController, type: :request do
+RSpec.describe Providers::RemoveDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
   let(:login) { login_as legal_aid_application.provider }
@@ -27,7 +27,9 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
   describe 'PATCH /providers/:application_id/remove_dependants/:dependant_id' do
     let(:params) do
       {
-        remove_dependant: remove_dependant
+        binary_choice_form: {
+          remove_dependant: remove_dependant
+        }
       }
     end
 
@@ -53,7 +55,7 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
       let(:remove_dependant) { 'not sure' }
 
       it 'show errors' do
-        expect(response.body).to include(I18n.t('providers.remove_dependant.show.error'))
+        expect(response.body).to include(I18n.t('providers.remove_dependants.show.error'))
       end
     end
 
@@ -61,7 +63,7 @@ RSpec.describe Providers::RemoveDependantController, type: :request do
       let(:params) { nil }
 
       it 'show errors' do
-        expect(response.body).to include(I18n.t('providers.remove_dependant.show.error'))
+        expect(response.body).to include(I18n.t('providers.remove_dependants.show.error'))
       end
     end
   end

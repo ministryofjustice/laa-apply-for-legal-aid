@@ -1,12 +1,11 @@
 <%= page_template page_title: t('.heading'), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
   <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_applicant_bank_account_path,
-          method: :patch,
-          local: true
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+        url: providers_legal_aid_application_applicant_bank_account_path,
+        model: @form,
+        method: :patch,
+        local: true
       ) do |form| %>
 
     <%= govuk_fieldset_header page_title %>
@@ -43,17 +42,12 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <%= form.govuk_collection_radio_buttons :offline_savings_account,
-                                            form.yes_no_radio_button_array,
+    <%= form.govuk_collection_radio_buttons :applicant_bank_account,
+                                            yes_no_options,
                                             :value,
                                             :label,
-                                            error: @error&.values&.first,
-                                            hint: t('.hints.offline_savings_accounts'),
-                                            title: {
-                                              text: t('.offline_savings_accounts'),
-                                              htag: 'h2',
-                                              size: :l
-                                            } %>
+                                            legend: {text: t('.offline_savings_accounts'), size: 'l', tag: 'h2'},
+                                            hint: {text: t('.hints.offline_savings_accounts')} %>
 
     <%= next_action_buttons(
             show_draft: true,

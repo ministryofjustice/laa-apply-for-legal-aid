@@ -45,7 +45,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'choose yes' do
-      let(:params) { { providers_has_other_proceedings_form: { has_other_proceedings: 'true' } } }
+      let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
 
       it 'redirects to the page to add another proceeding type' do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
@@ -53,7 +53,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'choose no' do
-      let(:params) { { providers_has_other_proceedings_form: { has_other_proceedings: 'false' } } }
+      let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
 
       it 'redirects to the delegated functions page' do
         expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
@@ -61,7 +61,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'choose nothing' do
-      let(:params) { { providers_has_other_proceedings_form: { has_other_proceedings: nil } } }
+      let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
 
       it 'stays on the page if there is a validation error' do
         expect(response).to have_http_status(:ok)

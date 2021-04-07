@@ -3,33 +3,34 @@ module Providers
     def show
       return go_forward unless Setting.allow_multiple_proceedings?
 
-      @form = Providers::HasOtherProceedingsForm.new
+      form
       proceeding_types
     end
 
     def update
       return continue_or_draft if draft_selected?
+      return go_forward(form.has_other_proceeding?) if form.valid?
 
-      @form = Providers::HasOtherProceedingsForm.new(form_params)
-      if @form.valid?
-        go_forward(form_params[:has_other_proceedings] == 'true')
-      else
-        render :show
-      end
+      render :show
     end
 
     def destroy
       remove_proceeding
+      return redirect_to providers_legal_aid_application_proceedings_types_path if proceeding_types.empty?
 
-      if proceeding_types.empty?
-        redirect_to providers_legal_aid_application_proceedings_types_path
-      else
-        @form = Providers::HasOtherProceedingsForm.new
-        render :show
-      end
+      form
+      render :show
     end
 
     private
+
+    def form
+      @form ||= BinaryChoiceForm.call(
+        journey: :provider,
+        radio_buttons_input_name: :has_other_proceeding,
+        form_params: update_form_params
+      )
+    end
 
     def proceeding_types
       @proceeding_types ||= legal_aid_application.proceeding_types
@@ -67,7 +68,9 @@ module Providers
     end
 
     def update_form_params
-      params.require(:providers_has_other_proceedings_form).permit(:has_other_proceedings)
+      return {} unless params[:binary_choice_form]
+
+      params.require(:binary_choice_form).permit(:has_other_proceeding)
     end
   end
 end

@@ -1,10 +1,9 @@
 <%= page_template page_title: t('.page_title', name: @dependant.name), template: :basic do %>
 
-  <%= render partial: 'shared/error' if @error %>
-
   <%= form_with(
           builder: GOVUKDesignSystemFormBuilder::FormBuilder,
           url: providers_legal_aid_application_remove_dependant_path,
+          model: @form,
           method: :patch,
           local: true
       ) do |form| %>

@@ -14,6 +14,19 @@ RSpec.describe 'provider confirm office', type: :request do
       it_behaves_like 'a provider not authenticated'
     end
 
+    context 'invalid login' do
+      let(:provider) { create :provider, invalid_login_details: 'role' }
+
+      before do
+        login_as provider
+        subject
+      end
+
+      it 'redirects to the invalid login page' do
+        expect(response).to redirect_to providers_invalid_login_path
+      end
+    end
+
     context 'when the provider is authenticated' do
       before do
         login_as provider
@@ -56,7 +69,7 @@ RSpec.describe 'provider confirm office', type: :request do
 
   describe 'PATCH providers/confirm_office' do
     subject { patch providers_confirm_office_path, params: params }
-    let(:params) { { correct: 'true' } }
+    let(:params) { { binary_choice_form: { confirm_office: 'true' } } }
 
     context 'when the provider is authenticated' do
       before do
@@ -81,7 +94,7 @@ RSpec.describe 'provider confirm office', type: :request do
       end
 
       context 'no is selected' do
-        let(:params) { { correct: 'false' } }
+        let(:params) { { binary_choice_form: { confirm_office: 'false' } } }
 
         it 'redirects to the office select page' do
           expect(response).to redirect_to providers_select_office_path
