@@ -37,7 +37,6 @@
 
 <% if Setting.allow_multiple_proceedings? %>
   <%= form_with(
-    builder: GOVUKDesignSystemFormBuilder::FormBuilder,
     model: nil,
     url: providers_legal_aid_application_proceedings_types_path,
     local: true) do |form| %>

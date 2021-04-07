@@ -7,23 +7,12 @@
       local: true
     ) do |form| %>
 
-    <%= govuk_form_group(
-          input: :proceedings_before_the_court,
-          show_error_if: @form.errors.any?
-        ) do %>
-
-      <%= govuk_fieldset_header(content_for(:page_title)) %>
-
-      <%= govuk_error_message(form.object.errors[:proceedings_before_the_court].first) %>
-
-      <div class="govuk-radios govuk-radios--conditional govuk-!-padding-top-2" data-module="govuk-radios">
-        <%= form.govuk_radio_button(:proceedings_before_the_court, true, 'data-aria-controls' => 'conditional-true') %>
-        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-true">
+    <%= form.govuk_radio_buttons_fieldset :proceedings_before_the_court,
+                                          legend: {text: (content_for(:page_title)), size: 'xl', tag: 'h1'} do %>
+        <%= form.govuk_radio_button :proceedings_before_the_court, true do %>
           <%= form.govuk_text_area :details_of_proceedings_before_the_court, rows: 5 %>
-        </div>
-        <%= form.govuk_radio_button(:proceedings_before_the_court, false) %>
-      </div>
-
+        <% end %>
+        <%= form.govuk_radio_button :proceedings_before_the_court, false %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-2"></div>

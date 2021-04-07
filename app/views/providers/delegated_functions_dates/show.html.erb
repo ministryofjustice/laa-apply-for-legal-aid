@@ -1,7 +1,6 @@
 <%= page_template page_title: t('.heading', date: @used_delegated_functions_on), template: :basic do %>
 
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_delegated_functions_date_path,
         method: :patch,

@@ -1,7 +1,6 @@
 <%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), template: :basic do %>
 
-  <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-                url: providers_confirm_office_path,
+  <%= form_with(url: providers_confirm_office_path,
                 model: @form,
                 method: :patch,
                 local: true) do |form| %>

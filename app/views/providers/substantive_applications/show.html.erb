@@ -1,7 +1,6 @@
 <%= page_template page_title: t('.heading'), template: :basic do %>
 
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_substantive_application_path,
         method: :patch,

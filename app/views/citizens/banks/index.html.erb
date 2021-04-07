@@ -1,6 +1,6 @@
 <%= page_template page_title: t('.title'), template: :basic do %>
 
-    <%= form_with(builder: GOVUKDesignSystemFormBuilder::FormBuilder, local: true) do |form| %>
+    <%= form_with(local: true) do |form| %>
       <div class="govuk-radios bank-selection">
         <%= form.govuk_radio_buttons_fieldset(:provider_id,
                                               legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},

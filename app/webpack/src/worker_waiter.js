@@ -31,7 +31,7 @@ function workerResponse(data, waitForWorker) {
 function accessibilityAlert() {
   setTimeout(() => {
     let accessibilityMessage = document.querySelector('#accessibilityMessageUpdate');
-    if (accessibilityMessage !== undefined) {
+    if (accessibilityMessage !== null) {
       accessibilityMessage.innerHTML = accessibilityMessage.dataset.message;
     }
   }, 5000);

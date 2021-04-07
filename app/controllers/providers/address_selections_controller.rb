@@ -10,6 +10,7 @@ module Providers
       if address_lookup.success?
         @addresses = address_lookup.result
         titleize_addresses
+        @address_collection = collect_addresses
         @form = Addresses::AddressSelectionForm.new(model: address)
       else
         @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
@@ -19,12 +20,18 @@ module Providers
 
     def update
       @addresses = build_addresses_from_form_data
+      @address_collection = collect_addresses
       @form = Addresses::AddressSelectionForm.new(permitted_params)
 
       render :show unless save_continue_or_draft(@form)
     end
 
     private
+
+    def collect_addresses
+      count = OpenStruct.new(id: nil, address: t('providers.address_selections.show.addresses_found_text', count: @addresses.size))
+      [count] + @addresses.collect { |a| OpenStruct.new(id: a.lookup_id, address: a.full_address) }
+    end
 
     def no_state_change_required?
       legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?

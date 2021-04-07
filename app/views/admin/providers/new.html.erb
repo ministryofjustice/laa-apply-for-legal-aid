@@ -1,19 +1,12 @@
 <%= form_with(model: @provider, url: admin_provider_check_path, local: true) do |form| %>
 
-  <%= govuk_form_group show_error_if: @provider.errors.present? do %>
-    <%= govuk_fieldset_header do %>
-      <h1 class="govuk-fieldset__heading">
-        <%= label_tag(t('.heading_1'), page_title) %>
-      </h1>
-    <% end %>
-    <%= form.govuk_text_field(
-            :username,
-            hint: controller_t('hint.username'),
-            label: nil,
-            value: @provider.username,
-            class: 'govuk-!-width-one-third'
-        ) %>
-  <% end %>
+  <%= form.govuk_text_field(
+          :username,
+          label: {text: label_tag(t('.heading_1'), page_title), tag: 'h1', size: 'xl'},
+          hint: {text: controller_t('hint.username')},
+          value: @provider.username,
+          width: 'one-third'
+      ) %>
 
   <%= next_action_buttons(
           show_draft: local_assigns.key?(:show_draft) ? show_draft : false,

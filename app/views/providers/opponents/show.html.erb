@@ -3,7 +3,6 @@
       back_link: { path: providers_legal_aid_application_opponent_name_path(@legal_aid_application) }
     ) do %>
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_opponent_path,
         method: :patch,

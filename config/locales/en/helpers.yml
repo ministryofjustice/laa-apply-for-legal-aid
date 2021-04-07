@@ -7,7 +7,6 @@ en:
     accessibility:
       error: "Error:"
     hint:
-      search: You can search by Application Reference, ccms_reference, client's name or application_id
       address_lookup:
         postcode: This must be a valid UK postcode
       applicant:
@@ -20,7 +19,6 @@ en:
         property_value: You can use property websites to find the estimated value
       student_finance: This includes any type of student loan, grant or bursary.
     label:
-      search: 'Application search:'
       applicant:
         employed:
           <<: *true_false
@@ -28,7 +26,7 @@ en:
         done_all_needed:
           <<: *true_false
         improvement_suggestion: Do you have any other feedback or suggestions on how we could improve the service?
-      chances_of_success:
+      merits_assessment:
         application_purpose: Please give details of why your client is applying for legal aid
         details_of_proceedings_before_the_court: Please give details.
         proceedings_before_the_court:

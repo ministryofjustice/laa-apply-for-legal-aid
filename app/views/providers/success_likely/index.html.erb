@@ -4,7 +4,6 @@
       back_link: { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
     ) do %>
   <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
         model: @form,
         url: providers_legal_aid_application_success_likely_index_path,
         method: :post,
