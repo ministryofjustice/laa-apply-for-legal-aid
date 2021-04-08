@@ -39,6 +39,10 @@ module LegalFramework
             outcome = service.call
             expect(outcome).to eq dummy_response_hash
           end
+
+          it 'stores a submission history record' do
+            expect { service.call }.to change { LegalFramework::SubmissionHistory.count }
+          end
         end
       end
 

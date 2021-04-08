@@ -27,7 +27,7 @@ module LegalFramework
 
     def update_merits_task_list(serialized_data)
       if MeritsTaskList.exists?(legal_aid_application_id: legal_aid_application.id)
-        MeritsTaskList.where(legal_aid_application_id: legal_aid_application.id).first.update!(serialized_data: serialized_data)
+        merits_task_list.update!(serialized_data: serialized_data, updated_at: Time.current)
       else
         MeritsTaskList.create!(legal_aid_application_id: legal_aid_application.id, serialized_data: serialized_data)
       end
@@ -35,6 +35,10 @@ module LegalFramework
 
     def merits_tasks(submission)
       @merits_tasks ||= MeritsTasksRetrieverService.call(submission)
+    end
+
+    def merits_task_list
+      MeritsTaskList.where(legal_aid_application_id: legal_aid_application.id).first
     end
 
     def submission

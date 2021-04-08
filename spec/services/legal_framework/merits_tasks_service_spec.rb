@@ -26,9 +26,20 @@ module LegalFramework
       end
 
       context 'merits task list exist' do
+        before do
+          described_class.call(application)
+        end
+
         it 'does not add a new merits task list record' do
-          service
           expect { service }.not_to change { MeritsTaskList.count }
+        end
+
+        it 'updates the existing merits task list' do
+          merits_task_list = MeritsTaskList.first
+          expect {
+            service
+            merits_task_list.reload
+          }.to change(merits_task_list, :updated_at)
         end
       end
 
@@ -63,6 +74,10 @@ module LegalFramework
           }
         ]
       }
+    end
+
+    def updated_response_hash
+      dummy_response_hash[:proceeding_types].first[:tasks][:chances_of_success]
     end
   end
 end
