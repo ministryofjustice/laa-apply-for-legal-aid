@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::CapitalIntroductionsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :at_applicant_details_checked }
+  let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :checking_applicant_details }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/capital_introduction' do
@@ -12,7 +12,21 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
       it_behaves_like 'a provider not authenticated'
     end
 
-    context 'when the provider is authenticated' do
+    context 'when the provider is authenticated and details still being checked' do
+      before do
+        login_as provider
+        subject
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include('Before you continue')
+      end
+    end
+
+    context 'when the provider is authenticated and details all checked' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :at_applicant_details_checked }
+
       before do
         login_as provider
         subject
