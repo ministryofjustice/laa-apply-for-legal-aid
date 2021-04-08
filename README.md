@@ -32,6 +32,7 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 - [**3rd party integrations**](#3rd-party-integrations)
     - [True Layer](#true-layer)
 - [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
+- [**Legal Framework API Service**](#legal-framework-api-service)
 - [**Geckoboard Dashboard**](#geckoboard-dashboard)
     - [1. Create a widget data provider](#1-create-a-widget-data-provider)
     - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)

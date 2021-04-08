@@ -469,7 +469,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_081304) do
 
   create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
-    t.string "serialized_data"
+    t.text "serialized_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "idx_lfa_merits_task_lists_on_legal_aid_application_id"
@@ -783,7 +783,6 @@ ActiveRecord::Schema.define(version: 2021_04_07_081304) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications"
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
-  add_foreign_key "merits_assessments", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
