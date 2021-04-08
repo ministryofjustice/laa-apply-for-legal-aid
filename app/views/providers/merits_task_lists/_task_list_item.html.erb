@@ -1,0 +1,10 @@
+<li class="app-task-list__item">
+  <span class="app-task-list__task-name">
+    <% if status != 'Cannot start yet' %>
+      <a href="<%= url %>" aria-describedby="<%= name %>-status"><%= name %></a>
+    <% else %>
+      <p><%= name %></p>
+    <% end %>
+  </span>
+  <strong class="govuk-tag <%= tag_class %> app-task-list__tag" id="<%= name %>-status"><%= status %></strong>
+</li>

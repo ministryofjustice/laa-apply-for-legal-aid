@@ -29,7 +29,6 @@
 }
 
 .app-task-list__items {
-  @include govuk-font($size: 19);
   @include govuk-responsive-margin(9, "bottom");
   padding-left: 0;
   @include govuk-media-query($from: tablet) {
@@ -51,10 +50,15 @@
 }
 
 .app-task-list__task-name {
+  @include govuk-font($size: 19);
   display: block;
   @include govuk-media-query($from: 450px) {
     float: left;
   }
+}
+
+.app-task-list__task-name p {
+  margin-bottom: 0;
 }
 
 // The `app-task-list__task-completed` class was previously used on the task

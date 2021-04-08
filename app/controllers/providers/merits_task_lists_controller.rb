@@ -5,13 +5,9 @@ module Providers
       @proceeding_stages = proceeding_stages
     end
 
-    def update
-      # update stage status to completed
-      render :show
-    end
-
     private
 
+    # TODO: replace these with response from LFA
     def application_stages
       { title: 'Case details', stages: [
         { name: 'Latest incident details', status: 'Completed' },
