@@ -5,13 +5,10 @@
   </h2>
   <ul class="app_task_list__items">
     <% section[:stages].each do |item| %>
-      <li class="app-task-list__item">
-        <% name = item[:name] %>
-        <span class="app-task-list__task-name">
-          <a href="#" aria-describedby="<%= name %>-status"><%= name %></a>
-        </span>
-        <strong class="govuk-tag app-task-list__tag" id="<%= name %>-status"><%= item[:status] %></strong>
-      </li>
+      <%= task_list_item(
+              name: item[:name],
+              status: item[:status]
+          ) %>
     <% end %>
   </ul>
 </li>
