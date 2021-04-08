@@ -1,32 +1,22 @@
-<% error_class = @form.errors.any? ? 'alternative-error-style' : '' %>
-
 <div class="interruption-panel">
-  <%= page_template(page_title: t('.tab_title'), column_width: :full, show_errors_for: nil, template: :basic) do %>
-
-    <!-- duplicate the model but remove errors so original error styling is removed-->
-    <%
-      model = @form.dup
-      model.errors.delete(:confirm_dwp_non_passported_application)
-    %>
+  <%= page_template(page_title: t('.tab_title'), column_width: :full, template: :basic) do %>
 
     <%= form_with(
-          model: model,
+          model: @form,
           url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
           method: :patch,
           local: true
         ) do |form| %>
 
-      <div class="<%= "#{error_class}" %>">
-        <%= form.govuk_collection_radio_buttons :correct_dwp_result,
-                                                [OpenStruct.new(value: true, label: t('generic.yes')),
-                                                 OpenStruct.new(value: false, label: t('.no'))],
-                                                :value,
-                                                :label,
-                                                legend: {text: content_for(:page_title), tag: 'h1', size: 'l'} %>
-      </div>
+      <%= form.govuk_collection_radio_buttons :correct_dwp_result,
+                                              [OpenStruct.new(value: true, label: t('generic.yes')),
+                                               OpenStruct.new(value: false, label: t('.no'))],
+                                              :value,
+                                              :label,
+                                              legend: {text: content_for(:page_title), tag: 'h1', size: 'l'} %>
 
       <% if @form.errors.any? %>
-        <%= link_to_accessible @form.errors.values.first, "#confirm_dwp_non_passported_application-true-field", class: 'govuk-heading-s' %>
+        <%= link_to_accessible @form.errors.values.first, "#correct_dwp_result-true-field", class: 'govuk-heading-s' %>
       <% end %>
 
       <div class="govuk-!-padding-bottom-4"></div>
