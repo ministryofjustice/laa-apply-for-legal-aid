@@ -1,0 +1,17 @@
+<li class="govuk-!-padding-bottom-4">
+  <h2 class="app-task-list__section">
+    <span class="app-task-list__section-number"><%= section_number %>.</span>
+    <%= section[:title] %>
+  </h2>
+  <ul class="app_task_list__items">
+    <% section[:stages].each do |item| %>
+      <li class="app-task-list__item">
+        <% name = item[:name] %>
+        <span class="app-task-list__task-name">
+          <a href="#" aria-describedby="<%= name %>-status"><%= name %></a>
+        </span>
+        <strong class="govuk-tag app-task-list__tag" id="<%= name %>-status"><%= item[:status] %></strong>
+      </li>
+    <% end %>
+  </ul>
+</li>

@@ -1,10 +1,21 @@
 <%= page_template(
-    page_title: 'Hello',
+    page_title: t('.page_heading'),
     back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) }
     ) do %>
 
-  <h1><% page_title %></h1>
-  <div class="govuk-!-padding-bottom-4"></div>
+  <h1 class="govuk-heading-xl"><% page_title %></h1>
+
+  <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
+  <ol class="app-task-list">
+    <%= render 'task_list_section', section: @application_stages, section_number: 1 %>
+
+    <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
+    <% @proceeding_stages.each_with_index do |proceeding, index| %>
+      <%= render 'task_list_section', section: proceeding, section_number: index + 2 %>
+    <% end %>
+  </ol>
+
+  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_check_merits_answers_path,
