@@ -199,13 +199,12 @@ class LegalAidApplication < ApplicationRecord
     #  loop through the collection to see if at least one APT for the legal aid application has a value in used_delegated_functions_on
     # this should break the loop when it finds a delegated_functon_date
     # we dont care about how many just if one exists
-    # returns nil which is falsey if nothing is found
     #
     # currently this is always false in tests as the factories aRE NOT SET UP TO STorE THIS INFORMATION
 
     # first_df_date = apts.map(&:used_delegated_functions_on).find(&:present?)
 
-    first_df_date = application_proceeding_types.find do |apt|
+    false unless application_proceeding_types.find do |apt|
       break apt.used_delegated_functions_on if apt.used_delegated_functions_on.present?
     end
   end
