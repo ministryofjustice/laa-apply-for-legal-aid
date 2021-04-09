@@ -4,6 +4,11 @@ class ApplicationProceedingType < ApplicationRecord
   belongs_to :legal_aid_application
   belongs_to :proceeding_type
   has_many :application_proceeding_types_scope_limitations, dependent: :destroy
+  has_many :application_proceeding_type_involved_children, class_name: 'ProceedingMeritsTask::ApplicationProceedingTypeInvolvedChild', dependent: :destroy
+
+  has_many :involved_children,
+           through: :application_proceeding_type_involved_children,
+           source: :involved_child
 
   has_many :assigned_scope_limitations,
            through: :application_proceeding_types_scope_limitations,
