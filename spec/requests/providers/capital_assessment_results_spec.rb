@@ -183,10 +183,11 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
+        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(multi_proc_flag)
         login_provider
         subject
-        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
       end
+      let(:multi_proc_flag) { true }
 
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
@@ -198,9 +199,8 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context 'multiple proceedings flag switched off' do
-          before do
-            Setting.setting.update!(allow_multiple_proceedings: false)
-          end
+          let(:multi_proc_flag) { false }
+
           it 'redirects to start chances of success' do
             expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
           end
