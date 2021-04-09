@@ -293,8 +293,23 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
-        it 'redirects to next page' do
-          expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
+
+        context 'multiple proceedings flag is switched on' do
+          before do
+            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
+          end
+          it 'redirects to the merits task list' do
+            expect(subject).to redirect_to(providers_legal_aid_application_merits_task_list_path)
+          end
+        end
+
+        context 'multiple proceedings flag switched off' do
+          before do
+            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
+          end
+          it 'redirects to start chances of success' do
+            expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
+          end
         end
       end
 
