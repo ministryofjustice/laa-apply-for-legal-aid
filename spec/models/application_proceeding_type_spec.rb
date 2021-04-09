@@ -121,4 +121,31 @@ RSpec.describe ApplicationProceedingType do
       end
     end
   end
+
+  describe 'involved children' do
+    let(:application1) { create :legal_aid_application }
+    let(:application2) { create :legal_aid_application }
+    let(:proceeding_type1) { ProceedingType.first }
+    let(:proceeding_type2) { ProceedingType.last }
+    let(:application_proceeding_type1) { application1.application_proceeding_types.first }
+    let(:application_proceeding_type2) { application2.application_proceeding_types.first }
+    let(:application_involved_child1) { ApplicationMeritsTask::InvolvedChild.create(full_name: 'John Smith', date_of_birth: 1.month.ago, legal_aid_application: application1) }
+    let(:application_involved_child2) { ApplicationMeritsTask::InvolvedChild.create(full_name: 'Mary Smith', date_of_birth: 1.month.ago, legal_aid_application: application2) }
+
+    before do
+      populate_legal_framework
+      application1.proceeding_types << proceeding_type1
+    end
+
+    it 'adds involved children to the application proceeding type' do
+      application_proceeding_type1.involved_children << application_involved_child1
+      expect(application_proceeding_type1.involved_children.first.full_name).to eq('John Smith')
+    end
+
+    it 'does not allow other application involved children be present' do
+      expect {
+        application_proceeding_type1.involved_children << application_involved_child2
+      }.to raise_error ActiveRecord::RecordInvalid, 'Validation failed: Involved child belongs to another application'
+    end
+  end
 end
