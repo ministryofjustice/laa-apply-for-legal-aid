@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_155950) do
+ActiveRecord::Schema.define(version: 2021_04_07_081304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -467,6 +467,37 @@ ActiveRecord::Schema.define(version: 2021_04_01_155950) do
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
+  create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.text "serialized_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "idx_lfa_merits_task_lists_on_legal_aid_application_id"
+  end
+
+  create_table "legal_framework_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "submission_id"
+    t.string "url"
+    t.string "http_method"
+    t.text "request_payload"
+    t.integer "http_response_status"
+    t.text "response_payload"
+    t.string "error_message"
+    t.string "error_backtrace"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "legal_framework_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.uuid "request_id"
+    t.string "error_message"
+    t.text "result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_legal_framework_submissions_on_legal_aid_application_id"
+  end
+
   create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "uploader_type"
     t.uuid "uploader_id"
@@ -750,6 +781,8 @@ ActiveRecord::Schema.define(version: 2021_04_01_155950) do
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"
+  add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications"
+  add_foreign_key "legal_framework_submissions", "legal_aid_applications"
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
