@@ -32,6 +32,7 @@ The laa-apply-for-legal-aid system is a web service by use for solicitors provid
 - [**3rd party integrations**](#3rd-party-integrations)
     - [True Layer](#true-layer)
 - [**Check Financial Eligibility Service**](#check-financial-eligibility-service)
+- [**Legal Framework API Service**](#legal-framework-api-service)
 - [**Geckoboard Dashboard**](#geckoboard-dashboard)
     - [1. Create a widget data provider](#1-create-a-widget-data-provider)
     - [2. Add a cronjob to run it](#2-add-a-cronjob-to-run-it)
@@ -84,6 +85,7 @@ To get the tests running you will need to obtain and set values for the followin
 ```bash
 GOVUK_NOTIFY_API_KEY=
 CHECK_FINANCIAL_ELIGIBILITY_HOST=
+LEGAL_FRAMEWORK_API_HOST=
 ```
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
@@ -439,6 +441,11 @@ this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"t
 ## Check Financial Eligibility Service
 
 The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_HOST`
+
+## Legal Framework API Service
+
+The URL for this service should be set using the environment variable  
+`LEGAL_FRAMEWORK_API_HOST`
 
 ---
 

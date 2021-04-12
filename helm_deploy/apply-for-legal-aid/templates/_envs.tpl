@@ -294,4 +294,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: policyDisregardsStartDate
+  - name: LEGAL_FRAMEWORK_API_HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: legalFrameworkApiHost
 {{- end }}
