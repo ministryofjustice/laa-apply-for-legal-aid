@@ -459,6 +459,11 @@ en:
           not_started: Not started
           cannot_start_yet: Cannot start yet
           completed: Completed
+        urls:
+          latest_incident_details: date_client_told_incident
+          opponent_details: opponent
+          statement_of_case: statement_of_case
+          chances_of_success: chances_of_success_index
     merits_reports:
       show:
         heading: Merits report
