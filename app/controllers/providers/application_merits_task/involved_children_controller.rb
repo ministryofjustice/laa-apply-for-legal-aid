@@ -10,7 +10,7 @@ module Providers
       end
 
       def update
-        app/views/providers/application_merits_task/has_other_involved_children/show.html.erb        @form = InvolvedChildForm.new(form_params)
+        @form = InvolvedChildForm.new(form_params)
         if @form.save
           go_forward(involved_child)
         else
