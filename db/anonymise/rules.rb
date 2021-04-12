@@ -28,6 +28,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   },
   application_proceeding_types: {},
   application_proceeding_types_scope_limitations: {},
+  application_proceeding_types_involved_children: {},
   attachments: {},
   attempts_to_settles: {
     attempts_made: -> { Faker::Lorem.sentence }

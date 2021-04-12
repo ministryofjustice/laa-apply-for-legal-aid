@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_081304) do
+ActiveRecord::Schema.define(version: 2021_04_07_120727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -116,6 +116,15 @@ ActiveRecord::Schema.define(version: 2021_04_07_081304) do
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_application_proceeding_types_on_proceeding_case_id", unique: true
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
+  end
+
+  create_table "application_proceeding_types_involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "involved_child_id", null: false
+    t.uuid "application_proceeding_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
+    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
   end
 
   create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -507,7 +516,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_081304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
