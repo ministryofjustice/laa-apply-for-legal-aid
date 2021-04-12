@@ -15,7 +15,7 @@ module LegalFramework
 
       smtl = SerializableMeritsTaskList.new(@response)
       update_merits_task_list(smtl.to_yaml)
-      true
+      merits_task_list
     rescue SubmissionError => e
       submission.error_message = e.message
       submission.save!
