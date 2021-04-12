@@ -1,8 +1,8 @@
 <li class="app-task-list__item">
   <span class="app-task-list__task-name">
     <% formatted_name = t(".#{name}") %>
-    <% if status != 'Cannot start yet' %>
-      <a href="<%= url %>" aria-describedby='<%= name %>-status'><%= formatted_name %></a>
+    <% if status != 'cannot_start_yet' %>
+      <%= link_to_accessible formatted_name, url, aria_describedby: "#{name}-status" %>
     <% else %>
       <p><%= formatted_name %></p>
     <% end %>
