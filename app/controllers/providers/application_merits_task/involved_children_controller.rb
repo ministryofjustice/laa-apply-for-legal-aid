@@ -2,15 +2,15 @@ module Providers
   module ApplicationMeritsTask
     class InvolvedChildrenController < ProviderBaseController
       def new
-        @form = ::ApplicationMeritsTask::InvolvedChildForm.new(model: involved_child)
+        @form = InvolvedChildForm.new(model: involved_child)
       end
 
       def show
-        @form = ::ApplicationMeritsTask::InvolvedChildForm.new(model: involved_child)
+        @form = InvolvedChildForm.new(model: involved_child)
       end
 
       def update
-        @form = ::ApplicationMeritsTask::InvolvedChildForm.new(form_params)
+        @form = InvolvedChildForm.new(form_params)
         if @form.save
           go_forward(involved_child)
         else
@@ -38,7 +38,7 @@ module Providers
 
       def form_params
         merged_params = merge_with_model(involved_child) do
-          params.require(:application_merits_task_involved_child).permit(*::ApplicationMeritsTask::InvolvedChildForm::MODEL_ATTRIBUTES)
+          params.require(:application_merits_task_involved_child).permit(*InvolvedChildForm::MODEL_ATTRIBUTES)
         end
         convert_date_params(merged_params)
       end

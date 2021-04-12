@@ -2,7 +2,6 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps
       STEPS = {
-
         start_chances_of_successes: {
           path: ->(application) { urls.providers_legal_aid_application_start_chances_of_success_path(application) },
           forward: :date_client_told_incidents,
