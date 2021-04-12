@@ -1,13 +1,13 @@
 <li class="govuk-!-padding-bottom-4">
   <h2 class="app-task-list__section">
     <span class="app-task-list__section-number"><%= section_number %>.</span>
-    <%= section[:title] %>
+    <%= name %>
   </h2>
   <ul class="app_task_list__items">
-    <% section[:stages].each do |item| %>
+    <% tasks.each do |task| %>
       <%= task_list_item(
-              name: item[:name],
-              status: item[:status]
+              name: task.name,
+              status: task.state
           ) %>
     <% end %>
   </ul>
