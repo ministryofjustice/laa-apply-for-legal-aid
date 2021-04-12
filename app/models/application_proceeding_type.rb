@@ -7,7 +7,7 @@ class ApplicationProceedingType < ApplicationRecord
   has_many :application_proceeding_type_involved_children, class_name: 'ProceedingMeritsTask::ApplicationProceedingTypeInvolvedChild', dependent: :destroy
 
   has_many :involved_children,
-           through: :application_proceeding_types_involved_children,
+           through: :application_proceeding_type_involved_children,
            source: :involved_child
 
   has_many :assigned_scope_limitations,
