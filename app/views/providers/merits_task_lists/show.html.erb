@@ -7,11 +7,11 @@
 
   <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
   <ol class="app-task-list">
-    <%= render 'task_list_section', section: @application_stages, section_number: 1 %>
+    <%= render 'task_list_section', name: t('.application_section_heading'), tasks: @merits_tasks[:application], section_number: 1 %>
 
     <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
-    <% @proceeding_stages.each_with_index do |proceeding, index| %>
-      <%= render 'task_list_section', section: proceeding, section_number: index + 2 %>
+    <% @merits_tasks[:proceedings].each_with_index do |proceeding, index| %>
+      <%= render 'task_list_section', name: proceeding[:name], tasks: proceeding[:tasks], section_number: index + 2 %>
     <% end %>
   </ol>
 
