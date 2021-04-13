@@ -10,7 +10,7 @@
     <%= render 'task_list_section', name: t('.application_section_heading'), tasks: @merits_tasks[:application], section_number: 1 %>
 
     <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
-    <% @merits_tasks[:proceedings].each_with_index do |proceeding, index| %>
+    <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
       <%= render 'task_list_section', name: proceeding[:name], tasks: proceeding[:tasks], section_number: index + 2 %>
     <% end %>
   </ol>

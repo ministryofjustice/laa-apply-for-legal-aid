@@ -20,7 +20,7 @@ FactoryBot.define do
             }
           },
           {
-            ccms_code: 'SE003',
+            ccms_code: 'DA001',
             tasks: {
               chances_of_success: [],
               proceeding_children: [:application_children]

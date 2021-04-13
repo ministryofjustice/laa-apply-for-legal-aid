@@ -1,6 +1,6 @@
 module TaskListHelper
   def task_list_item(name:, status:)
-    tag_class = status == 'Completed' ? nil : 'govuk-tag--grey'
+    tag_class = status == 'completed' ? nil : 'govuk-tag--grey'
     render(
       'providers/merits_task_lists/task_list_item',
       name: name,

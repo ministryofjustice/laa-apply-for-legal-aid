@@ -6,14 +6,18 @@ module LegalFramework
 
     def initialize(lfa_response)
       @lfa_response = lfa_response
-      @tasks = { application: [], proceedings: [] }
+      @tasks = { application: [], proceedings: {} }
 
       serialize_application_tasks
       serialize_proceeding_types_tasks
     end
 
     def tasks_for(task_group)
-      @tasks.fetch(task_group)
+      tasks = @tasks.fetch(task_group, false)
+      tasks ||= @tasks[:proceedings].fetch(task_group, {})[:tasks]
+      return tasks if tasks
+
+      raise KeyError, "key not found: #{task_group.inspect}"
     end
 
     def task(task_group, task_name)
@@ -44,11 +48,10 @@ module LegalFramework
       @lfa_response[:proceeding_types].each do |proceeding_type_hash|
         ccms_code = proceeding_type_hash[:ccms_code].to_sym
         proceeding_name = ProceedingType.find_by(ccms_code: ccms_code).meaning
-        proceeding_type = { name: proceeding_name, tasks: [] }
+        @tasks[:proceedings][ccms_code] = { name: proceeding_name, tasks: [] }
         proceeding_type_hash[:tasks].each do |task_name, dependencies|
-          proceeding_type[:tasks] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
+          @tasks[:proceedings][ccms_code][:tasks] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
         end
-        @tasks[:proceedings] << proceeding_type
       end
     end
   end
