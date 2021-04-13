@@ -91,7 +91,7 @@ RSpec.describe ApplicationProceedingType do
         before { application_proceeding_type.add_default_delegated_functions_scope_limitation }
 
         it 'ignores the duplicate request' do
-          expect(application_proceeding_type.assigned_scope_limitations).to eq [default_scope_limitation, default_df_scope_limitation]
+          expect(application_proceeding_type.assigned_scope_limitations).to match_array([default_scope_limitation, default_df_scope_limitation])
         end
       end
     end
