@@ -11,11 +11,9 @@ module Providers
 
       def update
         @form = InvolvedChildForm.new(form_params)
-        if @form.save
-          go_forward(involved_child)
-        else
-          render @form.model.id.nil? ? :new : :show
-        end
+        return go_forward if @form.save
+
+        render @form.model.id.nil? ? :new : :show
       end
 
       private
