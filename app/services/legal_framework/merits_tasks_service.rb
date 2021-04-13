@@ -34,7 +34,6 @@ module LegalFramework
     end
 
     def merits_tasks(submission)
-      # binding.pry
       @merits_tasks ||= MeritsTasksRetrieverService.call(submission)
     end
 
