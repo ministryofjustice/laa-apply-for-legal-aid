@@ -63,19 +63,10 @@ module LegalFramework
       end
 
       context 'task has dependencies' do
-        context 'proceeding_type task' do
-          it 'raises an exception' do
-            expect {
-              smtl.mark_as_complete!(:DA001, :proceeding_children)
-            }.to raise_error RuntimeError, 'Unmet dependency application_children for task proceeding_children'
-          end
-        end
-        context 'application task' do
-          it 'raises an exception' do
-            expect {
-              smtl.mark_as_complete!(:DA001, :proceeding_children)
-            }.to raise_error RuntimeError, 'Unmet dependency application_children for task proceeding_children'
-          end
+        it 'raises an exception' do
+          expect {
+            smtl.mark_as_complete!(:DA001, :proceeding_children)
+          }.to raise_error RuntimeError, 'Unmet dependency application_children for task proceeding_children'
         end
       end
 
