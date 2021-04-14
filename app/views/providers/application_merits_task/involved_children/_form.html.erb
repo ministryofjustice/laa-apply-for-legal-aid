@@ -4,6 +4,7 @@
       method: :patch,
       local: true
     ) do |form| %>
+  <span class="govuk-hint"><%= t('.hint') %></span>
   <div class="govuk-!-padding-bottom-2"></div>
 
   <%= form.govuk_text_field :full_name, width: 'three-quarters', label: { size: 'm', text: t('.name') } %>
@@ -16,3 +17,10 @@
         form: form
       ) %>
 <% end %>
+
+
+
+
+
+
+
