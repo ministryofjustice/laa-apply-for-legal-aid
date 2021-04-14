@@ -31,7 +31,7 @@ module TranslatableModelAttribute
         OpenStruct.new(name: option.to_s, label: translation)
       end
       collection.reverse! if order == :reverse
-      form.govuk_collection_radio_buttons(attribute, collection, :name, :label, args)
+      form.govuk_collection_radio_buttons(attribute, collection, :name, :label, **args)
     end
 
     def enum_ts(attribute)
