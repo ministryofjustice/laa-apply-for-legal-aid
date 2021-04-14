@@ -600,7 +600,9 @@ Then(/^the results section is empty$/) do
 end
 
 Then(/^proceeding suggestions has results$/) do
-  expect(page).to have_css('#proceeding-list > .proceeding-item')
+  result = expect(page).to have_css('#proceeding-list > .proceeding-item')
+  pp @legal_aid_application.proceeding_types.pluck(:code, :ccms_code) unless result
+  result
 end
 
 Given('I click Check Your Answers Change link for {string}') do |field_name|
