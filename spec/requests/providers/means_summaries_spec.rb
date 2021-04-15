@@ -131,8 +131,6 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
         let(:cfe_result) { false }
 
         it 'redirects to the problem page' do
-          pp 2_222_222
-          pp legal_aid_application.used_delegated_functions?
           expect(response).to redirect_to(problem_index_path)
         end
       end
