@@ -601,7 +601,7 @@ end
 
 Then(/^proceeding suggestions has results$/) do
   result = expect(page).to have_css('#proceeding-list > .proceeding-item')
-  log(@legal_aid_application.proceeding_types.pluck(:code, :ccms_code)) # unless result
+  log(@legal_aid_application&.proceeding_types&.pluck(:code, :ccms_code)) if @legal_aid_application.present? # && unless result
   result
 end
 
