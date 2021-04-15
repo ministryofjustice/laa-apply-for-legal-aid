@@ -7,7 +7,12 @@ module Providers
     private
 
     def merits_tasks
-      YAML.load(LegalFramework::MeritsTasksService.call(@legal_aid_application).serialized_data).tasks # rubocop:disable Security/YAMLLoad:
+      task_list_record = @legal_aid_application.legal_framework_merits_task_list
+      if task_list_record.nil?
+        LegalFramework::MeritsTasksService.call(@legal_aid_application).tasks
+      else
+        task_list_record.task_list.tasks
+      end
     end
   end
 end
