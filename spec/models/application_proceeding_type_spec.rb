@@ -49,6 +49,34 @@ RSpec.describe ApplicationProceedingType do
     end
   end
 
+  describe '#used_delegated_functions?' do
+    let(:application) { create :legal_aid_application }
+
+    before do
+      create :application_proceeding_type, legal_aid_application: application, used_delegated_functions_on: nil
+      create :application_proceeding_type, legal_aid_application: application, used_delegated_functions_on: df_date
+      Setting.setting.update(allow_multiple_proceedings: true)
+    end
+
+    context 'delegated functions used' do
+      let(:df_date) { Time.current }
+
+      it 'returns true' do
+        application_proceeding_type = application.application_proceeding_types.first
+        expect(application_proceeding_type.used_delegated_functions?).to be true
+      end
+    end
+
+    context 'delegated functions not used' do
+      let(:df_date) { nil }
+
+      it 'returns false' do
+        application_proceeding_type = application.application_proceeding_types.first
+        expect(application_proceeding_type.used_delegated_functions?).to be false
+      end
+    end
+  end
+
   describe 'assigned_scope_limitations' do
     let(:application) { create :legal_aid_application }
     let(:proceeding_type) { ProceedingType.first }
