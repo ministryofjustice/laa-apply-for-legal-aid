@@ -71,9 +71,17 @@ module LegalFramework
       end
 
       context 'successful' do
-        it 'marks the task as complete' do
-          smtl.mark_as_complete!(:application, :incident_details)
-          expect(smtl.task(:application, :incident_details).state).to eq :complete
+        context 'application group' do
+          it 'marks the task as complete' do
+            smtl.mark_as_complete!(:application, :incident_details)
+            expect(smtl.task(:application, :incident_details).state).to eq :complete
+          end
+        end
+        context 'proceeding type' do
+          it 'marks the task as complete' do
+            smtl.mark_as_complete!(:DA005, :chances_of_success)
+            expect(smtl.task(:DA005, :chances_of_success).state).to eq :complete
+          end
         end
       end
     end

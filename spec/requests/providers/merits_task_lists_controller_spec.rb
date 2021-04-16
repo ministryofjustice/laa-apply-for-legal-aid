@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let!(:pt1) { create :proceeding_type, ccms_code: 'DA005' }
-  let!(:pt2) { create :proceeding_type, ccms_code: 'DA002'  }
-  let!(:pt3) { create :proceeding_type, ccms_code: 'DA003'  }
+  let!(:pt2) { create :proceeding_type, ccms_code: 'DA001' }
+  let!(:pt3) { create :proceeding_type, ccms_code: 'DA003' }
   let(:login_provider) { login_as legal_aid_application.provider }
   let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types, proceeding_types: [pt1, pt2, pt3] }
 
@@ -26,10 +26,21 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       expect(response.body).to include('Case details')
     end
 
-    it 'displays a section for all proceeding types linked to this application' do
-      subject
-      [pt1, pt2, pt3].pluck(:name).each do |name|
-        expect(parsed_response_body.css("ol li#{name} h2").text).to match(/#{name}/)
+    context 'the record already exists' do
+      it 'displays a section for all proceeding types linked to this application' do
+        subject
+        [pt1, pt2, pt3].pluck(:name).each do |name|
+          expect(parsed_response_body.css("ol li#{name} h2").text).to match(/#{name}/)
+        end
+      end
+    end
+
+    context 'the record does not exist' do
+      it 'displays a section for all proceeding types linked to this application' do
+        subject
+        [pt1, pt2, pt3].pluck(:name).each do |name|
+          expect(parsed_response_body.css("ol li#{name} h2").text).to match(/#{name}/)
+        end
       end
     end
   end
