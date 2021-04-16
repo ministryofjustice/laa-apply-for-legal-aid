@@ -5,7 +5,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"9629b99a-5455-4833-85a1-b65157d676d5","proceeding_types":["DA005","DA002","DA003"]}'
+      string: '{"request_id":"fa00cdfa-36dc-411b-8129-65b5dc9e56ab","proceeding_types":["DA005","DA001","DA003"]}'
     headers:
       Content-Type:
       - application/json
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 13 Apr 2021 14:31:57 GMT
+      - Fri, 16 Apr 2021 15:52:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,17 +43,17 @@ http_interactions:
       Vary:
       - Accept
       Etag:
-      - W/"b8b710e7cdcb32d67ec5ae00a0fbde57"
+      - W/"bf4bb0b1637cb442597df3eab07649fa"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 4a92d78feabfb0d5e629deb6efa166ec
+      - 7928b6dab2094334cf8430cdf160487d
       X-Runtime:
-      - '0.053072'
+      - '0.117117'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"9629b99a-5455-4833-85a1-b65157d676d5","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA005","tasks":{"chances_of_success":[]}},{"ccms_code":"DA002","tasks":{"chances_of_success":[]}},{"ccms_code":"DA003","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Tue, 13 Apr 2021 14:31:57 GMT
+      string: '{"request_id":"fa00cdfa-36dc-411b-8129-65b5dc9e56ab","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA005","tasks":{"chances_of_success":[]}},{"ccms_code":"DA001","tasks":{"chances_of_success":[]}},{"ccms_code":"DA003","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Fri, 16 Apr 2021 15:52:19 GMT
 recorded_with: VCR 6.0.0
