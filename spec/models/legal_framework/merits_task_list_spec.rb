@@ -23,7 +23,7 @@ module LegalFramework
     end
 
     def dummy_serialized_merits_task_list
-      build :legal_framework_merits_task_list
+      build :legal_framework_serializable_merits_task_list
     end
   end
 end
