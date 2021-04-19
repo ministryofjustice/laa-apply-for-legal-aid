@@ -36,6 +36,10 @@ module LegalFramework
       YAML.safe_load(yaml_string, SAFE_SERIALIZABLE_CLASSES, aliases: true)
     end
 
+    def empty?
+      @tasks[:application].empty? && @tasks[:proceedings].empty?
+    end
+
     private
 
     def serialize_application_tasks
