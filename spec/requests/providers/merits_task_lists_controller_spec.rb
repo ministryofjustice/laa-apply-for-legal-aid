@@ -6,26 +6,14 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let!(:pt3) { create :proceeding_type, ccms_code: 'DA003' }
   let(:login_provider) { login_as legal_aid_application.provider }
   let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types, proceeding_types: [pt1, pt2, pt3] }
-  let(:tasks) do
-    {
-      application: [
-        LegalFramework::SerializableMeritsTask.new('latest_incident_details', dependencies: []),
-        LegalFramework::SerializableMeritsTask.new('opponent_details', dependencies: []),
-        LegalFramework::SerializableMeritsTask.new('statement_of_case', dependencies: [])
-      ],
-      proceedings: {
-        DA005: [LegalFramework::SerializableMeritsTask.new('chances_of_success', dependencies: [])],
-        DA001: [LegalFramework::SerializableMeritsTask.new('chances_of_success', dependencies: [])],
-        DA003: [LegalFramework::SerializableMeritsTask.new('chances_of_success', dependencies: [])]
-      }
-    }
-  end
+  let(:smtl) { build :legal_framework_serializable_merits_task_list }
+
   subject { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
 
-  describe 'GET /providers/merits_task_list', vcr: { record: :new_episodes } do
+  describe 'GET /providers/merits_task_list' do
     context 'the record does not exist' do
       before do
-        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(tasks)
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
         login_provider
         subject
       end
@@ -49,8 +37,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
     context 'the record already exists' do
       before do
         login_provider
-        serializable_merits_task_list = build(:legal_framework_serializable_merits_task_list)
-        LegalFramework::MeritsTaskList.create!(legal_aid_application_id: legal_aid_application.id, serialized_data: serializable_merits_task_list.to_yaml)
+        create :legal_framework_merits_task, legal_aid_application: legal_aid_application
         subject
       end
 
