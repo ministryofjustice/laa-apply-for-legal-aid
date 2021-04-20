@@ -748,8 +748,8 @@ Feature: Civil application journeys
   Scenario: View privacy policy
     Given I start the journey as far as the applicant page
     Then I click link "Privacy policy"
-    Then I should be on a page showing "Why we need your data"
-    Then I should be on a page showing "Your rights"
+    Then I should be on a page showing "Types of personal data we process"
+    Then I should be on a page showing "Complaints"
     Then I click link "Back"
     Then I should be on the Applicant page
 
