@@ -11,7 +11,7 @@ namespace :cucumber do
     Dir.glob(File.join(step_definition_dir,'**/*.rb')).each do |step_file|
       File.new(step_file).read.each_line.each_with_index do |line, number|
         next unless line =~ /^\s*(Given|When|Then)\((.+)\)\s*do$/
-        name = $2.gsub('/', '').gsub('^', '').gsub('$', '').gsub("'", '')
+        name = $2.gsub('/', '').gsub('^', '').gsub('$', '').gsub("'", '').gsub('"', '')
         results<< OpenStruct.new(stepname: name, location: "#{step_file}:#{number + 1}")
       end
     end
