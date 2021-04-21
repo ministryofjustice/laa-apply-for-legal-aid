@@ -32,14 +32,6 @@ module Providers
           end
         end
 
-        context 'date too early' do
-          let(:dob) { earliest_date - 2.years }
-          it 'returns false' do
-            expect(subject).not_to be_valid
-            expect(subject.errors[:date_of_birth]).to eq ['Date cannot be before 01 01 2000']
-          end
-        end
-
         context 'date in the future' do
           let(:dob) { Date.tomorrow }
           it 'returns false' do

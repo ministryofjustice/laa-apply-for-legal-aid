@@ -17,14 +17,7 @@ module Providers
 
       validates :full_name, presence: true
       validates :date_of_birth, presence: true
-      validates(
-        :date_of_birth,
-        date: {
-          not_in_the_future: true,
-          earliest_allowed_date: { date: '2000-01-01' }
-        },
-        allow_nil: true
-      )
+      validates :date_of_birth, date: { not_in_the_future: true }, allow_nil: true
 
       def initialize(*args)
         super
