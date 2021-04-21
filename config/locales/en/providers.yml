@@ -460,7 +460,7 @@ en:
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
-          completed: Completed
+          complete: Completed
         urls:
           latest_incident_details: date_client_told_incident
           opponent_details: opponent
