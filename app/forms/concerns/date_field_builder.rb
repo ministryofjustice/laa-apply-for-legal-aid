@@ -78,6 +78,10 @@ class DateFieldBuilder
     @form_date ||= Date.new(*date_attributes)
   end
 
+  def input_field_values
+    [''] + from_form
+  end
+
   private
 
   def field_for(part)
