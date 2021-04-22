@@ -15,6 +15,7 @@ gem 'pg_dump_anonymize'
 gem 'puma', '~> 5.2'
 gem 'rails', '~> 6.1.3'
 gem 'regexp-examples'
+gem 'rexml', '~> 3.2.4'
 gem 'savon', '~> 2.12.1'
 gem 'sentry-rails'
 gem 'sentry-ruby'
@@ -93,7 +94,7 @@ gem 'rails_admin', '~> 2.1'
 gem 'secure_headers'
 
 # DFE formbuilder
-gem 'govuk_design_system_formbuilder'
+gem 'govuk_design_system_formbuilder', '~> 2.4.0'
 
 # Sprockets isn't used by the app but is installed by rails as a dependency.
 # Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
@@ -138,7 +139,7 @@ group :test do
   gem 'capybara', '>= 3.32.2', '< 4.0'
   gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'codecov', require: false
-  gem 'cucumber', require: false
+  gem 'cucumber', '~> 5.3', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
