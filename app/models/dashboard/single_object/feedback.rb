@@ -44,7 +44,7 @@ module Dashboard
       def calculate_value_of(selection)
         return 0 if selection.nil?
 
-        MULTIPLIERS.map { |key, value| key if value.include?(selection.to_s) }.compact.first
+        MULTIPLIERS.filter_map { |key, value| key if value.include?(selection.to_s) }.first
       end
 
       def dataset_definition

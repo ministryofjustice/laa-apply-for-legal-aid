@@ -3,8 +3,6 @@
     back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) }
     ) do %>
 
-  <h1 class="govuk-heading-xl"><% page_title %></h1>
-
   <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
   <ol class="app-task-list">
     <%= render 'task_list_section', name: t('.application_section_heading'), tasks: @merits_tasks[:application], section_number: 1 %>

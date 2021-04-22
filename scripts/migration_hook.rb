@@ -3,7 +3,7 @@ require_relative '../db/anonymise/rules'
 
 def tables_in_schema
   f = IO.read('db/schema.rb')
-  f.each_line.map { |line| line.match(/create_table "(\w*)"/)[1] if line[/create_table/] }.compact
+  f.each_line.filter_map { |line| line.match(/create_table "(\w*)"/)[1] if line[/create_table/] }
 end
 
 def tables_in_rules
