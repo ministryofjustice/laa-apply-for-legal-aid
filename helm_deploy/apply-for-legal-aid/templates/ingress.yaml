@@ -10,6 +10,11 @@ metadata:
     chart: {{ template "apply-for-legal-aid.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+  annotations:
+    kubernetes.io/ingress.class: "modsec01"
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      SecRuleEngine On
 {{- with .Values.ingress.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}
