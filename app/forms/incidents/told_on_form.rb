@@ -32,7 +32,7 @@ module Incidents
     def told_on
       return @told_on if @told_on.present?
       return if told_on_date_fields.blank?
-      return :invalid if told_on_date_fields.partially_complete? || told_on_date_fields.form_date_invalid?
+      return told_on_date_fields.input_field_values if told_on_incomplete?
 
       @told_on = attributes[:told_on] = told_on_date_fields.form_date
     end
@@ -40,15 +40,24 @@ module Incidents
     def occurred_on
       return @occurred_on if @occurred_on.present?
       return if occurred_on_date_fields.blank?
-      return :invalid if occurred_on_date_fields.partially_complete? || occurred_on_date_fields.form_date_invalid?
+      return occurred_on_date_fields.input_field_values if occurred_on_incomplete?
 
       @occurred_on = attributes[:occurred_on] = occurred_on_date_fields.form_date
     end
 
     private
 
+    def told_on_incomplete?
+      told_on_date_fields.partially_complete? || told_on_date_fields.form_date_invalid?
+    end
+
+    def occurred_on_incomplete?
+      occurred_on_date_fields.partially_complete? || occurred_on_date_fields.form_date_invalid?
+    end
+
     def occurred_on_before_told_on
       return if occurred_on.blank? || told_on.blank?
+      return if occurred_on_incomplete? || told_on_incomplete?
 
       errors.add(:occurred_on, :invalid_timeline) if told_on < occurred_on
     rescue ArgumentError

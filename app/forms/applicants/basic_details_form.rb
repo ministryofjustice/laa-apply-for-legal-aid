@@ -42,7 +42,7 @@ module Applicants
     def date_of_birth
       return @date_of_birth if @date_of_birth.present?
       return if dob_date_fields.blank?
-      return :invalid if dob_date_fields.partially_complete? || dob_date_fields.form_date_invalid?
+      return dob_date_fields.input_field_values if dob_date_fields.partially_complete? || dob_date_fields.form_date_invalid?
 
       @date_of_birth = attributes[:date_of_birth] = dob_date_fields.form_date
     end

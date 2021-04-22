@@ -71,7 +71,7 @@ module LegalAidApplications
     def date_of_birth
       return @date_of_birth if @date_of_birth.present?
       return if date_fields.blank?
-      return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
+      return date_fields.input_field_values if date_fields.partially_complete? || date_fields.form_date_invalid?
 
       @date_of_birth = attributes[:date_of_birth] = date_fields.form_date
     end
