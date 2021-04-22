@@ -28,15 +28,7 @@ module Providers
           let(:full_name) { '' }
           it 'returns false' do
             expect(subject).not_to be_valid
-            expect(subject.errors[:full_name]).to eq ["can't be blank"]
-          end
-        end
-
-        context 'date in the future' do
-          let(:dob) { Date.tomorrow }
-          it 'returns false' do
-            expect(subject).not_to be_valid
-            expect(subject.errors[:date_of_birth]).to eq ['Date of birth cannot be in the future']
+            expect(subject.errors[:full_name]).to eq ["Enter the child's full name"]
           end
         end
 
@@ -51,7 +43,22 @@ module Providers
           end
           it 'returns false' do
             expect(subject).not_to be_valid
-            expect(subject.errors[:date_of_birth]).to eq ["can't be blank"]
+            expect(subject.errors[:date_of_birth]).to eq ['Enter the date of birth']
+          end
+        end
+
+        context 'invalid date of birth' do
+          let(:params) do
+            {
+              full_name: full_name,
+              date_of_birth_3i: '32',
+              date_of_birth_2i: '2',
+              date_of_birth_1i: '2021'
+            }
+          end
+          it 'returns false' do
+            expect(subject).not_to be_valid
+            expect(subject.errors[:date_of_birth]).to eq ['Enter a valid date of birth']
           end
         end
       end
