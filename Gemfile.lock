@@ -161,7 +161,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.8)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -596,7 +596,7 @@ GEM
     sidekiq-status (1.1.4)
       chronic_duration
       sidekiq (>= 3.0)
-    sidekiq_alive (2.0.5)
+    sidekiq_alive (2.0.6)
       sidekiq
     simplecov (0.21.2)
       docile (~> 1.1)
