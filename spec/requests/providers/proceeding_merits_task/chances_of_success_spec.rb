@@ -4,8 +4,8 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe ChancesOfSuccessController, type: :request do
       let(:chances_of_success) { create :chances_of_success, application_proceeding_type: application_proceeding_type }
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
-      let!(:application_proceeding_type) { legal_aid_application.lead_application_proceeding_type }
+      let(:legal_aid_application) { create :legal_aid_application }
+      let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
       let(:login) { login_as legal_aid_application.provider }
 
       before { login }

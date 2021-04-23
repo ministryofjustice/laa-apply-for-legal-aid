@@ -63,7 +63,7 @@ module Dashboard
         end
 
         def expected_apps
-          # pattern is days_ago => [created applications, ccms_submission failures, delegated_function applications, submitted passported applications, submitted non_passported applications]
+          # pattern is days_ago => [created applications, ccms_submission failures, delegated_function applications, submitted passported applications, submitted non_passported applications,  incomplete passported & nonpassported applications]
           {
             6 => [3, 0, 0, 0, 0, 0],
             5 => [1, 1, 0, 0, 0, 0],
