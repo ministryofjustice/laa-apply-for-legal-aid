@@ -5,7 +5,7 @@ namespace :move_delegated_functions_data do
     # if delegated functions exist on the legal aid application
     # then move the values for used_delegated_functions_on AND used_delegated_functions_reported_on
     # to their respective fields on application_proceeding_types
-    application_ids = LegalAidApplication.where.not(used_delegated_functions_on: nil).pluck_id
+    application_ids = LegalAidApplication.where.not(used_delegated_functions_on: nil).pluck(:id)
 
     application_ids.each do |ap_id|
       application = LegalAidApplication.find(ap_id)
