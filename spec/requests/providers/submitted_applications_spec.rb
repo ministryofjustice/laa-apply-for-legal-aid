@@ -6,6 +6,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:legal_aid_application) do
     create :legal_aid_application, :with_everything, :with_proceeding_types, :assessment_submitted, provider: provider
   end
+  let(:application_proceeding_type) { legal_aid_application.lead_application_proceeding_type }
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
