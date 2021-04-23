@@ -60,8 +60,6 @@ module Incidents
       return if occurred_on_incomplete? || told_on_incomplete?
 
       errors.add(:occurred_on, :invalid_timeline) if told_on < occurred_on
-    rescue ArgumentError
-      :invalid
     end
 
     def exclude_from_model
