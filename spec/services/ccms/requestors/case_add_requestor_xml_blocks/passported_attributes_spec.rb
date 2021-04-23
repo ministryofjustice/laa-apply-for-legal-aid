@@ -27,7 +27,7 @@ module CCMS
                  office: office
         end
 
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:lead_application_proceeding_type) { legal_aid_application.lead_application_proceeding_type }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -36,7 +36,9 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
-        let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let!(:chances_of_success) do
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: lead_application_proceeding_type
+        end
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
@@ -354,21 +356,21 @@ module CCMS
           context 'ProceedingCaseId section' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding_case_id)
-              expect(block.text).to eq application_proceeding_type.proceeding_case_p_num
+              expect(block.text).to eq lead_application_proceeding_type.proceeding_case_p_num
             end
           end
 
           context 'in merits assessment block' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_ID')
-              expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
+              expect(block).to have_text_response(lead_application_proceeding_type.proceeding_case_p_num)
             end
           end
 
           context 'in means assessment block' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding, 'PROCEEDING_ID')
-              expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
+              expect(block).to have_text_response(lead_application_proceeding_type.proceeding_case_p_num)
             end
           end
         end
@@ -386,31 +388,38 @@ module CCMS
         end
 
         context 'FAMILY_PROSPECTS_OF_SUCCESS' do
+          before do
+            allow(legal_aid_application).to receive(:chances_of_success).and_return(lead_application_proceeding_type.chances_of_success)
+          end
+
           it 'returns the ccms equivalent prospect of success for likely' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('likely')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Good'
           end
 
           it 'returns the ccms equivalent prospect of success for marginal' do
+            allow(lead_application_proceeding_type.chances_of_success).to receive(:success_prospect).and_return('marginal')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Marginal'
           end
 
           it 'returns the ccms equivalent prospect of success for uncertain' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('uncertain')
+            allow(legal_aid_application).to receive(:chances_of_success).and_return(lead_application_proceeding_type.chances_of_success)
+            allow(lead_application_proceeding_type.chances_of_success).to receive(:success_prospect).and_return('uncertain')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Uncertain'
           end
 
           it 'returns the ccms equivalent prospect of success for poor' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('poor')
+            allow(legal_aid_application).to receive(:chances_of_success).and_return(lead_application_proceeding_type.chances_of_success)
+            allow(lead_application_proceeding_type.chances_of_success).to receive(:success_prospect).and_return('poor')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Poor'
           end
 
           it 'returns the ccms equivalent prospect of success for borderline' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('borderline')
+            allow(legal_aid_application).to receive(:chances_of_success).and_return(lead_application_proceeding_type.chances_of_success)
+            allow(lead_application_proceeding_type.chances_of_success).to receive(:success_prospect).and_return('borderline')
             block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
             expect(block).to have_text_response 'Borderline'
           end
@@ -1360,28 +1369,28 @@ module CCMS
 
           it 'populates APP_IS_FAMILY' do
             block = XmlExtractor.call(xml, :global_merits, 'APP_IS_FAMILY')
-            expect(block).to have_boolean_response(application_proceeding_type.proceeding_type.ccms_category_law == 'Family')
+            expect(block).to have_boolean_response(lead_application_proceeding_type.proceeding_type.ccms_category_law == 'Family')
           end
 
           it 'populates CAT_OF_LAW_DESCRIPTION' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_DESCRIPTION')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+            expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.ccms_category_law
           end
 
           it 'populates CAT_OF_LAW_HIGH_LEVEL' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_HIGH_LEVEL')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+            expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.ccms_category_law
           end
 
           it 'populates CAT_OF_LAW_MEANING' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_MEANING')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.meaning
+            expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.meaning
           end
 
           it 'populates CATEGORY_OF_LAW' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'CATEGORY_OF_LAW')
-              expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law_code
+              expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.ccms_category_law_code
             end
           end
 
@@ -1400,13 +1409,13 @@ module CCMS
           it 'populates MATTER_TYPE' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'MATTER_TYPE')
-              expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_matter_code
+              expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.ccms_matter_code
             end
           end
 
           it 'populates PROCEEDING_NAME' do
             block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_NAME')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_code
+            expect(block).to have_text_response lead_application_proceeding_type.proceeding_type.ccms_code
           end
         end
 
