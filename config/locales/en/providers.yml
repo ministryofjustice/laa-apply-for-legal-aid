@@ -261,6 +261,9 @@ en:
           hint-text: Tell us if correspondence or mediation has been tried, or if no attempts have been made.
           attempts_made: Details
           error: Please provide details of the attempts made to settle
+      success_prospects:
+        show:
+          h1-heading: What is the chance of a successful outcome?
     application_merits_task:
       involved_children:
         new:
@@ -644,6 +647,8 @@ en:
     proceedings_before_the_courts:
       show:
         h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
+        label:
+          details_of_proceedings_before_the_court: Please give details.
     proceedings_types:
       create:
         search_and_select: Search for and select a proceeding
@@ -766,9 +771,6 @@ en:
           You can make a substantive application now or come back and do it later.
         no_start_later: No, I'll do it later
         must_submit_by: You must submit a substantive application by %{deadline}
-    success_prospects:
-      show:
-        h1-heading: What is the chance of a successful outcome?
     transactions:
       disregarded_list:
         disregarded_list: Benefits disregarded from the financial eligibility calculation
