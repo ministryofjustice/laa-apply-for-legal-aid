@@ -592,6 +592,54 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#used_delegated_functions?' do
+    context 'not allowed multiple proceedings' do
+      before { Setting.setting.update(allow_multiple_proceedings: false) }
+
+      context 'delegated functions used' do
+        let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: true, used_delegated_functions_on: Time.current }
+
+        it 'returns true' do
+          expect(legal_aid_application.used_delegated_functions?).to be true
+        end
+      end
+
+      context 'delegated functions not used' do
+        let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: false, used_delegated_functions_on: nil }
+
+        it 'returns false' do
+          expect(legal_aid_application.used_delegated_functions?).to be false
+        end
+      end
+    end
+
+    context 'allow_multiple_proceedings' do
+      let(:legal_aid_application) { create :legal_aid_application }
+
+      before do
+        create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: nil
+        create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: df_date
+        Setting.setting.update(allow_multiple_proceedings: true)
+      end
+
+      context 'delegated functions used' do
+        let(:df_date) { Time.current }
+
+        it 'returns true' do
+          expect(legal_aid_application.used_delegated_functions?).to be true
+        end
+      end
+
+      context 'delegated functions not used' do
+        let(:df_date) { nil }
+
+        it 'returns false' do
+          expect(legal_aid_application.used_delegated_functions?).to be false
+        end
+      end
+    end
+  end
+
   describe 'default_cost_limitations' do
     let(:proceeding_type) do
       create :proceeding_type,

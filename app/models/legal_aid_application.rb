@@ -195,6 +195,14 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
+  def used_delegated_functions?
+    if Setting.allow_multiple_proceedings?
+      application_proceeding_types.map(&:used_delegated_functions?).include?(true)
+    else
+      attributes['used_delegated_functions']
+    end
+  end
+
   def parent_transaction_types
     ids = transaction_types.map(&:parent_or_self).map(&:id)
     TransactionType.where(id: ids)

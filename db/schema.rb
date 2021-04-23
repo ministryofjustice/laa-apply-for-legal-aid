@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_120727) do
+ActiveRecord::Schema.define(version: 2021_04_08_162032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_04_07_120727) do
     t.datetime "updated_at", null: false
     t.integer "proceeding_case_id"
     t.boolean "lead_proceeding", default: false, null: false
+    t.date "used_delegated_functions_on"
+    t.date "used_delegated_functions_reported_on"
     t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_application_proceeding_types_on_proceeding_case_id", unique: true
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"

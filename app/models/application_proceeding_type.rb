@@ -54,6 +54,10 @@ class ApplicationProceedingType < ApplicationRecord
     "P_#{proceeding_case_id}"
   end
 
+  def used_delegated_functions?
+    used_delegated_functions_on.present?
+  end
+
   private
 
   def highest_proceeding_case_id
