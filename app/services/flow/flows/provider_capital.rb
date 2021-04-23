@@ -77,7 +77,7 @@ module Flow
         },
         capital_assessment_results: {
           path: ->(application) { urls.providers_legal_aid_application_capital_assessment_result_path(application) },
-          forward: :start_chances_of_successes
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :start_chances_of_successes }
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
@@ -115,7 +115,7 @@ module Flow
         },
         capital_income_assessment_results: {
           path: ->(application) { urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
-          forward: :start_chances_of_successes
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :start_chances_of_successes }
         },
         means_reports: {
           path: ->(application) { urls.providers_legal_aid_application_means_report_path(application) }

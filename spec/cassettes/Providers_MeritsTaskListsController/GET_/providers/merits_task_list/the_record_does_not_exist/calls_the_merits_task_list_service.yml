@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"bebf2a08-ab3e-4c6f-bbe9-c80e0c4da140","proceeding_types":["DA005","DA001","DA003"]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.3.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 16 Apr 2021 15:52:20 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"9643b3c20eb78d5e8f2e3b0c3cb6764b"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5e5159aa0391845d612de120d0dce5d6
+      X-Runtime:
+      - '0.111858'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"bebf2a08-ab3e-4c6f-bbe9-c80e0c4da140","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA005","tasks":{"chances_of_success":[]}},{"ccms_code":"DA001","tasks":{"chances_of_success":[]}},{"ccms_code":"DA003","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Fri, 16 Apr 2021 15:52:20 GMT
+recorded_with: VCR 6.0.0

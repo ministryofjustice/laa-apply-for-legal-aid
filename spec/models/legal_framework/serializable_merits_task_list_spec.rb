@@ -2,6 +2,7 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe SerializableMeritsTaskList, type: :model do
+    before { populate_legal_framework }
     let(:smtl) { described_class.new(dummy_response_hash) }
 
     describe '.new' do
@@ -64,15 +65,23 @@ module LegalFramework
       context 'task has dependencies' do
         it 'raises an exception' do
           expect {
-            smtl.mark_as_complete!(:SE003, :proceeding_children)
+            smtl.mark_as_complete!(:DA001, :proceeding_children)
           }.to raise_error RuntimeError, 'Unmet dependency application_children for task proceeding_children'
         end
       end
 
       context 'successful' do
-        it 'marks the task as complete' do
-          smtl.mark_as_complete!(:application, :incident_details)
-          expect(smtl.task(:application, :incident_details).state).to eq :complete
+        context 'application group' do
+          it 'marks the task as complete' do
+            smtl.mark_as_complete!(:application, :incident_details)
+            expect(smtl.task(:application, :incident_details).state).to eq :complete
+          end
+        end
+        context 'proceeding type' do
+          it 'marks the task as complete' do
+            smtl.mark_as_complete!(:DA005, :chances_of_success)
+            expect(smtl.task(:DA005, :chances_of_success).state).to eq :complete
+          end
         end
       end
     end
@@ -95,7 +104,7 @@ module LegalFramework
             }
           },
           {
-            ccms_code: 'SE003',
+            ccms_code: 'DA001',
             tasks: {
               chances_of_success: [],
               proceeding_children: [:application_children]

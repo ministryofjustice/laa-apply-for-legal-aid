@@ -207,6 +207,7 @@ Rails.application.routes.draw do
       resource :proceedings_before_the_court, only: %i[show update]
       resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
       resource :success_prospects, only: %i[show update]
+      resource :merits_task_list, only: %i[show]
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset

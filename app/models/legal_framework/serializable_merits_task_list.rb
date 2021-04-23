@@ -6,14 +6,18 @@ module LegalFramework
 
     def initialize(lfa_response)
       @lfa_response = lfa_response
-      @tasks = { application: [] }
+      @tasks = { application: [], proceedings: {} }
 
       serialize_application_tasks
       serialize_proceeding_types_tasks
     end
 
     def tasks_for(task_group)
-      @tasks.fetch(task_group)
+      tasks = @tasks.fetch(task_group, false)  # returns tasks at application level
+      tasks ||= @tasks[:proceedings].fetch(task_group, {})[:tasks]  # returns tasks from within nested :proceedings hash
+      return tasks if tasks
+
+      raise KeyError, "key not found: #{task_group.inspect}"
     end
 
     def task(task_group, task_name)
@@ -32,6 +36,10 @@ module LegalFramework
       YAML.safe_load(yaml_string, SAFE_SERIALIZABLE_CLASSES, aliases: true)
     end
 
+    def empty?
+      @tasks[:application].empty? && @tasks[:proceedings].empty?
+    end
+
     private
 
     def serialize_application_tasks
@@ -43,9 +51,10 @@ module LegalFramework
     def serialize_proceeding_types_tasks
       @lfa_response[:proceeding_types].each do |proceeding_type_hash|
         ccms_code = proceeding_type_hash[:ccms_code].to_sym
-        @tasks[ccms_code] = []
+        proceeding_name = ProceedingType.find_by(ccms_code: ccms_code).meaning
+        @tasks[:proceedings][ccms_code] = { name: proceeding_name, tasks: [] }
         proceeding_type_hash[:tasks].each do |task_name, dependencies|
-          @tasks[ccms_code] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
+          @tasks[:proceedings][ccms_code][:tasks] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
         end
       end
     end

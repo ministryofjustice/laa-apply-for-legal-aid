@@ -4,61 +4,45 @@
 
 // Task list pattern
 
-// Override column width for tablet and up
-.app-column-minimum {
-  @include govuk-media-query($from: tablet) {
-    min-width: 600px;
-  }
-}
-
-// Spacing to the left of the task list
-$task-list-indent: 35px;
-
 .app-task-list {
-  list-style: none;
-  padding: 0;
-  margin-top: $govuk-gutter;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   @include govuk-media-query($from: tablet) {
-    margin-top: ($govuk-gutter * 2);
+    min-width: 550px;
   }
 }
 
 .app-task-list__section {
   display: table;
-  margin: 0;
-  padding-bottom: ($govuk-gutter / 6);
-  font-family: "GDS Transport", arial, sans-serif;
+  @include govuk-font($size:24, $weight: bold);
 }
 
 .app-task-list__section-number {
   display: table-cell;
-  padding-right: ($govuk-gutter / 6);
 
   @include govuk-media-query($from: tablet) {
-    min-width: $task-list-indent;
+    min-width: govuk-spacing(6);
     padding-right: 0;
   }
 }
 
-
 .app-task-list__items {
-  list-style: none;
-  padding: 0;
-  margin-bottom: $govuk-gutter;
+  @include govuk-responsive-margin(9, "bottom");
+  padding-left: 0;
   @include govuk-media-query($from: tablet) {
-    margin-bottom: ($govuk-gutter * 2);
-  }
-
-  @include govuk-media-query($from: tablet) {
-    padding-left: $task-list-indent;
+    padding-left: govuk-spacing(6);
   }
 }
 
 .app-task-list__item {
+  list-style-type: none;
   border-bottom: 1px solid $govuk-border-colour;
+  margin-bottom: 0 !important;
   padding-top: govuk-spacing(2);
   padding-bottom: govuk-spacing(2);
-  @include govuk-clearfix
+  @include govuk-clearfix;
 }
 
 .app-task-list__item:first-child {
@@ -66,10 +50,28 @@ $task-list-indent: 35px;
 }
 
 .app-task-list__task-name {
-  width: 33.3%;
-  float: left;
+  @include govuk-font($size: 19);
+  display: block;
+  @include govuk-media-query($from: 450px) {
+    float: left;
+  }
 }
 
+.app-task-list__task-name p {
+  margin-bottom: 0;
+}
+
+// The `app-task-list__task-completed` class was previously used on the task
+// list for the completed tag (changed in 86c90ec) – it's still included here to
+// avoid breaking task lists in existing prototypes.
+.app-task-list__tag,
 .app-task-list__task-completed {
-  float: right;
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(1);
+
+  @include govuk-media-query($from: 450px) {
+    float: right;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }

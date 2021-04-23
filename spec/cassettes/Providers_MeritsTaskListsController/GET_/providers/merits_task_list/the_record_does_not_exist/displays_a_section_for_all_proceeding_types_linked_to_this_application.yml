@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"b4ec7696-07d1-4880-ac33-dc84dde9e03c","proceeding_types":["DA005","DA001","DA003"]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.3.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 16 Apr 2021 15:56:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"3207cecc2c05bb5f6aa440030d8e377e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - c66cd17d1108f5965cf12afb9346798b
+      X-Runtime:
+      - '0.239297'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"b4ec7696-07d1-4880-ac33-dc84dde9e03c","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA005","tasks":{"chances_of_success":[]}},{"ccms_code":"DA001","tasks":{"chances_of_success":[]}},{"ccms_code":"DA003","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Fri, 16 Apr 2021 15:56:00 GMT
+recorded_with: VCR 6.0.0

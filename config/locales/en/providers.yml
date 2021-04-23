@@ -444,6 +444,30 @@ en:
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
+    merits_task_lists:
+      show:
+        page_heading: Provide details of the case
+        application_heading: Enter general case details
+        application_section_heading: Case details
+        proceeding_heading: Enter details for each proceeding
+      task_list_item:
+        latest_incident_details: Latest incident details
+        opponent_details: Opponent details
+        statement_of_case: Statement of case
+        chances_of_success: Chances of success
+        application_children: Children involved in this application
+        proceeding_children: Children involved in this proceeding
+        states:
+          not_started: Not started
+          waiting_for_dependency: Cannot start yet
+          complete: Completed
+        urls:
+          latest_incident_details: date_client_told_incident
+          opponent_details: opponent
+          statement_of_case: statement_of_case
+          chances_of_success: chances_of_success_index
+          application_children: chances_of_success_index
+          proceeding_children: chances_of_success_index
     merits_reports:
       show:
         heading: Merits report

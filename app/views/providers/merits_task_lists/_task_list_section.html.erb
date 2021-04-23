@@ -1,0 +1,14 @@
+<li>
+  <h2 class="app-task-list__section">
+    <span class="app-task-list__section-number"><%= section_number %>.</span>
+    <%= name %>
+  </h2>
+  <ul class="app-task-list__items">
+    <% tasks.each do |task| %>
+      <%= task_list_item(
+              name: task.name,
+              status: task.state
+          ) %>
+    <% end %>
+  </ul>
+</li>
