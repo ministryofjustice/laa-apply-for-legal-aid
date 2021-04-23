@@ -1,6 +1,6 @@
 module ProceedingMeritsTask
   class ChancesOfSuccess < ApplicationRecord
-    belongs_to :legal_aid_application
+    belongs_to :application_proceeding_type
 
     PRETTY_SUCCESS_PROSPECTS = {
       likely: 'Likely (>50%)',
@@ -23,11 +23,6 @@ module ProceedingMeritsTask
       success_prospects.except(:likely).keys
     end
 
-    def submit!
-      update!(submitted_at: Time.current) unless submitted_at?
-      ActiveSupport::Notifications.instrument 'dashboard.chances_of_success_submitted'
-    end
-
     def pretty_success_prospect
       PRETTY_SUCCESS_PROSPECTS[success_prospect.to_sym]
     end
@@ -35,5 +30,7 @@ module ProceedingMeritsTask
     def statement_of_case_uploaded?
       legal_aid_application.attachments.statement_of_case.any?
     end
+
+    delegate :legal_aid_application, to: :application_proceeding_type
   end
 end
