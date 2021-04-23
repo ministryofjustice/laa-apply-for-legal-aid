@@ -161,6 +161,27 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#lead_application_proceeding_type' do
+    context 'application proceeding types exist' do
+      let!(:legal_aid_application) do
+        create :legal_aid_application, :with_applicant
+      end
+      let!(:application_proceeding_type1) { create :application_proceeding_type, lead_proceeding: true, legal_aid_application: legal_aid_application }
+      let!(:application_proceeding_type2) { create :application_proceeding_type, lead_proceeding: false, legal_aid_application: legal_aid_application }
+
+      it 'returns the lead application proceeding type' do
+        expect(legal_aid_application.lead_application_proceeding_type).to eq application_proceeding_type1
+      end
+    end
+    context 'application proceeding types do not exist' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+
+      it 'is true' do
+        expect(legal_aid_application.lead_application_proceeding_type).to eq nil
+      end
+    end
+  end
+
   describe '#pre_dwp_check?' do
     let(:state) { :initiated }
     let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, state }
@@ -259,28 +280,39 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#summary_state' do
-    let(:chances_of_success) { nil }
-    subject(:legal_aid_application) { create :legal_aid_application, chances_of_success: chances_of_success }
+  describe '#merits_complete!' do
+    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
-    it 'returns :in_progress summary state' do
-      expect(legal_aid_application.summary_state).to eq(:in_progress)
+    let(:date) { Date.new(2021, 1, 7) }
+
+    it 'updates the application merits_submitted_at attribute' do
+      travel_to(date) do
+        legal_aid_application.merits_complete!
+        expect(legal_aid_application.reload.merits_submitted_at).to eq(date)
+      end
     end
 
-    context 'with chances_of_success object' do
-      let(:submitted_at) { nil }
-      let(:chances_of_success) { create :chances_of_success, submitted_at: submitted_at }
+    it 'calls on rails notification service' do
+      expect(ActiveSupport::Notifications).to receive(:instrument).with(any_args)
+      legal_aid_application.merits_complete!
+    end
+  end
 
-      it 'still returns :in_progress summary state' do
+  describe '#summary_state' do
+    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, merits_submitted_at: merits_submitted_at) }
+
+    context 'merits not completed' do
+      let(:merits_submitted_at) { nil }
+      it 'returns :in_progress summary state' do
         expect(legal_aid_application.summary_state).to eq(:in_progress)
       end
+    end
 
-      context 'merits submitted' do
-        let(:submitted_at) { Faker::Time.backward }
+    context 'merits completed' do
+      let(:merits_submitted_at) { Faker::Time.backward }
 
-        it 'returns :in_progress summary state' do
-          expect(legal_aid_application.summary_state).to eq(:submitted)
-        end
+      it 'returns :in_progress summary state' do
+        expect(legal_aid_application.summary_state).to eq(:submitted)
       end
     end
   end

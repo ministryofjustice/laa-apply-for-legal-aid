@@ -123,6 +123,7 @@ RSpec.describe ApplicationProceedingType do
     context 'when the defaults have already been created' do
       # simulates the user pushing the back button and re-submitting the DF page
       before do
+        freeze_time
         application_proceeding_type.add_default_substantive_scope_limitation
         application_proceeding_type.add_default_delegated_functions_scope_limitation
       end
