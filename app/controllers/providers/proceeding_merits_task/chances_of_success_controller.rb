@@ -8,13 +8,23 @@ module Providers
       def create
         @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params)
 
-        render :index unless save_continue_or_draft(@form)
+        return if save_continue_or_draft(@form)
+
+        render :index
       end
 
       private
 
+      def legal_aid_application
+        @legal_aid_application ||= application_proceeding_type.legal_aid_application
+      end
+
       def chances_of_success
-        @chances_of_success ||= legal_aid_application.chances_of_success || legal_aid_application.build_chances_of_success
+        @chances_of_success ||= application_proceeding_type.chances_of_success || application_proceeding_type.build_chances_of_success
+      end
+
+      def application_proceeding_type
+        @application_proceeding_type = ApplicationProceedingType.find(params[:application_proceeding_type_id])
       end
 
       def form_params
