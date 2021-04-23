@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_04_23_180431) do
+=======
+ActiveRecord::Schema.define(version: 2021_04_21_094326) do
+>>>>>>> c5d07219... Add database migrations and update the database schema
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -322,7 +326,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_180431) do
   end
 
   create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
+    t.uuid "legal_aid_application_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "application_purpose"
@@ -332,6 +336,8 @@ ActiveRecord::Schema.define(version: 2021_04_23_180431) do
     t.text "success_prospect_details"
     t.datetime "submitted_at"
     t.boolean "success_likely"
+    t.uuid "application_proceeding_type_id"
+    t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
     t.index ["legal_aid_application_id"], name: "index_chances_of_successes_on_legal_aid_application_id"
   end
 
@@ -471,6 +477,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_180431) do
     t.boolean "student_finance"
     t.date "used_delegated_functions_reported_on"
     t.datetime "discarded_at"
+    t.datetime "merits_submitted_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
