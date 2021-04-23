@@ -216,6 +216,7 @@ FactoryBot.define do
           default_df_sl = pt.default_delegated_functions_scope_limitation || create(:scope_limitation, :delegated_functions, joined_proceeding_type: pt)
           apt.application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_subst_sl)
           apt.application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_df_sl)
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: apt)
         end
       end
     end
@@ -234,6 +235,10 @@ FactoryBot.define do
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
       end
+    end
+
+    trait :with_merits_submitted_at do
+      merits_submitted_at { Time.current }
     end
 
     trait :with_substantive_scope_limitation do
@@ -396,18 +401,6 @@ FactoryBot.define do
       other_assets_declaration { build :other_assets_declaration, :all_nil }
     end
 
-    trait :with_chances_of_success do
-      after(:create) do |application|
-        create(:chances_of_success, :with_optional_text, legal_aid_application: application)
-      end
-    end
-
-    trait :with_chances_of_success_submitted_today do
-      after(:create) do |application|
-        create(:chances_of_success, :with_optional_text, submitted_at: Time.zone.today, legal_aid_application: application)
-      end
-    end
-
     trait :with_merits_statement_of_case do
       after(:create) do |application|
         create(:statement_of_case, legal_aid_application: application)
@@ -453,7 +446,6 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -477,7 +469,6 @@ FactoryBot.define do
       outstanding_mortgage_amount { rand(1...1_000_000.0).round(2) }
       shared_ownership { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample }
       percentage_home { rand(1...99.0).round(2) }
-      with_chances_of_success
       with_merits_statement_of_case
       with_opponent
       with_restrictions
@@ -497,6 +488,19 @@ FactoryBot.define do
 
     trait :with_positive_benefit_check_result do
       benefit_check_result { build :benefit_check_result, :positive }
+    end
+
+    trait :with_application_proceeding_type do
+      transient do
+        proceeding_types_count { 1 }
+      end
+
+      after(:create) do |application, evaluator|
+        application.proceeding_types = create_list(:proceeding_type, evaluator.proceeding_types_count)
+        application.application_proceeding_types.each do |apt|
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: apt)
+        end
+      end
     end
 
     trait :passported do
@@ -596,7 +600,6 @@ FactoryBot.define do
 
     trait :at_checking_merits_answers do
       with_proceeding_types
-      with_chances_of_success
       with_merits_statement_of_case
 
       before(:create) do |application|
