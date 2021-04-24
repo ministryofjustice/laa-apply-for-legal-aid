@@ -8,9 +8,7 @@ module Providers
       def create
         @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params)
 
-        return if save_continue_or_draft(@form)
-
-        render :index
+        render :index unless save_continue_or_draft(@form)
       end
 
       private
