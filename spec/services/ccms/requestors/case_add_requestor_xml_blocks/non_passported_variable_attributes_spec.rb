@@ -28,7 +28,7 @@ module CCMS
                  percentage_home: percentage_home
         end
 
-        let!(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitation, legal_aid_application: legal_aid_application }
+        let!(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitations, legal_aid_application: legal_aid_application }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }

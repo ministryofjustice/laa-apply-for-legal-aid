@@ -62,7 +62,6 @@ class LegalAidApplication < ApplicationRecord
   validates :provider, presence: true
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
-  delegate :chances_of_success, to: :lead_application_proceeding_type, allow_nil: true
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
   delegate :applicant_enter_means!,

@@ -27,7 +27,7 @@ module Reports
                :used_delegated_functions_reported_on,
                :vehicle, to: :laa
 
-      delegate :chances_of_success, to: :laa
+      delegate :chances_of_success, to: :lead_application_proceeding_type
 
       delegate :case_ccms_reference, to: :ccms_submission
 

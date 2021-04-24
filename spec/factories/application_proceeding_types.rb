@@ -9,7 +9,7 @@ FactoryBot.define do
       end
     end
 
-    trait :with_proceeding_type_scope_limitation do
+    trait :with_proceeding_type_scope_limitations do
       after(:create) do |application_proceeding_type|
         apt = application_proceeding_type
         pt = apt.proceeding_type
@@ -17,6 +17,15 @@ FactoryBot.define do
         default_df_sl = pt.default_delegated_functions_scope_limitation || create(:scope_limitation, :delegated_functions, joined_proceeding_type: pt)
         apt.application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_subst_sl)
         apt.application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_df_sl)
+      end
+    end
+
+    trait :with_substantive_scope_limitation do
+      after(:create) do |application_proceeding_type|
+        pt = application_proceeding_type.proceeding_type
+        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: application_proceeding_type.id,
+                                                   scope_limitation_id: sl.id)
       end
     end
   end
