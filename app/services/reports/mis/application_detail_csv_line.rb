@@ -22,6 +22,7 @@ module Reports
                :savings_amount,
                :merits_submitted_at,
                :shared_ownership,
+               :statement_of_case_uploaded?,
                :used_delegated_functions?,
                :used_delegated_functions_on,
                :used_delegated_functions_reported_on,
@@ -61,7 +62,6 @@ module Reports
                :details_of_proceedings_before_the_court,
                :pretty_success_prospect,
                :success_prospect_details,
-               :statement_of_case_uploaded?,
                to: :chances_of_success
 
       delegate :firm,

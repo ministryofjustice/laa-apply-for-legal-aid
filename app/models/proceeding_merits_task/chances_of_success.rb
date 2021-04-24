@@ -26,11 +26,5 @@ module ProceedingMeritsTask
     def pretty_success_prospect
       PRETTY_SUCCESS_PROSPECTS[success_prospect.to_sym]
     end
-
-    def statement_of_case_uploaded?
-      legal_aid_application.attachments.statement_of_case.any?
-    end
-
-    delegate :legal_aid_application, to: :application_proceeding_type
   end
 end

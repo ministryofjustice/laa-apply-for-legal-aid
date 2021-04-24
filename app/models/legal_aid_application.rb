@@ -413,6 +413,10 @@ class LegalAidApplication < ApplicationRecord
     state_machine_proxy.generated_reports!(self)
   end
 
+  def statement_of_case_uploaded?
+    attachments.statement_of_case.any?
+  end
+
   def complete_non_passported_means!
     state_machine_proxy.complete_non_passported_means!(self)
   end

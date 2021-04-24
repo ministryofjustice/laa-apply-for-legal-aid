@@ -210,6 +210,24 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#statement_of_case_uploaded?' do
+    let(:legal_aid_application) { create :legal_aid_application }
+
+    context 'statement of case files attached' do
+      let!(:statement_of_case) { create :statement_of_case, :with_original_file_attached, legal_aid_application: legal_aid_application }
+
+      it 'is true' do
+        expect(legal_aid_application.statement_of_case_uploaded?).to eq true
+      end
+    end
+
+    context 'no statement of case files attached' do
+      it 'is false' do
+        expect(legal_aid_application.statement_of_case_uploaded?).to eq false
+      end
+    end
+  end
+
   describe 'benefit_check_result_needs_updating?' do
     let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, :at_entering_applicant_details }
     let(:applicant) { legal_aid_application.applicant }
