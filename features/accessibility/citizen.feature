@@ -6,7 +6,7 @@ Feature: Citizen accessibility
     And a "true layer bank" exists in the database
     Then I visit the start of the financial assessment
     Then I click link "Privacy policy"
-    Then I should be on a page showing "Why we need your data"
+    Then I should be on a page showing "Types of personal data we process"
     And the page is accessible
     Then I click link "Back"
     Then I should be on a page showing 'Your legal aid application'

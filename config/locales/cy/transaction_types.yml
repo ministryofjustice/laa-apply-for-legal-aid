@@ -4,28 +4,28 @@ cy:
     names:
       citizens:
         benefits: stifeneB
-        child_care: stsoc eracdlihC
+        child_care: stnemyap eracdlihC
         excluded_benefits: stifeneb dedragersiD
         friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
         legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-        maintenance_in: stnemyap ecnanetniaM
-        maintenance_out: rentrap-xe na ro nerdlihc rof stnemyap ecnanetniaM
+        maintenance_in: rentrap remrof a morf stnemyap ecnanetniaM
+        maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
         pension: noisneP
         property_or_lodger: regdol ro ytreporp a morf emocnI
-        rent_or_mortgage: stnemyap egagtrom ro tneR
+        rent_or_mortgage: stnemyap gnisuoH
         salary: segaw ro yralaS
         student_loan: tnarg ro naol tnedutS
       providers:
         benefits: stifeneB
-        child_care: stsoc eracdlihC
+        child_care: stnemyap eracdlihC
         excluded_benefits: stifeneb dedragersiD
         friends_or_family: ylimaf ro sdneirf morf pleh laicnaniF
         legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
-        maintenance_in: stnemyap ecnanetniaM
-        maintenance_out: stnemyap ecnanetniaM
+        maintenance_in: rentrap remrof a morf stnemyap ecnanetniaM
+        maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
         pension: noisneP
         property_or_lodger: regdol ro ytreporp a morf emocnI
-        rent_or_mortgage: stsoc gnisuoH
+        rent_or_mortgage: stnemyap gnisuoH
         salary: segaw ro yralaS
         student_loan: tnarg ro naol tnedutS
     table_label:
@@ -43,11 +43,11 @@ cy:
       student_loan: naol tnedutS
     page_titles:
       benefits: stnemyap stifeneb tceleS
-      child_care: stsoc eracdlihc tceleS
+      child_care: stnemyap eracdlihc tceleS
       friends_or_family: ylimaf ro sdneirf morf stnemyap tceleS
       legal_aid: stnemyap dia lagel tceleS
       maintenance_in: stnemyap ecnanetniam tceleS
-      maintenance_out: stnemyap ecnanetniam tceleS
+      maintenance_out: rentrap remrof a ot stnemyap ecnanetniam tceleS
       pension: stnemyap noisnep tceleS
       property_or_lodger: regdol ro ytreporp a morf stnemyap tceleS
       rent_or_mortgage: stnemyap gnisuoh tceleS
@@ -70,7 +70,7 @@ cy:
       subheading: ":era yeht fi emocni sa tnuoc ylimaf ro sdneirf morf stnemyaP"
       list: |2-
 
-        stsoc gnisuoh ekil sesnepxe gnivil rof desu
+        stnemyap gnisuoh ekil sesnepxe gnivil rof desu
         )meht yaper ot deen ton seod tneilc ruoy( stfig
         nosrep emas eht morf
         )htnom a ecno tsael ta( raluger

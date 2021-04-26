@@ -61,11 +61,10 @@ cy:
           property_or_lodger: regdol ro ytreporp morf emocnI
           student_loan: tnarg ro naol tnedutS
           pension: noisneP
-          rent_or_mortgage: stsoc gnisuoH
-          child_care: stsoc eracdlihC
-          maintenance_out: stnemyap ecnanetniaM
-          legal_aid: 83:br.spets_snezitic/snoitinifed_pets/serutaefesac lanimirc a
-            ni dia lagel sdrawot stnemyaP
+          rent_or_mortgage: stnemyap gnisuoH
+          child_care: stnemyap eracdlihC
+          maintenance_out: rentrap remrof a ot stnemyap ecnanetniaM
+          legal_aid: esac lanimirc a ni dia lagel sdrawot stnemyaP
       vehicle:
         purchased_on_day: yaD
         purchased_on_month: htnoM
@@ -163,6 +162,8 @@ cy:
               blank: tnenoppo eht ot tnes neeb sah rettel gninraw a fi sey tceleS
             police_notified:
               blank: deifiton neeb evah ecilop eht fi sey tceleS
+            police_notified_details:
+              blank: deifiton neeb evah ecilop eht fi sey tceleS
             bail_conditions_set:
               blank: tes neeb evah snoitidnoc liab fi sey tceleS
             understands_terms_of_court_order_details:
@@ -170,8 +171,10 @@ cy:
                 lleT
             warning_letter_sent_details:
               blank: tnes neeb ton sah rettel gninraw a yhw su lleT
-            police_notified_details:
+            police_notified_details_true:
               blank: nekat evah ecilop eht noitca tahw su lleT
+            police_notified_details_false:
+              blank: deifiton neeb ton evah ecilop eht yhw su lleT
             bail_conditions_set_details:
               blank: snoitidnoc liab eht fo sliated eviG
         application_merits_task/statement_of_case:
@@ -216,6 +219,43 @@ cy:
               not_a_number: 000,1 ekil ,yenom fo tnuoma na eb tsum eulaV
               too_many_decimals: srebmun lamiced 2 naht erom edulcni ton tsum eulaV
               less_than_threshold: 000,8£ naht ssel htrow stessa evah yeht fi on tceleS
+        chances_of_success:
+          attributes:
+            application_purpose:
+              blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
+            details_of_proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
+            proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
+                rof sgnideecorp eht fi seY tceleS
+            success_prospect:
+              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
+            success_likely:
+              blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
+            success_prospect_details:
+              blank: detnarg eb dluohs dia lagel yhw su lleT
+        dwp_override:
+          attributes:
+            passporting_benefit:
+              blank: stifeneb eseht fo yna deviecer sah tneilc ruoy fi tceleS
+            has_evidence_of_benefit:
+              blank: "%{passporting_benefit} seviecer tneilc ruoy taht ecnedive evah
+                uoy fi sey tceleS"
+        incident:
+          attributes:
+            told_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum tnedicni tsetal eht tuoba
+                uoy dlot tneilc ruoy etaD
+              blank: tnedicni tsetal eht tuoba uoy dlot tneilc ruoy etad eht retnE
+            occurred_on:
+              date_not_valid: etad dilav a retnE
+              date_is_in_the_future: tsap eht ni eb tsum derrucco tnedicni eht etaD
+              blank: derrucco tnedicni eht etad eht retnE
+              invalid_timeline: ti tuoba uoy dlot tneilc ruoy etad eht erofeb eb tsum
+                derrucco tnedicni eht etaD
+            details:
+              blank: tnedicni eht fo sliated retnE
         irregular_income:
           attributes:
             amount:
@@ -226,6 +266,8 @@ cy:
               not_a_number: 000,01 ekil ,yenom fo tnuoma na eb tsum tnuoma naol tnedutS
         legal_aid_application:
           attributes:
+            confirm_delegated_functions_date:
+              blank: snoitcnuf detageled desu uoy etad eht mrifnoC
             has_dependants:
               blank: stnadneped yna sah tneilc ruoy fi sey tceleS
             has_restrictions:
@@ -304,21 +346,6 @@ cy:
               blank: snoitcnuf detageled desu uoy etad eht retnE
               date_not_in_range: "%{months} erofeb eb tonnac snoitcnuf detageled desu
                 uoy etad ehT"
-        chances_of_success:
-          attributes:
-            application_purpose:
-              blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
-            details_of_proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
-            proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
-                rof sgnideecorp eht fi seY tceleS
-            success_prospect:
-              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
-            success_likely:
-              blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
-            success_prospect_details:
-              blank: detnarg eb dluohs dia lagel yhw su lleT
         other_assets_declaration:
           attributes:
             valuable_items_value:
@@ -388,12 +415,30 @@ cy:
           attributes:
             base:
               none_selected: stnemyap eseht fo yna deviecer sah tneilc ruoy fi tceleS
+        proceeding_merits_task/chances_of_success:
+          attributes:
+            application_purpose:
+              blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
+            details_of_proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
+            proceedings_before_the_court:
+              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
+                rof sgnideecorp eht fi seY tceleS
+            success_prospect:
+              blank: emoctuo lufsseccus a fo ecnahc eht tceleS
+            success_likely:
+              blank: retteb ro %05 si emoctuo lufsseccus a fo ecnahc eht fi sey tceleS
+            success_prospect_details:
+              blank: detnarg eb dluohs dia lagel yhw su lleT
         provider:
           attributes:
             selected_office_id:
               blank: rebmun tnuocca na tceleS
             username:
               already_exists: emanresu taht htiw resu a ydaerla si erehT
+        reports:
+          application_type: epyt ralucitrap a ro sesac lla hcraes ot tnaw uoy fi tceleS
+          submitted_to_ccms: ylno SMCC ot dettimbus sesac hcraes ot tnaw uoy fi tceleS
         savings_amount:
           attributes:
             base:

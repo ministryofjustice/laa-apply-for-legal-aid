@@ -9,9 +9,9 @@ RSpec.describe 'privacy policy page', type: :request do
 
     it 'display contact information' do
       get privacy_policy_index_path
-      expect(response.body).to include(I18n.t('privacy_policy.index.what_we_collect.data_we_collect'))
-      expect(response.body).to include(I18n.t('privacy_policy.index.why_we_need_your_data.header'))
-      expect(response.body).to include(I18n.t('privacy_policy.index.why_we_need_your_data.legal_basis_html'))
+      expect(response.body).to include(I18n.t('privacy_policy.index.more_details.header'))
+      expect(response.body).to include(I18n.t('privacy_policy.index.purpose_of_processing.header'))
+      expect(response.body).to include(I18n.t('privacy_policy.index.complaints.link_html'))
     end
   end
 end
