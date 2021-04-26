@@ -359,6 +359,7 @@ FactoryBot.define do
       savings_amount { build :savings_amount, :with_values }
     end
 
+    # TODO: Remove when backend references delegated functions from application proceeding types
     trait :with_delegated_functions do
       transient do
         delegated_functions_date { nil }
@@ -366,6 +367,15 @@ FactoryBot.define do
       used_delegated_functions_on { delegated_functions_date.presence || Time.zone.today }
       used_delegated_functions_reported_on { Time.zone.today }
       used_delegated_functions { true }
+    end
+
+    trait :with_multiple_delegated_functions do
+      after(:create) do |application|
+        application.application_proceeding_types.each_with_index do |type, i|
+          type.used_delegated_functions_on = Time.zone.today - (i.month + 1.day)
+          type.used_delegated_functions_reported_on = Time.zone.today unless i > 0
+        end
+      end
     end
 
     trait :with_substantive_application_deadline_on do

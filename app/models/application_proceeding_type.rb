@@ -31,6 +31,28 @@ class ApplicationProceedingType < ApplicationRecord
     self.lead_proceeding = true if proceedings.empty?
   end
 
+  ##############################
+  # DELEGATED FUNCTIONS
+  # References to earliest delegated functions can be accessed off any application proceeding type
+  def used_delegated_functions?
+    earliest_delegated_functions.present?
+  end
+
+  def earliest_delegated_functions_date
+    proceedings.minimum('used_delegated_functions_on')
+  end
+
+  def earliest_delegated_functions_reported_date
+    earliest_delegated_functions.used_delegated_functions_reported_on
+  end
+
+  def earliest_delegated_functions
+    earliest_delegated_functions_date && proceedings.find_by(used_delegated_functions_on: earliest_delegated_functions_date)
+  end
+  ##############################
+
+  ##############################
+  # SCOPE LIMITATIONS
   def add_default_substantive_scope_limitation
     new_scope_limitation = AssignedSubstantiveScopeLimitation.new(scope_limitation: default_substantive_scope_limitation)
     add_scope_limitation_unless_duplicate new_scope_limitation
@@ -49,13 +71,10 @@ class ApplicationProceedingType < ApplicationRecord
   def remove_default_delegated_functions_scope_limitation
     delegated_functions_scope_limitation_join&.destroy!
   end
+  ##############################
 
   def proceeding_case_p_num
     "P_#{proceeding_case_id}"
-  end
-
-  def used_delegated_functions?
-    used_delegated_functions_on.present?
   end
 
   private

@@ -1,14 +1,15 @@
 class SubstantiveApplicationDeadlineCalculator
-  def self.call(legal_aid_application)
-    new(legal_aid_application).deadline
+  def self.call(record)
+    new(record).deadline
   end
 
-  attr_reader :legal_aid_application
+  attr_reader :record
 
-  def initialize(legal_aid_application)
-    @legal_aid_application = legal_aid_application
+  delegate :used_delegated_functions_on, to: :record
+
+  def initialize(record)
+    @record = record
   end
-  delegate :used_delegated_functions_on, to: :legal_aid_application
 
   def deadline
     WorkingDayCalculator.call(

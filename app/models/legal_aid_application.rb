@@ -141,6 +141,17 @@ class LegalAidApplication < ApplicationRecord
     ProceedingType.find(lead.proceeding_type_id)
   end
 
+  def application_proceedings_by_name
+    types = application_proceeding_types.map do |application_proceeding_type|
+      OpenStruct.new({
+                       application_proceeding_type: application_proceeding_type,
+                       name: ProceedingType.find(application_proceeding_type.proceeding_type_id).name
+                     })
+    end
+
+    types.sort_by(&:name)
+  end
+
   def cfe_result
     most_recent_cfe_submission&.result
   end

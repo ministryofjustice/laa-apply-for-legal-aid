@@ -210,6 +210,7 @@ en:
           assistive: information
           text: "You can continue your application when your client has shared their financial information with us. We'll tell you when they've done this."
       shared:
+        change: Change
         section_client:
           heading: Client details
         section_proceeding:
@@ -799,6 +800,18 @@ en:
     used_delegated_functions:
       show:
         heading: Have you used delegated functions?
+    used_multiple_delegated_functions:
+      show:
+        heading: Which proceedings have you used delegated functions for?
+        extend_variation_or_discharge_part_iv: Extend, variation or discharge - Part IV
+        fgm_protection_order: FGM Protection Order
+        forced_marriage_protection_order: Forced marriage protection order
+        harassment_injunction: Harassment - injunction
+        inherent_jurisdiction_high_court_injunction: Inherent jurisdiction high court injunction
+        nonmolestation_order: Non-molestation order
+        occupation_order: Occupation order
+        variation_or_discharge_under_section_protection_from_harassment_act: Variation or discharge under section 5 protection from harassment act 1997
+        none_selected: I have not used delegated functions
     delegated_functions_dates:
       show:
         heading: "Confirm you used delegated functions on %{date}"
