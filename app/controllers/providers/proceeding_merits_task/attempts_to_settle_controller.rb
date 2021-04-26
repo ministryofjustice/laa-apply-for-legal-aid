@@ -28,7 +28,9 @@ module Providers
       end
 
       def form_params
-        params.require(:proceeding_merits_task_attempts_to_settle).permit(:attempts_made, :application_proceeding_type_id)
+        merge_with_model(attempts_to_settle) do
+          params.require(:proceeding_merits_task_attempts_to_settle).permit(:attempts_made)
+        end
       end
     end
   end

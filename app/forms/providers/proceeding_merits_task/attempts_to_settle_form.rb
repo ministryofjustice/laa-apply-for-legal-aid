@@ -5,7 +5,7 @@ module Providers
 
       form_for ::ProceedingMeritsTask::AttemptsToSettle
 
-      attr_accessor :attempts_made, :application_proceeding_type_id
+      attr_accessor :attempts_made
 
       validate :attempts_made_present?
 
