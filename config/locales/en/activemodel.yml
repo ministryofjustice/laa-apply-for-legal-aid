@@ -148,6 +148,13 @@ en:
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
             details:
               blank: Enter details of the incident
+        application_merits_task/involved_child:
+          attributes:
+            date_of_birth:
+              blank: Enter the date of birth
+              date_not_valid: Enter a valid date of birth
+            full_name:
+              blank: Enter the child's full name
         application_merits_task/opponent:
           attributes:
             full_name:

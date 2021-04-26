@@ -1,0 +1,19 @@
+<%= form_with(
+      model: @form,
+      url: form_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <span class="govuk-hint"><%= t('.hint') %></span>
+  <div class="govuk-!-padding-bottom-2"></div>
+
+  <%= form.govuk_text_field :full_name, width: 'three-quarters', label: { size: 'm', text: t('.name') } %>
+
+  <%= form.govuk_date_field :date_of_birth, legend: {text: t('.date_of_birth')} %>
+
+  <div class="govuk-!-padding-bottom-2"></div>
+  <%= next_action_buttons(
+        show_draft: true,
+        form: form
+      ) %>
+<% end %>

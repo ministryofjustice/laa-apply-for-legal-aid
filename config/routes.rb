@@ -161,6 +161,7 @@ Rails.application.routes.draw do
       resource :has_dependants, only: %i[show update]
       resources :dependants, only: %i[new show update]
       resources :remove_dependants, only: %i[show update]
+      resources :remove_dependant, only: %i[show update]
       resource :has_other_dependants, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
@@ -212,6 +213,10 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
+      resources :involved_children, only: %i[new show update], controller: 'application_merits_task/involved_children'
+      resource :has_other_involved_children, only: %i[show update], controller: 'application_merits_task/has_other_involved_children'
+      resources :remove_involved_child, only: %i[show update], controller: 'application_merits_task/remove_involved_child'
+
       resource :start_chances_of_success, only: %i[show update]
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
