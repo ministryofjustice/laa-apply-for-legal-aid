@@ -2,101 +2,164 @@
 cy:
   privacy_policy:
     index:
-      h1-heading: Privacy policy
+      h1-heading: ycilop ycavirP
       purpose:
         header: esopruP
-        info_1: This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met.
-        info_2: The Legal Aid Agency is an Executive Agency of the Ministry of Justice (MoJ). The MoJ is the data controller for the personal information we hold. The Legal Aid Agency collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid.
+        info_1: ".tem gnieb ton era sdradnats eht kniht uoy fi od nac uoy tahw dna
+          ;atad lanosrep ruoy fo ypoc a ot ssecca teg nac uoy woh ;uoy tuoba )’atad
+          lanosrep‘( noitamrofni lanosrep dloh ro tseuqer ew nehw ycnegA diA lageL
+          eht morf tcepxe nac uoy taht sdradnats eht tuo stes eciton ycavirp sihT"
+        info_2: ".dia lagel edivorp ot si noitcnuf cilbup ruO .snoitcnuf cilbup detaicossa
+          dna nwo sti fo esicrexe eht rof atad lanosrep sessecorp dna stcelloc ycnegA
+          diA lageL ehT .dloh ew noitamrofni lanosrep eht rof rellortnoc atad eht
+          si JoM ehT .)JoM( ecitsuJ fo yrtsiniM eht fo ycnegA evitucexE na si ycnegA
+          diA lageL ehT"
       about_personal_information:
-        header: About personal information
-        info_1: Personal data is information about you as an individual. It can be your name, address or telephone number. It can also include the information that you have provided in this service such as your financial circumstances and information relating to any current or previous legal proceedings concerning you.
-        info_2: We know how important it is to protect customers’ privacy and to comply with data protection laws. We will safeguard your personal data and will only disclose it where it is lawful to do so, or with your consent.
+        header: noitamrofni lanosrep tuobA
+        info_1: ".uoy gninrecnoc sgnideecorp lagel suoiverp ro tnerruc yna ot gnitaler
+          noitamrofni dna secnatsmucric laicnanif ruoy sa hcus ecivres siht ni dedivorp
+          evah uoy taht noitamrofni eht edulcni osla nac tI .rebmun enohpelet ro sserdda
+          ,eman ruoy eb nac tI .laudividni na sa uoy tuoba noitamrofni si atad lanosreP"
+        info_2: ".tnesnoc ruoy htiw ro ,os od ot lufwal si ti erehw ti esolcsid ylno
+          lliw dna atad lanosrep ruoy draugefas lliw eW .swal noitcetorp atad htiw
+          ylpmoc ot dna ycavirp ’sremotsuc tcetorp ot si ti tnatropmi woh wonk eW"
       types_of_personal_data_we_process:
-        header: Types of personal data we process
-        info_1: We only process personal data that is relevant for the services we are providing to you. The personal data which you have provided for this service will only be used for the purposes set out below.
+        header: ssecorp ew atad lanosrep fo sepyT
+        info_1: ".woleb tuo tes sesoprup eht rof desu eb ylno lliw ecivres siht rof
+          dedivorp evah uoy hcihw atad lanosrep ehT .uoy ot gnidivorp era ew secivres
+          eht rof tnaveler si taht atad lanosrep ssecorp ylno eW"
       purpose_of_processing:
-        header: Purpose of processing and the lawful basis for the process
-        info_1: "The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided on this form is for the purposes of providing legal aid. Specifically, we will use this personal data in the following ways:"
-        list: |
-          In deciding whether you are eligible for legal aid, whether you are required to make a contribution towards the costs of this legal aid and to assist the Legal Aid Agency in collecting those contributions, if appropriate.
-          In assessing claims from your legal representative(s) for payment from the legal aid fund for the work that they have conducted on your behalf.
-          In conducting periodic assurance audits on legal aid files to ensure that decisions have been made correctly and accurately.
-          In producing statistics and information on our systems and processes to enable us to improve our systems and processes and to assist us in carrying out our functions.
-        info_2: Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent us from providing legal aid.
-        info_3: The lawful basis for the Legal Aid Agency collecting and processing your personal data is in the administration of justice and the result of the powers contained in Legal Aid, Sentencing and Punishment of Offenders Act 2012.
-        info_4: We also collect ‘special categories of personal data’ for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application.
+        header: ssecorp eht rof sisab lufwal eht dna gnissecorp fo esopruP
+        info_1: ":syaw gniwollof eht ni atad lanosrep siht esu lliw ew ,yllacificepS
+          .dia lagel gnidivorp fo sesoprup eht rof si mrof siht no dedivorp evah uoy
+          hcihw atad lanosrep eht gnissecorp dna gnitcelloc ycnegA diA lageL eht fo
+          esoprup ehT"
+        list: |2-
+
+          .snoitcnuf ruo tuo gniyrrac ni su tsissa ot dna sessecorp dna smetsys ruo evorpmi ot su elbane ot sessecorp dna smetsys ruo no noitamrofni dna scitsitats gnicudorp nI
+          .yletarucca dna yltcerroc edam neeb evah snoisiced taht erusne ot selif dia lagel no stidua ecnarussa cidoirep gnitcudnoc nI
+          .flaheb ruoy no detcudnoc evah yeht taht krow eht rof dnuf dia lagel eht morf tnemyap rof )s(evitatneserper lagel ruoy morf smialc gnissessa nI
+          .etairporppa fi ,snoitubirtnoc esoht gnitcelloc ni ycnegA diA lageL eht tsissa ot dna dia lagel siht fo stsoc eht sdrawot noitubirtnoc a ekam ot deriuqer era uoy rehtehw ,dia lagel rof elbigile era uoy rehtehw gnidiced nI
+        info_2: ".dia lagel gnidivorp morf su tneverp dluow hcihw ,evoba seitivitca
+          eht tcudnoc ot elba eb ton dluow ew ,noitamrofni lanosrep siht tcelloc ot
+          elbanu ycnegA diA lageL eht ereW"
+        info_3: ".2102 tcA sredneffO fo tnemhsinuP dna gnicnetneS ,diA lageL ni deniatnoc
+          srewop eht fo tluser eht dna ecitsuj fo noitartsinimda eht ni si atad lanosrep
+          ruoy gnissecorp dna gnitcelloc ycnegA diA lageL eht rof sisab lufwal ehT"
+        info_4: ".noitacilppa dia lagel ruoy htiw detaicossa esle enoyna ro uoy yfitnedi
+          ton lliw dehsilbup noitamrofni yna dna ecnedifnoc tsetcirts eht htiw detaert
+          eb lliw gnirotinom ytilauqe rof deniatbo atad lanosrep fo seirogetac laicepS
+          .0102 tcA ytilauqE eht rednu seitirohtua cilbup rof tnemeriuqer lagel a
+          si siht ,ytilauqe gnirotinom fo sesoprup eht rof ’atad lanosrep fo seirogetac
+          laiceps‘ tcelloc osla eW"
       who_the_information_may_be_shared_with:
-        header: Who the information may be shared with
-        info_1: "We sometimes need to share the personal information we process with other organisations. When this is necessary, we will comply with all aspects of the relevant data protection laws. The organisations we may share your personal information include:"
-        list: |
-          Public authorities such as: HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC), Department of Work and Pensions (DWP) and HM Land Registry;
-          Non-public authorities such as: Credit reference agencies Equifax and TransUnion; and
-          If false or inaccurate information is provided or fraud identified, the Legal Aid Agency can lawfully share your personal information with fraud prevention agencies to detect and to prevent fraud and money laundering.
-        info_2: You can contact our Data Protection Officer for further information on the organisations we may share your personal information with.
+        header: htiw derahs eb yam noitamrofni eht ohW
+        info_1: ":edulcni noitamrofni lanosrep ruoy erahs yam ew snoitasinagro ehT
+          .swal noitcetorp atad tnaveler eht fo stcepsa lla htiw ylpmoc lliw ew ,yrassecen
+          si siht nehW .snoitasinagro rehto htiw ssecorp ew noitamrofni lanosrep eht
+          erahs ot deen semitemos eW"
+        list: |2-
+
+          .gnirednual yenom dna duarf tneverp ot dna tceted ot seicnega noitneverp duarf htiw noitamrofni lanosrep ruoy erahs yllufwal nac ycnegA diA lageL eht ,deifitnedi duarf ro dedivorp si noitamrofni etaruccani ro eslaf fI
+          dna ;noinUsnarT dna xafiuqE seicnega ecnerefer tiderC :sa hcus seitirohtua cilbup-noN
+          ;yrtsigeR dnaL MH dna )PWD( snoisneP dna kroW fo tnemtrapeD ,)CRMH( smotsuC dna euneveR MH ,)STCMH( ecivreS slanubirT dna struoC MH :sa hcus seitirohtua cilbuP
+        info_2: ".htiw noitamrofni lanosrep ruoy erahs yam ew snoitasinagro eht no
+          noitamrofni rehtruf rof reciffO noitcetorP ataD ruo tcatnoc nac uoY"
       data_processors:
-        header: Data Processors
-        info_1: The LAA may contract with third party data processors to provide email, system administration, document management and IT storage services. Data processors may also provide anonymised statistical information about your use of this service.
-        info_2: Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law.
+        header: srossecorP ataD
+        info_1: ".ecivres siht fo esu ruoy tuoba noitamrofni lacitsitats desimynona
+          edivorp osla yam srossecorp ataD .secivres egarots TI dna tnemeganam tnemucod
+          ,noitartsinimda metsys ,liame edivorp ot srossecorp atad ytrap driht htiw
+          tcartnoc yam AAL ehT"
+        info_2: ".wal noitcetorp atad rednu sesualc tcartnoc ledom yb denrevog eb
+          lliw esoprup siht rof rossecorp atad a htiw derahs atad lanosrep ynA"
       details_of_transfer:
-        header: Details of transfers to third country and safeguards
-        info_1: "It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to: the European Economic Area (EEA)"
-        info_2: Any transfers made will be in full compliance with all aspects of the data protection law.
+        header: sdraugefas dna yrtnuoc driht ot srefsnart fo sliateD
+        info_1: ")AEE( aerA cimonocE naeporuE eht :ot derrefsnart eb yam noitamrofni
+          ,dedeen si siht nehW .saesrevo noitamrofni lanosrep refsnart ot yrassecen
+          eb semitemos yam tI"
+        info_2: ".wal noitcetorp atad eht fo stcepsa lla htiw ecnailpmoc lluf ni eb
+          lliw edam srefsnart ynA"
       retention_period:
-        header: Retention period for information collected
-        info_1: "Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:"
-        link_html: <a href='https://www.gov.uk/government/publications/record-retention-and-disposition-schedules'>https://www.gov.uk/government/publications/record-retention-and-disposition-schedules</a>
-        info_2: You can also contact our Data Protection Officer for a copy of our retention policies.
-        info_3: While we retain your personal data, we will ensure that it is kept securely and protected from loss, misuse or unauthorised access and disclosure. Once the retention period has been reached, your personal data will be permanently and securely deleted and destroyed.
+        header: detcelloc noitamrofni rof doirep noitneteR
+        info_1: ":etisbew ruo aiv dessecca eb nac siht ,tcelloc ew taht noitamrofni
+          lanosrep eht rof sdoirep noitneter tes evah ycnegA diA lageL ehT .tnavelerri
+          ro etad fo tuo ,etaruccani emoceb ton seod noitamrofni lanosrep ruoy taht
+          erusne ot si sihT .dessecorp dna detcelloc neeb sah ti hcihw rof sesoprup
+          lufwal eht rof yrassecen si naht regnol yna rof deniater eb ton lliw noitamrofni
+          lanosrep ruoY"
+        link_html: ">a/<seludehcs-noitisopsid-dna-noitneter-drocer/snoitacilbup/tnemnrevog/ku.vog.www//:sptth>'seludehcs-noitisopsid-dna-noitneter-drocer/snoitacilbup/tnemnrevog/ku.vog.www//:sptth'=ferh
+          a<"
+        info_2: ".seicilop noitneter ruo fo ypoc a rof reciffO noitcetorP ataD ruo
+          tcatnoc osla nac uoY"
+        info_3: ".deyortsed dna deteled yleruces dna yltnenamrep eb lliw atad lanosrep
+          ruoy ,dehcaer neeb sah doirep noitneter eht ecnO .erusolcsid dna ssecca
+          desirohtuanu ro esusim ,ssol morf detcetorp dna yleruces tpek si ti taht
+          erusne lliw ew ,atad lanosrep ruoy niater ew elihW"
       access_to_personal_information:
-        header: Access to personal information
-        info_1: "You can find out if we hold any personal data about you by making a ‘subject access request’. If you wish to make a subject access request please contact:"
+        header: noitamrofni lanosrep ot sseccA
+        info_1: ":tcatnoc esaelp tseuqer ssecca tcejbus a ekam ot hsiw uoy fI .’tseuqer
+          ssecca tcejbus‘ a gnikam yb uoy tuoba atad lanosrep yna dloh ew fi tuo dnif
+          nac uoY"
         address:
-          title: Disclosure Team - Post point 10.25
-          line_1: Ministry of Justice
-          line_2: 102 Petty France
-          line_3: London
-          post_code: SW1H 9AJ
-        email_address_html: <a href="mailto:Data.access@justice.gov.uk">Data.access@justice.gov.uk</a>
+          title: 52.01 tniop tsoP - maeT erusolcsiD
+          line_1: ecitsuJ fo yrtsiniM
+          line_2: ecnarF ytteP 201
+          line_3: nodnoL
+          post_code: JA9 H1WS
+        email_address_html: '>a/<ku.vog.ecitsuj@ssecca.ataD>"ku.vog.ecitsuj@ssecca.ataD:otliam"=ferh
+          a<'
       when_we_ask_you_for_personal_data:
-        header: When we ask you for personal data
-        info_1: We promise to inform you why we need your personal data and ask only for the personal data we need and not collect information that is irrelevant or excessive.
-        info_2: "When we collect your personal data, we have responsibilities, and you have rights, these include:"
-        list: |
-          That you can withdraw consent at any time, where relevant;
-          That you can lodge a complaint with the supervisory authority;
-          That we will protect and ensure that no unauthorised person has access to it;
-          That your personal data is shared with other organisations only for legitimate purposes;
-          That we don’t keep it longer than is necessary;
-          That we will not make your personal data available for commercial use without your consent; and
-          That we will consider your request to correct, stop processing or erase your personal data.
+        header: atad lanosrep rof uoy ksa ew nehW
+        info_1: ".evissecxe ro tnavelerri si taht noitamrofni tcelloc ton dna deen
+          ew atad lanosrep eht rof ylno ksa dna atad lanosrep ruoy deen ew yhw uoy
+          mrofni ot esimorp eW"
+        info_2: ":edulcni eseht ,sthgir evah uoy dna ,seitilibisnopser evah ew ,atad
+          lanosrep ruoy tcelloc ew nehW"
+        list: |2-
+
+          .atad lanosrep ruoy esare ro gnissecorp pots ,tcerroc ot tseuqer ruoy redisnoc lliw ew tahT
+          dna ;tnesnoc ruoy tuohtiw esu laicremmoc rof elbaliava atad lanosrep ruoy ekam ton lliw ew tahT
+          ;yrassecen si naht regnol ti peek t’nod ew tahT
+          ;sesoprup etamitigel rof ylno snoitasinagro rehto htiw derahs si atad lanosrep ruoy tahT
+          ;ti ot ssecca sah nosrep desirohtuanu on taht erusne dna tcetorp lliw ew tahT
+          ;ytirohtua yrosivrepus eht htiw tnialpmoc a egdol nac uoy tahT
+          ;tnaveler erehw ,emit yna ta tnesnoc wardhtiw nac uoy tahT
       more_details:
-        header: "You can get more details on:"
-        list: |
-          Agreements we have with other organisations for sharing information;
-          Circumstances where we can pass on personal information without telling you, for example, to help with the prevention or detection of crime or to produce anonymised statistics;
-          Our instructions to staff on how to collect, use or delete your personal information;
-          How we check that the information we hold is accurate and up-to-date; and
-          How to make a complaint.
-        info_1: For more information about the above issues, please contact the;
+        header: ":no sliated erom teg nac uoY"
+        list: |2-
+
+          .tnialpmoc a ekam ot woH
+          dna ;etad-ot-pu dna etarucca si dloh ew noitamrofni eht taht kcehc ew woH
+          ;noitamrofni lanosrep ruoy eteled ro esu ,tcelloc ot woh no ffats ot snoitcurtsni ruO
+          ;scitsitats desimynona ecudorp ot ro emirc fo noitceted ro noitneverp eht htiw pleh ot ,elpmaxe rof ,uoy gnillet tuohtiw noitamrofni lanosrep no ssap nac ew erehw secnatsmucriC
+          ;noitamrofni gnirahs rof snoitasinagro rehto htiw evah ew stnemeergA
+        info_1: ";eht tcatnoc esaelp ,seussi evoba eht tuoba noitamrofni erom roF"
         address:
-          title: The Data Protection Officer
-          line_1: Ministry of Justice
-          line_2: 3rd Floor, Post Point 3.20
-          line_3: 10 South Colonnades
-          line_4: Canary Wharf
-          line_5: London
-          post_code: E14 4PU
-        email_address_html: <a href="mailto:privacy@justice.gov.uk">privacy@justice.gov.uk</a>
-        info_2: For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us.
+          title: reciffO noitcetorP ataD ehT
+          line_1: ecitsuJ fo yrtsiniM
+          line_2: 02.3 tnioP tsoP ,roolF dr3
+          line_3: sedannoloC htuoS 01
+          line_4: frahW yranaC
+          line_5: nodnoL
+          post_code: UP4 41E
+        email_address_html: '>a/<ku.vog.ecitsuj@ycavirp>"ku.vog.ecitsuj@ycavirp:otliam"=ferh
+          a<'
+        info_2: ".su yb detcatnoc erew ro secivres ruo dessecca uoy nehw dedivorp
+          noitamrofni eht ees esaelp ,dessecorp si noitamrofni ruoy yhw dna woh no
+          noitamrofni erom roF"
       complaints:
-        header: Complaints
-        info_1: "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
+        header: stnialpmoC
+        info_1: ":ta renoissimmoC noitamrofnI eht tcatnoc nac uoY .noitcetorp atad
+          tuoba ecivda tnednepedni rof renoissimmoC noitamrofnI eht tcatnoc nac uoy
+          ,yltcerrocni deldnah neeb sah noitamrofni ruoy taht redisnoc uoy fI .wal
+          eht htiw ylpmoc lliw ew ,noitamrofni rof uoy ksa ew nehW"
         address:
-          title: Information Commissioner's Office
-          line_1: Wycliffe House
-          line_2: Water Lane
-          line_3: Wilmslow
-          line_4: Cheshire
-          post_code: SK9 5AF
-          telephone: "Tel: 0303 123 1113"
-        link_html: <a href='www.ico.org.uk'>www.ico.org.uk</a>
+          title: eciffO s'renoissimmoC noitamrofnI
+          line_1: esuoH effilcyW
+          line_2: enaL retaW
+          line_3: wolsmliW
+          line_4: erihsehC
+          post_code: FA5 9KS
+          telephone: 3111 321 3030 :leT
+        link_html: ">a/<ku.gro.oci.www>'ku.gro.oci.www//:ptth'=ferh a<"

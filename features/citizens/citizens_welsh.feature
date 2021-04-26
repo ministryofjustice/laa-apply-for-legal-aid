@@ -59,7 +59,7 @@ Feature: Citizen journey in Welsh
     When I enter amount '5000'
     And I click 'eunitnoc dna evaS'
     Then I should be on a page showing '?ekam uoy od stnemyap gniwollof eht fo hcihW'
-    Then I select 'egagtrom ro tneR'
+    Then I select 'stnemyap gnisuoH'
     Then I click 'eunitnoc dna evaS'
     Then I should be on the 'cash_outgoing' page showing 'hsac ni ekam uoy stnemyap tceleS'
     Then I select 'stnemyap gnisuoH'

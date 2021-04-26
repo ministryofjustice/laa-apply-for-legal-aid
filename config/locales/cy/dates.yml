@@ -7,30 +7,30 @@ cy:
       long_date: "%-d %B %Y"
       month_name: "%B"
     abbr_month_names:
-      -
-      - naJ
-      - beF
-      - raM
-      - rpA
-      - yaM
-      - nuJ
-      - luJ
-      - guA
-      - peS
-      - tcO
-      - voN
-      - ceD
+    -
+    - naJ
+    - beF
+    - raM
+    - rpA
+    - yaM
+    - nuJ
+    - luJ
+    - guA
+    - peS
+    - tcO
+    - voN
+    - ceD
     month_names:
-      -
-      - yraunaJ
-      - yraurbeF
-      - hcraM
-      - lirpA
-      - yaM
-      - enuJ
-      - yluJ
-      - tsuguA
-      - rebmetpeS
-      - rebotcO
-      - rebmevoN
-      - rebmeceD
+    -
+    - yraunaJ
+    - yraurbeF
+    - hcraM
+    - lirpA
+    - yaM
+    - enuJ
+    - yluJ
+    - tsuguA
+    - rebmetpeS
+    - rebotcO
+    - rebmevoN
+    - rebmeceD
