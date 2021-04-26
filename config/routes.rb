@@ -181,7 +181,6 @@ Rails.application.routes.draw do
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
-      resource :proceeding_merits_tasks, only: %i[show]
       resources :proceeding_merits_tasks do
         resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
       end
