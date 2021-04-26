@@ -5,8 +5,8 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
   let(:lead_application_proceeding_type) { application.application_proceeding_types.first }
   let(:provider) { application.provider }
 
-  describe 'GET /providers/applications/:legal_aid_application_id/proceeding_merits_tasks/:proceeding_merits_task_id/attempts_to_settle' do
-    subject { get "/providers/applications/#{application.id}/proceeding_merits_tasks/#{lead_application_proceeding_type.id}/attempts_to_settle" }
+  describe 'GET /providers/applications/merits_task_list/:merits_task_list_id/attempts_to_settle' do
+    subject { get providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -30,7 +30,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/proceeding_merits_tasks/:proceeding_merits_task_id/attempts_to_settle' do
+  describe 'PATCH /providers/merits_task_list/:merits_task_list_id/attempts_to_settle' do
     let(:params) do
       {
         proceeding_merits_task_attempts_to_settle: {
@@ -46,7 +46,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
       end
 
       subject do
-        patch providers_legal_aid_application_proceeding_merits_task_attempts_to_settle_path(application, lead_application_proceeding_type), params: params.merge(submit_button)
+        patch providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type), params: params.merge(submit_button)
       end
 
       context 'Form submitted using Continue button' do
@@ -86,7 +86,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         let(:submit_button) { { draft_button: 'Save as draft' } }
 
         subject do
-          patch providers_legal_aid_application_proceeding_merits_task_attempts_to_settle_path(application, lead_application_proceeding_type), params: params.merge(submit_button)
+          patch providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type), params: params.merge(submit_button)
         end
 
         it "redirects provider to provider's applications page" do

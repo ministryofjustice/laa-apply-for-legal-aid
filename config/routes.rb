@@ -181,9 +181,6 @@ Rails.application.routes.draw do
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :percentage_home, only: %i[show update]
-      resources :proceeding_merits_tasks do
-        resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
-      end
       resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
@@ -248,6 +245,10 @@ Rails.application.routes.draw do
       resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
+    end
+
+    resources :merits_task_list do
+      resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
     end
   end
 

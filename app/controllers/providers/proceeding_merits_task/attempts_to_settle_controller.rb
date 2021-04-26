@@ -15,16 +15,20 @@ module Providers
 
       private
 
+      def legal_aid_application
+        @legal_aid_application ||= application_proceeding_type.legal_aid_application
+      end
+
       def attempts_to_settle
         @attempts_to_settle ||= @application_proceeding_type.attempts_to_settle || @application_proceeding_type.build_attempts_to_settle
       end
 
       def application_proceeding_type
-        legal_aid_application.application_proceeding_types.find(proceeding_merits_task_id)
+        ApplicationProceedingType.find(merits_task_list_id)
       end
 
-      def proceeding_merits_task_id
-        params['proceeding_merits_task_id']
+      def merits_task_list_id
+        params['merits_task_list_id']
       end
 
       def form_params
