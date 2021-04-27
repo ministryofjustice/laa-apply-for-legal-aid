@@ -336,7 +336,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_094326) do
     t.text "success_prospect_details"
     t.datetime "submitted_at"
     t.boolean "success_likely"
-    t.uuid "application_proceeding_type_id"
+    t.uuid "application_proceeding_type_id", null: false
     t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
     t.index ["legal_aid_application_id"], name: "index_chances_of_successes_on_legal_aid_application_id"
   end
@@ -793,6 +793,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_094326) do
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
+  add_foreign_key "chances_of_successes", "application_proceeding_types"
   add_foreign_key "chances_of_successes", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
