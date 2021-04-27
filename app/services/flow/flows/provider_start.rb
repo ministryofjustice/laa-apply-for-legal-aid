@@ -43,12 +43,26 @@ module Flow
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: ->(_application, has_other_proceeding) { has_other_proceeding ? :proceedings_types : :used_delegated_functions }
+          forward: ->(_application, has_other_proceeding) do
+            if has_other_proceeding
+              :proceedings_types
+            else
+              Setting.allow_multiple_proceedings? ? :used_multiple_delegated_functions : :used_delegated_functions
+            end
+          end
+        },
+        used_multiple_delegated_functions: {
+          path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
+          forward: ->(_earliest_reported_date) do
+            # TODO: AP-2233 if earliest reported date does not exist then go to the 'confirm earliest DF date' page as this is outside a month
+            # earliest_reported_date ? :limitations : :delegated_functions_dates
+            :limitations
+          end
         },
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
           forward: ->(application) do
-            application.used_delegated_functions_on&.between?(12.months.ago, 1.month.ago) ? :delegated_functions_dates : :limitations
+            application.used_delegated_functions_on&.between?(12.months.ago - 1.day, 1.month.ago) ? :delegated_functions_dates : :limitations
           end
         },
         delegated_functions_dates: {

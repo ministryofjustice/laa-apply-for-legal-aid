@@ -4,16 +4,17 @@ class DateFieldBuilder
   DATE_PARTS = %i[year month day].freeze
   FORM_PARTS = %i[1i 2i 3i].freeze
 
-  attr_reader :form, :model, :method, :prefix
+  attr_reader :form, :model, :method, :prefix, :label
 
   # :method is the target method on the model
   # :prefix is used to construct date part fields
-  def initialize(form:, model:, method:, prefix:, suffix: :date)
+  def initialize(form:, model:, method:, prefix:, suffix: :date, label: nil)
     @form = form
     @model = model
     @method = method
     @prefix = prefix
     @suffix = suffix
+    @label = label || method
   end
 
   def blank?

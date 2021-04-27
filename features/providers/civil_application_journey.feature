@@ -124,9 +124,41 @@ Feature: Civil application journeys
     Then I should be on a page showing 'You have added 1 proceeding'
     Then I should be on a page showing 'FGM Protection Order'
     Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Occupation order'
+    Then proceeding suggestions has results
+    Then I choose a 'Occupation order' radio button
+    Then I click 'Save and continue'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Harassment - injunction'
+    Then proceeding suggestions has results
+    Then I choose a 'Harassment - injunction' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'You have added 3 proceedings'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'Occupation order'
+    Then I enter the 'occupation order used delegated functions on' date of 35 days ago
+    Then I select 'Harassment - injunction'
+    Then I enter the 'harassment injunction used delegated functions on' date of 2 days ago
+    Then I click 'Save and continue'
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing 'Covered under an emergency certificate'
+    Then I should be on a page showing 'Covered under a substantive certificate'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Check your answers'
+    Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
+    Then I should be on a page showing 'Proceeding 2 Harassment - injunction'
+    Then I should be on a page showing 'Proceeding 3 Occupation order'
+    Then I should be on a page showing 'Delegated functions'
+    Then I should be on a page showing 'FGM Protection Order Not used'
+    Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %b %Y' format
+    Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %b %Y' format
+    Then I should be on a page showing 'Covered under an emergency certificate'
+    Then I should be on a page showing 'Covered under a substantive certificate'
 
   @javascript
   Scenario: I complete each step up to the applicant page
@@ -241,12 +273,12 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     Then I enter the 'used delegated functions on' date of 35 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago
+    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago using '%-d %B %Y' format
     Then I choose "This date is correct"
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click link "Back"
-    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago
+    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago using '%-d %B %Y' format
     Then I choose "I used delegated functions on a different date"
     Then I enter the 'used delegated functions' date of 3 days ago
     Then I click 'Save and continue'

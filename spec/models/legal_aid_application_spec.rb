@@ -469,6 +469,20 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe 'application_proceedings_by_name' do
+    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_multiple_proceeding_types }
+
+    it 'returns all application proceeding types with proceeding type names' do
+      result = legal_aid_application.application_proceedings_by_name
+      application_proceeding_types = result.map(&:application_proceeding_type)
+      application_proceeding_names = result.map(&:name)
+      proceeding_names = legal_aid_application.application_proceeding_types.map { |type| ProceedingType.find(type.proceeding_type_id).name }
+
+      expect(application_proceeding_types).to eq(legal_aid_application.application_proceeding_types)
+      expect(application_proceeding_names).to eq(proceeding_names)
+    end
+  end
+
   describe 'attributes are synced on applicant_details_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details }
 

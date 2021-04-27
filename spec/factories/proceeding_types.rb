@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:code) { |n| format('PR%<number>04d', number: n) }
     ccms_code { 'PBM23' }
     meaning { 'Meaning' }
+    name { 'name' }
     description { 'Description' }
     ccms_category_law { 'Category law' }
     ccms_category_law_code { 'Category law code' }
@@ -20,6 +21,7 @@ FactoryBot.define do
       code { 'PR0208' }
       ccms_code { 'DA001' }
       meaning { 'Inherent jurisdiction high court injunction' }
+      name { 'inherent_jurisdiction_high_court_injunction' }
       description { 'to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.' }
       ccms_category_law { 'Family' }
       ccms_category_law_code { 'MAT' }
@@ -35,6 +37,7 @@ FactoryBot.define do
       code { 'PR0214' }
       ccms_code { 'DA005' }
       meaning { 'Occupation order' }
+      name { 'occupation_order' }
       description { 'to be represented on an application for an occupation order.' }
       ccms_category_law { 'Family' }
       ccms_category_law_code { 'MAT' }
