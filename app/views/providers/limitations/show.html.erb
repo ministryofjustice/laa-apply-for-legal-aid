@@ -30,7 +30,7 @@
     <p><strong><%= t('.form_of_service') %></strong> <%= @legal_aid_application.lead_proceeding_type.default_level_of_service.name %></p>
     <div class="govuk-!-padding-bottom-1"></div>
     <p><strong><%= t('.incurrable_costs') %></strong><%= gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></p>
-    <p><strong><%= t('.allowable_work') %></strong><%= application_proceeding_type.earliest_delegated_functions.delegated_functions_scope_limitation.description %></p>
+    <p><strong><%= t('.allowable_work') %></strong><%= application_proceeding_type.proceeding_with_earliest_delegated_functions.delegated_functions_scope_limitation.description %></p>
     </p>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full text-column">

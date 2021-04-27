@@ -47,8 +47,8 @@ module LegalAidApplications
       save_proceeding_records
     end
 
-    def earliest_delegated_functions
-      @earliest_delegated_functions ||= proceeding_types_by_name.first.application_proceeding_type.earliest_delegated_functions
+    def proceeding_with_earliest_delegated_functions
+      @proceeding_with_earliest_delegated_functions ||= proceeding_types_by_name.first.application_proceeding_type.proceeding_with_earliest_delegated_functions
     end
 
     private_class_method :populate_attr_accessors
@@ -84,11 +84,14 @@ module LegalAidApplications
     end
 
     def delegated_functions_dates
-      @delegated_functions_dates ||= proceeding_types_by_name.map(&:name).filter_map { |name| date_fields(name) if checkbox_for? name }
+      @delegated_functions_dates ||= proceeding_types_by_name.filter_map do |type|
+        date_fields(type.name, type.meaning) if checkbox_for? type.name
+      end
     end
 
-    def date_fields(name)
+    def date_fields(name, meaning = nil)
       DateFieldBuilder.new(
+        label: meaning,
         form: self,
         model: self,
         method: :"#{name}_used_delegated_functions_on",
@@ -133,30 +136,37 @@ module LegalAidApplications
       month_range = Date.current.ago(12.months).strftime('%d %m %Y')
 
       delegated_functions_dates.each do |date_field|
-        name = date_field.method
+        meaning = date_field.label
+        attr_name = date_field.method
         valid = !date_field.form_date_invalid?
         date = valid ? date_field.form_date : nil
 
-        update_errors(name, valid, date, month_range)
+        update_errors(meaning, attr_name, valid, date, month_range)
       end
     end
 
-    def update_errors(name, valid, date, month_range)
-      error_date_invalid(name, valid)
-      error_not_in_range(name, valid, date, month_range)
-      error_in_future(name, valid, date)
+    def update_errors(meaning, attr_name, valid, date, month_range)
+      error_date_invalid(meaning, attr_name, valid)
+      error_not_in_range(meaning, attr_name, valid, date, month_range)
+      error_in_future(meaning, attr_name, valid, date)
     end
 
-    def error_date_invalid(name, valid)
-      errors.add(name, I18n.t("#{error_base_path}.date_invalid")) unless valid
+    def error_date_invalid(meaning, attr_name, valid)
+      return if valid
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_invalid", meaning: meaning))
     end
 
-    def error_not_in_range(name, valid, date, month_range)
-      errors.add(name, I18n.t("#{error_base_path}.date_not_in_range", months: month_range)) unless !valid || date >= Date.current.ago(12.months)
+    def error_not_in_range(meaning, attr_name, valid, date, month_range)
+      return unless valid && date < Date.current.ago(12.months)
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_not_in_range", months: month_range, meaning: meaning))
     end
 
-    def error_in_future(name, valid, date)
-      errors.add(name, I18n.t("#{error_base_path}.date_is_in_the_future")) unless !valid || date <= Date.current
+    def error_in_future(meaning, attr_name, valid, date)
+      return unless valid && date > Date.current
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_is_in_the_future", meaning: meaning))
     end
 
     def error_base_path

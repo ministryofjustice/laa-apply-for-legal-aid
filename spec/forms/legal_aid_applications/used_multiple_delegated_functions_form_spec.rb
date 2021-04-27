@@ -13,7 +13,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   let(:default_params) { { none_selected: 'false' } }
   let(:i18n_scope) { 'activemodel.errors.models.application_proceeding_types.attributes' }
   let(:error_locale) { :defined_in_spec }
-  let(:message) { I18n.t(error_locale, scope: i18n_scope) }
 
   let(:params) do
     params = default_params
@@ -31,17 +30,17 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
   subject { described_class.call(application_proceedings_by_name) }
 
-  describe '#earliest_delegated_functions' do
+  describe '#proceeding_with_earliest_delegated_functions' do
     before do
       subject.save(params)
       application_proceeding_types.reload
     end
 
     it 'updates the application with earliest delegated functions retrievable off any proceeding' do
-      form_df_date = subject.earliest_delegated_functions.used_delegated_functions_on
+      form_df_date = subject.proceeding_with_earliest_delegated_functions.used_delegated_functions_on
 
       application_proceeding_types.each do |type|
-        expect(type.earliest_delegated_functions.used_delegated_functions_on).to eq(form_df_date)
+        expect(type.proceeding_with_earliest_delegated_functions.used_delegated_functions_on).to eq(form_df_date)
       end
     end
   end
@@ -103,6 +102,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
+        message = I18n.t(error_locale, scope: i18n_scope)
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors[:delegated_functions].join).to match(message)
       end
@@ -117,6 +117,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
+        message = I18n.t(error_locale, scope: i18n_scope)
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors[:delegated_functions].join).to match(message)
       end
@@ -131,8 +132,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        expect(message).not_to match(/^translation missing:/)
         application_proceedings_by_name.each do |type|
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
       end
@@ -147,10 +149,11 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        expect(message).not_to match(/^translation missing:/)
         months = Time.zone.now.ago(12.months).strftime('%d %m %Y')
         application_proceedings_by_name.each do |type|
-          expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(I18n.t(error_locale, scope: i18n_scope, months: months))
+          message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: ProceedingType.find_by(name: type.name).meaning)
+          expect(message).not_to match(/^translation missing:/)
+          expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
       end
     end
@@ -164,6 +167,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message for the invalid proceeding date only' do
+        message = I18n.t(error_locale, scope: i18n_scope, meaning: 'Inherent jurisdiction high court injunction')
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors['inherent_jurisdiction_high_court_injunction_used_delegated_functions_on'].join).to match(message)
       end
@@ -182,8 +186,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        expect(message).not_to match(/^translation missing:/)
         application_proceedings_by_name.each do |type|
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
       end
@@ -210,8 +215,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        expect(message).not_to match(/^translation missing:/)
         application_proceedings_by_name.each do |type|
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
       end
@@ -256,8 +262,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        expect(message).not_to match(/^translation missing:/)
         application_proceedings_by_name.each do |type|
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
       end
@@ -272,6 +279,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message for the invalid proceeding date only' do
+        message = I18n.t(error_locale, scope: i18n_scope, meaning: 'Inherent jurisdiction high court injunction')
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors['inherent_jurisdiction_high_court_injunction_used_delegated_functions_on'].join).to match(message)
       end

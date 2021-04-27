@@ -49,26 +49,48 @@ RSpec.describe ApplicationProceedingType do
     end
   end
 
-  describe '#used_delegated_functions?' do
+  describe 'delegated functions' do
     let(:application) { create :legal_aid_application }
-    let!(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: application, used_delegated_functions_on: df_date }
-    let(:df_date) { Time.current }
+    let!(:application_proceeding_type) do
+      create :application_proceeding_type,
+             legal_aid_application: application,
+             used_delegated_functions_on: df_date,
+             used_delegated_functions_reported_on: df_reported_date
+    end
+    let(:df_date) { Date.current - 10.days }
+    let(:df_reported_date) { Date.current }
 
     before do
       Setting.setting.update(allow_multiple_proceedings: true)
     end
 
     context 'delegated functions used' do
-      it 'returns true' do
+      it 'used delegated functions returns true' do
         application_proceeding_type = application.application_proceeding_types.first
         expect(application_proceeding_type.used_delegated_functions?).to be true
+      end
+
+      it 'returns the application proceeding type with the earliest delegated functions' do
+        application_proceeding_type = application.application_proceeding_types.first
+        type = application.application_proceeding_types.first
+        expect(application_proceeding_type.proceeding_with_earliest_delegated_functions).to eq type
+      end
+
+      it 'returns the earliest delegated functions date' do
+        application_proceeding_type = application.application_proceeding_types.first
+        expect(application_proceeding_type.earliest_delegated_functions_date).to eq df_date
+      end
+
+      it 'returns the earliest delegated functions reported date' do
+        application_proceeding_type = application.application_proceeding_types.first
+        expect(application_proceeding_type.earliest_delegated_functions_reported_date).to eq df_reported_date
       end
     end
 
     context 'delegated functions not used' do
       let(:df_date) { nil }
 
-      it 'returns false' do
+      it 'used delegated functions returns false' do
         application_proceeding_type = application.application_proceeding_types.first
         expect(application_proceeding_type.used_delegated_functions?).to be false
       end

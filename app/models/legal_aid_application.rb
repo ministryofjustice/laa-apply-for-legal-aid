@@ -143,13 +143,15 @@ class LegalAidApplication < ApplicationRecord
 
   def application_proceedings_by_name
     types = application_proceeding_types.map do |application_proceeding_type|
+      proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
       OpenStruct.new({
-                       application_proceeding_type: application_proceeding_type,
-                       name: ProceedingType.find(application_proceeding_type.proceeding_type_id).name
+                       name: proceeding_type.name,
+                       meaning: proceeding_type.meaning,
+                       application_proceeding_type: application_proceeding_type
                      })
     end
 
-    types.sort_by(&:name)
+    types.sort_by(&:meaning)
   end
 
   def cfe_result

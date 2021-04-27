@@ -35,7 +35,7 @@ class ApplicationProceedingType < ApplicationRecord
   # DELEGATED FUNCTIONS
   # References to earliest delegated functions can be accessed off any application proceeding type
   def used_delegated_functions?
-    earliest_delegated_functions.present?
+    proceeding_with_earliest_delegated_functions.present?
   end
 
   def earliest_delegated_functions_date
@@ -43,10 +43,10 @@ class ApplicationProceedingType < ApplicationRecord
   end
 
   def earliest_delegated_functions_reported_date
-    earliest_delegated_functions.used_delegated_functions_reported_on
+    proceeding_with_earliest_delegated_functions&.used_delegated_functions_reported_on
   end
 
-  def earliest_delegated_functions
+  def proceeding_with_earliest_delegated_functions
     earliest_delegated_functions_date && proceedings.find_by(used_delegated_functions_on: earliest_delegated_functions_date)
   end
   ##############################

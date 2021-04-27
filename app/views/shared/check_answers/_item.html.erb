@@ -13,7 +13,7 @@
   </dd>
   <% unless read_only %>
     <dd class="govuk-summary-list__actions">
-      <% unless read_only || url == :show_blank_action %>
+      <% unless url == :show_blank_action %>
         <%= link_to_accessible(t('generic.change'), url, class: 'govuk-link change-link', suffix: question) %>
       <% end %>
     </dd>

@@ -18,7 +18,7 @@ module Providers
 
       update_application
 
-      draft_selected? ? continue_or_draft : go_forward(earliest_df&.used_delegated_functions_reported_on)
+      draft_selected? ? continue_or_draft : go_forward(earliest_delegated_functions_reported_date)
     end
 
     def form
@@ -37,18 +37,22 @@ module Providers
       application_proceedings_by_name.map(&:application_proceeding_type)
     end
 
-    def earliest_df
-      form.earliest_delegated_functions
+    def proceeding_with_earliest_delegated_functions
+      @proceeding_with_earliest_delegated_functions ||= form.proceeding_with_earliest_delegated_functions
     end
 
-    def earliest_df_date
-      earliest_df&.used_delegated_functions_on
+    def earliest_delegated_functions_date
+      @earliest_delegated_functions_date ||= proceeding_with_earliest_delegated_functions&.used_delegated_functions_on
+    end
+
+    def earliest_delegated_functions_reported_date
+      @earliest_delegated_functions_reported_date ||= proceeding_with_earliest_delegated_functions&.used_delegated_functions_reported_on
     end
 
     def update_application
       update_substantive_application_deadline
-      earliest_df_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
-      submit_application_reminder if !draft_selected? && earliest_df_date && earliest_df_date >= Date.current.ago(1.month)
+      earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
+      submit_application_reminder if !draft_selected? && earliest_delegated_functions_date && earliest_delegated_functions_date >= Date.current.ago(1.month)
     end
 
     def update_substantive_application_deadline
@@ -57,9 +61,9 @@ module Providers
     end
 
     def substantive_application_deadline
-      return unless earliest_df_date
+      return unless earliest_delegated_functions_date
 
-      SubstantiveApplicationDeadlineCalculator.call earliest_df
+      SubstantiveApplicationDeadlineCalculator.call proceeding_with_earliest_delegated_functions
     end
 
     def add_delegated_scope_limitations
