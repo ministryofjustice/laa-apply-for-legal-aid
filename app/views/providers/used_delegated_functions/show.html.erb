@@ -1,11 +1,11 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_used_delegated_functions_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_used_delegated_functions_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
+    <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
 
     <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions, legend: {text: t('.heading'), tag: 'h1', size: 'xl'}) do %>
       <%= form.govuk_radio_button(:used_delegated_functions, true, label: {text: t('generic.yes')} ) do %>

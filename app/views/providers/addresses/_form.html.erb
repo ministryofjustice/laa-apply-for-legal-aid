@@ -1,15 +1,16 @@
 <% heading_type = @form.lookup_error.present? ? :lookup : :manual %>
-<%= page_template(
-      page_title: t("forms.address_#{heading_type}.heading")
-    ) do %>
+<%= form_with(
+      model: @form,
+      scope: :address,
+      url: providers_legal_aid_application_address_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(
-        model: @form,
-        scope: :address,
-        url: providers_legal_aid_application_address_path(@legal_aid_application),
-        method: :patch,
-        local: true
-      ) do |form| %>
+    <%= page_template(
+            page_title: t("forms.address_#{heading_type}.heading"),
+            form: form,
+        ) do %>
 
     <% if form.object.lookup_postcode.present? %>
       <%= form.hidden_field :lookup_postcode %>

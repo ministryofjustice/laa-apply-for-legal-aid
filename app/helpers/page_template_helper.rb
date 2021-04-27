@@ -38,20 +38,22 @@ module PageTemplateHelper
   #   <% end %>
   #
 
-  def page_template( # rubocop:disable Metrics/ParameterLists, Metrics/MethodLength
+  def page_template( # rubocop:disable Metrics/ParameterLists, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     page_title: nil,
     head_title: nil,
     back_link: {},
     column_width: 'two-thirds',
     template: nil,
-    show_errors_for: @form,
+    form: nil,
+    show_errors_for: nil,
     success_message: nil,
     page_heading_options: {},
     &content
   )
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
-    page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, show_errors_for&.errors)
+    has_errors = form&.object&.errors || show_errors_for&.errors
+    page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, has_errors)
     content = capture(&content) if content
     content_for(:language_switcher) { language_links if show_language_switcher? }
     render(
@@ -61,6 +63,7 @@ module PageTemplateHelper
       back_link: back_link,
       column_width: column_width,
       content: content,
+      form: form,
       show_errors_for: show_errors_for,
       success_message: success_message,
       page_heading_options: page_heading_options
