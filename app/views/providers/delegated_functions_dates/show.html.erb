@@ -1,15 +1,14 @@
-<%= page_template page_title: t('.heading', date: @used_delegated_functions_on), template: :basic do %>
-
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_delegated_functions_date_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_delegated_functions_date_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+    <%= page_template page_title: t('.heading', date: @used_delegated_functions_on), form: form, template: :basic do %>
 
       <%= form.govuk_radio_buttons_fieldset :confirm_delegated_functions_date,
                                             legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
-        <%= form.govuk_radio_button(:confirm_delegated_functions_date, true, label: {text: t('.correct_date')}) %>
+        <%= form.govuk_radio_button(:confirm_delegated_functions_date, true, link_errors: true, label: {text: t('.correct_date')}) %>
         <%= form.govuk_radio_button(:confirm_delegated_functions_date, false, label: {text: t('.different_date')}) do %>
           <%= form.govuk_date_field :used_delegated_functions_on,
                                     legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label") },

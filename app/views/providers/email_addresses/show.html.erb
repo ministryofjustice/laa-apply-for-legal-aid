@@ -1,14 +1,15 @@
-<%= page_template(
-      page_title: t('.page_title'),
-      page_heading_options: { margin_bottom: 3 }
-    ) do %>
-
-  <%= form_with(
+<%= form_with(
         model: @form,
         url: providers_legal_aid_application_email_address_path,
         method: :patch,
         local: true
-      ) do |form| %>
+    ) do |form| %>
+
+    <%= page_template(
+        page_title: t('.page_title'),
+        page_heading_options: { margin_bottom: 3 },
+        form: form
+      ) do %>
 
     <div class="govuk-!-padding-bottom-6"></div>
 

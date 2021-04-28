@@ -13,7 +13,7 @@ module LegalAidApplications
     def consent_presence
       return if draft? || provider_received_citizen_consent.present?
 
-      errors.add(:open_banking_consent, I18n.t('activemodel.errors.models.legal_aid_application.attributes.open_banking_consents.providers.blank'))
+      errors.add(:provider_received_citizen_consent, I18n.t('activemodel.errors.models.legal_aid_application.attributes.open_banking_consents.providers.blank'))
     end
   end
 end

@@ -1,8 +1,44 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
-  <%= render(
-        'shared/forms/open_banking_consents',
-        form_path: providers_legal_aid_application_open_banking_consents_path(@legal_aid_application),
-        info: t('.info'),
-        show_draft: true
-      ) %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_open_banking_consents_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |form| %>
+
+    <%= page_template page_title: t('.heading'), form: form, template: :basic do %>
+
+    <%= form.govuk_radio_buttons_fieldset :provider_received_citizen_consent,
+                                          legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+
+      <p class="govuk-body govuk-!-padding-top-4">
+        <%= t('.info') %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><%= t('providers.open_banking_consents.show.list_1') %></li>
+        <li><%= t('providers.open_banking_consents.show.list_2_html') %></li>
+        <li><%= t('providers.open_banking_consents.show.list_3') %></li>
+      </ul>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              true,
+              link_errors: true,
+              label: {text: t('providers.open_banking_consents.show.radio_yes')}
+          ) %>
+
+      <%= form.govuk_radio_button(
+              :provider_received_citizen_consent,
+              false,
+              label: {text: t('providers.open_banking_consents.show.radio_no')}
+          ) %>
+
+      <div class="govuk-!-padding-bottom-5"></div>
+
+      <%= next_action_buttons(
+              show_draft: true,
+              form: form
+          ) %>
+    <% end %>
+  <% end %>
 <% end %>
