@@ -334,7 +334,7 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-      - deploy_uat:
+      - deploy_master_uat:
           requires:
           - build_and_push
       - unit_tests:
