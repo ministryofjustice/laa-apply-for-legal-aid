@@ -22,6 +22,8 @@ class ApplicationProceedingType < ApplicationRecord
 
   has_one :delegated_functions_scope_limitation, through: :delegated_functions_scope_limitation_join, source: :scope_limitation
 
+  has_one :attempts_to_settle, class_name: 'ProceedingMeritsTask::AttemptsToSettle', dependent: :destroy
+
   delegate :default_substantive_scope_limitation,
            :default_delegated_functions_scope_limitation,
            to: :proceeding_type

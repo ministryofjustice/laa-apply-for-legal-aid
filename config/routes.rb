@@ -252,6 +252,10 @@ Rails.application.routes.draw do
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
     end
+
+    resources :merits_task_list do
+      resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
+    end
   end
 
   # dummy route to set session vars available in test environment only

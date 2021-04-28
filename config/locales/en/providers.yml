@@ -255,6 +255,12 @@ en:
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
+      attempts_to_settle:
+        show:
+          h1-heading: What attempts have been made to settle the matter?
+          hint-text: Tell us if correspondence or mediation has been tried, or if no attempts have been made.
+          attempts_made: Details
+          error: Please provide details of the attempts made to settle
     application_merits_task:
       involved_children:
         new:
