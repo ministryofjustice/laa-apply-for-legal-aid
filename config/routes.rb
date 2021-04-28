@@ -255,6 +255,7 @@ Rails.application.routes.draw do
 
     resources :merits_task_list do
       resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
+      resource :involved_child, only: %i[show update], controller: 'proceeding_merits_task/involved_children'
     end
   end
 
