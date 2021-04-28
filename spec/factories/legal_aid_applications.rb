@@ -306,6 +306,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_involved_children do
+      after(:create) do |application|
+        3.times { create :involved_child, legal_aid_application: application }
+      end
+    end
+
     trait :with_dwp_override do
       dwp_override { build :dwp_override }
       with_non_passported_state_machine
