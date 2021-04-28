@@ -84,6 +84,14 @@ en:
             postcode:
               blank: Enter a postcode
               invalid: Enter a postcode in the right format
+        application_proceeding_types:
+          attributes:
+            used_delegated_functions_on:
+              nothing_selected: Select proceedings you've used delegated functions for
+              none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
+              date_not_in_range: "The date you used delegated functions for %{meaning} cannot be before %{months}"
+              date_is_in_the_future: "The date you used delegated functions for %{meaning} must be in the past"
+              date_invalid: "Enter the date you used delegated functions for %{meaning}"
         aggregated_cash_income:
           credits:
             attributes:
@@ -148,6 +156,13 @@ en:
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
             details:
               blank: Enter details of the incident
+        application_merits_task/involved_child:
+          attributes:
+            date_of_birth:
+              blank: Enter the date of birth
+              date_not_valid: Enter a valid date of birth
+            full_name:
+              blank: Enter the child's full name
         application_merits_task/opponent:
           attributes:
             full_name:

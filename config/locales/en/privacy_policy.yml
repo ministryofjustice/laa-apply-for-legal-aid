@@ -2,107 +2,100 @@ en:
   privacy_policy:
     index:
       h1-heading: Privacy policy
-      what_we_collect:
-        header: What data we collect
-        data_we_collect: "The data we collect from you includes:"
-        list:
-          item_1: personal details like your name, address, date of birth, contact details and National Insurance number
-          item_2: financial information to check if you qualify for legal aid
-          item_3_html: your Internet Protocol <abbr title='Internet Protocol'>(IP)</abbr> address, and details of which version of <a href='https://www.gov.uk/help/browsers'>web browser</a> you used
-          item_4_html: information on how you use the site, using <a href="https://www.gov.uk/help/cookies">cookies</a> and page tagging techniques
-          item_5: any feedback you leave
-      google_analytics:
-        why: We use Google Analytics software to collect information about how you use the service.
-        list_heading: "Google Analytics stores information about:"
+      purpose:
+        header: Purpose
+        info_1: This privacy notice sets out the standards that you can expect from the Legal Aid Agency when we request or hold personal information (‘personal data’) about you; how you can get access to a copy of your personal data; and what you can do if you think the standards are not being met.
+        info_2: The Legal Aid Agency is an Executive Agency of the Ministry of Justice (MoJ). The MoJ is the data controller for the personal information we hold. The Legal Aid Agency collects and processes personal data for the exercise of its own and associated public functions. Our public function is to provide legal aid.
+      about_personal_information:
+        header: About personal information
+        info_1: Personal data is information about you as an individual. It can be your name, address or telephone number. It can also include the information that you have provided in this service such as your financial circumstances and information relating to any current or previous legal proceedings concerning you.
+        info_2: We know how important it is to protect customers’ privacy and to comply with data protection laws. We will safeguard your personal data and will only disclose it where it is lawful to do so, or with your consent.
+      types_of_personal_data_we_process:
+        header: Types of personal data we process
+        info_1: We only process personal data that is relevant for the services we are providing to you. The personal data which you have provided for this service will only be used for the purposes set out below.
+      purpose_of_processing:
+        header: Purpose of processing and the lawful basis for the process
+        info_1: "The purpose of the Legal Aid Agency collecting and processing the personal data which you have provided on this form is for the purposes of providing legal aid. Specifically, we will use this personal data in the following ways:"
         list: |
-          the pages you visit
-          how long you spend on each page
-          how you got to the service
-          what you click on while you’re using the service
-        security_information: We do not collect or store your personal information through Google Analytics (for example your name or address) so this information cannot be used to identify who you are.
-      why_we_need_your_data:
-        header: Why we need your data
-        list_heading: "We collect data to:"
+          In deciding whether you are eligible for legal aid, whether you are required to make a contribution towards the costs of this legal aid and to assist the Legal Aid Agency in collecting those contributions, if appropriate.
+          In assessing claims from your legal representative(s) for payment from the legal aid fund for the work that they have conducted on your behalf.
+          In conducting periodic assurance audits on legal aid files to ensure that decisions have been made correctly and accurately.
+          In producing statistics and information on our systems and processes to enable us to improve our systems and processes and to assist us in carrying out our functions.
+        info_2: Were the Legal Aid Agency unable to collect this personal information, we would not be able to conduct the activities above, which would prevent us from providing legal aid.
+        info_3: The lawful basis for the Legal Aid Agency collecting and processing your personal data is in the administration of justice and the result of the powers contained in Legal Aid, Sentencing and Punishment of Offenders Act 2012.
+        info_4: We also collect ‘special categories of personal data’ for the purposes of monitoring equality, this is a legal requirement for public authorities under the Equality Act 2010. Special categories of personal data obtained for equality monitoring will be treated with the strictest confidence and any information published will not identify you or anyone else associated with your legal aid application.
+      who_the_information_may_be_shared_with:
+        header: Who the information may be shared with
+        info_1: "We sometimes need to share the personal information we process with other organisations. When this is necessary, we will comply with all aspects of the relevant data protection laws. The organisations we may share your personal information include:"
         list: |
-          work out whether you qualify for legal aid
-          make sure the service meets the needs of its users
-          gather statistics about the service
-          help us monitor and improve the service
-          prevent or detect crime or fraud
-          justify public expenditure
-          carry out audits to ensure that the decisions we make are correct and accurate
-        legal_basis_html: The legal basis for processing your personal data is the result of the powers contained in the <a href="http://www.legislation.gov.uk/ukpga/2012/10/contents/enacted">Legal Aid, Sentencing and Punishment of Offenders Act 2012</a>.
-      what_we_do_with_your_data:
-        header: What we do with your data
-        what: We’ll share your personal data with your solicitor so they can complete your legal aid application.
-        we_may:
-          list_heading: "We may also share your data with:"
-          list: |
-            other government departments, agencies and public bodies
-            non-public organisations such as credit reference and debt collection agencies
-            our technology suppliers, for example our hosting provider
-        we_will_not:
-          list_heading: "We will not:"
-          list: |
-            sell or rent your data to third parties
-            share your data with third parties for marketing purposes
-        we_will: We will share your data if the law requires us to – for example, by court order, or to prevent fraud or other crime.
-      where_your_data_is_processed_and_stored:
-        header: Where your data is processed and stored
-        info_1: We design, build and run our systems to make sure that your data is as safe as possible at all stages, both while it’s processed and when it’s stored.
-        info_2_html: All personal data is stored in the <a href="https://www.gov.uk/eu-eea">European Economic Area</a> <abbr title='European Economic Area'>(EEA)</abbr>. Google Analytics data may be transferred outside the <abbr title='European Economic Area'>EEA</abbr>, but this cannot be used to personally identify you.
-      security:
-        header: How we protect your data and keep it secure
-        info_1: We are committed to doing all that we can to keep your data secure. We have set up systems and processes to prevent unauthorised access or disclosure of your data – for example, we protect your data using varying levels of encryption.
-        info_2: We also make sure that any third parties that we deal with keep all personal data they process on our behalf secure.
-      data_retention_period:
-        header: How long we keep your data
-        list_heading: "We will only retain your personal data for as long as:"
+          Public authorities such as: HM Courts and Tribunals Service (HMCTS), HM Revenue and Customs (HMRC), Department of Work and Pensions (DWP) and HM Land Registry;
+          Non-public authorities such as: Credit reference agencies Equifax and TransUnion; and
+          If false or inaccurate information is provided or fraud identified, the Legal Aid Agency can lawfully share your personal information with fraud prevention agencies to detect and to prevent fraud and money laundering.
+        info_2: You can contact our Data Protection Officer for further information on the organisations we may share your personal information with.
+      data_processors:
+        header: Data Processors
+        info_1: The LAA may contract with third party data processors to provide email, system administration, document management and IT storage services. Data processors may also provide anonymised statistical information about your use of this service.
+        info_2: Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law.
+      details_of_transfer:
+        header: Details of transfers to third country and safeguards
+        info_1: "It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to: the European Economic Area (EEA)"
+        info_2: Any transfers made will be in full compliance with all aspects of the data protection law.
+      retention_period:
+        header: Retention period for information collected
+        info_1: "Your personal information will not be retained for any longer than is necessary for the lawful purposes for which it has been collected and processed. This is to ensure that your personal information does not become inaccurate, out of date or irrelevant. The Legal Aid Agency have set retention periods for the personal information that we collect, this can be accessed via our website:"
+        link_html: <a href='https://www.gov.uk/government/publications/record-retention-and-disposition-schedules'>https://www.gov.uk/government/publications/record-retention-and-disposition-schedules</a>
+        info_2: You can also contact our Data Protection Officer for a copy of our retention policies.
+        info_3: While we retain your personal data, we will ensure that it is kept securely and protected from loss, misuse or unauthorised access and disclosure. Once the retention period has been reached, your personal data will be permanently and securely deleted and destroyed.
+      access_to_personal_information:
+        header: Access to personal information
+        info_1: "You can find out if we hold any personal data about you by making a ‘subject access request’. If you wish to make a subject access request please contact:"
+        address:
+          title: Disclosure Team - Post point 10.25
+          line_1: Ministry of Justice
+          line_2: 102 Petty France
+          line_3: London
+          post_code: SW1H 9AJ
+        email_address_html: <a href="mailto:Data.access@justice.gov.uk">Data.access@justice.gov.uk</a>
+      when_we_ask_you_for_personal_data:
+        header: When we ask you for personal data
+        info_1: We promise to inform you why we need your personal data and ask only for the personal data we need and not collect information that is irrelevant or excessive.
+        info_2: "When we collect your personal data, we have responsibilities, and you have rights, these include:"
         list: |
-          it is needed for the purposes set out in this document
-          the law requires us to
-        info_html: View <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/824530/laa-rrds-august-2019.pdf">our policy on retaining data</a>, or request a copy from our Data Protection Officer.
-      rights:
-        header: Your rights
-        list_heading: "You have the right to request:"
+          That you can withdraw consent at any time, where relevant;
+          That you can lodge a complaint with the supervisory authority;
+          That we will protect and ensure that no unauthorised person has access to it;
+          That your personal data is shared with other organisations only for legitimate purposes;
+          That we don’t keep it longer than is necessary;
+          That we will not make your personal data available for commercial use without your consent; and
+          That we will consider your request to correct, stop processing or erase your personal data.
+      more_details:
+        header: "You can get more details on:"
         list: |
-          information about how your personal data is processed
-          a copy of that personal data (a 'subject access request')
-          that anything inaccurate in your personal data is corrected
-          that your personal data is erased if there is no longer a justification for it
-          a copy of any data-sharing agreements we have with other organisations
-          information on how we instruct staff to collect, use or delete your personal data
-        info_html: If you have any of these requests, contact the Ministry of Justice <abbr title='Ministry of Justice'>(MOJ)</abbr> Data Protection Officer.
-        data_protection_office_contact_details:
+          Agreements we have with other organisations for sharing information;
+          Circumstances where we can pass on personal information without telling you, for example, to help with the prevention or detection of crime or to produce anonymised statistics;
+          Our instructions to staff on how to collect, use or delete your personal information;
+          How we check that the information we hold is accurate and up-to-date; and
+          How to make a complaint.
+        info_1: For more information about the above issues, please contact the;
+        address:
           title: The Data Protection Officer
-          email_address_html: <a href="mailto:privacy@justice.gov.uk">privacy@justice.gov.uk</a>
-          address:
-            line_1: Ministry of Justice
-            line_2: 102 Petty France
-            line_3: London
-            post_code: SW1H 9AJ
-      contact_or_complaint:
-        header: Contact us or make a complaint
-        data_protection_office:
-          list_heading_html: "Contact the <abbr title='Ministry of Justice'>MOJ</abbr> Data Protection Officer if you:"
-          list: |
-            have a question about anything in this privacy notice
-            think that your personal data has been misused or
-          contact_details:
-            email_address_html: <a href="mailto:casework@ico.org.uk">casework@ico.org.uk</a>
-            telephone: "Telephone: 0303 123 1113"
-            text_phone: "Textphone: 01625 545860"
-            call_hours: "Monday to Friday, 9am to 4:30pm"
-            call_costs_html: <a href="https://www.gov.uk/call-charges">Find out about call charges</a>
-        commissioner_office:
-          list_heading_html: "Contact the Information Commissioner's Office (<abbr title='Information Commissioner's Office'>ICO</abbr>):"
-          list: |
-            to make a complaint
-            for independent advice about data protection
-          address:
-            title: Information Commissioner's Office
-            line_1: Wycliffe House
-            line_2: Water Lane
-            line_3: Wilmslow
-            line_4: Cheshire
-            post_code: SK9 5AF
+          line_1: Ministry of Justice
+          line_2: 3rd Floor, Post Point 3.20
+          line_3: 10 South Colonnades
+          line_4: Canary Wharf
+          line_5: London
+          post_code: E14 4PU
+        email_address_html: <a href="mailto:privacy@justice.gov.uk">privacy@justice.gov.uk</a>
+        info_2: For more information on how and why your information is processed, please see the information provided when you accessed our services or were contacted by us.
+      complaints:
+        header: Complaints
+        info_1: "When we ask you for information, we will comply with the law. If you consider that your information has been handled incorrectly, you can contact the Information Commissioner for independent advice about data protection. You can contact the Information Commissioner at:"
+        address:
+          title: Information Commissioner's Office
+          line_1: Wycliffe House
+          line_2: Water Lane
+          line_3: Wilmslow
+          line_4: Cheshire
+          post_code: SK9 5AF
+          telephone: "Tel: 0303 123 1113"
+        link_html: <a href='http://www.ico.org.uk'>www.ico.org.uk</a>

@@ -59,7 +59,7 @@ Feature: Citizen journey in Welsh
     When I enter amount '5000'
     And I click 'eunitnoc dna evaS'
     Then I should be on a page showing '?ekam uoy od stnemyap gniwollof eht fo hcihW'
-    Then I select 'egagtrom ro tneR'
+    Then I select 'stnemyap gnisuoH'
     Then I click 'eunitnoc dna evaS'
     Then I should be on the 'cash_outgoing' page showing 'hsac ni ekam uoy stnemyap tceleS'
     Then I select 'stnemyap gnisuoH'
@@ -79,7 +79,7 @@ Feature: Citizen journey in Welsh
     Given An application has been created
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'ycilop ycavirP'
-    Then I should be on a page showing 'atad ruoy deen ew yhW'
+    Then I should be on a page showing 'esopruP'
 
   @javascript @vcr
   Scenario: View contact information

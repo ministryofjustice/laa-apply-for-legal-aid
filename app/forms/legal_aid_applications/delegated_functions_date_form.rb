@@ -30,9 +30,13 @@ module LegalAidApplications
       return model.used_delegated_functions_on if confirm_delegated_functions_date_selected?
       return @used_delegated_functions_on if @used_delegated_functions_on.present?
       return if date_fields.blank?
-      return :invalid if date_fields.partially_complete? || date_fields.form_date_invalid?
+      return date_fields.input_field_values if incomplete?
 
       @used_delegated_functions_on = attributes[:used_delegated_functions_on] = date_fields.form_date
+    end
+
+    def incomplete?
+      date_fields.partially_complete? || date_fields.form_date_invalid?
     end
 
     def used_delegated_functions_reported_on
@@ -84,7 +88,7 @@ module LegalAidApplications
     end
 
     def substantive_application_deadline
-      return unless used_delegated_functions_on && used_delegated_functions_on != :invalid
+      return unless used_delegated_functions_on && used_delegated_functions_on != date_fields.input_field_values
 
       SubstantiveApplicationDeadlineCalculator.call self
     end

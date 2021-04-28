@@ -1,98 +1,72 @@
 <%= page_template page_title: t('.h1-heading') do %>
-  <h2 class="govuk-heading-m"><%= t('.what_we_collect.header') %></h2>
+  <h2 class="govuk-heading-l"><%= t('.purpose.header') %></h2>
+  <p class="govuk-body"><%= t('.purpose.info_1') %></p>
+  <p class="govuk-body"><%= t('.purpose.info_2') %></p>
 
-  <p class="govuk-body"><%= t('.what_we_collect.data_we_collect') %></p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><%= t('.what_we_collect.list.item_1') %></li>
-    <li><%= t('.what_we_collect.list.item_2') %></li>
-    <li><%= t('.what_we_collect.list.item_3_html') %></li>
-    <li><%= t('.what_we_collect.list.item_4_html') %></li>
-    <li><%= t('.what_we_collect.list.item_5') %></li>
-  </ul>
-  <p class="govuk-body"><%= t('.google_analytics.why') %></p>
+  <h2 class="govuk-heading-l"><%= t('.about_personal_information.header') %></h2>
+  <p class="govuk-body"><%= t('.about_personal_information.info_1') %></p>
+  <p class="govuk-body"><%= t('.about_personal_information.info_2') %></p>
 
-  <p class="govuk-body"><%= t('.google_analytics.list_heading') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.google_analytics' %>
+  <h2 class="govuk-heading-l"><%= t('.types_of_personal_data_we_process.header') %></h2>
+  <p class="govuk-body"><%= t('.types_of_personal_data_we_process.info_1') %></p>
 
-  <p class="govuk-body"><%= t('.google_analytics.security_information') %></p>
+  <h2 class="govuk-heading-l"><%= t('.purpose_of_processing.header') %></h2>
+  <p class="govuk-body"><%= t('.purpose_of_processing.info_1') %></p>
+  <%= list_from_translation_path 'privacy_policy.index.purpose_of_processing' %>
+  <p class="govuk-body"><%= t('.purpose_of_processing.info_2') %></p>
+  <p class="govuk-body"><%= t('.purpose_of_processing.info_3') %></p>
+  <p class="govuk-body"><%= t('.purpose_of_processing.info_4') %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.why_we_need_your_data.header') %></h2>
+  <h2 class="govuk-heading-l"><%= t('.who_the_information_may_be_shared_with.header') %></h2>
+  <p class="govuk-body"><%= t('.who_the_information_may_be_shared_with.info_1') %></p>
+  <%= list_from_translation_path 'privacy_policy.index.who_the_information_may_be_shared_with' %>
+  <p class="govuk-body"><%= t('.who_the_information_may_be_shared_with.info_2') %></p>
 
-  <p class="govuk-body"><%= t('.why_we_need_your_data.list_heading') %></p>
+  <h2 class="govuk-heading-l"><%= t('.data_processors.header') %></h2>
+  <p class="govuk-body"><%= t('.data_processors.info_1') %></p>
+  <p class="govuk-body"><%= t('.data_processors.info_2') %></p>
 
-  <%= list_from_translation_path 'privacy_policy.index.why_we_need_your_data' %>
+  <h2 class="govuk-heading-l"><%= t('.details_of_transfer.header') %></h2>
+  <p class="govuk-body"><%= t('.details_of_transfer.info_1') %></p>
+  <p class="govuk-body"><%= t('.details_of_transfer.info_2') %></p>
 
-  <p class="govuk-body"><%= t('.why_we_need_your_data.legal_basis_html') %></p>
+  <h2 class="govuk-heading-l"><%= t('.retention_period.header') %></h2>
+  <p class="govuk-body"><%= t('.retention_period.info_1') %></p>
+  <p class="govuk-body"><%= t('.retention_period.link_html') %></p>
+  <p class="govuk-body"><%= t('.retention_period.info_2') %></p>
+  <p class="govuk-body"><%= t('.retention_period.info_3') %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.what_we_do_with_your_data.header') %></h2>
-
-  <p class="govuk-body"><%= t('.what_we_do_with_your_data.what') %></p>
-
-  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_may.list_heading') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.what_we_do_with_your_data.we_may' %>
-
-  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_will_not.list_heading') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.what_we_do_with_your_data.we_will_not' %>
-
-  <p class="govuk-body"><%= t('.what_we_do_with_your_data.we_will') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.where_your_data_is_processed_and_stored.header') %></h2>
-
-  <p class="govuk-body"><%= t('.where_your_data_is_processed_and_stored.info_1') %></p>
-  <p class="govuk-body"><%= t('.where_your_data_is_processed_and_stored.info_2_html') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.security.header') %></h2>
-  <p class="govuk-body"><%= t('.security.info_1') %></p>
-  <p class="govuk-body"><%= t('.security.info_2') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.data_retention_period.header') %></h2>
-  <p class="govuk-body"><%= t('.data_retention_period.list_heading') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.data_retention_period' %>
-  <p class="govuk-body"><%= t('.data_retention_period.info_html') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.rights.header') %></h2>
-  <p class="govuk-body"><%= t('.rights.list_heading') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.rights' %>
-  <p class="govuk-body"><%= t('.rights.info_html') %></p>
-
+  <h2 class="govuk-heading-l"><%= t('.access_to_personal_information.header') %></h2>
+  <p class="govuk-body"><%= t('.access_to_personal_information.info_1') %></p>
   <p class="govuk-body">
-    <%= t('.rights.data_protection_office_contact_details.title') %>
-    <br>
-    <%= t('.rights.data_protection_office_contact_details.email_address_html') %>
-    <br>
-      <%= t('.rights.data_protection_office_contact_details.address.line_1') %>
-    <br>
-      <%= t('.rights.data_protection_office_contact_details.address.line_2') %>
-    <br>
-      <%= t('.rights.data_protection_office_contact_details.address.line_3') %>
-    <br>
-      <%= t('.rights.data_protection_office_contact_details.address.post_code') %>
-  </p>
-
-  <h2 class="govuk-heading-m"><%= t('.contact_or_complaint.header') %></h2>
-
-  <p class="govuk-body"><%= t('.contact_or_complaint.data_protection_office.list_heading_html') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.contact_or_complaint.data_protection_office' %>
-
-  <p class="govuk-body"><%= t('.contact_or_complaint.commissioner_office.list_heading_html') %></p>
-  <%= list_from_translation_path 'privacy_policy.index.contact_or_complaint.commissioner_office' %>
-
-  <p class="govuk-body">
-    <%= t('.contact_or_complaint.data_protection_office.contact_details.email_address_html') %>
-    <br>
-      <%= t('.contact_or_complaint.data_protection_office.contact_details.telephone') %>
-    <br>
-      <%= t('.contact_or_complaint.data_protection_office.contact_details.text_phone') %>
-    <br>
-      <%= t('.contact_or_complaint.data_protection_office.contact_details.call_hours') %>
-    <br>
-      <%= t('.contact_or_complaint.data_protection_office.contact_details.call_costs_html') %>
-  </p>
-
-  <p class="govuk-body">
-    <% t('.contact_or_complaint.commissioner_office.address').each do |address_lines| %>
-      <%= address_lines[-1] %>
-      <br>
+    <% t('.access_to_personal_information.address').each do |address_lines| %>
+      <%= address_lines[-1] %><br>
     <% end %>
+  </p>
+  <p class="govuk-body"><%= t('.access_to_personal_information.email_address_html') %></p>
+
+  <h2 class="govuk-heading-l"><%= t('.when_we_ask_you_for_personal_data.header') %></h2>
+  <p class="govuk-body"><%= t('.when_we_ask_you_for_personal_data.info_1') %></p>
+  <p class="govuk-body"><%= t('.when_we_ask_you_for_personal_data.info_2') %></p>
+  <%= list_from_translation_path 'privacy_policy.index.when_we_ask_you_for_personal_data' %>
+
+  <h2 class="govuk-heading-l"><%= t('.more_details.header') %></h2>
+  <%= list_from_translation_path 'privacy_policy.index.more_details' %>
+  <p class="govuk-body"><%= t('.more_details.info_1') %></p>
+  <p class="govuk-body">
+    <% t('.more_details.address').each do |address_lines| %>
+      <%= address_lines[-1] %><br>
+    <% end %>
+  </p>
+  <p class="govuk-body"><%= t('.more_details.email_address_html') %></p>
+  <p class="govuk-body"><%= t('.more_details.info_2') %></p>
+
+  <h2 class="govuk-heading-l"><%= t('.complaints.header') %></h2>
+  <p class="govuk-body"><%= t('.complaints.info_1') %></p>
+  <p class="govuk-body">
+    <% t('.complaints.address').each do |address_lines| %>
+      <%= address_lines[-1] %><br>
+    <% end %>
+    <%= t('.complaints.link_html') %>
   </p>
 <% end %>

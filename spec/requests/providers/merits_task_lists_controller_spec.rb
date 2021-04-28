@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Providers::MeritsTaskListsController, type: :request do
-  let!(:pt1) { create :proceeding_type, ccms_code: 'DA005' }
-  let!(:pt2) { create :proceeding_type, ccms_code: 'DA001' }
-  let!(:pt3) { create :proceeding_type, ccms_code: 'DA003' }
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types, proceeding_types: [pt1, pt2, pt3] }
+  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+  let(:proceeding_names) do
+    legal_aid_application.application_proceeding_types.map do |type|
+      ProceedingType.find(type.proceeding_type_id).meaning
+    end
+  end
   let(:smtl) { build :legal_framework_serializable_merits_task_list }
 
   subject { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
@@ -28,9 +30,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
       it 'displays a section for all proceeding types linked to this application' do
         subject
-        [pt1, pt2, pt3].pluck(:name).each do |name|
-          expect(parsed_response_body.css("ol li#{name} h2").text).to match(/#{name}/)
-        end
+        proceeding_names.each { |name| expect(response.body).to include(name) }
       end
     end
 
@@ -51,9 +51,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
       it 'displays a section for all proceeding types linked to this application' do
         subject
-        [pt1, pt2, pt3].pluck(:name).each do |name|
-          expect(parsed_response_body.css("ol li#{name} h2").text).to match(/#{name}/)
-        end
+        proceeding_names.each { |name| expect(response.body).to include(name) }
       end
     end
   end

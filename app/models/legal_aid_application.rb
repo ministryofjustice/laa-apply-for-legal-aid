@@ -42,6 +42,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application
   has_many :scheduled_mailings, dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
+  has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -138,6 +139,19 @@ class LegalAidApplication < ApplicationRecord
   def lead_proceeding_type
     lead = application_proceeding_types.find_by(lead_proceeding: true)
     ProceedingType.find(lead.proceeding_type_id)
+  end
+
+  def application_proceedings_by_name
+    types = application_proceeding_types.map do |application_proceeding_type|
+      proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
+      OpenStruct.new({
+                       name: proceeding_type.name,
+                       meaning: proceeding_type.meaning,
+                       application_proceeding_type: application_proceeding_type
+                     })
+    end
+
+    types.sort_by(&:meaning)
   end
 
   def cfe_result

@@ -3,145 +3,163 @@ cy:
   privacy_policy:
     index:
       h1-heading: ycilop ycavirP
-      what_we_collect:
-        header: tcelloc ew atad tahW
-        data_we_collect: ":sedulcni uoy morf tcelloc ew atad ehT"
-        list:
-          item_1: rebmun ecnarusnI lanoitaN dna sliated tcatnoc ,htrib fo etad ,sserdda
-            ,eman ruoy ekil sliated lanosrep
-          item_2: dia lagel rof yfilauq uoy fi kcehc ot noitamrofni laicnanif
-          item_3_html: desu uoy >a/<resworb bew>'sresworb/pleh/ku.vog.www//:sptth'=ferh
-            a< fo noisrev hcihw fo sliated dna ,sserdda >rbba/<)PI(>'locotorP tenretnI'=eltit
-            rbba< locotorP tenretnI ruoy
-          item_4_html: seuqinhcet gniggat egap dna >a/<seikooc>"seikooc/pleh/ku.vog.www//:sptth"=ferh
-            a< gnisu ,etis eht esu uoy woh no noitamrofni
-          item_5: evael uoy kcabdeef yna
-      google_analytics:
-        why: ".ecivres eht esu uoy woh tuoba noitamrofni tcelloc ot erawtfos scitylanA
-          elgooG esu eW"
-        list_heading: ":tuoba noitamrofni serots scitylanA elgooG"
+      purpose:
+        header: esopruP
+        info_1: ".tem gnieb ton era sdradnats eht kniht uoy fi od nac uoy tahw dna
+          ;atad lanosrep ruoy fo ypoc a ot ssecca teg nac uoy woh ;uoy tuoba )’atad
+          lanosrep‘( noitamrofni lanosrep dloh ro tseuqer ew nehw ycnegA diA lageL
+          eht morf tcepxe nac uoy taht sdradnats eht tuo stes eciton ycavirp sihT"
+        info_2: ".dia lagel edivorp ot si noitcnuf cilbup ruO .snoitcnuf cilbup detaicossa
+          dna nwo sti fo esicrexe eht rof atad lanosrep sessecorp dna stcelloc ycnegA
+          diA lageL ehT .dloh ew noitamrofni lanosrep eht rof rellortnoc atad eht
+          si JoM ehT .)JoM( ecitsuJ fo yrtsiniM eht fo ycnegA evitucexE na si ycnegA
+          diA lageL ehT"
+      about_personal_information:
+        header: noitamrofni lanosrep tuobA
+        info_1: ".uoy gninrecnoc sgnideecorp lagel suoiverp ro tnerruc yna ot gnitaler
+          noitamrofni dna secnatsmucric laicnanif ruoy sa hcus ecivres siht ni dedivorp
+          evah uoy taht noitamrofni eht edulcni osla nac tI .rebmun enohpelet ro sserdda
+          ,eman ruoy eb nac tI .laudividni na sa uoy tuoba noitamrofni si atad lanosreP"
+        info_2: ".tnesnoc ruoy htiw ro ,os od ot lufwal si ti erehw ti esolcsid ylno
+          lliw dna atad lanosrep ruoy draugefas lliw eW .swal noitcetorp atad htiw
+          ylpmoc ot dna ycavirp ’sremotsuc tcetorp ot si ti tnatropmi woh wonk eW"
+      types_of_personal_data_we_process:
+        header: ssecorp ew atad lanosrep fo sepyT
+        info_1: ".woleb tuo tes sesoprup eht rof desu eb ylno lliw ecivres siht rof
+          dedivorp evah uoy hcihw atad lanosrep ehT .uoy ot gnidivorp era ew secivres
+          eht rof tnaveler si taht atad lanosrep ssecorp ylno eW"
+      purpose_of_processing:
+        header: ssecorp eht rof sisab lufwal eht dna gnissecorp fo esopruP
+        info_1: ":syaw gniwollof eht ni atad lanosrep siht esu lliw ew ,yllacificepS
+          .dia lagel gnidivorp fo sesoprup eht rof si mrof siht no dedivorp evah uoy
+          hcihw atad lanosrep eht gnissecorp dna gnitcelloc ycnegA diA lageL eht fo
+          esoprup ehT"
         list: |2-
 
-          ecivres eht gnisu er’uoy elihw no kcilc uoy tahw
-          ecivres eht ot tog uoy woh
-          egap hcae no dneps uoy gnol woh
-          tisiv uoy segap eht
-        security_information: ".era uoy ohw yfitnedi ot desu eb tonnac noitamrofni
-          siht os )sserdda ro eman ruoy elpmaxe rof( scitylanA elgooG hguorht noitamrofni
-          lanosrep ruoy erots ro tcelloc ton od eW"
-      why_we_need_your_data:
-        header: atad ruoy deen ew yhW
-        list_heading: ":ot atad tcelloc eW"
+          .snoitcnuf ruo tuo gniyrrac ni su tsissa ot dna sessecorp dna smetsys ruo evorpmi ot su elbane ot sessecorp dna smetsys ruo no noitamrofni dna scitsitats gnicudorp nI
+          .yletarucca dna yltcerroc edam neeb evah snoisiced taht erusne ot selif dia lagel no stidua ecnarussa cidoirep gnitcudnoc nI
+          .flaheb ruoy no detcudnoc evah yeht taht krow eht rof dnuf dia lagel eht morf tnemyap rof )s(evitatneserper lagel ruoy morf smialc gnissessa nI
+          .etairporppa fi ,snoitubirtnoc esoht gnitcelloc ni ycnegA diA lageL eht tsissa ot dna dia lagel siht fo stsoc eht sdrawot noitubirtnoc a ekam ot deriuqer era uoy rehtehw ,dia lagel rof elbigile era uoy rehtehw gnidiced nI
+        info_2: ".dia lagel gnidivorp morf su tneverp dluow hcihw ,evoba seitivitca
+          eht tcudnoc ot elba eb ton dluow ew ,noitamrofni lanosrep siht tcelloc ot
+          elbanu ycnegA diA lageL eht ereW"
+        info_3: ".2102 tcA sredneffO fo tnemhsinuP dna gnicnetneS ,diA lageL ni deniatnoc
+          srewop eht fo tluser eht dna ecitsuj fo noitartsinimda eht ni si atad lanosrep
+          ruoy gnissecorp dna gnitcelloc ycnegA diA lageL eht rof sisab lufwal ehT"
+        info_4: ".noitacilppa dia lagel ruoy htiw detaicossa esle enoyna ro uoy yfitnedi
+          ton lliw dehsilbup noitamrofni yna dna ecnedifnoc tsetcirts eht htiw detaert
+          eb lliw gnirotinom ytilauqe rof deniatbo atad lanosrep fo seirogetac laicepS
+          .0102 tcA ytilauqE eht rednu seitirohtua cilbup rof tnemeriuqer lagel a
+          si siht ,ytilauqe gnirotinom fo sesoprup eht rof ’atad lanosrep fo seirogetac
+          laiceps‘ tcelloc osla eW"
+      who_the_information_may_be_shared_with:
+        header: htiw derahs eb yam noitamrofni eht ohW
+        info_1: ":edulcni noitamrofni lanosrep ruoy erahs yam ew snoitasinagro ehT
+          .swal noitcetorp atad tnaveler eht fo stcepsa lla htiw ylpmoc lliw ew ,yrassecen
+          si siht nehW .snoitasinagro rehto htiw ssecorp ew noitamrofni lanosrep eht
+          erahs ot deen semitemos eW"
         list: |2-
 
-          etarucca dna tcerroc era ekam ew snoisiced eht taht erusne ot stidua tuo yrrac
-          erutidnepxe cilbup yfitsuj
-          duarf ro emirc tceted ro tneverp
-          ecivres eht evorpmi dna rotinom su pleh
-          ecivres eht tuoba scitsitats rehtag
-          sresu sti fo sdeen eht steem ecivres eht erus ekam
-          dia lagel rof yfilauq uoy rehtehw tuo krow
-        legal_basis_html: .>a/<2102 tcA sredneffO fo tnemhsinuP dna gnicnetneS ,diA
-          lageL>"detcane/stnetnoc/01/2102/agpku/ku.vog.noitalsigel.www//:ptth"=ferh
-          a< eht ni deniatnoc srewop eht fo tluser eht si atad lanosrep ruoy gnissecorp
-          rof sisab lagel ehT
-      what_we_do_with_your_data:
-        header: atad ruoy htiw od ew tahW
-        what: ".noitacilppa dia lagel ruoy etelpmoc nac yeht os roticilos ruoy htiw
-          atad lanosrep ruoy erahs ll’eW"
-        we_may:
-          list_heading: ":htiw atad ruoy erahs osla yam eW"
-          list: |2-
-
-            redivorp gnitsoh ruo elpmaxe rof ,sreilppus ygolonhcet ruo
-            seicnega noitcelloc tbed dna ecnerefer tiderc sa hcus snoitasinagro cilbup-non
-            seidob cilbup dna seicnega ,stnemtraped tnemnrevog rehto
-        we_will_not:
-          list_heading: ":ton lliw eW"
-          list: |2-
-
-            sesoprup gnitekram rof seitrap driht htiw atad ruoy erahs
-            seitrap driht ot atad ruoy tner ro lles
-        we_will: ".emirc rehto ro duarf tneverp ot ro ,redro truoc yb ,elpmaxe rof
-          – ot su seriuqer wal eht fi atad ruoy erahs lliw eW"
-      where_your_data_is_processed_and_stored:
-        header: derots dna dessecorp si atad ruoy erehW
-        info_1: ".derots s’ti nehw dna dessecorp s’ti elihw htob ,segats lla ta elbissop
-          sa efas sa si atad ruoy taht erus ekam ot smetsys ruo nur dna dliub ,ngised
-          eW"
-        info_2_html: .uoy yfitnedi yllanosrep ot desu eb tonnac siht tub ,>rbba/<AEE>'aerA
-          cimonocE naeporuE'=eltit rbba< eht edistuo derrefsnart eb yam atad scitylanA
-          elgooG .>rbba/<)AEE(>'aerA cimonocE naeporuE'=eltit rbba< >a/<aerA cimonocE
-          naeporuE>"aee-ue/ku.vog.www//:sptth"=ferh a< eht ni derots si atad lanosrep
-          llA
-      security:
-        header: eruces ti peek dna atad ruoy tcetorp ew woH
-        info_1: ".noitpyrcne fo slevel gniyrav gnisu atad ruoy tcetorp ew ,elpmaxe
-          rof – atad ruoy fo erusolcsid ro ssecca desirohtuanu tneverp ot sessecorp
-          dna smetsys pu tes evah eW .eruces atad ruoy peek ot nac ew taht lla gniod
-          ot dettimmoc era eW"
-        info_2: ".eruces flaheb ruo no ssecorp yeht atad lanosrep lla peek htiw laed
-          ew taht seitrap driht yna taht erus ekam osla eW"
-      data_retention_period:
-        header: atad ruoy peek ew gnol woH
-        list_heading: ":sa gnol sa rof atad lanosrep ruoy niater ylno lliw eW"
+          .gnirednual yenom dna duarf tneverp ot dna tceted ot seicnega noitneverp duarf htiw noitamrofni lanosrep ruoy erahs yllufwal nac ycnegA diA lageL eht ,deifitnedi duarf ro dedivorp si noitamrofni etaruccani ro eslaf fI
+          dna ;noinUsnarT dna xafiuqE seicnega ecnerefer tiderC :sa hcus seitirohtua cilbup-noN
+          ;yrtsigeR dnaL MH dna )PWD( snoisneP dna kroW fo tnemtrapeD ,)CRMH( smotsuC dna euneveR MH ,)STCMH( ecivreS slanubirT dna struoC MH :sa hcus seitirohtua cilbuP
+        info_2: ".htiw noitamrofni lanosrep ruoy erahs yam ew snoitasinagro eht no
+          noitamrofni rehtruf rof reciffO noitcetorP ataD ruo tcatnoc nac uoY"
+      data_processors:
+        header: srossecorP ataD
+        info_1: ".ecivres siht fo esu ruoy tuoba noitamrofni lacitsitats desimynona
+          edivorp osla yam srossecorp ataD .secivres egarots TI dna tnemeganam tnemucod
+          ,noitartsinimda metsys ,liame edivorp ot srossecorp atad ytrap driht htiw
+          tcartnoc yam AAL ehT"
+        info_2: ".wal noitcetorp atad rednu sesualc tcartnoc ledom yb denrevog eb
+          lliw esoprup siht rof rossecorp atad a htiw derahs atad lanosrep ynA"
+      details_of_transfer:
+        header: sdraugefas dna yrtnuoc driht ot srefsnart fo sliateD
+        info_1: ")AEE( aerA cimonocE naeporuE eht :ot derrefsnart eb yam noitamrofni
+          ,dedeen si siht nehW .saesrevo noitamrofni lanosrep refsnart ot yrassecen
+          eb semitemos yam tI"
+        info_2: ".wal noitcetorp atad eht fo stcepsa lla htiw ecnailpmoc lluf ni eb
+          lliw edam srefsnart ynA"
+      retention_period:
+        header: detcelloc noitamrofni rof doirep noitneteR
+        info_1: ":etisbew ruo aiv dessecca eb nac siht ,tcelloc ew taht noitamrofni
+          lanosrep eht rof sdoirep noitneter tes evah ycnegA diA lageL ehT .tnavelerri
+          ro etad fo tuo ,etaruccani emoceb ton seod noitamrofni lanosrep ruoy taht
+          erusne ot si sihT .dessecorp dna detcelloc neeb sah ti hcihw rof sesoprup
+          lufwal eht rof yrassecen si naht regnol yna rof deniater eb ton lliw noitamrofni
+          lanosrep ruoY"
+        link_html: ">a/<seludehcs-noitisopsid-dna-noitneter-drocer/snoitacilbup/tnemnrevog/ku.vog.www//:sptth>'seludehcs-noitisopsid-dna-noitneter-drocer/snoitacilbup/tnemnrevog/ku.vog.www//:sptth'=ferh
+          a<"
+        info_2: ".seicilop noitneter ruo fo ypoc a rof reciffO noitcetorP ataD ruo
+          tcatnoc osla nac uoY"
+        info_3: ".deyortsed dna deteled yleruces dna yltnenamrep eb lliw atad lanosrep
+          ruoy ,dehcaer neeb sah doirep noitneter eht ecnO .erusolcsid dna ssecca
+          desirohtuanu ro esusim ,ssol morf detcetorp dna yleruces tpek si ti taht
+          erusne lliw ew ,atad lanosrep ruoy niater ew elihW"
+      access_to_personal_information:
+        header: noitamrofni lanosrep ot sseccA
+        info_1: ":tcatnoc esaelp tseuqer ssecca tcejbus a ekam ot hsiw uoy fI .’tseuqer
+          ssecca tcejbus‘ a gnikam yb uoy tuoba atad lanosrep yna dloh ew fi tuo dnif
+          nac uoY"
+        address:
+          title: 52.01 tniop tsoP - maeT erusolcsiD
+          line_1: ecitsuJ fo yrtsiniM
+          line_2: ecnarF ytteP 201
+          line_3: nodnoL
+          post_code: JA9 H1WS
+        email_address_html: '>a/<ku.vog.ecitsuj@ssecca.ataD>"ku.vog.ecitsuj@ssecca.ataD:otliam"=ferh
+          a<'
+      when_we_ask_you_for_personal_data:
+        header: atad lanosrep rof uoy ksa ew nehW
+        info_1: ".evissecxe ro tnavelerri si taht noitamrofni tcelloc ton dna deen
+          ew atad lanosrep eht rof ylno ksa dna atad lanosrep ruoy deen ew yhw uoy
+          mrofni ot esimorp eW"
+        info_2: ":edulcni eseht ,sthgir evah uoy dna ,seitilibisnopser evah ew ,atad
+          lanosrep ruoy tcelloc ew nehW"
         list: |2-
 
-          ot su seriuqer wal eht
-          tnemucod siht ni tuo tes sesoprup eht rof dedeen si ti
-        info_html: .reciffO noitcetorP ataD ruo morf ypoc a tseuqer ro ,>a/<atad gniniater
-          no ycilop ruo>"fdp.9102-tsugua-sdrr-aal/035428/elif/atad_tnemhcatta/sdaolpu/metsys/sdaolpu/tnemnrevog/ku.vog.ecivres.gnihsilbup.stessa//:sptth"=ferh
-          a< weiV
-      rights:
-        header: sthgir ruoY
-        list_heading: ":tseuqer ot thgir eht evah uoY"
+          .atad lanosrep ruoy esare ro gnissecorp pots ,tcerroc ot tseuqer ruoy redisnoc lliw ew tahT
+          dna ;tnesnoc ruoy tuohtiw esu laicremmoc rof elbaliava atad lanosrep ruoy ekam ton lliw ew tahT
+          ;yrassecen si naht regnol ti peek t’nod ew tahT
+          ;sesoprup etamitigel rof ylno snoitasinagro rehto htiw derahs si atad lanosrep ruoy tahT
+          ;ti ot ssecca sah nosrep desirohtuanu on taht erusne dna tcetorp lliw ew tahT
+          ;ytirohtua yrosivrepus eht htiw tnialpmoc a egdol nac uoy tahT
+          ;tnaveler erehw ,emit yna ta tnesnoc wardhtiw nac uoy tahT
+      more_details:
+        header: ":no sliated erom teg nac uoY"
         list: |2-
 
-          atad lanosrep ruoy eteled ro esu ,tcelloc ot ffats tcurtsni ew woh no noitamrofni
-          snoitasinagro rehto htiw evah ew stnemeerga gnirahs-atad yna fo ypoc a
-          ti rof noitacifitsuj a regnol on si ereht fi desare si atad lanosrep ruoy taht
-          detcerroc si atad lanosrep ruoy ni etaruccani gnihtyna taht
-          )'tseuqer ssecca tcejbus' a( atad lanosrep taht fo ypoc a
-          dessecorp si atad lanosrep ruoy woh tuoba noitamrofni
-        info_html: ".reciffO noitcetorP ataD >rbba/<)JOM(>'ecitsuJ fo yrtsiniM'=eltit
-          rbba< ecitsuJ fo yrtsiniM eht tcatnoc ,stseuqer eseht fo yna evah uoy fI"
-        data_protection_office_contact_details:
+          .tnialpmoc a ekam ot woH
+          dna ;etad-ot-pu dna etarucca si dloh ew noitamrofni eht taht kcehc ew woH
+          ;noitamrofni lanosrep ruoy eteled ro esu ,tcelloc ot woh no ffats ot snoitcurtsni ruO
+          ;scitsitats desimynona ecudorp ot ro emirc fo noitceted ro noitneverp eht htiw pleh ot ,elpmaxe rof ,uoy gnillet tuohtiw noitamrofni lanosrep no ssap nac ew erehw secnatsmucriC
+          ;noitamrofni gnirahs rof snoitasinagro rehto htiw evah ew stnemeergA
+        info_1: ";eht tcatnoc esaelp ,seussi evoba eht tuoba noitamrofni erom roF"
+        address:
           title: reciffO noitcetorP ataD ehT
-          email_address_html: '>a/<ku.vog.ecitsuj@ycavirp>"ku.vog.ecitsuj@ycavirp:otliam"=ferh
-            a<'
-          address:
-            line_1: ecitsuJ fo yrtsiniM
-            line_2: ecnarF ytteP 201
-            line_3: nodnoL
-            post_code: JA9 H1WS
-      contact_or_complaint:
-        header: tnialpmoc a ekam ro su tcatnoC
-        data_protection_office:
-          list_heading_html: ":uoy fi reciffO noitcetorP ataD >rbba/<JOM>'ecitsuJ
-            fo yrtsiniM'=eltit rbba< eht tcatnoC"
-          list: |2-
-
-            ro desusim neeb sah atad lanosrep ruoy taht kniht
-            eciton ycavirp siht ni gnihtyna tuoba noitseuq a evah
-          contact_details:
-            email_address_html: '>a/<ku.gro.oci@krowesac>"ku.gro.oci@krowesac:otliam"=ferh
-              a<'
-            telephone: 3111 321 3030 :enohpeleT
-            text_phone: '068545 52610 :enohptxeT'
-            call_hours: mp03:4 ot ma9 ,yadirF ot yadnoM
-            call_costs_html: '>a/<segrahc llac tuoba tuo dniF>"segrahc-llac/ku.vog.www//:sptth"=ferh
-              a<'
-        commissioner_office:
-          list_heading_html: ":)>rbba/<OCI>'eciffO s'renoissimmoC noitamrofnI'=eltit
-            rbba<( eciffO s'renoissimmoC noitamrofnI eht tcatnoC"
-          list: |2-
-
-            noitcetorp atad tuoba ecivda tnednepedni rof
-            tnialpmoc a ekam ot
-          address:
-            title: eciffO s'renoissimmoC noitamrofnI
-            line_1: esuoH effilcyW
-            line_2: enaL retaW
-            line_3: wolsmliW
-            line_4: erihsehC
-            post_code: FA5 9KS
+          line_1: ecitsuJ fo yrtsiniM
+          line_2: 02.3 tnioP tsoP ,roolF dr3
+          line_3: sedannoloC htuoS 01
+          line_4: frahW yranaC
+          line_5: nodnoL
+          post_code: UP4 41E
+        email_address_html: '>a/<ku.vog.ecitsuj@ycavirp>"ku.vog.ecitsuj@ycavirp:otliam"=ferh
+          a<'
+        info_2: ".su yb detcatnoc erew ro secivres ruo dessecca uoy nehw dedivorp
+          noitamrofni eht ees esaelp ,dessecorp si noitamrofni ruoy yhw dna woh no
+          noitamrofni erom roF"
+      complaints:
+        header: stnialpmoC
+        info_1: ":ta renoissimmoC noitamrofnI eht tcatnoc nac uoY .noitcetorp atad
+          tuoba ecivda tnednepedni rof renoissimmoC noitamrofnI eht tcatnoc nac uoy
+          ,yltcerrocni deldnah neeb sah noitamrofni ruoy taht redisnoc uoy fI .wal
+          eht htiw ylpmoc lliw ew ,noitamrofni rof uoy ksa ew nehW"
+        address:
+          title: eciffO s'renoissimmoC noitamrofnI
+          line_1: esuoH effilcyW
+          line_2: enaL retaW
+          line_3: wolsmliW
+          line_4: erihsehC
+          post_code: FA5 9KS
+          telephone: 3111 321 3030 :leT
+        link_html: ">a/<ku.gro.oci.www>'ku.gro.oci.www//:ptth'=ferh a<"

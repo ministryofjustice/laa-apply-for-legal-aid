@@ -7,6 +7,34 @@ module Flow
           forward: :date_client_told_incidents,
           check_answers: :check_merits_answers
         },
+        # the involved children section below has not yet been linked into the rest of the flow
+        # until the merits task page is done
+        # :nocov:
+        involved_children: {
+          path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
+          forward: :has_other_involved_children
+        },
+        has_other_involved_children: {
+          path: ->(application) { urls.providers_legal_aid_application_has_other_involved_children_path(application) },
+          forward: ->(_application, has_other_involved_child) {
+            if has_other_involved_child
+              :involved_children
+            else
+              :date_client_told_incidents
+            end
+          }
+        },
+        remove_involved_child: {
+          path: ->(application, child) { urls.providers_legal_aid_application_remove_involved_child_path(application, child) },
+          forward: ->(application) {
+            if application.involved_children.count.positive?
+              :has_other_involved_children
+            else
+              :involved_children
+            end
+          }
+        },
+        # :nocov:
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponent_names,
