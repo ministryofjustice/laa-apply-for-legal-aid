@@ -15,7 +15,7 @@ module Providers
 
         it 'displays the childs details' do
           subject
-          expect(response.body).to include(child2.full_name)
+          expect(response.body).to include(html_compare(child2.full_name))
         end
       end
 
