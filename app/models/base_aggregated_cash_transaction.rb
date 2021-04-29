@@ -138,7 +138,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
       return false if __send__(checkbox_attr) == 'true'
     end
 
-    errors.add(:cash_income, model_error(:blank))
+    errors.add(category_type.to_sym, model_error(:blank))
   end
 
   def validate_none_selected
@@ -148,7 +148,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
       checkbox_attr = "check_box_#{category}".to_sym
       next unless __send__(checkbox_attr) == 'true'
 
-      errors.add(:cash_income, model_error(:others_present))
+      errors.add(category_type.to_sym, model_error(:others_present))
       break
     end
   end
@@ -186,6 +186,10 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     __send__("check_box_#{category}".to_sym)
   end
 
+  def category_type
+    self.class.to_s.underscore.gsub('aggregated_', '')
+  end
+
   def blank_error(category, month_number)
     I18n.t("errors.#{self.class.to_s.underscore}.blank",
            category: I18n.t("transaction_types.names.citizens.#{category}"),
@@ -193,6 +197,6 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
   end
 
   def model_error(type)
-    I18n.t("activemodel.errors.models.aggregated_cash_income.#{self.class.operation}.attributes.cash_income.#{type}")
+    I18n.t("activemodel.errors.models.#{self.class.to_s.underscore}.#{self.class.operation}.attributes.#{category_type}.#{type}")
   end
 end

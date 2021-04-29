@@ -2,9 +2,7 @@ module Citizens
   class CashIncomesController < CitizenBaseController
     before_action :aggregated_cash_income, only: %i[show update]
 
-    def show
-      @error_class = error_class
-    end
+    def show; end
 
     def update
       if aggregated_cash_income.update(form_params)
