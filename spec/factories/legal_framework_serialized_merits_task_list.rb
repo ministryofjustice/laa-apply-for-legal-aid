@@ -9,7 +9,6 @@ FactoryBot.define do
           tasks: {
             latest_incident_details: [],
             opponent_details: [],
-            application_children: []
           }
         },
         proceeding_types: [
@@ -22,8 +21,7 @@ FactoryBot.define do
           {
             ccms_code: 'DA001',
             tasks: {
-              chances_of_success: [],
-              proceeding_children: [:application_children]
+              chances_of_success: [:opponent_details]
             }
           }
         ]
