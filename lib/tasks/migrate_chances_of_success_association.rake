@@ -7,7 +7,10 @@ namespace :migrate_chances_of_success_association do
 
     chances_of_successes.each do |chances_of_success|
       laa = chances_of_success.legal_aid_application
-      application_proceeding_type_id = laa&.lead_application_proceeding_type&.id
+
+      next if laa.nil?
+
+      application_proceeding_type_id = laa.lead_application_proceeding_type&.id
 
       chances_of_success.application_proceeding_type_id = application_proceeding_type_id
       chances_of_success.save!
