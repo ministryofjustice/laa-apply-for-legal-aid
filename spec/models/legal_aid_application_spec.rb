@@ -565,7 +565,7 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
-      create :legal_aid_application, :with_everything, :with_proceeding_types, :with_negative_benefit_check_result, :with_bank_transactions
+      create :legal_aid_application, :with_everything, :with_application_proceeding_type, :with_negative_benefit_check_result, :with_bank_transactions
     end
 
     before do

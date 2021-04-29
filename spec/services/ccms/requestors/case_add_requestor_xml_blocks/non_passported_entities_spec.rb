@@ -22,16 +22,15 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
-                 :with_proceeding_types,
-                 :with_substantive_scope_limitation,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 proceeding_types: [proceeding_type],
                  provider: provider,
                  office: office
         end
 
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:application_proceeding_type) do
+          create :application_proceeding_type, :with_substantive_scope_limitation, legal_aid_application: legal_aid_application, proceeding_type: proceeding_type
+        end
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -160,9 +159,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
                      vehicle: nil,
-                     proceeding_types: [proceeding_type],
                      office: office
             end
 

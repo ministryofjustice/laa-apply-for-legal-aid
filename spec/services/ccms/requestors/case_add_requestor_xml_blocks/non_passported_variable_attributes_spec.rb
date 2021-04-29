@@ -442,8 +442,6 @@ module CCMS
                    :with_everything,
                    :with_applicant_and_address,
                    :with_negative_benefit_check_result,
-                   :with_proceeding_types,
-                   :with_substantive_scope_limitation,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    provider: provider,

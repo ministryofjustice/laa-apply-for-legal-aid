@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Reports::MeritsReportCreator do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :generating_reports }
+  let(:legal_aid_application) { create :legal_aid_application, :with_application_proceeding_type, :with_everything, :generating_reports }
 
   subject do
     # dont' match on path - webpacker keeps changing the second part of the path

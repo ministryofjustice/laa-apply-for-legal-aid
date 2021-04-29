@@ -28,5 +28,15 @@ FactoryBot.define do
                                                    scope_limitation_id: sl.id)
       end
     end
+
+    trait :with_delegated_functions_scope_limitation do
+      after(:create) do |application_proceeding_type|
+        pt = application_proceeding_type.proceeding_type
+        sl = create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
+        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+        AssignedDfScopeLimitation.create!(application_proceeding_type_id: apt.id,
+                                          scope_limitation_id: sl.id)
+      end
+    end
   end
 end

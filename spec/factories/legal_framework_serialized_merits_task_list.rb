@@ -8,7 +8,7 @@ FactoryBot.define do
         application: {
           tasks: {
             latest_incident_details: [],
-            opponent_details: [],
+            opponent_details: []
           }
         },
         proceeding_types: [

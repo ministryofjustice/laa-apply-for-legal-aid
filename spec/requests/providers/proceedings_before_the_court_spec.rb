@@ -5,8 +5,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
   let(:application_proceeding_type) { legal_aid_application.lead_application_proceeding_type }
   let(:provider) { legal_aid_application.provider }
 
-  describe 'GET providers/application_proceeding_type/:id/proceedings_before_the_court' do
-    subject { get providers_application_proceeding_type_proceedings_before_the_court_path(application_proceeding_type) }
+  describe 'GET providers/merits_task_list/:id/proceedings_before_the_court' do
+    subject { get providers_merits_task_list_proceedings_before_the_court_path(application_proceeding_type) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -25,8 +25,8 @@ RSpec.describe 'provider proceedings before the court requests', type: :request 
     end
   end
 
-  describe 'PATCH providers/application_proceeding_type/:id/proceedings_before_the_court' do
-    subject { patch providers_application_proceeding_type_proceedings_before_the_court_path(application_proceeding_type), params: params.merge(submit_button) }
+  describe 'PATCH providers/merits_task_list/:id/proceedings_before_the_court' do
+    subject { patch providers_merits_task_list_proceedings_before_the_court_path(application_proceeding_type), params: params.merge(submit_button) }
     let(:proceedings_before_the_court) { true }
     let(:details_of_proceedings_before_the_court) { Faker::Lorem.paragraph }
     let(:params) do

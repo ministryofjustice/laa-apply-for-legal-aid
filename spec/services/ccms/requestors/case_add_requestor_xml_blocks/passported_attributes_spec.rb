@@ -191,8 +191,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      vehicle: nil,
                      office: office
             end
@@ -285,8 +283,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      with_bank_accounts: 2,
                      vehicle: nil,
                      office: office
@@ -317,8 +313,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      office: office
             end
@@ -804,8 +798,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -841,8 +833,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -1295,6 +1285,19 @@ module CCMS
           end
 
           context 'there are multiple scope limitations' do
+            let(:legal_aid_application) do
+              create :legal_aid_application,
+                     :with_everything,
+                     :with_applicant_and_address,
+                     :with_positive_benefit_check_result,
+                     populate_vehicle: true,
+                     with_bank_accounts: 2,
+                     provider: provider,
+                     office: office
+            end
+
+            let(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitations, legal_aid_application: legal_aid_application }
+
             it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
@@ -1428,8 +1431,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -1459,8 +1460,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,

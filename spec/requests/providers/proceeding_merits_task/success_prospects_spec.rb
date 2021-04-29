@@ -7,8 +7,8 @@ module Providers
       let!(:application_proceeding_type) { create :application_proceeding_type, :with_chances_of_success, legal_aid_application: legal_aid_application }
       let(:provider) { legal_aid_application.provider }
 
-      describe 'GET /providers/application_proceeding_type/:id/success_prospects' do
-        subject { get providers_application_proceeding_type_success_prospects_path(application_proceeding_type) }
+      describe 'GET /providers/merits_task_list/:id/success_prospects' do
+        subject { get providers_merits_task_list_success_prospects_path(application_proceeding_type) }
 
         context 'when the provider is not authenticated' do
           before { subject }
@@ -27,8 +27,8 @@ module Providers
         end
       end
 
-      describe 'PATCH providers/application_proceeding_type/:id/success_prospects' do
-        subject { patch providers_application_proceeding_type_success_prospects_path(application_proceeding_type), params: params.merge(submit_button) }
+      describe 'PATCH providers/merits_task_list/:id/success_prospects' do
+        subject { patch providers_merits_task_list_success_prospects_path(application_proceeding_type), params: params.merge(submit_button) }
         let(:success_prospect) { 'marginal' }
         let(:success_prospect_details) { Faker::Lorem.paragraph }
         let(:params) do

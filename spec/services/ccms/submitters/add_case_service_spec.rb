@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe AddCaseService do
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_proceeding_types,
+               :with_application_proceeding_type,
                :with_everything_and_address,
                :with_cfe_v3_result,
                :with_positive_benefit_check_result,

@@ -10,8 +10,8 @@ module Providers
 
       before { login }
 
-      describe 'GET /providers/application_proceeding_type/:id/chances_of_success' do
-        subject { get providers_application_proceeding_type_chances_of_success_index_path(application_proceeding_type) }
+      describe 'GET /providers/merits_task_list/:id/chances_of_success' do
+        subject { get providers_merits_task_list_chances_of_success_index_path(application_proceeding_type) }
 
         it 'renders successfully' do
           subject
@@ -25,7 +25,7 @@ module Providers
         end
       end
 
-      describe 'POST /providers/application_proceeding_type/:id/chances_of_success' do
+      describe 'POST /providers/merits_task_list/:id/chances_of_success' do
         let(:success_prospect) { :poor }
         let!(:chances_of_success) do
           create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
@@ -39,7 +39,7 @@ module Providers
 
         subject do
           post(
-            providers_application_proceeding_type_chances_of_success_index_path(application_proceeding_type),
+            providers_merits_task_list_chances_of_success_index_path(application_proceeding_type),
             params: params.merge(submit_button)
           )
         end
@@ -66,7 +66,7 @@ module Providers
         end
 
         context 'false is selected' do
-          let(:next_url) { providers_application_proceeding_type_success_prospects_path(application_proceeding_type) }
+          let(:next_url) { providers_merits_task_list_success_prospects_path(application_proceeding_type) }
           let(:success_likely) { 'false' }
 
           it 'sets chances_of_success to false' do

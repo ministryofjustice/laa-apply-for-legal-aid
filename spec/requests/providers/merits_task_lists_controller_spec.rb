@@ -20,7 +20,6 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
         subject
       end
       it 'returns http success' do
-        subject
         expect(response).to have_http_status(:ok)
       end
 

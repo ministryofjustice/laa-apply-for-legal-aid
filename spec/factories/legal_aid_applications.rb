@@ -216,7 +216,6 @@ FactoryBot.define do
           default_df_sl = pt.default_delegated_functions_scope_limitation || create(:scope_limitation, :delegated_functions, joined_proceeding_type: pt)
           apt.application_proceeding_types_scope_limitations << AssignedSubstantiveScopeLimitation.new(scope_limitation: default_subst_sl)
           apt.application_proceeding_types_scope_limitations << AssignedDfScopeLimitation.new(scope_limitation: default_df_sl)
-          create(:chances_of_success, :with_optional_text, application_proceeding_type: apt)
         end
       end
     end

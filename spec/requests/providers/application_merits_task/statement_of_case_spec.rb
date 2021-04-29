@@ -76,7 +76,7 @@ module Providers
         it 'redirects to the next page' do
           subject
           apt = legal_aid_application.lead_application_proceeding_type
-          expect(response).to redirect_to providers_application_proceeding_type_chances_of_success_index_path(apt)
+          expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
         end
 
         context 'uploading a file' do
