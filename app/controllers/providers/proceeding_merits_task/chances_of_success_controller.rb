@@ -22,7 +22,7 @@ module Providers
       end
 
       def application_proceeding_type
-        @application_proceeding_type = ApplicationProceedingType.find(params[:application_proceeding_type_id])
+        @application_proceeding_type = ApplicationProceedingType.find(params[:merits_task_list_id])
       end
 
       def form_params

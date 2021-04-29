@@ -16,7 +16,7 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      redirect_to providers_application_proceeding_type_chances_of_success_index_path(application_proceeding_type)
+      redirect_to providers_merits_task_list_chances_of_success_index_path(application_proceeding_type)
     end
 
     private
