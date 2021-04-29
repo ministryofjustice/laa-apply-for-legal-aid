@@ -8,6 +8,7 @@
       <%= task_list_item(
               name: task.name,
               status: task.state,
+              legal_aid_application: @legal_aid_application,
               ccms_code: ccms_code
           ) %>
     <% end %>
