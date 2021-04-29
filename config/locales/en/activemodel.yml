@@ -95,7 +95,7 @@ en:
         aggregated_cash_income:
           credits:
             attributes:
-              none_selected:
+              cash_income:
                 blank: Select if you receive these payments in cash
                 others_present: Select payments in cash or None of the above
         aggregated_cash_outgoings:

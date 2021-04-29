@@ -1,8 +1,7 @@
-<%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @legal_aid_application do %>
   <%= render(
         'shared/forms/types_of_income_form',
         journey: :provider,
+        page_title: t('.page_heading'),
         form_path: providers_legal_aid_application_identify_types_of_income_path(@legal_aid_application),
         show_draft: true
       ) %>
-<% end %>

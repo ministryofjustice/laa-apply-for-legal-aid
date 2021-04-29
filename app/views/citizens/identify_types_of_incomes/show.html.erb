@@ -1,7 +1,6 @@
-<%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @legal_aid_application do %>
-  <%= render(
-        'shared/forms/types_of_income_form',
-        journey: :citizen,
-        form_path: citizens_identify_types_of_income_path
-      ) %>
-<% end %>
+<%= render(
+      'shared/forms/types_of_income_form',
+      journey: :citizen,
+      page_title: t('.page_heading'),
+      form_path: citizens_identify_types_of_income_path
+    ) %>

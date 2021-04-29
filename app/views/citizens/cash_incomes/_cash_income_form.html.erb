@@ -5,10 +5,11 @@
       local: true
     ) do |form| %>
 
+    <%= page_template page_title: page_title, template: :basic, form: form do %>
+
     <%= form.govuk_check_boxes_fieldset :cash_income, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
       <p><%= t('.info') %></p>
       <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
-
       <div class="deselect-group" data-deselect-ctrl="#aggregated-cash-income-none-selected-true-field">
         <% @legal_aid_application.transaction_types.not_children.credits.each do |transaction_type| %>
           <%= render(
@@ -26,8 +27,9 @@
       <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.none_selected')} %>
     <% end %>
 
-  <%= next_action_buttons(
-        form: form,
-        show_draft: false
-      ) %>
+    <%= next_action_buttons(
+          form: form,
+          show_draft: false
+        ) %>
+  <% end %>
 <% end %>

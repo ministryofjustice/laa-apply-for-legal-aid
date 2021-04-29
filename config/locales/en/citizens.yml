@@ -150,7 +150,6 @@ en:
         page_heading: Which of the following payments do you receive?
       update:
         none_selected: Select if you receive any types of income
-
     identify_types_of_outgoings:
       show:
         page_heading: Which of the following payments do you make?
