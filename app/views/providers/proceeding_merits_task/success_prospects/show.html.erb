@@ -1,11 +1,11 @@
 <%= page_template(
       page_title: t('.h1-heading'),
       template: :basic,
-      back_link: { path: providers_application_proceeding_type_chances_of_success_index_path(@application_proceeding_type) }
+      back_link: { path: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type) }
     ) do %>
   <%= render(
         'shared/forms/success_prospect_form',
-        form_path: providers_application_proceeding_type_success_prospects_path(@application_proceeding_type),
+        form_path: providers_merits_task_list_success_prospects_path(@application_proceeding_type),
         show_draft: true
       ) %>
 <% end %>

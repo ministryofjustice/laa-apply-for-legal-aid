@@ -54,7 +54,7 @@ module Flow
           # :nocov:
           path: ->(application) do
             apt = application.lead_application_proceeding_type
-            urls.providers_application_proceeding_type_proceedings_before_the_court_path(apt)
+            urls.providers_merits_task_list_proceedings_before_the_court_path(apt)
           end,
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
@@ -68,7 +68,7 @@ module Flow
         chances_of_success: {
           path: ->(application) do
             apt = application.lead_application_proceeding_type
-            urls.providers_application_proceeding_type_chances_of_success_index_path(apt)
+            urls.providers_merits_task_list_chances_of_success_index_path(apt)
           end,
           forward: ->(application) do
             apt = application.lead_application_proceeding_type
@@ -79,7 +79,7 @@ module Flow
         success_prospects: {
           path: ->(application) do
             apt = application.lead_application_proceeding_type
-            urls.providers_application_proceeding_type_success_prospects_path(apt)
+            urls.providers_merits_task_list_success_prospects_path(apt)
           end,
           forward: :check_merits_answers
         },
