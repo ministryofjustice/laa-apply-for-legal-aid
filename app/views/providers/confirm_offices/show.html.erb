@@ -1,9 +1,9 @@
-<%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), template: :basic do %>
+<%= form_with(url: providers_confirm_office_path,
+              model: @form,
+              method: :patch,
+              local: true) do |form| %>
 
-  <%= form_with(url: providers_confirm_office_path,
-                model: @form,
-                method: :patch,
-                local: true) do |form| %>
+  <%= page_template page_title: t('.h1-heading', office_code: current_provider.selected_office.code), form: form, template: :basic do %>
 
     <%= form.govuk_collection_radio_buttons :confirm_office,
                                             [OpenStruct.new(value: true, label: t('generic.yes')),
