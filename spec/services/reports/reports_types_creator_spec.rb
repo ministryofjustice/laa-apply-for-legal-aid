@@ -6,7 +6,7 @@ RSpec.describe Reports::ReportsTypesCreator do
   let!(:application_non_passported) do
     create :legal_aid_application,
            :with_everything,
-           :with_proceeding_types,
+           # :with_proceeding_types,
            :at_assessment_submitted,
            :with_negative_benefit_check_result,
            :with_ccms_submission_completed,
@@ -15,7 +15,7 @@ RSpec.describe Reports::ReportsTypesCreator do
   let!(:application_passported) do
     create :legal_aid_application,
            :with_everything,
-           :with_proceeding_types,
+           # :with_proceeding_types,
            :at_assessment_submitted,
            :with_positive_benefit_check_result,
            provider: provider

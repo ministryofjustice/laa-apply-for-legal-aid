@@ -63,8 +63,9 @@ RSpec.describe 'provider restrictions request', type: :request do
                      :non_passported,
                      :with_non_passported_state_machine,
                      :provider_assessing_means,
-                     used_delegated_functions: true,
-                     used_delegated_functions_on: Date.new(2021, 1, 9)
+                     :with_proceeding_types,
+                     :with_delegated_functions,
+                     delegated_functions_reported_date: Date.new(2021, 1, 9)
             end
 
             it 'redirects to policy disregards' do
@@ -79,8 +80,9 @@ RSpec.describe 'provider restrictions request', type: :request do
                      :non_passported,
                      :with_non_passported_state_machine,
                      :provider_assessing_means,
-                     used_delegated_functions: true,
-                     used_delegated_functions_on: Date.new(2020, 12, 19)
+                     :with_proceeding_types,
+                     :with_delegated_functions,
+                     delegated_functions_date: Date.new(2020, 12, 19)
             end
 
             it 'redirects to check passported answers' do

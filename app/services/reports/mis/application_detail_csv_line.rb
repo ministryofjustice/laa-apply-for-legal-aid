@@ -26,6 +26,7 @@ module Reports
                :used_delegated_functions?,
                :used_delegated_functions_on,
                :used_delegated_functions_reported_on,
+               :lowest_prospect_of_success,
                :vehicle, to: :laa
 
       delegate :chances_of_success, to: :lead_application_proceeding_type
@@ -60,7 +61,6 @@ module Reports
       delegate :application_purpose,
                :proceedings_before_the_court,
                :details_of_proceedings_before_the_court,
-               :pretty_success_prospect,
                :success_prospect_details,
                to: :chances_of_success
 
@@ -298,7 +298,7 @@ module Reports
       end
 
       def merits
-        @line << pretty_success_prospect
+        @line << lowest_prospect_of_success
         @line << success_prospect_details
         @line << statement_of_case_uploaded?
         @line << created_at.strftime('%Y-%m-%d')

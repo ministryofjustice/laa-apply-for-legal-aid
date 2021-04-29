@@ -67,7 +67,11 @@ RSpec.describe 'does client use online banking requests', type: :request do
       context 'applicant is not employed after negative benefit check result' do
         context 'used_delegated_functions is true' do
           let(:application) do
-            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, used_delegated_functions: true, applicant: applicant
+            create :legal_aid_application,
+                   :with_non_passported_state_machine,
+                   :applicant_details_checked,
+                   :with_proceeding_types,
+                   :with_delegated_functions, applicant: applicant
           end
 
           let(:applicant) { create :applicant, :not_employed }
@@ -79,7 +83,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
 
         context 'used_delegated_functions is false' do
           let(:application) do
-            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, used_delegated_functions: false, applicant: applicant
+            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant: applicant
           end
 
           let(:applicant) { create :applicant, :not_employed }

@@ -66,11 +66,11 @@ module Flow
         used_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_delegated_functions_path(application) },
           forward: ->(application) do
-            application.used_delegated_functions_within_year ? :delegated_functions_dates : :limitations
+            application.used_delegated_functions_within_year ? :confirm_delegated_functions_dates : :limitations
           end
         },
-        delegated_functions_dates: {
-          path: ->(application) { urls.providers_legal_aid_application_delegated_functions_date_path(application) },
+        confirm_delegated_functions_dates: {
+          path: ->(application) { urls.providers_legal_aid_application_confirm_delegated_functions_date_path(application) },
           forward: :limitations
         },
         limitations: {

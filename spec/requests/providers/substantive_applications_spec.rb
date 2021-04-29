@@ -2,7 +2,11 @@ require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:state) { :with_passported_state_machine }
   let(:legal_aid_application) do
-    create :legal_aid_application, state, :applicant_details_checked, used_delegated_functions_on: 1.day.ago, applicant: applicant
+    create :legal_aid_application,
+           :with_proceeding_types,
+           :with_delegated_functions,
+           state, :applicant_details_checked,
+           applicant: applicant
   end
 
   let(:applicant) { create :applicant, :not_employed }

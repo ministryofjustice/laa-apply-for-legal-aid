@@ -86,11 +86,11 @@ module Dashboard
         def create_fake_applications(num_apps)
           FactoryBot.create_list :legal_aid_application, num_apps[0]
           FactoryBot.create_list :ccms_submission, num_apps[1], aasm_state: 'failed'
-          FactoryBot.create_list :legal_aid_application, num_apps[2], :with_delegated_functions
+          FactoryBot.create_list :legal_aid_application, num_apps[2], :with_proceeding_types, :with_delegated_functions
           FactoryBot.create_list :legal_aid_application, num_apps[3], :non_passported, merits_submitted_at: Time.zone.today
-          FactoryBot.create_list :legal_aid_application, num_apps[4], :passported, :with_delegated_functions, merits_submitted_at: Time.zone.today
-          FactoryBot.create_list :legal_aid_application, num_apps[5], :passported, :with_delegated_functions # unsubmitted application
-          FactoryBot.create_list :legal_aid_application, num_apps[5], :non_passported, :with_delegated_functions # unsubmitted application
+          FactoryBot.create_list :legal_aid_application, num_apps[4], :passported, :with_proceeding_types, :with_delegated_functions, merits_submitted_at: Time.zone.today
+          FactoryBot.create_list :legal_aid_application, num_apps[5], :passported, :with_proceeding_types, :with_delegated_functions # unsubmitted application
+          FactoryBot.create_list :legal_aid_application, num_apps[5], :non_passported, :with_proceeding_types, :with_delegated_functions # unsubmitted application
         end
       end
     end

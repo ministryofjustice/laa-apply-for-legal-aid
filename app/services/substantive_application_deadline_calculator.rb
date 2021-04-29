@@ -1,20 +1,16 @@
 class SubstantiveApplicationDeadlineCalculator
-  def self.call(record)
-    new(record).deadline
+  def self.call(df_date)
+    new(df_date).deadline
   end
 
-  attr_reader :record
-
-  delegate :used_delegated_functions_on, to: :record
-
-  def initialize(record)
-    @record = record
+  def initialize(df_date)
+    @df_date = df_date
   end
 
   def deadline
     WorkingDayCalculator.call(
       working_days: number_of_days_to_deadline,
-      from: used_delegated_functions_on
+      from: @df_date
     )
   end
 

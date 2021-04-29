@@ -66,8 +66,6 @@ module CCMS
 
     attr_reader :legal_aid_application
 
-    delegate :chances_of_success, to: :lead_application_proceeding_type
-
     delegate :lead_application_proceeding_type,
              :vehicle,
              :used_delegated_functions?, to: :legal_aid_application
@@ -406,6 +404,10 @@ module CCMS
 
     def manual_case_review_required?
       ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
+    end
+
+    def chances_of_success
+      legal_aid_application.application_proceeding_types.first.chances_of_success
     end
   end
 end

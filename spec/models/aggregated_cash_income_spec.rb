@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AggregatedCashIncome, type: :model do
   let(:aci) { AggregatedCashIncome.new(legal_aid_application_id: application.id) }
-  let(:application) { create :legal_aid_application }
+  let(:application) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 2 }
   let(:categories) { %i[benefits maintenance_in] }
   let!(:benefits) { create :transaction_type, :benefits }
   let!(:maintenance_in) { create :transaction_type, :maintenance_in }
@@ -66,11 +66,12 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context 'delegated fucntions are used' do
+      context 'delegated functions are used' do
         before do
-          application.update!(used_delegated_functions: true,
-                              used_delegated_functions_on: Date.parse('2021-01-28'))
+          application.application_proceeding_types.first.update!(used_delegated_functions_on: Date.parse('2021-01-28'),
+                                                                 used_delegated_functions_reported_on: Date.parse('2021-01-28'))
         end
+
         it 'sets the months based on the delegated functions date' do
           expect(application.used_delegated_functions?).to be true
           expect(application.transaction_period_finish_on).to eq Date.parse('2021-03-12')

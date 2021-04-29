@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
   let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
@@ -53,8 +54,10 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
   describe 'PATCH /providers/applications/:legal_aid_application_id/used_multiple_delegated_functions' do
     let!(:legal_aid_application) do
       create :legal_aid_application,
-             :with_multiple_proceeding_types,
-             :with_delegated_functions_scope_limitation
+             :with_proceeding_types,
+             # :with_delegated_functions,
+             proceeding_types_count: 2
+      # delegated_functions_date: used_delegated_functions_on
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
@@ -68,10 +71,11 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let(:button_clicked) { {} }
     let(:mocked_email_service) { instance_double(SubmitApplicationReminderService, send_email: {}) }
     let(:mock_deadline) { today + 20.days }
-    let(:earliest_df) { application_proceeding_types.first.proceeding_with_earliest_delegated_functions }
-
+    let(:earliest_df) { legal_aid_application.proceeding_with_earliest_delegated_functions }
+    let(:proceeding_type_meaning1) { legal_aid_application.proceeding_types[0].meaning }
+    let(:proceeding_type_meaning2) { legal_aid_application.proceeding_types[1].meaning }
     before do
-      allow(SubstantiveApplicationDeadlineCalculator).to receive(:call).with(an_instance_of(ApplicationProceedingType)).and_return(mock_deadline)
+      allow(SubstantiveApplicationDeadlineCalculator).to receive(:call).with(an_instance_of(Date)).and_return(mock_deadline)
       allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application),
@@ -81,9 +85,9 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     it 'updates the application proceeding types delegated functions dates' do
-      application_proceeding_types.each_with_index do |type, i|
-        expect(type.used_delegated_functions_reported_on).to eq(today)
-        expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
+      application_proceeding_types.each_with_index do |apt, i|
+        expect(apt.used_delegated_functions_reported_on).to eq(today)
+        expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - i.days)
       end
     end
 
@@ -115,8 +119,9 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
 
       context 'over a month ago' do
-        let(:past) { today - 1.month }
+        let(:past) { today - 6.weeks }
         let(:form_params) { update_proceeding_type_param_dates(day: past.day, month: past.month, year: past.year) }
+        let(:mock_deadline) { 2.days.ago }
 
         it 'does not call the submit application reminder mailer service' do
           expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
@@ -142,8 +147,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Occupation order'))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Inherent jurisdiction high court injunction'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
       end
     end
 
@@ -158,7 +163,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         hint_text_date = Time.zone.now.ago(12.months).strftime('%d %m %Y')
 
         subject
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", meaning: 'Inherent jurisdiction high court injunction', months: hint_text_date))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", meaning: proceeding_type_meaning1, months: hint_text_date))
       end
     end
 
@@ -171,8 +176,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Occupation order'))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Inherent jurisdiction high court injunction'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
       end
     end
 
@@ -185,8 +190,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Occupation order'))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Inherent jurisdiction high court injunction'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
       end
     end
 
@@ -268,8 +273,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
         it 'displays error' do
           expect(response.body).to include('govuk-error-summary')
-          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Occupation order'))
-          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Inherent jurisdiction high court injunction'))
+          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
+          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
         end
       end
     end

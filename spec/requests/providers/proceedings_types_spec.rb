@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ProceedingsTypesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types }
   let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
 

@@ -16,7 +16,8 @@ module Providers
       form.draft = draft_selected?
       return unless form.save(form_params)
 
-      update_application
+      update_scope_limitations
+      DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
 
       draft_selected? ? continue_or_draft : go_forward(delegated_functions_used_over_month_ago?)
     end
@@ -37,37 +38,20 @@ module Providers
       application_proceedings_by_name.map(&:application_proceeding_type)
     end
 
-    def proceeding_with_earliest_delegated_functions
-      @proceeding_with_earliest_delegated_functions ||= form.proceeding_with_earliest_delegated_functions
-    end
-
     def delegated_functions_used_over_month_ago?
       earliest_delegated_functions_date && !earliest_delegated_functions_reported_date
     end
 
     def earliest_delegated_functions_date
-      @earliest_delegated_functions_date ||= proceeding_with_earliest_delegated_functions&.used_delegated_functions_on
+      @earliest_delegated_functions_date ||= legal_aid_application.earliest_delegated_functions_date
     end
 
     def earliest_delegated_functions_reported_date
-      @earliest_delegated_functions_reported_date ||= proceeding_with_earliest_delegated_functions&.used_delegated_functions_reported_on
+      @earliest_delegated_functions_reported_date ||= legal_aid_application.earliest_delegated_functions_reported_date
     end
 
-    def update_application
-      update_substantive_application_deadline
+    def update_scope_limitations
       earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
-      submit_application_reminder if !draft_selected? && earliest_delegated_functions_date && earliest_delegated_functions_date > Date.current - 1.month
-    end
-
-    def update_substantive_application_deadline
-      legal_aid_application.substantive_application_deadline_on = substantive_application_deadline
-      legal_aid_application.save!
-    end
-
-    def substantive_application_deadline
-      return unless earliest_delegated_functions_date
-
-      SubstantiveApplicationDeadlineCalculator.call proceeding_with_earliest_delegated_functions
     end
 
     def add_delegated_scope_limitations
@@ -78,13 +62,6 @@ module Providers
 
     def remove_delegated_scope_limitations
       application_proceeding_types.each(&:remove_default_delegated_functions_scope_limitation)
-    end
-
-    def submit_application_reminder
-      return if legal_aid_application.awaiting_applicant?
-      return if legal_aid_application.applicant_entering_means?
-
-      SubmitApplicationReminderService.new(legal_aid_application).send_email
     end
 
     def form_params

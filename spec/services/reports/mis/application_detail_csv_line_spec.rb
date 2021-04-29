@@ -5,6 +5,11 @@ module Reports
     RSpec.describe ApplicationDetailCsvLine do
       let(:legal_aid_application) do
         create :application,
+               :with_proceeding_types,
+               :with_delegated_functions,
+               delegated_functions_date: used_delegated_functions_on,
+               delegated_functions_reported_date: used_delegated_functions_reported_on,
+               application_ref: 'L-X99-ZZZ',
                applicant: applicant,
                own_home: own_home_status,
                property_value: property_value,
@@ -18,9 +23,27 @@ module Reports
                other_assets_declaration: other_assets_declaration,
                opponent: opponent,
                ccms_submission: ccms_submission,
-               used_delegated_functions: used_delegated_functions,
-               used_delegated_functions_on: used_delegated_functions_on,
-               used_delegated_functions_reported_on: used_delegated_functions_reported_on,
+               own_vehicle: false,
+               merits_submitted_at: Time.current
+      end
+
+      let(:application_without_df) do
+        create :application,
+               :with_proceeding_types,
+               application_ref: 'L-X99-ZZZ',
+               applicant: applicant,
+               own_home: own_home_status,
+               property_value: property_value,
+               shared_ownership: shared_ownership_status,
+               outstanding_mortgage_amount: outstanding_mortgage,
+               percentage_home: percentage_home,
+               provider: provider,
+               office: office,
+               benefit_check_result: benefit_check_result,
+               savings_amount: savings_amount,
+               other_assets_declaration: other_assets_declaration,
+               opponent: opponent,
+               ccms_submission: ccms_submission,
                own_vehicle: false,
                merits_submitted_at: Time.current
       end
@@ -32,9 +55,9 @@ module Reports
                application_proceeding_type: application_proceeding_type
       end
 
-      let(:application_proceeding_type) do
-        create :application_proceeding_type, legal_aid_application: legal_aid_application, proceeding_type: proceeding_type
-      end
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+      #   create :application_proceeding_type, legal_aid_application: legal_aid_application, proceeding_type: proceeding_type
+      # end
 
       let(:applicant) do
         create :applicant,
@@ -146,9 +169,7 @@ module Reports
       let(:prospect) { 'likely' }
       let(:purpose) { 'The reason we are applying' }
       let(:submitted_at) { Time.zone.local(2020, 2, 21, 15, 44, 55) }
-      let(:used_delegated_functions) { true }
       let(:used_delegated_functions_on) { Date.new(2020, 1, 1) }
-      let(:used_delegated_functions_on_date) { Date.new(2020, 2, 21) }
       let(:used_delegated_functions_reported_on) { Date.new(2020, 2, 21) }
 
       describe '.call' do
@@ -162,9 +183,9 @@ module Reports
             expect(value_for('Office ID')).to eq '1T823E'
             expect(value_for('CCMS reference number')).to eq '42226668880'
             expect(value_for('DWP Overridden')).to eq 'FALSE'
-            expect(value_for('Matter type')).to eq 'Matter type'
-            expect(value_for('Proceeding type selected')).to eq 'Proceeding type meaning'
             expect(value_for('Case Type')).to eq 'Passported'
+            expect(value_for('Matter type')).to eq 'Matter'
+            expect(value_for('Proceeding type selected')).to match(/^Meaning-DA\d{3,4}$/)
             expect(value_for('Delegated functions used')).to eq 'Yes'
             expect(value_for('Delegated functions date')).to eq '2020-01-01'
             expect(value_for('Delegated functions reported')).to eq '2020-02-21'
@@ -178,8 +199,7 @@ module Reports
           end
 
           context 'Delegated functions not used' do
-            let(:used_delegated_functions) { false }
-            let(:used_delegated_functions_on) { nil }
+            let(:legal_aid_application) { application_without_df }
 
             it 'generates no' do
               expect(value_for('Delegated functions used')).to eq 'No'
@@ -415,7 +435,7 @@ module Reports
           end
 
           context 'data begins with a vulnerable character' do
-            before { firm.name = '=malicious_code' }
+            before { firm.update!(name: '=malicious_code') }
             it 'returns the escaped text' do
               expect(value_for('Firm name')).to eq "'=malicious_code"
             end

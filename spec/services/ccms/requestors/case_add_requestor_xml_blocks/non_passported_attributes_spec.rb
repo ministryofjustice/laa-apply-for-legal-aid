@@ -431,7 +431,13 @@ module CCMS
 
         context 'EMERGENCY_DPS_APP_AMD' do
           context 'delegated functions used' do
-            before { legal_aid_application.update! used_delegated_functions: true, used_delegated_functions_on: Date.yesterday }
+            before do
+              legal_aid_application.application_proceeding_types.each do |apt|
+                apt.update!(used_delegated_functions_on: Date.yesterday,
+                            used_delegated_functions_reported_on: Date.current)
+                apt.delegated_functions_scope_limitation = apt.proceeding_type.default_substantive_scope_limitation
+              end
+            end
             it 'generates the block with true' do
               block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
               expect(block).to have_boolean_response true
@@ -439,7 +445,6 @@ module CCMS
             end
           end
           context 'delegated functions NOT used' do
-            before { legal_aid_application.update! used_delegated_functions: false, used_delegated_functions_on: nil }
             it 'generates the block with true' do
               block = XmlExtractor.call(xml, :global_merits, 'EMERGENCY_DPS_APP_AMD')
               expect(block).to have_boolean_response false

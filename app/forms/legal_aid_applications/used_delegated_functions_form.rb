@@ -1,100 +1,156 @@
 module LegalAidApplications
-  class UsedDelegatedFunctionsForm
-    include BaseForm
-    form_for LegalAidApplication
+  class UsedDelegatedFunctionsForm # rubocop:disable Metrics/ClassLength
+    include ActiveModel::Model
 
-    attr_accessor :used_delegated_functions_on_1i, :used_delegated_functions_on_2i,
-                  :used_delegated_functions_on_3i, :used_delegated_functions
-    attr_writer :used_delegated_functions_on
+    validate :validate_nothing_selected,
+             :validate_proceeding_date
 
-    validates :used_delegated_functions, presence: { unless: :draft? }
-    validates :used_delegated_functions_on, presence: { unless: :date_not_required? }
-    validates :used_delegated_functions_on, date: { not_in_the_future: true }, allow_nil: true
-    validate :date_in_range
-    validates :used_delegated_functions_reported_on, presence: { unless: :date_not_required? }
+    attr_accessor :draft,
+                  :used_delegated_functions,
+                  :proceeding_types_by_name,
+                  :none_selected
 
-    after_validation :update_substantive_application_deadline
+    class << self
+      def call(proceeding_types_by_name)
+        populate_attr_accessors(proceeding_types_by_name.map(&:name))
+        new({ proceeding_types_by_name: proceeding_types_by_name })
+      end
+
+      def populate_attr_accessors(proceeding_names)
+        proceeding_names.each do |name|
+          attr_accessor :"#{name}_used_delegated_functions_on_1i",
+                        :"#{name}_used_delegated_functions_on_2i",
+                        :"#{name}_used_delegated_functions_on_3i",
+                        :"#{name}_used_delegated_functions_on"
+        end
+      end
+    end
 
     def initialize(*args)
       super
-      attributes[:used_delegated_functions_reported_on] = used_delegated_functions_reported_on
-      set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: date_fields.fields,
-        model_attributes: date_fields.model_attributes
-      )
+      proceeding_types_by_name.each do |proceeding|
+        date = proceeding.application_proceeding_type.used_delegated_functions_on
+        next unless date
+
+        __send__('used_delegated_functions=', 'true') if date
+        __send__("#{proceeding.name}_used_delegated_functions_on=", date)
+      end
     end
 
-    # Note that this method is first called by `validates`.
-    # Without that validation, the functionality in this method will not be called before save
-    def used_delegated_functions_on
-      return delete_existing_date unless used_delegated_functions_selected?
-      return @used_delegated_functions_on if @used_delegated_functions_on.present?
-      return if date_fields.blank?
-      return date_fields.input_field_values if date_fields.partially_complete? || date_fields.form_date_invalid?
+    def save(params)
+      update_proceeding_attributes(params)
+      populate_inputted_date
 
-      @used_delegated_functions_on = attributes[:used_delegated_functions_on] = date_fields.form_date
+      return false unless valid? || draft_nothing_selected?
+
+      save_proceeding_records
     end
 
-    def used_delegated_functions_reported_on
-      @used_delegated_functions_reported_on = used_delegated_functions_selected? ? Time.zone.today : nil
-    end
+    # def proceeding_with_earliest_delegated_functions
+    #   @proceeding_with_earliest_delegated_functions ||= proceeding_types_by_name.first.application_proceeding_type.proceeding_with_earliest_delegated_functions
+    # end
+
+    private_class_method :populate_attr_accessors
 
     private
 
-    def date_in_range
-      return if date_not_required? || !datetime?(used_delegated_functions_on)
-      return true if Time.zone.parse(used_delegated_functions_on.to_s) >= Date.current.ago(12.months)
-
-      add_date_in_range_error
+    def update_proceeding_attributes(params)
+      params.each do |key, value|
+        __send__("#{key}=", value)
+      end
     end
 
-    def datetime?(value)
-      value.methods.include? :strftime
+    def populate_inputted_date
+      name = proceeding_types_by_name.first.name
+      __send__("#{name}_used_delegated_functions_on=", date_fields(name).input_field_values)
     end
 
-    def add_date_in_range_error
-      translation_path = 'activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_in_range'
-      errors.add(:used_delegated_functions, I18n.t(translation_path, months: Time.zone.now.ago(12.months).strftime('%d %m %Y')))
+    def save_proceeding_records
+      proceeding_types_by_name.each do |proceeding|
+        date_field = delegated_functions_dates.detect { |field| field.method == :"#{proceeding.name}_used_delegated_functions_on" }
+        delegated_functions_date = date_field&.form_date
+
+        proceeding.application_proceeding_type.update(
+          used_delegated_functions_on: delegated_functions_date,
+          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
+        )
+      end
     end
 
-    def date_not_required?
-      !used_delegated_functions_selected? || draft_and_not_partially_complete_date?
+    def delegated_functions_dates
+      @delegated_functions_dates ||= proceeding_types_by_name.filter_map do |type|
+        date_fields(type.name, type.meaning) if used_delegated_functions == 'true'
+      end
     end
 
-    def used_delegated_functions_selected?
-      ActiveModel::Type::Boolean.new.cast(used_delegated_functions)
-    end
-
-    def exclude_from_model
-      date_fields.fields
-    end
-
-    def draft_and_not_partially_complete_date?
-      draft? && !date_fields.partially_complete?
-    end
-
-    def delete_existing_date
-      model.used_delegated_functions_on = nil
-    end
-
-    def date_fields
-      @date_fields ||= DateFieldBuilder.new(
+    def date_fields(name, meaning = nil)
+      DateFieldBuilder.new(
+        label: meaning,
         form: self,
-        model: model,
-        method: :used_delegated_functions_on,
-        prefix: :used_delegated_functions_on_,
+        model: self,
+        method: :"#{name}_used_delegated_functions_on",
+        prefix: :"#{name}_used_delegated_functions_on_",
         suffix: :gov_uk
       )
     end
 
-    def substantive_application_deadline
-      return unless used_delegated_functions_on && used_delegated_functions_on != date_fields.input_field_values
-
-      SubstantiveApplicationDeadlineCalculator.call self
+    def delegated_functions_reported_date(date)
+      Time.zone.today unless date.nil? || date_over_a_month_ago?(date)
     end
 
-    def update_substantive_application_deadline
-      model.substantive_application_deadline_on = substantive_application_deadline
+    def date_over_a_month_ago?(date)
+      date.before?(Time.zone.today - 1.month + 1.day)
+    end
+
+    def draft_nothing_selected?
+      draft && errors.include?(:delegated_functions)
+    end
+
+    def validate_nothing_selected
+      return if used_delegated_functions.present?
+
+      errors.add(:delegated_functions, I18n.t("#{error_base_path}.nothing_selected"))
+    end
+
+    def validate_proceeding_date
+      month_range = Date.current.ago(12.months).strftime('%d %m %Y')
+
+      delegated_functions_dates.each do |date_field|
+        meaning = date_field.label
+        attr_name = date_field.method
+        valid = !date_field.form_date_invalid?
+        date = valid ? date_field.form_date : nil
+
+        update_errors(meaning, attr_name, valid, date, month_range)
+      end
+    end
+
+    def update_errors(meaning, attr_name, valid, date, month_range)
+      error_date_invalid(meaning, attr_name, valid)
+      error_not_in_range(meaning, attr_name, valid, date, month_range)
+      error_in_future(meaning, attr_name, valid, date)
+    end
+
+    def error_date_invalid(meaning, attr_name, valid)
+      return if valid
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_invalid", meaning: meaning))
+    end
+
+    def error_not_in_range(meaning, attr_name, valid, date, month_range)
+      return unless valid && date < Date.current.ago(12.months)
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_not_in_range", months: month_range, meaning: meaning))
+    end
+
+    def error_in_future(meaning, attr_name, valid, date)
+      return unless valid && date > Date.current
+
+      errors.add(attr_name, I18n.t("#{error_base_path}.date_is_in_the_future", meaning: meaning))
+    end
+
+    def error_base_path
+      'activemodel.errors.models.application_proceeding_types.attributes.used_delegated_functions_on'
     end
   end
 end

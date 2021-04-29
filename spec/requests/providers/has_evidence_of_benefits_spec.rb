@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :checking_applicant_details, used_delegated_functions: used_delegated_functions }
-  let(:used_delegated_functions) { true }
+  let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :checking_applicant_details, :with_proceeding_types, :with_delegated_functions }
   let(:login) { login_as legal_aid_application.provider }
 
   before do
@@ -58,7 +57,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     end
 
     context 'does not use delegated functions' do
-      let(:used_delegated_functions) { false }
+      let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :applicant_details_checked }
 
       it 'redirects to the upload capital introductions page' do
         expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(legal_aid_application))

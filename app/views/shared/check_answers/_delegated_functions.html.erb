@@ -15,7 +15,7 @@
           name: :used_delegated_functions,
           url: providers_legal_aid_application_used_delegated_functions_path(@legal_aid_application),
           question: t('.section_delegated.used_delegated_functions'),
-          answer: yes_no(legal_aid_application.used_delegated_functions),
+          answer: yes_no(legal_aid_application.used_delegated_functions?),
           read_only: read_only
         ) %>
 

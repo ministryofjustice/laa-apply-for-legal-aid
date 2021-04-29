@@ -15,21 +15,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
   subject { described_class.call(application_proceedings_by_name) }
 
-  describe '#proceeding_with_earliest_delegated_functions' do
-    before do
-      subject.save(params)
-      application_proceeding_types.reload
-    end
-
-    it 'updates the application with earliest delegated functions retrievable off any proceeding' do
-      form_df_date = subject.proceeding_with_earliest_delegated_functions.used_delegated_functions_on
-
-      application_proceeding_types.each do |type|
-        expect(type.proceeding_with_earliest_delegated_functions.used_delegated_functions_on).to eq(form_df_date)
-      end
-    end
-  end
-
   describe '#save' do
     before do
       subject.save(params)
@@ -53,15 +38,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       it 'updates the application types with no reported on date' do
         expect(application_proceeding_types.all.pluck(:used_delegated_functions_on)).to match_array [today - 12.months, today - 12.months + 1.day]
         expect(application_proceeding_types.all.pluck(:used_delegated_functions_reported_on)).to match_array [nil, nil]
-
-        # TODO: replace the below with the above if the below still flickers
-        # also, check that this has value... used_delegated_functions_reported_on should always have a value
-        # if the used_delegated_functions_on has one
-
-        application_proceeding_types.each_with_index do |type, i|
-          expect(type.used_delegated_functions_reported_on).to be_nil
-          expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
-        end
       end
     end
 
