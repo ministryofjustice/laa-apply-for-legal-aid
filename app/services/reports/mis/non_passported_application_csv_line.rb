@@ -8,7 +8,6 @@ module Reports
 
       def self.header_row
         %w[
-          application_ref
           state
           ccms_reason
           username
@@ -30,7 +29,6 @@ module Reports
       end
 
       def call
-        @line << laa.application_ref
         @line << laa.state
         @line << laa.ccms_reason
         @line << laa.provider.username
