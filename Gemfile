@@ -111,7 +111,7 @@ group :development, :test do
   gem 'nokogiri'
   gem 'overcommit'
   gem 'pry-byebug'
-  gem 'rexml', '3.2.4'
+  gem 'rexml', '3.2.5'
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
   gem 'rubocop-performance'
