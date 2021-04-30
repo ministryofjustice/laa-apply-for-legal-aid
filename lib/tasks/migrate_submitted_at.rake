@@ -6,7 +6,8 @@ namespace :migrate_submitted_at do
     chances_of_successes = ProceedingMeritsTask::ChancesOfSuccess.where.not(submitted_at: nil)
 
     chances_of_successes.each do |cs|
-      laa = cs.legal_aid_application
+      laa_id = cs.legal_aid_application_id
+      laa = LegalAidApplication.find(laa_id)
       laa.merits_submitted_at = cs.submitted_at
 
       laa.save!
