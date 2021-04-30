@@ -205,34 +205,6 @@ cy:
         h1-heading: "?evah uoy od stessa fo sepyt hcihW"
         h2-heading: ylppa taht lla tceleS
         none_selected: eseht fo enoN
-    outstanding_mortgages:
-      field_set_header: "?emoh ruoy no egagtrom gnidnatstuo eht si tahW"
-      hint: rednel ro redivorp egagtrom ruoy morf tnemetats eht kcehC
-      outstanding_mortgage_amount: tnuoma egagtrom gnidnatstuo eht retnE
-      show:
-        h1-heading: "?egagtrom gnidnatstuo eht si tahW"
-    own_homes:
-      show:
-        h1-heading: "?ni evil uoy taht emoh eht nwo uoy oD"
-    percentage_homes:
-      show:
-        h1-heading: "?nwo yllagel uoy od emoh ruoy fo erahs % tahW"
-    property_values:
-      form:
-        citizens:
-          property_values:
-            hint:
-              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
-                uoY
-            property_value: emoh ruoy fo eulav detamitse eht retnE
-        providers:
-          property_values:
-            hint:
-              property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac
-                uoY
-            property_value: emoh ruoy fo eulav detamitse eht retnE
-      show:
-        h1-heading: "?htrow emoh ruoy si hcum woH"
     resend_link_requests:
       show:
         page_title: deripxe sah knil sihT

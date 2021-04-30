@@ -1,8 +1,24 @@
-<%= page_template page_title: t('.h1-heading'), template: :basic do %>
-  <%= render partial: 'shared/forms/percentage_home_form',
-             locals: {
-               model: @form,
-               show_draft: true,
-               url: providers_legal_aid_application_percentage_home_path(@legal_aid_application)
-             } %>
+<%= form_with(model: @form,
+              scope: :legal_aid_application,
+              url: providers_legal_aid_application_percentage_home_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+
+    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
+      <%= form.govuk_text_field(
+              :percentage_home,
+              value: @form.percentage_home,
+              label: {text: :percentage_home, hidden: true},
+              hint: {text: t('.percentage_home')},
+              width: 5,
+              suffix_text: '%'
+          ) %>
+    <% end %>
+    <div class="govuk-!-padding-bottom-4"></div>
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+  <% end %>
 <% end %>

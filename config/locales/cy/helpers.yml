@@ -11,13 +11,6 @@ cy:
         postcode: edoctsop KU dilav a eb tsum sihT
       applicant:
         national_insurance_number: "'C 65 43 21 QQ' ,elpmaxe roF"
-      legal_aid_application:
-        outstanding_mortgage_amount:
-          citizens: rednel ro redivorp egagtrom ruoy morf tnemetats eht kcehC
-          providers: ''
-        percentage_home: ".egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no eb tsum
-          eman ruoY"
-        property_value: eulav detamitse eht dnif ot setisbew ytreporp esu nac uoY
       student_finance: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
     label:
       applicant:

@@ -313,29 +313,6 @@ cy:
           enter_monthly_income: htnom hcae teg yeht tnuoma eht retnE
       savings_and_investments_form:
         none_selected: eseht fo enoN
-      outstanding_mortgage_form:
-        citizens:
-          outstanding_mortgages:
-            field_set_header: "?emoh ruoy no egagtrom gnidnatstuo eht si tahW"
-        providers:
-          outstanding_mortgages:
-            field_set_header: "?emoh s'tneilc ruoy no egagtrom gnidnatstuo eht si
-              tahW"
-      own_home_form:
-        mortgage: naol ro egagtrom a htiw ,seY
-        'no': 'oN'
-        owned_outright: thgirtuo denwo ,seY
-      percentage_home_form:
-        citizens:
-          percentage_homes:
-            hint:
-              percentage_home: ".egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no
-                eb tsum eman ruoY"
-            percentage_home: nwo uoy erahs egatnecrep detamitse eht retnE
-        providers:
-          percentage_homes:
-            percentage_home: egagtrom ro dloheerf ,esael ,sdeed ytreporp eht no eb
-              tsum eman s'tneilc ruoY
       policy_disregards:
         form:
           providers:
@@ -474,12 +451,6 @@ cy:
               peps_unit_trusts_capital_bonds_gov_stocks: denwo lla fo eulav latot
                 eht retnE
               plc_shares: denwo lla fo eulav latot eht retnE
-      shared_ownership_form:
-        friend_family_member_or_other_individual: laudividni rehto ro rebmem ylimaf
-          ,dneirf a ,seY
-        housing_assocation_or_landlord: droldnal ro noitaicossa gnisuoh a ,seY
-        no_sole_owner: renwo elos eht er'yeht ,oN
-        partner_or_ex_partner: rentrap-xe ro rentrap a ,seY
       success_prospect:
         likely: retteb ro %05
         marginal: "%94 ot %54"

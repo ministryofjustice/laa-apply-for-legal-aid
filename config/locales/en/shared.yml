@@ -285,26 +285,6 @@ en:
           enter_monthly_income: Enter the amount they get each month
       savings_and_investments_form:
         none_selected: None of these
-      outstanding_mortgage_form:
-        citizens:
-          outstanding_mortgages:
-            field_set_header: What is the outstanding mortgage on your home?
-        providers:
-          outstanding_mortgages:
-            field_set_header: What is the outstanding mortgage on your client's home?
-      own_home_form:
-        mortgage: Yes, with a mortgage or loan
-        'no': 'No'
-        owned_outright: Yes, owned outright
-      percentage_home_form:
-        citizens:
-          percentage_homes:
-            hint:
-              percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-            percentage_home: Enter the estimated percentage share you own
-        providers:
-          percentage_homes:
-            percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
       policy_disregards:
         form:
           providers:
@@ -410,11 +390,6 @@ en:
               other_person_account: Enter the estimated total in all accounts
               peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all owned
               plc_shares: Enter the total value of all owned
-      shared_ownership_form:
-        friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-        housing_assocation_or_landlord: Yes, a housing association or landlord
-        no_sole_owner: No, they're the sole owner
-        partner_or_ex_partner: Yes, a partner or ex-partner
       success_prospect:
           likely: 50% or better
           marginal: 45% to 49%

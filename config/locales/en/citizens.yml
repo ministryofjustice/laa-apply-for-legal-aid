@@ -184,32 +184,6 @@ en:
         h1-heading: Which types of assets do you have?
         h2-heading: Select all that apply
         none_selected: None of these
-    outstanding_mortgages:
-      field_set_header: What is the outstanding mortgage on your home?
-      hint: Check the statement from your mortgage provider or lender
-      outstanding_mortgage_amount: Enter the outstanding mortgage amount
-      show:
-        h1-heading: What is the outstanding mortgage?
-    own_homes:
-      show:
-        h1-heading: Do you own the home that you live in?
-    percentage_homes:
-      show:
-        h1-heading: What % share of your home do you legally own?
-    property_values:
-      form:
-        citizens:
-          property_values:
-            hint:
-              property_value: You can use property websites to find the estimated value
-            property_value: Enter the estimated value of your home
-        providers:
-          property_values:
-            hint:
-              property_value: You can use property websites to find the estimated value
-            property_value: Enter the estimated value of your home
-      show:
-        h1-heading: How much is your home worth?
     resend_link_requests:
       show:
         page_title: This link has expired

@@ -634,16 +634,23 @@ en:
           legal_aid: View statements and add transactions
         you_need_to: "You need to:"
     outstanding_mortgages:
-      field_set_header: What is the outstanding mortgage on your client's home?
-      outstanding_mortgage_amount: Enter the outstanding mortgage amount
       show:
         h1-heading: What is the outstanding mortgage?
+        field_set_header: What is the outstanding mortgage on your client's home?
     own_homes:
       show:
         h1-heading: Does your client own the home that they live in?
+        mortgage: Yes, with a mortgage or loan
+        'no': 'No'
+        owned_outright: Yes, owned outright
     percentage_homes:
       show:
         h1-heading: What % share of their home does your client legally own?
+        percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
+    property_values:
+      show:
+        h1-heading: How much is your client's home worth?
+        hint: You can use property websites to find the estimated value
     proceedings_before_the_courts:
       show:
         h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
@@ -669,12 +676,6 @@ en:
         existing: You have added %{count}
         remove: Remove
         error: Select yes if you want to add another proceeding
-    property_values:
-      form:
-        hint:
-          property_value: You can use property websites to find the estimated value
-      show:
-        h1-heading: How much is your client's home worth?
     providers:
       show:
         account_number: Account number
@@ -707,6 +708,10 @@ en:
     shared_ownerships:
       show:
         heading_1: Does your client own their home with anyone else?
+        friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+        housing_assocation_or_landlord: Yes, a housing association or landlord
+        no_sole_owner: No, they're the sole owner
+        partner_or_ex_partner: Yes, a partner or ex-partner
     start:
       index:
         apply_for_legal_aid_heading: Apply for legal aid
