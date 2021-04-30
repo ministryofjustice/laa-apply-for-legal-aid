@@ -48,13 +48,11 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
       model.__send__(value_method, trx.amount)
       model.__send__(checkbox_method, 'true')
       model.__send__("month#{trx.month_number}=", trx.transaction_date)
-      model.none_selected = false
     end
 
     def find_by(legal_aid_application_id:)
       transactions = find_transactions(legal_aid_application_id)
       model = new(legal_aid_application_id: legal_aid_application_id)
-      model.none_selected = true
       transactions.each { |trx| populate_attribute(model, trx) }
       model
     end
