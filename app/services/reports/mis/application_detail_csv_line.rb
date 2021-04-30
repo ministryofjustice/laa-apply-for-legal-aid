@@ -5,8 +5,7 @@ module Reports
 
       attr_reader :laa
 
-      delegate :application_ref,
-               :benefit_check_result,
+      delegate :benefit_check_result,
                :ccms_submission,
                :created_at,
                :chances_of_success,
@@ -69,7 +68,6 @@ module Reports
           'Firm name',
           'User name',
           'Office ID',
-          'Apply reference number',
           'CCMS reference number',
           'Matter type',
           'Proceeding type selected',
@@ -168,7 +166,6 @@ module Reports
       end
 
       def application_details
-        @line << application_ref
         @line << case_ccms_reference
       end
 
