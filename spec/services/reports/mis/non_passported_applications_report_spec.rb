@@ -31,13 +31,13 @@ module Reports
         end
 
         it 'returns a header line as the first line' do
-          expect(lines.first).to eq 'application_ref,state,ccms_reason,username,provider_email,created_at,date_submitted,applicant_name,deleted'
+          expect(lines.first).to eq 'state,ccms_reason,username,provider_email,created_at,date_submitted,applicant_name,deleted'
         end
 
         it 'returns data for all non-passorted applications after Sep 21st' do
-          expect(lines[1]).to eq %(L-ATE,checking_citizen_answers,,#{username},#{email},#{created_at},,#{applicant.full_name},"")
-          expect(lines[2]).to match(/^L-USE-CCMS,use_ccms,employed,/)
-          expect(lines[3]).to match(/^L-SUBMITTED,assessment_submitted,.*#{submission_date},.*$/)
+          expect(lines[1]).to eq %(checking_citizen_answers,,#{username},#{email},#{created_at},,#{applicant.full_name},"")
+          expect(lines[2]).to match(/^use_ccms,employed,/)
+          expect(lines[3]).to match(/^assessment_submitted,.*#{submission_date},.*$/)
         end
       end
 
