@@ -5,7 +5,6 @@ module Reports
     RSpec.describe ApplicationDetailCsvLine do
       let(:legal_aid_application) do
         create :application,
-               application_ref: 'L-X99-ZZZ',
                applicant: applicant,
                own_home: own_home_status,
                property_value: property_value,
@@ -158,7 +157,6 @@ module Reports
             expect(value_for('Firm name')).to eq 'Legal beagles'
             expect(value_for('User name')).to eq 'psr001'
             expect(value_for('Office ID')).to eq '1T823E'
-            expect(value_for('Apply reference number')).to eq 'L-X99-ZZZ'
             expect(value_for('CCMS reference number')).to eq '42226668880'
             expect(value_for('Matter type')).to eq 'Matter type'
             expect(value_for('Proceeding type selected')).to eq 'Proceeding type meaning'

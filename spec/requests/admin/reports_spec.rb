@@ -39,7 +39,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'sends the data' do
       subject
-      expect(response.body).to match(/^Firm name,User name,Office ID,Apply reference number,/)
+      expect(response.body).to match(/^Firm name,User name,Office ID,/)
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'sends the data' do
       subject
-      expect(response.body).to match(/^application_ref,state,ccms_reason,username,provider_email,created_at/)
+      expect(response.body).to match(/^state,ccms_reason,username,provider_email,created_at/)
     end
   end
 
@@ -106,7 +106,7 @@ RSpec.describe Admin::ReportsController, type: :request do
         before { subject }
 
         it 'sends csv response data' do
-          expect(response.body).to include('application_ref,case_ccms_reference,COUNTRY,APPLY_CASE_MEANS_REVIEW')
+          expect(response.body).to include('case_ccms_reference,COUNTRY,APPLY_CASE_MEANS_REVIEW')
         end
       end
     end
