@@ -14,6 +14,8 @@ class ApplicationProceedingType < ApplicationRecord
            through: :application_proceeding_types_scope_limitations,
            source: :scope_limitation
 
+  has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
+
   has_one :substantive_scope_limitation_join, class_name: 'AssignedSubstantiveScopeLimitation', dependent: :destroy
 
   has_one :substantive_scope_limitation, through: :substantive_scope_limitation_join, source: :scope_limitation

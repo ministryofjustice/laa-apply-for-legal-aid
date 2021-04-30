@@ -19,15 +19,13 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_positive_benefit_check_result,
-                 :with_proceeding_types,
-                 :with_substantive_scope_limitation,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
                  office: office
         end
 
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitations, legal_aid_application: legal_aid_application }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -35,8 +33,10 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let(:success_prospect) { :likely }
-        let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let!(:success_prospect) { :likely }
+        let!(:chances_of_success) do
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+        end
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
@@ -191,8 +191,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      vehicle: nil,
                      office: office
             end
@@ -285,8 +283,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      with_bank_accounts: 2,
                      vehicle: nil,
                      office: office
@@ -317,8 +313,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      office: office
             end
@@ -386,33 +380,44 @@ module CCMS
         end
 
         context 'FAMILY_PROSPECTS_OF_SUCCESS' do
-          it 'returns the ccms equivalent prospect of success for likely' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('likely')
-            block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-            expect(block).to have_text_response 'Good'
+          context 'likely success prospect' do
+            it 'returns the ccms equivalent prospect of success for likely' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+              expect(block).to have_text_response 'Good'
+            end
           end
 
-          it 'returns the ccms equivalent prospect of success for marginal' do
-            block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-            expect(block).to have_text_response 'Marginal'
+          context 'marginal success prospect' do
+            let(:success_prospect) { 'marginal' }
+
+            it 'returns the ccms equivalent prospect of success for marginal' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+              expect(block).to have_text_response 'Marginal'
+            end
           end
 
-          it 'returns the ccms equivalent prospect of success for uncertain' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('uncertain')
-            block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-            expect(block).to have_text_response 'Uncertain'
+          context 'not_known success prospect' do
+            let(:success_prospect) { 'not_known' }
+            it 'returns the ccms equivalent prospect of success for not_known' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+              expect(block).to have_text_response 'Uncertain'
+            end
           end
 
-          it 'returns the ccms equivalent prospect of success for poor' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('poor')
-            block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-            expect(block).to have_text_response 'Poor'
+          context 'poor success prospect' do
+            let(:success_prospect) { 'poor' }
+            it 'returns the ccms equivalent prospect of success for poor' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+              expect(block).to have_text_response 'Poor'
+            end
           end
 
-          it 'returns the ccms equivalent prospect of success for borderline' do
-            allow(legal_aid_application.chances_of_success).to receive(:success_prospect).and_return('borderline')
-            block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
-            expect(block).to have_text_response 'Borderline'
+          context 'borderline success prospect' do
+            let(:success_prospect) { 'borderline' }
+            it 'returns the ccms equivalent prospect of success for borderline' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
+              expect(block).to have_text_response 'Borderline'
+            end
           end
         end
 
@@ -793,8 +798,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -830,8 +833,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -1260,12 +1261,16 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
                      office: office
             end
+
+            let(:application_proceeding_type) do
+              create :application_proceeding_type, :with_substantive_scope_limitation, legal_aid_application: legal_aid_application
+            end
+
             it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
@@ -1284,14 +1289,15 @@ module CCMS
               create :legal_aid_application,
                      :with_everything,
                      :with_applicant_and_address,
-                     :with_substantive_scope_limitation,
-                     :with_delegated_functions_scope_limitation,
+                     :with_positive_benefit_check_result,
                      populate_vehicle: true,
+                     with_bank_accounts: 2,
                      provider: provider,
-                     office: office,
-                     used_delegated_functions: true,
-                     used_delegated_functions_on: Time.zone.today
+                     office: office
             end
+
+            let(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitations, legal_aid_application: legal_aid_application }
+
             it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
@@ -1425,8 +1431,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
@@ -1456,8 +1460,6 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     :with_substantive_scope_limitation,
-                     :with_proceeding_types,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,

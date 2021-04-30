@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
@@ -75,7 +75,8 @@ module Providers
 
         it 'redirects to the next page' do
           subject
-          expect(response).to redirect_to providers_legal_aid_application_chances_of_success_index_path(legal_aid_application)
+          apt = legal_aid_application.lead_application_proceeding_type
+          expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
         end
 
         context 'uploading a file' do

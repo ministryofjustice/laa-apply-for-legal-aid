@@ -40,7 +40,9 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
-        let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let!(:chances_of_success) do
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+        end
         let(:timestamp) { Time.current.strftime('%Y-%m-%d_%H.%M') }
         let(:applicant) { legal_aid_application.applicant }
         let(:default_cost) { legal_aid_application.lead_proceeding_type.default_cost_limitation_substantive }

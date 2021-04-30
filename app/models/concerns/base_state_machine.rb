@@ -93,6 +93,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
       transitions from: :checking_citizen_answers, to: :applicant_entering_means
       transitions from: :checking_passported_answers, to: :provider_entering_means
       transitions from: :checking_merits_answers, to: :provider_entering_merits
+      transitions from: :provider_entering_merits, to: :provider_entering_merits
     end
 
     event :provider_enter_merits do

@@ -66,7 +66,9 @@ module CCMS
 
     attr_reader :legal_aid_application
 
-    delegate :chances_of_success,
+    delegate :chances_of_success, to: :lead_application_proceeding_type
+
+    delegate :lead_application_proceeding_type,
              :vehicle,
              :used_delegated_functions?, to: :legal_aid_application
 

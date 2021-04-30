@@ -13,8 +13,16 @@ module Providers
 
       private
 
+      def legal_aid_application
+        @legal_aid_application ||= application_proceeding_type.legal_aid_application
+      end
+
       def chances_of_success
-        @chances_of_success ||= legal_aid_application.chances_of_success || legal_aid_application.build_chances_of_success
+        @chances_of_success ||= application_proceeding_type.chances_of_success || application_proceeding_type.build_chances_of_success
+      end
+
+      def application_proceeding_type
+        @application_proceeding_type = ApplicationProceedingType.find(params[:merits_task_list_id])
       end
 
       def form_params

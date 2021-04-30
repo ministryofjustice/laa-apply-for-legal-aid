@@ -51,9 +51,14 @@ module Flow
           check_answers: :check_merits_answers
         },
         proceedings_before_the_courts: {
-          path: ->(application) { urls.providers_legal_aid_application_proceedings_before_the_court_path(application) },
+          # :nocov:
+          path: ->(application) do
+            apt = application.lead_application_proceeding_type
+            urls.providers_merits_task_list_proceedings_before_the_court_path(apt)
+          end,
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
+          # :nocov:
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
@@ -61,11 +66,21 @@ module Flow
           check_answers: :check_merits_answers
         },
         chances_of_success: {
-          path: ->(application) { urls.providers_legal_aid_application_chances_of_success_index_path(application) },
-          forward: ->(application) { application.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects }
+          path: ->(application) do
+            apt = application.lead_application_proceeding_type
+            urls.providers_merits_task_list_chances_of_success_index_path(apt)
+          end,
+          forward: ->(application) do
+            apt = application.lead_application_proceeding_type
+            chances_of_success = apt.chances_of_success
+            chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
+          end
         },
         success_prospects: {
-          path: ->(application) { urls.providers_legal_aid_application_success_prospects_path(application) },
+          path: ->(application) do
+            apt = application.lead_application_proceeding_type
+            urls.providers_merits_task_list_success_prospects_path(apt)
+          end,
           forward: :check_merits_answers
         },
         merits_task_list: {

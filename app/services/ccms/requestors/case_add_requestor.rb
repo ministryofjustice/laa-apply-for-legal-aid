@@ -382,7 +382,7 @@ module CCMS
                                            appl_proceeding_type: application_proceeding_type,
                                            proceeding: application_proceeding_type.proceeding_type,
                                            opponent: @legal_aid_application.opponent,
-                                           chances_of_success: @legal_aid_application.chances_of_success)
+                                           chances_of_success: application_proceeding_type.chances_of_success)
           end
         end
       end

@@ -3,14 +3,15 @@ require 'rails_helper'
 module Providers
   module ProceedingMeritsTask
     RSpec.describe ChancesOfSuccessController, type: :request do
-      let(:chances_of_success) { create :chances_of_success }
-      let(:legal_aid_application) { create :legal_aid_application, chances_of_success: chances_of_success }
+      let(:chances_of_success) { create :chances_of_success, application_proceeding_type: application_proceeding_type }
+      let(:legal_aid_application) { create :legal_aid_application }
+      let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
       let(:login) { login_as legal_aid_application.provider }
 
       before { login }
 
-      describe 'GET /providers/applications/:id/chances_of_success' do
-        subject { get providers_legal_aid_application_chances_of_success_index_path(legal_aid_application) }
+      describe 'GET /providers/merits_task_list/:id/chances_of_success' do
+        subject { get providers_merits_task_list_chances_of_success_index_path(application_proceeding_type) }
 
         it 'renders successfully' do
           subject
@@ -24,9 +25,11 @@ module Providers
         end
       end
 
-      describe 'POST /providers/applications/:legal_aid_application_id/vehicle' do
+      describe 'POST /providers/merits_task_list/:id/chances_of_success' do
         let(:success_prospect) { :poor }
-        let(:chances_of_success) { create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details' }
+        let!(:chances_of_success) do
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+        end
         let(:success_likely) { 'true' }
         let(:params) do
           { proceeding_merits_task_chances_of_success: { success_likely: success_likely } }
@@ -36,9 +39,13 @@ module Providers
 
         subject do
           post(
-            providers_legal_aid_application_chances_of_success_index_path(legal_aid_application),
+            providers_merits_task_list_chances_of_success_index_path(application_proceeding_type),
             params: params.merge(submit_button)
           )
+        end
+
+        it 'associates with the application proceeding type' do
+          expect(chances_of_success.application_proceeding_type).to eq application_proceeding_type
         end
 
         it 'sets chances_of_success to true' do
@@ -59,7 +66,7 @@ module Providers
         end
 
         context 'false is selected' do
-          let(:next_url) { providers_legal_aid_application_success_prospects_path(legal_aid_application) }
+          let(:next_url) { providers_merits_task_list_success_prospects_path(application_proceeding_type) }
           let(:success_likely) { 'false' }
 
           it 'sets chances_of_success to false' do
