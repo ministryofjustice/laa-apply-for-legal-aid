@@ -58,23 +58,11 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
-    let(:day) { used_delegated_functions_on.day }
-    let(:month) { used_delegated_functions_on.month }
-    let(:year) { used_delegated_functions_on.year }
     let(:default_params) { { none_selected: 'false', delegated_functions: '' } }
+    let(:form_params) { update_proceeding_type_param_dates }
     let(:params) do
-      params = default_params
-      application_proceedings_by_name.each_with_index do |type, i|
-        type_params = {
-          "#{type.name}": 'true',
-          "#{type.name}_used_delegated_functions_on(3i)": (day.is_a?(Integer) ? day - i : day).to_s,
-          "#{type.name}_used_delegated_functions_on(2i)": month.to_s,
-          "#{type.name}_used_delegated_functions_on(1i)": year.to_s
-        }
-        params = type_params.merge(params)
-      end
       {
-        legal_aid_applications_used_multiple_delegated_functions_form: params
+        legal_aid_applications_used_multiple_delegated_functions_form: form_params
       }
     end
     let(:button_clicked) { {} }
@@ -119,8 +107,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     context 'email reminder service' do
       context 'within a month ago' do
         let(:past) { today - 1.month + 1.day }
-        let(:month) { past.month }
-        let(:day) { past.day }
+        let(:form_params) { update_proceeding_type_param_dates(day: past.day, month: past.month, year: past.year) }
 
         it 'calls the submit application reminder mailer service' do
           expect(SubmitApplicationReminderService).to have_received(:new).with(legal_aid_application)
@@ -129,8 +116,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       context 'over a month ago' do
         let(:past) { today - 1.month }
-        let(:month) { past.month }
-        let(:day) { past.day }
+        let(:form_params) { update_proceeding_type_param_dates(day: past.day, month: past.month, year: past.year) }
 
         it 'does not call the submit application reminder mailer service' do
           expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
@@ -144,7 +130,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     context 'when date incomplete' do
-      let(:month) { '' }
+      let(:form_params) { update_proceeding_type_param_dates(month: '') }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -158,9 +144,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     context 'date is not in range' do
-      let(:year) { 2018 }
-      let(:month) { 10 }
-      let(:day) { 1 }
+      let(:form_params) { update_proceeding_type_param_dates(day: 20, month: 1, year: 2018) }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -175,21 +159,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     context 'when date contains alpha characters' do
-      let(:params) do
-        params = default_params
-        application_proceedings_by_name.each_with_index do |type, i|
-          type_params = {
-            "#{type.name}": 'true',
-            "#{type.name}_used_delegated_functions_on(3i)": (day - i).to_s,
-            "#{type.name}_used_delegated_functions_on(2i)": '5s',
-            "#{type.name}_used_delegated_functions_on(1i)": year.to_s
-          }
-          params = type_params.merge(params)
-        end
-        {
-          legal_aid_applications_used_multiple_delegated_functions_form: params
-        }
-      end
+      let(:form_params) { update_proceeding_type_param_dates(month: '5s') }
+
       it 'renders show' do
         expect(response).to have_http_status(:ok)
       end
@@ -202,9 +173,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     context 'when date not entered' do
-      let(:day) { '' }
-      let(:month) { '' }
-      let(:year) { '' }
+      let(:form_params) { update_proceeding_type_param_dates(day: '', month: '', year: '') }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -287,9 +256,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
 
       context 'when date not entered' do
-        let(:day) { '' }
-        let(:month) { '' }
-        let(:year) { '' }
+        let(:form_params) { update_proceeding_type_param_dates(day: '', month: '', year: '') }
 
         it 'renders show' do
           expect(response).to have_http_status(:ok)
@@ -302,6 +269,25 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         end
       end
     end
+  end
+
+  def update_proceeding_type_param_dates(day: nil, month: nil, year: nil)
+    params = default_params
+    application_proceedings_by_name.each_with_index do |type, i|
+      adjusted_date = used_delegated_functions_on - i.day
+      type_params = proceeding_type_date_params(type, adjusted_date, day, month, year)
+      params = type_params.merge(params)
+    end
+    params
+  end
+
+  def proceeding_type_date_params(type, adjusted_date, day, month, year)
+    {
+      "#{type.name}": 'true',
+      "#{type.name}_used_delegated_functions_on_3i": day || adjusted_date.day.to_s,
+      "#{type.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
+      "#{type.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s
+    }
   end
 
   def base_error_translation

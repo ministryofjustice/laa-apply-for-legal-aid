@@ -7,26 +7,11 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   let(:today) { Time.zone.today }
   let(:used_delegated_functions_reported_on) { today }
   let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
-  let(:day) { used_delegated_functions_on.day }
-  let(:month) { used_delegated_functions_on.month }
-  let(:year) { used_delegated_functions_on.year }
   let(:default_params) { { none_selected: 'false' } }
   let(:i18n_scope) { 'activemodel.errors.models.application_proceeding_types.attributes' }
   let(:error_locale) { :defined_in_spec }
 
-  let(:params) do
-    params = default_params
-    application_proceedings_by_name.each_with_index do |type, i|
-      type_params = {
-        "#{type.name}": 'true',
-        "#{type.name}_used_delegated_functions_on_3i": (day - i).to_s,
-        "#{type.name}_used_delegated_functions_on_2i": month.to_s,
-        "#{type.name}_used_delegated_functions_on_1i": year.to_s
-      }
-      params = type_params.merge(params)
-    end
-    params
-  end
+  let(:params) { update_proceeding_type_param_dates }
 
   subject { described_class.call(application_proceedings_by_name) }
 
@@ -58,7 +43,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
     end
 
-    context 'date is exactly 12 months ago' do
+    context 'date is just within 12 months ago' do
       let(:used_delegated_functions_on) { today - 12.months + 1.day }
 
       it 'is valid' do
@@ -124,7 +109,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     end
 
     context 'when dates are invalid' do
-      let(:month) { 15 }
+      let(:params) { update_proceeding_type_param_dates(month: 15) }
       let(:error_locale) { 'used_delegated_functions_on.date_invalid' }
 
       it 'is invalid' do
@@ -196,19 +181,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
     context 'with a partial date' do
       let(:error_locale) { 'used_delegated_functions_on.date_invalid' }
-      let(:params) do
-        params = default_params
-        application_proceedings_by_name.each_with_index do |type, i|
-          type_params = {
-            "#{type.name}": 'true',
-            "#{type.name}_used_delegated_functions_on_3i": (day - i).to_s,
-            "#{type.name}_used_delegated_functions_on_2i": '',
-            "#{type.name}_used_delegated_functions_on_1i": year.to_s
-          }
-          params = type_params.merge(params)
-        end
-        params
-      end
+      let(:params) { update_proceeding_type_param_dates(month: '') }
 
       it 'is invalid' do
         expect(subject).to be_invalid
@@ -254,7 +227,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     end
 
     context 'when occurred on is invalid' do
-      let(:month) { 15 }
+      let(:params) { update_proceeding_type_param_dates(month: 15) }
       let(:error_locale) { 'used_delegated_functions_on.date_invalid' }
 
       it 'is invalid' do
@@ -284,5 +257,24 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         expect(subject.errors['inherent_jurisdiction_high_court_injunction_used_delegated_functions_on'].join).to match(message)
       end
     end
+  end
+
+  def update_proceeding_type_param_dates(month: nil)
+    params = default_params
+    application_proceedings_by_name.each_with_index do |type, i|
+      adjusted_date = used_delegated_functions_on - i.day
+      type_params = proceeding_type_date_params(type, adjusted_date, month)
+      params = type_params.merge(params)
+    end
+    params
+  end
+
+  def proceeding_type_date_params(type, adjusted_date, month)
+    {
+      "#{type.name}": 'true',
+      "#{type.name}_used_delegated_functions_on_3i": adjusted_date.day.to_s,
+      "#{type.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
+      "#{type.name}_used_delegated_functions_on_1i": adjusted_date.year.to_s
+    }
   end
 end

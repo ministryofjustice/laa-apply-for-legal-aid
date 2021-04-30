@@ -158,7 +158,7 @@ module LegalAidApplications
     end
 
     def error_not_in_range(meaning, attr_name, valid, date, month_range)
-      return unless valid && date < Date.current.ago(12.months)
+      return unless valid && date < Date.current - 12.months
 
       errors.add(attr_name, I18n.t("#{error_base_path}.date_not_in_range", months: month_range, meaning: meaning))
     end
