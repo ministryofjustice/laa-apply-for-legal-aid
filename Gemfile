@@ -111,11 +111,11 @@ group :development, :test do
   gem 'nokogiri'
   gem 'overcommit'
   gem 'pry-byebug'
-  gem 'rexml', '3.2.4'
+  gem 'rexml', '3.2.5'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance'
-  gem 'rubocop-rails', require: false
+  gem 'rubocop', '>= 1.13.0', require: false
+  gem 'rubocop-performance', '>= 1.11.0'
+  gem 'rubocop-rails', '>= 2.9.1', require: false
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 5.0'
@@ -125,7 +125,7 @@ group :development do
   gem 'guard-cucumber'
   gem 'guard-livereload'
   gem 'guard-rspec'
-  gem 'guard-rubocop'
+  gem 'guard-rubocop', '>= 1.4.0'
   gem 'listen', '>= 3.0.5', '< 3.6'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
@@ -149,5 +149,5 @@ group :test do
   gem 'simplecov-rcov'
   gem 'vcr'
   gem 'webdrivers', '~> 4.6'
-  gem 'webmock'
+  gem 'webmock', '>= 3.12.2'
 end
