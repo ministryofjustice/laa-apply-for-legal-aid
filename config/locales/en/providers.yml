@@ -837,13 +837,14 @@ en:
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?
+          use_car_valuation_sites: You can use car valuation websites to find this out
       ages:
         show:
           heading: Did your client buy the vehicle over 3 years ago?
       regular_uses:
         show:
           heading: Is the vehicle in regular use?
-          include_partner_use: This includes use by your client's partner (if they have one) -PROVIDERS.
+          include_partner_use: This means the vehicle is used at least once every 2 weeks for things like work, shopping or driving children to school.
       remaining_payments:
         show:
           heading: Are there any payments left on the vehicle?

@@ -260,22 +260,6 @@ cy:
           heading: stessa s'tneilc ruoy no snoitcirtseR
           question: "?stessa rieht tsniaga gniworrob ro gnilles morf tneilc ruoy tneverp
             taht snoitcirtser lagel yna ereht erA"
-      vehicles:
-        citizens:
-          heading: selciheV
-          own: "?elcihev a nwo uoy oD"
-          estimated_value: "?elcihev eht fo eulav detamitse eht si tahW"
-          payment_remaining: "?elcihev eht no tfel stnemyap yna ereht erA"
-          purchased_on: "?elcihev eht yub uoy did nehW"
-          used_regularly: "?esu raluger ni elcihev eht sI"
-        providers:
-          heading: selciheV
-          own: "?elcihev a nwo tneilc ruoy seoD"
-          estimated_value: "?elcihev eht fo eulav detamitse eht si tahW"
-          payment_remaining: "?elcihev eht no tfel stnemyap yna ereht erA"
-          more_than_three_years_old: "?oga sraey eerht naht erom thguob saw elcihev
-            ehT"
-          used_regularly: "?esu raluger ni elcihev eht sI"
     forms:
       applicant_form:
         page_title: sliated s'tneilc ruoy retnE
@@ -494,19 +478,6 @@ cy:
 
             .dia lagel rof yllaicnanif yfilauq uoy fi kcehc ot noitamrofni siht deen eW
             .tceles uoy seirogetac eht otni snoitcasnart ruoy tup dna stnemetats knab ruoy ta kool lliw roticilos ruoY
-      vehicles:
-        estimated_value:
-          use_car_valuation_sites: tuo siht dnif ot setisbew noitaulav rac esu nac
-            uoY
-        remaining_payment:
-          detail_of_payments_to_include: |2-
-
-            stnemeerga )PCP( esahcrup tcartnoc lanosrep
-            ro )PH( esahcrup erih ,snaol no stnemyap gnidnatstuo yna edulcnI
-          enter_amount_left_to_pay: yap ot tfel tnuoma eht retnE
-        regular_use:
-          include_partner_use: ".loohcs ot nerdlihc gnivird ro gnippohs ,krow ekil
-            sgniht rof skeew 2 yreve ecno tsael ta desu si elcihev eht snaem sihT"
     page-title:
       suffix: dia lagel rof ylppA
     property_results:
