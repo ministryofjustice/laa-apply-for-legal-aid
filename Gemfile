@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-gem 'aasm', '~> 5.1.1'
+gem 'aasm', '~> 5.2.0'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'after_commit_everywhere', '~> 1.0'
 gem 'discard', '~> 1.2'
