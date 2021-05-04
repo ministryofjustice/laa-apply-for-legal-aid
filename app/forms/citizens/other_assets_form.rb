@@ -101,8 +101,12 @@ module Citizens
       end
     end
 
+    def base_checkbox
+      CHECK_BOXES_ATTRIBUTES[0]
+    end
+
     def any_checkbox_checked_or_draft
-      errors.add :base, error_message_for_none_selected unless any_checkbox_checked? || draft?
+      errors.add base_checkbox.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
     end
 
     def error_message_for_none_selected

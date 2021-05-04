@@ -616,6 +616,13 @@ en:
     policy_disregards:
       show:
         h1-heading: Select if your client has received payments from these schemes or charities
+        england_infected_blood_support: England Infected Blood Support Scheme
+        vaccine_damage_payments: Vaccine Damage Payments Scheme
+        variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
+        criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
+        national_emergencies_trust: National Emergencies Trust (NET)
+        we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
+        london_emergencies_trust: The London Emergencies Trust
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
