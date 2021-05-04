@@ -112,6 +112,7 @@ module Reports
       let(:outstanding_mortgage) { 397_822 }
       let(:percentage_home) { 50 }
       let(:benefit_check_result_text) { 'Yes' }
+      let(:dwp_overridden) { 'FALSE' }
       let(:current_acct_val) { 25.44 }
       let(:savings_acct_val) { 266.10 }
       let(:cash_val) { 17 }

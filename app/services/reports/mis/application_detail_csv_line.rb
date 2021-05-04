@@ -5,7 +5,8 @@ module Reports
 
       attr_reader :laa
 
-      delegate :benefit_check_result,
+      delegate :applicant_receives_benefit?,
+               :dwp_override,
                :ccms_submission,
                :created_at,
                :lead_application_proceeding_type,
@@ -74,7 +75,8 @@ module Reports
           'CCMS reference number',
           'Matter type',
           'Proceeding type selected',
-          'DWP check result',
+          'Case Type',
+          'DWP Overridden',
           'Delegated functions used',
           'Delegated functions date',
           'Delegated functions reported',
@@ -148,7 +150,8 @@ module Reports
         provider_firm_details
         application_details
         proceeding_details
-        dwp_check_result
+        passported_check_result
+        dwp_overridden
         delegated_functions
         main_home_details
         vehicle_details
@@ -177,8 +180,12 @@ module Reports
         @line << proceeding_types.map(&:meaning).sort.join(', ')
       end
 
-      def dwp_check_result
-        @line << benefit_check_result.result == 'Yes' ? 'Passported' : 'Non-passported'
+      def passported_check_result
+        @line << (applicant_receives_benefit? ? 'Passported' : 'Non-passported')
+      end
+
+      def dwp_overridden
+        @line << (dwp_override ? 'TRUE' : 'FALSE')
       end
 
       def delegated_functions
