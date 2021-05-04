@@ -1,12 +1,11 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
-
-  <%= form_with(
-        builder: GOVUKDesignSystemFormBuilder::FormBuilder,
-        url: providers_legal_aid_application_applicant_bank_account_path,
-        model: @form,
-        method: :patch,
-        local: true
-      ) do |form| %>
+<%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+      url: providers_legal_aid_application_applicant_bank_account_path,
+      model: @form,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
 
     <%= govuk_fieldset_header page_title %>
 
