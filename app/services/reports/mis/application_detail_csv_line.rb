@@ -6,9 +6,9 @@ module Reports
       attr_reader :laa
 
       delegate :applicant_receives_benefit?,
-               :dwp_override,
                :ccms_submission,
                :created_at,
+               :dwp_override,
                :lead_application_proceeding_type,
                :office,
                :other_assets_declaration,
@@ -181,7 +181,7 @@ module Reports
       end
 
       def passported_check_result
-        @line << (applicant_receives_benefit? ? 'Passported' : 'Non-passported')
+        @line << (applicant_receives_benefit? ? 'Passported' : 'Non-Passported')
       end
 
       def dwp_overridden

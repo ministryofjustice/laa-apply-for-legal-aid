@@ -161,9 +161,10 @@ module Reports
             expect(value_for('User name')).to eq 'psr001'
             expect(value_for('Office ID')).to eq '1T823E'
             expect(value_for('CCMS reference number')).to eq '42226668880'
+            expect(value_for('DWP Overridden')).to eq 'FALSE'
             expect(value_for('Matter type')).to eq 'Matter type'
             expect(value_for('Proceeding type selected')).to eq 'Proceeding type meaning'
-            expect(value_for('DWP check result')).to eq 'Yes'
+            expect(value_for('Case Type')).to eq 'Passported'
             expect(value_for('Delegated functions used')).to eq 'Yes'
             expect(value_for('Delegated functions date')).to eq '2020-01-01'
             expect(value_for('Delegated functions reported')).to eq '2020-02-21'
@@ -171,8 +172,8 @@ module Reports
 
           context 'DWP check result negative' do
             let(:benefit_check_result_text) { 'No' }
-            it 'generates no' do
-              expect(value_for('DWP check result')).to eq 'No'
+            it 'generates Non-Passported' do
+              expect(value_for('Case Type')).to eq 'Non-Passported'
             end
           end
 
