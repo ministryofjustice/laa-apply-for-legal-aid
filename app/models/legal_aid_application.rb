@@ -344,6 +344,10 @@ class LegalAidApplication < ApplicationRecord
     self.used_delegated_functions_reported_on = nil
   end
 
+  def used_delegated_functions_within_year
+    used_delegated_functions_on&.between?(12.months.ago - 1.day, 1.month.ago)
+  end
+
   def reset_proceeding_types!
     proceeding_types.clear
     clear_scopes!
