@@ -74,7 +74,7 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
         let(:params) { { aggregated_cash_outgoings: { check_box_child_care: '' } } }
 
         it 'shows an error if nothing selected' do
-          expect(response.body).to include(I18n.t('activemodel.errors.models.aggregated_cash_outgoings.debits.attributes.none_selected.blank'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.aggregated_cash_outgoings.debits.attributes.cash_outgoings.blank'))
         end
       end
     end

@@ -1,14 +1,15 @@
-<%= page_template(
-      page_title: t('.h1-heading'),
-      template: :basic,
-      back_link: { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
-    ) do %>
-  <%= form_with(
-        model: @form,
-        url: providers_merits_task_list_chances_of_success_index_path,
-        method: :post,
-        local: true
-      ) do |form| %>
+<%= form_with(
+      model: @form,
+      url: providers_merits_task_list_chances_of_success_index_path,
+      method: :post,
+      local: true
+    ) do |form| %>
+    <%= page_template(
+            page_title: t('.h1-heading'),
+            template: :basic,
+            form: form,
+            back_link: { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
+        ) do %>
 
     <%= form.govuk_collection_radio_buttons(
           :success_likely,

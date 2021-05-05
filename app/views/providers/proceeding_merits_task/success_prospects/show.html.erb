@@ -1,11 +1,27 @@
-<%= page_template(
-      page_title: t('.h1-heading'),
-      template: :basic,
-      back_link: { path: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type) }
-    ) do %>
-  <%= render(
-        'shared/forms/success_prospect_form',
-        form_path: providers_merits_task_list_success_prospects_path(@application_proceeding_type),
-        show_draft: true
-      ) %>
+<%= form_with(
+        model: @form,
+        url: providers_merits_task_list_success_prospects_path(@application_proceeding_type),
+        method: :patch,
+        local: true
+    ) do |form| %>
+  <%= page_template(
+          page_title: t('.h1-heading'),
+          template: :basic,
+          form: form,
+          back_link: { path: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type) }
+      ) do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:success_prospect, legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) do %>
+      <% ProceedingMeritsTask::ChancesOfSuccess.prospects_unlikely_to_succeed.each do |prospect| %>
+        <%= form.govuk_radio_button :success_prospect, prospect,
+                                    link_errors: true,
+                                    label: {text: t("shared.forms.success_prospect.#{prospect}")},
+                                    hint: {text: t("shared.forms.success_prospect.hint.#{prospect}")} do %>
+          <%= form.govuk_text_area "success_prospect_details_#{prospect}".to_sym,
+                                   label: {text: 'Tell us why legal aid should be granted'}, rows: 5 %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
 <% end %>

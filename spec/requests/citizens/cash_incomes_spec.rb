@@ -74,7 +74,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         let(:params) { { aggregated_cash_income: { check_box_benefits: '' } } }
 
         it 'shows an error if nothing selected' do
-          expect(response.body).to include(I18n.t('activemodel.errors.models.aggregated_cash_income.credits.attributes.none_selected.blank'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.aggregated_cash_income.credits.attributes.cash_income.blank'))
         end
       end
     end
