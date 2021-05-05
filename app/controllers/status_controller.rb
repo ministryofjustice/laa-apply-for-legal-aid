@@ -18,9 +18,9 @@ class StatusController < ApiController
 
   def ping
     render json: {
-      'build_date' => ENV['BUILD_DATE'] || 'Not Available',
-      'build_tag' => ENV['BUILD_TAG'] || 'Not Available',
-      'app_branch' => ENV['APP_BRANCH'] || 'Not Available'
+      'build_date' => Rails.configuration.x.status.build_date,
+      'build_tag' => Rails.configuration.x.status.build_tag,
+      'app_branch' => Rails.configuration.x.status.app_branch
     }
   end
 

@@ -23,6 +23,6 @@ class SecureData < ApplicationRecord
   private
 
   def secret
-    @secret = ENV.fetch('SECURE_DATA_SECRET', 'someSecret')
+    @secret = Rails.configuration.x.secure_data_secret
   end
 end
