@@ -187,6 +187,12 @@ en:
               blank: Tell us why the police have not been notified
             bail_conditions_set_details:
               blank: Give details of the bail conditions
+        opponent:
+          attributes:
+            police_notified_details_true:
+              blank: Tell us what action the police have taken
+            police_notified_details_false:
+              blank: Tell us why the police have not been notified
         application_merits_task/statement_of_case:
           attributes:
             original_file:
