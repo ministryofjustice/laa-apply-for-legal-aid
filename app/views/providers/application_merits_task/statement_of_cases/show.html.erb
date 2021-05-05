@@ -6,12 +6,6 @@
                     else
                       t('.h1-heading')
                     end %>
-<%= page_template(
-      page_title: t('.h1-heading'),
-      head_title: new_head_title,
-      template: :basic,
-      back_link: { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
-    ) do %>
 
   <%= form_with(
           model: @form,
@@ -19,6 +13,14 @@
           method: :patch,
           local: true
       ) do |form| %>
+
+    <%= page_template(
+            page_title: t('.h1-heading'),
+            head_title: new_head_title,
+            template: :basic,
+            form: form,
+            back_link: { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
+        ) do %>
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
@@ -54,13 +56,13 @@
         <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
       <% end %>
     <% end %>
-  <% end %>
+  <%# end %>
 
   <div id="uploaded-files-table-container">
     <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
   </div>
 
-    <%= form_with(
+    <%#= form_with(
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,

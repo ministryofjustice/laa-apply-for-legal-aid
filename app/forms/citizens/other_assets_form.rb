@@ -102,7 +102,7 @@ module Citizens
     end
 
     def base_checkbox
-      CHECK_BOXES_ATTRIBUTES[0]
+      CHECK_BOXES_ATTRIBUTES.first
     end
 
     def any_checkbox_checked_or_draft

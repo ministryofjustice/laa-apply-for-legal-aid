@@ -6,6 +6,7 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
+            back_link: { path: providers_legal_aid_application_opponent_name_path(@legal_aid_application) },
             form: form) do %>
 
     <%

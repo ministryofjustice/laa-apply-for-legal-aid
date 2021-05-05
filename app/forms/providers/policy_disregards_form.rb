@@ -27,7 +27,7 @@ module Providers
     private
 
     def any_checkbox_checked_or_draft
-      errors.add SINGLE_VALUE_ATTRIBUTES[0].to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
+      errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?
     end
 
     def error_message_for_none_selected

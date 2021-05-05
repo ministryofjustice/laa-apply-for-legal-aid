@@ -6,6 +6,7 @@
     ) do |form| %>
     <%= page_template(page_title: t('.h1-heading'),
                       template: :basic,
+                      back_link: { path: providers_legal_aid_application_start_chances_of_success_path(@legal_aid_application) },
                       form: form) do %>
 
     <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>

@@ -1,6 +1,14 @@
-<%= page_template page_title: t('.page_title', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}"), template: :basic do %>
+<%= form_with(
+        url: providers_legal_aid_application_has_other_involved_children_path,
+        model: @form,
+        method: :patch,
+        local: true
+    ) do |form| %>
+  <%= page_template page_title: t('.page_title', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}"),
+                    template: :basic,
+                    form: form do %>
 
-  <% if @legal_aid_application.involved_children.count > 0 %>
+    <% if @legal_aid_application.involved_children.count > 0 %>
     <%= govuk_fieldset_header(size: 'l') { t('.existing', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}")} %>
     <div class="govuk-summary-list">
       <table class="govuk-table">
@@ -28,17 +36,10 @@
                         suffix: involved_child.full_name) %></td>
             </tr>
           <% end %>
-          <body>
+        </tbody>
       </table>
     </div>
-  <% end %>
-
-  <%= form_with(
-        url: providers_legal_aid_application_has_other_involved_children_path,
-        model: @form,
-        method: :patch,
-        local: true
-      ) do |form| %>
+    <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_involved_child,
                                             yes_no_options,
@@ -46,6 +47,6 @@
                                             :label,
                                             legend: {text: t(".add_another"), size: 'l', tag: 'h1'} %>
 
-    <%= next_action_buttons(form: form) %>
+      <%= next_action_buttons(form: form) %>
   <% end %>
 <% end %>
