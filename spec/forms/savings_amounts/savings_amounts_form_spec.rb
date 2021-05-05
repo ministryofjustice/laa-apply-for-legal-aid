@@ -194,7 +194,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
         it 'returns true' do
           expect(subject.save).to eq(false)
-          expect(subject.errors[:base]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected"))
+          expect(subject.errors[:check_box_cash]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected"))
         end
       end
 
