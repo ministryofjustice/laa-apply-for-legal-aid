@@ -9,6 +9,10 @@ class ProceedingTypeScopeLimitationsPopulator
 
   def call
     CSV.read(file_path, headers: true, header_converters: :symbol).each do |row|
+      # TODO: Delete when the allow_multiple_proceedings? flag is
+      # removed. At that point, all proceedings will be seeded again
+      next if ProceedingType.find_by(ccms_code: row[:proceeding_type_code]).nil?
+
       proceeding_type_scope_limitation =
         ProceedingTypeScopeLimitation.where(proceeding_type_id: proceeding_type_id(row),
                                             scope_limitation_id: scope_limitation_id(row)).first_or_initialize
