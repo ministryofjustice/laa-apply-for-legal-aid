@@ -6,6 +6,12 @@
                     else
                       t('.h1-heading')
                     end %>
+<%= page_template(
+      page_title: t('.h1-heading'),
+      head_title: new_head_title,
+      template: :basic,
+      back_link: { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
+    ) do %>
 
   <%= form_with(
           model: @form,
@@ -14,15 +20,9 @@
           local: true
       ) do |form| %>
 
-    <%= page_template(
-            page_title: t('.h1-heading'),
-            head_title: new_head_title,
-            template: :basic,
-            form: form,
-            back_link: { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
-        ) do %>
+    <%= form.govuk_error_summary %>
 
-      <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
       <p class="govuk-body"><%= t('generic.tell_us') %></p>
       <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
@@ -47,7 +47,6 @@
               name: 'upload_button',
               class: 'govuk-button form-button'
           ) %>
-      <% end %>
 
       <% #  Customised accessibility alerts within this span below %>
       <% if @successfully_deleted %>
@@ -56,16 +55,25 @@
       <% if @error_message || @successful_upload %>
         <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
       <% end %>
+    <% end %>
+  <% end %>
 
-      <div id="uploaded-files-table-container">
-        <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-      </div>
+  <div id="uploaded-files-table-container">
+    <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+  </div>
 
-      <%= form.govuk_radio_divider %>
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
 
-      <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
+    <%= form.govuk_radio_divider %>
 
-      <%= next_action_buttons(show_draft: true, form: form) %>
+    <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>
 
