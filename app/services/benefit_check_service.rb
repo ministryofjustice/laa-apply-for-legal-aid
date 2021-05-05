@@ -1,6 +1,6 @@
 class BenefitCheckService
   BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
-  USE_MOCK = ActiveModel::Type::Boolean.new.cast(ENV['BC_USE_DEV_MOCK'])
+  USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
   REQUEST_TIMEOUT = 30.seconds
 
   class ApiError < StandardError

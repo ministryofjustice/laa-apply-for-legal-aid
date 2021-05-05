@@ -17,7 +17,7 @@ class AddressLookupService
 
   def query_params
     {
-      key: ENV['ORDNANACE_SURVEY_API_KEY'],
+      key: Rails.configuration.x.ordnanace_survey_api_key,
       postcode: postcode,
       lr: 'EN'
     }

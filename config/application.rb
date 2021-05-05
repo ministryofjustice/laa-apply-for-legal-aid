@@ -90,6 +90,15 @@ module LaaApplyForLegalAid
 
     config.x.geckoboard.api_key = ENV['GECKOBOARD_API_KEY']
 
+    config.x.local_clamav = ENV['LOCAL_CLAMAV']
+    config.x.bc_use_dev_mock = ENV['BC_USE_DEV_MOCK']
+    config.x.ordnanace_survey_api_key = ENV['ORDNANACE_SURVEY_API_KEY']
+    config.x.secure_data_secret = ENV.fetch('SECURE_DATA_SECRET', 'someSecret')
+
+    config.x.status.build_date = ENV['BUILD_DATE'] || 'Not Available'
+    config.x.status.build_tag = ENV['BUILD_TAG'] || 'Not Available'
+    config.x.status.app_branch = ENV['APP_BRANCH'] || 'Not Available'
+
     ActionView::Base.default_form_builder = GOVUKDesignSystemFormBuilder::FormBuilder
 
     config.x.google_oauth2.client_id      = ENV['GOOGLE_CLIENT_ID']
