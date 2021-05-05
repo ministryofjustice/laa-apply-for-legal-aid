@@ -20,6 +20,14 @@ Given('I visit the confirm office page') do
   visit providers_confirm_office_path
 end
 
+When(/^I visit the root page/) do
+  visit root_path
+end
+
+When(/^I submit to saml/) do
+  find('input[name*=commit]').click
+end
+
 Given('I have an existing office') do
   office = @registered_provider.firm.offices.find_by(code: 'London')
   @registered_provider.update!(selected_office: office)

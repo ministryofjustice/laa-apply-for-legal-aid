@@ -511,7 +511,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -554,8 +554,9 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
-    ruby-saml (1.11.0)
-      nokogiri (>= 1.5.10)
+    ruby-saml (1.12.2)
+      nokogiri (>= 1.10.5)
+      rexml
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
     sassc (2.4.0)
@@ -741,7 +742,6 @@ DEPENDENCIES
   rails_admin (~> 2.1)
   redis-namespace
   regexp-examples
-  rexml (= 3.2.4)
   rspec-rails (~> 5.0)
   rspec_junit_formatter
   rubocop

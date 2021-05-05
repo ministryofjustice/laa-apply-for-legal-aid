@@ -19,7 +19,7 @@ RSpec.describe SamlIdpController, type: :request do
         it 'renders the saml auth form with the encoded request' do
           post saml_auth_path, params: login_params
           expect(response).to be_successful
-          expect(response.body).to include('<form action="http://test/providers/saml/auth"')
+          expect(response.body).to include('<form action="http://www.example.com/providers/saml/auth?locale=en"')
           expect(response.body).to include('input type="hidden" name="SAMLResponse" id="SAMLResponse"')
         end
       end
