@@ -443,13 +443,23 @@ en:
     limitations:
       show:
         h1-heading: What you're applying for
-        h2-heading: Proceeding
-        if_delegated_used: Covered under an emergency certificate
+        proceedings_heading: Proceedings
+        cost_heading: Cost limitations
+        substantive_certificate: Substantive certificate
+        emergency_certificate: Emergency certificate
         form_of_service: "Form of service: "
         form_of_service_type: Full representation
         incurrable_costs: "Costs you can incur: "
         allowable_work: "Work you can do: "
-        substantive_certificate: Covered under a substantive certificate
+        if_delegated_used: Covered under an emergency certificate # can be removed when multiple proceedings flag removed
+        substantive_certificate_covered: Covered under a substantive certificate  # can be removed when multiple proceedings flag removed
+      proceeding_type:
+        details_heading: Scope limitations
+        allowable_work: "Work you can do: "
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        substantive_certificate: Substantive certificate
+        emergency_certificate: Emergency certificate
     means_summaries:
       show:
         h1-heading: Check your answers
