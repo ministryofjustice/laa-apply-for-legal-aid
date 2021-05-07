@@ -27,9 +27,7 @@ module ChancesOfSuccesses
     end
 
     validates :success_prospect, presence: true, unless: :draft?
-    validates :success_prospect_details,
-              presence: true,
-              if: :details_required?
+    validate :details_present?
 
     def initialize(*args)
       super
@@ -38,6 +36,14 @@ module ChancesOfSuccesses
     end
 
     private
+
+    def details_present?
+      return if success_prospect.blank? || draft?
+
+      details = "success_prospect_details_#{success_prospect}".to_sym
+      value = __send__(details)
+      errors.add(details, I18n.t('activemodel.errors.models.chances_of_success.attributes.success_prospect_details.blank')) if value.blank?
+    end
 
     def interpolate_details
       return unless %w[poor marginal borderline not_known].include?(success_prospect)
@@ -54,12 +60,6 @@ module ChancesOfSuccesses
       field = "success_prospect_details_#{success_prospect}"
       __send__("#{field}=", success_prospect_details)
       attributes[field] = success_prospect_details
-    end
-
-    def details_required?
-      return false if draft?
-
-      success_prospect.present?
     end
 
     def success_prospect_details_expandable?

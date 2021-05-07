@@ -11,12 +11,6 @@ en:
         postcode: This must be a valid UK postcode
       applicant:
         national_insurance_number: For example, 'QQ 12 34 56 C'
-      legal_aid_application:
-        outstanding_mortgage_amount:
-          citizens: Check the statement from your mortgage provider or lender
-          providers: ""
-        percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-        property_value: You can use property websites to find the estimated value
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:

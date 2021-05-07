@@ -20,6 +20,8 @@
           local: true
       ) do |form| %>
 
+    <%= form.govuk_error_summary %>
+
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
       <p class="govuk-body"><%= t('generic.tell_us') %></p>

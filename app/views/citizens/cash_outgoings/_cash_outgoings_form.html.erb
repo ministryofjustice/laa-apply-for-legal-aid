@@ -5,7 +5,9 @@
       local: true
     ) do |form| %>
 
-  <%= form.govuk_check_boxes_fieldset :cash_outgoings, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+  <%= page_template page_title: page_title, template: :basic, form: form do %>
+
+    <%= form.govuk_check_boxes_fieldset :cash_outgoings, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
     <p><%= t('.info') %></p>
     <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
@@ -31,4 +33,5 @@
         form: form,
         show_draft: false
       ) %>
+  <% end %>
 <% end %>

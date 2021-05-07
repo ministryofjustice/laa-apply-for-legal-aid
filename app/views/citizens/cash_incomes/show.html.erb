@@ -1,6 +1,5 @@
-<%= page_template page_title: t('.page_heading'), template: :basic, show_errors_for: @aggregated_cash_income do %>
-  <%= render(
-        'cash_income_form',
-        form_path: citizens_cash_income_path
-      ) %>
-<% end %>
+<%= render(
+    'cash_income_form',
+    page_title: t('.page_heading'),
+    form_path: citizens_cash_income_path
+  ) %>

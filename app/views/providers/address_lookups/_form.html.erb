@@ -1,15 +1,16 @@
-<%= page_template(
-      page_title: t('forms.address_lookup.heading'),
-      template: :basic
-    ) do %>
+<%= form_with(
+      model: @form,
+      scope: :address_lookup,
+      url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(
-        model: @form,
-        scope: :address_lookup,
-        url: providers_legal_aid_application_address_lookup_path(@legal_aid_application),
-        method: :patch,
-        local: true
-      ) do |form| %>
+    <%= page_template(
+            page_title: t('forms.address_lookup.heading'),
+            template: :basic,
+            form: form,
+        ) do %>
 
     <%= form.govuk_text_field :postcode, label: {text: page_title, tag: 'h1', size: 'xl'}, width: 10 %>
 

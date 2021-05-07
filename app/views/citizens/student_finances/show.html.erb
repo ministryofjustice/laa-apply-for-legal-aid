@@ -1,8 +1,7 @@
-<%= page_template page_title: t('.field_set_header'), template: :basic do %>
-
-  <%= form_with(model: @form,
-                url: citizens_student_finance_path,
-                method: :patch, local: true) do |form| %>
+<%= form_with(model: @form,
+              url: citizens_student_finance_path,
+              method: :patch, local: true) do |form| %>
+  <%= page_template page_title: t('.field_set_header'), form: form, template: :basic do %>
 
     <%= form.govuk_collection_radio_buttons :student_finance,
                                             yes_no_options,

@@ -1,8 +1,8 @@
-<%= page_template page_title: t('.field_set_header'), template: :basic, show_errors_for: @offline_account_form do %>
-  <%= form_with(model: @offline_account_form,
-                url: citizens_additional_account_path(id: :update),
-                method: :patch,
-                local: true) do |form| %>
+<%= form_with(model: @offline_account_form,
+              url: citizens_additional_account_path(id: :update),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.field_set_header'), template: :basic, form: form do %>
 
     <%= form.govuk_collection_radio_buttons :has_offline_accounts,
                                             yes_no_options,

@@ -1,7 +1,21 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
-  <%= render(
-        'shared/forms/vehicles/own_vehicle',
-        form_path: providers_legal_aid_application_vehicle_path,
-        show_draft: true
-      ) %>
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_vehicle_path,
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
+
+    <%= form.govuk_collection_radio_buttons(
+            :own_vehicle,
+            yes_no_options,
+            :value,
+            :label,
+            legend: {size: 'xl', tag: 'h1', text: t('.heading')},
+            hint: {text: t('.hint') }
+        ) %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+  <% end %>
 <% end %>

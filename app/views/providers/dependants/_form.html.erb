@@ -1,20 +1,24 @@
-  <%= form_with(
+<%= form_with(
       model: @form,
       url: form_path,
       method: :patch,
       local: true
   ) do |form| %>
+
+  <%= page_template page_title: page_title, page_heading_options: { margin_bottom: 3 }, form: form do %>
+
     <div class="govuk-!-padding-bottom-2"></div>
 
     <%= form.govuk_text_field :name, width: 'three-quarters', label: { size: 'm', text: t('.name') } %>
 
     <%= form.govuk_date_field :date_of_birth, legend: {text: t('.date_of_birth')} %>
 
-    <%= form.govuk_fieldset legend: {text: t('.relationship')} do %>
+    <%= form.govuk_radio_buttons_fieldset :relationship, legend: {text: t('.relationship')} do %>
       <% Dependant.relationships.keys.each do |relationship_type| %>
         <%= form.govuk_radio_button(
                 :relationship,
                 relationship_type,
+                link_errors: true,
                 label: {text: t(".option.#{relationship_type}")},
                 hint: {text: t(".option.hint.#{relationship_type}")},
             ) %>
@@ -36,6 +40,7 @@
       <%= form.govuk_radio_button(
               :has_income,
               true,
+              link_errors: true,
               label: {text: t('generic.yes')},
           ) do %>
           <%= form.govuk_text_field(
@@ -59,6 +64,7 @@
       <%= form.govuk_radio_button(
               :has_assets_more_than_threshold,
               true,
+              link_errors: true,
               label: {text: t('generic.yes')},
           ) do %>
         <%= form.govuk_text_field(
@@ -81,4 +87,5 @@
             show_draft: true,
             form: form
         ) %>
+  <% end %>
 <% end %>

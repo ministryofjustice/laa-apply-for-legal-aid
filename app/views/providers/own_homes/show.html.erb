@@ -1,7 +1,25 @@
-<%= page_template page_title: t('.h1-heading'), template: :basic do %>
-  <%= render(
-        'shared/forms/own_home_form',
-        form_path: providers_legal_aid_application_own_home_path(@legal_aid_application),
-        show_draft: true
-      ) %>
+<%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_own_home_path(@legal_aid_application),
+        method: :patch,
+        local: true) do |form| %>
+    <%= page_template page_title: t('.h1-heading'), form: form, template: :basic do %>
+
+    <%
+      options = [
+          OpenStruct.new( value: :mortgage, label: t('.mortgage')),
+          OpenStruct.new(value: :owned_outright, label: t('.owned_outright')),
+          OpenStruct.new(value: :no, label: t('.no'))
+      ]
+    %>
+
+    <%= form.govuk_collection_radio_buttons(:own_home, options, :value, :label,
+                                            legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+
+  <% end %>
 <% end %>

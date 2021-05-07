@@ -1,10 +1,26 @@
-<%= page_template page_title: t('.h1-heading'), template: :basic do %>
-  <%= render(
-        partial: '/providers/property_values/form',
-        locals: {
-          model: @form,
-          url: providers_legal_aid_application_property_value_path,
-          show_draft: true
-        }
-      ) %>
+<%= form_with(
+        model: @form,
+        scope: :legal_aid_application,
+        url: providers_legal_aid_application_property_value_path,
+        method: :patch,
+        local: true) do |form| %>
+  <%= page_template page_title: t('.h1-heading'), form: form, template: :basic do %>
+
+    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
+      <%= form.govuk_text_field(
+              :property_value,
+              label: {text: :property_value, hidden: true},
+              hint: {text: t('.hint')},
+              value: number_to_currency_or_original_string(@form.property_value),
+              prefix_text: t('currency.gbp'),
+              width: 'one-third',
+              ) %>
+    <% end %>
+
+    <%= next_action_buttons(
+            show_draft: true,
+            form: form
+        ) %>
+
+  <% end %>
 <% end %>

@@ -192,7 +192,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it 'populates the errors' do
-          expect(aco.errors.full_messages).to eq ['None selected Select if you make these payments in cash']
+          expect(aco.errors.full_messages).to eq ['Cash outgoings Select if you make these payments in cash']
         end
       end
 
@@ -204,7 +204,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it 'populates the errors' do
-          expect(aco.errors.full_messages).to eq ['None selected Select payments in cash or None of the above']
+          expect(aco.errors.full_messages).to eq ['Cash outgoings Select payments in cash or None of the above']
         end
       end
     end

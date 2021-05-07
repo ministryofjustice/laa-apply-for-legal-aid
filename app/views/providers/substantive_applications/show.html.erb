@@ -1,11 +1,10 @@
-<%= page_template page_title: t('.heading'), template: :basic do %>
-
-  <%= form_with(
+<%= form_with(
         model: @form,
         url: providers_legal_aid_application_substantive_application_path,
         method: :patch,
         local: true
-      ) do |form| %>
+    ) do |form| %>
+  <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
 
     <%= form.govuk_radio_buttons_fieldset(:substantive_application,
                                             legend: { size: 'xl', tag: 'h1', text: page_title}) do %>

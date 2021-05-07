@@ -1,15 +1,14 @@
-<%= page_template(
-      page_title: t('.h1-heading'),
-      template: :basic,
-      back_link: { path: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) }
-    ) do %>
-
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_opponent_name_path(@legal_aid_application),
-        method: :patch,
-        local: true
-      ) do |form| %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_opponent_name_path(@legal_aid_application),
+      method: :patch,
+      local: true
+    ) do |form| %>
+    <%= page_template(
+            page_title: t('.h1-heading'),
+            template: :basic,
+            back_link: { path: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) },
+            form: form) do %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 
