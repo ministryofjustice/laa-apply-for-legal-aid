@@ -20,6 +20,21 @@ module LegalFramework
       it 'is not empty' do
         expect(merits_task_list.task_list).to_not be_empty
       end
+
+      it 'has no complete states' do
+        expect(merits_task_list.serialized_data).to_not include('state: :complete')
+      end
+    end
+
+    describe '.mark_as_complete' do
+      subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
+
+      before { mark_as_complete }
+
+      it { is_expected.to be true }
+      it 'updates the task list' do
+        expect(merits_task_list.serialized_data).to include('state: :complete')
+      end
     end
 
     def dummy_serialized_merits_task_list
