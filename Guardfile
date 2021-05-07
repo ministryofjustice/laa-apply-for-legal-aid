@@ -19,7 +19,7 @@ guard :rubocop, all_on_start: false do
   watch(%r{(?:.+/)?\.(rubocop|rubocop_todo)\.yml$}) { |m| File.dirname(m[0]) }
 end
 
-guard :cucumber, cmd: 'cucumber --publish-quiet', notification: false, all_on_start: false do
+guard :cucumber, cmd: 'bundle exec cucumber --publish-quiet', notification: false, all_on_start: false do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$}) { 'features' }
 
