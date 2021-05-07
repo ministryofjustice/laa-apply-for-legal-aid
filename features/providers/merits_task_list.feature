@@ -1,50 +1,53 @@
 Feature: Merits task list
 
   @javascript @vcr
-  Scenario: When the flag is enabled
+  Scenario: Merits Task list functions
     Given the feature flag for allow_multiple_proceedings is enabled
     And the method populate of ProceedingType is rerun
     And the method populate of ProceedingTypeScopeLimitation is rerun
-    And I start the journey as far as the applicant page
-    Then I enter name 'Test', 'User'
-    Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
-    Then I click 'Save and continue'
-    Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9EA'
-    Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
-    Then I search for proceeding 'Non-molestation order'
-    Then I choose a 'Non-molestation order' radio button
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you want to add another proceeding?'
-    When I choose 'Yes'
+    Given I previously created a passported application with multiple_proceedings and left on the "check_passported_answers" page
+    Then I visit the applications page
+    Then I view the previously created application
+    Then I am on the check your answers page for other assets
+    When I click 'Save and continue'
+    Then I should be on the 'capital_assessment_result' page showing 'could be eligible for legal aid'
+    When I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
+    And I should see Latest incident details\nNOT STARTED
+    And I should see Opponent details\nNOT STARTED
+    And I should see Statement of case\nNOT STARTED
+    And I should see Children involved in this application\nNOT STARTED
+    When I click link 'Latest incident details'
+    Then I should be on the 'date_client_told_incident' page showing 'Latest incident details'
+    When I enter the 'told_on' date of 9 days ago
+    And I enter the 'occurred_on' date of 10 days ago
     And I click 'Save and continue'
-    Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
-    Then I search for proceeding 'Child'
-    Then I choose a 'Child arrangements order (residence)' radio button
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Do you want to add another proceeding?'
-
-  @javascript @vcr
-  Scenario: When the flag is disabled
-    Given the feature flag for allow_multiple_proceedings is disabled
-    And the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
-    And I start the journey as far as the applicant page
-    Then I enter name 'Test', 'User'
-    Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
-    Then I click 'Save and continue'
-    Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9EA'
-    Then I click find address
-    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
-    Then I click 'Save and continue'
-    Then I search for proceeding 'Child arrangements order'
-    Then proceeding suggestions has no results
-    Then I search for proceeding 'non-mol'
-    Then proceeding suggestions has results
-    When I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I should be on the 'opponent_name' page showing "What is the opponent's name?"
+    When I enter full_name 'Bob Smith'
+    And I click 'Save and continue'
+    Then I should be on the 'opponent' page showing 'Opponent details'
+    When I choose option "Application merits task opponent understands terms of court order True field"
+    And I choose option "Application merits task opponent warning letter sent True field"
+    And I choose option "Application merits task opponent police notified True field"
+    And I choose option "Application merits task opponent bail conditions set True field"
+    And I fill "Bail conditions set details" with "Foo bar"
+    And I fill "Police notified details" with "Foo bar"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Provide a statement of case"
+    When I fill "Application merits task statement of case statement field" with "Statement of case"
+    And I click 'Save and continue'
+#    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+#    When I choose "Yes"
+#    And I click 'Save and continue'
+    Then I should be on the 'involved_children/new' page showing "Enter details of the children involved in this application"
+    When I fill "Name" with "Wednesday Adams"
+    And I enter a 'date_of_birth' for a 17 year old
+    And I click 'Save and continue'
+    Then I should be on the 'has_other_involved_children' page showing "Do you need to add another child?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
+    And I should see Latest incident details\nCOMPLETED
+    And I should see Opponent details\nCOMPLETED
+    And I should see Statement of case\nCOMPLETED
+    And I should see Children involved in this application\nCOMPLETED
