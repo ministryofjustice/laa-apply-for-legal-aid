@@ -36,9 +36,6 @@ Feature: Merits task list
     Then I should be on a page showing "Provide a statement of case"
     When I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
-#    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
-#    When I choose "Yes"
-#    And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing "Enter details of the children involved in this application"
     When I fill "Name" with "Wednesday Adams"
     And I enter a 'date_of_birth' for a 17 year old
