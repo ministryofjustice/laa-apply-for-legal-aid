@@ -25,6 +25,34 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
     end
 
+    context 'when the multiple proceedings flag is off' do
+      before do
+        Setting.setting.update!(allow_multiple_proceedings: false)
+        login_as provider
+        subject
+      end
+
+      it 'shows the correct text' do
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.show.substantive_certificate_covered'))
+      end
+
+      it 'does not have a details section' do
+        expect(parsed_response_body.css('details')).to be_empty
+      end
+    end
+
+    context 'when the multiple proceedings flag is on' do
+      before do
+        Setting.setting.update!(allow_multiple_proceedings: true)
+        login_as provider
+        subject
+      end
+
+      it 'puts scope limitations in a details section' do
+        expect(parsed_response_body.css('details').text).to include(I18n.t('providers.limitations.show.substantive_certificate'))
+      end
+    end
+
     context '#pre_dwp_check?' do
       it 'returns true' do
         expect(described_class.new.pre_dwp_check?).to be true

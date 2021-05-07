@@ -146,8 +146,10 @@ Feature: Civil application journeys
     Then I enter the 'harassment injunction used delegated functions on' date of 2 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing 'Covered under an emergency certificate'
-    Then I should be on a page showing 'Covered under a substantive certificate'
+    Then I should be on a page showing 'Occupation order'
+    Then I should be on a page showing 'Harassment - injunction'
+    Then I should be on a page showing 'Emergency certificate'
+    Then I should be on a page showing 'Substantive certificate'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
