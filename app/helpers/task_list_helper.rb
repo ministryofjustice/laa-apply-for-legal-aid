@@ -14,7 +14,13 @@ module TaskListHelper
   private
 
   def _task_url(name)
-    "providers_legal_aid_application_#{url_fragment(name)}".to_sym
+    prefix = case name
+             when :children_application
+               'new_'
+             else
+               ''
+             end
+    "#{prefix}providers_legal_aid_application_#{url_fragment(name)}".to_sym
   end
 
   def proceeding_task_url(name, application, ccms_code)

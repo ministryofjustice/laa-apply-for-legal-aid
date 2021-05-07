@@ -512,8 +512,8 @@ en:
         opponent_details: Opponent details
         statement_of_case: Statement of case
         chances_of_success: Chances of success
-        application_children: Children involved in this application
         proceeding_children: Children involved in this proceeding
+        children_application: Children involved in this application
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -523,7 +523,7 @@ en:
           opponent_details: opponent
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
-          application_children: chances_of_success_index
+          children_application: involved_child
           proceeding_children: chances_of_success_index
     merits_reports:
       show:
