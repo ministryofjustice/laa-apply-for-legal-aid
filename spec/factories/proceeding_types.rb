@@ -65,6 +65,22 @@ FactoryBot.define do
       involvement_type_applicant { true }
     end
 
+    trait :as_section_8_child_residence do
+      code { 'PH0004' }
+      ccms_code { 'SE014' }
+      meaning { 'Child arrangements order (residence)' }
+      name { 'child_arrangements_order_residence' }
+      description { 'to be represented on an application for a child arrangements order –where the child(ren) will live' }
+      ccms_category_law { 'Family' }
+      ccms_category_law_code { 'MAT' }
+      ccms_matter { 'Section 8 orders' }
+      ccms_matter_code { 'KSEC8' }
+      default_service_level_id { create(:service_level, service_level_number: 1).id }
+      default_cost_limitation_delegated_functions { 1350 }
+      default_cost_limitation_substantive { 25_000 }
+      involvement_type_applicant { true }
+    end
+
     trait :with_scope_limitations do
       after(:create) do |proceeding_type|
         create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
