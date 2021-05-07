@@ -230,7 +230,7 @@ en:
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
         hints:
           offline_savings_accounts: For example, a Post Office savings account.
-        error: Please select Yes or No
+        error: Select yes if your client has savings accounts they cannot access online
     client_completed_means:
       show:
         h1-heading: Continue your application
