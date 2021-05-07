@@ -79,12 +79,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_capital_assessment_result_path(application) },
           forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :start_chances_of_successes }
         },
-        attempts_to_settle: {
-          forward: :merits_task_list
-        },
-        involved_children: {
-          forward: :merits_task_list
-        },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries }

@@ -7,9 +7,6 @@ module Flow
           forward: :date_client_told_incidents,
           check_answers: :check_merits_answers
         },
-        # the involved children section below has not yet been linked into the rest of the flow
-        # until the merits task page is done
-        # :nocov:
         involved_children: {
           path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
           forward: :has_other_involved_children
@@ -20,7 +17,7 @@ module Flow
             if has_other_involved_child
               :involved_children
             else
-              :date_client_told_incidents
+              Setting.allow_multiple_proceedings? ? :merits_task_list : :date_client_told_incidents
             end
           }
         },
@@ -34,7 +31,6 @@ module Flow
             end
           }
         },
-        # :nocov:
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponents,
@@ -57,7 +53,7 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: :chances_of_success,
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :involved_children : :chances_of_success },
           check_answers: :check_merits_answers
         },
         chances_of_success: {
@@ -78,6 +74,12 @@ module Flow
           end,
           forward: :check_merits_answers
         },
+        attempts_to_settle: {
+          forward: :merits_task_list
+        },
+        # involved_children: {
+        #   forward: :merits_task_list
+        # },
         merits_task_list: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: :check_merits_answers
