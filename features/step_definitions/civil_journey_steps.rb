@@ -724,6 +724,15 @@ Then('I enter the {string} date of {int} days ago') do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
+Then('I enter a {string} for a {int} year old') do |name, number|
+  name.gsub!(/\s+/, '_')
+  date = (number.years + 1.month).ago
+  fields = page.all("input[name*=#{name}]")
+  fill_in(fields[0][:name].to_s, with: date.day)
+  fill_in(fields[1][:name].to_s, with: date.month)
+  fill_in(fields[2][:name].to_s, with: date.year)
+end
+
 Given('a {string} exists in the database') do |model|
   model.gsub!(/\s+/, '_')
   create model.to_sym

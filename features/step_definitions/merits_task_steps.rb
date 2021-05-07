@@ -19,7 +19,7 @@ Then(/I should be on the (.*?) page with (.*?) regex/) do |view_name, text|
   expect(page).to have_content(/#{text}/)
 end
 
-Then(/^I should (see|not see) (.*?)$/) do |visible, text|
+Then(/^I should (see|not see) regex (.*?)$/) do |visible, text|
   if visible.eql?('see')
     expect(page).to have_content(/#{text}/)
   else

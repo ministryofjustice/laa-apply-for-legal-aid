@@ -13,10 +13,10 @@ Feature: Merits task list
     Then I should be on the 'capital_assessment_result' page showing 'could be eligible for legal aid'
     When I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
-    And I should see Latest incident details\nNOT STARTED
-    And I should see Opponent details\nNOT STARTED
-    And I should see Statement of case\nNOT STARTED
-    And I should see Children involved in this application\nNOT STARTED
+    And I should see regex Latest incident details\nNOT STARTED
+    And I should see regex Opponent details\nNOT STARTED
+    And I should see regex Statement of case\nNOT STARTED
+    And I should see regex Children involved in this application\nNOT STARTED
     When I click link 'Latest incident details'
     Then I should be on the 'date_client_told_incident' page showing 'Latest incident details'
     When I enter the 'told_on' date of 9 days ago
@@ -47,7 +47,7 @@ Feature: Merits task list
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
-    And I should see Latest incident details\nCOMPLETED
-    And I should see Opponent details\nCOMPLETED
-    And I should see Statement of case\nCOMPLETED
-    And I should see Children involved in this application\nCOMPLETED
+    And I should see regex Latest incident details\nCOMPLETED
+    And I should see regex Opponent details\nCOMPLETED
+    And I should see regex Statement of case\nCOMPLETED
+    And I should see regex Children involved in this application\nCOMPLETED
