@@ -7,7 +7,7 @@ module Providers
 
       def create
         @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params)
-
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :chances_of_success)
         render :index unless save_continue_or_draft(@form)
       end
 
@@ -15,6 +15,10 @@ module Providers
 
       def legal_aid_application
         @legal_aid_application ||= application_proceeding_type.legal_aid_application
+      end
+
+      def proceeding_type
+        @proceeding_type ||= application_proceeding_type.proceeding_type
       end
 
       def chances_of_success

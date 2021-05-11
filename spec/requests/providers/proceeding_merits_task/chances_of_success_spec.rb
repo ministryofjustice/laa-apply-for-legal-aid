@@ -4,11 +4,19 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe ChancesOfSuccessController, type: :request do
       let(:chances_of_success) { create :chances_of_success, application_proceeding_type: application_proceeding_type }
-      let(:legal_aid_application) { create :legal_aid_application }
-      let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               legal_aid_application: legal_aid_application,
+               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
+      end
       let(:login) { login_as legal_aid_application.provider }
 
-      before { login }
+      before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+        login
+      end
 
       describe 'GET /providers/merits_task_list/:id/chances_of_success' do
         subject { get providers_merits_task_list_chances_of_success_index_path(application_proceeding_type) }
@@ -35,7 +43,8 @@ module Providers
           { proceeding_merits_task_chances_of_success: { success_likely: success_likely } }
         end
         let(:submit_button) { {} }
-        let(:next_url) { providers_legal_aid_application_check_merits_answers_path(legal_aid_application) }
+        # let(:next_url) { providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
+        # let(:next_url) { providers_legal_aid_application_check_merits_answers_path(legal_aid_application) }
 
         subject do
           post(
@@ -62,7 +71,7 @@ module Providers
 
         it 'redirects to next page' do
           subject
-          expect(response).to redirect_to(next_url)o
+          expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
         end
 
         context 'false is selected' do
@@ -83,7 +92,7 @@ module Providers
 
           it 'redirects to next page' do
             subject
-            expect(response).to redirect_to(next_url)
+            expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(application_proceeding_type))
           end
 
           context 'success_prospect was :likely' do

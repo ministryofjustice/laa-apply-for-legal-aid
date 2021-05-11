@@ -58,21 +58,29 @@ module Flow
           forward: ->(_) { Setting.allow_multiple_proceedings? ? :involved_children : :chances_of_success },
           check_answers: :check_merits_answers
         },
+        # chances_of_success: {
+        #   path: ->(application) do
+        #     apt = application.lead_application_proceeding_type
+        #     urls.providers_merits_task_list_chances_of_success_index_path(apt)
+        #   end,
+        #   forward: ->(application) do
+        #     apt = application.lead_application_proceeding_type
+        #     chances_of_success = apt.chances_of_success
+        #     chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
+        #   end
+        # },
         chances_of_success: {
-          path: ->(application) do
-            apt = application.lead_application_proceeding_type
-            urls.providers_merits_task_list_chances_of_success_index_path(apt)
-          end,
           forward: ->(application) do
-            apt = application.lead_application_proceeding_type
-            chances_of_success = apt.chances_of_success
-            chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
+            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
+            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
+            application_proceeding_type.chances_of_success.success_likely? ? :merits_task_list : :success_prospects
           end
         },
         success_prospects: {
           path: ->(application) do
-            apt = application.lead_application_proceeding_type
-            urls.providers_merits_task_list_success_prospects_path(apt)
+            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
+            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
+            urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
           end,
           forward: :check_merits_answers
         },
