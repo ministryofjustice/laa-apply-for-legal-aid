@@ -389,15 +389,13 @@ Given('I complete the journey as far as check your answers') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = ProceedingType.all.first
   @legal_aid_application = create(
     :legal_aid_application,
     :at_entering_applicant_details,
+    :with_proceeding_types,
     applicant: applicant,
-    proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
   )
-  add_scope_limitations(@legal_aid_application, proceeding_type)
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -610,6 +608,7 @@ Then(/^the results section is empty$/) do
 end
 
 Then(/^proceeding suggestions has results$/) do
+  wait_for_ajax
   expect(page).to have_css('#proceeding-list > .proceeding-item')
 end
 
