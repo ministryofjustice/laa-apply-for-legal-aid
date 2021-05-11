@@ -69,9 +69,18 @@ module Providers
           expect { subject }.to change { chances_of_success.reload.success_prospect_details }.to(nil)
         end
 
+        context 'when the multi-proceeding flag is true' do
+          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+          it 'redirects to the next page' do
+            subject
+            expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+          end
+        end
+
         it 'redirects to next page' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
         end
 
         context 'false is selected' do
