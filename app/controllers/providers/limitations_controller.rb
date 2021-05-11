@@ -20,6 +20,8 @@ module Providers
     # TODO: remove once multiple proceedings has been implemented
 
     def update_df_dates
+      return if Setting.allow_multiple_proceedings?
+
       apt = legal_aid_application.application_proceeding_types.first
       apt.update!(used_delegated_functions_on: legal_aid_application.used_delegated_functions_on,
                   used_delegated_functions_reported_on: legal_aid_application.used_delegated_functions_reported_on)
