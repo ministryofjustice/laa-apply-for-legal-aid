@@ -23,7 +23,7 @@ FactoryBot.define do
             ccms_code: 'SE014',
             tasks: {
               chances_of_success: [],
-              children_application: [:children_application]
+              children_proceeding: [:children_application]
             }
           }
         ]
