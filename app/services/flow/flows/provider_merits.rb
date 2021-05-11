@@ -54,6 +54,7 @@ module Flow
           check_answers: :check_merits_answers
           # :nocov:
         },
+        # TODO: handle a multi-proceeding application without a section 8 proceeding_type. it should return to the task list
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(_) { Setting.allow_multiple_proceedings? ? :involved_children : :chances_of_success },
