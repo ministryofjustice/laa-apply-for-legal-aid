@@ -36,7 +36,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
     context 'the record already exists' do
       before do
         login_provider
-        create :legal_framework_merits_task, legal_aid_application: legal_aid_application
+        create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application
         subject
       end
 
