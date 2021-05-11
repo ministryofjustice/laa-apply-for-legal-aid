@@ -27,7 +27,8 @@
     "node-forge": "^0.10.0",
     "yargs-parser": "^13.1.2",
     "is-svg": "^4.2.2",
-    "ssri": "^8.0.1"
+    "ssri": "^8.0.1",
+    "postcss": "^8.2.10"
   },
   "jest": {
     "roots": [
