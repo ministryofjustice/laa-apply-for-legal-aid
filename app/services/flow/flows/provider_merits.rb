@@ -67,14 +67,10 @@ module Flow
           check_answers: :check_merits_answers
         },
         chances_of_success: {
+          # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting chance_of_success
           path: ->(application) do
-            if Setting.allow_multiple_proceedings?
-              application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
-              urls.providers_merits_task_list_chances_of_success_index_path(application_proceeding_type)
-            else
-              apt = application.lead_application_proceeding_type
-              urls.providers_merits_task_list_chances_of_success_index_path(apt)
-            end
+            apt = application.lead_application_proceeding_type
+            urls.providers_merits_task_list_chances_of_success_index_path(apt)
           end,
           forward: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
