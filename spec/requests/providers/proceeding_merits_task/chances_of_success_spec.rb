@@ -62,7 +62,7 @@ module Providers
 
         it 'redirects to next page' do
           subject
-          expect(response).to redirect_to(next_url)
+          expect(response).to redirect_to(next_url)o
         end
 
         context 'false is selected' do
