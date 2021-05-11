@@ -582,7 +582,6 @@ Then('I visit received benefit confirmation page') do
 end
 
 And('I search for proceeding {string}') do |proceeding_search|
-  pp @legal_aid_application&.proceeding_types&.pluck(:ccms_code, :meaning) if @legal_aid_application&.proceeding_types
   fill_in('proceeding-search-input', with: proceeding_search)
   wait_for_ajax
 end
@@ -654,9 +653,7 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
 end
 
 Then('I select a proceeding type and continue') do
-  button = find('#proceeding-list').first(:button, 'Select and continue')
-  pp button
-  button.click
+  find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
 Then('I select proceeding type {int}') do |index|
