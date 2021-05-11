@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderMerits < FlowSteps
+    class ProviderMerits < FlowSteps # rubocop:disable Metrics/ClassLength
       STEPS = {
         # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting chance_of_success
         start_chances_of_successes: {
@@ -57,13 +57,24 @@ module Flow
         # TODO: handle a multi-proceeding application without a section 8 proceeding_type. it should return to the task list
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: ->(_) { Setting.allow_multiple_proceedings? ? :involved_children : :chances_of_success },
+          forward: ->(_) do
+            if Setting.allow_multiple_proceedings?
+              :involved_children
+            else
+              :chances_of_success
+            end
+          end,
           check_answers: :check_merits_answers
         },
         chances_of_success: {
           path: ->(application) do
-            application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
-            urls.providers_merits_task_list_chances_of_success_index_path(application_proceeding_type)
+            if Setting.allow_multiple_proceedings?
+              application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
+              urls.providers_merits_task_list_chances_of_success_index_path(application_proceeding_type)
+            else
+              apt = application.lead_application_proceeding_type
+              urls.providers_merits_task_list_chances_of_success_index_path(apt)
+            end
           end,
           forward: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
