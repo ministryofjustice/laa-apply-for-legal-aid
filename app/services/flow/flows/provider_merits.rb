@@ -74,7 +74,11 @@ module Flow
           end,
           forward: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
-            application_proceeding_type.chances_of_success.success_likely? ? :merits_task_list : :success_prospects
+            if application_proceeding_type.chances_of_success.success_likely?
+              Setting.allow_multiple_proceedings? ? :merits_task_list : :check_merits_answers
+            else
+              :success_prospects
+            end
           end
         },
         success_prospects: {
@@ -83,7 +87,7 @@ module Flow
             application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
             urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
           end,
-          forward: :check_merits_answers
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :check_merits_answers }
         },
         attempts_to_settle: {
           forward: :merits_task_list
