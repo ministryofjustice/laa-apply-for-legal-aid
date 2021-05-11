@@ -22,6 +22,7 @@ module Flow
           }
         },
         remove_involved_child: {
+          # :nocov:
           path: ->(application, child) { urls.providers_legal_aid_application_remove_involved_child_path(application, child) },
           forward: ->(application) {
             if application.involved_children.count.positive?
@@ -30,6 +31,7 @@ module Flow
               :involved_children
             end
           }
+          # :nocov:
         },
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
