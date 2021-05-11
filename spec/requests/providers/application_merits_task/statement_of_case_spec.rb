@@ -73,10 +73,23 @@ module Providers
           expect(statement_of_case.original_attachments.first).to be_present
         end
 
-        it 'redirects to the next page' do
-          subject
-          apt = legal_aid_application.lead_application_proceeding_type
-          expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
+        describe 'redirect on success' do
+          context 'when the multi-proceeding flag is true' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'redirects to the next page' do
+              subject
+              expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+            end
+          end
+
+          it 'redirects to the next page' do
+            subject
+            apt = legal_aid_application.lead_application_proceeding_type
+            expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
+          end
         end
 
         context 'uploading a file' do
