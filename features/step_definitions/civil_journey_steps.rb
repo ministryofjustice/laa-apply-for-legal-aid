@@ -389,15 +389,13 @@ Given('I complete the journey as far as check your answers') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = ProceedingType.all.first
   @legal_aid_application = create(
     :legal_aid_application,
     :at_entering_applicant_details,
+    :with_proceeding_types,
     applicant: applicant,
-    proceeding_types: [proceeding_type],
     used_delegated_functions_on: 1.day.ago
   )
-  add_scope_limitations(@legal_aid_application, proceeding_type)
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -584,7 +582,6 @@ Then('I visit received benefit confirmation page') do
 end
 
 And('I search for proceeding {string}') do |proceeding_search|
-  pp @legal_aid_application&.proceeding_types&.pluck(:ccms_code, :meaning) if @legal_aid_application&.proceeding_types
   fill_in('proceeding-search-input', with: proceeding_search)
   wait_for_ajax
 end
@@ -610,6 +607,7 @@ Then(/^the results section is empty$/) do
 end
 
 Then(/^proceeding suggestions has results$/) do
+  wait_for_ajax
   expect(page).to have_css('#proceeding-list > .proceeding-item')
 end
 
@@ -655,9 +653,7 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
 end
 
 Then('I select a proceeding type and continue') do
-  button = find('#proceeding-list').first(:button, 'Select and continue')
-  pp button
-  button.click
+  find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
 Then('I select proceeding type {int}') do |index|
