@@ -18,7 +18,7 @@ module Flow
             if has_other_involved_child
               :involved_children
             else
-              Setting.allow_multiple_proceedings? ? :merits_task_list : :date_client_told_incidents
+              Setting.allow_multiple_proceedings? ? :merits_task_lists : :date_client_told_incidents
             end
           }
         },
@@ -75,7 +75,7 @@ module Flow
           forward: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
             if application_proceeding_type.chances_of_success.success_likely?
-              Setting.allow_multiple_proceedings? ? :merits_task_list : :check_merits_answers
+              Setting.allow_multiple_proceedings? ? :merits_task_lists : :check_merits_answers
             else
               :success_prospects
             end
@@ -87,15 +87,15 @@ module Flow
             application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
             urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
           end,
-          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_list : :check_merits_answers }
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_lists : :check_merits_answers }
         },
         attempts_to_settle: {
-          forward: :merits_task_list
+          forward: :merits_task_lists
         },
         involved_child: {
-          forward: :merits_task_list
+          forward: :merits_task_lists
         },
-        merits_task_list: {
+        merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: :check_merits_answers
         },
