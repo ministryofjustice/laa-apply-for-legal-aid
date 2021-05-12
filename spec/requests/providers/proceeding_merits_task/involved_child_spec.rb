@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Providers
   module ProceedingMeritsTask
-    RSpec.describe InvolvedChildrenController, type: :request do
+    RSpec.describe InvolvedChildController, type: :request do
       let!(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
       let(:lead_application_proceeding_type) { legal_aid_application.application_proceeding_types.first }

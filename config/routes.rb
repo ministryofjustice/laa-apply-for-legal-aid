@@ -253,7 +253,7 @@ Rails.application.routes.draw do
 
     resources :merits_task_list do
       resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
-      resource :involved_child, only: %i[show update], controller: 'proceeding_merits_task/involved_children'
+      resource :involved_child, only: %i[show update], controller: 'proceeding_merits_task/involved_child'
       resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
       resource :success_prospects, only: %i[show update], controller: 'proceeding_merits_task/success_prospects'
       resource :proceedings_before_the_court, only: %i[show update]

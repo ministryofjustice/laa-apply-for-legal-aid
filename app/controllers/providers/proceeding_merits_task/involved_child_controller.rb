@@ -1,6 +1,6 @@
 module Providers
   module ProceedingMeritsTask
-    class InvolvedChildrenController < ProviderBaseController
+    class InvolvedChildController < ProviderBaseController
       def show
         application_proceeding_type
         involved_children
@@ -9,6 +9,10 @@ module Providers
       def update
         application_proceeding_type
         involved_children.each { |child| update_record(child[:id], child[:name]) }
+        # TODO: Remove SafeNavigators after MultiProceeding Feature flag is turned on
+        # Until then, some applications will not have a legal_framework_merits_task_list
+        # Afterwards - everything should have one!
+        legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(proceeding_type.ccms_code.to_sym, :children_proceeding)
         go_forward
       end
 
@@ -16,6 +20,10 @@ module Providers
 
       def legal_aid_application
         @legal_aid_application ||= application_proceeding_type.legal_aid_application
+      end
+
+      def proceeding_type
+        @proceeding_type ||= application_proceeding_type.proceeding_type
       end
 
       def application_proceeding_type

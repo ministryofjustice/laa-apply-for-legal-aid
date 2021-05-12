@@ -92,9 +92,9 @@ module Flow
         attempts_to_settle: {
           forward: :merits_task_list
         },
-        # involved_children: {
-        #   forward: :merits_task_list
-        # },
+        involved_child: {
+          forward: :merits_task_list
+        },
         merits_task_list: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: :check_merits_answers
