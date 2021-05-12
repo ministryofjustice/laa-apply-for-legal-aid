@@ -40,6 +40,28 @@ module LegalFramework
       end
     end
 
+    describe '.can_proceed?' do
+      subject(:can_proceed) { merits_task_list.can_proceed? }
+
+      context 'when not all tasks are complete' do
+        it { is_expected.to be false }
+      end
+
+      context 'when all tasks are complete' do
+        before do
+          merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+          merits_task_list.mark_as_complete!(:application, :opponent_details)
+          merits_task_list.mark_as_complete!(:application, :children_application)
+          merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
+          merits_task_list.mark_as_complete!(:SE014, :chances_of_success)
+          merits_task_list.mark_as_complete!(:SE014, :children_proceeding)
+          merits_task_list.mark_as_complete!(:SE014, :attempts_to_settle)
+        end
+
+        it { is_expected.to be true }
+      end
+    end
+
     def dummy_serialized_merits_task_list
       build :legal_framework_serializable_merits_task_list
     end

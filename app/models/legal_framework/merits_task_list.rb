@@ -11,5 +11,10 @@ module LegalFramework
       self.serialized_data = task_list.to_yaml
       save!
     end
+
+    def can_proceed?
+      states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten
+      states.all?(:complete)
+    end
   end
 end
