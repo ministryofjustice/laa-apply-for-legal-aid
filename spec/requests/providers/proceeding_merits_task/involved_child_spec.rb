@@ -3,15 +3,20 @@ require 'rails_helper'
 module Providers
   module ProceedingMeritsTask
     RSpec.describe InvolvedChildController, type: :request do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types_inc_section8 }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
-      let(:lead_application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
+      let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
       let(:login) { login_as legal_aid_application.provider }
 
-      before { login }
+      before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+        login
+      end
 
       describe 'GET /providers/merits_task_list/:merits_task_list_id/involved_child' do
-        subject { get providers_merits_task_list_involved_child_path(lead_application_proceeding_type) }
+        subject { get providers_merits_task_list_involved_child_path(application_proceeding_type) }
 
         context 'when the provider is not authenticated' do
           let(:login) { nil }
@@ -34,15 +39,16 @@ module Providers
 
       describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/involved_child' do
         let(:params) do
-          params = involved_children_names.index_with { |_k| 'true' }
-          params
+          involved_children_names.index_with { |_k| 'true' }
         end
 
-        subject { patch providers_merits_task_list_involved_child_path(lead_application_proceeding_type), params: params }
+        before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
+
+        subject { patch providers_merits_task_list_involved_child_path(application_proceeding_type), params: params }
 
         context 'all selected' do
           it 'adds involved children to the proceeding type' do
-            expect { subject }.to change { lead_application_proceeding_type.application_proceeding_type_involved_children.count }.by(3)
+            expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(3)
           end
         end
 
@@ -53,7 +59,7 @@ module Providers
           end
 
           it 'does not add involved children to the proceeding type' do
-            expect { subject }.to change { lead_application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
+            expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
           end
         end
 
@@ -65,14 +71,14 @@ module Providers
           end
 
           it 'only adds the specified children to the proceeding type' do
-            proceeding_type_involved_children = lead_application_proceeding_type.application_proceeding_type_involved_children
+            proceeding_type_involved_children = application_proceeding_type.application_proceeding_type_involved_children
             expect { subject }.to change { proceeding_type_involved_children.count }.by(1)
           end
         end
 
         context 'previous selections' do
           let(:update) do
-            patch providers_merits_task_list_involved_child_path(lead_application_proceeding_type), params: new_params
+            patch providers_merits_task_list_involved_child_path(application_proceeding_type), params: new_params
           end
 
           before { subject }
@@ -85,13 +91,13 @@ module Providers
             end
 
             it 'deletes a record if it is deselected' do
-              expect { update }.to change { lead_application_proceeding_type.application_proceeding_type_involved_children.count }.by(-1)
+              expect { update }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(-1)
             end
           end
 
           context 'record already exists' do
             it 'makes no changes if already selected records are left selected' do
-              expect { subject }.to change { lead_application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
+              expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
             end
           end
         end

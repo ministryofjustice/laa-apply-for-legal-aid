@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
-  let(:application) { create(:legal_aid_application, :with_multiple_proceeding_types) }
-  let(:lead_application_proceeding_type) { application.application_proceeding_types.first }
-  let(:provider) { application.provider }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceeding_types_inc_section8) }
+  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
+  let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
+  let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+  let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/merits_task_list/:merits_task_list_id/attempts_to_settle' do
-    subject { get providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type) }
+    subject { get providers_merits_task_list_attempts_to_settle_path(application_proceeding_type) }
 
     context 'when the provider is not authenticated' do
       before { subject }
@@ -15,6 +17,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
 
     context 'when the provider is authenticated' do
       before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
         login_as provider
       end
 
@@ -25,7 +28,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
 
       it 'displays the correct proceeding type as a header' do
         subject
-        expect(unescaped_response_body).to include(lead_application_proceeding_type.proceeding_type.meaning)
+        expect(unescaped_response_body).to include(application_proceeding_type.proceeding_type.meaning)
       end
     end
   end
@@ -35,18 +38,19 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
       {
         proceeding_merits_task_attempts_to_settle: {
           attempts_made: 'Details of settlement attempt',
-          application_proceeding_type_id: lead_application_proceeding_type.id
+          application_proceeding_type_id: application_proceeding_type.id
         }
       }
     end
 
     context 'when the provider is authenticated' do
       before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
         login_as provider
       end
 
       subject do
-        patch providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type), params: params.merge(submit_button)
+        patch providers_merits_task_list_attempts_to_settle_path(application_proceeding_type), params: params.merge(submit_button)
       end
 
       context 'Form submitted using Continue button' do
@@ -54,19 +58,19 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
 
         it 'redirects provider back to the merits task list' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
         end
 
         context 'when the application is in draft' do
-          let(:application) { create(:legal_aid_application, :with_multiple_proceeding_types, :draft) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceeding_types_inc_section8, :draft) }
 
           it 'redirects provider back to the merits task list' do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
           end
 
           it 'sets the application as no longer draft' do
-            expect { subject }.to change { application.reload.draft? }.from(true).to(false)
+            expect { subject }.to change { legal_aid_application.reload.draft? }.from(true).to(false)
           end
         end
 
@@ -86,7 +90,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         let(:submit_button) { { draft_button: 'Save as draft' } }
 
         subject do
-          patch providers_merits_task_list_attempts_to_settle_path(lead_application_proceeding_type), params: params.merge(submit_button)
+          patch providers_merits_task_list_attempts_to_settle_path(application_proceeding_type), params: params.merge(submit_button)
         end
 
         it "redirects provider to provider's applications page" do
@@ -95,7 +99,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         end
 
         it 'sets the application as draft' do
-          expect { subject }.to change { application.reload.draft? }.from(false).to(true)
+          expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
       end
     end
