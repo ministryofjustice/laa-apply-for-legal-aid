@@ -574,13 +574,13 @@ en:
     non_passported_client_instructions:
       show:
         h1-heading: What your client has to do
-        give_client_access: "We'll give your client access to the service and ask them to:"
+        give_client_access_1: Your client needs to access 'Apply for legal aid' using a link we'll send them in an email.
+        give_client_access_2: "They'll then be redirected to their bank’s website or app where they can:"
         actions:
           list: |
             sign in to their online banking
-            give TrueLayer one-time access to their bank accounts
-            tell us about their income and outgoings
-        next: Once they've done this, you'll need to categorise their bank transactions so we can calculate their disposable income.
+            give TrueLayer permission to collect 3 months of bank statements on behalf of the LAA
+        next: Once they've done this, your client will be returned to 'Apply for legal aid' so they can answer questions about their income and outgoings.
     offline_accounts:
       show:
         h1-heading: Which bank accounts does your client have?
