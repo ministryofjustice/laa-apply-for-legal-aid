@@ -1,0 +1,44 @@
+<div class="govuk-summary-list__row--no-border">
+  <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
+    <h3 class="govuk-heading-m"><%= proceeding_type.meaning %></h3>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <%= link_to_accessible(t('generic.change'),
+                          providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
+                          class: 'govuk-link change-link',
+                          suffix: 'proceeding') %>
+  </dd>
+</div>
+<div class="govuk-summary-list__row">
+  <dd class="govuk-summary-list__key">
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text"
+            title="<%= t('.details_heading') %>"
+            aria-label="<%= t('.details_heading') %>">
+        <%= t('.details_heading') %>
+      </span>
+      </summary>
+
+      <div class="govuk-details__text">
+        <% type=proceeding_type.application_proceeding_type %>
+        <% if type.used_delegated_functions_on %>
+        <h4 class="govuk-heading-m"><%= t('.emergency_certificate') %></h4>
+        <p><strong><%= t('.form_of_service') %></strong>
+          <%= t('.form_of_service_type') %>
+        </p>
+        <p><strong><%= t('.allowable_work') %></strong>
+          <%= type.delegated_functions_scope_limitation.description %>
+        </p>
+        <% end %>
+        <h4 class="govuk-heading-m"><%= t('.substantive_certificate') %></h4>
+        <p><strong><%= t('.form_of_service') %></strong>
+          <%= t('.form_of_service_type') %>
+        </p>
+        <p><strong><%= t('.allowable_work') %></strong>
+          <%= type.substantive_scope_limitation.description %>
+        </p>
+      </div>
+    </details>
+  </dd>
+</div>
