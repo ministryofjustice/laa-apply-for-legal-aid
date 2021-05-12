@@ -6,6 +6,13 @@
 
   <div id='task_list' class="<%= 'govuk-form-group--error' if @merits_task_list.errors[:task_list].present? %>">
     <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
+
+    <% if @merits_task_list.errors[:task_list].present? %>
+      <span class="govuk-error-message" id="task-list-error">
+        <span class="govuk-visually-hidden">Error: </span>
+        <%= @merits_task_list.errors[:task_list].first %>
+      </span>
+    <% end %>
     <ol class="app-task-list">
       <%= render 'task_list_section', name: t('.application_section_heading'), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
 
