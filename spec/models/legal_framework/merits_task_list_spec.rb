@@ -34,11 +34,9 @@ module LegalFramework
       it { is_expected.to be true }
 
       it 'updates the task list' do
-        expect(merits_task_list.serialized_data).to match(/name: :children_application\n    dependencies: \*3\n    state: :complete/)
-      end
-
-      it 'updates dependant tasks' do
-        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n    dependencies: \*\d\n    state: :not_started/)
+        # match pattern => key: :value, newline, any amount of spaces, repeat
+        expect(merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :not_started/)
       end
     end
 
