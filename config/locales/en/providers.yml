@@ -594,12 +594,23 @@ en:
       show:
         heading: Check if you can continue using this service
         info: "You agree that your client:"
-        list_1: uses online banking for all of their current accounts
-        list_2_html: will give a secure third-party service (TrueLayer) one-time access to their bank accounts to collect 3 months of bank statements
-        list_3: is not employed
+        list: |
+          uses online banking for all of their current accounts
+          will let a trusted third-party financial service provider called TrueLayer collect 3 months of bank statements and share them with the LAA
+          is not employed
+        details_summary: What is TrueLayer?
+        details_content: |
+          TrueLayer is a third-party service that acts as a messenger between your client's bank and the LAA.
+          It allows your client to quickly and securely share their bank statements without having to gather physical bank statements.
+          They’re regulated by the Financial Conduct Authority (FCA) and will never:
+        details:
+          list: |
+            access your client's bank account without their permission
+            see your client's online banking username and password
+            share your client's data with anyone other than the LAA
+            have ongoing access to your client's bank accounts
         radio_no: No, I do not agree
         radio_yes: Yes, I agree
-
     opponent_names:
       show:
         h1-heading: What is the opponent's name?

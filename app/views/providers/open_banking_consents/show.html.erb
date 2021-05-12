@@ -14,23 +14,34 @@
         <%= t('.info') %>
       </p>
 
-      <ul class="govuk-list govuk-list--bullet">
-        <li><%= t('providers.open_banking_consents.show.list_1') %></li>
-        <li><%= t('providers.open_banking_consents.show.list_2_html') %></li>
-        <li><%= t('providers.open_banking_consents.show.list_3') %></li>
-      </ul>
+      <%= list_from_translation_path('.open_banking_consents.show') %>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            <%= t('.details_summary') %>
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <% t('.details_content').each_line do |item| %>
+            <p><%= item %></p>
+          <% end %>
+
+          <%= list_from_translation_path('.open_banking_consents.show.details') %>
+        </div>
+      </details>
 
       <%= form.govuk_radio_button(
               :provider_received_citizen_consent,
               true,
               link_errors: true,
-              label: {text: t('providers.open_banking_consents.show.radio_yes')}
+              label: {text: t('.radio_yes')}
           ) %>
 
       <%= form.govuk_radio_button(
               :provider_received_citizen_consent,
               false,
-              label: {text: t('providers.open_banking_consents.show.radio_no')}
+              label: {text: t('.radio_no')}
           ) %>
 
       <div class="govuk-!-padding-bottom-5"></div>
