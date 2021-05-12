@@ -27,13 +27,18 @@ module LegalFramework
     end
 
     describe '.mark_as_complete' do
-      subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
+      subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, :children_application) }
 
       before { mark_as_complete }
 
       it { is_expected.to be true }
+
       it 'updates the task list' do
-        expect(merits_task_list.serialized_data).to include('state: :complete')
+        expect(merits_task_list.serialized_data).to match(/name: :children_application\n    dependencies: \*3\n    state: :complete/)
+      end
+
+      it 'updates dependant tasks' do
+        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n    dependencies: \*\d\n    state: :not_started/)
       end
     end
 
