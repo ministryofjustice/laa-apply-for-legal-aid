@@ -1,17 +1,31 @@
 module Providers
   class MeritsTaskListsController < ProviderBaseController
-    def show
-      @merits_tasks = merits_tasks
+    before_action :merits_tasks
+
+    def show; end
+
+    def update
+      return go_forward if @legal_aid_application.legal_framework_merits_task_list.can_proceed?
+
+      @merits_task_list.errors.add(:task_list, :incomplete)
+      render :show
     end
 
     private
 
     def merits_tasks
-      task_list_record = @legal_aid_application.legal_framework_merits_task_list
-      if task_list_record.nil?
+      @merits_tasks ||= task_list_record
+    end
+
+    def merits_task_list
+      @merits_task_list ||= @legal_aid_application.legal_framework_merits_task_list
+    end
+
+    def task_list_record
+      if merits_task_list.nil?
         LegalFramework::MeritsTasksService.call(@legal_aid_application).tasks
       else
-        task_list_record.task_list.tasks
+        merits_task_list.task_list.tasks
       end
     end
   end
