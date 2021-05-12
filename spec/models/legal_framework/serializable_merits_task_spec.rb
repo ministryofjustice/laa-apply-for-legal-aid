@@ -21,12 +21,24 @@ module LegalFramework
     end
 
     describe '#remove_dependency' do
+      subject(:remove_dependency) { legal_framework_serializable_merits_task.remove_dependency(parameter) }
       let(:legal_framework_serializable_merits_task) { build :legal_framework_serializable_merits_task, dependencies: [:application_children] }
+      before { remove_dependency }
 
-      it 'removes the dependency' do
-        expect(legal_framework_serializable_merits_task.dependencies).to eq [:application_children]
-        legal_framework_serializable_merits_task.remove_dependency(:application_children)
-        expect(legal_framework_serializable_merits_task.dependencies).to be_empty
+      context 'when sent a string' do
+        let(:parameter) { 'application_children' }
+
+        it 'removes the dependency' do
+          expect(legal_framework_serializable_merits_task.dependencies).to be_empty
+        end
+      end
+
+      context 'when sent a symbol' do
+        let(:parameter) { :application_children }
+
+        it 'removes the dependency' do
+          expect(legal_framework_serializable_merits_task.dependencies).to be_empty
+        end
       end
     end
 

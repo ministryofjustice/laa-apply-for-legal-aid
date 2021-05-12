@@ -9,7 +9,8 @@ module LegalFramework
     end
 
     def remove_dependency(dependency_name)
-      @dependencies.delete(dependency_name)
+      @dependencies.delete(dependency_name.to_sym)
+      @dependencies.delete(dependency_name.to_s)
 
       @state = :not_started if @dependencies.empty?
     end
