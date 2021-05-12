@@ -47,7 +47,7 @@ module LegalFramework
       @tasks[:proceedings].each do |proceeding|
         proceeding[1][:tasks].each do |task|
           dependencies = task.dependencies.map(&:to_sym)
-          task(proceeding[0], task.name).remove_dependency(blocking_task.to_s) if dependencies.include?(blocking_task)
+          task(proceeding[0], task.name).remove_dependency(blocking_task) if dependencies.include?(blocking_task)
         end
       end
     end
