@@ -1,4 +1,4 @@
-<%= page_template(page_title: t('.title')) do %></h1>
+<%= page_template(page_title: t('.title')) do %>
   <p class="govuk-body"><%= t '.sign_in_para' %></p>
 
   <p class="govuk-body">
@@ -8,25 +8,6 @@
   <p class="govuk-body">
     <%= t('.activity') %>
   </p>
-
-  <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
-    <summary class="govuk-details__summary">
-      <span class="govuk-details__summary-text"
-        title="<%= t('.disclosure.heading') %>"
-        aria-label="<%= t('.disclosure.heading') %>">
-        <%= t('.disclosure.heading') %>
-      </span>
-    </summary>
-
-    <div class="govuk-details__text">
-      <p><%= t('.disclosure.detail_use') %></p>
-
-      <p><%= t('.disclosure.will_not_heading') %></p>
-
-      <%= list_from_translation_path '.about_the_financial_assessments.show.disclosure' %>
-
-    </div>
-  </details>
 
   <h2 class="govuk-heading-m">
     <%= t '.section_2.heading' %>
