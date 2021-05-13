@@ -9,7 +9,10 @@ module Providers
 
     def update
       return continue_or_draft if draft_selected?
-      return go_forward(form.has_other_proceeding?) if form.valid?
+
+      return go_forward(form.has_other_proceeding?) if go_forward?
+
+      form.errors.add(:has_other_proceeding, I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse')) unless domestic_abuse_selected?
 
       render :show
     end
@@ -23,6 +26,11 @@ module Providers
     end
 
     private
+
+    def go_forward?
+      # go forward if the form is valid AND either there is a dom ab proceeding, or they have selected True to add another proceeding
+      form.valid? && (form.has_other_proceeding? || domestic_abuse_selected?)
+    end
 
     def form
       @form ||= BinaryChoiceForm.call(
@@ -51,6 +59,10 @@ module Providers
       set_new_lead_proceeding if application_proceeding_type.lead_proceeding? && proceeding_types.count > 1
 
       LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
+    end
+
+    def domestic_abuse_selected?
+      proceeding_types.any? { |type| type.ccms_matter == 'Domestic Abuse' }
     end
 
     def set_new_lead_proceeding

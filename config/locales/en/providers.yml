@@ -692,6 +692,7 @@ en:
         existing: You have added %{count}
         remove: Remove
         error: Select yes if you want to add another proceeding
+        must_add_domestic_abuse: You must add at least one domestic abuse proceeding
     providers:
       show:
         account_number: Account number
