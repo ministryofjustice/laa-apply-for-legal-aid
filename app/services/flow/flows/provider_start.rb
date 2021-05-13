@@ -53,10 +53,14 @@ module Flow
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
-          forward: ->(_earliest_reported_date) do
-            # TODO: AP-2233 if earliest reported date does not exist then go to the 'confirm earliest DF date' page as this is outside a month
-            # earliest_reported_date ? :limitations : :delegated_functions_dates
-            :limitations
+          forward: ->(_application, delegated_functions_used_over_month_ago) do
+            delegated_functions_used_over_month_ago ? :confirm_multiple_delegated_functions : :limitations
+          end
+        },
+        confirm_multiple_delegated_functions: {
+          path: ->(application) { urls.providers_legal_aid_application_confirm_multiple_delegated_functions_path(application) },
+          forward: ->(_application, confirmed_dates) do
+            confirmed_dates ? :limitations : :used_multiple_delegated_functions
           end
         },
         used_delegated_functions: {

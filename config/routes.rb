@@ -234,6 +234,7 @@ Rails.application.routes.draw do
       resource :means_summary, only: %i[show update]
       resource :used_delegated_functions, only: %i[show update]
       resource :used_multiple_delegated_functions, only: %i[show update]
+      resource :confirm_multiple_delegated_functions, only: %i[show update]
       resource :delegated_functions_date, only: %i[show update]
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
