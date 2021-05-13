@@ -5,7 +5,7 @@ module Providers
     def show; end
 
     def update
-      return go_forward if @legal_aid_application.legal_framework_merits_task_list.can_proceed?
+      return continue_or_draft if draft_selected? || @legal_aid_application.legal_framework_merits_task_list.can_proceed?
 
       @merits_task_list.errors.add(:task_list, :incomplete)
       render :show
