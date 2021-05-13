@@ -18,7 +18,7 @@ module Providers
 
       update_application
 
-      draft_selected? ? continue_or_draft : go_forward(earliest_delegated_functions_reported_date)
+      draft_selected? ? continue_or_draft : go_forward(delegated_functions_used_over_month_ago?)
     end
 
     def form
@@ -39,6 +39,10 @@ module Providers
 
     def proceeding_with_earliest_delegated_functions
       @proceeding_with_earliest_delegated_functions ||= form.proceeding_with_earliest_delegated_functions
+    end
+
+    def delegated_functions_used_over_month_ago?
+      earliest_delegated_functions_date && !earliest_delegated_functions_reported_date
     end
 
     def earliest_delegated_functions_date
