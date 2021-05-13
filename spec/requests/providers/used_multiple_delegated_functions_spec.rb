@@ -121,6 +121,10 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         it 'does not call the submit application reminder mailer service' do
           expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
         end
+
+        it 'redirects to the confirm delegated_functions dates page' do
+          expect(response).to redirect_to(providers_legal_aid_application_confirm_multiple_delegated_functions_path(legal_aid_application))
+        end
       end
     end
 

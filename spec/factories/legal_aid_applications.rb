@@ -388,6 +388,16 @@ FactoryBot.define do
       end
     end
 
+    trait :with_multiple_delegated_functions_different_dates_over_a_month_old do
+      after(:create) do |application|
+        application.application_proceeding_types.each_with_index do |type, i|
+          type.used_delegated_functions_on = Time.zone.today - ((i + 1).month - i.days)
+          type.used_delegated_functions_reported_on = Time.zone.today unless i > 0
+          type.save!
+        end
+      end
+    end
+
     trait :with_substantive_application_deadline_on do
       substantive_application_deadline_on { SubstantiveApplicationDeadlineCalculator.call self }
     end
