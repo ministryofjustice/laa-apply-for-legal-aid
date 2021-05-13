@@ -64,7 +64,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing 'Give your client temporary access to the service'
     And the page is accessible
-    When I click 'Send client link'
+    When I click 'Send link'
     Then I should be on a page showing 'Application created'
     And the page is accessible
     When I click link 'Back to your applications'

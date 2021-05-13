@@ -211,7 +211,7 @@ Feature: Civil application journeys
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
-    Then I click 'Send client link'
+    Then I click 'Send link'
     Then I am on the application confirmation page
 
   @localhost_request @javascript @vcr
@@ -252,7 +252,7 @@ Feature: Civil application journeys
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
-    Then I click 'Send client link'
+    Then I click 'Send link'
     Then I am on the application confirmation page
 
   @javascript @vcr

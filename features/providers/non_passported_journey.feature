@@ -297,7 +297,7 @@ Feature: Non-passported applicant journeys
     When I enter the email address 'test@example.com'
     And I click 'Save and continue'
     Then I should be on the 'about_the_financial_assessment' page showing 'Give your client temporary access to the service'
-    When I click 'Send client link'
+    When I click 'Send link'
     Then I should be on the 'application_confirmation' page showing 'Application created'
     When I visit the applications page
     And I view the first application in the table
