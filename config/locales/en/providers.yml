@@ -269,6 +269,9 @@ en:
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
     proceeding_merits_task:
+      involved_child:
+        show:
+          h1-heading: Which children are covered under this proceeding?
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
