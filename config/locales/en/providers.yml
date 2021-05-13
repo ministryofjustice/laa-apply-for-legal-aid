@@ -160,6 +160,32 @@ en:
         'no': No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
         title: DWP records show that your client does not receive a passporting benefit – is this correct?
+    confirm_multiple_delegated_functions_dates:
+      show:
+        heading: Confirm when you used delegated functions
+        search_help_example: One or more of the dates you entered is over one month old.
+        error:
+          blank_plural: Select yes if these dates are correct
+          blank_singular: Select yes if this date is correct
+        plural:
+          details_correct: These dates are correct
+          details_incorrect: I need to change one or more of these dates
+        singular:
+          details_correct: This date is correct
+          details_incorrect: I need to change this date
+    confirm_multiple_delegated_functions:
+      show:
+        heading: Confirm when you used delegated functions
+        search_help_example: One or more of the dates you entered is over one month old.
+        error:
+          blank_plural: Select yes if these dates are correct
+          blank_singular: Select yes if this date is correct
+        plural:
+          details_correct: These dates are correct
+          details_incorrect: I need to change one or more of these dates
+        singular:
+          details_correct: This date is correct
+          details_incorrect: I need to change this date
     correct_dwp_results:
       show:
         error: Select yes if your client does not receive a passporting benefit.
