@@ -17,6 +17,7 @@ Feature: Merits task list
     And I should see regex Opponent details\nNOT STARTED
     And I should see regex Statement of case\nNOT STARTED
     And I should see regex Children involved in this application\nNOT STARTED
+    And I should see regex Children involved in this proceeding\nCANNOT START YET
     When I click link 'Latest incident details'
     Then I should be on the 'date_client_told_incident' page showing 'Latest incident details'
     When I enter the 'told_on' date of 9 days ago
@@ -48,3 +49,7 @@ Feature: Merits task list
     And I should see regex Opponent details\nCOMPLETED
     And I should see regex Statement of case\nCOMPLETED
     And I should see regex Children involved in this application\nCOMPLETED
+    And I should see regex Children involved in this proceeding\nNOT STARTED
+    When I click 'Continue'
+    Then I should be on the 'merits_task_list' page showing 'Provide details of the case'
+    And I should see 'You must complete every section before you can continue'
