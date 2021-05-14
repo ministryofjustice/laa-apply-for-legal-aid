@@ -43,13 +43,17 @@ module Flow
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: ->(_application, has_other_proceeding) do
+          forward: ->(application, has_other_proceeding) do
             if has_other_proceeding
               :proceedings_types
             else
-              Setting.allow_multiple_proceedings? ? :used_multiple_delegated_functions : :used_delegated_functions
+              application.section_8_proceedings? ? :in_scope_of_laspo : :used_multiple_delegated_functions
             end
           end
+        },
+        in_scope_of_laspo: {
+          path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
+          forward: ->(_) { :used_multiple_delegated_functions }
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },

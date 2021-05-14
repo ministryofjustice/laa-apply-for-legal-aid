@@ -717,6 +717,9 @@ en:
         remove: Remove
         error: Select yes if you want to add another proceeding
         must_add_domestic_abuse: You must add at least one domestic abuse proceeding
+    in_scope_of_laspos:
+      show:
+        page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
     providers:
       show:
         account_number: Account number

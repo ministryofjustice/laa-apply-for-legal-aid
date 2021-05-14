@@ -1,0 +1,14 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_in_scope_of_laspo_path,
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
+    <%= form.govuk_collection_radio_buttons :in_scope_of_laspo,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            hint: { text: '' },
+                                            legend: { text: page_title, tag: 'h1', size: 'l' } %>
+    <%= next_action_buttons show_draft: true, form: form %>
+  <% end %>
+<% end %>
