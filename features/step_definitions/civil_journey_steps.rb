@@ -106,6 +106,10 @@ Given('the setting to allow multiple proceedings is enabled') do
   Setting.setting.update!(allow_multiple_proceedings: true)
 end
 
+Given('the setting to manually review all cases is enabled') do
+  Setting.setting.update!(manually_review_all_cases: true)
+end
+
 Given('the setting to allow DWP overrides is enabled') do
   Setting.setting.update!(override_dwp_results: true)
 end
@@ -821,6 +825,10 @@ end
 
 Then(/^I click How we checked your client's benefits status$/) do
   page.find('#checked-status').click
+end
+
+Then('I am on the {string} page') do |string|
+  expect(page).to have_content(string)
 end
 
 # rubocop:disable Lint/Debugger
