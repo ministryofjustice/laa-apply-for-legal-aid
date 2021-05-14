@@ -51,6 +51,13 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'updates the application types with no reported on date' do
+        expect(application_proceeding_types.all.pluck(:used_delegated_functions_on)).to match_array [today - 12.months, today - 12.months + 1.day]
+        expect(application_proceeding_types.all.pluck(:used_delegated_functions_reported_on)).to match_array [nil, nil]
+
+        # TODO: replace the below with the above if the below still flickers
+        # also, check that this has value... used_delegated_functions_reported_on should always have a value
+        # if the used_delegated_functions_on has one
+
         application_proceeding_types.each_with_index do |type, i|
           expect(type.used_delegated_functions_reported_on).to be_nil
           expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
