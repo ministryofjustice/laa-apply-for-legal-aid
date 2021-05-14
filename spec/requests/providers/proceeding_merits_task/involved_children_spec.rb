@@ -27,7 +27,7 @@ module Providers
           end
 
           it 'lists all involved children\'s names in the application' do
-            expect(involved_children_names.all? { |name| response.body.include? name }).to be true
+            expect(involved_children_names.all? { |name| response.body.include? html_compare(name) }).to be true
           end
         end
       end
