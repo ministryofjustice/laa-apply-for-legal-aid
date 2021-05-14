@@ -1,11 +1,12 @@
-<%= page_template page_title: t('.heading', date: @used_multiple_delegated_functions_on), template: :basic do %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_confirm_multiple_delegated_functions_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
 
-  <%= form_with(
-        model: @form,
-        url: providers_legal_aid_application_confirm_multiple_delegated_functions_path,
-        method: :patch,
-        local: true
-      ) do |form| %>
+  <%= page_template page_title: t('.heading', date: @used_multiple_delegated_functions_on), template: :basic do %>
+
 
       <%= govuk_fieldset_header page_title %>
 
