@@ -32,6 +32,7 @@ module Providers
           end
 
           it 'displays opponent data' do
+            expect(response.body).to include(html_compare(opponent.full_name))
             expect(response.body).to include(opponent.understands_terms_of_court_order_details)
             expect(response.body).to include(opponent.warning_letter_sent_details)
             expect(response.body).to include(opponent.police_notified_details)
@@ -45,6 +46,7 @@ module Providers
         let(:params) do
           {
             application_merits_task_opponent: {
+              full_name: Faker::Name.name,
               understands_terms_of_court_order: sample_opponent.understands_terms_of_court_order.to_s,
               understands_terms_of_court_order_details: sample_opponent.understands_terms_of_court_order_details,
               warning_letter_sent: sample_opponent.warning_letter_sent.to_s,
