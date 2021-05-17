@@ -280,7 +280,7 @@ en:
       opponents:
         show:
           h1-heading: Opponent details
-          opponent_name: Opponent's name
+          opponent_name: What is the opponent's name?
           understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
@@ -612,10 +612,6 @@ en:
             have ongoing access to your client's bank accounts
         radio_no: No, I do not agree
         radio_yes: Yes, I agree
-    opponent_names:
-      show:
-        h1-heading: What is the opponent's name?
-        hint_text: Full name
     other_assets:
       show:
         h1-heading: Which types of assets does your client have?
