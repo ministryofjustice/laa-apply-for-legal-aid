@@ -203,7 +203,6 @@ Rails.application.routes.draw do
       resource :identify_types_of_income, only: %i[show update]
       resource :identify_types_of_outgoing, only: %i[show update]
       resource :opponent, only: %i[show update], controller: 'application_merits_task/opponents'
-      resource :opponent_name, only: %i[show update]
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :merits_task_list, only: %i[show]
       resource :check_merits_answers, only: [:show] do
