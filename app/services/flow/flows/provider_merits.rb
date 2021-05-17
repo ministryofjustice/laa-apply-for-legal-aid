@@ -54,12 +54,16 @@ module Flow
           check_answers: :check_merits_answers
           # :nocov:
         },
-        # TODO: handle a multi-proceeding application without a section 8 proceeding_type. it should return to the task list
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: ->(_) do
+          forward: ->(application) do
             if Setting.allow_multiple_proceedings?
-              :involved_children
+              # TODO: discuss with Devs - should this be a class method on the application?  too much in here seems to be a code smell
+              if application.application_proceeding_types.map { |apt| apt.proceeding_type.ccms_matter_code }.include?('KSEC8')
+                :involved_children
+              else
+                :merits_task_lists
+              end
             else
               :chances_of_success
             end

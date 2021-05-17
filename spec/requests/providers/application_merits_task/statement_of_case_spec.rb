@@ -75,13 +75,22 @@ module Providers
 
         describe 'redirect on success' do
           context 'when the multi-proceeding flag is true' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
-
             before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
 
-            it 'redirects to the next page' do
-              subject
-              expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+            context 'and the application has a section 8 proceeding type' do
+              let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+              end
+            end
+
+            context 'and the application does not have a section 8 proceeding type' do
+              let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+              end
             end
           end
 
