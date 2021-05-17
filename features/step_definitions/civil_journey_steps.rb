@@ -784,6 +784,14 @@ Then(/^I select the second checkbox$/) do
   page.find("input[type='checkbox']", visible: false)[1].click
 end
 
+Then('I check {string}') do |string|
+  check string, visible: false
+end
+
+Then('I pause') do
+  sleep 5
+end
+
 Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's correspondence address")
 end
