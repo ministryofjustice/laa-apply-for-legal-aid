@@ -44,28 +44,63 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
     end
 
-    context 'choose yes' do
-      let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
+    context 'with at least one domestic abuse proceeding type' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
 
-      it 'redirects to the page to add another proceeding type' do
-        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+      context 'choose yes' do
+        let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
+
+        it 'redirects to the page to add another proceeding type' do
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+        end
+      end
+
+      context 'choose no' do
+        let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
+
+        it 'redirects to the delegated functions page' do
+          expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+        end
+      end
+
+      context 'choose nothing' do
+        let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
+
+        it 'stays on the page if there is a validation error' do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
+        end
       end
     end
 
-    context 'choose no' do
-      let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
+    context 'with only Section 8 proceedings selected' do
+      let(:proceeding_type) { create :proceeding_type, code: 'SE003' }
+      let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
 
-      it 'redirects to the delegated functions page' do
-        expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+      context 'choose yes' do
+        let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
+
+        it 'redirects to the page to add another proceeding type' do
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+        end
       end
-    end
 
-    context 'choose nothing' do
-      let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
+      context 'choose no' do
+        let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
 
-      it 'stays on the page if there is a validation error' do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
+        it 'stays on the page and displays an error' do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
+        end
+      end
+
+      context 'choose nothing' do
+        let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
+
+        it 'stays on the page if there is a validation error' do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
+        end
       end
     end
   end
