@@ -5,7 +5,7 @@
       local: true
     ) do |form| %>
 
-  <%= page_template page_title: t('.heading', date: @used_multiple_delegated_functions_on), template: :basic do %>
+  <%= page_template page_title: t('.heading', date: @used_multiple_delegated_functions_on), template: :basic, form: form do %>
 
       <%= govuk_fieldset_header page_title %>
 
