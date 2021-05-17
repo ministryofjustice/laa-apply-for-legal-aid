@@ -102,6 +102,22 @@ Given('I previously created a passported application with no assets and left on 
   login_as @legal_aid_application.provider
 end
 
+Given('I have a passported application with no assets on the {string} page') do |provider_step|
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :without_own_home,
+    :with_proceeding_types,
+    :with_no_other_assets,
+    :with_policy_disregards,
+    :with_passported_state_machine,
+    :provider_entering_means,
+    provider: create(:provider),
+    provider_step: provider_step.downcase
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given('the setting to allow multiple proceedings is enabled') do
   Setting.setting.update!(allow_multiple_proceedings: true)
 end
