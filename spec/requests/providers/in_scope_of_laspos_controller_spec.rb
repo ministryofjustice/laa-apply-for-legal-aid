@@ -8,63 +8,49 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
   before { login_as provider }
 
   describe 'GET /providers/:application_id/in_scope_of_laspo' do
-    subject! do
-      allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-      get providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application)
-    end
+    subject { get providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application) }
 
     context 'allow multiple proceedings setting off' do
-      it 'redirects to new action' do
+      before do
         allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
-        get providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application)
+        subject
+      end
+
+      it 'redirects to new action' do
         expect(response).to redirect_to(next_flow_step)
       end
     end
 
     context 'allow multiple proceedings setting on' do
-      context 'no section 8 proceedings selected' do
-        let(:proceeding_type) { create :proceeding_type, code: 'DA001' }
-        let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
-
-        it 'redirects to new action' do
-          allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-          get providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application)
-          expect(response).to redirect_to(next_flow_step)
-        end
+      before do
+        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
+        subject
       end
 
-      context 'with section 8 proceedings selected' do
-        let(:proceeding_type) { create :proceeding_type, code: 'SE003' }
-        let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
+      it 'returns http success' do
+        expect(response).to have_http_status(:ok)
+      end
 
-        it 'shows the page' do
-          expect(response).to have_http_status(:ok)
-          expect(unescaped_response_body).to include(I18n.t('providers.in_scope_of_laspos.show.page_title'))
-        end
+      it 'displays the page' do
+        expect(unescaped_response_body).to include(I18n.t('providers.in_scope_of_laspos.show.page_title'))
       end
     end
   end
 
   describe 'PATCH /providers/:application_id/in_scope_of_laspo' do
-    context 'with multiple proceedings flag on and section 8 proceedings selected' do
-      subject! do
+    subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: params }
+
+    context 'with multiple proceedings flag on' do
+      before do
         allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-        patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: params
-      end
-
-      context 'form submitted with save as draft button' do
-        let(:params) { { draft_button: 'Save as draft' } }
-
-        it 'redirects to the list of applications' do
-          expect(response).to redirect_to providers_legal_aid_applications_path
-        end
+        subject
       end
 
       context 'choose yes' do
         let(:params) { { legal_aid_application: { in_scope_of_laspo: true } } }
 
         it 'updates the record' do
-          expect(legal_aid_application.in_scope_of_laspo).to eq(true)
+          expect(legal_aid_application.reload.in_scope_of_laspo).to eq(true)
         end
 
         it 'redirects to the next page' do
@@ -76,7 +62,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
         let(:params) { { legal_aid_application: { in_scope_of_laspo: false } } }
 
         it 'updates the record' do
-          expect(legal_aid_application.in_scope_of_laspo).to eq(false)
+          expect(legal_aid_application.reload.in_scope_of_laspo).to eq(false)
         end
 
         it 'redirects to the next page' do

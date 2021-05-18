@@ -49,6 +49,22 @@ FactoryBot.define do
       involvement_type_applicant { true }
     end
 
+    trait :as_prohibited_steps_order do
+      code { 'PH001' }
+      ccms_code { 'SE003' }
+      meaning { 'Prohibited Steps Order-S8' }
+      name { 'prohibited_steps_order_s8' }
+      description { 'to be represented on an application for a prohibited steps order.' }
+      ccms_category_law { 'Family' }
+      ccms_category_law_code { 'MAT' }
+      ccms_matter { 'Section 8 orders' }
+      ccms_matter_code { 'KSEC8' }
+      default_service_level_id { create(:service_level, :with_real_data).id }
+      default_cost_limitation_delegated_functions { 1350 }
+      default_cost_limitation_substantive { 25_000 }
+      involvement_type_applicant { true }
+    end
+
     trait :with_scope_limitations do
       after(:create) do |proceeding_type|
         create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
