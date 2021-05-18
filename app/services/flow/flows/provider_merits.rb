@@ -9,7 +9,13 @@ module Flow
           check_answers: :check_merits_answers
         },
         involved_children: {
-          path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
+          path: ->(application) do
+            if application.involved_children.any?
+              urls.providers_legal_aid_application_has_other_involved_children_path(application)
+            else
+              urls.new_providers_legal_aid_application_involved_child_path(application)
+            end
+          end,
           forward: :has_other_involved_children
         },
         has_other_involved_children: {

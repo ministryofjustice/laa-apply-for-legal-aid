@@ -79,9 +79,21 @@ module Providers
 
             context 'and the application has a section 8 proceeding type' do
               let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
-              it 'redirects to the next page' do
-                subject
-                expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+
+              context 'and involved children exist' do
+                before { create :involved_child, legal_aid_application: legal_aid_application }
+
+                it 'redirects to the next page' do
+                  subject
+                  expect(response).to redirect_to providers_legal_aid_application_has_other_involved_children_path(legal_aid_application)
+                end
+              end
+
+              context 'and no involved children exist' do
+                it 'redirects to the next page' do
+                  subject
+                  expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+                end
               end
             end
 

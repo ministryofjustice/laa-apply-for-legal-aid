@@ -5,7 +5,7 @@ module TaskListHelper
       'providers/merits_task_lists/task_list_item',
       name: name,
       status: status,
-      url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name),
+      url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application),
       proceeding_merits_task: ccms_code.present?,
       tag_class: tag_class
     )
@@ -13,14 +13,19 @@ module TaskListHelper
 
   private
 
-  def _task_url(name)
-    prefix = case name
-             when :children_application
-               'new_'
-             else
-               ''
-             end
+  def _task_url(name, legal_aid_application)
+    prefix = _task_prefix(name, legal_aid_application)
     "#{prefix}providers_legal_aid_application_#{url_fragment(name)}".to_sym
+  end
+
+  def _task_prefix(name, legal_aid_application)
+    return 'new_' if name.eql?(:children_application) && application_has_no_involved_children?(legal_aid_application)
+
+    ''
+  end
+
+  def application_has_no_involved_children?(legal_aid_application)
+    legal_aid_application.involved_children.empty?
   end
 
   def proceeding_task_url(name, application, ccms_code)
