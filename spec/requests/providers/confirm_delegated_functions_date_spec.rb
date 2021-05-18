@@ -200,23 +200,6 @@ RSpec.describe Providers::ConfirmDelegatedFunctionsDatesController, type: :reque
         expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
       end
 
-      context 'when nothing selected' do
-        let(:default_params) { { confirm_delegated_functions_date: '' } }
-
-        it 'still updates the application proceeding types delegated functions dates' do
-          skip ' OUTSTANDING: Need to work out what this should do'
-          application_proceeding_types.each do |type|
-            expect(type.used_delegated_functions_reported_on).to be_nil
-            expect(type.used_delegated_functions_on).to be_nil
-          end
-        end
-
-        it 'does not have a delegated function scope limitation' do
-          skip ' OUTSTANDING: Need to work out what this should do'
-          expect(application_proceeding_types.first.delegated_functions_scope_limitation).to be_nil
-        end
-      end
-
       context 'when date not entered' do
         let(:form_params) { update_proceeding_type_param_dates(day: '', month: '', year: '') }
 
