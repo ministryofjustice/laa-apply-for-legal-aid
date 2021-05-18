@@ -1,0 +1,51 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_confirm_multiple_delegated_functions_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+
+  <%= page_template page_title: t('.heading', date: @used_multiple_delegated_functions_on), template: :basic, form: form do %>
+
+      <%= govuk_fieldset_header page_title %>
+
+      <span class="govuk-hint govuk-!-margin-top-0">
+        <%= t '.search_help_example' %>
+      </span>
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Proceeding</th>
+            <th scope="col" class="govuk-table__header">Date</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @legal_aid_application.application_proceedings_by_name.each do |type| %>
+            <% if type.application_proceeding_type[:used_delegated_functions_on] %>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header" id="proceeding_type_<%= type.code %>"><%= type[:meaning] %></th>
+                <td class="govuk-table__cell"><%= type.application_proceeding_type[:used_delegated_functions_on] %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% scope = @multiple_dates_check ? 'plural' : 'singular' %>
+
+      <% options = [
+              OpenStruct.new(value: true, label: t(".#{scope}.details_correct")),
+              OpenStruct.new(value: false, label: t(".#{scope}.details_incorrect"))
+             ] %>
+
+      <%= form.govuk_collection_radio_buttons :confirm_multiple_delegated_functions_date,
+                                            options,
+                                            :value,
+                                            :label,
+                                            legend: { text: '' } %>
+
+      <div class="govuk-!-padding-bottom-4"></div>
+      <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

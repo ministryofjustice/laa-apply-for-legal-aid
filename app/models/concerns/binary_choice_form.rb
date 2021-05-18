@@ -4,11 +4,11 @@ class BinaryChoiceForm
   validate :input_present?
 
   class << self
-    def call(journey:, radio_buttons_input_name:, action: :show, form_params: nil)
+    def call(journey:, radio_buttons_input_name:, action: :show, form_params: nil, error: nil)
       attr_accessor radio_buttons_input_name.to_sym
 
       define_input_conditional(radio_buttons_input_name, form_params) if form_params
-      new(journey, radio_buttons_input_name, action, form_params)
+      new(journey, radio_buttons_input_name, action, form_params, error)
     end
 
     def define_input_conditional(input_name, form_params)
@@ -18,11 +18,12 @@ class BinaryChoiceForm
     end
   end
 
-  def initialize(journey, radio_buttons_input_name, action, form_params)
+  def initialize(journey, radio_buttons_input_name, action, form_params, error)
     super(form_params)
     @journey = journey
     @input_name = radio_buttons_input_name
     @action = action
+    @error = error || 'error'
   end
 
   private
@@ -40,6 +41,6 @@ class BinaryChoiceForm
   end
 
   def error_message
-    I18n.t("#{@journey.to_s.pluralize}.#{@input_name.to_s.pluralize}.#{@action}.error")
+    I18n.t("#{@journey.to_s.pluralize}.#{@input_name.to_s.pluralize}.#{@action}.#{@error}")
   end
 end
