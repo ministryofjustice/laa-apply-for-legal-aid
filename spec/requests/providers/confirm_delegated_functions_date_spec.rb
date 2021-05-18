@@ -128,7 +128,6 @@ RSpec.describe Providers::ConfirmDelegatedFunctionsDatesController, type: :reque
       end
 
       it 'displays error' do
-        skip 'Need the error box to show at the top of the delegated functions date page'
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
@@ -157,7 +156,6 @@ RSpec.describe Providers::ConfirmDelegatedFunctionsDatesController, type: :reque
       end
 
       it 'displays error' do
-        skip 'OUTSTANDING: Display error box at top of page'
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
@@ -171,7 +169,6 @@ RSpec.describe Providers::ConfirmDelegatedFunctionsDatesController, type: :reque
       end
 
       it 'displays error' do
-        skip 'OUTSTANDING: Display error box at top of page'
         expect(response.body).to include('govuk-error-summary')
         expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
@@ -228,7 +225,6 @@ RSpec.describe Providers::ConfirmDelegatedFunctionsDatesController, type: :reque
         end
 
         it 'displays error' do
-          skip 'OUTSTANDING: Display error box at top of page'
           expect(response.body).to include('govuk-error-summary')
           expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
         end

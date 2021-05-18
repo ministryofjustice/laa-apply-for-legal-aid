@@ -92,6 +92,7 @@ en:
               date_not_in_range: "The date you used delegated functions for %{meaning} cannot be before %{months}"
               date_is_in_the_future: "The date you used delegated functions for %{meaning} must be in the past"
               date_invalid: "Enter the date you used delegated functions for %{meaning}"
+              blank: Select a response
         aggregated_cash_income:
           credits:
             attributes:

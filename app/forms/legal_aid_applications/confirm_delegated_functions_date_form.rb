@@ -105,7 +105,7 @@ module LegalAidApplications
     def validate_nothing_selected
       return if confirm_delegated_functions_date.present?
 
-      errors.add(:delegated_functions, I18n.t("#{error_base_path}.nothing_selected"))
+      errors.add(:confirm_delegated_functions_date, I18n.t("#{error_base_path}.blank"))
     end
 
     def validate_proceeding_date
