@@ -97,7 +97,7 @@ module LegalAidApplications
     end
 
     def delegated_functions_reported_date(date)
-      Time.zone.today unless date.nil? || date_over_a_month_ago?(date)
+      Time.zone.today unless date.nil?
     end
 
     def date_over_a_month_ago?(date)
