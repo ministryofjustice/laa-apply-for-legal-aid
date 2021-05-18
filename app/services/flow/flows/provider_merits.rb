@@ -96,7 +96,7 @@ module Flow
         attempts_to_settle: {
           forward: :merits_task_lists
         },
-        involved_child: {
+        linked_children: {
           forward: :merits_task_lists
         },
         merits_task_lists: {

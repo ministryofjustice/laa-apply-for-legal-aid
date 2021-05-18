@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Providers
   module ProceedingMeritsTask
-    RSpec.describe InvolvedChildController, type: :request do
+    RSpec.describe LinkedChildrenController, type: :request do
       let!(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types_inc_section8 }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
@@ -15,8 +15,8 @@ module Providers
         login
       end
 
-      describe 'GET /providers/merits_task_list/:merits_task_list_id/involved_child' do
-        subject { get providers_merits_task_list_involved_child_path(application_proceeding_type) }
+      describe 'GET /providers/merits_task_list/:merits_task_list_id/linked_children' do
+        subject { get providers_merits_task_list_linked_children_path(application_proceeding_type) }
 
         context 'when the provider is not authenticated' do
           let(:login) { nil }
@@ -37,14 +37,14 @@ module Providers
         end
       end
 
-      describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/involved_child' do
+      describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children' do
         let(:params) do
           involved_children_names.index_with { |_k| 'true' }
         end
 
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
 
-        subject { patch providers_merits_task_list_involved_child_path(application_proceeding_type), params: params }
+        subject { patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: params }
 
         context 'all selected' do
           it 'adds involved children to the proceeding type' do
@@ -78,7 +78,7 @@ module Providers
 
         context 'previous selections' do
           let(:update) do
-            patch providers_merits_task_list_involved_child_path(application_proceeding_type), params: new_params
+            patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: new_params
           end
 
           before { subject }

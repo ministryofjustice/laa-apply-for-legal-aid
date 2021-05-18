@@ -1,6 +1,6 @@
 module Providers
   module ProceedingMeritsTask
-    class InvolvedChildController < ProviderBaseController
+    class LinkedChildrenController < ProviderBaseController
       def show
         application_proceeding_type
         involved_children
