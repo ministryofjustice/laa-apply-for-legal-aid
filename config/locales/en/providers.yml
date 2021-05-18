@@ -232,6 +232,9 @@ en:
           heading: Client details
         section_proceeding:
           heading: Proceedings
+        section_laspo:
+          heading: Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)
+          question: Are the Section 8 proceedings you're applying for in scope of LASPO?
         section_delegated:
           heading: Delegated functions
         section_emergency:

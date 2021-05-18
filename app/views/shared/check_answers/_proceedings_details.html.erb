@@ -13,7 +13,7 @@
             name: :"#{proceeding.name}_used_delegated_functions_on",
             url: :show_blank_action,
             question: "#{t(".proceeding")} #{i + 1}",
-            answer: t("providers.used_multiple_delegated_functions.show.#{proceeding.name}"),
+            answer: proceeding.meaning,
             read_only: read_only
           ) %>
     <% end %>
