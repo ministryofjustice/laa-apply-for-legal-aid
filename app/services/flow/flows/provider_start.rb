@@ -53,7 +53,8 @@ module Flow
         },
         in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
-          forward: :used_multiple_delegated_functions
+          forward: :used_multiple_delegated_functions,
+          check_answers: :check_provider_answers
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },

@@ -212,6 +212,9 @@ en:
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
           proceeding: What does your client want legal aid for?
+        section_laspo:
+          heading: LASPO
+          question: Are the Section 8 proceedings you're applying for in scope of LASPO?
       delegated_functions:
         not_used: Not used
         section_delegated:

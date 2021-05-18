@@ -158,6 +158,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
     Then I should be on a page showing 'Proceeding 2 Harassment - injunction'
     Then I should be on a page showing 'Proceeding 3 Occupation order'
+    Then I should not see 'Legal Aid, Sentencing and Punishment of Offenders Act'
     Then I should be on a page showing 'Delegated functions'
     Then I should be on a page showing 'FGM Protection Order Not used'
     Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %b %Y' format

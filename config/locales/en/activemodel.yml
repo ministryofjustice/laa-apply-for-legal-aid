@@ -286,7 +286,7 @@ en:
               providers:
                 blank: Select yes if there are restrictions that prevent your client from selling or borrowing against their assets
             in_scope_of_laspo:
-              blank: Tell us if the Section 8 proceedings you're applying for are in scope of LASPO
+              blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             open_banking_consents:
               providers:
                 blank: Select yes if you agree
