@@ -47,13 +47,13 @@ module Flow
             if has_other_proceeding
               :proceedings_types
             else
-              application.section_8_proceedings? ? :in_scope_of_laspo : :used_multiple_delegated_functions
+              application.section_8_proceedings? ? :in_scope_of_laspos : :used_multiple_delegated_functions
             end
           end
         },
-        in_scope_of_laspo: {
+        in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
-          forward: ->(_) { :used_multiple_delegated_functions }
+          forward: :used_multiple_delegated_functions
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },

@@ -44,7 +44,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :scheduled_mailings, dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
   has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
-  has_one :in_scope_of_laspo, dependent: :destroy
+  # has_one :in_scope_of_laspo, dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref

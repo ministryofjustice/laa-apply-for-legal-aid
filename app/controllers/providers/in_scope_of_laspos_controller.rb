@@ -8,22 +8,18 @@ module Providers
     end
 
     def update
-      return continue_or_draft if draft_selected?
-
       @form = LegalAidApplications::InScopeOfLaspoForm.new(form_params)
 
-      if save_continue_or_draft(@form)
-        go_forward
-      else
-        render :show
-      end
+      render :show unless save_continue_or_draft(@form)
     end
 
     private
 
     def form_params
       merge_with_model(legal_aid_application) do
-        params.permit(:in_scope_of_laspo)
+        return {} unless params[:legal_aid_application]
+
+        params.require(:legal_aid_application).permit(:in_scope_of_laspo)
       end
     end
   end
