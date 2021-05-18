@@ -1,6 +1,7 @@
 class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include Discard::Model
+  include DelegatedFunctions
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
@@ -213,56 +214,9 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def lowest_prospect_of_success
-    # pp application_proceeding_types.first.chances_of_success # this is currently nil, so prospects_of_success_rank doesn't work
     min_rank = application_proceeding_types.map(&:chances_of_success).map(&:prospect_of_success_rank).min
     ProceedingMeritsTask::ChancesOfSuccess.rank_and_prettify(min_rank)
   end
-
-  def used_delegated_functions?
-    application_proceeding_types.any?(&:used_delegated_functions?)
-  end
-
-  def used_delegated_functions_on
-    earliest_delegated_functions_date
-  end
-
-  def used_delegated_functions_reported_on
-    application_proceeding_types.using_delegated_functions.first&.used_delegated_functions_reported_on
-  end
-
-  def used_delegated_functions_within_year
-    earliest_delegated_functions_date&.between?(12.months.ago - 1.day, 1.month.ago)
-    # TODO: check with D-Fab
-    # This was originally comparing the rported on date, which i don't think can be right
-    # earliest_delegated_functions_reported_date&.between?(12.months.ago - 1.day, 1.month.ago)
-  end
-
-  ##############################
-  # DELEGATED FUNCTIONS
-  # References to earliest delegated functions can be accessed off any application proceeding type
-
-  def proceeding_with_earliest_delegated_functions
-    application_proceeding_types.using_delegated_functions.first
-  end
-
-  def earliest_delegated_functions_date
-    proceeding_with_earliest_delegated_functions&.used_delegated_functions_on
-  end
-
-  def earliest_delegated_functions_reported_date
-    # This returns the reported_at date of the APT with the earliest used_delegated_functions_on
-    # which is not always the same as the earliest used_delegated_functions_reported_on
-    proceeding_with_earliest_delegated_functions&.used_delegated_functions_reported_on
-  end
-
-  # Next method possibly not required
-  # def earliest_delegated_functions_reported_date
-  #   application_proceeding_types.using_delegated_functions.first&.used_delegated_functions_reported_on
-  # end
-
-  # def proceeding_with_earliest_delegated_functions
-  #   earliest_delegated_functions_date && proceedings.find_by(used_delegated_functions_on: earliest_delegated_functions_date)
-  # end
 
   def parent_transaction_types
     ids = transaction_types.map(&:parent_or_self).map(&:id)

@@ -46,10 +46,6 @@ module LegalAidApplications
       save_proceeding_records
     end
 
-    # def proceeding_with_earliest_delegated_functions
-    #   @proceeding_with_earliest_delegated_functions ||= proceeding_types_by_name.first.application_proceeding_type.proceeding_with_earliest_delegated_functions
-    # end
-
     private_class_method :populate_attr_accessors
 
     private

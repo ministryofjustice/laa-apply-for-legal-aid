@@ -37,10 +37,6 @@ class ApplicationProceedingType < ApplicationRecord
     self.lead_proceeding = true if proceedings.empty?
   end
 
-  # def proceeding_with_earliest_delegated_functions
-  #   legal_aid_application.earliest_delegated_functions_date && proceedings.find_by(used_delegated_functions_on: legal_aid_application.earliest_delegated_functions_date)
-  # end
-
   def used_delegated_functions?
     used_delegated_functions_on.present?
   end

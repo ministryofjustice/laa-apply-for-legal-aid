@@ -25,10 +25,6 @@ module Providers
       @form ||= LegalAidApplications::ConfirmDelegatedFunctionsDateForm.call(application_proceedings_by_name)
     end
 
-    # def proceeding_types
-    #   @proceeding_types ||= legal_aid_application.proceeding_types
-    # end
-
     def application_proceedings_by_name
       @application_proceedings_by_name ||= legal_aid_application.application_proceedings_by_name
     end
@@ -56,16 +52,6 @@ module Providers
 
       SubstantiveApplicationDeadlineCalculator.call earliest_delegated_functions_date
     end
-
-    # def add_delegated_scope_limitations
-    #   proceeding_types.each do |proceeding_type|
-    #     LegalFramework::AddAssignedScopeLimitationService.call(legal_aid_application, proceeding_type.id, :delegated)
-    #   end
-    # end
-
-    # def remove_delegated_scope_limitations
-    #   application_proceeding_types.each(&:remove_default_delegated_functions_scope_limitation)
-    # end
 
     def submit_application_reminder
       return if legal_aid_application.awaiting_applicant?
