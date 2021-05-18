@@ -63,7 +63,7 @@ RSpec.describe LegalAidApplications::ConfirmDelegatedFunctionsDateForm, type: :f
 
     context 'when nothing selected' do
       let(:params) { { confirm_delegated_functions_date: '' } }
-      let(:error_locale) { 'used_delegated_functions_on.nothing_selected' }
+      let(:error_locale) { 'used_delegated_functions_on.blank' }
 
       it 'is invalid' do
         expect(subject).to be_invalid
