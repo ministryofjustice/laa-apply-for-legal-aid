@@ -354,6 +354,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Fill in the Applicant employment information after negative benefit check result and used delegated functions
     Given I start the application with a negative benefit check result
+    And I used delegated functions
     Then I should be on a page showing "We need to check your client's financial eligibility"
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"

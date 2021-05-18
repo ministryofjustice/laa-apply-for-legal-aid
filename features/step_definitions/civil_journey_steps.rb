@@ -305,8 +305,7 @@ Given('I start the application with a negative benefit check result') do
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :applicant_details_checked,
-    :with_negative_benefit_check_result,
-    used_delegated_functions: true
+    :with_negative_benefit_check_result
   )
 
   login_as @legal_aid_application.provider
@@ -324,8 +323,7 @@ Given('I start the application with a negative benefit check result and no used 
     :with_proceeding_types,
     :with_non_passported_state_machine,
     :applicant_details_checked,
-    :with_negative_benefit_check_result,
-    used_delegated_functions: false
+    :with_negative_benefit_check_result
   )
 
   login_as @legal_aid_application.provider
@@ -369,7 +367,12 @@ Given('I start the journey as far as the start of the vehicle section') do
 end
 
 Given('I used delegated functions') do
-  @legal_aid_application.update!(used_delegated_functions: true)
+  @legal_aid_application.application_proceeding_types.each do |apt|
+    apt.update!(used_delegated_functions_on: Date.current,
+                used_delegated_functions_reported_on: Date.current)
+    apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
+    apt.save!
+  end
 end
 
 Given('I complete the journey as far as check your answers') do
@@ -393,10 +396,8 @@ Given('I complete the journey as far as check your answers') do
     :legal_aid_application,
     :at_entering_applicant_details,
     :with_proceeding_types,
-    applicant: applicant,
-    used_delegated_functions_on: 1.day.ago
+    applicant: applicant
   )
-
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
@@ -424,10 +425,10 @@ Given('I complete the passported journey as far as check your answers') do
     :legal_aid_application,
     :with_passported_state_machine,
     :at_entering_applicant_details,
-    :with_substantive_scope_limitation,
-    applicant: applicant,
-    used_delegated_functions_on: 1.day.ago
+    :with_proceeding_types,
+    applicant: applicant
   )
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
@@ -456,8 +457,7 @@ Given('I complete the non-passported journey as far as check your answers') do
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
     :with_substantive_scope_limitation,
-    applicant: applicant,
-    used_delegated_functions_on: 1.day.ago
+    applicant: applicant
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
