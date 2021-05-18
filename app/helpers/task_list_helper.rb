@@ -5,7 +5,8 @@ module TaskListHelper
       'providers/merits_task_lists/task_list_item',
       name: name,
       status: status,
-      url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application),
+      url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application, status),
+      # url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application),
       proceeding_merits_task: ccms_code.present?,
       tag_class: tag_class
     )
@@ -13,15 +14,10 @@ module TaskListHelper
 
   private
 
-  def _task_url(name, legal_aid_application)
-    prefix = _task_prefix(name, legal_aid_application)
-    "#{prefix}providers_legal_aid_application_#{url_fragment(name)}".to_sym
-  end
-
-  def _task_prefix(name, legal_aid_application)
-    return 'new_' if name.eql?(:children_application) && application_has_no_involved_children?(legal_aid_application)
-
-    ''
+  def _task_url(name, legal_aid_application, status)
+    prefix = application_has_no_involved_children?(legal_aid_application) && name.eql?(:children_application) ? 'new_' : ''
+    url = "#{prefix}providers_legal_aid_application_#{new_url_fragment(name, status)}_path".to_sym
+    __send__(url, legal_aid_application)
   end
 
   def application_has_no_involved_children?(legal_aid_application)
@@ -35,6 +31,11 @@ module TaskListHelper
   end
 
   def url_fragment(name)
+    I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
+  end
+
+  def new_url_fragment(name, status)
+    name = 'children_application_complete' if status.eql?(:complete) && name.eql?(:children_application)
     I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
   end
 

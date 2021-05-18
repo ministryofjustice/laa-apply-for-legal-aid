@@ -528,6 +528,7 @@ en:
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
           children_application: involved_child
+          children_application_complete: has_other_involved_children
           children_proceeding: linked_children
           attempts_to_settle: attempts_to_settle
     merits_reports:
