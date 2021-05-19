@@ -29,7 +29,6 @@ module Flow
           }
         },
         remove_involved_child: {
-          path: ->(application, child) { urls.providers_legal_aid_application_remove_involved_child_path(application, child) },
           forward: ->(application) {
             if application.involved_children.count.positive?
               :has_other_involved_children
