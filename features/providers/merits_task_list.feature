@@ -23,10 +23,8 @@ Feature: Merits task list
     When I enter the 'told_on' date of 9 days ago
     And I enter the 'occurred_on' date of 10 days ago
     And I click 'Save and continue'
-    Then I should be on the 'opponent_name' page showing "What is the opponent's name?"
-    When I enter full_name 'Bob Smith'
-    And I click 'Save and continue'
     Then I should be on the 'opponent' page showing 'Opponent details'
+    When I enter full_name 'Bob Smith'
     When I choose option "Application merits task opponent understands terms of court order True field"
     And I choose option "Application merits task opponent warning letter sent True field"
     And I choose option "Application merits task opponent police notified True field"
