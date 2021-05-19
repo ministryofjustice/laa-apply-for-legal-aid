@@ -91,11 +91,7 @@ module LegalAidApplications
     end
 
     def delegated_functions_reported_date(date)
-      Time.zone.today unless date.nil? || date_over_a_month_ago?(date)
-    end
-
-    def date_over_a_month_ago?(date)
-      date.before?(Time.zone.today - 1.month + 1.day)
+      Time.zone.today unless date.nil?
     end
 
     def draft_nothing_selected?

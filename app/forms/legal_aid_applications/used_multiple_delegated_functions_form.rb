@@ -97,9 +97,9 @@ module LegalAidApplications
       Time.zone.today unless date.nil?
     end
 
-    def date_over_a_month_ago?(date)
-      date.before?(Time.zone.today - 1.month + 1.day)
-    end
+    # def date_over_a_month_ago?(date)
+    #   date.before?(Time.zone.today - 1.month + 1.day)
+    # end
 
     def checkbox_for?(category)
       __send__(category) == 'true'

@@ -29,13 +29,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
     context 'two of the thee proceeding types have delegated functions' do
       it 'updates each application proceeding type' do
-        application_proceeding_types.each_with_index do |apt, i|
-          if i == pt_without_df
-            expect(df_dates(apt)).to eq [nil, nil]
-          else
-            expect(df_dates(apt)).to eq [used_delegated_functions_on, used_delegated_functions_reported_on]
-          end
-        end
+        expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+        expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+                                                                                                         used_delegated_functions_reported_on])
       end
 
       context 'date is just within 12 months ago' do
@@ -46,13 +42,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         end
 
         it 'updates the application types with no reported on date' do
-          application_proceeding_types.each_with_index do |apt, i|
-            if i == pt_without_df
-              expect(df_dates(apt)).to eq [nil, nil]
-            else
-              expect(df_dates(apt)).to eq [used_delegated_functions_on, Date.current]
-            end
-          end
+          expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+          expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
         end
       end
     end
@@ -195,12 +186,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     end
 
     it 'updates each application proceeding type if they are entered' do
-      application_proceeding_types.each_with_index do |type, i|
-        next if i == pt_without_df
-
-        expect(type.used_delegated_functions_reported_on).to eq(used_delegated_functions_reported_on)
-        expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on)
-      end
+      expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+      expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+                                                                                                       used_delegated_functions_reported_on])
     end
 
     context 'when nothing selected' do
