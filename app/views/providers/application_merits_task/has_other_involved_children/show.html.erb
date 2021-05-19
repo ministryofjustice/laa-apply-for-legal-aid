@@ -9,7 +9,7 @@
                     form: form do %>
 
     <% if @legal_aid_application.involved_children.count > 0 %>
-    <%= govuk_fieldset_header(size: 'l') { t('.existing', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}")} %>
+    <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.involved_children.count, 'child')}") %></h1>
     <div class="govuk-summary-list">
       <table class="govuk-table">
         <thead class="govuk-table__head">
@@ -45,7 +45,7 @@
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            legend: {text: t(".add_another"), size: 'l', tag: 'h1'} %>
+                                            legend: {text: t(".add_another"), size: 'l', tag: 'h2'} %>
 
       <%= next_action_buttons(form: form) %>
   <% end %>
