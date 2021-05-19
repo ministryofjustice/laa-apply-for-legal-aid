@@ -49,6 +49,7 @@ module Flow
         },
         proceedings_before_the_courts: {
           # :nocov:
+          # TODO: Remove everything connected to proceedings_before_the_courts it's a stub of legacy code
           path: ->(application) do
             apt = application.lead_application_proceeding_type
             urls.providers_merits_task_list_proceedings_before_the_court_path(apt)
