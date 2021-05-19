@@ -48,9 +48,9 @@ module Providers
       @earliest_delegated_functions_date ||= legal_aid_application.earliest_delegated_functions_date
     end
 
-    def earliest_delegated_functions_reported_date
-      @earliest_delegated_functions_reported_date ||= legal_aid_application.earliest_delegated_functions_reported_date
-    end
+    # def earliest_delegated_functions_reported_date
+    #   @earliest_delegated_functions_reported_date ||= legal_aid_application.earliest_delegated_functions_reported_date
+    # end
 
     def update_scope_limitations
       earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
