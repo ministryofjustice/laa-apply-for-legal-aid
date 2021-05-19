@@ -28,31 +28,22 @@
 <section class="print-no-break">
 
   <%= check_answer_change_link(
-        name: :opponent_name_change,
-        url: providers_legal_aid_application_opponent_name_path(@legal_aid_application),
-        question: t('.items.opponent_name_title'),
-        read_only: read_only
-      ) %>
-
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
-          name: :opponent_name,
-          question: t('.items.opponent_name'),
-          answer: opponent.full_name,
-          read_only: read_only
-        ) %>
-  </dl>
-</section>
-
-<div class="govuk-!-padding-bottom-6"></div>
-<section class="print-no-break">
-
-  <%= check_answer_change_link(
         name: :opponent_details,
         url: providers_legal_aid_application_opponent_path(@legal_aid_application),
         question: t('.opponent-heading'),
         read_only: read_only
       ) %>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_no_link(
+          name: :full_name,
+          question: t('.items.full_name'),
+          answer: opponent.full_name,
+          read_only: read_only
+        ) %>
+  </dl>
+
+  <%= render 'shared/check_answers/section_break' unless opponent.full_name %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_no_link(

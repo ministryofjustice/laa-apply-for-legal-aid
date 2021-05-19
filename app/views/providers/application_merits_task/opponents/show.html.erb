@@ -6,8 +6,16 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
-            back_link: { path: providers_legal_aid_application_opponent_name_path(@legal_aid_application) },
+            back_link: { path: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) },
             form: form) do %>
+
+    <%= form.govuk_text_field(
+          :full_name,
+          label: { text: t('.opponent_name'), size: 'm' },
+          class: 'govuk-input govuk-input--width-20'
+        ) %>
+
+    <div class="govuk-!-padding-bottom-2"></div>
 
     <%
       questions = %i[understands_terms_of_court_order warning_letter_sent].map do |attr|

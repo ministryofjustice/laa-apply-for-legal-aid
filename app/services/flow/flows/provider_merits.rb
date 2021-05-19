@@ -37,11 +37,6 @@ module Flow
         # :nocov:
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
-          forward: :opponent_names,
-          check_answers: :check_merits_answers
-        },
-        opponent_names: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_name_path(application) },
           forward: :opponents,
           check_answers: :check_merits_answers
         },

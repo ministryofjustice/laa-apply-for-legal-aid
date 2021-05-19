@@ -15,6 +15,10 @@ module Opponents
       %i[police_notified_details_true police_notified_details_false]
     end
 
+    validates :full_name,
+              presence: true,
+              unless: :draft?
+
     validates :understands_terms_of_court_order, presence: true, unless: :draft?
     validates(
       :understands_terms_of_court_order_details,

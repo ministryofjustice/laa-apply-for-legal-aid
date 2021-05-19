@@ -193,8 +193,7 @@ en:
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?
           statement_of_case: Provide a statement of case
-          opponent_name_title: Opponent name
-          opponent_name: Name
+          full_name: Name
           understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
