@@ -27,13 +27,13 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       application_proceeding_types.reload
     end
 
-    context 'two of the trhee proceeding types have delegated functions' do
+    context 'two of the thee proceeding types have delegated functions' do
       it 'updates each application proceeding type' do
         application_proceeding_types.each_with_index do |apt, i|
           if i == pt_without_df
             expect(df_dates(apt)).to eq [nil, nil]
           else
-            expect(df_dates(apt)).to eq [used_delegated_functions_on - i.day, used_delegated_functions_reported_on]
+            expect(df_dates(apt)).to eq [used_delegated_functions_on, used_delegated_functions_reported_on]
           end
         end
       end
@@ -50,7 +50,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
             if i == pt_without_df
               expect(df_dates(apt)).to eq [nil, nil]
             else
-              expect(df_dates(apt)).to eq [used_delegated_functions_on - i.day, Date.current]
+              expect(df_dates(apt)).to eq [used_delegated_functions_on, Date.current]
             end
           end
         end
@@ -199,7 +199,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         next if i == pt_without_df
 
         expect(type.used_delegated_functions_reported_on).to eq(used_delegated_functions_reported_on)
-        expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
+        expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on)
       end
     end
 
@@ -261,14 +261,14 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   def update_proceeding_type_param_dates(month: nil)
     params = default_params
     application_proceedings_by_name.each_with_index do |type, i|
-      type_params = i == pt_without_df ? df_not_used_params(type) : df_used_params(type, month, i)
+      type_params = i == pt_without_df ? df_not_used_params(type) : df_used_params(type, month)
       params = type_params.merge(params)
     end
     params
   end
 
-  def df_used_params(type, month, index)
-    adjusted_date = used_delegated_functions_on - index.days
+  def df_used_params(type, month)
+    adjusted_date = used_delegated_functions_on
     {
       "#{type.name}": 'true',
       "#{type.name}_used_delegated_functions_on_3i": adjusted_date.day.to_s,
