@@ -39,7 +39,9 @@ module Providers
     end
 
     def delegated_functions_used_over_month_ago?
-      earliest_delegated_functions_date && !earliest_delegated_functions_reported_date
+      return false if earliest_delegated_functions_date.nil?
+
+      earliest_delegated_functions_date < 1.month.ago
     end
 
     def earliest_delegated_functions_date
