@@ -62,12 +62,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(application) do
             if Setting.allow_multiple_proceedings?
-              # TODO: discuss with Devs - should this be a class method on the application?  too much in here seems to be a code smell
-              if application.application_proceeding_types.map { |apt| apt.proceeding_type.ccms_matter_code }.include?('KSEC8')
-                :involved_children
-              else
-                :merits_task_lists
-              end
+              application.section_8_proceedings? ? :involved_children : :merits_task_lists
             else
               :chances_of_success
             end
