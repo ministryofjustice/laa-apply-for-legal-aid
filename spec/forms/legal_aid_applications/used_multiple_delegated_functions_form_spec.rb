@@ -7,7 +7,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
            proceeding_types_count: proceeding_type_count
   end
   let(:proceeding_type_count) { 3 }
-  let(:pt_without_df) { rand(0..(proceeding_type_count - 1)) }
+  let(:pt_without_df) { 1 }
   let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
   let(:application_proceedings_by_name) { legal_aid_application.application_proceedings_by_name }
   let(:today) { Time.zone.today }
