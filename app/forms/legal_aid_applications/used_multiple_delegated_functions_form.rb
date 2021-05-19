@@ -32,9 +32,6 @@ module LegalAidApplications
       proceeding_types_by_name.each do |proceeding|
         date = proceeding.application_proceeding_type.used_delegated_functions_on
         next unless date
-
-        __send__("#{proceeding.name}=", 'true')
-        __send__("#{proceeding.name}_used_delegated_functions_on=", date)
       end
     end
 
