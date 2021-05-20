@@ -656,6 +656,10 @@ Then('I select a proceeding type and continue') do
   find('#proceeding-list').first(:button, 'Select and continue').click
 end
 
+Then('I choose a proceeding type {string} radio button') do |radio_button_name|
+  choose(radio_button_name, allow_label_click: true)
+end
+
 Then('I select proceeding type {int}') do |index|
   find('#proceeding-list').all(:button, 'Select')[index - 1].click
 end

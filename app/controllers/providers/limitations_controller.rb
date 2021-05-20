@@ -3,6 +3,7 @@ module Providers
     include PreDWPCheckVisible
 
     def show
+      @form = LegalAidApplications::EmergencyCostOverrideForm.new(model: legal_aid_application)
       update_df_dates
       legal_aid_application.enter_applicant_details! unless legal_aid_application.entering_applicant_details?
     end

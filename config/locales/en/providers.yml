@@ -486,6 +486,9 @@ en:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings
         cost_heading: Cost limitations
+        cost_override_question: Do you want to request a higher cost limit?
+        enter_cost_limit: Enter a new emergency cost limit
+        enter_cost_reasons: Tell us why you need a higher cost limit
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
         form_of_service: "Form of service: "

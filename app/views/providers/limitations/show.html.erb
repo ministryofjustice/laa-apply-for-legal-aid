@@ -70,7 +70,7 @@
       ) %>
 =======
 <% if Setting.allow_multiple_proceedings? %>
-  <%= if @legal_aid_application.used_delegated_functions? %>
+  <% if @legal_aid_application.used_delegated_functions? %>
     <%= render partial: 'providers/limitations/multi_proceeding_types_with_df' %>
   <% else %>
     <%= render partial: 'providers/limitations/multi_proceeding_types' %>
