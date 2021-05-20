@@ -1,0 +1,47 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_limitations_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+    <h2 class="govuk-heading-l">
+      <%= t('.proceedings_heading') %>
+    </h2>
+
+    <dl class="govuk-summary-list govuk-!-padding-bottom-4">
+      <%= render partial: 'providers/limitations/proceeding_type',
+                 collection: @legal_aid_application.application_proceedings_by_name,
+                 locals: {translation_path: 'providers.limitations.show'} %>
+    </dl>
+
+    <h2 class="govuk-heading-l">
+      <%= t('.cost_heading') %>
+    </h2>
+    <p class="govuk-body">
+      <p><%= t('.emergency_certificate') %>: <strong><%= gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></strong></p>
+      <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
+                                            legend: { size: 'xl', tag: 'h1', text: page_title },
+                                            hint: {text: t('.detail_of_payments_to_include')}) do %>
+        <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: {text: t('generic.yes')} ) do %>
+          <%= form.govuk_text_field(
+                :payment_remaining,
+                label: {text: t('.enter_amount_left_to_pay')},
+                value: number_to_currency_or_original_string(@form.payment_remaining),
+                prefix_text: t('currency.gbp'),
+                width: 'one-third',
+                ) %>
+      <% end %>
+      <%= form.govuk_radio_button(:emergency_cost_override, false, label: {text:  t('generic.no')}) %>
+    <% end %>
+
+      <div class="govuk-!-padding-bottom-1"></div>
+      <p><%= t('.substantive_certificate') %>: <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
+    </p>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form
+        ) %>
+  <% end %>
+<% end %>

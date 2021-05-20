@@ -458,7 +458,31 @@ en:
         page_title: "Do you have evidence that your client receives %{passporting_benefit}?"
         hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
     limitations:
-      show:
+      legacy_proceeding_types:
+        h1-heading: What you're applying for
+        proceedings_heading: Proceedings
+        cost_heading: Cost limitations
+        substantive_certificate: Substantive certificate
+        emergency_certificate: Emergency certificate
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        incurrable_costs: "Costs you can incur: "
+        allowable_work: "Work you can do: "
+        if_delegated_used: Covered under an emergency certificate # can be removed when multiple proceedings flag removed
+        substantive_certificate_covered: Covered under a substantive certificate  # can be removed when multiple proceedings flag removed
+      multi_proceeding_types:
+        h1-heading: What you're applying for
+        proceedings_heading: Proceedings
+        cost_heading: Cost limitations
+        substantive_certificate: Substantive certificate
+        emergency_certificate: Emergency certificate
+        form_of_service: "Form of service: "
+        form_of_service_type: Full representation
+        incurrable_costs: "Costs you can incur: "
+        allowable_work: "Work you can do: "
+        if_delegated_used: Covered under an emergency certificate # can be removed when multiple proceedings flag removed
+        substantive_certificate_covered: Covered under a substantive certificate  # can be removed when multiple proceedings flag removed
+      multi_proceeding_types_with_df:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings
         cost_heading: Cost limitations
