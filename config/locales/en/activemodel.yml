@@ -297,6 +297,12 @@ en:
               greater_than_or_equal_to: Mortgage amount must be 0 or more
               not_a_number: Mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
+            emergency_cost_override:
+              blank: Select yes if you want to request a higher cost limit
+            emergency_cost_requested:
+              blank: Enter a new emergency cost limit
+            emergency_cost_reasons:
+              blank: Tell us why you need a higher cost limit
             own_home:
               citizens:
                 blank: Select yes if you own the home you live in
