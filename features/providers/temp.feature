@@ -1,5 +1,5 @@
 Feature: Checking ccms means does NOT auto grant
-  @javascript
+  @javascript @vcr
   Scenario: I am able to create a passported application with Cap Contribs > £3k and with restrictions
     Given the setting to manually review all cases is enabled
     And I have a passported application with no assets on the "savings_and_investments" page
@@ -23,7 +23,5 @@ Feature: Checking ccms means does NOT auto grant
     And I should be on a page showing 'Money not in a bank account'
     And I should be on a page showing '£4,000'
     Then I click 'Save and continue'
-    Then I bind and pry
-    Then I should be on a page showing "We need to check if"
-    And I should be on a page showing "pay towards legal aid"
-    And I pause 
+    And I should be on a page showing "may need to pay towards legal aid"
+    And I should be on a page showing "We’ve calculated that your client should pay £1,000 from their disposable capital."
