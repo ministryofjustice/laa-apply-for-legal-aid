@@ -21,7 +21,8 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(unescaped_response_body).to include(I18n.t('providers.limitations.show.h1-heading'))
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.h1-heading'))
+        #  test uses the multi_proceeding_types_with_df partial as all partials share the same wording
       end
     end
 
@@ -33,7 +34,10 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       it 'shows the correct text' do
-        expect(unescaped_response_body).to include(I18n.t('providers.limitations.show.substantive_certificate_covered'))
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.substantive_certificate_covered'))
+        # test uses the multi_proceeding_types_with_df translation as all partials share the same wording
+        # should we set up a bunch of tests to check the wording of the different options for this page?
+        # only multi_proceeding_types_with_df has wording that doesn't appear on other pages
       end
 
       it 'does not have a details section' do
@@ -49,7 +53,8 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       it 'puts scope limitations in a details section' do
-        expect(parsed_response_body.css('details').text).to include(I18n.t('providers.limitations.show.substantive_certificate'))
+        expect(parsed_response_body.css('details').text).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.substantive_certificate'))
+        #  test uses the multi_proceeding_types_with_df partial as all partials share the same wording
       end
     end
 

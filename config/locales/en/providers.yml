@@ -485,12 +485,13 @@ en:
       multi_proceeding_types_with_df:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings
-        cost_heading: Cost limitations
+        cost_heading: Cost limits
         cost_override_question: Do you want to request a higher cost limit?
         enter_cost_limit: Enter a new emergency cost limit
         enter_cost_reasons: Tell us why you need a higher cost limit
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
+        default_limit_is: The default cost limit is
         form_of_service: "Form of service: "
         form_of_service_type: Full representation
         incurrable_costs: "Costs you can incur: "
