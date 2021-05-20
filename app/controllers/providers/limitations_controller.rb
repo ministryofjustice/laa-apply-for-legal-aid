@@ -9,7 +9,9 @@ module Providers
     end
 
     def update
-      continue_or_draft
+      @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
+      render :show unless save_continue_or_draft(@form)
+      # continue_or_draft
     end
 
     private
@@ -26,6 +28,12 @@ module Providers
       apt = legal_aid_application.application_proceeding_types.first
       apt.update!(used_delegated_functions_on: legal_aid_application.used_delegated_functions_on,
                   used_delegated_functions_reported_on: legal_aid_application.used_delegated_functions_reported_on)
+    end
+
+    def form_params
+      merge_with_model(legal_aid_application) do
+        params.require(:legal_aid_application).permit(:emergency_cost_override, :emergency_cost_requested, :emergency_cost_reasons)
+      end
     end
   end
 end

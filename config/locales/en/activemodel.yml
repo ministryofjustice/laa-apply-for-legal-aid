@@ -301,6 +301,7 @@ en:
               blank: Select yes if you want to request a higher cost limit
             emergency_cost_requested:
               blank: Enter a new emergency cost limit
+              not_a_number: Cost limit must be an amount of money, like 2,500
             emergency_cost_reasons:
               blank: Tell us why you need a higher cost limit
             own_home:

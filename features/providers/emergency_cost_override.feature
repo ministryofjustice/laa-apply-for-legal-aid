@@ -25,4 +25,28 @@ Feature: Emergency cost override
     When I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     And I should see 'Do you want to request a higher cost limit?'
-
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
+    When I click link "Back"
+    Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Cost limits"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Select yes if you want to request a higher cost limit"
+### Do we need to test each validation here? i.e skip the value first, then the reason
+#   TEST 1 - validate text area
+#    When I choose 'Yes'
+#    And I enter a emergency cost requested '5000'
+#    And I click 'Save and continue'
+#    Then I should be on a page showing "Tell us why you need a higher cost limit"
+#    TEST 2 - validate first text/value field
+#    When I choose 'Yes'
+#    And I enter legal aid application emergency cost reasons field 'Reason entered but no value submitted'
+#    And I click 'Save and continue'
+#    Then I should be on a page showing "Enter a new emergency cost limit"
+#    TEST 3 - Happy Path no validation
+    When I choose 'Yes'
+    And I enter a emergency cost requested '5000'
+    And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Check your answers"
