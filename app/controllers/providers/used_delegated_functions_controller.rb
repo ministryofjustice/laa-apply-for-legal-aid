@@ -52,9 +52,7 @@ module Providers
     end
 
     def update_scope_limitations
-      # update_substantive_application_deadline
       earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
-      # submit_application_reminder if !draft_selected? && earliest_delegated_functions_date && earliest_delegated_functions_date > Date.current - 1.month
     end
 
     def add_delegated_scope_limitations

@@ -68,7 +68,7 @@ module LegalAidApplications
 
         proceeding.application_proceeding_type.update(
           used_delegated_functions_on: delegated_functions_date,
-          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
+          used_delegated_functions_reported_on: Time.zone.today
         )
       end
     end
@@ -88,14 +88,6 @@ module LegalAidApplications
         prefix: :"#{name}_used_delegated_functions_on_",
         suffix: :gov_uk
       )
-    end
-
-    def delegated_functions_reported_date(date)
-      Time.zone.today unless date.nil? || date_over_a_month_ago?(date)
-    end
-
-    def date_over_a_month_ago?(date)
-      date.before?(Time.zone.today - 1.month + 1.day)
     end
 
     def draft_nothing_selected?
