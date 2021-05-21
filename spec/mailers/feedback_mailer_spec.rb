@@ -23,6 +23,14 @@ RSpec.describe FeedbackMailer, type: :mailer do
           end
         end
 
+        context 'when application state is not a pre_dwp_check state' do
+          let(:application) { create :application, :assessment_submitted }
+
+          it 'does not have a status of pre dwp check' do
+            expect(mail.govuk_notify_personalisation[:application_status]).not_to eq 'pre-dwp-check'
+          end
+        end
+
         context 'passported' do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
