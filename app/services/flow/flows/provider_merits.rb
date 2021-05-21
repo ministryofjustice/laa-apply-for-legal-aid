@@ -2,7 +2,7 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps # rubocop:disable Metrics/ClassLength
       STEPS = {
-        # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting chance_of_success
+        # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting merits
         start_chances_of_successes: {
           path: ->(application) { urls.providers_legal_aid_application_start_chances_of_success_path(application) },
           forward: :date_client_told_incidents,
