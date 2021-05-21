@@ -3,11 +3,20 @@ require 'rails_helper'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe HasOtherInvolvedChildrenController, type: :request do
-      let(:application) { create :legal_aid_application }
+      let(:application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
       let(:provider) { application.provider }
       let(:child1) { create :involved_child, legal_aid_application: application }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               legal_aid_application: application,
+               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
+      end
 
-      before { login_as provider }
+      before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
+        login_as provider
+      end
 
       subject { get providers_legal_aid_application_has_other_involved_children_path(application) }
 
@@ -34,8 +43,10 @@ module Providers
             legal_aid_application_id: application.id
           }
         end
+        let(:draft_button) { { draft_button: 'Save as draft' } }
+        let(:button_clicked) { {} }
 
-        subject { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params }
+        subject { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params.merge(button_clicked) }
 
         context 'Wants to add more children' do
           let(:radio_button) { 'true' }
@@ -43,6 +54,15 @@ module Providers
           it 'redirects to new involved child' do
             subject
             expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(application))
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'sets the task to complete' do
+              subject
+              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+            end
           end
         end
 
@@ -53,6 +73,15 @@ module Providers
             subject
             expect(response).to redirect_to(providers_legal_aid_application_date_client_told_incident_path(application))
           end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'sets the task to complete' do
+              subject
+              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+            end
+          end
         end
 
         context 'neither yes nor no selected' do
@@ -60,6 +89,15 @@ module Providers
           it 're-renders the show page' do
             subject
             expect(response.body).to include('Do you need to add another child?')
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            end
           end
         end
       end
