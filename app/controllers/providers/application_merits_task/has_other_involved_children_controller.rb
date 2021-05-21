@@ -13,10 +13,6 @@ module Providers
 
       private
 
-      def update_task(level, task)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(level, task) if task_list_should_update?
-      end
-
       def task_list_should_update?
         application_has_task_list? && form.valid?
       end
