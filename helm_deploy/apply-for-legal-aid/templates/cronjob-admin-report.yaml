@@ -1,4 +1,3 @@
-{{- $schedule := include "apply-for-legal-aid.cronjob-schedule-daily-admin-report" . -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
