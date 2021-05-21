@@ -93,6 +93,15 @@ module Providers
           expect(opponent.bail_conditions_set_details).to eq(sample_opponent.bail_conditions_set_details)
         end
 
+        context 'when the multi-proceeding flag is true' do
+          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+          it 'does sets the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+          end
+        end
+
         it 'redirects to the next page' do
           subject
           expect(response).to redirect_to(flow_forward_path)
@@ -111,6 +120,15 @@ module Providers
             subject
             expect(response).to have_http_status(:ok)
           end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            end
+          end
         end
 
         context 'when save as draft selected' do
@@ -126,7 +144,7 @@ module Providers
 
             it 'does not set the task to complete' do
               subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
             end
           end
         end
