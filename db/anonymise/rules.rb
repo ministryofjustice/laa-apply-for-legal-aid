@@ -19,6 +19,10 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     username: -> { Faker::Internet.username },
     email: -> { Faker::Internet.email }
   },
+  admin_reports: {
+    submitted_applications_report: -> {},
+    nonpassported_applications_report: -> {}
+  },
   applicants: {
     first_name: -> { Faker::Name.first_name },
     last_name: -> { Faker::Name.last_name },
