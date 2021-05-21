@@ -101,6 +101,32 @@ module Providers
             end
           end
         end
+
+        context 'Form submitted using Save as draft button' do
+          let(:submit_button) { { draft_button: 'Save as draft' } }
+
+          subject do
+            patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: params.merge(submit_button)
+          end
+
+          it "redirects provider to provider's applications page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
+
+          it 'sets the application as draft' do
+            expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :complete/)
+            end
+          end
+        end
       end
     end
   end

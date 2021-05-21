@@ -9,8 +9,8 @@ module Providers
       def update
         application_proceeding_type
         involved_children.each { |child| update_record(child[:id], child[:name]) }
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :children_proceeding)
-        go_forward
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :children_proceeding) unless draft_selected?
+        continue_or_draft
       end
 
       private

@@ -43,8 +43,6 @@ module Providers
           { proceeding_merits_task_chances_of_success: { success_likely: success_likely } }
         end
         let(:submit_button) { {} }
-        # let(:next_url) { providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
-        # let(:next_url) { providers_legal_aid_application_check_merits_answers_path(legal_aid_application) }
 
         subject do
           post(
@@ -75,6 +73,11 @@ module Providers
           it 'redirects to the next page' do
             subject
             expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+          end
+
+          it 'updates the task list' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
         end
 
@@ -142,6 +145,15 @@ module Providers
 
           it 'sets the application as draft' do
             expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
+            end
           end
 
           it 'updates the model' do

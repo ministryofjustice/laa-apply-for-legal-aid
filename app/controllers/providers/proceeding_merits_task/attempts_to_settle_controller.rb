@@ -9,7 +9,7 @@ module Providers
       def update
         @application_proceeding_type = application_proceeding_type
         @form = Providers::ProceedingMeritsTask::AttemptsToSettleForm.new(form_params)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :attempts_to_settle)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :attempts_to_settle) unless draft_selected?
         render :show unless save_continue_or_draft(@form)
       end
 
