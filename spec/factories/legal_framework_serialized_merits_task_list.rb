@@ -9,7 +9,8 @@ FactoryBot.define do
           tasks: {
             latest_incident_details: [],
             opponent_details: [],
-            children_application: []
+            children_application: [],
+            statement_of_case: []
           }
         },
         proceeding_types: [
