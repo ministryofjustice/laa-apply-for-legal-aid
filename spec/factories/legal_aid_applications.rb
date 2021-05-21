@@ -320,15 +320,15 @@ FactoryBot.define do
       own_home { 'mortgage' }
     end
 
-    trait :with_no_increased_cost_limit do
-      emergency_cost_override { false }
-    end
-
-    trait :with_increased_cost_limit do
-      emergency_cost_override { true }
-      emergency_cost_requested { rand(1...5_000.0).round(2) }
-      emergency_cost_reasons { Faker::Lorem.paragraph }
-    end
+    # trait :with_no_increased_cost_limit do
+    #   emergency_cost_override { false }
+    # end
+    #
+    # trait :with_increased_cost_limit do
+    #   emergency_cost_override { true }
+    #   emergency_cost_requested { rand(1...5_000.0).round(2) }
+    #   emergency_cost_reasons { Faker::Lorem.paragraph }
+    # end
 
     trait :with_own_home_owned_outright do
       own_home { 'owned_outright' }

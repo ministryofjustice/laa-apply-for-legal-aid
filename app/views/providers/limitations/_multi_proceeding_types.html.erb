@@ -13,9 +13,6 @@
     <%= t('.cost_heading') %>
   </h2>
   <p class="govuk-body">
-    <% if @legal_aid_application.used_delegated_functions? %>
-    <p><%= t('.emergency_certificate') %>: <strong><%= gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></strong></p>
-  <% end %>
   <div class="govuk-!-padding-bottom-1"></div>
   <p><%= t('.substantive_certificate') %>: <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
   </p>
