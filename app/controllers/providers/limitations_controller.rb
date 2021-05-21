@@ -9,9 +9,12 @@ module Providers
     end
 
     def update
-      @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
-      render :show unless save_continue_or_draft(@form)
-      # continue_or_draft
+      if Setting.allow_multiple_proceedings? && @legal_aid_application.used_delegated_functions?
+        @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
+        render :show unless save_continue_or_draft(@form)
+      else
+        continue_or_draft
+      end
     end
 
     private

@@ -164,6 +164,10 @@ en:
         first_name: First name
         last_name: Last name
         nino: National Insurance number
+      emergency_costs:
+        request_higher_limit: Do you want to request a higher cost limit?
+        new_cost_limit: New emergency cost limit
+        new_limit_reasons: Why you need a higher cost limit
       income_details:
         income:
           benefits: Benefits

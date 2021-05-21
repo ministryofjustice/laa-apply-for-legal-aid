@@ -238,6 +238,8 @@ en:
           heading: Covered under an emergency certificate
         section_substantive:
           heading: Covered under a substantive certificate
+        emergency_cost_limit: Emergency cost limit
+
     applicant_bank_accounts:
       show:
         heading: Your client’s bank accounts
@@ -470,6 +472,10 @@ en:
         allowable_work: "Work you can do: "
         if_delegated_used: Covered under an emergency certificate # can be removed when multiple proceedings flag removed
         substantive_certificate_covered: Covered under a substantive certificate  # can be removed when multiple proceedings flag removed
+        default_limit_is: The default cost limit is
+        cost_override_question: Do you want to request a higher cost limit?
+        enter_cost_limit: Enter a new emergency cost limit
+        enter_cost_reasons: Tell us why you need a higher cost limit
       multi_proceeding_types:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings

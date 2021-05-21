@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Providers::LimitationsController, type: :request do
+  # let!(:proceeding_type) { create :proceeding_type }
+  # let(:legal_aid_application) { create :legal_aid_application, :with_substantive_scope_limitation, proceeding_types: [proceeding_type] }
+  # let(:provider) { legal_aid_application.provider }
+
   let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
   let(:proceeding_type) { legal_aid_application.proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
@@ -21,8 +25,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(unescaped_response_body).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.h1-heading'))
-        #  test uses the multi_proceeding_types_with_df partial as all partials share the same wording
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.legacy_proceeding_types.h1-heading'))
       end
     end
 
@@ -34,10 +37,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       it 'shows the correct text' do
-        expect(unescaped_response_body).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.substantive_certificate_covered'))
-        # test uses the multi_proceeding_types_with_df translation as all partials share the same wording
-        # should we set up a bunch of tests to check the wording of the different options for this page?
-        # only multi_proceeding_types_with_df has wording that doesn't appear on other pages
+        expect(unescaped_response_body).to include(I18n.t('providers.limitations.legacy_proceeding_types.substantive_certificate_covered'))
       end
 
       it 'does not have a details section' do
@@ -53,10 +53,20 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       it 'puts scope limitations in a details section' do
-        expect(parsed_response_body.css('details').text).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.substantive_certificate'))
-        #  test uses the multi_proceeding_types_with_df partial as all partials share the same wording
+        expect(parsed_response_body.css('details').text).to include(I18n.t('providers.limitations.multi_proceeding_types.substantive_certificate'))
+      end
+
+      context 'when delegated functions have been used' do
+        let!(:legal_aid_application1) { create :legal_aid_application, :with_substantive_scope_limitation, :with_proceeding_types, :with_delegated_functions }
+
+        it 'shows the correct text' do
+          puts 1111
+          pp legal_aid_application1.used_delegated_functions?
+          expect(unescaped_response_body).to include(I18n.t('providers.limitations.multi_proceeding_types_with_df.cost_override_question'))
+        end
       end
     end
+
 
     context '#pre_dwp_check?' do
       it 'returns true' do
@@ -66,14 +76,33 @@ RSpec.describe Providers::LimitationsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:id/limitations' do
-    subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
+    subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params: params) }
 
     before do
       login_as provider
     end
 
-    it 'redirects to next page' do
-      expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+    context 'with the correct params' do
+      let(:params) do
+        { legal_aid_application: { emergency_cost_override: false } }
+      end
+
+      it 'redirects to next page' do
+        expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+      end
     end
+
+    # context 'with incorrect params' do
+    #   let(:params) do
+    #     { legal_aid_application: { emergency_cost_override: nil } }
+    #   end
+    #
+    #   it 're-renders the form with the validation errors' do
+    #     subject
+    #     expect(unescaped_response_body).to include('There is a problem')
+    #     expect(response.body).to include('govuk-error-summary')
+    #     expect(unescaped_response_body).to include('Please select')
+    #   end
+    # end
   end
 end
