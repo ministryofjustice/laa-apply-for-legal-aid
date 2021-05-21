@@ -7,11 +7,7 @@ module Providers
 
       def update
         @form = Incidents::ToldOnForm.new(form_params)
-        # TODO: Remove SafeNavigators after MultiProceeding Feature flag is turned on
-        # Until then, some applications will not have a legal_framework_merits_task_list
-        # Afterwards - everything should have one!
-        legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :latest_incident_details)
-        render :show unless save_continue_or_draft(@form)
+        render :show unless update_task_save_continue_or_draft(:application, :latest_incident_details)
       end
 
       private
