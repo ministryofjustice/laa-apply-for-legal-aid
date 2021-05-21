@@ -50,11 +50,27 @@ RSpec.describe 'LegalAidApplication factory' do
 
   describe 'with_proceeding_types' do
     context 'proceeding type count not specified' do
+      let(:laa) { create :legal_aid_application, :with_proceeding_types }
+      let(:apt) { laa.application_proceeding_types.first }
+      let(:proceeding_type) { laa.proceeding_types.first }
+
       it 'creates an application with one proceeding type with two scope limitations' do
-        laa = create :legal_aid_application, :with_proceeding_types
         expect(laa.proceeding_types.count).to eq 1
         expect(ProceedingType.count).to eq 1
         expect(ScopeLimitation.count).to eq 2
+      end
+
+      it 'creates assigns the default substantive scope limitation to the application_proceeding_type' do
+        expect(proceeding_type.default_substantive_scope_limitation).not_to be_nil
+        expect(proceeding_type.default_delegated_functions_scope_limitation).not_to be_nil
+        default_sl = proceeding_type.default_substantive_scope_limitation
+        expect(apt.assigned_scope_limitations.size).to eq 1
+        expect(apt.assigned_scope_limitations.first).to eq default_sl
+      end
+
+      it 'creates application proceeding types with nil df dates' do
+        expect(apt.used_delegated_functions_on).to be_nil
+        expect(apt.used_delegated_functions_reported_on).to be_nil
       end
     end
 
@@ -71,10 +87,62 @@ RSpec.describe 'LegalAidApplication factory' do
       it 'creates a substantive and df scope limitation for each proceeding type' do
         expect(laa.application_proceeding_types.count).to eq 3
         laa.application_proceeding_types.each do |apt|
-          expect(apt.assigned_scope_limitations.count).to eq 2
+          expect(apt.assigned_scope_limitations.count).to eq 1
           expect(apt.substantive_scope_limitation).not_to be_nil
-          expect(apt.delegated_functions_scope_limitation).not_to be_nil
+          expect(apt.delegated_functions_scope_limitation).to be_nil
         end
+      end
+    end
+
+    context 'explicit proceeding types' do
+      let(:pt1) { create :proceeding_type, :with_real_data, :with_scope_limitations }
+      let(:pt2) { create :proceeding_type, :as_occupation_order, :with_scope_limitations }
+      let(:laa) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2] }
+      let(:apts) { laa.application_proceeding_types }
+
+      it 'has two apt records pointing to the explicitly specified proceeding types' do
+        expect(apts.size).to eq 2
+        expect(apts.map(&:proceeding_type)).to match_array [pt1, pt2]
+      end
+
+      it 'creates nil df dates on all apt records' do
+        expect(apts.map(&:used_delegated_functions_on)).to eq [nil, nil]
+        expect(apts.map(&:used_delegated_functions_reported_on)).to eq [nil, nil]
+      end
+
+      it 'links the default substantive scope limitation of each proceeding type to the relevant apt' do
+        apts.each do |apt|
+          pt = apt.proceeding_type
+          expect(apt.substantive_scope_limitation).to eq pt.default_substantive_scope_limitation
+        end
+      end
+
+      it 'does not link the delegated functions default scope limitation' do
+        expect(apts.map(&:delegated_functions_scope_limitation)).to eq [nil, nil]
+      end
+    end
+  end
+
+  describe ':with proceeding types, :with_delegated_functions' do
+    let(:laa) do
+      create :legal_aid_application,
+             :with_proceeding_types,
+             :with_delegated_functions,
+             proceeding_types_count: 3,
+             delegated_functions_date: [5.days.ago, 4.days.ago]
+    end
+    let(:apts) { laa.application_proceeding_types }
+
+    it 'creates three apt records with df dates of 5 days ago, 4 days ago and today' do
+      expect(apts.size).to eq 3
+      expect(apts.map(&:used_delegated_functions_on)).to match_array [5.days.ago.to_date, 4.days.ago.to_date, Date.current]
+      expect(apts.map(&:used_delegated_functions_reported_on)).to match_array [Date.current, Date.current, Date.current]
+    end
+
+    it 'links the default delegated_functions scope limitation to the relevant apt' do
+      laa.reload
+      apts.each do |apt|
+        expect(apt.delegated_functions_scope_limitation).to eq apt.proceeding_type.default_delegated_functions_scope_limitation
       end
     end
   end
@@ -240,11 +308,11 @@ RSpec.describe 'LegalAidApplication factory' do
         expect(pt1.default_delegated_functions_scope_limitation).to eq sl2
       end
 
-      it 'assigns both scope limtations to the application proceeding type' do
+      it 'assigns both scope limitations to the application proceeding type' do
         expect(apt.assigned_scope_limitations).to match_array [sl1, sl2]
       end
 
-      it 'assigns the substantive scope limtitation to the application_proceeding_type' do
+      it 'assigns the substantive scope limitation to the application_proceeding_type' do
         expect(apt.substantive_scope_limitation).to eq sl1
       end
 
@@ -270,11 +338,11 @@ RSpec.describe 'LegalAidApplication factory' do
         expect(pt1.default_delegated_functions_scope_limitation).to be_nil
       end
 
-      it 'assigns the substantive scope limtations to the application proceeding type' do
+      it 'assigns the substantive scope limitations to the application proceeding type' do
         expect(apt.assigned_scope_limitations).to match_array [sl1]
       end
 
-      it 'assigns the substantive scope limtitation to the application_proceeding_type' do
+      it 'assigns the substantive scope limitations to the application_proceeding_type' do
         expect(apt.substantive_scope_limitation).to eq sl1
       end
 

@@ -42,15 +42,20 @@ module CCMS
         let!(:chances_of_success) do
           create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
         end
+
+        before do
+          legal_aid_application.reload
+        end
+
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
-        context 'save to a temporary file' do
-          it 'creates a file' do
-            filename = Rails.root.join('tmp/generated_non_passported_ccms_payload.xml')
-            File.open(filename, 'w') { |f| f.puts xml }
-            expect(File.exist?(filename)).to be true
-          end
-        end
+        # context 'save to a temporary file' do
+        #   it 'creates a file' do
+        #     filename = Rails.root.join('tmp/generated_non_passported_ccms_payload.xml')
+        #     File.open(filename, 'w') { |f| f.puts xml }
+        #     expect(File.exist?(filename)).to be true
+        #   end
+        # end
 
         context 'entity CLINATIONAL' do
           before { savings_amount.update! national_savings: 1234 }

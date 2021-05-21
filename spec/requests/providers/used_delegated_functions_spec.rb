@@ -1,6 +1,8 @@
 require 'rails_helper'
 RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+  let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
+  let(:application_proceedings_by_name) { legal_aid_application.application_proceedings_by_name }
   let(:login_provider) { login_as legal_aid_application.provider }
 
   before do
@@ -39,72 +41,80 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/used_delegated_functions' do
-    let!(:proceeding_type) { create(:proceeding_type) }
-    let!(:default_substantive_scope_limitation) do
-      create :scope_limitation,
-             :substantive_default,
-             joined_proceeding_type: proceeding_type,
-             meaning: 'Default substantive SL'
-    end
-    let!(:default_delegated_function_scope_limitation) do
-      create :scope_limitation,
-             :delegated_functions_default,
-             joined_proceeding_type: proceeding_type,
-             meaning: 'Default delegated functions SL'
-    end
     let!(:legal_aid_application) do
       create :legal_aid_application,
-             :with_passported_state_machine,
-             :with_proceeding_type_and_scope_limitations,
-             this_proceeding_type: proceeding_type,
-             substantive_scope_limitation: default_substantive_scope_limitation
+             :with_proceeding_types,
+             :with_delegated_functions
+      # :with_delegated_functions_scope_limitation
     end
-
-    let(:used_delegated_functions_on) { rand(20).days.ago.to_date }
-    let(:day) { used_delegated_functions_on.day }
-    let(:month) { used_delegated_functions_on.month }
-    let(:year) { used_delegated_functions_on.year }
-    let(:used_delegated_functions) { true }
+    let(:today) { Time.zone.today }
+    let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
+    let(:default_params) { { used_delegated_functions: 'true' } }
+    let(:form_params) { update_proceeding_type_param_dates }
     let(:params) do
       {
-        legal_aid_application: {
-          'used_delegated_functions_on(3i)': day.to_s,
-          'used_delegated_functions_on(2i)': month.to_s,
-          'used_delegated_functions_on(1i)': year.to_s,
-          used_delegated_functions: used_delegated_functions.to_s
-        }
+        legal_aid_applications_used_delegated_functions_form: form_params
       }
     end
     let(:button_clicked) { {} }
     let(:mocked_email_service) { instance_double(SubmitApplicationReminderService, send_email: {}) }
+    let(:mock_deadline) { today + 20.days }
+    let(:earliest_df) { application_proceeding_types.first.proceeding_with_earliest_delegated_functions }
+    let(:meaning) { legal_aid_application.proceeding_types.first.meaning }
 
     before do
+      allow(SubstantiveApplicationDeadlineCalculator).to receive(:call).with(an_instance_of(Date)).and_return(mock_deadline)
       allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
       )
+      application_proceeding_types.reload
     end
 
-    it 'updates the application' do
-      legal_aid_application.reload
-      expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
-      expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+    it 'updates the application proceeding types delegated functions dates' do
+      application_proceeding_types.each_with_index do |type, i|
+        expect(type.used_delegated_functions_reported_on).to eq(today)
+        expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
+      end
+    end
+
+    it 'has a delegated function scope limitation' do
+      expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
+    end
+
+    it 'has a substantive scope limitation' do
+      expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
     end
 
     it 'redirects to the limitations page' do
       expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
     end
 
-    it 'calls the submit application reminder mailer service' do
-      expect(SubmitApplicationReminderService).to have_received(:new).with(legal_aid_application)
+    it 'updates the substantive application deadline' do
+      legal_aid_application.reload
+      expect(legal_aid_application.substantive_application_deadline_on).to eq(mock_deadline)
     end
 
-    context 'used delegated functions date is between 1 month and 12 months ago' do
-      let(:used_delegated_functions_on) { rand(35..365).days.ago.to_date }
+    context 'email reminder service' do
+      context 'within a month ago' do
+        let(:past) { today - 28.days }
+        let(:form_params) { update_proceeding_type_param_dates(day: past.day, month: past.month, year: past.year) }
 
-      it 'redirects to the delegated_functions_date page' do
-        expect(response).to redirect_to(providers_legal_aid_application_delegated_functions_date_path(legal_aid_application))
+        it 'calls the submit application reminder mailer service' do
+          expect(SubmitApplicationReminderService).to have_received(:new).with(legal_aid_application)
+        end
+      end
+
+      context 'over a month ago' do
+        let(:past) { today - 1.month }
+        let(:form_params) { update_proceeding_type_param_dates(day: past.day, month: past.month, year: past.year) }
+        let(:mock_deadline) { Date.yesterday }
+
+        it 'does not call the submit application reminder mailer service' do
+          expect(legal_aid_application.reload.substantive_application_deadline_on).to eq mock_deadline
+          expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
+        end
       end
     end
 
@@ -114,7 +124,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
     end
 
     context 'when date incomplete' do
-      let(:month) { '' }
+      let(:form_params) { update_proceeding_type_param_dates(month: '') }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -122,14 +132,12 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
     end
 
     context 'date is not in range' do
-      let(:year) { 2018 }
-      let(:month) { 10 }
-      let(:day) { 1 }
+      let(:form_params) { update_proceeding_type_param_dates(day: 20, month: 1, year: 2018) }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -139,36 +147,25 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         hint_text_date = Time.zone.now.ago(12.months).strftime('%d %m %Y')
 
         subject
-        translation_path = 'activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_in_range'
-        expect(response.body).to include(I18n.t(translation_path, months: hint_text_date))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", meaning: meaning, months: hint_text_date))
       end
     end
 
     context 'when date contains alpha characters' do
-      let(:params) do
-        {
-          legal_aid_application: {
-            'used_delegated_functions_on(3i)': day.to_s,
-            'used_delegated_functions_on(2i)': '5s',
-            'used_delegated_functions_on(1i)': year.to_s,
-            used_delegated_functions: used_delegated_functions.to_s
-          }
-        }
-      end
+      let(:form_params) { update_proceeding_type_param_dates(month: '5s') }
+
       it 'renders show' do
         expect(response).to have_http_status(:ok)
       end
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
     end
 
     context 'when date not entered' do
-      let(:day) { '' }
-      let(:month) { '' }
-      let(:year) { '' }
+      let(:form_params) { update_proceeding_type_param_dates(day: '', month: '', year: '') }
 
       it 'renders show' do
         expect(response).to have_http_status(:ok)
@@ -176,22 +173,27 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.blank'))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
       end
     end
 
     context 'when not using delegated functions' do
-      let(:used_delegated_functions) { false }
+      let(:default_params) { { used_delegated_functions: 'false' } }
 
       it 'updates the application' do
-        legal_aid_application.reload
-        expect(legal_aid_application.used_delegated_functions_on).to be_nil
-        expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        expect(legal_aid_application.application_proceeding_types.first.assigned_scope_limitations).to eq [default_substantive_scope_limitation]
+        expect(application_proceeding_types.first.used_delegated_functions?).to be false
+        application_proceeding_types.each do |type|
+          expect(type.used_delegated_functions_reported_on).to be_nil
+          expect(type.used_delegated_functions_on).to be_nil
+        end
       end
 
       it 'redirects to the limitations page' do
         expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
+      end
+
+      it 'does not have a delegated function scope limitation' do
+        expect(application_proceeding_types.first.delegated_functions_scope_limitation).to be_nil
       end
     end
 
@@ -202,17 +204,42 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'updates the application' do
-        legal_aid_application.reload
-        expect(legal_aid_application.used_delegated_functions_on).to eq(used_delegated_functions_on)
-        expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
-        apt = legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: legal_aid_application.lead_proceeding_type)
-
-        expect(apt.assigned_scope_limitations).to match_array [default_substantive_scope_limitation, default_delegated_function_scope_limitation]
+      it 'updates the application proceeding types delegated functions dates' do
+        application_proceeding_types.each_with_index do |type, i|
+          expect(type.used_delegated_functions_reported_on).to eq(today)
+          expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
+        end
       end
 
-      context 'when date incomplete' do
-        let(:month) { '' }
+      it 'has a delegated function scope limitation' do
+        expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
+      end
+
+      it 'has a substantive scope limitation' do
+        expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
+      end
+
+      it 'does not call the submit application reminder mailer service' do
+        expect(SubmitApplicationReminderService).not_to have_received(:new).with(legal_aid_application)
+      end
+
+      context 'when nothing selected' do
+        let(:default_params) { { used_delegated_functions: '' } }
+
+        it 'still updates the application proceeding types delegated functions dates' do
+          application_proceeding_types.each do |type|
+            expect(type.used_delegated_functions_reported_on).to be_nil
+            expect(type.used_delegated_functions_on).to be_nil
+          end
+        end
+
+        it 'does not have a delegated function scope limitation' do
+          expect(application_proceeding_types.first.delegated_functions_scope_limitation).to be_nil
+        end
+      end
+
+      context 'when date not entered' do
+        let(:form_params) { update_proceeding_type_param_dates(day: '', month: '', year: '') }
 
         it 'renders show' do
           expect(response).to have_http_status(:ok)
@@ -220,25 +247,31 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
         it 'displays error' do
           expect(response.body).to include('govuk-error-summary')
-          expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.used_delegated_functions_on.date_not_valid'))
-        end
-      end
-
-      context 'when date not entered' do
-        let(:day) { '' }
-        let(:month) { '' }
-        let(:year) { '' }
-
-        it "redirects provider to provider's applications page" do
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-
-        it 'updates the application' do
-          legal_aid_application.reload
-          expect(legal_aid_application.used_delegated_functions_on).to be_nil
-          expect(legal_aid_application.used_delegated_functions).to eq(used_delegated_functions)
+          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: 'Meaning'))
         end
       end
     end
+  end
+
+  def update_proceeding_type_param_dates(day: nil, month: nil, year: nil)
+    params = default_params
+    application_proceedings_by_name.each_with_index do |type, i|
+      adjusted_date = used_delegated_functions_on - i.day
+      type_params = proceeding_type_date_params(type, adjusted_date, day, month, year)
+      params = type_params.merge(params)
+    end
+    params
+  end
+
+  def proceeding_type_date_params(type, adjusted_date, day, month, year)
+    {
+      "#{type.name}_used_delegated_functions_on_3i": day || adjusted_date.day.to_s,
+      "#{type.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
+      "#{type.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s
+    }
+  end
+
+  def base_error_translation
+    'activemodel.errors.models.application_proceeding_types.attributes.used_delegated_functions_on'
   end
 end

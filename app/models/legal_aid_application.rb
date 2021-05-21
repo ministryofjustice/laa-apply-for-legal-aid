@@ -1,6 +1,7 @@
 class LegalAidApplication < ApplicationRecord
   include TranslatableModelAttribute
   include Discard::Model
+  include DelegatedFunctions
 
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
@@ -51,7 +52,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   after_save do
-    ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if saved_change_to_used_delegated_functions?
+    ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if used_delegated_functions?
     ActiveSupport::Notifications.instrument 'dashboard.declined_open_banking' if saved_change_to_open_banking_consent?
     ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end
@@ -203,7 +204,7 @@ class LegalAidApplication < ApplicationRecord
   def set_transaction_period
     return if transaction_period_start_on? && transaction_period_finish_on?
 
-    date_to = (used_delegated_functions? ? used_delegated_functions_on : Date.current)
+    date_to = used_delegated_functions_on || Date.current
     date_from = date_to - 3.months
 
     update!(
@@ -212,12 +213,9 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
-  def used_delegated_functions?
-    if Setting.allow_multiple_proceedings?
-      application_proceeding_types.map(&:used_delegated_functions?).include?(true)
-    else
-      attributes['used_delegated_functions']
-    end
+  def lowest_prospect_of_success
+    min_rank = application_proceeding_types.map(&:chances_of_success).map(&:prospect_of_success_rank).min
+    ProceedingMeritsTask::ChancesOfSuccess.rank_and_prettify(min_rank)
   end
 
   def parent_transaction_types
@@ -338,24 +336,9 @@ class LegalAidApplication < ApplicationRecord
       checking_non_passported_means?
   end
 
-  def reset_delegated_functions
-    self.used_delegated_functions = false
-    self.used_delegated_functions_on = nil
-    self.used_delegated_functions_reported_on = nil
-  end
-
-  def used_delegated_functions_within_year
-    used_delegated_functions_on&.between?(12.months.ago - 1.day, 1.month.ago)
-  end
-
   def reset_proceeding_types!
     proceeding_types.clear
-    clear_scopes!
-  end
-
-  def clear_scopes!
     application_proceeding_types.map(&:clear_scopes!)
-    reset_delegated_functions
   end
 
   def receives_student_finance?

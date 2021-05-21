@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_delegated_functions, :with_everything, substantive_application_deadline_on: 10.days.from_now }
+  let(:application) do
+    create :legal_aid_application,
+           :with_applicant,
+           :with_proceeding_types,
+           :with_delegated_functions,
+           :with_everything,
+           delegated_functions_date: 10.days.ago,
+           substantive_application_deadline_on: 10.days.from_now
+  end
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }
 
@@ -26,7 +34,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
         provider_name: provider_name,
         ref_number: application.application_ref,
         client_name: application.applicant.full_name,
-        delegated_functions_date: application.used_delegated_functions_on.strftime('%-d %B %Y'),
+        delegated_functions_date: application.earliest_delegated_functions_date.strftime('%-d %B %Y'),
         deadline_date: application.substantive_application_deadline_on.strftime('%-d %B %Y')
       )
     end

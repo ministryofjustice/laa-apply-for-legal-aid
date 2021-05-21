@@ -41,6 +41,8 @@ module CCMS
         let(:applicant) { legal_aid_application.applicant }
         let(:percentage_home) { rand(1...99.0).round(2) }
 
+        before { legal_aid_application.reload }
+
         context 'family prospects' do
           context '50% or better' do
             before { chances_of_success.update! success_prospect: 'likely' }

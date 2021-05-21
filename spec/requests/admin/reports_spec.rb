@@ -100,7 +100,10 @@ RSpec.describe Admin::ReportsController, type: :request do
         let(:firm) { create :firm }
         let(:provider) { create :provider, firm: firm }
         let!(:legal_aid_application) do
-          create :legal_aid_application, :with_everything, :with_proceeding_types, :at_assessment_submitted, provider: provider
+          create :legal_aid_application,
+                 :with_everything,
+                 :at_assessment_submitted,
+                 provider: provider
         end
 
         before { subject }

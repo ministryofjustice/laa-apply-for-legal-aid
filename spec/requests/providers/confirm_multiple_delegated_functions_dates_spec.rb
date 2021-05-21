@@ -48,7 +48,13 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
         expect(response.body).to include(I18n.t("#{base_error_translation}.error.blank_singular"))
       end
       context 'when the legal aid app has multiple DF dates over a month' do
-        let!(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types, :with_multiple_delegated_functions_different_dates_over_a_month_old }
+        let!(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_proceeding_types,
+                 :with_delegated_functions,
+                 proceeding_types_count: 2,
+                 delegated_functions_date: [35.days.ago.to_date, 36.days.ago.to_date]
+        end
         it 'error pluralised' do
           expect(response.body).to include(I18n.t("#{base_error_translation}.error.blank_plural"))
         end

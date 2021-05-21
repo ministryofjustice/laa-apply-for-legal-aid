@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe NonPassportedCaseAddRequestor do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
-        let(:proceeding_type) { create :proceeding_type, :with_real_data }
+        let(:proceeding_type) { legal_aid_application.application_proceeding_types.first.proceeding_type }
         let(:firm) { create :firm, name: 'Firm1' }
         let(:office) { create :office, firm: firm }
         let(:savings_amount) { legal_aid_application.savings_amount }
@@ -23,10 +23,8 @@ module CCMS
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
                  :with_proceeding_types,
-                 :with_substantive_scope_limitation,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 proceeding_types: [proceeding_type],
                  provider: provider,
                  office: office
         end
@@ -54,6 +52,7 @@ module CCMS
 
         context 'value_attributes' do
           # These are all omitted until such time sa we can determine which benefits are received
+
           it 'omits all attributes' do
             value_benefit_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :global_means, attr_name)

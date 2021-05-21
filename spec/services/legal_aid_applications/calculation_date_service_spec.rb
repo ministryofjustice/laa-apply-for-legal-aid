@@ -8,8 +8,9 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   let(:benefit_check_result) { create :benefit_check_result, result: applicant_receives_benefit ? 'yes' : 'no' }
   let(:legal_aid_application) do
     create :legal_aid_application,
-           used_delegated_functions_on: used_delegated_functions_on,
-           used_delegated_functions: used_delegated_functions,
+           :with_proceeding_types,
+           :with_delegated_functions,
+           delegated_functions_date: used_delegated_functions_on,
            transaction_period_finish_on: transaction_period_finish_on,
            benefit_check_result: benefit_check_result,
            merits_submitted_at: merits_submitted_at
@@ -18,15 +19,18 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   subject { described_class.call(legal_aid_application) }
 
   context 'delegated functions are used' do
-    let(:used_delegated_functions) { true }
-
     it 'returns date delegated functions were used' do
       expect(subject).to eq(used_delegated_functions_on)
     end
   end
 
   context 'delegated functions are not used' do
-    let(:used_delegated_functions) { false }
+    let(:legal_aid_application) do
+      create :legal_aid_application,
+             transaction_period_finish_on: transaction_period_finish_on,
+             benefit_check_result: benefit_check_result,
+             merits_submitted_at: merits_submitted_at
+    end
 
     context 'applicant receives benefits' do
       let(:applicant_receives_benefit) { true }

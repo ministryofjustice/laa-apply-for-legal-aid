@@ -8,8 +8,14 @@ class SubmitApplicationReminderService
   def send_email
     return unless application.substantive_application_deadline_on
 
+    return if application.substantive_application_deadline_on < Date.current
+
     scheduled_mail.map(&:cancel!) if scheduled_mail.present?
 
+    schedule_new_mails
+  end
+
+  def schedule_new_mails
     [five_days_before_deadline, nine_am_deadline_day].each do |scheduled_time|
       ScheduledMailing.send_later!(
         mailer_klass: SubmitApplicationReminderMailer,

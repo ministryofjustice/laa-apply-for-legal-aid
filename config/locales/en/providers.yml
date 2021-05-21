@@ -866,7 +866,7 @@ en:
         occupation_order: Occupation order
         variation_or_discharge_under_section_protection_from_harassment_act: Variation or discharge under section 5 protection from harassment act 1997
         none_selected: I have not used delegated functions
-    delegated_functions_dates:
+    confirm_delegated_functions_dates:
       show:
         heading: "Confirm you used delegated functions on %{date}"
         correct_date: This date is correct

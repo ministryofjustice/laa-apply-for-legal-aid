@@ -3,10 +3,10 @@ FactoryBot.define do
     association :default_level_of_service, factory: %i[service_level with_real_data]
 
     sequence(:code) { |n| format('PR%<number>04d', number: n) }
-    ccms_code { 'PBM23' }
-    meaning { 'Meaning' }
-    name { 'name' }
-    description { 'Description' }
+    sequence(:ccms_code) { |n| format('DA%<number>03d', number: n) }
+    meaning { "Meaning-#{ccms_code}" }
+    name { "name_#{ccms_code.downcase}" }
+    description { "Description-#{ccms_code}" }
     ccms_category_law { 'Category law' }
     ccms_category_law_code { 'Category law code' }
     ccms_matter { 'Matter' }
@@ -51,8 +51,8 @@ FactoryBot.define do
 
     trait :with_scope_limitations do
       after(:create) do |proceeding_type|
-        proceeding_type.scope_limitations << create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
-        proceeding_type.scope_limitations << create(:scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type)
+        create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
+        create(:scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type)
       end
     end
   end

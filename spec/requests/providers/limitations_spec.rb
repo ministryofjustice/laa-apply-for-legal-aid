@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Providers::LimitationsController, type: :request do
-  let!(:proceeding_type) { create :proceeding_type }
-  let(:legal_aid_application) { create :legal_aid_application, :with_substantive_scope_limitation, proceeding_types: [proceeding_type] }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+  let(:proceeding_type) { legal_aid_application.proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/limitations' do

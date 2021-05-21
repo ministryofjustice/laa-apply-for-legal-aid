@@ -4,7 +4,14 @@ require 'sidekiq/testing'
 RSpec.describe SubmitApplicationReminderService, :vcr do
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
   let(:provider) { create :provider, email: simulated_email_address }
-  let(:application) { create :application, :with_applicant, :with_delegated_functions, :with_substantive_application_deadline_on, provider: provider }
+  let(:application) do
+    create :application,
+           :with_applicant,
+           :with_proceeding_types,
+           :with_delegated_functions,
+           :with_substantive_application_deadline_on,
+           provider: provider
+  end
 
   subject { described_class.new(application) }
 

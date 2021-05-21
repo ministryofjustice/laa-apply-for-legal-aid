@@ -8,7 +8,14 @@ module ProceedingMeritsTask
       poor: 'Poor (<45%)',
       borderline: 'Borderline',
       not_known: 'Uncertain'
+    }.freeze
 
+    SUCCESS_RANKING = {
+      likely: 5,
+      marginal: 4,
+      poor: 3,
+      borderline: 2,
+      not_known: 1
     }.freeze
 
     enum success_prospect: {
@@ -25,6 +32,14 @@ module ProceedingMeritsTask
 
     def pretty_success_prospect
       PRETTY_SUCCESS_PROSPECTS[success_prospect.to_sym]
+    end
+
+    def prospect_of_success_rank
+      SUCCESS_RANKING[success_prospect.to_sym]
+    end
+
+    def self.rank_and_prettify(rank)
+      PRETTY_SUCCESS_PROSPECTS[SUCCESS_RANKING.invert[rank]]
     end
   end
 end

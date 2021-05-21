@@ -469,13 +469,15 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'delegated functions are used' do
-      let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: true, used_delegated_functions_on: Faker::Date.backward }
-      let(:used_delegated_functions_on) { legal_aid_application.used_delegated_functions_on }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+      let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
+      let(:used_delegated_functions_reported_on) { today }
+      let(:used_delegated_functions_on) { Faker::Date.backward }
 
       it 'sets start and finish relative to used_delegated_functions_on' do
         subject
-        expect(legal_aid_application.transaction_period_start_on).to eq(used_delegated_functions_on - 3.months)
-        expect(legal_aid_application.transaction_period_finish_on).to eq(used_delegated_functions_on)
+        expect(legal_aid_application.transaction_period_start_on).to eq(application_proceeding_types.first.used_delegated_functions_on - 3.months)
+        expect(legal_aid_application.transaction_period_finish_on).to eq(application_proceeding_types.first.used_delegated_functions_on)
       end
     end
   end
@@ -643,25 +645,14 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'reset delegated functions' do
-    it 'resets it to a substantive application' do
-      application = create :legal_aid_application, :with_delegated_functions
-      expect(application.used_delegated_functions).to be true
-      expect(application.used_delegated_functions_on).to eq Time.zone.today
-      expect(application.used_delegated_functions_reported_on).to eq Time.zone.today
-      application.reset_delegated_functions
-      expect(application.used_delegated_functions).to be false
-      expect(application.used_delegated_functions_on).to be_nil
-      expect(application.used_delegated_functions_reported_on).to be_nil
-    end
-  end
-
   describe '#used_delegated_functions?' do
     context 'not allowed multiple proceedings' do
       before { Setting.setting.update(allow_multiple_proceedings: false) }
 
       context 'delegated functions used' do
-        let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: true, used_delegated_functions_on: Time.current }
+        let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+        # let(:used_delegated_functions_reported_on) { today }
+        # let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
 
         it 'returns true' do
           expect(legal_aid_application.used_delegated_functions?).to be true
@@ -669,7 +660,7 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context 'delegated functions not used' do
-        let(:legal_aid_application) { create :legal_aid_application, used_delegated_functions: false, used_delegated_functions_on: nil }
+        let(:legal_aid_application) { create :legal_aid_application }
 
         it 'returns false' do
           expect(legal_aid_application.used_delegated_functions?).to be false
@@ -678,16 +669,19 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'allow_multiple_proceedings' do
-      let(:legal_aid_application) { create :legal_aid_application }
+      # let(:legal_aid_application) { create :legal_aid_application }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+      let(:used_delegated_functions_reported_on) { today }
+      let(:used_delegated_functions_on) { today }
 
       before do
-        create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: nil
-        create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: df_date
+        # create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: nil
+        # create :application_proceeding_type, legal_aid_application: legal_aid_application, used_delegated_functions_on: df_date
         Setting.setting.update(allow_multiple_proceedings: true)
       end
 
       context 'delegated functions used' do
-        let(:df_date) { Time.current }
+        # let(:df_date) { Time.current }
 
         it 'returns true' do
           expect(legal_aid_application.used_delegated_functions?).to be true
@@ -695,11 +689,36 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context 'delegated functions not used' do
-        let(:df_date) { nil }
+        let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
 
         it 'returns false' do
           expect(legal_aid_application.used_delegated_functions?).to be false
         end
+      end
+    end
+  end
+
+  describe '#earliest_delegated_functions_date' do
+    let(:laa) { create :legal_aid_application }
+    let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date1 }
+    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date2 }
+    let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
+
+    context 'there are application_proceeding_type records with dates ' do
+      let(:date1) { Time.zone.today }
+      let(:date2) { Time.zone.yesterday }
+
+      it 'returns 2 records with DF dates, in date order' do
+        expect(laa.earliest_delegated_functions_date).to eq Date.yesterday
+      end
+    end
+
+    context 'no delegated_functions dates' do
+      let(:date1) { nil }
+      let(:date2) { nil }
+
+      it 'returns nil' do
+        expect(laa.earliest_delegated_functions_date).to be_nil
       end
     end
   end
@@ -964,15 +983,14 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'after_save hook' do
     context 'when an application is created' do
-      let(:application) { create :legal_aid_application }
+      let(:application) { create :legal_aid_application, :with_proceeding_types }
 
-      it { expect(application.used_delegated_functions).to eq false }
+      it { expect(application.used_delegated_functions?).to eq false }
 
       context 'and the used_delegated_functions is changed and saved' do
         subject { application.save }
 
         before do
-          application.used_delegated_functions = true
           ActiveJob::Base.queue_adapter = :test
         end
 

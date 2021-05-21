@@ -89,7 +89,9 @@ RSpec.describe DashboardEventHandler do
   end
 
   context 'delegated_functions_used' do
-    subject { create :legal_aid_application, :with_delegated_functions }
+    subject { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+    # let(:used_delegated_functions_reported_on) { Date.current }
+    # let(:used_delegated_functions_on) { rand(5).days.ago.to_date }
 
     before { ActiveJob::Base.queue_adapter = :test }
 
@@ -101,7 +103,9 @@ RSpec.describe DashboardEventHandler do
   end
 
   context 'application completed' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_delegated_functions }
+    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+    let(:used_delegated_functions_reported_on) { Date.current }
+    let(:used_delegated_functions_on) { rand(12).days.ago.to_date }
 
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)

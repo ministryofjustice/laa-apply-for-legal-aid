@@ -118,12 +118,12 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:application_id/check_benefit' do
-    before { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
-
     subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
 
     before do
       login
+      application.reload
+      application.application_proceeding_types.map(&:reload)
       subject
     end
 
@@ -159,7 +159,12 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context 'when delegated functions used' do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, used_delegated_functions: true }
+        let!(:application) do
+          create :legal_aid_application,
+                 :with_positive_benefit_check_result,
+                 :with_proceeding_types,
+                 :with_delegated_functions
+        end
 
         it 'displays the substantive application page' do
           expect(response).to redirect_to providers_legal_aid_application_substantive_application_path(application)

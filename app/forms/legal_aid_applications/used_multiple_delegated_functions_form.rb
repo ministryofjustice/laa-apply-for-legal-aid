@@ -32,9 +32,6 @@ module LegalAidApplications
       proceeding_types_by_name.each do |proceeding|
         date = proceeding.application_proceeding_type.used_delegated_functions_on
         next unless date
-
-        __send__("#{proceeding.name}=", 'true')
-        __send__("#{proceeding.name}_used_delegated_functions_on=", date)
       end
     end
 
@@ -45,10 +42,6 @@ module LegalAidApplications
       return false unless valid? || draft_nothing_selected?
 
       save_proceeding_records
-    end
-
-    def proceeding_with_earliest_delegated_functions
-      @proceeding_with_earliest_delegated_functions ||= proceeding_types_by_name.first.application_proceeding_type.proceeding_with_earliest_delegated_functions
     end
 
     private_class_method :populate_attr_accessors
@@ -101,12 +94,12 @@ module LegalAidApplications
     end
 
     def delegated_functions_reported_date(date)
-      Time.zone.today unless date.nil? || date_over_a_month_ago?(date)
+      Time.zone.today unless date.nil?
     end
 
-    def date_over_a_month_ago?(date)
-      date.before?(Time.zone.today - 1.month + 1.day)
-    end
+    # def date_over_a_month_ago?(date)
+    #   date.before?(Time.zone.today - 1.month + 1.day)
+    # end
 
     def checkbox_for?(category)
       __send__(category) == 'true'

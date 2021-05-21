@@ -50,12 +50,18 @@ RSpec.describe ApplicationProceedingType do
   end
 
   describe 'delegated functions' do
-    let(:application) { create :legal_aid_application }
-    let!(:application_proceeding_type) do
-      create :application_proceeding_type,
-             legal_aid_application: application,
-             used_delegated_functions_on: df_date,
-             used_delegated_functions_reported_on: df_reported_date
+    # let(:application) { create :legal_aid_application }
+    # let!(:application_proceeding_type) do
+    #   create :application_proceeding_type,
+    #          legal_aid_application: application,
+    #          used_delegated_functions_on: df_date,
+    #          used_delegated_functions_reported_on: df_reported_date
+    let(:application) do
+      create :legal_aid_application,
+             :with_proceeding_types,
+             :with_delegated_functions,
+             delegated_functions_date: df_date,
+             delegated_functions_reported_date: df_reported_date
     end
     let(:df_date) { Date.current - 10.days }
     let(:df_reported_date) { Date.current }
@@ -70,30 +76,37 @@ RSpec.describe ApplicationProceedingType do
         expect(application_proceeding_type.used_delegated_functions?).to be true
       end
 
-      it 'returns the application proceeding type with the earliest delegated functions' do
-        application_proceeding_type = application.application_proceeding_types.first
-        type = application.application_proceeding_types.first
-        expect(application_proceeding_type.proceeding_with_earliest_delegated_functions).to eq type
-      end
-
       it 'returns the earliest delegated functions date' do
-        application_proceeding_type = application.application_proceeding_types.first
-        expect(application_proceeding_type.earliest_delegated_functions_date).to eq df_date
+        expect(application.earliest_delegated_functions_date).to eq df_date
       end
 
       it 'returns the earliest delegated functions reported date' do
-        application_proceeding_type = application.application_proceeding_types.first
-        expect(application_proceeding_type.earliest_delegated_functions_reported_date).to eq df_reported_date
+        expect(application.earliest_delegated_functions_reported_date).to eq df_reported_date
       end
     end
 
     context 'delegated functions not used' do
-      let(:df_date) { nil }
-
-      it 'used delegated functions returns false' do
-        application_proceeding_type = application.application_proceeding_types.first
-        expect(application_proceeding_type.used_delegated_functions?).to be false
+      before do
+        application.application_proceeding_types.each do |apt|
+          apt.update!(used_delegated_functions_on: nil,
+                      used_delegated_functions_reported_on: nil)
+        end
       end
+      it 'used delegated functions returns false' do
+        expect(application.used_delegated_functions?).to be false
+      end
+    end
+  end
+
+  describe 'scope using_delegated_functions' do
+    let(:laa) { create :legal_aid_application }
+    let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.today }
+    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.yesterday }
+    let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
+    let(:records) { laa.application_proceeding_types.using_delegated_functions }
+
+    it 'returns 2 records with DF dates, in date order' do
+      expect(records).to eq [apt2, apt1]
     end
   end
 

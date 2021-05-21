@@ -11,10 +11,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       :with_non_passported_state_machine,
       :at_entering_applicant_details,
       :with_proceeding_types,
-      :with_substantive_scope_limitation,
-      :with_delegated_functions_scope_limitation,
-      used_delegated_functions: used_delegated_functions,
-      used_delegated_functions_on: used_delegated_functions_on,
+      :with_delegated_functions,
+      delegated_functions_date: used_delegated_functions_on,
       applicant: applicant
     )
   end
@@ -55,12 +53,24 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
       end
 
-      it 'displays correct used_delegated_functions answer' do
-        expect(used_delegated_functions_answer.content.strip).to eq('No')
-      end
+      context 'delegated functions not used' do
+        let(:application) do
+          create(
+            :legal_aid_application,
+            :with_non_passported_state_machine,
+            :at_entering_applicant_details,
+            :with_proceeding_types,
+            applicant: applicant
+          )
+        end
 
-      it 'does not display used_delegated_functions_on answer' do
-        expect(used_delegated_functions_on_answer).to be_nil
+        it 'displays correct used_delegated_functions answer' do
+          expect(used_delegated_functions_answer.content.strip).to eq('No')
+        end
+
+        it 'does not display used_delegated_functions_on answer' do
+          expect(used_delegated_functions_on_answer).to be_nil
+        end
       end
 
       context 'provider have used delegated functions' do
@@ -221,10 +231,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
               :with_passported_state_machine,
               :at_entering_applicant_details,
               :with_proceeding_types,
-              :with_substantive_scope_limitation,
-              :with_delegated_functions_scope_limitation,
-              used_delegated_functions: used_delegated_functions,
-              used_delegated_functions_on: used_delegated_functions_on,
+              :with_delegated_functions,
+              delegated_functions_date: used_delegated_functions_on,
               applicant: applicant
             )
           end

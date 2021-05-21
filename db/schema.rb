@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_180431) do
+ActiveRecord::Schema.define(version: 2021_04_29_174354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -458,8 +458,6 @@ ActiveRecord::Schema.define(version: 2021_04_23_180431) do
     t.json "applicant_means_answers"
     t.datetime "declaration_accepted_at"
     t.json "provider_step_params"
-    t.date "used_delegated_functions_on"
-    t.boolean "used_delegated_functions"
     t.boolean "own_vehicle"
     t.date "substantive_application_deadline_on"
     t.boolean "substantive_application"
@@ -471,7 +469,6 @@ ActiveRecord::Schema.define(version: 2021_04_23_180431) do
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
     t.boolean "student_finance"
-    t.date "used_delegated_functions_reported_on"
     t.datetime "discarded_at"
     t.datetime "merits_submitted_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
