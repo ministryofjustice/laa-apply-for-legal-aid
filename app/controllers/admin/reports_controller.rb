@@ -21,7 +21,7 @@ module Admin
       expires_now
       respond_to do |format|
         format.csv do
-          data = Reports::MIS::ApplicationDetailsReport.new.run
+          data = admin_report.submitted_applications.attachment.blob.download
           send_data data, filename: "submitted_applications_#{timestamp}.csv", content_type: 'text/csv'
         end
       end
@@ -31,7 +31,7 @@ module Admin
       expires_now
       respond_to do |format|
         format.csv do
-          data = Reports::MIS::NonPassportedApplicationsReport.new.run
+          data = admin_report.non_passported_applications.attachment.blob.download
           send_data data, filename: "non_passported_#{timestamp}.csv", type: :csv, content_type: 'text/csv'
         end
       end
@@ -42,6 +42,10 @@ module Admin
     end
 
     private
+
+    def admin_report
+      @admin_report ||= AdminReport.first
+    end
 
     def download_custom_report
       expires_now
