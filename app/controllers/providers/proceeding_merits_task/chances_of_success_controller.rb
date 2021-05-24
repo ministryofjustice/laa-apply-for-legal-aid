@@ -7,11 +7,7 @@ module Providers
 
       def create
         @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params)
-        # TODO: Remove SafeNavigators after MultiProceeding Feature flag is turned on
-        # Until then, some applications will not have a legal_framework_merits_task_list
-        # Afterwards - everything should have one!
-        legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(proceeding_type.ccms_code.to_sym, :chances_of_success) unless draft_selected?
-        render :index unless save_continue_or_draft(@form)
+        render :index unless update_task_save_continue_or_draft(proceeding_type.ccms_code.to_sym, :chances_of_success)
       end
 
       private

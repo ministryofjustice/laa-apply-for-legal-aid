@@ -9,11 +9,14 @@ module Providers
       def update
         application_proceeding_type
         involved_children.each { |child| update_record(child[:id], child[:name]) }
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(proceeding_type.ccms_code.to_sym, :children_proceeding) unless draft_selected?
-        continue_or_draft
+        update_task_continue_or_draft(proceeding_type.ccms_code.to_sym, :children_proceeding)
       end
 
       private
+
+      def task_list_should_update?
+        application_has_task_list?
+      end
 
       def legal_aid_application
         @legal_aid_application ||= application_proceeding_type.legal_aid_application
