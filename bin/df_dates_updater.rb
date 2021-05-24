@@ -1,5 +1,4 @@
 class DFDatesUpdater
-
   def run
     apts = ApplicationProceedingType.where(used_delegated_functions_on: nil)
     apts.each { |apt| process_apt(apt) }
@@ -19,7 +18,9 @@ class DFDatesUpdater
     reminder_mail = ScheduledMailing.where(mailer_klass: 'SubmitApplicationReminderMailer', legal_aid_application_id: laa.id).first
     reported_date = reminder_mail&.created_at || df_date
     apt.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
+    # rubocop:disable Layout/LineLength
     puts "Legal Aid Application id: #{laa.id}  deadline: #{laa.substantive_application_deadline_on.strftime('%F')} DF dates updated to: #{df_date.strftime('%F')} (used), #{reported_date.strftime('%F')} (reported)"
+    # rubocop:enable Layout/LineLength
   end
 end
 
