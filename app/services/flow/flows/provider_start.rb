@@ -39,7 +39,7 @@ module Flow
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
           forward: ->(_) { Setting.allow_multiple_proceedings? ? :has_other_proceedings : :used_delegated_functions },
-          check_answers: :limitations
+          check_answers: ->(_) { Setting.allow_multiple_proceedings? ? :has_other_proceedings : :limitations }
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
