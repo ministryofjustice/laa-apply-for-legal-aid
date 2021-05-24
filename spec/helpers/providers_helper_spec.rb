@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProvidersHelper, type: :helper do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
   let(:provider_routes) do
     Rails.application.routes.routes.select do |route|
       route.defaults[:controller].to_s.split('/')[0] == 'providers' &&
@@ -17,6 +17,7 @@ RSpec.describe ProvidersHelper, type: :helper do
   let(:excluded_controllers) { %w[bank_transactions] + controllers_with_params }
 
   describe '#url_for_application' do
+    subject { url_for_application(legal_aid_application) }
     it 'should not crash' do
       (provider_controller_names - excluded_controllers).each do |controller_name|
         legal_aid_application.provider_step = controller_name
@@ -34,6 +35,14 @@ RSpec.describe ProvidersHelper, type: :helper do
       legal_aid_application.provider_step = 'outgoing_transactions'
       legal_aid_application.provider_step_params = { transaction_type: :salary }
       expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary?locale=en")
+    end
+
+    context 'when saved as draft and linking children' do
+      it do
+        legal_aid_application.provider_step = 'linked_children'
+        legal_aid_application.provider_step_params = { merits_task_list_id: legal_aid_application.lead_application_proceeding_type.id }
+        expect(subject).to eq("/providers/merits_task_list/#{legal_aid_application.lead_application_proceeding_type.id}/linked_children?locale=en")
+      end
     end
 
     context 'when removing a dependant' do
