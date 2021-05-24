@@ -8,7 +8,7 @@
             page_title: t('.h1-heading'),
             template: :basic,
             form: form,
-            back_link: { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
+            back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
         ) do %>
 
     <%= form.govuk_collection_radio_buttons(

@@ -8,7 +8,7 @@
           page_title: t('.h1-heading'),
           template: :basic,
           form: form,
-          back_link: { path: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type) }
+          back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type) }
       ) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:success_prospect, legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) do %>
