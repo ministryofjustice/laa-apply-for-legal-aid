@@ -5,7 +5,7 @@
   <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
 
     <% if @legal_aid_application.proceeding_types.any? %>
-      <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.proceeding_types.count, 'proceeding')}")} %>
+      <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.proceeding_types.count, 'proceeding')}") %></h1>
       <div class="govuk-summary-list">
         <% @legal_aid_application.proceeding_types.order(:created_at).each do |type| %>
           <dl class="govuk-summary-list__row" id="proceeding_type_<%= type.code %>">
@@ -25,7 +25,7 @@
     <% end %>
 
     <%= form.govuk_collection_radio_buttons :has_other_proceeding, yes_no_options, :value, :label,
-                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
+                                            legend: {text: content_for(:page_title), tag: 'h2', size: 'l'} %>
 
     <%= next_action_buttons(
             form: form,

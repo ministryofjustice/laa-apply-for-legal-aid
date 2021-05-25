@@ -8,7 +8,7 @@
   <%= page_template page_title: t('.page_title'), form: form, template: :basic do %>
 
   <% if @legal_aid_application.has_dependants? %>
-    <%= govuk_fieldset_header(size: 'm') { t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}")} %>
+    <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}") %></h1>
     <div class="govuk-summary-list">
       <% @legal_aid_application.dependants.order(:created_at, :number).each do |dependant| %>
         <dl class="govuk-summary-list__row" id="dependant_<%= dependant.number %>">
@@ -40,7 +40,7 @@
                                           yes_no_options,
                                           :value,
                                           :label,
-                                          legend: {text: content_for(:page_title), size: 'xl', tag: 'h1'} %>
+                                          legend: {text: content_for(:page_title), size: 'l', tag: 'h2'} %>
 
   <%= next_action_buttons(form: form) %>
   <% end %>
