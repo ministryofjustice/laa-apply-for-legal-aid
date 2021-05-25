@@ -8,14 +8,19 @@ module Flow
           forward: :date_client_told_incidents,
           check_answers: :check_merits_answers
         },
-        involved_children: {
+        start_involved_children_task: {
+          # This allows the statement of case flow to check for involved children while allowing a standard path
+          #  to :involved_children from :has_other_involved_children that always goes to the new children page
           path: ->(application) do
             if application.involved_children.any?
               urls.providers_legal_aid_application_has_other_involved_children_path(application)
             else
               urls.new_providers_legal_aid_application_involved_child_path(application)
             end
-          end,
+          end
+        },
+        involved_children: {
+          path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
           forward: :has_other_involved_children
         },
         has_other_involved_children: {
@@ -62,7 +67,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(application) do
             if Setting.allow_multiple_proceedings?
-              application.section_8_proceedings? ? :involved_children : :merits_task_lists
+              application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists
             else
               :chances_of_success
             end
