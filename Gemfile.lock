@@ -110,13 +110,13 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.1.0)
+    axe-core-api (4.2.0)
       capybara
       dumb_delegator
       selenium-webdriver
       virtus
       watir
-    axe-core-cucumber (4.1.0)
+    axe-core-cucumber (4.2.0)
       axe-core-api
       dumb_delegator
       virtus
@@ -506,7 +506,7 @@ GEM
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     regexp-examples (1.5.1)
-    regexp_parser (1.8.2)
+    regexp_parser (2.1.1)
     remotipart (1.4.4)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -650,9 +650,9 @@ GEM
       addressable
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
-    watir (6.17.0)
-      regexp_parser (~> 1.2)
-      selenium-webdriver (~> 3.6)
+    watir (6.19.1)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (>= 3.142.7)
     webdack-uuid_migration (1.4.0)
       activerecord (>= 4.0)
     webdrivers (4.6.0)
