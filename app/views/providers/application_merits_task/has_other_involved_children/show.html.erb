@@ -47,6 +47,8 @@
                                             :label,
                                             legend: {text: t(".add_another"), size: 'l', tag: 'h2'} %>
 
-      <%= next_action_buttons(form: form) %>
+      <%= next_action_buttons(
+            show_draft: true,
+            form: form) %>
   <% end %>
 <% end %>
