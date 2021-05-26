@@ -133,16 +133,21 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
-  # convenience method to return the lead proceeding type.  For now, that is the ONLY
-  # proceeding type until such time as we have multiple proceeding types per applications,
-  # at which time this method should be changed to determine which is the lead one and return that.
-  #
   def lead_proceeding_type
     ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
   end
 
   def lead_application_proceeding_type
     application_proceeding_types.find_by(lead_proceeding: true)
+  end
+
+  def find_or_create_lead_proceeding_type
+    apt = lead_application_proceeding_type
+    if apt.nil?
+      apt = application_proceeding_types.detect(&:domestic_abuse?)
+      apt.update!(lead_proceeding: true)
+    end
+    apt.proceeding_type
   end
 
   def application_proceedings_by_name

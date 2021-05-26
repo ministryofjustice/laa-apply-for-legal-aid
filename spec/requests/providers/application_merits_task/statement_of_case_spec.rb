@@ -5,6 +5,7 @@ module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
       let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+      # let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_chances_of_success }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }

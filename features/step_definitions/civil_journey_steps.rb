@@ -531,8 +531,9 @@ Given('I complete the application and view the check your answers page') do
     :legal_aid_application,
     :with_non_passported_state_machine,
     :applicant_entering_means,
+    :with_proceeding_types,
     applicant: applicant,
-    proceeding_types: [proceeding_type]
+    explicit_proceeding_types: [proceeding_type]
   )
   add_scope_limitations(@legal_aid_application, proceeding_type)
 

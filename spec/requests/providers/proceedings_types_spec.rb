@@ -143,6 +143,7 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
 
           before do
             allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+            allow(LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
           end
 
           it 'renders index' do
@@ -152,6 +153,8 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
 
           it 'displays errors' do
             subject
+            # puts ">>>>>> page output to >>>>> file://#{ENV['HOME']}/tmp/rspec.html"
+            # File.open("#{ENV['HOME']}/tmp/rspec.html", 'w') { |fp| fp.puts response.body }
             expect(response.body).to include('govuk-input--error')
             expect(response.body).to include('govuk-form-group--error')
           end

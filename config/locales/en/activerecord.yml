@@ -19,6 +19,10 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
+        application_proceeding_type:
+          attributes:
+            lead_proceeding:
+              multiple: Only one application proceeding type can be nominated as lead proceeding
         benefit_type:
           attributes:
             label:

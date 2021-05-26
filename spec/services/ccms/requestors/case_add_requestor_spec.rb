@@ -1,4 +1,3 @@
-# add_case_requestor_spec.rb
 require 'rails_helper'
 
 module CCMS

@@ -28,13 +28,15 @@ class ApplicationProceedingType < ApplicationRecord
 
   delegate :default_substantive_scope_limitation,
            :default_delegated_functions_scope_limitation,
+           :domestic_abuse?,
            to: :proceeding_type
 
   scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
 
+  before_save :check_only_one_lead_proceedig
+
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
-    self.lead_proceeding = true if proceedings.empty?
   end
 
   def used_delegated_functions?
@@ -69,12 +71,17 @@ class ApplicationProceedingType < ApplicationRecord
 
   private
 
+  def check_only_one_lead_proceedig
+    return if lead_proceeding == false
+
+    apt = legal_aid_application.application_proceeding_types.detect { |rec| rec.lead_proceeding? && rec.id != id }
+    return if apt.nil?
+
+    Sentry.capture_message "Duplicate lead proceedings detected for application #{legal_aid_application.application_ref}: #{id}, #{apt.id}"
+  end
+
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
     rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
-  end
-
-  def proceedings
-    ApplicationProceedingType.where(legal_aid_application_id: legal_aid_application.id)
   end
 end

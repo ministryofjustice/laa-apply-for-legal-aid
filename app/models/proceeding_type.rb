@@ -29,4 +29,8 @@ class ProceedingType < ApplicationRecord
 
     connection.execute(query)
   end
+
+  def domestic_abuse?
+    ccms_matter == 'Domestic Abuse'
+  end
 end

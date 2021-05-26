@@ -22,6 +22,8 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
+                 :with_proceeding_types,
+                 :with_chances_of_success,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
@@ -39,9 +41,9 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
-        let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
-        end
+        # let!(:chances_of_success) do
+        #   create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+        # end
 
         before do
           legal_aid_application.reload
@@ -164,6 +166,8 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_proceeding_types,
+                     :with_chances_of_success,
                      vehicle: nil,
                      office: office
             end
