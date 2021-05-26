@@ -192,7 +192,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
 
   def blank_error(category, month_number)
     I18n.t("errors.#{self.class.to_s.underscore}.blank",
-           category: I18n.t("transaction_types.names.citizens.#{category}"),
+           category: I18n.t("transaction_types.names.error_message.#{category}"),
            month: month_name(month_number))
   end
 

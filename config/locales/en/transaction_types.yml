@@ -28,6 +28,16 @@ en:
         rent_or_mortgage: Housing payments
         salary: Salary or wages
         student_loan: Student loan or grant
+      error_message:
+        benefits: in benefits
+        friends_or_family: from friends or family
+        maintenance_in: in maintenance
+        property_or_lodger: from a property or lodger
+        pension: in pension payments
+        rent_or_mortgage: for housing
+        child_care: for childcare
+        maintenance_out: in maintenance
+        legal_aid: towards legal aid
     table_label:
       benefits: Benefits
       child_care: Childcare
