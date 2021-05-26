@@ -20,7 +20,14 @@ module Flow
           end
         },
         involved_children: {
-          path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
+          path: ->(application, params) do
+            involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:application_merits_task_involved_child][:id]
+            if involved_child_id
+              urls.providers_legal_aid_application_involved_child_path(application, involved_child_id)
+            else
+              urls.new_providers_legal_aid_application_involved_child_path(application)
+            end
+          end,
           forward: :has_other_involved_children
         },
         has_other_involved_children: {
