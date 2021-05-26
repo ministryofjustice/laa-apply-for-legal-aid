@@ -6,7 +6,8 @@ module Providers
       end
 
       def update
-        return go_forward(form.has_other_involved_child?) if update_task(:application, :children_application)
+        update_task(:application, :children_application)
+        return go_forward(form.has_other_involved_child?) if form.valid?
 
         render :show
       end
@@ -14,7 +15,7 @@ module Providers
       private
 
       def task_list_should_update?
-        application_has_task_list? && form.valid?
+        application_has_task_list? && form.valid? && !form.has_other_involved_child?
       end
 
       def form

@@ -59,9 +59,9 @@ module Providers
           context 'when the multi-proceeding flag is true' do
             before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
 
-            it 'sets the task to complete' do
+            it 'does not set the task to complete' do
               subject
-              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :not_started/)
             end
           end
         end
