@@ -178,7 +178,7 @@ Feature: Provider accessibility
     Then I select "Any valuable items worth £500 or more"
     And I fill 'Valuable items value' with '600'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'any legal restrictions'
+    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
     And the page is accessible
     Then I choose 'No'
     Then I click 'Save and continue'

@@ -733,14 +733,15 @@ en:
         h1-heading: Which passporting benefit does your client receive?
     restrictions:
       show:
-        h1-heading: Are there any legal restrictions that prevent your client from selling or borrowing against their assets?
+        h1-heading: Is your client prohibited from selling or borrowing against their assets?
         restrictions_details: Tell us which assets they cannot sell or borrow against, and why
-        for_example: "For example:"
+        for_example: "For example, because:"
         examples:
           list: |
             they're bankrupt
             their home has been repossessed
-            their assets are the subject of dispute in other legal proceedings
+            their assets are the subject matter of dispute (SMOD)
+            their assets are held under a restraint order
     savings_and_investments:
       show:
         h1-heading: Which types of savings or investments does your client have?
