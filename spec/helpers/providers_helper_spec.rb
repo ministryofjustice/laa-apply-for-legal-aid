@@ -37,11 +37,21 @@ RSpec.describe ProvidersHelper, type: :helper do
       expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary?locale=en")
     end
 
-    context 'when saved as draft and adding involved child' do
+    context 'when saved as draft and amending involved child' do
       it do
         legal_aid_application.provider_step = 'involved_children'
-        legal_aid_application.provider_step_params = { application_merits_task_involved_child: { id: '21983d92-876d-4f95-84df-1af2e3308fd7' } }
+        legal_aid_application.provider_step_params = { id: '21983d92-876d-4f95-84df-1af2e3308fd7' }
         expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/21983d92-876d-4f95-84df-1af2e3308fd7?locale=en")
+      end
+    end
+
+    context 'when saved as draft and returning to a started involved child' do
+      let(:partial_record) { create :involved_child, legal_aid_application: legal_aid_application, date_of_birth: nil }
+
+      it do
+        legal_aid_application.provider_step = 'involved_children'
+        legal_aid_application.provider_step_params = { application_merits_task_involved_child: { full_name: partial_record.full_name }, id: 'new' }
+        expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/involved_children/#{partial_record.id}?locale=en")
       end
     end
 

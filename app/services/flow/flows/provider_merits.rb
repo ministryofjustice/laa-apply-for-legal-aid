@@ -21,8 +21,15 @@ module Flow
         },
         involved_children: {
           path: ->(application, params) do
-            involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:application_merits_task_involved_child][:id]
-            if involved_child_id
+            involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:id]
+            case involved_child_id
+            when 'new'
+              partial_record = ApplicationMeritsTask::InvolvedChild.find_by(
+                full_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:full_name],
+                legal_aid_application_id: application.id
+              )
+              urls.providers_legal_aid_application_involved_child_path(application, partial_record)
+            when /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ # uuid_regex
               urls.providers_legal_aid_application_involved_child_path(application, involved_child_id)
             else
               urls.new_providers_legal_aid_application_involved_child_path(application)
