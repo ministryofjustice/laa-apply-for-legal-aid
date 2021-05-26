@@ -381,6 +381,9 @@ en:
             offline_accounts:
               check_box_offline_current_accounts: Current account
               check_box_offline_savings_accounts: Savings account
+              hint:
+                revealing_check_box_offline_current_accounts: Include accounts with a negative balance or no money in them.
+                revealing_check_box_offline_savings_accounts: Include accounts with a negative balance or no money in them.
               offline_current_accounts: Enter the total in all current accounts
               offline_savings_accounts: Enter the total in all savings accounts
             savings_and_investments:
