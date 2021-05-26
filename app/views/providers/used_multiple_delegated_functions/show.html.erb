@@ -15,7 +15,7 @@
              @form.__send__("#{attribute_name}=", @form.send(attribute_name).present?)
              link_errors_value = index == 0 ? true : false %>
 
-          <%= form.govuk_check_box attribute_name, true, '', multiple: false, link_errors: link_errors_value, label: {text: proceeding.meaning } do %>
+          <%= form.govuk_check_box attribute_name, true, '', multiple: false, link_errors: link_errors_value, label: {text: proceeding.meaning} do %>
             <%= form.govuk_date_field :"#{attribute_name}_used_delegated_functions_on",
                                       legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: 'govuk-label govuk-date-input__label' },
                                       hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5))} %>

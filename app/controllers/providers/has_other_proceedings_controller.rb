@@ -19,6 +19,8 @@ module Providers
 
     def destroy
       remove_proceeding
+      remove_laspo_response unless @legal_aid_application.section_8_proceedings?
+
       return redirect_to providers_legal_aid_application_proceedings_types_path if proceeding_types.empty?
 
       form
@@ -59,6 +61,11 @@ module Providers
       set_new_lead_proceeding if application_proceeding_type.lead_proceeding? && proceeding_types.count > 1
 
       LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
+    end
+
+    def remove_laspo_response
+      legal_aid_application.in_scope_of_laspo = nil
+      legal_aid_application.save!
     end
 
     def domestic_abuse_selected?

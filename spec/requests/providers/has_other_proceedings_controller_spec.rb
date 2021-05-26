@@ -44,49 +44,29 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
     end
 
-    context 'with at least one domestic abuse proceeding type' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+    context 'choose yes' do
+      let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
 
-      context 'choose yes' do
-        let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
-
-        it 'redirects to the page to add another proceeding type' do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
-      end
-
-      context 'choose no' do
-        let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
-
-        it 'redirects to the delegated functions page' do
-          expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
-        end
-      end
-
-      context 'choose nothing' do
-        let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
-
-        it 'stays on the page if there is a validation error' do
-          expect(response).to have_http_status(:ok)
-          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
-        end
+      it 'redirects to the page to add another proceeding type' do
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
     end
 
-    context 'with only Section 8 proceedings selected' do
-      let(:proceeding_type) { create :proceeding_type, code: 'SE003' }
-      let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
+    context 'choose nothing' do
+      let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
 
-      context 'choose yes' do
-        let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
-
-        it 'redirects to the page to add another proceeding type' do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
+      it 'stays on the page if there is a validation error' do
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
       end
+    end
 
-      context 'choose no' do
-        let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
+    context 'choose no' do
+      let(:params) { { binary_choice_form: { has_other_proceeding: 'false' } } }
+
+      context 'with no domestic abuse proceedings and only Section 8 proceedings selected' do
+        let(:proceeding_type) { create :proceeding_type, :as_prohibited_steps_order }
+        let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
 
         it 'stays on the page and displays an error' do
           expect(response).to have_http_status(:ok)
@@ -94,12 +74,22 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         end
       end
 
-      context 'choose nothing' do
-        let(:params) { { providers_has_other_proceedings_form: { has_other_proceeding: nil } } }
+      context 'with at least one domestic abuse proceeding and no section 8 proceedings selected' do
+        let(:proceeding_type) { create :proceeding_type, :as_occupation_order }
+        let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [proceeding_type] }
 
-        it 'stays on the page if there is a validation error' do
-          expect(response).to have_http_status(:ok)
-          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.error'))
+        it 'redirects to the delegated functions page' do
+          expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
+        end
+      end
+
+      context 'with at least one domestic abuse and at least one section 8 proceeding' do
+        let(:pt1) { create :proceeding_type, :as_occupation_order }
+        let(:pt2) { create :proceeding_type, :as_prohibited_steps_order }
+        let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [pt1, pt2] }
+
+        it 'redirects to the LASPO page' do
+          expect(response).to redirect_to(providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application))
         end
       end
     end

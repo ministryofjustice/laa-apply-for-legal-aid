@@ -195,21 +195,39 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
       patch providers_legal_aid_application_proceedings_type_path(params)
     end
 
-    before do
-      login_as provider
-      subject
+    context 'with setting.allow_multiple_proceedings set to false' do
+      before do
+        login_as provider
+        subject
+      end
+
+      it 'redirects to the next page' do
+        expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+      end
+
+      it 'associates proceeding type with legal aid application' do
+        expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
+      end
+
+      it 'adds the default substantive scope limitation to the application proceedig type' do
+        expect(application_proceeding_type.assigned_scope_limitations).to eq [default_substantive_scope_limitation]
+      end
     end
 
-    it 'redirects to the next page' do
-      expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
-    end
+    context 'with setting.allow_multiple_proceedings set to true' do
+      let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
 
-    it 'associates proceeding type with legal aid application' do
-      expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
-    end
+      before do
+        login_as provider
+        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
+        allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+        subject
+      end
 
-    it 'adds the default substantive scope limitation to the application proceedig type' do
-      expect(application_proceeding_type.assigned_scope_limitations).to eq [default_substantive_scope_limitation]
+      it 'redirects to next step' do
+        subject
+        expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
+      end
     end
   end
 end

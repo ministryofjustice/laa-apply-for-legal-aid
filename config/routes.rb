@@ -151,6 +151,7 @@ Rails.application.routes.draw do
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create update]
       resource :has_other_proceedings, only: %i[show update destroy]
+      resource :in_scope_of_laspo, only: %i[show update]
       resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
