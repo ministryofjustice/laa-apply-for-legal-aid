@@ -126,11 +126,6 @@ RSpec.describe Providers::LimitationsController, type: :request do
                                      emergency_cost_reasons: 'this is just a test' } }
         end
 
-        it 'what is this doing?' do
-          subject
-          expect(response).to have_http_status(:ok)
-        end
-
         it 'should display an error' do
           subject
           expect(response.body).to match('govuk-error-summary')
