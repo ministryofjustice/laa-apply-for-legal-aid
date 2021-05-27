@@ -10,6 +10,7 @@ module Providers
 
     def update
       if Setting.allow_multiple_proceedings? && @legal_aid_application.used_delegated_functions?
+        clear_limit_and_reason
         @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       else
@@ -31,6 +32,14 @@ module Providers
       apt = legal_aid_application.application_proceeding_types.first
       apt.update!(used_delegated_functions_on: legal_aid_application.used_delegated_functions_on,
                   used_delegated_functions_reported_on: legal_aid_application.used_delegated_functions_reported_on)
+    end
+
+    def clear_limit_and_reason
+      atc = params[:legal_aid_application]
+      return unless atc[:emergency_cost_override].to_s == 'false'
+
+      atc[:emergency_cost_requested] = nil
+      atc[:emergency_cost_reasons] = nil
     end
 
     def form_params
