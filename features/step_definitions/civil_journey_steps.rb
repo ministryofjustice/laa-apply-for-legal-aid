@@ -606,9 +606,14 @@ Then(/^the results section is empty$/) do
   expect(page).to_not have_css('#proceeding-list > .proceeding-item')
 end
 
-Then(/^proceeding suggestions has results$/) do
+Then(/^proceeding suggestions has (results|no results)$/) do |results|
   wait_for_ajax
-  expect(page).to have_css('#proceeding-list > .proceeding-item')
+  case results
+  when 'results'
+    expect(page).to have_css('#proceeding-list > .proceeding-item')
+  when 'no results'
+    expect(page).to_not have_css('#proceeding-list > .proceeding-item')
+  end
 end
 
 Given('I click Check Your Answers Change link for {string}') do |field_name|
@@ -713,6 +718,15 @@ end
 Then('I enter the {string} date of {int} days ago') do |name, number|
   name.gsub!(/\s+/, '_')
   date = number.days.ago
+  fields = page.all("input[name*=#{name}]")
+  fill_in(fields[0][:name].to_s, with: date.day)
+  fill_in(fields[1][:name].to_s, with: date.month)
+  fill_in(fields[2][:name].to_s, with: date.year)
+end
+
+Then('I enter a {string} for a {int} year old') do |name, number|
+  name.gsub!(/\s+/, '_')
+  date = (number.years + 1.month).ago
   fields = page.all("input[name*=#{name}]")
   fill_in(fields[0][:name].to_s, with: date.day)
   fill_in(fields[1][:name].to_s, with: date.month)
