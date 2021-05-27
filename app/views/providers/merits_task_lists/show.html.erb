@@ -1,22 +1,31 @@
 <%= page_template(
     page_title: t('.page_heading'),
-    back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) }
+    back_link: { path: providers_legal_aid_application_capital_assessment_result_path(@legal_aid_application) },
+    show_errors_for: @merits_task_list
     ) do %>
 
-  <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
-  <ol class="app-task-list">
-    <%= render 'task_list_section', name: t('.application_section_heading'), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
+  <div id='task_list' class="<%= 'govuk-form-group--error' if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
+    <h2 class="govuk-heading-l"><%= t('.application_heading') %></h2>
 
-    <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
-    <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
-      <%= render 'task_list_section', name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
+    <% if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>
+      <span class="govuk-error-message" id="task-list-error">
+        <span class="govuk-visually-hidden">Error: </span>
+        <%= @merits_task_list&.errors[:task_list]&.first %>
+      </span>
     <% end %>
-  </ol>
+    <ol class="app-task-list">
+      <%= render 'task_list_section', name: t('.application_section_heading'), ccms_code: nil, tasks: @merits_tasks[:application], section_number: 1 %>
 
+      <h2 class="govuk-heading-l govuk-!-margin-top-4"><%= t('.proceeding_heading') %></h2>
+      <% @merits_tasks[:proceedings].each_with_index do |(_, proceeding), index| %>
+        <%= render 'task_list_section', name: proceeding[:name], tasks: proceeding[:tasks], ccms_code: @merits_tasks[:proceedings].keys[index], section_number: index + 2 %>
+      <% end %>
+    </ol>
+  </div>
   <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_check_merits_answers_path,
+        url: providers_legal_aid_application_merits_task_list_path,
         method: :patch,
         show_draft: true,
         continue_button_text: t('generic.continue')
