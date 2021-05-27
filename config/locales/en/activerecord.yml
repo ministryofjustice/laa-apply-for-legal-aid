@@ -38,3 +38,8 @@ en:
           attributes:
             base:
               none_selected: Select if you receive any types of income
+
+        legal_framework/merits_task_list:
+          attributes:
+            task_list:
+              incomplete: You must complete every section before you can continue

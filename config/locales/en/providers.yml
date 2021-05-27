@@ -269,6 +269,9 @@ en:
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
     proceeding_merits_task:
+      linked_children:
+        show:
+          h1-heading: Which children are covered under this proceeding?
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
@@ -512,8 +515,9 @@ en:
         opponent_details: Opponent details
         statement_of_case: Statement of case
         chances_of_success: Chances of success
-        application_children: Children involved in this application
-        proceeding_children: Children involved in this proceeding
+        children_application: Children involved in this application
+        children_proceeding: Children involved in this proceeding
+        attempts_to_settle: Attempts to settle
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -523,8 +527,10 @@ en:
           opponent_details: opponent
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
-          application_children: chances_of_success_index
-          proceeding_children: chances_of_success_index
+          children_application: involved_child
+          has_other_involved_children: has_other_involved_children
+          children_proceeding: linked_children
+          attempts_to_settle: attempts_to_settle
     merits_reports:
       show:
         heading: Merits report
@@ -860,6 +866,18 @@ en:
     used_multiple_delegated_functions:
       show:
         heading: Which proceedings have you used delegated functions for?
+        extend_variation_or_discharge_part_iv: Extend, variation or discharge - Part IV
+        fgm_protection_order: FGM Protection Order
+        forced_marriage_protection_order: Forced marriage protection order
+        harassment_injunction: Harassment - injunction
+        inherent_jurisdiction_high_court_injunction: Inherent jurisdiction high court injunction
+        nonmolestation_order: Non-molestation order
+        occupation_order: Occupation order
+        variation_or_discharge_under_section_protection_from_harassment_act: Variation or discharge under section 5 protection from harassment act 1997
+        prohibited_steps_order_s8: Prohibited steps order
+        specified_issue_order_s8: Specific issue order
+        child_arrangements_order_contact: Child arrangements order (contact)
+        child_arrangements_order_residence: Child arrangements order (residence)
         none_selected: I have not used delegated functions
     confirm_delegated_functions_dates:
       show:
