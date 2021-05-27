@@ -30,6 +30,7 @@ module LegalFramework
 
     def mark_as_complete!(task_group, task_name)
       task(task_group, task_name).mark_as_complete!
+      unblock_dependant_tasks(task_name)
     end
 
     def self.new_from_serialized(yaml_string)
@@ -41,6 +42,15 @@ module LegalFramework
     end
 
     private
+
+    def unblock_dependant_tasks(blocking_task)
+      @tasks[:proceedings].each do |proceeding|
+        proceeding[1][:tasks].each do |task|
+          dependencies = task.dependencies.map(&:to_sym)
+          task(proceeding[0], task.name).remove_dependency(blocking_task) if dependencies.include?(blocking_task)
+        end
+      end
+    end
 
     def serialize_application_tasks
       @lfa_response[:application][:tasks].each do |task_name, dependencies|

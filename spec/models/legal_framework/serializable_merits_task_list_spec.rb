@@ -76,6 +76,12 @@ module LegalFramework
             smtl.mark_as_complete!(:application, :incident_details)
             expect(smtl.task(:application, :incident_details).state).to eq :complete
           end
+
+          it 'marks the dependant tasks as not_started' do
+            smtl.mark_as_complete!(:application, :application_children)
+            expect(smtl.task(:application, :application_children).state).to eq :complete
+            expect(smtl.task(:DA001, :proceeding_children).state).to eq :not_started
+          end
         end
         context 'proceeding type' do
           it 'marks the task as complete' do
