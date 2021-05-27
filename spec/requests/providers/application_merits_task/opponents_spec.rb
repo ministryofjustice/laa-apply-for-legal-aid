@@ -3,13 +3,20 @@ require 'rails_helper'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe OpponentsController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
       let(:login_provider) { login_as legal_aid_application.provider }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               legal_aid_application: legal_aid_application,
+               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
+      end
 
       describe 'GET /providers/applications/:legal_aid_application_id/opponent' do
         subject { get providers_legal_aid_application_opponent_path(legal_aid_application) }
 
         before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
           login_provider
           subject
         end
@@ -25,7 +32,7 @@ module Providers
 
         context 'with an existing opponent' do
           let(:opponent) { create :opponent }
-          let(:legal_aid_application) { create :legal_aid_application, opponent: opponent }
+          let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, opponent: opponent }
 
           it 'renders successfully' do
             expect(response).to have_http_status(:ok)
@@ -69,7 +76,10 @@ module Providers
           )
         end
 
-        before { login_provider }
+        before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+          login_provider
+        end
 
         it 'creates a new opponent with the values entered' do
           expect { subject }.to change { ::ApplicationMeritsTask::Opponent.count }.by(1)
@@ -81,6 +91,15 @@ module Providers
           expect(opponent.police_notified_details).to eq(sample_opponent.police_notified_details)
           expect(opponent.bail_conditions_set).to eq(sample_opponent.bail_conditions_set)
           expect(opponent.bail_conditions_set_details).to eq(sample_opponent.bail_conditions_set_details)
+        end
+
+        context 'when the multi-proceeding flag is true' do
+          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+          it 'sets the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+          end
         end
 
         it 'redirects to the next page' do
@@ -101,6 +120,15 @@ module Providers
             subject
             expect(response).to have_http_status(:ok)
           end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            end
+          end
         end
 
         context 'when save as draft selected' do
@@ -109,6 +137,15 @@ module Providers
           it 'redirects to provider draft endpoint' do
             subject
             expect(response).to redirect_to providers_legal_aid_applications_path
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            end
           end
         end
       end

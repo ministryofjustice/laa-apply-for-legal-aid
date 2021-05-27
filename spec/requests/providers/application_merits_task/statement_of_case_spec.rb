@@ -4,10 +4,16 @@ require 'sidekiq/testing'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               legal_aid_application: legal_aid_application,
+               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
+      end
 
       describe 'GET /providers/applications/:legal_aid_application_id/statement_of_case' do
         subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
@@ -65,7 +71,10 @@ module Providers
 
         subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
-        before { login_as provider }
+        before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+          login_as provider
+        end
 
         it 'updates the record' do
           subject
@@ -73,10 +82,49 @@ module Providers
           expect(statement_of_case.original_attachments.first).to be_present
         end
 
-        it 'redirects to the next page' do
-          subject
-          apt = legal_aid_application.lead_application_proceeding_type
-          expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
+        describe 'redirect on success' do
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            context 'and the application has a section 8 proceeding type' do
+              let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+
+              context 'and involved children exist' do
+                before { create :involved_child, legal_aid_application: legal_aid_application }
+
+                it 'redirects to the next page' do
+                  subject
+                  expect(response).to redirect_to providers_legal_aid_application_has_other_involved_children_path(legal_aid_application)
+                end
+
+                it 'sets the task to complete' do
+                  subject
+                  expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
+                end
+              end
+
+              context 'and no involved children exist' do
+                it 'redirects to the next page' do
+                  subject
+                  expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+                end
+              end
+            end
+
+            # context 'and the application does not have a section 8 proceeding type' do
+            #   let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+            #   it 'redirects to the next page' do
+            #     subject
+            #     expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+            #   end
+            # end
+          end
+
+          it 'redirects to the next page' do
+            subject
+            apt = legal_aid_application.lead_application_proceeding_type
+            expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(apt)
+          end
         end
 
         context 'uploading a file' do
@@ -322,6 +370,15 @@ module Providers
             subject
             expect(statement_of_case.reload.statement).to eq(entered_text)
             expect(statement_of_case.original_attachments.first).to be_present
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            end
           end
 
           it 'redirects to provider draft endpoint' do
