@@ -110,14 +110,6 @@ module Providers
                 end
               end
             end
-
-            # context 'and the application does not have a section 8 proceeding type' do
-            #   let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
-            #   it 'redirects to the next page' do
-            #     subject
-            #     expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
-            #   end
-            # end
           end
 
           it 'redirects to the next page' do
