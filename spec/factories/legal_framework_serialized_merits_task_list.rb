@@ -8,20 +8,24 @@ FactoryBot.define do
         application: {
           tasks: {
             latest_incident_details: [],
-            opponent_details: []
+            opponent_details: [],
+            children_application: [],
+            statement_of_case: []
           }
         },
         proceeding_types: [
           {
-            ccms_code: 'DA005',
+            ccms_code: 'DA001',
             tasks: {
               chances_of_success: []
             }
           },
           {
-            ccms_code: 'DA001',
+            ccms_code: 'SE014',
             tasks: {
-              chances_of_success: [:opponent_details]
+              chances_of_success: [],
+              children_proceeding: [:children_application],
+              attempts_to_settle: []
             }
           }
         ]
