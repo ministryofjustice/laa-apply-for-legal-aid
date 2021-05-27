@@ -36,9 +36,9 @@ RSpec.describe LegalAidApplications::ConfirmDelegatedFunctionsDateForm, type: :f
         expect(subject).to be_valid
       end
 
-      it 'updates the application types with no reported on date' do
+      it 'updates the application types reported on date to Today' do
         application_proceeding_types.each_with_index do |type, i|
-          expect(type.used_delegated_functions_reported_on).to be_nil
+          expect(type.used_delegated_functions_reported_on).to eq Time.zone.today
           expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
         end
       end
