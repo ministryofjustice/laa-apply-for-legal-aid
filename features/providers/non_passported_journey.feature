@@ -276,7 +276,7 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
+    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
     Then I choose 'Yes'
     Then I fill 'Restrictions details' with 'Yes, there are restrictions. They include...'
     Then I click 'Save and continue'
