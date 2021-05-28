@@ -1,0 +1,62 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_limitations_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
+
+    <h1 class="govuk-heading-xl"><%= t('.h1-heading') %></h1>
+    <h2 class="govuk-heading-l">
+      <%= t('.proceedings_heading') %>
+    </h2>
+
+    <dl class="govuk-summary-list govuk-!-padding-bottom-4">
+      <%= render partial: 'providers/limitations/proceeding_type',
+                 collection: @legal_aid_application.application_proceedings_by_name,
+                 locals: {translation_path: 'providers.limitations.show'} %>
+    </dl>
+
+    <h2 class="govuk-heading-l">
+      <%= t('.cost_heading') %>
+    </h2>
+
+    <h2 class="govuk-heading-m">
+      <%= t('.emergency_certificate') %>
+    </h2>
+
+    <p class="govuk-body">
+      <p><%= t('.default_limit_is') %> <strong><%= gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation,  precision: 0) %></strong></p>
+      <%= form.govuk_radio_buttons_fieldset(:emergency_cost_override,
+                                            legend: { size: 's', tag: 'h2', text: t('.cost_override_question') }) do %>
+        <%= form.govuk_radio_button(:emergency_cost_override, true, link_errors: true, label: {text: t('generic.yes')} ) do %>
+          <%= form.govuk_text_field(
+                :emergency_cost_requested,
+                label: {text: t('.enter_cost_limit')},
+                value: number_to_currency_or_original_string(@form.emergency_cost_requested),
+                prefix_text: t('currency.gbp'),
+                width: 'one-third',
+                ) %>
+
+        <%= form.govuk_text_area(
+              :emergency_cost_reasons,
+              label: {text: t('.enter_cost_reasons')}
+              ) %>
+      <% end %>
+      <%= form.govuk_radio_button(:emergency_cost_override, false, label: {text:  t('generic.no')}) %>
+    <% end %>
+
+    <h2 class="govuk-heading-m">
+      <%= t('.substantive_certificate') %>
+    </h2>
+
+      <div class="govuk-!-padding-bottom-1"></div>
+      <p><%= t('.default_limit_is') %> <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
+    </p>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form
+        ) %>
+  <% end %>
+<% end %>

@@ -153,6 +153,10 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Harassment - injunction'
     Then I should be on a page showing 'Emergency certificate'
     Then I should be on a page showing 'Substantive certificate'
+    Then I should be on a page showing "Do you want to request a higher cost limit?"
+    When I choose 'Yes'
+    And I enter a emergency cost requested '5000'
+    And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
