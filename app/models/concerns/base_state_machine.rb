@@ -12,6 +12,12 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
     unknown
   ].freeze
 
+  PRE_DWP_STATES = %i[
+    initiated
+    entering_applicant_details
+    checking_applicant_details
+  ].freeze
+
   include AASM
 
   aasm do # rubocop:disable Metrics/BlockLength
