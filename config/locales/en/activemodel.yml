@@ -162,6 +162,7 @@ en:
             date_of_birth:
               blank: Enter the date of birth
               date_not_valid: Enter a valid date of birth
+              date_is_in_the_future: Date of birth must be in the past
             full_name:
               blank: Enter the child's full name
         application_merits_task/opponent:

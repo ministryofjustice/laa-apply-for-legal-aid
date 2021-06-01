@@ -1,0 +1,25 @@
+<%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+      url: providers_merits_task_list_linked_children_path(@application_proceeding_type),
+      method: :patch,
+      local: true
+    ) do |form| %>
+    <%= page_template(
+          page_title: t('.h1-heading'),
+          template: :basic
+        ) do %>
+
+      <%= form.govuk_check_boxes_fieldset :involved_children, legend: {size: 'xl', tag: 'h1', text: page_title},
+                                          caption: { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' } do %>
+        <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+
+        <% @involved_children.each do |child| %>
+          <%= form.govuk_check_box child[:name], true, '', multiple: false, link_errors: true, label: {text: child[:name]}, checked: child[:is_checked] %>
+        <% end %>
+      <% end %>
+
+      <div class="govuk-!-padding-bottom-2"></div>
+
+      <%= next_action_buttons(show_draft: true, form: form) %>
+    <% end %>
+<% end %>

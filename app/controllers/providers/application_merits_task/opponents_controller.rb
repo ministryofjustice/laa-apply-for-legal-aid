@@ -7,7 +7,7 @@ module Providers
 
       def update
         @form = Opponents::OpponentForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        render :show unless update_task_save_continue_or_draft(:application, :opponent_details)
       end
 
       private

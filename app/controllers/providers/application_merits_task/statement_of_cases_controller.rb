@@ -9,6 +9,7 @@ module Providers
         if upload_button_pressed?
           perform_upload
         elsif save_continue_or_draft(form)
+          update_task(:application, :statement_of_case)
           convert_new_files_to_pdf
         else
           render :show
@@ -23,6 +24,10 @@ module Providers
       end
 
       private
+
+      def task_list_should_update?
+        application_has_task_list? && !draft_selected?
+      end
 
       def populate_form
         @form = StatementOfCases::StatementOfCaseForm.new(model: statement_of_case)

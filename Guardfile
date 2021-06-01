@@ -9,6 +9,7 @@ end
 
 guard :rspec, cmd: 'bundle exec rspec', all_on_start: false do
   watch(%r{^spec/(.+)_spec\.rb$})
+  watch(%r{^app/controllers/(.+)\.rb$}) { |m| "spec/requests/#{m[1]}_spec.rb".gsub(/_controller/, '') }
   watch(%r{^app/(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^lib/(.+)\.rb$}) { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch(%r{^app/interfaces/api/(.+)\.rb$}) { |m| "spec/api/#{m[1]}_spec.rb" }
@@ -19,7 +20,7 @@ guard :rubocop, all_on_start: false do
   watch(%r{(?:.+/)?\.(rubocop|rubocop_todo)\.yml$}) { |m| File.dirname(m[0]) }
 end
 
-guard :cucumber, cmd: 'cucumber --publish-quiet', notification: false, all_on_start: false do
+guard :cucumber, cmd: 'bundle exec cucumber --publish-quiet', notification: false, all_on_start: false do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$}) { 'features' }
 

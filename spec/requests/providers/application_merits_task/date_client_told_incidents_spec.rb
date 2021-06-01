@@ -3,8 +3,14 @@ require 'rails_helper'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe DateClientToldIncidentsController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
       let(:login_provider) { login_as legal_aid_application.provider }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               legal_aid_application: legal_aid_application,
+               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
+      end
 
       describe 'GET /providers/applications/:legal_aid_application_id/date_client_told_incident' do
         subject do
@@ -74,12 +80,24 @@ module Providers
           )
         end
 
-        before { login_provider }
+        before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+          login_provider
+        end
 
         it 'creates a new incident with the values entered' do
           expect { subject }.to change { ::ApplicationMeritsTask::Incident.count }.by(1)
           expect(incident.told_on).to eq(told_on)
           expect(incident.occurred_on).to eq(occurred_on)
+        end
+
+        context 'when the multi-proceeding flag is true' do
+          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+          it 'sets the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+          end
         end
 
         it 'redirects to the next page' do
@@ -99,6 +117,15 @@ module Providers
           it 'renders show' do
             subject
             expect(response).to have_http_status(:ok)
+          end
+
+          context 'when the multi-proceeding flag is true' do
+            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+            let(:regex) { /name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/ }
+            it 'does not set the task to complete' do
+              subject
+              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(regex)
+            end
           end
         end
 
@@ -132,6 +159,15 @@ module Providers
           it 'redirects to provider draft endpoint' do
             subject
             expect(response).to redirect_to provider_draft_endpoint
+          end
+        end
+
+        context 'when the multi-proceeding flag is true' do
+          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
           end
         end
       end

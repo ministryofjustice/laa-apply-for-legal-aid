@@ -255,6 +255,22 @@ FactoryBot.define do
       end
     end
 
+    trait :with_multiple_proceeding_types_inc_section8 do
+      after(:create) do |application, evaluator|
+        if evaluator.proceeding_types.presence
+          application.proceeding_types = evaluator.proceeding_types
+        else
+          application.proceeding_types << create(:proceeding_type, :with_real_data)
+          application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
+        end
+        pt = application.lead_proceeding_type
+        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
+                                                   scope_limitation_id: sl.id)
+      end
+    end
+
     # :with_delegated_functions trait
     # ===============================
     # sets the df date fields on the application proceeding type records, and also

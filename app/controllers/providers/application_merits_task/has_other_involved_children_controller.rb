@@ -6,12 +6,18 @@ module Providers
       end
 
       def update
+        update_task(:application, :children_application)
+        return continue_or_draft if draft_selected?
         return go_forward(form.has_other_involved_child?) if form.valid?
 
         render :show
       end
 
       private
+
+      def task_list_should_update?
+        application_has_task_list? && form.valid? && !draft_selected? && !form.has_other_involved_child?
+      end
 
       def form
         @form ||= BinaryChoiceForm.call(

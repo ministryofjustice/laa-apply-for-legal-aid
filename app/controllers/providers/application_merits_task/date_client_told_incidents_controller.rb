@@ -7,7 +7,7 @@ module Providers
 
       def update
         @form = Incidents::ToldOnForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        render :show unless update_task_save_continue_or_draft(:application, :latest_incident_details)
       end
 
       private

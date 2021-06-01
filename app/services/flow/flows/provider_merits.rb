@@ -1,17 +1,40 @@
 module Flow
   module Flows
-    class ProviderMerits < FlowSteps
+    class ProviderMerits < FlowSteps # rubocop:disable Metrics/ClassLength
       STEPS = {
+        # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting merits
         start_chances_of_successes: {
           path: ->(application) { urls.providers_legal_aid_application_start_chances_of_success_path(application) },
           forward: :date_client_told_incidents,
           check_answers: :check_merits_answers
         },
-        # the involved children section below has not yet been linked into the rest of the flow
-        # until the merits task page is done
-        # :nocov:
+        start_involved_children_task: {
+          # This allows the statement of case flow to check for involved children while allowing a standard path
+          #  to :involved_children from :has_other_involved_children that always goes to the new children page
+          path: ->(application) do
+            if application.involved_children.any?
+              urls.providers_legal_aid_application_has_other_involved_children_path(application)
+            else
+              urls.new_providers_legal_aid_application_involved_child_path(application)
+            end
+          end
+        },
         involved_children: {
-          path: ->(application) { urls.new_providers_legal_aid_application_involved_child_path(application) },
+          path: ->(application, params) do
+            involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:id]
+            case involved_child_id
+            when 'new'
+              partial_record = ApplicationMeritsTask::InvolvedChild.find_by(
+                full_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:full_name],
+                legal_aid_application_id: application.id
+              )
+              urls.providers_legal_aid_application_involved_child_path(application, partial_record)
+            when /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ # uuid_regex
+              urls.providers_legal_aid_application_involved_child_path(application, involved_child_id)
+            else
+              urls.new_providers_legal_aid_application_involved_child_path(application)
+            end
+          end,
           forward: :has_other_involved_children
         },
         has_other_involved_children: {
@@ -20,12 +43,11 @@ module Flow
             if has_other_involved_child
               :involved_children
             else
-              :date_client_told_incidents
+              Setting.allow_multiple_proceedings? ? :merits_task_lists : :date_client_told_incidents
             end
           }
         },
         remove_involved_child: {
-          path: ->(application, child) { urls.providers_legal_aid_application_remove_involved_child_path(application, child) },
           forward: ->(application) {
             if application.involved_children.count.positive?
               :has_other_involved_children
@@ -34,7 +56,6 @@ module Flow
             end
           }
         },
-        # :nocov:
         date_client_told_incidents: {
           path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponents,
@@ -47,6 +68,7 @@ module Flow
         },
         proceedings_before_the_courts: {
           # :nocov:
+          # TODO: Remove everything connected to proceedings_before_the_courts it's a stub of legacy code
           path: ->(application) do
             apt = application.lead_application_proceeding_type
             urls.providers_merits_task_list_proceedings_before_the_court_path(apt)
@@ -57,28 +79,50 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: :chances_of_success,
+          forward: ->(application) do
+            if Setting.allow_multiple_proceedings?
+              application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists
+            else
+              :chances_of_success
+            end
+          end,
           check_answers: :check_merits_answers
         },
         chances_of_success: {
+          # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting chance_of_success
           path: ->(application) do
             apt = application.lead_application_proceeding_type
             urls.providers_merits_task_list_chances_of_success_index_path(apt)
           end,
           forward: ->(application) do
-            apt = application.lead_application_proceeding_type
-            chances_of_success = apt.chances_of_success
-            chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
+            application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
+            if application_proceeding_type.chances_of_success.success_likely?
+              Setting.allow_multiple_proceedings? ? :merits_task_lists : :check_merits_answers
+            else
+              :success_prospects
+            end
           end
         },
         success_prospects: {
           path: ->(application) do
-            apt = application.lead_application_proceeding_type
-            urls.providers_merits_task_list_success_prospects_path(apt)
+            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
+            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
+            urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
           end,
-          forward: :check_merits_answers
+          forward: ->(_) { Setting.allow_multiple_proceedings? ? :merits_task_lists : :check_merits_answers }
         },
-        merits_task_list: {
+        attempts_to_settle: {
+          forward: :merits_task_lists
+        },
+        linked_children: {
+          path: ->(application) do
+            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
+            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
+            urls.providers_merits_task_list_linked_children_path(application_proceeding_type)
+          end,
+          forward: :merits_task_lists
+        },
+        merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: :check_merits_answers
         },
