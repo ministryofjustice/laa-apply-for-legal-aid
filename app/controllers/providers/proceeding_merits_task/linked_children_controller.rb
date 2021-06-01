@@ -58,13 +58,13 @@ module Providers
 
       def create_record(id)
         application_proceeding_type
-          .application_proceeding_type_involved_children
+          .application_proceeding_type_linked_children
           .create!(involved_child_id: id)
       end
 
       def delete_record(id)
         application_proceeding_type
-          .application_proceeding_type_involved_children
+          .application_proceeding_type_linked_children
           .find_by(involved_child_id: id).destroy!
       end
 

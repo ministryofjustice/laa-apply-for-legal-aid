@@ -1,6 +1,6 @@
 module ProceedingMeritsTask
-  class ApplicationProceedingTypeInvolvedChild < ApplicationRecord
-    self.table_name = :application_proceeding_types_involved_children
+  class ApplicationProceedingTypeLinkedChild < ApplicationRecord
+    self.table_name = :application_proceeding_types_linked_children
     belongs_to :application_proceeding_type
     belongs_to :involved_child, class_name: 'ApplicationMeritsTask::InvolvedChild'
 

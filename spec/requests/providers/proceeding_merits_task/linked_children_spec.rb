@@ -48,7 +48,7 @@ module Providers
 
         context 'all selected' do
           it 'adds involved children to the proceeding type' do
-            expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(3)
+            expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(3)
           end
         end
 
@@ -59,7 +59,7 @@ module Providers
           end
 
           it 'does not add involved children to the proceeding type' do
-            expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
+            expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(0)
           end
         end
 
@@ -71,7 +71,7 @@ module Providers
           end
 
           it 'only adds the specified children to the proceeding type' do
-            proceeding_type_involved_children = application_proceeding_type.application_proceeding_type_involved_children
+            proceeding_type_involved_children = application_proceeding_type.application_proceeding_type_linked_children
             expect { subject }.to change { proceeding_type_involved_children.count }.by(1)
           end
         end
@@ -91,13 +91,13 @@ module Providers
             end
 
             it 'deletes a record if it is deselected' do
-              expect { update }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(-1)
+              expect { update }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(-1)
             end
           end
 
           context 'record already exists' do
             it 'makes no changes if already selected records are left selected' do
-              expect { subject }.to change { application_proceeding_type.application_proceeding_type_involved_children.count }.by(0)
+              expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(0)
             end
           end
         end
