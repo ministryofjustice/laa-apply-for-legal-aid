@@ -7,7 +7,7 @@ module CFE
     def headers
       {
         'Content-Type' => 'application/json',
-        'Accept' => 'application/json;version=3'
+        'Accept' => "application/json;version=#{cfe_version}"
       }
     end
 
@@ -35,12 +35,33 @@ module CFE
       nil
     end
 
+    def cfe_version
+      Setting.allow_multiple_proceedings? ? '4' : '3'
+    end
+
     def write_cfe_result
+      if Setting.allow_multiple_proceedings?
+        create_version_4_result
+      else
+        create_version_3_result
+      end
+    end
+
+    def create_version_3_result
       CFE::V3::Result.create!(
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,
         result: @response.body,
         type: 'CFE::V3::Result'
+      )
+    end
+
+    def create_version_4_result
+      CFE::V4::Result.create!(
+        legal_aid_application_id: legal_aid_application.id,
+        submission_id: @submission.id,
+        result: @response.body,
+        type: 'CFE::V4::Result'
       )
     end
   end

@@ -21,11 +21,16 @@ module CFE
 
     private
 
-    # override this method in the derived class if youe need more/different headers
+    # override this method in the derived class if you need more/different headers
     def headers
       {
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
+        'Accept' => "application/json;version=#{version}"
       }
+    end
+
+    def version
+      Setting.allow_multiple_proceedings? ? '4' : '3'
     end
 
     def conn
