@@ -111,6 +111,14 @@ module CFE
         capital[:total_capital]
       end
 
+      def total_other_assets
+        capital[:total_non_liquid].to_d
+      end
+
+      def total_savings
+        capital[:total_liquid].to_d
+      end
+
       def property
         capital[:capital_items][:properties]
       end
