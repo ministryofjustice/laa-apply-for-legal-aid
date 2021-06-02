@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_071320) do
+ActiveRecord::Schema.define(version: 2021_06_02_110352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -322,7 +322,6 @@ ActiveRecord::Schema.define(version: 2021_05_20_071320) do
   end
 
   create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "application_purpose"
@@ -334,7 +333,6 @@ ActiveRecord::Schema.define(version: 2021_05_20_071320) do
     t.boolean "success_likely"
     t.uuid "application_proceeding_type_id", null: false
     t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
-    t.index ["legal_aid_application_id"], name: "index_chances_of_successes_on_legal_aid_application_id"
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -791,7 +789,6 @@ ActiveRecord::Schema.define(version: 2021_05_20_071320) do
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "chances_of_successes", "application_proceeding_types"
-  add_foreign_key "chances_of_successes", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
