@@ -1,19 +1,23 @@
 require 'rails_helper'
 
 module CFE
-  module V3
+  module V4
     RSpec.describe Result, type: :model do
-      let(:eligible_result) { create :cfe_v3_result }
-      let(:not_eligible_result) { create :cfe_v3_result, :not_eligible }
-      let(:contribution_required_result) { create :cfe_v3_result, :with_capital_contribution_required }
-      let(:no_additional_properties) { create :cfe_v3_result, :no_additional_properties }
-      let(:additional_property) { create :cfe_v3_result, :with_additional_properties }
-      let(:no_vehicles) { create :cfe_v3_result, :no_vehicles }
-      let(:with_maintenance) { create :cfe_v3_result, :with_maintenance_received }
-      let(:with_student_finance) { create :cfe_v3_result, :with_student_finance_received }
-      let(:no_mortgage) { create :cfe_v3_result, :with_no_mortgage_costs }
-      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v3_result }
-      let(:contribution_and_restriction_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+      let(:eligible_result) { create :cfe_v4_result }
+      let(:not_eligible_result) { create :cfe_v4_result, :not_eligible }
+      let(:contribution_required_result) { create :cfe_v4_result, :with_capital_contribution_required }
+      let(:no_additional_properties) { create :cfe_v4_result, :no_additional_properties }
+      let(:additional_property) { create :cfe_v4_result, :with_additional_properties }
+      let(:with_no_vehicles) { create :cfe_v4_result, :with_no_vehicles }
+      let(:with_maintenance) { create :cfe_v4_result, :with_maintenance_received }
+      let(:with_student_finance) { create :cfe_v4_result, :with_student_finance_received }
+      let(:with_total_deductions) { create :cfe_v4_result, :with_total_deductions }
+      let(:with_mortgage) { create :cfe_v4_result, :with_mortgage_costs }
+      let(:with_monthly_income_equivalents) { create :cfe_v4_result, :with_monthly_income_equivalents }
+      let(:with_monthly_outgoing_equivalents) { create :cfe_v4_result, :with_monthly_outgoing_equivalents }
+      let(:with_total_gross_income) { create :cfe_v4_result, :with_total_gross_income }
+      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v4_result }
+      let(:contribution_and_restriction_result) { create :cfe_v4_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
@@ -26,35 +30,35 @@ module CFE
           before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(false) }
 
           context 'eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :eligible }
+            let(:cfe_result) { create :cfe_v4_result, :eligible }
             it 'returns eligible' do
               expect(subject).to eq 'eligible'
             end
           end
 
           context 'not_eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :not_eligible }
+            let(:cfe_result) { create :cfe_v4_result, :not_eligible }
             it 'returns not_eligible' do
               expect(subject).to eq 'not_eligible'
             end
           end
 
           context 'capital_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
             it 'returns capital_contribution_required' do
               expect(subject).to eq 'capital_contribution_required'
             end
           end
 
           context 'income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
             it 'returns income_contribution_required' do
               expect(subject).to eq 'income_contribution_required'
             end
           end
 
           context 'capital_and_income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
             it 'returns capital_and_income_contribution_required' do
               expect(subject).to eq 'capital_and_income_contribution_required'
             end
@@ -65,35 +69,35 @@ module CFE
           before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(true) }
 
           context 'eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :eligible }
+            let(:cfe_result) { create :cfe_v4_result, :eligible }
             it 'returns eligible' do
               expect(subject).to eq 'eligible'
             end
           end
 
           context 'not_eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :not_eligible }
+            let(:cfe_result) { create :cfe_v4_result, :not_eligible }
             it 'returns not_eligible' do
               expect(subject).to eq 'not_eligible'
             end
           end
 
           context 'capital_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
             it 'returns capital_contribution_required' do
               expect(subject).to eq 'capital_contribution_required'
             end
           end
 
           context 'income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
             it 'returns income_contribution_required' do
               expect(subject).to eq 'income_contribution_required'
             end
           end
 
           context 'capital_and_income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
             it 'returns capital_and_income_contribution_required' do
               expect(subject).to eq 'capital_and_income_contribution_required'
             end
@@ -107,35 +111,28 @@ module CFE
           end
 
           context 'eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :eligible }
+            let(:cfe_result) { create :cfe_v4_result, :eligible }
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
           end
 
           context 'not_eligible' do
-            let(:cfe_result) { create :cfe_v3_result, :not_eligible }
-            it 'returns manual_check_required' do
-              expect(subject).to eq 'manual_check_required'
-            end
-          end
-
-          context 'capital_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :not_eligible }
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
           end
 
           context 'income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
           end
 
           context 'capital_and_income_contribution_required' do
-            let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+            let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -185,7 +182,7 @@ module CFE
 
       describe '#version_4?' do
         it 'returns boolean response for cfe version check' do
-          expect(eligible_result.version_4?).to be false
+          expect(eligible_result.version_4?).to be true
         end
       end
 
@@ -207,42 +204,41 @@ module CFE
       #  CAPITAL ITEMS                                               #
       ################################################################
 
-      #  Are the next 2 tests testing the correct thing? Currently checks that an array contains items, what if there are no items?
       describe 'non_liquid_capital_items' do
         it 'returns the description and value for first item in non liquid items array' do
           expect(eligible_result.non_liquid_capital_items.first[:description]).to be_a String
-          expect(eligible_result.non_liquid_capital_items.first[:value].to_d).to eq 3902.92
+          expect(eligible_result.non_liquid_capital_items.first[:value].to_d).to eq 12.00
         end
       end
 
       describe 'liquid_capital_items' do
         it 'returns the description and value for first item in liquid items array' do
           expect(eligible_result.liquid_capital_items.first[:description]).to be_a String
-          expect(eligible_result.liquid_capital_items.first[:value].to_d).to eq 6692.12
+          expect(eligible_result.liquid_capital_items.first[:value].to_d).to eq 1.00
         end
       end
 
       describe 'total_property' do
         it 'returns the assessed value for total property' do
-          expect(eligible_result.total_property).to eq 1134.00
+          expect(eligible_result.total_property).to eq 0.0
         end
       end
 
       describe 'total_capital' do
         it 'returns the assessed value for total capital' do
-          expect(eligible_result.total_capital).to eq '9552.05'
+          expect(eligible_result.total_capital).to eq 144.0
         end
       end
 
       describe 'total_savings' do
         it 'returns the assessed value for liquid assets' do
-          expect(eligible_result.total_savings).to eq 5649.13
+          expect(eligible_result.total_savings).to eq 12.00
         end
       end
 
       describe 'total_other_assets' do
         it 'returns the assessed value for non liquid assets' do
-          expect(eligible_result.total_other_assets).to eq 3902.92
+          expect(eligible_result.total_other_assets).to eq 12.0
         end
       end
 
@@ -253,7 +249,7 @@ module CFE
       describe 'vehicle' do
         it 'returns a vehicle' do
           expect(eligible_result.vehicle).to be_kind_of(Hash)
-          expect(eligible_result.vehicle[:value].to_d).to eq 1784.61
+          expect(eligible_result.vehicle[:value].to_d).to eq 120.0
         end
       end
 
@@ -262,41 +258,41 @@ module CFE
           it 'returns a boolean response if vehicles exist' do
             expect(eligible_result.vehicles?).to be true
           end
-
-          context 'vehicles dont exist'
-          it 'returns a boolean response if vehicles exist' do
-            expect(no_vehicles.vehicles?).to be false
+        end
+        context "vehicles don't exist" do
+          it 'returns a boolean response if vehicles do not exist' do
+            expect(with_no_vehicles.vehicles?).to be false
           end
         end
       end
 
       describe 'vehicle_value' do
         it 'returns the assessed value for applicants vehicle' do
-          expect(eligible_result.vehicle_value).to eq 1784.61
+          expect(eligible_result.vehicle_value).to eq 120.0
         end
       end
 
       describe 'vehicle_loan_amount_outstanding' do
         it 'returns the loan value outstanding on applicants vehicle' do
-          expect(eligible_result.vehicle_loan_amount_outstanding).to eq 3225.77
+          expect(eligible_result.vehicle_loan_amount_outstanding).to eq 12.0
         end
       end
 
       describe 'vehicle_disregard' do
         it 'returns the vehicle disregard for applicants vehicle ' do
-          expect(eligible_result.vehicle_disregard).to eq 1784.61
+          expect(eligible_result.vehicle_disregard).to eq 0.0
         end
       end
 
       describe 'vehicle_assessed_amount' do
         it 'returns the assessed value for the applicants vehicle' do
-          expect(eligible_result.vehicle_assessed_amount).to eq 0.0
+          expect(eligible_result.vehicle_assessed_amount).to eq 120.0
         end
       end
 
       describe 'total_vehicles' do
         it 'returns the assessed value for all applicants vehicle(s)' do
-          expect(eligible_result.total_vehicles).to eq 0.0
+          expect(eligible_result.total_vehicles).to eq 120.0
         end
       end
 
@@ -354,19 +350,19 @@ module CFE
 
       describe 'main_home_value' do
         it 'returns the assessed value for the main home' do
-          expect(eligible_result.main_home_value).to eq 5985.82
+          expect(eligible_result.main_home_value).to eq 10.0
         end
       end
 
       describe 'main_home_outstanding_mortgage' do
         it 'returns the assessed value for the main home' do
-          expect(eligible_result.main_home_outstanding_mortgage).to eq(-7201.44)
+          expect(eligible_result.main_home_outstanding_mortgage).to eq(-20.0)
         end
       end
 
       describe 'main_home_transaction_allowance' do
         it 'returns the assessed value for the main home' do
-          expect(eligible_result.main_home_transaction_allowance).to eq(-179.57)
+          expect(eligible_result.main_home_transaction_allowance).to eq(-0.3)
         end
       end
 
@@ -414,21 +410,52 @@ module CFE
       #  THRESHOLDS                                                  #
       ################################################################
 
-      describe 'gross_income_upper_threshold' do
-        it 'returns the gross income upper threshold' do
-          expect(eligible_result.gross_income_upper_threshold).to eq '999999999999.0'
+      context 'thresholds within proceeding types' do
+        context 'gross income thresholds' do
+          let(:gross_income_proceeding_types) do
+            [
+              {
+                ccms_code: 'DA006',
+                upper_threshold: 999_999_999_999.0,
+                result: 'pending'
+              },
+              {
+                ccms_code: 'DA002',
+                upper_threshold: 999_999_999_999.0,
+                result: 'pending'
+              }
+            ]
+          end
+          describe '#gross_income_per_proceeding_types' do
+            it 'returns the gross income per proceeding type' do
+              expect(eligible_result.gross_income_proceeding_types).to match gross_income_proceeding_types
+            end
+          end
         end
-      end
 
-      describe 'disposable_income_upper_threshold' do
-        it 'returns the disposable income upper threshold' do
-          expect(eligible_result.disposable_income_upper_threshold).to eq '999999999999.0'
-        end
-      end
+        context 'disposable income thresholds' do
+          let(:disposable_income_proceeding_types) do
+            [
+              {
+                ccms_code: 'DA006',
+                upper_threshold: 999_999_999_999.0,
+                lower_threshold: 315.0,
+                result: 'pending'
+              },
+              {
+                ccms_code: 'DA002',
+                upper_threshold: 999_999_999_999.0,
+                lower_threshold: 315.0,
+                result: 'pending'
+              }
+            ]
+          end
 
-      describe 'disposable_income_lower_threshold' do
-        it 'returns the disposable income lower threshold' do
-          expect(eligible_result.disposable_income_lower_threshold).to eq '315.0'
+          describe '#disposable_income_proceeding_types' do
+            it 'returns the disposable income upper threshold' do
+              expect(eligible_result.disposable_income_proceeding_types).to match disposable_income_proceeding_types
+            end
+          end
         end
       end
 
@@ -439,13 +466,13 @@ module CFE
       describe 'mortgage per month' do
         context 'when mortgage is paid' do
           it 'returns the value of mortgage per month' do
-            expect(eligible_result.mortgage_per_month).to eq 125.0
+            expect(with_mortgage.mortgage_per_month).to eq 120.0
           end
         end
 
         context 'when no mortgage is paid' do
           it 'returns the value of mortgage per month' do
-            expect(no_mortgage.mortgage_per_month).to eq 0.0
+            expect(eligible_result.mortgage_per_month).to eq 0.0
           end
         end
       end
@@ -458,49 +485,49 @@ module CFE
 
       describe 'total_capital_before_pensioner_disregard' do
         it 'returns total capital before pension disregard' do
-          expect(eligible_result.total_capital_before_pensioner_disregard).to eq 10_686.05
+          expect(eligible_result.total_capital_before_pensioner_disregard).to eq 144.0
         end
       end
 
       describe 'total_disposable_capital' do
         it 'returns total disposable capital' do
-          expect(eligible_result.total_disposable_capital).to eq 10_686.05
+          expect(eligible_result.total_disposable_capital).to eq 144.0
         end
       end
 
       describe 'total_monthly_income' do
         it 'returns total monthly income' do
-          expect(eligible_result.total_monthly_income).to eq 712.28
+          expect(with_monthly_income_equivalents.total_monthly_income).to eq 40.0
         end
       end
 
       describe 'total_monthly_outgoings' do
         it 'returns total monthly outgoings' do
-          expect(eligible_result.total_monthly_outgoings).to eq 675.0
+          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 40.0
         end
       end
 
       describe 'total_gross_income' do
         it 'returns total gross income' do
-          expect(eligible_result.total_gross_income).to eq 150.0
+          expect(with_total_gross_income.total_gross_income).to eq 150.0
         end
       end
 
       describe 'total_disposable_income_assessed' do
         it 'returns total disposable income assessed' do
-          expect(eligible_result.total_disposable_income_assessed).to eq '0.0'
+          expect(eligible_result.total_disposable_income_assessed).to eq 0.0
         end
       end
 
       describe 'total_gross_income_assessed' do
         it 'returns total gross income assessed' do
-          expect(eligible_result.total_gross_income_assessed).to eq '150.0'
+          expect(with_total_gross_income.total_gross_income_assessed).to eq 150.0
         end
       end
 
       describe 'total_deductions' do
         it 'returns total deductions' do
-          expect(eligible_result.total_deductions).to eq 1791.86
+          expect(with_total_deductions.total_deductions).to eq 1300.0
         end
       end
 
