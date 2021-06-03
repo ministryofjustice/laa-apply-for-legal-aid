@@ -39,7 +39,10 @@ module Providers
 
       describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children' do
         let(:params) do
-          involved_children_names.index_with { |_k| 'true' }
+          {
+            proceeding_merits_task_application_proceeding_type_linked_child:
+              { linked_children: legal_aid_application.involved_children.map(&:id) }
+          }
         end
 
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
@@ -54,8 +57,10 @@ module Providers
 
         context 'none selected' do
           let(:params) do
-            params = involved_children_names.index_with { |_k| 'false' }
-            params
+            {
+              proceeding_merits_task_application_proceeding_type_linked_child:
+                { linked_children: involved_children_names.map { |_k| '' } }
+            }
           end
 
           it 'does not add involved children to the proceeding type' do
@@ -65,9 +70,10 @@ module Providers
 
         context 'some selected' do
           let(:params) do
-            params = involved_children_names.index_with { |_k| 'false' }
-            params[involved_children_names.first] = 'true'
-            params
+            {
+              proceeding_merits_task_application_proceeding_type_linked_child:
+                { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' } }
+            }
           end
 
           it 'only adds the specified children to the proceeding type' do
@@ -76,22 +82,32 @@ module Providers
           end
         end
 
-        context 'previous selections' do
+        context 'when a user has previously linked two children' do
           let(:update) do
             patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: new_params
           end
 
-          before { subject }
+          let(:first_child) { legal_aid_application.involved_children.first }
+          let(:second_child) { legal_aid_application.involved_children.second }
+          let(:third_child) { legal_aid_application.involved_children.third }
+          let(:initial_array) { [second_child.id, third_child.id] }
+          let(:linked_children_params) { [first_child.id, '', ''] }
+          before do
+            create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: second_child
+            create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: third_child
+            subject
+          end
 
           context 'remove record' do
             let(:new_params) do
-              params = involved_children_names.index_with { |_k| 'true' }
-              params[involved_children_names.first] = 'false'
-              params
+              {
+                proceeding_merits_task_application_proceeding_type_linked_child:
+                  { linked_children: [first_child.id, '', ''] }
+              }
             end
 
             it 'deletes a record if it is deselected' do
-              expect { update }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(-1)
+              expect { update }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(-2)
             end
           end
 
