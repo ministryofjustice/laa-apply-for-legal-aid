@@ -1,0 +1,32 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name | trunc 26 }}-daily-admin-report
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: '0 20 * * *'
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: daily-admin-report
+            image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+            imagePullPolicy: IfNotPresent
+            command: ['rake', "job:admin_reports:upload"]
+{{ include "apply-for-legal-aid.envs" . | nindent 12 }}
+            resources:
+              limits:
+                cpu: 200m
+                memory: 256Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
+          restartPolicy: Never

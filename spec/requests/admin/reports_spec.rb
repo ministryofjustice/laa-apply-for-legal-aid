@@ -26,10 +26,8 @@ RSpec.describe Admin::ReportsController, type: :request do
   describe 'GET download_submitted' do
     subject { get admin_reports_submitted_csv_path(format: :csv) }
 
-    it 'calls the report generator' do
-      expect(Reports::MIS::ApplicationDetailsReport).to receive(:new).and_call_original
-      expect_any_instance_of(Reports::MIS::ApplicationDetailsReport).to receive(:run).and_call_original
-      subject
+    before do
+      create :admin_report, :with_reports_attached
     end
 
     it 'renders successfully' do
@@ -39,17 +37,15 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'sends the data' do
       subject
-      expect(response.body).to match(/^Firm name,User name,Office ID,/)
+      expect(response.body).to match(/^col1,col2,col3/)
     end
   end
 
   describe 'GET download_non_passported' do
     subject { get admin_reports_non_passported_csv_path(format: :csv) }
 
-    it 'calls the report generator' do
-      expect(Reports::MIS::NonPassportedApplicationsReport).to receive(:new).and_call_original
-      expect_any_instance_of(Reports::MIS::NonPassportedApplicationsReport).to receive(:run).and_call_original
-      subject
+    before do
+      create :admin_report, :with_reports_attached
     end
 
     it 'renders successfully' do
@@ -59,7 +55,7 @@ RSpec.describe Admin::ReportsController, type: :request do
 
     it 'sends the data' do
       subject
-      expect(response.body).to match(/^state,ccms_reason,username,provider_email,created_at/)
+      expect(response.body).to match(/^col1,col2,col3/)
     end
   end
 
