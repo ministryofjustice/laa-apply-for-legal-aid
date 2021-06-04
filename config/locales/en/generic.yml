@@ -5,6 +5,7 @@ en:
     address:
       postcode: Postcode
       postcode_label: postcode
+    attach_file: Attach a file
     back: Back
     back_to_your_applications: Back to your applications
     cancel: Cancel
@@ -50,7 +51,7 @@ en:
     toggle_navigation: Show or hide Top Level Navigation
     undefined: Undefined
     upload: Upload
-    upload_file: Attach a file
+    upload_file: Upload a file
     view: View
     'yes': 'Yes'
     uploading: Uploading...
