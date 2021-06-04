@@ -93,6 +93,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   firms: {
     name: -> { "#{Faker::Company.name}\n" }
   },
+  gateway_evidences: {},
   incidents: {
     details: -> { Faker::Lorem.sentence }
   },
