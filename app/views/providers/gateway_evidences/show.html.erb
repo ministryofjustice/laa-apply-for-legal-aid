@@ -1,0 +1,77 @@
+<div id="files-errors-container" role="alert" tabindex="-1"></div>
+<% new_head_title = if @successfully_deleted
+                      @successfully_deleted
+                    elsif @error_message || @successful_upload
+                      "#{@successful_upload} #{@error_message}"
+                    else
+                      t('.h1-heading')
+                    end %>
+<%= page_template(
+      page_title: "Upload supporting evidence",
+      head_title: new_head_title,
+      template: :basic,
+      back_link: { path: providers_legal_aid_application_merits_task_list_path(@legal_aid_application) }
+    ) do %>
+
+  <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_gateway_evidence_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_error_summary %>
+
+    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+
+      <div class="govuk-inset-text"><%= t('.hint_text') %></div>
+
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
+                                hint: {text: t('.size_hint')} %>
+
+      <%= form.submit(
+              t('generic.upload'),
+              id: 'upload',
+              name: 'upload_button',
+              class: 'govuk-button govuk-button--secondary'
+          ) %>
+
+      <% #  Customised accessibility alerts within this span below %>
+      <% if @successfully_deleted %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+      <% end %>
+      <% if @error_message || @successful_upload %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div id="uploaded-files-table-container">
+    <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+  </div>
+
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_gateway_evidence_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_radio_divider %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>
+
+<script nonce="<%= content_security_policy_script_nonce %>">
+  window.LAA_VARS = {
+    images: {
+      loading_small: <%= asset_pack_path('media/images/loading-small.gif').to_json.html_safe %>
+    },
+    locales: {
+      generic: {
+        uploading: <%= t('generic.uploading').to_json.html_safe %>
+      }
+    }
+  };
+</script>
