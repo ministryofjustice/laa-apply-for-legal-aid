@@ -203,16 +203,32 @@ RSpec.describe 'check merits answers requests', type: :request do
         login_as application.provider
         get providers_legal_aid_application_end_of_application_path(application)
         get providers_legal_aid_application_check_merits_answers_path(application)
-        subject
       end
 
       it 'transitions to provider_entering_merits state' do
+        subject
         expect(application.reload.provider_entering_merits?).to be true
       end
 
       describe 'redirection' do
-        it 'redirects to chances_of_success page' do
-          expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(application.lead_application_proceeding_type)
+        context 'when multiple proceeding flag is false' do
+          before do
+            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
+            subject
+          end
+          it 'redirects to chances_of_success page' do
+            expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(application.lead_application_proceeding_type)
+          end
+        end
+
+        context 'when multiple proceeding flag is true' do
+          before do
+            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
+            subject
+          end
+          it 'redirects to gateway_evidence page' do
+            expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)
+          end
         end
       end
     end

@@ -69,8 +69,8 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
-      it 'redirects to the check your answers page' do
-        expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
+      it 'redirects to the gateway evidence page' do
+        expect(response).to redirect_to(providers_legal_aid_application_gateway_evidence_path(legal_aid_application))
       end
     end
 
