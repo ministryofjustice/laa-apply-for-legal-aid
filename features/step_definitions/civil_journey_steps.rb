@@ -366,6 +366,19 @@ Given('I start the journey as far as the start of the vehicle section') do
   )
 end
 
+Given('I have completed a non-passported application and reached the merits task_list') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_multiple_proceeding_types_inc_section8,
+    :with_non_passported_state_machine,
+    :provider_entering_merits
+  )
+  create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
+end
+
 Given('I used delegated functions') do
   @legal_aid_application.application_proceeding_types.each do |apt|
     apt.update!(used_delegated_functions_on: Date.current,
@@ -588,7 +601,7 @@ end
 
 And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
   if visibility == 'see'
-    expect(page).to have_content(text)
+    expect(page).to have_content(/#{text}/)
   else
     expect(page).not_to have_content(text)
   end
