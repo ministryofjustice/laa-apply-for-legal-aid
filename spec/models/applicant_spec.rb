@@ -124,19 +124,35 @@ RSpec.describe Applicant, type: :model do
     let(:benefits) { create :transaction_type, :credit, name: 'benefits' }
     let(:transaction_array) { [benefits] }
     let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
-    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
 
     describe '#receives_maintenance?' do
       subject { legal_aid_application.applicant.receives_maintenance? }
 
       context 'when they receive maintenance' do
-        let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
+        context 'with cfe version 3' do
+          let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
-        it { is_expected.to be true }
+          it { is_expected.to be true }
+        end
+        context 'with cfe version 4 result' do
+          let!(:cfe_result) { create :cfe_v4_result, :with_maintenance_received, submission: cfe_submission }
+
+          it { is_expected.to be true }
+        end
       end
 
       context 'when they do not receive maintenance' do
-        it { is_expected.to be false }
+        context 'with cfe version 3' do
+          let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+
+          it { is_expected.to be false }
+        end
+        context 'with cfe version 4 result' do
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it { is_expected.to be false }
+        end
       end
     end
 
@@ -144,13 +160,29 @@ RSpec.describe Applicant, type: :model do
       subject { legal_aid_application.applicant.maintenance_per_month }
 
       context 'when they receive maintenance' do
-        let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
+        context 'with cfe version 3' do
+          let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
-        it { is_expected.to eq '150.00' }
+          it { is_expected.to eq '150.00' }
+        end
+        context 'with cfe version 4 result' do
+          let!(:cfe_result) { create :cfe_v4_result, :with_maintenance_received, submission: cfe_submission }
+
+          it { is_expected.to eq '150.00' }
+        end
       end
 
       context 'when they do not receive maintenance' do
-        it { is_expected.to eq '0.0' }
+        context 'with cfe version 3' do
+          let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+
+          it { is_expected.to eq '0.00' }
+        end
+        context 'with cfe version 4 result' do
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it { is_expected.to eq '0.00' }
+        end
       end
     end
   end
@@ -161,13 +193,60 @@ RSpec.describe Applicant, type: :model do
     subject { legal_aid_application.applicant.mortgage_per_month }
 
     context 'when they pay a mortgage' do
-      let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+      context 'with cfe version 3 result' do
+        let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
-      it { is_expected.to eq '125.00' }
+        it { is_expected.to eq '125.00' }
+
+        context 'when they do not pay a mortgage' do
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it { is_expected.to eq '0.00' }
+        end
+      end
+      context 'with cfe version 4 result' do
+        let!(:cfe_result) { create :cfe_v4_result, :with_mortgage_costs, submission: cfe_submission }
+
+        it { is_expected.to eq '120.00' }
+
+        context 'when they do not pay a mortgage' do
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it { is_expected.to eq '0.00' }
+        end
+      end
+    end
+  end
+
+  describe '#valid_cfe_result_version?' do
+    let(:applicant) { create :applicant }
+
+    context 'with CFE version 3 result' do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v3_result, applicant: applicant }
+
+      it 'returns true' do
+        expect(applicant.valid_cfe_result_version?).to eq true
+      end
+    end
+    context 'with CFE version 4 result' do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v4_result, applicant: applicant }
+
+      it 'returns true' do
+        expect(applicant.valid_cfe_result_version?).to eq true
+      end
     end
 
-    context 'when they do not pay a mortgage' do
-      it { is_expected.to eq '0.0' }
+    context 'with CFE version out of scope result' do
+      let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+      let(:cfe_version_5_result) { double 'CFE::V5::Result' }
+
+      before do
+        allow_any_instance_of(Applicant).to receive(:cfe_result_type).and_return(cfe_version_5_result)
+      end
+
+      it 'returns false' do
+        expect(applicant.valid_cfe_result_version?).to eq false
+      end
     end
   end
 end

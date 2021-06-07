@@ -57,16 +57,24 @@ class Applicant < ApplicationRecord
   end
 
   def maintenance_per_month
-    cfe_result = legal_aid_application&.most_recent_cfe_submission&.result
-    return '0.0' unless cfe_result.is_a?(CFE::V3::Result)
+    return '0.0' unless valid_cfe_result_version?
 
     format('%<amount>.2f', amount: cfe_result.maintenance_per_month).to_s || '0.0'
   end
 
-  def mortgage_per_month
-    cfe_result = legal_aid_application&.most_recent_cfe_submission&.result
-    return '0.0' unless cfe_result.is_a?(CFE::V3::Result)
+  delegate :type, to: :cfe_result, prefix: true
 
-    format('%<amount>.2f', amount: cfe_result.mortgage_per_month).to_s || '0.0'
+  def cfe_result
+    legal_aid_application&.most_recent_cfe_submission&.result
+  end
+
+  def valid_cfe_result_version?
+    [CFE::V3::Result, CFE::V4::Result].any? { |klass| cfe_result_type == klass.to_s }
+  end
+
+  def mortgage_per_month
+    return '0.0' unless valid_cfe_result_version?
+
+    format('%<amount>.2f', amount: cfe_result.mortgage_per_month || 0)
   end
 end

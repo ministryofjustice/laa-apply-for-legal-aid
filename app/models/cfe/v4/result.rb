@@ -1,66 +1,86 @@
 module CFE
-  module V3
+  module V4
     class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
       def assessment_result
-        return nil if result_hash[:assessment].nil?
+        return nil if result_summary.nil?
 
-        result_hash[:assessment][:assessment_result]
+        overall_result[:result]
       end
 
-      def capital_assessment_result
-        capital[:assessment_result]
+      def overall_result
+        result_summary[:overall_result]
+      end
+
+      def result_summary
+        result_hash[:result_summary]
+      end
+
+      def assessment
+        result_hash[:assessment]
       end
 
       def capital_contribution_required?
-        capital_assessment_result == 'contribution_required'
+        capital_contribution > 0.0
       end
 
       def capital_contribution
-        capital[:capital_contribution].to_d
-      end
-
-      def income_assessment_result
-        disposable_income[:assessment_result]
+        overall_result[:capital_contribution]
       end
 
       def income_contribution_required?
-        income_assessment_result == 'contribution_required'
+        income_contribution > 0.0
       end
 
       def income_contribution
-        disposable_income[:income_contribution].to_d
+        overall_result[:income_contribution]
+      end
+
+      def capital_summary
+        result_summary[:capital]
+      end
+
+      def total_other_assets
+        capital_summary[:total_non_liquid]
+      end
+
+      def total_savings
+        capital_summary[:total_liquid]
       end
 
       def capital
-        result_hash[:assessment][:capital]
+        assessment[:capital]
       end
 
-      def gross_income
-        result_hash[:assessment][:gross_income]
+      def gross_income_breakdown
+        assessment[:gross_income]
+      end
+
+      def gross_income_summary
+        result_summary[:gross_income]
       end
 
       def total_disposable_income_assessed
-        disposable_income[:total_disposable_income]
+        disposable_income_summary[:total_disposable_income]
       end
 
       def total_gross_income_assessed
-        gross_income[:summary][:total_gross_income]
+        gross_income_summary[:total_gross_income]
       end
 
-      def gross_income_upper_threshold
-        gross_income[:summary][:upper_threshold]
+      def gross_income_proceeding_types
+        gross_income_summary[:proceeding_types]
       end
 
-      def disposable_income
-        result_hash[:assessment][:disposable_income]
+      def disposable_income_summary
+        result_summary[:disposable_income]
       end
 
-      def disposable_income_lower_threshold
-        disposable_income[:lower_threshold]
+      def disposable_income_breakdown
+        assessment[:disposable_income]
       end
 
-      def disposable_income_upper_threshold
-        disposable_income[:upper_threshold]
+      def disposable_income_proceeding_types
+        disposable_income_summary[:proceeding_types]
       end
 
       def vehicles
@@ -68,7 +88,7 @@ module CFE
       end
 
       def remarks
-        Remarks.new(result_hash[:assessment][:remarks])
+        Remarks.new(assessment[:remarks])
       end
 
       ################################################################
@@ -77,16 +97,16 @@ module CFE
       #                                                              #
       ################################################################
 
-      def mortgage_per_month
-        disposable_income[:gross_housing_costs].to_d
+      def total_gross_income
+        total_gross_income_assessed
       end
 
-      def total_gross_income
-        gross_income[:summary][:total_gross_income].to_d
+      def mortgage_per_month
+        disposable_income_summary[:gross_housing_costs]
       end
 
       def maintenance_per_month
-        disposable_income[:maintenance_allowance].to_d
+        disposable_income_summary[:maintenance_allowance]
       end
 
       ################################################################
@@ -104,19 +124,11 @@ module CFE
       end
 
       def total_property
-        capital[:total_property].to_d
+        capital_summary[:total_property]
       end
 
       def total_capital
-        capital[:total_capital]
-      end
-
-      def total_other_assets
-        capital[:total_non_liquid].to_d
-      end
-
-      def total_savings
-        capital[:total_liquid].to_d
+        result_summary[:capital][:total_capital]
       end
 
       def property
@@ -146,11 +158,11 @@ module CFE
       end
 
       def vehicle_value
-        vehicle[:value].to_d
+        vehicle[:value]
       end
 
       def total_vehicles
-        capital[:total_vehicle].to_d
+        capital_summary[:total_vehicle]
       end
 
       ################################################################
@@ -160,27 +172,27 @@ module CFE
       ################################################################
 
       def monthly_state_benefits
-        gross_income[:state_benefits][:monthly_equivalents][:all_sources].to_d
+        gross_income_breakdown[:state_benefits][:monthly_equivalents][:all_sources]
       end
 
       def mei_friends_or_family
-        monthly_income_equivalents[:friends_or_family].to_d
+        monthly_income_equivalents[:friends_or_family]
       end
 
       def mei_maintenance_in
-        monthly_income_equivalents[:maintenance_in].to_d
+        monthly_income_equivalents[:maintenance_in]
       end
 
       def mei_property_or_lodger
-        monthly_income_equivalents[:property_or_lodger].to_d
+        monthly_income_equivalents[:property_or_lodger]
       end
 
       def mei_student_loan
-        gross_income[:irregular_income][:monthly_equivalents][:student_loan].to_d
+        gross_income_breakdown[:irregular_income][:monthly_equivalents][:student_loan]
       end
 
       def mei_pension
-        monthly_income_equivalents[:pension].to_d
+        monthly_income_equivalents[:pension]
       end
 
       def total_monthly_income
@@ -194,19 +206,19 @@ module CFE
       ################################################################
 
       def moe_housing
-        monthly_outgoing_equivalents[:rent_or_mortgage].to_d.abs
+        monthly_outgoing_equivalents[:rent_or_mortgage].abs
       end
 
       def moe_childcare
-        monthly_outgoing_equivalents[:child_care].to_d.abs
+        monthly_outgoing_equivalents[:child_care].abs
       end
 
       def moe_maintenance_out
-        monthly_outgoing_equivalents[:maintenance_out].to_d.abs
+        monthly_outgoing_equivalents[:maintenance_out].abs
       end
 
       def moe_legal_aid
-        monthly_outgoing_equivalents[:legal_aid].to_d.abs
+        monthly_outgoing_equivalents[:legal_aid].abs
       end
 
       def total_monthly_outgoings
@@ -220,11 +232,11 @@ module CFE
       ################################################################
 
       def dependants_allowance
-        deductions[:dependants_allowance].to_d
+        deductions[:dependants_allowance]
       end
 
       def disregarded_state_benefits
-        deductions[:disregarded_state_benefits].to_d
+        deductions[:disregarded_state_benefits]
       end
 
       def total_deductions
@@ -234,16 +246,16 @@ module CFE
       private
 
       def monthly_income_equivalents
-        gross_income[:other_income][:monthly_equivalents][:all_sources]
+        gross_income_breakdown[:other_income][:monthly_equivalents][:all_sources]
       end
 
       def monthly_outgoing_equivalents
-        disposable_income[:monthly_equivalents][:all_sources]
+        disposable_income_breakdown[:monthly_equivalents][:all_sources]
       end
 
       def deductions
         # stub out zero values if not found until CFE is updated
-        disposable_income[:deductions] || { dependants_allowance: '0.0', disregarded_state_benefits: '0.0' }
+        disposable_income_breakdown[:deductions] || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
       end
     end
   end

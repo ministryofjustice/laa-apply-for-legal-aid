@@ -5,14 +5,29 @@ module CFE
     end
 
     def request_body
-      {
-        client_reference_id: legal_aid_application.application_ref,
-        submission_date: legal_aid_application.calculation_date,
-        matter_proceeding_type: 'domestic_abuse'
-      }.to_json
+      request_hash.to_json
     end
 
     private
+
+    def request_hash
+      {
+        client_reference_id: legal_aid_application.application_ref,
+        submission_date: legal_aid_application.calculation_date
+      }.merge(options)
+    end
+
+    def options
+      Setting.allow_multiple_proceedings? ? multiple_proceedings : { matter_proceeding_type: 'domestic_abuse' }
+    end
+
+    def multiple_proceedings
+      {
+        proceeding_types: {
+          ccms_codes: legal_aid_application.proceeding_types.map(&:ccms_code)
+        }
+      }
+    end
 
     def process_response
       @submission.assessment_id = @response['assessment_id']

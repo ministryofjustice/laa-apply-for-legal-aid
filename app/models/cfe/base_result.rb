@@ -23,6 +23,10 @@ module CFE
       assessment_result == 'eligible'
     end
 
+    def version_4?
+      result_hash[:version] == '4'
+    end
+
     ################################################################
     #                                                              #
     #  MAIN HOME VALUES                                            #
@@ -30,23 +34,24 @@ module CFE
     ################################################################
 
     def main_home_value
-      main_home[:value].to_d
+      main_home[:value]&.to_d
     end
 
     def main_home_outstanding_mortgage
-      main_home[:allowable_outstanding_mortgage].to_d * -1
+      -1 * main_home[:allowable_outstanding_mortgage]&.to_d
     end
 
     def main_home_transaction_allowance
-      main_home[:transaction_allowance].to_d * -1
+      -1 * main_home[:transaction_allowance]&.to_d
     end
 
     def main_home_equity_disregard
-      main_home[:main_home_equity_disregard].to_d * -1
+      -1 * main_home[:main_home_equity_disregard]&.to_d
     end
 
     def main_home_assessed_equity
-      main_home[:assessed_equity].to_d.positive? ? main_home[:assessed_equity].to_d : 0.0
+      assessed_equity = main_home[:assessed_equity]&.to_d
+      assessed_equity.positive? ? assessed_equity : 0.0
     end
 
     ################################################################
@@ -60,37 +65,24 @@ module CFE
     end
 
     def additional_property
-      property[:additional_properties].first
+      additional_properties.first
     end
 
     def additional_property_value
-      additional_property[:value].to_d
+      additional_property[:value]&.to_d
     end
 
     def additional_property_transaction_allowance
-      additional_property[:transaction_allowance].to_d * -1
+      -1 * additional_property[:transaction_allowance]&.to_d
     end
 
     def additional_property_mortgage
-      additional_property[:allowable_outstanding_mortgage].to_d * -1
+      -1 * additional_property[:allowable_outstanding_mortgage]&.to_d
     end
 
     def additional_property_assessed_equity
-      additional_property[:assessed_equity].to_d.positive? ? additional_property[:assessed_equity].to_d : 0.0
-    end
-
-    ################################################################
-    #                                                              #
-    #  CAPITAL ITEMS                                               #
-    #                                                              #
-    ################################################################
-
-    def total_savings
-      capital[:total_liquid].to_d
-    end
-
-    def total_other_assets
-      capital[:total_non_liquid].to_d
+      assessed_equity = additional_property[:assessed_equity]&.to_d
+      assessed_equity.positive? ? assessed_equity : 0.0
     end
 
     ################################################################
@@ -100,7 +92,7 @@ module CFE
     ################################################################
 
     def vehicle_loan_amount_outstanding
-      vehicle[:loan_amount_outstanding].to_d
+      vehicle[:loan_amount_outstanding]&.to_d
     end
 
     def vehicle_disregard
@@ -108,7 +100,7 @@ module CFE
     end
 
     def vehicle_assessed_amount
-      vehicle[:assessed_value].to_d
+      vehicle[:assessed_value]&.to_d
     end
 
     ################################################################
@@ -118,7 +110,11 @@ module CFE
     ################################################################
 
     def pensioner_capital_disregard
-      capital[:pensioner_capital_disregard].to_d * -1
+      if version_4?
+        -1 * capital_summary[:pensioner_capital_disregard]&.to_d
+      else
+        -1 * capital[:pensioner_capital_disregard]&.to_d
+      end
     end
 
     def total_capital_before_pensioner_disregard
@@ -136,7 +132,10 @@ module CFE
     ################################################################
 
     def existing_and_not_all_zero?(property)
-      property.present? && property[:value].to_d > 0.0
+      return false if property.nil?
+
+      property_value = property[:value]&.to_d
+      property.present? && property_value > 0.0
     end
 
     private
