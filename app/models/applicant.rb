@@ -75,6 +75,6 @@ class Applicant < ApplicationRecord
   def mortgage_per_month
     return '0.0' unless valid_cfe_result_version?
 
-    format('%<amount>.2f', amount: cfe_result.mortgage_per_month).to_s || '0.0'
+    format('%<amount>.2f', amount: cfe_result.mortgage_per_month || 0)
   end
 end
