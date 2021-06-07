@@ -28,7 +28,11 @@ module Flow
                 full_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:full_name],
                 legal_aid_application_id: application.id
               )
-              urls.providers_legal_aid_application_involved_child_path(application, partial_record)
+              if partial_record
+                urls.providers_legal_aid_application_involved_child_path(application, partial_record)
+              else
+                urls.new_providers_legal_aid_application_involved_child_path(application)
+              end
             when /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ # uuid_regex
               urls.providers_legal_aid_application_involved_child_path(application, involved_child_id)
             else
