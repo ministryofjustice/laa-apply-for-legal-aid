@@ -1855,6 +1855,7 @@ module CCMS
           [:global_means, 'OUT_GB_INPUT_C_20WP3_379A'],
           [:global_means, 'OUT_GB_PROC_C_34WP3_12A'],
           [:global_means, 'OUT_INCOME_CONT'],
+          [:global_means, 'PASSPORTED_NINO'],
           [:global_means, 'PROVIDER_CASE_REFERENCE'],
           [:global_means, 'PUI_CLIENT_INCOME_CONT'],
           [:global_means, 'RB_VERSION_DATE_MEANS'],

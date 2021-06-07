@@ -396,6 +396,14 @@ module CCMS
           end
         end
 
+        context 'PASSPORTED_NINO' do
+          it 'generates PASSPORTED NINO in global merits' do
+            block = XmlExtractor.call(xml, :global_means, 'PASSPORTED_NINO')
+            expect(block).to have_text_response applicant.national_insurance_number
+            expect(block).to be_user_defined
+          end
+        end
+
         context 'GB_INPUT_B_9WP3_353A' do
           context 'applicant has a student loan/grant' do
             let(:student_loan_income) { create :transaction_type, :credit, name: 'student_loan' }
