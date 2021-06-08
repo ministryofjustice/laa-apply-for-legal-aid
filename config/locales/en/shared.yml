@@ -184,13 +184,14 @@ en:
         disposable_income_lower_limit: Disposable income lower limit
         disposable_income_upper_limit: Disposable income upper limit
         disposable_income_contribution: Income contribution
-      merits:
+      merits: &merits
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
         case-details-heading: Case details
         involved-children-heading: Children involved in this application
         opponent-heading: Opponent details
         latest-incident-heading: Latest incident details
+        statement-of-case-heading: Statement of case
         items:
           client_declaration: Client declaration
           client_declaration_answer: Read & agreed
@@ -209,6 +210,8 @@ en:
           notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           details_of_latest_incident: What happened during the incident?
+      merits_orig: # TODO: Delete when Multi-proceeding flag is removed
+        <<: *merits
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:

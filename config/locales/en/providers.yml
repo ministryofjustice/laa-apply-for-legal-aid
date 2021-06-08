@@ -569,6 +569,7 @@ en:
         heading: Merits report
         client_details_heading: Client details
         applying_for: What you’re applying for
+        delegated_functions: Delegated functions
     means_reports:
       caseworker_review:
         required: Caseworker review required?
