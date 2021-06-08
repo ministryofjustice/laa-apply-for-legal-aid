@@ -268,6 +268,10 @@ FactoryBot.define do
         apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
+        application.application_proceeding_types.each do |app_proc_type|
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
+          create(:attempts_to_settles, application_proceeding_type: app_proc_type)
+        end
       end
     end
 
