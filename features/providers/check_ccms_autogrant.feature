@@ -13,7 +13,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on a page showing "Which types of assets does your client have?"
     Then I check "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Are there any legal restrictions that prevent your client from selling or borrowing against their assets?"
+    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets"
     Then I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
@@ -54,5 +54,4 @@ Feature: Checking ccms means does NOT auto grant
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
-
-
+    Then the application must be manually reviewed in CCMS
