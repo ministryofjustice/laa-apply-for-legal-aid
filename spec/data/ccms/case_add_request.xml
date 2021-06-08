@@ -1354,6 +1354,12 @@
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
+                            <ns0:Attribute>PASSPORTED_NINO</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>EG587804M</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
                             <ns0:Attribute>APPLICATION_FROM_APPLY</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
                             <ns0:ResponseValue>true</ns0:ResponseValue>
