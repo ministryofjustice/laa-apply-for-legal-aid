@@ -27,11 +27,11 @@ cy:
     additional_accounts:
       index:
         header: "?sknab rehto htiw stnuocca evah uoy oD"
-        hint: yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated
+        hint: .yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated
           erahS
         error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
       new:
-        hint: stnuocca sgnivas edulcni ton oD
+        hint: .stnuocca sgnivas edulcni ton oD
         field_set_header: "?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD"
     banks:
       index:
@@ -203,7 +203,6 @@ cy:
     other_assets:
       show:
         h1-heading: "?evah uoy od stessa fo sepyt hcihW"
-        h2-heading: ylppa taht lla tceleS
         none_selected: eseht fo enoN
     resend_link_requests:
       show:

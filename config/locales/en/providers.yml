@@ -725,11 +725,11 @@ en:
     percentage_homes:
       show:
         h1-heading: What % share of their home does your client legally own?
-        percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
+        percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
     property_values:
       show:
         h1-heading: How much is your client's home worth?
-        hint: You can use property websites to find the estimated value
+        hint: You can use property websites to find the estimated value.
     proceedings_before_the_courts:
       show:
         h1-heading: Are the proceedings, for which funding is being sought, currently, before the court?
@@ -784,7 +784,6 @@ en:
     savings_and_investments:
       show:
         h1-heading: Which types of savings or investments does your client have?
-        h2-heading: Select all that apply
         none_selected: None of these
     select_offices:
       show:
@@ -921,11 +920,11 @@ en:
     vehicles:
       show:
         heading: Does your client own a vehicle?
-        hint: This includes cars, vans and motorcyles
+        hint: This includes cars, vans and motorcyles.
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?
-          use_car_valuation_sites: You can use car valuation websites to find this out
+          use_car_valuation_sites: You can use car valuation websites to find this out.
       ages:
         show:
           heading: Did your client buy the vehicle over 3 years ago?
@@ -938,7 +937,7 @@ en:
           heading: Are there any payments left on the vehicle?
           detail_of_payments_to_include: |
             Include any outstanding payments on loans, hire purchase (HP) or
-            personal contract purchase (PCP) agreements
+            personal contract purchase (PCP) agreements.
           enter_amount_left_to_pay: Enter the amount left to pay
     email_addresses:
       show:

@@ -8,9 +8,9 @@ cy:
       error: ":rorrE"
     hint:
       address_lookup:
-        postcode: edoctsop KU dilav a eb tsum sihT
+        postcode: .edoctsop KU dilav a eb tsum sihT
       applicant:
-        national_insurance_number: "'C 65 43 21 QQ' ,elpmaxe roF"
+        national_insurance_number: ".'C 65 43 21 QQ' ,elpmaxe roF"
       student_finance: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
     label:
       applicant:

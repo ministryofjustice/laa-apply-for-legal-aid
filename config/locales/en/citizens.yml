@@ -25,10 +25,10 @@ en:
     additional_accounts:
       index:
         header: Do you have accounts with other banks?
-        hint: Share details of any accounts you have with another bank or building society
+        hint: Share details of any accounts you have with another bank or building society.
         error: Select yes if you have accounts with other banks
       new:
-        hint: Do not include savings accounts
+        hint: Do not include savings accounts.
         field_set_header: Do you have current accounts you cannot access online?
     banks:
       index:
@@ -182,7 +182,6 @@ en:
     other_assets:
       show:
         h1-heading: Which types of assets do you have?
-        h2-heading: Select all that apply
         none_selected: None of these
     resend_link_requests:
       show:

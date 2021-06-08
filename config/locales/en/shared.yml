@@ -256,14 +256,14 @@ en:
         email_label: Email address
         nino_label: National Insurance number
       date_input_fields:
-        date_of_birth_hint: For example, 31 3 1980
+        date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
         occurred_on_label: When did the incident occur?
         told_on_label: When did your client contact you about the latest domestic abuse incident?
-        told_on_hint: For example 31 3 2019
-        purchased_on_hint: For example, 31 3 1980
+        told_on_hint: For example 31 3 2019.
+        purchased_on_hint: For example, 31 3 1980.
         used_delegated_functions_on_label: Date you used delegated functions
-        used_delegated_functions_on_hint: "For example, %{options}"
+        used_delegated_functions_on_hint: "For example, %{options}."
       dependants:
         assets_value:
           example: For example, property, cash savings or shares.
@@ -381,7 +381,7 @@ en:
               timeshare_property_value: Enter value, minus any loan and sale costs
               trust_value: Enter estimated total value
               hint:
-                check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work
+                check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
             offline_accounts:
               check_box_offline_current_accounts: Current account
               check_box_offline_savings_accounts: Savings account
@@ -402,9 +402,9 @@ en:
               check_box_plc_shares: Shares in a PLC (public limited company)
               hint:
                 revealing_check_box_offline_current_accounts: If your client has multiple accounts, take the lowest balance from each account last month, add them, then enter the total
-                check_box_cash: For example, cash kept at home
-                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
-                check_box_other_person_account: For example, your client is a signatory on a child's account
+                check_box_cash: For example, cash kept at home.
+                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
+                check_box_other_person_account: For example, your client is a signatory on a child's account.
               offline_current_accounts: Enter the lowest balance last month
               offline_savings_accounts: Enter the total in all accounts
               life_assurance_endowment_policy: Enter the total value of all owned
@@ -424,10 +424,10 @@ en:
           borderline: Borderline
           not_known: I do not know yet
           hint:
-            marginal: The chance of a successful outcome is marginal
-            poor: The chance of a successful outcome is poor
-            borderline: You cannot predict the outcome
-            not_known: Work still needs to be done to determine the likelihood of success
+            marginal: The chance of a successful outcome is marginal.
+            poor: The chance of a successful outcome is poor.
+            borderline: You cannot predict the outcome.
+            not_known: Work still needs to be done to determine the likelihood of success.
       types_of_income_form:
         hints:
           citizens:

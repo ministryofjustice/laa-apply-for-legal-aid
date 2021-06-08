@@ -265,15 +265,15 @@ cy:
         email_label: sserdda liamE
         nino_label: rebmun ecnarusnI lanoitaN
       date_input_fields:
-        date_of_birth_hint: '0891 3 13 ,elpmaxe roF'
+        date_of_birth_hint: '.0891 3 13 ,elpmaxe roF'
         date_of_birth_label: htrib fo etaD
         occurred_on_label: "?rucco tnedicni eht did nehW"
         told_on_label: "?tnedicni esuba citsemod tsetal eht tuoba uoy tcatnoc tneilc
           ruoy did nehW"
-        told_on_hint: 9102 3 13 elpmaxe roF
-        purchased_on_hint: '0891 3 13 ,elpmaxe roF'
+        told_on_hint: .9102 3 13 elpmaxe roF
+        purchased_on_hint: '.0891 3 13 ,elpmaxe roF'
         used_delegated_functions_on_label: snoitcnuf detageled desu uoy etaD
-        used_delegated_functions_on_hint: "%{options} ,elpmaxe roF"
+        used_delegated_functions_on_hint: ".%{options} ,elpmaxe roF"
       dependants:
         assets_value:
           example: ".serahs ro sgnivas hsac ,ytreporp ,elpmaxe roF"
@@ -361,7 +361,7 @@ cy:
                 revealing_check_box_offline_current_accounts: latot eht retne neht
                   ,meht dda ,htnom tsal tnuocca hcae morf ecnalab tsewol eht ekat
                   ,stnuocca elpitlum evah uoy fI
-                check_box_cash: emoh ta tpek hsac ,elpmaxe roF
+                check_box_cash: .emoh ta tpek hsac ,elpmaxe roF
                 check_box_life_assurance_endowment_policy: htaed no tuo yap ylno taht
                   seicilop edulcni ton oD
                 check_box_other_person_account: tnuocca s'dlihc a no yrotangis a era
@@ -420,10 +420,10 @@ cy:
                 revealing_check_box_offline_current_accounts: latot eht retne neht
                   ,meht dda ,htnom tsal tnuocca hcae morf ecnalab tsewol eht ekat
                   ,stnuocca elpitlum sah tneilc ruoy fI
-                check_box_cash: emoh ta tpek hsac ,elpmaxe roF
-                check_box_life_assurance_endowment_policy: htaed no tuo yap ylno taht
+                check_box_cash: .emoh ta tpek hsac ,elpmaxe roF
+                check_box_life_assurance_endowment_policy: .htaed no tuo yap ylno taht
                   seicilop edulcni ton oD
-                check_box_other_person_account: tnuocca s'dlihc a no yrotangis a si
+                check_box_other_person_account: .tnuocca s'dlihc a no yrotangis a si
                   tneilc ruoy ,elpmaxe roF
               offline_current_accounts: htnom tsal ecnalab tsewol eht retnE
               offline_savings_accounts: stnuocca lla ni latot eht retnE
@@ -440,10 +440,10 @@ cy:
         borderline: enilredroB
         not_known: tey wonk ton od I
         hint:
-          marginal: lanigram si emoctuo lufsseccus a fo ecnahc ehT
-          poor: roop si emoctuo lufsseccus a fo ecnahc ehT
-          borderline: emoctuo eht tciderp tonnac uoY
-          not_known: sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
+          marginal: .lanigram si emoctuo lufsseccus a fo ecnahc ehT
+          poor: .roop si emoctuo lufsseccus a fo ecnahc ehT
+          borderline: .emoctuo eht tciderp tonnac uoY
+          not_known: .sseccus fo doohilekil eht enimreted ot enod eb ot sdeen llits
             kroW
       types_of_income_form:
         hints:
