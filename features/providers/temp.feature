@@ -25,3 +25,34 @@ Feature: Checking ccms means does NOT auto grant
     Then I click 'Save and continue'
     And I should be on a page showing "may need to pay towards legal aid"
     And I should be on a page showing "We’ve calculated that your client should pay £1,000 from their disposable capital."
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    Then I click 'Continue'
+    Then I should be on a page showing 'Latest incident details'
+    Then I fill "application_merits_task_incident_told_on_3i" with "5"
+    Then I fill "application_merits_task_incident_told_on_2i" with "5"
+    Then I fill "application_merits_task_incident_told_on_1i" with "20"
+    Then I fill "application_merits_task_incident_occurred_on_3i" with "4"
+    Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
+    Then I fill "application_merits_task_incident_occurred_on_1i" with "20"
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Opponent details'
+    Then I fill "application-merits-task-opponent-full-name-field" with "Bob"
+    Then I choose "application-merits-task-opponent-understands-terms-of-court-order-true-field"
+    Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
+    Then I choose "application-merits-task-opponent-police-notified-true-field"
+    Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike test"
+    Then I choose "application-merits-task-opponent-bail-conditions-set-field"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Provide a statement of case"
+    Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike SOC"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
+    Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check your answers and submit application"
+    Then I click 'Submit and continue'
+    Then I should be on a page showing "Application complete"
+    Then I click 'View completed application'
+
+
