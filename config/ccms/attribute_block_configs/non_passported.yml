@@ -831,8 +831,8 @@ global_means:
     user_defined: true
     br100_meaning: "Passported: The Receipient's NINO"
     response_type: text
-    generate_block?: true
-    value: '#applicant_national_insurance_number'
+    generate_block?: false
+    value: ''
   PROSPECTS_OF_SUCCESS:
     user_defined: false
     br100_meaning: "The proceeding's prospect of success"

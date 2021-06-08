@@ -397,10 +397,9 @@ module CCMS
         end
 
         context 'PASSPORTED_NINO' do
-          it 'generates PASSPORTED NINO in global merits' do
+          it 'does not generate the block' do
             block = XmlExtractor.call(xml, :global_means, 'PASSPORTED_NINO')
-            expect(block).to have_text_response applicant.national_insurance_number
-            expect(block).to be_user_defined
+            expect(block).not_to be_present
           end
         end
 
