@@ -16,7 +16,8 @@
           yes_no_options,
           :value,
           :label,
-          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}
+          legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)},
+          caption: Setting.allow_multiple_proceedings? ? { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' } : {}
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
