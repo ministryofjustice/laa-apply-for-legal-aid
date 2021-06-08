@@ -183,11 +183,12 @@ module Providers
           end
 
           context 'file is too big' do
-            before { allow(GatewayEvidenceForm).to receive(:max_file_size).and_return(0) }
+            before { allow(File).to receive(:size).and_return(9_437_184) }
 
             it 'does not save the object and raise an error' do
               subject
-              error = I18n.t("#{i18n_error_path}.file_too_big", size: 0, file_name: original_file.original_filename)
+              error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
+              puts error
               expect(response.body).to include(error)
               expect(gateway_evidence).to be_nil
             end
