@@ -116,6 +116,15 @@ module Providers
           end
         end
 
+        context 'user has come from the check_merits_answer page' do
+          let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, :checking_merits_answers }
+
+          it 'redirects back to the answers page' do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
+          end
+        end
+
         context 'nothing is selected' do
           let(:params) { {} }
 

@@ -54,19 +54,20 @@ module Flow
             else
               application.section_8_proceedings? ? :in_scope_of_laspos : :used_multiple_delegated_functions
             end
-          end
+          end,
+          check_answers: :check_provider_answers
         },
         in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
           forward: :used_multiple_delegated_functions,
-          check_answers: :check_provider_answers,
-          carry_on_sub_flow: true
+          check_answers: :check_provider_answers
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
           forward: ->(_application, delegated_functions_used_over_month_ago) do
             delegated_functions_used_over_month_ago ? :confirm_multiple_delegated_functions : :limitations
-          end
+          end,
+          check_answers: :check_provider_answers
         },
         confirm_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_confirm_multiple_delegated_functions_path(application) },
