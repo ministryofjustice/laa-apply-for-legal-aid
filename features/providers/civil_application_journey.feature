@@ -165,8 +165,8 @@ Feature: Civil application journeys
     Then I should not see 'Legal Aid, Sentencing and Punishment of Offenders Act'
     Then I should be on a page showing 'Delegated functions'
     Then I should be on a page showing 'FGM Protection Order Not used'
-    Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %b %Y' format
-    Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %b %Y' format
+    Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %B %Y' format
+    Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Covered under an emergency certificate'
     Then I should be on a page showing 'Covered under a substantive certificate'
 
