@@ -274,6 +274,7 @@ en:
       linked_children:
         show:
           h1-heading: Which children are covered under this proceeding?
+          error: At least one child must be covered under this proceeding
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?

@@ -11,11 +11,6 @@ module Providers
       save_continue_or_draft(@form)
     end
 
-    def update_task_continue_or_draft(level, task)
-      update_task(level, task)
-      continue_or_draft
-    end
-
     def update_task(level, task)
       legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(level, task) if task_list_should_update?
     end

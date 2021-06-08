@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_114709) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
-  create_table "application_proceeding_types_involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "involved_child_id", null: false
     t.uuid "application_proceeding_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
