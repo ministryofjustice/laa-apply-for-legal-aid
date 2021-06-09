@@ -10,8 +10,11 @@ module Providers
     def update
       return continue_or_draft if draft_selected?
 
-      return go_forward(form.has_other_proceeding?) if go_forward?
+      if go_forward?
+        return redirect_to providers_legal_aid_application_proceedings_types_path if legal_aid_application.checking_answers?
 
+        return go_forward(form.has_other_proceeding?)
+      end
       form.errors.add(:has_other_proceeding, I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse')) unless domestic_abuse_selected?
 
       render :show

@@ -275,6 +275,17 @@ FactoryBot.define do
       end
     end
 
+    # this is a trait of an invalid state and should only be used to test invalid state transitions
+    trait :with_only_section8_proceeding_type do
+      after(:create) do |application|
+        application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
+        application.application_proceeding_types.each do |app_proc_type|
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
+          create(:attempts_to_settles, application_proceeding_type: app_proc_type)
+        end
+      end
+    end
+
     # :with_delegated_functions trait
     # ===============================
     # sets the df date fields on the application proceeding type records, and also
