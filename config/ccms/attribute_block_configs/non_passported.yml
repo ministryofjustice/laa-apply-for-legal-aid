@@ -827,12 +827,19 @@ global_means:
     response_type: number
     generate_block?: '#applicant_shares_ownership_main_home?'
     value: '#third_party_owns_percentage_main_home'
+  PASSPORTED_NINO:
+    user_defined: true
+    br100_meaning: "Passported: The Receipient's NINO"
+    response_type: text
+    generate_block?: false
+    value: ''
   PROSPECTS_OF_SUCCESS:
     user_defined: false
     br100_meaning: "The proceeding's prospect of success"
     response_type: text
     generate_block?: true
     value: '#ccms_code_prospects_of_success'
+
 global_merits:
   APP_CARE_SUPERVISION:
     generate_block?: true

@@ -2428,6 +2428,12 @@ global_means:
     br100_meaning: 'Int.Result: Client Land- Value of equity'
     response_type: currency
     user_defined: false
+  PASSPORTED_NINO:
+    user_defined: true
+    br100_meaning: "Passported: The Receipient's NINO"
+    response_type: text
+    generate_block?: true
+    value: '#applicant_national_insurance_number'
   APPLICATION_FROM_APPLY:
     :value: true
     :br100_meaning: 'The application has been made through the Apply service'

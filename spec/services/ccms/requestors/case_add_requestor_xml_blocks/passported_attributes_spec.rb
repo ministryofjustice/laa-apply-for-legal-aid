@@ -71,6 +71,15 @@ module CCMS
           end
         end
 
+        context 'PASSPORTED_NINO' do
+          let(:applicant) { legal_aid_application.applicant }
+          it 'generates PASSPORTED NINO in global merits' do
+            block = XmlExtractor.call(xml, :global_means, 'PASSPORTED_NINO')
+            expect(block).to have_text_response applicant.national_insurance_number
+            expect(block).to be_user_defined
+          end
+        end
+
         context 'CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY' do
           context 'eligible' do
             let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
