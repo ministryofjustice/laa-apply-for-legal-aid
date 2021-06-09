@@ -11,7 +11,7 @@
 
     <%= form.govuk_text_field :name, width: 'three-quarters', label: { size: 'm', text: t('.name') } %>
 
-    <%= form.govuk_date_field :date_of_birth, legend: {text: t('.date_of_birth')} %>
+    <%= form.govuk_date_field :date_of_birth, legend: { text: t('.date_of_birth') }, hint: { text: t('.dob_hint') } %>
 
     <%= form.govuk_radio_buttons_fieldset :relationship, legend: {text: t('.relationship')} do %>
       <% Dependant.relationships.keys.each do |relationship_type| %>
