@@ -8,9 +8,9 @@ en:
       error: "Error:"
     hint:
       address_lookup:
-        postcode: This must be a valid UK postcode
+        postcode: This must be a valid UK postcode.
       applicant:
-        national_insurance_number: For example, 'QQ 12 34 56 C'
+        national_insurance_number: For example, 'QQ 12 34 56 C'.
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
