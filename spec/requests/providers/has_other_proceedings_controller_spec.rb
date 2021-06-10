@@ -76,9 +76,8 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
     end
 
-
-      context 'choose nothing' do
-        let(:params) { { legal_aid_application: { has_other_proceeding: '' }, continue_button: 'Save and continue' } }
+    context 'choose nothing' do
+      let(:params) { { legal_aid_application: { has_other_proceeding: '' }, continue_button: 'Save and continue' } }
 
       it 'stays on the page if there is a validation error' do
         expect(response).to have_http_status(:ok)

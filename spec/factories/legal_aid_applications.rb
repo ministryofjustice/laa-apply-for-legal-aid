@@ -274,7 +274,12 @@ FactoryBot.define do
           application.proceeding_types << create(:proceeding_type, :with_real_data)
           application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
         end
-        pt = application.lead_proceeding_type
+        lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
+        if lead_apt.nil?
+          lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
+          lead_apt.update!(lead_proceeding: true)
+        end
+        pt = lead_apt.proceeding_type
         sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
         apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,

@@ -50,17 +50,6 @@ module Providers
       legal_aid_application.save!
     end
 
-    def domestic_abuse_selected?
-      proceeding_types.any? { |type| type.ccms_matter == 'Domestic Abuse' }
-    end
-
-    def set_new_lead_proceeding
-      new_lead = ApplicationProceedingType.where(lead_proceeding: false).find_by(legal_aid_application_id: legal_aid_application.id)
-      new_lead.lead_proceeding = true
-      new_lead.save!
-      LeadProceedingAssignmentService.call(legal_aid_application)
-    end
-
     def form_params
       params[:action] == 'destroy' ? destroy_form_params : update_form_params
     end
