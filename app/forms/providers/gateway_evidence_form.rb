@@ -38,7 +38,6 @@ module Providers
     def save
       return if original_file.nil?
 
-      super
       model.save(validate: false) if attachments_made?
     end
 

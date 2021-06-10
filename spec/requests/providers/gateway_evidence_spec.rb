@@ -5,7 +5,6 @@ module Providers
   RSpec.describe GatewayEvidencesController, type: :request do
     let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
     let(:provider) { legal_aid_application.provider }
-    let(:soc) { nil }
     let(:i18n_error_path) { 'activemodel.errors.models.gateway_evidence.attributes.original_file' }
 
     describe 'GET /providers/applications/:legal_aid_application_id/gateway_evidence' do
@@ -18,7 +17,7 @@ module Providers
 
       context 'when the provider is authenticated' do
         before do
-          legal_aid_application.gateway_evidence = soc
+          legal_aid_application.gateway_evidence = nil
           login_as provider
           subject
         end
@@ -70,7 +69,7 @@ module Providers
 
         it 'updates the record' do
           subject
-          expect(gateway_evidence.original_attachments.first).to be_present
+          expect(gateway_evidence.original_attachments.count).to eq(1)
         end
 
         it 'returns http success' do
@@ -223,7 +222,7 @@ module Providers
           context 'additional file uploaded' do
             it 'attaches the file' do
               subject
-              expect(gateway_evidence.original_attachments.count).to eq 3
+              expect(gateway_evidence.original_attachments.count).to eq 2
             end
           end
         end
