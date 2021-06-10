@@ -242,34 +242,6 @@ RSpec.describe 'LegalAidApplication factory' do
     end
   end
 
-  # describe ':with_delegated_functions_scope_limitation' do
-  #   let(:laa) { create :legal_aid_application, :with_delegated_functions_scope_limitation }
-  #
-  #   subject { laa }
-  #
-  #   it 'creates a proceeding type and adds it to the application' do
-  #     expect(ProceedingType.count).to eq 0
-  #     expect { subject }.to change { ProceedingType.count }.by(1)
-  #     expect(laa.lead_proceeding_type).to eq ProceedingType.first
-  #   end
-  #
-  #   it 'creates a default scope DF limitation and adds to the lead proceeding type' do
-  #     expect(ScopeLimitation.count).to eq 0
-  #     expect { subject }.to change { ScopeLimitation.count }.by(1)
-  #     expect(laa.lead_proceeding_type.eligible_scope_limitations).to eq [ScopeLimitation.first]
-  #     expect(laa.lead_proceeding_type.default_delegated_functions_scope_limitation).to eq ScopeLimitation.first
-  #   end
-  #
-  #   it 'assigns the scope limtiation to the lead proceeding type' do
-  #     expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-  #     lead_pt = laa.lead_proceeding_type
-  #     apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-  #     aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-  #     expect(aptsl).to be_instance_of(AssignedDfScopeLimitation)
-  #     expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-  #   end
-  # end
-
   describe ':with_proceeding_type_and_scope_limitations' do
     let(:pt1) { create :proceeding_type }
     let(:sl1) { create :scope_limitation }

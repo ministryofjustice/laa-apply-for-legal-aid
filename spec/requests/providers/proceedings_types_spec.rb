@@ -153,8 +153,6 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
 
           it 'displays errors' do
             subject
-            # puts ">>>>>> page output to >>>>> file://#{ENV['HOME']}/tmp/rspec.html"
-            # File.open("#{ENV['HOME']}/tmp/rspec.html", 'w') { |fp| fp.puts response.body }
             expect(response.body).to include('govuk-input--error')
             expect(response.body).to include('govuk-form-group--error')
           end

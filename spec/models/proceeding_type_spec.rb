@@ -54,7 +54,7 @@ RSpec.describe ProceedingType, type: :model do
       end
     end
 
-    context 'something else' do
+    context 'not domestic abuse' do
       let(:matter) { 'Something Else' }
       it 'returns false' do
         expect(proceeding_type.domestic_abuse?).to be false

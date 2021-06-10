@@ -29,8 +29,6 @@ module Reports
         let(:applicant) { application.applicant }
         let(:time) { Time.zone.local(2020, 9, 20, 2, 3, 44) }
 
-        # before { LeadProceedingAssignmentService.call(application) }
-
         subject { described_class.call(application) }
 
         it 'returns an array of nine fields' do
