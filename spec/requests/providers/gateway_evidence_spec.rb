@@ -85,6 +85,21 @@ module Providers
             expect(gateway_evidence.original_attachments.first).to be_present
           end
 
+          context 'when gateway_evidence file already exists' do
+            let!(:gateway_evidence) { create :gateway_evidence, :with_multiple_files_attached, legal_aid_application: legal_aid_application }
+
+            it 'updates the record' do
+              subject
+              expect(gateway_evidence.original_attachments.count).to eq 4
+            end
+
+            it 'increments the attachment filename' do
+              subject
+              attachment_names = gateway_evidence.original_attachments.map(&:attachment_name)
+              expect(attachment_names).to include('gateway_evidence_4')
+            end
+          end
+
           it 'has the relevant content type' do
             subject
             document = gateway_evidence.original_attachments.first.document
