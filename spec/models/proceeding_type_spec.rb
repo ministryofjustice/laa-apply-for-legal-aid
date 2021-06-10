@@ -44,4 +44,21 @@ RSpec.describe ProceedingType, type: :model do
       end
     end
   end
+
+  describe '#domestic_abuse?' do
+    let(:proceeding_type) { create :proceeding_type, ccms_matter: matter }
+    context 'domestic abuse' do
+      let(:matter) { 'Domestic Abuse' }
+      it 'returns true' do
+        expect(proceeding_type.domestic_abuse?).to be true
+      end
+    end
+
+    context 'not domestic abuse' do
+      let(:matter) { 'Something Else' }
+      it 'returns false' do
+        expect(proceeding_type.domestic_abuse?).to be false
+      end
+    end
+  end
 end

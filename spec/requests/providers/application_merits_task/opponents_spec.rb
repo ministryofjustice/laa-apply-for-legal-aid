@@ -3,14 +3,12 @@ require 'rails_helper'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe OpponentsController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+      let(:pt_da) { create :proceeding_type, :with_real_data }
+      let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
       let(:login_provider) { login_as legal_aid_application.provider }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
-      let(:application_proceeding_type) do
-        create :application_proceeding_type,
-               legal_aid_application: legal_aid_application,
-               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
-      end
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.detect { |apt| apt.proceeding_type_id == pt_s8.id } }
 
       describe 'GET /providers/applications/:legal_aid_application_id/opponent' do
         subject { get providers_legal_aid_application_opponent_path(legal_aid_application) }
@@ -32,7 +30,7 @@ module Providers
 
         context 'with an existing opponent' do
           let(:opponent) { create :opponent }
-          let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, opponent: opponent }
+          let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8], opponent: opponent }
 
           it 'renders successfully' do
             expect(response).to have_http_status(:ok)

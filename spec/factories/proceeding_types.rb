@@ -9,7 +9,7 @@ FactoryBot.define do
     description { "Description-#{ccms_code}" }
     ccms_category_law { 'Category law' }
     ccms_category_law_code { 'Category law code' }
-    ccms_matter { 'Matter' }
+    ccms_matter { 'Domestic Abuse' }
     ccms_matter_code { 'Matter code' }
     default_service_level_id { create(:service_level).id }
     default_cost_limitation_delegated_functions { 1 }
@@ -86,6 +86,36 @@ FactoryBot.define do
         create(:scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type)
         create(:scope_limitation, :delegated_functions_default, joined_proceeding_type: proceeding_type)
       end
+    end
+
+    trait :domestic_abuse do
+      sequence(:ccms_code) { |n| format('DA%<number>03d', number: n) }
+      ccms_matter { 'Domestic Abuse' }
+    end
+
+    trait :section8 do
+      sequence(:ccms_code) { |n| format('SE%<number>03d', number: n) }
+      ccms_matter { 'Section 8 orders' }
+    end
+
+    trait :da001 do
+      ccms_code { 'DA001' }
+      ccms_matter { 'Domestic Abuse' }
+    end
+
+    trait :da004 do
+      ccms_code { 'DA004' }
+      ccms_matter { 'Domestic Abuse' }
+    end
+
+    trait :se013 do
+      ccms_code { 'SE013' }
+      ccms_matter { 'Section 8 orders' }
+    end
+
+    trait :se014 do
+      ccms_code { 'SE014' }
+      ccms_matter { 'Section 8 orders' }
     end
   end
 end

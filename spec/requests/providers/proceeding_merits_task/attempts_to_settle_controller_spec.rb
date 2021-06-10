@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceeding_types_inc_section8) }
+  let(:pt_da) { create :proceeding_type, :with_real_data }
+  let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
   let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
   let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
   let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
@@ -62,7 +64,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         end
 
         context 'when the application is in draft' do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceeding_types_inc_section8, :draft) }
+          let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :draft, explicit_proceeding_types: [pt_da, pt_s8] }
 
           it 'redirects provider back to the merits task list' do
             subject

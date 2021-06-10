@@ -4,13 +4,12 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe ChancesOfSuccessController, type: :request do
       let(:chances_of_success) { create :chances_of_success, application_proceeding_type: application_proceeding_type }
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
-      let(:application_proceeding_type) do
-        create :application_proceeding_type,
-               legal_aid_application: legal_aid_application,
-               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
-      end
+      let(:pt_da) { create :proceeding_type, :with_real_data }
+      let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
+
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:login) { login_as legal_aid_application.provider }
 
       before do

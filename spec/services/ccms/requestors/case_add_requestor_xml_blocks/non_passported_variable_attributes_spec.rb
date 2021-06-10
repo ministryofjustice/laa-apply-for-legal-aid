@@ -21,6 +21,9 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
+                 :with_proceeding_types,
+                 :with_chances_of_success,
+                 proceeding_types_count: 1,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
@@ -28,16 +31,14 @@ module CCMS
                  percentage_home: percentage_home
         end
 
-        let!(:application_proceeding_type) { create :application_proceeding_type, :with_proceeding_type_scope_limitations, legal_aid_application: legal_aid_application }
+        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type
-        end
+        let(:chances_of_success) { application_proceeding_type.chances_of_success }
         let(:applicant) { legal_aid_application.applicant }
         let(:percentage_home) { rand(1...99.0).round(2) }
 
@@ -451,6 +452,9 @@ module CCMS
                    :with_everything,
                    :with_applicant_and_address,
                    :with_negative_benefit_check_result,
+                   :with_proceeding_types,
+                   :with_chances_of_success,
+                   proceeding_types_count: 1,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
                    provider: provider,

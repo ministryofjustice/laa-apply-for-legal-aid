@@ -3,7 +3,9 @@ require 'rails_helper'
 module Providers
   module ProceedingMeritsTask
     RSpec.describe LinkedChildrenController, type: :request do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types_inc_section8 }
+      let(:pt_da) { create :proceeding_type, :with_real_data }
+      let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_involved_children, explicit_proceeding_types: [pt_da, pt_s8] }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
       let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }

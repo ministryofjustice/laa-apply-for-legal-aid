@@ -69,6 +69,8 @@ module BaseForm
     def save
       return false unless valid?
 
+      return true if assignable_attributes.empty?
+
       model.attributes = clean_attributes(assignable_attributes)
       model.save(validate: false)
     end

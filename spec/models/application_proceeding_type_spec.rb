@@ -13,7 +13,6 @@ RSpec.describe ApplicationProceedingType do
         legal_aid_application.save!
         application_proceeding_type = legal_aid_application.application_proceeding_types.first
         expect(application_proceeding_type.proceeding_case_id > 55_000_000).to be true
-        expect(application_proceeding_type.lead_proceeding).to be true
       end
     end
 
@@ -26,16 +25,6 @@ RSpec.describe ApplicationProceedingType do
         legal_aid_application.save!
         application_proceeding_type = legal_aid_application.application_proceeding_types.first
         expect(application_proceeding_type.proceeding_case_id).to eq highest_proceeding_case_id + 1
-      end
-
-      it 'creates record with multiple proceedings and assigns the first one as lead_proceeding' do
-        legal_aid_application.proceeding_types << proceeding_type
-        legal_aid_application.proceeding_types << proceeding_type2
-        legal_aid_application.save!
-        first_proceeding_type = legal_aid_application.application_proceeding_types.order(proceeding_case_id: :asc).first
-        expect(first_proceeding_type.lead_proceeding).to be true
-        second_proceeding_type = legal_aid_application.application_proceeding_types.order(proceeding_case_id: :asc).last
-        expect(second_proceeding_type.lead_proceeding).to be false
       end
     end
   end
@@ -50,12 +39,6 @@ RSpec.describe ApplicationProceedingType do
   end
 
   describe 'delegated functions' do
-    # let(:application) { create :legal_aid_application }
-    # let!(:application_proceeding_type) do
-    #   create :application_proceeding_type,
-    #          legal_aid_application: application,
-    #          used_delegated_functions_on: df_date,
-    #          used_delegated_functions_reported_on: df_reported_date
     let(:application) do
       create :legal_aid_application,
              :with_proceeding_types,
@@ -207,6 +190,71 @@ RSpec.describe ApplicationProceedingType do
       expect {
         application_proceeding_type1.involved_children << application_involved_child2
       }.to raise_error ActiveRecord::RecordInvalid, 'Validation failed: Involved child belongs to another application'
+    end
+  end
+
+  describe 'lead proceeding validation' do
+    let(:proceeding_types) { create_list :proceeding_type, 3, :domestic_abuse }
+    let!(:laa) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: proceeding_types, assign_lead_proceeding: false }
+    let(:new_pt) { create :proceeding_type }
+    let(:new_apt) { build :application_proceeding_type, proceeding_type: new_pt, legal_aid_application: laa, lead_proceeding: lead_proceeding }
+
+    context 'lead proceeding on this record set to false' do
+      let(:lead_proceeding) { false }
+
+      context 'other lead proceeding exists' do
+        before do
+          laa.application_proceeding_types.first.update!(lead_proceeding: true)
+          laa.reload
+        end
+
+        it 'is valid' do
+          expect(new_apt).to be_valid
+        end
+      end
+
+      context 'other lead proceeding doesnt exist' do
+        it 'is valid' do
+          expect(new_apt).to be_valid
+        end
+      end
+    end
+
+    context 'lead proceeding on this record set to true' do
+      let(:lead_proceeding) { true }
+
+      context 'this record already exists as the lead proceeding' do
+        before do
+          laa.application_proceeding_types.last.update!(lead_proceeding: true)
+          laa.reload
+        end
+
+        it 'is valid' do
+          apt = laa.application_proceeding_types.find_by(lead_proceeding: true)
+          apt.used_delegated_functions_on = Date.current
+          expect(apt).to be_valid
+        end
+      end
+
+      context 'other lead proceeding exists' do
+        before do
+          laa.application_proceeding_types.last.update!(lead_proceeding: true)
+          laa.reload
+        end
+
+        it 'is not valid' do
+          expect(Sentry).to receive(:capture_message).with(/^Duplicate lead proceedings detected for application/)
+          new_apt.save!
+        end
+      end
+
+      context 'no other lead proceeding exists' do
+        let(:lead_proceeding) { false }
+        it 'does not capture a Sentry message' do
+          expect(Sentry).not_to receive(:capture_message)
+          new_apt.save!
+        end
+      end
     end
   end
 end

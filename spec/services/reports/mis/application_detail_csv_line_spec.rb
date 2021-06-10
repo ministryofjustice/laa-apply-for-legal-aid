@@ -184,7 +184,7 @@ module Reports
             expect(value_for('CCMS reference number')).to eq '42226668880'
             expect(value_for('DWP Overridden')).to eq 'FALSE'
             expect(value_for('Case Type')).to eq 'Passported'
-            expect(value_for('Matter type')).to eq 'Matter'
+            expect(value_for('Matter type')).to eq 'Domestic Abuse'
             expect(value_for('Proceeding type selected')).to match(/^Meaning-DA\d{3,4}$/)
             expect(value_for('Delegated functions used')).to eq 'Yes'
             expect(value_for('Delegated functions date')).to eq '2020-01-01'

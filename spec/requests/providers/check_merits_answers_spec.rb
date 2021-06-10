@@ -187,7 +187,8 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_application_proceeding_type,
+             :with_proceeding_types,
+             :with_chances_of_success,
              :checking_merits_answers
     end
 
