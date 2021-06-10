@@ -10,15 +10,9 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-# <<<<<<< HEAD
              :with_multiple_proceeding_types_inc_section8,
              :with_involved_children,
              :provider_entering_merits
-# =======
-#              :with_proceeding_types,
-#              :with_chances_of_success,
-#              :checking_merits_answers
-# >>>>>>> cf7a3a666 (AP-2290 Make first domestic abuse proceeding lead)
     end
 
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }
