@@ -386,7 +386,7 @@ en:
       show:
         h1-heading: Upload supporting evidence
         hint_text: Use this page if you're applying for Section 8 proceedings and need to upload gateway evidence.
-        size_hint: The maximum file size is 8MB. Upload one file at a time.
+        size_hint: The maximum file size is 7MB. Upload one file at a time.
       uploaded_files:
         delete: Delete
         filename: Filename
