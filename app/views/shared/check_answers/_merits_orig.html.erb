@@ -1,5 +1,3 @@
-<h2 class="govuk-heading-l"><%= t('.case-details-heading') %></h2>
-
 <section class="print-no-break">
   <%= check_answer_change_link(
         name: :incident_details,
@@ -101,83 +99,44 @@
 </section>
 <div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">
-  <%= check_answer_change_link(
-        name: :statement_of_case,
-        url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-        question: t('.statement-of-case-heading'),
-        read_only: read_only
-      ) %>
+  <h2 class="govuk-heading-m">
+    <%= t '.case-details-heading' %>
+  </h2>
+
+  <div class='govuk-body'><%= chances_of_success.details_of_proceedings_before_the_court %></div>
+
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
+    <%= check_answer_link(
+          name: :statement_of_case,
+          url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+          question: t('.items.statement_of_case'),
+          answer: nil,
+          read_only: read_only,
+          no_border: statement_of_case&.statement.present?
+        ) %>
+  </dl>
+
   <div class="govuk-body"><%= statement_of_case&.statement %></div>
-</section>
-
-<% if @legal_aid_application.section_8_proceedings? %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-
-    <%= check_answer_change_link(
-        name: :involved_children,
-        url: providers_legal_aid_application_has_other_involved_children_path(@legal_aid_application),
-        question: t('.involved-children-heading'),
-        read_only: read_only
-      ) %>
-    <% @legal_aid_application.involved_children.each_with_index do |child, i| %>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-        <%= check_answer_no_link(
-              name: "involved_child_#{i+1}".to_sym,
-              question: "#{t('.items.child')} #{i+1}",
-              answer: "#{child.full_name} born on #{child.date_of_birth.strftime('%e %B %Y')}",
-              no_border: false,
-              read_only: read_only
-            ) %>
-      </dl>
-    <% end %>
-  </section>
-<% end %>
-
-<% @legal_aid_application.application_proceeding_types.each do |apt| %>
-  <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= apt.proceeding_type.meaning %></h2>
-  </section>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
-          name: "#{apt.id}_success_likely".to_sym,
-          url: providers_merits_task_list_chances_of_success_index_path(apt),
+          name: :success_likely,
+          url: providers_merits_task_list_chances_of_success_index_path(@application_proceeding_type),
           question: t('.items.prospects_of_success'),
-          answer: yes_no(apt.chances_of_success.success_likely),
+          answer: yes_no(chances_of_success.success_likely),
           read_only: read_only
         ) %>
-    <%= check_answer_link(
-          name: "#{apt.id}_success_prospect".to_sym,
-          url: providers_merits_task_list_success_prospects_path(apt),
-          question: t('.items.success_prospect'),
-          answer: t("shared.forms.success_prospect.#{apt.chances_of_success.success_prospect}"),
-          read_only: read_only
-        ) unless apt.chances_of_success.success_likely? %>
   </dl>
 
-  <div class='govuk-body'><%= apt.chances_of_success.success_prospect_details %></div>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+    <%= check_answer_link(
+          name: :success_prospect,
+          url: providers_merits_task_list_success_prospects_path(@application_proceeding_type),
+          question: t('.items.success_prospect'),
+          answer: t("shared.forms.success_prospect.#{chances_of_success.success_prospect}"),
+          read_only: read_only
+        ) unless chances_of_success.success_likely? %>
+  </dl>
 
-  <% if apt.attempts_to_settle %>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: "#{apt.id}_attempts_to_settle".to_sym,
-            url: providers_merits_task_list_attempts_to_settle_path(apt),
-            question: t('.items.attempts_to_settle'),
-            answer: apt.attempts_to_settle.attempts_made,
-            read_only: read_only
-          ) %>
-    </dl>
-  <% end %>
-  <% if apt.proceeding_type.ccms_matter_code.eql?('KSEC8') %>
-    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-      <%= check_answer_link(
-            name: "#{apt.id}_linked_children".to_sym,
-            url: providers_merits_task_list_linked_children_path(apt),
-            question: t('.items.linked_children'),
-            answer: linked_children_names(apt),
-            read_only: read_only
-          ) %>
-    </dl>
-  <% end %>
-<% end %>
+  <div class='govuk-body'><%= chances_of_success.success_prospect_details %></div>
+</section>

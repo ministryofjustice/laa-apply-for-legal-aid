@@ -6,7 +6,7 @@
             name: :"#{proceeding.name}_used_delegated_functions_on",
             url: :show_blank_action,
             question: proceeding.meaning,
-            answer: proceeding.application_proceeding_type.used_delegated_functions_on&.strftime('%-d %b %Y') || t(".not_used"),
+            answer: proceeding.application_proceeding_type.used_delegated_functions_on&.strftime('%-d %B %Y') || t(".not_used"),
             read_only: read_only
           ) %>
     <% end %>

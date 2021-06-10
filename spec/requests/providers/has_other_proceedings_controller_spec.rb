@@ -50,6 +50,14 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       it 'redirects to the page to add another proceeding type' do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
+
+      context 'when the user is checking answers and has deleted the domestic abuse proceeding but left the section 8' do
+        let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, :with_only_section8_proceeding_type }
+
+        it 'redirects to the page to add another proceeding type' do
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+        end
+      end
     end
 
     context 'choose nothing' do

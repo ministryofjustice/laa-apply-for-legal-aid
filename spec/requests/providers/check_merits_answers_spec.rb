@@ -3,12 +3,15 @@ require 'sidekiq/testing'
 
 RSpec.describe 'check merits answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
+  before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(multi_proc) }
+  let(:multi_proc) { false }
 
   describe 'GET /providers/applications/:id/check_merits_answers' do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_application_proceeding_type,
+             :with_multiple_proceeding_types_inc_section8,
+             :with_involved_children,
              :provider_entering_merits
     end
 
@@ -92,6 +95,13 @@ RSpec.describe 'check merits answers requests', type: :request do
       it 'displays the warning text' do
         expect(response.body).to include(I18n.t('providers.check_merits_answers.show.sign_app_text'))
         expect(unescaped_response_body).to include(application.provider.firm.name)
+      end
+
+      context 'when the multi-proceeding flag is true' do
+        let(:multi_proc) { true }
+
+        it { expect(response.body).to include(I18n.t('shared.check_answers.merits.items.linked_children')) }
+        it { expect(response.body).to include(I18n.t('shared.check_answers.merits.items.attempts_to_settle')) }
       end
 
       it 'should change the state to "checking_merits_answers"' do

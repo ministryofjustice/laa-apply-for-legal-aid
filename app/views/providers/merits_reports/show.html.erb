@@ -20,6 +20,8 @@
         show_client_involvment_type: true
       ) %>
 
+  <h2 class="govuk-heading-m"><%= t '.delegated_functions' %></h2>
+
   <%= render(
           'shared/check_answers/delegated_functions',
           legal_aid_application: @legal_aid_application,
@@ -27,7 +29,7 @@
       ) %>
 
   <%= render(
-        'shared/check_answers/merits',
+        "shared/check_answers/#{Setting.allow_multiple_proceedings? ? :merits: :merits_orig}",
         incident: @legal_aid_application.latest_incident,
         statement_of_case: @legal_aid_application.statement_of_case,
         opponent: @legal_aid_application.opponent,

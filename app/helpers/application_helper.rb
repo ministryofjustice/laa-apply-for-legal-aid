@@ -92,4 +92,8 @@ module ApplicationHelper
                                                                role: 'presentation',
                                                                focusable: 'false')
   end
+
+  def linked_children_names(application_proceeding_type)
+    application_proceeding_type.involved_children.map(&:full_name).join('</br>').html_safe
+  end
 end

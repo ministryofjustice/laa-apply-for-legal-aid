@@ -83,7 +83,7 @@
     <section class="merits page_break_before">
       <div class="govuk-!-padding-bottom-6"></div>
       <%= render(
-        'shared/check_answers/merits',
+        "shared/check_answers/#{Setting.allow_multiple_proceedings? ? :merits: :merits_orig}",
         incident: @legal_aid_application.latest_incident,
         statement_of_case: @legal_aid_application.statement_of_case,
         opponent: @legal_aid_application.opponent,
