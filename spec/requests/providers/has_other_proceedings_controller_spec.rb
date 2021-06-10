@@ -8,7 +8,6 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
 
-
   before { login_as provider }
 
   describe 'GET /providers/:application_id/has_other_proceedings' do
@@ -85,7 +84,6 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
     end
 
-
     context 'with only Section 8 proceedings selected' do
       let(:proceeding_type) { create :proceeding_type, code: 'SE003', ccms_matter: 'Section 8 orders' }
       let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, assign_lead_proceeding: false, explicit_proceeding_types: [proceeding_type] }
@@ -99,7 +97,6 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         end
       end
 
-
       context 'choose yes' do
         let(:params) { { legal_aid_application: { has_other_proceeding: 'true' } } }
 
@@ -108,7 +105,6 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         end
       end
     end
-
 
     context 'with at least one domestic abuse and at least one section 8 proceeding' do
       let(:pt1) { create :proceeding_type, :as_occupation_order }
