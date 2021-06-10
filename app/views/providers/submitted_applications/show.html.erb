@@ -81,7 +81,6 @@
     </section>
 
     <section class="merits page_break_before">
-      <div class="govuk-!-padding-bottom-6"></div>
       <%= render(
         "shared/check_answers/#{Setting.allow_multiple_proceedings? ? :merits: :merits_orig}",
         incident: @legal_aid_application.latest_incident,
@@ -113,6 +112,7 @@
       </dl>
     </section>
   </div>
+  <div class="govuk-!-padding-bottom-6"></div>
   <div class="no-print">
     <%= print_button t('.print_button') %>
 
