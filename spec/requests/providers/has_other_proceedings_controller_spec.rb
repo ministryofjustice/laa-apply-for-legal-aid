@@ -70,7 +70,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, :with_only_section8_proceeding_type }
 
         it 'redirects to the page to add another proceeding type' do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
         end
       end
     end
