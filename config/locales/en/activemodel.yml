@@ -55,16 +55,16 @@ en:
       transaction_types:
         name:
           benefits: Benefits
-          excluded_benefits: Excluded benefits
-          friends_or_family: Financial help from friends or family
-          maintenance_in: Maintenance payments
-          property_or_lodger: Income from property or lodger
+          excluded_benefits: Disregarded
+          friends_or_family: Financial help
+          maintenance_in: Maintenance
+          property_or_lodger: Property
           student_loan: Student loan or grant
           pension: Pension
-          rent_or_mortgage: Housing payments
-          child_care: Childcare payments
-          maintenance_out: Maintenance payments to a former partner
-          legal_aid: Payments towards legal aid in a criminal case
+          rent_or_mortgage: Housing
+          child_care: Childcare
+          maintenance_out: Maintenance
+          legal_aid: Legal aid
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month
