@@ -187,7 +187,6 @@ module Providers
             it 'does not save the object and raise an error' do
               subject
               error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
-              puts error
               expect(response.body).to include(error)
               expect(gateway_evidence).to be_nil
             end

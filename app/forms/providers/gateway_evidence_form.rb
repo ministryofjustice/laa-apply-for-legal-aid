@@ -28,10 +28,6 @@ module Providers
       MAX_FILE_SIZE
     end
 
-    def exclude_from_model
-      %i[upload_button_pressed original_file]
-    end
-
     validate :original_file_valid
     validate :file_uploaded?
 
