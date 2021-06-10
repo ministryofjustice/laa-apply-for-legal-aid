@@ -101,6 +101,12 @@ module Providers
             expect { subject }.not_to change { chances_of_success.reload.success_prospect_details }
           end
 
+          it 'does not set the task to complete' do
+            subject
+            serialized_merits_task_list = legal_aid_application.legal_framework_merits_task_list.reload.serialized_data
+            expect(serialized_merits_task_list).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
+          end
+
           it 'redirects to next page' do
             subject
             expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(application_proceeding_type))
