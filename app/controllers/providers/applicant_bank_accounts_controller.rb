@@ -8,7 +8,6 @@ module Providers
     def update
       @form = SavingsAmounts::OfflineSavingsAccountsForm.new(form_params)
 
-      binding.pry
       reset_account_balance if @form.valid? && @form.offline_savings_accounts.nil?
 
       applicant_accounts
