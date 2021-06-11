@@ -25,6 +25,16 @@ class ResultsPanelSelector
     capital_and_income_contribution_required_with_restrictions_no_disregards: :capital_and_income_contribution_required,
     capital_and_income_contribution_required_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
 
+    partially_eligible_capital_no_restrictions_no_disregards: :partially_eligible_capital,
+    partially_eligible_income_no_restrictions_no_disregards: :partially_eligible_income,
+    partially_eligible_capital_income_no_restrictions_no_disregards: :partially_eligible_capital_income,
+    partially_eligible_capital_no_restrictions_with_disregards: :manual_check_disregards,
+    partially_eligible_income_no_restrictions_with_disregards: :manual_check_disregards,
+    partially_eligible_capital_with_restrictions_no_disregards: :manual_check_required,
+    partially_eligible_income_with_restrictions_no_disregards: :manual_check_required,
+    partially_eligible_capital_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
+    partially_eligible_income_with_restrictions_with_disregards: :manual_check_disregards_restrictions,
+
     manual_check_required_no_restrictions_no_disregards: :manual_check_required,
     manual_check_required_no_restrictions_with_disregards: :manual_check_disregards,
     manual_check_required_with_restrictions_no_disregards: :manual_check_required,
@@ -40,7 +50,7 @@ class ResultsPanelSelector
   end
 
   def call
-    key = "#{cfe_result.overview}_#{restrictions}_#{disregards}".to_sym
+    key = "#{cfe_result.overview}#{capital_contribution}#{income_contribution}_#{restrictions}_#{disregards}".to_sym
     partial = DECISION_TREE.fetch(key)
     "shared/assessment_results/#{partial}"
   end
@@ -57,5 +67,13 @@ class ResultsPanelSelector
 
   def disregards
     @legal_aid_application.policy_disregards? ? 'with_disregards' : 'no_disregards'
+  end
+
+  def income_contribution
+    cfe_result.income_contribution_required? ? '_income' : ''
+  end
+
+  def capital_contribution
+    cfe_result.capital_contribution_required? ? '_capital' : ''
   end
 end

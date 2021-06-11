@@ -87,6 +87,28 @@ en:
         details:
           - "We’ve calculated that your client should pay %{amount} from their disposable income."
           - "You still need to provide details of the case before we can decide if they’re eligible."
+
+      partially_eligible_capital:
+        heading: "%{name} is partially eligible for legal aid"
+        details:
+          - "For domestic abuse proceedings, your client must pay %{amount} from their disposable capital."
+          - Your client is ineligible for Section 8 proceedings.
+          - You still need to provide details of the case before we can grant legal aid.
+      partially_eligible_income:
+        heading: "%{name} is partially eligible for legal aid"
+        details:
+          - "For domestic abuse proceedings, your client must pay %{amount} from their disposable income."
+          - Your client is ineligible for Section 8 proceedings.
+          - You still need to provide details of the case before we can grant legal aid.
+      partially_eligible_capital_income:
+        heading: "%{name} is partially eligible for legal aid"
+        line_1: "For domestic abuse proceedings, your client must pay:"
+        details:
+          - "%{income_contribution} from their disposable income"
+          - "%{capital_contribution} from their disposable capital"
+        line_2: Your client is ineligible for Section 8 proceedings.
+        line_3: You still need to provide details of the case before we can grant legal aid.
+
     means_report:
       item:
         deductions:

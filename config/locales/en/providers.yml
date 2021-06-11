@@ -53,6 +53,7 @@ en:
           eligible: Eligible
           not_eligible: Not Eligible
           contribution_required: Contribution required
+          partially_eligible: Partially eligible
       result_details:
         capital_calculation: Capital calculation
         client_eligibility_calculation: How we calculated your client's eligibility
@@ -64,6 +65,7 @@ en:
           eligible: Eligible
           not_eligible: Not eligible
           contribution_required: Contribution required
+          partially_eligible: Partially eligible
       result_details:
         capital_calculation: Capital calculation
         income_calculation: Income calculation
