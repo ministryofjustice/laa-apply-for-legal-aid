@@ -18,10 +18,6 @@ module Flow
         # Vehicle steps here (see ProviderVehicle)
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
-          forward: ->(_, has_offline_savings_account) { has_offline_savings_account ? :offline_savings_accounts : :savings_and_investments }
-        },
-        offline_savings_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_offline_savings_account_path(application) },
           forward: :savings_and_investments
         },
         offline_accounts: {

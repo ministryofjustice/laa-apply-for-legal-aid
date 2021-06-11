@@ -2,27 +2,20 @@ module Providers
   class ApplicantBankAccountsController < ProviderBaseController
     def show
       applicant_accounts
-      form
+      @form = SavingsAmounts::OfflineSavingsAccountsForm.new(model: savings_amount)
     end
 
     def update
-      if form.valid?
-        reset_account_balance unless form.applicant_bank_account?
-        return go_forward(form.applicant_bank_account?)
-      end
+      @form = SavingsAmounts::OfflineSavingsAccountsForm.new(form_params)
+
+      binding.pry
+      reset_account_balance if @form.valid? && @form.offline_savings_accounts.nil?
+
       applicant_accounts
-      render :show
+      render :show unless save_continue_or_draft(@form)
     end
 
     private
-
-    def form
-      @form ||= BinaryChoiceForm.call(
-        journey: :provider,
-        radio_buttons_input_name: :applicant_bank_account,
-        form_params: form_params
-      )
-    end
 
     def applicant_accounts
       @applicant_accounts ||= applicant.bank_providers.collect do |bank_provider|
@@ -37,10 +30,14 @@ module Providers
       legal_aid_application.savings_amount.save
     end
 
-    def form_params
-      return {} unless params[:binary_choice_form]
+    def savings_amount
+      @savings_amount ||= legal_aid_application.savings_amount || legal_aid_application.build_savings_amount
+    end
 
-      params.require(:binary_choice_form).permit(:applicant_bank_account)
+    def form_params
+      merge_with_model(savings_amount) do
+        params.require(:savings_amount).permit(:offline_savings_accounts)
+      end
     end
   end
 end
