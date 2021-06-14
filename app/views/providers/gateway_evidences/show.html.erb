@@ -7,15 +7,15 @@
                       t('.h1-heading')
                     end %>
 <%= page_template(
-      page_title: t('.h1-heading'),
+      page_title: "Upload supporting evidence",
       head_title: new_head_title,
       template: :basic,
-      back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
+      back_link: { path: providers_legal_aid_application_merits_task_list_path(@legal_aid_application) }
     ) do %>
 
   <%= form_with(
           model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
+          url: providers_legal_aid_application_gateway_evidence_path,
           method: :patch,
           local: true
       ) do |form| %>
@@ -24,28 +24,16 @@
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
-      <p class="govuk-body"><%= t('generic.tell_us') %></p>
-      <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
-        <% (1..5).each do |bullet_number| %>
-          <li><%= t(".bullet-#{bullet_number}") %></li>
-        <% end %>
-      </ul>
+      <div class="govuk-inset-text"><%= t('.hint_text') %></div>
 
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
-          <%= t('.warning_text') %>
-        </strong>
-      </div>
-
-      <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
                                 hint: {text: t('.size_hint')} %>
+
       <%= form.submit(
               t('generic.upload'),
               id: 'upload',
               name: 'upload_button',
-              class: 'govuk-button form-button'
+              class: 'govuk-button govuk-button--secondary'
           ) %>
 
       <% #  Customised accessibility alerts within this span below %>
@@ -64,14 +52,12 @@
 
     <%= form_with(
           model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
+          url: providers_legal_aid_application_gateway_evidence_path,
           method: :patch,
           local: true
       ) do |form| %>
 
     <%= form.govuk_radio_divider %>
-
-    <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>

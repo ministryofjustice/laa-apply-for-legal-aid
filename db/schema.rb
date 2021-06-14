@@ -400,6 +400,15 @@ ActiveRecord::Schema.define(version: 2021_06_02_114709) do
     t.string "name"
   end
 
+  create_table "gateway_evidences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.uuid "provider_uploader_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_gateway_evidences_on_legal_aid_application_id"
+    t.index ["provider_uploader_id"], name: "index_gateway_evidences_on_provider_uploader_id"
+  end
+
   create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.date "occurred_on"
     t.text "details"
@@ -795,6 +804,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_114709) do
   add_foreign_key "chances_of_successes", "application_proceeding_types"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
+  add_foreign_key "gateway_evidences", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"

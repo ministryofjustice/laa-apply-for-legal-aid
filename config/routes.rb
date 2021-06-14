@@ -206,6 +206,7 @@ Rails.application.routes.draw do
       resource :opponent, only: %i[show update], controller: 'application_merits_task/opponents'
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :merits_task_list, only: %i[show update]
+      resource :gateway_evidence, only: %i[show update destroy]
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset

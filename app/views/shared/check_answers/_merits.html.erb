@@ -134,6 +134,24 @@
   </section>
 <% end %>
 
+<div class="govuk-!-padding-bottom-6"></div>
+
+<section class="print-no-break">
+  <h2 class="govuk-heading-m">
+    <%= t '.gateway-evidence-heading' %>
+  </h2>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
+  <%= check_answer_link(
+        name: :gateway_evidence,
+        url: providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
+        question: t('.items.gateway_evidence'),
+        answer: nil,
+        read_only: read_only
+      ) %>
+  </dl>
+
+</section>
+
 <% @legal_aid_application.application_proceeding_types.each do |apt| %>
   <section class="print-no-break">
     <h2 class="govuk-heading-l"><%= apt.proceeding_type.meaning %></h2>

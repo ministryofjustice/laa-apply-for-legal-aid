@@ -382,6 +382,18 @@ en:
         feedback_suffix: " to help us improve this service."
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
+    gateway_evidences:
+      show:
+        h1-heading: Upload supporting evidence
+        hint_text: Use this page if you're applying for Section 8 proceedings and need to upload gateway evidence.
+        size_hint: The maximum file size is 7MB. Upload one file at a time.
+      uploaded_files:
+        delete: Delete
+        filename: Filename
+        size: Size
+        status: Status
+        uploaded: Uploaded
+        title: Uploaded files
     identify_types_of_incomes:
       show:
         page_heading: Which types of income does your client receive?

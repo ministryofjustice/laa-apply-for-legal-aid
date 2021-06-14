@@ -57,6 +57,8 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Attempts to settle\nCOMPLETED'
     When I click 'Continue'
+    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
+    And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers and submit application'
     And the page is accessible
 
