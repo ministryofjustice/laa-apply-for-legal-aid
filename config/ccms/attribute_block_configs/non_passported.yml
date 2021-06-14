@@ -1544,6 +1544,14 @@ money_due:
     response_type: text
     generate_block?: true
 
+client_residing_person:
+  CLI_RES_PER_INPUT_B_12WP3_20A:
+    generate_block: true
+    br100_meaning: "Dependant: relationship is a foster child"
+    user_defined: false
+    response_type: boolean
+    value: false
+
 national_savings:
   CLINATIONAL_INPUT_B_9WP2_10A:
     generate_block?: true
