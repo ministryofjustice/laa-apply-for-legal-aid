@@ -42,8 +42,11 @@ module CCMS
       end
 
       def document_type(xml)
-        if @document_type.eql?('bank_transaction_report')
+        case @document_type
+        when 'bank_transaction_report'
           xml.__send__('ns4:DocumentType', 'BSTMT')
+        when 'gateway_evidence_pdf'
+          xml.__send__('ns4:DocumentType', 'STATE')
         else
           xml.__send__('ns4:DocumentType', 'ADMIN1')
         end
