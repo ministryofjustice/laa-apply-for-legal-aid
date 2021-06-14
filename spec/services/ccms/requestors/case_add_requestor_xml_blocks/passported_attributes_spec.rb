@@ -80,6 +80,14 @@ module CCMS
           end
         end
 
+        context 'GB_INFER_T_6WP1_66A' do
+          it 'generates GB_INFER_T_6WP1_66A in global merits' do
+            block = XmlExtractor.call(xml, :global_merits, 'GB_INFER_T_6WP1_66A')
+            expect(block).to have_text_response 'CLIENT'
+            expect(block).not_to be_user_defined
+          end
+        end
+
         context 'CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY' do
           context 'eligible' do
             let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }

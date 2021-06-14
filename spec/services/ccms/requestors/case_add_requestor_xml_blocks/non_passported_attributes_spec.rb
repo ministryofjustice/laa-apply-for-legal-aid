@@ -499,6 +499,13 @@ module CCMS
           end
         end
 
+        context 'GB_INFER_T_6WP1_66A' do
+          it 'is omitted' do
+            block = XmlExtractor.call(xml, :global_merits, 'GB_INFER_T_6WP1_66A')
+            expect(block).not_to be_present
+          end
+        end
+
         context 'Proceeding Matter Type Descriptions' do
           let(:attrs) do
             %w[

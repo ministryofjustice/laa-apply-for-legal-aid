@@ -973,6 +973,9 @@ global_merits:
   FIRST_TIER_TRIBUNAL_TAXATION:
     generate_block?: true
     value: false
+  GB_INFER_T_6WP1_66A:
+    generate_block?: false
+    value: ''
   HIGH_COURT:
     generate_block?: true
     value: false

@@ -2456,6 +2456,12 @@ global_merits:
     br100_meaning: The Application Includes Immigration Proceedings
     response_type: boolean
     user_defined: false
+  GB_INFER_T_6WP1_66A:
+    generate_block?: true
+    value: 'CLIENT'
+    br100_meaning: "Passported: The person who receives passported benefit?"
+    response_type: text
+    user_defined: false
   COPY_SEPARATE_STATEMENT:
     value: false
     br100_meaning: The provider has a copy of separate statement
