@@ -13,7 +13,7 @@
   </div>
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_no_link(
-          name: :offline_savings_accounts,
+          name: :has_offline_savings,
           question: t('.offline_savings_accounts'),
           answer: safe_yes_or_no(@legal_aid_application.offline_savings?),
           read_only: read_only

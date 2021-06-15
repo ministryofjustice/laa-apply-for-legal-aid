@@ -173,3 +173,18 @@ Feature: Completing and checking means answers backwards and forwards
     Then I choose "Yes"
     And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'
+
+  @javascript
+  Scenario: I change the applicant answers about offline savings accounts
+    Given I am checking the applicant's means answers
+    Then I should be on a page showing 'Has savings accounts they cannot access online'
+    And I should be on a page showing 'Amount in offline savings accounts'
+    And the answer for 'has offline savings' should be 'Yes'
+    Then I click Check Your Answers Change link for 'offline savings accounts'
+    Then I should be on the 'applicant_bank_account' page showing 'Does your client have any savings accounts they cannot access online?'
+    And I should be on a page showing 'Enter the total amount in all accounts.'
+    Then I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    And the answer for 'has offline savings' should be 'No'
+    And I should not see 'Amount in offline savings accounts'
