@@ -20,5 +20,14 @@ FactoryBot.define do
       date_of_birth { Faker::Date.birthday(min_age: 1, max_age: 17) }
       relationship { 'child_relative' }
     end
+
+    trait :under15 do
+      date_of_birth { Faker::Date.birthday(min_age: 1, max_age: 14) }
+      relationship { 'child_relative' }
+    end
+
+    trait :child15_to_18 do
+      date_of_birth { Faker::Date.birthday(min_age: 16, max_age: 17) }
+    end
   end
 end
