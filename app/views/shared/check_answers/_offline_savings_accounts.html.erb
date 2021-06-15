@@ -29,7 +29,7 @@
   <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
-          name: :offline_savings_accounts,
+          name: :has_offline_savings,
           url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
           question: t('.offline_savings_accounts'),
           answer: safe_yes_or_no(@legal_aid_application.offline_savings?),

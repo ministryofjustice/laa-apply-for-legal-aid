@@ -42,11 +42,13 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
     let(:applicant_bank_account) { 'true' }
+    let(:offline_savings_accounts) { nil }
     let(:submit_button) { {} }
     let(:params) do
       {
-        binary_choice_form: {
-          applicant_bank_account: applicant_bank_account
+        savings_amount: {
+          applicant_bank_account: applicant_bank_account,
+          offline_savings_accounts: offline_savings_accounts
         }
       }
     end
@@ -64,15 +66,15 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
         subject
       end
 
-      it 'redirects to the non-passported offline savings account' do
-        expect(response).to redirect_to(providers_legal_aid_application_offline_savings_account_path(legal_aid_application))
+      it 'redirects to the savings and investments page' do
+        expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
       end
 
       context 'neither option is chosen' do
         let(:params) { {} }
 
         it 'shows an error' do
-          expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.error'))
+          expect(unescaped_response_body).to include(I18n.t('errors.applicant_bank_accounts.blank'))
         end
       end
 
@@ -81,6 +83,26 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
 
         it 'redirects to the savings and investments page' do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+        end
+      end
+
+      context 'The YES option is chosen' do
+        let(:applicant_bank_account) { 'true' }
+
+        context 'no amount is entered' do
+          let(:offline_savings_accounts) { nil }
+
+          it 'displays an error' do
+            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.blank'))
+          end
+        end
+
+        context 'a valid savings amount is entered' do
+          let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
+
+          it 'redirects to the savings and investments page' do
+            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+          end
         end
       end
     end

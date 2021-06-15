@@ -164,8 +164,7 @@ Feature: Provider accessibility
     Then I should be on a page showing "Your client’s bank accounts"
     And the page is accessible
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Enter the total amount in all savings accounts'
+    Then I should be on a page showing 'Enter the total amount in all accounts.'
     And the page is accessible
     Then I fill 'Offline savings accounts' with '3000'
     And I click 'Save and continue'

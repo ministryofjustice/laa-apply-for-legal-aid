@@ -58,7 +58,7 @@ RSpec.describe 'offline savings accounts', type: :request do
 
         it 'redirects to next page' do
           subject
-          expect(response.body).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application_id))
+          expect(response.body).to redirect_to(providers_legal_aid_application_means_summary_path(application_id))
         end
       end
     end

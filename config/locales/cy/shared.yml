@@ -144,11 +144,6 @@ cy:
     check_answers:
       assets:
         assets:
-          has_offline_savings_account: "?enilno ssecca tonnac yeht stnuocca sgnivas
-            yna evah tneilc ruoy seoD"
-          property-heading: ytreporP
-          offline_accounts: stnuocca knab s'tneilc ruoY
-          offline_savings: enilno ssecca tonnac tneilc ruoy stnuocca sgnivaS
           other_assets: "?evah tneilc ruoy seod stessa fo sepyt hcihW"
           policy_disregards: seitirahc ro emehcs morf stnemyaP
           restrictions: "?ylppa snoitcirtser yna oD"
