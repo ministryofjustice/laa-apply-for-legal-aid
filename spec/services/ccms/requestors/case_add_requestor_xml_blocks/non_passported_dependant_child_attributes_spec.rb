@@ -40,8 +40,7 @@ module CCMS
 
           context 'with dependant children' do
             let!(:younger_child) { create :dependant, :under15, legal_aid_application: legal_aid_application, number: 1, has_income: false }
-            let!(:older_child) { create :dependant, :child16_to_18, legal_aid_application: legal_aid_application, number: 2, has_income: true }
-
+            let!(:older_child) { create :dependant, :child16_to18, legal_aid_application: legal_aid_application, number: 2, has_income: true }
 
             context 'variable attributes' do
               context 'attribute CLI_RES_PER_INPUT_B_12WP3_21A - Dependant: Relationship is child aged 15 and under' do
@@ -148,7 +147,6 @@ module CCMS
           end
         end
 
-
         context 'passported' do
           let(:legal_aid_application) do
             create :legal_aid_application,
@@ -170,6 +168,5 @@ module CCMS
         end
       end
     end
-
   end
 end
