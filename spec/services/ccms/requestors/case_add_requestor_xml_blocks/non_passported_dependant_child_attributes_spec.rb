@@ -29,9 +29,8 @@ module CCMS
                  office: office
         end
 
-        let!(:child_dependants) { create_list :dependant, 2, :under18, legal_aid_application: legal_aid_application }
-        let!(:adult_dependants) { create_list :dependant, 2, :over18, legal_aid_application: legal_aid_application }
 
+        let!(:adult_dependants) { create_list :dependant, 2, :over18, legal_aid_application: legal_aid_application }
 
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -40,38 +39,67 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
 
-        it 'generates the expected block for each of the hard coded attrs' do
-          puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-          puts xml
-          puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-          hard_coded_attrs.each do |attr|
-            entity, attr_name, type, user_defined, value = attr
-            block = XmlExtractor.call(xml, entity.to_sym, attr_name)
-            case type
-            when 'number'
-              expect(block).to have_number_response value.to_i
-            when 'text'
-              expect(block).to have_text_response value
-            when 'currency'
-              expect(block).to have_currency_response value
-            when 'date'
-              expect(block).to have_date_response value
-            else raise 'Unexpected type'
+        context 'with dependant children' do
+          let!(:child_dependants) { create_list :dependant, 2, :under18, legal_aid_application: legal_aid_application }
+
+          context 'hard coded attributes' do
+            let(:hard_coded_attrs) do
+              [
+                # key for XmlExtractor xpath, attribute name, response type, user_defined?, expected_value
+                ['client_residing_person', 'CLI_RES_PER_INPUT_B_12WP3_20A', 'boolean', false, false]
+              ]
             end
 
-            case user_defined
-            when true
-              expect(block).to be_user_defined
-            else
-              expect(block).not_to be_user_defined
+            it 'generates a CLIENT RESIDING PERSON ENTITY' do
+              entity = XmlExtractor.call(xml, :client_residing_person_entity)
+              expect(entity).to be_present
+            end
+
+            it 'generates the an attribute block for each dependant child' do
+              hard_coded_attrs.each do |attr|
+                entity, attr_name, _type, _user_defined, _value = attr
+                blocks = XmlExtractor.call(xml, entity.to_sym, attr_name)
+                expect(blocks.size).to eq 2
+              end
+            end
+
+            it 'generates the expected block for each of the hard coded attrs' do
+              hard_coded_attrs.each do |attr|
+                entity, attr_name, type, user_defined, value = attr
+                blocks = XmlExtractor.call(xml, entity.to_sym, attr_name)
+
+                blocks.each do |block|
+                  case type
+                  when 'number'
+                    expect(block).to have_number_response value.to_i
+                  when 'text'
+                    expect(block).to have_text_response value
+                  when 'currency'
+                    expect(block).to have_currency_response value
+                  when 'date'
+                    expect(block).to have_date_response value
+                  when 'boolean'
+                    expect(block).to have_boolean_response value
+                  else raise 'Unexpected type'
+                  end
+
+                  case user_defined
+                  when true
+                    expect(block).to be_user_defined
+                  else
+                    expect(block).not_to be_user_defined
+                  end
+                end
+              end
             end
           end
         end
 
-        def hard_coded_attrs
-          [
-            ['client_residing_person', 'CLI_RES_PER_INPUT_B_12WP3_20A', 'boolean', false, false]
-          ]
+        context 'without dependant children' do
+          it 'does not generate a client residing person entiry' do
+            entity = XmlExtractor.call(xml, :client_residing_person_entity)
+            expect(entity).to be_empty
+          end
         end
       end
     end

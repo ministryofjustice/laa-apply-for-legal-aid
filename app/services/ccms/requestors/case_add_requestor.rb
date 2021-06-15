@@ -393,7 +393,7 @@ module CCMS
         @legal_aid_application.dependants.child_relative.each_with_index { |dependant, index| generate_client_residing_person_instance(xml, dependant, index) }
       end
 
-      def generate_client_residing_person_instance(xml, dependant, index)
+      def generate_client_residing_person_instance(xml, _dependant, index)
         xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', "the client's residing person#{index + 1}")
           xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person) }
