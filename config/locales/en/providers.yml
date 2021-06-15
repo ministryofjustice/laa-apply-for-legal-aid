@@ -853,6 +853,14 @@ en:
         passported: Passported
         payments: Regular payments
         property: Property
+        change: Change
+        emergency_cost_limit: Emergency cost limit
+        section_delegated:
+          heading: Delegated functions
+        section_emergency:
+          heading: Covered under an emergency certificate
+        section_substantive:
+          heading: Covered under a substantive certificate
         section_client:
           heading: Client details
         section_next:
