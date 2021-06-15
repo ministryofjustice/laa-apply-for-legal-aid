@@ -31,7 +31,9 @@ RSpec.describe ResultsPanelSelector do
       let(:cfe_result) { double CFE::V3::Result, overview: 'xxxx' }
 
       it 'raises' do
-        expect { described_class.call(legal_aid_application) }.to raise_error KeyError, 'key not found: :xxxx_no_restrictions_no_disregards'
+        # expect { described_class.call(legal_aid_application) }.to raise_error KeyError, 'key not found: :xxxx_no_restrictions_no_disregards'
+        # This test changes because now it fails when it translates the overview not the partial
+        expect { described_class.call(legal_aid_application) }.to raise_error KeyError, 'key not found: :xxxx'
       end
     end
   end
