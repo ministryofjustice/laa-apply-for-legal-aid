@@ -28,6 +28,7 @@ module CCMS
                                 |bank_account
                                 |lead_proceeding_type
                                 |chances_of_success
+                                |dependant
                                 |opponent
                                 |other_assets_declaration
                                 |other_party
@@ -45,6 +46,7 @@ module CCMS
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
     LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
     CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/.freeze
+    DEPENDANT_REGEX = /^dependant_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
     OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
     OTHER_PARTY = /^other_party_(\S+)$/.freeze
@@ -373,6 +375,8 @@ module CCMS
         options[:bank_acct].__send__(Regexp.last_match(1))
       when CHANCES_OF_SUCCESS
         options[:chances_of_success].__send__(Regexp.last_match(1))
+      when DEPENDANT_REGEX
+        options[:dependant].__send__(Regexp.last_match(1))
       when VEHICLE_REGEX
         options[:vehicle].__send__(Regexp.last_match(1))
       when WAGE_SLIP_REGEX
