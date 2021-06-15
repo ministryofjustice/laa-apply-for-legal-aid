@@ -467,7 +467,7 @@ en:
               not_a_number: Total in current accounts must be an amount of money, like 60,000
               too_many_decimals: Estimated total in current accounts must not include more than 2 decimal numbers
             offline_savings_accounts:
-              blank: Enter the estimated total in all savings accounts
+              blank: Enter the total amount in all accounts
               greater_than_or_equal_to: Total in savings accounts must be 0 or more
               not_a_number: Total in savings accounts must be an amount of money, like 60,000
               too_many_decimals: Estimated total in savings accounts must not include more than 2 decimal numbers

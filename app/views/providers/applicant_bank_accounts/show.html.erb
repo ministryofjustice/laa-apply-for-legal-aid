@@ -35,16 +35,24 @@
     <%= form.govuk_radio_buttons_fieldset :applicant_bank_account,
                                           legend: { size: 'l', tag: 'h2', text: t('.offline_savings_accounts') },
                                           hint: {text: t('.hints.offline_savings_accounts')} do %>
-      <%= form.govuk_radio_button :applicant_bank_account, true, link_errors: true, label: {text: t('generic.yes')} do %>
+      <%= form.govuk_radio_button :applicant_bank_account,
+                                  true,
+                                  link_errors: true,
+                                  label: {text: t('generic.yes')},
+                                  checked: (@form.offline_savings_accounts.present?) do %>
         <%= form.govuk_text_field(
               :offline_savings_accounts,
               label: {text: :offline_savings_accounts, hidden: true},
+              hint: { text: t('.hints.offline_savings_amount')},
               value: number_to_currency_or_original_string(@form.offline_savings_accounts),
               prefix_text: t('currency.gbp'),
               width: 5
             ) %>
       <% end %>
-      <%= form.govuk_radio_button :applicant_bank_account, true, label: {text: t('generic.no')} %>
+      <%= form.govuk_radio_button :applicant_bank_account,
+                                  false,
+                                  checked: (@legal_aid_application.checking_answers? && @form.offline_savings_accounts.nil?),
+                                  label: {text: t('generic.no')} %>
     <% end %>
 
     <%= next_action_buttons(
