@@ -496,11 +496,6 @@ global_means:
     br100_meaning: 'RESULT: Client Financial Support'
     response_type: currency
     user_defined: false
-  COUNTRY:
-    value: GBR
-    br100_meaning: Country of residence
-    response_type: text
-    user_defined: true
   GB_PROC_B_41WP3_15A:
     value: false
     br100_meaning: 'R - Rent: Copy of most recent housing benefit award letter'
