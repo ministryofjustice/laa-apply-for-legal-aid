@@ -53,6 +53,42 @@
                   </ns2:Organization>
                 </ns2:OtherPartyDetail>
               </ns2:OtherParty>
+              <ns2:OtherParty>
+                <ns2:OtherPartyID>OPPONENT_1</ns2:OtherPartyID>
+                <ns2:SharedInd>false</ns2:SharedInd>
+                <ns2:OtherPartyDetail>
+                  <ns2:Person>
+                    <ns2:Name>
+                      <ns2:Title>.</ns2:Title>
+                      <ns2:Surname>TestChild</ns2:Surname>
+                      <ns2:FirstName>First</ns2:FirstName>
+                    </ns2:Name>
+                    <ns2:DateOfBirth>2019-01-20</ns2:DateOfBirth>
+                    <ns2:Address/>
+                    <ns2:RelationToClient>UNKNOWN</ns2:RelationToClient>
+                    <ns2:RelationToCase>CHILD</ns2:RelationToCase>
+                    <ns2:ContactDetails/>
+                  </ns2:Person>
+                </ns2:OtherPartyDetail>
+              </ns2:OtherParty>
+              <ns2:OtherParty>
+                <ns2:OtherPartyID>OPPONENT_2</ns2:OtherPartyID>
+                <ns2:SharedInd>false</ns2:SharedInd>
+                <ns2:OtherPartyDetail>
+                  <ns2:Person>
+                    <ns2:Name>
+                      <ns2:Title>.</ns2:Title>
+                      <ns2:Surname>TestChild</ns2:Surname>
+                      <ns2:FirstName>Second</ns2:FirstName>
+                    </ns2:Name>
+                    <ns2:DateOfBirth>2020-02-15</ns2:DateOfBirth>
+                    <ns2:Address/>
+                    <ns2:RelationToClient>UNKNOWN</ns2:RelationToClient>
+                    <ns2:RelationToCase>CHILD</ns2:RelationToCase>
+                    <ns2:ContactDetails/>
+                  </ns2:Person>
+                </ns2:OtherPartyDetail>
+              </ns2:OtherParty>
             </ns2:OtherParties>
             <ns2:Proceedings>
               <ns2:Proceeding>

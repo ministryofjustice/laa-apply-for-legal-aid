@@ -59,6 +59,8 @@ module CCMS
         let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
+        let!(:involved_child1) { create :involved_child, full_name: 'First TestChild', date_of_birth: Date.parse('2019-01-20'), legal_aid_application: legal_aid_application }
+        let!(:involved_child2) { create :involved_child, full_name: 'Second TestChild', date_of_birth: Date.parse('2020-02-15'), legal_aid_application: legal_aid_application}
 
         before do
           allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return('FakeUser')

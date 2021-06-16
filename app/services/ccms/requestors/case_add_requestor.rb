@@ -125,10 +125,13 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        generate_other_party(xml)
+        generate_opponent(xml)
+        @legal_aid_application.involved_children.order(:date_of_birth).each_with_index do |child, i|
+          generate_involved_child(xml, child, i)
+        end
       end
 
-      def generate_other_party(xml) # rubocop:disable Metrics/MethodLength
+      def generate_opponent(xml) # rubocop:disable Metrics/MethodLength
         xml.__send__('ns2:OtherParty') do
           xml.__send__('ns2:OtherPartyID', 'OPPONENT_7713451')
           xml.__send__('ns2:SharedInd', false)
@@ -139,6 +142,28 @@ module CCMS
               xml.__send__('ns2:RelationToClient', 'NONE')
               xml.__send__('ns2:RelationToCase', 'OPP')
               xml.__send__('ns2:Address')
+              xml.__send__('ns2:ContactDetails')
+            end
+          end
+        end
+      end
+
+      def generate_involved_child(xml, child, i) # rubocop:disable Metrics/MethodLength
+        first_name, last_name = child.split_full_name
+        xml.__send__('ns2:OtherParty') do
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{i+1}")
+          xml.__send__('ns2:SharedInd', false)
+          xml.__send__('ns2:OtherPartyDetail') do
+            xml.__send__('ns2:Person') do
+              xml.__send__('ns2:Name') do
+                xml.__send__('ns2:Title', '.')
+                xml.__send__('ns2:Surname', last_name)
+                xml.__send__('ns2:FirstName', first_name)
+              end
+              xml.__send__('ns2:DateOfBirth', child.date_of_birth.strftime('%F'))
+              xml.__send__('ns2:Address')
+              xml.__send__('ns2:RelationToClient', 'UNKNOWN')
+              xml.__send__('ns2:RelationToCase', 'CHILD')
               xml.__send__('ns2:ContactDetails')
             end
           end
