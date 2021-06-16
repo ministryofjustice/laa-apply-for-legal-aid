@@ -257,6 +257,22 @@ module CFEResults
         result
       end
 
+      def self.partially_eligible_with_income_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = 'partially_eligible'
+        result[:result_summary][:disposable_income][:income_contribution] = 238.56
+        result[:result_summary][:overall_result][:income_contribution] = 238.56
+        result
+      end
+
+      def self.partially_eligible_with_capital_contribution_required
+        result = eligible
+        result[:result_summary][:overall_result][:result] = 'partially_eligible'
+        result[:result_summary][:capital][:capital_contribution] = 468.56
+        result[:result_summary][:overall_result][:capital_contribution] = 468.56
+        result
+      end
+
       def self.with_income_contribution_required
         result = eligible
         result[:result_summary][:overall_result][:result] = 'contribution_required'

@@ -85,13 +85,13 @@ class ResultsPanelSelector
   end
 
   def capital_contribution
-    return unless cfe_result == 'partially_eligible'
+    return unless cfe_result.overview == 'partially_eligible'
 
     cfe_result.capital_contribution_required? ? '_with_capital_contribution' : '_no_capital_contribution'
   end
 
   def income_contribution
-    return unless cfe_result == 'partially_eligible'
+    return unless cfe_result.overview == 'partially_eligible'
 
     cfe_result.income_contribution_required? ? '_with_income_contribution' : '_no_income_contribution'
   end

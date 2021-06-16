@@ -31,6 +31,14 @@ module CFEResults
           result { CFEResults::V4::MockResults.with_capital_and_income_contributions_required.to_json }
         end
 
+        trait :partially_eligible_with_income_contribution_required do
+          result { CFEResults::V4::MockResults.partially_eligible_with_income_contribution_required.to_json }
+        end
+
+        trait :partially_eligible_with_capital_contribution_required do
+          result { CFEResults::V4::MockResults.partially_eligible_with_capital_contribution_required.to_json }
+        end
+
         trait :no_additional_properties do
           result { CFEResults::V4::MockResults.no_additional_properties.to_json }
         end
