@@ -102,8 +102,28 @@ Given('I previously created a passported application with no assets and left on 
   login_as @legal_aid_application.provider
 end
 
+Given('I have a passported application with no assets on the {string} page') do |provider_step|
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :without_own_home,
+    :with_proceeding_types,
+    :with_no_other_assets,
+    :with_policy_disregards,
+    :with_passported_state_machine,
+    :provider_entering_means,
+    provider: create(:provider),
+    provider_step: provider_step.downcase
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given('the setting to allow multiple proceedings is enabled') do
   Setting.setting.update!(allow_multiple_proceedings: true)
+end
+
+Given('the setting to manually review all cases is enabled') do
+  Setting.setting.update!(manually_review_all_cases: true)
 end
 
 Given('the setting to allow DWP overrides is enabled') do
@@ -780,6 +800,14 @@ Then(/^I select the second checkbox$/) do
   page.find("input[type='checkbox']", visible: false)[1].click
 end
 
+Then('I check {string}') do |string|
+  check string, visible: false
+end
+
+Then('I pause') do
+  sleep 5
+end
+
 Then('I am on the postcode entry page') do
   expect(page).to have_content("Enter your client's correspondence address")
 end
@@ -821,6 +849,10 @@ end
 
 Then(/^I click How we checked your client's benefits status$/) do
   page.find('#checked-status').click
+end
+
+Then('I am on the {string} page') do |string|
+  expect(page).to have_content(string)
 end
 
 # rubocop:disable Lint/Debugger
