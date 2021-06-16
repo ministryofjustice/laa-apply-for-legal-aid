@@ -76,6 +76,10 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       context 'The NO option is chosen' do
         let(:applicant_bank_account) { 'false' }
 
+        it 'resets the account balance' do
+          expect(legal_aid_application.savings_amount[:offline_savings_account]).to be_nil
+        end
+
         it 'redirects to the savings and investments page' do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
         end
@@ -89,6 +93,14 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
 
           it 'displays the correct error' do
             expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.blank'))
+          end
+        end
+
+        context 'an invalid input is entered' do
+          let(:offline_savings_accounts) { 'abc' }
+
+          it 'displays the correct error' do
+            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.not_a_number'))
           end
         end
 
