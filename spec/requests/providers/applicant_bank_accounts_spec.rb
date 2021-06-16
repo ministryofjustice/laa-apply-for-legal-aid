@@ -76,12 +76,16 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       context 'The NO option is chosen' do
         let(:applicant_bank_account) { 'false' }
 
-        it 'resets the account balance' do
-          expect(legal_aid_application.savings_amount[:offline_savings_account]).to be_nil
-        end
-
         it 'redirects to the savings and investments page' do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+        end
+
+        context 'savings amount is not nil' do
+          let(:offline_savings_accounts) { '' }
+
+          it 'resets the account balance to nil for offline savings account' do
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to be_nil
+          end
         end
       end
 
@@ -106,6 +110,10 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
 
         context 'a valid savings amount is entered' do
           let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
+
+          it 'updates the savings amount' do
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(offline_savings_accounts)
+          end
 
           it 'redirects to the savings and investments page' do
             expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))

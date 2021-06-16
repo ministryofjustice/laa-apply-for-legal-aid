@@ -8,7 +8,7 @@ module Providers
     def update
       @form = SavingsAmounts::OfflineSavingsAccountsForm.new(form_params)
 
-      reset_account_balance if @form.valid? && @form.offline_savings_accounts.nil?
+      reset_account_balance if @form.valid? && @form.offline_savings_accounts.blank?
 
       applicant_accounts
       render :show unless save_continue_or_draft(@form)
