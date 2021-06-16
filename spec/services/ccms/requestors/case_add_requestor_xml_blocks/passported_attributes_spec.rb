@@ -2143,7 +2143,8 @@ module CCMS
           [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER'],
           [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST'],
           [:proceeding_merits, 'SMOD_APPLICABLE'],
-          [:proceeding_merits, 'WORK_IN_SCH_ONE']
+          [:proceeding_merits, 'WORK_IN_SCH_ONE'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_C_7WP2_18A']
         ]
       end
 
