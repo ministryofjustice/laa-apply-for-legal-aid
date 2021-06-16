@@ -39,7 +39,7 @@
                                   true,
                                   link_errors: true,
                                   label: {text: t('generic.yes')},
-                                  checked: (@form.offline_savings_accounts.present?) do %>
+                                  checked: (@form.offline_savings_accounts.present? || @form.errors.include?(:offline_savings_accounts)) do %>
         <%= form.govuk_text_field(
               :offline_savings_accounts,
               label: {text: :offline_savings_accounts, hidden: true},

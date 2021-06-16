@@ -8,9 +8,8 @@ module SavingsAmounts
 
     before_validation :clear_savings_amount
 
-    validates :offline_savings_accounts,
-              currency: { greater_than_or_equal_to: 0 },
-              if: proc { |form| form.applicant_bank_account.to_s == 'true' }
+    validates(:offline_savings_accounts, presence: true, if: proc { |form| form.applicant_bank_account.to_s == 'true' })
+    validates(:offline_savings_accounts, currency: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validate :applicant_bank_account_presence
 
     private
