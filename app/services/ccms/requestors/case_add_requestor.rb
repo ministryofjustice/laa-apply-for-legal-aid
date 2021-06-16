@@ -151,7 +151,7 @@ module CCMS
       def generate_involved_child(xml, child, i) # rubocop:disable Metrics/MethodLength
         first_name, last_name = child.split_full_name
         xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{i+1}")
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{i + 1}")
           xml.__send__('ns2:SharedInd', false)
           xml.__send__('ns2:OtherPartyDetail') do
             xml.__send__('ns2:Person') do
