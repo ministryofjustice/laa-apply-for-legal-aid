@@ -257,7 +257,6 @@ Rails.application.routes.draw do
       resource :linked_children, only: %i[show update], controller: 'proceeding_merits_task/linked_children'
       resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
       resource :success_prospects, only: %i[show update], controller: 'proceeding_merits_task/success_prospects'
-      resource :proceedings_before_the_court, only: %i[show update]
     end
   end
 

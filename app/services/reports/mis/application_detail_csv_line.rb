@@ -59,8 +59,6 @@ module Reports
                :bail_conditions_set_details, to: :opponent
 
       delegate :application_purpose,
-               :proceedings_before_the_court,
-               :details_of_proceedings_before_the_court,
                :success_prospect_details,
                to: :chances_of_success
 
