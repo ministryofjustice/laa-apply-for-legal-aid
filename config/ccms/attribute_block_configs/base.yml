@@ -5,7 +5,7 @@ bank_acct:
     br100_meaning: 'Bank accounts: Current Balance'
     response_type: currency
     user_defined: true
-    generate_block?: false
+    generate_block?: true
   BANKACC_INPUT_N_7WP2_5A:
     value: "#bank_account_account_number"
     br100_meaning: 'Bank accounts: Account number'
