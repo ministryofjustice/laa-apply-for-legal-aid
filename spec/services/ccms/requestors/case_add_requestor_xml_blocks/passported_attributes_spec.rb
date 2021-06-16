@@ -1641,6 +1641,7 @@ module CCMS
           [:main_dwelling, 'MAINTHIRD_INPUT_N_3WP2_11A'],
           [:family_statement, 'FAMILY_STMT_DETAIL'],
           [:family_statement, 'FAMILY_STATEMENT_INSTANCE'],
+          [:family_statement, 'GB_DECL_T_38WP3_32A'],
           [:change_in_circumstances],
           [:change_in_circumstances, 'CHANGE_CIRC_INPUT_T_33WP3_6A'],
           [:global_means, 'BEN_AWARD_DATE'],
