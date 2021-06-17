@@ -243,10 +243,6 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            details_of_proceedings_before_the_court:
-              blank: Enter details of the proceedings currently before the court
-            proceedings_before_the_court:
-              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             success_prospect:
               blank: Select the chance of a successful outcome
             success_likely:
@@ -427,10 +423,6 @@ en:
           attributes:
             application_purpose:
               blank: Enter details of why your client is applying for legal aid
-            details_of_proceedings_before_the_court:
-              blank: Enter details of the proceedings currently before the court
-            proceedings_before_the_court:
-              blank: Select Yes if the proceedings for which funding is being sought are currently before the court
             success_prospect:
               blank: Select the chance of a successful outcome
             success_likely:

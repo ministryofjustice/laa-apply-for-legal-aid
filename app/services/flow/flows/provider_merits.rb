@@ -70,17 +70,6 @@ module Flow
           forward: :statement_of_cases,
           check_answers: :check_merits_answers
         },
-        proceedings_before_the_courts: {
-          # :nocov:
-          # TODO: Remove everything connected to proceedings_before_the_courts it's a stub of legacy code
-          path: ->(application) do
-            apt = application.lead_application_proceeding_type
-            urls.providers_merits_task_list_proceedings_before_the_court_path(apt)
-          end,
-          forward: :statement_of_cases,
-          check_answers: :check_merits_answers
-          # :nocov:
-        },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(application) do

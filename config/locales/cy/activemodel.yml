@@ -223,11 +223,6 @@ cy:
           attributes:
             application_purpose:
               blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
-            details_of_proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
-            proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
-                rof sgnideecorp eht fi seY tceleS
             success_prospect:
               blank: emoctuo lufsseccus a fo ecnahc eht tceleS
             success_likely:
@@ -419,11 +414,6 @@ cy:
           attributes:
             application_purpose:
               blank: dia lagel rof gniylppa si tneilc ruoy yhw fo sliated retnE
-            details_of_proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc sgnideecorp eht fo sliated retnE
-            proceedings_before_the_court:
-              blank: truoc eht erofeb yltnerruc era thguos gnieb si gnidnuf hcihw
-                rof sgnideecorp eht fi seY tceleS
             success_prospect:
               blank: emoctuo lufsseccus a fo ecnahc eht tceleS
             success_likely:
