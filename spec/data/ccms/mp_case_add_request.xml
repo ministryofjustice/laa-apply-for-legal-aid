@@ -40,17 +40,20 @@
             </ns2:CategoryOfLaw>
             <ns2:OtherParties>
               <ns2:OtherParty>
-                <ns2:OtherPartyID>OPPONENT_7713451</ns2:OtherPartyID>
+                <ns2:OtherPartyID>OPPONENT_550001</ns2:OtherPartyID>
                 <ns2:SharedInd>false</ns2:SharedInd>
                 <ns2:OtherPartyDetail>
-                  <ns2:Organization>
-                    <ns2:OrganizationName>.</ns2:OrganizationName>
-                    <ns2:OrganizationType>GOVT</ns2:OrganizationType>
+                  <ns2:Person>
+                    <ns2:Name>
+                      <ns2:Title>.</ns2:Title>
+                      <ns2:Surname>Test-Opponent</ns2:Surname>
+                      <ns2:FirstName>Joffrey</ns2:FirstName>
+                    </ns2:Name>
+                    <ns2:Address/>
                     <ns2:RelationToClient>NONE</ns2:RelationToClient>
                     <ns2:RelationToCase>OPP</ns2:RelationToCase>
-                    <ns2:Address/>
                     <ns2:ContactDetails/>
-                  </ns2:Organization>
+                  </ns2:Person>
                 </ns2:OtherPartyDetail>
               </ns2:OtherParty>
               <ns2:OtherParty>
