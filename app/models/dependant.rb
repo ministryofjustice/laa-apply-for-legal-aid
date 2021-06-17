@@ -30,15 +30,15 @@ class Dependant < ApplicationRecord
   end
 
   def eighteen_or_less?
-    age <= 19
+    age < 19
   end
 
   def fifteen_or_less?
-    age <= 15
+    age < 16
   end
 
   def sixteen_or_over?
-    age >= 16
+    age > 15
   end
 
   def as_json
