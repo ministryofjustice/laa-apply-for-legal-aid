@@ -4,7 +4,7 @@ module ApplicationMeritsTask
     has_many :application_proceeding_type_linked_children, class_name: 'ProceedingMeritsTask::ApplicationProceedingTypeLinkedChild', dependent: :destroy
 
     def split_full_name
-      name_parts = normalize_spacing_name.split(' ')
+      name_parts = normalize_spacing_name.split
       last_name = name_parts.pop
       first_name = name_parts.join(' ')
       first_name = 'unspecified' if first_name.blank?
