@@ -191,9 +191,7 @@ module CCMS
             end
 
             it 'assigns the sequence number of 1 to the next entity ' do
-              bank_accounts_entity = XmlExtractor.call(xml, :bank_accounts_entity)
-              doc = Nokogiri::XML(bank_accounts_entity.to_s)
-              bank_accounts_sequence = doc.xpath('//SequenceNumber').text.to_i
+              bank_accounts_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
               expect(bank_accounts_sequence).to eq 1
             end
           end
@@ -318,9 +316,7 @@ module CCMS
             end
 
             it 'assigns the sequence number to the next entity one higher than that for bank accounts' do
-              bank_acount_entity = XmlExtractor.call(xml, :bank_accounts_entity)
-              doc = Nokogiri::XML(bank_acount_entity.to_s)
-              bank_account_sequence = doc.xpath('//SequenceNumber').text.to_i
+              bank_account_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
 
               means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
               doc = Nokogiri::XML(means_proceeding_entity.to_s)
