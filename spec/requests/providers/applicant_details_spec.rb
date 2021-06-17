@@ -84,6 +84,30 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
           expect(new_applicant).to be_instance_of(Applicant)
         end
 
+        context 'applicant details has trailing white spaces' do
+          let(:params) do
+            {
+              applicant: {
+                first_name: '  John  ',
+                last_name: '   Doe',
+                national_insurance_number: '  AA 12 34 56 C  ',
+                'date_of_birth(1i)': '1999',
+                'date_of_birth(2i)': '07',
+                'date_of_birth(3i)': '11',
+                email: Faker::Internet.safe_email
+              }
+            }
+          end
+
+          it 'strips and trims whitespaces from applicant details' do
+            subject
+            applicant = application.reload.applicant
+            expect(applicant.first_name).to eq 'John'
+            expect(applicant.last_name).to eq 'Doe'
+            expect(applicant.national_insurance_number).to eq 'AA123456C'
+          end
+        end
+
         context 'when the application is in draft' do
           let(:application) { create(:legal_aid_application, :draft) }
 
