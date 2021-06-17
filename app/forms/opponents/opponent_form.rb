@@ -9,7 +9,7 @@ module Opponents
                   :police_notified, :police_notified_details, :police_notified_details_true, :police_notified_details_false,
                   :bail_conditions_set, :bail_conditions_set_details, :full_name
 
-    before_validation :clear_details, :clear_bail_details, :interpolate_police_notified_details
+    before_validation :clear_details, :clear_bail_details, :interpolate_police_notified_details, :squish_whitespaces
 
     def exclude_from_model
       %i[police_notified_details_true police_notified_details_false]
@@ -50,6 +50,12 @@ module Opponents
     end
 
     private
+
+    def squish_whitespaces
+      attributes.each do |k, v|
+        attributes[k] = v.squish if v.respond_to?(:squish)
+      end
+    end
 
     def police_notified_presence
       return if police_notified.blank?
