@@ -12,7 +12,9 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    before_validation :squish_whitespaces
+    before_validation do
+      squish_whitespaces(:first_name, :last_name)
+    end
 
     # Note order of validation here determines order they appear on page
     # So validations for each field need to be in order, and presence validations
@@ -39,12 +41,6 @@ module Applicants
         attrs: dob_date_fields.fields,
         model_attributes: dob_date_fields.model_attributes
       )
-    end
-
-    def squish_whitespaces
-      attributes.each do |k, v|
-        attributes[k] = v.squish if v.respond_to?(:squish)
-      end
     end
 
     def date_of_birth

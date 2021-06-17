@@ -17,7 +17,9 @@ module LegalAidApplications
     attr_accessor(*ATTRIBUTES)
     attr_writer :date_of_birth
 
-    before_validation :squish_whitespaces
+    before_validation do
+      squish_whitespaces(:name)
+    end
 
     validates :name, presence: true
     validates :date_of_birth, presence: true
@@ -66,12 +68,6 @@ module LegalAidApplications
 
     def attributes_to_clean
       %i[monthly_income assets_value]
-    end
-
-    def squish_whitespaces
-      attributes.each do |k, v|
-        attributes[k] = v.squish if v.respond_to?(:squish)
-      end
     end
 
     # Note that this method is first called by `validates`.

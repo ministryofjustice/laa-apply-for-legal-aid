@@ -15,7 +15,9 @@ module Providers
       attr_accessor(*ATTRIBUTES)
       attr_writer :date_of_birth
 
-      before_validation :squish_whitespaces
+      before_validation do
+        squish_whitespaces(:full_name)
+      end
 
       validates :full_name, presence: true, unless: :draft?
       validates :date_of_birth, presence: true, unless: :draft_and_not_partially_complete_date?
@@ -40,12 +42,6 @@ module Providers
       end
 
       private
-
-      def squish_whitespaces
-        attributes.each do |k, v|
-          attributes[k] = v.squish if v.respond_to?(:squish)
-        end
-      end
 
       def draft_and_not_partially_complete_date?
         draft? && !date_fields.partially_complete?
