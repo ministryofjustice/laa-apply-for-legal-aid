@@ -49,11 +49,18 @@ module CCMS
             create :attachment, :means_report, legal_aid_application: legal_aid_application
             create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
             create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
+            create :gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
           end
 
-          it 'populates the documents array with statement_of_case, means_report and merits_report' do
+          it 'populates the documents array with statement_of_case, gateway_evidence, means_report and merits_report' do
             subject.call
-            expect(submission.submission_documents.count).to eq 4
+            expect(submission.submission_documents.count).to eq 5
+          end
+
+          it 'populates document array with gateway_evidence' do
+            subject.call
+            gateway_evidence_submission = submission.submission_documents.select { |a| a.document_type == 'gateway_evidence_pdf' }
+            expect(gateway_evidence_submission.count).to eq 1
           end
 
           context 'when requesting document_ids' do
@@ -76,7 +83,7 @@ module CCMS
             end
 
             it 'writes a history record for each document' do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(4)
+              expect { subject.call }.to change { SubmissionHistory.count }.by(5)
             end
 
             it 'updates the history records' do
@@ -96,11 +103,13 @@ module CCMS
               )
             end
 
-            it 'creates three documents as ADMIN1 and one as BSTMT' do
+            it 'creates three documents as ADMIN1, one as STATE and one as BSTMT' do
               subject.call
               admin1_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/ADMIN1/) }.flatten.count
+              state_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/STATE/) }.flatten.count
               bstmt_documents = SubmissionHistory.where(submission_id: submission.id).map(&:request).map { |x| x.scan(/BSTMT/) }.flatten.count
               expect(admin1_documents).to eq 3
+              expect(state_documents).to eq 1
               expect(bstmt_documents).to eq 1
             end
 
