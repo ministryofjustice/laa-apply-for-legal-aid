@@ -4156,19 +4156,19 @@ global_merits:
     value: true
   GB_INPUT_T_6WP1_2A:
     generate_block?: false
-    br100_meaning: '' # TODO: find br100 meaning
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
     response_type: boolean
     user_defined: true
     value: true
   SA_SCREEN2_6WP1_PASSPORTEDBEN:
     generate_block?: false
-    br100_meaning: '' # TODO: find br100 meaning
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
     response_type: boolean
     user_defined: true
     value: true
   SA_SCREEN4_6WP1_PASSPORT:
     generate_block?: false
-    br100_meaning: '' # TODO: find br100 meaning
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
     response_type: boolean
     user_defined: true
     value: true
