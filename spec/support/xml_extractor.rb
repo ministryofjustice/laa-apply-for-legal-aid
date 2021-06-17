@@ -2,7 +2,7 @@ class XmlExtractor
   # rubocop:disable Layout/LineLength
   XPATHS = {
     additional_property: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "ADDPROPERTY"]//Attributes/Attribute),
-    bank_accounts_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "BANKACC"]),
+    bank_accounts_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "BANKACC"]//Instances/Attributes/Attribute),
     car_used: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CAR_USED"]//Attributes/Attribute),
     change_in_circumstances: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CHANGE_IN_CIRCUMSTANCES"]//Attributes/Attribute),
     change_in_circumstance: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CHANGE_IN_CIRCUMSTANCE"]//Attributes/Attribute),
