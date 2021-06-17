@@ -4130,6 +4130,54 @@ global_merits:
     br100_meaning: 'The application has been made through the Apply service'
     response_type: boolean
     user_defined: false
+  NON_MAND_EVIDENCE_AMD_CORR:
+    value: false
+    br100_meaning: 'copy of correspond/evidence re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_COUNSEL:
+    value: false
+    br100_meaning: 'copy counsels opinion re amend prev displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_CT_ORDER:
+    value: false
+    br100_meaning: 'copy court order re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_EXPERT:
+    value: false
+    br100_meaning: 'copy experts report re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_PLEAD:
+    value: false
+    br100_meaning: 'copy pleadings re amend previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_SOLS_RPT:
+    value: false
+    br100_meaning: 'copy sols report re amend was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_CORR_ADR:
+    value: false
+    br100_meaning: 'copy relevant ADR correspondence previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_CORR_SETTLE:
+    value: false
+    br100_meaning: 'copy correspondence re attempts to settle prev displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
   COPY_WARNING_LETTER:
     value: true
     br100_meaning: 'The Application Can Be Submitted'
