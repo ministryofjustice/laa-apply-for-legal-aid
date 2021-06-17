@@ -78,7 +78,7 @@ module CCMS
 
         it 'generates the expected xml' do
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-              test_data_xml = ccms_data_from_file 'case_add_request.xml'
+            test_data_xml = ccms_data_from_file 'case_add_request.xml'
             expect(expected_xml).to eq test_data_xml
           end
         end
