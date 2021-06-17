@@ -8,6 +8,6 @@ module NameSplitHelper
   end
 
   def normalize_spacing_name
-    full_name.strip.gsub(/\s+/, ' ')
+    full_name.squish
   end
 end

@@ -49,7 +49,7 @@ module CCMS
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
-        let(:opponent) { create :opponent, police_notified: true }
+        let(:opponent) { create :opponent, full_name: 'Joffrey Test-Opponent', police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
