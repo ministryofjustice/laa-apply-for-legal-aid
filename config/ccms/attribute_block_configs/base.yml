@@ -4226,7 +4226,6 @@ global_merits:
     response_type: boolean
     user_defined: true
     value: true
-=======
   NON_MAND_EVIDENCE_COUNSEL_OP:
     value: false
     br100_meaning: 'copy existing counsels opinion re matter prev displayed on evi screen'
