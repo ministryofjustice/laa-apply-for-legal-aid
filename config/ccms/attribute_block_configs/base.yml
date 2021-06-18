@@ -4022,7 +4022,7 @@ global_merits:
     response_type: boolean
     user_defined: true
   EMERGENCY_FURTHER_INFORMATION:
-    generate_block?: false
+    generate_block?: '#application_used_delegated_functions?'
     value: .
     br100_meaning: 'Emg: Additional Information'
     response_type: text

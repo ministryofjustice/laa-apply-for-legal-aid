@@ -2160,7 +2160,6 @@ module CCMS
           [:bank_accounts_entity, 'BANKACC_INPUT_T_7WP2_4A'],
           [:bank_accounts_entity, 'BANKACC_INPUT_T_7WP2_6A'],
           [:global_merits, 'COPY_WARNING_LETTER'],
-          [:global_merits, 'EMERGENCY_FURTHER_INFORMATION'],
           [:global_merits, 'GB_DECL_T_38WP3_118A'],
           [:global_merits, 'GB_INPUT_B_39WP3_9A'],
           [:global_merits, 'GB_INPUT_T_6WP1_1A'],
