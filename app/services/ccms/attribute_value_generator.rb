@@ -92,10 +92,6 @@ module CCMS
       other_assets.valuable_items_value
     end
 
-    def bank_name(options)
-      options[:bank_acct].bank_provider.name
-    end
-
     def bank_account_holder_type(options)
       options[:bank_acct].holder_type
     end
