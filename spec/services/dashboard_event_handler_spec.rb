@@ -55,10 +55,12 @@ RSpec.describe DashboardEventHandler do
     before { ActiveJob::Base.queue_adapter = :test }
 
     after { ActiveJob::Base.queue_adapter = :sidekiq }
+
     context 'saved with state initialised' do
       let(:state) { 'initialised' }
 
-      it 'does not fire the Applications job' do
+      it 'does not fire additional Application jobs' do
+        # one is fired from creating the LegalAidApplication required by the ccms_submission factory
         expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_most(1).times
       end
 
@@ -88,6 +90,19 @@ RSpec.describe DashboardEventHandler do
 
       it 'fires the PendingCCMSSubmissions job' do
         expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('PendingCCMSSubmissions').once
+      end
+    end
+
+    context 'saved with document_ids_obtained' do
+      let(:state) { 'document_ids_obtained' }
+
+      it 'does not fire additional Application jobs' do
+        # one is fired from creating the LegalAidApplication required by the ccms_submission factory
+        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_most(1).times
+      end
+
+      it 'does not fire a PendingCCMSSubmissions job' do
+        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with('PendingCCMSSubmissions')
       end
     end
   end
