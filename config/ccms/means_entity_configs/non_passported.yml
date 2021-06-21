@@ -1,4 +1,9 @@
 ---
+- predicate: :dependant_children?
+  method: :generate_client_residing_person_entity
+  entity_name: CLIENT_RESIDING_PERSON
+  yaml_section: :client_residing_person
+
 - predicate: :national_savings_present?
   method: :generate_entity
   entity_name: CLINATIONAL

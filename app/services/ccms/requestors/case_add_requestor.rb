@@ -387,6 +387,19 @@ module CCMS
         end
       end
 
+      def generate_client_residing_person_entity(xml, sequence_no, _config)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'CLIENT_RESIDING_PERSON')
+        @legal_aid_application.dependants.child_relative.each_with_index { |dependant, index| generate_client_residing_person_instance(xml, dependant, index) }
+      end
+
+      def generate_client_residing_person_instance(xml, dependant, index)
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', "the client's residing person#{index + 1}")
+          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person, dependant: dependant) }
+        end
+      end
+
       def generate_opponent_other_parties(xml, sequence_no)
         xml.__send__('ns0:SequenceNumber', sequence_no)
         xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')

@@ -3,6 +3,8 @@ class Dependant < ApplicationRecord
 
   belongs_to :legal_aid_application
 
+  scope :child_relative, -> { where(relationship: 'child_relative') }
+
   DEFAULT_VALUES = {
     in_full_time_education: false,
     relationship: 'child_relative',
@@ -29,6 +31,14 @@ class Dependant < ApplicationRecord
 
   def eighteen_or_less?
     age < 19
+  end
+
+  def fifteen_or_less?
+    age < 16
+  end
+
+  def sixteen_or_over?
+    age > 15
   end
 
   def as_json

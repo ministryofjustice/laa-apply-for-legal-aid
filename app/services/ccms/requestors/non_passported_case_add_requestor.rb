@@ -24,6 +24,10 @@ module CCMS
         not_nil_or_zero? @legal_aid_application.savings_amount.national_savings
       end
 
+      def dependant_children?
+        @legal_aid_application.dependants.child_relative.any?
+      end
+
       def capital_share_present?
         not_nil_or_zero? @legal_aid_application.savings_amount.plc_shares
       end

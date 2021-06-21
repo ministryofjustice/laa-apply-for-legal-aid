@@ -358,11 +358,11 @@ FactoryBot.define do
 
     trait :with_dependant do
       transient do
-        dependants_count { 1 }
+        dependant_count { 1 }
       end
 
       after(:create) do |application, evaluator|
-        application.dependants = evaluator.dependants.presence || create_list(:dependant, 1)
+        application.dependants = evaluator.dependants.presence || create_list(:dependant, evaluator.dependant_count)
         application.save
       end
     end

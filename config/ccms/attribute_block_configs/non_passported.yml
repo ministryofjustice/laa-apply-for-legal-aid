@@ -1544,6 +1544,33 @@ money_due:
     response_type: text
     generate_block?: true
 
+client_residing_person:
+  CLI_RES_PER_INPUT_B_12WP3_20A:
+    generate_block: true
+    br100_meaning: "Dependant: relationship is a foster child"
+    user_defined: false
+    response_type: boolean
+    value: false
+  CLI_RES_PER_INPUT_B_12WP3_21A:
+    generate_block: true
+    br100_meaning: "Dependant: Relationship is child aged 15 and under"
+    user_defined: false
+    response_type: boolean
+    value: '#dependant_fifteen_or_less?'
+  CLI_RES_PER_INPUT_B_12WP3_23A:
+    generate_block: true
+    br100_meaning: "Person Residing: The child receives their own income?"
+    user_defined: true
+    response_type: boolean
+    value: '#dependant_has_income?'
+  CLI_RES_PER_INPUT_B_12WP3_24A:
+    generate_block: true
+    br100_meaning: "Dependant: Relationship is child aged 16 and over"
+    user_defined: false
+    response_type: boolean
+    value: '#dependant_sixteen_or_over?'
+
+
 national_savings:
   CLINATIONAL_INPUT_B_9WP2_10A:
     generate_block?: true

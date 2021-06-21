@@ -9,6 +9,8 @@ class XmlExtractor
     cli_capital: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLICAPITAL"]//Attributes/Attribute),
     cli_premium: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLIPREMIUM"]//Attributes/Attribute),
     cli_stock: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLISTOCK"]//Attributes/Attribute),
+    client_residing_person: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLIENT_RESIDING_PERSON"]//Attributes/Attribute),
+    client_residing_person_entity: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "CLIENT_RESIDING_PERSON"]),
     devolved_powers_date: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/DevolvedPowersDate),
     employment_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "EMPLOYMENT_CLIENT"]),
     family_statement: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeritsAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "FAMILY_STATEMENT"]//Attributes/Attribute),
