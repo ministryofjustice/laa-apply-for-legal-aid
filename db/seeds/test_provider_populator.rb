@@ -10,8 +10,8 @@ class TestProviderPopulator
     'Richards & Co.' => [555, %w[1S555R:19 2S555R:20]],
     'David Gray LLP' => [19_148, ['0B721W:137570']],
     'Test firm for portal login' => [807, %w[9F805X:21 3X805Z:22]],
-    'EDWARD HAYES LLP' => [19537, %w[1T462U:85605]],
-    'LAWRENCE & CO SOLICITORS CDS LLP' => [33230, %w[0Q974B:85981]],
+    'EDWARD HAYES LLP' => [19_537, %w[1T462U:85605]],
+    'LAWRENCE & CO SOLICITORS CDS LLP' => [33_230, %w[0Q974B:85981]]
   }.freeze
 
   TEST_PROVIDERS = {
