@@ -260,7 +260,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def applicant_receives_benefit?
-    return true if dwp_override
+    return true if dwp_override&.has_evidence_of_benefit?
 
     benefit_check_result&.positive? || false
   end
