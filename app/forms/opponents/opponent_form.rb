@@ -11,6 +11,10 @@ module Opponents
 
     before_validation :clear_details, :clear_bail_details, :interpolate_police_notified_details
 
+    before_validation do
+      squish_whitespaces(:full_name)
+    end
+
     def exclude_from_model
       %i[police_notified_details_true police_notified_details_false]
     end

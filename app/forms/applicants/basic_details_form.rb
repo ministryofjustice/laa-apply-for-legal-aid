@@ -12,6 +12,10 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
+    before_validation do
+      squish_whitespaces(:first_name, :last_name)
+    end
+
     # Note order of validation here determines order they appear on page
     # So validations for each field need to be in order, and presence validations
     # split so that they occur in the right order.

@@ -93,6 +93,12 @@ module BaseForm
       @attributes ||= {}
     end
 
+    def squish_whitespaces(*attribute_names)
+      attribute_names.each do |attr_name|
+        attributes[attr_name.to_s]&.squish!
+      end
+    end
+
     def save_as_draft
       @draft = true
       set_blanks_to_nil

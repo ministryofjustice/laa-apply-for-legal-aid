@@ -15,6 +15,10 @@ module Providers
       attr_accessor(*ATTRIBUTES)
       attr_writer :date_of_birth
 
+      before_validation do
+        squish_whitespaces(:full_name)
+      end
+
       validates :full_name, presence: true, unless: :draft?
       validates :date_of_birth, presence: true, unless: :draft_and_not_partially_complete_date?
       validates :date_of_birth, date: { not_in_the_future: true }, allow_nil: true

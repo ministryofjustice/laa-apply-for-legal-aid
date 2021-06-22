@@ -17,6 +17,10 @@ module LegalAidApplications
     attr_accessor(*ATTRIBUTES)
     attr_writer :date_of_birth
 
+    before_validation do
+      squish_whitespaces(:name)
+    end
+
     validates :name, presence: true
     validates :date_of_birth, presence: true
     validates(

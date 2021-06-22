@@ -79,6 +79,31 @@ RSpec.describe Providers::DependantsController, type: :request do
       end
     end
 
+    context 'when there are extra whitespaces in dependant name' do
+      let(:params) do
+        {
+          dependant: {
+            name: '   bob  john  ',
+            dob_day: 1,
+            dob_month: 1,
+            dob_year: 1990,
+            relationship: 'child_relative',
+            monthly_income: '',
+            has_income: 'false',
+            in_full_time_education: 'false',
+            has_assets_more_than_threshold: 'false',
+            assets_value: ''
+          }
+        }
+      end
+
+      it 'strips and trims whitespaces from dependant name' do
+        subject
+        dependant = legal_aid_application.reload.dependants.first
+        expect(dependant.name).to eq 'bob john'
+      end
+    end
+
     context 'when the parameters are invalid' do
       let(:params) do
         {

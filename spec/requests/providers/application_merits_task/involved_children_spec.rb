@@ -84,6 +84,15 @@ module Providers
               subject
               expect(response).to redirect_to(providers_legal_aid_application_has_other_involved_children_path(application))
             end
+
+            context 'with trailing whitespaces' do
+              let(:new_full_name) { '  John    Doe  ' }
+
+              it 'removes excess whitespaces' do
+                subject
+                expect(child.reload.full_name).to eq 'John Doe'
+              end
+            end
           end
 
           context 'invalid params' do

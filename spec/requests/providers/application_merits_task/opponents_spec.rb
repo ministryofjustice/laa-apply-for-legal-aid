@@ -48,10 +48,11 @@ module Providers
 
       describe 'PATCH /providers/applications/:legal_aid_application_id/opponent' do
         let(:sample_opponent) { build :opponent, :police_notified_true }
+        let(:full_name) { Faker::Name.name }
         let(:params) do
           {
             application_merits_task_opponent: {
-              full_name: Faker::Name.name,
+              full_name: full_name,
               understands_terms_of_court_order: sample_opponent.understands_terms_of_court_order.to_s,
               understands_terms_of_court_order_details: sample_opponent.understands_terms_of_court_order_details,
               warning_letter_sent: sample_opponent.warning_letter_sent.to_s,
@@ -103,6 +104,25 @@ module Providers
         it 'redirects to the next page' do
           subject
           expect(response).to redirect_to(flow_forward_path)
+        end
+
+        context 'when attributes have trailing whitespaces' do
+          let(:full_name) { '   John   Doe  ' }
+          let(:sample_opponent) { build :opponent, :police_notified_true, warning_letter_sent_details: '  extra    space  ' }
+
+          context 'fullname' do
+            it 'removes excess whitespaces' do
+              subject
+              expect(opponent.reload.full_name).to eq 'John Doe'
+            end
+          end
+
+          context 'when not a fullname attribute' do
+            it 'leaves the excess whitespaces' do
+              subject
+              expect(opponent.reload.warning_letter_sent_details).to eq '  extra    space  '
+            end
+          end
         end
 
         context 'when not authenticated' do
