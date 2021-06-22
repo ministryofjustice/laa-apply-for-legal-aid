@@ -1,4 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<h3 class="govuk-heading-m"><%= t('shared.check_answers.assets.property.heading') %></h3>
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
           name: :own_home,

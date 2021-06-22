@@ -128,10 +128,6 @@ en:
     check_answers:
       assets:
         assets:
-          has_offline_savings_account: Does your client have any savings accounts they cannot access online?
-          property-heading: Property
-          offline_accounts: Your client's bank accounts
-          offline_savings: Savings accounts your client cannot access online
           other_assets: Which types of assets does your client have?
           policy_disregards: Payments from scheme or charities
           restrictions: Do any restrictions apply?
@@ -140,6 +136,7 @@ en:
           current_account: Current account
           bank_accounts: Which bank accounts does your client have?
         property:
+          heading: Property
           outstanding_mortgage: What is the outstanding mortgage on your client's home?
           own_home: Does your client own the home they live in?
           percentage_home: What % share of their home does your client legally own?
@@ -148,6 +145,10 @@ en:
         submit:
           heading: Submit your details
           text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      offline_savings_accounts:
+        heading: Bank accounts
+        offline_savings_accounts: Has savings accounts they cannot access online
+        offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
         total: '%{text} total'
       capital_result:

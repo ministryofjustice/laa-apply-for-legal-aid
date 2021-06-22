@@ -31,39 +31,7 @@
       </dl>
     <% end %>
 
-    <div class="govuk-grid-row" id="app-check-your-answers__has_offline_savings_account_header">
-      <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t('.assets.has_offline_savings_account') %></h2>
-      </div>
-    </div>
-
-    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :has_offline_savings_account,
-          url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-          question: t('.assets.has_offline_savings_account'),
-          answer: yes_no(@legal_aid_application.offline_savings?),
-          read_only: read_only,
-        ) %>
-    </dl>
-
-    <% if @legal_aid_application.offline_savings? %>
-      <div class="govuk-grid-row" id="app-check-your-answers__offline_savings_account_header">
-        <div class="govuk-grid-column-two-thirds">
-          <h2 class="govuk-heading-m"><%= t('.assets.offline_savings') %></h2>
-        </div>
-      </div>
-
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        <%= check_answer_link(
-              name: :offline_savings_accounts,
-              url: check_answer_url_for(journey_type, :offline_savings_accounts, @legal_aid_application),
-              question: t('.assets.offline_savings'),
-              answer: gds_number_to_currency(@legal_aid_application.offline_savings_value),
-              read_only: read_only,
-            ) %>
-      </dl>
-    <% end %>
+    <%= render 'shared/check_answers/offline_savings_accounts', read_only: read_only %>
   <% else %>
 
     <%= check_answer_one_change_link(

@@ -1,0 +1,39 @@
+<% read_only = local_assigns[:read_only] ? read_only : false %>
+<% if @legal_aid_application.offline_savings? %>
+  <div class="govuk-grid-row" id="app-check-your-answers__offline_savings_accounts">
+    <div class="govuk-grid-column-two-thirds">
+      <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
+    </div>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+      <p>
+        <%= link_to_accessible(t('generic.change'), check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+                               class: 'govuk-link change-link', suffix: :offline_savings_accounts) %>
+      </p>
+    </div>
+  </div>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_no_link(
+          name: :has_offline_savings,
+          question: t('.offline_savings_accounts'),
+          answer: safe_yes_or_no(@legal_aid_application.offline_savings?),
+          read_only: read_only
+        ) %>
+    <%= check_answer_no_link(
+          name: :offline_savings_amount,
+          question: t('.offline_savings_amount'),
+          answer: gds_number_to_currency(@legal_aid_application.offline_savings_value),
+          read_only: read_only
+        ) %>
+  </dl>
+<% else %>
+  <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <%= check_answer_link(
+          name: :has_offline_savings,
+          url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+          question: t('.offline_savings_accounts'),
+          answer: safe_yes_or_no(@legal_aid_application.offline_savings?),
+          read_only: read_only
+        ) %>
+  </dl>
+<% end %>

@@ -9,7 +9,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
 
-  describe 'GET providers/applicant_bank_account' do
+  describe 'GET providers/:application_id/applicant_bank_account' do
     subject { get providers_legal_aid_application_applicant_bank_account_path(legal_aid_application.id) }
 
     context 'when the provider is not authenticated' do
@@ -40,13 +40,14 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking' do
-    let(:applicant_bank_account) { 'true' }
-    let(:submit_button) { {} }
+  describe 'PATCH /providers/applications/:application_id/applicant_bank_account' do
+    let(:applicant_bank_account) { 'false' }
+    let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
     let(:params) do
       {
-        binary_choice_form: {
-          applicant_bank_account: applicant_bank_account
+        savings_amount: {
+          applicant_bank_account: applicant_bank_account,
+          offline_savings_accounts: offline_savings_accounts
         }
       }
     end
@@ -54,7 +55,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     subject do
       patch(
         "/providers/applications/#{application_id}/applicant_bank_account",
-        params: params.merge(submit_button)
+        params: params
       )
     end
 
@@ -64,15 +65,11 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
         subject
       end
 
-      it 'redirects to the non-passported offline savings account' do
-        expect(response).to redirect_to(providers_legal_aid_application_offline_savings_account_path(legal_aid_application))
-      end
-
       context 'neither option is chosen' do
-        let(:params) { {} }
+        let(:applicant_bank_account) { nil }
 
         it 'shows an error' do
-          expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.error'))
+          expect(unescaped_response_body).to include(I18n.t('errors.applicant_bank_accounts.blank'))
         end
       end
 
@@ -81,6 +78,46 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
 
         it 'redirects to the savings and investments page' do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+        end
+
+        context 'savings amount is not nil' do
+          let(:offline_savings_accounts) { '' }
+
+          it 'resets the account balance to nil for offline savings account' do
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to be_nil
+          end
+        end
+      end
+
+      context 'The YES option is chosen' do
+        let(:applicant_bank_account) { 'true' }
+
+        context 'no amount is entered' do
+          let(:offline_savings_accounts) { '' }
+
+          it 'displays the correct error' do
+            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.blank'))
+          end
+        end
+
+        context 'an invalid input is entered' do
+          let(:offline_savings_accounts) { 'abc' }
+
+          it 'displays the correct error' do
+            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.not_a_number'))
+          end
+        end
+
+        context 'a valid savings amount is entered' do
+          let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
+
+          it 'updates the savings amount' do
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(offline_savings_accounts)
+          end
+
+          it 'redirects to the savings and investments page' do
+            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+          end
         end
       end
     end

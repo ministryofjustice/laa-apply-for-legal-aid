@@ -214,7 +214,6 @@ en:
         h2-heading: Your client's capital
         chances_of_success_body: We'll use your answers to calculate your client's financial eligibility for legal aid.
         chances_of_success_h2: What happens next
-        property: Property
     check_provider_answers:
       standard:
         title: Check your answers
@@ -249,7 +248,7 @@ en:
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
         hints:
           offline_savings_accounts: For example, a Post Office savings account.
-        error: Select yes if your client has savings accounts they cannot access online
+          offline_savings_amount: Enter the total amount in all accounts.
     client_completed_means:
       show:
         h1-heading: Continue your application
@@ -666,9 +665,6 @@ en:
         offline_current_accounts: Current account
         offline_savings_accounts: Savings account
         no_account_selected: None of these
-    offline_savings_accounts:
-      show:
-        h1-heading: Enter the total amount in all savings accounts that your client cannot access online
     open_banking_consents:
       show:
         heading: Check if you can continue using this service
@@ -847,7 +843,6 @@ en:
         income: Income
         passported: Passported
         payments: Regular payments
-        property: Property
         change: Change
         emergency_cost_limit: Emergency cost limit
         section_delegated:
