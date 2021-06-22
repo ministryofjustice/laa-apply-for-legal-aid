@@ -810,13 +810,28 @@ RSpec.describe LegalAidApplication, type: :model do
         end
 
         context 'DWP Override' do
-          before { create :dwp_override, legal_aid_application: legal_aid_application }
-          it 'returns true' do
-            expect(legal_aid_application.applicant_receives_benefit?).to be true
+          context 'when the provider selects yes for evidence' do
+            before { create :dwp_override, :with_evidence, legal_aid_application: legal_aid_application }
+
+            it 'returns true' do
+              expect(legal_aid_application.applicant_receives_benefit?).to be true
+            end
+
+            it 'returns false for the alias non_passported' do
+              expect(legal_aid_application.non_passported?).to be false
+            end
           end
 
-          it 'returns false for the alias non_passported' do
-            expect(legal_aid_application.non_passported?).to be false
+          context 'when the provider selects no for evidence' do
+            before { create :dwp_override, :with_no_evidence, legal_aid_application: legal_aid_application }
+
+            it 'returns false' do
+              expect(legal_aid_application.applicant_receives_benefit?).to be false
+            end
+
+            it 'returns true for the alias non_passported' do
+              expect(legal_aid_application.non_passported?).to be true
+            end
           end
         end
       end
@@ -830,7 +845,7 @@ RSpec.describe LegalAidApplication, type: :model do
         end
 
         context 'DWP Override' do
-          before { create :dwp_override, legal_aid_application: legal_aid_application }
+          before { create :dwp_override, :with_evidence, legal_aid_application: legal_aid_application }
           it 'returns true' do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
           end

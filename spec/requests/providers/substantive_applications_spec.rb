@@ -11,11 +11,12 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
 
   let(:applicant) { create :applicant, :not_employed }
   let(:login_provider) { login_as legal_aid_application.provider }
+  let(:ignore_subject) { false }
 
   before do
     login_provider
     allow(legal_aid_application).to receive(:applicant_employed?).and_return(false)
-    subject
+    subject unless ignore_subject
   end
 
   describe 'GET /providers/applications/:legal_aid_application_id/substantive_application' do
@@ -81,6 +82,39 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       end
     end
 
+    context 'with a negative benefit check' do
+      let(:ignore_subject) { true }
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :with_negative_benefit_check_result,
+          :with_non_passported_state_machine,
+          :applicant_details_checked
+        )
+      end
+
+      context 'and a dwp_override with evidence' do
+        let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: legal_aid_application }
+
+        it 'redirects to capital introductions' do
+          subject
+          expect(response).to redirect_to(
+            providers_legal_aid_application_capital_introduction_path(legal_aid_application)
+          )
+        end
+      end
+
+      context 'and a dwp_override without evidence' do
+        let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: legal_aid_application }
+
+        it 'redirects to non_passported_client_instructions' do
+          subject
+          expect(response).to redirect_to(
+            providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application)
+          )
+        end
+      end
+    end
     context 'No selected' do
       let(:substantive_application) { false }
 
