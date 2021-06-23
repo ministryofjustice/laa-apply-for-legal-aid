@@ -465,9 +465,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       end
       context 'locale :cy' do
         around(:each) do |example|
-          I18n.locale = :cy
-          example.run
-          I18n.locale = :en
+          I18n.with_locale(:cy) { example.run }
         end
 
         it 'displays period in faux Welsh' do
@@ -489,9 +487,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
       context 'locale :cy' do
         around(:each) do |example|
-          I18n.locale = :cy
-          example.run
-          I18n.locale = :en
+          I18n.with_locale(:cy) { example.run }
         end
 
         it 'displays the month nae in faux Welsh' do

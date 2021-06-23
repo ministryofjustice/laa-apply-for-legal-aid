@@ -33,11 +33,10 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
       end
 
       context 'Welsh locale' do
-        around do |example|
-          I18n.locale = :cy
-          example.run
-          I18n.locale = I18n.default_locale
+        around(:each) do |example|
+          I18n.with_locale(:cy) { example.run }
         end
+
         it 'returns the path with cy locale' do
           url = check_answer_url_for(:citizens, :consents)
           expect(url).to eq '/citizens/consent?locale=cy'
