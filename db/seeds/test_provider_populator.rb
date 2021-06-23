@@ -9,7 +9,9 @@ class TestProviderPopulator
     'Firm2 & Co.' => [806, %w[2F805I:16 3F805I:17 4F805I:18]],
     'Richards & Co.' => [555, %w[1S555R:19 2S555R:20]],
     'David Gray LLP' => [19_148, ['0B721W:137570']],
-    'Test firm for portal login' => [807, %w[9F805X:21 3X805Z:22]]
+    'Test firm for portal login' => [807, %w[9F805X:21 3X805Z:22]],
+    'EDWARD HAYES LLP' => [19_537, %w[1T462U:85605]],
+    'LAWRENCE & CO SOLICITORS CDS LLP' => [33_230, %w[0Q974B:85981]]
   }.freeze
 
   TEST_PROVIDERS = {
@@ -23,7 +25,9 @@ class TestProviderPopulator
     'firm2-user1' => ['Firm2 & Co.', 'firm2-user1@example.com', 107, 592],
     'sr' => ['Richards & Co.', 'stephen.richards@digital.justice.gov.uk', 108, 593],
     'MARTIN.RONAN@DAVIDGRAY.CO.UK' => ['David Gray LLP', 'martin.ronan@example.com', 494_000, 5027],
-    'BENREID' => ['Test firm for portal login', 'benreid@example.co.uk', 107, 592]
+    'BENREID' => ['Test firm for portal login', 'benreid@example.co.uk', 107, 592],
+    'HFITZSIMONS@EDWARDHAYES.CO.UK' => ['EDWARD HAYES LLP', 'hfitzsimons@example.com', 2_453_773],
+    'LHARRISON@TBILAW.CO.UK' => ['LAWRENCE & CO SOLICITORS CDS LLP', 'LHARRISON@example.com', 954_474]
   }.freeze
 
   def run
