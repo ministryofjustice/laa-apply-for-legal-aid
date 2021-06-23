@@ -2432,7 +2432,8 @@ module CCMS
           [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
           [:opponent, 'RELATIONSHIP_STEP_PARENT'],
           [:opponent, 'RELATIONSHIP_SUPPLIER'],
-          [:opponent, 'RELATIONSHIP_TENANT']
+          [:opponent, 'RELATIONSHIP_TENANT'],
+          [:proceeding_merits, 'UNLAWFUL_REMOVAL_OF_CHILDREN_C']
         ]
       end
     end

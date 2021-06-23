@@ -5548,6 +5548,12 @@ proceeding_merits:
     response_type: text
     user_defined: false
     generate_block?: false
+  UNLAWFUL_REMOVAL_OF_CHILDREN_C:
+    value: false
+    br100_meaning: 'LARCriteria: Falls Within The Unlawful Removal Of Children/Domestic Abduction'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
 valuable_possessions:
   VALPOSSESS_INPUT_T_12WP2_7A:
     generate_block?: '#applicant_has_valuable_possessions?'
