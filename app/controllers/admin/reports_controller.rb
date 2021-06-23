@@ -21,7 +21,8 @@ module Admin
       expires_now
       respond_to do |format|
         format.csv do
-          send_data submitted_applications_report, filename: "submitted_applications_#{timestamp}.csv", content_type: 'text/csv'
+          data = submitted_applications_report || Reports::MIS::ApplicationDetailsReport.new.run
+          send_data data, filename: "submitted_applications_#{timestamp}.csv", content_type: 'text/csv'
         end
       end
     end
@@ -30,7 +31,8 @@ module Admin
       expires_now
       respond_to do |format|
         format.csv do
-          send_data non_passported_applications_report, filename: "non_passported_#{timestamp}.csv", type: :csv, content_type: 'text/csv'
+          data = non_passported_applications_report || Reports::MIS::NonPassportedApplicationsReport.new.run
+          send_data data, filename: "non_passported_#{timestamp}.csv", type: :csv, content_type: 'text/csv'
         end
       end
     end
@@ -42,11 +44,15 @@ module Admin
     private
 
     def submitted_applications_report
+      return unless admin_report
+
       attachment = admin_report.submitted_applications.attachment
       attachment.blob.download
     end
 
     def non_passported_applications_report
+      return unless admin_report
+
       attachment = admin_report.non_passported_applications.attachment
       attachment.blob.download
     end
