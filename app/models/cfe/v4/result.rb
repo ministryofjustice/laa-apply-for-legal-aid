@@ -91,6 +91,34 @@ module CFE
         Remarks.new(assessment[:remarks])
       end
 
+      def results_by_proceeding_type
+        # transforms:
+        #
+        # [
+        #     {
+        #         :ccms_code => "DA004",
+        #         :result    => "contribution_required"
+        #     },
+        #     {
+        #         :ccms_code => "SE013",
+        #         :result    => "ineligible"
+        #     }
+        # ]
+        #
+        # into:
+        # {
+        #     "Non-molestation order"              => "Yes",
+        #     "Child arrangements order (contact)" => "No"
+        # }
+        #
+
+        results = {}
+        overall_result[:proceeding_types].each do |hash|
+          results[proceeding_type_meaning(hash[:ccms_code])] = elig_yes_no(hash[:result])
+        end
+        results
+      end
+
       ################################################################
       #                                                              #
       #  INCOME VALUES                                               #
@@ -256,6 +284,14 @@ module CFE
       def deductions
         # stub out zero values if not found until CFE is updated
         disposable_income_breakdown[:deductions] || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
+      end
+
+      def proceeding_type_meaning(ccms_code)
+        ProceedingType.find_by(ccms_code: ccms_code).meaning
+      end
+
+      def elig_yes_no(result)
+        result == 'ineligible' ? I18n.t('generic.no') : I18n.t('generic.yes')
       end
     end
   end

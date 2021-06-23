@@ -414,6 +414,25 @@ module CFEResults
         result[:assessment][:disposable_income][:assessment_result] = 'unknown'
         result
       end
+
+      def self.mixed_proceeding_type_results
+        result = eligible
+        result[:result_summary][:overall_result][:proceeding_types] = [
+          {
+            ccms_code: 'DA006',
+            result: 'eligible'
+          },
+          {
+            ccms_code: 'SE013',
+            result: 'ineligible'
+          },
+          {
+            ccms_code: 'SE003',
+            result: 'partially_eligible'
+          }
+        ]
+        result
+      end
     end
   end
 end
