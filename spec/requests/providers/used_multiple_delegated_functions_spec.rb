@@ -226,10 +226,19 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'updates the application proceeding types delegated functions dates' do
-        application_proceeding_types.each_with_index do |type, i|
-          expect(type.used_delegated_functions_reported_on).to eq(today)
-          expect(type.used_delegated_functions_on).to eq(used_delegated_functions_on - i.day)
+      context 'with first application proceeding type' do
+        it 'updates the application proceeding types delegated functions dates' do
+          apt = application_proceeding_types.first
+          expect(apt.used_delegated_functions_reported_on).to eq(today)
+          expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on)
+        end
+      end
+
+      context 'with second application proceeding type' do
+        it 'updates the application proceeding types delegated functions dates' do
+          apt = application_proceeding_types.last
+          expect(apt.used_delegated_functions_reported_on).to eq(today)
+          expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)
         end
       end
 
