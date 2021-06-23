@@ -11,9 +11,9 @@ RSpec.describe ErrorsController, type: :request do
       end
 
       context 'Welsh locale' do
-        # around(:each) do |example|
-        #   I18n.with_locale(:cy) { example.run }
-        # end
+        around(:each) do |example|
+          I18n.with_locale(:cy) { example.run }
+        end
 
         before { get '/unknown/path', params: { locale: 'cy' } }
         it 'redirect to page not found' do
@@ -31,9 +31,9 @@ RSpec.describe ErrorsController, type: :request do
       end
 
       context 'Welsh locale' do
-        # around(:each) do |example|
-        #   I18n.with_locale(:cy) { example.run }
-        # end
+        around(:each) do |example|
+          I18n.with_locale(:cy) { example.run }
+        end
 
         before { get feedback_path(SecureRandom.uuid, locale: :cy) }
         it 'redirect to page not found' do
