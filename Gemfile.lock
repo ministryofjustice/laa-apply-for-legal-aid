@@ -270,7 +270,7 @@ GEM
     geckoboard-ruby (0.4.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    govuk_design_system_formbuilder (2.6.0)
+    govuk_design_system_formbuilder (2.7.0)
       actionview (>= 6.0)
       activemodel (>= 6.0)
       activesupport (>= 6.0)
