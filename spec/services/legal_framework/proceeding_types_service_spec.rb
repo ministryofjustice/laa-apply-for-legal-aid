@@ -45,7 +45,7 @@ module LegalFramework
 
             it 'adds another proceeding type' do
               subject.add(**params)
-              expect(legal_aid_application.proceeding_types).to eq([proceeding_type, proceeding_type2])
+              expect(legal_aid_application.proceeding_types).to match_array [proceeding_type, proceeding_type2]
             end
           end
 
