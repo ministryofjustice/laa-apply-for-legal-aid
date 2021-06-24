@@ -5,7 +5,7 @@
 
 <div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
-    <h2 class="govuk-heading-m"><%= question %></h2>
+    <%= question %>
   </dt>
   <!--  in-line styling due to issues around pdf generation in our production envs -->
   <dd class="govuk-summary-list__value"<% if read_only %> style="text-align: right;"<% end %>>
