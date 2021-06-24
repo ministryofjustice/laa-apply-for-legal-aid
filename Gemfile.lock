@@ -110,13 +110,13 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.2.0)
+    axe-core-api (4.2.1)
       capybara
       dumb_delegator
       selenium-webdriver
       virtus
       watir
-    axe-core-cucumber (4.2.0)
+    axe-core-cucumber (4.2.1)
       axe-core-api
       dumb_delegator
       virtus
@@ -234,7 +234,6 @@ GEM
     em-websocket (0.5.2)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    equalizer (0.0.11)
     erb_lint (0.0.37)
       activesupport
       better_html (~> 1.0.7)
@@ -644,11 +643,10 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (1.7.0)
     vcr (6.0.0)
-    virtus (1.0.5)
+    virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
     wasabi (3.6.1)
