@@ -118,7 +118,8 @@ module Providers
     end
 
     def create_attachment(original_file)
-      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'gateway_evidence', attachment_name: sequenced_attachment_name
+      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'gateway_evidence', original_filename: @original_file.original_filename,
+                                                     attachment_name: sequenced_attachment_name
     end
 
     def sequenced_attachment_name

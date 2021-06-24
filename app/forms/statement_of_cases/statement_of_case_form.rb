@@ -4,7 +4,7 @@ module StatementOfCases
 
     form_for ApplicationMeritsTask::StatementOfCase
 
-    attr_accessor :statement, :original_file, :provider_uploader, :upload_button_pressed
+    attr_accessor :statement, :original_file, :original_filename, :provider_uploader, :upload_button_pressed
 
     MAX_FILE_SIZE = 7.megabytes
 
@@ -67,7 +67,7 @@ module StatementOfCases
     def original_file_valid
       return if original_file.nil?
 
-      @original_file_name = original_file.original_filename
+      @original_filename = original_file.original_filename
       scanner_down(original_file)
       malware_scan(original_file)
       file_empty(original_file)
@@ -83,33 +83,33 @@ module StatementOfCases
     def too_big(original_file)
       return if original_file_size(original_file) <= StatementOfCaseForm.max_file_size
 
-      error_options = { size: StatementOfCaseForm.max_file_size / 1.megabyte, file_name: @original_file_name }
+      error_options = { size: StatementOfCaseForm.max_file_size / 1.megabyte, file_name: @original_filename }
       errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
     end
 
     def file_empty(original_file)
       return if File.size(original_file.tempfile) > 1
 
-      errors.add(:original_file, original_file_error_for(:file_empty, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:file_empty, file_name: @original_filename))
     end
 
     def disallowed_content_type(original_file)
       return if Marcel::Magic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
       return if original_file.content_type == WORD_DOCUMENT
 
-      errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_filename))
     end
 
     def scanner_down(original_file)
       return if malware_scan_result(original_file).scanner_working
 
-      errors.add(:original_file, original_file_error_for(:system_down, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:system_down, file_name: @original_filename))
     end
 
     def malware_scan(original_file)
       return unless malware_scan_result(original_file).virus_found?
 
-      errors.add(:original_file, original_file_error_for(:file_virus, file_name: @original_file_name))
+      errors.add(:original_file, original_file_error_for(:file_virus, file_name: @original_filename))
     end
 
     def malware_scan_result(original_file)
@@ -133,7 +133,8 @@ module StatementOfCases
     end
 
     def create_attachment(original_file)
-      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'statement_of_case', attachment_name: sequenced_attachment_name
+      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'statement_of_case', original_filename: original_filename,
+                                                     attachment_name: sequenced_attachment_name
     end
 
     def sequenced_attachment_name
