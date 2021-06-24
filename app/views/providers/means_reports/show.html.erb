@@ -11,11 +11,10 @@
         read_only: true
       ) %>
 
-
   <% if Setting.allow_multiple_proceedings? %>
     <h2 class="govuk-heading-m"><%= t('.proceeding_eligibility') %></h2>
-    <%= render 'shared/means_report/proceeding_eligibility', results: @legal_aid_application.cfe_result.results_by_proceeding_type  %>
-    <% end %>
+    <%= render 'shared/means_report/proceeding_eligibility', results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
+  <% end %>
 
   <h2 class="govuk-heading-m">
     <%= t('.benefit_check_heading') %>
