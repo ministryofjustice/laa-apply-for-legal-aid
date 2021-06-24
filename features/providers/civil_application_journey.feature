@@ -755,6 +755,7 @@ Feature: Civil application journeys
     Then I enter the application merits task statement of case statement field 'This is some test data for the statement of case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
+    Then I should be on a page showing "hello_world.pdf (15.7 KB)"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
     And I should be on a page showing "Confirm the following"
     Then I click link "Back"

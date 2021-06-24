@@ -9,9 +9,11 @@ FactoryBot.define do
     end
 
     trait :with_original_file_attached do
+      statement { 'Statement of case text entered here' }
+
       after :create do |soc|
         attachment = soc.legal_aid_application.attachments.create!(attachment_type: 'statement_of_case',
-                                                                   attachment_name: 'statement_of_case')
+                                                                   attachment_name: 'statement_of_case', original_filename: 'Fake file name 1')
 
         filepath = Rails.root.join('spec/fixtures/files/documents/hello_world.pdf')
         attachment.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')

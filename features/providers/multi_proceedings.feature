@@ -38,6 +38,15 @@ Feature: Merits task list
     When I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
 
+
+  @javascript @vcr
+  Scenario: When the flag is enabled
+    Given the feature flag for allow_multiple_proceedings is enabled
+    Given I complete the multiple proceedings journey as far as check passported answers
+    Then I should be on a page showing "Fake gateway evidence file (15.7 KB)"
+    Then I should be on a page showing "Fake file name 1 (15.7 KB)"
+    Then I should be on a page showing "Statement of case text entered here"
+
   @javascript @vcr
   Scenario: When the flag is disabled
     Given the feature flag for allow_multiple_proceedings is disabled
