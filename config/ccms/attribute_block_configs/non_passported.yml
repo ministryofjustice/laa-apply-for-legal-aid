@@ -1319,6 +1319,12 @@ global_merits:
     user_defined: false
     response_type: boolean
     generate_block?: true
+  COPY_CA_UNSPENT_CONVICTION:
+    value: false
+    br100_meaning: 'The provider has a copy of unspent conviction for a child abuse offence'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
 
 land:
   LAND_INFER_B_5WP2_53A:
