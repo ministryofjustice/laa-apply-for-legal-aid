@@ -54,7 +54,7 @@
                 </ns2:OtherPartyDetail>
               </ns2:OtherParty>
               <ns2:OtherParty>
-                <ns2:OtherPartyID>OPPONENT_1</ns2:OtherPartyID>
+                <ns2:OtherPartyID>OPPONENT_88000001</ns2:OtherPartyID>
                 <ns2:SharedInd>false</ns2:SharedInd>
                 <ns2:OtherPartyDetail>
                   <ns2:Person>
@@ -72,7 +72,7 @@
                 </ns2:OtherPartyDetail>
               </ns2:OtherParty>
               <ns2:OtherParty>
-                <ns2:OtherPartyID>OPPONENT_2</ns2:OtherPartyID>
+                <ns2:OtherPartyID>OPPONENT_88000002</ns2:OtherPartyID>
                 <ns2:SharedInd>false</ns2:SharedInd>
                 <ns2:OtherPartyDetail>
                   <ns2:Person>

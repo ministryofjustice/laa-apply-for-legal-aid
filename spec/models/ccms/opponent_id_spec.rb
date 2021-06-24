@@ -30,7 +30,7 @@ module CCMS
 
         it 'does not add another record' do
           expect(described_class.count).to eq 1
-          expect{ described_class.next_serial_id }.not_to change {described_class.count}
+          expect { described_class.next_serial_id }.not_to change { described_class.count }
         end
       end
     end
@@ -47,12 +47,11 @@ module CCMS
       it 'does not create the additional record' do
         begin
           described_class.create!(serial_id: 12_345)
-        rescue
+        rescue StandardError
           nil
         end
         expect(described_class.count).to eq 1
       end
-
     end
   end
 end

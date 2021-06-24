@@ -126,12 +126,12 @@ module CCMS
 
       def generate_other_parties(xml)
         if Setting.allow_multiple_proceedings?
-          generate_opponent(xml, @legal_aid_application.opponent, 1)
+          generate_opponent(xml, @legal_aid_application.opponent)
         else
           generate_other_party(xml)
         end
-        @legal_aid_application.involved_children.order(:date_of_birth).each_with_index do |child, i|
-          generate_involved_child(xml, child, i)
+        @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
+          generate_involved_child(xml, child)
         end
       end
 
@@ -152,10 +152,10 @@ module CCMS
         end
       end
 
-      def generate_opponent(xml, opponent, idx) # rubocop:disable Metrics/MethodLength
+      def generate_opponent(xml, opponent) # rubocop:disable Metrics/MethodLength
         first_name, last_name = opponent.split_full_name
         xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{550_000 + idx}")
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{opponent.generate_ccms_opponent_id}")
           xml.__send__('ns2:SharedInd', false)
           xml.__send__('ns2:OtherPartyDetail') do
             xml.__send__('ns2:Person') do
@@ -173,10 +173,10 @@ module CCMS
         end
       end
 
-      def generate_involved_child(xml, child, idx) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def generate_involved_child(xml, child) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         first_name, last_name = child.split_full_name
         xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{idx + 1}")
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{child.generate_ccms_opponent_id}")
           xml.__send__('ns2:SharedInd', false)
           xml.__send__('ns2:OtherPartyDetail') do
             xml.__send__('ns2:Person') do

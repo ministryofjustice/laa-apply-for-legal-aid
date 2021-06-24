@@ -3,8 +3,7 @@ module CCMS
   # opponents and involved children.  There will only ever be one such record in the table.
   #
   class OpponentId < ApplicationRecord
-
-    SERIAL_ID_SEQUENCE_START = 88_000_000.freeze
+    SERIAL_ID_SEQUENCE_START = 88_000_000
 
     before_save :prevent_multiple_records
 
@@ -24,9 +23,7 @@ module CCMS
     def prevent_multiple_records
       return if self.class.count == 0
 
-      if self.class.first&.id != self.id
-        raise "Attempted to write multiple CCMS::OpponentId records"
-      end
+      raise 'Attempted to write multiple CCMS::OpponentId records' if self.class.first&.id != id
     end
   end
 end

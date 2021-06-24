@@ -2,7 +2,6 @@ require 'rails_helper'
 
 module ApplicationMeritsTask
   RSpec.describe InvolvedChild do
-
     describe '#split_full_name' do
       let(:involved_child) { build :involved_child, full_name: full_name }
 
@@ -57,8 +56,7 @@ module ApplicationMeritsTask
       context 'ccms_opponent_id is nil' do
         before { expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
 
-        let(:involved_child) { create :involved_child, full_name: 'John Doe', ccms_opponent_id: nil}
-
+        let(:involved_child) { create :involved_child, full_name: 'John Doe', ccms_opponent_id: nil }
 
         it 'returns the next serial id' do
           expect(involved_child.generate_ccms_opponent_id).to eq expected_id
@@ -73,7 +71,7 @@ module ApplicationMeritsTask
       context 'ccms_opponent_id is already populated' do
         before { expect(CCMS::OpponentId).not_to receive(:next_serial_id) }
 
-        let(:involved_child) { create :involved_child, full_name: 'John Doe', ccms_opponent_id: 4553}
+        let(:involved_child) { create :involved_child, full_name: 'John Doe', ccms_opponent_id: 4553 }
 
         it 'returns the value' do
           expect(involved_child.generate_ccms_opponent_id).to eq 4553
