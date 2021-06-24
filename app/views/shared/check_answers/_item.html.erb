@@ -5,11 +5,25 @@
 
 <div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
-    <%= question %>
+    <h2 class="govuk-heading-m"><%= question %></h2>
   </dt>
   <!--  in-line styling due to issues around pdf generation in our production envs -->
   <dd class="govuk-summary-list__value"<% if read_only %> style="text-align: right;"<% end %>>
-    <%= answer.present? ? answer : '-' %>
+    <% if answer.present? %>
+      <% if answer.kind_of?(Array) %>
+        <ul class="govuk-list">
+          <% answer.each do |ans| %>
+            <li>
+              <%= ans %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= answer %>
+      <% end %>
+    <% else %>
+      -
+    <% end %>
   </dd>
   <% unless read_only %>
     <dd class="govuk-summary-list__actions">
