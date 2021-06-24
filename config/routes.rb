@@ -68,14 +68,9 @@ Rails.application.routes.draw do
     resource :settings, only: %i[show update]
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
-    resources :ccms_connectivity_tests, only: [:show]
-    resources :reports, only: %i[index create] do
-      member do
-        get 'download_custom_report'
-      end
-    end
+    resources :reports, only: %i[index create]
     get 'user_dashboard', to: 'user_dashboard#index', as: 'user_dashboard'
-    resources :roles, only: %i[index create update]
+    resources :roles, only: %i[index]
     namespace :roles do
       resources :permissions, only: %i[show update]
     end
@@ -100,18 +95,9 @@ Rails.application.routes.draw do
     resource :consent, only: %i[show update]
     resource :contact_provider, only: [:show]
     resources :banks, only: %i[index create]
-    resource :property_value, only: %i[show update]
     resources :accounts, only: [:index]
     resources :gather_transactions, only: [:index]
     resources :additional_accounts, only: %i[index create new update]
-    resource :own_home, only: %i[show update]
-    resource :percentage_home, only: %i[show update]
-    resource :outstanding_mortgage, only: %i[show update]
-    resource :savings_and_investment, only: %i[show update]
-    resource :shared_ownership, only: %i[show update]
-    resource :restrictions, only: %i[show update]
-    resource :other_assets, only: %i[show update]
-    resource :policy_disregards, only: %i[show update]
     resources :check_answers, only: [:index] do
       patch :reset, on: :collection
       patch :continue, on: :collection
@@ -124,16 +110,6 @@ Rails.application.routes.draw do
       resource :annual_amount, only: %i[show update]
     end
     resource :identify_types_of_outgoing, only: %i[show update]
-    resources :income_summary, only: :index
-    resources :outgoings_summary, only: :index
-    resource :incoming_transactions, only: [] do
-      get '/:transaction_type', to: 'incoming_transactions#show', as: ''
-      patch '/:transaction_type', to: 'incoming_transactions#update'
-    end
-    resource :outgoing_transactions, only: [] do
-      get '/:transaction_type', to: 'outgoing_transactions#show', as: ''
-      patch '/:transaction_type', to: 'outgoing_transactions#update'
-    end
     resource :means_test_result, only: [:show]
   end
 
@@ -143,7 +119,7 @@ Rails.application.routes.draw do
     resources :applicants, only: %i[new create]
     resource :confirm_office, only: %i[show update]
     resource :select_office, only: %i[show update]
-    resource :declaration, only: %i[show update]
+    resource :declaration, only: %i[show]
     resource :invalid_login, only: :show
 
     resources :legal_aid_applications, path: 'applications', only: %i[index create] do
@@ -162,7 +138,6 @@ Rails.application.routes.draw do
       resource :has_dependants, only: %i[show update]
       resources :dependants, only: %i[new show update]
       resources :remove_dependants, only: %i[show update]
-      resources :remove_dependant, only: %i[show update]
       resource :has_other_dependants, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
@@ -172,7 +147,6 @@ Rails.application.routes.draw do
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
-      resource :merits_declaration, only: %i[show update]
       resource :capital_introduction, only: %i[show update]
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
@@ -251,7 +225,7 @@ Rails.application.routes.draw do
       resource :has_evidence_of_benefit, only: %i[show update]
     end
 
-    resources :merits_task_list do
+    resources :merits_task_list, only: [] do
       resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
       resource :linked_children, only: %i[show update], controller: 'proceeding_merits_task/linked_children'
       resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
