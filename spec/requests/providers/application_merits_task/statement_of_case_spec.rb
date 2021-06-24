@@ -147,6 +147,12 @@ module Providers
               expect(statement_of_case.original_attachments.first).to be_present
             end
 
+            it 'stores the original filename' do
+              subject
+              attachment = statement_of_case.original_attachments.first
+              expect(attachment.original_filename).to eq 'hello_world.docx'
+            end
+
             it 'has the relevant content type' do
               subject
               document = statement_of_case.original_attachments.first.document
