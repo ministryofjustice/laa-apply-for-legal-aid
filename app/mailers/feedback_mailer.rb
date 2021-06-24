@@ -34,6 +34,7 @@ class FeedbackMailer < BaseApplyMailer
   end
 
   def application_status
+    return '' if @legal_aid_application.nil?
     return 'pre-dwp-check' if @legal_aid_application&.pre_dwp_check?
 
     @legal_aid_application&.passported? ? 'passported' : 'non-passported'

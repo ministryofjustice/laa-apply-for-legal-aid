@@ -4,7 +4,8 @@ RSpec.describe FeedbackMailer, type: :mailer do
   describe 'notify' do
     let(:feedback) { create :feedback }
     let(:application) { create :application }
-    let(:mail) { described_class.notify(feedback.id, application.id) }
+    let(:application_id) { application.id }
+    let(:mail) { described_class.notify(feedback.id, application_id) }
 
     it 'sends to correct address' do
       expect(mail.to).to eq([Rails.configuration.x.support_email_address])
@@ -40,6 +41,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq 'passported'
           end
         end
+
         context 'non-passported' do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
@@ -47,6 +49,13 @@ RSpec.describe FeedbackMailer, type: :mailer do
           end
           it 'has a status of passported' do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq 'non-passported'
+          end
+        end
+
+        context 'when no legal_aid_application is present' do
+          let(:application_id) { nil }
+          it 'has an empty status' do
+            expect(mail.govuk_notify_personalisation[:application_status]).to eq ''
           end
         end
       end
