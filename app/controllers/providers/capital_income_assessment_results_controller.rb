@@ -1,6 +1,6 @@
 module Providers
   class CapitalIncomeAssessmentResultsController < ProviderBaseController
-    KNOWN_RESULTS = %w[eligible not_eligible contribution_required].freeze
+    KNOWN_RESULTS = %w[eligible not_eligible contribution_required partially_eligible].freeze
 
     def show
       @cfe_result = legal_aid_application.cfe_result
