@@ -83,7 +83,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     end
 
     it 'updates the application proceeding types delegated functions dates' do
-      application_proceeding_types.each_with_index do |apt, i|
+      application_proceeding_types.order(used_delegated_functions_on: :desc).each_with_index do |apt, i|
         expect(apt.used_delegated_functions_reported_on).to eq(today)
         expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - i.days)
       end
@@ -226,7 +226,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       context 'with first application proceeding type' do
         it 'updates the application proceeding types delegated functions dates' do
-          apt = application_proceeding_types.first
+          apt = application_proceeding_types.order(used_delegated_functions_on: :desc).first
           expect(apt.used_delegated_functions_reported_on).to eq(today)
           expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on)
         end
@@ -234,7 +234,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       context 'with second application proceeding type' do
         it 'updates the application proceeding types delegated functions dates' do
-          apt = application_proceeding_types.last
+          apt = application_proceeding_types.order(used_delegated_functions_on: :desc).last
           expect(apt.used_delegated_functions_reported_on).to eq(today)
           expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)
         end
