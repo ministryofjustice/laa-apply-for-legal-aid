@@ -55,9 +55,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_proceeding_types,
-             # :with_delegated_functions,
              proceeding_types_count: 2
-      # delegated_functions_date: used_delegated_functions_on
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
