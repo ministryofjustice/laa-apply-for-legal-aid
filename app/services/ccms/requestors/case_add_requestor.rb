@@ -7,6 +7,11 @@ module CCMS
 
       attr_reader :ccms_attribute_keys, :submission
 
+      delegate :involved_children,
+               :opponent, to: :legal_aid_application
+
+      attr_accessor :legal_aid_application
+
       MEANS_ENTITY_CONFIG_DIR = Rails.root.join('config/ccms/means_entity_configs')
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
@@ -290,6 +295,47 @@ module CCMS
             end
           end
         end
+      end
+
+      def generate_opponent_other_parties_means_entity(xml, sequence_no, config)
+        if Setting.allow_multiple_proceedings?
+          generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
+        else
+          generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, config)
+        end
+      end
+
+      def generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        other_parties.each { |other_party| generate_opponent_other_parties_means_instance(xml, other_party, config) }
+      end
+
+      def generate_opponent_other_parties_means_instance(xml, other_party, config)
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party: other_party)
+          end
+        end
+      end
+
+      #
+      # TODO: Deprecate this method once we've switched multiple proceedings on
+      #
+      def generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, _config)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_means_single_proceeding)
+          end
+        end
+      end
+
+      def other_parties
+        [opponent] + involved_children
       end
 
       def predicate_true?(config)

@@ -4130,7 +4130,11 @@ global_merits:
     br100_meaning: 'The application has been made through the Apply service'
     response_type: boolean
     user_defined: false
-opponent_other_parties_means:
+
+#
+# TODO: Deprecate this section once multiple proceedings is turned on
+#
+opponent_other_parties_means_single_proceeding:
   OTHER_PARTY_NAME:
     value: .
     br100_meaning: The name of the other party
@@ -4153,6 +4157,33 @@ opponent_other_parties_means:
     user_defined: true
   RELATIONSHIP_TO_CLIENT:
     value: NONE
+    br100_meaning: The relationship of the other party to the applicant
+    response_type: text
+    user_defined: true
+
+opponent_other_parties_means:
+  OTHER_PARTY_NAME:
+    value: '#other_party_full_name'
+    br100_meaning: The name of the other party
+    response_type: text
+    user_defined: true
+  OTHER_PARTY_TYPE:
+    value: PERSON
+    br100_meaning: The other party type
+    response_type: text
+    user_defined: true
+  OTHER_PARTY_ID:
+    value: '#other_party_ccms_opponent_id'
+    br100_meaning: The CCMS id of the other party
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_TO_CASE:
+    value: '#other_party_ccms_relationship_to_case'
+    br100_meaning: The relationship of the other party to the case
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_TO_CLIENT:
+    value: UNKNOWN
     br100_meaning: The relationship of the other party to the applicant
     response_type: text
     user_defined: true

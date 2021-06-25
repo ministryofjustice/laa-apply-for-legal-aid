@@ -321,6 +321,18 @@ module CCMS
       application_proceeding_type.assigned_scope_limitations.first.code
     end
 
+    def other_party_full_name(options)
+      options[:other_party].__send__(:full_name)
+    end
+
+    def other_party_ccms_opponent_id(options)
+      "OPPONENT_#{options[:other_party].__send__(:generate_ccms_opponent_id)}"
+    end
+
+    def other_party_ccms_relationship_to_case(options)
+      options[:other_party].__send__(:ccms_relationship_to_case)
+    end
+
     private
 
     def applicant
