@@ -4187,7 +4187,12 @@ opponent_other_parties_means:
     br100_meaning: The relationship of the other party to the applicant
     response_type: text
     user_defined: true
-opponent_other_parties_merits:
+
+
+#
+# TODO: This section should be removed once multiple proceedings is enabled
+#
+opponent_other_parties_merits_single_proceeding:
   RELATIONSHIP_CIVIL_PARTNER:
     value: false
     br100_meaning: The Opponent & Other Parties Relationship To Client Is Civil Partner
@@ -4402,6 +4407,235 @@ opponent_other_parties_merits:
     br100_meaning: The Opponent & Other Parties Relationship To Client Is Husband/Wife
     response_type: boolean
     user_defined: false
+
+
+
+opponent_other_parties_merits:
+  RELATIONSHIP_CIVIL_PARTNER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Civil Partner
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CASE_INTERVENOR:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Intervener
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_TENANT:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Tenant
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_MEDICAL_PRO:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Medical
+      Professional
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CASE_OPPONENT:
+    value: '#other_party_is_opponent?'
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Opponent
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_EMPLOYER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Employer
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_NONE:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is None
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_PERSON:
+    value: true
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  PARTY_IS_A_CHILD:
+    value: '#other_party_ccms_child?'
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_ORG:
+    value: false
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_STEP_PARENT:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Step Parent
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CASE_GAL:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Guardian
+      Ad Litem
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_EX_HUSBAND_WIFE:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Husband/Wife
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_LEGAL_GUARDIAN:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Legal Guardian
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_SOL_BARRISTER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Solicitor
+      Or Barrister
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_EX_CIVIL_PARTNER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Ex-Civil
+      Partner
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_LOCAL_AUTHORITY:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Local Authority
+    response_type: boolean
+    user_defined: false
+  OPP_RELATIONSHIP_TO_CASE:
+    value: '#other_party_ccms_opponent_relationship_to_case'
+    br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Case'
+    response_type: text
+    user_defined: false
+  RELATIONSHIP_PARENT:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Parent
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_OTHER_FAM_MEMBER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Other Family
+      Member
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CASE_BENEFICIARY:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Beneficiary
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_ID:
+    value: '#other_party_ccms_opponent_id'
+    br100_meaning: Other Party Id
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_GRANDPARENT:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Grandparent
+    response_type: boolean
+    user_defined: false
+  OPPONENT_DOB:
+    generate_block?: '#other_party_is_involved_child?'
+    value: "#other_party_date_of_birth"
+    br100_meaning: Date of Birth
+    response_type: date
+    user_defined: true
+  RELATIONSHIP_LANDLORD:
+    value: false
+    br100_meaning: Meaning not defined in BR100
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CHILD:
+    value: '#other_party_is_involved_child?'
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Child
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_NAME:
+    value: '#other_party_full_name'
+    br100_meaning: Other Party Name
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_CUSTOMER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Customer
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_NAME_MERITS:
+    value: '#other_party_full_name'
+    br100_meaning: 'OthPart: Other Party Name'
+    response_type: text
+    user_defined: false
+  RELATIONSHIP_CASE_INT_PARTY:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Interested
+      Party
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_TO_CASE:
+    value: '#other_party_ccms_relationship_to_case'
+    br100_meaning: Opponent relationship to case
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_PROPERTY_OWNER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Property
+      Owner
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_SUPPLIER:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Supplier
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_EMPLOYEE:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Employee
+    response_type: boolean
+    user_defined: false
+  RELATIONSHIP_CASE_CHILD:
+    value: '#other_party_is_involved_child?'
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Child
+    response_type: boolean
+    user_defined: false
+  OPPONENT_DOB_MERITS:
+    generate_block?: '#other_party_is_involved_child?'
+    value: "#other_party_date_of_birth"
+    br100_meaning: 'OthPart: Date of Birth'
+    response_type: date
+    user_defined: false
+  RELATIONSHIP_CASE_AGENT:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Case Is Agent
+    response_type: boolean
+    user_defined: false
+  OTHER_PARTY_TYPE:
+    value: PERSON
+    br100_meaning: Other Party Type
+    response_type: text
+    user_defined: true
+  OPP_RELATIONSHIP_TO_CLIENT:
+    value: Unknown
+    br100_meaning: 'OthPart: The Opponent & Other Parties Relationship To Client'
+    response_type: text
+    user_defined: false
+  RELATIONSHIP_TO_CLIENT:
+    value: UNKNOWN
+    br100_meaning: Opponent relationship to client
+    response_type: text
+    user_defined: true
+  RELATIONSHIP_HUSBAND_WIFE:
+    value: false
+    br100_meaning: The Opponent & Other Parties Relationship To Client Is Husband/Wife
+    response_type: boolean
+    user_defined: false
+
+
+
+
+
+
+
+
+
+
+
 main_dwelling:
   generate_block?: false
   MAINTHIRD_INPUT_T_3WP2_12A:

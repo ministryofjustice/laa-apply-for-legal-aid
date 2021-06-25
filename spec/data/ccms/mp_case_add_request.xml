@@ -2366,7 +2366,7 @@
                       <ns0:SequenceNumber>4</ns0:SequenceNumber>
                       <ns0:EntityName>OPPONENT_OTHER_PARTIES</ns0:EntityName>
                       <ns0:Instances>
-                        <ns0:InstanceLabel>OPPONENT_7713451</ns0:InstanceLabel>
+                        <ns0:InstanceLabel>OPPONENT_88123456</ns0:InstanceLabel>
                         <ns0:Attributes>
                           <ns0:Attribute>
                             <ns0:Attribute>RELATIONSHIP_CIVIL_PARTNER</ns0:Attribute>
@@ -2407,13 +2407,13 @@
                           <ns0:Attribute>
                             <ns0:Attribute>RELATIONSHIP_NONE</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
-                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_PERSON</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
-                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -2425,7 +2425,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_ORG</ns0:Attribute>
                             <ns0:ResponseType>boolean</ns0:ResponseType>
-                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -2497,7 +2497,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_ID</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>OPPONENT_7713451</ns0:ResponseValue>
+                            <ns0:ResponseValue>OPPONENT_88123456</ns0:ResponseValue>
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -2521,7 +2521,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_NAME</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>.</ns0:ResponseValue>
+                            <ns0:ResponseValue>Joffrey Test-Opponent</ns0:ResponseValue>
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -2533,7 +2533,7 @@
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_NAME_MERITS</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>.</ns0:ResponseValue>
+                            <ns0:ResponseValue>Joffrey Test-Opponent</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
@@ -2581,19 +2581,521 @@
                           <ns0:Attribute>
                             <ns0:Attribute>OTHER_PARTY_TYPE</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>ORGANISATION</ns0:ResponseValue>
+                            <ns0:ResponseValue>PERSON</ns0:ResponseValue>
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
                             <ns0:Attribute>OPP_RELATIONSHIP_TO_CLIENT</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>None</ns0:ResponseValue>
+                            <ns0:ResponseValue>Unknown</ns0:ResponseValue>
                             <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
                             <ns0:Attribute>RELATIONSHIP_TO_CLIENT</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
-                            <ns0:ResponseValue>OPP</ns0:ResponseValue>
+                            <ns0:ResponseValue>UNKNOWN</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_HUSBAND_WIFE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                        </ns0:Attributes>
+                      </ns0:Instances>
+                      <ns0:Instances>
+                        <ns0:InstanceLabel>OPPONENT_88123457</ns0:InstanceLabel>
+                        <ns0:Attributes>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CIVIL_PARTNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_INTERVENOR</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TENANT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_MEDICAL_PRO</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_OPPONENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EMPLOYER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_NONE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_PERSON</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>PARTY_IS_A_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_ORG</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_STEP_PARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_GAL</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EX_HUSBAND_WIFE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LEGAL_GUARDIAN</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_SOL_BARRISTER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EX_CIVIL_PARTNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LOCAL_AUTHORITY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPP_RELATIONSHIP_TO_CASE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Child</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_PARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_OTHER_FAM_MEMBER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_BENEFICIARY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_ID</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>OPPONENT_88123457</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_GRANDPARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPPONENT_DOB</ns0:Attribute>
+                            <ns0:ResponseType>date</ns0:ResponseType>
+                            <ns0:ResponseValue>20-01-2019</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LANDLORD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_NAME</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>First TestChild</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CUSTOMER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_NAME_MERITS</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>First TestChild</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_INT_PARTY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TO_CASE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>CHILD</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_PROPERTY_OWNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_SUPPLIER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EMPLOYEE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPPONENT_DOB_MERITS</ns0:Attribute>
+                            <ns0:ResponseType>date</ns0:ResponseType>
+                            <ns0:ResponseValue>20-01-2019</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_AGENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_TYPE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>PERSON</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPP_RELATIONSHIP_TO_CLIENT</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Unknown</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TO_CLIENT</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>UNKNOWN</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_HUSBAND_WIFE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                        </ns0:Attributes>
+                      </ns0:Instances>
+                      <ns0:Instances>
+                        <ns0:InstanceLabel>OPPONENT_88123458</ns0:InstanceLabel>
+                        <ns0:Attributes>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CIVIL_PARTNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_INTERVENOR</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TENANT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_MEDICAL_PRO</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_OPPONENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EMPLOYER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_NONE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_PERSON</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>PARTY_IS_A_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_ORG</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_STEP_PARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_GAL</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EX_HUSBAND_WIFE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LEGAL_GUARDIAN</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_SOL_BARRISTER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EX_CIVIL_PARTNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LOCAL_AUTHORITY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPP_RELATIONSHIP_TO_CASE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Child</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_PARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_OTHER_FAM_MEMBER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_BENEFICIARY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_ID</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>OPPONENT_88123458</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_GRANDPARENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPPONENT_DOB</ns0:Attribute>
+                            <ns0:ResponseType>date</ns0:ResponseType>
+                            <ns0:ResponseValue>15-02-2020</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_LANDLORD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_NAME</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Second TestChild</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CUSTOMER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_NAME_MERITS</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Second TestChild</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_INT_PARTY</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TO_CASE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>CHILD</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_PROPERTY_OWNER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_SUPPLIER</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_EMPLOYEE</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_CHILD</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>true</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPPONENT_DOB_MERITS</ns0:Attribute>
+                            <ns0:ResponseType>date</ns0:ResponseType>
+                            <ns0:ResponseValue>15-02-2020</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_CASE_AGENT</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OTHER_PARTY_TYPE</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>PERSON</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>OPP_RELATIONSHIP_TO_CLIENT</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>Unknown</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>false</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
+                            <ns0:Attribute>RELATIONSHIP_TO_CLIENT</ns0:Attribute>
+                            <ns0:ResponseType>text</ns0:ResponseType>
+                            <ns0:ResponseValue>UNKNOWN</ns0:ResponseValue>
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>

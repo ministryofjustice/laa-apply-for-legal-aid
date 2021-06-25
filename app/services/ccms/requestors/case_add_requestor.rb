@@ -447,7 +447,7 @@ module CCMS
           xml.__send__('ns0:ScreenName', 'SUMMARY')
           xml.__send__('ns0:Entity') { generate_global_merits_entity(xml, 1) }
           xml.__send__('ns0:Entity') { generate_merits_proceeding_entity(xml, 2) }
-          xml.__send__('ns0:Entity') { generate_opponent_other_parties(xml, 4) }
+          xml.__send__('ns0:Entity') { generate_opponent_other_parties_merits_entity(xml, 4) }
         end
       end
 
@@ -496,12 +496,35 @@ module CCMS
         end
       end
 
-      def generate_opponent_other_parties(xml, sequence_no)
+      def generate_opponent_other_parties_merits_entity(xml, sequence_no)
+        if Setting.allow_multiple_proceedings?
+          generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
+        else
+          generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
+        end
+      end
+
+      def generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
         xml.__send__('ns0:SequenceNumber', sequence_no)
         xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
         xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits) }
+          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits_single_proceeding) }
+        end
+      end
+
+      def generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        other_parties.each { |other_party| generate_opponent_other_parties_instance_merits(xml, other_party) }
+      end
+
+      def generate_opponent_other_parties_instance_merits(xml, other_party)
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits, other_party: other_party)
+          end
         end
       end
 

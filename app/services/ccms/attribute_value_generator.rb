@@ -333,6 +333,26 @@ module CCMS
       options[:other_party].__send__(:ccms_relationship_to_case)
     end
 
+    def other_party_ccms_child?(options)
+      options[:other_party].__send__(:ccms_child?)
+    end
+
+    def other_party_ccms_opponent_relationship_to_case(options)
+      options[:other_party].__send__(:ccms_opponent_relationship_to_case)
+    end
+
+    def other_party_date_of_birth(options)
+      options[:other_party].__send__(:date_of_birth)
+    end
+
+    def other_party_is_involved_child?(options)
+      options[:other_party].instance_of?(ApplicationMeritsTask::InvolvedChild)
+    end
+
+    def other_party_is_opponent?(options)
+      options[:other_party].instance_of?(ApplicationMeritsTask::Opponent)
+    end
+
     private
 
     def applicant

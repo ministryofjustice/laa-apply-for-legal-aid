@@ -21,7 +21,7 @@ module CCMS
     private
 
     def prevent_multiple_records
-      return if self.class.count == 0
+      return if self.class.count.zero?
 
       raise 'Attempted to write multiple CCMS::OpponentId records' if self.class.first&.id != id
     end
