@@ -623,7 +623,7 @@ en:
         income_details_heading: Income
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
-        proceeding_eligibility: PROCEEDING ELIGIBILITY
+        proceeding_eligibility: Proceeding eligbility
     no_income_summaries:
       show:
         page_heading: "Your client's income"
