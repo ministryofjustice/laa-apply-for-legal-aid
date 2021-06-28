@@ -84,13 +84,46 @@ module CCMS
                   expect(block).to have_boolean_response true
                 end
               end
+
+              context 'attirbute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_28A') }
+
+                it 'is false for both children' do
+                  blocks.each do |block|
+                    expect(block).to have_boolean_response false
+                  end
+                end
+
+                it 'is true if they are declared as adults' do
+                  older_child.update!(relationship: 'adult_relative')
+                  younger_child.update!(relationship: 'adult_relative')
+                  blocks.each do |block|
+                    expect(block).to have_boolean_response true
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_D_12WP3_3A - Person residing: DOB' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_D_12WP3_3A') }
+                before do
+                  older_child.update!(date_of_birth: Date.new(2018, 1, 8))
+                  younger_child.update!(date_of_birth: Date.new(2021, 3, 2))
+                end
+
+                it 'generates the dates correctly' do
+                  # sort the blocks to ensure 02-03-2021 comes before 08-01-2018
+                  expect(blocks.min).to have_date_response '02-03-2021'
+                  expect(blocks.max).to have_date_response '08-01-2018'
+                end
+              end
             end
 
             context 'hard coded attributes' do
               let(:hard_coded_attrs) do
                 [
                   # key for XmlExtractor xpath, attribute name, response type, user_defined?, expected_value
-                  ['client_residing_person', 'CLI_RES_PER_INPUT_B_12WP3_20A', 'boolean', false, false]
+                  ['client_residing_person', 'CLI_RES_PER_INPUT_B_12WP3_20A', 'boolean', false, false],
+                  ['client_residing_person', 'CLI_RES_PER_INPUT_B_12WP3_32A', 'boolean', false, false]
                 ]
               end
 
