@@ -101,14 +101,16 @@
 </section>
 <div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">
-  <%= check_answer_link(
-        name: :statement_of_case,
-        url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
-        answer: attachments_with_size(statement_of_case&.original_attachments),
-        question: t('.statement-of-case-heading'),
-        read_only: read_only,
-        no_border: true
-      ) %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-2 print-remove-border">
+    <%= check_answer_link(
+          name: :statement_of_case,
+          url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
+          answer: attachments_with_size(statement_of_case&.original_attachments),
+          question: t('.statement-of-case-heading'),
+          read_only: read_only,
+          no_border: true
+        ) %>
+  </dl>
   <div class="govuk-body"><%= statement_of_case&.statement %></div>
   <%= render 'shared/check_answers/section_break' if statement_of_case&.statement %>
 </section>

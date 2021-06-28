@@ -29,7 +29,7 @@ module StatementOfCases
     end
 
     def exclude_from_model
-      %i[upload_button_pressed original_file]
+      %i[upload_button_pressed original_file original_filename]
     end
 
     validate :statement_present_or_file_uploaded
