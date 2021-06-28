@@ -51,18 +51,15 @@ module Flow
           forward: ->(application, has_other_proceeding) do
             if has_other_proceeding
               :proceedings_types
-            elsif application.section_8_proceedings?
-              :in_scope_of_laspos
-            elsif application.checking_answers?
-              :check_provider_answers
             else
-              :used_multiple_delegated_functions
+              application.section_8_proceedings? ? :in_scope_of_laspos : :used_multiple_delegated_functions
             end
           end
         },
         in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
           forward: :used_multiple_delegated_functions,
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers
         },
         used_multiple_delegated_functions: {
