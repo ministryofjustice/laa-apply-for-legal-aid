@@ -506,7 +506,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.2.5)
+    redis (4.3.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     regexp-examples (1.5.1)
@@ -603,9 +603,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-status (1.1.4)
+    sidekiq-status (2.0.0)
       chronic_duration
-      sidekiq (>= 3.0)
+      sidekiq (>= 5.0)
     sidekiq_alive (2.0.6)
       sidekiq
     simplecov (0.21.2)
