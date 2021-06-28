@@ -9,7 +9,7 @@
       ) %>
 
   <% if Setting.allow_multiple_proceedings? %>
-    <div class="govuk-grid-row">
+    <div class="govuk-grid-row" id="app-check-your-answers__proceedings">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m"><%= t '.section_proceeding.heading' %></h2>
       </div>
@@ -28,7 +28,7 @@
       ) %>
 
   <% if Setting.allow_multiple_proceedings? %>
-    <div class="govuk-grid-row">
+    <div class="govuk-grid-row" id="app-check-your-answers__delegated_functions">
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
       </div>
