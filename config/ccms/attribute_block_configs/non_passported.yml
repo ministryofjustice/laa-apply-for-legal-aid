@@ -955,6 +955,20 @@ global_merits:
   DEC_AGAINST_INSTRUCTIONS:
     generate_block?: true
     value: false
+  DEC_AGAINST_INSTRUCT_SIGNED:
+    generate_block?: false
+  DEC_APP_NECESSARY:
+    generate_block?: false
+  DEC_CLIENT_TEXT_PARA16A:
+    generate_block?: false
+  DEC_CLIENT_TEXT_PARA17A:
+    generate_block?: false
+  DEC_CLIENT_TEXT_PARA18A:
+    generate_block?: false
+  DEC_NO_DIFFERENCES:
+    generate_block?: false
+  DEC_UNABLE_TO_ATTEND:
+    generate_block?: false
   EDUCATION:
     generate_block?: true
     value: false
@@ -1320,6 +1334,10 @@ global_merits:
     response_type: boolean
     generate_block?: true
 
+employment:
+  OUT_EMP_INFER_C_15WP3_17A:
+    generate_block?: false
+    br100_meaning: 'Int.Result: Client Employment- BIK'
 land:
   LAND_INFER_B_5WP2_53A:
     value: true
