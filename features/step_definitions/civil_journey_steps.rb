@@ -437,13 +437,18 @@ Given('I complete the journey as far as check your answers') do
 end
 
 Given('I complete the journey as far as check client details with multiple proceedings selected') do
+  proceeding_one = ProceedingType.find_by(code: 'PR0208')
+  proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_multiple_proceeding_types,
+    :with_proceeding_types,
     :with_non_passported_state_machine,
-    :at_entering_applicant_details
+    :at_entering_applicant_details,
+    explicit_proceeding_types: [proceeding_one, proceeding_two]
   )
+  add_scope_limitations(@legal_aid_application, proceeding_one)
+  add_scope_limitations(@legal_aid_application, proceeding_two)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
