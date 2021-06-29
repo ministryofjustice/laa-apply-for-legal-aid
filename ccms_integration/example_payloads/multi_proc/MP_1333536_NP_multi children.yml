@@ -1,0 +1,1320 @@
+---
+CaseAddRQ:
+  HeaderRQ:
+    TransactionRequestID: '202106101014076590207849460'
+    Language: ENG
+    Source: PUI
+    Target: Oracle EBusiness
+    UserLoginID: MARTIN.RONAN@DAVIDGRAY.CO.UK
+    UserRole: EXTERNAL
+    TimeStamp: '2021-06-10T10:14:07.659'
+  Case:
+    CaseReferenceNumber: '300001333536'
+    CaseDetails:
+      ApplicationDetails:
+        Client:
+          ClientReferenceNumber: '56206973'
+          FirstName: Dave
+          Surname: multi depend test
+        PreferredAddress: PROVIDER
+        ProviderDetails:
+          ProviderFirmID: '19148'
+          ProviderOfficeID: '137570'
+          ContactUserID:
+            UserLoginID: '34953565'
+        CategoryOfLaw:
+          CategoryOfLawCode: MAT
+          CategoryOfLawDescription: Family
+          RequestedAmount: '25000.00'
+        OtherParties:
+          OtherParty:
+            OtherPartyID: OPPONENT_36809820
+            SharedInd: 'false'
+            OtherPartyDetail:
+              Person:
+                Name:
+                  Title: DR.
+                  Surname: Strange
+                  FirstName: Stephanie
+                Address: {}
+                RelationToClient: UNKNOWN
+                RelationToCase: OPP
+                ContactDetails: {}
+                AssessedIncome: '0'
+                AssessedAsstes: '0'
+          OtherParty[1]:
+            OtherPartyID: OPPONENT_36809822
+            SharedInd: 'false'
+            OtherPartyDetail:
+              Person:
+                Name:
+                  Title: MASTER
+                  Surname: strange
+                  FirstName: Junior
+                DateOfBirth: '2017-12-20'
+                Address: {}
+                RelationToClient: UNKNOWN
+                RelationToCase: CHILD
+                ContactDetails: {}
+                AssessedIncome: '0'
+                AssessedAsstes: '0'
+          OtherParty[2]:
+            OtherPartyID: OPPONENT_36809824
+            SharedInd: 'false'
+            OtherPartyDetail:
+              Person:
+                Name:
+                  Title: MS.
+                  Surname: Strange
+                  FirstName: ALittle
+                DateOfBirth: '2018-05-20'
+                Address: {}
+                RelationToClient: UNKNOWN
+                RelationToCase: CHILD
+                ContactDetails: {}
+                AssessedIncome: '0'
+                AssessedAsstes: '0'
+        Proceedings:
+          Proceeding:
+            ProceedingCaseID: P_36809812
+            Status: Draft
+            LeadProceedingIndicator: 'true'
+            ProceedingDetails:
+              ProceedingType: DA005
+              ProceedingDescription: 'to be represented on an application for an occupation
+                order.  '
+              MatterType: MINJN
+              LevelOfService: '3'
+              Stage: '8'
+              ClientInvolvementType: A
+              ScopeLimitations:
+                ScopeLimitation:
+                  ScopeLimitation: CV117
+                  ScopeLimitationWording: Limited to all steps necessary to apply
+                    for an interim order; where application is made without notice
+                    to include representation on the return date.
+                  DelegatedFunctionsApply: 'true'
+                ScopeLimitation[1]:
+                  ScopeLimitation: AA019
+                  ScopeLimitationWording: As to proceedings under Part IV Family Law
+                    Act 1996 limited to all steps up to and including obtaining and
+                    serving a final order and in the event of breach leading to the
+                    exercise of a power of arrest to representation on the consideration
+                    of the breach by the court (but excluding applying for a warrant
+                    of arrest, if not attached, and representation in contempt proceedings).
+                  DelegatedFunctionsApply: 'false'
+          Proceeding[1]:
+            ProceedingCaseID: P_36809816
+            Status: Draft
+            LeadProceedingIndicator: 'false'
+            ProceedingDetails:
+              ProceedingType: SE003
+              ProceedingDescription: 'to be represented on an application for a prohibited
+                steps order.  '
+              MatterType: KSEC8
+              LevelOfService: '1'
+              Stage: '1'
+              ClientInvolvementType: A
+              ScopeLimitations:
+                ScopeLimitation:
+                  ScopeLimitation: CV117
+                  ScopeLimitationWording: Limited to all steps necessary to apply
+                    for an interim order; where application is made without notice
+                    to include representation on the return date.
+                  DelegatedFunctionsApply: 'true'
+                ScopeLimitation[1]:
+                  ScopeLimitation: FM059
+                  ScopeLimitationWording: Limited to Family Help (Higher) and to all
+                    steps necessary to negotiate and conclude a settlement. To include
+                    the issue of proceedings and representation in those proceedings
+                    save in relation to or at a contested final hearing.
+                  DelegatedFunctionsApply: 'false'
+        MeansAssesments:
+          AssesmentResults:
+            Results:
+              Goal:
+                Attribute: CLIENT_PROV_LA
+                AttributeValue: 'true'
+            AssesmentDetails:
+              AssessmentScreens:
+                ScreenName: SUMMARY
+                Entity:
+                  SequenceNumber: '2'
+                  EntityName: CLIENT_RESIDING_PERSON
+                  Instances:
+                    InstanceLabel: the client's residing person4
+                    Attributes:
+                      CLI_RES_PER_INPUT_D_12WP3_3A: date:20-12-1990:true
+                      CLI_RES_PER_INPUT_B_12WP3_30A: boolean:false:true
+                      CLI_RES_PER_INPUT_B_12WP3_21A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_32A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_20A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_31A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_17A: text:Dependent adult:true
+                      CLI_RES_PER_INPUT_B_12WP3_24A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_35A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_1A: text:Ms Adult dependant 2:true
+                      CLI_RES_PER_INPUT_B_12WP3_28A: boolean:true:false
+                      CLI_RES_PER_INPUT_B_12WP3_19A: boolean:false:true
+                  Instances[1]:
+                    InstanceLabel: the client's residing person1
+                    Attributes:
+                      CLI_RES_PER_INPUT_D_12WP3_3A: date:20-06-2020:true
+                      CLI_RES_PER_INPUT_B_12WP3_21A: boolean:true:false
+                      CLI_RES_PER_INPUT_B_12WP3_32A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_20A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_23A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_17A: text:Child aged 15 and under:true
+                      CLI_RES_PER_INPUT_B_12WP3_36A: boolean:false:true
+                      CLI_RES_PER_INPUT_B_12WP3_24A: boolean:false:false
+                      CLI_RES_PER_INPUT_T_12WP3_1A: text:Master dependant 1:true
+                      CLI_RES_PER_INPUT_B_12WP3_28A: boolean:false:false
+                  Instances[2]:
+                    InstanceLabel: the client's residing person2
+                    Attributes:
+                      CLI_RES_PER_INPUT_D_12WP3_3A: date:20-07-2019:true
+                      CLI_RES_PER_INPUT_B_12WP3_21A: boolean:true:false
+                      CLI_RES_PER_INPUT_B_12WP3_32A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_20A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_23A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_17A: text:Child aged 15 and under:true
+                      CLI_RES_PER_INPUT_B_12WP3_36A: boolean:false:true
+                      CLI_RES_PER_INPUT_B_12WP3_24A: boolean:false:false
+                      CLI_RES_PER_INPUT_T_12WP3_1A: text:Ms Dependant 2:true
+                      CLI_RES_PER_INPUT_B_12WP3_28A: boolean:false:false
+                  Instances[3]:
+                    InstanceLabel: the client's residing person3
+                    Attributes:
+                      CLI_RES_PER_INPUT_D_12WP3_3A: date:20-12-1980:true
+                      CLI_RES_PER_INPUT_B_12WP3_30A: boolean:false:true
+                      CLI_RES_PER_INPUT_B_12WP3_21A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_32A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_20A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_31A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_17A: text:Dependent adult:true
+                      CLI_RES_PER_INPUT_B_12WP3_24A: boolean:false:false
+                      CLI_RES_PER_INPUT_B_12WP3_35A: boolean:false:true
+                      CLI_RES_PER_INPUT_T_12WP3_1A: text:Mr adult dependant 1:true
+                      CLI_RES_PER_INPUT_B_12WP3_28A: boolean:true:false
+                      CLI_RES_PER_INPUT_B_12WP3_19A: boolean:false:true
+                Entity[1]:
+                  SequenceNumber: '3'
+                  EntityName: PROCEEDING
+                  Instances:
+                    InstanceLabel: P_36809812
+                    Attributes:
+                      CLIENT_INVOLVEMENT_TYPE: text:A:true
+                      SCOPE_LIMIT_IS_DEFAULT: boolean:false:true
+                      PROC_UPPER_TRIBUNAL: text:No:false
+                      LEVEL_OF_SERVICE: text:3:true
+                      PROCEEDING_ID: text:P_36809812:true
+                      MATTER_TYPE: text:MINJN:true
+                      NEW_OR_EXISTING: text:NEW:true
+                      REQUESTED_SCOPE: text:MULTIPLE:true
+                      PROCEEDING_NAME: text:DA005:true
+                  Instances[1]:
+                    InstanceLabel: P_36809816
+                    Attributes:
+                      CLIENT_INVOLVEMENT_TYPE: text:A:true
+                      SCOPE_LIMIT_IS_DEFAULT: boolean:false:true
+                      PROC_UPPER_TRIBUNAL: text:No:false
+                      LEVEL_OF_SERVICE: text:1:true
+                      PROCEEDING_ID: text:P_36809816:true
+                      MATTER_TYPE: text:KSEC8:true
+                      NEW_OR_EXISTING: text:NEW:true
+                      REQUESTED_SCOPE: text:MULTIPLE:true
+                      PROCEEDING_NAME: text:SE003:true
+                Entity[2]:
+                  SequenceNumber: '4'
+                  EntityName: OPPONENT_OTHER_PARTIES
+                  Instances:
+                    InstanceLabel: OPPONENT_36809820
+                    Attributes:
+                      OTHER_PARTY_NAME: text:Dr Stephanie Strange:true
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OTHER_PARTY_ID: text:OPPONENT_36809820:true
+                      RELATIONSHIP_TO_CASE: text:OPP:true
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                  Instances[1]:
+                    InstanceLabel: OPPONENT_36809822
+                    Attributes:
+                      OTHER_PARTY_NAME: text:Master Junior strange:true
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OTHER_PARTY_ID: text:OPPONENT_36809822:true
+                      RELATIONSHIP_TO_CASE: text:CHILD:true
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                  Instances[2]:
+                    InstanceLabel: OPPONENT_36809824
+                    Attributes:
+                      OTHER_PARTY_NAME: text:Ms ALittle Strange:true
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OTHER_PARTY_ID: text:OPPONENT_36809824:true
+                      RELATIONSHIP_TO_CASE: text:CHILD:true
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                Entity[3]:
+                  SequenceNumber: '5'
+                  EntityName: global
+                  Instances:
+                    InstanceLabel: '300001333536'
+                    Attributes:
+                      GB_DECL_T_38WP3_12A: 'text: ? The Legal Aid Agency may cancel
+                        my legal aid and I will have to pay back all of my legal fees.:false'
+                      OUT_GB_INFER_C_34WP3_1A: currency:1192.32:false
+                      OUT_GB_INFER_C_34WP2_103A: currency:0.00:false
+                      GB_DECL_T_38WP3_116A: text:This declaration applies to all the
+                        information given in this application as summarised below,
+                        and to any evidence provided in support::false
+                      GB_INPUT_B_14WP2_8A: boolean:false:true
+                      OUT_CAP_CONT: currency:0.00:false
+                      GB_PROC_B_41WP3_11A: boolean:false:false
+                      GB_ROUT_B_43WP3_13A: boolean:false:false
+                      GB_PROC_B_40WP3_17A: boolean:false:false
+                      GB_PROC_B_40WP3_29A: boolean:false:false
+                      GB_DECL_T_38WP3_13A: text:I understand::false
+                      GB_INFER_B_1WP3_419A: boolean:false:false
+                      GB_INPUT_B_14WP2_7A: boolean:false:true
+                      GB_INPUT_B_3WP2_1A: boolean:false:true
+                      OUT_GB_INFER_C_20WP2_101A: currency:0.00:false
+                      OUT_GB_INFER_C_37WP2_103A: currency:0.00:false
+                      GB_PROC_B_41WP3_10A: boolean:false:false
+                      OUT_GB_INFER_C_31WP2_103A: currency:0.00:false
+                      OUT_GB_INFER_C_26WP3_218A: currency:0.00:false
+                      OUT_GB_INFER_C_34WP3_3A: currency:1192.32:false
+                      APP_AMEND_TYPE: text:SUBDP:true
+                      GB_DECL_T_38WP3_14A: 'text: ? Legal aid is not always free.  I
+                        may have to pay a contribution towards my legal costs from
+                        my income and/or capital.  My legal aid may be withdrawn if
+                        I fall in arrears of payment and I will be responsible for
+                        the outstanding payments.:false'
+                      CATEGORY_OF_LAW: text:MAT:true
+                      OUT_GB_INFER_C_25WP3_167A: currency:0.00:false
+                      HIGH_PROFILE: boolean:false:true
+                      OUT_GB_INFER_C_21WP4_1A: currency:0.00:false
+                      INCOME_CONT: currency:0.00:false
+                      SURNAME_AT_BIRTH: text:Multi depend test:true
+                      LAR_PROC_B_40WP3_29A: boolean:false:false
+                      GB_DECL_T_38WP3_15A: 'text: ? I may have to pay back all or
+                        part of my legal costs at the end of my case.:false'
+                      GB_PROC_B_40WP3_15A: boolean:false:false
+                      OUT_GB_INFER_C_26WP3_217A: currency:0.00:false
+                      GB_PROC_B_40WP3_39A: boolean:false:false
+                      GB_PROC_B_40WP3_27A: boolean:false:false
+                      GB_INPUT_B_9WP3_356A: boolean:false:true
+                      GB_INPUT_B_6WP3_233A: boolean:false:true
+                      CLIENT_PRISONER: boolean:false:false
+                      GB_INPUT_B_8WP2_1A: boolean:false:true
+                      GB_PROC_B_41WP3_20A: boolean:false:false
+                      POA_OR_BILL_FLAG: text:N/A:true
+                      GB_PROC_B_1WP4_99A: boolean:true:false
+                      GB_INPUT_B_16WP2_7A: boolean:false:true
+                      GB_DECL_T_38WP3_20A: text:Full name (in block capitals):_______________________________:false
+                      GB_INFER_B_12WP3_12A: boolean:false:true
+                      GB_DECL_T_38WP3_1A: text:1. a) Client Means Declaration:false
+                      GB_PROC_B_39WP3_41A: boolean:false:false
+                      OUT_GB_INFER_C_22WP3_155A: currency:0.00:false
+                      GB_PROC_B_41WP3_15A: boolean:false:false
+                      LAR_RFLAG_B_37WP2_41A: boolean:true:false
+                      GB_INPUT_B_18WP2_2A: boolean:false:true
+                      OUT_GB_INFER_C_31WP2_100A: currency:0.00:false
+                      OUT_GB_INFER_C_34WP3_4A: currency:-1192.32:false
+                      GB_DECL_T_38WP3_21A: text:Date__/__/____:false
+                      GB_DECL_T_38WP3_2A: 'text: - To be signed in all non-passported
+                        cases (including clients living outside the UK) except where
+                        the client is a child under 16 or a protected party.:false'
+                      GB_PROC_B_41WP3_14A: boolean:false:false
+                      GB_PROC_B_39WP3_40A: boolean:false:false
+                      OUT_GB_INFER_C_21WP3_162A: currency:0.00:false
+                      GB_INFER_B_26WP3_214A: boolean:false:false
+                      GB_INPUT_B_1WP1_2A: boolean:false:true
+                      GB_INPUT_B_9WP3_349A: boolean:false:true
+                      GB_DECL_T_38WP3_10A: text:If I fail to notify the Legal Aid
+                        Agency of any change in my financial circumstances::false
+                      GB_DECL_T_38WP3_3A: text:This is a true statement of all my
+                        and my partner?s (if applicable) income and assets in the
+                        UK and abroad. I understand that if I tell you anything untrue
+                        in this application, or the documents I send with it, or if
+                        I leave anything out::false
+                      GB_PROC_B_39WP3_31A: boolean:false:false
+                      OUT_GB_INFER_C_20WP2_104A: currency:0.00:false
+                      OUT_GB_INFER_C_37WP2_100A: currency:0.00:false
+                      APPLICATION_FROM_APPLY: boolean:false:true
+                      DEVOLVED_POWERS_CONTRACT_FLAG: text:Yes - Excluding JR Proceedings:true
+                      GB_PROC_B_41WP3_13A: boolean:false:false
+                      SURNAME: text:multi depend test:true
+                      GB_INPUT_B_18WP2_4A: boolean:false:true
+                      GB_INPUT_B_1WP3_175A: boolean:false:false
+                      OUT_GB_INFER_C_34WP2_100A: currency:0.00:false
+                      GB_DECL_T_38WP3_11A: 'text: ? I may be prosecuted.:false'
+                      GB_PROC_B_40WP3_19A: boolean:false:false
+                      OUT_GB_INFER_C_34WP3_6A: currency:0.00:false
+                      GB_PROC_B_40WP3_9A: boolean:false:false
+                      GB_PROC_B_39WP3_30A: boolean:false:false
+                      GB_PROC_B_39WP3_42A: boolean:false:false
+                      GB_DECL_T_38WP3_4A: 'text: ? I may be prosecuted.:false'
+                      GB_PROC_B_41WP3_12A: boolean:false:false
+                      CLIENT_NASS: boolean:false:false
+                      GB_PROC_B_40WP3_10A: boolean:false:false
+                      GB_PROC_B_40WP3_46A: boolean:false:false
+                      OUT_GB_INFER_C_24WP2_102A: currency:0.00:false
+                      GB_PROC_B_40WP3_58A: boolean:false:false
+                      REQ_COST_LIMITATION: currency:25000.00:true
+                      PUI_CLIENT_CAP_CONT: currency:0.00:false
+                      OUT_GB_INFER_C_27WP3_218A: currency:2657.00:false
+                      OUT_GB_INFER_C_28WP4_3A: currency:0.00:false
+                      GB_PROC_B_41WP3_6A: boolean:false:false
+                      GB_INFER_C_28WP4_20A: currency:0.00:false
+                      GB_PROC_B_39WP3_21A: boolean:false:false
+                      OUT_GB_INFER_C_36WP2_100A: currency:0.00:false
+                      GB_PROC_B_39WP3_33A: boolean:false:false
+                      OUT_GB_INFER_C_30WP4_2A: currency:0.00:false
+                      POST_CODE: text:No Fixed Abode:true
+                      OUT_GB_INFER_C_31WP3_2A: currency:0.00:false
+                      GB_INPUT_B_13WP3_15A: boolean:false:false
+                      OUT_GB_INFER_C_30WP2_103A: currency:0.00:false
+                      GB_PROC_B_40WP3_33A: boolean:false:false
+                      OUT_GB_INFER_C_29WP4_1A: currency:0.00:false
+                      GB_PROC_B_40WP3_21A: boolean:false:false
+                      GB_PROC_B_40WP3_57A: boolean:false:false
+                      GB_PROC_B_40WP3_45A: boolean:false:false
+                      GB_INPUT_B_17WP2_7A: boolean:false:true
+                      OUT_GB_INFER_C_28WP4_2A: currency:0.00:false
+                      GB_PROC_B_39WP3_32A: boolean:false:false
+                      GB_INPUT_B_5WP1_18A: boolean:false:true
+                      OUT_GB_INFER_C_30WP4_1A: currency:0.00:false
+                      GB_PROC_B_41WP3_5A: boolean:false:false
+                      GB_PROC_B_39WP3_20A: boolean:false:false
+                      GB_INPUT_B_1WP3_400A: boolean:false:false
+                      GB_INPUT_B_18WP2_6A: boolean:false:true
+                      OUT_GB_INFER_C_15WP3_143A: currency:0.00:false
+                      GB_PROC_B_40WP3_44A: boolean:false:false
+                      GB_INFER_C_28WP4_10A: currency:0.00:false
+                      GB_PROC_B_40WP3_56A: boolean:false:false
+                      OUT_GB_INFER_C_29WP3_1A: currency:1192.32:false
+                      OUT_GB_INFER_C_27WP3_216A: currency:2657.00:false
+                      OUT_GB_INFER_C_24WP2_100A: currency:0.00:false
+                      GB_PROC_B_41WP3_4A: boolean:false:false
+                      GB_PROC_B_39WP3_47A: boolean:false:false
+                      GB_PROC_B_39WP3_23A: boolean:false:false
+                      GB_PROC_B_39WP3_35A: boolean:false:false
+                      OUT_GB_INFER_C_31WP3_4A: currency:0.00:false
+                      GB_DECL_B_38WP3_13A: boolean:true:true
+                      GB_INPUT_B_1WP3_401A: boolean:false:false
+                      GB_INPUT_B_13WP3_37A: boolean:false:false
+                      OUT_GB_INFER_C_15WP3_134A: currency:0.00:false
+                      GB_PROC_B_40WP3_31A: boolean:false:false
+                      GB_PROC_B_40WP3_55A: boolean:false:false
+                      GB_PROC_B_40WP3_43A: boolean:false:false
+                      GB_RFLAG_B_13WP3_42A: boolean:true:false
+                      GB_INPUT_B_2WP4_2A: boolean:false:true
+                      GB_INFER_B_1WP1_1A: boolean:false:false
+                      OUT_GB_INFER_C_14WP4_3A: currency:0.00:false
+                      GB_PROC_B_41WP3_3A: boolean:false:false
+                      GB_PROC_B_39WP3_22A: boolean:false:false
+                      GB_PROC_B_39WP3_34A: boolean:false:false
+                      GB_PROC_B_39WP3_46A: boolean:false:false
+                      OUT_GB_INFER_C_15WP3_133A: currency:0.00:false
+                      GB_INPUT_B_13WP3_14A: boolean:false:false
+                      GB_PROC_B_40WP3_42A: boolean:false:false
+                      GB_INPUT_B_9WP3_351A: boolean:false:true
+                      OUT_GB_INFER_C_25WP2_108A: currency:0.00:false
+                      GB_PROC_B_40WP3_4A: boolean:false:false
+                      GB_INPUT_B_1WP2_22A: boolean:false:true
+                      OUT_GB_INFER_C_30WP3_1A: currency:0.00:false
+                      GB_PROC_B_41WP3_2A: boolean:false:false
+                      GB_INPUT_B_1WP4_3B: boolean:false:true
+                      GB_PROC_B_39WP3_25A: boolean:false:false
+                      GB_PROC_B_39WP3_37A: boolean:false:false
+                      PUI_CLIENT_ELIGIBILITY: text:In Scope:false
+                      GB_INPUT_B_7WP2_1A: boolean:false:true
+                      GB_INPUT_B_4WP2_1A: boolean:false:true
+                      GB_INPUT_B_9WP3_350A: boolean:false:true
+                      GB_PROC_B_40WP3_13A: boolean:false:false
+                      OUT_GB_INFER_C_33WP3_1A: currency:0.00:false
+                      GB_INPUT_B_13WP3_49A: text:None of the above:true
+                      GB_PROC_B_40WP3_25A: boolean:false:false
+                      GB_PROC_B_40WP3_49A: boolean:false:false
+                      GB_PROC_B_40WP3_3A: boolean:false:false
+                      OUT_GB_INFER_C_15WP3_135A: currency:0.00:false
+                      GB_INPUT_B_1WP4_2B: boolean:false:true
+                      GB_PROC_B_39WP3_36A: boolean:false:false
+                      GB_PROC_B_41WP3_1A: boolean:false:false
+                      OUT_GB_INFER_C_19WP2_109A: currency:0.00:false
+                      OUT_GB_INFER_C_17WP4_1A: currency:0.00:false
+                      GB_PROC_B_39WP3_24A: boolean:false:false
+                      GB_INPUT_B_13WP3_36A: boolean:false:false
+                      APPLICATION_CASE_REF: text:300001333536:true
+                      GB_INPUT_B_9WP3_353A: boolean:false:true
+                      GB_PROC_B_40WP3_48A: boolean:false:false
+                      GB_INPUT_B_5WP1_3A: boolean:false:true
+                      GB_PROC_B_40WP3_2A: boolean:false:false
+                      GB_PROC_B_39WP3_39A: boolean:false:false
+                      GB_INPUT_B_6WP2_1A: boolean:false:true
+                      GB_INPUT_B_1WP4_1B: boolean:false:true
+                      OUT_GB_INFER_C_16WP4_3A: currency:0.00:false
+                      GB_PROC_B_39WP3_15A: boolean:false:false
+                      DELEGATED_FUNCTIONS_DATE: date:09-06-2021:true
+                      OUT_GB_INFER_C_32WP3_1A: currency:0.00:false
+                      OUT_GB_INFER_C_36WP2_102A: currency:0.00:false
+                      GB_INPUT_B_5WP2_1A: boolean:false:true
+                      GB_PROC_B_40WP3_35A: boolean:false:false
+                      GB_INPUT_B_9WP3_352A: boolean:false:true
+                      GB_PROC_B_40WP3_23A: boolean:false:false
+                      GB_PROC_B_40WP3_47A: boolean:false:false
+                      GB_PROC_B_40WP3_1A: boolean:false:false
+                      GB_PROC_B_39WP3_38A: boolean:false:false
+                      OUT_GB_INFER_C_24WP4_1A: currency:0.00:false
+                      PUI_CLIENT_INCOME_CONT: currency:0.00:false
+                      OUT_GB_PROC_C_34WP3_12A: currency:733.00:false
+                      OUT_GB_INFER_C_16WP4_4A: currency:0.00:false
+                      MEANS_TASK_AUTO_GEN: boolean:false:false
+                      OUT_GB_INFER_C_30WP3_2A: currency:0.00:false
+                      GB_PROC_B_39WP3_14A: boolean:false:false
+                      MEANS_SUBMISSION_PG_DISPLAYED: boolean:true:true
+                      OUT_GB_INFER_C_31WP3_1A: currency:0.00:false
+                      GB_INPUT_B_11WP3_367A: boolean:false:true
+                      OUT_GB_INFER_C_30WP2_100A: currency:0.00:false
+                      GB_PROC_B_39WP3_29A: boolean:false:false
+                      OUT_GB_INFER_C_19WP3_144A: currency:0.00:false
+                      GB_PROC_B_39WP3_17A: boolean:false:false
+                      APPLY_CASE_MEANS_REVIEW: boolean:false:true
+                      GB_INPUT_B_1WP2_27A: boolean:false:true
+                      GB_INFER_C_31WP3_13A: currency:0.00:false
+                      OUT_GB_INFER_C_28WP2_103A: currency:0.00:false
+                      RB_VERSION_DATE_MEANS: date:28-05-2021:false
+                      GB_INPUT_T_13WP3_59A: text:stuff:true
+                      OUT_GB_INFER_C_26WP3_186A: currency:0.00:false
+                      MEANS_REQD: boolean:true:false
+                      GB_PROC_B_39WP3_16A: boolean:false:false
+                      OUT_GB_INFER_C_25WP2_103A: currency:0.00:false
+                      GB_INPUT_B_1WP2_14A: boolean:false:true
+                      GB_INPUT_B_5WP1_22A: boolean:false:true
+                      GB_INPUT_B_39WP3_70B: boolean:false:true
+                      OUT_GB_INFER_C_18WP3_407A: currency:0.00:false
+                      OUT_GB_INFER_C_40WP2_102A: currency:8000.00:false
+                      GB_PROC_B_39WP3_19A: boolean:false:false
+                      GB_INPUT_B_41WP3_40A: boolean:false:true
+                      MEANS_ROUTING: text:MANB:false
+                      GB_PROC_B_39WP3_1A: boolean:false:false
+                      GB_INPUT_B_2WP2_1A: boolean:false:true
+                      GB_INPUT_B_9WP2_1A: boolean:false:true
+                      OUT_GB_INFER_C_35WP2_100A: currency:0.00:false
+                      GB_INPUT_B_8WP3_310A: boolean:false:true
+                      OUT_GB_INFER_C_40WP2_101A: currency:3000.00:false
+                      GB_PROC_B_39WP3_18A: boolean:false:false
+                      GB_INPUT_B_10WP2_1A: boolean:false:true
+                      BEN_AWARD_DATE: date:10-06-2021:false
+                      GB_INPUT_B_1WP2_36A: boolean:false:true
+                      GB_INPUT_D_18WP2_1A: date:09-06-2021:true
+                      LAR_INFER_B_1WP1_36A: boolean:false:false
+                      GB_INPUT_B_34WP3_32A: boolean:true:false
+                      GB_PROC_B_40WP3_54A: boolean:false:false
+                      OUT_GB_INFER_C_25WP2_100A: currency:0.00:false
+                      OUT_GB_INFER_C_31WP3_6A: currency:0.00:false
+                      DEFAULT_COST_LIMITATION: currency:25000.00:true
+                      GB_DECL_B_38WP3_11A: boolean:false:false
+                      OUT_GB_INFER_C_15WP3_140A: currency:0.00:false
+                      NEW_APPL_OR_AMENDMENT: text:APPLICATION:true
+                      GB_INPUT_B_13WP2_7A: boolean:false:true
+                      OUT_GB_INFER_C_23WP3_161A: currency:0.00:false
+                      GB_PROC_B_40WP3_53A: boolean:false:false
+                      GB_PROC_B_40WP3_41A: boolean:false:false
+                      OUT_GB_INFER_C_32WP2_102A: currency:0.00:false
+                      MEANS_REPORT_BACKLOG_TAG: text:MANB, Normal, Substantive DF
+                        Asses:false
+                      OUT_GB_INFER_C_26WP3_182A: currency:0.00:false
+                      OUT_GB_INFER_C_26WP3_194A: currency:0.00:false
+                      GB_PROC_B_39WP3_2A: boolean:false:false
+                      GB_PROC_B_41WP3_9A: boolean:false:false
+                      OUT_GB_INFER_C_35WP2_103A: currency:0.00:false
+                      OUT_GB_INFER_C_23WP3_160A: currency:0.00:false
+                      LAR_SCOPE_FLAG: boolean:true:true
+                      GB_PROC_B_40WP3_40A: boolean:false:false
+                      GB_PROC_B_40WP3_52A: boolean:false:false
+                      OUT_GB_INPUT_C_20WP3_371A: currency:0.00:false
+                      OUT_GB_INFER_C_26WP3_197A: currency:0.00:false
+                      GB_PROC_B_41WP3_8A: boolean:false:false
+                      GB_PROC_B_40WP3_51A: boolean:false:false
+                      OUT_GB_INFER_C_15WP3_142A: currency:0.00:false
+                      RB_VERSION_NUMBER_MEANS: text:v3.1.10:false
+                      GB_RFLAG_B_2WP3_01A: boolean:true:false
+                      OUT_GB_INFER_C_31WP3_9A: currency:0.00:false
+                      GB_INPUT_B_38WP3_2SCREEN: boolean:true:true
+                      GB_PROC_B_41WP3_7A: boolean:false:false
+                      GB_INPUT_B_13WP3_7A: boolean:false:false
+                      COST_LIMIT_CHANGED_FLAG: text:false:true
+                      GB_INPUT_B_15WP2_8A: boolean:false:true
+                      OUT_GB_INFER_C_15WP3_141A: currency:0.00:false
+                      GB_PROC_B_40WP3_50A: boolean:false:false
+                      MEANS_EVIDENCE_PROVIDED: boolean:false:true
+                      OUT_GB_INFER_C_18WP3_219A: currency:0.00:false
+                      LAR_PROC_B_39WP3_53A: boolean:false:false
+                      GB_PROC_B_39WP3_7A: boolean:false:false
+                      GB_INPUT_B_12WP3_3A: boolean:false:true
+                      OUT_GB_INFER_C_34WP3_9A: currency:0.00:false
+                      LAR_PROC_B_40WP3_31A: boolean:false:false
+                      GB_DECL_T_38WP3_5A: 'text: ? The Legal Aid Agency may take away
+                        my legal aid so I will have to pay back all my legal fees.:false'
+                      OUT_GB_INFER_C_21WP2_104A: currency:0.00:false
+                      SA_SCREEN10_1WP1_NONMEANS: boolean:true:false
+                      LAR_PROC_B_39WP3_54A: boolean:false:false
+                      GB_INPUT_B_1WP3_165A: boolean:false:false
+                      OUT_GB_INFER_C_26WP2_105A: currency:0.00:false
+                      OUT_GB_INFER_C_33WP2_100A: currency:0.00:false
+                      OUT_GB_INFER_C_31WP3_14A: currency:0.00:false
+                      LAR_PROC_B_40WP3_30A: boolean:false:false
+                      GB_DECL_T_38WP3_6A: 'text: - I agree to the Legal Aid Agency
+                        checking these facts with others such as credit reference
+                        agencies, the Department of Work and Pensions and HM Revenue
+                        and Customs and I authorise those people/organisations to
+                        provide the information they are asked for.:false'
+                      USER_TYPE: text:EXTERNAL:true
+                      GB_PROC_B_41WP3_18A: boolean:false:false
+                      OUT_GB_INFER_C_22WP3_150A: currency:0.00:false
+                      GB_INPUT_B_8WP3_308A: boolean:false:true
+                      GB_INPUT_B_13WP3_1A: boolean:false:false
+                      USER_PROVIDER_FIRM_ID: number:19148:true
+                      OUT_GB_INFER_C_38WP2_102A: currency:0.00:false
+                      OUT_GB_INFER_C_23WP3_159A: currency:0.00:false
+                      CLIENT_ELIGIBILITY: text:In Scope:false
+                      GB_DECL_T_38WP3_7A: text:I understand that I must co-operate
+                        fully and immediately with any enquiry into my financial circumstances.
+                        I will::false
+                      GB_PROC_B_41WP3_17A: boolean:false:false
+                      DATE_ASSESSMENT_STARTED: date:10-06-2021:true
+                      GB_INPUT_B_13WP3_2A: boolean:false:false
+                      OUT_GB_INFER_C_29WP3_18A: currency:596.16:false
+                      GB_PROC_B_39WP3_8A: boolean:false:false
+                      OUT_GB_INFER_C_38WP2_103A: currency:0.00:false
+                      GB_DECL_T_38WP3_8A: 'text: ? Provide more evidence if the Legal
+                        Aid Agency ask.:false'
+                      GB_INPUT_T_36WP3_1A: text:stuff:true
+                      OUT_GB_INFER_C_23WP3_158A: currency:0.00:false
+                      LAR_PROC_B_40WP3_32A: boolean:false:false
+                      OUT_GB_INFER_C_27WP2_100A: currency:0.00:false
+                      GB_PROC_B_41WP3_16A: boolean:false:false
+                      OUT_GB_INFER_C_34WP3_408A: currency:0.00:false
+                      GB_INPUT_B_12WP2_2A: boolean:false:true
+                      OUT_GB_INFER_C_14WP4_19A: currency:0.00:false
+                      OUT_GB_INFER_C_18WP3_227A: currency:0.00:false
+                      GB_DECL_T_38WP3_16A: 'text: ? The more work my solicitor does,
+                        the more I may have to pay back.:false'
+                      OUT_GB_INFER_C_38WP2_100A: currency:0.00:false
+                      GB_DECL_T_38WP3_9A: 'text: - Tell the Legal Aid Agency immediately
+                        if anything I have said here changes.:false'
+                      OUT_GB_INFER_C_31WP3_11A: currency:0.00:false
+                      GB_INPUT_B_14WP3_1A: boolean:false:true
+                      GB_INPUT_B_6WP3_232A: boolean:false:true
+                      OUT_GB_INFER_C_18WP3_226A: currency:0.00:false
+                      OUT_GB_INFER_C_26WP3_219A: currency:0.00:false
+                      MEANS_EVIDENCE_REQD: boolean:false:false
+                      GB_DECL_T_38WP3_17A: 'text: ? The Legal Aid Agency may register
+                        an interest-bearing charge against my property.:false'
+                      OUT_GB_INFER_C_31WP3_10A: currency:0.00:false
+                      GB_INPUT_B_12WP3_1A: boolean:true:true
+                      OUT_GB_INFER_C_26WP2_100A: currency:0.00:false
+                      GB_DECL_T_38WP3_18A: text:I understand if false or inaccurate
+                        information is provided and fraud is identified, details will
+                        be passed to fraud prevention agencies to prevent fraud and
+                        money laundering. For further details explaining how the information
+                        held by fraud prevention agencies may be used, contact the
+                        Counter Fraud and Investigations team on 020 3334 5588.:false
+                      OUT_GB_INFER_C_33WP2_103A: currency:0.00:false
+                      MEANS_OPA_RELEASE: text:18A:false
+                      GB_INPUT_B_11WP2_3A: boolean:false:true
+                      FIRST_NAME: text:Dave:true
+                      OUT_GB_INFER_C_27WP2_103A: currency:0.00:false
+                      DATE_OF_BIRTH: date:20-12-1979:true
+                      CAP_CONT: currency:0.00:false
+                      GB_DECL_T_38WP3_19A: text:Signed:_______________________________:false
+                      OUT_INCOME_CONT: currency:0.00:false
+                      MARITIAL_STATUS: text:U:true
+                      OUT_GB_INFER_C_31WP3_12A: currency:0.00:false
+                      GB_INPUT_B_2WP3_214A: boolean:false:true
+                      OUT_GB_INFER_C_21WP2_101A: currency:0.00:false
+        MeritsAssesments:
+          AssesmentResults:
+            Results:
+              Goal:
+                Attribute: ASSESS_COMPLETE
+                AttributeValue: 'true'
+            AssesmentDetails:
+              AssessmentScreens:
+                ScreenName: SUMMARY
+                Entity:
+                  SequenceNumber: '1'
+                  EntityName: global
+                  Instances:
+                    InstanceLabel: '300001333536'
+                    Attributes:
+                      APP_INCLUDES_IMMIGRATION_PROCS: boolean:false:false
+                      COPY_SEPARATE_STATEMENT: boolean:true:true
+                      PUB_AUTH_QUESTION_APPLIES: boolean:false:false
+                      NON_MAND_EVIDENCE_SEP_STATE: boolean:false:false
+                      APP_POTENTIAL_NON_MERITS: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA6A: text:I understand::false
+                      EVIDENCE_ICACU_LETTER: boolean:false:false
+                      UPPER_TRIBUNAL_OTHER: boolean:false:false
+                      DECLARATION_WILL_BE_SIGNED: boolean:true:true
+                      MERITS_SUBMISSION_PAGE: boolean:true:true
+                      LEGAL_HELP_COSTS_TO_DATE: currency:0.00:false
+                      COURT_ATTEND_IN_LAST_12_MONTHS: boolean:false:true
+                      MERITS_EVIDENCE_PROVIDED: boolean:false:true
+                      EVIDENCE_CA_POLICE_CAUTION: boolean:false:false
+                      EXISTING_COUNSEL_OPINION: boolean:false:true
+                      NON_MAND_EVIDENCE_AMD_EXPERT: boolean:false:false
+                      FIRST_TIER_TRIBUNAL_IMM_ASY: boolean:false:false
+                      CAFCASS_EXPT_RPT_RECEIVED: boolean:false:true
+                      DEC_CLIENT_TEXT_PARA15A: text:Date:___/___/___:false
+                      CASES_FEES_DISTRIBUTED: number:1:true
+                      COMMUNITY_CARE: boolean:false:false
+                      ROUTING_IMMIGRATION: boolean:false:false
+                      EVID_DEC_AGAINST_INSTRUCTIONS: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA7A: text:- Legal aid is not always free.:false
+                      COPY_WARNING_LETTER: boolean:true:true
+                      URGENT_HEARING_DATE: date:10-06-2021:true
+                      EVIDENCE_AMD_COUNSEL_OPINION: boolean:false:false
+                      APP_SCA_NON_MERITS_TESTED: boolean:false:false
+                      APP_CARE_SUPERVISION: boolean:false:false
+                      UPPER_TRIBUNAL_MENTAL_HEALTH: boolean:false:false
+                      EVIDENCE_CA_INJ_PSO: boolean:false:false
+                      CROSS_BORDER_DISPUTES_GLOBAL: boolean:true:true
+                      DEC_CLIENT_TEXT_PARA02A: text:This declaration applies to all
+                        the information given in this application as summarised below,
+                        and to any evidence provided in support::false
+                      SPECIAL_CHILDREN_ACT_APP: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA14A: 'text:Signed:  ______________________:false'
+                      EVIDENCE_DV_POLICE_CAUTION_2A: boolean:false:false
+                      DECLARATION_IS_CLIENTS: boolean:true:false
+                      MAGISTRATES_COURT: boolean:false:false
+                      APP_AMEND_TYPE: text:SUBDP:true
+                      APP_INCLUDES_INQUEST_PROCS: boolean:false:false
+                      EVIDENCE_DV_PUB_BODY: boolean:false:false
+                      EVIDENCE_EXISTING_EXPERT_RPT: boolean:false:false
+                      RB_VERSION_NUMBER_MERITS: text:v6.1.10:false
+                      EVIDENCE_AMD_CORRESPONDENCE: boolean:false:false
+                      FIRST_TIER_TRIBUNAL_CARE_STAND: boolean:false:false
+                      EMERGENCY_FC_CRITERIA: text:Urgent hearing to attend:true
+                      DEC_CLIENT_TEXT_PARA8A: text:- The Legal Aid Agency may register
+                        an interest bearing charge against my property.:false
+                      CAT_OF_LAW_DESCRIPTION: text:Family:false
+                      CATEGORY_OF_LAW: text:MAT:true
+                      HIGH_PROFILE: boolean:false:true
+                      EVIDENCE_PLEADINGS_REQUIRED: boolean:false:false
+                      APP_INC_CHILD_ABDUCTION: boolean:false:false
+                      LIMITATION_PERIOD_TO_EXPIRE: boolean:false:false
+                      SURNAME_AT_BIRTH: text:Multi depend test:true
+                      CURRENT_CERT_SUBSTANTIVE: boolean:false:false
+                      SUBSTANTIVE_APP: boolean:false:false
+                      ATTEND_URGENT_HEARING: boolean:true:false
+                      DEC_CLIENT_TEXT_PARA13A: text:I understand if false or inaccurate
+                        information is provided and fraud is identified, details will
+                        be passed to fraud prevention agencies to prevent fraud and
+                        money laundering. For further details explaining how the information
+                        held by fraud prevention agencies may be used contact the
+                        Counter Fraud and Investigations team via email at MoJCounterFraudInv@justice.gov.uk.:false
+                      RB_VERSION_DATE_MERITS: date:07-06-2021:false
+                      ROUTING_COMPLEX_MERITS: boolean:false:false
+                      EVIDENCE_AMD_COURT_ORDER: boolean:false:false
+                      CASE_OWNER_IMMIGRATION: boolean:false:false
+                      LEGALLY_LINKED_SCU: boolean:false:false
+                      EVIDENCE_DV_REFUGE: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA9A: text:- I may have to pay back all or
+                        part of my legal costs at the end of my case.:false
+                      MERITS_BACKLOG_REPORT_TAG: text:Standard Family Merits, Family,
+                        Substantive DF, Application, Non Urgent:false
+                      ACTION_AGAINST_POLICE: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA12A: text:I give my permission for the Legal
+                        Aid Agency to make any enquiries of third parties and I authorise
+                        those third parties to give any information necessary to deal
+                        with this.:false
+                      EVIDENCE_DV_SUPP_SERVICE: boolean:false:false
+                      NEGOTIATION_CORRESPONDENCE: boolean:false:true
+                      EVIDENCE_AMD_EXPERT_RPT: boolean:false:false
+                      DEFAULT_COST_LIMITATION: currency:25000.00:true
+                      DECLARATION_IS_REPRESENTATIVES: boolean:false:false
+                      EVIDENCE_EXISTING_COUNSEL_OP: boolean:false:false
+                      POA_OR_BILL_FLAG: text:N/A:true
+                      ISSUE_URGENT_PROCEEDINGS: boolean:false:false
+                      EVIDENCE_DV_PUBLIC_BODY: boolean:false:false
+                      EVIDENCE_DV_HEALTH_LETTER: boolean:false:false
+                      EVIDENCE_COPY_PR_ORDER: boolean:false:false
+                      MATTER_IS_SWPI: boolean:false:false
+                      MERITS_ROUTING: text:SFM:false
+                      EVIDENCE_PR_AGREEMENT: boolean:false:false
+                      CHILD_CLIENT: boolean:false:false
+                      ROUTING_MENTAL_HEALTH: boolean:false:false
+                      DATE_CLIENT_VISITED_FIRM: date:09-06-2021:true
+                      EVIDENCE_CA_SOCSERV_LTTR: boolean:false:false
+                      NEW_APPL_OR_AMENDMENT: text:APPLICATION:true
+                      NON_MAND_EVIDENCE_CORR_ADR: boolean:false:false
+                      EVIDENCE_DV_HOUSING_AUTHORITY: boolean:false:false
+                      EVIDENCE_DV_IMMRULES_289A: boolean:false:false
+                      EXISTING_EXPERT_REPORTS: boolean:false:true
+                      NON_MAND_EVIDENCE_OMBUD_RPT: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA11A: text:As far as I know, all the information
+                        I have given is true and I have not withheld any relevant
+                        information. I understand that if I knowingly give false information
+                        or withhold relevant information or fail to disclose any change
+                        in circumstances for the duration of my funding that my Legal
+                        Aid may be stopped and criminal proceedings may be taken against
+                        me.:false
+                      SMOD_APPLICABLE_TO_MATTER: boolean:false:false
+                      _SYSTEM_PUI_CONTEXT: text:Unused:true
+                      EVIDENCE_PRE_ACTION_DISCLOSURE: boolean:false:false
+                      COST_LIMIT_CHANGED: boolean:false:false
+                      EVIDENCE_DV_DVPN_2: boolean:false:false
+                      MAIN_PURPOSE_OF_APPLICATION: text:stuff:true
+                      MENTAL_HEALTH_REVIEW_TRIBUNAL: boolean:false:false
+                      DELEG_FUNCTIONS_DATE_MERITS: date:09-06-2021:false
+                      LEGAL_HELP_PROVIDED: boolean:false:true
+                      LAR_SCOPE_FLAG: boolean:true:true
+                      LEGALLY_LINKED_VHCC: boolean:false:false
+                      ROUTING_VHCC: boolean:false:false
+                      RISK_SCA_PR: boolean:false:false
+                      EVIDENCE_EXISTING_STATEMENT: boolean:true:false
+                      DEC_CLIENT_TEXT_PARA10A: text:- The more work my solicitor does,
+                        the more I may have to pay back.:false
+                      EVIDENCE_DV_COURT_ORDER: boolean:false:false
+                      EVIDENCE_IQ_REPORT_ON_DEATH: boolean:false:false
+                      APP_GRANTED_USING_DP: boolean:true:false
+                      OTHER_PARTIES_MAY_BENEFIT: boolean:false:true
+                      APP_IS_SCA_RELATED: boolean:false:false
+                      EVIDENCE_OMBUDSMAN_COMP_RPT: boolean:false:false
+                      SCA_APPEAL_INCLUDED: boolean:false:false
+                      NON_MAND_EVIDENCE_WARNING_LTTR: boolean:false:false
+                      ACTUAL_LIKELY_COSTS_EXCEED_25K: boolean:false:true
+                      EVIDENCE_DV_CONVICTION: boolean:false:false
+                      CLIENT_REQ_SEP_REP: boolean:true:true
+                      CLIENT_AGE: number:41:false
+                      MERITS_ROUTING_NAME: text:Standard Family Merits:false
+                      DEVOLVED_POWERS_CONTRACT_FLAG: text:Yes - Excluding JR Proceedings:true
+                      IMMIGRATION_QUESTION_APP: boolean:false:false
+                      HIGH_COURT: boolean:false:false
+                      FIRST_TIER_TRIBUNAL_TAXATION: boolean:false:false
+                      SURNAME: text:multi depend test:true
+                      NON_MAND_EVIDENCE_AMD_CT_ORDER: boolean:false:false
+                      EVIDENCE_DV_CRIM_PROCS_2A: boolean:false:false
+                      DECLARATION_IDENTIFIER: boolean:false:true
+                      IMMIGRATION_CT_OF_APPEAL: boolean:false:false
+                      CURRENT_CERT_EMERGENCY: boolean:false:false
+                      SPECIAL_IMM_APPEAL_COMMISSION: boolean:false:false
+                      CASE_OWNER_MENTAL_HEALTH: boolean:false:false
+                      EVIDENCE_DV_FIN_ABUSE: boolean:false:false
+                      CASE_OWNER_VHCC: boolean:false:false
+                      OTHERS_WHO_MAY_BENEFIT: boolean:false:true
+                      CASE_OWNER_SCA: boolean:false:false
+                      APP_BROUGHT_BY_PERSONAL_REP: boolean:false:true
+                      EVIDENCE_RELEVANT_CORR_ADR: boolean:false:false
+                      NON_MAND_EVIDENCE_AMD_SOLS_RPT: boolean:false:false
+                      CLIENT_MARITAL_STATUS: text:Unknown:false
+                      COST_LIMIT_CHANGED_FLAG: text:false:true
+                      MENTAL_HEAL_QUESTION_APPLIES: boolean:true:false
+                      APP_IS_FAMILY: boolean:true:false
+                      PROSCRIBED_ORG_APPEAL_COMM: boolean:false:false
+                      NEW_APPLICATION: boolean:true:false
+                      FAM_CERT_PREDICTED_COSTS: currency:6000.00:false
+                      EVIDENCE_AMD_PLEADINGS: boolean:false:false
+                      CLIENT_CIVIL_PARTNER_DISSOLVE: boolean:false:false
+                      NON_MAND_EVIDENCE_PRE_ACT_DISC: boolean:false:false
+                      EVIDENCE_RELEVANT_CORR_SETTLE: boolean:false:false
+                      CRIME: boolean:false:false
+                      REQ_COST_LIMITATION: currency:25000.00:true
+                      EVIDENCE_CA_UNSPENT_CONVICTION: boolean:false:false
+                      NON_MAND_EVIDENCE_CTORDER: boolean:false:false
+                      COURT_OF_APPEAL: boolean:false:false
+                      CASE_OWNER_SCU: boolean:false:false
+                      CASE_OWNER_COMPLEX_MERITS: boolean:false:false
+                      EVIDENCE_IQ_CORONER_CORR: boolean:false:false
+                      NON_MAND_EVIDENCE_COUNSEL_OP: boolean:false:false
+                      COUNTY_COURT: boolean:false:false
+                      POST_CODE: text:No Fixed Abode:true
+                      ROUTING_STD_FAMILY_MERITS: boolean:true:false
+                      EVIDENCE_CA_POLICE_BAIL: boolean:false:false
+                      NON_MAND_EVIDENCE_AMD_COUNSEL: boolean:false:false
+                      EVIDENCE_DV_PARTY_ON_BAIL_2A: boolean:false:false
+                      DEFAULT_COST_LIMITATION_MERITS: currency:25000.00:false
+                      APP_DIV_JUDSEP_DISSOLUTION_CP: boolean:false:false
+                      ECF_FLAG: boolean:false:true
+                      APPLICATION_CAN_BE_SUBMITTED: boolean:true:false
+                      _SYSTEM_PUI_URL: text:Unused:true
+                      NON_MAND_EVIDENCE_PLEADINGS: boolean:false:false
+                      MENTAL_HEAL_ACT_MENTAL_CAP_ACT: boolean:false:true
+                      EVIDENCE_CA_SOCSERV_ASSESS: boolean:false:false
+                      PROCS_INCLUDE_CHILD: boolean:true:false
+                      EVIDENCE_WARNING_LETTER: boolean:true:false
+                      URGENT_APPLICATION_TAG: text:Non Urgent:false
+                      USER_TYPE: text:EXTERNAL:true
+                      LEGALLY_LINKED_SIU: boolean:false:false
+                      REQUESTED_COST_LIMIT_OVER_25K: boolean:false:false
+                      NON_MAND_EVIDENCE_CORR_SETTLE: boolean:false:false
+                      NON_MAND_EVIDENCE_LTTR_ACTION: boolean:false:false
+                      CERTIFICATE_PREDICTED_COSTS: currency:6000.00:false
+                      EVIDENCE_EXISTING_CT_ORDER: boolean:false:false
+                      CLIENT_SINGLE: boolean:false:false
+                      EVIDENCE_IQ_COSTS_SCHEDULE: boolean:false:false
+                      USER_PROVIDER_FIRM_ID: number:19148:true
+                      SUPREME_COURT: boolean:false:false
+                      MERITS_EVIDENCE_REQD: boolean:true:false
+                      CASE_OWNER_STD_FAMILY_MERITS: boolean:true:false
+                      EVIDENCE_DV_FINDING_FACT_2A: boolean:false:false
+                      EDUCATION: boolean:false:false
+                      EVIDENCE_EXPERT_REPORT: boolean:false:false
+                      APP_INCLUDES_SCA_PROCS: boolean:false:false
+                      REASON_SEPARATE_REP_REQ: text:stuff:true
+                      PROCS_ARE_BEFORE_THE_COURT: boolean:false:true
+                      URGENT_FLAG: boolean:false:true
+                      CLIENT_COHABITING: boolean:false:false
+                      EVIDENCE_MEDIATOR_APP7A: boolean:false:false
+                      DEC_AGAINST_INSTRUCTIONS: boolean:false:true
+                      DATE_ASSESSMENT_STARTED: date:10-06-2021:true
+                      DECLARATION_CLIENT_TEXT: text:1.   a) Client?s Merits Declaration:false
+                      DP_WITH_JUDICIAL_REVIEW: boolean:false:false
+                      CLIENT_HAS_RECEIVED_LA_BEFORE: boolean:false:true
+                      EMERGENCY_DEC_SIGNED: boolean:false:false
+                      UPLOAD_SEPARATE_STATEMENT: boolean:true:true
+                      PROVIDER_HAS_DP: boolean:true:false
+                      PUBLIC_LAW_NON_FAMILY: boolean:false:false
+                      FH_LOWER_PROVIDED: boolean:false:true
+                      EVIDENCE_LETTER_BEFORE_ACTION: boolean:false:false
+                      REASON_NO_ATTEMPT_TO_SETTLE: text:violence:true
+                      NON_MAND_EVIDENCE_EXPERT_EXIST: boolean:false:false
+                      CAT_OF_LAW_HIGH_LEVEL: text:Family:false
+                      EVIDENCE_DV_IDVA: boolean:false:false
+                      UPPER_TRIBUNAL_IMM_ASY: boolean:false:false
+                      EVIDENCE_DV_PROT_INJUNCT: boolean:false:false
+                      EVIDENCE_DV_SUPPORT_ORG: boolean:false:false
+                      CLIENT_WIDOWED: boolean:false:false
+                      EVIDENCE_DV_UNDERTAKING_2A: boolean:false:false
+                      NON_MAND_EVIDENCE_ICA_LETTER: boolean:false:false
+                      MERITS_OPA_RELEASE: text:18A:false
+                      IMMIGRATION: boolean:false:false
+                      APP_INCLUDES_RELATED_PROCS: boolean:false:false
+                      CLIENT_MARRIED: boolean:false:false
+                      PROPORTIONALITY_QUESTION_APP: boolean:true:false
+                      EVIDENCE_CA_CRIME_PROCS: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA2A: text:My solicitors have given me to
+                        keep::false
+                      SA_INTRODUCTION: boolean:true:false
+                      CHILD_MUST_BE_INCLUDED: boolean:true:false
+                      NON_MAND_EVIDENCE_EXPERT_RPT: boolean:false:false
+                      NON_MAND_EVIDENCE_AMD_CORR: boolean:false:false
+                      ROUTING_SCU: boolean:false:false
+                      URGENT_DIRECTIONS: boolean:false:false
+                      CAT_OF_LAW_MEANING: text:Family:false
+                      APP_RELATES_EPO_EXTENDEPO_SAO: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA3A: text:> The Legal Aid Agency?s leaflet
+                        about Legal Aid (?Paying for your Legal Aid? leaflet available
+                        at https://www.gov.uk/guidance/funding-and-costs-assessment-for-civil-and-crime-matters):false
+                      APPLICATION_CASE_REF: text:300001333536:true
+                      EMPLOYMENT_APPEAL_TRIBUNAL: boolean:false:false
+                      PRE_CERT_COSTS: currency:0.00:false
+                      AMENDMENT: boolean:false:false
+                      EVIDENCE_CA_PROTECTIVE_INJ: boolean:false:false
+                      EMERGENCY_DPS_APP_AMD: boolean:true:false
+                      FIRST_NAME: text:Dave:true
+                      MENTAL_HEALTH: boolean:false:false
+                      URGENT_APPLICATION: boolean:false:false
+                      APP_INC_SECURE_ACCOM: boolean:false:false
+                      EVIDENCE_CA_FINDING_FACT: boolean:false:false
+                      HOUSING: boolean:false:false
+                      DELEGATED_FUNCTIONS_DATE: date:09-06-2021:true
+                      DECLARATION_REVOKE_IMP_SUBDP: boolean:true:true
+                      MERITS_CERT_PREDICTED_COSTS: currency:6000.00:false
+                      EMERGENCY_FURTHER_INFORMATION: text:stuff:true
+                      DATE_OF_BIRTH: date:20-12-1979:true
+                      CROWN_COURT: boolean:false:false
+                      SCA_AUTO_GRANT: boolean:false:false
+                      NON_MAND_EVIDENCE_AMD_PLEAD: boolean:false:false
+                      CLIENT_DIVORCED: boolean:false:false
+                      CLIENT_JUDICIALLY_SEPARATED: boolean:false:false
+                      PREP_OF_STATEMENT_PAPERS: boolean:false:false
+                      DEC_CLIENT_TEXT_PARA5A: text:My solicitors have explained the
+                        LAA Statutory Charge to me. In particular, my solicitors have
+                        advised that if I recover or preserve any property or asset,
+                        the Statutory Charge may arise, which could be payable immediately
+                        or postponed and registered as an interest - bearing charge
+                        on my home at the Legal Aid Agency?s discretion.:false
+                      CLINICAL_NEGLIGENCE: boolean:false:false
+                      _SYSTEM_PUI_USERID: text:MARTIN.RONAN@DAVIDGRAY.CO.UK:true
+                      MARITIAL_STATUS: text:U:true
+                      MERITS_DECLARATION_SCREEN: boolean:true:true
+                      APP_INC_CHILDREN_PROCS: boolean:true:false
+                      DV_LEGAL_HELP_PROVIDED: boolean:false:true
+                      MEDIATION_APPLICABLE: boolean:true:false
+                      CLIENT_CIVIL_PARTNER: boolean:false:false
+                      EVIDENCE_AMD_SOLICITOR_RPT: boolean:false:false
+                Entity[1]:
+                  SequenceNumber: '2'
+                  EntityName: PROCEEDING
+                  Instances:
+                    InstanceLabel: P_36809812
+                    Attributes:
+                      MATRIMONIAL_PROCEEDING: text:No:false
+                      PROC_IMMIGRATION_RELATED: boolean:false:false
+                      FAM_PROSP_VERY_POOR: boolean:false:false
+                      PROC_DEFAULT_LEVEL_OF_SERVICE: text:3:false
+                      REQUESTED_SCOPE: text:MULTIPLE:true
+                      FAM_PROSP_UNCERTAIN: boolean:false:false
+                      EXPERT_COST_FAMILY: currency:0.00:true
+                      PROC_CHILD_ABDUCTION: text:No:false
+                      PROPORTIONALITY_QUESTION: text:Yes:false
+                      FAM_PROSP_POOR: boolean:false:false
+                      CLIENT_INV_TYPE_CHILD: boolean:false:false
+                      CLIENT_INV_TYPE_PERSONAL_REP: boolean:false:false
+                      OVERWHELMING_IMPORTANCE: boolean:false:false
+                      PROCEEDING_ID: text:P_36809812:true
+                      PROCEEDING_TYPE: text:0:false
+                      LEVEL_OF_SERV_FHH: boolean:true:false
+                      FAM_PROSP_MARGINAL: boolean:false:false
+                      PROCEEDING_INCLUDES_CHILD: text:No:false
+                      PROC_CA_GATEWAY_APPLIES: boolean:false:false
+                      APPEAL_IN_SUPREME_COURT: boolean:false:false
+                      PROC_SCHED1_TRUE: boolean:false:false
+                      LEVEL_OF_SERVICE: text:3:true
+                      LEVEL_OF_SERV_FR: boolean:true:false
+                      CLIENT_INV_TYPE_INTERVENOR: boolean:false:false
+                      PROC_OUTCOME_NO_OUTCOME: boolean:true:false
+                      CLIENT_BRINGING_OR_DEFENDING: boolean:false:false
+                      SCOPE_LIMIT_IS_DEFAULT: boolean:false:true
+                      SCA_APPEAL_FINAL_ORDER: boolean:false:false
+                      DAMAGES_AGAINST_POLICE: text:No:false
+                      COUNSEL_FEE_FAMILY: currency:0.00:true
+                      PROCEEDING_APPLICATION_TYPE: text:Both:false
+                      CLIENT_INV_TYPE_BRING_3RD_PTY: boolean:false:false
+                      PROC_DELEGATED_FUNCTIONS_DATE: date:09-06-2021:false
+                      PROC_INVOLVING_FIN_AND_PROP: text:No:false
+                      PROCEEDING_JUDICIAL_REVIEW: boolean:false:false
+                      WARNING_LETTER_SENT: boolean:true:true
+                      SMOD_APPLICABLE: text:No:false
+                      POLICE_NOTIFIED: boolean:true:true
+                      FAMILY_PROSPECTS_OF_SUCCESS: text:50% or Better:true
+                      INJ_RESPONDENT_CAPACITY: boolean:true:true
+                      PROC_PREDICTED_COST_FAMILY: currency:3000.00:false
+                      LEAD_PROCEEDING_MERITS: boolean:true:false
+                      CLIENT_INV_TYPE_OTHER: boolean:false:false
+                      MATTER_TYPE_STAND_ALONE: text:No:false
+                      PROC_MEANING: text:Occupation order-Domestic Abuse:false
+                      NON_QUANTIFIABLE_REMEDY: boolean:false:false
+                      PROC_IS_SCA_OR_RELATED: text:No:false
+                      PROCEEDING_CASE_OWNER_SCU: boolean:false:false
+                      PRIVATE_FUNDING_APPLICABLE: boolean:false:false
+                      PROC_DV_GATEWAY_APPLIES: boolean:false:false
+                      PROCEEDING_LIMITATION_DESC: text:MULTIPLE:false
+                      PROCEEDING_NAME: text:DA005:true
+                      IMMIGRATION_QUESTION_APPLIES: text:No:false
+                      BAIL_CONDITIONS_SET: boolean:false:true
+                      ROUTING_FOR_PROCEEDING: text:Standard Family Merits:false
+                      DISBURSEMENT_COST_FAMILY: currency:0.00:true
+                      PROCEEDING_DESCRIPTION: text:to be represented on an application
+                        for an occupation order.:false
+                      PROC_RELATED_SCA_OR_RELATED: boolean:false:false
+                      CLIENT_DEFENDANT_3RD_PTY: boolean:false:false
+                      FAM_PROSP_50_OR_BETTER: boolean:true:false
+                      PROSPECTS_OF_SUCCESS: text:FA:false
+                      HIGH_COST_CASE_ROUTING: text:VHCC:false
+                      NEW_OR_EXISTING: text:NEW:true
+                      PROC_RELATED_PROCEEDING: boolean:false:false
+                      DOM_VIOLENCE_WAIVER_APPLIES: text:Yes:false
+                      CLIENT_INV_TYPE_BRING_COUNTER: boolean:false:false
+                      NEW_OR_EXISTING_MERITS: text:NEW:false
+                      PROCEEDING_LIMITATION_MEANING: text:MULTIPLE:false
+                      CLIENT_INV_TYPE_DEF_COUNTER: boolean:false:false
+                      LEAD_PROCEEDING: boolean:true:true
+                      PROC_MATTER_TYPE_DESC: text:Domestic Abuse:false
+                      SIGNIFICANT_WIDER_PUB_INTEREST: boolean:false:false
+                      PROC_INVOLVING_CHILDREN: text:No:false
+                      PROC_INVOLVING_INJUNCTION: text:Yes:false
+                      PROC_AVAILABLE_AMENDMENT_ONLY: text:No:false
+                      PROC_FIN_REP_CATEGORY: text:Domestic Violence:false
+                      CLIENT_INV_TYPE_APPELLANT: boolean:false:false
+                      MATTER_TYPE_CHILD_ABDUCTION: text:No:false
+                      PRIVATE_FUNDING_CONSIDERED: text:No:false
+                      PROFIT_COST_FAMILY: currency:3000.00:true
+                      PROC_MATTER_TYPE_MEANING: text:Domestic Abuse:false
+                      PROC_OUTCOME_RECORDED: boolean:false:false
+                      INJ_RECENT_INCIDENT_DETAIL: text:stuff:true
+                      CLIENT_INV_TYPE_INTERPLEADER: boolean:false:false
+                      PROC_IS_MERITS_TESTED: text:Yes:false
+                      CLIENT_INVOLVEMENT_TYPE: text:A:true
+                      CLIENT_INV_TYPE_DEFEND_PROCS: boolean:false:false
+                      CLIENT_INV_TYPE_BRINGING_PROCS: boolean:true:false
+                      PROC_SUBJECT_TO_MEDIATION: text:Yes:false
+                      PROC_CARE_SUPERV_OR_RELATED: text:No:false
+                      MATTER_TYPE: text:MINJN:true
+                      PROC_REGISTER_FOREIGN_ORDER: text:No:false
+                      PROC_POSSESSION: text:No:false
+                      CLIENT_INV_TYPE_JOINED_PARTY: boolean:false:false
+                      PROC_SUBJECT_TO_DP_CHECK: text:Yes:false
+                      MATTER_TYPE_PUBLIC_FAMILY: text:No:false
+                      LEVEL_OF_SERV_IH: boolean:false:false
+                      PROC_UPPER_TRIBUNAL: text:No:false
+                      PROC_LAR_GATEWAY: boolean:false:false
+                      PROCEEDING_LEVEL_OF_SERVICE: text:Full Representation:false
+                      PROCEEDING_STAND_ALONE: text:No:false
+                      LEVEL_OF_SERV_INQUEST: boolean:false:false
+                      CLIENT_INVOLVEMENT: text:Applicant/Claimant/Petitioner:false
+                      PROC_IS_SCA_APPEAL: boolean:false:false
+                      MATTER_TYPE_PRIVATE_FAMILY: text:Yes:false
+                      ACTION_DAMAGES_AGAINST_POLICE: boolean:false:false
+                  Instances[1]:
+                    InstanceLabel: P_36809816
+                    Attributes:
+                      MATRIMONIAL_PROCEEDING: text:No:false
+                      PROC_IMMIGRATION_RELATED: boolean:false:false
+                      WORK_IN_SCH_ONE: boolean:true:true
+                      FAM_PROSP_VERY_POOR: boolean:false:false
+                      PROC_DEFAULT_LEVEL_OF_SERVICE: text:1:false
+                      REQUESTED_SCOPE: text:MULTIPLE:true
+                      FAM_PROSP_UNCERTAIN: boolean:false:false
+                      EXPERT_COST_FAMILY: currency:0.00:true
+                      PROC_CHILD_ABDUCTION: text:No:false
+                      PROPORTIONALITY_QUESTION: text:No:false
+                      FAM_PROSP_POOR: boolean:false:false
+                      CLIENT_INV_TYPE_CHILD: boolean:false:false
+                      CLIENT_INV_TYPE_PERSONAL_REP: boolean:false:false
+                      OVERWHELMING_IMPORTANCE: boolean:false:false
+                      PROCEEDING_ID: text:P_36809816:true
+                      PROCEEDING_TYPE: text:0:false
+                      LEVEL_OF_SERV_FHH: boolean:true:false
+                      FAM_PROSP_MARGINAL: boolean:false:false
+                      PROCEEDING_INCLUDES_CHILD: text:Yes:false
+                      PROC_CA_GATEWAY_APPLIES: boolean:true:false
+                      APPEAL_IN_SUPREME_COURT: boolean:false:false
+                      PROC_SCHED1_TRUE: boolean:true:false
+                      LEVEL_OF_SERVICE: text:1:true
+                      LEVEL_OF_SERV_FR: boolean:true:false
+                      CLIENT_INV_TYPE_INTERVENOR: boolean:false:false
+                      PROC_OUTCOME_NO_OUTCOME: boolean:true:false
+                      CLIENT_BRINGING_OR_DEFENDING: boolean:false:false
+                      SCOPE_LIMIT_IS_DEFAULT: boolean:false:true
+                      SCA_APPEAL_FINAL_ORDER: boolean:false:false
+                      DAMAGES_AGAINST_POLICE: text:No:false
+                      COUNSEL_FEE_FAMILY: currency:0.00:true
+                      PROCEEDING_APPLICATION_TYPE: text:Both:false
+                      CLIENT_INV_TYPE_BRING_3RD_PTY: boolean:false:false
+                      PROC_DELEGATED_FUNCTIONS_DATE: date:09-06-2021:false
+                      PROC_INVOLVING_FIN_AND_PROP: text:No:false
+                      PROCEEDING_JUDICIAL_REVIEW: boolean:false:false
+                      SMOD_APPLICABLE: text:No:false
+                      FAMILY_PROSPECTS_OF_SUCCESS: text:50% or Better:true
+                      PROC_PREDICTED_COST_FAMILY: currency:3000.00:false
+                      LEAD_PROCEEDING_MERITS: boolean:false:false
+                      CLIENT_INV_TYPE_OTHER: boolean:false:false
+                      MATTER_TYPE_STAND_ALONE: text:No:false
+                      PROC_MEANING: text:Prohibited Steps Order-S8:false
+                      NON_QUANTIFIABLE_REMEDY: boolean:false:false
+                      PROC_IS_SCA_OR_RELATED: text:No:false
+                      PROCEEDING_CASE_OWNER_SCU: boolean:false:false
+                      PRIVATE_FUNDING_APPLICABLE: boolean:false:false
+                      PROC_DV_GATEWAY_APPLIES: boolean:true:false
+                      PROCEEDING_LIMITATION_DESC: text:MULTIPLE:false
+                      CROSS_BORDER_DISPUTES_C: boolean:true:true
+                      PROCEEDING_NAME: text:SE003:true
+                      IMMIGRATION_QUESTION_APPLIES: text:No:false
+                      ROUTING_FOR_PROCEEDING: text:Standard Family Merits:false
+                      DISBURSEMENT_COST_FAMILY: currency:0.00:true
+                      PROCEEDING_DESCRIPTION: text:to be represented on an application
+                        for a prohibited steps order.:false
+                      PROC_RELATED_SCA_OR_RELATED: boolean:false:false
+                      CLIENT_DEFENDANT_3RD_PTY: boolean:false:false
+                      CHILD_PARTIES_C: boolean:false:true
+                      FAM_PROSP_50_OR_BETTER: boolean:true:false
+                      PROSPECTS_OF_SUCCESS: text:FA:false
+                      HIGH_COST_CASE_ROUTING: text:VHCC:false
+                      NEW_OR_EXISTING: text:NEW:true
+                      PROC_RELATED_PROCEEDING: boolean:false:false
+                      DOM_VIOLENCE_WAIVER_APPLIES: text:No:false
+                      CLIENT_INV_TYPE_BRING_COUNTER: boolean:false:false
+                      NEW_OR_EXISTING_MERITS: text:NEW:false
+                      PROCEEDING_LIMITATION_MEANING: text:MULTIPLE:false
+                      CLIENT_INV_TYPE_DEF_COUNTER: boolean:false:false
+                      LEAD_PROCEEDING: boolean:false:true
+                      PROC_MATTER_TYPE_DESC: text:Children-Section 8 orders:false
+                      SIGNIFICANT_WIDER_PUB_INTEREST: boolean:false:false
+                      PROC_INVOLVING_CHILDREN: text:Yes:false
+                      PROC_INVOLVING_INJUNCTION: text:No:false
+                      PROC_AVAILABLE_AMENDMENT_ONLY: text:No:false
+                      PROC_FIN_REP_CATEGORY: text:Private Law Children:false
+                      CLIENT_INV_TYPE_APPELLANT: boolean:false:false
+                      MATTER_TYPE_CHILD_ABDUCTION: text:No:false
+                      PRIVATE_FUNDING_CONSIDERED: text:No:false
+                      PROFIT_COST_FAMILY: currency:3000.00:true
+                      PROC_MATTER_TYPE_MEANING: text:Section 8 orders:false
+                      PROC_OUTCOME_RECORDED: boolean:false:false
+                      CLIENT_INV_TYPE_INTERPLEADER: boolean:false:false
+                      PROC_IS_MERITS_TESTED: text:Yes:false
+                      CLIENT_INVOLVEMENT_TYPE: text:A:true
+                      CLIENT_INV_TYPE_DEFEND_PROCS: boolean:false:false
+                      CLIENT_INV_TYPE_BRINGING_PROCS: boolean:true:false
+                      PROC_SUBJECT_TO_MEDIATION: text:Yes:false
+                      PROC_CARE_SUPERV_OR_RELATED: text:No:false
+                      MATTER_TYPE: text:KSEC8:true
+                      PROC_REGISTER_FOREIGN_ORDER: text:No:false
+                      PROC_POSSESSION: text:No:false
+                      CLIENT_INV_TYPE_JOINED_PARTY: boolean:false:false
+                      PROC_SUBJECT_TO_DP_CHECK: text:Yes:false
+                      MATTER_TYPE_PUBLIC_FAMILY: text:No:false
+                      LEVEL_OF_SERV_IH: boolean:false:false
+                      PROC_UPPER_TRIBUNAL: text:No:false
+                      PROC_LAR_GATEWAY: boolean:true:false
+                      PROCEEDING_LEVEL_OF_SERVICE: text:Family Help (Higher):false
+                      PROCEEDING_STAND_ALONE: text:No:false
+                      UNLAWFUL_REMOVAL_OF_CHILDREN_C: boolean:false:true
+                      LEVEL_OF_SERV_INQUEST: boolean:false:false
+                      CLIENT_INVOLVEMENT: text:Applicant/Claimant/Petitioner:false
+                      PROC_IS_SCA_APPEAL: boolean:false:false
+                      MATTER_TYPE_PRIVATE_FAMILY: text:Yes:false
+                      ACTION_DAMAGES_AGAINST_POLICE: boolean:false:false
+                Entity[2]:
+                  SequenceNumber: '3'
+                  EntityName: FAMILY_STATEMENT
+                  Instances:
+                    InstanceLabel: the family statement of case1
+                    Attributes:
+                      FAMILY_STMT_DETAIL: text:stuff:true
+                      FAMILY_STATEMENT_INSTANCE: text:-:false
+                Entity[3]:
+                  SequenceNumber: '4'
+                  EntityName: OPPONENT_OTHER_PARTIES
+                  Instances:
+                    InstanceLabel: OPPONENT_36809820
+                    Attributes:
+                      RELATIONSHIP_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_CASE_INTERVENOR: boolean:false:false
+                      RELATIONSHIP_TENANT: boolean:false:false
+                      RELATIONSHIP_MEDICAL_PRO: boolean:false:false
+                      RELATIONSHIP_CASE_OPPONENT: boolean:true:false
+                      RELATIONSHIP_EMPLOYER: boolean:false:false
+                      RELATIONSHIP_NONE: boolean:false:false
+                      OTHER_PARTY_PERSON: boolean:true:false
+                      PARTY_IS_A_CHILD: boolean:false:false
+                      OTHER_PARTY_ORG: boolean:false:false
+                      RELATIONSHIP_STEP_PARENT: boolean:false:false
+                      RELATIONSHIP_CASE_GAL: boolean:false:false
+                      RELATIONSHIP_EX_HUSBAND_WIFE: boolean:false:false
+                      RELATIONSHIP_LEGAL_GUARDIAN: boolean:false:false
+                      RELATIONSHIP_SOL_BARRISTER: boolean:false:false
+                      RELATIONSHIP_EX_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_LOCAL_AUTHORITY: boolean:false:false
+                      OPP_RELATIONSHIP_TO_CASE: text:Opponent:false
+                      RELATIONSHIP_PARENT: boolean:false:false
+                      RELATIONSHIP_OTHER_FAM_MEMBER: boolean:false:false
+                      RELATIONSHIP_CASE_BENEFICIARY: boolean:false:false
+                      OTHER_PARTY_ID: text:OPPONENT_36809820:true
+                      RELATIONSHIP_GRANDPARENT: boolean:false:false
+                      RELATIONSHIP_LANDLORD: boolean:false:false
+                      RELATIONSHIP_CHILD: boolean:false:false
+                      OTHER_PARTY_NAME: text:Dr Stephanie Strange:true
+                      RELATIONSHIP_CUSTOMER: boolean:false:false
+                      OTHER_PARTY_NAME_MERITS: text:Dr Stephanie Strange:false
+                      RELATIONSHIP_CASE_INT_PARTY: boolean:false:false
+                      RELATIONSHIP_TO_CASE: text:OPP:true
+                      RELATIONSHIP_PROPERTY_OWNER: boolean:false:false
+                      RELATIONSHIP_SUPPLIER: boolean:false:false
+                      RELATIONSHIP_EMPLOYEE: boolean:false:false
+                      RELATIONSHIP_CASE_CHILD: boolean:false:false
+                      RELATIONSHIP_CASE_AGENT: boolean:false:false
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OPP_RELATIONSHIP_TO_CLIENT: text:Unknown:false
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                      RELATIONSHIP_HUSBAND_WIFE: boolean:false:false
+                  Instances[1]:
+                    InstanceLabel: OPPONENT_36809822
+                    Attributes:
+                      RELATIONSHIP_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_CASE_INTERVENOR: boolean:false:false
+                      RELATIONSHIP_TENANT: boolean:false:false
+                      RELATIONSHIP_MEDICAL_PRO: boolean:false:false
+                      RELATIONSHIP_CASE_OPPONENT: boolean:false:false
+                      RELATIONSHIP_EMPLOYER: boolean:false:false
+                      RELATIONSHIP_NONE: boolean:false:false
+                      OTHER_PARTY_PERSON: boolean:true:false
+                      PARTY_IS_A_CHILD: boolean:true:false
+                      OTHER_PARTY_ORG: boolean:false:false
+                      RELATIONSHIP_STEP_PARENT: boolean:false:false
+                      RELATIONSHIP_CASE_GAL: boolean:false:false
+                      RELATIONSHIP_EX_HUSBAND_WIFE: boolean:false:false
+                      RELATIONSHIP_LEGAL_GUARDIAN: boolean:false:false
+                      RELATIONSHIP_SOL_BARRISTER: boolean:false:false
+                      RELATIONSHIP_EX_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_LOCAL_AUTHORITY: boolean:false:false
+                      OPP_RELATIONSHIP_TO_CASE: text:Child:false
+                      RELATIONSHIP_PARENT: boolean:false:false
+                      RELATIONSHIP_OTHER_FAM_MEMBER: boolean:false:false
+                      RELATIONSHIP_CASE_BENEFICIARY: boolean:false:false
+                      OTHER_PARTY_ID: text:OPPONENT_36809822:true
+                      RELATIONSHIP_GRANDPARENT: boolean:false:false
+                      OPPONENT_DOB: date:20-12-2017:true
+                      RELATIONSHIP_LANDLORD: boolean:false:false
+                      RELATIONSHIP_CHILD: boolean:false:false
+                      OTHER_PARTY_NAME: text:Master Junior strange:true
+                      RELATIONSHIP_CUSTOMER: boolean:false:false
+                      OTHER_PARTY_NAME_MERITS: text:Master Junior strange:false
+                      RELATIONSHIP_CASE_INT_PARTY: boolean:false:false
+                      RELATIONSHIP_TO_CASE: text:CHILD:true
+                      RELATIONSHIP_PROPERTY_OWNER: boolean:false:false
+                      RELATIONSHIP_SUPPLIER: boolean:false:false
+                      RELATIONSHIP_EMPLOYEE: boolean:false:false
+                      RELATIONSHIP_CASE_CHILD: boolean:true:false
+                      OPPONENT_DOB_MERITS: date:20-12-2017:false
+                      RELATIONSHIP_CASE_AGENT: boolean:false:false
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OPP_RELATIONSHIP_TO_CLIENT: text:Unknown:false
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                      RELATIONSHIP_HUSBAND_WIFE: boolean:false:false
+                  Instances[2]:
+                    InstanceLabel: OPPONENT_36809824
+                    Attributes:
+                      RELATIONSHIP_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_CASE_INTERVENOR: boolean:false:false
+                      RELATIONSHIP_TENANT: boolean:false:false
+                      RELATIONSHIP_MEDICAL_PRO: boolean:false:false
+                      RELATIONSHIP_CASE_OPPONENT: boolean:false:false
+                      RELATIONSHIP_EMPLOYER: boolean:false:false
+                      RELATIONSHIP_NONE: boolean:false:false
+                      OTHER_PARTY_PERSON: boolean:true:false
+                      PARTY_IS_A_CHILD: boolean:true:false
+                      OTHER_PARTY_ORG: boolean:false:false
+                      RELATIONSHIP_STEP_PARENT: boolean:false:false
+                      RELATIONSHIP_CASE_GAL: boolean:false:false
+                      RELATIONSHIP_EX_HUSBAND_WIFE: boolean:false:false
+                      RELATIONSHIP_LEGAL_GUARDIAN: boolean:false:false
+                      RELATIONSHIP_SOL_BARRISTER: boolean:false:false
+                      RELATIONSHIP_EX_CIVIL_PARTNER: boolean:false:false
+                      RELATIONSHIP_LOCAL_AUTHORITY: boolean:false:false
+                      OPP_RELATIONSHIP_TO_CASE: text:Child:false
+                      RELATIONSHIP_PARENT: boolean:false:false
+                      RELATIONSHIP_OTHER_FAM_MEMBER: boolean:false:false
+                      RELATIONSHIP_CASE_BENEFICIARY: boolean:false:false
+                      OTHER_PARTY_ID: text:OPPONENT_36809824:true
+                      RELATIONSHIP_GRANDPARENT: boolean:false:false
+                      OPPONENT_DOB: date:20-05-2018:true
+                      RELATIONSHIP_LANDLORD: boolean:false:false
+                      RELATIONSHIP_CHILD: boolean:false:false
+                      OTHER_PARTY_NAME: text:Ms ALittle Strange:true
+                      RELATIONSHIP_CUSTOMER: boolean:false:false
+                      OTHER_PARTY_NAME_MERITS: text:Ms ALittle Strange:false
+                      RELATIONSHIP_CASE_INT_PARTY: boolean:false:false
+                      RELATIONSHIP_TO_CASE: text:CHILD:true
+                      RELATIONSHIP_PROPERTY_OWNER: boolean:false:false
+                      RELATIONSHIP_SUPPLIER: boolean:false:false
+                      RELATIONSHIP_EMPLOYEE: boolean:false:false
+                      RELATIONSHIP_CASE_CHILD: boolean:true:false
+                      OPPONENT_DOB_MERITS: date:20-05-2018:false
+                      RELATIONSHIP_CASE_AGENT: boolean:false:false
+                      OTHER_PARTY_TYPE: text:PERSON:true
+                      OPP_RELATIONSHIP_TO_CLIENT: text:Unknown:false
+                      RELATIONSHIP_TO_CLIENT: text:UNKNOWN:true
+                      RELATIONSHIP_HUSBAND_WIFE: boolean:false:false
+        DevolvedPowersDate: '2021-06-09'
+        ApplicationAmendmentType: SUBDP
+        LARDetails:
+          LARScopeFlag: 'true'
+      RecordHistory:
+        DateCreated: '2021-06-10T10:14:07.831'
+        LastUpdatedBy:
+          UserLoginID: MARTIN.RONAN@DAVIDGRAY.CO.UK
+          UserName: MARTIN.RONAN@DAVIDGRAY.CO.UK
+          UserType: EXTERNAL
+        DateLastUpdated: '2021-06-10T10:14:07.832'
+      CaseDocs: {}
