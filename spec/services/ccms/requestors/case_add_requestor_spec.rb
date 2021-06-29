@@ -49,7 +49,7 @@ module CCMS
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
         let(:proceeding_type) { create :proceeding_type, :with_real_data }
-        let(:opponent) { create :opponent, police_notified: true }
+        let(:opponent) { create :opponent, full_name: 'Joffrey Test-Opponent', police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
@@ -59,6 +59,8 @@ module CCMS
         let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
+        let!(:involved_child1) { create :involved_child, full_name: 'First TestChild', date_of_birth: Date.parse('2019-01-20'), legal_aid_application: legal_aid_application }
+        let!(:involved_child2) { create :involved_child, full_name: 'Second TestChild', date_of_birth: Date.parse('2020-02-15'), legal_aid_application: legal_aid_application }
 
         before do
           allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return('FakeUser')
@@ -75,9 +77,24 @@ module CCMS
         end
 
         it 'generates the expected xml' do
+          allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_000_001, 88_000_002)
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
             test_data_xml = ccms_data_from_file 'case_add_request.xml'
             expect(expected_xml).to eq test_data_xml
+          end
+        end
+
+        context 'when the multiple proceedings flag is on' do
+          before do
+            Setting.setting.update!(allow_multiple_proceedings: true)
+          end
+
+          it 'generates the expected xml' do
+            expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+            travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
+              test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
+              expect(expected_xml).to eq test_data_xml
+            end
           end
         end
       end

@@ -20,9 +20,8 @@
   entity_name: PROCEEDING
   yaml_section: :proceeding_means
 
-- method: :generate_entity
+- method: :generate_opponent_other_parties_means_entity
   entity_name: OPPONENT_OTHER_PARTIES
-  instance_label: OPPONENT_7713451
   yaml_section: :opponent_other_parties_means
 
 - method: :generate_entity

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_092032) do
+ActiveRecord::Schema.define(version: 2021_06_24_130422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -256,6 +256,12 @@ ActiveRecord::Schema.define(version: 2021_06_16_092032) do
     t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
   end
 
+  create_table "ccms_opponent_ids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "serial_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "status"
@@ -423,6 +429,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_092032) do
     t.date "date_of_birth"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "ccms_opponent_id"
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
   end
 
@@ -563,6 +570,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_092032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "full_name"
+    t.integer "ccms_opponent_id"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 

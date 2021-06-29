@@ -7,6 +7,11 @@ module CCMS
 
       attr_reader :ccms_attribute_keys, :submission
 
+      delegate :involved_children,
+               :opponent, to: :legal_aid_application
+
+      attr_accessor :legal_aid_application
+
       MEANS_ENTITY_CONFIG_DIR = Rails.root.join('config/ccms/means_entity_configs')
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
@@ -125,7 +130,14 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        generate_other_party(xml)
+        if Setting.allow_multiple_proceedings?
+          generate_opponent(xml, @legal_aid_application.opponent)
+        else
+          generate_other_party(xml)
+        end
+        @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
+          generate_involved_child(xml, child)
+        end
       end
 
       def generate_other_party(xml) # rubocop:disable Metrics/MethodLength
@@ -139,6 +151,49 @@ module CCMS
               xml.__send__('ns2:RelationToClient', 'NONE')
               xml.__send__('ns2:RelationToCase', 'OPP')
               xml.__send__('ns2:Address')
+              xml.__send__('ns2:ContactDetails')
+            end
+          end
+        end
+      end
+
+      def generate_opponent(xml, opponent) # rubocop:disable Metrics/MethodLength
+        first_name, last_name = opponent.split_full_name
+        xml.__send__('ns2:OtherParty') do
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{opponent.generate_ccms_opponent_id}")
+          xml.__send__('ns2:SharedInd', false)
+          xml.__send__('ns2:OtherPartyDetail') do
+            xml.__send__('ns2:Person') do
+              xml.__send__('ns2:Name') do
+                xml.__send__('ns2:Title', '.')
+                xml.__send__('ns2:Surname', last_name)
+                xml.__send__('ns2:FirstName', first_name)
+              end
+              xml.__send__('ns2:Address')
+              xml.__send__('ns2:RelationToClient', 'NONE')
+              xml.__send__('ns2:RelationToCase', 'OPP')
+              xml.__send__('ns2:ContactDetails')
+            end
+          end
+        end
+      end
+
+      def generate_involved_child(xml, child) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        first_name, last_name = child.split_full_name
+        xml.__send__('ns2:OtherParty') do
+          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{child.generate_ccms_opponent_id}")
+          xml.__send__('ns2:SharedInd', false)
+          xml.__send__('ns2:OtherPartyDetail') do
+            xml.__send__('ns2:Person') do
+              xml.__send__('ns2:Name') do
+                xml.__send__('ns2:Title', '.')
+                xml.__send__('ns2:Surname', last_name)
+                xml.__send__('ns2:FirstName', first_name)
+              end
+              xml.__send__('ns2:DateOfBirth', child.date_of_birth.strftime('%F'))
+              xml.__send__('ns2:Address')
+              xml.__send__('ns2:RelationToClient', 'UNKNOWN')
+              xml.__send__('ns2:RelationToCase', 'CHILD')
               xml.__send__('ns2:ContactDetails')
             end
           end
@@ -240,6 +295,47 @@ module CCMS
             end
           end
         end
+      end
+
+      def generate_opponent_other_parties_means_entity(xml, sequence_no, config)
+        if Setting.allow_multiple_proceedings?
+          generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
+        else
+          generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, config)
+        end
+      end
+
+      def generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        other_parties.each { |other_party| generate_opponent_other_parties_means_instance(xml, other_party, config) }
+      end
+
+      def generate_opponent_other_parties_means_instance(xml, other_party, config)
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party: other_party)
+          end
+        end
+      end
+
+      #
+      # TODO: Deprecate this method once we've switched multiple proceedings on
+      #
+      def generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, _config)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_means_single_proceeding)
+          end
+        end
+      end
+
+      def other_parties
+        [opponent] + involved_children
       end
 
       def predicate_true?(config)
@@ -351,7 +447,7 @@ module CCMS
           xml.__send__('ns0:ScreenName', 'SUMMARY')
           xml.__send__('ns0:Entity') { generate_global_merits_entity(xml, 1) }
           xml.__send__('ns0:Entity') { generate_merits_proceeding_entity(xml, 2) }
-          xml.__send__('ns0:Entity') { generate_opponent_other_parties(xml, 4) }
+          xml.__send__('ns0:Entity') { generate_opponent_other_parties_merits_entity(xml, 4) }
         end
       end
 
@@ -400,12 +496,35 @@ module CCMS
         end
       end
 
-      def generate_opponent_other_parties(xml, sequence_no)
+      def generate_opponent_other_parties_merits_entity(xml, sequence_no)
+        if Setting.allow_multiple_proceedings?
+          generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
+        else
+          generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
+        end
+      end
+
+      def generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
         xml.__send__('ns0:SequenceNumber', sequence_no)
         xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
         xml.__send__('ns0:Instances') do
           xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits) }
+          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits_single_proceeding) }
+        end
+      end
+
+      def generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
+        xml.__send__('ns0:SequenceNumber', sequence_no)
+        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        other_parties.each { |other_party| generate_opponent_other_parties_instance_merits(xml, other_party) }
+      end
+
+      def generate_opponent_other_parties_instance_merits(xml, other_party)
+        xml.__send__('ns0:Instances') do
+          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('ns0:Attributes') do
+            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits, other_party: other_party)
+          end
         end
       end
 
