@@ -1928,8 +1928,6 @@ module CCMS
           [:global_merits, 'CURRENT_CERT_EMERGENCY'],
           [:global_merits, 'CURRENT_CERT_SUBSTANTIVE'],
           [:global_merits, 'DEC_AGAINST_INSTRUCTIONS'],
-          [:global_merits, 'DEC_AGAINST_INSTRUCT_SIGNED'],
-          [:global_merits, 'DEC_APP_NECESSARY'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA02A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA10A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA11A'],
@@ -1937,9 +1935,6 @@ module CCMS
           [:global_merits, 'DEC_CLIENT_TEXT_PARA13A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA14A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA15A'],
-          [:global_merits, 'DEC_CLIENT_TEXT_PARA16A'],
-          [:global_merits, 'DEC_CLIENT_TEXT_PARA17A'],
-          [:global_merits, 'DEC_CLIENT_TEXT_PARA18A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA2A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA3A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA5A'],
@@ -1947,8 +1942,6 @@ module CCMS
           [:global_merits, 'DEC_CLIENT_TEXT_PARA7A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA8A'],
           [:global_merits, 'DEC_CLIENT_TEXT_PARA9A'],
-          [:global_merits, 'DEC_NO_DIFFERENCES'],
-          [:global_merits, 'DEC_UNABLE_TO_ATTEND'],
           [:global_merits, 'DECLARATION_CLIENT_TEXT'],
           [:global_merits, 'DECLARATION_IS_CLIENTS'],
           [:global_merits, 'DECLARATION_IS_REPRESENTATIVES'],
@@ -2379,8 +2372,7 @@ module CCMS
           [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
           [:opponent, 'RELATIONSHIP_STEP_PARENT'],
           [:opponent, 'RELATIONSHIP_SUPPLIER'],
-          [:opponent, 'RELATIONSHIP_TENANT'],
-          [:employment, 'OUT_EMP_INFER_C_15WP3_17A']
+          [:opponent, 'RELATIONSHIP_TENANT']
         ]
       end
     end
