@@ -15,21 +15,21 @@ Feature: Citizen accessibility
     Then I should be on a page showing 'Do you agree to share 3 months of bank statements with the LAA via TrueLayer?'
     And the page is accessible
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Select your bank'
     And the page is accessible
     Then I click link "Back"
     Then I should be on a page showing 'Do you agree to share 3 months of bank statements with the LAA via TrueLayer?'
     Then I choose 'No'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Contact your solicitor to continue your application'
     And the page is accessible
     Then I click link "Back"
     Then I should be on a page showing 'Do you agree to share 3 months of bank statements with the LAA via TrueLayer?'
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I choose 'HSBC'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I am directed to TrueLayer
 
   @javascript
