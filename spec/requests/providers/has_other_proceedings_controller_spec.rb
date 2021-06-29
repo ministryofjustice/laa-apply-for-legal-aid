@@ -25,13 +25,23 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'allow multiple proceedings setting on' do
-      it 'shows the page' do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.page_title'))
+      context 'application has at least one proceeding type already selected' do
+        it 'shows the page' do
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.page_title'))
+        end
+
+        it 'shows the current number of proceedings' do
+          expect(response.body).to include('You have added 2 proceedings')
+        end
       end
 
-      it 'shows the current number of proceedings' do
-        expect(response.body).to include('You have added 2 proceedings')
+      context 'application has no proceedings selected' do
+        let(:legal_aid_application) { create :legal_aid_application }
+
+        it 'redirects to the proceedings types page' do
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+        end
       end
     end
   end
