@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+
+require File.expand_path(File.dirname(__FILE__) + '/../lib/tasks/helpers/ccms_payload_yamlizer')
+
+raise "Supply name of XML file as parameter" if ARGV.empty?
+
+CcmsPayloadYamlizer.new(ARGV.first).run
