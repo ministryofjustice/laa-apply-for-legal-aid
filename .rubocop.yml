@@ -98,3 +98,9 @@ Style/SoleNestedConditional:
 Metrics/PerceivedComplexity:
   IgnoredMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
+
+Naming/InclusiveLanguage:
+  FlaggedTerms:
+    master:
+      AllowedRegex:
+        - !ruby/regexp "/master.key/i"
