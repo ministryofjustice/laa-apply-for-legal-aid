@@ -20,5 +20,15 @@ RSpec.describe AttachmentsHelper, type: :helper do
         expect(attachments_with_size(attachments)).to eq []
       end
     end
+
+    context 'without original_filename' do
+      let(:attachment1) { create :attachment, original_filename: nil }
+      let(:attachment2) { create :attachment, original_filename: 'fake name' }
+      let(:attachments) { [attachment1, attachment2] }
+
+      it 'returns attachment_type name in its place' do
+        expect(attachments_with_size(attachments)).to match_array ['statement_of_case (15.7 KB)', 'fake name (15.7 KB)']
+      end
+    end
   end
 end
