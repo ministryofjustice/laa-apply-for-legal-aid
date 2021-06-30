@@ -359,6 +359,26 @@ module CCMS
               end
             end
           end
+
+          context 'childcare payments' do
+            let(:childcare_out) { create :transaction_type, :debit, name: 'child_care' }
+
+            before do
+              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: childcare_out)
+            end
+            it 'has attribute block' do
+              block = XmlExtractor.call(xml, :global_means, 'GB_INFER_B_12WP3_12A')
+              expect(block).to have_boolean_response true
+              expect(block).to be_user_defined
+            end
+            context 'no childcare payments' do
+              before { legal_aid_application.transaction_types.delete_all }
+              it 'does not have attribute block' do
+                block = XmlExtractor.call(xml, :global_means, 'GB_INFER_B_12WP3_12A')
+                expect(block).to have_boolean_response false
+              end
+            end
+          end
         end
 
         context 'attributes for WILL' do

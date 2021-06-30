@@ -336,6 +336,12 @@ global_means:
   GB_INPUT_B_12WP3_3A:
     generate_block?: true
     value: '#outgoing_maintenance_out?'
+  GB_INFER_B_12WP3_12A:
+    value: '#outgoing_child_care?'
+    br100_meaning: 'Childcare: Client pays for childcare?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
   GB_INFER_B_26WP3_214A:
     generate_block?: true
     value: false
