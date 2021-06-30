@@ -1,6 +1,7 @@
 module CapitalHelper
   def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
     attributes = capital_amount_attributes(capital)
+    attributes = combine_second_home_attributes(attributes)
     build_asset_list(attributes, locale_namespace, percentage_values)
   end
 
@@ -22,6 +23,15 @@ module CapitalHelper
     {
       items: items
     }
+  end
+
+  def combine_second_home_attributes(items)
+    second_home_attributes = items.select { |attr_name, _| attr_name.include?('second_home') }
+    if second_home_attributes.all? { |_, value| value.nil? }
+      items.except!(*second_home_attributes.keys)
+      items[:second_home] = nil
+    end
+    items
   end
 
   def capital_amount_items(items, locale_namespace, percentage_values)
