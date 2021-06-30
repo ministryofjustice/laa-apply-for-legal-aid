@@ -191,9 +191,7 @@ module CCMS
             end
 
             it 'assigns the sequence number of 1 to the next entity ' do
-              bank_accounts_entity = XmlExtractor.call(xml, :bank_accounts_entity)
-              doc = Nokogiri::XML(bank_accounts_entity.to_s)
-              bank_accounts_sequence = doc.xpath('//SequenceNumber').text.to_i
+              bank_accounts_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
               expect(bank_accounts_sequence).to eq 1
             end
           end
@@ -318,9 +316,7 @@ module CCMS
             end
 
             it 'assigns the sequence number to the next entity one higher than that for bank accounts' do
-              bank_acount_entity = XmlExtractor.call(xml, :bank_accounts_entity)
-              doc = Nokogiri::XML(bank_acount_entity.to_s)
-              bank_account_sequence = doc.xpath('//SequenceNumber').text.to_i
+              bank_account_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
 
               means_proceeding_entity = XmlExtractor.call(xml, :means_proceeding_entity)
               doc = Nokogiri::XML(means_proceeding_entity.to_s)
@@ -1641,6 +1637,7 @@ module CCMS
           [:main_dwelling, 'MAINTHIRD_INPUT_N_3WP2_11A'],
           [:family_statement, 'FAMILY_STMT_DETAIL'],
           [:family_statement, 'FAMILY_STATEMENT_INSTANCE'],
+          [:family_statement, 'GB_DECL_T_38WP3_32A'],
           [:change_in_circumstances],
           [:change_in_circumstances, 'CHANGE_CIRC_INPUT_T_33WP3_6A'],
           [:global_means, 'BEN_AWARD_DATE'],
@@ -1660,8 +1657,16 @@ module CCMS
           [:global_means, 'EMP_INPUT_T_3WP3_23A'],
           [:global_means, 'EMP_INPUT_T_3WP3_28A'],
           [:global_means, 'EMP_INPUT_T_3WP3_29A'],
+          [:global_means, 'GB_DECL_T_38WP3_1A'],
+          [:global_means, 'GB_DECL_T_38WP3_2A'],
+          [:global_means, 'GB_DECL_T_38WP3_3A'],
+          [:global_means, 'GB_DECL_T_38WP3_4A'],
+          [:global_means, 'GB_DECL_T_38WP3_5A'],
+          [:global_means, 'GB_DECL_T_38WP3_6A'],
+          [:global_means, 'GB_DECL_T_38WP3_7A'],
+          [:global_means, 'GB_DECL_T_38WP3_8A'],
+          [:global_means, 'GB_DECL_T_38WP3_9A'],
           [:global_means, 'GB_DECL_T_38WP3_10A'],
-          [:global_means, 'GB_DECL_T_38WP3_116A'],
           [:global_means, 'GB_DECL_T_38WP3_11A'],
           [:global_means, 'GB_DECL_T_38WP3_12A'],
           [:global_means, 'GB_DECL_T_38WP3_13A'],
@@ -1671,17 +1676,23 @@ module CCMS
           [:global_means, 'GB_DECL_T_38WP3_17A'],
           [:global_means, 'GB_DECL_T_38WP3_18A'],
           [:global_means, 'GB_DECL_T_38WP3_19A'],
-          [:global_means, 'GB_DECL_T_38WP3_1A'],
           [:global_means, 'GB_DECL_T_38WP3_20A'],
           [:global_means, 'GB_DECL_T_38WP3_21A'],
-          [:global_means, 'GB_DECL_T_38WP3_2A'],
-          [:global_means, 'GB_DECL_T_38WP3_3A'],
-          [:global_means, 'GB_DECL_T_38WP3_4A'],
-          [:global_means, 'GB_DECL_T_38WP3_5A'],
-          [:global_means, 'GB_DECL_T_38WP3_6A'],
-          [:global_means, 'GB_DECL_T_38WP3_7A'],
-          [:global_means, 'GB_DECL_T_38WP3_8A'],
-          [:global_means, 'GB_DECL_T_38WP3_9A'],
+          [:global_means, 'GB_DECL_T_38WP3_33A'],
+          [:global_means, 'GB_DECL_T_38WP3_34A'],
+          [:global_means, 'GB_DECL_T_38WP3_35A'],
+          [:global_means, 'GB_DECL_T_38WP3_36A'],
+          [:global_means, 'GB_DECL_T_38WP3_37A'],
+          [:global_means, 'GB_DECL_T_38WP3_38A'],
+          [:global_means, 'GB_DECL_T_38WP3_39A'],
+          [:global_means, 'GB_DECL_T_38WP3_40A'],
+          [:global_means, 'GB_DECL_T_38WP3_41A'],
+          [:global_means, 'GB_DECL_T_38WP3_42A'],
+          [:global_means, 'GB_DECL_T_38WP3_43A'],
+          [:global_means, 'GB_DECL_T_38WP3_44A'],
+          [:global_means, 'GB_DECL_T_38WP3_45A'],
+          [:global_means, 'GB_DECL_T_38WP3_46A'],
+          [:global_means, 'GB_DECL_T_38WP3_116A'],
           [:global_means, 'GB_INFER_B_1WP3_419A'],
           [:global_means, 'GB_INFER_B_26WP3_214A'],
           [:global_means, 'GB_INFER_B_3WP2_403A'],
@@ -2142,7 +2153,19 @@ module CCMS
           [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER'],
           [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST'],
           [:proceeding_merits, 'SMOD_APPLICABLE'],
-          [:proceeding_merits, 'WORK_IN_SCH_ONE']
+          [:proceeding_merits, 'WORK_IN_SCH_ONE'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_C_7WP2_18A'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_N_7WP2_5A'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_T_7WP2_3A'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_T_7WP2_4A'],
+          [:bank_accounts_entity, 'BANKACC_INPUT_T_7WP2_6A'],
+          [:global_merits, 'COPY_WARNING_LETTER'],
+          [:global_merits, 'GB_DECL_T_38WP3_118A'],
+          [:global_merits, 'GB_INPUT_B_39WP3_9A'],
+          [:global_merits, 'GB_INPUT_T_6WP1_1A'],
+          [:global_merits, 'GB_INPUT_T_6WP1_2A'],
+          [:global_merits, 'SA_SCREEN2_6WP1_PASSPORTEDBEN'],
+          [:global_merits, 'SA_SCREEN4_6WP1_PASSPORT']
         ]
       end
 

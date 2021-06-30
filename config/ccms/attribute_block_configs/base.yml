@@ -5,26 +5,31 @@ bank_acct:
     br100_meaning: 'Bank accounts: Current Balance'
     response_type: currency
     user_defined: true
+    generate_block?: false
   BANKACC_INPUT_N_7WP2_5A:
     value: "#bank_account_account_number"
     br100_meaning: 'Bank accounts: Account number'
     response_type: text
     user_defined: true
+    generate_block?: false
   BANKACC_INPUT_T_7WP2_6A:
     value: "#bank_account_holder_type"
     br100_meaning: 'Bank accounts: Account holders'
     response_type: text
     user_defined: true
+    generate_block?: false
   BANKACC_INPUT_T_7WP2_4A:
     value: "#bank_name"
     br100_meaning: 'Bank accounts: Name of financial institution'
     response_type: text
     user_defined: true
+    generate_block?: false
   BANKACC_INPUT_T_7WP2_3A:
     value: "#bank_account_account_type_label"
     br100_meaning: 'Bank accounts: The type of account'
     response_type: text
     user_defined: true
+    generate_block?: false
   BANKACC_INPUT_B_7WP2_16A:
     value: "#bank_account_has_tax_credits?"
     br100_meaning: 'Bank accounts: Client tax credits paid in?'
@@ -496,11 +501,6 @@ global_means:
     br100_meaning: 'RESULT: Client Financial Support'
     response_type: currency
     user_defined: false
-  COUNTRY:
-    value: GBR
-    br100_meaning: Country of residence
-    response_type: text
-    user_defined: true
   GB_PROC_B_41WP3_15A:
     value: false
     br100_meaning: 'R - Rent: Copy of most recent housing benefit award letter'
@@ -4130,6 +4130,48 @@ global_merits:
     br100_meaning: 'The application has been made through the Apply service'
     response_type: boolean
     user_defined: false
+  COPY_WARNING_LETTER:
+    value: true
+    br100_meaning: 'The Application Can Be Submitted'
+    user_defined: true
+    response_type: boolean
+    generate_block?: false
+  GB_DECL_T_38WP3_118A:
+    generate_block?: false
+    br100_meaning: 'The means declaration 2a paragraph 03'
+    response_type: boolean
+    user_defined: true
+    value: true
+  GB_INPUT_B_39WP3_9A:
+    generate_block?: false
+    br100_meaning: 'Passported: Copy of letter confirming benefit (Client Claimaint)'
+    response_type: boolean
+    user_defined: true
+    value:
+  GB_INPUT_T_6WP1_1A:
+    generate_block?: false
+    br100_meaning: 'Passported: The passported benefit being received'
+    response_type: boolean
+    user_defined: true
+    value: true
+  GB_INPUT_T_6WP1_2A:
+    generate_block?: false
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
+    response_type: boolean
+    user_defined: true
+    value: true
+  SA_SCREEN2_6WP1_PASSPORTEDBEN:
+    generate_block?: false
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
+    response_type: boolean
+    user_defined: true
+    value: true
+  SA_SCREEN4_6WP1_PASSPORT:
+    generate_block?: false
+    br100_meaning: 'no br100 meaning available' # TODO: find br100 meaning
+    response_type: boolean
+    user_defined: true
+    value: true
 
 #
 # TODO: Deprecate this section once multiple proceedings is turned on
