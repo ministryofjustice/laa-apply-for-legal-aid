@@ -148,7 +148,7 @@ module CCMS
             xml.__send__('ns2:Organization') do
               xml.__send__('ns2:OrganizationName', '.')
               xml.__send__('ns2:OrganizationType', 'GOVT')
-              xml.__send__('ns2:RelationToClient', 'NONE')
+              xml.__send__('ns2:RelationToClient', 'NONE')spec/services/reports/reports_types_creator_spec.rb:57
               xml.__send__('ns2:RelationToCase', 'OPP')
               xml.__send__('ns2:Address')
               xml.__send__('ns2:ContactDetails')
