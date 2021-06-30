@@ -20,15 +20,12 @@ module CapitalHelper
     return nil if items.blank?
 
     {
-      items: items,
-      total_value: items.sum(&:amount)
+      items: items
     }
   end
 
   def capital_amount_items(items, locale_namespace, percentage_values)
     items&.map do |attribute, amount|
-      next unless amount
-
       type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
 
       OpenStruct.new(
@@ -41,7 +38,9 @@ module CapitalHelper
   end
 
   def capital_amount_text(amount, type)
-    if type == :percentage
+    if amount.nil?
+      'No'
+    elsif type == :percentage
       number_to_percentage(amount, precision: 2)
     else
       gds_number_to_currency(amount)
