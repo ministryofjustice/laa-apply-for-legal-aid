@@ -2,19 +2,20 @@ require 'nokogiri'
 require 'yaml'
 
 class CcmsPayloadYamlizer
-
   def initialize(filename)
-    @xml = File.open(filename) { |fp| fp.read }
-    @doc = Nokogiri::XML(@xml) { |config| config.noblanks }
+    @xml = File.open(filename, &:read)
+    @doc = Nokogiri::XML(@xml, &:noblanks)
     @doc.remove_namespaces!
     @data = @doc.children.first
     @hash = {}
   end
-  
+
   def run
     @hash[@data.name] = {}
     @data.children.each { |child| process_child(child, @hash[@data.name]) }
+    # rubocop:disable Rails/Output
     puts @hash.to_yaml
+    # rubocop:enable Rails/Output
   end
 
   private
@@ -47,12 +48,12 @@ class CcmsPayloadYamlizer
 
   def increment_node_name(node_name)
     if node_name =~ /^\S+\[(\d+)\]$/
-      node_name.sub(/\[\d+\]/, "[#{$1.to_i + 1}]")
+      node_name.sub(/\[\d+\]/, "[#{Regexp.last_match(1).to_i + 1}]")
     else
       "#{node_name}[1]"
     end
   end
-  
+
   def attribute_block(node)
     return if node.name != 'Attribute'
 

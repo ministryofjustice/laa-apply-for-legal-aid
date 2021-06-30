@@ -1,14 +1,14 @@
 require 'rails_helper'
-require "#{Rails.root}/lib/tasks/helpers/ccms_payload_yamlizer"
+require Rails.root.join('lib/tasks/helpers/ccms_payload_yamlizer')
 
 RSpec.describe CcmsPayloadYamlizer do
   let(:parser) { described_class.new(filename) }
   let(:filename) { '/Users/stephenrichards/moj/apply/ccms_integration/example_payloads/multi_proc/MP_1333536_NP_multi children.xml' }
 
   it 'parses' do
+    expect($stdout).to receive(:puts).at_least(1) # suppress output to console
     parser.run
   end
-
 
   describe '#calculate_new_key' do
     let(:hash) do
