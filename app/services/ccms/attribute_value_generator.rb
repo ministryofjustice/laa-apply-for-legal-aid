@@ -289,7 +289,7 @@ module CCMS
 
     def client_eligibility(_options)
       case cfe_result.assessment_result
-      when 'eligible', 'contribution_required'
+      when 'eligible', 'contribution_required', 'partially_eligible'
         'In Scope'
       when 'not_eligible'
         'Out Of Scope'
