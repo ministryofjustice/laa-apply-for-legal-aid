@@ -467,6 +467,26 @@ Given('I complete the passported journey as far as check your answers') do
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
+Given('I complete the multiple proceedings journey as far as check passported answers') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :provider_entering_merits,
+    :with_transaction_period,
+    :with_attached_statement_of_case,
+    :with_chances_of_success,
+    :with_gateway_evidence,
+    :with_policy_disregards,
+    :with_benefits_transactions
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
+
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
 Given('I complete the non-passported journey as far as check your answers') do
   applicant = create(
     :applicant,

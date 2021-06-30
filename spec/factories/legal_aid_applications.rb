@@ -446,6 +446,18 @@ FactoryBot.define do
       end
     end
 
+    trait :with_attached_statement_of_case do
+      after(:create) do |application|
+        create(:statement_of_case, :with_original_file_attached, legal_aid_application: application)
+      end
+    end
+
+    trait :with_gateway_evidence do
+      after(:create) do |application|
+        create(:gateway_evidence, :with_original_file_attached, legal_aid_application: application)
+      end
+    end
+
     trait :with_opponent do
       opponent { build :opponent }
     end

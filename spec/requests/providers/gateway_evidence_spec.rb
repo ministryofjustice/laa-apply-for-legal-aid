@@ -54,6 +54,12 @@ module Providers
         expect(gateway_evidence.original_attachments.first).to be_present
       end
 
+      it 'stores the original filename' do
+        subject
+        attachment = gateway_evidence.original_attachments.first
+        expect(attachment.original_filename).to eq 'hello_world.pdf'
+      end
+
       it 'redirects to the next page' do
         subject
         expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)

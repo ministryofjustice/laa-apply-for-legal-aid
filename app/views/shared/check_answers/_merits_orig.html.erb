@@ -108,13 +108,14 @@
           name: :statement_of_case,
           url: providers_legal_aid_application_statement_of_case_path(@legal_aid_application),
           question: t('.items.statement_of_case'),
-          answer: nil,
+          answer: attachments_with_size(statement_of_case&.original_attachments),
           read_only: read_only,
-          no_border: statement_of_case&.statement.present?
+          no_border: statement_of_case&.statement.present? || !statement_of_case&.original_attachments.present?
         ) %>
   </dl>
 
   <div class="govuk-body"><%= statement_of_case&.statement %></div>
+  <%= render 'shared/check_answers/section_break' if statement_of_case&.statement.present? %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
     <%= check_answer_link(
