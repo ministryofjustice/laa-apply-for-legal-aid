@@ -1,6 +1,7 @@
 <%= page_template(
       page_title: t('.heading_1'),
-      show_errors_for: @legal_aid_application
+      show_errors_for: @legal_aid_application,
+      back_link: @legal_aid_application.proceeding_types.empty? && @legal_aid_application.checking_answers? ? :none : {}
     ) %>
 
 <%

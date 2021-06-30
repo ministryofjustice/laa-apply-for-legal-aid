@@ -54,12 +54,12 @@ module Flow
             else
               application.section_8_proceedings? ? :in_scope_of_laspos : :used_multiple_delegated_functions
             end
-          end,
-          check_answers: :check_provider_answers
+          end
         },
         in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
           forward: :used_multiple_delegated_functions,
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers
         },
         used_multiple_delegated_functions: {
