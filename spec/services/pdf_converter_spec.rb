@@ -43,6 +43,25 @@ RSpec.describe PdfConverter do
           attachment = statement_of_case.original_attachments.first
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
         end
+
+        context 'when there are multiple uploaded files' do
+          let(:attachment) { statement_of_case.legal_aid_application.attachments.create!(attachment_type: 'statement_of_case', attachment_name: 'statement_of_case_2') }
+
+          it 'converts the file to pdf' do
+            expect(Libreconv).to receive(:convert)
+            expect { subject }.to change { ActiveStorage::Attachment.count }.by(1)
+            pdf_attachment = statement_of_case.pdf_attachments.first
+            expect(pdf_attachment.attachment_name).to eq 'statement_of_case_2.pdf'
+            expect(pdf_attachment.attachment_type).to eq 'statement_of_case_pdf'
+          end
+
+          it 'relates the pdf record to the original file' do
+            subject
+            pdf_attachment = statement_of_case.pdf_attachments.first
+            attachment = statement_of_case.original_attachments.first
+            expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
+          end
+        end
       end
     end
   end
@@ -85,6 +104,25 @@ RSpec.describe PdfConverter do
           pdf_attachment = gateway_evidence.pdf_attachments.first
           attachment = gateway_evidence.original_attachments.first
           expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
+        end
+
+        context 'when there are multiple uploaded files' do
+          let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence', attachment_name: 'gateway_evidence_2') }
+
+          it 'converts the file to pdf' do
+            expect(Libreconv).to receive(:convert)
+            expect { subject }.to change { ActiveStorage::Attachment.count }.by(1)
+            pdf_attachment = gateway_evidence.pdf_attachments.first
+            expect(pdf_attachment.attachment_name).to eq 'gateway_evidence_2.pdf'
+            expect(pdf_attachment.attachment_type).to eq 'gateway_evidence_pdf'
+          end
+
+          it 'relates the pdf record to the original file' do
+            subject
+            pdf_attachment = gateway_evidence.pdf_attachments.first
+            attachment = gateway_evidence.original_attachments.first
+            expect(attachment.pdf_attachment_id).to eq pdf_attachment.id
+          end
         end
       end
     end
