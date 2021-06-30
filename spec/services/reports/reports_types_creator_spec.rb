@@ -199,7 +199,7 @@ RSpec.describe Reports::ReportsTypesCreator do
     end
 
     def strip_quotes(string)
-      string.sub(/^\"/, '').sub(/\"$/,'')
+      string.sub(/^"/, '').sub(/"$/, '')
     end
   end
 end
