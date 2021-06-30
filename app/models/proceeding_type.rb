@@ -33,4 +33,8 @@ class ProceedingType < ApplicationRecord
   def domestic_abuse?
     ccms_matter == 'Domestic Abuse'
   end
+
+  def section8?
+    ccms_matter == 'Section 8 orders'
+  end
 end

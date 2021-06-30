@@ -71,6 +71,24 @@ module CCMS
           end
         end
 
+        context 'CHILD_PARTIES_C' do
+          context 'section8 proceeding' do
+            before { allow_any_instance_of(ProceedingType).to receive(:section8?).and_return true }
+            it 'is true' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'CHILD_PARTIES_C')
+              expect(block).to have_boolean_response(true)
+            end
+          end
+
+          context 'domestic abuse proceeding' do
+            before { allow_any_instance_of(ProceedingType).to receive(:section8?).and_return false }
+            it 'is false' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'CHILD_PARTIES_C')
+              expect(block).to have_boolean_response(false)
+            end
+          end
+        end
+
         context 'PASSPORTED_NINO' do
           let(:applicant) { legal_aid_application.applicant }
           it 'generates PASSPORTED NINO in global merits' do

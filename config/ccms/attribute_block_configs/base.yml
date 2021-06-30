@@ -5124,8 +5124,8 @@ proceeding_merits:
     response_type: boolean
     user_defined: false
   CHILD_PARTIES_C:
-    generate_block?: false
-    value: false
+    generate_block?: true
+    value: '#proceeding_section8?'
     br100_meaning: 'LARCriteria: Falls Within The Child Parties LAR Criteria'
     response_type: boolean
     user_defined: true

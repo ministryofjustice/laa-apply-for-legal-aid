@@ -2239,6 +2239,12 @@
                             <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
                           </ns0:Attribute>
                           <ns0:Attribute>
+                            <ns0:Attribute>CHILD_PARTIES_C</ns0:Attribute>
+                            <ns0:ResponseType>boolean</ns0:ResponseType>
+                            <ns0:ResponseValue>false</ns0:ResponseValue>
+                            <ns0:UserDefinedInd>true</ns0:UserDefinedInd>
+                          </ns0:Attribute>
+                          <ns0:Attribute>
                             <ns0:Attribute>NEW_OR_EXISTING</ns0:Attribute>
                             <ns0:ResponseType>text</ns0:ResponseType>
                             <ns0:ResponseValue>NEW</ns0:ResponseValue>
