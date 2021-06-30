@@ -775,6 +775,7 @@ module CCMS
             [:global_merits, 'CLIENT_WIDOWED', false],
             [:global_merits, 'CLINICAL_NEGLIGENCE', false],
             [:global_merits, 'COMMUNITY_CARE', false],
+            [:global_merits, 'COPY_CA_UNSPENT_CONVICTION', false],
             [:global_merits, 'COUNTY_COURT', false],
             [:global_merits, 'COURT_OF_APPEAL', false],
             [:global_merits, 'CRIME', false],
