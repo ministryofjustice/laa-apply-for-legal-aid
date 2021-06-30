@@ -90,6 +90,8 @@ Feature: Pathways from check your answers
     Then I should not see 'Occupation order'
     Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
     And I should not see 'Back'
+    When I click the browser back button
+    Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button

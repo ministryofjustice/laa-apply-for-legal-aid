@@ -2,7 +2,6 @@ module Providers
   class HasOtherProceedingsController < ProviderBaseController
     def show
       return go_forward unless Setting.allow_multiple_proceedings?
-      return redirect_to providers_legal_aid_application_proceedings_types_path if proceeding_types.empty?
 
       @form = LegalAidApplications::HasOtherProceedingsForm.new(model: legal_aid_application)
       proceeding_types

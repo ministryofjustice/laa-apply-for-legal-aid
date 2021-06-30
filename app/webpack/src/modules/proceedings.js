@@ -161,6 +161,17 @@ const submitForm = proceedingItem => {
   return false;
 }
 
+function disableBackButton () {
+  window.history.pushState(null, document.title, window.location.href);
+  window.addEventListener('popstate', function (event) {
+    window.history.pushState(null, document.title, window.location.href);
+  });
+}
+
+if (window.location.href.includes('proceedings_types')) {
+  disableBackButton()
+}
+
 // If the proceedings type search box appears on the page, call the searchOnUserInput function
 document.addEventListener('DOMContentLoaded', event => {
   const searchInputBox = document.querySelector('#proceeding-search-input');
