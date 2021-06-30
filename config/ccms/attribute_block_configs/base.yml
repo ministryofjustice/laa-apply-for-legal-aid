@@ -45,6 +45,12 @@ bank_acct:
     br100_meaning: 'Bank accounts: Client benefits, ex. tax credits, paid in?'
     response_type: boolean
     user_defined: true
+  LAR_BANKACC_INPUT_B_37WP2_1A:
+    value: false
+    br100_meaning: 'Bank accounts: Client benefits paid in?'
+    response_type: boolean
+    user_defined: true
+    generate_block?: true
 change_in_circumstances:
   generate_block?: false
   CHANGE_CIRC_INPUT_T_33WP3_6A:
@@ -4130,6 +4136,54 @@ global_merits:
     br100_meaning: 'The application has been made through the Apply service'
     response_type: boolean
     user_defined: false
+  NON_MAND_EVIDENCE_AMD_CORR:
+    value: false
+    br100_meaning: 'copy of correspond/evidence re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_COUNSEL:
+    value: false
+    br100_meaning: 'copy counsels opinion re amend prev displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_CT_ORDER:
+    value: false
+    br100_meaning: 'copy court order re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_EXPERT:
+    value: false
+    br100_meaning: 'copy experts report re amend prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_PLEAD:
+    value: false
+    br100_meaning: 'copy pleadings re amend previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_AMD_SOLS_RPT:
+    value: false
+    br100_meaning: 'copy sols report re amend was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_CORR_ADR:
+    value: false
+    br100_meaning: 'copy relevant ADR correspondence previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_CORR_SETTLE:
+    value: false
+    br100_meaning: 'copy correspondence re attempts to settle prev displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
   COPY_WARNING_LETTER:
     value: true
     br100_meaning: 'The Application Can Be Submitted'
@@ -4172,6 +4226,72 @@ global_merits:
     response_type: boolean
     user_defined: true
     value: true
+  NON_MAND_EVIDENCE_COUNSEL_OP:
+    value: false
+    br100_meaning: 'copy existing counsels opinion re matter prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_CTORDER:
+    value: false
+    br100_meaning: 'copy existing family court order(s) prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_EXPERT_EXIST:
+    value: false
+    br100_meaning: 'copy existing experts reports  re matter prev displayed on the evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_EXPERT_RPT:
+    value: false
+    br100_meaning: 'a copy of the expert report was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_ICA_LETTER:
+    value: false
+    br100_meaning: 'copy letter from ICACU previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_LTTR_ACTION:
+    value: false
+    br100_meaning: 'copy letter before action and any response prev displayed on the evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_OMBUD_RPT:
+    value: false
+    br100_meaning: 'copy of complaint response/ombudsman report prev displayed on evi screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_PLEADINGS:
+    value: false
+    br100_meaning: 'a copy of the pleadings was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_PRE_ACT_DISC:
+    value: false
+    br100_meaning: 'copy of pre-action disclosure was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_SEP_STATE:
+    value: false
+    br100_meaning: 'a copy of the separate statement was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
+  NON_MAND_EVIDENCE_WARNING_LTTR:
+    value: false
+    br100_meaning: 'a copy of the warning letter was previously displayed on the evidence screen'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
 
 #
 # TODO: Deprecate this section once multiple proceedings is turned on
@@ -5428,6 +5548,12 @@ proceeding_merits:
     response_type: text
     user_defined: false
     generate_block?: false
+  UNLAWFUL_REMOVAL_OF_CHILDREN_C:
+    value: false
+    br100_meaning: 'LARCriteria: Falls Within The Unlawful Removal Of Children/Domestic Abduction'
+    response_type: boolean
+    user_defined: false
+    generate_block?: true
 valuable_possessions:
   VALPOSSESS_INPUT_T_12WP2_7A:
     generate_block?: '#applicant_has_valuable_possessions?'

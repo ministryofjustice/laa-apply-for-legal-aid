@@ -2386,6 +2386,25 @@ module CCMS
           [:global_merits, 'PROCS_ARE_BEFORE_THE_COURT'],
           [:global_merits, 'UPLOAD_SEPARATE_STATEMENT'],
           [:global_merits, 'URGENT_FLAG'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_CORR'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_COUNSEL'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_CT_ORDER'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_EXPERT'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_PLEAD'],
+          [:global_merits, 'NON_MAND_EVIDENCE_AMD_SOLS_RPT'],
+          [:global_merits, 'NON_MAND_EVIDENCE_CORR_ADR'],
+          [:global_merits, 'NON_MAND_EVIDENCE_CORR_SETTLE'],
+          [:global_merits, 'NON_MAND_EVIDENCE_COUNSEL_OP'],
+          [:global_merits, 'NON_MAND_EVIDENCE_CTORDER'],
+          [:global_merits, 'NON_MAND_EVIDENCE_EXPERT_EXIST'],
+          [:global_merits, 'NON_MAND_EVIDENCE_EXPERT_RPT'],
+          [:global_merits, 'NON_MAND_EVIDENCE_ICA_LETTER'],
+          [:global_merits, 'NON_MAND_EVIDENCE_LTTR_ACTION'],
+          [:global_merits, 'NON_MAND_EVIDENCE_OMBUD_RPT'],
+          [:global_merits, 'NON_MAND_EVIDENCE_PLEADINGS'],
+          [:global_merits, 'NON_MAND_EVIDENCE_PRE_ACT_DISC'],
+          [:global_merits, 'NON_MAND_EVIDENCE_SEP_STATE'],
+          [:global_merits, 'NON_MAND_EVIDENCE_WARNING_LTTR'],
           [:opponent, 'OTHER_PARTY_PERSON'],
           [:opponent, 'PARTY_IS_A_CHILD'],
           [:opponent, 'RELATIONSHIP_CASE_AGENT'],
@@ -2413,7 +2432,8 @@ module CCMS
           [:opponent, 'RELATIONSHIP_SOL_BARRISTER'],
           [:opponent, 'RELATIONSHIP_STEP_PARENT'],
           [:opponent, 'RELATIONSHIP_SUPPLIER'],
-          [:opponent, 'RELATIONSHIP_TENANT']
+          [:opponent, 'RELATIONSHIP_TENANT'],
+          [:proceeding_merits, 'UNLAWFUL_REMOVAL_OF_CHILDREN_C']
         ]
       end
     end
