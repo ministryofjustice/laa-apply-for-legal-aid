@@ -112,7 +112,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
 
           it 'updates the savings amount' do
-            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts, offline_savings_accounts.to_s.length - 1))
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts.to_s))
           end
 
           it 'redirects to the savings and investments page' do

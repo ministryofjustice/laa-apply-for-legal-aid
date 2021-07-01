@@ -41,8 +41,8 @@ RSpec.describe TrueLayer::BankDataImportService do
 
     it 'imports the account balances' do
       subject
-      mock_account_balances = mock_data[:accounts].map { |a| a[:balance][:current].to_s }.sort
-      account_balances = bank_provider.bank_accounts.map { |a| a.balance.to_s }.sort
+      mock_account_balances = mock_data[:accounts].map { |a| BigDecimal(a[:balance][:current].to_s).to_s }.sort
+      account_balances = bank_provider.bank_accounts.map { |a| BigDecimal(a.balance.to_s).to_s }.sort
       expect(account_balances).to eq(mock_account_balances)
     end
 
