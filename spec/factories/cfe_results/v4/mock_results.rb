@@ -434,7 +434,7 @@ module CFEResults
         result
       end
 
-      def self.partially_eligible
+      def self.partially_eligible # rubocop:disable Metrics/AbcSize
         result = eligible
         result[:result_summary][:overall_result][:matter_types] << { matter_type: 'section8', result: 'ineligible' }
         result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: 'SE003', result: 'ineligible' }
