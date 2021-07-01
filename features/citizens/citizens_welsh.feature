@@ -9,20 +9,20 @@ Feature: Citizen journey in Welsh
     Then I click link 'tratS'
     Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'seY'
-    Then I click 'eunitnoC'
+    Then I click 'eunitnoc dna evaS'
     Then I should be on a page showing 'knab ruoy tceleS'
     Then I should be on a page showing ".sknab tnereffid htiw stnuocca evah uoy fi retal erom tceles ot elba eb ll'uoY .emit a ta knab eno tceleS"
     Then I click link 'kcaB'
     Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'oN'
-    Then I click 'eunitnoC'
+    Then I click 'eunitnoc dna evaS'
     Then I should be on a page showing 'noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC'
     Then I click link 'kcaB'
     Then I should be on a page showing "?reyaLeurT aiv >rbba/'ycnegA diA lageL'=eltit rbba< eht htiw stnemetats knab fo shtnom 3 erahs ot eerga uoy oD"
     Then I choose 'seY'
-    Then I click 'eunitnoC'
+    Then I click 'eunitnoc dna evaS'
     Then I choose 'HSBC'
-    Then I click 'eunitnoC'
+    Then I click 'eunitnoc dna evaS'
     Then I am directed to TrueLayer
 
   @javascript @vcr
