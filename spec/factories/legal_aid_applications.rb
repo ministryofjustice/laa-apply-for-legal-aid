@@ -279,6 +279,7 @@ FactoryBot.define do
           lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
           lead_apt.update!(lead_proceeding: true)
         end
+        application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
         pt = lead_apt.proceeding_type
         sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
         apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
