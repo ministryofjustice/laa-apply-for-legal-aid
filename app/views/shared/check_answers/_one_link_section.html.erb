@@ -13,12 +13,12 @@
   <% end %>
 </div>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9" id="app-check-your-answers__<%= name %>_items">
   <% if answer_hash.present? %>
 
-      <% answer_hash&.fetch(:items, [])&.each_with_index do |item| %>
+      <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
         <%= check_answer_no_link(
-              name: item.name || name,
+              name: item.name || "#{name}_#{index}",
               question: item.label,
               answer: safe_yes_or_no(item.amount_text),
               read_only: read_only

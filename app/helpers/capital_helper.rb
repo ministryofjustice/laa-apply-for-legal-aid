@@ -26,6 +26,8 @@ module CapitalHelper
   end
 
   def combine_second_home_attributes(items)
+    return nil if items.blank?
+
     second_home_attributes = items.select { |attr_name, _| attr_name.include?('second_home') }
     if second_home_attributes.all? { |_, value| value.nil? }
       items.except!(*second_home_attributes.keys)

@@ -193,15 +193,14 @@ Feature: Completing and checking means answers backwards and forwards
   Scenario: I go back and change the answer to second home from the means summary page
     Given I am checking the applicant's means answers
     Then I should be on a page showing 'Which types of assets does your client have?'
-    And the answer for 'Second home' should be 'No'
-    And I should not see 'Second property or holiday home outstanding mortgage amount'
+    And I should be on a page showing 'Second property or holiday home estimated value'
     Then I click Check Your Answers Change link for 'other assets'
     And I should be on a page showing 'Which types of assets does your client have?'
     And I should be on a page showing 'Select all that apply'
-    Then I select 'Second property or holiday home'
-    And I fill 'Enter estimated value' with '200000'
-    And I fill 'Enter outstanding mortgage amount' with '100000'
-    And I fill 'Enter percentage share you legally own' with '50'
+    Then I deselect 'Second property or holiday home'
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    And the answer for 'Second property value' should be '£200000'
+    And the answer for 'Second home' should be 'No'
+    And I should not see 'Second property or holiday home estimated value'
+
