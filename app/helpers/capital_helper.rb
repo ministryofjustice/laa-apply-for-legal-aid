@@ -40,6 +40,7 @@ module CapitalHelper
 
       OpenStruct.new(
         label: t("#{locale_namespace}#{attribute}"),
+        name: attribute.to_s.delete_prefix('check_box_'),
         amount: amount,
         type: type,
         amount_text: capital_amount_text(amount, type)

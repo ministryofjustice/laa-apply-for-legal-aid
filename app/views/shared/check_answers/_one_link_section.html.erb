@@ -16,9 +16,9 @@
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <% if answer_hash.present? %>
 
-      <% answer_hash&.fetch(:items, [])&.each_with_index do |item, index| %>
+      <% answer_hash&.fetch(:items, [])&.each_with_index do |item| %>
         <%= check_answer_no_link(
-              name: "#{name}_#{index}",
+              name: item.name || name,
               question: item.label,
               answer: safe_yes_or_no(item.amount_text),
               read_only: read_only
