@@ -184,6 +184,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     context 'when the provider is authenticated' do
       before do
         allow(Setting).to receive(:allow_multiple_proceedings?).and_return(multi_proc_flag)
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(true)
         login_provider
         subject
       end
@@ -204,6 +205,11 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
           it 'redirects to start chances of success' do
             expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
           end
+        end
+
+        it 'creates a task list' do
+          subject
+          expect(LegalFramework::MeritsTasksService).to have_received(:call).with(legal_aid_application)
         end
       end
 
