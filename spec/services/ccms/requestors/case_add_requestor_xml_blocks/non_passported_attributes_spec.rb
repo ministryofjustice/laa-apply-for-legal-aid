@@ -499,6 +499,16 @@ module CCMS
           end
         end
 
+        context 'attributes omitted from payload' do
+          it 'should not be present' do
+            omitted_attributes.each do |entity_attribute_pair|
+              entity, attribute = entity_attribute_pair
+              block = XmlExtractor.call(xml, entity, attribute)
+              expect(block).not_to be_present, "Expected block for attribute #{attribute} not to be generated, but was \n #{block}"
+            end
+          end
+        end
+
         context 'GB_INFER_T_6WP1_66A' do
           it 'is omitted' do
             block = XmlExtractor.call(xml, :global_merits, 'GB_INFER_T_6WP1_66A')
@@ -892,6 +902,19 @@ module CCMS
             [:proceeding_merits, 'PROCEEDING_JUDICIAL_REVIEW', false],
             [:proceeding_merits, 'SCA_APPEAL_FINAL_ORDER', false],
             [:proceeding_merits, 'SIGNIFICANT_WIDER_PUB_INTEREST', false]
+          ]
+        end
+
+        def omitted_attributes # rubocop:disable Metrics/MethodLength
+          [
+            [:global_merits, 'DEC_AGAINST_INSTRUCT_SIGNED'],
+            [:global_merits, 'DEC_APP_NECESSARY'],
+            [:global_merits, 'DEC_CLIENT_TEXT_PARA16A'],
+            [:global_merits, 'DEC_CLIENT_TEXT_PARA17A'],
+            [:global_merits, 'DEC_CLIENT_TEXT_PARA18A'],
+            [:global_merits, 'DEC_NO_DIFFERENCES'],
+            [:global_merits, 'DEC_UNABLE_TO_ATTEND'],
+            [:employment_entity, 'OUT_EMP_INFER_C_15WP3_17A']
           ]
         end
       end
