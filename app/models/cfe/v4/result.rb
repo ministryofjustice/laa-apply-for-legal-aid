@@ -59,6 +59,10 @@ module CFE
         result_summary[:gross_income]
       end
 
+      def gross_income_upper_threshold
+        min_threshold(gross_income_summary[:proceeding_types], :upper_threshold)
+      end
+
       def total_disposable_income_assessed
         disposable_income_summary[:total_disposable_income]
       end
@@ -81,6 +85,14 @@ module CFE
 
       def disposable_income_proceeding_types
         disposable_income_summary[:proceeding_types]
+      end
+
+      def disposable_income_lower_threshold
+        min_threshold(disposable_income_summary[:proceeding_types], :lower_threshold)
+      end
+
+      def disposable_income_upper_threshold
+        min_threshold(disposable_income_summary[:proceeding_types], :upper_threshold)
       end
 
       def vehicles
@@ -272,6 +284,11 @@ module CFE
       end
 
       private
+
+      def min_threshold(proceeding_types_array, threshold_method)
+        threshold = proceeding_types_array.map { |pt| pt[threshold_method] }.min
+        threshold == MAX_VALUE ? 'N/a' : threshold
+      end
 
       def monthly_income_equivalents
         gross_income_breakdown[:other_income][:monthly_equivalents][:all_sources]

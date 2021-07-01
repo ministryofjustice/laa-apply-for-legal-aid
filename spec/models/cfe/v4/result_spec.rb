@@ -4,6 +4,7 @@ module CFE
   module V4
     RSpec.describe Result, type: :model do
       let(:eligible_result) { create :cfe_v4_result }
+      let(:partially_eligible_result) { create :cfe_v4_result, :partially_eligible }
       let(:not_eligible_result) { create :cfe_v4_result, :not_eligible }
       let(:contribution_required_result) { create :cfe_v4_result, :with_capital_contribution_required }
       let(:no_additional_properties) { create :cfe_v4_result, :no_additional_properties }
@@ -197,6 +198,40 @@ module CFE
         context 'contribution is required ' do
           it 'returns true for capital_contribution_required' do
             expect(contribution_required_result.capital_contribution_required?).to be true
+          end
+        end
+      end
+
+      ################################################################
+      #  THRESHOLDS                                                  #
+      ################################################################
+
+      describe 'thresholds' do
+        describe '#gross_income_upper_threshold' do
+          context 'only domestic abuse' do
+            it 'returns N/a' do
+              expect(eligible_result.gross_income_upper_threshold).to eq 'N/a'
+            end
+          end
+
+          context 'domestic abuse and section 8 mixed' do
+            it 'returns the section 8 threshold' do
+              expect(partially_eligible_result.gross_income_upper_threshold).to eq 2657.0
+            end
+          end
+        end
+
+        describe '#disposable_income_upper_threshold' do
+          context 'only domestic abuse' do
+            it 'returns N/a' do
+              expect(eligible_result.disposable_income_upper_threshold).to eq 'N/a'
+            end
+          end
+
+          context 'domestic abuse and section 8 mixed' do
+            it 'returns the section 8 threshold' do
+              expect(partially_eligible_result.disposable_income_upper_threshold).to eq 733.0
+            end
           end
         end
       end

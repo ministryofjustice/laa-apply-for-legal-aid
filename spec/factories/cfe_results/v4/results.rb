@@ -15,6 +15,10 @@ module CFEResults
           result { CFEResults::V4::MockResults.not_eligible.to_json }
         end
 
+        trait :partially_eligible do
+          result { CFEResults::V4::MockResults.partially_eligible.to_json }
+        end
+
         trait :no_capital do
           result { CFEResults::V4::MockResults.no_capital.to_json }
         end
