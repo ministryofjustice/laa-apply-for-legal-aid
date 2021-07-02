@@ -1569,6 +1569,12 @@ money_due:
     generate_block?: true
 
 client_residing_person:
+  CLI_RES_PER_INPUT_D_12WP3_3A:
+    generate_block: true
+    br100_meaning: 'Person Residing: DOB'
+    user_defined: true
+    response_type: date
+    value: '#dependant_date_of_birth'
   CLI_RES_PER_INPUT_B_12WP3_20A:
     generate_block: true
     br100_meaning: "Dependant: relationship is a foster child"
@@ -1593,6 +1599,24 @@ client_residing_person:
     user_defined: false
     response_type: boolean
     value: '#dependant_sixteen_or_over?'
+  CLI_RES_PER_INPUT_B_12WP3_28A:
+    generate_block: true
+    br100_meaning: "Dependant: Relationship is adult"
+    user_defined: false
+    response_type: boolean
+    value: '#dependant_adult_relative?'
+  CLI_RES_PER_INPUT_B_12WP3_32A:
+    generate_block: true
+    br100_meaning: "Dependant: Relationship is non dependent"
+    user_defined: false
+    response_type: boolean
+    value: false
+  CLI_RES_PER_INPUT_B_12WP3_36A:
+    generate_block: true
+    br100_meaning: "Person Residing: In full time education?"
+    user_defined: true
+    response_type: boolean
+    value: '#dependant_in_full_time_education?'
 
 
 national_savings:

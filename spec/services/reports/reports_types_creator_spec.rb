@@ -6,7 +6,6 @@ RSpec.describe Reports::ReportsTypesCreator do
   let!(:application_non_passported) do
     create :legal_aid_application,
            :with_everything,
-           # :with_proceeding_types,
            :at_assessment_submitted,
            :with_negative_benefit_check_result,
            :with_ccms_submission_completed,
@@ -15,7 +14,6 @@ RSpec.describe Reports::ReportsTypesCreator do
   let!(:application_passported) do
     create :legal_aid_application,
            :with_everything,
-           # :with_proceeding_types,
            :at_assessment_submitted,
            :with_positive_benefit_check_result,
            provider: provider
@@ -54,7 +52,8 @@ RSpec.describe Reports::ReportsTypesCreator do
         end
 
         it 'has the correct application reference' do
-          expect(@table.first['application_ref']).to include(application_non_passported.application_ref)
+          application_refs = @table.map { |t| strip_quotes(t['application_ref']) }
+          expect(application_refs).to include(application_non_passported.application_ref)
         end
 
         it 'has the correct case ccms reference' do
@@ -197,6 +196,10 @@ RSpec.describe Reports::ReportsTypesCreator do
         table = CSV.parse(report.generate_csv, headers: true)
         expect(table).to be_empty
       end
+    end
+
+    def strip_quotes(string)
+      string.sub(/^"/, '').sub(/"$/, '')
     end
   end
 end
