@@ -3,6 +3,8 @@ module CFE
     belongs_to :legal_aid_application
     belongs_to :submission
 
+    MAX_VALUE = 999_999_999_999
+
     self.table_name = 'cfe_results'
 
     def result_hash

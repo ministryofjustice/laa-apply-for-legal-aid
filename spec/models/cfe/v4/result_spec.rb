@@ -4,6 +4,7 @@ module CFE
   module V4
     RSpec.describe Result, type: :model do
       let(:eligible_result) { create :cfe_v4_result }
+      let(:partially_eligible_result) { create :cfe_v4_result, :partially_eligible }
       let(:not_eligible_result) { create :cfe_v4_result, :not_eligible }
       let(:contribution_required_result) { create :cfe_v4_result, :with_capital_contribution_required }
       let(:no_additional_properties) { create :cfe_v4_result, :no_additional_properties }
@@ -16,6 +17,7 @@ module CFE
       let(:with_monthly_income_equivalents) { create :cfe_v4_result, :with_monthly_income_equivalents }
       let(:with_monthly_outgoing_equivalents) { create :cfe_v4_result, :with_monthly_outgoing_equivalents }
       let(:with_total_gross_income) { create :cfe_v4_result, :with_total_gross_income }
+      let(:with_mixed_proceeding_type_results) { create :cfe_v4_result, :with_mixed_proceeding_type_results }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v4_result }
       let(:contribution_and_restriction_result) { create :cfe_v4_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -201,6 +203,40 @@ module CFE
       end
 
       ################################################################
+      #  THRESHOLDS                                                  #
+      ################################################################
+
+      describe 'thresholds' do
+        describe '#gross_income_upper_threshold' do
+          context 'only domestic abuse' do
+            it 'returns N/a' do
+              expect(eligible_result.gross_income_upper_threshold).to eq 'N/a'
+            end
+          end
+
+          context 'domestic abuse and section 8 mixed' do
+            it 'returns the section 8 threshold' do
+              expect(partially_eligible_result.gross_income_upper_threshold).to eq 2657.0
+            end
+          end
+        end
+
+        describe '#disposable_income_upper_threshold' do
+          context 'only domestic abuse' do
+            it 'returns N/a' do
+              expect(eligible_result.disposable_income_upper_threshold).to eq 'N/a'
+            end
+          end
+
+          context 'domestic abuse and section 8 mixed' do
+            it 'returns the section 8 threshold' do
+              expect(partially_eligible_result.disposable_income_upper_threshold).to eq 733.0
+            end
+          end
+        end
+      end
+
+      ################################################################
       #  CAPITAL ITEMS                                               #
       ################################################################
 
@@ -239,6 +275,43 @@ module CFE
       describe 'total_other_assets' do
         it 'returns the assessed value for non liquid assets' do
           expect(eligible_result.total_other_assets).to eq 12.0
+        end
+      end
+
+      describe '#results_by_proceeding_type' do
+        before do
+          create :proceeding_type, ccms_code: 'DA006', meaning: 'Domestic abuse 006'
+          create :proceeding_type, ccms_code: 'SE003', meaning: 'Section Eight 003'
+          create :proceeding_type, ccms_code: 'SE013', meaning: 'Section Eight 013'
+        end
+        let(:cfe_result) { with_mixed_proceeding_type_results }
+        let(:expected_result_before_transformation) do
+          [
+            {
+              ccms_code: 'DA006',
+              result: 'eligible'
+            },
+            {
+              ccms_code: 'SE013',
+              result: 'ineligible'
+            },
+            {
+              ccms_code: 'SE003',
+              result: 'partially_eligible'
+            }
+          ]
+        end
+        let(:result_after_transformation) do
+          {
+            'Domestic abuse 006' => 'Yes',
+            'Section Eight 013' => 'No',
+            'Section Eight 003' => 'Yes'
+          }
+        end
+
+        it 'compresses and translates the overall_result[:proceeding_types] struct' do
+          expect(cfe_result.overall_result[:proceeding_types]).to eq expected_result_before_transformation
+          expect(cfe_result.results_by_proceeding_type).to eq result_after_transformation
         end
       end
 

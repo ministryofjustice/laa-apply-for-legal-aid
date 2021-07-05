@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_130422) do
     t.datetime "updated_at", null: false
     t.string "attachment_name"
     t.text "original_filename"
-    t.decimal "size", precision: 10, scale: 2
   end
 
   create_table "attempts_to_settles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -5,9 +5,12 @@
       <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
     </div>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+
       <p>
-        <%= link_to_accessible(t('generic.change'), check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-                               class: 'govuk-link change-link', suffix: :offline_savings_accounts) %>
+        <% if read_only == false %>
+          <%= link_to_accessible(t('generic.change'), check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
+                                 class: 'govuk-link change-link', suffix: :offline_savings_accounts) %>
+        <% end %>
       </p>
     </div>
   </div>

@@ -59,6 +59,10 @@ module CFE
         result_summary[:gross_income]
       end
 
+      def gross_income_upper_threshold
+        min_threshold(gross_income_summary[:proceeding_types], :upper_threshold)
+      end
+
       def total_disposable_income_assessed
         disposable_income_summary[:total_disposable_income]
       end
@@ -83,12 +87,48 @@ module CFE
         disposable_income_summary[:proceeding_types]
       end
 
+      def disposable_income_lower_threshold
+        min_threshold(disposable_income_summary[:proceeding_types], :lower_threshold)
+      end
+
+      def disposable_income_upper_threshold
+        min_threshold(disposable_income_summary[:proceeding_types], :upper_threshold)
+      end
+
       def vehicles
         capital[:capital_items][:vehicles]
       end
 
       def remarks
         Remarks.new(assessment[:remarks])
+      end
+
+      def results_by_proceeding_type
+        # transforms:
+        #
+        # [
+        #     {
+        #         :ccms_code => "DA004",
+        #         :result    => "contribution_required"
+        #     },
+        #     {
+        #         :ccms_code => "SE013",
+        #         :result    => "ineligible"
+        #     }
+        # ]
+        #
+        # into:
+        # {
+        #     "Non-molestation order"              => "Yes",
+        #     "Child arrangements order (contact)" => "No"
+        # }
+        #
+
+        results = {}
+        overall_result[:proceeding_types].each do |hash|
+          results[proceeding_type_meaning(hash[:ccms_code])] = elig_yes_no(hash[:result])
+        end
+        results
       end
 
       ################################################################
@@ -245,6 +285,11 @@ module CFE
 
       private
 
+      def min_threshold(proceeding_types_array, threshold_method)
+        threshold = proceeding_types_array.map { |pt| pt[threshold_method] }.min
+        threshold == MAX_VALUE ? 'N/a' : threshold
+      end
+
       def monthly_income_equivalents
         gross_income_breakdown[:other_income][:monthly_equivalents][:all_sources]
       end
@@ -256,6 +301,14 @@ module CFE
       def deductions
         # stub out zero values if not found until CFE is updated
         disposable_income_breakdown[:deductions] || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
+      end
+
+      def proceeding_type_meaning(ccms_code)
+        ProceedingType.find_by(ccms_code: ccms_code).meaning
+      end
+
+      def elig_yes_no(result)
+        result == 'ineligible' ? I18n.t('generic.no') : I18n.t('generic.yes')
       end
     end
   end

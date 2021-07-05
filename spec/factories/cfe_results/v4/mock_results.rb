@@ -414,6 +414,34 @@ module CFEResults
         result[:assessment][:disposable_income][:assessment_result] = 'unknown'
         result
       end
+
+      def self.mixed_proceeding_type_results
+        result = eligible
+        result[:result_summary][:overall_result][:proceeding_types] = [
+          {
+            ccms_code: 'DA006',
+            result: 'eligible'
+          },
+          {
+            ccms_code: 'SE013',
+            result: 'ineligible'
+          },
+          {
+            ccms_code: 'SE003',
+            result: 'partially_eligible'
+          }
+        ]
+        result
+      end
+
+      def self.partially_eligible # rubocop:disable Metrics/AbcSize
+        result = eligible
+        result[:result_summary][:overall_result][:matter_types] << { matter_type: 'section8', result: 'ineligible' }
+        result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: 'SE003', result: 'ineligible' }
+        result[:result_summary][:gross_income][:proceeding_types] << { ccms_code: 'SE003', upper_threshold: 2657.0, result: 'eligible' }
+        result[:result_summary][:disposable_income][:proceeding_types] << { ccms_code: 'SE003', upper_threshold: 733.0, lower_threshold: 315.0, result: 'ineligible' }
+        result
+      end
     end
   end
 end

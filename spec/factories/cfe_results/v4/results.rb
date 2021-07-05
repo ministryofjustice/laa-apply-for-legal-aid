@@ -15,6 +15,10 @@ module CFEResults
           result { CFEResults::V4::MockResults.not_eligible.to_json }
         end
 
+        trait :partially_eligible do
+          result { CFEResults::V4::MockResults.partially_eligible.to_json }
+        end
+
         trait :no_capital do
           result { CFEResults::V4::MockResults.no_capital.to_json }
         end
@@ -81,6 +85,10 @@ module CFEResults
 
         trait :with_unknown_result do
           result { CFEResults::V4::MockResults.unknown.to_json }
+        end
+
+        trait :with_mixed_proceeding_type_results do
+          result { CFEResults::V4::MockResults.mixed_proceeding_type_results.to_json }
         end
       end
     end

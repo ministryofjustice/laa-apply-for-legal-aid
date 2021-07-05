@@ -19,6 +19,7 @@
             name: :gross_income_limit,
             question: t('.gross_income_limit'),
             answer: number_to_currency_or_na(@legal_aid_application.cfe_result.gross_income_upper_threshold),
+            # answer: 'GROSS INCOME UPPER THRESHOLD',
             read_only: read_only
         ) %>
 
@@ -26,6 +27,7 @@
             name: :disposable_income_lower_limit,
             question: t('.disposable_income_lower_limit'),
             answer: gds_number_to_currency(@legal_aid_application.cfe_result.disposable_income_lower_threshold),
+            # answer: "DISPOSABLE INCOCME LOWER THRESHOLD",
             read_only: read_only
         ) %>
 
@@ -33,6 +35,7 @@
             name: :disposable_income_upper_limit_limit,
             question: t('.disposable_income_upper_limit'),
             answer: number_to_currency_or_na(@legal_aid_application.cfe_result.disposable_income_upper_threshold),
+            # answer: 'DISPOSABLE INCOME UPPER LIMIT',
             read_only: read_only
         ) %>
 
