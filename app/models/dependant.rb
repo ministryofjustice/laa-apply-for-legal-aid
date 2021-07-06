@@ -4,6 +4,7 @@ class Dependant < ApplicationRecord
   belongs_to :legal_aid_application
 
   scope :child_relative, -> { where(relationship: 'child_relative') }
+  scope :adult_relative, -> { where(relationship: 'adult_relative') }
 
   DEFAULT_VALUES = {
     in_full_time_education: false,
@@ -49,6 +50,18 @@ class Dependant < ApplicationRecord
       in_full_time_education: value_or_default(:in_full_time_education),
       assets_value: value_or_default(:assets_value)
     }
+  end
+
+  def ccms_relationship_to_client
+    return 'Dependant adult' if adult_relative?
+
+    return 'Child aged 15 and under' if fifteen_or_less?
+
+    'Child aged 16 and over'
+  end
+
+  def assets_over_threshold?
+    assets_value > 8_000.0
   end
 
   private

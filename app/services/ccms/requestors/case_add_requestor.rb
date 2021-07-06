@@ -484,9 +484,11 @@ module CCMS
       end
 
       def generate_client_residing_person_entity(xml, sequence_no, _config)
+        return if @legal_aid_application.passported?
+
         xml.__send__('ns0:SequenceNumber', sequence_no)
         xml.__send__('ns0:EntityName', 'CLIENT_RESIDING_PERSON')
-        @legal_aid_application.dependants.child_relative.each_with_index { |dependant, index| generate_client_residing_person_instance(xml, dependant, index) }
+        @legal_aid_application.dependants.each_with_index { |dependant, index| generate_client_residing_person_instance(xml, dependant, index) }
       end
 
       def generate_client_residing_person_instance(xml, dependant, index)

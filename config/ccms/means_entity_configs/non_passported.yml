@@ -1,5 +1,5 @@
 ---
-- predicate: :dependant_children?
+- predicate: :dependants?
   method: :generate_client_residing_person_entity
   entity_name: CLIENT_RESIDING_PERSON
   yaml_section: :client_residing_person

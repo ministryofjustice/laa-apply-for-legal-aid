@@ -133,4 +133,35 @@ RSpec.describe Dependant, type: :model do
       end
     end
   end
+
+  describe 'ccms_relationship_to_client' do
+    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, relationship: relationship, date_of_birth: dob }
+
+    context 'adult relative' do
+      let(:relationship) { 'adult_relative' }
+      let(:dob) { Time.current - 20.years }
+
+      it 'returns adult relative' do
+        expect(dependant.ccms_relationship_to_client).to eq 'Dependant adult'
+      end
+    end
+
+    context 'child aged fifteen or less' do
+      let(:relationship) { 'child_relative' }
+      let(:dob) { Time.current - 13.years }
+
+      it 'returns adult relative' do
+        expect(dependant.ccms_relationship_to_client).to eq 'Child aged 15 and under'
+      end
+    end
+
+    context 'child aged sixteen or more' do
+      let(:relationship) { 'child_relative' }
+      let(:dob) { Time.current - 17.years }
+
+      it 'returns adult relative' do
+        expect(dependant.ccms_relationship_to_client).to eq 'Child aged 16 and over'
+      end
+    end
+  end
 end
