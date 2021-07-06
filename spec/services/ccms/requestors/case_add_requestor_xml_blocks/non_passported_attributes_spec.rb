@@ -934,7 +934,9 @@ module CCMS
             [:global_merits, 'DEC_CLIENT_TEXT_PARA18A'],
             [:global_merits, 'DEC_NO_DIFFERENCES'],
             [:global_merits, 'DEC_UNABLE_TO_ATTEND'],
-            [:employment_entity, 'OUT_EMP_INFER_C_15WP3_17A']
+            [:employment_entity, 'OUT_EMP_INFER_C_15WP3_17A'],
+            [:global_means, 'OUT_GB_INFER_C_29WP3_18A'],
+            [:global_means, 'OUT_GB_PROC_C_34WP3_12A']
           ]
         end
       end
