@@ -25,7 +25,7 @@ en:
         other: "%{count} errors prohibited this %{resource} from being saved:"
     show:
       assessment_already_completed:
-        page_title: You've already completed your financial assessment
+        page_title: You've already shared your financial information
         contact_provider: Speak with your solicitor to check your application status.
       page_not_found:
         page_title: Page not found
