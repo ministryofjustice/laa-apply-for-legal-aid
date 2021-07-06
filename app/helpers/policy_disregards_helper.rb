@@ -11,10 +11,13 @@ module PolicyDisregardsHelper
     london_emergencies_trust
   ].freeze
 
-  def policy_disregards_hash(policy_disregards)
+  def policy_disregards_list(policy_disregards)
     items = policy_disregards_as_array(policy_disregards)
     items&.compact!
-    return nil if items.blank?
+
+    items.map do |item|
+      item.amount_text ||= 'No'
+    end
 
     {
       items: items
@@ -23,7 +26,7 @@ module PolicyDisregardsHelper
 
   def policy_disregards_as_array(policy_disregards)
     ATTRIBUTES&.map do |attribute|
-      send(attribute, policy_disregards) if policy_disregards.send("#{attribute}?")
+      send(attribute, policy_disregards)
     end
   end
 

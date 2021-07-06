@@ -899,7 +899,7 @@ Feature: Civil application journeys
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    And the answer for 'policy disregards' should be 'None declared'
+    And the answer for all 'policy disregards' categories should be 'No'
     Then I click Check Your Answers Change link for 'policy disregards'
     And I deselect 'None of these'
     Then I click 'Save and continue'

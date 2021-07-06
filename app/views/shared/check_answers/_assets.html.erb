@@ -74,7 +74,7 @@
           name: :policy_disregards,
           url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
           question: t('.assets.policy_disregards'),
-          answer_hash: policy_disregards_hash(@legal_aid_application.policy_disregards),
+          answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
           read_only: read_only
         ) %>
   <% end %>

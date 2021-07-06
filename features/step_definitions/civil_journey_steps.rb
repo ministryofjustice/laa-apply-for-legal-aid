@@ -729,6 +729,16 @@ Then('the answer for {string} should be {string}') do |field_name, answer|
   expect(page).to have_content(answer)
 end
 
+Then('the answer for all {string} categories should be {string}') do |field_name, expected_answer|
+  field_name.downcase!
+  field_name.gsub!(/\s+/, '_')
+  wrong_answer = expected_answer == 'No' ? 'Yes' : 'No'
+  within "#app-check-your-answers__#{field_name}_items" do # search within the section to check that all answers are yes/no
+    expect(page).to have_text(expected_answer)
+    expect(page).to_not have_text(wrong_answer)
+  end
+end
+
 Then('I select a proceeding type and continue') do
   find('#proceeding-list').first(:button, 'Select and continue').click
 end

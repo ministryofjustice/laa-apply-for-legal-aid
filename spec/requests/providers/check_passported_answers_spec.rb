@@ -61,10 +61,10 @@ RSpec.describe 'check passported answers requests', type: :request do
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.used_regularly'))
       end
 
-      it 'displays None Declared in the policy disregards section' do
+      it 'displays no categories selected in the policy disregards section' do
         parsed_response = Nokogiri::HTML(response.body)
         node = parsed_response.css('#app-check-your-answers__policy_disregards_header + .govuk-summary-list')
-        expect(node.text).to include(I18n.t('.generic.none_declared'))
+        expect(node.text).not_to include(I18n.t('.generic.yes'))
       end
 
       context 'applicant does not have any savings' do
@@ -76,8 +76,10 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
-        it 'displays that no savings have been declared' do
-          expect(response.body).to include(I18n.t('.generic.none_declared'))
+        it 'displays no categories selected in the savings and investments section' do
+          parsed_response = Nokogiri::HTML(response.body)
+          node = parsed_response.css('#app-check-your-answers__savings_and_investments_items')
+          expect(node.text).not_to include(I18n.t('.generic.yes'))
         end
       end
 
@@ -91,7 +93,9 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :provider_entering_means
         end
         it 'displays that no other assets have been declared' do
-          expect(response.body).to include(I18n.t('.generic.none_declared'))
+          parsed_response = Nokogiri::HTML(response.body)
+          node = parsed_response.css('#app-check-your-answers__other_assets_items')
+          expect(node.text).not_to include(I18n.t('.generic.yes'))
         end
       end
 
@@ -105,7 +109,9 @@ RSpec.describe 'check passported answers requests', type: :request do
                  has_restrictions: false
         end
         it 'displays that no capital restrictions have been declared' do
-          expect(response.body).to include(I18n.t('.generic.no'))
+          parsed_response = Nokogiri::HTML(response.body)
+          node = parsed_response.css('#app-check-your-answers__restrictions')
+          expect(node.text).to include(I18n.t('.generic.no'))
         end
       end
 

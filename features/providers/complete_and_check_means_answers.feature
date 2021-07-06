@@ -188,3 +188,19 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And the answer for 'has offline savings' should be 'No'
     And I should not see 'Amount in offline savings accounts'
+
+  @javascript
+  Scenario: I go back and change the answer to second home from the means summary page
+    Given I am checking the applicant's means answers
+    Then I should be on a page showing 'Which types of assets does your client have?'
+    And I should be on a page showing 'Second property or holiday home estimated value'
+    Then I click Check Your Answers Change link for 'other assets'
+    And I should be on a page showing 'Which types of assets does your client have?'
+    And I should be on a page showing 'Select all that apply'
+    Then I deselect 'Second property or holiday home'
+    Then I click 'Save and continue'
+    Then I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    And the answer for 'Second home' should be 'No'
+    And I should not see 'Second property or holiday home estimated value'
+

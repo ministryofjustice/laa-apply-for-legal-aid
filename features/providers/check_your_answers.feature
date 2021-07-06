@@ -102,7 +102,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Bank Accounts' should be 'None declared'
+    And the answer for all 'Bank accounts' categories should be 'No'
 
   @javascript
   Scenario: I am able to go back and change Savings and Investments and be taken back to the check your answers page for other assets
@@ -133,7 +133,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Savings and investments' should be 'None declared'
+    And the answer for all 'Savings and investments' categories should be 'No'
 
   @javascript
   Scenario: I am able to go back and change Other Assets and be taken to the restrictions page
@@ -163,7 +163,7 @@ Feature: Checking answers backwards and forwards
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
-    And the answer for 'Other assets' should be 'None declared'
+    And the answer for all 'Other assets' categories should be 'No'
 
   @javascript
   Scenario: I am able to go back and select multiple disregards then come straight back to the check your answers page
@@ -177,6 +177,7 @@ Feature: Checking answers backwards and forwards
     And I select 'Vaccine Damage Payments Scheme'
     Then I click 'Save and continue'
     Then I am on the check your answers page for policy disregards
+    And the answer for 'policy disregards' should be 'England Infected Blood Support Scheme'
     And the answer for 'policy disregards' should be 'Vaccine Damage Payments Scheme'
 
     @javascript
