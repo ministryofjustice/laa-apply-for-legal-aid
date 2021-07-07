@@ -176,6 +176,10 @@ class LegalAidApplication < ApplicationRecord
     LegalAidApplications::CalculationDateService.call(self)
   end
 
+  def year_to_calculation_date
+    [calculation_date - 1.year + 1.day, calculation_date]
+  end
+
   def capture_policy_disregards?
     (calculation_date || Time.zone.today) >= POLICY_DISREGARDS_START_DATE
   end
