@@ -67,7 +67,7 @@ RSpec.describe ErrorsController, type: :request do
     end
 
     it 'displays the correct header' do
-      expect(response.body).to match(/already completed[\w\s]+financial assessment/)
+      expect(unescaped_response_body).to match(I18n.t('errors.show.assessment_already_completed.page_title'))
     end
   end
 
