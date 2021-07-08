@@ -170,17 +170,6 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Covered under an emergency certificate'
     Then I should be on a page showing 'Covered under a substantive certificate'
 
-  @javascript
-  Scenario: I complete each step up to the applicant page
-    # testing shared steps: Given I start the journey as far as the applicant page
-    Given I am logged in as a provider
-    Given I visit the application service
-    And I click link "Start"
-    And I click link "Make a new application"
-    Then I should be on the 'providers/declaration' page showing 'Declaration'
-    When I click 'Agree and continue'
-    Then I should be on the Applicant page
-
   @javascript @vcr
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
@@ -370,7 +359,12 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS when the applicant is not eligible
-    Given I start a non-passported application after a failed benefit check
+    Given I start the application with a negative benefit check result
+    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I click 'Continue'
+    Then I should be on a page showing 'Is your client employed?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'No, I do not agree'
     Then I click 'Save and continue'
@@ -637,7 +631,7 @@ Feature: Civil application journeys
     And I should not see "Passported"
 
   @javascript @vcr
-  Scenario: Receives benefits and completes the application
+  Scenario: Receives benefits and completes the application - happy path no back button
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
@@ -682,39 +676,6 @@ Feature: Civil application journeys
     When I select 'None of these'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I click link "Back"
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I click link "Back"
-    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
-    Then I click link "Back"
-    Then I should be on a page showing "Which types of assets does your client have?"
-    Then I click link "Back"
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
-    Then I click link "Back"
-    Then I should be on a page showing "Which bank accounts does your client have?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own a vehicle?"
-    Then I click link "Back"
-    Then I should be on a page showing "What % share of their home does your client legally own?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own their home with anyone else?"
-    Then I click link "Back"
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
-    Then I click link "Back"
-    Then I should be on a page showing "How much is your client's home worth?"
-    Then I click link "Back"
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on a page showing 'We need to check if Test Walker should pay towards legal aid'
     Then I click 'Save and continue'
@@ -758,22 +719,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "hello_world.pdf (15.7 KB)"
     And the answer for 'Statement of case' should be 'This is some test data for the statement of case'
     And I should be on a page showing "Confirm the following"
-    Then I click link "Back"
-    Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
-    Then I click link "Back"
-    Then I should be on a page showing "Provide a statement of case"
-    Then I click link "Back"
-    Then I should be on a page showing "Opponent details"
-    Then I click link "Back"
-    Then I should be on a page showing "Latest incident details"
-    Then I click link "Back"
-    Then I should be on a page showing "Provide details of the case"
-    Then I click 'Continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click 'Save and continue'
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
@@ -909,7 +854,8 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
-    Given I start a non-passported application
+    Given I complete the non-passported journey as far as check your answers
+    Then I click 'Save and continue'
     Then I should be on a page showing "We used the following details to check your client's benefits status with the DWP"
     When I click link "Change your client's details"
     Then I should be on a page showing "Enter your client's details"
