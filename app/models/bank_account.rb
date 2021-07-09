@@ -12,7 +12,7 @@ class BankAccount < ApplicationRecord
   scope :savings, -> { where.not(account_type: 'TRANSACTION') }
 
   def latest_balance
-    return 0.0 if bank_transactions.empty?
+    return balance if bank_transactions.empty?
 
     bank_transactions.most_recent_first.limit(1).first.running_balance
   end
