@@ -1100,4 +1100,13 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
   end
+
+  describe '#year_to_calculation_date' do
+    let(:calc_date) { Date.new(2021, 2, 28) }
+    let(:expected_start_date) { Date.new(2020, 2, 29) }
+    it 'returns two dates a year up to the calculation date' do
+      allow(legal_aid_application).to receive(:calculation_date).and_return(calc_date)
+      expect(legal_aid_application.year_to_calculation_date).to eq [expected_start_date, calc_date]
+    end
+  end
 end
