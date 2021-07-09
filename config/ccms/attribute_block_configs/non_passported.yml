@@ -845,6 +845,18 @@ global_means:
     response_type: text
     generate_block?: true
     value: '#ccms_code_prospects_of_success'
+  OUT_GB_INFER_C_29WP3_18A:
+    generate_block?: false
+    value: 0.0
+    br100_meaning: 'Person Residing: Rate of allowance'
+    response_type: currency
+    user_defined: false
+  OUT_GB_PROC_C_34WP3_12A:
+    generate_block?: false
+    value: 0.0
+    br100_meaning: 'RESULT: Upper Disposable Limit'
+    response_type: currency
+    user_defined: false
 
 global_merits:
   APP_CARE_SUPERVISION:
