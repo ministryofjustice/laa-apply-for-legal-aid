@@ -101,7 +101,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing 'Enter dependant details'
     And the page is accessible
-    And I add the details for a child dependant
+    Given I add the details for a child dependant
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client have any other dependants?"
     And the page is accessible
