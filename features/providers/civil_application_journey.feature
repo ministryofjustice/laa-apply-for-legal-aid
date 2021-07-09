@@ -380,13 +380,6 @@ Feature: Civil application journeys
     And the answer for 'First name' should be 'Bartholomew'
 
   @javascript @vcr
-  Scenario: I want to return to the check your answers page without changing first name
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'First name'
-    Then I click link "Back"
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'Proceeding Type'
@@ -395,22 +388,6 @@ Feature: Civil application journeys
     Then I select a proceeding type and continue
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript @vcr
-  Scenario: I want to return to the check your answers page without changing proceeding type
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Proceeding Type'
-    And I search for proceeding 'Non-molestation order'
-    Then proceeding suggestions has results
-    Then I click link "Back"
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript @vcr
-  Scenario: I want to return to the check your answers page without changing name
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'First name'
-    Then I click link "Back"
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -461,41 +438,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
     Then I should be on a page showing 'test@test.com'
-
-  @javascript @vcr
-  Scenario: I want to return to check your answers from address lookup
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Address'
-    Then I am on the postcode entry page
-    Then I click link "Back"
-    Then I should be on a page showing 'Check your answers'
-
-  @javascript @vcr
-  Scenario: I want to return to check your answers from address select
-    Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Address'
-    Then I am on the postcode entry page
-    Then I enter a postcode 'SW1H 9EA'
-    Then I click find address
-    Then I click link "Back"
-    Then I click link "Back"
-    Then I should be on a page showing 'Check your answers'
-
-  Scenario: I navigate to Contact page from application service and back
-    Given I am logged in as a provider
-    Given I visit the application service
-    Then I click link "Contact"
-    Then I should be on a page showing "Contact us"
-    Then I click link "Back"
-    Then I should be on a page showing "Apply for legal aid"
-
-  @javascript
-  Scenario: I want to return to applicant from Contact page
-    Given I start the journey as far as the applicant page
-    Then I click link "Contact"
-    Then I should be on a page showing "Contact us"
-    Then I click link "Back"
-    Then I should be on the Applicant page
 
   @javascript @vcr
   Scenario: I am able to view the client completed means answers
@@ -726,23 +668,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "Passported"
 
   @javascript @vcr
-  Scenario: View privacy policy
-    Given I start the journey as far as the applicant page
-    Then I click link "Privacy policy"
-    Then I should be on a page showing "Types of personal data we process"
-    Then I should be on a page showing "Complaints"
-    Then I click link "Back"
-    Then I should be on the Applicant page
-
-  @javascript @vcr
-  Scenario: View feedback form within provider journey
-    Given I start the journey as far as the applicant page
-    Then I click link "feedback"
-    Then I should be on a page showing "How easy or difficult was it to use this service?"
-    Then I click link "Back"
-    Then I should be on the Applicant page
-
-  @javascript @vcr
   Scenario: Enter feedback within provider journey
     Given I start the journey as far as the applicant page
     Then I click link "feedback"
@@ -756,22 +681,6 @@ Feature: Civil application journeys
     Then I click "Send"
     Then I should be on a page showing "Thank you for your feedback"
     Then I click link "Back to your application"
-    Then I should be on the Applicant page
-
-  @javascript @vcr
-  Scenario: Enter feedback within provider journey then click Back
-    Given I start the journey as far as the applicant page
-    Then I click link "feedback"
-    Then I should be on a page showing "Help us improve this service"
-    Then I fill "improvement suggestion" with "Foo bar"
-    Then I should be on a page showing "Were you able to do what you needed today?"
-    Then I choose "Yes"
-    Then I should be on a page showing "How easy or difficult was it to use this service?"
-    Then I choose "Easy"
-    Then I choose "Satisfied"
-    Then I click "Send"
-    Then I should be on a page showing "Thank you for your feedback"
-    Then I click link "Back"
     Then I should be on the Applicant page
 
   @javascript
@@ -854,9 +763,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
-#    Given I complete the non-passported journey as far as check your answers
     Given I start the application with a negative benefit check result
-#    Then I click 'Save and continue'
     Then I should be on a page showing "We used the following details to check your client's benefits status with the DWP"
     When I click link "Change your client's details"
     Then I should be on a page showing "Enter your client's details"
