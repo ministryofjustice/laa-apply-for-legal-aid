@@ -106,21 +106,11 @@
         <% end %>
       </section>
 
-      <section>
-        <div class="govuk-!-padding-bottom-6"></div>
-        <h2 class="govuk-heading-m"><%= t('.irregular_income') %></h2>
-        <section class="print-no-break">
-          <% if @legal_aid_application.applicant_receives_benefit? %>
-            <strong class="govuk-tag app-tag--capitalize">
-              <%= t('.passported') %>
-            </strong>
-          <% else %>
-            <%= render 'irregular_incomes_table',
-                       irregular_incomes: @legal_aid_application.irregular_incomes,
-                       period: @legal_aid_application.year_to_calculation_date %>
-          <% end %>
-
-      </section>
+      <% if @legal_aid_application.irregular_incomes.any? %>
+        <%= render 'irregular_incomes_table',
+                   irregular_incomes: @legal_aid_application.irregular_incomes,
+                   period: @legal_aid_application.year_to_calculation_date %>
+      <% end %>
 
       <section class="print-no-break">
         <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= t('.payments') %></h3>
@@ -136,6 +126,7 @@
               ) %>
         <% end %>
       </section>
+
       <section class="print-no-break govuk-!-padding-top-8">
         <%= render 'shared/check_answers/assets', read_only: true %>
       </section>
