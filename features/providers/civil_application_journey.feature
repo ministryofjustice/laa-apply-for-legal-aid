@@ -631,7 +631,7 @@ Feature: Civil application journeys
     And I should not see "Passported"
 
   @javascript @vcr
-  Scenario: Receives benefits and completes the application - happy path no back button
+  Scenario: Receives benefits and completes the application happy path no back button
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
@@ -854,8 +854,9 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
-    Given I complete the non-passported journey as far as check your answers
-    Then I click 'Save and continue'
+#    Given I complete the non-passported journey as far as check your answers
+    Given I start the application with a negative benefit check result
+#    Then I click 'Save and continue'
     Then I should be on a page showing "We used the following details to check your client's benefits status with the DWP"
     When I click link "Change your client's details"
     Then I should be on a page showing "Enter your client's details"

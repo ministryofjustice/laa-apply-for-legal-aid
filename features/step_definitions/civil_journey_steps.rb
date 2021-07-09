@@ -397,6 +397,7 @@ Given('I complete the journey as far as check client details with multiple proce
 end
 
 Given('I complete the passported journey as far as check your answers') do
+  proceeding_one = ProceedingType.find_by(code: 'PR0208')
   applicant = create(
     :applicant,
     first_name: 'Test',
@@ -419,9 +420,10 @@ Given('I complete the passported journey as far as check your answers') do
     :with_passported_state_machine,
     :at_entering_applicant_details,
     :with_proceeding_types,
+    explicit_proceeding_types: [proceeding_one],
     applicant: applicant
   )
-
+  add_scope_limitations(@legal_aid_application, proceeding_one)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
