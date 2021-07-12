@@ -485,7 +485,9 @@ Given('I complete the passported journey as far as check your answers') do
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
-Given('I complete the multiple proceedings journey as far as check passported answers') do
+Given('I complete the multiple proceedings journey as far as check passported answers with multiple proceedings') do
+  proceeding_one = ProceedingType.find_by(code: 'PR0208')
+  proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -497,8 +499,10 @@ Given('I complete the multiple proceedings journey as far as check passported an
     :with_chances_of_success,
     :with_gateway_evidence,
     :with_policy_disregards,
-    :with_benefits_transactions
+    :with_benefits_transactions,
+    explicit_proceeding_types: [proceeding_one, proceeding_two]
   )
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_merits_answers_path(@legal_aid_application))
 
