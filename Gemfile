@@ -144,7 +144,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 4.5'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'vcr'
