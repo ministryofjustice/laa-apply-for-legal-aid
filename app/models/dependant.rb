@@ -61,6 +61,8 @@ class Dependant < ApplicationRecord
   end
 
   def assets_over_threshold?
+    return false if assets_value.nil?
+
     assets_value > 8_000.0
   end
 
