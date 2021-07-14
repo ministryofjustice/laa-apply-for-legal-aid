@@ -31,7 +31,7 @@ class ApplicationProceedingType < ApplicationRecord
            :domestic_abuse?,
            to: :proceeding_type
 
-  scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
+  scope :using_delegated_functions, -> { unscoped.where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
 
   before_save :check_only_one_lead_proceedig
 
@@ -88,5 +88,4 @@ class ApplicationProceedingType < ApplicationRecord
     rec = self.class.order(proceeding_case_id: :desc).first
     rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
   end
-
 end

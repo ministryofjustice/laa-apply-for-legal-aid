@@ -14,7 +14,7 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
-  has_many :application_proceeding_types, -> { order(:created_at) }, dependent: :destroy
+  has_many :application_proceeding_types, -> { order(:created_at) }, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :chances_of_success, through: :application_proceeding_types
   has_many :attachments, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
@@ -58,9 +58,6 @@ class LegalAidApplication < ApplicationRecord
     ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end
 
-  attr_reader :proceeding_type_codes
-
-  validate :proceeding_type_codes_existence
   validates :provider, presence: true
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
@@ -152,7 +149,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def application_proceedings_by_name
-    types = application_proceeding_types.map do |application_proceeding_type|
+    # The name of this method is misleading - as they are no longer sorted by name, but by the order in
+    # which they were added to the application.
+    #
+    application_proceeding_types.map do |application_proceeding_type|
       proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
       OpenStruct.new({
                        name: proceeding_type.name,
@@ -160,8 +160,6 @@ class LegalAidApplication < ApplicationRecord
                        application_proceeding_type: application_proceeding_type
                      })
     end
-
-    types.sort_by(&:meaning)
   end
 
   def section_8_proceedings?
@@ -245,11 +243,6 @@ class LegalAidApplication < ApplicationRecord
       uncategorised_transactions_errors(transaction_type) unless any_transactions_selected?(transaction_type, bank_trx, cash_trx)
     end
     errors.present?
-  end
-
-  def proceeding_type_codes=(codes)
-    @proceeding_type_codes = codes
-    self.proceeding_types = ProceedingType.where(code: codes)
   end
 
   def add_benefit_check_result
@@ -457,12 +450,6 @@ class LegalAidApplication < ApplicationRecord
 
   def applicant_updated_after_benefit_check_result_updated?
     benefit_check_result.updated_at < applicant.updated_at
-  end
-
-  def proceeding_type_codes_existence
-    return if proceeding_type_codes.blank?
-
-    errors.add(:proceeding_type_codes, :invalid) if proceeding_types.size != proceeding_type_codes.size
   end
 
   def uncategorised_transactions_errors(transaction_type)

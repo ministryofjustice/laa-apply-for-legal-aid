@@ -20,7 +20,7 @@ RSpec.describe 'LegalAidApplication factory' do
         end
 
         context ':with_bank_accounts specified' do
-          it 'has the specified number of bank accunts' do
+          it 'has the specified number of bank accounts' do
             legal_aid_application = create :legal_aid_application, :with_applicant, with_bank_accounts: 3
             expect(legal_aid_application.applicant).to be_present
             expect(legal_aid_application.applicant.bank_accounts.size).to eq 3
@@ -174,34 +174,6 @@ RSpec.describe 'LegalAidApplication factory' do
       end
 
       it 'assigns the scope limitation to the application_proceeding_type' do
-        expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-        lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-        aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-        expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
-        expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-      end
-    end
-
-    context 'specifying the proceeding types' do
-      let!(:pt1) { create :proceeding_type }
-      let!(:pt2) { create :proceeding_type }
-      let(:laa) { create :legal_aid_application, :with_multiple_proceeding_types, proceeding_types: [pt1, pt2] }
-
-      subject { laa }
-
-      it 'does not create any more proceeding type records' do
-        expect(ProceedingType.count).to eq 2
-        expect { subject }.not_to change { ProceedingType.count }
-      end
-
-      it 'creates one scope limitation and adds it to the lead proceeding types eligible scope limitaions' do
-        expect(ScopeLimitation.count).to be 0
-        expect { subject }.to change { ScopeLimitation.count }.by(1)
-        expect(laa.lead_proceeding_type.eligible_scope_limitations.first).to eq ScopeLimitation.first
-      end
-
-      it 'assigns the scope to the application  lead processing type' do
         expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
         lead_pt = laa.lead_proceeding_type
         apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)

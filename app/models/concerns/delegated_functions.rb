@@ -16,7 +16,7 @@ module DelegatedFunctions
   end
 
   def proceeding_with_earliest_delegated_functions
-    application_proceeding_types.using_delegated_functions.first
+    application_proceeding_types.unscoped.using_delegated_functions.first
   end
 
   def earliest_delegated_functions_date
