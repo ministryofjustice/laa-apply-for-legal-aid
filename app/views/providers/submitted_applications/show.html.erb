@@ -105,6 +105,13 @@
               ) %>
         <% end %>
       </section>
+
+      <% if @legal_aid_application.irregular_incomes.any? %>
+        <%= render 'irregular_incomes_table',
+                   irregular_incomes: @legal_aid_application.irregular_incomes,
+                   period: @legal_aid_application.year_to_calculation_date %>
+      <% end %>
+
       <section class="print-no-break">
         <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= t('.payments') %></h3>
         <% if @legal_aid_application.applicant_receives_benefit? %>
@@ -119,6 +126,7 @@
               ) %>
         <% end %>
       </section>
+
       <section class="print-no-break govuk-!-padding-top-8">
         <%= render 'shared/check_answers/assets', read_only: true %>
       </section>

@@ -84,9 +84,9 @@ RSpec.describe BankAccount, type: :model do
     end
 
     context 'no bank transactions' do
-      it 'returns zero' do
+      it 'returns the balance from the bank account record' do
         expect(bank_account.bank_transactions.size).to eq 0
-        expect(bank_account.latest_balance).to eq 0.0
+        expect(bank_account.latest_balance).to eq bank_account.balance
       end
     end
 
