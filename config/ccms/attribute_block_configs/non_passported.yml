@@ -1588,53 +1588,89 @@ money_due:
 
 client_residing_person:
   CLI_RES_PER_INPUT_D_12WP3_3A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: 'Person Residing: DOB'
     user_defined: true
     response_type: date
     value: '#dependant_date_of_birth'
+  CLI_RES_PER_INPUT_B_12WP3_30A:
+    generate_block?: '#dependant_adult_relative?'
+    br100_meaning: 'Person Residing: Employed?'
+    user_defined: true
+    response_type: boolean
+    value: false
   CLI_RES_PER_INPUT_B_12WP3_20A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: "Dependant: relationship is a foster child"
     user_defined: false
     response_type: boolean
     value: false
+  CLI_RES_PER_INPUT_B_12WP3_31A:
+    generate_block?: '#dependant_adult_relative?'
+    br100_meaning: "Dependant: receive their own income?"
+    user_defined: true
+    response_type: boolean
+    value: false
+  CLI_RES_PER_INPUT_T_12WP3_17A:
+    generate_block?: true
+    br100_meanig: 'Person residing: relationship to client'
+    user_defined: true
+    response_type: text
+    value: '#dependant_ccms_relationship_to_client'
   CLI_RES_PER_INPUT_B_12WP3_21A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: "Dependant: Relationship is child aged 15 and under"
     user_defined: false
     response_type: boolean
     value: '#dependant_fifteen_or_less?'
   CLI_RES_PER_INPUT_B_12WP3_23A:
-    generate_block: true
+    generate_block?: '#dependant_child_relative?'
     br100_meaning: "Person Residing: The child receives their own income?"
     user_defined: true
     response_type: boolean
     value: '#dependant_has_income?'
   CLI_RES_PER_INPUT_B_12WP3_24A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: "Dependant: Relationship is child aged 16 and over"
     user_defined: false
     response_type: boolean
     value: '#dependant_sixteen_or_over?'
+  CLI_RES_PER_INPUT_B_12WP3_35A:
+    generate_block?: '#dependant_adult_relative?'
+    br100_meaning: 'Person Residing: Entitled to claim benefits?'
+    user_defined: true
+    response_type: boolean
+    value: false
   CLI_RES_PER_INPUT_B_12WP3_28A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: "Dependant: Relationship is adult"
     user_defined: false
     response_type: boolean
     value: '#dependant_adult_relative?'
   CLI_RES_PER_INPUT_B_12WP3_32A:
-    generate_block: true
+    generate_block?: true
     br100_meaning: "Dependant: Relationship is non dependent"
     user_defined: false
     response_type: boolean
     value: false
   CLI_RES_PER_INPUT_B_12WP3_36A:
-    generate_block: true
+    generate_block?: '#dependant_child_relative?'
     br100_meaning: "Person Residing: In full time education?"
     user_defined: true
     response_type: boolean
     value: '#dependant_in_full_time_education?'
+  CLI_RES_PER_INPUT_T_12WP3_1A:
+    generate_block?: true
+    br100_meaning: 'Person residing: name'
+    user_defined: true
+    response_type: text
+    value: '#dependant_name'
+  CLI_RES_PER_INPUT_B_12WP3_19A:
+    generate_block?: '#dependant_adult_relative?'
+    br100_meaning: 'Person Residing: Capital over £8000?'
+    user_defined: true
+    response_type: boolean
+    value: '#dependant_assets_over_threshold?'
 
 
 national_savings:

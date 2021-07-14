@@ -16,13 +16,14 @@ module CCMS
                  username: 4_953_649
         end
 
-        let!(:adult_dependant) { create :dependant, :over18, legal_aid_application: legal_aid_application, number: 3 }
+        let!(:adult_dependant) { create :dependant, :over18, legal_aid_application: legal_aid_application, number: 3, assets_value: 8_000.01 }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
+        let(:dependants) { legal_aid_application.dependants.all }
 
         context 'non-passported' do
           let(:legal_aid_application) do
@@ -39,10 +40,134 @@ module CCMS
           end
 
           context 'with dependant children' do
-            let!(:younger_child) { create :dependant, :under15, legal_aid_application: legal_aid_application, number: 1, has_income: false }
-            let!(:older_child) { create :dependant, :child16_to18, legal_aid_application: legal_aid_application, number: 2, has_income: true }
+            let!(:younger_child) { create :dependant, :under15, legal_aid_application: legal_aid_application, number: 1, has_income: false, assets_value: 1_000 }
+            let!(:older_child) { create :dependant, :child16_to18, legal_aid_application: legal_aid_application, number: 2, has_income: true, assets_value: 0 }
 
             context 'variable attributes' do
+              context 'attribute CLI_RES_PER_INPUT_T_12WP3_1A - Person residing: name' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_1A') }
+                let(:sorted_blocks) { blocks.sort { |a, b| a.css('ResponseValue').text <=> b.css('ResponseValue').text } }
+
+                it 'generates one block per dependant regardless of whether they are adults or children' do
+                  expect(blocks.size).to eq dependants.size
+                end
+
+                it 'includes block with name' do
+                  expected_names = dependants.map(&:name).sort
+                  sorted_blocks.each_with_index do |block, i|
+                    expect(block).to have_text_response expected_names[i]
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_B_12WP3_30A - Person residing: Employed?' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_30A') }
+
+                it 'only generates a block for the adult_dependants' do
+                  expect(blocks.size).to eq dependants.adult_relative.size
+                end
+
+                it 'generates false for every block' do
+                  blocks.each do |block|
+                    expect(block).to have_boolean_response false
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_B_12WP3_31A - Dependant: receive their own income?' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_31A') }
+
+                it 'generates a block only for adult dependants' do
+                  expect(blocks.size).to eq dependants.adult_relative.size
+                end
+
+                it 'generates false for every block' do
+                  blocks.each do |block|
+                    expect(block).to have_boolean_response false
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_T_12WP3_17A - Person residing: relationship to client' do
+                before do
+                  legal_aid_application.dependants.map(&:destroy!)
+                  create :dependant, legal_aid_application: legal_aid_application, date_of_birth: dob, relationship: relationship
+                  legal_aid_application.reload
+                end
+
+                context 'adult_relative' do
+                  let(:relationship) { 'adult_relative' }
+                  let(:dob) { Time.current - 22.years }
+                  let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
+
+                  it 'generates just one block' do
+                    expect(blocks.size).to eq 1
+                  end
+
+                  it 'generated Dependant adult as relationship' do
+                    expect(blocks.first).to have_text_response 'Dependant adult'
+                  end
+                end
+
+                context 'child 15 or less' do
+                  let(:relationship) { 'child_relative' }
+                  let(:dob) { Time.current - 14.years }
+                  let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
+
+                  it 'generated Dependant adult as relationship' do
+                    expect(blocks.first).to have_text_response 'Child aged 15 and under'
+                  end
+                end
+
+                context 'child 16 or more' do
+                  let(:relationship) { 'child_relative' }
+                  let(:dob) { Time.current - 17.years }
+                  let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
+
+                  it 'generated Dependant adult as relationship' do
+                    expect(blocks.first).to have_text_response 'Child aged 16 and over'
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_B_12WP3_35A - Person residing: entitled to claim benefits?' do
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_35A') }
+                it 'only produces a block for adult relatives' do
+                  expect(dependants.size > dependants.adult_relative.size).to be true
+                  expect(blocks.size).to eq dependants.adult_relative.size
+                end
+
+                it 'hardcodes the value to false' do
+                  blocks.each do |block|
+                    expect(block).to have_boolean_response false
+                  end
+                end
+              end
+
+              context 'attribute CLI_RES_PER_INPUT_B_12WP3_19A - Person residing: Capital over £8000?' do
+                before { dependants.each { |dep| dep.update!(assets_value: value) } }
+
+                let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_19A') }
+
+                context 'all dependants have over £8,000 of assets' do
+                  let(:value) { 8_000.01 }
+                  it 'codes all blocks to true' do
+                    blocks.each do |block|
+                      expect(block).to have_boolean_response true
+                    end
+                  end
+                end
+
+                context 'all dependants have less than £8,000 in assets' do
+                  let(:value) { 7_999.99 }
+                  it 'codes all blocks to true' do
+                    blocks.each do |block|
+                      expect(block).to have_boolean_response false
+                    end
+                  end
+                end
+              end
+
               context 'attribute CLI_RES_PER_INPUT_B_12WP3_21A - Dependant: Relationship is child aged 15 and under' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_21A') }
 
@@ -85,20 +210,21 @@ module CCMS
                 end
               end
 
-              context 'attirbute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult' do
+              context 'attribute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_28A') }
+                before { dependants.each { |dep| dep.update!(relationship: relationship) } }
 
-                it 'is false for both children' do
-                  blocks.each do |block|
-                    expect(block).to have_boolean_response false
+                context 'all dependants are children' do
+                  let(:relationship) { 'child_relative' }
+                  it 'returns false for all blocks' do
+                    blocks.each { |block| expect(block).to have_boolean_response false }
                   end
                 end
 
-                it 'is true if they are declared as adults' do
-                  older_child.update!(relationship: 'adult_relative')
-                  younger_child.update!(relationship: 'adult_relative')
-                  blocks.each do |block|
-                    expect(block).to have_boolean_response true
+                context 'all dependants are adults' do
+                  let(:relationship) { 'adult_relative' }
+                  it 'returns false for all blocks' do
+                    blocks.each { |block| expect(block).to have_boolean_response true }
                   end
                 end
               end
@@ -106,14 +232,17 @@ module CCMS
               context 'attribute CLI_RES_PER_INPUT_D_12WP3_3A - Person residing: DOB' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_D_12WP3_3A') }
                 before do
+                  adult_dependant.update!(date_of_birth: Date.new(2000, 5, 6))
                   older_child.update!(date_of_birth: Date.new(2018, 1, 8))
                   younger_child.update!(date_of_birth: Date.new(2021, 3, 2))
                 end
 
                 it 'generates the dates correctly' do
-                  # sort the blocks to ensure 02-03-2021 comes before 08-01-2018
-                  expect(blocks.min).to have_date_response '02-03-2021'
-                  expect(blocks.max).to have_date_response '08-01-2018'
+                  # sort the blocks to ensure order is 02-03-2021, 06-05-2000, 08-01-2018
+                  sorted_blocks = blocks.sort { |a, b| a.css('ResponseValue').text <=> b.css('ResponseValue').text }
+                  expect(sorted_blocks[0]).to have_date_response '02-03-2021'
+                  expect(sorted_blocks[1]).to have_date_response '06-05-2000'
+                  expect(sorted_blocks[2]).to have_date_response '08-01-2018'
                 end
               end
             end
@@ -132,11 +261,11 @@ module CCMS
                 expect(entity).to be_present
               end
 
-              it 'generates the an attribute block for each dependant child' do
+              it 'generates the an attribute block for each dependant' do
                 hard_coded_attrs.each do |attr|
                   entity, attr_name, _type, _user_defined, _value = attr
                   blocks = XmlExtractor.call(xml, entity.to_sym, attr_name)
-                  expect(blocks.size).to eq 2
+                  expect(blocks.size).to eq dependants.size
                 end
               end
 
@@ -172,31 +301,13 @@ module CCMS
             end
           end
 
-          context 'without dependant children' do
+          context 'without dependants' do
+            before { dependants.map(&:destroy!) }
+
             it 'does not generate a client residing person entity' do
               entity = XmlExtractor.call(xml, :client_residing_person_entity)
               expect(entity).to be_empty
             end
-          end
-        end
-
-        context 'passported' do
-          let(:legal_aid_application) do
-            create :legal_aid_application,
-                   :with_everything,
-                   :with_applicant_and_address,
-                   :with_positive_benefit_check_result,
-                   :with_proceeding_types,
-                   :with_chances_of_success,
-                   populate_vehicle: true,
-                   with_bank_accounts: 2,
-                   provider: provider,
-                   office: office
-          end
-
-          it 'does not generate a client residing person entity' do
-            entity = XmlExtractor.call(xml, :client_residing_person_entity)
-            expect(entity).to be_empty
           end
         end
       end
