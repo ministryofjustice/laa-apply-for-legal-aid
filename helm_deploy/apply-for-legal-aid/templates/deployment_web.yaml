@@ -20,9 +20,9 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        # https://github.com/ministryofjustice/hmpps-utility-container-images
+        # https://github.com/ministryofjustice/clamav
         - name: clamav
-          image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+          image: '754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/clamav:1.0.2'
           imagePullPolicy: IfNotPresent
           ports:
             - name: clamav
