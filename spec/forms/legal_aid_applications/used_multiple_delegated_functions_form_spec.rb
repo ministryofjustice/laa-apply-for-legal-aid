@@ -110,7 +110,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        months = Time.zone.now.ago(12.months).strftime('%d %m %Y')
+        months = Time.zone.now.ago(12.months).strftime('%d %B %Y')
         application_proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 

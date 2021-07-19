@@ -145,8 +145,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
       end
     end
 
@@ -158,10 +158,10 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
 
       it 'displays error' do
-        hint_text_date = Time.zone.now.ago(12.months).strftime('%d %m %Y')
+        hint_text_date = Time.zone.now.ago(12.months).strftime('%d %B %Y')
 
         subject
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", meaning: proceeding_type_meaning1, months: hint_text_date))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", months: hint_text_date))
       end
     end
 
@@ -174,8 +174,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
       end
     end
 
@@ -188,8 +188,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'displays error' do
         expect(response.body).to include('govuk-error-summary')
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
-        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
+        expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
       end
     end
 
@@ -280,8 +280,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
         it 'displays error' do
           expect(response.body).to include('govuk-error-summary')
-          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning1))
-          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid", meaning: proceeding_type_meaning2))
+          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
+          expect(response.body).to include(I18n.t("#{base_error_translation}.date_invalid"))
         end
       end
     end
