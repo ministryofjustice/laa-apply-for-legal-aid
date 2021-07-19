@@ -48,16 +48,6 @@ module Reports
                merits_submitted_at: Time.current
       end
 
-      # let(:legal_aid_application_with_multiple_proceedings) do
-      #   puts ">>>>>>>>>>>> with mp  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-      #   puts ">>>>>>>>>>>> #{LegalAidApplication.count} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-      #   create :application,
-      #          :with_proceeding_types,
-      #          explicit_proceeding_types: proceeding_types
-      #   puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-      #   puts ">>>>>>>>>>>> #{LegalAidApplication.count} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-      # end
-
       let!(:chances_of_success) do
         create :chances_of_success,
                success_prospect: prospect,
