@@ -48,30 +48,28 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'choose yes' do
-      let(:params) { { binary_choice_form: { has_other_proceeding: 'true' } } }
+      let(:params) { { legal_aid_application: { has_other_proceeding: 'true' } } }
 
-      context 'choose yes' do
-        let(:params) { { legal_aid_application: { has_other_proceeding: 'true' } } }
-
-        it 'redirects to the page to add another proceeding type' do
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
+      it 'redirects to the page to add another proceeding type' do
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
       end
+    end
 
-      context 'choose no' do
-        let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
+    context 'choose no' do
+      let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
 
-        it 'redirects to the delegated functions page' do
-          expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
-        end
+      it 'redirects to the delegated functions page' do
+        expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
       end
+    end
 
-      context 'when the user is checking answers and has deleted the domestic abuse proceeding but left the section 8' do
-        let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, :with_only_section8_proceeding_type }
+    context 'when the user is checking answers and has deleted the domestic abuse proceeding but left the section 8' do
+      let(:proceeding_type) { create :proceeding_type, code: 'SE003', ccms_matter: 'Section 8 orders' }
+      let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, assign_lead_proceeding: false, explicit_proceeding_types: [proceeding_type] }
+      let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
 
-        it 'redirects to the page to add another proceeding type' do
-          expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
-        end
+      it 'redirects to the page to add another proceeding type' do
+        expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
       end
     end
 
