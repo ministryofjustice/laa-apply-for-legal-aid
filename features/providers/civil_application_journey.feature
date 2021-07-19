@@ -145,8 +145,8 @@ Feature: Civil application journeys
     Then I select 'Harassment - injunction'
     Then I enter the 'harassment injunction used delegated functions on' date of 2 days ago
     Then I click 'Save and continue'
-    Then I should be on a page showing "Confirm when you used delegated functions"
-    Then I choose a 'These dates are correct' radio button
+    Then I should be on a page showing 'Check delegated functions dates'
+    Then I choose a 'Yes' radio button
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing 'Occupation order'

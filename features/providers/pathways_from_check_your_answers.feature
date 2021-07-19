@@ -120,6 +120,8 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
     Then I select 'I have not used delegated functions'
     And I click 'Save and continue'
+    Then I should be on the 'limitations' page showing "What you're applying for"
+    And I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
     And I should be on a page showing 'Child arrangements order (contact)'

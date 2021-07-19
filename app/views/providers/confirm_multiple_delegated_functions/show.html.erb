@@ -38,8 +38,8 @@
         </tbody>
       </table>
 
-      <%= form.govuk_radio_buttons_fieldset :confirm_multiple_delegated_functions_date, legend: { text: t('.radios_heading') } do %>
-        <%= form.govuk_radio_button :confirm_multiple_delegated_functions_date, true, link_errors: true, label: { text: t(".#{scope}.details_correct")} %>
+      <%= form.govuk_radio_buttons_fieldset :confirm_multiple_delegated_functions_date, legend: { text: t('.radios_heading'), tag: 'h2' } do %>
+        <%= form.govuk_radio_button :confirm_multiple_delegated_functions_date, true, label: { text: t('generic.yes')}, link_errors: true %>
         <%= form.govuk_radio_button :confirm_multiple_delegated_functions_date, false, label: { text: t(".#{scope}.details_incorrect")} %>
       <% end %>
 

@@ -175,11 +175,9 @@ en:
           blank_singular: Select yes if this date is correct
         plural:
           warning_text: One or more of the dates you entered is over one month old.
-          details_correct: These dates are correct
           details_incorrect: No, I need to change one or more of these dates
         singular:
           warning_text: The date you entered is over one month old.
-          details_correct: Yes
           details_incorrect: No, I need to change this date
     correct_dwp_results:
       show:
