@@ -89,6 +89,8 @@ module Reports
           'Case Type',
           'DWP Overridden',
           'Delegated functions used',
+          'Proceedings DF used',
+          'Proceedings DF not used',
           'Delegated functions dates',
           'Delegated functions reported',
           'Requested higher limit?',
@@ -227,6 +229,8 @@ module Reports
 
       def delegated_functions
         @line << yesno(used_delegated_functions?)
+        @line << proceedings_df_used
+        @line << proceedings_df_not_used
         @line << application_proceeding_types.map(&:pretty_df_date).join(', ')
         @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime('%Y-%m-%d') : '')
       end
@@ -376,6 +380,14 @@ module Reports
 
       def gateway_evidence_count
         gateway_evidence.present? ? gateway_evidence.pdf_attachments.count : ''
+      end
+
+      def proceedings_df_used
+        application_proceeding_types.using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
+      end
+
+      def proceedings_df_not_used
+        application_proceeding_types.not_using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
       end
     end
   end

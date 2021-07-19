@@ -14,7 +14,7 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
-  has_many :application_proceeding_types, -> { order(:created_at) }, inverse_of: :legal_aid_application, dependent: :destroy
+  has_many :application_proceeding_types, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :chances_of_success, through: :application_proceeding_types
   has_many :attachments, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
@@ -152,7 +152,7 @@ class LegalAidApplication < ApplicationRecord
     # The name of this method is misleading - as they are no longer sorted by name, but by the order in
     # which they were added to the application.
     #
-    application_proceeding_types.map do |application_proceeding_type|
+    application_proceeding_types.in_order_of_addition.map do |application_proceeding_type|
       proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
       OpenStruct.new({
                        name: proceeding_type.name,

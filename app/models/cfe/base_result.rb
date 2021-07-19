@@ -8,6 +8,8 @@ module CFE
     self.table_name = 'cfe_results'
 
     def result_hash
+      return {} if result.nil?
+
       JSON.parse(result, symbolize_names: true)
     end
 

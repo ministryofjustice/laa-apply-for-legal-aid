@@ -31,7 +31,11 @@ class ApplicationProceedingType < ApplicationRecord
            :domestic_abuse?,
            to: :proceeding_type
 
-  scope :using_delegated_functions, -> { unscoped.where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
+  scope :in_order_of_addition, -> { order(:created_at) }
+
+  scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
+
+  scope :not_using_delegated_functions, -> { where(used_delegated_functions_on: nil) }
 
   before_save :check_only_one_lead_proceedig
 
