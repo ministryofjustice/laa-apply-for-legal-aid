@@ -106,6 +106,7 @@ en:
     consents:
       show:
         title_html: Do you agree to share 3 months of bank statements with the <abbr title='Legal Aid Agency'>LAA</abbr> via TrueLayer?
+        head_title: Do you agree to share 3 months of bank statements with the LAA via TrueLayer?
         inset_text: We only use your bank statements to support your legal aid application. We do not use them for anything else
         summary_heading: What will TrueLayer be able to see?
         able_to_see:
