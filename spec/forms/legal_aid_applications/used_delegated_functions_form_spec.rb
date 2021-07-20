@@ -98,7 +98,7 @@ RSpec.describe LegalAidApplications::UsedDelegatedFunctionsForm, type: :form, vc
       end
 
       it 'generates the expected error message' do
-        months = Time.zone.now.ago(12.months).strftime('%d %m %Y')
+        months = Time.zone.now.ago(12.months).strftime('%d %B %Y')
         message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: proceeding_type.meaning)
         expect(message).not_to match(/^translation missing:/)
         expect(subject.errors.first.type).to match(message)
