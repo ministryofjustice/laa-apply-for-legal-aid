@@ -28,6 +28,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
     state :provider_entering_merits
     state :checking_merits_answers
     state :generating_reports
+    state :submission_paused
     state :submitting_assessment
     state :assessment_submitted
     state :use_ccms
@@ -129,7 +130,9 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
       transitions from: :generating_reports, to: :submitting_assessment,
                   after: proc { |legal_aid_application|
                            legal_aid_application.find_or_create_ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
-                         }
+                         },
+                  guards: [:allow_ccms_submission?]
+      transitions from: :generating_reports, to: :submission_paused
     end
 
     event :submitted_assessment do
