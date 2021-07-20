@@ -1,6 +1,7 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     def show
+      delete_check_benefits_from_history
       form
     end
 
@@ -37,6 +38,14 @@ module Providers
       return {} unless params[:binary_choice_form]
 
       params.require(:binary_choice_form).permit(:correct_dwp_result)
+    end
+
+    def delete_check_benefits_from_history
+      return if page_history.empty?
+
+      temp_page_history = page_history
+      temp_page_history.delete_if { |path| path.include?('check_benefits') }
+      page_history_service.write(temp_page_history)
     end
   end
 end
