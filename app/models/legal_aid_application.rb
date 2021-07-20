@@ -149,8 +149,12 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def application_proceedings_by_name
-    # The name of this method is misleading - as they are no longer sorted by name, but by the order in
-    # which they were added to the application.
+    # returns an array of OpenStructs containing:
+    # - name of the proceeding type
+    # - meaning of the proceeding type
+    # - the ApplicationProceedingType
+    #
+    # in the order they were added to the LegalAidApplication
     #
     application_proceeding_types.in_order_of_addition.map do |application_proceeding_type|
       proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
