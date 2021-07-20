@@ -99,12 +99,6 @@ Metrics/PerceivedComplexity:
   IgnoredMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
 
-# TODO: Monitor this cop - when first added we got lots of
-# false positives e.g. with `steps %(...)` so it was
-# turned off, fixes may mean we can re-enable it
-Layout/LineEndStringConcatenationIndentation:
-  Enabled: false
-
 Naming/InclusiveLanguage:
   CheckComments: false
   CheckStrings: false
