@@ -27,7 +27,7 @@ module LegalAidApplications
 
       return if proceeding_types_include_domestic_abuse?
 
-      errors.add(:base, I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
+      errors.add(:has_other_proceeding, I18n.t('providers.has_other_proceedings.show.must_add_domestic_abuse'))
     end
 
     def exclude_from_model
