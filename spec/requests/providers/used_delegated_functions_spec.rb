@@ -144,7 +144,7 @@ RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr:
       end
 
       it 'displays error' do
-        hint_text_date = Time.zone.now.ago(12.months).strftime('%d %m %Y')
+        hint_text_date = Time.zone.now.ago(12.months).strftime('%d %B %Y')
 
         subject
         expect(response.body).to include(I18n.t("#{base_error_translation}.date_not_in_range", meaning: meaning, months: hint_text_date))

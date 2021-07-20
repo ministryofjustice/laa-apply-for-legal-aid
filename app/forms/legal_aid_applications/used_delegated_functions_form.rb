@@ -105,7 +105,7 @@ module LegalAidApplications
     end
 
     def validate_proceeding_date
-      month_range = Date.current.ago(12.months).strftime('%d %m %Y')
+      month_range = Date.current.ago(12.months).strftime('%d %B %Y')
 
       delegated_functions_dates.each do |date_field|
         meaning = date_field.label
