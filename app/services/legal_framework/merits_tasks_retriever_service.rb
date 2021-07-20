@@ -16,7 +16,7 @@ module LegalFramework
     private
 
     def proceeding_types_codes
-      legal_aid_application.proceeding_types.map(&:ccms_code)
+      legal_aid_application.application_proceeding_types.map{ |apt| apt.proceeding_type.ccms_code }
     end
   end
 end
