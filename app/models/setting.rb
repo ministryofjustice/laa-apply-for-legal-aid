@@ -23,6 +23,10 @@ class Setting < ApplicationRecord
     setting.override_dwp_results
   end
 
+  def self.enable_ccms_submission?
+    setting.enable_ccms_submission
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
