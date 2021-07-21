@@ -31,7 +31,7 @@
             <% if type.application_proceeding_type[:used_delegated_functions_on] %>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header" id="proceeding_type_<%= type.code %>"><%= type[:meaning] %></th>
-                <td class="govuk-table__cell"><%= type.application_proceeding_type[:used_delegated_functions_on] %></td>
+                <td class="govuk-table__cell" style="min-width: 9em"><%= type.application_proceeding_type[:used_delegated_functions_on] %></td>
               </tr>
             <% end %>
           <% end %>
