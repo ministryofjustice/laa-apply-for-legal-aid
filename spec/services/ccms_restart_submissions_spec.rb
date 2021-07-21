@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe CCMSRestartSubmissions do
   subject(:restart_submissions) { described_class.call }
 
+  before do
+    allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true)
+    allow(Setting).to receive(:enable_ccms_submission?).and_return(true)
+  end
+
   context 'when no submissions are paused' do
     it { is_expected.to eql 'No paused submissions found' }
   end
