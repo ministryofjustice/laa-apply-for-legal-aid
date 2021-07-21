@@ -414,6 +414,10 @@ class LegalAidApplication < ApplicationRecord
     state_machine_proxy.generated_reports!(self)
   end
 
+  def restart_submission!
+    state_machine_proxy.restart_submission!(self)
+  end
+
   def statement_of_case_uploaded?
     attachments.statement_of_case.any?
   end

@@ -135,6 +135,12 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
       transitions from: :generating_reports, to: :submission_paused
     end
 
+    event :restart_submission do
+      transitions from: :submission_paused, to: :submitting_assessment,
+                  after: proc { |legal_aid_application| legal_aid_application.find_or_create_ccms_submission.process_async! },
+                  guards: [:allow_ccms_submission?]
+    end
+
     event :submitted_assessment do
       transitions from: :submitting_assessment, to: :assessment_submitted
     end
