@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ProceedingTypeFullTextSearch do
   before(:all) do
     ServiceLevel.create!(service_level_number: 3, name: 'Full representation')
+    Setting.setting.update!(allow_multiple_proceedings: true)
     ProceedingType.populate
   end
 
@@ -43,6 +44,15 @@ RSpec.describe ProceedingTypeFullTextSearch do
           result = subject.first
           expect(result.meaning).to eq 'FGM Protection Order'
           expect(result.description).to eq 'To be represented on an application for a Female Genital Mutilation Protection Order under the Female Genital Mutilation Act.'
+        end
+      end
+
+      context 'search term only exists in additional_search_terms' do
+        let(:search_term) { 'cao' }
+
+        it 'returns two records' do
+          result_set = subject
+          expect(result_set.map(&:code).sort).to eq %w[PH0003 PH0004]
         end
       end
 
@@ -144,7 +154,11 @@ RSpec.describe ProceedingTypeFullTextSearch do
                                            'FGM Protection Order',
                                            'Variation or discharge under section 5 protection from harassment act 1997',
                                            'Inherent jurisdiction high court injunction',
-                                           'Extend, variation or discharge - Part IV'])
+                                           'Extend, variation or discharge - Part IV',
+                                           'Child arrangements order (contact)',
+                                           'Child arrangements order (residence)',
+                                           'Prohibited steps order',
+                                           'Specific issue order'])
         end
       end
     end
