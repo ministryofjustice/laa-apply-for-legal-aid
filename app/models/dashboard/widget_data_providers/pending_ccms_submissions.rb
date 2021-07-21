@@ -5,7 +5,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:number, name: 'Pending CCMS Submissions').to_hash
+            Geckoboard::NumberField.new(:number, name: 'Pending CCMS Submissions')
           ]
         }
       end

@@ -6,7 +6,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:number, name: 'Firms').to_hash
+            Geckoboard::NumberField.new(:number, name: 'Firms')
           ]
         }
       end

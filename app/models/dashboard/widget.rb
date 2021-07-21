@@ -8,7 +8,7 @@ module Dashboard
     end
 
     def run
-      @dataset = @client.datasets.find_or_create(dataset_name, @widget_klass.dataset_definition)
+      @dataset = @client.datasets.find_or_create(dataset_name, **@widget_klass.dataset_definition)
       @dataset.put(data)
       log_data_message
     end
