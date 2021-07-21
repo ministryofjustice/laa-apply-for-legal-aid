@@ -17,7 +17,7 @@ module Dashboard
       end
 
       def run
-        @dataset = @client.datasets.find_or_create(dataset_name, dataset_definition)
+        @dataset = @client.datasets.find_or_create(dataset_name, **dataset_definition)
         @dataset.post(build_row, delete_by: :timestamp)
         log_data_message
       end
