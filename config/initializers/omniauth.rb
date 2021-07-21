@@ -1,5 +1,7 @@
-require Rails.root.join 'app/lib/omni_auth/omni_auth_true_layer'
-require Rails.root.join 'app/controllers/applicants/omniauth_callbacks_controller.rb'
+Rails.application.reloader.to_prepare do
+  require Rails.root.join 'app/lib/omni_auth/omni_auth_true_layer'
+  require Rails.root.join 'app/controllers/applicants/omniauth_callbacks_controller.rb'
+end
 
 OmniAuth.config.allowed_request_methods = %i[post get]
 OmniAuth.config.logger = Rails.logger
