@@ -13,7 +13,7 @@
                                                OpenStruct.new(value: false, label: t('.no'))],
                                               :value,
                                               :label,
-                                              legend: {text: content_for(:page_title), tag: 'h1', size: 'l'} %>
+                                              legend: {text: t('.title_html'), tag: 'h1', size: 'l'} %>
 
       <% if @form.errors.any? %>
         <%= link_to_accessible @form.errors.map { |error| error.message }.first, "#correct_dwp_result-true-field", class: 'govuk-heading-s' %>
