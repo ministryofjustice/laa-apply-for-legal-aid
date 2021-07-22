@@ -127,3 +127,12 @@ Feature: Pathways from check your answers
     And I should be on a page showing 'Child arrangements order (contact)'
     And I should be on a page showing 'LASPO'
     And the answer for 'in scope of laspo' should be 'Yes'
+
+  @javascript @vcr
+  Scenario: I click the back button on the DWP override page
+    Given I complete the non-passported journey as far as check your answers
+    And the setting to allow DWP overrides is enabled
+    When I click 'Save and continue'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    When I click link 'Back'
+    Then I should be on a page showing 'Check your answers'

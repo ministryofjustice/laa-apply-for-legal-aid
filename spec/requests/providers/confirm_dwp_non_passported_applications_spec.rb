@@ -22,6 +22,22 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         expect(response).to be_successful
       end
     end
+
+    describe 'back link' do
+      let(:page1) { providers_legal_aid_application_check_provider_answers_path(application) }
+      let(:page2) { providers_legal_aid_application_check_benefits_path(application) }
+
+      before do
+        login_as application.provider
+        get page1
+        get page2
+        subject
+      end
+
+      it 'points to check youe answers page' do
+        expect(response.body).to have_back_link("#{page1}&back=true")
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications' do
