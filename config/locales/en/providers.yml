@@ -152,7 +152,7 @@ en:
       show:
         'no': No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
-        title: DWP records show that your client does not receive a passporting benefit – is this correct?
+        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not receive a passporting benefit – is this correct?
     confirm_multiple_delegated_functions_dates:
       show:
         heading: Confirm when you used delegated functions
@@ -221,7 +221,7 @@ en:
         title: Check your answers
         section_next:
           heading: What happens next
-          content: We'll check with the Department for Work and Pensions to see if your client receives benefits that qualify for legal aid.
+          content: We'll check with the Department for Work and Pensions (DWP) to see if your client receives benefits that qualify for legal aid.
       read_only:
         title: Your application
         banner:
