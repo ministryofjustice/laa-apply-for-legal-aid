@@ -57,16 +57,16 @@ RSpec.describe ProceedingTypeFullTextSearch do
       end
 
       context 'searching for a term which occures in more than one proceeding' do
-        let(:search_term) { 'molestation' }
+        let(:search_term) { 'injunction' }
 
         it 'returns two results' do
           result_set = subject
-          expect(result_set.size).to eq 2
+          expect(result_set.size).to eq 3
         end
 
         it 'returns the one with the search term in meaning first' do
           result_set = subject
-          expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
+          expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Inherent jurisdiction high court injunction', 'Non-molestation order']
         end
       end
 
@@ -111,16 +111,16 @@ RSpec.describe ProceedingTypeFullTextSearch do
         end
 
         context 'searching for a term which occurs in more than one proceeding' do
-          let(:search_term) { 'molestation' }
+          let(:search_term) { 'injunction' }
 
           it 'returns two results' do
             result_set = subject
-            expect(result_set.size).to eq 2
+            expect(result_set.size).to eq 3
           end
 
           it 'returns the one with the search term in meaning first' do
             result_set = subject
-            expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
+            expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Inherent jurisdiction high court injunction', 'Non-molestation order']
           end
         end
 
