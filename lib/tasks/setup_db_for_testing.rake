@@ -7,7 +7,8 @@ namespace :settings do
                     manually_review_all_cases: false,
                     allow_welsh_translation: false,
                     allow_multiple_proceedings: false,
-                    override_dwp_results: false)
+                    override_dwp_results: false,
+                    enable_ccms_submission: true)
 
     pp Setting.first
   end

@@ -56,6 +56,16 @@
         legend: { text: t('.labels.override_dwp_results') }
     ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+        :enable_ccms_submission,
+        yes_no_options,
+        :value,
+        :label,
+        inline: true,
+        hint: { text: t('.hints.enable_ccms_submission')},
+        legend: { text: t('.labels.enable_ccms_submission') }
+    ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>
