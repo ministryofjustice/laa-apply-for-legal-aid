@@ -147,6 +147,7 @@ en:
             Pension Credit (Guarantee Credit)
             Universal Credit
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
+        head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
     confirm_dwp_non_passported_applications:
       show:
@@ -894,6 +895,7 @@ en:
     use_ccms:
       show:
         title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to complete this application in CCMS
         sub_heading: "You cannot use this service if your client:"
         continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
@@ -905,6 +907,7 @@ en:
     use_ccms_employed:
       index:
         title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
+        head_title: You need to complete this application in CCMS
         warning: You cannot use this service if your client is employed.
         continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
