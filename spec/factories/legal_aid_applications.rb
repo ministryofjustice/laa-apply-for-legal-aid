@@ -161,6 +161,12 @@ FactoryBot.define do
       end
     end
 
+    trait :submission_paused do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :submission_paused)
+      end
+    end
+
     trait :use_ccms do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :unknown)

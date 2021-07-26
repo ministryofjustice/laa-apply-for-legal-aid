@@ -12,7 +12,23 @@ RSpec.describe Reports::ReportsCreator do
 
   subject { described_class.call(legal_aid_application) }
 
+  before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
+  let(:allow_ccms_submission) { true }
+
   describe '.call' do
+    context 'when the Setting.enable_ccms_submission? is turned off' do
+      let(:allow_ccms_submission) { false }
+
+      it 'updates the state to submission_paused' do
+        expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
+        expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
+        expect(Reports::BankTransactions::BankTransactionReportCreator).to_not receive(:call).with(legal_aid_application)
+        subject
+        legal_aid_application.reload
+        expect(legal_aid_application.state).to eq('submission_paused')
+      end
+    end
+
     it 'creates reports and update state' do
       expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
       expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)

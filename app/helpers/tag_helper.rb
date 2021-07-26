@@ -1,7 +1,12 @@
 module TagHelper
-  def gov_uk_tag(text:, type: nil, classes: [])
+  STATUS_TAGS = {
+    in_progress: 'govuk-tag--blue',
+    submitted: 'govuk-tag--green'
+  }.freeze
+
+  def gov_uk_tag(text:, status: nil, classes: [])
     classes << 'govuk-tag'
-    classes << "#{type.to_s.dasherize}-tag" if type
+    classes << STATUS_TAGS[status.to_sym] if status
     content_tag :strong, text, class: classes
   end
 end

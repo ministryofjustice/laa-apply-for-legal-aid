@@ -6,9 +6,18 @@ module Reports
       attr_reader :laa
 
       delegate :applicant_receives_benefit?,
+               :application_proceeding_types,
+               :cash_transactions,
                :ccms_submission,
+               :cfe_result,
                :created_at,
+               :dependants,
                :dwp_override,
+               :emergency_cost_override?,
+               :emergency_cost_requested,
+               :gateway_evidence,
+               :involved_children,
+               :irregular_incomes,
                :lead_application_proceeding_type,
                :office,
                :other_assets_declaration,
@@ -21,6 +30,7 @@ module Reports
                :opponent,
                :savings_amount,
                :merits_submitted_at,
+               :policy_disregards,
                :shared_ownership,
                :statement_of_case_uploaded?,
                :used_delegated_functions?,
@@ -71,13 +81,25 @@ module Reports
           'User name',
           'Office ID',
           'CCMS reference number',
-          'Matter type',
-          'Proceeding type selected',
+          'Single/Multi Proceedings',
+          'Matter types',
+          'No. of proceedings',
+          'Proceeding types selected',
+          'LASPO Question',
           'Case Type',
           'DWP Overridden',
           'Delegated functions used',
-          'Delegated functions date',
+          'Proceedings DF used',
+          'Proceedings DF not used',
+          'Delegated functions dates',
           'Delegated functions reported',
+          'Requested higher limit?',
+          'Limit requested',
+          'Payments received in cash?',
+          'Student finance received?',
+          'Payments made in cash?',
+          'Client has dependants?',
+          'Disregarded income/capital?',
           'Own home?',
           'Value',
           'Outstanding mortgage',
@@ -119,6 +141,11 @@ module Reports
           'Money owed value',
           'Restrictions?',
           'Restriction details',
+          'Fully eligible (means)?',
+          'Partially eligible (means)?',
+          'Number of children involved',
+          'Supporting evidence uploaded?',
+          'Number of items of evidence',
           'Opponent can understand?',
           'Ability to understand details',
           'Warning letter sent?',
@@ -151,11 +178,14 @@ module Reports
         passported_check_result
         dwp_overridden
         delegated_functions
+        default_cost_overrride
+        income_details
         main_home_details
         vehicle_details
         savings_and_investment_details
         other_assets_details
         restrictions
+        eligibility
         opponent_details
         merits
         sanitise
@@ -171,11 +201,22 @@ module Reports
 
       def application_details
         @line << case_ccms_reference
+        @line << (application_proceeding_types.count > 1 ? 'Multi' : 'Single')
       end
 
       def proceeding_details
-        @line << proceeding_types.map(&:ccms_matter).sort.join(', ')
+        @line << proceeding_types.map(&:ccms_matter).uniq.sort.join(', ')
+        @line << application_proceeding_types.count
         @line << proceeding_types.map(&:meaning).sort.join(', ')
+        @line << laspo_question
+      end
+
+      def income_details # rubocop:disable Metrics/AbcSize
+        @line << yesno(cash_transactions.credits.any?)
+        @line << yesno(irregular_incomes.student_finance.any?)
+        @line << yesno(cash_transactions.debits.any?)
+        @line << yesno(dependants.any?)
+        @line << yesno(policy_disregards.present?)
       end
 
       def passported_check_result
@@ -183,13 +224,20 @@ module Reports
       end
 
       def dwp_overridden
-        @line << (dwp_override ? 'TRUE' : 'FALSE')
+        @line << yesno(dwp_override)
       end
 
       def delegated_functions
         @line << yesno(used_delegated_functions?)
-        @line << (used_delegated_functions? ? used_delegated_functions_on&.strftime('%Y-%m-%d') : '')
+        @line << proceedings_df_used
+        @line << proceedings_df_not_used
+        @line << application_proceeding_types.map(&:pretty_df_date).join(', ')
         @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime('%Y-%m-%d') : '')
+      end
+
+      def default_cost_overrride
+        @line << yesno(emergency_cost_override?)
+        @line << emergency_cost_requested
       end
 
       def main_home_details
@@ -280,6 +328,14 @@ module Reports
         @line << (laa.has_restrictions? ? laa.restrictions_details : '')
       end
 
+      def eligibility
+        @line << yesno(cfe_result.eligible?)
+        @line << yesno(cfe_result.partially_eligible?)
+        @line << involved_children.count
+        @line << yesno(gateway_evidence.present?)
+        @line << gateway_evidence_count
+      end
+
       def opponent_details
         opponent.present? ? opponent_attrs : 8.times { @line << '' }
       end
@@ -309,6 +365,29 @@ module Reports
 
       def nil_or_zero?(value)
         value.nil? || value.zero?
+      end
+
+      def laspo_question
+        case @laa.in_scope_of_laspo
+        when true
+          'Yes'
+        when false
+          'No'
+        else
+          ''
+        end
+      end
+
+      def gateway_evidence_count
+        gateway_evidence.present? ? gateway_evidence.pdf_attachments.count : ''
+      end
+
+      def proceedings_df_used
+        application_proceeding_types.using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
+      end
+
+      def proceedings_df_not_used
+        application_proceeding_types.not_using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
       end
     end
   end

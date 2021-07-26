@@ -28,7 +28,7 @@ module LegalFramework
 
         context 'proceeding types already exist' do
           context 'Setting.allow_multiple_proceedings? returns true' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, proceeding_types: [proceeding_type1] }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, explicit_proceeding_types: [proceeding_type1] }
             let(:proceeding_type1) { ProceedingType.find_by(code: 'PR0206') }
             let(:proceeding_type2) { ProceedingType.find_by(code: 'PR0211') }
 
@@ -50,7 +50,7 @@ module LegalFramework
           end
 
           context 'Setting.allow_multiple_proceedings? returns false' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, proceeding_types: [proceeding_type1] }
+            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, explicit_proceeding_types: [proceeding_type1] }
             let(:proceeding_type1) { create :proceeding_type }
             let(:proceeding_type2) { create :proceeding_type }
             let!(:default_substantive_scope_limitation) do

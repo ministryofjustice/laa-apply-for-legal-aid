@@ -179,7 +179,7 @@ jobs:
     - store_test_results:
         path: /tmp/test-results/rspec
     - store_artifacts:
-        path: coverage
+        path: ./coverage
 
   integration_tests:
     executor: test-executor
