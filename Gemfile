@@ -89,7 +89,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'wicked_pdf'
 
 # interface to manage data
-gem 'rails_admin', '~> 2.1'
+gem 'rails_admin', '~> 2.2'
 
 # Manage security headers
 gem 'secure_headers'
