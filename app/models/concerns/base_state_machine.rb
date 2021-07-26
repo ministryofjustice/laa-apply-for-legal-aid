@@ -142,7 +142,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
     end
 
     event :submitted_assessment do
-      transitions from: :submitting_assessment, to: :assessment_submitted
+      transitions from: %i[submission_paused submitting_assessment], to: :assessment_submitted
     end
 
     event :reset_from_use_ccms do
