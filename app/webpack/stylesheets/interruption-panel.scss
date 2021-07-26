@@ -6,6 +6,10 @@
     color: govuk-colour("white");
   }
 
+  label {
+    font-size: 24px
+  }
+
   .govuk-error-summary, .govuk-error-message {
     display: none;
   }
