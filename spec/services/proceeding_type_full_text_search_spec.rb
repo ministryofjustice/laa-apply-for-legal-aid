@@ -10,6 +10,7 @@ RSpec.describe ProceedingTypeFullTextSearch do
   after(:all) do
     ServiceLevel.delete_all
     ProceedingType.delete_all
+    Setting.setting.update!(allow_multiple_proceedings: false)
   end
 
   let(:legal_aid_application) { create :legal_aid_application }
