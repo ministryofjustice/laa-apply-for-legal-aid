@@ -107,7 +107,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     context 'with at least one domestic abuse and at least one section 8 proceeding' do
       let(:pt1) { create :proceeding_type, :as_occupation_order }
       let(:pt2) { create :proceeding_type, :as_prohibited_steps_order }
-      let(:legal_aid_application) { create :legal_aid_application, proceeding_types: [pt1, pt2] }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2] }
 
       let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
 

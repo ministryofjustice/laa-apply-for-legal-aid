@@ -8,6 +8,8 @@ module CFE
     self.table_name = 'cfe_results'
 
     def result_hash
+      return {} if result.nil?
+
       JSON.parse(result, symbolize_names: true)
     end
 
@@ -23,6 +25,10 @@ module CFE
 
     def eligible?
       assessment_result == 'eligible'
+    end
+
+    def partially_eligible?
+      assessment_result == 'partially_eligible'
     end
 
     def version_4?

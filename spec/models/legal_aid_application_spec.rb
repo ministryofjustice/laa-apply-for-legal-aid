@@ -3,27 +3,6 @@ require 'rails_helper'
 RSpec.describe LegalAidApplication, type: :model do
   let(:legal_aid_application) { create :legal_aid_application }
 
-  describe 'validations' do
-    let(:attributes) { { proceeding_type_codes: %w[invalid_code1 invalid_code2] } }
-    let(:legal_aid_application) { described_class.new(attributes) }
-    context 'when invalid proceeding type codes are provided' do
-      it 'contains an invalid error for proceeding type codes' do
-        expect(legal_aid_application).not_to be_valid
-        expect(legal_aid_application.errors[:proceeding_type_codes]).to match_array(['is invalid'])
-      end
-    end
-
-    context 'when valid proceeding type codes are provided' do
-      let!(:proceeding_types) { create_list(:proceeding_type, 2) }
-      let(:proceeding_type_codes) { proceeding_types.map(&:code) }
-      let(:attributes) { { provider: create(:provider), proceeding_type_codes: proceeding_type_codes } }
-
-      it 'will be valid' do
-        expect(legal_aid_application).to be_valid
-      end
-    end
-  end
-
   describe '#capture_policy_disregards?' do
     subject { legal_aid_application.capture_policy_disregards? }
     context 'calculation date nil' do
@@ -88,42 +67,6 @@ RSpec.describe LegalAidApplication, type: :model do
         it 'returns true' do
           expect(legal_aid_application.policy_disregards?).to be true
         end
-      end
-    end
-  end
-
-  describe '#proceeding_type_codes=' do
-    context 'when all the provded codes match existent proceeding types' do
-      let!(:proceeding_types) { create_list(:proceeding_type, 2) }
-      let(:proceeding_type_codes) { proceeding_types.map(&:code) }
-
-      it 'assigns the provides codes' do
-        expect {
-          legal_aid_application.proceeding_type_codes = proceeding_type_codes
-        }.to change { legal_aid_application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
-      end
-
-      it 'assign all providing types matching the codes' do
-        expect(legal_aid_application.proceeding_types).to be_empty
-        legal_aid_application.proceeding_type_codes = proceeding_type_codes
-        expect(legal_aid_application.proceeding_types).to eq(proceeding_types)
-      end
-    end
-
-    context 'when not all the provided codes match existent proceeding types' do
-      let!(:proceeding_type) { create(:proceeding_type) }
-      let(:proceeding_type_codes) { [proceeding_type.code, 'non-existent-code'] }
-
-      it 'assigns the provides codes' do
-        expect {
-          legal_aid_application.proceeding_type_codes = proceeding_type_codes
-        }.to change { legal_aid_application.proceeding_type_codes }.from(nil).to(proceeding_type_codes)
-      end
-
-      it 'assign only the providing types matching the codes' do
-        expect(legal_aid_application.proceeding_types).to be_empty
-        legal_aid_application.proceeding_type_codes = proceeding_type_codes
-        expect(legal_aid_application.proceeding_types).to eq([proceeding_type])
       end
     end
   end
@@ -709,7 +652,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:date2) { Time.zone.yesterday }
 
       it 'returns 2 records with DF dates, in date order' do
-        expect(laa.earliest_delegated_functions_date).to eq Date.yesterday
+        expect(laa.reload.earliest_delegated_functions_date).to eq Date.yesterday
       end
     end
 
@@ -730,14 +673,14 @@ RSpec.describe LegalAidApplication, type: :model do
              default_cost_limitation_delegated_functions: 2_500
     end
     context 'substantive' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, proceeding_types: [proceeding_type] }
+      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
       it 'returns the substantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 9_000
       end
     end
 
     context 'delegated functions' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, proceeding_types: [proceeding_type] }
+      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
       it 'returns the subtantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 9_000
       end
