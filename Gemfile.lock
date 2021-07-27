@@ -613,7 +613,7 @@ GEM
     sidekiq-status (2.0.2)
       chronic_duration
       sidekiq (>= 5.0)
-    sidekiq_alive (2.1.0)
+    sidekiq_alive (2.1.2)
       sidekiq
     simplecov (0.21.2)
       docile (~> 1.1)
