@@ -20,7 +20,7 @@ spec:
           - name: reset-dashboard
             image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
             imagePullPolicy: IfNotPresent
-            command: ['rake', "job:dashboard:update[Applications]"]
+            command: ['rake', "job:dashboard:update", "WIDGETS=Applications"]
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:
