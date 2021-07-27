@@ -5,7 +5,6 @@ en:
       index:
         retrieving_transactions: Retrieving bank transactions
         failed_transactions_retrieval: Failed to retrieve bank transactions
-        default_error: Sorry, we are experiencing technical difficulties. Please try again later.
         page_loading: Page Loading
         heading_1: "You've successfully shared your bank transactions"
         intro_text: We’ve downloaded your bank statements from the past 3 months.
@@ -42,46 +41,23 @@ en:
       create:
         error: Select a bank
     cash_incomes:
-      checkbox:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
       show:
         page_heading: Select payments you receive in cash
       cash_income_form:
-        dates: "%{date}"
         info: Cash means physical money like banknotes and coins.
         none_selected: None of the above
-      update:
-        none_selected: Select if you receive these payments in cash
     cash_outgoings:
-      checkbox:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: None of the above
       show:
         page_heading: Select payments you make in cash
       cash_outgoings_form:
-        dates: "%{date}"
         info: Cash means physical money like banknotes and coins.
         none_selected: None of the above
-      update:
-        none_selected: Select if you receive these payments in cash
-
     check_answers:
       cash_transactions:
         cash_transactions_credits_header: Payments you receive in cash
         cash_transactions_debits_header: Payments you make in cash
         none: None
       index:
-        assets:
-          heading: Property, savings and other assets
-          other_assets: Other assets
-          outstanding_mortgage: Outstanding mortgage amount
-          own_home: Property owned
-          percentage_home: Percentage owned
-          property_value: Property value
-          restrictions: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
-          savings_and_investments: Savings and investments
-          shared_ownership: Owned with anyone else
         h1-heading: Check your answers and submit information
         bank_accounts:
           heading: Your bank accounts
@@ -123,29 +99,9 @@ en:
             see your online banking sign-in details
             share your details with anyone other than the LAA
             have any ongoing access to your bank account details
-    declarations:
-      show:
-        page_heading: Declaration
-        submit_button: Agree and submit
-    dependants:
-      assets_values:
-        show:
-          page_heading: "Does %{name} have assets worth more than £8,000?"
-      relationships:
-        show:
-          page_heading: "What is your relationship to %{name}?"
-    has_dependants:
-      show:
-        page_heading: Do you have any dependants?
-        info: A dependant could be a child or adult who lives with you and depends on you for financial support.
-        extra_info: Do not include your partner if you have one.
     has_offline_accounts:
       new:
         error: Select yes if you have current accounts you cannot access online
-    has_other_dependants:
-      show:
-        heading: Do you have any other dependants?
-        error: Select yes if you have other dependants
     identify_types_of_incomes:
       show:
         page_heading: Which of the following payments do you receive?
@@ -180,10 +136,6 @@ en:
         what-happens-next:  We'll confirm if you qualify for legal aid once we've checked your financial situation and the details of your case.
         feedback_prefix: 'Give feedback'
         feedback_suffix: ' to help us improve this service.'
-    other_assets:
-      show:
-        h1-heading: Which types of assets do you have?
-        none_selected: None of these
     resend_link_requests:
       show:
         page_title: This link has expired
@@ -192,29 +144,6 @@ en:
         page_title: We've sent you a new link
         check_inbox: Check your email inbox.
         valid_until: Your new link will only remain active for 7 days for security reasons.
-    restrictions:
-      show:
-        h1-heading: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
-        restrictions_details: Tell us which assets you cannot sell or borrow against, and why
-        for_example: "For example:"
-        examples:
-          list: |
-            you're bankrupt
-            your home has been repossessed
-            your assets are the subject of dispute in other legal proceedings
-    savings_and_investments:
-      accounts_summary:
-        col_account_number: Account number
-        col_amount: Amount
-        col_sort_code: Sort code
-        col_type: Type
-        intro_text: 'You have already told us you have the following online accounts:'
-      show:
-        h1-heading: What types of savings or investments do you have?
-        none_selected: None of these
-    shared_ownerships:
-      show:
-        heading_1: Do you own your home with anyone else?
     student_finances:
       show:
         field_set_header: Do you get student finance?
