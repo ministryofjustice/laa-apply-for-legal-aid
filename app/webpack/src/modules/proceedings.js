@@ -55,7 +55,6 @@ function updateMatchCounters (data, searchTerm) {
 
 // Calls search only when the typing timer expires
 async function doneTyping () {
-  document.querySelector('#screen-reader-messages').innerHTML = ariaText;
   const inputText = document.querySelector('#proceeding-search-input').value.trim();
 
   if (inputText.length > 2) {
@@ -124,7 +123,7 @@ function showResults (results, inputText) {
       span.innerHTML = span.innerHTML.replace(/<\/mark>/gi, '');
 
       // Highlight any text that matches the user's input
-      let terms = inputText.split(' ')
+      const terms = inputText.split(' ')
       terms.forEach(term => {
         if (term.length > 2) {
           const regExp = RegExp(term.trim(), 'gi');
@@ -143,6 +142,7 @@ function showResults (results, inputText) {
     show(document.querySelector('.no-proceeding-items'));
     ariaText = `No results found matching ${inputText}`;
   }
+  document.querySelector('#screen-reader-messages').innerHTML = ariaText;
 }
 
 // Hide any search results and the 'no results found' text
