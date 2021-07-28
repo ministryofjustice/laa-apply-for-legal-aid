@@ -1,7 +1,10 @@
 module Reports
   class MeritsReportCreator < BaseReportCreator
     def call
-      return if legal_aid_application.merits_report
+      if legal_aid_application.merits_report
+        Rails.logger.info "ReportsCreator: Merits report already exists for #{legal_aid_application.id}"
+        return
+      end
 
       attachment = legal_aid_application.attachments.create!(attachment_type: 'merits_report',
                                                              attachment_name: 'merits_report.pdf')
@@ -11,6 +14,8 @@ module Reports
         filename: 'merits_report.pdf',
         content_type: 'application/pdf'
       )
+
+      Rails.logger.info "ReportsCreator: Merits report attachment failed in #{legal_aid_application.id}" if attachment.document.download.nil?
     end
 
     private
