@@ -44,6 +44,11 @@ module LegalFramework
       subject(:can_proceed) { merits_task_list.can_proceed? }
 
       context 'when not all tasks are complete' do
+        before do
+          merits_task_list.mark_as_complete!(:application, :statement_of_case)
+          merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
+        end
+
         it { is_expected.to be false }
       end
 
@@ -52,6 +57,7 @@ module LegalFramework
           merits_task_list.mark_as_complete!(:application, :latest_incident_details)
           merits_task_list.mark_as_complete!(:application, :opponent_details)
           merits_task_list.mark_as_complete!(:application, :children_application)
+          merits_task_list.mark_as_complete!(:application, :statement_of_case)
           merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
           merits_task_list.mark_as_complete!(:SE014, :chances_of_success)
           merits_task_list.mark_as_complete!(:SE014, :children_proceeding)

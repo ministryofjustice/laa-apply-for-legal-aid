@@ -13,8 +13,10 @@ module LegalFramework
     end
 
     def can_proceed?
-      states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten
-      states.all?(:complete)
+      application_states = task_list.tasks[:application].map(&:state).flatten
+      proceeding_states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten
+      all_task_states = application_states + proceeding_states
+      all_task_states.all?(:complete)
     end
   end
 end
