@@ -66,18 +66,14 @@ module Providers
         context 'does not want to add more children' do
           let(:radio_button) { 'false' }
 
-          it 'redirects to new involved child' do
+          it 'redirects to merits_task_list' do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_date_client_told_incident_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'sets the task to complete' do
-              subject
-              expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
-            end
+          it 'sets the task to complete' do
+            subject
+            expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
         end
 

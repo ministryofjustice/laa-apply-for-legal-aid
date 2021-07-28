@@ -193,18 +193,8 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
 
-        context 'multiple proceedings flag is switched on' do
-          it 'redirects to the merits task list' do
-            expect(subject).to redirect_to(providers_legal_aid_application_merits_task_list_path)
-          end
-        end
-
-        context 'multiple proceedings flag switched off' do
-          let(:multi_proc_flag) { false }
-
-          it 'redirects to start chances of success' do
-            expect(subject).to redirect_to(providers_legal_aid_application_start_chances_of_success_path)
-          end
+        it 'redirects to the merits task list' do
+          expect(subject).to redirect_to(providers_legal_aid_application_merits_task_list_path)
         end
 
         it 'creates a task list' do
