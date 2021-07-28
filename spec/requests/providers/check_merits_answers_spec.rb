@@ -157,9 +157,27 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(application.reload.summary_state).to eq :submitted
       end
 
-      it 'transitions to generating_reports state' do
-        subject
-        expect(application.reload).to be_generating_reports
+      context 'when the Setting.enable_ccms_submission?' do
+        before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
+
+        context 'is turned on' do
+          let(:allow_ccms_submission) { true }
+
+          it 'transitions to generating_reports state' do
+            subject
+            expect(application.reload).to be_generating_reports
+            # expect(application.reload.state).to eq 'generating_reports'
+          end
+        end
+
+        context 'is turned off' do
+          let(:allow_ccms_submission) { false }
+
+          it 'transitions to submission_paused state' do
+            subject
+            expect(application.reload.state).to eq 'submission_paused'
+          end
+        end
       end
 
       context 'Form submitted using Save as draft button' do

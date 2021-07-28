@@ -123,16 +123,16 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
                   after: proc { |legal_aid_application|
                     ReportsCreatorWorker.perform_async(legal_aid_application.id)
                     PostSubmissionProcessingJob.perform_later(legal_aid_application.id, "#{Rails.configuration.x.application.host_url}/feedback/new")
-                  }
+                  },
+                  guards: [:allow_ccms_submission?]
+      transitions from: :checking_merits_answers, to: :submission_paused
     end
 
     event :generated_reports do
       transitions from: :generating_reports, to: :submitting_assessment,
                   after: proc { |legal_aid_application|
                            legal_aid_application.find_or_create_ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
-                         },
-                  guards: [:allow_ccms_submission?]
-      transitions from: :generating_reports, to: :submission_paused
+                         }
     end
 
     event :restart_submission do
