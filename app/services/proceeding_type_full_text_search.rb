@@ -71,8 +71,7 @@ class ProceedingTypeFullTextSearch
         ts_rank(textsearchable, query) AS rank
       FROM proceeding_types, to_tsquery($1) AS query
       WHERE query @@ textsearchable
-      ORDER BY rank DESC
-      LIMIT 10;
+      ORDER BY rank DESC;
 
     END_OF_QUERY
   end

@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe ProceedingTypeFullTextSearch do
   before(:all) do
     ServiceLevel.create!(service_level_number: 3, name: 'Full representation')
+    Setting.setting.update!(allow_multiple_proceedings: true)
     ProceedingType.populate
   end
 
   after(:all) do
     ServiceLevel.delete_all
     ProceedingType.delete_all
+    Setting.setting.update!(allow_multiple_proceedings: false)
   end
 
   let(:legal_aid_application) { create :legal_aid_application }
@@ -46,17 +48,26 @@ RSpec.describe ProceedingTypeFullTextSearch do
         end
       end
 
+      context 'search term only exists in additional_search_terms' do
+        let(:search_term) { 'cao' }
+
+        it 'returns two records' do
+          result_set = subject
+          expect(result_set.map(&:code).sort).to eq %w[PH0003 PH0004]
+        end
+      end
+
       context 'searching for a term which occures in more than one proceeding' do
-        let(:search_term) { 'molestation' }
+        let(:search_term) { 'injunction' }
 
         it 'returns two results' do
           result_set = subject
-          expect(result_set.size).to eq 2
+          expect(result_set.size).to eq 3
         end
 
         it 'returns the one with the search term in meaning first' do
           result_set = subject
-          expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
+          expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Inherent jurisdiction high court injunction', 'Non-molestation order']
         end
       end
 
@@ -101,16 +112,16 @@ RSpec.describe ProceedingTypeFullTextSearch do
         end
 
         context 'searching for a term which occurs in more than one proceeding' do
-          let(:search_term) { 'molestation' }
+          let(:search_term) { 'injunction' }
 
           it 'returns two results' do
             result_set = subject
-            expect(result_set.size).to eq 2
+            expect(result_set.size).to eq 3
           end
 
           it 'returns the one with the search term in meaning first' do
             result_set = subject
-            expect(result_set.map(&:meaning)).to eq ['Non-molestation order', 'Harassment - injunction']
+            expect(result_set.map(&:meaning)).to eq ['Harassment - injunction', 'Inherent jurisdiction high court injunction', 'Non-molestation order']
           end
         end
 
@@ -144,7 +155,11 @@ RSpec.describe ProceedingTypeFullTextSearch do
                                            'FGM Protection Order',
                                            'Variation or discharge under section 5 protection from harassment act 1997',
                                            'Inherent jurisdiction high court injunction',
-                                           'Extend, variation or discharge - Part IV'])
+                                           'Extend, variation or discharge - Part IV',
+                                           'Child arrangements order (contact)',
+                                           'Child arrangements order (residence)',
+                                           'Prohibited steps order',
+                                           'Specific issue order'])
         end
       end
     end
