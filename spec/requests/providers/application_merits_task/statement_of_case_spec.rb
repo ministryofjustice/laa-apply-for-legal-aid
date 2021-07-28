@@ -115,7 +115,6 @@ module Providers
 
           it 'redirects to the next page' do
             subject
-            apt = legal_aid_application.lead_application_proceeding_type
             expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
           end
         end

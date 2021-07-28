@@ -227,6 +227,8 @@ Feature: Provider accessibility
     And the page is accessible
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
+    When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     And the page is accessible
     Then I choose "No"

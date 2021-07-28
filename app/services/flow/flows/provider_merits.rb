@@ -43,14 +43,7 @@ module Flow
         },
         has_other_involved_children: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_involved_children_path(application) },
-          forward: ->(_application, has_other_involved_child) {
-            has_other_involved_child ? :involved_children : :merits_task_lists
-            # if has_other_involved_child ? :involved_children : :merits_task_lists
-            #   :involved_children
-            # else
-            #   Setting.allow_multiple_proceedings? ? :merits_task_lists : :date_client_told_incidents
-            # end
-          }
+          forward: ->(_application, has_other_involved_child) { has_other_involved_child ? :involved_children : :merits_task_lists }
         },
         remove_involved_child: {
           forward: ->(application) {
@@ -74,8 +67,8 @@ module Flow
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(application) do
-            if Setting.allow_multiple_proceedings?
-              application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists
+            if application.section_8_proceedings?
+              :start_involved_children_task
             else
               :merits_task_lists
             end
@@ -83,11 +76,6 @@ module Flow
           check_answers: :check_merits_answers
         },
         chances_of_success: {
-          # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting chance_of_success
-          path: ->(application) do
-            apt = application.lead_application_proceeding_type
-            urls.providers_merits_task_list_chances_of_success_index_path(apt)
-          end,
           forward: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
             if application_proceeding_type.chances_of_success.success_likely?

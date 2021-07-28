@@ -115,6 +115,7 @@ Given('I have a passported application with no assets on the {string} page') do 
     provider: create(:provider),
     provider_step: provider_step.downcase
   )
+  # create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
 end
 
@@ -201,6 +202,7 @@ Given('I have completed the non-passported means assessment and start the merits
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_start_chances_of_success_path(@legal_aid_application))
+  # visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
 Given('I start the merits application') do

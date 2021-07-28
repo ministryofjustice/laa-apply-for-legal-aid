@@ -497,7 +497,9 @@ Feature: Civil application journeys
     Then I should be on a page showing 'We need to check if'
     And I should be on a page showing 'whether or not the scheme or charity payments'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Provide details of the case'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+    When I click link 'Latest incident details'
+    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
 
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
@@ -540,8 +542,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'may need to pay towards legal aid'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Provide details of the case'
-    Then I click 'Continue'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+    When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
@@ -560,6 +562,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
+    When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
     Then I click 'Save and continue'
@@ -567,6 +571,8 @@ Feature: Civil application journeys
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
+    Then I click 'Continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page showing "Confirm the following"
     Then I click 'Submit and continue'

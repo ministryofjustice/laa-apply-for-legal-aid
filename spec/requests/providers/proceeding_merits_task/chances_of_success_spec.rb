@@ -152,13 +152,9 @@ module Providers
             expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
 
           it 'updates the model' do
