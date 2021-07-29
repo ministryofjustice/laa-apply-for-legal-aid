@@ -827,6 +827,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#submitted_assessment' do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_merits_answers }
     let(:feedback_url) { 'http://test/feedback/new' }
+    before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true) }
 
     it 'schedules a PostSubmissionProcessingJob ' do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
