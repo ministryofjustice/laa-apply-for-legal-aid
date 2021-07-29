@@ -9,7 +9,7 @@
       <div class="govuk-grid-row search-field govuk-!-margin-top-0">
         <div class="govuk-grid-column-two-thirds govuk-!-margin-top-0">
           <%= form_tag(admin_roles_path, method: :get, name: "firm-search-input") do %>
-            <%= text_field_tag(:search, params[:search], class: "govuk-input") %>
+            <%= text_field_tag(:search, params[:search], class: "govuk-input", autocomplete: "off") %>
         </div>
             <%= submit_tag ("Search"), name: nil, class: 'govuk-button' %>
       </div>
