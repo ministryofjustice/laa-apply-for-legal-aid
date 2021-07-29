@@ -115,7 +115,6 @@ Given('I have a passported application with no assets on the {string} page') do 
     provider: create(:provider),
     provider_step: provider_step.downcase
   )
-  # create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
 end
 
@@ -193,16 +192,18 @@ Given('I have completed the non-passported means assessment and start the merits
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    # :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_transaction_period,
     :with_policy_disregards,
-    :with_benefits_transactions
+    :with_benefits_transactions,
+    # :with_multiple_proceeding_types_no_section8
+    :with_multiple_proceeding_types_inc_section8
   )
+  create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
-  visit(providers_legal_aid_application_start_chances_of_success_path(@legal_aid_application))
-  # visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
+  visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
 Given('I start the merits application') do
@@ -302,12 +303,12 @@ Given('I start the merits application and the applicant has uploaded transaction
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
     :with_transaction_period,
-    :with_benefits_transactions
+    :with_benefits_transactions,
+    :with_proceeding_types
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(

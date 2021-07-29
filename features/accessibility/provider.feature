@@ -205,10 +205,10 @@ Feature: Provider accessibility
   @javascript
   Scenario: I complete the non-passported merits assessment and it is accessible
     Given I have completed the non-passported means assessment and start the merits assessment
-    Then I should be on a page showing 'Provide details of the case'
-    And the page is accessible
-    Then I click 'Continue'
-    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
+    Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
+    When I click link 'Latest incident details'
+    Then I should be on a page showing 'Latest incident details'
+    And I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
     And the page is accessible
     Then I enter the 'told' date of 2 days ago
     Then I enter the 'occurred' date of 2 days ago
@@ -238,6 +238,8 @@ Feature: Provider accessibility
     Then I choose "Borderline"
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
+    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
+    Then I click 'Continue'
     Then I should be on a page showing "Check your answers"
     And the page is accessible
     Then I click 'Submit and continue'

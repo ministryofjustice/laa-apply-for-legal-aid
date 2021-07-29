@@ -5,7 +5,7 @@ http_interactions:
     uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
     body:
       encoding: UTF-8
-      string: '{"client_reference_id":"L-33D-AEH","submission_date":"2021-07-29","matter_proceeding_type":"domestic_abuse"}'
+      string: '{"client_reference_id":"L-R4N-17D","submission_date":"2021-07-29","matter_proceeding_type":"domestic_abuse"}'
     headers:
       Content-Type:
       - application/json
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:39 GMT
+      - Thu, 29 Jul 2021 16:16:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -31,13 +31,13 @@ http_interactions:
       Vary:
       - Accept
       Etag:
-      - W/"3d9e575fe9f9a55facdfeaa4a68b2068"
+      - W/"90b1e26c6d3d827438a158650e9c0dba"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 774a2f3ccd24d6c8dcd4ed60338802bf
+      - 7d4cef7908644bd8b46d81366cebe0f6
       X-Runtime:
-      - '0.024813'
+      - '0.024823'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -55,14 +55,14 @@ http_interactions:
         'unsafe-inline'
     body:
       encoding: UTF-8
-      string: '{"success":true,"assessment_id":"ed646799-3a2c-4f0a-86d4-a693c0f019bc","errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:39 GMT
+      string: '{"success":true,"assessment_id":"630b32f5-d77f-4c17-b765-914713334271","errors":[]}'
+  recorded_at: Thu, 29 Jul 2021 16:16:17 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/applicant
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/applicant
     body:
       encoding: UTF-8
-      string: '{"applicant":{"date_of_birth":"1983-05-23","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+      string: '{"applicant":{"date_of_birth":"1967-11-07","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
     headers:
       Content-Type:
       - application/json
@@ -78,7 +78,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:39 GMT
+      - Thu, 29 Jul 2021 16:16:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -92,9 +92,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 67d8f7345dadf8193dfa9a2000ba7d68
+      - e7548e3689b682c1930daa91e1c2d6ba
       X-Runtime:
-      - '0.010110'
+      - '0.013305'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -113,14 +113,14 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:39 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:17 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/capitals
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/capitals
     body:
       encoding: UTF-8
-      string: '{"bank_accounts":[{"description":"Online current accounts","value":0},{"description":"Online
-        savings accounts","value":"750726.97"}],"non_liquid_capital":[]}'
+      string: '{"bank_accounts":[{"description":"Online current accounts","value":"949526.51"},{"description":"Online
+        savings accounts","value":0}],"non_liquid_capital":[]}'
     headers:
       Content-Type:
       - application/json
@@ -136,7 +136,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:39 GMT
+      - Thu, 29 Jul 2021 16:16:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -150,9 +150,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 80689e3a723916842dbfbecde5f1ac6a
+      - 9e2d4c179474d645bfc106f1dc8e14b9
       X-Runtime:
-      - '0.013770'
+      - '0.015284'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -171,10 +171,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:39 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:17 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/vehicles
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -193,7 +193,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:40 GMT
+      - Thu, 29 Jul 2021 16:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -207,9 +207,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 55348b9207ec0c3eb85994be35aeaba5
+      - 3da189e1daa9b50495c56700f70dcdbc
       X-Runtime:
-      - '0.004965'
+      - '0.006004'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -228,10 +228,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:40 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:18 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/properties
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -250,7 +250,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:41 GMT
+      - Thu, 29 Jul 2021 16:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -264,9 +264,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cd62a8ce68b94adfb8e4136c0861ce45
+      - d3d2ee21482e406ba8e2ea435669e0a1
       X-Runtime:
-      - '0.020519'
+      - '0.015867'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -285,10 +285,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:41 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:18 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/explicit_remarks
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/explicit_remarks
     body:
       encoding: UTF-8
       string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
@@ -307,7 +307,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:41 GMT
+      - Thu, 29 Jul 2021 16:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -321,9 +321,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 636da6e8868329d0045da58ea6f59048
+      - ad08edb15e53bbaf32fd826468c68ee1
       X-Runtime:
-      - '0.002962'
+      - '0.002518'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -342,10 +342,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:41 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:18 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/dependants
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/dependants
     body:
       encoding: UTF-8
       string: '{"dependants":[]}'
@@ -364,7 +364,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:41 GMT
+      - Thu, 29 Jul 2021 16:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -378,9 +378,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 65ea004c7ecf5c5a95554949002a3f81
+      - 6ce1739d6ab8afbaf73f1c6323c9179f
       X-Runtime:
-      - '0.004671'
+      - '0.004687'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -399,10 +399,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:41 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:18 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/outgoings
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/outgoings
     body:
       encoding: UTF-8
       string: '{"outgoings":[]}'
@@ -421,7 +421,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:41 GMT
+      - Thu, 29 Jul 2021 16:16:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -435,9 +435,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cab81ac05c717dd76a8da345094902db
+      - 5bf637ff4fa7d068d3356ca8c8e22e5f
       X-Runtime:
-      - '0.003669'
+      - '0.002520'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -456,13 +456,13 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:41 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:18 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/state_benefits
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/state_benefits
     body:
       encoding: UTF-8
-      string: '{"state_benefits":[{"name":"child_benefit","payments":[{"date":"2021-04-30","amount":511750.44,"client_id":"cc78069c-dbb6-416c-807c-d6726c82a6cd"},{"date":"2021-05-30","amount":847094.39,"client_id":"ce114375-cc0a-43bc-a747-af9752eeeee6"},{"date":"2021-06-29","amount":460665.05,"client_id":"84068e26-f789-400d-a503-9cd9fb10b712"}]}]}'
+      string: '{"state_benefits":[{"name":"child_benefit","payments":[{"date":"2021-04-30","amount":757039.17,"client_id":"d15c84b4-edaa-40ba-956b-fb17d11b63d5"},{"date":"2021-05-30","amount":17183.67,"client_id":"7fe90846-2706-4a98-962c-d07bc984a68e"},{"date":"2021-06-29","amount":232525.61,"client_id":"f07e7404-2b1e-45ad-9c07-7d204c643b47"}]}]}'
     headers:
       Content-Type:
       - application/json
@@ -478,7 +478,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:42 GMT
+      - Thu, 29 Jul 2021 16:16:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -492,9 +492,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - bc5e371e60296e2fc877c4fd9c6fb435
+      - 9be859de3f3df2992ace8fbb7cdf97fd
       X-Runtime:
-      - '0.024256'
+      - '0.040297'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -513,10 +513,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:42 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:19 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/other_incomes
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/other_incomes
     body:
       encoding: UTF-8
       string: '{"other_incomes":[]}'
@@ -535,7 +535,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:42 GMT
+      - Thu, 29 Jul 2021 16:16:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -549,9 +549,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 35d7593e802539dfdbadb6fce5c8dba5
+      - e1013d3709d0207c1715c27b2ded0f89
       X-Runtime:
-      - '0.006777'
+      - '0.004358'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -570,10 +570,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:42 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:19 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/irregular_incomes
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/irregular_incomes
     body:
       encoding: UTF-8
       string: '{"payments":[]}'
@@ -592,7 +592,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:42 GMT
+      - Thu, 29 Jul 2021 16:16:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -606,9 +606,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a9895985265a69bd4ce29b5186003d3b
+      - 18fc7b3e9032c3bc1c8e9f62ebdbaf55
       X-Runtime:
-      - '0.007570'
+      - '0.004544'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -627,10 +627,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:42 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:19 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc/cash_transactions
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271/cash_transactions
     body:
       encoding: UTF-8
       string: '{"income":[],"outgoings":[]}'
@@ -649,7 +649,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:42 GMT
+      - Thu, 29 Jul 2021 16:16:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -663,9 +663,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - eee564966620c5909f11e33dc5af0a44
+      - cb053272437274e75528302c503161f0
       X-Runtime:
-      - '0.002640'
+      - '0.003493'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -684,10 +684,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:42 GMT
+  recorded_at: Thu, 29 Jul 2021 16:16:19 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/ed646799-3a2c-4f0a-86d4-a693c0f019bc
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/630b32f5-d77f-4c17-b765-914713334271
     body:
       encoding: US-ASCII
       string: ''
@@ -706,7 +706,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:43 GMT
+      - Thu, 29 Jul 2021 16:16:20 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -716,13 +716,13 @@ http_interactions:
       Vary:
       - Accept
       Etag:
-      - W/"9d290604d4185e49d40fae19e3dd3d0f"
+      - W/"c3b483e606a20d84e69ff38e5bb6963e"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f387e48b92c48f34a4a76a242b0de9dd
+      - 5b76cf891b497fbd72ea01c6e30126d5
       X-Runtime:
-      - '0.307572'
+      - '0.409543'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
       X-Frame-Options:
@@ -740,16 +740,16 @@ http_interactions:
         'unsafe-inline'
     body:
       encoding: UTF-8
-      string: '{"version":"3","timestamp":"2021-07-29T12:29:43.341Z","success":true,"assessment":{"id":"ed646799-3a2c-4f0a-86d4-a693c0f019bc","client_reference_id":"L-33D-AEH","submission_date":"2021-07-29","matter_proceeding_type":"domestic_abuse","assessment_result":"contribution_required","applicant":{"date_of_birth":"1983-05-23","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false,"self_employed":false},"gross_income":{"summary":{"total_gross_income":"606503.29","upper_threshold":"999999999999.0","assessment_result":"eligible"},"irregular_income":{"monthly_equivalents":{"student_loan":"0.0"}},"state_benefits":{"monthly_equivalents":{"all_sources":"606503.29","cash_transactions":"0.0","bank_transactions":[{"name":"Child
-        Benefit","monthly_value":"606503.29","excluded_from_income_assessment":false}]}},"other_income":{"monthly_equivalents":{"bank_transactions":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"},"cash_transactions":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"},"all_sources":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"}}}},"disposable_income":{"monthly_equivalents":{"bank_transactions":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"},"cash_transactions":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"},"all_sources":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"}},"childcare_allowance":"0.0","deductions":{"dependants_allowance":"0.0","disregarded_state_benefits":0.0},"dependant_allowance":"0.0","maintenance_allowance":"0.0","gross_housing_costs":"0.0","housing_benefit":"0.0","net_housing_costs":"0.0","total_outgoings_and_allowances":"0.0","total_disposable_income":"606503.29","lower_threshold":"315.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","income_contribution":"424242.95"},"capital":{"capital_items":{"liquid":[{"description":"Online
-        current accounts","value":"0.0"},{"description":"Online savings accounts","value":"750726.97"}],"non_liquid":[],"vehicles":[],"properties":{"main_home":{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"0.0","assessed_equity":"0.0"}]}},"total_liquid":"750726.97","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"999999999999.0","total_capital":"750726.97","pensioner_capital_disregard":"0.0","assessed_capital":"750726.97","lower_threshold":"3000.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","capital_contribution":"747726.97"},"remarks":{"state_benefit_payment":{"amount_variation":["cc78069c-dbb6-416c-807c-d6726c82a6cd","ce114375-cc0a-43bc-a747-af9752eeeee6","84068e26-f789-400d-a503-9cd9fb10b712"]}}}}'
-  recorded_at: Thu, 29 Jul 2021 12:29:43 GMT
+      string: '{"version":"3","timestamp":"2021-07-29T16:16:20.369Z","success":true,"assessment":{"id":"630b32f5-d77f-4c17-b765-914713334271","client_reference_id":"L-R4N-17D","submission_date":"2021-07-29","matter_proceeding_type":"domestic_abuse","assessment_result":"contribution_required","applicant":{"date_of_birth":"1967-11-07","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false,"self_employed":false},"gross_income":{"summary":{"total_gross_income":"335582.82","upper_threshold":"999999999999.0","assessment_result":"eligible"},"irregular_income":{"monthly_equivalents":{"student_loan":"0.0"}},"state_benefits":{"monthly_equivalents":{"all_sources":"335582.82","cash_transactions":"0.0","bank_transactions":[{"name":"Child
+        Benefit","monthly_value":"335582.82","excluded_from_income_assessment":false}]}},"other_income":{"monthly_equivalents":{"bank_transactions":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"},"cash_transactions":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"},"all_sources":{"friends_or_family":"0.0","maintenance_in":"0.0","property_or_lodger":"0.0","pension":"0.0"}}}},"disposable_income":{"monthly_equivalents":{"bank_transactions":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"},"cash_transactions":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"},"all_sources":{"child_care":"0.0","rent_or_mortgage":"0.0","maintenance_out":"0.0","legal_aid":"0.0"}},"childcare_allowance":"0.0","deductions":{"dependants_allowance":"0.0","disregarded_state_benefits":0.0},"dependant_allowance":"0.0","maintenance_allowance":"0.0","gross_housing_costs":"0.0","housing_benefit":"0.0","net_housing_costs":"0.0","total_outgoings_and_allowances":"0.0","total_disposable_income":"335582.82","lower_threshold":"315.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","income_contribution":"234598.62"},"capital":{"capital_items":{"liquid":[{"description":"Online
+        current accounts","value":"949526.51"},{"description":"Online savings accounts","value":"0.0"}],"non_liquid":[],"vehicles":[],"properties":{"main_home":{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"100000.0","assessed_equity":"0.0"},"additional_properties":[{"value":"0.0","outstanding_mortgage":"0.0","percentage_owned":"0.0","main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":"0.0","allowable_outstanding_mortgage":"0.0","net_value":"0.0","net_equity":"0.0","main_home_equity_disregard":"0.0","assessed_equity":"0.0"}]}},"total_liquid":"949526.51","total_non_liquid":"0.0","total_vehicle":"0.0","total_property":"0.0","total_mortgage_allowance":"999999999999.0","total_capital":"949526.51","pensioner_capital_disregard":"0.0","assessed_capital":"949526.51","lower_threshold":"3000.0","upper_threshold":"999999999999.0","assessment_result":"contribution_required","capital_contribution":"946526.51"},"remarks":{"state_benefit_payment":{"amount_variation":["d15c84b4-edaa-40ba-956b-fb17d11b63d5","7fe90846-2706-4a98-962c-d07bc984a68e","f07e7404-2b1e-45ad-9c07-7d204c643b47"]}}}}'
+  recorded_at: Thu, 29 Jul 2021 16:16:20 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"b14d7fac-ce84-473a-a065-fcc8ba13f3ad","proceeding_types":["DA001"]}'
+      string: '{"request_id":"4fe4fd47-08ad-4c37-b8ff-71b4c8b8d486","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
@@ -765,7 +765,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 12:29:44 GMT
+      - Thu, 29 Jul 2021 16:16:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -787,17 +787,17 @@ http_interactions:
       Vary:
       - Accept
       Etag:
-      - W/"a642dc5b1c19753c0fb056bfe5b7f9f1"
+      - W/"9b1229787fc6646321f15a5ad4796efc"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2bd75ea0d74e7ed1d6d568a3a89463f9
+      - ce53510bfbc2d3e78e94de3e99de9ab9
       X-Runtime:
-      - '0.033954'
+      - '0.076344'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"b14d7fac-ce84-473a-a065-fcc8ba13f3ad","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Thu, 29 Jul 2021 12:29:44 GMT
+      string: '{"request_id":"4fe4fd47-08ad-4c37-b8ff-71b4c8b8d486","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Thu, 29 Jul 2021 16:16:21 GMT
 recorded_with: VCR 6.0.0

@@ -67,8 +67,8 @@ module Flow
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
           forward: ->(application) do
-            if application.section_8_proceedings?
-              :start_involved_children_task
+            if Setting.allow_multiple_proceedings?
+              application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists
             else
               :merits_task_lists
             end

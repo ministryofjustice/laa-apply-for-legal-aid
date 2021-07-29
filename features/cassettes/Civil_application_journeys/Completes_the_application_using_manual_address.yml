@@ -1,54 +1,6 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=XX11XX
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v1.0.1
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 25 Sep 2020 13:26:11 GMT
-      Content-Type:
-      - application/json;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Tx-Id:
-      - 1601040371064:64
-      Status:
-      - success
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "header" : {
-            "uri" : "https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX",
-            "query" : "postcode=XX11XX",
-            "offset" : 0,
-            "totalresults" : 0,
-            "format" : "JSON",
-            "dataset" : "DPA",
-            "lr" : "EN",
-            "maxresults" : 100,
-            "epoch" : "78",
-            "output_srs" : "EPSG:27700"
-          }
-        }
-  recorded_at: Fri, 25 Sep 2020 13:26:11 GMT
-- request:
     method: post
     uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
     body:
@@ -95,4 +47,68 @@ http_interactions:
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1601040372617</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
   recorded_at: Fri, 25 Sep 2020 13:26:12 GMT
+- request:
+    method: get
+    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=XX11XX
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.5.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 29 Jul 2021 14:16:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Origin,Accept-Encoding,key
+      Omse-Category:
+      - premium
+      Omse-Transaction-Count:
+      - '60'
+      Omse-Premium-Count:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, key, authorization, content-type
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "header" : {
+            "uri" : "https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX",
+            "query" : "postcode=XX11XX",
+            "offset" : 0,
+            "totalresults" : 0,
+            "format" : "JSON",
+            "dataset" : "DPA",
+            "lr" : "EN",
+            "maxresults" : 100,
+            "epoch" : "85",
+            "output_srs" : "EPSG:27700"
+          }
+        }
+  recorded_at: Thu, 29 Jul 2021 14:16:41 GMT
 recorded_with: VCR 6.0.0
