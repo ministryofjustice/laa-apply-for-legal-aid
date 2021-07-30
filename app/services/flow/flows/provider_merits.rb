@@ -97,6 +97,12 @@ module Flow
           end,
           check_answers: ->(application) do
             application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
+            pp '-------'
+            pp 'provider_merits.rb -- chances_of_success check_answers flow'
+            pp '-------'
+            pp "application_proceeding_type.chances_of_success.success_likely? #{application_proceeding_type.chances_of_success.success_likely?}"
+            pp "Setting.allow_multiple_proceedings?: #{Setting.allow_multiple_proceedings?}"
+            pp '-------'
             application_proceeding_type.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
           end
         },
