@@ -328,22 +328,23 @@ workflows:
   version: 2
   open_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              ignore: master
-      - build_and_push:
-          requires:
-          - lint_checks
-      - deploy_uat:
-          requires:
-          - build_and_push
-      - unit_tests:
-          requires:
-          - lint_checks
-      - integration_tests:
-          requires:
-          - lint_checks
+      - unit_tests
+#      - lint_checks:
+#          filters:
+#            branches:
+#              ignore: master
+#      - build_and_push:
+#          requires:
+#          - lint_checks
+#      - deploy_uat:
+#          requires:
+#          - build_and_push
+#      - unit_tests:
+#          requires:
+#          - lint_checks
+#      - integration_tests:
+#          requires:
+#          - lint_checks
 
   merge_pr:
     jobs:
