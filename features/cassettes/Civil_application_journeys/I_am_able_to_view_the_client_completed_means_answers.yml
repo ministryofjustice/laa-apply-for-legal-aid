@@ -749,7 +749,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"f385a4d2-862c-4f13-955d-2ef60e82fb42","proceeding_types":["DA007"]}'
+      string: '{"request_id":"f385a4d2-862c-4f13-955d-2ef60e82fb42","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
@@ -798,6 +798,6 @@ http_interactions:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"f385a4d2-862c-4f13-955d-2ef60e82fb42","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA007","tasks":{"chances_of_success":[]}}]}'
+      string: '{"request_id":"f385a4d2-862c-4f13-955d-2ef60e82fb42","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
   recorded_at: Thu, 29 Jul 2021 16:07:47 GMT
 recorded_with: VCR 6.0.0
