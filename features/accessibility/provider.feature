@@ -202,7 +202,7 @@ Feature: Provider accessibility
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
     And the page is accessible
 
-  @javascript
+  @javascript @vcr
   Scenario: I complete the non-passported merits assessment and it is accessible
     Given I have completed the non-passported means assessment and start the merits assessment
     Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
