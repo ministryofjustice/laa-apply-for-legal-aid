@@ -189,15 +189,16 @@ Given("I am checking the applicant's means answers") do
 end
 
 Given('I have completed the non-passported means assessment and start the merits assessment') do
+  @pt1 = create :proceeding_type, :with_real_data, :with_scope_limitations
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_transaction_period,
     :with_policy_disregards,
-    :with_benefits_transactions
+    :with_benefits_transactions,
+    :with_proceeding_types, explicit_proceeding_types: [@pt1]
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
@@ -297,6 +298,7 @@ Given('I start the application with a negative benefit check result and no used 
 end
 
 Given('I start the merits application and the applicant has uploaded transaction data') do
+  @pt1 = create :proceeding_type, :with_real_data, :with_scope_limitations
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -305,7 +307,7 @@ Given('I start the merits application and the applicant has uploaded transaction
     :with_policy_disregards,
     :with_transaction_period,
     :with_benefits_transactions,
-    :with_proceeding_types
+    :with_proceeding_types, explicit_proceeding_types: [@pt1]
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
