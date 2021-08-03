@@ -1,7 +1,7 @@
 Feature: Merits task list
 
   @javascript @vcr
-  Scenario: When the flag is enabled
+  Scenario: When the multiple proceedings flag is enabled
     Given the feature flag for allow_multiple_proceedings is enabled
     And the method populate of ProceedingType is rerun
     And the method populate of ProceedingTypeScopeLimitation is rerun

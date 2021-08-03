@@ -66,23 +66,14 @@ module Providers
           expect { subject }.to change { chances_of_success.reload.success_prospect_details }.to(nil)
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'redirects to the next page' do
-            subject
-            expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
-          end
-
-          it 'updates the task list' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
-          end
+        it 'redirects to the next page' do
+          subject
+          expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
         end
 
-        it 'redirects to next page' do
+        it 'updates the task list' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
         context 'false is selected' do
@@ -161,13 +152,9 @@ module Providers
             expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
 
           it 'updates the model' do
