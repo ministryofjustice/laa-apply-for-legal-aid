@@ -1,7 +1,10 @@
 module Reports
   class MeansReportCreator < BaseReportCreator
     def call
-      return if legal_aid_application.means_report
+      if legal_aid_application.means_report
+        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id}"
+        return
+      end
 
       attachment = legal_aid_application.attachments.create!(attachment_type: 'means_report',
                                                              attachment_name: 'means_report.pdf')
@@ -11,6 +14,8 @@ module Reports
         filename: 'means_report.pdf',
         content_type: 'application/pdf'
       )
+
+      Rails.logger.info "ReportsCreator: Means report attachment failed in #{legal_aid_application.id}" if attachment.document.download.nil?
     end
 
     private
