@@ -27,7 +27,7 @@ jobs:
 
     - name: Setup Brakeman
       env:
-        BRAKEMAN_VERSION: '5.0' # SARIF support is provided in Brakeman version 4.10+
+        BRAKEMAN_VERSION: '5.1.1'
       run: |
         gem install brakeman --version $BRAKEMAN_VERSION
 
