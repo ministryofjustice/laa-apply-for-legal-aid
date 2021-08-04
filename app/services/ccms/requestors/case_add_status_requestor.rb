@@ -3,13 +3,6 @@ module CCMS
     class CaseAddStatusRequestor < BaseRequestor
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-      uses_namespaces(
-        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:secext' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:casebim' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
-        'xmlns:hdr' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header'
-      )
-
       attr_reader :case_add_transaction_id
 
       def initialize(case_add_transaction_id, provider_username)

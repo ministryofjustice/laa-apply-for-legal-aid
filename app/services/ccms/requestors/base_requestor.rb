@@ -1,16 +1,41 @@
 module CCMS
   module Requestors
     class BaseRequestor
+      NAMESPACES = {
+        'xmlns:bill' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
+        'xmlns:casebim' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
+        'xmlns:casebio' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
+        'xmlns:clientbio' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO',
+        'xmlns:clientbim' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
+        'xmlns:common' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
+        'xmlns:hdr' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
+        'xmlns:refdatabim' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM',
+        'xmlns:refdatabio' => 'http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIO',
+        'xmlns:secext' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
+        'xmlns:utility' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd',
+        'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+      }.freeze
+
+      attr_reader :namespaces
+
+      def initialize
+        @namespaces = NAMESPACES
+      end
+
       class << self
-        attr_reader :wsdl, :namespaces
+        # attr_reader :wsdl, :namespaces
+        attr_reader :wsdl
+
 
         def wsdl_from(filename)
           @wsdl = filename
         end
 
-        def uses_namespaces(namespaces)
-          @namespaces = namespaces.freeze
-        end
+        # def uses_namespaces(namespaces)
+        #   @namespaces = namespaces.freeze
+        # end
       end
 
       def formatted_xml
@@ -73,10 +98,6 @@ module CCMS
 
       def wsdl_location
         Rails.root.join('app/services/ccms/wsdls/', self.class.wsdl.to_s).to_s
-      end
-
-      def namespaces
-        self.class.namespaces
       end
 
       def config

@@ -3,18 +3,6 @@ module CCMS
     class ApplicantAddRequestor < BaseRequestor
       wsdl_from Rails.configuration.x.ccms_soa.clientProxyServiceWsdl
 
-      uses_namespaces(
-        'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xmlns:clientbim' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
-        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:secext' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:hdr' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-        'xmlns:common' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-        'xmlns:clientbio' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO',
-        'xmlns:utility' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
-      )
-
       attr_reader :applicant
 
       delegate :address, to: :applicant
