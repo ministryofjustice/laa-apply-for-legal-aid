@@ -56,11 +56,11 @@ module CCMS
           it 'stores the reqeust body in the submission history record' do
             subject.call
             expect(latest_history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientInqRQ',
+              command: 'clientbim:ClientInqRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns5:Surname>#{applicant.last_name}</ns5:Surname>",
-                "<ns5:FirstName>#{applicant.first_name}</ns5:FirstName>"
+                "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
+                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
               ]
             )
           end
@@ -95,11 +95,11 @@ module CCMS
           it 'stores the request body in the submission history record' do
             subject.call
             expect(latest_history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientAddRQ',
+              command: 'clientbim:ClientAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
-                "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>"
+                "<common:Surname>#{applicant.last_name}</common:Surname>",
+                "<common:FirstName>#{applicant.first_name}</common:FirstName>"
               ]
             )
           end
@@ -143,11 +143,11 @@ module CCMS
             expect(latest_history.details).to match(/#{error}/)
             expect(latest_history.details).to match(/oops/)
             expect(latest_history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientInqRQ',
+              command: 'clientbim:ClientInqRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns5:Surname>#{applicant.last_name}</ns5:Surname>",
-                "<ns5:FirstName>#{applicant.first_name}</ns5:FirstName>"
+                "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
+                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
               ]
             )
           end

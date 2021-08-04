@@ -16,11 +16,11 @@ module CCMS
           it 'generates the expected XML' do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
             expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: 'ns2:DocumentUploadRQ',
+              command: 'casebim:DocumentUploadRQ',
               transaction_id: expected_tx_id,
               matching: %w[
-                <ns4:DocumentType>ADMIN1</ns4:DocumentType>
-                <ns4:Channel>E</ns4:Channel>
+                <casebio:DocumentType>ADMIN1</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
               ]
             )
           end
@@ -34,11 +34,11 @@ module CCMS
           it 'generates the expected XML' do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
             expect(requestor.formatted_xml).to be_soap_envelope_with(
-              command: 'ns2:DocumentUploadRQ',
+              command: 'casebim:DocumentUploadRQ',
               transaction_id: expected_tx_id,
               matching: %w[
-                <ns4:DocumentType>BSTMT</ns4:DocumentType>
-                <ns4:Channel>E</ns4:Channel>
+                <casebio:DocumentType>BSTMT</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
               ]
             )
           end

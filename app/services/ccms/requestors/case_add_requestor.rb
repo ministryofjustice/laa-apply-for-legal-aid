@@ -16,7 +16,6 @@ module CCMS
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-
       # rename namespaces as follows:
       # ns0 => common
       # ns1 => secext
@@ -25,8 +24,6 @@ module CCMS
       # ns4 => casebim
       # ns5 => bill
       # ns6 => hdr
-
-
 
       uses_namespaces(
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',

@@ -13,7 +13,7 @@ module CCMS
         it 'generates the expected XML' do
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           expect(requestor.formatted_xml).to be_soap_envelope_with(
-            command: 'ns2:CaseAddUpdtStatusRQ',
+            command: 'casebim:CaseAddUpdtStatusRQ',
             transaction_id: expected_tx_id
           )
         end

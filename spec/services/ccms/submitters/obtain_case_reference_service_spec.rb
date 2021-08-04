@@ -47,7 +47,7 @@ module CCMS
         it 'writes the request body to the history record' do
           subject.call
           expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:ReferenceDataInqRQ',
+            command: 'refdatabim:ReferenceDataInqRQ',
             transaction_id: '20190301030405123456'
           )
         end
@@ -79,7 +79,7 @@ module CCMS
           expect(history.details).to match(/#{error}/)
           expect(history.details).to match(/oops/)
           expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:ReferenceDataInqRQ',
+            command: 'refdatabim:ReferenceDataInqRQ',
             transaction_id: '20190301030405123456'
           )
           expect(history.response).to be_nil

@@ -60,11 +60,11 @@ module CCMS
           it 'stores the reqeust body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns4:CaseAddRQ',
+              command: 'casebim:CaseAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                '<ns2:PreferredAddress>CLIENT</ns2:PreferredAddress>',
-                "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
+                '<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>',
+                "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
               ]
             )
           end
@@ -87,10 +87,10 @@ module CCMS
           it 'stores the request body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns4:CaseAddRQ',
+              command: 'casebim:CaseAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
+                "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
               ]
             )
           end
@@ -124,11 +124,11 @@ module CCMS
             expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/oops/)
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns4:CaseAddRQ',
+              command: 'casebim:CaseAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                '<ns2:PreferredAddress>CLIENT</ns2:PreferredAddress>',
-                "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
+                '<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>',
+                "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
               ]
             )
           end
@@ -154,10 +154,10 @@ module CCMS
 
           it 'stores the reqeust body in the  submission history record' do
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns4:CaseAddRQ',
+              command: 'casebim:CaseAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns2:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</ns2:ProviderOfficeID>"
+                "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
               ]
             )
           end

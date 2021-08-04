@@ -26,11 +26,11 @@ module CCMS
           next unless generate_attribute_block?(config)
 
           response_value = extract_response_value(config)
-          @xml.__send__('ns0:Attribute') do
-            @xml.__send__('ns0:Attribute', attribute_name)
-            @xml.__send__('ns0:ResponseType', config[:response_type])
-            @xml.__send__('ns0:ResponseValue', response_value)
-            @xml.__send__('ns0:UserDefinedInd', config[:user_defined])
+          @xml.__send__('common:Attribute') do
+            @xml.__send__('common:Attribute', attribute_name)
+            @xml.__send__('common:ResponseType', config[:response_type])
+            @xml.__send__('common:ResponseValue', response_value)
+            @xml.__send__('common:UserDefinedInd', config[:user_defined])
           end
         end
       end

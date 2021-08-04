@@ -54,10 +54,10 @@ module CCMS
       end
 
       def soap_header(xml)
-        xml.__send__('ns1:Security') do
-          xml.__send__('ns1:UsernameToken') do
-            xml.__send__('ns1:Username', config.client_username)
-            xml.__send__('ns1:Password', 'Type' => config.client_password_type) do
+        xml.__send__('secext:Security') do
+          xml.__send__('secext:UsernameToken') do
+            xml.__send__('secext:Username', config.client_username)
+            xml.__send__('secext:Password', 'Type' => config.client_password_type) do
               xml.text(config.client_password)
             end
           end
@@ -65,10 +65,10 @@ module CCMS
       end
 
       def ns3_header_rq(xml, provider_username)
-        xml.__send__('ns3:TransactionRequestID', transaction_request_id)
-        xml.__send__('ns3:Language', 'ENG')
-        xml.__send__('ns3:UserLoginID', provider_username)
-        xml.__send__('ns3:UserRole', config.user_role)
+        xml.__send__('hdr:TransactionRequestID', transaction_request_id)
+        xml.__send__('hdr:Language', 'ENG')
+        xml.__send__('hdr:UserLoginID', provider_username)
+        xml.__send__('hdr:UserRole', config.user_role)
       end
 
       def wsdl_location

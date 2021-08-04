@@ -97,9 +97,9 @@ module CCMS
             it 'writes the request body to the history record' do
               subject.call
               expect(history.request).to be_soap_envelope_with(
-                command: 'ns2:DocumentUploadRQ',
+                command: 'casebim:DocumentUploadRQ',
                 transaction_id: '20190301030405123456',
-                matching: ['<ns4:Channel>E</ns4:Channel>']
+                matching: ['<casebio:Channel>E</casebio:Channel>']
               )
             end
 

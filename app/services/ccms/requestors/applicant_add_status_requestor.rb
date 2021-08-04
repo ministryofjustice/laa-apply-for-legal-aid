@@ -6,13 +6,19 @@ module CCMS
       uses_namespaces(
         'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
         'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
+        'xmlns:clientbim' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM',
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:ns3' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-        'xmlns:ns4' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-        'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'
+        'xmlns:secext' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
+        'xmlns:hdr' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
+        'xmlns:common' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
+        'xmlns:clientbio' => 'http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIO'
       )
+
+      # ns1 -> secext
+      # ns2 -> clientbim
+      # ns3 -> hdr
+      # ns4 -> common
+      # ns5 -> clientbio
 
       attr_reader :applicant_add_transaction_id
 
@@ -33,9 +39,9 @@ module CCMS
       end
 
       def soap_body(xml)
-        xml.__send__('ns2:ClientAddUpdtStatusRQ') do
-          xml.__send__('ns3:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
-          xml.__send__('ns2:TransactionID', applicant_add_transaction_id)
+        xml.__send__('clientbim:ClientAddUpdtStatusRQ') do
+          xml.__send__('hdr:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
+          xml.__send__('clientbim:TransactionID', applicant_add_transaction_id)
         end
       end
     end
