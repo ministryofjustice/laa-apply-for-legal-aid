@@ -57,7 +57,6 @@ references:
         sudo apt-get update
         sudo apt-get install -y postgresql-client
         sudo apt-get install -y clamav-daemon
-        sudo apt-get install -y libreoffice
         sudo apt-get install -y wkhtmltopdf
         sudo apt-get install -y git-crypt
 
