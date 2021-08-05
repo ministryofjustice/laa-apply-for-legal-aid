@@ -37,8 +37,7 @@ RSpec.describe Admin::SettingsController, type: :request do
         setting: {
           mock_true_layer_data: 'true',
           allow_welsh_translation: 'true',
-          allow_multiple_proceedings: 'true',
-          override_dwp_results: 'true'
+          allow_multiple_proceedings: 'true'
         }
       }
     end
@@ -55,7 +54,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.mock_true_layer_data?).to eq(true)
       expect(setting.allow_welsh_translation?).to eq(true)
       expect(setting.allow_multiple_proceedings?).to eq(true)
-      expect(setting.override_dwp_results?).to eq(true)
     end
 
     it 'create settings if they do not exist' do

@@ -87,6 +87,3 @@ cy:
         allow_multiple_proceedings:
           'false': 'oN'
           'true': seY
-        override_dwp_results:
-          'false': 'oN'
-          'true': seY

@@ -21,7 +21,6 @@ module Admin
                                       :manually_review_all_cases,
                                       :allow_welsh_translation,
                                       :allow_multiple_proceedings,
-                                      :override_dwp_results,
                                       :enable_ccms_submission)
     end
 

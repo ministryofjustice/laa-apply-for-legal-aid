@@ -38,7 +38,6 @@ en:
           manually_review_all_cases: Manually review all non-passported applications
           allow_welsh_translation: Allow Welsh translation
           allow_multiple_proceedings: Allow multiple proceedings
-          override_dwp_results: Allow DWP results to be overriden
           enable_ccms_submission: Allow CCMS submissions
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
@@ -47,7 +46,6 @@ en:
             Select Yes to additionally route all non-passported applications to caseworker for review.
           allow_welsh_translation: Select Yes to translate the service into Welsh
           allow_multiple_proceedings: Select Yes to allow solicitors to select multiple proceeding types
-          override_dwp_results: Select Yes to allow solicitors to override results from benefit checker
           enable_ccms_submission: Yes by default, only set to No if CCMS is being taken offline
     submitted_applications_reports:
       show:
