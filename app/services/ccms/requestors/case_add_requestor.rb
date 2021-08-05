@@ -16,8 +16,6 @@ module CCMS
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-      # uses_namespaces BaseRequestor::NAMESPACES
-
       def initialize(submission, options)
         super()
         @options = options
@@ -156,7 +154,7 @@ module CCMS
           xml.__send__('casebio:OtherPartyDetail') do
             xml.__send__('casebio:Person') do
               xml.__send__('casebio:Name') do
-                xml.__send__('common:Title', '.')
+                xml.__send__('common:Title', 'MR.')
                 xml.__send__('common:Surname', last_name)
                 xml.__send__('common:FirstName', first_name)
               end
@@ -177,7 +175,7 @@ module CCMS
           xml.__send__('casebio:OtherPartyDetail') do
             xml.__send__('casebio:Person') do
               xml.__send__('casebio:Name') do
-                xml.__send__('casebio:Title', '.')
+                xml.__send__('casebio:Title', 'MASTER')
                 xml.__send__('casebio:Surname', last_name)
                 xml.__send__('casebio:FirstName', first_name)
               end
