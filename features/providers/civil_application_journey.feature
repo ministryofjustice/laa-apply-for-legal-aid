@@ -193,7 +193,8 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -235,7 +236,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -314,7 +316,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS on the passported journey with an applicant does not receive benefits
@@ -339,7 +341,8 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -363,7 +366,8 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I am instructed to use CCMS when the applicant is not eligible
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -421,7 +425,8 @@ Feature: Civil application journeys
   Scenario: I want to change email address from the about financial assessment page
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -781,8 +786,12 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "We used the following details to check your client's benefits status with the DWP"
-    When I click link "Change your client's details"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'No, my client receives a passporting benefit'
+    Then I click "Continue"
+    Then I should be on a page showing "Check your client's details"
+    Then I choose 'I need to change these details'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's details"
     Then I enter name 'Kyle', 'Walker'
     Then I enter the date of birth '10-1-1980'
