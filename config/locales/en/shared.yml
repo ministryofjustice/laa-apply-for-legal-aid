@@ -3,7 +3,6 @@ en:
   shared:
     partials:
       revealing_checkbox:
-        dates:  "%{date_start} to %{date_end}"
         citizens:
           cash_incomes:
             hint: Enter the total cash amount you received in each month, or enter 0 if you received none.
@@ -152,7 +151,6 @@ en:
         assets:
           other_assets: Which types of assets does your client have?
           policy_disregards: Payments from scheme or charities
-          restrictions: Do any restrictions apply?
           savings_and_investments: Which types of savings or investments does your client have?
           savings_account: Savings account
           current_account: Current account
@@ -164,9 +162,6 @@ en:
           percentage_home: What % share of their home does your client legally own?
           property_value: How much is your client's home worth?
           shared_ownership: Does your client own their home with anyone else?
-        submit:
-          heading: Submit your details
-          text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
       offline_savings_accounts:
         heading: Bank accounts
         offline_savings_accounts: Has savings accounts they cannot access online
@@ -191,15 +186,6 @@ en:
         request_higher_limit: Do you want to request a higher cost limit?
         new_cost_limit: New emergency cost limit
         new_limit_reasons: Why you need a higher cost limit
-      income_details:
-        income:
-          benefits: Benefits
-          family_help: Financial help from friends or family
-          maintenance_in: Maintenance payments
-          property_or_lodger: Income from property or lodger
-          student_loan: Student loan or grant
-          pension: Pension
-          total_income: Total income
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
@@ -218,12 +204,9 @@ en:
         statement-of-case-heading: Statement of case
         gateway-evidence-heading: Supporting evidence
         items:
-          client_declaration: Client declaration
-          client_declaration_answer: Read & agreed
           override_requested: Do you want to request a higher cost limit?
           cost_override_question: What is the new requested emergency cost limit?
           enter_cost_reasons: Tell us why you need a higher cost limit.
-          proceedings_currently_before_court: Proceedings currently before court
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?
           statement_of_case: Provide a statement of case
@@ -237,7 +220,6 @@ en:
           bail_conditions_set: Have bail conditions been set?
           notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
-          details_of_latest_incident: What happened during the incident?
           gateway_evidence: Upload supporting evidence
       merits_orig: # TODO: Delete when Multi-proceeding flag is removed
         <<: *merits
@@ -248,7 +230,6 @@ en:
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:
-          heading: Scope of legal aid
           client_involvement_type: Client involvement type
           client_involvement_type_applicant: Applicant
           proceeding: What does your client want legal aid for?
@@ -258,7 +239,6 @@ en:
       delegated_functions:
         not_used: Not used
         section_delegated:
-          heading: Delegated functions
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
       emergency_limitations:
@@ -273,7 +253,6 @@ en:
         citizens:
           heading: Restrictions on your assets
           question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
-          details: Details of restrictions
         providers:
           heading: Restrictions on your client's assets
           question: Is your client prohibited from selling or borrowing against their assets? 
@@ -297,7 +276,6 @@ en:
         occurred_on_label: When did the incident occur?
         told_on_label: When did your client contact you about the latest domestic abuse incident?
         told_on_hint: For example 31 3 2019.
-        purchased_on_hint: For example, 31 3 1980.
         used_delegated_functions_on_label: Date you used delegated functions
         used_delegated_functions_on_hint: "For example, %{options}."
       dependants:
@@ -331,15 +309,6 @@ en:
         mortgage: Yes, with a mortgage or loan
         'no': 'No'
         owned_outright: Yes, owned outright
-      percentage_home_form:
-        citizens:
-          percentage_homes:
-            hint:
-              percentage_home: Your name must be on the property deeds, lease, freehold or mortgage.
-            percentage_home: Enter the estimated percentage share you own
-        providers:
-          percentage_homes:
-            percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage
       policy_disregards:
         form:
           providers:
@@ -362,43 +331,6 @@ en:
               income_support: Income Support
       revealing_checkbox:
         attribute:
-          citizens:
-            other_assets:
-              check_box_valuable_items_value: Any valuable items worth £500 or more
-              check_box_land_value: Land
-              check_box_inherited_assets_value: Money or assets from the estate of a person who has died
-              check_box_money_owed_value: Money owed to you, including from a private mortgage
-              check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
-              check_box_second_home_percentage: Second property or holiday home percentage owned
-              check_box_second_home_value: Second property or holiday home estimated value
-              check_box_timeshare_property_value: Timeshare property
-              check_box_trust_value: Interest in a trust
-              valuable_items_value: Enter estimated total value, minus any sale costs
-              land_value: Enter estimated value
-              inherited_assets_value: Enter estimated total value
-              money_owed_value: Enter estimated amount owed
-              timeshare_property_value: Enter value, minus any loan and sale costs
-              trust_value: Enter estimated total value
-              hint:
-                check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work
-            savings_and_investments:
-              cash: Enter the total amount
-              check_box_cash: Money not in a bank account
-              check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
-              check_box_national_savings: National Savings Certificates and Premium Bonds
-              check_box_other_person_account: Access to another person's bank account
-              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
-              check_box_plc_shares: Shares in a PLC (public limited company)
-              hint:
-                revealing_check_box_offline_current_accounts: If you have multiple accounts, take the lowest balance from each account last month, add them, then enter the total
-                check_box_cash: For example, cash kept at home
-                check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death
-                check_box_other_person_account: For example, you are a signatory on a child's account
-              life_assurance_endowment_policy: Enter the total value of all you own
-              national_savings: Enter the total value of all you own
-              other_person_account: Enter the estimated total in all accounts
-              peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all you own
-              plc_shares: Enter the total value of all you own
           providers:
             other_assets:
               check_box_valuable_items_value: Any valuable items worth £500 or more
@@ -498,11 +430,8 @@ en:
       property: Property
       value: Value
       outstanding_mortgage: Outstanding mortgage
-      mortgage_deduction: Mortgage deduction
       disregards: Disregards and deductions
       assessment_amount: Amount included in calculation
-      main_home_disregard: Main home disregard
-      main_home: Main home
       additional_property: Additional property
     vehicle_results:
       vehicles: Vehicles

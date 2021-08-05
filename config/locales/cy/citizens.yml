@@ -5,8 +5,6 @@ cy:
       index:
         retrieving_transactions: snoitcasnart knab gniveirteR
         failed_transactions_retrieval: snoitcasnart knab eveirter ot deliaF
-        default_error: ".retal niaga yrt esaelP .seitluciffid lacinhcet gnicneirepxe
-          era ew ,yrroS"
         page_loading: gnidaoL egaP
         heading_1: snoitcasnart knab ruoy derahs yllufsseccus ev'uoY
         intro_text: ".shtnom 3 tsap eht morf stnemetats knab ruoy dedaolnwod ev’eW"
@@ -48,46 +46,23 @@ cy:
       create:
         error: knab a tceleS
     cash_incomes:
-      checkbox:
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
       show:
         page_heading: hsac ni eviecer uoy stnemyap tceleS
       cash_income_form:
-        dates: "%{date}"
         info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
         none_selected: evoba eht fo enoN
-      update:
-        none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     cash_outgoings:
-      checkbox:
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
       show:
         page_heading: hsac ni ekam uoy stnemyap tceleS
       cash_outgoings_form:
-        dates: "%{date}"
         info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
         none_selected: evoba eht fo enoN
-      update:
-        none_selected: hsac ni stnemyap eseht eviecer uoy fi tceleS
     check_answers:
       cash_transactions:
         cash_transactions_credits_header: hsac ni eviecer uoy stnemyaP
         cash_transactions_debits_header: hsac ni ekam uoy stnemyaP
         none: enoN
       index:
-        assets:
-          heading: stessa rehto dna sgnivas ,ytreporP
-          other_assets: stessa rehtO
-          outstanding_mortgage: tnuoma egagtrom gnidnatstuO
-          own_home: denwo ytreporP
-          percentage_home: denwo egatnecreP
-          property_value: eulav ytreporP
-          restrictions: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp
-            taht snoitcirtser lagel yna ereht erA"
-          savings_and_investments: stnemtsevni dna sgnivaS
-          shared_ownership: esle enoyna htiw denwO
         h1-heading: noitamrofni timbus dna srewsna ruoy kcehC
         bank_accounts:
           heading: stnuocca knab ruoY
@@ -134,30 +109,9 @@ cy:
             AAL eht naht rehto enoyna htiw sliated ruoy erahs
             sliated ni-ngis gniknab enilno ruoy ees
             sliated tnuocca knab ruoy erots
-    declarations:
-      show:
-        page_heading: noitaralceD
-        submit_button: timbus dna eergA
-    dependants:
-      assets_values:
-        show:
-          page_heading: "?000,8£ naht erom htrow stessa evah %{name} seoD"
-      relationships:
-        show:
-          page_heading: "?%{name} ot pihsnoitaler ruoy si tahW"
-    has_dependants:
-      show:
-        page_heading: "?stnadneped yna evah uoy oD"
-        info: ".troppus laicnanif rof uoy no sdneped dna uoy htiw sevil ohw tluda
-          ro dlihc a eb dluoc tnadneped A"
-        extra_info: ".eno evah uoy fi rentrap ruoy edulcni ton oD"
     has_offline_accounts:
       new:
         error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
-    has_other_dependants:
-      show:
-        heading: "?stnadneped rehto yna evah uoy oD"
-        error: stnadneped rehto evah uoy fi sey tceleS
     identify_types_of_incomes:
       show:
         page_heading: "?eviecer uoy od stnemyap gniwollof eht fo hcihW"
@@ -201,10 +155,6 @@ cy:
           dekcehc ev'ew ecno dia lagel rof yfilauq uoy fi mrifnoc ll'eW"
         feedback_prefix: kcabdeef eviG
         feedback_suffix: ".ecivres siht evorpmi su pleh ot "
-    other_assets:
-      show:
-        h1-heading: "?evah uoy od stessa fo sepyt hcihW"
-        none_selected: eseht fo enoN
     resend_link_requests:
       show:
         page_title: deripxe sah knil sihT
@@ -214,33 +164,6 @@ cy:
         check_inbox: ".xobni liame ruoy kcehC"
         valid_until: ".snosaer ytiruces rof syad 7 rof evitca niamer ylno lliw knil
           wen ruoY"
-    restrictions:
-      show:
-        h1-heading: "?stessa ruoy tsniaga gniworrob ro gnilles morf uoy tneverp taht
-          snoitcirtser lagel yna ereht erA"
-        restrictions_details: yhw dna ,tsniaga worrob ro lles tonnac uoy stessa hcihw
-          su lleT
-        for_example: ":elpmaxe roF"
-        examples:
-          list: |2-
-
-            sgnideecorp lagel rehto ni etupsid fo tcejbus eht era stessa ruoy
-            dessessoper neeb sah emoh ruoy
-            tpurknab er'uoy
-    savings_and_investments:
-      accounts_summary:
-        col_account_number: rebmun tnuoccA
-        col_amount: tnuomA
-        col_sort_code: edoc troS
-        col_type: epyT
-        intro_text: ":stnuocca enilno gniwollof eht evah uoy su dlot ydaerla evah
-          uoY"
-      show:
-        h1-heading: "?evah uoy od stnemtsevni ro sgnivas fo sepyt tahW"
-        none_selected: eseht fo enoN
-    shared_ownerships:
-      show:
-        heading_1: "?esle enoyna htiw emoh ruoy nwo uoy oD"
     student_finances:
       show:
         field_set_header: "?ecnanif tneduts teg uoy oD"
