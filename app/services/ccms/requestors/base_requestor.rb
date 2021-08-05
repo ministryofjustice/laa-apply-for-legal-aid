@@ -28,7 +28,6 @@ module CCMS
         # attr_reader :wsdl, :namespaces
         attr_reader :wsdl
 
-
         def wsdl_from(filename)
           @wsdl = filename
         end
