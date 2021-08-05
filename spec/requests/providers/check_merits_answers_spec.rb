@@ -125,6 +125,8 @@ RSpec.describe 'check merits answers requests', type: :request do
     subject do
       patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
     end
+    before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
+    let(:allow_ccms_submission) { true }
 
     context 'logged in as an authenticated provider' do
       before do
@@ -157,9 +159,23 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(application.reload.summary_state).to eq :submitted
       end
 
-      it 'transitions to generating_reports state' do
-        subject
-        expect(application.reload).to be_generating_reports
+      context 'when the Setting.enable_ccms_submission?' do
+        context 'is turned on' do
+          it 'transitions to generating_reports state' do
+            subject
+            expect(application.reload).to be_generating_reports
+            # expect(application.reload.state).to eq 'generating_reports'
+          end
+        end
+
+        context 'is turned off' do
+          let(:allow_ccms_submission) { false }
+
+          it 'transitions to submission_paused state' do
+            subject
+            expect(application.reload.state).to eq 'submission_paused'
+          end
+        end
       end
 
       context 'Form submitted using Save as draft button' do

@@ -93,7 +93,6 @@ class LegalAidApplication < ApplicationRecord
            :checking_passported_answers?,
            :entering_applicant_details?,
            :generating_reports?,
-           :may_generate_reports?,
            :provider_assessing_means?,
            :provider_checking_or_checked_citizens_means_answers?,
            :provider_entering_means?,
