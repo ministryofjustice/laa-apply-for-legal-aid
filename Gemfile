@@ -5,7 +5,7 @@ ruby '3.0.1'
 
 gem 'aasm', '~> 5.2.0'
 gem 'active_model_serializers', '~> 0.10.12'
-gem 'after_commit_everywhere', '~> 1.0'
+gem 'after_commit_everywhere', '~> 1.1'
 gem 'discard', '~> 1.2'
 gem 'geckoboard-ruby'
 gem 'govuk_notify_rails', '~> 2.1.2'
