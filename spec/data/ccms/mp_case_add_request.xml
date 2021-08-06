@@ -45,7 +45,7 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <common:Title>.</common:Title>
+                      <common:Title>MR.</common:Title>
                       <common:Surname>Test-Opponent</common:Surname>
                       <common:FirstName>Joffrey</common:FirstName>
                     </casebio:Name>
@@ -62,9 +62,9 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <casebio:Title>.</casebio:Title>
-                      <casebio:Surname>TestChild</casebio:Surname>
-                      <casebio:FirstName>First</casebio:FirstName>
+                      <common:Title>MASTER</common:Title>
+                      <common:Surname>TestChild</common:Surname>
+                      <common:FirstName>First</common:FirstName>
                     </casebio:Name>
                     <casebio:DateOfBirth>2019-01-20</casebio:DateOfBirth>
                     <casebio:Address/>
@@ -80,9 +80,9 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <casebio:Title>.</casebio:Title>
-                      <casebio:Surname>TestChild</casebio:Surname>
-                      <casebio:FirstName>Second</casebio:FirstName>
+                      <common:Title>MASTER</common:Title>
+                      <common:Surname>TestChild</common:Surname>
+                      <common:FirstName>Second</common:FirstName>
                     </casebio:Name>
                     <casebio:DateOfBirth>2020-02-15</casebio:DateOfBirth>
                     <casebio:Address/>

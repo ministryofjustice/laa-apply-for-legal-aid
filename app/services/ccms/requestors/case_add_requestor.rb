@@ -175,9 +175,9 @@ module CCMS
           xml.__send__('casebio:OtherPartyDetail') do
             xml.__send__('casebio:Person') do
               xml.__send__('casebio:Name') do
-                xml.__send__('casebio:Title', 'MASTER')
-                xml.__send__('casebio:Surname', last_name)
-                xml.__send__('casebio:FirstName', first_name)
+                xml.__send__('common:Title', 'MASTER')
+                xml.__send__('common:Surname', last_name)
+                xml.__send__('common:FirstName', first_name)
               end
               xml.__send__('casebio:DateOfBirth', child.date_of_birth.strftime('%F'))
               xml.__send__('casebio:Address')

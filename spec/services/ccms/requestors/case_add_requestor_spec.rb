@@ -76,7 +76,7 @@ module CCMS
           requestor.call
         end
 
-        xit 'generates the expected xml' do
+        it 'generates the expected xml' do
           allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_000_001, 88_000_002)
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
             test_data_xml = ccms_data_from_file 'case_add_request.xml'
@@ -89,7 +89,7 @@ module CCMS
             Setting.setting.update!(allow_multiple_proceedings: true)
           end
 
-          xit 'generates the expected xml' do
+          it 'generates the expected xml' do
             expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
             travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
               test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
