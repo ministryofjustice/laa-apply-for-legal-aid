@@ -87,8 +87,6 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    after_commit_everywhere (1.0.0)
-      activerecord (>= 4.2)
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
@@ -154,7 +152,6 @@ GEM
     childprocess (3.0.0)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    climate_control (1.0.1)
     codecov (0.5.2)
       simplecov (>= 0.15, < 0.22)
     coderay (1.1.3)
@@ -694,7 +691,6 @@ DEPENDENCIES
   aasm (~> 5.2.0)
   active_model_serializers (~> 0.10.12)
   addressable
-  after_commit_everywhere (~> 1.0)
   awesome_print (~> 1.9.2)
   aws-sdk-s3
   axe-core-cucumber
@@ -703,7 +699,6 @@ DEPENDENCIES
   business
   byebug
   capybara (>= 3.32.2, < 4.0)
-  climate_control
   codecov
   cucumber
   cucumber-rails

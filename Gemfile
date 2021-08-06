@@ -5,7 +5,6 @@ ruby '3.0.2'
 
 gem 'aasm', '~> 5.2.0'
 gem 'active_model_serializers', '~> 0.10.12'
-gem 'after_commit_everywhere', '~> 1.0'
 gem 'discard', '~> 1.2'
 gem 'geckoboard-ruby'
 gem 'govuk_notify_rails', '~> 2.1.2'
@@ -139,7 +138,6 @@ end
 group :test do
   gem 'axe-core-cucumber'
   gem 'capybara', '>= 3.32.2', '< 4.0'
-  gem 'climate_control' # Allows environment variables to be modified within specs
   gem 'codecov', require: false
   gem 'cucumber', require: false
   gem 'cucumber-rails', require: false
