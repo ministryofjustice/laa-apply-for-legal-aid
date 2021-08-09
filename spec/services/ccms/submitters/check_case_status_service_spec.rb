@@ -41,7 +41,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService do
             expect(history.details).to be_nil
           end
 
-          it 'stores the reqeust body in the  submission history record' do
+          it 'stores the request body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
               command: 'ns2:CaseAddUpdtStatusRQ',
