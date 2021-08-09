@@ -90,12 +90,6 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-# Modify ENV variables within a spec. See:
-#   https://github.com/thoughtbot/climate_control
-def with_modified_env(options, &block)
-  ClimateControl.modify(options, &block)
-end
-
 def uploaded_file(path, content_type = nil, binary: false)
   Rack::Test::UploadedFile.new(Rails.root.join(path), content_type, binary)
 end
