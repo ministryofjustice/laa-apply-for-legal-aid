@@ -5,7 +5,7 @@ module CCMS
       STATUS_FREE_TEXT_PATH = '//Body//CaseAddUpdtStatusRS//HeaderRS//Status//StatusFreeText'.freeze
 
       def success?
-        parse(:extracted_status_free_text) == 'Case successfully created.'
+        @success = parse(:extracted_status_free_text).match?(/Case successfully created./)
       end
 
       private

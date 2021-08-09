@@ -1,0 +1,26 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+  <env:Header>
+    <wsa:To>http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+    <wsa:MessageID>urn:FFFB8390669E11E99F6F058281F6012C</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://www.w3.org/2005/08/addressing/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+  </env:Header>
+  <env:Body>
+    <CaseAddUpdtStatusRS xmlns:msg="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" xmlns="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <header:HeaderRS xmlns:header="http://legalservices.gov.uk/Enterprise/Common/1.0/Header">
+        <header:TransactionID>20190301030405123456</header:TransactionID>
+        <header:RequestDetails>
+          <header:TransactionRequestID>20190301030405123456</header:TransactionRequestID>
+          <header:Language>ENG</header:Language>
+          <header:UserLoginID>my_login</header:UserLoginID>
+          <header:UserRole>my_role</header:UserRole>
+        </header:RequestDetails>
+        <header:Status>
+          <header:Status>Success</header:Status>
+          <header:StatusFreeText>Case successfully created.</header:StatusFreeText>
+        </header:Status>
+      </header:HeaderRS>
+    </CaseAddUpdtStatusRS>
+  </env:Body>
+</env:Envelope>
