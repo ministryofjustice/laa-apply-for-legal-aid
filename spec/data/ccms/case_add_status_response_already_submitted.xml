@@ -18,7 +18,7 @@
         </header:RequestDetails>
         <header:Status>
           <header:Status>Success</header:Status>
-          <header:StatusFreeText>Case successfully created.</header:StatusFreeText>
+          <header:StatusFreeText>Case successfully created.Case already exist, exiting.</header:StatusFreeText>
         </header:Status>
       </header:HeaderRS>
     </CaseAddUpdtStatusRS>
