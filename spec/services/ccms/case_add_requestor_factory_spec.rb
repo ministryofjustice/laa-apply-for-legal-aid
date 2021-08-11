@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe CaseAddRequestorFactory do
+  RSpec.describe CaseAddRequestorFactory, :ccms do
     let(:submission) { create :submission, legal_aid_application: legal_aid_application }
 
     context 'passported' do

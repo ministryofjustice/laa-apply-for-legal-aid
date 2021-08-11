@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors
-    RSpec.describe ApplicantSearchRequestor do
+    RSpec.describe ApplicantSearchRequestor, :ccms do
       let(:expected_xml) { ccms_data_from_file 'applicant_search_request.xml' }
       let(:expected_tx_id) { '20190101121530000000' }
       let(:applicant) do

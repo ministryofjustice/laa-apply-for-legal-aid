@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CCMS::Submitters::CheckCaseStatusService do
+RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
   let(:submission) { create :submission, :case_submitted }
   let(:case_add_status_requestor) { double CCMS::Requestors::CaseAddStatusRequestor }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }

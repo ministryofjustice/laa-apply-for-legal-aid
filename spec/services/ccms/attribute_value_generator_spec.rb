@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe AttributeValueGenerator do
+  RSpec.describe AttributeValueGenerator, :ccms do
     let(:submission) { create :submission }
     let(:value_generator) { AttributeValueGenerator.new(submission) }
 

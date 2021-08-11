@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Submitters
-    RSpec.describe ObtainCaseReferenceService do
+    RSpec.describe ObtainCaseReferenceService, :ccms do
       let(:legal_aid_application) { create :legal_aid_application }
       let(:submission) { create :submission, legal_aid_application: legal_aid_application }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }

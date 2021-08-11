@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe CaseAddResponseParser do
+    RSpec.describe CaseAddResponseParser, :ccms do
       let(:expected_tx_id) { '20190301030405123456' }
 
       context 'successful response' do

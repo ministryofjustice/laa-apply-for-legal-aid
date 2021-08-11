@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe ApplicantSearchResponseParser do
+    RSpec.describe ApplicantSearchResponseParser, :ccms do
       describe 'parsing applicant search responses' do
         let(:no_results_response_xml) { ccms_data_from_file 'applicant_search_response_no_results.xml' }
         let(:one_result_response_xml) { ccms_data_from_file 'applicant_search_response_one_result.xml' }

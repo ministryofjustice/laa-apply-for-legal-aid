@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe AttributeConfiguration do
+  RSpec.describe AttributeConfiguration, :ccms do
     before do
       allow_any_instance_of(described_class).to receive(:configuration_files).and_return(mock_configuration)
     end

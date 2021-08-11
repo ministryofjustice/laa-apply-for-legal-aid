@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors
-    RSpec.describe CaseAddStatusRequestor do
+    RSpec.describe CaseAddStatusRequestor, :ccms do
       let(:expected_xml) { ccms_data_from_file 'case_add_status_request.xml' }
       let(:expected_tx_id) { '20190101121530000000' }
       let(:requestor) { described_class.new(expected_tx_id, 'my_login') }

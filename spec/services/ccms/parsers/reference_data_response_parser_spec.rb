@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe ReferenceDataResponseParser do
+    RSpec.describe ReferenceDataResponseParser, :ccms do
       let(:expected_tx_id) { '20190301030405123456' }
       let(:expected_reference_number) { '300000135140' }
 
