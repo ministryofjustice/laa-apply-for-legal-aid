@@ -1,0 +1,49 @@
+name: Check I18n matches
+on:
+  schedule:
+    - cron:  '5 7 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      RAILS_ENV: test
+      TZ: "Europe/London"
+    services:
+      postgres:
+        image: postgres:10.11
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 2.7
+        uses: ruby/setup-ruby@v1
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Bundle install
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: Configure database
+        run: |
+          bin/rails db:create db:schema:load
+      - name: Run Tests
+        env:
+          NOCOVERAGE: true
+        run: |
+          bundle exec rspec --tag i18n
+      - name: Slack alert
+        id: slack
+        uses: slackapi/slack-github-action@v1.14.0
+        if: failure()
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL }}
+          slack-message: ':alert: <!here> the daily Apply I18n checks have failed.  To reproduce locally, run `bundle exec rspec --tag i18n` and resolve the issues'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
