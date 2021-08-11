@@ -9,7 +9,7 @@ module Providers
       @applicant = legal_aid_application.applicant
       return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
 
-      check_benefits if legal_aid_application.benefit_check_result_needs_updating?
+      check_benefits && return if legal_aid_application.benefit_check_result_needs_updating?
 
       go_forward(true) if legal_aid_application.non_passported?
     end
