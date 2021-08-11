@@ -32,9 +32,8 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     it 'has not transitioned the state' do
-      puts ">>>>>>>>>>>> #{application.state} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
       subject
-      expect(application.reload.state).to eq 'applicant_details_checked'
+      expect(application.reload.state).to eq 'checking_applicant_details'
     end
 
     context 'state is provider_entering_means' do
@@ -42,7 +41,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       it 'transitions from provider_entering_means' do
         subject
-        expect(application.reload.state).to eq 'applicant_details_checked'
+        expect(application.reload.state).to eq 'provider_entering_means'
       end
     end
 

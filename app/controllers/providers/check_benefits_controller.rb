@@ -33,12 +33,7 @@ module Providers
     end
 
     def should_use_ccms?
-      return false if legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
-
-      return false if provider.non_passported_permissions?
-
-      legal_aid_application.use_ccms!(:non_passported) unless legal_aid_application.use_ccms?
-      true
+      UseCCMSArbiter.call(legal_aid_application)
     end
 
     def known_issue_prevents_benefit_check?
@@ -48,10 +43,6 @@ module Providers
     def set_negative_result_and_go_forward
       legal_aid_application.create_benefit_check_result!(result: 'skipped:known_issue')
       go_forward
-    end
-
-    def provider
-      legal_aid_application.provider
     end
   end
 end
