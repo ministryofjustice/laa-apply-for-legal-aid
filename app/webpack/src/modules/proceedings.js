@@ -2,13 +2,13 @@ import axios from 'axios';
 import { hide, show, pluralize } from '../helpers';
 
 const doneTypingInterval = 500; // time in ms, 500ms to make search work fairly quickly but avoid too many DB requests
+const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
 let typingTimer,
   ariaText,
   proceedingMatches = [],
   noMatchCount = 0,
   previousSearchTerm = null,
   containSimilarWords = false;
-
 
 async function searchResults (searchTerm) {
   const currentUrl = window.location.href;
@@ -62,9 +62,11 @@ async function doneTyping () {
     const results = await searchResults(inputText);
     showResults(results, inputText);
   } else {
+    ariaText = 'No text entered.'
     updateMatchCounters();
     hideProceeedingsItems();
   }
+  setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = ariaText }, screenReaderMessageDelay);
 }
 
 // Add event listeners for the user typing in the search box and clearing the search
@@ -81,6 +83,7 @@ function searchOnUserInput (searchInputBox) {
     .addEventListener('click', () => {
       searchInputBox.value = '';
       hideProceeedingsItems();
+      setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay);
     });
 
   // TODO: remove this when the multiple proceedings feature flag is removed
@@ -134,15 +137,14 @@ function showResults (results, inputText) {
       // show hidden proceedings item
       show(element);
       hide(document.querySelector('.no-proceeding-items'));
-      // the below alerts screen reader users that results appeared on the page
-      const pluralizedMatches = pluralize(codes.length, 'match', 'matches');
-      ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move through options`;
     })
+    // the below alerts screen reader users that results appeared on the page
+    const pluralizedMatches = pluralize(codes.length, 'match', 'matches');
+    ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move through options`;
   } else {
     show(document.querySelector('.no-proceeding-items'));
-    ariaText = `No results found matching ${inputText}`;
+    ariaText = `No results found matching ${inputText}`
   }
-  document.querySelector('#screen-reader-messages').innerHTML = ariaText;
 }
 
 // Hide any search results and the 'no results found' text
