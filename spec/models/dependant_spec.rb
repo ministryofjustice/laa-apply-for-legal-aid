@@ -73,6 +73,10 @@ RSpec.describe Dependant, type: :model do
       it 'returns false' do
         expect(dependant.over_fifteen?).to eq(false)
       end
+
+      it 'returns true' do
+        expect(dependant.sixteen_or_over?).to eq(false)
+      end
     end
 
     context 'more than 15 years old' do
@@ -81,6 +85,10 @@ RSpec.describe Dependant, type: :model do
       it 'returns true' do
         expect(dependant.over_fifteen?).to eq(true)
       end
+
+      it 'returns true' do
+        expect(dependant.sixteen_or_over?).to eq(true)
+      end
     end
 
     context '15 and a half years old' do
@@ -88,6 +96,10 @@ RSpec.describe Dependant, type: :model do
 
       it 'returns false' do
         expect(dependant.over_fifteen?).to eq(false)
+      end
+
+      it 'returns true' do
+        expect(dependant.sixteen_or_over?).to eq(false)
       end
     end
 
@@ -162,6 +174,31 @@ RSpec.describe Dependant, type: :model do
       it 'returns adult relative' do
         expect(dependant.ccms_relationship_to_client).to eq 'Child aged 16 and over'
       end
+    end
+  end
+
+  describe 'assets_over_threshold?' do
+    subject(:assets_over_threshold) { dependant.assets_over_threshold? }
+    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, assets_value: assets_value }
+
+    context 'when assets_value is nil' do
+      let(:assets_value) { nil }
+      it { is_expected.to be false }
+    end
+
+    context 'when assets_value is below threshold' do
+      let(:assets_value) { 7999.99 }
+      it { is_expected.to be false }
+    end
+
+    context 'when assets_value is on threshold' do
+      let(:assets_value) { 8000 }
+      it { is_expected.to be false }
+    end
+
+    context 'when assets_value is above threshold' do
+      let(:assets_value) { 8000.01 }
+      it { is_expected.to be true }
     end
   end
 end

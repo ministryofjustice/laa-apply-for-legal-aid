@@ -96,6 +96,10 @@ RSpec.describe Applicant, type: :model do
     it 'returns the age of the applicant' do
       expect(subject).to be_kind_of(Integer)
     end
+
+    it 'sets the child? value' do
+      expect(legal_aid_application.applicant.child?).to eq legal_aid_application.applicant.age < 16
+    end
   end
 
   describe '#receives_financial_support?' do
