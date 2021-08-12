@@ -760,15 +760,6 @@ Then('I enter the {string} date of {int} days ago') do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
-Then('I should see a {string} date of {int} days ago') do |name, number|
-  name.gsub!(/\s+/, '_')
-  date = number.days.ago
-  fields = page.all("input[name*=#{name}]")
-  expect(fields[0][:value]).to eq(date.day.to_s)
-  expect(fields[1][:value]).to eq(date.month.to_s)
-  expect(fields[2][:value]).to eq(date.year.to_s)
-end
-
 Then('I enter a {string} for a {int} year old') do |name, number|
   name.gsub!(/\s+/, '_')
   date = (number.years + 1.month).ago
