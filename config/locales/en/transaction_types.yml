@@ -56,8 +56,8 @@ en:
       child_care: Select childcare payments
       friends_or_family: Select payments from friends or family
       legal_aid: Select legal aid payments
-      maintenance_in: Select maintenance payments
-      maintenance_out: Select maintenance payments to a former partner
+      maintenance_in: Select maintenance payments your client received
+      maintenance_out: Select maintenance payments your client made
       pension: Select pension payments
       property_or_lodger: Select payments from a property or lodger
       rent_or_mortgage: Select housing payments

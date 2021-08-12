@@ -61,6 +61,7 @@ en:
     capital_income_assessment_results:
       show:
         page_title: "Capital and Income Assessment Result: %{result}"
+        tab_title: Your client could be eligible for free legal aid
         result:
           eligible: Eligible
           not_eligible: Not eligible

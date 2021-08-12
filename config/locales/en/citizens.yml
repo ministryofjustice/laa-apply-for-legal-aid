@@ -115,7 +115,7 @@ en:
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'
-        heading_1: Your legal aid application
+        heading_1: Your legal aid applications
         how_we_do_this_heading: How we do this
         how_we_do_this_body_1: We check 3 months of your bank statements to see the kinds of payments you make and receive.
         how_we_do_this_body_2: This helps us work out if you can get legal aid or you need to pay towards the costs.
