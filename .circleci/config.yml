@@ -174,6 +174,8 @@ jobs:
         name: Run JavaScript tests
         command: bin/rails javascript_tests
     - run:
+        environment:
+          INC_CCMS: $(if [ "$(git log -`git rev-list master.. --count` --stat | grep "services/bob\S*\." | wc -l)" -ne "0" ]; then echo true; fi)
         name: Run ruby tests
         command: bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
     - store_test_results:
