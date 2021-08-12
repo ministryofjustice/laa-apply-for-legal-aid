@@ -74,7 +74,7 @@ RSpec.describe Dependant, type: :model do
         expect(dependant.over_fifteen?).to eq(false)
       end
 
-      it 'returns true' do
+      it 'returns false' do
         expect(dependant.sixteen_or_over?).to eq(false)
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe Dependant, type: :model do
         expect(dependant.over_fifteen?).to eq(false)
       end
 
-      it 'returns true' do
+      it 'returns false' do
         expect(dependant.sixteen_or_over?).to eq(false)
       end
     end
