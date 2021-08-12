@@ -55,7 +55,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_proceeding_types,
-             :with_delegated_functions,
              proceeding_types_count: 2
     end
     let(:today) { Time.zone.today }
