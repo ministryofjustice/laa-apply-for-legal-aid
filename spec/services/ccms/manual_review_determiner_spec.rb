@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  RSpec.describe ManualReviewDeterminer do
+  RSpec.describe ManualReviewDeterminer, :ccms do
     let(:setting) { Setting.setting }
     let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
     let(:determiner) { described_class.new(legal_aid_application) }

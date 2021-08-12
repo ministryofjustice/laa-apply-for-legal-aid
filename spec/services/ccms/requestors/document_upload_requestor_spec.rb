@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors
-    RSpec.describe DocumentUploadRequestor do
+    RSpec.describe DocumentUploadRequestor, :ccms do
       let(:expected_xml) { ccms_data_from_file 'document_upload_request.xml' }
       let(:expected_tx_id) { '20190101121530000000' }
       let(:case_ccms_reference) { '1234567890' }

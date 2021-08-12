@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors
-    RSpec.describe ReferenceDataRequestor do
+    RSpec.describe ReferenceDataRequestor, :ccms do
       let(:expected_xml) { ccms_data_from_file 'reference_data_request.xml' }
       let(:expected_tx_id) { '20190101121530000000' }
       let(:requestor) { described_class.new('my_login') }

@@ -96,4 +96,11 @@ RSpec.describe BankAccount, type: :model do
       create :bank_transaction, bank_account: bank_account, happened_at: Date.current, running_balance: 415.26
     end
   end
+
+  describe 'standard values' do
+    subject(:bank_account) { create :bank_account }
+
+    it { expect(bank_account.has_wages?).to be false }
+    it { expect(bank_account.ccms_instance_name(1)).to eq 'the bank account1' }
+  end
 end

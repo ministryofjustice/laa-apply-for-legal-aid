@@ -209,6 +209,21 @@ bin/rake
 VCR_RECORD_MODE=all bin/rake
 ```
 
+As of August 2021, rspec will ignore the CCMS tests. There are 600+ of them and they were taking >6 minutes to run.
+Removing them halved the time taken to run the entire test suite.  A full overnight run is now scheduled in CircleCI and, on failure, it will alert via the apply-dev channel in slack
+
+If you are working on the CCMS tests and need to run them locally, you can run the tests locally with
+```shell
+INC_CCMS=true bundle exec rspec
+```
+This will run the entire test suite and monitor code coverage.
+
+If you don't care about code coverage, you could run 
+```ruby
+bundle exec rspec --tag ccms
+```
+and it will only run the CCMS tests, but complain about coverage
+
 #### Guard
 
 The repo also includes a Guardfile, this can be run in a terminal window

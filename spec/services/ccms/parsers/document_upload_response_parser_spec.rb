@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe DocumentUploadResponseParser do
+    RSpec.describe DocumentUploadResponseParser, :ccms do
       describe '#success?' do
         let(:response_xml) { ccms_data_from_file 'document_upload_response.xml' }
         let(:expected_tx_id) { '20190301030405123456' }

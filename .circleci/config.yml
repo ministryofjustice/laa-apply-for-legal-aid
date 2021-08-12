@@ -57,7 +57,6 @@ references:
         sudo apt-get update
         sudo apt-get install -y postgresql-client
         sudo apt-get install -y clamav-daemon
-        sudo apt-get install -y libreoffice
         sudo apt-get install -y wkhtmltopdf
         sudo apt-get install -y git-crypt
 
@@ -141,7 +140,6 @@ commands:
       - slack/approval:
           message: << parameters.message >>
           webhook: << parameters.webhook >>
-
 jobs:
   lint_checks:
     executor: linting-executor
@@ -181,6 +179,32 @@ jobs:
     - store_artifacts:
         path: ./coverage
 
+  full_unit_tests:
+    executor: test-executor
+    steps:
+    - checkout
+    - *install_packages_for_testing
+    - *decrypt_secrets
+    - *restore_gems_cache
+    - *install_gems
+    - *save_gems_cache
+    - *setup_database
+    - *restore_js_packages_cache
+    - *install_js_packages
+    - *save_js_packages_cache
+    - run:
+        environment:
+          INC_CCMS: true
+        name: Run ruby tests
+        command: bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
+    - store_test_results:
+        path: /tmp/test-results/rspec
+    - store_artifacts:
+        path: ./coverage
+    - slack/status:
+        fail_only: true
+        success_message: ":yep: The full CCMS run was successful"
+        failure_message: ":nope: <!here> The full CCMS run has failed, run:\n INC_CCMS=true bundle exec rspec --tag ccms \n locally to trace and resolve the issue"
   integration_tests:
     executor: test-executor
     steps:
@@ -401,3 +425,13 @@ workflows:
             only: master
     jobs:
     - clean_up_ecr
+
+  full_ccms_unit_test_run:
+    triggers:
+    - schedule:
+        cron: "15 2 * * *"
+        filters:
+          branches:
+            only: master
+    jobs:
+    - full_unit_tests

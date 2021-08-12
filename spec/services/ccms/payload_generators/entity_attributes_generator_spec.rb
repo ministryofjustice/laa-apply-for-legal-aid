@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module PayloadGenerators
-    RSpec.describe EntityAttributesGenerator do
+    RSpec.describe EntityAttributesGenerator, :ccms do
       let(:generator) { described_class.new(requestor, xml, entity_name, options) }
       let(:requestor) { double CCMS::Requestors::CaseAddRequestor, submission: submission, ccms_attribute_keys: yaml_keys }
       let(:submission) { double CCMS::Submission, id: '34343434', legal_aid_application: legal_aid_application }

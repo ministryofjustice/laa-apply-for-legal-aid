@@ -61,4 +61,21 @@ RSpec.describe ProceedingType, type: :model do
       end
     end
   end
+
+  describe '#section8?' do
+    let(:proceeding_type) { create :proceeding_type, ccms_matter: matter }
+    context 'section 8' do
+      let(:matter) { 'Section 8 orders' }
+      it 'returns true' do
+        expect(proceeding_type.section8?).to be true
+      end
+    end
+
+    context 'not section 8' do
+      let(:matter) { 'Domestic Abuse' }
+      it 'returns false' do
+        expect(proceeding_type.section8?).to be false
+      end
+    end
+  end
 end

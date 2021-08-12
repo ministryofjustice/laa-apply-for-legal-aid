@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe DocumentIdResponseParser do
+    RSpec.describe DocumentIdResponseParser, :ccms do
       let(:response_xml) { ccms_data_from_file 'document_id_response.xml' }
       let(:expected_tx_id) { '20190301030405123456' }
       let(:expected_document_id) { '4420073' }

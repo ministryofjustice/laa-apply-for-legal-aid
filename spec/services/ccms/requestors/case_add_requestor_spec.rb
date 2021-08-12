@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Requestors
-    RSpec.describe CaseAddRequestor do
+    RSpec.describe CaseAddRequestor, :ccms do
       describe '#call' do
         let(:expected_tx_id) { '202011241154290000006983477' }
 

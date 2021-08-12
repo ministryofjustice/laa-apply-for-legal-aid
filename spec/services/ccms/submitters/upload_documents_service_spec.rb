@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CCMS::Submitters::UploadDocumentsService do
+RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_applicant,

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Parsers
-    RSpec.describe ApplicantAddStatusResponseParser do
+    RSpec.describe ApplicantAddStatusResponseParser, :ccms do
       let(:response_xml) { ccms_data_from_file 'applicant_add_status_response.xml' }
       let(:expected_tx_id) { '20190301030405123456' }
       let(:expected_applicant_ccms_reference) { '20910584' }

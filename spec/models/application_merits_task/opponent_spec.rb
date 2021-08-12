@@ -2,6 +2,14 @@ require 'rails_helper'
 
 module ApplicationMeritsTask
   RSpec.describe Opponent do
+    describe 'standard values' do
+      subject(:opponent) { build :opponent }
+
+      it { expect(opponent.ccms_relationship_to_case).to eq 'OPP' }
+      it { expect(opponent.ccms_child?).to eq false }
+      it { expect(opponent.ccms_opponent_relationship_to_case).to eq 'Opponent' }
+    end
+
     describe 'CCMSOpponentIdGenerator concern' do
       let(:expected_id) { Faker::Number.number(digits: 8) }
 

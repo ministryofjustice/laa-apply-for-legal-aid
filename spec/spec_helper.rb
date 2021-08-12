@@ -25,12 +25,13 @@ unless ENV['NOCOVERAGE']
     add_filter 'spec/'
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
+    add_filter 'app/services/ccms/' unless ENV['INC_CCMS']
   end
 
   SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CODECOV_TOKEN']
 
   SimpleCov.at_exit do
-    say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < 100
+    say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
     SimpleCov.result.format!
   end
 end
@@ -59,6 +60,9 @@ VCR.configure do |vcr_config|
 end
 
 RSpec.configure do |config|
+  config.filter_run_excluding :i18n
+  config.filter_run_excluding :ccms unless ENV['INC_CCMS']
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

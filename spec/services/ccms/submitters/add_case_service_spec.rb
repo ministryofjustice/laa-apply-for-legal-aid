@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CCMS
   module Submitters # rubocop:disable Metrics/ModuleLength
-    RSpec.describe AddCaseService do
+    RSpec.describe AddCaseService, :ccms do
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_proceeding_types,
