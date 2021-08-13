@@ -153,7 +153,7 @@ jobs:
         command:  bundle exec rubocop
     - run:
         name: Run erblint
-        command: bin/rails erblint
+        command: bundle exec erblint -la
 
   unit_tests:
     executor: test-executor
