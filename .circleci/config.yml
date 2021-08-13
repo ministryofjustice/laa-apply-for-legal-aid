@@ -150,7 +150,7 @@ jobs:
     - *save_gems_cache
     - run:
         name: Run Rubocop
-        command:  bin/rails rubocop
+        command:  bundle exec rubocop
     - run:
         name: Run erblint
         command: bin/rails erblint
