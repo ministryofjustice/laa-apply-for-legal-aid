@@ -25,7 +25,7 @@ unless ENV['NOCOVERAGE']
     add_filter 'spec/'
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
-    add_filter 'app/services/ccms/' unless ENV['INC_CCMS']
+    add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
   end
 
   SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CODECOV_TOKEN']
@@ -61,7 +61,7 @@ end
 
 RSpec.configure do |config|
   config.filter_run_excluding :i18n
-  config.filter_run_excluding :ccms unless ENV['INC_CCMS']
+  config.filter_run_excluding :ccms unless ENV['INC_CCMS'].to_s == 'true'
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
