@@ -56,7 +56,7 @@ class ProceedingTypeFullTextSearch
     #
     # "An owl & a pussycat went to sea" => "An:* & owl:* & a:* & pussycat:* & went:* & to:* & sea:*"
     #
-    words = search_terms.split(/\s/).map { |w| "#{w}:*" }
+    words = search_terms.split(/\s+/).map { |w| "#{w}:*" }
     words.join(' & ').gsub('& & &', '&')
   end
 
