@@ -1,7 +1,7 @@
 class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   include BaseForm
 
-  attr_accessor :statement, :original_file, :original_filename, :provider_uploader, :upload_button_pressed
+  attr_accessor :original_file, :provider_uploader, :upload_button_pressed
 
   MAX_FILE_SIZE = 7.megabytes
 
@@ -26,10 +26,9 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   end
 
   def exclude_from_model
-    %i[upload_button_pressed original_file original_filename]
+    %i[original_file]
   end
 
-  validate :statement_present_or_file_uploaded
   validate :file_uploaded?
   validate :original_file_valid
 
@@ -43,17 +42,15 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
     result
   end
 
-  private
+  def name
+    @name = @model.class.name.demodulize.underscore
+  end
 
   def files?
     original_file.present?
   end
 
-  def statement_present_or_file_uploaded
-    return if file_present_or_draft?
-
-    @errors.add(:original_file, :blank) if statement.blank?
-  end
+  private
 
   def attachments_made?
     model.legal_aid_application.attachments.present?
@@ -75,10 +72,6 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
     disallowed_content_type(original_file)
     too_big(original_file)
     create_attachment(original_file) if errors.blank?
-  end
-
-  def file_present_or_draft?
-    model.original_attachments.any? || original_file.present? || draft?
   end
 
   def too_big(original_file)
@@ -130,11 +123,11 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   end
 
   def original_file_error_for(error_type, options = {})
-    I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.#{error_type}", **options)
+    I18n.t("activemodel.errors.models.application_merits_task/#{@name}.attributes.original_file.#{error_type}", **options)
   end
 
   def create_attachment(original_file)
-    model.legal_aid_application.attachments.create document: original_file, attachment_type: 'statement_of_case', original_filename: original_filename,
+    model.legal_aid_application.attachments.create document: original_file, attachment_type: @name, original_filename: original_filename,
                                                    attachment_name: sequenced_attachment_name
   end
 
@@ -143,16 +136,16 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
       most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
       increment_name(most_recent_name)
     else
-      'statement_of_case'
+      @name
     end
   end
 
   def increment_name(most_recent_name)
-    if most_recent_name == 'statement_of_case'
-      'statement_of_case_1'
+    if most_recent_name == @name
+      "#{@name}_1"
     else
-      most_recent_name =~ /^statement_of_case_(\d+)$/
-      "statement_of_case_#{Regexp.last_match(1).to_i + 1}"
+      most_recent_name =~ /^#{@name}_(\d+)$/
+      "#{@name}_#{Regexp.last_match(1).to_i + 1}"
     end
   end
 end
