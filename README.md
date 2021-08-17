@@ -1,6 +1,6 @@
 
-[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/master)
-[![codecov](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid/branch/master/graph/badge.svg?token=DIINMJT9O9)](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid)
+[![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
+[![codecov](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid/branch/main/graph/badge.svg?token=DIINMJT9O9)](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid)
 
 # LAA Apply for legal aid
 
@@ -74,7 +74,7 @@ brew bundle
 ## Initial setup
 This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
 
-Once the pull request has been merged, re-pull master and run
+Once the pull request has been merged, re-pull main and run
 
 ```
 git-crypt unlock
@@ -104,7 +104,7 @@ When localhost is returning ```Webpacker can't find styles.css in /Users/...```
 (and ```rake webpack: compile``` may be returning
 ```Compilation failed: ModuleNotFoundError: Error: Can't resolve 'sass-loader' in /User...```)
 
-on *master* run:
+on *main* run:
 ```
 git pull
 bundle install
@@ -259,9 +259,9 @@ To be able to modify those secrets, **git-crypt** needs to be set up according t
 ### UAT Deployments
 
 UAT deployments are automatically created and deleted as part of the Circle CI process. Once a pull request has been created on GitHub, Circle CI will create a deployment under the new branch name.
-Once the branch has been merged with `master` the UAT deployment is deleted as part of the Circle CI process to deploy production.
+Once the branch has been merged with `main` the UAT deployment is deleted as part of the Circle CI process to deploy production.
 
-In some cases a deployed branch will not be merged with `master` in which case the following commands can be used to manually delete the UAT deployment:
+In some cases a deployed branch will not be merged with `main` in which case the following commands can be used to manually delete the UAT deployment:
 
 ```
 # list the availables releases:
