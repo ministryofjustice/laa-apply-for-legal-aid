@@ -174,7 +174,8 @@ jobs:
     - run:
         name: Run ruby tests
         command: |
-          COMMITS_IN_BRANCH=$(git rev-list master.. --count)
+          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
+          COMMITS_IN_BRANCH=$(git rev-list "$DEFAULT_BRANCH".. --count) # temp while changing branch name, reset to main
           ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
           CCMS_FILES_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep "/services/ccms\S*\." || true) | wc -l)
           CCMS_TESTS_SHOULD_RUN=$(if [ "$CCMS_FILES_CHANGED" -ne "0" ]; then echo true; fi)
@@ -255,10 +256,11 @@ jobs:
           docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
 
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-            docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
-          fi
+          case "${CIRCLE_BRANCH}" in
+            master|main)
+              docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+              docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
+          esac
 
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
@@ -360,7 +362,7 @@ workflows:
       - lint_checks:
           filters:
             branches:
-              ignore: master
+              ignore: (master|main)
       - build_and_push:
           requires:
           - lint_checks
@@ -379,7 +381,7 @@ workflows:
       - lint_checks:
           filters:
             branches:
-              only: master
+              only: (master|main)
       - build_and_push:
           requires:
           - lint_checks
@@ -427,7 +429,7 @@ workflows:
         cron: "0 2 * * *"
         filters:
           branches:
-            only: master
+            only: (master|main)
     jobs:
     - clean_up_ecr
 
@@ -437,6 +439,6 @@ workflows:
         cron: "15 2 * * *"
         filters:
           branches:
-            only: master
+            only: (master|main)
     jobs:
     - full_unit_tests

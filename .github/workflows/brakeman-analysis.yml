@@ -6,9 +6,9 @@ name: Brakeman Scan
 # This section configures the trigger for the workflow. Feel free to customize depending on your convention
 on:
   push:
-    branches: [ master ]
+    branches: [master, main]
   pull_request:
-    branches: [ master ]
+    branches: [master, main]
 
 jobs:
   brakeman-scan:
