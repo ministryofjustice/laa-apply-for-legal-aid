@@ -29,10 +29,7 @@ module LegalAidApplications
 
     def initialize(*args)
       super
-      proceeding_types_by_name.each do |proceeding|
-        date = proceeding.application_proceeding_type.used_delegated_functions_on
-        next unless date
-      end
+      populate_form_attributes
     end
 
     def save(params)
@@ -47,6 +44,16 @@ module LegalAidApplications
     private_class_method :populate_attr_accessors
 
     private
+
+    def populate_form_attributes
+      proceeding_types_by_name.each do |proceeding|
+        date = proceeding.application_proceeding_type.used_delegated_functions_on
+        if date
+          instance_variable_set(:"@#{proceeding.name}", true)
+          instance_variable_set(:"@#{proceeding.name}_used_delegated_functions_on", date)
+        end
+      end
+    end
 
     def update_proceeding_attributes(params)
       params.each do |key, value|
