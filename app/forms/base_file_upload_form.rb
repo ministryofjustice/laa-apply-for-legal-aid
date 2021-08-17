@@ -43,7 +43,7 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   end
 
   def name
-    @name = @model.class.name.demodulize.underscore
+    @model.class.name.demodulize.underscore
   end
 
   def files?
@@ -123,11 +123,12 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   end
 
   def original_file_error_for(error_type, options = {})
-    I18n.t("activemodel.errors.models.application_merits_task/#{@name}.attributes.original_file.#{error_type}", **options)
+    error_path = @model.class.name.underscore.gsub('::', '/')
+    I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
   end
 
   def create_attachment(original_file)
-    model.legal_aid_application.attachments.create document: original_file, attachment_type: @name, original_filename: original_filename,
+    model.legal_aid_application.attachments.create document: original_file, attachment_type: name, original_filename: @original_file.original_filename,
                                                    attachment_name: sequenced_attachment_name
   end
 
@@ -141,11 +142,11 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
   end
 
   def increment_name(most_recent_name)
-    if most_recent_name == @name
-      "#{@name}_1"
+    if most_recent_name == name
+      "#{name}_1"
     else
-      most_recent_name =~ /^#{@name}_(\d+)$/
-      "#{@name}_#{Regexp.last_match(1).to_i + 1}"
+      most_recent_name =~ /^#{name}_(\d+)$/
+      "#{name}_#{Regexp.last_match(1).to_i + 1}"
     end
   end
 end
