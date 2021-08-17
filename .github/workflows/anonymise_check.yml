@@ -1,9 +1,9 @@
 name: Check anonymise rules
 on:
   push:
-    branches: [master, main]
+    branches: [main]
   pull_request:
-    branches: [master, main]
+    branches: [main]
 
 jobs:
   check-anonymise-rules:

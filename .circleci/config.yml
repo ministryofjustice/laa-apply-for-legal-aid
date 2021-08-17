@@ -257,7 +257,7 @@ jobs:
           docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:${CIRCLE_SHA1}"
 
           case "${CIRCLE_BRANCH}" in
-            master|main)
+            main)
               docker tag app "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
               docker push "${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}:latest"
           esac
@@ -362,7 +362,7 @@ workflows:
       - lint_checks:
           filters:
             branches:
-              ignore: (master|main)
+              ignore: main
       - build_and_push:
           requires:
           - lint_checks
@@ -381,7 +381,7 @@ workflows:
       - lint_checks:
           filters:
             branches:
-              only: (master|main)
+              only: main
       - build_and_push:
           requires:
           - lint_checks
@@ -429,7 +429,7 @@ workflows:
         cron: "0 2 * * *"
         filters:
           branches:
-            only: (master|main)
+            only: main
     jobs:
     - clean_up_ecr
 
@@ -439,6 +439,6 @@ workflows:
         cron: "15 2 * * *"
         filters:
           branches:
-            only: (master|main)
+            only: main
     jobs:
     - full_unit_tests
