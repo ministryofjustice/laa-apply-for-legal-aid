@@ -19,10 +19,6 @@ class Setting < ApplicationRecord
     setting.allow_multiple_proceedings
   end
 
-  def self.override_dwp_results?
-    setting.override_dwp_results
-  end
-
   def self.enable_ccms_submission?
     setting.enable_ccms_submission
   end

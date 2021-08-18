@@ -4,7 +4,8 @@ Feature: Pathways from check your answers
   Scenario: I do not use delegated functions
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose 'No'
@@ -25,7 +26,8 @@ Feature: Pathways from check your answers
     And a "bank holiday" exists in the database
     And I used delegated functions
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose 'No'
@@ -46,7 +48,8 @@ Feature: Pathways from check your answers
     And a "bank holiday" exists in the database
     And I used delegated functions
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose 'No'

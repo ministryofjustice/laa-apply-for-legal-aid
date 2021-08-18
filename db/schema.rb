@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_115125) do
+ActiveRecord::Schema.define(version: 2021_08_05_072930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -742,7 +742,6 @@ ActiveRecord::Schema.define(version: 2021_07_20_115125) do
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "allow_multiple_proceedings", default: false, null: false
-    t.boolean "override_dwp_results", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
   end
 

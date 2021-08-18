@@ -33,7 +33,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
     it 'has not transitioned the state' do
       subject
-      expect(application.reload.state).to eq 'applicant_details_checked'
+      expect(application.reload.state).to eq 'checking_applicant_details'
     end
 
     context 'state is provider_entering_means' do
@@ -41,7 +41,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       it 'transitions from provider_entering_means' do
         subject
-        expect(application.reload.state).to eq 'applicant_details_checked'
+        expect(application.reload.state).to eq 'provider_entering_means'
       end
     end
 
@@ -93,26 +93,21 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       it_behaves_like 'a provider not authenticated'
     end
 
-    context 'when dwp override is enabled' do
-      before(:all) { Setting.setting.update!(override_dwp_results: true) }
-      after(:all) { Setting.setting.update!(override_dwp_results: false) }
+    context 'when the check benefit result is positive' do
+      let(:application) { create :legal_aid_application, :with_applicant, :with_positive_benefit_check_result, :at_checking_applicant_details }
 
-      before { subject }
-
-      context 'when the check benefit result is positive' do
-        let(:application) { create :legal_aid_application, :with_applicant, :with_positive_benefit_check_result, :at_checking_applicant_details }
-
-        it 'displays the passported result page' do
-          expect(response.body).to include 'receives benefits that qualify for legal aid'
-        end
+      it 'displays the passported result page' do
+        subject
+        expect(response.body).to include 'receives benefits that qualify for legal aid'
       end
+    end
 
-      context 'when the check benefit result is negative' do
-        let(:application) { create :legal_aid_application, :with_applicant, :with_negative_benefit_check_result, :at_checking_applicant_details }
+    context 'when the check benefit result is negative' do
+      let(:application) { create :legal_aid_application, :with_applicant, :with_negative_benefit_check_result, :at_checking_applicant_details }
 
-        it 'displays the confirm dwp non passported_applications page' do
-          expect(response).to redirect_to providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application)
-        end
+      it 'displays the confirm dwp non passported_applications page' do
+        subject
+        expect(response).to redirect_to providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application)
       end
     end
   end
@@ -228,26 +223,6 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
           expect(response.body).to include('receives benefits that qualify for legal aid')
-        end
-      end
-    end
-
-    context 'application non-passported' do
-      let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
-
-      context 'permissions passported' do
-        let(:provider) { create :provider, :with_passported_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('CCMS')
-        end
-      end
-
-      context 'no permissions' do
-        let(:provider) { create :provider, :with_non_passported_permissions }
-        it 'allows us to continue' do
-          get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include(html_compare("We need to check your client's financial eligibility"))
         end
       end
     end

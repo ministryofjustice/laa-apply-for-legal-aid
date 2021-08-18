@@ -47,16 +47,6 @@
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
-        :override_dwp_results,
-        yes_no_options,
-        :value,
-        :label,
-        inline: true,
-        hint: { text: t('.hints.override_dwp_results')},
-        legend: { text: t('.labels.override_dwp_results') }
-    ) %>
-
-    <%= form.govuk_collection_radio_buttons(
         :enable_ccms_submission,
         yes_no_options,
         :value,

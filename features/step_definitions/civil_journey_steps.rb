@@ -126,10 +126,6 @@ Given('the setting to manually review all cases is enabled') do
   Setting.setting.update!(manually_review_all_cases: true)
 end
 
-Given('the setting to allow DWP overrides is enabled') do
-  Setting.setting.update!(override_dwp_results: true)
-end
-
 Then('I choose a {string} radio button') do |radio_button_name|
   choose(radio_button_name, allow_label_click: true)
 end

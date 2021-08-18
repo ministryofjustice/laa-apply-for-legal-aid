@@ -282,7 +282,8 @@ Feature: Non-passported applicant journeys
   @javascript @vcr
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
@@ -354,7 +355,8 @@ Feature: Non-passported applicant journeys
   Scenario: Fill in the Applicant employment information after negative benefit check result and used delegated functions
     Given I start the application with a negative benefit check result
     And I used delegated functions
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose 'Yes'
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"
@@ -375,7 +377,8 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Fill in the Applicant employment information after negative benefit check result and hasn't used delegated functions
     Given I start the application with a negative benefit check result and no used delegated functions
-    Then I should be on a page showing "We need to check your client's financial eligibility"
+    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
+    Then I choose "Yes"
     Then I click 'Continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"

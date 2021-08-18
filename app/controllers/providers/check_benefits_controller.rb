@@ -5,13 +5,13 @@ module Providers
     helper_method :should_use_ccms?
 
     def index
-      details_checked! unless details_checked? || dwp_override_non_passported?
+      details_checked! unless details_checked? || legal_aid_application.non_passported?
       @applicant = legal_aid_application.applicant
       return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
 
-      check_benefits if legal_aid_application.benefit_check_result_needs_updating?
+      check_benefits && return if legal_aid_application.benefit_check_result_needs_updating?
 
-      go_forward(true) if dwp_override_non_passported?
+      go_forward(true) if legal_aid_application.non_passported?
     end
 
     def update
@@ -19,10 +19,6 @@ module Providers
     end
 
     private
-
-    def dwp_override_non_passported?
-      Setting.override_dwp_results? && legal_aid_application.non_passported?
-    end
 
     def details_checked!
       legal_aid_application.applicant_details_checked!
@@ -37,12 +33,7 @@ module Providers
     end
 
     def should_use_ccms?
-      return false if legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
-
-      return false if provider.non_passported_permissions?
-
-      legal_aid_application.use_ccms!(:non_passported) unless legal_aid_application.use_ccms?
-      true
+      UseCCMSArbiter.call(legal_aid_application)
     end
 
     def known_issue_prevents_benefit_check?
@@ -52,10 +43,6 @@ module Providers
     def set_negative_result_and_go_forward
       legal_aid_application.create_benefit_check_result!(result: 'skipped:known_issue')
       go_forward
-    end
-
-    def provider
-      legal_aid_application.provider
     end
   end
 end
