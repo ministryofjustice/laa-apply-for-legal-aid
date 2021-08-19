@@ -1,5 +1,6 @@
 <%= page_template(
         page_title: t(".page_title", result: t(".result.#{@cfe_result.assessment_result}") ),
+        head_title: t(".tab_title.#{@cfe_result.assessment_result}" ),
         template: :basic,
         column_width: :full
     ) do %>

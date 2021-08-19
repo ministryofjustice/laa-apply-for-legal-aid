@@ -7,6 +7,7 @@
     ) do |form| %>
     <%= page_template(
           page_title: t('.h1-heading'),
+          head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
           template: :basic,
           form: form
         ) do %>

@@ -6,6 +6,7 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
+            head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
             template: :basic,
             form: form,
             back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }

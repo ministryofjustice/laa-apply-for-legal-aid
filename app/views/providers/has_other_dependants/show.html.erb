@@ -5,7 +5,7 @@
         local: true
     ) do |form| %>
 
-  <%= page_template page_title: t('.page_title'), form: form, template: :basic do %>
+  <%= page_template page_title: t('.page_title'), head_title: t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}"), form: form, template: :basic do %>
 
   <% if @legal_aid_application.has_dependants? %>
     <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.dependants.count, 'dependant')}") %></h1>
