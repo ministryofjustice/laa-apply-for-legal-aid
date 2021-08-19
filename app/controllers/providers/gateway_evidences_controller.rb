@@ -38,7 +38,7 @@ module Providers
 
     def perform_upload
       form.upload_button_pressed = true
-      if form.valid? && form.save
+      if form.save
         @successful_upload = successful_upload
       else
         @error_message = error_message

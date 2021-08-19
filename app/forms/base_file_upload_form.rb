@@ -36,7 +36,8 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
     result = super
     return unless original_file
 
-    # create and save statement_of_case model only if attachments were made
+    # create and save model only if attachments were made
+    create_attachment(original_file) if errors.blank?
     model.save(validate: false) if attachments_made?
     # return result which returns 300 for redirect to fix tests
     result
@@ -71,7 +72,6 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
     file_empty(original_file)
     disallowed_content_type(original_file)
     too_big(original_file)
-    create_attachment(original_file) if errors.blank?
   end
 
   def too_big(original_file)
