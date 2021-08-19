@@ -2,13 +2,13 @@ module StatementOfCases
   class StatementOfCaseForm < BaseFileUploadForm
     form_for ApplicationMeritsTask::StatementOfCase
 
-    attr_accessor :statement, :original_filename
-
-    def exclude_from_model
-      %i[upload_button_pressed original_file original_filename]
-    end
+    attr_accessor :statement
 
     validate :statement_present_or_file_uploaded
+
+    def exclude_from_model
+      %i[upload_button_pressed original_file]
+    end
 
     private
 

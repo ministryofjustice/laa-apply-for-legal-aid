@@ -25,12 +25,12 @@ class BaseFileUploadForm # rubocop:disable Metrics/ClassLength
     MAX_FILE_SIZE
   end
 
-  def exclude_from_model
-    %i[original_file]
-  end
-
   validate :file_uploaded?
   validate :original_file_valid
+
+  def exclude_from_model
+    %i[upload_button_pressed original_file]
+  end
 
   def save
     result = super
