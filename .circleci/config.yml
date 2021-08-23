@@ -50,6 +50,13 @@ references:
       command: |
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
 
+  install_lib_ffi: &install_lib_ffi
+    run:
+      name: Install libffi6
+      command: |
+        wget http://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
+        sudo apt install ./libffi6_3.2.1-8_amd64.deb
+
   install_packages_for_testing: &install_packages_for_testing
     run:
       name: Install System packages needed for testing
@@ -145,6 +152,7 @@ jobs:
     executor: linting-executor
     steps:
     - checkout
+    - *install_lib_ffi
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
@@ -159,6 +167,7 @@ jobs:
     executor: test-executor
     steps:
     - checkout
+    - *install_lib_ffi
     - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
@@ -189,6 +198,7 @@ jobs:
     executor: test-executor
     steps:
     - checkout
+    - *install_lib_ffi
     - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
@@ -215,6 +225,7 @@ jobs:
     executor: test-executor
     steps:
     - checkout
+    - *install_lib_ffi
     - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
