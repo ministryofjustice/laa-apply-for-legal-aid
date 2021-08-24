@@ -1,6 +1,5 @@
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
-[![codecov](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid/branch/main/graph/badge.svg?token=DIINMJT9O9)](https://codecov.io/gh/ministryofjustice/laa-apply-for-legal-aid)
 
 # LAA Apply for legal aid
 
