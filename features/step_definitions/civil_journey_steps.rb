@@ -621,16 +621,16 @@ Then(/^proceeding search field is empty$/) do
 end
 
 Then(/^the results section is empty$/) do
-  expect(page).to_not have_css('#proceeding-list > .proceeding-item')
+  expect(page).to_not have_css('#proceeding-list .proceeding-item')
 end
 
 Then(/^proceeding suggestions has (results|no results)$/) do |results|
   wait_for_ajax
   case results
   when 'results'
-    expect(page).to have_css('#proceeding-list > .proceeding-item')
+    expect(page).to have_css('#proceeding-list .proceeding-item')
   when 'no results'
-    expect(page).to_not have_css('#proceeding-list > .proceeding-item')
+    expect(page).to_not have_css('#proceeding-list .proceeding-item')
   end
 end
 

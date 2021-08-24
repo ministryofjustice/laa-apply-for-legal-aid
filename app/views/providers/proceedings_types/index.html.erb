@@ -43,13 +43,18 @@
     local: true) do |form| %>
     <div class="govuk-grid-row govuk-!-margin-top-0">
       <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
-        <%= render partial: 'shared/forms/proceedings_types/proceeding_type_form',
-                   collection: @proceeding_types,
-                   as: :proceeding_type,
-                   locals: {
-                     model: nil,
-                     form: form
-                   } %>
+          <%= form.govuk_radio_buttons_fieldset :id, legend: {text: nil, hidden: true} do %>
+            <% @proceeding_types.each do |proceeding_type| %>
+              <div id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item">
+                <%= form.govuk_radio_button(
+                        :id,
+                        proceeding_type.id,
+                        label: {text: proceeding_type.meaning},
+                        hint: {text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})"}
+                      ) %>
+              </div>
+            <% end %>
+          <% end %>
       </div>
     </div>
     <div class="govuk-grid-row no-proceeding-items" style="display: none;">
