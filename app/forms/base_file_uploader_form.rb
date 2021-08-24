@@ -121,5 +121,28 @@ module BaseFileUploaderForm
     def original_file_size(original_file)
       File.size(original_file.tempfile)
     end
+
+    def sequenced_attachment_name
+      if model.original_attachments.any?
+        most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
+        increment_name(most_recent_name)
+      else
+        name
+      end
+    end
+
+    def increment_name(most_recent_name)
+      if most_recent_name == name
+        "#{name}_1"
+      else
+        most_recent_name =~ /^#{name}_(\d+)$/
+        "#{name}_#{Regexp.last_match(1).to_i + 1}"
+      end
+    end
+
+    def original_file_error_for(error_type, options = {})
+      error_path = @model.class.name.underscore.gsub('::', '/')
+      I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
+    end
   end
 end

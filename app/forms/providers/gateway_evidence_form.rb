@@ -19,29 +19,5 @@ module Providers
     def files?
       original_file.present?
     end
-
-    private
-
-    def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.gateway_evidence.attributes.original_file.#{error_type}", **options)
-    end
-
-    def sequenced_attachment_name
-      if model.original_attachments.any?
-        most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
-        increment_name(most_recent_name)
-      else
-        'gateway_evidence'
-      end
-    end
-
-    def increment_name(most_recent_name)
-      if most_recent_name == 'gateway_evidence'
-        'gateway_evidence_1'
-      else
-        most_recent_name =~ /^gateway_evidence_(\d+)$/
-        "gateway_evidence_#{Regexp.last_match(1).to_i + 1}"
-      end
-    end
   end
 end

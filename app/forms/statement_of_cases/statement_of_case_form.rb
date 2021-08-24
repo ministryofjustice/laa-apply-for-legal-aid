@@ -36,27 +36,5 @@ module StatementOfCases
     def file_present_or_draft?
       model.original_attachments.any? || original_file.present? || draft?
     end
-
-    def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.#{error_type}", **options)
-    end
-
-    def sequenced_attachment_name
-      if model.original_attachments.any?
-        most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
-        increment_name(most_recent_name)
-      else
-        'statement_of_case'
-      end
-    end
-
-    def increment_name(most_recent_name)
-      if most_recent_name == 'statement_of_case'
-        'statement_of_case_1'
-      else
-        most_recent_name =~ /^statement_of_case_(\d+)$/
-        "statement_of_case_#{Regexp.last_match(1).to_i + 1}"
-      end
-    end
   end
 end
