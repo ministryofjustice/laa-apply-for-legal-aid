@@ -41,6 +41,10 @@ module BaseFileUploaderForm
   module InstanceMethods
     private
 
+    def name
+      @name ||= @model.class.name.demodulize.underscore
+    end
+
     def too_big(original_file)
       return if original_file_size(original_file) <= self.class.max_file_size
 
@@ -68,6 +72,13 @@ module BaseFileUploaderForm
       disallowed_content_type(original_file)
       too_big(original_file)
       create_attachment(original_file) if errors.blank?
+    end
+
+    def create_attachment(original_file)
+      model.legal_aid_application.attachments.create document: original_file,
+                                                     attachment_type: name,
+                                                     original_filename: @original_file.original_filename,
+                                                     attachment_name: sequenced_attachment_name
     end
 
     def file_empty(original_file)

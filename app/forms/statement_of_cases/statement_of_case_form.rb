@@ -41,11 +41,6 @@ module StatementOfCases
       I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.#{error_type}", **options)
     end
 
-    def create_attachment(original_file)
-      model.legal_aid_application.attachments.create document: original_file, attachment_type: 'statement_of_case', original_filename: original_filename,
-                                                     attachment_name: sequenced_attachment_name
-    end
-
     def sequenced_attachment_name
       if model.original_attachments.any?
         most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
