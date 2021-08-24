@@ -37,13 +37,6 @@ module StatementOfCases
       model.original_attachments.any? || original_file.present? || draft?
     end
 
-    def too_big(original_file)
-      return if original_file_size(original_file) <= StatementOfCaseForm.max_file_size
-
-      error_options = { size: StatementOfCaseForm.max_file_size / 1.megabyte, file_name: @original_filename }
-      errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
-    end
-
     def original_file_error_for(error_type, options = {})
       I18n.t("activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.#{error_type}", **options)
     end

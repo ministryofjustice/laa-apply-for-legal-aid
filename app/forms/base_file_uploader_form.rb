@@ -41,6 +41,13 @@ module BaseFileUploaderForm
   module InstanceMethods
     private
 
+    def too_big(original_file)
+      return if original_file_size(original_file) <= self.class.max_file_size
+
+      error_options = { size: self.class.max_file_size / 1.megabyte, file_name: @original_filename }
+      errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
+    end
+
     def attachments_made?
       model.legal_aid_application.attachments.present?
     end

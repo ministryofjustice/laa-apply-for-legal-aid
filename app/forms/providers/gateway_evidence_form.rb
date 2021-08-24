@@ -22,13 +22,6 @@ module Providers
 
     private
 
-    def too_big(original_file)
-      return if original_file_size(original_file) <= GatewayEvidenceForm.max_file_size
-
-      error_options = { size: GatewayEvidenceForm.max_file_size / 1.megabyte, file_name: @original_filename }
-      errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
-    end
-
     def original_file_error_for(error_type, options = {})
       I18n.t("activemodel.errors.models.gateway_evidence.attributes.original_file.#{error_type}", **options)
     end
