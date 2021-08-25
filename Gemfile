@@ -138,7 +138,6 @@ end
 group :test do
   gem 'axe-core-cucumber'
   gem 'capybara', '>= 3.32.2', '< 4.0'
-  gem 'codecov', require: false
   gem 'cucumber', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'

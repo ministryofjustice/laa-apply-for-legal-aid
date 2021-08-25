@@ -13,7 +13,6 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'codecov'
 require 'simplecov'
 require 'webmock/rspec'
 require 'highline/import'
@@ -27,8 +26,6 @@ unless ENV['NOCOVERAGE']
     add_filter 'config/environments/'
     add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
   end
-
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov if ENV['CODECOV_TOKEN']
 
   SimpleCov.at_exit do
     say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
