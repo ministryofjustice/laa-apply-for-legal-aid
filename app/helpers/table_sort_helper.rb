@@ -64,7 +64,7 @@ module TableSortHelper
     classes << 'govuk-table__header--numeric' if type == :numeric
     classes << "header-sort-#{currently_sorted}" if currently_sorted
 
-    content_tag(:th, role: 'columnheader', scope: 'col', class: classes) do
+    content_tag(:th, role: 'columnheader', scope: 'col', 'data-sort-type': type, class: classes) do
       content_tag(:span, class: 'aria-sort-description') { content } +
         sort_span_combine_right(combine_right) +
         content_tag(:span, ', button', class: 'govuk-visually-hidden') +
