@@ -109,7 +109,8 @@ function searchOnUserInput (searchInputBox) {
 function showResults (results, inputText) {
   if (results.length > 0) {
     const codes = results.map(obj => obj.code);
-    const proceedingsContainer = document.querySelector('.govuk-radios')
+    let proceedingsContainer = document.querySelector('.govuk-radios') // with MP flag on
+    if (proceedingsContainer == null) { proceedingsContainer = document.querySelector('#proceeding-list') } // with MP flag off
     codes.forEach((code, idx) => {
       // const element = $('#' + code)
       const element = document.getElementById(code);
