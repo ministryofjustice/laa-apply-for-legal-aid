@@ -128,11 +128,9 @@ function showResults (results, inputText) {
       // Highlight any text that matches the user's input
       const terms = inputText.split(' ')
       terms.forEach(term => {
-        if (term.length > 2) {
-          const regExp = RegExp(term.trim(), 'gi');
-          main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-          span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-        }
+        const regExp = RegExp(term.trim(), 'gi');
+        main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+        span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
       })
       // show hidden proceedings item
       show(element);
