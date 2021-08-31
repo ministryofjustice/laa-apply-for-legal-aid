@@ -109,7 +109,9 @@ function searchOnUserInput (searchInputBox) {
 function showResults (results, inputText) {
   if (results.length > 0) {
     const codes = results.map(obj => obj.code);
-    codes.forEach(code => {
+    let proceedingsContainer = document.querySelector('.govuk-radios') // with MP flag on
+    if (proceedingsContainer == null) { proceedingsContainer = document.querySelector('#proceeding-list') } // with MP flag off
+    codes.forEach((code, idx) => {
       // const element = $('#' + code)
       const element = document.getElementById(code);
 
@@ -134,6 +136,8 @@ function showResults (results, inputText) {
           span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
         }
       })
+      // move to top of list, but after previously added elements
+      proceedingsContainer.insertBefore(element, proceedingsContainer.children[idx])
       // show hidden proceedings item
       show(element);
       hide(document.querySelector('.no-proceeding-items'));
