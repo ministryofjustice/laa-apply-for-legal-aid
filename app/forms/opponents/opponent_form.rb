@@ -1,6 +1,5 @@
 module Opponents
-  class OpponentForm
-    include BaseForm
+  class OpponentForm < NewBaseForm
 
     form_for ApplicationMeritsTask::Opponent
 

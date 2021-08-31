@@ -1,6 +1,6 @@
 module StudentFinances
-  class AnnualAmountForm
-    include BaseForm
+  class AnnualAmountForm < NewBaseForm
+
 
     form_for IrregularIncome
 

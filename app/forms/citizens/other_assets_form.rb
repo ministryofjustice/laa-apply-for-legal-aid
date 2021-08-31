@@ -1,6 +1,6 @@
 module Citizens
-  class OtherAssetsForm
-    include BaseForm
+  class OtherAssetsForm < NewBaseForm
+
 
     form_for OtherAssetsDeclaration
 

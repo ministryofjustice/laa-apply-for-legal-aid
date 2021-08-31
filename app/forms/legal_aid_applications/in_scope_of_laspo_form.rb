@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class InScopeOfLaspoForm
-    include BaseForm
+  class InScopeOfLaspoForm < NewBaseForm
 
     form_for LegalAidApplication
 

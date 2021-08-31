@@ -1,6 +1,5 @@
 module VehicleForm
-  class RemainingPaymentForm
-    include BaseForm
+  class RemainingPaymentForm < NewBaseForm
 
     form_for Vehicle
 

@@ -1,6 +1,6 @@
 module Providers
-  class PolicyDisregardsForm
-    include BaseForm
+  class PolicyDisregardsForm < NewBaseForm
+
 
     form_for PolicyDisregards
 

@@ -1,6 +1,5 @@
 module Applicants
-  class EmployedForm
-    include BaseForm
+  class EmployedForm < NewBaseForm
 
     form_for Applicant
 

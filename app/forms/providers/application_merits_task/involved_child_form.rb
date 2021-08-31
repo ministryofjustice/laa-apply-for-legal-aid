@@ -1,7 +1,7 @@
 module Providers
   module ApplicationMeritsTask
-    class InvolvedChildForm
-      include BaseForm
+    class InvolvedChildForm < NewBaseForm
+
       form_for ::ApplicationMeritsTask::InvolvedChild
 
       BASE_ATTRIBUTES = %i[full_name].freeze

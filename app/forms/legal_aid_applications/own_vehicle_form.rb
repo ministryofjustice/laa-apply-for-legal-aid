@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class OwnVehicleForm
-    include BaseForm
+  class OwnVehicleForm < NewBaseForm
 
     form_for LegalAidApplication
 

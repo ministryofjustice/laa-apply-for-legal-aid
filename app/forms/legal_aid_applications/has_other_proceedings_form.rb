@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class HasOtherProceedingsForm
-    include BaseForm
+  class HasOtherProceedingsForm < NewBaseForm
 
     form_for LegalAidApplication
 

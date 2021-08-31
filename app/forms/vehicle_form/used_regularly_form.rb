@@ -1,6 +1,5 @@
 module VehicleForm
-  class UsedRegularlyForm
-    include BaseForm
+  class UsedRegularlyForm < NewBaseForm
 
     form_for Vehicle
 

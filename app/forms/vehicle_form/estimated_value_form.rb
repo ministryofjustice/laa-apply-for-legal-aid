@@ -1,6 +1,6 @@
 module VehicleForm
-  class EstimatedValueForm
-    include BaseForm
+  class EstimatedValueForm < NewBaseForm
+
 
     form_for Vehicle
 

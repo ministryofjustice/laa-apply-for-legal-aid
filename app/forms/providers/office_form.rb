@@ -1,6 +1,6 @@
 module Providers
-  class OfficeForm
-    include BaseForm
+  class OfficeForm < NewBaseForm
+
 
     form_for Provider
 

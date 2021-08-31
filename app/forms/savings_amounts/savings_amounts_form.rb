@@ -1,6 +1,6 @@
 module SavingsAmounts
-  class SavingsAmountsForm
-    include BaseForm
+  class SavingsAmountsForm < NewBaseForm
+
 
     form_for SavingsAmount
 

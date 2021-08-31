@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class OpenBankingConsentForm
-    include BaseForm
+  class OpenBankingConsentForm < NewBaseForm
 
     form_for LegalAidApplication
 

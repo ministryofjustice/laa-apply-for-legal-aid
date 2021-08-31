@@ -1,6 +1,6 @@
 module Settings
-  class SettingForm
-    include BaseForm
+  class SettingForm < NewBaseForm
+
 
     form_for Setting
 

@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class SharedOwnershipForm
-    include BaseForm
+  class SharedOwnershipForm < NewBaseForm
 
     form_for LegalAidApplication
 

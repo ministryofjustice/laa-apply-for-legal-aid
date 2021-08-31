@@ -1,6 +1,6 @@
 module VehicleForm
-  class AgeForm
-    include BaseForm
+  class AgeForm < NewBaseForm
+
 
     form_for Vehicle
 

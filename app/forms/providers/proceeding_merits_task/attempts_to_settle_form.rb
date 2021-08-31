@@ -1,7 +1,7 @@
 module Providers
   module ProceedingMeritsTask
-    class AttemptsToSettleForm
-      include BaseForm
+    class AttemptsToSettleForm < NewBaseForm
+
 
       form_for ::ProceedingMeritsTask::AttemptsToSettle
 

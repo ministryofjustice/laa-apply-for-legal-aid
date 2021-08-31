@@ -1,6 +1,6 @@
 module SavingsAmounts
-  class OfflineAccountsForm
-    include BaseForm
+  class OfflineAccountsForm < NewBaseForm
+
 
     form_for SavingsAmount
 
