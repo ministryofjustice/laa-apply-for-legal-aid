@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class OwnHomeForm < NewBaseForm
+  class OwnHomeForm < BaseForm
 
     form_for LegalAidApplication
 

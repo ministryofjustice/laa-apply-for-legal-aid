@@ -1,6 +1,6 @@
 module Providers
   module ApplicationMeritsTask
-    class InvolvedChildForm < NewBaseForm
+    class InvolvedChildForm < BaseForm
 
       form_for ::ApplicationMeritsTask::InvolvedChild
 

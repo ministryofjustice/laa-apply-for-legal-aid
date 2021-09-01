@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class InScopeOfLaspoForm < NewBaseForm
+  class InScopeOfLaspoForm < BaseForm
 
     form_for LegalAidApplication
 

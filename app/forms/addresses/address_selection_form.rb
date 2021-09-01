@@ -1,5 +1,5 @@
 module Addresses
-  class AddressSelectionForm < NewBaseForm
+  class AddressSelectionForm < BaseForm
 
     form_for Address
 

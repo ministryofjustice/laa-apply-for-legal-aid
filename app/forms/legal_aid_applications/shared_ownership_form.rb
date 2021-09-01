@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class SharedOwnershipForm < NewBaseForm
+  class SharedOwnershipForm < BaseForm
 
     form_for LegalAidApplication
 

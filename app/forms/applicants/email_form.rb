@@ -1,5 +1,5 @@
 module Applicants
-  class EmailForm < NewBaseForm
+  class EmailForm < BaseForm
 
     form_for Applicant
 

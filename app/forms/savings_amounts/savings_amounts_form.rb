@@ -1,5 +1,5 @@
 module SavingsAmounts
-  class SavingsAmountsForm < NewBaseForm
+  class SavingsAmountsForm < BaseForm
 
 
     form_for SavingsAmount

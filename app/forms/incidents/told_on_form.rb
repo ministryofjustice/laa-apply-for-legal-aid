@@ -1,5 +1,5 @@
 module Incidents
-  class ToldOnForm < NewBaseForm
+  class ToldOnForm < BaseForm
 
     form_for ApplicationMeritsTask::Incident
 

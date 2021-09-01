@@ -1,5 +1,5 @@
 module Settings
-  class SettingForm < NewBaseForm
+  class SettingForm < BaseForm
 
 
     form_for Setting

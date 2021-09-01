@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class HasEvidenceOfBenefitForm < NewBaseForm
+  class HasEvidenceOfBenefitForm < BaseForm
 
     form_for DWPOverride
 

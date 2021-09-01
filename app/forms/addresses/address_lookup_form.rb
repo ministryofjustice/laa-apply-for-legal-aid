@@ -1,5 +1,5 @@
 module Addresses
-  class AddressLookupForm < NewBaseForm
+  class AddressLookupForm < BaseForm
 
     form_for Address
 

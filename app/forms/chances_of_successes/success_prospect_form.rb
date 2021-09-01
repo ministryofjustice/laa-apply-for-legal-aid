@@ -1,5 +1,5 @@
 module ChancesOfSuccesses
-  class SuccessProspectForm < NewBaseForm
+  class SuccessProspectForm < BaseForm
 
 
     form_for ProceedingMeritsTask::ChancesOfSuccess

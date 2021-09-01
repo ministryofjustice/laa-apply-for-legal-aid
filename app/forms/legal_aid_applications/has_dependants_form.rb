@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class HasDependantsForm < NewBaseForm
+  class HasDependantsForm < BaseForm
 
     form_for LegalAidApplication
 

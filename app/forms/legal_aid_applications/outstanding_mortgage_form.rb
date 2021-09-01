@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class OutstandingMortgageForm < NewBaseForm
+  class OutstandingMortgageForm < BaseForm
     form_for LegalAidApplication
     attr_accessor :outstanding_mortgage_amount
 

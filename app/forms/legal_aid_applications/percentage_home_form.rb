@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class PercentageHomeForm < NewBaseForm
+  class PercentageHomeForm < BaseForm
 
     form_for LegalAidApplication
 

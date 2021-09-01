@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NewBaseForm do
+RSpec.describe BaseForm do
   describe '#exclude_from_model' do
     context 'when the derived form does not define #exclude_from_model' do
       it 'returns an empty array' do

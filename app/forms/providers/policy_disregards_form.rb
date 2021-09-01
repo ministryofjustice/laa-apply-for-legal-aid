@@ -1,5 +1,5 @@
 module Providers
-  class PolicyDisregardsForm < NewBaseForm
+  class PolicyDisregardsForm < BaseForm
 
 
     form_for PolicyDisregards

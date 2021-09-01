@@ -1,5 +1,5 @@
 module VehicleForm
-  class EstimatedValueForm < NewBaseForm
+  class EstimatedValueForm < BaseForm
 
 
     form_for Vehicle

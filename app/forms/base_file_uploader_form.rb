@@ -7,7 +7,7 @@
 # Add it below the `include BaseForm`
 # line so that it is included first
 
-class BaseFileUploaderForm < NewBaseForm
+class BaseFileUploaderForm < BaseForm
   MAX_FILE_SIZE = 7.megabytes
 
   ALLOWED_CONTENT_TYPES = %w[

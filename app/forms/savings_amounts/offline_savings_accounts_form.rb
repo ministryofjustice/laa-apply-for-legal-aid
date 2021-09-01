@@ -1,5 +1,5 @@
 module SavingsAmounts
-  class OfflineSavingsAccountsForm < NewBaseForm
+  class OfflineSavingsAccountsForm < BaseForm
 
 
     form_for SavingsAmount

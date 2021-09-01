@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class PropertyValueForm < NewBaseForm
+  class PropertyValueForm < BaseForm
 
     form_for LegalAidApplication
 

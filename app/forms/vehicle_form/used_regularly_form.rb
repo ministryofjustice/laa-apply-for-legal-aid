@@ -1,5 +1,5 @@
 module VehicleForm
-  class UsedRegularlyForm < NewBaseForm
+  class UsedRegularlyForm < BaseForm
 
     form_for Vehicle
 

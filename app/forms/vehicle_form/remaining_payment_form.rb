@@ -1,5 +1,5 @@
 module VehicleForm
-  class RemainingPaymentForm < NewBaseForm
+  class RemainingPaymentForm < BaseForm
 
     form_for Vehicle
 

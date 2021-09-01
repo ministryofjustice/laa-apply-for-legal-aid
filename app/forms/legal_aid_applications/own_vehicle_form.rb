@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class OwnVehicleForm < NewBaseForm
+  class OwnVehicleForm < BaseForm
 
     form_for LegalAidApplication
 

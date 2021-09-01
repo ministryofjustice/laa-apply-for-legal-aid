@@ -1,5 +1,5 @@
 module Applicants
-  class BasicDetailsForm < NewBaseForm
+  class BasicDetailsForm < BaseForm
 
     ATTRIBUTES = %i[first_name last_name national_insurance_number
                     date_of_birth_1i date_of_birth_2i date_of_birth_3i].freeze

@@ -1,5 +1,5 @@
 module VehicleForm
-  class AgeForm < NewBaseForm
+  class AgeForm < BaseForm
 
 
     form_for Vehicle

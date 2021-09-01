@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class RestrictionsForm < NewBaseForm
+  class RestrictionsForm < BaseForm
 
     form_for LegalAidApplication
 

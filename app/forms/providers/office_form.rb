@@ -1,5 +1,5 @@
 module Providers
-  class OfficeForm < NewBaseForm
+  class OfficeForm < BaseForm
 
 
     form_for Provider

@@ -1,6 +1,6 @@
 module Providers
   module ProceedingMeritsTask
-    class LinkedChildrenForm < NewBaseForm
+    class LinkedChildrenForm < BaseForm
 
 
       form_for ::ProceedingMeritsTask::ApplicationProceedingTypeLinkedChild

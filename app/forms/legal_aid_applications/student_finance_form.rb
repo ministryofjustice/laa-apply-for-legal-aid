@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class StudentFinanceForm < NewBaseForm
+  class StudentFinanceForm < BaseForm
 
     form_for LegalAidApplication
 

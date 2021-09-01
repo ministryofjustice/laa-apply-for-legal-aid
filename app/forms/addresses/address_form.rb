@@ -1,7 +1,5 @@
 module Addresses
-  class AddressForm
-    include OldBaseForm
-
+  class AddressForm < BaseForm
     form_for Address
 
     attr_accessor :address_line_one, :address_line_two, :city, :county, :postcode, :lookup_postcode, :lookup_error

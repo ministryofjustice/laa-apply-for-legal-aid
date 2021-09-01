@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class DependantForm < NewBaseForm  # rubocop:disable Metrics/ClassLength
+  class DependantForm < BaseForm  # rubocop:disable Metrics/ClassLength
 
     form_for Dependant
 

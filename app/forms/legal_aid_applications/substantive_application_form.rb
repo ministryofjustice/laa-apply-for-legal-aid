@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class SubstantiveApplicationForm < NewBaseForm
+  class SubstantiveApplicationForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :substantive_application

@@ -1,5 +1,5 @@
 module StudentFinances
-  class AnnualAmountForm < NewBaseForm
+  class AnnualAmountForm < BaseForm
 
 
     form_for IrregularIncome

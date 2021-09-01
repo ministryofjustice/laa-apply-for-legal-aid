@@ -1,5 +1,5 @@
 module Providers
-  class ReceivedBenefitConfirmationForm < NewBaseForm
+  class ReceivedBenefitConfirmationForm < BaseForm
 
 
     form_for DWPOverride
