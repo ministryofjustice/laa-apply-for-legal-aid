@@ -1,6 +1,6 @@
 module Addresses
   class AddressForm
-    include BaseForm
+    include OldBaseForm
 
     form_for Address
 

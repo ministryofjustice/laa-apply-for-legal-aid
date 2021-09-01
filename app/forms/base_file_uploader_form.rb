@@ -7,7 +7,7 @@
 # Add it below the `include BaseForm`
 # line so that it is included first
 
-module BaseFileUploaderForm
+class BaseFileUploaderForm < NewBaseForm
   MAX_FILE_SIZE = 7.megabytes
 
   ALLOWED_CONTENT_TYPES = %w[
@@ -26,19 +26,23 @@ module BaseFileUploaderForm
 
   WORD_DOCUMENT = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'.freeze
 
-  def self.included(base)
-    super
-    base.extend(ClassMethods)
-    base.include(InstanceMethods)
+  # def self.included(base)
+  #   super
+  #   base.extend(ClassMethods)
+  #   base.include(InstanceMethods)
+  # end
+
+  # module ClassMethods
+  #   def max_file_size
+  #     MAX_FILE_SIZE
+  #   end
+  # end
+
+  def self.max_file_size
+    MAX_FILE_SIZE
   end
 
-  module ClassMethods
-    def max_file_size
-      MAX_FILE_SIZE
-    end
-  end
-
-  module InstanceMethods
+  # module InstanceMethods
     private
 
     def name
@@ -144,5 +148,5 @@ module BaseFileUploaderForm
       error_path = @model.class.name.underscore.gsub('::', '/')
       I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
     end
-  end
+  # end
 end

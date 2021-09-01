@@ -1,7 +1,7 @@
 module Providers
-  class GatewayEvidenceForm
-    include BaseForm
-    include BaseFileUploaderForm
+  class GatewayEvidenceForm < BaseFileUploaderForm
+    # include BaseForm
+    # include BaseFileUploaderForm
 
     form_for GatewayEvidence
 

@@ -1,7 +1,7 @@
 module StatementOfCases
-  class StatementOfCaseForm
-    include BaseForm
-    include BaseFileUploaderForm
+  class StatementOfCaseForm < BaseFileUploaderForm
+    # include BaseForm
+    # include BaseFileUploaderForm
 
     form_for ApplicationMeritsTask::StatementOfCase
 
