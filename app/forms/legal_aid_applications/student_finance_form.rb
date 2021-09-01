@@ -1,6 +1,5 @@
 module LegalAidApplications
   class StudentFinanceForm < BaseForm
-
     form_for LegalAidApplication
 
     attr_accessor :student_finance

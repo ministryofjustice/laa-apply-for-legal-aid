@@ -1,7 +1,5 @@
 module Citizens
   class OtherAssetsForm < BaseForm
-
-
     form_for OtherAssetsDeclaration
 
     VALUABLE_ITEMS_VALUE_ATTRIBUTE = %i[valuable_items_value].freeze

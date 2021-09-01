@@ -1,6 +1,5 @@
 module Opponents
   class OpponentForm < BaseForm
-
     form_for ApplicationMeritsTask::Opponent
 
     attr_accessor :understands_terms_of_court_order, :understands_terms_of_court_order_details,

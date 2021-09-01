@@ -1,7 +1,5 @@
 module StudentFinances
   class AnnualAmountForm < BaseForm
-
-
     form_for IrregularIncome
 
     attr_accessor :income_type, :frequency, :amount, :legal_aid_application_id

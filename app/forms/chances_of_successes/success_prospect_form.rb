@@ -1,7 +1,5 @@
 module ChancesOfSuccesses
   class SuccessProspectForm < BaseForm
-
-
     form_for ProceedingMeritsTask::ChancesOfSuccess
 
     SUCCESS_PROSPECT_DETAILS = %i[

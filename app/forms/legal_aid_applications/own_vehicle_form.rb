@@ -1,6 +1,5 @@
 module LegalAidApplications
   class OwnVehicleForm < BaseForm
-
     form_for LegalAidApplication
 
     attr_accessor :own_vehicle, :journey

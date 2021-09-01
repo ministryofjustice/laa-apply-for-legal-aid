@@ -1,6 +1,5 @@
 module LegalAidApplications
   class OwnHomeForm < BaseForm
-
     form_for LegalAidApplication
 
     attr_accessor :own_home, :journey

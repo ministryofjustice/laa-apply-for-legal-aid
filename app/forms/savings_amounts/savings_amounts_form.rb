@@ -1,7 +1,5 @@
 module SavingsAmounts
   class SavingsAmountsForm < BaseForm
-
-
     form_for SavingsAmount
 
     ATTRIBUTES = %i[

@@ -1,6 +1,5 @@
 module LegalAidApplications
   class HasEvidenceOfBenefitForm < BaseForm
-
     form_for DWPOverride
 
     attr_accessor :has_evidence_of_benefit

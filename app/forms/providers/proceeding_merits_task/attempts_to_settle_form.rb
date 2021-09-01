@@ -1,8 +1,6 @@
 module Providers
   module ProceedingMeritsTask
     class AttemptsToSettleForm < BaseForm
-
-
       form_for ::ProceedingMeritsTask::AttemptsToSettle
 
       attr_accessor :attempts_made

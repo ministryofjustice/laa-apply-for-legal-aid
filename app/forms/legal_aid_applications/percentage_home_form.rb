@@ -1,6 +1,5 @@
 module LegalAidApplications
   class PercentageHomeForm < BaseForm
-
     form_for LegalAidApplication
 
     attr_accessor :percentage_home

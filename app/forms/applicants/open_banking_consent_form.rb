@@ -1,6 +1,5 @@
 module Applicants
   class OpenBankingConsentForm < BaseForm
-
     form_for LegalAidApplication
 
     attr_accessor :open_banking_consent

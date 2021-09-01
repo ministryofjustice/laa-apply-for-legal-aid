@@ -1,6 +1,5 @@
 module Applicants
   class EmployedForm < BaseForm
-
     form_for Applicant
 
     attr_accessor :employed

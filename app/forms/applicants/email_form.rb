@@ -1,6 +1,5 @@
 module Applicants
   class EmailForm < BaseForm
-
     form_for Applicant
 
     attr_accessor :email

@@ -1,6 +1,5 @@
 module Addresses
   class AddressLookupForm < BaseForm
-
     form_for Address
 
     attr_accessor :applicant_id, :postcode

@@ -1,7 +1,5 @@
 module SavingsAmounts
   class OfflineSavingsAccountsForm < BaseForm
-
-
     form_for SavingsAmount
 
     attr_accessor :offline_savings_accounts, :applicant_bank_account
