@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "jest-environment-jsdom": "^27.1.0",
-    "jest-environment-jsdom-global": "^2.0.4",
+    "jest-environment-jsdom-global": "^3.0.0",
     "standard": "^16.0.3",
     "webpack-dev-server": "^4.1.0"
   },
