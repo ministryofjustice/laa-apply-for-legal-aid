@@ -19,7 +19,7 @@ module LegalFramework
     rescue SubmissionError => e
       submission.error_message = e.message
       submission.save!
-      Sentry.capture_exception(e)
+      AlertManager.capture_exception(e)
       false
     end
 

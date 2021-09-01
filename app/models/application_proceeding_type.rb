@@ -85,7 +85,7 @@ class ApplicationProceedingType < ApplicationRecord
     apt = legal_aid_application.application_proceeding_types.detect { |rec| rec.lead_proceeding? && rec.id != id }
     return if apt.nil?
 
-    Sentry.capture_message "Duplicate lead proceedings detected for application #{legal_aid_application.application_ref}: #{id}, #{apt.id}"
+    AlertManager.capture_message "Duplicate lead proceedings detected for application #{legal_aid_application.application_ref}: #{id}, #{apt.id}"
   end
 
   def highest_proceeding_case_id

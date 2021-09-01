@@ -19,7 +19,7 @@ module GovukEmails
     def send_undeliverable_alerts
       return unless HostEnv.production?
 
-      Sentry.capture_message("Unable to deliver mail to #{@scheduled_mail.addressee} - ScheduledMailing record #{@scheduled_mail.id}")
+      AlertManager.capture_message("Unable to deliver mail to #{@scheduled_mail.addressee} - ScheduledMailing record #{@scheduled_mail.id}")
       ScheduledMailing.send_now!(mailer_klass: UndeliverableEmailAlertMailer,
                                  mailer_method: :notify_apply_team,
                                  legal_aid_application_id: @scheduled_mail.legal_aid_application_id,

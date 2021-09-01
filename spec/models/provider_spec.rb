@@ -42,14 +42,14 @@ RSpec.describe Provider, type: :model do
     context 'no permissions for provider and their firm' do
       let(:firm) { create :firm, :with_no_permissions }
       let(:provider) { create :provider, :with_no_permissions, firm: firm }
-      let(:Sentry) { instance_double(Tracker) }
+      let(:AlertManager) { instance_double(Tracker) }
 
       it 'returns false' do
         expect(provider.user_permissions).to be_empty
       end
 
       it 'notifies sentry' do
-        expect(Sentry).to receive(:capture_message).with("Provider Firm has no permissions with firm id: #{firm.id}")
+        expect(AlertManager).to receive(:capture_message).with("Provider Firm has no permissions with firm id: #{firm.id}")
         provider.user_permissions
       end
     end

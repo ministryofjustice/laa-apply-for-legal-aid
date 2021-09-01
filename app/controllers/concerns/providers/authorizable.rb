@@ -47,7 +47,7 @@ module Providers
         begin
           raise AuthController::AuthorizationError, 'Provider not authorised'
         rescue StandardError => e
-          Sentry.capture_exception(e)
+          AlertManager.capture_exception(e)
         end
         redirect_to error_path(:access_denied)
       end
@@ -62,7 +62,7 @@ module Providers
         begin
           raise AuthController::AuthorizationError, 'Provider not enabled on the portal'
         rescue StandardError => e
-          Sentry.capture_exception(e)
+          AlertManager.capture_exception(e)
         end
         redirect_to error_path(:access_denied)
       end

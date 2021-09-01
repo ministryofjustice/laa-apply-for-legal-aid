@@ -49,7 +49,7 @@ module LegalFramework
         end
 
         it 'captures error and returns false' do
-          expect(Sentry).to receive(:capture_exception).with(LegalFramework::SubmissionError)
+          expect(AlertManager).to receive(:capture_exception).with(LegalFramework::SubmissionError)
           service
         end
       end

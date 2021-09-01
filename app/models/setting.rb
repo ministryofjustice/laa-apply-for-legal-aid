@@ -23,6 +23,10 @@ class Setting < ApplicationRecord
     setting.enable_ccms_submission
   end
 
+  def self.alert_via_sentry?
+    setting.alert_via_sentry
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

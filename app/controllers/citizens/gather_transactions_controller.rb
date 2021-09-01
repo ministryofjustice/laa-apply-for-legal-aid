@@ -9,7 +9,7 @@ module Citizens
 
       if worker_errors.any?
         @error_decoder = TrueLayerErrorDecoder.new(worker_errors)
-        Sentry.capture_exception(TrueLayerWorkerError.new(@errors))
+        AlertManager.capture_exception(TrueLayerWorkerError.new(@errors))
         reset_worker
         render :display_error
       else

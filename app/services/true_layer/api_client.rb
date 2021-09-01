@@ -51,7 +51,7 @@ module TrueLayer
     end
 
     def simple_error(error)
-      Sentry.capture_exception(error)
+      AlertManager.capture_exception(error)
       SimpleResult.new(error: error)
     end
 
