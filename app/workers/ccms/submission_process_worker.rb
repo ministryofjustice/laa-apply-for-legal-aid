@@ -3,7 +3,7 @@ module CCMS
 
   class SentryIgnoreThisSidekiqFailError < StandardError; end
 
-  class NewSubmissionProcessWorker
+  class SubmissionProcessWorker
     include Sidekiq::Worker
     include Sidekiq::Status::Worker
     attr_accessor :retry_count, :submission
@@ -27,7 +27,7 @@ module CCMS
       raise SubmissionStateUnchanged if state_unchanged?(start_state)
 
       # if state has changed then create new worker for next state and successfully exit!
-      NewSubmissionProcessWorker.perform_async(submission_id, @submission.aasm_state)
+      SubmissionProcessWorker.perform_async(submission_id, @submission.aasm_state)
     rescue StandardError => e
       raise if @retry_count.eql? MAX_RETRIES
 

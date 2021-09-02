@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CCMS::NewSubmissionProcessWorker do
+RSpec.describe CCMS::SubmissionProcessWorker do
   let(:state) { :initialised }
   let(:submission) { create :submission, aasm_state: state }
   let(:worker) { described_class.new }
@@ -112,12 +112,12 @@ RSpec.describe CCMS::NewSubmissionProcessWorker do
           let(:expected_error) do
             <<~MESSAGE
               CCMS submission id:  failed
-              Moving CCMS::NewSubmissionProcessWorker to dead set, it failed with: /An error occured
+              Moving CCMS::SubmissionProcessWorker to dead set, it failed with: /An error occured
             MESSAGE
           end
 
           it 'raises a sentry error' do
-            CCMS::NewSubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
+            CCMS::SubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
             subject
