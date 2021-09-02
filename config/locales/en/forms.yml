@@ -4,7 +4,8 @@ en:
     address:
       errors:
         no_results: We could not find any addresses for that postcode. Enter the address manually.
-        unsuccessful: We could not find any addresses for that postcode. Enter the address manually.
+        unsuccessful: Sorry, there is a problem with the service. Please enter the address manually.
+        service_unavailable: Sorry, there is a problem with the service. Please enter the address manually.
     address_lookup:
       address_manual_link: Enter address manually
       heading: Enter your client's correspondence address
