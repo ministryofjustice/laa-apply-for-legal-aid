@@ -1,8 +1,5 @@
 module StatementOfCases
   class StatementOfCaseForm < BaseFileUploaderForm
-    # include BaseForm
-    # include BaseFileUploaderForm
-
     form_for ApplicationMeritsTask::StatementOfCase
 
     attr_accessor :statement, :original_file, :original_filename, :provider_uploader, :upload_button_pressed

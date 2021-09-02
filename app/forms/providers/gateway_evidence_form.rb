@@ -1,8 +1,5 @@
 module Providers
   class GatewayEvidenceForm < BaseFileUploaderForm
-    # include BaseForm
-    # include BaseFileUploaderForm
-
     form_for GatewayEvidence
 
     attr_accessor :original_file, :provider_uploader, :upload_button_pressed
