@@ -4,7 +4,10 @@ RSpec.describe GovukEmails::Monitor do
   let(:scheduled_mailing) { create :scheduled_mailing, :processing }
   let(:response) { double GovukEmails::Email, status: status }
 
-  before { allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response) }
+  before do
+    allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response)
+    Setting.setting.update(alert_via_sentry: true)
+  end
 
   describe '.call' do
     subject { described_class.call(scheduled_mailing.id) }
