@@ -135,49 +135,5 @@ module CCMS
         end
       end
     end
-
-    describe '#delay' do
-      context 'intialised state' do
-        it 'returns the base delay' do
-          expect(submission.delay).to eq 5.seconds
-        end
-      end
-
-      context 'applicant_submitted state' do
-        let(:state) { 'applicant_submitted' }
-
-        context 'zero poll count' do
-          let(:applicant_poll_count) { 0 }
-          it 'returns the base delay' do
-            expect(submission.delay).to eq 5.seconds
-          end
-        end
-
-        context 'poll count of 6' do
-          let(:applicant_poll_count) { 6 }
-          it 'returns 7 times the base delay' do
-            expect(submission.delay).to eq 35.seconds
-          end
-        end
-      end
-
-      context 'case_submitted state' do
-        let(:state) { 'case_submitted' }
-
-        context 'zero poll count' do
-          let(:case_poll_count) { 0 }
-          it 'returns the base delay' do
-            expect(submission.delay).to eq 5.seconds
-          end
-        end
-
-        context 'poll count of 6' do
-          let(:case_poll_count) { 8 }
-          it 'returns 7 times the base delay' do
-            expect(submission.delay).to eq 45.seconds
-          end
-        end
-      end
-    end
   end
 end

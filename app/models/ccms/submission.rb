@@ -14,8 +14,6 @@ module CCMS
 
     POLL_LIMIT = Rails.env.development? ? 99 : 20
 
-    BASE_DELAY = 5.seconds.freeze
-
     STATE_SERVICES = {
       initialised: CCMS::Submitters::ObtainCaseReferenceService,
       case_ref_obtained: CCMS::Submitters::ObtainApplicantReferenceService,
@@ -39,23 +37,6 @@ module CCMS
 
     def process_async!
       SubmissionProcessWorker.perform_async(id, aasm_state)
-    end
-
-    def delay
-      BASE_DELAY * (current_poll_count + 1)
-    end
-
-    private
-
-    def current_poll_count
-      case aasm_state
-      when 'applicant_submitted'
-        applicant_poll_count
-      when 'case_submitted'
-        case_poll_count
-      else
-        0
-      end
     end
   end
 end
