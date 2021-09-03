@@ -53,7 +53,6 @@ class LegalAidApplication < ApplicationRecord
   end
 
   after_save do
-    ActiveSupport::Notifications.instrument 'dashboard.delegated_functions_used' if used_delegated_functions?
     ActiveSupport::Notifications.instrument 'dashboard.declined_open_banking' if saved_change_to_open_banking_consent?
     ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end

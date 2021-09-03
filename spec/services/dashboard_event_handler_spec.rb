@@ -114,20 +114,6 @@ RSpec.describe DashboardEventHandler do
     end
   end
 
-  context 'delegated_functions_used' do
-    subject { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-    # let(:used_delegated_functions_reported_on) { Date.current }
-    # let(:used_delegated_functions_on) { rand(5).days.ago.to_date }
-
-    before { ActiveJob::Base.queue_adapter = :test }
-
-    after { ActiveJob::Base.queue_adapter = :sidekiq }
-
-    it 'fires the Applications job' do
-      expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with('Applications').at_least(1).times
-    end
-  end
-
   context 'application completed' do
     let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
     let(:used_delegated_functions_reported_on) { Date.current }

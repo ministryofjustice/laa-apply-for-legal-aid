@@ -34,7 +34,7 @@ class DashboardEventHandler
 
   def valid_events
     %w[application_created provider_updated ccms_submission_saved firm_created feedback_created
-       application_submitted delegated_functions_used declined_open_banking applicant_emailed]
+       application_submitted declined_open_banking applicant_emailed]
   end
 
   def application_created
@@ -63,10 +63,6 @@ class DashboardEventHandler
   end
 
   def application_submitted
-    Dashboard::UpdaterJob.perform_later('Applications')
-  end
-
-  def delegated_functions_used
     Dashboard::UpdaterJob.perform_later('Applications')
   end
 
