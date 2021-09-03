@@ -23,6 +23,8 @@ module CCMS
 
       @submission.process!
 
+      return if @submission.completed?
+
       # raise an error if the current attempt has not changed the state
       raise SubmissionStateUnchanged if state_unchanged?(start_state)
 

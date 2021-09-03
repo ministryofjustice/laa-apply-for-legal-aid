@@ -16,7 +16,20 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
     it 'calls process! on the submission' do
       expect(submission).to receive(:process!)
+      expect(CCMS::SubmissionProcessWorker).to receive(:perform_async)
       subject
+    end
+
+    context 'the state changes to completed' do
+      before do
+        allow(submission).to receive(:aasm_state).and_return(:complete)
+        allow(submission).to receive(:completed?).and_return(true)
+      end
+
+      it 'does not raise a new SubmissionProcessWorker job' do
+        expect(CCMS::SubmissionProcessWorker).not_to receive(:perform_async)
+        subject
+      end
     end
 
     context 'when an error occurs' do
