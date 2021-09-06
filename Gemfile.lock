@@ -215,7 +215,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_saml_authenticatable (1.6.3)
+    devise_saml_authenticatable (1.7.0)
       devise (> 2.0.0)
       ruby-saml (~> 1.7)
     dibber (0.6.0)
