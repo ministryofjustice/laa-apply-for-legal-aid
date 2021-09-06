@@ -1,7 +1,5 @@
 module Applicants
-  class EmployedForm
-    include BaseForm
-
+  class EmployedForm < BaseForm
     form_for Applicant
 
     attr_accessor :employed

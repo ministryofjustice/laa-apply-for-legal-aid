@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class SharedOwnershipForm
-    include BaseForm
-
+  class SharedOwnershipForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :shared_ownership, :journey

@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class PropertyValueForm
-    include BaseForm
-
+  class PropertyValueForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :property_value, :journey

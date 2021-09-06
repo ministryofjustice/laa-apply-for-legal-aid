@@ -1,7 +1,5 @@
 module Providers
-  class PolicyDisregardsForm
-    include BaseForm
-
+  class PolicyDisregardsForm < BaseForm
     form_for PolicyDisregards
 
     SINGLE_VALUE_ATTRIBUTES = %i[

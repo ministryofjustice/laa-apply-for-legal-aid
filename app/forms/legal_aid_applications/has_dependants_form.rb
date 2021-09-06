@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class HasDependantsForm
-    include BaseForm
-
+  class HasDependantsForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :has_dependants

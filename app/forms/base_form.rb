@@ -1,29 +1,20 @@
-require_relative 'concerns/date_field_builder'
+class BaseForm
+  include ActiveModel::Model
+  include ActiveModel::Validations::Callbacks
 
-# Add common methods to forms.
-# Usage:
-#   Add the following to the form:
-#
-#       include BaseForm
-#       form_for <ModelClass>
-#
-module BaseForm
   attr_writer :model
 
-  def self.included(base)
-    super
-    base.include(ActiveModel::Model)
-    base.include(ActiveModel::Validations::Callbacks)
-    base.extend(ClassMethods)
-    base.include(InstanceMethods)
-  end
-
-  module ClassMethods
+  class << self
     def form_for(klass)
       @model_class = klass
     end
 
     def model_class
+      # If there are any errors on the form, in order to get the I18n keys, the ActiveModel::Naming module calls #model_name on the form **and all it's ancestors**,
+      # so it will get called on this Base class. In this case, we just return our class - it won't get used and does no harm.
+      #
+      return self if in?([BaseForm, BaseFileUploaderForm])
+
       @model_class || raise('Model class must be defined. Use: `form_for Class`')
     end
 
@@ -43,109 +34,97 @@ module BaseForm
     end
   end
 
-  module InstanceMethods
-    # Allows a form to be initiated with an existing model instance, and for the values in the
-    # model to be passed to the form.
-    #
-    #   some_model = SomeModel.find(params[:id])
-    #   some_model.foo = :bar
-    #   form = SomeForm.new(model: some_model)
-    #   form.foo == :bar
-    #
-    # Assuming SomeForm definition includes `attr_accessor :foo`
-    #
-    def initialize(*args)
-      super
-      set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: self.class.locally_assigned,
-        model_attributes: model&.attributes
-      )
+  def initialize(*args)
+    super
+    set_instance_variables_for_attributes_if_not_set_but_in_model(
+      attrs: self.class.locally_assigned,
+      model_attributes: model&.attributes
+    )
+  end
+
+  def model
+    @model ||= self.class.model_class.new
+  end
+
+  def save
+    return false unless valid?
+
+    return true if assignable_attributes.empty?
+
+    model.attributes = clean_attributes(assignable_attributes)
+    model.save(validate: false)
+  end
+
+  # List of form attributes not to be passed to model
+  def exclude_from_model
+    []
+  end
+
+  def attributes_to_clean
+    []
+  end
+
+  def assignable_attributes
+    exclude_attrs = exclude_from_model + [:model]
+    attributes.deep_stringify_keys!.except(*exclude_attrs.map(&:to_s))
+  end
+
+  def attributes
+    @attributes ||= {}
+  end
+
+  def squish_whitespaces(*attribute_names)
+    attribute_names.each do |attr_name|
+      attributes[attr_name.to_s]&.squish!
     end
+  end
 
-    def model
-      @model ||= self.class.model_class.new
+  def save_as_draft
+    @draft = true
+    set_blanks_to_nil
+    save unless all_entries_blank?
+  end
+
+  def draft?
+    @draft
+  end
+
+  private
+
+  def clean_attributes(hash)
+    hash.each_with_object({}) do |(k, v), new_hash|
+      new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr('£,', '') : v
     end
+  end
 
-    def save
-      return false unless valid?
-
-      return true if assignable_attributes.empty?
-
-      model.attributes = clean_attributes(assignable_attributes)
-      model.save(validate: false)
+  def set_blanks_to_nil
+    self.class.locally_assigned.each do |attr|
+      attributes[attr.to_s] = nil if attributes[attr.to_s].blank?
     end
+  end
 
-    # List of form attributes not to be passed to model
-    def exclude_from_model
-      []
-    end
+  def all_entries_blank?
+    attributes_set_by_form.values.all?(&:blank?)
+  end
 
-    def attributes_to_clean
-      []
-    end
+  def attributes_set_by_form
+    attributes.slice(*self.class.locally_assigned.map(&:to_s))
+  end
 
-    def assignable_attributes
-      exclude_attrs = exclude_from_model + [:model]
-      attributes.deep_stringify_keys!.except(*exclude_attrs.map(&:to_s))
-    end
+  # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
+  def _assign_attribute(key, value)
+    attributes[key.to_s] = value
+    super
+  end
 
-    def attributes
-      @attributes ||= {}
-    end
+  def set_instance_variables_for_attributes_if_not_set_but_in_model(attrs:, model_attributes:)
+    return if model_attributes.blank?
 
-    def squish_whitespaces(*attribute_names)
-      attribute_names.each do |attr_name|
-        attributes[attr_name.to_s]&.squish!
-      end
-    end
+    model_attributes.stringify_keys!
 
-    def save_as_draft
-      @draft = true
-      set_blanks_to_nil
-      save unless all_entries_blank?
-    end
-
-    def draft?
-      @draft
-    end
-
-    private
-
-    def clean_attributes(hash)
-      hash.each_with_object({}) do |(k, v), new_hash|
-        new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr('£,', '') : v
-      end
-    end
-
-    def set_blanks_to_nil
-      self.class.locally_assigned.each do |attr|
-        attributes[attr.to_s] = nil if attributes[attr.to_s].blank?
-      end
-    end
-
-    def all_entries_blank?
-      attributes_set_by_form.values.all?(&:blank?)
-    end
-
-    def attributes_set_by_form
-      attributes.slice(*self.class.locally_assigned.map(&:to_s))
-    end
-
-    # Over-riding ActiveModel::AttributeAssignment method to store attributes as they are built
-    def _assign_attribute(key, value)
-      attributes[key.to_s] = value
-      super
-    end
-
-    def set_instance_variables_for_attributes_if_not_set_but_in_model(attrs:, model_attributes:)
-      return if model_attributes.blank?
-
-      model_attributes.stringify_keys!
-
-      attrs.map(&:to_s).each do |method|
-        model_value = model_attributes[method]
-        instance_variable_set(:"@#{method}", model_value) if !model_value.nil? && attributes[method].nil?
-      end
+    attrs.map(&:to_s).each do |method|
+      model_value = model_attributes[method]
+      instance_variable_set(:"@#{method}", model_value) if !model_value.nil? && attributes[method].nil?
     end
   end
 end

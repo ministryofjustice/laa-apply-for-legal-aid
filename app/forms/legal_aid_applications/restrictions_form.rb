@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class RestrictionsForm
-    include BaseForm
-
+  class RestrictionsForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :has_restrictions, :restrictions_details, :journey

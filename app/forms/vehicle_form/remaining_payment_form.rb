@@ -1,7 +1,5 @@
 module VehicleForm
-  class RemainingPaymentForm
-    include BaseForm
-
+  class RemainingPaymentForm < BaseForm
     form_for Vehicle
 
     attr_accessor :payment_remaining, :payments_remain

@@ -1,7 +1,5 @@
 module Providers
-  class ReceivedBenefitConfirmationForm
-    include BaseForm
-
+  class ReceivedBenefitConfirmationForm < BaseForm
     form_for DWPOverride
 
     SINGLE_VALUE_ATTRIBUTES = %i[

@@ -1,7 +1,5 @@
 module ChancesOfSuccesses
-  class SuccessLikelyForm
-    include BaseForm
-
+  class SuccessLikelyForm < BaseForm
     form_for ProceedingMeritsTask::ChancesOfSuccess
 
     attr_accessor :success_likely

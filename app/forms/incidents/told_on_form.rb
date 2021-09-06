@@ -1,6 +1,5 @@
 module Incidents
-  class ToldOnForm
-    include BaseForm
+  class ToldOnForm < BaseForm
     form_for ApplicationMeritsTask::Incident
 
     attr_accessor :told_on_1i, :told_on_2i, :told_on_3i

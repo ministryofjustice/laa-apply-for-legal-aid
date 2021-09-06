@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class DependantForm  # rubocop:disable Metrics/ClassLength
-    include BaseForm
+  class DependantForm < BaseForm  # rubocop:disable Metrics/ClassLength
     form_for Dependant
 
     before_validation :clear_value_fields

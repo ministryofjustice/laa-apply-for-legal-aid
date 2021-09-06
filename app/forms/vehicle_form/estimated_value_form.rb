@@ -1,7 +1,5 @@
 module VehicleForm
-  class EstimatedValueForm
-    include BaseForm
-
+  class EstimatedValueForm < BaseForm
     form_for Vehicle
 
     attr_accessor :estimated_value

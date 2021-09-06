@@ -1,8 +1,6 @@
 module Providers
   module ProceedingMeritsTask
-    class LinkedChildrenForm
-      include BaseForm
-
+    class LinkedChildrenForm < BaseForm
       form_for ::ProceedingMeritsTask::ApplicationProceedingTypeLinkedChild
 
       attr_accessor :linked_children

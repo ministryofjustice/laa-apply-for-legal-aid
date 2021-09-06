@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class EmergencyCostOverrideForm
-    include BaseForm
-
+  class EmergencyCostOverrideForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :emergency_cost_override, :emergency_cost_requested, :emergency_cost_reasons

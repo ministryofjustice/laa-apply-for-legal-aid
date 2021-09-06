@@ -1,7 +1,5 @@
 module VehicleForm
-  class UsedRegularlyForm
-    include BaseForm
-
+  class UsedRegularlyForm < BaseForm
     form_for Vehicle
 
     attr_accessor :used_regularly

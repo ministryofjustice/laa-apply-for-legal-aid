@@ -1,6 +1,5 @@
 module LegalAidApplications
-  class SubstantiveApplicationForm
-    include BaseForm
+  class SubstantiveApplicationForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :substantive_application

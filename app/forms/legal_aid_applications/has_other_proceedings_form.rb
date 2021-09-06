@@ -1,7 +1,5 @@
 module LegalAidApplications
-  class HasOtherProceedingsForm
-    include BaseForm
-
+  class HasOtherProceedingsForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :has_other_proceeding

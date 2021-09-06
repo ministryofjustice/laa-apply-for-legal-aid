@@ -1,7 +1,5 @@
 module Applicants
-  class EmailForm
-    include BaseForm
-
+  class EmailForm < BaseForm
     form_for Applicant
 
     attr_accessor :email
