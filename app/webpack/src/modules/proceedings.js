@@ -103,11 +103,17 @@ function searchOnUserInput (searchInputBox) {
   }
 }
 
+function deselectPreviousProceedingItem () {
+  const selected = document.querySelector('input:checked')
+  if (selected !== null) { selected.checked = false }
+}
+
 // Find the existing hidden proceeding type items
 // If they are one of the search matches returned from the V1 api, remove the hidden class
 // and highlight the search terms in the item text
 function showResults (results, inputText) {
   if (results.length > 0) {
+    deselectPreviousProceedingItem()
     const codes = results.map(obj => obj.code);
     let proceedingsContainer = document.querySelector('.govuk-radios') // with MP flag on
     if (proceedingsContainer == null) { proceedingsContainer = document.querySelector('#proceeding-list') } // with MP flag off
