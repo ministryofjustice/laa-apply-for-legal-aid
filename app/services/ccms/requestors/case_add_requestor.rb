@@ -124,6 +124,7 @@ module CCMS
         else
           generate_other_party(xml)
         end
+
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
           generate_involved_child(xml, child)
         end
@@ -154,7 +155,7 @@ module CCMS
           xml.__send__('casebio:OtherPartyDetail') do
             xml.__send__('casebio:Person') do
               xml.__send__('casebio:Name') do
-                xml.__send__('common:Title', 'MR.')
+                xml.__send__('common:Title', '')
                 xml.__send__('common:Surname', last_name)
                 xml.__send__('common:FirstName', first_name)
               end
@@ -175,7 +176,7 @@ module CCMS
           xml.__send__('casebio:OtherPartyDetail') do
             xml.__send__('casebio:Person') do
               xml.__send__('casebio:Name') do
-                xml.__send__('common:Title', 'MASTER')
+                xml.__send__('common:Title', '')
                 xml.__send__('common:Surname', last_name)
                 xml.__send__('common:FirstName', first_name)
               end
