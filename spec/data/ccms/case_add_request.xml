@@ -59,7 +59,7 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <common:Title> </common:Title>
+                      <common:Title>APPLY</common:Title>
                       <common:Surname>TestChild</common:Surname>
                       <common:FirstName>First</common:FirstName>
                     </casebio:Name>
@@ -77,7 +77,7 @@
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
                     <casebio:Name>
-                      <common:Title> </common:Title>
+                      <common:Title>APPLY</common:Title>
                       <common:Surname>TestChild</common:Surname>
                       <common:FirstName>Second</common:FirstName>
                     </casebio:Name>
