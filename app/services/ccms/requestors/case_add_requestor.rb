@@ -370,7 +370,6 @@ module CCMS
         xml.__send__('common:Instances') do
           xml.__send__('common:InstanceLabel', bank_account.ccms_instance_name(index))
           xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], bank_acct: bank_account) }
-          # xml.__send__('common:Attributes') { generate_attributes_for(xml, config[:yaml_section], bank_acct: bank_account) }
         end
       end
 
@@ -384,7 +383,6 @@ module CCMS
         xml.__send__('common:Instances') do
           xml.__send__('common:InstanceLabel', config[:instance_label])
           xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle: vehicle) }
-          # xml.__send__('common:Attributes') { generate_attributes_for(xml, config[:yaml_section], vehicle: vehicle) }
         end
       end
 
