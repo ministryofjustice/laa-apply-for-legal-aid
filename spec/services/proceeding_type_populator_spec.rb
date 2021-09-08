@@ -48,7 +48,7 @@ RSpec.describe ProceedingTypePopulator do
             expect {
               described_class.call
               described_class.call
-            }.to change { ProceedingType.count }.by(8)
+            }.to change { ProceedingType.count }.by(16)
           end
         end
       end
