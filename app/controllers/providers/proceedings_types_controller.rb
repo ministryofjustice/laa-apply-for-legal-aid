@@ -44,7 +44,7 @@ module Providers
     end
 
     def proceeding_types
-      @proceeding_types ||= ProceedingType.all
+      @proceeding_types ||= ProceedingType.where(['start_date <= ? and end_date > ?', Date.current, Date.current])
     end
   end
 end
