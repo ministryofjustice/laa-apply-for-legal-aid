@@ -1,4 +1,4 @@
-
+TEST
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
 
 # LAA Apply for legal aid
@@ -217,7 +217,7 @@ INC_CCMS=true bundle exec rspec
 ```
 This will run the entire test suite and monitor code coverage.
 
-If you don't care about code coverage, you could run 
+If you don't care about code coverage, you could run
 ```ruby
 bundle exec rspec --tag ccms
 ```
