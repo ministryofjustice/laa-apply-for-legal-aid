@@ -51,6 +51,8 @@ class ApplicationProceedingType < ApplicationRecord
   # SCOPE LIMITATIONS
   def add_default_substantive_scope_limitation
     new_scope_limitation = AssignedSubstantiveScopeLimitation.new(scope_limitation: default_substantive_scope_limitation)
+    # why does new_scope_limitation have no values for most attributes
+    # pp new_scope_limitation
     add_scope_limitation_unless_duplicate new_scope_limitation
   end
 

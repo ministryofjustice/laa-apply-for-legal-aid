@@ -54,11 +54,11 @@ RSpec.describe ProceedingTypeFullTextSearch do
 
           it 'returns two records' do
             result_set = subject
-            expect(result_set.map(&:code).sort).to eq %w[PH0003 PH0004]
+            expect(result_set.map(&:code).sort).to eq %w[PH0007 PH0008]
           end
         end
 
-        context 'searching for a term which occures in more than one proceeding' do
+        context 'searching for a term which occurs in more than one proceeding' do
           let(:search_term) { 'injunction' }
 
           it 'returns two results' do
@@ -86,9 +86,9 @@ RSpec.describe ProceedingTypeFullTextSearch do
 
       context 'when application already has proceeding types selected' do
         before do
-          # add Forced mariage protection order and Occupation order
-          legal_aid_application.proceeding_types << ProceedingType.find_by(code: 'PR0203')
-          legal_aid_application.proceeding_types << ProceedingType.find_by(code: 'PR0214')
+          # add Forced marriage protection order and Occupation order
+          legal_aid_application.proceeding_types << ProceedingType.find_by(code: 'PR0204')
+          legal_aid_application.proceeding_types << ProceedingType.find_by(code: 'PR0215')
         end
 
         context 'searching for a term not on an already-selected proceeding' do
@@ -145,6 +145,7 @@ RSpec.describe ProceedingTypeFullTextSearch do
           let(:search_term) { 'order' }
 
           it 'does not include either of the proceeding types already on the application' do
+            pp subject
             meanings = subject.map(&:meaning)
             expect(meanings).not_to include('Forced marriage protection order')
             expect(meanings).not_to include('Occupation order')

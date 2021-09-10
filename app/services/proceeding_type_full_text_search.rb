@@ -71,7 +71,7 @@ class ProceedingTypeFullTextSearch
         ts_rank(textsearchable, query) AS rank
       FROM proceeding_types, to_tsquery($1) AS query
       WHERE query @@ textsearchable
-      AND start_date <= CURRENT_DATE and end_date > CURRENT_DATE
+      AND start_date <= CURRENT_DATE and end_date >= CURRENT_DATE
       ORDER BY rank DESC;
 
     END_OF_QUERY
