@@ -67,7 +67,6 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
               additional_search_terms: 'injunction'
             }
           ]
-
           expect(response).to have_http_status(200)
           expect(response.media_type).to eql('application/json')
           expect(response.body).to match_json_expression(expected_json)
@@ -94,7 +93,6 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
               ccms_matter: 'Public Law - Other'
             }
           ]
-
           expect(response).to have_http_status(200)
           expect(response.media_type).to eql('application/json')
           expect(response.body).to match_json_expression(expected_json)
