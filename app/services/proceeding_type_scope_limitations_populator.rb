@@ -13,8 +13,6 @@ class ProceedingTypeScopeLimitationsPopulator
       # removed. At that point, all proceedings will be seeded again
       next if ProceedingType.find_by(code: row[:apply_code]).nil?
 
-      # ccms_code
-
       proceeding_type_scope_limitation =
         ProceedingTypeScopeLimitation.where(proceeding_type_id: proceeding_type_id(row),
                                             scope_limitation_id: scope_limitation_id(row)).first_or_initialize

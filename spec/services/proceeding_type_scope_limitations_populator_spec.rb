@@ -21,8 +21,8 @@ RSpec.describe ProceedingTypeScopeLimitationsPopulator do
   describe '#call' do
     let(:seed_file) { Rails.root.join('db/seeds/legal_framework/proceeding_type_scope_limitations.csv') }
     let(:proceeding_type_scope_limitation) { ProceedingTypeScopeLimitation.order('created_at ASC').first }
-    let(:expected_proceeding_type_id) { ProceedingType.find_by(ccms_code: CSV.read(seed_file, headers: true)[0][0]).id }
-    let(:expected_scope_limitation_id) { ScopeLimitation.find_by(code: CSV.read(seed_file, headers: true)[0][1]).id }
+    let(:expected_proceeding_type_id) { ProceedingType.find_by(ccms_code: CSV.read(seed_file, headers: true)[0][1]).id }
+    let(:expected_scope_limitation_id) { ScopeLimitation.find_by(code: CSV.read(seed_file, headers: true)[0][2]).id }
 
     it 'create instances from the seed file' do
       expect { described_class.call }.to change { ProceedingTypeScopeLimitation.count }.by(seed_file.readlines.size - 1)
@@ -61,7 +61,7 @@ RSpec.describe ProceedingTypeScopeLimitationsPopulator do
       let(:multi_proc_flag) { false }
 
       it 'create non-flagged instances from the seed file' do
-        expect { described_class.call }.to change { ProceedingTypeScopeLimitation.count }.by(77)
+        expect { described_class.call }.to change { ProceedingTypeScopeLimitation.count }.by(153)
       end
     end
   end
