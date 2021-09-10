@@ -11,7 +11,9 @@ class ProceedingTypeScopeLimitationsPopulator
     CSV.read(file_path, headers: true, header_converters: :symbol).each do |row|
       # TODO: Delete when the allow_multiple_proceedings? flag is
       # removed. At that point, all proceedings will be seeded again
-      next if ProceedingType.find_by(ccms_code: row[:proceeding_type_code]).nil?
+      next if ProceedingType.find_by(code: row[:apply_code]).nil?
+
+      # ccms_code
 
       proceeding_type_scope_limitation =
         ProceedingTypeScopeLimitation.where(proceeding_type_id: proceeding_type_id(row),
@@ -32,7 +34,7 @@ class ProceedingTypeScopeLimitationsPopulator
   private
 
   def proceeding_type_id(row)
-    proceeding_types.find { |proceeding_type| proceeding_type.ccms_code == row[:proceeding_type_code] }.id
+    proceeding_types.find { |proceeding_type| proceeding_type.code == row[:apply_code] }.id
   end
 
   def scope_limitation_id(row)
@@ -40,7 +42,7 @@ class ProceedingTypeScopeLimitationsPopulator
   end
 
   def proceeding_types
-    @proceeding_types ||= ProceedingType.select(:id, :ccms_code).all
+    @proceeding_types ||= ProceedingType.select(:id, :code).all
   end
 
   def scope_limitations
