@@ -16,8 +16,8 @@ FactoryBot.define do
     default_cost_limitation_substantive { 2 }
     involvement_type_applicant { false }
     additional_search_terms { nil }
-    start_date { Time.zone.today - 1.year }
-    end_date { Time.zone.today + 5.years }
+    start_date { '2018-08-07' }
+    end_date { '2020-09-12' }
 
     trait :with_real_data do
       code { 'PR0208' }
