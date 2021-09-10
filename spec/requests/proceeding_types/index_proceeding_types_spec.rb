@@ -37,7 +37,8 @@ RSpec.describe V1::ProceedingTypesController, type: :request do
                ccms_matter_code: 'APBLB',
                meaning: 'Not an application for a care order',
                description: 'Not to be represented on an application for a care order.',
-               additional_search_terms: 'injunction')
+               additional_search_terms: 'injunction',
+               end_date: Time.zone.now + 2.years)
         ProceedingType.refresh_textsearchable
       end
 
