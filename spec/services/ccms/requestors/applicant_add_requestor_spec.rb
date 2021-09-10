@@ -30,11 +30,11 @@ module CCMS
         it 'generates the expected XML' do
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           expect(requestor.formatted_xml).to be_soap_envelope_with(
-            command: 'ns2:ClientAddRQ',
+            command: 'clientbim:ClientAddRQ',
             transaction_id: expected_tx_id,
             matching: [
-              "<ns4:AddressLine1>#{applicant.address.address_line_one} #{applicant.address.address_line_two}</ns4:AddressLine1>",
-              "<ns4:City>#{applicant.address.city}</ns4:City>"
+              "<common:AddressLine1>#{applicant.address.address_line_one} #{applicant.address.address_line_two}</common:AddressLine1>",
+              "<common:City>#{applicant.address.city}</common:City>"
             ]
           )
         end

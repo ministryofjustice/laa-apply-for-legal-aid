@@ -44,7 +44,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           it 'stores the request body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:CaseAddUpdtStatusRQ',
+              command: 'casebim:CaseAddUpdtStatusRQ',
               transaction_id: '20190101121530123456'
             )
           end
@@ -79,7 +79,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           it 'stores the reqeust body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:CaseAddUpdtStatusRQ',
+              command: 'casebim:CaseAddUpdtStatusRQ',
               transaction_id: '20190101121530123456'
             )
           end
@@ -116,7 +116,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         it 'stores the reqeust body in the  submission history record' do
           subject.call
           expect(history.request).to be_soap_envelope_with(
-            command: 'ns2:CaseAddUpdtStatusRQ',
+            command: 'casebim:CaseAddUpdtStatusRQ',
             transaction_id: '20190101121530123456'
           )
         end
@@ -161,7 +161,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
 
       it 'stores the reqeust body in the  submission history record' do
         expect(history.request).to be_soap_envelope_with(
-          command: 'ns2:CaseAddUpdtStatusRQ',
+          command: 'casebim:CaseAddUpdtStatusRQ',
           transaction_id: '20190101121530123456'
         )
       end

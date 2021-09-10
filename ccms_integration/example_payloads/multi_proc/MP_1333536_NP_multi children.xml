@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns8:CaseAddRQ xmlns="http://legalservices.gov.uk/Enterprise/Common/1.0/Common" xmlns:ns6="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM" xmlns:ns5="http://legalservices.gov.uk/Enterprise/Common/1.0/Header" xmlns:ns8="uri" xmlns:ns7="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:ns2="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns4="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO" xmlns:ns3="http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO">
+<ns8:CaseAddRQ xmlns="http://legalservices.gov.uk/Enterprise/Common/1.0/Common"
+               xmlns:ns6="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM"
+               xmlns:ns5="http://legalservices.gov.uk/Enterprise/Common/1.0/Header"
+               xmlns:ns8="uri"
+               xmlns:ns7="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+               xmlns:ns2="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+               xmlns:ns4="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO"
+               xmlns:ns3="http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO">
     <ns5:HeaderRQ>
         <ns5:TransactionRequestID>202106101014076590207849460</ns5:TransactionRequestID>
         <ns5:Language>ENG</ns5:Language>

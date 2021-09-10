@@ -16,17 +16,6 @@ module CCMS
 
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-      uses_namespaces(
-        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-        'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
-        'xmlns:ns0' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-        'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
-        'xmlns:ns4' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
-        'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
-      )
-
       def initialize(submission, options)
         super()
         @options = options
@@ -84,47 +73,47 @@ module CCMS
       end
 
       def soap_body(xml)
-        xml.__send__('ns4:CaseAddRQ') do
-          xml.__send__('ns6:HeaderRQ') { header_request(xml) }
-          xml.__send__('ns4:Case') { case_request(xml) }
+        xml.__send__('casebim:CaseAddRQ') do
+          xml.__send__('hdr:HeaderRQ') { header_request(xml) }
+          xml.__send__('casebim:Case') { case_request(xml) }
         end
       end
 
       def header_request(xml)
-        xml.__send__('ns6:TransactionRequestID', transaction_request_id)
-        xml.__send__('ns6:Language', 'ENG')
-        xml.__send__('ns6:UserLoginID', provider.username)
-        xml.__send__('ns6:UserRole', 'EXTERNAL')
+        xml.__send__('hdr:TransactionRequestID', transaction_request_id)
+        xml.__send__('hdr:Language', 'ENG')
+        xml.__send__('hdr:UserLoginID', provider.username)
+        xml.__send__('hdr:UserRole', 'EXTERNAL')
       end
 
       def case_request(xml)
-        xml.__send__('ns2:CaseReferenceNumber', @submission.case_ccms_reference)
-        xml.__send__('ns2:CaseDetails') do
-          xml.__send__('ns2:ApplicationDetails') { generate_application_details(xml) }
-          xml.__send__('ns2:RecordHistory') { generate_record_history(xml) }
-          xml.__send__('ns2:CaseDocs') { generate_case_docs(xml) }
+        xml.__send__('casebio:CaseReferenceNumber', @submission.case_ccms_reference)
+        xml.__send__('casebio:CaseDetails') do
+          xml.__send__('casebio:ApplicationDetails') { generate_application_details(xml) }
+          xml.__send__('casebio:RecordHistory') { generate_record_history(xml) }
+          xml.__send__('casebio:CaseDocs') { generate_case_docs(xml) }
         end
       end
 
       def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
-        xml.__send__('ns2:Client') { generate_client(xml) }
-        xml.__send__('ns2:PreferredAddress', 'CLIENT')
-        xml.__send__('ns2:ProviderDetails') { generate_provider_details(xml) }
-        xml.__send__('ns2:CategoryOfLaw') { generate_category_of_law(xml) }
-        xml.__send__('ns2:OtherParties') { generate_other_parties(xml) }
-        xml.__send__('ns2:Proceedings') { generate_proceedings(xml) }
-        xml.__send__('ns2:MeansAssesments') { generate_means_assessment(xml) }
-        xml.__send__('ns2:MeritsAssesments') { generate_merits_assessment(xml) }
-        xml.__send__('ns2:DevolvedPowersDate', @legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)) if @legal_aid_application.used_delegated_functions?
-        xml.__send__('ns2:ApplicationAmendmentType', @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB')
-        xml.__send__('ns2:LARDetails') { generate_lar_details(xml) }
+        xml.__send__('casebio:Client') { generate_client(xml) }
+        xml.__send__('casebio:PreferredAddress', 'CLIENT')
+        xml.__send__('casebio:ProviderDetails') { generate_provider_details(xml) }
+        xml.__send__('casebio:CategoryOfLaw') { generate_category_of_law(xml) }
+        xml.__send__('casebio:OtherParties') { generate_other_parties(xml) }
+        xml.__send__('casebio:Proceedings') { generate_proceedings(xml) }
+        xml.__send__('casebio:MeansAssesments') { generate_means_assessment(xml) }
+        xml.__send__('casebio:MeritsAssesments') { generate_merits_assessment(xml) }
+        xml.__send__('casebio:DevolvedPowersDate', @legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)) if @legal_aid_application.used_delegated_functions?
+        xml.__send__('casebio:ApplicationAmendmentType', @legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB')
+        xml.__send__('casebio:LARDetails') { generate_lar_details(xml) }
       end
 
       def generate_case_docs(xml)
         @submission.submission_documents.each do |document|
-          xml.__send__('ns2:CaseDoc') do
-            xml.__send__('ns2:CCMSDocumentID', document.ccms_document_id)
-            xml.__send__('ns2:DocumentSubject', document.document_type)
+          xml.__send__('casebio:CaseDoc') do
+            xml.__send__('casebio:CCMSDocumentID', document.ccms_document_id)
+            xml.__send__('casebio:DocumentSubject', document.document_type)
           end
         end
       end
@@ -135,23 +124,24 @@ module CCMS
         else
           generate_other_party(xml)
         end
+
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
           generate_involved_child(xml, child)
         end
       end
 
       def generate_other_party(xml) # rubocop:disable Metrics/MethodLength
-        xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', 'OPPONENT_7713451')
-          xml.__send__('ns2:SharedInd', false)
-          xml.__send__('ns2:OtherPartyDetail') do
-            xml.__send__('ns2:Organization') do
-              xml.__send__('ns2:OrganizationName', '.')
-              xml.__send__('ns2:OrganizationType', 'GOVT')
-              xml.__send__('ns2:RelationToClient', 'NONE')
-              xml.__send__('ns2:RelationToCase', 'OPP')
-              xml.__send__('ns2:Address')
-              xml.__send__('ns2:ContactDetails')
+        xml.__send__('casebio:OtherParty') do
+          xml.__send__('casebio:OtherPartyID', 'OPPONENT_7713451')
+          xml.__send__('casebio:SharedInd', false)
+          xml.__send__('casebio:OtherPartyDetail') do
+            xml.__send__('casebio:Organization') do
+              xml.__send__('casebio:OrganizationName', '.')
+              xml.__send__('casebio:OrganizationType', 'GOVT')
+              xml.__send__('casebio:RelationToClient', 'NONE')
+              xml.__send__('casebio:RelationToCase', 'OPP')
+              xml.__send__('casebio:Address')
+              xml.__send__('casebio:ContactDetails')
             end
           end
         end
@@ -159,20 +149,20 @@ module CCMS
 
       def generate_opponent(xml, opponent) # rubocop:disable Metrics/MethodLength
         first_name, last_name = opponent.split_full_name
-        xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{opponent.generate_ccms_opponent_id}")
-          xml.__send__('ns2:SharedInd', false)
-          xml.__send__('ns2:OtherPartyDetail') do
-            xml.__send__('ns2:Person') do
-              xml.__send__('ns2:Name') do
-                xml.__send__('ns2:Title', '.')
-                xml.__send__('ns2:Surname', last_name)
-                xml.__send__('ns2:FirstName', first_name)
+        xml.__send__('casebio:OtherParty') do
+          xml.__send__('casebio:OtherPartyID', "OPPONENT_#{opponent.generate_ccms_opponent_id}")
+          xml.__send__('casebio:SharedInd', false)
+          xml.__send__('casebio:OtherPartyDetail') do
+            xml.__send__('casebio:Person') do
+              xml.__send__('casebio:Name') do
+                xml.__send__('common:Title', '')
+                xml.__send__('common:Surname', last_name)
+                xml.__send__('common:FirstName', first_name)
               end
-              xml.__send__('ns2:Address')
-              xml.__send__('ns2:RelationToClient', 'NONE')
-              xml.__send__('ns2:RelationToCase', 'OPP')
-              xml.__send__('ns2:ContactDetails')
+              xml.__send__('casebio:Address')
+              xml.__send__('casebio:RelationToClient', 'NONE')
+              xml.__send__('casebio:RelationToCase', 'OPP')
+              xml.__send__('casebio:ContactDetails')
             end
           end
         end
@@ -180,58 +170,58 @@ module CCMS
 
       def generate_involved_child(xml, child) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         first_name, last_name = child.split_full_name
-        xml.__send__('ns2:OtherParty') do
-          xml.__send__('ns2:OtherPartyID', "OPPONENT_#{child.generate_ccms_opponent_id}")
-          xml.__send__('ns2:SharedInd', false)
-          xml.__send__('ns2:OtherPartyDetail') do
-            xml.__send__('ns2:Person') do
-              xml.__send__('ns2:Name') do
-                xml.__send__('ns2:Title', '.')
-                xml.__send__('ns2:Surname', last_name)
-                xml.__send__('ns2:FirstName', first_name)
+        xml.__send__('casebio:OtherParty') do
+          xml.__send__('casebio:OtherPartyID', "OPPONENT_#{child.generate_ccms_opponent_id}")
+          xml.__send__('casebio:SharedInd', false)
+          xml.__send__('casebio:OtherPartyDetail') do
+            xml.__send__('casebio:Person') do
+              xml.__send__('casebio:Name') do
+                xml.__send__('common:Title', '')
+                xml.__send__('common:Surname', last_name)
+                xml.__send__('common:FirstName', first_name)
               end
-              xml.__send__('ns2:DateOfBirth', child.date_of_birth.strftime('%F'))
-              xml.__send__('ns2:Address')
-              xml.__send__('ns2:RelationToClient', 'UNKNOWN')
-              xml.__send__('ns2:RelationToCase', 'CHILD')
-              xml.__send__('ns2:ContactDetails')
+              xml.__send__('casebio:DateOfBirth', child.date_of_birth.strftime('%F'))
+              xml.__send__('casebio:Address')
+              xml.__send__('casebio:RelationToClient', 'UNKNOWN')
+              xml.__send__('casebio:RelationToCase', 'CHILD')
+              xml.__send__('casebio:ContactDetails')
             end
           end
         end
       end
 
       def generate_record_history(xml)
-        xml.__send__('ns0:DateCreated', Time.current.to_s(:ccms_date_time))
-        xml.__send__('ns0:LastUpdatedBy') do
-          xml.__send__('ns0:UserLoginID', provider.username)
-          xml.__send__('ns0:UserName', provider.username)
-          xml.__send__('ns0:UserType', 'EXTERNAL')
+        xml.__send__('common:DateCreated', Time.current.to_s(:ccms_date_time))
+        xml.__send__('common:LastUpdatedBy') do
+          xml.__send__('common:UserLoginID', provider.username)
+          xml.__send__('common:UserName', provider.username)
+          xml.__send__('common:UserType', 'EXTERNAL')
         end
-        xml.__send__('ns0:DateLastUpdated', Time.current.to_s(:ccms_date_time))
+        xml.__send__('common:DateLastUpdated', Time.current.to_s(:ccms_date_time))
       end
 
       def generate_lar_details(xml)
-        xml.__send__('ns2:LARScopeFlag', true)
+        xml.__send__('casebio:LARScopeFlag', true)
       end
 
       def generate_client(xml)
-        xml.__send__('ns2:ClientReferenceNumber', @submission.applicant_ccms_reference)
-        xml.__send__('ns2:FirstName', applicant.first_name)
-        xml.__send__('ns2:Surname', applicant.last_name)
+        xml.__send__('casebio:ClientReferenceNumber', @submission.applicant_ccms_reference)
+        xml.__send__('casebio:FirstName', applicant.first_name)
+        xml.__send__('casebio:Surname', applicant.last_name)
       end
 
       def generate_provider_details(xml)
-        xml.__send__('ns2:ProviderFirmID', provider.firm.ccms_id)
-        xml.__send__('ns2:ProviderOfficeID', @legal_aid_application.office.ccms_id)
-        xml.__send__('ns2:ContactUserID') do
-          xml.__send__('ns0:UserLoginID', provider.contact_id)
+        xml.__send__('casebio:ProviderFirmID', provider.firm.ccms_id)
+        xml.__send__('casebio:ProviderOfficeID', @legal_aid_application.office.ccms_id)
+        xml.__send__('casebio:ContactUserID') do
+          xml.__send__('common:UserLoginID', provider.contact_id)
         end
       end
 
       def generate_category_of_law(xml)
-        xml.__send__('ns2:CategoryOfLawCode', @legal_aid_application.lead_proceeding_type.ccms_category_law_code)
-        xml.__send__('ns2:CategoryOfLawDescription', @legal_aid_application.lead_proceeding_type.ccms_category_law)
-        xml.__send__('ns2:RequestedAmount', as_currency(@legal_aid_application.default_cost_limitation))
+        xml.__send__('casebio:CategoryOfLawCode', @legal_aid_application.lead_proceeding_type.ccms_category_law_code)
+        xml.__send__('casebio:CategoryOfLawDescription', @legal_aid_application.lead_proceeding_type.ccms_category_law)
+        xml.__send__('casebio:RequestedAmount', as_currency(@legal_aid_application.default_cost_limitation))
       end
 
       def generate_proceedings(xml)
@@ -239,23 +229,23 @@ module CCMS
       end
 
       def generate_proceeding(xml, application_proceeding_type)
-        xml.__send__('ns2:Proceeding') do
-          xml.__send__('ns2:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
-          xml.__send__('ns2:Status', 'Draft')
-          xml.__send__('ns2:LeadProceedingIndicator', application_proceeding_type.lead_proceeding)
-          xml.__send__('ns2:ProceedingDetails') { generate_proceeding_type(xml, application_proceeding_type) }
+        xml.__send__('casebio:Proceeding') do
+          xml.__send__('casebio:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
+          xml.__send__('casebio:Status', 'Draft')
+          xml.__send__('casebio:LeadProceedingIndicator', application_proceeding_type.lead_proceeding)
+          xml.__send__('casebio:ProceedingDetails') { generate_proceeding_type(xml, application_proceeding_type) }
         end
       end
 
       def generate_proceeding_type(xml, application_proceeding_type)
         proceeding_type = application_proceeding_type.proceeding_type
-        xml.__send__('ns2:ProceedingType', proceeding_type.ccms_code)
-        xml.__send__('ns2:ProceedingDescription', proceeding_type.description)
-        xml.__send__('ns2:MatterType', proceeding_type.ccms_matter_code)
-        xml.__send__('ns2:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
-        xml.__send__('ns2:Stage', 8) # TODO: CCMS placeholder - this may need changing when multiple proceedings are introduced
-        xml.__send__('ns2:ClientInvolvementType', 'A')
-        xml.__send__('ns2:ScopeLimitations') { generate_scope_limitations(xml, application_proceeding_type) }
+        xml.__send__('casebio:ProceedingType', proceeding_type.ccms_code)
+        xml.__send__('casebio:ProceedingDescription', proceeding_type.description)
+        xml.__send__('casebio:MatterType', proceeding_type.ccms_matter_code)
+        xml.__send__('casebio:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
+        xml.__send__('casebio:Stage', 8) # TODO: CCMS placeholder - this may need changing when multiple proceedings are introduced
+        xml.__send__('casebio:ClientInvolvementType', 'A')
+        xml.__send__('casebio:ScopeLimitations') { generate_scope_limitations(xml, application_proceeding_type) }
       end
 
       def generate_scope_limitations(xml, application_proceeding_type)
@@ -263,30 +253,30 @@ module CCMS
       end
 
       def generate_scope_limitation(xml, limitation)
-        xml.__send__('ns2:ScopeLimitation') do
-          xml.__send__('ns2:ScopeLimitation', limitation.code)
-          xml.__send__('ns2:ScopeLimitationWording', limitation.description)
-          xml.__send__('ns2:DelegatedFunctionsApply', limitation.delegated_functions)
+        xml.__send__('casebio:ScopeLimitation') do
+          xml.__send__('casebio:ScopeLimitation', limitation.code)
+          xml.__send__('casebio:ScopeLimitationWording', limitation.description)
+          xml.__send__('casebio:DelegatedFunctionsApply', limitation.delegated_functions)
         end
       end
 
       def generate_means_assessment(xml)
-        xml.__send__('ns2:AssesmentResults') do
-          xml.__send__('ns0:Results') { generate_means_assessment_results(xml) }
-          xml.__send__('ns0:AssesmentDetails') { generate_means_assessment_details(xml) }
+        xml.__send__('casebio:AssesmentResults') do
+          xml.__send__('common:Results') { generate_means_assessment_results(xml) }
+          xml.__send__('common:AssesmentDetails') { generate_means_assessment_details(xml) }
         end
       end
 
       def generate_means_assessment_results(xml)
-        xml.__send__('ns0:Goal') do
-          xml.__send__('ns0:Attribute', 'CLIENT_PROV_LA')
-          xml.__send__('ns0:AttributeValue', true)
+        xml.__send__('common:Goal') do
+          xml.__send__('common:Attribute', 'CLIENT_PROV_LA')
+          xml.__send__('common:AttributeValue', true)
         end
       end
 
       def generate_means_assessment_details(xml)
-        xml.__send__('ns0:AssessmentScreens') do
-          xml.__send__('ns0:ScreenName', 'SUMMARY')
+        xml.__send__('common:AssessmentScreens') do
+          xml.__send__('common:ScreenName', 'SUMMARY')
           sequence_no = 1
           means_entity_configs.each do |config|
             if predicate_true?(config)
@@ -306,15 +296,15 @@ module CCMS
       end
 
       def generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'OPPONENT_OTHER_PARTIES')
         other_parties.each { |other_party| generate_opponent_other_parties_means_instance(xml, other_party, config) }
       end
 
       def generate_opponent_other_parties_means_instance(xml, other_party, config)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
-          xml.__send__('ns0:Attributes') do
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party: other_party)
           end
         end
@@ -324,11 +314,11 @@ module CCMS
       # TODO: Deprecate this method once we've switched multiple proceedings on
       #
       def generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, _config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
-          xml.__send__('ns0:Attributes') do
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', 'OPPONENT_7713451')
+          xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self, xml, :opponent_other_parties_means_single_proceeding)
           end
         end
@@ -347,7 +337,7 @@ module CCMS
 
       def generate_entity_from_config(xml, sequence_no, config)
         config[:resolved_instance_label] = resolve_instance_label(config)
-        xml.__send__('ns0:Entity') do
+        xml.__send__('common:Entity') do
           __send__(config[:method], xml, sequence_no, config)
         end
       end
@@ -362,54 +352,52 @@ module CCMS
       end
 
       def generate_valuable_possessions_entity(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', config[:entity_name])
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', config[:instance_label])
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section]) }
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', config[:entity_name])
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', config[:instance_label])
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section]) }
         end
       end
 
       def generate_bank_accounts_entity(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', config[:entity_name])
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', config[:entity_name])
         bank_accounts.each_with_index { |acct, index| generate_bank_account_instance(xml, acct, config, index) }
       end
 
       def generate_bank_account_instance(xml, bank_account, config, index)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', bank_account.ccms_instance_name(index))
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], bank_acct: bank_account) }
-          # xml.__send__('ns0:Attributes') { generate_attributes_for(xml, config[:yaml_section], bank_acct: bank_account) }
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', bank_account.ccms_instance_name(index))
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], bank_acct: bank_account) }
         end
       end
 
       def generate_vehicles_entity(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', config[:entity_name])
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', config[:entity_name])
         generate_vehicle_instance(xml, vehicle, config) if vehicle
       end
 
       def generate_vehicle_instance(xml, vehicle, config)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', config[:instance_label])
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle: vehicle) }
-          # xml.__send__('ns0:Attributes') { generate_attributes_for(xml, config[:yaml_section], vehicle: vehicle) }
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', config[:instance_label])
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle: vehicle) }
         end
       end
 
       def generate_means_proceeding_entity(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', config[:entity_name])
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', config[:entity_name])
         application_proceeding_types.reverse_each do |application_proceeding_type|
           generate_means_proceeding_instance(xml, application_proceeding_type, config)
         end
       end
 
       def generate_means_proceeding_instance(xml, application_proceeding_type, config)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
-          xml.__send__('ns0:Attributes') do
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
+          xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self,
                                            xml,
                                            config[:yaml_section],
@@ -420,58 +408,58 @@ module CCMS
       end
 
       def generate_entity(xml, sequence_no, config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', config[:entity_name])
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', config[:resolved_instance_label])
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section]) }
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', config[:entity_name])
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', config[:resolved_instance_label])
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section]) }
         end
       end
 
       def generate_merits_assessment(xml)
-        xml.__send__('ns2:AssesmentResults') do
-          xml.__send__('ns0:Results') { generate_merits_assessment_results(xml) }
-          xml.__send__('ns0:AssesmentDetails') { generate_merits_assessment_details(xml) }
+        xml.__send__('casebio:AssesmentResults') do
+          xml.__send__('common:Results') { generate_merits_assessment_results(xml) }
+          xml.__send__('common:AssesmentDetails') { generate_merits_assessment_details(xml) }
         end
       end
 
       def generate_merits_assessment_results(xml)
-        xml.__send__('ns0:Goal') do
-          xml.__send__('ns0:Attribute', 'ASSESS_COMPLETE')
-          xml.__send__('ns0:AttributeValue', true)
+        xml.__send__('common:Goal') do
+          xml.__send__('common:Attribute', 'ASSESS_COMPLETE')
+          xml.__send__('common:AttributeValue', true)
         end
       end
 
       def generate_merits_assessment_details(xml)
-        xml.__send__('ns0:AssessmentScreens') do
-          xml.__send__('ns0:ScreenName', 'SUMMARY')
-          xml.__send__('ns0:Entity') { generate_global_merits_entity(xml, 1) }
-          xml.__send__('ns0:Entity') { generate_merits_proceeding_entity(xml, 2) }
-          xml.__send__('ns0:Entity') { generate_opponent_other_parties_merits_entity(xml, 4) }
+        xml.__send__('common:AssessmentScreens') do
+          xml.__send__('common:ScreenName', 'SUMMARY')
+          xml.__send__('common:Entity') { generate_global_merits_entity(xml, 1) }
+          xml.__send__('common:Entity') { generate_merits_proceeding_entity(xml, 2) }
+          xml.__send__('common:Entity') { generate_opponent_other_parties_merits_entity(xml, 4) }
         end
       end
 
       def generate_global_merits_entity(xml, sequence_no)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'global')
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', @submission.case_ccms_reference)
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :global_merits) }
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'global')
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', @submission.case_ccms_reference)
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, :global_merits) }
         end
       end
 
       # :nocov:
       def generate_merits_proceeding_entity(xml, sequence_no)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'PROCEEDING')
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'PROCEEDING')
         application_proceeding_types.reverse_each { |apt| generate_merits_proceeding_instance(xml, apt) }
       end
       # :nocov:
 
       def generate_merits_proceeding_instance(xml, application_proceeding_type)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
-          xml.__send__('ns0:Attributes') do
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
+          xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self,
                                            xml,
                                            :proceeding_merits,
@@ -484,15 +472,15 @@ module CCMS
       end
 
       def generate_client_residing_person_entity(xml, sequence_no, _config)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'CLIENT_RESIDING_PERSON')
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'CLIENT_RESIDING_PERSON')
         @legal_aid_application.dependants.each_with_index { |dependant, index| generate_client_residing_person_instance(xml, dependant, index) }
       end
 
       def generate_client_residing_person_instance(xml, dependant, index)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', "the client's residing person#{index + 1}")
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person, dependant: dependant) }
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', "the client's residing person#{index + 1}")
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person, dependant: dependant) }
         end
       end
 
@@ -505,24 +493,24 @@ module CCMS
       end
 
       def generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', 'OPPONENT_7713451')
-          xml.__send__('ns0:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits_single_proceeding) }
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', 'OPPONENT_7713451')
+          xml.__send__('common:Attributes') { EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits_single_proceeding) }
         end
       end
 
       def generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
-        xml.__send__('ns0:SequenceNumber', sequence_no)
-        xml.__send__('ns0:EntityName', 'OPPONENT_OTHER_PARTIES')
+        xml.__send__('common:SequenceNumber', sequence_no)
+        xml.__send__('common:EntityName', 'OPPONENT_OTHER_PARTIES')
         other_parties.each { |other_party| generate_opponent_other_parties_instance_merits(xml, other_party) }
       end
 
       def generate_opponent_other_parties_instance_merits(xml, other_party)
-        xml.__send__('ns0:Instances') do
-          xml.__send__('ns0:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
-          xml.__send__('ns0:Attributes') do
+        xml.__send__('common:Instances') do
+          xml.__send__('common:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
+          xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits, other_party: other_party)
           end
         end

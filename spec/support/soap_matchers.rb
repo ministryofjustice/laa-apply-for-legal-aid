@@ -9,7 +9,7 @@ module SoapMatcher
   RSpec::Matchers.define :be_soap_envelope_with do |options|
     results = []
     match do |actual|
-      results << 'String does not start with a soap Envelope declaration' unless /<soap:Envelope xmlns:(soap=|xsd=)/.match?(actual)
+      results << 'String does not start with a soap Envelope declaration' unless /<soap:Envelope xmlns:(soap=|xsd=|bill=)/.match?(actual)
 
       if options[:command]
         results << "String does not contain the #{options[:command]} command immediately after the soap:Body element" unless /<soap:Body>\n\s*<#{options[:command]}>/.match?(actual)

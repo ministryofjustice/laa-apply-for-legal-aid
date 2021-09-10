@@ -49,7 +49,7 @@ module CCMS
               it 'stores the reqeust body in the  submission history record' do
                 subject.call
                 expect(history.request).to be_soap_envelope_with(
-                  command: 'ns2:ClientAddUpdtStatusRQ',
+                  command: 'clientbim:ClientAddUpdtStatusRQ',
                   transaction_id: '20190301030405123456'
                 )
               end
@@ -84,7 +84,7 @@ module CCMS
               it 'stores the reqeust body in the  submission history record' do
                 subject.call
                 expect(history.request).to be_soap_envelope_with(
-                  command: 'ns2:ClientAddUpdtStatusRQ',
+                  command: 'clientbim:ClientAddUpdtStatusRQ',
                   transaction_id: '20190301030405123456'
                 )
               end
@@ -117,7 +117,7 @@ module CCMS
             it 'stores the reqeust body in the  submission history record' do
               subject.call
               expect(history.request).to be_soap_envelope_with(
-                command: 'ns2:ClientAddUpdtStatusRQ',
+                command: 'clientbim:ClientAddUpdtStatusRQ',
                 transaction_id: '20190301030405123456'
               )
             end
@@ -149,7 +149,7 @@ module CCMS
             expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/oops/)
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientAddUpdtStatusRQ',
+              command: 'clientbim:ClientAddUpdtStatusRQ',
               transaction_id: '20190301030405123456'
             )
           end

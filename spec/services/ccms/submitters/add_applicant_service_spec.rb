@@ -50,14 +50,14 @@ module CCMS
           it 'stores the reqeust body in the  submission history record' do
             subject.call
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientAddRQ',
+              command: 'clientbim:ClientAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
-                "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>",
-                "<ns4:AddressLine1>#{address.first_lines}</ns4:AddressLine1>",
-                "<ns4:City>#{address.city}</ns4:City>",
-                "<ns4:PostalCode>#{address.postcode}</ns4:PostalCode>"
+                "<common:Surname>#{applicant.last_name}</common:Surname>",
+                "<common:FirstName>#{applicant.first_name}</common:FirstName>",
+                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:City>#{address.city}</common:City>",
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
               ]
             )
           end
@@ -93,14 +93,14 @@ module CCMS
             expect(history.details).to match(/oops/)
             expect(history.response).to eq nil
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientAddRQ',
+              command: 'clientbim:ClientAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
-                "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>",
-                "<ns4:AddressLine1>#{address.first_lines}</ns4:AddressLine1>",
-                "<ns4:City>#{address.city}</ns4:City>",
-                "<ns4:PostalCode>#{address.postcode}</ns4:PostalCode>"
+                "<common:Surname>#{applicant.last_name}</common:Surname>",
+                "<common:FirstName>#{applicant.first_name}</common:FirstName>",
+                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:City>#{address.city}</common:City>",
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
               ]
             )
           end
@@ -127,14 +127,14 @@ module CCMS
 
           it 'stores the reqeust body in the  submission history record' do
             expect(history.request).to be_soap_envelope_with(
-              command: 'ns2:ClientAddRQ',
+              command: 'clientbim:ClientAddRQ',
               transaction_id: '20190301030405123456',
               matching: [
-                "<ns4:Surname>#{applicant.last_name}</ns4:Surname>",
-                "<ns4:FirstName>#{applicant.first_name}</ns4:FirstName>",
-                "<ns4:AddressLine1>#{address.first_lines}</ns4:AddressLine1>",
-                "<ns4:City>#{address.city}</ns4:City>",
-                "<ns4:PostalCode>#{address.postcode}</ns4:PostalCode>"
+                "<common:Surname>#{applicant.last_name}</common:Surname>",
+                "<common:FirstName>#{applicant.first_name}</common:FirstName>",
+                "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
+                "<common:City>#{address.city}</common:City>",
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
               ]
             )
           end

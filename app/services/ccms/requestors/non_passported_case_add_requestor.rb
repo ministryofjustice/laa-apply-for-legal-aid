@@ -3,17 +3,6 @@ module CCMS
     class NonPassportedCaseAddRequestor < CaseAddRequestor
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-      uses_namespaces(
-        'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
-        'xmlns:ns6' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Header',
-        'xmlns:ns5' => 'http://legalservices.gov.uk/CCMS/Finance/Payables/1.0/BillingBIO',
-        'xmlns:ns0' => 'http://legalservices.gov.uk/Enterprise/Common/1.0/Common',
-        'xmlns:ns2' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIO',
-        'xmlns:ns4' => 'http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM',
-        'xmlns:ns1' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
-        'xmlns:ns3' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
-      )
-
       private
 
       def means_entity_config_file
