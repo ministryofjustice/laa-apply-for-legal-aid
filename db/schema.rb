@@ -751,7 +751,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_110123) do
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "allow_multiple_proceedings", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
-    t.boolean "alert_via_sentry", default: false, null: false
   end
 
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
