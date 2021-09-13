@@ -12,10 +12,14 @@ FactoryBot.define do
     ccms_matter { 'Domestic Abuse' }
     ccms_matter_code { 'Matter code' }
     default_service_level_id { create(:service_level).id }
-    default_cost_limitation_delegated_functions { 1 }
-    default_cost_limitation_substantive { 2 }
     involvement_type_applicant { false }
     additional_search_terms { nil }
+
+    after(:create) do |pt|
+      create :default_cost_limitation, :substantive, proceeding_type: pt
+      create :default_cost_limitation, :original_df, proceeding_type: pt
+      create :default_cost_limitation, :revised_df, proceeding_type: pt
+    end
 
     trait :with_real_data do
       code { 'PR0208' }
@@ -28,8 +32,6 @@ FactoryBot.define do
       ccms_matter { 'Domestic Abuse' }
       ccms_matter_code { 'MINJN' }
       default_service_level_id { create(:service_level, :with_real_data).id }
-      default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
 
@@ -44,8 +46,6 @@ FactoryBot.define do
       ccms_matter { 'Domestic Abuse' }
       ccms_matter_code { 'MINJN' }
       default_service_level_id { create(:service_level, :with_real_data).id }
-      default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
 
@@ -60,8 +60,6 @@ FactoryBot.define do
       ccms_matter { 'Section 8 orders' }
       ccms_matter_code { 'KSEC8' }
       default_service_level_id { create(:service_level, :with_real_data).id }
-      default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
 
@@ -76,8 +74,6 @@ FactoryBot.define do
       ccms_matter { 'Section 8 orders' }
       ccms_matter_code { 'KSEC8' }
       default_service_level_id { create(:service_level, service_level_number: 1).id }
-      default_cost_limitation_delegated_functions { 1350 }
-      default_cost_limitation_substantive { 25_000 }
       involvement_type_applicant { true }
     end
 

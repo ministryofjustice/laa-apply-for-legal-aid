@@ -3,6 +3,7 @@ class ProceedingType < ApplicationRecord
   has_many :legal_aid_applications, through: :application_proceeding_types
   has_many :proceeding_type_scope_limitations
   has_many :eligible_scope_limitations, through: :proceeding_type_scope_limitations, source: :scope_limitation
+  has_many :default_cost_limitations, dependent: :destroy
   belongs_to :default_level_of_service, class_name: 'ServiceLevel', foreign_key: 'default_service_level_id', inverse_of: :proceeding_types
 
   validates :code, presence: true
@@ -36,5 +37,13 @@ class ProceedingType < ApplicationRecord
 
   def section8?
     ccms_matter == 'Section 8 orders'
+  end
+
+  def default_cost_limitation_delegated_functions
+    default_cost_limitations.delegated_functions.for_date(Date.current).value
+  end
+
+  def default_cost_limitation_substantive
+    default_cost_limitations.substantive.for_date(Date.current).value
   end
 end

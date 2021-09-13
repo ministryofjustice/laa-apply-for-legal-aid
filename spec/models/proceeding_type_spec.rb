@@ -78,4 +78,40 @@ RSpec.describe ProceedingType, type: :model do
       end
     end
   end
+
+  context 'cost limitations' do
+    let(:pt) { create :proceeding_type }
+    let(:old_start_date) { Date.parse('1970-01-01') }
+    let(:new_start_date) { Date.parse('2021-09-13') }
+
+    before do
+      create :default_cost_limitation, :substantive, proceeding_type: pt
+      create :default_cost_limitation, :original_df, proceeding_type: pt
+      create :default_cost_limitation, :revised_df, proceeding_type: pt
+    end
+
+    around do |example|
+      travel_to run_date
+      example.run
+      travel_back
+    end
+
+    describe 'before the change' do
+      let(:run_date) { Date.parse('2021-09-11') }
+
+      it 'returns the old values' do
+        expect(pt.default_cost_limitation_substantive).to eq 25_000.0
+        expect(pt.default_cost_limitation_delegated_functions).to eq 1350.0
+      end
+    end
+
+    describe 'after the change' do
+      let(:run_date) { Date.parse('2021-09-13') }
+
+      it 'returns the old values' do
+        expect(pt.default_cost_limitation_substantive).to eq 25_000.0
+        expect(pt.default_cost_limitation_delegated_functions).to eq 2250.0
+      end
+    end
+  end
 end

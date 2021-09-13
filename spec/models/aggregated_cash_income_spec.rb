@@ -73,7 +73,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it 'sets the months based on the delegated functions date' do
-          expect(application.used_delegated_functions?).to be true
+          expect(application.reload.used_delegated_functions?).to be true
           expect(application.transaction_period_finish_on).to eq Date.parse('2021-03-12')
           expect(aci.month1).to eq Date.parse('2020-12-01')
           expect(aci.month2).to eq Date.parse('2020-11-01')
