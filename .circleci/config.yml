@@ -284,7 +284,7 @@ jobs:
         name: Helm deployment to UAT
         command: |
           ./bin/uat_deploy
-  deploy_master_uat:
+  deploy_main_uat:
     <<: *deploy_uat
 
   deploy_staging:
@@ -359,11 +359,11 @@ jobs:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
 
-  hold_master_uat_notification:
+  hold_main_uat_notification:
     executor: notification-executor
     steps:
       - hold-notification:
-          message: "$CIRCLE_USERNAME - ONLY APPROVE IF THIS CODE WAS NEEDED FOR PEN TESTING\n There is a pending MASTER UAT approval for $CIRCLE_BRANCH"
+          message: "$CIRCLE_USERNAME - ONLY APPROVE IF THIS CODE WAS NEEDED FOR PEN TESTING\n There is a pending MAIN UAT approval for $CIRCLE_BRANCH"
 
 
 workflows:
@@ -396,17 +396,17 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-#      - hold_master_uat_notification:
+#      - hold_main_uat_notification:
 #          requires:
 #            - lint_checks
-#      - hold_master_uat_approval:
+#      - hold_main_uat_approval:
 #          type: approval
 #          requires:
-#            - hold_master_uat_notification
-      - deploy_master_uat:
+#            - hold_main_uat_notification
+      - deploy_main_uat:
           requires:
             - build_and_push
-#            - hold_master_uat_approval
+#            - hold_main_uat_approval
       - delete_uat_branch:
           requires:
 #            - lint_checks
