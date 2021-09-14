@@ -882,6 +882,7 @@ FactoryBot.define do
         application.proceeding_types << pt1
         apt = application.application_proceeding_types.first
         apt.update!(lead_proceeding: true)
+        application.application_proceeding_types.first.reload
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
         AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
       end
