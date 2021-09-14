@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe ExceptionAlertMailer, type: :mailer do
   let(:environment) { 'production' }
   let(:details) { 'alert details' }
-  let(:to) { SlackAlerter::SLACK_CHANNEL_EMAIL }
-  let(:mail) { described_class.notify(environment: environment, details: details, to: to) }
+  let(:dummy_email_address) { 'john@example.com' }
+  let(:mail) { described_class.notify(environment: environment, details: details, to: dummy_email_address) }
 
   describe 'notify' do
     it 'is a govuk_notify delivery' do
@@ -12,7 +12,7 @@ RSpec.describe ExceptionAlertMailer, type: :mailer do
     end
 
     it 'sends to correct address' do
-      expect(mail.to).to eq([SlackAlerter::SLACK_CHANNEL_EMAIL])
+      expect(mail.to).to eq [dummy_email_address]
     end
 
     it 'has the correct personalisation' do

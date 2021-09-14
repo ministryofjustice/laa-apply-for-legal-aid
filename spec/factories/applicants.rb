@@ -10,6 +10,10 @@ FactoryBot.define do
       addresses { build_list :address, 1 }
     end
 
+    trait :with_address_for_xml_fixture do
+      addresses { build_list :address, 1, :with_address_for_xml_fixture }
+    end
+
     trait :with_address_lookup do
       addresses { build_list :address, 1, :is_lookup_used }
     end

@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe SlackAlerter do
+  around do |example|
+    ENV['SLACK_ALERT_EMAIL'] = dummy_email_address
+    example.run
+    ENV['SLACK_ALERT_EMAIL'] = nil
+  end
+
   before { allow(HostEnv).to receive(:environment).and_return(:uat) }
 
   let(:dummy_mail) { double ExceptionAlertMailer }
+  let(:dummy_email_address) { 'john@example.com' }
 
   describe '.capture_message' do
     let(:message) { 'dummy message' }
@@ -11,7 +18,7 @@ RSpec.describe SlackAlerter do
       {
         environment: 'uat',
         details: 'dummy message',
-        to: SlackAlerter::SLACK_CHANNEL_EMAIL
+        to: dummy_email_address
       }
     end
 
@@ -43,7 +50,7 @@ RSpec.describe SlackAlerter do
       {
         environment: 'uat',
         details: formatted_message,
-        to: SlackAlerter::SLACK_CHANNEL_EMAIL
+        to: dummy_email_address
       }
     end
 

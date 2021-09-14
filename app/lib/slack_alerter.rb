@@ -1,6 +1,4 @@
 class SlackAlerter
-  SLACK_CHANNEL_EMAIL = 'apply-alerts-prod-aaaabbocbcpykkqticw7skurte@mojdt.slack.com'.freeze
-
   class << self
     def capture_message(message)
       send_alert(message)
@@ -21,13 +19,19 @@ class SlackAlerter
     end
 
     def send_alert(message)
+      raise 'Unable to send Slack Alert - SLACK_ALERT_EMAIL env var not configured' if slack_alert_email.nil?
+
       ExceptionAlertMailer.notify(
         environment: HostEnv.environment.to_s,
         details: message,
-        to: SLACK_CHANNEL_EMAIL
+        to: slack_alert_email
       ).deliver_now!
+    end
+
+    def slack_alert_email
+      ENV['SLACK_ALERT_EMAIL']
     end
   end
 
-  private_class_method :format_exception, :send_alert
+  private_class_method :format_exception, :send_alert, :slack_alert_email
 end
