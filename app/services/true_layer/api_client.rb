@@ -57,7 +57,7 @@ module TrueLayer
 
     def connection
       @connection ||= Faraday.new(url: TRUE_LAYER_URL) do |conn|
-        conn.authorization :Bearer, token
+        conn.request :authorization, 'Bearer', token
         conn.response :logger if Rails.configuration.x.logs_faraday_response
         conn.adapter Faraday.default_adapter
       end
