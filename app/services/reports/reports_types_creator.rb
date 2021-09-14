@@ -32,7 +32,7 @@ module Reports
     def generate_csv
       CSV.generate do |csv|
         if @results.present?
-          csv << %w[application_ref case_ccms_reference] + default_opts[:payload_attrs]
+          csv << (%w[application_ref case_ccms_reference] + default_opts[:payload_attrs])
           @results.each do |row|
             csv << row.map { |v| "\"#{v}\"" }
           end

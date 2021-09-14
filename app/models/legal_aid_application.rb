@@ -35,13 +35,13 @@ class LegalAidApplication < ApplicationRecord
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
   has_one :dwp_override, dependent: :destroy
-  has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
+  has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
   has_many :legal_framework_submissions, -> { order(created_at: :asc) }, class_name: 'LegalFramework::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_one :legal_framework_merits_task_list, class_name: 'LegalFramework::MeritsTaskList', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
-  has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application
+  has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
   has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application
+  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
   has_many :scheduled_mailings, dependent: :destroy
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
   has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
