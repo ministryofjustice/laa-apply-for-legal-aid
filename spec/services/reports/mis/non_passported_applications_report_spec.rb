@@ -11,10 +11,6 @@ module Reports
         travel_to(2.minutes.ago) { create_submitted_application }
       end
 
-      after do
-        travel_back
-      end
-
       subject { described_class.new.run }
 
       describe 'run' do
