@@ -17,6 +17,7 @@ Seeder.monitor ActorPermission
 Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
+Seeder.monitor DefaultCostLimitation
 
 Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
   load seed

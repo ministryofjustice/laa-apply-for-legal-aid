@@ -10,6 +10,7 @@ RSpec.describe ProceedingTypeFullTextSearch do
 
     after(:all) do
       ServiceLevel.delete_all
+      DefaultCostLimitation.delete_all
       ProceedingType.delete_all
       Setting.setting.update!(allow_multiple_proceedings: false)
     end

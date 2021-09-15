@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_072930) do
+ActiveRecord::Schema.define(version: 2021_09_13_150028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -358,6 +358,16 @@ ActiveRecord::Schema.define(version: 2021_08_05_072930) do
     t.string "browser_details"
   end
 
+  create_table "default_cost_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_type_id", null: false
+    t.date "start_date", null: false
+    t.string "cost_type", null: false
+    t.decimal "value", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["proceeding_type_id"], name: "index_default_cost_limitations_on_proceeding_type_id"
+  end
+
   create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "number"
@@ -640,8 +650,6 @@ ActiveRecord::Schema.define(version: 2021_08_05_072930) do
     t.string "ccms_category_law_code"
     t.string "ccms_matter"
     t.string "ccms_matter_code"
-    t.decimal "default_cost_limitation_delegated_functions", precision: 8, scale: 2
-    t.decimal "default_cost_limitation_substantive", precision: 8, scale: 2
     t.boolean "involvement_type_applicant"
     t.string "additional_search_terms"
     t.uuid "default_service_level_id"
@@ -811,6 +819,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_072930) do
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "chances_of_successes", "application_proceeding_types"
+  add_foreign_key "default_cost_limitations", "proceeding_types"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "gateway_evidences", "legal_aid_applications"

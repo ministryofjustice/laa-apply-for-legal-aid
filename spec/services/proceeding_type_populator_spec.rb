@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProceedingTypePopulator do
+  before { ProceedingType.delete_all }
+
   describe '#call' do
     let(:seed_file) { Rails.root.join('db/seeds/legal_framework/proceeding_types.csv').freeze }
     let(:proceeding_type) { ProceedingType.order('created_at ASC').first }
