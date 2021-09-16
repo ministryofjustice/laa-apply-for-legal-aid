@@ -14,6 +14,7 @@ module CCMSSubmissionStateMachine
       state :case_created
       state :completed
       state :failed
+      state :abandoned
 
       event :obtain_case_ref do
         transitions from: :initialised, to: :case_ref_obtained
@@ -54,6 +55,16 @@ module CCMSSubmissionStateMachine
         transitions from: :case_submitted, to: :failed
         transitions from: :case_created, to: :failed
         transitions from: :document_ids_obtained, to: :failed
+      end
+
+      event :abandon do
+        transitions from: :initialised, to: :abandoned
+        transitions from: :case_ref_obtained, to: :abandoned
+        transitions from: :applicant_submitted, to: :abandoned
+        transitions from: :applicant_ref_obtained, to: :abandoned
+        transitions from: :case_submitted, to: :abandoned
+        transitions from: :case_created, to: :abandoned
+        transitions from: :document_ids_obtained, to: :abandoned
       end
     end
   end

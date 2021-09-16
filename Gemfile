@@ -142,6 +142,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false

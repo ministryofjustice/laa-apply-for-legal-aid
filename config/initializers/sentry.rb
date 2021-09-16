@@ -7,6 +7,9 @@ if %w[production].include?(Rails.env) && ENV['SENTRY_DSN'].present?
     config.dsn = ENV['SENTRY_DSN']
 
     filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters.map(&:to_s))
+    config.excluded_exceptions += %w[
+      CCMS::SentryIgnoreThisSidekiqFailError
+    ]
 
     config.before_send = ->(event, _hint) {
       event.extra[:sidekiq][:job]['args'].first['arguments'] = [] if event.extra.dig(:sidekiq, :job, 'args')

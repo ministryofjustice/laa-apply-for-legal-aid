@@ -1,16 +1,16 @@
 module CCMS
+  CCMS_SUBMISSION_ERRORS = [
+    CCMSError,
+    CCMSUnsuccessfulResponseError,
+    Savon::HTTPError,
+    Savon::SOAPFault,
+    Savon::Error,
+    StandardError
+  ].freeze
+
   module Submitters
     class BaseSubmissionService
       attr_accessor :submission
-
-      CCMS_SUBMISSION_ERRORS = [
-        CCMSError,
-        CCMSUnsuccessfulResponseError,
-        Savon::HTTPError,
-        Savon::SOAPFault,
-        Savon::Error,
-        StandardError
-      ].freeze
 
       def initialize(submission)
         @submission = submission
