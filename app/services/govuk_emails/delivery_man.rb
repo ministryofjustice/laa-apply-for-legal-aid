@@ -19,6 +19,8 @@ module GovukEmails
       return unless scheduled_mail.waiting? # in case another job has picked it up
 
       eligible_for_delivery? ? deliver_now : cancel!
+    rescue Notifications::Client::BadRequestError
+      @scheduled_mail.cancel!
     rescue StandardError => e
       Sentry.capture_exception(e)
     end

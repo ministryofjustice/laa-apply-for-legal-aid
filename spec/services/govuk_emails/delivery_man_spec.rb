@@ -21,7 +21,7 @@ RSpec.describe GovukEmails::DeliveryMan do
       end
     end
 
-    context 'mail is still wating' do
+    context 'mail is still waiting' do
       context 'mail is eligible for delivery' do
         let(:message) { double 'MailMessage', govuk_notify_response: govuk_response }
         let(:govuk_response) { double 'GovukResponse', id: govuk_message_id }
@@ -47,6 +47,29 @@ RSpec.describe GovukEmails::DeliveryMan do
           expect(scheduled_mailing.govuk_message_id).to eq govuk_message_id
           expect(scheduled_mailing.sent_at.to_i).to eq time_now.to_i
           travel_back
+        end
+      end
+
+      context 'mail cannot be sent with current API key' do
+        # this simulates trying to send a message in staging that generates the following error
+        # BadRequestError: Can’t send to this recipient using a team-only API key
+        let(:scheduled_mailing) { create :scheduled_mailing, :waiting, legal_aid_application: application }
+        let(:application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, :with_delegated_functions, substantive_application_deadline_on: Date.tomorrow }
+        let(:response_error_stub) { OpenStruct.new(code: 400, body: 'BadRequestError: Can’t send to this recipient using a team-only API key') }
+
+        before do
+          allow(mailer_klass.constantize).to receive(mailer_method).and_raise(Notifications::Client::BadRequestError.new(response_error_stub))
+          allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(true)
+        end
+
+        it 'cancels the scheduled mail' do
+          subject
+          expect(scheduled_mailing.reload.status).to eq 'cancelled'
+        end
+
+        it 'is does not get sent to Sentry' do
+          expect(Sentry).to_not receive(:capture_exception)
+          subject
         end
       end
 
