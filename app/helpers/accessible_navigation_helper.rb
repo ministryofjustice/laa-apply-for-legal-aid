@@ -14,7 +14,6 @@ module AccessibleNavigationHelper
     # match element label text only (excluding content tags) or use full label name
     name = name.scan(/^.+?(?=\s*<)/).first || name
     name = "#{name} #{suffix}" if suffix
-    options[:title] = name
     options[:aria] = { label: name }
     options
   end
