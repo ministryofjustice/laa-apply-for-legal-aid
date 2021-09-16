@@ -39,7 +39,7 @@ module CCMS
     private
 
     def should_warn?
-      @retry_count == MAX_RETRIES / 2 + 1
+      @retry_count == (MAX_RETRIES / 2) + 1
     end
 
     def state_unchanged?(start_state)
