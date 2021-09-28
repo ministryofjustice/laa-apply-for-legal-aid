@@ -73,126 +73,126 @@ Feature: Provider accessibility
     Then I should be on a page showing 'Your applications'
     And the page is accessible
 
-  @javascript @vcr
-  Scenario: I complete the non-passported means assessment and it is accessible
-    Given I start the merits application with bank transactions with no transaction type category
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
-    And the page is accessible
-    Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    And the page is accessible
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of income does your client receive?"
-    And the page is accessible
-    Then I select 'Benefits'
-    And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    And the page is accessible
-    Then I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
-    And the page is accessible
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    Then the page is accessible
-    Then I click 'Save and continue'
-    Then I should be on the 'dependants' page showing "Does your client have any dependants?"
-    And the page is accessible
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Enter dependant details'
-    And the page is accessible
-    Given I add the details for a child dependant
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client have any other dependants?"
-    And the page is accessible
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    And the page is accessible
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
-    And the page is accessible
-    Then I select 'Housing payments'
-    Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    Then I click the first link 'View statements and add transactions'
-    And the page is accessible
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    And the page is accessible
-    Then I choose "Yes, with a mortgage or loan"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "How much is your client's home worth?"
-    And the page is accessible
-    Then I fill "Property value" with "200000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
-    And the page is accessible
-    Then I fill "Outstanding mortgage amount" with "100000"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own their home with anyone else?"
-    And the page is accessible
-    Then I choose "Yes, a partner or ex-partner"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What % share of their home does your client legally own?"
-    And the page is accessible
-    Then I fill "Percentage home" with "50"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own a vehicle?"
-    And the page is accessible
-    Then I choose "Yes"
-    And I click "Save and continue"
-    Then I should be on a page showing "What is the estimated value of the vehicle?"
-    And the page is accessible
-    Then I fill "Estimated value" with "4000"
-    And I click "Save and continue"
-    Then I should be on a page showing "Are there any payments left on the vehicle?"
-    And the page is accessible
-    Then I choose "Yes"
-    Then I fill "Payment remaining" with "2000"
-    And I click "Save and continue"
-    Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
-    And the page is accessible
-    Then I choose 'Yes'
-    And I click "Save and continue"
-    Then I should be on a page showing "Is the vehicle in regular use?"
-    And the page is accessible
-    Then I choose "Yes"
-    And I click "Save and continue"
-    Then I should be on a page showing "Your client’s bank accounts"
-    And the page is accessible
-    Then I choose 'Yes'
-    Then I should be on a page showing 'Enter the total amount in all accounts.'
-    And the page is accessible
-    Then I fill 'Offline savings accounts' with '3000'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
-    And the page is accessible
-    Then I select "None of these"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
-    And the page is accessible
-    Then I select "Any valuable items worth £500 or more"
-    And I fill 'Valuable items value' with '600'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
-    And the page is accessible
-    Then I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I select 'England Infected Blood Support Scheme'
-    And the page is accessible
-    Then I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
-    And the page is accessible
-    Then I click 'Save and continue'
-    Then I should be on the 'capital_income_assessment_result' page showing 'How we calculated your client\'s eligibility'
-    And the page is accessible
-    Then I click 'Save and continue'
+#  @javascript @vcr
+#  Scenario: I complete the non-passported means assessment and it is accessible
+#    Given I start the merits application with bank transactions with no transaction type category
+#    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+#    And the page is accessible
+#    Then I click 'Continue'
+#    Then I should be on a page showing "Your client's income"
+#    And the page is accessible
+#    Then I choose "No"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Which types of income does your client receive?"
+#    And the page is accessible
+#    Then I select 'Benefits'
+#    And I click 'Save and continue'
+#    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+#    And the page is accessible
+#    Then I click the first link 'View statements and add transactions'
+#    Then I should be on a page showing 'Select benefits payments'
+#    And the page is accessible
+#    Then I select the first checkbox
+#    And I click 'Save and continue'
+#    Then the page is accessible
+#    Then I click 'Save and continue'
+#    Then I should be on the 'dependants' page showing "Does your client have any dependants?"
+#    And the page is accessible
+#    Then I choose "Yes"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing 'Enter dependant details'
+#    And the page is accessible
+#    Given I add the details for a child dependant
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Does your client have any other dependants?"
+#    And the page is accessible
+#    Then I choose "No"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Your client's outgoings"
+#    And the page is accessible
+#    Then I choose "No"
+#    Then I click 'Save and continue'
+#    Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
+#    And the page is accessible
+#    Then I select 'Housing payments'
+#    Then I click 'Save and continue'
+#    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+#    Then I click the first link 'View statements and add transactions'
+#    And the page is accessible
+#    Then I select the first checkbox
+#    And I click 'Save and continue'
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Does your client own the home that they live in?"
+#    And the page is accessible
+#    Then I choose "Yes, with a mortgage or loan"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "How much is your client's home worth?"
+#    And the page is accessible
+#    Then I fill "Property value" with "200000"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "What is the outstanding mortgage on your client's home?"
+#    And the page is accessible
+#    Then I fill "Outstanding mortgage amount" with "100000"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Does your client own their home with anyone else?"
+#    And the page is accessible
+#    Then I choose "Yes, a partner or ex-partner"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "What % share of their home does your client legally own?"
+#    And the page is accessible
+#    Then I fill "Percentage home" with "50"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Does your client own a vehicle?"
+#    And the page is accessible
+#    Then I choose "Yes"
+#    And I click "Save and continue"
+#    Then I should be on a page showing "What is the estimated value of the vehicle?"
+#    And the page is accessible
+#    Then I fill "Estimated value" with "4000"
+#    And I click "Save and continue"
+#    Then I should be on a page showing "Are there any payments left on the vehicle?"
+#    And the page is accessible
+#    Then I choose "Yes"
+#    Then I fill "Payment remaining" with "2000"
+#    And I click "Save and continue"
+#    Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
+#    And the page is accessible
+#    Then I choose 'Yes'
+#    And I click "Save and continue"
+#    Then I should be on a page showing "Is the vehicle in regular use?"
+#    And the page is accessible
+#    Then I choose "Yes"
+#    And I click "Save and continue"
+#    Then I should be on a page showing "Your client’s bank accounts"
+#    And the page is accessible
+#    Then I choose 'Yes'
+#    Then I should be on a page showing 'Enter the total amount in all accounts.'
+#    And the page is accessible
+#    Then I fill 'Offline savings accounts' with '3000'
+#    And I click 'Save and continue'
+#    Then I should be on a page showing "Which types of savings or investments does your client have?"
+#    And the page is accessible
+#    Then I select "None of these"
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing "Which types of assets does your client have?"
+#    And the page is accessible
+#    Then I select "Any valuable items worth £500 or more"
+#    And I fill 'Valuable items value' with '600'
+#    Then I click 'Save and continue'
+#    Then I should be on a page showing 'Is your client prohibited from selling or borrowing against their assets?'
+#    And the page is accessible
+#    Then I choose 'No'
+#    Then I click 'Save and continue'
+#    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+#    Then I select 'England Infected Blood Support Scheme'
+#    And the page is accessible
+#    Then I click 'Save and continue'
+#    Then I should be on the 'means_summary' page showing 'Check your answers'
+#    And the page is accessible
+#    Then I click 'Save and continue'
+#    Then I should be on the 'capital_income_assessment_result' page showing 'How we calculated your client\'s eligibility'
+#    And the page is accessible
+#    Then I click 'Save and continue'
 
   @javascript @vcr
   Scenario: I complete the client details section of a passported application and it is accessible
