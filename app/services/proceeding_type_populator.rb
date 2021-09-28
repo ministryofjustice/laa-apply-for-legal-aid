@@ -24,16 +24,15 @@ class ProceedingTypePopulator
     populate_default_cost_limitations
   end
 
-  def create_this_row?(row)
+  def create_this_row?(_row)
     true
   end
 
-    # flag_to_check = FEATURE_FLAGS[row[:ccms_matter_code].to_sym]
-    # return true unless flag_to_check
-    # return true unless Setting.respond_to?(flag_to_check)
-    #
-    # Setting.send(flag_to_check)
-
+  # flag_to_check = FEATURE_FLAGS[row[:ccms_matter_code].to_sym]
+  # return true unless flag_to_check
+  # return true unless Setting.respond_to?(flag_to_check)
+  #
+  # Setting.send(flag_to_check)
 
   def populate_default_cost_limitations
     pts = ProceedingType.all
