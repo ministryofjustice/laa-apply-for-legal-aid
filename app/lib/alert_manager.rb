@@ -17,7 +17,7 @@ class AlertManager
     end
 
     def sendable?(message_or_exception)
-      return false unless HostEnv.environment.in?(%i[production uat])
+      return false unless HostEnv.environment.in?(%i[production uat staging])
 
       return false if geckoboard_too_many_messages_error?(message_or_exception)
 

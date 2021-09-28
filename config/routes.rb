@@ -240,10 +240,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # dummy route to test errors in order to see how they are reported in Sentry/Slack
-  # namespace :test do
-  #   resource :generate_error, only: :show
-  # end
   get 'test/generated_error', to: 'test/generate_error#show'
 
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
