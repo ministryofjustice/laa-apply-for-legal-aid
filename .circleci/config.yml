@@ -63,9 +63,9 @@ references:
       command: |
         sudo apt-get update
         sudo apt-get install -y postgresql-client
+        sudo apt-get install -y git-crypt
 #        sudo apt-get install -y clamav-daemon
 #        sudo apt-get install -y wkhtmltopdf
-        sudo apt-get install -y git-crypt
 
   install_js_packages: &install_js_packages
     run:
