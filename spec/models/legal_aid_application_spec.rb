@@ -473,8 +473,8 @@ RSpec.describe LegalAidApplication, type: :model do
       application_proceeding_names = result.map(&:name)
       proceeding_names = legal_aid_application.application_proceeding_types.map { |type| ProceedingType.find(type.proceeding_type_id).name }
 
-      expect(application_proceeding_types).to eq(legal_aid_application.application_proceeding_types)
-      expect(application_proceeding_names).to eq(proceeding_names)
+      expect(application_proceeding_types).to match_array(legal_aid_application.application_proceeding_types)
+      expect(application_proceeding_names).to match_array(proceeding_names)
     end
   end
 
