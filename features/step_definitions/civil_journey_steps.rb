@@ -546,6 +546,8 @@ Given('I complete the application and view the check your answers page') do
 end
 
 Given('The means questions have been answered by the applicant') do
+  proceeding_one = ProceedingType.find_by(code: 'PR0208')
+  proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -554,8 +556,11 @@ Given('The means questions have been answered by the applicant') do
     :provider_assessing_means,
     :with_policy_disregards,
     :with_uncategorised_debit_transactions,
-    :with_uncategorised_credit_transactions
+    :with_uncategorised_credit_transactions,
+    explicit_proceeding_types: [proceeding_one, proceeding_two]
   )
+  add_scope_limitations(@legal_aid_application, proceeding_one)
+  add_scope_limitations(@legal_aid_application, proceeding_two)
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,

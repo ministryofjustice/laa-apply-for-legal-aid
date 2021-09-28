@@ -41,7 +41,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "may need to pay towards legal aid" page
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
-    Then I click 'Continue'
+    When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
     Then I fill "application_merits_task_incident_told_on_3i" with "5"
     Then I fill "application_merits_task_incident_told_on_2i" with "5"
@@ -61,9 +61,19 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike non passported SOC"
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    When I click the first link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    When I click the last link 'Chances of success'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I click 'Continue'
+    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
@@ -113,7 +123,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "may need to pay towards legal aid" page
     Then I click 'Save and continue'
     Then I should be on a page showing 'Provide details of the case'
-    Then I click 'Continue'
+    When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
     Then I fill "application_merits_task_incident_told_on_3i" with "5"
     Then I fill "application_merits_task_incident_told_on_2i" with "5"
@@ -133,9 +143,19 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Mike non passported SOC"
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    When I click the first link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Provide details of the case'
+    When I click the last link 'Chances of success'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    When I choose 'Yes'
+    And I click 'Save and continue'
+    Then I click 'Continue'
+    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
