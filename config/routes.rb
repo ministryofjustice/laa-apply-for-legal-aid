@@ -240,7 +240,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'test/generated_error', to: 'test/generate_error#show'
+  get 'test/trapped_error', to: 'test/generate_error#trapped_error'
+  get 'test/untrapped_error', to: 'test/generate_error#untrapped_error'
 
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
 
