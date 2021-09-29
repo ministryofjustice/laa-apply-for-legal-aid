@@ -103,6 +103,7 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given('I have a passported application with no assets on the {string} page') do |provider_step|
+  proceeding_one = ProceedingType.find_by(code: 'PR0208')
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -113,8 +114,10 @@ Given('I have a passported application with no assets on the {string} page') do 
     :with_passported_state_machine,
     :provider_entering_means,
     provider: create(:provider),
-    provider_step: provider_step.downcase
+    provider_step: provider_step.downcase,
+    explicit_proceeding_types: [proceeding_one]
   )
+  add_scope_limitations(@legal_aid_application, proceeding_one)
   login_as @legal_aid_application.provider
 end
 
