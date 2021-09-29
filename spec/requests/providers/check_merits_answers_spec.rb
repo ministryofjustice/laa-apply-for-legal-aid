@@ -3,8 +3,6 @@ require 'sidekiq/testing'
 
 RSpec.describe 'check merits answers requests', type: :request do
   include ActionView::Helpers::NumberHelper
-  before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(multi_proc) }
-  let(:multi_proc) { false }
 
   describe 'GET /providers/applications/:id/check_merits_answers' do
     let(:application) do
@@ -97,11 +95,12 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(unescaped_response_body).to include(application.provider.firm.name)
       end
 
-      context 'when the multi-proceeding flag is true' do
-        let(:multi_proc) { true }
+      it 'displays linked children' do
+        expect(response.body).to include(I18n.t('shared.check_answers.merits.items.linked_children'))
+      end
 
-        it { expect(response.body).to include(I18n.t('shared.check_answers.merits.items.linked_children')) }
-        it { expect(response.body).to include(I18n.t('shared.check_answers.merits.items.attempts_to_settle')) }
+      it 'displays attempts to settle' do
+        expect(response.body).to include(I18n.t('shared.check_answers.merits.items.attempts_to_settle'))
       end
 
       it 'should change the state to "checking_merits_answers"' do
@@ -227,26 +226,9 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(application.reload.provider_entering_merits?).to be true
       end
 
-      describe 'redirection' do
-        context 'when multiple proceeding flag is false' do
-          before do
-            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
-            subject
-          end
-          it 'redirects to chances_of_success page' do
-            expect(response).to redirect_to providers_merits_task_list_chances_of_success_index_path(application.lead_application_proceeding_type)
-          end
-        end
-
-        context 'when multiple proceeding flag is true' do
-          before do
-            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-            subject
-          end
-          it 'redirects to gateway_evidence page' do
-            expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)
-          end
-        end
+      it 'redirects to gateway_evidence page' do
+        subject
+        expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)
       end
     end
   end

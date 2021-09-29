@@ -121,10 +121,6 @@ Given('I have a passported application with no assets on the {string} page') do 
   login_as @legal_aid_application.provider
 end
 
-Given('the setting to allow multiple proceedings is enabled') do
-  Setting.setting.update!(allow_multiple_proceedings: true)
-end
-
 Given('the setting to manually review all cases is enabled') do
   Setting.setting.update!(manually_review_all_cases: true)
 end
@@ -430,7 +426,7 @@ Given('I complete the passported journey as far as check your answers') do
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
-Given('I complete the multiple proceedings journey as far as check passported answers with multiple proceedings') do
+Given('I complete the journey as far as check passported answers with multiple proceedings') do
   proceeding_one = ProceedingType.find_by(code: 'PR0208')
   proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(

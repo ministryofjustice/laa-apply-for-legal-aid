@@ -1,8 +1,6 @@
 module Providers
   class InScopeOfLasposController < ProviderBaseController
     def show
-      return go_forward unless Setting.allow_multiple_proceedings?
-
       @form = LegalAidApplications::InScopeOfLaspoForm.new(model: legal_aid_application)
       render :show
     end

@@ -15,10 +15,6 @@ class Setting < ApplicationRecord
     setting.allow_welsh_translation
   end
 
-  def self.allow_multiple_proceedings?
-    setting.allow_multiple_proceedings
-  end
-
   def self.enable_ccms_submission?
     setting.enable_ccms_submission
   end

@@ -64,8 +64,6 @@ module CFE # rubocop:disable Metrics/ModuleLength
       end
 
       context 'obtain version 4 cfe response' do
-        before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
         it 'includes version=4 in the Accept header' do
           expect(service.__send__(:headers))
             .to eq(

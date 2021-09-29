@@ -27,51 +27,20 @@ module LegalFramework
         end
 
         context 'proceeding types already exist' do
-          context 'Setting.allow_multiple_proceedings? returns true' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, explicit_proceeding_types: [proceeding_type1] }
-            let(:proceeding_type1) { ProceedingType.find_by(code: 'PR0206') }
-            let(:proceeding_type2) { ProceedingType.find_by(code: 'PR0211') }
+          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, explicit_proceeding_types: [proceeding_type1] }
+          let(:proceeding_type1) { ProceedingType.find_by(code: 'PR0206') }
+          let(:proceeding_type2) { ProceedingType.find_by(code: 'PR0211') }
 
-            let(:params) do
-              {
-                proceeding_type_id: proceeding_type2.id,
-                scope_type: scope_type
-              }
-            end
-
-            before do
-              allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-            end
-
-            it 'adds another proceeding type' do
-              subject.add(**params)
-              expect(legal_aid_application.proceeding_types).to match_array([proceeding_type, proceeding_type2])
-            end
+          let(:params) do
+            {
+              proceeding_type_id: proceeding_type2.id,
+              scope_type: scope_type
+            }
           end
 
-          context 'Setting.allow_multiple_proceedings? returns false' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, explicit_proceeding_types: [proceeding_type1] }
-            let(:proceeding_type1) { create :proceeding_type }
-            let(:proceeding_type2) { create :proceeding_type }
-            let!(:default_substantive_scope_limitation) do
-              create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type2, meaning: 'Default substantive SL'
-            end
-            let(:params) do
-              {
-                proceeding_type_id: proceeding_type2.id,
-                scope_type: scope_type
-              }
-            end
-
-            before do
-              allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
-            end
-
-            it 'replaces the application proceeding type' do
-              expect(legal_aid_application.proceeding_types).to eq([proceeding_type1])
-              subject.add(**params)
-              expect(legal_aid_application.proceeding_types).to eq([proceeding_type2])
-            end
+          it 'adds another proceeding type' do
+            subject.add(**params)
+            expect(legal_aid_application.proceeding_types).to match_array([proceeding_type, proceeding_type2])
           end
         end
 

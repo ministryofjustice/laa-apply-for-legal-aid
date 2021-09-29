@@ -16,11 +16,7 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      if Setting.allow_multiple_proceedings?
-        redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
-      else
-        redirect_to providers_merits_task_list_chances_of_success_index_path(application_proceeding_type)
-      end
+      redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
     end
 
     private

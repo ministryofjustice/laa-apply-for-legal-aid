@@ -119,11 +119,7 @@ module CCMS
       end
 
       def generate_other_parties(xml)
-        if Setting.allow_multiple_proceedings?
-          generate_opponent(xml, @legal_aid_application.opponent)
-        else
-          generate_other_party(xml)
-        end
+        generate_opponent(xml, @legal_aid_application.opponent)
 
         @legal_aid_application.involved_children.order(:date_of_birth).each do |child|
           generate_involved_child(xml, child)
@@ -243,7 +239,7 @@ module CCMS
         xml.__send__('casebio:ProceedingDescription', proceeding_type.description)
         xml.__send__('casebio:MatterType', proceeding_type.ccms_matter_code)
         xml.__send__('casebio:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
-        xml.__send__('casebio:Stage', 8) # TODO: CCMS placeholder - this may need changing when multiple proceedings are introduced
+        xml.__send__('casebio:Stage', 8) # TODO: CCMS placeholder - This will need reviewing when we add more proceedings and/or matter types
         xml.__send__('casebio:ClientInvolvementType', 'A')
         xml.__send__('casebio:ScopeLimitations') { generate_scope_limitations(xml, application_proceeding_type) }
       end
@@ -288,11 +284,7 @@ module CCMS
       end
 
       def generate_opponent_other_parties_means_entity(xml, sequence_no, config)
-        if Setting.allow_multiple_proceedings?
-          generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
-        else
-          generate_opponent_other_parties_means_entity_for_single_proceeding(xml, sequence_no, config)
-        end
+        generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
       end
 
       def generate_opponent_other_parties_means_entity_for_multiple_proceedings(xml, sequence_no, config)
@@ -485,11 +477,7 @@ module CCMS
       end
 
       def generate_opponent_other_parties_merits_entity(xml, sequence_no)
-        if Setting.allow_multiple_proceedings?
-          generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
-        else
-          generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)
-        end
+        generate_opponent_other_parties_merits_entity_for_multiple_proceedings(xml, sequence_no)
       end
 
       def generate_opponent_other_parties_merits_entity_for_single_proceeding(xml, sequence_no)

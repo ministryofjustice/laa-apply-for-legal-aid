@@ -91,13 +91,9 @@ module Providers
           expect(incident.occurred_on).to eq(occurred_on)
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'sets the task to complete' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :complete/)
-          end
+        it 'sets the task to complete' do
+          subject
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
         it 'redirects to the next page' do
@@ -113,19 +109,16 @@ module Providers
 
         context 'when incomplete' do
           let(:told_on_3i) { '' }
+          let(:regex) { /name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/ }
 
           it 'renders show' do
             subject
             expect(response).to have_http_status(:ok)
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-            let(:regex) { /name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/ }
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(regex)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(regex)
           end
         end
 
@@ -162,13 +155,9 @@ module Providers
           end
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'does not set the task to complete' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
-          end
+        it 'does not set the task to complete' do
+          subject
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
         end
       end
     end

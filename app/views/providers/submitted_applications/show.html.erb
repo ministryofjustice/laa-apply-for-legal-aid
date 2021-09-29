@@ -43,15 +43,11 @@
           ) %>
     </section>
 
-    <% if Setting.allow_multiple_proceedings? %>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-          <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
-        </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
       </div>
-    <% else %>
-      <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
-    <% end %>
+    </div>
 
     <%= render(
           'shared/check_answers/delegated_functions',
@@ -73,19 +69,17 @@
           legal_aid_application: @legal_aid_application
         ) %>
 
-    <% if Setting.allow_multiple_proceedings? %>
-      <% if @legal_aid_application.used_delegated_functions? %>
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
-            <h2 class="govuk-heading-m"><%= t '.emergency_cost_limit' %></h2>
-          </div>
+    <% if @legal_aid_application.used_delegated_functions? %>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m"><%= t '.emergency_cost_limit' %></h2>
         </div>
-        <%= render(
-              'shared/check_answers/emergency_costs',
-              legal_aid_application: @legal_aid_application,
-              read_only: true
-            ) %>
-      <% end %>
+      </div>
+      <%= render(
+            'shared/check_answers/emergency_costs',
+            legal_aid_application: @legal_aid_application,
+            read_only: true
+          ) %>
     <% end %>
 
     <section class="income_payments_and_assets page_break_before">
@@ -134,7 +128,7 @@
 
     <section class="merits page_break_before">
       <%= render(
-        "shared/check_answers/#{Setting.allow_multiple_proceedings? ? :merits: :merits_orig}",
+        "shared/check_answers/merits",
         incident: @legal_aid_application.latest_incident,
         statement_of_case: @legal_aid_application.statement_of_case,
         gateway_evidence: @legal_aid_application&.gateway_evidence,

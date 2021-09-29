@@ -1,8 +1,6 @@
 module Providers
   class HasOtherProceedingsController < ProviderBaseController
     def show
-      return go_forward unless Setting.allow_multiple_proceedings?
-
       @form = LegalAidApplications::HasOtherProceedingsForm.new(model: legal_aid_application)
       proceeding_types
     end

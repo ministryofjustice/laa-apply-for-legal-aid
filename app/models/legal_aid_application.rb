@@ -346,11 +346,6 @@ class LegalAidApplication < ApplicationRecord
       checking_non_passported_means?
   end
 
-  def reset_proceeding_types!
-    proceeding_types.clear
-    application_proceeding_types.map(&:clear_scopes!)
-  end
-
   def receives_student_finance?
     student_finance?
   end

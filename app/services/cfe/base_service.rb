@@ -30,7 +30,7 @@ module CFE
     end
 
     def version
-      Setting.allow_multiple_proceedings? ? '4' : '3'
+      '4'
     end
 
     def conn

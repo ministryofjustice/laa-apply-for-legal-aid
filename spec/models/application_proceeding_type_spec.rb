@@ -49,10 +49,6 @@ RSpec.describe ApplicationProceedingType do
     let(:df_date) { Date.current - 10.days }
     let(:df_reported_date) { Date.current }
 
-    before do
-      Setting.setting.update(allow_multiple_proceedings: true)
-    end
-
     context 'delegated functions used' do
       it 'used delegated functions returns true' do
         application_proceeding_type = application.application_proceeding_types.first

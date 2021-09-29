@@ -37,16 +37,6 @@
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
-        :allow_multiple_proceedings,
-        yes_no_options,
-        :value,
-        :label,
-        inline: true,
-        hint: { text: t('.hints.allow_multiple_proceedings')},
-        legend: { text: t('.labels.allow_multiple_proceedings') }
-    ) %>
-
-    <%= form.govuk_collection_radio_buttons(
         :enable_ccms_submission,
         yes_no_options,
         :value,

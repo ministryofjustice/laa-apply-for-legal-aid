@@ -188,7 +188,6 @@ Rails.application.routes.draw do
       resource :has_other_involved_children, only: %i[show update], controller: 'application_merits_task/has_other_involved_children'
       resources :remove_involved_child, only: %i[show update], controller: 'application_merits_task/remove_involved_child'
 
-      resource :start_chances_of_success, only: %i[show update]
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
       resource :no_income_summary, only: %i[show update]

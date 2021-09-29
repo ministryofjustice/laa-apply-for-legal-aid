@@ -6,7 +6,7 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
-            back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) },
+            back_link: {},
             form: form) do %>
 
     <%= form.govuk_text_field(

@@ -11,7 +11,7 @@
         read_only: true
       ) %>
 
-  <% if Setting.allow_multiple_proceedings? && @legal_aid_application.cfe_result&.version_4? %>
+  <% if @legal_aid_application.cfe_result&.version_4? %>
     <h2 class="govuk-heading-m"><%= t('.proceeding_eligibility') %></h2>
     <%= render 'shared/means_report/proceeding_eligibility', results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
   <% end %>

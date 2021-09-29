@@ -72,7 +72,6 @@ module CFE
       context 'calling CFE version 4' do
         describe 'successful post' do
           before do
-            allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
             stub_request(:post, service.cfe_url)
               .with(body: version_4_payload_hash.to_json, headers: headers(version: 4))
               .to_return(body: version_4_dummy_response)

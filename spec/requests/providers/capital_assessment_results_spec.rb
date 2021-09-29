@@ -183,12 +183,10 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     context 'when the provider is authenticated' do
       before do
-        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(multi_proc_flag)
         allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(true)
         login_provider
         subject
       end
-      let(:multi_proc_flag) { true }
 
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
