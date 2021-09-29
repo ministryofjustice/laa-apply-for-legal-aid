@@ -49,7 +49,7 @@ module CCMS
                 response_type: 'number',
                 user_defined: true
               }
-              expect(Sentry).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
+              expect(AlertManager).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
               expect {
                 generator.__send__(:extract_response_value, config)
               }.to raise_error TypeError

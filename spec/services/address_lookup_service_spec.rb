@@ -53,7 +53,7 @@ RSpec.describe AddressLookupService do
       end
 
       it 'outcome is unsuccessful' do
-        expect(Sentry).to receive(:capture_exception).with(message_contains('Connection refused'))
+        expect(AlertManager).to receive(:capture_exception).with(message_contains('Connection refused'))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:service_unavailable])
@@ -78,7 +78,7 @@ RSpec.describe AddressLookupService do
       end
 
       it 'outcome is unsuccessful' do
-        expect(Sentry).to receive(:capture_exception).with(message_contains('No postcode parameter provided'))
+        expect(AlertManager).to receive(:capture_exception).with(message_contains('No postcode parameter provided'))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:unsuccessful])
@@ -91,7 +91,7 @@ RSpec.describe AddressLookupService do
     let(:state) { :service_unavailable }
     let(:error) { StandardError.new 'Service unavailable' }
     it 'captures error' do
-      expect(Sentry).to receive(:capture_exception).with(message_contains('Service unavailable'))
+      expect(AlertManager).to receive(:capture_exception).with(message_contains('Service unavailable'))
       service.__send__(:record_error, state, error)
     end
 
@@ -106,7 +106,7 @@ RSpec.describe AddressLookupService do
       end
 
       it 'does not capture error' do
-        expect(Sentry).not_to receive(:capture_exception).with(message_contains('Resource x does not exist'))
+        expect(AlertManager).not_to receive(:capture_exception).with(message_contains('Resource x does not exist'))
         service.call
       end
     end

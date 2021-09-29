@@ -95,8 +95,8 @@ RSpec.describe GovukEmails::DeliveryMan do
           allow(mailer_klass.constantize).to receive(:eligible_for_delivery?).and_return(true)
         end
 
-        it 'is captured by Sentry' do
-          expect(Sentry).to receive(:capture_exception).with(message_contains('Mailing job failed'))
+        it 'is captured by AlertManager' do
+          expect(AlertManager).to receive(:capture_exception).with(message_contains('Mailing job failed'))
           subject
         end
       end

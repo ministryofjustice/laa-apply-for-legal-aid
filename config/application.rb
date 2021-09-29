@@ -108,6 +108,8 @@ module LaaApplyForLegalAid
 
     config.active_job.queue_adapter = :sidekiq
 
+    config.x.slack_alert_email = ENV['SLACK_ALERT_EMAIL']
+
     # list geckoboard updater jobs which are suspended by host environment
     config.x.suspended_geckoboard_updater_jobs = {
       development: %w[

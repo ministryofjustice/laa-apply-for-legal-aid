@@ -299,4 +299,9 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: legalFrameworkApiHost
+  - name: SLACK_ALERT_EMAIL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: slackAlertEmail
 {{- end }}

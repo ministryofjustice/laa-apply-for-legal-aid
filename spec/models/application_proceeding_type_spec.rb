@@ -243,15 +243,15 @@ RSpec.describe ApplicationProceedingType do
         end
 
         it 'is not valid' do
-          expect(Sentry).to receive(:capture_message).with(/^Duplicate lead proceedings detected for application/)
+          expect(AlertManager).to receive(:capture_message).with(/^Duplicate lead proceedings detected for application/)
           new_apt.save!
         end
       end
 
       context 'no other lead proceeding exists' do
         let(:lead_proceeding) { false }
-        it 'does not capture a Sentry message' do
-          expect(Sentry).not_to receive(:capture_message)
+        it 'does not capture a AlertManager message' do
+          expect(AlertManager).not_to receive(:capture_message)
           new_apt.save!
         end
       end

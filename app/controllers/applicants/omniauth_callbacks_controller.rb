@@ -9,7 +9,7 @@ module Applicants
     def true_layer
       unless applicant
         set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
-        Sentry.capture_exception(MissingApplicantError.new('Unable to find applicant on return from TrueLayer'))
+        AlertManager.capture_exception(MissingApplicantError.new('Unable to find applicant on return from TrueLayer'))
         redirect_to citizens_consent_path
         return
       end

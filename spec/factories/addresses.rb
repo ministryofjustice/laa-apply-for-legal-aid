@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :is_lookup_used do
       lookup_used { true }
     end
+
+    trait :with_address_for_xml_fixture do
+      postcode { 'GH08NY' }
+    end
   end
 end

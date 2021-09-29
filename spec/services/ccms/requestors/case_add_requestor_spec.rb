@@ -23,7 +23,7 @@ module CCMS
         end
         let(:applicant) do
           create :applicant,
-                 :with_address,
+                 :with_address_for_xml_fixture,
                  first_name: 'Shery',
                  last_name: 'Ledner',
                  national_insurance_number: 'EG587804M',
@@ -63,6 +63,7 @@ module CCMS
         let!(:involved_child2) { create :involved_child, full_name: 'Second TestChild', date_of_birth: Date.parse('2020-02-15'), legal_aid_application: legal_aid_application }
 
         before do
+          legal_aid_application.reload
           allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return('FakeUser')
           allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return('FakePassword')
           allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return('password_type')

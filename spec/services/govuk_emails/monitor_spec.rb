@@ -4,7 +4,10 @@ RSpec.describe GovukEmails::Monitor do
   let(:scheduled_mailing) { create :scheduled_mailing, :processing }
   let(:response) { double GovukEmails::Email, status: status }
 
-  before { allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response) }
+  before do
+    allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response)
+    Setting.setting.update(alert_via_sentry: true)
+  end
 
   describe '.call' do
     subject { described_class.call(scheduled_mailing.id) }
@@ -33,7 +36,7 @@ RSpec.describe GovukEmails::Monitor do
         before { allow(HostEnv).to receive(:production?).and_return(true) }
 
         it 'captures raven message' do
-          expect(Sentry).to receive(:capture_message).with(raven_message)
+          expect(AlertManager).to receive(:capture_message).with(raven_message)
           subject
         end
 
@@ -54,7 +57,7 @@ RSpec.describe GovukEmails::Monitor do
         before { allow(HostEnv).to receive(:production?).and_return(false) }
 
         it 'does not captures raven message' do
-          expect(Sentry).not_to receive(:capture_message)
+          expect(AlertManager).not_to receive(:capture_message)
           subject
         end
 

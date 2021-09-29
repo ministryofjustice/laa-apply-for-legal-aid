@@ -240,6 +240,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'test/trapped_error', to: 'test/generate_error#trapped_error'
+  get 'test/untrapped_error', to: 'test/generate_error#untrapped_error'
+
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
 
   # Catch all route that traps paths not defined above. Must be last route.

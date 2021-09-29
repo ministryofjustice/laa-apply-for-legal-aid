@@ -88,7 +88,7 @@ module CFE
             end
 
             it 'captures error' do
-              expect(Sentry).to receive(:capture_exception).with(message_contains(message))
+              expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
               submission_manager.call
             end
 
