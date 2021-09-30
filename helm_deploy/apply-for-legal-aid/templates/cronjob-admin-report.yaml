@@ -10,11 +10,14 @@ metadata:
 spec:
   schedule: '0 20 * * *'
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 0
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            reportuploader: cronjob
         spec:
           containers:
           - name: daily-admin-report
