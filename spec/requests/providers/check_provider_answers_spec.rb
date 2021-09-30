@@ -18,8 +18,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
   end
   let(:application_id) { application.id }
   let(:parsed_html) { Nokogiri::HTML(response.body) }
-  let(:used_delegated_functions_answer) { parsed_html.at_css('#app-check-your-answers__used_delegated_functions .govuk-summary-list__value') }
-  let(:used_delegated_functions_on_answer) { parsed_html.at_css('#app-check-your-answers__used_delegated_functions_on .govuk-summary-list__value') }
+  let!(:proceeding_name) { application.lead_proceeding_type.name }
+  let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
 
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
     subject { get "/providers/applications/#{application_id}/check_provider_answers" }
@@ -65,11 +65,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         end
 
         it 'displays correct used_delegated_functions answer' do
-          expect(used_delegated_functions_answer.content.strip).to eq('No')
-        end
-
-        it 'does not display used_delegated_functions_on answer' do
-          expect(used_delegated_functions_on_answer).to be_nil
+          expect(used_delegated_functions_answer.content.strip).to eq('Not used')
         end
       end
 
@@ -77,12 +73,8 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         let(:used_delegated_functions) { true }
         let(:used_delegated_functions_on) { Faker::Date.backward }
 
-        it 'displays correct used_delegated_functions answer' do
-          expect(used_delegated_functions_answer.content.strip).to eq('Yes')
-        end
-
         it 'displays correct used_delegated_functions_on answer' do
-          expect(used_delegated_functions_on_answer.content.strip).to eq(application.used_delegated_functions_on.to_s.strip)
+          expect(used_delegated_functions_answer.content.strip).to eq(application.used_delegated_functions_on.to_s.strip)
         end
       end
 
