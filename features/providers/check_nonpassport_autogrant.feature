@@ -82,7 +82,6 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
 
 @javascript @vcr
   Scenario: I am able to create a non passported application without Income or Cap Contribs and with no restrictions
-    Given the setting to manually review all cases is enabled
     And The means questions have been answered by the applicant
     And Bank transactions exist
     Then I should be on a page showing 'Continue your application'
