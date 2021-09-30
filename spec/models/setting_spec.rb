@@ -12,7 +12,7 @@ RSpec.describe Setting do
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.allow_multiple_proceedings?).to be false
         expect(rec.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
-        expect(rec.alert_via_sentry?).to be false
+        expect(rec.alert_via_sentry?).to be true
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe Setting do
       expect(Setting.allow_multiple_proceedings?).to be false
       expect(Setting.enable_ccms_submission?).to be true
       expect(Setting.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
-      expect(Setting.alert_via_sentry?).to be false
+      expect(Setting.alert_via_sentry?).to be true
     end
   end
 end
