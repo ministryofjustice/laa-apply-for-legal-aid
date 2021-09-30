@@ -2,7 +2,7 @@ class ReportsUploaderJob < ApplicationJob
   # :nocov:
   def perform # rubocop:disable Metrics/AbcSize Layout/LineLength
     Rails.logger.info "ReportsUploaderJob - starting at #{Time.zone.now}"
-    if admin_report.submitted_applications && admin_report.submitted_applications.blob
+    unless admin_report.submitted_applications&.blob.nil?
       Rails.logger.info 'ReportsUploaderJon - preexisting record as follows:'
       Rails.logger.info "ReportsUploaderJon - blob key: #{admin_report.submitted_applications.blob.key}, blob_id: #{admin_report.submitted_applications.blob.id}"
     end
