@@ -170,10 +170,10 @@ module Reports
       let(:used_delegated_functions_on) { Date.new(2020, 1, 1) }
       let(:used_delegated_functions_reported_on) { Date.new(2020, 2, 21) }
 
-      let(:v3_cfe_result) { create :cfe_v3_result }
+      let(:v4_cfe_result) { create :cfe_v4_result }
 
       before do
-        allow(legal_aid_application).to receive(:cfe_result).and_return(v3_cfe_result)
+        allow(legal_aid_application).to receive(:cfe_result).and_return(v4_cfe_result)
       end
 
       describe '.call' do
