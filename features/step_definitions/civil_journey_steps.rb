@@ -528,7 +528,7 @@ Given('I complete the application and view the check your answers page') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = ProceedingType.all.sample
+  proceeding_type = ProceedingType.where(ccms_matter: 'Domestic Abuse').sample
 
   @legal_aid_application = create(
     :legal_aid_application,
