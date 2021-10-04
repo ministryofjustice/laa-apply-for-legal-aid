@@ -2,7 +2,6 @@ Feature: Emergency cost override
   @javascript @vcr
   Scenario: Provider is prompted to override emergency cost limitation
     Given I start the journey as far as the applicant page
-    And the setting to allow multiple proceedings is enabled
     When I enter name 'Test', 'User'
     And I enter the date of birth '03-04-1999'
     And I enter national insurance number 'CB987654A'

@@ -27,13 +27,18 @@ Feature: Provider accessibility
     Then I should be on the 'proceedings_types' page showing 'Search for legal proceedings'
     And the page is accessible
     Then I search for proceeding 'Non-molestation order'
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
-    And the page is accessible
-    Then I choose 'No'
+    Then I choose a 'Non-molestation order' radio button
     Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    And the page is accessible
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    And the page is accessible
+    When I select 'I have not used delegated functions'
+    And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I should be on a page showing "Substantive certificate"
     And the page is accessible
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'

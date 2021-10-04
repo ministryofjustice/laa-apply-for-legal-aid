@@ -76,11 +76,10 @@ Feature: Pathways from check your answers
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "You'll need to tell us if your client"
-    
+
   @javascript
   Scenario: I go back and change the proceedings on an application with multiple proceedings
-    Given the feature flag for allow_multiple_proceedings is enabled
-    And the method populate of ProceedingType is rerun
+    Given the method populate of ProceedingType is rerun
     And the method populate of ProceedingTypeScopeLimitation is rerun
     Given I complete the journey as far as check client details with multiple proceedings selected
     When I click Check Your Answers Change link for 'Proceedings'
@@ -133,8 +132,7 @@ Feature: Pathways from check your answers
 
   @javascript @vcr
   Scenario: I go back and change the delegated functions on an application with multiple proceedings
-    Given the feature flag for allow_multiple_proceedings is enabled
-    And the method populate of ProceedingType is rerun
+    Given the method populate of ProceedingType is rerun
     And the method populate of ProceedingTypeScopeLimitation is rerun
     Given I complete the journey as far as check client details with multiple proceedings selected
     When I click Check Your Answers Change link for 'Delegated functions'
@@ -154,7 +152,6 @@ Feature: Pathways from check your answers
   @javascript @vcr
   Scenario: I click the back button on the DWP override page
     Given I complete the non-passported journey as far as check your answers
-    And the setting to allow DWP overrides is enabled
     When I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     When I click link 'Back'
