@@ -1,5 +1,24 @@
 import { hide, show } from './helpers';
 
+const ERROR_MESSAGE_TEXT = 'Upload the chosen file'
+
+function createErrorMessage () {
+  const errorMessage = document.createElement('span')
+  errorMessage.classList.add('govuk-error-message')
+  errorMessage.innerHTML = ERROR_MESSAGE_TEXT
+  const accessibilityMessage = document.createElement('span')
+  accessibilityMessage.classList.add('govuk-visually-hidden')
+  accessibilityMessage.innerHTML = 'Error: '
+  errorMessage.appendChild(accessibilityMessage)
+  return errorMessage
+}
+
+function addErrorMsgToField (input) {
+  const errorMessage = createErrorMessage()
+  input.parentNode.insertBefore(errorMessage, input)
+  input.parentNode.classList.add('govuk-form-group--error')
+}
+
 document.addEventListener('DOMContentLoaded', event => {
   const fileUploadFields = document.querySelectorAll('[id$="-original-file-field"]')
   if (fileUploadFields.length) {
@@ -8,6 +27,7 @@ document.addEventListener('DOMContentLoaded', event => {
       fileUploadFields.forEach((field) => {
         if (field.value) {
           e.preventDefault()
+          addErrorMsgToField(field)
           show(errorSummary)
           errorSummary.focus()
         } else {
@@ -17,3 +37,4 @@ document.addEventListener('DOMContentLoaded', event => {
     })
   }
 })
+
