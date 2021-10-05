@@ -1,6 +1,6 @@
 import { hide, show } from './helpers';
 
-const ERROR_MESSAGE_TEXT = 'Upload the chosen file'
+const ERROR_MESSAGE_TEXT = 'Upload the selected file'
 
 function createErrorMessage () {
   const errorMessage = document.createElement('span')
