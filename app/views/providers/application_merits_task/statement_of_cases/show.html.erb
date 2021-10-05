@@ -22,6 +22,9 @@
 
     <%= form.govuk_error_summary %>
 
+    <%= render partial: 'shared/forms/error_summary_hidden', locals: { error_message: t('.file_not_uploaded_error'),
+                                                                field_id: 'application-merits-task-statement-of-case-original-file-field' } %>
+
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
       <p class="govuk-body"><%= t('generic.tell_us') %></p>

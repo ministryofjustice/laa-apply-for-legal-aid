@@ -338,6 +338,7 @@ en:
           size_hint: The maximum file size is 7MB. You can attach more than one file.
           warning: Warning
           warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
+          file_not_uploaded_error: Upload the chosen file
         uploaded_files:
           delete: Delete
           filename: Filename
