@@ -1,0 +1,91 @@
+<div id="files-errors-container" role="alert" tabindex="-1"></div>
+<% new_head_title = if @successfully_deleted
+                      @successfully_deleted
+                    elsif @error_message || @successful_upload
+                      "#{@successful_upload} #{@error_message}"
+                    else
+                      t('.h1-heading')
+                    end %>
+<%= page_template(
+      page_title: t('.h1-heading'),
+      head_title: new_head_title,
+      template: :basic,
+      back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
+    ) do %>
+
+  <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_error_summary %>
+
+    <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+
+      <p class="govuk-body"><%= t('generic.tell_us') %></p>
+      <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
+        <% (1..5).each do |bullet_number| %>
+          <li><%= t(".bullet-#{bullet_number}") %></li>
+        <% end %>
+      </ul>
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
+          <%= t('.warning_text') %>
+        </strong>
+      </div>
+
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+                                hint: {text: t('.size_hint')} %>
+      <%= form.submit(
+              t('generic.upload'),
+              id: 'upload',
+              name: 'upload_button',
+              class: 'govuk-button  govuk-button--secondary form-button'
+          ) %>
+
+      <% #  Customised accessibility alerts within this span below %>
+      <% if @successfully_deleted %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+      <% end %>
+      <% if @error_message || @successful_upload %>
+        <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div id="uploaded-files-table-container">
+    <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+  </div>
+
+    <%= form_with(
+          model: @form,
+          url: providers_legal_aid_application_statement_of_case_path,
+          method: :patch,
+          local: true
+      ) do |form| %>
+
+    <%= form.govuk_radio_divider %>
+
+    <%= form.govuk_text_area :statement, label: {text: t('generic.enter_text')}, rows: 15 %>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>
+
+<script nonce="<%= content_security_policy_script_nonce %>">
+  window.LAA_VARS = {
+    images: {
+      loading_small: <%= asset_pack_path('media/images/loading-small.gif').to_json.html_safe %>
+    },
+    locales: {
+      generic: {
+        uploading: <%= t('generic.uploading').to_json.html_safe %>
+      }
+    }
+  };
+</script>
