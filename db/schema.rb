@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_110123) do
+ActiveRecord::Schema.define(version: 2021_10_04_135707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -660,6 +660,28 @@ ActiveRecord::Schema.define(version: 2021_09_13_110123) do
     t.index ["textsearchable"], name: "textsearch_idx", using: :gin
   end
 
+  create_table "proceedings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.integer "proceeding_case_id"
+    t.boolean "lead_proceeding", default: false, null: false
+    t.string "ccms_code", null: false
+    t.string "meaning", null: false
+    t.string "description", null: false
+    t.decimal "substantive_cost_limitation", null: false
+    t.decimal "delegated_functions_cost_limitation", null: false
+    t.string "substantive_scope_limitation_code", null: false
+    t.string "substantive_scope_limitation_meaning", null: false
+    t.string "substantive_scope_limitation_description", null: false
+    t.string "delegated_functions_scope_limitation_code", null: false
+    t.string "delegated_functions_scope_limitation_meaning", null: false
+    t.string "delegated_functions_scope_limitation_description", null: false
+    t.date "used_delegated_functions_on", null: false
+    t.date "used_delegated_functions_reported_on", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
+  end
+
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "type"
@@ -751,7 +773,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_110123) do
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "allow_multiple_proceedings", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
-    t.boolean "alert_via_sentry", default: true, null: false
+    t.boolean "alert_via_sentry", default: false, null: false
   end
 
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -835,6 +857,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_110123) do
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "opponents", "legal_aid_applications"
   add_foreign_key "policy_disregards", "legal_aid_applications"
+  add_foreign_key "proceedings", "legal_aid_applications"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "savings_amounts", "legal_aid_applications"
