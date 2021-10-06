@@ -439,7 +439,7 @@ module CCMS
     end
 
     def chances_of_success
-      legal_aid_application.application_proceeding_types.first.chances_of_success
+      legal_aid_application.proceeding_proxies.first.chances_of_success
     end
   end
 end

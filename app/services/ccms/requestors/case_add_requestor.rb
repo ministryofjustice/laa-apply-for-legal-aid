@@ -225,7 +225,7 @@ module CCMS
       end
 
       def generate_proceedings(xml)
-        @legal_aid_application.application_proceeding_types.each { |apt| generate_proceeding(xml, apt) }
+        @legal_aid_application.proceeding_proxies.each { |apt| generate_proceeding(xml, apt) }
       end
 
       def generate_proceeding(xml, application_proceeding_type)
@@ -525,7 +525,7 @@ module CCMS
       end
 
       def application_proceeding_types
-        @application_proceeding_types ||= @legal_aid_application.application_proceeding_types
+        @application_proceeding_types ||= @legal_aid_application.proceeding_proxies
       end
 
       def bank_accounts

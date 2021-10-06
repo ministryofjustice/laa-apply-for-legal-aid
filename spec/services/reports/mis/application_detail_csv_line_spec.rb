@@ -55,7 +55,7 @@ module Reports
                application_proceeding_type: application_proceeding_type
       end
 
-      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+      let(:application_proceeding_type) { legal_aid_application.proceeding_proxies.first }
 
       let(:applicant) do
         create :applicant,
@@ -540,7 +540,7 @@ module Reports
       end
 
       def setup_multiple_proceedings
-        legal_aid_application.application_proceeding_types.map(&:destroy)
+        legal_aid_application.proceeding_proxies.map(&:destroy)
         %i[da001 da004 se013].each do |code|
           pt = create :proceeding_type, code
           apt = create :application_proceeding_type,

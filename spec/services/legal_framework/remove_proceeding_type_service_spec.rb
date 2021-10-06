@@ -25,7 +25,7 @@ module LegalFramework
 
         it 'deletes the application_proceeding_type record' do
           expect { subject }.to change { ApplicationProceedingType.count }.by(-1)
-          expect(laa.application_proceeding_types.find_by(proceeding_type_id: pt1.id)).to be_nil
+          expect(laa.proceeding_proxies.find_by(proceeding_type_id: pt1.id)).to be_nil
         end
 
         it 'does not delete the underlying proceeding type' do
@@ -54,7 +54,7 @@ module LegalFramework
 
         it 'deletes the application_proceeding_type record' do
           expect { subject }.to change { ApplicationProceedingType.count }.by(-1)
-          expect(laa.application_proceeding_types.find_by(proceeding_type_id: pt1.id)).to be_nil
+          expect(laa.proceeding_proxies.find_by(proceeding_type_id: pt1.id)).to be_nil
         end
 
         it 'does not delete the underlying proceeding type' do

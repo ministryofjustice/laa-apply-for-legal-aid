@@ -7,7 +7,7 @@ module LegalFramework
     def initialize(legal_aid_application, proceeding_type)
       @legal_aid_application = legal_aid_application
       @proceeding_type = proceeding_type
-      @application_proceeding_type = @legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
+      @application_proceeding_type = @legal_aid_application.proceeding_proxies.find_by(proceeding_type_id: proceeding_type.id)
     end
 
     def call

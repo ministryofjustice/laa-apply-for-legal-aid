@@ -343,7 +343,7 @@ Given('I have completed a non-passported application and reached the merits task
 end
 
 Given('I used delegated functions') do
-  @legal_aid_application.application_proceeding_types.each do |apt|
+  @legal_aid_application.proceeding_proxies.each do |apt|
     apt.update!(used_delegated_functions_on: Date.current,
                 used_delegated_functions_reported_on: Date.current)
     apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation

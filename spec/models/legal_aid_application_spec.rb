@@ -413,7 +413,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'delegated functions are used' do
       let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-      let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
+      let(:application_proceeding_types) { legal_aid_application.proceeding_proxies }
       let(:used_delegated_functions_reported_on) { today }
       let(:used_delegated_functions_on) { Faker::Date.backward }
 

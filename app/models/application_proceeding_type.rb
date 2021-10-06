@@ -82,7 +82,7 @@ class ApplicationProceedingType < ApplicationRecord
   def check_only_one_lead_proceedig
     return if lead_proceeding == false
 
-    apt = legal_aid_application.application_proceeding_types.detect { |rec| rec.lead_proceeding? && rec.id != id }
+    apt = legal_aid_application.proceeding_proxies.detect { |rec| rec.lead_proceeding? && rec.id != id }
     return if apt.nil?
 
     AlertManager.capture_message "Duplicate lead proceedings detected for application #{legal_aid_application.application_ref}: #{id}, #{apt.id}"

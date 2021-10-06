@@ -135,13 +135,13 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def lead_application_proceeding_type
-    application_proceeding_types.find_by(lead_proceeding: true)
+    proceeding_proxies.find_by(lead_proceeding: true)
   end
 
   def find_or_create_lead_proceeding_type
     apt = lead_application_proceeding_type
     if apt.nil?
-      apt = application_proceeding_types.detect(&:domestic_abuse?)
+      apt = proceeding_proxies.detect(&:domestic_abuse?)
       apt.update!(lead_proceeding: true)
     end
     apt.proceeding_type
@@ -155,7 +155,7 @@ class LegalAidApplication < ApplicationRecord
     #
     # in the order they were added to the LegalAidApplication
     #
-    application_proceeding_types.in_order_of_addition.map do |application_proceeding_type|
+    proceeding_proxies.in_order_of_addition.map do |application_proceeding_type|
       proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
       OpenStruct.new({
                        name: proceeding_type.name,
@@ -229,7 +229,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def lowest_prospect_of_success
-    min_rank = application_proceeding_types.map(&:chances_of_success).map(&:prospect_of_success_rank).min
+    min_rank = proceeding_proxies.map(&:chances_of_success).map(&:prospect_of_success_rank).min
     ProceedingMeritsTask::ChancesOfSuccess.rank_and_prettify(min_rank)
   end
 
@@ -348,7 +348,7 @@ class LegalAidApplication < ApplicationRecord
 
   def reset_proceeding_types!
     proceeding_types.clear
-    application_proceeding_types.map(&:clear_scopes!)
+    proceeding_proxies.map(&:clear_scopes!)
   end
 
   def receives_student_finance?
@@ -439,6 +439,10 @@ class LegalAidApplication < ApplicationRecord
 
   def transactions_total_by_type(transaction_type, category_id)
     __send__("#{transaction_type}_transactions").amounts.fetch(category_id, 0)
+  end
+
+  def proceeding_proxies
+    application_proceeding_types
   end
 
   private

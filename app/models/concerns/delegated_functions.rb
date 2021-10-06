@@ -1,6 +1,6 @@
 module DelegatedFunctions
   def used_delegated_functions?
-    application_proceeding_types.any?(&:used_delegated_functions?)
+    proceeding_proxies.any?(&:used_delegated_functions?)
   end
 
   def used_delegated_functions_on
@@ -8,7 +8,7 @@ module DelegatedFunctions
   end
 
   def used_delegated_functions_reported_on
-    application_proceeding_types.using_delegated_functions.first&.used_delegated_functions_reported_on
+    proceeding_proxies.using_delegated_functions.first&.used_delegated_functions_reported_on
   end
 
   def used_delegated_functions_within_year
@@ -16,7 +16,7 @@ module DelegatedFunctions
   end
 
   def proceeding_with_earliest_delegated_functions
-    application_proceeding_types.using_delegated_functions.first
+    proceeding_proxies.using_delegated_functions.first
   end
 
   def earliest_delegated_functions_date

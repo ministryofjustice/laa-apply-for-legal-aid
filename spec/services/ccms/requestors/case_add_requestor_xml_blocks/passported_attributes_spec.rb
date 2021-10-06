@@ -26,7 +26,7 @@ module CCMS
                  office: office
         end
 
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:application_proceeding_type) { legal_aid_application.proceeding_proxies.first }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -59,7 +59,7 @@ module CCMS
 
           context 'on a Delegated Functions case' do
             before do
-              legal_aid_application.application_proceeding_types.each do |apt|
+              legal_aid_application.proceeding_proxies.each do |apt|
                 apt.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
@@ -463,7 +463,7 @@ module CCMS
         context 'DELEGATED_FUNCTIONS_DATE blocks' do
           context 'delegated functions used' do
             before do
-              legal_aid_application.application_proceeding_types.each do |apt|
+              legal_aid_application.proceeding_proxies.each do |apt|
                 apt.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
@@ -1323,7 +1323,7 @@ module CCMS
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
                 block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response legal_aid_application.application_proceeding_types.first.assigned_scope_limitations.first.code
+                expect(block).to have_text_response legal_aid_application.proceeding_proxies.first.assigned_scope_limitations.first.code
               end
             end
           end

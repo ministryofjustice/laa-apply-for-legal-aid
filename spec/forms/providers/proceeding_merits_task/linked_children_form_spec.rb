@@ -5,7 +5,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
   let(:params) { { linked_children: linked_children_params, model: application_proceeding_type } }
   let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types_inc_section8 }
   let(:proceeding_type) { legal_aid_application.proceeding_types.find_by(ccms_matter_code: 'KSEC8') }
-  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id) }
+  let(:application_proceeding_type) { legal_aid_application.proceeding_proxies.find_by(proceeding_type_id: proceeding_type.id) }
   let(:linked_children_params) { nil }
 
   describe '.value_list' do

@@ -266,7 +266,7 @@ FactoryBot.define do
           da_pt = application.proceeding_types.detect(&:domestic_abuse?)
           raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
 
-          application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
+          application.proceeding_proxies.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
         end
         application.reload
       end
@@ -280,18 +280,18 @@ FactoryBot.define do
           application.proceeding_types << create(:proceeding_type, :with_real_data)
           application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
         end
-        lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
+        lead_apt = application.proceeding_proxies.find_by(lead_proceeding: true)
         if lead_apt.nil?
-          lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
+          lead_apt = application.proceeding_proxies.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
           lead_apt.update!(lead_proceeding: true)
         end
         application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
         pt = lead_apt.proceeding_type
         sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+        apt = application.proceeding_proxies.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
-        application.application_proceeding_types.each do |app_proc_type|
+        application.proceeding_proxies.each do |app_proc_type|
           create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
           create(:attempts_to_settles, application_proceeding_type: app_proc_type)
         end
@@ -302,7 +302,7 @@ FactoryBot.define do
     trait :with_only_section8_proceeding_type do
       after(:create) do |application|
         application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
-        application.application_proceeding_types.each do |app_proc_type|
+        application.proceeding_proxies.each do |app_proc_type|
           create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
           create(:attempts_to_settles, application_proceeding_type: app_proc_type)
         end
@@ -314,11 +314,11 @@ FactoryBot.define do
     #
     trait :with_lead_proceeding_type do
       after(:create) do |application|
-        if application.application_proceeding_types.detect(&:lead_proceeding).nil?
+        if application.proceeding_proxies.detect(&:lead_proceeding).nil?
           da_pt = application.proceeding_types.detect(&:domestic_abuse?)
           raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
 
-          application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
+          application.proceeding_proxies.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
           application.reload
         end
       end
@@ -355,7 +355,7 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         used_dates = evaluator.delegated_functions_date.is_a?(Array) ? evaluator.delegated_functions_date : [evaluator.delegated_functions_date]
         reported_dates = evaluator.delegated_functions_reported_date.is_a?(Array) ? evaluator.delegated_functions_reported_date : [evaluator.delegated_functions_reported_date]
-        application.application_proceeding_types.each_with_index do |apt, i|
+        application.proceeding_proxies.each_with_index do |apt, i|
           apt.update!(used_delegated_functions_on: used_dates[i] || Date.current,
                       used_delegated_functions_reported_on: reported_dates[i] || Date.current)
           apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
@@ -557,7 +557,7 @@ FactoryBot.define do
         prospect { 'likely' }
       end
       after(:create) do |application, evaluator|
-        application.application_proceeding_types.each do |apt|
+        application.proceeding_proxies.each do |apt|
           apt.chances_of_success = create(:chances_of_success, application_proceeding_type: apt, success_prospect: evaluator.prospect)
         end
       end
@@ -813,7 +813,7 @@ FactoryBot.define do
         end
         pt = application.find_or_create_lead_proceeding_type
         sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+        apt = application.proceeding_proxies.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
       end
@@ -831,7 +831,7 @@ FactoryBot.define do
           application.proceeding_types = create_list(:proceeding_type, 1)
           pt = application.find_or_create_lead_proceeding_type
           sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+          apt = application.proceeding_proxies.find_by(proceeding_type_id: pt.id)
           AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                      scope_limitation_id: sl.id)
           application.reload
@@ -851,7 +851,7 @@ FactoryBot.define do
           application.proceeding_types = create_list(:proceeding_type, 1)
           pt = application.lead_proceeding_type
           sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+          apt = application.proceeding_proxies.find_by(proceeding_type_id: pt.id)
           AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                      scope_limitation_id: sl.id)
         end
@@ -880,9 +880,9 @@ FactoryBot.define do
         pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :substantive_default, scope_limitation: sl1)
         pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :delegated_functions_default, scope_limitation: sl2) if sl2.present?
         application.proceeding_types << pt1
-        apt = application.application_proceeding_types.first
+        apt = application.proceeding_proxies.first
         apt.update!(lead_proceeding: true)
-        application.application_proceeding_types.first.reload
+        application.proceeding_proxies.first.reload
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
         AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
       end
@@ -896,7 +896,7 @@ FactoryBot.define do
     #
     trait :with_multiple_delegated_functions do
       after(:create) do |application|
-        application.application_proceeding_types.each_with_index do |type, i|
+        application.proceeding_proxies.each_with_index do |type, i|
           type.used_delegated_functions_on = Time.zone.today - (i.month + 1.day)
           type.used_delegated_functions_reported_on = Time.zone.today unless i > 0
         end
@@ -916,7 +916,7 @@ FactoryBot.define do
 
       after(:create) do |application, evaluator|
         application.proceeding_types = create_list(:proceeding_type, evaluator.proceeding_types_count)
-        application.application_proceeding_types.each do |apt|
+        application.proceeding_proxies.each do |apt|
           create(:chances_of_success, :with_optional_text, application_proceeding_type: apt)
         end
       end

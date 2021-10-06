@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LegalAidApplications::ConfirmDelegatedFunctionsDateForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-  let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
+  let(:application_proceeding_types) { legal_aid_application.proceeding_proxies }
   let(:application_proceedings_by_name) { legal_aid_application.application_proceedings_by_name }
   let(:today) { Time.zone.today }
   let(:used_delegated_functions_reported_on) { today }

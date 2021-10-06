@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
-        let(:proceeding_type) { legal_aid_application.application_proceeding_types.first.proceeding_type }
+        let(:proceeding_type) { legal_aid_application.proceeding_proxies.first.proceeding_type }
         let(:firm) { create :firm, name: 'Firm1' }
         let(:office) { create :office, firm: firm }
         let(:savings_amount) { legal_aid_application.savings_amount }
@@ -29,7 +29,7 @@ module CCMS
                  office: office
         end
 
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:application_proceeding_type) { legal_aid_application.proceeding_proxies.first }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }

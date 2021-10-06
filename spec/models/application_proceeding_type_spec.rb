@@ -11,7 +11,7 @@ RSpec.describe ApplicationProceedingType do
         expect(ApplicationProceedingType.count).to be_zero
         legal_aid_application.proceeding_types << proceeding_type
         legal_aid_application.save!
-        application_proceeding_type = legal_aid_application.application_proceeding_types.first
+        application_proceeding_type = legal_aid_application.proceeding_proxies.first
         expect(application_proceeding_type.proceeding_case_id > 55_000_000).to be true
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe ApplicationProceedingType do
         highest_proceeding_case_id = ApplicationProceedingType.order(:proceeding_case_id).last.proceeding_case_id
         legal_aid_application.proceeding_types << proceeding_type
         legal_aid_application.save!
-        application_proceeding_type = legal_aid_application.application_proceeding_types.first
+        application_proceeding_type = legal_aid_application.proceeding_proxies.first
         expect(application_proceeding_type.proceeding_case_id).to eq highest_proceeding_case_id + 1
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe ApplicationProceedingType do
   describe '#proceeding_case_p_num' do
     it 'prefixes the proceeding case id with P_' do
       legal_aid_application = create :legal_aid_application, :with_proceeding_types
-      application_proceeding_type = legal_aid_application.application_proceeding_types.first
+      application_proceeding_type = legal_aid_application.proceeding_proxies.first
       allow(application_proceeding_type).to receive(:proceeding_case_id).and_return 55_200_301
       expect(application_proceeding_type.proceeding_case_p_num).to eq 'P_55200301'
     end
@@ -55,7 +55,7 @@ RSpec.describe ApplicationProceedingType do
 
     context 'delegated functions used' do
       it 'used delegated functions returns true' do
-        application_proceeding_type = application.application_proceeding_types.first
+        application_proceeding_type = application.proceeding_proxies.first
         expect(application_proceeding_type.used_delegated_functions?).to be true
       end
 
@@ -70,7 +70,7 @@ RSpec.describe ApplicationProceedingType do
 
     context 'delegated functions not used' do
       before do
-        application.application_proceeding_types.each do |apt|
+        application.proceeding_proxies.each do |apt|
           apt.update!(used_delegated_functions_on: nil,
                       used_delegated_functions_reported_on: nil)
         end
@@ -86,7 +86,7 @@ RSpec.describe ApplicationProceedingType do
     let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.today }
     let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.yesterday }
     let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
-    let(:records) { laa.application_proceeding_types.using_delegated_functions }
+    let(:records) { laa.proceeding_proxies.using_delegated_functions }
 
     it 'returns 2 records with DF dates, in date order' do
       expect(records).to eq [apt2, apt1]
@@ -96,7 +96,7 @@ RSpec.describe ApplicationProceedingType do
   describe 'assigned_scope_limitations' do
     let(:application) { create :legal_aid_application }
     let(:proceeding_type) { ProceedingType.first }
-    let(:application_proceeding_type) { application.application_proceeding_types.first }
+    let(:application_proceeding_type) { application.proceeding_proxies.first }
     let(:default_scope_limitation) { proceeding_type.default_substantive_scope_limitation }
     let(:default_df_scope_limitation) { proceeding_type.default_delegated_functions_scope_limitation }
     let(:assigned_scope_limitation) { application_proceeding_type.assigned_scope_limitations.first }
@@ -171,8 +171,8 @@ RSpec.describe ApplicationProceedingType do
     let(:application2) { create :legal_aid_application }
     let(:proceeding_type1) { ProceedingType.first }
     let(:proceeding_type2) { ProceedingType.last }
-    let(:application_proceeding_type1) { application1.application_proceeding_types.first }
-    let(:application_proceeding_type2) { application2.application_proceeding_types.first }
+    let(:application_proceeding_type1) { application1.proceeding_proxies.first }
+    let(:application_proceeding_type2) { application2.proceeding_proxies.first }
     let(:application_involved_child1) { ApplicationMeritsTask::InvolvedChild.create(full_name: 'John Smith', date_of_birth: 1.month.ago, legal_aid_application: application1) }
     let(:application_involved_child2) { ApplicationMeritsTask::InvolvedChild.create(full_name: 'Mary Smith', date_of_birth: 1.month.ago, legal_aid_application: application2) }
 
@@ -204,7 +204,7 @@ RSpec.describe ApplicationProceedingType do
 
       context 'other lead proceeding exists' do
         before do
-          laa.application_proceeding_types.first.update!(lead_proceeding: true)
+          laa.proceeding_proxies.first.update!(lead_proceeding: true)
           laa.reload
         end
 
@@ -225,12 +225,12 @@ RSpec.describe ApplicationProceedingType do
 
       context 'this record already exists as the lead proceeding' do
         before do
-          laa.application_proceeding_types.last.update!(lead_proceeding: true)
+          laa.proceeding_proxies.last.update!(lead_proceeding: true)
           laa.reload
         end
 
         it 'is valid' do
-          apt = laa.application_proceeding_types.find_by(lead_proceeding: true)
+          apt = laa.proceeding_proxies.find_by(lead_proceeding: true)
           apt.used_delegated_functions_on = Date.current
           expect(apt).to be_valid
         end
@@ -238,7 +238,7 @@ RSpec.describe ApplicationProceedingType do
 
       context 'other lead proceeding exists' do
         before do
-          laa.application_proceeding_types.last.update!(lead_proceeding: true)
+          laa.proceeding_proxies.last.update!(lead_proceeding: true)
           laa.reload
         end
 

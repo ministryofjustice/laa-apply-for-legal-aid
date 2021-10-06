@@ -51,7 +51,7 @@ RSpec.describe 'LegalAidApplication factory' do
   describe 'with_proceeding_types' do
     context 'proceeding type count not specified' do
       let(:laa) { create :legal_aid_application, :with_proceeding_types }
-      let(:apt) { laa.application_proceeding_types.first }
+      let(:apt) { laa.proceeding_proxies.first }
       let(:proceeding_type) { laa.proceeding_types.first }
 
       it 'creates an application with one proceeding type with two scope limitations' do
@@ -85,8 +85,8 @@ RSpec.describe 'LegalAidApplication factory' do
       end
 
       it 'creates a substantive and df scope limitation for each proceeding type' do
-        expect(laa.application_proceeding_types.count).to eq 3
-        laa.application_proceeding_types.each do |apt|
+        expect(laa.proceeding_proxies.count).to eq 3
+        laa.proceeding_proxies.each do |apt|
           expect(apt.assigned_scope_limitations.count).to eq 1
           expect(apt.substantive_scope_limitation).not_to be_nil
           expect(apt.delegated_functions_scope_limitation).to be_nil
@@ -98,7 +98,7 @@ RSpec.describe 'LegalAidApplication factory' do
       let(:pt1) { create :proceeding_type, :with_real_data, :with_scope_limitations }
       let(:pt2) { create :proceeding_type, :as_occupation_order, :with_scope_limitations }
       let(:laa) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2] }
-      let(:apts) { laa.application_proceeding_types }
+      let(:apts) { laa.proceeding_proxies }
 
       it 'has two apt records pointing to the explicitly specified proceeding types' do
         expect(apts.size).to eq 2
@@ -131,7 +131,7 @@ RSpec.describe 'LegalAidApplication factory' do
              proceeding_types_count: 3,
              delegated_functions_date: [5.days.ago, 4.days.ago]
     end
-    let(:apts) { laa.application_proceeding_types }
+    let(:apts) { laa.proceeding_proxies }
 
     it 'creates three apt records with df dates of 5 days ago, 4 days ago and today' do
       expect(apts.size).to eq 3
@@ -176,7 +176,7 @@ RSpec.describe 'LegalAidApplication factory' do
       it 'assigns the scope limitation to the application_proceeding_type' do
         expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
         lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
+        apt = laa.reload.proceeding_proxies.find_by(proceeding_type_id: lead_pt.id)
         aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
         expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
         expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
@@ -206,7 +206,7 @@ RSpec.describe 'LegalAidApplication factory' do
       it 'assigns the scope limtiation to the lead proceeding type' do
         expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
         lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
+        apt = laa.reload.proceeding_proxies.find_by(proceeding_type_id: lead_pt.id)
         aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
         expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
         expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
@@ -219,7 +219,7 @@ RSpec.describe 'LegalAidApplication factory' do
     let(:sl1) { create :scope_limitation }
     let(:sl2) { create :scope_limitation }
 
-    let(:apt) { laa.application_proceeding_types.first }
+    let(:apt) { laa.proceeding_proxies.first }
 
     context 'initial state' do
       before { [pt1, sl1, sl2] }

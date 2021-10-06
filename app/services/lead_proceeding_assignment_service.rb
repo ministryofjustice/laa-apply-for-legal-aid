@@ -11,9 +11,9 @@ class LeadProceedingAssignmentService
   end
 
   def call
-    return if @legal_aid_application.application_proceeding_types.empty?
+    return if @legal_aid_application.proceeding_proxies.empty?
 
-    lead = @legal_aid_application.application_proceeding_types.find_by(lead_proceeding: true)
+    lead = @legal_aid_application.proceeding_proxies.find_by(lead_proceeding: true)
     assign_new_lead if lead.nil?
   end
 
@@ -23,7 +23,7 @@ class LeadProceedingAssignmentService
     pt = @legal_aid_application.proceeding_types.detect(&:domestic_abuse?)
     return if pt.nil?
 
-    apt = @legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
+    apt = @legal_aid_application.proceeding_proxies.find_by(proceeding_type_id: pt.id)
     apt.update!(lead_proceeding: true)
   end
 end

@@ -44,7 +44,7 @@ module TaskListHelper
   def application_proceeding_type_id(application, ccms_code)
     return nil unless ccms_code && application
 
-    apt = application.application_proceeding_types.find do |x|
+    apt = application.proceeding_proxies.find do |x|
       x.proceeding_type.ccms_code == ccms_code.to_s
     end
 

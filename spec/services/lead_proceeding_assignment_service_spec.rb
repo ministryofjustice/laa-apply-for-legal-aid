@@ -47,6 +47,6 @@ RSpec.describe LeadProceedingAssignmentService do
   end
 
   def apt_for(proceeding_type)
-    laa.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
+    laa.proceeding_proxies.find_by(proceeding_type_id: proceeding_type.id)
   end
 end

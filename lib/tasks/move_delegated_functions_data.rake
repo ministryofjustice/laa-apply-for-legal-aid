@@ -10,7 +10,7 @@ namespace :move_delegated_functions_data do
     application_ids.each do |ap_id|
       application = LegalAidApplication.find(ap_id)
 
-      application.application_proceeding_types.each do |apt|
+      application.proceeding_proxies.each do |apt|
         apt.used_delegated_functions_on = application.used_delegated_functions_on
         apt.used_delegated_functions_reported_on = application.used_delegated_functions_reported_on
 
