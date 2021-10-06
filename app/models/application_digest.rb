@@ -1,0 +1,2 @@
+class ApplicationDigest < ApplicationRecord
+end

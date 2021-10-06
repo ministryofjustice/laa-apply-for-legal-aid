@@ -245,6 +245,8 @@ Rails.application.routes.draw do
 
   get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
 
+  get 'application_digest', to: 'data_studio/application_digest#index'
+
   # Catch all route that traps paths not defined above. Must be last route.
   match '*path', to: 'errors#page_not_found', via: :all
 end
