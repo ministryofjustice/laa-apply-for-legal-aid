@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_135707) do
+ActiveRecord::Schema.define(version: 2021_10_06_124900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -675,8 +675,8 @@ ActiveRecord::Schema.define(version: 2021_10_04_135707) do
     t.string "delegated_functions_scope_limitation_code", null: false
     t.string "delegated_functions_scope_limitation_meaning", null: false
     t.string "delegated_functions_scope_limitation_description", null: false
-    t.date "used_delegated_functions_on", null: false
-    t.date "used_delegated_functions_reported_on", null: false
+    t.date "used_delegated_functions_on"
+    t.date "used_delegated_functions_reported_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
@@ -771,7 +771,6 @@ ActiveRecord::Schema.define(version: 2021_10_04_135707) do
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
     t.boolean "allow_welsh_translation", default: false, null: false
-    t.boolean "allow_multiple_proceedings", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
   end

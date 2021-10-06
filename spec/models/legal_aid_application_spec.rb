@@ -1049,4 +1049,175 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.year_to_calculation_date).to eq [expected_start_date, calc_date]
     end
   end
+
+  context '#proceeding_proxies' do
+    context 'when a proceeding record exists for an application' do
+      let(:proc) do
+        Proceeding.new(
+          proceeding_case_id: 55_000_001,
+          lead_proceeding: true,
+          ccms_code: 'DA001',
+          meaning: 'meaning',
+          description: 'description',
+          substantive_cost_limitation: 99_999,
+          delegated_functions_cost_limitation: 11_111,
+          substantive_scope_limitation_code: 'sslc',
+          substantive_scope_limitation_meaning: 'sslm',
+          substantive_scope_limitation_description: 'ssld',
+          delegated_functions_scope_limitation_code: 'dfslc',
+          delegated_functions_scope_limitation_meaning: 'dfslm',
+          delegated_functions_scope_limitation_description: 'dfsld',
+          used_delegated_functions_on: Time.zone.today,
+          used_delegated_functions_reported_on: Time.zone.today
+        )
+      end
+      let!(:legal_aid_application) { create :legal_aid_application, proceedings: [proc] }
+
+      it 'returns the proceeding record' do
+        expect(legal_aid_application.proceeding_proxies).to eq([proc])
+      end
+      it 'does not change the number of proceeding records' do
+        expect { legal_aid_application.proceeding_proxies }.to_not change { Proceeding.count }
+      end
+    end
+
+    context 'when multiple proceeding records exists for an application' do
+      let(:proc1) do
+        Proceeding.new(
+          proceeding_case_id: 55_000_001,
+          lead_proceeding: true,
+          ccms_code: 'DA001',
+          meaning: 'meaning',
+          description: 'description',
+          substantive_cost_limitation: 99_999,
+          delegated_functions_cost_limitation: 11_111,
+          substantive_scope_limitation_code: 'sslc',
+          substantive_scope_limitation_meaning: 'sslm',
+          substantive_scope_limitation_description: 'ssld',
+          delegated_functions_scope_limitation_code: 'dfslc',
+          delegated_functions_scope_limitation_meaning: 'dfslm',
+          delegated_functions_scope_limitation_description: 'dfsld',
+          used_delegated_functions_on: Time.zone.today,
+          used_delegated_functions_reported_on: Time.zone.today
+        )
+      end
+      let(:proc2) do
+        Proceeding.new(
+          proceeding_case_id: 55_000_002,
+          lead_proceeding: true,
+          ccms_code: 'DA002',
+          meaning: 'meaning',
+          description: 'description',
+          substantive_cost_limitation: 99_999,
+          delegated_functions_cost_limitation: 11_111,
+          substantive_scope_limitation_code: 'sslc',
+          substantive_scope_limitation_meaning: 'sslm',
+          substantive_scope_limitation_description: 'ssld',
+          delegated_functions_scope_limitation_code: 'dfslc',
+          delegated_functions_scope_limitation_meaning: 'dfslm',
+          delegated_functions_scope_limitation_description: 'dfsld',
+          used_delegated_functions_on: Time.zone.today,
+          used_delegated_functions_reported_on: Time.zone.today
+        )
+      end
+      let!(:legal_aid_application) { create :legal_aid_application, proceedings: [proc1, proc2] }
+      it 'returns the proceeding record' do
+        expect(legal_aid_application.proceeding_proxies).to eq([proc1, proc2])
+      end
+      it 'does not change the number of proceeding records' do
+        expect { legal_aid_application.proceeding_proxies }.to_not change { Proceeding.count }
+      end
+    end
+
+    context 'when no proceeding record exists for an application with one proceeding' do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 1 }
+      let(:laa_proc) { legal_aid_application.application_proceeding_types.first }
+
+      it 'creates a proceeding record' do
+        expect { legal_aid_application.proceeding_proxies }.to change { Proceeding.count }.by(1)
+      end
+      it 'returns a proceeding record' do
+        expect(legal_aid_application.proceeding_proxies.first).to be_a Proceeding
+      end
+      it 'populates the correct data in the proceeding record' do
+        expect(legal_aid_application.proceeding_proxies.first.legal_aid_application_id).to eq legal_aid_application.id
+        expect(legal_aid_application.proceeding_proxies.first.proceeding_case_id).to eq laa_proc.proceeding_case_id
+        expect(legal_aid_application.proceeding_proxies.first.lead_proceeding).to eq laa_proc.lead_proceeding
+        expect(legal_aid_application.proceeding_proxies.first.ccms_code).to eq laa_proc.proceeding_type.ccms_code
+        expect(legal_aid_application.proceeding_proxies.first.meaning).to eq laa_proc.proceeding_type.meaning
+        expect(legal_aid_application.proceeding_proxies.first.description).to eq laa_proc.proceeding_type.description
+        expect(legal_aid_application.proceeding_proxies.first.substantive_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_substantive
+        expect(legal_aid_application.proceeding_proxies.first.delegated_functions_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_delegated_functions
+        expect(legal_aid_application.proceeding_proxies.first.substantive_scope_limitation_code).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code
+        )
+        expect(legal_aid_application.proceeding_proxies.first.substantive_scope_limitation_meaning).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning
+        )
+        expect(legal_aid_application.proceeding_proxies.first.substantive_scope_limitation_description).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description
+        )
+        expect(legal_aid_application.proceeding_proxies.first.delegated_functions_scope_limitation_code).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code
+        )
+        expect(legal_aid_application.proceeding_proxies.first.delegated_functions_scope_limitation_meaning).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.meaning
+        )
+        expect(legal_aid_application.proceeding_proxies.first.delegated_functions_scope_limitation_description).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.description
+        )
+        expect(legal_aid_application.proceeding_proxies.first.used_delegated_functions_on).to eq laa_proc.used_delegated_functions_on
+        expect(legal_aid_application.proceeding_proxies.first.used_delegated_functions_reported_on).to eq laa_proc.used_delegated_functions_reported_on
+      end
+    end
+
+    context 'when no proceeding record exists for an application with multiple proceedings' do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 2 }
+
+      it 'creates the correct number of proceeding records' do
+        expect { legal_aid_application.proceeding_proxies }.to change { Proceeding.count }.by(2)
+      end
+
+      it 'returns proceeding objects' do
+        legal_aid_application.proceeding_proxies.each do |proc|
+          expect(proc).to be_a Proceeding
+        end
+      end
+
+      it 'populates the correct data in the proceeding record' do
+        legal_aid_application.proceeding_proxies.order(:created_at).each_with_index do |proc, index|
+          laa_proc = legal_aid_application.application_proceeding_types[index]
+
+          expect(proc.legal_aid_application_id).to eq legal_aid_application.id
+          expect(proc.proceeding_case_id).to eq laa_proc.proceeding_case_id
+          expect(proc.lead_proceeding).to eq laa_proc.lead_proceeding
+          expect(proc.ccms_code).to eq laa_proc.proceeding_type.ccms_code
+          expect(proc.meaning).to eq laa_proc.proceeding_type.meaning
+          expect(proc.description).to eq laa_proc.proceeding_type.description
+          expect(proc.substantive_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_substantive
+          expect(proc.delegated_functions_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_delegated_functions
+          expect(proc.substantive_scope_limitation_code).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code
+          )
+          expect(proc.substantive_scope_limitation_meaning).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning
+          )
+          expect(proc.substantive_scope_limitation_description).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description
+          )
+          expect(proc.delegated_functions_scope_limitation_code).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code
+          )
+          expect(proc.delegated_functions_scope_limitation_meaning).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.meaning
+          )
+          expect(proc.delegated_functions_scope_limitation_description).to eq(
+            laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.description
+          )
+          expect(proc.used_delegated_functions_on).to eq laa_proc.used_delegated_functions_on
+          expect(proc.used_delegated_functions_reported_on).to eq laa_proc.used_delegated_functions_reported_on
+        end
+      end
+    end
+  end
 end

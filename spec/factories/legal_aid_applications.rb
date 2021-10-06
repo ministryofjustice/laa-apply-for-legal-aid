@@ -262,12 +262,12 @@ FactoryBot.define do
           apt.substantive_scope_limitation = pt.default_substantive_scope_limitation
         end
 
-        if evaluator.assign_lead_proceeding == true
-          da_pt = application.proceeding_types.detect(&:domestic_abuse?)
-          raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
-
-          application.proceeding_proxies.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
-        end
+        # if evaluator.assign_lead_proceeding == true
+        #   da_pt = application.proceeding_types.detect(&:domestic_abuse?)
+        #   raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
+        #
+        #   application.proceeding_proxies.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
+        # end
         application.reload
       end
     end

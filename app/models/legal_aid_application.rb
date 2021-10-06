@@ -14,11 +14,11 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
-  has_many :application_proceeding_types, inverse_of: :legal_aid_application, dependent: :destroy
+  # has_many :application_proceeding_types, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :proceedings, dependent: :destroy
-  has_many :chances_of_success, through: :application_proceeding_types
+  # has_many :chances_of_success, through: :application_proceeding_types
   has_many :attachments, dependent: :destroy
-  has_many :proceeding_types, through: :application_proceeding_types
+  # has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
@@ -26,7 +26,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :gateway_evidence, dependent: :destroy
   has_one :opponent, class_name: 'ApplicationMeritsTask::Opponent', dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: 'ApplicationMeritsTask::Incident', inverse_of: :legal_aid_application, dependent: :destroy
-  has_many :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', through: :application_proceeding_types
+  # has_many :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', through: :application_proceeding_types
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
@@ -441,8 +441,32 @@ class LegalAidApplication < ApplicationRecord
     __send__("#{transaction_type}_transactions").amounts.fetch(category_id, 0)
   end
 
-  def proceeding_proxies
-    application_proceeding_types
+  def proceeding_proxies # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    if proceedings.empty?
+      application_proceeding_types.each do |proc|
+        Proceeding.create(
+          legal_aid_application_id: id,
+          proceeding_case_id: proc.proceeding_case_id,
+          lead_proceeding: proc.lead_proceeding,
+          ccms_code: proc.proceeding_type.ccms_code,
+          meaning: proc.proceeding_type.meaning,
+          description: proc.proceeding_type.description,
+          substantive_cost_limitation: proc.proceeding_type.default_cost_limitation_substantive,
+          delegated_functions_cost_limitation: proc.proceeding_type.default_cost_limitation_delegated_functions,
+          substantive_scope_limitation_code: proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code,
+          substantive_scope_limitation_meaning: proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning,
+          substantive_scope_limitation_description: proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description,
+          delegated_functions_scope_limitation_code: proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code,
+          delegated_functions_scope_limitation_meaning: proc.proceeding_type.proceeding_type_scope_limitations
+                                                            .where(delegated_functions_default: true).first.scope_limitation.meaning,
+          delegated_functions_scope_limitation_description: proc.proceeding_type.proceeding_type_scope_limitations
+                                                            .where(delegated_functions_default: true).first.scope_limitation.description,
+          used_delegated_functions_on: proc.used_delegated_functions_on,
+          used_delegated_functions_reported_on: proc.used_delegated_functions_reported_on
+        )
+      end
+    end
+    proceedings
   end
 
   private
@@ -480,5 +504,9 @@ class LegalAidApplication < ApplicationRecord
 
   def set_open_banking_consent_choice_at
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
+  end
+
+  def application_proceeding_types
+    ApplicationProceedingType.where(legal_aid_application_id: id)
   end
 end
