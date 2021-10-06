@@ -9,7 +9,7 @@
     "@rails/ujs": "^6.1.4",
     "@rails/webpacker": "^5.4.3",
     "acorn": "~8.5.0",
-    "axios": "^0.21.2",
+    "axios": "^0.22.0",
     "govuk-frontend": "^3.13.1",
     "jest": "^27.2.3",
     "jquery": "^3.6.0",
