@@ -358,7 +358,7 @@ FactoryBot.define do
         application.proceeding_proxies.each_with_index do |apt, i|
           apt.update!(used_delegated_functions_on: used_dates[i] || Date.current,
                       used_delegated_functions_reported_on: reported_dates[i] || Date.current)
-          apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
+          # apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
         end
       end
     end

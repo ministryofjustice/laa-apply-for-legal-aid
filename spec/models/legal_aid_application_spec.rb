@@ -107,19 +107,19 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#lead_application_proceeding_type' do
     context 'application proceeding types exist' do
       let!(:legal_aid_application) do
-        create :legal_aid_application, :with_applicant
+        create :legal_aid_application, :with_applicant, :with_delegated_functions, :with_proceeding_types, proceeding_types_count: 2
       end
-      let!(:application_proceeding_type1) { create :application_proceeding_type, lead_proceeding: true, legal_aid_application: legal_aid_application }
-      let!(:application_proceeding_type2) { create :application_proceeding_type, lead_proceeding: false, legal_aid_application: legal_aid_application }
+      let(:proceeding_type1) { legal_aid_application.proceeding_proxies.first }
+      before { proceeding_type1.update!(lead_proceeding: true) }
 
       it 'returns the lead application proceeding type' do
-        expect(legal_aid_application.lead_application_proceeding_type).to eq application_proceeding_type1
+        expect(legal_aid_application.lead_application_proceeding_type).to eq proceeding_type1
       end
     end
     context 'application proceeding types do not exist' do
       let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
 
-      it 'is true' do
+      it 'is nil' do
         expect(legal_aid_application.lead_application_proceeding_type).to eq nil
       end
     end
@@ -465,15 +465,15 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'application_proceedings_by_name' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_multiple_proceeding_types }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceeding_types, proceeding_types_count: 2 }
 
     it 'returns all application proceeding types with proceeding type names' do
       result = legal_aid_application.application_proceedings_by_name
       application_proceeding_types = result.map(&:application_proceeding_type)
       application_proceeding_names = result.map(&:name)
-      proceeding_names = legal_aid_application.application_proceeding_types.map { |type| ProceedingType.find(type.proceeding_type_id).name }
+      proceeding_names = legal_aid_application.proceeding_proxies.map(&:description) # using description as name does not exist on proceeding model
 
-      expect(application_proceeding_types).to match_array(legal_aid_application.application_proceeding_types)
+      expect(application_proceeding_types).to match_array(legal_aid_application.proceeding_proxies)
       expect(application_proceeding_names).to match_array(proceeding_names)
     end
   end
@@ -510,7 +510,7 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
-      create :legal_aid_application, :with_everything, :with_application_proceeding_type, :with_negative_benefit_check_result, :with_bank_transactions
+      create :legal_aid_application, :with_everything, :with_proceeding_types, :with_negative_benefit_check_result, :with_bank_transactions
     end
 
     before do
@@ -642,10 +642,16 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#earliest_delegated_functions_date' do
-    let(:laa) { create :legal_aid_application }
-    let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date1 }
-    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date2 }
-    let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
+    let!(:laa) { create :legal_aid_application, :with_delegated_functions, :with_proceeding_types, proceeding_types_count: 3 }
+    let(:apt1) { laa.proceeding_proxies.first }
+    let(:apt2) { laa.proceeding_proxies.last }
+
+    before do
+      apt1.used_delegated_functions_on = date1
+      apt2.used_delegated_functions_on = date2
+      apt1.save!
+      apt2.save!
+    end
 
     context 'there are application_proceeding_type records with dates ' do
       let(:date1) { Time.zone.today }
@@ -667,16 +673,17 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'default_cost_limitations' do
-    let(:proceeding_type) { create :proceeding_type }
+    # let(:proceeding_type) { create :proceeding_type }
+    let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+    before { application.proceeding_proxies.first.update!(lead_proceeding: true) }
+
     context 'substantive' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
       it 'returns the substantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 25_000.0
       end
     end
 
     context 'delegated functions' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
       it 'returns the subtantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 25_000.0
       end

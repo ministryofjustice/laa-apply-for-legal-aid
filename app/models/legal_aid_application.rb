@@ -130,22 +130,26 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
-  def lead_proceeding_type
-    ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
-  end
+  # def lead_proceeding_type
+  #   ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
+  # end
+  #
+  # def lead_application_proceeding_type
+  #   proceeding_proxies.find_by(lead_proceeding: true)
+  # end
 
-  def lead_application_proceeding_type
+  def lead_proceeding
     proceeding_proxies.find_by(lead_proceeding: true)
   end
 
-  def find_or_create_lead_proceeding_type
-    apt = lead_application_proceeding_type
-    if apt.nil?
-      apt = proceeding_proxies.detect(&:domestic_abuse?)
-      apt.update!(lead_proceeding: true)
-    end
-    apt.proceeding_type
-  end
+  # def find_or_create_lead_proceeding_type
+  #   apt = lead_application_proceeding_type
+  #   if apt.nil?
+  #     apt = proceeding_proxies.detect(&:domestic_abuse?)
+  #     apt.update!(lead_proceeding: true)
+  #   end
+  #   apt.proceeding_type
+  # end
 
   def application_proceedings_by_name
     # returns an array of OpenStructs containing:
@@ -156,10 +160,9 @@ class LegalAidApplication < ApplicationRecord
     # in the order they were added to the LegalAidApplication
     #
     proceeding_proxies.in_order_of_addition.map do |application_proceeding_type|
-      proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
       OpenStruct.new({
-                       name: proceeding_type.name,
-                       meaning: proceeding_type.meaning,
+                       name: application_proceeding_type.description, # using description  as name does not exist on proceeding model
+                       meaning: application_proceeding_type.meaning,
                        application_proceeding_type: application_proceeding_type
                      })
     end
@@ -364,11 +367,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def default_substantive_cost_limitation
-    lead_proceeding_type.default_cost_limitation_substantive
+    lead_proceeding.default_cost_limitation_substantive
   end
 
   def default_delegated_functions_cost_limitation
-    lead_proceeding_type.default_cost_limitation_delegated_functions
+    lead_proceeding.default_cost_limitation_delegated_functions
   end
 
   def find_or_create_ccms_submission
@@ -469,6 +472,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings
   end
 
+  def application_proceeding_types
+    ApplicationProceedingType.where(legal_aid_application_id: id)
+  end
+
   private
 
   def bank_transactions_by_type(type)
@@ -504,9 +511,5 @@ class LegalAidApplication < ApplicationRecord
 
   def set_open_banking_consent_choice_at
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
-  end
-
-  def application_proceeding_types
-    ApplicationProceedingType.where(legal_aid_application_id: id)
   end
 end
