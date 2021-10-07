@@ -2,7 +2,7 @@ class ProceedingsConverter
   def call # rubocop:disable Metrics/MethodLength
     LegalAidApplication.all.each do |application|
       application.application_proceeding_types.each do |proceeding|
-        next if Proceeding.where(legal_aid_application_id: application.id).count == application.application_proceeding_types.count
+        next if application.proceedings.count == application.application_proceeding_types.count
 
         Proceeding.create(
           legal_aid_application_id: application.id,

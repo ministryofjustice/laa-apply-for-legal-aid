@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe ApplicationProceedingType do
   describe '#proceeding_case_id' do
     let(:legal_aid_application) { create :legal_aid_application }
-    let(:proceeding_type) { create :proceeding_type }
-    let(:proceeding_type2) { create :proceeding_type }
+    let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
+    let(:proceeding_type2) { create :proceeding_type, :with_scope_limitations }
 
     context 'empty_database' do
       it 'creates record with first proceeding case id' do
@@ -79,9 +79,19 @@ RSpec.describe ApplicationProceedingType do
 
   describe 'scope using_delegated_functions' do
     let(:laa) { create :legal_aid_application }
-    let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.today }
-    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: Time.zone.yesterday }
-    let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
+    let!(:pt1) { create :proceeding_type, :with_scope_limitations }
+    let!(:pt2) { create :proceeding_type, :with_scope_limitations }
+    let!(:pt3) { create :proceeding_type, :with_scope_limitations }
+    let(:apt1) { laa.application_proceeding_types.first }
+    let(:apt2) { laa.application_proceeding_types.second }
+
+    before do
+      laa.proceeding_types << [pt1, pt2, pt3]
+      laa.save!
+      apt1.update!(used_delegated_functions_on: Time.zone.today)
+      apt2.update!(used_delegated_functions_on: Time.zone.yesterday)
+    end
+
     let(:records) { laa.application_proceeding_types.using_delegated_functions }
 
     it 'returns 2 records with DF dates, in date order' do
@@ -190,9 +200,9 @@ RSpec.describe ApplicationProceedingType do
   end
 
   describe 'lead proceeding validation' do
-    let(:proceeding_types) { create_list :proceeding_type, 3, :domestic_abuse }
+    let(:proceeding_types) { create_list :proceeding_type, 3, :domestic_abuse, :with_scope_limitations }
     let!(:laa) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: proceeding_types, assign_lead_proceeding: false }
-    let(:new_pt) { create :proceeding_type }
+    let(:new_pt) { create :proceeding_type, :with_scope_limitations }
     let(:new_apt) { build :application_proceeding_type, proceeding_type: new_pt, legal_aid_application: laa, lead_proceeding: lead_proceeding }
 
     context 'lead proceeding on this record set to false' do
@@ -250,6 +260,88 @@ RSpec.describe ApplicationProceedingType do
           expect(AlertManager).not_to receive(:capture_message)
           new_apt.save!
         end
+      end
+    end
+  end
+
+  describe 'callbacks' do
+    context 'creating a new application_proceeding_type' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
+
+      before do
+        legal_aid_application.proceeding_types << proceeding_type
+        legal_aid_application.save!
+      end
+
+      it 'creates a corresponding proceeding record' do
+        expect(Proceeding.count).to eq 1
+      end
+
+      it 'populates the proceeding record with the correct data' do
+        proceeding = legal_aid_application.proceedings.first
+        laa_proc = legal_aid_application.application_proceeding_types.first
+
+        expect(proceeding.legal_aid_application_id).to eq legal_aid_application.id
+        expect(proceeding.proceeding_case_id).to eq laa_proc.proceeding_case_id
+        expect(proceeding.lead_proceeding).to eq laa_proc.lead_proceeding
+        expect(proceeding.ccms_code).to eq laa_proc.proceeding_type.ccms_code
+        expect(proceeding.meaning).to eq laa_proc.proceeding_type.meaning
+        expect(proceeding.description).to eq laa_proc.proceeding_type.description
+        expect(proceeding.substantive_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_substantive
+        expect(proceeding.delegated_functions_cost_limitation).to eq laa_proc.proceeding_type.default_cost_limitation_delegated_functions
+        expect(proceeding.substantive_scope_limitation_code).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code
+        )
+        expect(proceeding.substantive_scope_limitation_meaning).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning
+        )
+        expect(proceeding.substantive_scope_limitation_description).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description
+        )
+        expect(proceeding.delegated_functions_scope_limitation_code).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code
+        )
+        expect(proceeding.delegated_functions_scope_limitation_meaning).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.meaning
+        )
+        expect(proceeding.delegated_functions_scope_limitation_description).to eq(
+          laa_proc.proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.description
+        )
+        expect(proceeding.used_delegated_functions_on).to eq laa_proc.used_delegated_functions_on
+        expect(proceeding.used_delegated_functions_reported_on).to eq laa_proc.used_delegated_functions_reported_on
+      end
+    end
+
+    context 'updating an application_proceeding_type' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
+
+      before do
+        legal_aid_application.proceeding_types << proceeding_type
+        legal_aid_application.save!
+        legal_aid_application.application_proceeding_types.first.update!(used_delegated_functions_on: Time.zone.yesterday)
+        legal_aid_application.application_proceeding_types.first.update!(used_delegated_functions_reported_on: Time.zone.today)
+      end
+
+      it 'updates the corresponding proceeding record' do
+        expect(legal_aid_application.proceedings.first.used_delegated_functions_on).to eq Time.zone.yesterday
+        expect(legal_aid_application.proceedings.first.used_delegated_functions_reported_on).to eq Time.zone.today
+      end
+    end
+
+    context 'deleting an application_proceeding_type' do
+      let(:legal_aid_application) { create :legal_aid_application }
+      let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
+
+      before do
+        legal_aid_application.proceeding_types << proceeding_type
+        legal_aid_application.save!
+        legal_aid_application.application_proceeding_types.first.destroy
+      end
+
+      it 'deletes the corresponding proceeding record' do
+        expect(Proceeding.count).to eq 0
       end
     end
   end

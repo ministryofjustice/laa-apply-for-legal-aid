@@ -1,4 +1,4 @@
-class ApplicationProceedingType < ApplicationRecord
+class ApplicationProceedingType < ApplicationRecord # rubocop:disable Metrics/ClassLength
   FIRST_PROCEEDING_CASE_ID = 55_000_000
 
   belongs_to :legal_aid_application
@@ -41,6 +41,57 @@ class ApplicationProceedingType < ApplicationRecord
 
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
+  end
+
+  after_create do
+    Proceeding.create(
+      legal_aid_application_id: legal_aid_application.id,
+      proceeding_case_id: proceeding_case_id,
+      lead_proceeding: lead_proceeding,
+      ccms_code: proceeding_type.ccms_code,
+      meaning: proceeding_type.meaning,
+      description: proceeding_type.description,
+      substantive_cost_limitation: proceeding_type.default_cost_limitation_substantive,
+      delegated_functions_cost_limitation: proceeding_type.default_cost_limitation_delegated_functions,
+      substantive_scope_limitation_code: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code,
+      substantive_scope_limitation_meaning: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning,
+      substantive_scope_limitation_description: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description,
+      delegated_functions_scope_limitation_code: proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code,
+      delegated_functions_scope_limitation_meaning: proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.meaning,
+      delegated_functions_scope_limitation_description: proceeding_type.proceeding_type_scope_limitations
+                                                                       .where(delegated_functions_default: true).first.scope_limitation.description,
+      used_delegated_functions_on: used_delegated_functions_on,
+      used_delegated_functions_reported_on: used_delegated_functions_reported_on
+    )
+  end
+
+  after_update do
+    proceeding_to_update = Proceeding.where(legal_aid_application_id: legal_aid_application.id, proceeding_case_id: proceeding_case_id).first
+
+    proceeding_to_update.update!(
+      legal_aid_application_id: legal_aid_application.id,
+      proceeding_case_id: proceeding_case_id,
+      lead_proceeding: lead_proceeding,
+      ccms_code: proceeding_type.ccms_code,
+      meaning: proceeding_type.meaning,
+      description: proceeding_type.description,
+      substantive_cost_limitation: proceeding_type.default_cost_limitation_substantive,
+      delegated_functions_cost_limitation: proceeding_type.default_cost_limitation_delegated_functions,
+      substantive_scope_limitation_code: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.code,
+      substantive_scope_limitation_meaning: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.meaning,
+      substantive_scope_limitation_description: proceeding_type.proceeding_type_scope_limitations.where(substantive_default: true).first.scope_limitation.description,
+      delegated_functions_scope_limitation_code: proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.code,
+      delegated_functions_scope_limitation_meaning: proceeding_type.proceeding_type_scope_limitations.where(delegated_functions_default: true).first.scope_limitation.meaning,
+      delegated_functions_scope_limitation_description: proceeding_type.proceeding_type_scope_limitations
+                                                                       .where(delegated_functions_default: true).first.scope_limitation.description,
+      used_delegated_functions_on: used_delegated_functions_on,
+      used_delegated_functions_reported_on: used_delegated_functions_reported_on
+    )
+  end
+
+  before_destroy do
+    proceeding_to_delete = Proceeding.where(legal_aid_application_id: legal_aid_application.id, proceeding_case_id: proceeding_case_id).first
+    proceeding_to_delete.destroy
   end
 
   def used_delegated_functions?

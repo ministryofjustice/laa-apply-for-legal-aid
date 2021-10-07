@@ -10,6 +10,8 @@ RSpec.describe ProceedingsConverter do
         let(:laa_proc) { laa.application_proceeding_types.first }
         let(:proceeding_records_for_application) { Proceeding.where(legal_aid_application_id: laa.id) }
 
+        before { Proceeding.delete_all }
+
         it 'creates a single proceeding record' do
           expect { converter.call }.to change { Proceeding.count }.by(1)
         end
@@ -59,6 +61,8 @@ RSpec.describe ProceedingsConverter do
         let!(:laa) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: proceeding_types_count }
         let(:laa_proc) { laa.application_proceeding_types.first }
         let(:proceeding_records_for_application) { Proceeding.where(legal_aid_application_id: laa.id) }
+
+        before { Proceeding.delete_all }
 
         it 'creates one proceeding record for every application_proceeding_type' do
           expect { converter.call }.to change { Proceeding.count }.by(proceeding_types_count)
@@ -114,6 +118,8 @@ RSpec.describe ProceedingsConverter do
       let!(:laa) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: proceeding_types_count }
       let!(:laa2) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: proceeding_types_count }
       let!(:laa3) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: proceeding_types_count }
+
+      before { Proceeding.delete_all }
 
       it 'creates one proceeding record for every application_proceeding_type' do
         expect { converter.call }.to change { Proceeding.count }.by(proceeding_types_count * LegalAidApplication.count)
