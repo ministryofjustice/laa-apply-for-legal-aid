@@ -274,7 +274,7 @@ GEM
       activemodel (>= 6.0)
       activesupport (>= 6.0)
       deep_merge (~> 1.2.1)
-    govuk_notify_rails (2.1.2)
+    govuk_notify_rails (2.2.0)
       notifications-ruby-client (~> 5.1)
       rails (>= 4.1.0)
     guard (2.18.0)
@@ -366,7 +366,7 @@ GEM
     lumberjack (1.2.8)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.1)
+    marcel (1.0.2)
     method_source (1.0.0)
     middleware (0.1.0)
     mime-types (3.3.1)
@@ -709,7 +709,7 @@ DEPENDENCIES
   faker (>= 1.9.1)
   geckoboard-ruby
   govuk_design_system_formbuilder
-  govuk_notify_rails (~> 2.1.2)
+  govuk_notify_rails (~> 2.2.0)
   guard-cucumber
   guard-livereload
   guard-rspec
