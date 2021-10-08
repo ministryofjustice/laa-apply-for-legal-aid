@@ -4,7 +4,6 @@ RSpec.describe ProceedingTypeFullTextSearch do
   context 'whole service' do
     before(:all) do
       ServiceLevel.create!(service_level_number: 3, name: 'Full representation')
-      Setting.setting.update!(allow_multiple_proceedings: true)
       ProceedingType.populate
     end
 
@@ -12,7 +11,6 @@ RSpec.describe ProceedingTypeFullTextSearch do
       ServiceLevel.delete_all
       DefaultCostLimitation.delete_all
       ProceedingType.delete_all
-      Setting.setting.update!(allow_multiple_proceedings: false)
     end
 
     let(:legal_aid_application) { create :legal_aid_application }

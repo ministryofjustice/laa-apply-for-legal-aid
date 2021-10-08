@@ -81,7 +81,6 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: Completes the application using address lookup
-    Given the setting to allow multiple proceedings is enabled
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
@@ -184,9 +183,13 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
@@ -228,9 +231,22 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'No'
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I search for proceeding 'Child'
+    Then I choose a 'Child arrangements order (residence)' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?"
+    When I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
@@ -269,25 +285,30 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'Yes'
-    Then I enter the 'used delegated functions on' date of 35 days ago
+    Then I choose a 'Non-molestation order' radio button
     Then I click 'Save and continue'
-    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago using '%-d %B %Y' format
-    Then I choose "This date is correct"
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'Non-molestation order'
+    Then I enter the 'nonmolestation order used delegated functions on' date of 35 days ago
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Check delegated functions dates"
+    Then I choose a 'Yes' radio button
+    Then I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I click link "Back"
-    Then I should be on a page showing "Confirm you used delegated functions on" with a date of 35 days ago using '%-d %B %Y' format
-    Then I choose "I used delegated functions on a different date"
-    Then I enter the 'used delegated functions' date of 3 days ago
+    Then I should be on a page showing "Check delegated functions dates"
+    Then I choose "No, I need to change this date"
+    Then I click 'Save and continue'
+    Then I enter the 'nonmolestation order used delegated functions on' date of 3 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Covered under an emergency certificate"
-    Then I should be on a page showing "Covered under a substantive certificate"
-    When I choose 'Yes'
+    And I should be on a page showing "Emergency certificate"
+    And I should be on a page showing "Substantive certificate"
+    Then I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     Then I click 'Save and continue'
@@ -307,12 +328,16 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'I have not used delegated functions'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I should be on a page showing "Substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -332,12 +357,16 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'I have not used delegated functions'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Covered under a substantive certificate"
+    Then I should be on a page showing "Substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -389,11 +418,19 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
-    And I click Check Your Answers Change link for 'Proceeding Type'
+    And I click Check Your Answers Change link for 'Proceedings'
+    And I click the first link 'Remove'
     And I search for proceeding 'Non-molestation order'
-    Then proceeding suggestions has results
-    Then I select a proceeding type and continue
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'I have not used delegated functions'
+    Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
+    Then I should be on a page showing "Substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
@@ -568,7 +605,6 @@ Feature: Civil application journeys
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
-#    When I click the first link 'Chances of success'
     When I click the last link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "No"
@@ -802,26 +838,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "receives benefits that qualify for legal aid"
 
   @javascript @vcr
-  Scenario: When the DWP override is enabled, a positive benefit check result behaves as usual
-    Given the setting to allow DWP overrides is enabled
-    And I complete the passported journey as far as check your answers
-    When I click 'Save and continue'
-    Then I should be on a page showing 'receives benefits that qualify for legal aid'
-
-  @javascript @vcr
-  Scenario: When the DWP override is enabled, a negative benefit check allows the solicitor to continue without overriding the result
-    Given the setting to allow DWP overrides is enabled
-    And I complete the non-passported journey as far as check your answers
-    When I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
-    Then I choose 'Yes'
-    And I click 'Continue'
-    Then I should be on a page showing 'Is your client employed?'
-
-  @javascript @vcr
-  Scenario: When the DWP override is enabled, a negative benefit check allows the solicitor to override the result
-    Given the setting to allow DWP overrides is enabled
-    And I complete the non-passported journey as far as check your answers
+  Scenario: A negative benefit check allows the solicitor to override the result
+    Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'No'
@@ -866,13 +884,20 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
-    Then I select a proceeding type and continue
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I choose 'Yes'
-    Then I enter the 'used delegated functions on' date of 5 days ago
+    Then I choose a 'Non-molestation order' radio button
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I choose 'No'
+    Then I click 'Save and continue'
+    Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
+    Then I select 'Non-molestation order'
+    Then I enter the 'nonmolestation order used delegated functions on' date of 5 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    When I click link "Back"
-    Then I should be on a page showing 'Have you used delegated functions?'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What you're applying for"
+
+  @javascript @vcr
+  Scenario: Checking passported answers for an application with multiple procedings
+    Given I complete the journey as far as check passported answers with multiple proceedings
+    Then I should be on a page showing "Fake gateway evidence file (15.7 KB)"
+    Then I should be on a page showing "Fake file name 1 (15.7 KB)"
+    Then I should be on a page showing "Statement of case text entered here"

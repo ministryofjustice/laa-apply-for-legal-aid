@@ -2,12 +2,6 @@ module Flow
   module Flows
     class ProviderMerits < FlowSteps # rubocop:disable Metrics/ClassLength
       STEPS = {
-        # TODO: Remove when MultiProceeding flag is removed, this is the legacy handling for starting merits
-        start_chances_of_successes: {
-          path: ->(application) { urls.providers_legal_aid_application_start_chances_of_success_path(application) },
-          forward: :date_client_told_incidents,
-          check_answers: :check_merits_answers
-        },
         start_involved_children_task: {
           # This allows the statement of case flow to check for involved children while allowing a standard path
           #  to :involved_children from :has_other_involved_children that always goes to the new children page
@@ -55,7 +49,6 @@ module Flow
           }
         },
         date_client_told_incidents: {
-          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponents,
           check_answers: :check_merits_answers
         },
@@ -66,13 +59,7 @@ module Flow
         },
         statement_of_cases: {
           path: ->(application) { urls.providers_legal_aid_application_statement_of_case_path(application) },
-          forward: ->(application) do
-            if Setting.allow_multiple_proceedings?
-              application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists
-            else
-              :merits_task_lists
-            end
-          end,
+          forward: ->(application) { application.section_8_proceedings? ? :start_involved_children_task : :merits_task_lists },
           check_answers: :check_merits_answers
         },
         chances_of_success: {

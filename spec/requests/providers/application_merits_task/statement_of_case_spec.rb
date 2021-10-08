@@ -5,7 +5,6 @@ module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
       let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
-      # let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_chances_of_success }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
@@ -84,38 +83,29 @@ module Providers
         end
 
         describe 'redirect on success' do
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
+          context 'when the application has a section 8 proceeding type' do
+            let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
 
-            context 'and the application has a section 8 proceeding type' do
-              let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+            context 'and involved children exist' do
+              before { create :involved_child, legal_aid_application: legal_aid_application }
 
-              context 'and involved children exist' do
-                before { create :involved_child, legal_aid_application: legal_aid_application }
-
-                it 'redirects to the next page' do
-                  subject
-                  expect(response).to redirect_to providers_legal_aid_application_has_other_involved_children_path(legal_aid_application)
-                end
-
-                it 'sets the task to complete' do
-                  subject
-                  expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
-                end
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_has_other_involved_children_path(legal_aid_application)
               end
 
-              context 'and no involved children exist' do
-                it 'redirects to the next page' do
-                  subject
-                  expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
-                end
+              it 'sets the task to complete' do
+                subject
+                expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
               end
             end
-          end
 
-          it 'redirects to the next page' do
-            subject
-            expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+            context 'and no involved children exist' do
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to new_providers_legal_aid_application_involved_child_path(legal_aid_application)
+              end
+            end
           end
         end
 
@@ -370,13 +360,9 @@ module Providers
             expect(statement_of_case.original_attachments.first).to be_present
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :not_started/)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :not_started/)
           end
 
           it 'redirects to provider draft endpoint' do

@@ -1541,41 +1541,36 @@ module CCMS
 
           it 'hardcodes OPP_RELATIONSHIP_TO_CLIENT' do
             block = XmlExtractor.call(xml, :opponent, 'OPP_RELATIONSHIP_TO_CLIENT')
-            expect(block).to have_text_response 'None'
+            expect(block).to have_text_response 'Unknown'
           end
 
           it 'hardcodes OTHER_PARTY_ID' do
             block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_ID')
-            expect(block).to have_text_response 'OPPONENT_7713451'
+            expect(block).to have_text_response 'OPPONENT_88000001'
           end
 
           it 'hardcodes OTHER_PARTY_NAME' do
             block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME')
-            expect(block).to have_text_response '.'
+            expect(block).to have_text_response opponent.full_name
           end
 
           it 'harcodes OTHER_PARTY_NAME_MERITS' do
             block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_NAME_MERITS')
-            expect(block).to have_text_response '.'
-          end
-
-          it 'harcodes OTHER_PARTY_ORG' do
-            block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_ORG')
-            expect(block).to have_boolean_response true
+            expect(block).to have_text_response opponent.full_name
           end
 
           it 'harcodes OTHER_PARTY_TYPE' do
             block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_TYPE')
-            expect(block).to have_text_response 'ORGANISATION'
+            expect(block).to have_text_response 'PERSON'
+          end
+
+          it 'harcodes OTHER_PARTY_PERSON' do
+            block = XmlExtractor.call(xml, :opponent, 'OTHER_PARTY_PERSON')
+            expect(block).to have_boolean_response true
           end
 
           it 'harcodes RELATIONSHIP_CASE_OPPONENT' do
             block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_CASE_OPPONENT')
-            expect(block).to have_boolean_response true
-          end
-
-          it 'harcodes RELATIONSHIP_NONE' do
-            block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_NONE')
             expect(block).to have_boolean_response true
           end
 
@@ -1586,7 +1581,7 @@ module CCMS
 
           it 'harcodes RELATIONSHIP_TO_CLIENT' do
             block = XmlExtractor.call(xml, :opponent, 'RELATIONSHIP_TO_CLIENT')
-            expect(block).to have_text_response 'OPP'
+            expect(block).to have_text_response 'UNKNOWN'
           end
         end
 
@@ -1621,17 +1616,17 @@ module CCMS
         context 'dummy other_party' do
           it 'hardcodes OTHER_PARTY_ID' do
             block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_ID')
-            expect(block).to have_text_response 'OPPONENT_7713451'
+            expect(block).to have_text_response 'OPPONENT_88000001'
           end
 
           it 'harcodes OTHER_PARTY_NAME' do
             block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_NAME')
-            expect(block).to have_text_response '.'
+            expect(block).to have_text_response opponent.full_name
           end
 
           it 'harcodes OTHER_PARTY_TYPE' do
             block = XmlExtractor.call(xml, :other_party, 'OTHER_PARTY_TYPE')
-            expect(block).to have_text_response 'ORGANISATION'
+            expect(block).to have_text_response 'PERSON'
           end
 
           it 'harcodes RELATIONSHIP_TO_CASE' do
@@ -1641,7 +1636,7 @@ module CCMS
 
           it 'harcodes RELATIONSHIP_TO_CLIENT' do
             block = XmlExtractor.call(xml, :other_party, 'RELATIONSHIP_TO_CLIENT')
-            expect(block).to have_text_response 'NONE'
+            expect(block).to have_text_response 'UNKNOWN'
           end
         end
       end
@@ -2405,7 +2400,6 @@ module CCMS
           [:global_merits, 'NON_MAND_EVIDENCE_PRE_ACT_DISC'],
           [:global_merits, 'NON_MAND_EVIDENCE_SEP_STATE'],
           [:global_merits, 'NON_MAND_EVIDENCE_WARNING_LTTR'],
-          [:opponent, 'OTHER_PARTY_PERSON'],
           [:opponent, 'PARTY_IS_A_CHILD'],
           [:opponent, 'RELATIONSHIP_CASE_AGENT'],
           [:opponent, 'RELATIONSHIP_CASE_BENEFICIARY'],
@@ -2433,6 +2427,8 @@ module CCMS
           [:opponent, 'RELATIONSHIP_STEP_PARENT'],
           [:opponent, 'RELATIONSHIP_SUPPLIER'],
           [:opponent, 'RELATIONSHIP_TENANT'],
+          [:opponent, 'RELATIONSHIP_NONE'],
+          [:opponent, 'OTHER_PARTY_ORG'],
           [:proceeding_merits, 'UNLAWFUL_REMOVAL_OF_CHILDREN_C']
         ]
       end

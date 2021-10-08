@@ -114,48 +114,37 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
           continue_button: 'Continue'
         }
       end
+      let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
+
+      before { allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service) }
 
       it 'redirects to next step' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
+        expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
       end
 
-      context 'with setting.allow_multiple_proceedings set to true' do
-        let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
+      it 'calls the proceeding types service' do
+        expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_type: :substantive)
+        subject
+      end
+
+      context 'LegalFramework::ProceedingTypesService call returns false' do
+        let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
 
         before do
-          allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
           allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+          allow(LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
         end
 
-        it 'redirects to next step' do
+        it 'renders index' do
           subject
-          expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
+          expect(response).to have_http_status(:ok)
         end
 
-        it 'calls the proceeding types service' do
-          expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_type: :substantive)
+        it 'displays errors' do
           subject
-        end
-
-        context 'LegalFramework::ProceedingTypesService call returns false' do
-          let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
-
-          before do
-            allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
-            allow(LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
-          end
-
-          it 'renders index' do
-            subject
-            expect(response).to have_http_status(:ok)
-          end
-
-          it 'displays errors' do
-            subject
-            expect(response.body).to include('govuk-input--error')
-            expect(response.body).to include('govuk-form-group--error')
-          end
+          expect(response.body).to include('govuk-input--error')
+          expect(response.body).to include('govuk-form-group--error')
         end
       end
     end
@@ -175,7 +164,6 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
   end
 
   describe 'update: PATCH /providers/applications/:legal_aid_application_id/proceedings_type/:id' do
-    let(:code) { 'PR0001' }
     let!(:proceeding_type) { create(:proceeding_type) }
     let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
     let!(:default_delegated_function_scope_limitation) do
@@ -184,7 +172,6 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
              joined_proceeding_type: proceeding_type,
              meaning: 'Default delegated functions SL'
     end
-    let!(:sl_non_default) { create :scope_limitation }
 
     let(:params) do
       {
@@ -192,43 +179,21 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
         id: proceeding_type
       }
     end
+    let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
+
     subject do
       patch providers_legal_aid_application_proceedings_type_path(params)
     end
 
-    context 'with setting.allow_multiple_proceedings set to false' do
-      before do
-        login_as provider
-        subject
-      end
-
-      it 'redirects to the next page' do
-        expect(response).to redirect_to(providers_legal_aid_application_used_delegated_functions_path(legal_aid_application))
-      end
-
-      it 'associates proceeding type with legal aid application' do
-        expect(legal_aid_application.reload.proceeding_types).to include(proceeding_type)
-      end
-
-      it 'adds the default substantive scope limitation to the application proceedig type' do
-        expect(application_proceeding_type.assigned_scope_limitations).to eq [default_substantive_scope_limitation]
-      end
+    before do
+      login_as provider
+      allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
+      subject
     end
 
-    context 'with setting.allow_multiple_proceedings set to true' do
-      let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
-
-      before do
-        login_as provider
-        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
-        allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
-        subject
-      end
-
-      it 'redirects to next step' do
-        subject
-        expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
-      end
+    it 'redirects to next step' do
+      subject
+      expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
     end
   end
 end

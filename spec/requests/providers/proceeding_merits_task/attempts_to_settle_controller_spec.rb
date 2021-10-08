@@ -76,13 +76,9 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
           end
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'updates the task list' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
-          end
+        it 'updates the task list' do
+          subject
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
         context 'when the params are not valid' do
@@ -113,13 +109,9 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
           expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'does not set the task to complete' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
-          end
+        it 'does not set the task to complete' do
+          subject
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
       end
     end

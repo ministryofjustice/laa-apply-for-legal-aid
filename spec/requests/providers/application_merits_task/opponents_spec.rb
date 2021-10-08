@@ -92,13 +92,9 @@ module Providers
           expect(opponent.bail_conditions_set_details).to eq(sample_opponent.bail_conditions_set_details)
         end
 
-        context 'when the multi-proceeding flag is true' do
-          before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-          it 'sets the task to complete' do
-            subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
-          end
+        it 'sets the task to complete' do
+          subject
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
         it 'redirects to the next page' do
@@ -139,13 +135,9 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
           end
         end
 
@@ -157,13 +149,9 @@ module Providers
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
 
-          context 'when the multi-proceeding flag is true' do
-            before { allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true) }
-
-            it 'does not set the task to complete' do
-              subject
-              expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
-            end
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
           end
         end
       end

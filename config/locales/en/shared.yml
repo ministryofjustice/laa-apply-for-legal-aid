@@ -209,7 +209,7 @@ en:
           enter_cost_reasons: Tell us why you need a higher cost limit.
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?
-          statement_of_case: Provide a statement of case
+          statement_of_case: Statement of case
           full_name: Name
           child: Child
           linked_children: Which children are covered under this proceeding?
@@ -221,8 +221,6 @@ en:
           notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           gateway_evidence: Upload supporting evidence
-      merits_orig: # TODO: Delete when Multi-proceeding flag is removed
-        <<: *merits
       no_link_cash_transaction_item:
         no_transactions: "No"
         html:

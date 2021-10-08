@@ -12,27 +12,16 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
 
   describe 'GET /providers/:application_id/has_other_proceedings' do
     subject! do
-      allow(Setting).to receive(:allow_multiple_proceedings?).and_return(true)
       get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
     end
 
-    context 'allow multiple proceedings setting off' do
-      it 'redirects to new action' do
-        allow(Setting).to receive(:allow_multiple_proceedings?).and_return(false)
-        get providers_legal_aid_application_has_other_proceedings_path(legal_aid_application)
-        expect(response).to redirect_to(next_flow_step)
-      end
+    it 'shows the page' do
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.page_title'))
     end
 
-    context 'allow multiple proceedings setting on' do
-      it 'shows the page' do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(I18n.t('providers.has_other_proceedings.show.page_title'))
-      end
-
-      it 'shows the current number of proceedings' do
-        expect(response.body).to include('You have added 2 proceedings')
-      end
+    it 'shows the current number of proceedings' do
+      expect(response.body).to include('You have added 2 proceedings')
     end
   end
 

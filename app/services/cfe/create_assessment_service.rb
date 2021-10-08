@@ -18,10 +18,6 @@ module CFE
     end
 
     def options
-      Setting.allow_multiple_proceedings? ? multiple_proceedings : { matter_proceeding_type: 'domestic_abuse' }
-    end
-
-    def multiple_proceedings
       {
         proceeding_types: {
           ccms_codes: legal_aid_application.proceeding_types.map(&:ccms_code)

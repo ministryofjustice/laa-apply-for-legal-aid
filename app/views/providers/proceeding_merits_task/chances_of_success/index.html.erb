@@ -9,7 +9,7 @@
             head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
             template: :basic,
             form: form,
-            back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_statement_of_case_path(@legal_aid_application) }
+            back_link: {}
         ) do %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -18,7 +18,7 @@
           :value,
           :label,
           legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)},
-          caption: Setting.allow_multiple_proceedings? ? { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' } : {}
+          caption: { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' }
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>

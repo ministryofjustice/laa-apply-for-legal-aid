@@ -1,49 +1,31 @@
 <% show_client_involvment_type = false unless local_assigns.key?(:show_client_involvment_type) %>
 <% read_only = false unless local_assigns.key?(:read_only) %>
-<% if Setting.allow_multiple_proceedings? %>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :proceeding_type,
-          question: t('.section_proceeding.client_involvement_type'),
-          answer: t('.section_proceeding.client_involvement_type_applicant')
-        ) if show_client_involvment_type %>
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+        name: :proceeding_type,
+        question: t('.section_proceeding.client_involvement_type'),
+        answer: t('.section_proceeding.client_involvement_type_applicant')
+      ) if show_client_involvment_type %>
 
-    <% @legal_aid_application.application_proceedings_by_name.each_with_index do |proceeding, i| %>
-      <%= check_answer_link(
-            name: :"#{proceeding.name}_used_delegated_functions_on",
-            url: :show_blank_action,
-            question: "#{t(".proceeding")} #{i + 1}",
-            answer: proceeding.meaning,
-            read_only: read_only
-          ) %>
-    <% end %>
-  </dl>
-  <% if @legal_aid_application.section_8_proceedings? %>
-    <h2 class="govuk-heading-m"><%= t '.section_laspo.heading' %></h2>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-        <%= check_answer_link(
-              name: :in_scope_of_laspo,
-              url: providers_legal_aid_application_in_scope_of_laspo_path(@legal_aid_application),
-              question: t('.section_laspo.question'),
-              answer: yes_no(@legal_aid_application.in_scope_of_laspo),
-              read_only: read_only
-            ) %>
-      </dl>
-    <% end %>
-<% else %>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <% @legal_aid_application.application_proceedings_by_name.each_with_index do |proceeding, i| %>
     <%= check_answer_link(
-          name: :proceeding_type,
-          question: t('.section_proceeding.client_involvement_type'),
-          answer: t('.section_proceeding.client_involvement_type_applicant')
-        ) if show_client_involvment_type %>
-
-    <%= check_answer_link(
-          name: :proceeding_type,
-          url: providers_legal_aid_application_proceedings_types_path(@legal_aid_application, anchor: 'proceeding-search-input'.freeze),
-          question: t('.section_proceeding.proceeding'),
-          answer: legal_aid_application.lead_proceeding_type.meaning,
+          name: :"#{proceeding.name}_proceeding",
+          url: :show_blank_action,
+          question: "#{t(".proceeding")} #{i + 1}",
+          answer: proceeding.meaning,
           read_only: read_only
         ) %>
-  </dl>
+  <% end %>
+</dl>
+<% if @legal_aid_application.section_8_proceedings? %>
+  <h2 class="govuk-heading-m"><%= t '.section_laspo.heading' %></h2>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <%= check_answer_link(
+            name: :in_scope_of_laspo,
+            url: providers_legal_aid_application_in_scope_of_laspo_path(@legal_aid_application),
+            question: t('.section_laspo.question'),
+            answer: yes_no(@legal_aid_application.in_scope_of_laspo),
+            read_only: read_only
+          ) %>
+    </dl>
 <% end %>

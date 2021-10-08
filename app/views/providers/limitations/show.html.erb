@@ -1,10 +1,5 @@
-<% if Setting.allow_multiple_proceedings? %>
-  <% if @legal_aid_application.used_delegated_functions? %>
-    <%= render partial: 'providers/limitations/multi_proceeding_types_with_df' %>
-  <% else %>
-    <%= render partial: 'providers/limitations/multi_proceeding_types' %>
-  <% end %>
-  <!-- This entire else block can be removed when multiple proceedings goes live and the feature flag is removed -->
+<% if @legal_aid_application.used_delegated_functions? %>
+  <%= render partial: 'providers/limitations/proceeding_types_with_df' %>
 <% else %>
-  <%= render partial: 'providers/limitations/legacy_proceeding_types' %>
+  <%= render partial: 'providers/limitations/proceeding_types' %>
 <% end %>

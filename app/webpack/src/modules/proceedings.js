@@ -85,22 +85,6 @@ function searchOnUserInput (searchInputBox) {
       hideProceeedingsItems();
       setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = 'Search box has been cleared.' }, screenReaderMessageDelay);
     });
-
-  // TODO: remove this when the multiple proceedings feature flag is removed
-  const proceedingItems = document.querySelectorAll('.proceeding-item');
-
-  if (proceedingItems.length) {
-    proceedingItems.forEach((item) => {
-      item.addEventListener('mouseover', () => item.classList.add('hover'));
-      item.addEventListener('mouseout', () => item.classList.remove('hover'));
-      item.addEventListener('click', () => submitForm(item));
-      item.addEventListener('keydown', event => {
-        if (event.which === 13) {
-          return submitForm(item);
-        }
-      });
-    });
-  }
 }
 
 function deselectPreviousProceedingItem () {
@@ -124,8 +108,7 @@ function showResults (results, inputText) {
       // We want to highlight anything text in <main> or <span> tags that
       // matches the user's search criteria
       const span = element.querySelector('span');
-      // TODO: remove h3 when the multiple proceedings feature flag is removed
-      const main = element.querySelectorAll('h3, label')[0];
+      const main = element.querySelectorAll('label')[0];
 
       // Remove any existing highlighting
       main.innerHTML = main.innerHTML.replace(/<mark class="highlight">/gi, '');
@@ -162,13 +145,6 @@ function hideProceeedingsItems () {
     .forEach(item => hide(item));
 
   hide(document.querySelector('.no-proceeding-items'));
-}
-
-// TODO: remove this when the multiple proceedings feature flag is removed
-const submitForm = proceedingItem => {
-  const form = proceedingItem.querySelector('form');
-  if (form) form.submit();
-  return false;
 }
 
 function disableBackButton () {

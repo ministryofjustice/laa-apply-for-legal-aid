@@ -1,9 +1,3 @@
-<%
-  single_proceeding_link = providers_legal_aid_application_proceedings_types_path(legal_aid_application_id: @legal_aid_application)
-  multi_proceeding_link = providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application)
-  change_link = Setting.allow_multiple_proceedings? ? multi_proceeding_link : single_proceeding_link
-%>
-
 <div class="govuk-grid-row selected-proceeding-type">
   <div class="govuk-grid-column-two-thirds text-column">
     <h3 class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4"><%= proceeding_type.meaning %></h3>
@@ -15,7 +9,7 @@
     <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-margin-top-4">
       <%= link_to_accessible(
             t('generic.change'),
-            change_link,
+            providers_legal_aid_application_has_other_proceedings_path(legal_aid_application_id: @legal_aid_application),
             class: 'govuk-link change-link',
             suffix: 'proceeding'
           ) %>

@@ -38,13 +38,7 @@ module Flow
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
-          forward: ->(application) do
-            if Setting.allow_multiple_proceedings?
-              :has_other_proceedings
-            else
-              application.checking_answers? ? :limitations : :used_delegated_functions
-            end
-          end
+          forward: :has_other_proceedings
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
