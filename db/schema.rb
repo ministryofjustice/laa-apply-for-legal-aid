@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_150627) do
+ActiveRecord::Schema.define(version: 2021_10_08_094831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -679,6 +679,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_150627) do
     t.date "used_delegated_functions_reported_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name", null: false
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
   end
 
