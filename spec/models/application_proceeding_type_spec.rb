@@ -310,6 +310,7 @@ RSpec.describe ApplicationProceedingType do
         )
         expect(proceeding.used_delegated_functions_on).to eq laa_proc.used_delegated_functions_on
         expect(proceeding.used_delegated_functions_reported_on).to eq laa_proc.used_delegated_functions_reported_on
+        expect(proceeding.name).to eq laa_proc.proceeding_type.name
       end
     end
 
