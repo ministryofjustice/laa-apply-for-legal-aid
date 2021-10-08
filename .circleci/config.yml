@@ -181,6 +181,11 @@ jobs:
         name: Run JavaScript tests
         command: bin/rails javascript_tests
     - run:
+        name: Setup Code Climate test-reporter
+        command: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+          chmod +x ./tmp/cc-test-reporter
+    - run:
         name: Run ruby tests
         command: |
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
@@ -188,7 +193,10 @@ jobs:
           ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
           CCMS_FILES_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep "/services/ccms\S*\." || true) | wc -l)
           CCMS_TESTS_SHOULD_RUN=$(if [ "$CCMS_FILES_CHANGED" -ne "0" ]; then echo true; fi)
+          ./tmp/cc-test-reporter before-build
           INC_CCMS=$CCMS_TESTS_SHOULD_RUN bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
+          ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
+          ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
     - store_test_results:
         path: /tmp/test-results/rspec
     - store_artifacts:
