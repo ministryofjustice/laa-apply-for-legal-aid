@@ -1,5 +1,7 @@
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
+[![Maintainability](https://api.codeclimate.com/v1/badges/74905b89c5298282a205/maintainability)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/74905b89c5298282a205/test_coverage)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/test_coverage)
 
 # LAA Apply for legal aid
 
@@ -217,7 +219,7 @@ INC_CCMS=true bundle exec rspec
 ```
 This will run the entire test suite and monitor code coverage.
 
-If you don't care about code coverage, you could run 
+If you don't care about code coverage, you could run
 ```ruby
 bundle exec rspec --tag ccms
 ```
