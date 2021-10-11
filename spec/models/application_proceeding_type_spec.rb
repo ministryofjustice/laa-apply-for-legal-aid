@@ -265,6 +265,18 @@ RSpec.describe ApplicationProceedingType do
   end
 
   describe 'callbacks' do
+    before do
+      ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
+      ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
+      ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
+    end
+
+    after do
+      ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
+      ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
+      ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
+    end
+
     context 'creating a new application_proceeding_type' do
       let(:legal_aid_application) { create :legal_aid_application }
       let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }

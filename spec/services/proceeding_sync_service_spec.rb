@@ -3,11 +3,21 @@ require 'rails_helper'
 RSpec.describe ProceedingSyncService do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
+  let(:sync_service) { described_class.new(legal_aid_application.application_proceeding_types.first) }
+
   before do
+    ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
+    ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
+    ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
+
     legal_aid_application.proceeding_types << proceeding_type
   end
 
-  let(:sync_service) { described_class.new(legal_aid_application.application_proceeding_types.first) }
+  after do
+    ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
+    ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
+    ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
+  end
 
   describe '.create!' do
     it 'creates a corresponding proceeding record' do
