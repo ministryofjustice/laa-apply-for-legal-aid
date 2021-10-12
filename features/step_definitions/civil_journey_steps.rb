@@ -827,6 +827,10 @@ Then(/^I select an address '(.*)'$/) do |address|
   select(address, from: 'address_selection[lookup_id]')
 end
 
+When('I attach a file') do
+  find('input[name*=original_file]').attach_file('spec/fixtures/files/documents/hello_world.pdf')
+end
+
 Then('I am on the application confirmation page') do
   expect(page).to have_content('Application created')
 end
