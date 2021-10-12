@@ -1309,13 +1309,7 @@ module CCMS
                      office: office
             end
 
-            # before do
-            #   # the :with_proceeding_types trait sets up both substantive and df scope limitations for the application proceeding type, so
-            #   # we have to delete it here because we don't want it
-            #   application_proceeding_type.delegated_functions_scope_limitation.destroy!
-            # end
-
-            it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
+            it 'REQUESTED_SCOPE should be populated with the scope limitation code' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
                 [:proceeding_merits, 'REQUESTED_SCOPE']
@@ -1332,32 +1326,17 @@ module CCMS
             let(:legal_aid_application) do
               create :legal_aid_application,
                      :with_proceeding_types,
+                     :with_delegated_functions,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
-                     proceeding_types_count: 2,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
                      office: office
             end
 
-            it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
-              skip 'Will be fixed when multiple proceeding CCMS generation is tested'
-              # Currently is producing two attribute blocks as follows:
-              # <Attribute>
-              #     <Attribute>REQUESTED_SCOPE</Attribute>
-              #     <ResponseType>text</ResponseType>
-              #     <ResponseValue>AA003</ResponseValue>
-              #     <UserDefinedInd>true</UserDefinedInd>
-              # </Attribute>
-              # <Attribute>
-              #     <Attribute>REQUESTED_SCOPE</Attribute>
-              #     <ResponseType>text</ResponseType>
-              #     <ResponseValue>AA001</ResponseValue>
-              #     <UserDefinedInd>true</UserDefinedInd>
-              # </Attribute>
-              #
+            it 'REQUESTED_SCOPE should populated with MULTIPLE in proceedings section' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
                 [:proceeding_merits, 'REQUESTED_SCOPE']
