@@ -4601,7 +4601,7 @@ proceeding_means:
     response_type: text
     user_defined: true
   REQUESTED_SCOPE:
-    value: '#proceeding_cost_limitation'
+    value: 'MULTIPLE'
     br100_meaning: Requested Scope
     response_type: text
     user_defined: true
@@ -4644,7 +4644,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   REQUESTED_SCOPE:
-    value: '#proceeding_cost_limitation'
+    value: 'Dummy requested scope pending legal framework enhancements'
     br100_meaning: Requested Scope
     response_type: text
     user_defined: true

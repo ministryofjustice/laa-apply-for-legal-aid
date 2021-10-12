@@ -249,7 +249,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>AA001</common:ResponseValue>
+                            <common:ResponseValue>MULTIPLE</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2362,7 +2362,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>AA001</common:ResponseValue>
+                            <common:ResponseValue>Dummy requested scope pending legal framework enhancements</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
