@@ -9,6 +9,7 @@ module Flow
               application.change_state_machine_type('NonPassportedStateMachine')
               :applicant_employed
             else
+              application.check_applicant_details! unless application.checking_applicant_details?
               application.change_state_machine_type('PassportedStateMachine')
               :check_client_details
             end

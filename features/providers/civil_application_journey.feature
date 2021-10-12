@@ -871,6 +871,36 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Is your client employed?'
 
   @javascript @vcr
+  Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
+    Given I complete the non-passported journey as far as check your answers
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I choose 'Yes'
+    And I click 'Continue'
+    And I should be on a page showing 'Is your client employed?'
+    And I choose 'No'
+    And I click 'Save and continue'
+    And I should be on a page showing 'Check if you can continue using this service'
+    And I click link 'Back'
+    And I should be on a page showing 'Is your client employed?'
+    And I click link 'Back'
+    And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
+    Then I choose 'No, my client receives a passporting benefit'
+    And I click 'Continue'
+    And I should be on a page showing "Check your client's details"
+    Then I choose 'These details are correct'
+    And I click 'Save and continue'
+    And I should be on a page showing 'Which passporting benefit does your client receive?'
+    Then I choose 'Universal Credit'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'Do you have evidence that your client receives Universal Credit?'
+    And I choose 'Yes'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'You'll need to tell us if your client:'
+    And I click 'Save and continue'
+    And I should be on a page showing 'Does your client own the home that they live in?'
+
+  @javascript @vcr
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
