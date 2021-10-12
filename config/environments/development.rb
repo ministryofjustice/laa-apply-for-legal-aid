@@ -71,13 +71,9 @@ Rails.application.configure do
   config.webpacker.check_yarn_integrity = false
 
   # allows connections from the web in the case that you want to expose a local server to the internet
-  puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
-  pp config.hosts
 
-  config.hosts << /[a-z0-9]+\.c9users\.io/
-  config.hosts << "1c29-185-230-112-77.ngrok.io"
-  puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
-  pp config.hosts
+  config.hosts << /[a-z0-9-]+\.ngrok\.io/
+  # config.hosts << "1c29-185-230-112-77.ngrok.io"
 
 
 end

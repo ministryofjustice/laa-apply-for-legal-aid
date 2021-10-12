@@ -2,7 +2,7 @@
 module DataStudio
   class ApplicationDigestController < ApiController
     def index
-      render json: ApplicationDigest.all.to_json
+      render json: ApplicationDigest.limit(10)
     end
   end
 end
