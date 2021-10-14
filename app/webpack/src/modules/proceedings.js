@@ -10,11 +10,19 @@ let typingTimer,
   previousSearchTerm = null,
   containSimilarWords = false;
 
-async function searchResults (searchTerm) {
-  const currentUrl = window.location.href;
-  const url = `/v1/proceeding_types?search_term=${searchTerm}&sourceUrl=${currentUrl}`;
-  const response = await axios.get(url);
-  const data = response.data;
+async function searchResults (host, searchTerm, excludeCodes) {
+  const url = `${host}/proceeding_types/searches`
+  const response = await axios({
+    accept:  'application/json',
+    responseType: 'json',
+    method: 'post',
+    url: url,
+    data: {
+      search_term: searchTerm,
+      excluded_codes: excludeCodes
+    }
+  });
+  const data = response.data['data'];
   return updateMatchCounters(data, searchTerm);
 }
 
@@ -55,11 +63,13 @@ function updateMatchCounters (data, searchTerm) {
 
 // Calls search only when the typing timer expires
 async function doneTyping () {
+  const host = document.querySelector('#exclude_codes').getAttribute('data-uri').trim();
   const inputText = document.querySelector('#proceeding-search-input').value.trim();
+  const excludeCodes = document.querySelector('#exclude_codes').value.trim();
 
   if (inputText.length > 2) {
     hideProceeedingsItems();
-    const results = await searchResults(inputText);
+    const results = await searchResults(host, inputText, excludeCodes);
     showResults(results, inputText);
   } else {
     ariaText = 'No text entered.'
@@ -98,7 +108,7 @@ function deselectPreviousProceedingItem () {
 function showResults (results, inputText) {
   if (results.length > 0) {
     deselectPreviousProceedingItem()
-    const codes = results.map(obj => obj.code);
+    const codes = results.map(obj => obj.ccms_code);
     let proceedingsContainer = document.querySelector('.govuk-radios') // with MP flag on
     if (proceedingsContainer == null) { proceedingsContainer = document.querySelector('#proceeding-list') } // with MP flag off
     codes.forEach((code, idx) => {

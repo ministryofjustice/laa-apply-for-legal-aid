@@ -11,25 +11,24 @@ describe('ProceedingsTypes.searchResults', () => {
   let result;
 
   beforeEach(async () => {
-    axios.get
-      .mockResolvedValue({ data: [] })
-      .mockResolvedValueOnce({ data: ['proceeding_type1', 'proceeding_type2'] });
+    axios.mockResolvedValue({ data: { data: [] } })
+         .mockResolvedValueOnce({ data: { data: ['proceeding_type1', 'proceeding_type2'] } });
   });
 
   describe('searching single word', () => {
     const searchTerm = 'family';
-
+    const excludeCodes = '';
+    const host = 'hhtp://example.com';
     beforeEach(async () => {
-      result = await ProceedingsTypes.searchResults(searchTerm);
+      result = await ProceedingsTypes.searchResults(host, searchTerm, excludeCodes);
     });
 
-    it('calls axios.get once', () => {
-      expect(axios.get).toHaveBeenCalledTimes(1);
+    it('calls axios.post once', () => {
+      expect(axios).toHaveBeenCalledTimes(1);
     });
 
-    it('polls the correct endpoint', () => {
-      let endpoint = `/v1/proceeding_types?search_term=${searchTerm}&sourceUrl=http://localhost/`;
-      expect(axios.get.mock.calls).toEqual([[endpoint]]);
+    it('polls the correct endpoint that ends with searches', () => {
+      expect(axios.post.mock.calls).toMatchObject(new RegExp('/proceeding_types/searches'));
     });
 
     it('returns correct values', () => {
@@ -68,9 +67,9 @@ describe('ProceedingsTypes.searchResults', () => {
       test.each(searchResultValues)(
         'Call searchResults %number of times',
         async (previousSearchTerm, nextSearchTerm, expected) => {
-          await ProceedingsTypes.searchResults(previousSearchTerm);
-          result = ProceedingsTypes.searchResults(nextSearchTerm);
-
+          const excludedCodes = ''; // not needed for this test 
+          await ProceedingsTypes.searchResults('http://fakehost.com', previousSearchTerm, excludedCodes);
+          result = ProceedingsTypes.searchResults('http://fakehost.com', nextSearchTerm, excludedCodes);
           return expect(result).resolves.toEqual(expected);
         }
       );
