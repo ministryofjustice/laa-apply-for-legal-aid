@@ -128,10 +128,16 @@ function showResults (results, inputText) {
 
       // Highlight any text that matches the user's input
       const terms = inputText.split(' ')
-      terms.forEach(term => {
-        const regExp = RegExp(term.trim(), 'gi');
-        main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-        span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+      terms.forEach((term, index) => {
+        if (index === 0) {
+          const regExp = RegExp(term.trim(), 'gi');
+          main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+          span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
+        } else {
+          const regExp = RegExp(`(?<=(</mark>))( ?${term.trim()})`, 'gi');
+          main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+          span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+        }
       })
       // move to top of list, but after previously added elements
       proceedingsContainer.insertBefore(element, proceedingsContainer.children[idx])
