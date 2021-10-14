@@ -77,7 +77,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "You'll need to tell us if your client"
 
-  @javascript
+  @javascript @vcr
   Scenario: I go back and change the proceedings on an application with multiple proceedings
     Given the method populate of ProceedingType is rerun
     And the method populate of ProceedingTypeScopeLimitation is rerun
