@@ -162,38 +162,4 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
       end
     end
   end
-
-  describe 'update: PATCH /providers/applications/:legal_aid_application_id/proceedings_type/:id' do
-    let!(:proceeding_type) { create(:proceeding_type) }
-    let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
-    let!(:default_delegated_function_scope_limitation) do
-      create :scope_limitation,
-             :delegated_functions_default,
-             joined_proceeding_type: proceeding_type,
-             meaning: 'Default delegated functions SL'
-    end
-
-    let(:params) do
-      {
-        legal_aid_application_id: legal_aid_application,
-        id: proceeding_type
-      }
-    end
-    let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
-
-    subject do
-      patch providers_legal_aid_application_proceedings_type_path(params)
-    end
-
-    before do
-      login_as provider
-      allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
-      subject
-    end
-
-    it 'redirects to next step' do
-      subject
-      expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
-    end
-  end
 end

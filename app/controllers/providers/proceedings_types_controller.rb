@@ -22,13 +22,6 @@ module Providers
       end
     end
 
-    # PATCH /provider/applications/:legal_aid_application_id/proceedings_types/:id
-    # TODO: Could be removed after multiple proceedings go live.
-    def update
-      run_transaction
-      go_forward
-    end
-
     private
 
     def run_transaction
