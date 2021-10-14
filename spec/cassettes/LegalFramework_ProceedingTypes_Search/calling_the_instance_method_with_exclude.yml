@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/searches
+    body:
+      encoding: UTF-8
+      string: '{"search_term":"injunction","excluded_terms":"DA001"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 11 Oct 2021 09:01:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"b74784c3e7dbc14d1024d6a0563c9fe4"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e308d5916822f9b7c89afdf23847b919
+      X-Runtime:
+      - '0.047986'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"data":[{"meaning":"Harassment - injunction","ccms_code":"DA003","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","ccms_category_law":"Family","ccms_matter":"Domestic
+        abuse"},{"meaning":"Non-molestation order","ccms_code":"DA004","description":"to
+        be represented on an application for a non-molestation order.","ccms_category_law":"Family","ccms_matter":"Domestic
+        abuse"}]}'
+  recorded_at: Mon, 11 Oct 2021 09:01:36 GMT
+recorded_with: VCR 6.0.0
