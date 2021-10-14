@@ -161,7 +161,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     end
   end
 
-  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset' do
+  describe 'POST /providers/applications/:legal_aid_application_id/check_provider_answers/reset', :vcr do
     subject { post "/providers/applications/#{application_id}/check_provider_answers/reset" }
 
     context 'when the provider is authenticated' do
