@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Providers::ProceedingsTypesController, type: :request do
+RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceeding_types }
   let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
@@ -110,7 +110,7 @@ RSpec.describe Providers::ProceedingsTypesController, type: :request do
       let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
       let(:params) do
         {
-          id: proceeding_type.id,
+          id: proceeding_type.ccms_code,
           continue_button: 'Continue'
         }
       end
