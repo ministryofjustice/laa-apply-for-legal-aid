@@ -2,8 +2,6 @@ Feature: Merits task list
 
   @javascript @vcr
   Scenario: Completing the merits task list
-    Given the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
     When I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     And I should see 'Children involved in this proceeding\nCANNOT START YET'
@@ -63,8 +61,6 @@ Feature: Merits task list
 
   @javascript @vcr
   Scenario: Removing children
-    Given the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
     When I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     And I should see 'Children involved in this proceeding\nCANNOT START YET'

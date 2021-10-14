@@ -79,8 +79,6 @@ Feature: Pathways from check your answers
 
   @javascript
   Scenario: I go back and change the proceedings on an application with multiple proceedings
-    Given the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
     Given I complete the journey as far as check client details with multiple proceedings selected
     When I click Check Your Answers Change link for 'Proceedings'
     Then I should be on a page showing 'Do you want to add another proceeding?'
@@ -132,8 +130,6 @@ Feature: Pathways from check your answers
 
   @javascript @vcr
   Scenario: I go back and change the delegated functions on an application with multiple proceedings
-    Given the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
     Given I complete the journey as far as check client details with multiple proceedings selected
     When I click Check Your Answers Change link for 'Delegated functions'
     Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
