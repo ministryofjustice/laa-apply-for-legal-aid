@@ -124,6 +124,10 @@ Before do |_scenario|
   Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
   FileUtils.rm_rf(Rails.root.join('tmp/capybara/**.*'))
+
+  ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
+  ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
+  ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
 end
 
 Around do |_scenario, block|
@@ -144,4 +148,8 @@ After do |scenario|
     name = scenario.location.file.gsub('features/', '').gsub(%r{/\.|/}, '-')
     screenshot_image(name)
   end
+
+  ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
+  ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
+  ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
 end

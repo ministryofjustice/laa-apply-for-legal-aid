@@ -37,11 +37,15 @@ class ApplicationProceedingType < ApplicationRecord
 
   scope :not_using_delegated_functions, -> { where(used_delegated_functions_on: nil) }
 
-  before_save :check_only_one_lead_proceedig
+  before_save :check_only_one_lead_proceeding
 
   before_create do
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
   end
+
+  after_create :create_proceeding
+  after_update :update_proceeding
+  before_destroy :destroy_proceeding
 
   def used_delegated_functions?
     used_delegated_functions_on.present?
@@ -79,7 +83,7 @@ class ApplicationProceedingType < ApplicationRecord
 
   private
 
-  def check_only_one_lead_proceedig
+  def check_only_one_lead_proceeding
     return if lead_proceeding == false
 
     apt = legal_aid_application.application_proceeding_types.detect { |rec| rec.lead_proceeding? && rec.id != id }
@@ -91,5 +95,17 @@ class ApplicationProceedingType < ApplicationRecord
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
     rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
+  end
+
+  def create_proceeding
+    ProceedingSyncService.new(self).create!
+  end
+
+  def update_proceeding
+    ProceedingSyncService.new(self).update!
+  end
+
+  def destroy_proceeding
+    ProceedingSyncService.new(self).destroy!
   end
 end
