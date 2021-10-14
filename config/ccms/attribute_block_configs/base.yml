@@ -4644,7 +4644,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   REQUESTED_SCOPE:
-    value: '#proceeding_cost_limitation'
+    value: 'JUST PUT SOMETHING HERE proceeding_merits.REQUESTED_SCOPE'
     br100_meaning: Requested Scope
     response_type: text
     user_defined: true

@@ -1309,12 +1309,6 @@ module CCMS
                      office: office
             end
 
-            # before do
-            #   # the :with_proceeding_types trait sets up both substantive and df scope limitations for the application proceeding type, so
-            #   # we have to delete it here because we don't want it
-            #   application_proceeding_type.delegated_functions_scope_limitation.destroy!
-            # end
-
             it 'REQUESTED_SCOPE should be hard be populated with the scope limitation code' do
               attributes = [
                 [:proceeding, 'REQUESTED_SCOPE'],
@@ -1332,8 +1326,10 @@ module CCMS
             let(:legal_aid_application) do
               create :legal_aid_application,
                      :with_proceeding_types,
+                     :with_delegated_functions,
                      :with_everything,
                      :with_applicant_and_address,
+                     :with_chances_of_success,
                      :with_positive_benefit_check_result,
                      proceeding_types_count: 2,
                      populate_vehicle: true,
@@ -1342,31 +1338,14 @@ module CCMS
                      office: office
             end
 
-            it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE' do
-              skip 'Will be fixed when multiple proceeding CCMS generation is tested'
-              # Currently is producing two attribute blocks as follows:
-              # <Attribute>
-              #     <Attribute>REQUESTED_SCOPE</Attribute>
-              #     <ResponseType>text</ResponseType>
-              #     <ResponseValue>AA003</ResponseValue>
-              #     <UserDefinedInd>true</UserDefinedInd>
-              # </Attribute>
-              # <Attribute>
-              #     <Attribute>REQUESTED_SCOPE</Attribute>
-              #     <ResponseType>text</ResponseType>
-              #     <ResponseValue>AA001</ResponseValue>
-              #     <UserDefinedInd>true</UserDefinedInd>
-              # </Attribute>
-              #
-              attributes = [
-                [:proceeding, 'REQUESTED_SCOPE'],
-                [:proceeding_merits, 'REQUESTED_SCOPE']
-              ]
-              attributes.each do |entity_attribute_pair|
-                entity, attribute = entity_attribute_pair
-                block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response 'MULTIPLE'
-              end
+            it 'REQUESTED_SCOPE should be hard be populated with MULTIPLE in proceedings section' do
+              block = XmlExtractor.call(xml, :proceeding, 'REQUESTED_SCOPE')
+              expect(block).to have_text_response legal_aid_application.application_proceeding_types.first.assigned_scope_limitations.first.code
+            end
+
+            it 'REQUESTED_SCOPE should be hard be populated with a text string in proceeding_merits' do
+              block = XmlExtractor.call(xml, :proceeding_merits, 'REQUESTED_SCOPE')
+              expect(block).to have_text_response legal_aid_application.application_proceeding_types.first.assigned_scope_limitations.first.code
             end
           end
 

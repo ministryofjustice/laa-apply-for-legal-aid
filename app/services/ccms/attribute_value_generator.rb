@@ -312,8 +312,6 @@ module CCMS
 
     def proceeding_cost_limitation(options)
       application_proceeding_type = options[:appl_proceeding_type]
-      return 'MULTIPLE' if application_proceeding_type.assigned_scope_limitations.size > 1
-
       application_proceeding_type.assigned_scope_limitations.first.code
     end
 
