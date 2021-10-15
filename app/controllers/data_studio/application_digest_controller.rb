@@ -2,8 +2,14 @@
 module DataStudio
   class ApplicationDigestController < ApiController
     def index
-      render json: ApplicationDigest.limit(10)
+
+      applications = ApplicationDigest.order(:date_submitted)
+
+
+      render json: applications
     end
+
+
   end
 end
 # :nocov:
