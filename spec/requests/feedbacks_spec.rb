@@ -226,6 +226,50 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
   end
 
+  describe 'GET /application_feedback/:application_reference' do
+    let(:session_vars) { {} }
+    let(:application) { create :legal_aid_application }
+
+    before do
+      set_session(session_vars)
+      get "/application_feedback/#{application.application_ref}"
+    end
+
+    it 'renders the page' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'displays the provider difficulty question' do
+      expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
+    end
+
+    context 'has come here as applicant or signed in provider' do
+      let(:session_vars) { {} }
+      it 'hash a hidden form field with no value' do
+        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" />')
+      end
+    end
+
+    context 'provider signed out' do
+      let(:provider) { create :provider }
+      let(:application) { create :legal_aid_application }
+
+      before do
+        sign_in provider
+        delete destroy_provider_session_path
+        get "/application_feedback/#{application.application_ref}"
+      end
+
+      it 'displays success message' do
+        expect(unescaped_response_body).to match(I18n.t('.feedback.new.signed_out'))
+      end
+
+      it 'does not display a back button' do
+        expect(unescaped_response_body).not_to match(I18n.t('.generic.back'))
+      end
+    end
+  end
+
   describe 'GET /feedback/:id' do
     let(:feedback) { create :feedback }
     let(:provider) { create :provider }
