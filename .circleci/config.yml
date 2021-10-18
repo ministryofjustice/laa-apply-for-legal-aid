@@ -367,13 +367,6 @@ jobs:
       - hold-notification:
           message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
 
-  hold_main_uat_notification:
-    executor: notification-executor
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME - ONLY APPROVE IF THIS CODE WAS NEEDED FOR PEN TESTING\n There is a pending MAIN UAT approval for $CIRCLE_BRANCH"
-
-
 workflows:
   version: 2
   open_pr:
@@ -404,20 +397,11 @@ workflows:
       - build_and_push:
           requires:
           - lint_checks
-#      - hold_main_uat_notification:
-#          requires:
-#            - lint_checks
-#      - hold_main_uat_approval:
-#          type: approval
-#          requires:
-#            - hold_main_uat_notification
       - deploy_main_uat:
           requires:
             - build_and_push
-#            - hold_main_uat_approval
       - delete_uat_branch:
           requires:
-#            - lint_checks
             - build_and_push
       - unit_tests:
           requires:
