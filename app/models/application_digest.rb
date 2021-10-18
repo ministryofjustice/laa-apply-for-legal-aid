@@ -26,6 +26,16 @@ class ApplicationDigest < ApplicationRecord
   end
 
 
+  def to_google_sheet_row
+    [
+      date_started,
+      date_submitted,
+      name,
+      days_to_submission.nil? ? 0 : days_to_submission
+    ]
+  end
+
+
   def self.to_csv
     attributes = %w{name date_started date_submitted days_to_submission submitted num_applications}
 
@@ -36,13 +46,5 @@ class ApplicationDigest < ApplicationRecord
         csv << attributes.map{ |attr| record.send(attr) }
       end
     end
-
-    # CSV.generate(headers: true) do |csv|
-    #   csv << attributes
-    #
-    #   all.each do |record|
-    #     csv << attributes.map{ |attr| record.send(attr) }
-    #   end
-    # end
   end
 end
