@@ -178,6 +178,9 @@ jobs:
     - *install_js_packages
     - *save_js_packages_cache
     - run:
+    		name: Display env vars
+    		command: echo $APPLICATION_DEPLOY_NAME
+    - run:
         name: Run JavaScript tests
         command: bin/rails javascript_tests
     - run:
