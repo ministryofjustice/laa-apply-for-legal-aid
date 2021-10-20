@@ -239,7 +239,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/application_feedback/:application_reference', to: 'feedback#new'
+  get '/submission_feedback/:application_ref', to: 'feedback#submission'
   get 'test/trapped_error', to: 'test/generate_error#trapped_error'
   get 'test/untrapped_error', to: 'test/generate_error#untrapped_error'
 

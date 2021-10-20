@@ -200,6 +200,10 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
     end
 
+    it 'has a hidden form field to show whether the feedback originates from a submission email with false value' do
+      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="false" />')
+    end
+
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
       it 'hash a hidden form field with no value' do
@@ -226,13 +230,13 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
   end
 
-  describe 'GET /application_feedback/:application_reference' do
+  describe 'GET /submission_feedback/:application_reference' do
     let(:session_vars) { {} }
     let(:application) { create :legal_aid_application }
 
     before do
       set_session(session_vars)
-      get "/application_feedback/#{application.application_ref}"
+      get "/submission_feedback/#{application.application_ref}"
     end
 
     it 'renders the page' do
@@ -241,6 +245,10 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     it 'displays the provider difficulty question' do
       expect(unescaped_response_body).to match(I18n.t('.feedback.new.difficulty'))
+    end
+
+    it 'has a hidden form field to show whether the feedback originates from a submission email with true value' do
+      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="true" />')
     end
 
     context 'has come here as applicant or signed in provider' do
@@ -257,7 +265,7 @@ RSpec.describe 'FeedbacksController', type: :request do
       before do
         sign_in provider
         delete destroy_provider_session_path
-        get "/application_feedback/#{application.application_ref}"
+        get "/submission_feedback/#{application.application_ref}"
       end
 
       it 'displays success message' do

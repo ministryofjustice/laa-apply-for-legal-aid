@@ -5,6 +5,8 @@ class FeedbackController < ApplicationController
     @journey = source
     @feedback = Feedback.new
     @signed_out = session.delete('signed_out')
+    @submission_feedback = submission_feedback
+    render :new
   end
 
   def create
@@ -27,12 +29,17 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.find(params[:id])
   end
 
+  def submission
+    new
+  end
+
   private
 
   def initialize_feedback
     @feedback = Feedback.new(feedback_params)
     @feedback.originating_page = originating_page
     @feedback.email = provider_email
+    @feedback.submission_feedback = params[:submission_feedback] || false
   end
 
   def provider_email
@@ -124,5 +131,9 @@ class FeedbackController < ApplicationController
 
   def citizen_path_regex
     @citizen_path_regex ||= Regexp.new(/\/citizens\//)
+  end
+
+  def submission_feedback
+    params[:action] == 'submission'
   end
 end

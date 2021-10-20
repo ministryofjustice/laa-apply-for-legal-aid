@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_133200) do
     t.integer "difficulty"
     t.string "email"
     t.string "originating_page"
+    t.boolean "submission_feedback", default: false, null: false
   end
 
   create_table "firms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
