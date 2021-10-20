@@ -377,6 +377,12 @@ jobs:
         command: |
           ./bin/delete_uat_release
 
+generic-slack-fail-post-step: &generic-slack-fail-post-step
+  post-steps:
+    - slack/notify:
+        event: fail
+        template: basic_fail_1
+
 workflows:
   version: 2
   open_pr:
@@ -385,38 +391,23 @@ workflows:
           filters:
             branches:
               ignore: main
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
           - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - deploy_uat:
           requires:
           - build_and_push
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
           - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
           - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
 
   merge_pr:
     jobs:
@@ -424,54 +415,33 @@ workflows:
           filters:
             branches:
               only: main
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
           - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - deploy_main_uat:
           requires:
             - build_and_push
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - delete_uat_branch:
           requires:
             - build_and_push
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
             - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
             - lint_checks
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - deploy_staging:
           requires:
             - integration_tests
             - unit_tests
             - build_and_push
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
       - slack/on-hold:
           custom: |
             {
@@ -522,10 +492,7 @@ workflows:
       - deploy_production:
           requires:
             - hold_production
-          post-steps:
-            - slack/notify:
-                event: fail
-                template: basic_fail_1
+          <<: *generic-slack-fail-post-step
 
   nightly:
     triggers:
