@@ -183,6 +183,16 @@ RSpec.describe 'FeedbacksController', type: :request do
         expect(unescaped_response_body).to include(I18n.t('.activerecord.errors.models.feedback.attributes.satisfaction.blank'))
       end
     end
+
+    context 'submitting feedback using link in submission email' do
+      let(:application) { create :legal_aid_application }
+      let(:params) { { feedback: attributes_for(:feedback), application_id: application.id, submission_feedback: 'true' } }
+      it 'adds signed-out submission_feedback specific attributes' do
+        subject
+        expect(feedback.legal_aid_application_id).to eq application.id
+        expect(feedback.originating_page).to eq 'submission_feedback'
+      end
+    end
   end
 
   describe 'GET /feedback/new' do
@@ -230,12 +240,11 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
   end
 
-  describe 'GET /submission_feedback/:application_reference' do
+  describe 'GET /submission_feedback/:application_ref' do
     let(:session_vars) { {} }
     let(:application) { create :legal_aid_application }
 
     before do
-      set_session(session_vars)
       get "/submission_feedback/#{application.application_ref}"
     end
 
@@ -251,29 +260,14 @@ RSpec.describe 'FeedbacksController', type: :request do
       expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="true" />')
     end
 
+    it 'has a hidden form field to store the application id' do
+      expect(response.body).to include("<input type=\"hidden\" name=\"application_id\" id=\"application_id\" value=\"#{application.id}\" />")
+    end
+
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
       it 'hash a hidden form field with no value' do
         expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" />')
-      end
-    end
-
-    context 'provider signed out' do
-      let(:provider) { create :provider }
-      let(:application) { create :legal_aid_application }
-
-      before do
-        sign_in provider
-        delete destroy_provider_session_path
-        get "/submission_feedback/#{application.application_ref}"
-      end
-
-      it 'displays success message' do
-        expect(unescaped_response_body).to match(I18n.t('.feedback.new.signed_out'))
-      end
-
-      it 'does not display a back button' do
-        expect(unescaped_response_body).not_to match(I18n.t('.generic.back'))
       end
     end
   end

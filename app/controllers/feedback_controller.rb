@@ -1,11 +1,15 @@
-class FeedbackController < ApplicationController
+class FeedbackController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :update_return_path, :update_locale
 
   def new
     @journey = source
     @feedback = Feedback.new
     @signed_out = session.delete('signed_out')
-    @submission_feedback = submission_feedback
+    @submission_feedback = submission_feedback?
+    if submission_feedback?
+      application = LegalAidApplication.find_by(application_ref: params[:application_ref])
+      @application_id = application.id
+    end
     render :new
   end
 
@@ -39,7 +43,7 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.new(feedback_params)
     @feedback.originating_page = originating_page
     @feedback.email = provider_email
-    @feedback.submission_feedback = params[:submission_feedback] || false
+    @feedback.legal_aid_application_id = application_id
   end
 
   def provider_email
@@ -53,6 +57,7 @@ class FeedbackController < ApplicationController
 
   def application_id
     return session['current_application_id'] if source == :citizen
+    return params[:application_id] if submission_feedback?
 
     application_id_from_page_history || nil
   end
@@ -68,6 +73,8 @@ class FeedbackController < ApplicationController
   end
 
   def originating_page
+    return 'submission_feedback' if submission_feedback?
+
     params['signed_out'].present? ? destroy_provider_session_path : URI(session['feedback_return_path']).path.split('/').last
   end
 
@@ -133,7 +140,7 @@ class FeedbackController < ApplicationController
     @citizen_path_regex ||= Regexp.new(/\/citizens\//)
   end
 
-  def submission_feedback
-    params[:action] == 'submission'
+  def submission_feedback?
+    params[:action] == 'submission' || params[:submission_feedback] == 'true'
   end
 end
