@@ -385,18 +385,38 @@ workflows:
           filters:
             branches:
               ignore: main
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - build_and_push:
           requires:
           - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - deploy_uat:
           requires:
           - build_and_push
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - unit_tests:
           requires:
           - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - integration_tests:
           requires:
           - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
 
   merge_pr:
     jobs:
@@ -404,26 +424,54 @@ workflows:
           filters:
             branches:
               only: main
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - build_and_push:
           requires:
           - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - deploy_main_uat:
           requires:
             - build_and_push
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - delete_uat_branch:
           requires:
             - build_and_push
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - unit_tests:
           requires:
             - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - integration_tests:
           requires:
             - lint_checks
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - deploy_staging:
           requires:
             - integration_tests
             - unit_tests
             - build_and_push
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
       - slack/on-hold:
           custom: |
             {
@@ -474,6 +522,10 @@ workflows:
       - deploy_production:
           requires:
             - hold_production
+          post-steps:
+            - slack/notify:
+                event: fail
+                template: basic_fail_1
 
   nightly:
     triggers:
