@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@3.4.2
+  slack: circleci/slack@4.4.4
 
 executors:
   basic-executor:
@@ -125,28 +125,6 @@ references:
         bundle exec rake db:create db:schema:load
         bundle exec rake db:migrate db:seed
 
-commands:
-  hold-notification:
-    description: Notify Slack about an awaiting approval job
-    parameters:
-      message:
-        default: "$CIRCLE_USERNAME has a pending approval for $CIRCLE_BRANCH"
-        description: A workflow in CircleCI is awaiting approval.
-        type: string
-      url:
-        default: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
-        description: The URL to link back to.
-        type: string
-      webhook:
-        default: '${SLACK_WEBHOOK}'
-        description: >-
-          Enter either your Webhook value or use the CircleCI UI to add your token
-          under the 'SLACK_WEBHOOK' env var
-        type: string
-    steps:
-      - slack/approval:
-          message: << parameters.message >>
-          webhook: << parameters.webhook >>
 jobs:
   lint_checks:
     executor: linting-executor
@@ -225,10 +203,48 @@ jobs:
         path: /tmp/test-results/rspec
     - store_artifacts:
         path: ./coverage
-    - slack/status:
-        fail_only: true
-        success_message: ":yep: The full CCMS run was successful"
-        failure_message: ":nope: <!here> The full CCMS run has failed, run:\n INC_CCMS=true bundle exec rspec --tag ccms \n locally to trace and resolve the issue"
+    - slack/notify:
+        event: fail
+        custom: |
+          {
+            "blocks": [
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": ":circleci: :nope: The full CCMS run has failed. Run: \n\n `INC_CCMS=true bundle exec rspec --tag ccms` \n\n locally to trace and resolve the issue."
+                  }
+                ]
+              },
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Project*: $CIRCLE_PROJECT_REPONAME"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "*Mentions*: @here"
+                  }
+                ]
+              },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View Job"
+                    },
+                    "url": "${CIRCLE_BUILD_URL}"
+                  }
+                ]
+              }
+            ]
+          }
   integration_tests:
     executor: test-executor
     steps:
@@ -361,18 +377,11 @@ jobs:
         command: |
           ./bin/delete_uat_release
 
-  hold_production_notification:
-    executor: notification-executor
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
-
-  hold_main_uat_notification:
-    executor: notification-executor
-    steps:
-      - hold-notification:
-          message: "$CIRCLE_USERNAME - ONLY APPROVE IF THIS CODE WAS NEEDED FOR PEN TESTING\n There is a pending MAIN UAT approval for $CIRCLE_BRANCH"
-
+generic-slack-fail-post-step: &generic-slack-fail-post-step
+  post-steps:
+    - slack/notify:
+        event: fail
+        template: basic_fail_1
 
 workflows:
   version: 2
@@ -382,18 +391,23 @@ workflows:
           filters:
             branches:
               ignore: main
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
           - lint_checks
+          <<: *generic-slack-fail-post-step
       - deploy_uat:
           requires:
           - build_and_push
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
           - lint_checks
+          <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
           - lint_checks
+          <<: *generic-slack-fail-post-step
 
   merge_pr:
     jobs:
@@ -401,36 +415,72 @@ workflows:
           filters:
             branches:
               only: main
+          <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
           - lint_checks
-#      - hold_main_uat_notification:
-#          requires:
-#            - lint_checks
-#      - hold_main_uat_approval:
-#          type: approval
-#          requires:
-#            - hold_main_uat_notification
+          <<: *generic-slack-fail-post-step
       - deploy_main_uat:
           requires:
             - build_and_push
-#            - hold_main_uat_approval
+          <<: *generic-slack-fail-post-step
       - delete_uat_branch:
           requires:
-#            - lint_checks
             - build_and_push
+          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
             - lint_checks
+          <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
             - lint_checks
+          <<: *generic-slack-fail-post-step
       - deploy_staging:
           requires:
             - integration_tests
             - unit_tests
             - build_and_push
-      - hold_production_notification:
+          <<: *generic-slack-fail-post-step
+      - slack/on-hold:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ":circleci: $CIRCLE_USERNAME has a pending production approval for $CIRCLE_BRANCH"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*: $CIRCLE_PROJECT_REPONAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Pull Request*: $CIRCLE_PULL_REQUEST"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Workflow"
+                      },
+                      "url": "https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
+                    }
+                  ]
+                }
+              ]
+            }
           requires:
             - deploy_staging
       - hold_production:
@@ -438,9 +488,11 @@ workflows:
           requires:
             - deploy_staging
             - delete_uat_branch
+            - slack/on-hold
       - deploy_production:
           requires:
             - hold_production
+          <<: *generic-slack-fail-post-step
 
   nightly:
     triggers:
