@@ -21,3 +21,4 @@ For more information on how to correctly configure CircleCI to be able to deploy
 Deploys are normally triggered through CI (CircleCI) after a branch is pushed to the repo (they require manual approval in order to be initiated).
 
 **NOTE:** A manually deploy can be triggered through the developer's console by executing the same command that CircleCI executes to trigger the deploy (refer to the `.circleci/config.yml` for more details).
+§
