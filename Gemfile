@@ -148,6 +148,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'vcr'
-  gem 'webdrivers', '~> 4.7'
+  gem 'webdrivers', '~> 5.0'
   gem 'webmock'
 end
