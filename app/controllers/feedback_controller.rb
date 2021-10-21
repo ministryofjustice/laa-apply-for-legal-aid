@@ -12,6 +12,7 @@ class FeedbackController < ApplicationController # rubocop:disable Metrics/Class
     end
     render :new
   end
+  alias submission new
 
   def create
     initialize_feedback
@@ -31,10 +32,6 @@ class FeedbackController < ApplicationController # rubocop:disable Metrics/Class
 
   def show
     @feedback = Feedback.find(params[:id])
-  end
-
-  def submission
-    new
   end
 
   private
