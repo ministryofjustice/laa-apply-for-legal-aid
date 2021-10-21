@@ -7,7 +7,7 @@ SecureHeaders::Configuration.configure do |config|
     script_src: %w['self' nonce https://www.google-analytics.com https://www.googletagmanager.com],
     style_src: %w['self' 'unsafe-inline'],
     object_src: %w['none'],
-    connect_src: %w['self' https://www.google-analytics.com]
+    connect_src: %w['self' https://www.google-analytics.com https://*.justice.gov.uk]
   }
   # rubocop:enable Lint/PercentStringArray
 end

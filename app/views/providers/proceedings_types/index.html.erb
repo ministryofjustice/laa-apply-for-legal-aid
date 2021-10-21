@@ -32,6 +32,10 @@
   </div>
 </div>
 
+<input id="exclude_codes"
+       class="hidden"
+       data-uri="<%= Rails.configuration.x.legal_framework_api_host %>"
+       value="<%= @excluded_codes %>">
 <%= form_with(
   model: nil,
   url: providers_legal_aid_application_proceedings_types_path,
@@ -40,10 +44,10 @@
     <div id="proceeding-list" class="govuk-grid-column-two-thirds govuk-list govuk-!-margin-bottom-0">
         <%= form.govuk_radio_buttons_fieldset :id, legend: {text: nil, hidden: true} do %>
           <% @proceeding_types.each do |proceeding_type| %>
-            <div id="<%= proceeding_type.code %>" class="govuk-grid-row proceeding-item">
+            <div id="<%= proceeding_type.ccms_code %>" class="govuk-grid-row proceeding-item">
               <%= form.govuk_radio_button(
                       :id,
-                      proceeding_type.id,
+                      proceeding_type.ccms_code,
                       label: {text: proceeding_type.meaning},
                       hint: {text: "#{proceeding_type.ccms_category_law} (#{proceeding_type.ccms_matter})"}
                     ) %>

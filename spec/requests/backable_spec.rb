@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Backable', type: :request do
+RSpec.describe 'Backable', :vcr, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant }
 
   before { login_as application.provider }
