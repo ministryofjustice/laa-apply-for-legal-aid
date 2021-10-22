@@ -81,6 +81,10 @@ class ApplicationProceedingType < ApplicationRecord
     used_delegated_functions_on&.strftime('%F') || 'n/a'
   end
 
+  def proceeding
+    Proceeding.find_by(legal_aid_application_id: legal_aid_application.id, ccms_code: proceeding_type.ccms_code)
+  end
+
   private
 
   def check_only_one_lead_proceeding
