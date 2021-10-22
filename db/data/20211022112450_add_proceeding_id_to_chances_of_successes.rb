@@ -15,6 +15,8 @@ class AddProceedingIdToChancesOfSuccesses < ActiveRecord::Migration[6.1]
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration
+    MigrationChancesOfSuccesses.all.each do |cos|
+      cos.update!(proceeding_id: nil)
+    end
   end
 end

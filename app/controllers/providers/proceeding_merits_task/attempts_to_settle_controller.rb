@@ -3,7 +3,6 @@ module Providers
     class AttemptsToSettleController < ProviderBaseController
       def show
         @application_proceeding_type = application_proceeding_type
-        @proceeding = proceeding
         @form = Providers::ProceedingMeritsTask::AttemptsToSettleForm.new(model: attempts_to_settle)
       end
 

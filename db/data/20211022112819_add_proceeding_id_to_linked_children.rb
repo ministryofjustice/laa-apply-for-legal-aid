@@ -15,6 +15,8 @@ class AddProceedingIdToLinkedChildren < ActiveRecord::Migration[6.1]
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration
+    MigrationLinkedChildren.all.each do |lc|
+      lc.update!(proceeding_id: nil)
+    end
   end
 end

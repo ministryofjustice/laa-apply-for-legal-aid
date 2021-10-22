@@ -15,6 +15,8 @@ class AddProceedingIdToAttemptsToSettles < ActiveRecord::Migration[6.1]
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration
+    MigrationAttemptsToSettle.all.each do |ats|
+      ats.update!(proceeding_id: nil)
+    end
   end
 end
