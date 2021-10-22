@@ -36,7 +36,8 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let!(:chances_of_success) { create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type }
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+        let!(:chances_of_success) { create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding }
         let(:applicant) { legal_aid_application.applicant }
 
         context 'boolean attributes' do

@@ -22,7 +22,6 @@ module CCMS
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
                  :with_proceeding_types,
-                 :with_substantive_scope_limitation,
                  :with_non_passported_state_machine,
                  :submitting_assessment,
                  populate_vehicle: true,
@@ -40,8 +39,10 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type,
+                                      proceeding: proceeding
         end
         let(:timestamp) { Time.current.strftime('%Y-%m-%d_%H.%M') }
         let(:applicant) { legal_aid_application.applicant }

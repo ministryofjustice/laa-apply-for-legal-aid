@@ -30,8 +30,9 @@ module CCMS
                  date_of_birth: Date.new(1977, 4, 10),
                  address: address
         end
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, application_proceeding_type: legal_aid_application.lead_application_proceeding_type
+          create :chances_of_success, :with_optional_text, application_proceeding_type: legal_aid_application.lead_application_proceeding_type, proceeding: proceeding
         end
         let(:vehicle) { create :vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true }
         let(:other_assets_declaration) do

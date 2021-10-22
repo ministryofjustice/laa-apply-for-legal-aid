@@ -12,8 +12,8 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
            :with_bank_transaction_report,
            :submitting_assessment
   end
-
-  let!(:chances_of_success) { create :chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type }
+  let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+  let!(:chances_of_success) { create :chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type, proceeding: proceeding }
   let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
   let(:statement_of_case_attachment) { statement_of_case.original_attachments.first }
   let(:means_report_attachment) { legal_aid_application.means_report }
