@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: firm }
+  let!(:provider) { create :provider, firm: firm }
   let!(:legal_aid_application) do
     create :legal_aid_application,
            :with_everything,
