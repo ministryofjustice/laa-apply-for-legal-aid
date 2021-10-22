@@ -260,6 +260,12 @@ FactoryBot.define do
         proceeding_types.each do |pt|
           apt = create :application_proceeding_type, legal_aid_application: application, proceeding_type: pt
           apt.substantive_scope_limitation = pt.default_substantive_scope_limitation
+          create :scope_limitation, :substantive_default, joined_proceeding_type: apt.proceeding_type if apt.proceeding_type.default_substantive_scope_limitation.nil?
+          if apt.proceeding_type.default_delegated_functions_scope_limitation.nil?
+            create :scope_limitation, :delegated_functions_default,
+                   joined_proceeding_type: apt.proceeding_type
+          end
+          Proceeding.create_from_proceeding_type(application, pt)
         end
 
         if evaluator.assign_lead_proceeding == true
@@ -273,17 +279,17 @@ FactoryBot.define do
     end
 
     trait :with_multiple_proceeding_types_inc_section8 do
-      after(:create) do |application, evaluator|
-        if evaluator.proceeding_types.presence
-          application.proceeding_types = evaluator.proceeding_types
-        else
-          application.proceeding_types << create(:proceeding_type, :with_real_data)
-          application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
-        end
+      after(:create) do |application|
+        application.proceeding_types << create(:proceeding_type, :with_real_data)
+        application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
+        application.proceedings << create(:proceeding, :da001)
+        application.proceedings << create(:proceeding, :se014)
         lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
         if lead_apt.nil?
           lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
           lead_apt.update!(lead_proceeding: true)
+          lead_proceeding = application.proceedings.detect { |proceeding| proceeding.ccms_code =~ /^DA/ }
+          lead_proceeding.update!(lead_proceeding: true)
         end
         application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
         pt = lead_apt.proceeding_type
@@ -292,8 +298,8 @@ FactoryBot.define do
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
         application.application_proceeding_types.each do |app_proc_type|
-          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
-          create(:attempts_to_settles, application_proceeding_type: app_proc_type)
+          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type, proceeding: app_proc_type.proceeding)
+          create(:attempts_to_settles, application_proceeding_type: app_proc_type, proceeding: app_proc_type.proceeding)
         end
       end
     end
@@ -558,7 +564,7 @@ FactoryBot.define do
       end
       after(:create) do |application, evaluator|
         application.application_proceeding_types.each do |apt|
-          apt.chances_of_success = create(:chances_of_success, application_proceeding_type: apt, success_prospect: evaluator.prospect)
+          apt.chances_of_success = create(:chances_of_success, application_proceeding_type: apt, success_prospect: evaluator.prospect, proceeding: apt.proceeding)
         end
       end
     end
@@ -885,40 +891,6 @@ FactoryBot.define do
         application.application_proceeding_types.first.reload
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
         AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
-      end
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types, :with_delegated_functions instead                      #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_multiple_delegated_functions do
-      after(:create) do |application|
-        application.application_proceeding_types.each_with_index do |type, i|
-          type.used_delegated_functions_on = Time.zone.today - (i.month + 1.day)
-          type.used_delegated_functions_reported_on = Time.zone.today unless i > 0
-        end
-      end
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_application_proceeding_type do
-      transient do
-        proceeding_types_count { 1 }
-      end
-
-      after(:create) do |application, evaluator|
-        application.proceeding_types = create_list(:proceeding_type, evaluator.proceeding_types_count)
-        application.application_proceeding_types.each do |apt|
-          create(:chances_of_success, :with_optional_text, application_proceeding_type: apt)
-        end
       end
     end
   end
