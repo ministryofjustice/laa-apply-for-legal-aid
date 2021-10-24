@@ -133,6 +133,19 @@ module Providers
           end
         end
 
+        context 'with invalid uploaded file header' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
+
+          before do
+            allow_any_instance_of(Http::UploadedFile).to receive(:head).and_return("\xC3hello_world.docx".force_encoding(Encoding::ASCII_8BIT))
+          end
+
+          it 'updates the record' do
+            subject
+            expect(gateway_evidence.original_attachments.first).to be_present
+          end
+        end
+
         context 'no file chosen' do
           let(:original_file) { nil }
 
