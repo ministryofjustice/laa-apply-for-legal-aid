@@ -16,6 +16,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
 
   before do
+    legal_aid_application.reload
     login
     subject
   end
