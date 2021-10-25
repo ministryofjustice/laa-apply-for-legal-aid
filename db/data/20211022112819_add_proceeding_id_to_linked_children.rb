@@ -2,21 +2,28 @@
 
 class AddProceedingIdToLinkedChildren < ActiveRecord::Migration[6.1]
   class MigrationLinkedChildren < ApplicationRecord
-    self.table_name = :application_proceeding_types_linked_children
+    self.table_name = :proceedings_linked_children
+
+    belongs_to :proceeding
+    belongs_to :involved_child, class_name: 'ApplicationMeritsTask::InvolvedChild'
+
+    validate :correct_involved_child
+
+    def correct_involved_child
+      errors.add(:involved_child, 'belongs to another application') if proceeding.legal_aid_application_id != involved_child.legal_aid_application_id
+    end
   end
 
   def up
-    MigrationLinkedChildren.all.each do |lc|
-      apt_id = lc.application_proceeding_type_id
-      apt = ApplicationProceedingType.find(apt_id)
-      proceeding = Proceeding.where(legal_aid_application_id: apt.legal_aid_application_id, proceeding_case_id: apt.proceeding_case_id).first
-      lc.update!(proceeding_id: proceeding.id)
+    ProceedingMeritsTask::ApplicationProceedingTypeLinkedChild.all.each do |aptlc|
+      apt = aptlc.application_proceeding_type
+      proceeding = apt.proceeding
+      involved_child = aptlc.involved_child
+      MigrationLinkedChildren.create!(proceeding_id: proceeding.id, involved_child_id: involved_child.id)
     end
   end
 
   def down
-    MigrationLinkedChildren.all.each do |lc|
-      lc.update!(proceeding_id: nil)
-    end
+    MigrationLinkedChildren.delete_all
   end
 end
