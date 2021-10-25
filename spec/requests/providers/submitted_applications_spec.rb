@@ -22,10 +22,6 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
   describe 'GET /providers/applications/:legal_aid_application_id/submitted_application' do
     subject do
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-      pp legal_aid_application.id
-      pp legal_aid_application.application_proceeding_types.first.substantive_scope_limitation
-      puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
 
