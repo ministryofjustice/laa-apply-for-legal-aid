@@ -5,6 +5,8 @@ class Proceeding < ApplicationRecord
 
   has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
 
+  # TODO: remove once migration from application_proceeding_types to proceedings is completed
+  #
   # temporary method to create test data from existing proceeding types
   # to be removed when application_proceeding_types are removed
   def self.create_from_proceeding_type(application, proceeding_type) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
