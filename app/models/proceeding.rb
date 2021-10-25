@@ -5,6 +5,12 @@ class Proceeding < ApplicationRecord
 
   has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
 
+  has_many :proceeding_linked_children, class_name: 'ProceedingMeritsTask::ProceedingLinkedChild', dependent: :destroy
+
+  has_many :involved_children,
+           through: :proceeding_linked_children,
+           source: :involved_child
+
   # TODO: remove once migration from application_proceeding_types to proceedings is completed
   #
   # temporary method to create test data from existing proceeding types

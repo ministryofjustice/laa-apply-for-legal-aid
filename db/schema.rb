@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_111515) do
+ActiveRecord::Schema.define(version: 2021_10_25_093729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -130,10 +130,8 @@ ActiveRecord::Schema.define(version: 2021_10_15_111515) do
     t.uuid "application_proceeding_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "proceeding_id"
     t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
     t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
-    t.index ["proceeding_id"], name: "apt_link_child_proceedings_index"
   end
 
   create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -692,6 +690,15 @@ ActiveRecord::Schema.define(version: 2021_10_15_111515) do
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
   end
 
+  create_table "proceedings_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id"
+    t.uuid "involved_child_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["involved_child_id", "proceeding_id"], name: "index_involved_child_proceeding", unique: true
+    t.index ["proceeding_id", "involved_child_id"], name: "index_proceeding_involved_child", unique: true
+  end
+
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "type"
@@ -839,7 +846,6 @@ ActiveRecord::Schema.define(version: 2021_10_15_111515) do
   add_foreign_key "addresses", "applicants"
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
-  add_foreign_key "application_proceeding_types_linked_children", "proceedings"
   add_foreign_key "attempts_to_settles", "application_proceeding_types"
   add_foreign_key "attempts_to_settles", "proceedings"
   add_foreign_key "bank_account_holders", "bank_providers"
