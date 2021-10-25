@@ -394,6 +394,7 @@ GEM
     notifications-ruby-client (5.3.0)
       jwt (>= 1.5, < 3)
     numerizer (0.1.1)
+    oauth (0.5.6)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -726,6 +727,7 @@ DEPENDENCIES
   loofah (>= 2.2.3)
   nesty
   nokogiri
+  oauth
   omniauth (>= 2.0.0)
   omniauth-google-oauth2 (>= 0.8.1)
   omniauth-oauth2 (>= 1.7.1)
