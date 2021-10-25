@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2021_10_26_175246) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
-    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
+    t.boolean "employed"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -432,6 +432,14 @@ ActiveRecord::Schema.define(version: 2021_10_26_175246) do
     t.index ["provider_uploader_id"], name: "index_gateway_evidences_on_provider_uploader_id"
   end
 
+  create_table "hmrc_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "application_id"
+    t.string "use_case"
+    t.json "response"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.date "occurred_on"
     t.text "details"
@@ -559,7 +567,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_175246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
