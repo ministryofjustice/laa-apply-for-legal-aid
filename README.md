@@ -435,7 +435,7 @@ and are executed in order.
 We use the [data-migrate](https://github.com/ilyakatz/data-migrate/blob/master/README.md) gem for data migrations, i.e. when existing 
 data in the database has to be changed.  These are stored in the `db/data` directory, and are also given a name prefixed with a timestamp.
 
-Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data mnigrations 
+Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations 
 that rely on the schema at a certain point in time are run at that time.
 
 
