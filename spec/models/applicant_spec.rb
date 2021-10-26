@@ -24,6 +24,18 @@ RSpec.describe Applicant, type: :model do
     end
   end
 
+  describe '.json_for_hmrc' do
+    subject(:json_for_hmrc) { described_class.new.json_for_hmrc }
+
+    it 'returns the expected values' do
+      expect(json_for_hmrc.keys).to match_array %i[first_name last_name nino dob]
+    end
+
+    it 'does not include model values we are not concerned with' do
+      expect(json_for_hmrc.keys).to_not include %i[id status created_at updated_at email employed true_layer_secure_data_id]
+    end
+  end
+
   # Main purpose: to ensure relationships to other object set so that destroying applicant destroys all objects
   # that then become redundant.
   describe '.destroy_all' do
