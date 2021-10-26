@@ -17,10 +17,8 @@ module Providers
         return false unless valid?
 
         ActiveRecord::Base.transaction do
-          application_proceeding_type.involved_children.delete_all
-          linked_children.filter_map(&:presence).each do |child_id|
-            application_proceeding_type.application_proceeding_type_linked_children.create!(involved_child_id: child_id)
-          end
+          update_involved_children_on_application_proceeding_type
+          update_involved_children_on_proceeding
         end
         true
       rescue StandardError
@@ -28,6 +26,20 @@ module Providers
       end
 
       private
+
+      def update_involved_children_on_application_proceeding_type
+        application_proceeding_type.involved_children.delete_all
+        linked_children.filter_map(&:presence).each do |child_id|
+          application_proceeding_type.application_proceeding_type_linked_children.create!(involved_child_id: child_id)
+        end
+      end
+
+      def update_involved_children_on_proceeding
+        proceeding.involved_children.delete_all
+        linked_children.filter_map(&:presence).each do |child_id|
+          proceeding.proceeding_linked_children.create!(involved_child_id: child_id)
+        end
+      end
 
       def one_selected_child?
         errors.add :linked_children, error_message if no_children_selected?
@@ -47,6 +59,10 @@ module Providers
 
       def application_proceeding_type
         @application_proceeding_type ||= model
+      end
+
+      def proceeding
+        application_proceeding_type.proceeding
       end
 
       def children_ids

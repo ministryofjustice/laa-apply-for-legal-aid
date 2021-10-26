@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_093729) do
+ActiveRecord::Schema.define(version: 2021_10_20_093729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -346,6 +346,9 @@ ActiveRecord::Schema.define(version: 2021_10_25_093729) do
     t.uuid "proceeding_id"
     t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
+  end
+
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
