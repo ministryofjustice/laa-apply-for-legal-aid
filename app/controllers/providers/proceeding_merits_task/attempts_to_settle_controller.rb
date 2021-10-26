@@ -8,7 +8,8 @@ module Providers
 
       def update
         @application_proceeding_type = application_proceeding_type
-        @form = Providers::ProceedingMeritsTask::AttemptsToSettleForm.new(form_params)
+        @form = Providers::ProceedingMeritsTask::AttemptsToSettleForm.new(form_params.merge(proceeding_id: proceeding.id,
+                                                                                            application_proceeding_type_id: application_proceeding_type.id))
         render :show unless update_task_save_continue_or_draft(proceeding_type.ccms_code.to_sym, :attempts_to_settle)
       end
 
@@ -28,6 +29,10 @@ module Providers
 
       def attempts_to_settle
         @attempts_to_settle ||= @application_proceeding_type.attempts_to_settle || @application_proceeding_type.build_attempts_to_settle
+      end
+
+      def proceeding
+        @proceeding = application_proceeding_type.proceeding
       end
 
       def merits_task_list_id

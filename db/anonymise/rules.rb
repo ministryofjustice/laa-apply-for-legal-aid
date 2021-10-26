@@ -82,6 +82,8 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   cfe_submissions: {
     cfe_result: nil
   },
+  chances_of_successes: {},
+  # data_migrations: {},
   debugs: {},
   default_cost_limitations: {},
   dependants: {
@@ -105,19 +107,18 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   irregular_incomes: {},
   legal_aid_application_transaction_types: {},
   legal_aid_applications: {},
+  legal_framework_merits_task_lists: {},
+  legal_framework_submission_histories: {},
+  legal_framework_submissions: {},
   malware_scan_results: {
     file_details: {}
     # this is a JSON block that contains the original filename
     # this has the potential to leak the applicant name
     # e.g. jane_smith_statement_of_case.doc, etc
   },
-  chances_of_successes: {},
   offices: {
     code: -> { Faker::Base.regexify(/^[0-9][A-Z][0-9]{3}[A-Z]$/) }
   },
-  legal_framework_merits_task_lists: {},
-  legal_framework_submission_histories: {},
-  legal_framework_submissions: {},
   offices_providers: {},
   opponents: {
     full_name: -> { Faker::Name.name },
@@ -129,9 +130,10 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   other_assets_declarations: {},
   permissions: {},
   policy_disregards: {},
-  proceedings: {},
   proceeding_type_scope_limitations: {},
   proceeding_types: {},
+  proceedings: {},
+  proceedings_linked_children: {},
   providers: {
     username: -> { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" },
     name: -> { Faker::Name.name },

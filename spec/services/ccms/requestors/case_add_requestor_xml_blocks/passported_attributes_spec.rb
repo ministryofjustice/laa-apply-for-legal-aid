@@ -34,9 +34,12 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
         let!(:success_prospect) { :likely }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
+                                      application_proceeding_type: application_proceeding_type,
+                                      proceeding: proceeding
         end
 
         # enable this context if you need to create a file of the payload for manual inspection

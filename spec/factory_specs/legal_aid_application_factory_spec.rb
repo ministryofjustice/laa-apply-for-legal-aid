@@ -48,6 +48,17 @@ RSpec.describe 'LegalAidApplication factory' do
     end
   end
 
+  describe 'trait :with_multiple_proceeding_types_inc_section8 do' do
+    context 'without specifying proceeding type' do
+      let(:laa) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+      it 'creates the correct application proceeding types and proceedings' do
+        expect(laa.proceedings.map(&:ccms_code).sort).to eq %w[DA001 SE014]
+        expect(laa.proceedings.detect { |p| p.ccms_code == 'DA001' }.lead_proceeding).to be true
+        expect(laa.proceedings.detect { |p| p.ccms_code == 'SE014' }.lead_proceeding).to be false
+      end
+    end
+  end
+
   describe 'with_proceeding_types' do
     context 'proceeding type count not specified' do
       let(:laa) { create :legal_aid_application, :with_proceeding_types }

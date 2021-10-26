@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: firm }
-  let(:legal_aid_application) do
+  let!(:provider) { create :provider, firm: firm }
+  let!(:legal_aid_application) do
     create :legal_aid_application,
            :with_everything,
-           :with_proceeding_types,
+           :with_multiple_proceeding_types_inc_section8,
            :with_chances_of_success,
            :assessment_submitted,
            provider: provider
   end
-
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
 
   before do
+    legal_aid_application.reload
     login
     subject
   end

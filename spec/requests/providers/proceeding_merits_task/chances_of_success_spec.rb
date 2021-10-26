@@ -8,7 +8,8 @@ module Providers
       let(:pt_da) { create :proceeding_type, :with_real_data }
       let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
       let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
-
+      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+      let!(:proceeding_two) { create :proceeding, :se014, legal_aid_application: legal_aid_application }
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
       let(:login) { login_as legal_aid_application.provider }
 
@@ -35,7 +36,8 @@ module Providers
       describe 'POST /providers/merits_task_list/:id/chances_of_success' do
         let(:success_prospect) { :poor }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type,
+                                      proceeding: proceeding
         end
         let(:success_likely) { 'true' }
         let(:params) do
@@ -45,7 +47,7 @@ module Providers
 
         subject do
           post(
-            providers_merits_task_list_chances_of_success_index_path(application_proceeding_type),
+            providers_merits_task_list_chances_of_success_index_path(application_proceeding_type, proceeding),
             params: params.merge(submit_button)
           )
         end
@@ -77,7 +79,7 @@ module Providers
         end
 
         context 'false is selected' do
-          let(:next_url) { providers_merits_task_list_success_prospects_path(application_proceeding_type) }
+          let(:next_url) { providers_merits_task_list_success_prospects_path(application_proceeding_type, proceeding) }
           let(:success_likely) { 'false' }
 
           it 'sets chances_of_success to false' do

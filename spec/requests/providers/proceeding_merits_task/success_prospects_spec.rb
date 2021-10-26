@@ -4,7 +4,14 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe SuccessProspectsController, type: :request do
       let!(:legal_aid_application) { create :legal_aid_application }
-      let!(:application_proceeding_type) { create :application_proceeding_type, :with_chances_of_success, legal_aid_application: legal_aid_application }
+      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+      let(:application_proceeding_type) do
+        create :application_proceeding_type,
+               :with_chances_of_success,
+               legal_aid_application: legal_aid_application,
+               proceeding_type: create(:proceeding_type, :with_real_data)
+      end
+
       let(:provider) { legal_aid_application.provider }
 
       describe 'GET /providers/merits_task_list/:id/success_prospects' do

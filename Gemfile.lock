@@ -197,6 +197,9 @@ GEM
       cucumber-core (~> 8.0, >= 8.0.1)
       cucumber-cucumber-expressions (~> 10.3, >= 10.3.0)
       cucumber-messages (~> 13.0, >= 13.0.1)
+    data_migrate (7.0.2)
+      activerecord (>= 5.0)
+      railties (>= 5.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.0)
@@ -702,6 +705,7 @@ DEPENDENCIES
   capybara (>= 3.32.2, < 4.0)
   cucumber
   cucumber-rails
+  data_migrate
   database_cleaner
   devise (>= 4.7.1)
   devise_saml_authenticatable (>= 1.6.2)

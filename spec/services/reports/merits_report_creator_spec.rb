@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Reports::MeritsReportCreator do
   let(:legal_aid_application) do
     create :legal_aid_application,
-           :with_application_proceeding_type,
+           :with_multiple_proceeding_types_inc_section8,
            :with_lead_proceeding_type,
            :with_everything,
            :generating_reports,
@@ -35,7 +35,7 @@ RSpec.describe Reports::MeritsReportCreator do
     context 'ccms case ref does not exist' do
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_application_proceeding_type,
+               :with_multiple_proceeding_types_inc_section8,
                :with_lead_proceeding_type,
                :with_everything,
                :generating_reports,
@@ -55,7 +55,7 @@ RSpec.describe Reports::MeritsReportCreator do
       context 'ccms submission does not exist' do
         let(:legal_aid_application) do
           create :legal_aid_application,
-                 :with_application_proceeding_type,
+                 :with_multiple_proceeding_types_inc_section8,
                  :with_lead_proceeding_type,
                  :with_everything,
                  :generating_reports

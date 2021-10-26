@@ -48,11 +48,13 @@ module Reports
                merits_submitted_at: Time.current
       end
 
+      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
       let!(:chances_of_success) do
         create :chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
-               application_proceeding_type: application_proceeding_type
+               application_proceeding_type: application_proceeding_type,
+               proceeding: proceeding
       end
 
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
@@ -551,7 +553,8 @@ module Reports
           create :chances_of_success,
                  success_prospect: prospect,
                  application_purpose: purpose,
-                 application_proceeding_type: apt
+                 application_proceeding_type: apt,
+                 proceeding: proceeding
         end
       end
     end

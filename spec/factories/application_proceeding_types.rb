@@ -5,7 +5,7 @@ FactoryBot.define do
 
     trait :with_chances_of_success do
       after(:create) do |application_proceeding_type|
-        create :chances_of_success, application_proceeding_type: application_proceeding_type
+        create :chances_of_success, application_proceeding_type: application_proceeding_type, proceeding: application_proceeding_type.proceeding
       end
     end
 

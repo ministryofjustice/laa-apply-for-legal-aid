@@ -143,7 +143,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
           create(:legal_aid_application,
                  :with_proceeding_types,
                  :with_applicant_and_address,
-                 :with_substantive_scope_limitation,
                  :with_non_passported_state_machine,
                  :checking_citizen_answers)
         end

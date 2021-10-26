@@ -2,7 +2,7 @@ module ChancesOfSuccesses
   class SuccessLikelyForm < BaseForm
     form_for ProceedingMeritsTask::ChancesOfSuccess
 
-    attr_accessor :success_likely
+    attr_accessor :success_likely, :proceeding_id, :application_proceeding_type_id
 
     validates :success_likely, presence: true, unless: :draft?
     before_validation :set_success_prospect

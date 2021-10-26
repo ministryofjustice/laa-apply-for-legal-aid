@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_094831) do
+ActiveRecord::Schema.define(version: 2021_10_25_093729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
+    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
-    t.boolean "employed"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -159,7 +159,9 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "application_proceeding_type_id", null: false
+    t.uuid "proceeding_id"
     t.index ["application_proceeding_type_id"], name: "index_attempts_to_settles_on_application_proceeding_type_id"
+    t.index ["proceeding_id"], name: "index_attempts_to_settles_on_proceeding_id"
   end
 
   create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -341,7 +343,9 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
     t.text "success_prospect_details"
     t.boolean "success_likely"
     t.uuid "application_proceeding_type_id", null: false
+    t.uuid "proceeding_id"
     t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
+    t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -551,7 +555,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -681,6 +685,15 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
+  end
+
+  create_table "proceedings_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id"
+    t.uuid "involved_child_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["involved_child_id", "proceeding_id"], name: "index_involved_child_proceeding", unique: true
+    t.index ["proceeding_id", "involved_child_id"], name: "index_proceeding_involved_child", unique: true
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -831,6 +844,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
   add_foreign_key "application_proceeding_types", "legal_aid_applications"
   add_foreign_key "application_proceeding_types", "proceeding_types"
   add_foreign_key "attempts_to_settles", "application_proceeding_types"
+  add_foreign_key "attempts_to_settles", "proceedings"
   add_foreign_key "bank_account_holders", "bank_providers"
   add_foreign_key "bank_accounts", "bank_providers"
   add_foreign_key "bank_errors", "applicants"
@@ -842,6 +856,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_094831) do
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
   add_foreign_key "chances_of_successes", "application_proceeding_types"
+  add_foreign_key "chances_of_successes", "proceedings"
   add_foreign_key "default_cost_limitations", "proceeding_types"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"

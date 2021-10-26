@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
   let(:pt_da) { create :proceeding_type, :with_real_data }
   let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
   let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
   let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
   let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
   let(:provider) { legal_aid_application.provider }
+  let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+  let!(:proceeding_two) { create :proceeding, :se014, legal_aid_application: legal_aid_application }
 
   describe 'GET /providers/applications/merits_task_list/:merits_task_list_id/attempts_to_settle' do
     subject { get providers_merits_task_list_attempts_to_settle_path(application_proceeding_type) }

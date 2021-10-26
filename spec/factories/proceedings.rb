@@ -1,0 +1,52 @@
+FactoryBot.define do
+  factory :proceeding do
+    legal_aid_application
+
+    sequence(:proceeding_case_id) { |n| n + 55_000_000 }
+
+    trait :da001 do
+      lead_proceeding { true }
+      ccms_code { 'DA001' }
+      meaning { 'Inherent jurisdiction high court injunction' }
+      description { 'to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.“' }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
+      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+      substantive_scope_limitation_code { 'FM062' }
+      substantive_scope_limitation_meaning { 'Final hearing' }
+      substantive_scope_limitation_description { 'Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.' }
+      delegated_functions_scope_limitation_code { 'CV117' }
+      delegated_functions_scope_limitation_meaning { 'Interim order inc. return date' }
+      delegated_functions_scope_limitation_description do
+        'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
+         To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
+      end
+      used_delegated_functions_on { nil }
+      used_delegated_functions_reported_on { nil }
+      name { 'inherent_jurisdiction_high_court_injunction' }
+    end
+
+    trait :se014 do
+      lead_proceeding { false }
+      ccms_code { 'SE014' }
+      meaning { 'Child arrangements order (residence)' }
+      description { 'to be represented on an application for a child arrangements order –where the child(ren) will live' }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
+      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+      substantive_scope_limitation_code { 'FM059' }
+      substantive_scope_limitation_meaning { 'FHH Children' }
+      substantive_scope_limitation_description do
+        'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
+        To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
+      end
+      delegated_functions_scope_limitation_code { 'CV117' }
+      delegated_functions_scope_limitation_meaning { 'Interim order inc. return date' }
+      delegated_functions_scope_limitation_description do
+        'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
+        To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
+      end
+      used_delegated_functions_on { nil }
+      used_delegated_functions_reported_on { nil }
+      name { 'child_arrangements_order_contact' }
+    end
+  end
+end
