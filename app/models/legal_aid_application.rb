@@ -138,6 +138,10 @@ class LegalAidApplication < ApplicationRecord
     application_proceeding_types.find_by(lead_proceeding: true)
   end
 
+  def lead_proceeding
+    proceedings.find_by(lead_proceeding: true)
+  end
+
   def find_or_create_lead_proceeding_type
     apt = lead_application_proceeding_type
     if apt.nil?

@@ -1043,7 +1043,15 @@ RSpec.describe LegalAidApplication, type: :model do
       ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014, application_proceeding_type: apt
 
       expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
+    end
+  end
 
+  describe '#lead_proceeding' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
+    let(:proceeding_da001) { laa.proceedings.detect{ |p| p.ccms_code == 'DA001' } }
+
+    it 'returns the domestic abuse proceeding' do
+      expect(laa.lead_proceeding).to eq proceeding_da001
     end
   end
 end
