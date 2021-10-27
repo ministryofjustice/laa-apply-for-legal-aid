@@ -1016,4 +1016,18 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.year_to_calculation_date).to eq [expected_start_date, calc_date]
     end
   end
+
+  describe '#chances of success' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
+    let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+    let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
+
+    it 'returns an array of all the  chances of success records' do
+      # TODO: remove the :with_application_proceeding_type trait once LFA conversion is complete and application_proceeding_type is no longer a required field on chances_of_success
+      cos_da001 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_da001
+      cos_se014 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_se014
+
+      expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
+    end
+  end
 end
