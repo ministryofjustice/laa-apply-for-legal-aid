@@ -1030,4 +1030,20 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
     end
   end
+
+  describe '#attempts_to_settle' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
+    let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+    let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
+    let(:apt) { create :application_proceeding_type }
+
+    it 'returns an array of attempt_to_settle records attached to the application' do
+      # TODO: remove the application_proceeding_type from these lines once the LFA migration is complete and application_proceeding_type_id is no longer a required field on attempts_to_settle
+      ats_da001 = create :attempts_to_settles, proceeding: proceeding_da001, application_proceeding_type: apt
+      ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014, application_proceeding_type: apt
+
+      expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
+
+    end
+  end
 end
