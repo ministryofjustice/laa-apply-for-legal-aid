@@ -220,11 +220,18 @@ FactoryBot.define do
     #    - false - no proceeding will be set as lead
     #    - :da001 or :da004 - the specified proceeding will be set as lead
     #  - explicit_proceedings - an array of trait names from the proceeding factory
+    # - delegated_functions_dates: an array of dates to add to the proceeding records - defaults to nil
+    # - delegated_functions_reported_on: an array of dates to add to the proceeding records (defaults to Date.today if delegated functions date is present, otherwise nil)
     #
     # examples:
     #   - create :legal_aid_application, :with_proceedings
     #   - create :legal_aid_application, :with_proceedings, proceeding_count: 3
     #   - create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001, :se013], set_lead_proceeding: :da001
+    #   - create :legal_aid_application,
+    #            :with_proceedings,
+    #            proceeding_count: 3,
+    #            delegated_functions_dates: [Date.today, Date.yesterday, Date.yesterday]
+
     #
     # Note that the first domestic_abuse proceeding will be set as lead proceeding
     trait :with_proceedings do
@@ -233,6 +240,8 @@ FactoryBot.define do
         assign_lead_proceeding { true }
         set_lead_proceeding { true }
         explicit_proceedings { nil }
+        delegated_functions_dates { nil }
+        delegated_functions_reported_on { nil }
       end
 
       after(:create) do |application, evaluator|
@@ -276,14 +285,12 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         raise 'Must specify an array including ccms_code and an array of two dates' if evaluator.df_options.nil?
 
-        puts evaluator.df_options
         evaluator.df_options.each do |ccms_code, _dates|
           proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code }
-          next if proceeding.nil?
+          next if proceeding.nil?  # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
           df_date, reported_date = evaluator.df_options[ccms_code]
           proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
-          pp proceeding.used_delegated_functions_on
         end
       end
     end

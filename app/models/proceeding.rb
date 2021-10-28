@@ -72,4 +72,12 @@ class Proceeding < ApplicationRecord
     proceeding_type = ProceedingType.find_by ccms_code: ccms_code
     legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
   end
+
+  # TODO: remove once LFA migration complete
+  #
+  # temporary method to return the corresponding application_proceeding_type
+  def application_proceeding_type
+    proceeding_type = ProceedingType.find_by ccms_code: ccms_code
+    legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
+  end
 end
