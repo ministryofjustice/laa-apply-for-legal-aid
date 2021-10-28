@@ -35,8 +35,6 @@ class ApplicationProceedingType < ApplicationRecord
 
   scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
 
-  scope :not_using_delegated_functions, -> { where(used_delegated_functions_on: nil) }
-
   before_save :check_only_one_lead_proceeding
 
   before_create do
@@ -79,10 +77,6 @@ class ApplicationProceedingType < ApplicationRecord
 
   def proceeding_case_p_num
     "P_#{proceeding_case_id}"
-  end
-
-  def pretty_df_date
-    used_delegated_functions_on&.strftime('%F') || 'n/a'
   end
 
   def proceeding

@@ -6,7 +6,6 @@ module Reports
       attr_reader :laa
 
       delegate :applicant_receives_benefit?,
-               :application_proceeding_types,
                :cash_transactions,
                :ccms_submission,
                :cfe_result,
@@ -18,13 +17,14 @@ module Reports
                :gateway_evidence,
                :involved_children,
                :irregular_incomes,
-               :lead_application_proceeding_type,
+               :lead_proceeding,
                :office,
                :other_assets_declaration,
                :outstanding_mortgage_amount,
                :own_home,
                :percentage_home,
                :proceeding_types,
+               :proceedings,
                :property_value,
                :provider,
                :opponent,
@@ -39,7 +39,7 @@ module Reports
                :lowest_prospect_of_success,
                :vehicle, to: :laa
 
-      delegate :chances_of_success, to: :lead_application_proceeding_type
+      delegate :chances_of_success, to: :lead_proceeding
 
       delegate :case_ccms_reference, to: :ccms_submission
 
@@ -201,12 +201,12 @@ module Reports
 
       def application_details
         @line << case_ccms_reference
-        @line << (application_proceeding_types.count > 1 ? 'Multi' : 'Single')
+        @line << (proceedings.count > 1 ? 'Multi' : 'Single')
       end
 
       def proceeding_details
         @line << proceeding_types.map(&:ccms_matter).uniq.sort.join(', ')
-        @line << application_proceeding_types.count
+        @line << proceedings.count
         @line << proceeding_types.map(&:meaning).sort.join(', ')
         @line << laspo_question
       end
@@ -231,7 +231,7 @@ module Reports
         @line << yesno(used_delegated_functions?)
         @line << proceedings_df_used
         @line << proceedings_df_not_used
-        @line << application_proceeding_types.map(&:pretty_df_date).join(', ')
+        @line << proceedings.map(&:pretty_df_date).join(', ')
         @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime('%Y-%m-%d') : '')
       end
 
@@ -383,11 +383,11 @@ module Reports
       end
 
       def proceedings_df_used
-        application_proceeding_types.using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
+        proceedings.using_delegated_functions.map(&:meaning).join(', ')
       end
 
       def proceedings_df_not_used
-        application_proceeding_types.not_using_delegated_functions.map { |apt| apt.proceeding_type.meaning }.join(', ')
+        proceedings.not_using_delegated_functions.map(&:meaning).join(', ')
       end
     end
   end

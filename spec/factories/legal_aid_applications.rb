@@ -306,6 +306,7 @@ FactoryBot.define do
           raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
 
           application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
+          application.proceedings.find_by(name: da_pt.name).update!(lead_proceeding: true)
         end
         application.reload
       end
@@ -398,6 +399,9 @@ FactoryBot.define do
           apt.update!(used_delegated_functions_on: used_dates[i] || Date.current,
                       used_delegated_functions_reported_on: reported_dates[i] || Date.current)
           apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
+
+          application.proceedings.find_by(name: apt.proceeding_type.name).update!(used_delegated_functions_on: apt.used_delegated_functions_on,
+                                                                                  used_delegated_functions_reported_on: apt.used_delegated_functions_reported_on)
         end
       end
     end
