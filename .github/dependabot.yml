@@ -2,6 +2,8 @@ version: 2
 updates:
 - package-ecosystem: bundler
   directory: "/"
+  allow:
+    - dependency-type: "all"
   schedule:
     interval: daily
     time: "03:00"
