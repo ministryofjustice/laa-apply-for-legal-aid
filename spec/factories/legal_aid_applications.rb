@@ -214,8 +214,11 @@ FactoryBot.define do
     # :with_proceedings trait
     # ============================
     # takes optional arguments
-    #    proceeding as the lead proceeding
     #  - proceeding_count, (1 is assumed if absent) - will generate random proceeding.
+    #  - set_lead_proceeding - may be one of:
+    #    - true - the first domestic abuse proceeding will be set as the lead (default)
+    #    - false - no proceeding will be set as lead
+    #    - :da001 or :da004 - the specified proceeding will be set as lead
     #
     # examples:
     #   - create :legal_aid_application, :with_proceedings
@@ -226,14 +229,17 @@ FactoryBot.define do
       transient do
         proceeding_count { 1 }
         assign_lead_proceeding { true }
+        set_lead_proceeding { true }
       end
 
       after(:create) do |application, evaluator|
-        raise ':with_proceedings trait can only have a proceeding count of 1 or 2' unless evaluator.proceeding_count.in?([1, 2])
+        raise ':with_proceedings trait can only have a proceeding count of 1 to 4' if evaluator.proceeding_count > 4
 
-        traits = %i[da001 se014]
+        traits = %i[da001 se014 se013 da004]
         (0..evaluator.proceeding_count - 1).each do |i|
-          create :proceeding, traits[i], legal_aid_application: application, lead_proceeding: i == 0
+          trait = traits[i]
+          lead = evaluator.set_lead_proceeding == trait || (evaluator.set_lead_proceeding == true && trait == :da001)
+          create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
         end
       end
     end
