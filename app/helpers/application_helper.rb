@@ -93,7 +93,7 @@ module ApplicationHelper
                                                                focusable: 'false')
   end
 
-  def linked_children_names(application_proceeding_type)
-    application_proceeding_type.involved_children.map(&:full_name).join('</br>').html_safe
+  def linked_children_names(proceeding)
+    proceeding.involved_children.map(&:full_name).join('</br>').html_safe
   end
 end

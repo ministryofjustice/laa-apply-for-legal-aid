@@ -201,7 +201,7 @@
               name: "#{apt.id}_linked_children".to_sym,
               url: providers_merits_task_list_linked_children_path(apt),
               question: t('.items.linked_children'),
-              answer: linked_children_names(apt),
+              answer: linked_children_names(apt.proceeding),
               read_only: read_only
             ) %>
       </dl>
