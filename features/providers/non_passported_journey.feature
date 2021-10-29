@@ -361,7 +361,7 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on a page showing "You cannot use this service if your client is employed."
+    Then I should be on a page showing "We're not currently accepting applications for employed clients."
     Then I click link 'Back'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "No"
@@ -383,7 +383,7 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"
     Then I click 'Save and continue'
-    Then I should be on a page showing "You cannot use this service if your client is employed."
+    Then I should be on a page showing "We're not currently accepting applications for employed clients."
     Then I click link 'Back'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "No"
