@@ -25,7 +25,7 @@ en:
     applicant_employed:
       index:
         heading_1: Is your client employed?
-        hint: This includes full-time, part-time, casual, temporary and self-employment.
+        hint: If your client is employed we'll share their personal details with HMRC to check their employment status.
     application_confirmations:
       show:
         application_created: Application created
@@ -895,7 +895,7 @@ en:
       index:
         title_html: You need to complete this application in <abbr title='Client and Cost Management System'>CCMS</abbr>
         head_title: You need to complete this application in CCMS
-        warning: You cannot use this service if your client is employed.
+        warning: We're not currently accepting applications for employed clients.
         continue_in_ccms_html: Continue in <abbr title='Client and Cost Management System'>CCMS</abbr>
         back_to_applications: Back to my applications
     used_delegated_functions:
