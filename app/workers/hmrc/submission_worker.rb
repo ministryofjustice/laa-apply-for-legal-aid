@@ -7,10 +7,7 @@ module HMRC
     MAX_RETRIES = 10
     sidekiq_options retry: MAX_RETRIES
     sidekiq_retries_exhausted do |msg, _ex|
-      Sentry.capture_message <<~ERROR
-        HMRC submission id: #{msg['args'].first} failed
-        Moving #{msg['class']} to dead set, it failed with: #{msg['error_class']}/#{msg['error_message']}
-      ERROR
+      Sentry.capture_message ExhaustedFailureMessage.call(msg)
     end
 
     def perform(hmrc_response_id)

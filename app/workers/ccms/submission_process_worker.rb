@@ -11,10 +11,7 @@ module CCMS
     MAX_RETRIES = 10
     sidekiq_options retry: MAX_RETRIES
     sidekiq_retries_exhausted do |msg, _ex|
-      Sentry.capture_message <<~ERROR
-        CCMS submission id: #{msg['args'].first} failed
-        Moving #{msg['class']} to dead set, it failed with: #{msg['error_class']}/#{msg['error_message']}
-      ERROR
+      Sentry.capture_message ExhaustedFailureMessage.call(msg)
     end
 
     def perform(submission_id, start_state)
