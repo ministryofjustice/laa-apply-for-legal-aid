@@ -24,7 +24,7 @@ module HMRC
     private
 
     def check_and_warn_if_needed
-      Sentry.capture_message in_progress_error if should_warn?
+      Sentry.capture_message Sidekiq::InProgressWarningMessage.call(self.class, @hmrc_response, @retry_count) if should_warn?
     end
 
     def should_warn?

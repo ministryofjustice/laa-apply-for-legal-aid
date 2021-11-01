@@ -8,13 +8,5 @@ module HMRC
         @hmrc_response.update(response: response)
       end
     end
-
-    private
-
-    def in_progress_error
-      <<~ERROR
-        HMRC result check for id: #{@hmrc_response.id} is failing, retry count at #{@retry_count}
-      ERROR
-    end
   end
 end
