@@ -1,3 +1,5 @@
+require Rails.root.join('spec/factory_helpers/application_proceeding_type_helper')
+
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
     provider
@@ -287,7 +289,7 @@ FactoryBot.define do
 
         evaluator.df_options.each do |ccms_code, _dates|
           proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code }
-          next if proceeding.nil?  # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
+          next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
           df_date, reported_date = evaluator.df_options[ccms_code]
           proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
@@ -365,10 +367,12 @@ FactoryBot.define do
 
     trait :with_multiple_proceeding_types_inc_section8 do
       after(:create) do |application|
-        application.proceeding_types << create(:proceeding_type, :with_real_data)
-        application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
-        application.proceedings << create(:proceeding, :da001)
-        application.proceedings << create(:proceeding, :se014)
+        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'DA001', trait: :with_real_data)
+        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'SE014', trait: :as_section_8_child_residence)
+        # application.proceeding_types << create(:proceeding_type, :with_real_data)
+        # application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
+        # application.proceedings << create(:proceeding, :da001) if application.proceedings.find_by(ccms_code: 'DA001').nil?
+        # application.proceedings << create(:proceeding, :se014) if application.proceedings.find_by(ccms_code: 'SE014').nil?
         lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
         if lead_apt.nil?
           lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
@@ -378,7 +382,8 @@ FactoryBot.define do
         end
         application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
         pt = lead_apt.proceeding_type
-        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        sl = FactoryHelpers::ScopeLimitationsHelper.find_or_create_substantive_default(proceeding_type: pt)
+        # sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
         apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)

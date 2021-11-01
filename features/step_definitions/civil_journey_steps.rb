@@ -184,7 +184,7 @@ Given("I am checking the applicant's means answers") do
 end
 
 Given('I have completed the non-passported means assessment and start the merits assessment') do
-  @pt1 = ProceedingType.find_by(ccms_code: 'DA001')
+  @pt1 = ProceedingType.find_by(ccms_code: 'DA001') || create(:proceeding_type, :with_real_data, :with_scope_limitations)
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -195,6 +195,7 @@ Given('I have completed the non-passported means assessment and start the merits
     :with_benefits_transactions,
     :with_proceeding_types, explicit_proceeding_types: [@pt1]
   )
+
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
@@ -293,7 +294,7 @@ Given('I start the application with a negative benefit check result and no used 
 end
 
 Given('I start the merits application and the applicant has uploaded transaction data') do
-  @pt1 = ProceedingType.find_by(ccms_code: 'DA001')
+  @pt1 = ProceedingType.find_by(ccms_code: 'DA001') || create(:proceeding_type, :with_real_data, :with_scope_limitations)
   @legal_aid_application = create(
     :application,
     :with_applicant,

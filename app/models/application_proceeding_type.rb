@@ -45,6 +45,13 @@ class ApplicationProceedingType < ApplicationRecord
   after_update :update_proceeding
   before_destroy :destroy_proceeding
 
+  # TODO: remove after LFA migration complete
+  #
+  # temporary method to find the corresponding proceeding record
+  def proceeding
+    legal_aid_application.proceedings.find_by!(ccms_code: proceeding_type.ccms_code)
+  end
+
   def used_delegated_functions?
     used_delegated_functions_on.present?
   end
@@ -77,10 +84,6 @@ class ApplicationProceedingType < ApplicationRecord
 
   def proceeding_case_p_num
     "P_#{proceeding_case_id}"
-  end
-
-  def proceeding
-    Proceeding.find_by(legal_aid_application_id: legal_aid_application.id, ccms_code: proceeding_type.ccms_code)
   end
 
   private

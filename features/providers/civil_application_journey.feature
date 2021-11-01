@@ -558,6 +558,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
     Given I start the merits application and the applicant has uploaded transaction data
+    And I enable callbacks on ApplicationProceedingType
     Then I should be on a page showing 'Continue your application'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
@@ -634,6 +635,7 @@ Feature: Civil application journeys
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
     And I should not see "Passported"
+    And I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application happy path no back button
