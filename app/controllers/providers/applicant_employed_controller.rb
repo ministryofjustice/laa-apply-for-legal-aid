@@ -7,6 +7,7 @@ module Providers
 
     def create
       @form = Applicants::EmployedForm.new(form_params)
+      HMRC::CreateResponsesService.call(legal_aid_application) if @form.employed.eql?('true')
       render :index unless save_continue_or_draft(@form)
     end
 
