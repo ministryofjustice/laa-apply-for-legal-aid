@@ -11,7 +11,7 @@ module CCMS
     MAX_RETRIES = 10
     sidekiq_options retry: MAX_RETRIES
     sidekiq_retries_exhausted do |msg, _ex|
-      Sentry.capture_message ExhaustedFailureMessage.call(msg)
+      Sentry.capture_message Sidekiq::ExhaustedFailureMessage.call(msg)
     end
 
     def perform(submission_id, start_state)
