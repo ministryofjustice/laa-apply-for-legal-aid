@@ -32,7 +32,6 @@ When(/^I display the setup$/) do
   puts ">>>>>>>>>>>> end of setup #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
 end
 
-
 # TODO: remove after LFA migration complete
 When(/^I enable callbacks on ApplicationProceedingType$/) do
   ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)

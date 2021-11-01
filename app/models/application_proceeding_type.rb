@@ -86,6 +86,17 @@ class ApplicationProceedingType < ApplicationRecord
     "P_#{proceeding_case_id}"
   end
 
+  def pretty_df_date
+    used_delegated_functions_on&.strftime('%F') || 'n/a'
+  end
+
+  # TODO: remove after LFA migration complete
+  #
+  # temporary method to find the corresponding proceeding record
+  def proceeding
+    Proceeding.find_by(legal_aid_application_id: legal_aid_application.id, ccms_code: proceeding_type.ccms_code)
+  end
+
   private
 
   def check_only_one_lead_proceeding
