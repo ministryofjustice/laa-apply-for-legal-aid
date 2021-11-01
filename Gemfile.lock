@@ -318,7 +318,7 @@ GEM
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
     http_parser.rb (0.6.0)
-    httpi (2.4.5)
+    httpi (2.5.0)
       rack
       socksify
     i18n (1.8.10)
