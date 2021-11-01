@@ -12,7 +12,7 @@ module HMRC
 
     def perform(hmrc_response_id)
       @hmrc_response = HMRC::Response.find(hmrc_response_id)
-      Sentry.capture_message in_progress_error if should_warn?
+      check_and_warn_if_needed
 
       response = HMRC::Interface::ResultService.call(@hmrc_response)
       raise SentryIgnoreThisSidekiqFailError, 'HMRC Submission still in progress, fail silently and re-try' if response[:status].eql?('in_progress')
@@ -25,6 +25,10 @@ module HMRC
     end
 
     private
+
+    def check_and_warn_if_needed
+      Sentry.capture_message in_progress_error if should_warn?
+    end
 
     def should_warn?
       @retry_count == (MAX_RETRIES / 2) + 1

@@ -12,7 +12,7 @@ module HMRC
 
     def perform(hmrc_response_id)
       @hmrc_response = HMRC::Response.find(hmrc_response_id)
-      Sentry.capture_message in_progress_error if should_warn?
+      check_and_warn_if_needed
 
       response = HMRC::Interface::SubmissionService.call(@hmrc_response)
       HMRC::ResultWorker.perform_in(5.seconds, hmrc_response_id) if response.keys == %i[id _links]
@@ -23,6 +23,10 @@ module HMRC
     end
 
     private
+
+    def check_and_warn_if_needed
+      Sentry.capture_message in_progress_error if should_warn?
+    end
 
     def should_warn?
       @retry_count == (MAX_RETRIES / 2) + 1
