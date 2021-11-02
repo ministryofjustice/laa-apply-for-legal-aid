@@ -228,7 +228,15 @@ module CCMS
       end
 
       def generate_scope_limitations(xml, application_proceeding_type)
-        application_proceeding_type.assigned_scope_limitations.each { |limitation| generate_scope_limitation(xml, limitation) }
+        application_proceeding_type.assigned_scope_limitations.each do |limitation|
+          next if application_proceeding_type.substantive_only? && default_df_limitation?(application_proceeding_type.proceeding_type, limitation)
+
+          generate_scope_limitation(xml, limitation)
+        end
+      end
+
+      def default_df_limitation?(proceeding_type, limitation)
+        limitation == proceeding_type.default_delegated_functions_scope_limitation
       end
 
       def generate_scope_limitation(xml, limitation)

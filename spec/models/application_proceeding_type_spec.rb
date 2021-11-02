@@ -55,6 +55,11 @@ RSpec.describe ApplicationProceedingType do
         expect(application_proceeding_type.used_delegated_functions?).to be true
       end
 
+      it 'returns false for substantive only' do
+        application_proceeding_type = application.application_proceeding_types.first
+        expect(application_proceeding_type.substantive_only?).to be false
+      end
+
       it 'returns the earliest delegated functions date' do
         expect(application.earliest_delegated_functions_date).to eq df_date
       end
@@ -73,6 +78,11 @@ RSpec.describe ApplicationProceedingType do
       end
       it 'used delegated functions returns false' do
         expect(application.used_delegated_functions?).to be false
+      end
+
+      it 'returns true for substantive_only?' do
+        apt = application.application_proceeding_types.first
+        expect(apt.substantive_only?).to be true
       end
     end
   end
