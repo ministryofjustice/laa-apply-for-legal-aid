@@ -9,6 +9,10 @@ class WorkingDayCalculator
     new(from).working_days_from_date(working_days)
   end
 
+  def self.working_days_between(date1, date2)
+    new(date1).calendar.business_days_between(date1, date2)
+  end
+
   attr_reader :date
 
   def initialize(date)
