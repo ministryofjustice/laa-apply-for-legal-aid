@@ -26,6 +26,12 @@ RSpec.describe HMRC::SubmissionWorker do
         allow(HMRC::Interface::SubmissionService).to receive(:call).with(hmrc_response).and_return(good_response)
       end
 
+      it 'updates the hmrc_response' do
+        perform
+        expect(hmrc_response.reload.url).to eq good_response[:_links][0][:href]
+        expect(hmrc_response.reload.submission_id).to eq good_response[:id]
+      end
+
       it 'starts a new check job' do
         expect { perform }.to change(HMRC::ResultWorker.jobs, :size).by(1)
       end
