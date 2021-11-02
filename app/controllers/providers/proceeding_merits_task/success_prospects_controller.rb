@@ -13,7 +13,7 @@ module Providers
       private
 
       def legal_aid_application
-        @legal_aid_application ||= application_proceeding_type.legal_aid_application
+        @legal_aid_application ||= LegalAidApplication.find(proceeding.legal_aid_application_id)
       end
 
       def proceeding_type
@@ -26,6 +26,10 @@ module Providers
 
       def application_proceeding_type
         @application_proceeding_type = ApplicationProceedingType.find(params[:merits_task_list_id])
+      end
+
+      def proceeding
+        @proceeding = Proceeding.find(params[:merits_task_list_id])
       end
 
       def form_params

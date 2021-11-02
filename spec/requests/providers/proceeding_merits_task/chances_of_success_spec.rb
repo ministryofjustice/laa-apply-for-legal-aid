@@ -19,7 +19,7 @@ module Providers
       end
 
       describe 'GET /providers/merits_task_list/:id/chances_of_success' do
-        subject { get providers_merits_task_list_chances_of_success_index_path(application_proceeding_type) }
+        subject { get providers_merits_task_list_chances_of_success_index_path(proceeding) }
 
         it 'renders successfully' do
           subject
@@ -47,7 +47,7 @@ module Providers
 
         subject do
           post(
-            providers_merits_task_list_chances_of_success_index_path(application_proceeding_type, proceeding),
+            providers_merits_task_list_chances_of_success_index_path(proceeding),
             params: params.merge(submit_button)
           )
         end
@@ -102,7 +102,7 @@ module Providers
 
           it 'redirects to next page' do
             subject
-            expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(application_proceeding_type))
+            expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
           end
 
           context 'success_prospect was :likely' do
