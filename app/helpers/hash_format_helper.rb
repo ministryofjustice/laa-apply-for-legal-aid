@@ -4,7 +4,9 @@ module HashFormatHelper
     hash.each do |key, value|
       next if value.blank?
 
-      if standard_type?(value) || value.is_a?(Hash)
+      if value.is_a?(Array)
+        html += build_dl(key, value[0])
+      elsif standard_type?(value) || value.is_a?(Hash)
         html += build_dl(key, value)
       else
         Rails.logger.info "Unexpected value type of '#{value.class.name}' for key '#{standardize_key(key)}' in format_hash: #{value.inspect}"
