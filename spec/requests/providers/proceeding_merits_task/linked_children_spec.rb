@@ -6,6 +6,7 @@ module Providers
       let(:pt_da) { create :proceeding_type, :with_real_data }
       let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
       let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_involved_children, explicit_proceeding_types: [pt_da, pt_s8] }
+      let!(:proceeding) { create :proceeding, :se014, legal_aid_application: legal_aid_application }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
       let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
       let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
@@ -18,7 +19,7 @@ module Providers
       end
 
       describe 'GET /providers/merits_task_list/:merits_task_list_id/linked_children' do
-        subject { get providers_merits_task_list_linked_children_path(application_proceeding_type) }
+        subject { get providers_merits_task_list_linked_children_path(proceeding) }
 
         context 'when the provider is not authenticated' do
           let(:login) { nil }
@@ -49,7 +50,7 @@ module Providers
 
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
 
-        subject { patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: params }
+        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
 
         context 'all selected' do
           it 'adds involved children to the proceeding type' do
@@ -86,7 +87,7 @@ module Providers
 
         context 'when a user has previously linked two children' do
           let(:update) do
-            patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: new_params
+            patch providers_merits_task_list_linked_children_path(proceeding), params: new_params
           end
 
           let(:first_child) { legal_aid_application.involved_children.first }
@@ -124,7 +125,7 @@ module Providers
           let(:submit_button) { { draft_button: 'Save as draft' } }
 
           subject do
-            patch providers_merits_task_list_linked_children_path(application_proceeding_type), params: params.merge(submit_button)
+            patch providers_merits_task_list_linked_children_path(proceeding), params: params.merge(submit_button)
           end
 
           it "redirects provider to provider's applications page" do

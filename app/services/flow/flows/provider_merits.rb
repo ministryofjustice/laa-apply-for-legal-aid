@@ -93,9 +93,8 @@ module Flow
         },
         linked_children: {
           path: ->(application) do
-            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
-            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
-            urls.providers_merits_task_list_linked_children_path(application_proceeding_type)
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            urls.providers_merits_task_list_linked_children_path(proceeding)
           end,
           forward: :merits_task_lists,
           check_answers: :check_merits_answers

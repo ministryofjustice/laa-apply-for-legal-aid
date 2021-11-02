@@ -66,8 +66,9 @@ RSpec.describe ProvidersHelper, type: :helper do
     context 'when saved as draft and linking children' do
       it do
         legal_aid_application.provider_step = 'linked_children'
-        legal_aid_application.provider_step_params = { merits_task_list_id: legal_aid_application.lead_application_proceeding_type.id }
-        expect(subject).to eq("/providers/merits_task_list/#{legal_aid_application.lead_application_proceeding_type.id}/linked_children?locale=en")
+        lead_proceeding = legal_aid_application.proceedings.find_by(lead_proceeding: true)
+        legal_aid_application.provider_step_params = { merits_task_list_id: lead_proceeding.id }
+        expect(subject).to eq("/providers/merits_task_list/#{lead_proceeding.id}/linked_children?locale=en")
       end
     end
 
