@@ -4,6 +4,7 @@ module HMRC
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
+      @legal_aid_application.set_transaction_period
     end
 
     def self.call(legal_aid_application)
