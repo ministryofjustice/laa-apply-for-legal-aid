@@ -56,7 +56,7 @@ RSpec.describe HMRC::ResultWorker do
       let(:in_progress_response) do
         {
           submission: hmrc_response.submission_id,
-          status: 'in_progress',
+          status: 'processing',
           _links: [
             {
               href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
