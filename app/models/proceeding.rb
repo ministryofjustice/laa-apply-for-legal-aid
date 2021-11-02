@@ -11,6 +11,8 @@ class Proceeding < ApplicationRecord
            through: :proceeding_linked_children,
            source: :involved_child
 
+  scope :in_order_of_addition, -> { order(:created_at) }
+
   # TODO: remove once migration from application_proceeding_types to proceedings is completed
   #
   # temporary method to create test data from existing proceeding types

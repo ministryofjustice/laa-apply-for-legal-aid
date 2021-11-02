@@ -16,7 +16,7 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :office, optional: true
   has_many :application_proceeding_types, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :proceedings, dependent: :destroy
-  has_many :chances_of_success, through: :application_proceeding_types
+  has_many :chances_of_success, through: :proceedings
   has_many :attachments, dependent: :destroy
   has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result, dependent: :destroy
@@ -26,7 +26,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :gateway_evidence, dependent: :destroy
   has_one :opponent, class_name: 'ApplicationMeritsTask::Opponent', dependent: :destroy
   has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: 'ApplicationMeritsTask::Incident', inverse_of: :legal_aid_application, dependent: :destroy
-  has_many :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', through: :application_proceeding_types
+  has_many :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', through: :proceedings
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
@@ -130,14 +130,21 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
+  # TODO: remove this once LFA migration is complete. Replaced by #lead_proceeding below
   def lead_proceeding_type
     ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
   end
 
+  # TODO: remove this once LFA migration is complete. Replaced by #lead_proceeding below
   def lead_application_proceeding_type
     application_proceeding_types.find_by(lead_proceeding: true)
   end
 
+  def lead_proceeding
+    proceedings.find_by(lead_proceeding: true)
+  end
+
+  # TODO: remove this once LFA migration is complete. Replaced by #find_or_set_lead_proceeding below
   def find_or_create_lead_proceeding_type
     apt = lead_application_proceeding_type
     if apt.nil?
@@ -147,6 +154,16 @@ class LegalAidApplication < ApplicationRecord
     apt.proceeding_type
   end
 
+  def find_or_set_lead_proceeding
+    lead_proc = lead_proceeding
+    if lead_proc.nil?
+      lead_proc = proceedings.detect { |p| p.ccms_code =~ /^DA/ }
+      lead_proc.update! lead_proceeding: true
+    end
+    lead_proc
+  end
+
+  # TODO: remove this once LFA migration is complete. Replaced by #proceedings_by_name below
   def application_proceedings_by_name
     # returns an array of OpenStructs containing:
     # - name of the proceeding type
@@ -161,6 +178,23 @@ class LegalAidApplication < ApplicationRecord
                        name: proceeding_type.name,
                        meaning: proceeding_type.meaning,
                        application_proceeding_type: application_proceeding_type
+                     })
+    end
+  end
+
+  def proceedings_by_name
+    # returns an array of OpenStructs containing:
+    # - name of the proceeding type
+    # - meaning of the proceeding type
+    # - the Proceeding
+    #
+    # in the order they were added to the LegalAidApplication
+    #
+    proceedings.in_order_of_addition.map do |proceeding|
+      OpenStruct.new({
+                       name: proceeding.name,
+                       meaning: proceeding.meaning,
+                       proceeding: proceeding
                      })
     end
   end
@@ -229,7 +263,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def lowest_prospect_of_success
-    min_rank = application_proceeding_types.map(&:chances_of_success).map(&:prospect_of_success_rank).min
+    min_rank = chances_of_success.map(&:prospect_of_success_rank).min
     ProceedingMeritsTask::ChancesOfSuccess.rank_and_prettify(min_rank)
   end
 

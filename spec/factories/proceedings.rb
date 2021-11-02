@@ -25,6 +25,52 @@ FactoryBot.define do
       name { 'inherent_jurisdiction_high_court_injunction' }
     end
 
+    trait :da004 do
+      lead_proceeding { false }
+      ccms_code { 'DA004' }
+      meaning { 'Non-molestation order' }
+      description { 'to be represented on an application for a non-molestation order.' }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
+      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+      substantive_scope_limitation_code { 'AA019' }
+      substantive_scope_limitation_meaning { 'Injunction FLA-to final hearing' }
+      substantive_scope_limitation_description { 'Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.' }
+      delegated_functions_scope_limitation_code { 'CV117' }
+      delegated_functions_scope_limitation_meaning { 'Interim order inc. return date' }
+      delegated_functions_scope_limitation_description do
+        'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
+         final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
+         of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
+      end
+      used_delegated_functions_on { nil }
+      used_delegated_functions_reported_on { nil }
+      name { 'nonmolestation_order' }
+    end
+
+    trait :se013 do
+      lead_proceeding { false }
+      ccms_code { 'SE013' }
+      meaning { 'Child arrangements order (contact)' }
+      description { 'to be represented on an application for a child arrangements order –where the child(ren) will live' }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
+      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+      substantive_scope_limitation_code { 'FM059' }
+      substantive_scope_limitation_meaning { 'FHH Children' }
+      substantive_scope_limitation_description do
+        'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
+        To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
+      end
+      delegated_functions_scope_limitation_code { 'CV117' }
+      delegated_functions_scope_limitation_meaning { 'Interim order inc. return date' }
+      delegated_functions_scope_limitation_description do
+        'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
+        To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
+      end
+      used_delegated_functions_on { nil }
+      used_delegated_functions_reported_on { nil }
+      name { 'child_arrangements_order_contact' }
+    end
+
     trait :se014 do
       lead_proceeding { false }
       ccms_code { 'SE014' }
@@ -46,7 +92,7 @@ FactoryBot.define do
       end
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
-      name { 'child_arrangements_order_contact' }
+      name { 'child_arrangements_order_residence' }
     end
   end
 end

@@ -181,7 +181,7 @@ RSpec.describe 'LegalAidApplication factory' do
       it 'attaches the scope limitation to the lead proceeding type as the default substantive' do
         subject
         expect(ProceedingTypeScopeLimitation.count).to eq 1
-        expect(laa.proceeding_types.first.default_substantive_scope_limitation).to eq ScopeLimitation.first
+        expect(laa.lead_proceeding_type.default_substantive_scope_limitation).to eq ScopeLimitation.first
       end
 
       it 'assigns the scope limitation to the application_proceeding_type' do

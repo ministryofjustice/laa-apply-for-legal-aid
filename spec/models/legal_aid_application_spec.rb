@@ -1016,4 +1016,113 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(legal_aid_application.year_to_calculation_date).to eq [expected_start_date, calc_date]
     end
   end
+
+  describe '#chances of success' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
+    let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+    let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
+
+    it 'returns an array of all the  chances of success records' do
+      # TODO: remove the :with_application_proceeding_type trait once LFA conversion is complete and application_proceeding_type is no longer a required field on chances_of_success
+      cos_da001 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_da001
+      cos_se014 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_se014
+
+      expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
+    end
+  end
+
+  describe '#attempts_to_settle' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
+    let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+    let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
+    let(:apt) { create :application_proceeding_type }
+
+    it 'returns an array of attempt_to_settle records attached to the application' do
+      # TODO: remove the application_proceeding_type from these lines once the LFA migration is complete
+      ats_da001 = create :attempts_to_settles, proceeding: proceeding_da001, application_proceeding_type: apt
+      ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014, application_proceeding_type: apt
+
+      expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
+    end
+  end
+
+  describe '#lead_proceeding' do
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
+    let(:proceeding_da004) { laa.proceedings.detect { |p| p.ccms_code == 'DA004' } }
+
+    it 'returns the domestic abuse proceeding' do
+      expect(laa.lead_proceeding).to eq proceeding_da004
+    end
+  end
+
+  describe '#find or set lead proceeding' do
+    context 'lead proceeding already set' do
+      let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
+      let(:da004) { laa.proceedings.find_by(ccms_code: 'DA004') }
+
+      it 'returns the lead proceeding' do
+        expect(laa.find_or_set_lead_proceeding).to eq da004
+      end
+    end
+
+    context 'no lead proceeding set' do
+      let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: false }
+
+      it 'returns one of the domestic abuse proceedings' do
+        expect(laa.lead_proceeding).to be_nil
+        lead_proc = laa.find_or_set_lead_proceeding
+        expect(lead_proc.ccms_code).to match(/^DA/)
+      end
+
+      it 'has set the lead proceeding to true' do
+        lead_proc = laa.find_or_set_lead_proceeding
+        expect(lead_proc.lead_proceeding).to be true
+      end
+    end
+  end
+
+  describe '#proceedings_by_name' do
+    let(:laa) { create :legal_aid_application }
+
+    before do
+      laa.proceedings << create(:proceeding, :se013)
+      laa.proceedings << create(:proceeding, :se014)
+      laa.proceedings << create(:proceeding, :da004)
+    end
+
+    subject { laa.proceedings_by_name }
+
+    it 'returns an array of three items' do
+      expect(subject.size).to eq 3
+    end
+
+    it 'returns se013 as the first item' do
+      item = subject.first
+      expect(item).to be_an_instance_of(OpenStruct)
+      expect(item.name).to eq 'child_arrangements_order_contact'
+      expect(item.meaning).to eq 'Child arrangements order (contact)'
+      expect(item.proceeding).to be_instance_of(Proceeding)
+    end
+
+    it 'returns da004 as the last item' do
+      item = subject.last
+      expect(item).to be_an_instance_of(OpenStruct)
+      expect(item.name).to eq 'nonmolestation_order'
+      expect(item.meaning).to eq 'Non-molestation order'
+      expect(item.proceeding).to be_instance_of(Proceeding)
+    end
+  end
+
+  describe 'lowest_chances_of_success' do
+    it 'returns text representation of the lowest chance of success' do
+      laa = create :legal_aid_application, :with_proceedings, proceeding_count: 3
+      prospects = %w[likely borderline marginal]
+      laa.proceedings.each_with_index do |proceeding, i|
+        proceeding.chances_of_success = create(:chances_of_success, proceeding: proceeding,
+                                                                    success_prospect: prospects[i],
+                                                                    application_proceeding_type: create(:application_proceeding_type))
+      end
+      expect(laa.lowest_prospect_of_success).to eq 'Borderline'
+    end
+  end
 end
