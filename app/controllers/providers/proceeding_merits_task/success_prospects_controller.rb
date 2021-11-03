@@ -7,17 +7,13 @@ module Providers
 
       def update
         @form = ChancesOfSuccesses::SuccessProspectForm.new(form_params)
-        render :show unless update_task_save_continue_or_draft(proceeding_type.ccms_code.to_sym, :chances_of_success)
+        render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :chances_of_success)
       end
 
       private
 
       def legal_aid_application
-        @legal_aid_application ||= LegalAidApplication.find(proceeding.legal_aid_application_id)
-      end
-
-      def proceeding_type
-        @proceeding_type ||= application_proceeding_type.proceeding_type
+        @legal_aid_application ||= proceeding.legal_aid_application
       end
 
       def chances_of_success
@@ -25,11 +21,11 @@ module Providers
       end
 
       def application_proceeding_type
-        @application_proceeding_type = ApplicationProceedingType.find(params[:merits_task_list_id])
+        @application_proceeding_type ||= proceeding.application_proceeding_type
       end
 
       def proceeding
-        @proceeding = Proceeding.find(params[:merits_task_list_id])
+        @proceeding ||= Proceeding.find(params[:merits_task_list_id])
       end
 
       def form_params

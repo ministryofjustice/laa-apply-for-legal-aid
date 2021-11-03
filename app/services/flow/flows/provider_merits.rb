@@ -81,8 +81,7 @@ module Flow
         success_prospects: {
           path: ->(application) do
             proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
-            application_proceeding_type = proceeding.application_proceeding_type
-            urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
+            urls.providers_merits_task_list_success_prospects_path(proceeding)
           end,
           forward: :merits_task_lists,
           check_answers: :check_merits_answers
