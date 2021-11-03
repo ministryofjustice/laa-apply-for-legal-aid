@@ -16,21 +16,21 @@
 <!--        <button class="js-modal-dialogue-close-button js-modal-dialog-close-button&#45;&#45;main" aria-label="Close modal dialogue">×</button>-->
 <!--    </dialog>-->
 <!--</div>-->
-<div id="delete-modal" class="modal" style="display: none;">
+<div id="delete-modal" class="modal hidden">
       <div class="modal-content">
-          <span class="close">&times;</span>
-          <h1 class="govuk-heading-xl"><%= t('.page_title') %></h1>
+          <span class="close close-modal">&times;</span>
+          <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
           <div class="govuk-panel__body">
               <dl class="govuk-list inline-list">
                   <dt>
                       <strong><%= t('.applicant') %>:</strong>
                   </dt>
-                  <dd id="applicant-name"></dd>
+                  <dd><%= name %></dd>
 
                   <dt>
                       <strong><%= t('.reference') %>:</strong>
                   </dt>
-                  <dd id="laa-reference"></dd>
+                  <dd><%= ref %></dd>
               </dl>
           </div>
 
@@ -45,6 +45,6 @@
               t('.yes_button'),
               class: 'govuk-button govuk-button--warning'
               ) %>
-          <%= link_to_accessible t('.no_button'), providers_legal_aid_applications_path, class: 'govuk-button' %>
+          <button class="govuk-button form-button govuk-!-margin-left-3 close-modal"><%= t('.no_button') %></button>
       </div>
     </div>

@@ -146,22 +146,6 @@ import { hide, show } from './helpers'
 //   triggerModal,
 // };
 
-function populateModalDetails (deleteBtn) {
-  const row = deleteBtn.parentElement.parentElement
-  const laaRefCell = row.childNodes[5]
-  const applicantNameCell = row.childNodes[1]
-  console.log(laaRefCell, applicantNameCell)
-  if (laaRefCell && applicantNameCell) {
-    const laaRef = laaRefCell.innerText
-    const applicantName = applicantNameCell.innerText
-    // populate the modal with the correct application details
-    const modalApplicantName = document.getElementById('applicant-name')
-    const modalLaaRef = document.getElementById('laa-reference')
-    modalApplicantName.innerText = applicantName
-    modalLaaRef.innerText = laaRef
-  }
-}
-
 document.addEventListener('DOMContentLoaded', event => {
 
   const deleteButtons = document.querySelectorAll(
@@ -175,16 +159,17 @@ document.addEventListener('DOMContentLoaded', event => {
       deleteBtn.addEventListener('click', () => {
         // extract the application details from the table row
         show(modal)
-        populateModalDetails(deleteBtn)
       })
     })
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName('close')[0];
+    const closeButtons = document.getElementsByClassName('close-modal');
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      hide(modal)
-    }
+    closeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        hide(modal)
+      })
+    })
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
