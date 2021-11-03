@@ -905,8 +905,9 @@ Feature: Civil application journeys
     And I click 'Save and continue'
     Then I should be on a page showing 'Do you have evidence that your client receives Universal Credit?'
     And I choose 'Yes'
+    Then I scroll down
     And I click 'Save and continue'
-    Then I should be on a page showing 'You'll need to tell us if your client:'
+    Then I should be on a page showing "You'll need to tell us if your client:"
     And I click 'Save and continue'
     And I should be on a page showing 'Does your client own the home that they live in?'
 
