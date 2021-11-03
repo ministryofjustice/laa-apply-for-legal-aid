@@ -1,5 +1,5 @@
 module HMRC
-  class SubmissionError < StandardError
+  class InterfaceError < StandardError
     include Nesty::NestedError
     attr_reader :http_status
 

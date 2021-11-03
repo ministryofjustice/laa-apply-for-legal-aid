@@ -124,7 +124,7 @@ RSpec.describe HMRC::Interface::ResultService do
         end
 
         it 'raises an exception' do
-          expect { call }.to raise_error HMRC::SubmissionError, /Couldn't find ProceedingType/
+          expect { call }.to raise_error HMRC::InterfaceError, /Couldn't find ProceedingType/
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe HMRC::Interface::ResultService do
         it 'raises an exception' do
           expect {
             described_class.call(hmrc_response)
-          }.to raise_error HMRC::SubmissionError, /Bad Request: URL:/
+          }.to raise_error HMRC::InterfaceError, /Bad Request: URL:/
         end
       end
 

@@ -8,7 +8,7 @@ module HMRC
         when 202
           parsed_response
         else
-          raise HMRC::SubmissionError.new(detailed_error(parsed_response, hmrc_interface_url), raw_response.status)
+          raise HMRC::InterfaceError.new(detailed_error(parsed_response, hmrc_interface_url), raw_response.status)
         end
       end
 

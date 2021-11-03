@@ -40,7 +40,7 @@ RSpec.describe HMRC::SubmissionWorker do
     context 'when an error occurs' do
       let(:hmrc_interface_service) { class_double HMRC::Interface::SubmissionService }
       before do
-        allow(hmrc_interface_service).to receive(:call).and_raise(HMRC::SubmissionError)
+        allow(hmrc_interface_service).to receive(:call).and_raise(HMRC::InterfaceError)
       end
       context 'when @retry_count is' do
         context 'below the halfway point' do
@@ -98,7 +98,7 @@ RSpec.describe HMRC::SubmissionWorker do
             HMRC::SubmissionWorker.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
-            expect { perform }.to raise_error HMRC::SubmissionError
+            expect { perform }.to raise_error HMRC::InterfaceError
           end
         end
       end

@@ -42,7 +42,7 @@ module HMRC
 
       def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
         Rails.logger.info { { message: message, backtrace: backtrace, method: http_method, http_status: http_status } }
-        raise HMRC::SubmissionError.new(message, http_status)
+        raise HMRC::InterfaceError.new(message, http_status)
       end
 
       def formatted_error_message(err)
