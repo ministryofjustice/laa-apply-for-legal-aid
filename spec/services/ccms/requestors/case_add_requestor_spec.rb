@@ -46,6 +46,7 @@ module CCMS
                  trust_value: 600
         end
         let(:scope_limitation) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
+
         let(:address) { create :address, postcode: 'GH08NY' }
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
@@ -83,6 +84,45 @@ module CCMS
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
             test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
             expect(expected_xml).to eq test_data_xml
+          end
+        end
+
+        context 'when DF assigned scope limitations are present' do
+          let(:df_scope_limitation) { create :scope_limitation, code: 'ZZ999', description: 'Default scope limitation.', substantive: false, delegated_functions: true }
+          let(:apt) { legal_aid_application.application_proceeding_types.first }
+
+          before do
+            # setup the df scope limitation to be the default for this proceeding type and add it to the application proceeding types
+            pt = apt.proceeding_type
+            pt.eligible_scope_limitations << df_scope_limitation
+            apt.delegated_functions_scope_limitation = df_scope_limitation
+            pt.proceeding_type_scope_limitations.find_by(scope_limitation_id: df_scope_limitation.id).update!(substantive_default: false, delegated_functions_default: true)
+          end
+
+          context 'DF not used' do
+            it 'does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope' do
+              expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+              travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
+                test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
+                expect(expected_xml).to eq test_data_xml
+              end
+            end
+          end
+
+          context 'DF actually used' do
+            let(:df_date) { Date.parse('2020-11-23') }
+            before do
+              apt.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
+              legal_aid_application.reload
+            end
+
+            it 'adds the extra scope limitation to the XML, and specifies MULTIPLE for requested scope' do
+              expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+              travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
+                test_data_xml = ccms_data_from_file 'mp_df_case_add_request.xml'
+                expect(expected_xml).to eq test_data_xml
+              end
+            end
           end
         end
       end

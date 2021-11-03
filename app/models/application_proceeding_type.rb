@@ -51,6 +51,10 @@ class ApplicationProceedingType < ApplicationRecord
     used_delegated_functions_on.present?
   end
 
+  def substantive_only?
+    !used_delegated_functions?
+  end
+
   ##############################
   # SCOPE LIMITATIONS
   def add_default_substantive_scope_limitation
