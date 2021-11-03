@@ -3,6 +3,7 @@ Feature: Provider accessibility
   @javascript @vcr
   Scenario: I start a new non-passported application and enter client details
     Given I am logged in as a provider
+    And I enable callbacks on ApplicationProceedingType
     Then I visit the application service
     And the page is accessible
     Then I click link "Start"
@@ -46,6 +47,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     And the page is accessible
+    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I complete the financial assessment eligibility section for a non-passported application
