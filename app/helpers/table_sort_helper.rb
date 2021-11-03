@@ -67,6 +67,7 @@ module TableSortHelper
     content_tag(:th, role: 'columnheader', scope: 'col', 'data-sort-type': type, class: classes) do
       content_tag(:span, class: 'aria-sort-description') { content } +
         sort_span_combine_right(combine_right) +
+        tag.br(class: 'hidden') +
         content_tag(:span, ', button', class: 'govuk-visually-hidden') +
         simple_span_sort_indicator
     end
