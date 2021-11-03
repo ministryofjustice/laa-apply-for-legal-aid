@@ -141,15 +141,6 @@ RSpec.describe HMRC::Interface::ResultService do
         end
       end
 
-      context 'connection error' do
-        it 'creates a LegalFramework::Submission error and writes a history record with a backtrace' do
-          stub_request(:get, get_url).to_raise(Faraday::ConnectionFailed.new('my faraday connection failed'))
-          expect {
-            described_class.call(hmrc_response)
-          }.to raise_error HMRC::SubmissionError
-        end
-      end
-
       def error_response
         {
           success: false,
