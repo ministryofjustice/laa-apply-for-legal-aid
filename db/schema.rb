@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_100659) do
+ActiveRecord::Schema.define(version: 2021_11_02_101801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -109,6 +109,27 @@ ActiveRecord::Schema.define(version: 2021_11_02_100659) do
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
+  end
+
+  create_table "application_digests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.string "firm_name", null: false
+    t.string "provider_username", null: false
+    t.date "date_started", null: false
+    t.date "date_submitted"
+    t.integer "days_to_submission"
+    t.boolean "use_ccms", default: false
+    t.string "matter_types", null: false
+    t.string "proceedings", null: false
+    t.boolean "passported", default: false
+    t.boolean "df_used", default: false
+    t.date "earliest_df_date"
+    t.date "df_reported_date"
+    t.integer "working_days_to_report_df"
+    t.integer "working_days_to_submit_df"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
   create_table "application_proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
