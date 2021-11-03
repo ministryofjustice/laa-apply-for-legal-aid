@@ -27,7 +27,7 @@ class ProceedingSyncService
                                                          proceeding_case_id: @application_proceeding_type.proceeding_case_id).first
   end
 
-  def payload
+  def payload # rubocop:disable Metrics/MethodLength
     {
       legal_aid_application_id: @application_proceeding_type.legal_aid_application.id,
       proceeding_case_id: @application_proceeding_type.proceeding_case_id,
@@ -39,7 +39,10 @@ class ProceedingSyncService
       delegated_functions_cost_limitation: @proceeding_type.default_cost_limitation_delegated_functions,
       used_delegated_functions_on: @application_proceeding_type.used_delegated_functions_on,
       used_delegated_functions_reported_on: @application_proceeding_type.used_delegated_functions_reported_on,
-      name: @proceeding_type.name
+      name: @proceeding_type.name,
+      matter_type: @proceeding_type.ccms_matter,
+      category_of_law: @proceeding_type.ccms_category_law,
+      category_law_code: @proceeding_type.ccms_category_law_code
     }
   end
 
