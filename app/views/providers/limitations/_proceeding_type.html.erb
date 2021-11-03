@@ -21,22 +21,22 @@
       </summary>
 
       <div class="govuk-details__text">
-        <% type=proceeding_type.application_proceeding_type %>
-        <% if type.used_delegated_functions_on %>
-        <h4 class="govuk-heading-m"><%= t('.emergency_certificate') %></h4>
-        <p><strong><%= t('.form_of_service') %></strong>
-          <%= t('.form_of_service_type') %>
-        </p>
-        <p><strong><%= t('.allowable_work') %></strong>
-          <%= type.delegated_functions_scope_limitation.description %>
-        </p>
+        <% proceeding = proceeding_type.proceeding %>
+        <% if proceeding.used_delegated_functions_on %>
+          <h4 class="govuk-heading-m"><%= t('.emergency_certificate') %></h4>
+          <p><strong><%= t('.form_of_service') %></strong>
+            <%= t('.form_of_service_type') %>
+          </p>
+          <p><strong><%= t('.allowable_work') %></strong>
+            <%= proceeding.delegated_functions_scope_limitation_description %>
+          </p>
         <% end %>
         <h4 class="govuk-heading-m"><%= t('.substantive_certificate') %></h4>
         <p><strong><%= t('.form_of_service') %></strong>
           <%= t('.form_of_service_type') %>
         </p>
         <p><strong><%= t('.allowable_work') %></strong>
-          <%= type.substantive_scope_limitation.description %>
+          <%= proceeding.substantive_scope_limitation_description %>
         </p>
       </div>
     </details>
