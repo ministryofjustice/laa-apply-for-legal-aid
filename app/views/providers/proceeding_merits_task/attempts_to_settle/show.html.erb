@@ -7,13 +7,13 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
-            head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
+            head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
             template: :basic,
             form: form
         ) do %>
 
     <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title},
-                            caption: { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' } do %>
+                            caption: { text: @proceeding.meaning, size: 'xl' } do %>
       <%= form.govuk_text_area(
           :attempts_made,
           label: nil,
