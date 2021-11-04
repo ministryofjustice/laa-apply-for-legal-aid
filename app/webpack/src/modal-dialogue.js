@@ -147,17 +147,15 @@ import { hide, show } from './helpers'
 // };
 
 document.addEventListener('DOMContentLoaded', event => {
-
-  const deleteButtons = document.querySelectorAll(
-    '[data-toggle="modal"][data-target="delete-modal"]'
-  )
+  const deleteButtons = document.querySelectorAll('[data-toggle="modal"]')
 
   if (deleteButtons) {
-    const modal = document.getElementById('delete-modal');
     // When the user clicks on the button, open the modal
     deleteButtons.forEach((deleteBtn) => {
       deleteBtn.addEventListener('click', () => {
-        // extract the application details from the table row
+        // find the corresponding modal for that button
+        const modalId = deleteBtn.id.replace('-btn', '')
+        const modal = document.getElementById(modalId);
         show(modal)
       })
     })
@@ -167,12 +165,15 @@ document.addEventListener('DOMContentLoaded', event => {
     // When the user clicks on <span> (x), close the modal
     closeButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
+        const modalId = btn.parentElement.parentElement.id
+        const modal = document.getElementById(modalId)
         hide(modal)
       })
     })
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
+      const modal = Array.from(document.querySelectorAll('.modal')).filter(mod => { return mod.style.display === 'block' })[0]
       if (event.target === modal) {
         hide(modal)
       }

@@ -15,54 +15,56 @@
       </thead>
       <tbody class="govuk-table__body">
         <% legal_aid_applications.each do |application| %>
-          <%= form_for(application, url: providers_legal_aid_application_delete_path(application), method: :delete) do |form| %>
-            <%= render 'shared/partials/modal_dialogue', form: form, name: application.applicant_full_name , ref: application.application_ref %>
+          <% ref = application.application_ref %>
+          <%= form_with(model: application, url: providers_legal_aid_application_delete_path(application), method: :delete) do |form| %>
+            <%= render 'shared/partials/modal_dialogue', form: form, application: application %>
           <% end %>
           <tr class="govuk-table__row">
-            <% link_text = application.applicant_full_name || t('generic.undefined') %>
-            <%= sort_column_cell(
-                  content: link_to_application(link_text, application),
-                  sort_by: link_text
-                ) %>
-
-            <%= sort_column_cell(
-                  content: l(application.created_at.to_date, format: :short_date),
-                  sort_by: application.created_at.to_i,
-                  combine_right: 555
-                ) %>
-
-            <%= sort_column_cell(content: application.application_ref) %>
-            <td class="nullcell" aria-hidden="true"></td>
-            <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s, combine_right: 555) do %>
-              <% if application.used_delegated_functions? %>
-                <%= t('.emergency') %>
-                <% if application.substantive_application_deadline_on? &&  application.summary_state == :in_progress %>
-                  <br>
-                  <span class="govuk-body-s">
-                    <%= t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
-                  </span>
-                <% end %>
-              <% else %>
-                <%= t('.substantive') %>
-              <% end %>
-            <% end %>
-
-            <%= sort_column_cell(sort_by: application.enum_t(:summary_state)) do %>
-              <%= gov_uk_tag text: application.enum_t(:summary_state), status: application.summary_state %>
-            <% end %>
-            <td>
-              <% unless application.summary_state == :submitted %>
-              <%#= link_to_accessible(
-                  t('.delete'),
-                  providers_legal_aid_application_delete_path(application),
-                  class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0',
-                  suffix: t('.delete_suffix', reference: application.application_ref, applicant: application.applicant_full_name)
+              <% link_text = application.applicant_full_name || t('generic.undefined') %>
+              <%= sort_column_cell(
+                    content: link_to_application(link_text, application),
+                    sort_by: link_text
                   ) %>
-                <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" data-toggle="modal" data-target="delete-modal"><%= t('.delete') %></button>
-            <% end %>
-            </td>
-          </tr>
-      <% end %>
+
+              <%= sort_column_cell(
+                    content: l(application.created_at.to_date, format: :short_date),
+                    sort_by: application.created_at.to_i,
+                    combine_right: 555
+                  ) %>
+
+              <%= sort_column_cell(content: ref) %>
+              <td class="nullcell" aria-hidden="true"></td>
+              <%= sort_column_cell(sort_by: application.used_delegated_functions?.to_s, combine_right: 555) do %>
+                <% if application.used_delegated_functions? %>
+                  <%= t('.emergency') %>
+                  <% if application.substantive_application_deadline_on? &&  application.summary_state == :in_progress %>
+                    <br>
+                    <span class="govuk-body-s">
+                      <%= t('.substantive_due', date: l(application.substantive_application_deadline_on, format: :short_date)) %>
+                    </span>
+                  <% end %>
+                <% else %>
+                  <%= t('.substantive') %>
+                <% end %>
+              <% end %>
+
+              <%= sort_column_cell(sort_by: application.enum_t(:summary_state)) do %>
+                <%= gov_uk_tag text: application.enum_t(:summary_state), status: application.summary_state %>
+              <% end %>
+              <td>
+                <% unless application.summary_state == :submitted %>
+                <%#= link_to_accessible(
+                    t('.delete'),
+                    providers_legal_aid_application_delete_path(application),
+                    class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0',
+                    suffix: t('.delete_suffix', reference: application.application_ref, applicant: application.applicant_full_name)
+                    ) %>
+                  <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" id="<%= ref %>-modal-btn"
+                          data-toggle="modal" data-target="<%= ref %>_modal"><%= t('.delete') %></button>
+              <% end %>
+              </td>
+            </tr>
+        <% end %>
       </tbody>
     </table>
     <% if local_assigns[:pagy] %>
