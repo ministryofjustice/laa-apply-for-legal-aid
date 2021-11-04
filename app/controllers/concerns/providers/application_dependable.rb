@@ -57,13 +57,11 @@ module Providers
         end
       end
 
-      # :nocov:
       def encode_header(headers)
         headers.encode!(Encoding::UTF_8)
       rescue EncodingError
         headers.force_encoding(Encoding::UTF_8)
       end
-      # :nocov:
     end
   end
 end
