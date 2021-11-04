@@ -25,11 +25,11 @@ spec:
               imagePullPolicy: IfNotPresent
               command: ['rake', "digest:extract"]
   {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
-resources:
-  limits:
-    cpu: 200m
-    memory: 512Mi
-  requests:
-    cpu: 100m
-    memory: 256Mi
-restartPolicy: Never
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+            restartPolicy: Never
