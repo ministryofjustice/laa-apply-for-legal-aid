@@ -30,12 +30,26 @@
     white-space: nowrap;
   }
 }
+
+@media (min-width: 555px) {
+  br.hidden {
+    display: block;
+  }
+}
+
 @media (min-width: 700px) {
   th.select-clear-all {
     min-width: 98px;
     box-sizing: border-box;
   }
 }
+
+@media (min-width: 850px) {
+  br.hidden {
+    display: none;
+  }
+}
+
 td.tick-box-cell,
 td.sortable-cell {
   padding-left:6px;
