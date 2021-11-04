@@ -20,10 +20,10 @@ spec:
             reportuploader: cronjob
         spec:
           containers:
-            - name: extract-digest
-              image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-              imagePullPolicy: IfNotPresent
-              command: ['rake', "digest:extract"]
+          - name: extract-digest
+            image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+            imagePullPolicy: IfNotPresent
+            command: ['rake', "digest:extract"]
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:
