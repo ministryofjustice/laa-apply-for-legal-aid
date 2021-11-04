@@ -48,16 +48,16 @@ module Reports
                merits_submitted_at: Time.current
       end
 
-      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+      let(:proceeding) { legal_aid_application.proceedings.first }
       let!(:chances_of_success) do
         create :chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
-               application_proceeding_type: application_proceeding_type,
+               application_proceeding_type: application_proceeding_type, # TODO: remove once ChancesOfSuccess has been refacted to use Proceedings only
                proceeding: proceeding
       end
 
-      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first } # TODO: remove once ChancesOfSuccess has been refacted to use Proceedings only
 
       let(:applicant) do
         create :applicant,
@@ -541,14 +541,21 @@ module Reports
         ]
       end
 
+      # TODO: refactor this once ChancesOfSuccess has been refactored to use Proceedings only
       def setup_multiple_proceedings
         legal_aid_application.application_proceeding_types.map(&:destroy)
+        legal_aid_application.proceedings.map(&:destroy)
         %i[da001 da004 se013].each do |code|
           pt = create :proceeding_type, code
+          create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+          create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
           apt = create :application_proceeding_type,
                        legal_aid_application: legal_aid_application,
                        proceeding_type: pt,
                        lead_proceeding: code == :da001
+
+          proceeding = Proceeding.create_from_proceeding_type(legal_aid_application, pt)
+          proceeding.update!(lead_proceeding: true) if apt.lead_proceeding?
 
           create :chances_of_success,
                  success_prospect: prospect,
