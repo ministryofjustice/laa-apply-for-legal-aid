@@ -352,7 +352,7 @@ FactoryBot.define do
                    joined_proceeding_type: apt.proceeding_type
           end
           proceeding = Proceeding.find_by(legal_aid_application_id: application.id, ccms_code: pt.ccms_code)
-          Proceeding.create_from_proceeding_type(application, pt)  unless proceeding.present?
+          Proceeding.create_from_proceeding_type(application, pt)  if proceeding.nil?
         end
 
         if evaluator.assign_lead_proceeding == true

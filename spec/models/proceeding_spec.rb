@@ -93,4 +93,24 @@ RSpec.describe Proceeding, type: :model do
       end
     end
   end
+
+  describe 'used_delegated_functions?' do
+    subject { proceeding.used_delegated_functions? }
+
+    let(:proceeding) { create :proceeding, :da001, used_delegated_functions_on: df_date }
+
+    context 'delegated functions not used' do
+      let(:df_date) { nil }
+      it 'returns false' do
+        expect(subject).to be false
+      end
+    end
+
+    context 'delegated functions used' do
+      let(:df_date) { Time.zone.yesterday }
+      it 'returns true' do
+        expect(subject).to be true
+      end
+    end
+  end
 end
