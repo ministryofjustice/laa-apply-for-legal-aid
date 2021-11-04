@@ -160,11 +160,23 @@ document.addEventListener('DOMContentLoaded', event => {
       })
     })
 
+    // close modal and refresh page when an application is deleted
+    const confirmDeleteBtns = document.querySelectorAll('.confirm-delete-btn')
+    confirmDeleteBtns.forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        const modalId = btn.parentElement.parentElement.id
+        const modal = document.getElementById(modalId)
+        hide(modal)
+        window.location.reload()
+      })
+    })
+
     // Get the <span> element that closes the modal
-    const closeButtons = document.getElementsByClassName('close-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
     // When the user clicks on <span> (x), close the modal
     closeButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (event) => {
+        event.preventDefault()
         const modalId = btn.parentElement.parentElement.id
         const modal = document.getElementById(modalId)
         hide(modal)
