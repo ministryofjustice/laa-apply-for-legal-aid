@@ -139,7 +139,7 @@ end
 group :test do
   gem 'axe-core-cucumber'
   gem 'capybara', '>= 3.32.2', '< 4.0'
-  gem 'cucumber', require: false
+  gem 'cucumber', '5.3.0', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
