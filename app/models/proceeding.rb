@@ -38,6 +38,9 @@ class Proceeding < ApplicationRecord
            delegated_functions_scope_limitation_description: proceeding_type.default_delegated_functions_scope_limitation.description,
            used_delegated_functions_on: nil,
            used_delegated_functions_reported_on: nil,
-           name: proceeding_type.name
+           name: proceeding_type.name,
+           matter_type: proceeding_type.ccms_matter,
+           category_of_law: proceeding_type.ccms_category_law,
+           category_law_code: proceeding_type.ccms_category_law_code
   end
 end

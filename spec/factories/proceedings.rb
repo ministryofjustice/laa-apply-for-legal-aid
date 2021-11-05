@@ -23,6 +23,9 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { 'inherent_jurisdiction_high_court_injunction' }
+      matter_type { 'Domestic Abuse' }
+      category_of_law { 'Family' }
+      category_law_code { 'MAT' }
     end
 
     trait :da004 do
@@ -45,6 +48,9 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { 'nonmolestation_order' }
+      matter_type { 'Domestic Abuse' }
+      category_of_law { 'Family' }
+      category_law_code { 'MAT' }
     end
 
     trait :se013 do
@@ -69,6 +75,9 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { 'child_arrangements_order_contact' }
+      matter_type { 'Section 8 orders' }
+      category_of_law { 'Family' }
+      category_law_code { 'MAT' }
     end
 
     trait :se014 do
@@ -93,6 +102,9 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { 'child_arrangements_order_residence' }
+      matter_type { 'Section 8 orders' }
+      category_of_law { 'Family' }
+      category_law_code { 'MAT' }
     end
   end
 end
