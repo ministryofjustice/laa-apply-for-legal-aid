@@ -304,4 +304,19 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: slackAlertEmail
+  - name: HMRC_API_HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: hmrcApiHost
+  - name: HMRC_API_UID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: hmrcApiUid
+  - name: HMRC_API_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: hmrcApiSecret
 {{- end }}

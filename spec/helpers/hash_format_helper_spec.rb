@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe HashFormatHelper, type: :helper do
-  let(:source) { { key: 'value', sub_hash: { sub_key: 'sub_value' } } }
+  let(:source) { { key: 'value', sub_hash: { sub_key: 'sub_value' }, array_hash: [{ array_one: 'array_value' }, { array_two: 'array_value' }] } }
   let(:expected_response) do
     '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Key</dt><dd>Value</dd></dl>' \
       '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Hash</dt>'\
-      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Key</dt><dd>Sub_value</dd></dl></dl>'
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Key</dt><dd>Sub_value</dd></dl></dl>'\
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Hash</dt>'\
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array One</dt><dd>Array_value</dd></dl>'\
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Two</dt><dd>Array_value</dd></dl></dl>'
   end
 
   describe '#format_hash' do
@@ -28,8 +31,8 @@ RSpec.describe HashFormatHelper, type: :helper do
         subject
       end
 
-      let(:source) { { key: ['value', 'value 2'] } }
-      let(:expected_response) { "Unexpected value type of 'Array' for key 'Key' in format_hash: [\"value\", \"value 2\"]" }
+      let(:source) { { key: :ten } }
+      let(:expected_response) { "Unexpected value type of 'Symbol' for key 'Key' in format_hash: :ten" }
 
       it 'logs error messages' do
         expect(Rails.logger).to have_received(:info).with(expected_response).once

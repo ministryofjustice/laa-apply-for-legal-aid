@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_112548) do
+ActiveRecord::Schema.define(version: 2021_11_05_083833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -454,11 +454,14 @@ ActiveRecord::Schema.define(version: 2021_11_03_112548) do
   end
 
   create_table "hmrc_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "application_id"
+    t.string "submission_id"
     t.string "use_case"
     t.json "response"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "legal_aid_application_id"
+    t.string "url"
+    t.index ["legal_aid_application_id"], name: "index_hmrc_responses_on_legal_aid_application_id"
   end
 
   create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -898,6 +901,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_112548) do
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "gateway_evidences", "legal_aid_applications"
+  add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"

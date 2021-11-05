@@ -4,7 +4,9 @@ module HashFormatHelper
     hash.each do |key, value|
       next if value.blank?
 
-      if standard_type?(value) || value.is_a?(Hash)
+      if value.is_a?(Array)
+        html += build_dl_array(key, value)
+      elsif standard_type?(value) || value.is_a?(Hash)
         html += build_dl(key, value)
       else
         Rails.logger.info "Unexpected value type of '#{value.class.name}' for key '#{standardize_key(key)}' in format_hash: #{value.inspect}"
@@ -14,6 +16,17 @@ module HashFormatHelper
   end
 
   private
+
+  def build_dl_array(key, value)
+    content_tag(:dl, class: 'govuk-body kvp govuk-!-margin-bottom-0') do
+      dl_contents = ''
+      dl_contents << content_tag(:dt, standardize_key(key))
+      value.each do |val|
+        dl_contents << format_hash(val)
+      end
+      dl_contents.html_safe
+    end
+  end
 
   def build_dl(key, value)
     content_tag(:dl, class: 'govuk-body kvp govuk-!-margin-bottom-0') do

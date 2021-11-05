@@ -9,6 +9,7 @@ if %w[production].include?(Rails.env) && ENV['SENTRY_DSN'].present?
     filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters.map(&:to_s))
     config.excluded_exceptions += %w[
       CCMS::SentryIgnoreThisSidekiqFailError
+      HMRC::SentryIgnoreThisSidekiqFailError
     ]
 
     config.before_send = ->(event, _hint) {

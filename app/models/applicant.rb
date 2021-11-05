@@ -48,6 +48,15 @@ class Applicant < ApplicationRecord
     age < 16
   end
 
+  def json_for_hmrc
+    {
+      first_name: first_name,
+      last_name: last_name,
+      dob: date_of_birth,
+      nino: national_insurance_number
+    }
+  end
+
   def receives_financial_support?
     bank_transactions.for_type('friends_or_family').present?
   end

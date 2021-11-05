@@ -21,6 +21,31 @@
       <dt>Merits report</dt>
       <dd><%= link_to_accessible('Download merits report', download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
     <% end %>
+    <% if @legal_aid_application&.hmrc_responses.any? %>
+      <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
+        <details>
+          <summary class="govuk-heading-m govuk-details__summary"
+                   title="HMRC use case <%= hmrc_response.use_case %>"
+                   aria-label="HMRC use case <%= hmrc_response.use_case %> result">
+            HMRC use case <%= hmrc_response.use_case %>
+          </summary>
+          <section>
+            <% if hmrc_response.response.present? %>
+                <% if hmrc_response&.response['data'].present? %>
+                <% hmrc_response.response['data'].each do |hrr_hash| %>
+                  <% next if hrr_hash.keys.eql?(['individuals/matching/individual']) %>
+                  <%= format_hash(hrr_hash) %>
+                <% end %>
+              <% else %>
+                <%= format_hash(hmrc_response.response) %>
+              <% end %>
+            <% else %>
+              Submission created, awaiting first check
+            <% end %>
+            </section>
+        </details>
+        <% end %>
+    <% end %>
   </dl>
   <% if @legal_aid_application.cfe_submissions.present? %>
     <% @legal_aid_application.cfe_submissions.each do |cfe_submission| %>
