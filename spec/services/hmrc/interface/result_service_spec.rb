@@ -5,6 +5,8 @@ RSpec.describe HMRC::Interface::ResultService do
   let(:hmrc_response) { create(:hmrc_response, :in_progress) }
   let(:expected_body) do
     {
+      submission: hmrc_response.submission_id,
+      status: 'completed',
       data: [
         { correlation_id: hmrc_response.submission_id },
         {
@@ -84,21 +86,14 @@ RSpec.describe HMRC::Interface::ResultService do
     end
 
     context 'when the submission has failed' do
-      let(:expected_status) { 202 } # TODO: Response should be 200, also json response should equal - AP-2639 addresses
-      # {
-      #   data: [
-      #     { correlation_id: hmrc_response.submission_id },
-      #     { error: 'submitted client details could not be found in HMRC service' }
-      #   ]
-      # }
+      let(:expected_status) { 202 }
       let(:expected_body) do
         {
           submission: hmrc_response.submission_id,
           status: 'failed',
-          _links: [
-            {
-              href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
-            }
+          data: [
+            { correlation_id: hmrc_response.submission_id },
+            { error: 'submitted client details could not be found in HMRC service' }
           ]
         }
       end
