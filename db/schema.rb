@@ -544,6 +544,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_083833) do
     t.string "emergency_cost_reasons"
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
+    t.date "purgeable_on"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
