@@ -654,6 +654,15 @@ Given('I click Check Your Answers Change link for dependant {string}') do |depen
   end
 end
 
+Given('I click Check Your Merits Answers Change link for {string} for {string}') do |field_name, meaning|
+  proceeding = @legal_aid_application.proceedings.find_by(meaning: meaning)
+  field_name.downcase!
+  field_name.gsub!(/\s+/, '_')
+  within "#app-check-your-answers__#{proceeding.id}_#{field_name}" do
+    click_link('Change')
+  end
+end
+
 Given('I click has other dependants remove link for dependant {string}') do |dependant|
   within "#dependant_#{dependant}" do
     click_link('Remove')

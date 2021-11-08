@@ -51,4 +51,8 @@ class Proceeding < ApplicationRecord
     proceeding_type = ProceedingType.find_by ccms_code: ccms_code
     legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
   end
+
+  def section8?
+    ccms_code.in? %w[SE003 SE004 SE013 SE014]
+  end
 end
