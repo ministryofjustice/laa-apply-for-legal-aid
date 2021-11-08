@@ -5,7 +5,7 @@
 
   <dl class="govuk-summary-list govuk-!-padding-bottom-4">
     <%= render partial: 'providers/limitations/proceeding_type',
-               collection: @legal_aid_application.application_proceedings_by_name,
+               collection: @legal_aid_application.proceedings_by_name,
                locals: {translation_path: 'providers.limitations.show'} %>
   </dl>
 

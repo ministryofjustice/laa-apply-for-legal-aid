@@ -98,9 +98,7 @@ Feature: Merits task list
 
   @javascript
   Scenario: Uploading a file for statement of case
-    Given the method populate of ProceedingType is rerun
-    And the method populate of ProceedingTypeScopeLimitation is rerun
-    And I have completed a non-passported application and reached the merits task_list
+    Given I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
