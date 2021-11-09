@@ -4,8 +4,8 @@ module Providers
   module ProceedingMeritsTask
     RSpec.describe SuccessProspectsController, type: :request do
       let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
-      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
-      let!(:proceeding_two) { create :proceeding, :se014, legal_aid_application: legal_aid_application }
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+      let(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
       let(:pt_da) { create :proceeding_type, :with_real_data }
       let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
       let(:application_proceeding_type) do

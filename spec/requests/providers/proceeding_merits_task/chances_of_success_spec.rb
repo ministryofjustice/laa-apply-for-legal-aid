@@ -8,9 +8,10 @@ module Providers
       let(:pt_da) { create :proceeding_type, :with_real_data }
       let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
       let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
-      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
-      let!(:proceeding_two) { create :proceeding, :se014, legal_aid_application: legal_aid_application }
-      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+      let!(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
+      let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
+      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
       let(:login) { login_as legal_aid_application.provider }
 
       before do
