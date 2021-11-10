@@ -64,7 +64,8 @@ module Flow
         },
         chances_of_success: {
           forward: ->(application) do
-            application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            application_proceeding_type = proceeding.application_proceeding_type
             if application_proceeding_type.chances_of_success.success_likely?
               :merits_task_lists
             else
@@ -72,15 +73,15 @@ module Flow
             end
           end,
           check_answers: ->(application) do
-            application_proceeding_type = application.application_proceeding_types.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            application_proceeding_type = proceeding.application_proceeding_type
             application_proceeding_type.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
           end
         },
         success_prospects: {
           path: ->(application) do
-            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
-            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
-            urls.providers_merits_task_list_success_prospects_path(application_proceeding_type)
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            urls.providers_merits_task_list_success_prospects_path(proceeding)
           end,
           forward: :merits_task_lists,
           check_answers: :check_merits_answers
@@ -91,9 +92,8 @@ module Flow
         },
         linked_children: {
           path: ->(application) do
-            application_proceeding_type_id = application.provider_step_params['merits_task_list_id']
-            application_proceeding_type = application.application_proceeding_types.find(application_proceeding_type_id)
-            urls.providers_merits_task_list_linked_children_path(application_proceeding_type)
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            urls.providers_merits_task_list_linked_children_path(proceeding)
           end,
           forward: :merits_task_lists,
           check_answers: :check_merits_answers

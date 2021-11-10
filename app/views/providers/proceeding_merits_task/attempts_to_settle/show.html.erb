@@ -1,19 +1,19 @@
 <%= form_with(
       builder: GOVUKDesignSystemFormBuilder::FormBuilder,
       model: @form,
-      url: providers_merits_task_list_attempts_to_settle_path(@application_proceeding_type),
+      url: providers_merits_task_list_attempts_to_settle_path(@proceeding),
       method: :patch,
       local: true
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
-            head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
+            head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
             template: :basic,
             form: form
         ) do %>
 
     <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title},
-                            caption: { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' } do %>
+                            caption: { text: @proceeding.meaning, size: 'xl' } do %>
       <%= form.govuk_text_area(
           :attempts_made,
           label: nil,

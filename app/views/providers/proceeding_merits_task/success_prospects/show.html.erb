@@ -1,12 +1,12 @@
 <%= form_with(
         model: @form,
-        url: providers_merits_task_list_success_prospects_path(@application_proceeding_type),
+        url: providers_merits_task_list_success_prospects_path(@proceeding),
         method: :patch,
         local: true
     ) do |form| %>
   <%= page_template(
           page_title: t('.h1-heading'),
-          head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
+          head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
           template: :basic,
           form: form,
           back_link: {}

@@ -184,7 +184,7 @@ Given("I am checking the applicant's means answers") do
 end
 
 Given('I have completed the non-passported means assessment and start the merits assessment') do
-  @pt1 = create :proceeding_type, :with_real_data, :with_scope_limitations
+  @pt1 = ProceedingType.find_by(ccms_code: 'DA001')
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -293,7 +293,7 @@ Given('I start the application with a negative benefit check result and no used 
 end
 
 Given('I start the merits application and the applicant has uploaded transaction data') do
-  @pt1 = create :proceeding_type, :with_real_data, :with_scope_limitations
+  @pt1 = ProceedingType.find_by(ccms_code: 'DA001')
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -326,12 +326,14 @@ Given('I start the journey as far as the start of the vehicle section') do
 end
 
 Given('I have completed a non-passported application and reached the merits task_list') do
+  @pt1 = ProceedingType.find_by(ccms_code: 'SE014')
+  @pt2 = ProceedingType.find_by(ccms_code: 'DA001')
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_multiple_proceeding_types_inc_section8,
     :with_non_passported_state_machine,
-    :provider_entering_merits
+    :provider_entering_merits,
+    :with_proceeding_types, explicit_proceeding_types: [@pt1, @pt2]
   )
   create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
@@ -648,6 +650,15 @@ end
 
 Given('I click Check Your Answers Change link for dependant {string}') do |dependant|
   within "#app-check-your-answers__dependants_#{dependant}" do
+    click_link('Change')
+  end
+end
+
+Given('I click Check Your Merits Answers Change link for {string} for {string}') do |field_name, meaning|
+  proceeding = @legal_aid_application.proceedings.find_by(meaning: meaning)
+  field_name.downcase!
+  field_name.gsub!(/\s+/, '_')
+  within "#app-check-your-answers__#{proceeding.id}_#{field_name}" do
     click_link('Change')
   end
 end

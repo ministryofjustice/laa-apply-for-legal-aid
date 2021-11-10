@@ -29,7 +29,7 @@ module TaskListHelper
   def proceeding_task_url(name, application, ccms_code)
     url = "providers_merits_task_list_#{url_fragment(name)}_path".to_sym
 
-    __send__(url, application_proceeding_type_id(application, ccms_code))
+    __send__(url, proceeding_id(application, ccms_code))
   end
 
   def url_fragment(name)
@@ -41,13 +41,10 @@ module TaskListHelper
     I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
   end
 
-  def application_proceeding_type_id(application, ccms_code)
+  def proceeding_id(application, ccms_code)
     return nil unless ccms_code && application
 
-    apt = application.application_proceeding_types.find do |x|
-      x.proceeding_type.ccms_code == ccms_code.to_s
-    end
-
-    apt.id
+    proceeding = application.proceedings.find_by(ccms_code: ccms_code)
+    proceeding.id
   end
 end

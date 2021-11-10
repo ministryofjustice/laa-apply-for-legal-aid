@@ -3,19 +3,22 @@ require 'rails_helper'
 module Providers
   module ProceedingMeritsTask
     RSpec.describe SuccessProspectsController, type: :request do
-      let!(:legal_aid_application) { create :legal_aid_application }
-      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+      let(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
+      let(:pt_da) { create :proceeding_type, :with_real_data }
+      let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
       let(:application_proceeding_type) do
         create :application_proceeding_type,
                :with_chances_of_success,
                legal_aid_application: legal_aid_application,
-               proceeding_type: create(:proceeding_type, :with_real_data)
+               proceeding_type: pt_da
       end
 
       let(:provider) { legal_aid_application.provider }
 
       describe 'GET /providers/merits_task_list/:id/success_prospects' do
-        subject { get providers_merits_task_list_success_prospects_path(application_proceeding_type) }
+        subject { get providers_merits_task_list_success_prospects_path(proceeding) }
 
         context 'when the provider is not authenticated' do
           before { subject }
@@ -35,7 +38,7 @@ module Providers
       end
 
       describe 'PATCH providers/merits_task_list/:id/success_prospects' do
-        subject { patch providers_merits_task_list_success_prospects_path(application_proceeding_type), params: params.merge(submit_button) }
+        subject { patch providers_merits_task_list_success_prospects_path(proceeding), params: params.merge(submit_button) }
         let(:success_prospect) { 'marginal' }
         let(:success_prospect_details) { Faker::Lorem.paragraph }
         let(:params) do
@@ -61,8 +64,8 @@ module Providers
             end
 
             it 'updates the record' do
-              expect(application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
-              expect(application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
+              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
+              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
             end
 
             it 'redirects to the next page' do
@@ -78,8 +81,8 @@ module Providers
             end
 
             it 'updates the record' do
-              expect(application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
-              expect(application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
+              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
+              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
             end
 
             it 'redirects to provider applications home page' do

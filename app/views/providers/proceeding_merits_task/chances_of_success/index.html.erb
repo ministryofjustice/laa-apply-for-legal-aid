@@ -6,7 +6,7 @@
     ) do |form| %>
     <%= page_template(
             page_title: t('.h1-heading'),
-            head_title: "#{@application_proceeding_type.proceeding_type.meaning} - "+ t('.h1-heading'),
+            head_title: "#{@proceeding.meaning} - "+ t('.h1-heading'),
             template: :basic,
             form: form,
             back_link: {}
@@ -18,7 +18,7 @@
           :value,
           :label,
           legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)},
-          caption: { text: @application_proceeding_type.proceeding_type.meaning, size: 'xl' }
+          caption: { text: @proceeding.meaning, size: 'xl' }
         ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>

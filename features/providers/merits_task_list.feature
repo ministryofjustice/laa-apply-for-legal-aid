@@ -58,6 +58,10 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers and submit application'
     And the page is accessible
+    Then I click Check Your Merits Answers Change link for 'Success Likely' for 'Inherent jurisdiction high court injunction'
+    Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
+    And I click 'Save and continue'
+    Then I should be on the 'check_merits_answers' page showing 'Check your answers and submit application'
 
   @javascript @vcr
   Scenario: Removing children
