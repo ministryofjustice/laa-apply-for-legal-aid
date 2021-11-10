@@ -5,6 +5,7 @@ deploy() {
   RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
+  IDENTIFIER="$RELEASE_NAME-laa-apply-for-legal-aid-laa-apply-for-legalaid-uat-blue"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
@@ -15,7 +16,8 @@ deploy() {
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set ingress.host="$RELEASE_HOST"
+                --set ingress.host="$RELEASE_HOST" \
+                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER"
 }
 
 deploy
