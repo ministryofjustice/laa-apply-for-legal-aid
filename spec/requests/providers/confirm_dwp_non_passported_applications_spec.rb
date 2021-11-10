@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :request do
-  let(:application) { create(:legal_aid_application, :with_proceeding_types, :at_checking_applicant_details, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications' do
@@ -34,7 +34,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         subject
       end
 
-      it 'points to check youe answers page' do
+      it 'points to check your answers page' do
         expect(response.body).to have_back_link("#{page1}&back=true")
       end
     end

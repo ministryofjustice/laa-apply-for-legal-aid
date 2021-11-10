@@ -3,6 +3,10 @@ module DelegatedFunctions
     application_proceeding_types.any?(&:used_delegated_functions?)
   end
 
+  def proceedings_used_delegated_functions?
+    proceedings.any?(&:used_delegated_functions?)
+  end
+
   def used_delegated_functions_on
     earliest_delegated_functions_date
   end

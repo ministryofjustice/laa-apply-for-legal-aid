@@ -25,7 +25,9 @@ When(/^I display the setup$/) do
   ap ProceedingType.order(:ccms_code).pluck(:ccms_code, :id)
   puts ">>>>>>>>>>>> apts #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
   ap laa.application_proceeding_types
-  puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+  puts ">>>>>>>>>>>> proceeeding types linked to application #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+  ap laa.application_proceeding_types.map(&:proceeding_type)
+  puts ">>>>>>>>>>>> proceedings #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
   ap laa.proceedings
   puts ">>>>>>>>>>>> end of setup #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
 end
@@ -39,7 +41,7 @@ end
 
 # TODO: remove after LFA migration complete
 When(/^I disable callbacks on ApplicationProceedingType$/) do
-  ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding)
-  ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding)
-  ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding)
+  ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
+  ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
+  ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
 end

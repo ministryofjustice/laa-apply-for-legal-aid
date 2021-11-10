@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Providers::CheckProviderAnswersController, type: :request do
-  let(:used_delegated_functions) { false }
   let(:used_delegated_functions_on) { nil }
   let(:address) { create :address }
   let(:applicant) { create :applicant, address: address }
@@ -10,15 +9,14 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       :legal_aid_application,
       :with_non_passported_state_machine,
       :at_entering_applicant_details,
-      :with_proceeding_types,
-      :with_delegated_functions,
-      delegated_functions_date: used_delegated_functions_on,
-      applicant: applicant
+      :with_proceedings,
+      applicant: applicant,
+      set_lead_proceeding: :da001
     )
   end
   let(:application_id) { application.id }
   let(:parsed_html) { Nokogiri::HTML(response.body) }
-  let!(:proceeding_name) { application.lead_proceeding_type.name }
+  let!(:proceeding_name) { application.lead_proceeding.name }
   let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
 
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
@@ -50,7 +48,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       end
 
       it 'displays the correct proceeding' do
-        expect(unescaped_response_body).to include(application.proceeding_types[0].meaning)
+        expect(unescaped_response_body).to include(application.proceedings[0].substantive_scope_limitation_description)
       end
 
       context 'delegated functions not used' do
@@ -59,7 +57,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             :legal_aid_application,
             :with_non_passported_state_machine,
             :at_entering_applicant_details,
-            :with_proceeding_types,
+            :with_proceedings,
             applicant: applicant
           )
         end
@@ -69,9 +67,23 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         end
       end
 
-      context 'provider have used delegated functions' do
-        let(:used_delegated_functions) { true }
-        let(:used_delegated_functions_on) { Faker::Date.backward }
+      context 'provider has used delegated functions' do
+        let(:application) do
+          create(
+            :legal_aid_application,
+            :with_non_passported_state_machine,
+            :at_entering_applicant_details,
+            :with_proceedings,
+            explicit_proceedings: [:da004],
+            set_lead_proceeding: :da004,
+            applicant: applicant
+          )
+        end
+
+        before do
+          application.proceedings.each { |proceeding| apt_from_proceeding(proceeding: proceeding) }
+          application.reload
+        end
 
         it 'displays correct used_delegated_functions_on answer' do
           expect(used_delegated_functions_answer.content.strip).to eq(application.used_delegated_functions_on.to_s.strip)
@@ -141,7 +153,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       context 'when client is checking answers' do
         let(:application) do
           create(:legal_aid_application,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_applicant_and_address,
                  :with_non_passported_state_machine,
                  :checking_citizen_answers)

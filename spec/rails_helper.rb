@@ -133,3 +133,25 @@ def populate_legal_framework
   ScopeLimitation.populate
   ProceedingTypeScopeLimitation.populate
 end
+
+# TODO: remove when LFA migration is complete
+# For tests that rely on application_proceeding types to be present, but only proceedings are created in the setup
+#
+def apt_from_proceeding(proceeding:, chances_of_success: false)
+  if ProceedingType.find_by(ccms_code: proceeding.ccms_code).nil?
+    pt1 = create :proceeding_type,
+                 meaning: proceeding.meaning,
+                 name: proceeding.name,
+                 description: proceeding.description
+  end
+
+  apt = create :application_proceeding_type,
+               :with_proceeding_type_scope_limitations,
+               :with_substantive_scope_limitation,
+               proceeding_type: pt1,
+               legal_aid_application: proceeding.legal_aid_application,
+               used_delegated_functions_on: proceeding.used_delegated_functions_on,
+               used_delegated_functions_reported_on: proceeding.used_delegated_functions_reported_on
+
+  create :chances_of_success, application_proceeding_type: apt, proceeding: application_proceeding_type.proceeding if chances_of_success
+end

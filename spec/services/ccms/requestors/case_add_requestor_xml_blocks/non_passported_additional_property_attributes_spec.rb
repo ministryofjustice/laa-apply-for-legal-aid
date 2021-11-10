@@ -21,12 +21,17 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
-                 :with_proceeding_types,
-                 :with_chances_of_success,
+                 :with_proceedings,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
                  office: office
+        end
+
+        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+        let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+        let!(:chances_of_success) do
+          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding
         end
 
         let(:ccms_reference) { '300000054005' }

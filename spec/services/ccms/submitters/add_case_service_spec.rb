@@ -5,13 +5,18 @@ module CCMS
     RSpec.describe AddCaseService, :ccms do
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_chances_of_success,
                :with_everything_and_address,
                :with_cfe_v3_result,
                :with_positive_benefit_check_result,
                office_id: office.id,
                populate_vehicle: true
+      end
+      let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+      let(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+      let!(:chances_of_success) do
+        create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type_one, proceeding: proceeding
       end
       let(:applicant) { legal_aid_application.applicant }
       let(:office) { create :office }

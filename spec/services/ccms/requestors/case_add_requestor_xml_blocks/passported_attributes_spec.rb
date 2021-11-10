@@ -14,19 +14,20 @@ module CCMS
                  username: 4_953_649
         end
 
-        let(:legal_aid_application) do
+        let!(:legal_aid_application) do
           create :legal_aid_application,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_everything,
                  :with_applicant_and_address,
                  :with_positive_benefit_check_result,
+                 set_lead_proceeding: :da001,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
                  office: office
         end
-
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+        let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -34,7 +35,6 @@ module CCMS
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
         let!(:success_prospect) { :likely }
         let!(:chances_of_success) do
           create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
@@ -42,15 +42,19 @@ module CCMS
                                       proceeding: proceeding
         end
 
+        before do
+          allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
+        end
+
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
-        context 'save to a temporary file' do
-          it 'creates a file' do
-            filename = Rails.root.join('tmp/generated_ccms_payload.xml')
-            File.open(filename, 'w') { |f| f.puts xml }
-            expect(File.exist?(filename)).to be true
-          end
-        end
+        # context 'save to a temporary file' do
+        #   it 'creates a file' do
+        #     filename = Rails.root.join('tmp/generated_ccms_payload.xml')
+        #     File.open(filename, 'w') { |f| f.puts xml }
+        #     expect(File.exist?(filename)).to be true
+        #   end
+        # end
 
         context 'DevolvedPowersDate' do
           context 'on a Substantive case' do
@@ -76,7 +80,7 @@ module CCMS
 
         context 'CHILD_PARTIES_C' do
           context 'section8 proceeding' do
-            before { allow_any_instance_of(ProceedingType).to receive(:section8?).and_return true }
+            before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return true }
             it 'is true' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'CHILD_PARTIES_C')
               expect(block).to have_boolean_response(true)
@@ -229,7 +233,7 @@ module CCMS
           context 'no bank accounts present' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
@@ -322,7 +326,7 @@ module CCMS
           context 'no car and vehicle present' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
@@ -351,7 +355,7 @@ module CCMS
           context 'no wage slips present' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
@@ -839,16 +843,18 @@ module CCMS
           context 'delegated function used' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
-                     :with_delegated_functions,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     set_lead_proceeding: :da004,
+                     proceeding_count: 2,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
                      office: office
             end
+            let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
 
             it 'returns SUBDP' do
               %i[global_means global_merits].each do |entity|
@@ -874,15 +880,23 @@ module CCMS
           context 'delegated function used' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
-                     :with_delegated_functions,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     set_lead_proceeding: :da004,
+                     proceeding_count: 2,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
                      office: office
+            end
+            let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
+            let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+            let!(:chances_of_success) do
+              create :chances_of_success, :with_optional_text,
+                     application_proceeding_type: application_proceeding_type,
+                     proceeding: da004
             end
 
             it 'returns hard coded statement' do
@@ -1219,10 +1233,9 @@ module CCMS
 
           context 'LEVEL_OF_SERVICE' do
             it 'is the service level number from the default level of service' do
-              service_level_number = legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number.to_s
               %i[proceeding_merits proceeding].each do |entity|
                 block = XmlExtractor.call(xml, entity, 'LEVEL_OF_SERVICE')
-                expect(block).to have_text_response service_level_number
+                expect(block).to have_text_response proceeding.default_level_of_service_level
               end
             end
           end
@@ -1230,7 +1243,7 @@ module CCMS
           context 'PROCEEDING_LEVEL_OF_SERVICE' do
             it 'should be the name of the lead proceeding default level of service' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_LEVEL_OF_SERVICE')
-              expect(block).to have_text_response legal_aid_application.lead_proceeding_type.default_level_of_service.name
+              expect(block).to have_text_response proceeding.default_level_of_service_name
             end
           end
 
@@ -1302,7 +1315,7 @@ module CCMS
           context 'there is one scope limitation' do
             let(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
@@ -1320,23 +1333,31 @@ module CCMS
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
                 block = XmlExtractor.call(xml, entity, attribute)
-                expect(block).to have_text_response legal_aid_application.application_proceeding_types.first.assigned_scope_limitations.first.code
+                expect(block).to have_text_response legal_aid_application.proceedings.first.substantive_scope_limitation_code
               end
             end
           end
 
           context 'there are multiple scope limitations' do
-            let(:legal_aid_application) do
+            let!(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
-                     :with_delegated_functions,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     explicit_proceedings: [:da004],
+                     set_lead_proceeding: :da004,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
                      provider: provider,
                      office: office
+            end
+            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
+            let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+            let!(:chances_of_success) do
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
+                                          application_proceeding_type: application_proceeding_type_one,
+                                          proceeding: proceeding_da004
             end
 
             it 'REQUESTED_SCOPE should populated with MULTIPLE in proceedings section' do
@@ -1401,59 +1422,59 @@ module CCMS
           it 'populates REQ_COST_LIMITATION' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'REQ_COST_LIMITATION')
-              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.default_substantive_cost_limitation)
+              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
           it 'populates APP_IS_FAMILY' do
             block = XmlExtractor.call(xml, :global_merits, 'APP_IS_FAMILY')
-            expect(block).to have_boolean_response(application_proceeding_type.proceeding_type.ccms_category_law == 'Family')
+            expect(block).to have_boolean_response(proceeding.category_of_law == 'Family')
           end
 
           it 'populates CAT_OF_LAW_DESCRIPTION' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_DESCRIPTION')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+            expect(block).to have_text_response proceeding.category_of_law
           end
 
           it 'populates CAT_OF_LAW_HIGH_LEVEL' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_HIGH_LEVEL')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law
+            expect(block).to have_text_response proceeding.category_of_law
           end
 
           it 'populates CAT_OF_LAW_MEANING' do
             block = XmlExtractor.call(xml, :global_merits, 'CAT_OF_LAW_MEANING')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.meaning
+            expect(block).to have_text_response proceeding.meaning
           end
 
           it 'populates CATEGORY_OF_LAW' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'CATEGORY_OF_LAW')
-              expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_category_law_code
+              expect(block).to have_text_response proceeding.category_law_code
             end
           end
 
           it 'populates DEFAULT_COST_LIMITATION_MERITS' do
             block = XmlExtractor.call(xml, :global_merits, 'DEFAULT_COST_LIMITATION_MERITS')
-            expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.default_substantive_cost_limitation)
+            expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
           end
 
           it 'populates DEFAULT_COST_LIMITATION' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
-              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.default_substantive_cost_limitation)
+              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
           it 'populates MATTER_TYPE' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'MATTER_TYPE')
-              expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_matter_code
+              expect(block).to have_text_response proceeding.ccms_matter_code
             end
           end
 
           it 'populates PROCEEDING_NAME' do
             block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_NAME')
-            expect(block).to have_text_response application_proceeding_type.proceeding_type.ccms_code
+            expect(block).to have_text_response proceeding.ccms_code
           end
         end
 
@@ -1467,17 +1488,23 @@ module CCMS
           end
 
           context 'delegated_functions' do
-            let(:legal_aid_application) do
+            let!(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
-                     :with_delegated_functions,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
-                     :with_positive_benefit_check_result,
+                     set_lead_proceeding: :da004,
+                     explicit_proceedings: [:da004],
                      populate_vehicle: true,
-                     with_bank_accounts: 2,
                      provider: provider,
                      office: office
+            end
+            let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
+            let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+            let!(:chances_of_success) do
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
+                                          application_proceeding_type: application_proceeding_type,
+                                          proceeding: proceeding_da004
             end
 
             it 'returns false' do
@@ -1496,17 +1523,25 @@ module CCMS
           end
 
           context 'delegated functions' do
-            let(:legal_aid_application) do
+            let!(:legal_aid_application) do
               create :legal_aid_application,
-                     :with_proceeding_types,
-                     :with_delegated_functions,
+                     :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     set_lead_proceeding: :da004,
+                     explicit_proceedings: [:da004],
                      populate_vehicle: true,
-                     with_bank_accounts: 2,
+                     with_bank_accounts: 1,
                      provider: provider,
                      office: office
+            end
+            let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
+            let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+            let!(:chances_of_success) do
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
+                                          application_proceeding_type: application_proceeding_type_one,
+                                          proceeding: proceeding_da004
             end
 
             it 'returns Both' do
