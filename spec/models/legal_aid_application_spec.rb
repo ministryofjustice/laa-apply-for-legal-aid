@@ -626,9 +626,9 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#earliest_delegated_functions_date' do
     let(:laa) { create :legal_aid_application }
-    let!(:apt1) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date1 }
-    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, used_delegated_functions_on: date2 }
-    let!(:apt3) { create :application_proceeding_type, legal_aid_application: laa }
+    let!(:proceeding1) { create :proceeding, :da001, legal_aid_application: laa, used_delegated_functions_on: date1 }
+    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa, used_delegated_functions_on: date2 }
+    let!(:proceeding3) { create :proceeding, :se014, legal_aid_application: laa }
 
     context 'there are application_proceeding_type records with dates ' do
       let(:date1) { Time.zone.today }

@@ -23,19 +23,19 @@ module Providers
     end
 
     def form
-      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(application_proceedings_by_name)
+      @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(proceedings_by_name)
     end
 
     def proceeding_types
       @proceeding_types ||= legal_aid_application.proceeding_types
     end
 
-    def application_proceedings_by_name
-      @application_proceedings_by_name ||= legal_aid_application.application_proceedings_by_name
+    def proceedings_by_name
+      @proceedings_by_name ||= legal_aid_application.proceedings_by_name
     end
 
-    def application_proceeding_types
-      application_proceedings_by_name.map(&:application_proceeding_type)
+    def proceedings
+      proceedings_by_name.map(&:proceeding)
     end
 
     def delegated_functions_used_over_month_ago?
@@ -48,10 +48,6 @@ module Providers
       @earliest_delegated_functions_date ||= legal_aid_application.earliest_delegated_functions_date
     end
 
-    # def earliest_delegated_functions_reported_date
-    #   @earliest_delegated_functions_reported_date ||= legal_aid_application.earliest_delegated_functions_reported_date
-    # end
-
     def update_scope_limitations
       earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
     end
@@ -63,7 +59,7 @@ module Providers
     end
 
     def remove_delegated_scope_limitations
-      application_proceeding_types.each(&:remove_default_delegated_functions_scope_limitation)
+      proceedings.map(&:application_proceeding_type).each(&:remove_default_delegated_functions_scope_limitation)
     end
 
     def form_params

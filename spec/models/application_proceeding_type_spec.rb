@@ -75,6 +75,10 @@ RSpec.describe ApplicationProceedingType do
           apt.update!(used_delegated_functions_on: nil,
                       used_delegated_functions_reported_on: nil)
         end
+        application.proceedings.each do |proceeding|
+          proceeding.update!(used_delegated_functions_on: nil,
+                             used_delegated_functions_reported_on: nil)
+        end
       end
       it 'used delegated functions returns false' do
         expect(application.used_delegated_functions?).to be false

@@ -3,16 +3,14 @@ require 'rails_helper'
 
 RSpec.describe DelegatedFunctionsDateService do
   describe 'sets date on application_proceeding_type records', :vcr do
-    let(:pt1) { create :proceeding_type, :with_real_data }
-    let(:pt2) { create :proceeding_type, :as_occupation_order }
     let(:laa) { create :legal_aid_application }
-    let!(:apt1) do
-      create :application_proceeding_type,
-             legal_aid_application: laa, proceeding_type: pt1,
+    let!(:proceeding1) do
+      create :proceeding, :da001,
+             legal_aid_application: laa,
              used_delegated_functions_on: df_date,
              used_delegated_functions_reported_on: reported_date
     end
-    let!(:apt2) { create :application_proceeding_type, legal_aid_application: laa, proceeding_type: pt2 }
+    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa }
     let(:df_date) { Date.new(2021, 5, 10) }
     let(:reported_date) { Date.new(2021, 5, 13) }
 

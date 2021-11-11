@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+  let(:proceedings) { legal_aid_application.proceedings }
   let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
-  let(:application_proceedings_by_name) { legal_aid_application.application_proceedings_by_name }
+  let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:login_provider) { login_as legal_aid_application.provider }
 
   before do
@@ -44,7 +45,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       before { subject }
 
       it 'shows selected proceedings for the application' do
-        application_proceedings_by_name.each do |type|
+        proceedings_by_name.each do |type|
           expect(response.body).to include(type.name)
         end
       end
@@ -80,7 +81,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
       )
-      application_proceeding_types.reload
+      application_proceeding_types.reload.reload
     end
 
     it 'updates the application proceeding types delegated functions dates' do
@@ -90,12 +91,21 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
     end
 
+    it 'updates the proceedings delegated functions dates' do
+      proceedings.order(used_delegated_functions_on: :desc).each_with_index do |proceeding, i|
+        expect(proceeding.used_delegated_functions_reported_on).to eq(today)
+        expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on - i.days)
+      end
+    end
+
     it 'has a delegated function scope limitation' do
+      expect(proceedings.first.delegated_functions_scope_limitation_code).not_to be_nil
       expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
     end
 
     it 'has a substantive scope limitation' do
       expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
+      expect(proceedings.first.substantive_scope_limitation_code).not_to be_nil
     end
 
     it 'redirects to the limitations page' do
@@ -197,15 +207,20 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     context 'when not using delegated functions' do
       let(:default_params) do
         params = { none_selected: 'true' }
-        application_proceedings_by_name.each { |type| params[:"#{type.name}"] = 'false' }
+        proceedings_by_name.each { |proceeding| params[:"#{proceeding.name}"] = 'false' }
         params
       end
 
       it 'updates the application' do
         expect(application_proceeding_types.first.used_delegated_functions?).to be false
+        expect(proceedings.first.used_delegated_functions?).to be false
         application_proceeding_types.each do |type|
           expect(type.used_delegated_functions_reported_on).to be_nil
           expect(type.used_delegated_functions_on).to be_nil
+        end
+        proceedings.each do |proceeding|
+          expect(proceeding.used_delegated_functions_reported_on).to be_nil
+          expect(proceeding.used_delegated_functions_on).to be_nil
         end
       end
 
@@ -230,23 +245,28 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
           apt = application_proceeding_types.order(used_delegated_functions_on: :desc).first
           expect(apt.used_delegated_functions_reported_on).to eq(today)
           expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on)
+          proceeding = proceedings.order(used_delegated_functions_on: :desc).first
+          expect(proceeding.used_delegated_functions_reported_on).to eq(today)
+          expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on)
         end
       end
 
       context 'with second application proceeding type' do
         it 'updates the application proceeding types delegated functions dates' do
-          apt = application_proceeding_types.order(used_delegated_functions_on: :desc).last
-          expect(apt.used_delegated_functions_reported_on).to eq(today)
-          expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)
+          proceeding = proceedings.order(used_delegated_functions_on: :desc).last
+          expect(proceeding.used_delegated_functions_reported_on).to eq(today)
+          expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)
         end
       end
 
       it 'has a delegated function scope limitation' do
         expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
+        expect(proceedings.first.delegated_functions_scope_limitation_code).not_to be_nil
       end
 
       it 'has a substantive scope limitation' do
         expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
+        expect(proceedings.first.substantive_scope_limitation_code).not_to be_nil
       end
 
       it 'does not call the submit application reminder mailer service' do
@@ -256,14 +276,14 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       context 'when nothing selected' do
         let(:default_params) do
           params = { none_selected: 'false' }
-          application_proceedings_by_name.each { |type| params[:"#{type.name}"] = 'false' }
+          proceedings_by_name.each { |proceeding| params[:"#{proceeding.name}"] = 'false' }
           params
         end
 
         it 'still updates the application proceeding types delegated functions dates' do
-          application_proceeding_types.each do |type|
-            expect(type.used_delegated_functions_reported_on).to be_nil
-            expect(type.used_delegated_functions_on).to be_nil
+          proceedings.each do |proceeding|
+            expect(proceeding.used_delegated_functions_reported_on).to be_nil
+            expect(proceeding.used_delegated_functions_on).to be_nil
           end
         end
 
@@ -290,20 +310,20 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
   def update_proceeding_type_param_dates(day: nil, month: nil, year: nil)
     params = default_params
-    application_proceedings_by_name.each_with_index do |type, i|
+    proceedings_by_name.each_with_index do |proceeding, i|
       adjusted_date = used_delegated_functions_on - i.day
-      type_params = proceeding_type_date_params(type, adjusted_date, day, month, year)
+      type_params = proceeding_type_date_params(proceeding, adjusted_date, day, month, year)
       params = type_params.merge(params)
     end
     params
   end
 
-  def proceeding_type_date_params(type, adjusted_date, day, month, year)
+  def proceeding_type_date_params(proceeding, adjusted_date, day, month, year)
     {
-      "#{type.name}": 'true',
-      "#{type.name}_used_delegated_functions_on_3i": day || adjusted_date.day.to_s,
-      "#{type.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
-      "#{type.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s
+      "#{proceeding.name}": 'true',
+      "#{proceeding.name}_used_delegated_functions_on_3i": day || adjusted_date.day.to_s,
+      "#{proceeding.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
+      "#{proceeding.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s
     }
   end
 
