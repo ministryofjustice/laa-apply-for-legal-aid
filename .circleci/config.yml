@@ -32,7 +32,7 @@ executors:
       - image: cimg/ruby:3.0.2-browsers
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-      - image: cimg/postgres:10.5
+      - image: cimg/postgres:10.18
       - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
 
