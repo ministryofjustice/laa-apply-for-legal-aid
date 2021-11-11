@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  browser-tools: circleci/browser-tools@1.2.3
   slack: circleci/slack@4.4.4
 
 executors:
@@ -11,7 +12,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
+      - image: cimg/ruby:3.0.2-browsers
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
@@ -29,13 +30,12 @@ executors:
 
   test-executor:
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
+      - image: cimg/ruby:3.0.2-browsers
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
-      - image: circleci/postgres:10.5
-      - image: circleci/redis:5.0
+      - image: cimg/postgres:10.18
+      - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
-
 references:
   decrypt_secrets: &decrypt_secrets
     run:
@@ -249,6 +249,8 @@ jobs:
   integration_tests:
     executor: test-executor
     steps:
+    - browser-tools/install-chrome
+    - browser-tools/install-chromedriver
     - checkout
     - *install_lib_ffi
     - *install_packages_for_testing
