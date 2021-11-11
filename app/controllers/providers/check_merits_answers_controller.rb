@@ -3,7 +3,6 @@ module Providers
     def show
       legal_aid_application.create_opponent! unless legal_aid_application.opponent
       legal_aid_application.check_merits_answers! unless legal_aid_application.checking_merits_answers?
-      application_proceeding_type
     end
 
     def continue
@@ -17,12 +16,6 @@ module Providers
     def reset
       legal_aid_application.reset!
       redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
-    end
-
-    private
-
-    def application_proceeding_type
-      @application_proceeding_type ||= legal_aid_application.lead_application_proceeding_type
     end
   end
 end
