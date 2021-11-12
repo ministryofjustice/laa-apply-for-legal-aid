@@ -9,7 +9,7 @@ module Providers
       @form = LegalAidApplications::HasOtherProceedingsForm.new(form_params)
       @form.draft! if params[:draft_button]
       if @form.save
-        LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
+        LegalFramework::LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
         return continue_or_draft if draft_selected?
 
         go_forward(@form.has_other_proceeding?)
@@ -49,8 +49,8 @@ module Providers
     def remove_proceeding
       LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
       LegalFramework::RemoveProceedingService.call(legal_aid_application, proceeding)
-      LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
-      LeadProceedingAssignmentService.call(legal_aid_application)
+      LegalFramework::LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
+      LegalFramework::LeadProceedingAssignmentService.call(legal_aid_application)
     end
 
     def remove_laspo_response
