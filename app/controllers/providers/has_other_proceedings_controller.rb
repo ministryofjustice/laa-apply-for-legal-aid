@@ -9,7 +9,7 @@ module Providers
       @form = LegalAidApplications::HasOtherProceedingsForm.new(form_params)
       @form.draft! if params[:draft_button]
       if @form.save
-        LeadProceedingAssignmentService.call(legal_aid_application)
+        LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
         return continue_or_draft if draft_selected?
 
         go_forward(@form.has_other_proceeding?)
@@ -35,11 +35,21 @@ module Providers
     end
 
     def proceeding_type
-      proceeding_types.find_by(code: form_params[:id])
+      proceeding_types.find_by(ccms_code: form_params[:ccms_code])
+    end
+
+    def proceedings
+      @proceedings ||= legal_aid_application.proceedings
+    end
+
+    def proceeding
+      proceedings.find_by(ccms_code: form_params[:ccms_code])
     end
 
     def remove_proceeding
       LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
+      LegalFramework::RemoveProceedingService.call(legal_aid_application, proceeding)
+      LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
       LeadProceedingAssignmentService.call(legal_aid_application)
     end
 
@@ -53,7 +63,7 @@ module Providers
     end
 
     def destroy_form_params
-      params.permit(:id)
+      params.permit(:ccms_code)
     end
 
     def update_form_params

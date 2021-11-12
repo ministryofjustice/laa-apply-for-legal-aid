@@ -430,6 +430,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
+    And I enable callbacks on ApplicationProceedingType
     And I click Check Your Answers Change link for 'Proceedings'
     And I click the first link 'Remove'
     And I search for proceeding 'Non-molestation order'
@@ -445,6 +446,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
+    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I want to change address from the check your answers page

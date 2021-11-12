@@ -107,7 +107,11 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   end
 
   describe 'DELETE /providers/:application_id/has_other_proceedings' do
-    let(:params) { { id: legal_aid_application.proceeding_types.last.code } }
+    let(:params) do
+      {
+        ccms_code: legal_aid_application.proceedings.last.ccms_code
+      }
+    end
     subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
 
     context 'remove proceeding' do
@@ -115,9 +119,18 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         expect { subject }.to change { legal_aid_application.proceeding_types.count }.by(-1)
       end
 
+      it 'removes one proceeding' do
+        expect { subject }.to change { legal_aid_application.proceedings.count }.by(-1)
+      end
+
       it 'leaves the correct remaining proceeding type number' do
         subject
         expect(legal_aid_application.proceeding_types.count).to eq 1
+      end
+
+      it 'leaves the correct number of remaining proceedings' do
+        subject
+        expect(legal_aid_application.proceedings.count).to eq 1
       end
 
       it 'displays the singular number of proceedings remaining' do
@@ -126,18 +139,28 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
 
       context 'delete lead proceeding' do
-        let(:params) { { id: legal_aid_application.proceeding_types.first.code } }
+        let(:params) do
+          { ccms_code: legal_aid_application.proceedings.first.ccms_code }
+        end
+
         subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+
+        it 'sets a new lead application_proceeding_type when the original one is deleted' do
+          subject
+          expect(legal_aid_application.application_proceeding_types[0].lead_proceeding).to eq true
+        end
 
         it 'sets a new lead proceeding when the original one is deleted' do
           subject
-          expect(legal_aid_application.application_proceeding_types[0].lead_proceeding).to eq true
+          expect(legal_aid_application.proceedings[0].lead_proceeding).to eq true
         end
       end
     end
 
     context 'remove all proceedings' do
-      let(:other_params) { { id: legal_aid_application.proceeding_types.first.code } }
+      let(:other_params) do
+        { ccms_code: legal_aid_application.proceedings.first.ccms_code }
+      end
 
       it 'redirects to the proceedings type page if all proceeding types removed' do
         subject
