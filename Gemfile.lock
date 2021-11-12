@@ -229,9 +229,9 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     dumb_delegator (1.0.0)
-    em-websocket (0.5.2)
+    em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.6.0)
+      http_parser.rb (~> 0)
     erb_lint (0.1.1)
       activesupport
       better_html (~> 1.0.7)
@@ -317,7 +317,7 @@ GEM
     hirb (0.7.3)
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
-    http_parser.rb (0.6.0)
+    http_parser.rb (0.8.0)
     httpi (2.5.0)
       rack
       socksify
