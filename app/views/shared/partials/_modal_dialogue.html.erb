@@ -16,12 +16,12 @@
 <!--        <button class="js-modal-dialogue-close-button js-modal-dialog-close-button&#45;&#45;main" aria-label="Close modal dialogue">×</button>-->
 <!--    </dialog>-->
 <!--</div>-->
-<div class="modal hidden" id="<%= application.application_ref %>-modal">
-  <div class="modal-content">
-      <span class="close close-modal">&times;</span>
-      <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
+<div class="modal modal-dialog" id="<%= application.application_ref %>-modal" tabindex="1">
+  <div class="modal-content" aria-modal="true" aria-hidden="true" role="dialog" aria-label="Confirm delete application">
+      <span class="close close-modal modal-dialog" aria-label="Close modal">&times;</span>
+      <h1 class="govuk-heading-l modal-dialog" id="modal-title"><%= t('.page_title') %></h1>
       <div class="govuk-panel__body">
-          <dl class="govuk-list inline-list">
+          <dl class="govuk-list inline-list modal-dialog">
               <dt>
                   <strong><%= t('.applicant') %>:</strong>
               </dt>
@@ -34,7 +34,7 @@
           </dl>
       </div>
 
-      <div class="govuk-warning-text">
+      <div class="govuk-warning-text modal-dialog">
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
               <span class="govuk-warning-text__assistive"><%= t('.warning_assistive') %></span>
@@ -43,8 +43,8 @@
       </div>
       <%= form.submit(
           t('.yes_button'),
-          class: 'govuk-button govuk-button--warning confirm-delete-btn'
+          class: 'govuk-button govuk-button--warning confirm-delete-btn modal-dialog'
           ) %>
-      <button class="govuk-button form-button govuk-!-margin-left-3 close-modal"><%= t('.no_button') %></button>
+      <button class="govuk-button form-button govuk-!-margin-left-3 close-modal modal-dialog"><%= t('.no_button') %></button>
   </div>
 </div>
