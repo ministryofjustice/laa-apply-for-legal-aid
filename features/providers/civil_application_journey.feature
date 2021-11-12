@@ -278,6 +278,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: I can see that the applicant receives benefits
+    Given I enable callbacks on ApplicationProceedingType
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
     Then I enter name 'Test', 'Walker'
@@ -319,6 +320,7 @@ Feature: Civil application journeys
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     Then I click 'Save and continue'
     Then I should be on a page showing 'receives benefits that qualify for legal aid'
+    And I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits

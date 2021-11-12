@@ -1,6 +1,7 @@
 Feature: Emergency cost override
   @javascript @vcr
   Scenario: Provider is prompted to override emergency cost limitation
+    Given I enable callbacks on ApplicationProceedingType
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'
     And I enter the date of birth '03-04-1999'
@@ -36,3 +37,4 @@ Feature: Emergency cost override
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page showing "Emergency cost limit"
+    And I disable callbacks on ApplicationProceedingType

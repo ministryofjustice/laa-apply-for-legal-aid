@@ -1317,13 +1317,13 @@ global_merits:
     value: '#application_used_delegated_functions?'
   FAM_CERT_PREDICTED_COSTS:
     generate_block?: true
-    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
   MERITS_CERT_PREDICTED_COSTS:
     generate_block?: true
-    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
   PROC_PREDICTED_COST_FAMILY:
     generate_block?: true
-    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
     response_type: currency
     br100_meaning: 'Fam: The Proceeding Family Predicted Costs Under The Certificate'
     user_defined: false
@@ -2198,7 +2198,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: true
   PROFIT_COST_FAMILY:
-    value: '#lead_proceeding_type_default_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: 'Fam: The Profit Costs To Completion Of The Family Proceeding'
     response_type: currency
     user_defined: true

@@ -219,10 +219,12 @@ FactoryBot.define do
     #    - true - the first domestic abuse proceeding will be set as the lead (default)
     #    - false - no proceeding will be set as lead
     #    - :da001 or :da004 - the specified proceeding will be set as lead
+    #  - explicit_proceedings - an array of trait names from the proceeding factory
     #
     # examples:
     #   - create :legal_aid_application, :with_proceedings
     #   - create :legal_aid_application, :with_proceedings, proceeding_count: 3
+    #   - create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001, :se013], set_lead_proceeding: :da001
     #
     # Note that the first domestic_abuse proceeding will be set as lead proceeding
     trait :with_proceedings do
@@ -230,16 +232,58 @@ FactoryBot.define do
         proceeding_count { 1 }
         assign_lead_proceeding { true }
         set_lead_proceeding { true }
+        explicit_proceedings { nil }
       end
 
       after(:create) do |application, evaluator|
         raise ':with_proceedings trait can only have a proceeding count of 1 to 4' if evaluator.proceeding_count > 4
 
-        traits = %i[da001 se014 se013 da004]
-        (0..evaluator.proceeding_count - 1).each do |i|
-          trait = traits[i]
-          lead = evaluator.set_lead_proceeding == trait || (evaluator.set_lead_proceeding == true && trait == :da001)
-          create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
+        if evaluator.explicit_proceedings.nil?
+          traits = %i[da001 da004 se014 se013]
+          (0..evaluator.proceeding_count - 1).each do |i|
+            trait = traits[i]
+            lead = evaluator.set_lead_proceeding == trait || (evaluator.set_lead_proceeding == true && trait == :da001)
+            create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
+          end
+        else
+          evaluator.explicit_proceedings.each do |trait|
+            lead = evaluator.set_lead_proceeding == trait
+            create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
+          end
+        end
+      end
+    end
+
+    # :with_delegated_functions_on_proceedings trait
+    # ========================
+    # This trait must be specified after the :with_proceedings trait.
+    #
+    # Takes a hash as a mandatory parameter, passing
+    # delegated_functions_date and delegated_functions_reported_date
+    # date in an array for each proceeding ccms_code.
+    # example:
+    #   {
+    #     DA001: [Date.yesterday, Date.today],
+    #     DA004: [nil, nil],
+    #     SE013: [2.days.ago, 1.day.ago]
+    #   }
+    #
+    trait :with_delegated_functions_on_proceedings do
+      transient do
+        df_options { nil }
+      end
+
+      after(:create) do |application, evaluator|
+        raise 'Must specify an array including ccms_code and an array of two dates' if evaluator.df_options.nil?
+
+        puts evaluator.df_options
+        evaluator.df_options.each do |ccms_code, _dates|
+          proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code }
+          next if proceeding.nil?
+
+          df_date, reported_date = evaluator.df_options[ccms_code]
+          proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
+          pp proceeding.used_delegated_functions_on
         end
       end
     end
@@ -878,25 +922,6 @@ FactoryBot.define do
           AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                      scope_limitation_id: sl.id)
           application.reload
-        end
-      end
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_substantive_scope_limitation do
-      after(:create) do |application, _evaluator|
-        if application.proceeding_types.empty?
-          application.proceeding_types = create_list(:proceeding_type, 1)
-          pt = application.lead_proceeding_type
-          sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-          AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                     scope_limitation_id: sl.id)
         end
       end
     end

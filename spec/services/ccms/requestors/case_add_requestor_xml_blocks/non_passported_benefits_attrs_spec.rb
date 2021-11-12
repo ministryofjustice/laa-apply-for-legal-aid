@@ -22,22 +22,23 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider: provider,
                  office: office
         end
-
-        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
+        let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+        let!(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+        let!(:chances_of_success) do
+          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding
+        end
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
-        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
-        let!(:chances_of_success) { create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding }
         let(:applicant) { legal_aid_application.applicant }
 
         context 'boolean attributes' do

@@ -26,7 +26,7 @@ module CCMS
                                 |applicant
                                 |application
                                 |bank_account
-                                |lead_proceeding_type
+                                |lead_proceeding
                                 |chances_of_success
                                 |dependant
                                 |opponent
@@ -44,7 +44,7 @@ module CCMS
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
-    LEAD_PROCEEDING_TYPE = /^lead_proceeding_type_(\S+)$/.freeze
+    LEAD_PROCEEDING = /^lead_proceeding_(\S+)$/.freeze
     CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/.freeze
     DEPENDANT_REGEX = /^dependant_(\S+)$/.freeze
     OPPONENT = /^opponent_(\S+)$/.freeze
@@ -105,7 +105,7 @@ module CCMS
     end
 
     def app_amendment_type(_options)
-      legal_aid_application.used_delegated_functions? ? 'SUBDP' : 'SUB'
+      legal_aid_application.proceedings_used_delegated_functions? ? 'SUBDP' : 'SUB'
     end
 
     def provider_firm_id(_options)
@@ -195,44 +195,36 @@ module CCMS
       not_zero? savings.other_person_account
     end
 
-    def lead_proceeding_type_default_level_of_service(_options)
-      legal_aid_application.lead_proceeding_type.default_level_of_service.service_level_number
-    end
-
-    def lead_proceeding_type_default_level_of_service_name(_options)
-      legal_aid_application.lead_proceeding_type.default_level_of_service.name
-    end
-
     def applicant_postcode(_options)
       applicant.address.postcode
     end
 
-    def lead_proceeding_cost_limitation_substantive(_options)
-      lead_proceeding_type.default_cost_limitation_substantive
+    def lead_proceeding_substantive_cost_limitation(_options)
+      lead_proceeding.substantive_cost_limitation
     end
 
     def lead_proceeding_category_of_law(_options)
-      lead_proceeding_type.ccms_category_law
+      lead_proceeding.category_of_law
     end
 
     def lead_proceeding_category_of_law_is_family?(_options)
-      lead_proceeding_type.ccms_category_law == 'Family'
+      lead_proceeding.category_of_law == 'Family'
     end
 
-    def lead_proceeding_category_of_law_meaning(_options)
-      lead_proceeding_type.meaning
+    def lead_proceeding_meaning(_options)
+      lead_proceeding.meaning
     end
 
     def lead_proceeding_category_of_law_code(_options)
-      lead_proceeding_type.ccms_category_law_code
+      lead_proceeding.category_law_code
     end
 
     def application_substantive?(_options)
-      !legal_aid_application.used_delegated_functions?
+      !legal_aid_application.proceedings_used_delegated_functions?
     end
 
     def proceeding_proceeding_application_type(_options)
-      legal_aid_application.used_delegated_functions? ? 'Both' : 'Substantive'
+      legal_aid_application.proceedings_used_delegated_functions? ? 'Both' : 'Substantive'
     end
 
     def no_warning_letter_sent?(_options)
@@ -311,10 +303,10 @@ module CCMS
     end
 
     def proceeding_cost_limitation(options)
-      application_proceeding_type = options[:appl_proceeding_type]
-      return 'MULTIPLE' if application_proceeding_type.used_delegated_functions?
+      proceeding = options[:proceeding]
+      return 'MULTIPLE' if proceeding.used_delegated_functions?
 
-      application_proceeding_type.assigned_scope_limitations.first.code
+      proceeding.substantive_scope_limitation_code
     end
 
     def other_party_full_name(options)
@@ -355,8 +347,8 @@ module CCMS
       @applicant ||= legal_aid_application.applicant
     end
 
-    def lead_proceeding_type
-      @lead_proceeding_type ||= legal_aid_application.lead_proceeding_type
+    def lead_proceeding
+      @lead_proceeding ||= legal_aid_application.lead_proceeding
     end
 
     def standardly_named_method?(method)
@@ -376,19 +368,15 @@ module CCMS
     end
 
     def proceeding_limitation_desc(options)
-      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation(options).description
-    end
-
-    def substantive_scope_limitation(options)
-      options[:appl_proceeding_type].substantive_scope_limitation
+      used_delegated_functions? ? 'MULTIPLE' : options[:proceeding].substantive_scope_limitation_description
     end
 
     def proceeding_description(_options)
-      lead_proceeding_type.description
+      lead_proceeding.description
     end
 
     def proceeding_limitation_meaning(options)
-      used_delegated_functions? ? 'MULTIPLE' : substantive_scope_limitation(options).meaning
+      used_delegated_functions? ? 'MULTIPLE' : options[:proceeding].substantive_scope_limitation_meaning
     end
 
     def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
@@ -397,8 +385,6 @@ module CCMS
         legal_aid_application.__send__(Regexp.last_match(1))
       when APPLICANT_REGEX
         applicant.__send__(Regexp.last_match(1))
-      when APPLICATION_PROCEEDING_TYPE_REGEX
-        options[:appl_proceeding_type].__send__(Regexp.last_match(1))
       when BANK_REGEX
         options[:bank_acct].__send__(Regexp.last_match(1))
       when CHANCES_OF_SUCCESS
@@ -421,8 +407,8 @@ module CCMS
         legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
       when OTHER_ASSETS_DECLARATION
         legal_aid_application.other_assets_declaration.__send__(Regexp.last_match(1))
-      when LEAD_PROCEEDING_TYPE
-        legal_aid_application.lead_proceeding_type.__send__(Regexp.last_match(1))
+      when LEAD_PROCEEDING
+        legal_aid_application.lead_proceeding.__send__(Regexp.last_match(1))
       end
     end
 
@@ -439,7 +425,7 @@ module CCMS
     end
 
     def chances_of_success
-      legal_aid_application.application_proceeding_types.first.chances_of_success
+      legal_aid_application.lead_proceeding.chances_of_success
     end
   end
 end

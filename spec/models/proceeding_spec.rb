@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Proceeding, type: :model do
+  let(:matter_code) { 'KSEC8' }
+  let(:df_date) { nil }
+  let(:proceeding) do
+    create :proceeding,
+           :da001,
+           proceeding_case_id: 55_123_456,
+           ccms_matter_code: matter_code,
+           used_delegated_functions_on: df_date
+  end
+
   it {
     is_expected.to respond_to(:legal_aid_application_id,
                               :proceeding_case_id,
@@ -32,6 +42,12 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
+  describe '#case_p_num' do
+    it 'returns formatted proceeding case id' do
+      expect(proceeding.case_p_num).to eq 'P_55123456'
+    end
+  end
+
   describe '#section8?' do
     context 'section 8 proceeding' do
       let(:proceeding) { create :proceeding, :se014 }
@@ -46,6 +62,34 @@ RSpec.describe Proceeding, type: :model do
 
       it 'returns false' do
         expect(proceeding.section8?).to eq false
+      end
+    end
+  end
+
+  context 'domestic abuse' do
+    let(:matter_code) { 'MINJN' }
+    it 'returns false' do
+      expect(proceeding.section8?).to be false
+    end
+  end
+
+  describe '#default_level_of_service_level' do
+    it 'returns hard coded value' do
+      expect(proceeding.default_level_of_service_level).to eq '3'
+    end
+  end
+
+  describe '#used_delegated_functions?' do
+    context 'df not used' do
+      it 'returns false' do
+        expect(proceeding.used_delegated_functions?).to be false
+      end
+    end
+
+    context 'df_used' do
+      let(:df_date) { 2.days.ago }
+      it 'returns true' do
+        expect(proceeding.used_delegated_functions?).to be true
       end
     end
   end

@@ -393,12 +393,14 @@ class LegalAidApplication < ApplicationRecord
     default_substantive_cost_limitation
   end
 
+  delegate :substantive_cost_limitation, to: :lead_proceeding
+
   def default_substantive_cost_limitation
-    lead_proceeding_type.default_cost_limitation_substantive
+    lead_proceeding.substantive_cost_limitation
   end
 
   def default_delegated_functions_cost_limitation
-    lead_proceeding_type.default_cost_limitation_delegated_functions
+    lead_proceeding.delegated_functions_cost_limitation
   end
 
   def find_or_create_ccms_submission

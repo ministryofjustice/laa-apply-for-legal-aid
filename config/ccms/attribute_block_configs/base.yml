@@ -785,7 +785,7 @@ global_means:
     response_type: currency
     user_defined: false
   REQ_COST_LIMITATION:
-    value: '#lead_proceeding_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: 'App: Requested Cost Limitation'
     response_type: currency
     user_defined: true
@@ -1736,7 +1736,7 @@ global_means:
     response_type: currency
     user_defined: false
   DEFAULT_COST_LIMITATION:
-    value: '#application_default_substantive_cost_limitation'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: the default cost limitation
     response_type: currency
     user_defined: true
@@ -2918,7 +2918,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   DEFAULT_COST_LIMITATION:
-    value: '#application_default_substantive_cost_limitation'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: the default cost limitation
     response_type: currency
     user_defined: true
@@ -3437,7 +3437,7 @@ global_merits:
     response_type: boolean
     user_defined: true
   REQ_COST_LIMITATION:
-    value: '#lead_proceeding_cost_limitation_substantive'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: 'App: Requested Cost Limitation'
     response_type: currency
     user_defined: true
@@ -3518,7 +3518,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   DEFAULT_COST_LIMITATION_MERITS:
-    value: '#application_default_substantive_cost_limitation'
+    value: '#lead_proceeding_substantive_cost_limitation'
     br100_meaning: 'App: The Default Cost Limitation'
     response_type: currency
     user_defined: false
@@ -3918,7 +3918,7 @@ global_merits:
     response_type: boolean
     user_defined: true
   CAT_OF_LAW_MEANING:
-    value: '#lead_proceeding_category_of_law_meaning'
+    value: '#lead_proceeding_meaning'
     br100_meaning: 'App: The Category Of Law Meaning'
     response_type: text
     user_defined: false
@@ -4028,7 +4028,7 @@ global_merits:
     response_type: boolean
     user_defined: true
   EMERGENCY_FURTHER_INFORMATION:
-    generate_block?: '#application_used_delegated_functions?'
+    generate_block?: '#lead_proceeding_used_delegated_functions?'
     value: .
     br100_meaning: 'Emg: Additional Information'
     response_type: text
@@ -4581,12 +4581,12 @@ proceeding_means:
     response_type: text
     user_defined: false
   LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_type_default_level_of_service'
+    value: '#lead_proceeding_default_level_of_service_level'
     br100_meaning: Form of Service
     response_type: text
     user_defined: true
   PROCEEDING_ID:
-    value: "#appl_proceeding_type_proceeding_case_p_num"
+    value: "#proceeding_case_p_num"
     br100_meaning: Proceeding ID
     response_type: text
     user_defined: true
@@ -4699,7 +4699,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   PROCEEDING_ID:
-    value: "#appl_proceeding_type_proceeding_case_p_num"
+    value: "#proceeding_case_p_num"
     br100_meaning: Proceeding ID
     response_type: text
     user_defined: true
@@ -4748,7 +4748,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_type_default_level_of_service'
+    value: '#lead_proceeding_default_level_of_service_level'
     br100_meaning: Form of Service
     response_type: text
     user_defined: true
@@ -5256,7 +5256,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_type_default_level_of_service_name'
+    value: '#lead_proceeding_default_level_of_service_name'
     br100_meaning: 'Proc: The Proceeding Form Of Service'
     response_type: text
     user_defined: false
