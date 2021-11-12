@@ -12,6 +12,7 @@ RSpec.describe Setting do
         expect(rec.allow_welsh_translation?).to be false
         expect(rec.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
         expect(rec.alert_via_sentry?).to be true
+        expect(rec.enable_employed_journey?).to be false
       end
     end
 
@@ -23,7 +24,8 @@ RSpec.describe Setting do
           allow_welsh_translation: false,
           enable_ccms_submission: false,
           bank_transaction_filename: 'my_special_file.csv',
-          alert_via_sentry: true
+          alert_via_sentry: true,
+          enable_employed_journey: true
         )
       end
 
@@ -35,6 +37,7 @@ RSpec.describe Setting do
         expect(rec.enable_ccms_submission?).to be false
         expect(rec.bank_transaction_filename).to eq 'my_special_file.csv'
         expect(rec.alert_via_sentry?).to be true
+        expect(rec.enable_employed_journey?).to be true
       end
     end
   end
@@ -49,6 +52,7 @@ RSpec.describe Setting do
       expect(Setting.enable_ccms_submission?).to be true
       expect(Setting.bank_transaction_filename).to eq 'db/sample_data/bank_transactions.csv'
       expect(Setting.alert_via_sentry?).to be true
+      expect(Setting.enable_employed_journey?).to be false
     end
   end
 end

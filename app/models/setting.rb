@@ -23,6 +23,10 @@ class Setting < ApplicationRecord
     setting.alert_via_sentry
   end
 
+  def self.enable_employed_journey?
+    setting.enable_employed_journey
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

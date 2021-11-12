@@ -20,7 +20,8 @@ module Admin
       params.require(:setting).permit(:mock_true_layer_data,
                                       :manually_review_all_cases,
                                       :allow_welsh_translation,
-                                      :enable_ccms_submission)
+                                      :enable_ccms_submission,
+                                      :enable_employed_journey)
     end
 
     def setting
