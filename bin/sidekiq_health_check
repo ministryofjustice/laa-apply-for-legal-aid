@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+module Worker
+  def self.healthcheck
+    abort 'sidekiq not found' unless system('pgrep -f sidekiq')
+  end
+end
+
+Worker.healthcheck

@@ -35,15 +35,13 @@ spec:
           ports:
             - containerPort: 7433
           livenessProbe:
-            httpGet:
-              path: /
-              port: 7433
+            exec:
+              command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 60
             timeoutSeconds: 5
           readinessProbe:
-            httpGet:
-              path: /
-              port: 7433
+            exec:
+              command: ['bin/sidekiq_health_check']
             initialDelaySeconds: 60
             timeoutSeconds: 5
           lifecycle:
