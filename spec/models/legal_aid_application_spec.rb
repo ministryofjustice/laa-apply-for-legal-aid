@@ -441,6 +441,22 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe '#proceedings_used_delegated_functions?' do
+    context 'application uses df' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+      it 'returns true' do
+        expect(legal_aid_application.proceedings_used_delegated_functions?).to be(true)
+      end
+    end
+
+    context 'application does not use df' do
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+      it 'returns false' do
+        expect(legal_aid_application.proceedings_used_delegated_functions?).to be(false)
+      end
+    end
+  end
+
   describe '#read_only?' do
     context 'provider application not submitted' do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
