@@ -53,13 +53,13 @@
               <% end %>
               <td>
                 <% unless application.summary_state == :submitted %>
-                <%#= link_to_accessible(
+                <%= link_to_accessible(
                     t('.delete'),
                     providers_legal_aid_application_delete_path(application),
-                    class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0 no-script hidden',
+                    class: 'govuk-button govuk-button--secondary govuk-!-margin-bottom-0 no-script',
                     suffix: t('.delete_suffix', reference: application.application_ref, applicant: application.applicant_full_name)
                     ) %>
-                  <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 hidden" id="<%= ref %>-modal-btn"
+                  <button class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 script hidden" id="<%= ref %>-modal-btn"
                           data-toggle="modal" data-target="<%= ref %>_modal"><%= t('.delete') %></button>
               <% end %>
               </td>

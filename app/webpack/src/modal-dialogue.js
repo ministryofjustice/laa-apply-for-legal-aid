@@ -36,7 +36,7 @@ function updateTabIndex(modal, nonModalElems) {
 
 // while open, prevent tabbing to outside the dialogue
 // and listen for ESC key to close the dialogue
-function handleKeyEvents (modal) {
+function handleKeyEvents (modal, lastFocusableElement, nonModalElems) {
   modal.focus()
   const modalContent = modal.querySelector('.modal-content')
   modalContent.addEventListener('keydown', (event) => {
@@ -46,9 +46,6 @@ function handleKeyEvents (modal) {
     // to keep tab keypresses within the modal and not the (hidden) document underneath
     const firstFocusableElement = modalContent.firstElementChild
     const lastFocusableElement = modalContent.lastElementChild
-    console.log(lastFocusableElement)
-    console.log(firstFocusableElement)
-    console.log(document.activeElement)
 
     switch (event.keyCode) {
       case KEY_TAB:
@@ -56,19 +53,19 @@ function handleKeyEvents (modal) {
           if (document.activeElement === firstFocusableElement) {
             event.preventDefault()
             lastFocusableElement.focus()
-            console.log(lastFocusableElement)
           }
         } else {
           if (document.activeElement === lastFocusableElement) {
             event.preventDefault()
             firstFocusableElement.focus()
-            console.log(firstFocusableElement)
           }
         }
 
         break
       case KEY_ESC:
         closeModal(modal)
+        updateTabIndex(modal, nonModalElems)
+        lastFocusableElement.focus()
         break
       default:
         break
