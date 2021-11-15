@@ -351,7 +351,8 @@ FactoryBot.define do
             create :scope_limitation, :delegated_functions_default,
                    joined_proceeding_type: apt.proceeding_type
           end
-          Proceeding.create_from_proceeding_type(application, pt)
+          proceeding = Proceeding.find_by(legal_aid_application_id: application.id, ccms_code: pt.ccms_code)
+          Proceeding.create_from_proceeding_type(application, pt) if proceeding.nil?
         end
 
         if evaluator.assign_lead_proceeding == true

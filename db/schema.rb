@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2021_11_05_083833) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
-    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
+    t.boolean "employed"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
@@ -592,7 +592,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_083833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

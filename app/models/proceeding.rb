@@ -19,6 +19,12 @@ class Proceeding < ApplicationRecord
     used_delegated_functions_on&.strftime('%F') || 'n/a'
   end
 
+  scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
+
+  def used_delegated_functions?
+    used_delegated_functions_on.present?
+  end
+
   # TODO: remove once migration from application_proceeding_types to proceedings is completed
   #
   # temporary method to create test data from existing proceeding types
@@ -63,10 +69,6 @@ class Proceeding < ApplicationRecord
 
   def default_level_of_service_name
     'Full Representation'
-  end
-
-  def used_delegated_functions?
-    used_delegated_functions_on.present?
   end
 
   # TODO: remove once LFA migration complete

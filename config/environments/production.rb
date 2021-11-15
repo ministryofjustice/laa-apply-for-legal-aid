@@ -96,4 +96,7 @@ Rails.application.configure do
   config.webpacker.check_yarn_integrity = false
 
   config.x.policy_disregards_start_date = Date.parse(ENV['POLICY_DISREGARDS_START_DATE'] || '2021-1-8')
+
+  # set the id of the Digest Export spreadsheet to use in this environment
+  config.x.digest_export.spreadsheet_id = '1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs'
 end

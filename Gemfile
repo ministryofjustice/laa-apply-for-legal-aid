@@ -8,6 +8,7 @@ gem 'active_model_serializers', '~> 0.10.12'
 gem 'data_migrate'
 gem 'discard', '~> 1.2'
 gem 'geckoboard-ruby'
+gem 'google_drive'
 gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'loofah', '>= 2.2.3'
 gem 'oauth'
@@ -139,7 +140,7 @@ end
 group :test do
   gem 'axe-core-cucumber'
   gem 'capybara', '>= 3.32.2', '< 4.0'
-  gem 'cucumber', require: false
+  gem 'cucumber', '5.3.0', require: false
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'

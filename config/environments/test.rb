@@ -72,4 +72,7 @@ Rails.application.configure do
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]
+
+  # set the id of the Digest Export spreadsheet to use in this environment
+  config.x.digest_export.spreadsheet_id = '1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs'
 end
