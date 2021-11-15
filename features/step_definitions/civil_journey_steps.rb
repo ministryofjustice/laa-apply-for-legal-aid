@@ -138,7 +138,7 @@ Then(/^I should not see the previously created application$/) do
 end
 
 Given(/^I click delete for the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a[contains(.,'Delete')]").click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[contains(.,'Delete')]").click
 end
 
 Given(/^I view the first application in the table$/) do
