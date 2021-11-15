@@ -64,8 +64,4 @@ class ApplicationDigest < ApplicationRecord
   def format_column(column_name, value)
     column_name.in?(BOOLEAN_COLUMNS) ? value.to_s.upcase : value
   end
-
-
 end
-
-

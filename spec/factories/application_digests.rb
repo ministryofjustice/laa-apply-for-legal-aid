@@ -17,23 +17,3 @@ FactoryBot.define do
     working_days_to_submit_df { earliest_df_date.nil? ? nil : date_submitted - earliest_df_date }
   end
 end
-
-
-# e8751ef2-5214-4997-929a-c59c0b9cf432,   id
-# c7023c4d-a595-43e0-8088-6177657d360e,   laa id
-# Wyman-Bergnaum,                         firm name
-# art_gottlieb,                           username
-# 2021-08-13,                             started
-# 2021-08-13,                             submitted
-# 1,                                      days to submission
-# t,                                      use_ccms
-# Domestic Abuse;Section 8 orders,        matter types
-# DA001;SE013;SE014,                      proceedings
-# t,                                      passported
-# f,                                      df used
-# null,                                   earliest df date
-# null,                                   df_reported_date
-# null,                                   working days to report
-# null,                                   working days to submit
-# null,                                   dreated at
-# null                                    updated at

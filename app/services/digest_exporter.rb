@@ -52,6 +52,4 @@ class DigestExporter
       client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/laa-apply-service%40laa-apply-for-legal-aid.iam.gserviceaccount.com'
     }
   end
-
 end
-

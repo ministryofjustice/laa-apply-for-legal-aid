@@ -1,12 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DigestExporter do
-  around do |example|
-    example.run
-  end
-
   describe '.call' do
-    let(:record_id) {  '26984944-a5c4-47f3-9c8d-39d6e03e3283' }
+    let(:record_id) { '26984944-a5c4-47f3-9c8d-39d6e03e3283' }
     let(:firm_name) { 'Mayer, Bashirian and Frami' }
     let(:provider_username) { 'finchy' }
     let(:date_started) { Date.new(2021, 11, 9) }
@@ -21,7 +17,6 @@ RSpec.describe DigestExporter do
     let(:df_reported_date) { Date.new(2021, 11, 9) }
     let(:working_days_to_report_df) { 5 }
     let(:working_days_to_submit_df) { 7 }
-
 
     before do
       fill_spreadsheet_with_dummy_data
@@ -44,7 +39,7 @@ RSpec.describe DigestExporter do
 
     it 'populates the cells with the expected values' do
       VCR.use_cassette 'DigestExporter/call/populates' do
-        row = get_specific_applicaiton_digest_row
+        row = specific_application_digest_row
         expect(row[0]).to eq record_id
         expect(row[1]).to eq firm_name
         expect(row[2]).to eq provider_username
@@ -79,10 +74,10 @@ RSpec.describe DigestExporter do
       worksheet.max_rows
     end
 
-    def get_specific_applicaiton_digest_row
+    def specific_application_digest_row
       worksheet = initialize_worksheet
       rows = worksheet.rows[0, worksheet.max_rows]
-      rows.detect { |row| row.first == record_id}
+      rows.detect { |row| row.first == record_id }
     end
 
     def initialize_worksheet
@@ -100,7 +95,7 @@ RSpec.describe DigestExporter do
         %w[5 aaa bbb ccc ddd eee fff ggg hhh],
         %w[6 aaa bbb ccc ddd eee fff ggg hhh],
         %w[7 aaa bbb ccc ddd eee fff ggg hhh],
-        %w[8 aaa bbb ccc ddd eee fff ggg hhh],
+        %w[8 aaa bbb ccc ddd eee fff ggg hhh]
       ]
     end
 
@@ -140,4 +135,3 @@ RSpec.describe DigestExporter do
     end
   end
 end
-

@@ -107,3 +107,6 @@ Naming/InclusiveLanguage:
     master:
       AllowedRegex:
         - !ruby/regexp "/master.key/i"
+
+Style/OpenStructUse:
+  Enabled: false

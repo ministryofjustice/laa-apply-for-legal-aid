@@ -649,9 +649,6 @@ GEM
     sidekiq-status (2.1.0)
       chronic_duration
       sidekiq (>= 5.0)
-    sidekiq_alive (2.1.4)
-      sidekiq
-      webrick
     signet (0.16.0)
       addressable (~> 2.8)
       faraday (>= 0.17.3, < 2.0)

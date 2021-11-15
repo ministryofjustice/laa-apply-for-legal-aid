@@ -67,10 +67,6 @@ class Proceeding < ApplicationRecord
     'Full Representation'
   end
 
-  def used_delegated_functions?
-    used_delegated_functions_on.present?
-  end
-
   # TODO: remove once LFA migration complete
   #
   # temporary method to return the corresponding application_proceeding_type
