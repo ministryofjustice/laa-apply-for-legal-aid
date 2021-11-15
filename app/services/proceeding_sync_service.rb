@@ -13,18 +13,14 @@ class ProceedingSyncService
   end
 
   def update!
-    proceeding_to_update_or_delete.update!(payload.merge(scope_limitations))
-  end
-
-  def destroy!
-    proceeding_to_update_or_delete.destroy
+    proceeding_to_update.update!(payload.merge(scope_limitations))
   end
 
   private
 
-  def proceeding_to_update_or_delete
-    @proceeding_to_update_or_delete ||= Proceeding.where(legal_aid_application_id: @application_proceeding_type.legal_aid_application.id,
-                                                         proceeding_case_id: @application_proceeding_type.proceeding_case_id).first
+  def proceeding_to_update
+    @proceeding_to_update ||= Proceeding.where(legal_aid_application_id: @application_proceeding_type.legal_aid_application.id,
+                                               proceeding_case_id: @application_proceeding_type.proceeding_case_id).first
   end
 
   def payload # rubocop:disable Metrics/MethodLength

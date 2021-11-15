@@ -43,7 +43,6 @@ class ApplicationProceedingType < ApplicationRecord
 
   after_create :create_proceeding
   after_update :update_proceeding
-  before_destroy :destroy_proceeding
 
   # TODO: remove after LFA migration complete
   #
@@ -108,9 +107,5 @@ class ApplicationProceedingType < ApplicationRecord
 
   def update_proceeding
     ProceedingSyncService.new(self).update!
-  end
-
-  def destroy_proceeding
-    ProceedingSyncService.new(self).destroy!
   end
 end

@@ -133,7 +133,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
 
         before do
           allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
-          allow(LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
+          allow(LegalFramework::LeadApplicationProceedingTypeAssignmentService).to receive(:call).with(legal_aid_application)
         end
 
         it 'renders index' do

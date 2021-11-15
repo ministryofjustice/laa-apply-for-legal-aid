@@ -75,13 +75,11 @@ RSpec.configure do |config|
 
     ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
     ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
-    ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
   end
 
   config.after(:suite) do
     ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
     ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
-    ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
   end
 
   # Add support for Devise authentication helpers

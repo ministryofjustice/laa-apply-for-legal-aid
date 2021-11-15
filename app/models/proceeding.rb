@@ -53,6 +53,10 @@ class Proceeding < ApplicationRecord
     ccms_matter_code == 'KSEC8'
   end
 
+  def domestic_abuse?
+    ccms_matter_code == 'MINJN'
+  end
+
   def default_level_of_service_level
     '3'
   end

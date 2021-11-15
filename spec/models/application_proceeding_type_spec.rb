@@ -278,13 +278,11 @@ RSpec.describe ApplicationProceedingType do
     before do
       ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
       ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
-      ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
     end
 
     after do
       ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
       ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
-      ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
     end
 
     context 'creating a new application_proceeding_type' do
@@ -350,21 +348,6 @@ RSpec.describe ApplicationProceedingType do
       it 'updates the corresponding proceeding record' do
         expect(legal_aid_application.proceedings.first.used_delegated_functions_on).to eq Time.zone.yesterday
         expect(legal_aid_application.proceedings.first.used_delegated_functions_reported_on).to eq Time.zone.today
-      end
-    end
-
-    context 'deleting an application_proceeding_type' do
-      let(:legal_aid_application) { create :legal_aid_application }
-      let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
-
-      before do
-        legal_aid_application.proceeding_types << proceeding_type
-        legal_aid_application.save!
-        legal_aid_application.application_proceeding_types.first.destroy
-      end
-
-      it 'deletes the corresponding proceeding record' do
-        expect(Proceeding.count).to eq 0
       end
     end
   end

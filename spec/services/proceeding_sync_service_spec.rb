@@ -8,7 +8,6 @@ RSpec.describe ProceedingSyncService do
   before do
     ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
     ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
-    ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
 
     legal_aid_application.proceeding_types << proceeding_type
   end
@@ -16,7 +15,6 @@ RSpec.describe ProceedingSyncService do
   after do
     ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
     ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
-    ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
   end
 
   describe '.create!' do
@@ -71,13 +69,6 @@ RSpec.describe ProceedingSyncService do
       sync_service.update!
 
       expect(legal_aid_application.proceedings.first.used_delegated_functions_on).to eq Time.zone.yesterday
-    end
-  end
-
-  describe '.destroy!' do
-    before { sync_service.create! }
-    it 'deletes the corresponding proceeding record' do
-      expect { sync_service.destroy! }.to change { Proceeding.count }.by(-1)
     end
   end
 end

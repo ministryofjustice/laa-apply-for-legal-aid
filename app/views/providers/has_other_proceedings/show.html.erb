@@ -4,19 +4,19 @@
               local: true) do |form| %>
   <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
 
-    <% if @legal_aid_application.proceeding_types.any? %>
-      <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.proceeding_types.count, 'proceeding')}") %></h1>
+    <% if @legal_aid_application.proceedings.any? %>
+      <h1 class="govuk-heading-xl"><%= t('.existing', count: "#{pluralize(@legal_aid_application.proceedings.count, 'proceeding')}") %></h1>
       <div class="govuk-summary-list">
-        <% @legal_aid_application.application_proceeding_types.order(:created_at).each do |apt| %>
-          <dl class="govuk-summary-list__row" id="proceeding_type_<%= apt.proceeding_type.code %>">
-            <dt class="govuk-summary-list__value"><%= apt.proceeding_type.meaning %></dt>
+        <% @legal_aid_application.proceedings.order(:created_at).each do |proceeding| %>
+          <dl class="govuk-summary-list__row" id="proceeding_type_<%= proceeding.ccms_code %>">
+            <dt class="govuk-summary-list__value"><%= proceeding.meaning %></dt>
             <dd class="govuk-summary-list__actions">
               <%= link_to_accessible(
                     t('.remove'),
-                    providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, id: apt.proceeding_type.code),
+                    providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application, ccms_code: proceeding.ccms_code),
                     class: 'govuk-link change-link',
                     method: :delete,
-                    suffix: apt.proceeding_type.meaning
+                    suffix: proceeding.meaning
                   ) %>
             </dd>
           </dl>
