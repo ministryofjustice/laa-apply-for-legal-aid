@@ -1,3 +1,5 @@
+require Rails.root.join('spec/factory_helpers/application_proceeding_type_helper')
+
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
     provider
@@ -220,11 +222,18 @@ FactoryBot.define do
     #    - false - no proceeding will be set as lead
     #    - :da001 or :da004 - the specified proceeding will be set as lead
     #  - explicit_proceedings - an array of trait names from the proceeding factory
+    # - delegated_functions_dates: an array of dates to add to the proceeding records - defaults to nil
+    # - delegated_functions_reported_on: an array of dates to add to the proceeding records (defaults to Date.today if delegated functions date is present, otherwise nil)
     #
     # examples:
     #   - create :legal_aid_application, :with_proceedings
     #   - create :legal_aid_application, :with_proceedings, proceeding_count: 3
     #   - create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001, :se013], set_lead_proceeding: :da001
+    #   - create :legal_aid_application,
+    #            :with_proceedings,
+    #            proceeding_count: 3,
+    #            delegated_functions_dates: [Date.today, Date.yesterday, Date.yesterday]
+
     #
     # Note that the first domestic_abuse proceeding will be set as lead proceeding
     trait :with_proceedings do
@@ -233,6 +242,8 @@ FactoryBot.define do
         assign_lead_proceeding { true }
         set_lead_proceeding { true }
         explicit_proceedings { nil }
+        delegated_functions_dates { nil }
+        delegated_functions_reported_on { nil }
       end
 
       after(:create) do |application, evaluator|
@@ -276,14 +287,12 @@ FactoryBot.define do
       after(:create) do |application, evaluator|
         raise 'Must specify an array including ccms_code and an array of two dates' if evaluator.df_options.nil?
 
-        puts evaluator.df_options
         evaluator.df_options.each do |ccms_code, _dates|
-          proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code }
-          next if proceeding.nil?
+          proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code.to_s }
+          next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
           df_date, reported_date = evaluator.df_options[ccms_code]
           proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
-          pp proceeding.used_delegated_functions_on
         end
       end
     end
@@ -358,10 +367,8 @@ FactoryBot.define do
 
     trait :with_multiple_proceeding_types_inc_section8 do
       after(:create) do |application|
-        application.proceeding_types << create(:proceeding_type, :with_real_data)
-        application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
-        application.proceedings << create(:proceeding, :da001)
-        application.proceedings << create(:proceeding, :se014)
+        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'DA001', trait: :with_real_data)
+        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'SE014', trait: :as_section_8_child_residence)
         lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
         if lead_apt.nil?
           lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
@@ -371,7 +378,7 @@ FactoryBot.define do
         end
         application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
         pt = lead_apt.proceeding_type
-        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
+        sl = FactoryHelpers::ScopeLimitationsHelper.find_or_create_substantive_default(proceeding_type: pt)
         apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)

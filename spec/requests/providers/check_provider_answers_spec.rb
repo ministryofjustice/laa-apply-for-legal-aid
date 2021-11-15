@@ -74,8 +74,10 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             :with_non_passported_state_machine,
             :at_entering_applicant_details,
             :with_proceedings,
+            :with_delegated_functions_on_proceedings,
             explicit_proceedings: [:da004],
             set_lead_proceeding: :da004,
+            df_options: { DA004: [Time.zone.today, Time.zone.today] },
             applicant: applicant
           )
         end
