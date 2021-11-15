@@ -51,7 +51,7 @@ module ProceedingMeritsTask
     # TODO: temp method to ensure the link is made to Proceeding until the LFA migration is complete
     # :nocov:
     def populate_proceeding
-      return unless self.proceeding_id.nil?
+      return unless proceeding_id.nil?
 
       self.proceeding_id = application_proceeding_type.proceeding.id
     end

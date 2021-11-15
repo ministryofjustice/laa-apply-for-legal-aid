@@ -288,7 +288,7 @@ FactoryBot.define do
         raise 'Must specify an array including ccms_code and an array of two dates' if evaluator.df_options.nil?
 
         evaluator.df_options.each do |ccms_code, _dates|
-          proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code }
+          proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code.to_s }
           next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
           df_date, reported_date = evaluator.df_options[ccms_code]

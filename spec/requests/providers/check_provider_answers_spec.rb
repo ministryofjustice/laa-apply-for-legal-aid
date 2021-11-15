@@ -19,11 +19,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
   let!(:proceeding_name) { application.lead_proceeding.name }
   let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
 
-  before do
-    # TODO: This can be removed once the setup for this test uses only proceedings and not application proceeding types
-    application.proceedings.first.update(used_delegated_functions_on: used_delegated_functions_on)
-  end
-
   describe 'GET /providers/applications/:legal_aid_application_id/check_provider_answers' do
     subject { get "/providers/applications/#{application_id}/check_provider_answers" }
 
@@ -79,8 +74,10 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             :with_non_passported_state_machine,
             :at_entering_applicant_details,
             :with_proceedings,
+            :with_delegated_functions_on_proceedings,
             explicit_proceedings: [:da004],
             set_lead_proceeding: :da004,
+            df_options: { DA004: [Time.zone.today, Time.zone.today] },
             applicant: applicant
           )
         end
