@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_083833) do
+ActiveRecord::Schema.define(version: 2021_11_12_174848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -829,6 +829,7 @@ ActiveRecord::Schema.define(version: 2021_11_05_083833) do
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", default: "1970-01-01 00:00:01"
+    t.boolean "enable_employed_journey", default: false, null: false
   end
 
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -6,7 +6,8 @@ namespace :settings do
                     bank_transaction_filename: 'db/sample_data/bank_transactions_2.csv',
                     manually_review_all_cases: false,
                     allow_welsh_translation: false,
-                    enable_ccms_submission: true)
+                    enable_ccms_submission: true,
+                    enable_employed_journey: false)
 
     pp Setting.first
   end
