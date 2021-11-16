@@ -717,6 +717,18 @@ Then('the answer for all {string} categories should be {string}') do |field_name
   end
 end
 
+Then('the delete modal should open') do
+  expect(page).to have_css('.modal-dialog', visible: true)
+end
+
+Then('I click the close button for the modal') do
+  find('.close').click
+end
+
+Then('the delete modal should not be visible') do
+  expect(page).to_not have_css('modal-dialog')
+end
+
 Then('I select a proceeding type and continue') do
   find('#proceeding-list').first(:button, 'Select and continue').click
 end
