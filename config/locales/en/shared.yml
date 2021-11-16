@@ -61,7 +61,7 @@ en:
         heading: "We need to check if %{name} can get legal aid"
         details:
           - We calculated that your client should pay a contribution towards legal aid.
-          - The amount depends on whether or not the scheme or charity payments they've received are disregarded from the financial eligibility calculation.
+          - The amount depends on whether or not the scheme or charity payments they've received are disregarded from the financial eligibility calculation
           - A caseworker will review this and let you know the outcome.
           - Please continue with the application to provide details of the case.
 
@@ -69,7 +69,7 @@ en:
         heading: "We need to check if %{name} can get legal aid"
         line1: "We calculated that your client should pay a contribution towards legal aid but the amount depends on:"
         bullets:
-          - whether or not the scheme or charity payments they've received are disregarded from the financial eligibility calculation.
+          - whether or not the scheme or charity payments they've received are disregarded from the financial eligibility calculation
           - the legal restrictions preventing them from selling or borrowing against their assets
         line2: We'll check the details you provided and let you know the outcome.
         line3: Please continue with the application to provide details of the case.
