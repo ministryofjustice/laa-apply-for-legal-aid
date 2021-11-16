@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe Providers::UsedDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
+RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:state) { :with_passported_state_machine }
   let(:legal_aid_application) do
     create :legal_aid_application,

@@ -17,10 +17,6 @@ module DelegatedFunctions
     proceedings.using_delegated_functions.first&.used_delegated_functions_reported_on
   end
 
-  def used_delegated_functions_within_year
-    earliest_delegated_functions_date&.between?(12.months.ago - 1.day, 1.month.ago)
-  end
-
   def proceeding_with_earliest_delegated_functions
     proceedings.using_delegated_functions.first
   end
