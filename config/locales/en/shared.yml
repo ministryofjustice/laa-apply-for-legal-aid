@@ -341,12 +341,12 @@ en:
               check_box_second_home: Second property or holiday home
               check_box_timeshare_property_value: Timeshare property
               check_box_trust_value: Interest in a trust
-              valuable_items_value: Enter the estimated value
-              land_value: Enter estimated value
-              inherited_assets_value: Enter estimated total value
-              money_owed_value: Enter estimated amount owed
-              timeshare_property_value: Enter value, minus any loan and sale costs
-              trust_value: Enter estimated total value
+              valuable_items_value: Enter the estimated total value
+              land_value: Enter the estimated value
+              inherited_assets_value: Enter the estimated total value
+              money_owed_value: Enter the estimated amount owed
+              timeshare_property_value: Enter the value, minus any loan and sale costs
+              trust_value: Enter the estimated total value
               hint:
                 check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
             offline_accounts:
