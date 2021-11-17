@@ -42,7 +42,7 @@
     <% if @legal_aid_application.student_finance? %>
       <div>
        <h3 class="govuk-heading-m govuk-!-padding-top-6"><%= t('.student_finance') %></h3>
-        <p class="gov-body"><%= t('.client_told_us') %> <%= gds_number_to_currency(@legal_aid_application.value_of_student_finance) %><%= t('.academic_year') %></p>
+        <p class="gov-body"><p><%= t('.academic_year_html', student_finance: value_with_currency_unit(@legal_aid_application.value_of_student_finance, t('currency.gbp'))) %></p></p>
       </div>
     <% end %>
 
