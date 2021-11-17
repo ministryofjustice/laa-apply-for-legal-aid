@@ -402,7 +402,7 @@ GEM
     memoist (0.16.2)
     method_source (1.0.0)
     middleware (0.1.0)
-    mime-types (3.4.0)
+    mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.1115)
     mini_mime (1.1.2)
@@ -743,22 +743,22 @@ DEPENDENCIES
   browser
   business
   byebug
-  capybara (>= 3.32.2, < 4.0)
+  capybara (>= 3.36.0, < 4.0)
   cucumber (= 5.3.0)
-  cucumber-rails
-  data_migrate
+  cucumber-rails (>= 2.4.0)
+  data_migrate (>= 7.0.2)
   database_cleaner
-  devise (>= 4.7.1)
-  devise_saml_authenticatable (>= 1.6.2)
+  devise (>= 4.8.0)
+  devise_saml_authenticatable (>= 1.7.0)
   dibber
   discard (~> 1.2)
-  dotenv-rails (>= 2.7.5)
+  dotenv-rails (>= 2.7.6)
   erb_lint (= 0.1.1)
-  factory_bot_rails (>= 5.2.0)
+  factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
-  google_drive
-  govuk_design_system_formbuilder
+  google_drive (>= 3.0.7)
+  govuk_design_system_formbuilder (>= 2.7.5)
   govuk_notify_rails (~> 2.2.0)
   guard-cucumber
   guard-livereload
@@ -766,20 +766,20 @@ DEPENDENCIES
   guard-rubocop
   hirb
   htmlentities
-  i18n-tasks (>= 0.9.31)
+  i18n-tasks (>= 0.9.35)
   json_expressions
   jwt
   launchy
   libreconv
   listen (>= 3.0.5, < 3.8)
-  loofah (>= 2.2.3)
+  loofah (>= 2.12.0)
   nesty
-  nokogiri
+  nokogiri (>= 1.12.5)
   oauth
   omniauth (>= 2.0.0)
   omniauth-google-oauth2 (>= 0.8.1)
   omniauth-oauth2 (>= 1.7.1)
-  omniauth-rails_csrf_protection (~> 1.0, >= 0.1.2)
+  omniauth-rails_csrf_protection (~> 1.0, >= 1.0.0)
   overcommit
   pagy
   pg
@@ -790,12 +790,12 @@ DEPENDENCIES
   pry-stack_explorer
   puma (~> 5.5)
   pundit
-  rails (~> 6.1.4)
-  rails_admin (~> 2.2)
+  rails (~> 6.1.4, >= 6.1.4.1)
+  rails_admin (~> 2.2, >= 2.2.1)
   redis-namespace
   regexp-examples
   rexml
-  rspec-rails (~> 5.0)
+  rspec-rails (~> 5.0, >= 5.0.2)
   rspec-sidekiq
   rspec_junit_formatter
   rubocop
@@ -805,7 +805,7 @@ DEPENDENCIES
   savon (~> 2.12.1)
   secure_headers
   selenium-webdriver
-  sentry-rails
+  sentry-rails (>= 4.8.0)
   sentry-ruby
   sentry-sidekiq
   shoulda-matchers (~> 5.0)
@@ -820,9 +820,9 @@ DEPENDENCIES
   tzinfo-data
   vcr
   webdack-uuid_migration (~> 1.4.0)
-  webdrivers (~> 5.0)
+  webdrivers (~> 5.0, >= 5.0.0)
   webmock
-  webpacker (~> 5)
+  webpacker (~> 5, >= 5.4.3)
   webrick
   wicked_pdf
 
