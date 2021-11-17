@@ -198,46 +198,52 @@ module CCMS
       end
 
       def generate_category_of_law(xml)
-        xml.__send__('casebio:CategoryOfLawCode', @legal_aid_application.lead_proceeding.category_law_code)
-        xml.__send__('casebio:CategoryOfLawDescription', @legal_aid_application.lead_proceeding.category_of_law)
-        xml.__send__('casebio:RequestedAmount', as_currency(@legal_aid_application.substantive_cost_limitation))
+        xml.__send__('casebio:CategoryOfLawCode', @legal_aid_application.lead_proceeding_type.ccms_category_law_code)
+        xml.__send__('casebio:CategoryOfLawDescription', @legal_aid_application.lead_proceeding_type.ccms_category_law)
+        xml.__send__('casebio:RequestedAmount', as_currency(@legal_aid_application.default_cost_limitation))
       end
 
       def generate_proceedings(xml)
-        @legal_aid_application.proceedings.each { |proceeding| generate_proceeding(xml, proceeding) }
+        @legal_aid_application.application_proceeding_types.each { |apt| generate_proceeding(xml, apt) }
       end
 
-      def generate_proceeding(xml, proceeding)
+      def generate_proceeding(xml, application_proceeding_type)
         xml.__send__('casebio:Proceeding') do
-          xml.__send__('casebio:ProceedingCaseID', proceeding.case_p_num)
+          xml.__send__('casebio:ProceedingCaseID', application_proceeding_type.proceeding_case_p_num)
           xml.__send__('casebio:Status', 'Draft')
-          xml.__send__('casebio:LeadProceedingIndicator', proceeding.lead_proceeding)
-          xml.__send__('casebio:ProceedingDetails') { generate_proceeding_type(xml, proceeding) }
+          xml.__send__('casebio:LeadProceedingIndicator', application_proceeding_type.lead_proceeding)
+          xml.__send__('casebio:ProceedingDetails') { generate_proceeding_type(xml, application_proceeding_type) }
         end
       end
 
-      def generate_proceeding_type(xml, proceeding)
-        xml.__send__('casebio:ProceedingType', proceeding.ccms_code)
-        xml.__send__('casebio:ProceedingDescription', proceeding.description)
-        xml.__send__('casebio:MatterType', proceeding.ccms_matter_code)
-        xml.__send__('casebio:LevelOfService', proceeding.default_level_of_service_level)
+      def generate_proceeding_type(xml, application_proceeding_type)
+        proceeding_type = application_proceeding_type.proceeding_type
+        xml.__send__('casebio:ProceedingType', proceeding_type.ccms_code)
+        xml.__send__('casebio:ProceedingDescription', proceeding_type.description)
+        xml.__send__('casebio:MatterType', proceeding_type.ccms_matter_code)
+        xml.__send__('casebio:LevelOfService', proceeding_type.default_level_of_service.service_level_number)
         xml.__send__('casebio:Stage', 8) # TODO: CCMS placeholder - This will need reviewing when we add more proceedings and/or matter types
         xml.__send__('casebio:ClientInvolvementType', 'A')
-        xml.__send__('casebio:ScopeLimitations') { generate_scope_limitations(xml, proceeding) }
+        xml.__send__('casebio:ScopeLimitations') { generate_scope_limitations(xml, application_proceeding_type) }
       end
 
-      def generate_scope_limitations(xml, proceeding)
-        xml.__send__('casebio:ScopeLimitation') do
-          xml.__send__('casebio:ScopeLimitation', proceeding.substantive_scope_limitation_code)
-          xml.__send__('casebio:ScopeLimitationWording', proceeding.substantive_scope_limitation_description)
-          xml.__send__('casebio:DelegatedFunctionsApply', proceeding.used_delegated_functions?)
-        end
-        return if proceeding.used_delegated_functions_on.nil?
+      def generate_scope_limitations(xml, application_proceeding_type)
+        application_proceeding_type.assigned_scope_limitations.each do |limitation|
+          next if application_proceeding_type.substantive_only? && default_df_limitation?(application_proceeding_type.proceeding_type, limitation)
 
+          generate_scope_limitation(xml, limitation)
+        end
+      end
+
+      def default_df_limitation?(proceeding_type, limitation)
+        limitation == proceeding_type.default_delegated_functions_scope_limitation
+      end
+
+      def generate_scope_limitation(xml, limitation)
         xml.__send__('casebio:ScopeLimitation') do
-          xml.__send__('casebio:ScopeLimitation', proceeding.delegated_functions_scope_limitation_code)
-          xml.__send__('casebio:ScopeLimitationWording', proceeding.delegated_functions_scope_limitation_description)
-          xml.__send__('casebio:DelegatedFunctionsApply', proceeding.used_delegated_functions?)
+          xml.__send__('casebio:ScopeLimitation', limitation.code)
+          xml.__send__('casebio:ScopeLimitationWording', limitation.description)
+          xml.__send__('casebio:DelegatedFunctionsApply', limitation.delegated_functions)
         end
       end
 
@@ -348,19 +354,20 @@ module CCMS
       def generate_means_proceeding_entity(xml, sequence_no, config)
         xml.__send__('common:SequenceNumber', sequence_no)
         xml.__send__('common:EntityName', config[:entity_name])
-        proceedings.reverse_each do |proceeding|
-          generate_means_proceeding_instance(xml, proceeding, config)
+        application_proceeding_types.reverse_each do |application_proceeding_type|
+          generate_means_proceeding_instance(xml, application_proceeding_type, config)
         end
       end
 
-      def generate_means_proceeding_instance(xml, proceeding, config)
+      def generate_means_proceeding_instance(xml, application_proceeding_type, config)
         xml.__send__('common:Instances') do
-          xml.__send__('common:InstanceLabel', proceeding.case_p_num)
+          xml.__send__('common:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
           xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self,
                                            xml,
                                            config[:yaml_section],
-                                           proceeding: proceeding)
+                                           appl_proceeding_type: application_proceeding_type,
+                                           proceeding: application_proceeding_type.proceeding_type)
           end
         end
       end
@@ -410,20 +417,21 @@ module CCMS
       def generate_merits_proceeding_entity(xml, sequence_no)
         xml.__send__('common:SequenceNumber', sequence_no)
         xml.__send__('common:EntityName', 'PROCEEDING')
-        proceedings.reverse_each { |proceeding| generate_merits_proceeding_instance(xml, proceeding) }
+        application_proceeding_types.reverse_each { |apt| generate_merits_proceeding_instance(xml, apt) }
       end
       # :nocov:
 
-      def generate_merits_proceeding_instance(xml, proceeding)
+      def generate_merits_proceeding_instance(xml, application_proceeding_type)
         xml.__send__('common:Instances') do
-          xml.__send__('common:InstanceLabel', proceeding.case_p_num)
+          xml.__send__('common:InstanceLabel', application_proceeding_type.proceeding_case_p_num)
           xml.__send__('common:Attributes') do
             EntityAttributesGenerator.call(self,
                                            xml,
                                            :proceeding_merits,
-                                           proceeding: proceeding,
+                                           appl_proceeding_type: application_proceeding_type,
+                                           proceeding: application_proceeding_type.proceeding_type,
                                            opponent: @legal_aid_application.opponent,
-                                           chances_of_success: proceeding.chances_of_success)
+                                           chances_of_success: application_proceeding_type.chances_of_success)
           end
         end
       end
@@ -464,8 +472,8 @@ module CCMS
         @provider ||= @legal_aid_application.provider
       end
 
-      def proceedings
-        @proceedings ||= @legal_aid_application.proceedings
+      def application_proceeding_types
+        @application_proceeding_types ||= @legal_aid_application.application_proceeding_types
       end
 
       def bank_accounts

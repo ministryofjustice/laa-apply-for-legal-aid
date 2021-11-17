@@ -8,8 +8,8 @@ FactoryBot.define do
       lead_proceeding { true }
       ccms_code { 'DA001' }
       meaning { 'Inherent jurisdiction high court injunction' }
-      description { 'to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.' }
-      substantive_cost_limitation { 25_000 }
+      description { 'to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.“' }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'FM062' }
       substantive_scope_limitation_meaning { 'Final hearing' }
@@ -26,7 +26,6 @@ FactoryBot.define do
       matter_type { 'Domestic Abuse' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
-      ccms_matter_code { 'MINJN' }
     end
 
     trait :da004 do
@@ -34,7 +33,7 @@ FactoryBot.define do
       ccms_code { 'DA004' }
       meaning { 'Non-molestation order' }
       description { 'to be represented on an application for a non-molestation order.' }
-      substantive_cost_limitation { 25_000 }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'AA019' }
       substantive_scope_limitation_meaning { 'Injunction FLA-to final hearing' }
@@ -46,13 +45,12 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
-      used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: Time.current - 2.days) }
-      used_delegated_functions_reported_on { Time.zone.today }
+      used_delegated_functions_on { nil }
+      used_delegated_functions_reported_on { nil }
       name { 'nonmolestation_order' }
       matter_type { 'Domestic Abuse' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
-      ccms_matter_code { 'MINJN' }
     end
 
     trait :se013 do
@@ -60,7 +58,7 @@ FactoryBot.define do
       ccms_code { 'SE013' }
       meaning { 'Child arrangements order (contact)' }
       description { 'to be represented on an application for a child arrangements order –where the child(ren) will live' }
-      substantive_cost_limitation { 25_000 }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'FM059' }
       substantive_scope_limitation_meaning { 'FHH Children' }
@@ -80,7 +78,6 @@ FactoryBot.define do
       matter_type { 'Section 8 orders' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
-      ccms_matter_code { 'KSEC8' }
     end
 
     trait :se014 do
@@ -88,7 +85,7 @@ FactoryBot.define do
       ccms_code { 'SE014' }
       meaning { 'Child arrangements order (residence)' }
       description { 'to be represented on an application for a child arrangements order –where the child(ren) will live' }
-      substantive_cost_limitation { 25_000 }
+      substantive_cost_limitation { rand(1...1_000_000.0).round(2) }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'FM059' }
       substantive_scope_limitation_meaning { 'FHH Children' }
@@ -108,7 +105,6 @@ FactoryBot.define do
       matter_type { 'Section 8 orders' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
-      ccms_matter_code { 'KSEC8' }
     end
   end
 end

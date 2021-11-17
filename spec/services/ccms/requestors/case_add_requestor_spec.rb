@@ -10,8 +10,9 @@ module CCMS
           create :legal_aid_application,
                  :with_everything,
                  :with_positive_benefit_check_result,
-                 :with_proceedings,
-                 set_lead_proceeding: :da001,
+                 :with_proceeding_type_and_scope_limitations,
+                 this_proceeding_type: proceeding_type,
+                 substantive_scope_limitation: scope_limitation,
                  applicant: applicant,
                  vehicle: vehicle,
                  other_assets_declaration: other_assets_declaration,
@@ -29,10 +30,9 @@ module CCMS
                  date_of_birth: Date.new(1977, 4, 10),
                  address: address
         end
-        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
-        let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding
+          create :chances_of_success, :with_optional_text, application_proceeding_type: legal_aid_application.lead_application_proceeding_type, proceeding: proceeding
         end
         let(:vehicle) { create :vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true }
         let(:other_assets_declaration) do
@@ -45,9 +45,12 @@ module CCMS
                  second_home_value: 500,
                  trust_value: 600
         end
+        let(:scope_limitation) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
+
         let(:address) { create :address, postcode: 'GH08NY' }
         let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
         let(:firm) { create :firm, ccms_id: 169 }
+        let(:proceeding_type) { create :proceeding_type, :with_real_data }
         let(:opponent) { create :opponent, full_name: 'Joffrey Test-Opponent', police_notified: true }
         let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -74,10 +77,6 @@ module CCMS
           expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
           requestor.call
-        end
-
-        before do
-          allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
         end
 
         it 'generates the expected xml' do
@@ -113,9 +112,7 @@ module CCMS
           context 'DF actually used' do
             let(:df_date) { Date.parse('2020-11-23') }
             before do
-              proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
-              application_proceeding_type.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
-
+              apt.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
               legal_aid_application.reload
             end
 

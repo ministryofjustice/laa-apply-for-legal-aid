@@ -380,7 +380,6 @@ end
 Given('I complete the journey as far as check client details with multiple proceedings selected') do
   proceeding_one = ProceedingType.find_by(code: 'PR0208')
   proceeding_two = ProceedingType.find_by(code: 'PR0214')
-
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -391,7 +390,6 @@ Given('I complete the journey as far as check client details with multiple proce
   )
   add_scope_limitations(@legal_aid_application, proceeding_one)
   add_scope_limitations(@legal_aid_application, proceeding_two)
-
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
@@ -479,21 +477,6 @@ Given('I complete the non-passported journey as far as check your answers') do
     :with_substantive_scope_limitation,
     applicant: applicant
   )
-
-  apt = @legal_aid_application.application_proceeding_types.first
-  pt = apt.proceeding_type
-
-  create :proceeding,
-         :da001,
-         ccms_code: pt.ccms_code,
-         legal_aid_application: @legal_aid_application,
-         lead_proceeding: true,
-         meaning: pt.meaning,
-         description: pt.description,
-         used_delegated_functions_on: apt.used_delegated_functions_on
-
-  @legal_aid_application.reload
-
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')

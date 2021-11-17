@@ -441,22 +441,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#proceedings_used_delegated_functions?' do
-    context 'application uses df' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
-      it 'returns true' do
-        expect(legal_aid_application.proceedings_used_delegated_functions?).to be(true)
-      end
-    end
-
-    context 'application does not use df' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
-      it 'returns false' do
-        expect(legal_aid_application.proceedings_used_delegated_functions?).to be(false)
-      end
-    end
-  end
-
   describe '#read_only?' do
     context 'provider application not submitted' do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
@@ -650,23 +634,18 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'default_cost_limitations' do
+    let(:proceeding_type) { create :proceeding_type }
     context 'substantive' do
-      let(:application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
+      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
       it 'returns the substantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 25_000.0
       end
     end
 
     context 'delegated functions' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
-      let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: 'DA004') }
-      let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
-      let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: da004
-      end
-
-      it 'returns the substantive cost limitation for the first proceeding type' do
-        expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
+      let(:application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions, explicit_proceeding_types: [proceeding_type] }
+      it 'returns the subtantive cost limitation for the first proceeding type' do
+        expect(application.default_cost_limitation).to eq 25_000.0
       end
     end
   end
@@ -1039,7 +1018,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#chances of success' do
-    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4 }
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
 
@@ -1053,7 +1032,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#attempts_to_settle' do
-    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4 }
+    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 2 }
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
     let(:apt) { create :application_proceeding_type }

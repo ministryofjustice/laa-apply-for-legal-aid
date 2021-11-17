@@ -724,7 +724,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_083833) do
     t.string "matter_type", null: false
     t.string "category_of_law", null: false
     t.string "category_law_code", null: false
-    t.string "ccms_matter_code"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
   end
 

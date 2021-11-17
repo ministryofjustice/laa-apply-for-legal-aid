@@ -80,7 +80,6 @@ Feature: Pathways from check your answers
   @javascript @vcr
   Scenario: I go back and change the proceedings on an application with multiple proceedings
     Given I complete the journey as far as check client details with multiple proceedings selected
-    And I disable callbacks on ApplicationProceedingType
     When I click Check Your Answers Change link for 'Proceedings'
     Then I should be on a page showing 'Do you want to add another proceeding?'
     And I should be on a page showing 'Inherent jurisdiction high court injunction'
@@ -90,7 +89,6 @@ Feature: Pathways from check your answers
     Then I click the first link 'Remove'
     Then I should not see 'Occupation order'
     Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
-    Then I enable callbacks on ApplicationProceedingType
     And I should not see 'Back'
     When I click the browser back button
     Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'

@@ -107,14 +107,13 @@
                   <casebio:ClientInvolvementType>A</casebio:ClientInvolvementType>
                   <casebio:ScopeLimitations>
                     <casebio:ScopeLimitation>
-                      <casebio:ScopeLimitation>FM062</casebio:ScopeLimitation>
-                      <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.</casebio:ScopeLimitationWording>
-                      <casebio:DelegatedFunctionsApply>true</casebio:DelegatedFunctionsApply>
+                      <casebio:ScopeLimitation>AA001</casebio:ScopeLimitation>
+                      <casebio:ScopeLimitationWording>Temporibus illum modi. Enim exercitationem nemo. In ut quia.</casebio:ScopeLimitationWording>
+                      <casebio:DelegatedFunctionsApply>false</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                     <casebio:ScopeLimitation>
-                      <casebio:ScopeLimitation>CV117</casebio:ScopeLimitation>
-                      <casebio:ScopeLimitationWording>Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-         To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.</casebio:ScopeLimitationWording>
+                      <casebio:ScopeLimitation>ZZ999</casebio:ScopeLimitation>
+                      <casebio:ScopeLimitationWording>Default scope limitation.</casebio:ScopeLimitationWording>
                       <casebio:DelegatedFunctionsApply>true</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                   </casebio:ScopeLimitations>

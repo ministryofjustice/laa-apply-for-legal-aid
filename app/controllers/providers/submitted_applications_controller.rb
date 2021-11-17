@@ -4,7 +4,6 @@ module Providers
 
     def show
       @application_proceeding_type = legal_aid_application.lead_application_proceeding_type
-      @proceeding = legal_aid_application.lead_proceeding
     end
   end
 end

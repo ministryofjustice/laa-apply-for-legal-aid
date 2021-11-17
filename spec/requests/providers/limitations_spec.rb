@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Providers::LimitationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+  let(:proceeding_type) { legal_aid_application.proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
-
-  before do
-    legal_aid_application.proceedings.each { |p| apt_from_proceeding(proceeding: p) }
-    legal_aid_application.reload
-  end
 
   describe 'GET /providers/applications/:id/limitations' do
     subject { get providers_legal_aid_application_limitations_path(legal_aid_application) }
@@ -34,7 +30,8 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       context 'when delegated functions have been used' do
-        let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+        let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
+        let(:proceeding_type) { legal_aid_application.proceeding_types.first }
         let(:provider) { legal_aid_application.provider }
 
         it 'shows the correct text' do
@@ -56,7 +53,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
     end
 
     context 'when delegated functions have not been used' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
 
       subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
 
@@ -66,7 +63,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
     end
 
     context 'when delegated functions have been used' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
       let(:proceeding_type) { legal_aid_application.proceeding_types.first }
       let(:provider) { legal_aid_application.provider }
 

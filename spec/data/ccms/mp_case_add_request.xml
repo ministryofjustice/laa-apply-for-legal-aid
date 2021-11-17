@@ -107,8 +107,8 @@
                   <casebio:ClientInvolvementType>A</casebio:ClientInvolvementType>
                   <casebio:ScopeLimitations>
                     <casebio:ScopeLimitation>
-                      <casebio:ScopeLimitation>FM062</casebio:ScopeLimitation>
-                      <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.</casebio:ScopeLimitationWording>
+                      <casebio:ScopeLimitation>AA001</casebio:ScopeLimitation>
+                      <casebio:ScopeLimitationWording>Temporibus illum modi. Enim exercitationem nemo. In ut quia.</casebio:ScopeLimitationWording>
                       <casebio:DelegatedFunctionsApply>false</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                   </casebio:ScopeLimitations>
@@ -249,7 +249,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>FM062</common:ResponseValue>
+                            <common:ResponseValue>AA001</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2362,7 +2362,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>FM062</common:ResponseValue>
+                            <common:ResponseValue>AA001</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>

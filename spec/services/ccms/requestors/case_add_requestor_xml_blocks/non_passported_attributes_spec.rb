@@ -21,7 +21,7 @@ module CCMS
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
-                 :with_proceedings,
+                 :with_proceeding_types,
                  :with_non_passported_state_machine,
                  :submitting_assessment,
                  populate_vehicle: true,
@@ -30,11 +30,7 @@ module CCMS
                  office: office
         end
 
-        let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
-        let!(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
-        let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: proceeding
-        end
+        let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -43,9 +39,14 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
+        let!(:proceeding) { create :proceeding, :da001, legal_aid_application: legal_aid_application }
+        let!(:chances_of_success) do
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', application_proceeding_type: application_proceeding_type,
+                                      proceeding: proceeding
+        end
         let(:timestamp) { Time.current.strftime('%Y-%m-%d_%H.%M') }
         let(:applicant) { legal_aid_application.applicant }
-        let(:default_cost) { legal_aid_application.lead_proceeding.substantive_cost_limitation }
+        let(:default_cost) { legal_aid_application.lead_proceeding_type.default_cost_limitation_substantive }
 
         # enable this context if you need to create a file of the payload for manual inspection
         # context 'saving to a temporary file', skip: 'Not needed for testing - but useful if you want to save the payload to a file' do
@@ -548,7 +549,7 @@ module CCMS
           it 'generates the block with the correct description' do
             attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :proceeding_merits, attr_name)
-              expect(block).to have_text_response legal_aid_application.lead_proceeding.description
+              expect(block).to have_text_response legal_aid_application.lead_proceeding_type.description
               expect(block).not_to be_user_defined
             end
           end
