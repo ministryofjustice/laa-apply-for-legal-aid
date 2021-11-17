@@ -130,7 +130,7 @@ en:
           title: "We need to check your client's financial eligibility"
         positive_result:
           tab_title: Your client receives benefits that qualify for legal aid
-          title: "%{name} receives benefits that qualify for legal aid"
+          title: "DWP records show that your client receives a passporting benefit"
           must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
           provide_details: provide details of the case
       how_we_checked: &how_we_checked
