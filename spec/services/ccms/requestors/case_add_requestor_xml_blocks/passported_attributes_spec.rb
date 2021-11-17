@@ -547,7 +547,7 @@ module CCMS
             end
           end
 
-          context 'a shared finanical interest' do
+          context 'a shared financial interest' do
             before { expect(legal_aid_application).to receive(:own_home?).and_return(true) }
             it 'inserts true into the attribute block' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_3WP2_1A')
