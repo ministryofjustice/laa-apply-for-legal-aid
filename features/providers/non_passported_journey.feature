@@ -319,7 +319,7 @@ Feature: Non-passported applicant journeys
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I should see 'Student finance'
-    And I should see 'in student finance this academic year.'
+    And I should see 'this academic year.'
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
@@ -349,7 +349,7 @@ Feature: Non-passported applicant journeys
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should not see 'Student finance'
+    And I should see 'Student finance'
 
   @javascript
   Scenario: Fill in the Applicant employment information after negative benefit check result and used delegated functions
