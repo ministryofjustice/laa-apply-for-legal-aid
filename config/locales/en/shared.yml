@@ -183,9 +183,9 @@ en:
         last_name: Last name
         nino: National Insurance number
       emergency_costs:
-        request_higher_limit: Do you want to request a higher cost limit?
-        new_cost_limit: New emergency cost limit
-        new_limit_reasons: Why you need a higher cost limit
+        request_higher_limit: Higher cost limit requested
+        new_cost_limit: Amount requested
+        new_limit_reasons: Reason
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
