@@ -34,7 +34,7 @@ module LegalFramework
     end
 
     def self.new_from_serialized(yaml_string)
-      YAML.safe_load(yaml_string, SAFE_SERIALIZABLE_CLASSES, aliases: true)
+      YAML.safe_load(yaml_string, permitted_classes: SAFE_SERIALIZABLE_CLASSES, aliases: true)
     end
 
     def empty?
