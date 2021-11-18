@@ -3,19 +3,17 @@
       <span class="close close-modal modal-dialog" aria-label="Close modal">&times;</span>
       <h1 class="govuk-heading-l modal-dialog" id="modal-title"><%= t('.page_title') %></h1>
       <div class="govuk-panel__body">
-          <dl class="govuk-list inline-list modal-dialog">
-              <dt>
-                  <strong><%= t('.applicant') %>:</strong>
-              </dt>
-              <dd><%= application.applicant_full_name %></dd>
-
-              <dt>
-                  <strong><%= t('.reference') %>:</strong>
-              </dt>
-              <dd><%= application.application_ref %></dd>
-          </dl>
+        <ul class="govuk-list modal-dialog govuk-!-margin-bottom-4">
+          <li>
+            <strong><%= t('.applicant') %>: </strong>
+            <%= application.applicant_full_name %>
+          </li>
+          <li>
+            <strong><%= t('.reference') %>: </strong>
+            <%= application.application_ref %>
+          </li>
+        </ul>
       </div>
-
       <div class="govuk-warning-text modal-dialog">
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">

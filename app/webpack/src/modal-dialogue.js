@@ -13,6 +13,7 @@ function closeModal (modal) {
   modal.style.visibility = 'hidden'
 }
 
+// set the tab index to -1 for all elements on the underlying page
 function makeModalTabbable (modal, nonModalElems) {
   const dialogElements = modal.querySelectorAll('.modal-dialog')
   dialogElements.forEach((elem) => {
@@ -24,7 +25,8 @@ function makeModalTabbable (modal, nonModalElems) {
   })
 }
 
-function updateTabIndex(modal, nonModalElems) {
+// restore the tab index for all elements on the underlying page and set to -1 for all modal dialog elements
+function updateTabIndex (modal, nonModalElems) {
   const dialogElements = modal.querySelectorAll('.modal-dialog')
   dialogElements.forEach((elem) => {
     elem.setAttribute('tabindex', -1)
@@ -36,7 +38,7 @@ function updateTabIndex(modal, nonModalElems) {
 
 // while open, prevent tabbing to outside the dialogue
 // and listen for ESC key to close the dialogue
-function handleKeyEvents (modal, lastFocusableElement, nonModalElems) {
+function handleKeyEvents (modal, previouslyFocusedElement, nonModalElems) {
   modal.focus()
   const modalContent = modal.querySelector('.modal-content')
   modalContent.addEventListener('keydown', (event) => {
@@ -50,13 +52,12 @@ function handleKeyEvents (modal, lastFocusableElement, nonModalElems) {
     switch (event.keyCode) {
       case KEY_TAB:
         if (event.shiftKey) {
+          event.preventDefault()
           if (document.activeElement === firstFocusableElement) {
-            event.preventDefault()
             lastFocusableElement.focus()
           }
         } else {
           if (document.activeElement === lastFocusableElement) {
-            event.preventDefault()
             firstFocusableElement.focus()
           }
         }
@@ -65,7 +66,7 @@ function handleKeyEvents (modal, lastFocusableElement, nonModalElems) {
       case KEY_ESC:
         closeModal(modal)
         updateTabIndex(modal, nonModalElems)
-        lastFocusableElement.focus()
+        previouslyFocusedElement.focus()
         break
       default:
         break
@@ -73,10 +74,10 @@ function handleKeyEvents (modal, lastFocusableElement, nonModalElems) {
   })
 }
 
-function startModal (modal, lastFocusableElement, nonModalElems) {
+function startModal (modal, previouslyFocusedElement, nonModalElems) {
   // display the modal
   openModal(modal)
-  handleKeyEvents(modal)
+  handleKeyEvents(modal, previouslyFocusedElement, nonModalElems)
   announceModal()
 
   // Get the button and span elements that close the modal
@@ -86,7 +87,7 @@ function startModal (modal, lastFocusableElement, nonModalElems) {
       event.preventDefault()
       closeModal(modal)
       updateTabIndex(modal, nonModalElems)
-      lastFocusableElement.focus()
+      previouslyFocusedElement.focus()
     })
   })
 
@@ -95,7 +96,7 @@ function startModal (modal, lastFocusableElement, nonModalElems) {
   confirmDeleteBtn.addEventListener('click', (event) => {
     closeModal(modal)
     window.location.reload()
-    lastFocusableElement.focus()
+    previouslyFocusedElement.focus()
   })
 
   // When the user clicks anywhere outside of the modal, close it
@@ -103,13 +104,14 @@ function startModal (modal, lastFocusableElement, nonModalElems) {
     if (event.target === modal) {
       closeModal(modal)
       updateTabIndex(modal, nonModalElems)
+      previouslyFocusedElement.focus()
     }
   }
 }
 
 document.addEventListener('DOMContentLoaded', event => {
   const deleteButtons = document.querySelectorAll('[data-toggle="modal"]')
-  const nonModalElements = document.querySelectorAll('body *:not(.modal-dialog):not([tabindex="-1"])')
+  const nonModalElements = document.querySelectorAll('body *:not(.modal-dialog):not([tabindex="-1"])') // all tabbable non-modal elements
 
   if (deleteButtons) {
     // When the user clicks on the button, open the modal
