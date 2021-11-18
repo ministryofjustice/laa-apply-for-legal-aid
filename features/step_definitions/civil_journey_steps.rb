@@ -138,7 +138,7 @@ Then(/^I should not see the previously created application$/) do
 end
 
 Given(/^I click delete for the previously created application$/) do
-  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td/a[contains(.,'Delete')]").click
+  find(:xpath, "//tr[contains(.,'#{@legal_aid_application.application_ref}')]/td[contains(.,'Delete')]").click
 end
 
 Given(/^I view the first application in the table$/) do
@@ -716,6 +716,18 @@ Then('the answer for all {string} categories should be {string}') do |field_name
     expect(page).to have_text(expected_answer)
     expect(page).to_not have_text(wrong_answer)
   end
+end
+
+Then('the delete modal should open') do
+  expect(page).to have_css('.modal-dialog', visible: true)
+end
+
+Then('I click the close button for the modal') do
+  find('.close').click
+end
+
+Then('the delete modal should not be visible') do
+  expect(page).to_not have_css('modal-dialog')
 end
 
 Then('I select a proceeding type and continue') do

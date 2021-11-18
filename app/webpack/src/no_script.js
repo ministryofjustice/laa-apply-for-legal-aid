@@ -13,10 +13,10 @@
 //   after the default entry for it to override the behaviour.
 //
 document.addEventListener('DOMContentLoaded', event => {
-  document.querySelectorAll('.no-script').forEach(function(obj) {
-    obj.classList.remove('no-script');
-    obj.querySelectorAll('input:disabled').forEach(function(input) {
-      input.disabled = false;
-    });
+  document.querySelectorAll('.no-script').forEach(function (obj) {
+    obj.classList.add('hidden')
   });
+  document.querySelectorAll('.script').forEach(function (obj) {
+    obj.classList.remove('hidden')
+  })
 });
