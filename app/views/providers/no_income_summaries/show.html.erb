@@ -27,7 +27,7 @@
       <% if @student_finance %>
         <h2 class="govuk-heading-l"><%= t('.student_finance.heading') %></h2>
 
-        <p><%= t('.student_finance.info', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
+        <p><%= t('.student_finance.info_html', student_finance: value_with_currency_unit(@student_finance, t('currency.gbp'))) %></p>
       <% end %>
 
       <div class="govuk-!-padding-bottom-2"></div>
