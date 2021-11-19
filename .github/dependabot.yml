@@ -10,10 +10,6 @@ updates:
     timezone: Europe/London
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: cucumber
-    versions:
-    - ">= 4.a"
-    - "< 5"
   - dependency-name: prometheus_exporter
     versions:
     - "> 0.4.17"
