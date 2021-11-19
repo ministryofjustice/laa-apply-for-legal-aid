@@ -158,15 +158,15 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    cucumber (6.0.0)
+    cucumber (6.1.0)
       builder (~> 3.2, >= 3.2.4)
-      cucumber-core (~> 9.0, >= 9.0.0)
+      cucumber-core (~> 9.0, >= 9.0.1)
       cucumber-create-meta (~> 4.0, >= 4.0.0)
       cucumber-cucumber-expressions (~> 12.1, >= 12.1.1)
       cucumber-gherkin (~> 18.1, >= 18.1.0)
       cucumber-html-formatter (~> 13.0, >= 13.0.0)
       cucumber-messages (~> 15.0, >= 15.0.0)
-      cucumber-wire (~> 5.0, >= 5.0.0)
+      cucumber-wire (~> 5.0, >= 5.0.1)
       diff-lcs (~> 1.4, >= 1.4.4)
       mime-types (~> 3.3, >= 3.3.1)
       multi_test (~> 0.1, >= 0.1.2)
@@ -744,7 +744,7 @@ DEPENDENCIES
   business
   byebug
   capybara (>= 3.36.0, < 4.0)
-  cucumber (= 6.0.0)
+  cucumber (= 6.1.0)
   cucumber-rails (>= 2.4.0)
   data_migrate (>= 7.0.2)
   database_cleaner
