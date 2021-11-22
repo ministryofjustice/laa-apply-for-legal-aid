@@ -207,7 +207,7 @@ Feature: Provider accessibility
     Then I should be on a page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
-    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+    Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     And the page is accessible
 
   @javascript @vcr

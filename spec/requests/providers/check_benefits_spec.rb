@@ -98,7 +98,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       it 'displays the passported result page' do
         subject
-        expect(response.body).to include 'receives benefits that qualify for legal aid'
+        expect(response.body).to include 'DWP records show that your client receives a passporting benefit'
       end
     end
 
@@ -214,7 +214,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         let(:provider) { create :provider, :with_passported_permissions }
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('receives benefits that qualify for legal aid')
+          expect(response.body).to include('DWP records show that your client receives a passporting benefit')
         end
       end
 
@@ -222,7 +222,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         let(:provider) { create :provider, :with_no_permissions }
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
-          expect(response.body).to include('receives benefits that qualify for legal aid')
+          expect(response.body).to include('DWP records show that your client receives a passporting benefit')
         end
       end
     end

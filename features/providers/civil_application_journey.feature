@@ -319,7 +319,9 @@ Feature: Civil application journeys
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+    Then I should be on a page showing 'Check your answers'
+    Then I click 'Save and continue'
+    Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     And I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
@@ -643,7 +645,7 @@ Feature: Civil application journeys
   Scenario: Receives benefits and completes the application happy path no back button
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+    Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Continue'
     Then I should be on a page showing "Before you continue"
     Then I click 'Save and continue'
@@ -851,7 +853,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
-    Then I should be on a page showing "receives benefits that qualify for legal aid"
+    Then I should be on a page showing "DWP records show that your client receives a passporting benefit"
 
   @javascript @vcr
   Scenario: A negative benefit check allows the solicitor to override the result

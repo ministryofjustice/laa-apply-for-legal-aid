@@ -6,7 +6,7 @@
 #  Scenario: Tests the back button across multiple pages
 #    Given I complete the passported journey as far as check your answers
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing 'receives benefits that qualify for legal aid'
+#    Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
 #    Then I click 'Continue'
 #    Then I should be on a page showing "Before you continue"
 #    Then I click 'Save and continue'

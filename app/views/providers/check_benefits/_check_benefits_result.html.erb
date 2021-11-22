@@ -1,29 +1,8 @@
 <div class="interruption-panel">
-  <%= page_template(page_title: t("#{result_namespace}.tab_title"), template: :basic) do %>
+  <%= page_template(page_title: t("#{result_namespace}.tab_title"), column_width: :full, template: :basic) do %>
     <h1 class="govuk-heading-l">
-      <%= t("#{result_namespace}.title", name: @legal_aid_application.applicant.full_name) %>
+      <%= t("#{result_namespace}.title") %>
     </h1>
-    <div class="maximize-text-width">
-      <% if result_namespace == '.negative_result' %>
-        <p class="govuk-body">
-          <%= t '.because_not_receiving_benefits' %>
-        </p>
-      <% end %>
-      <% if result_namespace == '.positive_result' %>
-        <h2 class="govuk-heading-m">
-          <%= t '.what_happens_next' %>
-        </h2>
-        <p class="govuk-body">
-          <%= t '.you_need_to' %>
-        </p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li><%= t "#{result_namespace}.must_answer_financial_questions" %></li>
-          <li><%= t "#{result_namespace}.provide_details" %></li>
-        </ul>
-      <% else %>
-        <%= render 'applicant_details' %>
-      <% end %>
-    </div>
     <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_check_benefit_path,
           method: :patch,
