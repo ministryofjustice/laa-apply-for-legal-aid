@@ -75,4 +75,7 @@ Rails.application.configure do
 
   # set the id of the Digest Export spreadsheet to use in this environment
   config.x.digest_export.spreadsheet_id = '1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs'
+
+  # Swirch to determine whether or not o collect HMRC data
+  config.x.collect_hmrc_data = true
 end
