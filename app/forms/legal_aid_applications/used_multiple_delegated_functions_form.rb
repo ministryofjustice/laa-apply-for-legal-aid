@@ -7,13 +7,13 @@ module LegalAidApplications
              :validate_proceeding_dates
 
     attr_accessor :draft,
-                  :proceeding_types_by_name,
+                  :proceedings_by_name,
                   :none_selected
 
     class << self
-      def call(proceeding_types_by_name)
-        populate_attr_accessors(proceeding_types_by_name.map(&:name))
-        new({ proceeding_types_by_name: proceeding_types_by_name })
+      def call(proceedings_by_name)
+        populate_attr_accessors(proceedings_by_name.map(&:name))
+        new({ proceedings_by_name: proceedings_by_name })
       end
 
       def populate_attr_accessors(proceeding_names)
@@ -46,8 +46,9 @@ module LegalAidApplications
     private
 
     def populate_form_attributes
-      proceeding_types_by_name.each do |proceeding|
-        date = proceeding.application_proceeding_type.used_delegated_functions_on
+      proceedings_by_name.each do |proceeding_by_name|
+        proceeding = proceeding_by_name.proceeding
+        date = proceeding.used_delegated_functions_on
         if date
           instance_variable_set(:"@#{proceeding.name}", true)
           instance_variable_set(:"@#{proceeding.name}_used_delegated_functions_on", date)
@@ -72,7 +73,8 @@ module LegalAidApplications
     end
 
     def save_proceeding_records
-      proceeding_types_by_name.each do |proceeding|
+      proceedings_by_name.each do |proceeding_by_name|
+        proceeding = proceeding_by_name.proceeding
         date_field = delegated_functions_dates.detect { |field| field.method == :"#{proceeding.name}_used_delegated_functions_on" }
         delegated_functions_date = date_field&.form_date
 
@@ -80,11 +82,15 @@ module LegalAidApplications
           used_delegated_functions_on: delegated_functions_date,
           used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
         )
+        proceeding.update(
+          used_delegated_functions_on: delegated_functions_date,
+          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
+        )
       end
     end
 
     def delegated_functions_dates
-      @delegated_functions_dates ||= proceeding_types_by_name.filter_map do |type|
+      @delegated_functions_dates ||= proceedings_by_name.filter_map do |type|
         date_fields(type.name, type.meaning) if checkbox_for? type.name
       end
     end
@@ -113,7 +119,7 @@ module LegalAidApplications
     end
 
     def proceeding_selected?
-      proceeding_types_by_name.map(&:name).any? { |name| checkbox_for? name }
+      proceedings_by_name.map(&:name).any? { |name| checkbox_for? name }
     end
 
     def validate_nothing_selected

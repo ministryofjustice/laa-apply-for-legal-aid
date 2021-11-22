@@ -1,6 +1,6 @@
 module DelegatedFunctions
   def used_delegated_functions?
-    application_proceeding_types.any?(&:used_delegated_functions?)
+    proceedings.any?(&:used_delegated_functions?)
   end
 
   # TODO: move the logic from the method below into used_delegated_functions? method above
@@ -14,15 +14,11 @@ module DelegatedFunctions
   end
 
   def used_delegated_functions_reported_on
-    application_proceeding_types.using_delegated_functions.first&.used_delegated_functions_reported_on
-  end
-
-  def used_delegated_functions_within_year
-    earliest_delegated_functions_date&.between?(12.months.ago - 1.day, 1.month.ago)
+    proceedings.using_delegated_functions.first&.used_delegated_functions_reported_on
   end
 
   def proceeding_with_earliest_delegated_functions
-    application_proceeding_types.using_delegated_functions.first
+    proceedings.using_delegated_functions.first
   end
 
   def earliest_delegated_functions_date

@@ -9,7 +9,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   let(:proceeding_type_count) { 3 }
   let(:pt_without_df) { 1 }
   let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
-  let(:application_proceedings_by_name) { legal_aid_application.application_proceedings_by_name }
+  let(:proceedings) { legal_aid_application.proceedings }
+  let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:today) { Time.zone.today }
   let(:used_delegated_functions_reported_on) { today }
   let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
@@ -19,12 +20,13 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
   let(:params) { update_proceeding_type_param_dates }
 
-  subject { described_class.call(application_proceedings_by_name) }
+  subject { described_class.call(proceedings_by_name) }
 
   describe '#save' do
     before do
       subject.save(params)
       application_proceeding_types.reload
+      proceedings.reload
     end
 
     context 'two of the three proceeding types have delegated functions' do
@@ -32,6 +34,12 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
         expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
                                                                                                          used_delegated_functions_reported_on])
+      end
+
+      it 'updates each proceeding' do
+        expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+        expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+                                                                                        used_delegated_functions_reported_on])
       end
 
       context 'date is just within 12 months ago' do
@@ -44,6 +52,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         it 'updates the application types with no reported on date' do
           expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
           expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
+          expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+          expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
         end
       end
     end
@@ -51,7 +61,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'when no delegated functions selected' do
       let(:default_params) do
         params = { none_selected: 'true' }
-        application_proceedings_by_name.each { |type| params[:"#{type.name}"] = 'false' }
+        proceedings_by_name.each { |type| params[:"#{type.name}"] = 'false' }
         params
       end
 
@@ -59,8 +69,19 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         expect(application_proceeding_types.first.used_delegated_functions?).to be false
       end
 
+      it 'updates the proceedings' do
+        expect(proceedings.first.used_delegated_functions?).to be false
+      end
+
       it 'updates the application proceeding type dates to nil' do
         application_proceeding_types.each do |type|
+          expect(type.used_delegated_functions_reported_on).to be_nil
+          expect(type.used_delegated_functions_on).to be_nil
+        end
+      end
+
+      it 'updates the proceedings delegated function dates to nil' do
+        proceedings.each do |type|
           expect(type.used_delegated_functions_reported_on).to be_nil
           expect(type.used_delegated_functions_on).to be_nil
         end
@@ -91,7 +112,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        application_proceedings_by_name.each_with_index do |type, i|
+        proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
           message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
@@ -111,7 +132,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
       it 'generates the expected error message' do
         months = Time.zone.now.ago(12.months).strftime('%d %B %Y')
-        application_proceedings_by_name.each_with_index do |type, i|
+        proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
           message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: ProceedingType.find_by(name: type.name).meaning)
@@ -124,7 +145,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'when occurred on is in future' do
       let(:error_locale) { 'used_delegated_functions_on.date_is_in_the_future' }
       let(:params) { future_params }
-      let(:future_application_proceeding) { application_proceedings_by_name[2] }
+      let(:future_application_proceeding) { proceedings_by_name[2] }
 
       it 'is invalid' do
         expect(subject).to be_invalid
@@ -140,7 +161,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'with delegated function selected but without date' do
       let(:params) do
         params = default_params
-        application_proceedings_by_name.each { |type| params.merge!({ "#{type.name}": 'true' }) }
+        proceedings_by_name.each { |type| params.merge!({ "#{type.name}": 'true' }) }
         params
       end
       let(:error_locale) { 'used_delegated_functions_on.date_invalid' }
@@ -150,7 +171,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        application_proceedings_by_name.each do |type|
+        proceedings_by_name.each do |type|
           message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
@@ -167,7 +188,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        application_proceedings_by_name.each_with_index do |type, i|
+        proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
           message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
@@ -182,13 +203,13 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     before do
       subject.draft = true
       subject.save(params)
-      application_proceeding_types.reload
+      proceedings.reload
     end
 
     it 'updates each application proceeding type if they are entered' do
-      expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
-      expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
-                                                                                                       used_delegated_functions_reported_on])
+      expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
+      expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+                                                                                      used_delegated_functions_reported_on])
     end
 
     context 'when nothing selected' do
@@ -198,8 +219,19 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         expect(application_proceeding_types.first.used_delegated_functions?).to be false
       end
 
+      it 'updates the proceedings' do
+        expect(proceedings.first.used_delegated_functions?).to be false
+      end
+
       it 'updates the application proceeding type dates to nil' do
         application_proceeding_types.each do |type|
+          expect(type.used_delegated_functions_reported_on).to be_nil
+          expect(type.used_delegated_functions_on).to be_nil
+        end
+      end
+
+      it 'updates the proceedings delegated function dates to nil' do
+        proceedings.each do |type|
           expect(type.used_delegated_functions_reported_on).to be_nil
           expect(type.used_delegated_functions_on).to be_nil
         end
@@ -215,7 +247,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
 
       it 'generates the expected error message' do
-        application_proceedings_by_name.each_with_index do |type, i|
+        proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
           message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
@@ -228,7 +260,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'when occurred on is in future' do
       let(:error_locale) { 'used_delegated_functions_on.date_is_in_the_future' }
       let(:params) { future_params }
-      let(:future_application_proceeding) { application_proceedings_by_name[2] }
+      let(:future_application_proceeding) { proceedings_by_name[2] }
 
       it 'is invalid' do
         expect(subject).to be_invalid
@@ -248,7 +280,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
   def update_proceeding_type_param_dates(month: nil)
     params = default_params
-    application_proceedings_by_name.each_with_index do |type, i|
+    proceedings_by_name.each_with_index do |type, i|
       type_params = i == pt_without_df ? df_not_used_params(type) : df_used_params(type, month)
       params = type_params.merge(params)
     end
@@ -276,7 +308,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
   def future_params
     params = default_params
-    application_proceedings_by_name.each_with_index do |type, i|
+    proceedings_by_name.each_with_index do |type, i|
       type_params = case i
                     when 0
                       df_used_on_date_params(type, Date.current)

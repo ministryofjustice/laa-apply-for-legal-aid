@@ -10,7 +10,7 @@
       <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
 
       <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-applications-used-multiple-delegated-functions-form-none-selected-true-field">
-        <% @application_proceedings_by_name.each_with_index do |proceeding, index| %>
+        <% @proceedings_by_name.each_with_index do |proceeding, index| %>
           <% attribute_name = proceeding.name
              @form.__send__("#{attribute_name}=", @form.send(attribute_name).present?)
              link_errors_value = index == 0 ? true : false %>

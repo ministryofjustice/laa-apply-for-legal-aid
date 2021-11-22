@@ -348,6 +348,11 @@ Given('I used delegated functions') do
     apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
     apt.save!
   end
+  @legal_aid_application.proceedings.each do |proceeding|
+    proceeding.update!(used_delegated_functions_on: Date.current,
+                       used_delegated_functions_reported_on: Date.current)
+    proceeding.save!
+  end
 end
 
 Given('I complete the journey as far as check your answers') do

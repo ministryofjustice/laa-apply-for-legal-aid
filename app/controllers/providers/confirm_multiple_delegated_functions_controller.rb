@@ -1,14 +1,14 @@
 module Providers
   class ConfirmMultipleDelegatedFunctionsController < ProviderBaseController
     def show
-      application_proceeding_types
+      proceedings_by_name
       form
     end
 
     def update
       return continue_or_draft if draft_selected?
 
-      application_proceeding_types
+      proceedings_by_name
       return go_forward(form.confirm_multiple_delegated_functions_date?) if form.valid?
 
       render :show
@@ -26,11 +26,11 @@ module Providers
     end
 
     def multiple_dates_check?
-      @multiple_dates_check ||= legal_aid_application.application_proceeding_types.uniq.select { |item| item.used_delegated_functions_on.present? }.many?
+      @multiple_dates_check ||= legal_aid_application.proceedings.uniq.select { |item| item.used_delegated_functions_on.present? }.many?
     end
 
-    def application_proceeding_types
-      @application_proceeding_types ||= legal_aid_application.application_proceedings_by_name
+    def proceedings_by_name
+      @proceedings_by_name ||= legal_aid_application.proceedings_by_name
     end
 
     def form_params
