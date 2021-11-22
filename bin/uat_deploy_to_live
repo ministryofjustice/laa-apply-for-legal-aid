@@ -5,6 +5,7 @@ deploy() {
   RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
+  
   IDENTIFIER="$RELEASE_NAME-apply-for-legal-aid-laa-apply-for-legalaid-uat-green"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
