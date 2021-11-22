@@ -439,8 +439,8 @@ workflows:
           - build_and_push
           <<: *generic-slack-fail-post-step
       - deploy_uat_live:
-          requires:
-          - build_and_push
+          # requires:
+          # - build_and_push
           <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
