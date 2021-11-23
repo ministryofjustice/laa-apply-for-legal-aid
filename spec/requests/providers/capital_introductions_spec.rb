@@ -20,7 +20,7 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Before you continue')
+        expect(response.body).to include(I18n.t('providers.capital_introductions.show.h1-heading'))
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('Before you continue')
+        expect(response.body).to include(I18n.t('providers.capital_introductions.show.h1-heading'))
       end
     end
   end

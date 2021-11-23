@@ -647,7 +647,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Continue'
-    Then I should be on a page showing "Before you continue"
+    Then I should be on a page showing "What you need to do"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
@@ -880,7 +880,7 @@ Feature: Civil application journeys
     Then I choose "Yes"
     Then I scroll down
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Before you continue'
+    Then I should be on a page showing 'What you need to do'
     When I click link "Back"
     Then I should be on a page showing 'Do you have evidence that your client receives Income Support?'
     Then I choose 'No'
@@ -915,7 +915,7 @@ Feature: Civil application journeys
     And I choose 'Yes'
     Then I scroll down
     And I click 'Save and continue'
-    Then I should be on a page showing "You'll need to tell us if your client:"
+    Then I should be on a page showing "What you need to do"
     And I click 'Save and continue'
     And I should be on a page showing 'Does your client own the home that they live in?'
 
