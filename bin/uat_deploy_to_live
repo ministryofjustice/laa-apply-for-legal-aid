@@ -8,6 +8,7 @@ deploy() {
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-52)
   IDENTIFIER="$INGRESS_NAME-${KUBE_ENV_UAT_NAMESPACE}-green"
 
+
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
