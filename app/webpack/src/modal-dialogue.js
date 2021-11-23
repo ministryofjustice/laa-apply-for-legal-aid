@@ -94,9 +94,11 @@ function startModal (modal, previouslyFocusedElement, nonModalElems) {
   // close modal and refresh page when an application is deleted
   const confirmDeleteBtn = modal.querySelector('.confirm-delete-btn')
   confirmDeleteBtn.addEventListener('click', (event) => {
-    closeModal(modal)
-    window.location.reload()
-    previouslyFocusedElement.focus()
+    setTimeout(() => {
+      closeModal(modal)
+      window.location.reload()
+      previouslyFocusedElement.focus()
+    }, 250)
   })
 
   // When the user clicks anywhere outside of the modal, close it
