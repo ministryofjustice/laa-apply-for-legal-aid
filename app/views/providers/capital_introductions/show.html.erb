@@ -2,11 +2,11 @@
   <ol class="govuk-list govuk-list--number govuk-heading-m">
 
     <li><%= t('.capital_list_heading') %></li>
-    <p class="govuk-body govuk-!-margin-top-2"><%= t('.capital_text') %></p>
+    <p class="govuk-body govuk-!-margin-top-4"><%= t('.capital_text') %></p>
     <%= list_from_translation_path '.capital_introductions.show.capital_items' %>
 
     <li><%= t('.merits_list_heading') %></li>
-    <p class="govuk-body govuk-!-margin-top-2"><%= t('.merits_text') %></p>
+    <p class="govuk-body govuk-!-margin-top-4"><%= t('.merits_text') %></p>
     <%= list_from_translation_path '.capital_introductions.show.merits_items' %>
 
     <% if @legal_aid_application.section_8_proceedings? %>
