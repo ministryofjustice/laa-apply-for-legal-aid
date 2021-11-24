@@ -105,20 +105,27 @@ en:
 
     capital_introductions:
       show:
-        about_the_client:
+        h1-heading: What you need to do
+        capital_list_heading: Tell us about your client's capital
+        capital_text: "This includes:"
+        merits_list_heading: Provide details of the case
+        merits_text: "As part of the merits test, you'll need to provide:"
+        capital_items:
           list: |
-            owns a home or has a mortgage (and their values)
-            has any savings, investments or other capital (and their values)
-            has any other ways to contribute towards legal costs
-        client_to_provide: "You'll also need to provide:"
-        does_your_client: "You'll need to tell us if your client:"
-        h1-heading: Before you continue
-        items_to_be_provided:
+            property
+            vehicles
+            savings and investments
+            other assets
+        merits_items:
           list: |
             details of the latest domestic abuse incident
             information about the opponent
             a statement of case
             the chances of a successful outcome
+        section_8_items:
+            list: |
+              details of children involved
+              details of any attempts to settle the matter
     check_benefits:
       check_benefits_result:
         details_used: "We used the following details to check your client's benefits status with the DWP:"
