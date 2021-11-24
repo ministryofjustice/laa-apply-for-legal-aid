@@ -648,7 +648,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Continue'
     Then I should be on a page showing "What you need to do"
-    Then I click 'Save and continue'
+    Then I click 'Continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
     Then I click 'Save and continue'
@@ -916,7 +916,7 @@ Feature: Civil application journeys
     Then I scroll down
     And I click 'Save and continue'
     Then I should be on a page showing "What you need to do"
-    And I click 'Save and continue'
+    And I click 'Continue'
     And I should be on a page showing 'Does your client own the home that they live in?'
 
   @javascript @vcr
