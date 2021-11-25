@@ -52,6 +52,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
       before do
         login_as application.provider
+        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       context 'the results are correct' do
@@ -83,6 +84,31 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           subject
           expect(application.reload.state_machine_proxy.type).to eq 'NonPassportedStateMachine'
         end
+
+        context 'the employed journey feature flag is not enabled' do
+          it 'does not call the HMRC::CreateResponsesService' do
+            subject
+            expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          end
+        end
+
+        context 'the employed journey feature flag is enabled' do
+          before { Setting.setting.update!(enable_employed_journey: true) }
+          context 'the user has employed permissions' do
+            before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+            it 'calls the HMRC::CreateResponsesService' do
+              subject
+              expect(HMRC::CreateResponsesService).to have_received(:call).once
+            end
+          end
+
+          context 'the user does not have employed permissions' do
+            it 'does not call the HMRC::CreateResponsesService' do
+              subject
+              expect(HMRC::CreateResponsesService).not_to have_received(:call)
+            end
+          end
+        end
       end
 
       context 'the solicitor wants to override the results' do
@@ -95,18 +121,44 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           }
         end
 
-        before { subject }
-
         it 'keeps the application state to checking applicant details' do
+          subject
           expect(application.reload.state).to eq 'checking_applicant_details'
         end
 
         it 'displays the check_client_details page' do
+          subject
           expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
         end
 
         it 'uses the passported state machine' do
+          subject
           expect(application.reload.state_machine_proxy.type).to eq 'PassportedStateMachine'
+        end
+
+        context 'the employed journey feature flag is not enabled' do
+          it 'does not call the HMRC::CreateResponsesService' do
+            subject
+            expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          end
+        end
+
+        context 'the employed journey feature flag is enabled' do
+          before { Setting.setting.update!(enable_employed_journey: true) }
+          context 'the user has employed permissions' do
+            before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+            it 'does not call the HMRC::CreateResponsesService' do
+              subject
+              expect(HMRC::CreateResponsesService).to_not have_received(:call)
+            end
+          end
+
+          context 'the user has does not have employed permissions' do
+            it 'does not call the HMRC::CreateResponsesService' do
+              subject
+              expect(HMRC::CreateResponsesService).to_not have_received(:call)
+            end
+          end
         end
       end
 
@@ -129,15 +181,42 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
       before do
         login_as application.provider
-        subject
+        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       it "redirects provider to provider's applications page" do
+        subject
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it 'sets the application as draft' do
+        subject
         expect(application.reload).to be_draft
+      end
+
+      context 'the employed journey feature flag is not enabled' do
+        it 'does not call the HMRC::CreateResponsesService' do
+          subject
+          expect(HMRC::CreateResponsesService).to_not have_received(:call)
+        end
+      end
+
+      context 'the employed journey feature flag is enabled' do
+        before { Setting.setting.update!(enable_employed_journey: true) }
+        context 'the user has employed permissions' do
+          before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+          it 'does not call the HMRC::CreateResponsesService' do
+            subject
+            expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          end
+        end
+
+        context 'the user has does not have employed permissions' do
+          it 'does not call the HMRC::CreateResponsesService' do
+            subject
+            expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          end
+        end
       end
     end
   end
