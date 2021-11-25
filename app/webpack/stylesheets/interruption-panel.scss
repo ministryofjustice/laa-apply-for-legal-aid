@@ -53,6 +53,11 @@
     border-color: govuk-colour("black");
     background-color: govuk-colour("white");
   }
+
+  .govuk-inset-text {
+    color: govuk-colour("white");
+    border-left: $govuk-border-width-wide solid govuk-colour("white");;
+  }
 }
 @media (min-width: 769px) {
   .interruption-panel {

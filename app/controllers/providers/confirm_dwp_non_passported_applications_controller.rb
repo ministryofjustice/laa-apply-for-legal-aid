@@ -1,5 +1,7 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
+    helper_method :display_hmrc_inset_text?
+
     def show
       delete_check_benefits_from_history
       form
@@ -67,6 +69,10 @@ module Providers
 
     def make_hmrc_call?
       correct_dwp_result? && employed_journey_enabled? && hmrc_call_enabled? && user_has_employment_permissions?
+    end
+
+    def display_hmrc_inset_text?
+      employed_journey_enabled? && hmrc_call_enabled? && user_has_employment_permissions?
     end
   end
 end

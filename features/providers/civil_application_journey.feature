@@ -201,7 +201,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -259,7 +259,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -385,7 +385,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -411,7 +411,7 @@ Feature: Civil application journeys
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -480,7 +480,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -842,7 +842,7 @@ Feature: Civil application journeys
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'No, my client receives a passporting benefit'
-    Then I click "Continue"
+    Then I click "Save and continue"
     Then I should be on a page showing "Check your client's details"
     Then I choose 'I need to change these details'
     Then I click 'Save and continue'
@@ -861,7 +861,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'No'
-    And I click 'Continue'
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your client's details"
     Then I choose 'I need to change these details'
     And I click 'Save and continue'
@@ -894,7 +894,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'Yes'
-    And I click 'Continue'
+    And I click 'Save and continue'
     And I should be on a page showing 'Is your client employed?'
     And I choose 'No'
     And I click 'Save and continue'
@@ -904,7 +904,7 @@ Feature: Civil application journeys
     And I click link 'Back'
     And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'No, my client receives a passporting benefit'
-    And I click 'Continue'
+    And I click 'Save and continue'
     And I should be on a page showing "Check your client's details"
     Then I choose 'These details are correct'
     And I click 'Save and continue'

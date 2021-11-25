@@ -284,7 +284,7 @@ Feature: Non-passported applicant journeys
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     Then I choose 'No'
     Then I click 'Save and continue'
@@ -357,7 +357,7 @@ Feature: Non-passported applicant journeys
     And I used delegated functions
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"
     Then I click 'Save and continue'
@@ -379,7 +379,7 @@ Feature: Non-passported applicant journeys
     Given I start the application with a negative benefit check result and no used delegated functions
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose "Yes"
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Is your client employed?"
     Then I choose "Yes"
     Then I click 'Save and continue'

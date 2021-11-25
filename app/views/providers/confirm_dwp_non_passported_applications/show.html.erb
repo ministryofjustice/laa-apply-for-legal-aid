@@ -16,6 +16,12 @@
                                               legend: {text: t('.title_html'), tag: 'h1', size: 'l'},
                                               classes: ['govuk-!-margin-top-4'] %>
 
+      <% if display_hmrc_inset_text? %>
+        <div class="govuk-inset-text">
+          <%= t('.hmrc_inset_text') %>
+        </div>
+      <% end %>
+
       <% if @form.errors.any? %>
         <%= link_to_accessible @form.errors.map { |error| error.message }.first, "#correct_dwp_result-true-field", class: 'govuk-heading-s' %>
       <% end %>
@@ -26,7 +32,7 @@
             url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
             method: :patch,
             show_draft: true,
-            continue_button_text: t('generic.continue')
+            continue_button_text: t('generic.save_and_continue')
           ) %>
     <% end %>
   <% end %>

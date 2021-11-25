@@ -38,6 +38,35 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         expect(response.body).to have_back_link("#{page1}&back=true")
       end
     end
+
+    describe 'HMRC inset text' do
+      before { login_as application.provider }
+
+      context 'the employed journey feature flag is not enabled' do
+        it 'does not display the HMRC inset text' do
+          subject
+          expect(unescaped_response_body).not_to include(I18n.t('.providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text'))
+        end
+      end
+
+      context 'the employed journey feature flag is enabled' do
+        before { Setting.setting.update!(enable_employed_journey: true) }
+        context 'the user has employed permissions' do
+          before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+          it 'displays the HMRC inset text' do
+            subject
+            expect(unescaped_response_body).to include(I18n.t('.providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text'))
+          end
+        end
+
+        context 'the user does not have employed permissions' do
+          it 'does not display the HMRC inset text' do
+            subject
+            expect(unescaped_response_body).not_to include(I18n.t('.providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text'))
+          end
+        end
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications' do
