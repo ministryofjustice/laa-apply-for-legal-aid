@@ -6,14 +6,14 @@ deploy() {
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
-  IDENTIFIER="$INGRESS_NAME-${KUBE_ENV_UAT_NAMESPACE}-blue"
+  IDENTIFIER="$INGRESS_NAME-${KUBE_ENV_UAT_NAMESPACE}-green"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
   helm upgrade $RELEASE_NAME ./helm_deploy/apply-for-legal-aid/. \
                 --install --wait \
                 --namespace=${KUBE_ENV_UAT_NAMESPACE} \
-                --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
+                --values ./helm_deploy/apply-for-legal-aid/values-live-uat.yaml \
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
