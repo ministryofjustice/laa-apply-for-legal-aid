@@ -1,35 +1,24 @@
-<%= page_template page_title: t('.h1-heading') do %>
+<%= page_template page_title: t('.h1-heading', client_name: @legal_aid_application.applicant.full_name) do %>
 
-  <p class="govuk-body govuk-!-margin-bottom-0">
-    <strong><%= t('.client') %>:</strong>
-    <%= @legal_aid_application.applicant.full_name %>
-  </p>
-  <p class="govuk-body">
-    <strong><%= t('.case-reference') %>:</strong>
-    <%= @legal_aid_application.application_ref %>
-  </p>
+  <p class="govuk-body-l"><%= t('.what_to_do') %></p>
 
-  <p class="govuk-body"><%= t('.state') %></p>
+  <h2 class="govuk-heading-m"><%= t('.point_1_heading') %></h2>
+  <p class="govuk-body"><%= t('.point_1_text') %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.what_next') %></h2>
-  <p class="govuk-body"><%= t('.intro') %></p>
-  <ul class="govuk-list govuk-list--bullet print-add-bullet">
-    <%- t('.intro-bullets').each do |bullet| %>
-      <li><%= bullet %></li>
-    <% end %>
-  </ul>
-  <p class="govuk-body"><%= t('.question') %></p>
-  <ul class="govuk-list govuk-list--bullet print-add-bullet">
-    <%- t('.question-bullets').each do |bullet| %>
-      <li><%= bullet %></li>
-    <% end %>
-  </ul>
+  <h2 class="govuk-heading-m"><%= t('.point_2_heading') %></h2>
+  <p class="govuk-body"><%= t('.point_2_text') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.point_3_heading') %></h2>
+  <p class="govuk-body"><%= t('.point_3_text') %></p>
+
+  <h2 class="govuk-heading-m"><%= t('.point_4_heading') %></h2>
+  <p class="govuk-body"><%= t('.point_4_text') %></p>
+
   <div class="govuk-!-padding-bottom-4"></div>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_client_completed_means_path,
         method: :patch,
-        show_draft: true,
         continue_button_text: t('generic.continue')
       ) %>
 <% end %>

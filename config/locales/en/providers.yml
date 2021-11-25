@@ -266,19 +266,16 @@ en:
           offline_savings_amount: Enter the total amount in all accounts.
     client_completed_means:
       show:
-        h1-heading: Continue your application
-        client: Client
-        case-reference: Case reference
-        state: Your client has shared their financial information with us.
-        what_next: What happens next
-        intro: "You need to:"
-        intro-bullets:
-          - view your client's bank statements from the past 3 months
-          - put their transactions into the categories they selected
-        question: "You'll also need to tell us about their:"
-        question-bullets:
-          - dependants (if they have any)
-          - property, savings and other assets
+        h1-heading: Continue %{client_name}'s financial assessment
+        what_to_do: "Your client has shared their financial information. You need to do the following:"
+        point_1_heading: 1. Review their employment details
+        point_1_text: We'll show you the information HRMC shared with us.
+        point_2_heading: 2. Sort their bank transactions into categories
+        point_2_text: Your client selected the categories their income and outgoings fall into. View their bank statements and sort transactions into these categories.
+        point_3_heading: 3. Tell us about their dependants
+        point_3_text: Provide details of your client's dependants (if they have any).
+        point_4_heading: 4. Tell us about their capital
+        point_4_text: Provide details of your client's savings, investments and other assets
     confirm_offices:
       show:
         h1-heading: Is %{office_code} your office account number?
