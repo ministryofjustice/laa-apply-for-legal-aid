@@ -80,7 +80,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
           let(:params) { { applicant: { employed: 'false' } } }
 
           it 'redirects to the open banking consents page' do
-            expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
           end
         end
       end
@@ -98,7 +98,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         end
 
         it 'includes the error message in the response' do
-          expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.employed.blank'))
+          expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.base.none_selected'))
         end
       end
     end

@@ -48,6 +48,10 @@ class Applicant < ApplicationRecord
     age < 16
   end
 
+  def not_employed?
+    !employed && !self_employed? && !armed_forces?
+  end
+
   def json_for_hmrc
     {
       first_name: first_name,

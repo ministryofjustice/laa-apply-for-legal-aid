@@ -265,4 +265,42 @@ RSpec.describe Applicant, type: :model do
       end
     end
   end
+
+  describe 'employment status' do
+    describe '#not_employed?' do
+      context 'not employed' do
+        it 'returns true' do
+          applicant = build :applicant, :not_employed
+          expect(applicant.not_employed?).to be true
+        end
+      end
+
+      context 'armed forces' do
+        it 'returns false' do
+          applicant = build :applicant, :armed_forces
+          expect(applicant.not_employed?).to be false
+        end
+      end
+
+      context 'self employed' do
+        it 'returns false' do
+          applicant = build :applicant, :armed_forces
+          expect(applicant.not_employed?).to be false
+        end
+      end
+      context 'employed and self employed' do
+        it 'returns false' do
+          applicant = build :applicant, :employed, :self_employed
+          expect(applicant.not_employed?).to be false
+        end
+      end
+
+      context 'all three' do
+        it 'returns false' do
+          applicant = build :applicant, :employed, :self_employed, :armed_forces
+          expect(applicant.not_employed?).to be false
+        end
+      end
+    end
+  end
 end

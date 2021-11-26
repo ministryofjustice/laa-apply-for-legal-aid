@@ -12,13 +12,19 @@
         back_link: { text: t('generic.back') }
       ) do %>
 
-    <%= form.govuk_collection_radio_buttons(
-          :employed,
-          yes_no_options,
-          :value,
-          :label,
-          legend: {text: content_for(:page_title), size: 'xl', tag: 'h1'}
-        ) %>
+    <%= form.govuk_check_boxes_fieldset :applicant,
+                                        legend: {text: page_title, size: 'xl', tag: 'h1'},
+                                        hint: {text: t('generic.select_all_that_apply')} do %>
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        <div class="deselect-group" data-deselect-ctrl="#applicant-none-selected-true-field">
+          <% Applicants::EmployedForm::EMPLOYMENT_TYPES.each do |employment_type| %>
+             <%= form.govuk_check_box employment_type, true, '', multiple: false, link_errors: true, label: {text: t(".#{employment_type}")} %>
+           <% end %>
+        </div>
+      </div>
+      <%= form.govuk_radio_divider %>
+      <%= form.govuk_check_box :none_selected, true, '', multiple: false, label: {text: t('.not_employed')} %>
+    <% end %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>

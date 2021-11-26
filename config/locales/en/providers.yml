@@ -24,7 +24,11 @@ en:
           { one: "1 address found", other: "%{count} addresses found" }
     applicant_employed:
       index:
-        heading_1: Is your client employed?
+        heading_1: What is your client's employment status?
+        employed: Employed
+        self_employed: Self-employed
+        armed_forces: Member of the armed forces
+        not_employed: None of the above
     application_confirmations:
       show:
         application_created: Application created

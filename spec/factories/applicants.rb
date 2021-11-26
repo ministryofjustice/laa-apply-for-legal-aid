@@ -20,6 +20,20 @@ FactoryBot.define do
 
     trait :not_employed do
       employed { false }
+      self_employed { false }
+      armed_forces { false }
+    end
+
+    trait :employed do
+      employed { true }
+    end
+
+    trait :self_employed do
+      self_employed { true }
+    end
+
+    trait :armed_forces do
+      armed_forces { true }
     end
 
     trait :with_true_layer_tokens do

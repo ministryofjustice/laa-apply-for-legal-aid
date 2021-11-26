@@ -52,6 +52,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     When the search for "cakes" is not successful
     Then the result list on page returns a "No results found." message
 
@@ -73,6 +77,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     And I search for proceeding 'app'
     Then proceeding suggestions has results
     When I click clear search
@@ -92,6 +100,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -184,6 +196,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -201,9 +217,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
@@ -234,6 +247,10 @@ Feature: Civil application journeys
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -259,9 +276,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
@@ -290,6 +304,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -337,6 +355,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -368,6 +390,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select 'None of the above'
+    And I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button
@@ -385,9 +411,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
@@ -411,9 +434,6 @@ Feature: Civil application journeys
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'No, I do not agree'
@@ -480,9 +500,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
@@ -872,7 +889,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Which passporting benefit does your client receive?'
     Then I choose 'None of these'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
+    Then I should be on a page showing 'What does your client want legal aid for?'
     When I click link "Back"
     Then I choose 'Income Support'
     And I click 'Save and continue'
@@ -886,7 +903,7 @@ Feature: Civil application journeys
     Then I choose 'No'
     Then I scroll down
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
+    Then I should be on a page showing 'What does your client want legal aid for?'
 
   @javascript @vcr
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
@@ -895,12 +912,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'Yes'
     And I click 'Save and continue'
-    And I should be on a page showing 'Is your client employed?'
-    And I choose 'No'
-    And I click 'Save and continue'
     And I should be on a page showing 'Check if you can continue using this service'
-    And I click link 'Back'
-    And I should be on a page showing 'Is your client employed?'
     And I click link 'Back'
     And I should be on a page showing 'DWP records show that your client does not receive a passporting benefit – is this correct?'
     Then I choose 'No, my client receives a passporting benefit'
@@ -932,6 +944,10 @@ Feature: Civil application journeys
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     Then I choose a 'Non-molestation order' radio button

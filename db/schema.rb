@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 2021_12_09_083010) do
     t.datetime "remember_created_at"
     t.string "remember_token"
     t.boolean "employed"
+    t.boolean "self_employed", default: false
+    t.boolean "armed_forces", default: false
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
