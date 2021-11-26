@@ -45,6 +45,10 @@ class Provider < ApplicationRecord
     user_permissions.map(&:role).include?('application.non_passported.*')
   end
 
+  def employment_permissions?
+    user_permissions.map(&:role).include?('application.non_passported.employment.*')
+  end
+
   def ccms_apply_role?
     return true if Rails.configuration.x.laa_portal.mock_saml == 'true'
 
