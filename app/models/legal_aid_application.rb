@@ -346,10 +346,14 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def online_savings_accounts_balance
+    return nil if applicant.bank_accounts.savings.empty?
+
     applicant.bank_accounts.savings.sum(&:latest_balance)
   end
 
   def online_current_accounts_balance
+    return nil if applicant.bank_accounts.current.empty?
+
     applicant.bank_accounts.current.sum(&:latest_balance)
   end
 
