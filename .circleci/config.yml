@@ -86,14 +86,6 @@ references:
       name: Kubectl deployment setup UAT
       command: |
         $(aws ecr get-login --region eu-west-2 --no-include-email)
-        setup-kube-auth
-        kubectl config use-context uat
-
-  setup_uat_kubectl_live: &setup_uat_kubectl_live
-    run:
-      name: Kubectl deployment setup UAT - live cluster
-      command: |
-        $(aws ecr get-login --region eu-west-2 --no-include-email)
         echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
@@ -324,20 +316,6 @@ jobs:
   deploy_main_uat:
     <<: *deploy_uat
 
-  deploy_uat_live: &deploy_uat_live
-    executor: cloud-platform-executor
-    steps:
-    - checkout
-    - setup_remote_docker
-    - *setup_uat_kubectl_live
-    - *decrypt_secrets
-    - deploy:
-        name: Helm deployment to UAT - live cluster
-        command: |
-          ./bin/uat_deploy_to_live
-  deploy_main_uat_live:
-    <<: *deploy_uat_live
-
   deploy_staging:
     executor: cloud-platform-executor
     steps:
@@ -404,17 +382,6 @@ jobs:
         command: |
           ./bin/delete_uat_release
 
-  delete_uat_branch_live:
-    executor: cloud-platform-executor
-    steps:
-    - checkout
-    - setup_remote_docker
-    - *setup_uat_kubectl_live
-    - run:
-        name: Delete UAT release from live cluster
-        command: |
-          ./bin/delete_uat_release
-
 generic-slack-fail-post-step: &generic-slack-fail-post-step
   post-steps:
     - slack/notify:
@@ -435,10 +402,6 @@ workflows:
           - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_uat:
-          requires:
-          - build_and_push
-          <<: *generic-slack-fail-post-step
-      - deploy_uat_live:
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
@@ -466,15 +429,7 @@ workflows:
           requires:
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - deploy_main_uat_live:
-          requires:
-            - build_and_push
-          <<: *generic-slack-fail-post-step
       - delete_uat_branch:
-          requires:
-            - build_and_push
-          <<: *generic-slack-fail-post-step
-      - delete_uat_branch_live:
           requires:
             - build_and_push
           <<: *generic-slack-fail-post-step

@@ -6,7 +6,7 @@ deploy() {
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
-  IDENTIFIER="$INGRESS_NAME-${KUBE_ENV_UAT_NAMESPACE}-blue"
+  IDENTIFIER="$INGRESS_NAME-${KUBE_ENV_UAT_NAMESPACE}-green"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
