@@ -83,7 +83,7 @@ Feature: Provider accessibility
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
     Given I start the merits application with bank transactions with no transaction type category
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     And the page is accessible
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"

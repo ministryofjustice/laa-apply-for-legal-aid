@@ -3,7 +3,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
   Scenario: I am able to create a non passported application with cap Contribs > £3k and without restrictions
     Given The means questions have been answered by the applicant
     And Bank transactions exist
-    Then I should be on a page showing 'Continue your application'
+    Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I am on the "Your client's income" page
     Then I choose "binary-choice-form-no-income-summaries-true-field"
@@ -84,7 +84,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
   Scenario: I am able to create a non passported application without Income or Cap Contribs and with no restrictions
     Given The means questions have been answered by the applicant
     And Bank transactions exist
-    Then I should be on a page showing 'Continue your application'
+    Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I am on the "Your client's income" page
     Then I choose "binary-choice-form-no-income-summaries-true-field"
