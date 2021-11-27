@@ -73,6 +73,6 @@ Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
 
-  # Swirch to determine whether or not o collect HMRC data
-  config.x.collect_hmrc_data = false
+  # Switch to determine whether or not o collect HMRC data
+  config.x.collect_hmrc_data = true
 end
