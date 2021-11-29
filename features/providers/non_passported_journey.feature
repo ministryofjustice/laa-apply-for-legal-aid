@@ -2,7 +2,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Completes a minimal merits application for applicant that does not receive benefits
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     And I should not see 'Student finance'
@@ -37,7 +37,7 @@ Feature: Non-passported applicant journeys
   @javascript @vcr
   Scenario: Selects and categorises bank transactions into transaction types
     Given I start the merits application with bank transactions with no transaction type category
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "No"
@@ -80,7 +80,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with dependants
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -145,7 +145,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with a child dependant
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -216,7 +216,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
     Given I start the merits application
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -308,7 +308,7 @@ Feature: Non-passported applicant journeys
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits but gets a student loan
     Given I start the merits application with student finance
-    Then I should be on the 'client_completed_means' page showing 'Continue your application'
+    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     When I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I should be on a page showing "Student finance"

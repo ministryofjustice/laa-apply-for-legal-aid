@@ -4,7 +4,7 @@ Feature: Completing and checking means answers backwards and forwards
   Scenario: I add a benefits category and add transactions to included and excluded benefits
     Given The means questions have been answered by the applicant
     And Bank transactions exist
-    Then I should be on a page showing 'Continue your application'
+    Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "No"

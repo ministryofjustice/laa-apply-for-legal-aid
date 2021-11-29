@@ -3,7 +3,7 @@ Feature: Completing and checking means answers backwards and forwards
   @javascript
   Scenario: I select some outgoing transaction types and then remove them
     Given The means questions have been answered by the applicant
-    Then I should be on a page showing 'Continue your application'
+    Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -33,7 +33,7 @@ Feature: Completing and checking means answers backwards and forwards
   @javascript @vcr
   Scenario: I navigate to the Check your answers page and then add some outgoing transaction types
     Given The means questions have been answered by the applicant
-    Then I should be on a page showing 'Continue your application'
+    Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
