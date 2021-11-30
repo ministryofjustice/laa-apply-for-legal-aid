@@ -25,7 +25,10 @@ module Providers
     private
 
     def run_transaction
-      # TODO: Should be fixed by future LFA ticket to change to Proceeding record
+      proceeding_to_add = proceeding_types.find { |proceeding| proceeding.ccms_code == form_params }
+      add_proceeding_service.call(ccms_code: proceeding_to_add.ccms_code)
+
+      # TODO: Remove this when application_proceeding_types are no longer used
       id = ProceedingType.find_by(ccms_code: form_params).id
       proceeding_types_service.add(proceeding_type_id: id, scope_type: :substantive)
     rescue ActionController::ParameterMissing
@@ -34,6 +37,10 @@ module Providers
 
     def proceeding_types_service
       LegalFramework::ProceedingTypesService.new(legal_aid_application)
+    end
+
+    def add_proceeding_service
+      LegalFramework::AddProceedingService.new(legal_aid_application)
     end
 
     def form_params
@@ -45,7 +52,7 @@ module Providers
     end
 
     def excluded_codes
-      @excluded_codes ||= legal_aid_application.application_proceeding_types&.map { |p| p.proceeding_type.ccms_code }&.join(',')
+      @excluded_codes ||= legal_aid_application.proceedings&.map { |p| p.ccms_code }&.join(',')
     end
   end
 end
