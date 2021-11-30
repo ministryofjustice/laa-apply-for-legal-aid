@@ -15,12 +15,10 @@
 
       <div class="govuk-!-padding-bottom-2"></div>
 
-      <%= form.govuk_collection_radio_buttons(
-              :no_outgoings_summaries,
-              yes_no_options,
-              :value,
-              :label,
-              legend: { text: t('.is_this_correct'), size: 'l', tag: 'h2' }) %>
+      <%= form.govuk_radio_buttons_fieldset(:no_outgoings_summaries, legend: { text: t('.is_this_correct'), size: 'm', tag: 'h2' }) do %>
+        <%= form.govuk_radio_button :no_outgoings_summaries, true, link_errors: true, label: {text: t('generic.yes')} %>
+        <%= form.govuk_radio_button :no_outgoings_summaries, false, label: {text: t('.no_radio')} %>
+      <% end %>
 
       <div class="govuk-!-padding-bottom-2"></div>
 

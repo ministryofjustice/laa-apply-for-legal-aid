@@ -627,6 +627,7 @@ en:
             income from a property or lodger
             pension payments
         is_this_correct: Is this correct?
+        no_radio: No, my client receives one or more of these
         student_finance:
           heading: Student finance
           info_html: '<strong>%{student_finance}</strong> this academic year.'
@@ -642,6 +643,7 @@ en:
             spousal or child maintenance
             for legal aid in a criminal case
         is_this_correct: Is this correct?
+        no_radio: No, my client has one or more of these outgoings
         error: Select yes if your client does not make these payments
     non_passported_client_instructions:
       show:
