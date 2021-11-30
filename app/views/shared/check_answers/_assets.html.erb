@@ -18,14 +18,14 @@
               name: :online_current_accounts,
               url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
               question: t('.assets.current_account'),
-              answer: online_current_accounts ? gds_number_to_currency(online_current_accounts) : t('generic.none_declared'),
+              answer: online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t('generic.none_declared'),
               read_only: read_only,
             ) %>
         <%= check_answer_link(
               name: :online_savings_accounts,
               url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
               question: t('.assets.savings_account'),
-              answer: online_savings_accounts ? gds_number_to_currency(online_savings_accounts) : t('generic.none_declared'),
+              answer: online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t('generic.none_declared'),
               read_only: read_only,
             ) %>
       </dl>
