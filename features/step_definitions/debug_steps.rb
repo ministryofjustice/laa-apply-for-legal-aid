@@ -34,12 +34,10 @@ end
 
 # TODO: remove after LFA migration complete
 When(/^I enable callbacks on ApplicationProceedingType$/) do
-  ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
   ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
 end
 
 # TODO: remove after LFA migration complete
 When(/^I disable callbacks on ApplicationProceedingType$/) do
-  ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
   ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
 end
