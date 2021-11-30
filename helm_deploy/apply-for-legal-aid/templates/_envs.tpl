@@ -319,4 +319,30 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: hmrcApiSecret
+  - name: GOOGLE_SHEETS_PRIVATE_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsPrivateKeyId
+  - name: GOOGLE_SHEETS_PRIVATE_KEY_VALUE
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsPrivateKeyValue
+  - name: GOOGLE_SHEETS_CLIENT_EMAIL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsClientEmail
+  - name: GOOGLE_SHEETS_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsClientId
+  - name: GOOGLE_SHEETS_SPREADSHEET_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleSheetsSpreadsheetId
+
 {{- end }}
