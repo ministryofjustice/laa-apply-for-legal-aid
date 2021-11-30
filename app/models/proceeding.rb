@@ -1,4 +1,6 @@
 class Proceeding < ApplicationRecord
+  FIRST_PROCEEDING_CASE_ID = 55_000_000
+
   belongs_to :legal_aid_application
 
   has_one :attempts_to_settle, class_name: 'ProceedingMeritsTask::AttemptsToSettle', dependent: :destroy
@@ -15,11 +17,13 @@ class Proceeding < ApplicationRecord
   scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
   scope :not_using_delegated_functions, -> { where(used_delegated_functions_on: nil) }
 
+  before_create do
+    self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
+  end
+
   def pretty_df_date
     used_delegated_functions_on&.strftime('%F') || 'n/a'
   end
-
-  scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
 
   def used_delegated_functions?
     used_delegated_functions_on.present?
@@ -77,5 +81,10 @@ class Proceeding < ApplicationRecord
   def application_proceeding_type
     proceeding_type = ProceedingType.find_by ccms_code: ccms_code
     legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id)
+  end
+
+  def highest_proceeding_case_id
+    rec = self.class.order(proceeding_case_id: :desc).first
+    rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
   end
 end
