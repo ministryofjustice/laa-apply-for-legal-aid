@@ -66,8 +66,8 @@ module CCMS
 
           context 'on a Delegated Functions case' do
             before do
-              legal_aid_application.application_proceeding_types.each do |apt|
-                apt.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
 
@@ -470,8 +470,8 @@ module CCMS
         context 'DELEGATED_FUNCTIONS_DATE blocks' do
           context 'delegated functions used' do
             before do
-              legal_aid_application.application_proceeding_types.each do |apt|
-                apt.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
 
