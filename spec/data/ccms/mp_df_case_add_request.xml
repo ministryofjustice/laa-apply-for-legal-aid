@@ -109,7 +109,7 @@
                     <casebio:ScopeLimitation>
                       <casebio:ScopeLimitation>FM062</casebio:ScopeLimitation>
                       <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.</casebio:ScopeLimitationWording>
-                      <casebio:DelegatedFunctionsApply>true</casebio:DelegatedFunctionsApply>
+                      <casebio:DelegatedFunctionsApply>false</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                     <casebio:ScopeLimitation>
                       <casebio:ScopeLimitation>CV117</casebio:ScopeLimitation>

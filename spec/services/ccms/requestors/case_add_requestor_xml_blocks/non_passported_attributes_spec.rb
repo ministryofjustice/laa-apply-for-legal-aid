@@ -452,10 +452,8 @@ module CCMS
         context 'EMERGENCY_DPS_APP_AMD' do
           context 'delegated functions used' do
             before do
-              legal_aid_application.application_proceeding_types.each do |apt|
-                apt.update!(used_delegated_functions_on: Date.yesterday,
-                            used_delegated_functions_reported_on: Date.current)
-                apt.delegated_functions_scope_limitation = apt.proceeding_type.default_substantive_scope_limitation
+              legal_aid_application.proceedings.each do |proceeding|
+                proceeding.update!(used_delegated_functions_on: Date.yesterday, used_delegated_functions_reported_on: Date.current)
               end
             end
             it 'generates the block with true' do
