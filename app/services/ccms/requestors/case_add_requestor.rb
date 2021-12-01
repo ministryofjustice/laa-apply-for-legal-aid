@@ -230,14 +230,14 @@ module CCMS
         xml.__send__('casebio:ScopeLimitation') do
           xml.__send__('casebio:ScopeLimitation', proceeding.substantive_scope_limitation_code)
           xml.__send__('casebio:ScopeLimitationWording', proceeding.substantive_scope_limitation_description)
-          xml.__send__('casebio:DelegatedFunctionsApply', proceeding.used_delegated_functions?)
+          xml.__send__('casebio:DelegatedFunctionsApply', false)
         end
         return if proceeding.used_delegated_functions_on.nil?
 
         xml.__send__('casebio:ScopeLimitation') do
           xml.__send__('casebio:ScopeLimitation', proceeding.delegated_functions_scope_limitation_code)
           xml.__send__('casebio:ScopeLimitationWording', proceeding.delegated_functions_scope_limitation_description)
-          xml.__send__('casebio:DelegatedFunctionsApply', proceeding.used_delegated_functions?)
+          xml.__send__('casebio:DelegatedFunctionsApply', true)
         end
       end
 
