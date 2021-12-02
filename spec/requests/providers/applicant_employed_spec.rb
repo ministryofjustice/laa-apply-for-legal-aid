@@ -60,10 +60,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     end
 
     describe 'POST /providers/:application_id/applicant_employed' do
-      before do
-        allow(HMRC::CreateResponsesService).to receive(:call).with(legal_aid_application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
-        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params
-      end
+      before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
 
       context 'valid params' do
         let(:params) { { applicant: { employed: 'true' } } }
@@ -77,10 +74,6 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
           it 'redirects to the use ccms employed page' do
             expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
           end
-
-          it 'calls the HMRC::CreateResponsesService' do
-            expect(HMRC::CreateResponsesService).to have_received(:call).once
-          end
         end
 
         context 'no' do
@@ -88,10 +81,6 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
           it 'redirects to the open banking consents page' do
             expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
-          end
-
-          it 'does not call the HMRC::CreateResponsesService' do
-            expect(HMRC::CreateResponsesService).to_not have_received(:call)
           end
         end
       end

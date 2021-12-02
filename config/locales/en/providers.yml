@@ -25,7 +25,6 @@ en:
     applicant_employed:
       index:
         heading_1: Is your client employed?
-        hint: If your client is employed we'll share their personal details with HMRC to check their employment status.
     application_confirmations:
       show:
         application_created: Application created
@@ -166,6 +165,7 @@ en:
         'no': No, my client receives a passporting benefit
         tab_title: DWP records show that your client does not receive a passporting benefit – is this correct?
         title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not receive a passporting benefit – is this correct?
+        hmrc_inset_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
     confirm_multiple_delegated_functions_dates:
       show:
         heading: Confirm when you used delegated functions

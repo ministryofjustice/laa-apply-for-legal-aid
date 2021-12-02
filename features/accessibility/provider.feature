@@ -55,7 +55,7 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing 'Is your client employed?'
     And the page is accessible
     Then I choose 'No'

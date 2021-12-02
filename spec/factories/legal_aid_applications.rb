@@ -360,7 +360,7 @@ FactoryBot.define do
           raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
 
           application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
-          application.proceedings.find_by(name: da_pt.name).update!(lead_proceeding: true)
+          application.proceedings.find_by(ccms_code: da_pt.ccms_code).update!(lead_proceeding: true)
         end
         application.reload
       end
