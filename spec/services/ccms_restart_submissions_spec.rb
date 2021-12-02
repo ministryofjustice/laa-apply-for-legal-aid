@@ -21,8 +21,8 @@ RSpec.describe CCMSRestartSubmissions do
 
     it 'changes the states to submitting_assessment' do
       subject
-      expect(LegalAidApplication.first.reload.state).to eql 'submitting_assessment'
-      expect(LegalAidApplication.last.reload.state).to eql 'submitting_assessment'
+      expect(LegalAidApplication.first.reload.state).to eql 'generating_reports'
+      expect(LegalAidApplication.last.reload.state).to eql 'generating_reports'
     end
   end
 end
