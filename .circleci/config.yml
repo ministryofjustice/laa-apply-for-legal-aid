@@ -12,7 +12,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: cimg/ruby:3.0.2-browsers
+      - image: cimg/ruby:3.0.3-browsers
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
@@ -30,7 +30,7 @@ executors:
 
   test-executor:
     docker:
-      - image: cimg/ruby:3.0.2-browsers
+      - image: cimg/ruby:3.0.3-browsers
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
       - image: cimg/postgres:10.18
