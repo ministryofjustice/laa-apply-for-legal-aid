@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_174848) do
+ActiveRecord::Schema.define(version: 2021_12_02_112509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -726,6 +726,7 @@ ActiveRecord::Schema.define(version: 2021_11_12_174848) do
     t.string "category_law_code", null: false
     t.string "ccms_matter_code"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
+    t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
   end
 
   create_table "proceedings_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
