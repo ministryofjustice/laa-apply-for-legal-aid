@@ -20,11 +20,16 @@ namespace :db do
   end
 
   task import_to_uat: :environment do
+    puts 'you have arrived here'
     raise(ArgumentError, 'Cannot construct DB connection string') if build_postgres_url.length < 25
 
+    puts 'is this hit?'
     $stdin.binmode
+    puts 'is this hit? 2'
     db_file = Tempfile.new('temp_file_prefix', Rails.root.join('tmp'))
+    puts 'is this hit?  3'
     db_file.write($stdin.read)
+    puts 'is this hit?  4'
     db_file.close
 
     command_one = "psql #{build_postgres_url} -c 'drop schema public cascade'"
