@@ -7,7 +7,7 @@ module Admin
     def update
       @form = Settings::SettingForm.new(form_params.merge(model: setting))
 
-      CCMSRestartSubmissions.call if ccms_restarting?
+      CCMS::RestartSubmissions.call if ccms_restarting?
       if @form.save
         redirect_to admin_settings_path, notice: 'Settings have been updated'
       else

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CCMSRestartSubmissions do
+RSpec.describe CCMS::RestartSubmissions do
   subject(:restart_submissions) { described_class.call }
 
   before do

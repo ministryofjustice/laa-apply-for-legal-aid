@@ -67,7 +67,7 @@ RSpec.describe Admin::SettingsController, type: :request do
     end
 
     context 'when the enable_ccms_submission is changed' do
-      before { allow_any_instance_of(CCMSRestartSubmissions).to receive(:call).and_return(true) }
+      before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
 
       context 'from false to true' do
         let(:params) do
@@ -79,7 +79,7 @@ RSpec.describe Admin::SettingsController, type: :request do
         end
 
         it 'sends an active_support notification' do
-          expect(CCMSRestartSubmissions).to receive(:call)
+          expect(CCMS::RestartSubmissions).to receive(:call)
           subject
         end
       end
@@ -93,7 +93,7 @@ RSpec.describe Admin::SettingsController, type: :request do
           }
         end
         it 'does not send an active_support notification' do
-          expect(CCMSRestartSubmissions).not_to receive(:call)
+          expect(CCMS::RestartSubmissions).not_to receive(:call)
           subject
         end
       end
