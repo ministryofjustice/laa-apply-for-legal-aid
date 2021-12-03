@@ -13,37 +13,23 @@ namespace :db do
   task import_to_dev: :environment do
     command_one = 'psql -q -d apply_for_legal_aid_dev -c "drop schema public cascade"'
     command_two = 'psql -q -d apply_for_legal_aid_dev -c "create schema public"'
-    command_three = 'psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/production.anon.sql'
+    command_three = 'psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/anon3.sql'
     `#{command_one}`
     `#{command_two}`
     `#{command_three}`
   end
 
   task import_to_uat: :environment do
-    puts 'you have arrived here'
     raise(ArgumentError, 'Cannot construct DB connection string') if build_postgres_url.length < 25
-
-    puts 'is this hit?'
-    $stdin.binmode
-    puts 'is this hit? 2'
-    db_file = Tempfile.new('temp_file_prefix', Rails.root.join('tmp'))
-    puts 'is this hit?  3'
-    db_file.write($stdin.read)
-    puts 'is this hit?  4'
-    db_file.close
 
     command_one = "psql #{build_postgres_url} -c 'drop schema public cascade'"
     command_two = "psql #{build_postgres_url} -c 'create schema public'"
-    command_three = "psql #{build_postgres_url} -f < db_file"
-    # command_three = "psql #{build_postgres_url} -f < #{db_file}"
+    command_three = "psql #{build_postgres_url} -f < ./tmp/anon3.sql"
 
     puts 'starting the rake task'
     `#{command_one}`
     `#{command_two}`
     `#{command_three}`
-
-    puts db_file.path
-    db_file.unlink
   end
 
   private
