@@ -539,7 +539,7 @@ GEM
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     regexp-examples (1.5.1)
-    regexp_parser (2.1.1)
+    regexp_parser (2.2.0)
     remotipart (1.4.4)
     representable (3.1.1)
       declarative (< 0.1.0)
