@@ -37,7 +37,8 @@ RSpec.describe Admin::SettingsController, type: :request do
         setting: {
           mock_true_layer_data: 'true',
           allow_welsh_translation: 'true',
-          enable_employed_journey: 'true'
+          enable_employed_journey: 'true',
+          enable_ccms_submission: 'true'
         }
       }
     end
@@ -63,6 +64,42 @@ RSpec.describe Admin::SettingsController, type: :request do
     it 'redirects to the same page' do
       subject
       expect(response).to redirect_to(admin_settings_path)
+    end
+
+    context 'when the enable_ccms_submission is changed' do
+      before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
+
+      context 'from false to true' do
+        # let(:params) do
+        #   {
+        #     setting: {
+        #       enable_ccms_submission: 'true'
+        #     }
+        #   }
+        # end
+
+        it 'calls CCMS::RestartSubmissions' do
+          expect(CCMS::RestartSubmissions).to receive(:call)
+          subject
+        end
+      end
+
+      context 'from true to false' do
+        let(:params) do
+          {
+            setting: {
+              mock_true_layer_data: 'true',
+              allow_welsh_translation: 'true',
+              enable_employed_journey: 'true',
+              enable_ccms_submission: 'false'
+            }
+          }
+        end
+        it 'does not send an active_support notification' do
+          expect(CCMS::RestartSubmissions).not_to receive(:call)
+          subject
+        end
+      end
     end
 
     context 'Setting already exist' do
