@@ -41,7 +41,6 @@ class ApplicationProceedingType < ApplicationRecord
     self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
   end
 
-  after_create :create_proceeding
   after_update :update_proceeding
 
   # TODO: remove after LFA migration complete
@@ -99,10 +98,6 @@ class ApplicationProceedingType < ApplicationRecord
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
     rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
-  end
-
-  def create_proceeding
-    ProceedingSyncService.new(self).create!
   end
 
   def update_proceeding

@@ -8,10 +8,6 @@ class ProceedingSyncService
                                            .where(delegated_functions_default: true).first.scope_limitation
   end
 
-  def create!
-    Proceeding.create(payload.merge(scope_limitations))
-  end
-
   def update!
     proceeding_to_update.update!(payload.merge(scope_limitations))
   end

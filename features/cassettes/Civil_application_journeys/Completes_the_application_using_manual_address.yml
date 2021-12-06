@@ -55,7 +55,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.5.1
+      - Faraday v1.8.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -66,7 +66,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 29 Jul 2021 14:16:41 GMT
+      - Tue, 30 Nov 2021 13:59:27 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -106,11 +106,11 @@ http_interactions:
             "dataset" : "DPA",
             "lr" : "EN",
             "maxresults" : 100,
-            "epoch" : "85",
+            "epoch" : "88",
             "output_srs" : "EPSG:27700"
           }
         }
-  recorded_at: Thu, 29 Jul 2021 14:16:41 GMT
+  recorded_at: Tue, 30 Nov 2021 13:59:27 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -132,7 +132,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 13 Oct 2021 11:37:29 GMT
+      - Tue, 30 Nov 2021 13:59:27 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -154,20 +154,20 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"94f2a99c750ef7be48fa646747bc9717"
+      - W/"9af4379273434cda5cca5b49200a2797"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - eb8bde9c7329137e3895c19b18319208
+      - 1131df8088cf3d015d919912fc4fa825
       X-Runtime:
-      - '0.033483'
+      - '0.018278'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDA0IiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBzcGVjaWZpYyBpc3N1ZSBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
-  recorded_at: Wed, 13 Oct 2021 11:37:29 GMT
+        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
+  recorded_at: Tue, 30 Nov 2021 13:59:27 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -189,7 +189,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 13 Oct 2021 11:37:30 GMT
+      - Tue, 30 Nov 2021 13:59:28 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -211,18 +211,256 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"94f2a99c750ef7be48fa646747bc9717"
+      - W/"9af4379273434cda5cca5b49200a2797"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 45883cbb3d05180caa2b5d3c4d6f0be0
+      - 04aeba6eb659684bad3600c1d01d1ba2
       X-Runtime:
-      - '0.010232'
+      - '0.011743'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDA0IiwibWVhbmluZyI6IlNwZWNpZmljIElzc3VlIE9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBzcGVjaWZpYyBpc3N1ZSBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
-  recorded_at: Wed, 13 Oct 2021 11:37:30 GMT
+        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
+  recorded_at: Tue, 30 Nov 2021 13:59:28 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 30 Nov 2021 13:59:29 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"71e5a296f651ff6010b92ec57d9fdc81"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - aebf0279e96297e494b58f90c936c3b7
+      X-Runtime:
+      - '0.023964'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
+        be represented on an application for a non-molestation order.","ccms_category_law":"Family","ccms_matter":"Domestic
+        abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date."}}}'
+  recorded_at: Tue, 30 Nov 2021 13:59:29 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 30 Nov 2021 13:59:29 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"9af4379273434cda5cca5b49200a2797"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 00aaad5a22c87da9637a391fc605bfa8
+      X-Runtime:
+      - '0.042711'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
+  recorded_at: Tue, 30 Nov 2021 13:59:29 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 30 Nov 2021 13:59:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"9af4379273434cda5cca5b49200a2797"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1959394d526f47f2886765f872706f75
+      X-Runtime:
+      - '0.011569'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
+  recorded_at: Tue, 30 Nov 2021 13:59:30 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/SE014
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 30 Nov 2021 13:59:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"b88e80b4f6388ea78d3cbb0cc1664c90"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d2ed0dd61c20e71026a72e4fdbc736b6
+      X-Runtime:
+      - '0.022962'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJzdWNjZXNzIjp0cnVlLCJjY21zX2NvZGUiOiJTRTAxNCIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKHJlc2lkZW5jZSkiLCJjY21zX2NhdGVnb3J5X2xhd19jb2RlIjoiTUFUIiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwibmFtZSI6ImNoaWxkX2FycmFuZ2VtZW50c19vcmRlcl9yZXNpZGVuY2UiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIGNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciDigJN3aGVyZSB0aGUgY2hpbGQocmVuKSB3aWxsIGxpdmUiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgiLCJjb3N0X2xpbWl0YXRpb25zIjp7InN1YnN0YW50aXZlIjp7InN0YXJ0X2RhdGUiOiIxOTcwLTAxLTAxIiwidmFsdWUiOiIyNTAwMC4wIn0sImRlbGVnYXRlZF9mdW5jdGlvbnMiOnsic3RhcnRfZGF0ZSI6IjIwMjEtMDktMTMiLCJ2YWx1ZSI6IjIyNTAuMCJ9fSwiZGVmYXVsdF9zY29wZV9saW1pdGF0aW9ucyI6eyJzdWJzdGFudGl2ZSI6eyJjb2RlIjoiRk0wNTkiLCJtZWFuaW5nIjoiRkhIIENoaWxkcmVuIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIEZhbWlseSBIZWxwIChIaWdoZXIpIGFuZCB0byBhbGwgc3RlcHMgbmVjZXNzYXJ5IHRvIG5lZ290aWF0ZSBhbmQgY29uY2x1ZGUgYSBzZXR0bGVtZW50LiBUbyBpbmNsdWRlIHRoZSBpc3N1ZSBvZiBwcm9jZWVkaW5ncyBhbmQgcmVwcmVzZW50YXRpb24gaW4gdGhvc2UgcHJvY2VlZGluZ3Mgc2F2ZSBpbiByZWxhdGlvbiB0byBvciBhdCBhIGNvbnRlc3RlZCBmaW5hbCBoZWFyaW5nLiJ9LCJkZWxlZ2F0ZWRfZnVuY3Rpb25zIjp7ImNvZGUiOiJDVjExNyIsIm1lYW5pbmciOiJJbnRlcmltIG9yZGVyIGluYy4gcmV0dXJuIGRhdGUiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gYWxsIHN0ZXBzIG5lY2Vzc2FyeSB0byBhcHBseSBmb3IgYW4gaW50ZXJpbSBvcmRlcjsgd2hlcmUgYXBwbGljYXRpb24gaXMgbWFkZSB3aXRob3V0IG5vdGljZSB0byBpbmNsdWRlIHJlcHJlc2VudGF0aW9uIG9uIHRoZSByZXR1cm4gZGF0ZS4ifX19
+  recorded_at: Tue, 30 Nov 2021 13:59:30 GMT
 recorded_with: VCR 6.0.0

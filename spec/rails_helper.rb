@@ -73,12 +73,10 @@ RSpec.configure do |config|
     Faker::Config.locale = 'en-GB'
     DatabaseCleaner.clean_with :truncation
 
-    ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
     ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
   end
 
   config.after(:suite) do
-    ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
     ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
   end
 
@@ -155,13 +153,9 @@ def apt_from_proceeding(proceeding:, chances_of_success: false)
 end
 
 def enable_apt_callbacks
-  ApplicationProceedingType.set_callback(:create, :after, :create_proceeding)
   ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
-  ApplicationProceedingType.set_callback(:destroy, :before, :destroy_proceeding)
 end
 
 def disable_apt_callbacks
-  ApplicationProceedingType.skip_callback(:create, :after, :create_proceeding, raise: false)
   ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
-  ApplicationProceedingType.skip_callback(:destroy, :before, :destroy_proceeding, raise: false)
 end

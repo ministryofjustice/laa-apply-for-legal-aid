@@ -106,7 +106,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
     end
 
     context 'with proceeding types' do
-      let!(:proceeding_type) { create :proceeding_type, legal_aid_applications: [legal_aid_application] }
+      let!(:proceeding_type) { create :proceeding_type, :with_real_data, legal_aid_applications: [legal_aid_application] }
       let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
       let(:params) do
         {
@@ -115,8 +115,10 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
         }
       end
       let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
+      let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: true) }
 
       before { allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service) }
+      before { allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service) }
 
       it 'redirects to next step' do
         subject
@@ -128,12 +130,20 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
         subject
       end
 
+      it 'calls the add proceeding service' do
+        expect(add_proceeding_service).to receive(:call).with(ccms_code: proceeding_type.ccms_code)
+        subject
+      end
+
       context 'LegalFramework::ProceedingTypesService call returns false' do
         let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
+        let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: false) }
 
         before do
           allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
           allow(LegalFramework::LeadApplicationProceedingTypeAssignmentService).to receive(:call).with(legal_aid_application)
+          allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service)
+          allow(LegalFramework::LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
         end
 
         it 'renders index' do
