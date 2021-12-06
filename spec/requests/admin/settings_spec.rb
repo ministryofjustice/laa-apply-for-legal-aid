@@ -70,15 +70,15 @@ RSpec.describe Admin::SettingsController, type: :request do
       before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
 
       context 'from false to true' do
-        let(:params) do
-          {
-            setting: {
-              enable_ccms_submission: 'true'
-            }
-          }
-        end
+        # let(:params) do
+        #   {
+        #     setting: {
+        #       enable_ccms_submission: 'true'
+        #     }
+        #   }
+        # end
 
-        it 'sends an active_support notification' do
+        it 'calls CCMS::RestartSubmissions' do
           expect(CCMS::RestartSubmissions).to receive(:call)
           subject
         end
@@ -88,6 +88,9 @@ RSpec.describe Admin::SettingsController, type: :request do
         let(:params) do
           {
             setting: {
+              mock_true_layer_data: 'true',
+              allow_welsh_translation: 'true',
+              enable_employed_journey: 'true',
               enable_ccms_submission: 'false'
             }
           }
