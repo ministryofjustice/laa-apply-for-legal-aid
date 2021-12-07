@@ -10,26 +10,16 @@ namespace :db do
     puts result_success ? 'Success' : 'Error occurred'
   end
 
-  task import_to_dev: :environment do
-    command_one = 'psql -q -d apply_for_legal_aid_dev -c "drop schema public cascade"'
-    command_two = 'psql -q -d apply_for_legal_aid_dev -c "create schema public"'
-    command_three = 'psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/anonymised_db.sql'
-    `#{command_one}`
-    `#{command_two}`
-    `#{command_three}`
-  end
-
   task import_to_uat: :environment do
     raise(ArgumentError, 'Cannot construct DB connection string') if build_postgres_url.length < 25
 
-    command_one = "psql #{build_postgres_url} -c 'drop schema public cascade'"
-    command_two = "psql #{build_postgres_url} -c 'create schema public'"
-    command_three = "psql #{build_postgres_url} -f ./tmp/anonymised_db.sql"
+    drop_existing_schema = "psql #{build_postgres_url} -c 'drop schema public cascade'"
+    create_new_schema = "psql #{build_postgres_url} -c 'create schema public'"
+    restore_anonymised_database = "psql #{build_postgres_url} -f ./tmp/anonymised_db.sql"
 
-    puts 'starting the rake task'
-    `#{command_one}`
-    `#{command_two}`
-    `#{command_three}`
+    `#{drop_existing_schema}`
+    `#{create_new_schema}`
+    `#{restore_anonymised_database}`
 
     list_of_users = Provider.last(10)
     list_of_users.each do |user|
