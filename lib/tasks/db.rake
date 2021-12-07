@@ -13,7 +13,7 @@ namespace :db do
   task import_to_dev: :environment do
     command_one = 'psql -q -d apply_for_legal_aid_dev -c "drop schema public cascade"'
     command_two = 'psql -q -d apply_for_legal_aid_dev -c "create schema public"'
-    command_three = 'psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/anon3.sql'
+    command_three = 'psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/anonymised_db.sql'
     `#{command_one}`
     `#{command_two}`
     `#{command_three}`
@@ -24,12 +24,17 @@ namespace :db do
 
     command_one = "psql #{build_postgres_url} -c 'drop schema public cascade'"
     command_two = "psql #{build_postgres_url} -c 'create schema public'"
-    command_three = "psql #{build_postgres_url} -f < ./tmp/anon3.sql"
+    command_three = "psql #{build_postgres_url} -f < ./tmp/anonymised_db.sql"
 
     puts 'starting the rake task'
     `#{command_one}`
     `#{command_two}`
     `#{command_three}`
+
+    list_of_users = Providers.last(10)
+    list_of_users.each do |user|
+      puts user.email
+    end
   end
 
   private
