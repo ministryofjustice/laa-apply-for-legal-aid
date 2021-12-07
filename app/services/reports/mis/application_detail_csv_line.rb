@@ -37,6 +37,7 @@ module Reports
                :used_delegated_functions_on,
                :used_delegated_functions_reported_on,
                :lowest_prospect_of_success,
+               :hmrc_responses,
                :vehicle, to: :laa
 
       delegate :chances_of_success, to: :lead_proceeding
@@ -158,7 +159,8 @@ module Reports
           'Prospects of success details',
           'SOC uploaded?',
           'Application started',
-          'Application submitted'
+          'Application submitted',
+          'HMRC data'
         ]
       end
 
@@ -188,6 +190,7 @@ module Reports
         eligibility
         opponent_details
         merits
+        hmrc_data
         sanitise
       end
 
@@ -357,6 +360,10 @@ module Reports
         @line << statement_of_case_uploaded?
         @line << created_at.strftime('%Y-%m-%d')
         @line << merits_submitted_at.strftime('%Y-%m-%d')
+      end
+
+      def hmrc_data
+        @line << yesno(HMRC::Response.where(legal_aid_application_id: laa.id).present?)
       end
 
       def yesno(value)

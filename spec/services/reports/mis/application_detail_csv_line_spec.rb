@@ -136,6 +136,7 @@ module Reports
       let(:percentage_home) { 50 }
       let(:benefit_check_result_text) { 'Yes' }
       let(:dwp_overridden) { 'FALSE' }
+      let(:hmrc_data) { [] }
       let(:current_acct_val) { 25.44 }
       let(:savings_acct_val) { 266.10 }
       let(:cash_val) { 17 }
@@ -199,6 +200,7 @@ module Reports
               expect(value_for('Delegated functions used')).to eq 'Yes'
               expect(value_for('Delegated functions dates')).to eq '2020-01-01'
               expect(value_for('Delegated functions reported')).to eq '2020-02-21'
+              expect(value_for('HMRC data')).to eq 'No'
             end
 
             context 'DWP check result negative' do
