@@ -1,8 +1,8 @@
 #!/bin/bash
 # This script will allow you to restore to any UAT instance
 # run in console and pass in the branch name, or just the start of it:
-# ./scripts/restore_anon_db.sh [branch-name]
-# ./scripts/restore_anon_db.sh ap-2555
+# ./scripts/restore_anonymised_db.sh [branch-name]
+# ./scripts/restore_anonymised_db.sh ap-2555
 
 echo "Finding pod for branch $1 in UAT"
 POD=$(kubectl -n laa-apply-for-legalaid-uat get pods | grep -o -m4 "apply-$1-.*2/2" | head -n1 | cut -d' ' -f 1)
