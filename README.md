@@ -445,7 +445,7 @@ Backups are taken daily at 5:40am and stored for 7 days, these are automated bac
 
 A Cron Job takes hourly snapshots of the production database between 6am and 9pm. The previous days hourly backups are deleted at 7am each day, as these are superseded by the daily back up taken at 5.40am.
 
-## Anonymised database export and restore
+## Anonymised database export and local restore
 
 In order to create an anonymised dump of an environments database you can:
 
@@ -472,7 +472,20 @@ Success
 You can restore this locally by running:
  psql -q -P pager=off -d apply_for_legal_aid_dev -f ./tmp/uat.anon.sql
 ```
+## Anonymised database restore to UAT
 
+To apply the anonymised database export to a UAT branch you can run the restore script:
+
+```bash
+$ ./scripts/restore_anonymised_db.sh [branch-name]
+```
+Where branch name is either the full git branch name or just the start of it e.g `ap-2555-anon-uat-db` or `ap-2555`
+
+It requires that you have kubectl authenticated and your context set to the `live` cluster. The `db_export.sh script` will save 
+the anonymised database to your local `/tmp` folder. This script will copy the file to the `/tmp` folder on the selected UAT instance,
+drop the existing database and restore using the anonymised data.
+
+The script will also output the anonymised email addresses for 10 Providers. These can be used to login to the UAT instance.
 ## 3rd party integrations
 
 ### True Layer
