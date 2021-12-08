@@ -56,6 +56,16 @@
         legend: { text: t('.labels.enable_employed_journey') }
     ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+        :enable_evidence_upload,
+        yes_no_options,
+        :value,
+        :label,
+        inline: true,
+        hint: { text: t('.hints.enable_evidence_upload')},
+        legend: { text: t('.labels.enable_evidence_upload') }
+    ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

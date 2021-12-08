@@ -7,7 +7,8 @@ namespace :settings do
                     manually_review_all_cases: false,
                     allow_welsh_translation: false,
                     enable_ccms_submission: true,
-                    enable_employed_journey: false)
+                    enable_employed_journey: false,
+                    enable_evidence_upload: false)
 
     pp Setting.first
   end

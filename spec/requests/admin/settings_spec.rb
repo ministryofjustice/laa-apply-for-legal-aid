@@ -38,7 +38,8 @@ RSpec.describe Admin::SettingsController, type: :request do
           mock_true_layer_data: 'true',
           allow_welsh_translation: 'true',
           enable_employed_journey: 'true',
-          enable_ccms_submission: 'true'
+          enable_ccms_submission: 'true',
+          enable_evidence_upload: 'true'
         }
       }
     end
@@ -55,6 +56,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.mock_true_layer_data?).to eq(true)
       expect(setting.allow_welsh_translation?).to eq(true)
       expect(setting.enable_employed_journey?).to eq(true)
+      expect(setting.enable_evidence_upload?).to eq(true)
     end
 
     it 'create settings if they do not exist' do
@@ -70,14 +72,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
 
       context 'from false to true' do
-        # let(:params) do
-        #   {
-        #     setting: {
-        #       enable_ccms_submission: 'true'
-        #     }
-        #   }
-        # end
-
         it 'calls CCMS::RestartSubmissions' do
           expect(CCMS::RestartSubmissions).to receive(:call)
           subject
@@ -91,7 +85,8 @@ RSpec.describe Admin::SettingsController, type: :request do
               mock_true_layer_data: 'true',
               allow_welsh_translation: 'true',
               enable_employed_journey: 'true',
-              enable_ccms_submission: 'false'
+              enable_ccms_submission: 'false',
+              enable_evidence_upload: 'false'
             }
           }
         end

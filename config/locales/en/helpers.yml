@@ -52,3 +52,5 @@ en:
           <<: *true_false
         enable_employed_journey:
           <<: *true_false
+        enable_evidence_upload:
+          <<: *true_false
