@@ -152,7 +152,6 @@ function initiateModals () {
   }
 }
 
-// window.initiateModals = initiateModals
 document.addEventListener('DOMContentLoaded', (e) => {
   initiateModals()
 })
