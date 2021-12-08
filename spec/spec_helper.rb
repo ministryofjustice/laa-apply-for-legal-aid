@@ -65,7 +65,7 @@ VCR.configure do |vcr_config|
 end
 
 RSpec.configure do |config|
-  config.filter_run_excluding :i18n
+  config.filter_run_excluding :i18n unless ENV['INC_I18N'].to_s == 'true'
   config.filter_run_excluding :ccms unless ENV['INC_CCMS'].to_s == 'true'
 
   # rspec-expectations config goes here. You can use an alternate
