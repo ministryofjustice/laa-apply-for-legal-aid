@@ -85,7 +85,7 @@ Rails.application.routes.draw do
   end
 
   namespace 'v1' do
-    resources :proceeding_types, only: [:index]
+    resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
   end
 
