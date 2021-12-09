@@ -1146,4 +1146,30 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(laa.lowest_prospect_of_success).to eq 'Borderline'
     end
   end
+
+  describe 'required_document_categories' do
+    let(:laa) { create :legal_aid_application }
+    before { allow(DocumentCategory).to receive(:valid_document_categories).and_return %w[benefit_evidence gateway_evidence] }
+
+    it 'defaults to an empty array' do
+      expect(laa.required_document_categories).to eq []
+    end
+
+    it 'allows a valid document category to be added' do
+      laa.required_document_categories << 'benefit_evidence'
+      laa.save!
+      expect(laa.required_document_categories).to eq ['benefit_evidence']
+    end
+
+    it 'allows multiple valid document categories to be added' do
+      laa.required_document_categories = %w[gateway_evidence benefit_evidence]
+      laa.save!
+      expect(laa.required_document_categories).to eq %w[gateway_evidence benefit_evidence]
+    end
+
+    it 'errors when an invalid document category is added' do
+      laa.required_document_categories << 'invalid_evidence'
+      expect { laa.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
 end
