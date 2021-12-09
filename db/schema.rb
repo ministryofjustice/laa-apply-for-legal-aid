@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_112509) do
+ActiveRecord::Schema.define(version: 2021_12_09_083010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -410,6 +410,16 @@ ActiveRecord::Schema.define(version: 2021_12_02_112509) do
     t.boolean "has_assets_more_than_threshold"
     t.decimal "assets_value"
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
+  end
+
+  create_table "document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "submit_to_ccms", default: false, null: false
+    t.string "ccms_document_type"
+    t.boolean "display_on_evidence_upload", default: false, null: false
+    t.boolean "mandatory", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
