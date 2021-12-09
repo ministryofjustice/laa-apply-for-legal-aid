@@ -18,6 +18,7 @@ Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
 Seeder.monitor DefaultCostLimitation
+Seeder.monitor DocumentCategory
 
 Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
   load seed
