@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const MODAL_OPEN_MESSAGE = 'A new window has opened inside the current window'
 
 function announceModal () {
@@ -52,12 +54,13 @@ function handleKeyEvents (modal, previouslyFocusedElement, nonModalElems) {
     switch (event.keyCode) {
       case KEY_TAB:
         if (event.shiftKey) {
-          event.preventDefault()
           if (document.activeElement === firstFocusableElement) {
+            event.preventDefault()
             lastFocusableElement.focus()
           }
         } else {
           if (document.activeElement === lastFocusableElement) {
+            event.preventDefault()
             firstFocusableElement.focus()
           }
         }
@@ -72,6 +75,15 @@ function handleKeyEvents (modal, previouslyFocusedElement, nonModalElems) {
         break
     }
   })
+}
+
+async function deleteApplication (applicationId) {
+  const url = `/v1/legal_aid_applications/${applicationId}`
+  const response = await axios({
+    method: 'delete',
+    url: url
+  })
+  return response.status
 }
 
 function startModal (modal, previouslyFocusedElement, nonModalElems) {
@@ -89,16 +101,27 @@ function startModal (modal, previouslyFocusedElement, nonModalElems) {
       updateTabIndex(modal, nonModalElems)
       previouslyFocusedElement.focus()
     })
+    btn.addEventListener('keydown', (event) => {
+      const KEY_ENTER = 13
+      if (event.keyCode === KEY_ENTER) {
+        event.preventDefault()
+        closeModal(modal)
+        updateTabIndex(modal, nonModalElems)
+        previouslyFocusedElement.focus()
+      }
+    })
   })
 
   // close modal and refresh page when an application is deleted
   const confirmDeleteBtn = modal.querySelector('.confirm-delete-btn')
   confirmDeleteBtn.addEventListener('click', (event) => {
-    setTimeout(() => {
+    const applicationRef = modal.id.replace('-modal', '')
+    const applicationId = document.getElementById(`${applicationRef}-id`).textContent.trim()
+    deleteApplication(applicationId).then(() => {
       closeModal(modal)
       window.location.reload()
       previouslyFocusedElement.focus()
-    }, 250)
+    })
   })
 
   // When the user clicks anywhere outside of the modal, close it
@@ -111,7 +134,7 @@ function startModal (modal, previouslyFocusedElement, nonModalElems) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', event => {
+function initiateModals () {
   const deleteButtons = document.querySelectorAll('[data-toggle="modal"]')
   const nonModalElements = document.querySelectorAll('body *:not(.modal-dialog):not([tabindex="-1"])') // all tabbable non-modal elements
 
@@ -127,4 +150,8 @@ document.addEventListener('DOMContentLoaded', event => {
       })
     })
   }
+}
+
+document.addEventListener('DOMContentLoaded', (e) => {
+  initiateModals()
 })

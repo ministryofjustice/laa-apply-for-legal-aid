@@ -16,9 +16,7 @@
       <tbody class="govuk-table__body">
         <% legal_aid_applications.each do |application| %>
           <% ref = application.application_ref %>
-          <%= form_with(model: application, url: providers_legal_aid_application_delete_path(application), method: :delete) do |form| %>
-            <%= render 'shared/partials/modal_dialogue', form: form, application: application %>
-          <% end %>
+          <%= render 'shared/partials/modal_dialogue', application: application %>
           <tr class="govuk-table__row">
               <% link_text = application.applicant_full_name || t('generic.undefined') %>
               <%= sort_column_cell(
