@@ -1,6 +1,41 @@
 Feature: Provider accessibility
 
   @javascript @vcr
+  Scenario: I start a new application and declare I am self-employed
+    Given I am logged in as a provider
+    And I enable callbacks on ApplicationProceedingType
+    Then I visit the application service
+    And the page is accessible
+    Then I click link "Start"
+    And the page is accessible
+    Then I click link "Make a new application"
+    And the page is accessible
+    Then I should be on the 'providers/declaration' page showing 'Declaration'
+    And the page is accessible
+    When I click 'Agree and continue'
+    Then I should be on the Applicant page
+    And the page is accessible
+    Then I enter name 'Test', 'User'
+    Then I enter the date of birth '03-04-1999'
+    Then I enter national insurance number 'CB987654A'
+    Then I click 'Save and continue'
+    Then I am on the postcode entry page
+    And the page is accessible
+    Then I enter a postcode 'SW1H 9EA'
+    Then I click find address
+    Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
+    Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select 'None of the above'
+    And I click 'Save and continue'
+    And I should be on a page showing 'Search for legal proceedings'
+    Then I click link 'Back'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select 'Self-employed'
+    And I click 'Save and continue'
+    And I should be on a page showing 'You need to complete this application in CCMS'
+
+  @javascript @vcr
   Scenario: I start a new non-passported application and enter client details
     Given I am logged in as a provider
     And I enable callbacks on ApplicationProceedingType
@@ -25,6 +60,9 @@ Feature: Provider accessibility
     Then I click find address
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select 'None of the above'
+    And I click 'Save and continue'
     Then I should be on the 'proceedings_types' page showing 'Search for legal proceedings'
     And the page is accessible
     Then I search for proceeding 'Non-molestation order'
@@ -55,10 +93,6 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    And the page is accessible
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check if you can continue using this service'
     And the page is accessible

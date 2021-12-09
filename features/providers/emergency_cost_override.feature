@@ -12,6 +12,10 @@ Feature: Emergency cost override
     And I click find address
     And I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     When I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
+    And I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
     When I choose a proceeding type 'Non-molestation order' radio button

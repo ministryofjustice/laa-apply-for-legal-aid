@@ -230,6 +230,18 @@ class LegalAidApplication < ApplicationRecord
     applicant&.employed?
   end
 
+  def applicant_self_employed?
+    applicant&.self_employed?
+  end
+
+  def applicant_armed_forces?
+    applicant&.armed_forces?
+  end
+
+  def applicant_not_employed?
+    !applicant_employed? && !applicant_self_employed? && !applicant_armed_forces?
+  end
+
   def pre_dwp_check?
     BaseStateMachine::PRE_DWP_STATES.include? state.to_sym
   end

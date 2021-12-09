@@ -7,9 +7,6 @@ Feature: Pathways from check your answers
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
 
   @javascript @vcr
@@ -29,9 +26,6 @@ Feature: Pathways from check your answers
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
@@ -50,9 +44,6 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check if you can continue using this service'
     Then I choose 'Yes, I agree'

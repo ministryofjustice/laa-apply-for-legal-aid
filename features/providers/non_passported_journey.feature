@@ -284,10 +284,7 @@ Feature: Non-passported applicant journeys
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Is your client employed?'
-    Then I choose 'No'
-    Then I click 'Save and continue'
+    And I click 'Save and continue'
     Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
     Then I choose 'Yes'
     And I click 'Save and continue'
@@ -358,14 +355,6 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "We're not currently accepting applications for employed clients."
-    Then I click link 'Back'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose "No"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose "Yes, I agree"
     Then I click 'Save and continue'
@@ -373,22 +362,3 @@ Feature: Non-passported applicant journeys
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "You told us you've used delegated functions"
-
-  @javascript
-  Scenario: Fill in the Applicant employment information after negative benefit check result and hasn't used delegated functions
-    Given I start the application with a negative benefit check result and no used delegated functions
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "We're not currently accepting applications for employed clients."
-    Then I click link 'Back'
-    Then I should be on a page showing "Is your client employed?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Check if you can continue using this service"
-    Then I choose "Yes, I agree"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "What your client has to do"

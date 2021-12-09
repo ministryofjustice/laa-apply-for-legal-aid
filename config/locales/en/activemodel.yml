@@ -87,6 +87,27 @@ en:
             postcode:
               blank: Enter a postcode
               invalid: Enter a postcode in the right format
+        applicant:
+          attributes:
+            date_of_birth:
+              blank: Enter a valid date of birth
+              date_is_in_the_future: Date of birth must be in the past
+              date_not_valid: Enter a valid date of birth
+              earliest_allowed_date: Enter a valid date of birth
+            email:
+              blank: Enter an email address
+              invalid: Enter an email address in the correct format, such as name@example.com
+            first_name:
+              blank: Enter first name
+            last_name:
+              blank: Enter last name
+            national_insurance_number:
+              blank: Enter a National Insurance number
+              not_valid: Enter a valid National Insurance number
+            employed:
+              blank: Select yes if your client is employed
+            base:
+              none_selected: Select one or more employment types or None of the above if not employed
         application_proceeding_types:
           attributes:
             used_delegated_functions_on:
@@ -108,25 +129,7 @@ en:
               cash_outgoings:
                 blank: Select if you make these payments in cash
                 others_present: Select payments in cash or None of the above
-        applicant:
-          attributes:
-            date_of_birth:
-              blank: Enter a valid date of birth
-              date_is_in_the_future: Date of birth must be in the past
-              date_not_valid: Enter a valid date of birth
-              earliest_allowed_date: Enter a valid date of birth
-            email:
-              blank: Enter an email address
-              invalid: Enter an email address in the correct format, such as name@example.com
-            first_name:
-              blank: Enter first name
-            last_name:
-              blank: Enter last name
-            national_insurance_number:
-              blank: Enter a National Insurance number
-              not_valid: Enter a valid National Insurance number
-            employed:
-              blank: Select yes if your client is employed
+
         applicants/address_form:
           attributes:
             address_line_one:

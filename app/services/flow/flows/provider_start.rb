@@ -28,13 +28,19 @@ module Flow
         },
         address_selections: {
           path: ->(application) { urls.providers_legal_aid_application_address_selection_path(application) },
-          forward: :proceedings_types,
+          forward: :applicant_employed,
           check_answers: :check_provider_answers
         },
         addresses: {
           path: ->(application) { urls.providers_legal_aid_application_address_path(application) },
-          forward: :proceedings_types,
+          forward: :applicant_employed,
           check_answers: :check_provider_answers
+        },
+        applicant_employed: {
+          path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
+          forward: ->(application) do
+            application.applicant_not_employed? ? :proceedings_types : :use_ccms_employed
+          end
         },
         proceedings_types: {
           path: ->(application) { urls.providers_legal_aid_application_proceedings_types_path(application) },
@@ -86,7 +92,7 @@ module Flow
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
               application.change_state_machine_type('NonPassportedStateMachine')
-              dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :applicant_employed
+              dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :open_banking_consents
             end
           end
         },
@@ -100,12 +106,6 @@ module Flow
         },
         delegated_confirmation: {
           path: ->(application) { urls.providers_legal_aid_application_delegated_confirmation_index_path(application) }
-        },
-        applicant_employed: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
-          forward: ->(application) do
-            application.applicant_employed? ? :use_ccms_employed : :open_banking_consents
-          end
         },
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },

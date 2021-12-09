@@ -81,6 +81,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
     event :use_ccms do
       transitions from: %i[
         initiated
+        entering_applicant_details
         applicant_details_checked
         delegated_functions_used
         provider_confirming_applicant_eligibility

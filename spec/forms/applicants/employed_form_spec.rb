@@ -14,7 +14,7 @@ RSpec.describe Applicants::EmployedForm, type: :form do
 
     it 'errors if employed not specified' do
       expect(subject.save).to be false
-      expect(subject.errors[:employed]).to eq [I18n.t('activemodel.errors.models.applicant.attributes.employed.blank')]
+      expect(subject.errors[:employed]).to eq [I18n.t('activemodel.errors.models.applicant.attributes.base.none_selected')]
     end
   end
 

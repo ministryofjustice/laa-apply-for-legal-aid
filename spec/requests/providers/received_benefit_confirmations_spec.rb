@@ -86,7 +86,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
 
       it 'continue to the applicant details page' do
         subject
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path(application))
+        expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application))
       end
 
       it 'transitions the application state to applicant details checked' do
