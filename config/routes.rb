@@ -220,6 +220,7 @@ Rails.application.routes.draw do
       resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
+      resource :employment_income, only: %i[show update]
     end
 
     resources :merits_task_list, only: [] do
