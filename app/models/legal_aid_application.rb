@@ -60,6 +60,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   validates :provider, presence: true
+  validate :validate_document_categories
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
   delegate :full_name, to: :applicant, prefix: true, allow_nil: true
@@ -524,5 +525,11 @@ class LegalAidApplication < ApplicationRecord
 
   def set_open_banking_consent_choice_at
     self.open_banking_consent_choice_at = Time.current if will_save_change_to_open_banking_consent?
+  end
+
+  def validate_document_categories
+    required_document_categories.each do |category|
+      errors.add(:required_document_categories, 'must be valid document categories') unless DocumentCategory.valid_document_categories.include?(category)
+    end
   end
 end
