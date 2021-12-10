@@ -317,6 +317,10 @@ en:
               greater_than_or_equal_to: The new cost limit cannot be less than 0
             emergency_cost_reasons:
               blank: Tell us why you need a higher cost limit
+            employment_information_details:
+              blank: Enter the details you need to tell us about (check wording with Jim)
+            extra_employment_information:
+              blank: Just answer the question (check wording with Jim)
             own_home:
               citizens:
                 blank: Select yes if you own the home you live in
