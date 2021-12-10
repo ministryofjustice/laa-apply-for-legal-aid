@@ -83,7 +83,7 @@ RSpec.describe 'employed incomes request', type: :request do
             let(:extra_employment_information) { '' }
 
             it 'displays error' do
-              expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank'))
+              expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank'))
             end
           end
         end
