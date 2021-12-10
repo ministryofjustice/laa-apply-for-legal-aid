@@ -194,6 +194,10 @@ en:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
+      employed_income:
+        employment: Employment income
+        employment_question: Do you need to tell us anything else about your client's employment?
+        employment_details: Details
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed

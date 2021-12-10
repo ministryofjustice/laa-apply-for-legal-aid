@@ -2,6 +2,10 @@
 
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
 
+  <% if @legal_aid_application.employment_information_details? %>
+    <%= render 'shared/check_answers/employed_income' %>
+  <% end %>
+
   <%= render(
          'shared/check_answers/income_summary',
          income_type: t('.credits-section-heading'),
