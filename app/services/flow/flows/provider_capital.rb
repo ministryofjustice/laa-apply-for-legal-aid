@@ -79,7 +79,7 @@ module Flow
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
           forward: ->(application) do
-            if Setting.enable_employed_journey?
+            if Setting.enable_employed_journey? && application.provider.employment_permissions?
               :employment_incomes
             else
               application.income_types? ? :income_summary : :no_income_summaries
