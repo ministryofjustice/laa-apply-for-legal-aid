@@ -1,10 +1,7 @@
 module Reports
   class MeansReportCreator < BaseReportCreator
     def call
-      if legal_aid_application.means_report
-        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id}"
-        return
-      end
+      return if valid_means_report_exists
 
       attachment = legal_aid_application.attachments.create!(attachment_type: 'means_report',
                                                              attachment_name: 'means_report.pdf')
@@ -19,6 +16,23 @@ module Reports
     end
 
     private
+
+    def valid_means_report_exists
+      if means_report_document_exists
+        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id} and is downloadable"
+      elsif means_report_attachment_exists
+        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id}"
+      end
+      means_report_attachment_exists && means_report_document_exists
+    end
+
+    def means_report_attachment_exists
+      @means_report_attachment_exists ||= legal_aid_application&.means_report
+    end
+
+    def means_report_document_exists
+      @means_report_document_exists ||= legal_aid_application&.means_report&.document&.present?
+    end
 
     def html_report
       ensure_case_ccms_reference_exists

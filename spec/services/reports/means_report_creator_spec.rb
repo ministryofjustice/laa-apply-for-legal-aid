@@ -77,9 +77,28 @@ RSpec.describe Reports::MeansReportCreator do
         expect(legal_aid_application.means_report.document.filename).to eq('means_report.pdf')
       end
 
-      it 'does not attach a report if one already exists' do
-        create :attachment, :means_report, legal_aid_application: legal_aid_application
-        expect { subject }.not_to change { Attachment.count }
+      context 'when an attachment record exists' do
+        let!(:attachment) { create :attachment, :means_report, legal_aid_application: legal_aid_application }
+        let(:expected_log) { "ReportsCreator: Means report already exists for #{legal_aid_application.id} and is downloadable" }
+        before { allow(Rails.logger).to receive(:info) }
+
+        it 'does not attach a report if one already exists' do
+          expect { subject }.not_to change { Attachment.count }
+          expect(Rails.logger).to have_received(:info).with(expected_log).once
+        end
+
+        context 'when the attachment has no document' do
+          let(:expected_log) { "ReportsCreator: Means report already exists for #{legal_aid_application.id}" }
+          before do
+            allow(legal_aid_application).to receive(:means_report).and_return(attachment)
+            allow(attachment).to receive(:document).and_return(nil)
+          end
+
+          it 'creates a new report if the existing one is not downloadable' do
+            expect { subject }.to change { Attachment.count }.by(1)
+            expect(Rails.logger).to have_received(:info).with(expected_log)
+          end
+        end
       end
 
       context 'ccms case ref does not exist' do
