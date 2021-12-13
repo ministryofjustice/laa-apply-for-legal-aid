@@ -1203,7 +1203,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context 'with bank accounts' do
       let(:balance1) { BigDecimal(rand(1...1_000_000.0), 2) }
       let(:balance2) { BigDecimal(rand(1...1_000_000.0), 2) }
-      let(:bank_provider) { create :bank_provider, applicant: laa.applicant}
+      let(:bank_provider) { create :bank_provider, applicant: laa.applicant }
 
       before do
         create :bank_account, bank_provider: bank_provider, account_type: account_type, balance: balance1
