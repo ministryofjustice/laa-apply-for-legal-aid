@@ -3,6 +3,7 @@ module Reports
     def call
       return if valid_merits_report_exists
 
+      delete_attachment if merits_report_attachment_exists
       attachment = legal_aid_application.attachments.create!(attachment_type: 'merits_report',
                                                              attachment_name: 'merits_report.pdf')
 
@@ -16,6 +17,11 @@ module Reports
     end
 
     private
+
+    def delete_attachment
+      legal_aid_application.merits_report.destroy!
+      legal_aid_application.reload
+    end
 
     def valid_merits_report_exists
       if merits_report_document_exists

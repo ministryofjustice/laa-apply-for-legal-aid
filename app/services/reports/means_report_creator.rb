@@ -3,6 +3,7 @@ module Reports
     def call
       return if valid_means_report_exists
 
+      delete_attachment if means_report_attachment_exists
       attachment = legal_aid_application.attachments.create!(attachment_type: 'means_report',
                                                              attachment_name: 'means_report.pdf')
 
@@ -16,6 +17,11 @@ module Reports
     end
 
     private
+
+    def delete_attachment
+      legal_aid_application.means_report.destroy!
+      legal_aid_application.reload
+    end
 
     def valid_means_report_exists
       if means_report_document_exists

@@ -95,7 +95,10 @@ RSpec.describe Reports::MeansReportCreator do
           end
 
           it 'creates a new report if the existing one is not downloadable' do
-            expect { subject }.to change { Attachment.count }.by(1)
+            # the count won';'t change as we delete one and create one
+            expect { subject }.not_to change { Attachment.count }
+            # check the original one has been deleted
+            expect { attachment.reload }.to raise_error(ActiveRecord::RecordNotFound)
             expect(Rails.logger).to have_received(:info).with(expected_log)
           end
         end
