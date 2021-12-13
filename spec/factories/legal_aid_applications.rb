@@ -258,8 +258,8 @@ FactoryBot.define do
           end
         else
           evaluator.explicit_proceedings.each do |trait|
-            # TODO: Remove the following line once the :with_application_proceeding_types trait has been removed.  During the transition period,
-            # These traits are often called together, and the :with_application_proceeding_types trait will have created the relevant Proceeding.
+            # TODO: Remove the following line once the :with_proceeding_types trait has been removed.  During the transition period,
+            # These traits are often called together, and the :with_proceeding_types trait will have created the relevant Proceeding.
             #
             next if Proceeding.exists?(ccms_code: trait.to_s.upcase)
 
