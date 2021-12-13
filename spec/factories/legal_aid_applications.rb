@@ -390,6 +390,13 @@ FactoryBot.define do
       end
     end
 
+    trait :with_multiple_proceedings_inc_section8 do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :da001)
+        application.proceedings << create(:proceeding, :se014)
+      end
+    end
+
     # this is a trait of an invalid state and should only be used to test invalid state transitions
     trait :with_only_section8_proceeding_type do
       after(:create) do |application|

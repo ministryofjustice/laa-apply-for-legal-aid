@@ -1172,4 +1172,23 @@ RSpec.describe LegalAidApplication, type: :model do
       expect { laa.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
+
+  describe '#section_8_proceedings?' do
+    context 'with section 8 proceedings' do
+      let(:laa) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+
+      it 'returns true' do
+        expect(laa.section_8_proceedings?).to eq true
+      end
+    end
+
+    context 'without section 8 proceedings' do
+      let(:laa) { create :legal_aid_application }
+      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: laa }
+
+      it 'returns false' do
+        expect(laa.section_8_proceedings?).to eq false
+      end
+    end
+  end
 end
