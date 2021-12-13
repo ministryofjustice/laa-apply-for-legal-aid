@@ -1,9 +1,9 @@
 module Reports
   class MeansReportCreator < BaseReportCreator
     def call
-      return if valid_means_report_exists
+      return if valid_report_exists
 
-      delete_attachment if means_report_attachment_exists
+      delete_attachment if report_attachment_exists
       attachment = legal_aid_application.attachments.create!(attachment_type: 'means_report',
                                                              attachment_name: 'means_report.pdf')
 
@@ -18,26 +18,8 @@ module Reports
 
     private
 
-    def delete_attachment
-      legal_aid_application.means_report.destroy!
-      legal_aid_application.reload
-    end
-
-    def valid_means_report_exists
-      if means_report_document_exists
-        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id} and is downloadable"
-      elsif means_report_attachment_exists
-        Rails.logger.info "ReportsCreator: Means report already exists for #{legal_aid_application.id}"
-      end
-      means_report_attachment_exists && means_report_document_exists
-    end
-
-    def means_report_attachment_exists
-      @means_report_attachment_exists ||= legal_aid_application&.means_report
-    end
-
-    def means_report_document_exists
-      @means_report_document_exists ||= legal_aid_application&.means_report&.document&.present?
+    def report_type
+      'means_report'
     end
 
     def html_report

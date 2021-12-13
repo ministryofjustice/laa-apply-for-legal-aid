@@ -1,9 +1,9 @@
 module Reports
   class MeritsReportCreator < BaseReportCreator
     def call
-      return if valid_merits_report_exists
+      return if valid_report_exists
 
-      delete_attachment if merits_report_attachment_exists
+      delete_attachment if report_attachment_exists
       attachment = legal_aid_application.attachments.create!(attachment_type: 'merits_report',
                                                              attachment_name: 'merits_report.pdf')
 
@@ -18,26 +18,8 @@ module Reports
 
     private
 
-    def delete_attachment
-      legal_aid_application.merits_report.destroy!
-      legal_aid_application.reload
-    end
-
-    def valid_merits_report_exists
-      if merits_report_document_exists
-        Rails.logger.info "ReportsCreator: Merits report already exists for #{legal_aid_application.id} and is downloadable"
-      elsif merits_report_attachment_exists
-        Rails.logger.info "ReportsCreator: Merits report already exists for #{legal_aid_application.id}"
-      end
-      merits_report_attachment_exists && merits_report_document_exists
-    end
-
-    def merits_report_attachment_exists
-      @merits_report_attachment_exists ||= legal_aid_application&.merits_report
-    end
-
-    def merits_report_document_exists
-      @merits_report_document_exists ||= legal_aid_application&.merits_report&.document&.present?
+    def report_type
+      'merits_report'
     end
 
     def html_report
