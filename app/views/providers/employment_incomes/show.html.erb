@@ -1,0 +1,71 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_employment_income_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+
+  <div class="moj-banner">
+    <div class="moj-banner__message">
+      <h2 class="govuk-heading-m"><%= t('.hmrc-information') %></h2>
+    </div>
+  </div>
+
+  <%= page_template page_title: t('.page_heading', name: @applicant.full_name), template: :basic, form: form do %>
+
+    <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
+                                          legend: { size: 'xl', tag: 'h1', text: page_title}) do %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" style="width: 20%;" scope="col"><%= t('.date') %></th>
+          <th class="govuk-table__header" style="width: 20%;" scope="col"><%= t('.income') %></th>
+          <th class="govuk-table__header" style="width: 20%;" scope="col"></th>
+          <th class="govuk-table__header" style="width: 20%;" scope="col"><%= t('.deductions') %></th>
+          <th class="govuk-table__header" style="width: 20%;" scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody class="govuk-table__body">
+        <% @summary_income.employments.each do |employment| %>
+          <% employment.payments.each do |payment| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.payment_date.to_date, format: :short_date) %></td>
+            <td class="govuk-table__cell" style="width: 10%;"><b><%= t('.gross') %></b></td>
+            <td class="govuk-table__cell" style="width: 10%;"><b></b><%= gds_number_to_currency(payment.gross_pay) %></td>
+            <td class="govuk-table__cell" style="width: 35%;"><b><%= t('.tax') %></b>
+            <br>
+            <b><%= t('.ni') %></b>
+            </td>
+            <td class="govuk-table__cell" style="width: 20%;">
+              <%= payment.tax > 0 ? "-#{gds_number_to_currency(payment.tax)}" : gds_number_to_currency(payment.tax) %>
+              <br>
+              <%= payment.national_insurance > 0 ? "-#{gds_number_to_currency(payment.national_insurance)}" : gds_number_to_currency(payment.national_insurance) %>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+      <h2 class="govuk-heading-l"><%= t('.supplementary_question') %></h2>
+      <span class="govuk-hint"><%= t('.employment_hint') %></span>
+      <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t('generic.yes') } do %>
+        <%= form.govuk_text_area :employment_information_details,
+                                 label: {text: t('.enter_details')},
+                                 hint: {text: t('.details_hint')},
+                                 rows: 5 %>
+
+      <% end %>
+      <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t('generic.no') } %>
+    <% end %>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form
+        ) %>
+  <% end %>
+<% end %>

@@ -379,6 +379,20 @@ en:
       show:
         h1-heading: Details of the latest domestic abuse incident
         details_label: What happened during the incident?
+    employment_incomes:
+      show:
+        hmrc-information: The information on this page has been provided by HMRC.
+        page_heading: Review %{name}'s employment income
+        supplementary_question: Do you need to tell us anything else about your client's employment?
+        employment_hint: For example, if they get cash in hand pay, have zero-hours contracts, or recently started or ended employment.
+        date: Date
+        income: Income
+        deductions: Deductions
+        gross: Gross
+        enter_details: Enter details
+        details_hint: You'll need to upload supporting evidence later.
+        tax: Tax
+        ni: National Insurance
     end_of_applications:
       show:
         heading: Application complete
