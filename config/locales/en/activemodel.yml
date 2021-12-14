@@ -321,6 +321,8 @@ en:
               blank: Enter details about your client’s employment
             extra_employment_information:
               blank: Select yes if you need to tell us anything else about your client's employment
+            full_employment_details:
+              blank: Enter your client's employment details
             own_home:
               citizens:
                 blank: Select yes if you own the home you live in
