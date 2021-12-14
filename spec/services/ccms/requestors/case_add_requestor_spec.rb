@@ -83,7 +83,7 @@ module CCMS
         it 'generates the expected xml' do
           expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
           travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-            test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
+            test_data_xml = ccms_data_from_file 'case_add_request.xml'
             expect(expected_xml).to eq test_data_xml
           end
         end
@@ -104,7 +104,7 @@ module CCMS
             it 'does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope' do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-                test_data_xml = ccms_data_from_file 'mp_case_add_request.xml'
+                test_data_xml = ccms_data_from_file 'case_add_request.xml'
                 expect(expected_xml).to eq test_data_xml
               end
             end
@@ -122,7 +122,7 @@ module CCMS
             it 'adds the extra scope limitation to the XML, and specifies MULTIPLE for requested scope' do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-                test_data_xml = ccms_data_from_file 'mp_df_case_add_request.xml'
+                test_data_xml = ccms_data_from_file 'df_case_add_request.xml'
                 expect(expected_xml).to eq test_data_xml
               end
             end

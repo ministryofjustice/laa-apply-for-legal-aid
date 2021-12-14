@@ -40,21 +40,24 @@
             </casebio:CategoryOfLaw>
             <casebio:OtherParties>
               <casebio:OtherParty>
-                <casebio:OtherPartyID>OPPONENT_7713451</casebio:OtherPartyID>
+                <casebio:OtherPartyID>OPPONENT_88123456</casebio:OtherPartyID>
                 <casebio:SharedInd>false</casebio:SharedInd>
                 <casebio:OtherPartyDetail>
-                  <casebio:Organization>
-                    <casebio:OrganizationName>.</casebio:OrganizationName>
-                    <casebio:OrganizationType>GOVT</casebio:OrganizationType>
+                  <casebio:Person>
+                    <casebio:Name>
+                      <common:Title/>
+                      <common:Surname>Test-Opponent</common:Surname>
+                      <common:FirstName>Joffrey</common:FirstName>
+                    </casebio:Name>
+                    <casebio:Address/>
                     <casebio:RelationToClient>NONE</casebio:RelationToClient>
                     <casebio:RelationToCase>OPP</casebio:RelationToCase>
-                    <casebio:Address/>
                     <casebio:ContactDetails/>
-                  </casebio:Organization>
+                  </casebio:Person>
                 </casebio:OtherPartyDetail>
               </casebio:OtherParty>
               <casebio:OtherParty>
-                <casebio:OtherPartyID>OPPONENT_88000001</casebio:OtherPartyID>
+                <casebio:OtherPartyID>OPPONENT_88123457</casebio:OtherPartyID>
                 <casebio:SharedInd>false</casebio:SharedInd>
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
@@ -72,7 +75,7 @@
                 </casebio:OtherPartyDetail>
               </casebio:OtherParty>
               <casebio:OtherParty>
-                <casebio:OtherPartyID>OPPONENT_88000002</casebio:OtherPartyID>
+                <casebio:OtherPartyID>OPPONENT_88123458</casebio:OtherPartyID>
                 <casebio:SharedInd>false</casebio:SharedInd>
                 <casebio:OtherPartyDetail>
                   <casebio:Person>
@@ -104,8 +107,8 @@
                   <casebio:ClientInvolvementType>A</casebio:ClientInvolvementType>
                   <casebio:ScopeLimitations>
                     <casebio:ScopeLimitation>
-                      <casebio:ScopeLimitation>AA001</casebio:ScopeLimitation>
-                      <casebio:ScopeLimitationWording>Temporibus illum modi. Enim exercitationem nemo. In ut quia.</casebio:ScopeLimitationWording>
+                      <casebio:ScopeLimitation>FM062</casebio:ScopeLimitation>
+                      <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.</casebio:ScopeLimitationWording>
                       <casebio:DelegatedFunctionsApply>false</casebio:DelegatedFunctionsApply>
                     </casebio:ScopeLimitation>
                   </casebio:ScopeLimitations>
@@ -246,7 +249,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>AA001</common:ResponseValue>
+                            <common:ResponseValue>FM062</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -262,24 +265,24 @@
                       <common:SequenceNumber>4</common:SequenceNumber>
                       <common:EntityName>OPPONENT_OTHER_PARTIES</common:EntityName>
                       <common:Instances>
-                        <common:InstanceLabel>OPPONENT_7713451</common:InstanceLabel>
+                        <common:InstanceLabel>OPPONENT_88123456</common:InstanceLabel>
                         <common:Attributes>
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>.</common:ResponseValue>
+                            <common:ResponseValue>Joffrey Test-Opponent</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>ORGANISATION</common:ResponseValue>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_ID</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>OPPONENT_7713451</common:ResponseValue>
+                            <common:ResponseValue>OPPONENT_88123456</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -291,7 +294,77 @@
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>NONE</common:ResponseValue>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                        </common:Attributes>
+                      </common:Instances>
+                      <common:Instances>
+                        <common:InstanceLabel>OPPONENT_88123457</common:InstanceLabel>
+                        <common:Attributes>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>First TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ID</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>OPPONENT_88123457</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>CHILD</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                        </common:Attributes>
+                      </common:Instances>
+                      <common:Instances>
+                        <common:InstanceLabel>OPPONENT_88123458</common:InstanceLabel>
+                        <common:Attributes>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Second TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ID</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>OPPONENT_88123458</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>CHILD</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                         </common:Attributes>
@@ -2289,7 +2362,7 @@
                           <common:Attribute>
                             <common:Attribute>REQUESTED_SCOPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>AA001</common:ResponseValue>
+                            <common:ResponseValue>FM062</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2419,7 +2492,7 @@
                       <common:SequenceNumber>4</common:SequenceNumber>
                       <common:EntityName>OPPONENT_OTHER_PARTIES</common:EntityName>
                       <common:Instances>
-                        <common:InstanceLabel>OPPONENT_7713451</common:InstanceLabel>
+                        <common:InstanceLabel>OPPONENT_88123456</common:InstanceLabel>
                         <common:Attributes>
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_CIVIL_PARTNER</common:Attribute>
@@ -2460,13 +2533,13 @@
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_NONE</common:Attribute>
                             <common:ResponseType>boolean</common:ResponseType>
-                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:ResponseValue>false</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_PERSON</common:Attribute>
                             <common:ResponseType>boolean</common:ResponseType>
-                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:ResponseValue>true</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2478,7 +2551,7 @@
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_ORG</common:Attribute>
                             <common:ResponseType>boolean</common:ResponseType>
-                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:ResponseValue>false</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2550,7 +2623,7 @@
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_ID</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>OPPONENT_7713451</common:ResponseValue>
+                            <common:ResponseValue>OPPONENT_88123456</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2574,7 +2647,7 @@
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>.</common:ResponseValue>
+                            <common:ResponseValue>Joffrey Test-Opponent</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2586,7 +2659,7 @@
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_NAME_MERITS</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>.</common:ResponseValue>
+                            <common:ResponseValue>Joffrey Test-Opponent</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
@@ -2634,19 +2707,521 @@
                           <common:Attribute>
                             <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>ORGANISATION</common:ResponseValue>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>OPP_RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>None</common:ResponseValue>
+                            <common:ResponseValue>Unknown</common:ResponseValue>
                             <common:UserDefinedInd>false</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
                             <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
                             <common:ResponseType>text</common:ResponseType>
-                            <common:ResponseValue>OPP</common:ResponseValue>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_HUSBAND_WIFE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                        </common:Attributes>
+                      </common:Instances>
+                      <common:Instances>
+                        <common:InstanceLabel>OPPONENT_88123457</common:InstanceLabel>
+                        <common:Attributes>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CIVIL_PARTNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_INTERVENOR</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TENANT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_MEDICAL_PRO</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_OPPONENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EMPLOYER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_NONE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_PERSON</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>PARTY_IS_A_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ORG</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_STEP_PARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_GAL</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EX_HUSBAND_WIFE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LEGAL_GUARDIAN</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_SOL_BARRISTER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EX_CIVIL_PARTNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LOCAL_AUTHORITY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPP_RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Child</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_PARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_OTHER_FAM_MEMBER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_BENEFICIARY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ID</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>OPPONENT_88123457</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_GRANDPARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPPONENT_DOB</common:Attribute>
+                            <common:ResponseType>date</common:ResponseType>
+                            <common:ResponseValue>20-01-2019</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LANDLORD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>First TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CUSTOMER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME_MERITS</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>First TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_INT_PARTY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>CHILD</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_PROPERTY_OWNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_SUPPLIER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EMPLOYEE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPPONENT_DOB_MERITS</common:Attribute>
+                            <common:ResponseType>date</common:ResponseType>
+                            <common:ResponseValue>20-01-2019</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_AGENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPP_RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Unknown</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_HUSBAND_WIFE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                        </common:Attributes>
+                      </common:Instances>
+                      <common:Instances>
+                        <common:InstanceLabel>OPPONENT_88123458</common:InstanceLabel>
+                        <common:Attributes>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CIVIL_PARTNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_INTERVENOR</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TENANT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_MEDICAL_PRO</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_OPPONENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EMPLOYER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_NONE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_PERSON</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>PARTY_IS_A_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ORG</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_STEP_PARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_GAL</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EX_HUSBAND_WIFE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LEGAL_GUARDIAN</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_SOL_BARRISTER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EX_CIVIL_PARTNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LOCAL_AUTHORITY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPP_RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Child</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_PARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_OTHER_FAM_MEMBER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_BENEFICIARY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_ID</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>OPPONENT_88123458</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_GRANDPARENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPPONENT_DOB</common:Attribute>
+                            <common:ResponseType>date</common:ResponseType>
+                            <common:ResponseValue>15-02-2020</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_LANDLORD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Second TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CUSTOMER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_NAME_MERITS</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Second TestChild</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_INT_PARTY</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CASE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>CHILD</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_PROPERTY_OWNER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_SUPPLIER</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_EMPLOYEE</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_CHILD</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>true</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPPONENT_DOB_MERITS</common:Attribute>
+                            <common:ResponseType>date</common:ResponseType>
+                            <common:ResponseValue>15-02-2020</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_CASE_AGENT</common:Attribute>
+                            <common:ResponseType>boolean</common:ResponseType>
+                            <common:ResponseValue>false</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OTHER_PARTY_TYPE</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>PERSON</common:ResponseValue>
+                            <common:UserDefinedInd>true</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>OPP_RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>Unknown</common:ResponseValue>
+                            <common:UserDefinedInd>false</common:UserDefinedInd>
+                          </common:Attribute>
+                          <common:Attribute>
+                            <common:Attribute>RELATIONSHIP_TO_CLIENT</common:Attribute>
+                            <common:ResponseType>text</common:ResponseType>
+                            <common:ResponseValue>UNKNOWN</common:ResponseValue>
                             <common:UserDefinedInd>true</common:UserDefinedInd>
                           </common:Attribute>
                           <common:Attribute>
