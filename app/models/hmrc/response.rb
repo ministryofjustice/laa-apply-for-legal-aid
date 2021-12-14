@@ -9,5 +9,17 @@ module HMRC
     def self.use_case_one_for(laa_id)
       where(legal_aid_application_id: laa_id, use_case: 'one').order(:created_at).last
     end
+
+    def employment_income?
+      return false if response.nil?
+
+      data_array = response&.dig('data')
+      paye_hash = data_array&.detect { |hash| hash.key?('income/paye/paye') }
+      income_array = paye_hash&.dig('income/paye/paye', 'income')
+
+      return false if income_array.nil?
+
+      !income_array.empty?
+    end
   end
 end
