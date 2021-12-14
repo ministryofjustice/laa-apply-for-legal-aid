@@ -8,7 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  schedule: '15 2 * * *'
+  schedule: '15 * * * *'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
@@ -28,8 +28,8 @@ spec:
             resources:
               limits:
                 cpu: 200m
-                memory: 1024Mi
+                memory: 2048Mi
               requests:
                 cpu: 100m
-                memory: 512Mi
+                memory: 1024Mi
           restartPolicy: Never

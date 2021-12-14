@@ -12,7 +12,10 @@ class DigestExporter
   end
 
   def call
-    ApplicationDigest.all.each_with_index { |digest, index| write_to_sheet(digest.to_google_sheet_row, index) }
+    ApplicationDigest.order(:created_at).pluck(:id).each_with_index do |digest_id, index|
+      digest = ApplicationDigest.find(digest_id)
+      write_to_sheet(digest.to_google_sheet_row, index)
+    end
     @worksheet.save
   end
 
@@ -31,11 +34,17 @@ class DigestExporter
 
   def write_header_row
     # Overwrite the 1 remaining row with column headers
-    @worksheet.update_cells(1, 1, [ApplicationDigest.column_headers])
+    @worksheet.update_cells(1, 1, [ApplicationDigest.column_headers + extraction_date])
     @worksheet.save
 
     # It turns out that you have to re-initialise the worksheet, otherwise the deleted rows haven't really gone.
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
+  end
+
+  def extraction_date
+    [
+      "Extracted at: #{Time.now}"
+    ]
   end
 
   def spreadsheet_key
