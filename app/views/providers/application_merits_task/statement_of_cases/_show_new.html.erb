@@ -10,17 +10,21 @@
       page_title: t('.h1-heading'),
       head_title: new_head_title,
       template: :basic,
-      back_link: Setting.allow_multiple_proceedings? ? {} : { path: providers_legal_aid_application_opponent_path(@legal_aid_application) }
+      back_link: {}
     ) do %>
 
   <%= form_with(
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,
           method: :patch,
-          local: true
+          local: true,
+          html: { id: 'dropzone-form' }
       ) do |form| %>
 
-    <%= form.govuk_error_summary %>
+    <%#= form.govuk_error_summary %>
+
+    <%#= render partial: 'shared/forms/error_summary_hidden', locals: { error_message: t('.file_not_uploaded_error'),
+                                                                field_id: 'application-merits-task-statement-of-case-original-file-field' } %>
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
@@ -39,22 +43,51 @@
         </strong>
       </div>
 
-      <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
-                                hint: {text: t('.size_hint')} %>
-      <%= form.submit(
-              t('generic.upload'),
-              id: 'upload',
-              name: 'upload_button',
-              class: 'govuk-button  govuk-button--secondary form-button'
-          ) %>
+      <div class="moj-multi-file-upload">
+            <div class="moj-multi-file__uploaded-files ">
+              <h2 class="govuk-heading-m">Files added</h2>
+              <% unless @form.model.original_attachments %>
+              <p class="govuk-body">
+                Files uploaded will appear here.
+              </p>
+              <% end %>
+              <div class="govuk-summary-list moj-multi-file-upload__list">
 
-      <% #  Customised accessibility alerts within this span below %>
+              </div>
+            </div>
+
+            <div class="moj-multi-file-upload__upload">
+
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-label--m" for="documents">
+                  Upload a file
+                </label>
+
+                <div class="fallback">
+                  <input class="govuk-file-upload moj-multi-file-upload__input" id="documents" name="documents" type="file" multiple="">
+                  <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+                                            hint: {text: t('.size_hint')},
+                                            classes: ['moj-multi-file-upload__input'] %>
+                  <%= form.submit(
+                        t('generic.upload'),
+                        id: 'upload',
+                        name: 'upload_button',
+                        class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+                      ) %>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
       <% if @successfully_deleted %>
         <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
       <% end %>
       <% if @error_message || @successful_upload %>
         <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
       <% end %>
+
     <% end %>
   <% end %>
 
