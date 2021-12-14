@@ -43,7 +43,7 @@ class DigestExporter
 
   def extraction_date
     [
-      "Extracted at: #{Time.now}"
+      "Extracted at: #{Time.zone.now}"
     ]
   end
 
