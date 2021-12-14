@@ -27,9 +27,9 @@ spec:
 {{ include "apply-for-legal-aid.envs" . | nindent 12 }}
             resources:
               limits:
-                cpu: 200m
-                memory: 1024Mi
+                cpu: 400m
+                memory: 4096Mi
               requests:
-                cpu: 100m
-                memory: 512Mi
+                cpu: 400m
+                memory: 4096Mi
           restartPolicy: Never
