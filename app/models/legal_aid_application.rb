@@ -202,7 +202,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def section_8_proceedings?
-    proceeding_types.any? { |type| type.ccms_matter_code.eql?('KSEC8') }
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?('KSEC8') }
   end
 
   def cfe_result
