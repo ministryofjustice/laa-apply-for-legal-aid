@@ -12,7 +12,7 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   When I choose 'Yes'
   And I click 'Save and continue'
   Then I should be on the 'employment_income' page showing "Enter details about your client’s employment"
-  When I fill "legal aid application employment information details error" with "some extra details about employment"
+  When I fill "legal aid application extra employment information details error" with "some extra details about employment"
   And I click 'Save and continue'
   Then I should be on the 'no_income_summary' page showing "Your client's income"
 

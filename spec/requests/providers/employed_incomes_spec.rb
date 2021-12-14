@@ -31,11 +31,11 @@ RSpec.describe 'employed incomes request', type: :request do
       {
         legal_aid_application: {
           extra_employment_information: extra_employment_information,
-          employment_information_details: employment_information_details
+          extra_employment_information_details: extra_employment_information_details
         }
       }
     end
-    let(:employment_information_details) { Faker::Lorem.paragraph }
+    let(:extra_employment_information_details) { Faker::Lorem.paragraph }
     let(:extra_employment_information) { 'true' }
 
     context 'when the provider is authenticated' do
@@ -53,7 +53,7 @@ RSpec.describe 'employed incomes request', type: :request do
 
         it 'updates legal aid application restriction information' do
           expect(application.reload.extra_employment_information).to eq true
-          expect(application.reload.employment_information_details).to_not be_empty
+          expect(application.reload.extra_employment_information_details).to_not be_empty
         end
 
         context 'when the provider has confirmed the information' do
@@ -73,10 +73,10 @@ RSpec.describe 'employed incomes request', type: :request do
         end
 
         context 'invalid params' do
-          let(:employment_information_details) { '' }
+          let(:extra_employment_information_details) { '' }
 
           it 'displays error' do
-            expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.employment_information_details.blank'))
+            expect(response.body).to include(I18n.t('activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank'))
           end
 
           context 'no params' do
@@ -105,7 +105,7 @@ RSpec.describe 'employed incomes request', type: :request do
 
           it 'updates the legal_aid_application.extra_employment_information' do
             expect(application.extra_employment_information).to eq true
-            expect(application.employment_information_details).to_not be_empty
+            expect(application.extra_employment_information_details).to_not be_empty
           end
 
           it 'redirects to the list of applications' do
