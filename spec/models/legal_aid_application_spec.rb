@@ -1192,6 +1192,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+<<<<<<< HEAD
   describe '#online_current_account_balance' do
     let(:laa) { create :legal_aid_application, :with_applicant }
     context 'no current accounts' do
@@ -1225,6 +1226,8 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+=======
+>>>>>>> be3791e39 (AP-2570 Include 'No HMRC data' page in flow)
   describe 'hmrc_employment_income?' do
     let(:laa) { create :legal_aid_application }
 
