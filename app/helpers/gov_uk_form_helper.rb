@@ -1,9 +1,19 @@
 module GovUkFormHelper
-  # Creates a template variable for yes/no options for radio buttons in a form
+  RadioOption = Struct.new(:value, :label, :radio_hint)
 
-  def yes_no_options
-    [OpenStruct.new(value: true, label: I18n.t('generic.yes')),
-     OpenStruct.new(value: false, label: I18n.t('generic.no'))]
+  # Creates a template variable for yes/no options for radio buttons on a form for use with govuk_collection_radio_buttons method.
+  #
+  # include hash for radio button hints if required, e.g.
+  #
+  # yes_no_options                                               - will print no hints under individual radio buttons
+  # yes_no_options(yes: 'this means Go!', no: 'This means Stop') - will print hints under both radios
+  # yes_no_options(yes: 'This means Go!')                        - will print hint under yes radio only
+  #
+  def yes_no_options(radio_hints = {})
+    [
+      RadioOption.new(true, I18n.t('generic.yes'), radio_hints[:yes]),
+      RadioOption.new(false, I18n.t('generic.no'), radio_hints[:no])
+    ]
   end
 
   # Either passing in the heading text and let this method sort out its formatting,

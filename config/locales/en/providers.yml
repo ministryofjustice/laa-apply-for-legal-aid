@@ -504,6 +504,8 @@ en:
       show:
         page_title: "Do you have evidence that your client receives %{passporting_benefit}?"
         hint: "For example, a letter from the DWP. A caseworker will request this after you've submitted your application."
+        evidence_hint: 'For example, a letter from the DWP, a bank statement from the last 3 months showing benefits paid in, or any other relevant documents.'
+        radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
       proceeding_types:
         h1-heading: What you're applying for

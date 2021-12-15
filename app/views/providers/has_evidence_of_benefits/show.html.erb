@@ -7,12 +7,14 @@
           local: true
       ) do |form| %>
 
-    <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit,
-                                            yes_no_options,
-                                            :value,
-                                            :label,
+    <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit, # attribute name
+                                            yes_no_options(yes: Setting.enable_evidence_upload? ? t('.radio_hint_yes') : nil), # collection
+                                            :value, # value method
+                                            :label, # text method
+                                            :radio_hint, #hint method,
+                                            bold_labels: false,
                                             legend: { text: content_for(:page_title), tag: 'h1', size: 'xl' },
-                                            hint: { text: t('.hint') } %>
+                                            hint: { text: Setting.enable_evidence_upload? ? t('.evidence_hint') : t('.hint') } %>
 
     <%= next_action_buttons(
             show_draft: true,
