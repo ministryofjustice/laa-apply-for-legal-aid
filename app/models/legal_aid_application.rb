@@ -490,6 +490,10 @@ class LegalAidApplication < ApplicationRecord
     __send__("#{transaction_type}_transactions").amounts.fetch(category_id, 0)
   end
 
+  def hmrc_employment_income?
+    hmrc_responses.any?(&:employment_income?)
+  end
+
   private
 
   def bank_transactions_by_type(type)

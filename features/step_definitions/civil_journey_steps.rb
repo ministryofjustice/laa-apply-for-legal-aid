@@ -313,6 +313,47 @@ Given('I start the merits application and the applicant has uploaded transaction
   )
 end
 
+Given('I start the means review journey with employment income from HMRC') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :provider_assessing_means
+  )
+
+  @hmrc_response = create(:hmrc_response, :use_case_one)
+
+  @legal_aid_application.hmrc_responses << @hmrc_response
+  @legal_aid_application.provider.permissions << Permission.where(role: 'application.non_passported.employment.*').first
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
+Given('I start the means review journey with no employment income from HMRC') do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceeding_types,
+    :with_non_passported_state_machine,
+    :provider_assessing_means
+  )
+
+  @legal_aid_application.provider.permissions << Permission.where(role: 'application.non_passported.employment.*').first
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 Given('I start the journey as far as the start of the vehicle section') do
   @legal_aid_application = create(
     :application,

@@ -635,6 +635,17 @@ en:
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
         proceeding_eligibility: Proceeding eligibility
+    no_employment_incomes:
+      show:
+        page_heading: HMRC has no record of your client's employment in the last 3 months
+        hmrc_cannot_confirm: You told us your client is employed but HMRC could not confirm this.
+        enter_details: "Enter details of your client's employment in the last 3 months, including:"
+        details_1: how much they earned before tax
+        details_2: how much National Insurance they paid
+        details_3: how much tax they paid
+        details_4: any benefits in kind they received
+        caseworker_will_ask: A caseworker will ask for evidence of this.
+        employment_details_header: Enter your client's employment details
     no_income_summaries:
       show:
         page_heading: "Your client's income"

@@ -43,5 +43,37 @@ module HMRC
         end
       end
     end
+
+    describe 'employment_income?' do
+      context 'when there is no hmrc data' do
+        let(:response) { create :hmrc_response }
+        it 'returns false' do
+          expect(response.employment_income?).to eq false
+        end
+      end
+
+      context 'when the hmrc data does not contain employment income data' do
+        let(:response) { create :hmrc_response }
+        let(:response_data_with_no_employment_income) do
+          { 'submission' => 'f3730ebf-4b56-4bc1-b419-417bdf2ce9d2',
+            'status' => 'completed',
+            'data' =>
+             [{ 'correlation_id' => 'f3730ebf-4b56-4bc1-b419-417bdf2ce9d2', 'use_case' => 'use_case_one' },
+              { 'individuals/matching/individual' => { 'firstName' => 'tesdt', 'lastName' => 'test', 'nino' => 'XX123456X', 'dateOfBirth' => '1970-01-01' } },
+              { 'income/paye/paye' => { 'income' => [] } }] }
+        end
+        before { response.response = response_data_with_no_employment_income }
+        it 'returns false' do
+          expect(response.employment_income?).to eq false
+        end
+      end
+
+      context 'when the hmrc data contains employment income data' do
+        let(:response) { create :hmrc_response, :use_case_one }
+        it 'returns true' do
+          expect(response.employment_income?).to eq true
+        end
+      end
+    end
   end
 end

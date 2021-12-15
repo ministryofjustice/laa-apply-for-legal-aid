@@ -61,10 +61,20 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
           before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
           let(:submit_button) { { continue_button: 'Continue' } }
+          context 'employment income data was received from HMRC' do
+            before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true) }
+            it 'redirects to the employed income page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_employment_income_path(legal_aid_application))
+            end
+          end
 
-          it 'redirects to next page' do
-            subject
-            expect(response).to redirect_to(providers_legal_aid_application_employment_income_path(legal_aid_application))
+          context 'no employment income data was received from HMRC' do
+            before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
+            it 'redirects to the no employed income page' do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_no_employment_income_path(legal_aid_application))
+            end
           end
         end
       end

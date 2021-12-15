@@ -1,0 +1,27 @@
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_no_employment_income_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+
+  <%= page_template page_title: t('.page_heading'), form: form do %>
+      <div class="govuk-!-padding-bottom-1"></div>
+      <h2 class="govuk-body-l"><%= t('.hmrc_cannot_confirm') %></h2>
+      <p class="govuk-body"><%= t('.enter_details') %></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><%= t '.details_1' %></li>
+        <li><%= t '.details_2' %></li>
+        <li><%= t '.details_3' %></li>
+        <li><%= t '.details_4' %></li>
+      </ul>
+      <p class="govuk-body"><%= t('.caseworker_will_ask') %></p>
+
+      <%= form.govuk_text_area :full_employment_details,
+                                label: {text: t('.employment_details_header'), tag: 'h2', size: 'm' },
+                                rows: 10 %>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form
+        ) %>
+  <% end %>
+<% end %>
