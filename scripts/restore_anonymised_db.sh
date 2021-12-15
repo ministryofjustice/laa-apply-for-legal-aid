@@ -13,3 +13,11 @@ kubectl -n laa-apply-for-legalaid-uat cp ./tmp/production.anon.sql -c web laa-ap
 
 echo "Connect to the pod and run the rake task"
 kubectl -n laa-apply-for-legalaid-uat -c web exec "$POD" -- rake db:import_to_uat
+
+if [ $? -eq 0 ]; then
+   echo 'Restore complete'
+   echo "Delete the restore file from the pod"
+   kubectl -n laa-apply-for-legalaid-uat -c web exec "$POD" -- sh -c 'rm tmp/anonymised_db.sql'
+else
+   echo "Restore may have failed, check logs before re-running the script"
+fi
