@@ -117,7 +117,6 @@ Given('I have a passported application with no assets on the {string} page') do 
     provider_step: provider_step.downcase,
     explicit_proceeding_types: [proceeding_one]
   )
-  add_scope_limitations(@legal_aid_application, proceeding_one)
   login_as @legal_aid_application.provider
 end
 
@@ -436,8 +435,6 @@ Given('I complete the journey as far as check client details with multiple proce
     :at_entering_applicant_details,
     explicit_proceeding_types: [proceeding_one, proceeding_two]
   )
-  add_scope_limitations(@legal_aid_application, proceeding_one)
-  add_scope_limitations(@legal_aid_application, proceeding_two)
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -471,7 +468,6 @@ Given('I complete the passported journey as far as check your answers') do
     explicit_proceeding_types: [proceeding_one],
     applicant: applicant
   )
-  add_scope_limitations(@legal_aid_application, proceeding_one)
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
   steps %(Then I should be on a page showing 'Check your answers')
@@ -604,7 +600,6 @@ Given('I complete the application and view the check your answers page') do
     applicant: applicant,
     explicit_proceeding_types: [proceeding_type]
   )
-  add_scope_limitations(@legal_aid_application, proceeding_type)
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -624,8 +619,6 @@ Given('The means questions have been answered by the applicant') do
     :with_uncategorised_credit_transactions,
     explicit_proceeding_types: [proceeding_one, proceeding_two]
   )
-  add_scope_limitations(@legal_aid_application, proceeding_one)
-  add_scope_limitations(@legal_aid_application, proceeding_two)
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -965,9 +958,4 @@ end
 
 When('I click the browser back button') do
   page.go_back
-end
-
-def add_scope_limitations(laa, ptype)
-  LegalFramework::AddAssignedScopeLimitationService.call(laa, ptype, :substantive)
-  LegalFramework::AddAssignedScopeLimitationService.call(laa, ptype, :delegated) if laa.used_delegated_functions?
 end

@@ -84,13 +84,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       application_proceeding_types.reload.reload
     end
 
-    it 'updates the application proceeding types delegated functions dates' do
-      application_proceeding_types.order(used_delegated_functions_on: :desc).each_with_index do |apt, i|
-        expect(apt.used_delegated_functions_reported_on).to eq(today)
-        expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on - i.days)
-      end
-    end
-
     it 'updates the proceedings delegated functions dates' do
       proceedings.order(used_delegated_functions_on: :desc).each_with_index do |proceeding, i|
         expect(proceeding.used_delegated_functions_reported_on).to eq(today)
@@ -212,12 +205,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
 
       it 'updates the application' do
-        expect(application_proceeding_types.first.used_delegated_functions?).to be false
         expect(proceedings.first.used_delegated_functions?).to be false
-        application_proceeding_types.each do |type|
-          expect(type.used_delegated_functions_reported_on).to be_nil
-          expect(type.used_delegated_functions_on).to be_nil
-        end
         proceedings.each do |proceeding|
           expect(proceeding.used_delegated_functions_reported_on).to be_nil
           expect(proceeding.used_delegated_functions_on).to be_nil
@@ -226,10 +214,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
       it 'redirects to the limitations page' do
         expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
-      end
-
-      it 'does not have a delegated function scope limitation' do
-        expect(application_proceeding_types.first.delegated_functions_scope_limitation).to be_nil
       end
     end
 
@@ -240,11 +224,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      context 'with first application proceeding type' do
-        it 'updates the application proceeding types delegated functions dates' do
-          apt = application_proceeding_types.order(used_delegated_functions_on: :desc).first
-          expect(apt.used_delegated_functions_reported_on).to eq(today)
-          expect(apt.used_delegated_functions_on).to eq(used_delegated_functions_on)
+      context 'with first proceeding' do
+        it 'updates the proceeding delegated functions dates' do
           proceeding = proceedings.order(used_delegated_functions_on: :desc).first
           expect(proceeding.used_delegated_functions_reported_on).to eq(today)
           expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on)
@@ -285,10 +266,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
             expect(proceeding.used_delegated_functions_reported_on).to be_nil
             expect(proceeding.used_delegated_functions_on).to be_nil
           end
-        end
-
-        it 'does not have a delegated function scope limitation' do
-          expect(application_proceeding_types.first.delegated_functions_scope_limitation).to be_nil
         end
       end
 
