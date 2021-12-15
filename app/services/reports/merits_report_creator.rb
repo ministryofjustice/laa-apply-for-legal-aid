@@ -1,11 +1,9 @@
 module Reports
   class MeritsReportCreator < BaseReportCreator
     def call
-      if legal_aid_application.merits_report
-        Rails.logger.info "ReportsCreator: Merits report already exists for #{legal_aid_application.id}"
-        return
-      end
+      return if valid_report_exists
 
+      delete_attachment if report_attachment_exists
       attachment = legal_aid_application.attachments.create!(attachment_type: 'merits_report',
                                                              attachment_name: 'merits_report.pdf')
 
@@ -19,6 +17,10 @@ module Reports
     end
 
     private
+
+    def report_type
+      'merits_report'
+    end
 
     def html_report
       ensure_case_ccms_reference_exists

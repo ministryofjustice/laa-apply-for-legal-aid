@@ -36,5 +36,27 @@ module Reports
         }
       }
     end
+
+    def delete_attachment
+      legal_aid_application.send(report_type).destroy!
+      legal_aid_application.reload
+    end
+
+    def valid_report_exists
+      if report_document_exists
+        Rails.logger.info "ReportsCreator: #{report_type.humanize} already exists for #{legal_aid_application.id} and is downloadable"
+      elsif report_attachment_exists
+        Rails.logger.info "ReportsCreator: #{report_type.humanize} already exists for #{legal_aid_application.id}"
+      end
+      report_attachment_exists && report_document_exists
+    end
+
+    def report_attachment_exists
+      @report_attachment_exists ||= legal_aid_application&.send(report_type)
+    end
+
+    def report_document_exists
+      @report_document_exists ||= legal_aid_application&.send(report_type)&.document&.present?
+    end
   end
 end
