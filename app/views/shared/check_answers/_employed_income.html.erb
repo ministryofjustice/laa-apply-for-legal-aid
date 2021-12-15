@@ -19,9 +19,9 @@
 
   <% if @legal_aid_application.extra_employment_information? %>
     <%= check_answer_no_link(
-          name: :employment_information_details,
+          name: :extra_employment_information_details,
           question: t('.employment_details'),
-          answer: @legal_aid_application.employment_information_details
+          answer: @legal_aid_application.extra_employment_information_details
         ) %>
   <% end %>
 </dl>
