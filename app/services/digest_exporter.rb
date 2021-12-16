@@ -4,6 +4,7 @@ class DigestExporter
   end
 
   def initialize
+    Rails.logger.info "Digest exporter starting"
     secret_file = StringIO.new(google_secret.to_json)
     @session = GoogleDrive::Session.from_service_account_key(secret_file)
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
@@ -12,11 +13,15 @@ class DigestExporter
   end
 
   def call
-    ApplicationDigest.order(:created_at).pluck(:id).each_with_index do |digest_id, index|
+    digest_ids = ApplicationDigest.order(:created_at).pluck(:id)
+    Rails.logger.info "Exporting #{digest_ids.size} ApplicationDigest records"
+    digest_ids.each_with_index do |digest_id, index|
       digest = ApplicationDigest.find(digest_id)
       write_to_sheet(digest.to_google_sheet_row, index)
+      Rails.logger.info "#{index} records written" if index % 500 == 0
     end
     @worksheet.save
+    Rails.logger.info "All records written and worksheet saved"
   end
 
   private
@@ -26,6 +31,7 @@ class DigestExporter
     # with the column headers
     @worksheet.delete_rows(1, @worksheet.max_rows - 1)
     @worksheet.save
+    Rails.logger.info "Existing data removed from spreadsheet"
   end
 
   def write_to_sheet(row, index)
