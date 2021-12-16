@@ -109,4 +109,23 @@ Naming/InclusiveLanguage:
         - !ruby/regexp "/master.key/i"
 
 Style/OpenStructUse:
-  Enabled: false
+  Enabled: true
+  Exclude:
+    - 'app/helpers/user_transactions_helper.rb'
+    - 'app/models/concerns/translatable_model_attribute.rb'
+    - 'app/models/legal_aid_application.rb'
+    - 'app/models/legal_aid_application.rb'
+    - 'app/services/legal_framework/proceeding_types/proceeding.rb'
+    - 'app/services/malware_scanner.rb'
+    - 'config/initializers/mock_saml.rb'
+    - 'lib/tasks/cucumber_steps.rake'
+    - 'spec/forms/concerns/date_field_builder_spec.rb'
+    - 'spec/forms/concerns/date_field_builder_spec.rb'
+    - 'spec/forms/concerns/date_field_builder_spec.rb'
+    - 'spec/lib/omni_auth/strategies/moj_oauth2_spec.rb'
+    - 'spec/models/legal_aid_application_spec.rb'
+    - 'spec/services/govuk_emails/delivery_man_spec.rb'
+    - 'spec/services/govuk_emails/email_spec.rb'
+    - 'spec/services/pdf_converter_spec.rb'
+    - 'spec/services/provider_details_creator_spec.rb'
+    - 'spec/services/provider_details_retriever_spec.rb'

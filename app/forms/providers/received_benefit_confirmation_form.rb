@@ -1,5 +1,7 @@
 module Providers
   class ReceivedBenefitConfirmationForm < BaseForm
+    RadioOption = Struct.new(:value, :label)
+
     form_for DWPOverride
 
     SINGLE_VALUE_ATTRIBUTES = %i[
@@ -13,5 +15,10 @@ module Providers
     attr_accessor :passporting_benefit
 
     validates :passporting_benefit, presence: true, unless: :draft?
+
+    def self.radio_options
+      translation_root = 'shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations'
+      SINGLE_VALUE_ATTRIBUTES.map { |benefit| RadioOption.new(benefit, I18n.t("#{translation_root}.#{benefit}")) }
+    end
   end
 end

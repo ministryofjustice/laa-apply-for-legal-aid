@@ -28,20 +28,20 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
     def expected_result_none_selected
       {
         items: [
-          OpenStruct.new(label: 'England Infected Blood Support Scheme', amount_text: 'No'),
-          OpenStruct.new(label: 'Vaccine Damage Payments Scheme', amount_text: 'No'),
-          OpenStruct.new(label: 'Variant Creutzfeldt-Jakob disease (vCJD) Trust', amount_text: 'No'),
-          OpenStruct.new(label: 'Criminal Injuries Compensation Scheme', amount_text: 'No'),
-          OpenStruct.new(label: 'National Emergencies Trust (NET)', amount_text: 'No'),
-          OpenStruct.new(label: 'We Love Manchester Emergency Fund', amount_text: 'No'),
-          OpenStruct.new(label: 'The London Emergencies Trust', amount_text: 'No')
+          CheckAnswersHelper::ItemStruct.new('England Infected Blood Support Scheme', 'No'),
+          CheckAnswersHelper::ItemStruct.new('Vaccine Damage Payments Scheme', 'No'),
+          CheckAnswersHelper::ItemStruct.new('Variant Creutzfeldt-Jakob disease (vCJD) Trust', 'No'),
+          CheckAnswersHelper::ItemStruct.new('Criminal Injuries Compensation Scheme', 'No'),
+          CheckAnswersHelper::ItemStruct.new('National Emergencies Trust (NET)', 'No'),
+          CheckAnswersHelper::ItemStruct.new('We Love Manchester Emergency Fund', 'No'),
+          CheckAnswersHelper::ItemStruct.new('The London Emergencies Trust', 'No')
         ]
       }
     end
 
     def expected_result
       {
-        items: [OpenStruct.new(label: 'England Infected Blood Support Scheme', amount_text: true)] + expected_result_none_selected[:items][1..]
+        items: [CheckAnswersHelper::ItemStruct.new('England Infected Blood Support Scheme', true)] + expected_result_none_selected[:items][1..]
       }
     end
   end

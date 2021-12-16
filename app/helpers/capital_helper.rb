@@ -1,4 +1,6 @@
 module CapitalHelper
+  CapitalAmountItem = Struct.new(:label, :name, :amount, :type, :amount_text)
+
   def capital_amounts_list(capital, locale_namespace:, percentage_values: [])
     attributes = capital_amount_attributes(capital)
     attributes = combine_second_home_attributes(attributes)
@@ -39,13 +41,12 @@ module CapitalHelper
   def capital_amount_items(items, locale_namespace, percentage_values)
     items&.map do |attribute, amount|
       type = percentage_values.include?(attribute.to_sym) ? :percentage : :currency
-
-      OpenStruct.new(
-        label: t("#{locale_namespace}#{attribute}"),
-        name: attribute.to_s.delete_prefix('check_box_'),
-        amount: amount,
-        type: type,
-        amount_text: capital_amount_text(amount, type)
+      CapitalAmountItem.new(
+        t("#{locale_namespace}#{attribute}"),
+        attribute.to_s.delete_prefix('check_box_'),
+        amount,
+        type,
+        capital_amount_text(amount, type)
       )
     end
   end

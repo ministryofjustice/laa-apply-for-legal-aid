@@ -1,12 +1,6 @@
 <%= form_with(model: model, url: url, method: :patch, local: true) do |form| %>
-  <%
-    options = []
-    Providers::ReceivedBenefitConfirmationForm::SINGLE_VALUE_ATTRIBUTES.each do |benefit|
-      options << OpenStruct.new(value: benefit, label: t(".providers.received_benefit_confirmations.#{benefit}"))
-    end
-  %>
 
-  <%= form.govuk_collection_radio_buttons(:passporting_benefit, options, :value, :label,
+  <%= form.govuk_collection_radio_buttons(:passporting_benefit, Providers::ReceivedBenefitConfirmationForm.radio_options, :value, :label,
                                           legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)}) %>
 
     <%= form.govuk_radio_divider %>
