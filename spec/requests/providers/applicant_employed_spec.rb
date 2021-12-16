@@ -79,7 +79,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         context 'no' do
           let(:params) { { applicant: { employed: 'false' } } }
 
-          it 'redirects to the open banking consents page' do
+          it 'redirects to the proceeding type search page' do
             expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
           end
         end
@@ -99,6 +99,25 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
         it 'includes the error message in the response' do
           expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.base.none_selected'))
+        end
+      end
+    end
+
+    context 'the employed journey feature flag is enabled' do
+      before do
+        login
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params
+        Setting.setting.update!(enable_employed_journey: true)
+      end
+      let(:params) { { applicant: { employed: 'false' } } }
+
+      let(:provider) { create :provider }
+      let(:legal_aid_application) { create :legal_aid_application, provider: provider }
+      context 'the user has employed permissions' do
+        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+        it 'redirects to the proceedings search page' do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
         end
       end
     end

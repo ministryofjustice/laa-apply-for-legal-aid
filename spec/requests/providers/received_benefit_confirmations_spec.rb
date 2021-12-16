@@ -84,7 +84,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
         expect { subject }.not_to change { DWPOverride.count }
       end
 
-      it 'continue to the applicant details page' do
+      it 'continue to the proceedings search page' do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application))
       end

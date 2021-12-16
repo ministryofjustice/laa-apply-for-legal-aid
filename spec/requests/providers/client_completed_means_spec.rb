@@ -77,6 +77,18 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_no_employment_income_path(legal_aid_application))
             end
           end
+
+          context 'transactions exist, and applicant is not employed' do
+            let(:submit_button) { { continue_button: 'Continue' } }
+            let(:transaction_type) { create :transaction_type, :salary }
+            let(:applicant) { create :applicant, :not_employed }
+            let(:legal_aid_application) do
+              create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type]
+            end
+            it 'redirects to next page' do
+              expect(subject).to redirect_to(providers_legal_aid_application_income_summary_index_path)
+            end
+          end
         end
       end
     end
