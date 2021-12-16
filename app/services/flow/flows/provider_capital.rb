@@ -80,7 +80,13 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
           forward: ->(application) do
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
-              application.hmrc_employment_income? ? :employment_incomes : :no_employment_incomes
+              if application.hmrc_employment_income?
+                :employment_incomes
+              elsif application.applicant.employed? && !application.hmrc_employment_income?
+                :no_employment_incomes
+              else
+                application.income_types? ? :income_summary : :no_income_summaries
+              end
             else
               application.income_types? ? :income_summary : :no_income_summaries
             end
