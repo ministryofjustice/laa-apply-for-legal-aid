@@ -29,6 +29,16 @@ RSpec.describe HMRC::Interface::SubmissionService do
       expect(call.keys).to match_array %i[id _links]
     end
 
+    context 'when the number of months is changed' do
+      before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return(4) }
+
+      let(:start_date) { Time.zone.today - 4.months }
+      it 'honours the date values' do
+        call
+        expect(a_request(:post, %r{.*/api/v1/submission/create/.*}).with { |req| req.body.include?(start_date.strftime('%Y-%m-%d')) }).to have_been_made
+      end
+    end
+
     context 'when an error occurs in the submission process' do
       before do
         stub_request(:post, %r{http.*laa-hmrc-interface.*apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/create/.*})
