@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ClientCompletedMeansController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+  let(:applicant) { create :applicant, :employed }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/client_completed_means' do

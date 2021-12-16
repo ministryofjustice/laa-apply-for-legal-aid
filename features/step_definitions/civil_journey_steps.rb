@@ -336,12 +336,17 @@ Given('I start the means review journey with employment income from HMRC') do
 end
 
 Given('I start the means review journey with no employment income from HMRC') do
+  @applicant = create(
+    :applicant,
+    :employed
+  )
+
   @legal_aid_application = create(
     :application,
-    :with_applicant,
     :with_proceeding_types,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
+    applicant: @applicant
   )
 
   @legal_aid_application.provider.permissions << Permission.where(role: 'application.non_passported.employment.*').first
