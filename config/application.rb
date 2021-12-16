@@ -107,6 +107,7 @@ module LaaApplyForLegalAid
     config.x.hmrc_interface.host = ENV['HMRC_API_HOST']
     config.x.hmrc_interface.client_id = ENV['HMRC_API_UID']
     config.x.hmrc_interface.client_secret = ENV['HMRC_API_SECRET']
+    config.x.hmrc_interface.duration_check = ENV['HMRC_DURATION_CHECK'] || 3
 
     config.x.db_url = Rails.env.production? ? "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}:5432/#{ENV['POSTGRES_DATABASE']}" : 'postgres://localhost:5432/apply_for_legal_aid_dev' # rubocop:disable Layout/LineLength
 
