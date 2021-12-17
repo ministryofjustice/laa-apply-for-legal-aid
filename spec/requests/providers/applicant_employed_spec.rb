@@ -102,39 +102,5 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         end
       end
     end
-
-    context 'the employed journey feature flag is enabled' do
-      let(:params) do
-        { applicant: { employed: employed } }
-      end
-
-      before do
-        login
-        # post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params
-        Setting.setting.update!(enable_employed_journey: true)
-      end
-
-      subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
-
-      let(:params) { { applicant: { employed: nil } } }
-      let(:provider) { create :provider }
-      let!(:legal_aid_application) { create :legal_aid_application, provider: provider, applicant: applicant }
-      let(:applicant) { create :applicant, :employed }
-
-      context 'the user has employed permissions' do
-        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-        it 'redirects to the proceedings search page' do
-          puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
-          puts legal_aid_application.provider.employment_permissions?
-          puts legal_aid_application.applicant.employed?
-          puts Setting.enable_employed_journey?
-          subject
-          # puts provider.employment_permissions?
-          # puts applicant.employed?
-          # puts Setting.enable_employed_journey?
-          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
-        end
-      end
-    end
   end
 end
