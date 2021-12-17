@@ -30,7 +30,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
     end
 
     context 'when the number of months is changed' do
-      before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return(4) }
+      before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return('4') }
 
       let(:start_date) { Time.zone.today - 4.months }
       it 'honours the date values' do
