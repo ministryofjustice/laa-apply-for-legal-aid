@@ -15,6 +15,7 @@ RSpec.describe Providers::UseCCMSEmployedController, type: :request do
     context 'when the provider is authenticated' do
       before do
         login_as provider
+        allow(HMRC::CreateResponsesService).to receive(:call).with(legal_aid_application).and_return(double(HMRC::CreateResponsesService, call: %w[one two]))
         subject
       end
 
@@ -24,6 +25,10 @@ RSpec.describe Providers::UseCCMSEmployedController, type: :request do
 
       it 'shows text to use CCMS' do
         expect(response.body).to include(I18n.t('providers.use_ccms_employed.index.title_html'))
+      end
+
+      it 'calls the HMRC::CreateResponsesService' do
+        expect(HMRC::CreateResponsesService).to have_received(:call).once
       end
 
       it 'sets state to use_ccms and reason to employed' do
