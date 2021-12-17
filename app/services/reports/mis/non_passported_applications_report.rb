@@ -18,8 +18,19 @@ module Reports
       def legal_aid_applications
         LegalAidApplication.joins(:state_machine)
                            .where(created_at: [START_DATE..Time.zone.today.end_of_day])
-                           .where(state_machine_proxies: { type: 'NonPassportedStateMachine' })
+                           .where(where_clause)
                            .order(:created_at)
+      end
+
+      def where_clause
+        <<~WHERE
+          state_machine_proxies.type = 'NonPassportedStateMachine' OR
+          (
+            state_machine_proxies.type = 'PassportedStateMachine'
+            AND aasm_state = 'use_ccms'
+            AND ccms_reason = 'employed'
+          )
+        WHERE
       end
     end
   end
