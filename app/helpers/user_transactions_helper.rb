@@ -1,13 +1,13 @@
 module UserTransactionsHelper
+  IncomingItemStruct = Struct.new(:label, :name, :amount_text)
+
   def incomings_list(incomings, locale_namespace:)
     items = TransactionType.credits&.map do |income_type|
       next if income_type.excluded_benefit?
 
-      OpenStruct.new(
-        label: t("#{locale_namespace}.#{income_type.name}"),
-        name: income_type.name,
-        amount_text: yes_no(incomings.pluck(:name).include?(income_type.name))
-      )
+      IncomingItemStruct.new(t("#{locale_namespace}.#{income_type.name}"),
+                             income_type.name,
+                             yes_no(incomings.pluck(:name).include?(income_type.name)))
     end
 
     return nil if items.blank?

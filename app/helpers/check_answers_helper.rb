@@ -1,4 +1,5 @@
 module CheckAnswersHelper
+  ItemStruct = Struct.new(:label, :amount_text, :name)
   # Creates one dictionary list item - so needs to be used within a `govuk-summary-list` `dl`:
   #     <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   #       <%= check_answer_link ..... %>
@@ -94,9 +95,6 @@ module CheckAnswersHelper
   end
 
   def build_ostruct(label, text)
-    OpenStruct.new(
-      label: label,
-      amount_text: text
-    )
+    ItemStruct.new(label, text, nil)
   end
 end

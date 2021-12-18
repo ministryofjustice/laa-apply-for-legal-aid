@@ -1,6 +1,7 @@
 module Providers
   class AddressSelectionsController < ProviderBaseController
     include PreDWPCheckVisible
+    AddressCollectionItem = Struct.new(:id, :address)
 
     def show # rubocop:disable Metrics/AbcSize
       return redirect_to back_path unless address.postcode
@@ -29,8 +30,8 @@ module Providers
     private
 
     def collect_addresses
-      count = OpenStruct.new(id: nil, address: t('providers.address_selections.show.addresses_found_text', count: @addresses.size))
-      [count] + @addresses.collect { |a| OpenStruct.new(id: a.lookup_id, address: a.full_address) }
+      count = AddressCollectionItem.new(nil, t('providers.address_selections.show.addresses_found_text', count: @addresses.size))
+      [count] + @addresses.map { |addr| AddressCollectionItem.new(addr.lookup_id, addr.full_address) }
     end
 
     def no_state_change_required?

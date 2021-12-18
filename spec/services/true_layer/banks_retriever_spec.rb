@@ -11,7 +11,7 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: 'true_layer_bank
     context 'on failure' do
       let(:uri) { URI.parse(described_class::API_URL_OPEN_BANKING) }
       before do
-        allow(Net::HTTP).to receive(:get_response).with(uri).and_return(OpenStruct.new)
+        allow(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
       end
       it 'raises error' do
         expect { described_class.banks }.to raise_error(described_class::UnsuccessfulRetrievalError)

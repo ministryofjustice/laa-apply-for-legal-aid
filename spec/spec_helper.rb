@@ -19,6 +19,8 @@ require 'highline/import'
 require 'rspec-sidekiq'
 require 'sidekiq/testing'
 
+DummyErrorReturnObj = Struct.new(:message, :code, :body)
+
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
