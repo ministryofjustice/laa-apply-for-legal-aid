@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'employed incomes request', type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
+  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant }
+  let(:applicant) { create :applicant, :not_employed }
   let(:provider) { application.provider }
   before { create :hmrc_response, :use_case_one, legal_aid_application_id: application.id }
 
@@ -21,6 +22,20 @@ RSpec.describe 'employed incomes request', type: :request do
 
       it 'returns http success' do
         expect(response).to have_http_status(:ok)
+      end
+
+      it 'displays correct text when applicant is not_employed' do
+        expect(unescaped_response_body).to include(I18n.t('providers.employment_incomes.show.not_employed'))
+        expect(unescaped_response_body).to include(I18n.t('providers.employment_incomes.show.hmrc_not_employed'))
+      end
+
+      context 'when applicant is employed' do
+        let(:applicant) { create :applicant, :employed }
+
+        it 'displays correct text' do
+          expect(unescaped_response_body).to include(I18n.t('providers.employment_incomes.show.employed', name: applicant.full_name))
+          expect(unescaped_response_body).not_to include(I18n.t('providers.employment_incomes.show.hmrc_not_employed'))
+        end
       end
     end
   end

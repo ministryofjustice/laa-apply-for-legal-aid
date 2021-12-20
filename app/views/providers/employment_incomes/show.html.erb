@@ -9,10 +9,21 @@
     </div>
   </div>
 
-  <%= page_template page_title: t('.page_heading', name: @applicant.full_name), template: :basic, form: form do %>
+  <% if @summary_income && @applicant.not_employed? %>
+    <% page_heading = 'not_employed' %>
+  <% else %>
+    <% page_heading = 'employed' %>
+  <% end %>
+
+  <%= page_template page_title: t(".#{page_heading}", name: @applicant.full_name), template: :basic, form: form do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: 'xl', tag: 'h1', text: page_title}) do %>
+
+    <% if @summary_income && @applicant.not_employed? %>
+        <div class="govuk-!-padding-bottom-6"></div>
+        <p class="govuk-body-l"> <%= t('.hmrc_not_employed') %> </p>
+    <% end %>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">

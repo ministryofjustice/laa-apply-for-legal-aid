@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ClientCompletedMeansController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+  let(:applicant) { create :applicant, :employed }
   let(:provider) { legal_aid_application.provider }
 
   describe 'GET /providers/applications/:id/client_completed_means' do
@@ -74,6 +75,18 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             it 'redirects to the no employed income page' do
               subject
               expect(response).to redirect_to(providers_legal_aid_application_no_employment_income_path(legal_aid_application))
+            end
+          end
+
+          context 'transactions exist, and applicant is not employed' do
+            let(:submit_button) { { continue_button: 'Continue' } }
+            let(:transaction_type) { create :transaction_type, :salary }
+            let(:applicant) { create :applicant, :not_employed }
+            let(:legal_aid_application) do
+              create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type]
+            end
+            it 'redirects to next page' do
+              expect(subject).to redirect_to(providers_legal_aid_application_income_summary_index_path)
             end
           end
         end
