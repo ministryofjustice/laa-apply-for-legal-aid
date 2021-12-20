@@ -106,7 +106,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
         it 'displays the applicant_employed page' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path(application))
         end
 
         it 'uses the non-passported state machine' do

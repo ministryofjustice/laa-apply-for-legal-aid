@@ -74,7 +74,7 @@ RSpec.describe 'address requests', type: :request do
       context 'with a valid address' do
         it 'redirects successfully to the next step' do
           subject
-          expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path)
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
 
         it 'creates an address record' do

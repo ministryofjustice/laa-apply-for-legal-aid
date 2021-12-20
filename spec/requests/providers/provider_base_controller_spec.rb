@@ -47,14 +47,14 @@ module Providers
       context 'provider who created legal aid application' do
         let(:logged_in_provider) { provider }
         it 'is successful' do
-          expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path)
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
       end
 
       context 'provider in same firm' do
         let(:logged_in_provider) { provider_in_same_firm }
         it 'is successful' do
-          expect(response).to redirect_to(providers_legal_aid_application_applicant_employed_index_path)
+          expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
       end
 
