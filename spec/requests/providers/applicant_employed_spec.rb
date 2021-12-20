@@ -79,8 +79,8 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         context 'no' do
           let(:params) { { applicant: { employed: 'false' } } }
 
-          it 'redirects to the proceeding type search page' do
-            expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(legal_aid_application))
+          it 'redirects to the open banking consents page' do
+            expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
           end
         end
       end

@@ -7,7 +7,7 @@ module Flow
           forward: ->(application, confirm_dwp_non_passported) do
             if confirm_dwp_non_passported
               application.change_state_machine_type('NonPassportedStateMachine')
-              :open_banking_consents
+              :applicant_employed
             else
               application.check_applicant_details! unless application.checking_applicant_details?
               application.change_state_machine_type('PassportedStateMachine')
@@ -27,7 +27,7 @@ module Flow
               :has_evidence_of_benefits
             else
               application.change_state_machine_type('NonPassportedStateMachine')
-              :proceedings_types
+              :applicant_employed
             end
           end
         },
@@ -39,7 +39,7 @@ module Flow
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
               application.change_state_machine_type('NonPassportedStateMachine')
-              :proceedings_types
+              :applicant_employed
             end
           end
         }

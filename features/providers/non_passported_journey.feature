@@ -285,6 +285,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
     And I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
     Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
     Then I choose 'Yes'
     And I click 'Save and continue'
@@ -355,6 +358,9 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
     Then I click 'Save and continue'
+    And I should be on a page showing "What is your client's employment status?"
+    And I select "None of the above"
+    When I click 'Save and continue'
     Then I should be on a page showing "Check if you can continue using this service"
     Then I choose "Yes, I agree"
     Then I click 'Save and continue'
