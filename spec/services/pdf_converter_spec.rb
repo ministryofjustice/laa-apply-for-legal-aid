@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+FileStruct = Struct.new(:name, :content_type)
+
 RSpec.describe PdfConverter do
   subject do
     described_class.call(attachment.id)
@@ -7,7 +9,7 @@ RSpec.describe PdfConverter do
   before { allow(Libreconv).to receive(:convert) }
   context 'when attachment is statement of case' do
     let(:statement_of_case) { create :statement_of_case }
-    let(:file) { OpenStruct.new(name: 'hello_world.pdf', content_type: 'application/pdf') }
+    let(:file) { FileStruct.new('hello_world.pdf', 'application/pdf') }
     let(:original_file) { statement_of_case.original_files.first }
     let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }
     let(:attachment) { statement_of_case.legal_aid_application.attachments.create!(attachment_type: 'statement_of_case', attachment_name: 'statement_of_case') }
@@ -29,7 +31,7 @@ RSpec.describe PdfConverter do
       end
 
       context 'original file is not a pdf' do
-        let(:file) { OpenStruct.new(name: 'hello_world.docx', content_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
+        let(:file) { FileStruct.new('hello_world.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
 
         it 'converts the file to pdf' do
           expect(Libreconv).to receive(:convert)
@@ -69,7 +71,7 @@ RSpec.describe PdfConverter do
 
   context 'when attachment is gateway evidence' do
     let(:gateway_evidence) { create :gateway_evidence }
-    let(:file) { OpenStruct.new(name: 'hello_world.pdf', content_type: 'application/pdf') }
+    let(:file) { FileStruct.new('hello_world.pdf', 'application/pdf') }
     let(:original_file) { gateway_evidence.original_files.first }
     let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }
     let(:attachment) { gateway_evidence.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence', attachment_name: 'gateway_evidence') }
@@ -91,7 +93,7 @@ RSpec.describe PdfConverter do
       end
 
       context 'original file is not a pdf' do
-        let(:file) { OpenStruct.new(name: 'hello_world.docx', content_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
+        let(:file) { FileStruct.new('hello_world.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
 
         it 'converts the file to pdf' do
           expect(Libreconv).to receive(:convert)
