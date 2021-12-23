@@ -3,13 +3,11 @@ require 'rails_helper'
 module Providers
   module ProceedingMeritsTask
     RSpec.describe LinkedChildrenController, type: :request do
-      let(:pt_da) { create :proceeding_type, :with_real_data }
-      let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_involved_children, explicit_proceeding_types: [pt_da, pt_s8] }
+      let!(:legal_aid_application) do
+        create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se014], set_lead_proceeding: :da001
+      end
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
-      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
-      let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
       let(:login) { login_as legal_aid_application.provider }
 
@@ -43,7 +41,7 @@ module Providers
       describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children' do
         let(:params) do
           {
-            proceeding_merits_task_application_proceeding_type_linked_child:
+            proceeding_merits_task_proceeding_linked_child:
               { linked_children: legal_aid_application.involved_children.map(&:id) }
           }
         end
@@ -53,35 +51,35 @@ module Providers
         subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
 
         context 'all selected' do
-          it 'adds involved children to the proceeding type' do
-            expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(3)
+          it 'adds involved children to the proceeding' do
+            expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
           end
         end
 
         context 'none selected' do
           let(:params) do
             {
-              proceeding_merits_task_application_proceeding_type_linked_child:
+              proceeding_merits_task_proceeding_linked_child:
                 { linked_children: involved_children_names.map { |_k| '' } }
             }
           end
 
-          it 'does not add involved children to the proceeding type' do
-            expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(0)
+          it 'does not add involved children to the proceeding' do
+            expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
           end
         end
 
         context 'some selected' do
           let(:params) do
             {
-              proceeding_merits_task_application_proceeding_type_linked_child:
+              proceeding_merits_task_proceeding_linked_child:
                 { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' } }
             }
           end
 
-          it 'only adds the specified children to the proceeding type' do
-            proceeding_type_involved_children = application_proceeding_type.application_proceeding_type_linked_children
-            expect { subject }.to change { proceeding_type_involved_children.count }.by(1)
+          it 'only adds the specified children to the proceeding' do
+            proceeding_involved_children = proceeding.proceeding_linked_children
+            expect { subject }.to change { proceeding_involved_children.count }.by(1)
           end
         end
 
@@ -96,27 +94,25 @@ module Providers
           let(:initial_array) { [second_child.id, third_child.id] }
           let(:linked_children_params) { [first_child.id, '', ''] }
           before do
-            create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: second_child
-            create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: third_child
             subject
           end
 
           context 'remove record' do
             let(:new_params) do
               {
-                proceeding_merits_task_application_proceeding_type_linked_child:
+                proceeding_merits_task_proceeding_linked_child:
                   { linked_children: [first_child.id, '', ''] }
               }
             end
 
             it 'deletes a record if it is deselected' do
-              expect { update }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(-2)
+              expect { update }.to change { proceeding.proceeding_linked_children.count }.by(-2)
             end
           end
 
           context 'record already exists' do
             it 'makes no changes if already selected records are left selected' do
-              expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(0)
+              expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
             end
           end
         end
