@@ -181,8 +181,8 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.text "attempts_made"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "application_proceeding_type_id", null: false
-    t.uuid "proceeding_id"
+    t.uuid "application_proceeding_type_id"
+    t.uuid "proceeding_id", null: false
     t.index ["application_proceeding_type_id"], name: "index_attempts_to_settles_on_application_proceeding_type_id"
     t.index ["proceeding_id"], name: "index_attempts_to_settles_on_proceeding_id"
   end
@@ -366,7 +366,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.text "success_prospect_details"
     t.boolean "success_likely"
     t.uuid "application_proceeding_type_id"
-    t.uuid "proceeding_id"
+    t.uuid "proceeding_id", null: false
     t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
   end
