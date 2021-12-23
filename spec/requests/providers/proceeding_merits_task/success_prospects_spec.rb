@@ -8,12 +8,6 @@ module Providers
       let(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
       let(:pt_da) { create :proceeding_type, :with_real_data }
       let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
-      let(:application_proceeding_type) do
-        create :application_proceeding_type,
-               :with_chances_of_success,
-               legal_aid_application: legal_aid_application,
-               proceeding_type: pt_da
-      end
 
       let(:provider) { legal_aid_application.provider }
 
@@ -64,8 +58,8 @@ module Providers
             end
 
             it 'updates the record' do
-              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
-              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
+              expect(proceeding.chances_of_success.reload.success_prospect).to eq(success_prospect)
+              expect(proceeding.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
             end
 
             it 'redirects to the next page' do
@@ -81,8 +75,8 @@ module Providers
             end
 
             it 'updates the record' do
-              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect).to eq(success_prospect)
-              expect(proceeding.application_proceeding_type.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
+              expect(proceeding.chances_of_success.reload.success_prospect).to eq(success_prospect)
+              expect(proceeding.chances_of_success.reload.success_prospect_details).to eq(success_prospect_details)
             end
 
             it 'redirects to provider applications home page' do

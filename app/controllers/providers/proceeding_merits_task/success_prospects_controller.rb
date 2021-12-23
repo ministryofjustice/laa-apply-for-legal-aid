@@ -17,11 +17,7 @@ module Providers
       end
 
       def chances_of_success
-        @chances_of_success ||= application_proceeding_type.chances_of_success || application_proceeding_type.build_chances_of_success
-      end
-
-      def application_proceeding_type
-        @application_proceeding_type ||= proceeding.application_proceeding_type
+        @chances_of_success ||= proceeding.chances_of_success || proceeding.build_chances_of_success
       end
 
       def proceeding
