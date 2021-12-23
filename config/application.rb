@@ -104,6 +104,7 @@ module LaaApplyForLegalAid
     config.x.google_oauth2.client_id      = ENV['GOOGLE_CLIENT_ID']
     config.x.google_oauth2.client_secret = ENV['GOOGLE_CLIENT_SECRET']
 
+    config.x.hmrc_use_dev_mock = ENV['HMRC_USE_DEV_MOCK']
     config.x.hmrc_interface.host = ENV['HMRC_API_HOST']
     config.x.hmrc_interface.client_id = ENV['HMRC_API_UID']
     config.x.hmrc_interface.client_secret = ENV['HMRC_API_SECRET']
