@@ -15,5 +15,15 @@ RSpec.describe HMRC::CreateResponsesService do
         expect { call }.to change(HMRC::SubmissionWorker.jobs, :size).by(2)
       end
     end
+
+    context 'when requests already exist' do
+      let!(:hmrc_response) { create :hmrc_response, legal_aid_application: legal_aid_application }
+      it 'does not create any more hmrc_response records' do
+        expect { call }.not_to change { legal_aid_application.hmrc_responses.count }
+      end
+      it 'does not create any jobs to request the data' do
+        expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
+      end
+    end
   end
 end
