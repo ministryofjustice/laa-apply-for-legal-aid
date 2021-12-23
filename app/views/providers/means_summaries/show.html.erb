@@ -3,7 +3,11 @@
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
 
   <% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? %>
-    <%= render 'shared/check_answers/employed_income' %>
+    <% if @legal_aid_application.hmrc_employment_income? %>
+      <%= render 'shared/check_answers/employed_income' %>
+    <% else %>
+      <%= render 'shared/check_answers/no_employed_income' %>
+    <% end %>
   <% end %>
 
   <%= render(
