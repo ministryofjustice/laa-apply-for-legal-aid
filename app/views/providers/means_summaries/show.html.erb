@@ -2,9 +2,7 @@
 
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
 
-  <% if @legal_aid_application.extra_employment_information_details? %>
-    <%= render 'shared/check_answers/employed_income' %>
-  <% end %>
+  <%= render 'shared/check_answers/employed_income' %>
 
   <%= render(
          'shared/check_answers/income_summary',
