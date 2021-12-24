@@ -53,11 +53,8 @@ module Reports
         create :chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
-               application_proceeding_type: application_proceeding_type, # TODO: remove once ChancesOfSuccess has been refacted to use Proceedings only
                proceeding: proceeding
       end
-
-      let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first } # TODO: remove once ChancesOfSuccess has been refacted to use Proceedings only
 
       let(:applicant) do
         create :applicant,
@@ -254,7 +251,7 @@ module Reports
 
           context 'multiple proceedings' do
             before { setup_multiple_proceedings }
-            let(:expected_proceeding_types) { 'Meaning-DA001, Meaning-DA004, Meaning-SE013' }
+            let(:expected_proceeding_types) { 'Child arrangements order (contact), Inherent jurisdiction high court injunction, Non-molestation order' }
             it 'generates multiple proceedings content' do
               expect(value_for('Single/Multi Proceedings')).to eq 'Multi'
               expect(value_for('Matter types')).to eq 'Domestic Abuse, Section 8 orders'
@@ -543,28 +540,18 @@ module Reports
         ]
       end
 
-      # TODO: refactor this once ChancesOfSuccess has been refactored to use Proceedings only
       def setup_multiple_proceedings
         legal_aid_application.application_proceeding_types.map(&:destroy)
         legal_aid_application.proceedings.map(&:destroy)
-        %i[da001 da004 se013].each do |code|
-          pt = create :proceeding_type, code
-          create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
-          apt = create :application_proceeding_type,
-                       legal_aid_application: legal_aid_application,
-                       proceeding_type: pt,
-                       lead_proceeding: code == :da001
-
-          proceeding = Proceeding.create_from_proceeding_type(legal_aid_application, pt)
-          proceeding.update!(lead_proceeding: true) if apt.lead_proceeding?
+        %i[da001 da004 se013].each do |trait|
+          proceeding = create :proceeding, trait, legal_aid_application: legal_aid_application
 
           create :chances_of_success,
                  success_prospect: prospect,
                  application_purpose: purpose,
-                 application_proceeding_type: apt,
                  proceeding: proceeding
         end
+        legal_aid_application.reload
       end
     end
   end

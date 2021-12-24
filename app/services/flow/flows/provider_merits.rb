@@ -98,7 +98,7 @@ module Flow
         },
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: ->(application) { application.proceeding_types.size > 1 ? :gateway_evidences : :check_merits_answers }
+          forward: ->(application) { application.proceedings.size > 1 ? :gateway_evidences : :check_merits_answers }
         },
         gateway_evidences: {
           path: ->(application) { urls.providers_legal_aid_application_gateway_evidence_path(application) },

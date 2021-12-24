@@ -1,6 +1,5 @@
 module ProceedingMeritsTask
   class ChancesOfSuccess < ApplicationRecord
-    belongs_to :application_proceeding_type
     belongs_to :proceeding
 
     # TODO: remove once LFA migration is complete
