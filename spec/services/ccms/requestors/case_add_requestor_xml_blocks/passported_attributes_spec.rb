@@ -391,24 +391,26 @@ module CCMS
         end
 
         context 'ProceedingCaseId' do
+          let(:proceeding_case_id) { legal_aid_application.proceedings.first.proceeding_case_p_num }
+
           context 'ProceedingCaseId section' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding_case_id)
-              expect(block.text).to eq application_proceeding_type.proceeding_case_p_num
+              expect(block.text).to eq proceeding_case_id
             end
           end
 
           context 'in merits assessment block' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'PROCEEDING_ID')
-              expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
+              expect(block).to have_text_response(proceeding_case_id)
             end
           end
 
           context 'in means assessment block' do
             it 'has a p number' do
               block = XmlExtractor.call(xml, :proceeding, 'PROCEEDING_ID')
-              expect(block).to have_text_response(application_proceeding_type.proceeding_case_p_num)
+              expect(block).to have_text_response(proceeding_case_id)
             end
           end
         end

@@ -113,4 +113,13 @@ RSpec.describe Proceeding, type: :model do
       end
     end
   end
+
+  describe '#proceeding_case_p_num' do
+    it 'prefixes the proceeding case id with P_' do
+      legal_aid_application = create :legal_aid_application, :with_proceedings
+      proceeding = legal_aid_application.proceedings.first
+      allow(proceeding).to receive(:proceeding_case_id).and_return 55_200_301
+      expect(proceeding.proceeding_case_p_num).to eq 'P_55200301'
+    end
+  end
 end
