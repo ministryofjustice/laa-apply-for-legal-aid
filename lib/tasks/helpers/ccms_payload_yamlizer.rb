@@ -3,7 +3,7 @@ require 'yaml'
 
 class CcmsPayloadYamlizer
   def initialize(filename)
-    @xml = File.open(filename, &:read)
+    @xml = File.read(filename)
     @doc = Nokogiri::XML(@xml, &:noblanks)
     @doc.remove_namespaces!
     @data = @doc.children.first
