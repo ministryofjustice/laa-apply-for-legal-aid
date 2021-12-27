@@ -106,7 +106,7 @@ module Providers
         end
 
         context 'user has come from the check_merits_answer page' do
-          let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :checking_merits_answers, explicit_proceedings: [:da001, :se014] }
+          let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :checking_merits_answers, explicit_proceedings: %i[da001 se014] }
 
           it 'redirects back to the answers page' do
             subject
