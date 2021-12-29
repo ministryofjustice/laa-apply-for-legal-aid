@@ -1,6 +1,5 @@
 require 'json'
 
-
 # This class is useful for debugging why coverage is not 100% on Circle-CI
 # A line to run this is included in the .circle/config.yml, however, if coverage is incomplete
 # the line:
