@@ -29,6 +29,8 @@ unless ENV['NOCOVERAGE']
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
     add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
+    add_filter 'app/models/cfe/v1/result.rb'
+    add_filter 'app/models/cfe/v2/result.rb'
   end
 
   SimpleCov.at_exit do
