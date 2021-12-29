@@ -59,7 +59,6 @@ class LegalAidApplication < ApplicationRecord
     ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end
 
-  validates :provider, presence: true
   validate :validate_document_categories
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
