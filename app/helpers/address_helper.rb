@@ -6,6 +6,6 @@ module AddressHelper
               address.address_line_two,
               address.city,
               address.county,
-              address.pretty_postcode].compact.reject(&:blank?).join('<br>'), tags: ['br']
+              address.pretty_postcode].compact.compact_blank.join('<br>'), tags: ['br']
   end
 end

@@ -59,7 +59,7 @@ module Reports
     def separate_attrs(str)
       return [] if !str || str.strip.empty?
 
-      str.split(/\r\n|,|\s/).reject(&:empty?).map(&:upcase)
+      str.split(/\r\n|,|\s/).compact_blank.map(&:upcase)
     end
 
     def process_date(params, date_type)

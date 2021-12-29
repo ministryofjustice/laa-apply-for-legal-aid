@@ -14,7 +14,7 @@ class Address < ApplicationRecord
   end
 
   def full_address
-    [address_line_one, address_line_two, city, county, postcode].compact.reject(&:blank?).join(', ')
+    [address_line_one, address_line_two, city, county, postcode].compact.compact_blank.join(', ')
   end
 
   def pretty_postcode
