@@ -51,7 +51,7 @@ RSpec.describe 'citizen home requests', type: :request do
       let(:secure_id) do
         SecureData.create_and_store!(
           legal_aid_application: { id: application_id },
-          expired_at: Time.current - 1.minute
+          expired_at: 1.minute.ago
         )
       end
 

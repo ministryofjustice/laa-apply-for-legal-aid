@@ -1,3 +1,4 @@
+# rubocop:disable Rails/ReversibleMigration
 class ChangeTransactionPeriodDates < ActiveRecord::Migration[5.2]
   def change
     rename_column :legal_aid_applications, :transaction_period_start_at, :transaction_period_start_on
@@ -7,3 +8,4 @@ class ChangeTransactionPeriodDates < ActiveRecord::Migration[5.2]
     change_column :legal_aid_applications, :transaction_period_finish_on, :date
   end
 end
+# rubocop:enable Rails/ReversibleMigration

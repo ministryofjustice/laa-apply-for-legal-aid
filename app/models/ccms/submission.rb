@@ -6,7 +6,9 @@ module CCMS
     has_many :submission_documents, dependent: :destroy
     has_many :submission_history, dependent: :destroy
 
+    # rubocop:disable Rails/RedundantPresenceValidationOnBelongsTo
     validates :legal_aid_application_id, presence: true
+    # rubocop:enable Rails/RedundantPresenceValidationOnBelongsTo
 
     after_save do
       ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
