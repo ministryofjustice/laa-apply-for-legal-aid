@@ -68,6 +68,10 @@ module CFE
     #                                                              #
     ################################################################
 
+    def additional_properties
+      property[:additional_properties]
+    end
+
     def additional_property?
       existing_and_not_all_zero?(property[:additional_properties].first)
     end
@@ -91,6 +95,20 @@ module CFE
     def additional_property_assessed_equity
       assessed_equity = additional_property[:assessed_equity]&.to_d
       assessed_equity.positive? ? assessed_equity : 0.0
+    end
+
+    ################################################################
+    #                                                              #
+    #  CAPITAL ITEMS                                               #
+    #                                                              #
+    ################################################################
+
+    def total_savings
+      capital[:total_liquid].to_d
+    end
+
+    def total_other_assets
+      capital[:total_non_liquid].to_d
     end
 
     ################################################################
