@@ -33,7 +33,6 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-droid \
                   ttf-freefont \
                   ttf-liberation \
-                  ttf-ubuntu-font-family \
                   wkhtmltopdf \
                   bash \
                   py3-pip
