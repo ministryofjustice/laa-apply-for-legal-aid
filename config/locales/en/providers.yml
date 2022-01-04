@@ -273,7 +273,7 @@ en:
         h1-heading: Continue %{client_name}'s financial assessment
         what_to_do: "Your client has shared their financial information. You need to do the following:"
         point_1_heading: 1. Review their employment details
-        point_1_text: We'll show you the information HRMC shared with us.
+        point_1_text: We'll show you the information HMRC shared with us.
         point_2_heading: 2. Sort their bank transactions into categories
         point_2_text: Your client selected the categories their income and outgoings fall into. View their bank statements and sort transactions into these categories.
         point_3_heading: 3. Tell us about their dependants
