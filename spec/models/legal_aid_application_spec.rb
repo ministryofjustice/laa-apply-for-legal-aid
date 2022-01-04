@@ -1115,7 +1115,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     it 'returns se013 as the first item' do
       item = subject.first
-      expect(item).to be_an_instance_of(OpenStruct)
+      expect(item).to be_an_instance_of(LegalAidApplication::ProceedingStruct)
       expect(item.name).to eq 'child_arrangements_order_contact'
       expect(item.meaning).to eq 'Child arrangements order (contact)'
       expect(item.proceeding).to be_instance_of(Proceeding)
@@ -1123,7 +1123,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     it 'returns da004 as the last item' do
       item = subject.last
-      expect(item).to be_an_instance_of(OpenStruct)
+      expect(item).to be_an_instance_of(LegalAidApplication::ProceedingStruct)
       expect(item.name).to eq 'nonmolestation_order'
       expect(item.meaning).to eq 'Non-molestation order'
       expect(item.proceeding).to be_instance_of(Proceeding)

@@ -14,6 +14,8 @@
 module TranslatableModelAttribute
   extend ActiveSupport::Concern
 
+  RadioButtonStruct = Struct.new(:name, :label)
+
   def enum_t(attribute)
     model = model_name.i18n_key
     I18n.t(__send__(attribute), scope: [:model_enum_translations, model, attribute])
@@ -28,7 +30,7 @@ module TranslatableModelAttribute
     #     <%= Feedback.enum_radio_buttons(form, :satisfaction, order: :reverse) %>
     def enum_radio_buttons(form, attribute, order: :normal, args: nil)
       collection = enum_ts(attribute).map do |option, translation|
-        OpenStruct.new(name: option.to_s, label: translation)
+        RadioButtonStruct.new(option.to_s, translation)
       end
       collection.reverse! if order == :reverse
       form.govuk_collection_radio_buttons(attribute, collection, :name, :label, **args)

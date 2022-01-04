@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+ErrorResponseStruct = Struct.new(:code, :body)
+
 RSpec.describe GovukEmails::DeliveryMan do
   let(:scheduled_mailing) { create :scheduled_mailing, :waiting }
   let(:mailer_klass) { scheduled_mailing.mailer_klass }
@@ -55,7 +57,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         # BadRequestError: Can’t send to this recipient using a team-only API key
         let(:scheduled_mailing) { create :scheduled_mailing, :waiting, legal_aid_application: application }
         let(:application) { create :legal_aid_application, :with_applicant, :with_proceeding_types, :with_delegated_functions, substantive_application_deadline_on: Date.tomorrow }
-        let(:response_error_stub) { OpenStruct.new(code: 400, body: 'BadRequestError: Can’t send to this recipient using a team-only API key') }
+        let(:response_error_stub) { ErrorResponseStruct.new(400, 'BadRequestError: Can’t send to this recipient using a team-only API key') }
 
         before do
           allow(mailer_klass.constantize).to receive(mailer_method).and_raise(Notifications::Client::BadRequestError.new(response_error_stub))

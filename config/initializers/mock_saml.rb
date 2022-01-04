@@ -1,20 +1,40 @@
 # frozen_string_literal: true
 
-Rails.configuration.x.application.mock_saml = OpenStruct.new(
+class ValidTestUsersStruct
+  attr_reader :users, :password
+
+  def initialize(users:, password:)
+    @users = users
+    @password = password
+  end
+
+  # imitate OpenStruct's behaviour of returning nil for unrecognised methods
+  def method_missing(_meth)
+    nil
+  end
+
+  def respond_to_missing?(_meth)
+    true
+  end
+end
+
+TestCredentialsStruct = Struct.new(:username, :email)
+
+Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
   users: [
-    OpenStruct.new(username: 'test1', email: 'test1@example.com'),
-    OpenStruct.new(username: 'will-c', email: 'william.clarke@digital.justice.gov.uk'),
-    OpenStruct.new(username: 'test-sch', email: 'apply-for-legal-aid@digital.justice.gov.uk'),
-    OpenStruct.new(username: 'test2', email: 'test2@example.com'),
-    OpenStruct.new(username: 'test3', email: 'really-really-long-email-address@example.com'),
-    OpenStruct.new(username: 'firm1-user1', email: 'firm1-user1@example.com'),
-    OpenStruct.new(username: 'firm1-user2', email: 'firm1-user2@example.com'),
-    OpenStruct.new(username: 'firm2-user1', email: 'firm2-user1@example.com'),
-    OpenStruct.new(username: 'NEETADESOR', email: 'neeta@example.com'),
-    OpenStruct.new(username: 'MARTIN.RONAN@DAVIDGRAY.CO.UK', email: 'martin.ronan@example.com'),
-    OpenStruct.new(username: 'HFITZSIMONS@EDWARDHAYES.CO.UK', email: 'hfitzsimons@example.com'),
-    OpenStruct.new(username: 'sr', email: 'stephen.richards@digital.justice.gov.uk'),
-    OpenStruct.new(username: 'ahernk', email: 'katharine.ahern@digital.justice.gov.uk')
+    TestCredentialsStruct.new('test1', 'test1@example.com'),
+    TestCredentialsStruct.new('will-c', 'william.clarke@digital.justice.gov.uk'),
+    TestCredentialsStruct.new('test-sch', 'apply-for-legal-aid@digital.justice.gov.uk'),
+    TestCredentialsStruct.new('test2', 'test2@example.com'),
+    TestCredentialsStruct.new('test3', 'really-really-long-email-address@example.com'),
+    TestCredentialsStruct.new('firm1-user1', 'firm1-user1@example.com'),
+    TestCredentialsStruct.new('firm1-user2', 'firm1-user2@example.com'),
+    TestCredentialsStruct.new('firm2-user1', 'firm2-user1@example.com'),
+    TestCredentialsStruct.new('NEETADESOR', 'neeta@example.com'),
+    TestCredentialsStruct.new('MARTIN.RONAN@DAVIDGRAY.CO.UK', 'martin.ronan@example.com'),
+    TestCredentialsStruct.new('HFITZSIMONS@EDWARDHAYES.CO.UK', 'hfitzsimons@example.com'),
+    TestCredentialsStruct.new('sr', 'stephen.richards@digital.justice.gov.uk'),
+    TestCredentialsStruct.new('ahernk', 'katharine.ahern@digital.justice.gov.uk')
   ],
   password: 'password'
 )

@@ -1,13 +1,16 @@
 require 'rails_helper'
 
+FirmStruct = Struct.new(:id, :name)
+OfficeStruct = Struct.new(:id, :code)
+
 RSpec.describe ProviderDetailsCreator do
   let(:username) { Faker::Name.name }
   let(:provider) { create :provider, name: nil, username: username }
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
   let(:third_provider) { create :provider, name: nil, email: nil }
-  let(:ccms_firm) { OpenStruct.new(id: rand(1..1000), name: Faker::Company.name) }
-  let(:ccms_office1) { OpenStruct.new(id: rand(1..100), code: random_vendor_code) }
-  let(:ccms_office2) { OpenStruct.new(id: rand(101..200), code: random_vendor_code) }
+  let(:ccms_firm) { FirmStruct.new(rand(1..1000), Faker::Company.name) }
+  let(:ccms_office1) { OfficeStruct.new(rand(1..100), random_vendor_code) }
+  let(:ccms_office2) { OfficeStruct.new(rand(101..200), random_vendor_code) }
   let(:contact_id) { rand(101..200) }
   let(:api_response) do
     {
@@ -130,7 +133,7 @@ RSpec.describe ProviderDetailsCreator do
 
     context 'another provider has the same firm but a different set of offices' do
       let(:provider2) { create :provider }
-      let(:ccms_office3) { OpenStruct.new(id: rand(201..300), code: rand(201..300).to_s) }
+      let(:ccms_office3) { OfficeStruct.new(rand(201..300), rand(201..300).to_s) }
       let(:api_response2) do
         {
           providerFirmId: ccms_firm.id,

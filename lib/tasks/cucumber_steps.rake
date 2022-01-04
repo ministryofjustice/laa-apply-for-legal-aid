@@ -1,4 +1,6 @@
 # rubocop:disable Rails/RakeEnvironment
+
+StepStruct = Struct.new(:stepname, :location)
 namespace :cucumber do
   desc 'List all defined steps'
   task :steps do
@@ -14,7 +16,7 @@ namespace :cucumber do
         next unless line =~ /^\s*(Given|When|Then)\((.+)\)\s*do$/
 
         name = Regexp.last_match(2).delete('/').delete('^').delete('$').delete("'").delete('"')
-        results << OpenStruct.new(stepname: name, location: "#{step_file}:#{number + 1}")
+        results << StepStruct.new(name, "#{step_file}:#{number + 1}")
       end
     end
 
