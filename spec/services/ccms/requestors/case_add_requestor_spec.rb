@@ -89,17 +89,6 @@ module CCMS
         end
 
         context 'when DF assigned scope limitations are present' do
-          let(:df_scope_limitation) { create :scope_limitation, code: 'ZZ999', description: 'Default scope limitation.', substantive: false, delegated_functions: true }
-          let(:apt) { legal_aid_application.application_proceeding_types.first }
-
-          before do
-            # setup the df scope limitation to be the default for this proceeding type and add it to the application proceeding types
-            pt = apt.proceeding_type
-            pt.eligible_scope_limitations << df_scope_limitation
-            apt.delegated_functions_scope_limitation = df_scope_limitation
-            pt.proceeding_type_scope_limitations.find_by(scope_limitation_id: df_scope_limitation.id).update!(substantive_default: false, delegated_functions_default: true)
-          end
-
           context 'DF not used' do
             it 'does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope' do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
@@ -114,8 +103,6 @@ module CCMS
             let(:df_date) { Date.parse('2020-11-23') }
             before do
               proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
-              application_proceeding_type.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
-
               legal_aid_application.reload
             end
 
