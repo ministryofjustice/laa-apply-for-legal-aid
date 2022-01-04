@@ -2,7 +2,7 @@ module Providers
   module ProceedingMeritsTask
     class LinkedChildrenController < ProviderBaseController
       def show
-        @form = Providers::ProceedingMeritsTask::LinkedChildrenForm.new(model: application_proceeding_type)
+        @form = Providers::ProceedingMeritsTask::LinkedChildrenForm.new(model: proceeding)
       end
 
       def update
@@ -16,10 +16,6 @@ module Providers
         @legal_aid_application ||= proceeding.legal_aid_application
       end
 
-      def application_proceeding_type
-        @application_proceeding_type ||= proceeding.application_proceeding_type
-      end
-
       def proceeding
         @proceeding ||= Proceeding.find(merits_task_list_id)
       end
@@ -29,8 +25,8 @@ module Providers
       end
 
       def form_params
-        merge_with_model(application_proceeding_type) do
-          params.require(:proceeding_merits_task_application_proceeding_type_linked_child).permit(linked_children: [])
+        merge_with_model(proceeding) do
+          params.require(:proceeding_merits_task_proceeding_linked_child).permit(linked_children: [])
         end
       end
     end

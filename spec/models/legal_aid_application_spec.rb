@@ -660,9 +660,8 @@ RSpec.describe LegalAidApplication, type: :model do
     context 'delegated functions' do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
       let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: 'DA004') }
-      let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, application_proceeding_type: application_proceeding_type, proceeding: da004
+        create :chances_of_success, :with_optional_text, proceeding: da004
       end
 
       it 'returns the substantive cost limitation for the first proceeding type' do
@@ -1044,9 +1043,8 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
 
     it 'returns an array of all the  chances of success records' do
-      # TODO: remove the :with_application_proceeding_type trait once LFA conversion is complete and application_proceeding_type is no longer a required field on chances_of_success
-      cos_da001 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_da001
-      cos_se014 = create :chances_of_success, :with_application_proceeding_type, proceeding: proceeding_se014
+      cos_da001 = create :chances_of_success, proceeding: proceeding_da001
+      cos_se014 = create :chances_of_success, proceeding: proceeding_se014
 
       expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
     end
@@ -1056,12 +1054,10 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4 }
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == 'DA001' } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == 'SE014' } }
-    let(:apt) { create :application_proceeding_type }
 
     it 'returns an array of attempt_to_settle records attached to the application' do
-      # TODO: remove the application_proceeding_type from these lines once the LFA migration is complete
-      ats_da001 = create :attempts_to_settles, proceeding: proceeding_da001, application_proceeding_type: apt
-      ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014, application_proceeding_type: apt
+      ats_da001 = create :attempts_to_settles, proceeding: proceeding_da001
+      ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014
 
       expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
     end
@@ -1140,8 +1136,7 @@ RSpec.describe LegalAidApplication, type: :model do
       prospects = %w[likely borderline marginal]
       laa.proceedings.each_with_index do |proceeding, i|
         proceeding.chances_of_success = create(:chances_of_success, proceeding: proceeding,
-                                                                    success_prospect: prospects[i],
-                                                                    application_proceeding_type: create(:application_proceeding_type))
+                                                                    success_prospect: prospects[i])
       end
       expect(laa.lowest_prospect_of_success).to eq 'Borderline'
     end

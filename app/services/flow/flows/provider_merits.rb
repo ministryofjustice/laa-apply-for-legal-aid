@@ -65,8 +65,7 @@ module Flow
         chances_of_success: {
           forward: ->(application) do
             proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
-            application_proceeding_type = proceeding.application_proceeding_type
-            if application_proceeding_type.chances_of_success.success_likely?
+            if proceeding.chances_of_success.success_likely?
               :merits_task_lists
             else
               :success_prospects
@@ -74,8 +73,7 @@ module Flow
           end,
           check_answers: ->(application) do
             proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
-            application_proceeding_type = proceeding.application_proceeding_type
-            application_proceeding_type.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
+            proceeding.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
           end
         },
         success_prospects: {
@@ -100,7 +98,7 @@ module Flow
         },
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: ->(application) { application.proceeding_types.size > 1 ? :gateway_evidences : :check_merits_answers }
+          forward: ->(application) { application.proceedings.size > 1 ? :gateway_evidences : :check_merits_answers }
         },
         gateway_evidences: {
           path: ->(application) { urls.providers_legal_aid_application_gateway_evidence_path(application) },

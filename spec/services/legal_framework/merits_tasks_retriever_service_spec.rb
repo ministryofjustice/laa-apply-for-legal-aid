@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe MeritsTasksRetrieverService do
-    let(:application) { create :legal_aid_application, :with_proceeding_types }
+    let(:application) { create :legal_aid_application, :with_proceedings }
     let(:submission) { create :legal_framework_submission, legal_aid_application: application }
     let(:dummy_response) { dummy_response_hash.to_json }
     let(:service) { described_class.new(submission) }
@@ -52,10 +52,9 @@ module LegalFramework
     end
 
     def expected_payload_hash
-      proceeding_types = application.proceeding_types.first
       {
         request_id: submission.id,
-        proceeding_types: [proceeding_types.ccms_code]
+        proceeding_types: [application.proceedings.first.ccms_code]
       }
     end
 
@@ -71,7 +70,7 @@ module LegalFramework
         },
         proceeding_types: [
           {
-            ccms_code: application.proceeding_types.first.ccms_code,
+            ccms_code: application.proceedings.first.ccms_code,
             tasks: {
               chances_of_success: [] # the merits tasks for this one proceeding type, and any dependencies
             }

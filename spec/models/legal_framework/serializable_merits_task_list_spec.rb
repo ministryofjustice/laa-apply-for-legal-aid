@@ -2,7 +2,10 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe SerializableMeritsTaskList, type: :model do
-    before { populate_legal_framework }
+    before do
+      create :proceeding, :da004
+      create :proceeding, :da001
+    end
     let(:smtl) { described_class.new(dummy_response_hash) }
 
     describe '.new' do
@@ -31,7 +34,7 @@ module LegalFramework
 
       context 'ccms_code' do
         it 'returns an array of serializable merits tasks' do
-          tasks = smtl.tasks_for(:DA005)
+          tasks = smtl.tasks_for(:DA004)
           expect(tasks.size).to eq 1
           expect(tasks.map(&:class).uniq).to eq [SerializableMeritsTask]
           expect(tasks.map(&:name)).to eq %i[chances_of_success]
@@ -85,8 +88,8 @@ module LegalFramework
         end
         context 'proceeding type' do
           it 'marks the task as complete' do
-            smtl.mark_as_complete!(:DA005, :chances_of_success)
-            expect(smtl.task(:DA005, :chances_of_success).state).to eq :complete
+            smtl.mark_as_complete!(:DA004, :chances_of_success)
+            expect(smtl.task(:DA004, :chances_of_success).state).to eq :complete
           end
         end
       end
@@ -104,7 +107,7 @@ module LegalFramework
         },
         proceeding_types: [
           {
-            ccms_code: 'DA005',
+            ccms_code: 'DA004',
             tasks: {
               chances_of_success: []
             }

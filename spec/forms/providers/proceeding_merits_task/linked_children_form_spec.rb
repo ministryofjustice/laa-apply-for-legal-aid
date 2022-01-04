@@ -2,14 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form do
   subject(:form) { described_class.new(params) }
-  let(:params) { { linked_children: linked_children_params, model: application_proceeding_type } }
-  let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_multiple_proceeding_types_inc_section8 }
-  let(:proceeding_type) { legal_aid_application.proceeding_types.find_by(ccms_matter_code: 'KSEC8') }
-  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type.id) }
+  let(:params) { { linked_children: linked_children_params, model: proceeding } }
+  let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se013], set_lead_proceeding: :da001 }
+  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'SE013') }
   let(:linked_children_params) { nil }
 
   describe '.value_list' do
-    subject(:form) { described_class.new(model: application_proceeding_type) }
+    subject(:form) { described_class.new(model: proceeding) }
 
     let(:expected_array) do
       legal_aid_application.involved_children.map do |child|
@@ -54,8 +53,8 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' }
     end
     context 'when the initial application_proceeding_type has no linked_children' do
-      it { expect(application_proceeding_type.application_proceeding_type_linked_children).to match_array [] }
-      it { expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(1) }
+      it { expect(proceeding.proceeding_linked_children).to match_array [] }
+      it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
     end
 
     context 'when a user has previously linked two children' do
@@ -65,20 +64,20 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       let(:initial_array) { [second_child.id, third_child.id] }
       let(:linked_children_params) { [first_child.id, '', ''] }
       before do
-        create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: second_child
-        create :application_proceeding_type_linked_child, application_proceeding_type: application_proceeding_type, involved_child: third_child
+        create :proceeding_linked_child, proceeding: proceeding, involved_child: second_child
+        create :proceeding_linked_child, proceeding: proceeding, involved_child: third_child
       end
 
-      it { expect { subject }.to change { application_proceeding_type.application_proceeding_type_linked_children.count }.by(-1) }
-      it { expect(application_proceeding_type.application_proceeding_type_linked_children.map(&:involved_child_id)).to match_array initial_array }
+      it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(-1) }
+      it { expect(proceeding.proceeding_linked_children.map(&:involved_child_id)).to match_array initial_array }
 
       context 'when an error occurs' do
         let(:linked_children_params) { ['guid-for-non-existent-child', '', ''] }
 
-        it { expect { subject }.to_not change { application_proceeding_type.application_proceeding_type_linked_children.count } }
+        it { expect { subject }.to_not change { proceeding.proceeding_linked_children.count } }
         it 'it rolls back all changes' do
           expect(subject).to eql false
-          expect(application_proceeding_type.application_proceeding_type_linked_children.reload.map(&:involved_child_id)).to match_array initial_array
+          expect(proceeding.proceeding_linked_children.reload.map(&:involved_child_id)).to match_array initial_array
         end
       end
     end

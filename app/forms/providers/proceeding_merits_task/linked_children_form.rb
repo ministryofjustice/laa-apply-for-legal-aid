@@ -1,7 +1,7 @@
 module Providers
   module ProceedingMeritsTask
     class LinkedChildrenForm < BaseForm
-      form_for ::ProceedingMeritsTask::ApplicationProceedingTypeLinkedChild
+      form_for ::ProceedingMeritsTask::ProceedingLinkedChild
 
       attr_accessor :linked_children
 
@@ -17,7 +17,6 @@ module Providers
         return false unless valid?
 
         ActiveRecord::Base.transaction do
-          update_involved_children_on_application_proceeding_type
           update_involved_children_on_proceeding
         end
         true
@@ -26,13 +25,6 @@ module Providers
       end
 
       private
-
-      def update_involved_children_on_application_proceeding_type
-        application_proceeding_type.involved_children.delete_all
-        linked_children.filter_map(&:presence).each do |child_id|
-          application_proceeding_type.application_proceeding_type_linked_children.create!(involved_child_id: child_id)
-        end
-      end
 
       def update_involved_children_on_proceeding
         proceeding.involved_children.delete_all
@@ -62,11 +54,11 @@ module Providers
       end
 
       def proceeding
-        application_proceeding_type.proceeding
+        @proceeding ||= model
       end
 
       def children_ids
-        @children_ids ||= application_proceeding_type.involved_children.map(&:id)
+        @children_ids ||= proceeding.involved_children.map(&:id)
       end
     end
   end

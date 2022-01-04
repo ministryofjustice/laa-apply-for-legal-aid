@@ -208,9 +208,9 @@ module Reports
       end
 
       def proceeding_details
-        @line << proceeding_types.map(&:ccms_matter).uniq.sort.join(', ')
+        @line << proceedings.map(&:matter_type).uniq.sort.join(', ')
         @line << proceedings.count
-        @line << proceeding_types.map(&:meaning).sort.join(', ')
+        @line << proceedings.map(&:meaning).sort.join(', ')
         @line << laspo_question
       end
 
