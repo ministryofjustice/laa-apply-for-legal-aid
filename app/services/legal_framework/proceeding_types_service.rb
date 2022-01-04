@@ -10,8 +10,8 @@ module LegalFramework
       ActiveRecord::Base.transaction do
         @legal_aid_application.proceeding_types << proceeding_type(proceeding_type_id)
         LeadApplicationProceedingTypeAssignmentService.call(@legal_aid_application)
-        AddAssignedScopeLimitationService.call(@legal_aid_application, proceeding_type_id, scope_type)
       end
+      true
     end
 
     private

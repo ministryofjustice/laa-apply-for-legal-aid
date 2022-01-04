@@ -16,7 +16,6 @@ module Providers
       form.draft = draft_selected?
       return unless form.save(form_params)
 
-      update_scope_limitations
       DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
 
       draft_selected? ? continue_or_draft : go_forward(delegated_functions_used_over_month_ago?)
@@ -26,16 +25,8 @@ module Providers
       @form ||= LegalAidApplications::UsedMultipleDelegatedFunctionsForm.call(proceedings_by_name)
     end
 
-    def proceeding_types
-      @proceeding_types ||= legal_aid_application.proceeding_types
-    end
-
     def proceedings_by_name
       @proceedings_by_name ||= legal_aid_application.proceedings_by_name
-    end
-
-    def proceedings
-      proceedings_by_name.map(&:proceeding)
     end
 
     def delegated_functions_used_over_month_ago?
@@ -46,20 +37,6 @@ module Providers
 
     def earliest_delegated_functions_date
       @earliest_delegated_functions_date ||= legal_aid_application.earliest_delegated_functions_date
-    end
-
-    def update_scope_limitations
-      earliest_delegated_functions_date ? add_delegated_scope_limitations : remove_delegated_scope_limitations
-    end
-
-    def add_delegated_scope_limitations
-      proceeding_types.each do |proceeding_type|
-        LegalFramework::AddAssignedScopeLimitationService.call(legal_aid_application, proceeding_type.id, :delegated)
-      end
-    end
-
-    def remove_delegated_scope_limitations
-      proceedings.map(&:application_proceeding_type).each(&:remove_default_delegated_functions_scope_limitation)
     end
 
     def form_params

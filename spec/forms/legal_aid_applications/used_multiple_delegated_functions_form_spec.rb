@@ -30,12 +30,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     end
 
     context 'two of the three proceeding types have delegated functions' do
-      it 'updates each application proceeding type' do
-        expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
-        expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
-                                                                                                         used_delegated_functions_reported_on])
-      end
-
       it 'updates each proceeding' do
         expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
         expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
@@ -50,8 +44,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         end
 
         it 'updates the application types with no reported on date' do
-          expect(application_proceeding_types.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
-          expect(application_proceeding_types.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
           expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
           expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
         end

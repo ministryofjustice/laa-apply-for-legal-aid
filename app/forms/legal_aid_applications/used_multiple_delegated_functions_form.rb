@@ -78,10 +78,6 @@ module LegalAidApplications
         date_field = delegated_functions_dates.detect { |field| field.method == :"#{proceeding.name}_used_delegated_functions_on" }
         delegated_functions_date = date_field&.form_date
 
-        proceeding.application_proceeding_type.update(
-          used_delegated_functions_on: delegated_functions_date,
-          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
-        )
         proceeding.update(
           used_delegated_functions_on: delegated_functions_date,
           used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
