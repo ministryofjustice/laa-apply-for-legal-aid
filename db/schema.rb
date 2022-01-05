@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.uuid "record_id", null: false
     t.string "record_type", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "actor_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "actor_permissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "permittable_type"
     t.uuid "permittable_id"
     t.uuid "permission_id"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["permittable_type", "permittable_id"], name: "index_actor_permissions_on_permittable_type_and_permittable_id"
   end
 
-  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "address_line_one"
     t.string "address_line_two"
     t.string "city"
@@ -68,12 +68,12 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
   end
 
-  create_table "admin_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "admin_reports", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "admin_users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "applicants", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.date "date_of_birth"
     t.datetime "created_at", null: false
@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
+    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
-    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
   end
 
-  create_table "application_digests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_digests", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "firm_name", null: false
     t.string "provider_username", null: false
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
-  create_table "application_proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_proceeding_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "proceeding_type_id"
     t.datetime "created_at", null: false
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
   end
 
-  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "involved_child_id", null: false
     t.uuid "application_proceeding_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
   end
 
-  create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "application_proceeding_type_id", null: false
     t.uuid "scope_limitation_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["type", "application_proceeding_type_id", "scope_limitation_id"], name: "index_application_proceeding_scope_limitation", unique: true
   end
 
-  create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "attachment_type"
     t.uuid "pdf_attachment_id"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.text "original_filename"
   end
 
-  create_table "attempts_to_settles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "attempts_to_settles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "attempts_made"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["proceeding_id"], name: "index_attempts_to_settles_on_proceeding_id"
   end
 
-  create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_account_holders", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_provider_id", null: false
     t.json "true_layer_response"
     t.string "full_name"
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["bank_provider_id"], name: "index_bank_account_holders_on_bank_provider_id"
   end
 
-  create_table "bank_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_accounts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_provider_id", null: false
     t.json "true_layer_response"
     t.json "true_layer_balance_response"
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["bank_provider_id"], name: "index_bank_accounts_on_bank_provider_id"
   end
 
-  create_table "bank_errors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_errors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "applicant_id", null: false
     t.string "bank_name"
     t.text "error"
@@ -223,13 +223,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["applicant_id"], name: "index_bank_errors_on_applicant_id"
   end
 
-  create_table "bank_holidays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_holidays", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "dates"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "bank_providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_providers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "applicant_id", null: false
     t.json "true_layer_response"
     t.string "credentials_id"
@@ -242,7 +242,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
   end
 
-  create_table "bank_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_transactions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_account_id", null: false
     t.json "true_layer_response"
     t.string "true_layer_id"
@@ -262,7 +262,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["transaction_type_id"], name: "index_bank_transactions_on_transaction_type_id"
   end
 
-  create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "benefit_check_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "result"
     t.string "dwp_ref"
@@ -271,7 +271,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
-  create_table "cash_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cash_transactions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
     t.decimal "amount"
     t.date "transaction_date"
@@ -282,13 +282,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
   end
 
-  create_table "ccms_opponent_ids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_opponent_ids", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "serial_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submission_documents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "status"
     t.string "document_type"
@@ -298,7 +298,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.uuid "attachment_id"
   end
 
-  create_table "ccms_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id", null: false
     t.string "from_state"
     t.string "to_state"
@@ -311,7 +311,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["submission_id"], name: "index_ccms_submission_histories_on_submission_id"
   end
 
-  create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "applicant_ccms_reference"
     t.string "case_ccms_reference"
@@ -325,7 +325,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
-  create_table "cfe_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "submission_id"
     t.text "result"
@@ -334,7 +334,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.string "type", default: "CFE::V1::Result"
   end
 
-  create_table "cfe_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "url"
     t.string "http_method"
@@ -347,7 +347,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cfe_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "assessment_id"
     t.string "aasm_state"
@@ -358,7 +358,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
-  create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "chances_of_successes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "application_purpose"
@@ -374,7 +374,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
-  create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "debugs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "debug_type"
     t.string "legal_aid_application_id"
     t.string "session_id"
@@ -388,7 +388,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.string "browser_details"
   end
 
-  create_table "default_cost_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "default_cost_limitations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_type_id", null: false
     t.date "start_date", null: false
     t.string "cost_type", null: false
@@ -398,7 +398,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["proceeding_type_id"], name: "index_default_cost_limitations_on_proceeding_type_id"
   end
 
-  create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "dependants", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "number"
     t.string "name"
@@ -414,7 +414,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
-  create_table "document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "document_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.boolean "submit_to_ccms", default: false, null: false
     t.string "ccms_document_type"
@@ -424,7 +424,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "dwp_overrides", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "passporting_benefit"
     t.boolean "has_evidence_of_benefit"
@@ -433,7 +433,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id", unique: true
   end
 
-  create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "feedbacks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "done_all_needed"
     t.integer "satisfaction"
     t.text "improvement_suggestion"
@@ -449,14 +449,14 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.uuid "legal_aid_application_id"
   end
 
-  create_table "firms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "firms", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccms_id"
     t.string "name"
   end
 
-  create_table "gateway_evidences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "gateway_evidences", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.uuid "provider_uploader_id"
     t.datetime "created_at", precision: 6, null: false
@@ -465,7 +465,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["provider_uploader_id"], name: "index_gateway_evidences_on_provider_uploader_id"
   end
 
-  create_table "hmrc_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "hmrc_responses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "submission_id"
     t.string "use_case"
     t.json "response"
@@ -476,7 +476,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_hmrc_responses_on_legal_aid_application_id"
   end
 
-  create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "incidents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.date "occurred_on"
     t.text "details"
     t.uuid "legal_aid_application_id"
@@ -486,7 +486,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
 
-  create_table "involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "involved_children", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "full_name"
     t.date "date_of_birth"
@@ -496,7 +496,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
   end
 
-  create_table "irregular_incomes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "irregular_incomes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
     t.string "income_type"
     t.string "frequency"
@@ -505,7 +505,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "transaction_type_id"
     t.datetime "created_at", null: false
@@ -514,7 +514,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["transaction_type_id"], name: "laa_trans_type_on_transaction_type_id"
   end
 
-  create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_aid_applications", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -534,7 +534,6 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.date "transaction_period_finish_on"
     t.boolean "transactions_gathered"
     t.datetime "completed_at"
-    t.json "applicant_means_answers"
     t.datetime "declaration_accepted_at"
     t.json "provider_step_params"
     t.boolean "own_vehicle"
@@ -568,7 +567,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
-  create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.text "serialized_data"
     t.datetime "created_at", precision: 6, null: false
@@ -576,7 +575,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "idx_lfa_merits_task_lists_on_legal_aid_application_id"
   end
 
-  create_table "legal_framework_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "url"
     t.string "http_method"
@@ -589,7 +588,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "legal_framework_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "request_id"
     t.string "error_message"
@@ -599,7 +598,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_legal_framework_submissions_on_legal_aid_application_id"
   end
 
-  create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "malware_scan_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "uploader_type"
     t.uuid "uploader_id"
     t.boolean "virus_found", null: false
@@ -608,10 +607,10 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
-  create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "offices", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccms_id"
@@ -627,7 +626,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["provider_id"], name: "index_offices_providers_on_provider_id"
   end
 
-  create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "opponents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.boolean "understands_terms_of_court_order"
     t.text "understands_terms_of_court_order_details"
@@ -644,7 +643,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 
-  create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "other_assets_declarations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value"
     t.decimal "second_home_mortgage"
@@ -661,13 +660,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
-  create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "permissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "role"
     t.string "description"
     t.index ["role"], name: "index_permissions_on_role", unique: true
   end
 
-  create_table "policy_disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "policy_disregards", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "england_infected_blood_support"
     t.boolean "vaccine_damage_payments"
     t.boolean "variant_creutzfeldt_jakob_disease"
@@ -682,7 +681,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_policy_disregards_on_legal_aid_application_id"
   end
 
-  create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_type_id"
     t.uuid "scope_limitation_id"
     t.boolean "substantive_default"
@@ -696,7 +695,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["scope_limitation_id"], name: "index_proceeding_type_scope_limitations_on_scope_limitation_id"
   end
 
-  create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceeding_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "ccms_code"
     t.string "meaning"
@@ -717,7 +716,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["textsearchable"], name: "textsearch_idx", using: :gin
   end
 
-  create_table "proceedings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceedings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "proceeding_case_id"
     t.boolean "lead_proceeding", default: false, null: false
@@ -745,7 +744,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
   end
 
-  create_table "proceedings_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceedings_linked_children", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_id"
     t.uuid "involved_child_id"
     t.datetime "created_at", precision: 6, null: false
@@ -754,7 +753,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["proceeding_id", "involved_child_id"], name: "index_proceeding_involved_child", unique: true
   end
 
-  create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "providers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "type"
     t.text "roles"
@@ -779,7 +778,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
-  create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "savings_amounts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "offline_current_accounts"
     t.decimal "cash"
@@ -796,7 +795,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 
-  create_table "scheduled_mailings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scheduled_mailings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "mailer_klass", null: false
     t.string "mailer_method", null: false
@@ -811,7 +810,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.string "govuk_message_id"
   end
 
-  create_table "scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scope_limitations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "meaning"
     t.string "description"
@@ -822,13 +821,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["code"], name: "index_scope_limitations_on_code"
   end
 
-  create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "secure_data", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "service_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "service_levels", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "service_level_number"
     t.string "name"
     t.datetime "created_at", null: false
@@ -836,7 +835,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["service_level_number"], name: "index_service_levels_on_service_level_number"
   end
 
-  create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "settings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "mock_true_layer_data", default: false, null: false
@@ -850,7 +849,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.boolean "enable_evidence_upload", default: false, null: false
   end
 
-  create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "state_machine_proxies", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "type"
     t.string "aasm_state"
@@ -859,7 +858,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.string "ccms_reason"
   end
 
-  create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "statement_of_cases", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "statement"
     t.datetime "created_at", null: false
@@ -869,7 +868,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end
 
-  create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "transaction_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "operation"
     t.datetime "created_at", null: false
@@ -881,13 +880,13 @@ ActiveRecord::Schema.define(version: 2021_12_23_105917) do
     t.index ["parent_id"], name: "index_transaction_types_on_parent_id"
   end
 
-  create_table "true_layer_banks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "true_layer_banks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "banks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "vehicles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "vehicles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "estimated_value"
     t.decimal "payment_remaining"
     t.date "purchased_on"
