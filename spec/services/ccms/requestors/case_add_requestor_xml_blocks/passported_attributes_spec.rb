@@ -37,9 +37,7 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let!(:success_prospect) { :likely }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
-                                      application_proceeding_type: application_proceeding_type,
-                                      proceeding: proceeding
+          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding
         end
 
         before do
@@ -896,9 +894,7 @@ module CCMS
             let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
             let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
-              create :chances_of_success, :with_optional_text,
-                     application_proceeding_type: application_proceeding_type,
-                     proceeding: da004
+              create :chances_of_success, :with_optional_text, proceeding: da004
             end
 
             it 'returns hard coded statement' do
@@ -1357,9 +1353,7 @@ module CCMS
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
             let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
-                                          application_proceeding_type: application_proceeding_type_one,
-                                          proceeding: proceeding_da004
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
 
             it 'REQUESTED_SCOPE should populated with MULTIPLE in proceedings section' do
@@ -1504,9 +1498,7 @@ module CCMS
             let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
             let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
-                                          application_proceeding_type: application_proceeding_type,
-                                          proceeding: proceeding_da004
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
 
             it 'returns false' do
@@ -1541,9 +1533,7 @@ module CCMS
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
             let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details',
-                                          application_proceeding_type: application_proceeding_type_one,
-                                          proceeding: proceeding_da004
+              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
 
             it 'returns Both' do
