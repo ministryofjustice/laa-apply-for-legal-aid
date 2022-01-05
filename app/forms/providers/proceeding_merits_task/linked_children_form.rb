@@ -46,11 +46,7 @@ module Providers
       end
 
       def legal_aid_application
-        @legal_aid_application ||= application_proceeding_type.legal_aid_application
-      end
-
-      def application_proceeding_type
-        @application_proceeding_type ||= model
+        @legal_aid_application ||= proceeding.legal_aid_application
       end
 
       def proceeding

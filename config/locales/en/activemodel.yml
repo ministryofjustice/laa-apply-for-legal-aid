@@ -108,15 +108,6 @@ en:
               blank: Select yes if your client is employed
             base:
               none_selected: Select one or more employment types or None of the above if not employed
-        application_proceeding_types:
-          attributes:
-            used_delegated_functions_on:
-              nothing_selected: Select proceedings you've used delegated functions for
-              none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
-              date_not_in_range: "The date you used delegated functions cannot be before %{months}"
-              date_is_in_the_future: The date you used delegated functions must be in the past
-              date_invalid: Enter the date you used delegated functions
-              blank: Select a response
         aggregated_cash_income:
           credits:
             attributes:
@@ -429,6 +420,15 @@ en:
           attributes:
             base:
               none_selected: Select if your client has received any of these payments
+        proceedings:
+          attributes:
+            used_delegated_functions_on:
+              nothing_selected: Select proceedings you've used delegated functions for
+              none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
+              date_not_in_range: "The date you used delegated functions cannot be before %{months}"
+              date_is_in_the_future: The date you used delegated functions must be in the past
+              date_invalid: Enter the date you used delegated functions
+              blank: Select a response
         proceeding_merits_task/chances_of_success:
           attributes:
             application_purpose:

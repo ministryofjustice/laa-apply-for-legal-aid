@@ -3,7 +3,7 @@ module Providers
     class AttemptsToSettleForm < BaseForm
       form_for ::ProceedingMeritsTask::AttemptsToSettle
 
-      attr_accessor :attempts_made, :proceeding_id, :application_proceeding_type_id
+      attr_accessor :attempts_made, :proceeding_id
 
       validate :attempts_made_present?
 
