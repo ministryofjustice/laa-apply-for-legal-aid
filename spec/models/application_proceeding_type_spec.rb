@@ -29,15 +29,6 @@ RSpec.describe ApplicationProceedingType do
     end
   end
 
-  describe '#proceeding_case_p_num' do
-    it 'prefixes the proceeding case id with P_' do
-      legal_aid_application = create :legal_aid_application, :with_proceeding_types
-      application_proceeding_type = legal_aid_application.application_proceeding_types.first
-      allow(application_proceeding_type).to receive(:proceeding_case_id).and_return 55_200_301
-      expect(application_proceeding_type.proceeding_case_p_num).to eq 'P_55200301'
-    end
-  end
-
   describe 'delegated functions' do
     let(:application) do
       create :legal_aid_application,

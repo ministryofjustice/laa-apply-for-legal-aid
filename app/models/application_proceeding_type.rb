@@ -80,10 +80,6 @@ class ApplicationProceedingType < ApplicationRecord
   end
   ##############################
 
-  def proceeding_case_p_num
-    "P_#{proceeding_case_id}"
-  end
-
   private
 
   def check_only_one_lead_proceeding

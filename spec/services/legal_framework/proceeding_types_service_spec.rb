@@ -43,11 +43,6 @@ module LegalFramework
             expect(legal_aid_application.proceeding_types).to match_array([proceeding_type, proceeding_type2])
           end
         end
-
-        it 'calls AddScopeLimitationService' do
-          expect(AddAssignedScopeLimitationService).to receive(:call).with(legal_aid_application, proceeding_type.id, scope_type)
-          subject.add(**params)
-        end
       end
 
       context 'on failure' do
@@ -61,11 +56,6 @@ module LegalFramework
 
         it 'returns false' do
           expect(subject.add(**params)).to eq false
-        end
-
-        it 'does not call AddScopeLimitationService' do
-          expect(AddAssignedScopeLimitationService).not_to receive(:call).with(legal_aid_application, proceeding_type.id, scope_type)
-          subject.add(**params)
         end
       end
     end

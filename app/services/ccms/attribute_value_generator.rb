@@ -22,8 +22,7 @@ module CCMS
   # value to insert.
   class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
     STANDARD_METHOD_NAMES = %r{^(
-                                appl_proceeding_type
-                                |applicant
+                                applicant
                                 |application
                                 |bank_account
                                 |lead_proceeding
@@ -40,7 +39,6 @@ module CCMS
                                 |vehicle
                                 |wage_slip
                                 )_(\S+)$}x.freeze
-    APPLICATION_PROCEEDING_TYPE_REGEX = /^appl_proceeding_type_(\S+)$/.freeze
     APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
     APPLICATION_REGEX = /^application_(\S+)$/.freeze
     BANK_REGEX = /^bank_account_(\S+)$/.freeze
@@ -68,7 +66,7 @@ module CCMS
 
     attr_reader :legal_aid_application
 
-    delegate :lead_application_proceeding_type,
+    delegate :lead_proceeding,
              :vehicle,
              :used_delegated_functions?, to: :legal_aid_application
 
@@ -345,10 +343,6 @@ module CCMS
 
     def applicant
       @applicant ||= legal_aid_application.applicant
-    end
-
-    def lead_proceeding
-      @lead_proceeding ||= legal_aid_application.lead_proceeding
     end
 
     def standardly_named_method?(method)

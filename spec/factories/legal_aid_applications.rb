@@ -389,8 +389,8 @@ FactoryBot.define do
         AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
                                                    scope_limitation_id: sl.id)
         application.application_proceeding_types.each do |app_proc_type|
-          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type, proceeding: app_proc_type.proceeding)
-          create(:attempts_to_settles, application_proceeding_type: app_proc_type, proceeding: app_proc_type.proceeding)
+          create(:chances_of_success, :with_optional_text, proceeding: app_proc_type.proceeding)
+          create(:attempts_to_settles, proceeding: app_proc_type.proceeding)
         end
       end
     end
@@ -665,7 +665,7 @@ FactoryBot.define do
       end
       after(:create) do |application, evaluator|
         application.application_proceeding_types.each do |apt|
-          apt.chances_of_success = create(:chances_of_success, application_proceeding_type: apt, success_prospect: evaluator.prospect, proceeding: apt.proceeding)
+          apt.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding: apt.proceeding)
         end
       end
     end
@@ -854,6 +854,20 @@ FactoryBot.define do
       end
     end
 
+    trait :with_cfe_v1_result do
+      after :create do |application|
+        cfe_submission = create :cfe_submission, legal_aid_application: application
+        create :cfe_v1_result, submission: cfe_submission
+      end
+    end
+
+    trait :with_cfe_v2_result do
+      after :create do |application|
+        cfe_submission = create :cfe_submission, legal_aid_application: application
+        create :cfe_v2_result, submission: cfe_submission
+      end
+    end
+
     trait :with_cfe_v3_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application
@@ -901,7 +915,7 @@ FactoryBot.define do
     end
 
     trait :discarded do
-      discarded_at { Time.current - 5.minutes }
+      discarded_at { 5.minutes.ago }
     end
 
     #######################################################################################################

@@ -1,6 +1,8 @@
 require 'rails_helper'
 require Rails.root.join('app/lib/omni_auth/strategies/moj_oauth2')
 
+AccessTokenStruct = Struct.new(:expired?, :token, :expires?)
+
 module OmniAuth
   module Strategies
     RSpec.describe MojOauth2 do
@@ -38,7 +40,8 @@ module OmniAuth
 
       context 'callback phase' do
         let(:mock_request) { double 'request', params: example_request_params, scheme: 'http', url: 'my_url' }
-        let(:my_access_token) { OpenStruct.new(expired?: false) }
+
+        let(:my_access_token) { AccessTokenStruct.new(false) }
 
         before do
           allow(strategy).to receive(:request).and_return(mock_request)

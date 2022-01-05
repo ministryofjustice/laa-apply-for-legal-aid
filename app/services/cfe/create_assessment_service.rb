@@ -20,7 +20,7 @@ module CFE
     def options
       {
         proceeding_types: {
-          ccms_codes: legal_aid_application.proceeding_types.map(&:ccms_code)
+          ccms_codes: legal_aid_application.proceedings.map(&:ccms_code)
         }
       }
     end

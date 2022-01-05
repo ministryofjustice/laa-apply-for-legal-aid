@@ -6,7 +6,7 @@ module Providers
       end
 
       def create
-        @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params.merge(proceeding_id: proceeding.id, application_proceeding_type_id: application_proceeding_type.id))
+        @form = ChancesOfSuccesses::SuccessLikelyForm.new(form_params.merge(proceeding_id: proceeding.id))
         render :index unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :chances_of_success)
       end
 
@@ -26,10 +26,6 @@ module Providers
 
       def proceeding
         @proceeding ||= Proceeding.find(params[:merits_task_list_id])
-      end
-
-      def application_proceeding_type
-        @application_proceeding_type ||= proceeding.application_proceeding_type
       end
 
       def form_params

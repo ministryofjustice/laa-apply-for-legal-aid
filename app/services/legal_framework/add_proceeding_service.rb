@@ -13,6 +13,7 @@ module LegalFramework
         Proceeding.create(proceeding_attrs.merge(scope_limitation_attrs))
         LeadProceedingAssignmentService.call(@legal_aid_application)
       end
+      true
     end
 
     private

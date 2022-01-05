@@ -3,6 +3,8 @@ class LegalAidApplication < ApplicationRecord
   include Discard::Model
   include DelegatedFunctions
 
+  ProceedingStruct = Struct.new(:name, :meaning, :proceeding)
+
   SHARED_OWNERSHIP_YES_REASONS = %w[partner_or_ex_partner housing_assocation_or_landlord friend_family_member_or_other_individual].freeze
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
@@ -59,7 +61,6 @@ class LegalAidApplication < ApplicationRecord
     ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end
 
-  validates :provider, presence: true
   validate :validate_document_categories
 
   delegate :bank_transactions, to: :applicant, allow_nil: true
@@ -176,16 +177,18 @@ class LegalAidApplication < ApplicationRecord
     #
     application_proceeding_types.in_order_of_addition.map do |application_proceeding_type|
       proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
+      # rubocop:disable Style/OpenStructUse
       OpenStruct.new({
                        name: proceeding_type.name,
                        meaning: proceeding_type.meaning,
                        application_proceeding_type: application_proceeding_type
                      })
+      # rubocop:enable Style/OpenStructUse
     end
   end
 
   def proceedings_by_name
-    # returns an array of OpenStructs containing:
+    # returns an array of ProceedingStruct containing:
     # - name of the proceeding type
     # - meaning of the proceeding type
     # - the Proceeding
@@ -193,11 +196,7 @@ class LegalAidApplication < ApplicationRecord
     # in the order they were added to the LegalAidApplication
     #
     proceedings.in_order_of_addition.map do |proceeding|
-      OpenStruct.new({
-                       name: proceeding.name,
-                       meaning: proceeding.meaning,
-                       proceeding: proceeding
-                     })
+      ProceedingStruct.new(proceeding.name, proceeding.meaning, proceeding)
     end
   end
 

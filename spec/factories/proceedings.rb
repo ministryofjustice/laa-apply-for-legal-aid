@@ -46,7 +46,7 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
-      used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: Time.current - 2.days) }
+      used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { 'nonmolestation_order' }
       matter_type { 'Domestic Abuse' }

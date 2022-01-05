@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+StatusStruct = Struct.new(:status)
+
 RSpec.describe GovukEmails::Email do
   let(:message_id) { 'ad9559be-f32d-4674-91dd-87c50d4a16b2' }
 
@@ -14,7 +16,7 @@ RSpec.describe GovukEmails::Email do
   context 'status is not delivered' do
     let(:govuk_client) { double(Notifications::Client) }
     before do
-      allow(govuk_client).to receive(:get_notification).with(message_id).and_return(OpenStruct.new(status: status))
+      allow(govuk_client).to receive(:get_notification).with(message_id).and_return(StatusStruct.new(status))
       allow(Notifications::Client).to receive(:new).with(Rails.configuration.x.govuk_notify_api_key).and_return(govuk_client)
     end
 

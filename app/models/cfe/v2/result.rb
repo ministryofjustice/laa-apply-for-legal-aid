@@ -1,6 +1,5 @@
 ## Do not delete: This file is no longer in use but is needed for the single
 ## table inheritance table cfe_results to continue to function correctly.
-# :nocov:
 module CFE
   module V2
     class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
@@ -269,4 +268,3 @@ module CFE
     end
   end
 end
-# :nocov:

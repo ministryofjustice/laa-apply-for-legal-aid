@@ -146,7 +146,7 @@ group :test do
   gem 'launchy'
   gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers', '~> 5.1'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
   gem 'vcr'

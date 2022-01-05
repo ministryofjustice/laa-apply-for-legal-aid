@@ -18,7 +18,7 @@ When(/^the feature flag for (.*?) is (enabled|disabled)$/) do |flag, enabled|
 end
 
 When(/^I display the setup$/) do
-  puts ">>>>>>>>>>>> LegalAidAppliation count: #{LegalAidApplication.count} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+  puts ">>>>>>>>>>>> LegalAidApplication count: #{LegalAidApplication.count} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
   laa = LegalAidApplication.first
   puts ">>>>>>>>>>>> id: #{laa.id} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
   puts ">>>>>>>>>>>> proceeding types #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow

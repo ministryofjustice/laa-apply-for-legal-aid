@@ -1,4 +1,5 @@
 require 'rails_helper'
+DummyResponseStruct = Struct.new(:message, :code, :body)
 
 RSpec.describe ProviderDetailsRetriever do
   let(:api_url) { 'https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails' }
@@ -54,7 +55,7 @@ RSpec.describe ProviderDetailsRetriever do
 
       context 'on failure' do
         before do
-          allow(Net::HTTP).to receive(:get_response).and_return(OpenStruct.new)
+          allow(Net::HTTP).to receive(:get_response).and_return(DummyResponseStruct.new)
         end
 
         it 'raises error' do
