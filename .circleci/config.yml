@@ -47,14 +47,12 @@ references:
     run:
       name: Authenticate with cluster
       command: |
-        echo "this authenticate live running now"
         echo -n ${K8S_CLUSTER_CERT_LIVE} | base64 -d > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER_NAME_LIVE} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER_NAME_LIVE}
         kubectl config set-credentials circleci --token=${K8S_TOKEN_LIVE}
         kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
-        echo "authenticate live completed"
   install_gems: &install_gems
     run:
       name: Install ruby gems
