@@ -432,6 +432,15 @@ workflows:
           requires:
           - lint_checks
           <<: *generic-slack-fail-post-step
+      - deploy_staging:
+          context: laa-apply-for-legalaid-staging
+          requires:
+            - build_and_push
+          <<: *generic-slack-fail-post-step
+      - deploy_staging_legacy:
+          requires:
+            - build_and_push
+          <<: *generic-slack-fail-post-step
       - deploy_uat:
           requires:
           - build_and_push
