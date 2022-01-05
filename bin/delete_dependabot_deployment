@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+RELEASE_NAME="apply-$RELEASE_BRANCH"
+echo "Attempting to delete UAT dependabot release"
+echo "$RELEASE_NAME"
+
+
+UAT_RELEASES=$(helm list --namespace=${KUBE_ENV_UAT_NAMESPACE} --all)
+echo "Current UAT releases:"
+echo "$UAT_RELEASES"
+
+if [[ $UAT_RELEASES == *"$RELEASE_NAME"* ]]
+then
+  helm delete $RELEASE_NAME --namespace=${KUBE_ENV_UAT_NAMESPACE}
+  echo "Deleted UAT dependabot release $RELEASE_NAME"
+else
+  echo "UAT dependabot release $RELEASE_NAME was not found"
+fi
