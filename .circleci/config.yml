@@ -411,6 +411,17 @@ jobs:
         command: |
           ./bin/delete_uat_release
 
+  delete_dependabot_deployment:
+    executor: cloud-platform-executor
+    steps:
+    - checkout
+    - setup_remote_docker
+    - *setup_uat_kubectl
+    - run:
+        name: Delete dependabot deployment
+        command: |
+          ./bin/delete_dependabot_deployment
+
 generic-slack-fail-post-step: &generic-slack-fail-post-step
   post-steps:
     - slack/notify:
@@ -441,6 +452,14 @@ workflows:
       - integration_tests:
           requires:
           - lint_checks
+          <<: *generic-slack-fail-post-step
+      - delete_dependabot_deployment:
+          filters:
+            branches:
+              only:
+                - /dependabot.*/
+          requires:
+          - deploy_uat
           <<: *generic-slack-fail-post-step
 
   merge_pr:
