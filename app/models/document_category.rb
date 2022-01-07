@@ -3,7 +3,7 @@ class DocumentCategory < ApplicationRecord
     DocumentCategoryPopulator.call
   end
 
-  def self.valid_document_category_names
+  def self.displayable_document_category_names
     where(display_on_evidence_upload: true).pluck(:name)
   end
 
