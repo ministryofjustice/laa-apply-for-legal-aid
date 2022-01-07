@@ -15,4 +15,28 @@ RSpec.describe DocumentCategory, type: :model do
       described_class.populate
     end
   end
+
+  describe '.valid_document_category_names' do
+    before { described_class.populate }
+    it 'returns an array of names to display on evidence upload page' do
+      expect(described_class.valid_document_category_names).to eq %w[benefit_evidence gateway_evidence]
+    end
+  end
+
+  describe '.submittable_category_names' do
+    before { described_class.populate }
+    let(:expected_categories) do
+      %w[
+        bank_transaction_report
+        benefit_evidence_pdf
+        gateway_evidence_pdf
+        means_report
+        merits_report
+        statement_of_case_pdf
+      ]
+    end
+    it 'returns an array of names that should be uploaded to CCMS' do
+      expect(described_class.submittable_category_names).to eq expected_categories
+    end
+  end
 end

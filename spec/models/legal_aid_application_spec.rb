@@ -1144,7 +1144,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'required_document_categories' do
     let(:laa) { create :legal_aid_application }
-    before { allow(DocumentCategory).to receive(:valid_document_categories).and_return %w[benefit_evidence gateway_evidence] }
+    before { allow(DocumentCategory).to receive(:valid_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
 
     it 'defaults to an empty array' do
       expect(laa.required_document_categories).to eq []

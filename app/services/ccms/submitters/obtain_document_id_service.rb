@@ -1,7 +1,7 @@
 module CCMS
   module Submitters
     class ObtainDocumentIdService < BaseSubmissionService
-      NON_PDF_VERSION_ATTACHMENTS = %w[statement_of_case gateway_evidence].freeze
+      # NON_PDF_VERSION_ATTACHMENTS = %w[statement_of_case gateway_evidence].freeze
 
       def call
         return unless populate_documents
@@ -19,10 +19,8 @@ module CCMS
 
       private
 
-      def pdf_attachments
-        # Ignore the original document and use the pdf attachment it was converted to
-
-        @pdf_attachments ||= attachments.reject { |a| NON_PDF_VERSION_ATTACHMENTS.include? a.attachment_type }
+      def submittable_attachments
+        @submittable_attachments ||= attachments.select { |a| DocumentCategory.submittable_category_names.include?(a.attachment_type) }
       end
 
       def attachments
@@ -34,7 +32,7 @@ module CCMS
       end
 
       def populate_documents
-        pdf_attachments.each do |attachment|
+        submittable_attachments.each do |attachment|
           SubmissionDocument.create!(
             submission: submission,
             attachment_id: attachment.id,
