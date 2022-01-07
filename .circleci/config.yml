@@ -339,7 +339,7 @@ jobs:
     - deploy:
         name: Helm deployment to staging
         command: |
-          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
+          helm upgrade laa-apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
                         --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
