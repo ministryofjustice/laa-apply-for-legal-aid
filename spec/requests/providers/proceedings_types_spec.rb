@@ -114,20 +114,13 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
           continue_button: 'Continue'
         }
       end
-      let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: true) }
       let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: true) }
 
-      before { allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service) }
       before { allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service) }
 
       it 'redirects to next step' do
         subject
         expect(response.body).to redirect_to(providers_legal_aid_application_has_other_proceedings_path(legal_aid_application))
-      end
-
-      it 'calls the proceeding types service' do
-        expect(proceeding_type_service).to receive(:add).with(proceeding_type_id: proceeding_type.id, scope_type: :substantive)
-        subject
       end
 
       it 'calls the add proceeding service' do
@@ -140,8 +133,6 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
         let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: false) }
 
         before do
-          allow(LegalFramework::ProceedingTypesService).to receive(:new).with(legal_aid_application).and_return(proceeding_type_service)
-          allow(LegalFramework::LeadApplicationProceedingTypeAssignmentService).to receive(:call).with(legal_aid_application)
           allow(LegalFramework::AddProceedingService).to receive(:new).with(legal_aid_application).and_return(add_proceeding_service)
           allow(LegalFramework::LeadProceedingAssignmentService).to receive(:call).with(legal_aid_application)
         end

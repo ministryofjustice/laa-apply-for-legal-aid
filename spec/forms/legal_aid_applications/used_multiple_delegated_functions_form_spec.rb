@@ -8,14 +8,13 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   end
   let(:proceeding_type_count) { 3 }
   let(:pt_without_df) { 1 }
-  let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
   let(:proceedings) { legal_aid_application.proceedings }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:today) { Time.zone.today }
   let(:used_delegated_functions_reported_on) { today }
   let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
   let(:default_params) { { none_selected: 'false' } }
-  let(:i18n_scope) { 'activemodel.errors.models.application_proceeding_types.attributes' }
+  let(:i18n_scope) { 'activemodel.errors.models.proceedings.attributes' }
   let(:error_locale) { :defined_in_spec }
 
   let(:params) { update_proceeding_type_param_dates }
@@ -25,7 +24,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   describe '#save' do
     before do
       subject.save(params)
-      application_proceeding_types.reload
       proceedings.reload
     end
 
@@ -57,19 +55,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         params
       end
 
-      it 'updates the application proceeding types' do
-        expect(application_proceeding_types.first.used_delegated_functions?).to be false
-      end
-
       it 'updates the proceedings' do
         expect(proceedings.first.used_delegated_functions?).to be false
-      end
-
-      it 'updates the application proceeding type dates to nil' do
-        application_proceeding_types.each do |type|
-          expect(type.used_delegated_functions_reported_on).to be_nil
-          expect(type.used_delegated_functions_on).to be_nil
-        end
       end
 
       it 'updates the proceedings delegated function dates to nil' do
@@ -207,19 +194,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'when nothing selected' do
       let(:params) { {} }
 
-      it 'updates the application proceeding types' do
-        expect(application_proceeding_types.first.used_delegated_functions?).to be false
-      end
-
       it 'updates the proceedings' do
         expect(proceedings.first.used_delegated_functions?).to be false
-      end
-
-      it 'updates the application proceeding type dates to nil' do
-        application_proceeding_types.each do |type|
-          expect(type.used_delegated_functions_reported_on).to be_nil
-          expect(type.used_delegated_functions_on).to be_nil
-        end
       end
 
       it 'updates the proceedings delegated function dates to nil' do

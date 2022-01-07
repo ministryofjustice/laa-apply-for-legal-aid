@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
   let(:proceedings) { legal_aid_application.proceedings }
-  let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:login_provider) { login_as legal_aid_application.provider }
 
@@ -81,7 +80,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
       )
-      application_proceeding_types.reload.reload
     end
 
     it 'updates the proceedings delegated functions dates' do
@@ -93,11 +91,9 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
     it 'has a delegated function scope limitation' do
       expect(proceedings.first.delegated_functions_scope_limitation_code).not_to be_nil
-      expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
     end
 
     it 'has a substantive scope limitation' do
-      expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
       expect(proceedings.first.substantive_scope_limitation_code).not_to be_nil
     end
 
@@ -241,12 +237,10 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       end
 
       it 'has a delegated function scope limitation' do
-        expect(application_proceeding_types.first.delegated_functions_scope_limitation).not_to be_nil
         expect(proceedings.first.delegated_functions_scope_limitation_code).not_to be_nil
       end
 
       it 'has a substantive scope limitation' do
-        expect(application_proceeding_types.first.substantive_scope_limitation).not_to be_nil
         expect(proceedings.first.substantive_scope_limitation_code).not_to be_nil
       end
 
@@ -305,6 +299,6 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
   end
 
   def base_error_translation
-    'activemodel.errors.models.application_proceeding_types.attributes.used_delegated_functions_on'
+    'activemodel.errors.models.proceedings.attributes.used_delegated_functions_on'
   end
 end

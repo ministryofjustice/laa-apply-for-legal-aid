@@ -2,14 +2,12 @@ module Providers
   class HasOtherProceedingsController < ProviderBaseController
     def show
       @form = LegalAidApplications::HasOtherProceedingsForm.new(model: legal_aid_application)
-      proceeding_types
     end
 
     def update
       @form = LegalAidApplications::HasOtherProceedingsForm.new(form_params)
       @form.draft! if params[:draft_button]
       if @form.save
-        LegalFramework::LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
         return continue_or_draft if draft_selected?
 
         go_forward(@form.has_other_proceeding?)
@@ -22,21 +20,13 @@ module Providers
       remove_proceeding
       remove_laspo_response unless @legal_aid_application.section_8_proceedings?
 
-      return redirect_to providers_legal_aid_application_proceedings_types_path if proceeding_types.empty?
+      return redirect_to providers_legal_aid_application_proceedings_types_path if proceedings.empty?
 
       @form = LegalAidApplications::HasOtherProceedingsForm.new(model: legal_aid_application)
       render :show
     end
 
     private
-
-    def proceeding_types
-      @proceeding_types ||= legal_aid_application.proceeding_types
-    end
-
-    def proceeding_type
-      proceeding_types.find_by(ccms_code: form_params[:ccms_code])
-    end
 
     def proceedings
       @proceedings ||= legal_aid_application.proceedings
@@ -47,9 +37,7 @@ module Providers
     end
 
     def remove_proceeding
-      LegalFramework::RemoveProceedingTypeService.call(legal_aid_application, proceeding_type)
       LegalFramework::RemoveProceedingService.call(legal_aid_application, proceeding)
-      LegalFramework::LeadApplicationProceedingTypeAssignmentService.call(legal_aid_application)
       LegalFramework::LeadProceedingAssignmentService.call(legal_aid_application)
     end
 

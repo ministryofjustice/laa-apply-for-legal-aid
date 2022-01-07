@@ -167,7 +167,7 @@ module LegalAidApplications
     end
 
     def error_base_path
-      'activemodel.errors.models.application_proceeding_types.attributes.used_delegated_functions_on'
+      'activemodel.errors.models.proceedings.attributes.used_delegated_functions_on'
     end
   end
 end

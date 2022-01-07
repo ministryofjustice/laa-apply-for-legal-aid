@@ -115,17 +115,8 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
 
     context 'remove proceeding' do
-      it 'removes one application proceeding type' do
-        expect { subject }.to change { legal_aid_application.proceeding_types.count }.by(-1)
-      end
-
       it 'removes one proceeding' do
         expect { subject }.to change { legal_aid_application.proceedings.count }.by(-1)
-      end
-
-      it 'leaves the correct remaining proceeding type number' do
-        subject
-        expect(legal_aid_application.proceeding_types.count).to eq 1
       end
 
       it 'leaves the correct number of remaining proceedings' do

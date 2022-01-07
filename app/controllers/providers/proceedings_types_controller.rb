@@ -27,16 +27,8 @@ module Providers
     def run_transaction
       proceeding_to_add = proceeding_types.find { |proceeding| proceeding.ccms_code == form_params }
       add_proceeding_service.call(ccms_code: proceeding_to_add.ccms_code)
-
-      # TODO: Remove this when application_proceeding_types are no longer used
-      id = ProceedingType.find_by(ccms_code: form_params).id
-      proceeding_types_service.add(proceeding_type_id: id, scope_type: :substantive)
     rescue ActionController::ParameterMissing
       false
-    end
-
-    def proceeding_types_service
-      LegalFramework::ProceedingTypesService.new(legal_aid_application)
     end
 
     def add_proceeding_service
