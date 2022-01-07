@@ -206,6 +206,10 @@ en:
           attributes:
             code:
               blank: A proceeding must be selected
+        attachment:
+          attributes:
+            attachment_type:
+              invalid: "'%{attachment_type}' is invalid"
         dependant:
           attributes:
             name:

@@ -1,4 +1,6 @@
 class DocumentCategory < ApplicationRecord
+  validates_with DocumentCategoryValidator
+
   def self.populate
     DocumentCategoryPopulator.call
   end
