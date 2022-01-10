@@ -87,7 +87,7 @@ Rails.application.routes.draw do
   namespace 'v1' do
     resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
-    resources :statement_of_cases, only: %i[create destroy]
+    resources :statement_of_cases, only: [:create]
   end
 
   namespace :citizens do
