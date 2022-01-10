@@ -3,7 +3,7 @@ def parsed_response_body(html = response.body)
 end
 
 def button_value(html_body:, attr:)
-  parsed_response_body(html_body).css(attr)[0].attr('value')
+  parsed_response_body(html_body).css(attr)[0].attr(:value)
 end
 
 def save_xml_in_temp_file(_xml)
