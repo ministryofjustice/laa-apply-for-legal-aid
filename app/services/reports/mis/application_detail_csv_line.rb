@@ -7,6 +7,7 @@ module Reports
 
       delegate :applicant_receives_benefit?,
                :cash_transactions,
+               :ccms_reason,
                :ccms_submission,
                :cfe_result,
                :created_at,
@@ -31,6 +32,7 @@ module Reports
                :merits_submitted_at,
                :policy_disregards,
                :shared_ownership,
+               :state,
                :statement_of_case_uploaded?,
                :used_delegated_functions?,
                :used_delegated_functions_on,
@@ -38,8 +40,6 @@ module Reports
                :lowest_prospect_of_success,
                :hmrc_responses,
                :vehicle, to: :laa
-
-      delegate :chances_of_success, to: :lead_proceeding
 
       delegate :case_ccms_reference, to: :ccms_submission
 
@@ -68,10 +68,6 @@ module Reports
                :bail_conditions_set?,
                :bail_conditions_set_details, to: :opponent
 
-      delegate :application_purpose,
-               :success_prospect_details,
-               to: :chances_of_success
-
       delegate :firm,
                :username, to: :provider
 
@@ -80,6 +76,8 @@ module Reports
           'Firm name',
           'User name',
           'Office ID',
+          'State',
+          'CCMS reason',
           'CCMS reference number',
           'Single/Multi Proceedings',
           'Matter types',
@@ -159,6 +157,7 @@ module Reports
           'SOC uploaded?',
           'Application started',
           'Application submitted',
+          'Application deleted',
           'HMRC data'
         ]
       end
@@ -195,6 +194,12 @@ module Reports
 
       private
 
+      def chances_of_success
+        return lead_proceeding&.chances_of_success unless lead_proceeding.nil?
+
+        proceedings.first&.chances_of_success
+      end
+
       def provider_firm_details
         @line << firm.name
         @line << username
@@ -202,7 +207,9 @@ module Reports
       end
 
       def application_details
-        @line << case_ccms_reference
+        @line << state
+        @line << ccms_reason
+        @line << (ccms_submission.nil? ? '' : case_ccms_reference)
         @line << (proceedings.count > 1 ? 'Multi' : 'Single')
       end
 
@@ -331,8 +338,8 @@ module Reports
       end
 
       def eligibility
-        @line << yesno(cfe_result.eligible?)
-        @line << yesno(cfe_result.partially_eligible?)
+        @line << yesno(cfe_result&.eligible?)
+        @line << yesno(cfe_result&.partially_eligible?)
         @line << involved_children.count
         @line << yesno(gateway_evidence.present?)
         @line << gateway_evidence_count
@@ -355,10 +362,11 @@ module Reports
 
       def merits
         @line << lowest_prospect_of_success
-        @line << success_prospect_details
+        @line << chances_of_success&.success_prospect_details
         @line << statement_of_case_uploaded?
         @line << created_at.strftime('%Y-%m-%d')
-        @line << merits_submitted_at.strftime('%Y-%m-%d')
+        @line << merits_submitted_at&.strftime('%Y-%m-%d')
+        @line << yesno(laa.discarded?)
       end
 
       def hmrc_data
@@ -366,6 +374,8 @@ module Reports
       end
 
       def yesno(value)
+        return '' if value.nil?
+
         value == true ? 'Yes' : 'No'
       end
 

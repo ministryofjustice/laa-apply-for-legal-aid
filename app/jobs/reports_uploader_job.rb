@@ -2,16 +2,14 @@ class ReportsUploaderJob < ApplicationJob
   # :nocov:
   def perform # rubocop:disable Metrics/AbcSize Layout/LineLength
     Rails.logger.info "ReportsUploaderJob - starting at #{Time.zone.now}"
-    unless admin_report.submitted_applications&.blob.nil?
-      Rails.logger.info 'ReportsUploaderJon - preexisting record as follows:'
-      Rails.logger.info "ReportsUploaderJon - blob key: #{admin_report.submitted_applications.blob.key}, blob_id: #{admin_report.submitted_applications.blob.id}"
+    unless admin_report.application_details_report&.blob.nil?
+      Rails.logger.info 'ReportsUploaderJob - preexisting record as follows:'
+      Rails.logger.info "ReportsUploaderJob - blob key: #{admin_report.application_details_report.blob.key}, blob_id: #{admin_report.application_details_report.blob.id}"
     end
-    upload_submitted_applications
-    upload_non_passported_applications
+    upload_application_details_report
     admin_report.save
     # rubocop:disable Layout/LineLength
-    Rails.logger.info "ReportsUploaderJob - Submitted applications report attached as blob with key #{admin_report.submitted_applications.blob.key}, blob_id: #{admin_report.submitted_applications.blob.id}"
-    Rails.logger.info "ReportsUploaderJob - Non Passported applications report attached as blob with key: #{admin_report.non_passported_applications.blob.key}, blob_id: #{admin_report.non_passported_applications.blob.id}"
+    Rails.logger.info "ReportsUploaderJob - Application Details report attached as blob with key #{admin_report.application_details_report.blob.key}, blob_id: #{admin_report.application_details_report.blob.id}"
     Rails.logger.info "ReportsUploaderJob - AdminReport record updated at #{admin_report.updated_at}"
     # rubocop:enable Layout/LineLength
 
@@ -20,18 +18,11 @@ class ReportsUploaderJob < ApplicationJob
 
   private
 
-  def upload_submitted_applications
+  def upload_application_details_report
     Rails.logger.info "ReportsUploaderJob - creating submitted applications report at #{Time.zone.now}"
     data = Reports::MIS::ApplicationDetailsReport.new.run
-    Rails.logger.info "ReportsUploaderJob - submitted applications report completed at #{Time.zone.now}"
-    admin_report.submitted_applications.attach io: StringIO.new(data), filename: 'submitted_applications_report', content_type: 'text/csv'
-  end
-
-  def upload_non_passported_applications
-    Rails.logger.info "ReportsUploaderJob - creating submitted applications report at #{Time.zone.now}"
-    data = Reports::MIS::NonPassportedApplicationsReport.new.run
-    Rails.logger.info "ReportsUploaderJob - submitted applications report completed at #{Time.zone.now}"
-    admin_report.non_passported_applications.attach io: StringIO.new(data), filename: 'non_passported_applications_report', content_type: 'text/csv'
+    Rails.logger.info "ReportsUploaderJob - application_details_report completed at #{Time.zone.now}"
+    admin_report.application_details_report.attach io: StringIO.new(data), filename: 'application_details_report', content_type: 'text/csv'
   end
 
   def admin_report
