@@ -344,6 +344,9 @@ en:
           bullet-4: why the proceedings are necessary
           bullet-5: if anyone else might be able to fund the case
           h1-heading: Provide a statement of case
+          h2-heading: Files added
+          no_files: Files uploaded will appear here.
+          upload_file: Upload a file
           size_hint: The maximum file size is 7MB. You can attach more than one file.
           warning: Warning
           warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
@@ -365,7 +368,7 @@ en:
           size: Size
           status: Status
           uploaded: Uploaded
-          title: Uploaded files
+          title: Files added
     has_other_involved_children:
       show:
         error: Select either yes or no

@@ -14,9 +14,13 @@ document.addEventListener('DOMContentLoaded', event => {
     dropzone.on('addedfile', file => {
       console.log(`File added: ${file.name}`)
     })
-    dropzone.on('sending', function (file, xhr, formData) {
+    dropzone.on('sending', (file, xhr, formData) => {
       // send the legal_aid_application id in the form data
       formData.append('legal_aid_application_id', applicationId)
+    })
+    dropzone.on('success', () => {
+      // refresh the page to see the uploaded files
+      window.location.reload()
     })
   }
 })

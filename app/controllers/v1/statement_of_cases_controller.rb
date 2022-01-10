@@ -29,6 +29,7 @@ module V1
     end
 
     def increment_name(most_recent_name)
+      name = ATTACHMENT_TYPE
       if most_recent_name == name
         "#{name}_1"
       else

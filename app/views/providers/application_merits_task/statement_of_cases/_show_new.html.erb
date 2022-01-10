@@ -45,11 +45,15 @@
 
       <div class="moj-multi-file-upload">
         <div class="moj-multi-file__uploaded-files">
-          <h2 class="govuk-heading-m">Files added</h2>
-          <% unless @form.model.original_attachments %>
-          <p class="govuk-body">
-            Files uploaded will appear here.
-          </p>
+          <%# binding.pry %>
+          <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+            <div id="uploaded-files-table-container">
+              <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+            </div>
+          <% if @form.model.original_attachments.empty? %>
+            <p class="govuk-body">
+              <%= t('.no_files') %>
+            </p>
           <% end %>
           <div class="govuk-summary-list moj-multi-file-upload__list">
 
@@ -59,7 +63,7 @@
         <div class="moj-multi-file-upload__upload">
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--m" for="documents">
-              Upload a file
+              <%= t('.upload_file') %>
             </label>
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
@@ -93,16 +97,12 @@
     <% end %>
   <% end %>
 
-  <div id="uploaded-files-table-container">
-    <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-  </div>
-
-    <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_statement_of_case_path,
-          method: :patch,
-          local: true
-      ) do |form| %>
+  <%= form_with(
+        model: @form,
+        url: providers_legal_aid_application_statement_of_case_path,
+        method: :patch,
+        local: true
+    ) do |form| %>
 
     <%= form.govuk_radio_divider %>
 
