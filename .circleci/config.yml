@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
-  slack: circleci/slack@4.4.4
+  slack: circleci/slack@4.5.2
 
 executors:
   basic-executor:
