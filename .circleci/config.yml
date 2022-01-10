@@ -367,6 +367,22 @@ jobs:
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
 
+  deploy_production:
+    executor: cloud-platform-executor
+    steps:
+    - checkout
+    - setup_remote_docker
+    - *authenticate_k8s_live
+    - *decrypt_secrets
+    - deploy:
+        name: Helm deployment to production
+        command: |
+          helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
+                        --install --wait \
+                        --namespace=${K8S_NAMESPACE} \
+                        --values ./helm_deploy/apply-for-legal-aid/values-production.yaml \
+                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
+                        --set image.tag="${CIRCLE_SHA1}"
   deploy_production_legacy:
     executor: cloud-platform-executor
     steps:
@@ -551,6 +567,11 @@ workflows:
             - deploy_staging_legacy
             - delete_uat_branch
             - slack/on-hold
+      - deploy_production:
+          context: laa-apply-for-legalaid-production
+          requires:
+            - hold_production
+          <<: *generic-slack-fail-post-step
       - deploy_production_legacy:
           requires:
             - hold_production
