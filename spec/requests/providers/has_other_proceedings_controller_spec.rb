@@ -138,7 +138,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
 
         it 'sets a new lead application_proceeding_type when the original one is deleted' do
           subject
-          expect(legal_aid_application.application_proceeding_types[0].lead_proceeding).to eq true
+          expect(legal_aid_application.application_proceeding_types.order(:created_at)[0].lead_proceeding).to eq true
         end
 
         it 'sets a new lead proceeding when the original one is deleted' do
