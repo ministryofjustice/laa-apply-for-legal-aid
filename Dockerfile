@@ -1,4 +1,4 @@
-FROM ruby:3.1.0-alpine3.14
+FROM ruby:3.0.3-alpine3.13
 MAINTAINER apply for legal aid team
 
 ENV \
@@ -33,6 +33,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-droid \
                   ttf-freefont \
                   ttf-liberation \
+                  ttf-ubuntu-font-family \
                   wkhtmltopdf \
                   bash \
                   py3-pip
