@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.0'
+ruby '3.0.3'
 
 gem 'aasm', '~> 5.2.0'
 gem 'active_model_serializers', '~> 0.10.12'
@@ -11,9 +11,6 @@ gem 'geckoboard-ruby'
 gem 'google_drive', '>= 3.0.7'
 gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'loofah', '>= 2.12.0'
-gem 'net-imap'
-gem 'net-pop'
-gem 'net-smtp'
 gem 'oauth'
 gem 'pg'
 gem 'pg_dump_anonymize'
