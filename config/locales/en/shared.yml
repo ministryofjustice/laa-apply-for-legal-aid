@@ -208,7 +208,6 @@ en:
       merits: &merits
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
-        cost-override-heading: Emergency cost override
         case-details-heading: Case details
         involved-children-heading: Children involved in this application
         opponent-heading: Opponent details
@@ -216,9 +215,6 @@ en:
         statement-of-case-heading: Statement of case
         gateway-evidence-heading: Supporting evidence
         items:
-          override_requested: Do you want to request a higher cost limit?
-          cost_override_question: What is the new requested emergency cost limit?
-          enter_cost_reasons: Tell us why you need a higher cost limit.
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?
           statement_of_case: Statement of case
