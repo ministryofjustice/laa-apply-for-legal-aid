@@ -532,7 +532,7 @@ class LegalAidApplication < ApplicationRecord
 
   def validate_document_categories
     required_document_categories.each do |category|
-      errors.add(:required_document_categories, 'must be valid document categories') unless DocumentCategory.valid_document_categories.include?(category)
+      errors.add(:required_document_categories, 'must be valid document categories') unless DocumentCategory.displayable_document_category_names.include?(category)
     end
   end
 end

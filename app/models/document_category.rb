@@ -3,5 +3,11 @@ class DocumentCategory < ApplicationRecord
     DocumentCategoryPopulator.call
   end
 
-  scope :valid_document_categories, -> { where(display_on_evidence_upload: true).pluck(:name) }
+  def self.displayable_document_category_names
+    where(display_on_evidence_upload: true).pluck(:name)
+  end
+
+  def self.submittable_category_names
+    where(submit_to_ccms: true).pluck(:name)
+  end
 end
