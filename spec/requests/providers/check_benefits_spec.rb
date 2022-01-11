@@ -118,7 +118,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     before do
       login
       application.reload
-      application.application_proceeding_types.map(&:reload)
+      application.proceedings.map(&:reload)
       subject
     end
 
