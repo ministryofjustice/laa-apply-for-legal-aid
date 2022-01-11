@@ -1,8 +1,6 @@
 module CCMS
   module Submitters
     class ObtainDocumentIdService < BaseSubmissionService
-      # NON_PDF_VERSION_ATTACHMENTS = %w[statement_of_case gateway_evidence].freeze
-
       def call
         return unless populate_documents
 
