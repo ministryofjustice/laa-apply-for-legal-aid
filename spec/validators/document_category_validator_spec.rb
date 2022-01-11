@@ -16,7 +16,7 @@ RSpec.describe DocumentCategoryValidator do
 
     context 'valid attachment types' do
       let(:attachment_type) { valid_attachment_types.sample }
-      it 'does not fail when trying to create a record with an invalid attachment type' do
+      it 'does not fail when trying to create a record with an valid attachment type' do
         record = subject
         expect(record).to be_instance_of(Attachment)
         expect(record).to be_valid
@@ -39,7 +39,7 @@ RSpec.describe DocumentCategoryValidator do
 
     context 'valid names ' do
       let(:name) { valid_names.sample }
-      it 'does not fail when trying to create a record with an invalid name' do
+      it 'does not fail when trying to create a record with an valid name' do
         record = subject
         expect(record).to be_instance_of(DocumentCategory)
         expect(record).to be_valid
