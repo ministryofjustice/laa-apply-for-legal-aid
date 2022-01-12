@@ -6,7 +6,7 @@
   display: none;
 }
 
-.moj-multi-file-upload__dropzone {
+.dropzone {
   outline: 3px dashed govuk-colour('black');
   display: flex;
   text-align: center;
@@ -14,13 +14,13 @@
   transition: outline-offset .1s ease-in-out, background-color .1s linear;
 }
 
-.moj-multi-file-upload__dropzone label {
+.dropzone label {
   margin-bottom: 0;
   display: inline-block;
   width: auto;
 }
 
-.moj-multi-file-upload__dropzone p {
+.dropzone p {
   margin-bottom: 0;
   margin-right: 10px;
   padding-top: 7px;
