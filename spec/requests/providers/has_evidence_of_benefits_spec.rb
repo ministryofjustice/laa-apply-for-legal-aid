@@ -1,7 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :checking_applicant_details, :with_proceeding_types, :with_delegated_functions }
+  let(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_dwp_override,
+           :checking_applicant_details,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           explicit_proceedings: %i[da004],
+           df_options: { DA004: [Time.zone.now, Time.zone.now] }
+  end
+
   let(:login) { login_as legal_aid_application.provider }
   let(:enable_evidence_upload_flag) { false }
 

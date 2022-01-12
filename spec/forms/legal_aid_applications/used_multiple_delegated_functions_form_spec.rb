@@ -3,8 +3,12 @@ require 'rails_helper'
 RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :form, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
   let(:legal_aid_application) do
     create :legal_aid_application,
-           :with_proceeding_types,
-           proceeding_types_count: proceeding_type_count
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           explicit_proceedings: %i[da004 da001 se014],
+           set_lead_proceeding: :da004,
+           df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
+           proceeding_count: proceeding_type_count
   end
   let(:proceeding_type_count) { 3 }
   let(:pt_without_df) { 1 }
@@ -94,7 +98,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
-          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
@@ -114,7 +118,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
-          message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: ProceedingType.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
@@ -151,7 +155,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
       it 'generates the expected error message' do
         proceedings_by_name.each do |type|
-          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
@@ -170,7 +174,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
-          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end
@@ -218,7 +222,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
-          message = I18n.t(error_locale, scope: i18n_scope, meaning: ProceedingType.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end

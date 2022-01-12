@@ -174,8 +174,10 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         let(:legal_aid_application) do
           create :legal_aid_application,
                  :with_applicant,
-                 :with_proceeding_types,
-                 :with_delegated_functions,
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: [:da004],
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] },
                  substantive_application_deadline_on: Time.zone.today + 3.days
         end
         let(:search_term) { legal_aid_application.application_ref }
@@ -189,15 +191,17 @@ RSpec.describe 'providers legal aid application requests', type: :request do
         end
       end
 
-      context 'when searching for an Emergency application with a substantiuve due date and the application has been submitted' do
+      context 'when searching for an Emergency application with a substantive due date and the application has been submitted' do
         let(:legal_aid_application) do
           create :legal_aid_application,
                  :with_applicant,
                  :with_everything,
-                 :with_proceeding_types,
-                 :with_delegated_functions,
-                 merits_submitted_at: Time.zone.today,
-                 substantive_application_deadline_on: Time.zone.today + 3.days
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: [:da004],
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] },
+                 substantive_application_deadline_on: Time.zone.today + 3.days,
+                 merits_submitted_at: Time.zone.today
         end
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: search_term } }

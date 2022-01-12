@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TaskListHelper, type: :helper do
   context 'when passed an application with section 8 proceeding_types' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+    let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
     context 'with a child already added' do
       before { create :involved_child, legal_aid_application: legal_aid_application }
 

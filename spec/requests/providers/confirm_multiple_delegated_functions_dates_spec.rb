@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :request do
-  let!(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+  let!(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           df_options: { DA001: [Time.zone.now, Time.zone.now] }
+  end
   let(:login_provider) { login_as legal_aid_application.provider }
 
   before do
@@ -47,6 +52,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
       it 'error singular' do
         expect(response.body).to include(I18n.t("#{base_error_translation}.error.blank_singular"))
       end
+
       context 'when the legal aid app has multiple DF dates over a month' do
         let!(:legal_aid_application) do
           create :legal_aid_application,

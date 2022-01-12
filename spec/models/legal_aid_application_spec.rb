@@ -412,15 +412,22 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'delegated functions are used' do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-      let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
-      let(:used_delegated_functions_reported_on) { today }
-      let(:used_delegated_functions_on) { Faker::Date.backward }
+      let!(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_proceedings,
+               :with_delegated_functions_on_proceedings,
+               explicit_proceedings: [:da004],
+               set_lead_proceeding: :da004,
+               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] }
+      end
+      let(:proceedings) { legal_aid_application.proceedings }
+      let!(:used_delegated_functions_reported_on) { Time.zone.today }
+      let!(:used_delegated_functions_on) { Faker::Date.backward }
 
       it 'sets start and finish relative to used_delegated_functions_on' do
         subject
-        expect(legal_aid_application.transaction_period_start_on).to eq(application_proceeding_types.first.used_delegated_functions_on - 3.months)
-        expect(legal_aid_application.transaction_period_finish_on).to eq(application_proceeding_types.first.used_delegated_functions_on)
+        expect(legal_aid_application.transaction_period_start_on).to eq(proceedings.first.used_delegated_functions_on - 3.months)
+        expect(legal_aid_application.transaction_period_finish_on).to eq(proceedings.first.used_delegated_functions_on)
       end
     end
   end
@@ -481,7 +488,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'application_proceedings_by_name' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_multiple_proceeding_types }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceedings }
 
     it 'returns all application proceeding types with proceeding type names' do
       result = legal_aid_application.application_proceedings_by_name
@@ -605,9 +612,14 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#used_delegated_functions?' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-    let(:used_delegated_functions_reported_on) { today }
-    let(:used_delegated_functions_on) { today }
+    let!(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_proceedings,
+             :with_delegated_functions_on_proceedings,
+             explicit_proceedings: [:da004],
+             set_lead_proceeding: :da004,
+             df_options: { DA004: [Time.zone.now, Time.zone.now] }
+    end
 
     context 'delegated functions used' do
       it 'returns true' do
@@ -616,7 +628,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'delegated functions not used' do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
 
       it 'returns false' do
         expect(legal_aid_application.used_delegated_functions?).to be false
@@ -925,7 +937,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'after_save hook' do
     context 'when an application is created' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types }
+      let(:application) { create :legal_aid_application, :with_proceedings }
 
       it { expect(application.used_delegated_functions?).to eq false }
 

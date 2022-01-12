@@ -7,9 +7,12 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
   let(:application) do
     create :application,
            :with_applicant,
-           :with_proceeding_types,
-           :with_delegated_functions,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
            :with_substantive_application_deadline_on,
+           explicit_proceedings: [:da004],
+           set_lead_proceeding: :da004,
+           df_options: { DA004: [Time.zone.today, Time.zone.today] },
            provider: provider
   end
 

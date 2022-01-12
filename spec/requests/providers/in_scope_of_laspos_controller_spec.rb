@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::InScopeOfLasposController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
 
