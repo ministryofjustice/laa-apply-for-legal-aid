@@ -151,11 +151,3 @@ def apt_from_proceeding(proceeding:, chances_of_success: false)
 
   create :chances_of_success, application_proceeding_type: apt, proceeding: application_proceeding_type.proceeding if chances_of_success
 end
-
-def enable_apt_callbacks
-  ApplicationProceedingType.set_callback(:update, :after, :update_proceeding)
-end
-
-def disable_apt_callbacks
-  ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
-end

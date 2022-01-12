@@ -2,12 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ApplicationDigest do
   describe '.create_or_update!' do
-    around do |example|
-      enable_apt_callbacks
-      example.run
-      disable_apt_callbacks
-    end
-
     let(:firm_name) { 'Regional Legal Services' }
     let(:username) { 'regional_user_1' }
     let(:firm) { create :firm, name: firm_name }
@@ -129,15 +123,14 @@ RSpec.describe ApplicationDigest do
         before do
           # DF used on DA001 and SE014 only - used and reported dates specified in array
           # Good Friday on 2nd April, Easter Monday 5th April
-          # We update the application_proceeding_types here, and rely on the callbacks to update the Proceedings
           dates = {
             'DA001' => [Date.parse('2021-03-29'), Date.parse('2021-04-08')],
             'SE013' => [nil, nil],
             'SE014' => [Date.parse('2021-04-06'), Date.parse('2021-04-07')]
           }
-          laa.application_proceeding_types.each do |apt|
-            used_date, reported_date = dates[apt.proceeding_type.ccms_code]
-            apt.update!(used_delegated_functions_on: used_date, used_delegated_functions_reported_on: reported_date)
+          laa.proceedings.each do |proceeding|
+            used_date, reported_date = dates[proceeding.ccms_code]
+            proceeding.update!(used_delegated_functions_on: used_date, used_delegated_functions_reported_on: reported_date)
           end
           laa.reload
         end

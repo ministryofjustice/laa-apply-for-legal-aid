@@ -541,7 +541,6 @@ module Reports
       end
 
       def setup_multiple_proceedings
-        legal_aid_application.application_proceeding_types.map(&:destroy)
         legal_aid_application.proceedings.map(&:destroy)
         %i[da001 da004 se013].each do |trait|
           proceeding = create :proceeding, trait, legal_aid_application: legal_aid_application
