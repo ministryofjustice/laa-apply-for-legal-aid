@@ -39,7 +39,11 @@ module Flow
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: ->(application) do
-            application.applicant_not_employed? ? :open_banking_consents : :use_ccms_employed
+            if Setting.enable_employed_journey? && application.provider.employment_permissions?
+              application.applicant_employed? ? :open_banking_consents : :use_ccms_employed
+            else
+              application.applicant_not_employed? ? :open_banking_consents : :use_ccms_employed
+            end
           end
         },
         proceedings_types: {

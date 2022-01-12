@@ -7,10 +7,13 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
   before do
     login
-    subject
   end
 
   describe 'GET /providers/:application_id/applicant_employed' do
+    before do
+      subject
+    end
+
     subject { get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application) }
 
     it 'returns http success' do
@@ -33,6 +36,10 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
   end
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/applicant_employed' do
+    before do
+      subject
+    end
+
     let(:employed) { nil }
     let(:params) do
       { applicant: { employed: employed } }
@@ -100,6 +107,24 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         it 'includes the error message in the response' do
           expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.base.none_selected'))
         end
+      end
+    end
+  end
+
+  context 'the employed journey feature flag is enabled' do
+    before { Setting.setting.update!(enable_employed_journey: true) }
+    subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
+
+    let(:params) { { applicant: { employed: 'true' } } }
+    let(:provider) { create :provider }
+    let!(:legal_aid_application) { create :legal_aid_application, provider: provider, applicant: applicant }
+    let(:applicant) { create :applicant }
+
+    context 'applicant is employed and  the provider has employed permissions' do
+      before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+      it 'redirects to the proceedings search page' do
+        subject
+        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
       end
     end
   end
