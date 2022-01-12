@@ -345,27 +345,6 @@ jobs:
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
-  deploy_staging_legacy:
-    executor: cloud-platform-executor
-    steps:
-    - checkout
-    - setup_remote_docker
-    - run:
-        name: Kubectl deployment setup staging
-        command: |
-          $(aws ecr get-login --region eu-west-2 --no-include-email)
-          setup-kube-auth
-          kubectl config use-context staging
-    - *decrypt_secrets
-    - deploy:
-        name: Helm deployment to staging
-        command: |
-          helm upgrade ${APPLICATION_DEPLOY_NAME} ./helm_deploy/apply-for-legal-aid/. \
-                        --install --wait \
-                        --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
-                        --values ./helm_deploy/apply-for-legal-aid/values-staging-legacy.yaml \
-                        --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
-                        --set image.tag="${CIRCLE_SHA1}"
 
   deploy_production:
     executor: cloud-platform-executor
@@ -512,12 +491,6 @@ workflows:
             - unit_tests
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - deploy_staging_legacy:
-          requires:
-            - integration_tests
-            - unit_tests
-            - build_and_push
-          <<: *generic-slack-fail-post-step
       - slack/on-hold:
           custom: |
             {
@@ -559,12 +532,10 @@ workflows:
             }
           requires:
             - deploy_staging
-            - deploy_staging_legacy
       - hold_production:
           type: approval
           requires:
             - deploy_staging
-            - deploy_staging_legacy
             - delete_uat_branch
             - slack/on-hold
       - deploy_production:
