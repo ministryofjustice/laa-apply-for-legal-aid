@@ -40,7 +40,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: ->(application) do
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
-              application.applicant_employed? ? :open_banking_consents : :use_ccms_employed
+              application.employment_journey_ineligible? ? :use_ccms_employed : :open_banking_consents
             else
               application.applicant_not_employed? ? :open_banking_consents : :use_ccms_employed
             end
