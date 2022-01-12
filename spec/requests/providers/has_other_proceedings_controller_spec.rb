@@ -135,7 +135,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         end
 
         subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
-        
+
         it 'sets a new lead proceeding when the original one is deleted' do
           subject
           expect(legal_aid_application.proceedings[0].lead_proceeding).to eq true
