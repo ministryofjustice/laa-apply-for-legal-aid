@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AggregatedCashIncome, type: :model do
   let(:aci) { AggregatedCashIncome.new(legal_aid_application_id: application.id) }
-  let(:application) { create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 2 }
+  let(:application) { create :legal_aid_application, :with_proceedings }
   let(:categories) { %i[benefits maintenance_in] }
   let!(:benefits) { create :transaction_type, :benefits }
   let!(:maintenance_in) { create :transaction_type, :maintenance_in }

@@ -8,9 +8,22 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_multiple_proceeding_types_inc_section8,
+             :with_proceedings,
              :with_involved_children,
-             :provider_entering_merits
+             :provider_entering_merits,
+             explicit_proceedings: %i[da001 se014],
+             set_lead_proceeding: :da001
+    end
+    let(:da001) { application.proceedings.find_by(ccms_code: 'DA001') }
+    let(:se014) { application.proceedings.find_by(ccms_code: 'SE014') }
+    let!(:ats) { create :attempts_to_settles, proceeding: se014 }
+
+    let!(:chances_of_success) do
+      create :chances_of_success, :with_optional_text, proceeding: da001
+    end
+
+    let!(:chances_of_success_two) do
+      create :chances_of_success, :with_optional_text, proceeding: se014
     end
 
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }
@@ -98,7 +111,7 @@ RSpec.describe 'check merits answers requests', type: :request do
       end
 
       it 'displays linked children' do
-        expect(response.body).to include(I18n.t('shared.check_answers.merits.items.linked_children'))
+        expect(unescaped_response_body).to include(I18n.t('shared.check_answers.merits.items.linked_children'))
       end
 
       it 'displays attempts to settle' do
@@ -119,7 +132,7 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_multiple_proceeding_types_inc_section8,
+             :with_proceedings,
              :checking_merits_answers
     end
     let(:params) { {} }
@@ -204,9 +217,15 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_proceeding_types,
-             :with_chances_of_success,
-             :checking_merits_answers
+             :with_proceedings,
+             :checking_merits_answers,
+             explicit_proceedings: %i[da004],
+             set_lead_proceeding: :da004
+    end
+    let(:da004) { application.proceedings.find_by(ccms_code: 'DA004') }
+
+    let!(:chances_of_success) do
+      create :chances_of_success, :with_optional_text, proceeding: da004
     end
 
     subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }

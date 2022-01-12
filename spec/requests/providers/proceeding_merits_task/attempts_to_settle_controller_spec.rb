@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
-  let(:pt_da) { create :proceeding_type, :with_real_data }
-  let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
-  let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt_da, pt_s8] }
-  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
+  # let(:pt_da) { create :proceeding_type, :with_real_data }
+  # let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+  let!(:legal_aid_application) do
+    create :legal_aid_application, :with_proceedings,
+           explicit_proceedings: %i[da001 se014],
+           set_lead_proceeding: :da004
+  end
+  # let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.find_by(proceeding_type_id: proceeding_type) }
   let(:proceeding_type) { ProceedingType.find_by(ccms_code: 'SE014') }
   let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
   let(:provider) { legal_aid_application.provider }
@@ -42,7 +46,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
       {
         proceeding_merits_task_attempts_to_settle: {
           attempts_made: 'Details of settlement attempt',
-          application_proceeding_type_id: proceeding_two.application_proceeding_type.id
+          proceeding_id: proceeding_two.id
         }
       }
     end
@@ -66,7 +70,10 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         end
 
         context 'when the application is in draft' do
-          let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :draft, explicit_proceeding_types: [pt_da, pt_s8] }
+          let(:legal_aid_application) do
+            create :legal_aid_application, :with_proceedings, :draft, explicit_proceedings: %i[da001 se014],
+                                                                      set_lead_proceeding: :da004
+          end
 
           it 'redirects provider back to the merits task list' do
             subject

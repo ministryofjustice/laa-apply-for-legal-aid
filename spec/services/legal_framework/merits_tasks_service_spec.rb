@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe MeritsTasksService do
-    let(:application) { create :legal_aid_application, :with_proceeding_types }
+    let(:application) { create :legal_aid_application, :with_proceedings }
     let(:service) { described_class.call(application) }
     let(:submission) { create :legal_framework_submission }
 
@@ -67,7 +67,7 @@ module LegalFramework
         },
         proceeding_types: [
           {
-            ccms_code: application.proceeding_types.first.ccms_code,
+            ccms_code: application.proceedings.first.ccms_code,
             tasks: {
               chances_of_success: [] # the merits tasks for this one proceeding type, and any dependencies
             }

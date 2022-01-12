@@ -283,9 +283,9 @@ RSpec.describe ApplicationProceedingType do
       let(:proceeding_type) { create :proceeding_type, :with_scope_limitations }
 
       before do
-        legal_aid_application.proceeding_types << proceeding_type
-        Proceeding.create_from_proceeding_type(legal_aid_application, proceeding_type)
-        legal_aid_application.save!
+        # legal_aid_application.proceeding_types << proceeding_type
+        # Proceeding.create_from_proceeding_type(legal_aid_application, proceeding_type)
+        # legal_aid_application.save!
         legal_aid_application.application_proceeding_types.first.update!(used_delegated_functions_on: Time.zone.yesterday)
         legal_aid_application.application_proceeding_types.first.update!(used_delegated_functions_reported_on: Time.zone.today)
       end

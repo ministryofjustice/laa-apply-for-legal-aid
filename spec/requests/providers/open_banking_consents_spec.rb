@@ -70,8 +70,12 @@ RSpec.describe 'does client use online banking requests', type: :request do
             create :legal_aid_application,
                    :with_non_passported_state_machine,
                    :applicant_details_checked,
-                   :with_proceeding_types,
-                   :with_delegated_functions, applicant: applicant
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   explicit_proceedings: [:da004],
+                   set_lead_proceeding: :da004,
+                   df_options: { DA004: [Time.zone.today, Time.zone.today] },
+                   applicant: applicant
           end
 
           let(:applicant) { create :applicant, :not_employed }

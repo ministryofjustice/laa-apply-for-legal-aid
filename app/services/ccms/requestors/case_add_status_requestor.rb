@@ -22,9 +22,9 @@ module CCMS
       end
 
       def soap_body(xml)
-        xml.__send__(:'casebim:CaseAddUpdtStatusRQ') do
-          xml.__send__(:'hdr:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
-          xml.__send__(:'casebim:TransactionID', case_add_transaction_id)
+        xml.__send__('casebim:CaseAddUpdtStatusRQ') do
+          xml.__send__('hdr:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
+          xml.__send__('casebim:TransactionID', case_add_transaction_id)
         end
       end
     end

@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Providers::HasOtherProceedingsController, type: :request do
-  let(:pt1) { create :proceeding_type, :with_real_data }
-  let(:pt2) { create :proceeding_type, :as_occupation_order }
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2] }
+  let(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_proceedings,
+           explicit_proceedings: %i[da001 da004]
+  end
 
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
@@ -53,8 +55,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'when the user is checking answers and has deleted the domestic abuse proceeding but left the section 8' do
-      let(:proceeding_type) { create :proceeding_type, code: 'SE003', ccms_matter: 'Section 8 orders' }
-      let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, assign_lead_proceeding: false, explicit_proceeding_types: [proceeding_type] }
+      let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false }
       let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
 
       it 'redirects to the page to add another proceeding type' do
@@ -72,8 +73,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'with only Section 8 proceedings selected' do
-      let(:proceeding_type) { create :proceeding_type, code: 'SE003', ccms_matter: 'Section 8 orders' }
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, assign_lead_proceeding: false, explicit_proceeding_types: [proceeding_type] }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013] }
 
       context 'choose no' do
         let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
@@ -94,9 +94,11 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context 'with at least one domestic abuse and at least one section 8 proceeding' do
-      let(:pt1) { create :proceeding_type, :as_occupation_order }
-      let(:pt2) { create :proceeding_type, :as_prohibited_steps_order }
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2] }
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_proceedings,
+               explicit_proceedings: %i[da004 se014]
+      end
 
       let(:params) { { legal_aid_application: { has_other_proceeding: 'false' } } }
 

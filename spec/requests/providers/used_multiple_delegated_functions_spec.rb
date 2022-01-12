@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: 'gov_uk_bank_holiday_api' } do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
   let(:proceedings) { legal_aid_application.proceedings }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:login_provider) { login_as legal_aid_application.provider }
@@ -54,9 +54,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
   describe 'PATCH /providers/applications/:legal_aid_application_id/used_multiple_delegated_functions' do
     let!(:legal_aid_application) do
       create :legal_aid_application,
-             :with_proceeding_types,
-             :with_delegated_functions,
-             proceeding_types_count: 2
+             :with_proceedings,
+             explicit_proceedings: %i[da004]
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
@@ -228,11 +227,11 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         end
       end
 
-      context 'with second application proceeding type' do
-        it 'updates the application proceeding types delegated functions dates' do
+      context 'with second proceeding' do
+        it 'updates the proceeding delegated functions dates' do
           proceeding = proceedings.order(used_delegated_functions_on: :desc).last
           expect(proceeding.used_delegated_functions_reported_on).to eq(today)
-          expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)
+          expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on)
         end
       end
 
@@ -255,7 +254,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
           params
         end
 
-        it 'still updates the application proceeding types delegated functions dates' do
+        it 'still updates the proceeding delegated functions dates' do
           proceedings.each do |proceeding|
             expect(proceeding.used_delegated_functions_reported_on).to be_nil
             expect(proceeding.used_delegated_functions_on).to be_nil

@@ -10,6 +10,8 @@ module CCMS
                :with_everything_and_address,
                :with_cfe_v3_result,
                :with_positive_benefit_check_result,
+               explicit_proceedings: [:da001],
+               set_lead_proceeding: :da001,
                office_id: office.id,
                populate_vehicle: true
       end

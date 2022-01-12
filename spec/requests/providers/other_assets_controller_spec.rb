@@ -209,9 +209,11 @@ RSpec.describe 'provider other assets requests', type: :request do
                 let(:application) do
                   create :legal_aid_application,
                          :with_positive_benefit_check_result,
-                         :with_proceeding_types,
-                         :with_delegated_functions,
-                         delegated_functions_date: Date.new(2021, 1, 5)
+                         :with_proceedings,
+                         :with_delegated_functions_on_proceedings,
+                         explicit_proceedings: [:da004],
+                         set_lead_proceeding: :da004,
+                         df_options: { DA004: [Date.new(2021, 1, 5), Date.new(2021, 1, 5)] }
                 end
                 let(:policy_disregards) { false }
 

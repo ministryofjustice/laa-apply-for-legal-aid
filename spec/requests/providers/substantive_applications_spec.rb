@@ -3,9 +3,12 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
   let(:state) { :with_passported_state_machine }
   let(:legal_aid_application) do
     create :legal_aid_application,
-           :with_proceeding_types,
-           :with_delegated_functions,
-           state, :applicant_details_checked,
+           :at_applicant_details_checked,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           explicit_proceedings: [:da004],
+           set_lead_proceeding: :da004,
+           df_options: { DA004: [Time.zone.today, Time.zone.today] },
            applicant: applicant
   end
 

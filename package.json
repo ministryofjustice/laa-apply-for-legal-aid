@@ -11,7 +11,7 @@
     "acorn": "~8.7.0",
     "axios": "^0.24.0",
     "govuk-frontend": "^3.14.0",
-    "jest": "^27.4.7",
+    "jest": "^27.4.6",
     "jquery": "^3.6.0",
     "js-search": "^2.0.0"
   },
@@ -19,7 +19,7 @@
     "jest-environment-jsdom": "^27.4.6",
     "jest-environment-jsdom-global": "^3.0.0",
     "standard": "^16.0.4",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.2"
   },
   "resolutions": {
     "minimist": "^1.2.2",

@@ -6,7 +6,7 @@ module CCMS
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_applicant,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_opponent,
                :with_transaction_period,
                :with_cfe_v3_result
@@ -23,7 +23,6 @@ module CCMS
 
       around do |example|
         VCR.turn_off!
-        DocumentCategory.populate
         example.run
         VCR.turn_on!
       end
@@ -53,32 +52,9 @@ module CCMS
             create :gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
           end
 
-          let(:all_attachment_types) do
-            %w[
-              merits_report
-              means_report
-              bank_transaction_report
-              statement_of_case_pdf
-              statement_of_case
-              gateway_evidence_pdf
-              gateway_evidence
-            ]
-          end
-
-          let(:submittable_document_types) do
-            %w[
-              merits_report
-              means_report
-              bank_transaction_report
-              statement_of_case_pdf
-              gateway_evidence_pdf
-            ]
-          end
-
-          it 'only populates the documents array with submittable documents' do
-            expect(legal_aid_application.attachments.map(&:attachment_type)).to eq all_attachment_types
+          it 'populates the documents array with statement_of_case, gateway_evidence, means_report and merits_report' do
             subject.call
-            expect(submission.submission_documents.map(&:document_type)).to eq submittable_document_types
+            expect(submission.submission_documents.count).to eq 5
           end
 
           it 'populates document array with gateway_evidence' do

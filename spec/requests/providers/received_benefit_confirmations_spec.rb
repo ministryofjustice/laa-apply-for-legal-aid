@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request do
-  let(:application) { create(:legal_aid_application, :with_proceeding_types, :at_checking_applicant_details, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:application_id) { application.id }
 
   describe 'GET /providers/applications/:legal_aid_application_id/received_benefit_confirmation' do

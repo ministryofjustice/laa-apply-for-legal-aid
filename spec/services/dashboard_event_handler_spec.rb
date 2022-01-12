@@ -115,9 +115,13 @@ RSpec.describe DashboardEventHandler do
   end
 
   context 'application completed' do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-    let(:used_delegated_functions_reported_on) { Date.current }
-    let(:used_delegated_functions_on) { rand(12).days.ago.to_date }
+    let(:legal_aid_application) do
+      create :legal_aid_application, :with_proceedings,
+             :with_delegated_functions_on_proceedings,
+             explicit_proceedings: [:da004],
+             set_lead_proceeding: :da004,
+             df_options: { DA004: [rand(12).days.ago.to_date, Time.zone.now] }
+    end
 
     before do
       allow_any_instance_of(DashboardEventHandler).to receive(:firm_created)

@@ -2,7 +2,7 @@ require 'rspec'
 require 'rails_helper'
 
 RSpec.describe DelegatedFunctionsDateService do
-  describe 'sets date on proceeding records', :vcr do
+  describe 'sets date on application_proceeding_type records', :vcr do
     let(:laa) { create :legal_aid_application }
     let!(:proceeding1) do
       create :proceeding, :da001,

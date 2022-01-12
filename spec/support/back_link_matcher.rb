@@ -14,7 +14,7 @@ RSpec::Matchers.define :have_back_link do |expected|
 
   def extract_back_link(html)
     atag = parsed_response_body(html).css('a.govuk-back-link').first
-    atag.nil? ? nil : atag.attr(:href)
+    atag.nil? ? nil : atag.attr('href')
   end
 
   # URLs match if content same even if order of query part is diferent

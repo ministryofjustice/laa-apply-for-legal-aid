@@ -412,15 +412,22 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'delegated functions are used' do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-      let(:application_proceeding_types) { legal_aid_application.application_proceeding_types }
-      let(:used_delegated_functions_reported_on) { today }
-      let(:used_delegated_functions_on) { Faker::Date.backward }
+      let!(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_proceedings,
+               :with_delegated_functions_on_proceedings,
+               explicit_proceedings: [:da004],
+               set_lead_proceeding: :da004,
+               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] }
+      end
+      let(:proceedings) { legal_aid_application.proceedings }
+      let!(:used_delegated_functions_reported_on) { Time.zone.today }
+      let!(:used_delegated_functions_on) { Faker::Date.backward }
 
       it 'sets start and finish relative to used_delegated_functions_on' do
         subject
-        expect(legal_aid_application.transaction_period_start_on).to eq(application_proceeding_types.first.used_delegated_functions_on - 3.months)
-        expect(legal_aid_application.transaction_period_finish_on).to eq(application_proceeding_types.first.used_delegated_functions_on)
+        expect(legal_aid_application.transaction_period_start_on).to eq(proceedings.first.used_delegated_functions_on - 3.months)
+        expect(legal_aid_application.transaction_period_finish_on).to eq(proceedings.first.used_delegated_functions_on)
       end
     end
   end
@@ -481,7 +488,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'application_proceedings_by_name' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_multiple_proceeding_types }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceedings }
 
     it 'returns all application proceeding types with proceeding type names' do
       result = legal_aid_application.application_proceedings_by_name
@@ -526,7 +533,11 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
-      create :legal_aid_application, :with_everything, :with_multiple_proceeding_types_inc_section8, :with_negative_benefit_check_result, :with_bank_transactions
+      create :legal_aid_application, :with_everything, :with_multiple_proceedings_inc_section8, :with_negative_benefit_check_result, :with_bank_transactions
+    end
+    let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+    let!(:chances_of_success) do
+      create :chances_of_success, :with_optional_text, proceeding: da001
     end
 
     before do
@@ -537,7 +548,6 @@ RSpec.describe LegalAidApplication, type: :model do
 
     # A bit verbose, but minimises the SQL calls required to complete spec
     it 'removes everything it needs to' do
-      expect(ApplicationProceedingType.count).not_to be_zero
       expect(BenefitCheckResult.count).not_to be_zero
       expect(OtherAssetsDeclaration.count).not_to be_zero
       expect(SavingsAmount.count).not_to be_zero
@@ -550,8 +560,8 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BankAccountHolder.count).not_to be_zero
       expect(BankError.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
+      expect(Proceeding.count).not_to be_zero
       expect { subject }.to change { described_class.count }.to(0)
-      expect(ApplicationProceedingType.count).to be_zero
       expect(BenefitCheckResult.count).to be_zero
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero
@@ -564,13 +574,12 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BankAccountHolder.count).to be_zero
       expect(BankError.count).to be_zero
       expect(LegalAidApplicationTransactionType.count).to be_zero
+      expect(Proceeding.count).to be_zero
     end
 
     it 'leaves object it should not affect' do
-      expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
       subject
-      expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
     end
   end
@@ -605,9 +614,14 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#used_delegated_functions?' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_delegated_functions }
-    let(:used_delegated_functions_reported_on) { today }
-    let(:used_delegated_functions_on) { today }
+    let!(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_proceedings,
+             :with_delegated_functions_on_proceedings,
+             explicit_proceedings: [:da004],
+             set_lead_proceeding: :da004,
+             df_options: { DA004: [Time.zone.now, Time.zone.now] }
+    end
 
     context 'delegated functions used' do
       it 'returns true' do
@@ -616,7 +630,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'delegated functions not used' do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
 
       it 'returns false' do
         expect(legal_aid_application.used_delegated_functions?).to be false
@@ -925,7 +939,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'after_save hook' do
     context 'when an application is created' do
-      let(:application) { create :legal_aid_application, :with_proceeding_types }
+      let(:application) { create :legal_aid_application, :with_proceedings }
 
       it { expect(application.used_delegated_functions?).to eq false }
 
@@ -1144,7 +1158,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'required_document_categories' do
     let(:laa) { create :legal_aid_application }
-    before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
+    before { allow(DocumentCategory).to receive(:valid_document_categories).and_return %w[benefit_evidence gateway_evidence] }
 
     it 'defaults to an empty array' do
       expect(laa.required_document_categories).to eq []

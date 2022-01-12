@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Reports::ReportsCreator do
   let(:legal_aid_application) do
     create :legal_aid_application,
-           :with_proceeding_types,
+           :with_proceedings,
            :with_ccms_submission,
            :with_everything,
            :with_passported_state_machine,
@@ -25,7 +25,7 @@ RSpec.describe Reports::ReportsCreator do
     context 'when the application is non-passported and has transactions' do
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_everything,
                :with_ccms_submission,
                :with_benefits_transactions,

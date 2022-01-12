@@ -19,16 +19,16 @@ module CCMS
       private
 
       def soap_body(xml)
-        xml.__send__(:'refdatabim:ReferenceDataInqRQ') do
-          xml.__send__(:'hdr:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
-          xml.__send__(:'refdatabim:SearchCriteria') { search_criteria(xml) }
+        xml.__send__('refdatabim:ReferenceDataInqRQ') do
+          xml.__send__('hdr:HeaderRQ') { ns3_header_rq(xml, @provider_username) }
+          xml.__send__('refdatabim:SearchCriteria') { search_criteria(xml) }
         end
       end
 
       def search_criteria(xml)
-        xml.__send__(:'refdatabio:ContextKey', 'CaseReferenceNumber')
-        xml.__send__(:'refdatabio:SearchKey') do
-          xml.__send__(:'refdatabio:Key', 'CaseReferenceNumber')
+        xml.__send__('refdatabio:ContextKey', 'CaseReferenceNumber')
+        xml.__send__('refdatabio:SearchKey') do
+          xml.__send__('refdatabio:Key', 'CaseReferenceNumber')
         end
       end
     end

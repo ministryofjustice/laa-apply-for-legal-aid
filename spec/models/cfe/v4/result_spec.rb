@@ -18,7 +18,7 @@ module CFE
       let(:with_monthly_outgoing_equivalents) { create :cfe_v4_result, :with_monthly_outgoing_equivalents }
       let(:with_total_gross_income) { create :cfe_v4_result, :with_total_gross_income }
       let(:with_mixed_proceeding_type_results) { create :cfe_v4_result, :with_mixed_proceeding_type_results }
-      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v4_result }
+      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_proceedings, :with_cfe_v4_result }
       let(:contribution_and_restriction_result) { create :cfe_v4_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
