@@ -374,8 +374,6 @@ module Reports
       end
 
       def yesno(value)
-        return '' if value.nil?
-
         value == true ? 'Yes' : 'No'
       end
 

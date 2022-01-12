@@ -170,6 +170,7 @@ module Reports
       let(:submitted_at) { Time.zone.local(2020, 2, 21, 15, 44, 55) }
       let(:used_delegated_functions_on) { Date.new(2020, 1, 1) }
       let(:used_delegated_functions_reported_on) { Date.new(2020, 2, 21) }
+      let(:today) { Time.zone.today.strftime('%F') }
 
       let(:v4_cfe_result) { create :cfe_v4_result }
 
@@ -189,6 +190,8 @@ module Reports
               expect(value_for('Firm name')).to eq 'Legal beagles'
               expect(value_for('User name')).to eq 'psr001'
               expect(value_for('Office ID')).to eq '1T823E'
+              expect(value_for('State')).to eq 'initiated'
+              expect(value_for('CCMS reason')).to be nil
               expect(value_for('CCMS reference number')).to eq '42226668880'
               expect(value_for('DWP Overridden')).to eq 'No'
               expect(value_for('Case Type')).to eq 'Passported'
@@ -198,6 +201,9 @@ module Reports
               expect(value_for('Delegated functions used')).to eq 'Yes'
               expect(value_for('Delegated functions dates')).to eq '2020-01-01'
               expect(value_for('Delegated functions reported')).to eq '2020-02-21'
+              expect(value_for('Application started')).to eq today
+              expect(value_for('Application submitted')).to eq today
+              expect(value_for('Application deleted')).to eq 'No'
               expect(value_for('HMRC data')).to eq 'No'
             end
 
@@ -246,6 +252,16 @@ module Reports
                 it 'populates with Yes' do
                   expect(value_for('LASPO Question')).to eq ''
                 end
+              end
+            end
+          end
+
+          context 'no lead proceeding specified' do
+            before { legal_aid_application.lead_proceeding.update(lead_proceeding: false) }
+
+            describe 'chances of success' do
+              it 'returns the chances of success of the first proceeding, lead or not' do
+                expect(value_for('Prospects of success')).to eq 'Likely (>50%)'
               end
             end
           end

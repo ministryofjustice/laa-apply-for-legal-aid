@@ -20,35 +20,20 @@ module Reports
                :at_submitting_assessment,
                :with_merits_submitted_at
       end
+      let(:num_applications) { (unsubmitted_applications + submitted_applications + [applications_being_submitted]).flatten.size }
       let(:report) { described_class.new }
 
       describe '#run' do
-        context 'testing ActiveRecord calls' do
-          let(:joined_applications) { double LegalAidApplication }
-          let(:selected_applications) { double LegalAidApplication }
-          let(:sorted_applications) { double LegalAidApplication }
-
-          it 'gets only applications in assessment submitted or submitting assessment states' do
-            expect(LegalAidApplication).to receive(:joins).with(:state_machine).and_return(joined_applications)
-            expect(joined_applications).to receive(:where).with({ state_machine_proxies: { aasm_state: %w[submitting_assessment assessment_submitted] } })
-                                                          .and_return(selected_applications)
-            expect(selected_applications).to receive(:order).with(:created_at).and_return(sorted_applications)
-            expect(sorted_applications).to receive(:find_each)
-
-            report.run
-          end
-        end
-
         it 'returns a csv string with a header line' do
           csv_string = report.run
           lines = csv_string.split("\n")
           expect(lines.first).to match(/^Firm name,User name,Office ID/)
         end
 
-        it 'returns a header and four detail lines' do
+        it 'returns a header and seven detail lines' do
           csv_string = report.run
           lines = csv_string.split("\n")
-          expect(lines.size).to eq 5
+          expect(lines.size).to eq num_applications + 1
         end
       end
     end
