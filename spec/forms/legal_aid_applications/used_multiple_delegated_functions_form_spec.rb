@@ -6,11 +6,9 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: %i[da004 da001 se014],
-           set_lead_proceeding: :da004,
-           df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
-           proceeding_count: proceeding_type_count
+           set_lead_proceeding: :da001,
+           df_options: { DA001: [used_delegated_functions_on, used_delegated_functions_reported_on] }
   end
-  let(:proceeding_type_count) { 3 }
   let(:pt_without_df) { 1 }
   let(:proceedings) { legal_aid_application.proceedings }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }

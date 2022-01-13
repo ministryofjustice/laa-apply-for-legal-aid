@@ -3,9 +3,7 @@ require 'rails_helper'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe HasOtherInvolvedChildrenController, type: :request do
-      let(:application) do
-        create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014]
-      end
+      let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
       let(:provider) { application.provider }
       let(:child1) { create :involved_child, legal_aid_application: application }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: application }

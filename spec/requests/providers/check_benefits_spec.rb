@@ -160,7 +160,6 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
                  :with_proceedings,
                  :with_delegated_functions_on_proceedings,
                  explicit_proceedings: [:da004],
-                 set_lead_proceeding: :da004,
                  df_options: { DA004: [Time.zone.today, Time.zone.today] }
         end
 
