@@ -457,7 +457,7 @@ GEM
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    pagy (5.7.2)
+    pagy (5.7.3)
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
