@@ -32,8 +32,11 @@ FactoryBot.define do
     trait :da002 do
       lead_proceeding { false }
       ccms_code { 'DA002' }
-      meaning { 'Non-molestation order' }
-      description { 'to be represented on an application for a non-molestation order.' }
+      meaning { 'Variation or discharge under section 5 protection from harassment act 1997r' }
+      description do
+        'to be represented on an application to vary or discharge an order under section 5 Protection from Harassment Act 1997
+         where the parties are associated persons (as defined by Part IV Family Law Act 1996).'
+      end
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'AA019' }
@@ -48,7 +51,7 @@ FactoryBot.define do
       end
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
-      name { 'nonmolestation_order' }
+      name { 'variation_or_discharge_under_section_protection_from_harassment_act' }
       matter_type { 'Domestic Abuse' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
@@ -58,8 +61,8 @@ FactoryBot.define do
     trait :da006 do
       lead_proceeding { false }
       ccms_code { 'DA006' }
-      meaning { 'Non-molestation order' }
-      description { 'to be represented on an application for a non-molestation order.' }
+      meaning { 'Extend, variation or discharge - Part IV ' }
+      description { 'to be represented on an application to extend, vary or discharge an order under Part IV Family Law Act 1996. ' }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
       substantive_scope_limitation_code { 'AA019' }
@@ -74,7 +77,7 @@ FactoryBot.define do
       end
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
-      name { 'nonmolestation_order' }
+      name { 'extend_variation_or_discharge_part_iv' }
       matter_type { 'Domestic Abuse' }
       category_of_law { 'Family' }
       category_law_code { 'MAT' }
