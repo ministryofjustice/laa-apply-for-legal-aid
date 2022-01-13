@@ -488,7 +488,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe 'application_proceedings_by_name' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceedings }
+    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceeding_types }
 
     it 'returns all application proceeding types with proceeding type names' do
       result = legal_aid_application.application_proceedings_by_name
