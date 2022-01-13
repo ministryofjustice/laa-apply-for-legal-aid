@@ -238,6 +238,10 @@ class LegalAidApplication < ApplicationRecord
     applicant&.armed_forces?
   end
 
+  def employment_journey_ineligible?
+    applicant&.armed_forces? || applicant_self_employed?
+  end
+
   def applicant_not_employed?
     !applicant_employed? && !applicant_self_employed? && !applicant_armed_forces?
   end
