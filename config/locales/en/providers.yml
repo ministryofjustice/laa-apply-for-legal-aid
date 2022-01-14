@@ -344,12 +344,14 @@ en:
           bullet-4: why the proceedings are necessary
           bullet-5: if anyone else might be able to fund the case
           h1-heading: Provide a statement of case
-          h2-heading: Files added
-          no_files: Files uploaded will appear here.
-          upload_file: Upload a file
-          size_hint: The maximum file size is 7MB. You can attach more than one file.
           warning: Warning
           warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
+          h2-heading: Uploaded files
+          no_files: Files uploaded will appear here.
+          upload_file: Attach a file
+          size_hint: The maximum file size is 7MB. You can attach more than one file.
+          dropzone_message: Drag and drop files here or
+          choose_files_btn: Choose files
           file_not_uploaded_error: Upload the selected file
         show_old:
           bullet-1: details of the latest domestic abuse incident

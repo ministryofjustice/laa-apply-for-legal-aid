@@ -8,8 +8,10 @@
 
 .dropzone {
   outline: 3px dashed govuk-colour('black');
+  border: none !important;
   display: flex;
   text-align: center;
+  border-radius: 0 !important;
   padding: govuk-spacing(9) govuk-spacing(3);
   transition: outline-offset .1s ease-in-out, background-color .1s linear;
 }
@@ -26,7 +28,7 @@
   padding-top: 7px;
 }
 
-.moj-multi-file-upload__dropzone [type=file] {
+.dropzone [type=file] {
   position: absolute;
   left: -9999em;
 }

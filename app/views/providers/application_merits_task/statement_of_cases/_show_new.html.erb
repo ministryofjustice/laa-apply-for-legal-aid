@@ -44,30 +44,21 @@
       </div>
 
       <div class="moj-multi-file-upload">
-        <div class="moj-multi-file__uploaded-files">
-          <%# binding.pry %>
-          <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
-            <div id="uploaded-files-table-container">
-              <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-            </div>
-          <% if @form.model.original_attachments.empty? %>
-            <p class="govuk-body">
-              <%= t('.no_files') %>
-            </p>
-          <% end %>
-          <div class="govuk-summary-list moj-multi-file-upload__list">
 
-          </div>
-        </div>
-
-        <div class="moj-multi-file-upload__upload">
+        <div class="dropzone__upload">
           <div class="govuk-form-group">
             <label class="govuk-label govuk-label--m" for="documents">
               <%= t('.upload_file') %>
             </label>
+            <span class="govuk-hint"><%= t('.size_hint') %></span>
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
             <div class="dropzone" id="dropzone-form">
+              <div class="dz-message" data-dz-message>
+                <p class="govuk-body govuk-!-padding-top-2"><%= t('.dropzone_message') %></p>
+                <label for="documents" class="govuk-button govuk-button--secondary"><%= t('.choose_files_btn') %></label>
+                <div aria-live="polite" role="status" class="govuk-visually-hidden" id="file-upload-status-message"></div>
+              </div>
               <div class="fallback">
                 <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
                                           hint: {text: t('.size_hint')},
@@ -85,6 +76,22 @@
           </div>
 
         </div>
+
+        <div class="moj-multi-file__uploaded-files">
+          <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+          <div id="uploaded-files-table-container">
+            <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+          </div>
+          <% if @form.model.original_attachments.empty? %>
+            <p class="govuk-body">
+              <%= t('.no_files') %>
+            </p>
+          <% end %>
+          <div class="govuk-summary-list moj-multi-file-upload__list">
+
+          </div>
+        </div>
+
       </div>
 
       <% if @successfully_deleted %>

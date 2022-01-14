@@ -3,10 +3,15 @@ module V1
     ATTACHMENT_TYPE = 'statement_of_case'.freeze
 
     def create
-      legal_aid_application.attachments.create document: form_params[:file],
-                                               attachment_type: ATTACHMENT_TYPE,
-                                               original_filename: form_params[:original_filename],
-                                               attachment_name: sequenced_attachment_name
+      if legal_aid_application
+        legal_aid_application.attachments.create document: form_params[:file],
+                                                 attachment_type: ATTACHMENT_TYPE,
+                                                 original_filename: form_params[:original_filename],
+                                                 attachment_name: sequenced_attachment_name
+        render '', status: :ok
+      else
+        render '', status: :not_found
+      end
     end
 
     private
