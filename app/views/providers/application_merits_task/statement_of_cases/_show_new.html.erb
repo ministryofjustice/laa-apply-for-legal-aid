@@ -53,6 +53,7 @@
             <span class="govuk-hint"><%= t('.size_hint') %></span>
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
+            <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/statement_of_cases"></span>
             <div class="dropzone" id="dropzone-form">
               <div class="dz-message" data-dz-message>
                 <p class="govuk-body govuk-!-padding-top-2"><%= t('.dropzone_message') %></p>

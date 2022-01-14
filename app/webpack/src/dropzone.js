@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', event => {
   const statusMessage = document.querySelector(('#file-upload-status-message'))
   if (dropzoneElem) {
     const applicationId = document.querySelector('#application-id').textContent.trim()
-    const url = '/v1/statement_of_cases'
+    const url = document.querySelector('#dropzone-url').getAttribute('data-url')
     const dropzone = new Dropzone(dropzoneElem, {
       url: url,
       headers: {
