@@ -324,6 +324,11 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: hmrcDurationCheck
+  - name: HMRC_USE_DEV_MOCK
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: hmrcUseDevMock
   - name: GOOGLE_SHEETS_PRIVATE_KEY_ID
     valueFrom:
       secretKeyRef:
