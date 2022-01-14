@@ -20,7 +20,7 @@ module Providers
     end
 
     def summary_income
-      @summary_income ||= HMRC::EmploymentIncomeSummary.new(legal_aid_application.id)
+      @summary_income ||= HMRC::ParsedResponse::EmploymentIncomeSummary.new(legal_aid_application.id)
     end
 
     def form_params
