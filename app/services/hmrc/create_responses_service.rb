@@ -16,12 +16,18 @@ module HMRC
 
       USE_CASES.each do |use_case|
         hmrc_response = @legal_aid_application.hmrc_responses.create(use_case: use_case)
-        if Rails.configuration.x.hmrc_use_dev_mock && !Rails.env.production?
+        if use_mock?
           MockInterfaceResponseService.call(hmrc_response)
         else
           HMRC::SubmissionWorker.perform_async(hmrc_response.id)
         end
       end
+    end
+
+    private
+
+    def use_mock?
+      Rails.configuration.x.hmrc_use_dev_mock && !Rails.env.production?
     end
   end
 end
