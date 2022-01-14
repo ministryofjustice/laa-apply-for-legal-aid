@@ -14,6 +14,7 @@ class DocumentCategoryValidator < ActiveModel::Validator
     merits_report
     statement_of_case
     statement_of_case_pdf
+    uploaded_evidence_collection
   ].freeze
 
   def validate(record)

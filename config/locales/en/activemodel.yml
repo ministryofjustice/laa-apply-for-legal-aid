@@ -506,6 +506,11 @@ en:
           attributes:
             mock_true_layer_data:
               blank: Mock TrueLayer Data can't be blank
+        uploaded_evidence_collection:
+          attributes:
+            original_file:
+              no_file_chosen: You must choose at least one file
+              content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
 
         vehicle:
           attributes:
