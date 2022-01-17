@@ -101,7 +101,7 @@ module CCMS
 
                 context 'adult_relative' do
                   let(:relationship) { 'adult_relative' }
-                  let(:dob) { Time.current - 22.years }
+                  let(:dob) { 22.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
 
                   it 'generates just one block' do
@@ -115,7 +115,7 @@ module CCMS
 
                 context 'child 15 or less' do
                   let(:relationship) { 'child_relative' }
-                  let(:dob) { Time.current - 14.years }
+                  let(:dob) { 14.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
 
                   it 'generated Dependant adult as relationship' do
@@ -125,7 +125,7 @@ module CCMS
 
                 context 'child 16 or more' do
                   let(:relationship) { 'child_relative' }
-                  let(:dob) { Time.current - 17.years }
+                  let(:dob) { 17.years.ago }
                   let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_T_12WP3_17A') }
 
                   it 'generated Dependant adult as relationship' do
