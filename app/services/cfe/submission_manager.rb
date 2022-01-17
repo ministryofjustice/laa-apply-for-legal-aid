@@ -14,7 +14,8 @@ module CFE
       CreateOutgoingsService,
       CreateStateBenefitsService,
       CreateOtherIncomeService,
-      CreateIrregularIncomesService
+      CreateIrregularIncomesService,
+      CreateEmploymentsService
     ].freeze
 
     def self.call(legal_aid_application_id)

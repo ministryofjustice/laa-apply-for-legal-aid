@@ -83,6 +83,7 @@ module CFE
         value = model.__send__(field_name)
         next if value.nil?
 
+        value = value.round(2)
         items << description_and_value(field_description, value) if not_nil_or_zero?(value)
       end
       items

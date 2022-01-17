@@ -28,7 +28,7 @@ module CFE
     let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
     let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
 
-    let(:submission) { create :cfe_submission, aasm_state: 'irregular_income_created', legal_aid_application: application }
+    let(:submission) { create :cfe_submission, aasm_state: 'employments_created', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -58,8 +58,8 @@ module CFE
       context 'successful post' do
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-        it 'updates the submission record from irregular_income_created to cash_transactions_created' do
-          expect(submission.aasm_state).to eq 'irregular_income_created'
+        it 'updates the submission record from employments_created to cash_transactions_created' do
+          expect(submission.aasm_state).to eq 'employments_created'
           CreateCashTransactionsService.call(submission)
           expect(submission.aasm_state).to eq 'cash_transactions_created'
         end
