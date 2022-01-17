@@ -68,7 +68,7 @@ RSpec.describe Dependant, type: :model do
 
   describe '#over_fifteen?' do
     context 'Less than 15 years old' do
-      let(:date_of_birth) { Time.current - 10.years }
+      let(:date_of_birth) { 10.years.ago }
 
       it 'returns false' do
         expect(dependant.over_fifteen?).to eq(false)
@@ -80,7 +80,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context 'more than 15 years old' do
-      let(:date_of_birth) { Time.current - 20.years }
+      let(:date_of_birth) { 20.years.ago }
 
       it 'returns true' do
         expect(dependant.over_fifteen?).to eq(true)
@@ -92,7 +92,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context '15 and a half years old' do
-      let(:date_of_birth) { Time.current - 15.years + 6.months }
+      let(:date_of_birth) { 15.years.ago + 6.months }
 
       it 'returns false' do
         expect(dependant.over_fifteen?).to eq(false)
@@ -104,7 +104,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context '14 and a half years old' do
-      let(:date_of_birth) { Time.current - 15.years - 6.months }
+      let(:date_of_birth) { 15.years.ago - 6.months }
 
       it 'returns false' do
         expect(dependant.over_fifteen?).to eq(false)
@@ -114,7 +114,7 @@ RSpec.describe Dependant, type: :model do
 
   describe '#eighteen_or_less?' do
     context 'Less than 18 years old' do
-      let(:date_of_birth) { Time.current - 10.years }
+      let(:date_of_birth) { 10.years.ago }
 
       it 'returns true' do
         expect(dependant.eighteen_or_less?).to eq(true)
@@ -122,7 +122,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context 'more than 18 years old' do
-      let(:date_of_birth) { Time.current - 20.years }
+      let(:date_of_birth) { 20.years.ago }
 
       it 'returns false' do
         expect(dependant.eighteen_or_less?).to eq(false)
@@ -130,7 +130,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context '18 and a half years old' do
-      let(:date_of_birth) { Time.current - 18.years + 6.months }
+      let(:date_of_birth) { 18.years.ago + 6.months }
 
       it 'returns true' do
         expect(dependant.eighteen_or_less?).to eq(true)
@@ -138,7 +138,7 @@ RSpec.describe Dependant, type: :model do
     end
 
     context '17 and a half years old' do
-      let(:date_of_birth) { Time.current - 18.years - 6.months }
+      let(:date_of_birth) { 18.years.ago - 6.months }
 
       it 'returns true' do
         expect(dependant.eighteen_or_less?).to eq(true)
@@ -151,7 +151,7 @@ RSpec.describe Dependant, type: :model do
 
     context 'adult relative' do
       let(:relationship) { 'adult_relative' }
-      let(:dob) { Time.current - 20.years }
+      let(:dob) { 20.years.ago }
 
       it 'returns adult relative' do
         expect(dependant.ccms_relationship_to_client).to eq 'Dependant adult'
@@ -160,7 +160,7 @@ RSpec.describe Dependant, type: :model do
 
     context 'child aged fifteen or less' do
       let(:relationship) { 'child_relative' }
-      let(:dob) { Time.current - 13.years }
+      let(:dob) { 13.years.ago }
 
       it 'returns adult relative' do
         expect(dependant.ccms_relationship_to_client).to eq 'Child aged 15 and under'
@@ -169,7 +169,7 @@ RSpec.describe Dependant, type: :model do
 
     context 'child aged sixteen or more' do
       let(:relationship) { 'child_relative' }
-      let(:dob) { Time.current - 17.years }
+      let(:dob) { 17.years.ago }
 
       it 'returns adult relative' do
         expect(dependant.ccms_relationship_to_client).to eq 'Child aged 16 and over'
