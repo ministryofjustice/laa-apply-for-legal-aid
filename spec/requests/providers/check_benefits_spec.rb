@@ -94,7 +94,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context 'when the check benefit result is positive' do
-      let(:application) { create :legal_aid_application, :with_applicant, :with_positive_benefit_check_result, :at_checking_applicant_details }
+      let(:application) { create :legal_aid_application, :with_applicant, :with_proceedings, :with_positive_benefit_check_result, :at_checking_applicant_details }
 
       it 'displays the passported result page' do
         subject
@@ -103,7 +103,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context 'when the check benefit result is negative' do
-      let(:application) { create :legal_aid_application, :with_applicant, :with_negative_benefit_check_result, :at_checking_applicant_details }
+      let(:application) { create :legal_aid_application, :with_applicant, :with_proceedings, :with_negative_benefit_check_result, :at_checking_applicant_details }
 
       it 'displays the confirm dwp non passported_applications page' do
         subject
@@ -157,8 +157,10 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         let!(:application) do
           create :legal_aid_application,
                  :with_positive_benefit_check_result,
-                 :with_proceeding_types,
-                 :with_delegated_functions
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: [:da004],
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] }
         end
 
         it 'displays the substantive application page' do

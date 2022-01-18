@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CFE
   RSpec.describe CreateAssessmentService do
-    let(:application) { create :legal_aid_application, :with_proceeding_types }
+    let(:application) { create :legal_aid_application, :with_proceedings }
     let!(:applicant) { create :applicant, legal_aid_application: application }
     let(:submission) { create :cfe_submission, aasm_state: 'initialised', legal_aid_application: application }
     let(:service) { described_class.new(submission) }
@@ -70,7 +70,7 @@ module CFE
         client_reference_id: application.application_ref,
         submission_date: Time.zone.today.strftime('%Y-%m-%d'),
         proceeding_types: {
-          ccms_codes: application.proceeding_types.map(&:ccms_code)
+          ccms_codes: application.proceedings.map(&:ccms_code)
         }
       }
     end

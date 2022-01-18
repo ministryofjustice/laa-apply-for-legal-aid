@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
@@ -84,7 +84,7 @@ module Providers
 
         describe 'redirect on success' do
           context 'when the application has a section 8 proceeding type' do
-            let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8 }
+            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
 
             context 'and involved children exist' do
               before { create :involved_child, legal_aid_application: legal_aid_application }

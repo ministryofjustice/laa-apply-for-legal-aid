@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'about financial assessments requests', type: :request do
   let(:application) do
     create(:legal_aid_application,
-           :with_proceeding_types,
+           :with_proceedings,
            :with_applicant_and_address,
            :with_non_passported_state_machine,
            :provider_confirming_applicant_eligibility)
@@ -44,7 +44,7 @@ RSpec.describe 'about financial assessments requests', type: :request do
         let(:application) do
           create(
             :legal_aid_application,
-            :with_proceeding_types,
+            :with_proceedings,
             :with_applicant_and_address,
             :with_non_passported_state_machine,
             :provider_assessing_means

@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:pt_da) { create :proceeding_type, :with_real_data }
-  let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
-  let(:legal_aid_application) do
-    create :legal_aid_application,
-           :with_proceeding_types,
-           explicit_proceeding_types: [pt_da, pt_s8]
-  end
+  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
 
   let(:proceeding_names) do
     legal_aid_application.application_proceeding_types.map do |type|

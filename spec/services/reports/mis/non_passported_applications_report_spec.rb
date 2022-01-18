@@ -41,6 +41,7 @@ module Reports
         travel_to(Time.zone.local(2020, 9, 1, 2, 3, 4)) do
           create :legal_aid_application,
                  :with_applicant,
+                 :with_proceedings,
                  :with_negative_benefit_check_result,
                  :with_non_passported_state_machine,
                  :at_client_completed_means,

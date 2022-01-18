@@ -9,7 +9,7 @@ RSpec.describe 'check passported answers requests', type: :request do
     let!(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_proceeding_types,
+             :with_proceedings,
              :with_passported_state_machine,
              :provider_entering_means,
              vehicle: vehicle,
@@ -71,7 +71,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_no_savings,
                  :with_passported_state_machine,
                  :provider_entering_means
@@ -87,7 +87,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_no_other_assets,
                  :with_passported_state_machine,
                  :provider_entering_means
@@ -103,7 +103,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_passported_state_machine,
                  :provider_entering_means,
                  has_restrictions: false
@@ -119,7 +119,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_applicant,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_policy_disregards,
                  :without_own_home,
                  :with_passported_state_machine,
@@ -165,7 +165,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :without_own_home,
                  :with_passported_state_machine,
                  :provider_entering_means
@@ -185,7 +185,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_own_home_owned_outright,
                  :with_passported_state_machine,
                  :provider_entering_means
@@ -200,7 +200,7 @@ RSpec.describe 'check passported answers requests', type: :request do
         let!(:application) do
           create :legal_aid_application,
                  :with_everything,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_passported_state_machine,
                  :provider_entering_means,
                  :with_populated_policy_disregards,
@@ -218,7 +218,7 @@ RSpec.describe 'check passported answers requests', type: :request do
           create :legal_aid_application,
                  :with_everything,
                  :with_no_other_assets,
-                 :with_proceeding_types,
+                 :with_proceedings,
                  :with_home_sole_owner,
                  :with_passported_state_machine,
                  :provider_entering_means
@@ -318,7 +318,7 @@ RSpec.describe 'check passported answers requests', type: :request do
              :with_everything,
              :with_passported_state_machine,
              :checking_passported_answers,
-             :with_proceeding_types
+             :with_proceedings
     end
 
     subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
@@ -332,7 +332,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       let(:application) do
         create :legal_aid_application,
                :with_everything,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_passported_state_machine,
                :provider_entering_means
       end

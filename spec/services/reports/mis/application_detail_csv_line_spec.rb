@@ -5,10 +5,11 @@ module Reports
     RSpec.describe ApplicationDetailCsvLine do
       let(:legal_aid_application) do
         create :application,
-               :with_proceeding_types,
-               :with_delegated_functions,
-               delegated_functions_date: used_delegated_functions_on,
-               delegated_functions_reported_date: used_delegated_functions_reported_on,
+               :with_proceedings,
+               :with_delegated_functions_on_proceedings,
+               explicit_proceedings: [:da004],
+               set_lead_proceeding: :da004,
+               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
                application_ref: 'L-X99-ZZZ',
                applicant: applicant,
                own_home: own_home_status,
@@ -29,7 +30,7 @@ module Reports
 
       let(:application_without_df) do
         create :application,
-               :with_proceeding_types,
+               :with_proceedings,
                application_ref: 'L-X99-ZZZ',
                applicant: applicant,
                own_home: own_home_status,
@@ -193,7 +194,7 @@ module Reports
               expect(value_for('Case Type')).to eq 'Passported'
               expect(value_for('Single/Multi Proceedings')).to eq 'Single'
               expect(value_for('Matter types')).to eq 'Domestic Abuse'
-              expect(value_for('Proceeding types selected')).to match(/^Meaning-DA\d{3,4}$/)
+              expect(value_for('Proceeding types selected')).to match(/^Non-molestation order/)
               expect(value_for('Delegated functions used')).to eq 'Yes'
               expect(value_for('Delegated functions dates')).to eq '2020-01-01'
               expect(value_for('Delegated functions reported')).to eq '2020-02-21'

@@ -8,9 +8,10 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   let(:benefit_check_result) { create :benefit_check_result, result: applicant_receives_benefit ? 'yes' : 'no' }
   let(:legal_aid_application) do
     create :legal_aid_application,
-           :with_proceeding_types,
-           :with_delegated_functions,
-           delegated_functions_date: used_delegated_functions_on,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           explicit_proceedings: [:da004],
+           df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_on] },
            transaction_period_finish_on: transaction_period_finish_on,
            benefit_check_result: benefit_check_result,
            merits_submitted_at: merits_submitted_at

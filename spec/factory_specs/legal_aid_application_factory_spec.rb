@@ -158,43 +158,6 @@ RSpec.describe 'LegalAidApplication factory' do
     end
   end
 
-  describe ':with_multiple_proceeding_types' do
-    context 'not specifying the proceeding types' do
-      let(:laa) { create :legal_aid_application, :with_multiple_proceeding_types }
-      subject { laa }
-
-      it 'seeds Proceeding Types with two real items' do
-        subject
-        expect(ProceedingType.order(:code).pluck(:code)).to eq %w[PR0208 PR0214]
-      end
-
-      it 'attached both real items to the application' do
-        expect(laa.proceeding_types.order(:code).map(&:code)).to eq %w[PR0208 PR0214]
-      end
-
-      it 'populates scope limitations table with one dummy scope limitation' do
-        expect(ScopeLimitation.count).to eq 0
-        subject
-        expect(ScopeLimitation.count).to eq 1
-      end
-
-      it 'attaches the scope limitation to the lead proceeding type as the default substantive' do
-        subject
-        expect(ProceedingTypeScopeLimitation.count).to eq 1
-        expect(laa.lead_proceeding_type.default_substantive_scope_limitation).to eq ScopeLimitation.first
-      end
-
-      it 'assigns the scope limitation to the application_proceeding_type' do
-        expect { subject }.to change { ApplicationProceedingTypesScopeLimitation.count }.by(1)
-        lead_pt = laa.lead_proceeding_type
-        apt = laa.reload.application_proceeding_types.find_by(proceeding_type_id: lead_pt.id)
-        aptsl = ApplicationProceedingTypesScopeLimitation.find_by(application_proceeding_type_id: apt.id)
-        expect(aptsl).to be_instance_of(AssignedSubstantiveScopeLimitation)
-        expect(aptsl.scope_limitation_id).to eq ScopeLimitation.first.id
-      end
-    end
-  end
-
   describe ':with_substantive_scope_limitation' do
     context 'without specifying proceeding type' do
       let(:laa) { create :legal_aid_application, :with_substantive_scope_limitation }

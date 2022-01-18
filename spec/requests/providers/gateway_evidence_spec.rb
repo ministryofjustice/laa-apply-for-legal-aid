@@ -3,7 +3,7 @@ require 'sidekiq/testing'
 
 module Providers
   RSpec.describe GatewayEvidencesController, type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types }
+    let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
     let(:provider) { legal_aid_application.provider }
     let(:i18n_error_path) { 'activemodel.errors.models.gateway_evidence.attributes.original_file' }
 

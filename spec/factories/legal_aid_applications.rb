@@ -402,17 +402,6 @@ FactoryBot.define do
       end
     end
 
-    # this is a trait of an invalid state and should only be used to test invalid state transitions
-    trait :with_only_section8_proceeding_type do
-      after(:create) do |application|
-        application.proceeding_types << create(:proceeding_type, :as_section_8_child_residence)
-        application.application_proceeding_types.each do |app_proc_type|
-          create(:chances_of_success, :with_optional_text, application_proceeding_type: app_proc_type)
-          create(:attempts_to_settles, application_proceeding_type: app_proc_type)
-        end
-      end
-    end
-
     # this trait will mark the first domestic abuse proceeding type for the application as the lead proceeding, unless one already exists
     # the application proceeding types must have been set up before calling this trait.  Only needed for deprecated traits, not for :with_proceeding_types
     #
@@ -712,7 +701,7 @@ FactoryBot.define do
     end
 
     trait :at_checking_applicant_details do
-      with_proceeding_types
+      with_proceedings
 
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :checking_applicant_details)
@@ -722,7 +711,7 @@ FactoryBot.define do
     end
 
     trait :at_checking_passported_answers do
-      with_proceeding_types
+      with_proceedings
 
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :checking_passported_answers)
@@ -732,7 +721,7 @@ FactoryBot.define do
     end
 
     trait :at_applicant_details_checked do
-      with_proceeding_types
+      with_proceedings
 
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :applicant_details_checked)
@@ -742,7 +731,7 @@ FactoryBot.define do
     end
 
     trait :at_client_completed_means do
-      with_proceeding_types
+      with_proceedings
 
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :checking_citizen_answers)
@@ -752,7 +741,7 @@ FactoryBot.define do
     end
 
     trait :at_check_provider_answers do
-      with_proceeding_types
+      with_proceedings
 
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :provider_assessing_means)
@@ -762,7 +751,7 @@ FactoryBot.define do
     end
 
     trait :at_checking_merits_answers do
-      with_proceeding_types
+      with_proceedings
       with_merits_statement_of_case
 
       before(:create) do |application|
@@ -916,28 +905,6 @@ FactoryBot.define do
 
     trait :discarded do
       discarded_at { 5.minutes.ago }
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_multiple_proceeding_types do
-      after(:create) do |application, evaluator|
-        if evaluator.proceeding_types.presence
-          application.proceeding_types = evaluator.proceeding_types
-        else
-          application.proceeding_types << create(:proceeding_type, :with_real_data)
-          application.proceeding_types << create(:proceeding_type, :as_occupation_order)
-        end
-        pt = application.find_or_create_lead_proceeding_type
-        sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                   scope_limitation_id: sl.id)
-      end
     end
 
     #######################################################################################################

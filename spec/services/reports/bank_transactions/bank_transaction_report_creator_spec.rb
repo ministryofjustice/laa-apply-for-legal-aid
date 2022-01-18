@@ -5,7 +5,7 @@ module Reports
     RSpec.describe BankTransactionReportCreator do
       let(:legal_aid_application) do
         create :legal_aid_application,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_everything,
                :with_benefits_transactions,
                :with_uncategorised_credit_transactions,
