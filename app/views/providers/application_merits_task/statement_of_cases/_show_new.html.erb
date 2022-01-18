@@ -44,7 +44,7 @@
       </div>
 
       <div class="dropzone__upload">
-        <div class="govuk-form-group script hidden">
+        <div class="govuk-form-group script hidden" id="dropzone-form-group">
             <label class="govuk-label govuk-label--m" for="documents">
               <%= t('.upload_file') %>
             </label>
@@ -52,6 +52,9 @@
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
             <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/statement_of_cases"></span>
+            <p id="dropzone-error" class="govuk-error-message hidden">
+              <span class="govuk-visually-hidden">Error:</span>
+            </p>
             <div class="dropzone" id="dropzone-form">
               <div class="dz-message" data-dz-message>
                 <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
