@@ -8,8 +8,8 @@ task employ: :environment do
 
   Firm.all.each do |firm|
     next if firm.permissions.include?(employment_permission)
+
     firm.permissions << employment_permission
     firm.save!
   end
-
 end
