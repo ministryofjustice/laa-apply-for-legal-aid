@@ -345,7 +345,7 @@ en:
           bullet-5: if anyone else might be able to fund the case
           h1-heading: Provide a statement of case
           warning: Warning
-          warning_text: You must provide a complete statement now. You will not be able to upload a statement later.
+          warning_text: You must provide a complete statement of case now. You cannot do it later.
           h2-heading: Uploaded files
           no_files: Files uploaded will appear here.
           upload_file: Attach a file
