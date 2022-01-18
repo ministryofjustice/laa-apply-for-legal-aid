@@ -21,9 +21,9 @@
           html: { id: 'file-upload-form' }
       ) do |form| %>
 
-    <%#= form.govuk_error_summary %>
+    <%= form.govuk_error_summary %>
 
-    <%#= render partial: 'shared/forms/error_summary_hidden', locals: { error_message: t('.file_not_uploaded_error'),
+    <%= render partial: 'shared/forms/error_summary_hidden', locals: { error_message: t('.file_not_uploaded_error'),
                                                                 field_id: 'application-merits-task-statement-of-case-original-file-field' } %>
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
@@ -43,10 +43,8 @@
         </strong>
       </div>
 
-      <div class="moj-multi-file-upload">
-
-        <div class="dropzone__upload">
-          <div class="govuk-form-group">
+      <div class="dropzone__upload">
+        <div class="govuk-form-group script hidden">
             <label class="govuk-label govuk-label--m" for="documents">
               <%= t('.upload_file') %>
             </label>
@@ -56,42 +54,35 @@
             <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/statement_of_cases"></span>
             <div class="dropzone" id="dropzone-form">
               <div class="dz-message" data-dz-message>
-                <p class="govuk-body govuk-!-padding-top-2"><%= t('.dropzone_message') %></p>
-                <label for="documents" class="govuk-button govuk-button--secondary"><%= t('.choose_files_btn') %></label>
+                <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
+                <label for="documents" id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></label>
                 <div aria-live="polite" role="status" class="govuk-visually-hidden" id="file-upload-status-message"></div>
               </div>
-              <div class="fallback">
-                <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
-                                          hint: {text: t('.size_hint')},
-                                          classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
-                <%= form.submit(
-                      t('generic.upload'),
-                      id: 'upload',
-                      name: 'upload_button',
-                      class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
-                    ) %>
-
-              </div>
             </div>
+        </div>
 
-          </div>
+        <div class="fallback no-script">
+          <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+                                    hint: {text: t('.size_hint')},
+                                    classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
+          <%= form.submit(
+                t('generic.upload'),
+                id: 'upload',
+                name: 'upload_button',
+                class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+              ) %>
 
         </div>
 
-        <div class="moj-multi-file__uploaded-files">
-          <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
-          <div id="uploaded-files-table-container">
-            <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-          </div>
-          <% if @form.model.original_attachments.empty? %>
-            <p class="govuk-body">
-              <%= t('.no_files') %>
-            </p>
-          <% end %>
-          <div class="govuk-summary-list moj-multi-file-upload__list">
-
-          </div>
+        <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
+        <div id="uploaded-files-table-container">
+          <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
         </div>
+        <% if @form.model.original_attachments.empty? %>
+          <p class="govuk-body">
+            <%= t('.no_files') %>
+          </p>
+        <% end %>
 
       </div>
 

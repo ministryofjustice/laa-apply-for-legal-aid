@@ -1,11 +1,3 @@
-.moj-multi-file-upload {
-  margin-bottom: 40px;
-}
-
-.moj-multi-file-upload--enhanced .moj-multi-file-upload__button {
-  display: none;
-}
-
 .dropzone {
   outline: 3px dashed govuk-colour('black');
   border: none !important;
@@ -33,35 +25,39 @@
   left: -9999em;
 }
 
-.moj-multi-file-upload--dragover {
+.dz-message {
+  display: flex;
+}
+
+.dz-drag-hover {
   background: #b1b4b6;
   outline-color: #6f777b;
 }
 
-.moj-multi-file-upload--focused {
+.dz--focused {
   background-color: $govuk-focus-colour;
   color: $govuk-focus-text-colour;
   box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
   outline: none;
 }
 
-.moj-multi-file-upload__error {
+.dz__error {
   color: govuk-colour('red');
   font-weight: bold;
 }
 
-.moj-multi-file-upload__success {
+.dz__success {
   color: govuk-colour('green');
   font-weight: bold;
 }
 
-.moj-multi-file-upload__error svg {
+.dz__error svg {
   fill: currentColor;
   float: left;
   margin-right: govuk-spacing(2);
 }
 
-.moj-multi-file-upload__success svg {
+.dz__success svg {
   fill: currentColor;
   float: left;
   margin-right: govuk-spacing(2);
