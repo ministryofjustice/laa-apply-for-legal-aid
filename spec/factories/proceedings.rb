@@ -58,6 +58,32 @@ FactoryBot.define do
       ccms_matter_code { 'MINJN' }
     end
 
+    trait :da005 do
+      lead_proceeding { false }
+      ccms_code { 'DA005' }
+      meaning { 'Occupation order' }
+      description { 'to be represented on an application for an occupation order.' }
+      substantive_cost_limitation { 25_000 }
+      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+      substantive_scope_limitation_code { 'AA019' }
+      substantive_scope_limitation_meaning { 'Injunction FLA-to final hearing' }
+      substantive_scope_limitation_description { 'Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.' }
+      delegated_functions_scope_limitation_code { 'CV117' }
+      delegated_functions_scope_limitation_meaning { 'Interim order inc. return date' }
+      delegated_functions_scope_limitation_description do
+        'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
+         final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
+         of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
+      end
+      used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
+      used_delegated_functions_reported_on { Time.zone.today }
+      name { 'occupation_order' }
+      matter_type { 'Domestic Abuse' }
+      category_of_law { 'Family' }
+      category_law_code { 'MAT' }
+      ccms_matter_code { 'MINJN' }
+    end
+
     trait :da006 do
       lead_proceeding { false }
       ccms_code { 'DA006' }

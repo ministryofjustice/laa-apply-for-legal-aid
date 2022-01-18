@@ -11,7 +11,7 @@ RSpec.describe Reports::MeansReportCreator do
   describe '.call' do
     context 'V3 CFE Result' do
       let(:legal_aid_application) do
-        create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: ccms_submission
+        create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: ccms_submission
       end
       let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
 
@@ -30,7 +30,7 @@ RSpec.describe Reports::MeansReportCreator do
 
       context 'ccms case ref does not exist' do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: ccms_submission
+          create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: ccms_submission
         end
         let(:ccms_submission) { create :ccms_submission }
 
@@ -44,7 +44,7 @@ RSpec.describe Reports::MeansReportCreator do
         end
 
         context 'ccms submission does not exist' do
-          let(:legal_aid_application) { create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: nil }
+          let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v3_result, :generating_reports, ccms_submission: nil }
 
           before do
             allow(legal_aid_application).to receive(:case_ccms_reference).and_return(nil)
@@ -61,11 +61,16 @@ RSpec.describe Reports::MeansReportCreator do
     end
 
     context 'V4 CFE result' do
-      let(:da002) { create :proceeding_type, ccms_code: 'DA002' }
-      let(:da006) { create :proceeding_type, ccms_code: 'DA006' }
+      let!(:da002) { create :proceeding_type, ccms_code: 'DA002' }
+      let!(:da006) { create :proceeding_type, ccms_code: 'DA006' }
       let(:legal_aid_application) do
-        create :legal_aid_application, :with_proceeding_types, :with_everything, :with_cfe_v4_result,
-               :generating_reports, ccms_submission: ccms_submission, explicit_proceeding_types: [da002, da006]
+        create :legal_aid_application,
+               :with_proceedings,
+               :with_everything,
+               :with_cfe_v4_result,
+               :generating_reports,
+               ccms_submission: ccms_submission,
+               explicit_proceedings: %i[da002 da006]
       end
       let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
 

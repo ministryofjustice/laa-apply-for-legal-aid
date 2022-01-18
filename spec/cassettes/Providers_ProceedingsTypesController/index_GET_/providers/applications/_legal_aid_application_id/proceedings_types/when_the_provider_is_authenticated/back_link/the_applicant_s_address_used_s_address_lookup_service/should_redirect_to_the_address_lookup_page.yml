@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.8.0
+      - Faraday v1.9.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -16,16 +16,22 @@ http_interactions:
   response:
     status:
       code: 400
-      message: Bad Request
+      message: ''
     headers:
       Date:
-      - Wed, 13 Oct 2021 06:56:45 GMT
+      - Tue, 18 Jan 2022 14:26:54 GMT
       Content-Type:
       - application/json;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '194'
       Connection:
       - keep-alive
+      Vary:
+      - Access-Control-Request-Headers
+      Request-Context:
+      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
+      X-Powered-By:
+      - ASP.NET
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Credentials:
@@ -40,14 +46,10 @@ http_interactions:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: |-
-        {
-          "error" : {
-            "statuscode" : 400,
-            "message" : "Requested postcode must contain a minimum of the sector plus 1 digit of the district e.g. SO1. Requested postcode was YO4B0LJ"
-          }
-        }
-  recorded_at: Wed, 13 Oct 2021 06:56:45 GMT
+      string: "{\r\n  \"error\" : {\r\n    \"statuscode\" : 400,\r\n    \"message\"
+        : \"Requested postcode must contain a minimum of the sector plus 1 digit of
+        the district e.g. SO1. Requested postcode was YO4B0LJ\"\r\n  }\r\n}"
+  recorded_at: Tue, 18 Jan 2022 14:26:54 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
@@ -58,7 +60,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.8.0
+      - Faraday v1.9.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -69,7 +71,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 13 Oct 2021 06:56:45 GMT
+      - Tue, 18 Jan 2022 14:26:55 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -95,14 +97,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 16d181337f77b10b0cdde4b7a979f577
+      - 90f91a205c687549d47807a7c061becd
       X-Runtime:
-      - '0.013121'
+      - '0.014965'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
-  recorded_at: Wed, 13 Oct 2021 06:56:45 GMT
+  recorded_at: Tue, 18 Jan 2022 14:26:55 GMT
 recorded_with: VCR 6.0.0

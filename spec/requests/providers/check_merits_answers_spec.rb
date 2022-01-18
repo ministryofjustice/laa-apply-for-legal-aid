@@ -8,9 +8,12 @@ RSpec.describe 'check merits answers requests', type: :request do
     let(:application) do
       create :legal_aid_application,
              :with_everything,
-             :with_multiple_proceeding_types_inc_section8,
+             :with_proceedings,
+             :with_chances_of_success,
+             :with_attempts_to_settle,
              :with_involved_children,
-             :provider_entering_merits
+             :provider_entering_merits,
+             proceeding_count: 3
     end
 
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }

@@ -23,7 +23,6 @@ module Reports
                :outstanding_mortgage_amount,
                :own_home,
                :percentage_home,
-               :proceeding_types,
                :proceedings,
                :property_value,
                :provider,

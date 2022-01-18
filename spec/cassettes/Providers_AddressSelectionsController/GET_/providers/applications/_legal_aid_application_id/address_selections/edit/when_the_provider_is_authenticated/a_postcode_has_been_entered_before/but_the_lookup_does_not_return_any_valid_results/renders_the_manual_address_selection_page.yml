@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - Faraday v1.9.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -19,33 +19,41 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 25 Sep 2020 13:12:42 GMT
+      - Tue, 18 Jan 2022 14:38:57 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Tx-Id:
-      - 1601039562327:327
-      Status:
-      - success
+      Request-Context:
+      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
+      Vary:
+      - Origin,Accept-Encoding,key
+      Omse-Category:
+      - premium
+      Omse-Transaction-Count:
+      - '60'
+      Omse-Premium-Count:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, key, authorization, content-type
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
     body:
-      encoding: UTF-8
-      string: |-
-        {
-          "header" : {
-            "uri" : "https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX",
-            "query" : "postcode=XX11XX",
-            "offset" : 0,
-            "totalresults" : 0,
-            "format" : "JSON",
-            "dataset" : "DPA",
-            "lr" : "EN",
-            "maxresults" : 100,
-            "epoch" : "78",
-            "output_srs" : "EPSG:27700"
-          }
-        }
-  recorded_at: Fri, 25 Sep 2020 13:12:42 GMT
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=XX11XX\",\r\n
+        \   \"query\" : \"postcode=XX11XX\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
+        : 0,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"89\",\r\n    \"output_srs\"
+        : \"EPSG:27700\"\r\n  }\r\n}"
+  recorded_at: Tue, 18 Jan 2022 14:38:57 GMT
 recorded_with: VCR 6.0.0

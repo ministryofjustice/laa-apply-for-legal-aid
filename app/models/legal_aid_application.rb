@@ -166,27 +166,6 @@ class LegalAidApplication < ApplicationRecord
     lead_proc
   end
 
-  # TODO: remove this once LFA migration is complete. Replaced by #proceedings_by_name below
-  def application_proceedings_by_name
-    # returns an array of OpenStructs containing:
-    # - name of the proceeding type
-    # - meaning of the proceeding type
-    # - the ApplicationProceedingType
-    #
-    # in the order they were added to the LegalAidApplication
-    #
-    application_proceeding_types.in_order_of_addition.map do |application_proceeding_type|
-      proceeding_type = ProceedingType.find(application_proceeding_type.proceeding_type_id)
-      # rubocop:disable Style/OpenStructUse
-      OpenStruct.new({
-                       name: proceeding_type.name,
-                       meaning: proceeding_type.meaning,
-                       application_proceeding_type: application_proceeding_type
-                     })
-      # rubocop:enable Style/OpenStructUse
-    end
-  end
-
   def proceedings_by_name
     # returns an array of ProceedingStruct containing:
     # - name of the proceeding type

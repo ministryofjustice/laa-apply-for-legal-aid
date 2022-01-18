@@ -4,10 +4,11 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
   let(:application) do
     create :legal_aid_application,
            :with_applicant,
-           :with_proceeding_types,
+           :with_proceedings,
            :with_delegated_functions,
            :with_everything,
-           delegated_functions_date: 10.days.ago,
+           :with_delegated_functions_on_proceedings,
+           df_options: { DA001: 10.days.ago },
            substantive_application_deadline_on: 10.days.from_now
   end
   let(:email) { Faker::Internet.safe_email }

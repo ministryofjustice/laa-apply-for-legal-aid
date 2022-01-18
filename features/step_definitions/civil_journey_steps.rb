@@ -91,7 +91,7 @@ Given('I previously created a passported application with no assets and left on 
     :application,
     :with_applicant,
     :without_own_home,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_no_other_assets,
     :with_policy_disregards,
     :with_passported_state_machine,
@@ -103,19 +103,19 @@ Given('I previously created a passported application with no assets and left on 
 end
 
 Given('I have a passported application with no assets on the {string} page') do |provider_step|
-  proceeding_one = ProceedingType.find_by(code: 'PR0208')
   @legal_aid_application = create(
     :application,
     :with_applicant,
     :without_own_home,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_no_other_assets,
     :with_policy_disregards,
     :with_passported_state_machine,
     :provider_entering_means,
     provider: create(:provider),
     provider_step: provider_step.downcase,
-    explicit_proceeding_types: [proceeding_one]
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001
   )
   login_as @legal_aid_application.provider
 end
@@ -183,7 +183,6 @@ Given("I am checking the applicant's means answers") do
 end
 
 Given('I have completed the non-passported means assessment and start the merits assessment') do
-  @pt1 = ProceedingType.find_by(ccms_code: 'DA001') || create(:proceeding_type, :with_real_data, :with_scope_limitations)
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -192,7 +191,9 @@ Given('I have completed the non-passported means assessment and start the merits
     :with_transaction_period,
     :with_policy_disregards,
     :with_benefits_transactions,
-    :with_proceeding_types, explicit_proceeding_types: [@pt1]
+    :with_proceedings,
+    explicit_proceedings: %i[da001],
+    set_lead_proceeding: :da001
   )
 
   login_as @legal_aid_application.provider
@@ -203,7 +204,7 @@ Given('I start the merits application') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards
@@ -220,7 +221,7 @@ Given('I start the merits application with bank transactions with no transaction
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_uncategorised_credit_transactions,
@@ -239,7 +240,7 @@ Given('I start the merits application with student finance') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
@@ -260,7 +261,7 @@ Given('I start the application with a negative benefit check result') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :applicant_details_checked,
     :with_negative_benefit_check_result
@@ -278,7 +279,7 @@ Given('I start the application with a negative benefit check result and no used 
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :applicant_details_checked,
     :with_negative_benefit_check_result
@@ -293,7 +294,6 @@ Given('I start the application with a negative benefit check result and no used 
 end
 
 Given('I start the merits application and the applicant has uploaded transaction data') do
-  @pt1 = ProceedingType.find_by(ccms_code: 'DA001') || create(:proceeding_type, :with_real_data, :with_scope_limitations)
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -302,7 +302,8 @@ Given('I start the merits application and the applicant has uploaded transaction
     :with_policy_disregards,
     :with_transaction_period,
     :with_benefits_transactions,
-    :with_proceeding_types, explicit_proceeding_types: [@pt1]
+    :with_proceedings, explicit_proceedings: [:da001],
+                       set_lead_proceeding: :da001
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -316,7 +317,7 @@ Given('I start the means review journey with employment income from HMRC') do
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means
   )
@@ -342,7 +343,7 @@ Given('I start the means review journey with no employment income from HMRC') do
 
   @legal_aid_application = create(
     :application,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     applicant: @applicant
@@ -372,14 +373,12 @@ Given('I start the journey as far as the start of the vehicle section') do
 end
 
 Given('I have completed a non-passported application and reached the merits task_list') do
-  @pt1 = ProceedingType.find_by(ccms_code: 'SE014')
-  @pt2 = ProceedingType.find_by(ccms_code: 'DA001')
   @legal_aid_application = create(
     :application,
     :with_applicant,
     :with_non_passported_state_machine,
     :provider_entering_merits,
-    :with_proceeding_types, explicit_proceeding_types: [@pt1, @pt2]
+    :with_proceedings, explicit_proceedings: %i[se014 da001]
   )
   create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
@@ -420,7 +419,7 @@ Given('I complete the journey as far as check your answers') do
   @legal_aid_application = create(
     :legal_aid_application,
     :at_entering_applicant_details,
-    :with_proceeding_types,
+    :with_proceedings,
     applicant: applicant
   )
   login_as @legal_aid_application.provider
@@ -429,16 +428,14 @@ Given('I complete the journey as far as check your answers') do
 end
 
 Given('I complete the journey as far as check client details with multiple proceedings selected') do
-  proceeding_one = ProceedingType.find_by(code: 'PR0208')
-  proceeding_two = ProceedingType.find_by(code: 'PR0214')
-
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
-    explicit_proceeding_types: [proceeding_one, proceeding_two]
+    explicit_proceedings: %i[da001 da005],
+    set_lead_proceeding: :da001
   )
 
   login_as @legal_aid_application.provider
@@ -447,7 +444,6 @@ Given('I complete the journey as far as check client details with multiple proce
 end
 
 Given('I complete the passported journey as far as check your answers') do
-  proceeding_one = ProceedingType.find_by(code: 'PR0208')
   applicant = create(
     :applicant,
     first_name: 'Test',
@@ -469,22 +465,23 @@ Given('I complete the passported journey as far as check your answers') do
     :legal_aid_application,
     :with_passported_state_machine,
     :at_entering_applicant_details,
-    :with_proceeding_types,
-    explicit_proceeding_types: [proceeding_one],
+    :with_proceedings,
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001,
     applicant: applicant
   )
   login_as @legal_aid_application.provider
+
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
 Given('I complete the journey as far as check passported answers with multiple proceedings') do
-  proceeding_one = ProceedingType.find_by(code: 'PR0208')
-  proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_transaction_period,
@@ -493,7 +490,8 @@ Given('I complete the journey as far as check passported answers with multiple p
     :with_gateway_evidence,
     :with_policy_disregards,
     :with_benefits_transactions,
-    explicit_proceeding_types: [proceeding_one, proceeding_two]
+    explicit_proceedings: %i[da001 da005],
+    set_lead_proceeding: :da001
   )
 
   login_as @legal_aid_application.provider
@@ -568,7 +566,7 @@ Given('I complete the passported journey as far as capital check your answers') 
   @legal_aid_application = create(
     :legal_aid_application,
     :with_everything,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_passported_state_machine,
     :provider_entering_means,
     applicant: applicant
@@ -595,15 +593,15 @@ Given('I complete the application and view the check your answers page') do
     lookup_used: true,
     applicant: applicant
   )
-  proceeding_type = ProceedingType.where(ccms_matter: 'Domestic Abuse').sample
 
   @legal_aid_application = create(
     :legal_aid_application,
     :with_non_passported_state_machine,
     :applicant_entering_means,
-    :with_proceeding_types,
+    :with_proceedings,
     applicant: applicant,
-    explicit_proceeding_types: [proceeding_type]
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001
   )
 
   login_as @legal_aid_application.provider
@@ -611,18 +609,17 @@ Given('I complete the application and view the check your answers page') do
 end
 
 Given('The means questions have been answered by the applicant') do
-  proceeding_one = ProceedingType.find_by(code: 'PR0208')
-  proceeding_two = ProceedingType.find_by(code: 'PR0214')
   @legal_aid_application = create(
     :application,
     :with_applicant,
-    :with_proceeding_types,
+    :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
     :with_uncategorised_debit_transactions,
     :with_uncategorised_credit_transactions,
-    explicit_proceeding_types: [proceeding_one, proceeding_two]
+    explicit_proceedings: %i[da001 da005],
+    set_lead_proceeding: :da001
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
