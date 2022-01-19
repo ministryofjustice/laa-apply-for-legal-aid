@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'ping', to: 'status#ping', format: :json
   get 'healthcheck', to: 'status#status', format: :json
   get 'status', to: 'status#ping', format: :json
+  get 'data', to: 'status#data'
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
