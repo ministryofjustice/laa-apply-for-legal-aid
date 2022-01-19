@@ -18,6 +18,8 @@ module CFE
       let(:with_monthly_outgoing_equivalents) { create :cfe_v4_result, :with_monthly_outgoing_equivalents }
       let(:with_total_gross_income) { create :cfe_v4_result, :with_total_gross_income }
       let(:with_mixed_proceeding_type_results) { create :cfe_v4_result, :with_mixed_proceeding_type_results }
+      let(:with_employments) { create :cfe_v4_result, :with_employments }
+      let(:with_no_employments) { create :cfe_v4_result, :with_no_employments }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v4_result }
       let(:contribution_and_restriction_result) { create :cfe_v4_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
@@ -616,6 +618,78 @@ module CFE
         it 'instantiates the Remarks class with the remarks part of the hash' do
           expect(CFE::Remarks).to receive(:new).with({})
           eligible_result.remarks
+        end
+      end
+
+      ################################################################
+      #  EMPLOYMENT_INCOME                                           #
+      ################################################################
+
+      context 'employment income' do
+        context 'with employments' do
+          describe 'gross_income' do
+            subject(:gross_income) { with_employments.employment_income_gross_income }
+            it { is_expected.to eq 1041.00 }
+          end
+
+          describe 'gross_income' do
+            subject(:benefits_in_kind) { with_employments.employment_income_benefits_in_kind }
+            it { is_expected.to eq 16.60 }
+          end
+
+          describe 'tax' do
+            subject(:tax) { with_employments.employment_income_tax }
+            it { is_expected.to eq(-104.10) }
+          end
+
+          describe 'national_insurance' do
+            subject(:tax) { with_employments.employment_income_national_insurance }
+            it { is_expected.to eq(-18.66) }
+          end
+
+          describe 'fixed_employment_deduction' do
+            subject(:tax) { with_employments.employment_income_fixed_employment_deduction }
+            it { is_expected.to eq(-45.00) }
+          end
+
+          describe 'net_employment_income' do
+            subject(:tax) { with_employments.employment_income_net_employment_income }
+            it { is_expected.to eq 8898.84 }
+          end
+
+          describe 'jobs' do
+            subject(:jobs) { with_employments.jobs }
+            it { is_expected.to be_kind_of(Array) }
+            it { is_expected.to_not be_empty }
+            it 'has a name' do
+              expect(subject[0][:name]).to eq 'Job 1'
+              expect(subject[1][:name]).to eq 'Job 2'
+            end
+          end
+
+          describe 'jobs?' do
+            subject(:jobs?) { with_employments.jobs? }
+            it { is_expected.to be(true) }
+          end
+        end
+
+        context 'with no employments' do
+          describe 'employment_income' do
+            subject(:employment_income) { with_no_employments.employment_income }
+            it { is_expected.to be_kind_of(Hash) }
+            it { is_expected.to be_empty }
+          end
+
+          describe 'jobs' do
+            subject(:jobs) { with_no_employments.jobs }
+            it { is_expected.to be_kind_of(Array) }
+            it { is_expected.to be_empty }
+          end
+
+          describe 'jobs?' do
+            subject(:jobs?) { with_no_employments.jobs? }
+            it { is_expected.to be(false) }
+          end
         end
       end
     end
