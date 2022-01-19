@@ -1,5 +1,7 @@
 import Dropzone from 'dropzone'
 
+const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
+
 const ERR_GENERIC = 'There was a problem uploading your file - try again'
 const FILE_SIZE_ERR = 'The selected file must be smaller than 7MB.'
 const ERR_CONTENT_TYPE = 'The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.'
@@ -35,6 +37,23 @@ function addErrorMessage (msg) {
 document.addEventListener('DOMContentLoaded', event => {
   const dropzoneElem = document.querySelector('#dropzone-form')
   const statusMessage = document.querySelector(('#file-upload-status-message'))
+
+  const chooseFilesBtn = document.querySelector('#dz-upload-button')
+  chooseFilesBtn.addEventListener('click', (e) => {
+    e.preventDefault() // prevent submitting form by default
+    e.parentElement.click()
+  })
+  // use enter key to add files
+  chooseFilesBtn.addEventListener('keydown', (e) => {
+    const KEY_ENTER = 13
+    if (e.keyCode === KEY_ENTER) {
+      e.parentElement.click()
+    }
+  })
+
+  // aria-hide auto-generated dropzone input field so Wave doesn't complain
+  document.querySelector('.dz-hidden-input').setAttribute('aria-hidden', true)
+
   if (dropzoneElem) {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
@@ -47,7 +66,7 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('addedfile', file => {
-      statusMessage.innerHTML = 'Your files are being uploaded.'
+      setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
     })
     dropzone.on('sending', (file, xhr, formData) => {
       // send the legal_aid_application id in the form data
@@ -56,7 +75,7 @@ document.addEventListener('DOMContentLoaded', event => {
     dropzone.on('success', () => {
       // refresh the page to see the uploaded files
       window.location.reload()
-      statusMessage.innerHTML = 'Your files have been uploaded successfully.'
+      setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
     })
     dropzone.on('error', (file) => {
       let errorMsg = ''
@@ -67,11 +86,13 @@ document.addEventListener('DOMContentLoaded', event => {
       } else {
         errorMsg = ERR_GENERIC
       }
-      dropzone.removeFile(file)
+      dropzone.removeFile(file)// add an error message to the error summary component
+      addErrorMessage(errorMsg)
+      if (errorMsg !== ERR_GENERIC) {
+        errorMsg = ERR_GENERIC + errorMsg // make error message more informative for screenreaders
+      }
       // update the screenreader message to alert the user of the error
       statusMessage.innerHTML = errorMsg
-      // add an error message to the error summary component
-      addErrorMessage(errorMsg)
     })
   }
 })
