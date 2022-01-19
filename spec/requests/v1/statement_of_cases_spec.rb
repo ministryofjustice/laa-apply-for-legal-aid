@@ -18,6 +18,27 @@ RSpec.describe 'POST /v1/statement_of_case', type: :request do
       it 'adds the statement of case to the legal aid application' do
         expect { subject }.to change { legal_aid_application.reload.attachments.length }.by 1
       end
+
+      context 'when the application has no statement of case' do
+        let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, attachments: [] }
+
+        it 'does not increment the attachment name' do
+          subject
+          expect(legal_aid_application.reload.attachments.length).to match(1)
+          expect(legal_aid_application.reload.attachments.last.attachment_name).to match('statement_of_case')
+        end
+      end
+
+      context 'when the application has one attachment for statement of case already' do
+        let(:statement_of_case) { create :attachment }
+        let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, attachments: [statement_of_case] }
+
+        it 'increments the attachment name' do
+          subject
+          expect(legal_aid_application.reload.attachments.length).to match(2)
+          expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match('statement_of_case_1')
+        end
+      end
     end
 
     context 'when the application does not exist' do

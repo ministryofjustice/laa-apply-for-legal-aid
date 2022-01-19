@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', event => {
       statusMessage.innerHTML = 'Your files have been uploaded successfully.'
     })
     dropzone.on('error', (file) => {
-      console.log(file)
       let errorMsg = ''
       if (file.size >= 7000) {
         errorMsg = FILE_SIZE_ERR
@@ -69,7 +68,6 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg = ERR_GENERIC
       }
       dropzone.removeFile(file)
-      // window.location.reload()
       // update the screenreader message to alert the user of the error
       statusMessage.innerHTML = errorMsg
       // add an error message to the error summary component

@@ -45,7 +45,7 @@
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden" id="dropzone-form-group">
-            <label class="govuk-label govuk-label--m" for="documents">
+            <label class="govuk-label govuk-label--m" for="dropzone-form">
               <%= t('.upload_file') %>
             </label>
             <span class="govuk-hint"><%= t('.size_hint') %></span>
@@ -57,8 +57,8 @@
             </p>
             <div class="dropzone" id="dropzone-form">
               <div class="dz-message" data-dz-message>
-                <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
-                <label for="documents" id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></label>
+                <p class="govuk-body govuk-!-padding-top-2 script" tabindex="0"><%= t('.dropzone_message') %></p>
+                <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></button>
                 <div aria-live="polite" role="status" class="govuk-visually-hidden" id="file-upload-status-message"></div>
               </div>
             </div>
