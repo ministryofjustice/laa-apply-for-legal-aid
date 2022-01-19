@@ -24,6 +24,10 @@ class StatusController < ApiController
     }
   end
 
+  def data
+    redirect_to ENV['GOOGLE_DATA_STUDIO_URL']
+  end
+
   private
 
   def redis_alive?

@@ -354,5 +354,10 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: googleSheetsSpreadsheetId
+  - name: GOOGLE_DATA_STUDIO_URL
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "apply-for-legal-aid.fullname" . }}
+        key: googleDataStudioUrl
 
 {{- end }}
