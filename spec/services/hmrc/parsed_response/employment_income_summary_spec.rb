@@ -7,7 +7,7 @@ module HMRC
         context 'When only one employment' do
           let(:laa) { create :legal_aid_application }
 
-          before { create :hmrc_response, :eg1_uc1, legal_aid_application_id: laa.id }
+          before { create :hmrc_response, :example1_usecase1, legal_aid_application_id: laa.id }
 
           subject { described_class.new(laa.id) }
 

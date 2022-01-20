@@ -21,9 +21,9 @@ module HMRC
         url { "#{Rails.configuration.x.hmrc_interface.host}api/v1/submission/result/#{submission_id}" }
       end
 
-      trait :eg1_uc1 do
+      trait :example1_usecase1 do
         use_case { 'one' }
-        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :eg1_uc1).response }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :example1_usecase1).response }
       end
     end
   end

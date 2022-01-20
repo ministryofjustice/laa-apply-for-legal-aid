@@ -33,7 +33,7 @@ RSpec.describe CFE::CreateEmploymentsService do
       let(:expected_payload) { full_payload }
 
       before do
-        create :hmrc_response, :eg1_uc1, legal_aid_application: laa
+        create :hmrc_response, :example1_usecase1, legal_aid_application: laa
       end
 
       it 'sends array of payment data' do
@@ -65,7 +65,7 @@ RSpec.describe CFE::CreateEmploymentsService do
       let(:expected_payload) { full_payload }
       let(:expected_payload_hash) { full_payload }
       before do
-        create :hmrc_response, :eg1_uc1, legal_aid_application: laa
+        create :hmrc_response, :example1_usecase1, legal_aid_application: laa
       end
       it_behaves_like 'a failed call to CFE'
     end

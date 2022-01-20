@@ -4,7 +4,7 @@ module HMRC
   module ParsedResponse
     RSpec.describe Employment do
       describe '.new' do
-        let(:hmrc_response) { create :hmrc_response, :eg1_uc1 }
+        let(:hmrc_response) { create :hmrc_response, :example1_usecase1 }
         let(:laa) { hmrc_response.legal_aid_application }
         let(:employment_income_summary) { EmploymentIncomeSummary.new(laa) }
         let(:employment) { employment_income_summary.employments.first }

@@ -51,16 +51,14 @@ module FactoryHelpers
 
       def generate_named_data
         case @options[:named_data]
-        when :eg1_uc1
-          eg1_uc1
-        when :eg2_uc2
-          eg2_uc2
+        when :example1_usecase1
+          example1_usecase1
         else
           raise "named data #{@options[:named_data]} passed to #{self.class}} unrecognised"
         end
       end
 
-      def eg1_uc1
+      def example1_usecase1
         @options = {
           first_name: 'John',
           last_name: 'Doe',
