@@ -17,7 +17,6 @@
         <% @reports.each do |_key, report| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell case-full-name"><%= report[:report_title] %></td>
-<!--            <td class="govuk-table__cell"><%#= link_to_accessible 'TEST', admin_application_details_csv_path(format: :csv) %></td>-->
             <td class="govuk-table__cell"><%= link_to_accessible(report[:path_text], __send__(report[:path], format: :csv)) %></td>
           </tr>
         <% end %>
