@@ -1,5 +1,7 @@
 <div class="govuk-accordion__section-content">
-  <h2 class="govuk-heading-m"><%= t('.title') %></h2>
+  <h2 class="govuk-heading-m">
+    <%= Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? ? t('.title') : t('.income') %>
+  </h2>
   <table class="govuk-table">
     <tbody>
     <%= render partial: 'shared/results_detail_row', locals: { caption: t('.benefits'), value: gds_number_to_currency(@cfe_result.monthly_state_benefits) } %>
