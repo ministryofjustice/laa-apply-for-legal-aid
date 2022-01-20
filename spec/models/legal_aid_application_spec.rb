@@ -487,20 +487,6 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe 'application_proceedings_by_name' do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_everything, :with_proceeding_types }
-
-    it 'returns all application proceeding types with proceeding type names' do
-      result = legal_aid_application.application_proceedings_by_name
-      application_proceeding_types = result.map(&:application_proceeding_type)
-      application_proceeding_names = result.map(&:name)
-      proceeding_names = legal_aid_application.application_proceeding_types.map { |type| ProceedingType.find(type.proceeding_type_id).name }
-
-      expect(application_proceeding_types).to match_array(legal_aid_application.application_proceeding_types)
-      expect(application_proceeding_names).to match_array(proceeding_names)
-    end
-  end
-
   describe 'attributes are synced on applicant_details_checked' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details }
 
@@ -533,7 +519,12 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe '.destroy_all' do
     let!(:legal_aid_application) do
-      create :legal_aid_application, :with_everything, :with_multiple_proceeding_types_inc_section8, :with_negative_benefit_check_result, :with_bank_transactions
+      create :legal_aid_application,
+             :with_everything,
+             :with_multiple_proceedings_inc_section8,
+             :with_negative_benefit_check_result,
+             :with_bank_transactions,
+             :with_chances_of_success
     end
 
     before do
@@ -544,7 +535,6 @@ RSpec.describe LegalAidApplication, type: :model do
 
     # A bit verbose, but minimises the SQL calls required to complete spec
     it 'removes everything it needs to' do
-      expect(ApplicationProceedingType.count).not_to be_zero
       expect(BenefitCheckResult.count).not_to be_zero
       expect(OtherAssetsDeclaration.count).not_to be_zero
       expect(SavingsAmount.count).not_to be_zero
@@ -558,7 +548,6 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BankError.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
       expect { subject }.to change { described_class.count }.to(0)
-      expect(ApplicationProceedingType.count).to be_zero
       expect(BenefitCheckResult.count).to be_zero
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero
@@ -574,10 +563,8 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     it 'leaves object it should not affect' do
-      expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
       subject
-      expect(ProceedingType.count).not_to be_zero
       expect(TransactionType.count).not_to be_zero
     end
   end

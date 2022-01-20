@@ -10,17 +10,14 @@ RSpec.describe ApplicationDigest do
     let(:creation_date) { creation_time.to_date }
     let(:submission_time) { creation_time + 3.days }
     let(:submission_date) { submission_time.to_date }
-    let(:da001) { create :proceeding_type, :da001, :with_scope_limitations }
-    let(:se013) { create :proceeding_type, :se013, :with_scope_limitations }
-    let(:se014) { create :proceeding_type, :se014, :with_scope_limitations }
 
     let(:laa) do
       travel_to creation_time do
         create :legal_aid_application,
                :assessment_submitted,
                :with_everything,
-               :with_proceeding_types,
-               explicit_proceeding_types: [da001, se013, se014],
+               :with_proceedings,
+               explicit_proceedings: %i[da001 se013 se014],
                provider: provider,
                merits_submitted_at: submission_time
       end
@@ -52,18 +49,22 @@ RSpec.describe ApplicationDigest do
 
     context 'when no digest record exists for this application' do
       it 'creates a new record' do
-        expect { subject }.to change { ApplicationDigest.count }.by(1)
+        VCR.use_cassette 'bank_holidays' do
+          expect { subject }.to change { ApplicationDigest.count }.by(1)
+        end
       end
 
       it 'creates a record with expected values' do
-        subject
-        expect(digest.firm_name).to eq firm_name
-        expect(digest.provider_username).to eq username
-        expect(digest.date_started).to eq creation_date
-        expect(digest.date_submitted).to eq submission_date
-        expect(digest.days_to_submission).to eq 4
-        expect(digest.matter_types).to eq 'Domestic Abuse;Section 8 orders'
-        expect(digest.proceedings).to eq 'DA001;SE013;SE014'
+        VCR.use_cassette 'bank_holidays' do
+          subject
+          expect(digest.firm_name).to eq firm_name
+          expect(digest.provider_username).to eq username
+          expect(digest.date_started).to eq creation_date
+          expect(digest.date_submitted).to eq submission_date
+          expect(digest.days_to_submission).to eq 4
+          expect(digest.matter_types).to eq 'Domestic Abuse;Section 8 orders'
+          expect(digest.proceedings).to eq 'DA001;SE013;SE014'
+        end
       end
     end
 
@@ -75,7 +76,7 @@ RSpec.describe ApplicationDigest do
         end
       end
 
-      context 'applcation is at use_ccms' do
+      context 'application is at use_ccms' do
         it 'is true' do
           described_class.create_or_update!(laa_at_use_ccms.id)
           digest = described_class.find_by(legal_aid_application_id: laa_at_use_ccms.id)

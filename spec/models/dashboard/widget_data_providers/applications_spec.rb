@@ -62,35 +62,97 @@ module Dashboard
           ]
         end
 
-        def expected_apps
-          # pattern is days_ago => [created applications, ccms_submission failures, delegated_function applications, submitted passported applications, submitted non_passported applications,  incomplete passported & nonpassported applications]
-          {
-            6 => [3, 0, 0, 0, 0, 0],
-            5 => [1, 1, 0, 0, 0, 0],
-            4 => [0, 0, 1, 0, 1, 0],
-            3 => [1, 0, 0, 0, 0, 0],
-            2 => [5, 0, 0, 0, 0, 0],
-            1 => [3, 0, 2, 1, 2, 0],
-            0 => [1, 0, 0, 0, 0, 2]
-          }
+        def create_apps
+          create_2019_12_06
+          create_2019_12_07
+          create_2019_12_08
+          create_2019_12_09
+          create_2019_12_10
+          create_2019_12_11
+          create_2019_12_12
         end
 
-        def create_apps
-          expected_apps.each do |num_days, num_apps|
-            travel_to(date - num_days.days) do
-              create_fake_applications(num_apps)
-            end
+        # rubocop:disable Naming/VariableNumber
+        def create_2019_12_06
+          travel_to(Date.new(2019, 12, 6)) do
+            create_new(3)
           end
         end
 
-        def create_fake_applications(num_apps)
-          FactoryBot.create_list :legal_aid_application, num_apps[0]
-          FactoryBot.create_list :ccms_submission, num_apps[1], aasm_state: 'failed'
-          FactoryBot.create_list :legal_aid_application, num_apps[2], :with_proceeding_types, :with_delegated_functions
-          FactoryBot.create_list :legal_aid_application, num_apps[3], :non_passported, merits_submitted_at: Time.zone.today
-          FactoryBot.create_list :legal_aid_application, num_apps[4], :passported, :with_proceeding_types, :with_delegated_functions, merits_submitted_at: Time.zone.today
-          FactoryBot.create_list :legal_aid_application, num_apps[5], :passported, :with_proceeding_types, :with_delegated_functions # unsubmitted application
-          FactoryBot.create_list :legal_aid_application, num_apps[5], :non_passported, :with_proceeding_types, :with_delegated_functions # unsubmitted application
+        def create_2019_12_07
+          travel_to(Date.new(2019, 12, 7)) do
+            create_new(1)
+            create_ccms_submisson_failure(1)
+          end
+        end
+
+        def create_2019_12_08
+          travel_to(Date.new(2019, 12, 8)) do
+            create_df(1)
+            create_passported(1)
+          end
+        end
+
+        def create_2019_12_09
+          travel_to(Date.new(2019, 12, 9)) do
+            create_new(1)
+          end
+        end
+
+        def create_2019_12_10
+          travel_to(Date.new(2019, 12, 10)) do
+            create_new(5)
+          end
+        end
+
+        def create_2019_12_11
+          travel_to(Date.new(2019, 12, 11)) do
+            create_new(3)
+            create_df(2)
+            create_non_passported(1)
+            create_passported(2)
+          end
+        end
+
+        def create_2019_12_12
+          travel_to(Date.new(2019, 12, 12)) do
+            create_new(1)
+            create_incomplete_passported(2)
+            create_incomplete_non_passported(2)
+          end
+        end
+        # rubocop:enable Naming/VariableNumber
+
+        def create_new(num)
+          FactoryBot.create_list :legal_aid_application, num
+        end
+
+        def create_ccms_submisson_failure(num)
+          FactoryBot.create_list :ccms_submission, num, aasm_state: 'failed'
+        end
+
+        def create_df(num)
+          FactoryBot.create_list :legal_aid_application, num, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+        end
+
+        def create_non_passported(num)
+          FactoryBot.create_list :legal_aid_application, num, :non_passported, merits_submitted_at: Time.zone.today
+        end
+
+        def create_passported(num)
+          FactoryBot.create_list :legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }, merits_submitted_at: Time.zone.today
+        end
+
+        def create_incomplete_passported(num)
+          FactoryBot.create_list :legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+        end
+
+        def create_incomplete_non_passported(num)
+          FactoryBot.create_list :legal_aid_application, num, :non_passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+        end
+
+        def df_date
+          Time.zone.yesterday.to_date
         end
       end
     end

@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.8.0
+      - Faraday v1.9.3
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 30 Nov 2021 17:08:27 GMT
+      - Tue, 18 Jan 2022 14:21:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -47,9 +47,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2e54e6b21cba693a8e10d4717159ad9b
+      - f0002a24595f7eb07a9c350a53898bc7
       X-Runtime:
-      - '0.070215'
+      - '0.019826'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -66,5 +66,5 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date."}}}'
-  recorded_at: Tue, 30 Nov 2021 17:08:28 GMT
+  recorded_at: Tue, 18 Jan 2022 14:21:40 GMT
 recorded_with: VCR 6.0.0

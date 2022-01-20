@@ -231,9 +231,9 @@ FactoryBot.define do
     #   - create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001, :se013], set_lead_proceeding: :da001
     #   - create :legal_aid_application,
     #            :with_proceedings,
-    #            proceeding_count: 3,
-    #            delegated_functions_dates: [Date.today, Date.yesterday, Date.yesterday]
-
+    #            :with_delegated_functions_on_proceedings,
+    #            proceeding_count: 2,
+    #            df_options: { DA001: 35.days.ago.to_date, DA004: 36.days.ago.to_date }
     #
     # Note that the first domestic_abuse proceeding will be set as lead proceeding
     trait :with_proceedings do
@@ -258,9 +258,6 @@ FactoryBot.define do
           end
         else
           evaluator.explicit_proceedings.each do |trait|
-            # TODO: Remove the following line once the :with_proceeding_types trait has been removed.  During the transition period,
-            # These traits are often called together, and the :with_proceeding_types trait will have created the relevant Proceeding.
-            #
             next if Proceeding.exists?(ccms_code: trait.to_s.upcase)
 
             lead = evaluator.set_lead_proceeding == trait
@@ -298,99 +295,6 @@ FactoryBot.define do
 
           df_date, reported_date = evaluator.df_options[ccms_code]
           proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
-        end
-      end
-    end
-
-    # :with_proceeding_types trait
-    # ============================
-    # takes optional arguments
-    #  - set_lead_proceeding - (true or false - true is assumed) - will set the first domestic abuse
-    #    proceeding as the lead proceeding
-    #  - proceeding_types_count, (1 is assumed if absent) - will generate random proceeding types.
-    #    OR
-    #  - explicit_proceeding_types (an array of proceeding types to attach to the application).  The ProceedingType
-    #                              records must already have default substantive and df scope limitations (i.e. if
-    #                              created using FactoryBot, have been created with the :with_scope_limitations trait)
-    #
-    # examples:
-    #   - create :legal_aid_application, :with_proceeding_types
-    #   - create :legal_aid_application, :with_proceeding_types, proceeding_types_count: 3
-    #   - create :legal_aid_application, :with_proceeding_types, explicit_proceeding_types: [pt1, pt2, pt3]
-    #
-    # creates the following records:
-    # - ProceedingType
-    # - Scope Limitation
-    # - ProceedingTypeScopeLimitation
-    # - ApplicationProceedingType
-    # - ApplicationProceedingTypesScopeLimitation for default substantive scope limitation only
-    #
-    # use this trait, and :with_delegated functions to put df dates on the ApplicationProceedingType
-    # and create an ApplicationProceedingTypesScopeLimitation record for the delegated function default
-    # scope limitation
-    #
-    #
-    trait :with_proceeding_types do
-      transient do
-        proceeding_types_count { 1 }
-        explicit_proceeding_types { [] }
-        assign_lead_proceeding { true }
-      end
-
-      after(:create) do |application, evaluator|
-        if evaluator.explicit_proceeding_types.empty?
-          proceeding_types = create_list :proceeding_type, evaluator.proceeding_types_count
-          proceeding_types.each do |pt|
-            create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-            create :scope_limitation, :delegated_functions_default, joined_proceeding_type: pt
-          end
-        else
-          proceeding_types = evaluator.explicit_proceeding_types
-        end
-
-        proceeding_types.each do |pt|
-          apt = create :application_proceeding_type, legal_aid_application: application, proceeding_type: pt
-          apt.substantive_scope_limitation = pt.default_substantive_scope_limitation
-          create :scope_limitation, :substantive_default, joined_proceeding_type: apt.proceeding_type if apt.proceeding_type.default_substantive_scope_limitation.nil?
-          if apt.proceeding_type.default_delegated_functions_scope_limitation.nil?
-            create :scope_limitation, :delegated_functions_default,
-                   joined_proceeding_type: apt.proceeding_type
-          end
-          proceeding = Proceeding.find_by(legal_aid_application_id: application.id, ccms_code: pt.ccms_code)
-          Proceeding.create_from_proceeding_type(application, pt) if proceeding.nil?
-        end
-
-        if evaluator.assign_lead_proceeding == true
-          da_pt = application.proceeding_types.detect(&:domestic_abuse?)
-          raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
-
-          application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
-          application.proceedings.find_by(ccms_code: da_pt.ccms_code).update!(lead_proceeding: true)
-        end
-        application.reload
-      end
-    end
-
-    trait :with_multiple_proceeding_types_inc_section8 do
-      after(:create) do |application|
-        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'DA001', trait: :with_real_data)
-        FactoryHelpers::ApplicationProceedingTypeHelper.add_proceeding_type(application: application, ccms_code: 'SE014', trait: :as_section_8_child_residence)
-        lead_apt = application.application_proceeding_types.find_by(lead_proceeding: true)
-        if lead_apt.nil?
-          lead_apt = application.application_proceeding_types.detect { |apt| apt.proceeding_type.ccms_matter == 'Domestic Abuse' }
-          lead_apt.update!(lead_proceeding: true)
-          lead_proceeding = application.proceedings.detect { |proceeding| proceeding.ccms_code =~ /^DA/ }
-          lead_proceeding.update!(lead_proceeding: true)
-        end
-        application.update(provider_step_params: { merits_task_list_id: lead_apt.id })
-        pt = lead_apt.proceeding_type
-        sl = FactoryHelpers::ScopeLimitationsHelper.find_or_create_substantive_default(proceeding_type: pt)
-        apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                   scope_limitation_id: sl.id)
-        application.application_proceeding_types.each do |app_proc_type|
-          create(:chances_of_success, :with_optional_text, proceeding: app_proc_type.proceeding)
-          create(:attempts_to_settles, proceeding: app_proc_type.proceeding)
         end
       end
     end
@@ -648,13 +552,19 @@ FactoryBot.define do
       with_positive_benefit_check_result
     end
 
+    trait :with_attempts_to_settle do
+      after(:create) do |application, _evaluator|
+        application.proceedings.each { |proceeding| create(:attempts_to_settles, proceeding: proceeding) }
+      end
+    end
+
     trait :with_chances_of_success do
       transient do
         prospect { 'likely' }
       end
       after(:create) do |application, evaluator|
-        application.application_proceeding_types.each do |apt|
-          apt.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding: apt.proceeding)
+        application.proceedings.each do |proceeding|
+          proceeding.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding: proceeding)
         end
       end
     end

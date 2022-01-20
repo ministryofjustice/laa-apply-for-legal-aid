@@ -72,7 +72,7 @@ module Dashboard
       end
 
       def self.delegated_function_applications(date)
-        ApplicationProceedingType
+        Proceeding
           .where.not(used_delegated_functions_on: [nil])
           .where('DATE(created_at) = ?', date)
           .uniq(&:legal_aid_application_id).count

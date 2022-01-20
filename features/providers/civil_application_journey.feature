@@ -84,7 +84,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -172,12 +171,10 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Covered under an emergency certificate'
     Then I should be on a page showing 'Covered under a substantive certificate'
-    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -221,12 +218,10 @@ Feature: Civil application journeys
     Then I am on the About the Financial Assessment page
     Then I click 'Send link'
     Then I am on the application confirmation page
-    Then I disable callbacks on ApplicationProceedingType
 
   @localhost_request @javascript @vcr
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -279,11 +274,9 @@ Feature: Civil application journeys
     Then I am on the About the Financial Assessment page
     Then I click 'Send link'
     Then I am on the application confirmation page
-    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I can see that the applicant receives benefits
-    Given I enable callbacks on ApplicationProceedingType
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
     Then I enter name 'Test', 'Walker'
@@ -328,12 +321,10 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
-    And I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
@@ -360,12 +351,10 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS on the passported journey with an applicant does not receive benefits
     When I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
     Then I enter national insurance number 'JA293483B'
@@ -412,7 +401,6 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
     Then I should be on a page showing 'test@test.com'
-    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I am instructed to use CCMS when the applicant is not eligible
@@ -440,7 +428,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
-    And I enable callbacks on ApplicationProceedingType
     And I click Check Your Answers Change link for 'Proceedings'
     And I click the first link 'Remove'
     And I search for proceeding 'Non-molestation order'
@@ -456,7 +443,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "Substantive certificate"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: I want to change address from the check your answers page
@@ -570,7 +556,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
     Given I start the merits application and the applicant has uploaded transaction data
-    And I enable callbacks on ApplicationProceedingType
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
     Then I should be on a page showing "Your client's income"
@@ -647,7 +632,6 @@ Feature: Civil application journeys
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
     And I should not see "Passported"
-    And I disable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application happy path no back button
@@ -925,7 +909,6 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
-    And I enable callbacks on ApplicationProceedingType
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
     Then I enter national insurance number 'CB987654A'
@@ -948,7 +931,6 @@ Feature: Civil application journeys
     Then I enter the 'nonmolestation order used delegated functions on' date of 5 days ago
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I enable callbacks on ApplicationProceedingType
 
   @javascript @vcr
   Scenario: Checking passported answers for an application with multiple procedings
