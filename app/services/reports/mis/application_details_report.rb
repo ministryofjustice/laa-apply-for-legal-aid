@@ -1,11 +1,11 @@
 module Reports
   module MIS
     class ApplicationDetailsReport
-      SUBMITTED_STATES = %w[submitting_assessment assessment_submitted].freeze
       def run
         csv_string = CSV.generate do |csv|
           csv << ApplicationDetailCsvLine.header_row
-          legal_aid_applications.find_each(batch_size: 100) do |legal_aid_application|
+          legal_aid_application_ids.each do |laa_id|
+            legal_aid_application = LegalAidApplication.find(laa_id)
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
           end
         end
@@ -14,8 +14,8 @@ module Reports
 
       private
 
-      def legal_aid_applications
-        LegalAidApplication.joins(:state_machine).where(state_machine_proxies: { aasm_state: SUBMITTED_STATES }).order(:created_at)
+      def legal_aid_application_ids
+        LegalAidApplication.order(:created_at).pluck(:id)
       end
     end
   end

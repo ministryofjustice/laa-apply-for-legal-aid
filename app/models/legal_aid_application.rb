@@ -259,7 +259,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def lowest_prospect_of_success
-    min_rank = chances_of_success.map(&:prospect_of_success_rank).min
+    min_rank = chances_of_success.any? ? chances_of_success.map(&:prospect_of_success_rank).min : 1
     ProceedingMeritsTask::ChancesOfSuccess.rank_and_prettify(min_rank)
   end
 

@@ -38,6 +38,8 @@ module ProceedingMeritsTask
     end
 
     def prospect_of_success_rank
+      return 1 if success_prospect.nil? # return not known if chances of success record  not yet populated
+
       SUCCESS_RANKING[success_prospect.to_sym]
     end
 
