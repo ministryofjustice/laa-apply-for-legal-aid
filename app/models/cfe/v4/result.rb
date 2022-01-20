@@ -283,6 +283,48 @@ module CFE
         dependants_allowance + disregarded_state_benefits
       end
 
+      ################################################################
+      #                                                              #
+      #  EMPLOYMENT_INCOME                                           #
+      #                                                              #
+      ################################################################
+
+      def employment_income
+        disposable_income_summary[:employment_income]
+      end
+
+      def employment_income_gross_income
+        employment_income[:gross_income]
+      end
+
+      def employment_income_benefits_in_kind
+        employment_income[:benefits_in_kind]
+      end
+
+      def employment_income_tax
+        employment_income[:tax]
+      end
+
+      def employment_income_national_insurance
+        employment_income[:national_insurance]
+      end
+
+      def employment_income_fixed_employment_deduction
+        employment_income[:fixed_employment_deduction]
+      end
+
+      def employment_income_net_employment_income
+        employment_income[:net_employment_income]
+      end
+
+      def jobs
+        gross_income_breakdown[:employment_income]
+      end
+
+      def jobs?
+        jobs.any?
+      end
+
       private
 
       def min_threshold(proceeding_types_array, threshold_method)

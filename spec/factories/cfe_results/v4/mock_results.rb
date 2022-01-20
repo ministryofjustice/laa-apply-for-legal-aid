@@ -442,6 +442,88 @@ module CFEResults
         result[:result_summary][:disposable_income][:proceeding_types] << { ccms_code: 'SE003', upper_threshold: 733.0, lower_threshold: 315.0, result: 'ineligible' }
         result
       end
+
+      def self.with_employments
+        result = eligible
+        employment_income = {
+          gross_income: 1041.00,
+          benefits_in_kind: 16.60,
+          tax: -104.10,
+          national_insurance: -18.66,
+          fixed_employment_deduction: -45.00,
+          net_employment_income: 8898.84
+        }
+        jobs = [
+          {
+            name: 'Job 1',
+            payments: [
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              },
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              },
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              }
+            ]
+          },
+          {
+            name: 'Job 2',
+            payments: [
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              },
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              },
+              {
+                date: '2021-10-30',
+                gross: 1046.00,
+                benefits_in_kind: 16.60,
+                tax: -104.10,
+                national_insurance: -18.66,
+                net_employment_income: 8898.84
+              }
+            ]
+          }
+        ]
+        result[:result_summary][:disposable_income][:employment_income] = employment_income
+        result[:assessment][:gross_income][:employment_income] = jobs
+        result
+      end
+
+      def self.with_no_employments
+        result = eligible
+        result[:result_summary][:disposable_income][:employment_income] = {}
+        result[:assessment][:gross_income][:employment_income] = []
+        result
+      end
     end
   end
 end

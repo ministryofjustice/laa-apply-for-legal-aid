@@ -90,6 +90,14 @@ module CFEResults
         trait :with_mixed_proceeding_type_results do
           result { CFEResults::V4::MockResults.mixed_proceeding_type_results.to_json }
         end
+
+        trait :with_employments do
+          result { CFEResults::V4::MockResults.with_employments.to_json }
+        end
+
+        trait :with_no_employments do
+          result { CFEResults::V4::MockResults.with_no_employments.to_json }
+        end
       end
     end
   end
