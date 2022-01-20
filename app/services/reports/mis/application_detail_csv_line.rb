@@ -5,7 +5,8 @@ module Reports
 
       attr_reader :laa
 
-      delegate :applicant_receives_benefit?,
+      delegate :applicant,
+               :applicant_receives_benefit?,
                :cash_transactions,
                :ccms_reason,
                :ccms_submission,
@@ -76,6 +77,7 @@ module Reports
           'Firm name',
           'User name',
           'Office ID',
+          'Applicant name',
           'State',
           'CCMS reason',
           'CCMS reference number',
@@ -207,6 +209,7 @@ module Reports
       end
 
       def application_details
+        @line << applicant.full_name
         @line << state
         @line << ccms_reason
         @line << (ccms_submission.nil? ? '' : case_ccms_reference)
