@@ -30,13 +30,25 @@ RSpec.describe 'POST /v1/statement_of_case', type: :request do
       end
 
       context 'when the application has one attachment for statement of case already' do
-        let(:statement_of_case) { create :attachment }
+        let(:statement_of_case) { create :attachment, attachment_name: 'statement_of_case' }
         let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, attachments: [statement_of_case] }
 
         it 'increments the attachment name' do
           subject
           expect(legal_aid_application.reload.attachments.length).to match(2)
           expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match('statement_of_case_1')
+        end
+      end
+
+      context 'when the application has multiple attachments for statement of case already' do
+        let(:soc1) { create :attachment, attachment_name: 'statement_of_case' }
+        let(:soc2) { create :attachment, attachment_name: 'statement_of_case_1' }
+        let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceeding_types_inc_section8, attachments: [soc1, soc2] }
+
+        it 'increments the attachment name' do
+          subject
+          expect(legal_aid_application.reload.attachments.length).to match(3)
+          expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match('statement_of_case_2')
         end
       end
     end
