@@ -306,21 +306,6 @@ FactoryBot.define do
       end
     end
 
-    # this trait will mark the first domestic abuse proceeding type for the application as the lead proceeding, unless one already exists
-    # the application proceeding types must have been set up before calling this trait.  Only needed for deprecated traits, not for :with_proceeding_types
-    #
-    trait :with_lead_proceeding_type do
-      after(:create) do |application|
-        if application.application_proceeding_types.detect(&:lead_proceeding).nil?
-          da_pt = application.proceeding_types.detect(&:domestic_abuse?)
-          raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
-
-          application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
-          application.reload
-        end
-      end
-    end
-
     # :with_delegated_functions trait
     # ===============================
     # sets the df date fields on the application proceeding type records, and also
