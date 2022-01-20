@@ -51,12 +51,10 @@ document.addEventListener('DOMContentLoaded', event => {
     }
   })
 
-  // aria-hide auto-generated dropzone input field so Wave doesn't complain
-  document.querySelector('.dz-hidden-input').setAttribute('aria-hidden', true)
-
   if (dropzoneElem) {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
+
     const dropzone = new Dropzone(dropzoneElem, {
       url: url,
       headers: {
@@ -94,5 +92,11 @@ document.addEventListener('DOMContentLoaded', event => {
       // update the screenreader message to alert the user of the error
       statusMessage.innerHTML = errorMsg
     })
+
+    // aria-hide auto-generated dropzone input field so Wave doesn't complain
+    const dzInput = document.querySelector('.dz-hidden-input')
+    if (dzInput) {
+      dzInput.setAttribute('aria-hidden', true)
+    }
   }
 })
