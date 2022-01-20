@@ -1376,63 +1376,6 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:38:48 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
-    body:
-      encoding: UTF-8
-      string: '{"client_reference_id":"L-C8J-WE1","submission_date":"2022-01-19","proceeding_types":{"ccms_codes":["DA001"]}}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json;version=4
-      User-Agent:
-      - Faraday v1.9.3
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 19 Jan 2022 09:07:18 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Vary:
-      - Accept
-      Etag:
-      - W/"af8a09700385eca9a26eee61625efb87"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - fbcab487949d07a3747e5f827e021638
-      X-Runtime:
-      - '0.443516'
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-      X-Frame-Options:
-      - sameorigin
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Content-Security-Policy:
-      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
-        'unsafe-inline'
-    body:
-      encoding: UTF-8
-      string: '{"success":true,"assessment_id":"48892fcb-b8c2-428d-a4d3-c74dff4194e4","errors":[]}'
-  recorded_at: Wed, 19 Jan 2022 09:07:18 GMT
-- request:
-    method: post
     uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/48892fcb-b8c2-428d-a4d3-c74dff4194e4/applicant
     body:
       encoding: UTF-8
@@ -2120,10 +2063,811 @@ http_interactions:
   recorded_at: Wed, 19 Jan 2022 09:07:20 GMT
 - request:
     method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-6PR-TTK","submission_date":"2022-01-20","proceeding_types":{"ccms_codes":["DA001"]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"f5a82ac7a358f09c8939f0ddf44ddda5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e0408108bf8250565a85d97937658f85
+      X-Runtime:
+      - '0.303563'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"assessment_id":"c60bfde0-2a6d-4d6b-887f-2ab47839d464","errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:43 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"1971-09-23","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5138ee5a325cd7c07a7792e95dbb3088
+      X-Runtime:
+      - '0.093960'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:43 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Savings accounts","value":"3000.0"},{"description":"Online
+        current accounts","value":"92261.83"},{"description":"Online savings accounts","value":"738015.94"}],"non_liquid_capital":[{"description":"Any
+        valuable items worth more than £500","value":"600.0"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - cab7c8a71c639554e2f4c20499e3f370
+      X-Runtime:
+      - '0.046047'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:43 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[{"value":"4000.0","loan_amount_outstanding":"2000.0","date_of_purchase":"2018-01-20","in_regular_use":true}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 413ce75d7d55c622366b5e890e0bc20e
+      X-Runtime:
+      - '0.047482'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:43 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"200000.0","outstanding_mortgage":"100000.0","percentage_owned":"50.0","shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 056554b6399b385154f5dc695a40d6cc
+      X-Runtime:
+      - '0.035312'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/explicit_remarks
+    body:
+      encoding: UTF-8
+      string: '{"explicit_remarks":[{"category":"policy_disregards","details":["england_infected_blood_support"]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2b7660ada0395f82ca0258eb974eb3a4
+      X-Runtime:
+      - '0.022830'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/dependants
+    body:
+      encoding: UTF-8
+      string: '{"dependants":[{"date_of_birth":"2004-12-20","relationship":"child_relative","monthly_income":0.0,"in_full_time_education":false,"assets_value":0.0}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - eba7ddccdb9b49aea04631482a8b2136
+      X-Runtime:
+      - '0.025685'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/outgoings
+    body:
+      encoding: UTF-8
+      string: '{"outgoings":[{"name":"rent_or_mortgage","payments":[{"payment_date":"2021-12-21","amount":361090.54,"client_id":"0a89c4a0-7175-4740-b1ec-a6a07a24adf1"}]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 518699b73ea144bd5790b786f443fc34
+      X-Runtime:
+      - '0.057964'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/state_benefits
+    body:
+      encoding: UTF-8
+      string: '{"state_benefits":[{"name":"manually_chosen","payments":[{"date":"2021-12-21","amount":75141.33,"client_id":"24819770-bcc6-46bf-9aab-013be3209f9f"}]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 128c56ee3eb78f31d5b085009b845825
+      X-Runtime:
+      - '0.058030'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/other_incomes
+    body:
+      encoding: UTF-8
+      string: '{"other_incomes":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0a72bc4abbc7e725f1ff80f5bbead052
+      X-Runtime:
+      - '0.008565'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:44 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/irregular_incomes
+    body:
+      encoding: UTF-8
+      string: '{"payments":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5d88d6cd02dcf8b123c99000cf330fb8
+      X-Runtime:
+      - '0.196893'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:45 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/employments
+    body:
+      encoding: UTF-8
+      string: '{"employment_income":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ddde8ae9d4b371db2faea80e93679783
+      X-Runtime:
+      - '0.010077'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:45 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464/cash_transactions
+    body:
+      encoding: UTF-8
+      string: '{"income":[],"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a21b4be82cbccdc56d5cd9bf0a21c222
+      X-Runtime:
+      - '0.006727'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:45 GMT
+- request:
+    method: get
+    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/c60bfde0-2a6d-4d6b-887f-2ab47839d464
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.9.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 20 Jan 2022 14:26:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      Etag:
+      - W/"8c06f8373e6eb8f8c341c507c8751a98"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 26fc78faa04565c13436d11d591fc2df
+      X-Runtime:
+      - '0.761279'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Content-Security-Policy:
+      - default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'
+        'unsafe-inline'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ2ZXJzaW9uIjoiNCIsInRpbWVzdGFtcCI6IjIwMjItMDEtMjBUMTQ6MjY6NDYuMzAyWiIsInN1Y2Nlc3MiOnRydWUsInJlc3VsdF9zdW1tYXJ5Ijp7Im92ZXJhbGxfcmVzdWx0Ijp7InJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCIsImNhcGl0YWxfY29udHJpYnV0aW9uIjo4MzA4NzcuNzcsImluY29tZV9jb250cmlidXRpb24iOjAuMCwibWF0dGVyX3R5cGVzIjpbeyJtYXR0ZXJfdHlwZSI6ImRvbWVzdGljX2FidXNlIiwicmVzdWx0IjoiY29udHJpYnV0aW9uX3JlcXVpcmVkIn1dLCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsInJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCJ9XX0sImdyb3NzX2luY29tZSI6eyJ0b3RhbF9ncm9zc19pbmNvbWUiOjI1MDQ3LjExLCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsInVwcGVyX3RocmVzaG9sZCI6OTk5OTk5OTk5OTk5LjAsInJlc3VsdCI6ImVsaWdpYmxlIn1dfSwiZGlzcG9zYWJsZV9pbmNvbWUiOnsiZGVwZW5kYW50X2FsbG93YW5jZSI6Mjk4LjA4LCJncm9zc19ob3VzaW5nX2Nvc3RzIjoxMjAzNjMuNTEsImhvdXNpbmdfYmVuZWZpdCI6MC4wLCJuZXRfaG91c2luZ19jb3N0cyI6MTIwMzYzLjUxLCJtYWludGVuYW5jZV9hbGxvd2FuY2UiOjAuMCwidG90YWxfb3V0Z29pbmdzX2FuZF9hbGxvd2FuY2VzIjoxMjA2NjEuNTksInRvdGFsX2Rpc3Bvc2FibGVfaW5jb21lIjowLjAsImVtcGxveW1lbnRfaW5jb21lIjp7Imdyb3NzX2luY29tZSI6MC4wLCJiZW5lZml0c19pbl9raW5kIjowLjAsInRheCI6MC4wLCJuYXRpb25hbF9pbnN1cmFuY2UiOjAuMCwiZml4ZWRfZW1wbG95bWVudF9kZWR1Y3Rpb24iOjAuMCwibmV0X2VtcGxveW1lbnRfaW5jb21lIjowLjB9LCJpbmNvbWVfY29udHJpYnV0aW9uIjowLjAsInByb2NlZWRpbmdfdHlwZXMiOlt7ImNjbXNfY29kZSI6IkRBMDAxIiwidXBwZXJfdGhyZXNob2xkIjo5OTk5OTk5OTk5OTkuMCwibG93ZXJfdGhyZXNob2xkIjozMTUuMCwicmVzdWx0IjoiZWxpZ2libGUifV19LCJjYXBpdGFsIjp7InRvdGFsX2xpcXVpZCI6ODMzMjc3Ljc3LCJ0b3RhbF9ub25fbGlxdWlkIjo2MDAuMCwidG90YWxfdmVoaWNsZSI6MC4wLCJ0b3RhbF9wcm9wZXJ0eSI6MC4wLCJ0b3RhbF9tb3J0Z2FnZV9hbGxvd2FuY2UiOjk5OTk5OTk5OTk5OS4wLCJ0b3RhbF9jYXBpdGFsIjo4MzM4NzcuNzcsInBlbnNpb25lcl9jYXBpdGFsX2Rpc3JlZ2FyZCI6MC4wLCJjYXBpdGFsX2NvbnRyaWJ1dGlvbiI6ODMwODc3Ljc3LCJhc3Nlc3NlZF9jYXBpdGFsIjo4MzM4NzcuNzcsInByb2NlZWRpbmdfdHlwZXMiOlt7ImNjbXNfY29kZSI6IkRBMDAxIiwibG93ZXJfdGhyZXNob2xkIjozMDAwLjAsInVwcGVyX3RocmVzaG9sZCI6OTk5OTk5OTk5OTk5LjAsInJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCJ9XX19LCJhc3Nlc3NtZW50Ijp7ImlkIjoiYzYwYmZkZTAtMmE2ZC00ZDZiLTg4N2YtMmFiNDc4MzlkNDY0IiwiY2xpZW50X3JlZmVyZW5jZV9pZCI6IkwtNlBSLVRUSyIsInN1Ym1pc3Npb25fZGF0ZSI6IjIwMjItMDEtMjAiLCJhcHBsaWNhbnQiOnsiZGF0ZV9vZl9iaXJ0aCI6IjE5NzEtMDktMjMiLCJpbnZvbHZlbWVudF90eXBlIjoiYXBwbGljYW50IiwiaGFzX3BhcnRuZXJfb3Bwb25lbnQiOmZhbHNlLCJyZWNlaXZlc19xdWFsaWZ5aW5nX2JlbmVmaXQiOmZhbHNlLCJzZWxmX2VtcGxveWVkIjpmYWxzZX0sImdyb3NzX2luY29tZSI6eyJlbXBsb3ltZW50X2luY29tZSI6W10sImlycmVndWxhcl9pbmNvbWUiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJzdHVkZW50X2xvYW4iOjAuMH19LCJzdGF0ZV9iZW5lZml0cyI6eyJtb250aGx5X2VxdWl2YWxlbnRzIjp7ImFsbF9zb3VyY2VzIjoyNTA0Ny4xMSwiY2FzaF90cmFuc2FjdGlvbnMiOjAuMCwiYmFua190cmFuc2FjdGlvbnMiOlt7Im5hbWUiOiJtYW51YWxseV9jaG9zZW4iLCJtb250aGx5X3ZhbHVlIjoyNTA0Ny4xMSwiZXhjbHVkZWRfZnJvbV9pbmNvbWVfYXNzZXNzbWVudCI6ZmFsc2V9XX19LCJvdGhlcl9pbmNvbWUiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJhbGxfc291cmNlcyI6eyJmcmllbmRzX29yX2ZhbWlseSI6MC4wLCJtYWludGVuYW5jZV9pbiI6MC4wLCJwcm9wZXJ0eV9vcl9sb2RnZXIiOjAuMCwicGVuc2lvbiI6MC4wfSwiYmFua190cmFuc2FjdGlvbnMiOnsiZnJpZW5kc19vcl9mYW1pbHkiOjAuMCwibWFpbnRlbmFuY2VfaW4iOjAuMCwicHJvcGVydHlfb3JfbG9kZ2VyIjowLjAsInBlbnNpb24iOjAuMH0sImNhc2hfdHJhbnNhY3Rpb25zIjp7ImZyaWVuZHNfb3JfZmFtaWx5IjowLjAsIm1haW50ZW5hbmNlX2luIjowLjAsInByb3BlcnR5X29yX2xvZGdlciI6MC4wLCJwZW5zaW9uIjowLjB9fX19LCJkaXNwb3NhYmxlX2luY29tZSI6eyJtb250aGx5X2VxdWl2YWxlbnRzIjp7ImFsbF9zb3VyY2VzIjp7ImNoaWxkX2NhcmUiOjAuMCwicmVudF9vcl9tb3J0Z2FnZSI6MTIwMzYzLjUxLCJtYWludGVuYW5jZV9vdXQiOjAuMCwibGVnYWxfYWlkIjowLjB9LCJiYW5rX3RyYW5zYWN0aW9ucyI6eyJjaGlsZF9jYXJlIjowLjAsInJlbnRfb3JfbW9ydGdhZ2UiOjEyMDM2My41MSwibWFpbnRlbmFuY2Vfb3V0IjowLjAsImxlZ2FsX2FpZCI6MC4wfSwiY2FzaF90cmFuc2FjdGlvbnMiOnsiY2hpbGRfY2FyZSI6MC4wLCJyZW50X29yX21vcnRnYWdlIjowLjAsIm1haW50ZW5hbmNlX291dCI6MC4wLCJsZWdhbF9haWQiOjAuMH19LCJjaGlsZGNhcmVfYWxsb3dhbmNlIjowLjAsImRlZHVjdGlvbnMiOnsiZGVwZW5kYW50c19hbGxvd2FuY2UiOjI5OC4wOCwiZGlzcmVnYXJkZWRfc3RhdGVfYmVuZWZpdHMiOjAuMH19LCJjYXBpdGFsIjp7ImNhcGl0YWxfaXRlbXMiOnsibGlxdWlkIjpbeyJkZXNjcmlwdGlvbiI6IlNhdmluZ3MgYWNjb3VudHMiLCJ2YWx1ZSI6MzAwMC4wfSx7ImRlc2NyaXB0aW9uIjoiT25saW5lIGN1cnJlbnQgYWNjb3VudHMiLCJ2YWx1ZSI6OTIyNjEuODN9LHsiZGVzY3JpcHRpb24iOiJPbmxpbmUgc2F2aW5ncyBhY2NvdW50cyIsInZhbHVlIjo3MzgwMTUuOTR9XSwibm9uX2xpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJBbnkgdmFsdWFibGUgaXRlbXMgd29ydGggbW9yZSB0aGFuIMKjNTAwIiwidmFsdWUiOjYwMC4wfV0sInZlaGljbGVzIjpbeyJ2YWx1ZSI6NDAwMC4wLCJsb2FuX2Ftb3VudF9vdXRzdGFuZGluZyI6MjAwMC4wLCJkYXRlX29mX3B1cmNoYXNlIjoiMjAxOC0wMS0yMCIsImluX3JlZ3VsYXJfdXNlIjp0cnVlLCJpbmNsdWRlZF9pbl9hc3Nlc3NtZW50IjpmYWxzZSwiYXNzZXNzZWRfdmFsdWUiOjAuMH1dLCJwcm9wZXJ0aWVzIjp7Im1haW5faG9tZSI6eyJ2YWx1ZSI6MjAwMDAwLjAsIm91dHN0YW5kaW5nX21vcnRnYWdlIjoxMDAwMDAuMCwicGVyY2VudGFnZV9vd25lZCI6NTAuMCwibWFpbl9ob21lIjp0cnVlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjo2MDAwLjAsImFsbG93YWJsZV9vdXRzdGFuZGluZ19tb3J0Z2FnZSI6MTAwMDAwLjAsIm5ldF92YWx1ZSI6OTQwMDAuMCwibmV0X2VxdWl0eSI6NDcwMDAuMCwibWFpbl9ob21lX2VxdWl0eV9kaXNyZWdhcmQiOjEwMDAwMC4wLCJhc3Nlc3NlZF9lcXVpdHkiOjAuMH0sImFkZGl0aW9uYWxfcHJvcGVydGllcyI6W3sidmFsdWUiOjAuMCwib3V0c3RhbmRpbmdfbW9ydGdhZ2UiOjAuMCwicGVyY2VudGFnZV9vd25lZCI6MC4wLCJtYWluX2hvbWUiOmZhbHNlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjowLjAsImFsbG93YWJsZV9vdXRzdGFuZGluZ19tb3J0Z2FnZSI6MC4wLCJuZXRfdmFsdWUiOjAuMCwibmV0X2VxdWl0eSI6MC4wLCJtYWluX2hvbWVfZXF1aXR5X2Rpc3JlZ2FyZCI6MC4wLCJhc3Nlc3NlZF9lcXVpdHkiOjAuMH1dfX19LCJyZW1hcmtzIjp7InN0YXRlX2JlbmVmaXRfcGF5bWVudCI6eyJ1bmtub3duX2ZyZXF1ZW5jeSI6WyIyNDgxOTc3MC1iY2M2LTQ2YmYtOWFhYi0wMTNiZTMyMDlmOWYiXX0sIm91dGdvaW5nc19ob3VzaW5nX2Nvc3QiOnsidW5rbm93bl9mcmVxdWVuY3kiOlsiMGE4OWM0YTAtNzE3NS00NzQwLWIxZWMtYTZhMDdhMjRhZGYxIl19LCJwb2xpY3lfZGlzcmVnYXJkcyI6WyJlbmdsYW5kX2luZmVjdGVkX2Jsb29kX3N1cHBvcnQiXX19fQ==
+  recorded_at: Thu, 20 Jan 2022 14:26:46 GMT
+- request:
+    method: post
     uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"f88e298a-7963-402e-bacf-b676906e6a0a","proceeding_types":["DA001"]}'
+      string: '{"request_id":"a1b9b803-7db4-4c78-bfde-5201ad828c86","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
@@ -2139,7 +2883,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Jan 2022 09:07:24 GMT
+      - Thu, 20 Jan 2022 14:26:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -2161,17 +2905,17 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"279b6ea624fffe11d617ef713e73fe91"
+      - W/"3019d947f637b77dc300ce98d2d7e826"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 56b38745e73d53dfd3e1fabbc90b68f5
+      - 5919c3879615bb2886c2b6f001517b4d
       X-Runtime:
-      - '0.042833'
+      - '0.055591'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"f88e298a-7963-402e-bacf-b676906e6a0a","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Wed, 19 Jan 2022 09:07:24 GMT
+      string: '{"request_id":"a1b9b803-7db4-4c78-bfde-5201ad828c86","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Thu, 20 Jan 2022 14:26:47 GMT
 recorded_with: VCR 6.0.0
