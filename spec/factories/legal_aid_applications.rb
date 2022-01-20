@@ -306,48 +306,6 @@ FactoryBot.define do
       end
     end
 
-    # :with_delegated_functions trait
-    # ===============================
-    # sets the df date fields on the application proceeding type records, and also
-    # links the default delegated functions scope limitation to the apt.
-    #
-    # must be used after :with_proceeding_types
-    #
-    # examples
-    #
-    # create legal_aid_application,
-    #          :with_proceeding_types,
-    #          :with_delegated_functions,
-    #          :proceeding_types_count: 3
-    #          delegated_functions_date: 2.days.ago,
-    #          delegated_functions_reported_date: Date.yesterday
-    #
-    # create legal_aid_application,
-    #          :with_proceeding_types,
-    #          :with_delegated_functions,
-    #          :proceeding_types_count: 2,
-    #          delegated_functions_dates: [3.days.ago, Date.yesterday]
-    #
-    trait :with_delegated_functions do
-      transient do
-        delegated_functions_date { Date.current } # can be a date or an array of dates
-        delegated_functions_reported_date { Date.current } # can be a date or an array of dates
-      end
-
-      after(:create) do |application, evaluator|
-        used_dates = evaluator.delegated_functions_date.is_a?(Array) ? evaluator.delegated_functions_date : [evaluator.delegated_functions_date]
-        reported_dates = evaluator.delegated_functions_reported_date.is_a?(Array) ? evaluator.delegated_functions_reported_date : [evaluator.delegated_functions_reported_date]
-        application.application_proceeding_types.each_with_index do |apt, i|
-          apt.update!(used_delegated_functions_on: used_dates[i] || Date.current,
-                      used_delegated_functions_reported_on: reported_dates[i] || Date.current)
-          apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
-
-          application.proceedings.find_by(name: apt.proceeding_type.name).update!(used_delegated_functions_on: apt.used_delegated_functions_on,
-                                                                                  used_delegated_functions_reported_on: apt.used_delegated_functions_reported_on)
-        end
-      end
-    end
-
     trait :with_dependant do
       transient do
         dependant_count { 1 }

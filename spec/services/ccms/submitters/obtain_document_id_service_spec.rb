@@ -6,7 +6,7 @@ module CCMS
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_applicant,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_opponent,
                :with_transaction_period,
                :with_cfe_v3_result

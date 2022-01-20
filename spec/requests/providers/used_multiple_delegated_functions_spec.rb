@@ -55,8 +55,9 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_proceedings,
-             :with_delegated_functions,
-             proceeding_count: 2
+             :with_delegated_functions_on_proceedings,
+             proceeding_count: 2,
+             df_options: { DA001: Time.zone.today, DA004: Time.zone.today }
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }
@@ -80,6 +81,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application),
         params: params.merge(button_clicked)
       )
+      proceedings.reload
     end
 
     it 'updates the proceedings delegated functions dates' do
@@ -255,7 +257,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
           params
         end
 
-        it 'still updates the application proceeding types delegated functions dates' do
+        it 'still updates the proceeding delegated functions dates' do
           proceedings.each do |proceeding|
             expect(proceeding.used_delegated_functions_reported_on).to be_nil
             expect(proceeding.used_delegated_functions_on).to be_nil

@@ -5,7 +5,6 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
     create :legal_aid_application,
            :with_applicant,
            :with_proceedings,
-           :with_delegated_functions,
            :with_everything,
            :with_delegated_functions_on_proceedings,
            df_options: { DA001: 10.days.ago },
