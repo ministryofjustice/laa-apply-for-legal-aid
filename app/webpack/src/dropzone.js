@@ -5,7 +5,7 @@ const screenReaderMessageDelay = 1000 // wait before updating the screenreader m
 const ERR_GENERIC = 'There was a problem uploading your file - try again'
 const FILE_SIZE_ERR = 'The selected file must be smaller than 7MB.'
 const ERR_CONTENT_TYPE = 'The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.'
-// const ERR_VIRUS = 'The selected file contains a virus.'
+// const ERR_VIRUS = 'The selected file contains a virus.'  // TODO: implement malware scanning in the v1 upload endpoint
 const ACCEPTED_FILES = ['.doc', '.docx', '.rtf', '.odt', '.jpg', '.bpm', '.png', '.tif', '.tiff', '.pdf']
 
 function addErrorMessage (msg) {
