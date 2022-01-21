@@ -6,6 +6,22 @@ GIT
     ruby-saml-idp (0.3.2)
 
 GIT
+  remote: https://github.com/glebm/i18n-tasks.git
+  revision: d51327cb48870f984303da55fe1a0605cf0e70d3
+  branch: main
+  specs:
+    i18n-tasks (0.9.37)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 2.0.0)
+      i18n
+      parser (>= 2.2.3.0)
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      terminal-table (>= 1.5.1)
+
+GIT
   remote: https://github.com/nebulab/simple_command.git
   revision: 48ecd83e6f8de6ef354f729109ed4c6e69aaf87c
   branch: master
@@ -354,16 +370,6 @@ GEM
       socksify
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (0.9.37)
-      activesupport (>= 4.0.2)
-      ast (>= 2.1.0)
-      erubi
-      highline (>= 2.0.0)
-      i18n
-      parser (>= 2.2.3.0)
-      rails-i18n
-      rainbow (>= 2.2.2, < 4.0)
-      terminal-table (>= 1.5.1)
     ice_nine (0.11.2)
     iniparse (1.5.0)
     interception (0.5)
@@ -781,7 +787,7 @@ DEPENDENCIES
   guard-rubocop
   hirb
   htmlentities
-  i18n-tasks (>= 0.9.35)
+  i18n-tasks!
   json_expressions
   jwt
   launchy

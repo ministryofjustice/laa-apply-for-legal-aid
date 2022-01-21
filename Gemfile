@@ -113,7 +113,7 @@ group :development, :test do
   gem 'erb_lint', '0.1.1', require: false
   gem 'hirb'
   gem 'htmlentities'
-  gem 'i18n-tasks', '>= 0.9.35'
+  gem 'i18n-tasks', github: 'glebm/i18n-tasks', branch: 'main'
   gem 'json_expressions'
   gem 'nokogiri', '>= 1.12.5'
   gem 'overcommit'
