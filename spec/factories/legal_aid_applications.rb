@@ -1,5 +1,3 @@
-require Rails.root.join('spec/factory_helpers/application_proceeding_type_helper')
-
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
     provider
@@ -303,63 +301,6 @@ FactoryBot.define do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :da001)
         application.proceedings << create(:proceeding, :se014)
-      end
-    end
-
-    # this trait will mark the first domestic abuse proceeding type for the application as the lead proceeding, unless one already exists
-    # the application proceeding types must have been set up before calling this trait.  Only needed for deprecated traits, not for :with_proceeding_types
-    #
-    trait :with_lead_proceeding_type do
-      after(:create) do |application|
-        if application.application_proceeding_types.detect(&:lead_proceeding).nil?
-          da_pt = application.proceeding_types.detect(&:domestic_abuse?)
-          raise 'At least one domestic abuse proceeding type must be added before you can use the :with_lead_proceeding_type trait' if da_pt.nil?
-
-          application.application_proceeding_types.find_by(proceeding_type_id: da_pt.id).update!(lead_proceeding: true)
-          application.reload
-        end
-      end
-    end
-
-    # :with_delegated_functions trait
-    # ===============================
-    # sets the df date fields on the application proceeding type records, and also
-    # links the default delegated functions scope limitation to the apt.
-    #
-    # must be used after :with_proceeding_types
-    #
-    # examples
-    #
-    # create legal_aid_application,
-    #          :with_proceeding_types,
-    #          :with_delegated_functions,
-    #          :proceeding_types_count: 3
-    #          delegated_functions_date: 2.days.ago,
-    #          delegated_functions_reported_date: Date.yesterday
-    #
-    # create legal_aid_application,
-    #          :with_proceeding_types,
-    #          :with_delegated_functions,
-    #          :proceeding_types_count: 2,
-    #          delegated_functions_dates: [3.days.ago, Date.yesterday]
-    #
-    trait :with_delegated_functions do
-      transient do
-        delegated_functions_date { Date.current } # can be a date or an array of dates
-        delegated_functions_reported_date { Date.current } # can be a date or an array of dates
-      end
-
-      after(:create) do |application, evaluator|
-        used_dates = evaluator.delegated_functions_date.is_a?(Array) ? evaluator.delegated_functions_date : [evaluator.delegated_functions_date]
-        reported_dates = evaluator.delegated_functions_reported_date.is_a?(Array) ? evaluator.delegated_functions_reported_date : [evaluator.delegated_functions_reported_date]
-        application.application_proceeding_types.each_with_index do |apt, i|
-          apt.update!(used_delegated_functions_on: used_dates[i] || Date.current,
-                      used_delegated_functions_reported_on: reported_dates[i] || Date.current)
-          apt.delegated_functions_scope_limitation = apt.proceeding_type.default_delegated_functions_scope_limitation
-
-          application.proceedings.find_by(name: apt.proceeding_type.name).update!(used_delegated_functions_on: apt.used_delegated_functions_on,
-                                                                                  used_delegated_functions_reported_on: apt.used_delegated_functions_reported_on)
-        end
       end
     end
 
@@ -815,56 +756,6 @@ FactoryBot.define do
 
     trait :discarded do
       discarded_at { 5.minutes.ago }
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_substantive_scope_limitation do
-      after(:create) do |application, _evaluator|
-        if application.proceeding_types.empty?
-          application.proceeding_types = create_list(:proceeding_type, 1)
-          pt = application.find_or_create_lead_proceeding_type
-          sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-          AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                     scope_limitation_id: sl.id)
-          application.reload
-        end
-      end
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_proceeding_type_and_scope_limitations do
-      transient do
-        this_proceeding_type { nil }
-        substantive_scope_limitation { nil }
-        df_scope_limitation { nil }
-      end
-      after(:create) do |application, evaluator|
-        pt1 = evaluator.this_proceeding_type
-        sl1 = evaluator.substantive_scope_limitation
-        sl2 = evaluator.df_scope_limitation
-
-        # destroy any eligible scope limitations and build from scratch
-        ProceedingTypeScopeLimitation.where(proceeding_type_id: pt1.id).map(&:destroy!)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :substantive_default, scope_limitation: sl1)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :delegated_functions_default, scope_limitation: sl2) if sl2.present?
-        application.proceeding_types << pt1
-        apt = application.application_proceeding_types.first
-        apt.update!(lead_proceeding: true)
-        application.application_proceeding_types.first.reload
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
-        AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
-      end
     end
   end
 end

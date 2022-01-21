@@ -52,7 +52,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
     let(:linked_children_params) do
       legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' }
     end
-    context 'when the initial application_proceeding_type has no linked_children' do
+    context 'when the initial proceeding has no linked_children' do
       it { expect(proceeding.proceeding_linked_children).to match_array [] }
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
     end

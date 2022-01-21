@@ -6,7 +6,7 @@ module CCMS
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_applicant,
-               :with_proceeding_types,
+               :with_proceedings,
                :with_opponent,
                :with_transaction_period,
                :with_cfe_v3_result
@@ -76,9 +76,9 @@ module CCMS
           end
 
           it 'only populates the documents array with submittable documents' do
-            expect(legal_aid_application.attachments.map(&:attachment_type)).to eq all_attachment_types
+            expect(legal_aid_application.attachments.map(&:attachment_type)).to match_array all_attachment_types
             subject.call
-            expect(submission.submission_documents.map(&:document_type)).to eq submittable_document_types
+            expect(submission.submission_documents.map(&:document_type)).to match_array submittable_document_types
           end
 
           it 'populates document array with gateway_evidence' do

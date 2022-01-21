@@ -9,19 +9,15 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:bank_account) { create :bank_account, bank_provider: bank_provider }
   let(:vehicle) { create :vehicle, :populated }
   let(:own_vehicle) { true }
-  let(:proceeding_type) { create :proceeding_type, :with_real_data }
-  let(:scope_limitation) { create :scope_limitation, code: 'AA001', description: 'Temporibus illum modi. Enim exercitationem nemo. In ut quia.' }
-  let(:sl2) { create :scope_limitation }
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_negative_benefit_check_result,
            :with_non_passported_state_machine,
            :provider_assessing_means,
            :with_policy_disregards,
-           :with_proceeding_type_and_scope_limitations,
-           this_proceeding_type: proceeding_type,
-           substantive_scope_limitation: scope_limitation,
-           df_scope_limitation: sl2,
+           :with_proceedings,
+           :with_delegated_functions_on_proceedings,
+           df_options: { DA001: Time.zone.today },
            vehicle: vehicle,
            own_vehicle: own_vehicle,
            applicant: applicant,
