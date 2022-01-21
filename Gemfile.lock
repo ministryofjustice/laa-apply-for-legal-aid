@@ -653,8 +653,8 @@ GEM
     sentry-ruby-core (4.9.2)
       concurrent-ruby
       faraday
-    sentry-sidekiq (4.9.1)
-      sentry-ruby-core (~> 4.9.1)
+    sentry-sidekiq (4.9.2)
+      sentry-ruby-core (~> 4.9.2)
       sidekiq (>= 3.0)
     shellany (0.0.1)
     shoulda-matchers (5.1.0)
