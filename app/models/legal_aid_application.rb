@@ -134,27 +134,12 @@ class LegalAidApplication < ApplicationRecord
   )
 
   # TODO: remove this once LFA migration is complete. Replaced by #lead_proceeding below
-  def lead_proceeding_type
-    ProceedingType.find(lead_application_proceeding_type.proceeding_type_id)
-  end
-
-  # TODO: remove this once LFA migration is complete. Replaced by #lead_proceeding below
   def lead_application_proceeding_type
     application_proceeding_types.find_by(lead_proceeding: true)
   end
 
   def lead_proceeding
     proceedings.find_by(lead_proceeding: true)
-  end
-
-  # TODO: remove this once LFA migration is complete. Replaced by #find_or_set_lead_proceeding below
-  def find_or_create_lead_proceeding_type
-    apt = lead_application_proceeding_type
-    if apt.nil?
-      apt = application_proceeding_types.detect(&:domestic_abuse?)
-      apt.update!(lead_proceeding: true)
-    end
-    apt.proceeding_type
   end
 
   def find_or_set_lead_proceeding
