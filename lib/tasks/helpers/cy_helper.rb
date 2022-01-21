@@ -44,7 +44,7 @@ class CyHelper
 
   def reverse_strings(filename)
     Rails.logger.info "Reversing #{filename}"
-    hash = YAML.load_file(filename)
+    hash = YAML.safe_load_file(filename, aliases: true)
     hash['cy'] = hash['en']
     hash.delete('en')
     hash['cy'].each_key { |k| reverse_key(k, hash['cy']) }
