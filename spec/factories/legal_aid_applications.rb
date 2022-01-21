@@ -1,5 +1,3 @@
-require Rails.root.join('spec/factory_helpers/application_proceeding_type_helper')
-
 FactoryBot.define do
   factory :legal_aid_application, aliases: [:application] do
     provider
