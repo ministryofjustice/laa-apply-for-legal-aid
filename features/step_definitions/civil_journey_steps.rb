@@ -522,23 +522,9 @@ Given('I complete the non-passported journey as far as check your answers') do
     :legal_aid_application,
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
-    :with_substantive_scope_limitation,
+    :with_proceedings,
     applicant: applicant
   )
-
-  apt = @legal_aid_application.application_proceeding_types.first
-  pt = apt.proceeding_type
-
-  create :proceeding,
-         :da001,
-         ccms_code: pt.ccms_code,
-         legal_aid_application: @legal_aid_application,
-         lead_proceeding: true,
-         meaning: pt.meaning,
-         description: pt.description,
-         used_delegated_functions_on: apt.used_delegated_functions_on
-
-  @legal_aid_application.reload
 
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))

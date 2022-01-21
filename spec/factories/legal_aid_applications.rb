@@ -766,26 +766,6 @@ FactoryBot.define do
     #                                                                                                     #
     #######################################################################################################
     #
-    trait :with_substantive_scope_limitation do
-      after(:create) do |application, _evaluator|
-        if application.proceeding_types.empty?
-          application.proceeding_types = create_list(:proceeding_type, 1)
-          pt = application.find_or_create_lead_proceeding_type
-          sl = create :scope_limitation, :substantive_default, joined_proceeding_type: pt
-          apt = application.application_proceeding_types.find_by(proceeding_type_id: pt.id)
-          AssignedSubstantiveScopeLimitation.create!(application_proceeding_type_id: apt.id,
-                                                     scope_limitation_id: sl.id)
-          application.reload
-        end
-      end
-    end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
     trait :with_proceeding_type_and_scope_limitations do
       transient do
         this_proceeding_type { nil }
