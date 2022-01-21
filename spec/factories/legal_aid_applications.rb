@@ -759,35 +759,5 @@ FactoryBot.define do
     trait :discarded do
       discarded_at { 5.minutes.ago }
     end
-
-    #######################################################################################################
-    #                                                                                                     #
-    #     DEPRECATED - use :with_proceeding_types instead                                                 #
-    #                                                                                                     #
-    #######################################################################################################
-    #
-    trait :with_proceeding_type_and_scope_limitations do
-      transient do
-        this_proceeding_type { nil }
-        substantive_scope_limitation { nil }
-        df_scope_limitation { nil }
-      end
-      after(:create) do |application, evaluator|
-        pt1 = evaluator.this_proceeding_type
-        sl1 = evaluator.substantive_scope_limitation
-        sl2 = evaluator.df_scope_limitation
-
-        # destroy any eligible scope limitations and build from scratch
-        ProceedingTypeScopeLimitation.where(proceeding_type_id: pt1.id).map(&:destroy!)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :substantive_default, scope_limitation: sl1)
-        pt1.proceeding_type_scope_limitations << create(:proceeding_type_scope_limitation, :delegated_functions_default, scope_limitation: sl2) if sl2.present?
-        application.proceeding_types << pt1
-        apt = application.application_proceeding_types.first
-        apt.update!(lead_proceeding: true)
-        application.application_proceeding_types.first.reload
-        AssignedSubstantiveScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl1)
-        AssignedDfScopeLimitation.create!(application_proceeding_type: apt, scope_limitation: sl2) if sl2.present?
-      end
-    end
   end
 end
