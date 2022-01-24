@@ -4,9 +4,10 @@ module V1
 
     def create
       if legal_aid_application
-        legal_aid_application.attachments.create document: form_params[:file],
+        file = form_params[:file]
+        legal_aid_application.attachments.create document: file,
                                                  attachment_type: ATTACHMENT_TYPE,
-                                                 original_filename: form_params[:original_filename],
+                                                 original_filename: file.original_filename,
                                                  attachment_name: sequenced_attachment_name
         render '', status: :ok
       else
@@ -21,7 +22,7 @@ module V1
     end
 
     def form_params
-      params.permit(%i[legal_aid_application_id file original_filename])
+      params.permit(%i[legal_aid_application_id file])
     end
 
     def sequenced_attachment_name
