@@ -31,16 +31,27 @@ module Reports
       let(:report) { described_class.new }
 
       describe '#run' do
-        it 'returns a csv string with a header line' do
-          csv_string = report.run
-          lines = csv_string.split("\n")
-          expect(lines.first).to match(/^Firm name,User name,Office ID/)
+        context 'runs successfully' do
+          it 'returns a csv string with a header line' do
+            csv_string = report.run
+            lines = csv_string.split("\n")
+            expect(lines.first).to match(/^Firm name,User name,Office ID/)
+          end
+
+          it 'returns a header and seven detail lines' do
+            csv_string = report.run
+            lines = csv_string.split("\n")
+            expect(lines.size).to eq num_applications + 1
+          end
         end
 
-        it 'returns a header and seven detail lines' do
-          csv_string = report.run
-          lines = csv_string.split("\n")
-          expect(lines.size).to eq num_applications + 1
+        context 'exception' do
+          before { expect(report).to receive(:generate_csv_string).and_raise(RuntimeError) }
+
+          it 'notifies sentry' do
+            expect(Sentry).to receive(:capture_message)
+            report.run
+          end
         end
       end
     end

@@ -1,5 +1,4 @@
 class ReportsUploaderJob < ApplicationJob
-  # :nocov:
   def perform # rubocop:disable Metrics/AbcSize
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?
@@ -10,8 +9,6 @@ class ReportsUploaderJob < ApplicationJob
     admin_report.save
     log "Application Details report attached as blob with key #{blob.key}, blob_id: #{blob.id}"
     log "AdminReport record updated at #{admin_report.updated_at}"
-
-    log_scheduled_sidekiq_jobs
   end
 
   private
@@ -33,24 +30,7 @@ class ReportsUploaderJob < ApplicationJob
     admin_report.application_details_report.blob
   end
 
-  def log_scheduled_sidekiq_jobs
-    ss = Sidekiq::ScheduledSet.new
-    log "Sidekiq Scheduled set size: #{ss.size}"
-    ss.each { |job| log_job(job) }
-  end
-
   def log(message)
     Rails.logger.info "ReportsUploaderJob - #{message}"
   end
-
-  def log_job(job) # rubocop:disable Metrics/AbcSize
-    log '>>>>>>>'
-    log "    JID: #{job.jid}"
-    log "    Queue: #{job.queue}"
-    log "    Class: #{job.item['class']}"
-    log "    Args: #{job.item['args']}"
-    log "    Created: #{Time.zone.at(job.created_at)}"
-    log "    Scheduled: #{Time.zone.at(job.score)}"
-  end
-  # :nocov:
 end
