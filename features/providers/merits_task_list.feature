@@ -5,7 +5,7 @@ Feature: Merits task list
     When I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     And I should see 'Children involved in this proceeding\nCANNOT START YET'
-    When I click 'Continue'
+    When I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'You must complete every section before you can continue'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
@@ -53,7 +53,7 @@ Feature: Merits task list
     When I fill "Attempts made" with "A settlement attempt"
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Attempts to settle\nCOMPLETED'
-    When I click 'Continue'
+    When I click 'Save and continue'
     Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers and submit application'
@@ -68,7 +68,7 @@ Feature: Merits task list
     When I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     And I should see 'Children involved in this proceeding\nCANNOT START YET'
-    When I click 'Continue'
+    When I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'You must complete every section before you can continue'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'

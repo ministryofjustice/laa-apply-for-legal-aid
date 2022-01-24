@@ -624,7 +624,7 @@ Feature: Civil application journeys
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page showing "Confirm the following"
     Then I click 'Submit and continue'
@@ -717,7 +717,7 @@ Feature: Civil application journeys
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And I click Check Your Answers Change link for 'Statement of Case'
     Then I enter the application merits task statement of case statement field 'This is some test data for the statement of case'

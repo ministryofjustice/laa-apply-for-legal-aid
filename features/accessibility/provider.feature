@@ -245,7 +245,7 @@ Feature: Provider accessibility
     Then I fill "Success prospect details" with "Prospects of success"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the page is accessible
     Then I click 'Submit and continue'

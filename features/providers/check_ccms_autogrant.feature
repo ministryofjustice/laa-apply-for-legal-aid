@@ -53,7 +53,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
@@ -108,7 +108,7 @@ Feature: Checking ccms means does NOT auto grant
     Then I choose "proceeding-merits-task-chances-of-success-success-likely-true-field"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"

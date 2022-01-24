@@ -71,7 +71,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
@@ -152,7 +152,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
