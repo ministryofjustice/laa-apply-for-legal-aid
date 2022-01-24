@@ -213,14 +213,15 @@ en:
         h1-heading: Check your answers and submit application
         sub-heading: Confirm the following
         text: "Your client agrees that:"
-        list: |
-          they've instructed %{provider_firm_name} to represent them
-          we can share their information with other government departments like the Department for Work and Pensions and HM Revenue and Customs
-          we can check their details with bank and credit reference agencies
-          they may have to pay towards legal aid
-          they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
-          the information they’ve given is complete and correct
-          they’ll report any changes to their financial situation immediately
+        list:
+          a: they've instructed %{provider_firm_name} to represent them
+          b_html: they've read the <a href="/privacy_policy">LAA privacy_policy</a>
+          c: we can share their information with other government departments like the DWP and HMRC
+          d: we can check their details with bank and credit reference agencies
+          e: they may have to pay towards legal aid
+          f: they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
+          g: the information they’ve given is complete and correct
+          h: they’ll report any changes to their financial situation immediately
         sign_app_text: "If your client gives wrong or incomplete information, does not report changes, or is found to have committed benefit fraud, they may:"
         warning:
           list: |
