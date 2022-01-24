@@ -282,9 +282,9 @@ module CFE
 
       describe '#results_by_proceeding_type' do
         before do
-          create :proceeding_type, ccms_code: 'DA006', meaning: 'Domestic abuse 006'
-          create :proceeding_type, ccms_code: 'SE003', meaning: 'Section Eight 003'
-          create :proceeding_type, ccms_code: 'SE013', meaning: 'Section Eight 013'
+          create :proceeding, :da006
+          create :proceeding, :se013
+          create :proceeding, :se014
         end
         let(:cfe_result) { with_mixed_proceeding_type_results }
         let(:expected_result_before_transformation) do
@@ -298,16 +298,16 @@ module CFE
               result: 'ineligible'
             },
             {
-              ccms_code: 'SE003',
+              ccms_code: 'SE014',
               result: 'partially_eligible'
             }
           ]
         end
         let(:result_after_transformation) do
           {
-            'Domestic abuse 006' => 'Yes',
-            'Section Eight 013' => 'No',
-            'Section Eight 003' => 'Yes'
+            'Child arrangements order (contact)' => 'No',
+            'Child arrangements order (residence)' => 'Yes',
+            'Extend, variation or discharge - Part IV' => 'Yes'
           }
         end
 

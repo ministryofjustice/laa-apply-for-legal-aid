@@ -126,7 +126,7 @@ module CFE
 
         results = {}
         overall_result[:proceeding_types].each do |hash|
-          results[proceeding_type_meaning(hash[:ccms_code])] = elig_yes_no(hash[:result])
+          results[proceeding_meaning(hash[:ccms_code])] = elig_yes_no(hash[:result])
         end
         results
       end
@@ -345,8 +345,8 @@ module CFE
         disposable_income_breakdown[:deductions] || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
       end
 
-      def proceeding_type_meaning(ccms_code)
-        ProceedingType.find_by(ccms_code: ccms_code).meaning
+      def proceeding_meaning(ccms_code)
+        Proceeding.find_by(ccms_code: ccms_code).meaning
       end
 
       def elig_yes_no(result)

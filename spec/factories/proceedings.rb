@@ -87,7 +87,7 @@ FactoryBot.define do
     trait :da006 do
       lead_proceeding { false }
       ccms_code { 'DA006' }
-      meaning { 'Extend, variation or discharge - Part IV ' }
+      meaning { 'Extend, variation or discharge - Part IV' }
       description { 'to be represented on an application to extend, vary or discharge an order under Part IV Family Law Act 1996. ' }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
