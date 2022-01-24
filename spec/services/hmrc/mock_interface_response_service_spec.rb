@@ -167,10 +167,17 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     }
   end
 
-  before { service }
+  before do
+    allow(SecureRandom).to receive(:uuid).and_return('dummy_uuid')
+    service
+  end
 
   it 'updates the hmrc_response.response value' do
     expect(JSON.parse(hmrc_response.reload.response)).to match_json_expression not_found_response
+  end
+
+  it 'updates the hmrc_response.submission_id value' do
+    expect(hmrc_response.reload.submission_id).to eq 'dummy_uuid'
   end
 
   context 'when the applicant is known to the mock response service' do
