@@ -24,7 +24,7 @@
       <td class="govuk-table__cell no-wrap">
         <div class="govuk-form-group">
             <select>
-              <option value="attachment_type"><%= options %></option>
+              <option value="attachment_select"><%= options %></option>
             </select>
         </div>
       </td>
@@ -32,7 +32,7 @@
       <td class="govuk-table__cell">
         <%= button_to_accessible(
               t('.delete'),
-              providers_legal_aid_application_gateway_evidence_path(@legal_aid_application),
+              providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
               method: :delete,
               class: 'button-as-link',
               params: { attachment_id: attachment.id },

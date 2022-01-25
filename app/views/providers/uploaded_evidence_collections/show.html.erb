@@ -1,5 +1,4 @@
 <div id="files-errors-container" role="alert" tabindex="-1"></div>
-
 <% new_head_title = if @successfully_deleted
                       @successfully_deleted
                     elsif @error_message || @successful_upload
@@ -9,7 +8,7 @@
                     end %>
 
 <%= page_template(
-      page_title: new_head_title,
+      page_title: t('.h1-heading'),
       head_title: new_head_title,
       template: :basic,
       back_link: { path: providers_legal_aid_application_merits_task_list_path(@legal_aid_application) }
@@ -36,36 +35,29 @@
         <% end %>
       </ul>
 
-<!--      <p>The evidence below is not currently accounted for in the array</p>-->
-      <%# if @required_documents.include? 'gateway_evidence'  %>
-<!--        <li class="govuk-body"><%#= t('.emp_evidence') %></li>-->
-      <%# end  %>
 
-      <div id="uploaded-files-table-container">
-        <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
-      </div>
 
       <div class="govuk-!-padding-bottom-4"></div>
-      <div class="dropzone__upload">
-        <div class="govuk-form-group script hidden" id="dropzone-form-group">
-          <label class="govuk-label govuk-label--m" for="documents">
-            <%= t('.upload_file') %>
-          </label>
-          <span class="govuk-hint"><%= t('.size_hint') %></span>
+<!--      <div class="dropzone__upload">-->
+<!--        <div class="govuk-form-group script hidden" id="dropzone-form-group">-->
+<!--          <label class="govuk-label govuk-label--m" for="documents">-->
+            <%#= t('.upload_file') %>
+<!--          </label>-->
+<!--          <span class="govuk-hint"><%#= t('.size_hint') %></span>-->
 
-          <span class="hidden" aria-hidden="true" id="application-id"><%= @legal_aid_application.id %></span>
-          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/uploaded_evidence_collection"></span>
-          <p id="dropzone-error" class="govuk-error-message hidden">
-            <span class="govuk-visually-hidden">Error:</span>
-          </p>
-          <div class="dropzone" id="dropzone-form">
-            <div class="dz-message" data-dz-message>
-              <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
-              <label for="documents" id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></label>
-              <div aria-live="polite" role="status" class="govuk-visually-hidden" id="file-upload-status-message"></div>
-            </div>
-          </div>
-        </div>
+<!--          <span class="hidden" aria-hidden="true" id="application-id"><%#= @legal_aid_application.id %></span>-->
+<!--          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/uploaded_evidence_collection"></span>-->
+<!--          <p id="dropzone-error" class="govuk-error-message hidden">-->
+<!--            <span class="govuk-visually-hidden">Error:</span>-->
+<!--          </p>-->
+<!--          <div class="dropzone" id="dropzone-form">-->
+<!--            <div class="dz-message" data-dz-message>-->
+<!--              <p class="govuk-body govuk-!-padding-top-2 script"><%#= t('.dropzone_message') %></p>-->
+<!--              <label for="documents" id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%#= t('.choose_files_btn') %></label>-->
+<!--              <div aria-live="polite" role="status" class="govuk-visually-hidden" id="file-upload-status-message"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="fallback no-script">
           <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
@@ -79,7 +71,7 @@
               ) %>
 
         </div>
-      </div>
+<!--      </div>-->
 
 
 
@@ -91,6 +83,12 @@
       <% end %>
     <% end %>
   <% end %>
+
+  <div id="uploaded-files-table-container">
+    <%= render partial: 'uploaded_files', locals: { form: @form, attachments: @form.model.original_attachments } %>
+  </div>
+
+
   <%= form_with(
         model: @form,
         url: providers_legal_aid_application_uploaded_evidence_collection_path,

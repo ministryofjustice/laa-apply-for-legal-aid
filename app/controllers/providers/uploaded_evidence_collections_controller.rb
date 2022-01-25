@@ -8,7 +8,6 @@ module Providers
       if upload_button_pressed?
         perform_upload
       elsif save_or_continue
-        # update_attachment_name
         convert_new_files_to_pdf
       else
         populate_form
@@ -32,6 +31,11 @@ module Providers
     def attachment_type_options
       @attachment_type_options ||= DocumentCategory.all
     end
+
+    # def attachment_types
+    #   @attachment_types ||= DocumentCategory.all.pluck(:name)
+    #   @attachment_types.map{ |s| s.humanize}
+    # end
 
     def save_or_continue
       if form.files?
@@ -57,7 +61,6 @@ module Providers
         @error_message = error_message
       end
       populate_form
-      # required_documents
       render :show
     end
 
@@ -82,12 +85,6 @@ module Providers
         PdfConverterWorker.perform_async(attachment.id)
       end
     end
-    #
-    # def update_attachment_name
-    #   binding.pry
-    #   attachment = Attachment.find(:id)
-    #   attachment.update!(attachment_type: )
-    # end
 
     def upload_button_pressed?
       params[:upload_button].present?

@@ -2,7 +2,7 @@ module Providers
   class UploadedEvidenceCollectionForm < BaseFileUploaderForm
     form_for UploadedEvidenceCollection
 
-    attr_accessor :original_file, :provider_uploader, :upload_button_pressed
+    attr_accessor :original_file, :provider_uploader, :upload_button_pressed, :attachment_type
 
     validate :original_file_valid
     validate :file_uploaded?

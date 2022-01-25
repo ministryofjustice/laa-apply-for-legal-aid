@@ -35,8 +35,6 @@ class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
   end
 
   def attachments_made?
-    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
-    pp model.legal_aid_application.attachments
     model.legal_aid_application.attachments.present?
   end
 
