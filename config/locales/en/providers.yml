@@ -337,7 +337,23 @@ en:
           police_notified_no: Tell us why the police have not been notified
           police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
       statement_of_cases:
-        show:
+        show_new:
+          bullet-1: details of the latest domestic abuse incident
+          bullet-2: what's happened in the case so far
+          bullet-3: if any other parties are involved and their relationship to your client
+          bullet-4: why the proceedings are necessary
+          bullet-5: if anyone else might be able to fund the case
+          h1-heading: Provide a statement of case
+          warning: Warning
+          warning_text: You must provide a complete statement of case now. You cannot do it later.
+          h2-heading: Uploaded files
+          no_files: Files uploaded will appear here.
+          upload_file: Attach a file
+          size_hint: The maximum file size is 7MB. You can attach more than one file.
+          dropzone_message: Drag and drop files here or
+          choose_files_btn: Choose files
+          file_not_uploaded_error: Upload the selected file
+        show_old:
           bullet-1: details of the latest domestic abuse incident
           bullet-2: what's happened in the case so far
           bullet-3: if any other parties are involved and their relationship to your client
@@ -354,7 +370,7 @@ en:
           size: Size
           status: Status
           uploaded: Uploaded
-          title: Uploaded files
+          title: Files added
     has_other_involved_children:
       show:
         error: Select either yes or no

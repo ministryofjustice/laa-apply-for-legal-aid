@@ -1,0 +1,64 @@
+.dropzone {
+  outline: 3px dashed govuk-colour('black');
+  border: none !important;
+  display: flex;
+  text-align: center;
+  border-radius: 0 !important;
+  padding: govuk-spacing(9) govuk-spacing(3);
+  transition: outline-offset .1s ease-in-out, background-color .1s linear;
+}
+
+.dropzone label {
+  margin-bottom: 0;
+  display: inline-block;
+  width: auto;
+}
+
+.dropzone p {
+  margin-bottom: 0;
+  margin-right: 10px;
+  padding-top: 7px;
+}
+
+.dropzone [type=file] {
+  position: absolute;
+  left: -9999em;
+}
+
+.dz-message {
+  display: flex;
+}
+
+.dz-drag-hover {
+  background: #b1b4b6;
+  outline-color: #6f777b;
+}
+
+.dz--focused {
+  background-color: $govuk-focus-colour;
+  color: $govuk-focus-text-colour;
+  box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
+  outline: none;
+}
+
+.dz__error {
+  color: govuk-colour('red');
+  font-weight: bold;
+}
+
+.dz__success {
+  color: govuk-colour('green');
+  font-weight: bold;
+}
+
+.dz__error svg {
+  fill: currentColor;
+  float: left;
+  margin-right: govuk-spacing(2);
+}
+
+.dz__success svg {
+  fill: currentColor;
+  float: left;
+  margin-right: govuk-spacing(2);
+}
