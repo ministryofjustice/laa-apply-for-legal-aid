@@ -20,7 +20,7 @@ module HMRC
     end
 
     def call
-      @hmrc_response.update!(response: return_json.to_json, submission_id: @submission_id)
+      @hmrc_response.update!(response: return_json, submission_id: @submission_id)
     end
 
     private

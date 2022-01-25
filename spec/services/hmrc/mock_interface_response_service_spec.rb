@@ -173,7 +173,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   end
 
   it 'updates the hmrc_response.response value' do
-    expect(JSON.parse(hmrc_response.reload.response)).to match_json_expression not_found_response
+    expect(hmrc_response.reload.response).to match_json_expression not_found_response
   end
 
   it 'updates the hmrc_response.submission_id value' do
@@ -184,7 +184,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     let(:applicant) { create :applicant, first_name: 'Langley', last_name: 'Yorke', national_insurance_number: 'MN212451D', date_of_birth: '1992-07-22' }
 
     it 'updates the hmrc_response.response value' do
-      expect(JSON.parse(hmrc_response.reload.response)).to match_json_expression employed_response
+      expect(hmrc_response.reload.response).to match_json_expression employed_response
     end
   end
 end
