@@ -215,7 +215,7 @@ en:
         text: "Your client agrees that:"
         list:
           a: they've instructed %{provider_firm_name} to represent them
-          b_html: they've read the <a href="/privacy_policy">LAA privacy_policy</a>
+          b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
           c: we can share their information with other government departments like the DWP and HMRC
           d: we can check their details with bank and credit reference agencies
           e: they may have to pay towards legal aid
