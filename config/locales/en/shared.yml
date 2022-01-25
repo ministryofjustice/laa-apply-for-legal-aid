@@ -87,8 +87,8 @@ en:
         line_1: "We've calculated that your client should pay:"
         line_2: You still need to provide details of the case before we can decide if they’re eligible.
         details:
-          - "%{income_contribution} from their disposable income"
-          - "%{capital_contribution} from their disposable capital"
+          - "%{income_contribution} per month from their disposable income until the end of the case or there is a change in their financial situation"
+          - "a %{capital_contribution} one-off payment from their disposable capital"
       income_contribution_required:
         heading: "%{name} may need to pay towards legal aid"
         details:
