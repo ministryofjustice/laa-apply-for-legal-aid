@@ -16,11 +16,11 @@ module HMRC
     def initialize(hmrc_response)
       @hmrc_response = hmrc_response
       @application = @hmrc_response.legal_aid_application
-      @submission_id = @hmrc_response.submission_id
+      @submission_id = SecureRandom.uuid
     end
 
     def call
-      @hmrc_response.update!(response: return_json.to_json)
+      @hmrc_response.update!(response: return_json, submission_id: @submission_id)
     end
 
     private
