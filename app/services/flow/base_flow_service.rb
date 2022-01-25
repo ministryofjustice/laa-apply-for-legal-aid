@@ -76,7 +76,10 @@ module Flow
 
     def path_for(step, option)
       path_action = steps.dig(step, option)
-      raise FlowError, ":#{option} of step :#{step} is not defined" unless path_action
+      unless path_action
+        raise FlowError,
+              ":#{option} of step :#{step} is not defined (laa_id: #{@legal_aid_application.id}, current_step: #{@current_step}, params: #{@params.inspect}"
+      end
 
       return path_action unless path_action.is_a?(Proc)
 
