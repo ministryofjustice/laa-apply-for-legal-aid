@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', event => {
     })
     dropzone.on('error', (file) => {
       let errorMsg = ''
-      if (file.size >= 7000) {
-        errorMsg = FILE_SIZE_ERR
-      } else if (!ACCEPTED_FILES.includes(file.type)) {
+      if (!ACCEPTED_FILES.includes(file.type)) {
         errorMsg = ERR_CONTENT_TYPE
+      } else if (file.size >= 7000) {
+        errorMsg = FILE_SIZE_ERR
       } else {
         errorMsg = ERR_GENERIC
       }
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', event => {
     // aria-hide auto-generated dropzone input field so Wave doesn't complain
     const dzInput = document.querySelector('.dz-hidden-input')
     if (dzInput) {
-      dzInput.setAttribute('aria-hidden', true)
+      dzInput.style.display = 'none'
     }
   }
 })
