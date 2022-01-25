@@ -6,7 +6,21 @@ const ERR_GENERIC = 'There was a problem uploading your file - try again'
 const FILE_SIZE_ERR = 'The selected file must be smaller than 7MB.'
 const ERR_CONTENT_TYPE = 'The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.'
 // const ERR_VIRUS = 'The selected file contains a virus.'  // TODO: implement malware scanning in the v1 upload endpoint
-const ACCEPTED_FILES = ['.doc', '.docx', '.rtf', '.odt', '.jpg', '.bpm', '.png', '.tif', '.tiff', '.pdf']
+const ACCEPTED_FILES = [
+  // dropzone checks both the mimetype and the file extension so this list covers everything
+  '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf',
+  'application/pdf',
+  'application/msword',
+  'application/vnd.oasis.opendocument.text',
+  'text/rtf',
+  'text/plain',
+  'application/rtf',
+  'image/jpeg',
+  'image/png',
+  'image/tiff',
+  'image/bmp',
+  'image/x-bitmap'
+]
 
 function addErrorMessage (msg) {
   // this adds an error message to the gov uk error summary and shows the errors
@@ -64,6 +78,8 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('addedfile', file => {
+      console.log(file.type)
+      console.log(file.size)
       setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
     })
     dropzone.on('sending', (file, xhr, formData) => {
@@ -78,8 +94,10 @@ document.addEventListener('DOMContentLoaded', event => {
     dropzone.on('error', (file) => {
       let errorMsg = ''
       if (!ACCEPTED_FILES.includes(file.type)) {
+        console.log(ACCEPTED_FILES.includes(file.type))
+        console.log(ACCEPTED_FILES.includes('.jpeg'))
         errorMsg = ERR_CONTENT_TYPE
-      } else if (file.size >= 7000) {
+      } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR
       } else {
         errorMsg = ERR_GENERIC
