@@ -40,8 +40,6 @@
       <%# if @required_documents.include? 'gateway_evidence'  %>
 <!--        <li class="govuk-body"><%#= t('.emp_evidence') %></li>-->
       <%# end  %>
-      <p> what is below:</p>
-      <%= @form.model.class %>
 
       <div id="uploaded-files-table-container">
         <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
@@ -56,7 +54,7 @@
           <span class="govuk-hint"><%= t('.size_hint') %></span>
 
           <span class="hidden" aria-hidden="true" id="application-id"><%= @legal_aid_application.id %></span>
-          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/evidence_upload"></span>
+          <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/uploaded_evidence_collection"></span>
           <p id="dropzone-error" class="govuk-error-message hidden">
             <span class="govuk-visually-hidden">Error:</span>
           </p>

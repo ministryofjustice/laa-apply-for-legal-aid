@@ -461,6 +461,7 @@ en:
         status: Status
         uploaded: Uploaded
         delete: Delete
+        select_a_category: Select a category
     gateway_evidences:
       show:
         h1-heading: Upload supporting evidence

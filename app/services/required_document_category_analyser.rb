@@ -9,7 +9,6 @@ class RequiredDocumentCategoryAnalyser
 
   def call
     required_document_categories = []
-    required_document_categories << 'uploaded_evidence_collection'
     required_document_categories << 'benefit_evidence' if @application.dwp_override
     required_document_categories << 'gateway_evidence' if @application.section_8_proceedings?
     @application.update!(required_document_categories: required_document_categories)

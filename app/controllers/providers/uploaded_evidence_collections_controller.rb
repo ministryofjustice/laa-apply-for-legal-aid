@@ -8,9 +8,10 @@ module Providers
       if upload_button_pressed?
         perform_upload
       elsif save_or_continue
+        # update_attachment_name
         convert_new_files_to_pdf
       else
-        # required_documents
+        populate_form
         render :show
       end
     end
@@ -28,6 +29,10 @@ module Providers
       @required_documents = legal_aid_application.required_document_categories
     end
 
+    def attachment_type_options
+      @attachment_type_options ||= DocumentCategory.all
+    end
+
     def save_or_continue
       if form.files?
         save_continue_or_draft(form)
@@ -41,18 +46,18 @@ module Providers
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       required_documents
       @form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
+      attachment_type_options
     end
 
     def perform_upload
-      binding.pry
       form.upload_button_pressed = true
       if form.valid? && form.save
-        puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
         @successful_upload = successful_upload
       else
         @error_message = error_message
       end
-      required_documents
+      populate_form
+      # required_documents
       render :show
     end
 
@@ -77,6 +82,12 @@ module Providers
         PdfConverterWorker.perform_async(attachment.id)
       end
     end
+    #
+    # def update_attachment_name
+    #   binding.pry
+    #   attachment = Attachment.find(:id)
+    #   attachment.update!(attachment_type: )
+    # end
 
     def upload_button_pressed?
       params[:upload_button].present?

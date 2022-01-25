@@ -4,6 +4,8 @@
 # - to validate the name field on the DocumentCategory model
 #
 class DocumentCategoryValidator < ActiveModel::Validator
+  # added uploaded_evidence_collection as a temp measure and also had to update the DB
+  # if this is long term then the seed data needs to be updated
   VALID_DOCUMENT_TYPES = %w[
     bank_transaction_report
     benefit_evidence
@@ -18,6 +20,7 @@ class DocumentCategoryValidator < ActiveModel::Validator
   ].freeze
 
   def validate(record)
+    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     attr = case record.class.to_s
            when 'Attachment'
              :attachment_type
@@ -26,9 +29,9 @@ class DocumentCategoryValidator < ActiveModel::Validator
            else
              raise ArgumentError, 'Unexpected record sent to DocumentCategoryValidator'
            end
-
+    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     return if record.__send__(attr).in?(VALID_DOCUMENT_TYPES)
-
+    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     record.errors.add attr,
                       I18n.t('activemodel.errors.models.attachment.attributes.attachment_type.invalid', attachment_type: record.__send__(attr))
   end

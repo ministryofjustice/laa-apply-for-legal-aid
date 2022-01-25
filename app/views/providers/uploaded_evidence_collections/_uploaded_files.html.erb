@@ -7,7 +7,7 @@
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.size') %></th>
+    <th class="govuk-table__header" scope="col"><%= t('.select_a_category') %></th>
     <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
     <th class="govuk-table__header" scope="col"></th>
   </tr>
@@ -16,10 +16,18 @@
 
   <span alert-live="assertive" class="govuk-visually-hidden"><%= success_message %></span>
 
+  <% options = options_from_collection_for_select(@attachment_type_options, 'id','name') %>
+
   <% attachments.order(:created_at).each do |attachment| %>
     <tr class="govuk-table__row">
       <td class="govuk-table__cell"><%= attachment.document.filename %></td>
-      <td class="govuk-table__cell no-wrap"><%= number_to_human_size(attachment.document.blob.byte_size) %></td>
+      <td class="govuk-table__cell no-wrap">
+        <div class="govuk-form-group">
+            <select>
+              <option value="attachment_type"><%= options %></option>
+            </select>
+        </div>
+      </td>
       <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
       <td class="govuk-table__cell">
         <%= button_to_accessible(
