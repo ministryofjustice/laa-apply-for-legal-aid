@@ -123,6 +123,7 @@ module CFE
             expect(CreateExplicitRemarksService).to receive(:call).and_return(true)
             expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
             expect(CreateCashTransactionsService).to receive(:call).and_return(true)
+            expect(CreateEmploymentsService).to receive(:call).and_return(true)
 
             submission_manager.call
           end

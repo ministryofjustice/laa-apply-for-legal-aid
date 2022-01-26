@@ -20,6 +20,11 @@ module HMRC
         submission_id { SecureRandom.uuid }
         url { "#{Rails.configuration.x.hmrc_interface.host}api/v1/submission/result/#{submission_id}" }
       end
+
+      trait :example1_usecase1 do
+        use_case { 'one' }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :example1_usecase1).response }
+      end
     end
   end
 end
