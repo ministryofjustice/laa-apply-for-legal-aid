@@ -720,7 +720,7 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    wasabi (3.6.1)
+    wasabi (3.7.0)
       addressable
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
