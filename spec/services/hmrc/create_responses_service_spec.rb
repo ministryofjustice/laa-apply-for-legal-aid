@@ -27,9 +27,34 @@ RSpec.describe HMRC::CreateResponsesService do
       context 'when HMRC_USE_DEV_MOCK is set to true' do
         let(:hmrc_use_dev_mock) { 'true' }
 
-        it 'calls the MockInterfaceResponseService and creates no SubmissionWorker jobs' do
-          expect { call }.to_not change(HMRC::SubmissionWorker.jobs, :size)
-          expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
+        context 'the host is set to' do
+          before { allow(HostEnv).to receive(:environment).and_return(host) }
+
+          context 'production' do
+            let(:host) { :production }
+
+            it 'creates two jobs to request the data and does not invoke the MockInterfaceResponseService' do
+              expect { call }.to change(HMRC::SubmissionWorker.jobs, :size).by(2)
+              expect(HMRC::MockInterfaceResponseService).to_not have_received(:call)
+            end
+          end
+
+          context 'staging' do
+            let(:host) { :staging }
+            it 'calls the MockInterfaceResponseService and creates no SubmissionWorker jobs' do
+              expect { call }.to_not change(HMRC::SubmissionWorker.jobs, :size)
+              expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
+            end
+          end
+
+          context 'uat' do
+            let(:host) { :uat }
+
+            it 'calls the MockInterfaceResponseService and creates no SubmissionWorker jobs' do
+              expect { call }.to_not change(HMRC::SubmissionWorker.jobs, :size)
+              expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
+            end
+          end
         end
       end
     end
