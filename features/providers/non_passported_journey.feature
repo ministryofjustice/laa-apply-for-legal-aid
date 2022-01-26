@@ -288,7 +288,7 @@ Feature: Non-passported applicant journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on the 'does-client-use-online-banking' page showing 'Check if you can continue using this service'
+    Then I should be on the 'does-client-use-online-banking' page showing 'Do you agree with the following?'
     Then I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'non_passported_client_instructions' page showing 'What your client has to do'
@@ -361,7 +361,7 @@ Feature: Non-passported applicant journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Check if you can continue using this service"
+    Then I should be on a page showing "Do you agree with the following?"
     Then I choose "Yes, I agree"
     Then I click 'Save and continue'
     Then I should be on a page showing "Do you want to make a substantive application now?"
