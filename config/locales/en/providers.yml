@@ -96,6 +96,7 @@ en:
         tax: Tax
         national_insurance: National Insurance
         fixed_employment_deduction: Fixed employment expenses deduction
+        total: Total
       other_income:
         title: Other income
         income: Income
@@ -105,7 +106,7 @@ en:
         property_or_lodger: Income from property or lodger
         student_loan_or_grant: Student finance
         pension: Pension
-        total_income: Total income
+        total: Total
       outgoings:
         title: Outgoings
         housing_costs: Housing payments

@@ -295,6 +295,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         let(:tax) { I18n.t('providers.capital_income_assessment_results.employment_income.tax') }
         let(:national_insurance) { I18n.t('providers.capital_income_assessment_results.employment_income.national_insurance') }
         let(:fixed_employment_deduction) { I18n.t('providers.capital_income_assessment_results.employment_income.fixed_employment_deduction') }
+        let(:total) { I18n.t('providers.capital_income_assessment_results.employment_income.total') }
 
         it 'displays the employment income' do
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.title'))
@@ -304,6 +305,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
           expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
           expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
           expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
+          expect(unescaped_response_body).to include(total + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
         end
       end
 
