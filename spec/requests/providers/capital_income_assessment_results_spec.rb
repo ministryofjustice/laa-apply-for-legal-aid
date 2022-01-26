@@ -289,14 +289,21 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'applicant has employment(s)' do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
+        let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
+        let(:monthly_income_before_tax) { I18n.t('providers.capital_income_assessment_results.employment_income.monthly_income_before_tax') }
+        let(:benefits_in_kind) { I18n.t('providers.capital_income_assessment_results.employment_income.benefits_in_kind') }
+        let(:tax) { I18n.t('providers.capital_income_assessment_results.employment_income.tax') }
+        let(:national_insurance) { I18n.t('providers.capital_income_assessment_results.employment_income.national_insurance') }
+        let(:fixed_employment_deduction) { I18n.t('providers.capital_income_assessment_results.employment_income.fixed_employment_deduction') }
+
         it 'displays the employment income' do
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.title'))
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
-          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.monthly_income_before_tax'))
-          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.benefits_in_kind'))
-          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.tax'))
-          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.national_insurance'))
-          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.fixed_employment_deduction'))
+          expect(unescaped_response_body).to include(monthly_income_before_tax + td + gds_number_to_currency(cfe_result.employment_income_gross_income))
+          expect(unescaped_response_body).to include(benefits_in_kind + td + gds_number_to_currency(cfe_result.employment_income_benefits_in_kind))
+          expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
+          expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
+          expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
         end
       end
 
