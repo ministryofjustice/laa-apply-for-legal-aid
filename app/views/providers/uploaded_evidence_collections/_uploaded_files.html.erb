@@ -16,30 +16,31 @@
 
   <span alert-live="assertive" class="govuk-visually-hidden"><%= success_message %></span>
 
-  <% options = options_from_collection_for_select(@attachment_type_options, 'id','name') %>
+  <%= form_with model: @uploaded_evidence_collection, url: providers_legal_aid_application_uploaded_evidence_collection_path do |form| %>
 
-  <% attachments.order(:created_at).each do |attachment| %>
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell"><%= attachment.document.filename %></td>
-      <td class="govuk-table__cell no-wrap">
-        <div class="govuk-form-group">
-            <select>
-              <option value="attachment_select"><%= options %></option>
-            </select>
-        </div>
-      </td>
-      <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
-      <td class="govuk-table__cell">
-        <%= button_to_accessible(
-              t('.delete'),
-              providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
-              method: :delete,
-              class: 'button-as-link',
-              params: { attachment_id: attachment.id },
-              suffix: attachment.document.filename
-            ) %>
-      </td>
-    </tr>
+
+    <% attachments.order(:created_at).each do |attachment| %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><%= attachment.document.filename %></td>
+        <td class="govuk-table__cell no-wrap">
+          <div class="govuk-form-group">
+              <%= form.govuk_collection_select attachment.id,
+                                               @attachment_type_options,
+                                               :first,
+                                               :last,
+                                               label: nil,
+                                               options: { selected: attachment.attachment_type }
+              %>
+          </div>
+        </td>
+        <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
+        <td class="govuk-table__cell">
+
+        </td>
+      </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>
+
+

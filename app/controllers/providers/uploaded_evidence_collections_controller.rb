@@ -1,7 +1,7 @@
 module Providers
   class UploadedEvidenceCollectionsController < ProviderBaseController
     def show
-      populate_form
+      populate_upload_form
     end
 
     def update
@@ -10,7 +10,7 @@ module Providers
       elsif save_or_continue
         convert_new_files_to_pdf
       else
-        populate_form
+        populate_upload_form
         render :show
       end
     end
@@ -18,7 +18,7 @@ module Providers
     def destroy
       original_file = delete_original_and_pdf_files
       @successfully_deleted = files_deleted_message(original_file.attachment_name) unless original_file.nil?
-      populate_form
+      populate_upload_form
       render :show
     end
 
@@ -29,16 +29,13 @@ module Providers
     end
 
     def attachment_type_options
-      @attachment_type_options ||= DocumentCategory.all
+      @attachment_type_options = DocumentCategory.where(display_on_evidence_upload: true).map { |dc| [dc.name, dc.name.humanize] }
+      @attachment_type_options << ['uncategorised', 'Uncategorised']
     end
 
-    # def attachment_types
-    #   @attachment_types ||= DocumentCategory.all.pluck(:name)
-    #   @attachment_types.map{ |s| s.humanize}
-    # end
-
     def save_or_continue
-      if form.files?
+      update_attachment_type(submission_params)
+      if submission_form.files?
         save_continue_or_draft(form)
       else
         legal_aid_application.reload
@@ -46,28 +43,28 @@ module Providers
       end
     end
 
-    def populate_form
+    def populate_upload_form
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       required_documents
-      @form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
+      @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
     end
 
     def perform_upload
-      form.upload_button_pressed = true
-      if form.valid? && form.save
+      upload_form.upload_button_pressed = true
+      if upload_form.valid? && upload_form.save
         @successful_upload = successful_upload
       else
         @error_message = error_message
       end
-      populate_form
+      populate_upload_form
       render :show
     end
 
     def error_message
-      return if form.errors.blank?
+      return if upload_form.errors.blank?
 
-      "#{I18n.t('accessibility.problem_text')} #{form.errors.messages[:original_file].first}"
+      "#{I18n.t('accessibility.problem_text')} #{upload_form.errors.messages[:original_file].first}"
     end
 
     def files_deleted_message(deleted_file_name)
@@ -75,7 +72,7 @@ module Providers
     end
 
     def successful_upload
-      return if form.errors.present?
+      return if upload_form.errors.present?
 
       I18n.t('activemodel.attributes.gateway_evidence.file_uploaded', file_name: 'File')
     end
@@ -90,8 +87,22 @@ module Providers
       params[:upload_button].present?
     end
 
-    def form
-      @form ||= Providers::UploadedEvidenceCollectionForm.new(uploaded_evidence_collection_params)
+    def upload_form
+      @upload_form ||= Providers::UploadedEvidenceCollectionForm.new(uploaded_evidence_collection_params)
+    end
+
+    def submission_form
+      @submission_form ||= Providers::UploadedEvidenceSubmissionForm.new(submission_params)
+    end
+
+    def update_attachment_type(submission_params)
+      params[:uploaded_evidence_collection].each do |att_id,att_type|
+        Attachment.find(att_id).update(attachment_type: att_type)
+      end
+    end
+
+    def submission_params
+      params[:uploaded_evidence_collection]
     end
 
     def uploaded_evidence_collection_params

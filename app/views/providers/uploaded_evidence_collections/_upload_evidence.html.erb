@@ -1,0 +1,43 @@
+<%= form_with(
+      model: @upload_form,
+      url: providers_legal_aid_application_uploaded_evidence_collection_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+
+  <%= form.govuk_error_summary %>
+
+  <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
+
+    <div class="govuk-!-padding-bottom-6"></div>
+
+    <div class="govuk-body"><%= t('.list_text') %></div>
+
+    <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
+      <% @required_documents.each do |evidence| %>
+        <li><%= t(".#{evidence}") %></li>
+      <% end %>
+    </ul>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <div class="fallback no-script">
+      <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+                                hint: {text: t('.size_hint')},
+                                classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
+      <%= form.submit(
+            t('generic.upload'),
+            id: 'upload',
+            name: 'upload_button',
+            class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+          ) %>
+    </div>
+
+    <% if @successfully_deleted %>
+      <span role="alert" class="govuk-visually-hidden"><%= @successfully_deleted %></span>
+    <% end %>
+    <% if @error_message || @successful_upload %>
+      <span role="alert" class="govuk-visually-hidden"><%= @successful_upload %><%= @error_message %></span>
+    <% end %>
+  <% end %>
+<% end %>

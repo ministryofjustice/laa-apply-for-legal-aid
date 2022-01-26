@@ -9,4 +9,5 @@ class Attachment < ApplicationRecord
   end
 
   scope (:uploadable_evidence_types),->{ where(attachment_type: DocumentCategory.submittable_category_names)}
+  scope (:displayable_evidence_types),->{ where(attachment_type: DocumentCategory.displayable_document_category_names+['uncategorised'])}
 end

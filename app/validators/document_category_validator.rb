@@ -19,7 +19,6 @@ class DocumentCategoryValidator < ActiveModel::Validator
   ].freeze
 
   def validate(record)
-    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     return if uncategorised_evidence_attachment?(record)
 
     attr = case record.class.to_s
@@ -30,15 +29,13 @@ class DocumentCategoryValidator < ActiveModel::Validator
            else
              raise ArgumentError, 'Unexpected record sent to DocumentCategoryValidator'
            end
-    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     return if record.__send__(attr).in?(VALID_DOCUMENT_TYPES)
-    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
+
     record.errors.add attr,
                       I18n.t('activemodel.errors.models.attachment.attributes.attachment_type.invalid', attachment_type: record.__send__(attr))
   end
 
   def uncategorised_evidence_attachment?(record)
-    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
   #  evidence uploads are attached with an attachment_typeof evidence upload collection before they are categorised
   # which is valid, but is not in the list of valid document types
   record.is_a?(Attachment) && record.attachment_type=='uncategorised'

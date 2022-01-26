@@ -441,19 +441,20 @@ en:
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
     uploaded_evidence_collections:
-      show:
-        h1-heading: Upload supporting evidence
-        h2-heading: Uploaded files
+      upload_evidence:
         list_text: 'Use this page to upload:'
         benefit_evidence: evidence that your client receives Universal Credit
         employment_evidence: evidence of your client's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
-        upload_file: Upload files
         size_hint: The maximum file size is 7MB.
         dropzone_message: Drag and drop files here or
         choose_files_btn: Choose files
         file_not_uploaded_error: Upload the selected file
         no_files: Files uploaded will appear here.
+      show:
+        h1-heading: Upload supporting evidence
+        h2-heading: Uploaded files
+        upload_file: Upload files
       uploaded_files:
         title: Files added
         filename: Filename
