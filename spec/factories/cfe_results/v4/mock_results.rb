@@ -427,7 +427,7 @@ module CFEResults
             result: 'ineligible'
           },
           {
-            ccms_code: 'SE003',
+            ccms_code: 'SE014',
             result: 'partially_eligible'
           }
         ]
