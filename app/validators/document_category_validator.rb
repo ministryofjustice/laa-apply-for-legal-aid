@@ -36,8 +36,6 @@ class DocumentCategoryValidator < ActiveModel::Validator
   end
 
   def uncategorised_evidence_attachment?(record)
-  #  evidence uploads are attached with an attachment_typeof evidence upload collection before they are categorised
-  # which is valid, but is not in the list of valid document types
   record.is_a?(Attachment) && record.attachment_type=='uncategorised'
   end
 end

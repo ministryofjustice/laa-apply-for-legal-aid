@@ -34,7 +34,7 @@ module Providers
     end
 
     def save_or_continue
-      update_attachment_type(submission_params)
+      update_attachment_type
       if submission_form.files?
         save_continue_or_draft(form)
       else
@@ -57,7 +57,9 @@ module Providers
       else
         @error_message = error_message
       end
-      populate_upload_form
+      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      required_documents
+      attachment_type_options
       render :show
     end
 
@@ -92,17 +94,22 @@ module Providers
     end
 
     def submission_form
-      @submission_form ||= Providers::UploadedEvidenceSubmissionForm.new(submission_params)
+      @submission_form ||= Providers::UploadedEvidenceSubmissionForm.new
     end
 
-    def update_attachment_type(submission_params)
-      params[:uploaded_evidence_collection].each do |att_id,att_type|
-        Attachment.find(att_id).update(attachment_type: att_type)
+    def update_attachment_type
+      # # Should we check here for an new_att_type of 'uncategorised'
+      # # and then return a validation error? that may be another ticket.
+      # params[:uploaded_evidence_collection].each do |att_id, new_att_type|
+      #   if new_att_type == 'uncategorised'
+      #     #  do something here to show a validation error
+      #   else
+      #     Attachment.find(att_id).update(attachment_type: new_att_type)
+      #   end
+      # end
+      params[:uploaded_evidence_collection].each do |att_id, new_att_type|
+        Attachment.find(att_id).update(attachment_type: new_att_type)
       end
-    end
-
-    def submission_params
-      params[:uploaded_evidence_collection]
     end
 
     def uploaded_evidence_collection_params
