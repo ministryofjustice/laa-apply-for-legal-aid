@@ -16,11 +16,12 @@ class DocumentCategoryValidator < ActiveModel::Validator
     merits_report
     statement_of_case
     statement_of_case_pdf
-    uploaded_evidence_collection
   ].freeze
 
   def validate(record)
     puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
+    return if uncategorised_evidence_attachment?(record)
+
     attr = case record.class.to_s
            when 'Attachment'
              :attachment_type
@@ -34,5 +35,12 @@ class DocumentCategoryValidator < ActiveModel::Validator
     puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
     record.errors.add attr,
                       I18n.t('activemodel.errors.models.attachment.attributes.attachment_type.invalid', attachment_type: record.__send__(attr))
+  end
+
+  def uncategorised_evidence_attachment?(record)
+    puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
+  #  evidence uploads are attached with an attachment_typeof evidence upload collection before they are categorised
+  # which is valid, but is not in the list of valid document types
+  record.is_a?(Attachment) && record.attachment_type=='uncategorised'
   end
 end

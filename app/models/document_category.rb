@@ -10,6 +10,6 @@ class DocumentCategory < ApplicationRecord
   end
 
   def self.submittable_category_names
-    where(submit_to_ccms: true).pluck(:name)
+    where(submit_to_ccms: true).pluck(:name)+['uncategorised']
   end
 end
