@@ -451,6 +451,7 @@ en:
         choose_files_btn: Choose files
         file_not_uploaded_error: Upload the selected file
         no_files: Files uploaded will appear here.
+        upload_file: Upload files
       show:
         h1-heading: Upload supporting evidence
         h2-heading: Uploaded files

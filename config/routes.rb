@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
     resources :statement_of_cases, only: [:create]
+    resources :uploaded_evidence_collections, only: [:create]
   end
 
   namespace :citizens do

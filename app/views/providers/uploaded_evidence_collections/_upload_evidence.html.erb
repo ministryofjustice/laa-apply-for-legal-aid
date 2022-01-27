@@ -21,16 +21,37 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <div class="fallback no-script">
-      <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
-                                hint: {text: t('.size_hint')},
-                                classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
-      <%= form.submit(
-            t('generic.upload'),
-            id: 'upload',
-            name: 'upload_button',
-            class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
-          ) %>
+    <div class="dropzone__upload">
+      <div class="govuk-form-group script hidden" id="dropzone-form-group" aria-labelledby="dropzone-label">
+        <label class="govuk-label govuk-label--m" id="dropzone-label">
+          <%= t('.upload_file') %>
+        </label>
+        <span class="govuk-hint"><%= t('.size_hint') %></span>
+
+        <span class="hidden" aria-hidden="true" id="application-id"><%= @upload_form.model.legal_aid_application_id %></span>
+        <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/uploaded_evidence_collections"></span>
+        <p id="dropzone-error" class="govuk-error-message hidden">
+          <span class="govuk-visually-hidden">Error:</span>
+        </p>
+        <div class="dropzone" id="dropzone-form">
+          <div class="dz-message" data-dz-message>
+            <p class="govuk-body govuk-!-padding-top-2 script"><%= t('.dropzone_message') %></p>
+            <button id="dz-upload-button" class="govuk-button govuk-button--secondary script" tabindex="0"><%= t('.choose_files_btn') %></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fallback no-script">
+        <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
+                                  hint: {text: t('.size_hint')},
+                                  classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
+        <%= form.submit(
+              t('generic.upload'),
+              id: 'upload',
+              name: 'upload_button',
+              class: 'govuk-button govuk-button--secondary form-button moj-multi-file-upload__button'
+            ) %>
+      </div>
     </div>
 
     <% if @successfully_deleted %>
