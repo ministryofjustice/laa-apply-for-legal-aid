@@ -5,8 +5,4 @@ class UploadedEvidenceCollection < ApplicationRecord
   def original_attachments
     legal_aid_application.attachments.displayable_evidence_types
   end
-
-  def pdf_attachments
-    legal_aid_application.attachments.evidence_upload_pdf
-  end
 end

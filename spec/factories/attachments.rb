@@ -20,6 +20,11 @@ FactoryBot.define do
       attachment_name { 'bank_transaction_report.csv' }
     end
 
+    trait :uploaded_evidence_collection do
+      attachment_type { 'uncategorised' }
+      attachment_name { 'uploaded_evidence_collection' }
+    end
+
     after(:create) do |attachment|
       attachment.document.attach(
         io: File.open(Rails.root.join('spec/fixtures/files/documents/hello_world.pdf')),

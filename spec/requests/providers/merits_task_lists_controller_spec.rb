@@ -75,6 +75,14 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       it 'redirects to the gateway evidence page' do
         expect(response).to redirect_to(providers_legal_aid_application_gateway_evidence_path(legal_aid_application))
       end
+
+      # context 'when the employed journey setting is enabled' do
+      #   before { Setting.setting.update!(enable_employed_journey: true) }
+      #
+      #   it 'should redirect to the new upload evidence page' do
+      #     expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+      #   end
+      # end
     end
 
     context 'when some tasks are incomplete' do
@@ -83,6 +91,31 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       it { expect(response).to have_http_status(:ok) }
       it { expect(response.body).to include('Provide details of the case') }
       it { expect(response.body).to include('There is a problem') }
+    end
+  end
+
+  describe 'PATCH /providers/merits_task_list' do
+    context 'when all tasks are complete and the employed journey setting is enabled' do
+      before do
+        Setting.setting.update!(enable_employed_journey: true)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :children_proceeding)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :attempts_to_settle)
+        patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+      end
+      # subject { patch providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
+
+      it 'should redirect to the new upload evidence page' do
+        # binding.pry
+        puts ">>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<".yellow
+        ap Setting.enable_employed_journey?
+        expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+      end
     end
   end
 end

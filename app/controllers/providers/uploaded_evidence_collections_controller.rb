@@ -5,6 +5,7 @@ module Providers
     end
 
     def update
+      # binding.pry
       if upload_button_pressed?
         perform_upload
       elsif save_or_continue
@@ -30,7 +31,7 @@ module Providers
 
     def attachment_type_options
       @attachment_type_options = DocumentCategory.where(display_on_evidence_upload: true).map { |dc| [dc.name, dc.name.humanize] }
-      @attachment_type_options << ['uncategorised', 'Uncategorised']
+      @attachment_type_options << %w[uncategorised Uncategorised]
     end
 
     def save_or_continue
@@ -61,22 +62,6 @@ module Providers
       required_documents
       attachment_type_options
       render :show
-    end
-
-    def error_message
-      return if upload_form.errors.blank?
-
-      "#{I18n.t('accessibility.problem_text')} #{upload_form.errors.messages[:original_file].first}"
-    end
-
-    def files_deleted_message(deleted_file_name)
-      I18n.t('activemodel.attributes.gateway_evidence.file_deleted', file_name: deleted_file_name)
-    end
-
-    def successful_upload
-      return if upload_form.errors.present?
-
-      I18n.t('activemodel.attributes.gateway_evidence.file_uploaded', file_name: 'File')
     end
 
     def convert_new_files_to_pdf
@@ -138,6 +123,22 @@ module Providers
 
     def attachment_id
       params[:attachment_id]
+    end
+
+    def error_message
+      return if upload_form.errors.blank?
+
+      "#{I18n.t('accessibility.problem_text')} #{upload_form.errors.messages[:original_file].first}"
+    end
+
+    def files_deleted_message(deleted_file_name)
+      I18n.t('activemodel.attributes.gateway_evidence.file_deleted', file_name: deleted_file_name)
+    end
+
+    def successful_upload
+      return if upload_form.errors.present?
+
+      I18n.t('activemodel.attributes.gateway_evidence.file_uploaded', file_name: 'File')
     end
   end
 end

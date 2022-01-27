@@ -18,6 +18,7 @@ module Providers
     end
 
     private
+
     def create_attachment(original_file)
       model.legal_aid_application.attachments.create document: original_file,
                                                      attachment_type: 'uncategorised',

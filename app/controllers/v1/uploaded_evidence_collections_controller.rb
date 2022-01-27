@@ -1,6 +1,5 @@
 module V1
   class UploadedEvidenceCollectionsController < ApiController
-
     def create
       if legal_aid_application
         file = form_params[:file]
