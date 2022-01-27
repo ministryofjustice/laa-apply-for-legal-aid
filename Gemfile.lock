@@ -368,7 +368,7 @@ GEM
     httpi (2.5.0)
       rack
       socksify
-    i18n (1.8.11)
+    i18n (1.9.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iniparse (1.5.0)
@@ -589,7 +589,7 @@ GEM
     rspec-mocks (3.10.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-rails (5.0.2)
+    rspec-rails (5.1.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
@@ -818,7 +818,7 @@ DEPENDENCIES
   redis-namespace
   regexp-examples
   rexml
-  rspec-rails (~> 5.0, >= 5.0.2)
+  rspec-rails (~> 5.1)
   rspec-sidekiq
   rspec_junit_formatter
   rubocop

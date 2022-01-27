@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LegalAidApplications::DependantForm do
+RSpec.describe LegalAidApplications::DependantForm, type: :form do
   let(:dependant) { create :dependant, date_of_birth: nil }
   let(:date) { Faker::Date.birthday }
   let(:day) { date.strftime('%d') } # Two number day
@@ -14,7 +14,7 @@ RSpec.describe LegalAidApplications::DependantForm do
 
   let(:params) do
     {
-      name: Faker::Lorem.word,
+      name: Faker::Name.name,
       date_of_birth_3i: day,
       date_of_birth_2i: month,
       date_of_birth_1i: year,
