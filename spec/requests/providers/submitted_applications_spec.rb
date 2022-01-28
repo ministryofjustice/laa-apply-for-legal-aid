@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
+  include ActionView::Helpers::NumberHelper
   let(:firm) { create :firm }
   let!(:provider) { create :provider, firm: firm }
   let!(:legal_aid_application) do
@@ -21,13 +22,13 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:html) { Nokogiri::HTML(response.body) }
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
 
-  before do
-    legal_aid_application.reload
-    login
-    subject
-  end
-
   describe 'GET /providers/applications/:legal_aid_application_id/submitted_application' do
+    before do
+      legal_aid_application.reload
+      login
+      subject
+    end
+
     subject do
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
@@ -44,7 +45,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
       expect(html.at_css('#client-declaration').classes).to include('only-print')
     end
 
-    it 'hidess print buttons when printing the page' do
+    it 'hides print buttons when printing the page' do
       print_buttons.each do |print_button|
         expect(print_button.ancestors.at_css('.no-print')).to_not eq(nil)
       end
@@ -66,6 +67,110 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
       it 'redirects to access denied error' do
         expect(response).to redirect_to(error_path(:access_denied))
+      end
+    end
+  end
+
+  describe 'employment income table' do
+    let(:firm) { create :firm }
+    let!(:provider) { create :provider, firm: firm }
+    let!(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_everything,
+             :with_proceedings,
+             :assessment_submitted,
+             set_lead_proceeding: :da001,
+             provider: provider
+    end
+    let(:login) { login_as legal_aid_application.provider }
+    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let!(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
+    let(:translation_path) { 'providers.submitted_applications.employment_income_table' }
+
+    subject do
+      get providers_legal_aid_application_submitted_application_path(legal_aid_application)
+    end
+
+    shared_examples 'employment data is not present' do
+      before { subject }
+      it 'does not display the employment income table' do
+        expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.benefits_in_kind")
+        expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.monthly_income_before_tax")
+        expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.national_insurance")
+        expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.tax")
+      end
+
+      it 'does not display the Other income header' do
+        expect(unescaped_response_body).not_to include I18n.t('providers.submitted_applications.show.other_income')
+      end
+    end
+
+    context 'when the employed journey is enabled' do
+      before do
+        Setting.setting.update!(enable_employed_journey: true)
+        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
+        login
+      end
+
+      context 'when employment data is present' do
+        it 'displays the employment income table' do
+          subject
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.heading")
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.benefits_in_kind")
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.monthly_income_before_tax")
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.national_insurance")
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.tax")
+        end
+
+        it 'populates the employment income table with the correct data' do
+          subject
+          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_benefits_in_kind)
+          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_gross_income)
+          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_national_insurance)
+          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_tax)
+        end
+
+        it 'displays the Other income header' do
+          subject
+          expect(unescaped_response_body).to include I18n.t('providers.submitted_applications.show.other_income')
+        end
+
+        it 'does not display the extra employment information details' do
+          subject
+          expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.employment_details")
+        end
+
+        context 'when employment details have been entered by the solicitor' do
+          before do
+            legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: 'test details')
+            subject
+          end
+
+          it 'displays the extra employment information details' do
+            expect(unescaped_response_body).to include I18n.t("#{translation_path}.employment_details")
+            expect(unescaped_response_body).to include 'test details'
+          end
+        end
+      end
+
+      context 'when employment data is not present' do
+        let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
+
+        it_behaves_like 'employment data is not present'
+      end
+    end
+
+    context 'when the employed journey is not enabled' do
+      context 'when employment data is present' do
+        let(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
+
+        it_behaves_like 'employment data is not present'
+      end
+
+      context 'when employment data is not present' do
+        let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
+
+        it_behaves_like 'employment data is not present'
       end
     end
   end
