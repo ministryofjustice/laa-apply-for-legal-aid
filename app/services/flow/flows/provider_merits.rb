@@ -104,7 +104,7 @@ module Flow
             else
               application.proceedings.size > 1 ? :gateway_evidences : :check_merits_answers
               # TODO: check correct option, above is how it currently works. Below is how the ticket says it should work
-              # that is gateway_evidence upload page is only shown if a secion8 proceeding exists
+              # that is gateway_evidence upload page is only shown if a section8 proceeding exists
               # application.section_8_proceedings? ? :gateway_evidences : :check_merits_answers
             end
           end

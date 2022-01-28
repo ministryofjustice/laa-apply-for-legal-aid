@@ -42,7 +42,7 @@ module Providers
       end
       let(:draft_button) { { draft_button: 'Save as draft' } }
       let(:upload_button) { { upload_button: 'Upload' } }
-      let(:button_clicked) { upload_button }
+      let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
 
       subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
@@ -52,7 +52,7 @@ module Providers
       it 'updates the record' do
         subject
         legal_aid_application.reload
-        expect(uploaded_evidence_collection.original_attachments.first).to be_present
+        expect(legal_aid_application.uploaded_evidence_collection.original_attachments.first).to be_present
       end
 
       it 'stores the original filename' do
@@ -62,9 +62,13 @@ module Providers
         expect(attachment.original_filename).to eq 'hello_world.pdf'
       end
 
-      it 'redirects to the next page' do
-        subject
-        expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+      context 'continue button is pressed' do
+        let(:params_uploaded_evidence_collection) { {} }
+
+        it 'redirects to the next page' do
+          subject
+          expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+        end
       end
 
       context 'upload button pressed' do

@@ -14,6 +14,10 @@ module Providers
     end
 
     def files?
+      # Validation needs to remove the empty? check done below
+      # at present we need to advance with or without an attached file
+      return if files.empty?
+
       original_file.present?
     end
 

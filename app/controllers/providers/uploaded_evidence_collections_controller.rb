@@ -5,7 +5,6 @@ module Providers
     end
 
     def update
-      # binding.pry
       if upload_button_pressed?
         perform_upload
       elsif save_or_continue
@@ -37,7 +36,7 @@ module Providers
     def save_or_continue
       update_attachment_type
       if submission_form.files?
-        save_continue_or_draft(form)
+        save_continue_or_draft(submission_form)
       else
         legal_aid_application.reload
         continue_or_draft
@@ -65,6 +64,11 @@ module Providers
     end
 
     def convert_new_files_to_pdf
+      # return if it is empty for now
+      # validation needs to deal with this.
+      #
+      return if uploaded_evidence_collection.nil?
+
       uploaded_evidence_collection.original_attachments.each do |attachment|
         PdfConverterWorker.perform_async(attachment.id)
       end
@@ -92,6 +96,9 @@ module Providers
       #     Attachment.find(att_id).update(attachment_type: new_att_type)
       #   end
       # end
+      # for now return if the params are empty and progress to the next page
+      return if params[:uploaded_evidence_collection].nil?
+
       params[:uploaded_evidence_collection].each do |att_id, new_att_type|
         Attachment.find(att_id).update(attachment_type: new_att_type)
       end
