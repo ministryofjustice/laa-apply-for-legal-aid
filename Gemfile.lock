@@ -368,7 +368,7 @@ GEM
     httpi (2.5.0)
       rack
       socksify
-    i18n (1.9.0)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iniparse (1.5.0)
@@ -667,7 +667,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-status (2.1.1)
+    sidekiq-status (2.1.2)
       chronic_duration
       sidekiq (>= 5.0)
     signet (0.16.0)
@@ -833,7 +833,7 @@ DEPENDENCIES
   sentry-sidekiq
   shoulda-matchers (~> 5.1)
   sidekiq (~> 6.4.0)
-  sidekiq-status (>= 1.1.4)
+  sidekiq-status (~> 2.1.2)
   simple_command!
   simplecov
   simplecov-rcov
