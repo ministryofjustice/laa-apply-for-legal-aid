@@ -13,10 +13,10 @@
         <li><%= t '.details_3' %></li>
         <li><%= t '.details_4' %></li>
       </ul>
-      <p class="govuk-body"><%= t('.caseworker_will_ask') %></p>
 
       <%= form.govuk_text_area :full_employment_details,
-                                label: {text: t('.employment_details_header'), tag: 'h2', size: 'm' },
+                                label: { text: t('.employment_details_header'), tag: 'h2', size: 'm' },
+                                hint: { text: t('.employment_details_hint') },
                                 rows: 10 %>
 
     <%= next_action_buttons(
