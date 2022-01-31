@@ -13,7 +13,10 @@
         </span>
         </h2>
       </div>
-        <%= render 'income' %>
+        <% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
+          <%= render 'employment_income' %>
+        <% end %>
+        <%= render 'other_income' %>
         <%= render 'outgoings' %>
         <%= render 'deductions' %>
         <%= render 'disposable_income' %>

@@ -280,6 +280,70 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         expect { subject }.to raise_error(/Unknown capital_assessment_result/)
       end
     end
+
+    context 'enable_employed_journey is true' do
+      let(:before_tasks) do
+        Setting.setting.update!(enable_employed_journey: true)
+        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
+        login_provider
+        subject
+      end
+
+      context 'applicant has employment(s)' do
+        let(:cfe_result) { create :cfe_v4_result, :with_employments }
+        let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
+        let(:monthly_income_before_tax) { I18n.t('providers.capital_income_assessment_results.employment_income.monthly_income_before_tax') }
+        let(:benefits_in_kind) { I18n.t('providers.capital_income_assessment_results.employment_income.benefits_in_kind') }
+        let(:tax) { I18n.t('providers.capital_income_assessment_results.employment_income.tax') }
+        let(:national_insurance) { I18n.t('providers.capital_income_assessment_results.employment_income.national_insurance') }
+        let(:fixed_employment_deduction) { I18n.t('providers.capital_income_assessment_results.employment_income.fixed_employment_deduction') }
+        let(:total) { I18n.t('providers.capital_income_assessment_results.employment_income.total') }
+
+        it 'displays the employment income' do
+          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.title'))
+          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
+          expect(unescaped_response_body).to include(monthly_income_before_tax + td + gds_number_to_currency(cfe_result.employment_income_gross_income))
+          expect(unescaped_response_body).to include(benefits_in_kind + td + gds_number_to_currency(cfe_result.employment_income_benefits_in_kind))
+          expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
+          expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
+          expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
+          expect(unescaped_response_body).to include(total + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
+        end
+      end
+
+      context 'applicant has no employment(s)' do
+        let(:cfe_result) { create :cfe_v4_result, :with_no_employments }
+        it 'does not display employment income' do
+          expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
+          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))
+        end
+      end
+    end
+
+    context 'enable_employed_journey is false' do
+      let(:before_tasks) do
+        Setting.setting.update!(enable_employed_journey: false)
+        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(false)
+        login_provider
+        subject
+      end
+
+      context 'applicant has employment(s)' do
+        let(:cfe_result) { create :cfe_v4_result, :with_employments }
+        it 'does not display employment income' do
+          expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
+          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))
+        end
+      end
+
+      context 'applicant has no employment(s)' do
+        let(:cfe_result) { create :cfe_v4_result, :with_employments }
+        it 'does not display employment income' do
+          expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
+          expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))
+        end
+      end
+    end
   end
 
   describe 'PATCH /providers/applications/:id/capital_income_assessment_result' do
