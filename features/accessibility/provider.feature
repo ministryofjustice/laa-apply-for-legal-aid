@@ -58,7 +58,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I select 'None of the above'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Check if you can continue using this service'
+    Then I should be on a page showing 'Do you agree with the following?'
     And the page is accessible
     Then I choose 'Yes, I agree'
     Then I click 'Save and continue'
