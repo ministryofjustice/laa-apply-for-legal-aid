@@ -11,6 +11,7 @@ class RequiredDocumentCategoryAnalyser
     required_document_categories = []
     required_document_categories << 'benefit_evidence' if @application.dwp_override
     required_document_categories << 'gateway_evidence' if @application.section_8_proceedings?
+    required_document_categories << 'employment_evidence' if @application.employment_evidence_required?
     @application.update!(required_document_categories: required_document_categories)
   end
 end

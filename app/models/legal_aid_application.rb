@@ -293,6 +293,10 @@ class LegalAidApplication < ApplicationRecord
     applicant_updated_after_benefit_check_result_updated?
   end
 
+  def employment_evidence_required?
+    Setting.setting.enable_employed_journey? ? (applicant_employed? && !hmrc_employment_income?) || (hmrc_employment_income? && applicant_not_employed?) : false
+  end
+
   def outstanding_mortgage?
     outstanding_mortgage_amount?
   end

@@ -13,13 +13,17 @@ module Providers
       model.save(validate: false) if attachments_made?
     end
 
+    # TODO: method will need to be changed on the validation ticket
+    # https://dsdmoj.atlassian.net/browse/AP-2739 and the nocov removed
+    # :nocov:
     def files?
-      # Validation needs to remove the empty? check done below
-      # at present we need to advance with or without an attached file
+      # For now we return if it is empty so application can progress to the next page
+      # but the line below will need to be removed
       return if files.empty?
 
       original_file.present?
     end
+    # :nocov:
 
     private
 
