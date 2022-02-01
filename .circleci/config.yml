@@ -154,6 +154,7 @@ jobs:
         command: bin/rails erblint
 
   unit_tests:
+    parallelism: 6
     executor: test-executor
     steps:
     - checkout
@@ -178,15 +179,28 @@ jobs:
     - run:
         name: Run ruby tests
         command: |
-          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
-          COMMITS_IN_BRANCH=$(git rev-list "$DEFAULT_BRANCH".. --count) # temp while changing branch name, reset to main
-          ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
-          CCMS_FILES_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep "/services/ccms\S*\." || true) | wc -l)
-          CCMS_TESTS_SHOULD_RUN=$(if [ "$CCMS_FILES_CHANGED" -ne "0" ]; then echo true; fi)
           ./tmp/cc-test-reporter before-build
-          INC_CCMS=$CCMS_TESTS_SHOULD_RUN bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
-          ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
-          ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
+          TESTFILES=$(circleci tests glob "./spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+          echo "LOOOOOK HERE >>>>>>>>>>>"
+          echo $TESTFILES
+          bundle exec rspec --format progress \
+          --format RspecJunitFormatter \
+          -o /tmp/test-results/rspec/rspec.xml \
+          -- ${TESTFILES}
+          echo "By here we are looking for the report to be joined"
+          ./tmp/cc-test-reporter format-coverage -t simplecov -o "./tmp/coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+#          echo $(circleci tests glob "spec/**/*_spec.rb")
+#          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+#          echo "LOOOOOK HERE >>>>>>>>>>>"
+#          echo $TESTFILES
+#          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
+#          COMMITS_IN_BRANCH=$(git rev-list "$DEFAULT_BRANCH".. --count) # temp while changing branch name, reset to main
+#          ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
+#          CCMS_FILES_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep "/services/ccms\S*\." || true) | wc -l)
+#          CCMS_TESTS_SHOULD_RUN=$(if [ "$CCMS_FILES_CHANGED" -ne "0" ]; then echo true; fi)
+#          INC_CCMS=$CCMS_TESTS_SHOULD_RUN bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml --${TESTFILES}
+#          ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
+#          ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
     - store_test_results:
         path: /tmp/test-results/rspec
     - store_artifacts:
@@ -406,35 +420,35 @@ workflows:
   version: 2
   open_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              ignore: main
-          <<: *generic-slack-fail-post-step
-      - build_and_push:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
-      - deploy_uat:
-          requires:
-          - build_and_push
-          <<: *generic-slack-fail-post-step
-      - unit_tests:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
-      - integration_tests:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
-      - delete_dependabot_deployment:
-          filters:
-            branches:
-              only:
-                - /dependabot.*/
-          requires:
-          - deploy_uat
-          <<: *generic-slack-fail-post-step
+#      - lint_checks:
+#          filters:
+#            branches:
+#              ignore: main
+#          <<: *generic-slack-fail-post-step
+#      - build_and_push:
+#          requires:
+#          - lint_checks
+#          <<: *generic-slack-fail-post-step
+#      - deploy_uat:
+#          requires:
+#          - build_and_push
+#          <<: *generic-slack-fail-post-step
+      - unit_tests
+#          requires:
+#          - lint_checks
+#          <<: *generic-slack-fail-post-step
+#      - integration_tests:
+#          requires:
+#          - lint_checks
+#          <<: *generic-slack-fail-post-step
+#      - delete_dependabot_deployment:
+#          filters:
+#            branches:
+#              only:
+#                - /dependabot.*/
+#          requires:
+#          - deploy_uat
+#          <<: *generic-slack-fail-post-step
 
   merge_pr:
     jobs:
