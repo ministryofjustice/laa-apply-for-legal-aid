@@ -177,18 +177,50 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
           chmod +x ./tmp/cc-test-reporter
     - run:
-        name: Run ruby tests
+        name: Run ruby tests in parrallel
         command: |
-          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+          mkdir -p /tmp/test-results/rspec
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
           bundle exec rspec --format progress \
           --format RspecJunitFormatter \
           -o /tmp/test-results/rspec/rspec.xml \
           -- ${TESTFILES}
-
     - store_test_results:
         path: /tmp/test-results/rspec
     - store_artifacts:
         path: ./coverage
+    - run:
+        name: Stash Coverage Results
+        command: |
+          mkdir coverage_results
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+    - persist_to_workspace:
+        root: .
+        paths:
+          - coverage_results
+
+
+  coverage:
+    executor: test-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - *install_lib_ffi
+      - *install_packages_for_testing
+      - *decrypt_secrets
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - run:
+          name: Merge and check coverage
+          command: |
+            RUN_COVERAGE=true bundle exec rake simplecov:merge_coverage_results
+      - store_artifacts:
+          path: ~/split_app/coverage
+          destination: coverage
+
+
 
   full_unit_tests:
     executor: test-executor
@@ -418,6 +450,9 @@ workflows:
 #          - build_and_push
 #          <<: *generic-slack-fail-post-step
       - unit_tests
+      - coverage:
+          requires:
+            - unit_tests
 #          requires:
 #          - lint_checks
 #          <<: *generic-slack-fail-post-step

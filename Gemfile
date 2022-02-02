@@ -117,6 +117,7 @@ group :development, :test do
   gem 'json_expressions'
   gem 'nokogiri', '>= 1.12.5'
   gem 'overcommit'
+  gem 'parallel_tests'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false

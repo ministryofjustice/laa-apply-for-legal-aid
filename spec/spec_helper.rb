@@ -21,9 +21,6 @@ require 'sidekiq/testing'
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
 
-require File.expand_path('../config/environment', __dir__)
-require 'rspec/rails'
-
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
@@ -32,6 +29,10 @@ unless ENV['NOCOVERAGE']
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
     add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
+    Dir['app/*'].each do |dir|
+      add_group File.basename(dir).humanize, dir
+    end
+    minimum_coverage 100 unless ENV['CIRCLE_NODE_INDEX']
   end
 
   SimpleCov.at_exit do
