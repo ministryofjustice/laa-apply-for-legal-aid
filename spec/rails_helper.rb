@@ -72,8 +72,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     Faker::Config.locale = 'en-GB'
     DatabaseCleaner.clean_with :truncation
-
-    ApplicationProceedingType.skip_callback(:update, :after, :update_proceeding, raise: false)
   end
 
   config.after(:suite) do
