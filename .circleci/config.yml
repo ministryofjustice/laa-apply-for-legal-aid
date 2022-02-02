@@ -27,10 +27,9 @@ executors:
         environment:
           TERM: dumb
     resource_class: small
-
   test-executor:
     docker:
-      - image: cimg/ruby:3.1.0-browsers
+      - image: ministryofjustice/apply-ci:latest
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
       - image: cimg/postgres:10.18
@@ -65,16 +64,6 @@ references:
       command: |
         wget http://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
         sudo apt install ./libffi6_3.2.1-8_amd64.deb
-
-  install_packages_for_testing: &install_packages_for_testing
-    run:
-      name: Install System packages needed for testing
-      command: |
-        sudo apt-get update
-        sudo apt-get install -y postgresql-client
-        sudo apt-get install -y clamav-daemon
-        sudo apt-get install -y wkhtmltopdf
-        sudo apt-get install -y git-crypt
 
   install_js_packages: &install_js_packages
     run:
@@ -157,8 +146,6 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *install_lib_ffi
-    - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
@@ -196,8 +183,6 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *install_lib_ffi
-    - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
@@ -261,8 +246,6 @@ jobs:
     - browser-tools/install-chrome
     - browser-tools/install-chromedriver
     - checkout
-    - *install_lib_ffi
-    - *install_packages_for_testing
     - *decrypt_secrets
     - *restore_gems_cache
     - *install_gems
