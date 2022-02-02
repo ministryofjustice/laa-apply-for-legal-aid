@@ -179,16 +179,12 @@ jobs:
     - run:
         name: Run ruby tests
         command: |
-          ./tmp/cc-test-reporter before-build
           TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
-          echo "LOOK HERE >>>>>>>>>>>"
-          echo $TESTFILES
           bundle exec rspec --format progress \
           --format RspecJunitFormatter \
           -o /tmp/test-results/rspec/rspec.xml \
           -- ${TESTFILES}
-          echo "By here we are looking for the report to be joined"
-          tmp/cc-test-reporter format-coverage -t simplecov -o "tmp/coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+
 
 #          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
 #          COMMITS_IN_BRANCH=$(git rev-list "$DEFAULT_BRANCH".. --count) # temp while changing branch name, reset to main

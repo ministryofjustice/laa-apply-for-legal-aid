@@ -21,6 +21,9 @@ require 'sidekiq/testing'
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
 
+require File.expand_path('../config/environment', __dir__)
+require 'rspec/rails'
+
 SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
@@ -29,6 +32,24 @@ unless ENV['NOCOVERAGE']
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
     add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
+
+    # Disambiguates individual test runs with CIRCLE_NODE_INDEX
+    command_name "Job #{ENV['CIRCLE_NODE_INDEX']}" if ENV['CIRCLE_NODE_INDEX']
+
+    # If running test in CI, generate just .json result, then we can join them later
+    # else, generate the full HTML report
+    if ENV['CI']
+      formatter SimpleCov::Formatter::SimpleFormatter
+    else
+      formatter SimpleCov::Formatter::MultiFormatter.new(
+        [
+          SimpleCov::Formatter::SimpleFormatter,
+          SimpleCov::Formatter::HTMLFormatter
+        ]
+      )
+    end
+
+    track_files '**/*.rb'
   end
 
   SimpleCov.at_exit do
