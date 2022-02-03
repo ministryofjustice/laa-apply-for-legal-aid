@@ -9,11 +9,6 @@ module Providers
       let(:soc) { nil }
       let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
-      let(:application_proceeding_type) do
-        create :application_proceeding_type,
-               legal_aid_application: legal_aid_application,
-               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
-      end
 
       describe 'GET /providers/applications/:legal_aid_application_id/statement_of_case' do
         subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
