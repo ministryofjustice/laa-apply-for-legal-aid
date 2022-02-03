@@ -61,8 +61,6 @@ RSpec.describe Reports::MeansReportCreator do
     end
 
     context 'V4 CFE result' do
-      let!(:da002) { create :proceeding_type, ccms_code: 'DA002' }
-      let!(:da006) { create :proceeding_type, ccms_code: 'DA006' }
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_proceedings,
