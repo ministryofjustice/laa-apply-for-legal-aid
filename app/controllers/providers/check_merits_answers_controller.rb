@@ -15,7 +15,12 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-      redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
+
+      if Setting.enable_evidence_upload?
+        redirect_to providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application)
+      else
+        redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
+      end
     end
   end
 end
