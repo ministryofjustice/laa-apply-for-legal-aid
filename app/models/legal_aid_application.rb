@@ -134,11 +134,6 @@ class LegalAidApplication < ApplicationRecord
     _prefix: true
   )
 
-  # TODO: remove this once LFA migration is complete. Replaced by #lead_proceeding below
-  def lead_application_proceeding_type
-    application_proceeding_types.find_by(lead_proceeding: true)
-  end
-
   def lead_proceeding
     proceedings.find_by(lead_proceeding: true)
   end

@@ -5,7 +5,6 @@ RSpec.describe Providers::LimitationsController, type: :request do
   let(:provider) { legal_aid_application.provider }
 
   before do
-    legal_aid_application.proceedings.each { |p| apt_from_proceeding(proceeding: p) }
     legal_aid_application.reload
   end
 
