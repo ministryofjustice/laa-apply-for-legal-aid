@@ -88,12 +88,14 @@ document.addEventListener('DOMContentLoaded', event => {
       window.location.reload()
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
     })
-    dropzone.on('error', (file) => {
+    dropzone.on('error', (file, response) => {
       let errorMsg = ''
       if (!ACCEPTED_FILES.includes(file.type)) {
         errorMsg = ERR_CONTENT_TYPE
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR
+      } else if (response.error!="") {
+        errorMsg = response.error
       } else {
         errorMsg = ERR_GENERIC
       }
