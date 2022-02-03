@@ -78,7 +78,7 @@ module Providers
         end
 
         describe 'redirect on success' do
-          context 'when the application has a section 8 proceeding type' do
+          context 'when the application has a section 8 proceeding' do
             let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
 
             context 'and involved children exist' do
