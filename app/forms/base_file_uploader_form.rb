@@ -1,4 +1,5 @@
 class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
+  include MalwareScanning
   MAX_FILE_SIZE = 7.megabytes
 
   ALLOWED_CONTENT_TYPES = %w[
@@ -88,22 +89,6 @@ class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
     errors.add(:original_file, original_file_error_for(:file_virus, file_name: @original_filename))
   end
 
-  def malware_scan_result(original_file)
-    MalwareScanner.call(
-      file_path: original_file.tempfile.path,
-      uploader: provider_uploader,
-      file_details: {
-        size: original_file_size(original_file),
-        name: original_file.original_filename,
-        content_type: original_file.content_type
-      }
-    )
-  end
-
-  def original_file_size(original_file)
-    File.size(original_file.tempfile)
-  end
-
   def sequenced_attachment_name
     if model.original_attachments.any?
       most_recent_name = model.original_attachments.order(:attachment_name).last.attachment_name
@@ -122,8 +107,7 @@ class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def original_file_error_for(error_type, options = {})
-    error_path = @model.class.name.underscore.gsub('::', '/')
-    I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
+  def error_path
+    @model.class.name.underscore.gsub('::', '/')
   end
 end

@@ -1,5 +1,6 @@
 module V1
   class StatementOfCasesController < ApiController
+    include MalwareScanning
     ATTACHMENT_TYPE = 'statement_of_case'.freeze
 
     def create
@@ -22,26 +23,6 @@ module V1
 
     def provider_uploader
       legal_aid_application.provider
-    end
-
-    def malware_scan_result(original_file)
-      MalwareScanner.call(
-        file_path: original_file.tempfile.path,
-        uploader: provider_uploader,
-        file_details: {
-          size: original_file_size(original_file),
-          name: original_file.original_filename,
-          content_type: original_file.content_type
-        }
-      )
-    end
-
-    def original_file_size(original_file)
-      File.size(original_file.tempfile)
-    end
-
-    def original_file_error_for(error_type, options = {})
-      I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
     end
 
     def error_path
