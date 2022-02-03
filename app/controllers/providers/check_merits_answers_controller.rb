@@ -15,9 +15,12 @@ module Providers
 
     def reset
       legal_aid_application.reset!
-
+      # TODO: remove the nocov when setting is enabled fully
+      # https://dsdmoj.atlassian.net/browse/AP-2739
+      # :nocov:
       if Setting.enable_evidence_upload?
         redirect_to providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application)
+        # :nocov:
       else
         redirect_to providers_legal_aid_application_gateway_evidence_path(legal_aid_application)
       end

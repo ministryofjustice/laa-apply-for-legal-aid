@@ -294,7 +294,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def employment_evidence_required?
-    Setting.setting.enable_employed_journey? ? (applicant_employed? && !hmrc_employment_income?) || (hmrc_employment_income? && applicant_not_employed?) : false
+    extra_employment_information_details.present?
   end
 
   def outstanding_mortgage?
