@@ -123,6 +123,7 @@ en:
           disregarded_state_benefits: Income from benefits excluded from calculation
         income:
           benefits: Benefits
+          employment: Gross employment income
           family_help: Financial help from friends or family
           maintenance_in: Maintenance payments
           property_or_lodger: Income from property or lodger
@@ -130,9 +131,11 @@ en:
           pension: Pension
         outgoing:
           housing: Housing payments
+          income_tax: Income tax
           childcare: Childcare payments
           maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case
+          national_insurance: National insurance
       total:
         total_income: Total income
         total_outgoings: Total outgoings
