@@ -8,7 +8,6 @@
 Rails.logger.info 'Seeding started'
 Seeder = Dibber::Seeder
 Seeder.monitor AdminUser
-Seeder.monitor ServiceLevel
 Seeder.monitor Permission
 Seeder.monitor ActorPermission
 Seeder.monitor Office
