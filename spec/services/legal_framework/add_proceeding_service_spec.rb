@@ -2,9 +2,6 @@ require 'rails_helper'
 
 module LegalFramework
   RSpec.describe AddProceedingService, :vcr do
-    before do
-      populate_legal_framework
-    end
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:ccms_code) { 'DA004' }
 

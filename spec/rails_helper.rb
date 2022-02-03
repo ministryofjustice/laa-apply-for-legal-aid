@@ -116,7 +116,3 @@ end
 def html_compare(string)
   HTMLEntities.new.encode(string).gsub('&apos;', '&#39;')
 end
-
-def populate_legal_framework
-  ServiceLevel.populate
-end
