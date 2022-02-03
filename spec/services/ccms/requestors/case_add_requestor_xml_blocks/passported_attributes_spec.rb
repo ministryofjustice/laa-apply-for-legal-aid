@@ -27,7 +27,6 @@ module CCMS
                  office: office
         end
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
-        let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { '300000054005' }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
@@ -86,7 +85,7 @@ module CCMS
           end
 
           context 'domestic abuse proceeding' do
-            before { allow_any_instance_of(ProceedingType).to receive(:section8?).and_return false }
+            before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return false }
             it 'is false' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'CHILD_PARTIES_C')
               expect(block).to have_boolean_response(false)
@@ -892,7 +891,6 @@ module CCMS
                      office: office
             end
             let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
-            let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
               create :chances_of_success, :with_optional_text, proceeding: da004
             end
@@ -1351,7 +1349,6 @@ module CCMS
                      office: office
             end
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
-            let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
               create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
@@ -1496,7 +1493,6 @@ module CCMS
                      office: office
             end
             let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
-            let(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
               create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
@@ -1531,7 +1527,6 @@ module CCMS
                      office: office
             end
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA004' } }
-            let!(:application_proceeding_type_one) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
             let!(:chances_of_success) do
               create :chances_of_success, success_prospect: success_prospect, success_prospect_details: 'details', proceeding: proceeding_da004
             end
