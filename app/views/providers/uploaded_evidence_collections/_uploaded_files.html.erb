@@ -3,12 +3,11 @@
 %>
 
 <table class="govuk-table <%= 'hidden' if attachments.empty? %>">
-  <caption class="govuk-table__caption"><%= t('.title') %></caption>
+  <caption class="govuk-table__caption govuk-heading-m"><%= t('.title') %></caption>
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
     <th class="govuk-table__header" scope="col"><%= t('.select_a_category') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
     <th class="govuk-table__header" scope="col"></th>
   </tr>
   </thead>
@@ -31,10 +30,6 @@
                                                options: { selected: attachment.attachment_type } %>
           </div>
         </td>
-        <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
-<!--        <td class="govuk-table__cell">-->
-          <!-- delete button goes here-->
-<!--        </td>-->
       </tr>
     <% end %>
   <% end %>
