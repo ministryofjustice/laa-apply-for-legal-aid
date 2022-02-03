@@ -122,7 +122,6 @@ RSpec.describe LegalAidApplication, type: :model do
         create :chances_of_success, :with_optional_text, proceeding: se014
       end
 
-
       it 'returns the lead application proceeding type' do
         expect(legal_aid_application.lead_proceeding).to eq da001
       end

@@ -16,11 +16,9 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
-  has_many :application_proceeding_types, inverse_of: :legal_aid_application, dependent: :destroy
   has_many :proceedings, dependent: :destroy
   has_many :chances_of_success, through: :proceedings
   has_many :attachments, dependent: :destroy
-  has_many :proceeding_types, through: :application_proceeding_types
   has_one :benefit_check_result, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
