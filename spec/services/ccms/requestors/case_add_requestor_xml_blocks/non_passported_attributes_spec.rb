@@ -31,7 +31,6 @@ module CCMS
         end
 
         let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
-        let!(:application_proceeding_type) { create :application_proceeding_type, legal_aid_application: legal_aid_application }
         let!(:chances_of_success) do
           create :chances_of_success, :with_optional_text, proceeding: proceeding
         end
