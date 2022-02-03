@@ -122,18 +122,10 @@ RSpec.describe LegalAidApplication, type: :model do
         create :chances_of_success, :with_optional_text, proceeding: se014
       end
 
-      it 'returns the lead application proceeding type' do
+      it 'returns the lead proceeding' do
         expect(legal_aid_application.lead_proceeding).to eq da001
       end
     end
-
-    # context 'application proceeding types do not exist' do
-    #   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-    #
-    #   it 'is true' do
-    #     expect(legal_aid_application.lead_application_proceeding_type).to eq nil
-    #   end
-    # end
   end
 
   describe '#pre_dwp_check?' do
@@ -674,7 +666,7 @@ RSpec.describe LegalAidApplication, type: :model do
         create :chances_of_success, :with_optional_text, proceeding: da004
       end
 
-      it 'returns the substantive cost limitation for the first proceeding type' do
+      it 'returns the substantive cost limitation for the proceeding' do
         expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
       end
     end
