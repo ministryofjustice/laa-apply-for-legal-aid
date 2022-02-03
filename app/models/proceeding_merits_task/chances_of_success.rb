@@ -2,9 +2,6 @@ module ProceedingMeritsTask
   class ChancesOfSuccess < ApplicationRecord
     belongs_to :proceeding
 
-    # TODO: remove once LFA migration is complete
-    after_create :populate_proceeding
-
     PRETTY_SUCCESS_PROSPECTS = {
       likely: 'Likely (>50%)',
       marginal: 'Marginal (45-49%)',
@@ -46,16 +43,5 @@ module ProceedingMeritsTask
     def self.rank_and_prettify(rank)
       PRETTY_SUCCESS_PROSPECTS[SUCCESS_RANKING.invert[rank]]
     end
-
-    private
-
-    # TODO: temp method to ensure the link is made to Proceeding until the LFA migration is complete
-    # :nocov:
-    def populate_proceeding
-      return unless proceeding_id.nil?
-
-      self.proceeding_id = application_proceeding_type.proceeding.id
-    end
-    # :nocov:
   end
 end

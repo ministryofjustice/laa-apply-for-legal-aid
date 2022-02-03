@@ -1,7 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe DefaultCostLimitation do
-  let(:pt) { create :proceeding_type }
+  let!(:legal_aid_application) do
+    create :legal_aid_application,
+           :with_applicant,
+           :with_proceedings,
+           set_lead_proceeding: :da001
+  end
+  let(:pt) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+  let!(:chances_of_success) do
+    create :chances_of_success, :with_optional_text, proceeding: pt
+  end
 
   context 'enum' do
     it 'does not allow invalid cost types' do
