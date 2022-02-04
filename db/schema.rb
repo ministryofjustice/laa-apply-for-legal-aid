@@ -347,6 +347,9 @@ ActiveRecord::Schema.define(version: 2022_02_04_114732) do
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
   end
 
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "debug_type"
     t.string "legal_aid_application_id"
