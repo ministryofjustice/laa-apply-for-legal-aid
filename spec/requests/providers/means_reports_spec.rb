@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Providers::MeansReportsController, type: :request do
   include ActionView::Helpers::NumberHelper
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v3_result, :assessment_submitted }
+  let(:legal_aid_application) do
+    create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v4_result, :assessment_submitted, explicit_proceedings: %i[da002 da006]
+  end
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
   let(:cfe_result) { legal_aid_application.cfe_result }
@@ -64,6 +66,47 @@ RSpec.describe Providers::MeansReportsController, type: :request do
 
     it 'displays the capital contribution' do
       expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
+    end
+
+    context 'when employed feature flag is set to false' do
+      let(:before_subject) { Setting.setting.update!(enable_employed_journey: false) }
+
+      it 'does not display employment lines' do
+        expect(unescaped_response_body).not_to include('Gross employment income')
+        expect(unescaped_response_body).not_to include('Income tax')
+        expect(unescaped_response_body).not_to include('National insurance')
+        expect(unescaped_response_body).not_to include('Fixed employment deduction')
+      end
+    end
+
+    context 'when employed feature flag is set to true' do
+      let(:before_subject) do
+        Setting.setting.update!(enable_employed_journey: true)
+        legal_aid_application.applicant.update!(employed: true)
+      end
+
+      context 'when the applicant is employed' do
+        it 'displays the employment lines' do
+          expect(unescaped_response_body).to include('Gross employment income')
+          expect(unescaped_response_body).to include('Income tax')
+          expect(unescaped_response_body).to include('National insurance')
+          expect(unescaped_response_body).to include('Fixed employment deduction')
+        end
+      end
+
+      context 'when the applicant is not employed' do
+        let(:before_subject) do
+          Setting.setting.update!(enable_employed_journey: true)
+          legal_aid_application.applicant.update!(employed: false)
+        end
+
+        it 'does not display the employment lines' do
+          expect(unescaped_response_body).to_not include('Gross employment income')
+          expect(unescaped_response_body).to_not include('Income tax')
+          expect(unescaped_response_body).to_not include('National insurance')
+          expect(unescaped_response_body).to_not include('Fixed employment deduction')
+        end
+      end
     end
 
     context 'when not authenticated' do

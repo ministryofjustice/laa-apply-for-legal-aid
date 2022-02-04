@@ -58,7 +58,7 @@ RSpec.describe 'cfe_result version 4 factory' do
 
       context 'within disposable_income' do
         it 'has required keys' do
-          expect(disposable_income_summary.keys).to match_array %i[dependant_allowance gross_housing_costs housing_benefit net_housing_costs maintenance_allowance
+          expect(disposable_income_summary.keys).to match_array %i[dependant_allowance employment_income gross_housing_costs housing_benefit net_housing_costs maintenance_allowance
                                                                    total_outgoings_and_allowances total_disposable_income income_contribution proceeding_types]
         end
 
@@ -336,7 +336,7 @@ RSpec.describe 'cfe_result version 4 factory' do
     include_examples 'has the correct structure for v4'
 
     it 'has correct values' do
-      expect(cfe_result.moe_housing).to eq 10.0
+      expect(cfe_result.moe_housing).to eq 135.0
       expect(cfe_result.moe_childcare).to eq 10.0
       expect(cfe_result.moe_maintenance_out).to eq 10.0
       expect(cfe_result.moe_legal_aid).to eq 10.0
