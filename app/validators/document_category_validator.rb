@@ -17,6 +17,8 @@ class DocumentCategoryValidator < ActiveModel::Validator
   ].freeze
 
   def validate(record)
+    return if uncategorised_evidence_attachment?(record)
+
     attr = case record.class.to_s
            when 'Attachment'
              :attachment_type
@@ -30,5 +32,9 @@ class DocumentCategoryValidator < ActiveModel::Validator
 
     record.errors.add attr,
                       I18n.t('activemodel.errors.models.attachment.attributes.attachment_type.invalid', attachment_type: record.__send__(attr))
+  end
+
+  def uncategorised_evidence_attachment?(record)
+    record.is_a?(Attachment) && record.attachment_type == 'uncategorised'
   end
 end

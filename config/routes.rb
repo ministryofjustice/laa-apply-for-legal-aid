@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
     resources :statement_of_cases, only: [:create]
+    resources :uploaded_evidence_collections, only: [:create]
   end
 
   namespace :citizens do
@@ -181,6 +182,7 @@ Rails.application.routes.draw do
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
+      resource :uploaded_evidence_collection, only: %i[show update destroy]
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset

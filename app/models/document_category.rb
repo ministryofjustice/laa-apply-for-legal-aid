@@ -6,7 +6,7 @@ class DocumentCategory < ApplicationRecord
   end
 
   def self.displayable_document_category_names
-    where(display_on_evidence_upload: true).pluck(:name)
+    where(display_on_evidence_upload: true).pluck(:name) + ['uncategorised']
   end
 
   def self.submittable_category_names

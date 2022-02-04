@@ -1,0 +1,45 @@
+<div id="files-errors-container" role="alert" tabindex="-1"></div>
+<% new_head_title = if @successfully_deleted
+                      @successfully_deleted
+                    elsif @error_message || @successful_upload
+                      "#{@successful_upload} #{@error_message}"
+                    else
+                      t('.h1-heading')
+                    end %>
+
+<%= page_template(
+      page_title: t('.h1-heading'),
+      head_title: new_head_title,
+      template: :basic,
+      back_link: { path: providers_legal_aid_application_merits_task_list_path(@legal_aid_application) }
+    ) do %>
+
+  <%= render partial: 'upload_evidence' %>
+
+  <%= form_with(
+        model: @submission_form,
+        url: providers_legal_aid_application_uploaded_evidence_collection_path,
+        method: :patch,
+        local: true
+      ) do |form| %>
+
+    <div id="uploaded-files-table-container">
+      <%= render partial: 'uploaded_files', locals: { attachments: @legal_aid_application.uploaded_evidence_collection.original_attachments } %>
+    </div>
+
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>
+
+<script nonce="<%= content_security_policy_script_nonce %>">
+  window.LAA_VARS = {
+    images: {
+      loading_small: <%= asset_pack_path('media/images/loading-small.gif').to_json.html_safe %>
+    },
+    locales: {
+      generic: {
+        uploading: <%= t('generic.uploading').to_json.html_safe %>
+      }
+    }
+  };
+</script>
