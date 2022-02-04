@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
-    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
+    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
@@ -371,9 +371,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
   end
 
-  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
-  end
-
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "debug_type"
     t.string "legal_aid_application_id"
@@ -556,9 +553,9 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
@@ -607,7 +604,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -708,12 +705,8 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.string "ccms_matter_code"
     t.boolean "involvement_type_applicant"
     t.string "additional_search_terms"
-    t.uuid "default_service_level_id"
-    t.tsvector "textsearchable"
     t.string "name"
     t.index ["code"], name: "index_proceeding_types_on_code"
-    t.index ["default_service_level_id"], name: "index_proceeding_types_on_default_service_level_id"
-    t.index ["textsearchable"], name: "textsearch_idx", using: :gin
   end
 
   create_table "proceedings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
