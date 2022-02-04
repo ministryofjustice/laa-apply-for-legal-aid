@@ -30,7 +30,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     date_of_birth: -> { Faker::Date.birthday },
     national_insurance_number: -> { Faker::Base.regexify(NINO_REGEXP) }
   },
-  application_proceeding_types_linked_children: {},
   application_digests: {},
   attachments: {},
   attempts_to_settles: {
@@ -84,7 +83,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   chances_of_successes: {},
   data_migrations: {},
   debugs: {},
-  default_cost_limitations: {},
   dependants: {
     name: -> { Faker::Name.name }
   },
@@ -151,7 +149,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     statement: -> { Faker::Lorem.sentence }
   },
   secure_data: {},
-  service_levels: {},
   settings: {},
   state_machine_proxies: {},
   transaction_types: {},

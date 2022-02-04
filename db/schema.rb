@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_114732) do
+ActiveRecord::Schema.define(version: 2022_02_04_171301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -132,15 +132,6 @@ ActiveRecord::Schema.define(version: 2022_02_04_114732) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
-  end
-
-  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "involved_child_id", null: false
-    t.uuid "application_proceeding_type_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
-    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
   end
 
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -362,16 +353,6 @@ ActiveRecord::Schema.define(version: 2022_02_04_114732) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "browser_details"
-  end
-
-  create_table "default_cost_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "proceeding_type_id", null: false
-    t.date "start_date", null: false
-    t.string "cost_type", null: false
-    t.decimal "value", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["proceeding_type_id"], name: "index_default_cost_limitations_on_proceeding_type_id"
   end
 
   create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -755,14 +736,6 @@ ActiveRecord::Schema.define(version: 2022_02_04_114732) do
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "service_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "service_level_number"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["service_level_number"], name: "index_service_levels_on_service_level_number"
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
