@@ -241,6 +241,7 @@ jobs:
             ]
           }
   integration_tests:
+    parallelism: 3
     executor: test-executor
     steps:
     - browser-tools/install-chrome
@@ -256,7 +257,10 @@ jobs:
     - *save_js_packages_cache
     - run:
         name: Run integration tests
-        command: bundle exec cucumber --format junit --out /tmp/test-results/cucumber --format pretty
+        command: |
+          TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
+          echo "${TESTFILES}"
+          bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
     - store_artifacts:
         path: tmp/capybara
     - store_test_results:
