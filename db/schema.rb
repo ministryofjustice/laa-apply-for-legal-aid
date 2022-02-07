@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_103950) do
+ActiveRecord::Schema.define(version: 2022_02_07_115210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -776,6 +776,16 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
+  end
+
+  create_table "results_panel_decisions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cfe_result", null: false
+    t.boolean "disregards", default: false
+    t.boolean "restrictions", default: false
+    t.boolean "extra_employment_information", default: false
+    t.string "decision", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
