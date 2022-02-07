@@ -3,13 +3,13 @@
    error_class=nil %>
 
 <%= form.govuk_check_box field_name, true, '', link_errors: true, multiple: false, label: {text: controller_t("check_box_#{name}")} do %>
-  <span class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint") %></span>
+  <div class="govuk-hint"><% t(".#{journey_type}.#{controller_name}.hint") %></div>
   <% (1..number_of_fields).each do |number| %>
     <% error=model.errors.messages["#{name}#{number}".to_sym][0] %>
     <% if error %>
       <% error_class='govuk-form-group--error'
          error_id = "#{model.model_name.to_s.underscore.dasherize}-#{name.dasherize}#{number}" %>
-      <span class='govuk-error-message' id="<% error_id %>"><%= error %></span>
+      <p class='govuk-error-message' id="<% error_id %>"><%= error %></p>
     <% end %>
     <%= form.govuk_text_field "#{name}#{number}",
       label: {text: model.period(number)},

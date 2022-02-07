@@ -26,7 +26,7 @@
         <label class="govuk-label govuk-label--m" id="dropzone-label">
           <%= t('.upload_file') %>
         </label>
-        <span class="govuk-hint"><%= t('.size_hint') %></span>
+        <div class="govuk-hint"><%= t('.size_hint') %></div>
 
         <span class="hidden" aria-hidden="true" id="application-id"><%= @upload_form.model.legal_aid_application_id %></span>
         <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/uploaded_evidence_collections"></span>

@@ -99,7 +99,7 @@ gem 'rails_admin', '~> 2.2', '>= 2.2.1'
 gem 'secure_headers'
 
 # DFE formbuilder
-gem 'govuk_design_system_formbuilder', '>= 2.7.5'
+gem 'govuk_design_system_formbuilder', '>= 3.0.1'
 
 # Sprockets isn't used by the app but is installed by rails as a dependency.
 # Versions >= 4 cause issues if app/assets/config/manifest.js is not present.

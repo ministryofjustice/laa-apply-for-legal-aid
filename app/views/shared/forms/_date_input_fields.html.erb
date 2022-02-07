@@ -22,11 +22,11 @@ accessibility_error_notice = content_tag(:span, I18n.translate('helpers.accessib
       <% end %>
 
       <% if hint.present? %>
-        <%= content_tag(:span, t(".#{field_name}_hint", options: options), id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
+        <%= content_tag(:div, t(".#{field_name}_hint", options: options), id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
       <% end %>
 
       <% if form.object.errors[field_name].any? %>
-          <%= content_tag(:span, class: 'govuk-error-message', id: "#{field_name}-error".dasherize) do %>
+          <%= content_tag(:p, class: 'govuk-error-message', id: "#{field_name}-error".dasherize) do %>
             <%= accessibility_error_notice + form.object.errors[field_name].first %>
           <% end %>
       <% end %>

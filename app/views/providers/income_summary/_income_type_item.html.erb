@@ -19,12 +19,12 @@
 
     <%= t("transaction_types.names.providers.#{name}") %>
     <% if I18n.exists? "transaction_types.hints.#{name}" %>
-      <span class="govuk-hint" style="margin-bottom: 0px">
+      <div class="govuk-hint" style="margin-bottom: 0px">
         <%= t("transaction_types.hints.#{name}") %>
-      </span>
+      </div>
     <% end %>
     <% if error_message %>
-      <span id='<%= "error-#{name}" %>' class="govuk-error-message"><%= error_message %></span>
+      <p id='<%= "error-#{name}" %>' class="govuk-error-message"><%= error_message %></p>
     <% end %>
   </h2>
   <%= content_tag(:div, class: 'app-task-list__items', id: "list-item-#{name}") do %>
