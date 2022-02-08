@@ -3,7 +3,6 @@
   <thead class="govuk-table__head">
   <tr class="govuk-table__row">
     <th class="govuk-table__header" scope="col"><%= t('.filename') %></th>
-    <th class="govuk-table__header" scope="col"><%= t('.size') %></th>
     <th class="govuk-table__header" scope="col"><%= t('.status') %></th>
     <td class="govuk-table__header" scope="col"></td>
   </tr>
@@ -13,7 +12,6 @@
   <% attachments.order(:created_at).each do |attachment| %>
     <tr class="govuk-table__row">
       <td class="govuk-table__cell"><%= attachment.document.filename %></td>
-      <td class="govuk-table__cell no-wrap"><%= number_to_human_size(attachment.document.blob.byte_size) %></td>
       <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
       <td class="govuk-table__cell">
         <%= button_to_accessible(

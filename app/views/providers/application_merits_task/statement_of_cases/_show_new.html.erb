@@ -13,6 +13,8 @@
       back_link: {}
     ) do %>
 
+  <%= render partial: 'shared/partials/delete_notification' if @successfully_deleted %>
+
   <%= form_with(
           model: @form,
           url: providers_legal_aid_application_statement_of_case_path,

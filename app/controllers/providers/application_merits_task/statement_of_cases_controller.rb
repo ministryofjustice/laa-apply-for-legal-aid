@@ -18,7 +18,7 @@ module Providers
 
       def destroy
         original_file = delete_original_and_pdf_files
-        @successfully_deleted = files_deleted_message(original_file.attachment_name) unless original_file.nil?
+        @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
         populate_form
         render :show
       end
@@ -50,13 +50,13 @@ module Providers
       end
 
       def files_deleted_message(deleted_file_name)
-        I18n.t('activemodel.attributes.application_merits_task/statement_of_case.file_deleted', file_name: deleted_file_name)
+        I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
       end
 
       def successful_upload
         return if form.errors.present?
 
-        I18n.t('activemodel.attributes.application_merits_task/statement_of_case.file_uploaded', file_name: form.original_file.original_filename)
+        I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: form.original_file.original_filename)
       end
 
       def convert_new_files_to_pdf
