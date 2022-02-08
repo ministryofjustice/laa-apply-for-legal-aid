@@ -41,8 +41,8 @@ en:
         dob_year: Year
         name: Name
       gateway_evidence:
-        file_uploaded: "You have uploaded %{file_name}"
-        file_deleted: "You have deleted %{file_name}"
+        file_uploaded: "%{file_name} has been successfully uploaded."
+        file_deleted: "%{file_name} has been successfully deleted."
       incident:
         told_day: Day
         told_month: Month
@@ -68,6 +68,9 @@ en:
           child_care: Childcare
           maintenance_out: Maintenance
           legal_aid: Legal aid
+      uploaded_evidence_collection:
+        file_uploaded: "%{file_name} has been successfully uploaded."
+        file_deleted: "%{file_name} has been successfully deleted."
       vehicle:
         purchased_on_day: Day
         purchased_on_month: Month

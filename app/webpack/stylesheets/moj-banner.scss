@@ -32,3 +32,20 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 .moj-banner__message p:last-child {
   margin-bottom: 0;
 }
+
+.moj-banner__assistive {
+  @include govuk-visually-hidden;
+}
+
+/* Style variants
+   ========================================================================== */
+
+.moj-banner--success {
+  border-color: govuk-colour("green");
+  color: govuk-colour("green");
+}
+
+.moj-banner--warning {
+  border-color: govuk-colour("red");
+  color: govuk-colour("red");
+}

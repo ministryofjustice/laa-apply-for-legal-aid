@@ -78,8 +78,6 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('addedfile', file => {
-      console.log(file.type)
-      console.log(file.size)
       setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
     })
     dropzone.on('sending', (file, xhr, formData) => {
@@ -94,8 +92,6 @@ document.addEventListener('DOMContentLoaded', event => {
     dropzone.on('error', (file) => {
       let errorMsg = ''
       if (!ACCEPTED_FILES.includes(file.type)) {
-        console.log(ACCEPTED_FILES.includes(file.type))
-        console.log(ACCEPTED_FILES.includes('.jpeg'))
         errorMsg = ERR_CONTENT_TYPE
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR
