@@ -115,6 +115,42 @@ en:
           - "%{capital_contribution} from their disposable capital"
         line_2: Your client is ineligible for Section 8 proceedings.
         line_3: You still need to provide details of the case before we can grant legal aid.
+      eligible_manual_check_employment:
+        heading: "We need to check if %{name} can get legal aid"
+        line_1: We calculated that your client should pay towards legal aid, but the amount may change because you entered further details about their employment.
+        line_2: A caseworker will review your application and let you know the outcome.
+        line_3: Please continue your application to provide details of the case.
+      manual_check_employment:
+        heading: "We need to check if %{name} can get legal aid"
+        line_1: We calculated that your client should pay towards legal aid, but the amount may change because you entered further details about their employment.
+        line_2: A caseworker will review your application and let you know the outcome.
+        line_3: Please continue your application to provide details of the case.
+      manual_check_disregards_employment:
+        heading: "We need to check if %{name} can get legal aid"
+        line_1: "We've calculated that the client should pay a contribution but a caseworker needs to review the application because the provider:"
+        bullets:
+          - told us their client receives disregarded charity/scheme payments
+          - entered further details about their client’s employment
+        line_2: A caseworker will review your application and let you know the outcome.
+        line_3: Please continue your application to provide details of the case.
+      manual_check_restrictions_employment:
+        heading: "We need to check if %{name} can get legal aid"
+        line_1: "We've calculated that the client should pay a contribution but a caseworker needs to review the application because the provider:"
+        bullets:
+          - told us their client cannot sell or buy against their assets
+          - entered further details about their client’s employment
+        line_2: A caseworker will review your application and let you know the outcome.
+        line_3: Please continue your application to provide details of the case.
+      manual_check_disregards_restrictions_employment:
+        heading: "We need to check if %{name} can get legal aid"
+        line_1: "We've calculated that the client should pay a contribution but a caseworker needs to review the application because the provider:"
+        bullets:
+          - told us their client receives disregarded charity/scheme payments
+          - told us their client cannot sell or buy against their assets
+          - entered further details about their client’s employment
+        line_2: A caseworker will review your application and let you know the outcome.
+        line_3: Please continue your application to provide details of the case.
+
 
     means_report:
       item:

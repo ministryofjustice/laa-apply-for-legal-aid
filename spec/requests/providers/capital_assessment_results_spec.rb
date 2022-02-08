@@ -13,7 +13,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     let(:before_tasks) do
       create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
-
+      ResultsPanelDecisionsPopulator.call
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
       subject
@@ -101,7 +101,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     context 'with restrictions' do
       let(:before_tasks) do
         create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
-
+        ResultsPanelDecisionsPopulator.call
         Setting.setting.update!(manually_review_all_cases: false)
         create :applicant, legal_aid_application: legal_aid_application, first_name: 'Stepriponikas', last_name: 'Bonstart'
         legal_aid_application.update has_restrictions: true, restrictions_details: 'Blah blah'

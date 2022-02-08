@@ -13,6 +13,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
     let(:before_tasks) do
       create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
+      ResultsPanelDecisionsPopulator.call
 
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
@@ -155,6 +156,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
     context 'with restrictions' do
       let(:before_tasks) do
+        ResultsPanelDecisionsPopulator.call
         Setting.setting.update!(manually_review_all_cases: false)
         create :applicant, legal_aid_application: legal_aid_application, first_name: 'Stepriponikas', last_name: 'Bonstart'
         create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
@@ -284,6 +286,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
     context 'enable_employed_journey is true' do
       let(:before_tasks) do
         Setting.setting.update!(enable_employed_journey: true)
+        ResultsPanelDecisionsPopulator.call
         allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
         login_provider
         subject
@@ -323,6 +326,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
     context 'enable_employed_journey is false' do
       let(:before_tasks) do
         Setting.setting.update!(enable_employed_journey: false)
+        ResultsPanelDecisionsPopulator.call
         allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(false)
         login_provider
         subject
