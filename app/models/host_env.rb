@@ -5,7 +5,7 @@ class HostEnv
     case root_url
     when /staging.apply-for-legal-aid.service.justice.gov.uk/
       :staging
-    when /.apps.live-1.cloud-platform.service.justice.gov.uk/
+    when /uat.cloud-platform.service.justice.gov.uk/
       :uat
     when /apply-for-legal-aid.service.justice.gov.uk/
       :production
