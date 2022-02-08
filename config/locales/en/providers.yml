@@ -358,7 +358,7 @@ en:
           h2-heading: Uploaded files
           no_files: Files uploaded will appear here.
           upload_file: Attach a file
-          size_hint: The maximum file size is 7MB. You can attach more than one file.
+          size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
           dropzone_message: Drag and drop files here or
           choose_files_btn: Choose files
           file_not_uploaded_error: Upload the selected file
@@ -446,7 +446,7 @@ en:
         benefit_evidence: evidence that your client receives Universal Credit
         employment_evidence: evidence of your client's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
-        size_hint: The maximum file size is 7MB.
+        size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
         dropzone_message: Drag and drop files here or
         choose_files_btn: Choose files
         file_not_uploaded_error: Upload the selected file
