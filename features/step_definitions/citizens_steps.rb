@@ -26,6 +26,10 @@ Then('I visit the start of the financial assessment in Welsh') do
   click_link('Cymraeg')
 end
 
+Then('I return to English') do
+  click_link('English')
+end
+
 Then('I visit the first question about dependants') do
   visit citizens_legal_aid_application_path(secure_id)
   visit citizens_has_dependants_path
