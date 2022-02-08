@@ -58,7 +58,7 @@ RSpec.describe HostEnv do
     end
 
     context 'uat' do
-      let(:root_url) { 'https://mybranch-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk' }
+      let(:root_url) { 'https://mybranch-applyforlegalaid-uat.apps.live-1.cloud-platform.service.justice.gov.uk' }
       let(:rails_env) { :production }
 
       describe '.environment' do
