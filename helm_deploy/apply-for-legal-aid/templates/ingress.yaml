@@ -19,6 +19,7 @@ spec:
   {{- range .Values.ingress.hosts }}
   - hosts:
     - {{ . }}
+      secretName: {{ .Values.ingress.secretName }}
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
