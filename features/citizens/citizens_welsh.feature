@@ -24,6 +24,8 @@ Feature: Citizen journey in Welsh
     Then I choose 'HSBC'
     Then I click 'eunitnoc dna evaS'
     Then I am directed to TrueLayer
+    When I click the browser back button
+    Then I return to English
 
   @javascript @vcr
   Scenario: Follow citizen journey from Accounts page
@@ -73,6 +75,7 @@ Feature: Citizen journey in Welsh
     Then I should be on a page showing "noitamrofni laicnanif ruoy derahs ev'uoY"
     Then I click the browser back button
     Then I should be on a page showing "tnemssessa laicnanif ruoy detelpmoc ydaerla ev'uoY"
+    Then I return to English
 
   @javascript @vcr
   Scenario: View privacy policy
@@ -80,6 +83,7 @@ Feature: Citizen journey in Welsh
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'ycilop ycavirP'
     Then I should be on a page showing 'esopruP'
+    Then I return to English
 
   @javascript @vcr
   Scenario: View contact information
@@ -87,6 +91,7 @@ Feature: Citizen journey in Welsh
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'tcatnoC'
     Then I should be on a page showing 'su tcatnoC'
+    Then I return to English
 
   @javascript @vcr
   Scenario: View accessibility statement
@@ -94,6 +99,7 @@ Feature: Citizen journey in Welsh
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'tnemetats ytilibisseccA'
     Then I should be on a page showing 'ecivres siht gnisU'
+    Then I return to English
 
   @javascript @vcr
   Scenario: Visit the feedback page
@@ -101,3 +107,4 @@ Feature: Citizen journey in Welsh
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'kcabdeeF'
     Then I should be on a page showing '?ecivres siht esu ot ti saw tluciffid ro ysae woH'
+    Then I return to English

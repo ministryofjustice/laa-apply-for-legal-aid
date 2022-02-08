@@ -12,11 +12,11 @@ cy:
     continue: eunitnoC
     confirm: "?erus uoy erA"
     create_test_applications: snoitacilppa tset etaerC
-    cy: gearmyC
+    cy: Cymraeg
     destroy: yortseD
     edit: tidE
-    en: hsilgnE
-    en-GB: hsilgnE
+    en: English
+    en-GB: EnglishGBForFakerInTests
     enter_text: txet retnE
     errors:
       problem_text: melborp a si erehT
