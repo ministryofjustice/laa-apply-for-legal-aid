@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "apply-for-legal-aid.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- $secretName := .Values.ingress.secretName -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -16,11 +17,14 @@ metadata:
 {{- end }}
 spec:
   tls:
+  {{- range .Values.ingress.hosts }}
   - hosts:
-    - {{ .Values.ingress.host }}
-    secretName: {{ .Values.ingress.secretName }}
+    - {{ . }}
+    secretName: {{ $secretName }}
+  {{- end }}
   rules:
-    - host: {{ .Values.ingress.host }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
       http:
         paths:
           - path: {{ $ingressPath }}
@@ -30,4 +34,5 @@ spec:
                 name: {{ $fullName }}
                 port:
                   name: http
+    {{- end }}
 {{- end }}
