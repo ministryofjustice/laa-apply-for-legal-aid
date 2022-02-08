@@ -406,14 +406,21 @@ workflows:
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
-      - unit_tests:
+      - deploy_staging:
+          context: laa-apply-for-legalaid-staging
           requires:
-          - lint_checks
+            # - integration_tests
+            # - unit_tests
+            - build_and_push
           <<: *generic-slack-fail-post-step
-      - integration_tests:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
+      # - unit_tests:
+      #     requires:
+      #     - lint_checks
+      #     <<: *generic-slack-fail-post-step
+      # - integration_tests:
+      #     requires:
+      #     - lint_checks
+      #     <<: *generic-slack-fail-post-step
       - delete_dependabot_deployment:
           filters:
             branches:
