@@ -40,9 +40,6 @@ en:
         dob_month: Month
         dob_year: Year
         name: Name
-      gateway_evidence:
-        file_uploaded: "%{file_name} has been successfully uploaded."
-        file_deleted: "%{file_name} has been successfully deleted."
       incident:
         told_day: Day
         told_month: Month

@@ -32,9 +32,6 @@ cy:
         first_name: eman tsriF
         last_name: eman tsaL
         national_insurance_number: rebmun ecnarusnI lanoitaN
-      application_merits_task/statement_of_case:
-        file_uploaded: "%{file_name} dedaolpu evah uoY"
-        file_deleted: "%{file_name} deteled evah uoY"
       dependant:
         dob_day: yaD
         dob_month: htnoM
