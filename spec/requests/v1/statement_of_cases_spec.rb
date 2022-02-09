@@ -51,6 +51,30 @@ RSpec.describe 'POST /v1/statement_of_case', type: :request do
           expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match('statement_of_case_2')
         end
       end
+
+      context 'file contains a malware' do
+        let(:file) { uploaded_file('spec/fixtures/files/malware.doc', 'application/pdf') }
+        let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
+
+        it 'does not save the object and raises a 500 error with text' do
+          subject
+          expect(legal_aid_application.reload.attachments.length).to match(0)
+          expect(response.status).to eq 400
+          expect(response.body).to include(I18n.t("#{i18n_error_path}.file_virus"))
+        end
+      end
+
+      context 'virus scanner is down' do
+        before { allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false) }
+        let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
+
+        it 'does not save the object and raises a 500 error with text' do
+          subject
+          expect(legal_aid_application.reload.attachments.length).to match(0)
+          expect(response.status).to eq 400
+          expect(response.body).to include(I18n.t("#{i18n_error_path}.system_down"))
+        end
+      end
     end
 
     context 'when the application does not exist' do

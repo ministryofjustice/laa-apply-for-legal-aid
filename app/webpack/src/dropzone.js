@@ -5,7 +5,6 @@ const screenReaderMessageDelay = 1000 // wait before updating the screenreader m
 const ERR_GENERIC = 'There was a problem uploading your file - try again'
 const FILE_SIZE_ERR = 'The selected file must be smaller than 7MB.'
 const ERR_CONTENT_TYPE = 'The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.'
-// const ERR_VIRUS = 'The selected file contains a virus.'  // TODO: implement malware scanning in the v1 upload endpoint
 const ACCEPTED_FILES = [
   // dropzone checks both the mimetype and the file extension so this list covers everything
   '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf',
@@ -78,8 +77,6 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('addedfile', file => {
-      console.log(file.type)
-      console.log(file.size)
       setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
     })
     dropzone.on('sending', (file, xhr, formData) => {
@@ -91,14 +88,14 @@ document.addEventListener('DOMContentLoaded', event => {
       window.location.reload()
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
     })
-    dropzone.on('error', (file) => {
+    dropzone.on('error', (file, response) => {
       let errorMsg = ''
       if (!ACCEPTED_FILES.includes(file.type)) {
-        console.log(ACCEPTED_FILES.includes(file.type))
-        console.log(ACCEPTED_FILES.includes('.jpeg'))
         errorMsg = ERR_CONTENT_TYPE
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR
+      } else if (response.error!="") {
+        errorMsg = response.error
       } else {
         errorMsg = ERR_GENERIC
       }
