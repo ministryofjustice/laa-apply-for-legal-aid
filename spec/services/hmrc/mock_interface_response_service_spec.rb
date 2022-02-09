@@ -7,6 +7,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   let(:application) { create :legal_aid_application, applicant: applicant }
   let(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid }
   let(:guid) { SecureRandom.uuid }
+  let(:hmrc_data) { hmrc_response.response['data'] }
   let(:not_found_response) do
     {
       submission: guid,
@@ -185,6 +186,37 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
     it 'updates the hmrc_response.response value' do
       expect(hmrc_response.reload.response).to match_json_expression employed_response
+    end
+  end
+
+  context 'when the applicant is known to the mock response service' do
+    context 'and is paid weekly' do
+      let(:applicant) { create :applicant, first_name: 'Jeremy', last_name: 'Irons', national_insurance_number: 'BB313661B', date_of_birth: '1966-06-16' }
+
+      it 'updates the hmrc_response.response value' do
+        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Jeremy'
+        expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
+      end
+    end
+
+    context 'and has multiple employments' do
+      let(:applicant) { create :applicant, first_name: 'Ida', last_name: 'Paisley', national_insurance_number: 'OE726113A', date_of_birth: '1987-11-24' }
+
+      it 'updates the hmrc_response.response value' do
+        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Ida'
+        expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
+        expect(hmrc_data[2]['income/paye/paye']['income'][1]['payFrequency']).to eq 'W1'
+        expect(hmrc_data[16]['employments/paye/employments'].size).to eq 4
+      end
+    end
+
+    context 'and receives tax credits' do
+      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'RE476107D', date_of_birth: '1959-02-22' }
+
+      it 'updates the hmrc_response.response value' do
+        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Oakley'
+        expect(hmrc_data[17]['benefits_and_credits/working_tax_credit/applications'][0]['awards'][0]['totalEntitlement']).not_to be_nil
+      end
     end
   end
 end

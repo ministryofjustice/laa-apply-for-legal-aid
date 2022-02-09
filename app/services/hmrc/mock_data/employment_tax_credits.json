@@ -1,0 +1,264 @@
+{
+  "submission": "@submission_id",
+  "status": "completed",
+  "data": [
+    {
+      "correlation_id": "@submission_id",
+      "use_case": "@use_case_name"
+    },
+    {
+      "individuals/matching/individual": {
+        "firstName": "Oakley",
+        "lastName": "Weller",
+        "nino": "RE476107D",
+        "dateOfBirth": "1959-02-22"
+      }
+    },
+    {
+      "income/paye/paye": {
+        "income": [
+          {
+            "taxYear": "21-22",
+            "payFrequency": "M1",
+            "monthPayNumber": 9,
+            "paymentDate": "2021-12-17",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 18917.75,
+            "taxablePay": 2464.75,
+            "totalTaxToDate": 1896.6,
+            "taxDeductedOrRefunded": 283.4,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 2464.75
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 238.43,
+              "ytd1": 1695.29
+            },
+            "employeeNics": {
+              "inPayPeriod1": 200.13,
+              "ytd1": 1409.39
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "M1",
+            "monthPayNumber": 8,
+            "paymentDate": "2021-11-25",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 16453,
+            "taxablePay": 2464.75,
+            "totalTaxToDate": 1613.2,
+            "taxDeductedOrRefunded": 283.2,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 2464.75
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 238.43,
+              "ytd1": 1456.86
+            },
+            "employeeNics": {
+              "inPayPeriod1": 200.13,
+              "ytd1": 1209.26
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "M1",
+            "monthPayNumber": 7,
+            "paymentDate": "2021-10-25",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 13988.25,
+            "taxablePay": 2112.64,
+            "totalTaxToDate": 1330,
+            "taxDeductedOrRefunded": 212.8,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 2112.64
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 189.84,
+              "ytd1": 1218.43
+            },
+            "employeeNics": {
+              "inPayPeriod1": 157.88,
+              "ytd1": 1009.13
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "M1",
+            "monthPayNumber": 6,
+            "paymentDate": "2021-09-24",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 11875.61,
+            "taxablePay": 1971.8,
+            "totalTaxToDate": 1117.2,
+            "taxDeductedOrRefunded": 184.8,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 1971.8
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 170.4,
+              "ytd1": 1028.59
+            },
+            "employeeNics": {
+              "inPayPeriod1": 140.98,
+              "ytd1": 851.25
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "M1",
+            "monthPayNumber": 5,
+            "paymentDate": "2021-08-25",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 9903.81,
+            "taxablePay": 2016.61,
+            "totalTaxToDate": 932.4,
+            "taxDeductedOrRefunded": 193.6,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 2016.61
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 176.59,
+              "ytd1": 858.19
+            },
+            "employeeNics": {
+              "inPayPeriod1": 146.35,
+              "ytd1": 710.27
+            }
+          }
+        ]
+      }
+    },
+    {
+      "income/sa/selfAssessment": {
+        "registrations": [],
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/pensions_and_state_benefits/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/source/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/employments/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/additional_information/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/partnerships/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/uk_properties/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/foreign/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/further_details/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/interests_and_dividends/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/other/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/summary/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/trusts/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "employments/paye/employments": [
+        {
+          "startDate": "2019-03-12",
+          "endDate": "2099-12-31"
+        }
+      ]
+    },
+    {
+      "benefits_and_credits/working_tax_credit/applications": [
+        {
+          "awards": [
+            {
+              "payProfCalcDate": "2021-07-01",
+              "totalEntitlement": 141224,
+              "workingTaxCredit": {
+                "amount": 0,
+                "paidYTD": 8850
+              },
+              "childTaxCredit": {
+                "childCareAmount": 0
+              },
+              "payments": [
+                {
+                  "startDate": "2021-04-15",
+                  "endDate": "2022-03-31",
+                  "frequency": 7,
+                  "tcType": "ETC",
+                  "amount": 4246
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "benefits_and_credits/child_tax_credit/applications": [
+        {
+          "awards": [
+            {
+              "payProfCalcDate": "2021-07-01",
+              "totalEntitlement": 141224,
+              "childTaxCredit": {
+                "childCareAmount": 0,
+                "ctcChildAmount": 128774,
+                "familyAmount": 12450,
+                "babyAmount": 0,
+                "paidYTD": 177570
+              },
+              "payments": [
+                {
+                  "startDate": "2021-05-27",
+                  "endDate": "2022-03-31",
+                  "frequency": 28,
+                  "tcType": "ICC",
+                  "amount": 55270
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
