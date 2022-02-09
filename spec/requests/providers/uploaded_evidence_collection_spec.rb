@@ -62,15 +62,6 @@ module Providers
       #   expect(attachment.original_filename).to eq 'hello_world.pdf'
       # end
 
-      context 'continue button is pressed' do
-        let(:params_uploaded_evidence_collection) { {} }
-
-        it 'redirects to the next page' do
-          subject
-          expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
-        end
-      end
-
       context 'upload button pressed' do
         let(:params_uploaded_evidence_collection) do
           {
@@ -125,7 +116,7 @@ module Providers
           end
         end
 
-        context 'and there is an error' do
+        context 'with an invalid file type' do
           let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
 
           it 'does not update the record' do
@@ -141,6 +132,21 @@ module Providers
           end
         end
 
+        context 'with an invalid mime type but valid content_type' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+          before do
+            allow(original_file).to receive(:content_type).and_return('application/pdf')
+          end
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+            expect(response.body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
         context 'with invalid uploaded file header' do
           let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') }
 
@@ -151,6 +157,42 @@ module Providers
           it 'updates the record' do
             subject
             expect(uploaded_evidence_collection.original_attachments.first).to be_present
+          end
+        end
+
+        context 'with a file that is too big' do
+          before { allow(File).to receive(:size).and_return(9_437_184) }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
+            expect(response.body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
+        context 'with a file that contains malware' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/malware.doc') }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
+            expect(response.body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
+        context 'with a file that is empty' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/empty_file.pdf', 'application/pdf') }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
+            expect(response.body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
           end
         end
 
@@ -185,101 +227,17 @@ module Providers
 
       context 'Continue button pressed' do
         context 'model has no files attached previously' do
-          context 'file is invalid content type' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
-
-            xit 'does not save the object and it raises an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
-            end
-          end
-
           context 'no files chosen' do
             let(:original_file) { nil }
 
-            xit 'does not add a record' do
+            it 'does not add a record' do
               subject
               expect(legal_aid_application.uploaded_evidence_collection).to be_nil
-            end
-
-            xit 'redirects to the next page' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              # this test will need to check it does not proceed as file upload is required
-              skip
-              subject
-              expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
-            end
-          end
-
-          context 'file is invalid mime type but has valid content_type' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
-            before do
-              allow(original_file).to receive(:content_type).and_return('application/pdf')
-            end
-
-            xit 'does not save the object and it raises an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
-            end
-          end
-
-          context 'file is too big' do
-            before { allow(File).to receive(:size).and_return(9_437_184) }
-
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
-            end
-          end
-
-          context 'file is empty' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/empty_file.pdf', 'application/pdf') }
-
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
-            end
-          end
-
-          context 'file contains a malware' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/malware.doc') }
-
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
             end
           end
         end
       end
 
-      ## TODO these tests need to be reinstated when the validation is addressed
-      ## in ticket https://dsdmoj.atlassian.net/browse/AP-2739
       # context 'Save as draft' do
       #   let(:button_clicked) { { draft_button: 'Save as draft' } }
       #
