@@ -25,6 +25,9 @@
         local: true
       ) do |form| %>
 
+      <%= form.govuk_error_summary if @submission_form %>
+      <%= @submission_form.errors.full_messages if @submission_form %>
+
     <div id="uploaded-files-table-container">
       <%= render partial: 'uploaded_files', locals: { attachments: @legal_aid_application.uploaded_evidence_collection.original_attachments } %>
     </div>

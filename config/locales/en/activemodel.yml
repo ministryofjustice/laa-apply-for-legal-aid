@@ -509,7 +509,7 @@ en:
         uploaded_evidence_collection:
           attributes:
             original_file:
-              benefits_evidence_missing: Upload evidence that your client receives %{benefit}
+              benefit_evidence_missing: Upload evidence that your client receives %{benefit}
               content_type_invalid: The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF
               employment_evidence_missing: Upload evidence of your client's employment
               file_empty: The selected file is empty

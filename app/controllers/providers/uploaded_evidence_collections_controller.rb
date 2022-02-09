@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 module Providers
   class UploadedEvidenceCollectionsController < ProviderBaseController
     def show
@@ -10,12 +11,8 @@ module Providers
       elsif save_or_continue
         convert_new_files_to_pdf
       else
-        # TODO: remove the nocov on the validation ticket
-        # https://dsdmoj.atlassian.net/browse/AP-2739
-        # :nocov:
         populate_upload_form
         render :show
-        # :nocov:
       end
     end
 
@@ -38,16 +35,16 @@ module Providers
     end
 
     def save_or_continue
-      update_attachment_type
-      if submission_form.files?
-        save_continue_or_draft(submission_form)
-      else
-        # TODO: remove the nocov on the validation ticket
-        # https://dsdmoj.atlassian.net/browse/AP-2739
-        # :nocov:
+      no_files = params[:uploaded_evidence_collection].nil?
+      update_attachment_type unless no_files
+      populate_submission_form
+      return false unless submission_form.valid?
+
+      if no_files
         legal_aid_application.reload
         continue_or_draft
-        # :nocov:
+      else
+        save_continue_or_draft(submission_form)
       end
     end
 
@@ -55,6 +52,13 @@ module Providers
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       required_documents
       @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
+      attachment_type_options
+    end
+
+    def populate_submission_form
+      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      required_documents
+      @submission_form = Providers::UploadedEvidenceSubmissionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
     end
 
@@ -71,19 +75,13 @@ module Providers
       render :show
     end
 
-    # TODO: method will need to be changed on the validation ticket
-    # https://dsdmoj.atlassian.net/browse/AP-2739 and the nocov removed
-    # :nocov:
     def convert_new_files_to_pdf
-      # For now we return if it is empty so application can progress to the next page
-      # but the line below will need to be removed
       return if uploaded_evidence_collection.nil?
 
       uploaded_evidence_collection.original_attachments.each do |attachment|
         PdfConverterWorker.perform_async(attachment.id)
       end
     end
-    # :nocov:
 
     def upload_button_pressed?
       params[:upload_button].present?
@@ -94,31 +92,14 @@ module Providers
     end
 
     def submission_form
-      @submission_form ||= Providers::UploadedEvidenceSubmissionForm.new
+      @submission_form ||= Providers::UploadedEvidenceSubmissionForm.new(uploaded_evidence_collection_params)
     end
 
-    # TODO: method will need ot be changed on the validation ticket
-    # https://dsdmoj.atlassian.net/browse/AP-2739 and the :nocov: removed
-    # :nocov:
     def update_attachment_type
-      # # We need to check here for an new_att_type of 'uncategorised'
-      # # and then return a validation error if it exists
-      # params[:uploaded_evidence_collection].each do |att_id, new_att_type|
-      #   if new_att_type == 'uncategorised'
-      #     #  do something here to show a validation error
-      #   else
-      #     Attachment.find(att_id).update(attachment_type: new_att_type)
-      #   end
-      # end
-      # for now return if the params are empty and progress to the next page
-      # the line below will need to be removed on the validation ticket
-      return if params[:uploaded_evidence_collection].nil?
-
       params[:uploaded_evidence_collection].each do |att_id, new_att_type|
         Attachment.find(att_id).update(attachment_type: new_att_type)
       end
     end
-    # :nocov:
 
     def uploaded_evidence_collection_params
       params[:uploaded_evidence_collection] = { original_file: [] } unless params.key?(:uploaded_evidence_collection)
@@ -180,3 +161,4 @@ module Providers
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
