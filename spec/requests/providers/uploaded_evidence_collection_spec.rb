@@ -27,7 +27,7 @@ module Providers
         end
 
         it 'does not display error' do
-          expect(response.body).not_to match 'id="uploaded_evidence_collection-original-file-error"'
+          expect(unescaped_response_body).not_to match 'id="uploaded_evidence_collection-original-file-error"'
         end
       end
     end
@@ -128,7 +128,7 @@ module Providers
           it 'returns error message' do
             subject
             error = I18n.t("#{i18n_error_path}.content_type_invalid")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
           end
         end
 
@@ -142,7 +142,7 @@ module Providers
             uploaded_evidence_collection
             subject
             error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
           end
         end
@@ -167,7 +167,7 @@ module Providers
             uploaded_evidence_collection
             subject
             error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
           end
         end
@@ -179,7 +179,7 @@ module Providers
             uploaded_evidence_collection
             subject
             error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
           end
         end
@@ -191,7 +191,7 @@ module Providers
             uploaded_evidence_collection
             subject
             error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
             expect(uploaded_evidence_collection).to be_nil
           end
         end
@@ -208,7 +208,7 @@ module Providers
           it 'return error message' do
             subject
             error = I18n.t("#{i18n_error_path}.no_file_chosen")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
           end
         end
 
@@ -220,19 +220,202 @@ module Providers
           it 'returns error message' do
             subject
             error = I18n.t("#{i18n_error_path}.system_down")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
           end
         end
       end
 
       context 'Continue button pressed' do
         context 'model has no files attached previously' do
-          context 'no files chosen' do
-            let(:original_file) { nil }
+          context 'no files uploaded' do
+            let(:params_uploaded_evidence_collection) { {} }
 
             it 'does not add a record' do
               subject
               expect(legal_aid_application.uploaded_evidence_collection).to be_nil
+            end
+
+            context 'when no mandatory evidence is required' do
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
+            end
+
+            context 'when mandatory evidence is missing' do
+              let(:attachment_type) { 'gateway_evidence' }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
+
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+            end
+          end
+
+          context 'with a file uploaded' do
+            let(:attachment_type) { 'uncategorised' }
+            let(:attachment) { create :attachment, attachment_name: 'test_file.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:params_uploaded_evidence_collection) { { attachment.id.to_s => attachment.attachment_type.to_s } }
+
+            context 'when all validation rules are satisfied' do
+              let(:attachment_type) { 'gateway_evidence' }
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
+            end
+
+            context 'when the file is uncategorised' do
+              it 'raises an error' do
+                subject
+                error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                expect(unescaped_response_body).to include(error)
+              end
+            end
+
+            context 'when mandatory evidence is missing' do
+              let(:attachment_type) { 'gateway_evidence' }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
+
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when files are uncategorised and mandatory evidence is missing' do
+                let(:attachment_type) { 'uncategorised' }
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises two errors' do
+                  subject
+                  benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                  expect(unescaped_response_body).to include(benefit_error)
+                  expect(unescaped_response_body).to include(uncategorised_error)
+                end
+              end
+            end
+          end
+
+          context 'with multiple files uploaded' do
+            let(:attachment_type) { 'uncategorised' }
+            let(:attachment1) { create :attachment, attachment_name: 'test_file1.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:attachment2) { create :attachment, attachment_name: 'test_file2.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:params_uploaded_evidence_collection) { { attachment1.id.to_s => attachment1.attachment_type.to_s, attachment2.id.to_s => attachment2.attachment_type.to_s } }
+
+            context 'when all validation rules are satisfied' do
+              let(:attachment_type) { 'gateway_evidence' }
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
+            end
+
+            context 'when a file is uncategorised' do
+              it 'raises an error' do
+                subject
+                error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                expect(unescaped_response_body).to include(error)
+              end
+            end
+
+            context 'when mandatory evidence is missing' do
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
+
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                before { attachment1.update!(attachment_type: 'gateway_evidence') }
+                before { attachment2.update!(attachment_type: 'employment_evidence') }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                before { attachment1.update!(attachment_type: 'gateway_evidence') }
+                before { attachment2.update!(attachment_type: 'benefit_evidence') }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when files are uncategorised and mandatory evidence is missing' do
+                let(:missing_categories) { %w[benefit_evidence employment_evidence] }
+
+                it 'raises two errors' do
+                  subject
+                  benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  employment_error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                  expect(unescaped_response_body).to include(benefit_error)
+                  expect(unescaped_response_body).to include(employment_error)
+                  expect(unescaped_response_body).to include(uncategorised_error)
+                end
+              end
             end
           end
         end

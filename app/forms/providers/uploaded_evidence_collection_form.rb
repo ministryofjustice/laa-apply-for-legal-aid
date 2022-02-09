@@ -8,22 +8,14 @@ module Providers
     validate :file_uploaded?
 
     def save
-      return if original_file.nil?
+      return unless original_file
 
       model.save(validate: false) if attachments_made?
     end
 
-    # TODO: method will need to be changed on the validation ticket
-    # https://dsdmoj.atlassian.net/browse/AP-2739 and the nocov removed
-    # :nocov:
     def files?
-      # For now we return if it is empty so application can progress to the next page
-      # but the line below will need to be removed
-      return if files.empty?
-
       original_file.present?
     end
-    # :nocov:
 
     private
 
