@@ -4,8 +4,17 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <% t(".details").each do |detail| %>
-      <p class="govuk-body"><%= detail %></p>
+    <% if @legal_aid_application.cfe_result.assessment_result == 'eligible' %>
+      <p class="govuk-body"><%= t('.line1_eligible') %></p>
+    <% elsif @details.length > 1 %>
+      <p class="govuk-body"><%= t('.line1_multi') %></p>
+      <% @details.each do |detail| %>
+        <p class="govuk-body"><%= t('.detail', detail: detail) %></p>
+      <% end %>
+    <% else %>
+      <p class="govuk-body"><%= t('.line1', detail: @details[0]) %></p>
     <% end %>
+    <p class="govuk-body"><%= t('.line2') %></p>
+    <p class="govuk-body"><%= t('.line3') %></p>
   </div>
 </div>
