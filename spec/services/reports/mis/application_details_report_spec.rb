@@ -53,6 +53,15 @@ module Reports
             report.run
           end
         end
+
+        context 'ApplicationDetailCsvLine exception' do
+          before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, 'fake error') }
+
+          it 'logs the error message' do
+            expect(Rails.logger).to receive(:info).with('ApplicationDetailsReport - generate_csv_string - fake error')
+            report.run
+          end
+        end
       end
     end
   end

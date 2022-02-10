@@ -18,6 +18,9 @@ module Reports
           end
         end
         csv_string
+      rescue StandardError => e
+        log "generate_csv_string - #{e.message}"
+        raise e
       end
 
       def legal_aid_application_ids
@@ -28,6 +31,10 @@ module Reports
         message = "#{err.class} #{err.message}\n#{err.backtrace}"
         Rails.logger.error message
         Sentry.capture_message(message)
+      end
+
+      def log(message)
+        Rails.logger.info "ApplicationDetailsReport - #{message}"
       end
     end
   end
