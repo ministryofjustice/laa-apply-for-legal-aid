@@ -230,8 +230,8 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
         end
       end
 
-      context 'with second application proceeding type' do
-        it 'updates the application proceeding types delegated functions dates' do
+      context 'with second proceeding' do
+        it 'updates the proceedings delegated functions dates' do
           proceeding = proceedings.order(used_delegated_functions_on: :desc).last
           expect(proceeding.used_delegated_functions_reported_on).to eq(today)
           expect(proceeding.used_delegated_functions_on).to eq(used_delegated_functions_on - 1.day)

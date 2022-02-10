@@ -6,11 +6,6 @@ module Providers
       let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
       let(:login_provider) { login_as legal_aid_application.provider }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
-      let(:application_proceeding_type) do
-        create :application_proceeding_type,
-               legal_aid_application: legal_aid_application,
-               proceeding_type: create(:proceeding_type, :as_section_8_child_residence)
-      end
 
       describe 'GET /providers/applications/:legal_aid_application_id/date_client_told_incident' do
         subject do

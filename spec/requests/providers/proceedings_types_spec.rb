@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceedings }
-  let(:application_proceeding_type) { legal_aid_application.application_proceeding_types.first }
   let(:provider) { legal_aid_application.provider }
 
   describe 'index: GET /providers/applications/:legal_aid_application_id/proceedings_types' do
@@ -67,18 +66,6 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
         expect(described_class.new.pre_dwp_check?).to be true
       end
     end
-
-    context 'when application has proceeding types' do
-      let!(:proceeding_type) { create :proceeding_type, legal_aid_applications: [legal_aid_application] }
-      before do
-        login_as provider
-        subject
-      end
-
-      it 'returns http success' do
-        expect(response).to have_http_status(:ok)
-      end
-    end
   end
 
   describe 'create: POST /providers/applications/:legal_aid_application_id/proceedings_types' do
@@ -105,12 +92,17 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
       expect(response.body).to include('govuk-form-group--error')
     end
 
-    context 'with proceeding types' do
-      let!(:proceeding_type) { create :proceeding_type, :with_real_data, legal_aid_applications: [legal_aid_application] }
-      let!(:default_substantive_scope_limitation) { create :scope_limitation, :substantive_default, joined_proceeding_type: proceeding_type, meaning: 'Default substantive SL' }
+    context 'with proceedings' do
+      let!(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_applicant,
+               :with_proceedings,
+               set_lead_proceeding: :da001
+      end
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
       let(:params) do
         {
-          id: proceeding_type.ccms_code,
+          id: proceeding.ccms_code,
           continue_button: 'Continue'
         }
       end
@@ -124,7 +116,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
       end
 
       it 'calls the add proceeding service' do
-        expect(add_proceeding_service).to receive(:call).with(ccms_code: proceeding_type.ccms_code)
+        expect(add_proceeding_service).to receive(:call).with(ccms_code: proceeding.ccms_code)
         subject
       end
 

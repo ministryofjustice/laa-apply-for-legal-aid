@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_103950) do
+ActiveRecord::Schema.define(version: 2022_02_04_171301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
-    t.boolean "employed"
     t.datetime "remember_created_at"
     t.string "remember_token"
+    t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
@@ -132,39 +132,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
-  end
-
-  create_table "application_proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id"
-    t.uuid "proceeding_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "proceeding_case_id"
-    t.boolean "lead_proceeding", default: false, null: false
-    t.date "used_delegated_functions_on"
-    t.date "used_delegated_functions_reported_on"
-    t.index ["legal_aid_application_id"], name: "index_application_proceeding_types_on_legal_aid_application_id"
-    t.index ["proceeding_case_id"], name: "index_application_proceeding_types_on_proceeding_case_id", unique: true
-    t.index ["proceeding_type_id"], name: "index_application_proceeding_types_on_proceeding_type_id"
-  end
-
-  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "involved_child_id", null: false
-    t.uuid "application_proceeding_type_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
-    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
-  end
-
-  create_table "application_proceeding_types_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "application_proceeding_type_id", null: false
-    t.uuid "scope_limitation_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "type"
-    t.index ["scope_limitation_id", "application_proceeding_type_id"], name: "index_scope_limitation_application_proceeding"
-    t.index ["type", "application_proceeding_type_id", "scope_limitation_id"], name: "index_application_proceeding_scope_limitation", unique: true
   end
 
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -388,16 +355,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.string "browser_details"
   end
 
-  create_table "default_cost_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "proceeding_type_id", null: false
-    t.date "start_date", null: false
-    t.string "cost_type", null: false
-    t.decimal "value", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["proceeding_type_id"], name: "index_default_cost_limitations_on_proceeding_type_id"
-  end
-
   create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "number"
@@ -556,9 +513,9 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
@@ -607,7 +564,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "scanner_working"
-    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
+    t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -679,41 +636,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "legal_aid_application_id"
     t.index ["legal_aid_application_id"], name: "index_policy_disregards_on_legal_aid_application_id"
-  end
-
-  create_table "proceeding_type_scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "proceeding_type_id"
-    t.uuid "scope_limitation_id"
-    t.boolean "substantive_default"
-    t.boolean "delegated_functions_default"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["proceeding_type_id", "delegated_functions_default"], name: "index_proceedings_scopes_unique_delegated_default", unique: true, where: "(delegated_functions_default = true)"
-    t.index ["proceeding_type_id", "scope_limitation_id"], name: "index_proceedings_scopes_unique_on_ids", unique: true
-    t.index ["proceeding_type_id", "substantive_default"], name: "index_proceedings_scopes_unique_substantive_default", unique: true, where: "(substantive_default = true)"
-    t.index ["proceeding_type_id"], name: "index_proceeding_type_scope_limitations_on_proceeding_type_id"
-    t.index ["scope_limitation_id"], name: "index_proceeding_type_scope_limitations_on_scope_limitation_id"
-  end
-
-  create_table "proceeding_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "code"
-    t.string "ccms_code"
-    t.string "meaning"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "ccms_category_law"
-    t.string "ccms_category_law_code"
-    t.string "ccms_matter"
-    t.string "ccms_matter_code"
-    t.boolean "involvement_type_applicant"
-    t.string "additional_search_terms"
-    t.uuid "default_service_level_id"
-    t.tsvector "textsearchable"
-    t.string "name"
-    t.index ["code"], name: "index_proceeding_types_on_code"
-    t.index ["default_service_level_id"], name: "index_proceeding_types_on_default_service_level_id"
-    t.index ["textsearchable"], name: "textsearch_idx", using: :gin
   end
 
   create_table "proceedings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -810,29 +732,10 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
     t.string "govuk_message_id"
   end
 
-  create_table "scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "code"
-    t.string "meaning"
-    t.string "description"
-    t.boolean "substantive", default: false
-    t.boolean "delegated_functions", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_scope_limitations_on_code"
-  end
-
   create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "service_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "service_level_number"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["service_level_number"], name: "index_service_levels_on_service_level_number"
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -910,9 +813,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "applicants"
-  add_foreign_key "application_proceeding_types", "legal_aid_applications"
-  add_foreign_key "application_proceeding_types", "proceeding_types"
-  add_foreign_key "attempts_to_settles", "application_proceeding_types"
   add_foreign_key "attempts_to_settles", "proceedings"
   add_foreign_key "bank_account_holders", "bank_providers"
   add_foreign_key "bank_accounts", "bank_providers"
@@ -924,9 +824,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_103950) do
   add_foreign_key "ccms_submission_histories", "ccms_submissions", column: "submission_id"
   add_foreign_key "ccms_submissions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "cfe_submissions", "legal_aid_applications"
-  add_foreign_key "chances_of_successes", "application_proceeding_types"
   add_foreign_key "chances_of_successes", "proceedings"
-  add_foreign_key "default_cost_limitations", "proceeding_types"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "gateway_evidences", "legal_aid_applications"

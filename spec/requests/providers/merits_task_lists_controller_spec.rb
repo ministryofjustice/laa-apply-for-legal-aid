@@ -6,9 +6,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let(:evidence_upload) { false }
 
   let(:proceeding_names) do
-    legal_aid_application.application_proceeding_types.map do |type|
-      ProceedingType.find(type.proceeding_type_id).meaning
-    end
+    legal_aid_application.proceedings.map(&:meaning)
   end
   let(:task_list) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
 

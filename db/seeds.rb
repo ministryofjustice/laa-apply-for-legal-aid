@@ -8,16 +8,11 @@
 Rails.logger.info 'Seeding started'
 Seeder = Dibber::Seeder
 Seeder.monitor AdminUser
-Seeder.monitor ServiceLevel
-Seeder.monitor ProceedingType
-Seeder.monitor ProceedingTypeScopeLimitation
-Seeder.monitor ScopeLimitation
 Seeder.monitor Permission
 Seeder.monitor ActorPermission
 Seeder.monitor Office
 Seeder.monitor Firm
 Seeder.monitor Provider
-Seeder.monitor DefaultCostLimitation
 Seeder.monitor DocumentCategory
 
 Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|

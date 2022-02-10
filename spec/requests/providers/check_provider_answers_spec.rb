@@ -83,7 +83,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         end
 
         before do
-          application.proceedings.each { |proceeding| apt_from_proceeding(proceeding: proceeding) }
           application.reload
         end
 

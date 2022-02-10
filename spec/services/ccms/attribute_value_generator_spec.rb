@@ -44,7 +44,7 @@ module CCMS
         end
 
         context 'proceeding' do
-          let(:my_proceeding) { double ProceedingType }
+          let(:my_proceeding) { double Proceeding }
           let(:options) { { proceeding: my_proceeding } }
           let(:my_name) { 'Non-mol' }
 
