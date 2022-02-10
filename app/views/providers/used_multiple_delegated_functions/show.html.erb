@@ -7,7 +7,7 @@
     <%= page_template page_title: t('.heading'), template: :basic, form: form do %>
 
       <%= form.govuk_check_boxes_fieldset :delegated_functions, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <span id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></span>
+      <div id="select-all-that-apply-hint" class="govuk-hint"><%= t('generic.select_all_that_apply') %></div>
 
       <div class="deselect-group govuk-!-padding-bottom-1" data-deselect-ctrl="#legal-aid-applications-used-multiple-delegated-functions-form-none-selected-true-field">
         <% @proceedings_by_name.each_with_index do |proceeding, index| %>

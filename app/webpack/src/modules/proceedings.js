@@ -13,7 +13,7 @@ let typingTimer,
 async function searchResults (host, searchTerm, excludeCodes) {
   const url = `${host}/proceeding_types/searches`
   const response = await axios({
-    accept:  'application/json',
+    accept: 'application/json',
     responseType: 'json',
     method: 'post',
     url: url,
@@ -22,7 +22,7 @@ async function searchResults (host, searchTerm, excludeCodes) {
       excluded_codes: excludeCodes
     }
   });
-  const data = response.data['data'];
+  const data = response.data.data;
   return updateMatchCounters(data, searchTerm);
 }
 
@@ -115,28 +115,28 @@ function showResults (results, inputText) {
       // const element = $('#' + code)
       const element = document.getElementById(code);
 
-      // We want to highlight anything text in <main> or <span> tags that
+      // We want to highlight anything in the label or hint text that
       // matches the user's search criteria
-      const span = element.querySelector('span');
-      const main = element.querySelectorAll('label')[0];
+      const label = element.querySelector('label');
+      const hint = element.querySelector('.govuk-hint');
 
       // Remove any existing highlighting
-      main.innerHTML = main.innerHTML.replace(/<mark class="highlight">/gi, '');
-      main.innerHTML = main.innerHTML.replace(/<\/mark>/gi, '');
-      span.innerHTML = span.innerHTML.replace(/<mark class="highlight">/gi, '');
-      span.innerHTML = span.innerHTML.replace(/<\/mark>/gi, '');
+      label.innerHTML = label.innerHTML.replace(/<mark class="highlight">/gi, '');
+      label.innerHTML = label.innerHTML.replace(/<\/mark>/gi, '');
+      hint.innerHTML = hint.innerHTML.replace(/<mark class="highlight">/gi, '');
+      hint.innerHTML = hint.innerHTML.replace(/<\/mark>/gi, '');
 
       // Highlight any text that matches the user's input
       const terms = inputText.split(' ')
       terms.forEach((term, index) => {
         if (index === 0) {
           const regExp = RegExp(term.trim(), 'gi');
-          main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-          span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
+          label.innerHTML = label.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+          hint.innerHTML = hint.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>')
         } else {
           const regExp = RegExp(`(?<=(</mark>))( ?${term.trim()})`, 'gi');
-          main.innerHTML = main.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
-          span.innerHTML = span.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+          label.innerHTML = label.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
+          hint.innerHTML = hint.innerHTML.replace(regExp, '<mark class="highlight">$&</mark>');
         }
       })
       // move to top of list, but after previously added elements

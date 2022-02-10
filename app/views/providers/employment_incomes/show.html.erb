@@ -63,7 +63,7 @@
   </div>
 
       <h2 class="govuk-heading-l"><%= t('.supplementary_question') %></h2>
-      <span class="govuk-hint"><%= t('.employment_hint') %></span>
+      <div class="govuk-hint"><%= t('.employment_hint') %></div>
       <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t('generic.yes') } do %>
         <%= form.govuk_text_area :extra_employment_information_details,
                                  label: {text: t('.enter_details')},

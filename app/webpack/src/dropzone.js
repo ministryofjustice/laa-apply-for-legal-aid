@@ -51,22 +51,22 @@ document.addEventListener('DOMContentLoaded', event => {
   const dropzoneElem = document.querySelector('#dropzone-form')
   const statusMessage = document.querySelector(('#file-upload-status-message'))
 
-  const chooseFilesBtn = document.querySelector('#dz-upload-button')
-  chooseFilesBtn.addEventListener('click', (e) => {
-    e.preventDefault() // prevent submitting form by default
-    e.parentElement.click()
-  })
-  // use enter key to add files
-  chooseFilesBtn.addEventListener('keydown', (e) => {
-    const KEY_ENTER = 13
-    if (e.keyCode === KEY_ENTER) {
-      e.parentElement.click()
-    }
-  })
-
   if (dropzoneElem) {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
+    const chooseFilesBtn = document.querySelector('#dz-upload-button')
+
+    chooseFilesBtn.addEventListener('click', (e) => {
+      e.preventDefault() // prevent submitting form by default
+      e.parentElement.click()
+    })
+    // use enter key to add files
+    chooseFilesBtn.addEventListener('keydown', (e) => {
+      const KEY_ENTER = 13
+      if (e.keyCode === KEY_ENTER) {
+        e.parentElement.click()
+      }
+    })
 
     const dropzone = new Dropzone(dropzoneElem, {
       url: url,
