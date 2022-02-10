@@ -30,6 +30,16 @@
                                                options: { selected: attachment.attachment_type } %>
           </div>
         </td>
+        <td class="govuk-table__cell">
+          <%= button_to_accessible(
+                t('.delete'),
+                providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
+                method: :delete,
+                class: 'button-as-link',
+                params: { attachment_id: attachment.id },
+                suffix: attachment.document.filename
+              ) %>
+        </td>
       </tr>
     <% end %>
   <% end %>

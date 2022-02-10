@@ -125,5 +125,12 @@ Feature: Merits task list
     Then I click 'Upload'
     Then I should see 'hello_world.pdf'
     And I should see 'UPLOADED'
+    When I click 'Delete'
+    Then I should see 'hello_world.pdf has been successfully deleted'
+    And I should not see 'UPLOADED'
     When I click 'Save and continue'
+    Then I should be on the 'statement_of_case' page showing 'Attach a file or enter text'
+    When I attach a file
+    And I click 'Upload'
+    And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'

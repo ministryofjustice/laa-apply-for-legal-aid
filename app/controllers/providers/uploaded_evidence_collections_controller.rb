@@ -21,7 +21,7 @@ module Providers
 
     def destroy
       original_file = delete_original_and_pdf_files
-      @successfully_deleted = files_deleted_message(original_file.attachment_name) unless original_file.nil?
+      @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
       populate_upload_form
       render :show
     end
@@ -169,14 +169,14 @@ module Providers
     # with the forms - ticket to be created for this work
     # :nocov:
     def files_deleted_message(deleted_file_name)
-      I18n.t('activemodel.attributes.gateway_evidence.file_deleted', file_name: deleted_file_name)
+      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
     end
     # :nocov:
 
     def successful_upload
       return if upload_form.errors.present?
 
-      I18n.t('activemodel.attributes.gateway_evidence.file_uploaded', file_name: 'File')
+      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: 'File')
     end
   end
 end
