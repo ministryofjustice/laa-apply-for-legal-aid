@@ -43,6 +43,12 @@
       <%= render 'shared/check_answers/income_details' %>
     </section>
 
+    <section class="print-no-break">
+      <% if @legal_aid_application.extra_employment_information? %>
+        <%= render 'shared/check_answers/employed_income', read_only: true %>
+      <% end %>
+    </section>
+
     <div class="govuk-!-padding-bottom-8"></div>
 
     <section class="print-no-break">

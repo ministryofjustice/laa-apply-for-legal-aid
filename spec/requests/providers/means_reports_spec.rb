@@ -76,6 +76,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         expect(unescaped_response_body).not_to include('Income tax')
         expect(unescaped_response_body).not_to include('National insurance')
         expect(unescaped_response_body).not_to include('Fixed employment deduction')
+        expect(unescaped_response_body).not_to include('Employment notes')
       end
     end
 
@@ -83,6 +84,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       let(:before_subject) do
         Setting.setting.update!(enable_employed_journey: true)
         legal_aid_application.applicant.update!(employed: true)
+        legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: 'Made redundant')
       end
 
       context 'when the applicant is employed' do
@@ -91,6 +93,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           expect(unescaped_response_body).to include('Income tax')
           expect(unescaped_response_body).to include('National insurance')
           expect(unescaped_response_body).to include('Fixed employment deduction')
+          expect(unescaped_response_body).to include('Employment notes')
         end
       end
 
@@ -105,6 +108,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           expect(unescaped_response_body).to_not include('Income tax')
           expect(unescaped_response_body).to_not include('National insurance')
           expect(unescaped_response_body).to_not include('Fixed employment deduction')
+          expect(unescaped_response_body).to_not include('Employment notes')
         end
       end
     end
