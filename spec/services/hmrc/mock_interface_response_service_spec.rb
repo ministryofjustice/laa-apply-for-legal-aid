@@ -46,39 +46,91 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           'income/paye/paye': {
             income: [
               {
-                taxYear: '20-21',
+                taxYear: '21-22',
                 payFrequency: 'M1',
-                paymentDate: '2020-12-18',
-                paidHoursWorked: 'D',
-                taxablePayToDate: 16_447.71,
-                totalTaxToDate: 1366.6,
-                dednsFromNetPay: 0,
+                monthPayNumber: 8,
+                paymentDate: '2021-11-30',
+                paidHoursWorked: 'E',
+                taxablePayToDate: 17_666.66,
+                taxablePay: 2083.33,
+                totalTaxToDate: 1848,
+                taxDeductedOrRefunded: 206,
                 grossEarningsForNics: {
-                  inPayPeriod1: 2526
+                  inPayPeriod1: 2083.33
+                },
+                totalEmployerNics: {
+                  inPayPeriod1: 185.79,
+                  ytd1: 1624.32
+                },
+                employeeNics: {
+                  inPayPeriod1: 154.36,
+                  ytd1: 1354.88
                 }
               },
               {
-                taxYear: '20-21',
+                taxYear: '21-22',
                 payFrequency: 'M1',
-                paymentDate: '2020-11-28',
-                paidHoursWorked: 'D',
-                taxablePayToDate: 14_156.63,
-                totalTaxToDate: 1122,
-                dednsFromNetPay: 0,
+                monthPayNumber: 7,
+                paymentDate: '2021-10-29',
+                paidHoursWorked: 'E',
+                taxablePayToDate: 15_583.33,
+                taxablePay: 3083.33,
+                totalTaxToDate: 1642,
+                taxDeductedOrRefunded: 406,
                 grossEarningsForNics: {
-                  inPayPeriod1: 2526
+                  inPayPeriod1: 3083.33
+                },
+                totalEmployerNics: {
+                  inPayPeriod1: 323.79,
+                  ytd1: 1438.53
+                },
+                employeeNics: {
+                  inPayPeriod1: 274.36,
+                  ytd1: 1200.52
                 }
               },
               {
-                taxYear: '20-21',
+                taxYear: '21-22',
                 payFrequency: 'M1',
-                paymentDate: '2020-10-28',
-                paidHoursWorked: 'D',
-                taxablePayToDate: 11_865.55,
-                totalTaxToDate: 877.4,
-                dednsFromNetPay: 0,
+                monthPayNumber: 6,
+                paymentDate: '2021-09-30',
+                paidHoursWorked: 'E',
+                taxablePayToDate: 12_500,
+                taxablePay: 2000,
+                totalTaxToDate: 1236,
+                taxDeductedOrRefunded: 189.4,
                 grossEarningsForNics: {
-                  inPayPeriod1: 2526
+                  inPayPeriod1: 2000
+                },
+                totalEmployerNics: {
+                  inPayPeriod1: 174.29,
+                  ytd1: 1114.74
+                },
+                employeeNics: {
+                  inPayPeriod1: 144.36,
+                  ytd1: 926.16
+                }
+              },
+              {
+                taxYear: '21-22',
+                payFrequency: 'M1',
+                monthPayNumber: 5,
+                paymentDate: '2021-08-31',
+                paidHoursWorked: 'E',
+                taxablePayToDate: 10_500,
+                taxablePay: 1750,
+                totalTaxToDate: 1046.6,
+                taxDeductedOrRefunded: 139.4,
+                grossEarningsForNics: {
+                  inPayPeriod1: 1750
+                },
+                totalEmployerNics: {
+                  inPayPeriod1: 139.79,
+                  ytd1: 940.45
+                },
+                employeeNics: {
+                  inPayPeriod1: 114.36,
+                  ytd1: 781.8
                 }
               }
             ]
@@ -187,13 +239,12 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     it 'updates the hmrc_response.response value' do
       expect(hmrc_response.reload.response).to match_json_expression employed_response
     end
-  end
 
-  context 'when the applicant is known to the mock response service' do
     context 'and is paid weekly' do
-      let(:applicant) { create :applicant, first_name: 'Jeremy', last_name: 'Irons', national_insurance_number: 'BB313661B', date_of_birth: '1966-06-16' }
+      let(:applicant) { create :applicant, first_name: 'Jeremy', last_name: 'Irons', national_insurance_number: 'BB313661B', date_of_birth: '1966-06-06' }
 
       it 'updates the hmrc_response.response value' do
+        ap hmrc_data
         expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Jeremy'
         expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
       end
@@ -211,7 +262,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context 'and receives tax credits' do
-      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'RE476107D', date_of_birth: '1959-02-22' }
+      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'DD476107D', date_of_birth: '1988-08-08' }
 
       it 'updates the hmrc_response.response value' do
         expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Oakley'
