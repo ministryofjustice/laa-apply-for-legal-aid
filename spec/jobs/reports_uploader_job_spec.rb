@@ -4,6 +4,13 @@ RSpec.describe ReportsUploaderJob, type: :job do
   let(:report_uploader) { described_class.new }
   subject { report_uploader.perform }
 
+  describe '#expiration' do
+    subject(:expiration) { report_uploader.expiration }
+    it 'returns 24 hours in seconds' do
+      expect(expiration).to eq 86_400
+    end
+  end
+
   describe '#perform' do
     before do
       allow_any_instance_of(Reports::MIS::ApplicationDetailsReport).to receive(:run).and_return('csv string, application details')

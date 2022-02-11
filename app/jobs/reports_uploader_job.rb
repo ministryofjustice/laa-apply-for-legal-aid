@@ -1,4 +1,5 @@
 class ReportsUploaderJob < ApplicationJob
+  include Sidekiq::Status::Worker
   def perform # rubocop:disable Metrics/AbcSize
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?
@@ -9,6 +10,10 @@ class ReportsUploaderJob < ApplicationJob
     admin_report.save
     log "Application Details report attached as blob with key #{blob.key}, blob_id: #{blob.id}"
     log "AdminReport record updated at #{admin_report.updated_at}"
+  end
+
+  def expiration
+    @expiration ||= 60 * 60 * 24 # Leave the status on the sidekiq output for 24 hours
   end
 
   private
