@@ -443,7 +443,7 @@ en:
     uploaded_evidence_collections:
       upload_evidence:
         list_text: 'Use this page to upload:'
-        benefit_evidence: evidence that your client receives Universal Credit
+        benefit_evidence: evidence that your client receives %{benefit}
         employment_evidence: evidence of your client's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
         size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
