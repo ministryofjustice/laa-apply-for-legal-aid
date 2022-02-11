@@ -6,7 +6,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
 
   describe '#expiration' do
     subject(:expiration) { report_uploader.expiration }
-    it 'returns 24' do
+    it 'returns 24 hours in seconds' do
       expect(expiration).to eq 86_400
     end
   end
