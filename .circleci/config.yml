@@ -143,6 +143,7 @@ jobs:
         command: bin/rails erblint
 
   unit_tests:
+    parallelism: 6
     executor: test-executor
     steps:
     - checkout
@@ -150,6 +151,10 @@ jobs:
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
+    - save_cache:
+        key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - ~/project
     - *setup_database
     - *restore_js_packages_cache
     - *install_js_packages
@@ -165,19 +170,44 @@ jobs:
     - run:
         name: Run ruby tests
         command: |
-          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD) # temp while changing branch name, delete
-          COMMITS_IN_BRANCH=$(git rev-list "$DEFAULT_BRANCH".. --count) # temp while changing branch name, reset to main
-          ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
-          CCMS_FILES_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep "/services/ccms\S*\." || true) | wc -l)
-          CCMS_TESTS_SHOULD_RUN=$(if [ "$CCMS_FILES_CHANGED" -ne "0" ]; then echo true; fi)
-          ./tmp/cc-test-reporter before-build
-          INC_CCMS=$CCMS_TESTS_SHOULD_RUN bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
-          ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/coverage/codeclimate.json
-          ./tmp/cc-test-reporter upload-coverage -i tmp/coverage/codeclimate.json
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+          bundle exec rspec --format progress \
+          --format RspecJunitFormatter \
+          -o /tmp/test-results/rspec/rspec.xml \
+          -- ${TESTFILES}
+
     - store_test_results:
         path: /tmp/test-results/rspec
-    - store_artifacts:
-        path: ./coverage
+
+    - run:
+        name: Stash Coverage Results
+        command: |
+          mkdir coverage_results
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+    - persist_to_workspace:
+        root: .
+        paths:
+          - coverage_results
+
+  coverage:
+    executor: linting-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Merge coverage
+          command: |
+            bundle exec rake simplecov:merge_coverage_results
+      - run:
+          name: Process coverage
+          command: |
+            bundle exec rake simplecov:process_coverage
+      - store_artifacts:
+          path: ~/project/coverage
+          destination: coverage
+
 
   full_unit_tests:
     executor: test-executor
@@ -408,7 +438,11 @@ workflows:
           <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
-          - lint_checks
+            - lint_checks
+          <<: *generic-slack-fail-post-step
+      - coverage:
+          requires:
+            - unit_tests
           <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:

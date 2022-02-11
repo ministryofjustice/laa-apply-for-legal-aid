@@ -21,19 +21,20 @@ require 'sidekiq/testing'
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
 
-SimpleCov.minimum_coverage 100
 unless ENV['NOCOVERAGE']
   SimpleCov.start do
     add_filter 'config/initializers/'
     add_filter 'spec/'
     add_filter 'services/migration_helpers/'
     add_filter 'config/environments/'
-    add_filter 'app/services/ccms/' unless ENV['INC_CCMS'].to_s == 'true'
+    minimum_coverage 100 unless ENV['CIRCLE_JOB']
   end
 
-  SimpleCov.at_exit do
-    say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
-    SimpleCov.result.format!
+  unless ENV['CIRCLE_JOB']
+    SimpleCov.at_exit do
+      say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
+      SimpleCov.result.format!
+    end
   end
 end
 
@@ -68,7 +69,6 @@ end
 
 RSpec.configure do |config|
   config.filter_run_excluding :i18n unless ENV['INC_I18N'].to_s == 'true'
-  config.filter_run_excluding :ccms unless ENV['INC_CCMS'].to_s == 'true'
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
