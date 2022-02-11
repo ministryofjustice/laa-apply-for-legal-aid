@@ -3,10 +3,10 @@ module HMRC
     MATCHED = {
       single_employment: { first_name: 'Langley', last_name: 'Yorke', nino: 'MN212451D', dob: '1992-07-22' },
       multiple_employments: { first_name: 'Ida', last_name: 'Paisley', nino: 'OE726113A', dob: '1987-11-24' },
-      weekly_employment: { first_name: 'Tom', last_name: 'Waits', nino: 'AA268555C', dob: '1955-05-55' },
+      weekly_employment: { first_name: 'Tom', last_name: 'Waits', nino: 'AA268555C', dob: '1955-05-05' },
       four_weekly_employment: { first_name: 'Jeremy', last_name: 'Irons', nino: 'BB313661B', dob: '1966-06-06' },
       monthly_employment: { first_name: 'Stevie', last_name: 'Nicks', nino: 'CC414771C', dob: '1977-07-07' },
-      employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'DD476107D', dob: '1988-08-08' }
+      employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'AB476107D', dob: '1988-08-08' }
     }.freeze
 
     def self.call(*args)

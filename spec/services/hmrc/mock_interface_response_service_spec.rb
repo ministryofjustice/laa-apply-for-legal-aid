@@ -262,7 +262,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context 'and receives tax credits' do
-      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'DD476107D', date_of_birth: '1988-08-08' }
+      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'AB476107D', date_of_birth: '1988-08-08' }
 
       it 'updates the hmrc_response.response value' do
         expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Oakley'
