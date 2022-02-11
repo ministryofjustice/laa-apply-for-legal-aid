@@ -16,10 +16,22 @@
     <div class="govuk-body"><%= t('.list_text') %></div>
 
     <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
-      <% @required_documents.each do |evidence| %>
-        <li><%= evidence == 'benefit_evidence' ? t(".#{evidence}", benefit: @legal_aid_application.dwp_override.passporting_benefit.titleize) : t(".#{evidence}") %></li>
+      <% if @required_documents.size == 1 %>
+        <% if  @legal_aid_application.section_8_proceedings? %>
+          <div class="govuk-body"><%= t('.section_8_evidence') %></div>
+        <% else %>
+          <div class="govuk-body"><%= t('.single_item', evidence_type: @evidence_type_translation) %></div>
+          <% @required_documents.each do |evidence| %>
+            <li><%= evidence == 'benefit_evidence' ? t(".#{evidence}", benefit: @legal_aid_application.dwp_override.passporting_benefit.titleize) : t(".#{evidence}") %></li>
+          <% end %>
+        <% end %>
+      <% else %>
+          <% @required_documents.each do |evidence| %>
+            <li><%= t(".#{evidence}") %></li>
+          <% end %>
+        </ul>
+
       <% end %>
-    </ul>
 
     <div class="govuk-!-padding-bottom-4"></div>
 

@@ -442,6 +442,9 @@ en:
         back_to_your_applications: Back to your applications
     uploaded_evidence_collections:
       upload_evidence:
+        single_item: "Use this page to provide evidence of %{evidence_type}"
+        section_8_evidence: Use this page to provide optional gateway evidence
+        just_some_text: this is what i want to see
         list_text: 'Use this page to upload:'
         benefit_evidence: evidence that your client receives %{benefit}
         employment_evidence: evidence of your client's employment
@@ -457,7 +460,7 @@ en:
         h2-heading: Uploaded files
         upload_file: Upload files
       uploaded_files:
-        title: Files added
+        title: Uploaded files
         filename: Filename
         size: Size
         status: Status
