@@ -68,8 +68,6 @@ VCR.configure do |vcr_config|
 end
 
 RSpec.configure do |config|
-  config.filter_run_excluding :i18n unless ENV['INC_I18N'].to_s == 'true'
-
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
