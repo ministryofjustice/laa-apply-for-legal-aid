@@ -13,10 +13,6 @@ module Providers
       model.save(validate: false) if attachments_made?
     end
 
-    def files?
-      original_file.present?
-    end
-
     private
 
     def create_attachment(original_file)
