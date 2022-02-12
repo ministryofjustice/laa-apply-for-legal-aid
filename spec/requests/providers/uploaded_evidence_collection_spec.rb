@@ -49,19 +49,6 @@ module Providers
 
       before { login_as provider }
 
-      # it 'updates the record' do
-      #   subject
-      #   legal_aid_application.reload
-      #   expect(legal_aid_application.uploaded_evidence_collection.original_attachments.first).to be_present
-      # end
-
-      # it 'stores the original filename' do
-      #   subject
-      #   legal_aid_application.reload
-      #   attachment = uploaded_evidence_collection.original_attachments.first
-      #   expect(attachment.original_filename).to eq 'hello_world.pdf'
-      # end
-
       context 'upload button pressed' do
         let(:params_uploaded_evidence_collection) do
           {
@@ -74,6 +61,13 @@ module Providers
           subject
           legal_aid_application.reload
           expect(uploaded_evidence_collection.original_attachments.count).to eq(1)
+        end
+
+        it 'stores the original filename' do
+          subject
+          legal_aid_application.reload
+          attachment = uploaded_evidence_collection.original_attachments.first
+          expect(attachment.original_filename).to eq 'hello_world.pdf'
         end
 
         it 'returns http success' do
@@ -283,6 +277,9 @@ module Providers
 
             context 'when all validation rules are satisfied' do
               let(:attachment_type) { 'gateway_evidence' }
+
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence']) }
+
               it 'redirects to the next page' do
                 subject
                 expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
@@ -352,6 +349,9 @@ module Providers
 
             context 'when all validation rules are satisfied' do
               let(:attachment_type) { 'gateway_evidence' }
+
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence']) }
+
               it 'redirects to the next page' do
                 subject
                 expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
@@ -421,28 +421,30 @@ module Providers
         end
       end
 
-      # context 'Save as draft' do
-      #   let(:button_clicked) { { draft_button: 'Save as draft' } }
-      #
-      #   it 'updates the record' do
-      #     subject
-      #     expect(uploaded_evidence_collection.original_attachments.first).to be_present
-      #   end
-      #
-      #   it 'redirects to provider draft endpoint' do
-      #     subject
-      #     expect(response).to redirect_to provider_draft_endpoint
-      #   end
-      #
-      #   context 'nothing specified' do
-      #     let(:original_file) { nil }
-      #
-      #     it 'redirects to provider draft endpoint' do
-      #       subject
-      #       expect(response).to redirect_to provider_draft_endpoint
-      #     end
-      #   end
-      # end
+      context 'Save as draft' do
+        let(:button_clicked) { { draft_button: 'Save as draft' } }
+
+        context 'when no files have been uploaded' do
+          it 'updates the record' do
+            subject
+            expect(uploaded_evidence_collection).to be_present
+          end
+        end
+
+        it 'redirects to provider draft endpoint' do
+          subject
+          expect(response).to redirect_to provider_draft_endpoint
+        end
+
+        context 'nothing specified' do
+          let(:original_file) { nil }
+
+          it 'redirects to provider draft endpoint' do
+            subject
+            expect(response).to redirect_to provider_draft_endpoint
+          end
+        end
+      end
     end
 
     describe 'DELETE /providers/applications/:legal_aid_application_id/uploaded_evidence_collection' do

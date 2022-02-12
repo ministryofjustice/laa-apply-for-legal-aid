@@ -8,6 +8,9 @@ module Providers
     def update
       if upload_button_pressed?
         perform_upload
+      elsif draft_button_pressed?
+        populate_submission_form
+        save_continue_or_draft(submission_form)
       elsif save_or_continue
         convert_new_files_to_pdf
       else
@@ -85,6 +88,10 @@ module Providers
 
     def upload_button_pressed?
       params[:upload_button].present?
+    end
+
+    def draft_button_pressed?
+      params[:draft_button].present?
     end
 
     def upload_form
