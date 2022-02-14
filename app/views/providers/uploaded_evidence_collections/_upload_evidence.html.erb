@@ -7,8 +7,7 @@
 
   <%= form.govuk_error_summary %>
 
-  <%= render partial: 'shared/forms/error_summary_hidden', locals: { error_message: t('.file_not_uploaded_error'),
-                                                              field_id: 'uploaded-evidence-collection-original-file-field' } %>
+  <%= render partial: 'shared/forms/error_summary_hidden', locals: { field_id: 'uploaded-evidence-collection-original-file-field' } %>
 
   <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
