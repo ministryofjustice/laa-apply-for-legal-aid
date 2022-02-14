@@ -27,7 +27,9 @@ class UploadedEvidenceCollection < ApplicationRecord
     mandatory_evidence_types.each do |type|
       next if categorised_evidence_types.include?(type)
 
-      errors.add("uploaded_files_table_container#{type}", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit))
+      errors.add("uploaded_files_table_container#{type}",
+                 I18n.t("#{error_path}.#{type}_missing",
+                        benefit: legal_aid_application.dwp_override.passporting_benefit.titleize))
     end
 
     mandatory_evidence_types.all? { |mandatory_type| categorised_evidence_types.include?(mandatory_type) }
@@ -43,10 +45,6 @@ class UploadedEvidenceCollection < ApplicationRecord
 
   def categorised_evidence_types
     original_attachments.pluck(:attachment_type).uniq
-  end
-
-  def passporting_benefit
-    legal_aid_application.dwp_override ? legal_aid_application.dwp_override.passporting_benefit.titleize : nil
   end
 
   def error_path
