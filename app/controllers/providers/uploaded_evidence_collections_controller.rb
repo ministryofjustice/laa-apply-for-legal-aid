@@ -11,6 +11,8 @@ module Providers
       elsif draft_button_pressed?
         populate_submission_form
         save_continue_or_draft(submission_form)
+      elsif delete_button_pressed?
+        destroy
       elsif save_or_continue
         convert_new_files_to_pdf
       else
@@ -94,6 +96,10 @@ module Providers
       params[:draft_button].present?
     end
 
+    def delete_button_pressed?
+      params[:delete_button].present?
+    end
+
     def upload_form
       @upload_form ||= Providers::UploadedEvidenceCollectionForm.new(uploaded_evidence_collection_params)
     end
@@ -119,10 +125,6 @@ module Providers
       @uploaded_evidence_collection ||= legal_aid_application.uploaded_evidence_collection || legal_aid_application.build_uploaded_evidence_collection
     end
 
-    # TODO: remove the nocov on a future ticket
-    # delete function has been removed due to limitations
-    # with the forms - ticket to be created for this work
-    # :nocov:
     def delete_original_and_pdf_files
       original_attachment = Attachment.find(attachment_id)
       delete_attachment(Attachment.find(original_attachment.pdf_attachment_id)) if original_attachment.pdf_attachment_id.present?
@@ -130,17 +132,11 @@ module Providers
     rescue StandardError
       original_attachment
     end
-    # :nocov:
 
-    # TODO: remove the nocov on a future ticket
-    # delete function has been removed due to limitations
-    # with the forms - ticket to be created for this work
-    # :nocov:
     def delete_attachment(attachment)
       attachment.document.purge_later
       attachment.destroy
     end
-    # :nocov:
 
     def attachment_id
       params[:attachment_id]
@@ -152,14 +148,9 @@ module Providers
       "#{I18n.t('accessibility.problem_text')} #{upload_form.errors.messages[:original_file].first}"
     end
 
-    # TODO: remove the nocov on a future ticket
-    # delete function has been removed due to limitations
-    # with the forms - ticket to be created for this work
-    # :nocov:
     def files_deleted_message(deleted_file_name)
       I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
     end
-    # :nocov:
 
     def successful_upload
       return if upload_form.errors.present?

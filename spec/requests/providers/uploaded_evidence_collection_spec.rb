@@ -42,6 +42,7 @@ module Providers
       end
       let(:draft_button) { { draft_button: 'Save as draft' } }
       let(:upload_button) { { upload_button: 'Upload' } }
+      let(:delete_button) { { delete_button: 'Delete' } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
 
@@ -422,7 +423,7 @@ module Providers
       end
 
       context 'Save as draft' do
-        let(:button_clicked) { { draft_button: 'Save as draft' } }
+        let(:button_clicked) { draft_button }
 
         context 'when no files have been uploaded' do
           it 'updates the record' do
@@ -445,22 +446,28 @@ module Providers
           end
         end
       end
-    end
 
-    describe 'DELETE /providers/applications/:legal_aid_application_id/uploaded_evidence_collection' do
-      let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
-      let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
-      let(:original_file) { uploaded_evidence_collection.original_attachments.first }
-      let(:params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
-      subject { delete providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
+      context 'Delete' do
+        let(:button_clicked) { delete_button }
+        let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
+        let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
+        let(:original_file) { uploaded_evidence_collection.original_attachments.first }
+        let(:delete_params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
 
-      before do
-        login_as provider
-      end
+        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
 
-      shared_examples_for 'deleting a file' do
+        before do
+          allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence'])
+          login_as provider
+        end
+
+        it 'returns http success' do
+          subject
+          expect(response).to have_http_status(:ok)
+        end
+
         context 'when only original file exists' do
-          xit 'deletes the file' do
+          it 'deletes the file' do
             attachment_id = original_file.id
             expect { subject }.to change { Attachment.count }.by(-1)
             expect(Attachment.exists?(attachment_id)).to be(false)
@@ -470,31 +477,20 @@ module Providers
         context 'when a PDF exists' do
           let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_and_pdf_files_attached }
 
-          xit 'deletes both attachments' do
-            # Validation works when JS is disabled
-            # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-            # Delete button has been removed in this PR but needs to be reinstated
-            skip
+          it 'deletes both attachments' do
             expect { subject }.to change { Attachment.count }.by(-2)
           end
         end
-      end
 
-      xit 'returns http success' do
-        subject
-        expect(response).to have_http_status(:ok)
-      end
+        context 'when file not found' do
+          let(:delete_params) { { attachment_id: :unknown } }
 
-      context 'when file not found' do
-        let(:params) { { attachment_id: :unknown } }
-
-        it 'returns http success' do
-          subject
-          expect(response).to have_http_status(:ok)
+          it 'returns http success' do
+            subject
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
-
-      it_behaves_like 'deleting a file'
     end
   end
 end
