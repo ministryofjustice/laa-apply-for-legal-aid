@@ -2,6 +2,7 @@
 module Providers
   class UploadedEvidenceCollectionsController < ProviderBaseController
     def show
+      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       populate_upload_form
     end
 
@@ -43,7 +44,7 @@ module Providers
       no_files = params[:uploaded_evidence_collection].nil?
       update_attachment_type unless no_files
       populate_submission_form
-      return false unless submission_form.valid?
+      return false unless submission_form.model.valid?
 
       if no_files
         legal_aid_application.reload
@@ -54,17 +55,13 @@ module Providers
     end
 
     def populate_upload_form
-      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       required_documents
       @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
     end
 
     def populate_submission_form
-      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
-      required_documents
       @submission_form = Providers::UploadedEvidenceSubmissionForm.new(model: uploaded_evidence_collection)
-      attachment_type_options
     end
 
     def perform_upload
