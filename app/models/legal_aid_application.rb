@@ -459,6 +459,11 @@ class LegalAidApplication < ApplicationRecord
     hmrc_responses.any?(&:employment_income?)
   end
 
+  def uploaded_evidence_by_category
+    out = uploaded_evidence_collection.original_attachments.group_by(&:attachment.attachment_type)
+    out.transform_values { |category, attachment| [category, attachment.map(&:original_filename)] }.to_h
+  end
+
   private
 
   def bank_transactions_by_type(type)
