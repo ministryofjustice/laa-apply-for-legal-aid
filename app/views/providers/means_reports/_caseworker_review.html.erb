@@ -5,7 +5,7 @@
       <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
         <%= t(".required") %>
       </dt>
-      <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+      <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>">
         <%= yes_no(manual_review_determiner.manual_review_required?) %>
       </dd>
     </div>
@@ -16,7 +16,7 @@
         <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
           <%= t(".reasons") %>
         </dt>
-        <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+        <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>">
           <% manual_review_determiner.review_reasons.each do |reason| %>
             <%= t(".reason.#{reason}") %>
             <br>
@@ -29,7 +29,7 @@
           <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
             <%= t(".category-#{reason}") %>
           </dt>
-          <dd class="<%= "govuk-summary-list__value align-text-right" %>">
+          <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>">
             <% categories.each do |category| %>
               <%= t(".category.#{category}") %>
               <br>

@@ -16,14 +16,16 @@
   <%= check_answer_no_link(
         name: :extra_employment_information,
         question: t('.employment_question'),
-        answer: safe_yes_or_no(@legal_aid_application.extra_employment_information?)
+        answer: safe_yes_or_no(@legal_aid_application.extra_employment_information?),
+        read_only: read_only
       ) %>
 
   <% if @legal_aid_application.extra_employment_information? %>
     <%= check_answer_no_link(
           name: :extra_employment_information_details,
           question: t('.employment_details'),
-          answer: @legal_aid_application.extra_employment_information_details
+          answer: @legal_aid_application.extra_employment_information_details,
+          read_only: read_only
         ) %>
   <% end %>
 </dl>

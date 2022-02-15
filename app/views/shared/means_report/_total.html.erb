@@ -2,7 +2,8 @@
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
     <%= t(".#{name}") %>
   </dt>
-  <dd class="govuk-summary-list__value align-text-right">
+  <!--  in-line styling due to issues around pdf generation in our production envs -->
+  <dd class="govuk-summary-list__value govuk-!-text-align-right">
     <%= gds_number_to_currency(@cfe_result.__send__(value_method)) %>
   </dd>
 </div>
