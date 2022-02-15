@@ -135,6 +135,12 @@ jobs:
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
+    - *restore_js_packages_cache
+    - *install_js_packages
+    - *save_js_packages_cache
+    - run:
+        name: Run JavaScript tests
+        command: bin/rails javascript_tests
     - run:
         name: Run Rubocop
         command:  bundle exec rubocop
@@ -159,9 +165,6 @@ jobs:
     - *restore_js_packages_cache
     - *install_js_packages
     - *save_js_packages_cache
-    - run:
-        name: Run JavaScript tests
-        command: bin/rails javascript_tests
     - run:
         name: Setup Code Climate test-reporter
         command: |
