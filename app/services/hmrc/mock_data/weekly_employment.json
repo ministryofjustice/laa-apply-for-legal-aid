@@ -1,0 +1,490 @@
+{
+  "submission": "@submission_id",
+  "status": "completed",
+  "data": [
+    {
+      "correlation_id": "@submission_id",
+      "use_case": "@use_case_name"
+    },
+    {
+      "individuals/matching/individual": {
+        "firstName": "Tom",
+        "lastName": "Waits",
+        "nino": "AA268555C",
+        "dateOfBirth": "1955-05-05"
+      }
+    },
+    {
+      "income/paye/paye": {
+        "income": [
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W4",
+            "weekPayNumber": 36,
+            "paymentDate": "2021-12-10",
+            "paidHoursWorked": "A",
+            "taxablePayToDate": 770.78,
+            "taxablePay": 770.78,
+            "totalTaxToDate": 154,
+            "taxDeductedOrRefunded": 154,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 770.78
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 12.53,
+              "ytd1": 12.53
+            },
+            "employeeNics": {
+              "inPayPeriod1": 4.17,
+              "ytd1": 4.17
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 33,
+            "paymentDate": "2021-11-19",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 500,
+            "taxablePay": 500,
+            "totalTaxToDate": 51.6,
+            "taxDeductedOrRefunded": 51.6,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 500
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 45.54,
+              "ytd1": 45.54
+            },
+            "employeeNics": {
+              "inPayPeriod1": 37.92,
+              "ytd1": 37.92
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 32,
+            "paymentDate": "2021-11-12",
+            "paidHoursWorked": "A",
+            "taxablePayToDate": 983.78,
+            "taxablePay": 110.99,
+            "totalTaxToDate": 16,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 110.99
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 29.87
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 21.23
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 31,
+            "paymentDate": "2021-11-05",
+            "paidHoursWorked": "A",
+            "taxablePayToDate": 872.79,
+            "taxablePay": 146.31,
+            "totalTaxToDate": 16,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 146.31
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 29.87
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 21.23
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 31,
+            "paymentDate": "2021-11-05",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 1455,
+            "taxablePay": 0,
+            "totalTaxToDate": 22.8,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 0
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 51.06
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 36.48
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 30,
+            "paymentDate": "2021-10-29",
+            "paidHoursWorked": "B",
+            "taxablePayToDate": 726.48,
+            "taxablePay": 221.98,
+            "totalTaxToDate": 16,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 221.98
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 7.17,
+              "ytd1": 29.87
+            },
+            "employeeNics": {
+              "inPayPeriod1": 4.56,
+              "ytd1": 21.23
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 30,
+            "paymentDate": "2021-10-29",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 1455,
+            "taxablePay": 35,
+            "totalTaxToDate": 22.8,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 35
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 51.06
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 36.48
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 29,
+            "paymentDate": "2021-10-22",
+            "paidHoursWorked": "D",
+            "taxablePayToDate": 504.5,
+            "taxablePay": 322.88,
+            "totalTaxToDate": 16,
+            "taxDeductedOrRefunded": 16,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 322.88
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 21.1,
+              "ytd1": 22.7
+            },
+            "employeeNics": {
+              "inPayPeriod1": 16.67,
+              "ytd1": 16.67
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 27,
+            "paymentDate": "2021-10-08",
+            "paidHoursWorked": "B",
+            "taxablePayToDate": 181.62,
+            "taxablePay": 181.62,
+            "totalTaxToDate": 0,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 181.62
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 1.6,
+              "ytd1": 1.6
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 26,
+            "paymentDate": "2021-10-01",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 1420,
+            "taxablePay": 200,
+            "totalTaxToDate": 22.8,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 200
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 4.14,
+              "ytd1": 51.06
+            },
+            "employeeNics": {
+              "inPayPeriod1": 1.92,
+              "ytd1": 36.48
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 25,
+            "paymentDate": "2021-09-24",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 1220,
+            "taxablePay": 180,
+            "totalTaxToDate": 22.8,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 180
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 1.38,
+              "ytd1": 46.92
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 34.56
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 24,
+            "paymentDate": "2021-09-17",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 1040,
+            "taxablePay": 300,
+            "totalTaxToDate": 22.8,
+            "taxDeductedOrRefunded": 11.6,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 300
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 17.94,
+              "ytd1": 45.54
+            },
+            "employeeNics": {
+              "inPayPeriod1": 13.92,
+              "ytd1": 34.56
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 23,
+            "paymentDate": "2021-09-10",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 740,
+            "taxablePay": 270,
+            "totalTaxToDate": 11.2,
+            "taxDeductedOrRefunded": 5.6,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 270
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 13.8,
+              "ytd1": 27.6
+            },
+            "employeeNics": {
+              "inPayPeriod1": 10.32,
+              "ytd1": 20.64
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 22,
+            "paymentDate": "2021-09-03",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 470,
+            "taxablePay": 100,
+            "totalTaxToDate": 5.6,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 100
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 13.8
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 10.32
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 21,
+            "paymentDate": "2021-08-27",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 370,
+            "taxablePay": 0,
+            "totalTaxToDate": 5.6,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 0
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 13.8
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 10.32
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 21,
+            "paymentDate": "2021-08-27",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 370,
+            "taxablePay": 100,
+            "totalTaxToDate": 5.6,
+            "taxDeductedOrRefunded": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 100
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 13.8
+            },
+            "employeeNics": {
+              "inPayPeriod1": 0,
+              "ytd1": 10.32
+            }
+          },
+          {
+            "taxYear": "21-22",
+            "payFrequency": "W1",
+            "weekPayNumber": 20,
+            "paymentDate": "2021-08-20",
+            "paidHoursWorked": "E",
+            "taxablePayToDate": 270,
+            "taxablePay": 270,
+            "totalTaxToDate": 5.6,
+            "taxDeductedOrRefunded": 5.6,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 270
+            },
+            "totalEmployerNics": {
+              "inPayPeriod1": 13.8,
+              "ytd1": 13.8
+            },
+            "employeeNics": {
+              "inPayPeriod1": 10.32,
+              "ytd1": 10.32
+            }
+          }
+        ]
+      }
+    },
+    {
+      "income/sa/selfAssessment": {
+        "registrations": [],
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/pensions_and_state_benefits/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/source/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/employments/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/additional_information/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/partnerships/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/uk_properties/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/foreign/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/further_details/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/interests_and_dividends/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/other/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/summary/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "income/sa/trusts/selfAssessment": {
+        "taxReturns": []
+      }
+    },
+    {
+      "employments/paye/employments": [
+        {
+          "startDate": "2021-11-11",
+          "endDate": "2099-12-31"
+        },
+        {
+          "startDate": "2021-09-28",
+          "endDate": "2099-12-31"
+        },
+        {
+          "startDate": "2021-04-21",
+          "endDate": "2022-04-05"
+        },
+        {
+          "startDate": "2021-08-18",
+          "endDate": "2021-10-29"
+        }
+      ]
+    },
+    {
+      "benefits_and_credits/working_tax_credit/applications": [
+        {
+          "awards": []
+        }
+      ]
+    },
+    {
+      "benefits-and-credits/child-tax-credit": "returned INTERNAL_SERVER_ERROR"
+    }
+  ]
+}

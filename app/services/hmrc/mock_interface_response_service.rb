@@ -1,7 +1,12 @@
 module HMRC
   class MockInterfaceResponseService
     MATCHED = {
-      single_employment: { first_name: 'Langley', last_name: 'Yorke', nino: 'MN212451D', dob: '1992-07-22' }
+      single_employment: { first_name: 'Langley', last_name: 'Yorke', nino: 'MN212451D', dob: '1992-07-22' },
+      multiple_employments: { first_name: 'Ida', last_name: 'Paisley', nino: 'OE726113A', dob: '1987-11-24' },
+      weekly_employment: { first_name: 'Tom', last_name: 'Waits', nino: 'AA268555C', dob: '1955-05-05' },
+      four_weekly_employment: { first_name: 'Jeremy', last_name: 'Irons', nino: 'BB313661B', dob: '1966-06-06' },
+      monthly_employment: { first_name: 'Stevie', last_name: 'Nicks', nino: 'CC414771C', dob: '1977-07-07' },
+      employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'AB476107D', dob: '1988-08-08' }
     }.freeze
 
     def self.call(*args)
@@ -31,7 +36,8 @@ module HMRC
 
     def applicant_matched?
       applicant_found = MATCHED.key({ first_name: first_name, last_name: last_name, nino: national_insurance_number, dob: date_of_birth.strftime('%Y-%m-%d') })
-      return send(applicant_found) unless applicant_found.nil?
+
+      return collate_response(applicant_found) unless applicant_found.nil?
     end
 
     def unknown_response
@@ -50,8 +56,8 @@ module HMRC
       }
     end
 
-    def single_employment
-      json_file = File.read('app/services/hmrc/mock_data/single_employment.json')
+    def collate_response(scenario)
+      json_file = File.read("app/services/hmrc/mock_data/#{scenario}.json")
       JSON.parse(json_file.gsub('@submission_id', @submission_id).gsub('@use_case_name', "use_case_#{@hmrc_response.use_case}"))
     end
   end
