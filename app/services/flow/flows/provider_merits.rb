@@ -49,6 +49,7 @@ module Flow
           }
         },
         date_client_told_incidents: {
+          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponents,
           check_answers: :check_merits_answers
         },
