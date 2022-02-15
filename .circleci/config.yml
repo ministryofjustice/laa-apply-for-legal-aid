@@ -208,68 +208,6 @@ jobs:
           path: ~/project/coverage
           destination: coverage
 
-
-  full_unit_tests:
-    executor: test-executor
-    steps:
-    - checkout
-    - *decrypt_secrets
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
-    - *setup_database
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
-    - run:
-        name: Run ruby tests
-        command: INC_CCMS=true INC_I18N=true bundle exec rspec --format progress --format RspecJunitFormatter -o /tmp/test-results/rspec/rspec.xml
-    - store_test_results:
-        path: /tmp/test-results/rspec
-    - store_artifacts:
-        path: ./coverage
-    - slack/notify:
-        event: fail
-        custom: |
-          {
-            "blocks": [
-              {
-                "type": "section",
-                "fields": [
-                  {
-                    "type": "mrkdwn",
-                    "text": ":circleci: :nope: The full CCMS run has failed. Run: \n\n `INC_CCMS=true bundle exec rspec --tag ccms` \n\n locally to trace and resolve the issue."
-                  }
-                ]
-              },
-              {
-                "type": "section",
-                "fields": [
-                  {
-                    "type": "mrkdwn",
-                    "text": "*Project*: $CIRCLE_PROJECT_REPONAME"
-                  },
-                  {
-                    "type": "mrkdwn",
-                    "text": "*Mentions*: @here"
-                  }
-                ]
-              },
-              {
-                "type": "actions",
-                "elements": [
-                  {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "View Job"
-                    },
-                    "url": "${CIRCLE_BUILD_URL}"
-                  }
-                ]
-              }
-            ]
-          }
   integration_tests:
     parallelism: 3
     executor: test-executor
@@ -553,13 +491,3 @@ workflows:
             only: main
     jobs:
     - clean_up_ecr
-
-  full_ccms_unit_test_run:
-    triggers:
-    - schedule:
-        cron: "15 2 * * *"
-        filters:
-          branches:
-            only: main
-    jobs:
-    - full_unit_tests
