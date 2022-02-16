@@ -28,10 +28,6 @@ Given('multiple applications have been submitted') do
     :with_applicant,
     provider: create(:provider)
   )
-  # create :application,
-  #        :with_applicant,
-  #        provider: create(:provider)
-  # binding.pry unless Applicant.count > 0
 end
 
 Given(/^I visit the admin applications page$/) do
