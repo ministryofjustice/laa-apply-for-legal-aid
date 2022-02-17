@@ -244,7 +244,6 @@ RSpec.describe HMRC::MockInterfaceResponseService do
       let(:applicant) { create :applicant, first_name: 'Jeremy', last_name: 'Irons', national_insurance_number: 'BB313661B', date_of_birth: '1966-06-06' }
 
       it 'updates the hmrc_response.response value' do
-        ap hmrc_data
         expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Jeremy'
         expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
       end
