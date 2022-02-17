@@ -460,8 +460,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def uploaded_evidence_by_category
-    out = uploaded_evidence_collection.original_attachments.group_by(&:attachment.attachment_type)
-    out.transform_values { |category, attachment| [category, attachment.map(&:original_filename)] }.to_h
+    return if uploaded_evidence_collection.nil?
+
+    out = uploaded_evidence_collection.original_attachments.group_by(&:attachment_type)
+    out.map{ |category, attachment| [category, attachment.map { |a| a.original_filename } ] }.to_h
   end
 
   private
