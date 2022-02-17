@@ -1249,7 +1249,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'uploaded_evidence_by_category' do
     let(:laa) { create :legal_aid_application }
-    let(:evidence) { create :uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa }
+    let!(:evidence) { create :uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa }
+    before { DocumentCategory.populate }
 
     context 'no evidence has been uploaded' do
       before { laa.uploaded_evidence_collection = nil }
@@ -1260,9 +1261,8 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'evidence has been uploaded' do
-
       it 'returns a hash of evidence filenames grouped by category' do
-        expect(laa.reload.uploaded_evidence_by_category).to equal(uploaded_evidence_output)
+        expect(laa.uploaded_evidence_by_category).to eq(uploaded_evidence_output)
       end
     end
   end
@@ -1271,8 +1271,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
   def uploaded_evidence_output
     {
-      benefit_evidence: ['Fake Benefit Evidence 1', 'Fake Benefit Evidence 2'],
-      gateway_evidence: ['Fake Gateway Evidence 1', 'Fake Gateway Evidence 2']
+      'benefit_evidence' => ['Fake Benefit Evidence 1', 'Fake Benefit Evidence 2'],
+      'gateway_evidence' => ['Fake Gateway Evidence 1', 'Fake Gateway Evidence 2']
     }
   end
 end
