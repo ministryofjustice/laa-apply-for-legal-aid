@@ -61,32 +61,16 @@ cy:
         - You still need to provide details of the case before we can decide if they’re
           eligible.
       manual_check_required:
-        heading: dia lagel sdrawot yap dluohs %{name} fi kcehc ot deen eW
-        details:
-        - You told us legal restrictions prevent your client from selling or borrowing
-          against their assets.
-        - We calculated that your client should pay a contribution, but the amount
-          depends on the restrictions.
-        - We’ll check the details you provided and let you know our decision.
-      manual_check_disregards:
-        heading: dia lagel teg nac %{name} fi kcehc ot deen eW
-        details:
-        - We calculated that your client should pay a contribution towards legal aid.
-        - The amount depends on whether or not the scheme or charity payments they've
-          received are disregarded from the financial eligibility calculation
-        - A caseworker will review this and let you know the outcome.
-        - Please continue with the application to provide details of the case.
-      manual_check_disregards_restrictions:
-        heading: dia lagel teg nac %{name} fi kcehc ot deen eW
-        line1: ":no sdneped tnuoma eht tub dia lagel sdrawot noitubirtnoc a yap dluohs
-          tneilc ruoy taht detaluclac eW"
-        bullets:
-        - whether or not the scheme or charity payments they've received are disregarded
-          from the financial eligibility calculation
-        - the legal restrictions preventing them from selling or borrowing against
-          their assets
-        line2: ".emoctuo eht wonk uoy tel dna dedivorp uoy sliated eht kcehc ll'eW"
-        line3: ".esac eht fo sliated edivorp ot noitacilppa eht htiw eunitnoc esaelP"
+        heading: "dia lagel teg nac %{name} fi kcehc ot deen eW"
+        line1_multi: ":esuaceb egnahc yam tnuoma eht tub ,dia lagel sdrawot yap dluohs tneilc ruoy taht detaluclac eW"
+        line1_eligible: ".tnemyolpme rieht tuoba sliated rehtruf deretne uoy esuaceb egnahc yam siht tub ,dia lagel sdrawot yap ot deen ton seod tneilc ruoy taht detaluclac eW"
+        line1: "%{detail} esuaceb egnahc yam tnuoma eht tub ,dia lagel sdrawot yap dluohs tneilc ruoy taht detaluclac eW"
+        detail: "- %{detail}"
+        line2: ".emoctuo eht wonk uoy tel dna noitacilppa ruoy weiver lliw rekrowesac A"
+        line3: ".esac eht fo sliated edivorp ot noitacilppa ruoy eunitnoC"
+        restrictions: "stessa rieht tsniaga gniworrob ro gnilles morf detibihorp er'yeht"
+        policy_disregards: "stnemyap ytirahc ro emehcs dedragersid deviecer yeht"
+        extra_employment_information: "tnemyolpme rieht tuoba sliated rehtruf deretne uoy"
       capital_and_income_contribution_required:
         heading: dia lagel sdrawot yap ot deen yam %{name}
         line_1: ":yap dluohs tneilc ruoy taht detaluclac ev'eW"
