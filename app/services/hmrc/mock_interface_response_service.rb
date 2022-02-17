@@ -6,7 +6,8 @@ module HMRC
       weekly_employment: { first_name: 'Tom', last_name: 'Waits', nino: 'AA268555C', dob: '1955-05-05' },
       four_weekly_employment: { first_name: 'Jeremy', last_name: 'Irons', nino: 'BB313661B', dob: '1966-06-06' },
       monthly_employment: { first_name: 'Stevie', last_name: 'Nicks', nino: 'CC414771C', dob: '1977-07-07' },
-      employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'AB476107D', dob: '1988-08-08' }
+      employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'AB476107D', dob: '1988-08-08' },
+      eligible_employment: { first_name: 'Leanne', last_name: 'Conway', nino: 'JA827365B', dob: '1977-03-08' }
     }.freeze
 
     def self.call(*args)

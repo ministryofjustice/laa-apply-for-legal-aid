@@ -1,0 +1,193 @@
+{
+    "submission": "@submission_id",
+    "status": "completed",
+    "data": [
+      {
+        "correlation_id": "@submission_id",
+        "use_case": "@use_case_name"
+      },
+      {
+        "individuals/matching/individual": {
+          "firstName": "Leanne",
+          "lastName": "Conway",
+          "nino": "JA827365B",
+          "dateOfBirth": "1977-03-08"
+        }
+      },
+      {
+        "income/paye/paye": {
+          "income": [
+            {
+              "taxYear": "21-22",
+              "payFrequency": "M1",
+              "monthPayNumber": 8,
+              "paymentDate": "2021-11-30",
+              "paidHoursWorked": "E",
+              "taxablePayToDate": 1766.66,
+              "taxablePay": 208.33,
+              "totalTaxToDate": 184,
+              "taxDeductedOrRefunded": 20,
+              "grossEarningsForNics": {
+                "inPayPeriod1": 208.33
+              },
+              "totalEmployerNics": {
+                "inPayPeriod1": 18.79,
+                "ytd1": 162.32
+              },
+              "employeeNics": {
+                "inPayPeriod1": 15.36,
+                "ytd1": 135.88
+              }
+            },
+            {
+              "taxYear": "21-22",
+              "payFrequency": "M1",
+              "monthPayNumber": 7,
+              "paymentDate": "2021-10-29",
+              "paidHoursWorked": "E",
+              "taxablePayToDate": 1558.33,
+              "taxablePay": 308.33,
+              "totalTaxToDate": 164,
+              "taxDeductedOrRefunded": 40,
+              "grossEarningsForNics": {
+                "inPayPeriod1": 308.33
+              },
+              "totalEmployerNics": {
+                "inPayPeriod1": 32.79,
+                "ytd1": 143.53
+              },
+              "employeeNics": {
+                "inPayPeriod1": 27.36,
+                "ytd1": 120.52
+              }
+            },
+            {
+              "taxYear": "21-22",
+              "payFrequency": "M1",
+              "monthPayNumber": 6,
+              "paymentDate": "2021-09-30",
+              "paidHoursWorked": "E",
+              "taxablePayToDate": 1250,
+              "taxablePay": 200,
+              "totalTaxToDate": 123,
+              "taxDeductedOrRefunded": 18.4,
+              "grossEarningsForNics": {
+                "inPayPeriod1": 200
+              },
+              "totalEmployerNics": {
+                "inPayPeriod1": 17.29,
+                "ytd1": 111.74
+              },
+              "employeeNics": {
+                "inPayPeriod1": 14.36,
+                "ytd1": 92.16
+              }
+            },
+            {
+              "taxYear": "21-22",
+              "payFrequency": "M1",
+              "monthPayNumber": 5,
+              "paymentDate": "2021-08-31",
+              "paidHoursWorked": "E",
+              "taxablePayToDate": 1050,
+              "taxablePay": 175,
+              "totalTaxToDate": 104.6,
+              "taxDeductedOrRefunded": 13.4,
+              "grossEarningsForNics": {
+                "inPayPeriod1": 175
+              },
+              "totalEmployerNics": {
+                "inPayPeriod1": 13.79,
+                "ytd1": 94.45
+              },
+              "employeeNics": {
+                "inPayPeriod1": 11.36,
+                "ytd1": 78.8
+              }
+            }
+          ]
+        }
+      },
+      {
+        "income/sa/selfAssessment": {
+          "registrations": [],
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/pensions_and_state_benefits/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/source/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/employments/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/additional_information/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/partnerships/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/uk_properties/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/foreign/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/further_details/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/interests_and_dividends/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/other/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/summary/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "income/sa/trusts/selfAssessment": {
+          "taxReturns": []
+        }
+      },
+      {
+        "employments/paye/employments": [
+          {
+            "startDate": "2017-07-24",
+            "endDate": "2099-12-31"
+          }
+        ]
+      },
+      {
+        "benefits_and_credits/working_tax_credit/applications": []
+      },
+      {
+        "benefits_and_credits/child_tax_credit/applications": []
+      }
+    ]
+  }
+  

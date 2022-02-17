@@ -547,7 +547,7 @@ Feature: Civil application journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'We need to check if'
-    And I should be on a page showing 'whether or not the scheme or charity payments'
+    And I should be on a page showing 'they received disregarded scheme or charity payments'
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
     When I click link 'Latest incident details'
@@ -680,7 +680,7 @@ Feature: Civil application journeys
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'We need to check if Test Walker should pay towards legal aid'
+    Then I should be on a page showing 'We need to check if Test Walker can get legal aid'
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
     When I click link 'Latest incident details'
