@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', event => {
       // send the legal_aid_application id in the form data
       formData.append('legal_aid_application_id', applicationId)
     })
-    dropzone.on('success', () => {
+    dropzone.on('queuecomplete',() => {
       // refresh the page to see the uploaded files
       window.location.reload()
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
