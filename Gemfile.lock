@@ -7,12 +7,13 @@ GIT
 
 GIT
   remote: https://github.com/glebm/i18n-tasks.git
-  revision: d51327cb48870f984303da55fe1a0605cf0e70d3
+  revision: d7ae6e6e9158ae7581c1e36079eb32117d4aa77f
   branch: main
   specs:
     i18n-tasks (0.9.37)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
+      better_html (~> 1.0)
       erubi
       highline (>= 2.0.0)
       i18n
