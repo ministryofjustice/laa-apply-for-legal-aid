@@ -148,11 +148,11 @@ module Providers
             subject
             expect(response).to redirect_to provider_draft_endpoint
           end
-        end
 
-        it 'does not set the task to complete' do
-          subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+          it 'does not set the task to complete' do
+            subject
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+          end
         end
       end
     end

@@ -49,6 +49,7 @@ module Flow
           }
         },
         date_client_told_incidents: {
+          path: ->(application) { urls.providers_legal_aid_application_date_client_told_incident_path(application) },
           forward: :opponents,
           check_answers: :check_merits_answers
         },
@@ -63,6 +64,10 @@ module Flow
           check_answers: :check_merits_answers
         },
         chances_of_success: {
+          path: ->(application) do
+            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            urls.providers_merits_task_list_chances_of_success_index_path(proceeding)
+          end,
           forward: ->(application) do
             proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
             if proceeding.chances_of_success.success_likely?
