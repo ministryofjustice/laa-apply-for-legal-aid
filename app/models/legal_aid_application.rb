@@ -163,7 +163,8 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def evidence_is_required?
-    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?('KSEC8') } || employment_evidence_required? || dwp_override
+    RequiredDocumentCategoryAnalyser.call(self)
+    required_document_categories.any?
   end
 
   def cfe_result

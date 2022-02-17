@@ -69,6 +69,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :children_proceeding)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :attempts_to_settle)
+        DocumentCategory.populate
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
@@ -82,9 +83,30 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       context 'when setting is enabled' do
         let(:evidence_upload) { true }
 
-        it 'should redirect to the new upload evidence page' do
-          expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
+        context 'when at least one evidence type is required' do
+          it 'should redirect to the new upload evidence page' do
+            expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
+          end
         end
+      end
+    end
+
+    context 'when evidence upload setting is on but no documents required' do
+      let(:evidence_upload) { true }
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001] }
+      let(:task_list) { create :legal_framework_merits_task_list, :da001, legal_aid_application: legal_aid_application }
+
+      before do
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
+        patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+      end
+
+      it 'redirects to the check merits answers page' do
+        expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
       end
     end
 
