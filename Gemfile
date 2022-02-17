@@ -152,7 +152,7 @@ group :test do
   gem 'shoulda-matchers', '~> 5.1'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
-  gem 'vcr'
+  gem 'vcr', github: 'vcr/vcr', branch: 'master'
   gem 'webdrivers', '~> 5.0', '>= 5.0.0'
   gem 'webmock'
 end
