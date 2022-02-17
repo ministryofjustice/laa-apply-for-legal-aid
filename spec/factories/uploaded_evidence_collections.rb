@@ -45,23 +45,23 @@ FactoryBot.define do
 
     trait :with_multiple_evidence_types_attached do
       after :create do |ge|
-        gateway_evidence_1 = ge.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence',
-                                                                      attachment_name: 'uploaded_evidence_collection',
-                                                                      original_filename: 'Fake Gateway Evidence 1')
-        gateway_evidence_2 = ge.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence',
-                                                                        attachment_name: 'uploaded_evidence_collection_1',
-                                                                        original_filename: 'Fake Gateway Evidence 2')
-        benefits_evidence_1 = ge.legal_aid_application.attachments.create!(attachment_type: 'benefit_evidence',
-                                                                        attachment_name: 'uploaded_evidence_collection_2',
-                                                                        original_filename: 'Fake Benefit Evidence 1')
-        benefits_evidence_2 = ge.legal_aid_application.attachments.create!(attachment_type: 'benefit_evidence',
-                                                                        attachment_name: 'uploaded_evidence_collection_3',
-                                                                        original_filename: 'Fake Benefit Evidence 2')
+        gateway_evidence1 = ge.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence',
+                                                                         attachment_name: 'uploaded_evidence_collection',
+                                                                         original_filename: 'Fake Gateway Evidence 1')
+        gateway_evidence2 = ge.legal_aid_application.attachments.create!(attachment_type: 'gateway_evidence',
+                                                                         attachment_name: 'uploaded_evidence_collection_1',
+                                                                         original_filename: 'Fake Gateway Evidence 2')
+        benefits_evidence1 = ge.legal_aid_application.attachments.create!(attachment_type: 'benefit_evidence',
+                                                                          attachment_name: 'uploaded_evidence_collection_2',
+                                                                          original_filename: 'Fake Benefit Evidence 1')
+        benefits_evidence2 = ge.legal_aid_application.attachments.create!(attachment_type: 'benefit_evidence',
+                                                                          attachment_name: 'uploaded_evidence_collection_3',
+                                                                          original_filename: 'Fake Benefit Evidence 2')
         filepath = Rails.root.join('spec/fixtures/files/documents/hello_world.pdf')
-        gateway_evidence_1.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
-        gateway_evidence_2.document.attach(io: File.open(filepath), filename: 'hello_world1.pdf', content_type: 'application/pdf')
-        benefits_evidence_1.document.attach(io: File.open(filepath), filename: 'hello_world2.pdf', content_type: 'application/pdf')
-        benefits_evidence_2.document.attach(io: File.open(filepath), filename: 'hello_world3.pdf', content_type: 'application/pdf')
+        gateway_evidence1.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
+        gateway_evidence2.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
+        benefits_evidence1.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
+        benefits_evidence2.document.attach(io: File.open(filepath), filename: 'hello_world.pdf', content_type: 'application/pdf')
       end
     end
   end
