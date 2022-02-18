@@ -54,13 +54,13 @@ RSpec.describe 'POST /v1/statement_of_case', type: :request do
 
       context 'file contains a malware' do
         let(:file) { uploaded_file('spec/fixtures/files/malware.doc', 'application/pdf') }
-        let(:i18n_error_path) { 'activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file' }
+        let(:i18n_error_message) { I18n.t('activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file.file_virus', file_name: 'malware.doc') }
 
         it 'does not save the object and raises a 500 error with text' do
           subject
           expect(legal_aid_application.reload.attachments.length).to match(0)
           expect(response.status).to eq 400
-          expect(response.body).to include(I18n.t("#{i18n_error_path}.file_virus"))
+          expect(response.body).to include(i18n_error_message)
         end
       end
 
