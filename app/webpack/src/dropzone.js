@@ -24,14 +24,13 @@ const ACCEPTED_FILES = [
 function addErrorMessage (msg) {
   // this adds an error message to the gov uk error summary and shows the errors
   const errorSummary = document.querySelector('.govuk-error-summary')
-  const li = errorSummary.querySelector('li')
-  let a = li.querySelector('a')
-  if (a === null) {
-    a = document.createElement('a')
-    li.appendChild(a)
-  }
+  const ul = errorSummary.querySelector('ul');
+  let li = document.createElement('li');
+  let a = document.createElement('a');
+  li.appendChild(a);
+  ul.appendChild(li);
   // add text and link to field
-  a.innerText = msg
+  a.innerText += msg
   a.setAttribute('aria-label', msg)
   a.setAttribute('data-turbolinks', false)
   a.setAttribute('href', '#dz-upload-button')
@@ -39,7 +38,10 @@ function addErrorMessage (msg) {
   const dropzoneElem = document.querySelector('#dropzone-form-group')
   dropzoneElem.classList.add('govuk-form-group--error')
   const fieldErrorMsg = document.querySelector('#dropzone-error')
-  fieldErrorMsg.innerText = msg
+  let div = document.createElement('div');
+  div.innerText = msg;
+  fieldErrorMsg.appendChild(div);
+  // fieldErrorMsg.innerText += msg
   fieldErrorMsg.classList.remove('hidden')
   // show the error summary and move focus to it
   errorSummary.classList.remove('hidden')
@@ -50,7 +52,6 @@ function addErrorMessage (msg) {
 document.addEventListener('DOMContentLoaded', event => {
   const dropzoneElem = document.querySelector('#dropzone-form')
   const statusMessage = document.querySelector(('#file-upload-status-message'))
-
   if (dropzoneElem) {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
@@ -83,9 +84,18 @@ document.addEventListener('DOMContentLoaded', event => {
       // send the legal_aid_application id in the form data
       formData.append('legal_aid_application_id', applicationId)
     })
+    dropzone.on('success',(file) => {
+      dropzone.removeFile(file);
+    })
     dropzone.on('queuecomplete',() => {
-      // refresh the page to see the uploaded files
-      window.location.reload()
+      // reload the partial to see the uploaded files
+      const fileSection = document.querySelector('#uploaded-files-table-container')
+      let url = window.location.pathname +'/list';
+      let xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", url, false ); // false for synchronous request
+      xmlHttp.send( null );
+      const response = xmlHttp.responseText;
+      fileSection.innerHTML = response;
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
     })
     dropzone.on('error', (file, response) => {
