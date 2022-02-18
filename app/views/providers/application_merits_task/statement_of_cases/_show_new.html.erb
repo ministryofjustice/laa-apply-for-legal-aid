@@ -80,12 +80,12 @@
         <h2 class="govuk-heading-m"><%= t('.h2-heading') %></h2>
         <div id="uploaded-files-table-container">
           <%= render partial: 'uploaded_files', locals: { attachments: @form.model.original_attachments } %>
+          <% if @form.model.original_attachments.empty? %>
+            <p class="govuk-body">
+              <%= t('.no_files') %>
+            </p>
+          <% end %>
         </div>
-        <% if @form.model.original_attachments.empty? %>
-          <p class="govuk-body">
-            <%= t('.no_files') %>
-          </p>
-        <% end %>
       </div>
 
       <div aria-live="assertive" class="govuk-visually-hidden" id="file-upload-status-message"></div>
