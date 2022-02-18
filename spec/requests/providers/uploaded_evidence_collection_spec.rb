@@ -27,7 +27,7 @@ module Providers
         end
 
         it 'does not display error' do
-          expect(response.body).not_to match 'id="uploaded_evidence_collection-original-file-error"'
+          expect(unescaped_response_body).not_to match 'id="uploaded_evidence_collection-original-file-error"'
         end
       end
     end
@@ -42,34 +42,13 @@ module Providers
       end
       let(:draft_button) { { draft_button: 'Save as draft' } }
       let(:upload_button) { { upload_button: 'Upload' } }
+      let(:delete_button) { { delete_button: 'Delete' } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
 
       subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
 
       before { login_as provider }
-
-      # it 'updates the record' do
-      #   subject
-      #   legal_aid_application.reload
-      #   expect(legal_aid_application.uploaded_evidence_collection.original_attachments.first).to be_present
-      # end
-
-      # it 'stores the original filename' do
-      #   subject
-      #   legal_aid_application.reload
-      #   attachment = uploaded_evidence_collection.original_attachments.first
-      #   expect(attachment.original_filename).to eq 'hello_world.pdf'
-      # end
-
-      context 'continue button is pressed' do
-        let(:params_uploaded_evidence_collection) { {} }
-
-        it 'redirects to the next page' do
-          subject
-          expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
-        end
-      end
 
       context 'upload button pressed' do
         let(:params_uploaded_evidence_collection) do
@@ -83,6 +62,13 @@ module Providers
           subject
           legal_aid_application.reload
           expect(uploaded_evidence_collection.original_attachments.count).to eq(1)
+        end
+
+        it 'stores the original filename' do
+          subject
+          legal_aid_application.reload
+          attachment = uploaded_evidence_collection.original_attachments.first
+          expect(attachment.original_filename).to eq 'hello_world.pdf'
         end
 
         it 'returns http success' do
@@ -125,7 +111,7 @@ module Providers
           end
         end
 
-        context 'and there is an error' do
+        context 'with an invalid file type' do
           let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
 
           it 'does not update the record' do
@@ -137,7 +123,22 @@ module Providers
           it 'returns error message' do
             subject
             error = I18n.t("#{i18n_error_path}.content_type_invalid")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
+          end
+        end
+
+        context 'with an invalid mime type but valid content_type' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+          before do
+            allow(original_file).to receive(:content_type).and_return('application/pdf')
+          end
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+            expect(unescaped_response_body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
           end
         end
 
@@ -154,6 +155,42 @@ module Providers
           end
         end
 
+        context 'with a file that is too big' do
+          before { allow(File).to receive(:size).and_return(9_437_184) }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
+            expect(unescaped_response_body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
+        context 'with a file that contains malware' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/malware.doc') }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
+            expect(unescaped_response_body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
+        context 'with a file that is empty' do
+          let(:original_file) { uploaded_file('spec/fixtures/files/empty_file.pdf', 'application/pdf') }
+
+          it 'does not save the object and raises an error' do
+            uploaded_evidence_collection
+            subject
+            error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
+            expect(unescaped_response_body).to include(error)
+            expect(uploaded_evidence_collection).to be_nil
+          end
+        end
+
         context 'no file chosen' do
           let(:original_file) { nil }
 
@@ -166,7 +203,7 @@ module Providers
           it 'return error message' do
             subject
             error = I18n.t("#{i18n_error_path}.no_file_chosen")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
           end
         end
 
@@ -178,146 +215,259 @@ module Providers
           it 'returns error message' do
             subject
             error = I18n.t("#{i18n_error_path}.system_down")
-            expect(response.body).to include(error)
+            expect(unescaped_response_body).to include(error)
           end
         end
       end
 
       context 'Continue button pressed' do
         context 'model has no files attached previously' do
-          context 'file is invalid content type' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+          context 'no files uploaded' do
+            let(:params_uploaded_evidence_collection) { {} }
 
-            xit 'does not save the object and it raises an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
-            end
-          end
-
-          context 'no files chosen' do
-            let(:original_file) { nil }
-
-            xit 'does not add a record' do
+            it 'does not add a record' do
               subject
               expect(legal_aid_application.uploaded_evidence_collection).to be_nil
             end
 
-            xit 'redirects to the next page' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              # this test will need to check it does not proceed as file upload is required
-              skip
-              subject
-              expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+            context 'when no mandatory evidence is required' do
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
+            end
+
+            context 'when mandatory evidence is missing' do
+              let(:attachment_type) { 'gateway_evidence' }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
+
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
             end
           end
 
-          context 'file is invalid mime type but has valid content_type' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
-            before do
-              allow(original_file).to receive(:content_type).and_return('application/pdf')
+          context 'with a file uploaded' do
+            let(:attachment_type) { 'uncategorised' }
+            let(:attachment) { create :attachment, attachment_name: 'test_file.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:params_uploaded_evidence_collection) { { attachment.id.to_s => attachment.attachment_type.to_s } }
+
+            context 'when all validation rules are satisfied' do
+              let(:attachment_type) { 'gateway_evidence' }
+
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence']) }
+
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
             end
 
-            xit 'does not save the object and it raises an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
+            context 'when the file is uncategorised' do
+              it 'raises an error' do
+                subject
+                error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                expect(unescaped_response_body).to include(error)
+              end
+            end
+
+            context 'when mandatory evidence is missing' do
+              let(:attachment_type) { 'gateway_evidence' }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
+
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when files are uncategorised and mandatory evidence is missing' do
+                let(:attachment_type) { 'uncategorised' }
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                it 'raises two errors' do
+                  subject
+                  benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                  expect(unescaped_response_body).to include(benefit_error)
+                  expect(unescaped_response_body).to include(uncategorised_error)
+                end
+              end
             end
           end
 
-          context 'file is too big' do
-            before { allow(File).to receive(:size).and_return(9_437_184) }
+          context 'with multiple files uploaded' do
+            let(:attachment_type) { 'uncategorised' }
+            let(:attachment1) { create :attachment, attachment_name: 'test_file1.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:attachment2) { create :attachment, attachment_name: 'test_file2.pdf', attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:params_uploaded_evidence_collection) { { attachment1.id.to_s => attachment1.attachment_type.to_s, attachment2.id.to_s => attachment2.attachment_type.to_s } }
 
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_too_big", size: 7, file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
+            context 'when all validation rules are satisfied' do
+              let(:attachment_type) { 'gateway_evidence' }
+
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence']) }
+
+              it 'redirects to the next page' do
+                subject
+                expect(response).to redirect_to providers_legal_aid_application_check_merits_answers_path(legal_aid_application)
+              end
             end
-          end
 
-          context 'file is empty' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/empty_file.pdf', 'application/pdf') }
-
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_empty", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
+            context 'when a file is uncategorised' do
+              it 'raises an error' do
+                subject
+                error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                expect(unescaped_response_body).to include(error)
+              end
             end
-          end
 
-          context 'file contains a malware' do
-            let(:original_file) { uploaded_file('spec/fixtures/files/malware.doc') }
+            context 'when mandatory evidence is missing' do
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let(:missing_categories) { [] }
 
-            xit 'does not save the object and raise an error' do
-              # Validation works when JS is disabled
-              # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-              skip
-              subject
-              error = I18n.t("#{i18n_error_path}.file_virus", file_name: original_file.original_filename)
-              expect(response.body).to include(error)
-              expect(uploaded_evidence_collection).to be_nil
+              before do
+                allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(missing_categories)
+                allow_any_instance_of(LegalAidApplication).to receive(:required_document_categories).and_return(missing_categories)
+                allow_any_instance_of(UploadedEvidenceCollection).to receive(:mandatory_evidence_types).and_return(missing_categories)
+                legal_aid_application.reload
+              end
+
+              context 'when benefits evidence is required' do
+                let(:missing_categories) { ['benefit_evidence'] }
+
+                before { attachment1.update!(attachment_type: 'gateway_evidence') }
+                before { attachment2.update!(attachment_type: 'employment_evidence') }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when employment evidence is required' do
+                let(:missing_categories) { ['employment_evidence'] }
+
+                before { attachment1.update!(attachment_type: 'gateway_evidence') }
+                before { attachment2.update!(attachment_type: 'benefit_evidence') }
+
+                it 'raises an error' do
+                  subject
+                  error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  expect(unescaped_response_body).to include(error)
+                end
+              end
+
+              context 'when files are uncategorised and mandatory evidence is missing' do
+                let(:missing_categories) { %w[benefit_evidence employment_evidence] }
+
+                it 'raises two errors' do
+                  subject
+                  benefit_error = I18n.t("#{i18n_error_path}.benefit_evidence_missing", benefit: 'Universal Credit')
+                  employment_error = I18n.t("#{i18n_error_path}.employment_evidence_missing")
+                  uncategorised_error = I18n.t("#{i18n_error_path}.uncategorised_evidence")
+                  expect(unescaped_response_body).to include(benefit_error)
+                  expect(unescaped_response_body).to include(employment_error)
+                  expect(unescaped_response_body).to include(uncategorised_error)
+                end
+              end
             end
           end
         end
       end
 
-      ## TODO these tests need to be reinstated when the validation is addressed
-      ## in ticket https://dsdmoj.atlassian.net/browse/AP-2739
-      # context 'Save as draft' do
-      #   let(:button_clicked) { { draft_button: 'Save as draft' } }
-      #
-      #   it 'updates the record' do
-      #     subject
-      #     expect(uploaded_evidence_collection.original_attachments.first).to be_present
-      #   end
-      #
-      #   it 'redirects to provider draft endpoint' do
-      #     subject
-      #     expect(response).to redirect_to provider_draft_endpoint
-      #   end
-      #
-      #   context 'nothing specified' do
-      #     let(:original_file) { nil }
-      #
-      #     it 'redirects to provider draft endpoint' do
-      #       subject
-      #       expect(response).to redirect_to provider_draft_endpoint
-      #     end
-      #   end
-      # end
-    end
+      context 'Save as draft' do
+        let(:button_clicked) { draft_button }
 
-    describe 'DELETE /providers/applications/:legal_aid_application_id/uploaded_evidence_collection' do
-      let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
-      let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
-      let(:original_file) { uploaded_evidence_collection.original_attachments.first }
-      let(:params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
-      subject { delete providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
+        context 'when no files have been uploaded' do
+          it 'updates the record' do
+            subject
+            expect(uploaded_evidence_collection).to be_present
+          end
+        end
 
-      before do
-        login_as provider
+        it 'redirects to provider draft endpoint' do
+          subject
+          expect(response).to redirect_to provider_draft_endpoint
+        end
+
+        context 'nothing specified' do
+          let(:original_file) { nil }
+
+          it 'redirects to provider draft endpoint' do
+            subject
+            expect(response).to redirect_to provider_draft_endpoint
+          end
+        end
       end
 
-      shared_examples_for 'deleting a file' do
+      context 'Delete' do
+        let(:button_clicked) { delete_button }
+        let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
+        let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
+        let(:original_file) { uploaded_evidence_collection.original_attachments.first }
+        let(:delete_params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
+
+        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
+
+        before do
+          allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(['gateway_evidence'])
+          login_as provider
+        end
+
+        it 'returns http success' do
+          subject
+          expect(response).to have_http_status(:ok)
+        end
+
         context 'when only original file exists' do
-          xit 'deletes the file' do
+          it 'deletes the file' do
             attachment_id = original_file.id
             expect { subject }.to change { Attachment.count }.by(-1)
             expect(Attachment.exists?(attachment_id)).to be(false)
@@ -327,31 +477,20 @@ module Providers
         context 'when a PDF exists' do
           let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_and_pdf_files_attached }
 
-          xit 'deletes both attachments' do
-            # Validation works when JS is disabled
-            # validation work is to be done on https://dsdmoj.atlassian.net/browse/AP-2739
-            # Delete button has been removed in this PR but needs to be reinstated
-            skip
+          it 'deletes both attachments' do
             expect { subject }.to change { Attachment.count }.by(-2)
           end
         end
-      end
 
-      xit 'returns http success' do
-        subject
-        expect(response).to have_http_status(:ok)
-      end
+        context 'when file not found' do
+          let(:delete_params) { { attachment_id: :unknown } }
 
-      context 'when file not found' do
-        let(:params) { { attachment_id: :unknown } }
-
-        it 'returns http success' do
-          subject
-          expect(response).to have_http_status(:ok)
+          it 'returns http success' do
+            subject
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
-
-      it_behaves_like 'deleting a file'
     end
   end
 end

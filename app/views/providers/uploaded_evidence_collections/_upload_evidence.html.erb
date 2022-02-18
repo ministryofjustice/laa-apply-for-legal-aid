@@ -7,6 +7,8 @@
 
   <%= form.govuk_error_summary %>
 
+  <%= render partial: 'shared/forms/error_summary_hidden', locals: { field_id: 'uploaded-evidence-collection-original-file-field' } %>
+
   <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
     <div class="govuk-!-padding-bottom-6"></div>
@@ -15,7 +17,7 @@
 
     <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
       <% @required_documents.each do |evidence| %>
-        <li><%= t(".#{evidence}") %></li>
+        <li><%= evidence == 'benefit_evidence' ? t(".#{evidence}", benefit: @legal_aid_application.dwp_override.passporting_benefit.titleize) : t(".#{evidence}") %></li>
       <% end %>
     </ul>
 

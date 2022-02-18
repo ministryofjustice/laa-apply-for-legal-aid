@@ -1,16 +1,20 @@
 module V1
   class UploadedEvidenceCollectionsController < ApiController
+    include MalwareScanning
     def create
-      if legal_aid_application
-        file = form_params[:file]
-        legal_aid_application.attachments.create document: file,
-                                                 attachment_type: 'uncategorised',
-                                                 original_filename: file.original_filename,
-                                                 attachment_name: sequenced_attachment_name
-        render '', status: :ok
-      else
-        render '', status: :not_found
-      end
+      return head :not_found unless legal_aid_application
+
+      file = form_params[:file]
+      malware_scan = malware_scan_result(file)
+
+      return render json: { error: original_file_error_for(:file_virus) }, status: :bad_request if malware_scan.virus_found?
+      return render json: { error: original_file_error_for(:system_down) }, status: :bad_request unless malware_scan.scanner_working
+
+      legal_aid_application.attachments.create document: file,
+                                               attachment_type: 'uncategorised',
+                                               original_filename: file.original_filename,
+                                               attachment_name: sequenced_attachment_name
+      head :ok
     end
 
     private
@@ -47,6 +51,14 @@ module V1
         most_recent_name =~ /^#{name}_(\d+)$/
         "#{name}_#{Regexp.last_match(1).to_i + 1}"
       end
+    end
+
+    def provider_uploader
+      legal_aid_application.provider
+    end
+
+    def error_path
+      'uploaded_evidence_collection'
     end
   end
 end

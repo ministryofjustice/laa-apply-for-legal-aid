@@ -7,16 +7,29 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     subject { described_class.call(application) }
 
     context 'application has dwp result overriden' do
-      let(:application) { create :legal_aid_application, :with_dwp_override }
-      it 'updates the required_document_categories with benefit_evidence' do
-        subject
-        expect(application.required_document_categories).to eq %w[benefit_evidence]
+      let(:dwp_override) { create :dwp_override, :with_evidence }
+      let(:application) { create :legal_aid_application, dwp_override: dwp_override }
+
+      context 'when the provider has evidence of benefits' do
+        it 'updates the required_document_categories with benefit_evidence' do
+          subject
+          expect(application.required_document_categories).to eq %w[benefit_evidence]
+        end
+
+        it 'overwrites any existing required_document_categories' do
+          application.update!(required_document_categories: %w[gateway_evidence])
+          subject
+          expect(application.required_document_categories).to eq %w[benefit_evidence]
+        end
       end
 
-      it 'overwrites any existing required_document_categories' do
-        application.update!(required_document_categories: %w[gateway_evidence])
-        subject
-        expect(application.required_document_categories).to eq %w[benefit_evidence]
+      context 'when the provider has no evidence of benefits' do
+        let(:dwp_override) { create :dwp_override, :with_no_evidence }
+
+        it 'does not update the required_document_categories with benefit_evidence' do
+          subject
+          expect(application.required_document_categories).to be_empty
+        end
       end
     end
 
@@ -29,7 +42,9 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
     end
 
     context 'application has dwp result overriden and section 8 proceedings' do
-      let(:application) { create :legal_aid_application, :with_dwp_override, :with_multiple_proceedings_inc_section8 }
+      let(:dwp_override) { create :dwp_override, :with_evidence }
+      let(:application) { create :legal_aid_application, dwp_override: dwp_override }
+      let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8, dwp_override: dwp_override }
       it 'updates the required_document_categories with gateway_evidence' do
         subject
         expect(application.required_document_categories).to eq %w[benefit_evidence gateway_evidence]
@@ -41,6 +56,15 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       it 'updates the required_document_categories with an empty array' do
         subject
         expect(application.required_document_categories).to eq []
+      end
+    end
+
+    context 'when the provider has entered employment details' do
+      let(:application) { create :legal_aid_application, extra_employment_information_details: 'test details' }
+
+      it 'updates the required_document_categories with employment_evidence' do
+        subject
+        expect(application.required_document_categories).to eq %w[employment_evidence]
       end
     end
   end

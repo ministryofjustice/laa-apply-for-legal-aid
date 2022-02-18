@@ -287,7 +287,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def employment_evidence_required?
-    extra_employment_information_details.present?
+    extra_employment_information_details.present? || full_employment_details.present?
   end
 
   def outstanding_mortgage?
