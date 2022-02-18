@@ -110,8 +110,12 @@ en:
           disregarded_state_benefits: Income from benefits excluded from calculation
         income:
           benefits: Benefits
+          employment: Gross employment income
+          fixed_employment_deduction: Fixed employment deduction
           family_help: Financial help from friends or family
+          income_tax: Income tax
           maintenance_in: Maintenance payments
+          national_insurance: National insurance
           property_or_lodger: Income from property or lodger
           student_loan: Student loan or grant
           pension: Pension
@@ -182,7 +186,7 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       employed_income:
-        employment: Employment income
+        employment: Employment notes
         employment_question: Do you need to tell us anything else about your client's employment?
         employment_details: Details
       income_result:

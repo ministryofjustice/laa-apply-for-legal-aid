@@ -11,6 +11,7 @@ class TestProviderPopulator
     'David Gray LLP' => [19_148, ['0B721W:137570']],
     'Test firm for portal login' => [807, %w[9F805X:21 3X805Z:22]],
     'Ahern & Co.' => [808, %w[9F808X:21 3X808Z:22]],
+    'Groves & Co.' => [989, %w[7F809X:23 4X809Z:24]],
     'EDWARD HAYES LLP' => [19_537, %w[1T462U:85605]],
     'LAWRENCE & CO SOLICITORS CDS LLP' => [33_230, %w[0Q974B:85981]]
   }.freeze
@@ -29,7 +30,8 @@ class TestProviderPopulator
     'MARTIN.RONAN@DAVIDGRAY.CO.UK' => ['David Gray LLP', 'martin.ronan@example.com', 494_000, 5027],
     'BENREID' => ['Test firm for portal login', 'benreid@example.co.uk', 107, 592],
     'HFITZSIMONS@EDWARDHAYES.CO.UK' => ['EDWARD HAYES LLP', 'hfitzsimons@example.com', 2_453_773],
-    'LHARRISON@TBILAW.CO.UK' => ['LAWRENCE & CO SOLICITORS CDS LLP', 'LHARRISON@example.com', 954_474]
+    'LHARRISON@TBILAW.CO.UK' => ['LAWRENCE & CO SOLICITORS CDS LLP', 'LHARRISON@example.com', 954_474],
+    'CG' => ['Groves & Co.', 'chris.groves@digital.justice.gov.uk', 110, 599]
   }.freeze
 
   def run

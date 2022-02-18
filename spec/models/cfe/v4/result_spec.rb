@@ -572,13 +572,13 @@ module CFE
 
       describe 'total_monthly_income' do
         it 'returns total monthly income' do
-          expect(with_monthly_income_equivalents.total_monthly_income).to eq 40.0
+          expect(with_monthly_income_equivalents.total_monthly_income).to eq 115.0
         end
       end
 
       describe 'total_monthly_outgoings' do
         it 'returns total monthly outgoings' do
-          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 40.0
+          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 165.0
         end
       end
 

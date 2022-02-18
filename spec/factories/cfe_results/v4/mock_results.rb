@@ -50,6 +50,14 @@ module CFEResults
               total_outgoings_and_allowances: 0.0,
               total_disposable_income: 0.0,
               income_contribution: 0.0,
+              employment_income: {
+                gross_income: 2143.97,
+                benefits_in_kind: 0.0,
+                tax: 204.15,
+                national_insurance: 161.64,
+                fixed_employment_deduction: 45.0,
+                net_employment_income: 1778.18
+              },
               proceeding_types: [
                 {
                   ccms_code: 'DA006',
@@ -110,7 +118,7 @@ module CFEResults
               },
               state_benefits: {
                 monthly_equivalents: {
-                  all_sources: 0.0,
+                  all_sources: 75.0,
                   cash_transactions: 0.0,
                   bank_transactions: []
                 }
@@ -142,7 +150,7 @@ module CFEResults
               monthly_equivalents: {
                 all_sources: {
                   child_care: 0.0,
-                  rent_or_mortgage: 0.0,
+                  rent_or_mortgage: 125.0,
                   maintenance_out: 0.0,
                   legal_aid: 0.0
                 },

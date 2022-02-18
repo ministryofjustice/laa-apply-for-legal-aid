@@ -1,14 +1,22 @@
 <section>
   <dl class="govuk-summary-list govuk-!-margin-bottom-9">
     <%
-      {
-          benefits: :monthly_state_benefits,
-          family_help: :mei_friends_or_family,
-          maintenance_in: :mei_maintenance_in,
-          property_or_lodger: :mei_property_or_lodger,
-          student_loan: :mei_student_loan,
-          pension: :mei_pension
-      }.each do |name, value_method|
+      employed_items = {
+        employment: :employment_income_gross_income,
+        income_tax: :employment_income_tax,
+        national_insurance: :employment_income_national_insurance,
+        fixed_employment_deduction: :employment_income_fixed_employment_deduction,
+      }
+      non_employed_items = {
+        benefits: :monthly_state_benefits,
+        family_help: :mei_friends_or_family,
+        maintenance_in: :mei_maintenance_in,
+        property_or_lodger: :mei_property_or_lodger,
+        student_loan: :mei_student_loan,
+        pension: :mei_pension
+        }
+      item_list = Setting.enable_employed_journey? && @legal_aid_application.applicant.employed? ? employed_items.merge(non_employed_items) : non_employed_items
+      item_list.each do |name, value_method|
     %>
       <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :pension %>
     <% end %>
