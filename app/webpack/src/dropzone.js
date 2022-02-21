@@ -2,9 +2,9 @@ import Dropzone from 'dropzone'
 
 const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
 
-const ERR_GENERIC = 'There was a problem uploading your file - try again'
-const FILE_SIZE_ERR = 'The selected file must be smaller than 7MB.'
-const ERR_CONTENT_TYPE = 'The selected file must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.'
+const ERR_GENERIC = 'There was a problem uploading FILENAME - try again'
+const FILE_SIZE_ERR = 'FILENAME is larger than 7MB'
+const ERR_CONTENT_TYPE = 'FILENAME is not a valid file type'
 const ACCEPTED_FILES = [
   // dropzone checks both the mimetype and the file extension so this list covers everything
   '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf',
@@ -112,13 +112,13 @@ document.addEventListener('DOMContentLoaded', event => {
     dropzone.on('error', (file, response) => {
       let errorMsg = ''
       if (!ACCEPTED_FILES.includes(file.type)) {
-        errorMsg = ERR_CONTENT_TYPE
+        errorMsg = ERR_CONTENT_TYPE.replace('FILENAME', file.name)
       } else if (file.size >= 7000000) {
-        errorMsg = FILE_SIZE_ERR
+        errorMsg = FILE_SIZE_ERR.replace('FILENAME', file.name)
       } else if (response.error!="") {
         errorMsg = response.error
       } else {
-        errorMsg = ERR_GENERIC
+        errorMsg = ERR_GENERIC.replace('FILENAME', file.name)
       }
       dropzone.removeFile(file)// add an error message to the error summary component
       addErrorMessage(errorMsg)
