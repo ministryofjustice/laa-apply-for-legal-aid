@@ -77,6 +77,17 @@ document.addEventListener('DOMContentLoaded', event => {
       maxFilesize: 7,
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
+    dropzone.on('drop', () => {
+      document.querySelector('#dropzone-error').querySelectorAll('div').forEach( div => {
+        div.remove();
+      });
+      const errorSummary = document.querySelector('.govuk-error-summary');
+      errorSummary.querySelectorAll('li').forEach(listItem => {
+        listItem.remove();
+      });
+      errorSummary.classList.add('hidden'); // toggle error-summary-hideable
+      document.querySelector('#dropzone-form-group').classList.remove('govuk-form-group--error');
+    })
     dropzone.on('addedfile', file => {
       setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
     })
