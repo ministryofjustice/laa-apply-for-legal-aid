@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/vcr/vcr.git
-  revision: 8ced6c96e01737a418cd270e0382a8c2c6d85f7f
+  revision: 7ac8292c289ca98dcb4254b59e1ee29e2205d8b3
   branch: master
   specs:
     vcr (6.0.0)
