@@ -7,7 +7,7 @@ module V1
       file = form_params[:file]
       malware_scan = malware_scan_result(file)
 
-      return render json: { error: original_file_error_for(:file_virus) }, status: :bad_request if malware_scan.virus_found?
+      return render json: { error: original_file_error_for(:file_virus, file_name: file.original_filename) }, status: :bad_request if malware_scan.virus_found?
       return render json: { error: original_file_error_for(:system_down) }, status: :bad_request unless malware_scan.scanner_working
 
       legal_aid_application.attachments.create document: file,

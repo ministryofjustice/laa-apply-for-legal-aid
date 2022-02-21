@@ -514,7 +514,7 @@ en:
               employment_evidence_missing: Upload evidence of your client's employment
               file_empty: The selected file is empty
               file_too_big: The selected file must be smaller than %{size}MB
-              file_virus: The selected file contains a virus
+              file_virus: "%{file_name} contains a virus"
               no_file_chosen: You must choose at least one file
               system_down: There was a problem uploading your file - try again
               uncategorised_evidence: Select a category for each uploaded file
