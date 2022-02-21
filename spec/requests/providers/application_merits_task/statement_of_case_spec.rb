@@ -49,6 +49,27 @@ module Providers
         end
       end
 
+      describe 'GET /providers/applications/:legal_aid_application_id/statement_of_case/list' do
+        subject { get list_providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
+
+        context 'when the provider is not authenticated' do
+          before { subject }
+          it_behaves_like 'a provider not authenticated'
+        end
+
+        context 'when the provider is authenticated' do
+          before do
+            legal_aid_application.statement_of_case = soc
+            login_as provider
+            subject
+          end
+
+          it 'returns http success' do
+            expect(response).to have_http_status(:ok)
+          end
+        end
+      end
+
       describe 'PATCH /providers/applications/:legal_aid_application_id/statement_of_case' do
         let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
         let(:original_file) { uploaded_file('spec/fixtures/files/documents/hello_world.pdf', 'application/pdf') }
