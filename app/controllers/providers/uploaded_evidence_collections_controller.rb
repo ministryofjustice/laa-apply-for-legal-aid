@@ -29,6 +29,12 @@ module Providers
       render :show
     end
 
+    def list
+      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      attachment_type_options
+      render partial: 'uploaded_files', locals: { attachments: uploaded_evidence_collection.original_attachments }
+    end
+
     private
 
     def required_documents

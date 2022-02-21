@@ -184,7 +184,9 @@ Rails.application.routes.draw do
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
-      resource :uploaded_evidence_collection, only: %i[show update destroy]
+      resource :uploaded_evidence_collection, only: %i[show update destroy] do
+        get '/list', to: 'uploaded_evidence_collections#list'
+      end
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset
