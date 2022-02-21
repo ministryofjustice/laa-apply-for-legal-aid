@@ -35,7 +35,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       it 'shows the client bank account name and balance' do
         subject
         expect(unescaped_response_body).to include(bank_provider.name)
-        expect(response.body).to include(bank_account.balance.to_s(:delimited))
+        expect(response.body).to include(bank_account.balance.to_fs(:delimited))
       end
     end
   end
