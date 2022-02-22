@@ -41,7 +41,6 @@ function addErrorMessage (msg) {
   let div = document.createElement('div');
   div.innerText = msg;
   fieldErrorMsg.appendChild(div);
-  // fieldErrorMsg.innerText += msg
   fieldErrorMsg.classList.remove('hidden')
   // show the error summary and move focus to it
   errorSummary.classList.remove('hidden')
