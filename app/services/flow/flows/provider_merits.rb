@@ -105,7 +105,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
           forward: ->(application) do
             if Setting.enable_evidence_upload?
-              :uploaded_evidence_collections
+              application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers
             else
               application.proceedings.size > 1 ? :gateway_evidences : :check_merits_answers
               # TODO: check correct option, above is how it currently works. Below is how the ticket says it should work

@@ -18,6 +18,7 @@
   <%= form_with model: @uploaded_evidence_collection, url: providers_legal_aid_application_uploaded_evidence_collection_path do |form| %>
 
     <% attachments.order(:created_at).each do |attachment| %>
+      <% selected = @required_documents.size > 1 ? attachment.attachment_type : @attachment_type_options.first %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell"><%= attachment.document.filename %></td>
         <td class="govuk-table__cell no-wrap">
@@ -27,7 +28,7 @@
                                                :first,
                                                :last,
                                                label: nil,
-                                               options: { selected: attachment.attachment_type } %>
+                                               options: { selected: selected } %>
           </div>
         </td>
         <td class="govuk-table__cell">

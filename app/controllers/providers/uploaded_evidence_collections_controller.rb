@@ -1,6 +1,8 @@
 # rubocop:disable Metrics/ClassLength
 module Providers
-  class UploadedEvidenceCollectionsController < ProviderBaseController
+  # TODO: refactor this controller once the validation ticket AP-2739 and this one AP-2872
+  # have been merged. Then we can remove the rubocop disable tag
+  class UploadedEvidenceCollectionsController < ProviderBaseController # rubocop:disable Metrics/ClassLength
     def show
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       populate_upload_form
@@ -36,7 +38,7 @@ module Providers
     end
 
     def attachment_type_options
-      @attachment_type_options = DocumentCategory.where(display_on_evidence_upload: true).map { |dc| [dc.name, dc.name.humanize] }
+      @attachment_type_options = required_documents.map { |rd| [rd, rd.humanize] }
       @attachment_type_options << %w[uncategorised Uncategorised]
     end
 
@@ -58,6 +60,7 @@ module Providers
       required_documents
       @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
+      evidence_type_translation
     end
 
     def populate_submission_form
@@ -153,6 +156,16 @@ module Providers
       return if upload_form.errors.present?
 
       I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: 'File')
+    end
+
+    def evidence_type_translation
+      return unless required_documents.include?('benefit_evidence')
+
+      @evidence_type_translation = I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{passporting_benefit}")
+    end
+
+    def passporting_benefit
+      legal_aid_application.dwp_override.passporting_benefit
     end
   end
 end
