@@ -444,7 +444,7 @@ en:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}"
         section_8_evidence: Use this page to provide optional gateway evidence
-        just_some_text: this is what i want to see
+        single_non_specific_item: "Use this page to provide %{item}"
         list_text: 'Use this page to upload:'
         benefit_evidence: evidence that your client receives %{benefit}
         employment_evidence: evidence of your client's employment
