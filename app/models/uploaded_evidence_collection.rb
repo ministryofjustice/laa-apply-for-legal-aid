@@ -14,8 +14,7 @@ class UploadedEvidenceCollection < ApplicationRecord
   def all_evidence_categorised
     return true unless uncategorised_evidence_exists?
 
-    errors.add(:'uploaded-files-table-container',
-               I18n.t("#{error_path}.uncategorised_evidence"))
+    errors.add(:'uploaded-files-table-container', I18n.t("#{error_path}.uncategorised_evidence"), mandatory_evidence: false)
     false
   end
 
@@ -27,7 +26,7 @@ class UploadedEvidenceCollection < ApplicationRecord
     mandatory_evidence_types.each do |type|
       next if categorised_evidence_types.include?(type)
 
-      errors.add("uploaded_files_table_container#{type}", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit))
+      errors.add('dz-upload-button', I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit), mandatory_evidence: true)
     end
 
     mandatory_evidence_types.all? { |mandatory_type| categorised_evidence_types.include?(mandatory_type) }

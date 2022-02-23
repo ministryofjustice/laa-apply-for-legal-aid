@@ -67,6 +67,8 @@ module Providers
       @upload_form = Providers::UploadedEvidenceCollectionForm.new(model: uploaded_evidence_collection)
       attachment_type_options
       evidence_type_translation
+      mandatory_evidence_errors
+      categorisation_errors
     end
 
     def populate_submission_form
@@ -152,6 +154,14 @@ module Providers
       return if upload_form.errors.blank?
 
       "#{I18n.t('accessibility.problem_text')} #{upload_form.errors.messages[:original_file].first}"
+    end
+
+    def mandatory_evidence_errors
+      @mandatory_evidence_errors = @uploaded_evidence_collection.errors.errors.select { |error| error.options[:mandatory_evidence] }
+    end
+
+    def categorisation_errors
+      @categorisation_errors = @uploaded_evidence_collection.errors.errors.reject { |error| error.options[:mandatory_evidence] }
     end
 
     def files_deleted_message(deleted_file_name)
