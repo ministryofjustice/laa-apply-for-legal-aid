@@ -145,7 +145,9 @@ Rails.application.routes.draw do
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
-      resource :statement_of_case, only: %i[show update destroy], controller: 'application_merits_task/statement_of_cases'
+      resource :statement_of_case, only: %i[show update destroy], controller: 'application_merits_task/statement_of_cases' do
+        get '/list', to: 'application_merits_task/statement_of_cases#list'
+      end
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
@@ -182,7 +184,9 @@ Rails.application.routes.draw do
       resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
-      resource :uploaded_evidence_collection, only: %i[show update destroy]
+      resource :uploaded_evidence_collection, only: %i[show update destroy] do
+        get '/list', to: 'uploaded_evidence_collections#list'
+      end
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset

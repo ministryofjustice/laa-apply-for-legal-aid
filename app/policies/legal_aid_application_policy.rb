@@ -11,6 +11,10 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     authorized_to_process?
   end
 
+  def list?
+    authorized_to_process?
+  end
+
   def update?
     authorized_to_process?
   end
