@@ -1,3 +1,6 @@
+<%
+  form_group_error_class = @mandatory_evidence_errors.present? ? 'govuk-form-group--error' : ''
+%>
 <%= form_with(
       model: @upload_form,
       url: providers_legal_aid_application_uploaded_evidence_collection_path,
@@ -32,12 +35,15 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <div class="dropzone__upload">
+    <div class="dropzone__upload <%= form_group_error_class %>">
       <div class="govuk-form-group script hidden" id="dropzone-form-group" aria-labelledby="dropzone-label">
         <label class="govuk-label govuk-label--m" id="dropzone-label">
           <%= t('.upload_file') %>
         </label>
         <div class="govuk-hint"><%= t('.size_hint') %></div>
+        <% @mandatory_evidence_errors.each do |error| %>
+          <p class='govuk-error-message govuk-!-margin-bottom-0'><%= error.message %></p>
+        <% end %>
 
         <span class="hidden" aria-hidden="true" id="application-id"><%= @upload_form.model.legal_aid_application_id %></span>
         <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/uploaded_evidence_collections"></span>
