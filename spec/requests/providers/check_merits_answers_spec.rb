@@ -256,8 +256,8 @@ RSpec.describe 'check merits answers requests', type: :request do
 
         context 'when there are required document categories' do
           before do
-            DocumentCategory.populate
-            application.update!(required_document_categories: ['benefit_evidence'])
+            allow(LegalAidApplication).to receive(:find_by).and_return(application)
+            allow(application).to receive(:evidence_is_required?).and_return(true)
           end
 
           it 'redirects to upload evidence page' do
