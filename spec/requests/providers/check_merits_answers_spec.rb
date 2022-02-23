@@ -236,9 +236,35 @@ RSpec.describe 'check merits answers requests', type: :request do
         expect(application.reload.provider_entering_merits?).to be true
       end
 
-      it 'redirects to gateway_evidence page' do
-        subject
-        expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)
+      context 'when evidence upload flag NOT set' do
+        before { Setting.setting.update!(enable_evidence_upload: false) }
+        it 'redirects to gateway_evidence page' do
+          subject
+          expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)
+        end
+      end
+
+      context 'when evidence upload flag set to TRUE' do
+        before { Setting.setting.update!(enable_evidence_upload: true) }
+
+        context 'when no required document categories' do
+          it 'redirects to merits task page' do
+            subject
+            expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(application)
+          end
+        end
+
+        context 'when there are required document categories' do
+          before do
+            allow(LegalAidApplication).to receive(:find_by).and_return(application)
+            allow(application).to receive(:evidence_is_required?).and_return(true)
+          end
+
+          it 'redirects to upload evidence page' do
+            subject
+            expect(response).to redirect_to providers_legal_aid_application_uploaded_evidence_collection_path(application)
+          end
+        end
       end
     end
   end

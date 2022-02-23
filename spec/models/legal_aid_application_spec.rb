@@ -1189,7 +1189,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe '#online_current_account_balance' do
+  describe '#online_current_accounts_balance' do
     let(:laa) { create :legal_aid_application, :with_applicant }
     context 'no current accounts' do
       it 'returns nil' do
@@ -1217,6 +1217,32 @@ RSpec.describe LegalAidApplication, type: :model do
         let(:account_type) { 'TRANSACTION' }
         it 'returns the sum of the balances' do
           expect(laa.online_current_accounts_balance).to eq balance1 + balance2
+        end
+      end
+    end
+  end
+
+  describe '#online_savings_accounts_balance' do
+    let(:laa) { create :legal_aid_application, :with_applicant }
+    context 'no current accounts' do
+      it 'returns nil' do
+        expect(laa.online_savings_accounts_balance).to be_nil
+      end
+    end
+
+    context 'with bank accounts' do
+      let(:balance1) { BigDecimal(rand(1...1_000_000.0), 2) }
+      let(:balance2) { BigDecimal(rand(1...1_000_000.0), 2) }
+      let(:bank_provider) { create :bank_provider, applicant: laa.applicant }
+
+      before do
+        create :bank_account, bank_provider: bank_provider, account_type: 'SAVINGS', balance: balance1
+        create :bank_account, bank_provider: bank_provider, account_type: 'SAVINGS', balance: balance2
+      end
+
+      context 'only savings' do
+        it 'returns nil' do
+          expect(laa.online_savings_accounts_balance).to eq balance1 + balance2
         end
       end
     end
