@@ -7,7 +7,7 @@ module CFE
     end
 
     def request_body
-      payload = { employment_income: employment_income_payload }.to_json
+      { employment_income: employment_income_payload }.to_json
     end
 
     def process_response
