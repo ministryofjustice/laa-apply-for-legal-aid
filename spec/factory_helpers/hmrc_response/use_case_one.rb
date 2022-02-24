@@ -53,6 +53,9 @@ module FactoryHelpers
         case @options[:named_data]
         when :example1_usecase1
           example1_usecase1
+        when :multiple_employments_usecase1
+          example1_usecase1
+          @options[:data_array][16]['employments/paye/employments'] << { 'startDate' => '2021-09-25', 'endDate' => '2099-12-31' }
         else
           raise "named data #{@options[:named_data]} passed to #{self.class}} unrecognised"
         end
@@ -174,7 +177,7 @@ module FactoryHelpers
             { 'income/sa/other/selfAssessment' => { 'taxReturns' => [] } },
             { 'income/sa/summary/selfAssessment' => { 'taxReturns' => [] } },
             { 'income/sa/trusts/selfAssessment' => { 'taxReturns' => [] } },
-            { 'employments/paye/employments' => [{ startDate: 2013 - 0o4 - 22, endDate: 2099 - 12 - 31 }] },
+            { 'employments/paye/employments' => [{ startDate: '2013-04-22', endDate: '2099-12-31' }] },
             { 'benefits_and_credits/working_tax_credit/applications' => [{ awards: [] }] },
             { 'benefits_and_credits/child_tax_credit/applications' => [{ awards: [] }] }
           ]

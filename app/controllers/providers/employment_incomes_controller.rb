@@ -1,14 +1,14 @@
 module Providers
   class EmploymentIncomesController < ProviderBaseController
+    before_action :employments
+
     def show
       @applicant = applicant
-      @summary_income = summary_income
       @form = LegalAidApplications::EmploymentIncomeForm.new(model: legal_aid_application)
     end
 
     def update
       @applicant = applicant
-      @summary_income = summary_income
       @form = LegalAidApplications::EmploymentIncomeForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end
@@ -19,8 +19,8 @@ module Providers
       @applicant ||= legal_aid_application.applicant
     end
 
-    def summary_income
-      @summary_income ||= HMRC::ParsedResponse::EmploymentIncomeSummary.new(legal_aid_application.id)
+    def employments
+      @employments = @legal_aid_application.employments
     end
 
     def form_params

@@ -322,9 +322,8 @@ Given('I start the means review journey with employment income from HMRC') do
     :provider_assessing_means
   )
 
-  @hmrc_response = create(:hmrc_response, :use_case_one)
+  @hmrc_response = create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application) # creates the employment and employment records as well
 
-  @legal_aid_application.hmrc_responses << @hmrc_response
   @legal_aid_application.provider.permissions << Permission.where(role: 'application.non_passported.employment.*').first
 
   login_as @legal_aid_application.provider

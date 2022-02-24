@@ -26,6 +26,7 @@ RSpec.describe CFE::CreateEmploymentsService do
       let(:expected_payload) { empty_payload }
 
       it 'sends empty array' do
+        # this tests passes if the service sends the same payload as is stubbed out above, i.e. expected_payload
         described_class.call(submission)
         expect(employment_income_payload).to eq expected_payload.to_json
       end
@@ -44,12 +45,10 @@ RSpec.describe CFE::CreateEmploymentsService do
     context 'applicant employed' do
       let(:applicant) { create :applicant, :employed }
       let(:expected_payload) { full_payload }
-
-      before do
-        create :hmrc_response, :example1_usecase1, legal_aid_application: laa
-      end
+      let!(:employment) { create :employment, :example1_usecase1, legal_aid_application: laa }
 
       it 'sends array of payment data' do
+        # this tests passes if the service sends the same payload as is stubbed out above, i.e. expected_payload
         described_class.call(submission)
         expect(employment_income_payload).to eq expected_payload.to_json
       end
@@ -100,9 +99,11 @@ RSpec.describe CFE::CreateEmploymentsService do
     {
       employment_income: [
         {
-          name: 'Job 1',
+          name: 'Job 788',
+          client_id: '12345678-1234-1234-1234-123456789abc',
           payments: [
             {
+              client_id: '20211128-0000-0000-0000-123456789abc',
               date: '2021-11-28',
               gross: 1868.98,
               benefits_in_kind: 0.0,
@@ -111,14 +112,16 @@ RSpec.describe CFE::CreateEmploymentsService do
               net_employment_income: 1578.54
             },
             {
+              client_id: '20211028-0000-0000-0000-123456789abc',
               date: '2021-10-28',
               gross: 1868.98,
               benefits_in_kind: 0.0,
-              tax: -111,
+              tax: -111.0,
               national_insurance: -128.64,
               net_employment_income: 1629.34
             },
             {
+              client_id: '20210928-0000-0000-0000-123456789abc',
               date: '2021-09-28',
               gross: 2492.61,
               benefits_in_kind: 0.0,
@@ -127,6 +130,7 @@ RSpec.describe CFE::CreateEmploymentsService do
               net_employment_income: 2002.54
             },
             {
+              client_id: '20210828-0000-0000-0000-123456789abc',
               date: '2021-08-28',
               gross: 2345.29,
               benefits_in_kind: 0.0,

@@ -48,6 +48,7 @@ class LegalAidApplication < ApplicationRecord
   has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
   has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
   has_many :hmrc_responses, class_name: 'HMRC::Response', dependent: :destroy, inverse_of: :legal_aid_application
+  has_many :employments, dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -461,7 +462,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def hmrc_employment_income?
-    hmrc_responses.any?(&:employment_income?)
+    employments.any?
   end
 
   def uploaded_evidence_by_category

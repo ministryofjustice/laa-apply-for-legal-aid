@@ -1251,22 +1251,14 @@ RSpec.describe LegalAidApplication, type: :model do
   describe 'hmrc_employment_income?' do
     let(:laa) { create :legal_aid_application }
 
-    context 'when there are no HMRC::Response records' do
+    context 'when there are no Employment records' do
       it 'returns false' do
         expect(laa.hmrc_employment_income?).to eq false
       end
     end
 
-    context 'when HMRC::Response records do not include employment_income' do
-      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
-      before { allow_any_instance_of(HMRC::Response).to receive(:employment_income?).and_return false }
-      it 'returns false' do
-        expect(laa.hmrc_employment_income?).to eq false
-      end
-    end
-
-    context 'when HMRC::Response records include employment_income' do
-      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
+    context 'when there are Employment records' do
+      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa } # employment records created from this
       it 'returns true' do
         expect(laa.hmrc_employment_income?).to eq true
       end
