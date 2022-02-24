@@ -13,8 +13,8 @@ When('I have completed a non-passported application and reached the evidence upl
   visit(providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application))
 end
 
-Then('I upload an evidence file') do
-  attach_file('Attach a file', Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'))
+Then(/^I upload an evidence file named ['|"](.*?)['|"]/) do |filename|
+  attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: 'dz-hidden-input', make_visible: true)
 end
 
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
@@ -29,7 +29,8 @@ Given('csrf is enabled') do
   ActionController::Base.allow_forgery_protection = true
 end
 
-And('I should only see two uploaded files') do
+And('I should see {int} uploaded files') do |int|
+  sleep 0.5
   delete_buttons = find_all(:xpath, "//td//input[contains(@class,'button-as-link')]")
-  expect(delete_buttons.count).to eq 2
+  expect(delete_buttons.count).to eq int
 end
