@@ -474,9 +474,21 @@ module CFE
         end
       end
 
+      describe 'total_monthly_income_including_employment_income' do
+        it 'returns total monthly income including employment income' do
+          expect(eligible_result.total_monthly_income_including_employment_income).to eq 712.28
+        end
+      end
+
       describe 'total_monthly_outgoings' do
         it 'returns total monthly outgoings' do
           expect(eligible_result.total_monthly_outgoings).to eq 675.0
+        end
+      end
+
+      describe 'total_monthly_outgoings_including_tax_and_ni' do
+        it 'returns total monthly outgoings including tax and ni' do
+          expect(eligible_result.total_monthly_outgoings_including_tax_and_ni).to eq 675.0
         end
       end
 
@@ -501,6 +513,12 @@ module CFE
       describe 'total_deductions' do
         it 'returns total deductions' do
           expect(eligible_result.total_deductions).to eq 1791.86
+        end
+      end
+
+      describe 'total_deductions_including_fixed_employment_allowance' do
+        it 'returns total deductions including_employment restrictions' do
+          expect(eligible_result.total_deductions_including_fixed_employment_allowance).to eq 1791.86
         end
       end
 

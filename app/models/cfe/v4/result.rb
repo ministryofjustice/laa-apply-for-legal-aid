@@ -239,6 +239,10 @@ module CFE
         mei_pension + mei_student_loan + mei_property_or_lodger + mei_maintenance_in + mei_friends_or_family + monthly_state_benefits
       end
 
+      def total_monthly_income_including_employment_income
+        total_monthly_income + employment_income_gross_income
+      end
+
       ################################################################
       #                                                              #
       #  MONTHLY_OUTGOING_EQUIVALENTS                                #
@@ -265,6 +269,10 @@ module CFE
         moe_housing + moe_childcare + moe_maintenance_out + moe_legal_aid
       end
 
+      def total_monthly_outgoings_including_tax_and_ni
+        total_monthly_outgoings - employment_income_tax - employment_income_national_insurance
+      end
+
       ################################################################
       #                                                              #
       #  DEDUCTIONS                                                  #
@@ -283,6 +291,10 @@ module CFE
         dependants_allowance + disregarded_state_benefits
       end
 
+      def total_deductions_including_fixed_employment_allowance
+        total_deductions - employment_income_fixed_employment_deduction
+      end
+
       ################################################################
       #                                                              #
       #  EMPLOYMENT_INCOME                                           #
@@ -294,27 +306,27 @@ module CFE
       end
 
       def employment_income_gross_income
-        employment_income[:gross_income]
+        employment_income[:gross_income] || 0.0
       end
 
       def employment_income_benefits_in_kind
-        employment_income[:benefits_in_kind]
+        employment_income[:benefits_in_kind] || 0.0
       end
 
       def employment_income_tax
-        employment_income[:tax]
+        employment_income[:tax] || 0.0
       end
 
       def employment_income_national_insurance
-        employment_income[:national_insurance]
+        employment_income[:national_insurance] || 0.0
       end
 
       def employment_income_fixed_employment_deduction
-        employment_income[:fixed_employment_deduction]
+        employment_income[:fixed_employment_deduction] || 0.0
       end
 
       def employment_income_net_employment_income
-        employment_income[:net_employment_income]
+        employment_income[:net_employment_income] || 0.0
       end
 
       def jobs

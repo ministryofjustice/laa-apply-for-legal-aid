@@ -422,12 +422,20 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       context 'applicant has employment(s)' do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
         let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
+        let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <b>" }
         let(:monthly_income_before_tax) { I18n.t('providers.capital_income_assessment_results.employment_income.monthly_income_before_tax') }
         let(:benefits_in_kind) { I18n.t('providers.capital_income_assessment_results.employment_income.benefits_in_kind') }
         let(:tax) { I18n.t('providers.capital_income_assessment_results.employment_income.tax') }
         let(:national_insurance) { I18n.t('providers.capital_income_assessment_results.employment_income.national_insurance') }
         let(:fixed_employment_deduction) { I18n.t('providers.capital_income_assessment_results.employment_income.fixed_employment_deduction') }
-        let(:total) { I18n.t('providers.capital_income_assessment_results.employment_income.total') }
+        let(:total_employment) { I18n.t('providers.capital_income_assessment_results.employment_income.total') }
+        let(:total_outgoings) { I18n.t('providers.capital_income_assessment_results.outgoings.total_outgoings') }
+        let(:total_other_income) { I18n.t('providers.capital_income_assessment_results.other_income.total') }
+        let(:total_deductions) { I18n.t('providers.capital_income_assessment_results.deductions.total_deductions') }
+        let(:total_disposable_income) { I18n.t('providers.capital_income_assessment_results.disposable_income.total_income') }
+        let(:total_disposable_outgoings) { I18n.t('providers.capital_income_assessment_results.disposable_income.total_outgoings') }
+        let(:total_disposable_deductions) { I18n.t('providers.capital_income_assessment_results.disposable_income.total_deductions') }
+        let(:total_disposable) { I18n.t('providers.capital_income_assessment_results.disposable_income.total_disposable') }
 
         it 'displays the employment income' do
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.title'))
@@ -437,7 +445,18 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
           expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
           expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
           expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
-          expect(unescaped_response_body).to include(total + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
+          expect(unescaped_response_body).to include(total_employment + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
+        end
+
+        it 'displays the correct totals' do
+          expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
+          expect(unescaped_response_body).to include(total_other_income + td + gds_number_to_currency(cfe_result.total_gross_income))
+          expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
+          expect(unescaped_response_body).to include(total_deductions + td + gds_number_to_currency(cfe_result.total_deductions))
+          expect(unescaped_response_body).to include(total_disposable_income + td + gds_number_to_currency(cfe_result.total_monthly_income_including_employment_income))
+          expect(unescaped_response_body).to include(total_disposable_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings_including_tax_and_ni))
+          expect(unescaped_response_body).to include(total_disposable_deductions + td + gds_number_to_currency(cfe_result.total_deductions_including_fixed_employment_allowance))
+          expect(unescaped_response_body).to include(total_disposable + td_bold + gds_number_to_currency(cfe_result.total_disposable_income_assessed))
         end
       end
 
