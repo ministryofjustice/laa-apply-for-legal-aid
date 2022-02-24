@@ -41,8 +41,10 @@
           <%= t('.upload_file') %>
         </label>
         <div class="govuk-hint"><%= t('.size_hint') %></div>
-        <% @mandatory_evidence_errors.each do |error| %>
-          <p class='govuk-error-message govuk-!-margin-bottom-0'><%= error.message %></p>
+        <% if @mandatory_evidence_errors %>
+          <% @mandatory_evidence_errors.each do |error| %>
+            <p class='govuk-error-message govuk-!-margin-bottom-1'><%= error.message %></p>
+          <% end %>
         <% end %>
 
         <span class="hidden" aria-hidden="true" id="application-id"><%= @upload_form.model.legal_aid_application_id %></span>
@@ -58,10 +60,15 @@
         </div>
       </div>
 
-      <div class="fallback no-script">
+      <div class="fallback no-script govuk-!-margin-bottom-4">
+        <% if @mandatory_evidence_errors %>
+          <% @mandatory_evidence_errors.each do |error| %>
+            <p class='govuk-error-message govuk-!-margin-top-1'><%= error.message %></p>
+          <% end %>
+        <% end %>
         <%= form.govuk_file_field :original_file, label: {text: t('generic.attach_file'), size: 'm'},
                                   hint: {text: t('.size_hint')},
-                                  classes: ['govuk-file-upload moj-multi-file-upload__input'] %>
+                                  classes: ['govuk-file-upload ' + form_group_error_class] %>
         <%= form.submit(
               t('generic.upload'),
               id: 'upload',

@@ -26,6 +26,7 @@ class UploadedEvidenceCollection < ApplicationRecord
     mandatory_evidence_types.each do |type|
       next if categorised_evidence_types.include?(type)
 
+      # link the error message to the dropzone
       errors.add('dz-upload-button', I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit), mandatory_evidence: true)
     end
 

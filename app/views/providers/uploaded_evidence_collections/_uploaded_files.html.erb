@@ -8,8 +8,10 @@
   <table class="govuk-table <%= 'hidden' if attachments.empty? %>">
     <caption class="govuk-table__caption govuk-heading-m">
       <%= t('.title') %>
-      <% @categorisation_errors.each do |error| %>
-        <p class='govuk-error-message govuk-!-margin-bottom-0'><%= error.message %></p>
+      <% if @categorisation_errors %>
+        <% @categorisation_errors.each do |error| %>
+          <p class='govuk-error-message govuk-!-margin-bottom-0'><%= error.message %></p>
+        <% end %>
       <% end %>
     </caption>
     <thead class="govuk-table__head">
