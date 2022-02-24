@@ -9,3 +9,11 @@ Feature: Evidence upload
     When I click 'Save and continue'
     Then I should see 'Upload supporting evidence'
     And I should see 'Select a category for each uploaded file'
+
+  @javascript @vcr
+  Scenario: Deleting a file
+    When I have completed a non-passported application and reached the evidence upload page
+    Then I should be on a page showing 'Upload supporting evidence'
+    Then I should be able to delete 'hello_world.pdf'
+    Then I should see 'has been successfully deleted'
+    And I should only see two uploaded files

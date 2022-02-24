@@ -20,3 +20,16 @@ end
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
   find(:xpath, "//td[text()='#{filename}']/following-sibling::td//select/option[text()='#{category}']").select_option
 end
+
+Then(/^I should be able to delete ['|"](.*?)['|"]/) do |filename|
+  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//input[contains(@class,'button-as-link')]").click
+end
+
+Given('csrf is enabled') do
+  ActionController::Base.allow_forgery_protection = true
+end
+
+And('I should only see two uploaded files') do
+  delete_buttons = find_all(:xpath, "//td//input[contains(@class,'button-as-link')]")
+  expect(delete_buttons.count).to eq 2
+end
