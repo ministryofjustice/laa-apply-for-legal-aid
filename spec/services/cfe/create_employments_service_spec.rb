@@ -28,6 +28,15 @@ RSpec.describe CFE::CreateEmploymentsService do
       end
     end
 
+    context 'applicant employed but has no HMRC data' do
+      let(:applicant) { create :applicant, :employed }
+      let(:expected_payload) { empty_payload }
+
+      it 'sends empty array' do
+        described_class.call(submission)
+      end
+    end
+
     context 'applicant employed' do
       let(:applicant) { create :applicant, :employed }
       let(:expected_payload) { full_payload }

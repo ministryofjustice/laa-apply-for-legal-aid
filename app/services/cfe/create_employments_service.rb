@@ -20,7 +20,7 @@ module CFE
 
     def employment_income_payload
       payload = []
-      return payload unless legal_aid_application.applicant_employed?
+      return payload unless legal_aid_application.hmrc_employment_income?
 
       employments.each_with_index { |employment, index| payload << employment_data(employment, index + 1) }
       payload
