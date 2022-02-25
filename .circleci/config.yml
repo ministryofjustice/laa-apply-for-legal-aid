@@ -369,9 +369,13 @@ workflows:
             branches:
               ignore: main
           <<: *generic-slack-fail-post-step
+      - hold_build:
+          type: approval
+          requires:
+            - lint_checks
       - build_and_push:
           requires:
-          - lint_checks
+          - hold_build
           <<: *generic-slack-fail-post-step
       - deploy_uat:
           requires:
