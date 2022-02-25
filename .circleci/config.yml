@@ -367,8 +367,7 @@ generic-slack-fail-post-step: &generic-slack-fail-post-step
 workflows:
   version: 2
   open_pr_with_hold:
-    when:
-      condition: << pipeline.parameters.hold_needed >>
+    when: << pipeline.parameters.hold_needed >>
     jobs:
       - lint_checks:
           filters:
