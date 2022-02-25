@@ -409,8 +409,7 @@ workflows:
           <<: *generic-slack-fail-post-step
   open_pr:
     when:
-      not:
-        << pipeline.parameters.hold_needed >>
+      not: << pipeline.parameters.hold_needed >>
     jobs:
       - lint_checks:
           filters:
