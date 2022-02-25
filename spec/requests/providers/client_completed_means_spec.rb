@@ -23,6 +23,23 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include('Your client has shared their financial information')
       end
+
+      context 'when the applicant is not employed' do
+        let(:applicant) { create :applicant, :not_employed }
+        it 'does not include reviewing employment details in action list' do
+          expect(response.body).not_to include('Review their employment details')
+        end
+
+        it 'includes sorting transactions as first point' do
+          expect(response.body).to include('1. Sort their bank transactions into categories')
+        end
+      end
+
+      context 'when the applicant is employed' do
+        it 'includes reviewing employment details in action list' do
+          expect(response.body).to include('1. Review their employment details')
+        end
+      end
     end
   end
 

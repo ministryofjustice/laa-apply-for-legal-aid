@@ -282,14 +282,14 @@ en:
       show:
         h1-heading: Continue %{client_name}'s financial assessment
         what_to_do: "Your client has shared their financial information. You need to do the following:"
-        point_1_heading: 1. Review their employment details
-        point_1_text: We'll show you the information HMRC shared with us.
-        point_2_heading: 2. Sort their bank transactions into categories
-        point_2_text: Your client selected the categories their income and outgoings fall into. View their bank statements and sort transactions into these categories.
-        point_3_heading: 3. Tell us about their dependants
-        point_3_text: Provide details of your client's dependants (if they have any).
-        point_4_heading: 4. Tell us about their capital
-        point_4_text: Provide details of your client's savings, investments and other assets
+        review_employment_heading: Review their employment details
+        review_employment_text: We'll show you the information HMRC shared with us.
+        sort_transactions_heading: Sort their bank transactions into categories
+        sort_transactions_text: Your client selected the categories their income and outgoings fall into. View their bank statements and sort transactions into these categories.
+        dependants_heading: Tell us about their dependants
+        dependants_text: Provide details of your client's dependants (if they have any).
+        capital_heading: Tell us about their capital
+        capital_text: Provide details of your client's savings, investments and other assets
     confirm_offices:
       show:
         h1-heading: Is %{office_code} your office account number?
