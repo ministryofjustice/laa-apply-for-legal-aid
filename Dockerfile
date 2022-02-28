@@ -1,4 +1,4 @@
-FROM delete-this-base-build:latest
+FROM 754256621582.dkr.ecr.eu-west-2.amazonaws.com/laa-apply-for-legal-aid/applyforlegalaid-service:base
 MAINTAINER apply for legal aid team
 
 ######################
