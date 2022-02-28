@@ -24,11 +24,11 @@ const ACCEPTED_FILES = [
 function addErrorMessage (msg) {
   // this adds an error message to the gov uk error summary and shows the errors
   const errorSummary = document.querySelector('.govuk-error-summary')
-  const ul = errorSummary.querySelector('ul');
-  let li = document.createElement('li');
-  let a = document.createElement('a');
-  li.appendChild(a);
-  ul.appendChild(li);
+  const ul = errorSummary.querySelector('ul')
+  const li = document.createElement('li')
+  const a = document.createElement('a')
+  li.appendChild(a)
+  ul.appendChild(li)
   // add text and link to field
   a.innerText += msg
   a.setAttribute('aria-label', msg)
@@ -38,9 +38,9 @@ function addErrorMessage (msg) {
   const dropzoneElem = document.querySelector('#dropzone-form-group')
   dropzoneElem.classList.add('govuk-form-group--error')
   const fieldErrorMsg = document.querySelector('#dropzone-error')
-  let div = document.createElement('div');
-  div.innerText = msg;
-  fieldErrorMsg.appendChild(div);
+  const div = document.createElement('div')
+  div.innerText = msg
+  fieldErrorMsg.appendChild(div)
   fieldErrorMsg.classList.remove('hidden')
   // show the error summary and move focus to it
   errorSummary.classList.remove('hidden')
@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', event => {
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
-      e.parentElement.click()
+      e.target.parentElement.click()
     })
     // use enter key to add files
     chooseFilesBtn.addEventListener('keydown', (e) => {
       const KEY_ENTER = 13
       if (e.keyCode === KEY_ENTER) {
-        e.parentElement.click()
+        e.target.parentElement.click()
       }
     })
 
@@ -77,35 +77,35 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('drop', () => {
-      document.querySelector('#dropzone-error').querySelectorAll('div').forEach( div => {
-        div.remove();
-      });
-      const errorSummary = document.querySelector('.govuk-error-summary');
+      document.querySelector('#dropzone-error').querySelectorAll('div').forEach(div => {
+        div.remove()
+      })
+      const errorSummary = document.querySelector('.govuk-error-summary')
       errorSummary.querySelectorAll('li').forEach(listItem => {
-        listItem.remove();
-      });
-      errorSummary.classList.add('hidden'); // toggle error-summary-hideable
-      document.querySelector('#dropzone-form-group').classList.remove('govuk-form-group--error');
+        listItem.remove()
+      })
+      errorSummary.classList.add('hidden') // toggle error-summary-hideable
+      document.querySelector('#dropzone-form-group').classList.remove('govuk-form-group--error')
+      document.querySelector('#dropzone-form-group > p.govuk-error-message').remove()
     })
     dropzone.on('addedfile', file => {
-      setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay);
+      setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay)
     })
     dropzone.on('sending', (file, xhr, formData) => {
       // send the legal_aid_application id in the form data
       formData.append('legal_aid_application_id', applicationId)
     })
-    dropzone.on('success',(file) => {
-      dropzone.removeFile(file);
+    dropzone.on('success', (file) => {
+      dropzone.removeFile(file)
     })
-    dropzone.on('queuecomplete',() => {
+    dropzone.on('queuecomplete', () => {
       // reload the partial to see the uploaded files
       const fileSection = document.querySelector('#uploaded-files-table-container')
-      let url = window.location.pathname +'/list';
-      let xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", url, false ); // false for synchronous request
-      xmlHttp.send( null );
-      const response = xmlHttp.responseText;
-      fileSection.innerHTML = response;
+      const url = window.location.pathname + '/list'
+      const xmlHttp = new XMLHttpRequest()
+      xmlHttp.open('GET', url, false) // false for synchronous request
+      xmlHttp.send(null)
+      fileSection.innerHTML = xmlHttp.responseText
       setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
     })
     dropzone.on('error', (file, response) => {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg = ERR_CONTENT_TYPE.replace('FILENAME', file.name)
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR.replace('FILENAME', file.name)
-      } else if (response.error!="") {
+      } else if (response.error !== '') {
         errorMsg = response.error
       } else {
         errorMsg = ERR_GENERIC.replace('FILENAME', file.name)

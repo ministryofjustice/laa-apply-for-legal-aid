@@ -35,16 +35,19 @@
 
     <div class="govuk-!-padding-bottom-4"></div>
 
-    <div class="dropzone__upload <%= form_group_error_class %>">
-      <div class="govuk-form-group script hidden" id="dropzone-form-group" aria-labelledby="dropzone-label">
+    <div class="dropzone__upload">
+      <div class="govuk-form-group script hidden <%= form_group_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
         <label class="govuk-label govuk-label--m" id="dropzone-label">
           <%= t('.upload_file') %>
         </label>
         <div class="govuk-hint"><%= t('.size_hint') %></div>
         <% if @mandatory_evidence_errors %>
-          <% @mandatory_evidence_errors.each do |error| %>
-            <p class='govuk-error-message govuk-!-margin-bottom-1'><%= error.message %></p>
-          <% end %>
+            <p id="dropzone-error" class='govuk-error-message govuk-!-margin-bottom-1'>
+              <% @mandatory_evidence_errors.each do |error| %>
+                <span class="govuk-visually-hidden">Error:</span>
+                <%= error.message %>
+              <% end %>
+            </p>
         <% end %>
 
         <span class="hidden" aria-hidden="true" id="application-id"><%= @upload_form.model.legal_aid_application_id %></span>
