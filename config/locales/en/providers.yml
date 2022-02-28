@@ -81,8 +81,8 @@ en:
       disposable_income:
         title: Disposable income
         total_income: Total income
-        total_outgoings: Total outgoings
-        total_deductions: Total deductions
+        total_outgoings: Total outgoings (includes tax and National Insurance)
+        total_deductions: Total deductions (includes employment expenses)
         total_disposable: Total disposable income
       deductions:
         title: Deductions

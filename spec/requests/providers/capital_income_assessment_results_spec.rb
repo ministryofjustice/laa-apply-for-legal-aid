@@ -86,6 +86,8 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
             expect(unescaped_response_body).to include(I18n.t('capital_and_income_contribution_required.heading', name: applicant_name, scope: locale_scope))
             expect(unescaped_response_body).to include(income_string)
             expect(unescaped_response_body).to include("a #{gds_number_to_currency(cfe_result.capital_contribution)} one-off payment from their disposable capital")
+            expect(unescaped_response_body).to include('Total outgoings (includes tax and National Insurance)')
+            expect(unescaped_response_body).to include('Total deductions (includes employment expenses)')
           end
         end
       end
