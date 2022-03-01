@@ -19,12 +19,25 @@ RSpec.describe CFE::CreateEmploymentsService do
       stub_request(:post, service.cfe_url).with(body: expected_payload.to_json).to_return(body: dummy_response)
     end
 
+    let(:employment_income_payload) { submission.submission_histories.first.request_payload }
+
     context 'applicant not employed' do
       let(:applicant) { create :applicant, :not_employed }
       let(:expected_payload) { empty_payload }
 
       it 'sends empty array' do
         described_class.call(submission)
+        expect(employment_income_payload).to eq expected_payload.to_json
+      end
+    end
+
+    context 'applicant employed but has no HMRC data' do
+      let(:applicant) { create :applicant, :employed }
+      let(:expected_payload) { empty_payload }
+
+      it 'sends empty array' do
+        described_class.call(submission)
+        expect(employment_income_payload).to eq expected_payload.to_json
       end
     end
 
@@ -38,6 +51,7 @@ RSpec.describe CFE::CreateEmploymentsService do
 
       it 'sends array of payment data' do
         described_class.call(submission)
+        expect(employment_income_payload).to eq expected_payload.to_json
       end
 
       it 'updates the state on the submission record from irregular_income_created to employments_created' do
