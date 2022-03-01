@@ -19,7 +19,19 @@ RSpec.describe ManualReviewDetailer do
         before do
           allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
           allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
-          allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+          allow(legal_aid_application).to receive(:full_employment_details).and_return('test details')
+        end
+
+        it 'returns an array with one entry' do
+          expect(described_class.call(legal_aid_application)).to eq [I18n.t('shared.assessment_results.manual_check_required.extra_employment_information')]
+        end
+      end
+
+      context 'no restrictions, no policy disregards, with full employment details manually entered by the provider' do
+        before do
+          allow(legal_aid_application).to receive(:has_restrictions?).and_return(false)
+          allow(legal_aid_application).to receive(:policy_disregards?).and_return(false)
+          allow(legal_aid_application).to receive(:full_employment_details).and_return('test details')
         end
 
         it 'returns an array with one entry' do
@@ -46,6 +58,20 @@ RSpec.describe ManualReviewDetailer do
         allow(legal_aid_application).to receive(:has_restrictions?).and_return(true)
         allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
         allow(legal_aid_application).to receive(:extra_employment_information?).and_return(true)
+      end
+
+      it 'returns an array with three entries' do
+        expect(described_class.call(legal_aid_application)).to eq [I18n.t('shared.assessment_results.manual_check_required.restrictions'),
+                                                                   I18n.t('shared.assessment_results.manual_check_required.policy_disregards'),
+                                                                   I18n.t('shared.assessment_results.manual_check_required.extra_employment_information')]
+      end
+    end
+
+    context 'with restrictions, with policy disregards and with full employment details manually entered by the provider' do
+      before do
+        allow(legal_aid_application).to receive(:has_restrictions?).and_return(true)
+        allow(legal_aid_application).to receive(:policy_disregards?).and_return(true)
+        allow(legal_aid_application).to receive(:full_employment_details).and_return('test details')
       end
 
       it 'returns an array with three entries' do
