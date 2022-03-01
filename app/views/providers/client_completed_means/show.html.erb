@@ -2,17 +2,11 @@
 
   <p class="govuk-body-l"><%= t('.what_to_do') %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.point_1_heading') %></h2>
-  <p class="govuk-body"><%= t('.point_1_text') %></p>
+  <% @action_list.each_with_index do |action, index| %>
 
-  <h2 class="govuk-heading-m"><%= t('.point_2_heading') %></h2>
-  <p class="govuk-body"><%= t('.point_2_text') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.point_3_heading') %></h2>
-  <p class="govuk-body"><%= t('.point_3_text') %></p>
-
-  <h2 class="govuk-heading-m"><%= t('.point_4_heading') %></h2>
-  <p class="govuk-body"><%= t('.point_4_text') %></p>
+    <h2 class="govuk-heading-m"><%= "#{index + 1}. #{t(".#{action}_heading")}" %> </h2>
+    <p class="govuk-body"><%= t(".#{action}_text") %></p>
+  <% end %>
 
   <div class="govuk-!-padding-bottom-4"></div>
 
