@@ -451,7 +451,6 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         it 'displays the correct totals' do
           expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
           expect(unescaped_response_body).to include(total_other_income + td + gds_number_to_currency(cfe_result.total_gross_income))
-          expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
           expect(unescaped_response_body).to include(total_deductions + td + gds_number_to_currency(cfe_result.total_deductions))
           expect(unescaped_response_body).to include(total_disposable_income + td + gds_number_to_currency(cfe_result.total_monthly_income_including_employment_income))
           expect(unescaped_response_body).to include(total_disposable_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings_including_tax_and_ni))
