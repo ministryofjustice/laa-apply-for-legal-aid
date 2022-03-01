@@ -6,7 +6,7 @@
     <% if @legal_aid_application.hmrc_employment_income? %>
       <%= render 'shared/check_answers/employed_income', read_only: false %>
     <% else %>
-      <%= render 'shared/check_answers/no_employed_income' %>
+      <%= render 'shared/check_answers/no_employed_income', read_only: false %>
     <% end %>
   <% end %>
 

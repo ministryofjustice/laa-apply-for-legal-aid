@@ -81,13 +81,14 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     end
 
     context 'when employed feature flag is set to true' do
-      let(:before_subject) do
-        Setting.setting.update!(enable_employed_journey: true)
-        legal_aid_application.applicant.update!(employed: true)
-        legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: 'Made redundant')
-      end
+      before(:all) { Setting.setting.update!(enable_employed_journey: true) }
 
-      context 'when the applicant is employed' do
+      context 'when the applicant is employed and HMRC returns employment data' do
+        let(:before_subject) do
+          legal_aid_application.applicant.update!(employed: true)
+          legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: 'Made redundant')
+        end
+
         it 'displays the employment lines' do
           expect(unescaped_response_body).to include('Gross employment income')
           expect(unescaped_response_body).to include('Income tax')
@@ -97,11 +98,20 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         end
       end
 
-      context 'when the applicant is not employed' do
+      context 'when the applicant is employed but HMRC does not return employment data' do
         let(:before_subject) do
-          Setting.setting.update!(enable_employed_journey: true)
-          legal_aid_application.applicant.update!(employed: false)
+          legal_aid_application.applicant.update!(employed: true)
+          legal_aid_application.update!(full_employment_details: 'Test employment details')
         end
+
+        it 'displays the manually entered employment details' do
+          expect(unescaped_response_body).to include("Your client's employment details")
+          expect(unescaped_response_body).to include('Test employment details')
+        end
+      end
+
+      context 'when the applicant is not employed' do
+        let(:before_subject) { legal_aid_application.applicant.update!(employed: false) }
 
         it 'does not display the employment lines' do
           expect(unescaped_response_body).to_not include('Gross employment income')
