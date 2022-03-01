@@ -30,8 +30,7 @@ en:
           info_suffix: " AA standard."
         not_in_scope:
           heading: Content that’s not within the scope of the accessibility regulations
-          info_1: Page titles do not conform with GOV.UK Design System guidelines.
-          info_2: There are pages which will be difficult for screen reader users to navigate due to the structure of the page.
+          info_1: There are pages which will be difficult for screen reader users to navigate due to the structure of the page.
         improvements:
           heading: What we’re doing to improve accessibility
           info: We will monitor the accessibility of this website on an on-going basis and fix any accessibility issues reported to us.
@@ -49,4 +48,4 @@ en:
       testing:
         heading: How we tested this website
         info_1: This website was last tested on 16 October 2020. The test was carried out by the Digital Accessibility Centre (DAC).
-      preparation_date: This statement was prepared on 26 October 2020.
+      preparation_date: This statement was prepared on 26 October 2020 and last updated on 24 February 2022.
