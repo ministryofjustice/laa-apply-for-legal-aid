@@ -207,6 +207,10 @@ module CFE
         mei_pension + mei_student_loan + mei_property_or_lodger + mei_maintenance_in + mei_friends_or_family + monthly_state_benefits.to_d
       end
 
+      def total_monthly_income_including_employment_income
+        total_monthly_income
+      end
+
       ################################################################
       #                                                              #
       #  MONTHLY_OUTGOING_EQUIVALENTS                                #
@@ -233,6 +237,10 @@ module CFE
         moe_housing + moe_childcare + moe_maintenance_out + moe_legal_aid
       end
 
+      def total_monthly_outgoings_including_tax_and_ni
+        total_monthly_outgoings
+      end
+
       ################################################################
       #                                                              #
       #  DEDUCTIONS                                                  #
@@ -249,6 +257,10 @@ module CFE
 
       def total_deductions
         dependants_allowance + disregarded_state_benefits
+      end
+
+      def total_deductions_including_fixed_employment_allowance
+        total_deductions
       end
 
       private

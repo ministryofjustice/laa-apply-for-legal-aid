@@ -53,9 +53,9 @@ module CFEResults
               employment_income: {
                 gross_income: 2143.97,
                 benefits_in_kind: 0.0,
-                tax: 204.15,
-                national_insurance: 161.64,
-                fixed_employment_deduction: 45.0,
+                tax: -204.15,
+                national_insurance: -161.64,
+                fixed_employment_deduction: -45.0,
                 net_employment_income: 1778.18
               },
               proceeding_types: [

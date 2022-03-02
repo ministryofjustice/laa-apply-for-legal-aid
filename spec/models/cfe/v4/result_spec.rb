@@ -576,9 +576,21 @@ module CFE
         end
       end
 
+      describe 'total_monthly_income_including_employment_income' do
+        it 'returns total monthly income including employment income' do
+          expect(with_monthly_income_equivalents.total_monthly_income_including_employment_income).to eq 2258.97
+        end
+      end
+
       describe 'total_monthly_outgoings' do
         it 'returns total monthly outgoings' do
           expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 165.0
+        end
+      end
+
+      describe 'total_monthly_outgoings_including_tax_and_ni' do
+        it 'returns total monthly outgoings including tax and ni' do
+          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings_including_tax_and_ni).to eq 530.79
         end
       end
 
@@ -603,6 +615,12 @@ module CFE
       describe 'total_deductions' do
         it 'returns total deductions' do
           expect(with_total_deductions.total_deductions).to eq 1300.0
+        end
+      end
+
+      describe 'total_deductions_including_fixed_employment_allowance' do
+        it 'returns total deductions including_employment restrictions' do
+          expect(with_total_deductions.total_deductions_including_fixed_employment_allowance).to eq 1345.0
         end
       end
 
@@ -689,6 +707,36 @@ module CFE
           describe 'jobs?' do
             subject(:jobs?) { with_no_employments.jobs? }
             it { is_expected.to be(false) }
+          end
+
+          describe 'gross_income' do
+            subject(:gross_income) { with_no_employments.employment_income_gross_income }
+            it { is_expected.to eq 0.0 }
+          end
+
+          describe 'gross_income' do
+            subject(:benefits_in_kind) { with_no_employments.employment_income_benefits_in_kind }
+            it { is_expected.to eq 0.0 }
+          end
+
+          describe 'tax' do
+            subject(:tax) { with_no_employments.employment_income_tax }
+            it { is_expected.to eq 0.0 }
+          end
+
+          describe 'national_insurance' do
+            subject(:tax) { with_no_employments.employment_income_national_insurance }
+            it { is_expected.to eq 0.0 }
+          end
+
+          describe 'fixed_employment_deduction' do
+            subject(:tax) { with_no_employments.employment_income_fixed_employment_deduction }
+            it { is_expected.to eq 0.0 }
+          end
+
+          describe 'net_employment_income' do
+            subject(:tax) { with_no_employments.employment_income_net_employment_income }
+            it { is_expected.to eq 0.0 }
           end
         end
       end

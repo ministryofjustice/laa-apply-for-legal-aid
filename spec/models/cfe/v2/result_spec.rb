@@ -488,6 +488,7 @@ module CFE
           expect(result.mei_property_or_lodger).to eq 450.0
           expect(result.mei_pension).to eq 82.52
           expect(result.total_monthly_income).to eq 712.28
+          expect(result.total_monthly_income_including_employment_income).to eq 712.28
         end
       end
 
@@ -499,6 +500,7 @@ module CFE
           expect(result.moe_maintenance_out).to eq 3.64
           expect(result.moe_legal_aid).to eq 7.0
           expect(result.total_monthly_outgoings).to eq 26.39
+          expect(result.total_monthly_outgoings_including_tax_and_ni).to eq 26.39
         end
       end
 
@@ -508,6 +510,7 @@ module CFE
           expect(result.dependants_allowance).to eq 291.86
           expect(result.disregarded_state_benefits).to eq 1500.0
           expect(result.total_deductions).to eq 1791.86
+          expect(result.total_deductions_including_fixed_employment_allowance).to eq 1791.86
         end
       end
 
