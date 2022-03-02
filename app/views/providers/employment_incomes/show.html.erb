@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <% if @summary_income && @applicant.not_employed? %>
+  <% if @employments.any? && @applicant.not_employed? %>
     <% page_heading = 'not_employed' %>
   <% else %>
     <% page_heading = 'employed' %>
@@ -20,7 +20,7 @@
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
                                           legend: { size: 'xl', tag: 'h1', text: page_title}) do %>
 
-    <% if @summary_income && @applicant.not_employed? %>
+    <% if @employments.any? && @applicant.not_employed? %>
         <div class="govuk-!-padding-bottom-6"></div>
         <p class="govuk-body-l"> <%= t('.hmrc_not_employed') %> </p>
     <% end %>
@@ -39,12 +39,12 @@
         </thead>
 
         <tbody class="govuk-table__body">
-        <% @summary_income.employments.each do |employment| %>
-          <% employment.payments.each do |payment| %>
+        <% @employments.each do |employment| %>
+          <% employment.employment_payments.each do |payment| %>
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.payment_date.to_date, format: :short_date) %></td>
+            <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.date, format: :short_date) %></td>
             <td class="govuk-table__cell" style="width: 10%;"><b><%= t('.gross') %></b></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><b></b><%= gds_number_to_currency(payment.gross_pay) %></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><b></b><%= gds_number_to_currency(payment.gross) %></td>
             <td class="govuk-table__cell" style="width: 35%;"><b><%= t('.tax') %></b>
             <br>
             <b><%= t('.ni') %></b>

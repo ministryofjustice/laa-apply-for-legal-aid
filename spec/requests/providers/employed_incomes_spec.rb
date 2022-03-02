@@ -4,7 +4,11 @@ RSpec.describe 'employed incomes request', type: :request do
   let(:application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant }
   let(:applicant) { create :applicant, :not_employed }
   let(:provider) { application.provider }
-  before { create :hmrc_response, :use_case_one, legal_aid_application_id: application.id }
+
+  before do
+    # This will also create the corresponding employment and employment_payment records
+    create :hmrc_response, :use_case_one, legal_aid_application_id: application.id
+  end
 
   describe 'GET /providers/applications/:id/employed_income' do
     subject { get providers_legal_aid_application_employment_income_path(application) }
@@ -42,6 +46,7 @@ RSpec.describe 'employed incomes request', type: :request do
 
   describe 'PATCH /providers/applications/:id/employed_income' do
     subject { patch providers_legal_aid_application_employment_income_path(application), params: params.merge(submit_button) }
+
     let(:params) do
       {
         legal_aid_application: {

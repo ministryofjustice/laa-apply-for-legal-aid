@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_171301) do
+ActiveRecord::Schema.define(version: 2022_02_23_141651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -388,6 +388,27 @@ ActiveRecord::Schema.define(version: 2022_02_04_171301) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id", unique: true
+  end
+
+  create_table "employment_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "employment_id"
+    t.date "date", null: false
+    t.decimal "gross", default: "0.0", null: false
+    t.decimal "benefits_in_kind", default: "0.0", null: false
+    t.decimal "national_insurance", default: "0.0", null: false
+    t.decimal "tax", default: "0.0", null: false
+    t.decimal "net_employment_income", default: "0.0", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employment_id"], name: "index_employment_payments_on_employment_id"
+  end
+
+  create_table "employments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id"
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legal_aid_application_id"], name: "index_employments_on_legal_aid_application_id"
   end
 
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -827,6 +848,8 @@ ActiveRecord::Schema.define(version: 2022_02_04_171301) do
   add_foreign_key "chances_of_successes", "proceedings"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "dwp_overrides", "legal_aid_applications"
+  add_foreign_key "employment_payments", "employments"
+  add_foreign_key "employments", "legal_aid_applications"
   add_foreign_key "gateway_evidences", "legal_aid_applications"
   add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"

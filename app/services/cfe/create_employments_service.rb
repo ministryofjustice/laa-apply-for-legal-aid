@@ -7,9 +7,7 @@ module CFE
     end
 
     def request_body
-      {
-        employment_income: employment_income_payload
-      }.to_json
+      { employment_income: employment_income_payload }.to_json
     end
 
     def process_response
@@ -26,36 +24,37 @@ module CFE
       payload
     end
 
-    def employment_data(employment, job_num)
+    def employment_data(employment, _job_num)
       {
-        name: "Job #{job_num}",
+        name: employment.name,
+        client_id: employment.id,
         payments: employment_payments(employment)
       }
     end
 
     def employment_payments(employment)
       data = []
-      employment.payments.each { |payment| data << individual_payment_data(payment) }
+      employment.employment_payments.each do |payment|
+        data << individual_payment_data(payment)
+      end
       data
     end
 
     def individual_payment_data(payment)
+      # convert the values to floats here to prevent them from being quoted by JSON
       {
-        date: payment.formatted_payment_date,
-        gross: payment.gross_pay,
-        benefits_in_kind: payment.benefits_in_kind,
-        tax: payment.tax,
-        national_insurance: payment.national_insurance,
-        net_employment_income: payment.net_pay
+        client_id: payment.id,
+        date: payment.date.strftime('%F'),
+        gross: payment.gross.to_f,
+        benefits_in_kind: payment.benefits_in_kind.to_f,
+        tax: payment.tax.to_f,
+        national_insurance: payment.national_insurance.to_f,
+        net_employment_income: payment.net_employment_income.to_f
       }
     end
 
     def employments
-      employment_income_summary.employments
-    end
-
-    def employment_income_summary
-      @employment_income_summary || HMRC::ParsedResponse::EmploymentIncomeSummary.new(legal_aid_application)
+      legal_aid_application.employments
     end
   end
 end
