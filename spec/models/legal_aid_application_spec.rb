@@ -1293,6 +1293,35 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe 'manually_entered_employment_information?' do
+    let(:laa) { create :legal_aid_application }
+
+    context 'when no employment information has been entered by the provider' do
+      it 'returns false' do
+        expect(laa.manually_entered_employment_information?).to eq false
+      end
+    end
+
+    context 'when extra employment information has been entered by the provider' do
+      before do
+        laa.update!(extra_employment_information: true)
+        laa.update!(extra_employment_information_details: 'test details')
+      end
+
+      it 'returns true' do
+        expect(laa.manually_entered_employment_information?).to eq true
+      end
+    end
+
+    context 'when full employment information has been entered by the provider' do
+      before { laa.update!(full_employment_details: 'test details') }
+
+      it 'returns true' do
+        expect(laa.manually_entered_employment_information?).to eq true
+      end
+    end
+  end
+
   private
 
   def uploaded_evidence_output

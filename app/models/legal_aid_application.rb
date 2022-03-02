@@ -471,6 +471,10 @@ class LegalAidApplication < ApplicationRecord
     out.transform_values { |attachment| attachment.map(&:original_filename) }
   end
 
+  def manually_entered_employment_information?
+    extra_employment_information? || full_employment_details.present?
+  end
+
   private
 
   def bank_transactions_by_type(type)
