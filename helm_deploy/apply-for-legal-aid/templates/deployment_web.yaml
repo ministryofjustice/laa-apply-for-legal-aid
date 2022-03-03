@@ -22,7 +22,7 @@ spec:
       containers:
         # https://github.com/ministryofjustice/hmpps-utility-container-images
         - name: clamav
-          image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+          image: ghcr.io/ministryofjustice/hmpps-clamav:latest # trigger build - it should fail
           imagePullPolicy: IfNotPresent
           ports:
             - name: clamav
