@@ -37,5 +37,5 @@ cy:
   problem:
     index:
       title: ecivres eht htiw melborp a si ereht ,yrroS
-      try_later: ".retal niaga yrT"
+      ccms_or_try_later_html: ".retal niaga yrT"
       answers_saved: ".srewsna ruoy devas eW"
