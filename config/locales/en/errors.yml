@@ -37,5 +37,5 @@ en:
   problem:
     index:
       title: Sorry, there is a problem with the service
-      try_later: Try again later.
-      answers_saved: We saved your answers.
+      ccms_or_try_later_html: <a href="https://portal.legalservices.gov.uk/">Use CCMS to complete your application</a> or try again later.
+      answers_saved: We've saved your answers.

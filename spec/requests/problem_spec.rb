@@ -11,7 +11,7 @@ RSpec.describe ProblemController, type: :request do
 
     it 'displays the correct content' do
       expect(unescaped_response_body).to match(I18n.t('problem.index.title'))
-      expect(unescaped_response_body).to match(I18n.t('problem.index.try_later'))
+      expect(unescaped_response_body).to match(I18n.t('problem.index.ccms_or_try_later_html'))
       expect(unescaped_response_body).to match(I18n.t('problem.index.answers_saved'))
     end
   end
