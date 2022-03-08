@@ -11,7 +11,7 @@ namespace :inactive_providers do
         updated_at
         portal_enabled
       ]
-      inactive_providers = Provider.where('current_sign_in_at < ? OR (current_sign_in_at IS NULL AND created_at < ?)', 6.months.ago.to_date, 6.months.ago.to_date)
+      inactive_providers = Provider.where('current_sign_in_at < :limit OR (current_sign_in_at IS NULL AND created_at < :limit)', limit: 6.months.ago.to_date)
       inactive_providers.each do |inactive_provider|
         csv << [
           inactive_provider.id,
@@ -29,7 +29,7 @@ namespace :inactive_providers do
 
   desc 'Deactivate inactive providers'
   task deactivate: :environment do
-    inactive_providers = Provider.where('current_sign_in_at < ? OR (current_sign_in_at IS NULL AND created_at < ?)', 6.months.ago.to_date, 6.months.ago.to_date)
+    inactive_providers = Provider.where('current_sign_in_at < :limit OR (current_sign_in_at IS NULL AND created_at < :limit)', limit: 6.months.ago.to_date)
     inactive_providers.each do |inactive_provider|
       inactive_provider.update!(portal_enabled: false)
     end
