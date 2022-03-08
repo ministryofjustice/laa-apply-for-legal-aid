@@ -28,7 +28,7 @@
         <div class="govuk-body"><%= t('.list_text') %></div>
         <ul class="govuk-list govuk-list--bullet govuk-!-padding-bottom-2">
           <% @required_documents.each do |evidence| %>
-            <li><%= t(".#{evidence}", benefit: @legal_aid_application.dwp_override.passporting_benefit.titleize) %></li>
+            <li><%= t(".#{evidence}", benefit: @legal_aid_application&.dwp_override&.passporting_benefit&.titleize) %></li>
           <% end %>
         </ul>
       <% end %>
