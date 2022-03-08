@@ -1,8 +1,8 @@
-name: Docker/generate apply-ci image
+name: "Generate apply-ci docker image"
 on:
   schedule:
     - cron:  '30 5 * * *'
-  workflow_dispatch
+  workflow_dispatch:
 jobs:
   build-push:
     runs-on: ubuntu-latest
