@@ -18,4 +18,5 @@ jobs:
           docker build . --file ./docker/apply_ci.dockerfile --tag ministryofjustice/apply-ci:latest --tag ministryofjustice/apply-ci:latest-$(cat .ruby-version)
       - name: Push the Docker image
         run: |
-          docker push ministryofjustice/apply-ci
+          docker push ministryofjustice/apply-ci:latest
+          docker push ministryofjustice/apply-ci:latest-$(cat .ruby-version)
