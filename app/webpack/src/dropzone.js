@@ -58,13 +58,12 @@ document.addEventListener('DOMContentLoaded', event => {
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
-      e.target.parentElement.click()
     })
     // use enter key to add files
     chooseFilesBtn.addEventListener('keydown', (e) => {
       const KEY_ENTER = 13
       if (e.keyCode === KEY_ENTER) {
-        e.target.parentElement.click()
+        e.preventDefault() // prevent submitting form by default
       }
     })
 
@@ -77,9 +76,12 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('drop', () => {
-      document.querySelector('#dropzone-error').querySelectorAll('div').forEach(div => {
-        div.remove()
-      })
+      const dropzoneError = document.querySelector('#dropzone-error')
+      if (dropzoneError) {
+        dropzoneError.querySelectorAll('div').forEach(div => {
+          div.remove()
+        })
+      }
       const errorSummary = document.querySelector('.govuk-error-summary')
       errorSummary.querySelectorAll('li').forEach(listItem => {
         listItem.remove()
