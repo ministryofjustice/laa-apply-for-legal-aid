@@ -11,6 +11,7 @@ const ACCEPTED_FILES = [
   'application/pdf',
   'application/msword',
   'application/vnd.oasis.opendocument.text',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   'text/rtf',
   'text/plain',
   'application/rtf',
@@ -37,7 +38,7 @@ function addErrorMessage (msg) {
   // show error message on the dropzone form field
   const dropzoneElem = document.querySelector('#dropzone-form-group')
   dropzoneElem.classList.add('govuk-form-group--error')
-  const fieldErrorMsg = document.querySelector('#dropzone-error')
+  const fieldErrorMsg = document.querySelector('#dropzone-file-error')
   const div = document.createElement('div')
   div.innerText = msg
   fieldErrorMsg.appendChild(div)
@@ -46,6 +47,23 @@ function addErrorMessage (msg) {
   errorSummary.classList.remove('hidden')
   errorSummary.scrollIntoView()
   errorSummary.focus()
+}
+
+function removeErrorMessages() {
+  document.querySelectorAll('.dropzone-error').forEach((dzError) => {
+    if (dzError) {
+      dzError.querySelectorAll('div').forEach(div => {
+        div.remove()
+      })
+    }
+  })
+  const errorSummary = document.querySelector('.govuk-error-summary')
+  errorSummary.querySelectorAll('li').forEach(listItem => {
+    listItem.remove()
+  })
+  errorSummary.classList.add('hidden') // toggle error-summary-hideable
+  document.querySelector('#dropzone-form-group').classList.remove('govuk-form-group--error')
+  document.querySelector('#dropzone-form-group > p.govuk-error-message').classList.add('hidden')
 }
 
 document.addEventListener('DOMContentLoaded', event => {
@@ -58,12 +76,14 @@ document.addEventListener('DOMContentLoaded', event => {
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
+      removeErrorMessages()
     })
     // use enter key to add files
     chooseFilesBtn.addEventListener('keydown', (e) => {
       const KEY_ENTER = 13
       if (e.keyCode === KEY_ENTER) {
         e.preventDefault() // prevent submitting form by default
+        removeErrorMessages()
       }
     })
 
@@ -76,19 +96,7 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', ')
     })
     dropzone.on('drop', () => {
-      const dropzoneError = document.querySelector('#dropzone-error')
-      if (dropzoneError) {
-        dropzoneError.querySelectorAll('div').forEach(div => {
-          div.remove()
-        })
-      }
-      const errorSummary = document.querySelector('.govuk-error-summary')
-      errorSummary.querySelectorAll('li').forEach(listItem => {
-        listItem.remove()
-      })
-      errorSummary.classList.add('hidden') // toggle error-summary-hideable
-      document.querySelector('#dropzone-form-group').classList.remove('govuk-form-group--error')
-      document.querySelector('#dropzone-form-group > p.govuk-error-message').remove()
+      removeErrorMessages()
     })
     dropzone.on('addedfile', file => {
       setTimeout(() => { statusMessage.innerHTML = 'Your files are being uploaded.' }, screenReaderMessageDelay)
