@@ -11,6 +11,7 @@ const ACCEPTED_FILES = [
   'application/pdf',
   'application/msword',
   'application/vnd.oasis.opendocument.text',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   'text/rtf',
   'text/plain',
   'application/rtf',
