@@ -372,8 +372,8 @@ en:
               check_box_life_assurance_endowment_policy: Life assurance and endowment policies not linked to a mortgage
               check_box_national_savings: ISAs, National Savings Certificates and Premium Bonds
               check_box_other_person_account: Access to another person's bank account
-              check_box_peps_unit_trusts_capital_bonds_gov_stocks: PEPs, unit trusts, capital bonds and government stocks
-              check_box_plc_shares: Shares in a PLC (public limited company)
+              check_box_peps_unit_trusts_capital_bonds_gov_stocks: Personal equity plans (PEPs), unit trusts, capital bonds and government stocks
+              check_box_plc_shares: Shares in a public limited company (PLC)
               hint:
                 revealing_check_box_offline_current_accounts: If your client has multiple accounts, take the lowest balance from each account last month, add them, then enter the total
                 check_box_cash: For example, cash kept at home.
