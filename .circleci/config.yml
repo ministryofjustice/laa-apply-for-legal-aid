@@ -12,7 +12,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
   linting-executor:
     docker:
-      - image: cimg/ruby:3.1.0-browsers
+      - image: cimg/ruby:3.1.1-browsers
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
@@ -29,7 +29,7 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest
+      - image: ministryofjustice/apply-ci:latest-3.1.1
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
       - image: cimg/postgres:10.18
@@ -56,6 +56,7 @@ references:
     run:
       name: Install ruby gems
       command: |
+        gem update --system
         bundle install --path=vendor/bundle --jobs=4 && bundle clean
 
   install_lib_ffi: &install_lib_ffi
@@ -131,6 +132,11 @@ jobs:
     executor: linting-executor
     steps:
     - checkout
+    - setup_remote_docker:
+        version: 20.10.7
+    - *update_packages
+    - run: sudo apt-get install -y git-crypt
+    - *decrypt_secrets
     - *install_lib_ffi
     - *restore_gems_cache
     - *install_gems
@@ -147,6 +153,25 @@ jobs:
     - run:
         name: Run erblint
         command: bin/rails erblint
+    - run:
+        name: Check if new apply-ci image is needed, and build if so
+        command: |
+          COMMITS_IN_BRANCH=$(git rev-list main.. --count)
+          ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
+          RUBY_VERSION_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep ".ruby-version" || true) | wc -l | xargs) 
+          TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${DOCKER_HUB_USERNAME}'", "password": "'${DOCKER_HUB_PAT}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+          VERSION_EXISTS=$(curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/ministryofjustice/apply-ci/tags | jq -r '.results|.[]|.name|startswith("latest-$(cat .ruby-version)")')
+          if [ "$RUBY_VERSION_CHANGED" = "1" ]; then 
+            if [ "$VERSION_EXISTS" = "false" ]; then
+              echo "${DOCKER_HUB_PAT}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+              docker build -f ./docker/apply_ci.dockerfile . -t ministryofjustice/apply-ci:latest-$(cat .ruby-version)
+              docker push ministryofjustice/apply-ci:latest-$(cat .ruby-version)
+            else
+              echo "latest-$(cat .ruby-version) image already exists"
+            fi
+          else
+            echo ".ruby-version not changed"
+          fi
 
   unit_tests:
     parallelism: 6

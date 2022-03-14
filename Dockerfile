@@ -1,4 +1,4 @@
-FROM ruby:3.1.0-alpine3.14
+FROM ruby:3.1.1-alpine3.14
 MAINTAINER apply for legal aid team
 
 ENV \
@@ -67,8 +67,8 @@ COPY Gemfile* ./
 
 # only install production dependencies,
 # build nokogiri using libxml2-dev, libxslt-dev
-RUN gem install bundler -v 2.0.2 \
-&& bundle config --global without test:development \
+RUN gem update --system \
+&& bundle config --local without 'test development' \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle install
 
