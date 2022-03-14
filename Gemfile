@@ -119,9 +119,8 @@ group :development, :test do
   gem 'overcommit'
   gem 'pry-byebug'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance'
-  gem 'rubocop-rails', require: false
+  gem "rubocop-govuk", require: false
+  gem "rubocop-performance"
 
   # Available in dev env for generators
   gem 'rspec-rails', '~> 5.1'

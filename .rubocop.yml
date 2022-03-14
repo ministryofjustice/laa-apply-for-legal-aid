@@ -1,11 +1,19 @@
-require: 
+require:
   - rubocop-performance
-  - rubocop-rails
 
 inherit_from: .rubocop_todo.yml
 
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    - config/rails.yml
+    - config/rspec.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
 AllCops:
-  TargetRubyVersion: 2.7
   NewCops: enable
   SuggestExtensions: false
   Exclude:
@@ -17,18 +25,9 @@ AllCops:
   - 'tmp/**/*'
   - 'log/**/*'
 
-Layout/LineLength:
-  Max: 180
-
 Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
-
-Lint/UriEscapeUnescape:
-  Enabled: false
-
-Lint/RedundantCopDisableDirective:
-  Enabled: false
 
 Metrics/AbcSize:
   Exclude:
@@ -57,53 +56,10 @@ Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*'
 
-Metrics/ParameterLists:
-  Max: 7
-
-Rails/Present:
-  Exclude:
-  - 'bin/bundle'
-
-Style/BlockDelimiters:
-  EnforcedStyle: braces_for_chaining
-
-Style/Documentation:
-  Exclude:
-  - '**/*'
-
-Style/SymbolArray:
-  EnforcedStyle: percent
-
-Style/Lambda:
-  EnforcedStyle: literal
-
-Style/RegexpLiteral:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Metrics/CyclomaticComplexity:
   IgnoredMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
 
-Style/AccessorGrouping:
-  Enabled: false
-
-Style/RedundantAssignment:
-  Enabled: false
-
-Style/SoleNestedConditional:
-  Enabled: false
-
 Metrics/PerceivedComplexity:
   IgnoredMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
-
-Naming/InclusiveLanguage:
-  CheckComments: false
-  CheckStrings: false
-  FlaggedTerms:
-    master:
-      AllowedRegex:
-        - !ruby/regexp "/master.key/i"
