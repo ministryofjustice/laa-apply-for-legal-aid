@@ -30,10 +30,10 @@ GIT
 
 GIT
   remote: https://github.com/vcr/vcr.git
-  revision: 7ac8292c289ca98dcb4254b59e1ee29e2205d8b3
+  revision: 042fae33555eac5296b7de786c59db7b2bf10183
   branch: master
   specs:
-    vcr (6.0.0)
+    vcr (6.1.0)
 
 GEM
   remote: https://rubygems.org/
