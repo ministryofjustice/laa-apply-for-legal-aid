@@ -211,13 +211,13 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
 
     it 'has a hidden form field to show whether the feedback originates from a submission email with false value' do
-      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="false" />')
+      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="false" autocomplete="off" />')
     end
 
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
       it 'hash a hidden form field with no value' do
-        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" />')
+        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" autocomplete="off" />')
       end
     end
 
@@ -257,17 +257,17 @@ RSpec.describe 'FeedbacksController', type: :request do
     end
 
     it 'has a hidden form field to show whether the feedback originates from a submission email with true value' do
-      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="true" />')
+      expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="true" autocomplete="off" />')
     end
 
     it 'has a hidden form field to store the application id' do
-      expect(response.body).to include("<input type=\"hidden\" name=\"application_id\" id=\"application_id\" value=\"#{application.id}\" />")
+      expect(response.body).to include("<input type=\"hidden\" name=\"application_id\" id=\"application_id\" value=\"#{application.id}\" autocomplete=\"off\" />")
     end
 
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
       it 'hash a hidden form field with no value' do
-        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" />')
+        expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" autocomplete="off" />')
       end
     end
   end
