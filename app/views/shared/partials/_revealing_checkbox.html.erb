@@ -9,7 +9,7 @@
     <% if error %>
       <% error_class='govuk-form-group--error'
          error_id = "#{model.model_name.to_s.underscore.dasherize}-#{name.dasherize}#{number}" %>
-      <p class='govuk-error-message' id="<% error_id %>"><%= error %></p>
+      <p class='govuk-error-message' id="<%= error_id %>"><%= error %></p>
     <% end %>
     <%= form.govuk_text_field "#{name}#{number}",
       label: {text: model.period(number)},
