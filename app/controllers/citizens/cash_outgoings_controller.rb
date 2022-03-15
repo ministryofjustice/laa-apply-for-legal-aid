@@ -24,9 +24,9 @@ module Citizens
         .require(:aggregated_cash_outgoings)
         .except(:cash_outgoings)
         .merge({
-                 legal_aid_application_id: legal_aid_application[:id],
-                 none_selected: params[:aggregated_cash_outgoings][:none_selected]
-               })
+          legal_aid_application_id: legal_aid_application[:id],
+          none_selected: params[:aggregated_cash_outgoings][:none_selected]
+        })
     end
 
     def update_no_cash_outgoings(params)

@@ -409,11 +409,11 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
   def additional_valid_params
     valid_params.merge({
-                         check_box_legal_aid: 'true',
-                         legal_aid1: '15',
-                         legal_aid2: '20',
-                         legal_aid3: '25'
-                       })
+      check_box_legal_aid: 'true',
+      legal_aid1: '15',
+      legal_aid2: '20',
+      legal_aid3: '25'
+    })
   end
 
   def non_numeric_params
@@ -434,13 +434,13 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
   def corrected_valid_params
     valid_params.merge({
-                         rent_or_mortgage1: '7',
-                         rent_or_mortgage2: '8',
-                         rent_or_mortgage3: '9',
-                         maintenance_out1: '10',
-                         maintenance_out2: '11',
-                         maintenance_out3: '12'
-                       })
+      rent_or_mortgage1: '7',
+      rent_or_mortgage2: '8',
+      rent_or_mortgage3: '9',
+      maintenance_out1: '10',
+      maintenance_out2: '11',
+      maintenance_out3: '12'
+    })
   end
 
   def none_selected_params
