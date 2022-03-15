@@ -149,5 +149,27 @@ RSpec.describe CCMS::SubmissionProcessWorker do
         end
       end
     end
+
+    context 'when a failure occurs' do
+      before do
+        allow(submission).to receive(:case_ccms_reference).and_return('FAILED')
+      end
+
+      let(:expected_error) do
+        "<<~MESSAGE
+          Submission #{submission.id} failed with Case CCMS Reference FAILED
+        MESSAGE"
+      end
+
+      it 'raises a Sentry error' do
+        expect(Sentry).to receive(:capture_message)
+        subject
+      end
+
+      it 'the submission does not continue' do
+        expect(CCMS::SubmissionProcessWorker).not_to receive(:perform_async)
+        subject
+      end
+    end
   end
 end

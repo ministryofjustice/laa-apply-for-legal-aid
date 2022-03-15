@@ -3,6 +3,8 @@ module CCMS
 
   class SentryIgnoreThisSidekiqFailError < StandardError; end
 
+  class SubmissionFailed < StandardError; end
+
   class SubmissionProcessWorker
     include Sidekiq::Worker
     include Sidekiq::Status::Worker
@@ -25,8 +27,14 @@ module CCMS
       # raise an error if the current attempt has not changed the state
       raise SubmissionStateUnchanged if state_unchanged?(start_state)
 
+      # CCMS is occasionally returning Case CCMS Refence FAILED ap-2509
+      raise SubmissionFailed if @submission.case_ccms_reference == 'FAILED'
+
       # if state has changed then create new worker for next state and successfully exit!
       SubmissionProcessWorker.perform_async(submission_id, @submission.aasm_state)
+    rescue SubmissionFailed
+      # don't continue with submission and notify in Sentry
+      Sentry.capture_message("Submission #{@submission.id} failed with Case CCMS Reference FAILED")
     rescue StandardError => e
       raise if @retry_count.eql? MAX_RETRIES
 
