@@ -15,7 +15,7 @@ class ApplicationDigest < ApplicationRecord
 
   private
 
-    def map_attrs(application_id) # rubocop:disable Metrics/MethodLength
+    def map_attrs(application_id)
       laa = LegalAidApplication.find application_id
       {
         legal_aid_application_id: laa.id,

@@ -37,7 +37,7 @@ private
     raise ApiError, "Provider details error: #{e.class} :: #{e.message}"
   end
 
-  def url # rubocop:disable Lint/UriEscapeUnescape
+  def url
     File.join(Rails.configuration.x.provider_details.url, encoded_uri)
   end
 

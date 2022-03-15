@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class UsedMultipleDelegatedFunctionsForm # rubocop:disable Metrics/ClassLength
+  class UsedMultipleDelegatedFunctionsForm
     include ActiveModel::Model
 
     validate :validate_nothing_selected,

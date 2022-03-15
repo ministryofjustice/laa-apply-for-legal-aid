@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  module Submitters # rubocop:disable Metrics/ModuleLength
+  module Submitters
     RSpec.describe ObtainApplicantReferenceService, :ccms do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_everything_and_address, populate_vehicle: true }
       let(:applicant) { legal_aid_application.applicant }

@@ -223,7 +223,7 @@ module Reports
         @line << laspo_question
       end
 
-      def income_details # rubocop:disable Metrics/AbcSize
+      def income_details
         @line << yesno(cash_transactions.credits.any?)
         @line << yesno(irregular_incomes.student_finance.any?)
         @line << yesno(cash_transactions.debits.any?)
@@ -265,7 +265,7 @@ module Reports
         vehicle.present? ? vehicle_attrs : @line += ['', '', '', '', '']
       end
 
-      def vehicle_attrs # rubocop:disable Metrics/AbcSize
+      def vehicle_attrs
         @line << vehicle.estimated_value
         @line << (nil_or_zero?(vehicle.payment_remaining) ? 'No' : 'Yes')
         @line << (nil_or_zero?(vehicle.payment_remaining) ? '' : vehicle.payment_remaining)
@@ -352,7 +352,7 @@ module Reports
         opponent.present? ? opponent_attrs : 8.times { @line << '' }
       end
 
-      def opponent_attrs # rubocop:disable Metrics/AbcSize
+      def opponent_attrs
         @line << yesno(understands_terms_of_court_order?)
         @line << understands_terms_of_court_order_details
         @line << yesno(warning_letter_sent?)

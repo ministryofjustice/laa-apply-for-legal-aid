@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  module Requestors # rubocop:disable Metrics/ModuleLength
+  module Requestors
     RSpec.describe CaseAddRequestor, :ccms do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
@@ -1645,7 +1645,7 @@ module CCMS
         end
       end
 
-      def omitted_attributes # rubocop:disable Metrics/MethodLength
+      def omitted_attributes
         [
           [:family_statement],
           [:main_dwelling],
@@ -2186,7 +2186,7 @@ module CCMS
         ]
       end
 
-      def false_attributes # rubocop:disable Metrics/MethodLength
+      def false_attributes
         [
           [:global_means, 'GB_INPUT_B_1WP2_14A'],
           [:global_means, 'GB_INPUT_B_1WP2_22A'],

@@ -1,5 +1,5 @@
 module CFE
-  class BaseResult < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  class BaseResult < ApplicationRecord
     belongs_to :legal_aid_application
     belongs_to :submission
 

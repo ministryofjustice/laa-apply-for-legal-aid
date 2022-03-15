@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Layout/LineLength
 module Dashboard
   module WidgetDataProviders
     RSpec.describe Applications do
@@ -37,7 +36,7 @@ module Dashboard
           end
         end
 
-        def expected_data # rubocop:disable Metrics/MethodLength
+        def expected_data
           [
             { 'date' => '2019-11-22', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'submitted_passported_apps' => 0, 'submitted_nonpassported_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
             { 'date' => '2019-11-23', 'started_apps' => 0, 'submitted_apps' => 0, 'total_submitted_apps' => 0, 'submitted_passported_apps' => 0, 'submitted_nonpassported_apps' => 0, 'failed_apps' => 0, 'delegated_func_apps' => 0 },
@@ -73,7 +72,6 @@ module Dashboard
           create_2019_12_12
         end
 
-        # rubocop:disable Naming/VariableNumber
         def create_2019_12_06
           travel_to(Date.new(2019, 12, 6)) do
             create_new(3)
@@ -122,7 +120,6 @@ module Dashboard
             create_incomplete_non_passported(2)
           end
         end
-        # rubocop:enable Naming/VariableNumber
 
         def create_new(num)
           FactoryBot.create_list :legal_aid_application, num
@@ -159,4 +156,3 @@ module Dashboard
     end
   end
 end
-# rubocop:enable Layout/LineLength

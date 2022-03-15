@@ -1,4 +1,4 @@
-class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
+class BaseFileUploaderForm < BaseForm
   include MalwareScanning
   MAX_FILE_SIZE = 7.megabytes
 

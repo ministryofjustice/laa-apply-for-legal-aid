@@ -106,7 +106,7 @@ module CFE
              life_assurance_endowment_policy: nil
     end
 
-    def expected_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def expected_payload_hash
       payload = {
         bank_accounts: [
           {

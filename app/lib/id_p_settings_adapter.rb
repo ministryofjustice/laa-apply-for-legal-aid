@@ -7,7 +7,7 @@ class IdPSettingsAdapter
     end
   end
 
-  def self.mock_settings # rubocop:disable Metrics/MethodLength
+  def self.mock_settings
     {
       security: {
         authn_requests_signed: false,

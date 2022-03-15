@@ -1,6 +1,6 @@
 class ReportsUploaderJob < ApplicationJob
   include Sidekiq::Status::Worker
-  def perform # rubocop:disable Metrics/AbcSize
+  def perform
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?
       log 'preexisting record as follows:'

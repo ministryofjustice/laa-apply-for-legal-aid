@@ -20,7 +20,7 @@ module CCMS
   # method name without the prefix is called on the appropriate object in the options hash, e.g.
   # 'vehicle_registration_number'  will call the registration_number method on options[:vehicle] in order to get the
   # value to insert.
-  class AttributeValueGenerator # rubocop:disable Metrics/ClassLength
+  class AttributeValueGenerator
     STANDARD_METHOD_NAMES = %r{^(
                                 applicant
                                 |application
@@ -373,7 +373,7 @@ module CCMS
       used_delegated_functions? ? 'MULTIPLE' : options[:proceeding].substantive_scope_limitation_meaning
     end
 
-    def call_standard_method(method, options) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
+    def call_standard_method(method, options)
       case method
       when APPLICATION_REGEX
         legal_aid_application.__send__(Regexp.last_match(1))

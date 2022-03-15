@@ -1,4 +1,3 @@
-# rubocop:disable Layout/LineLength
 module MigrationHelpers
   class StateChanger
     STATE_CHANGES = [
@@ -56,4 +55,3 @@ module MigrationHelpers
     end
   end
 end
-# rubocop:enable Layout/LineLength

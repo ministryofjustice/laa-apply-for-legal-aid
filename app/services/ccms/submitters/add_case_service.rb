@@ -5,7 +5,7 @@ module CCMS
         new(submission).call(options)
       end
 
-      def call(options = {}) # rubocop:disable Metrics/AbcSize
+      def call(options = {})
         @options = options
 
         unless case_add_response_parser.success?

@@ -15,7 +15,7 @@ module CCMS
 
     private
 
-      def process_response(parser) # rubocop:disable Metrics/AbcSize
+      def process_response(parser)
         if parser.success?
           submission.applicant_ccms_reference = parser.applicant_ccms_reference
           create_history(:applicant_submitted, submission.aasm_state, xml_request, response) if submission.obtain_applicant_ref!

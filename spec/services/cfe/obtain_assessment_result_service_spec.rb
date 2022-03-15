@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module CFE # rubocop:disable Metrics/ModuleLength
+module CFE
   RSpec.describe ObtainAssessmentResultService do
     around do |example|
       VCR.turn_off!

@@ -1,5 +1,5 @@
 module Admin
-  class ProviderDetailsService # rubocop:disable Metrics/ClassLength
+  class ProviderDetailsService
     attr_reader :message
 
     def initialize(provider)

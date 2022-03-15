@@ -2,7 +2,7 @@ require_relative '../payload_generators/entity_attributes_generator'
 
 module CCMS
   module Requestors
-    class CaseAddRequestor < BaseRequestor # rubocop:disable Metrics/ClassLength
+    class CaseAddRequestor < BaseRequestor
       include CCMS::PayloadGenerators
 
       attr_reader :ccms_attribute_keys, :submission
@@ -95,7 +95,7 @@ module CCMS
         end
       end
 
-      def generate_application_details(xml) # rubocop:disable Metrics/AbcSize
+      def generate_application_details(xml)
         xml.__send__(:'casebio:Client') { generate_client(xml) }
         xml.__send__(:'casebio:PreferredAddress', 'CLIENT')
         xml.__send__(:'casebio:ProviderDetails') { generate_provider_details(xml) }
@@ -126,7 +126,7 @@ module CCMS
         end
       end
 
-      def generate_opponent(xml, opponent) # rubocop:disable Metrics/MethodLength
+      def generate_opponent(xml, opponent)
         first_name, last_name = opponent.split_full_name
         xml.__send__(:'casebio:OtherParty') do
           xml.__send__(:'casebio:OtherPartyID', "OPPONENT_#{opponent.generate_ccms_opponent_id}")
@@ -147,7 +147,7 @@ module CCMS
         end
       end
 
-      def generate_involved_child(xml, child) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def generate_involved_child(xml, child)
         first_name, last_name = child.split_full_name
         xml.__send__(:'casebio:OtherParty') do
           xml.__send__(:'casebio:OtherPartyID', "OPPONENT_#{child.generate_ccms_opponent_id}")

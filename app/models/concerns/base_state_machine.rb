@@ -1,4 +1,4 @@
-class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLength
+class BaseStateMachine < ApplicationRecord
   self.table_name = 'state_machine_proxies'
 
   belongs_to :legal_aid_application
@@ -20,7 +20,7 @@ class BaseStateMachine < ApplicationRecord  # rubocop:disable Metrics/ClassLengt
 
   include AASM
 
-  aasm do # rubocop:disable Metrics/BlockLength
+  aasm do
     state :initiated, initial: true
     state :entering_applicant_details
     state :checking_applicant_details

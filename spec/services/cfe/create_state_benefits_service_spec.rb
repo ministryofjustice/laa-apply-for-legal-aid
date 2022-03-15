@@ -109,7 +109,7 @@ module CFE
       }
     end
 
-    def basic_payload_hash # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def basic_payload_hash
       {
         name: 'child_benefit',
         payments: [

@@ -1,8 +1,7 @@
-# rubocop:disable Metrics/ClassLength
 module Providers
   # TODO: refactor this controller once the validation ticket AP-2739 and this one AP-2872
   # have been merged. Then we can remove the rubocop disable tag
-  class UploadedEvidenceCollectionsController < ProviderBaseController # rubocop:disable Metrics/ClassLength
+  class UploadedEvidenceCollectionsController < ProviderBaseController
     def show
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       populate_upload_form
@@ -185,4 +184,3 @@ module Providers
     end
   end
 end
-# rubocop:enable Metrics/ClassLength

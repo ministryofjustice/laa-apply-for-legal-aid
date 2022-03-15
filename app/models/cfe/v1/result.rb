@@ -2,7 +2,7 @@
 ## table inheritance table cfe_results to continue to function correctly.
 module CFE
   module V1
-    class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
+    class Result < CFE::BaseResult
       def assessment_result
         result_hash[:assessment_result]
       end

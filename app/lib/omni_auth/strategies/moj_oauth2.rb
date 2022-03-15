@@ -14,7 +14,7 @@ module OmniAuth
     # You must generally register your application with the provider and
     # utilize an application id and secret in order to authenticate using
     # OAuth 2.0.
-    class MojOauth2 # rubocop:disable Metrics/ClassLength
+    class MojOauth2
       include OmniAuth::Strategy
       include Browser::ActionController
 
@@ -22,7 +22,7 @@ module OmniAuth
         OmniAuth::Strategy.included(subclass)
       end
 
-      args %i[client_id client_secret] # rubocop:disable Layout/SpaceBeforeBrackets
+      args %i[client_id client_secret]
 
       option :client_id, nil
       option :client_secret, nil
@@ -59,7 +59,7 @@ module OmniAuth
         hash
       end
 
-      def request_phase # rubocop:disable Metrics/AbcSize
+      def request_phase
         auth_params = authorize_params
         applicant_id = session['warden.user.applicant.key'].first.first
 
@@ -77,7 +77,7 @@ module OmniAuth
         redirect client.auth_code.authorize_url({ redirect_uri: callback_url }.merge(auth_params))
       end
 
-      def authorize_params # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def authorize_params
         options.authorize_params[:state] = SecureRandom.hex(24)
 
         if OmniAuth.config.test_mode
@@ -99,7 +99,7 @@ module OmniAuth
         options.token_params.merge(options_for('token')).merge(pkce_token_params)
       end
 
-      def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+      def callback_phase
         # we ALWAYS restore the session even if a perfectly good one exists because if we try to do it inside an
         # if statement, then the path that doesn't restore the session will set it to nil.  Go figure!
         #
@@ -160,7 +160,7 @@ module OmniAuth
         end
       end
 
-      def options_for(option) # rubocop:disable Metrics/AbcSize
+      def options_for(option)
         hash = {}
         options.send(:"#{option}_options").select { |key| options[key] }.each do |key|
           hash[key.to_sym] = if options[key].respond_to?(:call)

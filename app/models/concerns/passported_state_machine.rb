@@ -1,5 +1,5 @@
-class PassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassLength
-  aasm do # rubocop:disable Metrics/BlockLength
+class PassportedStateMachine < BaseStateMachine
+  aasm do
     state :provider_entering_means
     state :checking_passported_answers
 

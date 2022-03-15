@@ -1,7 +1,7 @@
 module CCMS
   module Submitters
     class AddApplicantService < BaseSubmissionService
-      def call # rubocop:disable Metrics/AbcSize
+      def call
         unless applicant_add_response_parser.success?
           raise CCMSUnsuccessfulResponseError.new(response),
                 "AddApplicantService failed with unsuccessful response for submission: #{submission.id}"

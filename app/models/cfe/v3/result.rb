@@ -1,6 +1,6 @@
 module CFE
   module V3
-    class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
+    class Result < CFE::BaseResult
       def assessment_result
         return nil if result_hash[:assessment].nil?
 

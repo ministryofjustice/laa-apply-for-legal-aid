@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderDWPOverride < FlowSteps # rubocop:disable Metrics/ClassLength
+    class ProviderDWPOverride < FlowSteps
       STEPS = {
         confirm_dwp_non_passported_applications: {
           path: ->(application) { urls.providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application) },

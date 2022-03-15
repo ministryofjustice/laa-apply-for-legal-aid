@@ -3,7 +3,7 @@ module Providers
     include PreDWPCheckVisible
     AddressCollectionItem = Struct.new(:id, :address)
 
-    def show # rubocop:disable Metrics/AbcSize
+    def show
       return redirect_to back_path unless address.postcode
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?

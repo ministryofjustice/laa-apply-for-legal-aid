@@ -20,7 +20,7 @@ module CCMS
         @applicant_search_requestor ||= CCMS::Requestors::ApplicantSearchRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)
       end
 
-      def process_records(parser) # rubocop:disable Metrics/AbcSize
+      def process_records(parser)
         applicant_ccms_reference = parser.applicant_ccms_reference
         if applicant_ccms_reference.nil?
           create_history(:case_ref_obtained, submission.aasm_state, xml_request, response)

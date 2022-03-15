@@ -14,7 +14,7 @@ module CCMS
 
     private
 
-      def process_response(parser) # rubocop:disable Metrics/AbcSize
+      def process_response(parser)
         if parser.success?
           create_history(:case_submitted, submission.aasm_state, xml_request, response) if submission.confirm_case_created!
         elsif submission.case_poll_count >= Submission::POLL_LIMIT

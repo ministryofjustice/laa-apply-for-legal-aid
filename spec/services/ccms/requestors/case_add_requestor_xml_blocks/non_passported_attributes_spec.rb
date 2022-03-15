@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  module Requestors # rubocop:disable Metrics/ModuleLength
+  module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }
@@ -739,7 +739,7 @@ module CCMS
           ]
         end
 
-        def false_attributes # rubocop:disable Metrics/MethodLength
+        def false_attributes
           [
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_12A', true],
             [:first_bank_acct_instance, 'BANKACC_INPUT_B_7WP2_14A', true],
@@ -922,7 +922,7 @@ module CCMS
           ]
         end
 
-        def omitted_attributes # rubocop:disable Metrics/MethodLength
+        def omitted_attributes
           [
             [:global_merits, 'DEC_AGAINST_INSTRUCT_SIGNED'],
             [:global_merits, 'DEC_APP_NECESSARY'],

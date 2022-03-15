@@ -96,7 +96,7 @@ end
 
 # method to enable session vars to be set in request spec.
 # uses the test_session_path route which is only available in test env.
-def set_session(vars = {}) # rubocop:disable Naming/AccessorMethodName
+def set_session(vars = {})
   return if vars.empty?
 
   my_params = { session_vars: vars.to_json }
