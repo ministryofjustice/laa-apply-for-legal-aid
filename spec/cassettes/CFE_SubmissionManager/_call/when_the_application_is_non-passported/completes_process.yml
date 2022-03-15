@@ -811,7 +811,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 11:33:36 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments
     body:
       encoding: UTF-8
       string: '{"client_reference_id":"L-0CA-WH2","submission_date":"2022-03-15","proceeding_types":{"ccms_codes":[]}}'
