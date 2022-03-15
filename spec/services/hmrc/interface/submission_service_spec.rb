@@ -13,7 +13,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
     stub_request(:post, %r{http.*laa-hmrc-interface.*apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/create/.*})
       .to_return(
         status: 202,
-        body: '{"id":"26b94ef2-5854-409a-8223-05f4b58368b7","_links":[{"href":"https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7"}]
+        body: '{"id":"26b94ef2-5854-409a-8223-05f4b58368b7","_links":[{"href":"https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7"}]
 }',
         headers: { 'Content-Type' => 'application/json; charset=utf-8' }
       )

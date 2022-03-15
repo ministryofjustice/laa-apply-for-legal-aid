@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/applicant
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/applicant
     body:
       encoding: UTF-8
       string: '{"applicant":{"date_of_birth":"1970-03-26","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
@@ -59,7 +59,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:01 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/capitals
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/capitals
     body:
       encoding: UTF-8
       string: '{"bank_accounts":[{"description":"Online current accounts","value":0},{"description":"Online
@@ -117,7 +117,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:01 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/vehicles
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -174,7 +174,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:02 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/properties
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -231,7 +231,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:02 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/explicit_remarks
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf/explicit_remarks
     body:
       encoding: UTF-8
       string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
@@ -288,7 +288,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:02 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/a11e93cf-d2b7-4c65-8db9-e26d035d4bcf
     body:
       encoding: US-ASCII
       string: ''
@@ -346,7 +346,7 @@ http_interactions:
   recorded_at: Wed, 29 Sep 2021 09:46:02 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/applicant
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/applicant
     body:
       encoding: UTF-8
       string: '{"applicant":{"date_of_birth":"1965-06-02","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
@@ -403,7 +403,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:45 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/capitals
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/capitals
     body:
       encoding: UTF-8
       string: '{"bank_accounts":[{"description":"Online current accounts","value":0},{"description":"Online
@@ -461,7 +461,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:45 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/vehicles
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -518,7 +518,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:45 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/properties
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -575,7 +575,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:45 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/explicit_remarks
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a/explicit_remarks
     body:
       encoding: UTF-8
       string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
@@ -632,7 +632,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:46 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/d8e8fb57-b828-4501-af99-578d2071b28a
     body:
       encoding: US-ASCII
       string: ''
@@ -690,7 +690,7 @@ http_interactions:
   recorded_at: Mon, 04 Oct 2021 09:45:46 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments
     body:
       encoding: UTF-8
       string: '{"client_reference_id":"L-HTJ-A3C","submission_date":"2022-01-17","proceeding_types":{"ccms_codes":["DA001"]}}'
@@ -747,7 +747,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/applicant
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/applicant
     body:
       encoding: UTF-8
       string: '{"applicant":{"date_of_birth":"1975-09-09","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
@@ -804,7 +804,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/capitals
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/capitals
     body:
       encoding: UTF-8
       string: '{"bank_accounts":[],"non_liquid_capital":[]}'
@@ -861,7 +861,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/vehicles
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -918,7 +918,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/properties
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -975,7 +975,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/explicit_remarks
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9/explicit_remarks
     body:
       encoding: UTF-8
       string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
@@ -1032,7 +1032,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/7a8efce8-4668-4ba5-8e29-fa5a2e62c2f9
     body:
       encoding: US-ASCII
       string: ''
@@ -1089,7 +1089,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:09:20 GMT
 - request:
     method: post
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
       string: '{"request_id":"6211cddd-57d5-40d2-89a1-6f538f0970f5","proceeding_types":["DA001"]}'

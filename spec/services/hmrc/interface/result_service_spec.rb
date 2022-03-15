@@ -74,7 +74,7 @@ RSpec.describe HMRC::Interface::ResultService do
           status: 'in_progress',
           _links: [
             {
-              href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
+              href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
             }
           ]
         }
