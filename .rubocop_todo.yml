@@ -6,20 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 312
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth.
-# SupportedStyles: outdent, indent
-#Layout/AccessModifierIndentation:
-#  EnforcedStyle: indent
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/FirstArrayElementIndentation:
-  EnforcedStyle: special_inside_parentheses
-
 # Offense count: 14
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
