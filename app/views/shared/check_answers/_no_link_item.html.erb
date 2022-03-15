@@ -7,7 +7,7 @@
     <%= question %>
   </dt>
   <!--  in-line styling due to issues around pdf generation in our production envs -->
-  <dd class="govuk-summary-list__value"<% if read_only %> style="text-align: right;"<% end %>>
+  <dd class="govuk-summary-list__value" style="<%= "text-align: right;" if read_only %>">
     <% if answer.present? %>
       <% if answer.kind_of?(Array) %>
         <ul class="govuk-list">
