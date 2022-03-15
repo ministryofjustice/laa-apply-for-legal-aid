@@ -6,18 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 41
-# Cop supports --auto-correct.
-Layout/MultilineArrayLineBreaks:
-  Exclude:
-    - 'app/forms/applicants/basic_details_form.rb'
-    - 'app/forms/legal_aid_applications/dependant_form.rb'
-    - 'app/services/dashboard_event_handler.rb'
-    - 'config/initializers/secure_headers.rb'
-    - 'spec/factory_specs/v4/cfe_result_factory_spec.rb'
-    - 'spec/forms/legal_aid_applications/used_multiple_delegated_functions_form_spec.rb'
-    - 'spec/support/true_layer_mock_data.rb'
-
 # Offense count: 5
 # Cop supports --auto-correct.
 Layout/MultilineHashKeyLineBreaks:

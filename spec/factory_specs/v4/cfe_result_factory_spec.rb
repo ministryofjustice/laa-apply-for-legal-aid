@@ -58,8 +58,16 @@ RSpec.describe 'cfe_result version 4 factory' do
 
       context 'within disposable_income' do
         it 'has required keys' do
-          expect(disposable_income_summary.keys).to match_array %i[dependant_allowance employment_income gross_housing_costs housing_benefit net_housing_costs maintenance_allowance
-                                                                   total_outgoings_and_allowances total_disposable_income income_contribution proceeding_types]
+          expect(disposable_income_summary.keys).to match_array %i[dependant_allowance
+                                                                   employment_income
+                                                                   gross_housing_costs
+                                                                   housing_benefit
+                                                                   net_housing_costs
+                                                                   maintenance_allowance
+                                                                   total_outgoings_and_allowances
+                                                                   total_disposable_income
+                                                                   income_contribution
+                                                                   proceeding_types]
         end
 
         context 'within proceeding_types' do
@@ -73,8 +81,16 @@ RSpec.describe 'cfe_result version 4 factory' do
 
       context 'within capital' do
         it 'has required keys' do
-          expect(capital_summary.keys).to match_array %i[total_liquid total_non_liquid total_vehicle total_property total_mortgage_allowance total_capital
-                                                         pensioner_capital_disregard capital_contribution assessed_capital proceeding_types]
+          expect(capital_summary.keys).to match_array %i[total_liquid
+                                                         total_non_liquid
+                                                         total_vehicle
+                                                         total_property
+                                                         total_mortgage_allowance
+                                                         total_capital
+                                                         pensioner_capital_disregard
+                                                         capital_contribution
+                                                         assessed_capital
+                                                         proceeding_types]
         end
 
         context 'within proceeding_types' do

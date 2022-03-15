@@ -32,7 +32,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
     context 'two of the three proceeding types have delegated functions' do
       it 'updates each proceeding' do
         expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
-        expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+        expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil,
+                                                                                        used_delegated_functions_reported_on,
                                                                                         used_delegated_functions_reported_on])
       end
 
@@ -189,7 +190,8 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
     it 'updates each application proceeding type if they are entered' do
       expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
-      expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, used_delegated_functions_reported_on,
+      expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil,
+                                                                                      used_delegated_functions_reported_on,
                                                                                       used_delegated_functions_reported_on])
     end
 

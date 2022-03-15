@@ -4,8 +4,13 @@ module LegalAidApplications
 
     before_validation :clear_value_fields
 
-    BASE_ATTRIBUTES = %i[name relationship in_full_time_education has_income
-                         monthly_income has_assets_more_than_threshold assets_value].freeze
+    BASE_ATTRIBUTES = %i[name
+                         relationship
+                         in_full_time_education
+                         has_income
+                         monthly_income
+                         has_assets_more_than_threshold
+                         assets_value].freeze
 
     MODEL_ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth].freeze
 

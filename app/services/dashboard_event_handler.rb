@@ -33,8 +33,14 @@ private
   end
 
   def valid_events
-    %w[application_created provider_updated ccms_submission_saved firm_created feedback_created
-       application_submitted declined_open_banking applicant_emailed]
+    %w[application_created
+       provider_updated
+       ccms_submission_saved
+       firm_created
+       feedback_created
+       application_submitted
+       declined_open_banking
+       applicant_emailed]
   end
 
   def application_created
