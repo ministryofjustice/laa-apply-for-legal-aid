@@ -22,7 +22,8 @@ module Dashboard
                                       { name: 'Total submitted applications', optional: false, type: 'number' },
                                       { name: 'Failed applications', optional: false, type: 'number' },
                                       { name: 'Delegated function applications', optional: false, type: 'number' }
-                                    ], unique_by: ['date'] }.to_json
+                                    ],
+                                  unique_by: ['date'] }.to_json
           expect(described_class.dataset_definition.to_json).to eq expected_definition
         end
       end
