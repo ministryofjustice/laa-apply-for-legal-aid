@@ -24,7 +24,7 @@ class CfePayloadRecorder
     logger.info @recording.to_yaml
   end
 
-  private
+private
 
   def record_history(history)
     hash = {}

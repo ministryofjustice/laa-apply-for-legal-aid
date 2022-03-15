@@ -7,7 +7,7 @@ module CCMS
         @document_id ||= parse(:extracted_document_id)
       end
 
-      private
+    private
 
       def response_type
         'DocumentUploadRS'.freeze

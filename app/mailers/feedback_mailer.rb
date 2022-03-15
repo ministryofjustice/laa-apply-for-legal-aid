@@ -9,7 +9,7 @@ class FeedbackMailer < BaseApplyMailer
     mail to: to
   end
 
-  private
+private
 
   def personalise(feedback_id) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     feedback = Feedback.find(feedback_id)

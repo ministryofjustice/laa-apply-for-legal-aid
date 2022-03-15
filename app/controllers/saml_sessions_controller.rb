@@ -29,7 +29,7 @@ class SamlSessionsController < Devise::SamlSessionsController
     providers_confirm_office_path
   end
 
-  private
+private
 
   def update_provider_details
     ProviderAfterLoginService.call(current_provider)

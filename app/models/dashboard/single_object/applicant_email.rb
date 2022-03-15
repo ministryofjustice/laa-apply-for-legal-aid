@@ -23,7 +23,7 @@ module Dashboard
         ]
       end
 
-      private
+    private
 
       def dataset_name
         "apply_for_legal_aid.#{HostEnv.environment}.applicant_email"

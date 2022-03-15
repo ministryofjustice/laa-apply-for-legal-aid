@@ -23,7 +23,7 @@ module Addresses
       attributes[:lookup_used] = lookup_postcode.present?
     end
 
-    private
+  private
 
     def normalise_postcode
       return if postcode.blank?

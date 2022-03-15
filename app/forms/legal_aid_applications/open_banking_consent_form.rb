@@ -6,7 +6,7 @@ module LegalAidApplications
 
     validate :consent_presence
 
-    private
+  private
 
     def consent_presence
       return if draft? || provider_received_citizen_consent.present?

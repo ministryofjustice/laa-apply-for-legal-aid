@@ -10,7 +10,7 @@ module Providers
       render :show
     end
 
-    private
+  private
 
     def form
       @form ||= BinaryChoiceForm.call(

@@ -19,7 +19,7 @@ class AuthController < ApplicationController
     end
   end
 
-  private
+private
 
   def origin
     @origin ||= params[:origin]

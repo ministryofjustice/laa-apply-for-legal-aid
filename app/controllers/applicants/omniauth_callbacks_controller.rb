@@ -18,7 +18,7 @@ module Applicants
       redirect_to citizens_gather_transactions_path
     end
 
-    private
+  private
 
     def store_tokens
       applicant.store_true_layer_token(token: token, expires: token_expires_at)

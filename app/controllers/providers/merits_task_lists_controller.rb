@@ -11,7 +11,7 @@ module Providers
       render :show
     end
 
-    private
+  private
 
     def merits_tasks
       @merits_tasks ||= task_list_record

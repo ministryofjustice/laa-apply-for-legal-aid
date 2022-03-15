@@ -15,7 +15,7 @@ module Admin
       end
     end
 
-    private
+  private
 
     def form_params
       params.require(:setting).permit(:mock_true_layer_data,

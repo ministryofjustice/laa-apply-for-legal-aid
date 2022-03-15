@@ -22,7 +22,7 @@ class BaseFileUploaderForm < BaseForm # rubocop:disable Metrics/ClassLength
     MAX_FILE_SIZE
   end
 
-  private
+private
 
   def name
     @name ||= @model.class.name.demodulize.underscore

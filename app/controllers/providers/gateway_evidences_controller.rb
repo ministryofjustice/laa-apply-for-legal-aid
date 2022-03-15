@@ -21,7 +21,7 @@ module Providers
       render :show
     end
 
-    private
+  private
 
     def save_or_continue
       if form.files?

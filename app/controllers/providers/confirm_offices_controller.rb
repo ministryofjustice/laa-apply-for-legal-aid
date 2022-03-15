@@ -23,7 +23,7 @@ module Providers
 
     def invalid_login; end
 
-    private
+  private
 
     def form
       @form ||= BinaryChoiceForm.call(

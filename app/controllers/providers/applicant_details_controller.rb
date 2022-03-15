@@ -11,7 +11,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def applicant
       legal_aid_application.applicant || legal_aid_application.build_applicant

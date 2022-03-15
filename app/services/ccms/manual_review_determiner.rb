@@ -37,7 +37,7 @@ module CCMS
       cfe_result.remarks.review_categories_by_reason
     end
 
-    private
+  private
 
     def cfe_result
       @cfe_result ||= @legal_aid_application.cfe_result

@@ -9,7 +9,7 @@ module LegalAidApplications
     validate :extra_employment_information_presence
     validate :extra_employment_information_details_presence
 
-    private
+  private
 
     def extra_employment_information_presence
       return if draft? || extra_employment_information.present?

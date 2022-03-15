@@ -16,7 +16,7 @@ class ReportsUploaderJob < ApplicationJob
     @expiration ||= 60 * 60 * 24 # Leave the status on the sidekiq output for 24 hours
   end
 
-  private
+private
 
   def upload_application_details_report
     log "creating submitted applications report at #{Time.zone.now}"

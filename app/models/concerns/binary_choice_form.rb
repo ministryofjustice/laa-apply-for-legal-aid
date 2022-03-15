@@ -26,7 +26,7 @@ class BinaryChoiceForm
     @error = error || 'error'
   end
 
-  private
+private
 
   def input_present?
     errors.add @input_name.to_sym, error_message if blank_value? || bad_value?

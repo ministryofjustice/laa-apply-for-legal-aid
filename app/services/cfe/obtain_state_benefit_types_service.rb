@@ -1,6 +1,6 @@
 module CFE
   class ObtainStateBenefitTypesService < BaseService
-    private
+  private
 
     def cfe_url_path
       '/state_benefit_type'

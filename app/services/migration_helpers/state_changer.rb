@@ -25,7 +25,7 @@ module MigrationHelpers
       run(:down)
     end
 
-    private
+  private
 
     def run(migration_direction)
       STATE_CHANGES.each do |change_details|

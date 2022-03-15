@@ -10,7 +10,7 @@ module Providers
         render :show unless update_task_save_continue_or_draft(:application, :latest_incident_details)
       end
 
-      private
+    private
 
       def incident
         legal_aid_application.latest_incident || legal_aid_application.build_latest_incident

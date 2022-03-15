@@ -17,7 +17,7 @@ module CCMS
         soap_client.call(:create_client, xml: request_xml)
       end
 
-      private
+    private
 
       def request_xml
         soap_envelope(namespaces).to_xml

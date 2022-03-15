@@ -41,7 +41,7 @@ module LegalFramework
       @tasks[:application].empty? && @tasks[:proceedings].empty?
     end
 
-    private
+  private
 
     def unblock_dependant_tasks(blocking_task)
       @tasks[:proceedings].each do |proceeding|

@@ -24,7 +24,7 @@ module LegalFramework
         JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
       end
 
-      private
+    private
 
       def request
         conn.get url

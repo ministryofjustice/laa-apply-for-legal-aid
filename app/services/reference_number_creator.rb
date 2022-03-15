@@ -9,7 +9,7 @@ class ReferenceNumberCreator
     unique_reference_number
   end
 
-  private
+private
 
   def unique_reference_number
     loop do

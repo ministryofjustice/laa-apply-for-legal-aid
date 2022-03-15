@@ -11,7 +11,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def form_params
       merge_with_model(address) do

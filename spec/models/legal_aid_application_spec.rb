@@ -1314,7 +1314,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  private
+private
 
   def uploaded_evidence_output
     {

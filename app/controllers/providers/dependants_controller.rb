@@ -17,7 +17,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def dependant
       @dependant ||= dependant_exists? || build_new_dependant

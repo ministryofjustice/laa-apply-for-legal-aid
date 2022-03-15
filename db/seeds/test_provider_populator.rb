@@ -41,7 +41,7 @@ class TestProviderPopulator
     populate_firm_permissions
   end
 
-  private
+private
 
   def populate_firm_permissions # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     passported_permission = Permission.find_by(role: 'application.passported.*')

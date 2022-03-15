@@ -29,7 +29,7 @@ module HMRC
       @hmrc_response.update!(response: return_json, submission_id: @submission_id)
     end
 
-    private
+  private
 
     def return_json
       applicant_matched? || unknown_response

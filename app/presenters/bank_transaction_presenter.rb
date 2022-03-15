@@ -41,7 +41,7 @@ class BankTransactionPresenter
     build_transaction_hash.values
   end
 
-  private
+private
 
   def transaction_happened_at
     @transaction.happened_at.strftime('%d/%b/%Y')

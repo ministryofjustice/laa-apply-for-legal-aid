@@ -10,7 +10,7 @@ module SavingsAmounts
     validates(:offline_savings_accounts, currency: { greater_than_or_equal_to: 0 }, allow_blank: true)
     validate :applicant_bank_account_presence
 
-    private
+  private
 
     def clear_savings_amount
       offline_savings_accounts&.clear if applicant_bank_account.to_s == 'false'

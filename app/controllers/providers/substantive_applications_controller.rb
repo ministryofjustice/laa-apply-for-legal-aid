@@ -13,7 +13,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def form_params
       merge_with_model(legal_aid_application) do

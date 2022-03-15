@@ -18,7 +18,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def benefit?
       form_params[:passporting_benefit] != 'none_selected'

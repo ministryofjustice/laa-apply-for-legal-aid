@@ -18,7 +18,7 @@ class DelegatedFunctionsDateService
     true
   end
 
-  private
+private
 
   def update_deadline
     laa.update!(substantive_application_deadline_on: new_deadline)

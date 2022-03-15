@@ -31,7 +31,7 @@ class PdfConverter
     end
   end
 
-  private
+private
 
   def converted_file
     return downloaded_file if @original_attachment.document.content_type == 'application/pdf'

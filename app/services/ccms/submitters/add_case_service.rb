@@ -22,7 +22,7 @@ module CCMS
         raise
       end
 
-      private
+    private
 
       def from_state?
         submission.submission_documents.empty? ? 'applicant_ref_obtained' : 'document_ids_obtained'

@@ -10,7 +10,7 @@ module Reports
       @legal_aid_application = legal_aid_application
     end
 
-    private
+  private
 
     def pdf_report
       WickedPdf.new.pdf_from_string(html_report)

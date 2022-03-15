@@ -12,7 +12,7 @@ module CCMS
         raise
       end
 
-      private
+    private
 
       def process_response(parser) # rubocop:disable Metrics/AbcSize
         if parser.success?

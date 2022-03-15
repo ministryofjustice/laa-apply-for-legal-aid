@@ -11,7 +11,7 @@ module TaskListHelper
     )
   end
 
-  private
+private
 
   def _task_url(name, legal_aid_application, status)
     url = if application_has_no_involved_children?(legal_aid_application) && name.eql?(:children_application)

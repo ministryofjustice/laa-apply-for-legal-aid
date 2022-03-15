@@ -24,7 +24,7 @@ module HMRC
       end
     end
 
-    private
+  private
 
     def use_mock?
       Rails.configuration.x.hmrc_use_dev_mock && not_production_environment?

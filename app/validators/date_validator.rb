@@ -10,7 +10,7 @@ class DateValidator < ActiveModel::EachValidator
     validate_not_too_early(record, attribute, value)
   end
 
-  private
+private
 
   def parse_date(date_str, format)
     format ||= DEFAULT_FORMAT

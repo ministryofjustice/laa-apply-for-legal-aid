@@ -17,7 +17,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def firm
       current_provider.firm

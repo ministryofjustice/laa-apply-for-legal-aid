@@ -476,7 +476,7 @@ class LegalAidApplication < ApplicationRecord
     extra_employment_information? || full_employment_details.present?
   end
 
-  private
+private
 
   def bank_transactions_by_type(type)
     bank_transactions.__send__(type).order(happened_at: :desc).by_parent_transaction_type

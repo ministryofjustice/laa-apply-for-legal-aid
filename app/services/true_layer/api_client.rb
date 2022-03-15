@@ -31,7 +31,7 @@ module TrueLayer
       perform_lookup("/data/v1/accounts/#{account_id}/balance")
     end
 
-    private
+  private
 
     attr_reader :token
 

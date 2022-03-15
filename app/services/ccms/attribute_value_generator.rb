@@ -339,7 +339,7 @@ module CCMS
       options[:other_party].instance_of?(ApplicationMeritsTask::Opponent)
     end
 
-    private
+  private
 
     def applicant
       @applicant ||= legal_aid_application.applicant

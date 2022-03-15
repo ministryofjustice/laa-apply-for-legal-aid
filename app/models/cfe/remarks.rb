@@ -22,7 +22,7 @@ module CFE
       @review_transactions ||= populate_review_transactions
     end
 
-    private
+  private
 
     def populate_review_transactions
       collection = RemarkedTransactionCollection.new

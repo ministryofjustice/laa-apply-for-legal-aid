@@ -15,7 +15,7 @@ module Citizens
 
     def index; end
 
-    private
+  private
 
     def authenticate_with_devise
       authenticate_applicant!

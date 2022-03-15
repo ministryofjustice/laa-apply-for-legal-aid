@@ -36,7 +36,7 @@ module Admin
       @firm_name ||= parsed_response[:providerOffices].first[:name].sub(/-\S{6}$/, '').strip
     end
 
-    private
+  private
 
     def provider_eligible_to_be_added?
       if Provider.exists?(username: @provider.username)

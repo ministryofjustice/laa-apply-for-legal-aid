@@ -25,7 +25,7 @@ module Providers
       )
     end
 
-    private
+  private
 
     def applications
       @pagy, @legal_aid_applications = pagy(

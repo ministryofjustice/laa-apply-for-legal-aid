@@ -31,7 +31,7 @@ module CFE
       }.to_json
     end
 
-    private
+  private
 
     def process_response
       @submission.capitals_created!

@@ -17,7 +17,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def uncategorized_transactions?
       @legal_aid_application.uncategorised_transactions?(:debit)

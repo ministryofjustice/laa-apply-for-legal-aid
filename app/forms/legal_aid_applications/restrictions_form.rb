@@ -9,7 +9,7 @@ module LegalAidApplications
     validate :restrictions_presence
     validate :restrictions_details_presence
 
-    private
+  private
 
     def restrictions_presence
       return if draft? || has_restrictions.present?

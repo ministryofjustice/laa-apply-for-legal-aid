@@ -18,7 +18,7 @@ class DashboardEventHandler
     method(method_to_call).call
   end
 
-  private
+private
 
   def name_parts
     @name_parts ||= name.to_s.split('.')

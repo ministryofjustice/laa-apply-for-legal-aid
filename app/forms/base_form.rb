@@ -89,7 +89,7 @@ class BaseForm
     @draft
   end
 
-  private
+private
 
   def clean_attributes(hash)
     hash.each_with_object({}) do |(k, v), new_hash|

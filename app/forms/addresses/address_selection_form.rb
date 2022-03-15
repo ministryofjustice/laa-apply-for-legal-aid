@@ -13,7 +13,7 @@ module Addresses
       attributes[:lookup_used] = true
     end
 
-    private
+  private
 
     def deserialize_address
       return if lookup_id.blank?

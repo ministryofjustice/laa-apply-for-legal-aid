@@ -40,7 +40,7 @@ module Reports
       end
     end
 
-    private
+  private
 
     def default_opts
       @default_opts ||= {

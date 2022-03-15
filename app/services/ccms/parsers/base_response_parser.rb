@@ -29,7 +29,7 @@ module CCMS
         doc.xpath(xpath).text
       end
 
-      private
+    private
 
       def expect_transaction_request_id_in_response?
         true

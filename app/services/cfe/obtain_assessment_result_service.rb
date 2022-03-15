@@ -2,7 +2,7 @@ module CFE
   class ObtainAssessmentResultService < BaseService
     HTTP_ERR_MESSAGE = 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code'.freeze
 
-    private
+  private
 
     def headers
       {

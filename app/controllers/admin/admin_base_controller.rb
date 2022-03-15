@@ -3,7 +3,7 @@ module Admin
     before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster
     layout 'admin'.freeze
 
-    protected
+  protected
 
     def check_vpn_ipaddr
       redirect_to error_path(:access_denied) unless ip_addr_authorised?(current_ip_address)
@@ -18,7 +18,7 @@ module Admin
       ip_checker.authorized?(string_ipaddr)
     end
 
-    private
+  private
 
     def set_cache_buster
       response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'

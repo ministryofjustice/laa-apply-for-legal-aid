@@ -22,7 +22,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def run_transaction
       proceeding_to_add = proceeding_types.find { |proceeding| proceeding.ccms_code == form_params }

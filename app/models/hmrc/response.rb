@@ -24,7 +24,7 @@ module HMRC
       !income_array.empty?
     end
 
-    private
+  private
 
     def persist_parsed_response
       HMRC::ParsedResponse::Persistor.call(legal_aid_application)

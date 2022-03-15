@@ -128,7 +128,7 @@ module OmniAuth
         fail!(:failed_to_connect, e)
       end
 
-      protected
+    protected
 
       def pkce_authorize_params
         return {} unless options.pkce
@@ -172,7 +172,7 @@ module OmniAuth
         hash
       end
 
-      private
+    private
 
       def state
         request.params['state']

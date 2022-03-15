@@ -22,7 +22,7 @@ module Providers
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
     end
 
-    private
+  private
 
     def any_checkbox_checked_or_draft
       errors.add SINGLE_VALUE_ATTRIBUTES.first.to_sym, error_message_for_none_selected unless any_checkbox_checked? || draft?

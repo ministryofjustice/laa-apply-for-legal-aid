@@ -13,7 +13,7 @@ module LegalFramework
       }.to_json
     end
 
-    private
+  private
 
     def proceeding_types_codes
       legal_aid_application.proceedings.map(&:ccms_code)

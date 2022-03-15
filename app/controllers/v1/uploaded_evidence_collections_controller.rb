@@ -17,7 +17,7 @@ module V1
       head :ok
     end
 
-    private
+  private
 
     def model
       @model ||= legal_aid_application.uploaded_evidence_collection || legal_aid_application.build_uploaded_evidence_collection

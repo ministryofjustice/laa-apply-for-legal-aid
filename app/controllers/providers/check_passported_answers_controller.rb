@@ -21,7 +21,7 @@ module Providers
       redirect_to back_path
     end
 
-    private
+  private
 
     def already_checking_answers
       legal_aid_application.checking_passported_answers?

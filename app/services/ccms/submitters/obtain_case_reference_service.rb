@@ -20,7 +20,7 @@ module CCMS
 
       delegate :transaction_request_id, to: :reference_data_requestor
 
-      private
+    private
 
       def reference_data_requestor
         @reference_data_requestor ||= CCMS::Requestors::ReferenceDataRequestor.new(submission.legal_aid_application.provider.username)

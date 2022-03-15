@@ -9,7 +9,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def declaration
       @declaration ||= legal_aid_application.other_assets_declaration || legal_aid_application.create_other_assets_declaration!

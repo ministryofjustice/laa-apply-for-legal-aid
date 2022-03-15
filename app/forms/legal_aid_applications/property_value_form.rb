@@ -16,7 +16,7 @@ module LegalAidApplications
       [:property_value]
     end
 
-    private
+  private
 
     def value_presence
       return if draft?

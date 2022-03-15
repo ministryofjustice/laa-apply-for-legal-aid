@@ -13,7 +13,7 @@ module Citizens
       end
     end
 
-    private
+  private
 
     def aggregated_cash_outgoings
       @aggregated_cash_outgoings ||= AggregatedCashOutgoings.find_by(legal_aid_application_id: legal_aid_application.id)

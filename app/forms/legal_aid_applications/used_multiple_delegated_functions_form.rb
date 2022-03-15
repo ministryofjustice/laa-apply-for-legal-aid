@@ -43,7 +43,7 @@ module LegalAidApplications
 
     private_class_method :populate_attr_accessors
 
-    private
+  private
 
     def populate_form_attributes
       proceedings_by_name.each do |proceeding_by_name|

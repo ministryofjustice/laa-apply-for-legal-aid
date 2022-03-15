@@ -243,7 +243,7 @@ module CFE
         total_deductions
       end
 
-      private
+    private
 
       def monthly_income_equivalents
         gross_income[:other_income][:monthly_equivalents][:all_sources]

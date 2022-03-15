@@ -20,7 +20,7 @@ module HMRC
         @request_body ||= { filter: applicant_values.merge(date_values) }.to_json
       end
 
-      private
+    private
 
       def application
         @application ||= @hmrc_response.legal_aid_application

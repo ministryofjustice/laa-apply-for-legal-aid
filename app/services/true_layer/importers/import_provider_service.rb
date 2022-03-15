@@ -18,7 +18,7 @@ module TrueLayer
         end
       end
 
-      private
+    private
 
       attr_reader :api_client, :applicant, :token, :token_expires_at
 

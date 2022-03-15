@@ -16,7 +16,7 @@ module Reports
       Rails.logger.info "ReportsCreator: Merits report attachment failed in #{legal_aid_application.id}" if attachment.document.download.nil?
     end
 
-    private
+  private
 
     def report_type
       'merits_report'

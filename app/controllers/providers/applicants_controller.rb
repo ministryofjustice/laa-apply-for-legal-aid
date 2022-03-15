@@ -20,7 +20,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def legal_aid_application
       @legal_aid_application ||= LegalAidApplication.create!(

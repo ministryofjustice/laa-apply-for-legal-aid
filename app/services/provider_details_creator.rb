@@ -21,7 +21,7 @@ class ProviderDetailsCreator
     provider.update!(selected_office: nil) if should_clear_selected_office?
   end
 
-  private
+private
 
   def provider_name
     ''

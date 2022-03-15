@@ -96,7 +96,7 @@ module LegalAidApplications
       I18n.t('activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold', name: model.name)
     end
 
-    private
+  private
 
     def exclude_from_model
       date_fields.fields

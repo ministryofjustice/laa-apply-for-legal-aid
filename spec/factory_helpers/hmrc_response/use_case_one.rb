@@ -47,7 +47,7 @@ module FactoryHelpers
         }
       end
 
-      private
+    private
 
       def generate_named_data
         case @options[:named_data]

@@ -17,7 +17,7 @@ class ProviderDetailsRetriever
     provider_details
   end
 
-  private
+private
 
   def provider_details
     raise_record_not_found_error if response.is_a?(Net::HTTPNotFound)

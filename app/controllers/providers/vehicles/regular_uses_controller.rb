@@ -12,7 +12,7 @@ module Providers
         render :show unless save_continue_or_draft(@form)
       end
 
-      private
+    private
 
       def vehicle
         @vehicle = legal_aid_application.vehicle

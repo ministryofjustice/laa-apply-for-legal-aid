@@ -13,7 +13,7 @@ module Providers
       model.save(validate: false) if attachments_made?
     end
 
-    private
+  private
 
     def create_attachment(original_file)
       model.legal_aid_application.attachments.create document: original_file,

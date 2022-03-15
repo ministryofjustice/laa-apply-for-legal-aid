@@ -16,7 +16,7 @@ module LegalFramework
       true
     end
 
-    private
+  private
 
     attr_reader :ccms_code
 

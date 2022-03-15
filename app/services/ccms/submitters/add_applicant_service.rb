@@ -16,7 +16,7 @@ module CCMS
         raise
       end
 
-      private
+    private
 
       def applicant_add_requestor
         @applicant_add_requestor ||= CCMS::Requestors::ApplicantAddRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)

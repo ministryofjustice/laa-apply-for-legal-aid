@@ -63,7 +63,7 @@ class Dependant < ApplicationRecord
     assets_value > 8_000.0
   end
 
-  private
+private
 
   def value_or_default(attribute)
     __send__(attribute) || DEFAULT_VALUES[attribute]

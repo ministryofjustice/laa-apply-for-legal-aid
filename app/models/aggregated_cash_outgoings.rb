@@ -24,7 +24,7 @@ class AggregatedCashOutgoings < BaseAggregatedCashTransaction
     save_cash_transaction_records
   end
 
-  private
+private
 
   def model_error(type)
     I18n.t("activemodel.errors.models.#{self.class.to_s.underscore}.#{self.class.operation}.attributes.cash_outgoings.#{type}")

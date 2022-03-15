@@ -14,7 +14,7 @@ module CCMS
         @response ||= applicant_search_requestor.call
       end
 
-      private
+    private
 
       def applicant_search_requestor
         @applicant_search_requestor ||= CCMS::Requestors::ApplicantSearchRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)

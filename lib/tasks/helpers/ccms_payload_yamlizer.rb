@@ -18,7 +18,7 @@ class CcmsPayloadYamlizer
     # rubocop:enable Rails/Output
   end
 
-  private
+private
 
   def process_child(node, hash)
     if attribute_block(node)

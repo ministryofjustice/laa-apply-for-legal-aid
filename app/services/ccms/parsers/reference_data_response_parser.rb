@@ -12,7 +12,7 @@ module CCMS
         'ReferenceDataInqRS'.freeze
       end
 
-      private
+    private
 
       def extracted_transaction_request_id
         text_from(TRANSACTION_ID_PATH)

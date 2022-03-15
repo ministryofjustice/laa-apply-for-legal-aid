@@ -16,7 +16,7 @@ module TrueLayer
         end
       end
 
-      private
+    private
 
       attr_reader :api_client, :bank_provider
 

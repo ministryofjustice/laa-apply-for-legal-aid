@@ -194,7 +194,7 @@ module Reports
         sanitise
       end
 
-      private
+    private
 
       def chances_of_success
         return lead_proceeding&.chances_of_success unless lead_proceeding.nil?

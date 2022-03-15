@@ -17,7 +17,7 @@ module Providers
       go_forward
     end
 
-    private
+  private
 
     def ready_for_citizen_to_enter_financial_details?
       !legal_aid_application.awaiting_applicant? && !legal_aid_application.applicant_entering_means?

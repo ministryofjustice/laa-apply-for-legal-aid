@@ -21,7 +21,7 @@ module TrueLayer
         end
       end
 
-      private
+    private
 
       attr_reader :api_client, :bank_account, :start_at, :finish_at
 

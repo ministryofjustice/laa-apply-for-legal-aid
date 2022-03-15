@@ -17,7 +17,7 @@ module Banking
       bank_providers.each { |bank| process_bank(bank) }
     end
 
-    private
+  private
 
     def process_bank(bank)
       bank.bank_accounts.each { |acct| process_account(acct) }

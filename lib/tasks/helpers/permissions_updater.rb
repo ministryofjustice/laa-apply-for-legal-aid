@@ -8,7 +8,7 @@ class PermissionsUpdater
     Firm.all.each { |firm| update_permissions(firm) }
   end
 
-  private
+private
 
   def update_permissions(firm)
     firm.permissions << @passported unless firm.permissions.include?(@passported)

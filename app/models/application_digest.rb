@@ -13,7 +13,7 @@ class ApplicationDigest < ApplicationRecord
       columns.map(&:name) - COLUMNS_TO_OMIT
     end
 
-    private
+  private
 
     def map_attrs(application_id) # rubocop:disable Metrics/MethodLength
       laa = LegalAidApplication.find application_id

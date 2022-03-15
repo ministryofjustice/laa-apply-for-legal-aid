@@ -40,7 +40,7 @@ module SavingsAmounts
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
     end
 
-    private
+  private
 
     def empty_unchecked_values
       ATTRIBUTES.each do |attribute|

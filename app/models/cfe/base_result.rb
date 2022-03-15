@@ -164,7 +164,7 @@ module CFE
       property.present? && property_value > 0.0
     end
 
-    private
+  private
 
     def manual_check_required?
       CCMS::ManualReviewDeterminer.new(legal_aid_application).manual_review_required?

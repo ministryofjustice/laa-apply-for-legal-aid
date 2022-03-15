@@ -8,7 +8,7 @@ module CFE
       vehicle_request_body.to_json
     end
 
-    private
+  private
 
     def vehicle_request_body
       vehicle.nil? ? vehicle_absent_request : vehicle_present_request

@@ -19,7 +19,7 @@ module CFE
       File.join(cfe_url_host, cfe_url_path)
     end
 
-    private
+  private
 
     # override this method in the derived class if you need more/different headers
     def headers

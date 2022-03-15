@@ -30,7 +30,7 @@ module CCMS
         soap_client.call(:create_case_application, xml: request_xml) unless @options[:no_call]
       end
 
-      private
+    private
 
       def means_entity_configs
         YAML.load_file(means_entity_config_file).map(&:deep_symbolize_keys!)

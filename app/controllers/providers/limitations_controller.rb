@@ -17,7 +17,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def clear_limit_and_reason
       atc = params[:legal_aid_application]

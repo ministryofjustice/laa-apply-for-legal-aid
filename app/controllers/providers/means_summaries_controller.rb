@@ -14,7 +14,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def check_financial_eligibility
       CFE::SubmissionManager.call(legal_aid_application.id)

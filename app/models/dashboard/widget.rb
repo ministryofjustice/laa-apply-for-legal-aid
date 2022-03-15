@@ -17,7 +17,7 @@ module Dashboard
       @data ||= @widget_klass.data
     end
 
-    private
+  private
 
     def dataset_name
       "apply_for_legal_aid.#{HostEnv.environment}.#{@widget_klass.handle}"

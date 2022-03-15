@@ -21,7 +21,7 @@ module VehicleForm
       super
     end
 
-    private
+  private
 
     def exclude_from_model
       [:payments_remain]

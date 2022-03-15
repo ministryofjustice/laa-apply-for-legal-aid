@@ -20,7 +20,7 @@ module CCMS
         new(*args).call
       end
 
-      private
+    private
 
       def create_history(from_state, to_state, xml_request, xml_response)
         SubmissionHistory.create submission: submission,

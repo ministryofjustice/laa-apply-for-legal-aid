@@ -11,7 +11,7 @@ class PageHistoryService
     redis.get(redis_key)
   end
 
-  private
+private
 
   def redis
     @redis ||= Redis.new(url: redis_url)

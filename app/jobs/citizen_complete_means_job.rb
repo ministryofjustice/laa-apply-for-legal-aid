@@ -7,7 +7,7 @@ class CitizenCompleteMeansJob < ApplicationJob
     SubmitProviderReminderService.new(@legal_aid_application).send_email
   end
 
-  private
+private
 
   def reminder_mailings
     @legal_aid_application.scheduled_mailings.where(mailer_klass: 'SubmitCitizenFinancialReminderMailer')

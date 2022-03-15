@@ -25,7 +25,7 @@ module Providers
         AuthorizationContext.new(current_provider, self)
       end
 
-      private
+    private
 
       def provider_not_authorized
         respond_to do |format|

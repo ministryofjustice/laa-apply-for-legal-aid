@@ -80,7 +80,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
                        :populate_attribute,
                        :find_transactions
 
-  private
+private
 
   def transaction_date(month_number)
     __send__("month#{month_number}")

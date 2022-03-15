@@ -7,7 +7,7 @@ class SavingsAmount < ApplicationRecord
     all_attributes.map { |attr| send(attr).present? }.any?
   end
 
-  private
+private
 
   def all_attributes
     %i[

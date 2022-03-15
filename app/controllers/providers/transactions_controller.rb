@@ -13,7 +13,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def set_selection
       new_values = { transaction_type_id: transaction_type.id }

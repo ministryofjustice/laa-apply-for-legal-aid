@@ -37,7 +37,7 @@ module Providers
       render partial: 'uploaded_files', locals: { attachments: uploaded_evidence_collection.original_attachments }
     end
 
-    private
+  private
 
     def required_documents
       @required_documents = legal_aid_application.required_document_categories

@@ -51,7 +51,7 @@ module Opponents
       extrapolate_police_notified_details
     end
 
-    private
+  private
 
     def police_notified_presence
       return if police_notified.blank?

@@ -7,7 +7,7 @@ module ChancesOfSuccesses
     validates :success_likely, presence: true, unless: :draft?
     before_validation :set_success_prospect
 
-    private
+  private
 
     def set_success_prospect
       if success_likely == 'true'
