@@ -8,12 +8,12 @@ module Providers
     end
 
     def update
-      if upload_button_pressed?
+      if button_pressed?(:upload_button)
         perform_upload
-      elsif draft_button_pressed?
+      elsif button_pressed?(:draft_button)
         populate_submission_form
         save_continue_or_draft(submission_form)
-      elsif delete_button_pressed?
+      elsif button_pressed?(:delete_button)
         destroy
       elsif save_or_continue
         convert_new_files_to_pdf
@@ -95,16 +95,13 @@ module Providers
       end
     end
 
-    def upload_button_pressed?
-      params[:upload_button].present?
-    end
+    def button_pressed?(button)
+      # does the parameter exist?
+      return false if params[button].nil?
 
-    def draft_button_pressed?
-      params[:draft_button].present?
-    end
-
-    def delete_button_pressed?
-      params[:delete_button].present?
+      # The current helper renders the buttons with a content value
+      # rather than an attribute therefore it will be an empty string
+      params[button].empty?
     end
 
     def upload_form
