@@ -200,20 +200,6 @@ RSpec/BeforeAfterAll:
   Exclude:
     - 'spec/requests/providers/means_reports_spec.rb'
 
-# Offense count: 12
-# Cop supports --auto-correct.
-RSpec/ContextMethod:
-  Exclude:
-    - 'spec/presenters/applicant_account_presenter_spec.rb'
-    - 'spec/requests/providers/address_lookups_spec.rb'
-    - 'spec/requests/providers/address_selections_spec.rb'
-    - 'spec/requests/providers/applicant_details_spec.rb'
-    - 'spec/requests/providers/check_benefits_spec.rb'
-    - 'spec/requests/providers/check_provider_answers_spec.rb'
-    - 'spec/requests/providers/limitations_spec.rb'
-    - 'spec/requests/providers/proceedings_types_spec.rb'
-    - 'spec/requests/providers/used_multiple_delegated_functions_spec.rb'
-
 # Offense count: 1939
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without
