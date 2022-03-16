@@ -18,7 +18,7 @@ module Citizens
       end
     end
 
-    private
+  private
 
     def authenticate_with_devise
       restored_session = OauthSessionSaver.get(current_applicant.id)

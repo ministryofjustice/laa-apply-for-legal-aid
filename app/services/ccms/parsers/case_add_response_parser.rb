@@ -8,7 +8,7 @@ module CCMS
         parse(:extracted_status) == 'Success'
       end
 
-      private
+    private
 
       def response_type
         'CaseAddRS'.freeze

@@ -14,7 +14,7 @@ module HMRC
         persist_response
       end
 
-      private
+    private
 
       def destroy_existing_employments
         @application.employments.map(&:destroy!)

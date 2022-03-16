@@ -14,7 +14,7 @@ module CFE
       @submission.employments_created!
     end
 
-    private
+  private
 
     def employment_income_payload
       payload = []

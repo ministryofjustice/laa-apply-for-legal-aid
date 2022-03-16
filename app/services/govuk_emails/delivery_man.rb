@@ -25,7 +25,7 @@ module GovukEmails
       AlertManager.capture_exception(e)
     end
 
-    private
+  private
 
     def deliver_now
       mail_message = mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now!

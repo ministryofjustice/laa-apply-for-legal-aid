@@ -12,7 +12,7 @@ module HMRC
         end
       end
 
-      private
+    private
 
       def run_get_request
         conn.get(@hmrc_response.url)

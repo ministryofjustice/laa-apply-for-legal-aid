@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  module Requestors # rubocop:disable Metrics/ModuleLength
+  module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
       context 'XML request' do
         let(:expected_tx_id) { '201904011604570390059770666' }

@@ -18,7 +18,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def set_variables
       @applicant = legal_aid_application.applicant

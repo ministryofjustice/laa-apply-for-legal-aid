@@ -14,7 +14,7 @@ module TrueLayer
       save_error if error
     end
 
-    private
+  private
 
     attr_reader :legal_aid_application
 

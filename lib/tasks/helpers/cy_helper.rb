@@ -29,7 +29,7 @@ class CyHelper
     translation_files.each { |f| reverse_strings(f) }
   end
 
-  private
+private
 
   def copy_en_to_cy
     Rails.logger.info 'copying en locale to cy'

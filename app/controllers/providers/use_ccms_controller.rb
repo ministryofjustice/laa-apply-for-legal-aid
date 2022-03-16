@@ -4,7 +4,7 @@ module Providers
       @legal_aid_application.use_ccms!(use_ccms_reason) unless @legal_aid_application.use_ccms?
     end
 
-    private
+  private
 
     def use_ccms_reason
       case request.referer

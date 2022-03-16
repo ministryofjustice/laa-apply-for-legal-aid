@@ -5,7 +5,7 @@ module Providers
       head :ok
     end
 
-    private
+  private
 
     def bank_transaction
       @bank_transaction ||= @legal_aid_application.bank_transactions.find(params[:id])

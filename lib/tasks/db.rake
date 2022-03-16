@@ -29,7 +29,7 @@ namespace :db do
     end
   end
 
-  private
+private
 
   def build_postgres_url
     "postgres://#{ENV.fetch('POSTGRES_USER', '')}:#{ENV.fetch('POSTGRES_PASSWORD', '')}" \

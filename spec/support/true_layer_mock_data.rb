@@ -13,13 +13,15 @@ module TrueLayerHelpers
       addresses: [{
         address: Faker::Address.street_address,
         city: Faker::Address.city
-      }, {
-        address: Faker::Address.street_address,
-        city: Faker::Address.city
-      }]
-    }, {
-      full_name: Faker::Name.name
-    }],
+      },
+                  {
+                    address: Faker::Address.street_address,
+                    city: Faker::Address.city
+                  }]
+    },
+                      {
+                        full_name: Faker::Name.name
+                      }],
     accounts: [{
       account_id: SecureRandom.hex,
       display_name: Faker::Bank.name,
@@ -44,33 +46,36 @@ module TrueLayerHelpers
           currency: 'GBP',
           amount: 413.11
         }
-      }, {
-        transaction_id: SecureRandom.hex,
-        timestamp: '2018-02-18T00:00:00',
-        description: 'PAYPAL EBAY',
-        amount: 25.25,
-        currency: 'GBP',
-        transaction_type: 'CREDIT',
-        merchant_name: 'Ebay',
-        running_balance: {}
-      }]
-    }, {
-      account_id: SecureRandom.hex,
-      display_name: Faker::Bank.name,
-      account_type: 'SAVINGS',
-      currency: Faker::Currency.code,
-      account_number: {
-        number: Faker::Number.number,
-        sort_code: Faker::Number.number(digits: 6)
       },
-      balance: {
-        current: rand(1...1_000_000.0).round(2)
-      },
-      transactions: [{
-        transaction_id: SecureRandom.hex
-      }, {
-        transaction_id: SecureRandom.hex
-      }]
-    }]
+                     {
+                       transaction_id: SecureRandom.hex,
+                       timestamp: '2018-02-18T00:00:00',
+                       description: 'PAYPAL EBAY',
+                       amount: 25.25,
+                       currency: 'GBP',
+                       transaction_type: 'CREDIT',
+                       merchant_name: 'Ebay',
+                       running_balance: {}
+                     }]
+    },
+               {
+                 account_id: SecureRandom.hex,
+                 display_name: Faker::Bank.name,
+                 account_type: 'SAVINGS',
+                 currency: Faker::Currency.code,
+                 account_number: {
+                   number: Faker::Number.number,
+                   sort_code: Faker::Number.number(digits: 6)
+                 },
+                 balance: {
+                   current: rand(1...1_000_000.0).round(2)
+                 },
+                 transactions: [{
+                   transaction_id: SecureRandom.hex
+                 },
+                                {
+                                  transaction_id: SecureRandom.hex
+                                }]
+               }]
   }.freeze
 end

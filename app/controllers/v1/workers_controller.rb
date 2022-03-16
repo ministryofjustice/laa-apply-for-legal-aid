@@ -7,7 +7,7 @@ module V1
       }
     end
 
-    private
+  private
 
     def worker
       @worker ||= Sidekiq::Status.get_all(worker_id)

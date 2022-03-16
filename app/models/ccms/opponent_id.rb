@@ -18,7 +18,7 @@ module CCMS
       new(serial_id: SERIAL_ID_SEQUENCE_START)
     end
 
-    private
+  private
 
     def prevent_multiple_records
       return if self.class.count.zero?

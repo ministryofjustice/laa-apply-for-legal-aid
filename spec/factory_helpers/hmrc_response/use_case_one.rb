@@ -1,6 +1,6 @@
 module FactoryHelpers
   module HMRCResponse
-    class UseCaseOne # rubocop:disable Metrics/ClassLength
+    class UseCaseOne
       def initialize(correlation_id, options = {})
         @correlation_id = correlation_id
         @options = options
@@ -47,7 +47,7 @@ module FactoryHelpers
         }
       end
 
-      private
+    private
 
       def generate_named_data
         case @options[:named_data]

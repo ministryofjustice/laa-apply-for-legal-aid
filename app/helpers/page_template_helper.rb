@@ -38,7 +38,7 @@ module PageTemplateHelper
   #   <% end %>
   #
 
-  def page_template( # rubocop:disable Metrics/ParameterLists, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def page_template(
     page_title: nil,
     head_title: nil,
     back_link: {},

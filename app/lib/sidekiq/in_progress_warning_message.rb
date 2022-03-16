@@ -16,7 +16,7 @@ module Sidekiq
       ERROR
     end
 
-    private
+  private
 
     def call_type
       {

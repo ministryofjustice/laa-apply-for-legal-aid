@@ -6,7 +6,7 @@ module LegalAidApplications
 
     validate :evidence_present
 
-    private
+  private
 
     def passporting_benefit_error
       ".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{model.passporting_benefit}"

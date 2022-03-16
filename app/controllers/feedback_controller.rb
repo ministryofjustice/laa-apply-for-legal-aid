@@ -34,7 +34,7 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.find(params[:id])
   end
 
-  private
+private
 
   def initialize_feedback
     @feedback = Feedback.new(feedback_params)

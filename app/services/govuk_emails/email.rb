@@ -26,7 +26,7 @@ module GovukEmails
 
     delegate :status, to: :email
 
-    private
+  private
 
     def email
       @email ||= govuk_notify_client.get_notification(id)

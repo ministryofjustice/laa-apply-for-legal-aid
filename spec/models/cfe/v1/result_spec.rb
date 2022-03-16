@@ -127,13 +127,13 @@ module CFE
         describe '#vehicle' do
           it 'returns the vehicle hash' do
             expect(vehicle.keys).to match_array(%i[
-                                                  in_regular_use
-                                                  value
-                                                  loan_amount_outstanding
-                                                  date_of_purchase
-                                                  included_in_assessment
-                                                  assessed_value
-                                                ])
+              in_regular_use
+              value
+              loan_amount_outstanding
+              date_of_purchase
+              included_in_assessment
+              assessed_value
+            ])
           end
         end
 

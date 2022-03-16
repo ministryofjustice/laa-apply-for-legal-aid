@@ -10,7 +10,7 @@ module Providers
       render :show unless save_continue_and_update_scope_limitations
     end
 
-    private
+  private
 
     def save_continue_and_update_scope_limitations
       form.draft = draft_selected?

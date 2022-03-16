@@ -11,7 +11,7 @@ module CFE
       }.to_json
     end
 
-    private
+  private
 
     def cash_transactions
       @cash_transactions ||= legal_aid_application.cash_transactions

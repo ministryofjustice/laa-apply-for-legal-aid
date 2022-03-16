@@ -16,7 +16,7 @@ class ProviderAfterLoginService
     end
   end
 
-  private
+private
 
   def check_provider_details_api
     if @provider.newly_created_by_devise?

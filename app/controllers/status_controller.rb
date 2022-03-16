@@ -28,7 +28,7 @@ class StatusController < ApiController
     redirect_to ENV['GOOGLE_DATA_STUDIO_URL']
   end
 
-  private
+private
 
   def redis_alive?
     Sidekiq.redis(&:info)

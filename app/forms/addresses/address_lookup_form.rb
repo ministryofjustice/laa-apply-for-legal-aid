@@ -14,7 +14,7 @@ module Addresses
       save
     end
 
-    private
+  private
 
     def normalise_postcode
       return if postcode.blank?

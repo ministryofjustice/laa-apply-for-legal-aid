@@ -15,7 +15,7 @@ module CCMS
         raise
       end
 
-      private
+    private
 
       def submittable_attachments
         @submittable_attachments ||= attachments.select { |a| DocumentCategory.submittable_category_names.include?(a.attachment_type) }

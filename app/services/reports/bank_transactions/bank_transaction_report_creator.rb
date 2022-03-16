@@ -9,7 +9,7 @@ module Reports
         local_csv ? generate_csv_locally : generate_attachment
       end
 
-      private
+    private
 
       def generate_csv_locally
         File.open(Rails.root.join('tmp/bank_transactions.csv'), 'wb') do |fp|

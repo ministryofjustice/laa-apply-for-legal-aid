@@ -9,7 +9,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def details_checked!
       legal_aid_application.applicant_details_checked!

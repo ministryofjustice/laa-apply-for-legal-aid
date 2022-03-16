@@ -49,7 +49,7 @@ module CCMS
         @transaction_request_id ||= Time.current.strftime('%Y%m%d%H%M%S%6N') + rand.to_s[2..8]
       end
 
-      private
+    private
 
       # temporarily ignore this until connectivity with ccms is working
       # :nocov:

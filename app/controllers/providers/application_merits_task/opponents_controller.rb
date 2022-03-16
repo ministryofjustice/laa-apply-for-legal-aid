@@ -10,7 +10,7 @@ module Providers
         render :show unless update_task_save_continue_or_draft(:application, :opponent_details)
       end
 
-      private
+    private
 
       def opponent
         @opponent ||= legal_aid_application.opponent || legal_aid_application.build_opponent

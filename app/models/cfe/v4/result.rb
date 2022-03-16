@@ -1,6 +1,6 @@
 module CFE
   module V4
-    class Result < CFE::BaseResult # rubocop:disable Metrics/ClassLength
+    class Result < CFE::BaseResult
       def assessment_result
         return nil if result_summary.nil?
 
@@ -337,7 +337,7 @@ module CFE
         jobs.any?
       end
 
-      private
+    private
 
       def min_threshold(proceeding_types_array, threshold_method)
         threshold = proceeding_types_array.map { |pt| pt[threshold_method] }.min

@@ -6,7 +6,7 @@ module Citizens
     before_action :set_cache_buster
     around_action :switch_locale
 
-    private
+  private
 
     def authenticate_with_devise
       authenticate_applicant!

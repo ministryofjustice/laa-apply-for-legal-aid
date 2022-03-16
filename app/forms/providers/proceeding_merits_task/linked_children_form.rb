@@ -24,7 +24,7 @@ module Providers
         false
       end
 
-      private
+    private
 
       def update_involved_children_on_proceeding
         proceeding.involved_children.delete_all

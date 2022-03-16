@@ -8,7 +8,7 @@ class CfeApiDisplayer
     display_cfe_submission_history
   end
 
-  private
+private
 
   def categorised_bank_transactions
     @categorised_bank_transactions ||= @legal_aid_application.bank_transactions.by_type

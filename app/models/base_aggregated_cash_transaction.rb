@@ -3,7 +3,7 @@
 # These classes are facades to allow three cash transaction records per Transaction Type
 # to be displayed on a form and validated.
 #
-class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
+class BaseAggregatedCashTransaction
   include ActiveModel::Model
   include MoneyHelper
 
@@ -80,7 +80,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
                        :populate_attribute,
                        :find_transactions
 
-  private
+private
 
   def transaction_date(month_number)
     __send__("month#{month_number}")
@@ -153,7 +153,7 @@ class BaseAggregatedCashTransaction # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def check_all_values_set_for(category) # rubocop:disable Metrics/AbcSize
+  def check_all_values_set_for(category)
     MONTH_RANGE.each do |i|
       value_attr = "#{category}#{i}".to_sym
       value = __send__(value_attr)

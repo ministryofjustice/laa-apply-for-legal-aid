@@ -9,7 +9,7 @@ module HMRC
         @hmrc_response = hmrc_response
       end
 
-      private
+    private
 
       def conn
         @conn ||= Faraday.new(url: host, headers: headers)

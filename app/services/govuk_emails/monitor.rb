@@ -14,7 +14,7 @@ module GovukEmails
       send_undeliverable_alerts if status.in?(ScheduledMailing::FAILURE_STATUSES)
     end
 
-    private
+  private
 
     def send_undeliverable_alerts
       return unless HostEnv.production?

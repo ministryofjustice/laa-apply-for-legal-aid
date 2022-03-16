@@ -1,11 +1,16 @@
 module LegalAidApplications
-  class DependantForm < BaseForm  # rubocop:disable Metrics/ClassLength
+  class DependantForm < BaseForm
     form_for Dependant
 
     before_validation :clear_value_fields
 
-    BASE_ATTRIBUTES = %i[name relationship in_full_time_education has_income
-                         monthly_income has_assets_more_than_threshold assets_value].freeze
+    BASE_ATTRIBUTES = %i[name
+                         relationship
+                         in_full_time_education
+                         has_income
+                         monthly_income
+                         has_assets_more_than_threshold
+                         assets_value].freeze
 
     MODEL_ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth].freeze
 
@@ -96,7 +101,7 @@ module LegalAidApplications
       I18n.t('activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold', name: model.name)
     end
 
-    private
+  private
 
     def exclude_from_model
       date_fields.fields

@@ -17,7 +17,7 @@ class ProviderDetailsRetriever
     provider_details
   end
 
-  private
+private
 
   def provider_details
     raise_record_not_found_error if response.is_a?(Net::HTTPNotFound)
@@ -37,7 +37,7 @@ class ProviderDetailsRetriever
     raise ApiError, "Provider details error: #{e.class} :: #{e.message}"
   end
 
-  def url # rubocop:disable Lint/UriEscapeUnescape
+  def url
     File.join(Rails.configuration.x.provider_details.url, encoded_uri)
   end
 

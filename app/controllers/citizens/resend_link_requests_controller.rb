@@ -11,7 +11,7 @@ module Citizens
                                  arguments: mailer_args)
     end
 
-    private
+  private
 
     def mailer_args
       [

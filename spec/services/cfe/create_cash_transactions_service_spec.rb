@@ -84,7 +84,7 @@ module CFE
       end
     end
 
-    def expected_payload_hash # rubocop:disable Metrics/AbcSize
+    def expected_payload_hash
       {
         income: [
           {

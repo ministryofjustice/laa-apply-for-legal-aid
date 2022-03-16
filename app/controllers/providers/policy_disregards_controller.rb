@@ -9,7 +9,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def policy_disregards
       @policy_disregards ||= legal_aid_application.policy_disregards || legal_aid_application.create_policy_disregards!

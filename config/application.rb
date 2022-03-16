@@ -110,7 +110,7 @@ module LaaApplyForLegalAid
     config.x.hmrc_interface.client_secret = ENV['HMRC_API_SECRET']
     config.x.hmrc_interface.duration_check = ENV['HMRC_DURATION_CHECK'] || 3
 
-    config.x.db_url = Rails.env.production? ? "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}:5432/#{ENV['POSTGRES_DATABASE']}" : 'postgres://localhost:5432/apply_for_legal_aid_dev' # rubocop:disable Layout/LineLength
+    config.x.db_url = Rails.env.production? ? "postgres://#{ENV['POSTGRES_USER']}:#{ENV['POSTGRES_PASSWORD']}@#{ENV['POSTGRES_HOST']}:5432/#{ENV['POSTGRES_DATABASE']}" : 'postgres://localhost:5432/apply_for_legal_aid_dev'
 
     config.active_job.queue_adapter = :sidekiq
 
@@ -140,7 +140,7 @@ module LaaApplyForLegalAid
       production: []
     }
 
-    config.x.redis.base_url = ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : 'redis://localhost:6379' # rubocop:disable Layout/LineLength, Lint/RequireParentheses
+    config.x.redis.base_url = ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : 'redis://localhost:6379' # rubocop:disable Lint/RequireParentheses
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
 

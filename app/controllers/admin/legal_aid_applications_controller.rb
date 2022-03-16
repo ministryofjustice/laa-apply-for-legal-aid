@@ -44,7 +44,7 @@ module Admin
       redirect_to action: :index
     end
 
-    protected
+  protected
 
     def create_test_applications_enabled?
       Rails.configuration.x.admin_portal.allow_create_test_applications
@@ -56,7 +56,7 @@ module Admin
     end
     helper_method :destroy_enabled?, :create_test_applications_enabled?
 
-    private
+  private
 
     def search_application_results
       search_applications

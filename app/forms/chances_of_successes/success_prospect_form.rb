@@ -33,7 +33,7 @@ module ChancesOfSuccesses
       extrapolate_details
     end
 
-    private
+  private
 
     def details_present?
       return if success_prospect.blank? || draft?

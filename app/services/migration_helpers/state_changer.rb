@@ -1,4 +1,3 @@
-# rubocop:disable Layout/LineLength
 module MigrationHelpers
   class StateChanger
     STATE_CHANGES = [
@@ -25,7 +24,7 @@ module MigrationHelpers
       run(:down)
     end
 
-    private
+  private
 
     def run(migration_direction)
       STATE_CHANGES.each do |change_details|
@@ -56,4 +55,3 @@ module MigrationHelpers
     end
   end
 end
-# rubocop:enable Layout/LineLength

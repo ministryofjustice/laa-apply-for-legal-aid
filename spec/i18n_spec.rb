@@ -27,7 +27,7 @@ RSpec.describe 'I18n', :i18n do
     end
   end
 
-  def print_missing_keys(missing_applicant_keys) # rubocop:disable Metrics/AbcSize
+  def print_missing_keys(missing_applicant_keys)
     key_details = gather_missing_details(missing_applicant_keys)
     max_key_length = key_details.keys.map(&:length).max
     max_location_length = key_details.values.map(&:length).max

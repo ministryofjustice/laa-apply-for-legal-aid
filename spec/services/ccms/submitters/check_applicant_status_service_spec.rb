@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module CCMS
-  module Submitters # rubocop:disable Metrics/ModuleLength
+  module Submitters
     RSpec.describe CheckApplicantStatusService, :ccms do
       let(:submission) { create :submission, :applicant_submitted }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }

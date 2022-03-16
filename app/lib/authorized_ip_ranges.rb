@@ -17,7 +17,7 @@ class AuthorizedIpRanges
     false
   end
 
-  private
+private
 
   def parse_ipaddrs_config
     cidr_hash = YAML.load_file(Rails.root.join('config/ipaddrs.crypt.yml'))

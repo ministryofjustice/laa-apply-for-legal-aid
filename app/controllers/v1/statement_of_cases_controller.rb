@@ -19,7 +19,7 @@ module V1
       head :ok
     end
 
-    private
+  private
 
     def provider_uploader
       legal_aid_application.provider

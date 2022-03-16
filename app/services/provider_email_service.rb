@@ -13,7 +13,7 @@ class ProviderEmailService
                                arguments: mailer_args)
   end
 
-  private
+private
 
   attr_reader :application
 

@@ -8,7 +8,7 @@ module CFE
       request_hash.to_json
     end
 
-    private
+  private
 
     def request_hash
       {

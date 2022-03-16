@@ -13,7 +13,7 @@ module Providers
         render :show
       end
 
-      private
+    private
 
       def task_list_should_update?
         application_has_task_list? && form.valid? && !draft_selected? && !form.has_other_involved_child?

@@ -21,13 +21,13 @@ module AdminUsers
       redirect_to error_path(:access_denied)
     end
 
-    protected
+  protected
 
     def after_sign_in_path_for(resource)
       request.env['omniauth.origin'] || stored_location_for(resource) || admin_root_path
     end
 
-    private
+  private
 
     def admin_user
       @admin_user ||= AdminUser.find_by(email: email)

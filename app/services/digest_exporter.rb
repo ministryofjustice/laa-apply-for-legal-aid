@@ -18,7 +18,7 @@ class DigestExporter
     update_and_save_worksheet
   end
 
-  private
+private
 
   def log_message(message)
     message = Time.zone.now.strftime('%F %T.%L ') + message if Rails.env.development?

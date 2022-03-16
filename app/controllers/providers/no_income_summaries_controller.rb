@@ -12,7 +12,7 @@ module Providers
       render :show
     end
 
-    private
+  private
 
     def student_finance
       @student_finance ||= legal_aid_application.value_of_student_finance

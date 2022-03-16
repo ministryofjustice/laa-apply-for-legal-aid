@@ -10,7 +10,7 @@ module Providers
       sign_out current_provider
     end
 
-    private
+  private
 
     def portal_url
       uri = URI(Rails.configuration.x.laa_portal.idp_sso_target_url)

@@ -12,7 +12,7 @@ module Metrics
       queues.each { |queue| send_metric(queue) }
     end
 
-    private
+  private
 
     attr_reader :prometheus_client
 

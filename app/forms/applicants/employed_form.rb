@@ -13,7 +13,7 @@ module Applicants
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
     end
 
-    private
+  private
 
     def exclude_from_model
       [:none_selected]

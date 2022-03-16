@@ -1,7 +1,7 @@
 module CFEResults
   module V2
-    class MockResults # rubocop:disable Metrics/ClassLength
-      def self.eligible # rubocop:disable Metrics/MethodLength
+    class MockResults
+      def self.eligible
         {
           version: '2',
           timestamp: '2020-01-28T16:37:07.921+00:00',
@@ -246,7 +246,7 @@ module CFEResults
         result
       end
 
-      def self.with_capital_and_income_contributions_required # rubocop:disable Metrics/AbcSize
+      def self.with_capital_and_income_contributions_required
         result = eligible
         result[:assessment][:assessment_result] = 'contribution_required'
 

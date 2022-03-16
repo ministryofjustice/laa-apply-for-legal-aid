@@ -8,7 +8,7 @@ class EmailMonitorJob < ApplicationJob
     reschedule unless JobQueue.enqueued?(self.class)
   end
 
-  private
+private
 
   def reschedule
     self.class.set(wait: DEFAULT_DELAY).perform_later

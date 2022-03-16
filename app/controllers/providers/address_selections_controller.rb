@@ -3,7 +3,7 @@ module Providers
     include PreDWPCheckVisible
     AddressCollectionItem = Struct.new(:id, :address)
 
-    def show # rubocop:disable Metrics/AbcSize
+    def show
       return redirect_to back_path unless address.postcode
 
       legal_aid_application.enter_applicant_details! unless no_state_change_required?
@@ -27,7 +27,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def collect_addresses
       count = AddressCollectionItem.new(nil, t('providers.address_selections.show.addresses_found_text', count: @addresses.size))

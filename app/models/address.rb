@@ -40,7 +40,7 @@ class Address < ApplicationRecord
     }.to_json
   end
 
-  private
+private
 
   def validate_address_lines
     return if address_line_one.present? || address_line_two.present?

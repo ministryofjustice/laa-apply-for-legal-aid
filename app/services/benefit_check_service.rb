@@ -28,7 +28,7 @@ class BenefitCheckService
     false
   end
 
-  private
+private
 
   attr_reader :application, :config
 

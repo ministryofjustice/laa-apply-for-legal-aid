@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderStart < FlowSteps # rubocop:disable Metrics/ClassLength
+    class ProviderStart < FlowSteps
       STEPS = {
         providers_home: {
           path: ->(_application) { urls.providers_legal_aid_applications_path }

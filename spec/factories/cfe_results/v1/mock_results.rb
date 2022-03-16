@@ -1,7 +1,7 @@
 module CFEResults
   module V1
     class MockResults
-      def self.eligible # rubocop:disable Metrics/MethodLength
+      def self.eligible
         {
           assessment_result: 'eligible',
           applicant: {

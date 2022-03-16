@@ -23,7 +23,7 @@ module LegalFramework
       false
     end
 
-    private
+  private
 
     def update_merits_task_list(serialized_data)
       if MeritsTaskList.exists?(legal_aid_application_id: legal_aid_application.id)

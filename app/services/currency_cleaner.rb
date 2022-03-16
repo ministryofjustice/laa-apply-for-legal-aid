@@ -14,7 +14,7 @@ class CurrencyCleaner
     PURE_NUMERIC_REGEX.match?(clean_value) ? clean_value : @original_value
   end
 
-  private
+private
 
   def remove_commas
     @original_value.sub(LEADING_POUND_SIGN_REGEX, '').gsub(THOUSANDS_SEPARATOR_REGEX, '')

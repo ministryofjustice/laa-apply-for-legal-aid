@@ -10,7 +10,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def legal_aid_application_params
       merge_with_model(legal_aid_application) do

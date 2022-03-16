@@ -13,7 +13,7 @@ module TrueLayer
       all_banks.sort_by { |bank| bank[:display_name] }
     end
 
-    private
+  private
 
     def all_banks
       fetch(API_URL_OPEN_BANKING) + fetch(API_URL_OAUTH)

@@ -22,7 +22,7 @@ module StatementOfCases
       result
     end
 
-    private
+  private
 
     def statement_present_or_file_uploaded
       return if file_present_or_draft?

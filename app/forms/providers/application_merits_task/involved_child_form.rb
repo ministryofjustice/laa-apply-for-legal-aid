@@ -40,7 +40,7 @@ module Providers
         @date_of_birth = attributes[:date_of_birth] = date_fields.form_date
       end
 
-      private
+    private
 
       def draft_and_not_partially_complete_date?
         draft? && !date_fields.partially_complete?

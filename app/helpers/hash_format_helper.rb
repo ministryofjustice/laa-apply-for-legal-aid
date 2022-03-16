@@ -15,7 +15,7 @@ module HashFormatHelper
     html.html_safe
   end
 
-  private
+private
 
   def build_dl_array(key, value)
     content_tag(:dl, class: 'govuk-body kvp govuk-!-margin-bottom-0') do

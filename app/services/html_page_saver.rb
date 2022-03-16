@@ -16,7 +16,7 @@ class HtmlPageSaver
     save_file
   end
 
-  private
+private
 
   def save_file
     File.write(prepared_path, html, mode: 'wb')

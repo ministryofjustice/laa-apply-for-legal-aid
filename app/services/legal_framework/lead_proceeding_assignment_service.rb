@@ -18,7 +18,7 @@ module LegalFramework
       assign_new_lead if lead.nil?
     end
 
-    private
+  private
 
     def assign_new_lead
       new_lead_proceeding = @legal_aid_application.proceedings.detect(&:domestic_abuse?)

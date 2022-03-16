@@ -26,7 +26,7 @@ module Providers
       render :show
     end
 
-    private
+  private
 
     def proceedings
       @proceedings ||= legal_aid_application.proceedings

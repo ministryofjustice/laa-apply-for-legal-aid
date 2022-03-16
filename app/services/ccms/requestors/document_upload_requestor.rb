@@ -18,7 +18,7 @@ module CCMS
         soap_client.call(:upload_document, xml: request_xml)
       end
 
-      private
+    private
 
       def request_xml
         soap_envelope(namespaces).to_xml

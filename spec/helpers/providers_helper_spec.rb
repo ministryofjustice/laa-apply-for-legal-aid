@@ -75,7 +75,11 @@ RSpec.describe ProvidersHelper, type: :helper do
     context 'when saved as draft and returning to date_client_told_incident' do
       it do
         legal_aid_application.provider_step = 'date_client_told_incidents'
-        legal_aid_application.provider_step_params = { application_merits_task_incident: { told_on_3i: '', told_on_2i: '', told_on_1i: '', occurred_on_3i: '', occurred_on_2i: '',
+        legal_aid_application.provider_step_params = { application_merits_task_incident: { told_on_3i: '',
+                                                                                           told_on_2i: '',
+                                                                                           told_on_1i: '',
+                                                                                           occurred_on_3i: '',
+                                                                                           occurred_on_2i: '',
                                                                                            occurred_on_1i: '' } }
         expect(subject).to eq("/providers/applications/#{legal_aid_application.id}/date_client_told_incident?locale=en")
       end

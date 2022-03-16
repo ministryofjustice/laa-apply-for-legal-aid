@@ -533,22 +533,22 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
   def corrected_valid_params
     valid_params.merge({
-                         benefits1: '7',
-                         benefits2: '8',
-                         benefits3: '9',
-                         maintenance_in1: '10',
-                         maintenance_in2: '11',
-                         maintenance_in3: '12'
-                       })
+      benefits1: '7',
+      benefits2: '8',
+      benefits3: '9',
+      maintenance_in1: '10',
+      maintenance_in2: '11',
+      maintenance_in3: '12'
+    })
   end
 
   def additional_valid_params
     valid_params.merge({
-                         check_box_pension: 'true',
-                         pension1: '15',
-                         pension2: '20',
-                         pension3: '25'
-                       })
+      check_box_pension: 'true',
+      pension1: '15',
+      pension2: '20',
+      pension3: '25'
+    })
   end
 
   def none_selected_params

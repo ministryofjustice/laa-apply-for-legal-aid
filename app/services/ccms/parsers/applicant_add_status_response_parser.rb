@@ -13,7 +13,7 @@ module CCMS
         @applicant_ccms_reference ||= parse(:extracted_applicant_ccms_reference)
       end
 
-      private
+    private
 
       def response_type
         'ClientAddUpdtStatusRS'.freeze

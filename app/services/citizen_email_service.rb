@@ -16,7 +16,7 @@ class CitizenEmailService
     notify_dashboard
   end
 
-  private
+private
 
   def notify_dashboard
     ActiveSupport::Notifications.instrument 'dashboard.applicant_emailed', legal_aid_application_id: @application.id

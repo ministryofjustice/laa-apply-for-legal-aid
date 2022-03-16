@@ -21,7 +21,7 @@ module Providers
       end
       delegate :applicant, to: :legal_aid_application
 
-      private
+    private
 
       def set_legal_aid_application
         return if self.class.legal_aid_application_not_required?

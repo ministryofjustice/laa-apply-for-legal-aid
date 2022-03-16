@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderMerits < FlowSteps # rubocop:disable Metrics/ClassLength
+    class ProviderMerits < FlowSteps
       STEPS = {
         start_involved_children_task: {
           # This allows the statement of case flow to check for involved children while allowing a standard path

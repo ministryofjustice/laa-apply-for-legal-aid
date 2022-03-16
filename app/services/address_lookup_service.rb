@@ -13,7 +13,7 @@ class AddressLookupService
     MapAddressLookupResults.call(results)
   end
 
-  private
+private
 
   def query_params
     {

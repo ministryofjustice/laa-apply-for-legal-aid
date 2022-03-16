@@ -11,7 +11,7 @@ module Populators
       populate_hierarchy
     end
 
-    private
+  private
 
     def insert_new_records
       TransactionType::NAMES.each_with_index do |(operation, names), op_index|

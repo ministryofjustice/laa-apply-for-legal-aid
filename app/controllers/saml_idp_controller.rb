@@ -13,7 +13,7 @@ class SamlIdpController < SamlIdp::IdpController
     render template: 'saml_idp/idp/new'
   end
 
-  private
+private
 
   def idp_authenticate(email, password)
     return unless config.password == password

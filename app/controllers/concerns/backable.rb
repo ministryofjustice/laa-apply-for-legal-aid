@@ -33,7 +33,7 @@ module Backable
       page_history_service.write(temp_page_history)
     end
 
-    private
+  private
 
     def update_page_history
       return if self.class.skip_back_history_actions.include?(action_name.to_sym)

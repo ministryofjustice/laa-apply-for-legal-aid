@@ -18,7 +18,7 @@ module Admin
       Time.current.strftime('%FT%T')
     end
 
-    private
+  private
 
     def application_details_report
       return unless admin_report

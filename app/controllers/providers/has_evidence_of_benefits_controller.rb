@@ -20,7 +20,7 @@ module Providers
       end
     end
 
-    private
+  private
 
     def passporting_benefit_translation
       I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{dwp_override.passporting_benefit}")

@@ -1,7 +1,7 @@
 module CFEResults
   module V4
-    class MockResults # rubocop:disable Metrics/ClassLength
-      def self.eligible # rubocop:disable Metrics/MethodLength
+    class MockResults
+      def self.eligible
         {
           version: '4',
           timestamp: '2021-05-26T12:51:56.329Z',
@@ -289,7 +289,7 @@ module CFEResults
         result
       end
 
-      def self.with_capital_and_income_contributions_required # rubocop:disable Metrics/AbcSize
+      def self.with_capital_and_income_contributions_required
         result = eligible
         result[:result_summary][:overall_result][:result] = 'contribution_required'
 
@@ -442,7 +442,7 @@ module CFEResults
         result
       end
 
-      def self.partially_eligible # rubocop:disable Metrics/AbcSize
+      def self.partially_eligible
         result = eligible
         result[:result_summary][:overall_result][:matter_types] << { matter_type: 'section8', result: 'ineligible' }
         result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: 'SE003', result: 'ineligible' }

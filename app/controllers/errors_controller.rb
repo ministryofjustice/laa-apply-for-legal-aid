@@ -9,7 +9,7 @@ class ErrorsController < ApplicationController
     redirect_to error_path(:page_not_found, default_url_options)
   end
 
-  private
+private
 
   def error_param
     params.require(:id)

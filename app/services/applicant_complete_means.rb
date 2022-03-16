@@ -17,7 +17,7 @@ class ApplicantCompleteMeans
     )
   end
 
-  private
+private
 
   def intended_provider_step
     Flow::KeyPoint.step_for(

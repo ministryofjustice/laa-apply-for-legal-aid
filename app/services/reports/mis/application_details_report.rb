@@ -7,7 +7,7 @@ module Reports
         notify_error(e)
       end
 
-      private
+    private
 
       def generate_csv_string
         csv_string = CSV.generate do |csv|

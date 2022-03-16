@@ -34,7 +34,7 @@ module Citizens
       render :new
     end
 
-    private
+  private
 
     def additional_account_form
       @additional_account_form ||= BinaryChoiceForm.call(

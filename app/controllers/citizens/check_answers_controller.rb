@@ -18,7 +18,7 @@ module Citizens
       redirect_to back_path
     end
 
-    private
+  private
 
     def record_acceptance
       return if legal_aid_application.declaration_accepted_at?

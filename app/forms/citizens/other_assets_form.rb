@@ -68,7 +68,7 @@ module Citizens
       CHECK_BOXES_ATTRIBUTES.map { |attribute| __send__(attribute) }.any?(&:present?)
     end
 
-    private
+  private
 
     def empty_unchecked_values
       (SINGLE_VALUE_ATTRIBUTES + VALUABLE_ITEMS_VALUE_ATTRIBUTE).each do |attribute|

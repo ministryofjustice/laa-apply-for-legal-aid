@@ -14,7 +14,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def handle_unknown
       return if KNOWN_RESULTS.include?(@cfe_result.assessment_result)

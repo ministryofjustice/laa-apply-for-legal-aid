@@ -43,7 +43,7 @@ class LegalAidApplicationPolicy < ApplicationPolicy
     authorized_to_view_submitted?
   end
 
-  private
+private
 
   def authorized_to_process?
     my_firms_record? && !record.submitted_to_ccms? && authorized_passported_permissions?

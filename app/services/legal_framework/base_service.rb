@@ -26,7 +26,7 @@ module LegalFramework
       @legal_aid_application ||= @submission.legal_aid_application
     end
 
-    private
+  private
 
     # override this method in the derived class if you need more/different headers
     def headers

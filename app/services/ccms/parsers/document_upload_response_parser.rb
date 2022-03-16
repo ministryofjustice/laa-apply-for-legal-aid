@@ -8,7 +8,7 @@ module CCMS
         /Success/.match?(parse(:extracted_status))
       end
 
-      private
+    private
 
       def status_path
         "/Envelope/Body/#{response_type}/HeaderRS/Status"

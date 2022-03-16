@@ -8,7 +8,7 @@ module CCMS
         @success = parse(:extracted_status_free_text).match?(/Case successfully created./)
       end
 
-      private
+    private
 
       def response_type
         'CaseAddUpdtStatusRS'.freeze

@@ -27,7 +27,7 @@ module Providers
         render partial: 'providers/application_merits_task/statement_of_cases/uploaded_files', locals: { attachments: legal_aid_application.attachments.statement_of_case }
       end
 
-      private
+    private
 
       def task_list_should_update?
         application_has_task_list? && !draft_selected?

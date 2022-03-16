@@ -14,7 +14,7 @@ class ResultsPanelSelector
     "shared/assessment_results/#{cfe_result}#{capital_contribution}#{income_contribution}"
   end
 
-  private
+private
 
   def cfe_result
     @cfe_result ||= @legal_aid_application.cfe_result.overview

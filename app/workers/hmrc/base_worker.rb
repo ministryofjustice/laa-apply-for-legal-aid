@@ -21,7 +21,7 @@ module HMRC
       raise SentryIgnoreThisSidekiqFailError, "HMRC result check for `#{@hmrc_response.legal_aid_application.id}` failed on retry #{@retry_count.to_i} with error #{e.message}"
     end
 
-    private
+  private
 
     def check_and_warn_if_needed
       Sentry.capture_message Sidekiq::InProgressWarningMessage.call(self.class, @hmrc_response, @retry_count) if should_warn?

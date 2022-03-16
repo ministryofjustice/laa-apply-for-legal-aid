@@ -10,7 +10,7 @@ module Providers
         render :index unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :chances_of_success)
       end
 
-      private
+    private
 
       def task_list_should_update?
         application_has_task_list? && !draft_selected? && @form.valid? && @form.success_likely.eql?('true')

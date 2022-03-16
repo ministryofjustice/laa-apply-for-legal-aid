@@ -14,7 +14,7 @@ module Providers
         render @form.model.id.nil? ? :new : :show unless save_continue_or_draft(@form)
       end
 
-      private
+    private
 
       def involved_child
         @involved_child ||= involved_child_exists? || build_new_involved_child

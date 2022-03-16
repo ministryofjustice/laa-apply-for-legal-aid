@@ -28,7 +28,7 @@ class SubmitApplicationReminderService
     end
   end
 
-  private
+private
 
   def addressee
     HostEnv.staging? ? Rails.configuration.x.support_email_address : application.provider.email

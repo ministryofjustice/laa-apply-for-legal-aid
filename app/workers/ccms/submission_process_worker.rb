@@ -33,7 +33,7 @@ module CCMS
       raise SentryIgnoreThisSidekiqFailError, "Submission `#{@submission.id}` failed at `#{start_state}` on retry #{@retry_count.to_i} with error #{e.message}"
     end
 
-    private
+  private
 
     def should_warn?
       @retry_count == (MAX_RETRIES / 2) + 1

@@ -35,7 +35,7 @@ module CCMS
         end
       end
 
-      private
+    private
 
       def attribute_value_generator
         @attribute_value_generator ||= AttributeValueGenerator.new(submission)

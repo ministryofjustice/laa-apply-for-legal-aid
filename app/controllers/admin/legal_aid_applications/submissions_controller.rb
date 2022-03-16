@@ -25,7 +25,7 @@ module Admin
         download_report :merits
       end
 
-      private
+    private
 
       def legal_aid_application
         @legal_aid_application ||= LegalAidApplication.find(params[:id])

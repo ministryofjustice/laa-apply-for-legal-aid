@@ -16,7 +16,7 @@ class SubmitProviderReminderService
     )
   end
 
-  private
+private
 
   attr_reader :application
 

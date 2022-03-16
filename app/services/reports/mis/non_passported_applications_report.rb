@@ -13,7 +13,7 @@ module Reports
         csv_string
       end
 
-      private
+    private
 
       def legal_aid_applications
         LegalAidApplication.joins(:state_machine)

@@ -22,7 +22,7 @@ module OmniAuth
         @access_token
       end
 
-      private
+    private
 
       def new_access_token
         oauth_client.client_credentials.get_token

@@ -10,7 +10,7 @@ class PdfConverter
     @original_attachment = Attachment.find_by(id: attachment_id)
   end
 
-  def call # rubocop:disable Metrics/MethodLength
+  def call
     return if @original_attachment&.pdf_attachment_id.present?
 
     file = converted_file
@@ -31,7 +31,7 @@ class PdfConverter
     end
   end
 
-  private
+private
 
   def converted_file
     return downloaded_file if @original_attachment.document.content_type == 'application/pdf'

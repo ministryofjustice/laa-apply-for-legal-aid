@@ -41,7 +41,7 @@ module Flow
       path(current_step)
     end
 
-    private
+  private
 
     def carry_on_sub_flow?
       carry_on_sub_flow = steps.dig(current_step, :carry_on_sub_flow)

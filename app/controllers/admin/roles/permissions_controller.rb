@@ -15,7 +15,7 @@ module Admin
         #  should this redirect take you back to the admin_roles_path instead, useful if multiple firms are being updated
       end
 
-      private
+    private
 
       def permissions
         @permissions ||= Permission.all

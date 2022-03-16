@@ -44,7 +44,7 @@ module Incidents
       @occurred_on = attributes[:occurred_on] = occurred_on_date_fields.form_date
     end
 
-    private
+  private
 
     def told_on_incomplete?
       told_on_date_fields.partially_complete? || told_on_date_fields.form_date_invalid?

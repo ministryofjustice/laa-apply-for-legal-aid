@@ -6,7 +6,7 @@ module LegalAidApplications
 
     validate :full_employment_details_presence
 
-    private
+  private
 
     def full_employment_details_presence
       return if draft?

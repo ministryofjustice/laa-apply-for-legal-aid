@@ -37,7 +37,6 @@ class BankAccount < ApplicationRecord
     "#{bank_provider.name} #{name}"
   end
 
-  # rubocop:disable Naming/PredicateName
   def has_tax_credits?
     meta_data_codes = bank_transactions.pluck(:meta_data).pluck(:code)
     meta_data_codes.include?('TC') || meta_data_codes.include?('WTC') || meta_data_codes.include?('CTC')
@@ -50,5 +49,4 @@ class BankAccount < ApplicationRecord
   def has_benefits?
     bank_transactions.joins(:transaction_type).where(transaction_type: { name: 'benefits' }).present?
   end
-  # rubocop:enable Naming/PredicateName
 end

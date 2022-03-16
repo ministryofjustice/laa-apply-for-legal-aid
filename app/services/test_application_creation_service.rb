@@ -29,7 +29,7 @@ class TestApplicationCreationService
     end
   end
 
-  private
+private
 
   def providers
     Provider.all

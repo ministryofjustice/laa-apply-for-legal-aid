@@ -8,7 +8,7 @@ module Providers
       continue_or_draft
     end
 
-    private
+  private
 
     def define_action_list
       @action_list = %w[sort_transactions dependants capital]

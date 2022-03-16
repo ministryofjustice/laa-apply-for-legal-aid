@@ -9,7 +9,7 @@ class UploadedEvidenceCollection < ApplicationRecord
     legal_aid_application.attachments.displayable_evidence_types
   end
 
-  private
+private
 
   def all_evidence_categorised
     return true unless uncategorised_evidence_exists?

@@ -1,5 +1,4 @@
 class XmlExtractor
-  # rubocop:disable Layout/LineLength
   XPATHS = {
     additional_property: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "ADDPROPERTY"]//Attributes/Attribute),
     bank_accounts_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "BANKACC"]//Instances/Attributes/Attribute),
@@ -45,8 +44,6 @@ class XmlExtractor
     wage_slip_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CLI_NON_HM_WAGE_SLIP"]),
     will: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "WILL"]//Instances/Attributes/Attribute)
   }.freeze
-  # rubocop:enable Layout/LineLength
-
   def self.call(xml, section, attribute_name = nil)
     new(xml, section, attribute_name).extract
   end

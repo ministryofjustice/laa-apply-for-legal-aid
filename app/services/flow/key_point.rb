@@ -39,7 +39,7 @@ module Flow
       flow(legal_aid_application).current_path
     end
 
-    private
+  private
 
     def flow((legal_aid_application))
       Flow::BaseFlowService.flow_service_for(

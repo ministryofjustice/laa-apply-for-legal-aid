@@ -23,7 +23,7 @@ class PolicyDisregards < ApplicationRecord
     }
   end
 
-  private
+private
 
   def build_attribute_array
     DISREGARDS.map { |att| att.to_s if send(att) }.select(&:present?)

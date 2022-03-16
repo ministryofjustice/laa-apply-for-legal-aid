@@ -6,7 +6,7 @@ module Applicants
 
     validate :open_banking_consent_presence
 
-    private
+  private
 
     def open_banking_consent_presence
       return if open_banking_consent.present?

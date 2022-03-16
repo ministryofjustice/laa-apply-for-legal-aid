@@ -13,7 +13,7 @@ class SecureApplicationFinder
     LegalAidApplication.find_by! secure_data[:legal_aid_application]
   end
 
-  private
+private
 
   def secure_data
     @secure_data ||= SecureData.for(secure_id)

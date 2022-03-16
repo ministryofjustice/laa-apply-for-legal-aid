@@ -14,7 +14,7 @@ class SubmissionConfirmationMailer < BaseApplyMailer
     mail to: @legal_aid_application.provider.email
   end
 
-  private
+private
 
   def first_name
     @legal_aid_application.applicant.first_name

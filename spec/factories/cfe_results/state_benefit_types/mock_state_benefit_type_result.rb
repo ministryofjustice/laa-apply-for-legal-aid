@@ -1,5 +1,5 @@
 module CFE
-  class MockStateBenefitTypeResult # rubocop:disable Metrics/ClassLength
+  class MockStateBenefitTypeResult
     def self.full_list
       [
         {

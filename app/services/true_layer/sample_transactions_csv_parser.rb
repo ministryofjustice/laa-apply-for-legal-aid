@@ -12,7 +12,7 @@ module TrueLayer
       end
     end
 
-    private
+  private
 
     def parse_transaction_csv_row(row)
       transaction_type = row[:amount_in].present? ? :credit : :debit

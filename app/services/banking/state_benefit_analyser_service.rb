@@ -18,7 +18,7 @@ module Banking
       update_legal_aid_transaction_types if @benefit_transactions_found
     end
 
-    private
+  private
 
     def included_benefit_transaction_type
       @included_benefit_transaction_type ||= TransactionType.find_by(name: 'benefits')

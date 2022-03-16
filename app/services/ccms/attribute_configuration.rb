@@ -13,7 +13,7 @@ module CCMS
       @config.deep_symbolize_keys!
     end
 
-    private
+  private
 
     def configuration_files
       {

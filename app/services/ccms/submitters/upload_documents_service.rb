@@ -14,7 +14,7 @@ module CCMS
         raise
       end
 
-      private
+    private
 
       def failed_upload_ids
         @failed_upload_ids ||= submission.submission_documents.select { |document| document.status == 'failed' }&.map(&:id)&.join(', ')

@@ -1,5 +1,5 @@
 module Reports
-  class ReportsTypesCreator # rubocop:disable Metrics/ClassLength
+  class ReportsTypesCreator
     include ActiveModel::Model
 
     def self.call(params)
@@ -40,7 +40,7 @@ module Reports
       end
     end
 
-    private
+  private
 
     def default_opts
       @default_opts ||= {
@@ -123,7 +123,7 @@ module Reports
       siblings.detect { |s| s.name == 'ResponseValue' }.text
     end
 
-    def process_payload_attrs(result, laa_ref, ccms_hist) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def process_payload_attrs(result, laa_ref, ccms_hist)
       return result unless default_opts[:payload_attrs].any? && ccms_hist
 
       xml_key_values = []

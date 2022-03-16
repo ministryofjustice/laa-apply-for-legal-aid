@@ -20,7 +20,7 @@ class SecureData < ApplicationRecord
     JWT.decode(data, secret, true, algorithm: 'HS256').first.symbolize_keys
   end
 
-  private
+private
 
   def secret
     @secret = Rails.configuration.x.secure_data_secret

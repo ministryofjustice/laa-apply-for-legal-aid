@@ -83,7 +83,7 @@ class DateFieldBuilder
     [''] + from_form
   end
 
-  private
+private
 
   def field_for(part)
     [prefix, part].join.to_sym

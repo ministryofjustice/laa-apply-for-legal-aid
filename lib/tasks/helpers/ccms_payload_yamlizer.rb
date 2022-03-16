@@ -13,12 +13,10 @@ class CcmsPayloadYamlizer
   def run
     @hash[@data.name] = {}
     @data.children.each { |child| process_child(child, @hash[@data.name]) }
-    # rubocop:disable Rails/Output
     puts @hash.to_yaml
-    # rubocop:enable Rails/Output
   end
 
-  private
+private
 
   def process_child(node, hash)
     if attribute_block(node)

@@ -16,7 +16,7 @@ module LegalFramework
       true
     end
 
-    private
+  private
 
     attr_reader :ccms_code
 
@@ -24,7 +24,7 @@ module LegalFramework
       @proceeding_type ||= LegalFramework::ProceedingTypes::Proceeding.call(ccms_code)
     end
 
-    def proceeding_attrs # rubocop:disable Metrics/MethodLength
+    def proceeding_attrs
       {
         legal_aid_application_id: @legal_aid_application.id,
         lead_proceeding: false,

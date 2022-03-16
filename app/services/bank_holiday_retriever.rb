@@ -21,7 +21,7 @@ class BankHolidayRetriever
     data.dig(group, 'events')&.pluck('date')
   end
 
-  private
+private
 
   def response
     @response ||= Net::HTTP.get_response(uri)

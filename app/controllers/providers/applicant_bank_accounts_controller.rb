@@ -14,7 +14,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def applicant_accounts
       @applicant_accounts ||= applicant.bank_providers.collect do |bank_provider|

@@ -1,6 +1,6 @@
 class ReportsUploaderJob < ApplicationJob
   include Sidekiq::Status::Worker
-  def perform # rubocop:disable Metrics/AbcSize
+  def perform
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?
       log 'preexisting record as follows:'
@@ -16,7 +16,7 @@ class ReportsUploaderJob < ApplicationJob
     @expiration ||= 60 * 60 * 24 # Leave the status on the sidekiq output for 24 hours
   end
 
-  private
+private
 
   def upload_application_details_report
     log "creating submitted applications report at #{Time.zone.now}"

@@ -10,7 +10,7 @@ module Providers
         render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :children_proceeding)
       end
 
-      private
+    private
 
       def legal_aid_application
         @legal_aid_application ||= proceeding.legal_aid_application

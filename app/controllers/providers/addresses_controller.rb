@@ -11,7 +11,7 @@ module Providers
       render :show unless save_continue_or_draft(@form)
     end
 
-    private
+  private
 
     def address_attributes
       %i[address_line_one address_line_two city county postcode lookup_postcode lookup_error]

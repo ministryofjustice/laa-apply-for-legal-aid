@@ -18,7 +18,7 @@ class SubmitCitizenReminderService
     end
   end
 
-  private
+private
 
   attr_reader :application
 

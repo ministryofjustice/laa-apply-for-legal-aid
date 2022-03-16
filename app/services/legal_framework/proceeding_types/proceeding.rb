@@ -44,7 +44,7 @@ module LegalFramework
         Response.new(request.body)
       end
 
-      private
+    private
 
       def request
         conn.get url

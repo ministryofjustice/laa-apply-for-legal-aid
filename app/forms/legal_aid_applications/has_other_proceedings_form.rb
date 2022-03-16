@@ -36,7 +36,7 @@ module LegalAidApplications
       proceedings.map(&:domestic_abuse?).include?(true)
     end
 
-    def has_other_proceeding? # rubocop:disable Naming/PredicateName
+    def has_other_proceeding?
       @has_other_proceeding == 'true'
     end
   end

@@ -14,7 +14,7 @@ module Metrics
       sleep PROMETHEUS_THREAD_SLEEP * 2
     end
 
-    private
+  private
 
     def prometheus_client
       @prometheus_client ||= PrometheusExporter::Client.new(

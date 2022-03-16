@@ -1,5 +1,5 @@
-class NonPassportedStateMachine < BaseStateMachine # rubocop:disable Metrics/ClassLength
-  aasm do # rubocop:disable Metrics/BlockLength
+class NonPassportedStateMachine < BaseStateMachine
+  aasm do
     state :provider_confirming_applicant_eligibility
     state :awaiting_applicant
     state :applicant_entering_means

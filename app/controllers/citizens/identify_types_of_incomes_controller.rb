@@ -13,7 +13,7 @@ module Citizens
       render :show
     end
 
-    private
+  private
 
     def legal_aid_application_params
       params.require(:legal_aid_application).permit(transaction_type_ids: [])

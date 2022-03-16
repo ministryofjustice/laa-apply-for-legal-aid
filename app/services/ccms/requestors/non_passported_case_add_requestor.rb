@@ -3,7 +3,7 @@ module CCMS
     class NonPassportedCaseAddRequestor < CaseAddRequestor
       wsdl_from Rails.configuration.x.ccms_soa.caseServicesWsdl
 
-      private
+    private
 
       def means_entity_config_file
         MEANS_ENTITY_CONFIG_DIR.join('non_passported.yml')

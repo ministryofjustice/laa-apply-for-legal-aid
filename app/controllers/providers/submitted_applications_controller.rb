@@ -5,7 +5,7 @@ module Providers
 
     def show; end
 
-    private
+  private
 
     def display_employment_income?
       Setting.enable_employed_journey? &&

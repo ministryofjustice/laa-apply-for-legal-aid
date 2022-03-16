@@ -16,7 +16,7 @@ module CCMS
         soap_envelope(namespaces).to_xml
       end
 
-      private
+    private
 
       def soap_body(xml)
         xml.__send__(:'refdatabim:ReferenceDataInqRQ') do
