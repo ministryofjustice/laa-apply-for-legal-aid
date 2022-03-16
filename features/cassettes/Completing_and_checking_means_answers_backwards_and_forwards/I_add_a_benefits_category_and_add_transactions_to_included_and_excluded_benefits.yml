@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/state_benefit_type
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/state_benefit_type
     body:
       encoding: US-ASCII
       string: ''

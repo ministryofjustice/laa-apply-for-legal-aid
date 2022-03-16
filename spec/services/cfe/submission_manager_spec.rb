@@ -8,7 +8,7 @@ module CFE
     let(:call_result) { true }
 
     describe '.call', vcr: { record: :new_episodes } do
-      let(:staging_host) { 'https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk' }
+      let(:staging_host) { 'https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk' }
       let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
       before do
         allow(Rails.configuration.x).to receive(:check_financial_eligibility_host).and_return(staging_host)

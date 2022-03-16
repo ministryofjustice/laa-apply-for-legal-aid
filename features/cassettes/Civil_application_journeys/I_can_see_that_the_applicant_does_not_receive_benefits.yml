@@ -176,7 +176,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:11:11 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -233,7 +233,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:11:12 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -290,7 +290,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:11:13 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
     body:
       encoding: US-ASCII
       string: ''

@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Tue, 18 Jan 2022 14:26:54 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''

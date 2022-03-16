@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
       string: '{"request_id":"a8ecca4e-be6a-438a-91d1-664088fb049e","proceeding_types":["DA005","DA001","DA003"]}'

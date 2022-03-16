@@ -49,7 +49,7 @@ http_interactions:
   recorded_at: Tue, 18 Aug 2020 10:36:10 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -106,7 +106,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:36 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -163,7 +163,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:38 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA005
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA005
     body:
       encoding: US-ASCII
       string: ''
@@ -230,7 +230,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:38 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -287,7 +287,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:39 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -344,7 +344,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:40 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA020
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA020
     body:
       encoding: US-ASCII
       string: ''
@@ -412,7 +412,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:40 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -469,7 +469,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:40 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -526,7 +526,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:41 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA005
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA005
     body:
       encoding: US-ASCII
       string: ''
@@ -593,7 +593,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:41 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -650,7 +650,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:42 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -707,7 +707,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:43 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA003
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA003
     body:
       encoding: US-ASCII
       string: ''
@@ -969,7 +969,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:48 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -1026,7 +1026,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:48 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
       string: ''
@@ -1083,7 +1083,7 @@ http_interactions:
   recorded_at: Mon, 17 Jan 2022 17:10:49 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
     body:
       encoding: US-ASCII
       string: ''

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/proceeding_types/searches
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/searches
     body:
       encoding: UTF-8
       string: '{"search_term":"harassment"}'

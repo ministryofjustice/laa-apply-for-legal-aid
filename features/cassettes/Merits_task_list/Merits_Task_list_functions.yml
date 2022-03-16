@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments
     body:
       encoding: UTF-8
       string: '{"client_reference_id":"L-X2A-UX0","submission_date":"2021-05-06","matter_proceeding_type":"domestic_abuse"}'
@@ -59,7 +59,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:29 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/applicant
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/applicant
     body:
       encoding: UTF-8
       string: '{"applicant":{"date_of_birth":"1994-05-27","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true}}'
@@ -116,7 +116,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:29 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/capitals
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/capitals
     body:
       encoding: UTF-8
       string: '{"bank_accounts":[{"description":"Online current accounts","value":0},{"description":"Online
@@ -174,7 +174,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:29 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/vehicles
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/vehicles
     body:
       encoding: UTF-8
       string: '{"vehicles":[]}'
@@ -231,7 +231,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:30 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/properties
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/properties
     body:
       encoding: UTF-8
       string: '{"properties":{"main_home":{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0,"outstanding_mortgage":0,"percentage_owned":0,"shared_with_housing_assoc":false}]}}'
@@ -288,7 +288,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:30 GMT
 - request:
     method: post
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/explicit_remarks
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62/explicit_remarks
     body:
       encoding: UTF-8
       string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
@@ -345,7 +345,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:30 GMT
 - request:
     method: get
-    uri: https://check-financial-eligibility-staging.apps.live-1.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments/8f530521-3a82-4e6c-905b-1cd41376be62
     body:
       encoding: US-ASCII
       string: ''
@@ -403,7 +403,7 @@ http_interactions:
   recorded_at: Thu, 06 May 2021 11:45:30 GMT
 - request:
     method: post
-    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
       string: '{"request_id":"a2c6e109-94d8-43b2-a492-73a7fab7a977","proceeding_types":["DA001","SE014"]}'
