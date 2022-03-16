@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CFE
   RSpec.describe Remarks do
-    let(:remarks) { Remarks.new(remarks_hash) }
+    let(:remarks) { described_class.new(remarks_hash) }
 
     describe '#caseworker_review_required?' do
       context 'no remarks' do

@@ -16,7 +16,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
     it 'calls process! on the submission' do
       expect(submission).to receive(:process!)
-      expect(CCMS::SubmissionProcessWorker).to receive(:perform_async)
+      expect(described_class).to receive(:perform_async)
       subject
     end
 
@@ -27,7 +27,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
       end
 
       it 'does not raise a new SubmissionProcessWorker job' do
-        expect(CCMS::SubmissionProcessWorker).not_to receive(:perform_async)
+        expect(described_class).not_to receive(:perform_async)
         subject
       end
     end
@@ -130,7 +130,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           end
 
           it 'raises a sentry error' do
-            CCMS::SubmissionProcessWorker.within_sidekiq_retries_exhausted_block do
+            described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
             subject

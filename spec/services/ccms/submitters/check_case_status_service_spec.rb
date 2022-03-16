@@ -175,7 +175,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
   # private method tested here because it is mocked out above
   #
   describe '#case_add_status_requestor' do
-    let(:service_double) { CCMS::Submitters::CheckCaseStatusService.new(submission) }
+    let(:service_double) { described_class.new(submission) }
     let(:requestor1) { service_double.__send__(:case_add_status_requestor) }
     let(:requestor2) { service_double.__send__(:case_add_status_requestor) }
     it 'only instantiates one copy of the CaseAddStatusRequestor' do

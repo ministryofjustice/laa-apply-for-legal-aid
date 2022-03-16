@@ -21,8 +21,8 @@ RSpec.describe ScheduledMailing do
     it 'creates a record in waiting state' do
       travel_to frozen_time
 
-      expect { subject }.to change { ScheduledMailing.count }.by(1)
-      rec = ScheduledMailing.first
+      expect { subject }.to change { described_class.count }.by(1)
+      rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.legal_aid_application_id).to eq legal_aid_application.id
       expect(rec.mailer_method).to eq mailer_method
@@ -46,8 +46,8 @@ RSpec.describe ScheduledMailing do
     end
 
     it 'creates a record in waiting state with a scheduled time' do
-      expect { subject }.to change { ScheduledMailing.count }.by(1)
-      rec = ScheduledMailing.first
+      expect { subject }.to change { described_class.count }.by(1)
+      rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.mailer_method).to eq mailer_method
       expect(rec.legal_aid_application_id).to eq legal_aid_application.id
@@ -94,19 +94,19 @@ RSpec.describe ScheduledMailing do
 
     describe 'waiting' do
       it 'picks only waiting status' do
-        expect(ScheduledMailing.waiting).to match_array [waiting_due, waiting_due_later]
+        expect(described_class.waiting).to match_array [waiting_due, waiting_due_later]
       end
     end
 
-    describe :past_due do
+    describe 'past_due' do
       it 'picks only records where scheduled at is in the past' do
-        expect(ScheduledMailing.past_due).to match_array [waiting_due]
+        expect(described_class.past_due).to match_array [waiting_due]
       end
     end
 
     describe 'monitored' do
       it 'picks only records in processing, created, sending states' do
-        expect(ScheduledMailing.monitored).to match_array [processing, created, sending]
+        expect(described_class.monitored).to match_array [processing, created, sending]
       end
     end
   end

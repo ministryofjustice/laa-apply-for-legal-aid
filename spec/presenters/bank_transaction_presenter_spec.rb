@@ -6,7 +6,7 @@ RSpec.describe BankTransactionPresenter do
   let(:transaction) { create :bank_transaction, :uncategorised_credit_transaction, bank_account: account }
   let(:remarks) { [] }
 
-  it { is_expected.to be_a BankTransactionPresenter }
+  it { is_expected.to be_a described_class }
 
   describe '.headers' do
     subject(:headers) { described_class.headers }

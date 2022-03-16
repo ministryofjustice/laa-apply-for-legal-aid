@@ -18,7 +18,7 @@ module Dashboard
       let(:application) { create :legal_aid_application, :with_applicant }
       let(:provider) { application.provider }
 
-      it { is_expected.to be_a Dashboard::SingleObject::ProviderData }
+      it { is_expected.to be_a described_class }
 
       describe '.build_row' do
         subject(:build_row) { dashboard_provider.build_row }

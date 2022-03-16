@@ -8,7 +8,7 @@ RSpec.describe PermissionsUpdater do
   let!(:firm_none) { create :firm, :with_no_permissions }
 
   it 'adds non_passported permissions' do
-    PermissionsUpdater.new.run
+    described_class.new.run
     expect(firm_both.reload.permissions.map(&:role)).to match_array(['application.passported.*', 'application.non_passported.*'])
     expect(firm_non_passported.reload.permissions.map(&:role)).to match_array(['application.passported.*', 'application.non_passported.*'])
     expect(firm_passported.reload.permissions.map(&:role)).to match_array(['application.passported.*', 'application.non_passported.*'])

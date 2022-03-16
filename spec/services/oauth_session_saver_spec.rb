@@ -17,13 +17,13 @@ RSpec.describe OauthSessionSaver do
 
   describe '.store' do
     it 'stores the session in the redis database as JSON' do
-      OauthSessionSaver.store(key, session)
+      described_class.store(key, session)
       stored_session = redis.get(key)
       expect(stored_session).to eq session.to_json
     end
 
     it 'remaining time-to-live is less than the services TTL value' do
-      OauthSessionSaver.store(key, session)
+      described_class.store(key, session)
       expect(redis.ttl(key) <= OauthSessionSaver::TIME_TO_LIVE_IN_SECONDS).to be true
     end
   end
@@ -32,13 +32,13 @@ RSpec.describe OauthSessionSaver do
     context 'a record with the key exists' do
       before { redis.set(key, session.to_json) }
       it 'returns the reconstituted session hash' do
-        expect(OauthSessionSaver.get(key)).to eq session
+        expect(described_class.get(key)).to eq session
       end
     end
 
     context 'no such record exists' do
       it 'returns empty array' do
-        expect(OauthSessionSaver.get(SecureRandom.uuid)).to eq({})
+        expect(described_class.get(SecureRandom.uuid)).to eq({})
       end
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe OauthSessionSaver do
   describe '.destroy!' do
     before { redis.set(key, session.to_json) }
     it 'deletes the record from the redis database' do
-      OauthSessionSaver.destroy!(key)
+      described_class.destroy!(key)
       expect(redis.get(key)).to be_nil
     end
   end

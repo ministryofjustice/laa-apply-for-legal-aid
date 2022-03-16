@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AuthorizedIpRanges do
   describe '#authorized?' do
-    subject { AuthorizedIpRanges.new.authorized?(ipaddr) }
+    subject { described_class.new.authorized?(ipaddr) }
 
     context 'IPV4' do
       context 'authorized address' do

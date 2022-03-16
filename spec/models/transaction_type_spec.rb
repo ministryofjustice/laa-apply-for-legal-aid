@@ -23,14 +23,14 @@ RSpec.describe TransactionType, type: :model do
     before { create :transaction_type, :child_care }
     context 'no such outgoing types exist' do
       it 'returns false' do
-        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be false
+        expect(described_class.for_outgoing_type?('maintenance_out')).to be false
       end
     end
 
     context 'outgoing types do exist' do
       before { create :transaction_type, :maintenance_out }
       it 'returns true' do
-        expect(TransactionType.for_outgoing_type?('maintenance_out')).to be true
+        expect(described_class.for_outgoing_type?('maintenance_out')).to be true
       end
     end
   end
@@ -38,20 +38,20 @@ RSpec.describe TransactionType, type: :model do
   describe '.other_income' do
     it 'returns all other_income type TransactionTypes' do
       Populators::TransactionTypePopulator.call
-      names = TransactionType.other_income.pluck(:name)
+      names = described_class.other_income.pluck(:name)
       expect(names).to eq %w[friends_or_family maintenance_in property_or_lodger student_loan pension]
     end
   end
 
   context 'hierarchies' do
     before { Populators::TransactionTypePopulator.call }
-    let(:benefits) { TransactionType.find_by(name: 'benefits') }
-    let(:excluded_benefits) { TransactionType.find_by(name: 'excluded_benefits') }
-    let(:pension) { TransactionType.find_by(name: 'pension') }
+    let(:benefits) { described_class.find_by(name: 'benefits') }
+    let(:excluded_benefits) { described_class.find_by(name: 'excluded_benefits') }
+    let(:pension) { described_class.find_by(name: 'pension') }
 
     describe 'not_children scope' do
       it 'does not return any record that is a child' do
-        expect(TransactionType.not_children.pluck(:parent_id).uniq).to eq [nil]
+        expect(described_class.not_children.pluck(:parent_id).uniq).to eq [nil]
       end
     end
 
@@ -141,24 +141,24 @@ RSpec.describe TransactionType, type: :model do
     describe '.find_with_children' do
       context 'one id with no children' do
         it 'return the one record' do
-          expect(TransactionType.find_with_children(pension.id)).to eq [pension]
+          expect(described_class.find_with_children(pension.id)).to eq [pension]
         end
       end
 
       context 'one id with children' do
         it 'returns the parent and child' do
-          expect(TransactionType.find_with_children(benefits.id)).to match_array([benefits, excluded_benefits])
+          expect(described_class.find_with_children(benefits.id)).to match_array([benefits, excluded_benefits])
         end
       end
 
       context 'multiple ids all without children' do
         it 'returns just the records' do
-          expect(TransactionType.find_with_children(pension.id, excluded_benefits.id)).to match_array([pension, excluded_benefits])
+          expect(described_class.find_with_children(pension.id, excluded_benefits.id)).to match_array([pension, excluded_benefits])
         end
       end
       context 'multiple ids with and without children' do
         it 'returns the records and the children' do
-          expect(TransactionType.find_with_children(pension.id, benefits.id)).to match_array([pension, benefits, excluded_benefits])
+          expect(described_class.find_with_children(pension.id, benefits.id)).to match_array([pension, benefits, excluded_benefits])
         end
       end
     end
@@ -166,27 +166,27 @@ RSpec.describe TransactionType, type: :model do
     describe '.any_type_of' do
       context 'name of record with children' do
         it 'returns record and its chidlren' do
-          expect(TransactionType.any_type_of('benefits')).to match_array([benefits, excluded_benefits])
+          expect(described_class.any_type_of('benefits')).to match_array([benefits, excluded_benefits])
         end
       end
 
       context 'name of record with no children' do
         it 'returns just that record in an array' do
-          expect(TransactionType.any_type_of('pension')).to eq [pension]
+          expect(described_class.any_type_of('pension')).to eq [pension]
         end
       end
 
       context 'name that does not exist' do
         it 'returns an empty collection' do
-          expect(TransactionType.any_type_of('xxx')).to be_empty
+          expect(described_class.any_type_of('xxx')).to be_empty
         end
       end
     end
 
     describe 'active' do
       it 'does not return records with a date in archived at' do
-        TransactionType.find_by(name: 'student_loan').update!(archived_at: Time.current)
-        expect(TransactionType.active.pluck(:name)).not_to include('student_loan')
+        described_class.find_by(name: 'student_loan').update!(archived_at: Time.current)
+        expect(described_class.active.pluck(:name)).not_to include('student_loan')
       end
     end
   end

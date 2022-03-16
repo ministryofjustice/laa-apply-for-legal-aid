@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AgeCalculator do
   let(:date) { Date.parse('15-08-2010') }
-  subject { AgeCalculator.call(date_of_birth, date) }
+  subject { described_class.call(date_of_birth, date) }
 
   context 'birthday is just before date' do
     let(:date_of_birth) { Date.parse('14-08-2000') }

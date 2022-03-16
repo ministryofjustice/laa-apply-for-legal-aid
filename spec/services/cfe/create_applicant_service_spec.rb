@@ -38,13 +38,13 @@ module CFE
 
           it 'updates the submission record from assessment_created to applicant_created' do
             expect(submission.aasm_state).to eq 'assessment_created'
-            CreateApplicantService.call(submission)
+            described_class.call(submission)
             expect(submission.aasm_state).to eq 'applicant_created'
           end
 
           it 'creates a submission_history record' do
             expect {
-              CreateApplicantService.call(submission)
+              described_class.call(submission)
             }.to change { submission.submission_histories.count }.by 1
             history = CFE::SubmissionHistory.last
             expect(history.submission_id).to eq submission.id
@@ -63,7 +63,7 @@ module CFE
       end
 
       describe 'failed calls to CFE' do
-        it_behaves_like 'a failed call to CFE', CreateApplicantService, 'applicant'
+        it_behaves_like 'a failed call to CFE', described_class, 'applicant'
       end
     end
 

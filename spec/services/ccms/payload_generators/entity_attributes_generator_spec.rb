@@ -40,7 +40,7 @@ module CCMS
 
           context 'raises exception' do
             before do
-              allow_any_instance_of(EntityAttributesGenerator).to receive(:extract_raw_value).and_raise(TypeError, 'type error')
+              allow_any_instance_of(described_class).to receive(:extract_raw_value).and_raise(TypeError, 'type error')
             end
             it 'captures the error' do
               config = {

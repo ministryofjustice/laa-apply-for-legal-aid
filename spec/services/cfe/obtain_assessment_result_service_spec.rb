@@ -39,17 +39,17 @@ module CFE # rubocop:disable Metrics/ModuleLength
       end
 
       it 'updates the submission state to results_obtained' do
-        ObtainAssessmentResultService.call(submission)
+        described_class.call(submission)
         expect(submission.aasm_state).to eq 'results_obtained'
       end
 
       it 'stores the response in the submission cfe_result field' do
-        ObtainAssessmentResultService.call(submission)
+        described_class.call(submission)
         expect(submission.cfe_result).to eq expected_response
       end
 
       it 'writes a history record' do
-        ObtainAssessmentResultService.call(submission)
+        described_class.call(submission)
         history = submission.submission_histories.first
         expect(history.url).to eq service.cfe_url
         expect(history.http_method).to eq 'GET'
@@ -70,14 +70,14 @@ module CFE # rubocop:disable Metrics/ModuleLength
 
         it 'updates the submission state to failed' do
           expect {
-            ObtainAssessmentResultService.call(submission)
+            described_class.call(submission)
           }.to raise_error CFE::SubmissionError
           expect(submission.aasm_state).to eq 'failed'
         end
 
         it 'writes the details to the history record' do
           expect {
-            ObtainAssessmentResultService.call(submission)
+            described_class.call(submission)
           }.to raise_error CFE::SubmissionError
           history = submission.submission_histories.last
           expect(history.url).to eq service.cfe_url

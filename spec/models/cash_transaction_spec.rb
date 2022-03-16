@@ -26,14 +26,14 @@ RSpec.describe CashTransaction, type: :model do
 
   describe 'amounts' do
     it 'returns a hash of totals for a specific application' do
-      expect(CashTransaction.amounts_for_application(application1)).to eq expected_result1
-      expect(CashTransaction.amounts_for_application(application2)).to eq expected_result2
+      expect(described_class.amounts_for_application(application1)).to eq expected_result1
+      expect(described_class.amounts_for_application(application2)).to eq expected_result2
     end
   end
 
   describe 'scope by parent_transaction_type' do
     it 'groups the transactions keyed by parent transaction type' do
-      grouped_transactions = CashTransaction.by_parent_transaction_type
+      grouped_transactions = described_class.by_parent_transaction_type
       expect(grouped_transactions[pension]).to match_array @pension_transactions
       expect(grouped_transactions[benefits]).to match_array @benefits_transactions
     end

@@ -6,7 +6,7 @@ RSpec.describe OtherAssetsDeclaration, type: :model do
       application = create :legal_aid_application
       application.create_other_assets_declaration!
       expect {
-        OtherAssetsDeclaration.create!(legal_aid_application_id: application.id)
+        described_class.create!(legal_aid_application_id: application.id)
       }.to raise_error ActiveRecord::RecordNotUnique
     end
   end

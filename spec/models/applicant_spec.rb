@@ -19,7 +19,7 @@ RSpec.describe Applicant, type: :model do
       let!(:existing_applicant) { create :applicant }
 
       it 'allows another applicant to be created with same email' do
-        expect { create :applicant, email: existing_applicant.email }.to change { Applicant.count }.by(1)
+        expect { create :applicant, email: existing_applicant.email }.to change { described_class.count }.by(1)
       end
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe Applicant, type: :model do
     subject { described_class.destroy_all }
 
     it 'removes everything it needs to' do
-      expect(Applicant.count).not_to be_zero
+      expect(described_class.count).not_to be_zero
       expect(Address.count).not_to be_zero
       expect(BankProvider.count).not_to be_zero
       expect(BankTransaction.count).not_to be_zero
@@ -58,7 +58,7 @@ RSpec.describe Applicant, type: :model do
       expect(BankAccountHolder.count).not_to be_zero
       expect(BankError.count).not_to be_zero
       subject
-      expect(Applicant.count).to be_zero
+      expect(described_class.count).to be_zero
       expect(Address.count).to be_zero
       expect(BankProvider.count).to be_zero
       expect(BankTransaction.count).to be_zero
@@ -257,7 +257,7 @@ RSpec.describe Applicant, type: :model do
       let(:cfe_version_5_result) { double 'CFE::V5::Result' }
 
       before do
-        allow_any_instance_of(Applicant).to receive(:cfe_result_type).and_return(cfe_version_5_result)
+        allow_any_instance_of(described_class).to receive(:cfe_result_type).and_return(cfe_version_5_result)
       end
 
       it 'returns false' do

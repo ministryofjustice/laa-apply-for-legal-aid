@@ -19,7 +19,7 @@ RSpec.describe Reports::ReportsTypesCreator do
            provider: provider
   end
 
-  let(:report) { Reports::ReportsTypesCreator.call(params) }
+  let(:report) { described_class.call(params) }
 
   describe 'all application types' do
     context 'matching application' do

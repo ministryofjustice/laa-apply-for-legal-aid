@@ -45,7 +45,7 @@ module Reports
         context 'with local_csv param' do
           subject { creator.call(local_csv: true) }
 
-          let(:creator) { BankTransactionReportCreator.new(legal_aid_application) }
+          let(:creator) { described_class.new(legal_aid_application) }
           let(:tempfile) { Rails.root.join('tmp/bank_transactions.csv') }
 
           it 'creates a local file' do

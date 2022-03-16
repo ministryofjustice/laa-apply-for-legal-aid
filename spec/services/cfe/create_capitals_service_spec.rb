@@ -44,13 +44,13 @@ module CFE
 
         it 'updates the submission record from applicant_created to capitals_created' do
           expect(submission.aasm_state).to eq 'applicant_created'
-          CreateCapitalsService.call(submission)
+          described_class.call(submission)
           expect(submission.aasm_state).to eq 'capitals_created'
         end
 
         it 'creates a submission_history record' do
           expect {
-            CreateCapitalsService.call(submission)
+            described_class.call(submission)
           }.to change { submission.submission_histories.count }.by 1
           history = CFE::SubmissionHistory.last
           expect(history.submission_id).to eq submission.id
@@ -73,7 +73,7 @@ module CFE
         it 'does not send any data for current account' do
           stub_request(:post, service.cfe_url).with(body: expected_payload_without_current_account.to_json).to_return(body: dummy_response)
           expect(submission.aasm_state).to eq 'applicant_created'
-          CreateCapitalsService.call(submission)
+          described_class.call(submission)
           expect(submission.aasm_state).to eq 'capitals_created'
         end
       end

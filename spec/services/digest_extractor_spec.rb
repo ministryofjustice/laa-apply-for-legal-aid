@@ -18,7 +18,7 @@ RSpec.describe DigestExtractor do
 
     it 'updates the settings table with current time' do
       freeze_time do
-        DigestExtractor.call
+        described_class.call
       end
       expect(Setting.setting.digest_extracted_at >= 2.seconds.ago).to be true
     end

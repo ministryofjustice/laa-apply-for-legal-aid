@@ -6,7 +6,7 @@ RSpec.describe HMRC::SubmissionWorker do
   let(:application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application) }
 
-  it { is_expected.to be_a HMRC::SubmissionWorker }
+  it { is_expected.to be_a described_class }
 
   describe '.perform' do
     subject(:perform) { worker.perform(hmrc_response.id) }
@@ -95,7 +95,7 @@ RSpec.describe HMRC::SubmissionWorker do
           end
 
           it 'raises a tracked error and the expired block' do
-            HMRC::SubmissionWorker.within_sidekiq_retries_exhausted_block do
+            described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
             expect { perform }.to raise_error HMRC::InterfaceError

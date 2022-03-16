@@ -7,10 +7,10 @@ RSpec.describe Dependant, type: :model do
 
   describe '#ordinal_number' do
     it 'returns the correct ordinal_number' do
-      expect(Dependant.new(number: 1).ordinal_number).to eq('first')
-      expect(Dependant.new(number: 5).ordinal_number).to eq('fifth')
-      expect(Dependant.new(number: 9).ordinal_number).to eq('ninth')
-      expect(Dependant.new(number: 10).ordinal_number).to eq('10th')
+      expect(described_class.new(number: 1).ordinal_number).to eq('first')
+      expect(described_class.new(number: 5).ordinal_number).to eq('fifth')
+      expect(described_class.new(number: 9).ordinal_number).to eq('ninth')
+      expect(described_class.new(number: 10).ordinal_number).to eq('10th')
     end
   end
 
