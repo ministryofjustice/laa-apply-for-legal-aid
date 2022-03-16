@@ -195,13 +195,6 @@ RSpec/AnyInstance:
     - 'spec/services/reports/merits_report_creator_spec.rb'
     - 'spec/services/reports/mis/application_details_report_spec.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-RSpec/BeEql:
-  Exclude:
-    - 'spec/forms/providers/proceeding_merits_task/linked_children_form_spec.rb'
-    - 'spec/services/reports/reports_types_creator_spec.rb'
-
 # Offense count: 1
 RSpec/BeforeAfterAll:
   Exclude:
