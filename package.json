@@ -5,7 +5,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@rails/activestorage": "^6.1.4",
+    "@rails/activestorage": "^6.1.5",
     "@rails/ujs": "^6.1.5",
     "@rails/webpacker": "^5.4.3",
     "acorn": "~8.7.0",
