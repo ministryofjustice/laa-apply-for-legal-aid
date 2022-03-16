@@ -46,7 +46,7 @@ RSpec.describe AccessibleNavigationHelper, type: :helper do
     context 'with html options' do
       it 'returns the html for a button with an aria-label and other properties' do
         str = '<form class="button_to" method="post" action="test_path">'
-        str << '<input class="gov_button" aria-label="Start now" type="submit" value="Start now" /></form>'
+        str << '<button class="gov_button" aria-label="Start now" type="submit">Start now</button></form>'
         button = button_to_accessible(name, path, html_options)
         expect(button).to eq str
       end
@@ -55,7 +55,7 @@ RSpec.describe AccessibleNavigationHelper, type: :helper do
     context 'with no html options' do
       it 'returns the html for a button with an aria-label' do
         str = '<form class="button_to" method="post" action="test_path">'
-        str << '<input aria-label="Start now" type="submit" value="Start now" /></form>'
+        str << '<button aria-label="Start now" type="submit">Start now</button></form>'
         button = button_to_accessible(name, path)
         expect(button).to eq str
       end
@@ -67,7 +67,7 @@ RSpec.describe AccessibleNavigationHelper, type: :helper do
       it 'returns with aria-label containing label name and suffix' do
         button = button_to_accessible(name, path, html_options)
         str = '<form class="button_to" method="post" action="test_path">'
-        str << '<input class="gov_button" suffix="Application" aria-label="Start now Application" type="submit" value="Start now" /></form>'
+        str << '<button class="gov_button" suffix="Application" aria-label="Start now Application" type="submit">Start now</button></form>'
         expect(button).to eq str
       end
     end
