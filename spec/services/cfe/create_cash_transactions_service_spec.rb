@@ -93,19 +93,19 @@ module CFE
               {
                 date: benefits3.transaction_date.strftime('%Y-%m-%d'),
                 amount: benefits3.amount.abs.to_f,
-                client_id: benefits3.id
+                client_id: benefits3.id,
               },
               {
                 date: benefits2.transaction_date.strftime('%Y-%m-%d'),
                 amount: benefits2.amount.abs.to_f,
-                client_id: benefits2.id
+                client_id: benefits2.id,
               },
               {
                 date: benefits1.transaction_date.strftime('%Y-%m-%d'),
                 amount: benefits1.amount.abs.to_f,
-                client_id: benefits1.id
+                client_id: benefits1.id,
               }
-            ]
+            ],
           },
           {
             category: 'friends_or_family',
@@ -113,19 +113,19 @@ module CFE
               {
                 date: friends_or_family3.transaction_date.strftime('%Y-%m-%d'),
                 amount: friends_or_family3.amount.abs.to_f,
-                client_id: friends_or_family3.id
+                client_id: friends_or_family3.id,
               },
               {
                 date: friends_or_family2.transaction_date.strftime('%Y-%m-%d'),
                 amount: friends_or_family2.amount.abs.to_f,
-                client_id: friends_or_family2.id
+                client_id: friends_or_family2.id,
               },
               {
                 date: friends_or_family1.transaction_date.strftime('%Y-%m-%d'),
                 amount: friends_or_family1.amount.abs.to_f,
-                client_id: friends_or_family1.id
+                client_id: friends_or_family1.id,
               }
-            ]
+            ],
           },
           {
             category: 'maintenance_in',
@@ -133,19 +133,19 @@ module CFE
               {
                 date: maintenance_in3.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_in3.amount.abs.to_f,
-                client_id: maintenance_in3.id
+                client_id: maintenance_in3.id,
               },
               {
                 date: maintenance_in2.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_in2.amount.abs.to_f,
-                client_id: maintenance_in2.id
+                client_id: maintenance_in2.id,
               },
               {
                 date: maintenance_in1.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_in1.amount.abs.to_f,
-                client_id: maintenance_in1.id
+                client_id: maintenance_in1.id,
               }
-            ]
+            ],
           }
         ],
         outgoings: [
@@ -155,19 +155,19 @@ module CFE
               {
                 date: child_care3.transaction_date.strftime('%Y-%m-%d'),
                 amount: child_care3.amount.abs.to_f,
-                client_id: child_care3.id
+                client_id: child_care3.id,
               },
               {
                 date: child_care2.transaction_date.strftime('%Y-%m-%d'),
                 amount: child_care2.amount.abs.to_f,
-                client_id: child_care2.id
+                client_id: child_care2.id,
               },
               {
                 date: child_care1.transaction_date.strftime('%Y-%m-%d'),
                 amount: child_care1.amount.abs.to_f,
-                client_id: child_care1.id
+                client_id: child_care1.id,
               }
-            ]
+            ],
           },
           {
             category: 'legal_aid',
@@ -175,19 +175,19 @@ module CFE
               {
                 date: legal_aid3.transaction_date.strftime('%Y-%m-%d'),
                 amount: legal_aid3.amount.abs.to_f,
-                client_id: legal_aid3.id
+                client_id: legal_aid3.id,
               },
               {
                 date: legal_aid2.transaction_date.strftime('%Y-%m-%d'),
                 amount: legal_aid2.amount.abs.to_f,
-                client_id: legal_aid2.id
+                client_id: legal_aid2.id,
               },
               {
                 date: legal_aid1.transaction_date.strftime('%Y-%m-%d'),
                 amount: legal_aid1.amount.abs.to_f,
-                client_id: legal_aid1.id
+                client_id: legal_aid1.id,
               }
-            ]
+            ],
           },
           {
             category: 'maintenance_out',
@@ -195,27 +195,27 @@ module CFE
               {
                 date: maintenance_out3.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_out3.amount.abs.to_f,
-                client_id: maintenance_out3.id
+                client_id: maintenance_out3.id,
               },
               {
                 date: maintenance_out2.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_out2.amount.abs.to_f,
-                client_id: maintenance_out2.id
+                client_id: maintenance_out2.id,
               },
               {
                 date: maintenance_out1.transaction_date.strftime('%Y-%m-%d'),
                 amount: maintenance_out1.amount.abs.to_f,
-                client_id: maintenance_out1.id
+                client_id: maintenance_out1.id,
               }
-            ]
+            ],
           }
-        ]
+        ],
       }
     end
 
     def dummy_response_hash
       {
-        success: true
+        success: true,
       }
     end
   end

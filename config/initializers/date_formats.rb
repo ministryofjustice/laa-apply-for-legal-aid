@@ -4,7 +4,7 @@ Time::DATE_FORMATS[:datetime] = '%H:%M %d-%b-%Y'
 
 ccms_formats = {
   ccms_date: '%Y-%m-%d',
-  ccms_date_time: '%Y-%m-%dT%H:%M:%S.%3N'
+  ccms_date_time: '%Y-%m-%dT%H:%M:%S.%3N',
 }
 
 Time::DATE_FORMATS.merge! ccms_formats

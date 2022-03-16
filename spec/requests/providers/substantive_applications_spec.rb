@@ -42,8 +42,8 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
     let(:params) do
       {
         legal_aid_application: {
-          substantive_application: substantive_application.to_s
-        }
+          substantive_application: substantive_application.to_s,
+        },
       }
     end
     let(:button_clicked) { {} }

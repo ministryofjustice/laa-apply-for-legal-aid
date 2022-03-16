@@ -32,8 +32,8 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          transaction_type_ids: transaction_type_ids
-        }
+          transaction_type_ids: transaction_type_ids,
+        },
       }
     end
     subject { patch citizens_identify_types_of_income_path, params: params }

@@ -15,7 +15,7 @@ module CCMS
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
         'xmlns:utility' => 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd',
         'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema',
-        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
       }.freeze
 
       attr_reader :namespaces

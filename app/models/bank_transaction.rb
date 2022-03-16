@@ -25,7 +25,7 @@ class BankTransaction < ApplicationRecord
 
   enum operation: {
     credit: 'credit'.freeze,
-    debit: 'debit'.freeze
+    debit: 'debit'.freeze,
   }
 
   def self.amounts

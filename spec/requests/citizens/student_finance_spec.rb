@@ -21,7 +21,7 @@ RSpec.describe 'student_finance', type: :request do
   describe 'PATCH /citizens/student_finance' do
     let(:params) do
       { legal_aid_application: {
-        student_finance: yes_or_no
+        student_finance: yes_or_no,
       } }
     end
 

@@ -13,7 +13,7 @@ module Dashboard
             Geckoboard::DateField.new(:date, name: 'Date'),
             Geckoboard::NumberField.new(:number, name: 'Things')
           ],
-          unique_by: [:date]
+          unique_by: [:date],
         }
       end
 
@@ -21,11 +21,11 @@ module Dashboard
         [
           {
             'date' => 7.days.ago.strftime('%Y-%m-%d'),
-            'number' => 2
+            'number' => 2,
           },
           {
             'date' => 6.days.ago.strftime('%Y-%m-%d'),
-            'number' => 3
+            'number' => 3,
           }
         ]
       end

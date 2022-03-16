@@ -13,18 +13,18 @@ module CFEResults
               income_contribution: 0.0,
               matter_types: [{
                 matter_type: 'domestic_abuse',
-                result: 'eligible'
+                result: 'eligible',
               }],
               proceeding_types: [
                 {
                   ccms_code: 'DA006',
-                  result: 'eligible'
+                  result: 'eligible',
                 },
                 {
                   ccms_code: 'DA002',
-                  result: 'eligible'
+                  result: 'eligible',
                 }
-              ]
+              ],
             },
             gross_income: {
               total_gross_income: 0.0,
@@ -32,14 +32,14 @@ module CFEResults
                 {
                   ccms_code: 'DA006',
                   upper_threshold: 999_999_999_999.0,
-                  result: 'pending'
+                  result: 'pending',
                 },
                 {
                   ccms_code: 'DA002',
                   upper_threshold: 999_999_999_999.0,
-                  result: 'pending'
+                  result: 'pending',
                 }
-              ]
+              ],
             },
             disposable_income: {
               dependant_allowance: 0.0,
@@ -56,22 +56,22 @@ module CFEResults
                 tax: -204.15,
                 national_insurance: -161.64,
                 fixed_employment_deduction: -45.0,
-                net_employment_income: 1778.18
+                net_employment_income: 1778.18,
               },
               proceeding_types: [
                 {
                   ccms_code: 'DA006',
                   upper_threshold: 999_999_999_999.0,
                   lower_threshold: 315.0,
-                  result: 'pending'
+                  result: 'pending',
                 },
                 {
                   ccms_code: 'DA002',
                   upper_threshold: 999_999_999_999.0,
                   lower_threshold: 315.0,
-                  result: 'pending'
+                  result: 'pending',
                 }
-              ]
+              ],
             },
             capital: {
               total_liquid: 12.0,
@@ -88,16 +88,16 @@ module CFEResults
                   ccms_code: 'DA006',
                   lower_threshold: 3000.0,
                   upper_threshold: 999_999_999_999.0,
-                  result: 'eligible'
+                  result: 'eligible',
                 },
                 {
                   ccms_code: 'DA002',
                   lower_threshold: 3000.0,
                   upper_threshold: 999_999_999_999.0,
-                  result: 'eligible'
+                  result: 'eligible',
                 }
-              ]
-            }
+              ],
+            },
           },
           assessment: {
             id: 'b60d9312-b77b-4c5f-aa79-ba8508800c59',
@@ -108,20 +108,20 @@ module CFEResults
               involvement_type: 'applicant',
               has_partner_opponent: false,
               receives_qualifying_benefit: true,
-              self_employed: false
+              self_employed: false,
             },
             gross_income: {
               irregular_income: {
                 monthly_equivalents: {
-                  student_loan: 0.0
-                }
+                  student_loan: 0.0,
+                },
               },
               state_benefits: {
                 monthly_equivalents: {
                   all_sources: 75.0,
                   cash_transactions: 0.0,
-                  bank_transactions: []
-                }
+                  bank_transactions: [],
+                },
               },
               other_income: {
                 monthly_equivalents: {
@@ -129,22 +129,22 @@ module CFEResults
                     friends_or_family: 0.0,
                     maintenance_in: 0.0,
                     property_or_lodger: 0.0,
-                    pension: 0.0
+                    pension: 0.0,
                   },
                   bank_transactions: {
                     friends_or_family: 0.0,
                     maintenance_in: 0.0,
                     property_or_lodger: 0.0,
-                    pension: 0.0
+                    pension: 0.0,
                   },
                   cash_transactions: {
                     friends_or_family: 0.0,
                     maintenance_in: 0.0,
                     property_or_lodger: 0.0,
-                    pension: 0.0
-                  }
-                }
-              }
+                    pension: 0.0,
+                  },
+                },
+              },
             },
             disposable_income: {
               monthly_equivalents: {
@@ -152,54 +152,54 @@ module CFEResults
                   child_care: 0.0,
                   rent_or_mortgage: 125.0,
                   maintenance_out: 0.0,
-                  legal_aid: 0.0
+                  legal_aid: 0.0,
                 },
                 bank_transactions: {
                   child_care: 0.0,
                   rent_or_mortgage: 0.0,
                   maintenance_out: 0.0,
-                  legal_aid: 0.0
+                  legal_aid: 0.0,
                 },
                 cash_transactions: {
                   child_care: 0.0,
                   rent_or_mortgage: 0.0,
                   maintenance_out: 0.0,
-                  legal_aid: 0.0
-                }
+                  legal_aid: 0.0,
+                },
               },
               childcare_allowance: 0.0,
               deductions: {
                 dependants_allowance: 0.0,
-                disregarded_state_benefits: 0.0
-              }
+                disregarded_state_benefits: 0.0,
+              },
             },
             capital: {
               capital_items: {
                 liquid: [
                   {
                     description: 'Current accounts',
-                    value: 1.0
+                    value: 1.0,
                   },
                   {
                     description: 'Savings accounts',
-                    value: 1.0
+                    value: 1.0,
                   },
                   {
                     description: 'Money not in a bank account',
-                    value: 10.0
+                    value: 10.0,
                   },
                   {
                     description: 'Online current accounts',
-                    value: 0.0
+                    value: 0.0,
                   },
                   {
                     description: 'Online savings accounts',
-                    value: 0.0
+                    value: 0.0,
                   }
                 ],
                 non_liquid: [{
                   description: 'Interest in a trust',
-                  value: 12.0
+                  value: 12.0,
                 }],
                 vehicles: [
                   {
@@ -208,7 +208,7 @@ module CFEResults
                     date_of_purchase: '2017-05-26',
                     in_regular_use: false,
                     included_in_assessment: true,
-                    assessed_value: 120.0
+                    assessed_value: 120.0,
                   }
                 ],
                 properties: {
@@ -223,7 +223,7 @@ module CFEResults
                     net_value: -10.3,
                     net_equity: -19.3,
                     main_home_equity_disregard: 100_000.0,
-                    assessed_equity: 0.0
+                    assessed_equity: 0.0,
                   },
                   additional_properties: [
                     {
@@ -237,14 +237,14 @@ module CFEResults
                       net_value: 0.0,
                       net_equity: 0.0,
                       main_home_equity_disregard: 0.0,
-                      assessed_equity: 0.0
+                      assessed_equity: 0.0,
                     }
-                  ]
-                }
-              }
+                  ],
+                },
+              },
             },
-            remarks: {}
-          }
+            remarks: {},
+          },
         }
       end
 
@@ -379,7 +379,7 @@ module CFEResults
           net_value: -4533.94,
           net_equity: -8000.82,
           main_home_equity_disregard: '0.0',
-          assessed_equity: 125.33
+          assessed_equity: 125.33,
         }
         result[:assessment][:capital][:capital_items][:properties][:additional_properties] = [property]
         result
@@ -428,15 +428,15 @@ module CFEResults
         result[:result_summary][:overall_result][:proceeding_types] = [
           {
             ccms_code: 'DA006',
-            result: 'eligible'
+            result: 'eligible',
           },
           {
             ccms_code: 'SE013',
-            result: 'ineligible'
+            result: 'ineligible',
           },
           {
             ccms_code: 'SE014',
-            result: 'partially_eligible'
+            result: 'partially_eligible',
           }
         ]
         result
@@ -459,7 +459,7 @@ module CFEResults
           tax: -104.10,
           national_insurance: -18.66,
           fixed_employment_deduction: -45.00,
-          net_employment_income: 8898.84
+          net_employment_income: 8898.84,
         }
         jobs = [
           {
@@ -471,7 +471,7 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               },
               {
                 date: '2021-10-30',
@@ -479,7 +479,7 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               },
               {
                 date: '2021-10-30',
@@ -487,9 +487,9 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               }
-            ]
+            ],
           },
           {
             name: 'Job 2',
@@ -500,7 +500,7 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               },
               {
                 date: '2021-10-30',
@@ -508,7 +508,7 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               },
               {
                 date: '2021-10-30',
@@ -516,9 +516,9 @@ module CFEResults
                 benefits_in_kind: 16.60,
                 tax: -104.10,
                 national_insurance: -18.66,
-                net_employment_income: 8898.84
+                net_employment_income: 8898.84,
               }
-            ]
+            ],
           }
         ]
         result[:result_summary][:disposable_income][:employment_income] = employment_income

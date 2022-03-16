@@ -131,7 +131,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => 'CWP',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'child_benefit',
@@ -139,7 +139,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => 'CHB',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'universal_credit',
@@ -147,7 +147,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'exclude_from_gross_income' => false,
           'dwp_code' => 'UC',
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'disability_living_allowance',
@@ -155,7 +155,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => 'DLA',
           'exclude_from_gross_income' => true,
           'category' => 'carer_disability',
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'employment_support_allowance',
@@ -163,7 +163,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => 'ESA',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'training_payment',
@@ -171,7 +171,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => 'T/P',
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         },
         {
           'label' => 'social_fund_payments',
@@ -179,7 +179,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           'dwp_code' => nil,
           'exclude_from_gross_income' => false,
           'category' => nil,
-          'selected_by' => 'System'
+          'selected_by' => 'System',
         }
       ]
     end

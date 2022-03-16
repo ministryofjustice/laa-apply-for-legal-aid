@@ -62,7 +62,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
     {
       label: I18n.t("#{locale_namespace}.#{transaction_type.name}"),
       name: transaction_type.name,
-      amount_text: true
+      amount_text: true,
     }
   end
 end

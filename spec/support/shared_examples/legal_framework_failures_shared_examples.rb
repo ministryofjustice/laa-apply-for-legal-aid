@@ -79,7 +79,7 @@ module LegalFramework
         success: false,
         error_class: 'ActiveRecord::RecordNotFound',
         message: "Couldn't find ProceedingType",
-        backtrace: ['fake error backtrace']
+        backtrace: ['fake error backtrace'],
       }.to_json
     end
   end

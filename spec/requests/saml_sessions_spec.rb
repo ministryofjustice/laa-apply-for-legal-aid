@@ -222,19 +222,19 @@ RSpec.describe 'SamlSessionsController', type: :request do
       contacts: [
         {
           id: 568_352,
-          name: 'SALLYCORNHILL'
+          name: 'SALLYCORNHILL',
         },
         {
           id: 2_017_809,
-          name: username
+          name: username,
         }
       ],
       providerOffices: [
         {
           id: 81_693,
-          name: 'Test1 and Co'
+          name: 'Test1 and Co',
         }
-      ]
+      ],
     }
   end
 
@@ -244,7 +244,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
       status: 404,
       error: 'Not Found',
       message: 'No records found for [bob%20the%20builder]',
-      path: '/api/providerDetails/bob%20the%20builder'
+      path: '/api/providerDetails/bob%20the%20builder',
     }
   end
 

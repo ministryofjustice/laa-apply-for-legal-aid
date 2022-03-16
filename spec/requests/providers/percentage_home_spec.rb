@@ -27,7 +27,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
     let(:percentage_home) { '33.33' }
     let(:params) do
       {
-        legal_aid_application: { percentage_home: percentage_home }
+        legal_aid_application: { percentage_home: percentage_home },
       }
     end
 
@@ -41,7 +41,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
       context 'Submitted with Continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -79,7 +79,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
       context 'Submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

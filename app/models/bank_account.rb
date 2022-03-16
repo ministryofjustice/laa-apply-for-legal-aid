@@ -5,7 +5,7 @@ class BankAccount < ApplicationRecord
 
   ACCOUNT_TYPE_LABELS = {
     'TRANSACTION' => 'Bank Current',
-    'SAVINGS' => 'Bank Savings'
+    'SAVINGS' => 'Bank Savings',
   }.freeze
 
   scope :current, -> { where(account_type: 'TRANSACTION') }

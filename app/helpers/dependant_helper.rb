@@ -16,7 +16,7 @@ module DependantHelper
     return nil if items.blank?
 
     {
-      items: items
+      items: items,
     }
   end
 

@@ -40,16 +40,16 @@ module CFE
         explicit_remarks: [
           {
             category: 'policy_disregards',
-            details: ['vaccine_damage_payments']
+            details: ['vaccine_damage_payments'],
           }
-        ]
+        ],
       }.to_json
     end
 
     def dummy_response
       {
         success: true,
-        errors: []
+        errors: [],
       }.to_json
     end
   end

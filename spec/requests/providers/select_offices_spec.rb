@@ -42,7 +42,7 @@ RSpec.describe 'provider selects office', type: :request do
 
     let(:params) do
       {
-        provider: { selected_office_id: office2.id }
+        provider: { selected_office_id: office2.id },
       }
     end
 
@@ -75,7 +75,7 @@ RSpec.describe 'provider selects office', type: :request do
       context 'invalid params - selects office from different provider' do
         let(:params) do
           {
-            provider: { selected_office_id: office3.id }
+            provider: { selected_office_id: office3.id },
           }
         end
 

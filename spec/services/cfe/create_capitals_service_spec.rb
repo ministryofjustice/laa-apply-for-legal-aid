@@ -111,41 +111,41 @@ module CFE
         bank_accounts: [
           {
             description: 'Current accounts',
-            value: savings_amount.offline_current_accounts.to_s
+            value: savings_amount.offline_current_accounts.to_s,
           },
           {
             description: 'Savings accounts',
-            value: savings_amount.offline_savings_accounts.to_s
+            value: savings_amount.offline_savings_accounts.to_s,
           },
           {
             description: 'Money not in a bank account',
-            value: savings_amount.cash.to_s
+            value: savings_amount.cash.to_s,
           },
           {
             description: "Access to another person's bank account",
-            value: savings_amount.other_person_account.to_s
+            value: savings_amount.other_person_account.to_s,
           },
           {
             description: 'ISAs, National Savings Certificates and Premium Bonds',
-            value: savings_amount.national_savings.to_s
+            value: savings_amount.national_savings.to_s,
           }
         ],
         non_liquid_capital: [
           {
             description: 'Timeshare property',
-            value: other_assets_declaration.timeshare_property_value.to_s
+            value: other_assets_declaration.timeshare_property_value.to_s,
           },
           {
             description: 'Land',
-            value: other_assets_declaration.land_value.to_s
+            value: other_assets_declaration.land_value.to_s,
           },
           {
             description: 'Any valuable items worth more than £500',
-            value: other_assets_declaration.valuable_items_value.to_s
+            value: other_assets_declaration.valuable_items_value.to_s,
           },
           { description: 'Interest in a trust',
             value: other_assets_declaration.trust_value.to_s }
-        ]
+        ],
       }
       add_non_nil_accounts(payload, :current)
       add_non_nil_accounts(payload, :savings)
@@ -175,7 +175,7 @@ module CFE
 
     def dummy_response_hash
       {
-        success: true
+        success: true,
       }
     end
   end

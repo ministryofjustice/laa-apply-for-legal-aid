@@ -30,8 +30,8 @@ RSpec.describe 'provider restrictions request', type: :request do
       {
         legal_aid_application: {
           has_restrictions: has_restrictions,
-          restrictions_details: restrictions_details
-        }
+          restrictions_details: restrictions_details,
+        },
       }
     end
     let(:restrictions_details) { Faker::Lorem.paragraph }
@@ -46,7 +46,7 @@ RSpec.describe 'provider restrictions request', type: :request do
       context 'Form submitted with continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -137,7 +137,7 @@ RSpec.describe 'provider restrictions request', type: :request do
       context 'Form submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

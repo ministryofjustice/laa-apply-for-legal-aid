@@ -39,7 +39,7 @@ module TrueLayer
             account_type: account[:account_type],
             currency: account[:currency],
             account_number: account[:account_number][:number],
-            sort_code: account[:account_number][:sort_code]
+            sort_code: account[:account_number][:sort_code],
           }
         end
       end

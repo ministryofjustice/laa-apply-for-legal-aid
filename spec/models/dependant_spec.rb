@@ -32,7 +32,7 @@ RSpec.describe Dependant, type: :model do
           in_full_time_education: false,
           relationship: 'child_relative',
           monthly_income: 0.0,
-          assets_value: 0.0
+          assets_value: 0.0,
         }
       end
       it 'returns the expected hash' do
@@ -57,7 +57,7 @@ RSpec.describe Dependant, type: :model do
           in_full_time_education: true,
           relationship: 'adult_relative',
           monthly_income: 123.45,
-          assets_value: 6789.0
+          assets_value: 6789.0,
         }
       end
       it 'returns the expected hash' do

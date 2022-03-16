@@ -3,7 +3,7 @@ module V1
     def show
       render json: {
         status: worker['status'],
-        errors: worker['errors']
+        errors: worker['errors'],
       }
     end
 

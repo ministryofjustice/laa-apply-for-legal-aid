@@ -20,7 +20,7 @@ module CCMS
                 value: 10,
                 br100_meaning: 'n/a',
                 response_type: 'number',
-                user_defined: true
+                user_defined: true,
               }
               expect(generator.__send__(:extract_response_value, config)).to eq 10
             end
@@ -31,7 +31,7 @@ module CCMS
               value: 4664,
               br100_meaning: 'n/a',
               response_type: 'numeric',
-              user_defined: true
+              user_defined: true,
             }
             expect {
               generator.__send__(:extract_response_value, config)
@@ -47,7 +47,7 @@ module CCMS
                 value: 4664,
                 br100_meaning: 'n/a',
                 response_type: 'number',
-                user_defined: true
+                user_defined: true,
               }
               expect(AlertManager).to receive(:capture_message).with(/EntityAttributesGenerator TypeError: type error/)
               expect {

@@ -38,7 +38,7 @@ RSpec.describe DateFieldBuilder do
       expected = {
         happened_day: model_date.day,
         happened_month: model_date.month,
-        happened_year: model_date.year
+        happened_year: model_date.year,
       }
       expect(subject.model_attributes).to eq(expected)
     end

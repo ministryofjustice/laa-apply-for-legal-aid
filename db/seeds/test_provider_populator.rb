@@ -13,7 +13,7 @@ class TestProviderPopulator
     'Ahern & Co.' => [808, %w[9F808X:21 3X808Z:22]],
     'Groves & Co.' => [989, %w[7F809X:23 4X809Z:24]],
     'EDWARD HAYES LLP' => [19_537, %w[1T462U:85605]],
-    'LAWRENCE & CO SOLICITORS CDS LLP' => [33_230, %w[0Q974B:85981]]
+    'LAWRENCE & CO SOLICITORS CDS LLP' => [33_230, %w[0Q974B:85981]],
   }.freeze
 
   TEST_PROVIDERS = {
@@ -31,7 +31,7 @@ class TestProviderPopulator
     'BENREID' => ['Test firm for portal login', 'benreid@example.co.uk', 107, 592],
     'HFITZSIMONS@EDWARDHAYES.CO.UK' => ['EDWARD HAYES LLP', 'hfitzsimons@example.com', 2_453_773],
     'LHARRISON@TBILAW.CO.UK' => ['LAWRENCE & CO SOLICITORS CDS LLP', 'LHARRISON@example.com', 954_474],
-    'CG' => ['Groves & Co.', 'chris.groves@digital.justice.gov.uk', 110, 599]
+    'CG' => ['Groves & Co.', 'chris.groves@digital.justice.gov.uk', 110, 599],
   }.freeze
 
   def run

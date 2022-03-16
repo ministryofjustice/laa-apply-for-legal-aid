@@ -47,7 +47,7 @@ module Reports
         passported: application_type != 'A' && application_type,
         submitted_to_ccms: submitted_to_ccms == 'true',
         assessment_result: capital_assessment_result.last != '' && capital_assessment_result,
-        payload_attrs: separate_attrs(payload_attrs)
+        payload_attrs: separate_attrs(payload_attrs),
       }
     end
 

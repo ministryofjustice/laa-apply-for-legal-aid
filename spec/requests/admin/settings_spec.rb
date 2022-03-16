@@ -39,8 +39,8 @@ RSpec.describe Admin::SettingsController, type: :request do
           allow_welsh_translation: 'true',
           enable_employed_journey: 'true',
           enable_ccms_submission: 'true',
-          enable_evidence_upload: 'true'
-        }
+          enable_evidence_upload: 'true',
+        },
       }
     end
     let(:setting) { Setting.setting }
@@ -86,8 +86,8 @@ RSpec.describe Admin::SettingsController, type: :request do
               allow_welsh_translation: 'true',
               enable_employed_journey: 'true',
               enable_ccms_submission: 'false',
-              enable_evidence_upload: 'false'
-            }
+              enable_evidence_upload: 'false',
+            },
           }
         end
         it 'does not send an active_support notification' do
@@ -109,8 +109,8 @@ RSpec.describe Admin::SettingsController, type: :request do
       let(:params) do
         {
           setting: {
-            mock_true_layer_data: nil
-          }
+            mock_true_layer_data: nil,
+          },
         }
       end
 

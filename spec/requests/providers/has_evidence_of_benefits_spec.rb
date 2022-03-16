@@ -63,8 +63,8 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     let(:params) do
       {
         dwp_override: {
-          has_evidence_of_benefit: has_evidence_of_benefit
-        }
+          has_evidence_of_benefit: has_evidence_of_benefit,
+        },
       }
     end
 

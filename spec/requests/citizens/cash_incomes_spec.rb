@@ -91,8 +91,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
       {
         aggregated_cash_income: {
           check_box_benefits: '',
-          none_selected: 'true'
-        }
+          none_selected: 'true',
+        },
       }
     end
 
@@ -103,8 +103,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
           benefits1: '1',
           benefits2: '2',
           benefits3: '3',
-          none_selected: ''
-        }
+          none_selected: '',
+        },
       }
     end
 
@@ -118,8 +118,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
           check_box_maintenance_in: 'true',
           maintenance_in1: '',
           maintenance_in2: '',
-          maintenance_in3: ''
-        }
+          maintenance_in3: '',
+        },
       }
     end
   end

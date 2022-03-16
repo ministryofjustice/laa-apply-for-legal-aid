@@ -76,8 +76,8 @@ RSpec.describe TrueLayerErrorDecoder do
       'TrueLayerError' => {
         'error_description' => error_description,
         'error' => error_code,
-        'error_details' => {}
-      }
+        'error_details' => {},
+      },
     }
   end
 end

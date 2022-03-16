@@ -32,9 +32,9 @@ module Providers
         let(:params) do
           {
             binary_choice_form: {
-              has_other_involved_child: radio_button
+              has_other_involved_child: radio_button,
             },
-            legal_aid_application_id: application.id
+            legal_aid_application_id: application.id,
           }
         end
         let(:draft_button) { { draft_button: 'Save as draft' } }

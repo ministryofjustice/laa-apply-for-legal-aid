@@ -511,7 +511,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       maintenance_in2: '5',
       maintenance_in3: '6',
       legal_aid_application_id: application.id,
-      none_selected: ''
+      none_selected: '',
     }
   end
 
@@ -538,7 +538,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       benefits3: '9',
       maintenance_in1: '10',
       maintenance_in2: '11',
-      maintenance_in3: '12'
+      maintenance_in3: '12',
     })
   end
 
@@ -547,7 +547,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       check_box_pension: 'true',
       pension1: '15',
       pension2: '20',
-      pension3: '25'
+      pension3: '25',
     })
   end
 
@@ -562,7 +562,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       maintenance_in2: '',
       maintenance_in3: '',
       legal_aid_application_id: application.id,
-      none_selected: 'true'
+      none_selected: 'true',
     }
   end
 

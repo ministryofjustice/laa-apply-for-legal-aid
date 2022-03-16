@@ -23,7 +23,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       has_income: has_income,
       in_full_time_education: 'false',
       has_assets_more_than_threshold: has_assets,
-      assets_value: assets_value
+      assets_value: assets_value,
     }
   end
 

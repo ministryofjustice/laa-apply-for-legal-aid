@@ -61,7 +61,7 @@ module CCMS
       poor: { text: 'Poor', code: 'NE' },
       borderline: { text: 'Borderline', code: 'FH' },
       uncertain: { text: 'Uncertain', code: 'FJ' },
-      not_known: { text: 'Uncertain', code: 'FJ' }
+      not_known: { text: 'Uncertain', code: 'FJ' },
     }.freeze
 
     attr_reader :legal_aid_application

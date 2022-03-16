@@ -76,7 +76,7 @@ module CFE
     def error_response
       {
         errors: ['Detailed error message'],
-        success: false
+        success: false,
       }.to_json
     end
   end

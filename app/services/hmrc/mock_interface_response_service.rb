@@ -7,7 +7,7 @@ module HMRC
       four_weekly_employment: { first_name: 'Jeremy', last_name: 'Irons', nino: 'BB313661B', dob: '1966-06-06' },
       monthly_employment: { first_name: 'Stevie', last_name: 'Nicks', nino: 'CC414771C', dob: '1977-07-07' },
       employment_tax_credits: { first_name: 'Oakley', last_name: 'Weller', nino: 'AB476107D', dob: '1988-08-08' },
-      eligible_employment: { first_name: 'Leanne', last_name: 'Conway', nino: 'JA827365B', dob: '1977-03-08' }
+      eligible_employment: { first_name: 'Leanne', last_name: 'Conway', nino: 'JA827365B', dob: '1977-03-08' },
     }.freeze
 
     def self.call(*args)
@@ -48,12 +48,12 @@ module HMRC
         data: [
           {
             correlation_id: @submission_id,
-            use_case: "use_case_#{@hmrc_response.use_case}"
+            use_case: "use_case_#{@hmrc_response.use_case}",
           },
           {
-            error: 'submitted client details could not be found in HMRC service'
+            error: 'submitted client details could not be found in HMRC service',
           }
-        ]
+        ],
       }
     end
 

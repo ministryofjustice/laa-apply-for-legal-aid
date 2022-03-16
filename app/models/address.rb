@@ -36,7 +36,7 @@ class Address < ApplicationRecord
       city: city,
       county: county,
       postcode: postcode,
-      lookup_id: lookup_id
+      lookup_id: lookup_id,
     }.to_json
   end
 

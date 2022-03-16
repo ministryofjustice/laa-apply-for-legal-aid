@@ -6,7 +6,7 @@ module CFE
 
     def request_body
       {
-        dependants: dependants_data
+        dependants: dependants_data,
       }.to_json
     end
 

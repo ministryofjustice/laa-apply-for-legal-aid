@@ -291,15 +291,15 @@ module CFE
           [
             {
               ccms_code: 'DA006',
-              result: 'eligible'
+              result: 'eligible',
             },
             {
               ccms_code: 'SE013',
-              result: 'ineligible'
+              result: 'ineligible',
             },
             {
               ccms_code: 'SE014',
-              result: 'partially_eligible'
+              result: 'partially_eligible',
             }
           ]
         end
@@ -307,7 +307,7 @@ module CFE
           {
             'Child arrangements order (contact)' => 'No',
             'Child arrangements order (residence)' => 'Yes',
-            'Extend, variation or discharge - Part IV' => 'Yes'
+            'Extend, variation or discharge - Part IV' => 'Yes',
           }
         end
 
@@ -492,12 +492,12 @@ module CFE
               {
                 ccms_code: 'DA006',
                 upper_threshold: 999_999_999_999.0,
-                result: 'pending'
+                result: 'pending',
               },
               {
                 ccms_code: 'DA002',
                 upper_threshold: 999_999_999_999.0,
-                result: 'pending'
+                result: 'pending',
               }
             ]
           end
@@ -515,13 +515,13 @@ module CFE
                 ccms_code: 'DA006',
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
-                result: 'pending'
+                result: 'pending',
               },
               {
                 ccms_code: 'DA002',
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
-                result: 'pending'
+                result: 'pending',
               }
             ]
           end

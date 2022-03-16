@@ -30,7 +30,7 @@ module Dashboard
               difficulty_count: 4,
               difficulty_score: 100,
               satisfaction_count: 2,
-              satisfaction_score: 50
+              satisfaction_score: 50,
             }
           ]
         end

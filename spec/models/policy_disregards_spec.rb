@@ -6,7 +6,7 @@ RSpec.describe PolicyDisregards, type: :model do
   let(:expected_json) do
     {
       category: 'policy_disregards',
-      details: %w[vaccine_damage_payments]
+      details: %w[vaccine_damage_payments],
     }
   end
 

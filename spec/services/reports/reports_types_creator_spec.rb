@@ -34,7 +34,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           records_to_3i: '',
           records_to_2i: '',
           records_to_1i: '',
-          payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+          payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
         }
       end
 
@@ -73,7 +73,7 @@ RSpec.describe Reports::ReportsTypesCreator do
               records_to_3i: today.year.to_s,
               records_to_2i: today.month.to_s,
               records_to_1i: today.day.to_s,
-              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
             }
           end
 
@@ -94,7 +94,7 @@ RSpec.describe Reports::ReportsTypesCreator do
               records_to_3i: yesterday.year.to_s,
               records_to_2i: yesterday.month.to_s,
               records_to_1i: yesterday.day.to_s,
-              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
             }
           end
 
@@ -115,7 +115,7 @@ RSpec.describe Reports::ReportsTypesCreator do
               records_to_3i: '',
               records_to_2i: '',
               records_to_1i: '',
-              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
             }
           end
 
@@ -137,7 +137,7 @@ RSpec.describe Reports::ReportsTypesCreator do
               records_to_3i: '',
               records_to_2i: '',
               records_to_1i: '',
-              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
             }
           end
 
@@ -159,7 +159,7 @@ RSpec.describe Reports::ReportsTypesCreator do
               records_to_3i: '',
               records_to_2i: '',
               records_to_1i: '',
-              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+              payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
             }
           end
 
@@ -188,7 +188,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           records_to_3i: '',
           records_to_2i: '',
           records_to_1i: '',
-          payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW"
+          payload_attrs: "country\r\nAPPLY_CASE_MEANS_REVIEW",
         }
       end
 

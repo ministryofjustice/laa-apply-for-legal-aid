@@ -17,8 +17,8 @@ RSpec.describe 'Backable', :vcr, type: :request do
         address_line_two: 'High Street',
         city: 'London',
         county: 'Greater London',
-        postcode: 'SW1H 9AJ'
-      }
+        postcode: 'SW1H 9AJ',
+      },
     }
   end
 

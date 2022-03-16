@@ -25,7 +25,7 @@ module Citizens
         .except(:cash_income)
         .merge({
           legal_aid_application_id: legal_aid_application[:id],
-          none_selected: params[:aggregated_cash_income][:none_selected]
+          none_selected: params[:aggregated_cash_income][:none_selected],
         })
     end
 

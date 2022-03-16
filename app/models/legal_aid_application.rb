@@ -128,7 +128,7 @@ class LegalAidApplication < ApplicationRecord
     own_home: {
       no: 'no'.freeze,
       mortgage: 'mortgage'.freeze,
-      owned_outright: 'owned_outright'.freeze
+      owned_outright: 'owned_outright'.freeze,
     },
     _prefix: true
   )

@@ -47,8 +47,8 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
     let(:params) do
       {
         vehicle: {
-          more_than_three_years_old: true
-        }
+          more_than_three_years_old: true,
+        },
       }
     end
     let(:next_url) { providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application) }
@@ -75,8 +75,8 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
       let(:params) do
         {
           vehicle: {
-            more_than_three_years_old: nil
-          }
+            more_than_three_years_old: nil,
+          },
         }
       end
 

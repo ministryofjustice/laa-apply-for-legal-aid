@@ -27,7 +27,7 @@ module HMRC
         {
           'Content-Type' => 'application/json',
           'Accept' => 'application/json',
-          'Authorization' => "Bearer #{bearer_token}"
+          'Authorization' => "Bearer #{bearer_token}",
         }
       end
 

@@ -1,7 +1,7 @@
 module TagHelper
   STATUS_TAGS = {
     in_progress: 'govuk-tag--blue',
-    submitted: 'govuk-tag--green'
+    submitted: 'govuk-tag--green',
   }.freeze
 
   def gov_uk_tag(text:, status: nil, classes: [])

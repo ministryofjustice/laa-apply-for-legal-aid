@@ -9,7 +9,7 @@ module CFE
 
     def request_body
       {
-        payments: irregular_incomes.map(&:as_json)
+        payments: irregular_incomes.map(&:as_json),
       }.to_json
     end
 

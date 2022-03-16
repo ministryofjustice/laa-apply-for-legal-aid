@@ -8,8 +8,8 @@ class StatusController < ApiController
 
       malware_scanner: {
         positive: malware_scanner_positive,
-        negative: malware_scanner_negative
-      }
+        negative: malware_scanner_negative,
+      },
     }
 
     status = :bad_gateway unless checks.except(:sidekiq_queue).values.all?
@@ -20,7 +20,7 @@ class StatusController < ApiController
     render json: {
       'build_date' => Rails.configuration.x.status.build_date,
       'build_tag' => Rails.configuration.x.status.build_tag,
-      'app_branch' => Rails.configuration.x.status.app_branch
+      'app_branch' => Rails.configuration.x.status.app_branch,
     }
   end
 

@@ -13,11 +13,11 @@ module Flow
               application.change_state_machine_type('PassportedStateMachine')
               :check_client_details
             end
-          end
+          end,
         },
         check_client_details: {
           path: ->(application) { urls.providers_legal_aid_application_check_client_details_path(application) },
-          forward: ->(_application, correct_details) { correct_details ? :received_benefit_confirmations : :applicant_details }
+          forward: ->(_application, correct_details) { correct_details ? :received_benefit_confirmations : :applicant_details },
         },
         received_benefit_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
@@ -29,7 +29,7 @@ module Flow
               application.change_state_machine_type('NonPassportedStateMachine')
               :applicant_employed
             end
-          end
+          end,
         },
         has_evidence_of_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_has_evidence_of_benefit_path(application) },
@@ -41,8 +41,8 @@ module Flow
               application.change_state_machine_type('NonPassportedStateMachine')
               :applicant_employed
             end
-          end
-        }
+          end,
+        },
       }.freeze
     end
   end

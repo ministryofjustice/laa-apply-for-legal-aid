@@ -17,7 +17,7 @@ class TransactionType < ApplicationRecord
       child_care
       maintenance_out
       legal_aid
-    ]
+    ],
   }.freeze
 
   EXCLUDED_BENEFITS = 'excluded_benefits'.freeze
@@ -31,7 +31,7 @@ class TransactionType < ApplicationRecord
   ].freeze
 
   HIERARCHIES = {
-    excluded_benefits: :benefits
+    excluded_benefits: :benefits,
   }.freeze
 
   scope :active, -> { where(archived_at: nil) }

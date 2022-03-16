@@ -6,7 +6,7 @@ module Dashboard
         25 => %w[dissatisfied difficult],
         50 => %w[neither_dissatisfied_nor_satisfied neither_difficult_nor_easy],
         75 => %w[satisfied easy],
-        100 => %w[very_satisfied very_easy]
+        100 => %w[very_satisfied very_easy],
       }.freeze
 
       def initialize(feedback)
@@ -30,7 +30,7 @@ module Dashboard
             difficulty_count: @feedback.difficulty_before_type_cast,
             difficulty_score: calculate_value_of(@feedback.difficulty),
             satisfaction_count: @feedback.satisfaction_before_type_cast,
-            satisfaction_score: calculate_value_of(@feedback.satisfaction)
+            satisfaction_score: calculate_value_of(@feedback.satisfaction),
           }
         ]
       end
@@ -56,7 +56,7 @@ module Dashboard
             Geckoboard::NumberField.new(:difficulty_score, name: 'Difficulty score', optional: true),
             Geckoboard::NumberField.new(:satisfaction_count, name: 'Satisfaction count', optional: true),
             Geckoboard::NumberField.new(:satisfaction_score, name: 'Satisfaction score', optional: true)
-          ]
+          ],
         }
       end
 

@@ -25,7 +25,7 @@ module CFE
     def headers
       {
         'Content-Type' => 'application/json',
-        'Accept' => "application/json;version=#{version}"
+        'Accept' => "application/json;version=#{version}",
       }
     end
 

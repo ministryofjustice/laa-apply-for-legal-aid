@@ -5,7 +5,7 @@ RSpec.describe 'AuthController', type: :request do
     {
       'message' => 'provider_error',
       'origin' => origin_path,
-      'strategy' => 'true_layer'
+      'strategy' => 'true_layer',
     }
   end
   describe 'GET failure' do

@@ -137,7 +137,7 @@ module LaaApplyForLegalAid
         Dashboard::UpdaterJob
       ],
       staging: [],
-      production: []
+      production: [],
     }
 
     config.x.redis.base_url = ENV['REDIS_HOST'].present? && ENV['REDIS_PASSWORD'].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : 'redis://localhost:6379' # rubocop:disable Lint/RequireParentheses

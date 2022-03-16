@@ -36,8 +36,8 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
     let(:params) do
       {
         binary_choice_form: {
-          no_outgoings_summaries: confirm_no_outgoings
-        }
+          no_outgoings_summaries: confirm_no_outgoings,
+        },
       }
     end
 

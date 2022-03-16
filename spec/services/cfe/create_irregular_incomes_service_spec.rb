@@ -42,16 +42,16 @@ module CFE
           {
             income_type: 'student_loan',
             frequency: 'annual',
-            amount: 3628.07
+            amount: 3628.07,
           }
-        ]
+        ],
       }.to_json
     end
 
     def dummy_response
       {
         success: true,
-        errors: []
+        errors: [],
       }.to_json
     end
   end

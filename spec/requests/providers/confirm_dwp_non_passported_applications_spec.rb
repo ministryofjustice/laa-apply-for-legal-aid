@@ -73,7 +73,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
     context 'submitting with Continue button' do
       let(:params) do
         {
-          continue_button: 'Continue'
+          continue_button: 'Continue',
         }
       end
 
@@ -89,8 +89,8 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           {
             continue_button: 'Continue',
             binary_choice_form: {
-              correct_dwp_result: 'true'
-            }
+              correct_dwp_result: 'true',
+            },
           }
         end
 
@@ -145,8 +145,8 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           {
             continue_button: 'Continue',
             binary_choice_form: {
-              correct_dwp_result: 'false'
-            }
+              correct_dwp_result: 'false',
+            },
           }
         end
 
@@ -202,7 +202,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
     context 'submitting with Save As Draft button' do
       let(:params) do
         {
-          draft_button: 'Save as draft'
+          draft_button: 'Save as draft',
         }
       end
 

@@ -13,52 +13,52 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     city: -> { Faker::Address.city },
     county: -> { Faker::Address.city },
     postcode: -> { Faker::Address.zip },
-    organisation: nil
+    organisation: nil,
   },
   admin_users: {
     username: -> { Faker::Internet.username },
-    email: -> { Faker::Internet.email }
+    email: -> { Faker::Internet.email },
   },
   admin_reports: {
     submitted_applications_report: -> {},
-    nonpassported_applications_report: -> {}
+    nonpassported_applications_report: -> {},
   },
   applicants: {
     first_name: -> { Faker::Name.first_name },
     last_name: -> { Faker::Name.last_name },
     email: -> { Faker::Internet.email },
     date_of_birth: -> { Faker::Date.birthday },
-    national_insurance_number: -> { Faker::Base.regexify(NINO_REGEXP) }
+    national_insurance_number: -> { Faker::Base.regexify(NINO_REGEXP) },
   },
   application_digests: {},
   attachments: {},
   attempts_to_settles: {
-    attempts_made: -> { Faker::Lorem.sentence }
+    attempts_made: -> { Faker::Lorem.sentence },
   },
   bank_account_holders: {
     true_layer_response: nil,
     full_name: -> { Faker::Name.name },
     date_of_birth: -> { Faker::Date.birthday },
-    addresses: nil
+    addresses: nil,
   },
   bank_accounts: {
     name: 'Anonymous bank account',
     true_layer_response: nil,
     account_number: -> { Faker::Bank.account_number },
-    sort_code: -> { Faker::Base.regexify(/^[0-9]{2}-[0-9]{2}-[0-9]{2}$/) }
+    sort_code: -> { Faker::Base.regexify(/^[0-9]{2}-[0-9]{2}-[0-9]{2}$/) },
   },
   bank_errors: {
-    bank_name: -> { Faker::Bank.name }
+    bank_name: -> { Faker::Bank.name },
   },
   bank_holidays: {},
   bank_providers: {
     true_layer_response: nil,
-    bank_name: -> { Faker::Bank.name }
+    bank_name: -> { Faker::Bank.name },
   },
   bank_transactions: {
     description: -> { Faker::Company.industry },
     true_layer_response: nil,
-    merchant: -> { Faker::Company.name }
+    merchant: -> { Faker::Company.name },
   },
   benefit_check_results: {},
   cash_transactions: {},
@@ -66,25 +66,25 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   ccms_submission_histories: {
     details: nil,
     request: nil,
-    response: -> { "\\N\n" }
+    response: -> { "\\N\n" },
   },
   ccms_opponent_ids: {},
   ccms_submissions: {},
   cfe_results: {
-    result: nil
+    result: nil,
   },
   cfe_submission_histories: {
     request_payload: nil,
-    response_payload: nil
+    response_payload: nil,
   },
   cfe_submissions: {
-    cfe_result: nil
+    cfe_result: nil,
   },
   chances_of_successes: {},
   data_migrations: {},
   debugs: {},
   dependants: {
-    name: -> { Faker::Name.name }
+    name: -> { Faker::Name.name },
   },
   document_categories: {},
   dwp_overrides: {},
@@ -92,20 +92,20 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   employment_payments: {},
   feedbacks: {
     improvement_suggestion: -> { Faker::Lorem.paragraph(sentence_count: 2) },
-    email: -> { Faker::Internet.email }
+    email: -> { Faker::Internet.email },
   },
   firms: {
-    name: -> { "#{Faker::Company.name}\n" }
+    name: -> { "#{Faker::Company.name}\n" },
   },
   gateway_evidences: {},
   hmrc_responses: {
-    response: nil
+    response: nil,
   },
   incidents: {
-    details: -> { Faker::Lorem.sentence }
+    details: -> { Faker::Lorem.sentence },
   },
   involved_children: {
-    full_name: -> { Faker::Name.name }
+    full_name: -> { Faker::Name.name },
   },
   irregular_incomes: {},
   legal_aid_application_transaction_types: {},
@@ -114,13 +114,13 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   legal_framework_submission_histories: {},
   legal_framework_submissions: {},
   malware_scan_results: {
-    file_details: {}
+    file_details: {},
     # this is a JSON block that contains the original filename
     # this has the potential to leak the applicant name
     # e.g. jane_smith_statement_of_case.doc, etc
   },
   offices: {
-    code: -> { Faker::Base.regexify(/^[0-9][A-Z][0-9]{3}[A-Z]$/) }
+    code: -> { Faker::Base.regexify(/^[0-9][A-Z][0-9]{3}[A-Z]$/) },
   },
   offices_providers: {},
   opponents: {
@@ -128,7 +128,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
     understands_terms_of_court_order_details: -> { Faker::Lorem.sentence },
     warning_letter_sent_details: -> { Faker::Lorem.sentence },
     police_notified_details: -> { Faker::Lorem.sentence },
-    bail_conditions_set_details: -> { Faker::Lorem.sentence }
+    bail_conditions_set_details: -> { Faker::Lorem.sentence },
   },
   other_assets_declarations: {},
   permissions: {},
@@ -138,17 +138,17 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   providers: {
     username: -> { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" },
     name: -> { Faker::Name.name },
-    email: -> { Faker::Internet.email }
+    email: -> { Faker::Internet.email },
   },
   savings_amounts: {},
   scheduled_mailings: {
     # Should we just not export this?
     # The potential PII (email) is embedded in a JSON block
     arguments: -> { {} },
-    addressee: -> { Faker::Internet.email }
+    addressee: -> { Faker::Internet.email },
   },
   statement_of_cases: {
-    statement: -> { Faker::Lorem.sentence }
+    statement: -> { Faker::Lorem.sentence },
   },
   secure_data: {},
   settings: {},
@@ -156,6 +156,6 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/.fr
   transaction_types: {},
   true_layer_banks: {},
   uploaded_evidence_collections: {},
-  vehicles: {}
+  vehicles: {},
 }
 @rules

@@ -31,7 +31,7 @@ module Reports
         template: 'providers/merits_reports/show',
         layout: 'pdf',
         locals: {
-          :@legal_aid_application => legal_aid_application
+          :@legal_aid_application => legal_aid_application,
         }
       )
     end

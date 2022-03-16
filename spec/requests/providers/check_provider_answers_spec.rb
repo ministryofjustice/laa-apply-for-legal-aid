@@ -200,7 +200,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     context 'Continue' do
       let(:params) do
         {
-          continue_button: 'Continue'
+          continue_button: 'Continue',
         }
       end
 
@@ -244,7 +244,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     context 'Save as draft' do
       let(:params) do
         {
-          draft_button: 'Save as draft'
+          draft_button: 'Save as draft',
         }
       end
 

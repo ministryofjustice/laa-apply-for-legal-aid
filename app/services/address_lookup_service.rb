@@ -19,7 +19,7 @@ private
     {
       key: Rails.configuration.x.ordnanace_survey_api_key,
       postcode: postcode,
-      lr: 'EN'
+      lr: 'EN',
     }
   end
 

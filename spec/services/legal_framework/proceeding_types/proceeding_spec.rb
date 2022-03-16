@@ -40,12 +40,12 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
       {
         'substantive' => {
           'start_date' => '1970-01-01',
-          'value' => '25000.0'
+          'value' => '25000.0',
         },
         'delegated_functions' => {
           'start_date' => '2021-09-13',
-          'value' => '2250.0'
-        }
+          'value' => '2250.0',
+        },
       }
     end
 
@@ -54,13 +54,13 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
         'substantive' => {
           'code' => 'AA019',
           'meaning' => 'Injunction FLA-to final hearing',
-          'description' => substantive_description.chomp
+          'description' => substantive_description.chomp,
         },
         'delegated_functions' => {
           'code' => 'CV117',
           'meaning' => 'Interim order inc. return date',
-          'description' => 'Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.'
-        }
+          'description' => 'Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.',
+        },
       }
     end
 

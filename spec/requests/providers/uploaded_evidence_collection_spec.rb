@@ -58,7 +58,7 @@ module Providers
       let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
       let(:params_uploaded_evidence_collection) do
         {
-          original_file: original_file
+          original_file: original_file,
         }
       end
       let(:draft_button) { { draft_button: 'Save as draft' } }
@@ -74,7 +74,7 @@ module Providers
       context 'upload button pressed' do
         let(:params_uploaded_evidence_collection) do
           {
-            original_file: original_file
+            original_file: original_file,
           }
         end
         let(:button_clicked) { upload_button }

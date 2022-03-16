@@ -5,7 +5,7 @@ RSpec.describe LegalAidApplications::HasEvidenceOfBenefitForm do
   let(:has_evidence_of_benefit) { true }
   let(:params) do
     {
-      has_evidence_of_benefit: has_evidence_of_benefit
+      has_evidence_of_benefit: has_evidence_of_benefit,
     }
   end
 

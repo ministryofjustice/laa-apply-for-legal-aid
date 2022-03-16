@@ -122,7 +122,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
     let(:params) do
       {
         transaction_type: transaction_type.name,
-        transaction_ids: selected_transactions.pluck(:id)
+        transaction_ids: selected_transactions.pluck(:id),
       }
     end
 
@@ -138,7 +138,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         let(:params) do
           {
             transaction_type: benefits_transaction_type.name,
-            transaction_ids: selected_transactions.pluck(:id)
+            transaction_ids: selected_transactions.pluck(:id),
           }
         end
 
@@ -152,7 +152,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
             label: 'manually_chosen',
             name: 'Benefits',
             category: 'Benefits',
-            selected_by: 'Provider'
+            selected_by: 'Provider',
           }
         end
       end
@@ -167,7 +167,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         let(:params) do
           {
             transaction_type: benefits_transaction_type.name,
-            transaction_ids: selected_transactions.pluck(:id)
+            transaction_ids: selected_transactions.pluck(:id),
           }
         end
 
@@ -183,7 +183,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         let(:params) do
           {
             transaction_type: friends_or_family_transaction_type.name,
-            transaction_ids: selected_transactions.pluck(:id)
+            transaction_ids: selected_transactions.pluck(:id),
           }
         end
 
@@ -197,7 +197,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
             label: 'manually_chosen',
             name: 'Friends Or Family',
             category: 'Friends Or Family',
-            selected_by: 'Provider'
+            selected_by: 'Provider',
           }
         end
       end
@@ -222,7 +222,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
         let(:params) do
           {
             transaction_type: outgoing_bank_transaction_type.name,
-            transaction_ids: selected_transactions.pluck(:id)
+            transaction_ids: selected_transactions.pluck(:id),
           }
         end
 
@@ -236,7 +236,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
             label: 'manually_chosen',
             name: 'Rent Or Mortgage',
             category: 'Rent Or Mortgage',
-            selected_by: 'Provider'
+            selected_by: 'Provider',
           }
         end
       end

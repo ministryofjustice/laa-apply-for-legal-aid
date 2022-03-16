@@ -33,7 +33,7 @@ module Reports
         locals: {
           :@legal_aid_application => legal_aid_application,
           :@cfe_result => legal_aid_application.cfe_result,
-          :@manual_review_determiner => CCMS::ManualReviewDeterminer.new(legal_aid_application)
+          :@manual_review_determiner => CCMS::ManualReviewDeterminer.new(legal_aid_application),
         }
       )
     end

@@ -11,7 +11,7 @@ module CFE
       {
         explicit_remarks: [
           policy_disregards.as_json
-        ]
+        ],
       }.to_json
     end
 

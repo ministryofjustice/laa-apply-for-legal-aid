@@ -65,7 +65,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let(:form_params) { update_proceeding_type_param_dates }
     let(:params) do
       {
-        legal_aid_applications_used_multiple_delegated_functions_form: form_params
+        legal_aid_applications_used_multiple_delegated_functions_form: form_params,
       }
     end
     let(:button_clicked) { {} }
@@ -296,7 +296,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       "#{proceeding.name}": 'true',
       "#{proceeding.name}_used_delegated_functions_on_3i": day || adjusted_date.day.to_s,
       "#{proceeding.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
-      "#{proceeding.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s
+      "#{proceeding.name}_used_delegated_functions_on_1i": year || adjusted_date.year.to_s,
     }
   end
 

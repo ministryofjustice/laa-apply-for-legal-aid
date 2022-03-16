@@ -26,7 +26,7 @@ module Dashboard
           [
             {
               timestamp: application.created_at,
-              reference: application.application_ref
+              reference: application.application_ref,
             }
           ]
         end

@@ -91,8 +91,8 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
       {
         aggregated_cash_outgoings: {
           check_box_child_care: '',
-          none_selected: 'true'
-        }
+          none_selected: 'true',
+        },
       }
     end
 
@@ -103,8 +103,8 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
           child_care1: '1',
           child_care2: '2',
           child_care3: '3',
-          none_selected: ''
-        }
+          none_selected: '',
+        },
       }
     end
 
@@ -118,8 +118,8 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
           check_box_maintenance_out: 'true',
           maintenance_out1: '',
           maintenance_out2: '',
-          maintenance_out3: ''
-        }
+          maintenance_out3: '',
+        },
       }
     end
   end

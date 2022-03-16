@@ -77,7 +77,7 @@ module Providers
         let(:params_statement_of_case) do
           {
             statement: entered_text,
-            original_file: original_file
+            original_file: original_file,
           }
         end
         let(:draft_button) { { draft_button: 'Save as draft' } }
@@ -128,7 +128,7 @@ module Providers
         context 'uploading a file' do
           let(:params_statement_of_case) do
             {
-              original_file: original_file
+              original_file: original_file,
             }
           end
           let(:button_clicked) { upload_button }
@@ -218,7 +218,7 @@ module Providers
             context 'file is empty and text is empty' do
               let(:params_statement_of_case) do
                 {
-                  statement: ''
+                  statement: '',
                 }
               end
 
@@ -232,7 +232,7 @@ module Providers
             context 'file is empty but text is entered' do
               let(:params_statement_of_case) do
                 {
-                  statement: entered_text
+                  statement: entered_text,
                 }
               end
 
@@ -336,7 +336,7 @@ module Providers
               context 'no additional file uploaded' do
                 let(:params_statement_of_case) do
                   {
-                    statement: entered_text
+                    statement: entered_text,
                   }
                 end
 

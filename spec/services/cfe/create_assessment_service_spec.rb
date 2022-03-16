@@ -70,8 +70,8 @@ module CFE
         client_reference_id: application.application_ref,
         submission_date: Time.zone.today.strftime('%Y-%m-%d'),
         proceeding_types: {
-          ccms_codes: application.proceedings.map(&:ccms_code)
-        }
+          ccms_codes: application.proceedings.map(&:ccms_code),
+        },
       }
     end
 
@@ -79,7 +79,7 @@ module CFE
       {
         'Accept' => "application/json;version=#{version}",
         'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       }
     end
 
@@ -87,7 +87,7 @@ module CFE
       {
         success: true,
         assessment_id: '1b2aa5eb-3763-445e-9407-2397ec3968f6',
-        errors: []
+        errors: [],
       }
     end
   end

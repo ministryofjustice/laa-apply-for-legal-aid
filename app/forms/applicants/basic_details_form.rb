@@ -29,7 +29,7 @@ module Applicants
       :date_of_birth,
       date: {
         not_in_the_future: true,
-        earliest_allowed_date: { date: '1900-01-01' }
+        earliest_allowed_date: { date: '1900-01-01' },
       },
       allow_nil: true
     )

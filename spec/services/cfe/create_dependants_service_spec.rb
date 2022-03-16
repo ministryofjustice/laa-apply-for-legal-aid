@@ -78,7 +78,7 @@ module CFE
             relationship: 'adult_relative',
             monthly_income: '1352.55',
             assets_value: '0.0',
-            dependant_allowance: '0.0'
+            dependant_allowance: '0.0',
           },
           {
             id: 'ee01c68c-f465-4a8e-a292-3f0cb1f2cd2d',
@@ -90,17 +90,17 @@ module CFE
             relationship: 'child_relative',
             monthly_income: '8665.97',
             assets_value: '0.0',
-            dependant_allowance: '0.0'
+            dependant_allowance: '0.0',
           }
         ],
         errors: [],
-        success: true
+        success: true,
       }
     end
 
     def empty_payload
       {
-        dependants: []
+        dependants: [],
       }
     end
 
@@ -133,16 +133,16 @@ module CFE
             relationship: 'adult_relative',
             monthly_income: '180.0',
             in_full_time_education: false,
-            assets_value: '10000.0'
+            assets_value: '10000.0',
           },
           {
             date_of_birth: 10.years.ago.strftime('%Y-%m-%d'),
             relationship: 'child_relative',
             monthly_income: '0.0',
             in_full_time_education: true,
-            assets_value: '0.0'
+            assets_value: '0.0',
           }
-        ]
+        ],
       }
     end
   end

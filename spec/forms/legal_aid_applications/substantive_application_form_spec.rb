@@ -9,7 +9,7 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
   let(:params) do
     {
       substantive_application: substantive_application.to_s,
-      model: application
+      model: application,
     }
   end
 

@@ -42,7 +42,7 @@ module OmniAuth
             padding: false
           )
         },
-        code_challenge_method: 'S256'
+        code_challenge_method: 'S256',
       }
 
       attr_accessor :access_token
@@ -139,7 +139,7 @@ module OmniAuth
         {
           code_challenge: options.pkce_options[:code_challenge]
                                  .call(options.pkce_verifier),
-          code_challenge_method: options.pkce_options[:code_challenge_method]
+          code_challenge_method: options.pkce_options[:code_challenge_method],
         }
       end
 

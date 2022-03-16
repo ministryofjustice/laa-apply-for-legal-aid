@@ -31,7 +31,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
     let(:params) do
       {
         legal_aid_application: { property_value: property_value },
-        legal_aid_application_id: legal_aid_application.id
+        legal_aid_application_id: legal_aid_application.id,
       }
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
       context 'Continue button pressed' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -92,7 +92,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
       context 'Save as draft button pressed' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

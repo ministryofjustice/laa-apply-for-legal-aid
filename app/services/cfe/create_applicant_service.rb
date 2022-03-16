@@ -10,8 +10,8 @@ module CFE
           date_of_birth: applicant.date_of_birth.strftime('%Y-%m-%d'),
           involvement_type: 'applicant',
           has_partner_opponent: false,
-          receives_qualifying_benefit: legal_aid_application.applicant_receives_benefit?
-        }
+          receives_qualifying_benefit: legal_aid_application.applicant_receives_benefit?,
+        },
       }.to_json
     end
 

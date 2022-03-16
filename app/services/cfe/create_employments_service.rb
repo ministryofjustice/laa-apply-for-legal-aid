@@ -28,7 +28,7 @@ module CFE
       {
         name: employment.name,
         client_id: employment.id,
-        payments: employment_payments(employment)
+        payments: employment_payments(employment),
       }
     end
 
@@ -49,7 +49,7 @@ module CFE
         benefits_in_kind: payment.benefits_in_kind.to_f,
         tax: payment.tax.to_f,
         national_insurance: payment.national_insurance.to_f,
-        net_employment_income: payment.net_employment_income.to_f
+        net_employment_income: payment.net_employment_income.to_f,
       }
     end
 

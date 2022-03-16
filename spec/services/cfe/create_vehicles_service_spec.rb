@@ -74,21 +74,21 @@ module CFE
             value: vehicle.estimated_value.to_s,
             loan_amount_outstanding: vehicle.payment_remaining.to_s,
             date_of_purchase: vehicle.purchased_on.strftime('%Y-%m-%d'),
-            in_regular_use: vehicle.used_regularly
+            in_regular_use: vehicle.used_regularly,
           }
-        ]
+        ],
       }
     end
 
     def expected_empty_payload_hash
       {
-        vehicles: []
+        vehicles: [],
       }
     end
 
     def dummy_response_hash
       {
-        success: true
+        success: true,
       }
     end
   end

@@ -7,7 +7,7 @@ module Dashboard
         {
           fields: [
             Geckoboard::NumberField.new(:declined_open_banking, name: 'Percentage that declined open banking consent')
-          ]
+          ],
         }
       end
 
@@ -15,7 +15,7 @@ module Dashboard
         percentage_declining_consent = declined_consent / total_consent_answers * 100
         [
           {
-            'declined_open_banking' => percentage_declining_consent
+            'declined_open_banking' => percentage_declining_consent,
           }
         ]
       end

@@ -6,7 +6,7 @@ module CFE
       valuable_items_value: 'Any valuable items worth more than £500',
       inherited_assets_value: 'Money or assets from the estate of a person who has died',
       money_owed_value: 'Money owed to applicant',
-      trust_value: 'Interest in a trust'
+      trust_value: 'Interest in a trust',
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
@@ -17,7 +17,7 @@ module CFE
       national_savings: 'ISAs, National Savings Certificates and Premium Bonds',
       plc_shares: 'Shares in a public limited company',
       peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
-      life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage'
+      life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage',
     }.freeze
 
     def cfe_url_path
@@ -27,7 +27,7 @@ module CFE
     def request_body
       {
         bank_accounts: bank_account_assets,
-        non_liquid_capital: itemised_other_assets
+        non_liquid_capital: itemised_other_assets,
       }.to_json
     end
 
@@ -58,7 +58,7 @@ module CFE
 
       {
         description: 'Online current accounts',
-        value: legal_aid_application.online_current_accounts_balance
+        value: legal_aid_application.online_current_accounts_balance,
       }
     end
 
@@ -67,7 +67,7 @@ module CFE
 
       {
         description: 'Online savings accounts',
-        value: legal_aid_application.online_savings_accounts_balance
+        value: legal_aid_application.online_savings_accounts_balance,
       }
     end
 
@@ -92,7 +92,7 @@ module CFE
     def description_and_value(description, value)
       {
         'description' => description,
-        'value' => value
+        'value' => value,
       }
     end
 

@@ -16,12 +16,12 @@ RSpec.describe HMRC::MockInterfaceResponseService do
         [
           {
             correlation_id: guid,
-            use_case: 'use_case_one'
+            use_case: 'use_case_one',
           },
           {
-            error: 'submitted client details could not be found in HMRC service'
+            error: 'submitted client details could not be found in HMRC service',
           }
-        ]
+        ],
     }
   end
 
@@ -32,15 +32,15 @@ RSpec.describe HMRC::MockInterfaceResponseService do
       data: [
         {
           correlation_id: guid,
-          use_case: 'use_case_one'
+          use_case: 'use_case_one',
         },
         {
           'individuals/matching/individual': {
             firstName: 'Langley',
             lastName: 'Yorke',
             nino: 'MN212451D',
-            dateOfBirth: '1992-07-22'
-          }
+            dateOfBirth: '1992-07-22',
+          },
         },
         {
           'income/paye/paye': {
@@ -56,16 +56,16 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 totalTaxToDate: 1848,
                 taxDeductedOrRefunded: 206,
                 grossEarningsForNics: {
-                  inPayPeriod1: 2083.33
+                  inPayPeriod1: 2083.33,
                 },
                 totalEmployerNics: {
                   inPayPeriod1: 185.79,
-                  ytd1: 1624.32
+                  ytd1: 1624.32,
                 },
                 employeeNics: {
                   inPayPeriod1: 154.36,
-                  ytd1: 1354.88
-                }
+                  ytd1: 1354.88,
+                },
               },
               {
                 taxYear: '21-22',
@@ -78,16 +78,16 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 totalTaxToDate: 1642,
                 taxDeductedOrRefunded: 406,
                 grossEarningsForNics: {
-                  inPayPeriod1: 3083.33
+                  inPayPeriod1: 3083.33,
                 },
                 totalEmployerNics: {
                   inPayPeriod1: 323.79,
-                  ytd1: 1438.53
+                  ytd1: 1438.53,
                 },
                 employeeNics: {
                   inPayPeriod1: 274.36,
-                  ytd1: 1200.52
-                }
+                  ytd1: 1200.52,
+                },
               },
               {
                 taxYear: '21-22',
@@ -100,16 +100,16 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 totalTaxToDate: 1236,
                 taxDeductedOrRefunded: 189.4,
                 grossEarningsForNics: {
-                  inPayPeriod1: 2000
+                  inPayPeriod1: 2000,
                 },
                 totalEmployerNics: {
                   inPayPeriod1: 174.29,
-                  ytd1: 1114.74
+                  ytd1: 1114.74,
                 },
                 employeeNics: {
                   inPayPeriod1: 144.36,
-                  ytd1: 926.16
-                }
+                  ytd1: 926.16,
+                },
               },
               {
                 taxYear: '21-22',
@@ -122,101 +122,101 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 totalTaxToDate: 1046.6,
                 taxDeductedOrRefunded: 139.4,
                 grossEarningsForNics: {
-                  inPayPeriod1: 1750
+                  inPayPeriod1: 1750,
                 },
                 totalEmployerNics: {
                   inPayPeriod1: 139.79,
-                  ytd1: 940.45
+                  ytd1: 940.45,
                 },
                 employeeNics: {
                   inPayPeriod1: 114.36,
-                  ytd1: 781.8
-                }
+                  ytd1: 781.8,
+                },
               }
-            ]
-          }
+            ],
+          },
         },
         {
           'income/sa/selfAssessment': {
             registrations: [],
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/pensions_and_state_benefits/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/source/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/employments/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/additional_information/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/partnerships/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/uk_properties/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/foreign/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/further_details/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/interests_and_dividends/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/other/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/summary/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'income/sa/trusts/selfAssessment': {
-            taxReturns: []
-          }
+            taxReturns: [],
+          },
         },
         {
           'employments/paye/employments': [
             {
               startDate: '2017-07-24',
-              endDate: '2099-12-31'
+              endDate: '2099-12-31',
             }
-          ]
+          ],
         },
         {
-          'benefits_and_credits/working_tax_credit/applications': []
+          'benefits_and_credits/working_tax_credit/applications': [],
         },
         {
-          'benefits_and_credits/child_tax_credit/applications': []
+          'benefits_and_credits/child_tax_credit/applications': [],
         }
-      ]
+      ],
     }
   end
 

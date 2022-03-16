@@ -17,7 +17,7 @@ module CFEResults
               involvement_type: 'applicant',
               has_partner_opponent: false,
               receives_qualifying_benefit: false,
-              self_employed: false
+              self_employed: false,
             },
             gross_income: {
               monthly_student_loan: '0.0',
@@ -31,14 +31,14 @@ module CFEResults
                   friends_or_family: '50.59',
                   maintenance_in: '54.17',
                   property_or_lodger: '450.0',
-                  pension: '82.52'
+                  pension: '82.52',
                 },
               monthly_outgoing_equivalents:
                 {
                   child_care: '0.0',
                   maintenance_out: '-3.64',
                   rent_or_mortgage: '-15.75',
-                  legal_aid: '-7.0'
+                  legal_aid: '-7.0',
                 },
               state_benefits: [
                 {
@@ -48,17 +48,17 @@ module CFEResults
                   state_benefit_payments: [
                     {
                       payment_date: '2020-01-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     },
                     {
                       payment_date: '2019-12-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     },
                     {
                       payment_date: '2019-11-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     }
-                  ]
+                  ],
                 }
               ],
               other_income: [
@@ -68,68 +68,68 @@ module CFEResults
                   payments: [
                     {
                       payment_date: '2020-01-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     },
                     {
                       payment_date: '2019-12-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     },
                     {
                       payment_date: '2019-11-28',
-                      amount: '75.0'
+                      amount: '75.0',
                     }
-                  ]
+                  ],
                 }
-              ]
+              ],
             },
             disposable_income: {
               outgoings: {
                 childcare_costs: [
                   {
                     payment_date: '2020-01-28',
-                    amount: '100.0'
+                    amount: '100.0',
                   },
                   {
                     payment_date: '2019-12-28',
-                    amount: '100.0'
+                    amount: '100.0',
                   },
                   {
                     payment_date: '2019-11-28',
-                    amount: '100.0'
+                    amount: '100.0',
                   }
                 ],
                 housing_costs: [
                   {
                     payment_date: '2020-01-28',
-                    amount: '125.0'
+                    amount: '125.0',
                   },
                   {
                     payment_date: '2019-12-28',
-                    amount: '125.0'
+                    amount: '125.0',
                   },
                   {
                     payment_date: '2019-11-28',
-                    amount: '125.0'
+                    amount: '125.0',
                   }
                 ],
                 maintenance_costs: [
                   {
                     payment_date: '2020-01-28',
-                    amount: '50.0'
+                    amount: '50.0',
                   },
                   {
                     payment_date: '2019-12-28',
-                    amount: '50.0'
+                    amount: '50.0',
                   },
                   {
                     payment_date: '2019-11-28',
-                    amount: '50.0'
+                    amount: '50.0',
                   }
-                ]
+                ],
               },
               deductions: {
                 dependants_allowance: '291.86',
-                disregarded_state_benefits: '1500'
+                disregarded_state_benefits: '1500',
               },
               childcare_allowance: '0.0',
               dependant_allowance: '0.0',
@@ -142,20 +142,20 @@ module CFEResults
               lower_threshold: '315.0',
               upper_threshold: '733.0',
               assessment_result: 'eligible',
-              income_contribution: '0.0'
+              income_contribution: '0.0',
             },
             capital: {
               capital_items: {
                 liquid: [
                   {
                     description: 'Ab quasi autem rerum.',
-                    value: '6692.12'
+                    value: '6692.12',
                   }
                 ],
                 non_liquid: [
                   {
                     description: 'Omnis sit et corrupti.',
-                    value: '3902.92'
+                    value: '3902.92',
                   }
                 ],
                 vehicles: [
@@ -165,7 +165,7 @@ module CFEResults
                     date_of_purchase: '2014-07-01',
                     in_regular_use: true,
                     included_in_assessment: false,
-                    assessed_value: '0.0'
+                    assessed_value: '0.0',
                   }
                 ],
                 properties: {
@@ -180,7 +180,7 @@ module CFEResults
                     net_value: '-1395.19',
                     net_equity: '-26.09',
                     main_home_equity_disregard: '100000.0',
-                    assessed_equity: '0.0'
+                    assessed_equity: '0.0',
                   },
                   additional_properties: [
                     {
@@ -194,10 +194,10 @@ module CFEResults
                       net_value: '-4533.94',
                       net_equity: '-8000.82',
                       main_home_equity_disregard: '0.0',
-                      assessed_equity: '0.0'
+                      assessed_equity: '0.0',
                     }
-                  ]
-                }
+                  ],
+                },
               },
               total_liquid: '5649.13',
               total_non_liquid: '3902.92',
@@ -210,11 +210,11 @@ module CFEResults
               lower_threshold: '3000.0',
               upper_threshold: '999999999999.0',
               assessment_result: 'eligible',
-              capital_contribution: '0.0'
+              capital_contribution: '0.0',
             },
             remarks: {
-            }
-          }
+            },
+          },
         }
       end
 
@@ -312,7 +312,7 @@ module CFEResults
           net_value: '-4533.94',
           net_equity: '-8000.82',
           main_home_equity_disregard: '0.0',
-          assessed_equity: '125.33'
+          assessed_equity: '125.33',
         }
         result[:assessment][:capital][:capital_items][:properties][:additional_properties] = [property]
         result

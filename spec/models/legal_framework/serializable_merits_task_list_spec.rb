@@ -102,24 +102,24 @@ module LegalFramework
           tasks: {
             incident_details: [],
             opponent_details: [],
-            application_children: []
-          }
+            application_children: [],
+          },
         },
         proceeding_types: [
           {
             ccms_code: 'DA004',
             tasks: {
-              chances_of_success: []
-            }
+              chances_of_success: [],
+            },
           },
           {
             ccms_code: 'DA001',
             tasks: {
               chances_of_success: [],
-              proceeding_children: [:application_children]
-            }
+              proceeding_children: [:application_children],
+            },
           }
-        ]
+        ],
       }
     end
   end

@@ -16,7 +16,7 @@ RSpec.describe CcmsPayloadYamlizer do
         'key_a' => 'aa',
         'key_b' => 'bb',
         'key_b[1]' => 'bb1',
-        'key_b[2]' => 'bb1'
+        'key_b[2]' => 'bb1',
       }
     end
 

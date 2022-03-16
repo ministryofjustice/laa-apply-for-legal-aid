@@ -9,7 +9,7 @@ module LegalFramework
     def request_body
       {
         request_id: request_id,
-        proceeding_types: proceeding_types_codes
+        proceeding_types: proceeding_types_codes,
       }.to_json
     end
 

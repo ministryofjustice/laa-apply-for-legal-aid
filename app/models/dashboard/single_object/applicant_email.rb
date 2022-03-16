@@ -18,7 +18,7 @@ module Dashboard
         [
           {
             timestamp: @application.created_at,
-            reference: @application.application_ref
+            reference: @application.application_ref,
           }
         ]
       end
@@ -34,7 +34,7 @@ module Dashboard
           fields: [
             Geckoboard::DateTimeField.new(:timestamp, name: 'Time'),
             Geckoboard::StringField.new(:reference, name: 'Reference')
-          ]
+          ],
         }
       end
 

@@ -9,5 +9,5 @@
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
 WickedPdf.config = {
-  print_media_type: true
+  print_media_type: true,
 }

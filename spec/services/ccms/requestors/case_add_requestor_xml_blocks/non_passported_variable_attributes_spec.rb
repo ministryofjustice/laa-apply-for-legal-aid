@@ -277,7 +277,7 @@ module CCMS
                   'ADDPROPERTY_INPUT_C_4WP2_13A' => 120_634,
                   'ADDPROPERTY_INPUT_C_4WP2_14A' => 45_933,
                   'ADDPROPERTY_INPUT_N_4WP2_22A' => 100.0,
-                  'GB_INPUT_B_3WP2_29A' => true
+                  'GB_INPUT_B_3WP2_29A' => true,
                 }
               end
               it 'generates attrs with expected values' do
@@ -304,7 +304,7 @@ module CCMS
                   'ADDPROPERTY_INPUT_C_4WP2_13A' => 120_634,
                   'ADDPROPERTY_INPUT_C_4WP2_14A' => 0.0,
                   'ADDPROPERTY_INPUT_N_4WP2_22A' => 50.0,
-                  'GB_INPUT_B_3WP2_29A' => true
+                  'GB_INPUT_B_3WP2_29A' => true,
                 }
               end
               it 'generates attrs with expected values' do
@@ -790,7 +790,7 @@ module CCMS
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], result: 60.0 },
                 { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 40.0 }
-              ]
+              ],
             },
             {
               input: 99,
@@ -798,7 +798,7 @@ module CCMS
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], result: 99.0 },
                 { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 1.0 }
-              ]
+              ],
             },
             {
               input: 100,
@@ -806,7 +806,7 @@ module CCMS
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: false },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], omit_block: true },
                 { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], omit_block: true }
-              ]
+              ],
             }
           ].freeze
           examples.each do |example|

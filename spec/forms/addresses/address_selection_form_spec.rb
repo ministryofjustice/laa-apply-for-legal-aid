@@ -8,7 +8,7 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
     {
       lookup_id: lookup_id,
       postcode: postcode,
-      addresses: [Address.new(lookup_id: lookup_id)]
+      addresses: [Address.new(lookup_id: lookup_id)],
     }
   end
   subject(:form) { described_class.new(form_params.merge(model: applicant)) }

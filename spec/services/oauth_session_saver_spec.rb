@@ -9,7 +9,7 @@ RSpec.describe OauthSessionSaver do
       'warden.user.applicant.key' => [['50b98c1b-cf5d-428e-b32c-d20e9d1184dd'], nil],
       '_csrf_token' => 'bHisWZcUID4DqymnSBSyJ31OghMf8cop4Aw/9RJ3T9c=',
       'provider_id' => 'mock',
-      'omniauth.state' => '6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76'
+      'omniauth.state' => '6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76',
     }
   end
   let(:key) { SecureRandom.uuid }

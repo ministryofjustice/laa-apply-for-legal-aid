@@ -31,7 +31,7 @@ module LegalAidApplications
       :date_of_birth,
       date: {
         not_in_the_future: true,
-        earliest_allowed_date: { date: '1900-01-01' }
+        earliest_allowed_date: { date: '1900-01-01' },
       },
       allow_nil: true
     )
@@ -57,7 +57,7 @@ module LegalAidApplications
       :assets_value,
       currency: {
         greater_than_or_equal_to: 8_000,
-        message: ->(form, _) { form.less_than_threshold_error_message }
+        message: ->(form, _) { form.less_than_threshold_error_message },
       },
       if: :assets_more_than_threshold?
     )

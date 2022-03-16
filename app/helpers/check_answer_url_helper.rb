@@ -15,7 +15,7 @@ module CheckAnswerUrlHelper
     {
       property_values: :property_value,
       outstanding_mortgages: :outstanding_mortgage_amount,
-      percentage_homes: :percentage_home
+      percentage_homes: :percentage_home,
     }
   end
 end

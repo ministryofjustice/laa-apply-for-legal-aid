@@ -103,9 +103,9 @@ module CFE
           {
             date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
             amount: 123.45,
-            client_id: '22222222-2222-2222-2222-222222222222'
+            client_id: '22222222-2222-2222-2222-222222222222',
           }
-        ]
+        ],
       }
     end
 
@@ -116,19 +116,19 @@ module CFE
           {
             date: DAY_SEQUENCE[2].days.ago.strftime('%Y-%m-%d'),
             amount: 123.45,
-            client_id: '22222222-2222-2222-2222-222222222222'
+            client_id: '22222222-2222-2222-2222-222222222222',
           },
           {
             date: DAY_SEQUENCE[1].days.ago.strftime('%Y-%m-%d'),
             amount: 123.45,
-            client_id: '22222222-2222-2222-2222-222222222222'
+            client_id: '22222222-2222-2222-2222-222222222222',
           },
           {
             date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
             amount: 123.45,
-            client_id: '22222222-2222-2222-2222-222222222222'
+            client_id: '22222222-2222-2222-2222-222222222222',
           }
-        ]
+        ],
       }
     end
 
@@ -140,9 +140,9 @@ module CFE
             date: DAY_SEQUENCE[0].days.ago.strftime('%Y-%m-%d'),
             amount: 321.99,
             client_id: '22222222-2222-2222-2222-222222222222',
-            flags: { multi_benefit: true }
+            flags: { multi_benefit: true },
           }
-        ]
+        ],
       }
     end
 
@@ -156,11 +156,11 @@ module CFE
             name: 'child_maintenance',
             created_at: '2020-03-27T13:08:22.022Z',
             updated_at: '2020-03-27T13:08:22.022Z',
-            monthly_value: '123.45'
+            monthly_value: '123.45',
           }
         ],
         errors: [],
-        success: true
+        success: true,
       }
     end
   end

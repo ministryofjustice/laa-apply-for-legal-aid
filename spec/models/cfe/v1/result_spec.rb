@@ -169,7 +169,7 @@ module CFE
             [
               {
                 description: 'Off-line bank accounts',
-                value: '350.0'
+                value: '350.0',
               }
             ]
           end

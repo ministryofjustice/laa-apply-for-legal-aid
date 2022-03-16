@@ -7,7 +7,7 @@ RSpec.describe AddressLookupService do
     {
       key: ENV['ORDNANACE_SURVEY_API_KEY'],
       postcode: postcode,
-      lr: 'EN'
+      lr: 'EN',
     }
   end
   let(:api_request_uri) do
@@ -66,8 +66,8 @@ RSpec.describe AddressLookupService do
         {
           error: {
             statuscode: 400,
-            message: 'No postcode parameter provided.'
-          }
+            message: 'No postcode parameter provided.',
+          },
         }
       end
       let(:postcode) { nil }

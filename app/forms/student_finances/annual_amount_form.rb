@@ -7,7 +7,7 @@ module StudentFinances
     validates :amount,
               currency: {
                 greater_than_or_equal_to: 0,
-                allow_blank: true
+                allow_blank: true,
               },
               presence: { unless: :draft? }
 

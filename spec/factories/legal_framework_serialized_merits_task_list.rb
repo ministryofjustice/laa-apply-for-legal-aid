@@ -10,25 +10,25 @@ FactoryBot.define do
             latest_incident_details: [],
             opponent_details: [],
             children_application: [],
-            statement_of_case: []
-          }
+            statement_of_case: [],
+          },
         },
         proceeding_types: [
           {
             ccms_code: 'DA001',
             tasks: {
-              chances_of_success: []
-            }
+              chances_of_success: [],
+            },
           },
           {
             ccms_code: 'SE014',
             tasks: {
               chances_of_success: [],
               children_proceeding: [:children_application],
-              attempts_to_settle: []
-            }
+              attempts_to_settle: [],
+            },
           }
-        ]
+        ],
       }
     end
 
@@ -41,17 +41,17 @@ FactoryBot.define do
               latest_incident_details: [],
               opponent_details: [],
               children_application: [],
-              statement_of_case: []
-            }
+              statement_of_case: [],
+            },
           },
           proceeding_types: [
             {
               ccms_code: 'DA001',
               tasks: {
-                chances_of_success: []
-              }
+                chances_of_success: [],
+              },
             }
-          ]
+          ],
         }
       end
     end

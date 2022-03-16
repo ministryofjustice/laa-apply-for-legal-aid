@@ -47,8 +47,8 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       {
         savings_amount: {
           applicant_bank_account: applicant_bank_account,
-          offline_savings_accounts: offline_savings_accounts
-        }
+          offline_savings_accounts: offline_savings_accounts,
+        },
       }
     end
 

@@ -28,7 +28,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
         {
           occurred_on_1i: occurred_on.year.to_s,
           occurred_on_2i: '55',
-          occurred_on_3i: occurred_on.day.to_s
+          occurred_on_3i: occurred_on.day.to_s,
         }
       end
       let(:error_locale) { 'occurred_on.date_not_valid' }
@@ -47,7 +47,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
         {
           told_on_1i: told_on.year.to_s,
           told_on_2i: '55',
-          told_on_3i: told_on.day.to_s
+          told_on_3i: told_on.day.to_s,
         }
       end
       let(:error_locale) { 'told_on.date_not_valid' }
@@ -92,7 +92,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
         {
           told_on_1i: told_on.year.to_s,
           told_on_2i: told_on.month.to_s,
-          told_on_3i: told_on.day.to_s
+          told_on_3i: told_on.day.to_s,
         }
       end
 
@@ -135,7 +135,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
         {
           occurred_on_1i: occurred_on.year.to_s,
           occurred_on_2i: '',
-          occurred_on_3i: occurred_on.day.to_s
+          occurred_on_3i: occurred_on.day.to_s,
         }
       end
 
@@ -154,7 +154,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
         {
           told_on_1i: told_on.year.to_s,
           told_on_2i: '',
-          told_on_3i: told_on.day.to_s
+          told_on_3i: told_on.day.to_s,
         }
       end
 

@@ -11,7 +11,7 @@ RSpec.describe WorkingDayCalculator, vcr: { cassette_name: 'gov_uk_bank_holiday_
       3 => three_working_days_later,
       5 => five_working_days_later,
       6 => six_working_days_later,
-      -2 => two_working_days_before
+      -2 => two_working_days_before,
     }
   end
   let(:working_day) { described_class.new(day) }

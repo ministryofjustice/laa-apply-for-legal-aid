@@ -13,8 +13,8 @@ RSpec.describe Providers::Draftable do
           national_insurance_number: 'AA 12 34 56 C',
           'date_of_birth(1i)': '1981',
           'date_of_birth(2i)': '07',
-          'date_of_birth(3i)': '11'
-        }
+          'date_of_birth(3i)': '11',
+        },
       }
     end
 
@@ -65,8 +65,8 @@ RSpec.describe Providers::Draftable do
         let(:params) do
           {
             applicant: {
-              national_insurance_number: 'invalid'
-            }
+              national_insurance_number: 'invalid',
+            },
           }
         end
 
@@ -87,8 +87,8 @@ RSpec.describe Providers::Draftable do
           {
             applicant: {
               last_name: 'Doe',
-              national_insurance_number: 'AA 12 34 56 C'
-            }
+              national_insurance_number: 'AA 12 34 56 C',
+            },
           }
         end
 

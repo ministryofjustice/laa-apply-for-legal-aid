@@ -15,7 +15,7 @@ RSpec.describe Addresses::AddressForm, type: :form do
       address_line_two: address_line_two,
       city: city,
       county: county,
-      postcode: postcode
+      postcode: postcode,
     }
   end
 

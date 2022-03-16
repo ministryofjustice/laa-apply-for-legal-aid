@@ -8,7 +8,7 @@ class IrregularIncome < ApplicationRecord
     {
       income_type: income_type,
       frequency: frequency,
-      amount: amount.to_f
+      amount: amount.to_f,
     }
   end
 

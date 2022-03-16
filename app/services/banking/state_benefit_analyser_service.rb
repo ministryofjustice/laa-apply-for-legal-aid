@@ -67,7 +67,7 @@ module Banking
         code: 'multiple',
         label: 'multiple dwp codes',
         name: 'multiple state benefits',
-        selected_by: 'System'
+        selected_by: 'System',
       }
     end
 
@@ -81,7 +81,7 @@ module Banking
         code: benefit.code,
         label: benefit.label,
         name: benefit.name,
-        selected_by: 'System'
+        selected_by: 'System',
       }
     end
 
