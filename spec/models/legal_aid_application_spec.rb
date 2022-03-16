@@ -28,6 +28,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(calculation_date) }
       context 'todays date before start of policy disregards' do
         let(:calculation_date) { Date.new(2021, 1, 7) }
+
         it 'returns false' do
           travel_to Time.zone.local(2021, 1, 7, 13, 45)
           expect(subject).to be false
@@ -37,6 +38,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'todays date after start of policy disregards' do
         let(:calculation_date) { Date.new(2021, 1, 8) }
+
         it 'returns true' do
           travel_to Time.zone.local(2021, 1, 8, 13, 45)
           expect(subject).to be true
@@ -177,6 +179,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe 'benefit_check_result_needs_updating?' do
     let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, :at_entering_applicant_details }
     let(:applicant) { legal_aid_application.applicant }
+
     it 'is true if no benefit check results' do
       expect(legal_aid_application).to be_benefit_check_result_needs_updating
     end
@@ -267,6 +270,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'merits not completed' do
       let(:merits_submitted_at) { nil }
+
       it 'returns :in_progress summary state' do
         expect(legal_aid_application.summary_state).to eq(:in_progress)
       end
@@ -294,6 +298,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'when applicant is the sole owner of a property' do
       let(:shared_ownership_reason) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
+
       it 'return true that the applicant owns a share of a property' do
         expect(legal_aid_application.shared_ownership?).to eq false
       end
@@ -311,6 +316,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'income transactions' do
         let!(:transaction_type) { create :transaction_type, :credit, name: 'salary' }
+
         it 'returns false' do
           expect(legal_aid_application.uncategorised_transactions?(:credit)).to eq false
         end
@@ -319,6 +325,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context 'outgoing transactions' do
         let(:transaction_type) { create :transaction_type, :debit }
         let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: transaction_type, bank_account: bank_account }
+
         it 'returns false' do
           expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq false
         end
@@ -341,6 +348,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context 'outgoing transactions' do
         let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: nil, bank_account: bank_account }
         let!(:transaction_type) { create :transaction_type, :debit }
+
         it 'returns true' do
           expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq true
         end
@@ -358,6 +366,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'legal_aid_application.own_home is "no"' do
       let(:legal_aid_application) { create :legal_aid_application, :without_own_home }
+
       it 'returns false' do
         expect(legal_aid_application.own_home?).to eq(false)
       end
@@ -365,6 +374,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'legal_aid_application.own_home is not "no"' do
       let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
+
       it 'returns true' do
         expect(legal_aid_application.own_home?).to eq(true)
       end
@@ -374,6 +384,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#own_capital?' do
     context 'no home, savings or assets' do
       let(:legal_aid_application) { create :legal_aid_application, own_home: nil }
+
       it 'returns nil' do
         expect(legal_aid_application.own_capital?).to be false
       end
@@ -381,6 +392,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'own home' do
       let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
+
       it 'returns true' do
         expect(legal_aid_application.own_capital?).to eq(true)
       end
@@ -438,6 +450,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#submitted_to_ccms?' do
     context 'application not submitted to ccms' do
       let(:legal_aid_application) { create :legal_aid_application }
+
       it 'returns false' do
         expect(legal_aid_application.submitted_to_ccms?).to be(false)
       end
@@ -445,6 +458,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'application submitted to ccms' do
       let(:legal_aid_application) { create :legal_aid_application, :submitted_to_ccms }
+
       it 'returns true' do
         expect(legal_aid_application.submitted_to_ccms?).to be(true)
       end
@@ -454,6 +468,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#proceedings_used_delegated_functions?' do
     context 'application uses df' do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+
       it 'returns true' do
         expect(legal_aid_application.proceedings_used_delegated_functions?).to be(true)
       end
@@ -461,6 +476,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'application does not use df' do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+
       it 'returns false' do
         expect(legal_aid_application.proceedings_used_delegated_functions?).to be(false)
       end
@@ -470,6 +486,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#read_only?' do
     context 'provider application not submitted' do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
+
       it 'returns false' do
         expect(legal_aid_application.read_only?).to be(false)
       end
@@ -477,6 +494,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'provider submitted' do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means }
+
       it 'returns true' do
         expect(legal_aid_application.read_only?).to be(true)
       end
@@ -484,6 +502,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'checking citizen answers?' do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
+
       it 'returns true' do
         expect(legal_aid_application.read_only?).to be(true)
       end
@@ -654,6 +673,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe 'default_cost_limitations' do
     context 'substantive' do
       let(:application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
+
       it 'returns the substantive cost limitation for the first proceeding type' do
         expect(application.default_cost_limitation).to eq 25_000.0
       end
@@ -812,6 +832,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#submitted_assessment' do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_merits_answers }
     let(:feedback_url) { 'http://test/feedback/new' }
+
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true) }
 
     it 'schedules a PostSubmissionProcessingJob ' do
@@ -825,6 +846,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'complete means event' do
     let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
+
     it 'runs the complete means service and the bank transaction analyser' do
       expect(ApplicantCompleteMeans).to receive(:call).with(legal_aid_application)
       expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application)
@@ -1033,6 +1055,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe '#year_to_calculation_date' do
     let(:calc_date) { Date.new(2021, 2, 28) }
     let(:expected_start_date) { Date.new(2020, 2, 29) }
+
     it 'returns two dates a year up to the calculation date' do
       allow(legal_aid_application).to receive(:calculation_date).and_return(calc_date)
       expect(legal_aid_application.year_to_calculation_date).to eq [expected_start_date, calc_date]
@@ -1146,6 +1169,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe 'required_document_categories' do
     let(:laa) { create :legal_aid_application }
+
     before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
 
     it 'defaults to an empty array' do
@@ -1191,6 +1215,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#online_current_accounts_balance' do
     let(:laa) { create :legal_aid_application, :with_applicant }
+
     context 'no current accounts' do
       it 'returns nil' do
         expect(laa.online_current_accounts_balance).to be_nil
@@ -1209,12 +1234,14 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context 'only savings' do
         let(:account_type) { 'SAVINGS' }
+
         it 'returns nil' do
           expect(laa.online_current_accounts_balance).to be_nil
         end
       end
       context 'only current' do
         let(:account_type) { 'TRANSACTION' }
+
         it 'returns the sum of the balances' do
           expect(laa.online_current_accounts_balance).to eq balance1 + balance2
         end
@@ -1224,6 +1251,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#online_savings_accounts_balance' do
     let(:laa) { create :legal_aid_application, :with_applicant }
+
     context 'no current accounts' do
       it 'returns nil' do
         expect(laa.online_savings_accounts_balance).to be_nil
@@ -1259,6 +1287,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context 'when there are Employment records' do
       let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa } # employment records created from this
+
       it 'returns true' do
         expect(laa.hmrc_employment_income?).to eq true
       end
@@ -1268,6 +1297,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe 'uploaded_evidence_by_category' do
     let(:laa) { create :legal_aid_application }
     let!(:evidence) { create :uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa }
+
     before { DocumentCategory.populate }
 
     context 'no evidence has been uploaded' do

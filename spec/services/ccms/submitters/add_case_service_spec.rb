@@ -55,6 +55,7 @@ module CCMS
 
         context 'there are documents to upload' do
           let(:submission) { create :submission, :document_ids_obtained, legal_aid_application: legal_aid_application }
+
           it 'writes a history record' do
             expect { subject.call }.to change { SubmissionHistory.count }.by(1)
             expect(history.from_state).to eq 'document_ids_obtained'

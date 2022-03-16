@@ -25,12 +25,14 @@ RSpec.describe UserTransactionsHelper, type: :helper do
 
       context 'with excluded state benefit' do
         let(:transaction_type) { create :transaction_type, :excluded_benefits }
+
         it 'returns correct hash' do
           expect(subject[:items]).to be_empty
         end
       end
       context 'no transactions' do
         let(:legal_aid_application) { create :legal_aid_application }
+
         it 'returns nil' do
           expect(subject).to be_nil
         end
@@ -40,6 +42,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
 
   describe '#payments_list' do
     let(:transaction_type) { create :transaction_type, :maintenance_out }
+
     subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace: locale_namespace) }
 
     context 'for citizen' do
@@ -51,6 +54,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
 
       context 'no transactions' do
         let(:legal_aid_application) { create :legal_aid_application }
+
         it 'returns nil' do
           expect(subject).to be_nil
         end

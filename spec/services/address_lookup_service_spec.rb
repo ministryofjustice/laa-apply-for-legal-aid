@@ -90,6 +90,7 @@ RSpec.describe AddressLookupService do
   describe '#record_error' do
     let(:state) { :service_unavailable }
     let(:error) { StandardError.new 'Service unavailable' }
+
     it 'captures error' do
       expect(AlertManager).to receive(:capture_exception).with(message_contains('Service unavailable'))
       service.__send__(:record_error, state, error)

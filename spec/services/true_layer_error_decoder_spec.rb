@@ -9,6 +9,7 @@ RSpec.describe TrueLayerErrorDecoder do
   describe '#error_heading' do
     context 'known error' do
       let(:error_code) { 'account_temporarily_locked' }
+
       it 'returns the correct translation' do
         expect(subject.error_heading).to eq I18n.t('true_layer_errors.headings.account_temporarily_locked')
       end
@@ -32,6 +33,7 @@ RSpec.describe TrueLayerErrorDecoder do
   describe '#error_details' do
     context 'known error' do
       let(:error_code) { 'internal_server_error' }
+
       it 'returns the correct translation' do
         expect(subject.error_detail).to eq I18n.t('true_layer_errors.detail.internal_server_error')
       end
@@ -50,6 +52,7 @@ RSpec.describe TrueLayerErrorDecoder do
   describe '#show_link?' do
     context 'link shown' do
       let(:error_code) { 'wrong_credentials' }
+
       it 'returns true' do
         expect(subject.show_link?).to be true
       end
@@ -57,6 +60,7 @@ RSpec.describe TrueLayerErrorDecoder do
 
     context 'no link shown' do
       let(:error_code) { 'account_permanently_locked' }
+
       it 'returns true' do
         expect(subject.show_link?).to be false
       end

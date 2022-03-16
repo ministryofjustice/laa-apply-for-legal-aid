@@ -11,6 +11,7 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
       addresses: [Address.new(lookup_id: lookup_id)]
     }
   end
+
   subject(:form) { described_class.new(form_params.merge(model: applicant)) }
 
   describe 'validations' do

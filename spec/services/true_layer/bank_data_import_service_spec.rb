@@ -105,6 +105,7 @@ RSpec.describe TrueLayer::BankDataImportService do
 
     context 'mock_true_layer_data is on' do
       let(:sample_data) { TrueLayer::SampleData }
+
       before { Setting.create!(mock_true_layer_data: true) }
 
       it 'uses the Mock ApiClient' do

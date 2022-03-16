@@ -42,6 +42,7 @@ module Providers
 
           context 'statement of case record already exists for the application' do
             let(:soc) { legal_aid_application.create_statement_of_case(statement: 'This is my case statement') }
+
             it 'displays the details of the statement on the page' do
               expect(response.body).to have_text_area_with_id_and_content('application-merits-task-statement-of-case-statement-field', soc.statement)
             end
@@ -266,6 +267,7 @@ module Providers
 
             context 'file is invalid mime type but has valid content_type' do
               let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
               before do
                 allow(original_file).to receive(:content_type).and_return('application/pdf')
               end
@@ -358,6 +360,7 @@ module Providers
 
             context 'text is entered and an additional file is uploaded' do
               let(:entered_text) { 'Now we have two attached files' }
+
               it 'updates the text and attaches  the additional file' do
                 subject
                 expect(statement_of_case.reload.statement).to eq entered_text
@@ -403,6 +406,7 @@ module Providers
         let(:legal_aid_application) { statement_of_case.legal_aid_application }
         let(:original_file) { statement_of_case.original_attachments.first }
         let(:params) { { attachment_id: statement_of_case.original_attachments.first.id } }
+
         subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
         before do

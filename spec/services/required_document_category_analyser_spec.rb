@@ -35,6 +35,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
 
     context 'application has section 8 proceedings' do
       let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+
       it 'updates the required_document_categories with gateway_evidence' do
         subject
         expect(application.required_document_categories).to eq %w[gateway_evidence]
@@ -45,6 +46,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
       let(:dwp_override) { create :dwp_override, :with_evidence }
       let(:application) { create :legal_aid_application, dwp_override: dwp_override }
       let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8, dwp_override: dwp_override }
+
       it 'updates the required_document_categories with gateway_evidence' do
         subject
         expect(application.required_document_categories).to eq %w[benefit_evidence gateway_evidence]
@@ -53,6 +55,7 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
 
     context 'application has neither dwp result overriden nor section 8 proceedings' do
       let(:application) { create :legal_aid_application }
+
       it 'updates the required_document_categories with an empty array' do
         subject
         expect(application.required_document_categories).to eq []

@@ -41,6 +41,7 @@ RSpec.describe 'citizen accounts request', type: :request do
   describe 'GET /citizens/gather_transactions' do
     let(:worker_id) { SecureRandom.uuid }
     let(:worker) { {} }
+
     subject { get citizens_gather_transactions_path }
 
     before do

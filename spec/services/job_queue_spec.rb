@@ -14,6 +14,7 @@ RSpec.describe JobQueue do
 
     context 'empty queue' do
       let(:job_queue) { [] }
+
       it 'returns false' do
         expect(subject).to be false
       end
@@ -21,6 +22,7 @@ RSpec.describe JobQueue do
 
     context 'job scheduled for later than the default delay time' do
       let(:job_queue) { [late_job] }
+
       it 'returns false' do
         expect(subject).to be false
       end
@@ -28,6 +30,7 @@ RSpec.describe JobQueue do
 
     context 'job scheduled for before default delay' do
       let(:job_queue) { [early_job] }
+
       it 'returns true' do
         expect(subject).to be true
       end
@@ -35,6 +38,7 @@ RSpec.describe JobQueue do
 
     context 'jobs scheduled for before and after the delay' do
       let(:job_queue) { [early_job, late_job] }
+
       it 'returns true' do
         expect(subject).to be true
       end
@@ -42,6 +46,7 @@ RSpec.describe JobQueue do
 
     context 'other jobs in the queue' do
       let(:job_queue) { [other_job] }
+
       it 'returns false' do
         expect(subject).to be false
       end

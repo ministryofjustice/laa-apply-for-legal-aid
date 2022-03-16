@@ -72,6 +72,7 @@ RSpec.describe Providers::UseCCMSController, type: :request do
 
       context 'when referrer is another unknown page' do
         let(:referer) { 'http://www.example.com/providers' }
+
         it 'sets the ccms reason to :unknown' do
           get providers_legal_aid_application_use_ccms_path(legal_aid_application)
           expect(legal_aid_application.reload.ccms_reason).to eq 'unknown'

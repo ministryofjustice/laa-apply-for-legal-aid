@@ -61,6 +61,7 @@ module CFE
 
       context 'failed calls to CFE' do
         let(:expected_payload_hash) { loaded_payload }
+
         it_behaves_like 'a failed call to CFE'
       end
     end

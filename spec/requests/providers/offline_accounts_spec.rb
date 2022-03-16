@@ -134,6 +134,7 @@ RSpec.describe 'providers offine accounts', type: :request do
               continue_button: 'Continue'
             }
           end
+
           before { subject }
 
           it 'redirects to the check passported answers page' do

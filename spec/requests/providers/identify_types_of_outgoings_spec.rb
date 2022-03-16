@@ -5,6 +5,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
   let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
+
   before { login }
 
   describe 'GET /providers/identify_types_of_outgoing' do
@@ -27,6 +28,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
   end
@@ -148,6 +150,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     context 'when the provider is not authenticated' do
       before { subject }
       let(:login) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
   end

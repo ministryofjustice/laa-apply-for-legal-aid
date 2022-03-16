@@ -60,12 +60,14 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
 
     context 'when not logged in' do
       let(:login) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 
     context 'applicant does not have vehicle' do
       let(:vehicle) { nil }
       let(:own_vehicle) { false }
+
       it 'displays first vehicle question' do
         expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
       end
@@ -81,6 +83,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
 
   describe 'PATCH /providers/applications/:legal_aid_application_id/means_summary' do
     let(:params) { {} }
+
     subject do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
       patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params

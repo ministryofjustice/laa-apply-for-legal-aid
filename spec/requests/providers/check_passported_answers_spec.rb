@@ -76,6 +76,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'displays no categories selected in the savings and investments section' do
           parsed_response = Nokogiri::HTML(response.body)
           node = parsed_response.css('#app-check-your-answers__savings_and_investments_items')
@@ -92,6 +93,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'displays that no other assets have been declared' do
           parsed_response = Nokogiri::HTML(response.body)
           node = parsed_response.css('#app-check-your-answers__other_assets_items')
@@ -108,6 +110,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :provider_entering_means,
                  has_restrictions: false
         end
+
         it 'displays that no capital restrictions have been declared' do
           parsed_response = Nokogiri::HTML(response.body)
           node = parsed_response.css('#app-check-your-answers__restrictions')
@@ -125,6 +128,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'does not display capital restrictions' do
           expect(response.body).not_to include('restrictions')
         end
@@ -170,6 +174,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'does not display property value' do
           expect(response.body).not_to include(gds_number_to_currency(application.property_value, unit: '£'))
           expect(response.body).not_to include('Property value')
@@ -190,6 +195,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'does not display property value' do
           expect(response.body).not_to include(gds_number_to_currency(application.outstanding_mortgage_amount, unit: '£'))
           expect(response.body).not_to include('Outstanding mortgage')
@@ -223,6 +229,7 @@ RSpec.describe 'check passported answers requests', type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means
         end
+
         it 'does not display percentage owned' do
           expect(response.body).not_to include(number_to_percentage(application.percentage_home, precision: 2))
           expect(response.body).not_to include('Percentage')
@@ -232,6 +239,7 @@ RSpec.describe 'check passported answers requests', type: :request do
       context 'applicant does not have vehicle' do
         let(:vehicle) { nil }
         let(:own_vehicle) { false }
+
         it 'displays first vehicle question' do
           expect(response.body).to include(I18n.t('shared.check_answers.vehicles.providers.own'))
         end
@@ -254,6 +262,7 @@ RSpec.describe 'check passported answers requests', type: :request do
              :checking_passported_answers
     end
     let(:params) { {} }
+
     subject do
       patch(
         "/providers/applications/#{application.id}/check_passported_answers/continue",

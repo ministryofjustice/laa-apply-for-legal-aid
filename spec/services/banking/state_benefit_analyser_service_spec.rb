@@ -18,6 +18,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
     context 'there are no state benefit transactions' do
       let!(:transactions) { create_mix_of_non_benefit_transactions }
+
       it 'does not change any bank transactions' do
         subject
         expect(legal_aid_application.reload.bank_transactions.order(:id)).to eq transactions
@@ -48,6 +49,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     context 'DWP payment for this applicant with recognised code' do
       context 'an included benefit' do
         let!(:transactions) { [create(:bank_transaction, :credit, description: '010101010101-CHB', bank_account: bank_account1)] }
+
         it 'marks the transaction as a state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
@@ -70,6 +72,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
       context 'an excluded benefit' do
         let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP #{nino} DLA", bank_account: bank_account1)] }
+
         it 'marks the transaction as a state benefit' do
           subject
           tx = legal_aid_application.reload.bank_transactions.first
@@ -94,6 +97,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     context 'DWP payment for this applicant has multiple recognised codes' do
       context 'an included benefit' do
         let!(:transactions) { [create(:bank_transaction, :credit, description: "DWP DP JSA MID CWP #{nino} DWP UC 10203040506070809N", bank_account: bank_account1)] }
+
         before { call }
 
         # OCT-2020: A choice has been made that, for now, we should not try to handle multiple codes in a single row.These
@@ -110,6 +114,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
 
       context 'duplicate benefits' do
         let!(:transactions) { [create(:bank_transaction, :credit, description: '123456789999-CHB BGC 123456789999-CHB BGC', bank_account: bank_account1)] }
+
         before { call }
 
         it 'updates the meta data' do

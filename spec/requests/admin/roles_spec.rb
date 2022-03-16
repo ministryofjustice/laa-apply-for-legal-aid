@@ -6,6 +6,7 @@ RSpec.describe Admin::RolesController, type: :request do
   let!(:firm2) { create :firm, name: 'McKenzie, Brackman, Chaney and Kuzak' }
   let!(:firm3) { create :firm, name: 'McKenzie, Crook, and Gervais' }
   let!(:firm4) { create :firm, name: 'Nelson and Murdock' }
+
   before { sign_in admin_user }
 
   describe 'GET index' do

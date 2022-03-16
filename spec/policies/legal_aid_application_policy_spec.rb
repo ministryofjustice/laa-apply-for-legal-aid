@@ -38,6 +38,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
     context 'controller is pre-DWP check' do
       let(:authorization_context) { AuthorizationContext.new(provider, pre_dwp_check_controller) }
+
       it 'should permit all actions' do
         controller_actions.each do |action|
           expect(subject).to permit(action)
@@ -51,6 +52,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       context 'provider has passported rights' do
         let(:provider)  { create :provider, :with_passported_permissions }
+
         it 'permits all actions' do
           controller_actions.each do |action|
             expect(subject).to permit(action)
@@ -60,6 +62,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       context 'provider does not have passported rights' do
         let(:provider)  { create :provider, :with_non_passported_permissions }
+
         it 'does not permit any actions' do
           controller_actions.each do |action|
             expect(subject).not_to permit(action)
@@ -71,6 +74,7 @@ RSpec.describe LegalAidApplicationPolicy do
     context 'application is non-passported' do
       let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_non_passported_state_machine, provider: provider) }
       let(:authorization_context) { AuthorizationContext.new(provider, post_dwp_check_controller) }
+
       context 'provider has non-passported rights' do
         let(:provider) { create :provider, :with_non_passported_permissions }
 
@@ -83,6 +87,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
       context 'provider does not have non-passported rights' do
         let(:provider) { create :provider, :with_passported_permissions }
+
         it 'does not permit any actions' do
           controller_actions.each do |action|
             expect(subject).not_to permit(action)

@@ -13,6 +13,7 @@ module OmniAuth
 
       describe '#options.client_options' do
         let(:client_options) { subject.options.client_options }
+
         it 'has site set to true layer' do
           expect(client_options.site).to match(true_layer_root_url)
         end
@@ -47,6 +48,7 @@ module OmniAuth
 
       describe '#token_params' do
         let(:callback_url) { 'http://example.com' }
+
         before do
           allow(subject).to receive(:callback_url).and_return(callback_url)
         end

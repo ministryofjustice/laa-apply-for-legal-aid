@@ -5,6 +5,7 @@ RSpec.describe Metrics::SendMetrics do
     let(:metrics_service_host) { Faker::Internet.domain_word }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
     let(:prometheus_thread_sleep) { rand(1..10).to_f / 1000 }
+
     subject { described_class.call }
 
     before do

@@ -26,6 +26,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
       context 'when the applicant is not employed' do
         let(:applicant) { create :applicant, :not_employed }
+
         it 'does not include reviewing employment details in action list' do
           expect(response.body).not_to include('Review their employment details')
         end
@@ -54,6 +55,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
       context 'Continue button pressed' do
         let(:submit_button) { { continue_button: 'Continue' } }
+
         it 'redirects to next page' do
           expect(subject).to redirect_to(providers_legal_aid_application_no_income_summary_path)
         end
@@ -79,6 +81,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
           before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
           let(:submit_button) { { continue_button: 'Continue' } }
+
           context 'employment income data was received from HMRC' do
             before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true) }
             it 'redirects to the employed income page' do
@@ -102,6 +105,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             let(:legal_aid_application) do
               create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type]
             end
+
             it 'redirects to next page' do
               expect(subject).to redirect_to(providers_legal_aid_application_income_summary_index_path)
             end

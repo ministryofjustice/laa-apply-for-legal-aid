@@ -49,6 +49,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
 
   describe 'POST /citizens/additional_accounts' do
     let(:params) { {} }
+
     before { post citizens_additional_accounts_path, params: params }
 
     it 'does not redirect if no choice submitted' do
@@ -88,6 +89,7 @@ RSpec.describe 'citizen additional accounts request test', type: :request do
   describe 'PATCH/PUT /citizens/additional_accounts' do
     let(:params) { {} }
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
+
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       patch(

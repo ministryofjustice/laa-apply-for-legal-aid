@@ -38,6 +38,7 @@ RSpec.describe HMRC::Interface::ResultService do
     }
   end
   let(:expected_status) { 200 }
+
   before do
     stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/oauth/token})
       .to_return(
@@ -107,6 +108,7 @@ RSpec.describe HMRC::Interface::ResultService do
 
     context 'when an error occurs in the result process' do
       let(:get_url) { %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/result/.*} }
+
       before do
         stub_request(:get, get_url)
           .to_raise(StandardError)

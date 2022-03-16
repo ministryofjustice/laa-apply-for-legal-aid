@@ -4,6 +4,7 @@ module FactoryHelpers
   module HMRCResponse
     RSpec.describe UseCaseOne do
       let(:correlation_id) { SecureRandom.uuid }
+
       it 'returns a hash with expected keys' do
         response = described_class.new(correlation_id).response
         expect(response['submission']).to eq correlation_id

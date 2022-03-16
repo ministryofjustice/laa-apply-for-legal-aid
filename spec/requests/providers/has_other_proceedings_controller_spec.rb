@@ -114,6 +114,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
         ccms_code: legal_aid_application.proceedings.last.ccms_code
       }
     end
+
     subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
 
     context 'remove proceeding' do

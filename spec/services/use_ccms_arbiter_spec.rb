@@ -18,8 +18,10 @@ RSpec.describe UseCCMSArbiter do
 
     context 'provider does not have non-passported permissions' do
       let(:provider_non_passported_permission) { false }
+
       context 'provider has passported permissions' do
         let(:provider_passported_permission) { true }
+
         it 'returns false' do
           expect(subject).to be false
         end
@@ -32,6 +34,7 @@ RSpec.describe UseCCMSArbiter do
 
       context 'provider does not have passported permissions' do
         let(:provider_passported_permission) { false }
+
         it 'returns true' do
           expect(subject).to be true
         end
@@ -48,6 +51,7 @@ RSpec.describe UseCCMSArbiter do
 
       context 'provider has passported permissions' do
         let(:provider_passported_permission) { true }
+
         it 'returns false' do
           expect(subject).to be false
         end
@@ -60,6 +64,7 @@ RSpec.describe UseCCMSArbiter do
 
       context 'provider does not have passported permissions' do
         let(:provider_passported_permission) { false }
+
         it 'returns true' do
           expect(subject).to be true
         end
@@ -78,6 +83,7 @@ RSpec.describe UseCCMSArbiter do
 
     context 'provider has non_passported permissions' do
       let(:provider_non_passported_permission) { true }
+
       it 'returns false' do
         expect(subject).to be false
       end
@@ -90,6 +96,7 @@ RSpec.describe UseCCMSArbiter do
 
     context 'provider does not have passported permissions' do
       let(:provider_non_passported_permission) { false }
+
       it 'returns true' do
         expect(subject).to be true
       end

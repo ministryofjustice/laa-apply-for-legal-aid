@@ -28,6 +28,7 @@ module CFE
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
+
             it 'returns eligible' do
               expect(subject).to eq 'eligible'
             end
@@ -35,6 +36,7 @@ module CFE
 
           context 'not_eligible' do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+
             it 'returns not_eligible' do
               expect(subject).to eq 'not_eligible'
             end
@@ -42,6 +44,7 @@ module CFE
 
           context 'capital_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+
             it 'returns capital_contribution_required' do
               expect(subject).to eq 'capital_contribution_required'
             end
@@ -49,6 +52,7 @@ module CFE
 
           context 'income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+
             it 'returns income_contribution_required' do
               expect(subject).to eq 'income_contribution_required'
             end
@@ -56,6 +60,7 @@ module CFE
 
           context 'capital_and_income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+
             it 'returns capital_and_income_contribution_required' do
               expect(subject).to eq 'capital_and_income_contribution_required'
             end
@@ -67,6 +72,7 @@ module CFE
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
+
             it 'returns eligible' do
               expect(subject).to eq 'eligible'
             end
@@ -74,6 +80,7 @@ module CFE
 
           context 'not_eligible' do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+
             it 'returns not_eligible' do
               expect(subject).to eq 'not_eligible'
             end
@@ -81,6 +88,7 @@ module CFE
 
           context 'capital_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+
             it 'returns capital_contribution_required' do
               expect(subject).to eq 'capital_contribution_required'
             end
@@ -88,6 +96,7 @@ module CFE
 
           context 'income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+
             it 'returns income_contribution_required' do
               expect(subject).to eq 'income_contribution_required'
             end
@@ -95,6 +104,7 @@ module CFE
 
           context 'capital_and_income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+
             it 'returns capital_and_income_contribution_required' do
               expect(subject).to eq 'capital_and_income_contribution_required'
             end
@@ -109,6 +119,7 @@ module CFE
 
           context 'eligible' do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
+
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -116,6 +127,7 @@ module CFE
 
           context 'not_eligible' do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
+
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -123,6 +135,7 @@ module CFE
 
           context 'capital_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
+
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -130,6 +143,7 @@ module CFE
 
           context 'income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
+
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -137,6 +151,7 @@ module CFE
 
           context 'capital_and_income_contribution_required' do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
+
             it 'returns manual_check_required' do
               expect(subject).to eq 'manual_check_required'
             end
@@ -482,6 +497,7 @@ module CFE
 
       describe 'monthly equivalent income' do
         let(:result) { eligible_result }
+
         it 'returns the expected values' do
           expect(result.mei_friends_or_family).to eq 50.59
           expect(result.mei_maintenance_in).to eq 54.17
@@ -494,6 +510,7 @@ module CFE
 
       describe 'monthly outgoing equivalents' do
         let(:result) { eligible_result }
+
         it 'returns the expected values' do
           expect(result.moe_housing).to eq 15.75
           expect(result.moe_childcare).to be_zero
@@ -506,6 +523,7 @@ module CFE
 
       describe 'deductions' do
         let(:result) { eligible_result }
+
         it 'returns the expected values' do
           expect(result.dependants_allowance).to eq 291.86
           expect(result.disregarded_state_benefits).to eq 1500.0

@@ -37,6 +37,7 @@ RSpec.describe Citizens::BanksController, type: :request do
 
   describe 'POST citizens/banks' do
     let(:provider_id) { Faker::Bank.name }
+
     before { post citizens_banks_path, params: { provider_id: provider_id } }
 
     it 'redirects to true layer' do

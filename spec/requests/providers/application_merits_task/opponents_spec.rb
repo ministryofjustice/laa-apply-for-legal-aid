@@ -23,6 +23,7 @@ module Providers
 
         context 'when not authenticated' do
           let(:login_provider) { nil }
+
           it_behaves_like 'a provider not authenticated'
         end
 
@@ -121,6 +122,7 @@ module Providers
 
         context 'when not authenticated' do
           let(:login_provider) { nil }
+
           before { subject }
           it_behaves_like 'a provider not authenticated'
         end

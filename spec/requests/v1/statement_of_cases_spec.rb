@@ -79,6 +79,7 @@ RSpec.describe 'POST /v1/statement_of_case', type: :request do
 
     context 'when the application does not exist' do
       let(:id) { SecureRandom.hex }
+
       it 'returns http not found' do
         subject
         expect(response).to have_http_status(:not_found)

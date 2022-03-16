@@ -44,6 +44,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
         }
       }
     end
+
     context 'when the provider is authenticated' do
       before do
         login_as provider

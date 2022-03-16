@@ -85,6 +85,7 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
   describe 'nil value' do
     let(:submission) { legal_aid_application.ccms_submission }
     let!(:history) { create(:ccms_submission_history, :without_xml, submission: submission) }
+
     subject { get download_xml_response_admin_legal_aid_applications_submission_path(history, format: :xml) }
 
     it { expect { subject }.to raise_error StandardError, 'No data found' }

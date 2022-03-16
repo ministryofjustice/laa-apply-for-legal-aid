@@ -192,6 +192,7 @@ RSpec.describe 'provider other assets requests', type: :request do
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { 'true' }
             let(:policy_disregards) { true }
+
             before do
               allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(policy_disregards)
               patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)

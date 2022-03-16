@@ -23,6 +23,7 @@ module LegalFramework
     describe '#remove_dependency' do
       subject(:remove_dependency) { legal_framework_serializable_merits_task.remove_dependency(parameter) }
       let(:legal_framework_serializable_merits_task) { build :legal_framework_serializable_merits_task, dependencies: [:application_children] }
+
       before { remove_dependency }
 
       context 'when sent a string' do

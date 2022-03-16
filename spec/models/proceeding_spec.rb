@@ -56,6 +56,7 @@ RSpec.describe Proceeding, type: :model do
 
   context 'domestic abuse' do
     let(:matter_code) { 'MINJN' }
+
     it 'returns false' do
       expect(proceeding.section8?).to be false
     end
@@ -76,6 +77,7 @@ RSpec.describe Proceeding, type: :model do
 
     context 'df_used' do
       let(:df_date) { 2.days.ago }
+
       it 'returns true' do
         expect(proceeding.used_delegated_functions?).to be true
       end
@@ -89,6 +91,7 @@ RSpec.describe Proceeding, type: :model do
 
     context 'delegated functions not used' do
       let(:df_date) { nil }
+
       it 'returns false' do
         expect(subject).to be false
       end
@@ -96,6 +99,7 @@ RSpec.describe Proceeding, type: :model do
 
     context 'delegated functions used' do
       let(:df_date) { Time.zone.yesterday }
+
       it 'returns true' do
         expect(subject).to be true
       end

@@ -124,6 +124,7 @@ module CFE
       context 'vehicles' do
         let(:result) { not_eligible_result }
         let(:vehicle) { result.vehicle }
+
         describe '#vehicle' do
           it 'returns the vehicle hash' do
             expect(vehicle.keys).to match_array(%i[
@@ -158,6 +159,7 @@ module CFE
 
       context 'capital_items' do
         let(:result) { contribution_required_result }
+
         describe '#non_liquid_capital_items' do
           it 'returns empty array' do
             expect(result.non_liquid_capital_items).to eq []
@@ -173,6 +175,7 @@ module CFE
               }
             ]
           end
+
           it 'returns array of items' do
             expect(result.liquid_capital_items).to eq expected_items
           end

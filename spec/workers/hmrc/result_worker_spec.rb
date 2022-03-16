@@ -42,6 +42,7 @@ RSpec.describe HMRC::ResultWorker do
           ]
         }
       end
+
       before do
         allow(HMRC::Interface::ResultService).to receive(:call).with(hmrc_response).and_return(good_response)
       end
@@ -64,6 +65,7 @@ RSpec.describe HMRC::ResultWorker do
           ]
         }
       end
+
       before do
         allow(HMRC::Interface::ResultService).to receive(:call).with(hmrc_response).and_return(in_progress_response)
       end
@@ -76,6 +78,7 @@ RSpec.describe HMRC::ResultWorker do
 
     context 'when an error occurs' do
       let(:hmrc_interface_service) { class_double HMRC::Interface::ResultService }
+
       before do
         allow(hmrc_interface_service).to receive(:call).and_raise(HMRC::InterfaceError)
       end

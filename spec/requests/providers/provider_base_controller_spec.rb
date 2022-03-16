@@ -17,6 +17,7 @@ module Providers
 
         context 'provider who created legal aid application' do
           let(:logged_in_provider) { provider }
+
           it 'is successful' do
             expect(response).to be_successful
           end
@@ -24,6 +25,7 @@ module Providers
 
         context 'provider in same firm' do
           let(:logged_in_provider) { provider_in_same_firm }
+
           it 'is successful' do
             expect(response).to be_successful
           end
@@ -31,6 +33,7 @@ module Providers
 
         context 'provider in different firm' do
           let(:logged_in_provider) { provider_in_different_firm }
+
           it 'is redirected to the access denied page' do
             expect(response).to redirect_to(error_path(:access_denied))
           end
@@ -46,6 +49,7 @@ module Providers
 
       context 'provider who created legal aid application' do
         let(:logged_in_provider) { provider }
+
         it 'is successful' do
           expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
@@ -53,6 +57,7 @@ module Providers
 
       context 'provider in same firm' do
         let(:logged_in_provider) { provider_in_same_firm }
+
         it 'is successful' do
           expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path)
         end
@@ -60,6 +65,7 @@ module Providers
 
       context 'provider in different firm' do
         let(:logged_in_provider) { provider_in_different_firm }
+
         it 'is redirected to the access denied page' do
           expect(response).to redirect_to(error_path(:access_denied))
         end

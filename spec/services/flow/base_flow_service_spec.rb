@@ -13,6 +13,7 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:legal_aid_application) { create :legal_aid_application }
   let(:params) { nil }
+
   subject do
     flow_service_class.new(
       legal_aid_application: legal_aid_application,
@@ -96,6 +97,7 @@ RSpec.describe Flow::BaseFlowService do
 
       context 'when path not defined' do
         let(:path) { nil }
+
         it 'raises an error' do
           expect { subject.current_path }.to raise_error(/not defined/)
         end
@@ -103,6 +105,7 @@ RSpec.describe Flow::BaseFlowService do
 
       context 'when path is a proc' do
         let(:path) { ->(passed_in) { passed_in } }
+
         it 'passes in the legal aid application' do
           expect(subject.current_path).to eq(legal_aid_application)
         end

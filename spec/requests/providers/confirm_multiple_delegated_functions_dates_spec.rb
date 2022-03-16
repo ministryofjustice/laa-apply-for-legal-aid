@@ -34,6 +34,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
     context 'redirecting' do
       context 'when true' do
         let(:confirmation) { true }
+
         it 'redirects to limitations' do
           expect(response).to redirect_to(providers_legal_aid_application_limitations_path(legal_aid_application))
         end
@@ -41,6 +42,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
 
       context 'when false' do
         let(:confirmation) { false }
+
         it 'redirects back to the used multiple delegated functions page' do
           expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
         end
@@ -49,6 +51,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
 
     context 'when nothing selected' do
       let(:confirmation) { nil }
+
       it 'error singular' do
         expect(response.body).to include(I18n.t("#{base_error_translation}.error.blank_singular"))
       end
@@ -61,6 +64,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
                  proceeding_count: 2,
                  df_options: { DA001: 35.days.ago.to_date, DA004: 36.days.ago.to_date }
         end
+
         it 'error pluralised' do
           expect(response.body).to include(I18n.t("#{base_error_translation}.error.blank_plural"))
         end

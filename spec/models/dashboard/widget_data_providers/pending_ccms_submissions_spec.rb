@@ -19,6 +19,7 @@ module Dashboard
       describe '.data' do
         let(:aasm_states) { CCMS::Submission.aasm.states.map(&:name) - %i[failed completed] }
         let(:expected_data) { [{ 'number' => 4 }] }
+
         it 'sends expected data' do
           4.times do
             create :ccms_submission, aasm_state: aasm_states.sample

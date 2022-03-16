@@ -97,6 +97,7 @@ RSpec.describe 'FeedbacksController', type: :request do
       context 'as a provider after logging out' do
         let(:originating_page) { address_lookup_page }
         let(:params) { { feedback: attributes_for(:feedback), signed_out: true } }
+
         it 'adds signed-out provider specific attributes' do
           subject
           expect(feedback.source).to eq 'Provider'
@@ -112,6 +113,7 @@ RSpec.describe 'FeedbacksController', type: :request do
             'current_application_id' => application.id
           }
         end
+
         it 'adds applicant specific data' do
           subject
           expect(feedback.source).to eq 'Applicant'
@@ -130,6 +132,7 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     context 'provider feedback' do
       let(:originating_page) { address_lookup_page }
+
       it 'contains provider email' do
         subject
         expect(feedback.source).to eq 'Provider'
@@ -140,6 +143,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     context 'provider feedback' do
       let(:originating_page) { additional_accounts_page }
       let(:session_vars) { { current_application_id: application.id } }
+
       context 'no appliction id in the page history' do
         it 'contains provider email' do
           subject
@@ -187,6 +191,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     context 'submitting feedback using link in submission email' do
       let(:application) { create :legal_aid_application }
       let(:params) { { feedback: attributes_for(:feedback), application_id: application.id, submission_feedback: 'true' } }
+
       it 'adds signed-out submission_feedback specific attributes' do
         subject
         expect(feedback.legal_aid_application_id).to eq application.id
@@ -197,6 +202,7 @@ RSpec.describe 'FeedbacksController', type: :request do
 
   describe 'GET /feedback/new' do
     let(:session_vars) { {} }
+
     before do
       set_session(session_vars)
       get new_feedback_path
@@ -216,6 +222,7 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
+
       it 'hash a hidden form field with no value' do
         expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" autocomplete="off" />')
       end
@@ -266,6 +273,7 @@ RSpec.describe 'FeedbacksController', type: :request do
 
     context 'has come here as applicant or signed in provider' do
       let(:session_vars) { {} }
+
       it 'hash a hidden form field with no value' do
         expect(response.body).to include('<input type="hidden" name="signed_out" id="signed_out" autocomplete="off" />')
       end

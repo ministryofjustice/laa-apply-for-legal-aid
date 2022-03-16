@@ -65,6 +65,7 @@ RSpec.describe CFE::CreateEmploymentsService do
     context 'failed calls to CFE' do
       let(:expected_payload) { full_payload }
       let(:expected_payload_hash) { full_payload }
+
       before do
         create :hmrc_response, :example1_usecase1, legal_aid_application: laa
       end

@@ -4,6 +4,7 @@ RSpec.describe HMRC::CreateResponsesService do
   subject(:create_service) { described_class.new(legal_aid_application) }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:hmrc_use_dev_mock) { false }
+
   before do
     allow(HMRC::MockInterfaceResponseService).to receive(:call).and_return({})
     allow(Rails.configuration.x).to receive(:hmrc_use_dev_mock).and_return(hmrc_use_dev_mock)
@@ -41,6 +42,7 @@ RSpec.describe HMRC::CreateResponsesService do
 
           context 'staging' do
             let(:host) { :staging }
+
             it 'calls the MockInterfaceResponseService and creates no SubmissionWorker jobs' do
               expect { call }.to_not change(HMRC::SubmissionWorker.jobs, :size)
               expect(HMRC::MockInterfaceResponseService).to have_received(:call).twice
@@ -61,6 +63,7 @@ RSpec.describe HMRC::CreateResponsesService do
 
     context 'when requests already exist' do
       let!(:hmrc_response) { create :hmrc_response, legal_aid_application: legal_aid_application }
+
       it 'does not create any more hmrc_response records' do
         expect { call }.not_to change { legal_aid_application.hmrc_responses.count }
       end

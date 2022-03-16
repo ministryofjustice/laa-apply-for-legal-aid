@@ -5,6 +5,7 @@ RSpec.describe PageHistoryService do
   let(:page_history_id) { SecureRandom.uuid }
   let(:key) { "page_history:#{page_history_id}" }
   let(:page_history) { %w[page_1 page_2] }
+
   before(:each) { redis.flushdb }
   after(:each) { redis.quit }
 

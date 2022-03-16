@@ -60,6 +60,7 @@ RSpec.describe ScheduledMailing do
 
   describe '#cancel' do
     let(:rec) { create :scheduled_mailing }
+
     it 'updates the cancelled at column' do
       travel_to frozen_time
       rec.cancel!

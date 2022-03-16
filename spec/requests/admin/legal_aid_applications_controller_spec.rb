@@ -78,6 +78,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   describe 'POST /admin/search' do
     subject { post admin_application_search_path(params) }
     let(:params) { nil }
+
     before { subject }
 
     context 'when the params are empty' do
@@ -168,6 +169,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe 'DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy' do
     let(:application) { legal_aid_applications.first }
+
     subject { delete admin_legal_aid_application_path(application) }
 
     context 'when enabled' do

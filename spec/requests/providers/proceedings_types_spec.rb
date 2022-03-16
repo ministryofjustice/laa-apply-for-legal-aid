@@ -70,6 +70,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
 
   describe 'create: POST /providers/applications/:legal_aid_application_id/proceedings_types' do
     let(:params) { { continue_button: 'Continue' } }
+
     subject do
       post(
         providers_legal_aid_application_proceedings_types_path(legal_aid_application),

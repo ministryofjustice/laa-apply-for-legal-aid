@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
+
   before { create :hmrc_response, :use_case_one, legal_aid_application_id: application.id }
 
   describe 'GET /providers/applications/:id/no_employment_income' do

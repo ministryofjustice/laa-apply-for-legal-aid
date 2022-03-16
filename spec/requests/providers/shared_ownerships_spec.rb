@@ -77,6 +77,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'Yes path' do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
+
           it 'does NOT create an new application record' do
             expect { subject }.not_to change { LegalAidApplication.count }
           end
@@ -104,6 +105,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'No path' do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
+
           it 'does NOT create an new application record' do
             expect { subject }.not_to change { LegalAidApplication.count }
           end
@@ -132,6 +134,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'with an invalid param' do
           let(:params) { { legal_aid_application: { shared_ownership: '' } } }
+
           it 're-renders the form with the validation errors' do
             subject
             expect(unescaped_response_body).to include('There is a problem')
@@ -150,6 +153,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'Yes path' do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
+
           it 'does NOT create an new application record' do
             expect { subject }.not_to change { LegalAidApplication.count }
           end
@@ -177,6 +181,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'No path' do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
+
           it 'does NOT create an new application record' do
             expect { subject }.not_to change { LegalAidApplication.count }
           end
@@ -204,6 +209,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
 
         context 'with an empty entry' do
           let(:params) { { legal_aid_application: { shared_ownership: '' } } }
+
           it 'redirects to the applications list page' do
             subject
             expect(response).to redirect_to(providers_legal_aid_applications_path)

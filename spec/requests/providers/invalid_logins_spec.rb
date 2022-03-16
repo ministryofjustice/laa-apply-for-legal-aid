@@ -4,6 +4,7 @@ RSpec.describe 'provider confirm office', type: :request do
   describe 'GET providers/invalid_login' do
     let(:email) { Rails.configuration.x.support_email_address }
     let(:provider) { create :provider, invalid_login_details: detail }
+
     before do
       login_as provider
       get providers_invalid_login_path
@@ -11,6 +12,7 @@ RSpec.describe 'provider confirm office', type: :request do
 
     context 'no CCMS_Apply role' do
       let(:detail) { 'role' }
+
       it 'has the no permissions title' do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t('providers.invalid_logins.show.permission_title')))
       end
@@ -21,6 +23,7 @@ RSpec.describe 'provider confirm office', type: :request do
 
     context 'no user on CCMS Provider details API' do
       let(:detail) { 'api_details_user_not_found' }
+
       it 'has the no permissions title' do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t('providers.invalid_logins.show.permission_title')))
       end
@@ -31,6 +34,7 @@ RSpec.describe 'provider confirm office', type: :request do
 
     context 'API error' do
       let(:detail) { 'provider_details_api_error' }
+
       it 'has the no error title' do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t('providers.invalid_logins.show.error_title')))
       end

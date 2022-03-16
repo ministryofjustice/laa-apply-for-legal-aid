@@ -57,6 +57,7 @@ module CCMS
                 ['FAM_PROSP_UNCERTAIN', false]
               ]
             end
+
             it 'generates the correct values for the attributes' do
               expected_results.each do |expected_result_array|
                 attr_name, expected_result = expected_result_array
@@ -78,6 +79,7 @@ module CCMS
                 ['FAM_PROSP_UNCERTAIN', false]
               ]
             end
+
             it 'generates the correct values for the attributes' do
               expected_results.each do |expected_result_array|
                 attr_name, expected_result = expected_result_array
@@ -99,6 +101,7 @@ module CCMS
                 ['FAM_PROSP_UNCERTAIN', false]
               ]
             end
+
             it 'generates the correct values for the attributes' do
               expected_results.each do |expected_result_array|
                 attr_name, expected_result = expected_result_array
@@ -120,6 +123,7 @@ module CCMS
                 ['FAM_PROSP_UNCERTAIN', false]
               ]
             end
+
             it 'generates the correct values for the attributes' do
               expected_results.each do |expected_result_array|
                 attr_name, expected_result = expected_result_array
@@ -141,6 +145,7 @@ module CCMS
                 ['FAM_PROSP_UNCERTAIN', true]
               ]
             end
+
             it 'generates the correct values for the attributes' do
               expected_results.each do |expected_result_array|
                 attr_name, expected_result = expected_result_array
@@ -259,6 +264,7 @@ module CCMS
                 GB_INPUT_B_3WP2_29A
               ]
             end
+
             it 'does not generate the blocks' do
               attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :additional_property, attr_name)
@@ -280,6 +286,7 @@ module CCMS
                   'GB_INPUT_B_3WP2_29A' => true
                 }
               end
+
               it 'generates attrs with expected values' do
                 attrs.each do |attr_name, expected_value|
                   block = XmlExtractor.call(xml, :additional_property, attr_name)
@@ -307,6 +314,7 @@ module CCMS
                   'GB_INPUT_B_3WP2_29A' => true
                 }
               end
+
               it 'generates attrs with expected values' do
                 attrs.each do |attr_name, expected_value|
                   block = XmlExtractor.call(xml, :additional_property, attr_name)
@@ -327,9 +335,11 @@ module CCMS
 
         context 'vehicle attributes' do
           let(:vehicle) { legal_aid_application.vehicle }
+
           context 'applicant has no vehicle' do
             before { vehicle.update! estimated_value: nil }
             let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27] }
+
             it 'does not generate the attributes' do
               attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :vehicle_entity, attr_name)
@@ -345,6 +355,7 @@ module CCMS
             context 'CARANDVEH_INPUT_B_14WP2_28A In regular use?' do
               context 'in regular use' do
                 let(:regular_use) { true }
+
                 it 'generates the block with a value of true' do
                   block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_B_14WP2_28A')
                   expect(block).to have_boolean_response true
@@ -354,6 +365,7 @@ module CCMS
 
               context 'not in regular use' do
                 let(:regular_use) { false }
+
                 it 'generates the block with a value of true' do
                   block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_B_14WP2_28A')
                   expect(block).to have_boolean_response false
@@ -492,6 +504,7 @@ module CCMS
                   ['GB_INPUT_B_9WP3_352A', false]
                 ]
               end
+
               it 'generates a block with a response of false' do
                 expected_results.each do |expected_result_array|
                   attr_name, expected_result = expected_result_array
@@ -509,6 +522,7 @@ module CCMS
                   ['GB_INPUT_B_9WP3_352A', false]
                 ]
               end
+
               it 'generates a block with a response of false' do
                 expected_results.each do |expected_result_array|
                   attr_name, expected_result = expected_result_array

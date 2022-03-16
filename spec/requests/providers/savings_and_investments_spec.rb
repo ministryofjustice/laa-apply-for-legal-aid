@@ -149,6 +149,7 @@ RSpec.describe 'providers savings and investments', type: :request do
               continue_button: 'Continue'
             }
           end
+
           before { subject }
 
           it 'redirects to the restrictions page' do
@@ -172,6 +173,7 @@ RSpec.describe 'providers savings and investments', type: :request do
               continue_button: 'Continue'
             }
           end
+
           before { subject }
 
           it 'redirects to the restrictions page' do

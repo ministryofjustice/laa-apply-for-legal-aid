@@ -17,6 +17,7 @@ module CFE
     describe '#request payload' do
       context 'vehicle record is present' do
         let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
+
         it 'creates the expected payload from the values in the applicant' do
           expect(service.request_body).to eq expected_payload_hash.to_json
         end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe IdPSettingsAdapter do
   describe 'IdPSettingsAdapter.mock_saml?' do
     let(:setting) { 'true' }
+
     before do
       allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(setting)
     end

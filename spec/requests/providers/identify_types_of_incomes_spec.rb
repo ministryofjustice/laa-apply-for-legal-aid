@@ -35,6 +35,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end

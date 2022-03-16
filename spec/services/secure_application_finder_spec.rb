@@ -9,6 +9,7 @@ RSpec.describe SecureApplicationFinder do
       expired_at: expired_at
     )
   end
+
   subject { described_class.new(secure_data_id) }
 
   it 'finds the application' do

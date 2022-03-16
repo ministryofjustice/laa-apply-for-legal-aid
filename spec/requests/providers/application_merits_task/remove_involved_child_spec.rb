@@ -56,6 +56,7 @@ module Providers
 
         context 'child is not removed' do
           let(:radio_button) { 'false' }
+
           it 'does not delete a record' do
             expect { subject }.not_to change { application.involved_children.count }
           end
@@ -68,6 +69,7 @@ module Providers
 
         context 'neither yes nor no specified' do
           let(:radio_button) { '' }
+
           it 'does not delete a record' do
             expect { subject }.not_to change { application.involved_children.count }
           end

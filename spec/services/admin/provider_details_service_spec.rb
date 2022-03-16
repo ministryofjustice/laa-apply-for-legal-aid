@@ -33,6 +33,7 @@ module Admin
       context 'username not on provider details api' do
         let(:response_body) { user_not_found_response.to_json }
         let(:http_status) { 404 }
+
         it 'responds :error' do
           expect(subject).to eq :error
         end
@@ -46,6 +47,7 @@ module Admin
       context 'other non-200 response' do
         let(:response_body) { '' }
         let(:http_status) { 505 }
+
         it 'responds :error' do
           expect(subject).to eq :error
         end
@@ -59,6 +61,7 @@ module Admin
       context 'username not in list of contacts' do
         let(:response_body) { missing_contact_response.to_json }
         let(:http_status) { 200 }
+
         it 'responds :error' do
           expect(subject).to eq :error
         end
@@ -96,8 +99,10 @@ module Admin
 
       context 'success' do
         let(:http_status) { 200 }
+
         context 'username in list of contacts' do
           let(:response_body) { sarah_smith_response.to_json }
+
           it 'responds success' do
             expect(service.check).to eq :success
           end
@@ -118,9 +123,11 @@ module Admin
 
       context 'success' do
         let(:http_status) { 200 }
+
         subject { service.create }
         context 'no firm or offices pre-exist' do
           let(:response_body) { sarah_smith_response.to_json }
+
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
             expect(Provider.exists?(username: username)).to be true

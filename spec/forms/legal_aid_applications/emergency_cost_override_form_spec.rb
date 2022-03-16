@@ -22,6 +22,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
     context 'when no parameters sent' do
       let(:params) { {} }
+
       before { valid? }
 
       it { is_expected.to be false }
@@ -43,6 +44,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
       context 'but no value supplied' do
         let(:value) { nil }
+
         before { valid? }
 
         it { is_expected.to be false }
@@ -53,6 +55,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
       context 'but no reasons supplied' do
         let(:reasons) { nil }
+
         before { valid? }
 
         it { is_expected.to be false }
