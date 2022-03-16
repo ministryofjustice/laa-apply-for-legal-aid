@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AggregatedCashIncome, type: :model do
-  let(:aci) { AggregatedCashIncome.new(legal_aid_application_id: application.id) }
+  let(:aci) { described_class.new(legal_aid_application_id: application.id) }
   let(:application) { create :legal_aid_application, :with_proceedings }
   let(:categories) { %i[benefits maintenance_in] }
   let!(:benefits) { create :transaction_type, :benefits }
@@ -30,7 +30,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
     context 'no cash income transaction records' do
       it 'returns an empty model' do
-        aci = AggregatedCashIncome.find_by(legal_aid_application_id: application.id)
+        aci = described_class.find_by(legal_aid_application_id: application.id)
         expect(aci.check_box_benefits).to be_nil
         expect(aci.benefits1).to be_nil
         expect(aci.benefits2).to be_nil
@@ -93,7 +93,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }
-      let(:aci) { AggregatedCashIncome.find_by(legal_aid_application_id: application.id) }
+      let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
 
       around(:each) do |example|
         travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
@@ -454,7 +454,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
     let!(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
     let!(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
     let!(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
-    let(:aci) { AggregatedCashIncome.find_by(legal_aid_application_id: application.id) }
+    let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
 
     describe '#period' do
       context 'locale :en' do

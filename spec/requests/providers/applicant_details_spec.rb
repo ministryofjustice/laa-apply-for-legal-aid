@@ -33,7 +33,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         end
       end
 
-      context '#pre_dwp_check?' do
+      describe '#pre_dwp_check?' do
         it 'returns true' do
           expect(described_class.new.pre_dwp_check?).to be true
         end

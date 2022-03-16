@@ -17,7 +17,7 @@ module LegalFramework
     describe 'serialization' do
       it 'can serialize and deserialize' do
         serialized_string = smtl.to_yaml
-        new_smtl = SerializableMeritsTaskList.new_from_serialized(serialized_string)
+        new_smtl = described_class.new_from_serialized(serialized_string)
         expect(new_smtl.tasks[:application].map(&:name)).to eq %i[incident_details opponent_details application_children]
       end
     end

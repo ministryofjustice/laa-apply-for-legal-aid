@@ -17,7 +17,7 @@ module Dashboard
 
       let(:feedback) { create :feedback, :from_provider, satisfaction: 2, difficulty: 4 }
 
-      it { is_expected.to be_a Dashboard::SingleObject::Feedback }
+      it { is_expected.to be_a described_class }
 
       describe '.build_row' do
         subject(:build_row) { dashboard_feedback.build_row }

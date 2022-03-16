@@ -19,7 +19,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
       context 'rescheduling the next Delivery job' do
         let(:short_delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY - 20.seconds }
-        let(:early_job) { MockQueuedJob.new(ScheduledMailingsDeliveryJob, short_delay.from_now) }
+        let(:early_job) { MockQueuedJob.new(described_class, short_delay.from_now) }
 
         before do
           allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue)
@@ -29,7 +29,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
         context 'Delivery job already scheduled for a few seconds from now' do
           let(:job_queue) { [early_job] }
           it 'does not schedule another job' do
-            expect(ScheduledMailingsDeliveryJob).not_to receive(:set)
+            expect(described_class).not_to receive(:set)
             subject
           end
         end
@@ -39,7 +39,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           let(:job) { double 'Sidekiq Job', perform_later: nil }
           let(:delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY }
           it 'schedules another delivery job' do
-            expect(ScheduledMailingsDeliveryJob).to receive(:set).with(wait: delay).and_return(job)
+            expect(described_class).to receive(:set).with(wait: delay).and_return(job)
             subject
           end
         end

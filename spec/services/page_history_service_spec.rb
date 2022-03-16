@@ -8,7 +8,7 @@ RSpec.describe PageHistoryService do
   before(:each) { redis.flushdb }
   after(:each) { redis.quit }
 
-  subject { PageHistoryService.new(page_history_id: page_history_id) }
+  subject { described_class.new(page_history_id: page_history_id) }
 
   describe '#write' do
     before { subject.write(page_history) }

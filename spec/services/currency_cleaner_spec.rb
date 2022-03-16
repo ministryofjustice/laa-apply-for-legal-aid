@@ -17,7 +17,7 @@ RSpec.describe CurrencyCleaner do
         %w[-1,000 -1000]
       ]
       valid_strings.each do |valid_pair|
-        expect(CurrencyCleaner.new(valid_pair.first).call).to eq valid_pair.last
+        expect(described_class.new(valid_pair.first).call).to eq valid_pair.last
       end
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe CurrencyCleaner do
       ]
 
       invalid_strings.each do |invalid_string|
-        expect(CurrencyCleaner.new(invalid_string).call).to eq invalid_string
+        expect(described_class.new(invalid_string).call).to eq invalid_string
       end
     end
   end

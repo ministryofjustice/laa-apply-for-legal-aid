@@ -574,7 +574,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe '#create_app_ref' do
     it 'generates an application_ref when the application is created' do
-      legal_aid_application = LegalAidApplication.create!(provider: (create :provider))
+      legal_aid_application = described_class.create!(provider: (create :provider))
       expect(legal_aid_application.application_ref).to match(/L(-[ABCDEFHJKLMNPRTUVWXY0-9]{3}){2}/)
     end
   end
@@ -848,9 +848,9 @@ RSpec.describe LegalAidApplication, type: :model do
         'L/123/ABC',
         "L123#{non_alphanum}ABC"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application1), term
+        expect(described_class.search(term)).to include(application1), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application1)
+      expect(described_class.search('something')).not_to include(application1)
     end
 
     it "matches applicant's name" do
@@ -864,9 +864,9 @@ RSpec.describe LegalAidApplication, type: :model do
         'sMOg',
         "jac#{non_alphanum}ob"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application2), term
+        expect(described_class.search(term)).to include(application2), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application2)
+      expect(described_class.search('something')).not_to include(application2)
     end
 
     it 'matches ccms case reference number' do
@@ -877,9 +877,9 @@ RSpec.describe LegalAidApplication, type: :model do
         '09',
         "0#{non_alphanum}9"
       ].each do |term|
-        expect(LegalAidApplication.search(term)).to include(application3), term
+        expect(described_class.search(term)).to include(application3), term
       end
-      expect(LegalAidApplication.search('something')).not_to include(application3)
+      expect(described_class.search('something')).not_to include(application3)
     end
   end
 

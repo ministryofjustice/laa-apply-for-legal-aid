@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReferenceNumberCreator do
-  subject { ReferenceNumberCreator.new }
+  subject { described_class.new }
 
   describe '#call' do
     it 'matches the regex' do

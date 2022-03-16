@@ -132,7 +132,7 @@ RSpec.describe HMRC::ResultWorker do
           end
 
           it 'raises a tracked error and the expired block' do
-            HMRC::ResultWorker.within_sidekiq_retries_exhausted_block do
+            described_class.within_sidekiq_retries_exhausted_block do
               expect(Sentry).to receive(:capture_message).with(expected_error)
             end
             expect { perform }.to raise_error HMRC::InterfaceError

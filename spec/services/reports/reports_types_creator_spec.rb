@@ -19,7 +19,7 @@ RSpec.describe Reports::ReportsTypesCreator do
            provider: provider
   end
 
-  let(:report) { Reports::ReportsTypesCreator.call(params) }
+  let(:report) { described_class.call(params) }
 
   describe 'all application types' do
     context 'matching application' do
@@ -78,7 +78,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it 'has both records' do
-            expect(@table.count).to eql(2)
+            expect(@table.count).to be(2)
           end
         end
 
@@ -120,7 +120,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it 'has one passported record' do
-            expect(@table.count).to eql(1)
+            expect(@table.count).to be(1)
             expect(@table.first['application_ref']).to include(application_passported.application_ref)
           end
         end
@@ -142,7 +142,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it 'has one passported record' do
-            expect(@table.count).to eql(1)
+            expect(@table.count).to be(1)
             expect(@table.first['application_ref']).to include(application_non_passported.application_ref)
           end
         end
@@ -164,7 +164,7 @@ RSpec.describe Reports::ReportsTypesCreator do
           end
 
           it 'collects records successfully sent to ccms only' do
-            expect(@table.count).to eql(1)
+            expect(@table.count).to be(1)
             expect(@table.first['application_ref']).to include(application_non_passported.application_ref)
           end
 
