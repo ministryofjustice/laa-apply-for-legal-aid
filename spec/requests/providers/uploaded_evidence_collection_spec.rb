@@ -61,9 +61,9 @@ module Providers
           original_file: original_file
         }
       end
-      let(:draft_button) { { draft_button: 'Save as draft' } }
-      let(:upload_button) { { upload_button: 'Upload' } }
-      let(:delete_button) { { delete_button: 'Delete' } }
+      let(:draft_button) { { draft_button: '' } }
+      let(:upload_button) { { upload_button: '' } }
+      let(:delete_button) { { delete_button: '' } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
 
