@@ -5,6 +5,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
 
   describe '#policy_disregards_hash' do
     let(:result) { policy_disregards_list(policy_disregards) }
+
     context 'no disregards selected' do
       let(:policy_disregards) { create :policy_disregards, none_selected: true }
 

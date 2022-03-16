@@ -12,6 +12,7 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: 'gov_uk_bank_holiday_
 
     context 'on failure' do
       let(:uri) { URI.parse(described_class::API_URL) }
+
       before do
         expect(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
       end
@@ -33,6 +34,7 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: 'gov_uk_bank_holiday_
 
   describe '#dates' do
     let(:dates) { subject.dates(group) }
+
     it 'is an array' do
       expect(dates).to be_a(Array)
     end

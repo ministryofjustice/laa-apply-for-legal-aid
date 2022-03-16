@@ -242,6 +242,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
       context 'valid params' do
         let(:params) { valid_params }
+
         it 'creates the expected cash income records' do
           expect { subject }.to change { CashTransaction.count }.by(6)
         end

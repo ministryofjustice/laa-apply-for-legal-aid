@@ -41,6 +41,7 @@ RSpec.describe BankTransaction do
   context 'serialization of meta data' do
     context 'meta data is null' do
       let(:tx) { create :bank_transaction }
+
       it 'returns nil' do
         expect(tx.meta_data).to be_nil
       end

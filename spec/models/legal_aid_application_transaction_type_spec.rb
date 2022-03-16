@@ -5,6 +5,7 @@ RSpec.describe LegalAidApplicationTransactionType, type: :model do
     let(:credit_transaction_type) { create :transaction_type, :credit_with_standard_name }
     let(:debit_transaction_type) { create :transaction_type, :debit_with_standard_name }
     let(:legal_aid_application) { create :legal_aid_application }
+
     before do
       create(
         :legal_aid_application_transaction_type,

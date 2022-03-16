@@ -28,6 +28,7 @@ module HMRC
         let!(:response1) { create :hmrc_response, :use_case_one }
         let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
         let!(:response2) { create :hmrc_response, :use_case_one }
+
         it 'returns the record for the application we specify' do
           expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1
         end
@@ -38,6 +39,7 @@ module HMRC
         let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
         let!(:response1_last) { create :hmrc_response, :use_case_one, legal_aid_application_id: response1.legal_aid_application_id }
         let!(:response2) { create :hmrc_response, :use_case_one }
+
         it 'returns the last created use case one record for the specified application id' do
           expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1_last
         end
@@ -47,6 +49,7 @@ module HMRC
     describe 'employment_income?' do
       context 'when there is no hmrc data' do
         let(:response) { create :hmrc_response }
+
         it 'returns false' do
           expect(response.employment_income?).to eq false
         end
@@ -62,6 +65,7 @@ module HMRC
               { 'individuals/matching/individual' => { 'firstName' => 'tesdt', 'lastName' => 'test', 'nino' => 'XX123456X', 'dateOfBirth' => '1970-01-01' } },
               { 'income/paye/paye' => { 'income' => [] } }] }
         end
+
         before { response.response = response_data_with_no_employment_income }
         it 'returns false' do
           expect(response.employment_income?).to eq false
@@ -70,6 +74,7 @@ module HMRC
 
       context 'when the hmrc data contains employment income data' do
         let(:response) { create :hmrc_response, :use_case_one }
+
         it 'returns true' do
           expect(response.employment_income?).to eq true
         end

@@ -135,6 +135,7 @@ module CCMS
 
               context 'attribute CLI_RES_PER_INPUT_B_12WP3_35A - Person residing: entitled to claim benefits?' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_35A') }
+
                 it 'only produces a block for adult relatives' do
                   expect(dependants.size > dependants.adult_relative.size).to be true
                   expect(blocks.size).to eq dependants.adult_relative.size
@@ -154,6 +155,7 @@ module CCMS
 
                 context 'all dependants have over £8,000 of assets' do
                   let(:value) { 8_000.01 }
+
                   it 'codes all blocks to true' do
                     blocks.each do |block|
                       expect(block).to have_boolean_response true
@@ -163,6 +165,7 @@ module CCMS
 
                 context 'all dependants have less than £8,000 in assets' do
                   let(:value) { 7_999.99 }
+
                   it 'codes all blocks to true' do
                     blocks.each do |block|
                       expect(block).to have_boolean_response false
@@ -215,10 +218,12 @@ module CCMS
 
               context 'attribute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_28A') }
+
                 before { dependants.each { |dep| dep.update!(relationship: relationship) } }
 
                 context 'all dependants are children' do
                   let(:relationship) { 'child_relative' }
+
                   it 'returns false for all blocks' do
                     blocks.each { |block| expect(block).to have_boolean_response false }
                   end
@@ -226,6 +231,7 @@ module CCMS
 
                 context 'all dependants are adults' do
                   let(:relationship) { 'adult_relative' }
+
                   it 'returns false for all blocks' do
                     blocks.each { |block| expect(block).to have_boolean_response true }
                   end
@@ -234,6 +240,7 @@ module CCMS
 
               context 'attribute CLI_RES_PER_INPUT_D_12WP3_3A - Person residing: DOB' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_D_12WP3_3A') }
+
                 before do
                   adult_dependant.update!(date_of_birth: Date.new(2000, 5, 6))
                   older_child.update!(date_of_birth: Date.new(2018, 1, 8))

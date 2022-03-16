@@ -54,6 +54,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
 
         context 'when no legal_aid_application is present' do
           let(:application_id) { nil }
+
           it 'has an empty status' do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq ''
           end

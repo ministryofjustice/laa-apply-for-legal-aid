@@ -10,6 +10,7 @@ module ProceedingMeritsTask
 
       context 'involved child belongs to this application' do
         let(:involved_child) { create :involved_child, legal_aid_application: laa }
+
         it 'it is valid' do
           expect(linked_child).to be_valid
         end
@@ -17,6 +18,7 @@ module ProceedingMeritsTask
 
       context 'involved child does not belong to this application' do
         let(:involved_child) { create :involved_child, legal_aid_application: other_laa }
+
         it 'is not valid' do
           expect(linked_child).not_to be_valid
           expect(linked_child.errors[:involved_child]).to eq ['belongs to another application']

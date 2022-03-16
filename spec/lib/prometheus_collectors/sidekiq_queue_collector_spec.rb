@@ -5,6 +5,7 @@ RSpec.describe PrometheusCollectors::SidekiqQueueCollector do
   let(:queue) { 'mailers' }
   let(:gauge) { spy(PrometheusExporter::Metric::Gauge) }
   let(:queue_size) { rand(1..100) }
+
   subject { described_class.new }
 
   before do

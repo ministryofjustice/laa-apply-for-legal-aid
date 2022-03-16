@@ -12,6 +12,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'likely' do
       let(:prospect) { 'likely' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Likely (>50%)'
       end
@@ -19,6 +20,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'likely' do
       let(:prospect) { 'likely' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Likely (>50%)'
       end
@@ -26,6 +28,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'marginal' do
       let(:prospect) { 'marginal' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Marginal (45-49%)'
       end
@@ -33,6 +36,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'poor' do
       let(:prospect) { 'poor' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Poor (<45%)'
       end
@@ -40,6 +44,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'borderline' do
       let(:prospect) { 'borderline' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Borderline'
       end
@@ -47,6 +52,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
 
     context 'not_known' do
       let(:prospect) { 'not_known' }
+
       it 'generates the correct pretty text' do
         expect(chances_of_success.pretty_success_prospect).to eq 'Uncertain'
       end

@@ -17,6 +17,7 @@ module Reports
 
       let(:remarks) { CFE::Remarks.new(populated_remarks_hash) }
       let(:remarked_transaction) { double CFE::RemarkedTransaction, reasons: %i[amount_variation unknown_frequency] }
+
       before do
         allow(legal_aid_application.cfe_result).to receive(:remarks).and_return(remarks)
         allow(remarks.review_transactions.transactions).to receive(:[]).and_call_original

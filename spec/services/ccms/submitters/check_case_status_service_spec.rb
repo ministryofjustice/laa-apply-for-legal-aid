@@ -6,6 +6,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_status_response) { ccms_data_from_file 'case_add_status_response.xml' }
   let(:case_add_status_request) { ccms_data_from_file 'case_add_status_request.xml' }
+
   subject { described_class.new(submission) }
 
   before do
@@ -178,6 +179,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
     let(:service_double) { described_class.new(submission) }
     let(:requestor1) { service_double.__send__(:case_add_status_requestor) }
     let(:requestor2) { service_double.__send__(:case_add_status_requestor) }
+
     it 'only instantiates one copy of the CaseAddStatusRequestor' do
       expect(requestor1).to be_instance_of(CCMS::Requestors::CaseAddStatusRequestor)
       expect(requestor1).to eq requestor2

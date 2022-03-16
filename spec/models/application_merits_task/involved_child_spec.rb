@@ -17,6 +17,7 @@ module ApplicationMeritsTask
 
       context 'first name and last name' do
         let(:full_name) { 'John Smith' }
+
         it 'separates out first and last name' do
           expect(subject).to eq %w[John Smith]
         end
@@ -24,6 +25,7 @@ module ApplicationMeritsTask
 
       context 'with  multiple embedded spaces' do
         let(:full_name) { 'Michael      Winner' }
+
         it 'separates out first and last name' do
           expect(subject).to eq %w[Michael Winner]
         end
@@ -31,6 +33,7 @@ module ApplicationMeritsTask
 
       context 'first name, middle name, last name' do
         let(:full_name) { 'Philip   Stephen    Richards' }
+
         it 'separates out first and last name' do
           expect(subject).to eq ['Philip Stephen', 'Richards']
         end
@@ -38,6 +41,7 @@ module ApplicationMeritsTask
 
       context 'just last name' do
         let(:full_name) { 'Prince' }
+
         it 'returns unspecified as first name' do
           expect(subject).to eq %w[unspecified Prince]
         end
@@ -45,6 +49,7 @@ module ApplicationMeritsTask
 
       context 'double-barrelled names' do
         let(:full_name) { 'Jacob Rees-Mogg' }
+
         it 'is not phased by the hyphen' do
           expect(subject).to eq %w[Jacob Rees-Mogg]
         end
@@ -52,6 +57,7 @@ module ApplicationMeritsTask
 
       context 'irish names' do
         let(:full_name) { "Daira O'Brien" }
+
         it 'is not phased by the apostrophe' do
           expect(subject).to eq ['Daira', "O'Brien"]
         end

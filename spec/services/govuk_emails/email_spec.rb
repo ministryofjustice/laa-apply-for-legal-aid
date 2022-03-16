@@ -15,6 +15,7 @@ RSpec.describe GovukEmails::Email do
 
   context 'status is not delivered' do
     let(:govuk_client) { double(Notifications::Client) }
+
     before do
       allow(govuk_client).to receive(:get_notification).with(message_id).and_return(StatusStruct.new(status))
       allow(Notifications::Client).to receive(:new).with(Rails.configuration.x.govuk_notify_api_key).and_return(govuk_client)

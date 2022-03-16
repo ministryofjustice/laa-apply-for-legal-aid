@@ -26,6 +26,7 @@ module Providers
 
         context 'missing name' do
           let(:full_name) { '' }
+
           it 'returns false' do
             expect(subject).not_to be_valid
             expect(subject.errors[:full_name]).to eq ["Enter the child's full name"]
@@ -41,6 +42,7 @@ module Providers
               date_of_birth_1i: '',
             }
           end
+
           it 'returns false' do
             expect(subject).not_to be_valid
             expect(subject.errors[:date_of_birth]).to eq ['Enter the date of birth']
@@ -56,6 +58,7 @@ module Providers
               date_of_birth_1i: '2021',
             }
           end
+
           it 'returns false' do
             expect(subject).not_to be_valid
             expect(subject.errors[:date_of_birth]).to eq ['Enter a valid date of birth']

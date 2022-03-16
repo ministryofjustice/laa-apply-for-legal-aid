@@ -24,6 +24,7 @@ RSpec.describe AlertManager do
 
         context 'ignorable exception' do
           let(:exception) { Geckoboard::UnexpectedStatusError.new('You have exceeded the API rate limit blah blah blah') }
+
           it 'ignores the error' do
             expect(Sentry).not_to receive(:capture_exception)
             described_class.capture_exception(exception)

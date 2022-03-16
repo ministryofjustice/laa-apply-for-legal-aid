@@ -10,12 +10,14 @@ module CFE
     describe '.call', vcr: { record: :new_episodes } do
       let(:staging_host) { 'https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk' }
       let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
+
       before do
         allow(Rails.configuration.x).to receive(:check_financial_eligibility_host).and_return(staging_host)
       end
 
       context 'when the application is passported' do
         let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+
         it 'completes process' do
           described_class.call(application.id)
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
@@ -24,6 +26,7 @@ module CFE
 
       context 'when the application is non-passported' do
         let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+
         it 'completes process' do
           described_class.call(application.id)
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
@@ -77,6 +80,7 @@ module CFE
 
           context 'on submission error' do
             let(:message) { Faker::Lorem.sentence }
+
             before do
               allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
             end

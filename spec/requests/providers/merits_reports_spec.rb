@@ -45,6 +45,7 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
 
     context 'when not authenticated' do
       let(:login_provider) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
   end

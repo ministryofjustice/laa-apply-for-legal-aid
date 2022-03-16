@@ -103,6 +103,7 @@ RSpec.describe Applicant, type: :model do
 
   describe '#age' do
     let(:legal_aid_application) { build :legal_aid_application, :with_transaction_period, :with_applicant }
+
     subject { legal_aid_application.applicant.age }
 
     it 'returns the age of the applicant' do
@@ -206,6 +207,7 @@ RSpec.describe Applicant, type: :model do
   describe '#mortgage_per_month' do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything }
     let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+
     subject { legal_aid_application.applicant.mortgage_per_month }
 
     context 'when they pay a mortgage' do

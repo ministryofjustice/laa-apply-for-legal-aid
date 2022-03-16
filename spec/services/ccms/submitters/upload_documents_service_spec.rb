@@ -45,6 +45,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   end
   let(:document_upload_response) { ccms_data_from_file 'document_upload_response.xml' }
   let(:transaction_request_id_in_example_response) { '20190301030405123456' }
+
   subject { described_class.new(submission) }
 
   before do

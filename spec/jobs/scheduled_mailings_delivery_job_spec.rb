@@ -28,6 +28,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
         context 'Delivery job already scheduled for a few seconds from now' do
           let(:job_queue) { [early_job] }
+
           it 'does not schedule another job' do
             expect(described_class).not_to receive(:set)
             subject
@@ -38,6 +39,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           let(:job_queue) { [] }
           let(:job) { double 'Sidekiq Job', perform_later: nil }
           let(:delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY }
+
           it 'schedules another delivery job' do
             expect(described_class).to receive(:set).with(wait: delay).and_return(job)
             subject
@@ -56,6 +58,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
         context 'monitoring job already scheduled for a few seconds from now' do
           let(:job_queue) { [early_job] }
+
           it 'does not schedule another job' do
             expect(EmailMonitorJob).not_to receive(:perform_later)
             subject
@@ -64,6 +67,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
         context 'nothing in the queue' do
           let(:job_queue) { [] }
+
           it 'starts a montoring job' do
             expect(EmailMonitorJob).to receive(:perform_later)
             subject

@@ -97,6 +97,7 @@ module Providers
 
           context 'invalid params' do
             let(:new_full_name) { '' }
+
             it 'does not update the child record' do
               expect { subject }.not_to change { child.full_name }
             end

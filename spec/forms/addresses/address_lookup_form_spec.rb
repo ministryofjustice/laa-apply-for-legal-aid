@@ -4,6 +4,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
   let(:postcode) { 'SW1H9AJ' }
   let(:address) { build :address }
   let(:params) { { postcode: postcode, model: address } }
+
   subject(:form) { described_class.new(params) }
 
   describe 'validations' do
@@ -39,6 +40,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
 
     context 'when postcode is invalid' do
       let(:postcode) { 'invalid' }
+
       it 'has an error on postcode' do
         expect(form).to be_invalid
         expect(form.errors[:postcode]).to match_array(['Enter a postcode in the right format'])

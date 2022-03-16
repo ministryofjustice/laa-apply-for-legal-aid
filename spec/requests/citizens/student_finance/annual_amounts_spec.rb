@@ -49,6 +49,7 @@ RSpec.describe 'annual_amounts', type: :request do
 
         context 'update amount' do
           let(:amount) { 5000 }
+
           it 'updates the same record without creating a new one' do
             expect { patch citizens_student_finances_annual_amount_path, params: params }.to change { IrregularIncome.count }.by(0)
             irregular_income = legal_aid_application.irregular_incomes.first

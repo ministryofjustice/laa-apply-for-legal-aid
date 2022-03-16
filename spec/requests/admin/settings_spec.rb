@@ -90,6 +90,7 @@ RSpec.describe Admin::SettingsController, type: :request do
             },
           }
         end
+
         it 'does not send an active_support notification' do
           expect(CCMS::RestartSubmissions).not_to receive(:call)
           subject

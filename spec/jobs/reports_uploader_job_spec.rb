@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReportsUploaderJob, type: :job do
   let(:report_uploader) { described_class.new }
+
   subject { report_uploader.perform }
 
   describe '#expiration' do
@@ -18,6 +19,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
 
     context 'AdminReport record does not exist' do
       let(:admin_report) { AdminReport.first }
+
       it 'creates an admin report' do
         expect { subject }.to change { AdminReport.count }.by(1)
       end

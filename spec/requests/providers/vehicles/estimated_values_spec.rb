@@ -19,6 +19,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
@@ -96,6 +97,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
 
     context 'with currency sign' do
       let(:estimated_value) { '£25,300' }
+
       it 'updates the estimated value' do
         subject
         expect(vehicle.reload.estimated_value).to eq 25_300.0
@@ -139,6 +141,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end

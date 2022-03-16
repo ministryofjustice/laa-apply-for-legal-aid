@@ -9,6 +9,7 @@ module CCMS
 
           context 'normal success response' do
             let(:response_xml) { ccms_data_from_file 'case_add_status_response.xml' }
+
             it 'extracts the status' do
               parser = described_class.new(expected_tx_id, response_xml)
               expect(parser.success?).to eq true

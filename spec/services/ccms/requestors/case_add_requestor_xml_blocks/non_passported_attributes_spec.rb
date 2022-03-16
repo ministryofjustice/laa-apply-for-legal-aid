@@ -342,6 +342,7 @@ module CCMS
           end
           context 'applicant criminal legal aid payments' do
             let(:criminal_legal_aid_transaction) { create :transaction_type, :debit, name: 'legal_aid' }
+
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: criminal_legal_aid_transaction)
             end
@@ -418,10 +419,12 @@ module CCMS
           let(:sixteen_today) { 16.years.ago.to_date }
           let(:sixteen_yesterday) { sixteen_today - 1.day }
           let(:sixteen_tomorrow) { sixteen_today + 1.day }
+
           before { applicant.update! date_of_birth: dob }
 
           context 'applicant is 16 today' do
             let(:dob) { sixteen_today }
+
             it 'generates the block as an adult' do
               block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
               expect(block).to have_boolean_response false
@@ -431,6 +434,7 @@ module CCMS
 
           context 'applicant is 16 tomorrow' do
             let(:dob) { sixteen_tomorrow }
+
             it 'generates the block as a child' do
               block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
               expect(block).to have_boolean_response true
@@ -440,6 +444,7 @@ module CCMS
 
           context 'applicant was 16 yesterday' do
             let(:dob) { sixteen_yesterday }
+
             it 'generates the block as an adult' do
               block = XmlExtractor.call(xml, :global_merits, 'CHILD_CLIENT')
               expect(block).to have_boolean_response false
@@ -542,6 +547,7 @@ module CCMS
               PROCEEDING_DESCRIPTION
             ]
           end
+
           it 'generates the block with the correct description' do
             attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :proceeding_merits, attr_name)

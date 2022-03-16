@@ -8,11 +8,13 @@ RSpec.describe 'AuthController', type: :request do
       'strategy' => 'true_layer',
     }
   end
+
   describe 'GET failure' do
     subject { get '/auth/failure', params: params }
 
     context 'origin from citizens/banks' do
       let(:origin_path) { citizens_banks_path }
+
       it 'redirects to citizens_consent_path' do
         subject
         expect(response).to redirect_to citizens_consent_path(auth_failure: true)
@@ -21,6 +23,7 @@ RSpec.describe 'AuthController', type: :request do
 
     context 'origin from elsewhere' do
       let(:origin_path) { root_path }
+
       it 'redirects to access denied' do
         subject
         expect(response).to redirect_to error_path(:access_denied)

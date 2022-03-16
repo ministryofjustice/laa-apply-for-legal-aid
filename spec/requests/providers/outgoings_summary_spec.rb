@@ -27,6 +27,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
@@ -64,6 +65,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
           transaction_types: [transaction_type, other_transaction_type]
         )
       end
+
       it 'does not display an Add additional outgoing types section' do
         get providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application)
         expect(response.body).not_to include(I18n.t('citizens.outgoings_summary.add_other_outgoings.add_other_outgoings'))
@@ -100,6 +102,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
     let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [transaction_type] }
 
     let(:submit_button) { { continue_button: 'Continue' } }
+
     subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
     before { subject }
 
@@ -109,6 +112,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 
@@ -129,6 +133,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [transaction_type] }
 
       let(:submit_button) { { continue_button: 'Continue' } }
+
       subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
       before { subject }
 

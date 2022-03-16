@@ -18,6 +18,7 @@ module Reports
             deleted
           ]
         end
+
         it 'returns column headings' do
           expect(described_class.header_row).to eq expected_header_row
         end

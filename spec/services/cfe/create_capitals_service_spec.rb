@@ -23,6 +23,7 @@ module CFE
 
     describe '#request payload' do
       let!(:savings_amount) { my_savings_amount }
+
       it 'creates the expected payload from the values in the applicant' do
         response_hash = JSON.parse(service.request_body, symbolize_names: true)
         response_hash.each_key do |key|
@@ -40,6 +41,7 @@ module CFE
 
       context 'successful post' do
         let!(:savings_amount) { my_savings_amount }
+
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
         it 'updates the submission record from applicant_created to capitals_created' do

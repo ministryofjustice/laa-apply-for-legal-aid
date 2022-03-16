@@ -36,6 +36,7 @@ RSpec.describe Reports::MeritsReportCreator do
     context 'when an attachment record exists' do
       let!(:attachment) { create :attachment, :merits_report, legal_aid_application: legal_aid_application }
       let(:expected_log) { "ReportsCreator: Merits report already exists for #{legal_aid_application.id} and is downloadable" }
+
       before { allow(Rails.logger).to receive(:info) }
 
       it 'does not attach a report if one already exists' do
@@ -45,6 +46,7 @@ RSpec.describe Reports::MeritsReportCreator do
 
       context 'when the attachment has no document' do
         let(:expected_log) { "ReportsCreator: Merits report already exists for #{legal_aid_application.id}" }
+
         before do
           allow(legal_aid_application).to receive(:merits_report).and_return(attachment)
           allow(attachment).to receive(:document).and_return(nil)

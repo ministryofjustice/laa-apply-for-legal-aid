@@ -94,6 +94,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create :provider, :created_by_devise, :without_ccms_apply_role, username: username }
+
           before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
           it 'does not call the ProviderDetailsCreator' do
@@ -137,6 +138,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
           let(:status) { 502 }
           let(:api_response) { blank_response }
           let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: username }
+
           it 'updates the invalid login details on the provider record' do
             subject
             expect(provider.invalid_login_details).to eq 'provider_details_api_error'
@@ -193,6 +195,7 @@ RSpec.describe 'SamlSessionsController', type: :request do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
           let(:provider) { create :provider, :with_ccms_apply_role, username: username }
+
           it 'does not schedule a job to update the provider details' do
             expect(HostEnv).to receive(:staging_or_production?).and_return(false)
             expect(provider).to receive(:update_details).and_call_original

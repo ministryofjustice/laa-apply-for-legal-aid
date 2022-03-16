@@ -33,6 +33,7 @@ RSpec.describe 'provider own home requests', type: :request do
         legal_aid_application: { own_home: own_home },
       }
     end
+
     context 'when the provider is authenticated' do
       before do
         login_as provider

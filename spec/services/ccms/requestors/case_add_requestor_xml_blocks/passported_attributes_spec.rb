@@ -95,6 +95,7 @@ module CCMS
 
         context 'PASSPORTED_NINO' do
           let(:applicant) { legal_aid_application.applicant }
+
           it 'generates PASSPORTED NINO in global merits' do
             block = XmlExtractor.call(xml, :global_means, 'PASSPORTED_NINO')
             expect(block).to have_text_response applicant.national_insurance_number
@@ -113,6 +114,7 @@ module CCMS
         context 'CLIENT_ELIGIBILITY and PUI_CLIENT_ELIGIBILITY' do
           context 'eligible' do
             let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+
             it 'returns In Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'In Scope'
@@ -123,6 +125,7 @@ module CCMS
 
           context 'not_eligible' do
             let!(:cfe_result) { create :cfe_v3_result, :not_eligible, submission: cfe_submission }
+
             it 'returns Out Of Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'Out Of Scope'
@@ -133,6 +136,7 @@ module CCMS
 
           context 'contribution_required' do
             let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+
             it 'returns In Scope' do
               block = XmlExtractor.call(xml, :global_means, 'CLIENT_ELIGIBILITY')
               expect(block).to have_text_response 'In Scope'
@@ -163,8 +167,10 @@ module CCMS
 
         context 'CAP_CONT and similar attributes' do
           let(:attributes) { %w[PUI_CLIENT_CAP_CONT CAP_CONT OUT_CAP_CONT] }
+
           context 'eligble' do
             let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+
             it 'returns zero' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
@@ -175,6 +181,7 @@ module CCMS
 
           context 'not eligble' do
             let!(:cfe_result) { create :cfe_v3_result, :not_eligible, submission: cfe_submission }
+
             it 'returns zero' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
@@ -187,6 +194,7 @@ module CCMS
 
           context 'contribution_required' do
             let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+
             it 'returns the capital contribution' do
               attributes.each do |attribute|
                 block = XmlExtractor.call(xml, :global_means, attribute)
@@ -443,6 +451,7 @@ module CCMS
 
           context 'not_known success prospect' do
             let(:success_prospect) { 'not_known' }
+
             it 'returns the ccms equivalent prospect of success for not_known' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
               expect(block).to have_text_response 'Uncertain'
@@ -451,6 +460,7 @@ module CCMS
 
           context 'poor success prospect' do
             let(:success_prospect) { 'poor' }
+
             it 'returns the ccms equivalent prospect of success for poor' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
               expect(block).to have_text_response 'Poor'
@@ -459,6 +469,7 @@ module CCMS
 
           context 'borderline success prospect' do
             let(:success_prospect) { 'borderline' }
+
             it 'returns the ccms equivalent prospect of success for borderline' do
               block = XmlExtractor.call(xml, :proceeding_merits, 'FAMILY_PROSPECTS_OF_SUCCESS')
               expect(block).to have_text_response 'Borderline'
@@ -823,6 +834,7 @@ module CCMS
 
           context 'benefit check result is no' do
             let(:benefit_check_result) { create :benefit_check_result, :negative }
+
             before { legal_aid_application.benefit_check_result = benefit_check_result }
             it 'uses the DWP benefit check result' do
               block = XmlExtractor.call(xml, :global_means, 'LAR_INFER_B_1WP1_36A')
@@ -1012,6 +1024,7 @@ module CCMS
           let(:plc_shares_val) { 0 }
           let(:peps_val) { 0 }
           let(:policy_val) { 0 }
+
           before do
             legal_aid_application.savings_amount.update(national_savings: ns_val,
                                                         plc_shares: plc_shares_val,
@@ -1027,6 +1040,7 @@ module CCMS
 
           context 'national savings only' do
             let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+
             it 'inserts true into the attribute block' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
               expect(block).to have_boolean_response true
@@ -1035,6 +1049,7 @@ module CCMS
 
           context 'life_assurance_policy_only' do
             let(:ns_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+
             it 'inserts true into the attribute block' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
               expect(block).to have_boolean_response true
@@ -1046,6 +1061,7 @@ module CCMS
             let(:plc_shares_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
             let(:peps_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
             let(:policy_val) { Faker::Number.decimal(l_digits: 4, r_digits: 2) }
+
             it 'inserts true into the attribute block' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_9WP2_1A')
               expect(block).to have_boolean_response true
@@ -1134,6 +1150,7 @@ module CCMS
 
         context 'GB_INPUT_D_18WP2_1A - application submission date' do
           let(:dummy_date) { Faker::Date.between(from: 20.days.ago, to: Time.zone.today) }
+
           it 'inserts the submission date into the attribute block' do
             allow(legal_aid_application).to receive(:calculation_date).and_return(dummy_date)
             block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_D_18WP2_1A')

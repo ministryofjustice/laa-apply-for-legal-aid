@@ -21,6 +21,7 @@ module Providers
 
         context 'when the provider is not authenticated' do
           let(:login) { nil }
+
           before { subject }
           it_behaves_like 'a provider not authenticated'
         end
@@ -93,6 +94,7 @@ module Providers
           let(:third_child) { legal_aid_application.involved_children.third }
           let(:initial_array) { [second_child.id, third_child.id] }
           let(:linked_children_params) { [first_child.id, '', ''] }
+
           before do
             subject
           end

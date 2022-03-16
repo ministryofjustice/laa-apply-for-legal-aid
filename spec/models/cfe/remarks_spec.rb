@@ -7,6 +7,7 @@ module CFE
     describe '#caseworker_review_required?' do
       context 'no remarks' do
         let(:remarks_hash) { empty_hash }
+
         it 'returns false' do
           expect(remarks.caseworker_review_required?).to be false
         end
@@ -14,6 +15,7 @@ module CFE
 
       context 'remarks exist' do
         let(:remarks_hash) { populated_hash }
+
         it 'returns false' do
           expect(remarks.caseworker_review_required?).to be true
         end
@@ -23,6 +25,7 @@ module CFE
     describe '#review_reasons' do
       context 'no remarks' do
         let(:remarks_hash) { empty_hash }
+
         it 'returns empty array' do
           expect(remarks.review_reasons).to eq []
         end
@@ -30,6 +33,7 @@ module CFE
 
       context 'with remarks' do
         let(:remarks_hash) { populated_hash }
+
         it 'returns an array of reasons' do
           expect(remarks.review_reasons).to eq %i[amount_variation policy_disregards unknown_frequency]
         end
@@ -39,6 +43,7 @@ module CFE
     describe '#review_categories_by_reason' do
       context 'no remarks' do
         let(:remarks_hash) { empty_hash }
+
         it 'returns empty hash' do
           expect(remarks.review_categories_by_reason).to eq({})
         end
@@ -46,6 +51,7 @@ module CFE
 
       context 'with remarks' do
         let(:remarks_hash) { populated_hash }
+
         it 'returns an hash of categories by reason' do
           expected_results = {
             amount_variation: [:state_benefit_payment],
@@ -59,6 +65,7 @@ module CFE
       context 'with remarks that do not require a category' do
         before { populated_hash[:current_account_balance] = { residual_balance: [] } }
         let(:remarks_hash) { populated_hash }
+
         it 'does not include the remarks in the hash of categories by reason' do
           expected_results = {
             amount_variation: [:state_benefit_payment],

@@ -36,6 +36,7 @@ RSpec.describe SamlIdpController, type: :request do
     context 'user not in config/initializers/mock_saml.rb' do
       let(:email) { 'nobody@example.com' }
       let(:username) { 'test1' }
+
       it 'renders the saml auth form with the encoded request' do
         post saml_auth_path, params: login_params
         expect(response).to be_successful
@@ -47,6 +48,7 @@ RSpec.describe SamlIdpController, type: :request do
       let(:email) { 'test1@example.com' }
       let(:username) { 'test1' }
       let(:password) { 'forgotten' }
+
       it 'renders the saml auth form with the encoded request' do
         post saml_auth_path, params: login_params
         expect(response).to be_successful

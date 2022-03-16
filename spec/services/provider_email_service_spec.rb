@@ -7,6 +7,7 @@ RSpec.describe ProviderEmailService do
   let(:provider) { create :provider, email: simulated_email_address }
   let(:application) { create(:application, applicant: applicant, provider: provider) }
   let(:application_url) { "http://www.example.com/providers/applications/#{application.id}/client_completed_means?locale=en" }
+
   subject { described_class.new(application) }
 
   describe '#send_email' do
@@ -18,6 +19,7 @@ RSpec.describe ProviderEmailService do
         provider.email
       ]
     end
+
     it 'schedules a mail for immediate delivery' do
       expect { subject.send_email }.to change { ScheduledMailing.count }.by(1)
 
