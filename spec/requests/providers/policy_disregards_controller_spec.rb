@@ -40,8 +40,8 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           national_emergencies_trust: false,
           we_love_manchester_emergency_fund: false,
           london_emergencies_trust: false,
-          none_selected: ''
-        }
+          none_selected: '',
+        },
       }
     end
     context 'when the provider is authenticated' do
@@ -102,8 +102,8 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
               national_emergencies_trust: '',
               we_love_manchester_emergency_fund: '',
               london_emergencies_trust: '',
-              none_selected: none_selected
-            }
+              none_selected: none_selected,
+            },
           }
         end
         let(:submit_button) { { continue_button: 'Continue' } }

@@ -42,7 +42,7 @@ class XmlExtractor
     vehicle_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CARS_AND_MOTOR_VEHICLES"]//Attributes/Attribute),
     vehicle_sequence_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CARS_AND_MOTOR_VEHICLES"]),
     wage_slip_entity: %(/Envelope/Body/CaseAddRQ/Case/CaseDetails/ApplicationDetails/MeansAssesments/AssesmentResults/AssesmentDetails/AssessmentScreens/Entity[EntityName = "CLI_NON_HM_WAGE_SLIP"]),
-    will: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "WILL"]//Instances/Attributes/Attribute)
+    will: %(//MeansAssesments//AssesmentDetails//Entity[EntityName = "WILL"]//Instances/Attributes/Attribute),
   }.freeze
   def self.call(xml, section, attribute_name = nil)
     new(xml, section, attribute_name).extract

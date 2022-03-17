@@ -18,7 +18,7 @@ RSpec.describe SlackAlerter do
       {
         environment: 'uat',
         details: 'dummy message',
-        to: dummy_email_address
+        to: dummy_email_address,
       }
     end
 
@@ -50,7 +50,7 @@ RSpec.describe SlackAlerter do
       {
         environment: 'uat',
         details: formatted_message,
-        to: dummy_email_address
+        to: dummy_email_address,
       }
     end
 

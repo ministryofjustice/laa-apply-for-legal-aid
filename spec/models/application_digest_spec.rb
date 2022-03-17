@@ -127,7 +127,7 @@ RSpec.describe ApplicationDigest do
           dates = {
             'DA001' => [Date.parse('2021-03-29'), Date.parse('2021-04-08')],
             'SE013' => [nil, nil],
-            'SE014' => [Date.parse('2021-04-06'), Date.parse('2021-04-07')]
+            'SE014' => [Date.parse('2021-04-06'), Date.parse('2021-04-07')],
           }
           laa.proceedings.each do |proceeding|
             used_date, reported_date = dates[proceeding.ccms_code]

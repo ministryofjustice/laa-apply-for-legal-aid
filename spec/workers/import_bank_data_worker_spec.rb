@@ -22,7 +22,7 @@ RSpec.describe ImportBankDataWorker, type: :worker do
       {
         error_description: 'Feature not supported by the provider',
         error: :endpoint_not_supported,
-        error_details: { foo: :bar }
+        error_details: { foo: :bar },
       }
     end
     let(:worker_status) { Sidekiq::Status.get_all(worker_id) }

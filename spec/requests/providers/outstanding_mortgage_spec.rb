@@ -6,7 +6,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   let(:params) do
     {
       legal_aid_application: { outstanding_mortgage_amount: outstanding_mortgage_amount },
-      legal_aid_application_id: legal_aid_application.id
+      legal_aid_application_id: legal_aid_application.id,
     }
   end
 
@@ -77,7 +77,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
       context 'Submitted with the Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 
@@ -100,7 +100,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
           let(:params) do
             {
               legal_aid_application: { outstanding_mortgage_amount: '' },
-              legal_aid_application_id: legal_aid_application.id
+              legal_aid_application_id: legal_aid_application.id,
             }
           end
 
@@ -113,7 +113,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
           let(:params) do
             {
               legal_aid_application: { outstanding_mortgage_amount: 'invalid' },
-              legal_aid_application_id: legal_aid_application.id
+              legal_aid_application_id: legal_aid_application.id,
             }
           end
 

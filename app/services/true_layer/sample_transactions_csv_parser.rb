@@ -24,7 +24,7 @@ module TrueLayer
         amount: amount.to_f,
         timestamp: Time.zone.parse(row[:date]).to_s,
         transaction_type: transaction_type.to_s,
-        running_balance: running_balance(row)
+        running_balance: running_balance(row),
       }
     end
 

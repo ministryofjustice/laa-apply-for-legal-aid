@@ -7,7 +7,7 @@ module Dashboard
         {
           fields: [
             Geckoboard::NumberField.new(:number, name: 'Firms')
-          ]
+          ],
         }
       end
 
@@ -15,7 +15,7 @@ module Dashboard
         provider_count = Provider.all.group(:firm_id).count.size
         [
           {
-            'number' => provider_count
+            'number' => provider_count,
           }
         ]
       end

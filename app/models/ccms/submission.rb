@@ -23,7 +23,7 @@ module CCMS
       applicant_ref_obtained: CCMS::Submitters::ObtainDocumentIdService,
       document_ids_obtained: CCMS::Submitters::AddCaseService,
       case_submitted: CCMS::Submitters::CheckCaseStatusService,
-      case_created: CCMS::Submitters::UploadDocumentsService
+      case_created: CCMS::Submitters::UploadDocumentsService,
     }.freeze
 
     def process!(options = {})

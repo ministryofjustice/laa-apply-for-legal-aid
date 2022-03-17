@@ -104,8 +104,8 @@ RSpec.describe 'citizen accounts request', type: :request do
           'TrueLayerError' => {
             'error_description' => 'The provider service is currently unavailable or experiencing technical difficulties. Please try again later.',
             'error' => 'provider_error',
-            'error_details' => {}
-          }
+            'error_details' => {},
+          },
         }
       end
     end

@@ -13,15 +13,15 @@ module CFE
     def request_hash
       {
         client_reference_id: legal_aid_application.application_ref,
-        submission_date: legal_aid_application.calculation_date.strftime('%Y-%m-%d')
+        submission_date: legal_aid_application.calculation_date.strftime('%Y-%m-%d'),
       }.merge(options)
     end
 
     def options
       {
         proceeding_types: {
-          ccms_codes: legal_aid_application.proceedings.map(&:ccms_code)
-        }
+          ccms_codes: legal_aid_application.proceedings.map(&:ccms_code),
+        },
       }
     end
 

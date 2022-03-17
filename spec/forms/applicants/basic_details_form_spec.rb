@@ -146,7 +146,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: attributes[:date_of_birth].year.to_s,
           date_of_birth_2i: attributes[:date_of_birth].month.to_s,
           date_of_birth_3i: attributes[:date_of_birth].day.to_s,
-          model: applicant
+          model: applicant,
         }
       end
 
@@ -169,7 +169,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           date_of_birth_1i: '10',
           date_of_birth_2i: '21',
           date_of_birth_3i: '44',
-          model: applicant
+          model: applicant,
         }
       end
 
@@ -203,7 +203,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: '',
           last_name: '',
           national_insurance_number: '',
-          date_of_birth: ''
+          date_of_birth: '',
         }
       end
 
@@ -224,7 +224,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: first_name,
           last_name: '',
           national_insurance_number: '',
-          date_of_birth: ''
+          date_of_birth: '',
         }
       end
 
@@ -247,7 +247,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           first_name: first_name,
           last_name: '',
           national_insurance_number: invalid_nino,
-          date_of_birth: ''
+          date_of_birth: '',
         }
       end
 
@@ -277,7 +277,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
           national_insurance_number: attributes[:national_insurance_number],
           date_of_birth_2i: '10',
           date_of_birth_3i: '4',
-          model: applicant
+          model: applicant,
         }
       end
 

@@ -14,8 +14,8 @@ RSpec.describe HMRC::Interface::ResultService do
             firstName: 'fname',
             lastName: 'lname',
             nino: 'XY234567A',
-            dateOfBirth: '1992-07-22'
-          }
+            dateOfBirth: '1992-07-22',
+          },
         },
         { 'income/paye/paye': { income: [] } },
         { 'income/sa/selfAssessment': [] },
@@ -34,7 +34,7 @@ RSpec.describe HMRC::Interface::ResultService do
         { 'employments/paye/employments': [] },
         { 'benefits_and_credits/working_tax_credit/applications': [] },
         { 'benefits_and_credits/child_tax_credit/applications': [] }
-      ]
+      ],
     }
   end
   let(:expected_status) { 200 }
@@ -74,9 +74,9 @@ RSpec.describe HMRC::Interface::ResultService do
           status: 'in_progress',
           _links: [
             {
-              href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
+              href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}",
             }
-          ]
+          ],
         }
       end
 
@@ -94,7 +94,7 @@ RSpec.describe HMRC::Interface::ResultService do
           data: [
             { correlation_id: hmrc_response.submission_id },
             { error: 'submitted client details could not be found in HMRC service' }
-          ]
+          ],
         }
       end
 
@@ -141,7 +141,7 @@ RSpec.describe HMRC::Interface::ResultService do
           success: false,
           error_class: 'ActiveRecord::RecordNotFound',
           message: "Couldn't find ProceedingType",
-          backtrace: ['fake error backtrace']
+          backtrace: ['fake error backtrace'],
         }.to_json
       end
     end

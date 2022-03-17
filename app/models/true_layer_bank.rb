@@ -11,7 +11,7 @@ class TrueLayerBank < ApplicationRecord
   MOCK_BANK = {
     provider_id: 'mock',
     display_name: 'Mock Bank',
-    logo_url: 'https://truelayer-client-logos.s3-eu-west-1.amazonaws.com/banks/banks-icons/mock-icon.svg'
+    logo_url: 'https://truelayer-client-logos.s3-eu-west-1.amazonaws.com/banks/banks-icons/mock-icon.svg',
   }.freeze
 
   def self.available_banks

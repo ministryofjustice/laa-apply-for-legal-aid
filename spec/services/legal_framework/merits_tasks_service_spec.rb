@@ -62,17 +62,17 @@ module LegalFramework
           tasks: {
             incident_details: [],
             opponent_details: [],
-            application_children: []
-          }
+            application_children: [],
+          },
         },
         proceeding_types: [
           {
             ccms_code: application.proceedings.first.ccms_code,
             tasks: {
-              chances_of_success: [] # the merits tasks for this one proceeding type, and any dependencies
-            }
+              chances_of_success: [], # the merits tasks for this one proceeding type, and any dependencies
+            },
           }
-        ]
+        ],
       }
     end
 

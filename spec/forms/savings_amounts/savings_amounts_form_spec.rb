@@ -46,7 +46,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
             national_savings: /certificates and bonds/,
             plc_shares: /shares/,
             peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
-            life_assurance_endowment_policy: /total.*of life assurance policies/i
+            life_assurance_endowment_policy: /total.*of life assurance policies/i,
           }
         end
         it 'returns false' do
@@ -90,7 +90,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
               national_savings: /certificates and bonds/,
               plc_shares: /shares/,
               peps_unit_trusts_capital_bonds_gov_stocks: /total.*of other investments/i,
-              life_assurance_endowment_policy: /total.*of life assurance policies/i
+              life_assurance_endowment_policy: /total.*of life assurance policies/i,
             }
           end
           let(:amount_params) { attributes.index_with { |_attr| Faker::Number.negative.to_s } }

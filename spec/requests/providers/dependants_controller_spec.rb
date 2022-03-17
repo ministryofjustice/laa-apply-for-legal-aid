@@ -53,8 +53,8 @@ RSpec.describe Providers::DependantsController, type: :request do
           has_income: 'false',
           in_full_time_education: 'false',
           has_assets_more_than_threshold: 'false',
-          assets_value: ''
-        }
+          assets_value: '',
+        },
       }
     end
 
@@ -92,8 +92,8 @@ RSpec.describe Providers::DependantsController, type: :request do
             has_income: 'false',
             in_full_time_education: 'false',
             has_assets_more_than_threshold: 'false',
-            assets_value: ''
-          }
+            assets_value: '',
+          },
         }
       end
 
@@ -117,8 +117,8 @@ RSpec.describe Providers::DependantsController, type: :request do
             has_income: 'true',
             in_full_time_education: '',
             has_assets_more_than_threshold: 'true',
-            assets_value: ''
-          }
+            assets_value: '',
+          },
         }
       end
 

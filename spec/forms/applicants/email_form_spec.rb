@@ -14,7 +14,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
   let(:params) do
     {
       email: email,
-      model: applicant
+      model: applicant,
     }
   end
 

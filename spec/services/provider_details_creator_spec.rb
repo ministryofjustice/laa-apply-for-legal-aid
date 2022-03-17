@@ -19,28 +19,28 @@ RSpec.describe ProviderDetailsCreator do
       contacts: [
         {
           id: contact_id,
-          name: username
+          name: username,
         },
         {
           id: rand(101..200),
-          name: other_provider.email
+          name: other_provider.email,
         },
         {
           id: rand(101..200),
-          name: third_provider.username
+          name: third_provider.username,
         }
       ],
       feeEarners: [],
       providerOffices: [
         {
           id: ccms_office1.id,
-          name: "#{ccms_firm.name}-#{ccms_office1.code}"
+          name: "#{ccms_firm.name}-#{ccms_office1.code}",
         },
         {
           id: ccms_office2.id,
-          name: "#{ccms_firm.name}-#{ccms_office2.code}"
+          name: "#{ccms_firm.name}-#{ccms_office2.code}",
         }
-      ]
+      ],
     }
   end
   let(:firm) { provider.firm }
@@ -141,19 +141,19 @@ RSpec.describe ProviderDetailsCreator do
           contacts: [
             {
               id: rand(101..200),
-              name: Faker::Name.name
+              name: Faker::Name.name,
             }
           ],
           providerOffices: [
             {
               id: ccms_office2.id,
-              name: "#{ccms_firm.name}-#{ccms_office2.code}"
+              name: "#{ccms_firm.name}-#{ccms_office2.code}",
             },
             {
               id: ccms_office3.id,
-              name: "#{ccms_firm.name}-#{ccms_office3.code}"
+              name: "#{ccms_firm.name}-#{ccms_office3.code}",
             }
-          ]
+          ],
         }
       end
       let(:firm) { provider.firm }

@@ -26,7 +26,7 @@ module CFE
           .to eq(
             {
               'Content-Type' => 'application/json',
-              'Accept' => 'application/json;version=4'
+              'Accept' => 'application/json;version=4',
             }
           )
       end
@@ -104,15 +104,15 @@ module CFE
             matter_types: [
               {
                 matter_type: 'domestic_abuse',
-                result: 'contribution_required'
+                result: 'contribution_required',
               }
             ],
             proceeding_types: [
               {
                 ccms_code: 'DA001',
-                result: 'contribution_required'
+                result: 'contribution_required',
               }
-            ]
+            ],
           },
           gross_income: {
             total_gross_income: 1615.0,
@@ -120,9 +120,9 @@ module CFE
               {
                 ccms_code: 'DA001',
                 upper_threshold: 999_999_999_999.0,
-                result: 'eligible'
+                result: 'eligible',
               }
-            ]
+            ],
           },
           disposable_income: {
             dependant_allowance: 1457.45,
@@ -138,9 +138,9 @@ module CFE
                 ccms_code: 'DA001',
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
-                result: 'eligible'
+                result: 'eligible',
               }
-            ]
+            ],
           },
           capital: {
             total_liquid: 0.0,
@@ -157,10 +157,10 @@ module CFE
                 ccms_code: 'DA001',
                 lower_threshold: 3000.0,
                 upper_threshold: 999_999_999_999.0,
-                result: 'contribution_required'
+                result: 'contribution_required',
               }
-            ]
-          }
+            ],
+          },
         },
         assessment: {
           id: '53448494-5481-4b65-95b8-2afb6e7bc862',
@@ -171,13 +171,13 @@ module CFE
             involvement_type: 'applicant',
             has_partner_opponent: false,
             receives_qualifying_benefit: false,
-            self_employed: false
+            self_employed: false,
           },
           gross_income: {
             irregular_income: {
               monthly_equivalents: {
-                student_loan: 0.0
-              }
+                student_loan: 0.0,
+              },
             },
             state_benefits: {
               monthly_equivalents: {
@@ -187,10 +187,10 @@ module CFE
                   {
                     name: 'Child Benefit',
                     monthly_value: 200.0,
-                    excluded_from_income_assessment: false
+                    excluded_from_income_assessment: false,
                   }
-                ]
-              }
+                ],
+              },
             },
             other_income: {
               monthly_equivalents: {
@@ -198,22 +198,22 @@ module CFE
                   friends_or_family: 1415.0,
                   maintenance_in: 0.0,
                   property_or_lodger: 0.0,
-                  pension: 0.0
+                  pension: 0.0,
                 },
                 bank_transactions: {
                   friends_or_family: 1415.0,
                   maintenance_in: 0.0,
                   property_or_lodger: 0.0,
-                  pension: 0.0
+                  pension: 0.0,
                 },
                 cash_transactions: {
                   friends_or_family: 0.0,
                   maintenance_in: 0.0,
                   property_or_lodger: 0.0,
-                  pension: 0.0
-                }
-              }
-            }
+                  pension: 0.0,
+                },
+              },
+            },
           },
           disposable_income: {
             monthly_equivalents: {
@@ -221,41 +221,41 @@ module CFE
                 child_care: 0.0,
                 rent_or_mortgage: 50.0,
                 maintenance_out: 0.0,
-                legal_aid: 0.0
+                legal_aid: 0.0,
               },
               bank_transactions: {
                 child_care: 0.0,
                 rent_or_mortgage: 50.0,
                 maintenance_out: 0.0,
-                legal_aid: 0.0
+                legal_aid: 0.0,
               },
               cash_transactions: {
                 child_care: 0.0,
                 rent_or_mortgage: 0.0,
                 maintenance_out: 0.0,
-                legal_aid: 0.0
-              }
+                legal_aid: 0.0,
+              },
             },
             childcare_allowance: 0.0,
             deductions: {
               dependants_allowance: 1457.45,
-              disregarded_state_benefits: 0.0
-            }
+              disregarded_state_benefits: 0.0,
+            },
           },
           capital: {
             capital_items: {
               liquid: [
                 {
                   description: 'Bank acct 1',
-                  value: 0.0
+                  value: 0.0,
                 },
                 {
                   description: 'Bank acct 2',
-                  value: 0.0
+                  value: 0.0,
                 },
                 {
                   description: 'Bank acct 3',
-                  value: 0.0
+                  value: 0.0,
                 }
               ],
               non_liquid: [],
@@ -266,7 +266,7 @@ module CFE
                   date_of_purchase: '2018-05-20',
                   in_regular_use: false,
                   included_in_assessment: true,
-                  assessed_value: 9000.0
+                  assessed_value: 9000.0,
                 }
               ],
               properties: {
@@ -281,11 +281,11 @@ module CFE
                   net_value: 385_000.0,
                   net_equity: 192_500.0,
                   main_home_equity_disregard: 100_000.0,
-                  assessed_equity: 92_500.0
+                  assessed_equity: 92_500.0,
                 },
-                additional_properties: []
-              }
-            }
+                additional_properties: [],
+              },
+            },
           },
           remarks: {
             state_benefit_payment: {
@@ -298,10 +298,10 @@ module CFE
                 4b84cd39-bb3e-4603-9470-b64df27c72f2
                 306ef3e1-9316-402e-b6f7-c87cdafbd790
                 934b2ecb-015c-4f55-84ca-a8ec6614ddde
-              ]
-            }
-          }
-        }
+              ],
+            },
+          },
+        },
       }
     end
   end

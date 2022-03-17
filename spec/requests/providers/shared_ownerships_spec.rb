@@ -54,8 +54,8 @@ RSpec.describe 'providers shared ownership request test', type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          shared_ownership: shared_ownership
-        }
+          shared_ownership: shared_ownership,
+        },
       }
     end
 
@@ -71,7 +71,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
       context 'Submitted with Continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -144,7 +144,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
       context 'submitted with a Save as Draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

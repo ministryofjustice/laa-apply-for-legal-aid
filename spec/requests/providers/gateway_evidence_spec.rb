@@ -37,7 +37,7 @@ module Providers
       let(:gateway_evidence) { legal_aid_application.gateway_evidence }
       let(:params_gateway_evidence) do
         {
-          original_file: original_file
+          original_file: original_file,
         }
       end
       let(:draft_button) { { draft_button: 'Save as draft' } }
@@ -68,7 +68,7 @@ module Providers
       context 'upload button pressed' do
         let(:params_gateway_evidence) do
           {
-            original_file: original_file
+            original_file: original_file,
           }
         end
         let(:button_clicked) { upload_button }

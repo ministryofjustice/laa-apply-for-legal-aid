@@ -42,7 +42,7 @@ module Providers
         let(:params) do
           {
             proceeding_merits_task_proceeding_linked_child:
-              { linked_children: legal_aid_application.involved_children.map(&:id) }
+              { linked_children: legal_aid_application.involved_children.map(&:id) },
           }
         end
 
@@ -60,7 +60,7 @@ module Providers
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
-                { linked_children: involved_children_names.map { |_k| '' } }
+                { linked_children: involved_children_names.map { |_k| '' } },
             }
           end
 
@@ -73,7 +73,7 @@ module Providers
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
-                { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' } }
+                { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' } },
             }
           end
 
@@ -101,7 +101,7 @@ module Providers
             let(:new_params) do
               {
                 proceeding_merits_task_proceeding_linked_child:
-                  { linked_children: [first_child.id, '', ''] }
+                  { linked_children: [first_child.id, '', ''] },
               }
             end
 

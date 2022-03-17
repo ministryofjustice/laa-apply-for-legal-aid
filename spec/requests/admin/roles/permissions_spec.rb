@@ -40,8 +40,8 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
       let!(:params) do
         {
           firm: {
-            permission_ids: [permission2.id, firm.permissions.first.id]
-          }
+            permission_ids: [permission2.id, firm.permissions.first.id],
+          },
         }
       end
 

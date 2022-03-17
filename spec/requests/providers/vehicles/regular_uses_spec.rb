@@ -28,7 +28,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     let(:used_regularly) { true }
     let(:params) do
       {
-        vehicle: { used_regularly: used_regularly.to_s }
+        vehicle: { used_regularly: used_regularly.to_s },
       }
     end
     let(:next_url) { providers_legal_aid_application_applicant_bank_account_path(legal_aid_application) }

@@ -21,8 +21,8 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
     let(:params) do
       {
         binary_choice_form: {
-          has_other_dependant: has_other_dependant
-        }
+          has_other_dependant: has_other_dependant,
+        },
       }
     end
 

@@ -7,7 +7,7 @@ module CFE
     def request_body
       {
         income: build_cash_transactions_for(:credit),
-        outgoings: build_cash_transactions_for(:debit)
+        outgoings: build_cash_transactions_for(:debit),
       }.to_json
     end
 
@@ -40,7 +40,7 @@ module CFE
         result << {
           date: transaction.transaction_date.strftime('%Y-%m-%d'),
           amount: transaction.amount.abs.to_f,
-          client_id: transaction.id
+          client_id: transaction.id,
         }
       end
       result

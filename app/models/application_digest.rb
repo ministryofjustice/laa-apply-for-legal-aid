@@ -31,7 +31,7 @@ class ApplicationDigest < ApplicationRecord
         df_used: laa.used_delegated_functions?,
         earliest_df_date: laa.earliest_delegated_functions_date,
         df_reported_date: laa.earliest_delegated_functions_reported_date,
-        working_days_to_report_df: working_days_to_report(laa)
+        working_days_to_report_df: working_days_to_report(laa),
       }
     end
 

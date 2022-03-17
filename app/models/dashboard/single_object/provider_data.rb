@@ -20,7 +20,7 @@ module Dashboard
             reference: @provider.id,
             timestamp: @provider.created_at,
             firm: @provider.firm.name,
-            count: @provider.legal_aid_applications.count
+            count: @provider.legal_aid_applications.count,
           }
         ]
       end
@@ -39,7 +39,7 @@ module Dashboard
             Geckoboard::StringField.new(:firm, name: 'Works for'),
             Geckoboard::NumberField.new(:count, name: 'Applications')
           ],
-          unique_by: %w[timestamp reference]
+          unique_by: %w[timestamp reference],
         }
       end
 

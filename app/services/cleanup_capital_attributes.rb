@@ -28,7 +28,7 @@ class CleanupCapitalAttributes
       property_value: nil,
       outstanding_mortgage_amount: nil,
       shared_ownership: nil,
-      percentage_home: nil
+      percentage_home: nil,
     }
   end
 

@@ -50,8 +50,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           money_owed_value: '90,123.45',
           check_box_trust_value: 'true',
           trust_value: '1,234.56',
-          none_selected: ''
-        }
+          none_selected: '',
+        },
       }
     end
 
@@ -74,8 +74,8 @@ RSpec.describe 'provider other assets requests', type: :request do
           money_owed_value: '',
           check_box_trust_value: '',
           trust_value: '',
-          none_selected: none_selected
-        }
+          none_selected: none_selected,
+        },
       }
     end
 
@@ -235,7 +235,7 @@ RSpec.describe 'provider other assets requests', type: :request do
         context 'none of these checkbox is selected' do
           let(:params) do
             {
-              other_assets_declaration: { none_selected: 'true' }
+              other_assets_declaration: { none_selected: 'true' },
             }
           end
 
@@ -249,8 +249,8 @@ RSpec.describe 'provider other assets requests', type: :request do
             {
               other_assets_declaration: {
                 check_box_second_home: 'true',
-                second_home_value: 'aaa'
-              }
+                second_home_value: 'aaa',
+              },
             }
           end
 
@@ -362,8 +362,8 @@ RSpec.describe 'provider other assets requests', type: :request do
             {
               other_assets_declaration: {
                 check_box_second_home: 'true',
-                second_home_value: 'aaa'
-              }
+                second_home_value: 'aaa',
+              },
             }
           end
 

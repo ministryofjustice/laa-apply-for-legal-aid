@@ -19,8 +19,8 @@ RSpec.describe HMRC::ResultWorker do
                 'firstName' => 'fname',
                 'lastName' => 'lname',
                 'nino' => 'XY234567A',
-                'dateOfBirth' => '1992-07-22'
-              }
+                'dateOfBirth' => '1992-07-22',
+              },
             },
             { 'income/paye/paye' => { 'income' => [] } },
             { 'income/sa/selfAssessment' => [] },
@@ -39,7 +39,7 @@ RSpec.describe HMRC::ResultWorker do
             { 'employments/paye/employments' => [] },
             { 'benefits_and_credits/working_tax_credit/applications' => [] },
             { 'benefits_and_credits/child_tax_credit/applications' => [] }
-          ]
+          ],
         }
       end
       before do
@@ -59,9 +59,9 @@ RSpec.describe HMRC::ResultWorker do
           status: 'processing',
           _links: [
             {
-              href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}"
+              href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}",
             }
-          ]
+          ],
         }
       end
       before do

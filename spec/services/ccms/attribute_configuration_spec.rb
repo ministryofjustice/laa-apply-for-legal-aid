@@ -59,13 +59,13 @@ module CCMS
               value: '#new_section_attr_1',
               br100_meaning: 'Attr 1',
               response_type: 'text',
-              user_defined: true
+              user_defined: true,
             },
             NEW_SECTION_ATTR: {
               value: '#new_seciton_attr_2',
               br100_meaning: 'Attr 2',
               response_type: 'text',
-              user_defined: false
+              user_defined: false,
             }
           )
         end
@@ -79,13 +79,13 @@ module CCMS
               value: '#applicant name',
               br100_meaning: 'Applicant: name',
               response_type: 'text',
-              user_defined: false
+              user_defined: false,
             },
             AGE: {
               value: '#applicant age',
               br100_meaning: 'Applicant: age',
               response_type: 'number',
-              user_defined: true
+              user_defined: true,
             }
           )
         end
@@ -109,7 +109,7 @@ module CCMS
     def mock_configuration
       {
         standard: Rails.root.join('spec/fixtures/files/ccms_keys/standard_ccms_keys.yml'),
-        non_passported: Rails.root.join('spec/fixtures/files/ccms_keys/merged_in_ccms_keys.yml')
+        non_passported: Rails.root.join('spec/fixtures/files/ccms_keys/merged_in_ccms_keys.yml'),
       }
     end
   end

@@ -46,7 +46,7 @@ module TrueLayerHelpers
     response_body = {
       error_description: 'Feature not supported by the provider',
       error: :endpoint_not_supported,
-      error_details: {}
+      error_details: {},
     }.to_json
 
     # the /o suffix to the regex ensures the regex gets cached and not run each time the

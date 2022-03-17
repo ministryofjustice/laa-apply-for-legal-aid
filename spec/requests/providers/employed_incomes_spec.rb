@@ -51,8 +51,8 @@ RSpec.describe 'employed incomes request', type: :request do
       {
         legal_aid_application: {
           extra_employment_information: extra_employment_information,
-          extra_employment_information_details: extra_employment_information_details
-        }
+          extra_employment_information_details: extra_employment_information_details,
+        },
       }
     end
     let(:extra_employment_information_details) { Faker::Lorem.paragraph }
@@ -67,7 +67,7 @@ RSpec.describe 'employed incomes request', type: :request do
       context 'Form submitted with continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -112,7 +112,7 @@ RSpec.describe 'employed incomes request', type: :request do
       context 'Form submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

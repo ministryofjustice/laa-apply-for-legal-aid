@@ -9,7 +9,7 @@ RSpec.describe 'FeedbacksController', type: :request do
     let(:provider) { create :provider }
     let(:session_vars) do
       {
-        'page_history_id' => page_history_id
+        'page_history_id' => page_history_id,
       }
     end
     let(:address_lookup_page) { "http://localhost:3000/providers/applications/#{application.id}/address_lookup" }
@@ -109,7 +109,7 @@ RSpec.describe 'FeedbacksController', type: :request do
         let(:originating_page) { additional_accounts_page }
         let(:session_vars) do
           {
-            'current_application_id' => application.id
+            'current_application_id' => application.id,
           }
         end
         it 'adds applicant specific data' do

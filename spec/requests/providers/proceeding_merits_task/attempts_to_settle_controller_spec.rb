@@ -37,8 +37,8 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
       {
         proceeding_merits_task_attempts_to_settle: {
           attempts_made: 'Details of settlement attempt',
-          proceeding_id: proceeding.id
-        }
+          proceeding_id: proceeding.id,
+        },
       }
     end
 

@@ -38,7 +38,7 @@ private
       nino: applicant.national_insurance_number,
       surname: applicant.last_name.strip.upcase,
       dateOfBirth: applicant.date_of_birth.strftime('%Y%m%d'),
-      dateOfAward: Time.zone.today.strftime('%Y%m%d')
+      dateOfAward: Time.zone.today.strftime('%Y%m%d'),
     }.merge(credential_params)
   end
 
@@ -46,7 +46,7 @@ private
     {
       lscServiceName: config.service_name,
       clientOrgId: config.client_org_id,
-      clientUserId: config.client_user_id
+      clientUserId: config.client_user_id,
     }
   end
 

@@ -10,7 +10,7 @@ module RequestHelpers
       {
         'ACCEPT' => 'application/json',
         'HTTP_ACCEPT' => 'application/json',
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       }
     end
 

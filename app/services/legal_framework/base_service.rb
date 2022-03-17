@@ -31,7 +31,7 @@ module LegalFramework
     # override this method in the derived class if you need more/different headers
     def headers
       {
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       }
     end
 

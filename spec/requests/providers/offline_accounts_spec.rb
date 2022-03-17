@@ -65,8 +65,8 @@ RSpec.describe 'providers offine accounts', type: :request do
       {
         savings_amount: {
           offline_current_accounts: offline_current_accounts,
-          check_box_offline_current_accounts: check_box_offline_current_accounts
-        }
+          check_box_offline_current_accounts: check_box_offline_current_accounts,
+        },
       }
     end
 
@@ -80,7 +80,7 @@ RSpec.describe 'providers offine accounts', type: :request do
       context 'Submitted with Continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -131,7 +131,7 @@ RSpec.describe 'providers offine accounts', type: :request do
           let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, state }
           let(:submit_button) do
             {
-              continue_button: 'Continue'
+              continue_button: 'Continue',
             }
           end
           before { subject }
@@ -162,7 +162,7 @@ RSpec.describe 'providers offine accounts', type: :request do
       context 'Submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

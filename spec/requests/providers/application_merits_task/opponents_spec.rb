@@ -58,8 +58,8 @@ module Providers
               police_notified: sample_opponent.police_notified.to_s,
               police_notified_details_true: sample_opponent.police_notified_details,
               bail_conditions_set: sample_opponent.bail_conditions_set.to_s,
-              bail_conditions_set_details: sample_opponent.bail_conditions_set_details
-            }
+              bail_conditions_set_details: sample_opponent.bail_conditions_set_details,
+            },
           }
         end
         let(:draft_button) { { draft_button: 'Save as draft' } }

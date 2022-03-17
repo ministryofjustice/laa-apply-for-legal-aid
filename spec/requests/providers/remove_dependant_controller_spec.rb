@@ -28,8 +28,8 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
     let(:params) do
       {
         binary_choice_form: {
-          remove_dependant: remove_dependant
-        }
+          remove_dependant: remove_dependant,
+        },
       }
     end
 

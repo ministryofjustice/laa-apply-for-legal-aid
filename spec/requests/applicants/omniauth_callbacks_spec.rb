@@ -22,7 +22,7 @@ RSpec.describe 'applicants omniauth call back', type: :request do
       :true_layer,
       credentials: {
         token: token,
-        expires_at: true_layer_expires_at
+        expires_at: true_layer_expires_at,
       }
     )
 

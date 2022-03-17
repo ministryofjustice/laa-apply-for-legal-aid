@@ -39,7 +39,7 @@ module LegalFramework
         matter_type: proceeding_type.ccms_matter,
         category_of_law: proceeding_type.ccms_category_law,
         category_law_code: proceeding_type.ccms_category_law_code,
-        ccms_matter_code: proceeding_type.ccms_matter_code
+        ccms_matter_code: proceeding_type.ccms_matter_code,
       }
     end
 
@@ -50,7 +50,7 @@ module LegalFramework
         substantive_scope_limitation_description: proceeding_type.default_scope_limitations.dig('substantive', 'description'),
         delegated_functions_scope_limitation_code: proceeding_type.default_scope_limitations.dig('delegated_functions', 'code'),
         delegated_functions_scope_limitation_meaning: proceeding_type.default_scope_limitations.dig('delegated_functions', 'meaning'),
-        delegated_functions_scope_limitation_description: proceeding_type.default_scope_limitations.dig('delegated_functions', 'description')
+        delegated_functions_scope_limitation_description: proceeding_type.default_scope_limitations.dig('delegated_functions', 'description'),
       }
     end
   end

@@ -75,7 +75,7 @@ RSpec.describe CFE::CreateEmploymentsService do
   def dummy_response_hash
     {
       success: true,
-      errors: []
+      errors: [],
     }
   end
 
@@ -97,7 +97,7 @@ RSpec.describe CFE::CreateEmploymentsService do
               benefits_in_kind: 0.0,
               tax: -161.8,
               national_insurance: -128.64,
-              net_employment_income: 1578.54
+              net_employment_income: 1578.54,
             },
             {
               client_id: '20211028-0000-0000-0000-123456789abc',
@@ -106,7 +106,7 @@ RSpec.describe CFE::CreateEmploymentsService do
               benefits_in_kind: 0.0,
               tax: -111.0,
               national_insurance: -128.64,
-              net_employment_income: 1629.34
+              net_employment_income: 1629.34,
             },
             {
               client_id: '20210928-0000-0000-0000-123456789abc',
@@ -115,7 +115,7 @@ RSpec.describe CFE::CreateEmploymentsService do
               benefits_in_kind: 0.0,
               tax: -286.6,
               national_insurance: -203.47,
-              net_employment_income: 2002.54
+              net_employment_income: 2002.54,
             },
             {
               client_id: '20210828-0000-0000-0000-123456789abc',
@@ -124,11 +124,11 @@ RSpec.describe CFE::CreateEmploymentsService do
               benefits_in_kind: 0.0,
               tax: -257.2,
               national_insurance: -185.79,
-              net_employment_income: 1902.3
+              net_employment_income: 1902.3,
             }
-          ]
+          ],
         }
-      ]
+      ],
     }
   end
 end

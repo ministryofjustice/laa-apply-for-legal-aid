@@ -9,7 +9,7 @@ VCR.configure do |vcr_config|
   vcr_config.hook_into :webmock
   vcr_config.default_cassette_options = {
     record: record_mode,
-    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)]
+    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)],
   }
   vcr_config.debug_logger = $stdout if vcr_debug
   vcr_config.ignore_request do |request|

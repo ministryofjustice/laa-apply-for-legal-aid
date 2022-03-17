@@ -103,7 +103,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
       let(:params) do
         {
           id: proceeding.ccms_code,
-          continue_button: 'Continue'
+          continue_button: 'Continue',
         }
       end
       let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: true) }

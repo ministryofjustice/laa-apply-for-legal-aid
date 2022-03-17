@@ -125,7 +125,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     context 'Form submitted with Continue button' do
       let(:params) do
         {
-          continue_button: 'Continue'
+          continue_button: 'Continue',
         }
       end
 
@@ -172,7 +172,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     context 'Form submitted with Save as draft button' do
       let(:params) do
         {
-          draft_button: 'Save as draft'
+          draft_button: 'Save as draft',
         }
       end
 

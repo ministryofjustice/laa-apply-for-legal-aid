@@ -60,8 +60,8 @@ module Providers
               'told_on(1i)': told_on.year,
               'occurred_on(3i)': occurred_on.day,
               'occurred_on(2i)': occurred_on.month,
-              'occurred_on(1i)': occurred_on.year
-            }
+              'occurred_on(1i)': occurred_on.year,
+            },
           }
         end
         let(:draft_button) { { draft_button: 'Save as draft' } }

@@ -29,7 +29,7 @@ module Dashboard
               reference: provider.id,
               timestamp: provider.created_at,
               firm: provider.firm.name,
-              count: 1
+              count: 1,
             }
           ]
         end

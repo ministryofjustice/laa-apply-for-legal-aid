@@ -220,7 +220,7 @@ module Admin
         'providerOffices' => [
           { 'id' => '146988', 'name' => 'LOCAL LAW & CO LTD-8M609S' },
           { 'id' => '81333', 'name' => 'LOCAL LAW & CO LTD-8B869F' }
-        ]
+        ],
       }
     end
 
@@ -230,7 +230,7 @@ module Admin
         'status' => 404,
         'error' => 'Not Found',
         'message' => 'No records found for [SARAH%20SMITH]',
-        'path' => '/api/providerDetails/SARAH%20SMITH'
+        'path' => '/api/providerDetails/SARAH%20SMITH',
       }
     end
 
@@ -250,7 +250,7 @@ module Admin
         'providerOffices' => [
           { 'id' => 146_988, 'name' => 'LOCAL LAW & CO LTD-8M609S' },
           { 'id' => 81_333, 'name' => 'LOCAL LAW & CO LTD-8B869F' }
-        ]
+        ],
       }
     end
 
@@ -272,7 +272,7 @@ module Admin
           { 'id' => '146988', 'name' => 'LOCAL LAW & CO LTD-8M609S' },
           { 'id' => '81333', 'name' => 'LOCAL LAW & CO LTD-8B869F' },
           { 'id' => '81334', 'name' => 'LOCAL LAW & CO LTD-8M609X' }
-        ]
+        ],
       }
     end
   end

@@ -11,7 +11,7 @@ module LegalFramework
       context 'correct params' do
         let(:params) do
           {
-            ccms_code: ccms_code
+            ccms_code: ccms_code,
           }
         end
 
@@ -37,7 +37,7 @@ module LegalFramework
       context 'on failure' do
         let(:params) do
           {
-            ccms_code: nil
+            ccms_code: nil,
           }
         end
 

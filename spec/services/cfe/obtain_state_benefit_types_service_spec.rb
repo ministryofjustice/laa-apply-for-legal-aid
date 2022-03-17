@@ -42,17 +42,17 @@ module CFE
           {
             'label' => 'budget_advances',
             'name' => 'Budget Advances',
-            'dwp_code' => nil
+            'dwp_code' => nil,
           },
           {
             'label' => 'care_in_the_community_direct_payment',
             'name' => 'Care in the Community Direct Payment',
-            'dwp_code' => nil
+            'dwp_code' => nil,
           },
           {
             'label' => 'earnings_top_up',
             'name' => 'Earnings Top Up',
-            'dwp_code' => nil
+            'dwp_code' => nil,
           }
         ].to_json
       end

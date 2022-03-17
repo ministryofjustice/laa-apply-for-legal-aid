@@ -61,7 +61,7 @@ module CCMS
         number: :extract_raw_value,
         boolean: :extract_raw_value,
         currency: :extract_as_currency,
-        date: :extract_as_date
+        date: :extract_as_date,
       }.freeze
 
       def extract_response_value(config)

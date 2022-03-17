@@ -8,7 +8,7 @@ RSpec.describe 'GET /v1/workers', type: :request do
         status: 'complete',
         worker: 'ImportBankDataWorker',
         jid: worker_id,
-        errors: ['error 1', 'error 2'].to_json
+        errors: ['error 1', 'error 2'].to_json,
       }.stringify_keys
     end
 

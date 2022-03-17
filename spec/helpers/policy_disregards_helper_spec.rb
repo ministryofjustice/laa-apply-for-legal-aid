@@ -35,13 +35,13 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
           CheckAnswersHelper::ItemStruct.new('National Emergencies Trust (NET)', 'No'),
           CheckAnswersHelper::ItemStruct.new('We Love Manchester Emergency Fund', 'No'),
           CheckAnswersHelper::ItemStruct.new('The London Emergencies Trust', 'No')
-        ]
+        ],
       }
     end
 
     def expected_result
       {
-        items: [CheckAnswersHelper::ItemStruct.new('England Infected Blood Support Scheme', true)] + expected_result_none_selected[:items][1..]
+        items: [CheckAnswersHelper::ItemStruct.new('England Infected Blood Support Scheme', true)] + expected_result_none_selected[:items][1..],
       }
     end
   end

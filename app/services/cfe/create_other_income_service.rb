@@ -6,7 +6,7 @@ module CFE
 
     def request_body
       {
-        other_incomes: other_income_data
+        other_incomes: other_income_data,
       }.to_json
     end
 
@@ -28,7 +28,7 @@ module CFE
     def all_transactions_of_one_type(transaction_type, transactions)
       {
         source: transaction_type.name.humanize,
-        payments: transactions.map { |t| single_transaction_hash(t) }
+        payments: transactions.map { |t| single_transaction_hash(t) },
       }
     end
 
@@ -36,7 +36,7 @@ module CFE
       {
         date: transaction.happened_at.strftime('%Y-%m-%d'),
         amount: transaction.amount.to_f,
-        client_id: transaction.id
+        client_id: transaction.id,
       }
     end
 

@@ -81,11 +81,11 @@ RSpec.describe Flow::BaseFlowService do
           path: path,
           forward: forward,
           carry_on_sub_flow: carry_on_sub_flow,
-          check_answers: check_answers
+          check_answers: check_answers,
         },
         forward => {
-          path: forward_url
-        }
+          path: forward_url,
+        },
       }
     end
 

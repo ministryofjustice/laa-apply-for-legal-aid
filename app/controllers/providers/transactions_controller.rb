@@ -62,7 +62,7 @@ module Providers
         label: 'manually_chosen',
         name: transaction_type.name.titleize,
         category: sentencize(transaction_type.name),
-        selected_by: 'Provider'
+        selected_by: 'Provider',
       }
     end
 

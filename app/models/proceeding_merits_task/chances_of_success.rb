@@ -7,7 +7,7 @@ module ProceedingMeritsTask
       marginal: 'Marginal (45-49%)',
       poor: 'Poor (<45%)',
       borderline: 'Borderline',
-      not_known: 'Uncertain'
+      not_known: 'Uncertain',
     }.freeze
 
     SUCCESS_RANKING = {
@@ -15,7 +15,7 @@ module ProceedingMeritsTask
       marginal: 4,
       poor: 3,
       borderline: 2,
-      not_known: 1
+      not_known: 1,
     }.freeze
 
     enum success_prospect: {
@@ -23,7 +23,7 @@ module ProceedingMeritsTask
       marginal: 'marginal'.freeze,
       poor: 'poor'.freeze,
       borderline: 'borderline'.freeze,
-      not_known: 'not_known'.freeze
+      not_known: 'not_known'.freeze,
     }, _prefix: true
 
     def self.prospects_unlikely_to_succeed

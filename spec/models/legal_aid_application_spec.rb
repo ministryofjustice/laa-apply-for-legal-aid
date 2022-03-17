@@ -75,7 +75,7 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:benefit_check_response) do
       {
         benefit_checker_status: Faker::Lorem.word,
-        confirmation_ref: SecureRandom.hex
+        confirmation_ref: SecureRandom.hex,
       }
     end
 
@@ -1319,7 +1319,7 @@ private
   def uploaded_evidence_output
     {
       'benefit_evidence' => ['Fake Benefit Evidence 1', 'Fake Benefit Evidence 2'],
-      'gateway_evidence' => ['Fake Gateway Evidence 1', 'Fake Gateway Evidence 2']
+      'gateway_evidence' => ['Fake Gateway Evidence 1', 'Fake Gateway Evidence 2'],
     }
   end
 end

@@ -265,7 +265,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       "#{type.name}": 'true',
       "#{type.name}_used_delegated_functions_on_3i": adjusted_date.day.to_s,
       "#{type.name}_used_delegated_functions_on_2i": month || adjusted_date.month.to_s,
-      "#{type.name}_used_delegated_functions_on_1i": adjusted_date.year.to_s
+      "#{type.name}_used_delegated_functions_on_1i": adjusted_date.year.to_s,
     }
   end
 
@@ -274,7 +274,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       "#{type.name}": '',
       "#{type.name}_used_delegated_functions_on_3i": '',
       "#{type.name}_used_delegated_functions_on_2i": '',
-      "#{type.name}_used_delegated_functions_on_1i": ''
+      "#{type.name}_used_delegated_functions_on_1i": '',
     }
   end
 
@@ -299,7 +299,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       "#{type.name}": 'true',
       "#{type.name}_used_delegated_functions_on_3i": date.day.to_s,
       "#{type.name}_used_delegated_functions_on_2i": date.month.to_s,
-      "#{type.name}_used_delegated_functions_on_1i": date.year.to_s
+      "#{type.name}_used_delegated_functions_on_1i": date.year.to_s,
     }
   end
 end

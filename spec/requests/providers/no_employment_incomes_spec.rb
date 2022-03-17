@@ -31,8 +31,8 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          full_employment_details: full_employment_details
-        }
+          full_employment_details: full_employment_details,
+        },
       }
     end
 
@@ -45,7 +45,7 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
       context 'Form submitted with continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -69,7 +69,7 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
       context 'Form submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

@@ -6,7 +6,7 @@ module CFEResults
           assessment_result: 'eligible',
           applicant: {
             receives_qualifying_benefit: true,
-            age_at_submission: 39
+            age_at_submission: 39,
           },
           capital: {
             total_liquid: '350.0',
@@ -17,10 +17,10 @@ module CFEResults
             liquid_capital_items: [
               {
                 description: 'Off-line bank accounts',
-                value: '350.0'
+                value: '350.0',
               }
             ],
-            non_liquid_capital_items: []
+            non_liquid_capital_items: [],
           },
           property: {
             total_mortgage_allowance: '100000.0',
@@ -39,9 +39,9 @@ module CFEResults
                 transaction_allowance: '0.0',
                 allowable_outstanding_mortgage: '0.0',
                 percentage_owned: '0.0',
-                assessed_equity: '0.0'
+                assessed_equity: '0.0',
               }
-            ]
+            ],
           },
           vehicles: {
             total_vehicle: '0.0',
@@ -52,10 +52,10 @@ module CFEResults
                 loan_amount_outstanding: '0.0',
                 date_of_purchase: '2013-06-01',
                 included_in_assessment: false,
-                assessed_value: '0.0'
+                assessed_value: '0.0',
               }
-            ]
-          }
+            ],
+          },
         }
       end
 
@@ -89,7 +89,7 @@ module CFEResults
           transaction_allowance: '012550',
           allowable_outstanding_mortgage: '45000.0',
           percentage_owned: '100.0',
-          assessed_equity: '224000'
+          assessed_equity: '224000',
         }
         result[:property][:additional_properties] = [property]
         result

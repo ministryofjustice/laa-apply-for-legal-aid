@@ -21,7 +21,7 @@ module Sidekiq
     def call_type
       {
         'HMRC::SubmissionWorker' => 'HMRC submission id',
-        'HMRC::ResultWorker' => 'HMRC result check for id'
+        'HMRC::ResultWorker' => 'HMRC result check for id',
       }[@source]
     end
   end

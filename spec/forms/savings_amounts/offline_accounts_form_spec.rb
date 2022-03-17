@@ -42,7 +42,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:attribute_map) do
           {
             offline_current_accounts: /total.*current accounts/i,
-            offline_savings_accounts: /total.*savings accounts/i
+            offline_savings_accounts: /total.*savings accounts/i,
           }
         end
         it 'returns false' do
@@ -99,7 +99,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         {
           check_box_offline_current_accounts: 'true',
           check_box_offline_savings_accounts: '',
-          no_account_selected: ''
+          no_account_selected: '',
         }
       end
 
@@ -107,7 +107,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         let(:amount_params) do
           {
             offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
-            offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s
+            offline_savings_accounts: rand(1...1_000_000.0).round(2).to_s,
           }
         end
 
@@ -152,7 +152,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           {
             check_box_offline_current_accounts: '',
             check_box_offline_savings_accounts: '',
-            no_account_selected: 'true'
+            no_account_selected: 'true',
           }
         end
 
@@ -167,7 +167,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           {
             check_box_offline_current_accounts: '',
             check_box_offline_savings_accounts: '',
-            no_account_selected: ''
+            no_account_selected: '',
           }
         end
 

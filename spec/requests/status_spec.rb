@@ -21,9 +21,9 @@ RSpec.describe StatusController, type: :request do
             sidekiq_queue: false,
             malware_scanner: {
               positive: true,
-              negative: true
-            }
-          }
+              negative: true,
+            },
+          },
         }.to_json
       end
 
@@ -79,9 +79,9 @@ RSpec.describe StatusController, type: :request do
             sidekiq_queue: true,
             malware_scanner: {
               positive: true,
-              negative: true
-            }
-          }
+              negative: true,
+            },
+          },
         }.to_json
       end
 
@@ -110,9 +110,9 @@ RSpec.describe StatusController, type: :request do
             sidekiq_queue: true,
             malware_scanner: {
               positive: true,
-              negative: true
-            }
-          }
+              negative: true,
+            },
+          },
         }.to_json
       end
 
@@ -141,9 +141,9 @@ RSpec.describe StatusController, type: :request do
             sidekiq_queue: false,
             malware_scanner: {
               positive: true,
-              negative: true
-            }
-          }
+              negative: true,
+            },
+          },
         }.to_json
       end
 
@@ -176,9 +176,9 @@ RSpec.describe StatusController, type: :request do
             sidekiq_queue: true,
             malware_scanner: {
               positive: true,
-              negative: true
-            }
-          }
+              negative: true,
+            },
+          },
         }.to_json
       end
 
@@ -200,7 +200,7 @@ RSpec.describe StatusController, type: :request do
         {
           'build_date' => '20150721',
           'build_tag' => 'test',
-          'app_branch' => 'test_branch'
+          'app_branch' => 'test_branch',
         }
       end
 

@@ -66,14 +66,14 @@ module Reports
             unknown_frequency: %w[
               d55743b5-c1c4-4c9a-98a3-bad709aac422
               a277038a-86df-4bbd-8b87-d576ae150369
-            ]
+            ],
           },
           outgoings_housing_cost: {
             unknown_frequency: %w[
               5d58c3b1-c34d-4f20-90fc-c22642410cfa
               05bcd12c-6790-49bc-a1aa-490fba8d2624
-            ]
-          }
+            ],
+          },
         }
       end
     end

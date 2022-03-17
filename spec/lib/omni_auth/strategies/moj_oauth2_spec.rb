@@ -70,7 +70,7 @@ module OmniAuth
             'warden.user.applicant.key' => [[applicant_id], nil],
             '_csrf_token' => 'bHisWZcUID4DqymnSBSyJ31OghMf8cop4Aw/9RJ3T9c=',
             'provider_id' => 'mock',
-            'omniauth.state' => omniauth_state
+            'omniauth.state' => omniauth_state,
           }
         )
       end
@@ -83,7 +83,7 @@ module OmniAuth
             'enable_mock' => true,
             'provider_id' => 'mock',
             'consent_id' => 'applyforlegalaidtest-uxqw',
-            'tracking_id' => '9829f7c1-e8c4-4334-8f39-ff48e024ea62'
+            'tracking_id' => '9829f7c1-e8c4-4334-8f39-ff48e024ea62',
           }
         )
       end
@@ -91,7 +91,7 @@ module OmniAuth
       def example_request_params
         HashWithIndifferentAccess.new(
           {
-            state: omniauth_state
+            state: omniauth_state,
           }
         )
       end
@@ -99,7 +99,7 @@ module OmniAuth
       def example_environment
         HashWithIndifferentAccess.new(
           {
-            'omniauth.auth' => {}
+            'omniauth.auth' => {},
           }
         )
       end

@@ -13,7 +13,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       'police_notified_details_true' => 'Reasons police not notified details',
       'bail_conditions_set' => 'true',
       'bail_conditions_set_details' => 'New bail conditions set details',
-      'full_name' => 'Hiram Schulist'
+      'full_name' => 'Hiram Schulist',
     }
   end
   let(:i18n_scope) { 'activemodel.errors.models.application_merits_task/opponent.attributes' }
@@ -34,7 +34,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           police_notified_details: police_notified_details,
           bail_conditions_set: 'true',
           bail_conditions_set_details: 'bail condition set details',
-          full_name: 'Bob Smith'
+          full_name: 'Bob Smith',
         }
       end
 
@@ -85,7 +85,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order: 'true',
           warning_letter_sent: 'true',
           understands_terms_of_court_order_details: '',
-          warning_letter_sent_details: ''
+          warning_letter_sent_details: '',
         }
       end
 
@@ -103,7 +103,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order: '',
           warning_letter_sent: '',
           police_notified: '',
-          bail_conditions_set: ''
+          bail_conditions_set: '',
         }
       end
 
@@ -140,7 +140,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
           police_notified_details_true: '',
-          bail_conditions_set_details: ''
+          bail_conditions_set_details: '',
         }
       end
 
@@ -191,7 +191,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order: '',
           warning_letter_sent: '',
           police_notified: '',
-          bail_conditions_set: ''
+          bail_conditions_set: '',
         }
       end
 
@@ -212,7 +212,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order_details: '',
           warning_letter_sent_details: '',
           police_notified_details_false: '',
-          bail_conditions_set_details: ''
+          bail_conditions_set_details: '',
         }
       end
 

@@ -65,8 +65,8 @@ RSpec.describe 'providers savings and investments', type: :request do
       {
         savings_amount: {
           cash: cash,
-          check_box_cash: check_box_cash
-        }
+          check_box_cash: check_box_cash,
+        },
       }
     end
 
@@ -80,7 +80,7 @@ RSpec.describe 'providers savings and investments', type: :request do
       context 'Submitted with Continue button' do
         let(:submit_button) do
           {
-            continue_button: 'Continue'
+            continue_button: 'Continue',
           }
         end
 
@@ -130,8 +130,8 @@ RSpec.describe 'providers savings and investments', type: :request do
               {
                 savings_amount: {
                   cash: '',
-                  check_box_cash: 'true'
-                }
+                  check_box_cash: 'true',
+                },
               }
             end
 
@@ -146,7 +146,7 @@ RSpec.describe 'providers savings and investments', type: :request do
           let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_passported_state_machine, :checking_passported_answers }
           let(:submit_button) do
             {
-              continue_button: 'Continue'
+              continue_button: 'Continue',
             }
           end
           before { subject }
@@ -169,7 +169,7 @@ RSpec.describe 'providers savings and investments', type: :request do
           let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, :checking_non_passported_means }
           let(:submit_button) do
             {
-              continue_button: 'Continue'
+              continue_button: 'Continue',
             }
           end
           before { subject }
@@ -183,7 +183,7 @@ RSpec.describe 'providers savings and investments', type: :request do
       context 'Submitted with Save as draft button' do
         let(:submit_button) do
           {
-            draft_button: 'Save as draft'
+            draft_button: 'Save as draft',
           }
         end
 

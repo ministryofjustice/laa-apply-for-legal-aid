@@ -36,8 +36,8 @@ module Admin
         csv_download: {
           report_title: 'Application Details report',
           path: :admin_application_details_csv_path,
-          path_text: 'Download CSV'
-        }
+          path_text: 'Download CSV',
+        },
       }
     end
   end

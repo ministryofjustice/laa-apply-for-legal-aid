@@ -8,7 +8,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
     {
       emergency_cost_override: overridden,
       emergency_cost_requested: value,
-      emergency_cost_reasons: reasons
+      emergency_cost_reasons: reasons,
     }
   end
   let(:form_params) { params.merge(model: application) }

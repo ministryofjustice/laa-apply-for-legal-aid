@@ -403,7 +403,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
       maintenance_out2: '5',
       maintenance_out3: '6',
       legal_aid_application_id: application.id,
-      none_selected: ''
+      none_selected: '',
     }
   end
 
@@ -412,7 +412,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
       check_box_legal_aid: 'true',
       legal_aid1: '15',
       legal_aid2: '20',
-      legal_aid3: '25'
+      legal_aid3: '25',
     })
   end
 
@@ -439,7 +439,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
       rent_or_mortgage3: '9',
       maintenance_out1: '10',
       maintenance_out2: '11',
-      maintenance_out3: '12'
+      maintenance_out3: '12',
     })
   end
 
@@ -454,7 +454,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
       maintenance_out2: '',
       maintenance_out3: '',
       legal_aid_application_id: application.id,
-      none_selected: 'true'
+      none_selected: 'true',
     }
   end
 

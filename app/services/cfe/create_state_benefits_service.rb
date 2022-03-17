@@ -6,7 +6,7 @@ module CFE
 
     def request_body
       {
-        state_benefits: build_transactions
+        state_benefits: build_transactions,
       }.to_json
     end
 
@@ -34,7 +34,7 @@ module CFE
         result << {
           date: transaction.happened_at.strftime('%Y-%m-%d'),
           amount: transaction.amount.to_f,
-          client_id: transaction.id
+          client_id: transaction.id,
         }
         result.first[:flags] = transaction.flags if transaction.flags.present?
       end

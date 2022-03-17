@@ -22,9 +22,9 @@ module Providers
         let(:params) do
           {
             binary_choice_form: {
-              remove_involved_child: radio_button
+              remove_involved_child: radio_button,
             },
-            legal_aid_application_id: application.id
+            legal_aid_application_id: application.id,
           }
         end
 

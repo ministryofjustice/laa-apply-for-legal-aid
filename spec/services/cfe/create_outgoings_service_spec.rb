@@ -33,7 +33,7 @@ module CFE
 
           def empty_payload
             {
-              outgoings: []
+              outgoings: [],
             }
           end
         end
@@ -88,16 +88,16 @@ module CFE
                   payments: [
                     { payment_date: 45.days.ago.strftime('%F'), amount: 266.0, client_id: '33333333-3333-3333-3333-333333333333' },
                     { payment_date: 15.days.ago.strftime('%F'), amount: 234.56, client_id: '33333333-3333-3333-3333-333333333333' }
-                  ]
+                  ],
                 },
                 {
                   name: 'rent_or_mortgage',
                   payments: [
                     { payment_date: 40.days.ago.strftime('%F'), amount: 1150.0, client_id: '33333333-3333-3333-3333-333333333333' },
                     { payment_date: 10.days.ago.strftime('%F'), amount: 1150.0, client_id: '33333333-3333-3333-3333-333333333333' }
-                  ]
+                  ],
                 }
-              ]
+              ],
             }
           end
         end
@@ -107,7 +107,7 @@ module CFE
         {
           outgoings: [],
           success: true,
-          errors: []
+          errors: [],
         }
       end
     end

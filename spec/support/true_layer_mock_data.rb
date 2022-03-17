@@ -4,23 +4,23 @@ module TrueLayerHelpers
       credentials_id: SecureRandom.hex,
       provider: {
         display_name: 'Lloyds Bank',
-        provider_id: 'lloyds'
-      }
+        provider_id: 'lloyds',
+      },
     },
     account_holders: [{
       full_name: Faker::Name.name,
       date_of_birth: Faker::Date.backward.to_time.utc.iso8601,
       addresses: [{
         address: Faker::Address.street_address,
-        city: Faker::Address.city
+        city: Faker::Address.city,
       },
                   {
                     address: Faker::Address.street_address,
-                    city: Faker::Address.city
-                  }]
+                    city: Faker::Address.city,
+                  }],
     },
                       {
-                        full_name: Faker::Name.name
+                        full_name: Faker::Name.name,
                       }],
     accounts: [{
       account_id: SecureRandom.hex,
@@ -29,10 +29,10 @@ module TrueLayerHelpers
       currency: Faker::Currency.code,
       account_number: {
         number: Faker::Number.number.to_s,
-        sort_code: Faker::Number.number(digits: 6).to_s
+        sort_code: Faker::Number.number(digits: 6).to_s,
       },
       balance: {
-        current: rand(1...1_000_000.0).round(2)
+        current: rand(1...1_000_000.0).round(2),
       },
       transactions: [{
         transaction_id: SecureRandom.hex,
@@ -44,8 +44,8 @@ module TrueLayerHelpers
         merchant_name: 'Google play',
         running_balance: {
           currency: 'GBP',
-          amount: 413.11
-        }
+          amount: 413.11,
+        },
       },
                      {
                        transaction_id: SecureRandom.hex,
@@ -55,8 +55,8 @@ module TrueLayerHelpers
                        currency: 'GBP',
                        transaction_type: 'CREDIT',
                        merchant_name: 'Ebay',
-                       running_balance: {}
-                     }]
+                       running_balance: {},
+                     }],
     },
                {
                  account_id: SecureRandom.hex,
@@ -65,17 +65,17 @@ module TrueLayerHelpers
                  currency: Faker::Currency.code,
                  account_number: {
                    number: Faker::Number.number,
-                   sort_code: Faker::Number.number(digits: 6)
+                   sort_code: Faker::Number.number(digits: 6),
                  },
                  balance: {
-                   current: rand(1...1_000_000.0).round(2)
+                   current: rand(1...1_000_000.0).round(2),
                  },
                  transactions: [{
-                   transaction_id: SecureRandom.hex
+                   transaction_id: SecureRandom.hex,
                  },
                                 {
-                                  transaction_id: SecureRandom.hex
-                                }]
-               }]
+                                  transaction_id: SecureRandom.hex,
+                                }],
+               }],
   }.freeze
 end

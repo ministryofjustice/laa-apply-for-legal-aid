@@ -8,7 +8,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
   let(:params) do
     {
       model: legal_aid_application,
-      outstanding_mortgage_amount: amount
+      outstanding_mortgage_amount: amount,
     }
   end
   subject { described_class.new(params) }

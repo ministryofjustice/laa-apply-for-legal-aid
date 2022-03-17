@@ -43,7 +43,7 @@ module FactoryHelpers
         {
           'submission' => @correlation_id,
           'status' => status,
-          'data' => @options[:data_array] || default_data_array
+          'data' => @options[:data_array] || default_data_array,
         }
       end
 
@@ -68,15 +68,15 @@ module FactoryHelpers
           data_array: [
             {
               correlation_id: @correlation_id,
-              use_case: 'use_case_one'
+              use_case: 'use_case_one',
             },
             {
               'individuals/matching/individual' => {
                 firstName: firstname,
                 lastName: lastname,
                 nino: nino,
-                dateOfBirth: '1994-04-30'
-              }
+                dateOfBirth: '1994-04-30',
+              },
             },
             {
               'income/paye/paye' => {
@@ -95,11 +95,11 @@ module FactoryHelpers
                       paidYTD: 0,
                       notPaidYTD: 514.17,
                       paid: 0,
-                      notPaid: 53.96
+                      notPaid: 53.96,
                     },
                     grossEarningsForNics: { inPayPeriod1: 1868.98 },
                     totalEmployerNics: { inPayPeriod1: 156.21, ytd: 1534.31 },
-                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 }
+                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 },
                   },
                   {
                     taxYear: '21-22',
@@ -115,11 +115,11 @@ module FactoryHelpers
                       paidYTD: 0,
                       notPaidYTD: 460.21,
                       paid: 0,
-                      notPaid: 43.83
+                      notPaid: 43.83,
                     },
                     grossEarningsForNics: { inPayPeriod1: 1868.98 },
                     totalEmployerNics: { inPayPeriod1: 156.21, ytd: 1534.31 },
-                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 }
+                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 },
                   },
                   {
                     taxYear: '21-22',
@@ -135,11 +135,11 @@ module FactoryHelpers
                       paidYTD: 0,
                       notPaidYTD: 416.38,
                       paid: 0,
-                      notPaid: 78.9
+                      notPaid: 78.9,
                     },
                     grossEarningsForNics: { inPayPeriod1: 2492.61 },
                     totalEmployerNics: { inPayPeriod1: 242.27, ytd: 1256.83 },
-                    employeeNics: { inPayPeriod1: 203.47, ytd1: 1049.7 }
+                    employeeNics: { inPayPeriod1: 203.47, ytd1: 1049.7 },
                   },
                   {
                     taxYear: '21-22',
@@ -155,14 +155,14 @@ module FactoryHelpers
                       paidYTD: 0,
                       notPaidYTD: 337.48,
                       paid: 0,
-                      notPaid: 73.01
+                      notPaid: 73.01,
                     },
                     grossEarningsForNics: { inPayPeriod1: 2345.29 },
                     totalEmployerNics: { inPayPeriod1: 221.94, ytd: 1014.56 },
-                    employeeNics: { inPayPeriod1: 185.79, ytd1: 846.23 }
+                    employeeNics: { inPayPeriod1: 185.79, ytd1: 846.23 },
                   }
-                ]
-              }
+                ],
+              },
             },
             { 'income/sa/selfAssessment' => { 'registrations' => [], 'taxReturns' => [] } },
             { 'income/sa/pensions_and_state_benefits/selfAssessment' => { 'taxReturns' => [] } },
@@ -180,7 +180,7 @@ module FactoryHelpers
             { 'employments/paye/employments' => [{ startDate: '2013-04-22', endDate: '2099-12-31' }] },
             { 'benefits_and_credits/working_tax_credit/applications' => [{ awards: [] }] },
             { 'benefits_and_credits/child_tax_credit/applications' => [{ awards: [] }] }
-          ]
+          ],
         }
       end
 
@@ -211,7 +211,7 @@ module FactoryHelpers
       def correlation_element
         {
           'correlation_id' => @correlation_id,
-          'use_case' => 'use_case_one'
+          'use_case' => 'use_case_one',
         }
       end
 
@@ -221,8 +221,8 @@ module FactoryHelpers
             'firstName' => firstname,
             'lastName' => lastname,
             'nino' => nino,
-            'dateOfBirth' => dob
-          }
+            'dateOfBirth' => dob,
+          },
         }
       end
 
@@ -237,8 +237,8 @@ module FactoryHelpers
                        end
         {
           'income/paye/paye' => {
-            'income' => income_array
-          }
+            'income' => income_array,
+          },
         }
       end
 
@@ -263,7 +263,7 @@ module FactoryHelpers
           'totalTaxToDate' => 5_442.66,
           'taxDeductedOrRefunded' => 1_325.66,
           'grossEarningsForNics' => {
-            'inPayPeriod1' => 6_512.92
+            'inPayPeriod1' => 6_512.92,
           } }
       end
 
@@ -272,9 +272,9 @@ module FactoryHelpers
           'employments/paye/employments' => [
             {
               'startDate' => '2019-06-04',
-              'endDate' => '2099-12-31'
+              'endDate' => '2099-12-31',
             }
-          ]
+          ],
         }
       end
 

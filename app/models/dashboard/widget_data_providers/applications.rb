@@ -13,7 +13,7 @@ module Dashboard
             Geckoboard::NumberField.new(:failed_apps, name: 'Failed applications'),
             Geckoboard::NumberField.new(:delegated_func_apps, name: 'Delegated function applications')
           ],
-          unique_by: [:date]
+          unique_by: [:date],
         }
       end
 
@@ -43,7 +43,7 @@ module Dashboard
           'submitted_passported_apps' => submitted_passported_apps(date),
           'submitted_nonpassported_apps' => submitted_nonpassported_apps(date),
           'failed_apps' => failed_ccms_submissions(date),
-          'delegated_func_apps' => delegated_function_applications(date)
+          'delegated_func_apps' => delegated_function_applications(date),
         }
       end
 

@@ -13,7 +13,7 @@ module UserTransactionsHelper
     return nil if items.blank?
 
     {
-      items: items.compact
+      items: items.compact,
     }
   end
 
@@ -29,7 +29,7 @@ module UserTransactionsHelper
     return nil if items.blank?
 
     {
-      items: items
+      items: items,
     }
   end
 end

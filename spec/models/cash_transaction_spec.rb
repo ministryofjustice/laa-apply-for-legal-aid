@@ -58,14 +58,14 @@ RSpec.describe CashTransaction, type: :model do
   def expected_result1
     {
       'benefits' => 300,
-      'pension' => 600
+      'pension' => 600,
     }
   end
 
   def expected_result2
     {
       'benefits' => 600,
-      'pension' => 1200
+      'pension' => 1200,
     }
   end
 end

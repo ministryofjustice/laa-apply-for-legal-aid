@@ -64,7 +64,7 @@ module Providers
             full_name: new_full_name,
             'date_of_birth(3i)': '4',
             'date_of_birth(2i)': '6',
-            'date_of_birth(1i)': '2020'
+            'date_of_birth(1i)': '2020',
           } }
         end
 

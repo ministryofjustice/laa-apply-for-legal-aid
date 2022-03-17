@@ -69,7 +69,7 @@ RSpec.describe SamlIdpController, type: :request do
         {
           'locale' => 'en',
           'controller' => 'saml_sessions',
-          'action' => 'new'
+          'action' => 'new',
         }
       )
     end
@@ -83,7 +83,7 @@ RSpec.describe SamlIdpController, type: :request do
           'commit' => 'Sign in',
           'locale' => 'en',
           'controller' => 'saml_idp',
-          'action' => 'create'
+          'action' => 'create',
         }
       )
     end

@@ -11,7 +11,7 @@ module Providers
           full_name: full_name,
           date_of_birth_3i: dob.day.to_s,
           date_of_birth_2i: dob.month.to_s,
-          date_of_birth_1i: dob.year.to_s
+          date_of_birth_1i: dob.year.to_s,
         }
       end
 
@@ -38,7 +38,7 @@ module Providers
               full_name: full_name,
               date_of_birth_3i: '',
               date_of_birth_2i: '',
-              date_of_birth_1i: ''
+              date_of_birth_1i: '',
             }
           end
           it 'returns false' do
@@ -53,7 +53,7 @@ module Providers
               full_name: full_name,
               date_of_birth_3i: '32',
               date_of_birth_2i: '2',
-              date_of_birth_1i: '2021'
+              date_of_birth_1i: '2021',
             }
           end
           it 'returns false' do

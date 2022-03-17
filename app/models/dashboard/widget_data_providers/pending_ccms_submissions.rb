@@ -6,14 +6,14 @@ module Dashboard
         {
           fields: [
             Geckoboard::NumberField.new(:number, name: 'Pending CCMS Submissions')
-          ]
+          ],
         }
       end
 
       def self.data
         [
           {
-            'number' => pending_submissions
+            'number' => pending_submissions,
           }
         ]
       end

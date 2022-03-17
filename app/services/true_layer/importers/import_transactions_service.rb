@@ -36,7 +36,7 @@ module TrueLayer
             amount: transaction[:amount],
             happened_at: transaction[:timestamp],
             operation: transaction[:transaction_type]&.downcase,
-            running_balance: transaction.dig(:running_balance, :amount)
+            running_balance: transaction.dig(:running_balance, :amount),
           }
         end
       end

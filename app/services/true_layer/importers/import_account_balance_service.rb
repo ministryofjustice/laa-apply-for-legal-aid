@@ -23,7 +23,7 @@ module TrueLayer
       def mapped_resource
         {
           true_layer_balance_response: account_balance,
-          balance: BigDecimal(account_balance[:current].to_s, 2).to_s
+          balance: BigDecimal(account_balance[:current].to_s, 2).to_s,
         }
       end
 

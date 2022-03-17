@@ -6,8 +6,8 @@ module TrueLayer
         client_id: 'client_id',
         provider: {
           display_name: 'Mock',
-          provider_id: 'sample'
-        }
+          provider_id: 'sample',
+        },
       }
     ].freeze
 
@@ -19,9 +19,9 @@ module TrueLayer
             address: '2 Denman Road',
             city: 'London',
             zip: 'SE15 5NP',
-            country: 'UK'
+            country: 'UK',
           }
-        ]
+        ],
       }
     ].freeze
 
@@ -33,8 +33,8 @@ module TrueLayer
         currency: 'GBP',
         account_number: {
           number: '10000000',
-          sort_code: '01-21-31'
-        }
+          sort_code: '01-21-31',
+        },
       }
     ].freeze
 

@@ -31,8 +31,8 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
       {
         vehicle: {
           payment_remaining: payment_remaining,
-          payments_remain: payments_remain
-        }
+          payments_remain: payments_remain,
+        },
       }
     end
     let(:next_url) { providers_legal_aid_application_vehicles_age_path(legal_aid_application) }

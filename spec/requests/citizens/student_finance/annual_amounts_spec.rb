@@ -22,8 +22,8 @@ RSpec.describe 'annual_amounts', type: :request do
     let(:params) do
       {
         irregular_income: {
-          amount: amount
-        }
+          amount: amount,
+        },
       }
     end
 
