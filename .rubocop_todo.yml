@@ -1981,21 +1981,6 @@ Style/Lambda:
 Style/QuotedSymbols:
   EnforcedStyle: single_quotes
 
-# Offense count: 27
-# Cop supports --auto-correct.
-Style/RedundantFreeze:
-  Exclude:
-    - 'app/jobs/dashboard/applicant_email_job.rb'
-    - 'app/models/applicant.rb'
-    - 'app/models/base_aggregated_cash_transaction.rb'
-    - 'app/services/ccms/attribute_value_generator.rb'
-    - 'app/services/ccms/payload_generators/entity_attributes_generator.rb'
-    - 'app/services/currency_cleaner.rb'
-    - 'app/validators/currency_validator.rb'
-    - 'config/initializers/settings.rb'
-    - 'db/anonymise/rules.rb'
-    - 'spec/services/reports/mis/non_passported_application_csv_line_spec.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AllowModifier.

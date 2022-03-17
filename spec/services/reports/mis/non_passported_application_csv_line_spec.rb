@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module Reports
   module MIS
-    DATE_TIME_REGEX = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.freeze
+    DATE_TIME_REGEX = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/
 
     RSpec.describe NonPassportedApplicationCsvLine do
       describe '.header_row' do

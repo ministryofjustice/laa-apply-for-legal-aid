@@ -38,22 +38,22 @@ module CCMS
                                 |income_type
                                 |vehicle
                                 |wage_slip
-                                )_(\S+)$}x.freeze
-    APPLICANT_REGEX = /^applicant_(\S+)$/.freeze
-    APPLICATION_REGEX = /^application_(\S+)$/.freeze
-    BANK_REGEX = /^bank_account_(\S+)$/.freeze
-    LEAD_PROCEEDING = /^lead_proceeding_(\S+)$/.freeze
-    CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/.freeze
-    DEPENDANT_REGEX = /^dependant_(\S+)$/.freeze
-    OPPONENT = /^opponent_(\S+)$/.freeze
-    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/.freeze
-    OTHER_PARTY = /^other_party_(\S+)$/.freeze
-    PROCEEDING_REGEX = /^proceeding_(\S+)$/.freeze
-    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/.freeze
-    INCOME_TYPE_REGEX = /^income_type_(\S+)$/.freeze
-    VEHICLE_REGEX = /^vehicle_(\S+)$/.freeze
-    WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/.freeze
-    OUTGOING = /^outgoing_(\S+)$/.freeze
+                                )_(\S+)$}x
+    APPLICANT_REGEX = /^applicant_(\S+)$/
+    APPLICATION_REGEX = /^application_(\S+)$/
+    BANK_REGEX = /^bank_account_(\S+)$/
+    LEAD_PROCEEDING = /^lead_proceeding_(\S+)$/
+    CHANCES_OF_SUCCESS = /^chances_of_success_(\S+)$/
+    DEPENDANT_REGEX = /^dependant_(\S+)$/
+    OPPONENT = /^opponent_(\S+)$/
+    OTHER_ASSETS_DECLARATION = /^other_assets_declaration_(\S+)$/
+    OTHER_PARTY = /^other_party_(\S+)$/
+    PROCEEDING_REGEX = /^proceeding_(\S+)$/
+    SAVINGS_AMOUNT = /^savings_amount_(\S+)$/
+    INCOME_TYPE_REGEX = /^income_type_(\S+)$/
+    VEHICLE_REGEX = /^vehicle_(\S+)$/
+    WAGE_SLIP_REGEX = /^wage_slip_(\S+)$/
+    OUTGOING = /^outgoing_(\S+)$/
 
     PROSPECTS_OF_SUCCESS = {
       likely: { text: 'Good', code: 'FM' },

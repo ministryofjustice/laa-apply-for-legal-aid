@@ -2,7 +2,7 @@ module Dashboard
   class ApplicantEmailJob < ApplicationJob
     include SuspendableJob
 
-    APPLY_EMAIL_REGEX = /#{Rails.configuration.x.email_domain.suffix}/.freeze
+    APPLY_EMAIL_REGEX = /#{Rails.configuration.x.email_domain.suffix}/
 
     def perform(application)
       return if job_suspended?

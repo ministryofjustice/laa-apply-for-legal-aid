@@ -7,7 +7,7 @@ module CCMS
 
       attr_reader :requestor
 
-      CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
+      CONFIG_METHOD_REGEX = /^#(\S+)/
 
       def self.call(requestor, xml, entity_name, options = {})
         new(requestor, xml, entity_name, options).call

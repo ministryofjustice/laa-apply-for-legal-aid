@@ -1,5 +1,5 @@
 class CurrencyValidator < ActiveModel::Validations::NumericalityValidator
-  ONLY_2_DECIMALS_PATTERN = /(\A-?[0-9]+\z)|(\A-?[0-9]*\.[0-9]{,2}\z)/.freeze
+  ONLY_2_DECIMALS_PATTERN = /(\A-?[0-9]+\z)|(\A-?[0-9]*\.[0-9]{,2}\z)/
 
   def validate_each(record, attr_name, value)
     clean_value = clean_numeric_value(value)
