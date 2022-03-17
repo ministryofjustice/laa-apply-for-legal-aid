@@ -23,6 +23,7 @@ RSpec.describe TranslatableModelAttribute do
     let(:klass) { Feedback }
     let(:satisfactions) { klass.satisfactions }
     let(:instance) { klass.new }
+
     subject { klass.enum_ts(:satisfaction) }
 
     it 'returns a hash with an entry for each state' do

@@ -203,6 +203,7 @@ module Providers
 
           context 'file is invalid mime type but has valid content_type' do
             let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
             before do
               allow(original_file).to receive(:content_type).and_return('application/pdf')
             end
@@ -290,6 +291,7 @@ module Providers
       let(:legal_aid_application) { gateway_evidence.legal_aid_application }
       let(:original_file) { gateway_evidence.original_attachments.first }
       let(:params) { { attachment_id: gateway_evidence.original_attachments.first.id } }
+
       subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
 
       before do

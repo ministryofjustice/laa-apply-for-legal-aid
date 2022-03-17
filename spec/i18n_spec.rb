@@ -7,6 +7,7 @@ RSpec.describe 'I18n', :i18n do
 
   context 'English' do
     let(:locale) { 'en' }
+
     it 'does not have missing keys' do
       expect(missing_keys).to be_empty,
                               "Missing #{missing_keys.leaves.count} i18n keys, run `i18n-tasks missing en' to show them"
@@ -16,6 +17,7 @@ RSpec.describe 'I18n', :i18n do
   context 'Welsh' do
     let(:locale) { 'cy' }
     let(:welsh_paths) { ['/accessibility_statement', '/citizen', '/contact', '/error', '/feedback', '/privacy_policy'] }
+
     it 'does not have missing keys for the applicant journey' do
       missing_applicant_keys = []
       missing_keys.leaves.each do |leaf|

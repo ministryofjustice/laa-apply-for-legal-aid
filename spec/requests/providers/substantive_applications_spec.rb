@@ -32,6 +32,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
 
     context 'when not authenticated' do
       let(:login_provider) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
   end
@@ -133,6 +134,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
 
     context 'when not authenticated' do
       let(:login_provider) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 

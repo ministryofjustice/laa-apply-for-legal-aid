@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Providers::ProvidersController, type: :request do
   let(:provider) { create :provider }
+
   subject { get providers_provider_path }
 
   before do

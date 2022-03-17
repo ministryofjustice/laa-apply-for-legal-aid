@@ -22,6 +22,7 @@ RSpec.describe HMRC::SubmissionWorker do
           ],
         }
       end
+
       before do
         allow(HMRC::Interface::SubmissionService).to receive(:call).with(hmrc_response).and_return(good_response)
       end
@@ -39,6 +40,7 @@ RSpec.describe HMRC::SubmissionWorker do
 
     context 'when an error occurs' do
       let(:hmrc_interface_service) { class_double HMRC::Interface::SubmissionService }
+
       before do
         allow(hmrc_interface_service).to receive(:call).and_raise(HMRC::InterfaceError)
       end

@@ -71,11 +71,13 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:test_nino) { 'JS130161E' }
       let(:invalid_nino) { 'QQ12AS23RR' }
       let(:valid_nino) { Faker::Base.regexify(Applicant::NINO_REGEXP) }
+
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
       end
       context 'with normal validation' do
         let(:in_test_mode) { 'false' }
+
         it 'test nino is invalid' do
           subject.national_insurance_number = test_nino
           expect(subject).to be_invalid
@@ -94,6 +96,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       context 'with test level validation' do
         let(:in_test_mode) { 'true' }
+
         it 'test NINO is valid' do
           subject.national_insurance_number = test_nino
           expect(subject).to be_valid
@@ -186,6 +189,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
   describe 'save_as_draft' do
     let(:applicant) { Applicant.last }
+
     it 'creates a new applicant' do
       expect { subject.save_as_draft }.to change { Applicant.count }.by(1)
     end
@@ -298,6 +302,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     context 'with an existing applicant passed in' do
       let(:applicant) { create :applicant }
       let(:params) { attributes.slice(*attr_list).merge(model: applicant) }
+
       it 'returns the applicant' do
         expect(subject.model).to eq(applicant)
       end

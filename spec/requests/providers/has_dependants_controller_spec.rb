@@ -28,6 +28,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
     let(:params) do
       { legal_aid_application: { has_dependants: has_dependants } }
     end
+
     subject do
       patch(
         providers_legal_aid_application_has_dependants_path(legal_aid_application),

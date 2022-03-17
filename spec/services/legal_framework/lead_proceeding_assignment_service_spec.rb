@@ -12,6 +12,7 @@ module LegalFramework
 
     context 'when a lead proceeding already exists' do
       let(:explicit_proceedings) { %i[da001 da004 se013 se014] }
+
       before { make_lead!(p_da2) }
 
       it 'changes nothing' do

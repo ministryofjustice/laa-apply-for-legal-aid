@@ -75,6 +75,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
       context 'when evidence upload setting  is off' do
         let(:evidence_upload) { false }
+
         it 'redirects to the gateway evidence page' do
           expect(response).to redirect_to(providers_legal_aid_application_gateway_evidence_path(legal_aid_application))
         end

@@ -63,6 +63,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
       context 'with policy disregards' do
         let(:add_policy_disregards?) { true }
+
         context 'eligible' do
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
@@ -114,8 +115,10 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
       context 'with policy disregards' do
         let(:add_policy_disregards?) { true }
+
         context 'eligible' do
           let(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -145,6 +148,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       context 'with no policy disregards' do
         context 'eligible' do
           let(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -181,6 +185,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
       context 'eligible' do
         let!(:cfe_result) { create :cfe_v4_result, :eligible }
+
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
         end
@@ -246,6 +251,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     context 'unauthenticated' do
       let(:before_tasks) { subject }
+
       it_behaves_like 'a provider not authenticated'
     end
 

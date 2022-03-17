@@ -11,6 +11,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
       outstanding_mortgage_amount: amount,
     }
   end
+
   subject { described_class.new(params) }
 
   describe '#outstanding_mortgage_amount' do
@@ -18,6 +19,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
     let(:legal_aid_application) do
       create :legal_aid_application, outstanding_mortgage_amount: existing_amount
     end
+
     it 'matches the value in params' do
       expect(subject.outstanding_mortgage_amount).to eq(amount)
     end
@@ -25,6 +27,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
       let(:params) do
         { model: legal_aid_application }
       end
+
       it 'matches the existing amount' do
         expect(subject.outstanding_mortgage_amount).to eq(existing_amount.to_d)
       end
@@ -52,6 +55,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
       context 'with an empty input' do
         let(:amount) { '' }
+
         it 'generates an error' do
           expect(subject.errors[:outstanding_mortgage_amount]).to contain_exactly('Enter the outstanding mortgage amount')
         end
@@ -64,6 +68,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
       context 'with something not a number' do
         let(:amount) { 'not a number' }
+
         it 'generates an error' do
           expect(subject.errors[:outstanding_mortgage_amount]).to contain_exactly('Mortgage amount must be an amount of money, like 60,000')
         end
@@ -76,6 +81,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
       context 'with negative numbers' do
         let(:amount) { Faker::Number.negative.to_s }
+
         it 'generates an error' do
           expect(subject.errors[:outstanding_mortgage_amount]).to contain_exactly('Mortgage amount must be 0 or more')
         end
@@ -83,6 +89,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
       context 'with zero' do
         let(:amount) { '0' }
+
         it 'does not generates an error' do
           expect(subject.errors[:outstanding_mortgage_amount]).to be_empty
         end
@@ -90,6 +97,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
 
       context 'with comma delimiter' do
         let(:amount) { '12,345' }
+
         it 'converts it to a number' do
           expect(legal_aid_application.outstanding_mortgage_amount).to eq(12_345)
         end

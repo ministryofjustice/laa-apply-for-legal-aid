@@ -20,6 +20,7 @@ RSpec.describe HashFormatHelper, type: :helper do
 
     context 'hash has key but no value' do
       let(:source) { { result: nil } }
+
       it 'returns empty string' do
         expect(subject).to eq ''
       end

@@ -19,6 +19,7 @@ module Dashboard
       describe '.data' do
         context 'no one has ever logged in' do
           let(:expected_data) { [{ 'number' => 0 }] }
+
           it 'sends expected data' do
             expect(described_class.data).to eq expected_data
           end

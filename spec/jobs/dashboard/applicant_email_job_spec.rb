@@ -37,6 +37,7 @@ module Dashboard
         context 'job is sending email to an Apply team email' do
           let(:applicant) { create :applicant, email: Rails.configuration.x.email_domain.suffix }
           let(:application) { create :legal_aid_application, applicant: applicant }
+
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 
           context 'in production environment' do

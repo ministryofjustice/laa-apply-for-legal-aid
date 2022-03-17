@@ -117,6 +117,7 @@ RSpec.describe Citizens::OtherAssetsForm do
 
         context 'from an existing record and form params' do
           let(:form) { described_class.new(form_params(empty_oad)) }
+
           context 'valid form params' do
             context 'all fields present' do
               let(:submitted_params) { params }

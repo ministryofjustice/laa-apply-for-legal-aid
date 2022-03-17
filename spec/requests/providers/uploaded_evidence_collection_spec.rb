@@ -150,6 +150,7 @@ module Providers
 
         context 'with an invalid mime type but valid content_type' do
           let(:original_file) { uploaded_file('spec/fixtures/files/zip.zip', 'application/zip') }
+
           before do
             allow(original_file).to receive(:content_type).and_return('application/pdf')
           end

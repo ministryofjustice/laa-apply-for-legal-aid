@@ -7,6 +7,7 @@ RSpec.describe AuthorizedIpRanges do
     context 'IPV4' do
       context 'authorized address' do
         let(:ipaddr) { '127.0.0.1' }
+
         it 'is authorised' do
           expect(subject).to be true
         end
@@ -14,6 +15,7 @@ RSpec.describe AuthorizedIpRanges do
 
       context 'unauthorized address' do
         let(:ipaddr) { '250.155.1.66' }
+
         it 'is not authorised' do
           expect(subject).to be false
         end
@@ -23,6 +25,7 @@ RSpec.describe AuthorizedIpRanges do
     context 'IPV6' do
       context 'authorized address' do
         let(:ipaddr) { '::1' }
+
         it 'is authorised' do
           expect(subject).to be true
         end
@@ -30,6 +33,7 @@ RSpec.describe AuthorizedIpRanges do
 
       context 'unauthorized address' do
         let(:ipaddr) { 'fdaa:bbcc:ddee:0:14c3:d7c5:9d07:195c' }
+
         it 'is not authorised' do
           expect(subject).to be false
         end

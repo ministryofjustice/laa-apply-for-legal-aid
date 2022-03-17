@@ -25,6 +25,7 @@ module CCMS
 
     describe 'initial state' do
       let(:submission) { create :submission }
+
       it 'puts new records into the initial state' do
         expect(submission.aasm_state).to eq 'initialised'
       end
@@ -59,6 +60,7 @@ module CCMS
         context 'case_ref_obtained state' do
           let(:state) { :case_ref_obtained }
           let(:service) { CCMS::Submitters::ObtainApplicantReferenceService }
+
           it 'calls the obtain_applicant_reference service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -67,6 +69,7 @@ module CCMS
         context 'applicant_submitted state' do
           let(:state) { :applicant_submitted }
           let(:service) { CCMS::Submitters::CheckApplicantStatusService }
+
           it 'calls the check_applicant_status service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -75,6 +78,7 @@ module CCMS
         context 'applicant_ref_obtained state' do
           let(:state) { :applicant_ref_obtained }
           let(:service) { CCMS::Submitters::ObtainDocumentIdService }
+
           it 'calls the add_case service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -83,6 +87,7 @@ module CCMS
         context 'case_submitted state' do
           let(:state) { :case_submitted }
           let(:service) { CCMS::Submitters::CheckCaseStatusService }
+
           it 'calls the check_case_status service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -91,6 +96,7 @@ module CCMS
         context 'case_created state' do
           let(:state) { :case_created }
           let(:service) { CCMS::Submitters::UploadDocumentsService }
+
           it 'calls the obtain_document_id service' do
             expect(service_instance).to receive(:call).with(no_args)
           end
@@ -99,6 +105,7 @@ module CCMS
         context 'document_ids_obtained state' do
           let(:state) { :document_ids_obtained }
           let(:service) { CCMS::Submitters::AddCaseService }
+
           it 'calls the upload_documents service' do
             expect(service_instance).to receive(:call).with({})
           end
@@ -120,6 +127,7 @@ module CCMS
 
         context 'with event complete' do
           let(:state) { :case_created }
+
           it 'changes state' do
             expect { submission.complete }.to change { submission.aasm_state }.to('completed')
           end

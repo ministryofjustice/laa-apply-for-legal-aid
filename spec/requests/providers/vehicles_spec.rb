@@ -16,6 +16,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
@@ -26,6 +27,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
     let(:params) do
       { legal_aid_application: { own_vehicle: own_vehicle } }
     end
+
     subject do
       patch(
         providers_legal_aid_application_vehicle_path(legal_aid_application),
@@ -45,6 +47,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end

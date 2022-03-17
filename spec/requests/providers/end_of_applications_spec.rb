@@ -28,12 +28,14 @@ RSpec.describe Providers::EndOfApplicationsController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
 
     context 'with another provider' do
       let(:login) { login_as create(:provider) }
+
       before { subject }
 
       it 'redirects to access denied error' do
@@ -72,12 +74,14 @@ RSpec.describe Providers::EndOfApplicationsController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
 
     context 'with another provider' do
       let(:login) { login_as create(:provider) }
+
       before { subject }
 
       it 'redirects to access denied error' do

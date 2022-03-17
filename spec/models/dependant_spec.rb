@@ -35,6 +35,7 @@ RSpec.describe Dependant, type: :model do
           assets_value: 0.0,
         }
       end
+
       it 'returns the expected hash' do
         expect(dependant.as_json).to eq expected_hash
       end
@@ -60,6 +61,7 @@ RSpec.describe Dependant, type: :model do
           assets_value: 6789.0,
         }
       end
+
       it 'returns the expected hash' do
         expect(dependant.as_json).to eq expected_hash
       end
@@ -183,21 +185,25 @@ RSpec.describe Dependant, type: :model do
 
     context 'when assets_value is nil' do
       let(:assets_value) { nil }
+
       it { is_expected.to be false }
     end
 
     context 'when assets_value is below threshold' do
       let(:assets_value) { 7999.99 }
+
       it { is_expected.to be false }
     end
 
     context 'when assets_value is on threshold' do
       let(:assets_value) { 8000 }
+
       it { is_expected.to be false }
     end
 
     context 'when assets_value is above threshold' do
       let(:assets_value) { 8000.01 }
+
       it { is_expected.to be true }
     end
   end

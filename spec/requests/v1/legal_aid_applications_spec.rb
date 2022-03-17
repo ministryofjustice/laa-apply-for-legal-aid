@@ -20,6 +20,7 @@ RSpec.describe 'GET /v1/legal_aid_applications', type: :request do
 
     context 'when the application does not exist' do
       let(:id) { SecureRandom.hex }
+
       it 'returns http not found' do
         subject
         expect(response).to have_http_status(:not_found)

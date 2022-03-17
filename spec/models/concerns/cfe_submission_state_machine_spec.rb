@@ -46,6 +46,7 @@ module CFE
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
         it 'raises' do
           expect { submission.dependants_created! }.to raise_error AASM::InvalidTransition, /Event 'dependants_created' cannot transition from 'explicit_remarks_created'/
         end
@@ -66,6 +67,7 @@ module CFE
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
         it 'raises' do
           expect { submission.outgoings_created! }.to raise_error AASM::InvalidTransition, /Event 'outgoings_created' cannot transition from 'dependants_created'/
         end
@@ -86,6 +88,7 @@ module CFE
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
         it 'raises' do
           expect { submission.state_benefits_created! }.to raise_error AASM::InvalidTransition, /Event 'state_benefits_created' cannot transition from 'outgoings_created'/
         end
@@ -106,6 +109,7 @@ module CFE
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
         it 'raises' do
           expect { submission.other_income_created! }.to raise_error AASM::InvalidTransition, /Event 'other_income_created' cannot transition from 'state_benefits_created'/
         end
@@ -126,6 +130,7 @@ module CFE
 
       context 'passported' do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+
         it 'transitions from state_benefits_created to other_income_created' do
           expect { submission.explicit_remarks_created! }.not_to raise_error
           expect(submission.explicit_remarks_created?).to be true
@@ -144,6 +149,7 @@ module CFE
 
     context 'fail! event' do
       let(:states) { Submission.aasm.states.map(&:name) - %i[failed results_obtained] }
+
       it 'transitions to failed from all states except failed and results obtained' do
         states.each do |state|
           submission = create :cfe_submission, aasm_state: state

@@ -28,6 +28,7 @@ module CCMS
         context 'operation successful' do
           context 'applicant not yet created' do
             let(:response_body) { ccms_data_from_file 'applicant_add_status_response_no_such_party.xml' }
+
             context 'poll count remains below limit' do
               it 'increments the poll count' do
                 expect { subject.call }.to change { submission.applicant_poll_count }.by 1

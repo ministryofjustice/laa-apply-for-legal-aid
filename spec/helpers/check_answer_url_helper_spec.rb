@@ -12,6 +12,7 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
 
       context 'when params are provided' do
         let(:params) { { transaction_type: 'benefits' } }
+
         it 'returns the correct path' do
           url = check_answer_url_for(:providers, :incoming_transactions, application, params)
           expect(url).to eq "/providers/applications/#{application.id}/incoming_transactions/benefits?locale=en"

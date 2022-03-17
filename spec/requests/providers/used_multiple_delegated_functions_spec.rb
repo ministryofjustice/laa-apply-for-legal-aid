@@ -37,6 +37,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
     context 'when not authenticated' do
       let(:login_provider) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 
@@ -74,6 +75,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
     let(:earliest_df) { legal_aid_application.proceeding_with_earliest_delegated_functions }
     let(:proceeding_type_meaning1) { legal_aid_application.proceeding_types[0].meaning }
     let(:proceeding_type_meaning2) { legal_aid_application.proceeding_types[1].meaning }
+
     before do
       allow(SubstantiveApplicationDeadlineCalculator).to receive(:call).with(an_instance_of(Date)).and_return(mock_deadline)
       allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
@@ -135,6 +137,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
     context 'when not authenticated' do
       let(:login_provider) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 

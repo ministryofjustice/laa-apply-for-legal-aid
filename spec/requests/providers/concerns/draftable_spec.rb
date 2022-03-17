@@ -26,6 +26,7 @@ RSpec.describe Providers::Draftable do
 
     context 'Form submitted using Continue button' do
       let(:submit_button) { { anything: 'That is not draft_button' } }
+
       context 'when the application is in draft' do
         let(:application) { create(:legal_aid_application, :draft) }
 

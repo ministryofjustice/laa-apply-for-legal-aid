@@ -52,6 +52,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
     let(:linked_children_params) do
       legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' }
     end
+
     context 'when the initial proceeding has no linked_children' do
       it { expect(proceeding.proceeding_linked_children).to match_array [] }
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
@@ -63,6 +64,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       let(:third_child) { legal_aid_application.involved_children.third }
       let(:initial_array) { [second_child.id, third_child.id] }
       let(:linked_children_params) { [first_child.id, '', ''] }
+
       before do
         create :proceeding_linked_child, proceeding: proceeding, involved_child: second_child
         create :proceeding_linked_child, proceeding: proceeding, involved_child: third_child

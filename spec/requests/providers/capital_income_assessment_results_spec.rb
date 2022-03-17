@@ -28,6 +28,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       context 'without policy disregards' do
         context 'eligible' do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -97,6 +98,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
         context 'eligible' do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -175,6 +177,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       context 'without policy disregards' do
         context 'eligible' do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -232,6 +235,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
         context 'eligible' do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
+
           it 'returns http success' do
             expect(response).to have_http_status(:ok)
           end
@@ -302,6 +306,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'eligible' do
         let!(:cfe_result) { create :cfe_v4_result, :eligible }
+
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
         end
@@ -397,6 +402,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
     context 'unauthenticated' do
       let(:before_tasks) { subject }
       let!(:cfe_result) { create :cfe_v3_result, :eligible }
+
       it_behaves_like 'a provider not authenticated'
     end
 
@@ -461,6 +467,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'applicant has no employment(s)' do
         let(:cfe_result) { create :cfe_v4_result, :with_no_employments }
+
         it 'does not display employment income' do
           expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))
@@ -478,6 +485,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'applicant has employment(s)' do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
+
         it 'does not display employment income' do
           expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))
@@ -486,6 +494,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context 'applicant has no employment(s)' do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
+
         it 'does not display employment income' do
           expect(unescaped_response_body).not_to include(I18n.t('providers.capital_income_assessment_results.employment_income.title'))
           expect(unescaped_response_body).to include(I18n.t('providers.capital_income_assessment_results.other_income.income'))

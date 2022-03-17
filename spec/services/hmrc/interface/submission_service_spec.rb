@@ -33,6 +33,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
       before { allow(Rails.configuration.x.hmrc_interface).to receive(:duration_check).and_return('4') }
 
       let(:start_date) { Time.zone.today - 4.months }
+
       it 'honours the date values' do
         call
         expect(a_request(:post, %r{.*/api/v1/submission/create/.*}).with { |req| req.body.include?(start_date.strftime('%Y-%m-%d')) }).to have_been_made

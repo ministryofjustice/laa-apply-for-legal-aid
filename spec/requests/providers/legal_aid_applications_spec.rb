@@ -7,6 +7,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
     let(:other_provider) { create(:provider) }
     let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
     let(:params) { {} }
+
     subject { get providers_legal_aid_applications_path(params) }
 
     context 'when the provider is not authenticated' do
@@ -135,6 +136,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
     let(:other_provider) { create(:provider) }
     let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
     let(:params) { {} }
+
     subject { get search_providers_legal_aid_applications_path(params) }
 
     context 'when the provider is not authenticated' do
@@ -236,6 +238,7 @@ RSpec.describe 'providers legal aid application requests', type: :request do
 
     context 'when another provider is authenticated and search the application' do
       let(:params) { { search_term: legal_aid_application.application_ref } }
+
       before do
         login_as other_provider
         subject

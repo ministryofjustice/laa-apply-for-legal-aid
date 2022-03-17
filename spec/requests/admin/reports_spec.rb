@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::ReportsController, type: :request do
   let(:admin_user) { create :admin_user }
+
   before { sign_in admin_user }
 
   describe 'GET index' do

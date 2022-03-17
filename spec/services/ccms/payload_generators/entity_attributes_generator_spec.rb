@@ -60,6 +60,7 @@ module CCMS
         describe '#evaluate_generate_block_method?' do
           context 'when true' do
             let(:config) { { generate_block?: true } }
+
             it 'returns true' do
               generator.__send__(:evaluate_generate_block_method, config)
             end
@@ -67,6 +68,7 @@ module CCMS
 
           context 'when false' do
             let(:config) { { generate_block?: false } }
+
             it 'returns false' do
               generator.__send__(:evaluate_generate_block_method, config)
             end

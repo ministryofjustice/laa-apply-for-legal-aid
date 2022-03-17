@@ -121,6 +121,7 @@ RSpec.describe BankTransactionPresenter do
 
       context 'when the transaction is from a current account' do
         let(:account) { create :bank_account, account_type: 'TRANSACTION' }
+
         it { is_expected.to eq 'Bank Current' }
       end
     end

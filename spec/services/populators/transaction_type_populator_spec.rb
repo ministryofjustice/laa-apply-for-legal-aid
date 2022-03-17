@@ -42,6 +42,7 @@ module Populators
 
       context 'when a transaction type has been removed from the model' do
         let!(:old_transaction_type) { create :transaction_type, name: :council_tax }
+
         it 'sets the archived_at date in the database' do
           subject
           expect(TransactionType.find_by(name: 'council_tax').archived_at).to_not eq nil

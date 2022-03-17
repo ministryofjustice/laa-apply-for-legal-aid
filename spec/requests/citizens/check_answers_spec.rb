@@ -29,6 +29,7 @@ RSpec.describe 'check your answers requests', type: :request do
   let(:has_restrictions) { true }
   let(:restrictions_details) { Faker::Lorem.paragraph }
   let(:secure_id) { legal_aid_application.generate_secure_id }
+
   before { get citizens_legal_aid_application_path(secure_id) }
 
   describe 'GET /citizens/check_answers' do
@@ -65,6 +66,7 @@ RSpec.describe 'check your answers requests', type: :request do
 
     context 'firms with special characters in the name' do
       let(:firm) { create :firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!") }
+
       it 'finds the firm even though it has special characters' do
         subject
         expect(response.body).to include(html_compare(firm.name))

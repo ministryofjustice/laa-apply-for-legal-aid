@@ -209,6 +209,7 @@ module Reports
 
             context 'DWP check result negative' do
               let(:benefit_check_result_text) { 'No' }
+
               it 'generates Non-Passported' do
                 expect(value_for('Case Type')).to eq 'Non-Passported'
               end
@@ -235,6 +236,7 @@ module Reports
 
               context 'true' do
                 let(:laspo_answer) { true }
+
                 it 'populates with Yes' do
                   expect(value_for('LASPO Question')).to eq 'Yes'
                 end
@@ -242,6 +244,7 @@ module Reports
 
               context 'false' do
                 let(:laspo_answer) { false }
+
                 it 'populates with Yes' do
                   expect(value_for('LASPO Question')).to eq 'No'
                 end
@@ -249,6 +252,7 @@ module Reports
 
               context 'nil' do
                 let(:laspo_answer) { nil }
+
                 it 'populates with Yes' do
                   expect(value_for('LASPO Question')).to eq ''
                 end
@@ -269,6 +273,7 @@ module Reports
           context 'multiple proceedings' do
             before { setup_multiple_proceedings }
             let(:expected_proceeding_types) { 'Child arrangements order (contact), Inherent jurisdiction high court injunction, Non-molestation order' }
+
             it 'generates multiple proceedings content' do
               expect(value_for('Single/Multi Proceedings')).to eq 'Multi'
               expect(value_for('Matter types')).to eq 'Domestic Abuse, Section 8 orders'
@@ -289,6 +294,7 @@ module Reports
 
             context 'own home not shared' do
               let(:shared_ownership_status) { 'no_sole_owner' }
+
               it 'generates values for home not shared' do
                 expect(value_for('Own home?')).to eq 'mortgage'
                 expect(value_for('Value')).to eq 876_200
@@ -301,6 +307,7 @@ module Reports
             context 'home owned outright' do
               let(:shared_ownership_status) { 'no_sole_owner' }
               let(:own_home_status) { 'owned_outright' }
+
               it 'generates values for home not shared' do
                 expect(value_for('Own home?')).to eq 'owned_outright'
                 expect(value_for('Value')).to eq 876_200
@@ -338,6 +345,7 @@ module Reports
 
             context 'in regular use, no loan outstanding' do
               let(:payment_remaining) { 0 }
+
               it 'generates the values' do
                 expect(value_for('Vehicle?')).to eq 'Yes'
                 expect(value_for('Vehicle value')).to eq 12_000
@@ -351,6 +359,7 @@ module Reports
             context 'not in regular use' do
               let(:used_regularly) { false }
               let(:payment_remaining) { 0 }
+
               it 'generates the values' do
                 expect(value_for('Vehicle?')).to eq 'Yes'
                 expect(value_for('Vehicle value')).to eq 12_000
@@ -363,6 +372,7 @@ module Reports
 
             context 'loan outstanding' do
               let(:payment_remaining) { 4_566 }
+
               it 'generates the values' do
                 expect(value_for('Vehicle?')).to eq 'Yes'
                 expect(value_for('Vehicle value')).to eq 12_000

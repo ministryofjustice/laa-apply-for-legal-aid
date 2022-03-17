@@ -25,6 +25,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
 
     context 'sending the email' do
       let(:mail) { SubmitApplicationReminderMailer.notify_provider(application.id, application.provider.name, provider.email) }
+
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(
           email: provider.email,

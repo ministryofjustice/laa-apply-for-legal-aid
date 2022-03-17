@@ -38,6 +38,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
@@ -83,6 +84,7 @@ RSpec.describe Providers::IncomeSummaryController do
     let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [salary] }
 
     let(:submit_button) { { continue_button: 'Continue' } }
+
     subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
     before { subject }
 
@@ -92,6 +94,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       it_behaves_like 'a provider not authenticated'
     end
 
@@ -111,6 +114,7 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [salary] }
 
       let(:submit_button) { { continue_button: 'Continue' } }
+
       subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
       before { subject }
 

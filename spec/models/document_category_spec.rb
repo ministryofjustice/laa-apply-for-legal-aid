@@ -36,6 +36,7 @@ RSpec.describe DocumentCategory, type: :model do
         statement_of_case_pdf
       ]
     end
+
     it 'returns an array of names that should be uploaded to CCMS' do
       expect(described_class.submittable_category_names).to eq expected_categories
     end

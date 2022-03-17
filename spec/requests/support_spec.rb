@@ -10,6 +10,7 @@ RSpec.describe '/support', type: :request do
 
   context 'when authenticated' do
     let(:admin_user) { create :admin_user }
+
     before { sign_in admin_user }
 
     it 'renders successfully' do

@@ -114,6 +114,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
 
       context 'when an address includes an organisation but no address_line_one' do
         let(:address) { create :address, address_line_one: 'Honeysuckle Cottage', address_line_two: 'Station Road', city: 'Dartford', county: '', postcode: 'DA4 0EN' }
+
         it 'formats the address correctly' do
           expect(unescaped_response_body).to include('Honeysuckle Cottage<br>Station Road<br>Dartford<br>DA4 0EN')
         end
@@ -159,6 +160,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
                  :with_non_passported_state_machine,
                  :checking_citizen_answers)
         end
+
         it 'renders page successfully' do
           expect(response).to have_http_status(:ok)
         end
@@ -166,6 +168,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
 
       context 'when client has completed their journey' do
         let(:application) { create(:legal_aid_application, :with_proceedings, :with_applicant_and_address, :with_non_passported_state_machine, :provider_assessing_means) }
+
         it 'redirects to client completed means page' do
           expect(response).to redirect_to(providers_legal_aid_application_client_completed_means_path(application))
         end

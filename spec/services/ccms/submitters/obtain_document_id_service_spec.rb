@@ -150,6 +150,7 @@ module CCMS
         # There should only be one record in this state, so if it fails it's a legitimate error,
         # previously a race condition would occur where both records where created to
         # the microsecond :(
+
         context 'when populating documents' do
           let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }

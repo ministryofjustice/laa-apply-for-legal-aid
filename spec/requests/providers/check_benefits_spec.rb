@@ -12,6 +12,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
   describe 'GET /providers/applications/:application_id/check_benefits', :vcr do
     let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
+
     subject { get "/providers/applications/#{application.id}/check_benefits" }
 
     before { login }
@@ -89,6 +90,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
     context 'when the provider is not authenticated' do
       let(:login) { nil }
+
       before { subject }
       it_behaves_like 'a provider not authenticated'
     end
@@ -214,6 +216,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       context 'permissions passported' do
         let(:provider) { create :provider, :with_passported_permissions }
+
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
           expect(response.body).to include('DWP records show that your client receives a passporting benefit')
@@ -222,6 +225,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       context 'no permissions' do
         let(:provider) { create :provider, :with_no_permissions }
+
         it 'allows us to continue' do
           get "/providers/applications/#{application.id}/check_benefits"
           expect(response.body).to include('DWP records show that your client receives a passporting benefit')

@@ -41,6 +41,7 @@ RSpec.describe DelegatedFunctionsDateService do
       context 'no DF used on any proceeding type' do
         let(:df_date) { nil }
         let(:reported_date) { nil }
+
         it 'sets the substantive application_deadline_on to nil' do
           subject
           expect(laa.reload.substantive_application_deadline_on).to be_nil
@@ -71,6 +72,7 @@ RSpec.describe DelegatedFunctionsDateService do
       context 'delegated functions on at least one proceeding type' do
         let(:expected_date1) { Time.zone.local(2021, 6, 1, 9, 0, 0) }
         let(:expected_date2) { Time.zone.local(2021, 6, 8, 9, 0, 0) }
+
         context 'scheduled mail already exists' do
           before do
             create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1
