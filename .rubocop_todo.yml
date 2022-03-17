@@ -1907,17 +1907,6 @@ Rake/MethodDefinitionInTask:
   Exclude:
     - 'lib/tasks/db.rake'
 
-# Offense count: 13
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: separated, grouped
-Style/AccessorGrouping:
-  Exclude:
-    - 'app/forms/citizens/other_assets_form.rb'
-    - 'app/forms/incidents/told_on_form.rb'
-    - 'app/forms/savings_amounts/offline_accounts_form.rb'
-    - 'app/forms/savings_amounts/savings_amounts_form.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: AllowCoercion.
