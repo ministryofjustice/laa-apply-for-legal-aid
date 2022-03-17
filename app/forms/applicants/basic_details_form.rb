@@ -71,7 +71,7 @@ module Applicants
     def dob_date_fields
       @dob_date_fields ||= DateFieldBuilder.new(
         form: self,
-        model: model,
+        model:,
         method: :date_of_birth,
         prefix: :date_of_birth_,
         suffix: :gov_uk

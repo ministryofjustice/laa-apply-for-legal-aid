@@ -13,7 +13,7 @@ module LegalAidApplications
     class << self
       def call(proceedings_by_name)
         populate_attr_accessors(proceedings_by_name.map(&:name))
-        new({ proceedings_by_name: proceedings_by_name })
+        new({ proceedings_by_name: })
       end
 
       def populate_attr_accessors(proceeding_names)

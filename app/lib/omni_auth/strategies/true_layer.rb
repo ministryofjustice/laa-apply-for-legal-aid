@@ -21,7 +21,7 @@ module OmniAuth
              token_url: 'https://auth.truelayer.com/connect/token'
 
       def authorize_params
-        extra_params = { enable_mock: enable_mock }
+        extra_params = { enable_mock: }
 
         extra_params[:provider_id] = session[:provider_id] if session[:provider_id].present?
         extra_params[:consent_id] = consent_id if consent_id

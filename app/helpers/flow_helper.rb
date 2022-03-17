@@ -8,13 +8,13 @@ module FlowHelper
     draft_button_text: t('generic.save_and_come_back_later')
   )
 
-    form_with(model: nil, url: url, method: method, local: true) do |form|
+    form_with(model: nil, url:, method:, local: true) do |form|
       next_action_buttons(
-        show_continue: show_continue,
-        show_draft: show_draft,
-        form: form,
-        continue_button_text: continue_button_text,
-        draft_button_text: draft_button_text
+        show_continue:,
+        show_draft:,
+        form:,
+        continue_button_text:,
+        draft_button_text:
       )
     end
   end
@@ -30,12 +30,12 @@ module FlowHelper
 
     render(
       'shared/forms/next_action_buttons',
-      continue_id: continue_id,
-      form: form,
-      show_continue: show_continue,
-      show_draft: show_draft,
-      continue_button_text: continue_button_text,
-      draft_button_text: draft_button_text
+      continue_id:,
+      form:,
+      show_continue:,
+      show_draft:,
+      continue_button_text:,
+      draft_button_text:
     )
   end
 

@@ -31,7 +31,7 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
 
   context 'Downloads' do
     let(:submission) { legal_aid_application.ccms_submission }
-    let!(:history) { create(:ccms_submission_history, :with_xml, submission: submission) }
+    let!(:history) { create(:ccms_submission_history, :with_xml, submission:) }
 
     describe 'GET download_response_xml' do
       subject { get download_xml_response_admin_legal_aid_applications_submission_path(history, format: :xml) }
@@ -84,7 +84,7 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
 
   describe 'nil value' do
     let(:submission) { legal_aid_application.ccms_submission }
-    let!(:history) { create(:ccms_submission_history, :without_xml, submission: submission) }
+    let!(:history) { create(:ccms_submission_history, :without_xml, submission:) }
 
     subject { get download_xml_response_admin_legal_aid_applications_submission_path(history, format: :xml) }
 

@@ -11,7 +11,7 @@ FactoryBot.define do
       aasm_state { 'case_ref_obtained' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
+        create(:ccms_submission_history, submission:)
       end
     end
 
@@ -20,7 +20,7 @@ FactoryBot.define do
       aasm_state { 'applicant_submitted' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
+        create(:ccms_submission_history, submission:)
       end
     end
 
@@ -30,7 +30,7 @@ FactoryBot.define do
       aasm_state { 'applicant_ref_obtained' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
+        create(:ccms_submission_history, submission:)
       end
     end
 
@@ -40,8 +40,8 @@ FactoryBot.define do
       aasm_state { 'document_ids_obtained' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
-        create(:ccms_submission_document, submission: submission)
+        create(:ccms_submission_history, submission:)
+        create(:ccms_submission_document, submission:)
       end
     end
 
@@ -51,8 +51,8 @@ FactoryBot.define do
       aasm_state { 'case_submitted' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
-        create(:ccms_submission_document, submission: submission)
+        create(:ccms_submission_history, submission:)
+        create(:ccms_submission_document, submission:)
       end
     end
 
@@ -62,8 +62,8 @@ FactoryBot.define do
       aasm_state { 'case_created' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, submission: submission)
-        create(:ccms_submission_document, submission: submission)
+        create(:ccms_submission_history, submission:)
+        create(:ccms_submission_document, submission:)
       end
     end
 
@@ -73,8 +73,8 @@ FactoryBot.define do
       aasm_state { 'completed' }
 
       after(:create) do |submission|
-        create(:ccms_submission_history, :with_xml, to_state: 'case_submitted', submission: submission)
-        create(:ccms_submission_document, submission: submission)
+        create(:ccms_submission_history, :with_xml, to_state: 'case_submitted', submission:)
+        create(:ccms_submission_document, submission:)
       end
     end
   end

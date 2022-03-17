@@ -25,7 +25,7 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
       expect(mail.govuk_notify_personalisation).to eq(
         ref_number: application.application_ref,
         client_name: application.applicant.full_name,
-        application_url: application_url
+        application_url:
       )
     end
   end

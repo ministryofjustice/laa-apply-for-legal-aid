@@ -3,11 +3,11 @@ module TaskListHelper
     tag_class = status == :complete ? nil : 'govuk-tag--grey'
     render(
       'providers/merits_task_lists/task_list_item',
-      name: name,
-      status: status,
+      name:,
+      status:,
       url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application, status),
       proceeding_merits_task: ccms_code.present?,
-      tag_class: tag_class
+      tag_class:
     )
   end
 
@@ -44,7 +44,7 @@ private
   def proceeding_id(application, ccms_code)
     return nil unless ccms_code && application
 
-    proceeding = application.proceedings.find_by(ccms_code: ccms_code)
+    proceeding = application.proceedings.find_by(ccms_code:)
     proceeding.id
   end
 end

@@ -26,7 +26,7 @@ RSpec.describe SubmissionConfirmationMailer, type: :mailer do
         provider_name: provider.name,
         client_name: applicant.full_name,
         ref_number: legal_aid_application.application_ref,
-        feedback_url: feedback_url
+        feedback_url:
       )
     end
   end

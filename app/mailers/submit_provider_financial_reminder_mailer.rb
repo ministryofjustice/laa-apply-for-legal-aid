@@ -12,7 +12,7 @@ class SubmitProviderFinancialReminderMailer < BaseApplyMailer
     set_personalisation(
       ref_number: application['application_ref'],
       client_name: application.applicant.full_name,
-      application_url: application_url
+      application_url:
     )
     mail to: application.provider.email
   end

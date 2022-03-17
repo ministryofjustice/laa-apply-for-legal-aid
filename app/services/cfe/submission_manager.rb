@@ -42,7 +42,7 @@ module CFE
     end
 
     def submission
-      @submission ||= Submission.create!(legal_aid_application_id: legal_aid_application_id)
+      @submission ||= Submission.create!(legal_aid_application_id:)
     end
 
     def call_common_services

@@ -73,7 +73,7 @@ module Banking
 
     def process_known_benefit(txn, benefit)
       transaction_type = benefit.excluded? ? excluded_benefit_transaction_type : included_benefit_transaction_type
-      txn.update!(transaction_type: transaction_type, meta_data: known_meta(benefit))
+      txn.update!(transaction_type:, meta_data: known_meta(benefit))
     end
 
     def known_meta(benefit)

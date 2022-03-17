@@ -27,7 +27,7 @@ module Providers
         return if self.class.legal_aid_application_not_required?
         return process_invalid_application if legal_aid_application.blank?
 
-        legal_aid_application.update!(provider_step: provider_step, provider_step_params: provider_step_params) unless provider_step == :delete
+        legal_aid_application.update!(provider_step:, provider_step_params:) unless provider_step == :delete
       end
 
       def process_invalid_application

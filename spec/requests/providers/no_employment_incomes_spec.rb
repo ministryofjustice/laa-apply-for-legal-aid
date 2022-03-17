@@ -32,7 +32,7 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          full_employment_details: full_employment_details,
+          full_employment_details:,
         },
       }
     end

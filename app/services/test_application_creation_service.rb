@@ -41,7 +41,7 @@ private
       :with_passported_state_machine,
       :with_applicant,
       trait,
-      provider: provider
+      provider:
     )
   end
 
@@ -51,7 +51,7 @@ private
       :with_non_passported_state_machine,
       :with_applicant,
       trait,
-      provider: provider
+      provider:
     )
   end
 end

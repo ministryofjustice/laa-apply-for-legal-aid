@@ -76,7 +76,7 @@ module Incidents
     def told_on_date_fields
       @told_on_date_fields ||= DateFieldBuilder.new(
         form: self,
-        model: model,
+        model:,
         method: :told_on,
         prefix: :told_on_,
         suffix: :gov_uk
@@ -86,7 +86,7 @@ module Incidents
     def occurred_on_date_fields
       @occurred_on_date_fields ||= DateFieldBuilder.new(
         form: self,
-        model: model,
+        model:,
         method: :occurred_on,
         prefix: :occurred_on_,
         suffix: :gov_uk

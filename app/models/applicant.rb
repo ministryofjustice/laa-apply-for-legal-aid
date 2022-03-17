@@ -24,7 +24,7 @@ class Applicant < ApplicationRecord
   end
 
   def store_true_layer_token(token:, expires:)
-    data = { token: token, expires: expires }
+    data = { token:, expires: }
     update!(true_layer_secure_data_id: SecureData.create_and_store!(data))
   end
 

@@ -15,7 +15,7 @@ module HMRC
       return unless @legal_aid_application.hmrc_responses.empty?
 
       USE_CASES.each do |use_case|
-        hmrc_response = @legal_aid_application.hmrc_responses.create(use_case: use_case)
+        hmrc_response = @legal_aid_application.hmrc_responses.create(use_case:)
         if use_mock?
           MockInterfaceResponseService.call(hmrc_response)
         else

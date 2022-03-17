@@ -5,7 +5,7 @@ class ApplicationDigest < ApplicationRecord
   class << self
     def create_or_update!(legal_aid_application_id)
       attrs = map_attrs(legal_aid_application_id)
-      rec = find_by(legal_aid_application_id: legal_aid_application_id)
+      rec = find_by(legal_aid_application_id:)
       rec.nil? ? create!(attrs) : rec.update!(attrs)
     end
 

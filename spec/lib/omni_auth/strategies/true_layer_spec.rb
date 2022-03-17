@@ -33,7 +33,7 @@ module OmniAuth
         let(:provider_id) { [nil, 'hsbc'].sample }
 
         before do
-          allow(subject).to receive(:session).and_return(provider_id: provider_id)
+          allow(subject).to receive(:session).and_return(provider_id:)
           allow(Rails.configuration.x.true_layer).to receive(:enable_mock).and_return(enable_mock)
         end
 

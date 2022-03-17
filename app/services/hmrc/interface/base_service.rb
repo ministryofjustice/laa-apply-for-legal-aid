@@ -12,7 +12,7 @@ module HMRC
     private
 
       def conn
-        @conn ||= Faraday.new(url: host, headers: headers)
+        @conn ||= Faraday.new(url: host, headers:)
       end
 
       def bearer_token
@@ -35,13 +35,13 @@ module HMRC
         raise_exception_error(
           message: formatted_error_message(error),
           backtrace: error.backtrace&.join("\n"),
-          http_method: http_method,
+          http_method:,
           http_status: error.respond_to?(:http_status) ? error.http_status : nil
         )
       end
 
       def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
-        Rails.logger.info { { message: message, backtrace: backtrace, method: http_method, http_status: http_status } }
+        Rails.logger.info { { message:, backtrace:, method: http_method, http_status: } }
         raise HMRC::InterfaceError.new(message, http_status)
       end
 

@@ -325,7 +325,7 @@ module CCMS
             let(:maintenance_transaction) { create :transaction_type, :debit, name: 'maintenance_out' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: maintenance_transaction)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: maintenance_transaction)
             end
             it 'has attributes' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_12WP3_3A')
@@ -344,7 +344,7 @@ module CCMS
             let(:criminal_legal_aid_transaction) { create :transaction_type, :debit, name: 'legal_aid' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: criminal_legal_aid_transaction)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: criminal_legal_aid_transaction)
             end
             it 'has attributes' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INPUT_B_14WP3_1A')
@@ -364,7 +364,7 @@ module CCMS
             let(:childcare_out) { create :transaction_type, :debit, name: 'child_care' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: childcare_out)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: childcare_out)
             end
             it 'has attribute block' do
               block = XmlExtractor.call(xml, :global_means, 'GB_INFER_B_12WP3_12A')

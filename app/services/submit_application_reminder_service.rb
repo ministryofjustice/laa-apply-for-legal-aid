@@ -21,7 +21,7 @@ class SubmitApplicationReminderService
         mailer_klass: SubmitApplicationReminderMailer,
         mailer_method: :notify_provider,
         legal_aid_application_id: application.id,
-        addressee: addressee,
+        addressee:,
         scheduled_at: scheduled_time,
         arguments: mailer_args
       )

@@ -8,7 +8,7 @@ class PermissionsPopulator
 
   def self.run
     ROLES.each do |role, description|
-      Permission.create(role: role, description: description) if Permission.find_by(role: role).nil?
+      Permission.create(role:, description:) if Permission.find_by(role:).nil?
     end
   end
 end

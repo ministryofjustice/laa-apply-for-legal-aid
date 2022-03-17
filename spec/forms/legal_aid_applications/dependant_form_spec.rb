@@ -19,11 +19,11 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       date_of_birth_2i: month,
       date_of_birth_1i: year,
       relationship: 'child_relationship',
-      monthly_income: monthly_income,
-      has_income: has_income,
+      monthly_income:,
+      has_income:,
       in_full_time_education: 'false',
       has_assets_more_than_threshold: has_assets,
-      assets_value: assets_value,
+      assets_value:,
     }
   end
 

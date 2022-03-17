@@ -51,7 +51,7 @@ module LegalFramework
       end
 
       def conn
-        @conn ||= Faraday.new(url: url, headers: headers)
+        @conn ||= Faraday.new(url:, headers:)
       end
 
       def url

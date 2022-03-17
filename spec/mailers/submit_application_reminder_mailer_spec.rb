@@ -30,8 +30,8 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq(
-        email: email,
-        provider_name: provider_name,
+        email:,
+        provider_name:,
         ref_number: application.application_ref,
         client_name: application.applicant.full_name,
         delegated_functions_date: application.earliest_delegated_functions_date.strftime('%-d %B %Y'),

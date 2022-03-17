@@ -30,7 +30,7 @@ RSpec.describe 'provider own home requests', type: :request do
     let(:own_home) { 'owned_outright' }
     let(:params) do
       {
-        legal_aid_application: { own_home: own_home },
+        legal_aid_application: { own_home: },
       }
     end
 

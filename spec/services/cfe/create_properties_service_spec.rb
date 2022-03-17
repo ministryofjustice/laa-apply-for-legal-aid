@@ -9,10 +9,10 @@ RSpec.describe CFE::CreatePropertiesService do
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
-      property_value: property_value,
+      property_value:,
       outstanding_mortgage_amount: outstanding_mortgage,
       percentage_home: percentage_owned,
-      shared_ownership: shared_ownership
+      shared_ownership:
     )
   end
   let(:submission) do
@@ -100,7 +100,7 @@ RSpec.describe CFE::CreatePropertiesService do
         create(
           :cfe_submission,
           assessment_id: SecureRandom.uuid,
-          legal_aid_application: legal_aid_application
+          legal_aid_application:
         )
       end
 
@@ -130,7 +130,7 @@ RSpec.describe CFE::CreatePropertiesService do
         create(
           :cfe_submission,
           assessment_id: SecureRandom.uuid,
-          legal_aid_application: legal_aid_application
+          legal_aid_application:
         )
       end
 

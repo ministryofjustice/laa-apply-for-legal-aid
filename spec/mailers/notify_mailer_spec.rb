@@ -25,9 +25,9 @@ RSpec.describe NotifyMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq(
-        application_url: application_url,
-        client_name: client_name,
-        provider_firm: provider_firm,
+        application_url:,
+        client_name:,
+        provider_firm:,
         ref_number: app_id,
         expiry_date: (Time.zone.today + 7.days).strftime('%-d %B %Y')
       )

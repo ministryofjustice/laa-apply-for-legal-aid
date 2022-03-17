@@ -74,7 +74,7 @@ module FactoryHelpers
               'individuals/matching/individual' => {
                 firstName: firstname,
                 lastName: lastname,
-                nino: nino,
+                nino:,
                 dateOfBirth: '1994-04-30',
               },
             },

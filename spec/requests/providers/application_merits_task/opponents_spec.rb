@@ -51,7 +51,7 @@ module Providers
         let(:params) do
           {
             application_merits_task_opponent: {
-              full_name: full_name,
+              full_name:,
               understands_terms_of_court_order: sample_opponent.understands_terms_of_court_order.to_s,
               understands_terms_of_court_order_details: sample_opponent.understands_terms_of_court_order_details,
               warning_letter_sent: sample_opponent.warning_letter_sent.to_s,

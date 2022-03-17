@@ -422,7 +422,7 @@ module CCMS
             let(:student_loan_income) { create :transaction_type, :credit, name: 'student_loan' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: student_loan_income)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: student_loan_income)
             end
 
             it 'returns true' do
@@ -585,7 +585,7 @@ module CCMS
             let(:rent_or_mortgage_payment) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: rent_or_mortgage_payment)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: rent_or_mortgage_payment)
             end
             let(:attrs) do
               %w[
@@ -630,7 +630,7 @@ module CCMS
             let(:rent_or_mortgage_payment) { create :transaction_type, :debit, name: 'rent_or_mortgage' }
 
             before do
-              create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: rent_or_mortgage_payment)
+              create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: rent_or_mortgage_payment)
             end
 
             it 'does generate the block' do

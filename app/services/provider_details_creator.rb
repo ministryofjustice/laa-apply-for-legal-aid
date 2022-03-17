@@ -13,10 +13,10 @@ class ProviderDetailsCreator
 
   def call
     provider.update!(
-      firm: firm,
-      offices: offices,
+      firm:,
+      offices:,
       name: provider_name,
-      contact_id: contact_id
+      contact_id:
     )
     provider.update!(selected_office: nil) if should_clear_selected_office?
   end

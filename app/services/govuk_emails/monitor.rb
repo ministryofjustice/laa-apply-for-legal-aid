@@ -10,7 +10,7 @@ module GovukEmails
 
     def call
       status = GovukEmails::Email.new(@scheduled_mail.govuk_message_id).status
-      @scheduled_mail.update!(status: status)
+      @scheduled_mail.update!(status:)
       send_undeliverable_alerts if status.in?(ScheduledMailing::FAILURE_STATUSES)
     end
 

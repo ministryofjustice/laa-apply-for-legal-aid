@@ -4,7 +4,7 @@ RSpec.describe ExceptionAlertMailer, type: :mailer do
   let(:environment) { 'production' }
   let(:details) { 'alert details' }
   let(:dummy_email_address) { 'john@example.com' }
-  let(:mail) { described_class.notify(environment: environment, details: details, to: dummy_email_address) }
+  let(:mail) { described_class.notify(environment:, details:, to: dummy_email_address) }
 
   describe 'notify' do
     it 'is a govuk_notify delivery' do

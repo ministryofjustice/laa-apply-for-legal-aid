@@ -31,8 +31,8 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
     let(:params) do
       {
         vehicle: {
-          payment_remaining: payment_remaining,
-          payments_remain: payments_remain,
+          payment_remaining:,
+          payments_remain:,
         },
       }
     end

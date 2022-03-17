@@ -85,8 +85,8 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
       {
         address_selection: {
           list: address_list.map(&:to_json),
-          postcode: postcode,
-          lookup_id: lookup_id,
+          postcode:,
+          lookup_id:,
         },
       }.merge(submit_button)
     end

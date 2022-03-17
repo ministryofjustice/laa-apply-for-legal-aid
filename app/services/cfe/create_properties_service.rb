@@ -9,7 +9,7 @@ module CFE
     def request_body
       {
         properties: {
-          main_home: main_home,
+          main_home:,
           additional_properties: [second_home],
         },
       }.to_json

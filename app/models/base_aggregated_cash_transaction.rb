@@ -52,7 +52,7 @@ class BaseAggregatedCashTransaction
 
     def find_by(legal_aid_application_id:)
       transactions = find_transactions(legal_aid_application_id)
-      model = new(legal_aid_application_id: legal_aid_application_id)
+      model = new(legal_aid_application_id:)
       transactions.each { |trx| populate_attribute(model, trx) }
       model
     end
@@ -95,7 +95,7 @@ private
   def save_cash_transaction_records
     self.class.cash_transaction_categories.each do |category|
       CashTransaction.where(
-        legal_aid_application_id: legal_aid_application_id,
+        legal_aid_application_id:,
         transaction_type_id: transaction_type_id(category)
       ).destroy_all
 
@@ -109,10 +109,10 @@ private
       date = calculated_date(i)
 
       CashTransaction.create!(
-        legal_aid_application_id: legal_aid_application_id,
+        legal_aid_application_id:,
         transaction_type_id: transaction_type_id(category),
         transaction_date: date,
-        amount: amount,
+        amount:,
         month_number: i
       )
     end

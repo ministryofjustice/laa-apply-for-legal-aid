@@ -43,9 +43,9 @@ module TrueLayer
 
     def import_bank_provider
       command = Importers::ImportProviderService.call(
-        api_client: api_client,
-        applicant: applicant,
-        token_expires_at: token_expires_at
+        api_client:,
+        applicant:,
+        token_expires_at:
       )
       if command.success?
         self.bank_provider = command.result
@@ -102,9 +102,9 @@ module TrueLayer
 
     def save_error
       BankError.create!(
-        applicant: applicant,
-        bank_name: bank_name,
-        error: error
+        applicant:,
+        bank_name:,
+        error:
       )
       errors.add(:bank_data_import, error)
     end

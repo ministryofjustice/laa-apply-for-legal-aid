@@ -29,8 +29,8 @@ RSpec.describe 'provider restrictions request', type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          has_restrictions: has_restrictions,
-          restrictions_details: restrictions_details,
+          has_restrictions:,
+          restrictions_details:,
         },
       }
     end

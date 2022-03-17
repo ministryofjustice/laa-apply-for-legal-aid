@@ -8,7 +8,7 @@ RSpec.describe 'citizen accounts request', type: :request do
   let!(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
   let!(:applicant_bank_account_holder) do
     create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
-                                 addresses: addresses)
+                                 addresses:)
   end
   let(:addresses) do
     [{ address: Faker::Address.building_number,

@@ -18,7 +18,7 @@ module CFE
     end
 
     def cash_transactions_for(operation)
-      cash_transactions.joins(:transaction_type).where(transaction_type: { operation: operation })
+      cash_transactions.joins(:transaction_type).where(transaction_type: { operation: })
                        .order('transaction_type.name', :transaction_date)
                        .group_by(&:transaction_type_id)
     end
@@ -28,7 +28,7 @@ module CFE
 
       cash_transactions_for(operation).each do |transaction_type_id, array|
         category = TransactionType.find(transaction_type_id).name
-        type_hash = { category: category, payments: transactions(array) }
+        type_hash = { category:, payments: transactions(array) }
         result << type_hash
       end
       result

@@ -13,11 +13,11 @@ RSpec.describe DateFieldBuilder do
 
   subject do
     described_class.new(
-      form: form,
-      model: model,
+      form:,
+      model:,
       method: :happened_on,
       prefix: :happened_,
-      suffix: suffix
+      suffix:
     )
   end
 

@@ -25,8 +25,8 @@ module Populators
     end
 
     def find_or_create(name, operation)
-      record = TransactionType.find_by(name: name, operation: operation)
-      record = TransactionType.new(name: name, operation: operation) if record.nil?
+      record = TransactionType.find_by(name:, operation:)
+      record = TransactionType.new(name:, operation:) if record.nil?
       record
     end
 

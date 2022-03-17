@@ -8,10 +8,10 @@ RSpec.describe TrueLayer::BankDataImportService do
 
   before do
     Setting.delete_all
-    applicant.store_true_layer_token(token: token, expires: token_expires_at)
+    applicant.store_true_layer_token(token:, expires: token_expires_at)
   end
 
-  subject { described_class.call(legal_aid_application: legal_aid_application) }
+  subject { described_class.call(legal_aid_application:) }
 
   describe '#call' do
     let(:bank_provider) { applicant.bank_providers.find_by(token: applicant.true_layer_secure_data_id) }

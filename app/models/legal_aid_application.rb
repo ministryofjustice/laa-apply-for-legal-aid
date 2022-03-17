@@ -224,7 +224,7 @@ class LegalAidApplication < ApplicationRecord
 
   def generate_secure_id
     SecureData.create_and_store!(
-      legal_aid_application: { id: id },
+      legal_aid_application: { id: },
       expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
       # So each secure data payload is unique
       token: SecureRandom.hex

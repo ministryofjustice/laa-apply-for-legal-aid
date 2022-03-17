@@ -6,7 +6,7 @@ RSpec.describe CitizenEmailService do
   let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: simulated_email_address) }
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
-  let(:application) { create(:application, applicant: applicant, provider: provider) }
+  let(:application) { create(:application, applicant:, provider:) }
   let(:secure_id) { SecureRandom.uuid }
   let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}?locale=en" }
 

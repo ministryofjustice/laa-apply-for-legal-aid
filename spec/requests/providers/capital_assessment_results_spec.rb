@@ -13,7 +13,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     let(:add_restrictions?) { false }
 
     let(:before_tasks) do
-      create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
+      create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
 
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
@@ -104,7 +104,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     context 'with restrictions' do
       let(:before_tasks) do
-        create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
+        create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
 
         Setting.setting.update!(manually_review_all_cases: false)
         create :applicant, legal_aid_application: legal_aid_application, first_name: 'Stepriponikas', last_name: 'Bonstart'
@@ -177,7 +177,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     context 'with extra employment information' do
       let(:before_tasks) do
         legal_aid_application.update extra_employment_information: true, extra_employment_information_details: 'Blah blah'
-        create(:policy_disregards, :with_selected_value, legal_aid_application: legal_aid_application) if add_policy_disregards?
+        create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
         legal_aid_application.update has_restrictions: true, restrictions_details: 'Blah blah' if add_restrictions?
         login_provider
         subject

@@ -14,7 +14,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
   end
 
   describe '#incomings_list' do
-    subject { helper.incomings_list(legal_aid_application.transaction_types.credits, locale_namespace: locale_namespace) }
+    subject { helper.incomings_list(legal_aid_application.transaction_types.credits, locale_namespace:) }
 
     context 'for citizen' do
       let(:locale_namespace) { 'transaction_types.names.citizens' }
@@ -43,7 +43,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
   describe '#payments_list' do
     let(:transaction_type) { create :transaction_type, :maintenance_out }
 
-    subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace: locale_namespace) }
+    subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace:) }
 
     context 'for citizen' do
       let(:locale_namespace) { 'transaction_types.names.citizens' }

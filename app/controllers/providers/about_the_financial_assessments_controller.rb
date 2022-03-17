@@ -27,7 +27,7 @@ module Providers
       Flow::KeyPoint.path_for(
         key_point: :start_after_applicant_completes_means,
         journey: :providers,
-        legal_aid_application: legal_aid_application
+        legal_aid_application:
       )
     end
   end

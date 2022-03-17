@@ -64,8 +64,8 @@ RSpec.describe 'providers savings and investments', type: :request do
     let(:params) do
       {
         savings_amount: {
-          cash: cash,
-          check_box_cash: check_box_cash,
+          cash:,
+          check_box_cash:,
         },
       }
     end

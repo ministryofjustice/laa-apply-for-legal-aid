@@ -4,7 +4,7 @@ class CfePayloadRecorder
   end
 
   def initialize(application_ref)
-    @legal_aid_application = LegalAidApplication.find_by(application_ref: application_ref)
+    @legal_aid_application = LegalAidApplication.find_by(application_ref:)
     raise ArgumentError, 'No such application' if @legal_aid_application.nil?
 
     @recording = []

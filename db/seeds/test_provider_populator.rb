@@ -56,13 +56,13 @@ private
   def populate_provider(username, details)
     firm_name, email, contact_id = details
     firm = populate_firm(firm_name)
-    return if Provider.exists?(username: username)
+    return if Provider.exists?(username:)
 
     Provider.create!(
-      username: username,
-      email: email,
-      contact_id: contact_id,
-      firm: firm,
+      username:,
+      email:,
+      contact_id:,
+      firm:,
       offices: firm.offices
     )
   end
@@ -70,12 +70,12 @@ private
   def populate_firm(firm_name)
     details = TEST_FIRMS.fetch(firm_name)
     ccms_id, office_code_ids = details
-    firm = Firm.find_by(name: firm_name) || Firm.new(name: firm_name, ccms_id: ccms_id)
+    firm = Firm.find_by(name: firm_name) || Firm.new(name: firm_name, ccms_id:)
     office_code_ids.each do |office_code_id|
       code, ccms_id = office_code_id.split(':')
       next if firm.offices.map(&:code).include?(code)
 
-      firm.offices << Office.new(code: code, ccms_id: ccms_id.to_s)
+      firm.offices << Office.new(code:, ccms_id: ccms_id.to_s)
     end
     firm.save!
     firm

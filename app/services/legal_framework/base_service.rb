@@ -36,7 +36,7 @@ module LegalFramework
     end
 
     def conn
-      @conn ||= Faraday.new(url: host, headers: headers)
+      @conn ||= Faraday.new(url: host, headers:)
     end
 
     def host
@@ -79,7 +79,7 @@ module LegalFramework
       raise_exception_error(
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
-        http_method: http_method,
+        http_method:,
         http_status: error.respond_to?(:http_status) ? error.http_status : nil
       )
     end
@@ -87,7 +87,7 @@ module LegalFramework
     def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
       @submission.submission_histories.create!(
         url: legal_framework_url,
-        http_method: http_method,
+        http_method:,
         request_payload: request_body,
         http_response_status: http_status,
         error_message: message,
@@ -103,7 +103,7 @@ module LegalFramework
     def write_submission_history(raw_response, http_method = 'POST')
       @submission.submission_histories.create!(
         url: legal_framework_url,
-        http_method: http_method,
+        http_method:,
         request_payload: request_body,
         http_response_status: raw_response.status,
         response_payload: raw_response.body,

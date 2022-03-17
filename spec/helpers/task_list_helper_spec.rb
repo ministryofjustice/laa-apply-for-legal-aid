@@ -21,7 +21,7 @@ RSpec.describe TaskListHelper, type: :helper do
       it 'returns a link' do
         expect(helper.task_list_item(name: :children_application,
                                      status: :complete,
-                                     legal_aid_application: legal_aid_application,
+                                     legal_aid_application:,
                                      ccms_code: nil)).to eq expected
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe TaskListHelper, type: :helper do
       it 'returns a link' do
         expect(helper.task_list_item(name: :children_application,
                                      status: :not_started,
-                                     legal_aid_application: legal_aid_application,
+                                     legal_aid_application:,
                                      ccms_code: nil)).to eq expected
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe TaskListHelper, type: :helper do
       it 'returns a link' do
         expect(helper.task_list_item(name: :chances_of_success,
                                      status: :complete,
-                                     legal_aid_application: legal_aid_application,
+                                     legal_aid_application:,
                                      ccms_code: :DA001)).to eq expected
       end
     end

@@ -69,7 +69,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
       let(:proceeding_type) { legal_aid_application.proceeding_types.first }
       let(:provider) { legal_aid_application.provider }
 
-      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params: params) }
+      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
       context 'with the correct params' do
         context 'when no limit extension is requested' do

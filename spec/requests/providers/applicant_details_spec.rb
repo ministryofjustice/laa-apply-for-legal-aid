@@ -25,7 +25,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
 
       context 'has already got applicant info' do
         let(:applicant) { create(:applicant) }
-        let(:application) { create(:legal_aid_application, applicant: applicant) }
+        let(:application) { create(:legal_aid_application, applicant:) }
 
         it 'display first_name' do
           subject

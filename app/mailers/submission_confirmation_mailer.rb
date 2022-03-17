@@ -9,7 +9,7 @@ class SubmissionConfirmationMailer < BaseApplyMailer
       provider_name: @legal_aid_application.provider.name,
       client_name: "#{first_name} #{last_name}",
       ref_number: @legal_aid_application.application_ref,
-      feedback_url: feedback_url
+      feedback_url:
     )
     mail to: @legal_aid_application.provider.email
   end

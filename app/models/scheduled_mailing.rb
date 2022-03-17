@@ -29,23 +29,23 @@ class ScheduledMailing < ApplicationRecord
   scope :monitored, -> { where(status: MONITORED_STATUSES) }
 
   def self.send_now!(mailer_klass:, mailer_method:, legal_aid_application_id:, addressee:, arguments:)
-    create!(legal_aid_application_id: legal_aid_application_id,
-            mailer_klass: mailer_klass,
-            mailer_method: mailer_method,
-            arguments: arguments,
-            addressee: addressee,
+    create!(legal_aid_application_id:,
+            mailer_klass:,
+            mailer_method:,
+            arguments:,
+            addressee:,
             scheduled_at: Time.zone.now,
             status: 'waiting')
     ScheduledMailingsDeliveryJob.perform_later
   end
 
   def self.send_later!(mailer_klass:, mailer_method:, legal_aid_application_id:, addressee:, scheduled_at:, arguments:)
-    create!(legal_aid_application_id: legal_aid_application_id,
-            mailer_klass: mailer_klass,
-            mailer_method: mailer_method,
-            arguments: arguments,
-            addressee: addressee,
-            scheduled_at: scheduled_at,
+    create!(legal_aid_application_id:,
+            mailer_klass:,
+            mailer_method:,
+            arguments:,
+            addressee:,
+            scheduled_at:,
             status: 'waiting')
   end
 

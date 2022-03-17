@@ -16,7 +16,7 @@ module CCMS
 
       let(:applicant) do
         create(:applicant,
-               address: address,
+               address:,
                first_name: 'lenovo',
                last_name: 'Hurlock',
                date_of_birth: Date.new(1969, 1, 1))

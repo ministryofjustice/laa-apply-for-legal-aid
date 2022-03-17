@@ -95,7 +95,7 @@ module Reports
       # get the latest CFE result (in case of multiple attempts/corrections) for an application
       # using the base class; this is to accommodate for different CFE result versions
       ids.each do |id|
-        record = find_latest_application(id: id)
+        record = find_latest_application(id:)
         next unless record
 
         hash = JSON.parse record.result
@@ -160,7 +160,7 @@ module Reports
       application_ids.each do |id|
         ccms = ccms_submission(id)
         ccms_ref = ccms&.case_ccms_reference
-        laa = LegalAidApplication.find_by(id: id)
+        laa = LegalAidApplication.find_by(id:)
         ccms_hist = laa&.ccms_submission&.submission_history
 
         process_result(laa.application_ref, ccms_ref, ccms_hist) unless default_opts[:submitted_to_ccms] && !ccms

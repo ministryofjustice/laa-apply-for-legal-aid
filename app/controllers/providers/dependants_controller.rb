@@ -31,7 +31,7 @@ module Providers
 
     def build_new_dependant
       Dependant.new(
-        legal_aid_application: legal_aid_application,
+        legal_aid_application:,
         number: legal_aid_application.dependants.count + 1
       )
     end

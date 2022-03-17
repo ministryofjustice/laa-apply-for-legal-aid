@@ -19,7 +19,7 @@ module Metrics
     def send_metric(queue)
       prometheus_client.send_json(
         type: PrometheusCollectors::SidekiqQueueCollector::COLLECTOR_TYPE,
-        queue: queue,
+        queue:,
         size: queue_size(queue)
       )
     end

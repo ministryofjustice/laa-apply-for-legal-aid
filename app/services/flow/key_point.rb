@@ -44,7 +44,7 @@ module Flow
     def flow((legal_aid_application))
       Flow::BaseFlowService.flow_service_for(
         journey,
-        legal_aid_application: legal_aid_application,
+        legal_aid_application:,
         current_step: step
       )
     end

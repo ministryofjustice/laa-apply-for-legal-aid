@@ -21,7 +21,7 @@ module Providers
       @form ||= BinaryChoiceForm.call(
         journey: :provider,
         radio_buttons_input_name: :remove_dependant,
-        form_params: form_params
+        form_params:
       )
     end
 

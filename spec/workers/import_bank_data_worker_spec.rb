@@ -10,7 +10,7 @@ RSpec.describe ImportBankDataWorker, type: :worker do
 
   before do
     described_class.clear
-    applicant.store_true_layer_token(token: token, expires: token_expires_at)
+    applicant.store_true_layer_token(token:, expires: token_expires_at)
     worker_id
     endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
     stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)

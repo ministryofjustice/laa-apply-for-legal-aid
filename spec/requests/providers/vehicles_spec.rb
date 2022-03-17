@@ -25,13 +25,13 @@ RSpec.describe Providers::VehiclesController, type: :request do
   describe 'PATCH /providers/applications/:legal_aid_application_id/vehicle' do
     let(:own_vehicle) { nil }
     let(:params) do
-      { legal_aid_application: { own_vehicle: own_vehicle } }
+      { legal_aid_application: { own_vehicle: } }
     end
 
     subject do
       patch(
         providers_legal_aid_application_vehicle_path(legal_aid_application),
-        params: params
+        params:
       )
     end
 

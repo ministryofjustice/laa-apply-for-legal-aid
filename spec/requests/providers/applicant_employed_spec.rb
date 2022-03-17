@@ -43,13 +43,13 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
     let(:employed) { nil }
     let(:params) do
-      { applicant: { employed: employed } }
+      { applicant: { employed: } }
     end
 
     subject do
       post(
         providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-        params: params
+        params:
       )
     end
 

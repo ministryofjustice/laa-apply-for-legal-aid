@@ -20,9 +20,9 @@ module Admin
         find_or_create_firm
 
         @provider.update!(
-          firm: firm,
-          offices: offices,
-          contact_id: contact_id
+          firm:,
+          offices:,
+          contact_id:
         )
       end
       @message = "User #{@provider.username} successfully created"

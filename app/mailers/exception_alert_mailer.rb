@@ -4,7 +4,7 @@ class ExceptionAlertMailer < BaseApplyMailer
 
   def notify(environment:, details:, to:)
     template_name :exception_alert
-    set_personalisation(environment: environment, details: details)
+    set_personalisation(environment:, details:)
     mail to: to
   end
 end

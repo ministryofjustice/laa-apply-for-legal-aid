@@ -1,6 +1,6 @@
 class CfeApiDisplayer
   def initialize(application_ref)
-    @legal_aid_application = LegalAidApplication.find_by(application_ref: application_ref)
+    @legal_aid_application = LegalAidApplication.find_by(application_ref:)
   end
 
   def run

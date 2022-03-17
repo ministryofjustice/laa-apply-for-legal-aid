@@ -54,7 +54,7 @@ RSpec.describe 'providers shared ownership request test', type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          shared_ownership: shared_ownership,
+          shared_ownership:,
         },
       }
     end

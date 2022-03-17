@@ -30,7 +30,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
 
     let(:params) do
       {
-        legal_aid_application: { property_value: property_value },
+        legal_aid_application: { property_value: },
         legal_aid_application_id: legal_aid_application.id,
       }
     end

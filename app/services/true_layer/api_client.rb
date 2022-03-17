@@ -52,7 +52,7 @@ module TrueLayer
 
     def simple_error(error)
       AlertManager.capture_exception(error)
-      SimpleResult.new(error: error)
+      SimpleResult.new(error:)
     end
 
     def connection

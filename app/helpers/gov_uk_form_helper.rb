@@ -34,9 +34,9 @@ module GovUkFormHelper
     padding_class = padding_below && "govuk-!-padding-bottom-#{padding_below}"
     render(
       'shared/forms/fieldset_header',
-      heading: heading,
-      size: size,
-      padding_class: padding_class
+      heading:,
+      size:,
+      padding_class:
     )
   end
 
