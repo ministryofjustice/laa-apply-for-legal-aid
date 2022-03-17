@@ -1981,14 +1981,6 @@ Style/Lambda:
 Style/QuotedSymbols:
   EnforcedStyle: single_quotes
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AllowModifier.
-Style/SoleNestedConditional:
-  Exclude:
-    - 'app/controllers/providers/transactions_controller.rb'
-    - 'spec/support/soap_matchers.rb'
-
 # Offense count: 19640
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
