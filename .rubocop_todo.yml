@@ -1915,23 +1915,6 @@ Style/DateTime:
     - 'app/services/true_layer/api_client.rb'
     - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
 
-# Offense count: 19
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: format, sprintf, percent
-Style/FormatString:
-  Exclude:
-    - 'app/models/applicant.rb'
-    - 'app/services/banking/bank_transaction_balance_calculator.rb'
-    - 'app/services/ccms/payload_generators/entity_attributes_generator.rb'
-    - 'app/services/ccms/requestors/case_add_requestor.rb'
-    - 'app/services/job_queue.rb'
-    - 'lib/tasks/helpers/cfe_api_displayer.rb'
-    - 'spec/factories/submissions.rb'
-    - 'spec/i18n_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-    - 'spec/support/xml_attribute_block_matcher.rb'
-
 # Offense count: 46
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

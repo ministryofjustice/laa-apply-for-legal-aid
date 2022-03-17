@@ -316,14 +316,14 @@ module CCMS
             context 'CARANDVEH_INPUT_C_14WP2_25A - Current market value' do
               it 'is populated with the estimated value' do
                 block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_25A')
-                expect(block).to have_currency_response(format('%<value>.2f', value: legal_aid_application.vehicle.estimated_value))
+                expect(block).to have_currency_response(sprintf('%<value>.2f', value: legal_aid_application.vehicle.estimated_value))
               end
             end
 
             context 'CARANDVEH_INPUT_C_14WP2_26A - Value of loan outstanding' do
               it 'is populated with the payment remaining' do
                 block = XmlExtractor.call(xml, :vehicle_entity, 'CARANDVEH_INPUT_C_14WP2_26A')
-                expect(block).to have_currency_response(format('%<value>.2f', value: legal_aid_application.vehicle.payment_remaining))
+                expect(block).to have_currency_response(sprintf('%<value>.2f', value: legal_aid_application.vehicle.payment_remaining))
               end
             end
           end
@@ -1432,7 +1432,7 @@ module CCMS
           it 'populates REQ_COST_LIMITATION' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'REQ_COST_LIMITATION')
-              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
+              expect(block).to have_currency_response sprintf('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
@@ -1465,13 +1465,13 @@ module CCMS
 
           it 'populates DEFAULT_COST_LIMITATION_MERITS' do
             block = XmlExtractor.call(xml, :global_merits, 'DEFAULT_COST_LIMITATION_MERITS')
-            expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
+            expect(block).to have_currency_response sprintf('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
           end
 
           it 'populates DEFAULT_COST_LIMITATION' do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, 'DEFAULT_COST_LIMITATION')
-              expect(block).to have_currency_response format('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
+              expect(block).to have_currency_response sprintf('%<value>.2f', value: legal_aid_application.lead_proceeding.substantive_cost_limitation)
             end
           end
 
