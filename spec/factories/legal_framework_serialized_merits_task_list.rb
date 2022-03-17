@@ -15,13 +15,13 @@ FactoryBot.define do
         },
         proceeding_types: [
           {
-            ccms_code: 'DA001',
+            ccms_code: "DA001",
             tasks: {
               chances_of_success: [],
             },
           },
           {
-            ccms_code: 'SE014',
+            ccms_code: "SE014",
             tasks: {
               chances_of_success: [],
               children_proceeding: [:children_application],
@@ -46,7 +46,7 @@ FactoryBot.define do
           },
           proceeding_types: [
             {
-              ccms_code: 'DA001',
+              ccms_code: "DA001",
               tasks: {
                 chances_of_success: [],
               },

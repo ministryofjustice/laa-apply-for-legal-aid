@@ -1,12 +1,12 @@
 module CCMS
   module Parsers
     class ApplicantAddStatusResponseParser < BaseResponseParser
-      TRANSACTION_REQUEST_ID_PATH = '//Body//ClientAddUpdtStatusRS//HeaderRS//RequestDetails//TransactionRequestID'.freeze
-      STATUS_FREE_TEXT_PATH = '//Body//ClientAddUpdtStatusRS//HeaderRS//Status//StatusFreeText'.freeze
-      APPLICANT_CCMS_REFERENCE_PATH = '//Body//ClientAddUpdtStatusRS//ClientReferenceNumber'.freeze
+      TRANSACTION_REQUEST_ID_PATH = "//Body//ClientAddUpdtStatusRS//HeaderRS//RequestDetails//TransactionRequestID".freeze
+      STATUS_FREE_TEXT_PATH = "//Body//ClientAddUpdtStatusRS//HeaderRS//Status//StatusFreeText".freeze
+      APPLICANT_CCMS_REFERENCE_PATH = "//Body//ClientAddUpdtStatusRS//ClientReferenceNumber".freeze
 
       def success?
-        parse(:extracted_status_free_text) == 'Party Successfully Created.'
+        parse(:extracted_status_free_text) == "Party Successfully Created."
       end
 
       def applicant_ccms_reference
@@ -16,7 +16,7 @@ module CCMS
     private
 
       def response_type
-        'ClientAddUpdtStatusRS'.freeze
+        "ClientAddUpdtStatusRS".freeze
       end
 
       def extracted_transaction_request_id

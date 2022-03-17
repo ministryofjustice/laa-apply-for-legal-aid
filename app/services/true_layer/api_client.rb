@@ -1,22 +1,22 @@
 module TrueLayer
   class ApiClient
     ApiError = Class.new(StandardError)
-    TRUE_LAYER_URL = 'https://api.truelayer.com'.freeze
+    TRUE_LAYER_URL = "https://api.truelayer.com".freeze
 
     def initialize(token)
       @token = token
     end
 
     def provider
-      perform_lookup('/data/v1/me')
+      perform_lookup("/data/v1/me")
     end
 
     def account_holders
-      perform_lookup('/data/v1/info')
+      perform_lookup("/data/v1/info")
     end
 
     def accounts
-      perform_lookup('/data/v1/accounts')
+      perform_lookup("/data/v1/accounts")
     end
 
     def transactions(account_id, date_from, date_to)
@@ -57,7 +57,7 @@ module TrueLayer
 
     def connection
       @connection ||= Faraday.new(url: TRUE_LAYER_URL) do |conn|
-        conn.request :authorization, 'Bearer', token
+        conn.request :authorization, "Bearer", token
         conn.response :logger if Rails.configuration.x.logs_faraday_response
         conn.adapter Faraday.default_adapter
       end

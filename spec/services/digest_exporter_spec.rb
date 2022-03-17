@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe DigestExporter do
   # Unable to get VCR to properly record interactions with Google Sheets, so here just testing the
   # expected methods are called
-  describe '.call' do
+  describe ".call" do
     let(:google_session) { double GoogleDrive::Session }
-    let(:spreadsheet) { double 'Spreadsheet' }
-    let(:worksheet) { double 'Worksheet' }
+    let(:spreadsheet) { double "Spreadsheet" }
+    let(:worksheet) { double "Worksheet" }
     let(:column_headings) { ApplicationDigest.column_headers + [extracted_at] }
     let(:fixed_time) { Time.zone.now }
     let(:extracted_at) { "Extracted at: #{fixed_time.strftime('%Y-%m-%d %H:%M:%S %z')}" }
@@ -16,7 +16,7 @@ RSpec.describe DigestExporter do
       create_list :application_digest, 4
     end
 
-    it 'loads all the digest records' do
+    it "loads all the digest records" do
       travel_to fixed_time do
         expect(GoogleDrive::Session).to receive(:from_service_account_key).and_return(google_session)
         expect(google_session).to receive(:spreadsheet_by_key).and_return(spreadsheet).exactly(2)

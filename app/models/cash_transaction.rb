@@ -38,11 +38,11 @@ class CashTransaction < ApplicationRecord
   end
 
   def period_start
-    transaction_date.beginning_of_month.strftime('%d %b')
+    transaction_date.beginning_of_month.strftime("%d %b")
   end
 
   def period_end
-    transaction_date.end_of_month.strftime('%d %b')
+    transaction_date.end_of_month.strftime("%d %b")
   end
 
   def parent_transaction_type

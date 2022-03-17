@@ -1,7 +1,7 @@
-require 'rails_helper'
-require 'sidekiq/testing'
+require "rails_helper"
+require "sidekiq/testing"
 
-RSpec.describe 'applicants omniauth call back', type: :request do
+RSpec.describe "applicants omniauth call back", type: :request do
   around(:example) do |example|
     OmniAuth.config.test_mode = true
     example.run
@@ -30,53 +30,53 @@ RSpec.describe 'applicants omniauth call back', type: :request do
     ImportBankDataWorker.clear
   end
 
-  describe 'GET /applicants/auth/true_layer/callback' do
+  describe "GET /applicants/auth/true_layer/callback" do
     subject do
       get applicant_true_layer_omniauth_callback_path
       ImportBankDataWorker.drain
     end
 
-    it 'redirects to next page' do
+    it "redirects to next page" do
       expect(subject).to redirect_to(citizens_gather_transactions_path)
     end
 
-    it 'persists the token on the applicant' do
+    it "persists the token on the applicant" do
       subject
       expect(applicant.reload.true_layer_token).to eq(token)
     end
 
-    it 'does not add its url to page history' do
+    it "does not add its url to page history" do
       subject
       expect(session.keys).not_to include(:page_history)
     end
 
-    context 'with a string time' do
+    context "with a string time" do
       let(:true_layer_expires_at) { expires_at.to_json }
 
-      it 'persists expires_at' do
+      it "persists expires_at" do
         subject
         expect(applicant.reload.true_layer_token_expires_at.utc.to_s).to eq(expires_at.utc.to_s)
       end
     end
 
-    context 'with nil time' do
+    context "with nil time" do
       let(:true_layer_expires_at) { nil }
 
-      it 'does not persist expires_at' do
+      it "does not persist expires_at" do
         subject
         expect(applicant.reload.true_layer_token_expires_at).to be_nil
       end
     end
 
-    context 'without applicant' do
+    context "without applicant" do
       let(:applicant) { nil }
 
-      it 'redirects to root' do
+      it "redirects to root" do
         expect(subject).to redirect_to(citizens_consent_path)
       end
     end
 
-    context 'on authentication failure' do
+    context "on authentication failure" do
       before do
         OmniAuth.config.mock_auth[:true_layer] = :invalid_credentials
 
@@ -86,13 +86,13 @@ RSpec.describe 'applicants omniauth call back', type: :request do
         allow_any_instance_of(Logger).to receive(:add)
       end
 
-      it 'redirects to error page' do
+      it "redirects to error page" do
         subject
         follow_redirect!
         expect(response).to redirect_to(error_path(:access_denied))
       end
 
-      it 'has reset the session and has no page history' do
+      it "has reset the session and has no page history" do
         subject
         expect(session.keys).not_to include(:page_history)
       end

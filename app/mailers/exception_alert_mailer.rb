@@ -1,5 +1,5 @@
 class ExceptionAlertMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify(environment:, details:, to:)

@@ -15,7 +15,7 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    'Cache-Control' => "public, max-age=#{1.hour.to_i}",
+    "Cache-Control" => "public, max-age=#{1.hour.to_i}",
   }
 
   # Show full error reports and disable caching.
@@ -38,43 +38,43 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  config.x.benefit_check.wsdl_url = 'https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl'
+  config.x.benefit_check.wsdl_url = "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
 
   config.x.logs_faraday_response = false
 
-  config.x.laa_portal.idp_sso_target_url = 'https://example.com/sso'
-  config.x.laa_portal.idp_cert = 'laa-portal.cert'
-  config.x.laa_portal.idp_cert_fingerprint_algorithm = 'http://www.w3.org/2000/09/xmldsig#sha'
+  config.x.laa_portal.idp_sso_target_url = "https://example.com/sso"
+  config.x.laa_portal.idp_cert = "laa-portal.cert"
+  config.x.laa_portal.idp_cert_fingerprint_algorithm = "http://www.w3.org/2000/09/xmldsig#sha"
 
   # Policy Disregards feature flag
-  config.x.policy_disregards_start_date = Date.parse('2021-1-8')
+  config.x.policy_disregards_start_date = Date.parse("2021-1-8")
 
   # Raises error for missing translations
   config.i18n.raise_on_missing_translations = true
 
-  Rails.application.routes.default_url_options[:host] = 'www.example.com'
+  Rails.application.routes.default_url_options[:host] = "www.example.com"
 
   config.active_storage.service = :test
-  config.x.application.host = 'test'
+  config.x.application.host = "test"
   config.x.application.host_url = "http://#{config.x.application.host}"
 
   config.x.support_email_address = config.x.simulated_email_address
 
-  config.x.email_domain.suffix = '@test.test'
+  config.x.email_domain.suffix = "@test.test"
 
-  unless ENV['RAILS_ENABLE_TEST_LOG']
+  unless ENV["RAILS_ENABLE_TEST_LOG"]
     config.logger = ActiveSupport::Logger.new(nil)
     config.log_level = :fatal
   end
 
   # Dummy url for provider details api
-  config.x.provider_details.url = 'http://dummy-provider-details-api/'
+  config.x.provider_details.url = "http://dummy-provider-details-api/"
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]
 
   # set the id of the Digest Export spreadsheet to use in this environment
-  config.x.digest_export.spreadsheet_id = '1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs'
+  config.x.digest_export.spreadsheet_id = "1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs"
 
   # Switch to determine whether or not o collect HMRC data
   config.x.collect_hmrc_data = true

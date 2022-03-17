@@ -1,7 +1,7 @@
 module Admin
   class ProvidersController < AdminBaseController
     def index
-      if params[:firm_id] == '0'
+      if params[:firm_id] == "0"
         @providers = Provider.order(:username)
         @firm = nil
       else

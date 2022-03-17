@@ -29,7 +29,7 @@ module GovukEmails
 
     def deliver_now
       mail_message = mailer_klass.constantize.__send__(mailer_method, *arguments).deliver_now!
-      @scheduled_mail.update!(status: 'processing',
+      @scheduled_mail.update!(status: "processing",
                               govuk_message_id: mail_message.govuk_notify_response.id,
                               sent_at: Time.current)
     end

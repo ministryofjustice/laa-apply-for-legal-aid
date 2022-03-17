@@ -28,6 +28,6 @@ private
   def auth_error_during_bank_login?
     return true if origin.nil?
 
-    URI(origin).path != '/citizens/banks'
+    URI(origin).path != "/citizens/banks"
   end
 end

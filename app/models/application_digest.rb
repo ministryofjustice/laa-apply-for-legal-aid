@@ -24,7 +24,7 @@ class ApplicationDigest < ApplicationRecord
         date_started: laa.created_at.to_date,
         date_submitted: laa.merits_submitted_at,
         days_to_submission: calendar_days_to_submission(laa),
-        use_ccms: laa.state == 'use_ccms',
+        use_ccms: laa.state == "use_ccms",
         matter_types: matter_types(laa),
         proceedings: proceedings(laa),
         passported: laa.passported?,
@@ -42,11 +42,11 @@ class ApplicationDigest < ApplicationRecord
     end
 
     def matter_types(laa)
-      laa.proceedings.pluck(:matter_type).uniq.sort.join(';')
+      laa.proceedings.pluck(:matter_type).uniq.sort.join(";")
     end
 
     def proceedings(laa)
-      laa.proceedings.pluck(:ccms_code).sort.join(';')
+      laa.proceedings.pluck(:ccms_code).sort.join(";")
     end
 
     def working_days_to_report(laa)

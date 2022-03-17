@@ -18,7 +18,7 @@ module LegalAidApplications
     end
 
     def restrictions_details_presence
-      return if draft? || has_restrictions.to_s != 'true'
+      return if draft? || has_restrictions.to_s != "true"
 
       add_blank_error_for :restrictions_details if restrictions_details.blank?
     end
@@ -32,7 +32,7 @@ module LegalAidApplications
     end
 
     def clear_restrictions_details
-      restrictions_details&.clear if has_restrictions.to_s == 'false'
+      restrictions_details&.clear if has_restrictions.to_s == "false"
     end
   end
 end

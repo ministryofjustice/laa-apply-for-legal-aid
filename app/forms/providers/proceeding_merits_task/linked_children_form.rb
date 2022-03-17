@@ -38,11 +38,11 @@ module Providers
       end
 
       def error_message
-        I18n.t('providers.proceeding_merits_task.linked_children.show.error')
+        I18n.t("providers.proceeding_merits_task.linked_children.show.error")
       end
 
       def no_children_selected?
-        linked_children.all?('')
+        linked_children.all?("")
       end
 
       def legal_aid_application

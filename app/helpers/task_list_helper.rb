@@ -1,8 +1,8 @@
 module TaskListHelper
   def task_list_item(name:, status:, legal_aid_application: nil, ccms_code: nil)
-    tag_class = status == :complete ? nil : 'govuk-tag--grey'
+    tag_class = status == :complete ? nil : "govuk-tag--grey"
     render(
-      'providers/merits_task_lists/task_list_item',
+      "providers/merits_task_lists/task_list_item",
       name:,
       status:,
       url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application, status),
@@ -37,7 +37,7 @@ private
   end
 
   def new_url_fragment(name, status, application)
-    name = 'has_other_involved_children' if name.eql?(:children_application) && (status.eql?(:complete) || application.involved_children.any?)
+    name = "has_other_involved_children" if name.eql?(:children_application) && (status.eql?(:complete) || application.involved_children.any?)
     I18n.t("providers.merits_task_lists.task_list_item.urls.#{name}")
   end
 

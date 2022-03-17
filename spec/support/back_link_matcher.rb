@@ -6,14 +6,14 @@ RSpec::Matchers.define :have_back_link do |expected|
   failure_message do |actual|
     back_link = extract_back_link(actual)
     if back_link.nil?
-      'Expected to find back link, but none found'
+      "Expected to find back link, but none found"
     else
       "Expected back link to be #{expected}, was #{back_link}"
     end
   end
 
   def extract_back_link(html)
-    atag = parsed_response_body(html).css('a.govuk-back-link').first
+    atag = parsed_response_body(html).css("a.govuk-back-link").first
     atag.nil? ? nil : atag.attr(:href)
   end
 

@@ -42,7 +42,7 @@ module PageTemplateHelper
     page_title: nil,
     head_title: nil,
     back_link: {},
-    column_width: 'two-thirds',
+    column_width: "two-thirds",
     template: nil,
     form: nil,
     show_errors_for: nil,
@@ -75,7 +75,7 @@ module PageTemplateHelper
 
     classes = ["govuk-heading-#{size}"]
     classes << "govuk-!-margin-bottom-#{margin_bottom}" if margin_bottom
-    content_tag heading, page_title, class: classes.join(' ')
+    content_tag heading, page_title, class: classes.join(" ")
   end
 
   def page_title
@@ -92,7 +92,7 @@ module PageTemplateHelper
   end
 
   def error_page_title(headings)
-    prefix = t('errors.title_prefix')
+    prefix = t("errors.title_prefix")
     content_for(:page_title) { headings[:page_title] }
     content_for(:head_title) { "#{prefix}: #{headings[:head_title] || headings[:page_title]}" }
   end

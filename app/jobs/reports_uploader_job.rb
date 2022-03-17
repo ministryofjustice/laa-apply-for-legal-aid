@@ -3,7 +3,7 @@ class ReportsUploaderJob < ApplicationJob
   def perform
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?
-      log 'preexisting record as follows:'
+      log "preexisting record as follows:"
       log "blob key: #{blob.key}, blob_id: #{blob.id}"
     end
     upload_application_details_report
@@ -23,8 +23,8 @@ private
     data = Reports::MIS::ApplicationDetailsReport.new.run
     log "application_details_report completed at #{Time.zone.now}"
     admin_report.application_details_report.attach io: StringIO.new(data),
-                                                   filename: 'application_details_report',
-                                                   content_type: 'text/csv'
+                                                   filename: "application_details_report",
+                                                   content_type: "text/csv"
   end
 
   def admin_report

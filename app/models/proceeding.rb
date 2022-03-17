@@ -3,11 +3,11 @@ class Proceeding < ApplicationRecord
 
   belongs_to :legal_aid_application
 
-  has_one :attempts_to_settle, class_name: 'ProceedingMeritsTask::AttemptsToSettle', dependent: :destroy
+  has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
 
-  has_one :chances_of_success, class_name: 'ProceedingMeritsTask::ChancesOfSuccess', dependent: :destroy
+  has_one :chances_of_success, class_name: "ProceedingMeritsTask::ChancesOfSuccess", dependent: :destroy
 
-  has_many :proceeding_linked_children, class_name: 'ProceedingMeritsTask::ProceedingLinkedChild', dependent: :destroy
+  has_many :proceeding_linked_children, class_name: "ProceedingMeritsTask::ProceedingLinkedChild", dependent: :destroy
 
   has_many :involved_children,
            through: :proceeding_linked_children,
@@ -22,7 +22,7 @@ class Proceeding < ApplicationRecord
   end
 
   def pretty_df_date
-    used_delegated_functions_on&.strftime('%F') || 'n/a'
+    used_delegated_functions_on&.strftime("%F") || "n/a"
   end
 
   def used_delegated_functions?
@@ -34,19 +34,19 @@ class Proceeding < ApplicationRecord
   end
 
   def section8?
-    ccms_matter_code == 'KSEC8'
+    ccms_matter_code == "KSEC8"
   end
 
   def domestic_abuse?
-    ccms_matter_code == 'MINJN'
+    ccms_matter_code == "MINJN"
   end
 
   def default_level_of_service_level
-    '3'
+    "3"
   end
 
   def default_level_of_service_name
-    'Full Representation'
+    "Full Representation"
   end
 
   def highest_proceeding_case_id

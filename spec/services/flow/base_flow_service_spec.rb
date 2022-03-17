@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 class TestFlowService < Flow::BaseFlowService; end
 
@@ -24,51 +24,51 @@ RSpec.describe Flow::BaseFlowService do
 
   before { flow_service_class.use_steps steps }
 
-  describe '#forward_path' do
+  describe "#forward_path" do
     let(:current_step) { :accounts }
     let(:expected_error) { "Forward step of #{current_step} is not defined" }
 
-    context 'default locale' do
-      it 'returns forward url with en locale' do
-        expect(subject.forward_path).to eq('/citizens/additional_accounts?locale=en')
+    context "default locale" do
+      it "returns forward url with en locale" do
+        expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=en")
       end
     end
 
-    context 'Welsh locale' do
+    context "Welsh locale" do
       around(:each) do |example|
         I18n.with_locale(:cy) { example.run }
       end
-      it 'returns forward url with cy locale' do
-        expect(subject.forward_path).to eq('/citizens/additional_accounts?locale=cy')
+      it "returns forward url with cy locale" do
+        expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=cy")
       end
     end
 
-    context 'with logic' do
+    context "with logic" do
       let(:current_step) { :consents }
 
-      it 'returns forward url' do
-        expect(subject.forward_path).to eq('/citizens/contact_provider?locale=en')
+      it "returns forward url" do
+        expect(subject.forward_path).to eq("/citizens/contact_provider?locale=en")
       end
     end
 
-    context 'step is not defined' do
+    context "step is not defined" do
       let(:current_step) { :foo_bar }
 
-      it 'raises an error' do
+      it "raises an error" do
         expect { subject.forward_path }.to raise_error(/not defined/)
       end
     end
 
-    context 'forward step is not defined' do
+    context "forward step is not defined" do
       let(:steps) { { foo: :bar } }
 
-      it 'raises an error' do
+      it "raises an error" do
         expect { subject.forward_path }.to raise_error(/not defined/)
       end
     end
   end
 
-  context 'with basic data' do
+  context "with basic data" do
     let(:url_helpers) { Rails.application.routes.url_helpers }
     let(:current_step) { :foo }
     let(:path) { :path }
@@ -90,47 +90,47 @@ RSpec.describe Flow::BaseFlowService do
       }
     end
 
-    describe '#current_path' do
-      it 'returns path' do
+    describe "#current_path" do
+      it "returns path" do
         expect(subject.current_path).to eq(path)
       end
 
-      context 'when path not defined' do
+      context "when path not defined" do
         let(:path) { nil }
 
-        it 'raises an error' do
+        it "raises an error" do
           expect { subject.current_path }.to raise_error(/not defined/)
         end
       end
 
-      context 'when path is a proc' do
+      context "when path is a proc" do
         let(:path) { ->(passed_in) { passed_in } }
 
-        it 'passes in the legal aid application' do
+        it "passes in the legal aid application" do
           expect(subject.current_path).to eq(legal_aid_application)
         end
 
-        context 'with params' do
+        context "with params" do
           let(:params) { { foo: :bar } }
           let(:path) { ->(passed_in, params) { [passed_in, params] } }
 
-          it 'passes in the legal aid application and the params' do
+          it "passes in the legal aid application and the params" do
             expect(subject.current_path).to eq([legal_aid_application, params])
           end
         end
       end
 
-      context 'path for step is not defined' do
+      context "path for step is not defined" do
         let(:path) { nil }
 
-        it 'raises an error' do
+        it "raises an error" do
           expect { subject.current_path }.to raise_error(/not defined/)
         end
       end
     end
 
-    describe '#forward_path' do
-      it 'returns forward url' do
+    describe "#forward_path" do
+      it "returns forward url" do
         expect(subject.forward_path).to eq(forward_url)
       end
     end

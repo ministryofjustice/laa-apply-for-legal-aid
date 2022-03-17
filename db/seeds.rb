@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Rails.logger.info 'Seeding started'
+Rails.logger.info "Seeding started"
 Seeder = Dibber::Seeder
 Seeder.monitor AdminUser
 Seeder.monitor Permission
@@ -15,9 +15,9 @@ Seeder.monitor Firm
 Seeder.monitor Provider
 Seeder.monitor DocumentCategory
 
-Dir[Rails.root.join('db/seeds/*.rb')].sort.each do |seed|
+Dir[Rails.root.join("db/seeds/*.rb")].sort.each do |seed|
   load seed
 end
 
 Rails.logger.info Seeder.report.join("\n")
-Rails.logger.info 'Seeding completed'
+Rails.logger.info "Seeding completed"

@@ -1,19 +1,19 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Test::GenerateErrorController, type: :request do
-  describe 'GET trapped_error' do
-    it 'calls the Alert Manager' do
+  describe "GET trapped_error" do
+    it "calls the Alert Manager" do
       expect(AlertManager).to receive(:capture_exception)
-      get '/test/trapped_error'
+      get "/test/trapped_error"
       expect(response).to redirect_to providers_legal_aid_applications_path
     end
   end
 
-  describe 'untrapped error' do
-    it 'propagates the error' do
+  describe "untrapped error" do
+    it "propagates the error" do
       expect {
-        get '/test/untrapped_error'
-      }.to raise_error RuntimeError, 'Untrapped Test Error generated'
+        get "/test/untrapped_error"
+      }.to raise_error RuntimeError, "Untrapped Test Error generated"
     end
   end
 end

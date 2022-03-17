@@ -18,14 +18,14 @@ class StatusController < ApiController
 
   def ping
     render json: {
-      'build_date' => Rails.configuration.x.status.build_date,
-      'build_tag' => Rails.configuration.x.status.build_tag,
-      'app_branch' => Rails.configuration.x.status.app_branch,
+      "build_date" => Rails.configuration.x.status.build_date,
+      "build_tag" => Rails.configuration.x.status.build_tag,
+      "app_branch" => Rails.configuration.x.status.app_branch,
     }
   end
 
   def data
-    redirect_to ENV['GOOGLE_DATA_STUDIO_URL']
+    redirect_to ENV["GOOGLE_DATA_STUDIO_URL"]
   end
 
 private
@@ -60,22 +60,22 @@ private
 
   def malware_scanner_positive
     virus_found = MalwareScanner.call(
-      file_path: Rails.root.join('spec/fixtures/files/malware.doc'),
+      file_path: Rails.root.join("spec/fixtures/files/malware.doc"),
       save_result: false
     ).virus_found
 
-    throw 'MalwareScanner fails to identify virus' unless virus_found
+    throw "MalwareScanner fails to identify virus" unless virus_found
 
     true
   end
 
   def malware_scanner_negative
     virus_found = MalwareScanner.call(
-      file_path: Rails.root.join('spec/fixtures/files/documents/hello_world.pdf'),
+      file_path: Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"),
       save_result: false
     ).virus_found
 
-    throw 'MalwareScanner wrongly flags safe file' if virus_found
+    throw "MalwareScanner wrongly flags safe file" if virus_found
 
     true
   end

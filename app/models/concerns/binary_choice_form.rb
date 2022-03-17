@@ -13,7 +13,7 @@ class BinaryChoiceForm
 
     def define_input_conditional(input_name, form_params)
       define_method "#{input_name}?" do
-        form_params[input_name] == 'true'
+        form_params[input_name] == "true"
       end
     end
   end
@@ -23,7 +23,7 @@ class BinaryChoiceForm
     @journey = journey
     @input_name = radio_buttons_input_name
     @action = action
-    @error = error || 'error'
+    @error = error || "error"
   end
 
 private

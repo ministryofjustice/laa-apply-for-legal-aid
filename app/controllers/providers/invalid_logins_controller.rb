@@ -5,8 +5,8 @@ module Providers
     def show
       @provider = Provider.find(current_provider.id)
       @portal_url = portal_url
-      session['signed_out'] = true
-      session['feedback_return_path'] = destroy_provider_session_path
+      session["signed_out"] = true
+      session["feedback_return_path"] = destroy_provider_session_path
       sign_out current_provider
     end
 

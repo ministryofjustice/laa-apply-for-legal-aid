@@ -23,12 +23,12 @@ private
   end
 
   def display_bank_transactions
-    logger.info '>>>> BANK TRANSACTIONS <<<<'
+    logger.info ">>>> BANK TRANSACTIONS <<<<"
     categorised_bank_transactions.each do |transaction_type, txs|
       logger.info "#{transaction_type.name}:"
       txs.each do |tx|
-        logger.info format('   %<date>s %<amount>.2f %<description>s',
-                           date: tx.happened_at.strftime('%F'),
+        logger.info format("   %<date>s %<amount>.2f %<description>s",
+                           date: tx.happened_at.strftime("%F"),
                            amount: tx.amount,
                            description: tx.description)
       end
@@ -42,9 +42,9 @@ private
 
   def display_history(history)
     logger.info "#{history.http_method} #{history.url}"
-    logger.info JSON.parse(history.request_payload) if history.http_method == 'POST'
+    logger.info JSON.parse(history.request_payload) if history.http_method == "POST"
     logger.info JSON.parse(history.response_payload)
-    logger.info '++++++++++++++++++++++++++++++++++++++++++++'
+    logger.info "++++++++++++++++++++++++++++++++++++++++++++"
   end
 
   def logger

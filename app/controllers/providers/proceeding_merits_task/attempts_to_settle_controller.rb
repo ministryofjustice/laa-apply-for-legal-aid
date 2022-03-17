@@ -25,7 +25,7 @@ module Providers
       end
 
       def merits_task_list_id
-        params['merits_task_list_id']
+        params["merits_task_list_id"]
       end
 
       def form_params

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Providers::ApplicantEmployedController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
@@ -9,34 +9,34 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     login
   end
 
-  describe 'GET /providers/:application_id/applicant_employed' do
+  describe "GET /providers/:application_id/applicant_employed" do
     before do
       subject
     end
 
     subject { get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application) }
 
-    it 'returns http success' do
+    it "returns http success" do
       expect(response).to have_http_status(:ok)
     end
 
-    context 'when the provider is not authenticated' do
+    context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      it_behaves_like 'a provider not authenticated'
+      it_behaves_like "a provider not authenticated"
     end
 
-    context 'when the application is in use_ccms state' do
+    context "when the application is in use_ccms state" do
       let(:legal_aid_application) { create :legal_aid_application, :use_ccms_employed, applicant: applicant }
 
-      it 'sets the state back to applicant details checked and removes the reason' do
-        expect(legal_aid_application.reload.state).to eq 'applicant_details_checked'
+      it "sets the state back to applicant details checked and removes the reason" do
+        expect(legal_aid_application.reload.state).to eq "applicant_details_checked"
         expect(legal_aid_application.ccms_reason).to be_nil
       end
     end
   end
 
-  describe 'PATCH /providers/applications/:legal_aid_application_id/applicant_employed' do
+  describe "PATCH /providers/applications/:legal_aid_application_id/applicant_employed" do
     before do
       subject
     end
@@ -53,77 +53,77 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
       )
     end
 
-    it 'renders successfully' do
+    it "renders successfully" do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'displays error' do
-      expect(response.body).to include('govuk-error-summary')
+    it "displays error" do
+      expect(response.body).to include("govuk-error-summary")
     end
 
-    context 'when the provider is not authenticated' do
+    context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      it_behaves_like 'a provider not authenticated'
+      it_behaves_like "a provider not authenticated"
     end
 
-    describe 'POST /providers/:application_id/applicant_employed' do
+    describe "POST /providers/:application_id/applicant_employed" do
       before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
 
-      context 'valid params' do
-        let(:params) { { applicant: { employed: 'true' } } }
+      context "valid params" do
+        let(:params) { { applicant: { employed: "true" } } }
 
-        it 'updates the record' do
+        it "updates the record" do
           applicant = legal_aid_application.reload.applicant
           expect(applicant.reload.employed).to be true
         end
 
-        context 'yes' do
-          it 'redirects to the use ccms employed page' do
+        context "yes" do
+          it "redirects to the use ccms employed page" do
             expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
           end
         end
 
-        context 'no' do
-          let(:params) { { applicant: { employed: 'false' } } }
+        context "no" do
+          let(:params) { { applicant: { employed: "false" } } }
 
-          it 'redirects to the open banking consents page' do
+          it "redirects to the open banking consents page" do
             expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
           end
         end
       end
 
-      context 'invalid params - nothing specified' do
+      context "invalid params - nothing specified" do
         let(:params) { {} }
 
-        it 'returns http_success' do
+        it "returns http_success" do
           expect(response).to have_http_status(:ok)
         end
 
-        it 'does not update the record' do
+        it "does not update the record" do
           applicant = legal_aid_application.reload.applicant
           expect(applicant.reload.employed).to be_nil
         end
 
-        it 'includes the error message in the response' do
-          expect(response.body).to include(I18n.t('activemodel.errors.models.applicant.attributes.base.none_selected'))
+        it "includes the error message in the response" do
+          expect(response.body).to include(I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected"))
         end
       end
     end
   end
 
-  context 'the employed journey feature flag is enabled' do
+  context "the employed journey feature flag is enabled" do
     before { Setting.setting.update!(enable_employed_journey: true) }
     subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
 
-    let(:params) { { applicant: { employed: 'true' } } }
+    let(:params) { { applicant: { employed: "true" } } }
     let(:provider) { create :provider }
     let!(:legal_aid_application) { create :legal_aid_application, provider: provider, applicant: applicant }
     let(:applicant) { create :applicant }
 
-    context 'applicant is employed and  the provider has employed permissions' do
+    context "applicant is employed and  the provider has employed permissions" do
       before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-      it 'redirects to the proceedings search page' do
+      it "redirects to the proceedings search page" do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
       end

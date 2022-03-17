@@ -12,7 +12,7 @@ module CFE
       end
 
       def capital_contribution_required?
-        result_hash[:assessment_result] == 'contribution_required'
+        result_hash[:assessment_result] == "contribution_required"
       end
 
       def capital_contribution

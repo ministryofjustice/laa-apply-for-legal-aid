@@ -107,7 +107,7 @@ module LegalAidApplications
     end
 
     def checkbox_for?(category)
-      __send__(category) == 'true'
+      __send__(category) == "true"
     end
 
     def draft_nothing_selected?
@@ -131,7 +131,7 @@ module LegalAidApplications
     end
 
     def validate_proceeding_dates
-      month_range = Date.current.ago(12.months).strftime('%d %B %Y')
+      month_range = Date.current.ago(12.months).strftime("%d %B %Y")
 
       delegated_functions_dates.each do |date_field|
         attr_name = date_field.method
@@ -167,7 +167,7 @@ module LegalAidApplications
     end
 
     def error_base_path
-      'activemodel.errors.models.proceedings.attributes.used_delegated_functions_on'
+      "activemodel.errors.models.proceedings.attributes.used_delegated_functions_on"
     end
   end
 end

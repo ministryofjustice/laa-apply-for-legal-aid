@@ -1,9 +1,9 @@
 module CCMS
   module Parsers
     class ApplicantSearchResponseParser < BaseResponseParser
-      TRANSACTION_ID_PATH = '//Body//ClientInqRS//HeaderRS//TransactionID'.freeze
-      RECORD_COUNT_PATH = '//Body//ClientInqRS//RecordCount//RecordsFetched'.freeze
-      APPLICANT_CCMS_REFERENCE_PATH = '//Body//ClientInqRS//Client//ClientReferenceNumber'.freeze
+      TRANSACTION_ID_PATH = "//Body//ClientInqRS//HeaderRS//TransactionID".freeze
+      RECORD_COUNT_PATH = "//Body//ClientInqRS//RecordCount//RecordsFetched".freeze
+      APPLICANT_CCMS_REFERENCE_PATH = "//Body//ClientInqRS//Client//ClientReferenceNumber".freeze
 
       def record_count
         @record_count ||= parse(:extracted_record_count)
@@ -16,7 +16,7 @@ module CCMS
     private
 
       def response_type
-        'ClientInqRS'.freeze
+        "ClientInqRS".freeze
       end
 
       def extracted_transaction_request_id

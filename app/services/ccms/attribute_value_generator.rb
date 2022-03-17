@@ -56,12 +56,12 @@ module CCMS
     OUTGOING = /^outgoing_(\S+)$/.freeze
 
     PROSPECTS_OF_SUCCESS = {
-      likely: { text: 'Good', code: 'FM' },
-      marginal: { text: 'Marginal', code: 'FO' },
-      poor: { text: 'Poor', code: 'NE' },
-      borderline: { text: 'Borderline', code: 'FH' },
-      uncertain: { text: 'Uncertain', code: 'FJ' },
-      not_known: { text: 'Uncertain', code: 'FJ' },
+      likely: { text: "Good", code: "FM" },
+      marginal: { text: "Marginal", code: "FO" },
+      poor: { text: "Poor", code: "NE" },
+      borderline: { text: "Borderline", code: "FH" },
+      uncertain: { text: "Uncertain", code: "FJ" },
+      not_known: { text: "Uncertain", code: "FJ" },
     }.freeze
 
     attr_reader :legal_aid_application
@@ -99,11 +99,11 @@ module CCMS
     end
 
     def used_delegated_functions_on(_options)
-      legal_aid_application.used_delegated_functions_on.strftime('%d-%m-%Y')
+      legal_aid_application.used_delegated_functions_on.strftime("%d-%m-%Y")
     end
 
     def app_amendment_type(_options)
-      legal_aid_application.proceedings_used_delegated_functions? ? 'SUBDP' : 'SUB'
+      legal_aid_application.proceedings_used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
     def provider_firm_id(_options)
@@ -206,7 +206,7 @@ module CCMS
     end
 
     def lead_proceeding_category_of_law_is_family?(_options)
-      lead_proceeding.category_of_law == 'Family'
+      lead_proceeding.category_of_law == "Family"
     end
 
     def lead_proceeding_meaning(_options)
@@ -222,7 +222,7 @@ module CCMS
     end
 
     def proceeding_proceeding_application_type(_options)
-      legal_aid_application.proceedings_used_delegated_functions? ? 'Both' : 'Substantive'
+      legal_aid_application.proceedings_used_delegated_functions? ? "Both" : "Substantive"
     end
 
     def no_warning_letter_sent?(_options)
@@ -279,10 +279,10 @@ module CCMS
 
     def client_eligibility(_options)
       case cfe_result.assessment_result
-      when 'eligible', 'contribution_required', 'partially_eligible'
-        'In Scope'
-      when 'not_eligible'
-        'Out Of Scope'
+      when "eligible", "contribution_required", "partially_eligible"
+        "In Scope"
+      when "not_eligible"
+        "Out Of Scope"
       else
         raise "Unexpected assessment result: #{cfe_result.assessment_result}"
       end
@@ -297,12 +297,12 @@ module CCMS
     end
 
     def benefit_check_passed?(_options)
-      legal_aid_application.benefit_check_result.result == 'Yes'
+      legal_aid_application.benefit_check_result.result == "Yes"
     end
 
     def proceeding_cost_limitation(options)
       proceeding = options[:proceeding]
-      return 'MULTIPLE' if proceeding.used_delegated_functions?
+      return "MULTIPLE" if proceeding.used_delegated_functions?
 
       proceeding.substantive_scope_limitation_code
     end
@@ -362,7 +362,7 @@ module CCMS
     end
 
     def proceeding_limitation_desc(options)
-      used_delegated_functions? ? 'MULTIPLE' : options[:proceeding].substantive_scope_limitation_description
+      used_delegated_functions? ? "MULTIPLE" : options[:proceeding].substantive_scope_limitation_description
     end
 
     def proceeding_description(_options)
@@ -370,7 +370,7 @@ module CCMS
     end
 
     def proceeding_limitation_meaning(options)
-      used_delegated_functions? ? 'MULTIPLE' : options[:proceeding].substantive_scope_limitation_meaning
+      used_delegated_functions? ? "MULTIPLE" : options[:proceeding].substantive_scope_limitation_meaning
     end
 
     def call_standard_method(method, options)
@@ -392,11 +392,11 @@ module CCMS
       when PROCEEDING_REGEX
         options[:proceeding].__send__(Regexp.last_match(1))
       when INCOME_TYPE_REGEX
-        legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp('?'))
+        legal_aid_application.transaction_types.for_income_type?(Regexp.last_match(1).chomp("?"))
       when OPPONENT
         options[:opponent].__send__(Regexp.last_match(1))
       when OUTGOING
-        legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp('?'))
+        legal_aid_application.transaction_types.for_outgoing_type?(Regexp.last_match(1).chomp("?"))
       when SAVINGS_AMOUNT
         legal_aid_application.savings_amount.__send__(Regexp.last_match(1))
       when OTHER_ASSETS_DECLARATION

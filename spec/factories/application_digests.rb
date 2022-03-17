@@ -7,8 +7,8 @@ FactoryBot.define do
     date_submitted { date_started + [0, 0, 1, 2, 3, 10, 15, 20].sample.days }
     days_to_submission { date_submitted - date_started + 1 }
     use_ccms { [false, true, true, true].sample }
-    matter_types { ['Domestic Abuse', 'Domestic Abuse;Section 8 orders'].sample }
-    proceedings { matter_types == 'Domestic Abuse' ? 'DA004;DA005' : 'DA001;SE013;SE014' }
+    matter_types { ["Domestic Abuse", "Domestic Abuse;Section 8 orders"].sample }
+    proceedings { matter_types == "Domestic Abuse" ? "DA004;DA005" : "DA001;SE013;SE014" }
     passported { [true, false].sample }
     df_used { [true, false].sample }
     earliest_df_date { df_used ? Faker::Date.backward(days: rand(0..5)) : nil }

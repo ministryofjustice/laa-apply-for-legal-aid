@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module Reports
   module BankTransactions
@@ -24,32 +24,32 @@ module Reports
         allow(remarks.review_transactions.transactions).to receive(:[]).with(legal_aid_application.bank_transactions.first.id).and_return(remarked_transaction)
       end
 
-      describe '.call' do
-        context 'with no local_csv param' do
+      describe ".call" do
+        context "with no local_csv param" do
           subject { described_class.call(legal_aid_application) }
 
-          it 'attaches bank_transaction_report.csv to the application' do
+          it "attaches bank_transaction_report.csv to the application" do
             subject
             legal_aid_application.reload
-            expect(legal_aid_application.bank_transaction_report.document.content_type).to eq('text/csv')
-            expect(legal_aid_application.bank_transaction_report.document.filename).to eq('bank_transaction_report.csv')
+            expect(legal_aid_application.bank_transaction_report.document.content_type).to eq("text/csv")
+            expect(legal_aid_application.bank_transaction_report.document.filename).to eq("bank_transaction_report.csv")
           end
 
-          context 'report already exists' do
-            it 'does not attach a report' do
+          context "report already exists" do
+            it "does not attach a report" do
               create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
               expect { subject }.not_to change { Attachment.count }
             end
           end
         end
 
-        context 'with local_csv param' do
+        context "with local_csv param" do
           subject { creator.call(local_csv: true) }
 
           let(:creator) { described_class.new(legal_aid_application) }
-          let(:tempfile) { Rails.root.join('tmp/bank_transactions.csv') }
+          let(:tempfile) { Rails.root.join("tmp/bank_transactions.csv") }
 
-          it 'creates a local file' do
+          it "creates a local file" do
             File.unlink(tempfile) if File.exist?(tempfile)
             subject
             expect(File.exist?(tempfile)).to be true

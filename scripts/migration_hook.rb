@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-require_relative '../db/anonymise/rules'
+require_relative "../db/anonymise/rules"
 
 def tables_in_schema
-  f = File.read('db/schema.rb')
+  f = File.read("db/schema.rb")
   f.each_line.filter_map { |line| line.match(/create_table "(\w*)"/)[1] if line[/create_table/] }
 end
 
@@ -30,7 +30,7 @@ end
 
 if tables_without_rules.any?
   puts "Tables missing rules: #{tables_without_rules.join(', ')}"
-  puts 'You can find rules at db/anonymise/rules.rb'
+  puts "You can find rules at db/anonymise/rules.rb"
   exit_status = 1
 end
 

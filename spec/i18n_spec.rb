@@ -1,24 +1,24 @@
-require 'i18n/tasks'
-require 'rails_helper'
+require "i18n/tasks"
+require "rails_helper"
 
-RSpec.describe 'I18n', :i18n do
+RSpec.describe "I18n", :i18n do
   let(:i18n) { I18n::Tasks::BaseTask.new }
   let(:missing_keys) { i18n.missing_keys[locale] || I18n::Tasks::Data::Tree::Siblings.new }
 
-  context 'English' do
-    let(:locale) { 'en' }
+  context "English" do
+    let(:locale) { "en" }
 
-    it 'does not have missing keys' do
+    it "does not have missing keys" do
       expect(missing_keys).to be_empty,
                               "Missing #{missing_keys.leaves.count} i18n keys, run `i18n-tasks missing en' to show them"
     end
   end
 
-  context 'Welsh' do
-    let(:locale) { 'cy' }
-    let(:welsh_paths) { ['/accessibility_statement', '/citizen', '/contact', '/error', '/feedback', '/privacy_policy'] }
+  context "Welsh" do
+    let(:locale) { "cy" }
+    let(:welsh_paths) { ["/accessibility_statement", "/citizen", "/contact", "/error", "/feedback", "/privacy_policy"] }
 
-    it 'does not have missing keys for the applicant journey' do
+    it "does not have missing keys for the applicant journey" do
       missing_applicant_keys = []
       missing_keys.leaves.each do |leaf|
         missing_applicant_keys << leaf if welsh_paths.any? { |path| leaf.data[:occurrences]&.first&.path&.include? "views#{path}" }
@@ -36,8 +36,8 @@ RSpec.describe 'I18n', :i18n do
     format_string = "%<key>-#{max_key_length}s %<location>s"
 
     puts "\nTranslation keys missing for locale #{locale.inspect}".red
-    puts format(format_string, key: 'key', location: 'location').red
-    puts format(format_string, key: ('=' * max_key_length), location: ('=' * max_location_length)).red
+    puts format(format_string, key: "key", location: "location").red
+    puts format(format_string, key: ("=" * max_key_length), location: ("=" * max_location_length)).red
     key_details.each do |key, location|
       puts format(format_string, key:, location:).red
     end

@@ -4,14 +4,14 @@ module Test
   #
   class GenerateErrorController < ApplicationController
     def trapped_error
-      raise 'Test Error Generated - to test the reporting of errors'
+      raise "Test Error Generated - to test the reporting of errors"
     rescue StandardError => e
       AlertManager.capture_exception(e)
       redirect_to providers_legal_aid_applications_path
     end
 
     def untrapped_error
-      raise 'Untrapped Test Error generated'
+      raise "Untrapped Test Error generated"
     end
   end
 end

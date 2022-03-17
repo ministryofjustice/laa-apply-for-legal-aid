@@ -3,7 +3,7 @@ module CFE
   private
 
     def cfe_url_path
-      '/state_benefit_type'
+      "/state_benefit_type"
     end
 
     def query_cfe_service

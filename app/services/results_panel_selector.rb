@@ -9,7 +9,7 @@ class ResultsPanelSelector
 
   def call
     return eligible_or_non_eligible if %w[eligible not_eligible].include?(assessment_result)
-    return 'shared/assessment_results/manual_check_required' if restrictions? || disregards? || manually_entered_employment_information?
+    return "shared/assessment_results/manual_check_required" if restrictions? || disregards? || manually_entered_employment_information?
 
     "shared/assessment_results/#{cfe_result}#{capital_contribution}#{income_contribution}"
   end
@@ -25,15 +25,15 @@ private
   end
 
   def capital_contribution
-    return unless cfe_result == 'partially_eligible'
+    return unless cfe_result == "partially_eligible"
 
-    '_capital' if @legal_aid_application.cfe_result.capital_contribution_required?
+    "_capital" if @legal_aid_application.cfe_result.capital_contribution_required?
   end
 
   def income_contribution
-    return unless cfe_result == 'partially_eligible'
+    return unless cfe_result == "partially_eligible"
 
-    '_income' if @legal_aid_application.cfe_result.income_contribution_required?
+    "_income" if @legal_aid_application.cfe_result.income_contribution_required?
   end
 
   def restrictions?
@@ -49,7 +49,7 @@ private
   end
 
   def eligible_or_non_eligible
-    return 'shared/assessment_results/manual_check_required' if manually_entered_employment_information?
+    return "shared/assessment_results/manual_check_required" if manually_entered_employment_information?
 
     "shared/assessment_results/#{assessment_result}"
   end

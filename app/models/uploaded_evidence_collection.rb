@@ -1,6 +1,6 @@
 class UploadedEvidenceCollection < ApplicationRecord
   belongs_to :legal_aid_application
-  belongs_to :provider_uploader, class_name: 'Provider', optional: true
+  belongs_to :provider_uploader, class_name: "Provider", optional: true
 
   validate :all_evidence_categorised
   validate :all_mandatory_evidence_uploaded
@@ -19,7 +19,7 @@ private
   end
 
   def uncategorised_evidence_exists?
-    original_attachments.any? { |attachment| attachment.attachment_type == 'uncategorised' }
+    original_attachments.any? { |attachment| attachment.attachment_type == "uncategorised" }
   end
 
   def all_mandatory_evidence_uploaded
@@ -27,7 +27,7 @@ private
       next if categorised_evidence_types.include?(type)
 
       # link the error message to the dropzone
-      errors.add('dz-upload-button', I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit), mandatory_evidence: true)
+      errors.add("dz-upload-button", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit), mandatory_evidence: true)
     end
 
     mandatory_evidence_types.all? { |mandatory_type| categorised_evidence_types.include?(mandatory_type) }
@@ -50,6 +50,6 @@ private
   end
 
   def error_path
-    '.activemodel.errors.models.uploaded_evidence_collection.attributes.original_file'
+    ".activemodel.errors.models.uploaded_evidence_collection.attributes.original_file"
   end
 end

@@ -19,7 +19,7 @@ module CCMS
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
-      raise 'Unable to determine whether Manual review is required before means assessment' if legal_aid_application.cfe_result.nil?
+      raise "Unable to determine whether Manual review is required before means assessment" if legal_aid_application.cfe_result.nil?
     end
 
     def manual_review_required?

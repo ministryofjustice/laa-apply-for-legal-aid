@@ -19,7 +19,7 @@ class HtmlPageSaver
 private
 
   def save_file
-    File.write(prepared_path, html, mode: 'wb')
+    File.write(prepared_path, html, mode: "wb")
   end
 
   def prepared_path

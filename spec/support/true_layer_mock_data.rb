@@ -3,8 +3,8 @@ module TrueLayerHelpers
     provider: {
       credentials_id: SecureRandom.hex,
       provider: {
-        display_name: 'Lloyds Bank',
-        provider_id: 'lloyds',
+        display_name: "Lloyds Bank",
+        provider_id: "lloyds",
       },
     },
     account_holders: [{
@@ -25,7 +25,7 @@ module TrueLayerHelpers
     accounts: [{
       account_id: SecureRandom.hex,
       display_name: Faker::Bank.name,
-      account_type: 'TRANSACTION',
+      account_type: "TRANSACTION",
       currency: Faker::Currency.code,
       account_number: {
         number: Faker::Number.number.to_s,
@@ -36,32 +36,32 @@ module TrueLayerHelpers
       },
       transactions: [{
         transaction_id: SecureRandom.hex,
-        timestamp: '2018-03-06T00:00:00',
-        description: 'GOOGLE PLAY STORE',
+        timestamp: "2018-03-06T00:00:00",
+        description: "GOOGLE PLAY STORE",
         amount: -2.99,
-        currency: 'GBP',
-        transaction_type: 'DEBIT',
-        merchant_name: 'Google play',
+        currency: "GBP",
+        transaction_type: "DEBIT",
+        merchant_name: "Google play",
         running_balance: {
-          currency: 'GBP',
+          currency: "GBP",
           amount: 413.11,
         },
       },
                      {
                        transaction_id: SecureRandom.hex,
-                       timestamp: '2018-02-18T00:00:00',
-                       description: 'PAYPAL EBAY',
+                       timestamp: "2018-02-18T00:00:00",
+                       description: "PAYPAL EBAY",
                        amount: 25.25,
-                       currency: 'GBP',
-                       transaction_type: 'CREDIT',
-                       merchant_name: 'Ebay',
+                       currency: "GBP",
+                       transaction_type: "CREDIT",
+                       merchant_name: "Ebay",
                        running_balance: {},
                      }],
     },
                {
                  account_id: SecureRandom.hex,
                  display_name: Faker::Bank.name,
-                 account_type: 'SAVINGS',
+                 account_type: "SAVINGS",
                  currency: Faker::Currency.code,
                  account_number: {
                    number: Faker::Number.number,

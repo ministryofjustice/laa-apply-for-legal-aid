@@ -6,7 +6,7 @@ module ApplicationMeritsTask
     belongs_to :legal_aid_application
 
     def ccms_relationship_to_case
-      'OPP'
+      "OPP"
     end
 
     def ccms_child?
@@ -14,7 +14,7 @@ module ApplicationMeritsTask
     end
 
     def ccms_opponent_relationship_to_case
-      'Opponent'
+      "Opponent"
     end
   end
 end

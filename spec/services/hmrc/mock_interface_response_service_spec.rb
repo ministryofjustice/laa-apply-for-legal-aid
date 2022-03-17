@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HMRC::MockInterfaceResponseService do
   subject(:service) { described_class.call(hmrc_response) }
@@ -7,19 +7,19 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   let(:application) { create :legal_aid_application, applicant: applicant }
   let(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid }
   let(:guid) { SecureRandom.uuid }
-  let(:hmrc_data) { hmrc_response.response['data'] }
+  let(:hmrc_data) { hmrc_response.response["data"] }
   let(:not_found_response) do
     {
       submission: guid,
-      status: 'failed',
+      status: "failed",
       data:
         [
           {
             correlation_id: guid,
-            use_case: 'use_case_one',
+            use_case: "use_case_one",
           },
           {
-            error: 'submitted client details could not be found in HMRC service',
+            error: "submitted client details could not be found in HMRC service",
           }
         ],
     }
@@ -28,29 +28,29 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   let(:employed_response) do
     {
       submission: guid,
-      status: 'completed',
+      status: "completed",
       data: [
         {
           correlation_id: guid,
-          use_case: 'use_case_one',
+          use_case: "use_case_one",
         },
         {
           'individuals/matching/individual': {
-            firstName: 'Langley',
-            lastName: 'Yorke',
-            nino: 'MN212451D',
-            dateOfBirth: '1992-07-22',
+            firstName: "Langley",
+            lastName: "Yorke",
+            nino: "MN212451D",
+            dateOfBirth: "1992-07-22",
           },
         },
         {
           'income/paye/paye': {
             income: [
               {
-                taxYear: '21-22',
-                payFrequency: 'M1',
+                taxYear: "21-22",
+                payFrequency: "M1",
                 monthPayNumber: 8,
-                paymentDate: '2021-11-30',
-                paidHoursWorked: 'E',
+                paymentDate: "2021-11-30",
+                paidHoursWorked: "E",
                 taxablePayToDate: 17_666.66,
                 taxablePay: 2083.33,
                 totalTaxToDate: 1848,
@@ -68,11 +68,11 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 },
               },
               {
-                taxYear: '21-22',
-                payFrequency: 'M1',
+                taxYear: "21-22",
+                payFrequency: "M1",
                 monthPayNumber: 7,
-                paymentDate: '2021-10-29',
-                paidHoursWorked: 'E',
+                paymentDate: "2021-10-29",
+                paidHoursWorked: "E",
                 taxablePayToDate: 15_583.33,
                 taxablePay: 3083.33,
                 totalTaxToDate: 1642,
@@ -90,11 +90,11 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 },
               },
               {
-                taxYear: '21-22',
-                payFrequency: 'M1',
+                taxYear: "21-22",
+                payFrequency: "M1",
                 monthPayNumber: 6,
-                paymentDate: '2021-09-30',
-                paidHoursWorked: 'E',
+                paymentDate: "2021-09-30",
+                paidHoursWorked: "E",
                 taxablePayToDate: 12_500,
                 taxablePay: 2000,
                 totalTaxToDate: 1236,
@@ -112,11 +112,11 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 },
               },
               {
-                taxYear: '21-22',
-                payFrequency: 'M1',
+                taxYear: "21-22",
+                payFrequency: "M1",
                 monthPayNumber: 5,
-                paymentDate: '2021-08-31',
-                paidHoursWorked: 'E',
+                paymentDate: "2021-08-31",
+                paidHoursWorked: "E",
                 taxablePayToDate: 10_500,
                 taxablePay: 1750,
                 totalTaxToDate: 1046.6,
@@ -205,8 +205,8 @@ RSpec.describe HMRC::MockInterfaceResponseService do
         {
           'employments/paye/employments': [
             {
-              startDate: '2017-07-24',
-              endDate: '2099-12-31',
+              startDate: "2017-07-24",
+              endDate: "2099-12-31",
             }
           ],
         },
@@ -221,51 +221,51 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   end
 
   before do
-    allow(SecureRandom).to receive(:uuid).and_return('dummy_uuid')
+    allow(SecureRandom).to receive(:uuid).and_return("dummy_uuid")
     service
   end
 
-  it 'updates the hmrc_response.response value' do
+  it "updates the hmrc_response.response value" do
     expect(hmrc_response.reload.response).to match_json_expression not_found_response
   end
 
-  it 'updates the hmrc_response.submission_id value' do
-    expect(hmrc_response.reload.submission_id).to eq 'dummy_uuid'
+  it "updates the hmrc_response.submission_id value" do
+    expect(hmrc_response.reload.submission_id).to eq "dummy_uuid"
   end
 
-  context 'when the applicant is known to the mock response service' do
-    let(:applicant) { create :applicant, first_name: 'Langley', last_name: 'Yorke', national_insurance_number: 'MN212451D', date_of_birth: '1992-07-22' }
+  context "when the applicant is known to the mock response service" do
+    let(:applicant) { create :applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22" }
 
-    it 'updates the hmrc_response.response value' do
+    it "updates the hmrc_response.response value" do
       expect(hmrc_response.reload.response).to match_json_expression employed_response
     end
 
-    context 'and is paid weekly' do
-      let(:applicant) { create :applicant, first_name: 'Jeremy', last_name: 'Irons', national_insurance_number: 'BB313661B', date_of_birth: '1966-06-06' }
+    context "and is paid weekly" do
+      let(:applicant) { create :applicant, first_name: "Jeremy", last_name: "Irons", national_insurance_number: "BB313661B", date_of_birth: "1966-06-06" }
 
-      it 'updates the hmrc_response.response value' do
-        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Jeremy'
-        expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
+      it "updates the hmrc_response.response value" do
+        expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Jeremy"
+        expect(hmrc_data[2]["income/paye/paye"]["income"][0]["payFrequency"]).to eq "W4"
       end
     end
 
-    context 'and has multiple employments' do
-      let(:applicant) { create :applicant, first_name: 'Ida', last_name: 'Paisley', national_insurance_number: 'OE726113A', date_of_birth: '1987-11-24' }
+    context "and has multiple employments" do
+      let(:applicant) { create :applicant, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24" }
 
-      it 'updates the hmrc_response.response value' do
-        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Ida'
-        expect(hmrc_data[2]['income/paye/paye']['income'][0]['payFrequency']).to eq 'W4'
-        expect(hmrc_data[2]['income/paye/paye']['income'][1]['payFrequency']).to eq 'W1'
-        expect(hmrc_data[16]['employments/paye/employments'].size).to eq 4
+      it "updates the hmrc_response.response value" do
+        expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Ida"
+        expect(hmrc_data[2]["income/paye/paye"]["income"][0]["payFrequency"]).to eq "W4"
+        expect(hmrc_data[2]["income/paye/paye"]["income"][1]["payFrequency"]).to eq "W1"
+        expect(hmrc_data[16]["employments/paye/employments"].size).to eq 4
       end
     end
 
-    context 'and receives tax credits' do
-      let(:applicant) { create :applicant, first_name: 'Oakley', last_name: 'Weller', national_insurance_number: 'AB476107D', date_of_birth: '1988-08-08' }
+    context "and receives tax credits" do
+      let(:applicant) { create :applicant, first_name: "Oakley", last_name: "Weller", national_insurance_number: "AB476107D", date_of_birth: "1988-08-08" }
 
-      it 'updates the hmrc_response.response value' do
-        expect(hmrc_data[1]['individuals/matching/individual']['firstName']).to eq 'Oakley'
-        expect(hmrc_data[17]['benefits_and_credits/working_tax_credit/applications'][0]['awards'][0]['totalEntitlement']).not_to be_nil
+      it "updates the hmrc_response.response value" do
+        expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Oakley"
+        expect(hmrc_data[17]["benefits_and_credits/working_tax_credit/applications"][0]["awards"][0]["totalEntitlement"]).not_to be_nil
       end
     end
   end

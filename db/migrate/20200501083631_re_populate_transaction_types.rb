@@ -7,6 +7,6 @@ class RePopulateTransactionTypes < ActiveRecord::Migration[6.0]
   end
 
   def down
-    TransactionType.find_by(name: 'excluded_benefits').destroy!
+    TransactionType.find_by(name: "excluded_benefits").destroy!
   end
 end

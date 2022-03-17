@@ -9,13 +9,13 @@ module Admin
       respond_to do |format|
         format.csv do
           data = application_details_report || Reports::MIS::ApplicationDetailsReport.new.run
-          send_data data, filename: "application_details_#{timestamp}.csv", content_type: 'text/csv'
+          send_data data, filename: "application_details_#{timestamp}.csv", content_type: "text/csv"
         end
       end
     end
 
     def timestamp
-      Time.current.strftime('%FT%T')
+      Time.current.strftime("%FT%T")
     end
 
   private
@@ -34,9 +34,9 @@ module Admin
     def reports
       @reports ||= {
         csv_download: {
-          report_title: 'Application Details report',
+          report_title: "Application Details report",
           path: :admin_application_details_csv_path,
-          path_text: 'Download CSV',
+          path_text: "Download CSV",
         },
       }
     end

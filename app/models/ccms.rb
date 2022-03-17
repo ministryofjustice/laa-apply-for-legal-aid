@@ -1,5 +1,5 @@
 module CCMS
   def self.table_name_prefix
-    'ccms_'
+    "ccms_"
   end
 end

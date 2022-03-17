@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Providers::ApplicantsController, type: :request do
   let(:office) { create :office }
@@ -7,21 +7,21 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
   before { login }
 
-  describe 'GET /providers/applicants/new' do
+  describe "GET /providers/applicants/new" do
     subject { get new_providers_applicant_path }
 
-    it 'renders successfully' do
+    it "renders successfully" do
       subject
       expect(response).to have_http_status(:ok)
     end
 
-    it 'does not prefix page title with error label' do
+    it "does not prefix page title with error label" do
       subject
       expect(response.body).not_to match(/<title>#{I18n.t('errors.title_prefix')}:/)
     end
   end
 
-  describe 'POST /providers/applicants' do
+  describe "POST /providers/applicants" do
     let(:submit_button) { {} }
     let(:param_applicant) { FactoryBot.attributes_for :applicant }
     let(:params) do
@@ -44,7 +44,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       expect(legal_aid_application.office.id).to eq(provider.selected_office.id)
     end
 
-    it 'creates an applicant' do
+    it "creates an applicant" do
       expect { subject }.to change { Applicant.count }.by(1)
       expect(applicant).to be_present
       expect(applicant.first_name).to eq(param_applicant[:first_name])
@@ -53,7 +53,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
     end
 
-    it 'redirects to next page' do
+    it "redirects to next page" do
       subject
       expect(response).to redirect_to(next_url)
     end
@@ -65,42 +65,42 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       expect(response.body).to have_back_link(providers_legal_aid_application_applicant_details_path(legal_aid_application, back: true))
     end
 
-    context 'with missing parameters' do
-      let(:params) { { applicant: { first_name: 'bob' } } }
+    context "with missing parameters" do
+      let(:params) { { applicant: { first_name: "bob" } } }
 
-      it 'displays errors' do
+      it "displays errors" do
         subject
-        expect(response.body).to include('govuk-error-summary')
+        expect(response.body).to include("govuk-error-summary")
       end
 
-      it 'prefixes page title with error label' do
+      it "prefixes page title with error label" do
         subject
         expect(response.body).to match(/<title>#{I18n.t('errors.title_prefix')}:/)
       end
 
-      it 'does not create applicant' do
+      it "does not create applicant" do
         expect { subject }.not_to change { Applicant.count }
       end
 
-      it 'does not create application' do
+      it "does not create application" do
         expect { subject }.not_to change { LegalAidApplication.count }
       end
     end
 
-    context 'Form submitted using Save as draft button' do
-      let(:submit_button) { { draft_button: 'Save as draft' } }
+    context "Form submitted using Save as draft button" do
+      let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do
         subject
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'creates an application as draft' do
+      it "creates an application as draft" do
         expect { subject }.to change { provider.legal_aid_applications.count }.by(1)
         expect(legal_aid_application.draft?).to eq(true)
       end
 
-      it 'creates an applicant' do
+      it "creates an applicant" do
         expect { subject }.to change { Applicant.count }.by(1)
         expect(applicant).to be_present
         expect(applicant.first_name).to eq(param_applicant[:first_name])
@@ -109,20 +109,20 @@ RSpec.describe Providers::ApplicantsController, type: :request do
         expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
       end
 
-      context 'with blank entries' do
-        let(:params) { { applicant: { first_name: 'bob' } } }
+      context "with blank entries" do
+        let(:params) { { applicant: { first_name: "bob" } } }
 
         it "redirects provider to provider's applications page" do
           subject
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
-        it 'sets the application as draft' do
+        it "sets the application as draft" do
           subject
           expect(legal_aid_application.draft?).to eq(true)
         end
 
-        it 'leaves values blank' do
+        it "leaves values blank" do
           subject
           expect(applicant.last_name).to be_blank
           expect(applicant.national_insurance_number).to be_blank
@@ -130,11 +130,11 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       end
     end
 
-    context 'when the provider is not authenticated' do
+    context "when the provider is not authenticated" do
       let(:login) { nil }
 
       before { subject }
-      it_behaves_like 'a provider not authenticated'
+      it_behaves_like "a provider not authenticated"
     end
   end
 end

@@ -8,7 +8,7 @@ module Providers
       return continue_or_draft if none_selected? || transactions_added || draft_selected?
 
       remove_existing_transaction_types
-      legal_aid_application.errors.add :transaction_type_ids, t('.none_selected')
+      legal_aid_application.errors.add :transaction_type_ids, t(".none_selected")
       render :show
     end
 
@@ -23,7 +23,7 @@ module Providers
     end
 
     def none_selected?
-      return unless params[:legal_aid_application][:none_selected] == 'true'
+      return unless params[:legal_aid_application][:none_selected] == "true"
 
       LegalAidApplication.transaction do
         remove_existing_transaction_types

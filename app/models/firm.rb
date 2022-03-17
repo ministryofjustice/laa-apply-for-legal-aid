@@ -11,18 +11,18 @@ class Firm < ApplicationRecord
   end
 
   after_create do
-    ActiveSupport::Notifications.instrument 'dashboard.firm_created'
+    ActiveSupport::Notifications.instrument "dashboard.firm_created"
   end
 
   def self.search(search_term)
     if search_term
-      where('name ILIKE ?', "%#{search_term}%")
+      where("name ILIKE ?", "%#{search_term}%")
     else
       all
     end
   end
 
   def passported_permission_id
-    Permission.find_by(role: 'application.passported.*')&.id
+    Permission.find_by(role: "application.passported.*")&.id
   end
 end

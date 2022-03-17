@@ -13,7 +13,7 @@ module LegalAidApplications
     end
 
     def blank_error
-      'activemodel.errors.models.dwp_override.attributes.has_evidence_of_benefit.blank'
+      "activemodel.errors.models.dwp_override.attributes.has_evidence_of_benefit.blank"
     end
 
     def evidence_present

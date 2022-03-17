@@ -5,7 +5,7 @@ FactoryBot.define do
 
     trait :with_real_data do
       service_level_number { 3 }
-      name { 'Full Representation' }
+      name { "Full Representation" }
     end
 
     initialize_with { ServiceLevel.find_or_create_by(service_level_number:) }

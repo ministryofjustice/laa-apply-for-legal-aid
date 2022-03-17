@@ -1,6 +1,6 @@
 class DateValidator < ActiveModel::EachValidator
-  DEFAULT_FORMAT = '%Y-%m-%d'.freeze
-  DEFAULT_EARLIEST_DATE = '1900-01-01'.freeze
+  DEFAULT_FORMAT = "%Y-%m-%d".freeze
+  DEFAULT_EARLIEST_DATE = "1900-01-01".freeze
 
   def validate_each(record, attribute, value)
     value = parse_date(value, options[:format]) if value.is_a?(String)
@@ -41,7 +41,7 @@ private
     required = options[:earliest_allowed_date]
     return if required.blank?
 
-    formatted_date = earliest_allowed_date.strftime('%d %m %Y')
+    formatted_date = earliest_allowed_date.strftime("%d %m %Y")
     message = required[:message] if required.is_a?(Hash)
     message ||= :earliest_allowed_date
     record.errors.add(attribute, message, date: formatted_date) if value < earliest_allowed_date

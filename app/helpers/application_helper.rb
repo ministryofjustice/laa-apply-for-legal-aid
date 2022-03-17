@@ -1,14 +1,14 @@
 module ApplicationHelper
   def home_link
-    link_url = '#'
-    link_url = providers_legal_aid_applications_url if request.path_info.include?('providers')
-    link_to_accessible(t('layouts.application.header.title'),
+    link_url = "#"
+    link_url = providers_legal_aid_applications_url if request.path_info.include?("providers")
+    link_to_accessible(t("layouts.application.header.title"),
                        link_url,
-                       class: 'govuk-header__link govuk-header__link--service-name')
+                       class: "govuk-header__link govuk-header__link--service-name")
   end
 
   def html_title
-    default = t('shared.page-title.suffix')
+    default = t("shared.page-title.suffix")
     return default unless content_for?(:head_title) || content_for?(:page_title)
 
     title = content_for?(:head_title) ? content_for(:head_title) : content_for(:page_title)
@@ -16,20 +16,20 @@ module ApplicationHelper
   end
 
   def controller_t(lazy_t, **args)
-    controller = controller_path.split('/')
+    controller = controller_path.split("/")
     t ".#{[*controller, lazy_t].join('.')}", **args
   end
 
   def menu_button
-    button_tag(t('generic.menu'),
-               type: 'button', role: 'button', class: 'govuk-header__menu-button govuk-js-header-toggle',
-               aria: { controls: 'navigation', label: t('generic.toggle_navigation') })
+    button_tag(t("generic.menu"),
+               type: "button", role: "button", class: "govuk-header__menu-button govuk-js-header-toggle",
+               aria: { controls: "navigation", label: t("generic.toggle_navigation") })
   end
 
-  def back_link(text: t('generic.back'), path: back_path, method: nil)
+  def back_link(text: t("generic.back"), path: back_path, method: nil)
     return unless path
 
-    link_to_accessible text, path, class: 'govuk-back-link', id: 'back', method: method
+    link_to_accessible text, path, class: "govuk-back-link", id: "back", method: method
   end
 
   def current_journey
@@ -50,9 +50,9 @@ module ApplicationHelper
 
   def provider_header_link
     if provider_signed_in?
-      render 'shared/provider_header_link'
+      render "shared/provider_header_link"
     else
-      render 'shared/signed_out_header_link'
+      render "shared/signed_out_header_link"
     end
   end
 
@@ -60,45 +60,45 @@ module ApplicationHelper
     return unless admin_user_signed_in?
 
     button = button_to_accessible(
-      t('layouts.logout.admin'),
+      t("layouts.logout.admin"),
       destroy_admin_user_session_path,
       method: :delete,
-      class: 'button-as-link govuk-header__link'
+      class: "button-as-link govuk-header__link"
     )
 
-    content_tag(:li, button, class: 'govuk-header__navigation-item')
+    content_tag(:li, button, class: "govuk-header__navigation-item")
   end
 
   def list_from_translation_path(translation_path, params: {})
-    prefix = current_journey && current_journey != :unknown ? current_journey.to_s : ''
-    render 'shared/forms/list_items', translation_path: prefix + translation_path, params: params
+    prefix = current_journey && current_journey != :unknown ? current_journey.to_s : ""
+    render "shared/forms/list_items", translation_path: prefix + translation_path, params: params
   end
 
   def bullet_list_from_translation_array(locale_path, params: {})
-    keys = [I18n.locale, locale_path.split('.').map(&:to_sym)].flatten
-    render 'shared/forms/list_with_items', locale_path: locale_path, items: I18n.backend.send(:translations).dig(*keys), params: params
+    keys = [I18n.locale, locale_path.split(".").map(&:to_sym)].flatten
+    render "shared/forms/list_with_items", locale_path: locale_path, items: I18n.backend.send(:translations).dig(*keys), params: params
   end
 
   def yes_no(boolean)
-    boolean ? t('generic.yes') : t('generic.no')
+    boolean ? t("generic.yes") : t("generic.no")
   end
 
   def print_button(text)
-    content_tag :button, text, class: 'govuk-button no-print print-button', type: 'button'
+    content_tag :button, text, class: "govuk-button no-print print-button", type: "button"
   end
 
   def start_button_label(button_text)
     "#{t("generic.#{button_text}")} ".html_safe << content_tag(:svg,
-                                                               content_tag(:path, '', fill: 'currentColor', d: 'M0 0h13l20 20-20 20H0l20-20z'),
-                                                               class: 'govuk-button__start-icon',
-                                                               xmlns: 'http://www.w3.org/2000/svg',
-                                                               height: '19',
-                                                               viewBox: '0 0 33 40',
-                                                               role: 'presentation',
-                                                               focusable: 'false')
+                                                               content_tag(:path, "", fill: "currentColor", d: "M0 0h13l20 20-20 20H0l20-20z"),
+                                                               class: "govuk-button__start-icon",
+                                                               xmlns: "http://www.w3.org/2000/svg",
+                                                               height: "19",
+                                                               viewBox: "0 0 33 40",
+                                                               role: "presentation",
+                                                               focusable: "false")
   end
 
   def linked_children_names(proceeding)
-    proceeding.involved_children.map(&:full_name).join('</br>').html_safe
+    proceeding.involved_children.map(&:full_name).join("</br>").html_safe
   end
 end

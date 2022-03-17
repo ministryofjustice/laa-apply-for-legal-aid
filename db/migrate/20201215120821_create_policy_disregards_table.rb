@@ -8,7 +8,7 @@ class CreatePolicyDisregardsTable < ActiveRecord::Migration[6.0]
       t.boolean :national_emergencies_trust
       t.boolean :we_love_manchester_emergency_fund
       t.boolean :london_emergencies_trust
-      t.boolean 'none_selected'
+      t.boolean "none_selected"
       t.timestamps
       t.references :legal_aid_application, foreign_key: true, type: :uuid
     end

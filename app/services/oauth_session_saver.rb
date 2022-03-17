@@ -18,7 +18,7 @@ class OauthSessionSaver
   end
 
   def store(key, session)
-    return unless session.key?('omniauth.state')
+    return unless session.key?("omniauth.state")
 
     @redis.set(key, session.to_json, ex: TIME_TO_LIVE_IN_SECONDS)
   end

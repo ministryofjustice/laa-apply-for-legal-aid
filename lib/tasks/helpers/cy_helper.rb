@@ -20,8 +20,8 @@ class CyHelper
   ].freeze
 
   def initialize
-    @cy_dir = Rails.root.join('config/locales/cy')
-    @en_dir = Rails.root.join('config/locales/en')
+    @cy_dir = Rails.root.join("config/locales/cy")
+    @en_dir = Rails.root.join("config/locales/en")
   end
 
   def run
@@ -32,7 +32,7 @@ class CyHelper
 private
 
   def copy_en_to_cy
-    Rails.logger.info 'copying en locale to cy'
+    Rails.logger.info "copying en locale to cy"
     en_files = FILES_TO_TRANSLATE.map { |f| Rails.root.join("config/locales/en/#{f}.yml").to_s }
     FileUtils.mkdir @cy_dir unless File.exist?(@cy_dir)
     FileUtils.cp en_files, @cy_dir, verbose: true
@@ -45,10 +45,10 @@ private
   def reverse_strings(filename)
     Rails.logger.info "Reversing #{filename}"
     hash = YAML.safe_load_file(filename, aliases: true)
-    hash['cy'] = hash['en']
-    hash.delete('en')
-    hash['cy'].each_key { |k| reverse_key(k, hash['cy']) }
-    File.open(filename, 'w') { |f| f.puts(YAML.dump(hash)) }
+    hash["cy"] = hash["en"]
+    hash.delete("en")
+    hash["cy"].each_key { |k| reverse_key(k, hash["cy"]) }
+    File.open(filename, "w") { |f| f.puts(YAML.dump(hash)) }
   end
 
   def reverse_key(key, hash)

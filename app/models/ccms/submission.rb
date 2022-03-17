@@ -11,7 +11,7 @@ module CCMS
     # rubocop:enable Rails/RedundantPresenceValidationOnBelongsTo
 
     after_save do
-      ActiveSupport::Notifications.instrument 'dashboard.ccms_submission_saved', id: id, state: aasm_state
+      ActiveSupport::Notifications.instrument "dashboard.ccms_submission_saved", id: id, state: aasm_state
     end
 
     POLL_LIMIT = Rails.env.development? ? 99 : 20
@@ -30,7 +30,7 @@ module CCMS
       service = STATE_SERVICES[aasm_state.to_sym]
       raise CCMSError, "Submission #{id} - Unknown state: #{aasm_state}" if service.nil?
 
-      if aasm_state.eql?('document_ids_obtained')
+      if aasm_state.eql?("document_ids_obtained")
         service.call(self, options)
       else
         service.call(self)

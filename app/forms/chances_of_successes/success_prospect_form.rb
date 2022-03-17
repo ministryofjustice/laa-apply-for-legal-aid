@@ -40,7 +40,7 @@ module ChancesOfSuccesses
 
       details = "success_prospect_details_#{success_prospect}".to_sym
       value = __send__(details)
-      errors.add(details, I18n.t('activemodel.errors.models.chances_of_success.attributes.success_prospect_details.blank')) if value.blank?
+      errors.add(details, I18n.t("activemodel.errors.models.chances_of_success.attributes.success_prospect_details.blank")) if value.blank?
     end
 
     def interpolate_details
@@ -48,7 +48,7 @@ module ChancesOfSuccesses
 
       value = __send__("success_prospect_details_#{success_prospect}".to_sym)
       @success_prospect_details = value&.empty? ? nil : value
-      attributes['success_prospect_details'] = @success_prospect_details
+      attributes["success_prospect_details"] = @success_prospect_details
     end
 
     def extrapolate_details

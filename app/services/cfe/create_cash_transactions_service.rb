@@ -19,7 +19,7 @@ module CFE
 
     def cash_transactions_for(operation)
       cash_transactions.joins(:transaction_type).where(transaction_type: { operation: })
-                       .order('transaction_type.name', :transaction_date)
+                       .order("transaction_type.name", :transaction_date)
                        .group_by(&:transaction_type_id)
     end
 
@@ -38,7 +38,7 @@ module CFE
       result = []
       array.each do |transaction|
         result << {
-          date: transaction.transaction_date.strftime('%Y-%m-%d'),
+          date: transaction.transaction_date.strftime("%Y-%m-%d"),
           amount: transaction.amount.abs.to_f,
           client_id: transaction.id,
         }

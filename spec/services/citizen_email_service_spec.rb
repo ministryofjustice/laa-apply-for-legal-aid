@@ -1,9 +1,9 @@
-require 'rails_helper'
-require 'sidekiq/testing'
+require "rails_helper"
+require "sidekiq/testing"
 
 RSpec.describe CitizenEmailService do
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
-  let(:applicant) { create(:applicant, first_name: 'John', last_name: 'Doe', email: simulated_email_address) }
+  let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe", email: simulated_email_address) }
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
   let(:application) { create(:application, applicant:, provider:) }
@@ -12,7 +12,7 @@ RSpec.describe CitizenEmailService do
 
   subject { described_class.new(application) }
 
-  describe '#send_email' do
+  describe "#send_email" do
     let(:mailer_args) do
       [
         application.application_ref,
@@ -34,12 +34,12 @@ RSpec.describe CitizenEmailService do
 
     before { allow(subject).to receive(:secure_id).and_return(secure_id) }
 
-    it 'schedules and email for immediate delivery' do
+    it "schedules and email for immediate delivery" do
       expect(ScheduledMailing).to receive(:send_now!).with(*scheduled_mail_attrs)
       subject.send_email
     end
 
-    it 'notifies the dashboard' do
+    it "notifies the dashboard" do
       expect(subject).to receive(:notify_dashboard)
       subject.send_email
     end

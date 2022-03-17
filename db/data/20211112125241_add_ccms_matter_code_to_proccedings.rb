@@ -9,6 +9,6 @@ class AddCCMSMatterCodeToProccedings < ActiveRecord::Migration[6.1]
   end
 
   def down
-    ActiveRecord::Base.connection.execute 'UPDATE proceedings SET ccms_matter_code = NULL'
+    ActiveRecord::Base.connection.execute "UPDATE proceedings SET ccms_matter_code = NULL"
   end
 end

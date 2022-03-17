@@ -7,8 +7,8 @@ class ProviderDetailsCreator
 
   def initialize(provider)
     @provider = provider
-    @passported_permission = Permission.find_by(role: 'application.passported.*')
-    @non_passported_permission = Permission.find_by(role: 'application.non_passported.*')
+    @passported_permission = Permission.find_by(role: "application.passported.*")
+    @non_passported_permission = Permission.find_by(role: "application.non_passported.*")
   end
 
   def call
@@ -24,7 +24,7 @@ class ProviderDetailsCreator
 private
 
   def provider_name
-    ''
+    ""
   end
 
   def should_clear_selected_office?
@@ -60,7 +60,7 @@ private
     # Remove " Office No. n" at the end if it's there because created by MockProviderDetailsRetriever
     #
     name = provider_details[:providerOffices].first[:name]
-    name.sub(/Office No. \d+/, '').sub(/-\S{6}$/, '').strip
+    name.sub(/Office No. \d+/, "").sub(/-\S{6}$/, "").strip
   end
 
   def contact_id

@@ -1,6 +1,6 @@
 class NotifyMailer < BaseApplyMailer
   # Require relative statement required as concern not found when loaded from sidekiq on retry
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def citizen_start_email(app_id, email, application_url, client_name, provider_firm)

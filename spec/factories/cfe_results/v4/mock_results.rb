@@ -3,26 +3,26 @@ module CFEResults
     class MockResults
       def self.eligible
         {
-          version: '4',
-          timestamp: '2021-05-26T12:51:56.329Z',
+          version: "4",
+          timestamp: "2021-05-26T12:51:56.329Z",
           success: true,
           result_summary: {
             overall_result: {
-              result: 'eligible',
+              result: "eligible",
               capital_contribution: 0.0,
               income_contribution: 0.0,
               matter_types: [{
-                matter_type: 'domestic_abuse',
-                result: 'eligible',
+                matter_type: "domestic_abuse",
+                result: "eligible",
               }],
               proceeding_types: [
                 {
-                  ccms_code: 'DA006',
-                  result: 'eligible',
+                  ccms_code: "DA006",
+                  result: "eligible",
                 },
                 {
-                  ccms_code: 'DA002',
-                  result: 'eligible',
+                  ccms_code: "DA002",
+                  result: "eligible",
                 }
               ],
             },
@@ -30,14 +30,14 @@ module CFEResults
               total_gross_income: 0.0,
               proceeding_types: [
                 {
-                  ccms_code: 'DA006',
+                  ccms_code: "DA006",
                   upper_threshold: 999_999_999_999.0,
-                  result: 'pending',
+                  result: "pending",
                 },
                 {
-                  ccms_code: 'DA002',
+                  ccms_code: "DA002",
                   upper_threshold: 999_999_999_999.0,
-                  result: 'pending',
+                  result: "pending",
                 }
               ],
             },
@@ -60,16 +60,16 @@ module CFEResults
               },
               proceeding_types: [
                 {
-                  ccms_code: 'DA006',
+                  ccms_code: "DA006",
                   upper_threshold: 999_999_999_999.0,
                   lower_threshold: 315.0,
-                  result: 'pending',
+                  result: "pending",
                 },
                 {
-                  ccms_code: 'DA002',
+                  ccms_code: "DA002",
                   upper_threshold: 999_999_999_999.0,
                   lower_threshold: 315.0,
-                  result: 'pending',
+                  result: "pending",
                 }
               ],
             },
@@ -85,27 +85,27 @@ module CFEResults
               assessed_capital: 144.0,
               proceeding_types: [
                 {
-                  ccms_code: 'DA006',
+                  ccms_code: "DA006",
                   lower_threshold: 3000.0,
                   upper_threshold: 999_999_999_999.0,
-                  result: 'eligible',
+                  result: "eligible",
                 },
                 {
-                  ccms_code: 'DA002',
+                  ccms_code: "DA002",
                   lower_threshold: 3000.0,
                   upper_threshold: 999_999_999_999.0,
-                  result: 'eligible',
+                  result: "eligible",
                 }
               ],
             },
           },
           assessment: {
-            id: 'b60d9312-b77b-4c5f-aa79-ba8508800c59',
-            client_reference_id: 'L-C36-J5T',
-            submission_date: '2021-05-26',
+            id: "b60d9312-b77b-4c5f-aa79-ba8508800c59",
+            client_reference_id: "L-C36-J5T",
+            submission_date: "2021-05-26",
             applicant: {
-              date_of_birth: '1980-01-10',
-              involvement_type: 'applicant',
+              date_of_birth: "1980-01-10",
+              involvement_type: "applicant",
               has_partner_opponent: false,
               receives_qualifying_benefit: true,
               self_employed: false,
@@ -177,35 +177,35 @@ module CFEResults
               capital_items: {
                 liquid: [
                   {
-                    description: 'Current accounts',
+                    description: "Current accounts",
                     value: 1.0,
                   },
                   {
-                    description: 'Savings accounts',
+                    description: "Savings accounts",
                     value: 1.0,
                   },
                   {
-                    description: 'Money not in a bank account',
+                    description: "Money not in a bank account",
                     value: 10.0,
                   },
                   {
-                    description: 'Online current accounts',
+                    description: "Online current accounts",
                     value: 0.0,
                   },
                   {
-                    description: 'Online savings accounts',
+                    description: "Online savings accounts",
                     value: 0.0,
                   }
                 ],
                 non_liquid: [{
-                  description: 'Interest in a trust',
+                  description: "Interest in a trust",
                   value: 12.0,
                 }],
                 vehicles: [
                   {
                     value: 120.0,
                     loan_amount_outstanding: 12.0,
-                    date_of_purchase: '2017-05-26',
+                    date_of_purchase: "2017-05-26",
                     in_regular_use: false,
                     included_in_assessment: true,
                     assessed_value: 120.0,
@@ -250,16 +250,16 @@ module CFEResults
 
       def self.not_eligible
         not_eligible_result = eligible
-        not_eligible_result[:result_summary][:overall_result][:result] = 'not_eligible'
+        not_eligible_result[:result_summary][:overall_result][:result] = "not_eligible"
         not_eligible_result[:result_summary][:overall_result][:proceeding_types].each do |pt|
-          pt[:result] = 'not_eligible'
+          pt[:result] = "not_eligible"
         end
         not_eligible_result
       end
 
       def self.with_capital_contribution_required
         result = eligible
-        result[:result_summary][:overall_result][:result] = 'contribution_required'
+        result[:result_summary][:overall_result][:result] = "contribution_required"
         result[:result_summary][:capital][:capital_contribution] = 465.66
         result[:result_summary][:overall_result][:capital_contribution] = 465.66
         result
@@ -267,7 +267,7 @@ module CFEResults
 
       def self.partially_eligible_with_income_contribution_required
         result = eligible
-        result[:result_summary][:overall_result][:result] = 'partially_eligible'
+        result[:result_summary][:overall_result][:result] = "partially_eligible"
         result[:result_summary][:disposable_income][:income_contribution] = 238.56
         result[:result_summary][:overall_result][:income_contribution] = 238.56
         result
@@ -275,7 +275,7 @@ module CFEResults
 
       def self.partially_eligible_with_capital_contribution_required
         result = eligible
-        result[:result_summary][:overall_result][:result] = 'partially_eligible'
+        result[:result_summary][:overall_result][:result] = "partially_eligible"
         result[:result_summary][:capital][:capital_contribution] = 468.56
         result[:result_summary][:overall_result][:capital_contribution] = 468.56
         result
@@ -283,7 +283,7 @@ module CFEResults
 
       def self.with_income_contribution_required
         result = eligible
-        result[:result_summary][:overall_result][:result] = 'contribution_required'
+        result[:result_summary][:overall_result][:result] = "contribution_required"
         result[:result_summary][:overall_result][:income_contribution] = 366.82
         result[:result_summary][:disposable_income][:income_contribution] = 366.82
         result
@@ -291,12 +291,12 @@ module CFEResults
 
       def self.with_capital_and_income_contributions_required
         result = eligible
-        result[:result_summary][:overall_result][:result] = 'contribution_required'
+        result[:result_summary][:overall_result][:result] = "contribution_required"
 
         result[:result_summary][:overall_result][:income_contribution] = 366.82
         eligible[:result_summary][:disposable_income][:income_contribution] = 366.82
 
-        result[:result_summary][:overall_result][:result] = 'contribution_required'
+        result[:result_summary][:overall_result][:result] = "contribution_required"
         new_capital_section = result[:result_summary][:capital]
         new_capital_section[:capital_contribution] = 465.66
         result[:result_summary][:capital] = new_capital_section
@@ -378,7 +378,7 @@ module CFEResults
           allowable_outstanding_mortgage: 8202.00,
           net_value: -4533.94,
           net_equity: -8000.82,
-          main_home_equity_disregard: '0.0',
+          main_home_equity_disregard: "0.0",
           assessed_equity: 125.33,
         }
         result[:assessment][:capital][:capital_items][:properties][:additional_properties] = [property]
@@ -417,9 +417,9 @@ module CFEResults
 
       def self.unknown
         result = eligible
-        result[:assessment][:assessment_result] = 'unknown'
-        result[:assessment][:capital][:assessment_result] = 'unknown'
-        result[:assessment][:disposable_income][:assessment_result] = 'unknown'
+        result[:assessment][:assessment_result] = "unknown"
+        result[:assessment][:capital][:assessment_result] = "unknown"
+        result[:assessment][:disposable_income][:assessment_result] = "unknown"
         result
       end
 
@@ -427,16 +427,16 @@ module CFEResults
         result = eligible
         result[:result_summary][:overall_result][:proceeding_types] = [
           {
-            ccms_code: 'DA006',
-            result: 'eligible',
+            ccms_code: "DA006",
+            result: "eligible",
           },
           {
-            ccms_code: 'SE013',
-            result: 'ineligible',
+            ccms_code: "SE013",
+            result: "ineligible",
           },
           {
-            ccms_code: 'SE014',
-            result: 'partially_eligible',
+            ccms_code: "SE014",
+            result: "partially_eligible",
           }
         ]
         result
@@ -444,10 +444,10 @@ module CFEResults
 
       def self.partially_eligible
         result = eligible
-        result[:result_summary][:overall_result][:matter_types] << { matter_type: 'section8', result: 'ineligible' }
-        result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: 'SE003', result: 'ineligible' }
-        result[:result_summary][:gross_income][:proceeding_types] << { ccms_code: 'SE003', upper_threshold: 2657.0, result: 'eligible' }
-        result[:result_summary][:disposable_income][:proceeding_types] << { ccms_code: 'SE003', upper_threshold: 733.0, lower_threshold: 315.0, result: 'ineligible' }
+        result[:result_summary][:overall_result][:matter_types] << { matter_type: "section8", result: "ineligible" }
+        result[:result_summary][:overall_result][:proceeding_types] << { ccms_code: "SE003", result: "ineligible" }
+        result[:result_summary][:gross_income][:proceeding_types] << { ccms_code: "SE003", upper_threshold: 2657.0, result: "eligible" }
+        result[:result_summary][:disposable_income][:proceeding_types] << { ccms_code: "SE003", upper_threshold: 733.0, lower_threshold: 315.0, result: "ineligible" }
         result
       end
 
@@ -463,10 +463,10 @@ module CFEResults
         }
         jobs = [
           {
-            name: 'Job 1',
+            name: "Job 1",
             payments: [
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,
@@ -474,7 +474,7 @@ module CFEResults
                 net_employment_income: 8898.84,
               },
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,
@@ -482,7 +482,7 @@ module CFEResults
                 net_employment_income: 8898.84,
               },
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,
@@ -492,10 +492,10 @@ module CFEResults
             ],
           },
           {
-            name: 'Job 2',
+            name: "Job 2",
             payments: [
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,
@@ -503,7 +503,7 @@ module CFEResults
                 net_employment_income: 8898.84,
               },
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,
@@ -511,7 +511,7 @@ module CFEResults
                 net_employment_income: 8898.84,
               },
               {
-                date: '2021-10-30',
+                date: "2021-10-30",
                 gross: 1046.00,
                 benefits_in_kind: 16.60,
                 tax: -104.10,

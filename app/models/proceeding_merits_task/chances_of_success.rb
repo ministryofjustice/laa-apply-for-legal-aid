@@ -3,11 +3,11 @@ module ProceedingMeritsTask
     belongs_to :proceeding
 
     PRETTY_SUCCESS_PROSPECTS = {
-      likely: 'Likely (>50%)',
-      marginal: 'Marginal (45-49%)',
-      poor: 'Poor (<45%)',
-      borderline: 'Borderline',
-      not_known: 'Uncertain',
+      likely: "Likely (>50%)",
+      marginal: "Marginal (45-49%)",
+      poor: "Poor (<45%)",
+      borderline: "Borderline",
+      not_known: "Uncertain",
     }.freeze
 
     SUCCESS_RANKING = {
@@ -19,11 +19,11 @@ module ProceedingMeritsTask
     }.freeze
 
     enum success_prospect: {
-      likely: 'likely'.freeze,
-      marginal: 'marginal'.freeze,
-      poor: 'poor'.freeze,
-      borderline: 'borderline'.freeze,
-      not_known: 'not_known'.freeze,
+      likely: "likely".freeze,
+      marginal: "marginal".freeze,
+      poor: "poor".freeze,
+      borderline: "borderline".freeze,
+      not_known: "not_known".freeze,
     }, _prefix: true
 
     def self.prospects_unlikely_to_succeed

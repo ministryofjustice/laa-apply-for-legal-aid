@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'id_p_settings_adapter'
+require "id_p_settings_adapter"
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -21,7 +21,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # This should be over-written if we configure Devise to send via Notify
-  config.mailer_sender = 'apply@digital.justice.gov.uk'
+  config.mailer_sender = "apply@digital.justice.gov.uk"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -33,7 +33,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require "devise/orm/active_record"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -273,10 +273,10 @@ Devise.setup do |config|
     settings.private_key = laa_portal_config.secret_key
 
     settings.assertion_consumer_service_url     = "#{Rails.configuration.x.application.host_url}/providers/saml/auth"
-    settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
-    settings.name_identifier_format             = 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified'
-    settings.issuer                             = 'apply'
-    settings.authn_context                      = 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport'
+    settings.assertion_consumer_service_binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    settings.name_identifier_format             = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
+    settings.issuer                             = "apply"
+    settings.authn_context                      = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
     settings.idp_slo_target_url                 = laa_portal_config.idp_slo_target_url
     settings.idp_sso_target_url                 = laa_portal_config.idp_sso_target_url
     settings.idp_cert = laa_portal_config.idp_cert

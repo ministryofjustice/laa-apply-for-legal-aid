@@ -1,27 +1,27 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/support', as: 'rails_admin'
+  mount RailsAdmin::Engine => "/support", as: "rails_admin"
 
-  root to: 'providers/start#index'
+  root to: "providers/start#index"
 
-  require 'sidekiq/web'
-  require 'sidekiq-status/web'
-  mount Sidekiq::Web => '/sidekiq'
+  require "sidekiq/web"
+  require "sidekiq-status/web"
+  mount Sidekiq::Web => "/sidekiq"
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    username == 'sidekiq' && password == ENV['SIDEKIQ_WEB_UI_PASSWORD'].to_s
+    username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
   end
 
-  get '/saml/auth' => 'saml_idp#new'
-  post '/saml/auth' => 'saml_idp#create'
+  get "/saml/auth" => "saml_idp#new"
+  post "/saml/auth" => "saml_idp#create"
 
-  devise_for :providers, controllers: { saml_sessions: 'saml_sessions' }
+  devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
   devise_for :applicants
-  devise_for :admin_users, controllers: { sessions: 'admin_users/sessions' }
+  devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
 
   devise_scope :applicant do
     match(
-      'auth/true_layer/callback',
-      to: 'applicants/omniauth_callbacks#true_layer',
+      "auth/true_layer/callback",
+      to: "applicants/omniauth_callbacks#true_layer",
       via: %i[get puts],
       as: :applicant_true_layer_omniauth_callback
     )
@@ -29,18 +29,18 @@ Rails.application.routes.draw do
 
   devise_scope :admin_user do
     match(
-      'auth/google_oauth2/callback',
-      to: 'admin_users/omniauth_callbacks#google_oauth2',
+      "auth/google_oauth2/callback",
+      to: "admin_users/omniauth_callbacks#google_oauth2",
       via: %i[get puts],
       as: :admin_user_google_oauth2_omniauth_callback
     )
   end
 
-  get 'auth/failure', to: 'auth#failure'
-  get 'ping', to: 'status#ping', format: :json
-  get 'healthcheck', to: 'status#status', format: :json
-  get 'status', to: 'status#ping', format: :json
-  get 'data', to: 'status#data'
+  get "auth/failure", to: "auth#failure"
+  get "ping", to: "status#ping", format: :json
+  get "healthcheck", to: "status#status", format: :json
+  get "status", to: "status#ping", format: :json
+  get "data", to: "status#data"
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
@@ -50,15 +50,15 @@ Rails.application.routes.draw do
   resources :problem, only: :index
 
   namespace :admin do
-    root to: 'legal_aid_applications#index'
-    post 'search', to: 'legal_aid_applications#search', as: 'application_search'
+    root to: "legal_aid_applications#index"
+    post "search", to: "legal_aid_applications#search", as: "application_search"
     namespace :legal_aid_applications do
       resources :submissions, only: [:show] do
         member do
-          get 'download_xml_response'
-          get 'download_xml_request'
-          get 'download_means_report'
-          get 'download_merits_report'
+          get "download_xml_response"
+          get "download_xml_request"
+          get "download_means_report"
+          get "download_merits_report"
         end
       end
     end
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
     resources :reports, only: %i[index create]
-    get 'user_dashboard', to: 'user_dashboard#index', as: 'user_dashboard'
+    get "user_dashboard", to: "user_dashboard#index", as: "user_dashboard"
     resources :roles, only: %i[index]
     namespace :roles do
       resources :permissions, only: %i[show update]
@@ -80,11 +80,11 @@ Rails.application.routes.draw do
       resources :providers, only: :index
     end
 
-    post 'provider/check', to: 'providers#check', as: 'provider_check'
-    get 'admin_report_application_details', to: 'reports#download_application_details_report', as: 'application_details_csv'
+    post "provider/check", to: "providers#check", as: "provider_check"
+    get "admin_report_application_details", to: "reports#download_application_details_report", as: "application_details_csv"
   end
 
-  namespace 'v1' do
+  namespace "v1" do
     resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
     resources :statement_of_cases, only: [:create]
@@ -93,7 +93,7 @@ Rails.application.routes.draw do
 
   namespace :citizens do
     resources :legal_aid_applications, only: %i[show index]
-    resources :resend_link_requests, only: %i[show update], path: 'resend_link'
+    resources :resend_link_requests, only: %i[show update], path: "resend_link"
     resource :consent, only: %i[show update]
     resource :contact_provider, only: [:show]
     resources :banks, only: %i[index create]
@@ -116,15 +116,15 @@ Rails.application.routes.draw do
   end
 
   namespace :providers do
-    root to: 'start#index'
-    resource :provider, only: [:show], path: 'your_profile'
+    root to: "start#index"
+    resource :provider, only: [:show], path: "your_profile"
     resources :applicants, only: %i[new create]
     resource :confirm_office, only: %i[show update]
     resource :select_office, only: %i[show update]
     resource :declaration, only: %i[show]
     resource :invalid_login, only: :show
 
-    resources :legal_aid_applications, path: 'applications', only: %i[index create] do
+    resources :legal_aid_applications, path: "applications", only: %i[index create] do
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
@@ -145,12 +145,12 @@ Rails.application.routes.draw do
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
-      resource :statement_of_case, only: %i[show update destroy], controller: 'application_merits_task/statement_of_cases' do
-        get '/list', to: 'application_merits_task/statement_of_cases#list'
+      resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
+        get "/list", to: "application_merits_task/statement_of_cases#list"
       end
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
-      resource :open_banking_consents, only: %i[show update], path: 'does-client-use-online-banking'
+      resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"
       resource :capital_introduction, only: %i[show update]
       resources :check_provider_answers, only: [:index] do
         post :reset, on: :collection
@@ -180,20 +180,20 @@ Rails.application.routes.draw do
       resource :capital_income_assessment_result, only: %i[show update]
       resource :identify_types_of_income, only: %i[show update]
       resource :identify_types_of_outgoing, only: %i[show update]
-      resource :opponent, only: %i[show update], controller: 'application_merits_task/opponents'
-      resource :date_client_told_incident, only: %i[show update], controller: 'application_merits_task/date_client_told_incidents'
+      resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
+      resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
-        get '/list', to: 'uploaded_evidence_collections#list'
+        get "/list", to: "uploaded_evidence_collections#list"
       end
       resource :check_merits_answers, only: [:show] do
         patch :continue
         patch :reset
       end
-      resources :involved_children, only: %i[new show update], controller: 'application_merits_task/involved_children'
-      resource :has_other_involved_children, only: %i[show update], controller: 'application_merits_task/has_other_involved_children'
-      resources :remove_involved_child, only: %i[show update], controller: 'application_merits_task/remove_involved_child'
+      resources :involved_children, only: %i[new show update], controller: "application_merits_task/involved_children"
+      resource :has_other_involved_children, only: %i[show update], controller: "application_merits_task/has_other_involved_children"
+      resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
 
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
@@ -201,15 +201,15 @@ Rails.application.routes.draw do
       resources :outgoings_summary, only: %i[index create]
       resource :no_outgoings_summary, only: %i[show update]
       resource :incoming_transactions, only: [] do
-        get '/:transaction_type', to: 'incoming_transactions#show', as: ''
-        patch '/:transaction_type', to: 'incoming_transactions#update'
+        get "/:transaction_type", to: "incoming_transactions#show", as: ""
+        patch "/:transaction_type", to: "incoming_transactions#update"
       end
       resource :outgoing_transactions, only: [] do
-        get '/:transaction_type', to: 'outgoing_transactions#show', as: ''
-        patch '/:transaction_type', to: 'outgoing_transactions#update'
+        get "/:transaction_type", to: "outgoing_transactions#show", as: ""
+        patch "/:transaction_type", to: "outgoing_transactions#update"
       end
       resources :bank_transactions, only: [] do
-        patch 'remove_transaction_type', on: :member
+        patch "remove_transaction_type", on: :member
       end
       resource :means_summary, only: %i[show update]
       resource :used_multiple_delegated_functions, only: %i[show update]
@@ -232,10 +232,10 @@ Rails.application.routes.draw do
     end
 
     resources :merits_task_list, only: [] do
-      resource :attempts_to_settle, only: %i[show update], controller: 'proceeding_merits_task/attempts_to_settle'
-      resource :linked_children, only: %i[show update], controller: 'proceeding_merits_task/linked_children'
-      resources :chances_of_success, only: %i[index create], controller: 'proceeding_merits_task/chances_of_success'
-      resource :success_prospects, only: %i[show update], controller: 'proceeding_merits_task/success_prospects'
+      resource :attempts_to_settle, only: %i[show update], controller: "proceeding_merits_task/attempts_to_settle"
+      resource :linked_children, only: %i[show update], controller: "proceeding_merits_task/linked_children"
+      resources :chances_of_success, only: %i[index create], controller: "proceeding_merits_task/chances_of_success"
+      resource :success_prospects, only: %i[show update], controller: "proceeding_merits_task/success_prospects"
     end
   end
 
@@ -246,12 +246,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/submission_feedback/:application_ref', to: 'feedback#submission'
-  get 'test/trapped_error', to: 'test/generate_error#trapped_error'
-  get 'test/untrapped_error', to: 'test/generate_error#untrapped_error'
+  get "/submission_feedback/:application_ref", to: "feedback#submission"
+  get "test/trapped_error", to: "test/generate_error#trapped_error"
+  get "test/untrapped_error", to: "test/generate_error#untrapped_error"
 
-  get '/.well-known/security.txt' => redirect('https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt')
+  get "/.well-known/security.txt" => redirect("https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt")
 
   # Catch all route that traps paths not defined above. Must be last route.
-  match '*path', to: 'errors#page_not_found', via: :all
+  match "*path", to: "errors#page_not_found", via: :all
 end

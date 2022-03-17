@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form do
   subject(:form) { described_class.new(params) }
   let(:params) { { linked_children: linked_children_params, model: proceeding } }
   let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se013], set_lead_proceeding: :da001 }
-  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'SE013') }
+  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE013") }
   let(:linked_children_params) { nil }
 
-  describe '.value_list' do
+  describe ".value_list" do
     subject(:form) { described_class.new(model: proceeding) }
 
     let(:expected_array) do
@@ -16,21 +16,21 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       end
     end
 
-    it 'loads an array of involved_children from the legal_aid_application' do
+    it "loads an array of involved_children from the legal_aid_application" do
       expect(form.value_list).to match_array expected_array
     end
   end
 
-  describe '.valid?' do
+  describe ".valid?" do
     before { form.valid? }
 
-    context 'when all values are false' do
-      let(:linked_children_params) { ['', '', ''] }
+    context "when all values are false" do
+      let(:linked_children_params) { ["", "", ""] }
 
       it { is_expected.to be_invalid }
     end
 
-    context 'when all values are true' do
+    context "when all values are true" do
       let(:linked_children_params) do
         legal_aid_application.involved_children.map(&:id)
       end
@@ -38,32 +38,32 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       it { is_expected.to be_valid }
     end
 
-    context 'when one value is true' do
+    context "when one value is true" do
       let(:linked_children_params) do
-        legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' }
+        legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : "" }
       end
 
       it { is_expected.to be_valid }
     end
   end
 
-  describe '.save' do
+  describe ".save" do
     subject(:save_form) { form.save }
     let(:linked_children_params) do
-      legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' }
+      legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : "" }
     end
 
-    context 'when the initial proceeding has no linked_children' do
+    context "when the initial proceeding has no linked_children" do
       it { expect(proceeding.proceeding_linked_children).to match_array [] }
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(1) }
     end
 
-    context 'when a user has previously linked two children' do
+    context "when a user has previously linked two children" do
       let(:first_child) { legal_aid_application.involved_children.first }
       let(:second_child) { legal_aid_application.involved_children.second }
       let(:third_child) { legal_aid_application.involved_children.third }
       let(:initial_array) { [second_child.id, third_child.id] }
-      let(:linked_children_params) { [first_child.id, '', ''] }
+      let(:linked_children_params) { [first_child.id, "", ""] }
 
       before do
         create :proceeding_linked_child, proceeding: proceeding, involved_child: second_child
@@ -73,11 +73,11 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(-1) }
       it { expect(proceeding.proceeding_linked_children.map(&:involved_child_id)).to match_array initial_array }
 
-      context 'when an error occurs' do
-        let(:linked_children_params) { ['guid-for-non-existent-child', '', ''] }
+      context "when an error occurs" do
+        let(:linked_children_params) { ["guid-for-non-existent-child", "", ""] }
 
         it { expect { subject }.to_not change { proceeding.proceeding_linked_children.count } }
-        it 'it rolls back all changes' do
+        it "it rolls back all changes" do
           expect(subject).to be false
           expect(proceeding.proceeding_linked_children.reload.map(&:involved_child_id)).to match_array initial_array
         end

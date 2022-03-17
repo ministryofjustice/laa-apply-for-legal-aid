@@ -24,7 +24,7 @@ module Providers
       end
 
       def list
-        render partial: 'providers/application_merits_task/statement_of_cases/uploaded_files', locals: { attachments: legal_aid_application.attachments.statement_of_case }
+        render partial: "providers/application_merits_task/statement_of_cases/uploaded_files", locals: { attachments: legal_aid_application.attachments.statement_of_case }
       end
 
     private
@@ -54,13 +54,13 @@ module Providers
       end
 
       def files_deleted_message(deleted_file_name)
-        I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
+        I18n.t("activemodel.attributes.uploaded_evidence_collection.file_deleted", file_name: deleted_file_name)
       end
 
       def successful_upload
         return if form.errors.present?
 
-        I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: form.original_file.original_filename)
+        I18n.t("activemodel.attributes.uploaded_evidence_collection.file_uploaded", file_name: form.original_file.original_filename)
       end
 
       def convert_new_files_to_pdf

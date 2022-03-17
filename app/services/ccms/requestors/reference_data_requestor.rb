@@ -26,9 +26,9 @@ module CCMS
       end
 
       def search_criteria(xml)
-        xml.__send__(:'refdatabio:ContextKey', 'CaseReferenceNumber')
+        xml.__send__(:'refdatabio:ContextKey', "CaseReferenceNumber")
         xml.__send__(:'refdatabio:SearchKey') do
-          xml.__send__(:'refdatabio:Key', 'CaseReferenceNumber')
+          xml.__send__(:'refdatabio:Key', "CaseReferenceNumber")
         end
       end
     end

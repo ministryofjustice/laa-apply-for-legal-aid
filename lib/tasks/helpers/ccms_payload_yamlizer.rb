@@ -1,5 +1,5 @@
-require 'nokogiri'
-require 'yaml'
+require "nokogiri"
+require "yaml"
 
 class CcmsPayloadYamlizer
   def initialize(filename)
@@ -36,7 +36,7 @@ private
   end
 
   def text_node?(node)
-    node.children.size == 1 && node.children.first.name == 'text'
+    node.children.size == 1 && node.children.first.name == "text"
   end
 
   def calculate_new_key(hash, node_name)
@@ -53,7 +53,7 @@ private
   end
 
   def attribute_block(node)
-    return if node.name != 'Attribute'
+    return if node.name != "Attribute"
 
     return unless node.children.map(&:name).sort == %w[Attribute ResponseType ResponseValue UserDefinedInd]
 
@@ -61,10 +61,10 @@ private
   end
 
   def extract_details_from_attribute_block(node)
-    key = node.xpath('Attribute').text
-    val = node.xpath('ResponseValue').text
-    type = node.xpath('ResponseType').text
-    user_def = node.xpath('UserDefinedInd').text
+    key = node.xpath("Attribute").text
+    val = node.xpath("ResponseValue").text
+    type = node.xpath("ResponseType").text
+    user_def = node.xpath("UserDefinedInd").text
     [key, "#{type}:#{val}:#{user_def}"]
   end
 end

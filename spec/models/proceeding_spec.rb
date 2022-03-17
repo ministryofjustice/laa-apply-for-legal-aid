@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Proceeding, type: :model do
-  let(:matter_code) { 'KSEC8' }
+  let(:matter_code) { "KSEC8" }
   let(:df_date) { nil }
   let(:proceeding) do
     create :proceeding,
@@ -30,88 +30,88 @@ RSpec.describe Proceeding, type: :model do
                               :used_delegated_functions_reported_on)
   }
 
-  describe '#case_p_num' do
-    it 'returns formatted proceeding case id' do
-      expect(proceeding.case_p_num).to eq 'P_55123456'
+  describe "#case_p_num" do
+    it "returns formatted proceeding case id" do
+      expect(proceeding.case_p_num).to eq "P_55123456"
     end
   end
 
-  describe '#section8?' do
-    context 'section 8 proceeding' do
+  describe "#section8?" do
+    context "section 8 proceeding" do
       let(:proceeding) { create :proceeding, :se014 }
 
-      it 'returns true' do
+      it "returns true" do
         expect(proceeding.section8?).to eq true
       end
     end
 
-    context 'non section 8 proceeding' do
+    context "non section 8 proceeding" do
       let(:proceeding) { create :proceeding, :da001 }
 
-      it 'returns false' do
+      it "returns false" do
         expect(proceeding.section8?).to eq false
       end
     end
   end
 
-  context 'domestic abuse' do
-    let(:matter_code) { 'MINJN' }
+  context "domestic abuse" do
+    let(:matter_code) { "MINJN" }
 
-    it 'returns false' do
+    it "returns false" do
       expect(proceeding.section8?).to be false
     end
   end
 
-  describe '#default_level_of_service_level' do
-    it 'returns hard coded value' do
-      expect(proceeding.default_level_of_service_level).to eq '3'
+  describe "#default_level_of_service_level" do
+    it "returns hard coded value" do
+      expect(proceeding.default_level_of_service_level).to eq "3"
     end
   end
 
-  describe '#used_delegated_functions?' do
-    context 'df not used' do
-      it 'returns false' do
+  describe "#used_delegated_functions?" do
+    context "df not used" do
+      it "returns false" do
         expect(proceeding.used_delegated_functions?).to be false
       end
     end
 
-    context 'df_used' do
+    context "df_used" do
       let(:df_date) { 2.days.ago }
 
-      it 'returns true' do
+      it "returns true" do
         expect(proceeding.used_delegated_functions?).to be true
       end
     end
   end
 
-  describe 'used_delegated_functions?' do
+  describe "used_delegated_functions?" do
     subject { proceeding.used_delegated_functions? }
 
     let(:proceeding) { create :proceeding, :da001, used_delegated_functions_on: df_date }
 
-    context 'delegated functions not used' do
+    context "delegated functions not used" do
       let(:df_date) { nil }
 
-      it 'returns false' do
+      it "returns false" do
         expect(subject).to be false
       end
     end
 
-    context 'delegated functions used' do
+    context "delegated functions used" do
       let(:df_date) { Time.zone.yesterday }
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject).to be true
       end
     end
   end
 
-  describe '#proceeding_case_p_num' do
-    it 'prefixes the proceeding case id with P_' do
+  describe "#proceeding_case_p_num" do
+    it "prefixes the proceeding case id with P_" do
       legal_aid_application = create :legal_aid_application, :with_proceedings
       proceeding = legal_aid_application.proceedings.first
       allow(proceeding).to receive(:proceeding_case_id).and_return 55_200_301
-      expect(proceeding.proceeding_case_p_num).to eq 'P_55200301'
+      expect(proceeding.proceeding_case_p_num).to eq "P_55200301"
     end
   end
 end

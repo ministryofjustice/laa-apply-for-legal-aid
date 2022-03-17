@@ -4,7 +4,7 @@ class DigestExporter
   end
 
   def initialize
-    log_message 'DigestExporter starting'
+    log_message "DigestExporter starting"
     secret_file = StringIO.new(google_secret.to_json)
     @session = GoogleDrive::Session.from_service_account_key(secret_file)
     @worksheet = @session.spreadsheet_by_key(spreadsheet_key).worksheets[0]
@@ -21,16 +21,16 @@ class DigestExporter
 private
 
   def log_message(message)
-    message = Time.zone.now.strftime('%F %T.%L ') + message if Rails.env.development?
+    message = Time.zone.now.strftime("%F %T.%L ") + message if Rails.env.development?
     Rails.logger.info message
   end
 
   def update_and_save_worksheet
-    log_message 'updating cells'
+    log_message "updating cells"
     @worksheet.update_cells(2, 1, @rows)
-    log_message 'saving worksheet'
+    log_message "saving worksheet"
     @worksheet.save
-    log_message 'All records written and worksheet saved'
+    log_message "All records written and worksheet saved"
   end
 
   def digest_ids
@@ -38,7 +38,7 @@ private
   end
 
   def initialize_digest_ids
-    log_message 'Getting digest ids'
+    log_message "Getting digest ids"
     ApplicationDigest.order(:created_at).pluck(:id)
   end
 
@@ -55,7 +55,7 @@ private
     # with the column headers
     @worksheet.delete_rows(1, @worksheet.max_rows - 1)
     @worksheet.save
-    log_message 'Existing data removed from spreadsheet'
+    log_message "Existing data removed from spreadsheet"
   end
 
   def write_header_row
@@ -74,21 +74,21 @@ private
   end
 
   def spreadsheet_key
-    ENV['GOOGLE_SHEETS_SPREADSHEET_ID']
+    ENV["GOOGLE_SHEETS_SPREADSHEET_ID"]
   end
 
   def google_secret
     {
-      type: 'service_account',
-      project_id: 'laa-apply-for-legal-aid',
-      private_key_id: ENV['GOOGLE_SHEETS_PRIVATE_KEY_ID'],
-      private_key: ENV['GOOGLE_SHEETS_PRIVATE_KEY_VALUE'],
-      client_email: ENV['GOOGLE_SHEETS_CLIENT_EMAIL'],
-      client_id: ENV['GOOGLE_SHEETS_CLIENT_ID'],
-      auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-      token_uri: 'https://oauth2.googleapis.com/token',
-      auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-      client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/laa-apply-service%40laa-apply-for-legal-aid.iam.gserviceaccount.com',
+      type: "service_account",
+      project_id: "laa-apply-for-legal-aid",
+      private_key_id: ENV["GOOGLE_SHEETS_PRIVATE_KEY_ID"],
+      private_key: ENV["GOOGLE_SHEETS_PRIVATE_KEY_VALUE"],
+      client_email: ENV["GOOGLE_SHEETS_CLIENT_EMAIL"],
+      client_id: ENV["GOOGLE_SHEETS_CLIENT_ID"],
+      auth_uri: "https://accounts.google.com/o/oauth2/auth",
+      token_uri: "https://oauth2.googleapis.com/token",
+      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+      client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/laa-apply-service%40laa-apply-for-legal-aid.iam.gserviceaccount.com",
     }
   end
 end

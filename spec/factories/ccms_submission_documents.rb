@@ -3,8 +3,8 @@ FactoryBot.define do
     submission
 
     attachment_id { SecureRandom.uuid }
-    status { 'uploaded' }
-    document_type { 'means_report' }
+    status { "uploaded" }
+    document_type { "means_report" }
     ccms_document_id { Faker::Number.number(digits: 8) }
   end
 end

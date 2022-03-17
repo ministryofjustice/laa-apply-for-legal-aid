@@ -25,13 +25,13 @@ module HMRC
 
       def headers
         {
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/json',
-          'Authorization' => "Bearer #{bearer_token}",
+          "Content-Type" => "application/json",
+          "Accept" => "application/json",
+          "Authorization" => "Bearer #{bearer_token}",
         }
       end
 
-      def catch_and_record_exception(error, http_method = 'POST')
+      def catch_and_record_exception(error, http_method = "POST")
         raise_exception_error(
           message: formatted_error_message(error),
           backtrace: error.backtrace&.join("\n"),
@@ -40,7 +40,7 @@ module HMRC
         )
       end
 
-      def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
+      def raise_exception_error(message:, backtrace: nil, http_method: "POST", http_status: nil)
         Rails.logger.info { { message:, backtrace:, method: http_method, http_status: } }
         raise HMRC::InterfaceError.new(message, http_status)
       end
@@ -52,7 +52,7 @@ module HMRC
       def parse_json_response(response_body)
         JSON.parse(response_body, symbolize_names: true)
       rescue JSON::ParserError, TypeError
-        response_body || ''
+        response_body || ""
       end
 
       def detailed_error(parsed_response, url)

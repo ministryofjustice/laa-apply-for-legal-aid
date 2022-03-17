@@ -11,6 +11,6 @@ class PopulateExtraProceedingsFields < ActiveRecord::Migration[6.1]
   end
 
   def down
-    ActiveRecord::Base.connection.execute 'UPDATE proceedings SET matter_type = NULL, category_of_law = NULL, category_law_code = NULL'
+    ActiveRecord::Base.connection.execute "UPDATE proceedings SET matter_type = NULL, category_of_law = NULL, category_law_code = NULL"
   end
 end

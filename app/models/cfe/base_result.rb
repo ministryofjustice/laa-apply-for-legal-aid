@@ -5,7 +5,7 @@ module CFE
 
     MAX_VALUE = 999_999_999_999
 
-    self.table_name = 'cfe_results'
+    self.table_name = "cfe_results"
 
     def result_hash
       return {} if result.nil?
@@ -14,9 +14,9 @@ module CFE
     end
 
     def overview
-      return 'manual_check_required' if manual_check_required? && legal_aid_application.has_restrictions
+      return "manual_check_required" if manual_check_required? && legal_aid_application.has_restrictions
 
-      return determine_type_of_contribution if assessment_result == 'contribution_required'
+      return determine_type_of_contribution if assessment_result == "contribution_required"
 
       assessment_result
     end
@@ -24,15 +24,15 @@ module CFE
     # alias contribution_required? capital_contribution_required?
 
     def eligible?
-      assessment_result == 'eligible'
+      assessment_result == "eligible"
     end
 
     def partially_eligible?
-      assessment_result == 'partially_eligible'
+      assessment_result == "partially_eligible"
     end
 
     def version_4?
-      result_hash[:version] == '4'
+      result_hash[:version] == "4"
     end
 
     ################################################################
@@ -171,11 +171,11 @@ module CFE
     end
 
     def determine_type_of_contribution
-      return 'capital_and_income_contribution_required' if capital_contribution_required? && income_contribution_required?
+      return "capital_and_income_contribution_required" if capital_contribution_required? && income_contribution_required?
 
-      return 'capital_contribution_required' if capital_contribution_required?
+      return "capital_contribution_required" if capital_contribution_required?
 
-      'income_contribution_required'
+      "income_contribution_required"
     end
   end
 end

@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Provider access', type: :request do
+RSpec.describe "Provider access", type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
   let(:other_provider) { create :provider }
 
-  it 'allows provider to access page in flow until submission' do
+  it "allows provider to access page in flow until submission" do
     login_as legal_aid_application.provider
 
     # Access page initially
@@ -19,7 +19,7 @@ RSpec.describe 'Provider access', type: :request do
     expect(response).to redirect_to(providers_legal_aid_application_submitted_application_path(legal_aid_application))
   end
 
-  it 'prevents another provider accessing the page' do
+  it "prevents another provider accessing the page" do
     login_as other_provider
 
     get providers_legal_aid_application_address_lookup_path(legal_aid_application)
@@ -27,7 +27,7 @@ RSpec.describe 'Provider access', type: :request do
     expect(response).to redirect_to(error_path(:access_denied))
   end
 
-  it 'allows missing application to be caught by not found' do
+  it "allows missing application to be caught by not found" do
     login_as other_provider
 
     get providers_legal_aid_application_address_lookup_path(SecureRandom.uuid)

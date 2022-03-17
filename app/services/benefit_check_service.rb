@@ -1,5 +1,5 @@
 class BenefitCheckService
-  BENEFIT_CHECKER_NAMESPACE = 'https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check'.freeze
+  BENEFIT_CHECKER_NAMESPACE = "https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check".freeze
   USE_MOCK = ActiveModel::Type::Boolean.new.cast(Rails.configuration.x.bc_use_dev_mock)
   REQUEST_TIMEOUT = 30.seconds
 
@@ -37,8 +37,8 @@ private
       clientReference: application.id,
       nino: applicant.national_insurance_number,
       surname: applicant.last_name.strip.upcase,
-      dateOfBirth: applicant.date_of_birth.strftime('%Y%m%d'),
-      dateOfAward: Time.zone.today.strftime('%Y%m%d'),
+      dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d"),
+      dateOfAward: Time.zone.today.strftime("%Y%m%d"),
     }.merge(credential_params)
   end
 

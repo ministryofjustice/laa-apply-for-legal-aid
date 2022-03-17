@@ -6,7 +6,7 @@ module CCMS
     private
 
       def means_entity_config_file
-        MEANS_ENTITY_CONFIG_DIR.join('non_passported.yml')
+        MEANS_ENTITY_CONFIG_DIR.join("non_passported.yml")
       end
 
       def national_savings_present?
@@ -30,7 +30,7 @@ module CCMS
       end
 
       def applicant_recieves_financial_support?
-        @legal_aid_application.bank_transactions.for_type('friends_or_family').any?
+        @legal_aid_application.bank_transactions.for_type("friends_or_family").any?
       end
 
       def applicant_has_access_to_other_person_account?

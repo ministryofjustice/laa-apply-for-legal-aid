@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'sidekiq/testing'
+require "rails_helper"
+require "sidekiq/testing"
 
 RSpec.describe ImportBankDataWorker, type: :worker do
   let(:token) { SecureRandom.hex }
@@ -17,18 +17,18 @@ RSpec.describe ImportBankDataWorker, type: :worker do
     described_class.drain
   end
 
-  context 'it generates an error' do
+  context "it generates an error" do
     let(:api_error) do
       {
-        error_description: 'Feature not supported by the provider',
+        error_description: "Feature not supported by the provider",
         error: :endpoint_not_supported,
         error_details: { foo: :bar },
       }
     end
     let(:worker_status) { Sidekiq::Status.get_all(worker_id) }
-    let(:worker_errors) { JSON.parse(worker_status['errors']) }
+    let(:worker_errors) { JSON.parse(worker_status["errors"]) }
 
-    it 'saves the error' do
+    it "saves the error" do
       subject
       expect(worker_errors.to_s).to include(api_error[:error_description])
       expect(worker_errors.to_s).to include(api_error[:error].to_s)

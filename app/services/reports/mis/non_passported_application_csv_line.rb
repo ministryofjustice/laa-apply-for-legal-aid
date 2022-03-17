@@ -33,15 +33,15 @@ module Reports
         @line << laa.ccms_reason
         @line << laa.provider.username
         @line << provider.email
-        @line << laa.created_at.strftime('%Y-%m-%d %H:%M:%S')
-        @line << laa.ccms_submission_date&.strftime('%Y-%m-%d %H:%M:%S')
+        @line << laa.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        @line << laa.ccms_submission_date&.strftime("%Y-%m-%d %H:%M:%S")
         @line << laa.applicant.full_name
         @line << deleted?(laa)
         sanitise
       end
 
       def deleted?(laa)
-        laa.discarded? ? 'Y' : ''
+        laa.discarded? ? "Y" : ""
       end
     end
   end

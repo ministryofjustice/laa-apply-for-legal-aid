@@ -1,12 +1,12 @@
-require 'prometheus_exporter/server'
+require "prometheus_exporter/server"
 
 module PrometheusCollectors
   class SidekiqQueueCollector < PrometheusExporter::Server::TypeCollector
-    COLLECTOR_TYPE = 'sidekiq_queue_size'.freeze
+    COLLECTOR_TYPE = "sidekiq_queue_size".freeze
 
     def initialize
       super
-      @gauge = PrometheusExporter::Metric::Gauge.new(COLLECTOR_TYPE, 'Sidekiq queue size')
+      @gauge = PrometheusExporter::Metric::Gauge.new(COLLECTOR_TYPE, "Sidekiq queue size")
     end
 
     def type
@@ -14,7 +14,7 @@ module PrometheusCollectors
     end
 
     def collect(obj)
-      @gauge.observe(obj['size'], queue: obj['queue'])
+      @gauge.observe(obj["size"], queue: obj["queue"])
     end
 
     def metrics

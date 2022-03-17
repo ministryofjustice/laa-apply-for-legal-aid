@@ -17,7 +17,7 @@ module Providers
 
     def create_attachment(original_file)
       model.legal_aid_application.attachments.create document: original_file,
-                                                     attachment_type: 'uncategorised',
+                                                     attachment_type: "uncategorised",
                                                      original_filename: @original_file.original_filename,
                                                      attachment_name: sequenced_attachment_name
     end

@@ -1,5 +1,5 @@
 # rubocop:disable Lint/Debugger
-When('I bind and pry') do
+When("I bind and pry") do
   binding.pry
 end
 
@@ -13,6 +13,6 @@ When(/^I save and open screenshot$/) do
 end
 
 When(/^the feature flag for (.*?) is (enabled|disabled)$/) do |flag, enabled|
-  value = enabled.eql?('enabled')
+  value = enabled.eql?("enabled")
   Setting.setting.update!("#{flag}": value)
 end

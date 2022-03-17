@@ -1,6 +1,6 @@
 module Banking
   class StateBenefitAnalyserService
-    Struct.new('Benefit', :code, :label, :name, :excluded?)
+    Struct.new("Benefit", :code, :label, :name, :excluded?)
 
     def self.call(legal_aid_application)
       new(legal_aid_application).call
@@ -21,11 +21,11 @@ module Banking
   private
 
     def included_benefit_transaction_type
-      @included_benefit_transaction_type ||= TransactionType.find_by(name: 'benefits')
+      @included_benefit_transaction_type ||= TransactionType.find_by(name: "benefits")
     end
 
     def excluded_benefit_transaction_type
-      @excluded_benefit_transaction_type ||= TransactionType.find_by(name: 'excluded_benefits')
+      @excluded_benefit_transaction_type ||= TransactionType.find_by(name: "excluded_benefits")
     end
 
     def process_transaction(txn)
@@ -35,14 +35,14 @@ module Banking
     def load_state_benefit_types
       state_benefit_list = CFE::ObtainStateBenefitTypesService.call
       state_benefit_list.each do |sb_hash|
-        next if sb_hash['dwp_code'].nil?
+        next if sb_hash["dwp_code"].nil?
 
         store_benefit(sb_hash)
       end
     end
 
     def store_benefit(sb_hash)
-      benefit = Struct::Benefit.new(sb_hash['dwp_code'], sb_hash['label'], sb_hash['name'], sb_hash['exclude_from_gross_income'])
+      benefit = Struct::Benefit.new(sb_hash["dwp_code"], sb_hash["label"], sb_hash["name"], sb_hash["exclude_from_gross_income"])
       @state_benefit_codes[benefit.code] = benefit
     end
 
@@ -64,10 +64,10 @@ module Banking
 
     def multi_dwp_codes_meta_data
       {
-        code: 'multiple',
-        label: 'multiple dwp codes',
-        name: 'multiple state benefits',
-        selected_by: 'System',
+        code: "multiple",
+        label: "multiple dwp codes",
+        name: "multiple state benefits",
+        selected_by: "System",
       }
     end
 
@@ -81,7 +81,7 @@ module Banking
         code: benefit.code,
         label: benefit.label,
         name: benefit.name,
-        selected_by: 'System',
+        selected_by: "System",
       }
     end
 
@@ -94,7 +94,7 @@ module Banking
     end
 
     def keys
-      @keys ||= @state_benefit_codes.keys.join('|').gsub('/', '\/')
+      @keys ||= @state_benefit_codes.keys.join("|").gsub("/", '\/')
     end
 
     def update_legal_aid_transaction_types

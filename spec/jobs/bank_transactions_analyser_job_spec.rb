@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module Banking
   RSpec.describe BankTransactionsAnalyserJob, type: :job do
@@ -14,41 +14,41 @@ module Banking
 
     subject { described_class.perform_now(legal_aid_application) }
 
-    describe '#perform' do
-      it 'calls the BankTransactionBalanceCalculator' do
+    describe "#perform" do
+      it "calls the BankTransactionBalanceCalculator" do
         expect(BankTransactionBalanceCalculator).to receive(:call).with(legal_aid_application)
         subject
       end
 
-      it 'calls the BankTransactionTrimmer' do
+      it "calls the BankTransactionTrimmer" do
         expect(BankTransactionsTrimmer).to receive(:call).with(legal_aid_application)
         subject
       end
 
-      it 'calls the StateBenefitAnalyserService' do
+      it "calls the StateBenefitAnalyserService" do
         expect(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
         subject
       end
 
-      it 'updates the state' do
+      it "updates the state" do
         allow(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
         subject
-        expect(legal_aid_application.reload.state).to eq('provider_assessing_means')
+        expect(legal_aid_application.reload.state).to eq("provider_assessing_means")
       end
 
-      context 'transactions analysis' do
-        context 'pending' do
+      context "transactions analysis" do
+        context "pending" do
           before do
-            allow_any_instance_of(NonPassportedStateMachine).to receive(:aasm_state).and_return('analysing_bank_transactions')
+            allow_any_instance_of(NonPassportedStateMachine).to receive(:aasm_state).and_return("analysing_bank_transactions")
           end
 
-          it 'does not call ProviderEmailService' do
+          it "does not call ProviderEmailService" do
             expect(provider_email_service).not_to receive(:send_email)
             subject
           end
         end
-        context 'complete' do
-          it 'calls ProviderEmailService' do
+        context "complete" do
+          it "calls ProviderEmailService" do
             expect(provider_email_service).to receive(:send_email)
             subject
           end

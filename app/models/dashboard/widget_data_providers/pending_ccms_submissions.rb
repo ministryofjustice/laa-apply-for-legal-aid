@@ -5,7 +5,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:number, name: 'Pending CCMS Submissions')
+            Geckoboard::NumberField.new(:number, name: "Pending CCMS Submissions")
           ],
         }
       end
@@ -13,13 +13,13 @@ module Dashboard
       def self.data
         [
           {
-            'number' => pending_submissions,
+            "number" => pending_submissions,
           }
         ]
       end
 
       def self.handle
-        'pending_ccms_submissions'
+        "pending_ccms_submissions"
       end
 
       def self.pending_submissions

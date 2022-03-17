@@ -1,62 +1,62 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe FeedbackMailer, type: :mailer do
-  describe 'notify' do
+  describe "notify" do
     let(:feedback) { create :feedback }
     let(:application) { create :application }
     let(:application_id) { application.id }
     let(:mail) { described_class.notify(feedback.id, application_id) }
 
-    it 'sends to correct address' do
+    it "sends to correct address" do
       expect(mail.to).to eq([Rails.configuration.x.support_email_address])
     end
 
-    it 'is a govuk_notify delivery' do
+    it "is a govuk_notify delivery" do
       expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
     end
 
-    context 'personalisation' do
-      describe 'application_status' do
-        context 'pre_dwp_check' do
+    context "personalisation" do
+      describe "application_status" do
+        context "pre_dwp_check" do
           before { allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(true) }
-          it 'has a status of pre dwp check' do
-            expect(mail.govuk_notify_personalisation[:application_status]).to eq 'pre-dwp-check'
+          it "has a status of pre dwp check" do
+            expect(mail.govuk_notify_personalisation[:application_status]).to eq "pre-dwp-check"
           end
         end
 
-        context 'when application state is not a pre_dwp_check state' do
+        context "when application state is not a pre_dwp_check state" do
           let(:application) { create :application, :assessment_submitted }
 
-          it 'does not have a status of pre dwp check' do
-            expect(mail.govuk_notify_personalisation[:application_status]).not_to eq 'pre-dwp-check'
+          it "does not have a status of pre dwp check" do
+            expect(mail.govuk_notify_personalisation[:application_status]).not_to eq "pre-dwp-check"
           end
         end
 
-        context 'passported' do
+        context "passported" do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
           end
-          it 'has a status of passported' do
-            expect(mail.govuk_notify_personalisation[:application_status]).to eq 'passported'
+          it "has a status of passported" do
+            expect(mail.govuk_notify_personalisation[:application_status]).to eq "passported"
           end
         end
 
-        context 'non-passported' do
+        context "non-passported" do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
           end
-          it 'has a status of passported' do
-            expect(mail.govuk_notify_personalisation[:application_status]).to eq 'non-passported'
+          it "has a status of passported" do
+            expect(mail.govuk_notify_personalisation[:application_status]).to eq "non-passported"
           end
         end
 
-        context 'when no legal_aid_application is present' do
+        context "when no legal_aid_application is present" do
           let(:application_id) { nil }
 
-          it 'has an empty status' do
-            expect(mail.govuk_notify_personalisation[:application_status]).to eq ''
+          it "has an empty status" do
+            expect(mail.govuk_notify_personalisation[:application_status]).to eq ""
           end
         end
       end

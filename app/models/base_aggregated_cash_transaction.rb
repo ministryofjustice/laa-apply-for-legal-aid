@@ -46,7 +46,7 @@ class BaseAggregatedCashTransaction
       value_method = "#{trx.transaction_type.name}#{month_no}="
       checkbox_method = "check_box_#{trx.transaction_type.name}="
       model.__send__(value_method, trx.amount)
-      model.__send__(checkbox_method, 'true')
+      model.__send__(checkbox_method, "true")
       model.__send__("month#{trx.month_number}=", trx.transaction_date)
     end
 
@@ -69,7 +69,7 @@ class BaseAggregatedCashTransaction
 
   def period(month_number)
     period_start = transaction_date(month_number)
-    I18n.l(period_start, format: '%B %Y')
+    I18n.l(period_start, format: "%B %Y")
   end
 
   def month_name(month_number)
@@ -99,7 +99,7 @@ private
         transaction_type_id: transaction_type_id(category)
       ).destroy_all
 
-      save_category(category) if checkbox_for(category) == 'true'
+      save_category(category) if checkbox_for(category) == "true"
     end
   end
 
@@ -122,7 +122,7 @@ private
     self.class.cash_transaction_categories.each do |category|
       checkbox_attr = "check_box_#{category}".to_sym
 
-      if __send__(checkbox_attr) == 'true'
+      if __send__(checkbox_attr) == "true"
         check_all_values_set_for category
       else
         erase_values_for category
@@ -135,7 +135,7 @@ private
 
     self.class.cash_transaction_categories.each do |category|
       checkbox_attr = "check_box_#{category}".to_sym
-      return false if __send__(checkbox_attr) == 'true'
+      return false if __send__(checkbox_attr) == "true"
     end
 
     errors.add(category_type.to_sym, model_error(:blank))
@@ -146,7 +146,7 @@ private
 
     self.class.cash_transaction_categories.each do |category|
       checkbox_attr = "check_box_#{category}".to_sym
-      next unless __send__(checkbox_attr) == 'true'
+      next unless __send__(checkbox_attr) == "true"
 
       errors.add(category_type.to_sym, model_error(:others_present))
       break
@@ -187,7 +187,7 @@ private
   end
 
   def category_type
-    self.class.to_s.underscore.gsub('aggregated_', '')
+    self.class.to_s.underscore.gsub("aggregated_", "")
   end
 
   def blank_error(category, month_number)

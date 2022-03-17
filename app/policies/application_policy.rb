@@ -5,6 +5,6 @@ class ApplicationPolicy
     @provider = authorization_context.provider
     @controller = authorization_context.controller
     @record = record
-    raise Pundit::NotAuthorizedError, 'must be logged in' unless @provider
+    raise Pundit::NotAuthorizedError, "must be logged in" unless @provider
   end
 end

@@ -20,7 +20,7 @@ module Admin
           size: [1, 1, 1, 1]
         )
       elsif search_params.nil?
-        @error = t('.error')
+        @error = t(".error")
       end
       render :index
     end
@@ -31,14 +31,14 @@ module Admin
     end
 
     def destroy_all
-      raise 'Legal Aid Application Destroy All action disabled' unless destroy_enabled?
+      raise "Legal Aid Application Destroy All action disabled" unless destroy_enabled?
 
       LegalAidApplication.destroy_all
       redirect_to action: :index
     end
 
     def destroy
-      raise 'Legal Aid Application Destroy action disabled' unless destroy_enabled?
+      raise "Legal Aid Application Destroy action disabled" unless destroy_enabled?
 
       legal_aid_application.destroy
       redirect_to action: :index

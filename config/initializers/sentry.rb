@@ -1,10 +1,10 @@
-require 'sentry-ruby'
-require 'sentry-rails'
-require 'sentry-sidekiq'
+require "sentry-ruby"
+require "sentry-rails"
+require "sentry-sidekiq"
 
-if %w[production].include?(Rails.env) && ENV['SENTRY_DSN'].present?
+if %w[production].include?(Rails.env) && ENV["SENTRY_DSN"].present?
   Sentry.init do |config|
-    config.dsn = ENV['SENTRY_DSN']
+    config.dsn = ENV["SENTRY_DSN"]
 
     filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters.map(&:to_s))
     config.excluded_exceptions += %w[
@@ -13,7 +13,7 @@ if %w[production].include?(Rails.env) && ENV['SENTRY_DSN'].present?
     ]
 
     config.before_send = ->(event, _hint) {
-      event.extra[:sidekiq][:job]['args'].first['arguments'] = [] if event.extra.dig(:sidekiq, :job, 'args')
+      event.extra[:sidekiq][:job]["args"].first["arguments"] = [] if event.extra.dig(:sidekiq, :job, "args")
 
       event.extra[:sidekiq][:jobstr] = {} if event.extra.dig(:sidekiq, :jobstr)
 

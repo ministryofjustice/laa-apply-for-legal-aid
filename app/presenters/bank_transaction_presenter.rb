@@ -44,7 +44,7 @@ class BankTransactionPresenter
 private
 
   def transaction_happened_at
-    @transaction.happened_at.strftime('%d/%b/%Y')
+    @transaction.happened_at.strftime("%d/%b/%Y")
   end
 
   def transaction_description
@@ -52,11 +52,11 @@ private
   end
 
   def transaction_credit
-    @transaction.amount if @transaction.operation.eql?('credit')
+    @transaction.amount if @transaction.operation.eql?("credit")
   end
 
   def transaction_debit
-    @transaction.amount if @transaction.operation.eql?('debit')
+    @transaction.amount if @transaction.operation.eql?("debit")
   end
 
   def transaction_type
@@ -82,11 +82,11 @@ private
   def transaction_flagged
     return nil if @remarks.empty?
 
-    @remarks.map { |x| x.to_s.humanize }.join(', ').to_s
+    @remarks.map { |x| x.to_s.humanize }.join(", ").to_s
   end
 
   def transaction_balance_running_total
-    @transaction.running_balance || 'Not available'
+    @transaction.running_balance || "Not available"
   end
 
   def transaction_account_type

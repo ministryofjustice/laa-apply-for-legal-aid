@@ -35,7 +35,7 @@ private
   end
 
   def scheduled_mail
-    application.scheduled_mailings.where(mailer_klass: 'SubmitApplicationReminderMailer')
+    application.scheduled_mailings.where(mailer_klass: "SubmitApplicationReminderMailer")
   end
 
   def mailer_args

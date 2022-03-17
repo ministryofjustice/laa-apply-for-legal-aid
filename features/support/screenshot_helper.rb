@@ -5,7 +5,7 @@ module ScreenshotHelper
     Launchy.open file_path
   end
 
-  def screenshot_image(name = 'capybara-screenshot')
+  def screenshot_image(name = "capybara-screenshot")
     window = Capybara.current_session.driver.browser.manage.window
     window.resize_to(*dimensions)
     screenshot_name = "#{name}-#{Time.current.utc.iso8601.delete('-').delete(':')}.png"
@@ -16,8 +16,8 @@ module ScreenshotHelper
 
   def dimensions
     driver = Capybara.current_session.driver
-    total_width = driver.execute_script('return document.body.offsetWidth')
-    total_height = driver.execute_script('return document.body.scrollHeight')
+    total_width = driver.execute_script("return document.body.offsetWidth")
+    total_height = driver.execute_script("return document.body.scrollHeight")
     [total_width, total_height]
   end
 end

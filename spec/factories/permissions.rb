@@ -4,13 +4,13 @@ FactoryBot.define do
     sequence(:description) { |n| "The description for role_#{n}" }
 
     trait :passported do
-      role { 'application.passported.*' }
-      description { 'Can create, view, modify passported applications' }
+      role { "application.passported.*" }
+      description { "Can create, view, modify passported applications" }
     end
 
     trait :non_passported do
-      role { 'application.non_passported.*' }
-      description { 'Can create, view, modify non-passported applications' }
+      role { "application.non_passported.*" }
+      description { "Can create, view, modify non-passported applications" }
     end
   end
 end

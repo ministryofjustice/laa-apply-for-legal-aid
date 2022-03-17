@@ -12,7 +12,7 @@ module Providers
       end
 
       def error_message
-        I18n.t('providers.proceeding_merits_task.attempts_to_settle.show.error')
+        I18n.t("providers.proceeding_merits_task.attempts_to_settle.show.error")
       end
     end
   end

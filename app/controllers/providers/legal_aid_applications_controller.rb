@@ -13,8 +13,8 @@ module Providers
       if search_term.present?
         applications
         log_search
-      elsif search_term == ''
-        @error = t('.error')
+      elsif search_term == ""
+        @error = t(".error")
       end
     end
 

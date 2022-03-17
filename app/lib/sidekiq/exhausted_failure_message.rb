@@ -19,10 +19,10 @@ module Sidekiq
 
     def call_type
       {
-        'HMRC::SubmissionWorker' => 'HMRC submission id',
-        'HMRC::ResultWorker' => 'HMRC result check for id',
-        'CCMS::SubmissionProcessWorker' => 'CCMS submission id',
-      }[@msg['class']]
+        "HMRC::SubmissionWorker" => "HMRC submission id",
+        "HMRC::ResultWorker" => "HMRC result check for id",
+        "CCMS::SubmissionProcessWorker" => "CCMS submission id",
+      }[@msg["class"]]
     end
   end
 end

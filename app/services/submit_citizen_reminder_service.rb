@@ -50,7 +50,7 @@ private
   end
 
   def url_expiry_date
-    (Time.zone.today + 7.days).strftime('%-d %B %Y')
+    (Time.zone.today + 7.days).strftime("%-d %B %Y")
   end
 
   def nine_am_deadline_day

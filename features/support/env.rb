@@ -4,14 +4,14 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'cucumber/rails'
-require 'capybara'
-require 'capybara/cucumber'
-require 'selenium/webdriver'
-require 'webmock/cucumber'
-require 'factory_bot'
-require 'webdrivers'
-require 'axe-cucumber-steps'
+require "cucumber/rails"
+require "capybara"
+require "capybara/cucumber"
+require "selenium/webdriver"
+require "webmock/cucumber"
+require "factory_bot"
+require "webdrivers"
+require "axe-cucumber-steps"
 
 # HACK: this method was available in cucumber 3.1 but not cucumber 4 and VCR relies on it to
 # generate cassette names.
@@ -54,7 +54,7 @@ end
 Capybara.default_driver = :headless_chrome
 Capybara.javascript_driver = :headless_chrome
 
-if ENV['BROWSER'] == 'chrome'
+if ENV["BROWSER"] == "chrome"
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
@@ -67,7 +67,7 @@ end
 
 # By default, cucumber-rails will auto mix-in the helpers from Rack::Test into your default Cucumber World instance.
 # You can prevent this behaviour by setting ENV['CR_REMOVE_RACK_TEST_HELPERS'] = 'true'
-ENV['CR_REMOVE_RACK_TEST_HELPERS'] = 'true'
+ENV["CR_REMOVE_RACK_TEST_HELPERS"] = "true"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -96,7 +96,7 @@ ActionController::Base.allow_rescue = false
 begin
   DatabaseCleaner.strategy = :transaction
 rescue NameError
-  raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
+  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
@@ -118,12 +118,12 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :transaction
-load Rails.root.join('db/seeds.rb')
+load Rails.root.join("db/seeds.rb")
 
 Before do |_scenario|
   Populators::TransactionTypePopulator.call
   # Delete previous screenshots from filesystem that were generated during previous feature runs
-  FileUtils.rm_rf(Rails.root.join('tmp/capybara/**.*'))
+  FileUtils.rm_rf(Rails.root.join("tmp/capybara/**.*"))
 end
 
 Around do |_scenario, block|
@@ -141,7 +141,7 @@ After do |scenario|
   OmniAuth.config.test_mode = false
 
   if scenario.failed?
-    name = scenario.location.file.gsub('features/', '').gsub(%r{/\.|/}, '-')
+    name = scenario.location.file.gsub("features/", "").gsub(%r{/\.|/}, "-")
     screenshot_image(name)
   end
 end

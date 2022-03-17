@@ -16,7 +16,7 @@ module LegalAidApplications
 
     ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth_1i date_of_birth_2i date_of_birth_3i].freeze
 
-    SCOPE = 'activemodel.errors.models.dependant.attributes'.freeze
+    SCOPE = "activemodel.errors.models.dependant.attributes".freeze
 
     attr_accessor(*ATTRIBUTES)
     attr_writer :date_of_birth
@@ -31,14 +31,14 @@ module LegalAidApplications
       :date_of_birth,
       date: {
         not_in_the_future: true,
-        earliest_allowed_date: { date: '1900-01-01' },
+        earliest_allowed_date: { date: "1900-01-01" },
       },
       allow_nil: true
     )
     validate :relationship_presence
     validate :full_time_education_presence
     validate :validate_has_income_presence
-    validates :monthly_income, presence: true, if: proc { |form| form.has_income.to_s == 'true' }
+    validates :monthly_income, presence: true, if: proc { |form| form.has_income.to_s == "true" }
     validates :monthly_income, allow_blank: true, currency: { greater_than: 0.0 }
     validates(
       :has_assets_more_than_threshold,
@@ -90,15 +90,15 @@ module LegalAidApplications
     end
 
     def blank_option_error_message
-      I18n.t('.has_assets_more_than_threshold.blank_message', scope: SCOPE, name: model.name)
+      I18n.t(".has_assets_more_than_threshold.blank_message", scope: SCOPE, name: model.name)
     end
 
     def assets_more_than_threshold?
-      has_assets_more_than_threshold.to_s == 'true'
+      has_assets_more_than_threshold.to_s == "true"
     end
 
     def less_than_threshold_error_message
-      I18n.t('activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold', name: model.name)
+      I18n.t("activemodel.errors.models.dependant.attributes.assets_value.less_than_threshold", name: model.name)
     end
 
   private
@@ -120,19 +120,19 @@ module LegalAidApplications
     def relationship_presence
       return if relationship.present?
 
-      errors.add(:relationship, I18n.t('.relationship.blank', scope: SCOPE, name: model.name))
+      errors.add(:relationship, I18n.t(".relationship.blank", scope: SCOPE, name: model.name))
     end
 
     def full_time_education_presence
       return if in_full_time_education.present?
 
-      errors.add(:in_full_time_education, I18n.t('.in_full_time_education.blank_message', scope: SCOPE, name: model.name))
+      errors.add(:in_full_time_education, I18n.t(".in_full_time_education.blank_message", scope: SCOPE, name: model.name))
     end
 
     def validate_has_income_presence
       return if has_income.present?
 
-      errors.add(:has_income, I18n.t('.has_income.blank_message', scope: SCOPE, name: model.name))
+      errors.add(:has_income, I18n.t(".has_income.blank_message", scope: SCOPE, name: model.name))
     end
 
     def clear_value_fields

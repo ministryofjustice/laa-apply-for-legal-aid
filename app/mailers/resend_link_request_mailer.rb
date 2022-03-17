@@ -1,5 +1,5 @@
 class ResendLinkRequestMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify(app_id, email, application_url, client_name)

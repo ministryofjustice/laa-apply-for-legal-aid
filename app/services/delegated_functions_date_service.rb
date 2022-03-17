@@ -34,7 +34,7 @@ private
   end
 
   def delete_existing_reminders
-    ScheduledMailing.where(mailer_klass: 'SubmitApplicationReminderMailer', legal_aid_application_id: laa.id).map(&:destroy!)
+    ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id).map(&:destroy!)
   end
 
   def create_new_reminders

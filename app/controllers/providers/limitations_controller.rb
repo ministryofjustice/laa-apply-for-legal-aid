@@ -21,7 +21,7 @@ module Providers
 
     def clear_limit_and_reason
       atc = params[:legal_aid_application]
-      return unless atc[:emergency_cost_override].to_s == 'false'
+      return unless atc[:emergency_cost_override].to_s == "false"
 
       atc[:emergency_cost_requested] = nil
       atc[:emergency_cost_reasons] = nil

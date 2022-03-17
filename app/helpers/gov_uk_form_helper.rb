@@ -11,8 +11,8 @@ module GovUkFormHelper
   #
   def yes_no_options(radio_hints = {})
     [
-      RadioOption.new(true, I18n.t('generic.yes'), radio_hints[:yes]),
-      RadioOption.new(false, I18n.t('generic.no'), radio_hints[:no])
+      RadioOption.new(true, I18n.t("generic.yes"), radio_hints[:yes]),
+      RadioOption.new(false, I18n.t("generic.no"), radio_hints[:no])
     ]
   end
 
@@ -29,11 +29,11 @@ module GovUkFormHelper
   #
   # Both result in the same output
 
-  def govuk_fieldset_header(text = nil, size: 'xl', padding_below: nil, &block)
-    heading = text ? content_tag(:h1, text, class: 'govuk-fieldset__heading') : capture(&block)
+  def govuk_fieldset_header(text = nil, size: "xl", padding_below: nil, &block)
+    heading = text ? content_tag(:h1, text, class: "govuk-fieldset__heading") : capture(&block)
     padding_class = padding_below && "govuk-!-padding-bottom-#{padding_below}"
     render(
-      'shared/forms/fieldset_header',
+      "shared/forms/fieldset_header",
       heading:,
       size:,
       padding_class:
@@ -43,7 +43,7 @@ module GovUkFormHelper
   def govuk_error_message(text, args = {})
     return if text.blank?
 
-    content_tag :span, text, merge_with_class(args, 'govuk-error-message')
+    content_tag :span, text, merge_with_class(args, "govuk-error-message")
   end
 
   # Adds or appends `class_text` to `args[:class]`. So:
@@ -55,13 +55,13 @@ module GovUkFormHelper
   def merge_with_class(args, class_text)
     class_text = [class_text, args[:class]]
     class_text.compact!
-    args.merge(class: class_text.join(' '))
+    args.merge(class: class_text.join(" "))
   end
 
   def merge_with_class!(args, class_text)
     class_text = [class_text, args[:class]]
     class_text.compact!
     class_text.flatten!
-    args.merge!(class: class_text.join(' '))
+    args.merge!(class: class_text.join(" "))
   end
 end

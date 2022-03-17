@@ -21,7 +21,7 @@ module Providers
   private
 
     def benefit?
-      form_params[:passporting_benefit] != 'none_selected'
+      form_params[:passporting_benefit] != "none_selected"
     end
 
     def details_checked!

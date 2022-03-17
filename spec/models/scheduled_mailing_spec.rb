@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ScheduledMailing do
-  let(:mailer_klass) { 'NotifyMailer' }
-  let(:mailer_method) { 'notify' }
+  let(:mailer_klass) { "NotifyMailer" }
+  let(:mailer_method) { "notify" }
   let(:legal_aid_application) { create :legal_aid_application }
   let(:addressee) { Faker::Internet.safe_email }
-  let(:mailer_args) { [:one, :two, 'three'] }
+  let(:mailer_args) { [:one, :two, "three"] }
   let(:frozen_time) { Time.zone.now }
   let(:future_time) { 2.hours.from_now }
 
-  describe '.send_now' do
+  describe ".send_now" do
     subject do
       described_class.send_now!(mailer_klass:,
                                 mailer_method:,
@@ -18,7 +18,7 @@ RSpec.describe ScheduledMailing do
                                 arguments: mailer_args)
     end
 
-    it 'creates a record in waiting state' do
+    it "creates a record in waiting state" do
       travel_to frozen_time
 
       expect { subject }.to change { described_class.count }.by(1)
@@ -29,13 +29,13 @@ RSpec.describe ScheduledMailing do
       expect(rec.arguments).to eq mailer_args
       expect(rec.addressee).to eq addressee
       expect(rec.scheduled_at.to_i).to eq frozen_time.to_i
-      expect(rec.status).to eq 'waiting'
+      expect(rec.status).to eq "waiting"
 
       travel_back
     end
   end
 
-  describe '.send_later!' do
+  describe ".send_later!" do
     subject do
       described_class.send_later!(mailer_klass:,
                                   mailer_method:,
@@ -45,7 +45,7 @@ RSpec.describe ScheduledMailing do
                                   scheduled_at: future_time)
     end
 
-    it 'creates a record in waiting state with a scheduled time' do
+    it "creates a record in waiting state with a scheduled time" do
       expect { subject }.to change { described_class.count }.by(1)
       rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
@@ -54,14 +54,14 @@ RSpec.describe ScheduledMailing do
       expect(rec.arguments).to eq mailer_args
       expect(rec.addressee).to eq addressee
       expect(rec.scheduled_at.to_i).to eq future_time.to_i
-      expect(rec.status).to eq 'waiting'
+      expect(rec.status).to eq "waiting"
     end
   end
 
-  describe '#cancel' do
+  describe "#cancel" do
     let(:rec) { create :scheduled_mailing }
 
-    it 'updates the cancelled at column' do
+    it "updates the cancelled at column" do
       travel_to frozen_time
       rec.cancel!
       expect(rec.cancelled_at.to_i).to eq frozen_time.to_i
@@ -69,23 +69,23 @@ RSpec.describe ScheduledMailing do
     end
   end
 
-  describe '#waiting?' do
-    context 'waiting' do
-      it 'returns true' do
+  describe "#waiting?" do
+    context "waiting" do
+      it "returns true" do
         rec = create :scheduled_mailing, :due
         expect(rec.waiting?).to be true
       end
     end
 
-    context 'not waiting' do
-      it 'returns true' do
+    context "not waiting" do
+      it "returns true" do
         rec = create :scheduled_mailing, :delivered
         expect(rec.waiting?).to be false
       end
     end
   end
 
-  describe 'scopes' do
+  describe "scopes" do
     let!(:waiting_due) { create :scheduled_mailing, :due }
     let!(:waiting_due_later) { create :scheduled_mailing, :due_later }
     let!(:processing) { create :scheduled_mailing, :processing }
@@ -93,20 +93,20 @@ RSpec.describe ScheduledMailing do
     let!(:created) { create :scheduled_mailing, :created }
     let!(:sending) { create :scheduled_mailing, :sending }
 
-    describe 'waiting' do
-      it 'picks only waiting status' do
+    describe "waiting" do
+      it "picks only waiting status" do
         expect(described_class.waiting).to match_array [waiting_due, waiting_due_later]
       end
     end
 
-    describe 'past_due' do
-      it 'picks only records where scheduled at is in the past' do
+    describe "past_due" do
+      it "picks only records where scheduled at is in the past" do
         expect(described_class.past_due).to match_array [waiting_due]
       end
     end
 
-    describe 'monitored' do
-      it 'picks only records in processing, created, sending states' do
+    describe "monitored" do
+      it "picks only records in processing, created, sending states" do
         expect(described_class.monitored).to match_array [processing, created, sending]
       end
     end

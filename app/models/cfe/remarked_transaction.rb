@@ -9,9 +9,9 @@ module CFE
     end
 
     def update(tx_id, category, reason)
-      raise ArgumentError, 'Transaction Id mismatch' unless tx_id == @tx_id
+      raise ArgumentError, "Transaction Id mismatch" unless tx_id == @tx_id
 
-      raise ArgumentError, 'Category mismatch' unless category == @category
+      raise ArgumentError, "Category mismatch" unless category == @category
 
       @reasons << reason
     end

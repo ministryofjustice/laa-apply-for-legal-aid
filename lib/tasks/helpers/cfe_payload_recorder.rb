@@ -5,7 +5,7 @@ class CfePayloadRecorder
 
   def initialize(application_ref)
     @legal_aid_application = LegalAidApplication.find_by(application_ref:)
-    raise ArgumentError, 'No such application' if @legal_aid_application.nil?
+    raise ArgumentError, "No such application" if @legal_aid_application.nil?
 
     @recording = []
   end
@@ -16,11 +16,11 @@ class CfePayloadRecorder
       record_history(history)
     end
     logger = Rails.logger
-    logger.info '#'.yellow
+    logger.info "#".yellow
     logger.info "# CFE API calls for application #{@legal_aid_application.application_ref}".yellow
-    logger.info '# Copy and paste this output in to tmp/api_replay.yml in the CFE repo, and '.yellow
-    logger.info '# replay the API interaction with the rake task rake replay'.yellow
-    logger.info '#'.yellow
+    logger.info "# Copy and paste this output in to tmp/api_replay.yml in the CFE repo, and ".yellow
+    logger.info "# replay the API interaction with the rake task rake replay".yellow
+    logger.info "#".yellow
     logger.info @recording.to_yaml
   end
 

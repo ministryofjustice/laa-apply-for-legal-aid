@@ -48,7 +48,7 @@ module CCMS
       def evaluate_generate_block_method(config)
         return config[:generate_block?] if boolean?(config[:generate_block?])
 
-        method_name = config[:generate_block?].sub(/^#/, '')
+        method_name = config[:generate_block?].sub(/^#/, "")
         attribute_value_generator.__send__(method_name, @options)
       end
 
@@ -88,7 +88,7 @@ module CCMS
 
       def extract_as_date(config)
         raw_value = extract_raw_value(config)
-        raw_value.is_a?(Date) ? raw_value.strftime('%d-%m-%Y') : raw_value
+        raw_value.is_a?(Date) ? raw_value.strftime("%d-%m-%Y") : raw_value
       end
 
       def method_name?(str)
@@ -102,11 +102,11 @@ module CCMS
       end
 
       def method_name(str)
-        str.sub(/^#/, '')
+        str.sub(/^#/, "")
       end
 
       def as_currency(raw_value)
-        format('%<amount>.2f', amount: raw_value)
+        format("%<amount>.2f", amount: raw_value)
       end
     end
   end

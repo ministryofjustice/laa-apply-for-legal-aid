@@ -16,7 +16,7 @@ class BaseFileUploaderForm < BaseForm
     image/x-bitmap
   ].freeze
 
-  WORD_DOCUMENT = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'.freeze
+  WORD_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document".freeze
 
   def self.max_file_size
     MAX_FILE_SIZE
@@ -108,6 +108,6 @@ private
   end
 
   def error_path
-    @model.class.name.underscore.gsub('::', '/')
+    @model.class.name.underscore.gsub("::", "/")
   end
 end

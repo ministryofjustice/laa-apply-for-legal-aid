@@ -11,7 +11,7 @@ module V1
       return render json: { error: original_file_error_for(:system_down) }, status: :bad_request unless malware_scan.scanner_working
 
       legal_aid_application.attachments.create document: file,
-                                               attachment_type: 'uncategorised',
+                                               attachment_type: "uncategorised",
                                                original_filename: file.original_filename,
                                                attachment_name: sequenced_attachment_name
       head :ok
@@ -58,7 +58,7 @@ module V1
     end
 
     def error_path
-      'uploaded_evidence_collection'
+      "uploaded_evidence_collection"
     end
   end
 end

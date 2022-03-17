@@ -7,8 +7,8 @@ class SamlSessionsController < Devise::SamlSessionsController
   before_action :update_locale
 
   def destroy
-    session['signed_out'] = true
-    session['feedback_return_path'] = destroy_provider_session_path
+    session["signed_out"] = true
+    session["feedback_return_path"] = destroy_provider_session_path
     sign_out current_provider
     if IdPSettingsAdapter.mock_saml?
       redirect_to providers_root_url

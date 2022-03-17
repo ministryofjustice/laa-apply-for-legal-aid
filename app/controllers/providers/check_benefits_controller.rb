@@ -41,7 +41,7 @@ module Providers
     end
 
     def set_negative_result_and_go_forward
-      legal_aid_application.create_benefit_check_result!(result: 'skipped:known_issue')
+      legal_aid_application.create_benefit_check_result!(result: "skipped:known_issue")
       go_forward
     end
   end

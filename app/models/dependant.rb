@@ -5,14 +5,14 @@ class Dependant < ApplicationRecord
 
   DEFAULT_VALUES = {
     in_full_time_education: false,
-    relationship: 'child_relative',
+    relationship: "child_relative",
     monthly_income: 0.0,
     assets_value: 0.0,
   }.freeze
 
   enum relationship: {
-    child_relative: 'child_relative'.freeze,
-    adult_relative: 'adult_relative'.freeze,
+    child_relative: "child_relative".freeze,
+    adult_relative: "adult_relative".freeze,
   }
 
   def ordinal_number
@@ -41,7 +41,7 @@ class Dependant < ApplicationRecord
 
   def as_json
     {
-      date_of_birth: date_of_birth.strftime('%Y-%m-%d'),
+      date_of_birth: date_of_birth.strftime("%Y-%m-%d"),
       relationship: value_or_default(:relationship),
       monthly_income: value_or_default(:monthly_income),
       in_full_time_education: value_or_default(:in_full_time_education),
@@ -50,11 +50,11 @@ class Dependant < ApplicationRecord
   end
 
   def ccms_relationship_to_client
-    return 'Dependant adult' if adult_relative?
+    return "Dependant adult" if adult_relative?
 
-    return 'Child aged 15 and under' if fifteen_or_less?
+    return "Child aged 15 and under" if fifteen_or_less?
 
-    'Child aged 16 and over'
+    "Child aged 16 and over"
   end
 
   def assets_over_threshold?

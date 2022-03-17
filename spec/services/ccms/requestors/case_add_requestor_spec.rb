@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 module CCMS
   module Requestors
     RSpec.describe CaseAddRequestor, :ccms do
-      describe '#call' do
-        let(:expected_tx_id) { '202011241154290000006983477' }
+      describe "#call" do
+        let(:expected_tx_id) { "202011241154290000006983477" }
 
         let(:legal_aid_application) do
           create :legal_aid_application,
@@ -23,13 +23,13 @@ module CCMS
         let(:applicant) do
           create :applicant,
                  :with_address_for_xml_fixture,
-                 first_name: 'Shery',
-                 last_name: 'Ledner',
-                 national_insurance_number: 'EG587804M',
+                 first_name: "Shery",
+                 last_name: "Ledner",
+                 national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
                  address: address
         end
-        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+        let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
           create :chances_of_success, :with_optional_text, proceeding: proceeding
         end
@@ -44,32 +44,32 @@ module CCMS
                  second_home_value: 500,
                  trust_value: 600
         end
-        let(:address) { create :address, postcode: 'GH08NY' }
-        let(:provider) { create :provider, username: 'saturnina', firm: firm, email: 'patrick_rath@example.net' }
+        let(:address) { create :address, postcode: "GH08NY" }
+        let(:provider) { create :provider, username: "saturnina", firm: firm, email: "patrick_rath@example.net" }
         let(:firm) { create :firm, ccms_id: 169 }
-        let(:opponent) { create :opponent, full_name: 'Joffrey Test-Opponent', police_notified: true }
-        let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: '300000000001', legal_aid_application: legal_aid_application }
+        let(:opponent) { create :opponent, full_name: "Joffrey Test-Opponent", police_notified: true }
+        let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application: legal_aid_application }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
-        let(:office) { create :office, ccms_id: '4727432767' }
+        let(:office) { create :office, ccms_id: "4727432767" }
         let(:savings_amount) { create :savings_amount, :all_nil }
         let(:soap_client_double) { Savon.client(env_namespace: :soap, wsdl: requestor.__send__(:wsdl_location)) }
         let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
-        let!(:involved_child1) { create :involved_child, full_name: 'First TestChild', date_of_birth: Date.parse('2019-01-20'), legal_aid_application: legal_aid_application }
-        let!(:involved_child2) { create :involved_child, full_name: 'Second TestChild', date_of_birth: Date.parse('2020-02-15'), legal_aid_application: legal_aid_application }
+        let!(:involved_child1) { create :involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application: legal_aid_application }
+        let!(:involved_child2) { create :involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application: legal_aid_application }
 
         before do
           legal_aid_application.reload
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return('FakeUser')
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return('FakePassword')
-          allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return('password_type')
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_username).and_return("FakeUser")
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_password).and_return("FakePassword")
+          allow(Rails.configuration.x.ccms_soa).to receive(:client_password_type).and_return("password_type")
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
           allow(legal_aid_application).to receive(:calculation_date).and_return(Date.new(2020, 3, 25))
         end
 
-        it 'calls the savon soap client' do
+        it "calls the savon soap client" do
           expect(soap_client_double).to receive(:call).with(expected_soap_operation, xml: expected_xml)
           expect(requestor).to receive(:soap_client).and_return(soap_client_double)
           requestor.call
@@ -79,37 +79,37 @@ module CCMS
           allow_any_instance_of(Proceeding).to receive(:proceeding_case_id).and_return(55_000_001)
         end
 
-        it 'generates the expected xml' do
+        it "generates the expected xml" do
           expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
-          travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-            test_data_xml = ccms_data_from_file 'case_add_request.xml'
+          travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+            test_data_xml = ccms_data_from_file "case_add_request.xml"
             expect(expected_xml).to eq test_data_xml
           end
         end
 
-        context 'when DF assigned scope limitations are present' do
-          context 'DF not used' do
-            it 'does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope' do
+        context "when DF assigned scope limitations are present" do
+          context "DF not used" do
+            it "does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
-              travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-                test_data_xml = ccms_data_from_file 'case_add_request.xml'
+              travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+                test_data_xml = ccms_data_from_file "case_add_request.xml"
                 expect(expected_xml).to eq test_data_xml
               end
             end
           end
 
-          context 'DF actually used' do
-            let(:df_date) { Date.parse('2020-11-23') }
+          context "DF actually used" do
+            let(:df_date) { Date.parse("2020-11-23") }
 
             before do
               proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
               legal_aid_application.reload
             end
 
-            it 'adds the extra scope limitation to the XML, and specifies MULTIPLE for requested scope' do
+            it "adds the extra scope limitation to the XML, and specifies MULTIPLE for requested scope" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
-              travel_to Time.zone.parse('2020-11-24T11:54:29.000') do
-                test_data_xml = ccms_data_from_file 'df_case_add_request.xml'
+              travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+                test_data_xml = ccms_data_from_file "df_case_add_request.xml"
                 expect(expected_xml).to eq test_data_xml
               end
             end

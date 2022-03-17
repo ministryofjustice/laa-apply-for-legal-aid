@@ -9,7 +9,7 @@ module CCMS
 
         submission.applicant_add_transaction_id = applicant_add_requestor.transaction_request_id
         submission.save!
-        create_history('case_ref_obtained', submission.aasm_state, xml_request, response) if submission.submit_applicant!
+        create_history("case_ref_obtained", submission.aasm_state, xml_request, response) if submission.submit_applicant!
       rescue *CCMS_SUBMISSION_ERRORS => e
         failed_response = e.respond_to?(:response) ? e&.response : nil
         handle_exception(e, xml_request, response: failed_response)

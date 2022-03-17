@@ -12,7 +12,7 @@ module Citizens
         session[:locale] = I18n.locale
         go_forward
       else
-        @error = t('.error')
+        @error = t(".error")
         render :index
       end
     end

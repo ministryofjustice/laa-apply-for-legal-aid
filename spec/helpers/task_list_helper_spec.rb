@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe TaskListHelper, type: :helper do
-  context 'when passed an application with section 8 proceeding_types' do
+  context "when passed an application with section 8 proceeding_types" do
     let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
 
-    context 'with a child already added' do
+    context "with a child already added" do
       before { create :involved_child, legal_aid_application: legal_aid_application }
 
       let(:expected) do
@@ -18,7 +18,7 @@ RSpec.describe TaskListHelper, type: :helper do
         RESULT
       end
 
-      it 'returns a link' do
+      it "returns a link" do
         expect(helper.task_list_item(name: :children_application,
                                      status: :complete,
                                      legal_aid_application:,
@@ -26,7 +26,7 @@ RSpec.describe TaskListHelper, type: :helper do
       end
     end
 
-    context 'with no child added' do
+    context "with no child added" do
       let(:expected) do
         <<~RESULT
           <li class="app-task-list__item">
@@ -38,7 +38,7 @@ RSpec.describe TaskListHelper, type: :helper do
         RESULT
       end
 
-      it 'returns a link' do
+      it "returns a link" do
         expect(helper.task_list_item(name: :children_application,
                                      status: :not_started,
                                      legal_aid_application:,
@@ -46,8 +46,8 @@ RSpec.describe TaskListHelper, type: :helper do
       end
     end
 
-    context 'chances of success' do
-      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'DA001') }
+    context "chances of success" do
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
 
       let(:expected) do
         <<~RESULT
@@ -60,7 +60,7 @@ RSpec.describe TaskListHelper, type: :helper do
         RESULT
       end
 
-      it 'returns a link' do
+      it "returns a link" do
         expect(helper.task_list_item(name: :chances_of_success,
                                      status: :complete,
                                      legal_aid_application:,

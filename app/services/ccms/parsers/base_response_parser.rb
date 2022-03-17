@@ -45,7 +45,7 @@ module CCMS
         elsif exception.present?
           extract_exception_and_message
         else
-          raise CCMSError, 'Unable to find status code or exception in response'
+          raise CCMSError, "Unable to find status code or exception in response"
         end
       end
 
@@ -62,7 +62,7 @@ module CCMS
       end
 
       def extract_status_code_and_message
-        @success = status == 'Success'
+        @success = status == "Success"
         @message = "#{status}: #{status_free_text}"
       end
 

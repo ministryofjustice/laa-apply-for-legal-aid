@@ -2,8 +2,8 @@
 
 class BankHolidayRetriever
   UnsuccessfulRetrievalError = Class.new(StandardError)
-  API_URL = 'https://www.gov.uk/bank-holidays.json'
-  DEFAULT_GROUP = 'england-and-wales'
+  API_URL = "https://www.gov.uk/bank-holidays.json"
+  DEFAULT_GROUP = "england-and-wales"
 
   def self.dates
     new.dates(DEFAULT_GROUP)
@@ -18,7 +18,7 @@ class BankHolidayRetriever
   def dates(group)
     return if data.empty?
 
-    data.dig(group, 'events')&.pluck('date')
+    data.dig(group, "events")&.pluck("date")
   end
 
 private

@@ -42,7 +42,7 @@ private
   end
 
   def encoded_uri
-    URI.encode_www_form_component(username).gsub('+', '%20')
+    URI.encode_www_form_component(username).gsub("+", "%20")
   end
 
   def raise_error

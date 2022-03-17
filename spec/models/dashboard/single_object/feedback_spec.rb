@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module Dashboard
   module SingleObject
@@ -19,14 +19,14 @@ module Dashboard
 
       it { is_expected.to be_a described_class }
 
-      describe '.build_row' do
+      describe ".build_row" do
         subject(:build_row) { dashboard_feedback.build_row }
 
         let(:expected_response) do
           [
             {
               timestamp: feedback.created_at,
-              type: 'Provider',
+              type: "Provider",
               difficulty_count: 4,
               difficulty_score: 100,
               satisfaction_count: 2,
@@ -35,15 +35,15 @@ module Dashboard
           ]
         end
 
-        it 'returns an array summarising the feedback' do
+        it "returns an array summarising the feedback" do
           is_expected.to eql expected_response
         end
       end
 
-      describe '.run' do
+      describe ".run" do
         subject(:run) { dashboard_feedback.run }
 
-        it 'submits data to geckoboard' do
+        it "submits data to geckoboard" do
           expect(datasets_client).to receive(:find_or_create).and_return(dataset)
           expect(dataset).to receive(:post)
           run

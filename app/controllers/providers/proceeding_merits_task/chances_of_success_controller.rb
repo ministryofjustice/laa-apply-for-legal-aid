@@ -13,7 +13,7 @@ module Providers
     private
 
       def task_list_should_update?
-        application_has_task_list? && !draft_selected? && @form.valid? && @form.success_likely.eql?('true')
+        application_has_task_list? && !draft_selected? && @form.valid? && @form.success_likely.eql?("true")
       end
 
       def legal_aid_application

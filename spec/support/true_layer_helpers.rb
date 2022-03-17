@@ -9,17 +9,17 @@ module TrueLayerHelpers
 
   def stub_true_layer_provider
     result = MOCK_DATA[:provider]
-    stub_true_layer_endpoint('/data/v1/me', { results: [result] }.to_json)
+    stub_true_layer_endpoint("/data/v1/me", { results: [result] }.to_json)
   end
 
   def stub_true_layer_accounts
     results = MOCK_DATA[:accounts]
-    stub_true_layer_endpoint('/data/v1/accounts', { results: results }.to_json)
+    stub_true_layer_endpoint("/data/v1/accounts", { results: results }.to_json)
   end
 
   def stub_true_layer_account_holders
     results = MOCK_DATA[:account_holders]
-    stub_true_layer_endpoint('/data/v1/info', { results: results }.to_json)
+    stub_true_layer_endpoint("/data/v1/info", { results: results }.to_json)
   end
 
   def stub_true_layer_account_balances
@@ -44,7 +44,7 @@ module TrueLayerHelpers
 
   def stub_true_layer_error
     response_body = {
-      error_description: 'Feature not supported by the provider',
+      error_description: "Feature not supported by the provider",
       error: :endpoint_not_supported,
       error_details: {},
     }.to_json

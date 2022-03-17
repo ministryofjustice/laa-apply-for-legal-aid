@@ -6,11 +6,11 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application) },
           forward: ->(application, confirm_dwp_non_passported) do
             if confirm_dwp_non_passported
-              application.change_state_machine_type('NonPassportedStateMachine')
+              application.change_state_machine_type("NonPassportedStateMachine")
               :applicant_employed
             else
               application.check_applicant_details! unless application.checking_applicant_details?
-              application.change_state_machine_type('PassportedStateMachine')
+              application.change_state_machine_type("PassportedStateMachine")
               :check_client_details
             end
           end,
@@ -23,10 +23,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
           forward: ->(application, has_benefit) do
             if has_benefit
-              application.change_state_machine_type('PassportedStateMachine')
+              application.change_state_machine_type("PassportedStateMachine")
               :has_evidence_of_benefits
             else
-              application.change_state_machine_type('NonPassportedStateMachine')
+              application.change_state_machine_type("NonPassportedStateMachine")
               :applicant_employed
             end
           end,
@@ -35,10 +35,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_has_evidence_of_benefit_path(application) },
           forward: ->(application, has_evidence_of_benefit) do
             if has_evidence_of_benefit
-              application.change_state_machine_type('PassportedStateMachine')
+              application.change_state_machine_type("PassportedStateMachine")
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
-              application.change_state_machine_type('NonPassportedStateMachine')
+              application.change_state_machine_type("NonPassportedStateMachine")
               :applicant_employed
             end
           end,

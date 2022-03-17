@@ -1,8 +1,8 @@
 module CCMS
   module Parsers
     class CaseAddStatusResponseParser < BaseResponseParser
-      TRANSACTION_ID_PATH = '//Body//CaseAddUpdtStatusRS//HeaderRS//TransactionID'.freeze
-      STATUS_FREE_TEXT_PATH = '//Body//CaseAddUpdtStatusRS//HeaderRS//Status//StatusFreeText'.freeze
+      TRANSACTION_ID_PATH = "//Body//CaseAddUpdtStatusRS//HeaderRS//TransactionID".freeze
+      STATUS_FREE_TEXT_PATH = "//Body//CaseAddUpdtStatusRS//HeaderRS//Status//StatusFreeText".freeze
 
       def success?
         @success = parse(:extracted_status_free_text).match?(/Case successfully created./)
@@ -11,7 +11,7 @@ module CCMS
     private
 
       def response_type
-        'CaseAddUpdtStatusRS'.freeze
+        "CaseAddUpdtStatusRS".freeze
       end
 
       def extracted_transaction_request_id

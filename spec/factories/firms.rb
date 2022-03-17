@@ -6,11 +6,11 @@ FactoryBot.define do
   end
 
   trait :with_passported_permissions do
-    permissions { [Permission.find_by(role: 'application.passported.*') || create(:permission, :passported)] }
+    permissions { [Permission.find_by(role: "application.passported.*") || create(:permission, :passported)] }
   end
 
   trait :with_non_passported_permissions do
-    permissions { [Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)] }
+    permissions { [Permission.find_by(role: "application.non_passported.*") || create(:permission, :non_passported)] }
   end
 
   trait :with_no_permissions do
@@ -20,8 +20,8 @@ FactoryBot.define do
   trait :with_passported_and_non_passported_permissions do
     permissions do
       [
-        Permission.find_by(role: 'application.passported.*') || create(:permission, :passported),
-        Permission.find_by(role: 'application.non_passported.*') || create(:permission, :non_passported)
+        Permission.find_by(role: "application.passported.*") || create(:permission, :passported),
+        Permission.find_by(role: "application.non_passported.*") || create(:permission, :non_passported)
       ]
     end
   end

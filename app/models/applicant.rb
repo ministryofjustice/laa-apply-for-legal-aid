@@ -1,5 +1,5 @@
-require 'uri'
-require 'omniauth'
+require "uri"
+require "omniauth"
 
 class Applicant < ApplicationRecord
   devise :rememberable
@@ -62,7 +62,7 @@ class Applicant < ApplicationRecord
   end
 
   def receives_financial_support?
-    bank_transactions.for_type('friends_or_family').present?
+    bank_transactions.for_type("friends_or_family").present?
   end
 
   def receives_maintenance?
@@ -70,9 +70,9 @@ class Applicant < ApplicationRecord
   end
 
   def maintenance_per_month
-    return '0.0' unless valid_cfe_result_version?
+    return "0.0" unless valid_cfe_result_version?
 
-    format('%<amount>.2f', amount: cfe_result.maintenance_per_month).to_s || '0.0'
+    format("%<amount>.2f", amount: cfe_result.maintenance_per_month).to_s || "0.0"
   end
 
   delegate :type, to: :cfe_result, prefix: true
@@ -86,8 +86,8 @@ class Applicant < ApplicationRecord
   end
 
   def mortgage_per_month
-    return '0.0' unless valid_cfe_result_version?
+    return "0.0" unless valid_cfe_result_version?
 
-    format('%<amount>.2f', amount: cfe_result.mortgage_per_month || 0)
+    format("%<amount>.2f", amount: cfe_result.mortgage_per_month || 0)
   end
 end

@@ -31,7 +31,7 @@ module LegalFramework
     # override this method in the derived class if you need more/different headers
     def headers
       {
-        'Content-Type' => 'application/json',
+        "Content-Type" => "application/json",
       }
     end
 
@@ -62,20 +62,20 @@ module LegalFramework
     def parse_json_response(response_body)
       JSON.parse(response_body, symbolize_names: true)
     rescue JSON::ParserError, TypeError
-      response_body || ''
+      response_body || ""
     end
 
     def post_request
       conn.post do |request|
         request.url url_path
-        request.headers['Content-Type'] = 'application/json'
+        request.headers["Content-Type"] = "application/json"
         request.body = request_body
       end
     rescue StandardError => e
       catch_and_record_exception(e)
     end
 
-    def catch_and_record_exception(error, http_method = 'POST')
+    def catch_and_record_exception(error, http_method = "POST")
       raise_exception_error(
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
@@ -84,7 +84,7 @@ module LegalFramework
       )
     end
 
-    def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
+    def raise_exception_error(message:, backtrace: nil, http_method: "POST", http_status: nil)
       @submission.submission_histories.create!(
         url: legal_framework_url,
         http_method:,
@@ -100,7 +100,7 @@ module LegalFramework
       "#{self.class} received #{err.class}: #{err.message}"
     end
 
-    def write_submission_history(raw_response, http_method = 'POST')
+    def write_submission_history(raw_response, http_method = "POST")
       @submission.submission_histories.create!(
         url: legal_framework_url,
         http_method:,

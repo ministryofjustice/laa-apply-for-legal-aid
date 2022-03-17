@@ -4,7 +4,7 @@ RSpec::Matchers.define :have_text_area_with_id_and_content do |expected_id, expe
     if text_area.empty?
       false
     else
-      text_area.text.sub(/^\n/, '') == expected_content
+      text_area.text.sub(/^\n/, "") == expected_content
     end
   end
 

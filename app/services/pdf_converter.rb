@@ -25,7 +25,7 @@ class PdfConverter
       pdf_attachment.document.attach(
         io: File.open(file.path),
         filename: pdf_filename,
-        content_type: 'application/pdf'
+        content_type: "application/pdf"
       )
       @original_attachment.update!(pdf_attachment_id: pdf_attachment.id)
     end
@@ -34,7 +34,7 @@ class PdfConverter
 private
 
   def converted_file
-    return downloaded_file if @original_attachment.document.content_type == 'application/pdf'
+    return downloaded_file if @original_attachment.document.content_type == "application/pdf"
 
     file = Tempfile.new
     Libreconv.convert(downloaded_file.path, file.path)

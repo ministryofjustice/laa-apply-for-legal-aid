@@ -1,15 +1,15 @@
 module CCMS
   module Parsers
     class ReferenceDataResponseParser < BaseResponseParser
-      TRANSACTION_ID_PATH = '//Body//ReferenceDataInqRS//HeaderRS//TransactionID'.freeze
-      RESULTS_PATH = '//Body//ReferenceDataInqRS//Results'.freeze
+      TRANSACTION_ID_PATH = "//Body//ReferenceDataInqRS//HeaderRS//TransactionID".freeze
+      RESULTS_PATH = "//Body//ReferenceDataInqRS//Results".freeze
 
       def reference_id
         @reference_id ||= parse(:extracted_reference_id)
       end
 
       def response_type
-        'ReferenceDataInqRS'.freeze
+        "ReferenceDataInqRS".freeze
       end
 
     private

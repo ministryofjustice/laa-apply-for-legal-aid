@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Flow::KeyPoint do
   let(:journey) { :providers }
@@ -15,20 +15,20 @@ RSpec.describe Flow::KeyPoint do
 
   subject { described_class.new(journey, key_point) }
 
-  describe '#step' do
-    it 'returns the matching step' do
+  describe "#step" do
+    it "returns the matching step" do
       expect(subject.step).to eq(step)
     end
   end
 
-  describe '#path' do
-    it 'returns the matching path from flow' do
+  describe "#path" do
+    it "returns the matching path from flow" do
       expect(subject.path(legal_aid_application)).to eq(flow.current_path)
     end
   end
 
-  describe '.step_for' do
-    it 'returns the matching step' do
+  describe ".step_for" do
+    it "returns the matching step" do
       response = described_class.step_for(
         journey:,
         key_point:
@@ -37,8 +37,8 @@ RSpec.describe Flow::KeyPoint do
     end
   end
 
-  describe '.path_for' do
-    it 'returns the matching path' do
+  describe ".path_for" do
+    it "returns the matching path" do
       response = described_class.path_for(
         journey:,
         key_point:,

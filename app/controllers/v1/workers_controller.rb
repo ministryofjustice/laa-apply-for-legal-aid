@@ -2,8 +2,8 @@ module V1
   class WorkersController < ApiController
     def show
       render json: {
-        status: worker['status'],
-        errors: worker['errors'],
+        status: worker["status"],
+        errors: worker["errors"],
       }
     end
 

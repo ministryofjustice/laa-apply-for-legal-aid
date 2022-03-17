@@ -1,7 +1,7 @@
 class PermissionsUpdater
   def initialize
-    @passported = Permission.find_by(role: 'application.passported.*')
-    @non_passported = Permission.find_by(role: 'application.non_passported.*')
+    @passported = Permission.find_by(role: "application.passported.*")
+    @non_passported = Permission.find_by(role: "application.non_passported.*")
   end
 
   def run

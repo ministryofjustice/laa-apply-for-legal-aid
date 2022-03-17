@@ -13,11 +13,11 @@ class SecureData < ApplicationRecord
   end
 
   def store(hash)
-    self.data = JWT.encode hash, secret, 'HS256'
+    self.data = JWT.encode hash, secret, "HS256"
   end
 
   def retrieve
-    JWT.decode(data, secret, true, algorithm: 'HS256').first.symbolize_keys
+    JWT.decode(data, secret, true, algorithm: "HS256").first.symbolize_keys
   end
 
 private

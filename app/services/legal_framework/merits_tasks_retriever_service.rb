@@ -1,6 +1,6 @@
 module LegalFramework
   class MeritsTasksRetrieverService < BaseService
-    ENDPOINT = '/merits_tasks'.freeze
+    ENDPOINT = "/merits_tasks".freeze
 
     def url_path
       ENDPOINT

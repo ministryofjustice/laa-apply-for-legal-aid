@@ -28,9 +28,9 @@ module Citizens
     end
 
     def worker_errors
-      return [] unless worker && worker['errors'].present?
+      return [] unless worker && worker["errors"].present?
 
-      @worker_errors ||= JSON.parse(worker['errors'])
+      @worker_errors ||= JSON.parse(worker["errors"])
     end
 
     def worker_working?
@@ -38,9 +38,9 @@ module Citizens
     end
 
     def worker_status
-      return nil unless worker && worker['status']
+      return nil unless worker && worker["status"]
 
-      worker['status'].to_sym
+      worker["status"].to_sym
     end
 
     def worker

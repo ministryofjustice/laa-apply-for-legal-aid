@@ -1,5 +1,5 @@
-desc 'Run ERB lint'
+desc "Run ERB lint"
 task erblint: :environment do
-  path = 'app/views'
+  path = "app/views"
   sh("erblint #{path}")
 end
