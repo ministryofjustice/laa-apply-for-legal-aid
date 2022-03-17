@@ -1918,15 +1918,6 @@ Style/AccessorGrouping:
     - 'app/forms/savings_amounts/offline_accounts_form.rb'
     - 'app/forms/savings_amounts/savings_amounts_form.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Exclude:
-    - 'app/controllers/feedback_controller.rb'
-    - 'app/models/legal_aid_application.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: AllowCoercion.
