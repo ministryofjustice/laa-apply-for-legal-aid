@@ -1981,14 +1981,6 @@ Style/Lambda:
 Style/QuotedSymbols:
   EnforcedStyle: single_quotes
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/RedundantAssignment:
-  Exclude:
-    - 'app/services/reports/bank_transactions/bank_transaction_report_creator.rb'
-    - 'app/services/reports/mis/application_details_report.rb'
-    - 'app/services/reports/mis/non_passported_applications_report.rb'
-
 # Offense count: 27
 # Cop supports --auto-correct.
 Style/RedundantFreeze:

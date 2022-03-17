@@ -10,14 +10,13 @@ module Reports
     private
 
       def generate_csv_string
-        csv_string = CSV.generate do |csv|
+        CSV.generate do |csv|
           csv << ApplicationDetailCsvLine.header_row
           legal_aid_application_ids.each do |laa_id|
             legal_aid_application = LegalAidApplication.find(laa_id)
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
           end
         end
-        csv_string
       rescue StandardError => e
         log "generate_csv_string - #{e.message}"
         raise e
