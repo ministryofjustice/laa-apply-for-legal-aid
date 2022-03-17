@@ -45,7 +45,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
   def populate_transactions(bank_account, seed_data)
     seed_data.each do |row|
       create(:bank_transaction,
-             bank_account: bank_account,
+             bank_account:,
              happened_at: Time.parse(row[0]).in_time_zone,
              created_at: Time.parse(row[1]).in_time_zone,
              operation: row[2],

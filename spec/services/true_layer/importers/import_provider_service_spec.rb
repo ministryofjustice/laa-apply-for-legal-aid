@@ -12,7 +12,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
     let(:existing_true_layer_provider_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant: applicant, true_layer_provider_id: existing_true_layer_provider_id }
 
-    subject { described_class.call(api_client: api_client, applicant: applicant, token_expires_at: token_expires_at) }
+    subject { described_class.call(api_client:, applicant:, token_expires_at:) }
 
     context 'request is successful' do
       before do

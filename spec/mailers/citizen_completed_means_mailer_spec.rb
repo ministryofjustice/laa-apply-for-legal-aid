@@ -25,11 +25,11 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq(
-        email: email,
-        provider_name: provider_name,
-        applicant_name: applicant_name,
+        email:,
+        provider_name:,
+        applicant_name:,
         ref_number: application.application_ref,
-        application_url: application_url
+        application_url:
       )
     end
 

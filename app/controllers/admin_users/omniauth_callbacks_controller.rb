@@ -13,7 +13,7 @@ module AdminUsers
 
     def failure(reason: 'Process cancelled')
       begin
-        set_flash_message(:error, :failure, kind: 'Google', reason: reason)
+        set_flash_message(:error, :failure, kind: 'Google', reason:)
         raise AuthController::AuthorizationError, "Kind: Google, reason: #{reason}"
       rescue StandardError => e
         AlertManager.capture_exception(e)
@@ -30,7 +30,7 @@ module AdminUsers
   private
 
     def admin_user
-      @admin_user ||= AdminUser.find_by(email: email)
+      @admin_user ||= AdminUser.find_by(email:)
     end
 
     def access_token

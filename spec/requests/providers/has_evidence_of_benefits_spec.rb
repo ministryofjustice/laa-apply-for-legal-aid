@@ -63,7 +63,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     let(:params) do
       {
         dwp_override: {
-          has_evidence_of_benefit: has_evidence_of_benefit,
+          has_evidence_of_benefit:,
         },
       }
     end
@@ -126,7 +126,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
       it 'show errors' do
         dwp_override = legal_aid_application.reload.dwp_override
         passporting_benefit = dwp_override.passporting_benefit.titleize
-        error = I18n.t('activemodel.errors.models.dwp_override.attributes.has_evidence_of_benefit.blank', passporting_benefit: passporting_benefit)
+        error = I18n.t('activemodel.errors.models.dwp_override.attributes.has_evidence_of_benefit.blank', passporting_benefit:)
         expect(response.body).to include(error)
       end
 

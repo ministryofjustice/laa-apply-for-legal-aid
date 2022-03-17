@@ -32,7 +32,7 @@ module CCMS
       def populate_documents
         submittable_attachments.each do |attachment|
           SubmissionDocument.create!(
-            submission: submission,
+            submission:,
             attachment_id: attachment.id,
             status: :new,
             document_type: attachment.attachment_type,

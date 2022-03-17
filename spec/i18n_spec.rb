@@ -39,7 +39,7 @@ RSpec.describe 'I18n', :i18n do
     puts format(format_string, key: 'key', location: 'location').red
     puts format(format_string, key: ('=' * max_key_length), location: ('=' * max_location_length)).red
     key_details.each do |key, location|
-      puts format(format_string, key: key, location: location).red
+      puts format(format_string, key:, location:).red
     end
   end
 

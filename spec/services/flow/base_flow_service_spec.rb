@@ -16,9 +16,9 @@ RSpec.describe Flow::BaseFlowService do
 
   subject do
     flow_service_class.new(
-      legal_aid_application: legal_aid_application,
-      current_step: current_step,
-      params: params
+      legal_aid_application:,
+      current_step:,
+      params:
     )
   end
 
@@ -79,10 +79,10 @@ RSpec.describe Flow::BaseFlowService do
     let(:steps) do
       {
         current_step => {
-          path: path,
-          forward: forward,
-          carry_on_sub_flow: carry_on_sub_flow,
-          check_answers: check_answers,
+          path:,
+          forward:,
+          carry_on_sub_flow:,
+          check_answers:,
         },
         forward => {
           path: forward_url,

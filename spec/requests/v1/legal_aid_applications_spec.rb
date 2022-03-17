@@ -5,7 +5,7 @@ RSpec.describe 'GET /v1/legal_aid_applications', type: :request do
   let(:id) { legal_aid_application.id }
 
   describe 'GET /v1/legal_aid_applications/:id' do
-    subject { delete v1_legal_aid_application_path(id: id) }
+    subject { delete v1_legal_aid_application_path(id:) }
 
     context 'when the application exists' do
       it 'returns http success' do

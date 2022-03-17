@@ -54,17 +54,17 @@ module LegalFramework
 
     def serialize_application_tasks
       @lfa_response[:application][:tasks].each do |task_name, dependencies|
-        @tasks[:application] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
+        @tasks[:application] << SerializableMeritsTask.new(task_name, dependencies:)
       end
     end
 
     def serialize_proceeding_types_tasks
       @lfa_response[:proceeding_types].each do |proceeding_type_hash|
         ccms_code = proceeding_type_hash[:ccms_code].to_sym
-        proceeding_name = Proceeding.find_by(ccms_code: ccms_code).meaning
+        proceeding_name = Proceeding.find_by(ccms_code:).meaning
         @tasks[:proceedings][ccms_code] = { name: proceeding_name, tasks: [] }
         proceeding_type_hash[:tasks].each do |task_name, dependencies|
-          @tasks[:proceedings][ccms_code][:tasks] << SerializableMeritsTask.new(task_name, dependencies: dependencies)
+          @tasks[:proceedings][ccms_code][:tasks] << SerializableMeritsTask.new(task_name, dependencies:)
         end
       end
     end

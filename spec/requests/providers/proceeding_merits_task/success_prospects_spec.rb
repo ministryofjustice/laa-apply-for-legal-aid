@@ -37,7 +37,7 @@ module Providers
           {
             proceeding_merits_task_chances_of_success: {
               success_prospect: success_prospect.to_s,
-              success_prospect_details: success_prospect_details,
+              success_prospect_details:,
             },
           }
         end

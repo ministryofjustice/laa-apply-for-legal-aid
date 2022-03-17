@@ -27,7 +27,7 @@ RSpec.describe 'provider percentage share of home test', type: :request do
     let(:percentage_home) { '33.33' }
     let(:params) do
       {
-        legal_aid_application: { percentage_home: percentage_home },
+        legal_aid_application: { percentage_home: },
       }
     end
 

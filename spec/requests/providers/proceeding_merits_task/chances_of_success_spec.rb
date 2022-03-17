@@ -38,7 +38,7 @@ module Providers
         end
         let(:success_likely) { 'true' }
         let(:params) do
-          { proceeding_merits_task_chances_of_success: { success_likely: success_likely } }
+          { proceeding_merits_task_chances_of_success: { success_likely: } }
         end
         let(:submit_button) { {} }
 

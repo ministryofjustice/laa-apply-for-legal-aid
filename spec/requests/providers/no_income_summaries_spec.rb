@@ -36,7 +36,7 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
     let(:params) do
       {
         binary_choice_form: {
-          no_income_summaries: no_income_summaries,
+          no_income_summaries:,
         },
       }
     end

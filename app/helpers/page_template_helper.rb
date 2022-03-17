@@ -53,20 +53,20 @@ module PageTemplateHelper
     template = :default unless %i[form basic].include?(template)
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     has_errors = form&.object&.errors || show_errors_for&.errors
-    page_title_possibly_with_error({ page_title: page_title, head_title: head_title }, has_errors)
+    page_title_possibly_with_error({ page_title:, head_title: }, has_errors)
     content = capture(&content) if content
     content_for(:language_switcher) { language_links if show_language_switcher? }
     render(
       "shared/page_templates/#{template}_page_template",
-      page_title: page_title,
-      head_title: head_title,
-      back_link: back_link,
-      column_width: column_width,
-      content: content,
-      form: form,
-      show_errors_for: show_errors_for,
-      success_message: success_message,
-      page_heading_options: page_heading_options
+      page_title:,
+      head_title:,
+      back_link:,
+      column_width:,
+      content:,
+      form:,
+      show_errors_for:,
+      success_message:,
+      page_heading_options:
     )
   end
 

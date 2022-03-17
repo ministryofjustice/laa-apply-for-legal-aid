@@ -46,7 +46,7 @@ module CCMS
       end
 
       def handle_exception(exception, xml_request, response: nil)
-        create_ccms_failure_history(submission.aasm_state, exception, xml_request, response: response)
+        create_ccms_failure_history(submission.aasm_state, exception, xml_request, response:)
       end
     end
   end

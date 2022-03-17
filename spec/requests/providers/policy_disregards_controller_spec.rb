@@ -103,7 +103,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
               national_emergencies_trust: '',
               we_love_manchester_emergency_fund: '',
               london_emergencies_trust: '',
-              none_selected: none_selected,
+              none_selected:,
             },
           }
         end

@@ -117,7 +117,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         proceedings_by_name.each_with_index do |type, i|
           next if i == pt_without_df
 
-          message = I18n.t(error_locale, scope: i18n_scope, months: months, meaning: Proceeding.find_by(name: type.name).meaning)
+          message = I18n.t(error_locale, scope: i18n_scope, months:, meaning: Proceeding.find_by(name: type.name).meaning)
           expect(message).not_to match(/^translation missing:/)
           expect(subject.errors[:"#{type.name}_used_delegated_functions_on"].join).to match(message)
         end

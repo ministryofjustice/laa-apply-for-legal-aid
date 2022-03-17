@@ -266,7 +266,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe '#summary_state' do
-    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, merits_submitted_at: merits_submitted_at) }
+    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, merits_submitted_at:) }
 
     context 'merits not completed' do
       let(:merits_submitted_at) { nil }
@@ -1160,7 +1160,7 @@ RSpec.describe LegalAidApplication, type: :model do
       laa = create :legal_aid_application, :with_proceedings, proceeding_count: 3
       prospects = %w[likely borderline marginal]
       laa.proceedings.each_with_index do |proceeding, i|
-        proceeding.chances_of_success = create(:chances_of_success, proceeding: proceeding,
+        proceeding.chances_of_success = create(:chances_of_success, proceeding:,
                                                                     success_prospect: prospects[i])
       end
       expect(laa.lowest_prospect_of_success).to eq 'Borderline'

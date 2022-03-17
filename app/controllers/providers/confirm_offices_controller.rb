@@ -29,7 +29,7 @@ module Providers
       @form ||= BinaryChoiceForm.call(
         journey: :provider,
         radio_buttons_input_name: :confirm_office,
-        form_params: form_params
+        form_params:
       )
     end
 

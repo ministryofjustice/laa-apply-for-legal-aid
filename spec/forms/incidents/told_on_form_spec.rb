@@ -8,7 +8,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
   let(:error_locale) { :defined_in_spec }
   let(:message) { I18n.t(error_locale, scope: i18n_scope) }
 
-  let(:params) { { occurred_on: occurred_on, told_on: told_on } }
+  let(:params) { { occurred_on:, told_on: } }
 
   subject { described_class.new(params.merge(model: incident)) }
 

@@ -39,15 +39,15 @@ RSpec.describe 'check merits answers requests', type: :request do
 
       it 'displays the correct questions' do
         scope = 'shared.check_answers.merits.items'
-        expect(response.body).to include(I18n.t('notification_of_latest_incident', scope: scope))
-        expect(response.body).to include(I18n.t('date_of_latest_incident', scope: scope))
-        expect(response.body).to include(I18n.t('understands_terms_of_court_order', scope: scope))
-        expect(response.body).to include(I18n.t('warning_letter_sent', scope: scope))
-        expect(response.body).to include(I18n.t('police_notified', scope: scope))
-        expect(response.body).to include(I18n.t('bail_conditions_set', scope: scope))
-        expect(response.body).to include(I18n.t('statement_of_case', scope: scope))
-        expect(response.body).to include(I18n.t('prospects_of_success', scope: scope))
-        expect(response.body).to include(I18n.t('success_prospect', scope: scope))
+        expect(response.body).to include(I18n.t('notification_of_latest_incident', scope:))
+        expect(response.body).to include(I18n.t('date_of_latest_incident', scope:))
+        expect(response.body).to include(I18n.t('understands_terms_of_court_order', scope:))
+        expect(response.body).to include(I18n.t('warning_letter_sent', scope:))
+        expect(response.body).to include(I18n.t('police_notified', scope:))
+        expect(response.body).to include(I18n.t('bail_conditions_set', scope:))
+        expect(response.body).to include(I18n.t('statement_of_case', scope:))
+        expect(response.body).to include(I18n.t('prospects_of_success', scope:))
+        expect(response.body).to include(I18n.t('success_prospect', scope:))
       end
 
       it 'displays the correct URLs for changing values' do

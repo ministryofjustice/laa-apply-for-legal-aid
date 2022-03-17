@@ -358,7 +358,7 @@ module CFE
       end
 
       def proceeding_meaning(ccms_code)
-        Proceeding.find_by(ccms_code: ccms_code).meaning
+        Proceeding.find_by(ccms_code:).meaning
       end
 
       def elig_yes_no(result)

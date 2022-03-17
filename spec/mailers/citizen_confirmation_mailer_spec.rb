@@ -23,7 +23,7 @@ RSpec.describe CitizenConfirmationMailer, type: :mailer do
 
     it 'has the right personalisation' do
       expect(mail.govuk_notify_personalisation).to eq(
-        client_name: client_name,
+        client_name:,
         ref_number: app_id
       )
     end

@@ -11,10 +11,10 @@ RSpec.describe ScheduledMailing do
 
   describe '.send_now' do
     subject do
-      described_class.send_now!(mailer_klass: mailer_klass,
-                                mailer_method: mailer_method,
+      described_class.send_now!(mailer_klass:,
+                                mailer_method:,
                                 legal_aid_application_id: legal_aid_application.id,
-                                addressee: addressee,
+                                addressee:,
                                 arguments: mailer_args)
     end
 
@@ -37,10 +37,10 @@ RSpec.describe ScheduledMailing do
 
   describe '.send_later!' do
     subject do
-      described_class.send_later!(mailer_klass: mailer_klass,
-                                  mailer_method: mailer_method,
+      described_class.send_later!(mailer_klass:,
+                                  mailer_method:,
                                   legal_aid_application_id: legal_aid_application.id,
-                                  addressee: addressee,
+                                  addressee:,
                                   arguments: mailer_args,
                                   scheduled_at: future_time)
     end

@@ -7,23 +7,23 @@ module CheckAnswersHelper
   def check_answer_link(question:, answer:, name:, url: nil, read_only: false, no_border: false)
     render(
       'shared/check_answers/item',
-      name: name,
-      url: url,
-      question: question,
-      answer: answer,
+      name:,
+      url:,
+      question:,
+      answer:,
       read_only: url.nil? ? true : read_only,
-      no_border: no_border
+      no_border:
     )
   end
 
   def check_answer_no_link(question:, answer:, name:, no_border: false, read_only: false)
     render(
       'shared/check_answers/no_link_item',
-      name: name,
-      question: question,
-      answer: answer,
-      read_only: read_only,
-      no_border: no_border
+      name:,
+      question:,
+      answer:,
+      read_only:,
+      no_border:
     )
   end
 
@@ -31,52 +31,52 @@ module CheckAnswersHelper
   def check_answer_one_change_link(url:, question:, answer_hash:, name:, read_only: false)
     render(
       'shared/check_answers/one_link_section',
-      name: name,
-      url: url,
-      question: question,
-      answer_hash: answer_hash,
-      read_only: read_only
+      name:,
+      url:,
+      question:,
+      answer_hash:,
+      read_only:
     )
   end
 
   def check_answer_change_link(name:, url:, question:, read_only: false)
     render(
       'shared/check_answers/only_link_section',
-      name: name,
-      url: url,
-      question: question,
-      read_only: read_only
+      name:,
+      url:,
+      question:,
+      read_only:
     )
   end
 
   def check_long_questions_single_change_link(url:, question:, answer_hash:, name:, read_only: false)
     render(
       'shared/check_answers/one_change_link_long_answers_section',
-      url: url,
-      name: name,
-      question: question,
-      answer_hash: answer_hash,
-      read_only: read_only
+      url:,
+      name:,
+      question:,
+      answer_hash:,
+      read_only:
     )
   end
 
   def check_long_question_no_link(question:, answer:, name:, no_border: false)
     render(
       'shared/check_answers/no_link_long_item',
-      name: name,
-      question: question,
-      answer: answer,
-      no_border: no_border
+      name:,
+      question:,
+      answer:,
+      no_border:
     )
   end
 
   def check_long_question_for_cash_transactions(name:, question:, legal_aid_application:, transaction_type:)
     render(
       'shared/check_answers/no_link_cash_transaction_item',
-      name: name,
-      question: question,
-      legal_aid_application: legal_aid_application,
-      transaction_type: transaction_type
+      name:,
+      question:,
+      legal_aid_application:,
+      transaction_type:
     )
   end
 

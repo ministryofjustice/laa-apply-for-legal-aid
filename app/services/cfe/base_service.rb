@@ -34,7 +34,7 @@ module CFE
     end
 
     def conn
-      @conn ||= Faraday.new(url: cfe_url_host, headers: headers)
+      @conn ||= Faraday.new(url: cfe_url_host, headers:)
     end
 
     def cfe_url_host
@@ -83,7 +83,7 @@ module CFE
       raise_exception_error(
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
-        http_method: http_method,
+        http_method:,
         http_status: error.respond_to?(:http_status) ? error.http_status : nil
       )
     end
@@ -91,7 +91,7 @@ module CFE
     def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
       @submission.submission_histories.create!(
         url: cfe_url,
-        http_method: http_method,
+        http_method:,
         request_payload: request_body,
         http_response_status: http_status,
         error_message: message,
@@ -107,7 +107,7 @@ module CFE
     def write_submission_history(raw_response, http_method = 'POST')
       @submission.submission_histories.create!(
         url: cfe_url,
-        http_method: http_method,
+        http_method:,
         request_payload: request_body,
         http_response_status: raw_response.status,
         response_payload: raw_response.body,

@@ -29,7 +29,7 @@ module UserTransactionsHelper
     return nil if items.blank?
 
     {
-      items: items,
+      items:,
     }
   end
 end

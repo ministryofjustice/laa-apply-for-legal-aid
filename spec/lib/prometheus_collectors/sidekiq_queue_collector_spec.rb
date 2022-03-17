@@ -24,7 +24,7 @@ RSpec.describe PrometheusCollectors::SidekiqQueueCollector do
   end
 
   it 'sends the queue size to the prometheus gauge' do
-    expect(gauge).to receive(:observe).with(queue_size, queue: queue)
+    expect(gauge).to receive(:observe).with(queue_size, queue:)
     subject.collect('queue' => queue, 'size' => queue_size)
   end
 end

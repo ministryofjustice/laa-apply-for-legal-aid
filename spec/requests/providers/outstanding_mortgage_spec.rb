@@ -5,7 +5,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
   let(:provider) { legal_aid_application.provider }
   let(:params) do
     {
-      legal_aid_application: { outstanding_mortgage_amount: outstanding_mortgage_amount },
+      legal_aid_application: { outstanding_mortgage_amount: },
       legal_aid_application_id: legal_aid_application.id,
     }
   end

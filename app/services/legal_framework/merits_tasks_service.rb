@@ -27,9 +27,9 @@ module LegalFramework
 
     def update_merits_task_list(serialized_data)
       if MeritsTaskList.exists?(legal_aid_application_id: legal_aid_application.id)
-        merits_task_list.update!(serialized_data: serialized_data, updated_at: Time.current)
+        merits_task_list.update!(serialized_data:, updated_at: Time.current)
       else
-        MeritsTaskList.create!(legal_aid_application_id: legal_aid_application.id, serialized_data: serialized_data)
+        MeritsTaskList.create!(legal_aid_application_id: legal_aid_application.id, serialized_data:)
       end
     end
 

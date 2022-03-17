@@ -39,7 +39,7 @@ RSpec.describe Providers::AddressLookupsController, type: :request do
     let(:params) do
       {
         address_lookup: {
-          postcode: postcode,
+          postcode:,
         },
       }.merge(submit_button)
     end

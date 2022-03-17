@@ -63,7 +63,7 @@ class TransactionType < ApplicationRecord
   end
 
   def self.any_type_of(name)
-    top_level_id = TransactionType.find_by(name: name)&.id
+    top_level_id = TransactionType.find_by(name:)&.id
     return [] if top_level_id.nil?
 
     find_with_children(top_level_id)

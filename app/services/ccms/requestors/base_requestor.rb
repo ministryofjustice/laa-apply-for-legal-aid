@@ -58,7 +58,7 @@ module CCMS
           headers: { 'x-api-key' => config.aws_gateway_api_key },
           env_namespace: :soap,
           wsdl: wsdl_location,
-          namespaces: namespaces,
+          namespaces:,
           pretty_print_xml: true,
           convert_request_keys_to: :none,
           namespace_identifier: 'ns2',

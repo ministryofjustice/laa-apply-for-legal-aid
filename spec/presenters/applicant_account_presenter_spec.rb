@@ -11,7 +11,7 @@ RSpec.describe ApplicantAccountPresenter do
 
   let!(:applicant_bank_account_holder) do
     create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,
-                                 addresses: addresses)
+                                 addresses:)
   end
 
   let!(:applicant_bank_account) do

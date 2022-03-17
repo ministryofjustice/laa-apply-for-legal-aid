@@ -50,8 +50,8 @@ RSpec.describe 'employed incomes request', type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          extra_employment_information: extra_employment_information,
-          extra_employment_information_details: extra_employment_information_details,
+          extra_employment_information:,
+          extra_employment_information_details:,
         },
       }
     end

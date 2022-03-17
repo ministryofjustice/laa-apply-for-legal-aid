@@ -219,7 +219,7 @@ module CCMS
               context 'attribute CLI_RES_PER_INPUT_B_12WP3_28A - Dependant: Relationship is adult' do
                 let(:blocks) { XmlExtractor.call(xml, :client_residing_person, 'CLI_RES_PER_INPUT_B_12WP3_28A') }
 
-                before { dependants.each { |dep| dep.update!(relationship: relationship) } }
+                before { dependants.each { |dep| dep.update!(relationship:) } }
 
                 context 'all dependants are children' do
                   let(:relationship) { 'child_relative' }

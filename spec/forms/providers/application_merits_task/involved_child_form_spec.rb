@@ -8,7 +8,7 @@ module Providers
       let(:full_name) { Faker::Name.name }
       let(:params) do
         {
-          full_name: full_name,
+          full_name:,
           date_of_birth_3i: dob.day.to_s,
           date_of_birth_2i: dob.month.to_s,
           date_of_birth_1i: dob.year.to_s,

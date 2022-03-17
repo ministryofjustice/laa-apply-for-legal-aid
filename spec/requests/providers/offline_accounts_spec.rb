@@ -64,8 +64,8 @@ RSpec.describe 'providers offine accounts', type: :request do
     let(:params) do
       {
         savings_amount: {
-          offline_current_accounts: offline_current_accounts,
-          check_box_offline_current_accounts: check_box_offline_current_accounts,
+          offline_current_accounts:,
+          check_box_offline_current_accounts:,
         },
       }
     end

@@ -39,7 +39,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     let(:params) do
       {
         legal_aid_application: {
-          transaction_type_ids: transaction_type_ids,
+          transaction_type_ids:,
         },
       }
     end

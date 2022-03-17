@@ -6,7 +6,7 @@ module ProceedingMeritsTask
       let(:laa) { create :legal_aid_application }
       let(:other_laa) { create :legal_aid_application }
       let(:proceeding) { create :proceeding, :da001, legal_aid_application: laa }
-      let(:linked_child) { described_class.create(proceeding: proceeding, involved_child: involved_child) }
+      let(:linked_child) { described_class.create(proceeding:, involved_child:) }
 
       context 'involved child belongs to this application' do
         let(:involved_child) { create :involved_child, legal_aid_application: laa }

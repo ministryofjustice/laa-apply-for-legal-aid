@@ -43,7 +43,7 @@ RSpec.describe 'does client use online banking requests', type: :request do
     let(:params) do
       {
         legal_aid_application: {
-          provider_received_citizen_consent: provider_received_citizen_consent,
+          provider_received_citizen_consent:,
         },
       }
     end

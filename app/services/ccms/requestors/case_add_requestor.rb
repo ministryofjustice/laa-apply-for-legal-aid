@@ -278,7 +278,7 @@ module CCMS
         xml.__send__(:'common:Instances') do
           xml.__send__(:'common:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
           xml.__send__(:'common:Attributes') do
-            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party: other_party)
+            EntityAttributesGenerator.call(self, xml, config[:yaml_section], other_party:)
           end
         end
       end
@@ -341,7 +341,7 @@ module CCMS
       def generate_vehicle_instance(xml, vehicle, config)
         xml.__send__(:'common:Instances') do
           xml.__send__(:'common:InstanceLabel', config[:instance_label])
-          xml.__send__(:'common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle: vehicle) }
+          xml.__send__(:'common:Attributes') { EntityAttributesGenerator.call(self, xml, config[:yaml_section], vehicle:) }
         end
       end
 
@@ -360,7 +360,7 @@ module CCMS
             EntityAttributesGenerator.call(self,
                                            xml,
                                            config[:yaml_section],
-                                           proceeding: proceeding)
+                                           proceeding:)
           end
         end
       end
@@ -421,7 +421,7 @@ module CCMS
             EntityAttributesGenerator.call(self,
                                            xml,
                                            :proceeding_merits,
-                                           proceeding: proceeding,
+                                           proceeding:,
                                            opponent: @legal_aid_application.opponent,
                                            chances_of_success: proceeding.chances_of_success)
           end
@@ -437,7 +437,7 @@ module CCMS
       def generate_client_residing_person_instance(xml, dependant, index)
         xml.__send__(:'common:Instances') do
           xml.__send__(:'common:InstanceLabel', "the client's residing person#{index + 1}")
-          xml.__send__(:'common:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person, dependant: dependant) }
+          xml.__send__(:'common:Attributes') { EntityAttributesGenerator.call(self, xml, :client_residing_person, dependant:) }
         end
       end
 
@@ -451,7 +451,7 @@ module CCMS
         xml.__send__(:'common:Instances') do
           xml.__send__(:'common:InstanceLabel', "OPPONENT_#{other_party.generate_ccms_opponent_id}")
           xml.__send__(:'common:Attributes') do
-            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits, other_party: other_party)
+            EntityAttributesGenerator.call(self, xml, :opponent_other_parties_merits, other_party:)
           end
         end
       end

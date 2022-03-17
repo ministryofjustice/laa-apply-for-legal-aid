@@ -18,7 +18,7 @@ private
   def idp_authenticate(email, password)
     return unless config.password == password
 
-    user = Provider.find_by(email: email)
+    user = Provider.find_by(email:)
     return unless user
 
     user

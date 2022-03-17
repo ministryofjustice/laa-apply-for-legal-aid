@@ -46,8 +46,8 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     let(:params) do
       {
         savings_amount: {
-          applicant_bank_account: applicant_bank_account,
-          offline_savings_accounts: offline_savings_accounts,
+          applicant_bank_account:,
+          offline_savings_accounts:,
         },
       }
     end
@@ -55,7 +55,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     subject do
       patch(
         "/providers/applications/#{application_id}/applicant_bank_account",
-        params: params
+        params:
       )
     end
 

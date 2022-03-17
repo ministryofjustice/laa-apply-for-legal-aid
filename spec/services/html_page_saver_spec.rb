@@ -8,7 +8,7 @@ RSpec.describe HtmlPageSaver do
     let(:expected_html) { html.sub('"utf-8">', '"utf-8"><base href="http://localhost:3004" />') }
     let(:expected_file) { File.expand_path(file_path) }
 
-    subject { described_class.call(html: html, file_path: file_path, asset_host: asset_host) }
+    subject { described_class.call(html:, file_path:, asset_host:) }
 
     before { expect(File).to receive(:write).with(expected_file, expected_html, mode: 'wb') }
 

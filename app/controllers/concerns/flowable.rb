@@ -34,8 +34,8 @@ module Flowable
     def flow_service(flow_param = nil)
       Flow::BaseFlowService.flow_service_for(
         journey_type,
-        legal_aid_application: legal_aid_application,
-        current_step: current_step,
+        legal_aid_application:,
+        current_step:,
         params: flow_param
       )
     end

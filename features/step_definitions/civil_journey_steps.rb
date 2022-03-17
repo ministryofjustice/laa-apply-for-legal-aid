@@ -4,8 +4,8 @@ Given(/^I am logged in as a provider$/) do
   @registered_provider = create(:provider, username: 'test_provider')
   login_as @registered_provider
   firm = @registered_provider.firm
-  @registered_provider.offices << create(:office, firm: firm, code: 'London')
-  @registered_provider.offices << create(:office, firm: firm, code: 'Manchester')
+  @registered_provider.offices << create(:office, firm:, code: 'London')
+  @registered_provider.offices << create(:office, firm:, code: 'Manchester')
 end
 
 Given(/^I visit the application service$/) do
@@ -40,13 +40,13 @@ end
 Given('I have previously created multiple applications') do
   provider = create(:provider)
   create_list :legal_aid_application, 3, :with_non_passported_state_machine, provider: provider
-  create_list :legal_aid_application, 3, :with_passported_state_machine, :at_assessment_submitted, provider: provider
+  create_list :legal_aid_application, 3, :with_passported_state_machine, :at_assessment_submitted, provider:
   @legal_aid_application = create(
     :application,
     :with_everything,
     :with_passported_state_machine,
     :initiated,
-    provider: provider
+    provider:
   )
   login_as @legal_aid_application.provider
 end
@@ -407,13 +407,13 @@ Given('I complete the journey as far as check your answers') do
     city: 'London',
     postcode: 'SW1H 9EA',
     lookup_used: true,
-    applicant: applicant
+    applicant:
   )
   @legal_aid_application = create(
     :legal_aid_application,
     :at_entering_applicant_details,
     :with_proceedings,
-    applicant: applicant
+    applicant:
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -452,7 +452,7 @@ Given('I complete the passported journey as far as check your answers') do
     city: 'London',
     postcode: 'SW1H 9EA',
     lookup_used: true,
-    applicant: applicant
+    applicant:
   )
   @legal_aid_application = create(
     :legal_aid_application,
@@ -461,7 +461,7 @@ Given('I complete the passported journey as far as check your answers') do
     :with_proceedings,
     explicit_proceedings: [:da001],
     set_lead_proceeding: :da001,
-    applicant: applicant
+    applicant:
   )
   login_as @legal_aid_application.provider
 
@@ -509,14 +509,14 @@ Given('I complete the non-passported journey as far as check your answers') do
     city: 'London',
     postcode: 'SW1H 9EA',
     lookup_used: true,
-    applicant: applicant
+    applicant:
   )
   @legal_aid_application = create(
     :legal_aid_application,
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
     :with_proceedings,
-    applicant: applicant
+    applicant:
   )
 
   login_as @legal_aid_application.provider
@@ -540,7 +540,7 @@ Given('I complete the passported journey as far as capital check your answers') 
     city: 'London',
     postcode: 'SW1H 9EA',
     lookup_used: true,
-    applicant: applicant
+    applicant:
   )
   @legal_aid_application = create(
     :legal_aid_application,
@@ -548,7 +548,7 @@ Given('I complete the passported journey as far as capital check your answers') 
     :with_proceedings,
     :with_passported_state_machine,
     :provider_entering_means,
-    applicant: applicant
+    applicant:
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_passported_answers_path(@legal_aid_application))
@@ -570,7 +570,7 @@ Given('I complete the application and view the check your answers page') do
     city: 'London',
     postcode: 'SW1H 9EA',
     lookup_used: true,
-    applicant: applicant
+    applicant:
   )
 
   @legal_aid_application = create(
@@ -578,7 +578,7 @@ Given('I complete the application and view the check your answers page') do
     :with_non_passported_state_machine,
     :applicant_entering_means,
     :with_proceedings,
-    applicant: applicant,
+    applicant:,
     explicit_proceedings: [:da001],
     set_lead_proceeding: :da001
   )
@@ -693,7 +693,7 @@ Given('I click Check Your Answers Change link for dependant {string}') do |depen
 end
 
 Given('I click Check Your Merits Answers Change link for {string} for {string}') do |field_name, meaning|
-  proceeding = @legal_aid_application.proceedings.find_by(meaning: meaning)
+  proceeding = @legal_aid_application.proceedings.find_by(meaning:)
   field_name.downcase!
   field_name.gsub!(/\s+/, '_')
   within "#app-check-your-answers__#{proceeding.id}_#{field_name}" do

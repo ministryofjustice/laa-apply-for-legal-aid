@@ -19,7 +19,7 @@ RSpec.describe SubmitProviderReminderService, :vcr do
 
       it 'sends an email with the right parameters' do
         expect(mail.govuk_notify_personalisation).to eq(
-          application_url: application_url,
+          application_url:,
           ref_number: application.application_ref,
           client_name: application.applicant.full_name
         )

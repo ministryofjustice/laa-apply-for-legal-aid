@@ -11,8 +11,8 @@ class SubmitCitizenFinancialReminderMailer < BaseApplyMailer
     template_name :reminder_to_submit_financial_information_client
     set_personalisation(
       ref_number: application['application_ref'],
-      client_name: client_name,
-      application_url: application_url,
+      client_name:,
+      application_url:,
       expiry_date: url_expiry_date
     )
     mail(to: email)

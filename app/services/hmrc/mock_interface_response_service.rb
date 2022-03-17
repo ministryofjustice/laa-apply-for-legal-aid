@@ -36,7 +36,7 @@ module HMRC
     end
 
     def applicant_matched?
-      applicant_found = MATCHED.key({ first_name: first_name, last_name: last_name, nino: national_insurance_number, dob: date_of_birth.strftime('%Y-%m-%d') })
+      applicant_found = MATCHED.key({ first_name:, last_name:, nino: national_insurance_number, dob: date_of_birth.strftime('%Y-%m-%d') })
 
       return collate_response(applicant_found) unless applicant_found.nil?
     end

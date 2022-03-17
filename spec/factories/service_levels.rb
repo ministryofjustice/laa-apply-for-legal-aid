@@ -8,6 +8,6 @@ FactoryBot.define do
       name { 'Full Representation' }
     end
 
-    initialize_with { ServiceLevel.find_or_create_by(service_level_number: service_level_number) }
+    initialize_with { ServiceLevel.find_or_create_by(service_level_number:) }
   end
 end

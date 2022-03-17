@@ -8,7 +8,7 @@ module Admin
     end
 
     let(:dummy_provider_details_host) { 'http://my_dummy_url/' }
-    let(:provider) { Provider.new(username: username) }
+    let(:provider) { Provider.new(username:) }
     let(:api_url) { "#{dummy_provider_details_host}#{normalized_username}" }
     let(:normalized_username) { username.upcase.gsub(' ', '%20') }
     let(:username) { 'sarah smith' }
@@ -16,7 +16,7 @@ module Admin
 
     shared_examples 'service handling error conditions' do
       context 'user already exists in providers table' do
-        before { Provider.create(username: username) }
+        before { Provider.create(username:) }
         let(:response_body) { nil }
         let(:http_status) { nil }
 
@@ -130,12 +130,12 @@ module Admin
 
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
-            expect(Provider.exists?(username: username)).to be true
+            expect(Provider.exists?(username:)).to be true
           end
 
           it 'creates the firm linked to the provider' do
             expect { subject }.to change { Firm.count }.by(1)
-            provider = Provider.find_by(username: username)
+            provider = Provider.find_by(username:)
             firm = provider.firm
             expect(firm.ccms_id).to eq '24493'
           end
@@ -162,12 +162,12 @@ module Admin
 
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
-            expect(Provider.exists?(username: username)).to be true
+            expect(Provider.exists?(username:)).to be true
           end
 
           it 'links the provider to the firm' do
             expect { subject }.not_to change { Firm.count }
-            provider = Provider.find_by(username: username)
+            provider = Provider.find_by(username:)
             expect(provider.firm).to eq firm
           end
 
@@ -185,12 +185,12 @@ module Admin
 
           it 'creates the provider' do
             expect { subject }.to change { Provider.count }.by(1)
-            expect(Provider.exists?(username: username)).to be true
+            expect(Provider.exists?(username:)).to be true
           end
 
           it 'links the provider to the firm' do
             expect { subject }.not_to change { Firm.count }
-            provider = Provider.find_by(username: username)
+            provider = Provider.find_by(username:)
             expect(provider.firm).to eq firm
           end
 
@@ -207,7 +207,7 @@ module Admin
     end
 
     def create_office(firm, ccms_id, code)
-      Office.create(firm: firm, ccms_id: ccms_id, code: code)
+      Office.create(firm:, ccms_id:, code:)
     end
 
     def sarah_smith_response

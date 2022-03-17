@@ -21,7 +21,7 @@ module CFE
 
       bank_transactions.each do |transaction_type_id, array|
         name = TransactionType.find(transaction_type_id).name
-        type_hash = { name: name, payments: transactions(array) }
+        type_hash = { name:, payments: transactions(array) }
         result << type_hash
       end
       result

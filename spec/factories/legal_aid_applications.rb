@@ -28,7 +28,7 @@ FactoryBot.define do
     trait :with_non_passported_state_machine do
       before(:create) do |application|
         state_machine = FactoryBot.build(:non_passported_state_machine, legal_aid_application: application)
-        application.update!(state_machine: state_machine)
+        application.update!(state_machine:)
       end
       non_passported
     end
@@ -36,7 +36,7 @@ FactoryBot.define do
     trait :with_passported_state_machine do
       before(:create) do |application|
         state_machine = FactoryBot.build(:passported_state_machine, legal_aid_application: application)
-        application.update!(state_machine: state_machine)
+        application.update!(state_machine:)
       end
       passported
     end
@@ -495,7 +495,7 @@ FactoryBot.define do
 
     trait :with_attempts_to_settle do
       after(:create) do |application, _evaluator|
-        application.proceedings.each { |proceeding| create(:attempts_to_settles, proceeding: proceeding) }
+        application.proceedings.each { |proceeding| create(:attempts_to_settles, proceeding:) }
       end
     end
 
@@ -505,7 +505,7 @@ FactoryBot.define do
       end
       after(:create) do |application, evaluator|
         application.proceedings.each do |proceeding|
-          proceeding.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding: proceeding)
+          proceeding.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding:)
         end
       end
     end

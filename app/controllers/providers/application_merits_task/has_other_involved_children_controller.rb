@@ -23,7 +23,7 @@ module Providers
         @form ||= BinaryChoiceForm.call(
           journey: :provider,
           radio_buttons_input_name: :has_other_involved_child,
-          form_params: form_params
+          form_params:
         )
       end
 

@@ -18,7 +18,7 @@ RSpec.describe 'admin users omniauth call back', type: :request do
   before do
     OmniAuth.config.add_mock(
       :google_oauth2,
-      info: { email: email },
+      info: { email: },
       origin: target_url
     )
   end
