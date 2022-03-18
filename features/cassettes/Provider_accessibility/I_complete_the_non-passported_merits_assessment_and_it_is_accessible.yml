@@ -56,4 +56,60 @@ http_interactions:
       encoding: UTF-8
       string: '{"request_id":"3d273839-7e9b-430c-aed3-90e957d2f1ec","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
   recorded_at: Wed, 19 Jan 2022 09:31:16 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.apps.live-1.cloud-platform.service.justice.gov.uk/merits_tasks
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"784d8252-7ded-4d0f-bc06-0ca28e8554c1","proceeding_types":["DA001"]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 18 Mar 2022 15:45:23 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"4b5b60c7cd83f46a2971bda44c450019"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1d3cfb1b4ddd0fb214acc4fde218b2eb
+      X-Runtime:
+      - '0.037982'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"784d8252-7ded-4d0f-bc06-0ca28e8554c1","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Fri, 18 Mar 2022 15:45:22 GMT
+recorded_with: VCR 6.1.0
