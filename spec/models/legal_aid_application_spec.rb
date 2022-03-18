@@ -1308,8 +1308,8 @@ RSpec.describe LegalAidApplication, type: :model do
       end
     end
 
-    context 'evidence has been uploaded' do
-      it 'returns a hash of evidence filenames grouped by category' do
+    context "evidence has been uploaded" do
+      it "returns a hash of evidence filenames grouped by category" do
         deep_match(laa.uploaded_evidence_by_category, uploaded_evidence_output)
       end
     end

@@ -27,8 +27,8 @@ private
     categorised_bank_transactions.each do |transaction_type, txs|
       logger.info "#{transaction_type.name}:"
       txs.each do |tx|
-        logger.info sprintf('   %<date>s %<amount>.2f %<description>s',
-                            date: tx.happened_at.strftime('%F'),
+        logger.info sprintf("   %<date>s %<amount>.2f %<description>s",
+                            date: tx.happened_at.strftime("%F"),
                             amount: tx.amount,
                             description: tx.description)
       end
