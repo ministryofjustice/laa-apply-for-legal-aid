@@ -4,8 +4,8 @@ module FlowHelper
     method: :post,
     show_continue: true,
     show_draft: false,
-    continue_button_text: t('generic.save_and_continue'),
-    draft_button_text: t('generic.save_and_come_back_later')
+    continue_button_text: t("generic.save_and_continue"),
+    draft_button_text: t("generic.save_and_come_back_later")
   )
 
     form_with(model: nil, url:, method:, local: true) do |form|
@@ -24,12 +24,12 @@ module FlowHelper
     continue_id: :continue,
     show_continue: true,
     show_draft: false,
-    continue_button_text: t('generic.save_and_continue'),
-    draft_button_text: t('generic.save_and_come_back_later')
+    continue_button_text: t("generic.save_and_continue"),
+    draft_button_text: t("generic.save_and_come_back_later")
   )
 
     render(
-      'shared/forms/next_action_buttons',
+      "shared/forms/next_action_buttons",
       continue_id:,
       form:,
       show_continue:,
@@ -39,8 +39,8 @@ module FlowHelper
     )
   end
 
-  def next_action_link(continue_id: :continue, continue_text: t('generic.save_and_continue'), html_class: nil)
-    klasses = ['govuk-button', html_class].compact.join(' ')
+  def next_action_link(continue_id: :continue, continue_text: t("generic.save_and_continue"), html_class: nil)
+    klasses = ["govuk-button", html_class].compact.join(" ")
     link_to_accessible(continue_text, forward_path, id: continue_id, class: klasses)
   end
 end

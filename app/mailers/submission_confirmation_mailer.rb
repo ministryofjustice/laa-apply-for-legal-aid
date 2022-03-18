@@ -1,5 +1,5 @@
 class SubmissionConfirmationMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify(legal_aid_application_id, feedback_url)

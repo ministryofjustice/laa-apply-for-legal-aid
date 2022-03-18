@@ -16,6 +16,6 @@ class ApplicantAccountPresenter
   end
 
   def main_account_holder_address
-    main_account_holder&.addresses&.first&.values&.join(', ')
+    main_account_holder&.addresses&.first&.values&.join(", ")
   end
 end

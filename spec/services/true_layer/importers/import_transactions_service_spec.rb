@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:mock_account) { TrueLayerHelpers::MOCK_DATA[:accounts].first }
   let(:bank_account) { create :bank_account, true_layer_id: mock_account[:account_id] }
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
-  describe '#call' do
-    let(:now) { '6/11/2018'.to_datetime.beginning_of_day }
-    let(:now_minus_3_month) { '5/08/2018'.to_datetime.beginning_of_day }
+  describe "#call" do
+    let(:now) { "6/11/2018".to_datetime.beginning_of_day }
+    let(:now_minus_3_month) { "5/08/2018".to_datetime.beginning_of_day }
     let(:mock_transaction1) { mock_account[:transactions][0] }
     let(:mock_transaction2) { mock_account[:transactions][1] }
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
@@ -16,12 +16,12 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
     subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
 
-    context 'request is successful' do
+    context "request is successful" do
       before do
         stub_true_layer_transactions
       end
 
-      it 'adds the bank transactions to the bank_account' do
+      it "adds the bank transactions to the bank_account" do
         subject
         expect(transaction1.true_layer_response).to eq(mock_transaction1.deep_stringify_keys)
         expect(transaction1.true_layer_id).to eq(mock_transaction1[:transaction_id])
@@ -44,12 +44,12 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
         expect(transaction2.running_balance.to_s).to eq(mock_transaction2.dig(:running_balance, :amount).to_s)
       end
 
-      it 'removes existing transactions' do
+      it "removes existing transactions" do
         subject
         expect { existing_transaction.reload }.to raise_error ActiveRecord::RecordNotFound
       end
 
-      it 'requests 3 months of transactions' do
+      it "requests 3 months of transactions" do
         subject
 
         expected_request_url = [
@@ -59,22 +59,22 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
 
         expect(WebMock).to have_requested(:get, expected_request_url)
           .with(query: {
-            from: '2018-08-05T00:00:00Z',
-            to: '2018-11-06T00:00:00Z',
+            from: "2018-08-05T00:00:00Z",
+            to: "2018-11-06T00:00:00Z",
           })
       end
     end
 
-    context 'request is not successful' do
+    context "request is not successful" do
       before do
         stub_true_layer_error
       end
 
-      it 'does not change anything' do
+      it "does not change anything" do
         expect { subject }.not_to change { bank_account.bank_transactions.count }
       end
 
-      it 'returns an error' do
+      it "returns an error" do
         expect(subject.errors.keys.first).to eq(:import_transactions)
       end
     end

@@ -12,7 +12,7 @@ class IrregularIncome < ApplicationRecord
     }
   end
 
-  scope :student_finance, -> { where(income_type: 'student_loan') }
+  scope :student_finance, -> { where(income_type: "student_loan") }
 
   def label
     income_type.humanize

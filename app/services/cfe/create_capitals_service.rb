@@ -1,23 +1,23 @@
 module CFE
   class CreateCapitalsService < BaseService
     OTHER_ASSET_FIELDS = {
-      timeshare_property_value: 'Timeshare property',
-      land_value: 'Land',
-      valuable_items_value: 'Any valuable items worth more than £500',
-      inherited_assets_value: 'Money or assets from the estate of a person who has died',
-      money_owed_value: 'Money owed to applicant',
-      trust_value: 'Interest in a trust',
+      timeshare_property_value: "Timeshare property",
+      land_value: "Land",
+      valuable_items_value: "Any valuable items worth more than £500",
+      inherited_assets_value: "Money or assets from the estate of a person who has died",
+      money_owed_value: "Money owed to applicant",
+      trust_value: "Interest in a trust",
     }.freeze
 
     SAVINGS_AMOUNT_FIELDS = {
-      offline_current_accounts: 'Current accounts',
-      offline_savings_accounts: 'Savings accounts',
-      cash: 'Money not in a bank account',
+      offline_current_accounts: "Current accounts",
+      offline_savings_accounts: "Savings accounts",
+      cash: "Money not in a bank account",
       other_person_account: "Access to another person's bank account",
-      national_savings: 'ISAs, National Savings Certificates and Premium Bonds',
-      plc_shares: 'Shares in a public limited company',
-      peps_unit_trusts_capital_bonds_gov_stocks: 'PEPs, unit trusts, capital bonds and government stocks',
-      life_assurance_endowment_policy: 'Life assurance and endowment policies not linked to a mortgage',
+      national_savings: "ISAs, National Savings Certificates and Premium Bonds",
+      plc_shares: "Shares in a public limited company",
+      peps_unit_trusts_capital_bonds_gov_stocks: "PEPs, unit trusts, capital bonds and government stocks",
+      life_assurance_endowment_policy: "Life assurance and endowment policies not linked to a mortgage",
     }.freeze
 
     def cfe_url_path
@@ -57,7 +57,7 @@ module CFE
       return if legal_aid_application.online_current_accounts_balance.blank?
 
       {
-        description: 'Online current accounts',
+        description: "Online current accounts",
         value: legal_aid_application.online_current_accounts_balance,
       }
     end
@@ -66,7 +66,7 @@ module CFE
       return if legal_aid_application.online_savings_accounts_balance.blank?
 
       {
-        description: 'Online savings accounts',
+        description: "Online savings accounts",
         value: legal_aid_application.online_savings_accounts_balance,
       }
     end
@@ -91,8 +91,8 @@ module CFE
 
     def description_and_value(description, value)
       {
-        'description' => description,
-        'value' => value,
+        "description" => description,
+        "value" => value,
       }
     end
 

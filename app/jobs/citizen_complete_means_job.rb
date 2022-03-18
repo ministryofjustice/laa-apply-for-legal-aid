@@ -10,6 +10,6 @@ class CitizenCompleteMeansJob < ApplicationJob
 private
 
   def reminder_mailings
-    @legal_aid_application.scheduled_mailings.where(mailer_klass: 'SubmitCitizenFinancialReminderMailer')
+    @legal_aid_application.scheduled_mailings.where(mailer_klass: "SubmitCitizenFinancialReminderMailer")
   end
 end

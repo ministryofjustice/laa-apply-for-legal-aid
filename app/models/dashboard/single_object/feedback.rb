@@ -13,7 +13,7 @@ module Dashboard
         @feedback = feedback
         log_start_message
         @client = Geckoboard.client(Rails.configuration.x.geckoboard.api_key)
-        raise 'Unable to access Geckoboard' unless @client.ping
+        raise "Unable to access Geckoboard" unless @client.ping
       end
 
       def run
@@ -26,7 +26,7 @@ module Dashboard
         [
           {
             timestamp: @feedback.created_at,
-            type: @feedback.source ||= 'Unknown',
+            type: @feedback.source ||= "Unknown",
             difficulty_count: @feedback.difficulty_before_type_cast,
             difficulty_score: calculate_value_of(@feedback.difficulty),
             satisfaction_count: @feedback.satisfaction_before_type_cast,
@@ -50,12 +50,12 @@ module Dashboard
       def dataset_definition
         {
           fields: [
-            Geckoboard::DateTimeField.new(:timestamp, name: 'Time'),
-            Geckoboard::StringField.new(:type, name: 'Source'),
-            Geckoboard::NumberField.new(:difficulty_count, name: 'Difficulty count', optional: true),
-            Geckoboard::NumberField.new(:difficulty_score, name: 'Difficulty score', optional: true),
-            Geckoboard::NumberField.new(:satisfaction_count, name: 'Satisfaction count', optional: true),
-            Geckoboard::NumberField.new(:satisfaction_score, name: 'Satisfaction score', optional: true)
+            Geckoboard::DateTimeField.new(:timestamp, name: "Time"),
+            Geckoboard::StringField.new(:type, name: "Source"),
+            Geckoboard::NumberField.new(:difficulty_count, name: "Difficulty count", optional: true),
+            Geckoboard::NumberField.new(:difficulty_score, name: "Difficulty score", optional: true),
+            Geckoboard::NumberField.new(:satisfaction_count, name: "Satisfaction count", optional: true),
+            Geckoboard::NumberField.new(:satisfaction_score, name: "Satisfaction score", optional: true)
           ],
         }
       end

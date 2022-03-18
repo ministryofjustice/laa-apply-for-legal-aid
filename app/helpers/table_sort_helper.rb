@@ -30,12 +30,12 @@ module TableSortHelper
     combine_right = args.delete(:combine_right)
     sort_by = args.delete(:sort_by)
     content = args.delete(:content) || capture(&block)
-    merge_with_class! args, ['table-combine_right_if_narrow', "narrow_#{combine_right}"] if combine_right
+    merge_with_class! args, ["table-combine_right_if_narrow", "narrow_#{combine_right}"] if combine_right
     merge_with_class! args, %w[govuk-table__cell sortable-cell]
-    args['data-sort-value'] = sort_by.is_a?(Array) ? sort_by.join : sort_by
+    args["data-sort-value"] = sort_by.is_a?(Array) ? sort_by.join : sort_by
     if args.delete(:numeric)
-      merge_with_class! args, 'govuk-table__cell--numeric'
-      args['data-sort-type'] = 'number'
+      merge_with_class! args, "govuk-table__cell--numeric"
+      args["data-sort-type"] = "number"
     end
     content_tag :td, content, args
   end
@@ -60,15 +60,15 @@ module TableSortHelper
   def sort_column_th(type:, content:, combine_right: {}, currently_sorted: nil)
     combine_right_at = combine_right[:at]
     classes = %w[govuk-table__header sort] # sort enables function and wrapping th content in 'sortable-column' span
-    classes += ['table-combine_right_if_narrow', "narrow_#{combine_right_at}"] if combine_right_at
-    classes << 'govuk-table__header--numeric' if type == :numeric
+    classes += ["table-combine_right_if_narrow", "narrow_#{combine_right_at}"] if combine_right_at
+    classes << "govuk-table__header--numeric" if type == :numeric
     classes << "header-sort-#{currently_sorted}" if currently_sorted
 
-    content_tag(:th, role: 'columnheader', scope: 'col', 'data-sort-type': type, class: classes) do
-      content_tag(:span, class: 'aria-sort-description') { content } +
+    content_tag(:th, role: "columnheader", scope: "col", 'data-sort-type': type, class: classes) do
+      content_tag(:span, class: "aria-sort-description") { content } +
         sort_span_combine_right(combine_right) +
-        tag.br(class: 'hidden') +
-        content_tag(:span, ', button', class: 'govuk-visually-hidden') +
+        tag.br(class: "hidden") +
+        content_tag(:span, ", button", class: "govuk-visually-hidden") +
         simple_span_sort_indicator
     end
   end
@@ -76,14 +76,14 @@ module TableSortHelper
   def simple_span_sort_indicator
     content_tag(
       :span,
-      '',
-      class: 'sort-direction-indicator'
+      "",
+      class: "sort-direction-indicator"
     )
   end
 
   def sort_span_combine_right(options = {})
-    return '' if options.empty?
+    return "" if options.empty?
 
-    content_tag :span, " #{options[:append]}", class: 'table-hidden_right_title'
+    content_tag :span, " #{options[:append]}", class: "table-hidden_right_title"
   end
 end

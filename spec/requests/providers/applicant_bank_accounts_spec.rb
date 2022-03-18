@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   let(:applicant) { create :applicant }
@@ -9,30 +9,30 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   let(:application_id) { legal_aid_application.id }
   let!(:provider) { legal_aid_application.provider }
 
-  describe 'GET providers/:application_id/applicant_bank_account' do
+  describe "GET providers/:application_id/applicant_bank_account" do
     subject { get providers_legal_aid_application_applicant_bank_account_path(legal_aid_application.id) }
 
-    context 'when the provider is not authenticated' do
+    context "when the provider is not authenticated" do
       before { subject }
-      it_behaves_like 'a provider not authenticated'
+      it_behaves_like "a provider not authenticated"
     end
 
-    context 'when the provider is authenticated' do
+    context "when the provider is authenticated" do
       before do
         login_as provider
         subject
       end
 
-      it 'returns http success' do
+      it "returns http success" do
         expect(response).to have_http_status(:success)
       end
 
-      it 'displays the correct page content' do
-        expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.heading'))
-        expect(unescaped_response_body).to include(I18n.t('providers.applicant_bank_accounts.show.offline_savings_accounts'))
+      it "displays the correct page content" do
+        expect(unescaped_response_body).to include(I18n.t("providers.applicant_bank_accounts.show.heading"))
+        expect(unescaped_response_body).to include(I18n.t("providers.applicant_bank_accounts.show.offline_savings_accounts"))
       end
 
-      it 'shows the client bank account name and balance' do
+      it "shows the client bank account name and balance" do
         subject
         expect(unescaped_response_body).to include(bank_provider.name)
         expect(response.body).to include(bank_account.balance.to_s(:delimited))
@@ -40,8 +40,8 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     end
   end
 
-  describe 'PATCH /providers/applications/:application_id/applicant_bank_account' do
-    let(:applicant_bank_account) { 'false' }
+  describe "PATCH /providers/applications/:application_id/applicant_bank_account" do
+    let(:applicant_bank_account) { "false" }
     let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
     let(:params) do
       {
@@ -59,63 +59,63 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       )
     end
 
-    context 'the provider is authenticated' do
+    context "the provider is authenticated" do
       before do
         login_as provider
         subject
       end
 
-      context 'neither option is chosen' do
+      context "neither option is chosen" do
         let(:applicant_bank_account) { nil }
 
-        it 'shows an error' do
-          expect(unescaped_response_body).to include(I18n.t('errors.applicant_bank_accounts.blank'))
+        it "shows an error" do
+          expect(unescaped_response_body).to include(I18n.t("errors.applicant_bank_accounts.blank"))
         end
       end
 
-      context 'The NO option is chosen' do
-        let(:applicant_bank_account) { 'false' }
+      context "The NO option is chosen" do
+        let(:applicant_bank_account) { "false" }
 
-        it 'redirects to the savings and investments page' do
+        it "redirects to the savings and investments page" do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
         end
 
-        context 'savings amount is not nil' do
-          let(:offline_savings_accounts) { '' }
+        context "savings amount is not nil" do
+          let(:offline_savings_accounts) { "" }
 
-          it 'resets the account balance to nil for offline savings account' do
+          it "resets the account balance to nil for offline savings account" do
             expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to be_nil
           end
         end
       end
 
-      context 'The YES option is chosen' do
-        let(:applicant_bank_account) { 'true' }
+      context "The YES option is chosen" do
+        let(:applicant_bank_account) { "true" }
 
-        context 'no amount is entered' do
-          let(:offline_savings_accounts) { '' }
+        context "no amount is entered" do
+          let(:offline_savings_accounts) { "" }
 
-          it 'displays the correct error' do
-            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.blank'))
+          it "displays the correct error" do
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.blank"))
           end
         end
 
-        context 'an invalid input is entered' do
-          let(:offline_savings_accounts) { 'abc' }
+        context "an invalid input is entered" do
+          let(:offline_savings_accounts) { "abc" }
 
-          it 'displays the correct error' do
-            expect(unescaped_response_body).to include(I18n.t('activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.not_a_number'))
+          it "displays the correct error" do
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.offline_savings_accounts.not_a_number"))
           end
         end
 
-        context 'a valid savings amount is entered' do
+        context "a valid savings amount is entered" do
           let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
 
-          it 'updates the savings amount' do
+          it "updates the savings amount" do
             expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts.to_s))
           end
 
-          it 'redirects to the savings and investments page' do
+          it "redirects to the savings and investments page" do
             expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
           end
         end

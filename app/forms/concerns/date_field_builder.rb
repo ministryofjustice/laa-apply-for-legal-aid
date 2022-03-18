@@ -80,7 +80,7 @@ class DateFieldBuilder
   end
 
   def input_field_values
-    [''] + from_form
+    [""] + from_form
   end
 
 private
@@ -101,9 +101,9 @@ private
     when 4
       year
     when 2
-      year > Time.current.strftime('%y') ? "19#{year}" : "20#{year}"
+      year > Time.current.strftime("%y") ? "19#{year}" : "20#{year}"
     else
-      raise YearError, 'Year is incorrect length'
+      raise YearError, "Year is incorrect length"
     end
   end
 end

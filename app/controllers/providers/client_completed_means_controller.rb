@@ -12,7 +12,7 @@ module Providers
 
     def define_action_list
       @action_list = %w[sort_transactions dependants capital]
-      @action_list.prepend('review_employment') if @legal_aid_application.applicant.employed?
+      @action_list.prepend("review_employment") if @legal_aid_application.applicant.employed?
     end
   end
 end

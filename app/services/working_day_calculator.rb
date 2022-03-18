@@ -16,7 +16,7 @@ class WorkingDayCalculator
   attr_reader :date
 
   def initialize(date)
-    raise ParameterError, 'No date present' unless date
+    raise ParameterError, "No date present" unless date
 
     @date = date
   end

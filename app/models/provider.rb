@@ -12,7 +12,7 @@ class Provider < ApplicationRecord
   has_many :permissions, through: :actor_permissions
 
   after_create do
-    ActiveSupport::Notifications.instrument 'dashboard.provider_updated', provider_id: id
+    ActiveSupport::Notifications.instrument "dashboard.provider_updated", provider_id: id
   end
 
   delegate :name, to: :firm, prefix: true, allow_nil: true
@@ -38,23 +38,23 @@ class Provider < ApplicationRecord
   end
 
   def passported_permissions?
-    user_permissions.map(&:role).include?('application.passported.*')
+    user_permissions.map(&:role).include?("application.passported.*")
   end
 
   def non_passported_permissions?
-    user_permissions.map(&:role).include?('application.non_passported.*')
+    user_permissions.map(&:role).include?("application.non_passported.*")
   end
 
   def employment_permissions?
-    user_permissions.map(&:role).include?('application.non_passported.employment.*')
+    user_permissions.map(&:role).include?("application.non_passported.employment.*")
   end
 
   def ccms_apply_role?
-    return true if Rails.configuration.x.laa_portal.mock_saml == 'true'
+    return true if Rails.configuration.x.laa_portal.mock_saml == "true"
 
     return false if roles.nil?
 
-    roles.split(',').include?('CCMS_Apply')
+    roles.split(",").include?("CCMS_Apply")
   end
 
   def invalid_login?
@@ -66,7 +66,7 @@ class Provider < ApplicationRecord
   end
 
   def provider_details_api_error?
-    invalid_login_details == 'provider_details_api_error'
+    invalid_login_details == "provider_details_api_error"
   end
 
   def clear_invalid_login!

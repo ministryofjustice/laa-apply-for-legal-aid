@@ -1,1 +1,1 @@
-require 'geckoboard'
+require "geckoboard"

@@ -1,21 +1,21 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Dependant, type: :model do
   let(:calculation_date) { Date.current }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, date_of_birth: date_of_birth }
 
-  describe '#ordinal_number' do
-    it 'returns the correct ordinal_number' do
-      expect(described_class.new(number: 1).ordinal_number).to eq('first')
-      expect(described_class.new(number: 5).ordinal_number).to eq('fifth')
-      expect(described_class.new(number: 9).ordinal_number).to eq('ninth')
-      expect(described_class.new(number: 10).ordinal_number).to eq('10th')
+  describe "#ordinal_number" do
+    it "returns the correct ordinal_number" do
+      expect(described_class.new(number: 1).ordinal_number).to eq("first")
+      expect(described_class.new(number: 5).ordinal_number).to eq("fifth")
+      expect(described_class.new(number: 9).ordinal_number).to eq("ninth")
+      expect(described_class.new(number: 10).ordinal_number).to eq("10th")
     end
   end
 
-  describe '#as_json' do
-    context 'dependant has nil values' do
+  describe "#as_json" do
+    context "dependant has nil values" do
       let(:dependant) do
         create :dependant,
                date_of_birth: Date.new(2019, 3, 2),
@@ -28,180 +28,180 @@ RSpec.describe Dependant, type: :model do
       end
       let(:expected_hash) do
         {
-          date_of_birth: '2019-03-02',
+          date_of_birth: "2019-03-02",
           in_full_time_education: false,
-          relationship: 'child_relative',
+          relationship: "child_relative",
           monthly_income: 0.0,
           assets_value: 0.0,
         }
       end
 
-      it 'returns the expected hash' do
+      it "returns the expected hash" do
         expect(dependant.as_json).to eq expected_hash
       end
     end
 
-    context 'dependant has values' do
+    context "dependant has values" do
       let(:dependant) do
         create :dependant,
                date_of_birth: Date.new(2019, 3, 2),
                in_full_time_education: true,
                has_assets_more_than_threshold: false,
                has_income: true,
-               relationship: 'adult_relative',
+               relationship: "adult_relative",
                monthly_income: 123.45,
                assets_value: 6789.0
       end
       let(:expected_hash) do
         {
-          date_of_birth: '2019-03-02',
+          date_of_birth: "2019-03-02",
           in_full_time_education: true,
-          relationship: 'adult_relative',
+          relationship: "adult_relative",
           monthly_income: 123.45,
           assets_value: 6789.0,
         }
       end
 
-      it 'returns the expected hash' do
+      it "returns the expected hash" do
         expect(dependant.as_json).to eq expected_hash
       end
     end
   end
 
-  describe '#over_fifteen?' do
-    context 'Less than 15 years old' do
+  describe "#over_fifteen?" do
+    context "Less than 15 years old" do
       let(:date_of_birth) { 10.years.ago }
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.over_fifteen?).to eq(false)
       end
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.sixteen_or_over?).to eq(false)
       end
     end
 
-    context 'more than 15 years old' do
+    context "more than 15 years old" do
       let(:date_of_birth) { 20.years.ago }
 
-      it 'returns true' do
+      it "returns true" do
         expect(dependant.over_fifteen?).to eq(true)
       end
 
-      it 'returns true' do
+      it "returns true" do
         expect(dependant.sixteen_or_over?).to eq(true)
       end
     end
 
-    context '15 and a half years old' do
+    context "15 and a half years old" do
       let(:date_of_birth) { 15.years.ago + 6.months }
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.over_fifteen?).to eq(false)
       end
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.sixteen_or_over?).to eq(false)
       end
     end
 
-    context '14 and a half years old' do
+    context "14 and a half years old" do
       let(:date_of_birth) { 15.years.ago - 6.months }
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.over_fifteen?).to eq(false)
       end
     end
   end
 
-  describe '#eighteen_or_less?' do
-    context 'Less than 18 years old' do
+  describe "#eighteen_or_less?" do
+    context "Less than 18 years old" do
       let(:date_of_birth) { 10.years.ago }
 
-      it 'returns true' do
+      it "returns true" do
         expect(dependant.eighteen_or_less?).to eq(true)
       end
     end
 
-    context 'more than 18 years old' do
+    context "more than 18 years old" do
       let(:date_of_birth) { 20.years.ago }
 
-      it 'returns false' do
+      it "returns false" do
         expect(dependant.eighteen_or_less?).to eq(false)
       end
     end
 
-    context '18 and a half years old' do
+    context "18 and a half years old" do
       let(:date_of_birth) { 18.years.ago + 6.months }
 
-      it 'returns true' do
+      it "returns true" do
         expect(dependant.eighteen_or_less?).to eq(true)
       end
     end
 
-    context '17 and a half years old' do
+    context "17 and a half years old" do
       let(:date_of_birth) { 18.years.ago - 6.months }
 
-      it 'returns true' do
+      it "returns true" do
         expect(dependant.eighteen_or_less?).to eq(true)
       end
     end
   end
 
-  describe 'ccms_relationship_to_client' do
+  describe "ccms_relationship_to_client" do
     let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, relationship: relationship, date_of_birth: dob }
 
-    context 'adult relative' do
-      let(:relationship) { 'adult_relative' }
+    context "adult relative" do
+      let(:relationship) { "adult_relative" }
       let(:dob) { 20.years.ago }
 
-      it 'returns adult relative' do
-        expect(dependant.ccms_relationship_to_client).to eq 'Dependant adult'
+      it "returns adult relative" do
+        expect(dependant.ccms_relationship_to_client).to eq "Dependant adult"
       end
     end
 
-    context 'child aged fifteen or less' do
-      let(:relationship) { 'child_relative' }
+    context "child aged fifteen or less" do
+      let(:relationship) { "child_relative" }
       let(:dob) { 13.years.ago }
 
-      it 'returns adult relative' do
-        expect(dependant.ccms_relationship_to_client).to eq 'Child aged 15 and under'
+      it "returns adult relative" do
+        expect(dependant.ccms_relationship_to_client).to eq "Child aged 15 and under"
       end
     end
 
-    context 'child aged sixteen or more' do
-      let(:relationship) { 'child_relative' }
+    context "child aged sixteen or more" do
+      let(:relationship) { "child_relative" }
       let(:dob) { 17.years.ago }
 
-      it 'returns adult relative' do
-        expect(dependant.ccms_relationship_to_client).to eq 'Child aged 16 and over'
+      it "returns adult relative" do
+        expect(dependant.ccms_relationship_to_client).to eq "Child aged 16 and over"
       end
     end
   end
 
-  describe 'assets_over_threshold?' do
+  describe "assets_over_threshold?" do
     subject(:assets_over_threshold) { dependant.assets_over_threshold? }
     let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, assets_value: assets_value }
 
-    context 'when assets_value is nil' do
+    context "when assets_value is nil" do
       let(:assets_value) { nil }
 
       it { is_expected.to be false }
     end
 
-    context 'when assets_value is below threshold' do
+    context "when assets_value is below threshold" do
       let(:assets_value) { 7999.99 }
 
       it { is_expected.to be false }
     end
 
-    context 'when assets_value is on threshold' do
+    context "when assets_value is on threshold" do
       let(:assets_value) { 8000 }
 
       it { is_expected.to be false }
     end
 
-    context 'when assets_value is above threshold' do
+    context "when assets_value is above threshold" do
       let(:assets_value) { 8000.01 }
 
       it { is_expected.to be true }

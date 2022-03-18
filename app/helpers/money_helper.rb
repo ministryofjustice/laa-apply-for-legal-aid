@@ -4,7 +4,7 @@ module MoneyHelper
   end
 
   def number_to_currency_or_original_string(value)
-    value.is_a?(String) ? value : gds_number_to_currency(value, unit: '')
+    value.is_a?(String) ? value : gds_number_to_currency(value, unit: "")
   end
 
   def gds_number_to_currency(value, opts = {})

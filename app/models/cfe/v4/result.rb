@@ -341,7 +341,7 @@ module CFE
 
       def min_threshold(proceeding_types_array, threshold_method)
         threshold = proceeding_types_array.map { |pt| pt[threshold_method] }.min
-        threshold == MAX_VALUE ? 'N/a' : threshold
+        threshold == MAX_VALUE ? "N/a" : threshold
       end
 
       def monthly_income_equivalents
@@ -362,7 +362,7 @@ module CFE
       end
 
       def elig_yes_no(result)
-        result == 'ineligible' ? I18n.t('generic.no') : I18n.t('generic.yes')
+        result == "ineligible" ? I18n.t("generic.no") : I18n.t("generic.yes")
       end
     end
   end

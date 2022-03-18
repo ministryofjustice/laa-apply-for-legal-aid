@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'check your answers requests', type: :request do
+RSpec.describe "check your answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: firm }
@@ -32,25 +32,25 @@ RSpec.describe 'check your answers requests', type: :request do
 
   before { get citizens_legal_aid_application_path(secure_id) }
 
-  describe 'GET /citizens/check_answers' do
-    subject { get '/citizens/check_answers' }
+  describe "GET /citizens/check_answers" do
+    subject { get "/citizens/check_answers" }
     before { subject }
 
-    it 'returns http success' do
+    it "returns http success" do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'displays the correct section headings' do
-      expect(response.body).to include('Your bank accounts')
-      expect(response.body).to include('Payments you receive')
-      expect(response.body).to include('Payments you receive in cash')
-      expect(response.body).to include('Payments you make')
-      expect(response.body).to include('Payments you make in cash')
-      expect(response.body).to include('Do you get student finance?')
-      expect(response.body).to include('How much student finance will you get this academic year?')
+    it "displays the correct section headings" do
+      expect(response.body).to include("Your bank accounts")
+      expect(response.body).to include("Payments you receive")
+      expect(response.body).to include("Payments you receive in cash")
+      expect(response.body).to include("Payments you make")
+      expect(response.body).to include("Payments you make in cash")
+      expect(response.body).to include("Do you get student finance?")
+      expect(response.body).to include("How much student finance will you get this academic year?")
     end
 
-    it 'displays the correct URLs for changing values' do
+    it "displays the correct URLs for changing values" do
       expect(response.body).to have_change_link(:incomings, citizens_identify_types_of_income_path)
       expect(response.body).to have_change_link(:payments, citizens_identify_types_of_outgoing_path)
     end
@@ -59,61 +59,61 @@ RSpec.describe 'check your answers requests', type: :request do
       expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
     end
 
-    it 'displays the name of the firm' do
+    it "displays the name of the firm" do
       subject
       expect(response.body).to include(html_compare(firm.name))
     end
 
-    context 'firms with special characters in the name' do
+    context "firms with special characters in the name" do
       let(:firm) { create :firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!") }
 
-      it 'finds the firm even though it has special characters' do
+      it "finds the firm even though it has special characters" do
         subject
         expect(response.body).to include(html_compare(firm.name))
       end
     end
   end
 
-  describe 'PATCH /citizens/check_answers/continue' do
-    subject { patch '/citizens/check_answers/continue' }
+  describe "PATCH /citizens/check_answers/continue" do
+    subject { patch "/citizens/check_answers/continue" }
 
     before do
       legal_aid_application.check_citizen_answers!
     end
 
-    it 'redirects to next step' do
+    it "redirects to next step" do
       subject
       expect(response).to redirect_to(flow_forward_path)
     end
 
-    it 'changes the state' do
+    it "changes the state" do
       expect { subject }.to change { legal_aid_application.reload.state }
     end
 
-    it 'sets the application state to analysing_bank_transactions' do
+    it "sets the application state to analysing_bank_transactions" do
       subject
-      expect(legal_aid_application.reload.state).to eq 'analysing_bank_transactions'
+      expect(legal_aid_application.reload.state).to eq "analysing_bank_transactions"
       expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
-    it 'changes the provider step to start_chances_of_success' do
+    it "changes the provider step to start_chances_of_success" do
       subject
-      expect(legal_aid_application.reload.provider_step).to eq('client_completed_means')
+      expect(legal_aid_application.reload.provider_step).to eq("client_completed_means")
     end
 
-    it 'records when the declaration was accepted' do
+    it "records when the declaration was accepted" do
       subject
       expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
     end
 
-    it 'syncs the application' do
+    it "syncs the application" do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       subject
     end
   end
 
-  describe 'PATCH /citizens/check_answers/reset' do
-    subject { patch '/citizens/check_answers/reset' }
+  describe "PATCH /citizens/check_answers/reset" do
+    subject { patch "/citizens/check_answers/reset" }
 
     before do
       legal_aid_application.check_citizen_answers!
@@ -122,7 +122,7 @@ RSpec.describe 'check your answers requests', type: :request do
       subject
     end
 
-    it 'should redirect back' do
+    it "should redirect back" do
       expect(response).to redirect_to(citizens_identify_types_of_outgoing_path(back: true))
     end
 

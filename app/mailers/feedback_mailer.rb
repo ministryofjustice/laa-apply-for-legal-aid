@@ -1,5 +1,5 @@
 class FeedbackMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify(feedback_id, legal_aid_application_id, to = support_email_address)
@@ -18,14 +18,14 @@ private
       user_data: user_data(feedback),
       user_type: feedback.source,
       done_all_needed: yes_or_no(feedback),
-      satisfaction: safe_nil(get_translation('satisfaction', feedback.satisfaction)),
-      difficulty: safe_nil(get_translation('difficulty', feedback.difficulty)),
+      satisfaction: safe_nil(get_translation("satisfaction", feedback.satisfaction)),
+      difficulty: safe_nil(get_translation("difficulty", feedback.difficulty)),
       improvement_suggestion: safe_nil(feedback.improvement_suggestion),
       originating_page: safe_nil(feedback.originating_page),
       provider_email: provider_email_phrase(feedback),
-      application_reference: @legal_aid_application&.application_ref || '',
-      application_status: application_status || '',
-      non_live_env: non_live_environment? ? '- non-live' : ''
+      application_reference: @legal_aid_application&.application_ref || "",
+      application_status: application_status || "",
+      non_live_env: non_live_environment? ? "- non-live" : ""
     )
   end
 
@@ -34,10 +34,10 @@ private
   end
 
   def application_status
-    return '' if @legal_aid_application.nil?
-    return 'pre-dwp-check' if @legal_aid_application&.pre_dwp_check?
+    return "" if @legal_aid_application.nil?
+    return "pre-dwp-check" if @legal_aid_application&.pre_dwp_check?
 
-    @legal_aid_application&.passported? ? 'passported' : 'non-passported'
+    @legal_aid_application&.passported? ? "passported" : "non-passported"
   end
 
   def legal_aid_application(legal_aid_application_id)
@@ -49,7 +49,7 @@ private
   end
 
   def yes_or_no(feedback)
-    feedback['done_all_needed'] == true ? 'Yes' : 'No'
+    feedback["done_all_needed"] == true ? "Yes" : "No"
   end
 
   def non_live_environment?
@@ -57,7 +57,7 @@ private
   end
 
   def provider_email_phrase(feedback)
-    return '' if feedback.email.nil?
+    return "" if feedback.email.nil?
 
     "from #{feedback.email}"
   end

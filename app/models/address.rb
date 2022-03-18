@@ -10,23 +10,23 @@ class Address < ApplicationRecord
 
   def self.from_json(json)
     attrs = JSON.parse(json)
-    new(attrs.slice('address_line_one', 'address_line_two', 'city', 'county', 'postcode', 'lookup_id'))
+    new(attrs.slice("address_line_one", "address_line_two", "city", "county", "postcode", "lookup_id"))
   end
 
   def full_address
-    [address_line_one, address_line_two, city, county, postcode].compact.compact_blank.join(', ')
+    [address_line_one, address_line_two, city, county, postcode].compact.compact_blank.join(", ")
   end
 
   def pretty_postcode
-    pretty_postcode? ? postcode : postcode.insert(-4, ' ')
+    pretty_postcode? ? postcode : postcode.insert(-4, " ")
   end
 
   def pretty_postcode?
-    postcode[-4] == ' '
+    postcode[-4] == " "
   end
 
   def first_lines
-    [address_line_one, address_line_two].select(&:present?).join(' ')
+    [address_line_one, address_line_two].select(&:present?).join(" ")
   end
 
   def to_json(*_args)
@@ -51,7 +51,7 @@ private
   def normalize_postcode
     return if postcode.blank?
 
-    postcode.delete!(' ')
+    postcode.delete!(" ")
     postcode.upcase!
   end
 end

@@ -5,7 +5,7 @@ module CFEResults
         submission { create :cfe_submission }
         legal_aid_application { submission.legal_aid_application }
         result { CFEResults::V3::MockResults.eligible.to_json }
-        type { 'CFE::V3::Result' }
+        type { "CFE::V3::Result" }
 
         trait :eligible do
           result { CFEResults::V3::MockResults.eligible.to_json }

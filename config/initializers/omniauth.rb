@@ -1,6 +1,6 @@
 Rails.application.reloader.to_prepare do
-  require Rails.root.join 'app/lib/omni_auth/omni_auth_true_layer'
-  require Rails.root.join 'app/controllers/applicants/omniauth_callbacks_controller.rb'
+  require Rails.root.join "app/lib/omni_auth/omni_auth_true_layer"
+  require Rails.root.join "app/controllers/applicants/omniauth_callbacks_controller.rb"
 end
 
 OmniAuth.config.allowed_request_methods = %i[post get]
@@ -20,7 +20,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :true_layer,
     Rails.configuration.x.true_layer.client_id,
     Rails.configuration.x.true_layer.client_secret,
-    scope: 'info accounts balance transactions'
+    scope: "info accounts balance transactions"
   )
   provider(
     :google_oauth2,

@@ -92,10 +92,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
           forward: ->(application, dwp_override_non_passported) do
             if application.applicant_receives_benefit?
-              application.change_state_machine_type('PassportedStateMachine')
+              application.change_state_machine_type("PassportedStateMachine")
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
             else
-              application.change_state_machine_type('NonPassportedStateMachine')
+              application.change_state_machine_type("NonPassportedStateMachine")
               dwp_override_non_passported ? :confirm_dwp_non_passported_applications : :applicant_employed
             end
           end,

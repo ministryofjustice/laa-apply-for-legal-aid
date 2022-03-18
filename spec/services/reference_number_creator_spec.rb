@@ -1,17 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ReferenceNumberCreator do
   subject { described_class.new }
 
-  describe '#call' do
-    it 'matches the regex' do
+  describe "#call" do
+    it "matches the regex" do
       expect(subject.call).to match(/L(-[ABCDEFHJKLMNPRTUVWXY0-9]{3}){2}/)
     end
 
-    context 'first generated numbers are taken' do
-      let(:existing_reference_number) { 'L-AAA-AAA' }
-      let(:other_existing_reference_number) { 'L-BBB-BBB' }
-      let(:third_reference_number) { 'L-CCC-CCC' }
+    context "first generated numbers are taken" do
+      let(:existing_reference_number) { "L-AAA-AAA" }
+      let(:other_existing_reference_number) { "L-BBB-BBB" }
+      let(:third_reference_number) { "L-CCC-CCC" }
       let!(:legal_aid_application) { create :legal_aid_application, application_ref: existing_reference_number }
       let!(:other_legal_aid_application) { create :legal_aid_application, application_ref: other_existing_reference_number }
 
@@ -25,7 +25,7 @@ RSpec.describe ReferenceNumberCreator do
           )
       end
 
-      it 'generates another number' do
+      it "generates another number" do
         expect(subject.call).to eq(third_reference_number)
       end
     end

@@ -45,7 +45,7 @@ module Providers
 
       def redirect_to_auth_error_path
         begin
-          raise AuthController::AuthorizationError, 'Provider not authorised'
+          raise AuthController::AuthorizationError, "Provider not authorised"
         rescue StandardError => e
           AlertManager.capture_exception(e)
         end
@@ -60,7 +60,7 @@ module Providers
         return if current_provider.portal_enabled?
 
         begin
-          raise AuthController::AuthorizationError, 'Provider not enabled on the portal'
+          raise AuthController::AuthorizationError, "Provider not enabled on the portal"
         rescue StandardError => e
           AlertManager.capture_exception(e)
         end

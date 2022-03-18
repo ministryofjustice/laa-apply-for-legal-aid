@@ -1,5 +1,5 @@
 class CitizenCompletedMeansMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify_provider(application_id, provider_name, applicant_name, application_url, to = support_email_address)

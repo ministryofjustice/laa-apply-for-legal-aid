@@ -1,19 +1,19 @@
-require Rails.root.join('spec/factory_helpers/hmrc_response/use_case_one.rb')
+require Rails.root.join("spec/factory_helpers/hmrc_response/use_case_one.rb")
 
 module HMRC
   FactoryBot.define do
     factory :hmrc_response, class: HMRC::Response do
       legal_aid_application
       submission_id { SecureRandom.uuid }
-      use_case { 'one' }
+      use_case { "one" }
 
       trait :use_case_one do
-        use_case { 'one' }
+        use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id).response }
       end
 
       trait :use_case_two do
-        use_case { 'two' }
+        use_case { "two" }
       end
 
       trait :in_progress do
@@ -22,12 +22,12 @@ module HMRC
       end
 
       trait :example1_usecase1 do
-        use_case { 'one' }
+        use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :example1_usecase1).response }
       end
 
       trait :multiple_employments_usecase1 do
-        use_case { 'one' }
+        use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :multiple_employments_usecase1).response }
       end
     end

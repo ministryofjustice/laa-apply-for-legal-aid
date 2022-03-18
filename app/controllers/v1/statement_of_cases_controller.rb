@@ -1,7 +1,7 @@
 module V1
   class StatementOfCasesController < ApiController
     include MalwareScanning
-    ATTACHMENT_TYPE = 'statement_of_case'.freeze
+    ATTACHMENT_TYPE = "statement_of_case".freeze
 
     def create
       return head :not_found unless legal_aid_application
@@ -26,7 +26,7 @@ module V1
     end
 
     def error_path
-      'application_merits_task/statement_of_case'
+      "application_merits_task/statement_of_case"
     end
 
     def legal_aid_application

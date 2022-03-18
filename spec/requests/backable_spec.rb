@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Backable', :vcr, type: :request do
+RSpec.describe "Backable", :vcr, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant }
 
   before { login_as application.provider }
@@ -13,16 +13,16 @@ RSpec.describe 'Backable', :vcr, type: :request do
     {
       address:
       {
-        address_line_one: '123',
-        address_line_two: 'High Street',
-        city: 'London',
-        county: 'Greater London',
-        postcode: 'SW1H 9AJ',
+        address_line_one: "123",
+        address_line_two: "High Street",
+        city: "London",
+        county: "Greater London",
+        postcode: "SW1H 9AJ",
       },
     }
   end
 
-  describe 'back_path' do
+  describe "back_path" do
     before do
       get page1
       get page2
@@ -30,28 +30,28 @@ RSpec.describe 'Backable', :vcr, type: :request do
       get page3
     end
 
-    it 'has a back link to the previous page' do
+    it "has a back link to the previous page" do
       expect(response.body).to have_back_link("#{page2}&back=true")
     end
 
-    context 'we reload the current page several times' do
+    context "we reload the current page several times" do
       before do
         get page3
         get page3
       end
 
-      it 'has a back link to the previous page' do
+      it "has a back link to the previous page" do
         expect(response.body).to have_back_link("#{page2}&back=true")
       end
     end
 
-    context 'we go back once' do
-      it 'redirects to same page without the param' do
+    context "we go back once" do
+      it "redirects to same page without the param" do
         get "#{page2}&back=true"
         expect(response).to redirect_to(page2)
       end
 
-      it 'has a link to the previous page' do
+      it "has a link to the previous page" do
         get "#{page2}&back=true"
         get page2
         expect(response.body).to have_back_link("#{page1}&back=true")

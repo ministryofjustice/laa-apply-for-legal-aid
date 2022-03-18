@@ -1,5 +1,5 @@
 class UndeliverableEmailAlertMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   def notify_apply_team(scheduled_mail_id)

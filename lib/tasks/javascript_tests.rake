@@ -1,4 +1,4 @@
-desc 'Run JavaScript unit tests'
+desc "Run JavaScript unit tests"
 task javascript_tests: :environment do
-  sh('yarn test')
+  sh("yarn test")
 end

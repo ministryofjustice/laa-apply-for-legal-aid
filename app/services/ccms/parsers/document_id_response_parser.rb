@@ -1,7 +1,7 @@
 module CCMS
   module Parsers
     class DocumentIdResponseParser < BaseResponseParser
-      DOCUMENT_ID_PATH = '//Body//DocumentUploadRS//DocumentID'.freeze
+      DOCUMENT_ID_PATH = "//Body//DocumentUploadRS//DocumentID".freeze
 
       def document_id
         @document_id ||= parse(:extracted_document_id)
@@ -10,7 +10,7 @@ module CCMS
     private
 
       def response_type
-        'DocumentUploadRS'.freeze
+        "DocumentUploadRS".freeze
       end
 
       def expect_transaction_request_id_in_response?

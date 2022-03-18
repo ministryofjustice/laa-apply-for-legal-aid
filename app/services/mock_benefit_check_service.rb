@@ -2,11 +2,11 @@
 
 class MockBenefitCheckService
   KNOWN = {
-    'SMITH' => { nino: 'ZZ123459A', dob: '11-Jan-99' },
-    'JONES' => { nino: 'ZZ123458A', dob: '1-Jun-80' },
-    'BLOGGS' => { nino: 'ZZ123457A', dob: '4-Jan-90' },
-    'WRINKLE' => { nino: 'ZZ010150A', dob: '01-Jan-50' },
-    'WALKER' => { nino: 'JA293483A', dob: '10-Jan-80' }, # Used in cucumber tests and specs
+    "SMITH" => { nino: "ZZ123459A", dob: "11-Jan-99" },
+    "JONES" => { nino: "ZZ123458A", dob: "1-Jun-80" },
+    "BLOGGS" => { nino: "ZZ123457A", dob: "4-Jan-90" },
+    "WRINKLE" => { nino: "ZZ010150A", dob: "01-Jan-50" },
+    "WALKER" => { nino: "JA293483A", dob: "10-Jan-80" }, # Used in cucumber tests and specs
   }.freeze
 
   def self.call(*args)
@@ -30,7 +30,7 @@ class MockBenefitCheckService
   end
 
   def result
-    known? ? 'Yes' : 'No'
+    known? ? "Yes" : "No"
   end
 
   def known?
@@ -43,7 +43,7 @@ class MockBenefitCheckService
   def applicant_data
     {
       nino: national_insurance_number,
-      dob: date_of_birth&.strftime('%d-%b-%y'),
+      dob: date_of_birth&.strftime("%d-%b-%y"),
     }
   end
 end

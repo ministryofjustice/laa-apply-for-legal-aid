@@ -19,7 +19,7 @@ module Populators
           start_number = (op_index * 1000) + (index * 10)
           transaction_type = find_or_create(name, operation)
           transaction_type.update! sort_order: start_number
-          transaction_type.update!(parent_id: nil) if transaction_type.attributes.include?('parent_id')
+          transaction_type.update!(parent_id: nil) if transaction_type.attributes.include?("parent_id")
         end
       end
     end
@@ -32,7 +32,7 @@ module Populators
 
     def mark_old_as_archived
       TransactionType.active.where.not(name: TransactionType::NAMES.values.flatten).update(archived_at: Time.current)
-      TransactionType.find_by(name: 'student_loan').update!(archived_at: Time.current)
+      TransactionType.find_by(name: "student_loan").update!(archived_at: Time.current)
     end
 
     def update_other_income_types
@@ -45,7 +45,7 @@ module Populators
       TransactionType::HIERARCHIES.each do |child_name, parent_name|
         child = TransactionType.find_by(name: child_name)
         parent = TransactionType.find_by(name: parent_name)
-        child.update!(parent_id: parent.id) if child.attributes.include?('parent_id')
+        child.update!(parent_id: parent.id) if child.attributes.include?("parent_id")
       end
     end
   end

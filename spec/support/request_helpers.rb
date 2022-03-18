@@ -8,9 +8,9 @@ module RequestHelpers
   module JsonHelpers
     def json_headers
       {
-        'ACCEPT' => 'application/json',
-        'HTTP_ACCEPT' => 'application/json',
-        'Content-Type' => 'application/json',
+        "ACCEPT" => "application/json",
+        "HTTP_ACCEPT" => "application/json",
+        "Content-Type" => "application/json",
       }
     end
 

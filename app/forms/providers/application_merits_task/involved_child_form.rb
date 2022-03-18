@@ -9,7 +9,7 @@ module Providers
 
       ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth_1i date_of_birth_2i date_of_birth_3i].freeze
 
-      SCOPE = 'activemodel.errors.models.application_merits_task.involved_child.attributes'.freeze
+      SCOPE = "activemodel.errors.models.application_merits_task.involved_child.attributes".freeze
 
       attr_accessor(*ATTRIBUTES)
       attr_writer :date_of_birth

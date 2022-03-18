@@ -19,7 +19,7 @@ module CFE
     def build_transactions
       result = []
 
-      raise CFE::SubmissionError, 'Benefit transactions un-coded' if bank_transactions.keys.any?(nil)
+      raise CFE::SubmissionError, "Benefit transactions un-coded" if bank_transactions.keys.any?(nil)
 
       bank_transactions.each do |meta_data, array|
         type_hash = { name: meta_data[:label], payments: transactions(array) }
@@ -32,7 +32,7 @@ module CFE
       result = []
       array.each do |transaction|
         result << {
-          date: transaction.happened_at.strftime('%Y-%m-%d'),
+          date: transaction.happened_at.strftime("%Y-%m-%d"),
           amount: transaction.amount.to_f,
           client_id: transaction.id,
         }

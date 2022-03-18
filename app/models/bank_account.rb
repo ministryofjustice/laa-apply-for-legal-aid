@@ -4,12 +4,12 @@ class BankAccount < ApplicationRecord
   has_one :legal_aid_application, through: :bank_provider
 
   ACCOUNT_TYPE_LABELS = {
-    'TRANSACTION' => 'Bank Current',
-    'SAVINGS' => 'Bank Savings',
+    "TRANSACTION" => "Bank Current",
+    "SAVINGS" => "Bank Savings",
   }.freeze
 
-  scope :current, -> { where(account_type: 'TRANSACTION') }
-  scope :savings, -> { where.not(account_type: 'TRANSACTION') }
+  scope :current, -> { where(account_type: "TRANSACTION") }
+  scope :savings, -> { where.not(account_type: "TRANSACTION") }
 
   def latest_balance
     return balance if bank_transactions.empty?
@@ -22,7 +22,7 @@ class BankAccount < ApplicationRecord
   end
 
   def holder_type
-    'Client Sole'
+    "Client Sole"
   end
 
   def display_name
@@ -39,7 +39,7 @@ class BankAccount < ApplicationRecord
 
   def has_tax_credits?
     meta_data_codes = bank_transactions.pluck(:meta_data).pluck(:code)
-    meta_data_codes.include?('TC') || meta_data_codes.include?('WTC') || meta_data_codes.include?('CTC')
+    meta_data_codes.include?("TC") || meta_data_codes.include?("WTC") || meta_data_codes.include?("CTC")
   end
 
   def has_wages?
@@ -47,6 +47,6 @@ class BankAccount < ApplicationRecord
   end
 
   def has_benefits?
-    bank_transactions.joins(:transaction_type).where(transaction_type: { name: 'benefits' }).present?
+    bank_transactions.joins(:transaction_type).where(transaction_type: { name: "benefits" }).present?
   end
 end

@@ -67,7 +67,7 @@ module Backable
     # removing "?back=true" param from the path
     def cleanup_path
       path = Addressable::URI.parse(request.fullpath)
-      path.query_values = (path.query_values || {}).except('back')
+      path.query_values = (path.query_values || {}).except("back")
       path.query_values = nil if path.query_values.empty?
       redirect_to path.to_s, flash: { back: true }
     end

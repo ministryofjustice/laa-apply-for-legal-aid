@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ResendLinkRequestMailer, type: :mailer do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:application_url) { 'https://this_is_a_test.com' }
+  let(:application_url) { "https://this_is_a_test.com" }
   let(:mail) do
     described_class.notify(
       legal_aid_application.application_ref,
@@ -12,12 +12,12 @@ RSpec.describe ResendLinkRequestMailer, type: :mailer do
     )
   end
 
-  describe '#notify' do
-    it 'sends to correct address' do
+  describe "#notify" do
+    it "sends to correct address" do
       expect(mail.to).to eq([legal_aid_application.applicant.email_address])
     end
 
-    it 'is a govuk_notify delivery' do
+    it "is a govuk_notify delivery" do
       expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
     end
   end

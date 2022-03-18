@@ -45,7 +45,7 @@ module Flowable
     end
 
     def first_module_of_parent_name_space
-      parent_name_space_module.to_s.snakecase.split('/').first
+      parent_name_space_module.to_s.snakecase.split("/").first
     end
 
     def parent_name_space_module
@@ -53,11 +53,11 @@ module Flowable
     end
 
     def path?(string)
-      string.starts_with?('/')
+      string.starts_with?("/")
     end
 
     def current_step
-      [self.class.step_prefix, controller_name].compact.join('_').to_sym
+      [self.class.step_prefix, controller_name].compact.join("_").to_sym
     end
   end
 end

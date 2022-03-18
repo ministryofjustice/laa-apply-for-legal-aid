@@ -1,7 +1,7 @@
 class AddressLookupService
   prepend SimpleCommand
 
-  ORDNANCE_SURVEY_URL = 'https://api.os.uk/search/places/v1/postcode'.freeze
+  ORDNANCE_SURVEY_URL = "https://api.os.uk/search/places/v1/postcode".freeze
 
   attr_reader :postcode
 
@@ -19,7 +19,7 @@ private
     {
       key: Rails.configuration.x.ordnanace_survey_api_key,
       postcode: postcode,
-      lr: 'EN',
+      lr: "EN",
     }
   end
 
@@ -45,8 +45,8 @@ private
 
   def parse_successful_response(response)
     parsed_body = JSON.parse(response.body)
-    if parsed_body.dig('header', 'totalresults').positive?
-      parsed_body['results']
+    if parsed_body.dig("header", "totalresults").positive?
+      parsed_body["results"]
     else
       errors.add(:lookup, :no_results)
       []

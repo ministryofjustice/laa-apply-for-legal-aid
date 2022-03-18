@@ -1,10 +1,10 @@
 # This strategy modifies the behaviour of OmniAuth so that it can be used to manage
 # Oauth2 authentication via TrueLayer.
 # Note that you need to restart the server to apply changes to this file.
-require 'omniauth-oauth2'
+require "omniauth-oauth2"
 
 # remove this once special true layer debugging removed
-require_relative 'moj_oauth2'
+require_relative "moj_oauth2"
 
 module OmniAuth
   module Strategies
@@ -16,9 +16,9 @@ module OmniAuth
       option :name, :true_layer
 
       option :client_options,
-             site: 'https://auth.truelayer.com',
-             authorize_url: 'https://auth.truelayer.com/',
-             token_url: 'https://auth.truelayer.com/connect/token'
+             site: "https://auth.truelayer.com",
+             authorize_url: "https://auth.truelayer.com/",
+             token_url: "https://auth.truelayer.com/connect/token"
 
       def authorize_params
         extra_params = { enable_mock: }

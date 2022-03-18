@@ -47,24 +47,24 @@ module CCMS
       # this is all mandatory: we don't hold any of this data except date of birth
       def personal_information(xml)
         xml.__send__(:'clientbio:DateOfBirth', applicant.date_of_birth.to_s(:ccms_date))
-        xml.__send__(:'clientbio:Gender', 'UNSPECIFIED')
-        xml.__send__(:'clientbio:MaritalStatus', 'U')
+        xml.__send__(:'clientbio:Gender', "UNSPECIFIED")
+        xml.__send__(:'clientbio:MaritalStatus', "U")
         xml.__send__(:'clientbio:VulnerableClient', false)
         xml.__send__(:'clientbio:HighProfileClient', false)
         xml.__send__(:'clientbio:VexatiousLitigant', false)
-        xml.__send__(:'clientbio:CountryOfOrigin', 'GBR')
+        xml.__send__(:'clientbio:CountryOfOrigin', "GBR")
         xml.__send__(:'clientbio:MentalCapacityInd', false)
       end
 
       # this is the only mandatory item of contact data. i'm not sure what it's for...
       def contacts(xml)
-        xml.__send__(:'clientbio:Password', 'Testing')
+        xml.__send__(:'clientbio:Password', "Testing")
       end
 
       def applicant_address(xml)
         xml.__send__(:'common:AddressLine1', address.first_lines)
         xml.__send__(:'common:City', address.city)
-        xml.__send__(:'common:Country', 'GBR')
+        xml.__send__(:'common:Country', "GBR")
         xml.__send__(:'common:PostalCode', address.pretty_postcode)
       end
     end

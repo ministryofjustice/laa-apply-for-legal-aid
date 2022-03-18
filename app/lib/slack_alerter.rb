@@ -19,7 +19,7 @@ class SlackAlerter
     end
 
     def send_alert(message)
-      raise 'Unable to send Slack Alert - SLACK_ALERT_EMAIL env var not configured' if slack_alert_email.nil?
+      raise "Unable to send Slack Alert - SLACK_ALERT_EMAIL env var not configured" if slack_alert_email.nil?
 
       ExceptionAlertMailer.notify(
         environment: HostEnv.environment.to_s,
@@ -29,7 +29,7 @@ class SlackAlerter
     end
 
     def slack_alert_email
-      ENV['SLACK_ALERT_EMAIL']
+      ENV["SLACK_ALERT_EMAIL"]
     end
   end
 

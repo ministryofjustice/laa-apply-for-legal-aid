@@ -5,7 +5,7 @@ module Dashboard
         @application = application
         log_start_message
         @client = Geckoboard.client(Rails.configuration.x.geckoboard.api_key)
-        raise 'Unable to access Geckoboard' unless @client.ping
+        raise "Unable to access Geckoboard" unless @client.ping
       end
 
       def run
@@ -32,8 +32,8 @@ module Dashboard
       def dataset_definition
         {
           fields: [
-            Geckoboard::DateTimeField.new(:timestamp, name: 'Time'),
-            Geckoboard::StringField.new(:reference, name: 'Reference')
+            Geckoboard::DateTimeField.new(:timestamp, name: "Time"),
+            Geckoboard::StringField.new(:reference, name: "Reference")
           ],
         }
       end

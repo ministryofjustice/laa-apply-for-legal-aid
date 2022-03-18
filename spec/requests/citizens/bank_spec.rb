@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Citizens::BanksController, type: :request do
   let(:application) { create :application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
@@ -11,10 +11,10 @@ RSpec.describe Citizens::BanksController, type: :request do
     allow(Rails.configuration.x.true_layer).to receive(:enable_mock).and_return(enable_mock)
   end
 
-  describe 'GET citizens/banks' do
+  describe "GET citizens/banks" do
     before { get citizens_banks_path }
 
-    it 'shows the banks' do
+    it "shows the banks" do
       banks.each do |bank|
         expect(response.body).to include(bank[:display_name])
         expect(response.body).to include(bank[:provider_id])
@@ -22,55 +22,55 @@ RSpec.describe Citizens::BanksController, type: :request do
       end
     end
 
-    it 'does not show the mock bank' do
-      expect(response.body).not_to include('mock')
+    it "does not show the mock bank" do
+      expect(response.body).not_to include("mock")
     end
 
-    context 'enable_mock is set to true' do
+    context "enable_mock is set to true" do
       let(:enable_mock) { true }
 
-      it 'shows the mock bank' do
-        expect(response.body).to include('mock')
+      it "shows the mock bank" do
+        expect(response.body).to include("mock")
       end
     end
   end
 
-  describe 'POST citizens/banks' do
+  describe "POST citizens/banks" do
     let(:provider_id) { Faker::Bank.name }
 
     before { post citizens_banks_path, params: { provider_id: } }
 
-    it 'redirects to true layer' do
+    it "redirects to true layer" do
       expect(response).to redirect_to(omniauth_login_start_path(:true_layer))
     end
 
-    it 'sets provider_id in the session' do
+    it "sets provider_id in the session" do
       expect(session[:provider_id]).to eq(provider_id)
     end
 
-    it 'sets the default locale in the session' do
+    it "sets the default locale in the session" do
       expect(session[:locale]).to eq(:en)
     end
 
-    context 'Welsh locale' do
+    context "Welsh locale" do
       before { post citizens_banks_path, params: { provider_id: } }
       around(:each) do |example|
         I18n.with_locale(:cy) { example.run }
       end
-      it 'sets locale in the session' do
+      it "sets locale in the session" do
         expect(session[:locale]).to eq(:cy)
       end
     end
 
-    context 'no bank was selected' do
+    context "no bank was selected" do
       let(:provider_id) { nil }
 
-      it 'returns http success' do
+      it "returns http success" do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'shows an error' do
-        expect(response.body).to include(I18n.t('citizens.banks.create.error'))
+      it "shows an error" do
+        expect(response.body).to include(I18n.t("citizens.banks.create.error"))
       end
     end
   end

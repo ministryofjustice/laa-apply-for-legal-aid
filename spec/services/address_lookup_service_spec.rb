@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AddressLookupService do
   subject(:service) { described_class.new(postcode) }
 
   let(:query_params) do
     {
-      key: ENV['ORDNANACE_SURVEY_API_KEY'],
+      key: ENV["ORDNANACE_SURVEY_API_KEY"],
       postcode: postcode,
-      lr: 'EN',
+      lr: "EN",
     }
   end
   let(:api_request_uri) do
@@ -15,22 +15,22 @@ RSpec.describe AddressLookupService do
     uri.query = query_params.to_query
     uri
   end
-  let(:postcode) { 'SW1H9AJ' }
+  let(:postcode) { "SW1H9AJ" }
 
-  describe '#call' do
-    context 'when the lookup is successful' do
-      let(:stubbed_json_body) { file_fixture('address_lookups/success.json') }
+  describe "#call" do
+    context "when the lookup is successful" do
+      let(:stubbed_json_body) { file_fixture("address_lookups/success.json") }
 
       before do
         stub_request(:get, api_request_uri)
           .to_return(status: 200, body: stubbed_json_body)
       end
 
-      context 'but the response does not contain any results' do
-        let(:postcode) { 'W1A1AA' }
-        let(:stubbed_json_body) { file_fixture('address_lookups/no_results.json') }
+      context "but the response does not contain any results" do
+        let(:postcode) { "W1A1AA" }
+        let(:stubbed_json_body) { file_fixture("address_lookups/no_results.json") }
 
-        it 'outcome is unsuccessful' do
+        it "outcome is unsuccessful" do
           outcome = service.call
           expect(outcome).not_to be_success
           expect(outcome.errors).to eq(lookup: [:no_results])
@@ -38,7 +38,7 @@ RSpec.describe AddressLookupService do
         end
       end
 
-      it 'returns a list of mapped addresses' do
+      it "returns a list of mapped addresses" do
         outcome = service.call
         expect(outcome).to be_success
         expect(outcome.errors).to be_empty
@@ -46,14 +46,14 @@ RSpec.describe AddressLookupService do
       end
     end
 
-    context 'when there is a problem connecting to the postcode API' do
+    context "when there is a problem connecting to the postcode API" do
       before do
         stub_request(:get, api_request_uri)
           .to_raise(Errno::ECONNREFUSED)
       end
 
-      it 'outcome is unsuccessful' do
-        expect(AlertManager).to receive(:capture_exception).with(message_contains('Connection refused'))
+      it "outcome is unsuccessful" do
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("Connection refused"))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:service_unavailable])
@@ -61,12 +61,12 @@ RSpec.describe AddressLookupService do
       end
     end
 
-    context 'when the lookup service is not successful' do
+    context "when the lookup service is not successful" do
       let(:stubbed_body) do
         {
           error: {
             statuscode: 400,
-            message: 'No postcode parameter provided.',
+            message: "No postcode parameter provided.",
           },
         }
       end
@@ -77,8 +77,8 @@ RSpec.describe AddressLookupService do
           .to_return(status: 400, body: stubbed_body.to_json)
       end
 
-      it 'outcome is unsuccessful' do
-        expect(AlertManager).to receive(:capture_exception).with(message_contains('No postcode parameter provided'))
+      it "outcome is unsuccessful" do
+        expect(AlertManager).to receive(:capture_exception).with(message_contains("No postcode parameter provided"))
         outcome = service.call
         expect(outcome).not_to be_success
         expect(outcome.errors).to eq(lookup: [:unsuccessful])
@@ -87,27 +87,27 @@ RSpec.describe AddressLookupService do
     end
   end
 
-  describe '#record_error' do
+  describe "#record_error" do
     let(:state) { :service_unavailable }
-    let(:error) { StandardError.new 'Service unavailable' }
+    let(:error) { StandardError.new "Service unavailable" }
 
-    it 'captures error' do
-      expect(AlertManager).to receive(:capture_exception).with(message_contains('Service unavailable'))
+    it "captures error" do
+      expect(AlertManager).to receive(:capture_exception).with(message_contains("Service unavailable"))
       service.__send__(:record_error, state, error)
     end
 
-    context 'postocde is in a correct format' do
+    context "postocde is in a correct format" do
       let(:state) { :unsuccessful }
-      let(:error) { StandardError.new 'Resource x does not exist' }
-      let(:postcode) { 'SW109LO' }
+      let(:error) { StandardError.new "Resource x does not exist" }
+      let(:postcode) { "SW109LO" }
 
       before do
         stub_request(:get, api_request_uri)
           .to_raise(Errno::ECONNREFUSED)
       end
 
-      it 'does not capture error' do
-        expect(AlertManager).not_to receive(:capture_exception).with(message_contains('Resource x does not exist'))
+      it "does not capture error" do
+        expect(AlertManager).not_to receive(:capture_exception).with(message_contains("Resource x does not exist"))
         service.call
       end
     end

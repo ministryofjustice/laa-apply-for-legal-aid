@@ -1,19 +1,19 @@
 namespace :db do
-  desc 'Output anonymised DB as restore file'
+  desc "Output anonymised DB as restore file"
   task export: :environment do
-    raise(ArgumentError, 'Cannot construct DB connection string') if build_postgres_url.length < 25
+    raise(ArgumentError, "Cannot construct DB connection string") if build_postgres_url.length < 25
 
     command = "pg_dump #{build_postgres_url} --no-owner --no-privileges --no-password --exclude-table-data=scheduled_mailings \
                 | pg_dump_anonymize -d db/anonymise/rules.rb > ./tmp/temp.sql"
     create_success = `#{command}`
     zip_success = `gzip -3 -f ./tmp/temp.sql`
     result_success = [create_success, zip_success].all?(&:empty?)
-    puts result_success ? 'Success' : 'Error occurred'
+    puts result_success ? "Success" : "Error occurred"
   end
 
-  desc 'Restore anonymised DB to UAT instance'
+  desc "Restore anonymised DB to UAT instance"
   task import_to_uat: :environment do
-    raise(ArgumentError, 'Cannot construct DB connection string') if build_postgres_url.length < 25
+    raise(ArgumentError, "Cannot construct DB connection string") if build_postgres_url.length < 25
 
     drop_existing_schema = "psql #{build_postgres_url} -c 'drop schema public cascade'"
     create_new_schema = "psql #{build_postgres_url} -c 'create schema public'"

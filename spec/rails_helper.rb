@@ -1,16 +1,16 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../config/environment', __dir__)
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../config/environment", __dir__)
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
-require 'rspec/rails'
-require 'json_expressions/rspec'
-require 'awesome_print'
-require 'pry-rescue/rspec' if Rails.env.development?
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+require "rspec/rails"
+require "json_expressions/rspec"
+require "awesome_print"
+require "pry-rescue/rspec" if Rails.env.development?
 
 # Add additional requires below this line. Rails is not loaded until this point!
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -70,7 +70,7 @@ RSpec.configure do |config|
   config.include CCMS
   config.include XMLBlockMatchers
   config.before(:suite) do
-    Faker::Config.locale = 'en-GB'
+    Faker::Config.locale = "en-GB"
     DatabaseCleaner.clean_with :truncation
   end
 
@@ -114,5 +114,5 @@ end
 # but apostrophes are translated to decimal equivalent, '&#39;'
 #
 def html_compare(string)
-  HTMLEntities.new.encode(string).gsub('&apos;', '&#39;')
+  HTMLEntities.new.encode(string).gsub("&apos;", "&#39;")
 end

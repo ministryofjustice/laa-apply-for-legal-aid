@@ -53,13 +53,13 @@ module Providers
     end
 
     def files_deleted_message(deleted_file_name)
-      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
+      I18n.t("activemodel.attributes.uploaded_evidence_collection.file_deleted", file_name: deleted_file_name)
     end
 
     def successful_upload
       return if form.errors.present?
 
-      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: 'File')
+      I18n.t("activemodel.attributes.uploaded_evidence_collection.file_uploaded", file_name: "File")
     end
 
     def convert_new_files_to_pdf

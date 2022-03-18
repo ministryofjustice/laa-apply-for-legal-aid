@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module LegalFramework
   RSpec.describe MeritsTasksService do
@@ -11,30 +11,30 @@ module LegalFramework
       allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_return(dummy_response_hash)
     end
 
-    describe '#call' do
-      it 'calls the MeritsTasksRetrieverService' do
+    describe "#call" do
+      it "calls the MeritsTasksRetrieverService" do
         service
         expect(MeritsTasksRetrieverService).to have_received(:call)
       end
 
-      it 'adds a new submission record' do
+      it "adds a new submission record" do
         expect { service }.to change { Submission.count }.by(1)
       end
 
-      it 'adds a merits task list record' do
+      it "adds a merits task list record" do
         expect { service }.to change { MeritsTaskList.count }.by(1)
       end
 
-      context 'merits task list exist' do
+      context "merits task list exist" do
         before do
           described_class.call(application)
         end
 
-        it 'does not add a new merits task list record' do
+        it "does not add a new merits task list record" do
           expect { service }.not_to change { MeritsTaskList.count }
         end
 
-        it 'updates the existing merits task list' do
+        it "updates the existing merits task list" do
           merits_task_list = MeritsTaskList.first
           expect {
             service
@@ -43,12 +43,12 @@ module LegalFramework
         end
       end
 
-      context 'error is raised' do
+      context "error is raised" do
         before do
-          allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_raise(SubmissionError, 'failed submission')
+          allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_raise(SubmissionError, "failed submission")
         end
 
-        it 'captures error and returns false' do
+        it "captures error and returns false" do
           expect(AlertManager).to receive(:capture_exception).with(LegalFramework::SubmissionError)
           service
         end

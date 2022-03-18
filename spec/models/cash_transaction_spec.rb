@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CashTransaction, type: :model do
   let(:application1) { create :legal_aid_application }
@@ -24,48 +24,48 @@ RSpec.describe CashTransaction, type: :model do
     end
   end
 
-  describe 'amounts' do
-    it 'returns a hash of totals for a specific application' do
+  describe "amounts" do
+    it "returns a hash of totals for a specific application" do
       expect(described_class.amounts_for_application(application1)).to eq expected_result1
       expect(described_class.amounts_for_application(application2)).to eq expected_result2
     end
   end
 
-  describe 'scope by parent_transaction_type' do
-    it 'groups the transactions keyed by parent transaction type' do
+  describe "scope by parent_transaction_type" do
+    it "groups the transactions keyed by parent transaction type" do
       grouped_transactions = described_class.by_parent_transaction_type
       expect(grouped_transactions[pension]).to match_array @pension_transactions
       expect(grouped_transactions[benefits]).to match_array @benefits_transactions
     end
   end
 
-  context 'date formatting' do
+  context "date formatting" do
     let(:ctx) { create :cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1 }
 
-    describe '.period_start' do
-      it 'displays 1st day and month of transaction date' do
-        expect(ctx.period_start).to eq '01 Feb'
+    describe ".period_start" do
+      it "displays 1st day and month of transaction date" do
+        expect(ctx.period_start).to eq "01 Feb"
       end
     end
 
-    describe '.period_end' do
-      it 'displays last day and month of transaction date' do
-        expect(ctx.period_end).to eq '28 Feb'
+    describe ".period_end" do
+      it "displays last day and month of transaction date" do
+        expect(ctx.period_end).to eq "28 Feb"
       end
     end
   end
 
   def expected_result1
     {
-      'benefits' => 300,
-      'pension' => 600,
+      "benefits" => 300,
+      "pension" => 600,
     }
   end
 
   def expected_result2
     {
-      'benefits' => 600,
-      'pension' => 1200,
+      "benefits" => 600,
+      "pension" => 1200,
     }
   end
 end

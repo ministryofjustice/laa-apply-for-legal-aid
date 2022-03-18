@@ -11,8 +11,8 @@ class JobQueue
   def self.next_job_due(klass)
     ss = Sidekiq::ScheduledSet.new
     enqueued_jobs = ss.select do |job|
-      job.item['queue'] == klass.queue_name &&
-        job.item['wrapped'] == klass.to_s
+      job.item["queue"] == klass.queue_name &&
+        job.item["wrapped"] == klass.to_s
     end
     return END_OF_TIME if enqueued_jobs.empty?
 
@@ -24,11 +24,11 @@ class JobQueue
   # :nocov:
   # rubocop:disable Rails/Output
   def self.list
-    format_pattern = '%<jobname>30s    %<due>s'
+    format_pattern = "%<jobname>30s    %<due>s"
     ss = Sidekiq::ScheduledSet.new
 
-    puts sprintf(format_pattern, jobname: 'Job name', due: 'Due')
-    puts sprintf(format_pattern, jobname: '========', due: '===')
+    puts sprintf(format_pattern, jobname: "Job name", due: "Due")
+    puts sprintf(format_pattern, jobname: "========", due: "===")
     ss.each do |job|
       next if job_name(job).blank?
 
@@ -38,7 +38,7 @@ class JobQueue
   # rubocop:enable Rails/Output
 
   def self.job_name(job)
-    job.item['wrapped']
+    job.item["wrapped"]
   end
 
   def self.scheduled_time(job)

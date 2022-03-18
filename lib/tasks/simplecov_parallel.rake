@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-if ENV['CIRCLE_JOB']
-  require_relative '../../spec/simplecov_helper'
+if ENV["CIRCLE_JOB"]
+  require_relative "../../spec/simplecov_helper"
   namespace :simplecov do
-    desc 'Merge coverage results'
+    desc "Merge coverage results"
     task merge_coverage_results: :environment do
       SimpleCovHelper.merge_coverage_results
     end
 
-    desc 'Process coverage results'
+    desc "Process coverage results"
     task process_coverage: :environment do
       SimpleCovHelper.process_coverage
     end

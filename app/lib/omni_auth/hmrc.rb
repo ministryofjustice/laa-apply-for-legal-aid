@@ -29,7 +29,7 @@ module OmniAuth
       end
 
       def fake_bearer_token
-        'fake-hmrc-interface-bearer-token'
+        "fake-hmrc-interface-bearer-token"
       end
     end
   end

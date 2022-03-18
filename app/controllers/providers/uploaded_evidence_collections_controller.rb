@@ -33,7 +33,7 @@ module Providers
     def list
       RequiredDocumentCategoryAnalyser.call(legal_aid_application)
       attachment_type_options
-      render partial: 'uploaded_files', locals: { attachments: uploaded_evidence_collection.original_attachments }
+      render partial: "uploaded_files", locals: { attachments: uploaded_evidence_collection.original_attachments }
     end
 
   private
@@ -164,17 +164,17 @@ module Providers
     end
 
     def files_deleted_message(deleted_file_name)
-      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_deleted', file_name: deleted_file_name)
+      I18n.t("activemodel.attributes.uploaded_evidence_collection.file_deleted", file_name: deleted_file_name)
     end
 
     def successful_upload
       return if upload_form.errors.present?
 
-      I18n.t('activemodel.attributes.uploaded_evidence_collection.file_uploaded', file_name: 'File')
+      I18n.t("activemodel.attributes.uploaded_evidence_collection.file_uploaded", file_name: "File")
     end
 
     def evidence_type_translation
-      return unless required_documents.include?('benefit_evidence')
+      return unless required_documents.include?("benefit_evidence")
 
       @evidence_type_translation = I18n.t(".shared.forms.received_benefit_confirmation.form.providers.received_benefit_confirmations.#{passporting_benefit}")
     end

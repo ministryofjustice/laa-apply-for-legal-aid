@@ -22,21 +22,21 @@ class DocumentCategoryValidator < ActiveModel::Validator
     return if uncategorised_evidence_attachment?(record)
 
     attr = case record.class.to_s
-           when 'Attachment'
+           when "Attachment"
              :attachment_type
-           when 'DocumentCategory'
+           when "DocumentCategory"
              :name
            else
-             raise ArgumentError, 'Unexpected record sent to DocumentCategoryValidator'
+             raise ArgumentError, "Unexpected record sent to DocumentCategoryValidator"
            end
 
     return if record.__send__(attr).in?(VALID_DOCUMENT_TYPES)
 
     record.errors.add attr,
-                      I18n.t('activemodel.errors.models.attachment.attributes.attachment_type.invalid', attachment_type: record.__send__(attr))
+                      I18n.t("activemodel.errors.models.attachment.attributes.attachment_type.invalid", attachment_type: record.__send__(attr))
   end
 
   def uncategorised_evidence_attachment?(record)
-    record.is_a?(Attachment) && record.attachment_type == 'uncategorised'
+    record.is_a?(Attachment) && record.attachment_type == "uncategorised"
   end
 end

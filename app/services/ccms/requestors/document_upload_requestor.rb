@@ -36,21 +36,21 @@ module CCMS
       def document(xml)
         xml.__send__(:'casebio:CCMSDocumentID', ccms_document_id)
         document_type(xml)
-        xml.__send__(:'casebio:Channel', 'E')
+        xml.__send__(:'casebio:Channel', "E")
         xml.__send__(:'casebio:BinData', document_encoded_base64)
       end
 
       def document_type(xml)
         case @document_type
-        when 'bank_transaction_report'
-          xml.__send__(:'casebio:DocumentType', 'BSTMT')
-          xml.__send__(:'casebio:FileExtension', 'csv')
-        when 'gateway_evidence_pdf'
-          xml.__send__(:'casebio:DocumentType', 'STATE')
-          xml.__send__(:'casebio:FileExtension', 'pdf')
+        when "bank_transaction_report"
+          xml.__send__(:'casebio:DocumentType', "BSTMT")
+          xml.__send__(:'casebio:FileExtension', "csv")
+        when "gateway_evidence_pdf"
+          xml.__send__(:'casebio:DocumentType', "STATE")
+          xml.__send__(:'casebio:FileExtension', "pdf")
         else
-          xml.__send__(:'casebio:DocumentType', 'ADMIN1')
-          xml.__send__(:'casebio:FileExtension', 'pdf')
+          xml.__send__(:'casebio:DocumentType', "ADMIN1")
+          xml.__send__(:'casebio:FileExtension', "pdf")
         end
       end
     end

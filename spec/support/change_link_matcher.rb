@@ -17,7 +17,7 @@ RSpec::Matchers.define :have_change_link do |field_name, expected_link|
 
   def extract_link(html, field_name)
     links = parsed_response_body(html).css("div#app-check-your-answers__#{field_name} a")
-    links.first&.attr('href')
+    links.first&.attr("href")
   end
 
   def formatted_field_name(field_name)

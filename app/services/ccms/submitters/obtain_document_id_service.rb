@@ -45,7 +45,7 @@ module CCMS
         document_id_requestor = document_id_requestor(document.document_type)
         response = update_document_and_return_response(document, document_id_requestor)
         document.save!
-        create_history('applicant_ref_obtained', 'document_ids_obtained', document_id_requestor.formatted_xml, response) if submission.save!
+        create_history("applicant_ref_obtained", "document_ids_obtained", document_id_requestor.formatted_xml, response) if submission.save!
       rescue *CCMS_SUBMISSION_ERRORS => e
         document.status = :failed
         document.save!
@@ -68,7 +68,7 @@ module CCMS
       end
 
       def failed_requesting_ids
-        @failed_requesting_ids ||= submission.submission_documents.select { |document| document.status == 'failed' }&.map(&:id)&.join(', ')
+        @failed_requesting_ids ||= submission.submission_documents.select { |document| document.status == "failed" }&.map(&:id)&.join(", ")
       end
     end
   end

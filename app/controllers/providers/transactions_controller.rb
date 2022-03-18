@@ -1,7 +1,7 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
-      if transaction_type.name == 'excluded_benefits' && !disregarded_state_benefits_list
+      if transaction_type.name == "excluded_benefits" && !disregarded_state_benefits_list
         redirect_to(problem_index_path) && return
       end
 
@@ -44,8 +44,8 @@ module Providers
       benefits_list = state_benefit_types
       return false unless benefits_list
 
-      disregarded_state_benefits = benefits_list.select! { |benefit| benefit['exclude_from_gross_income'] == true }
-      categorised_benefits = disregarded_state_benefits.group_by { |benefit| benefit['category'] }
+      disregarded_state_benefits = benefits_list.select! { |benefit| benefit["exclude_from_gross_income"] == true }
+      categorised_benefits = disregarded_state_benefits.group_by { |benefit| benefit["category"] }
       categorised_benefits.delete(nil)
       @categorised_benefits = categorised_benefits.sort_by { |key, _value| key }
     end
@@ -59,16 +59,16 @@ module Providers
 
     def manually_chosen_metadata(transaction_type)
       {
-        code: 'XXXX',
-        label: 'manually_chosen',
+        code: "XXXX",
+        label: "manually_chosen",
         name: transaction_type.name.titleize,
         category: sentencize(transaction_type.name),
-        selected_by: 'Provider',
+        selected_by: "Provider",
       }
     end
 
     def sentencize(sentence)
-      sentence.split('_').map(&:capitalize).join(' ')
+      sentence.split("_").map(&:capitalize).join(" ")
     end
   end
 end

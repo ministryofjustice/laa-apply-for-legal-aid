@@ -1,44 +1,44 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
   let!(:application) { create :legal_aid_application, :with_applicant_and_address }
 
-  let(:params) { { own_home: 'mortgage' } }
+  let(:params) { { own_home: "mortgage" } }
   let(:form_params) { params.merge(model: application) }
 
   subject { described_class.new(form_params) }
 
-  describe '.model_name' do
+  describe ".model_name" do
     it 'should be "LegalAidApplication"' do
-      expect(described_class.model_name).to eq('LegalAidApplication')
+      expect(described_class.model_name).to eq("LegalAidApplication")
     end
   end
 
-  describe 'validations' do
+  describe "validations" do
     let(:params) { {} }
 
-    it 'errors if own_home not specified' do
+    it "errors if own_home not specified" do
       expect(subject.save).to be false
-      expect(subject.errors[:own_home]).to eq [I18n.t('activemodel.errors.models.legal_aid_application.attributes.own_home.blank')]
+      expect(subject.errors[:own_home]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.own_home.blank")]
     end
   end
 
-  describe '#save' do
-    let(:params) { { own_home: 'mortgage' } }
+  describe "#save" do
+    let(:params) { { own_home: "mortgage" } }
     let(:form_params) { params.merge(model: application) }
 
-    it 'does not create a new applicant' do
+    it "does not create a new applicant" do
       subject
       expect { subject.save }.not_to change { LegalAidApplication.count }
     end
 
-    it 'saves updates record with new value of own home attribute' do
+    it "saves updates record with new value of own home attribute" do
       expect(application.own_home).to be_nil
       subject.save
-      expect(application.own_home).to eq 'mortgage'
+      expect(application.own_home).to eq "mortgage"
     end
 
-    it 'leaves other attributes on the record unchanged' do
+    it "leaves other attributes on the record unchanged" do
       expected_attributes = application.attributes.symbolize_keys.except(:state, :own_home, :updated_at, :created_at)
       subject.save
       application.reload

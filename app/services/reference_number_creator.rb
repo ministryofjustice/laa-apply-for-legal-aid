@@ -27,6 +27,6 @@ private
   end
 
   def letters_to_use
-    ('A'..'Z').to_a - UNUSED_LETTERS
+    ("A".."Z").to_a - UNUSED_LETTERS
   end
 end

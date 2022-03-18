@@ -15,7 +15,7 @@ module Providers
         @form = Addresses::AddressSelectionForm.new(model: address)
       else
         @form = Addresses::AddressForm.new(model: address, lookup_error: address_lookup.errors[:lookup].first)
-        render template: 'providers/addresses/show'.freeze
+        render template: "providers/addresses/show".freeze
       end
     end
 
@@ -30,7 +30,7 @@ module Providers
   private
 
     def collect_addresses
-      count = AddressCollectionItem.new(nil, t('providers.address_selections.show.addresses_found_text', count: @addresses.size))
+      count = AddressCollectionItem.new(nil, t("providers.address_selections.show.addresses_found_text", count: @addresses.size))
       [count] + @addresses.map { |addr| AddressCollectionItem.new(addr.lookup_id, addr.full_address) }
     end
 
@@ -63,7 +63,7 @@ module Providers
     end
 
     def hyphen_safe_titleize(sentence)
-      sentence.to_s&.split(' ')&.map(&:capitalize)&.join(' ')
+      sentence.to_s&.split(" ")&.map(&:capitalize)&.join(" ")
     end
 
     def titleize_addresses

@@ -44,7 +44,7 @@ module CFE
       # convert the values to floats here to prevent them from being quoted by JSON
       {
         client_id: payment.id,
-        date: payment.date.strftime('%F'),
+        date: payment.date.strftime("%F"),
         gross: payment.gross.to_f,
         benefits_in_kind: payment.benefits_in_kind.to_f,
         tax: payment.tax.to_f,

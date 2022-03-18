@@ -20,7 +20,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -54,8 +54,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
-    host: ENV.fetch('MAILER_DEFAULT_URL', 'localhost'),
-    port: ENV.fetch('PORT', 80),
+    host: ENV.fetch("MAILER_DEFAULT_URL", "localhost"),
+    port: ENV.fetch("PORT", 80),
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -76,7 +76,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
@@ -87,7 +87,7 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = false
 
-  Rails.application.routes.default_url_options[:host] = ENV['HOST']
+  Rails.application.routes.default_url_options[:host] = ENV["HOST"]
 
   config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
@@ -95,10 +95,10 @@ Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
 
-  config.x.policy_disregards_start_date = Date.parse(ENV['POLICY_DISREGARDS_START_DATE'] || '2021-1-8')
+  config.x.policy_disregards_start_date = Date.parse(ENV["POLICY_DISREGARDS_START_DATE"] || "2021-1-8")
 
   # set the id of the Digest Export spreadsheet to use in this environment
-  config.x.digest_export.spreadsheet_id = '1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs'
+  config.x.digest_export.spreadsheet_id = "1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs"
 
   # Switch to determine whether or not o collect HMRC data
   config.x.collect_hmrc_data = true

@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 module CCMS
   module Requestors
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
-      context 'XML request' do
-        let(:expected_tx_id) { '201904011604570390059770666' }
+      context "XML request" do
+        let(:expected_tx_id) { "201904011604570390059770666" }
         let(:proceeding_type) { legal_aid_application.application_proceeding_types.first.proceeding_type }
-        let(:firm) { create :firm, name: 'Firm1' }
+        let(:firm) { create :firm, name: "Firm1" }
         let(:office) { create :office, firm: firm }
         let(:savings_amount) { legal_aid_application.savings_amount }
         let(:other_assets_decl) { legal_aid_application.other_assets_declaration }
@@ -28,11 +28,11 @@ module CCMS
                  provider: provider,
                  office: office
         end
-        let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == 'DA001' } }
+        let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
           create :chances_of_success, :with_optional_text, proceeding: proceeding
         end
-        let(:ccms_reference) { '300000054005' }
+        let(:ccms_reference) { "300000054005" }
         let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
         let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
@@ -40,9 +40,9 @@ module CCMS
         let(:xml) { requestor.formatted_xml }
         let(:applicant) { legal_aid_application.applicant }
 
-        context 'boolean attributes' do
+        context "boolean attributes" do
           # these are all currently coded as FALSE until such time as we can determine which benefits are received
-          it 'generates the attribute blocks as false' do
+          it "generates the attribute blocks as false" do
             boolean_benefit_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :global_means, attr_name)
               expect(block).to have_boolean_response false
@@ -51,10 +51,10 @@ module CCMS
           end
         end
 
-        context 'value_attributes' do
+        context "value_attributes" do
           # These are all omitted until such time sa we can determine which benefits are received
 
-          it 'omits all attributes' do
+          it "omits all attributes" do
             value_benefit_attrs.each do |attr_name|
               block = XmlExtractor.call(xml, :global_means, attr_name)
               expect(block).not_to be_present

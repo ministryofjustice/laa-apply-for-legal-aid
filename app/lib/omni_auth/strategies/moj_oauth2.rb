@@ -1,8 +1,8 @@
-require 'oauth2'
-require 'omniauth'
-require 'securerandom'
-require 'socket'       # for SocketError
-require 'timeout'      # for Timeout::Error
+require "oauth2"
+require "omniauth"
+require "securerandom"
+require "socket"       # for SocketError
+require "timeout"      # for Timeout::Error
 
 # rubocop:disable Lint/MissingSuper
 # :nocov:
@@ -42,7 +42,7 @@ module OmniAuth
             padding: false
           )
         },
-        code_challenge_method: 'S256',
+        code_challenge_method: "S256",
       }
 
       attr_accessor :access_token
@@ -52,16 +52,16 @@ module OmniAuth
       end
 
       credentials do
-        hash = { 'token' => access_token.token }
-        hash['refresh_token'] = access_token.refresh_token if access_token.expires? && access_token.refresh_token
-        hash['expires_at'] = access_token.expires_at if access_token.expires?
-        hash['expires'] = access_token.expires?
+        hash = { "token" => access_token.token }
+        hash["refresh_token"] = access_token.refresh_token if access_token.expires? && access_token.refresh_token
+        hash["expires_at"] = access_token.expires_at if access_token.expires?
+        hash["expires"] = access_token.expires?
         hash
       end
 
       def request_phase
         auth_params = authorize_params
-        applicant_id = session['warden.user.applicant.key'].first.first
+        applicant_id = session["warden.user.applicant.key"].first.first
 
         # We save the session in the redis database here in case the user backgrounds his browser on a mobile
         # device while looking up the bank credentials, which would result in the session being destroyed.
@@ -82,21 +82,21 @@ module OmniAuth
 
         if OmniAuth.config.test_mode
           @env ||= {}
-          @env['rack.session'] ||= {}
+          @env["rack.session"] ||= {}
         end
 
         params = options.authorize_params
-                        .merge(options_for('authorize'))
+                        .merge(options_for("authorize"))
                         .merge(pkce_authorize_params)
 
-        session['omniauth.pkce.verifier'] = options.pkce_verifier if options.pkce
-        session['omniauth.state'] = params[:state]
+        session["omniauth.pkce.verifier"] = options.pkce_verifier if options.pkce
+        session["omniauth.state"] = params[:state]
 
         params
       end
 
       def token_params
-        options.token_params.merge(options_for('token')).merge(pkce_token_params)
+        options.token_params.merge(options_for("token")).merge(pkce_token_params)
       end
 
       def callback_phase
@@ -107,14 +107,14 @@ module OmniAuth
         restored_session.each { |k, v| session[k] = v }
         OauthSessionSaver.destroy!(state)
 
-        error = request.params['error_reason'] || request.params['error']
+        error = request.params["error_reason"] || request.params["error"]
 
         if error
-          Debug.record_error(session, request.params, '', browser_details)
-          fail!(error, CallbackError.new(request.params['error'], request.params['error_description'] || request.params['error_reason'], request.params['error_uri']))
-        elsif !options.provider_ignores_state && (request.params['state'].to_s.empty? || request.params['state'] != session.delete('omniauth.state'))
-          Debug.record_error(session, request.params, 'CSRF detected', browser_details)
-          fail!(:csrf_detected, CallbackError.new(:csrf_detected, 'CSRF detected'))
+          Debug.record_error(session, request.params, "", browser_details)
+          fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
+        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
+          Debug.record_error(session, request.params, "CSRF detected", browser_details)
+          fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
         else
           self.access_token = build_access_token
           self.access_token = access_token.refresh! if access_token.expired?
@@ -146,11 +146,11 @@ module OmniAuth
       def pkce_token_params
         return {} unless options.pkce
 
-        { code_verifier: session.delete('omniauth.pkce.verifier') }
+        { code_verifier: session.delete("omniauth.pkce.verifier") }
       end
 
       def build_access_token
-        verifier = request.params['code']
+        verifier = request.params["code"]
         client.auth_code.get_token(verifier, { redirect_uri: callback_url }.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       end
 
@@ -175,13 +175,13 @@ module OmniAuth
     private
 
       def state
-        request.params['state']
+        request.params["state"]
       end
 
       def browser_details
         browser = Browser.new(
-          request.env['HTTP_USER_AGENT'],
-          accept_language: request.env['HTTP_ACCEPT_LANGUAGE']
+          request.env["HTTP_USER_AGENT"],
+          accept_language: request.env["HTTP_ACCEPT_LANGUAGE"]
         )
         "#{browser.platform.name}::#{browser.name}::#{browser.full_version}"
       end
@@ -198,13 +198,13 @@ module OmniAuth
         end
 
         def message
-          [error, error_reason, error_uri].compact.join(' | ')
+          [error, error_reason, error_uri].compact.join(" | ")
         end
       end
     end
   end
 end
 
-OmniAuth.config.add_camelization 'oauth2', 'OAuth2'
+OmniAuth.config.add_camelization "oauth2", "OAuth2"
 # :nocov:
 # rubocop:enable Lint/MissingSuper

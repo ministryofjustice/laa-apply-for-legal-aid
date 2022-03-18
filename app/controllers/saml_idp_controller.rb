@@ -3,14 +3,14 @@ class SamlIdpController < SamlIdp::IdpController
     if params[:email].present?
       provider = idp_authenticate(params[:email], params[:password])
       if provider.nil?
-        @saml_idp_fail_msg = 'Incorrect email or password.'
+        @saml_idp_fail_msg = "Incorrect email or password."
       else
         @saml_response = idp_make_saml_response(provider, params[:email])
-        render template: 'saml_idp/idp/saml_post', layout: false
+        render template: "saml_idp/idp/saml_post", layout: false
         return
       end
     end
-    render template: 'saml_idp/idp/new'
+    render template: "saml_idp/idp/new"
   end
 
 private

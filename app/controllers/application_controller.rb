@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  layout 'application'
+  layout "application"
   include Backable
   include OmniauthPathHelper
   helper_method :omniauth_login_start_path

@@ -1,8 +1,8 @@
 class PermissionsPopulator
   ROLES = {
-    'application.passported.*' => 'Can create, edit, delete passported applications',
-    'application.non_passported.*' => 'Can create, edit, delete non-passported applications',
-    'application.non_passported.employment.*' => 'Can create, edit, delete employment applications',
+    "application.passported.*" => "Can create, edit, delete passported applications",
+    "application.non_passported.*" => "Can create, edit, delete non-passported applications",
+    "application.non_passported.employment.*" => "Can create, edit, delete employment applications",
 
   }.freeze
 

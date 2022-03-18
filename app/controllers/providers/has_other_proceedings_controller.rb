@@ -47,7 +47,7 @@ module Providers
     end
 
     def form_params
-      params[:action] == 'destroy' ? destroy_form_params : update_form_params
+      params[:action] == "destroy" ? destroy_form_params : update_form_params
     end
 
     def destroy_form_params

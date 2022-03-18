@@ -25,14 +25,14 @@ module Opponents
     validates(
       :understands_terms_of_court_order_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.understands_terms_of_court_order.to_s == 'false' }
+      if: proc { |form| !form.draft? && form.understands_terms_of_court_order.to_s == "false" }
     )
 
     validates :warning_letter_sent, presence: true, unless: :draft?
     validates(
       :warning_letter_sent_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.warning_letter_sent.to_s == 'false' }
+      if: proc { |form| !form.draft? && form.warning_letter_sent.to_s == "false" }
     )
 
     validates :police_notified, presence: true, unless: :draft?
@@ -42,7 +42,7 @@ module Opponents
     validates(
       :bail_conditions_set_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.bail_conditions_set.to_s == 'true' }
+      if: proc { |form| !form.draft? && form.bail_conditions_set.to_s == "true" }
     )
 
     def initialize(*args)
@@ -64,15 +64,15 @@ module Opponents
     end
 
     def interpolate_police_notified_details
-      return unless [true, false, 'true', 'false'].include?(police_notified)
+      return unless [true, false, "true", "false"].include?(police_notified)
 
       value = __send__("police_notified_details_#{police_notified}")
       @police_notified_details = value&.empty? ? nil : value
-      attributes['police_notified_details'] = @police_notified_details
+      attributes["police_notified_details"] = @police_notified_details
     end
 
     def extrapolate_police_notified_details
-      return unless [true, false, 'true', 'false'].include?(police_notified)
+      return unless [true, false, "true", "false"].include?(police_notified)
       return unless police_notified_details_expandable?
 
       field = "police_notified_details_#{police_notified}"
@@ -84,12 +84,12 @@ module Opponents
       %i[understands_terms_of_court_order warning_letter_sent].each do |attr|
         details = "#{attr}_details"
         attr_value = __send__(attr)
-        __send__(details)&.clear if attr_value.to_s == 'true'
+        __send__(details)&.clear if attr_value.to_s == "true"
       end
     end
 
     def clear_bail_details
-      bail_conditions_set_details&.clear if bail_conditions_set.to_s == 'false'
+      bail_conditions_set_details&.clear if bail_conditions_set.to_s == "false"
     end
 
     def police_notified_details_expandable?

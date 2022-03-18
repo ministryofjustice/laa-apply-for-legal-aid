@@ -21,11 +21,11 @@ class DashboardEventHandler
 private
 
   def name_parts
-    @name_parts ||= name.to_s.split('.')
+    @name_parts ||= name.to_s.split(".")
   end
 
   def name_matches?
-    name_parts[0].eql?('dashboard') && valid_events.include?(name_parts[1])
+    name_parts[0].eql?("dashboard") && valid_events.include?(name_parts[1])
   end
 
   def method_to_call
@@ -44,7 +44,7 @@ private
   end
 
   def application_created
-    Dashboard::UpdaterJob.perform_later('Applications') if payload[:state] == 'initiated'
+    Dashboard::UpdaterJob.perform_later("Applications") if payload[:state] == "initiated"
   end
 
   def provider_updated
@@ -52,16 +52,16 @@ private
   end
 
   def ccms_submission_saved
-    Dashboard::UpdaterJob.perform_later('Applications') if payload[:state].in?(%w[failed completed])
-    Dashboard::UpdaterJob.set(wait: 1.minute).perform_later('PendingCCMSSubmissions') if payload[:state].in?(%w[initialised failed completed])
+    Dashboard::UpdaterJob.perform_later("Applications") if payload[:state].in?(%w[failed completed])
+    Dashboard::UpdaterJob.set(wait: 1.minute).perform_later("PendingCCMSSubmissions") if payload[:state].in?(%w[initialised failed completed])
   end
 
   def declined_open_banking
-    Dashboard::UpdaterJob.perform_later('PercentageDeclinedOpenBanking')
+    Dashboard::UpdaterJob.perform_later("PercentageDeclinedOpenBanking")
   end
 
   def firm_created
-    Dashboard::UpdaterJob.perform_later('NumberProviderFirms')
+    Dashboard::UpdaterJob.perform_later("NumberProviderFirms")
   end
 
   def feedback_created
@@ -69,7 +69,7 @@ private
   end
 
   def application_submitted
-    Dashboard::UpdaterJob.perform_later('Applications')
+    Dashboard::UpdaterJob.perform_later("Applications")
   end
 
   def applicant_emailed

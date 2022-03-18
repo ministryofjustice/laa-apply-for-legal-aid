@@ -27,7 +27,7 @@ module Providers
     end
 
     def evidence_of_benefit?
-      form_params[:has_evidence_of_benefit] == 'true'
+      form_params[:has_evidence_of_benefit] == "true"
     end
 
     def passporting_benefit

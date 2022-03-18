@@ -5,7 +5,7 @@ class ConvertMetaDataToHash < ActiveRecord::Migration[6.0]
       next unless bt.meta_data.is_a?(String)
 
       label = bt.meta_data
-      bt.update!(meta_data: { label:, name: label, code: 'xx' })
+      bt.update!(meta_data: { label:, name: label, code: "xx" })
     end
   end
 

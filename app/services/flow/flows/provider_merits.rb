@@ -17,7 +17,7 @@ module Flow
           path: ->(application, params) do
             involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:id]
             case involved_child_id
-            when 'new'
+            when "new"
               partial_record = ApplicationMeritsTask::InvolvedChild.find_by(
                 full_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:full_name],
                 legal_aid_application_id: application.id
@@ -65,11 +65,11 @@ module Flow
         },
         chances_of_success: {
           path: ->(application) do
-            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_chances_of_success_index_path(proceeding)
           end,
           forward: ->(application) do
-            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             if proceeding.chances_of_success.success_likely?
               :merits_task_lists
             else
@@ -77,13 +77,13 @@ module Flow
             end
           end,
           check_answers: ->(application) do
-            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             proceeding.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
           end,
         },
         success_prospects: {
           path: ->(application) do
-            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_success_prospects_path(proceeding)
           end,
           forward: :merits_task_lists,
@@ -95,7 +95,7 @@ module Flow
         },
         linked_children: {
           path: ->(application) do
-            proceeding = application.proceedings.find(application.provider_step_params['merits_task_list_id'])
+            proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_linked_children_path(proceeding)
           end,
           forward: :merits_task_lists,

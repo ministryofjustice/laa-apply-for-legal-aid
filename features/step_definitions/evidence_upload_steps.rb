@@ -1,4 +1,4 @@
-When('I have completed a non-passported application and reached the evidence upload page') do
+When("I have completed a non-passported application and reached the evidence upload page") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -14,7 +14,7 @@ When('I have completed a non-passported application and reached the evidence upl
 end
 
 Then(/^I upload an evidence file named ['|"](.*?)['|"]/) do |filename|
-  attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: 'dz-hidden-input', make_visible: true)
+  attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: "dz-hidden-input", make_visible: true)
 end
 
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
@@ -25,11 +25,11 @@ Then(/^I should be able to delete ['|"](.*?)['|"]/) do |filename|
   find(:xpath, "//td[text()='#{filename}']/following-sibling::td//input[contains(@class,'button-as-link')]").click
 end
 
-Given('csrf is enabled') do
+Given("csrf is enabled") do
   ActionController::Base.allow_forgery_protection = true
 end
 
-And('I should see {int} uploaded files') do |int|
+And("I should see {int} uploaded files") do |int|
   sleep 0.5
   delete_buttons = find_all(:xpath, "//td//input[contains(@class,'button-as-link')]")
   expect(delete_buttons.count).to eq int

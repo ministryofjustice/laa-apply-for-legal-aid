@@ -18,7 +18,7 @@ module LegalAidApplications
     end
 
     def extra_employment_information_details_presence
-      return if draft? || extra_employment_information.to_s != 'true'
+      return if draft? || extra_employment_information.to_s != "true"
 
       add_blank_error_for :extra_employment_information_details if extra_employment_information_details.blank?
     end
@@ -28,7 +28,7 @@ module LegalAidApplications
     end
 
     def clear_employment_info_details
-      extra_employment_information_details&.clear if extra_employment_information.to_s == 'false'
+      extra_employment_information_details&.clear if extra_employment_information.to_s == "false"
     end
   end
 end

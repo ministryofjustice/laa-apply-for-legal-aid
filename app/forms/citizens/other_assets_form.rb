@@ -45,7 +45,7 @@ module Citizens
     validate :any_checkbox_checked_or_draft
 
     def second_home_checkbox_status
-      any_second_home_value_present? ? 'checked' : nil
+      any_second_home_value_present? ? "checked" : nil
     end
 
     def any_second_home_value_present?
@@ -114,7 +114,7 @@ module Citizens
     end
 
     def zero_string?(attr)
-      /\A0+\z/.match? attr.to_s.tr(' ,.', '')
+      /\A0+\z/.match? attr.to_s.tr(" ,.", "")
     end
   end
 end

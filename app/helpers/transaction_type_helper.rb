@@ -21,7 +21,7 @@ module TransactionTypeHelper
 
     sort_column_cell(
       id: "Category-#{object.id}",
-      sort_by: 'ZZZ',
+      sort_by: "ZZZ",
       content:
     )
   end

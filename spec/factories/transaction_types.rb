@@ -31,8 +31,8 @@ FactoryBot.define do
       operation { :credit }
 
       after(:create) do |record|
-        if record.name == 'excluded_benefits'
-          parent = TransactionType.find_or_create_by(name: 'benefits', operation: 'credit')
+        if record.name == "excluded_benefits"
+          parent = TransactionType.find_or_create_by(name: "benefits", operation: "credit")
           record.update!(parent_id: parent.id)
         end
       end
@@ -46,80 +46,80 @@ FactoryBot.define do
     end
 
     trait :friends_or_family do
-      name { 'friends_or_family' }
-      operation { 'credit' }
+      name { "friends_or_family" }
+      operation { "credit" }
       sort_order { 20 }
     end
 
     trait :salary do
-      name { 'salary' }
-      operation { 'credit' }
+      name { "salary" }
+      operation { "credit" }
       sort_order { 10 }
     end
 
     trait :maintenance_in do
-      name { 'maintenance_in' }
-      operation { 'credit' }
+      name { "maintenance_in" }
+      operation { "credit" }
       sort_order { 50 }
     end
 
     trait :property_or_lodger do
-      name { 'property_or_lodger' }
-      operation { 'credit' }
+      name { "property_or_lodger" }
+      operation { "credit" }
       sort_order { 50 }
     end
 
     trait :pension do
-      name { 'pension' }
-      operation { 'credit' }
+      name { "pension" }
+      operation { "credit" }
       sort_order { 50 }
     end
 
     trait :maintenance_out do
-      name { 'maintenance_out' }
-      operation { 'debit' }
+      name { "maintenance_out" }
+      operation { "debit" }
       sort_order { 50 }
     end
 
     trait :rent_or_mortgage do
-      name { 'rent_or_mortgage' }
-      operation { 'debit' }
+      name { "rent_or_mortgage" }
+      operation { "debit" }
       sort_order { 50 }
     end
 
     trait :benefits do
-      name { 'benefits' }
-      operation { 'credit' }
+      name { "benefits" }
+      operation { "credit" }
       sort_order { 30 }
     end
 
     trait :excluded_benefits do
-      name { 'excluded_benefits' }
-      operation { 'credit' }
+      name { "excluded_benefits" }
+      operation { "credit" }
       sort_order { 40 }
     end
 
     trait :rent_or_mortgage do
-      name { 'rent_or_mortgage' }
-      operation { 'debit' }
+      name { "rent_or_mortgage" }
+      operation { "debit" }
       sort_order { 140 }
     end
 
     trait :maintenance_out do
-      name { 'maintenance_out' }
-      operation { 'debit' }
+      name { "maintenance_out" }
+      operation { "debit" }
       sort_order { 160 }
     end
 
     trait :child_care do
-      name { 'child_care' }
-      operation { 'debit' }
+      name { "child_care" }
+      operation { "debit" }
       sort_order { 180 }
     end
 
     trait :legal_aid do
-      name { 'legal_aid' }
-      operation { 'debit' }
+      name { "legal_aid" }
+      operation { "debit" }
       sort_order { 180 }
     end
   end

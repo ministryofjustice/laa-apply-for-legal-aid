@@ -12,7 +12,7 @@ module CFE
       end
 
       def capital_contribution_required?
-        capital_assessment_result == 'contribution_required'
+        capital_assessment_result == "contribution_required"
       end
 
       def capital_contribution
@@ -24,7 +24,7 @@ module CFE
       end
 
       def income_contribution_required?
-        income_assessment_result == 'contribution_required'
+        income_assessment_result == "contribution_required"
       end
 
       def income_contribution
@@ -255,7 +255,7 @@ module CFE
 
       def deductions
         # stub out zero values if not found until CFE is updated
-        disposable_income[:deductions] || { dependants_allowance: '0.0', disregarded_state_benefits: '0.0' }
+        disposable_income[:deductions] || { dependants_allowance: "0.0", disregarded_state_benefits: "0.0" }
       end
     end
   end

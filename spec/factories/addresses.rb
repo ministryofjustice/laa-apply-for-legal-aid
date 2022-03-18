@@ -12,7 +12,7 @@ FactoryBot.define do
     end
 
     trait :with_address_for_xml_fixture do
-      postcode { 'GH08NY' }
+      postcode { "GH08NY" }
     end
   end
 end

@@ -14,12 +14,12 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}",
+      "Cache-Control" => "public, max-age=#{2.days.to_i}",
     }
   else
     config.action_controller.perform_caching = false
@@ -33,8 +33,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
-    host: ENV.fetch('MAILER_DEFAULT_URL', 'localhost'),
-    port: ENV.fetch('PORT', 3002),
+    host: ENV.fetch("MAILER_DEFAULT_URL", "localhost"),
+    port: ENV.fetch("PORT", 3002),
   }
 
   # Print deprecation notices to the Rails logger.
@@ -53,7 +53,7 @@ Rails.application.configure do
   config.i18n.raise_on_missing_translations = true
 
   # Policy Disregards feature flag
-  config.x.policy_disregards_start_date = Date.parse('2020-12-1')
+  config.x.policy_disregards_start_date = Date.parse("2020-12-1")
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -61,7 +61,7 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = true
 
-  config.x.application.host = ENV['HOST'] || "localhost:#{ENV.fetch('PORT', 3002)}"
+  config.x.application.host = ENV["HOST"] || "localhost:#{ENV.fetch('PORT', 3002)}"
   Rails.application.routes.default_url_options[:host] = config.x.application.host
 
   config.active_storage.service = :local

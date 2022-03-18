@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 ModelStruct = Struct.new(:happened_on)
 FormStruct = Struct.new(:happened_day, :happened_month, :happened_year)
@@ -21,20 +21,20 @@ RSpec.describe DateFieldBuilder do
     )
   end
 
-  describe '#fields' do
-    it 'returns three prefixed names for day, month, and year' do
+  describe "#fields" do
+    it "returns three prefixed names for day, month, and year" do
       expect(subject.fields).to eq(%i[happened_year happened_month happened_day])
     end
   end
 
-  describe '#from_form' do
-    it 'returns array of data stored in form prefixed part fields' do
+  describe "#from_form" do
+    it "returns array of data stored in form prefixed part fields" do
       expect(subject.from_form).to eq([form_date.year, form_date.month, form_date.day])
     end
   end
 
-  describe '#model_attributes' do
-    it 'returns hash of data for form build from model date' do
+  describe "#model_attributes" do
+    it "returns hash of data for form build from model date" do
       expected = {
         happened_day: model_date.day,
         happened_month: model_date.month,
@@ -44,97 +44,97 @@ RSpec.describe DateFieldBuilder do
     end
   end
 
-  describe '#model_date' do
-    it 'returns date from model' do
+  describe "#model_date" do
+    it "returns date from model" do
       expect(subject.model_date).to eq(model_date)
     end
   end
 
-  describe '#form_date' do
-    it 'returns date built from form part fields' do
+  describe "#form_date" do
+    it "returns date built from form part fields" do
       expect(subject.form_date).to eq(form_date)
     end
 
-    context 'with two character year' do
-      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime('%y')) }
+    context "with two character year" do
+      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
-      it 'returns date built from form part fields' do
+      it "returns date built from form part fields" do
         expect(subject.form_date).to eq(form_date)
       end
     end
   end
 
-  describe '#form_date_invalid?' do
-    it 'returns false with valid date data' do
+  describe "#form_date_invalid?" do
+    it "returns false with valid date data" do
       expect(subject.form_date_invalid?).to be false
     end
 
-    context 'with invalid data' do
+    context "with invalid data" do
       let(:form) { FormStruct.new(form_date.day, 15, form_date.year) }
 
-      it 'returns false' do
+      it "returns false" do
         expect(subject.form_date_invalid?).to be true
       end
     end
 
-    context 'with two character year' do
-      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime('%y')) }
+    context "with two character year" do
+      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
-      it 'returns false with valid date data' do
+      it "returns false with valid date data" do
         expect(subject.form_date_invalid?).to be false
       end
     end
 
-    context 'with one character year' do
-      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime('%y').last) }
+    context "with one character year" do
+      let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.strftime("%y").last) }
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject.form_date_invalid?).to be true
       end
     end
   end
 
-  describe '#blank?' do
-    it 'returns false if fully populated' do
+  describe "#blank?" do
+    it "returns false if fully populated" do
       expect(subject.blank?).to be false
     end
 
-    context 'when all form part fields are empty' do
+    context "when all form part fields are empty" do
       let(:form) { FormStruct.new }
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject.blank?).to be true
       end
     end
   end
 
-  describe '#partially_complete?' do
-    it 'returns false if fully populated' do
+  describe "#partially_complete?" do
+    it "returns false if fully populated" do
       expect(subject.partially_complete?).to be false
     end
 
-    context 'when one part field is empty' do
+    context "when one part field is empty" do
       let(:form) { FormStruct.new(form_date.day, nil, form_date.year) }
 
-      it 'returns true' do
+      it "returns true" do
         expect(subject.partially_complete?).to be true
       end
     end
 
-    context 'when all part fields empty' do
+    context "when all part fields empty" do
       let(:form) { FormStruct.new }
 
-      it 'returns false' do
+      it "returns false" do
         expect(subject.partially_complete?).to be false
       end
     end
   end
 
-  context 'when a suffix is set' do
+  context "when a suffix is set" do
     let(:suffix) { :gov_uk }
-    let(:form) { SuffixedFormStruct.new(form_date.day, form_date.month, form_date.strftime('%y')) }
+    let(:form) { SuffixedFormStruct.new(form_date.day, form_date.month, form_date.strftime("%y")) }
 
-    it 'returns date built from form new style part fields' do
+    it "returns date built from form new style part fields" do
       expect(subject.form_date).to eq(form_date)
     end
   end

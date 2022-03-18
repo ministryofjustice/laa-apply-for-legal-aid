@@ -1,4 +1,4 @@
-Given('An application has been created') do
+Given("An application has been created") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -7,40 +7,40 @@ Given('An application has been created') do
     :with_non_passported_state_machine,
     :applicant_entering_means,
     provider: create(:provider),
-    transaction_period_finish_on: '2019-07-01'
+    transaction_period_finish_on: "2019-07-01"
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: 'GBP'
+  create :bank_account, bank_provider: bank_provider, currency: "GBP"
   Populators::TransactionTypePopulator.call
 end
 
-Then('I visit the start of the financial assessment') do
+Then("I visit the start of the financial assessment") do
   visit citizens_legal_aid_application_path(secure_id)
 end
 
-Then('I visit the start of the financial assessment in Welsh') do
+Then("I visit the start of the financial assessment in Welsh") do
   Setting.setting.update!(allow_welsh_translation: true)
   visit citizens_legal_aid_application_path(secure_id)
-  click_link('Cymraeg')
+  click_link("Cymraeg")
 end
 
-Then('I return to English') do
-  click_link('English')
+Then("I return to English") do
+  click_link("English")
 end
 
-Then('I visit the first question about dependants') do
+Then("I visit the first question about dependants") do
   visit citizens_legal_aid_application_path(secure_id)
   visit citizens_has_dependants_path
 end
 
-Then('I visit the accounts page') do
+Then("I visit the accounts page") do
   @legal_aid_application.update! transactions_gathered: true
   visit citizens_accounts_path
 end
 
-Then('I visit the gather transactions page') do
+Then("I visit the gather transactions page") do
   @legal_aid_application = create(
     :application,
     :with_everything,
@@ -50,7 +50,7 @@ Then('I visit the gather transactions page') do
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: 'GBP'
+  create :bank_account, bank_provider: bank_provider, currency: "GBP"
 
   @legal_aid_application.update! transactions_gathered: true
   visit citizens_gather_transactions_path
@@ -60,7 +60,7 @@ Then('I visit the gather transactions page') do
   visit citizens_accounts_path
 end
 
-Then('I am directed to TrueLayer') do
+Then("I am directed to TrueLayer") do
   expect(current_url).to match(/truelayer.com/)
 end
 
@@ -68,7 +68,7 @@ def secure_id
   @secure_id ||= @legal_aid_application.generate_secure_id
 end
 
-Given('I have completed an application') do
+Given("I have completed an application") do
   @legal_aid_application = create(
     :application,
     :with_everything,
@@ -78,17 +78,17 @@ Given('I have completed an application') do
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   create :bank_account_holder, bank_provider: bank_provider
-  create :bank_account, bank_provider: bank_provider, currency: 'GBP'
+  create :bank_account, bank_provider: bank_provider, currency: "GBP"
   Populators::TransactionTypePopulator.call
   steps %(Then I visit the start of the financial assessment)
 end
 
-Given('I complete the citizen journey as far as check your answers') do
+Given("I complete the citizen journey as far as check your answers") do
   visit citizens_check_answers_path
   steps %(Then I should be on a page showing "Check your answers")
 end
 
-Given('the application has a restriction') do
+Given("the application has a restriction") do
   create(
     :application,
     :with_restrictions,
@@ -96,10 +96,10 @@ Given('the application has a restriction') do
   )
 end
 
-Given('{string} savings of {int}') do |savings_method, amount|
+Given("{string} savings of {int}") do |savings_method, amount|
   @legal_aid_application.savings_amount.update!(savings_method.to_sym => amount)
 end
 
-Then('I should have completed the dependants section of the journey') do
+Then("I should have completed the dependants section of the journey") do
   steps %(Then I should be on a page showing "Which of the following payments do you make?")
 end

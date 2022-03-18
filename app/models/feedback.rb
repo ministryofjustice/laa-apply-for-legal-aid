@@ -22,6 +22,6 @@ class Feedback < ApplicationRecord
   validates :done_all_needed, inclusion: { in: [true, false] }
 
   after_create do
-    ActiveSupport::Notifications.instrument 'dashboard.feedback_created', feedback_id: id
+    ActiveSupport::Notifications.instrument "dashboard.feedback_created", feedback_id: id
   end
 end

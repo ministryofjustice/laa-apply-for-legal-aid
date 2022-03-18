@@ -55,19 +55,19 @@ module HMRC
       end
 
       def data_array
-        @data_array ||= hmrc_response['data']
+        @data_array ||= hmrc_response["data"]
       end
 
       def paye_hash
-        @paye_hash ||= data_array.detect { |hash| hash.key?('income/paye/paye') }
+        @paye_hash ||= data_array.detect { |hash| hash.key?("income/paye/paye") }
       end
 
       def employments_array
-        @employments_array ||= data_array.detect { |hash| hash.key?('employments/paye/employments') }['employments/paye/employments']
+        @employments_array ||= data_array.detect { |hash| hash.key?("employments/paye/employments") }["employments/paye/employments"]
       end
 
       def income_array
-        @income_array ||= paye_hash.dig('income/paye/paye', 'income')
+        @income_array ||= paye_hash.dig("income/paye/paye", "income")
       end
 
       def new_employment_payment(income_hash)
@@ -81,21 +81,21 @@ module HMRC
       end
 
       def date_from_hash(hash)
-        Date.parse hash.fetch('paymentDate')
+        Date.parse hash.fetch("paymentDate")
       end
 
       def gross_from_hash(hash)
-        hash.fetch('grossEarningsForNics').fetch('inPayPeriod1')
+        hash.fetch("grossEarningsForNics").fetch("inPayPeriod1")
       end
 
       def tax_from_hash(hash)
-        (hash['taxDeductedOrRefunded'] || 0.0) * -1
+        (hash["taxDeductedOrRefunded"] || 0.0) * -1
       end
 
       def ni_from_hash(hash)
-        return 0.0 unless hash.key?('employeeNics')
+        return 0.0 unless hash.key?("employeeNics")
 
-        hash.fetch('employeeNics').fetch('inPayPeriod1') * -1
+        hash.fetch("employeeNics").fetch("inPayPeriod1") * -1
       end
     end
   end

@@ -22,43 +22,43 @@ class LegalAidApplication < ApplicationRecord
   has_one :benefit_check_result, dependent: :destroy
   has_one :other_assets_declaration, dependent: :destroy
   has_one :savings_amount, dependent: :destroy
-  has_one :statement_of_case, class_name: 'ApplicationMeritsTask::StatementOfCase', dependent: :destroy
+  has_one :statement_of_case, class_name: "ApplicationMeritsTask::StatementOfCase", dependent: :destroy
   has_one :gateway_evidence, dependent: :destroy
   has_one :uploaded_evidence_collection, dependent: :destroy
-  has_one :opponent, class_name: 'ApplicationMeritsTask::Opponent', dependent: :destroy
-  has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: 'ApplicationMeritsTask::Incident', inverse_of: :legal_aid_application, dependent: :destroy
-  has_many :attempts_to_settles, class_name: 'ProceedingMeritsTask::AttemptsToSettle', through: :proceedings
+  has_one :opponent, class_name: "ApplicationMeritsTask::Opponent", dependent: :destroy
+  has_one :latest_incident, -> { order(occurred_on: :desc) }, class_name: "ApplicationMeritsTask::Incident", inverse_of: :legal_aid_application, dependent: :destroy
+  has_many :attempts_to_settles, class_name: "ProceedingMeritsTask::AttemptsToSettle", through: :proceedings
   has_many :legal_aid_application_transaction_types, dependent: :destroy
   has_many :transaction_types, through: :legal_aid_application_transaction_types
   has_many :cash_transactions, dependent: :destroy
   has_many :irregular_incomes, dependent: :destroy
   has_many :dependants, dependent: :destroy
-  has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: 'CCMS::Submission', inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :ccms_submission, -> { order(created_at: :desc) }, class_name: "CCMS::Submission", inverse_of: :legal_aid_application, dependent: :destroy
   has_one :vehicle, dependent: :destroy
   has_one :policy_disregards, dependent: :destroy
   has_one :dwp_override, dependent: :destroy
-  has_one :bank_transaction_report, -> { where(attachment_type: 'bank_transaction_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
-  has_many :legal_framework_submissions, -> { order(created_at: :asc) }, class_name: 'LegalFramework::Submission', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :legal_framework_merits_task_list, class_name: 'LegalFramework::MeritsTaskList', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :merits_report, -> { where(attachment_type: 'merits_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :means_report, -> { where(attachment_type: 'means_report') }, class_name: 'Attachment', inverse_of: :legal_aid_application, dependent: :destroy
-  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
-  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: 'CFE::Submission', inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :bank_transaction_report, -> { where(attachment_type: "bank_transaction_report") }, class_name: "Attachment", inverse_of: :legal_aid_application, dependent: :destroy
+  has_many :legal_framework_submissions, -> { order(created_at: :asc) }, class_name: "LegalFramework::Submission", inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :legal_framework_merits_task_list, class_name: "LegalFramework::MeritsTaskList", inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :merits_report, -> { where(attachment_type: "merits_report") }, class_name: "Attachment", inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :means_report, -> { where(attachment_type: "means_report") }, class_name: "Attachment", inverse_of: :legal_aid_application, dependent: :destroy
+  has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: "CFE::Submission", inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :most_recent_cfe_submission, -> { order(created_at: :desc) }, class_name: "CFE::Submission", inverse_of: :legal_aid_application, dependent: :destroy
   has_many :scheduled_mailings, dependent: :destroy
-  has_one :state_machine, class_name: 'BaseStateMachine', dependent: :destroy
-  has_many :involved_children, class_name: 'ApplicationMeritsTask::InvolvedChild', dependent: :destroy
-  has_many :hmrc_responses, class_name: 'HMRC::Response', dependent: :destroy, inverse_of: :legal_aid_application
+  has_one :state_machine, class_name: "BaseStateMachine", dependent: :destroy
+  has_many :involved_children, class_name: "ApplicationMeritsTask::InvolvedChild", dependent: :destroy
+  has_many :hmrc_responses, class_name: "HMRC::Response", dependent: :destroy, inverse_of: :legal_aid_application
   has_many :employments, dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
   after_create do
-    ActiveSupport::Notifications.instrument 'dashboard.application_created', id: id, state: state
+    ActiveSupport::Notifications.instrument "dashboard.application_created", id: id, state: state
   end
 
   after_save do
-    ActiveSupport::Notifications.instrument 'dashboard.declined_open_banking' if saved_change_to_open_banking_consent?
-    ActiveSupport::Notifications.instrument('dashboard.provider_updated', provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
+    ActiveSupport::Notifications.instrument "dashboard.declined_open_banking" if saved_change_to_open_banking_consent?
+    ActiveSupport::Notifications.instrument("dashboard.provider_updated", provider_id: provider.id) if proc { |laa| laa.state }.eql?(:assessment_submitted)
   end
 
   validate :validate_document_categories
@@ -109,11 +109,11 @@ class LegalAidApplication < ApplicationRecord
   scope :latest, -> { order(created_at: :desc) }
   scope :search, ->(term) do
     attributes = [
-      'application_ref',
-      'concat(applicants.first_name, applicants.last_name)',
-      'ccms_submissions.case_ccms_reference'
+      "application_ref",
+      "concat(applicants.first_name, applicants.last_name)",
+      "ccms_submissions.case_ccms_reference"
     ]
-    clean_term = term.to_s.downcase.gsub(/[^0-9a-z\\s]/i, '')
+    clean_term = term.to_s.downcase.gsub(/[^0-9a-z\\s]/i, "")
     queries = attributes.map do |attribute|
       left_joins(:applicant, :ccms_submission).where("regexp_replace(lower(#{attribute}),'[^[:alnum:]]', '', 'g') like ?", "%#{clean_term}%")
     end
@@ -126,9 +126,9 @@ class LegalAidApplication < ApplicationRecord
 
   enum(
     own_home: {
-      no: 'no'.freeze,
-      mortgage: 'mortgage'.freeze,
-      owned_outright: 'owned_outright'.freeze,
+      no: "no".freeze,
+      mortgage: "mortgage".freeze,
+      owned_outright: "owned_outright".freeze,
     },
     _prefix: true
   )
@@ -160,7 +160,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def section_8_proceedings?
-    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?('KSEC8') }
+    proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KSEC8") }
   end
 
   def evidence_is_required?
@@ -306,7 +306,7 @@ class LegalAidApplication < ApplicationRecord
 
   def shared_ownership=(new_val)
     self[:shared_ownership] = new_val
-    self[:percentage_home] = 100.0 if new_val == 'no_sole_owner'
+    self[:percentage_home] = 100.0 if new_val == "no_sole_owner"
   end
 
   def own_home?
@@ -374,7 +374,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def value_of_student_finance
-    receives_student_finance? ? irregular_incomes.student_finance.order('created_at').last.amount : nil
+    receives_student_finance? ? irregular_incomes.student_finance.order("created_at").last.amount : nil
   end
 
   def default_cost_limitation
@@ -407,7 +407,7 @@ class LegalAidApplication < ApplicationRecord
   def state_machine_proxy
     if state_machine.nil?
       save!
-      create_state_machine(type: 'PassportedStateMachine')
+      create_state_machine(type: "PassportedStateMachine")
     end
     state_machine
   end
@@ -444,7 +444,7 @@ class LegalAidApplication < ApplicationRecord
 
   def merits_complete!
     update!(merits_submitted_at: Time.current) unless merits_submitted_at?
-    ActiveSupport::Notifications.instrument 'dashboard.application_submitted'
+    ActiveSupport::Notifications.instrument "dashboard.application_submitted"
   end
 
   def summary_state
@@ -500,9 +500,9 @@ private
   end
 
   def add_uncategorised_transaction_error(transaction_type)
-    return if transaction_type.name == 'excluded_benefits'
+    return if transaction_type.name == "excluded_benefits"
 
-    errors.add(transaction_type.name, I18n.t('activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message'))
+    errors.add(transaction_type.name, I18n.t("activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message"))
   end
 
   def create_app_ref
@@ -515,7 +515,7 @@ private
 
   def validate_document_categories
     required_document_categories.each do |category|
-      errors.add(:required_document_categories, 'must be valid document categories') unless DocumentCategory.displayable_document_category_names.include?(category)
+      errors.add(:required_document_categories, "must be valid document categories") unless DocumentCategory.displayable_document_category_names.include?(category)
     end
   end
 end

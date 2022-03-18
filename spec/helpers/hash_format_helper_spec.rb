@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HashFormatHelper, type: :helper do
-  let(:source) { { key: 'value', sub_hash: { sub_key: 'sub_value' }, array_hash: [{ array_one: 'array_value' }, { array_two: 'array_value' }] } }
+  let(:source) { { key: "value", sub_hash: { sub_key: "sub_value" }, array_hash: [{ array_one: "array_value" }, { array_two: "array_value" }] } }
   let(:expected_response) do
     '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Key</dt><dd>Value</dd></dl>' \
       '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Hash</dt>'\
@@ -11,22 +11,22 @@ RSpec.describe HashFormatHelper, type: :helper do
       '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Two</dt><dd>Array_value</dd></dl></dl>'
   end
 
-  describe '#format_hash' do
+  describe "#format_hash" do
     subject { format_hash(source) }
 
-    context 'when passed a hash' do
+    context "when passed a hash" do
       it { is_expected.to eql expected_response }
     end
 
-    context 'hash has key but no value' do
+    context "hash has key but no value" do
       let(:source) { { result: nil } }
 
-      it 'returns empty string' do
-        expect(subject).to eq ''
+      it "returns empty string" do
+        expect(subject).to eq ""
       end
     end
 
-    context 'when passed invalid data' do
+    context "when passed invalid data" do
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
         subject
@@ -35,7 +35,7 @@ RSpec.describe HashFormatHelper, type: :helper do
       let(:source) { { key: :ten } }
       let(:expected_response) { "Unexpected value type of 'Symbol' for key 'Key' in format_hash: :ten" }
 
-      it 'logs error messages' do
+      it "logs error messages" do
         expect(Rails.logger).to have_received(:info).with(expected_response).once
       end
     end

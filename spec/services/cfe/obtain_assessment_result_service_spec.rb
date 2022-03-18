@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module CFE
   RSpec.describe ObtainAssessmentResultService do
@@ -8,51 +8,51 @@ module CFE
       VCR.turn_on!
     end
 
-    let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, application_ref: 'L-XYZ-999' }
-    let(:submission) { create :cfe_submission, aasm_state: 'explicit_remarks_created', legal_aid_application: application }
+    let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, application_ref: "L-XYZ-999" }
+    let(:submission) { create :cfe_submission, aasm_state: "explicit_remarks_created", legal_aid_application: application }
     let(:expected_response) { expected_response_hash.to_json }
     let(:service) { described_class.new(submission) }
 
-    describe '#cfe_url' do
-      it 'contains the submission assessment id' do
+    describe "#cfe_url" do
+      it "contains the submission assessment id" do
         expect(service.cfe_url)
           .to eq "#{Rails.configuration.x.check_financial_eligibility_host}/assessments/#{submission.assessment_id}"
       end
     end
 
-    describe 'private method #headers' do
-      it 'includes version=4 in the Accept header' do
+    describe "private method #headers" do
+      it "includes version=4 in the Accept header" do
         expect(service.__send__(:headers))
           .to eq(
             {
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json;version=4',
+              "Content-Type" => "application/json",
+              "Accept" => "application/json;version=4",
             }
           )
       end
     end
 
-    context 'success' do
+    context "success" do
       before do
         stub_request(:get, service.cfe_url)
           .to_return(body: expected_response)
       end
 
-      it 'updates the submission state to results_obtained' do
+      it "updates the submission state to results_obtained" do
         described_class.call(submission)
-        expect(submission.aasm_state).to eq 'results_obtained'
+        expect(submission.aasm_state).to eq "results_obtained"
       end
 
-      it 'stores the response in the submission cfe_result field' do
+      it "stores the response in the submission cfe_result field" do
         described_class.call(submission)
         expect(submission.cfe_result).to eq expected_response
       end
 
-      it 'writes a history record' do
+      it "writes a history record" do
         described_class.call(submission)
         history = submission.submission_histories.first
         expect(history.url).to eq service.cfe_url
-        expect(history.http_method).to eq 'GET'
+        expect(history.http_method).to eq "GET"
         expect(history.request_payload).to be_nil
         expect(history.http_response_status).to eq 200
         expect(history.response_payload).to eq expected_response
@@ -61,31 +61,31 @@ module CFE
       end
     end
 
-    context 'unsuccessful call' do
-      context 'http status 404' do
+    context "unsuccessful call" do
+      context "http status 404" do
         before do
           stub_request(:get, service.cfe_url)
-            .to_return(body: '', status: 404)
+            .to_return(body: "", status: 404)
         end
 
-        it 'updates the submission state to failed' do
+        it "updates the submission state to failed" do
           expect {
             described_class.call(submission)
           }.to raise_error CFE::SubmissionError
-          expect(submission.aasm_state).to eq 'failed'
+          expect(submission.aasm_state).to eq "failed"
         end
 
-        it 'writes the details to the history record' do
+        it "writes the details to the history record" do
           expect {
             described_class.call(submission)
           }.to raise_error CFE::SubmissionError
           history = submission.submission_histories.last
           expect(history.url).to eq service.cfe_url
-          expect(history.http_method).to eq 'GET'
+          expect(history.http_method).to eq "GET"
           expect(history.request_payload).to be_nil
           expect(history.http_response_status).to eq 404
           expect(history.response_payload).to be_nil
-          expect(history.error_message).to eq 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code'
+          expect(history.error_message).to eq "CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code"
           expect(history.error_backtrace).to be_nil
         end
       end
@@ -93,24 +93,24 @@ module CFE
 
     def expected_response_hash
       {
-        version: '4',
-        timestamp: '2021-04-29T15:44:53.000Z',
+        version: "4",
+        timestamp: "2021-04-29T15:44:53.000Z",
         success: true,
         result_summary: {
           overall_result: {
-            result: 'contribution_required',
+            result: "contribution_required",
             capital_contribution: 38_500.0,
             income_contribution: 0.0,
             matter_types: [
               {
-                matter_type: 'domestic_abuse',
-                result: 'contribution_required',
+                matter_type: "domestic_abuse",
+                result: "contribution_required",
               }
             ],
             proceeding_types: [
               {
-                ccms_code: 'DA001',
-                result: 'contribution_required',
+                ccms_code: "DA001",
+                result: "contribution_required",
               }
             ],
           },
@@ -118,9 +118,9 @@ module CFE
             total_gross_income: 1615.0,
             proceeding_types: [
               {
-                ccms_code: 'DA001',
+                ccms_code: "DA001",
                 upper_threshold: 999_999_999_999.0,
-                result: 'eligible',
+                result: "eligible",
               }
             ],
           },
@@ -135,10 +135,10 @@ module CFE
             income_contribution: 0.0,
             proceeding_types: [
               {
-                ccms_code: 'DA001',
+                ccms_code: "DA001",
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
-                result: 'eligible',
+                result: "eligible",
               }
             ],
           },
@@ -154,21 +154,21 @@ module CFE
             assessed_capital: 41_500.0,
             proceeding_types: [
               {
-                ccms_code: 'DA001',
+                ccms_code: "DA001",
                 lower_threshold: 3000.0,
                 upper_threshold: 999_999_999_999.0,
-                result: 'contribution_required',
+                result: "contribution_required",
               }
             ],
           },
         },
         assessment: {
-          id: '53448494-5481-4b65-95b8-2afb6e7bc862',
-          client_reference_id: 'NPE6-1',
-          submission_date: '2019-05-29',
+          id: "53448494-5481-4b65-95b8-2afb6e7bc862",
+          client_reference_id: "NPE6-1",
+          submission_date: "2019-05-29",
           applicant: {
-            date_of_birth: '1990-07-15',
-            involvement_type: 'applicant',
+            date_of_birth: "1990-07-15",
+            involvement_type: "applicant",
             has_partner_opponent: false,
             receives_qualifying_benefit: false,
             self_employed: false,
@@ -185,7 +185,7 @@ module CFE
                 cash_transactions: 0.0,
                 bank_transactions: [
                   {
-                    name: 'Child Benefit',
+                    name: "Child Benefit",
                     monthly_value: 200.0,
                     excluded_from_income_assessment: false,
                   }
@@ -246,15 +246,15 @@ module CFE
             capital_items: {
               liquid: [
                 {
-                  description: 'Bank acct 1',
+                  description: "Bank acct 1",
                   value: 0.0,
                 },
                 {
-                  description: 'Bank acct 2',
+                  description: "Bank acct 2",
                   value: 0.0,
                 },
                 {
-                  description: 'Bank acct 3',
+                  description: "Bank acct 3",
                   value: 0.0,
                 }
               ],
@@ -263,7 +263,7 @@ module CFE
                 {
                   value: 9000.0,
                   loan_amount_outstanding: 0.0,
-                  date_of_purchase: '2018-05-20',
+                  date_of_purchase: "2018-05-20",
                   in_regular_use: false,
                   included_in_assessment: true,
                   assessed_value: 9000.0,

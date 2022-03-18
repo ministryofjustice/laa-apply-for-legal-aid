@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module Reports
   module MIS
@@ -30,35 +30,35 @@ module Reports
       let(:num_applications) { (unsubmitted_applications + submitted_applications + [applications_being_submitted]).flatten.size }
       let(:report) { described_class.new }
 
-      describe '#run' do
-        context 'runs successfully' do
-          it 'returns a csv string with a header line' do
+      describe "#run" do
+        context "runs successfully" do
+          it "returns a csv string with a header line" do
             csv_string = report.run
             lines = csv_string.split("\n")
             expect(lines.first).to match(/^Firm name,User name,Office ID/)
           end
 
-          it 'returns a header and seven detail lines' do
+          it "returns a header and seven detail lines" do
             csv_string = report.run
             lines = csv_string.split("\n")
             expect(lines.size).to eq num_applications + 1
           end
         end
 
-        context 'exception' do
+        context "exception" do
           before { expect(report).to receive(:generate_csv_string).and_raise(RuntimeError) }
 
-          it 'notifies sentry' do
+          it "notifies sentry" do
             expect(Sentry).to receive(:capture_message)
             report.run
           end
         end
 
-        context 'ApplicationDetailCsvLine exception' do
-          before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, 'fake error') }
+        context "ApplicationDetailCsvLine exception" do
+          before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, "fake error") }
 
-          it 'logs the error message' do
-            expect(Rails.logger).to receive(:info).with('ApplicationDetailsReport - generate_csv_string - fake error')
+          it "logs the error message" do
+            expect(Rails.logger).to receive(:info).with("ApplicationDetailsReport - generate_csv_string - fake error")
             report.run
           end
         end

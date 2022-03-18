@@ -29,7 +29,7 @@ module Applicants
       :date_of_birth,
       date: {
         not_in_the_future: true,
-        earliest_allowed_date: { date: '1900-01-01' },
+        earliest_allowed_date: { date: "1900-01-01" },
       },
       allow_nil: true
     )
@@ -56,7 +56,7 @@ module Applicants
     def normalise_national_insurance_number
       return if national_insurance_number.blank?
 
-      national_insurance_number.delete!(' ')
+      national_insurance_number.delete!(" ")
       national_insurance_number.upcase!
     end
 
@@ -93,7 +93,7 @@ module Applicants
     end
 
     def test_level_validation?
-      Rails.configuration.x.laa_portal.mock_saml == 'true'
+      Rails.configuration.x.laa_portal.mock_saml == "true"
     end
   end
 end

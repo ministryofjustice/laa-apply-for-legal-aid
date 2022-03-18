@@ -74,93 +74,93 @@ module Reports
 
       def self.header_row
         [
-          'Firm name',
-          'User name',
-          'Office ID',
-          'Applicant name',
-          'State',
-          'CCMS reason',
-          'CCMS reference number',
-          'Single/Multi Proceedings',
-          'Matter types',
-          'No. of proceedings',
-          'Proceeding types selected',
-          'LASPO Question',
-          'Case Type',
-          'DWP Overridden',
-          'Delegated functions used',
-          'Proceedings DF used',
-          'Proceedings DF not used',
-          'Delegated functions dates',
-          'Delegated functions reported',
-          'Requested higher limit?',
-          'Limit requested',
-          'Payments received in cash?',
-          'Student finance received?',
-          'Payments made in cash?',
-          'Client has dependants?',
-          'Disregarded income/capital?',
-          'Own home?',
-          'Value',
-          'Outstanding mortgage',
-          'Shared?',
-          '%age owned',
-          'Vehicle?',
-          'Vehicle value',
-          'Outstanding loan?',
-          'Loan remaining',
-          'Date purchased',
-          'In Regular use?',
-          'Current acct?',
-          'Savings acct?',
-          'Cash?',
-          'Third party acct?',
-          'NSI and PB?',
-          'PLC shares?',
-          'Govt. stocks, bonds?, etc?',
-          'Life assurance?',
-          'Current acct value',
-          'Savings acct value',
-          'Cash value',
-          'Third party acct value',
-          'NSI and PB value',
-          'PLC shares value',
-          'Govt. stocks, bonds value',
-          'Life assurance value',
-          'Valuable items?',
-          'Second home?',
-          'Timeshare?',
-          'Land?',
-          'Inheritance?',
-          'Money owed?',
-          'Valuable items value',
-          'Second home value',
-          'Timeshare value',
-          'Land value',
-          'Inheritance value',
-          'Money owed value',
-          'Restrictions?',
-          'Restriction details',
-          'Fully eligible (means)?',
-          'Partially eligible (means)?',
-          'Number of children involved',
-          'Supporting evidence uploaded?',
-          'Number of items of evidence',
-          'Opponent can understand?',
-          'Ability to understand details',
-          'Warning letter sent?',
-          'Warning letter details',
-          'Police notified?',
-          'Police notification details',
-          'Bail conditions set?',
-          'Bail details',
-          'Prospects of success',
-          'Prospects of success details',
-          'SOC uploaded?',
-          'Application started',
-          'Application submitted',
-          'Application deleted',
-          'HMRC data'
+          "Firm name",
+          "User name",
+          "Office ID",
+          "Applicant name",
+          "State",
+          "CCMS reason",
+          "CCMS reference number",
+          "Single/Multi Proceedings",
+          "Matter types",
+          "No. of proceedings",
+          "Proceeding types selected",
+          "LASPO Question",
+          "Case Type",
+          "DWP Overridden",
+          "Delegated functions used",
+          "Proceedings DF used",
+          "Proceedings DF not used",
+          "Delegated functions dates",
+          "Delegated functions reported",
+          "Requested higher limit?",
+          "Limit requested",
+          "Payments received in cash?",
+          "Student finance received?",
+          "Payments made in cash?",
+          "Client has dependants?",
+          "Disregarded income/capital?",
+          "Own home?",
+          "Value",
+          "Outstanding mortgage",
+          "Shared?",
+          "%age owned",
+          "Vehicle?",
+          "Vehicle value",
+          "Outstanding loan?",
+          "Loan remaining",
+          "Date purchased",
+          "In Regular use?",
+          "Current acct?",
+          "Savings acct?",
+          "Cash?",
+          "Third party acct?",
+          "NSI and PB?",
+          "PLC shares?",
+          "Govt. stocks, bonds?, etc?",
+          "Life assurance?",
+          "Current acct value",
+          "Savings acct value",
+          "Cash value",
+          "Third party acct value",
+          "NSI and PB value",
+          "PLC shares value",
+          "Govt. stocks, bonds value",
+          "Life assurance value",
+          "Valuable items?",
+          "Second home?",
+          "Timeshare?",
+          "Land?",
+          "Inheritance?",
+          "Money owed?",
+          "Valuable items value",
+          "Second home value",
+          "Timeshare value",
+          "Land value",
+          "Inheritance value",
+          "Money owed value",
+          "Restrictions?",
+          "Restriction details",
+          "Fully eligible (means)?",
+          "Partially eligible (means)?",
+          "Number of children involved",
+          "Supporting evidence uploaded?",
+          "Number of items of evidence",
+          "Opponent can understand?",
+          "Ability to understand details",
+          "Warning letter sent?",
+          "Warning letter details",
+          "Police notified?",
+          "Police notification details",
+          "Bail conditions set?",
+          "Bail details",
+          "Prospects of success",
+          "Prospects of success details",
+          "SOC uploaded?",
+          "Application started",
+          "Application submitted",
+          "Application deleted",
+          "HMRC data"
         ]
       end
 
@@ -212,14 +212,14 @@ module Reports
         @line << applicant.full_name
         @line << state
         @line << ccms_reason
-        @line << (ccms_submission.nil? ? '' : case_ccms_reference)
-        @line << (proceedings.count > 1 ? 'Multi' : 'Single')
+        @line << (ccms_submission.nil? ? "" : case_ccms_reference)
+        @line << (proceedings.count > 1 ? "Multi" : "Single")
       end
 
       def proceeding_details
-        @line << proceedings.map(&:matter_type).uniq.sort.join(', ')
+        @line << proceedings.map(&:matter_type).uniq.sort.join(", ")
         @line << proceedings.count
-        @line << proceedings.map(&:meaning).sort.join(', ')
+        @line << proceedings.map(&:meaning).sort.join(", ")
         @line << laspo_question
       end
 
@@ -232,7 +232,7 @@ module Reports
       end
 
       def passported_check_result
-        @line << (applicant_receives_benefit? ? 'Passported' : 'Non-Passported')
+        @line << (applicant_receives_benefit? ? "Passported" : "Non-Passported")
       end
 
       def dwp_overridden
@@ -243,8 +243,8 @@ module Reports
         @line << yesno(used_delegated_functions?)
         @line << proceedings_df_used
         @line << proceedings_df_not_used
-        @line << proceedings.map(&:pretty_df_date).join(', ')
-        @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime('%Y-%m-%d') : '')
+        @line << proceedings.map(&:pretty_df_date).join(", ")
+        @line << (used_delegated_functions? ? used_delegated_functions_reported_on&.strftime("%Y-%m-%d") : "")
       end
 
       def default_cost_overrride
@@ -254,22 +254,22 @@ module Reports
 
       def main_home_details
         @line << own_home
-        @line << (own_home == 'no' ? '' : property_value)
-        @line << (own_home == 'mortgage' ? outstanding_mortgage_amount : '')
+        @line << (own_home == "no" ? "" : property_value)
+        @line << (own_home == "mortgage" ? outstanding_mortgage_amount : "")
         @line << shared_ownership
-        @line << (shared_ownership == 'no_sole_owner' ? '' : percentage_home)
+        @line << (shared_ownership == "no_sole_owner" ? "" : percentage_home)
       end
 
       def vehicle_details
         @line << yesno(vehicle.present?)
-        vehicle.present? ? vehicle_attrs : @line += ['', '', '', '', '']
+        vehicle.present? ? vehicle_attrs : @line += ["", "", "", "", ""]
       end
 
       def vehicle_attrs
         @line << vehicle.estimated_value
-        @line << (nil_or_zero?(vehicle.payment_remaining) ? 'No' : 'Yes')
-        @line << (nil_or_zero?(vehicle.payment_remaining) ? '' : vehicle.payment_remaining)
-        @line << vehicle.purchased_on&.strftime('%Y-%m-%d')
+        @line << (nil_or_zero?(vehicle.payment_remaining) ? "No" : "Yes")
+        @line << (nil_or_zero?(vehicle.payment_remaining) ? "" : vehicle.payment_remaining)
+        @line << vehicle.purchased_on&.strftime("%Y-%m-%d")
         @line << yesno(vehicle.used_regularly?)
       end
 
@@ -278,8 +278,8 @@ module Reports
           sandi_bools
           sandi_values
         else
-          8.times { @line << 'No' }
-          8.times { @line << '' }
+          8.times { @line << "No" }
+          8.times { @line << "" }
         end
       end
 
@@ -301,7 +301,7 @@ module Reports
       end
 
       def sandi_values
-        sandi_attributes.each { |attr| @line << (attr.nil? ? '' : attr) }
+        sandi_attributes.each { |attr| @line << (attr.nil? ? "" : attr) }
       end
 
       def other_assets_details
@@ -309,8 +309,8 @@ module Reports
           other_assets_bools
           other_assets_values
         else
-          6.times { @line << 'No' }
-          6.times { @line << '' }
+          6.times { @line << "No" }
+          6.times { @line << "" }
         end
       end
 
@@ -331,13 +331,13 @@ module Reports
 
       def other_assets_values
         other_assets_attributes.each do |attr|
-          @line << (attr.nil? ? '' : attr)
+          @line << (attr.nil? ? "" : attr)
         end
       end
 
       def restrictions
         @line << yesno(laa.has_restrictions?)
-        @line << (laa.has_restrictions? ? laa.restrictions_details : '')
+        @line << (laa.has_restrictions? ? laa.restrictions_details : "")
       end
 
       def eligibility
@@ -349,7 +349,7 @@ module Reports
       end
 
       def opponent_details
-        opponent.present? ? opponent_attrs : 8.times { @line << '' }
+        opponent.present? ? opponent_attrs : 8.times { @line << "" }
       end
 
       def opponent_attrs
@@ -367,8 +367,8 @@ module Reports
         @line << lowest_prospect_of_success
         @line << chances_of_success&.success_prospect_details
         @line << statement_of_case_uploaded?
-        @line << created_at.strftime('%Y-%m-%d')
-        @line << merits_submitted_at&.strftime('%Y-%m-%d')
+        @line << created_at.strftime("%Y-%m-%d")
+        @line << merits_submitted_at&.strftime("%Y-%m-%d")
         @line << yesno(laa.discarded?)
       end
 
@@ -377,7 +377,7 @@ module Reports
       end
 
       def yesno(value)
-        value == true ? 'Yes' : 'No'
+        value == true ? "Yes" : "No"
       end
 
       def nil_or_zero?(value)
@@ -387,24 +387,24 @@ module Reports
       def laspo_question
         case @laa.in_scope_of_laspo
         when true
-          'Yes'
+          "Yes"
         when false
-          'No'
+          "No"
         else
-          ''
+          ""
         end
       end
 
       def gateway_evidence_count
-        gateway_evidence.present? ? gateway_evidence.pdf_attachments.count : ''
+        gateway_evidence.present? ? gateway_evidence.pdf_attachments.count : ""
       end
 
       def proceedings_df_used
-        proceedings.using_delegated_functions.map(&:meaning).join(', ')
+        proceedings.using_delegated_functions.map(&:meaning).join(", ")
       end
 
       def proceedings_df_not_used
-        proceedings.not_using_delegated_functions.map(&:meaning).join(', ')
+        proceedings.not_using_delegated_functions.map(&:meaning).join(", ")
       end
     end
   end

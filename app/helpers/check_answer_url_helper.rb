@@ -7,7 +7,7 @@ module CheckAnswerUrlHelper
       params: args
     )
     anchor = field_name_to_anchor_map[field_name]
-    [flow_service.current_path, anchor].compact.join('#')
+    [flow_service.current_path, anchor].compact.join("#")
   end
 
   # Used to append '#<anchor>' to urls for field names that need an anchor

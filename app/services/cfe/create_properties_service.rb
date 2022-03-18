@@ -42,7 +42,7 @@ module CFE
     end
 
     def main_home_shared_with_housing_association_or_landlord?
-      legal_aid_application.shared_ownership == 'housing_assocation_or_landlord'
+      legal_aid_application.shared_ownership == "housing_assocation_or_landlord"
     end
   end
 end

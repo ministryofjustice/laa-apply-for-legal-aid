@@ -4,7 +4,7 @@ class FeedbackController < ApplicationController
   def new
     @journey = source
     @feedback = Feedback.new
-    @signed_out = session.delete('signed_out')
+    @signed_out = session.delete("signed_out")
     @submission_feedback = submission_feedback?
     if submission_feedback?
       application = LegalAidApplication.find_by(application_ref: params[:application_ref])
@@ -16,7 +16,7 @@ class FeedbackController < ApplicationController
 
   def create
     initialize_feedback
-    @display_close_tab_msg = params['signed_out'].present?
+    @display_close_tab_msg = params["signed_out"].present?
 
     if @feedback.save
       ScheduledMailing.send_now!(mailer_klass: FeedbackMailer,
@@ -53,7 +53,7 @@ private
   end
 
   def application_id
-    return session['current_application_id'] if source == :citizen
+    return session["current_application_id"] if source == :citizen
     return params[:application_id] if submission_feedback?
 
     application_id_from_page_history || nil
@@ -64,15 +64,15 @@ private
     page_history = JSON.parse(page_history_service.read)
     previous_page = page_history[-2]
 
-    previous_page&.split('/')&.each_with_index do |section, i|
-      return previous_page.split('/')[i + 1] if ['applications'].include?(section)
+    previous_page&.split("/")&.each_with_index do |section, i|
+      return previous_page.split("/")[i + 1] if ["applications"].include?(section)
     end
   end
 
   def originating_page
-    return 'submission_feedback' if submission_feedback?
+    return "submission_feedback" if submission_feedback?
 
-    params['signed_out'].present? ? destroy_provider_session_path : URI(session['feedback_return_path']).path.split('/').last
+    params["signed_out"].present? ? destroy_provider_session_path : URI(session["feedback_return_path"]).path.split("/").last
   end
 
   def feedback_params
@@ -91,11 +91,11 @@ private
   def user
     case source
     when :citizen
-      'Applicant'
+      "Applicant"
     when :provider
-      'Provider'
+      "Provider"
     else
-      'Unknown'
+      "Unknown"
     end
   end
 
@@ -106,7 +106,7 @@ private
   def success_message
     return {} if citizen_journey?
 
-    provider_signed_in? ? {} : I18n.t('feedback.new.signed_out')
+    provider_signed_in? ? {} : I18n.t("feedback.new.signed_out")
   end
 
   def citizen_journey?
@@ -120,7 +120,7 @@ private
   helper_method :back_path, :back_button, :success_message
 
   def update_return_path
-    return if request.referer&.include?('/feedback/')
+    return if request.referer&.include?("/feedback/")
 
     session[:feedback_return_path] = request.referer
   end
@@ -138,6 +138,6 @@ private
   end
 
   def submission_feedback?
-    params[:action] == 'submission' || params[:submission_feedback] == 'true'
+    params[:action] == "submission" || params[:submission_feedback] == "true"
   end
 end

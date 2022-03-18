@@ -19,7 +19,7 @@ module Addresses
     def normalise_postcode
       return if postcode.blank?
 
-      postcode.delete!(' ')
+      postcode.delete!(" ")
       postcode.upcase!
     end
   end

@@ -42,7 +42,7 @@ module Citizens
     end
 
     def legal_aid_application
-      return super unless action_name == 'show'
+      return super unless action_name == "show"
       return if application_error
 
       @legal_aid_application ||= secure_application_finder.legal_aid_application

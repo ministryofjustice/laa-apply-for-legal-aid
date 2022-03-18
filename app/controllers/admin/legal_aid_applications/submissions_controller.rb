@@ -3,7 +3,7 @@ module Admin
     class SubmissionsController < AdminBaseController
       before_action :authenticate_admin_user!
       before_action :load_history, only: %i[download_xml_response download_xml_request]
-      layout 'admin'.freeze
+      layout "admin".freeze
 
       def show
         legal_aid_application
@@ -36,7 +36,7 @@ module Admin
       end
 
       def prettify_xml(source)
-        Nokogiri::XML(source.delete("\n").gsub(/>\s+</, '><'))
+        Nokogiri::XML(source.delete("\n").gsub(/>\s+</, "><"))
       end
 
       def load_history
@@ -45,11 +45,11 @@ module Admin
 
       def download_data(attribute)
         data = @history.__send__(attribute)
-        raise StandardError, 'No data found' if data.nil?
+        raise StandardError, "No data found" if data.nil?
 
         send_data prettify_xml(data),
                   status: 200,
-                  type: 'text/xml',
+                  type: "text/xml",
                   filename: filename(attribute, params[:id])
       end
 
@@ -58,7 +58,7 @@ module Admin
         report = legal_aid_application.send("#{attribute}_report")
         send_data report.document.download,
                   status: 200,
-                  type: 'application/pdf',
+                  type: "application/pdf",
                   filename: report.attachment_name
       end
       # :nocov:

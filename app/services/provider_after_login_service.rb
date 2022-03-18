@@ -12,7 +12,7 @@ class ProviderAfterLoginService
     if @provider.ccms_apply_role?
       check_provider_details_api
     else
-      @provider.update!(invalid_login_details: 'role')
+      @provider.update!(invalid_login_details: "role")
     end
   end
 
@@ -30,8 +30,8 @@ private
     ProviderDetailsCreator.call(@provider)
     @provider.clear_invalid_login!
   rescue ProviderDetailsRetriever::ApiRecordNotFoundError
-    @provider.update!(invalid_login_details: 'api_details_user_not_found')
+    @provider.update!(invalid_login_details: "api_details_user_not_found")
   rescue ProviderDetailsRetriever::ApiError
-    @provider.update!(invalid_login_details: 'provider_details_api_error')
+    @provider.update!(invalid_login_details: "provider_details_api_error")
   end
 end

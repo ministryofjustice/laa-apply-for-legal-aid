@@ -20,7 +20,7 @@ class TransactionType < ApplicationRecord
     ],
   }.freeze
 
-  EXCLUDED_BENEFITS = 'excluded_benefits'.freeze
+  EXCLUDED_BENEFITS = "excluded_benefits".freeze
 
   OTHER_INCOME_TYPES = %w[
     friends_or_family

@@ -13,24 +13,24 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'simplecov'
-require 'webmock/rspec'
-require 'highline/import'
-require 'rspec-sidekiq'
-require 'sidekiq/testing'
+require "simplecov"
+require "webmock/rspec"
+require "highline/import"
+require "rspec-sidekiq"
+require "sidekiq/testing"
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
 
-unless ENV['NOCOVERAGE']
+unless ENV["NOCOVERAGE"]
   SimpleCov.start do
-    add_filter 'config/initializers/'
-    add_filter 'spec/'
-    add_filter 'services/migration_helpers/'
-    add_filter 'config/environments/'
-    minimum_coverage 100 unless ENV['CIRCLE_JOB']
+    add_filter "config/initializers/"
+    add_filter "spec/"
+    add_filter "services/migration_helpers/"
+    add_filter "config/environments/"
+    minimum_coverage 100 unless ENV["CIRCLE_JOB"]
   end
 
-  unless ENV['CIRCLE_JOB']
+  unless ENV["CIRCLE_JOB"]
     SimpleCov.at_exit do
       say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
       SimpleCov.result.format!
@@ -46,13 +46,13 @@ RSpec::Sidekiq.configure do |config|
   config.warn_when_jobs_not_processed_by_sidekiq = false # default => true
 end
 
-require 'vcr'
+require "vcr"
 
-vcr_debug = ENV['VCR_DEBUG'].to_s == 'true'
-record_mode = ENV['VCR_RECORD_MODE'] ? ENV['VCR_RECORD_MODE'].to_sym : :once
+vcr_debug = ENV["VCR_DEBUG"].to_s == "true"
+record_mode = ENV["VCR_RECORD_MODE"] ? ENV["VCR_RECORD_MODE"].to_sym : :once
 
 VCR.configure do |vcr_config|
-  vcr_config.cassette_library_dir = 'spec/cassettes'
+  vcr_config.cassette_library_dir = "spec/cassettes"
   vcr_config.hook_into :webmock
   vcr_config.default_cassette_options = {
     record: record_mode,
@@ -60,11 +60,11 @@ VCR.configure do |vcr_config|
   }
   vcr_config.configure_rspec_metadata!
   vcr_config.debug_logger = $stdout if vcr_debug
-  vcr_config.filter_sensitive_data('<GOVUK_NOTIFY_API_KEY>') { ENV['GOVUK_NOTIFY_API_KEY'] }
-  vcr_config.filter_sensitive_data('<ORDNANACE_SURVEY_API_KEY>') { ENV['ORDNANACE_SURVEY_API_KEY'] }
-  vcr_config.filter_sensitive_data('<BC_LSC_SERVICE_NAME>') { ENV['BC_LSC_SERVICE_NAME'] }
-  vcr_config.filter_sensitive_data('<BC_CLIENT_ORG_ID>') { ENV['BC_CLIENT_ORG_ID'] }
-  vcr_config.filter_sensitive_data('<BC_CLIENT_USER_ID>') { ENV['BC_CLIENT_USER_ID'] }
+  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV["GOVUK_NOTIFY_API_KEY"] }
+  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV["ORDNANACE_SURVEY_API_KEY"] }
+  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV["BC_LSC_SERVICE_NAME"] }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV["BC_CLIENT_ORG_ID"] }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV["BC_CLIENT_USER_ID"] }
 end
 
 RSpec.configure do |config|

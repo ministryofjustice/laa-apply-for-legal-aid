@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 module Providers
   module ProceedingMeritsTask
@@ -6,7 +6,7 @@ module Providers
       let!(:legal_aid_application) do
         create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se014], set_lead_proceeding: :da001
       end
-      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: 'SE014') }
+      let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
       let(:login) { login_as legal_aid_application.provider }
@@ -16,30 +16,30 @@ module Providers
         login
       end
 
-      describe 'GET /providers/merits_task_list/:merits_task_list_id/linked_children' do
+      describe "GET /providers/merits_task_list/:merits_task_list_id/linked_children" do
         subject { get providers_merits_task_list_linked_children_path(proceeding) }
 
-        context 'when the provider is not authenticated' do
+        context "when the provider is not authenticated" do
           let(:login) { nil }
 
           before { subject }
-          it_behaves_like 'a provider not authenticated'
+          it_behaves_like "a provider not authenticated"
         end
 
-        context 'when the provider is authenticated' do
+        context "when the provider is authenticated" do
           before { subject }
 
-          it 'renders successfully' do
+          it "renders successfully" do
             expect(response).to have_http_status(:ok)
           end
 
-          it 'lists all involved children\'s names in the application' do
+          it "lists all involved children's names in the application" do
             expect(involved_children_names.all? { |name| response.body.include? html_compare(name) }).to be true
           end
         end
       end
 
-      describe 'PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children' do
+      describe "PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children" do
         let(:params) do
           {
             proceeding_merits_task_proceeding_linked_child:
@@ -51,40 +51,40 @@ module Providers
 
         subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
 
-        context 'all selected' do
-          it 'adds involved children to the proceeding' do
+        context "all selected" do
+          it "adds involved children to the proceeding" do
             expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
           end
         end
 
-        context 'none selected' do
+        context "none selected" do
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
-                { linked_children: involved_children_names.map { |_k| '' } },
+                { linked_children: involved_children_names.map { |_k| "" } },
             }
           end
 
-          it 'does not add involved children to the proceeding' do
+          it "does not add involved children to the proceeding" do
             expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
           end
         end
 
-        context 'some selected' do
+        context "some selected" do
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
-                { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : '' } },
+                { linked_children: legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : "" } },
             }
           end
 
-          it 'only adds the specified children to the proceeding' do
+          it "only adds the specified children to the proceeding" do
             proceeding_involved_children = proceeding.proceeding_linked_children
             expect { subject }.to change { proceeding_involved_children.count }.by(1)
           end
         end
 
-        context 'when a user has previously linked two children' do
+        context "when a user has previously linked two children" do
           let(:update) do
             patch providers_merits_task_list_linked_children_path(proceeding), params: new_params
           end
@@ -93,34 +93,34 @@ module Providers
           let(:second_child) { legal_aid_application.involved_children.second }
           let(:third_child) { legal_aid_application.involved_children.third }
           let(:initial_array) { [second_child.id, third_child.id] }
-          let(:linked_children_params) { [first_child.id, '', ''] }
+          let(:linked_children_params) { [first_child.id, "", ""] }
 
           before do
             subject
           end
 
-          context 'remove record' do
+          context "remove record" do
             let(:new_params) do
               {
                 proceeding_merits_task_proceeding_linked_child:
-                  { linked_children: [first_child.id, '', ''] },
+                  { linked_children: [first_child.id, "", ""] },
               }
             end
 
-            it 'deletes a record if it is deselected' do
+            it "deletes a record if it is deselected" do
               expect { update }.to change { proceeding.proceeding_linked_children.count }.by(-2)
             end
           end
 
-          context 'record already exists' do
-            it 'makes no changes if already selected records are left selected' do
+          context "record already exists" do
+            it "makes no changes if already selected records are left selected" do
               expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
             end
           end
         end
 
-        context 'Form submitted using Save as draft button' do
-          let(:submit_button) { { draft_button: 'Save as draft' } }
+        context "Form submitted using Save as draft button" do
+          let(:submit_button) { { draft_button: "Save as draft" } }
 
           subject do
             patch providers_merits_task_list_linked_children_path(proceeding), params: params.merge(submit_button)
@@ -131,11 +131,11 @@ module Providers
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
-          it 'sets the application as draft' do
+          it "sets the application as draft" do
             expect { subject }.to change { legal_aid_application.reload.draft? }.from(false).to(true)
           end
 
-          it 'does not set the task to complete' do
+          it "does not set the task to complete" do
             subject
             expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :complete/)
           end

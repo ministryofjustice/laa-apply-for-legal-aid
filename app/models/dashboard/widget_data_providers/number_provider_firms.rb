@@ -6,7 +6,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:number, name: 'Firms')
+            Geckoboard::NumberField.new(:number, name: "Firms")
           ],
         }
       end
@@ -15,13 +15,13 @@ module Dashboard
         provider_count = Provider.all.group(:firm_id).count.size
         [
           {
-            'number' => provider_count,
+            "number" => provider_count,
           }
         ]
       end
 
       def self.handle
-        'number_provider_firms'
+        "number_provider_firms"
       end
     end
   end

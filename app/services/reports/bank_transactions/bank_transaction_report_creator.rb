@@ -12,7 +12,7 @@ module Reports
     private
 
       def generate_csv_locally
-        File.open(Rails.root.join('tmp/bank_transactions.csv'), 'wb') do |fp|
+        File.open(Rails.root.join("tmp/bank_transactions.csv"), "wb") do |fp|
           fp.puts generate_csv
         end
       end
@@ -20,13 +20,13 @@ module Reports
       def generate_attachment
         return if legal_aid_application.bank_transaction_report
 
-        attachment = legal_aid_application.attachments.create!(attachment_type: 'bank_transaction_report',
-                                                               attachment_name: 'bank_transaction_report.csv')
+        attachment = legal_aid_application.attachments.create!(attachment_type: "bank_transaction_report",
+                                                               attachment_name: "bank_transaction_report.csv")
 
         attachment.document.attach(
           io: StringIO.new(generate_report),
-          filename: 'bank_transaction_report.csv',
-          content_type: 'text/csv'
+          filename: "bank_transaction_report.csv",
+          content_type: "text/csv"
         )
       end
 
@@ -47,7 +47,7 @@ module Reports
       end
 
       def transaction_remarks_for
-        raise 'No CFE result exists yet for this application' if cfe_result.nil?
+        raise "No CFE result exists yet for this application" if cfe_result.nil?
 
         @transaction_remarks_for ||= cfe_result.remarks.review_transactions.transactions
       end

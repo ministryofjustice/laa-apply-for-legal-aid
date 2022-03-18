@@ -17,6 +17,6 @@ class CurrencyCleaner
 private
 
   def remove_commas
-    @original_value.sub(LEADING_POUND_SIGN_REGEX, '').gsub(THOUSANDS_SEPARATOR_REGEX, '')
+    @original_value.sub(LEADING_POUND_SIGN_REGEX, "").gsub(THOUSANDS_SEPARATOR_REGEX, "")
   end
 end

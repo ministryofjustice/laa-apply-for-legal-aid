@@ -1,4 +1,4 @@
-require 'faker'
+require "faker"
 
 NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
 
@@ -42,7 +42,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     addresses: nil,
   },
   bank_accounts: {
-    name: 'Anonymous bank account',
+    name: "Anonymous bank account",
     true_layer_response: nil,
     account_number: -> { Faker::Bank.account_number },
     sort_code: -> { Faker::Base.regexify(/^[0-9]{2}-[0-9]{2}-[0-9]{2}$/) },

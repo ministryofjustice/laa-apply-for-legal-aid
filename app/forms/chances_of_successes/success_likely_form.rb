@@ -10,7 +10,7 @@ module ChancesOfSuccesses
   private
 
     def set_success_prospect
-      if success_likely == 'true'
+      if success_likely == "true"
         model.success_prospect = :likely
         model.success_prospect_details = nil
       elsif model.success_prospect_likely?

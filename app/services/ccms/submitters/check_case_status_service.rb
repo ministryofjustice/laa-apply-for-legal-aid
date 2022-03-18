@@ -18,7 +18,7 @@ module CCMS
         if parser.success?
           create_history(:case_submitted, submission.aasm_state, xml_request, response) if submission.confirm_case_created!
         elsif submission.case_poll_count >= Submission::POLL_LIMIT
-          handle_exception('Poll limit exceeded', xml_request)
+          handle_exception("Poll limit exceeded", xml_request)
         else
           create_history(submission.aasm_state, submission.aasm_state, xml_request, response)
         end

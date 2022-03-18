@@ -8,8 +8,8 @@ module Applicants
 
     def true_layer
       unless applicant
-        set_flash_message(:error, :failure, kind: 'TrueLayer', reason: 'Unable to find matching application')
-        AlertManager.capture_exception(MissingApplicantError.new('Unable to find applicant on return from TrueLayer'))
+        set_flash_message(:error, :failure, kind: "TrueLayer", reason: "Unable to find matching application")
+        AlertManager.capture_exception(MissingApplicantError.new("Unable to find applicant on return from TrueLayer"))
         redirect_to citizens_consent_path
         return
       end
@@ -36,13 +36,13 @@ module Applicants
       when String
         Time.zone.parse(expires_at)
       else
-        Rails.logger.info 'Unable to determine expiry'
+        Rails.logger.info "Unable to determine expiry"
         nil
       end
     end
 
     def credentials
-      @credentials ||= request.env['omniauth.auth'].credentials
+      @credentials ||= request.env["omniauth.auth"].credentials
     end
 
     def applicant

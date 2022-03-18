@@ -6,7 +6,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:declined_open_banking, name: 'Percentage that declined open banking consent')
+            Geckoboard::NumberField.new(:declined_open_banking, name: "Percentage that declined open banking consent")
           ],
         }
       end
@@ -15,17 +15,17 @@ module Dashboard
         percentage_declining_consent = declined_consent / total_consent_answers * 100
         [
           {
-            'declined_open_banking' => percentage_declining_consent,
+            "declined_open_banking" => percentage_declining_consent,
           }
         ]
       end
 
       def self.handle
-        'declined_open_banking'
+        "declined_open_banking"
       end
 
       def self.declined_consent
-        LegalAidApplication.where('open_banking_consent=false').count.to_f
+        LegalAidApplication.where("open_banking_consent=false").count.to_f
       end
 
       def self.total_consent_answers

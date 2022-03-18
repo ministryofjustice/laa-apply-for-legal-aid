@@ -24,13 +24,13 @@ module CFE
     # override this method in the derived class if you need more/different headers
     def headers
       {
-        'Content-Type' => 'application/json',
-        'Accept' => "application/json;version=#{version}",
+        "Content-Type" => "application/json",
+        "Accept" => "application/json;version=#{version}",
       }
     end
 
     def version
-      '4'
+      "4"
     end
 
     def conn
@@ -55,7 +55,7 @@ module CFE
       when 422
         raise CFE::SubmissionError.new(detailed_error(parsed_response, history), 422)
       else
-        raise CFE::SubmissionError.new('Unsuccessful HTTP response code', raw_response.status)
+        raise CFE::SubmissionError.new("Unsuccessful HTTP response code", raw_response.status)
       end
     end
 
@@ -66,20 +66,20 @@ module CFE
     def parse_json_response(response_body)
       JSON.parse(response_body)
     rescue JSON::ParserError, TypeError
-      response_body || ''
+      response_body || ""
     end
 
     def post_request
       conn.post do |request|
         request.url cfe_url_path
-        request.headers['Content-Type'] = 'application/json'
+        request.headers["Content-Type"] = "application/json"
         request.body = request_body
       end
     rescue StandardError => e
       catch_and_record_exception(e)
     end
 
-    def catch_and_record_exception(error, http_method = 'POST')
+    def catch_and_record_exception(error, http_method = "POST")
       raise_exception_error(
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
@@ -88,7 +88,7 @@ module CFE
       )
     end
 
-    def raise_exception_error(message:, backtrace: nil, http_method: 'POST', http_status: nil)
+    def raise_exception_error(message:, backtrace: nil, http_method: "POST", http_status: nil)
       @submission.submission_histories.create!(
         url: cfe_url,
         http_method:,
@@ -104,7 +104,7 @@ module CFE
       "#{self.class} received #{err.class}: #{err.message}"
     end
 
-    def write_submission_history(raw_response, http_method = 'POST')
+    def write_submission_history(raw_response, http_method = "POST")
       @submission.submission_histories.create!(
         url: cfe_url,
         http_method:,

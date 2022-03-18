@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'admin users omniauth call back', type: :request do
+RSpec.describe "admin users omniauth call back", type: :request do
   around(:example) do |example|
     OmniAuth.config.test_mode = true
     example.run
@@ -23,27 +23,27 @@ RSpec.describe 'admin users omniauth call back', type: :request do
     )
   end
 
-  describe 'GET /auth/google_oauth2/callback' do
+  describe "GET /auth/google_oauth2/callback" do
     subject do
       get admin_user_google_oauth2_omniauth_callback_path
     end
 
-    it 'redirects to admin user root' do
+    it "redirects to admin user root" do
       expect(subject).to redirect_to(admin_root_path)
     end
 
-    context 'with unknown email' do
+    context "with unknown email" do
       let(:email) { Faker::Internet.email }
 
-      it 'redirects to error page' do
+      it "redirects to error page" do
         subject
         expect(response).to redirect_to(error_path(:access_denied))
       end
 
-      it 'displays failure information' do
+      it "displays failure information" do
         subject
         follow_redirect!
-        expect(response.body).to include('You do not have an Admin account')
+        expect(response.body).to include("You do not have an Admin account")
       end
     end
   end

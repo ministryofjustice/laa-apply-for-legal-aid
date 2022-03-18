@@ -19,12 +19,12 @@ class TrueLayerErrorDecoder
 
   def initialize(error_details)
     @error_hash = JSON.parse(error_details[2])
-    @error_code = @error_hash.dig('TrueLayerError', 'error')
+    @error_code = @error_hash.dig("TrueLayerError", "error")
     return if @error_code.in?(ERROR_CODES)
 
-    error_description = @error_hash.dig('TrueLayerError', 'error_description')
+    error_description = @error_hash.dig("TrueLayerError", "error_description")
     AlertManager.capture_message("Unknown error code received from TrueLayer: #{@error_code} :: #{error_description}")
-    @error_code = 'unknown'
+    @error_code = "unknown"
   end
 
   def error_heading
@@ -36,6 +36,6 @@ class TrueLayerErrorDecoder
   end
 
   def show_link?
-    @error_code != 'account_permanently_locked'
+    @error_code != "account_permanently_locked"
   end
 end

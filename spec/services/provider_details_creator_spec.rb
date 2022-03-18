@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 FirmStruct = Struct.new(:id, :name)
 OfficeStruct = Struct.new(:id, :code)
@@ -51,87 +51,87 @@ RSpec.describe ProviderDetailsCreator do
 
   subject { described_class.call(provider) }
 
-  describe '.call' do
-    it 'creates the right firm' do
+  describe ".call" do
+    it "creates the right firm" do
       expect { subject }.to change { Firm.count }.by(1)
       expect(firm.ccms_id).to eq(ccms_firm.id.to_s)
       expect(firm.name).to eq(ccms_firm.name)
     end
 
-    it 'adds non passported permission to the firm' do
+    it "adds non passported permission to the firm" do
       expect { subject }.to change { Firm.count }.by(1)
-      expect(firm.permissions.map(&:role)).to match_array(['application.passported.*', 'application.non_passported.*'])
+      expect(firm.permissions.map(&:role)).to match_array(["application.passported.*", "application.non_passported.*"])
     end
 
-    it 'creates the right offices' do
+    it "creates the right offices" do
       expect { subject }.to change { Office.count }.by(2)
       expect(firm.offices.count).to eq(2)
       expect(office1.code).to eq(ccms_office1.code)
       expect(office2.code).to eq(ccms_office2.code)
     end
 
-    it 'updates the name of the provider' do
-      expect { subject }.to change { provider.reload.name }.to('')
+    it "updates the name of the provider" do
+      expect { subject }.to change { provider.reload.name }.to("")
     end
 
-    it 'updates the contact_id of the provider' do
+    it "updates the contact_id of the provider" do
       expect { subject }.to change { provider.reload.contact_id }.to(contact_id)
     end
 
-    context 'when the names match' do
-      it 'updates the contact_id of the provider' do
+    context "when the names match" do
+      it "updates the contact_id of the provider" do
         expect { subject }.to change { provider.reload.contact_id }.to(api_response[:contacts][0][:id])
       end
     end
 
-    context 'when the username matches' do
+    context "when the username matches" do
       before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
 
       subject { described_class.call(third_provider) }
 
-      it 'updates the contact_id of the provider' do
+      it "updates the contact_id of the provider" do
         expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
       end
     end
 
-    context 'when the emails match' do
+    context "when the emails match" do
       before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
 
       subject { described_class.call(third_provider) }
 
-      it 'updates the contact_id of the provider' do
+      it "updates the contact_id of the provider" do
         expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
       end
     end
 
-    context 'selected office of provider is not returned by the API' do
-      let(:selected_office) { create :office, code: 'selected-office' }
+    context "selected office of provider is not returned by the API" do
+      let(:selected_office) { create :office, code: "selected-office" }
       let(:provider) { create :provider, selected_office: selected_office }
 
-      it 'clears the selected office' do
+      it "clears the selected office" do
         expect { subject }.to change { provider.reload.selected_office }.to(nil)
       end
     end
 
-    context 'firm already exists with one of the offices' do
-      let!(:existing_firm) { create :firm, ccms_id: ccms_firm.id, name: 'foobar' }
+    context "firm already exists with one of the offices" do
+      let!(:existing_firm) { create :firm, ccms_id: ccms_firm.id, name: "foobar" }
       let!(:existing_office) { create :office, firm: existing_firm }
 
-      it 'uses existing firm' do
+      it "uses existing firm" do
         expect { subject }.not_to change { Firm.count }
         expect(provider.firm_id).to eq(existing_firm.id)
       end
 
-      it 'should add the new offices' do
+      it "should add the new offices" do
         expect { subject }.to change { existing_firm.reload.offices.count }.by(2)
       end
 
-      it 'should update the name of the firm' do
+      it "should update the name of the firm" do
         expect { subject }.to change { existing_firm.reload.name }.to(ccms_firm.name)
       end
     end
 
-    context 'another provider has the same firm but a different set of offices' do
+    context "another provider has the same firm but a different set of offices" do
       let(:provider2) { create :provider }
       let(:ccms_office3) { OfficeStruct.new(rand(201..300), rand(201..300).to_s) }
       let(:api_response2) do
@@ -167,7 +167,7 @@ RSpec.describe ProviderDetailsCreator do
         provider2.reload
       end
 
-      it 'does not add all offices to both providers' do
+      it "does not add all offices to both providers" do
         expect(provider.offices).to contain_exactly(office1, office2)
         expect(provider2.offices).to contain_exactly(office2, office3)
       end

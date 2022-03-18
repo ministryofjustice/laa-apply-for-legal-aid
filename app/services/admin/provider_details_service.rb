@@ -33,7 +33,7 @@ module Admin
       # Remove the code at the end.
       # "Pearson & Pearson -0A1234" becomes "Pearson & Pearson"
       #
-      @firm_name ||= parsed_response[:providerOffices].first[:name].sub(/-\S{6}$/, '').strip
+      @firm_name ||= parsed_response[:providerOffices].first[:name].sub(/-\S{6}$/, "").strip
     end
 
   private
@@ -46,7 +46,7 @@ module Admin
 
       return false unless parse_uri
 
-      format_error_message if raw_response.code != '200'
+      format_error_message if raw_response.code != "200"
       return false if @message
 
       format_no_contact_message if contact_id.nil?
@@ -56,7 +56,7 @@ module Admin
     end
 
     def format_error_message
-      @message = if raw_response.code == '404'
+      @message = if raw_response.code == "404"
                    "User #{@provider.username} not known to CCMS"
                  else
                    "Bad response from Provider Details API: HTTP status #{raw_response.code}"
@@ -76,7 +76,7 @@ module Admin
     end
 
     def normalized_username
-      @provider.username.upcase.gsub(' ', '%20')
+      @provider.username.upcase.gsub(" ", "%20")
     end
 
     def provider_details_url

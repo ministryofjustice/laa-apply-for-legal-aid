@@ -15,7 +15,7 @@ class BaseForm
       #
       return self if in?([BaseForm, BaseFileUploaderForm])
 
-      @model_class || raise('Model class must be defined. Use: `form_for Class`')
+      @model_class || raise("Model class must be defined. Use: `form_for Class`")
     end
 
     def model_name
@@ -93,7 +93,7 @@ private
 
   def clean_attributes(hash)
     hash.each_with_object({}) do |(k, v), new_hash|
-      new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr('£,', '') : v
+      new_hash[k] = k.to_sym.in?(attributes_to_clean) ? v.to_s.tr("£,", "") : v
     end
   end
 

@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :ccms_submission_history, class: CCMS::SubmissionHistory do
     submission
 
-    from_state { 'initialised' }
-    to_state { 'case_ref_obtained' }
+    from_state { "initialised" }
+    to_state { "case_ref_obtained" }
     success { Faker::Boolean.boolean }
     details { Faker::Lorem.word }
     request { Faker::Lorem.word }
@@ -15,7 +15,7 @@ FactoryBot.define do
     end
 
     trait :with_xml do
-      request { File.open(Rails.root.join('ccms_integration/example_payloads/NonPassportedFullMonty.xml')) { |f| Nokogiri::XML(f).remove_namespaces! } }
+      request { File.open(Rails.root.join("ccms_integration/example_payloads/NonPassportedFullMonty.xml")) { |f| Nokogiri::XML(f).remove_namespaces! } }
       response do
         '<?xml version="1.0" encoding="UTF-8"?>
       <soap:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM"

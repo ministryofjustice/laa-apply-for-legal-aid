@@ -1,5 +1,5 @@
 class BaseStateMachine < ApplicationRecord
-  self.table_name = 'state_machine_proxies'
+  self.table_name = "state_machine_proxies"
 
   belongs_to :legal_aid_application
 
@@ -90,7 +90,7 @@ class BaseStateMachine < ApplicationRecord
       ],
                   to: :use_ccms,
                   after: proc { |reason|
-                    raise 'Invalid ccms_reason' unless reason.in?(VALID_CCMS_REASONS)
+                    raise "Invalid ccms_reason" unless reason.in?(VALID_CCMS_REASONS)
 
                     update!(ccms_reason: reason)
                   }

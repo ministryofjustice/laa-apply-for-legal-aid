@@ -1,30 +1,30 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HostEnv do
-  describe 'root_url' do
-    it 'returns the root  url' do
-      expect(described_class.root_url).to eq 'http://www.example.com/?locale=en'
+  describe "root_url" do
+    it "returns the root  url" do
+      expect(described_class.root_url).to eq "http://www.example.com/?locale=en"
     end
   end
 
-  context 'with dummied out root url' do
+  context "with dummied out root url" do
     before do
       allow(described_class).to receive(:root_url).and_return(root_url)
       allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new(rails_env.to_s))
     end
 
-    context 'development' do
-      let(:root_url) { 'http://localhost:3000/' }
+    context "development" do
+      let(:root_url) { "http://localhost:3000/" }
       let(:rails_env) { :development }
 
-      describe '.environment' do
-        it 'returns :development' do
+      describe ".environment" do
+        it "returns :development" do
           expect(described_class.environment).to eq :development
         end
       end
 
-      context 'interrogations' do
-        it 'returns the correct values' do
+      context "interrogations" do
+        it "returns the correct values" do
           expect(described_class.development?).to be true
           expect(described_class.test?).to be false
           expect(described_class.uat?).to be false
@@ -35,18 +35,18 @@ RSpec.describe HostEnv do
       end
     end
 
-    context 'test' do
-      let(:root_url) { 'http://localhost:3000/' }
+    context "test" do
+      let(:root_url) { "http://localhost:3000/" }
       let(:rails_env) { :test }
 
-      describe '.environment' do
-        it 'returns :test' do
+      describe ".environment" do
+        it "returns :test" do
           expect(described_class.environment).to eq :test
         end
       end
 
-      context 'interrogations' do
-        it 'returns the correct values' do
+      context "interrogations" do
+        it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be true
           expect(described_class.uat?).to be false
@@ -57,18 +57,18 @@ RSpec.describe HostEnv do
       end
     end
 
-    context 'uat' do
-      let(:root_url) { 'https://mybranch-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk' }
+    context "uat" do
+      let(:root_url) { "https://mybranch-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
-      describe '.environment' do
-        it 'returns :uat' do
+      describe ".environment" do
+        it "returns :uat" do
           expect(described_class.environment).to eq :uat
         end
       end
 
-      context 'interrogations' do
-        it 'returns the correct values' do
+      context "interrogations" do
+        it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
           expect(described_class.uat?).to be true
@@ -79,18 +79,18 @@ RSpec.describe HostEnv do
       end
     end
 
-    context 'staging' do
-      let(:root_url) { 'https://staging.apply-for-legal-aid.service.justice.gov.uk' }
+    context "staging" do
+      let(:root_url) { "https://staging.apply-for-legal-aid.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
-      describe '.environment' do
-        it 'returns :staging' do
+      describe ".environment" do
+        it "returns :staging" do
           expect(described_class.environment).to eq :staging
         end
       end
 
-      context 'interrogations' do
-        it 'returns the correct values' do
+      context "interrogations" do
+        it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
           expect(described_class.uat?).to be false
@@ -101,18 +101,18 @@ RSpec.describe HostEnv do
       end
     end
 
-    context 'production' do
-      let(:root_url) { 'https://apply-for-legal-aid.service.justice.gov.uk' }
+    context "production" do
+      let(:root_url) { "https://apply-for-legal-aid.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
-      describe '.environment' do
-        it 'returns :production' do
+      describe ".environment" do
+        it "returns :production" do
           expect(described_class.environment).to eq :production
         end
       end
 
-      context 'interrogations' do
-        it 'returns the correct values' do
+      context "interrogations" do
+        it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
           expect(described_class.uat?).to be false
@@ -123,15 +123,15 @@ RSpec.describe HostEnv do
       end
     end
 
-    context 'unknown environment' do
-      let(:root_url) { 'https://example.com' }
+    context "unknown environment" do
+      let(:root_url) { "https://example.com" }
       let(:rails_env) { :production }
 
-      describe '.environment' do
-        it 'raises' do
+      describe ".environment" do
+        it "raises" do
           expect {
             described_class.environment
-          }.to raise_error RuntimeError, 'Unable to determine HostEnv from https://example.com'
+          }.to raise_error RuntimeError, "Unable to determine HostEnv from https://example.com"
         end
       end
     end

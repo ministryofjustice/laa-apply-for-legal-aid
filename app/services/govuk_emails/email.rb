@@ -5,8 +5,8 @@ module GovukEmails
     # states documentation:
     # https://docs.notifications.service.gov.uk/ruby.html#status-optional
     RESENDABLE_STATUS = %w[temporary-failure technical-failure].freeze
-    PERMANENTLY_FAILED_STATUS = 'permanent-failure'.freeze
-    DELIVERED_STATUS = 'delivered'.freeze
+    PERMANENTLY_FAILED_STATUS = "permanent-failure".freeze
+    DELIVERED_STATUS = "delivered".freeze
 
     def initialize(id)
       @id = id

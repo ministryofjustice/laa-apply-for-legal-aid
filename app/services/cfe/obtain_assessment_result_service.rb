@@ -1,13 +1,13 @@
 module CFE
   class ObtainAssessmentResultService < BaseService
-    HTTP_ERR_MESSAGE = 'CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code'.freeze
+    HTTP_ERR_MESSAGE = "CFE::ObtainAssessmentResultService received CFE::SubmissionError: Unsuccessful HTTP response code".freeze
 
   private
 
     def headers
       {
-        'Content-Type' => 'application/json',
-        'Accept' => "application/json;version=#{cfe_version}",
+        "Content-Type" => "application/json",
+        "Accept" => "application/json;version=#{cfe_version}",
       }
     end
 
@@ -22,12 +22,12 @@ module CFE
     def process_response
       @submission.cfe_result = @response.body
       if @response.status == 200
-        write_submission_history(@response, 'GET')
+        write_submission_history(@response, "GET")
         write_cfe_result
         @submission.results_obtained!
       else
         @submission.fail! unless @submission.failed?
-        raise_exception_error message: HTTP_ERR_MESSAGE, http_method: 'GET', http_status: @response.status
+        raise_exception_error message: HTTP_ERR_MESSAGE, http_method: "GET", http_status: @response.status
       end
     end
 
@@ -36,7 +36,7 @@ module CFE
     end
 
     def cfe_version
-      '4'
+      "4"
     end
 
     def write_cfe_result
@@ -44,7 +44,7 @@ module CFE
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,
         result: @response.body,
-        type: 'CFE::V4::Result'
+        type: "CFE::V4::Result"
       )
     end
   end

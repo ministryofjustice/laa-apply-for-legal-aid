@@ -187,7 +187,7 @@ FactoryBot.define do
 
     trait :use_ccms_offline_accounts do
       before(:create) do |application|
-        application.change_state_machine_type('NonPassportedStateMachine')
+        application.change_state_machine_type("NonPassportedStateMachine")
         application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :offline_accounts)
       end
     end
@@ -245,7 +245,7 @@ FactoryBot.define do
       end
 
       after(:create) do |application, evaluator|
-        raise ':with_proceedings trait can only have a proceeding count of 1 to 4' if evaluator.proceeding_count > 4
+        raise ":with_proceedings trait can only have a proceeding count of 1 to 4" if evaluator.proceeding_count > 4
 
         if evaluator.explicit_proceedings.nil?
           traits = %i[da001 da004 se014 se013]
@@ -285,7 +285,7 @@ FactoryBot.define do
       end
 
       after(:create) do |application, evaluator|
-        raise 'Must specify an array including ccms_code and an array of two dates' if evaluator.df_options.nil?
+        raise "Must specify an array including ccms_code and an array of two dates" if evaluator.df_options.nil?
 
         evaluator.df_options.each do |ccms_code, _dates|
           proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code.to_s }
@@ -327,19 +327,19 @@ FactoryBot.define do
     end
 
     trait :with_own_home_mortgaged do
-      own_home { 'mortgage' }
+      own_home { "mortgage" }
     end
 
     trait :with_own_home_owned_outright do
-      own_home { 'owned_outright' }
+      own_home { "owned_outright" }
     end
 
     trait :without_own_home do
-      own_home { 'no' }
+      own_home { "no" }
     end
 
     trait :with_home_sole_owner do
-      shared_ownership { 'no_sole_owner' }
+      shared_ownership { "no_sole_owner" }
     end
 
     trait :with_student_finance do
@@ -347,7 +347,7 @@ FactoryBot.define do
     end
 
     trait :with_home_shared_with_partner do
-      shared_ownership { 'partner_or_ex_partner' }
+      shared_ownership { "partner_or_ex_partner" }
     end
 
     trait :with_other_assets_declaration do
@@ -501,7 +501,7 @@ FactoryBot.define do
 
     trait :with_chances_of_success do
       transient do
-        prospect { 'likely' }
+        prospect { "likely" }
       end
       after(:create) do |application, evaluator|
         application.proceedings.each do |proceeding|
@@ -653,8 +653,8 @@ FactoryBot.define do
                  :benefits,
                  happened_at: count.days.ago,
                  bank_account: bank_account,
-                 operation: 'credit',
-                 meta_data: { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' }
+                 operation: "credit",
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
         end
       end
     end
@@ -668,8 +668,8 @@ FactoryBot.define do
                  :benefits,
                  happened_at: count.days.ago,
                  bank_account: bank_account,
-                 operation: 'credit',
-                 meta_data: { code: 'CHB', label: 'child_benefit', name: 'Child Benefit' }
+                 operation: "credit",
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
         end
       end
     end
@@ -679,7 +679,7 @@ FactoryBot.define do
         bank_provider = create :bank_provider, applicant: application.applicant
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: 'credit'
+          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: "credit"
         end
       end
     end
@@ -689,7 +689,7 @@ FactoryBot.define do
         bank_provider = create :bank_provider, applicant: application.applicant
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: 'debit'
+          create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: "debit"
         end
       end
     end

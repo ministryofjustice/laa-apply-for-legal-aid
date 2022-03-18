@@ -4,7 +4,7 @@ module Dashboard
       @widget_klass = "Dashboard::WidgetDataProviders::#{widget_klass}".constantize
       log_start_message
       @client = Geckoboard.client(Rails.configuration.x.geckoboard.api_key)
-      raise 'Unable to access Geckoboard' unless @client.ping
+      raise "Unable to access Geckoboard" unless @client.ping
     end
 
     def run

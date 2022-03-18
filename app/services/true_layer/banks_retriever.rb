@@ -2,8 +2,8 @@ module TrueLayer
   class BanksRetriever
     UnsuccessfulRetrievalError = Class.new(StandardError)
 
-    API_URL_OPEN_BANKING = 'https://auth.truelayer.com/api/providers/oauth/openbanking'.freeze
-    API_URL_OAUTH = 'https://auth.truelayer.com/api/providers/oauth'.freeze
+    API_URL_OPEN_BANKING = "https://auth.truelayer.com/api/providers/oauth/openbanking".freeze
+    API_URL_OAUTH = "https://auth.truelayer.com/api/providers/oauth".freeze
 
     def self.banks
       new.banks

@@ -1,2 +1,2 @@
-Rails.logger.info 'Populating document_categories'
+Rails.logger.info "Populating document_categories"
 DocumentCategory.populate

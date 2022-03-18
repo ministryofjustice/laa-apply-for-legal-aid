@@ -1,8 +1,8 @@
 module CCMS
   module Parsers
     class DocumentUploadResponseParser < BaseResponseParser
-      STATUS_PATH = '//Body//DocumentUploadRS//HeaderRS//Status'.freeze
-      TRANSACTION_ID_PATH = '//Body/DocumentUploadRS/TransactionID'.freeze
+      STATUS_PATH = "//Body//DocumentUploadRS//HeaderRS//Status".freeze
+      TRANSACTION_ID_PATH = "//Body/DocumentUploadRS/TransactionID".freeze
 
       def success?
         /Success/.match?(parse(:extracted_status))
@@ -19,7 +19,7 @@ module CCMS
       end
 
       def response_type
-        'DocumentUploadRS'.freeze
+        "DocumentUploadRS".freeze
       end
 
       def extracted_status

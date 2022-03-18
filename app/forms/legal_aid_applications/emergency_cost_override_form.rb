@@ -14,7 +14,7 @@ module LegalAidApplications
     )
 
     def requested_override?
-      emergency_cost_override.to_s == 'true'
+      emergency_cost_override.to_s == "true"
     end
 
     def attributes_to_clean

@@ -1,5 +1,5 @@
 class SubmitApplicationReminderMailer < BaseApplyMailer
-  require_relative 'concerns/notify_template_methods'
+  require_relative "concerns/notify_template_methods"
   include NotifyTemplateMethods
 
   INELIGIBLE_STATES = %w[use_ccms generating_reports submitting_assessment assessment_submitted].freeze
@@ -14,10 +14,10 @@ class SubmitApplicationReminderMailer < BaseApplyMailer
     set_personalisation(
       email: to,
       provider_name: name,
-      ref_number: application['application_ref'],
+      ref_number: application["application_ref"],
       client_name: application.applicant.full_name,
-      delegated_functions_date: application.earliest_delegated_functions_date&.strftime('%-d %B %Y'),
-      deadline_date: application['substantive_application_deadline_on'].strftime('%-d %B %Y')
+      delegated_functions_date: application.earliest_delegated_functions_date&.strftime("%-d %B %Y"),
+      deadline_date: application["substantive_application_deadline_on"].strftime("%-d %B %Y")
     )
     mail to: to
   end

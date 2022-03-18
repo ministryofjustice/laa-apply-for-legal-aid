@@ -29,7 +29,7 @@ module Providers
     end
 
     def error_message_for_none_selected
-      I18n.t('activemodel.errors.models.policy_disregards.attributes.base.none_selected')
+      I18n.t("activemodel.errors.models.policy_disregards.attributes.base.none_selected")
     end
   end
 end
