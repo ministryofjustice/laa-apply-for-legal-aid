@@ -229,6 +229,7 @@ Rails.application.routes.draw do
       resource :has_evidence_of_benefit, only: %i[show update]
       resource :employment_income, only: %i[show update]
       resource :no_employment_income, only: %i[show update]
+      resource :multiple_employment_income, only: %i[show update]
     end
 
     resources :merits_task_list, only: [] do

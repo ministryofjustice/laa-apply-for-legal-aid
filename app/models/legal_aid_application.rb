@@ -465,6 +465,10 @@ class LegalAidApplication < ApplicationRecord
     employments.any?
   end
 
+  def has_multiple_employments?
+    employments.length > 1
+  end
+
   def uploaded_evidence_by_category
     return if uploaded_evidence_collection.nil?
 

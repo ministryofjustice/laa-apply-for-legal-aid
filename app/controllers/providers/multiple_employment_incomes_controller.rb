@@ -1,5 +1,5 @@
 module Providers
-  class NoEmploymentIncomesController < ProviderBaseController
+  class MultipleEmploymentIncomesController < ProviderBaseController
     def show
       @form = LegalAidApplications::FullEmploymentInformationForm.new(model: legal_aid_application)
     end

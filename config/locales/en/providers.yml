@@ -692,6 +692,17 @@ en:
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
         proceeding_eligibility: Proceeding eligibility
+    multiple_employment_incomes:
+      show:
+        page_heading: HMRC found a record of your client's employment
+        hmrc_info: HMRC says your client had more than one job in the last 3 months.
+        enter_details: "Enter details of your client's employment in the last 3 months, including:"
+        details_1: how much they earned before tax
+        details_2: how much National Insurance they paid
+        details_3: how much tax they paid
+        details_4: any benefits in kind they received
+        employment_details_header: Enter your client's employment details
+        employment_details_hint: You'll need to upload supporting evidence later.
     no_employment_incomes:
       show:
         page_heading: HMRC has no record of your client's employment in the last 3 months

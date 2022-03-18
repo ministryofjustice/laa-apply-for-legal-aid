@@ -1,5 +1,5 @@
 module LegalAidApplications
-  class NoEmploymentIncomeForm < BaseForm
+  class FullEmploymentInformationForm < BaseForm
     form_for LegalAidApplication
 
     attr_accessor :full_employment_details
