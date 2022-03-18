@@ -72,7 +72,7 @@ module CCMS
               matching: [
                 "<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>",
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
-              ]
+              ],
             )
           end
 
@@ -98,7 +98,7 @@ module CCMS
               transaction_id: "20190301030405123456",
               matching: [
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
-              ]
+              ],
             )
           end
 
@@ -136,7 +136,7 @@ module CCMS
               matching: [
                 "<casebio:PreferredAddress>CLIENT</casebio:PreferredAddress>",
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
-              ]
+              ],
             )
           end
         end
@@ -165,7 +165,7 @@ module CCMS
               transaction_id: "20190301030405123456",
               matching: [
                 "<casebio:ProviderOfficeID>#{legal_aid_application.office.ccms_id}</casebio:ProviderOfficeID>"
-              ]
+              ],
             )
           end
 

@@ -66,7 +66,7 @@ module CCMS
               br100_meaning: "Attr 2",
               response_type: "text",
               user_defined: false,
-            }
+            },
           )
         end
       end
@@ -86,7 +86,7 @@ module CCMS
               br100_meaning: "Applicant: age",
               response_type: "number",
               user_defined: true,
-            }
+            },
           )
         end
       end

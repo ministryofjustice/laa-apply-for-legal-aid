@@ -25,7 +25,7 @@ module CCMS
             matching: [
               "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
               "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-            ]
+            ],
           )
         end
       end
