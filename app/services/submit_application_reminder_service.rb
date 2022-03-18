@@ -23,7 +23,7 @@ class SubmitApplicationReminderService
         legal_aid_application_id: application.id,
         addressee:,
         scheduled_at: scheduled_time,
-        arguments: mailer_args
+        arguments: mailer_args,
       )
     end
   end

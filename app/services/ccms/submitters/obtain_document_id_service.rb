@@ -36,7 +36,7 @@ module CCMS
             attachment_id: attachment.id,
             status: :new,
             document_type: attachment.attachment_type,
-            ccms_document_id: nil
+            ccms_document_id: nil,
           )
         end
       end

@@ -20,12 +20,12 @@ class PdfConverter
       pdf_attachment = Attachment.create!(
         legal_aid_application_id: @original_attachment.legal_aid_application_id,
         attachment_type: "#{File.basename(@original_attachment.attachment_type, '.*')}_pdf",
-        attachment_name: pdf_filename
+        attachment_name: pdf_filename,
       )
       pdf_attachment.document.attach(
         io: File.open(file.path),
         filename: pdf_filename,
-        content_type: "application/pdf"
+        content_type: "application/pdf",
       )
       @original_attachment.update!(pdf_attachment_id: pdf_attachment.id)
     end

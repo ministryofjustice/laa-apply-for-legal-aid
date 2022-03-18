@@ -13,7 +13,7 @@ class SubmitCitizenReminderService
         legal_aid_application_id: application.id,
         addressee: applicant.email,
         scheduled_at: scheduled_time,
-        arguments: mailer_args
+        arguments: mailer_args,
       )
     end
   end

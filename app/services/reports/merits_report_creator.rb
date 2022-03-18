@@ -10,7 +10,7 @@ module Reports
       attachment.document.attach(
         io: StringIO.new(pdf_report),
         filename: "merits_report.pdf",
-        content_type: "application/pdf"
+        content_type: "application/pdf",
       )
 
       Rails.logger.info "ReportsCreator: Merits report attachment failed in #{legal_aid_application.id}" if attachment.document.download.nil?
@@ -32,7 +32,7 @@ module Reports
         layout: "pdf",
         locals: {
           :@legal_aid_application => legal_aid_application,
-        }
+        },
       )
     end
   end

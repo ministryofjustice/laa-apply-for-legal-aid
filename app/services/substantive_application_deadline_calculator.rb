@@ -10,7 +10,7 @@ class SubstantiveApplicationDeadlineCalculator
   def deadline
     WorkingDayCalculator.call(
       working_days: number_of_days_to_deadline,
-      from: @df_date
+      from: @df_date,
     )
   end
 

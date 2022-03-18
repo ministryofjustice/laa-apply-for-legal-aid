@@ -76,7 +76,7 @@ module HMRC
           gross: gross_from_hash(income_hash),
           benefits_in_kind: 0,
           national_insurance: ni_from_hash(income_hash),
-          tax: tax_from_hash(income_hash)
+          tax: tax_from_hash(income_hash),
         )
       end
 

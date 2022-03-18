@@ -22,7 +22,7 @@ module Admin
         @provider.update!(
           firm:,
           offices:,
-          contact_id:
+          contact_id:,
         )
       end
       @message = "User #{@provider.username} successfully created"

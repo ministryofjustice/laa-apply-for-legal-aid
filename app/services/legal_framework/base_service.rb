@@ -80,7 +80,7 @@ module LegalFramework
         message: formatted_error_message(error),
         backtrace: error.backtrace&.join("\n"),
         http_method:,
-        http_status: error.respond_to?(:http_status) ? error.http_status : nil
+        http_status: error.respond_to?(:http_status) ? error.http_status : nil,
       )
     end
 
@@ -91,7 +91,7 @@ module LegalFramework
         request_payload: request_body,
         http_response_status: http_status,
         error_message: message,
-        error_backtrace: backtrace
+        error_backtrace: backtrace,
       )
       raise LegalFramework::SubmissionError.new(message, http_status)
     end
@@ -107,7 +107,7 @@ module LegalFramework
         request_payload: request_body,
         http_response_status: raw_response.status,
         response_payload: raw_response.body,
-        error_message: error_message_from_response(raw_response)
+        error_message: error_message_from_response(raw_response),
       )
     end
 

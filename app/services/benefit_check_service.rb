@@ -59,7 +59,7 @@ private
       endpoint: config.wsdl_url,
       open_timeout: REQUEST_TIMEOUT,
       read_timeout: REQUEST_TIMEOUT,
-      namespace: BENEFIT_CHECKER_NAMESPACE
+      namespace: BENEFIT_CHECKER_NAMESPACE,
     )
   end
 end
