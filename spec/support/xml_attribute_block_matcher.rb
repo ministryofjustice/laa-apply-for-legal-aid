@@ -91,7 +91,7 @@ module XMLBlockMatchers
     return "Block not found" if actual.blank?
 
     formatted_expected_value = if formatted_decimal?(expected_value, expected_response_type)
-                                 format("%<val>12.2f", val: expected_value).squish
+                                 sprintf('%<val>12.2f', val: expected_value).squish
                                else
                                  expected_value
                                end

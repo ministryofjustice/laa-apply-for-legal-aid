@@ -8,7 +8,7 @@ class BaseAggregatedCashTransaction
   include MoneyHelper
 
   NUMBER_OF_FIELDS = 3
-  MONTH_RANGE = (1..NUMBER_OF_FIELDS).freeze
+  MONTH_RANGE = (1..NUMBER_OF_FIELDS)
 
   validate :validate_none_selected
   validate :validate_at_least_one_selected

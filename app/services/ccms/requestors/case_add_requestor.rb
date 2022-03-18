@@ -481,7 +481,7 @@ module CCMS
       end
 
       def as_currency(raw_value)
-        format("%<amount>.2f", amount: raw_value)
+        sprintf('%<amount>.2f', amount: raw_value)
       end
 
       def boolean?(val)

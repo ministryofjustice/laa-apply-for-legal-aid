@@ -12,7 +12,7 @@ class FeedbackController < ApplicationController
     end
     render :new
   end
-  alias submission new
+  alias_method :submission, :new
 
   def create
     initialize_feedback

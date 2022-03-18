@@ -37,14 +37,13 @@ module Reports
 
       def generate_csv
         transactions = legal_aid_application.bank_transactions.by_account_most_recent_first
-        csv_string = CSV.generate do |csv|
+        CSV.generate do |csv|
           csv << BankTransactionPresenter.headers
           transactions.each do |transaction|
             remarks = transaction_remarks_for[transaction.id]&.reasons.to_a
             csv << BankTransactionPresenter.present!(transaction, remarks)
           end
         end
-        csv_string
       end
 
       def transaction_remarks_for

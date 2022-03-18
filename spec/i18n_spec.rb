@@ -36,10 +36,10 @@ RSpec.describe "I18n", :i18n do
     format_string = "%<key>-#{max_key_length}s %<location>s"
 
     puts "\nTranslation keys missing for locale #{locale.inspect}".red
-    puts format(format_string, key: "key", location: "location").red
-    puts format(format_string, key: ("=" * max_key_length), location: ("=" * max_location_length)).red
+    puts sprintf(format_string, key: 'key', location: 'location').red
+    puts sprintf(format_string, key: ('=' * max_key_length), location: ('=' * max_location_length)).red
     key_details.each do |key, location|
-      puts format(format_string, key:, location:).red
+      puts sprintf(format_string, key:, location:).red
     end
   end
 

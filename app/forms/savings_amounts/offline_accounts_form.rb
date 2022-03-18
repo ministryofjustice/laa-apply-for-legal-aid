@@ -14,9 +14,7 @@ module SavingsAmounts
       validates attribute, presence: true, if: proc { |form| form.send(check_box_attribute).present? }
     end
 
-    attr_accessor(*ATTRIBUTES)
-    attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :journey
+    attr_accessor(*ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
     validates(:offline_current_accounts, :offline_savings_accounts, allow_blank: true, currency: true)
 

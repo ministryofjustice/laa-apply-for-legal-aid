@@ -11,14 +11,12 @@ module SoapMatcher
     match do |actual|
       results << "String does not start with a soap Envelope declaration" unless /<soap:Envelope xmlns:(soap=|xsd=|bill=)/.match?(actual)
 
-      if options[:command]
-        results << "String does not contain the #{options[:command]} command immediately after the soap:Body element" unless /<soap:Body>\n\s*<#{options[:command]}>/.match?(actual)
+      if options[:command] && !/<soap:Body>\n\s*<#{options[:command]}>/.match?(actual)
+        results << "String does not contain the #{options[:command]} command immediately after the soap:Body element"
       end
 
-      if options[:transaction_id]
-        unless %r{TransactionRequestID>#{options[:transaction_id]}</.+TransactionRequestID>}.match?(actual)
-          results << "String does not contain an ns3:/ns6:TransactionRequestID with a value of #{options[:transaction_id]}"
-        end
+      if options[:transaction_id] && !%r{TransactionRequestID>#{options[:transaction_id]}</.+TransactionRequestID>}.match?(actual)
+        results << "String does not contain an ns3:/ns6:TransactionRequestID with a value of #{options[:transaction_id]}"
       end
 
       options[:matching]&.each do |string_to_match|
