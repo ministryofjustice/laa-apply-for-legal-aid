@@ -685,7 +685,7 @@ module CCMS
               [:global_means, "APPLICATION_FROM_APPLY"],
               [:global_means, "APPLICATION_FROM_APPLY"],
               [:global_means, "MEANS_SUBMISSION_PG_DISPLAYED"],
-              [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"]
+              [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -1221,7 +1221,7 @@ module CCMS
             it "DEVOLVED_POWERS_CONTRACT_FLAG should be hard coded to Yes - Excluding JR Proceedings" do
               attributes = [
                 [:global_means, "DEVOLVED_POWERS_CONTRACT_FLAG"],
-                [:global_merits, "DEVOLVED_POWERS_CONTRACT_FLAG"]
+                [:global_merits, "DEVOLVED_POWERS_CONTRACT_FLAG"],
               ]
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
@@ -1263,7 +1263,7 @@ module CCMS
           it "CLIENT_INVOLVEMENT_TYPE should be hard coded to A" do
             attributes = [
               [:proceeding_merits, "CLIENT_INVOLVEMENT_TYPE"],
-              [:proceeding, "CLIENT_INVOLVEMENT_TYPE"]
+              [:proceeding, "CLIENT_INVOLVEMENT_TYPE"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -1276,7 +1276,7 @@ module CCMS
             it "should be type of text hard coded to false" do
               attributes = [
                 [:global_means, "COST_LIMIT_CHANGED_FLAG"],
-                [:global_merits, "COST_LIMIT_CHANGED_FLAG"]
+                [:global_merits, "COST_LIMIT_CHANGED_FLAG"],
               ]
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
@@ -1294,7 +1294,7 @@ module CCMS
           it "NEW_APPL_OR_AMENDMENT should be hard coded to APPLICATION" do
             attributes = [
               [:global_means, "NEW_APPL_OR_AMENDMENT"],
-              [:global_merits, "NEW_APPL_OR_AMENDMENT"]
+              [:global_merits, "NEW_APPL_OR_AMENDMENT"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -1306,7 +1306,7 @@ module CCMS
           it "USER_TYPE should be hard coded to EXTERNAL" do
             attributes = [
               [:global_means, "USER_TYPE"],
-              [:global_merits, "USER_TYPE"]
+              [:global_merits, "USER_TYPE"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -1341,7 +1341,7 @@ module CCMS
             it "REQUESTED_SCOPE should be populated with the scope limitation code" do
               attributes = [
                 [:proceeding, "REQUESTED_SCOPE"],
-                [:proceeding_merits, "REQUESTED_SCOPE"]
+                [:proceeding_merits, "REQUESTED_SCOPE"],
               ]
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
@@ -1373,7 +1373,7 @@ module CCMS
             it "REQUESTED_SCOPE should populated with MULTIPLE in proceedings section" do
               attributes = [
                 [:proceeding, "REQUESTED_SCOPE"],
-                [:proceeding_merits, "REQUESTED_SCOPE"]
+                [:proceeding_merits, "REQUESTED_SCOPE"],
               ]
               attributes.each do |entity_attribute_pair|
                 entity, attribute = entity_attribute_pair
@@ -1386,7 +1386,7 @@ module CCMS
           it "NEW_OR_EXISTING should be hard coded to NEW" do
             attributes = [
               [:proceeding, "NEW_OR_EXISTING"],
-              [:proceeding_merits, "NEW_OR_EXISTING"]
+              [:proceeding_merits, "NEW_OR_EXISTING"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -1418,7 +1418,7 @@ module CCMS
               [:global_merits, "REASON_NO_ATTEMPT_TO_SETTLE"],
               [:global_merits, "REASON_SEPARATE_REP_REQ"],
               [:global_merits, "MAIN_PURPOSE_OF_APPLICATION"],
-              [:global_means, "LAR_INPUT_T_1WP2_8A"]
+              [:global_means, "LAR_INPUT_T_1WP2_8A"],
             ]
             attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
@@ -2199,7 +2199,7 @@ module CCMS
           [:global_merits, "GB_INPUT_T_6WP1_1A"],
           [:global_merits, "GB_INPUT_T_6WP1_2A"],
           [:global_merits, "SA_SCREEN2_6WP1_PASSPORTEDBEN"],
-          [:global_merits, "SA_SCREEN4_6WP1_PASSPORT"]
+          [:global_merits, "SA_SCREEN4_6WP1_PASSPORT"],
         ]
       end
 
@@ -2450,7 +2450,7 @@ module CCMS
           [:opponent, "RELATIONSHIP_TENANT"],
           [:opponent, "RELATIONSHIP_NONE"],
           [:opponent, "OTHER_PARTY_ORG"],
-          [:proceeding_merits, "UNLAWFUL_REMOVAL_OF_CHILDREN_C"]
+          [:proceeding_merits, "UNLAWFUL_REMOVAL_OF_CHILDREN_C"],
         ]
       end
     end

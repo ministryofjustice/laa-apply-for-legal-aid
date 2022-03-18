@@ -34,8 +34,8 @@ module CCMS
             transaction_id: expected_tx_id,
             matching: [
               "<common:AddressLine1>#{applicant.address.address_line_one} #{applicant.address.address_line_two}</common:AddressLine1>",
-              "<common:City>#{applicant.address.city}</common:City>"
-            ]
+              "<common:City>#{applicant.address.city}</common:City>",
+            ],
           )
         end
       end

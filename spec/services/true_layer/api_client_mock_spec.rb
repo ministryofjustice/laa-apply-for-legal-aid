@@ -74,7 +74,7 @@ RSpec.describe TrueLayer::ApiClientMock do
             timestamp: "2010-01-12 00:00:00 +0000",
             transaction_type: "credit",
             running_balance: nil,
-          }
+          },
         ]
       end
 

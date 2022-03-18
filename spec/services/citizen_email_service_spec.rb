@@ -19,7 +19,7 @@ RSpec.describe CitizenEmailService do
         applicant.email_address,
         citizen_url,
         applicant.full_name,
-        provider.firm.name
+        provider.firm.name,
       ]
     end
     let(:scheduled_mail_attrs) do
@@ -28,7 +28,7 @@ RSpec.describe CitizenEmailService do
         mailer_method: :citizen_start_email,
         legal_aid_application_id: application.id,
         addressee: applicant.email_address,
-        arguments: mailer_args
+        arguments: mailer_args,
       ]
     end
 

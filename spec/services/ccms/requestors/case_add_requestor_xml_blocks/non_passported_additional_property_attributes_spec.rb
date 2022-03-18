@@ -174,7 +174,7 @@ module CCMS
             ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_20A", "text", true, "."],
             ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_21A", "text", true, "."],
             ["vehicle_entity", "CARANDVEH_INPUT_T_14WP2_22A", "text", true, "."],
-            ["will", "WILL_INPUT_T_2WP2_52A", "text", true, "."]
+            ["will", "WILL_INPUT_T_2WP2_52A", "text", true, "."],
           ]
         end
       end

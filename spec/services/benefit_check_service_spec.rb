@@ -15,8 +15,8 @@ RSpec.describe BenefitCheckService do
         message: hash_including(
           clientReference: application.id,
           surname: applicant.last_name.strip.upcase,
-          dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d")
-        )
+          dateOfBirth: applicant.date_of_birth.strftime("%Y%m%d"),
+        ),
       )
     end
 

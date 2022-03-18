@@ -705,7 +705,7 @@ module CCMS
             ["ADDPROPERTY_INPUT_B_4WP2_26A", true],
             ["ADDPROPERTY_INPUT_B_4WP2_27A", true],
             ["ADDPROPERTY_INPUT_B_4WP2_28A", true],
-            ["ADDPROPERTY_INPUT_B_4WP2_32A", true]
+            ["ADDPROPERTY_INPUT_B_4WP2_32A", true],
           ]
         end
 
@@ -741,7 +741,7 @@ module CCMS
             [:global_merits, "APPLICATION_CAN_BE_SUBMITTED", false],
             [:global_merits, "COPY_WARNING_LETTER", true],
             [:global_merits, "DP_WITH_JUDICIAL_REVIEW", false],
-            [:proceeding_merits, "CLIENT_INV_TYPE_BRINGING_PROCS", false]
+            [:proceeding_merits, "CLIENT_INV_TYPE_BRINGING_PROCS", false],
           ]
         end
 
@@ -924,7 +924,7 @@ module CCMS
             [:proceeding_merits, "PROCEEDING_CASE_OWNER_SCU", false],
             [:proceeding_merits, "PROCEEDING_JUDICIAL_REVIEW", false],
             [:proceeding_merits, "SCA_APPEAL_FINAL_ORDER", false],
-            [:proceeding_merits, "SIGNIFICANT_WIDER_PUB_INTEREST", false]
+            [:proceeding_merits, "SIGNIFICANT_WIDER_PUB_INTEREST", false],
           ]
         end
 
@@ -939,7 +939,7 @@ module CCMS
             [:global_merits, "DEC_UNABLE_TO_ATTEND"],
             [:employment_entity, "OUT_EMP_INFER_C_15WP3_17A"],
             [:global_means, "OUT_GB_INFER_C_29WP3_18A"],
-            [:global_means, "OUT_GB_PROC_C_34WP3_12A"]
+            [:global_means, "OUT_GB_PROC_C_34WP3_12A"],
           ]
         end
       end

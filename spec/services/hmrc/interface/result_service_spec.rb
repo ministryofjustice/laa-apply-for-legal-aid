@@ -33,7 +33,7 @@ RSpec.describe HMRC::Interface::ResultService do
         { 'income/sa/trusts/selfAssessment': [] },
         { 'employments/paye/employments': [] },
         { 'benefits_and_credits/working_tax_credit/applications': [] },
-        { 'benefits_and_credits/child_tax_credit/applications': [] }
+        { 'benefits_and_credits/child_tax_credit/applications': [] },
       ],
     }
   end
@@ -44,13 +44,13 @@ RSpec.describe HMRC::Interface::ResultService do
       .to_return(
         status: 200,
         body: '{"access_token":"test-bearer-token","token_type":"Bearer","expires_in":7200,"created_at":1582809000}',
-        headers: { "Content-Type" => "application/json; charset=utf-8" }
+        headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
     stub_request(:get, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/result/#{hmrc_response.submission_id}})
       .to_return(
         status: expected_status,
         body: expected_body.to_json,
-        headers: { "Content-Type" => "application/json; charset=utf-8" }
+        headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
   end
 
@@ -76,7 +76,7 @@ RSpec.describe HMRC::Interface::ResultService do
           _links: [
             {
               href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/#{hmrc_response.submission_id}",
-            }
+            },
           ],
         }
       end
@@ -94,7 +94,7 @@ RSpec.describe HMRC::Interface::ResultService do
           status: "failed",
           data: [
             { correlation_id: hmrc_response.submission_id },
-            { error: "submitted client details could not be found in HMRC service" }
+            { error: "submitted client details could not be found in HMRC service" },
           ],
         }
       end

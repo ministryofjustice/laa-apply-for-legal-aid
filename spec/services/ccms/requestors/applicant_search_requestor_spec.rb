@@ -24,8 +24,8 @@ module CCMS
             transaction_id: expected_tx_id,
             matching: [
               "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
-              "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-            ]
+              "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>",
+            ],
           )
         end
       end

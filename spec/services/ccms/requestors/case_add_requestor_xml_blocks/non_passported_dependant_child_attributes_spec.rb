@@ -262,7 +262,7 @@ module CCMS
                 [
                   # key for XmlExtractor xpath, attribute name, response type, user_defined?, expected_value
                   ["client_residing_person", "CLI_RES_PER_INPUT_B_12WP3_20A", "boolean", false, false],
-                  ["client_residing_person", "CLI_RES_PER_INPUT_B_12WP3_32A", "boolean", false, false]
+                  ["client_residing_person", "CLI_RES_PER_INPUT_B_12WP3_32A", "boolean", false, false],
                 ]
               end
 

@@ -21,7 +21,7 @@ module CCMS
               matching: %w[
                 <casebio:DocumentType>ADMIN1</casebio:DocumentType>
                 <casebio:Channel>E</casebio:Channel>
-              ]
+              ],
             )
           end
         end
@@ -39,7 +39,7 @@ module CCMS
               matching: %w[
                 <casebio:DocumentType>BSTMT</casebio:DocumentType>
                 <casebio:Channel>E</casebio:Channel>
-              ]
+              ],
             )
           end
         end

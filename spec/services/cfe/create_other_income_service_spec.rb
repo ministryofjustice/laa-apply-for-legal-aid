@@ -104,7 +104,7 @@ module CFE
             updated_at: "2020-03-27T13:08:21.907Z",
             monthly_income: nil,
             assessment_error: false,
-          }
+          },
         ],
         errors: [],
         success: true,
@@ -124,14 +124,14 @@ module CFE
             source: "Friends or family",
             payments: [
               { date: one_week_ago, amount: 60.0, client_id: "11111111-1111-1111-1111-111111111111" },
-              { date: today, amount: 60.0, client_id: "11111111-1111-1111-1111-111111111111" }
+              { date: today, amount: 60.0, client_id: "11111111-1111-1111-1111-111111111111" },
             ],
           },
           {
             source: "Maintenance in",
             payments: [
               { date: one_week_ago, amount: 125.0, client_id: "11111111-1111-1111-1111-111111111111" },
-              { date: today, amount: 250.0, client_id: "11111111-1111-1111-1111-111111111111" }
+              { date: today, amount: 250.0, client_id: "11111111-1111-1111-1111-111111111111" },
             ],
           },
           {
@@ -139,9 +139,9 @@ module CFE
             payments: [
               { date: two_weeks_ago, amount: 355.68, client_id: "11111111-1111-1111-1111-111111111111" },
               { date: one_week_ago, amount: 355.67, client_id: "11111111-1111-1111-1111-111111111111" },
-              { date: today, amount: 355.66, client_id: "11111111-1111-1111-1111-111111111111" }
+              { date: today, amount: 355.66, client_id: "11111111-1111-1111-1111-111111111111" },
             ],
-          }
+          },
         ],
       }
     end

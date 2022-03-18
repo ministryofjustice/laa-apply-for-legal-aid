@@ -48,7 +48,7 @@ module CCMS
           subject.call
           expect(history.request).to be_soap_envelope_with(
             command: "refdatabim:ReferenceDataInqRQ",
-            transaction_id: "20190301030405123456"
+            transaction_id: "20190301030405123456",
           )
         end
 
@@ -80,7 +80,7 @@ module CCMS
           expect(history.details).to match(/oops/)
           expect(history.request).to be_soap_envelope_with(
             command: "refdatabim:ReferenceDataInqRQ",
-            transaction_id: "20190301030405123456"
+            transaction_id: "20190301030405123456",
           )
           expect(history.response).to be_nil
         end

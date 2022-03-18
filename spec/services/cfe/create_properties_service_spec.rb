@@ -12,7 +12,7 @@ RSpec.describe CFE::CreatePropertiesService do
       property_value:,
       outstanding_mortgage_amount: outstanding_mortgage,
       percentage_home: percentage_owned,
-      shared_ownership:
+      shared_ownership:,
     )
   end
   let(:submission) do
@@ -31,11 +31,11 @@ RSpec.describe CFE::CreatePropertiesService do
       stub_request(:post, subject.cfe_url)
         .with(
           body: subject.request_body,
-          headers: { "Content-Type" => "application/json" }
+          headers: { "Content-Type" => "application/json" },
         )
         .to_return(
           status: response_status,
-          body: api_response
+          body: api_response,
         )
 
       example.run
@@ -100,7 +100,7 @@ RSpec.describe CFE::CreatePropertiesService do
         create(
           :cfe_submission,
           assessment_id: SecureRandom.uuid,
-          legal_aid_application:
+          legal_aid_application:,
         )
       end
 
@@ -130,7 +130,7 @@ RSpec.describe CFE::CreatePropertiesService do
         create(
           :cfe_submission,
           assessment_id: SecureRandom.uuid,
-          legal_aid_application:
+          legal_aid_application:,
         )
       end
 

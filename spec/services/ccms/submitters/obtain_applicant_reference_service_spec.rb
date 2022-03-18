@@ -60,8 +60,8 @@ module CCMS
               transaction_id: "20190301030405123456",
               matching: [
                 "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
-                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-              ]
+                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>",
+              ],
             )
           end
 
@@ -99,8 +99,8 @@ module CCMS
               transaction_id: "20190301030405123456",
               matching: [
                 "<common:Surname>#{applicant.last_name}</common:Surname>",
-                "<common:FirstName>#{applicant.first_name}</common:FirstName>"
-              ]
+                "<common:FirstName>#{applicant.first_name}</common:FirstName>",
+              ],
             )
           end
 
@@ -147,8 +147,8 @@ module CCMS
               transaction_id: "20190301030405123456",
               matching: [
                 "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
-                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-              ]
+                "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>",
+              ],
             )
           end
         end

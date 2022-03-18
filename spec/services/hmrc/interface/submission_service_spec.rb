@@ -8,14 +8,14 @@ RSpec.describe HMRC::Interface::SubmissionService do
       .to_return(
         status: 200,
         body: '{"access_token":"test-bearer-token","token_type":"Bearer","expires_in":7200,"created_at":1582809000}',
-        headers: { "Content-Type" => "application/json; charset=utf-8" }
+        headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
     stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/create/.*})
       .to_return(
         status: 202,
         body: '{"id":"26b94ef2-5854-409a-8223-05f4b58368b7","_links":[{"href":"https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7"}]
 }',
-        headers: { "Content-Type" => "application/json; charset=utf-8" }
+        headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
   end
   let(:application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
