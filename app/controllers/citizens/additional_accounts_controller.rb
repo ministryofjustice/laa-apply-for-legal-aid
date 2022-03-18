@@ -41,7 +41,7 @@ module Citizens
         journey: :citizen,
         radio_buttons_input_name: :additional_account,
         action: :index,
-        form_params:
+        form_params:,
       )
     end
 
@@ -50,7 +50,7 @@ module Citizens
         journey: :citizen,
         radio_buttons_input_name: :has_offline_accounts,
         action: :new,
-        form_params:
+        form_params:,
       )
     end
 

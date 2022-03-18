@@ -21,7 +21,7 @@ module Providers
     def create
       redirect_to Flow::KeyPoint.path_for(
         journey: :providers,
-        key_point: :journey_start
+        key_point: :journey_start,
       )
     end
 
@@ -31,7 +31,7 @@ module Providers
       @pagy, @legal_aid_applications = pagy(
         applications_query,
         items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1] # control of how many elements shown in page info
+        size: [1, 1, 1, 1], # control of how many elements shown in page info
       )
       @initial_sort = { created_at: :desc }
     end

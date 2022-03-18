@@ -21,7 +21,7 @@ module Providers
         journey: :provider,
         radio_buttons_input_name: :confirm_multiple_delegated_functions_date,
         form_params:,
-        error: multiple_dates_check? ? "error.blank_plural" : "error.blank_singular"
+        error: multiple_dates_check? ? "error.blank_plural" : "error.blank_singular",
       )
     end
 

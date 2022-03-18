@@ -8,7 +8,7 @@ module Admin
       @pagy, @applications = pagy(
         LegalAidApplication.latest,
         items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1]
+        size: [1, 1, 1, 1],
       )
     end
 
@@ -17,7 +17,7 @@ module Admin
         @pagy, @applications = pagy(
           search_application_results,
           items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-          size: [1, 1, 1, 1]
+          size: [1, 1, 1, 1],
         )
       elsif search_params.nil?
         @error = t(".error")
