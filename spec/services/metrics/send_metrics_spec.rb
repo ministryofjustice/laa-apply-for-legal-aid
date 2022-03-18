@@ -32,8 +32,8 @@ RSpec.describe Metrics::SendMetrics do
       expect(prometheus_client).to receive(:send_json).with(
         hash_including(
           type: PrometheusCollectors::SidekiqQueueCollector::COLLECTOR_TYPE,
-          queue: "mailers"
-        )
+          queue: "mailers",
+        ),
       )
       subject
     end

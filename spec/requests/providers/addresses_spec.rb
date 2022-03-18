@@ -58,7 +58,7 @@ RSpec.describe "address requests", type: :request do
     subject do
       patch(
         providers_legal_aid_application_address_path(legal_aid_application),
-        params: address_params.merge(submit_button)
+        params: address_params.merge(submit_button),
       )
     end
 

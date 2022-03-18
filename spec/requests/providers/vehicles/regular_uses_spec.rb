@@ -38,7 +38,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application),
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

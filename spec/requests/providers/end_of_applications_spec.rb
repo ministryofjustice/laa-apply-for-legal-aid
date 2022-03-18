@@ -50,7 +50,7 @@ RSpec.describe Providers::EndOfApplicationsController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_end_of_application_path(legal_aid_application),
-        params:
+        params:,
       )
     end
 

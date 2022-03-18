@@ -27,7 +27,7 @@ module CFE
             {
               "Content-Type" => "application/json",
               "Accept" => "application/json;version=4",
-            }
+            },
           )
       end
     end

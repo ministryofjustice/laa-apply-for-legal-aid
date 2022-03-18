@@ -47,14 +47,14 @@ RSpec.describe "about financial assessments requests", type: :request do
             :with_proceedings,
             :with_applicant_and_address,
             :with_non_passported_state_machine,
-            :provider_assessing_means
+            :provider_assessing_means,
           )
         end
         let(:target_path) do
           Flow::KeyPoint.path_for(
             key_point: :start_after_applicant_completes_means,
             journey: :providers,
-            legal_aid_application: application
+            legal_aid_application: application,
           )
         end
 

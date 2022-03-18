@@ -94,7 +94,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       patch(
         citizens_additional_account_path(id: :update),
-        params:
+        params:,
       )
     end
 

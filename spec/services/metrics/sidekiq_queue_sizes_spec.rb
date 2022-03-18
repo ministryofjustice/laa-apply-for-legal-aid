@@ -11,7 +11,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
     it "sends to prometheus the size of each queue" do
       queues.each do |queue|
         expect(prometheus_client).to receive(:send_json).with(
-          type: collector_type, queue:, size: Sidekiq::Queue.new(queue).size
+          type: collector_type, queue:, size: Sidekiq::Queue.new(queue).size,
         )
       end
       subject
@@ -32,7 +32,7 @@ RSpec.describe Metrics::SidekiqQueueSizes do
       it "sends to prometheus the size of each queue" do
         queues.each do |queue|
           expect(prometheus_client).to receive(:send_json).with(
-            type: collector_type, queue:, size: expected_sizes[queue]
+            type: collector_type, queue:, size: expected_sizes[queue],
           )
         end
         subject

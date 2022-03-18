@@ -18,7 +18,7 @@ RSpec.describe Flow::BaseFlowService do
     flow_service_class.new(
       legal_aid_application:,
       current_step:,
-      params:
+      params:,
     )
   end
 

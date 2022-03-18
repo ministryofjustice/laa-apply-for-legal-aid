@@ -70,7 +70,7 @@ module Providers
         subject do
           patch(
             providers_legal_aid_application_opponent_path(legal_aid_application),
-            params: params.merge(button_clicked)
+            params: params.merge(button_clicked),
           )
         end
 

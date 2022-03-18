@@ -23,7 +23,7 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
           application_url:,
           ref_number: application.application_ref,
           client_name: application.applicant.full_name,
-          expiry_date: url_expiry_date
+          expiry_date: url_expiry_date,
         )
       end
     end

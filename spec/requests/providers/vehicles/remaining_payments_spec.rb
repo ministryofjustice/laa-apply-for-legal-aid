@@ -42,7 +42,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
     subject do
       patch(
         providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application),
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

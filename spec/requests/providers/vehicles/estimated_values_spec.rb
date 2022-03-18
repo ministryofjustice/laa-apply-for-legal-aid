@@ -34,7 +34,7 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application),
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

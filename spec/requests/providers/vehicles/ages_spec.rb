@@ -58,7 +58,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_vehicles_age_path(legal_aid_application),
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

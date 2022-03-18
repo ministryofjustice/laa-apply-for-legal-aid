@@ -29,7 +29,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
         applicant: param_applicant.merge(
           'date_of_birth(1i)': param_applicant[:date_of_birth].year.to_s,
           'date_of_birth(2i)': param_applicant[:date_of_birth].month.to_s,
-          'date_of_birth(3i)': param_applicant[:date_of_birth].day.to_s
+          'date_of_birth(3i)': param_applicant[:date_of_birth].day.to_s,
         ).except(:date_of_birth),
       }
     end

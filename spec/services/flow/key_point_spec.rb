@@ -9,7 +9,7 @@ RSpec.describe Flow::KeyPoint do
     Flow::BaseFlowService.flow_service_for(
       journey,
       legal_aid_application:,
-      current_step: step
+      current_step: step,
     )
   end
 
@@ -31,7 +31,7 @@ RSpec.describe Flow::KeyPoint do
     it "returns the matching step" do
       response = described_class.step_for(
         journey:,
-        key_point:
+        key_point:,
       )
       expect(response).to eq(step)
     end
@@ -42,7 +42,7 @@ RSpec.describe Flow::KeyPoint do
       response = described_class.path_for(
         journey:,
         key_point:,
-        legal_aid_application:
+        legal_aid_application:,
       )
       expect(response).to eq(flow.current_path)
     end

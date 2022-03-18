@@ -6,7 +6,7 @@ RSpec.describe SecureApplicationFinder do
   let(:secure_data_id) do
     SecureData.create_and_store!(
       legal_aid_application: { id: legal_aid_application.id },
-      expired_at:
+      expired_at:,
     )
   end
 

@@ -44,7 +44,7 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
     subject do
       patch(
         "/providers/applications/#{application_id}/no_outgoings_summary",
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 
