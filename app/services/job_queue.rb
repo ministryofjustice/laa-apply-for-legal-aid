@@ -27,12 +27,12 @@ class JobQueue
     format_pattern = '%<jobname>30s    %<due>s'
     ss = Sidekiq::ScheduledSet.new
 
-    puts format(format_pattern, jobname: 'Job name', due: 'Due')
-    puts format(format_pattern, jobname: '========', due: '===')
+    puts sprintf(format_pattern, jobname: 'Job name', due: 'Due')
+    puts sprintf(format_pattern, jobname: '========', due: '===')
     ss.each do |job|
       next if job_name(job).blank?
 
-      puts  format(format_pattern, jobname: job_name(job), due: scheduled_time(job))
+      puts sprintf(format_pattern, jobname: job_name(job), due: scheduled_time(job))
     end
   end
   # rubocop:enable Rails/Output

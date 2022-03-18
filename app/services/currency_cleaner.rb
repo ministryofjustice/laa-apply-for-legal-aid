@@ -1,7 +1,7 @@
 class CurrencyCleaner
-  THOUSANDS_SEPARATOR_REGEX = /,(?=\d{3}\b)/.freeze
-  LEADING_POUND_SIGN_REGEX = /^£/.freeze
-  PURE_NUMERIC_REGEX = /^-?\d+\.?\d+?$/.freeze
+  THOUSANDS_SEPARATOR_REGEX = /,(?=\d{3}\b)/
+  LEADING_POUND_SIGN_REGEX = /^£/
+  PURE_NUMERIC_REGEX = /^-?\d+\.?\d+?$/
 
   def initialize(value)
     @original_value = value

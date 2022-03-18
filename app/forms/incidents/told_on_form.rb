@@ -2,11 +2,8 @@ module Incidents
   class ToldOnForm < BaseForm
     form_for ApplicationMeritsTask::Incident
 
-    attr_accessor :told_on_1i, :told_on_2i, :told_on_3i
-    attr_writer :told_on
-
-    attr_accessor :occurred_on_1i, :occurred_on_2i, :occurred_on_3i
-    attr_writer :occurred_on
+    attr_accessor :told_on_1i, :told_on_2i, :told_on_3i, :occurred_on_1i, :occurred_on_2i, :occurred_on_3i
+    attr_writer :told_on, :occurred_on
 
     validates :told_on, presence: true, unless: :draft_and_not_partially_complete_told_on_date?
     validates :told_on, date: { not_in_the_future: true }, allow_nil: true

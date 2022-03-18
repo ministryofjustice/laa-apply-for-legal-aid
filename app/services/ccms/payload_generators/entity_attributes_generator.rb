@@ -7,7 +7,7 @@ module CCMS
 
       attr_reader :requestor
 
-      CONFIG_METHOD_REGEX = /^#(\S+)/.freeze
+      CONFIG_METHOD_REGEX = /^#(\S+)/
 
       def self.call(requestor, xml, entity_name, options = {})
         new(requestor, xml, entity_name, options).call
@@ -106,7 +106,7 @@ module CCMS
       end
 
       def as_currency(raw_value)
-        format('%<amount>.2f', amount: raw_value)
+        sprintf('%<amount>.2f', amount: raw_value)
       end
     end
   end

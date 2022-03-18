@@ -37,9 +37,7 @@ module Citizens
       validates attribute, presence: true, if: proc { |form| form.__send__(check_box_attribute).present? }
     end
 
-    attr_accessor(*ALL_ATTRIBUTES)
-    attr_accessor(*CHECK_BOXES_ATTRIBUTES)
-    attr_accessor :journey
+    attr_accessor(*ALL_ATTRIBUTES, *CHECK_BOXES_ATTRIBUTES, :journey)
 
     before_validation :empty_unchecked_values
 

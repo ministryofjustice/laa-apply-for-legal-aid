@@ -280,7 +280,7 @@ class LegalAidApplication < ApplicationRecord
     benefit_check_result&.positive? || false
   end
 
-  alias passported? applicant_receives_benefit?
+  alias_method :passported?, :applicant_receives_benefit?
 
   def non_passported?
     !passported?

@@ -4,13 +4,12 @@ module Reports
       START_DATE = Time.zone.local(2020, 9, 21, 0, 0, 0).freeze
 
       def run
-        csv_string = CSV.generate do |csv|
+        CSV.generate do |csv|
           csv << NonPassportedApplicationCsvLine.header_row
           legal_aid_applications.each do |legal_aid_application|
             csv << NonPassportedApplicationCsvLine.call(legal_aid_application)
           end
         end
-        csv_string
       end
 
     private
