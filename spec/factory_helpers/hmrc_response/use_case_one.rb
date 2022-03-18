@@ -55,7 +55,10 @@ module FactoryHelpers
           example1_usecase1
         when :multiple_employments_usecase1
           example1_usecase1
-          @options[:data_array][16]["employments/paye/employments"] << { "startDate" => "2021-09-25", "endDate" => "2099-12-31" }
+          @options[:data_array][16]['employments/paye/employments'] << { 'startDate' => '2021-09-25', 'endDate' => '2099-12-31' }
+        when :all_remarks_usecase1
+          all_remarks_usecase1
+          @options[:data_array][16]['employments/paye/employments'] << { 'startDate' => '2021-09-25', 'endDate' => '2099-12-31' }
         else
           raise "named data #{@options[:named_data]} passed to #{self.class}} unrecognised"
         end
@@ -181,6 +184,129 @@ module FactoryHelpers
             { "benefits_and_credits/working_tax_credit/applications" => [{ awards: [] }] },
             { "benefits_and_credits/child_tax_credit/applications" => [{ awards: [] }] },
           ],
+        }
+      end
+
+      def all_remarks_usecase1
+        @options = {
+          first_name: 'John',
+          last_name: 'Doe',
+          data_array: [
+            {
+              correlation_id: @correlation_id,
+              use_case: 'use_case_one'
+            },
+            {
+              'individuals/matching/individual' => {
+                firstName: firstname,
+                lastName: lastname,
+                nino: nino,
+                dateOfBirth: '1994-04-30'
+              }
+            },
+            {
+              'income/paye/paye' => {
+                income: [
+                  {
+                    taxYear: '21-22',
+                    payFrequency: 'M1',
+                    monthPayNumber: 8,
+                    paymentDate: '2021-11-22',
+                    paidHoursWorked: 'D',
+                    taxablePayToDate: 17_014.34,
+                    taxablePay: 180.98,
+                    totalTaxToDate: 1706.8,
+                    taxDeductedOrRefunded: 161.8,
+                    employeePensionContribs: {
+                      paidYTD: 0,
+                      notPaidYTD: 514.17,
+                      paid: 0,
+                      notPaid: 53.96
+                    },
+                    grossEarningsForNics: { inPayPeriod1: 1868.98 },
+                    totalEmployerNics: { inPayPeriod1: 156.21, ytd: 1534.31 },
+                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 }
+                  },
+                  {
+                    taxYear: '21-22',
+                    payFrequency: 'M1',
+                    monthPayNumber: 7,
+                    paymentDate: '2021-10-28',
+                    paidHoursWorked: 'D',
+                    taxablePayToDate: 15_145.36,
+                    taxablePay: 1615.78,
+                    totalTaxToDate: 1545,
+                    taxDeductedOrRefunded: 111,
+                    employeePensionContribs: {
+                      paidYTD: 0,
+                      notPaidYTD: 460.21,
+                      paid: 0,
+                      notPaid: 43.83
+                    },
+                    grossEarningsForNics: { inPayPeriod1: 1868.98 },
+                    totalEmployerNics: { inPayPeriod1: 156.21, ytd: 1534.31 },
+                    employeeNics: { inPayPeriod1: 128.64, ytd1: 1276.59 }
+                  },
+                  {
+                    taxYear: '21-22',
+                    payFrequency: 'M1',
+                    monthPayNumber: 6,
+                    paymentDate: '2021-09-16',
+                    paidHoursWorked: 'D',
+                    taxablePayToDate: 13_529.58,
+                    taxablePay: 2492.61,
+                    totalTaxToDate: 1434,
+                    taxDeductedOrRefunded: -286.6,
+                    employeePensionContribs: {
+                      paidYTD: 0,
+                      notPaidYTD: 416.38,
+                      paid: 0,
+                      notPaid: 78.9
+                    },
+                    grossEarningsForNics: { inPayPeriod1: 2492.61 },
+                    totalEmployerNics: { inPayPeriod1: 242.27, ytd: 1256.83 },
+                    employeeNics: { inPayPeriod1: -203.47, ytd1: 1049.7 }
+                  },
+                  {
+                    taxYear: '21-22',
+                    payFrequency: 'M1',
+                    monthPayNumber: 5,
+                    paymentDate: '2021-08-28',
+                    paidHoursWorked: 'D',
+                    taxablePayToDate: 11_036.97,
+                    taxablePay: 230.29,
+                    totalTaxToDate: 1147.4,
+                    taxDeductedOrRefunded: 257.2,
+                    employeePensionContribs: {
+                      paidYTD: 0,
+                      notPaidYTD: 337.48,
+                      paid: 0,
+                      notPaid: 73.01
+                    },
+                    grossEarningsForNics: { inPayPeriod1: 2345.29 },
+                    totalEmployerNics: { inPayPeriod1: 221.94, ytd: 1014.56 },
+                    employeeNics: { inPayPeriod1: -750.2, ytd1: 846.23 }
+                  }
+                ]
+              }
+            },
+            { 'income/sa/selfAssessment' => { 'registrations' => [], 'taxReturns' => [] } },
+            { 'income/sa/pensions_and_state_benefits/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/source/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/employments/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/additional_information/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/partnerships/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/uk_properties/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/foreign/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/further_details/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/interests_and_dividends/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/other/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/summary/selfAssessment' => { 'taxReturns' => [] } },
+            { 'income/sa/trusts/selfAssessment' => { 'taxReturns' => [] } },
+            { 'employments/paye/employments' => [{ startDate: '2013-04-22', endDate: '2099-12-31' }] },
+            { 'benefits_and_credits/working_tax_credit/applications' => [{ awards: [] }] },
+            { 'benefits_and_credits/child_tax_credit/applications' => [{ awards: [] }] }
+          ]
         }
       end
 

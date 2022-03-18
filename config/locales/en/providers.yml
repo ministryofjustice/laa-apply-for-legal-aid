@@ -658,7 +658,13 @@ en:
         category-amount_variation: Review categories - Monthly value
         category-unknown_frequency: Review categories - Frequency
         category-policy_disregards: Review categories - Discretionary disregards
+        category-multiple_employments: Review categories - Multiple employments
+        category-refunds: Review categories - Tax or NI refunds
         category:
+          employment: Employment
+          employment_gross_income: Employment gross income
+          employment_tax: Employment income tax
+          employment_nic: Employment National Insurance contributions
           state_benefit_payment: State benefits
           other_income_payment: Other income
           outgoings_housing_cost: Housing payments
@@ -681,6 +687,8 @@ en:
           dwp_override: Provider disagrees with DWP result
           restrictions: Restrictions on client's assets
           further_employment_details: Further employment details
+          multiple_employments: Multiple employments
+          refunds: Tax or NI refunds
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review

@@ -16,7 +16,7 @@ module HMRC
       new(*args).call
     end
 
-    attr_reader :application
+    attr_reader :applicationconfig/locales/en/providers.yml
 
     delegate :applicant, to: :application, allow_nil: true
     delegate :first_name, :last_name, :national_insurance_number, :date_of_birth, to: :applicant, allow_nil: true
