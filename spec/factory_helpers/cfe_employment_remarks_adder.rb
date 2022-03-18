@@ -33,7 +33,7 @@ module FactoryHelpers
       @cfe_result.update!(result: result_hash.to_json)
     end
 
-    private
+  private
 
     def create_employment_records
       FactoryBot.create :employment, :with_irregularities, legal_aid_application: @laa

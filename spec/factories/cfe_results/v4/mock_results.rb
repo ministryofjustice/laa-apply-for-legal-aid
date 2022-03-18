@@ -543,12 +543,12 @@ module CFEResults
           },
           employment_nic: {
             amount_variation: [payments.map(&:id)],
-            refunds: refunded_nic_ids
+            refunds: refunded_nic_ids,
           },
           employment_tax: {
             amount_variation: [payments.map(&:id)],
-            refunds: refunded_tax_ids
-          }
+            refunds: refunded_tax_ids,
+          },
         }
         result[:assessment][:remarks] = remarks
         result

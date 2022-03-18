@@ -17,12 +17,6 @@ module FactoryHelpers
         expect(rec.response["status"]).to eq "completed"
         expect(rec.response["data"].size).to eq 19
       end
-
-      context 'when trait :all_remarks_usecase1' do
-        it 'generates an hmrc response with irregular dates, amounts and multiple employments' do
-          rec = create :hmrc_response, :all_remarks_usecase1
-        end
-      end
     end
   end
 end

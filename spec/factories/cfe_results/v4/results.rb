@@ -104,7 +104,7 @@ module CFEResults
             record.legal_aid_application.employments << create(:employment, :with_irregularities)
             record.legal_aid_application.employments << create(:employment)
 
-            record.update(result: CFEResults::V4::MockResults.with_employment_remarks(record).to_json)
+            record.update!(result: CFEResults::V4::MockResults.with_employment_remarks(record).to_json)
           end
         end
       end
