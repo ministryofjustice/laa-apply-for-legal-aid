@@ -36,7 +36,7 @@ module Flowable
         journey_type,
         legal_aid_application:,
         current_step:,
-        params: flow_param
+        params: flow_param,
       )
     end
 

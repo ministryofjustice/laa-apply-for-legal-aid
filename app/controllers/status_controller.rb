@@ -61,7 +61,7 @@ private
   def malware_scanner_positive
     virus_found = MalwareScanner.call(
       file_path: Rails.root.join("spec/fixtures/files/malware.doc"),
-      save_result: false
+      save_result: false,
     ).virus_found
 
     throw "MalwareScanner fails to identify virus" unless virus_found
@@ -72,7 +72,7 @@ private
   def malware_scanner_negative
     virus_found = MalwareScanner.call(
       file_path: Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"),
-      save_result: false
+      save_result: false,
     ).virus_found
 
     throw "MalwareScanner wrongly flags safe file" if virus_found

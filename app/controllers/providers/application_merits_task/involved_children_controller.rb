@@ -28,7 +28,7 @@ module Providers
 
       def build_new_involved_child
         ::ApplicationMeritsTask::InvolvedChild.new(
-          legal_aid_application:
+          legal_aid_application:,
         )
       end
 
