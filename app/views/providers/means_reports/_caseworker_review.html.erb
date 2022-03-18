@@ -5,7 +5,7 @@
       <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
         <%= t(".required") %>
       </dt>
-      <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>">
+      <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_required_answer">
         <%= yes_no(manual_review_determiner.manual_review_required?) %>
       </dd>
     </div>
@@ -16,7 +16,7 @@
         <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
           <%= t(".reasons") %>
         </dt>
-        <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>">
+        <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_reasons">
           <% manual_review_determiner.review_reasons.each do |reason| %>
             <%= t(".reason.#{reason}") %>
             <br>
@@ -25,11 +25,11 @@
       </div>
 
       <% manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
-        <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
+        <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required-#{reason}" %>">
           <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
             <%= t(".category-#{reason}") %>
           </dt>
-          <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>">
+          <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>" id="<%= "review-reason-#{reason}" %>">
             <% categories.each do |category| %>
               <%= t(".category.#{category}") %>
               <br>

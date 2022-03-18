@@ -1,4 +1,5 @@
-require "rails_helper"
+require 'rails_helper'
+require Rails.root.join('spec/factory_helpers/cfe_employment_remarks_adder')
 
 RSpec.describe Providers::MeansReportsController, type: :request do
   include ActionView::Helpers::NumberHelper
@@ -119,6 +120,34 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           expect(unescaped_response_body).to_not include("National insurance")
           expect(unescaped_response_body).to_not include("Fixed employment deduction")
           expect(unescaped_response_body).to_not include("Employment notes")
+        end
+      end
+
+      context 'remarks' do
+        let(:before_subject) { FactoryHelpers::CFEEmploymentRemarksAdder.call(cfe_result) }
+
+        it 'displays all expected employment-related remarks' do
+          expect(parsed_response_body.css('#caseworker_review_required_answer').text.strip).to eq "Yes"
+          reasons = parsed_response_body.css('#caseworker_review_reasons').text.split("\n").map(&:strip)
+          reasons.delete_if(&:blank?)
+          expect(reasons).to eq ["Monthly value unknown (variations)",
+                                 "Multiple employments",
+                                 "Tax or NI refunds",
+                                 "Frequency unknown"]
+          expect(parsed_response_body.css('#means-merits-report__caseworker-review-required-multiple_employments > dt').text.strip).to eq "Review categories - Multiple employments"
+
+
+          amount_variation_categories = parsed_response_body.css('#review-reason-amount_variation').text.split("\n").map(&:strip)
+          amount_variation_categories.delete_if(&:blank?)
+          expect(amount_variation_categories).to eq ["Employment gross income", "Employment National Insurance contributions", "Employment income tax"]
+
+          unknown_frequency_categories = parsed_response_body.css('#review-reason-unknown_frequency').text.split("\n").map(&:strip)
+          unknown_frequency_categories.delete_if(&:blank?)
+          expect(unknown_frequency_categories).to eq ["Employment gross income"]
+
+          refunds_categories = parsed_response_body.css('#review-reason-refunds').text.split("\n").map(&:strip)
+          refunds_categories.delete_if(&:blank?)
+          expect(refunds_categories).to eq ["Employment National Insurance contributions", "Employment income tax"]
         end
       end
     end
