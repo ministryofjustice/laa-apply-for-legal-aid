@@ -13,7 +13,9 @@ module CCMS
              :dwp_override,
              :passported?,
              :non_passported?,
-             :has_restrictions?, to: :legal_aid_application
+             :has_restrictions?,
+             :policy_disregards?,
+             :manually_entered_employment_information?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
@@ -26,7 +28,9 @@ module CCMS
       dwp_override.present? ||
         manually_review_all_non_passported? ||
         capital_contribution_required? ||
-        has_restrictions?
+        has_restrictions? ||
+        policy_disregards? ||
+        manually_entered_employment_information?
     end
 
     def review_reasons
@@ -48,7 +52,11 @@ module CCMS
     end
 
     def application_review_reasons
-      dwp_override ? [:dwp_override] : []
+      application_review_reasons = []
+      application_review_reasons << :dwp_override if dwp_override
+      application_review_reasons << :restrictions if has_restrictions?
+      application_review_reasons << :further_employment_details if manually_entered_employment_information?
+      application_review_reasons
     end
 
     def manually_review_all_non_passported?
