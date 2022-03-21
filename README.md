@@ -5,7 +5,7 @@
 
 # LAA Apply for legal aid
 
-The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
+The laa-apply-for-legal-aid system is a web service for solicitors that provide legal aid services. The service enables users to submit applications for legal aid on-line.
 
 ## Table of Contents
 - [**Architecture Diagram**](#architecture-diagram)
