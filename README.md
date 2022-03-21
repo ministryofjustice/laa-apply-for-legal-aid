@@ -73,13 +73,21 @@ brew bundle
 ```
 
 ## Initial setup
-This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
 
-Once the pull request has been merged, re-pull main and run
+Git-crypt is used for encryption. It uses either your personal public key or a symmetric key.
 
+1. To obtain the symmetric key you will need to get access to LastPass. Liase with a team member for this. Once you have the the key you can unlock:
+
+```sh
+git-crypt unlock path-to-symmetric-key
 ```
+
+2. To add your personal public gpg key to git-crypt liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md). Once the pull request has been merged, re-pull main branch and then run:
+
+```sh
 git-crypt unlock
 ```
+
 Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the tests running you will need to obtain and set values for the following:
