@@ -1,4 +1,8 @@
 #Add a new user for git-crypt
+
+* have the user publish their public key
+
+         gpg --keyserver pgp.mit.edu --send-keys A1234BBB1232CCCETC
 * start a new git branch `git checkout -b add-<name>-as-gpg-user`
 * obtain the user key ID from a keystore (for example pgp.key-server.io)
 
