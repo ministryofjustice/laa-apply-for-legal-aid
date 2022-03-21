@@ -358,6 +358,27 @@ Given("I start the means review journey with no employment income from HMRC") do
   )
 end
 
+Given("I start the means review journey with employment income for multiple jobs from HMRC") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :with_proceedings,
+    :with_non_passported_state_machine,
+    :provider_assessing_means
+  )
+
+  @hmrc_response = create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application: @legal_aid_application) # creates the employment and employment records as well
+
+  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
+
+  login_as @legal_aid_application.provider
+  visit Flow::KeyPoint.path_for(
+    journey: :providers,
+    key_point: :start_after_applicant_completes_means,
+    legal_aid_application: @legal_aid_application
+  )
+end
+
 Given("I start the journey as far as the start of the vehicle section") do
   @legal_aid_application = create(
     :application,

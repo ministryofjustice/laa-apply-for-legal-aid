@@ -1,11 +1,11 @@
 module Providers
-  class MultipleEmploymentIncomesController < ProviderBaseController
+  class FullEmploymentDetailsController < ProviderBaseController
     def show
-      @form = LegalAidApplications::FullEmploymentInformationForm.new(model: legal_aid_application)
+      @form = LegalAidApplications::FullEmploymentDetailsForm.new(model: legal_aid_application)
     end
 
     def update
-      @form = LegalAidApplications::FullEmploymentInformationForm.new(form_params)
+      @form = LegalAidApplications::FullEmploymentDetailsForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end
 

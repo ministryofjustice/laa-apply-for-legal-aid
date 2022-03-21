@@ -1,11 +1,16 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_no_employment_income_path(@legal_aid_application),
+              url: providers_legal_aid_application_full_employment_details_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
+  <% page_heading = @legal_aid_application.has_multiple_employments? ? t('.page_heading_multi_jobs') : t('.page_heading_no_info') %>
 
-  <%= page_template page_title: t('.page_heading'), form: form do %>
+  <%= page_template page_title: page_heading, form: form do %>
       <div class="govuk-!-padding-bottom-1"></div>
-      <h2 class="govuk-body-l"><%= t('.hmrc_cannot_confirm') %></h2>
+      <% if @legal_aid_application.has_multiple_employments? %>
+        <h2 class="govuk-body-l"><%= t('.mutiple_employment_info') %></h2>
+      <% else %>
+        <h2 class="govuk-body-l"><%= t('.no_employment_info') %></h2>
+      <% end %>
       <p class="govuk-body"><%= t('.enter_details') %></p>
       <ul class="govuk-list govuk-list--bullet">
         <li><%= t '.details_1' %></li>

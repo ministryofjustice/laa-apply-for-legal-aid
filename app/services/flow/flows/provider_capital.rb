@@ -82,12 +82,12 @@ module Flow
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
               if application.hmrc_employment_income?
                 if application.has_multiple_employments?
-                  :multiple_employment_incomes
+                  :full_employment_details
                 else
                   :employment_incomes
                 end
               elsif application.applicant.employed? && !application.hmrc_employment_income?
-                :no_employment_incomes
+                :full_employment_details
               else
                 application.income_types? ? :income_summary : :no_income_summaries
               end
@@ -100,12 +100,8 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_employment_income_path(application) },
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
         },
-        no_employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_no_employment_income_path(application) },
-          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
-        },
-        multiple_employment_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_multiple_employment_income_path(application) },
+        full_employment_details: {
+          path: ->(application) { urls.providers_legal_aid_application_full_employment_details_path(application) },
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
         },
         income_summary: {

@@ -94,7 +94,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
             it "redirects to the no employed income page" do
               subject
-              expect(response).to redirect_to(providers_legal_aid_application_no_employment_income_path(legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_full_employment_details_path(legal_aid_application))
             end
           end
 
