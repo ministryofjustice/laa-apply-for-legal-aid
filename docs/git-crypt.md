@@ -2,11 +2,11 @@
 
 * have the user publish their public key
 
-         gpg --keyserver pgp.mit.edu --send-keys A1234BBB1232CCCETC
+        gpg [--keyserver pgp.mit.edu] --send-keys A1234BBB1232CCCETC
 * start a new git branch `git checkout -b add-<name>-as-gpg-user`
 * obtain the user key ID from a keystore (for example pgp.key-server.io)
 
-        gpg --keyserver pgp.key-server.io --recv-key <key ID>
+        gpg [--keyserver pgp.mit.edu] --recv-key A1234BBB1232CCCETC
 * add trust:
 
         gpg --edit-key <email>
