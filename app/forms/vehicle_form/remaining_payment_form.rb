@@ -9,7 +9,7 @@ module VehicleForm
       :payment_remaining,
       currency: { greater_than_or_equal_to: 0, allow_blank: true },
       presence: { unless: :draft? },
-      if: :payments_remain?
+      if: :payments_remain?,
     )
 
     def payments_remain?

@@ -25,7 +25,7 @@ private
       provider_email: provider_email_phrase(feedback),
       application_reference: @legal_aid_application&.application_ref || "",
       application_status: application_status || "",
-      non_live_env: non_live_environment? ? "- non-live" : ""
+      non_live_env: non_live_environment? ? "- non-live" : "",
     )
   end
 

@@ -33,7 +33,7 @@ module LegalAidApplications
         not_in_the_future: true,
         earliest_allowed_date: { date: "1900-01-01" },
       },
-      allow_nil: true
+      allow_nil: true,
     )
     validate :relationship_presence
     validate :full_time_education_presence
@@ -43,14 +43,14 @@ module LegalAidApplications
     validates(
       :has_assets_more_than_threshold,
       presence: { message: ->(form, _) { form.blank_option_error_message } },
-      unless: :draft?
+      unless: :draft?,
     )
 
     validates(
       :assets_value,
       currency: { allow_blank: true },
       presence: { unless: :draft? },
-      if: :assets_more_than_threshold?
+      if: :assets_more_than_threshold?,
     )
 
     validates(
@@ -59,14 +59,14 @@ module LegalAidApplications
         greater_than_or_equal_to: 8_000,
         message: ->(form, _) { form.less_than_threshold_error_message },
       },
-      if: :assets_more_than_threshold?
+      if: :assets_more_than_threshold?,
     )
 
     def initialize(*args)
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
         attrs: date_fields.fields,
-        model_attributes: date_fields.model_attributes
+        model_attributes: date_fields.model_attributes,
       )
     end
 
@@ -113,7 +113,7 @@ module LegalAidApplications
         model:,
         method: :date_of_birth,
         prefix: :date_of_birth_,
-        suffix: :gov_uk
+        suffix: :gov_uk,
       )
     end
 

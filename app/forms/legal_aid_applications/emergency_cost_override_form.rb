@@ -10,7 +10,7 @@ module LegalAidApplications
       :emergency_cost_requested,
       currency: { greater_than_or_equal_to: 0, allow_blank: true },
       presence: { unless: :draft? },
-      if: :requested_override?
+      if: :requested_override?,
     )
 
     def requested_override?

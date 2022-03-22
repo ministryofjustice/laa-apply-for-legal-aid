@@ -38,7 +38,7 @@ class BaseForm
     super
     set_instance_variables_for_attributes_if_not_set_but_in_model(
       attrs: self.class.locally_assigned,
-      model_attributes: model&.attributes
+      model_attributes: model&.attributes,
     )
   end
 

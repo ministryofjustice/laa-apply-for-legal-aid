@@ -31,7 +31,7 @@ module Applicants
         not_in_the_future: true,
         earliest_allowed_date: { date: "1900-01-01" },
       },
-      allow_nil: true
+      allow_nil: true,
     )
 
     validates :national_insurance_number, presence: true, unless: :draft?
@@ -41,7 +41,7 @@ module Applicants
       super
       set_instance_variables_for_attributes_if_not_set_but_in_model(
         attrs: dob_date_fields.fields,
-        model_attributes: dob_date_fields.model_attributes
+        model_attributes: dob_date_fields.model_attributes,
       )
     end
 
@@ -74,7 +74,7 @@ module Applicants
         model:,
         method: :date_of_birth,
         prefix: :date_of_birth_,
-        suffix: :gov_uk
+        suffix: :gov_uk,
       )
     end
 

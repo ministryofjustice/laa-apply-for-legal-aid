@@ -7,7 +7,7 @@ class CitizenConfirmationMailer < BaseApplyMailer
     template_name :citizen_completed_application
     set_personalisation(
       client_name:,
-      ref_number: app_id
+      ref_number: app_id,
     )
     mail(to: email)
   end

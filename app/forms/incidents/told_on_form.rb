@@ -21,7 +21,7 @@ module Incidents
         [
           told_on_date_fields.model_attributes,
           occurred_on_date_fields.model_attributes
-        ].compact.reduce(&:merge)
+        ].compact.reduce(&:merge),
       )
     end
 
@@ -76,7 +76,7 @@ module Incidents
         model:,
         method: :told_on,
         prefix: :told_on_,
-        suffix: :gov_uk
+        suffix: :gov_uk,
       )
     end
 
@@ -86,7 +86,7 @@ module Incidents
         model:,
         method: :occurred_on,
         prefix: :occurred_on_,
-        suffix: :gov_uk
+        suffix: :gov_uk,
       )
     end
   end

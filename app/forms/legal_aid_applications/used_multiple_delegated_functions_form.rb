@@ -80,7 +80,7 @@ module LegalAidApplications
 
         proceeding.update(
           used_delegated_functions_on: delegated_functions_date,
-          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date)
+          used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date),
         )
       end
     end
@@ -98,7 +98,7 @@ module LegalAidApplications
         model: self,
         method: :"#{name}_used_delegated_functions_on",
         prefix: :"#{name}_used_delegated_functions_on_",
-        suffix: :gov_uk
+        suffix: :gov_uk,
       )
     end
 
