@@ -22,7 +22,7 @@ module UserTransactionsHelper
       TransactionItemStruct.new(
         t("#{locale_namespace}.#{payment_type.name}"),
         payment_type.name,
-        yes_no(payments.pluck(:name).include?(payment_type.name))
+        yes_no(payments.pluck(:name).include?(payment_type.name)),
       )
     end
 

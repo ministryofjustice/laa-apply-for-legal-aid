@@ -66,7 +66,7 @@ module PageTemplateHelper
       form:,
       show_errors_for:,
       success_message:,
-      page_heading_options:
+      page_heading_options:,
     )
   end
 

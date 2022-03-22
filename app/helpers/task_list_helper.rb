@@ -7,7 +7,7 @@ module TaskListHelper
       status:,
       url: ccms_code ? proceeding_task_url(name, legal_aid_application, ccms_code) : _task_url(name, legal_aid_application, status),
       proceeding_merits_task: ccms_code.present?,
-      tag_class:
+      tag_class:,
     )
   end
 

@@ -77,7 +77,7 @@ module TableSortHelper
     content_tag(
       :span,
       "",
-      class: "sort-direction-indicator"
+      class: "sort-direction-indicator",
     )
   end
 

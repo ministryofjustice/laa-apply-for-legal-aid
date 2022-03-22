@@ -36,7 +36,7 @@ module GovUkFormHelper
       "shared/forms/fieldset_header",
       heading:,
       size:,
-      padding_class:
+      padding_class:,
     )
   end
 

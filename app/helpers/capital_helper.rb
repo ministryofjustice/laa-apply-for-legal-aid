@@ -46,7 +46,7 @@ module CapitalHelper
         attribute.to_s.delete_prefix("check_box_"),
         amount,
         type,
-        capital_amount_text(amount, type)
+        capital_amount_text(amount, type),
       )
     end
   end
