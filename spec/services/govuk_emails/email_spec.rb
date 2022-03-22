@@ -3,24 +3,25 @@ require "rails_helper"
 StatusStruct = Struct.new(:status)
 
 RSpec.describe GovukEmails::Email do
-  let(:message_id) { "ad9559be-f32d-4674-91dd-87c50d4a16b2" }
-
   subject { described_class.new(message_id) }
 
+  let(:govuk_client) { double(Notifications::Client) }
+  let(:message_id) { "ad9559be-f32d-4674-91dd-87c50d4a16b2" }
+
+  before do
+    allow(govuk_client).to receive(:get_notification).with(message_id).and_return(StatusStruct.new(status))
+    allow(Notifications::Client).to receive(:new).with(Rails.configuration.x.govuk_notify_api_key).and_return(govuk_client)
+  end
+
   context "status is 'delivered'", vcr: { cassette_name: "govuk_email_delivered" } do
+    let(:status) { described_class::DELIVERED_STATUS }
+
     it { is_expected.to be_delivered }
     it { is_expected.not_to be_should_resend }
     it { is_expected.not_to be_permanently_failed }
   end
 
   context "status is not delivered" do
-    let(:govuk_client) { double(Notifications::Client) }
-
-    before do
-      allow(govuk_client).to receive(:get_notification).with(message_id).and_return(StatusStruct.new(status))
-      allow(Notifications::Client).to receive(:new).with(Rails.configuration.x.govuk_notify_api_key).and_return(govuk_client)
-    end
-
     context "status is a permanent failure'" do
       let(:status) { described_class::PERMANENTLY_FAILED_STATUS }
 
