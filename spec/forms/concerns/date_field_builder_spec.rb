@@ -17,7 +17,7 @@ RSpec.describe DateFieldBuilder do
       model:,
       method: :happened_on,
       prefix: :happened_,
-      suffix:
+      suffix:,
     )
   end
 

@@ -838,7 +838,7 @@ RSpec.describe LegalAidApplication, type: :model do
     it "schedules a PostSubmissionProcessingJob " do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
         legal_aid_application.id,
-        feedback_url
+        feedback_url,
       ).and_call_original
       legal_aid_application.generate_reports!
     end

@@ -9,7 +9,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
 
   before do
     allow(helper).to(
-      receive(:yes_no).with(boolean).and_return(true)
+      receive(:yes_no).with(boolean).and_return(true),
     )
   end
 

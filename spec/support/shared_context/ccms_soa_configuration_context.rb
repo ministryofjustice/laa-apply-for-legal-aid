@@ -17,8 +17,8 @@ RSpec.shared_context "ccms soa configuration", shared_context: :metadata do
         client_password_type: "password_type",
         client_password: "xxxxx",
         user_login: "my_login",
-        user_role: "my_role"
-      )
+        user_role: "my_role",
+      ),
     )
   end
 end

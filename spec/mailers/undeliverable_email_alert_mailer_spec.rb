@@ -32,7 +32,7 @@ RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
         email_address: scheduled_mailing.addressee,
         failure_reason: scheduled_mailing.status,
         mailer_and_method: "NotifyMailer#citizen_start_email",
-        mail_params: scheduled_mailing.arguments
+        mail_params: scheduled_mailing.arguments,
       )
     end
   end

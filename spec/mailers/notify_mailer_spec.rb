@@ -29,7 +29,7 @@ RSpec.describe NotifyMailer, type: :mailer do
         client_name:,
         provider_firm:,
         ref_number: app_id,
-        expiry_date: (Time.zone.today + 7.days).strftime("%-d %B %Y")
+        expiry_date: (Time.zone.today + 7.days).strftime("%-d %B %Y"),
       )
     end
   end

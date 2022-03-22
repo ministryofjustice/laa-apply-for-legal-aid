@@ -125,7 +125,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
             warning_letter_sent
             police_notified
             bail_conditions_set
-          ]
+          ],
         )
       end
     end
@@ -162,7 +162,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
             warning_letter_sent_details
             police_notified_details_true
             bail_conditions_set_details
-          ]
+          ],
         )
       end
     end
