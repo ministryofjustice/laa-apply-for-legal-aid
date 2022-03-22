@@ -92,9 +92,9 @@ Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the tests running you will need to obtain and set values for the following:
 ```bash
-GOVUK_NOTIFY_API_KEY=
 CHECK_FINANCIAL_ELIGIBILITY_HOST=
 LEGAL_FRAMEWORK_API_HOST=
+HMRC_API_HOST=
 ```
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
@@ -202,9 +202,13 @@ foreman start -f Procfile
 
 ### Running tests
 
-Ensure you have an .env.test file. This can be the same as your .env.development file
+Ensure you have an `.env.test` file. This can be the same as your .env.development file. In addition you should set the following.
 
-Set `BC_USE_DEV_MOCK=true`. This mocks the call to the benefits checker.
+Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
+Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth
+Set `LEGAL_FRAMEWORK_API_HOST=<staging api>
+Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>
+Set `HMRC_API_HOST=<staging api>`
 
 Runs Rubocop, RSpec specs and Cucumber features
 
