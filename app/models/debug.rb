@@ -8,7 +8,7 @@ class Debug < ApplicationRecord
       session: session.to_h.to_json,
       auth_params: auth_params.to_json,
       callback_url:,
-      browser_details:
+      browser_details:,
     )
   end
 
@@ -19,7 +19,7 @@ class Debug < ApplicationRecord
       session_id: session[:session_id],
       session: session.to_h.to_json,
       callback_params: callback_params.to_json,
-      browser_details:
+      browser_details:,
     )
   end
 
@@ -31,7 +31,7 @@ class Debug < ApplicationRecord
       session: session.to_h.to_json,
       callback_params: params.to_json,
       error_details: details,
-      browser_details:
+      browser_details:,
     )
   end
   # :nocov:

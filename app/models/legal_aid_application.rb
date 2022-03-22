@@ -130,7 +130,7 @@ class LegalAidApplication < ApplicationRecord
       mortgage: "mortgage".freeze,
       owned_outright: "owned_outright".freeze,
     },
-    _prefix: true
+    _prefix: true,
   )
 
   def lead_proceeding
@@ -227,7 +227,7 @@ class LegalAidApplication < ApplicationRecord
       legal_aid_application: { id: },
       expired_at: (Time.current + SECURE_ID_DAYS_TO_EXPIRE.days).end_of_day,
       # So each secure data payload is unique
-      token: SecureRandom.hex
+      token: SecureRandom.hex,
     )
   end
 
@@ -239,7 +239,7 @@ class LegalAidApplication < ApplicationRecord
 
     update!(
       transaction_period_start_on: date_from,
-      transaction_period_finish_on: date_to
+      transaction_period_finish_on: date_to,
     )
   end
 
@@ -270,7 +270,7 @@ class LegalAidApplication < ApplicationRecord
     self.benefit_check_result ||= build_benefit_check_result
     benefit_check_result.update!(
       result: benefit_check_response[:benefit_checker_status],
-      dwp_ref: benefit_check_response[:confirmation_ref]
+      dwp_ref: benefit_check_response[:confirmation_ref],
     )
   end
 

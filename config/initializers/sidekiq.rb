@@ -33,7 +33,7 @@ Sidekiq.configure_server do |config|
       PrometheusExporter::Client.default.send_json(
         type: "sidekiq",
         name: job["class"],
-        dead: true
+        dead: true,
       )
     end
 

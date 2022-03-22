@@ -62,7 +62,7 @@ class BaseAggregatedCashTransaction
 
       CashTransaction.where(
         legal_aid_application_id: id,
-        transaction_type_id: transaction_type_ids
+        transaction_type_id: transaction_type_ids,
       )
     end
   end
@@ -96,7 +96,7 @@ private
     self.class.cash_transaction_categories.each do |category|
       CashTransaction.where(
         legal_aid_application_id:,
-        transaction_type_id: transaction_type_id(category)
+        transaction_type_id: transaction_type_id(category),
       ).destroy_all
 
       save_category(category) if checkbox_for(category) == "true"
@@ -113,7 +113,7 @@ private
         transaction_type_id: transaction_type_id(category),
         transaction_date: date,
         amount:,
-        month_number: i
+        month_number: i,
       )
     end
   end

@@ -63,7 +63,7 @@ private
       email:,
       contact_id:,
       firm:,
-      offices: firm.offices
+      offices: firm.offices,
     )
   end
 

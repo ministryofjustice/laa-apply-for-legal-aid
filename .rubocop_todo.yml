@@ -1944,28 +1944,6 @@ Style/Lambda:
 Style/QuotedSymbols:
   EnforcedStyle: single_quotes
 
-# Offense count: 345
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArguments:
-  Exclude:
-    - 'app/models/base_aggregated_cash_transaction.rb'
-    - 'app/models/debug.rb'
-    - 'app/models/legal_aid_application.rb'
-    - 'app/workers/import_bank_data_worker.rb'
-    - 'config/initializers/gov_uk_notify.rb'
-    - 'config/initializers/mock_saml.rb'
-    - 'config/initializers/omniauth.rb'
-    - 'config/initializers/prometheus_metrics.rb'
-    - 'config/initializers/sidekiq.rb'
-    - 'config/routes.rb'
-    - 'db/seeds/test_provider_populator.rb'
-    - 'features/step_definitions/admin_steps.rb'
-    - 'features/step_definitions/citizens_steps.rb'
-    - 'features/step_definitions/civil_journey_steps.rb'
-    - 'features/step_definitions/merits_task_steps.rb'
-
 # Offense count: 225
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.

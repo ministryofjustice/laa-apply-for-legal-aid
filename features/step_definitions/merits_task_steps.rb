@@ -9,7 +9,7 @@ Given("I previously created a passported application with multiple_proceedings a
     :with_passported_state_machine,
     :checking_passported_answers,
     provider: create(:provider),
-    provider_step: provider_step.downcase
+    provider_step: provider_step.downcase,
   )
   login_as @legal_aid_application.provider
 end
