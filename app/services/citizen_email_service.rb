@@ -28,7 +28,7 @@ private
       applicant.email_address,
       application_url,
       applicant.full_name,
-      provider.firm.name
+      provider.firm.name,
     ]
   end
 

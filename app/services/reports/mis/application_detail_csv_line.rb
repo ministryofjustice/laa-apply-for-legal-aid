@@ -160,7 +160,7 @@ module Reports
           "Application started",
           "Application submitted",
           "Application deleted",
-          "HMRC data"
+          "HMRC data",
         ]
       end
 
@@ -292,7 +292,7 @@ module Reports
           national_savings,
           plc_shares,
           peps_unit_trusts_capital_bonds_gov_stocks,
-          life_assurance_endowment_policy
+          life_assurance_endowment_policy,
         ]
       end
 
@@ -321,7 +321,7 @@ module Reports
           timeshare_property_value,
           land_value,
           inherited_assets_value,
-          money_owed_value
+          money_owed_value,
         ]
       end
 

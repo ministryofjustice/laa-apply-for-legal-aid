@@ -42,7 +42,7 @@ private
     [
       application.id,
       application.provider.name,
-      addressee
+      addressee,
     ]
   end
 

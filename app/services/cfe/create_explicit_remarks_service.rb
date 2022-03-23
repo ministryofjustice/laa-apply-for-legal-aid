@@ -10,7 +10,7 @@ module CFE
     def request_body
       {
         explicit_remarks: [
-          policy_disregards.as_json
+          policy_disregards.as_json,
         ],
       }.to_json
     end

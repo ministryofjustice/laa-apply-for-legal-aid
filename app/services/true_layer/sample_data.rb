@@ -8,7 +8,7 @@ module TrueLayer
           display_name: "Mock",
           provider_id: "sample",
         },
-      }
+      },
     ].freeze
 
     ACCOUNT_HOLDERS = [
@@ -20,9 +20,9 @@ module TrueLayer
             city: "London",
             zip: "SE15 5NP",
             country: "UK",
-          }
+          },
         ],
-      }
+      },
     ].freeze
 
     ACCOUNTS = [
@@ -35,7 +35,7 @@ module TrueLayer
           number: "10000000",
           sort_code: "01-21-31",
         },
-      }
+      },
     ].freeze
 
     BALANCES = [{ current: 205.79 }].freeze

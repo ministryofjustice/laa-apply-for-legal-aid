@@ -23,7 +23,7 @@ private
       provider.name,
       applicant.full_name,
       application_url,
-      provider_email_or_support
+      provider_email_or_support,
     ]
   end
 

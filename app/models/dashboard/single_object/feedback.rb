@@ -31,7 +31,7 @@ module Dashboard
             difficulty_score: calculate_value_of(@feedback.difficulty),
             satisfaction_count: @feedback.satisfaction_before_type_cast,
             satisfaction_score: calculate_value_of(@feedback.satisfaction),
-          }
+          },
         ]
       end
 
@@ -55,7 +55,7 @@ module Dashboard
             Geckoboard::NumberField.new(:difficulty_count, name: "Difficulty count", optional: true),
             Geckoboard::NumberField.new(:difficulty_score, name: "Difficulty score", optional: true),
             Geckoboard::NumberField.new(:satisfaction_count, name: "Satisfaction count", optional: true),
-            Geckoboard::NumberField.new(:satisfaction_score, name: "Satisfaction score", optional: true)
+            Geckoboard::NumberField.new(:satisfaction_score, name: "Satisfaction score", optional: true),
           ],
         }
       end

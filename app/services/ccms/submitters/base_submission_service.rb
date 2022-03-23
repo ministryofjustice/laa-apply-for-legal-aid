@@ -5,7 +5,7 @@ module CCMS
     Savon::HTTPError,
     Savon::SOAPFault,
     Savon::Error,
-    StandardError
+    StandardError,
   ].freeze
 
   module Submitters

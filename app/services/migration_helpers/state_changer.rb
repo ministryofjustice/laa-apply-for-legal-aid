@@ -9,7 +9,7 @@ module MigrationHelpers
       [:provider_assessing_means, :provider_entering_merits, %|provider_step in ('capital_assessment_results', 'start_chances_of_successes', 'date_client_told_incidents', 'respondents', 'statement_of_cases', 'chances_of_success', 'success_prospects')|],
       [:provider_submitted, :applicant_entering_means, nil],
       [:provider_checking_citizens_means_answers, :checking_non_passported_means, nil],
-      [:provider_checked_citizens_means_answers, :provider_entering_merits, %|provider_step not in ('capital_assessment_results', 'start_chances_of_successes', 'date_client_told_incidents', 'respondents', 'statement_of_cases', 'chances_of_success', 'success_prospects')|]
+      [:provider_checked_citizens_means_answers, :provider_entering_merits, %|provider_step not in ('capital_assessment_results', 'start_chances_of_successes', 'date_client_told_incidents', 'respondents', 'statement_of_cases', 'chances_of_success', 'success_prospects')|],
     ].freeze
 
     def initialize(dummy_run:)

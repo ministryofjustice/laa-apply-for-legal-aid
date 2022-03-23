@@ -28,7 +28,7 @@ private
       applicant.email,
       application_url,
       applicant.full_name,
-      url_expiry_date
+      url_expiry_date,
     ]
   end
 
