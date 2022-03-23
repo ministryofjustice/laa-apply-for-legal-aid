@@ -5,7 +5,7 @@
 
 # LAA Apply for legal aid
 
-The laa-apply-for-legal-aid system is a web service by use for solicitors providing legal aid services to enter applications for legal aid on-line.
+The laa-apply-for-legal-aid system is a web service for solicitors that provide legal aid services. The service enables users to submit applications for legal aid on-line.
 
 ## Table of Contents
 - [**Architecture Diagram**](#architecture-diagram)
@@ -73,20 +73,28 @@ brew bundle
 ```
 
 ## Initial setup
-This requires your gpg key to have been added to git-crypt.  Liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md)
 
-Once the pull request has been merged, re-pull main and run
+Git-crypt is used for encryption. It uses either your personal public key or a symmetric key.
 
+1. To obtain the symmetric key you will need to get access to LastPass. Liase with a team member for this. Once you have the the key you can unlock:
+
+```sh
+git-crypt unlock path-to-symmetric-key
 ```
+
+2. To add your personal public gpg key to git-crypt liaise with another developer to action the steps in [git-crypt.md](docs/git-crypt.md). Once the pull request has been merged, re-pull main branch and then run:
+
+```sh
 git-crypt unlock
 ```
+
 Copy the `.env.sample` file and name the new file `.env.development`
 
 To get the tests running you will need to obtain and set values for the following:
 ```bash
-GOVUK_NOTIFY_API_KEY=
 CHECK_FINANCIAL_ELIGIBILITY_HOST=
 LEGAL_FRAMEWORK_API_HOST=
+HMRC_API_HOST=
 ```
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
@@ -194,9 +202,13 @@ foreman start -f Procfile
 
 ### Running tests
 
-Ensure you have an .env.test file. This can be the same as your .env.development file
+Ensure you have an `.env.test` file. This can be the same as your .env.development file. In addition you should set the following.
 
-Set `BC_USE_DEV_MOCK=true`. This mocks the call to the benefits checker.
+Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
+Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth
+Set `LEGAL_FRAMEWORK_API_HOST=<staging api>
+Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>
+Set `HMRC_API_HOST=<staging api>`
 
 Runs Rubocop, RSpec specs and Cucumber features
 
@@ -233,7 +245,7 @@ bundle exec guard
 ```
 
 When changes to test files are made it will run the tests in that file
-When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_sepc.rb`
+When changes are made to objects it will attempt to pattern match the appropriate tests and run them, e.g. changes to `app/models/applicant.rb` will run `spec/models/applicant_spec.rb`
 Ensuring your test files match the folder structure and naming convention will help guard monitor your file changes
 
 #### pry-rescue
@@ -320,8 +332,7 @@ different firms.  The password for all users is `password`.
 Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
 an after_action method `#update_provider_details` on the `SamlSsessionsController` is executed. This will call
 the `update_details` method on the current_provider (a Provider object supplied by Devise) whch generates
-a background job to query the
-provider details API and updates any details that have changed on the provider record.
+a background job to query the provider details API and updates any details that have changed on the provider record.
 
 
 ### Signing out of the application
@@ -330,7 +341,7 @@ When using the mock-saml in development or on UAT, sign out works in the way you
 to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.
 
 When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
-sign out link takes you to a feedback page, but doesn't really sign you out.  This is an side effect of using the
+sign out link takes you to a feedback page, but doesn't really sign you out.  This is a side effect of using the
 portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that,
 you are signed out of all other applications at the same time. (Behind the scenes, the Devise `authenticate_provider!`
 method contacts the portal to see if your signed in, and if so, repopulates the session with the required data).
@@ -393,7 +404,7 @@ Staging and UAT environments.
 
 - To monitor the worker jobs execution you can access `/sidekiq`:
     - User: `sidekiq`
-    - Password: `worker: webUiPassword` in the secrets.
+    - Password: see `worker: webUiPassword` in the secrets (or `SIDEKIQ_WEB_UI_PASSWORD` env var)
 - To access to the Site Administration Dashboard you need to point to `/support`.
   Credentials are the same as in the Admin Portal.
 
@@ -432,8 +443,7 @@ This will then allow you to connect to the database, eg:
 We use the standard Rails mechanism for migrating the database schema, i.e. timestamped files go into the `db/migrate` directory
 and are executed in order.
 
-We use the [data-migrate](https://github.com/ilyakatz/data-migrate/blob/master/README.md) gem for data migrations, i.e. when existing 
-data in the database has to be changed.  These are stored in the `db/data` directory, and are also given a name prefixed with a timestamp.
+We use the [data-migrate](https://github.com/ilyakatz/data-migrate/blob/master/README.md) gem for data migrations, i.e. when existing data in the database has to be changed.  These are stored in the `db/data` directory, and are also given a name prefixed with a timestamp.
 
 Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations 
 that rely on the schema at a certain point in time are run at that time.

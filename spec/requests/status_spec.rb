@@ -232,8 +232,14 @@ RSpec.describe StatusController, type: :request do
   end
 
   describe "#data" do
+    before do
+      allow(ENV).to receive(:[])
+                      .with("GOOGLE_DATA_STUDIO_URL")
+                      .and_return("https://fake.datastudio.com/")
+    end
+
     it "redirects to the current google data studio url" do
-      expect(get("/data")).to redirect_to ENV["GOOGLE_DATA_STUDIO_URL"]
+      expect(get("/data")).to redirect_to "https://fake.datastudio.com/"
     end
   end
 end
