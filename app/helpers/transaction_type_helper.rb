@@ -9,7 +9,7 @@ module TransactionTypeHelper
     sort_column_cell(
       id: "Category-#{object.id}",
       sort_by: label,
-      content:
+      content:,
     )
   end
 
@@ -22,7 +22,7 @@ module TransactionTypeHelper
     sort_column_cell(
       id: "Category-#{object.id}",
       sort_by: "ZZZ",
-      content:
+      content:,
     )
   end
 end

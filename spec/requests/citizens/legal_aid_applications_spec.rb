@@ -22,7 +22,7 @@ RSpec.describe "citizen home requests", type: :request do
     context "the link is not set to expire" do
       let(:secure_id) do
         SecureData.create_and_store!(
-          legal_aid_application: { id: application_id }
+          legal_aid_application: { id: application_id },
         )
       end
 
@@ -51,7 +51,7 @@ RSpec.describe "citizen home requests", type: :request do
       let(:secure_id) do
         SecureData.create_and_store!(
           legal_aid_application: { id: application_id },
-          expired_at: 1.minute.ago
+          expired_at: 1.minute.ago,
         )
       end
 

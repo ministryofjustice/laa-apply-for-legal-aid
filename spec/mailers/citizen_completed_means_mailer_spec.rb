@@ -29,7 +29,7 @@ RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
         provider_name:,
         applicant_name:,
         ref_number: application.application_ref,
-        application_url:
+        application_url:,
       )
     end
 

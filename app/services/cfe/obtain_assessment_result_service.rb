@@ -44,7 +44,7 @@ module CFE
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,
         result: @response.body,
-        type: "CFE::V4::Result"
+        type: "CFE::V4::Result",
       )
     end
   end

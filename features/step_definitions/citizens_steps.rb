@@ -7,7 +7,7 @@ Given("An application has been created") do
     :with_non_passported_state_machine,
     :applicant_entering_means,
     provider: create(:provider),
-    transaction_period_finish_on: "2019-07-01"
+    transaction_period_finish_on: "2019-07-01",
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
@@ -45,7 +45,7 @@ Then("I visit the gather transactions page") do
     :application,
     :with_everything,
     :with_non_passported_state_machine,
-    :applicant_entering_means
+    :applicant_entering_means,
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
@@ -73,7 +73,7 @@ Given("I have completed an application") do
     :application,
     :with_everything,
     :with_non_passported_state_machine,
-    :applicant_entering_means
+    :applicant_entering_means,
   )
 
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
@@ -92,7 +92,7 @@ Given("the application has a restriction") do
   create(
     :application,
     :with_restrictions,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       "auth/true_layer/callback",
       to: "applicants/omniauth_callbacks#true_layer",
       via: %i[get puts],
-      as: :applicant_true_layer_omniauth_callback
+      as: :applicant_true_layer_omniauth_callback,
     )
   end
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       "auth/google_oauth2/callback",
       to: "admin_users/omniauth_callbacks#google_oauth2",
       via: %i[get puts],
-      as: :admin_user_google_oauth2_omniauth_callback
+      as: :admin_user_google_oauth2_omniauth_callback,
     )
   end
 

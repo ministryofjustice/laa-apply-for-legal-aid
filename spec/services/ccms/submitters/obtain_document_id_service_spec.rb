@@ -123,7 +123,7 @@ module CCMS
               expect(history.request).to be_soap_envelope_with(
                 command: "casebim:DocumentUploadRQ",
                 transaction_id: "20190301030405123456",
-                matching: ["<casebio:Channel>E</casebio:Channel>"]
+                matching: ["<casebio:Channel>E</casebio:Channel>"],
               )
             end
 

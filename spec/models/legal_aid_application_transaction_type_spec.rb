@@ -10,12 +10,12 @@ RSpec.describe LegalAidApplicationTransactionType, type: :model do
       create(
         :legal_aid_application_transaction_type,
         legal_aid_application:,
-        transaction_type: credit_transaction_type
+        transaction_type: credit_transaction_type,
       )
       create(
         :legal_aid_application_transaction_type,
         legal_aid_application:,
-        transaction_type: debit_transaction_type
+        transaction_type: debit_transaction_type,
       )
     end
 

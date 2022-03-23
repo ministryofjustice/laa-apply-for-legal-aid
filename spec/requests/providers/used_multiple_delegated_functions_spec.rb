@@ -81,7 +81,7 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
       allow(SubmitApplicationReminderService).to receive(:new).with(legal_aid_application).and_return(mocked_email_service)
       patch(
         providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application),
-        params: params.merge(button_clicked)
+        params: params.merge(button_clicked),
       )
       proceedings.reload
     end

@@ -40,7 +40,7 @@ FactoryBot.define do
       after(:build) do |applicant|
         applicant.store_true_layer_token(
           token: SecureRandom.hex,
-          expires: 1.hour.from_now
+          expires: 1.hour.from_now,
         )
       end
     end

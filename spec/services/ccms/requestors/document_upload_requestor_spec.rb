@@ -22,7 +22,7 @@ module CCMS
               matching: %w[
                 <casebio:DocumentType>ADMIN1</casebio:DocumentType>
                 <casebio:FileExtension>pdf</casebio:FileExtension>
-              ]
+              ],
             )
           end
         end
@@ -40,7 +40,7 @@ module CCMS
               matching: %w[
                 <casebio:DocumentType>STATE</casebio:DocumentType>
                 <casebio:FileExtension>pdf</casebio:FileExtension>
-              ]
+              ],
             )
           end
         end
@@ -58,7 +58,7 @@ module CCMS
               matching: %w[
                 <casebio:DocumentType>BSTMT</casebio:DocumentType>
                 <casebio:FileExtension>csv</casebio:FileExtension>
-              ]
+              ],
             )
           end
         end

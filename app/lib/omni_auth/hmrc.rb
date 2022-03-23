@@ -9,7 +9,7 @@ module OmniAuth
         @oauth_client ||= ::OAuth2::Client.new(
           Rails.configuration.x.hmrc_interface.client_id,
           Rails.configuration.x.hmrc_interface.client_secret,
-          site: Rails.configuration.x.hmrc_interface.host
+          site: Rails.configuration.x.hmrc_interface.host,
         )
       end
 

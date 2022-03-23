@@ -10,7 +10,7 @@ class CitizenCompletedMeansMailer < BaseApplyMailer
       provider_name:,
       applicant_name:,
       ref_number: application.application_ref,
-      application_url:
+      application_url:,
     )
     mail to: to
   end

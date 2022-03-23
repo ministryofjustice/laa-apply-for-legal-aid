@@ -12,7 +12,7 @@ class SubmitProviderReminderService
       legal_aid_application_id: @application.id,
       addressee: @application.provider.email,
       scheduled_at: two_days_after_initial,
-      arguments: mailer_args
+      arguments: mailer_args,
     )
   end
 

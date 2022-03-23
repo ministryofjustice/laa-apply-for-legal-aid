@@ -10,7 +10,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
       :with_applicant,
       :with_transaction_period,
       :with_non_passported_state_machine,
-      transaction_types: [transaction_type]
+      transaction_types: [transaction_type],
     )
   end
   let(:provider) { legal_aid_application.provider }
@@ -62,7 +62,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
           :legal_aid_application,
           :with_applicant,
           :with_non_passported_state_machine,
-          transaction_types: [transaction_type, other_transaction_type]
+          transaction_types: [transaction_type, other_transaction_type],
         )
       end
 

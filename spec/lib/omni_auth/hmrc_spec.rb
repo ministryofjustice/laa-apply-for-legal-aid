@@ -12,7 +12,7 @@ module OmniAuth
           .to_return(
             status: 200,
             body: '{"access_token":"test-bearer-token","token_type":"Bearer","expires_in":7200,"created_at":1582809000}',
-            headers: { "Content-Type" => "application/json; charset=utf-8" }
+            headers: { "Content-Type" => "application/json; charset=utf-8" },
           )
       end
 

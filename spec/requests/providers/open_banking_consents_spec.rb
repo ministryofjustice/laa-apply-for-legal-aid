@@ -51,7 +51,7 @@ RSpec.describe "does client use online banking requests", type: :request do
     subject do
       patch(
         "/providers/applications/#{application_id}/does-client-use-online-banking",
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

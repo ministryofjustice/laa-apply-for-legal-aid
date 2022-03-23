@@ -26,7 +26,7 @@ module Reports
         attachment.document.attach(
           io: StringIO.new(generate_report),
           filename: "bank_transaction_report.csv",
-          content_type: "text/csv"
+          content_type: "text/csv",
         )
       end
 

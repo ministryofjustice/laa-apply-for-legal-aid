@@ -47,7 +47,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     subject do
       patch(
         providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application),
-        params: params.merge(submit_button)
+        params: params.merge(submit_button),
       )
     end
 

@@ -8,7 +8,7 @@ class ResendLinkRequestMailer < BaseApplyMailer
       application_url:,
       client_name:,
       ref_number: app_id,
-      expiry_date: url_expiry_date
+      expiry_date: url_expiry_date,
     )
     mail(to: email)
   end

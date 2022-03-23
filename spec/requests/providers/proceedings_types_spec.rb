@@ -74,7 +74,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
     subject do
       post(
         providers_legal_aid_application_proceedings_types_path(legal_aid_application),
-        params:
+        params:,
       )
     end
 

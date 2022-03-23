@@ -55,7 +55,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
     subject do
       patch(
         "/providers/applications/#{application_id}/applicant_bank_account",
-        params:
+        params:,
       )
     end
 

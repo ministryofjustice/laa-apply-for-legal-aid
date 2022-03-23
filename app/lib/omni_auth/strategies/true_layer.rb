@@ -34,7 +34,7 @@ module OmniAuth
         redirect_uri = URI(callback_url)
         redirect_uri.query = nil
         super.merge(
-          redirect_uri: redirect_uri.to_s
+          redirect_uri: redirect_uri.to_s,
         )
       end
 

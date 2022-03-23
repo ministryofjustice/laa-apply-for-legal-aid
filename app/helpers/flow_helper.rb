@@ -14,7 +14,7 @@ module FlowHelper
         show_draft:,
         form:,
         continue_button_text:,
-        draft_button_text:
+        draft_button_text:,
       )
     end
   end
@@ -35,7 +35,7 @@ module FlowHelper
       show_continue:,
       show_draft:,
       continue_button_text:,
-      draft_button_text:
+      draft_button_text:,
     )
   end
 

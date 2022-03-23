@@ -20,11 +20,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :true_layer,
     Rails.configuration.x.true_layer.client_id,
     Rails.configuration.x.true_layer.client_secret,
-    scope: "info accounts balance transactions"
+    scope: "info accounts balance transactions",
   )
   provider(
     :google_oauth2,
     Rails.configuration.x.google_oauth2.client_id,
-    Rails.configuration.x.google_oauth2.client_secret
+    Rails.configuration.x.google_oauth2.client_secret,
   )
 end

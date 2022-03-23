@@ -10,7 +10,7 @@ module Reports
       attachment.document.attach(
         io: StringIO.new(pdf_report),
         filename: "means_report.pdf",
-        content_type: "application/pdf"
+        content_type: "application/pdf",
       )
 
       Rails.logger.info "ReportsCreator: Means report attachment failed in #{legal_aid_application.id}" if attachment.document.download.nil?
@@ -34,7 +34,7 @@ module Reports
           :@legal_aid_application => legal_aid_application,
           :@cfe_result => legal_aid_application.cfe_result,
           :@manual_review_determiner => CCMS::ManualReviewDeterminer.new(legal_aid_application),
-        }
+        },
       )
     end
   end

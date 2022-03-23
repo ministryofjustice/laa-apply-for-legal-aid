@@ -17,7 +17,7 @@ module CCMS
             transaction_id: expected_tx_id,
             matching: [
               "<hdr:Language>ENG</hdr:Language>"
-            ]
+            ],
           )
         end
       end

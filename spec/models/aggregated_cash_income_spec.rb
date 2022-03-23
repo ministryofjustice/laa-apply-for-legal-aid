@@ -578,7 +578,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
   def category_transactions(aci, category)
     CashTransaction.where(
       legal_aid_application_id: aci.legal_aid_application_id,
-      transaction_type_id: transaction_type(category)
+      transaction_type_id: transaction_type(category),
     )
   end
 

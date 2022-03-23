@@ -25,14 +25,14 @@ module Opponents
     validates(
       :understands_terms_of_court_order_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.understands_terms_of_court_order.to_s == "false" }
+      if: proc { |form| !form.draft? && form.understands_terms_of_court_order.to_s == "false" },
     )
 
     validates :warning_letter_sent, presence: true, unless: :draft?
     validates(
       :warning_letter_sent_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.warning_letter_sent.to_s == "false" }
+      if: proc { |form| !form.draft? && form.warning_letter_sent.to_s == "false" },
     )
 
     validates :police_notified, presence: true, unless: :draft?
@@ -42,7 +42,7 @@ module Opponents
     validates(
       :bail_conditions_set_details,
       presence: true,
-      if: proc { |form| !form.draft? && form.bail_conditions_set.to_s == "true" }
+      if: proc { |form| !form.draft? && form.bail_conditions_set.to_s == "true" },
     )
 
     def initialize(*args)

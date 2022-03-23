@@ -9,7 +9,7 @@ module Admin
       @pagy, @feedback = pagy(
         Feedback.all,
         items: params.fetch(:page_size, DEFAULT_PAGE_SIZE),
-        size: [1, 1, 1, 1]
+        size: [1, 1, 1, 1],
       )
     end
   end

@@ -45,7 +45,7 @@ module Providers
         subject do
           post(
             providers_merits_task_list_chances_of_success_index_path(proceeding),
-            params: params.merge(submit_button)
+            params: params.merge(submit_button),
           )
         end
 

@@ -11,7 +11,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       :at_entering_applicant_details,
       :with_proceedings,
       applicant:,
-      set_lead_proceeding: :da001
+      set_lead_proceeding: :da001,
     )
   end
   let(:application_id) { application.id }
@@ -58,7 +58,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             :with_non_passported_state_machine,
             :at_entering_applicant_details,
             :with_proceedings,
-            applicant:
+            applicant:,
           )
         end
 
@@ -78,7 +78,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             explicit_proceedings: [:da004],
             set_lead_proceeding: :da004,
             df_options: { DA004: [Time.zone.today, Time.zone.today] },
-            applicant:
+            applicant:,
           )
         end
 
@@ -233,7 +233,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
             :with_passported_state_machine,
             :at_entering_applicant_details,
             :with_proceedings,
-            applicant:
+            applicant:,
           )
         end
 

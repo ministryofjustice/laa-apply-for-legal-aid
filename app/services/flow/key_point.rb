@@ -45,7 +45,7 @@ module Flow
       Flow::BaseFlowService.flow_service_for(
         journey,
         legal_aid_application:,
-        current_step: step
+        current_step: step,
       )
     end
   end

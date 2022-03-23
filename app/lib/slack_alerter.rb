@@ -24,7 +24,7 @@ class SlackAlerter
       ExceptionAlertMailer.notify(
         environment: HostEnv.environment.to_s,
         details: message,
-        to: slack_alert_email
+        to: slack_alert_email,
       ).deliver_now!
     end
 

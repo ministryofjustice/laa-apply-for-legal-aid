@@ -63,7 +63,7 @@ module CCMS
           convert_request_keys_to: :none,
           namespace_identifier: "ns2",
           log: false,
-          log_level: :debug
+          log_level: :debug,
         )
       end
       # :nocov:

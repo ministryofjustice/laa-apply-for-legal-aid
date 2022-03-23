@@ -67,7 +67,7 @@ class MapAddressLookupResults
       city: result["POST_TOWN"],
       county: nil,
       postcode: result["POSTCODE"],
-      lookup_id: result["UDPRN"] # Unique Delivery Point Reference Number
+      lookup_id: result["UDPRN"], # Unique Delivery Point Reference Number
     )
   end
 end

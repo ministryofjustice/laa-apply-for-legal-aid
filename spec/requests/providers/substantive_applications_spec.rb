@@ -52,7 +52,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
     subject do
       patch(
         providers_legal_aid_application_substantive_application_path(legal_aid_application),
-        params: params.merge(button_clicked)
+        params: params.merge(button_clicked),
       )
     end
 
@@ -64,7 +64,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
 
     it "redirects to non passported client instructions" do
       expect(response).to redirect_to(
-        providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application)
+        providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application),
       )
     end
 
@@ -74,13 +74,13 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
           :legal_aid_application,
           :with_positive_benefit_check_result,
           :with_passported_state_machine,
-          :applicant_details_checked
+          :applicant_details_checked,
         )
       end
 
       it "redirects to capital introductions" do
         expect(response).to redirect_to(
-          providers_legal_aid_application_capital_introduction_path(legal_aid_application)
+          providers_legal_aid_application_capital_introduction_path(legal_aid_application),
         )
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
           :legal_aid_application,
           :with_negative_benefit_check_result,
           :with_non_passported_state_machine,
-          :applicant_details_checked
+          :applicant_details_checked,
         )
       end
 
@@ -102,7 +102,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         it "redirects to capital introductions" do
           subject
           expect(response).to redirect_to(
-            providers_legal_aid_application_capital_introduction_path(legal_aid_application)
+            providers_legal_aid_application_capital_introduction_path(legal_aid_application),
           )
         end
       end
@@ -113,7 +113,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         it "redirects to non_passported_client_instructions" do
           subject
           expect(response).to redirect_to(
-            providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application)
+            providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application),
           )
         end
       end

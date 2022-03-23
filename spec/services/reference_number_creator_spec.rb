@@ -21,7 +21,7 @@ RSpec.describe ReferenceNumberCreator do
           .and_return(
             existing_reference_number,
             other_existing_reference_number,
-            third_reference_number
+            third_reference_number,
           )
       end
 

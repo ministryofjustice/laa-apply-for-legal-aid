@@ -46,7 +46,7 @@ Given("I have previously created multiple applications") do
     :with_everything,
     :with_passported_state_machine,
     :initiated,
-    provider:
+    provider:,
   )
   login_as @legal_aid_application.provider
 end
@@ -58,7 +58,7 @@ Given("I have created and submitted an application") do
     :with_passported_state_machine,
     :with_merits_submitted_at,
     :initiated,
-    provider: create(:provider)
+    provider: create(:provider),
   )
   login_as @legal_aid_application.provider
 end
@@ -69,7 +69,7 @@ Given("I have created but not submitted an application") do
     :with_applicant,
     :draft,
     :initiated,
-    provider: create(:provider)
+    provider: create(:provider),
   )
   login_as @legal_aid_application.provider
 end
@@ -81,7 +81,7 @@ Given("I previously created a passported application and left on the {string} pa
     :with_passported_state_machine,
     :initiated,
     provider: create(:provider),
-    provider_step: provider_step.downcase
+    provider_step: provider_step.downcase,
   )
   login_as @legal_aid_application.provider
 end
@@ -97,7 +97,7 @@ Given("I previously created a passported application with no assets and left on 
     :with_passported_state_machine,
     :checking_passported_answers,
     provider: create(:provider),
-    provider_step: provider_step.downcase
+    provider_step: provider_step.downcase,
   )
   login_as @legal_aid_application.provider
 end
@@ -115,7 +115,7 @@ Given("I have a passported application with no assets on the {string} page") do 
     provider: create(:provider),
     provider_step: provider_step.downcase,
     explicit_proceedings: [:da001],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
   login_as @legal_aid_application.provider
 end
@@ -163,7 +163,7 @@ Given("I start the journey as far as the client completed means page") do
     :with_everything,
     :with_vehicle,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_client_completed_means_path(@legal_aid_application))
@@ -176,7 +176,7 @@ Given("I am checking the applicant's means answers") do
     :with_everything,
     :with_vehicle,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
@@ -193,7 +193,7 @@ Given("I have completed the non-passported means assessment and start the merits
     :with_benefits_transactions,
     :with_proceedings,
     explicit_proceedings: %i[da001],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
 
   login_as @legal_aid_application.provider
@@ -207,13 +207,13 @@ Given("I start the merits application") do
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    :with_policy_disregards
+    :with_policy_disregards,
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -225,14 +225,14 @@ Given("I start the merits application with bank transactions with no transaction
     :with_non_passported_state_machine,
     :provider_entering_merits,
     :with_uncategorised_credit_transactions,
-    :with_uncategorised_debit_transactions
+    :with_uncategorised_debit_transactions,
   )
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -246,14 +246,14 @@ Given("I start the merits application with student finance") do
     :with_policy_disregards,
     :with_irregular_income,
     :with_transaction_period,
-    :with_uncategorised_credit_transactions
+    :with_uncategorised_credit_transactions,
   )
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -264,14 +264,14 @@ Given("I start the application with a negative benefit check result") do
     :with_proceedings,
     :with_non_passported_state_machine,
     :applicant_details_checked,
-    :with_negative_benefit_check_result
+    :with_negative_benefit_check_result,
   )
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :check_benefits,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -282,14 +282,14 @@ Given("I start the application with a negative benefit check result and no used 
     :with_proceedings,
     :with_non_passported_state_machine,
     :applicant_details_checked,
-    :with_negative_benefit_check_result
+    :with_negative_benefit_check_result,
   )
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :check_benefits,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -309,7 +309,7 @@ Given("I start the merits application and the applicant has uploaded transaction
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -319,7 +319,7 @@ Given("I start the means review journey with employment income from HMRC") do
     :with_applicant,
     :with_proceedings,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
   )
 
   @hmrc_response = create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application) # creates the employment and employment records as well
@@ -330,14 +330,14 @@ Given("I start the means review journey with employment income from HMRC") do
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
 Given("I start the means review journey with no employment income from HMRC") do
   @applicant = create(
     :applicant,
-    :employed
+    :employed,
   )
 
   @legal_aid_application = create(
@@ -345,7 +345,7 @@ Given("I start the means review journey with no employment income from HMRC") do
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    applicant: @applicant
+    applicant: @applicant,
   )
 
   @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
@@ -354,20 +354,20 @@ Given("I start the means review journey with no employment income from HMRC") do
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
 Given("I start the journey as far as the start of the vehicle section") do
   @legal_aid_application = create(
     :application,
-    :passported
+    :passported,
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_vehicle_journey,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -398,7 +398,7 @@ Given("I complete the journey as far as check your answers") do
     first_name: "Test",
     last_name: "User",
     national_insurance_number: "CB987654A",
-    date_of_birth: "03-04-1999"
+    date_of_birth: "03-04-1999",
   )
   create(
     :address,
@@ -407,13 +407,13 @@ Given("I complete the journey as far as check your answers") do
     city: "London",
     postcode: "SW1H 9EA",
     lookup_used: true,
-    applicant:
+    applicant:,
   )
   @legal_aid_application = create(
     :legal_aid_application,
     :at_entering_applicant_details,
     :with_proceedings,
-    applicant:
+    applicant:,
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
@@ -428,7 +428,7 @@ Given("I complete the journey as far as check client details with multiple proce
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
     explicit_proceedings: %i[da001 da005],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
 
   login_as @legal_aid_application.provider
@@ -443,7 +443,7 @@ Given("I complete the passported journey as far as check your answers") do
     last_name: "Walker",
     national_insurance_number: "JA293483A",
     date_of_birth: "10-01-1980",
-    email: "test@test.com"
+    email: "test@test.com",
   )
   create(
     :address,
@@ -452,7 +452,7 @@ Given("I complete the passported journey as far as check your answers") do
     city: "London",
     postcode: "SW1H 9EA",
     lookup_used: true,
-    applicant:
+    applicant:,
   )
   @legal_aid_application = create(
     :legal_aid_application,
@@ -461,7 +461,7 @@ Given("I complete the passported journey as far as check your answers") do
     :with_proceedings,
     explicit_proceedings: [:da001],
     set_lead_proceeding: :da001,
-    applicant:
+    applicant:,
   )
   login_as @legal_aid_application.provider
 
@@ -484,7 +484,7 @@ Given("I complete the journey as far as check passported answers with multiple p
     :with_policy_disregards,
     :with_benefits_transactions,
     explicit_proceedings: %i[da001 da005],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
 
   login_as @legal_aid_application.provider
@@ -500,7 +500,7 @@ Given("I complete the non-passported journey as far as check your answers") do
     last_name: "Test",
     national_insurance_number: "JA123456A",
     date_of_birth: "01-01-1970",
-    email: "test@test.com"
+    email: "test@test.com",
   )
   create(
     :address,
@@ -509,14 +509,14 @@ Given("I complete the non-passported journey as far as check your answers") do
     city: "London",
     postcode: "SW1H 9EA",
     lookup_used: true,
-    applicant:
+    applicant:,
   )
   @legal_aid_application = create(
     :legal_aid_application,
     :with_non_passported_state_machine,
     :at_entering_applicant_details,
     :with_proceedings,
-    applicant:
+    applicant:,
   )
 
   login_as @legal_aid_application.provider
@@ -531,7 +531,7 @@ Given("I complete the passported journey as far as capital check your answers") 
     last_name: "Walker",
     national_insurance_number: "JA293483A",
     date_of_birth: "10-01-1980",
-    email: "test@test.com"
+    email: "test@test.com",
   )
   create(
     :address,
@@ -540,7 +540,7 @@ Given("I complete the passported journey as far as capital check your answers") 
     city: "London",
     postcode: "SW1H 9EA",
     lookup_used: true,
-    applicant:
+    applicant:,
   )
   @legal_aid_application = create(
     :legal_aid_application,
@@ -548,7 +548,7 @@ Given("I complete the passported journey as far as capital check your answers") 
     :with_proceedings,
     :with_passported_state_machine,
     :provider_entering_means,
-    applicant:
+    applicant:,
   )
   login_as @legal_aid_application.provider
   visit(providers_legal_aid_application_check_passported_answers_path(@legal_aid_application))
@@ -561,7 +561,7 @@ Given("I complete the application and view the check your answers page") do
     first_name: "Test",
     last_name: "User",
     national_insurance_number: "CB987654A",
-    date_of_birth: "03-04-1999"
+    date_of_birth: "03-04-1999",
   )
   create(
     :address,
@@ -570,7 +570,7 @@ Given("I complete the application and view the check your answers page") do
     city: "London",
     postcode: "SW1H 9EA",
     lookup_used: true,
-    applicant:
+    applicant:,
   )
 
   @legal_aid_application = create(
@@ -580,7 +580,7 @@ Given("I complete the application and view the check your answers page") do
     :with_proceedings,
     applicant:,
     explicit_proceedings: [:da001],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
 
   login_as @legal_aid_application.provider
@@ -598,13 +598,13 @@ Given("The means questions have been answered by the applicant") do
     :with_uncategorised_debit_transactions,
     :with_uncategorised_credit_transactions,
     explicit_proceedings: %i[da001 da005],
-    set_lead_proceeding: :da001
+    set_lead_proceeding: :da001,
   )
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
@@ -765,7 +765,7 @@ end
 Then("I expect to see {int} proceeding types selected") do |number|
   expect(page).to have_selector(
     ".selected-proceeding-types .selected-proceeding-type",
-    count: number
+    count: number,
   )
 end
 

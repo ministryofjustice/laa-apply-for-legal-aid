@@ -13,7 +13,7 @@ class SubmitCitizenFinancialReminderMailer < BaseApplyMailer
       ref_number: application["application_ref"],
       client_name:,
       application_url:,
-      expiry_date: url_expiry_date
+      expiry_date: url_expiry_date,
     )
     mail(to: email)
   end

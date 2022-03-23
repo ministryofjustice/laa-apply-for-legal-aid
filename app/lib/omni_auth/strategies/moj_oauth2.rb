@@ -39,7 +39,7 @@ module OmniAuth
         code_challenge: proc { |verifier|
           Base64.urlsafe_encode64(
             Digest::SHA2.digest(verifier),
-            padding: false
+            padding: false,
           )
         },
         code_challenge_method: "S256",
@@ -181,7 +181,7 @@ module OmniAuth
       def browser_details
         browser = Browser.new(
           request.env["HTTP_USER_AGENT"],
-          accept_language: request.env["HTTP_ACCEPT_LANGUAGE"]
+          accept_language: request.env["HTTP_ACCEPT_LANGUAGE"],
         )
         "#{browser.platform.name}::#{browser.name}::#{browser.full_version}"
       end

@@ -61,7 +61,7 @@ module CCMS
               matching: [
                 "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
                 "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-              ]
+              ],
             )
           end
 
@@ -100,7 +100,7 @@ module CCMS
               matching: [
                 "<common:Surname>#{applicant.last_name}</common:Surname>",
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>"
-              ]
+              ],
             )
           end
 
@@ -148,7 +148,7 @@ module CCMS
               matching: [
                 "<clientbio:Surname>#{applicant.last_name}</clientbio:Surname>",
                 "<clientbio:FirstName>#{applicant.first_name}</clientbio:FirstName>"
-              ]
+              ],
             )
           end
         end

@@ -74,7 +74,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
           start_path = Flow::KeyPoint.path_for(
             journey: :providers,
             key_point: :edit_applicant,
-            legal_aid_application:
+            legal_aid_application:,
           )
           expect(response.body).to include(start_path)
         end

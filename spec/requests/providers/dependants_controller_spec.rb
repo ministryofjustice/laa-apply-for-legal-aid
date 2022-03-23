@@ -61,7 +61,7 @@ RSpec.describe Providers::DependantsController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_dependant_path(legal_aid_application, dependant),
-        params:
+        params:,
       )
     end
 

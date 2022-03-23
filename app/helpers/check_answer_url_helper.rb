@@ -4,7 +4,7 @@ module CheckAnswerUrlHelper
       journey_type,
       current_step: field_name,
       legal_aid_application: application,
-      params: args
+      params: args,
     )
     anchor = field_name_to_anchor_map[field_name]
     [flow_service.current_path, anchor].compact.join("#")

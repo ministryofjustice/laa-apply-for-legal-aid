@@ -27,7 +27,7 @@ RSpec.describe Setting do
           bank_transaction_filename: "my_special_file.csv",
           alert_via_sentry: true,
           enable_employed_journey: true,
-          enable_evidence_upload: true
+          enable_evidence_upload: true,
         )
       end
 

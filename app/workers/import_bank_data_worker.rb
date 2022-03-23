@@ -8,7 +8,7 @@ class ImportBankDataWorker
   def perform(legal_aid_application_id)
     @legal_aid_application_id = legal_aid_application_id
     command = TrueLayer::BankDataImportService.call(
-      legal_aid_application:
+      legal_aid_application:,
     )
     store errors: command.errors.to_a.flatten.to_json unless command.success?
   end

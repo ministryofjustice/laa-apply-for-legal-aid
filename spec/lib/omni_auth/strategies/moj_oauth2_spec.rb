@@ -71,7 +71,7 @@ module OmniAuth
             "_csrf_token" => "bHisWZcUID4DqymnSBSyJ31OghMf8cop4Aw/9RJ3T9c=",
             "provider_id" => "mock",
             "omniauth.state" => omniauth_state,
-          }
+          },
         )
       end
 
@@ -84,7 +84,7 @@ module OmniAuth
             "provider_id" => "mock",
             "consent_id" => "applyforlegalaidtest-uxqw",
             "tracking_id" => "9829f7c1-e8c4-4334-8f39-ff48e024ea62",
-          }
+          },
         )
       end
 
@@ -92,7 +92,7 @@ module OmniAuth
         HashWithIndifferentAccess.new(
           {
             state: omniauth_state,
-          }
+          },
         )
       end
 
@@ -100,7 +100,7 @@ module OmniAuth
         HashWithIndifferentAccess.new(
           {
             "omniauth.auth" => {},
-          }
+          },
         )
       end
     end

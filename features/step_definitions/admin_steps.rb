@@ -4,7 +4,7 @@ Given(/^I am logged in as an admin$/) do
   OmniAuth.config.add_mock(
     :google_oauth2,
     info: { email: admin_user.email },
-    origin: admin_settings_url
+    origin: admin_settings_url,
   )
   get admin_user_google_oauth2_omniauth_callback_path
   follow_redirect!
@@ -16,7 +16,7 @@ Given("an application has been submitted") do
   @legal_aid_application = create(
     :application,
     :at_assessment_submitted,
-    provider: create(:provider)
+    provider: create(:provider),
   )
 end
 
@@ -26,7 +26,7 @@ Given("multiple applications have been submitted") do
     15,
     :at_assessment_submitted,
     :with_applicant,
-    provider: create(:provider)
+    provider: create(:provider),
   )
 end
 

@@ -266,7 +266,7 @@ RSpec.describe "check passported answers requests", type: :request do
     subject do
       patch(
         "/providers/applications/#{application.id}/check_passported_answers/continue",
-        params:
+        params:,
       )
     end
 

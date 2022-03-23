@@ -20,7 +20,7 @@ module Flow
             when "new"
               partial_record = ApplicationMeritsTask::InvolvedChild.find_by(
                 full_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:full_name],
-                legal_aid_application_id: application.id
+                legal_aid_application_id: application.id,
               )
               if partial_record
                 urls.providers_legal_aid_application_involved_child_path(application, partial_record)

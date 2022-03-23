@@ -9,7 +9,7 @@ class UndeliverableEmailAlertMailer < BaseApplyMailer
       email_address: scheduled_mail.addressee,
       failure_reason: scheduled_mail.status,
       mailer_and_method: "#{scheduled_mail.mailer_klass}##{scheduled_mail.mailer_method}",
-      mail_params: scheduled_mail.arguments
+      mail_params: scheduled_mail.arguments,
     )
 
     mail to: Rails.configuration.x.support_email_address

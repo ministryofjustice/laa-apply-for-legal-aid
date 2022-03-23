@@ -31,7 +31,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
     subject do
       patch(
         providers_legal_aid_application_vehicle_path(legal_aid_application),
-        params:
+        params:,
       )
     end
 

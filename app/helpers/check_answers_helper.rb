@@ -12,7 +12,7 @@ module CheckAnswersHelper
       question:,
       answer:,
       read_only: url.nil? ? true : read_only,
-      no_border:
+      no_border:,
     )
   end
 
@@ -23,7 +23,7 @@ module CheckAnswersHelper
       question:,
       answer:,
       read_only:,
-      no_border:
+      no_border:,
     )
   end
 
@@ -35,7 +35,7 @@ module CheckAnswersHelper
       url:,
       question:,
       answer_hash:,
-      read_only:
+      read_only:,
     )
   end
 
@@ -45,7 +45,7 @@ module CheckAnswersHelper
       name:,
       url:,
       question:,
-      read_only:
+      read_only:,
     )
   end
 
@@ -56,7 +56,7 @@ module CheckAnswersHelper
       name:,
       question:,
       answer_hash:,
-      read_only:
+      read_only:,
     )
   end
 
@@ -66,7 +66,7 @@ module CheckAnswersHelper
       name:,
       question:,
       answer:,
-      no_border:
+      no_border:,
     )
   end
 
@@ -76,7 +76,7 @@ module CheckAnswersHelper
       name:,
       question:,
       legal_aid_application:,
-      transaction_type:
+      transaction_type:,
     )
   end
 

@@ -36,7 +36,7 @@ module HMRC
           message: formatted_error_message(error),
           backtrace: error.backtrace&.join("\n"),
           http_method:,
-          http_status: error.respond_to?(:http_status) ? error.http_status : nil
+          http_status: error.respond_to?(:http_status) ? error.http_status : nil,
         )
       end
 

@@ -63,7 +63,7 @@ module ApplicationHelper
       t("layouts.logout.admin"),
       destroy_admin_user_session_path,
       method: :delete,
-      class: "button-as-link govuk-header__link"
+      class: "button-as-link govuk-header__link",
     )
 
     content_tag(:li, button, class: "govuk-header__navigation-item")

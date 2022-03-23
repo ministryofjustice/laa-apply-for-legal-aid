@@ -26,7 +26,7 @@ module Providers
         super
         set_instance_variables_for_attributes_if_not_set_but_in_model(
           attrs: date_fields.fields,
-          model_attributes: date_fields.model_attributes
+          model_attributes: date_fields.model_attributes,
         )
       end
 
@@ -56,7 +56,7 @@ module Providers
           model:,
           method: :date_of_birth,
           prefix: :date_of_birth_,
-          suffix: :gov_uk
+          suffix: :gov_uk,
         )
       end
     end

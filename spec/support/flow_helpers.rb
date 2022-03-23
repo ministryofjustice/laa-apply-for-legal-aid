@@ -9,7 +9,7 @@ module FlowHelpers
     Flow::BaseFlowService.flow_service_for(
       controller_module,
       legal_aid_application: legal_aid_application_id ? LegalAidApplication.find(legal_aid_application_id) : FactoryBot.create(:legal_aid_application),
-      current_step: controller_name
+      current_step: controller_name,
     ).forward_path
   end
 
