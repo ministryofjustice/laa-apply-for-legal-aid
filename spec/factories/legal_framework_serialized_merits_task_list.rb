@@ -27,7 +27,7 @@ FactoryBot.define do
               children_proceeding: [:children_application],
               attempts_to_settle: [],
             },
-          }
+          },
         ],
       }
     end
@@ -50,7 +50,7 @@ FactoryBot.define do
               tasks: {
                 chances_of_success: [],
               },
-            }
+            },
           ],
         }
       end

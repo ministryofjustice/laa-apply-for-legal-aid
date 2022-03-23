@@ -39,7 +39,7 @@ module CFEResults
                       name: "manually_chosen",
                       monthly_value: "50.00",
                       excluded_from_income_assessment: false,
-                    }
+                    },
                   ],
                 },
               },
@@ -110,13 +110,13 @@ module CFEResults
                   {
                     description: "Ab quasi autem rerum.",
                     value: "6692.12",
-                  }
+                  },
                 ],
                 non_liquid: [
                   {
                     description: "Omnis sit et corrupti.",
                     value: "3902.92",
-                  }
+                  },
                 ],
                 vehicles: [
                   {
@@ -126,7 +126,7 @@ module CFEResults
                     in_regular_use: true,
                     included_in_assessment: false,
                     assessed_value: "0.0",
-                  }
+                  },
                 ],
                 properties: {
                   main_home: {
@@ -155,7 +155,7 @@ module CFEResults
                       net_equity: "-8000.82",
                       main_home_equity_disregard: "0.0",
                       assessed_equity: "0.0",
-                    }
+                    },
                   ],
                 },
               },

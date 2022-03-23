@@ -554,7 +554,7 @@ module CFE
           "exclude_from_gross_income" => true,
           "dwp_code" => nil,
           "category" => "other",
-        }
+        },
       ]
     end
   end

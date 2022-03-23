@@ -57,9 +57,9 @@ module CFEResults
                     {
                       payment_date: "2019-11-28",
                       amount: "75.0",
-                    }
+                    },
                   ],
-                }
+                },
               ],
               other_income: [
                 {
@@ -77,9 +77,9 @@ module CFEResults
                     {
                       payment_date: "2019-11-28",
                       amount: "75.0",
-                    }
+                    },
                   ],
-                }
+                },
               ],
             },
             disposable_income: {
@@ -96,7 +96,7 @@ module CFEResults
                   {
                     payment_date: "2019-11-28",
                     amount: "100.0",
-                  }
+                  },
                 ],
                 housing_costs: [
                   {
@@ -110,7 +110,7 @@ module CFEResults
                   {
                     payment_date: "2019-11-28",
                     amount: "125.0",
-                  }
+                  },
                 ],
                 maintenance_costs: [
                   {
@@ -124,7 +124,7 @@ module CFEResults
                   {
                     payment_date: "2019-11-28",
                     amount: "50.0",
-                  }
+                  },
                 ],
               },
               deductions: {
@@ -150,13 +150,13 @@ module CFEResults
                   {
                     description: "Ab quasi autem rerum.",
                     value: "6692.12",
-                  }
+                  },
                 ],
                 non_liquid: [
                   {
                     description: "Omnis sit et corrupti.",
                     value: "3902.92",
-                  }
+                  },
                 ],
                 vehicles: [
                   {
@@ -166,7 +166,7 @@ module CFEResults
                     in_regular_use: true,
                     included_in_assessment: false,
                     assessed_value: "0.0",
-                  }
+                  },
                 ],
                 properties: {
                   main_home: {
@@ -195,7 +195,7 @@ module CFEResults
                       net_equity: "-8000.82",
                       main_home_equity_disregard: "0.0",
                       assessed_equity: "0.0",
-                    }
+                    },
                   ],
                 },
               },

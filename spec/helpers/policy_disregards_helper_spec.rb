@@ -35,7 +35,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
           CheckAnswersHelper::ItemStruct.new("Criminal Injuries Compensation Scheme", "No"),
           CheckAnswersHelper::ItemStruct.new("National Emergencies Trust (NET)", "No"),
           CheckAnswersHelper::ItemStruct.new("We Love Manchester Emergency Fund", "No"),
-          CheckAnswersHelper::ItemStruct.new("The London Emergencies Trust", "No")
+          CheckAnswersHelper::ItemStruct.new("The London Emergencies Trust", "No"),
         ],
       }
     end

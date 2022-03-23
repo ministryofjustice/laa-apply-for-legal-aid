@@ -18,7 +18,7 @@ module CFEResults
               {
                 description: "Off-line bank accounts",
                 value: "350.0",
-              }
+              },
             ],
             non_liquid_capital_items: [],
           },
@@ -40,7 +40,7 @@ module CFEResults
                 allowable_outstanding_mortgage: "0.0",
                 percentage_owned: "0.0",
                 assessed_equity: "0.0",
-              }
+              },
             ],
           },
           vehicles: {
@@ -53,7 +53,7 @@ module CFEResults
                 date_of_purchase: "2013-06-01",
                 included_in_assessment: false,
                 assessed_value: "0.0",
-              }
+              },
             ],
           },
         }

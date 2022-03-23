@@ -1944,31 +1944,6 @@ Style/Lambda:
 Style/QuotedSymbols:
   EnforcedStyle: single_quotes
 
-# Offense count: 225
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'app/controllers/citizens/resend_link_requests_controller.rb'
-    - 'app/forms/incidents/told_on_form.rb'
-    - 'app/helpers/gov_uk_form_helper.rb'
-    - 'config/initializers/mock_saml.rb'
-    - 'features/support/env.rb'
-    - 'spec/factories/cfe_results/state_benefit_types/mock_state_benefit_type_result.rb'
-    - 'spec/factories/cfe_results/v1/mock_results.rb'
-    - 'spec/factories/cfe_results/v2/mock_results.rb'
-    - 'spec/factories/cfe_results/v3/mock_results.rb'
-    - 'spec/factories/cfe_results/v4/mock_results.rb'
-    - 'spec/factories/firms.rb'
-    - 'spec/factories/legal_framework_serialized_merits_task_list.rb'
-    - 'spec/factories/true_layer_banks.rb'
-    - 'spec/factory_helpers/hmrc_response/use_case_one.rb'
-    - 'spec/forms/legal_aid_applications/dependant_form_spec.rb'
-    - 'spec/helpers/policy_disregards_helper_spec.rb'
-    - 'spec/workers/hmrc/result_worker_spec.rb'
-    - 'spec/workers/hmrc/submission_worker_spec.rb'
-
 # Offense count: 27
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.

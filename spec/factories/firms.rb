@@ -21,7 +21,7 @@ FactoryBot.define do
     permissions do
       [
         Permission.find_by(role: "application.passported.*") || create(:permission, :passported),
-        Permission.find_by(role: "application.non_passported.*") || create(:permission, :non_passported)
+        Permission.find_by(role: "application.non_passported.*") || create(:permission, :non_passported),
       ]
     end
   end

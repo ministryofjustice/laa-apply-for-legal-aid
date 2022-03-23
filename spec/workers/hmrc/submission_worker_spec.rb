@@ -18,7 +18,7 @@ RSpec.describe HMRC::SubmissionWorker do
           _links: [
             {
               href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7",
-            }
+            },
           ],
         }
       end

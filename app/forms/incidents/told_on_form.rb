@@ -20,7 +20,7 @@ module Incidents
         model_attributes:
         [
           told_on_date_fields.model_attributes,
-          occurred_on_date_fields.model_attributes
+          occurred_on_date_fields.model_attributes,
         ].compact.reduce(&:merge),
       )
     end
