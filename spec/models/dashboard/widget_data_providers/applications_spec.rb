@@ -20,7 +20,7 @@ module Dashboard
                                       { name: "Submitted nonpassported applications", optional: false, type: "number" },
                                       { name: "Total submitted applications", optional: false, type: "number" },
                                       { name: "Failed applications", optional: false, type: "number" },
-                                      { name: "Delegated function applications", optional: false, type: "number" }
+                                      { name: "Delegated function applications", optional: false, type: "number" },
                                     ],
                                   unique_by: ["date"] }.to_json
           expect(described_class.dataset_definition.to_json).to eq expected_definition
@@ -59,7 +59,7 @@ module Dashboard
             { "date" => "2019-12-09", "started_apps" => 1, "submitted_apps" => 0, "total_submitted_apps" => 1, "submitted_passported_apps" => 0, "submitted_nonpassported_apps" => 0, "failed_apps" => 0, "delegated_func_apps" => 0 },
             { "date" => "2019-12-10", "started_apps" => 5, "submitted_apps" => 0, "total_submitted_apps" => 1, "submitted_passported_apps" => 0, "submitted_nonpassported_apps" => 0, "failed_apps" => 0, "delegated_func_apps" => 0 },
             { "date" => "2019-12-11", "started_apps" => 8, "submitted_apps" => 3, "total_submitted_apps" => 4, "submitted_passported_apps" => 2, "submitted_nonpassported_apps" => 1, "failed_apps" => 0, "delegated_func_apps" => 4 },
-            { "date" => "2019-12-12", "started_apps" => 5, "submitted_apps" => 0, "total_submitted_apps" => 4, "submitted_passported_apps" => 0, "submitted_nonpassported_apps" => 0, "failed_apps" => 0, "delegated_func_apps" => 4 }
+            { "date" => "2019-12-12", "started_apps" => 5, "submitted_apps" => 0, "total_submitted_apps" => 4, "submitted_passported_apps" => 0, "submitted_nonpassported_apps" => 0, "failed_apps" => 0, "delegated_func_apps" => 4 },
           ]
         end
 

@@ -39,7 +39,7 @@ RSpec.describe Citizens::ResendLinkRequestsController, type: :request do
         legal_aid_application.application_ref,
         legal_aid_application.applicant.email_address,
         citizens_legal_aid_application_url(secure_data_id),
-        legal_aid_application.applicant.full_name
+        legal_aid_application.applicant.full_name,
       ]
     end
   end

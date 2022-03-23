@@ -146,7 +146,7 @@ module CFE
           ],
         },
         policy_disregards: [
-          "england_infected_blood_support"
+          "england_infected_blood_support",
         ],
       }
     end

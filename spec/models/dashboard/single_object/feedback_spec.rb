@@ -31,7 +31,7 @@ module Dashboard
               difficulty_score: 100,
               satisfaction_count: 2,
               satisfaction_score: 50,
-            }
+            },
           ]
         end
 

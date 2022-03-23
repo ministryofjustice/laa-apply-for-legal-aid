@@ -30,7 +30,7 @@ module Dashboard
               timestamp: provider.created_at,
               firm: provider.firm.name,
               count: 1,
-            }
+            },
           ]
         end
 

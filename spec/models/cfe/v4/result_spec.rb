@@ -314,7 +314,7 @@ module CFE
             {
               ccms_code: "SE014",
               result: "partially_eligible",
-            }
+            },
           ]
         end
         let(:result_after_transformation) do
@@ -512,7 +512,7 @@ module CFE
                 ccms_code: "DA002",
                 upper_threshold: 999_999_999_999.0,
                 result: "pending",
-              }
+              },
             ]
           end
 
@@ -537,7 +537,7 @@ module CFE
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
                 result: "pending",
-              }
+              },
             ]
           end
 
