@@ -105,13 +105,13 @@ module CFE
               {
                 matter_type: "domestic_abuse",
                 result: "contribution_required",
-              }
+              },
             ],
             proceeding_types: [
               {
                 ccms_code: "DA001",
                 result: "contribution_required",
-              }
+              },
             ],
           },
           gross_income: {
@@ -121,7 +121,7 @@ module CFE
                 ccms_code: "DA001",
                 upper_threshold: 999_999_999_999.0,
                 result: "eligible",
-              }
+              },
             ],
           },
           disposable_income: {
@@ -139,7 +139,7 @@ module CFE
                 upper_threshold: 999_999_999_999.0,
                 lower_threshold: 315.0,
                 result: "eligible",
-              }
+              },
             ],
           },
           capital: {
@@ -158,7 +158,7 @@ module CFE
                 lower_threshold: 3000.0,
                 upper_threshold: 999_999_999_999.0,
                 result: "contribution_required",
-              }
+              },
             ],
           },
         },
@@ -188,7 +188,7 @@ module CFE
                     name: "Child Benefit",
                     monthly_value: 200.0,
                     excluded_from_income_assessment: false,
-                  }
+                  },
                 ],
               },
             },
@@ -256,7 +256,7 @@ module CFE
                 {
                   description: "Bank acct 3",
                   value: 0.0,
-                }
+                },
               ],
               non_liquid: [],
               vehicles: [
@@ -267,7 +267,7 @@ module CFE
                   in_regular_use: false,
                   included_in_assessment: true,
                   assessed_value: 9000.0,
-                }
+                },
               ],
               properties: {
                 main_home: {

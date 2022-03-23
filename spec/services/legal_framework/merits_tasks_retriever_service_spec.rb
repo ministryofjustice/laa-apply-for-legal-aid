@@ -74,7 +74,7 @@ module LegalFramework
             tasks: {
               chances_of_success: [], # the merits tasks for this one proceeding type, and any dependencies
             },
-          }
+          },
         ],
       }
     end

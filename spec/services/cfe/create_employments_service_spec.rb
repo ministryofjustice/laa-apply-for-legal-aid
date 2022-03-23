@@ -126,9 +126,9 @@ RSpec.describe CFE::CreateEmploymentsService do
               tax: -257.2,
               national_insurance: -185.79,
               net_employment_income: 1902.3,
-            }
+            },
           ],
-        }
+        },
       ],
     }
   end

@@ -41,7 +41,7 @@ module CFE
           {
             category: "policy_disregards",
             details: ["vaccine_damage_payments"],
-          }
+          },
         ],
       }.to_json
     end

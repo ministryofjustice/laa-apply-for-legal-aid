@@ -185,7 +185,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           "exclude_from_gross_income" => false,
           "category" => nil,
           "selected_by" => "System",
-        }
+        },
       ]
     end
 

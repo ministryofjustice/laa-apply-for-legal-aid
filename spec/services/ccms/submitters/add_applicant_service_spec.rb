@@ -57,7 +57,7 @@ module CCMS
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
                 "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
                 "<common:City>#{address.city}</common:City>",
-                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],
             )
           end
@@ -100,7 +100,7 @@ module CCMS
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
                 "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
                 "<common:City>#{address.city}</common:City>",
-                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],
             )
           end
@@ -134,7 +134,7 @@ module CCMS
                 "<common:FirstName>#{applicant.first_name}</common:FirstName>",
                 "<common:AddressLine1>#{address.first_lines}</common:AddressLine1>",
                 "<common:City>#{address.city}</common:City>",
-                "<common:PostalCode>#{address.postcode}</common:PostalCode>"
+                "<common:PostalCode>#{address.postcode}</common:PostalCode>",
               ],
             )
           end

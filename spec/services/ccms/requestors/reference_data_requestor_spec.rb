@@ -16,7 +16,7 @@ module CCMS
             command: "refdatabim:ReferenceDataInqRQ",
             transaction_id: expected_tx_id,
             matchers: [
-              "<hdr:Language>ENG</hdr:Language>"
+              "<hdr:Language>ENG</hdr:Language>",
             ],
           )
         end

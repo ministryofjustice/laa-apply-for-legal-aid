@@ -28,7 +28,7 @@ RSpec.describe ProviderDetailsCreator do
         {
           id: rand(101..200),
           name: third_provider.username,
-        }
+        },
       ],
       feeEarners: [],
       providerOffices: [
@@ -39,7 +39,7 @@ RSpec.describe ProviderDetailsCreator do
         {
           id: ccms_office2.id,
           name: "#{ccms_firm.name}-#{ccms_office2.code}",
-        }
+        },
       ],
     }
   end
@@ -142,7 +142,7 @@ RSpec.describe ProviderDetailsCreator do
             {
               id: rand(101..200),
               name: Faker::Name.name,
-            }
+            },
           ],
           providerOffices: [
             {
@@ -152,7 +152,7 @@ RSpec.describe ProviderDetailsCreator do
             {
               id: ccms_office3.id,
               name: "#{ccms_firm.name}-#{ccms_office3.code}",
-            }
+            },
           ],
         }
       end

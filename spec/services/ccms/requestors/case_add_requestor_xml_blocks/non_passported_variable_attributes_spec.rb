@@ -54,7 +54,7 @@ module CCMS
                 ["FAM_PROSP_BORDER_UNCERT_POOR", false],
                 ["FAM_PROSP_MARGINAL", false],
                 ["FAM_PROSP_POOR", false],
-                ["FAM_PROSP_UNCERTAIN", false]
+                ["FAM_PROSP_UNCERTAIN", false],
               ]
             end
 
@@ -76,7 +76,7 @@ module CCMS
                 ["FAM_PROSP_BORDER_UNCERT_POOR", false],
                 ["FAM_PROSP_MARGINAL", true],
                 ["FAM_PROSP_POOR", false],
-                ["FAM_PROSP_UNCERTAIN", false]
+                ["FAM_PROSP_UNCERTAIN", false],
               ]
             end
 
@@ -98,7 +98,7 @@ module CCMS
                 ["FAM_PROSP_BORDER_UNCERT_POOR", false],
                 ["FAM_PROSP_MARGINAL", false],
                 ["FAM_PROSP_POOR", true],
-                ["FAM_PROSP_UNCERTAIN", false]
+                ["FAM_PROSP_UNCERTAIN", false],
               ]
             end
 
@@ -120,7 +120,7 @@ module CCMS
                 ["FAM_PROSP_BORDER_UNCERT_POOR", true],
                 ["FAM_PROSP_MARGINAL", false],
                 ["FAM_PROSP_POOR", false],
-                ["FAM_PROSP_UNCERTAIN", false]
+                ["FAM_PROSP_UNCERTAIN", false],
               ]
             end
 
@@ -142,7 +142,7 @@ module CCMS
                 ["FAM_PROSP_BORDER_UNCERT_POOR", false],
                 ["FAM_PROSP_MARGINAL", false],
                 ["FAM_PROSP_POOR", false],
-                ["FAM_PROSP_UNCERTAIN", true]
+                ["FAM_PROSP_UNCERTAIN", true],
               ]
             end
 
@@ -501,7 +501,7 @@ module CCMS
               let(:expected_results) do
                 [
                   ["GB_INPUT_B_9WP3_351A", false],
-                  ["GB_INPUT_B_9WP3_352A", false]
+                  ["GB_INPUT_B_9WP3_352A", false],
                 ]
               end
 
@@ -519,7 +519,7 @@ module CCMS
               let(:expected_results) do
                 [
                   ["GB_INPUT_B_9WP3_351A", false],
-                  ["GB_INPUT_B_9WP3_352A", false]
+                  ["GB_INPUT_B_9WP3_352A", false],
                 ]
               end
 
@@ -761,7 +761,7 @@ module CCMS
             { input: "marginal", result: "FO" },
             { input: "poor", result: "NE" },
             { input: "borderline", result: "FH" },
-            { input: "not_known", result: "FJ" }
+            { input: "not_known", result: "FJ" },
           ].freeze
 
           examples.each do |test|
@@ -803,7 +803,7 @@ module CCMS
               tests: [
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], result: 60.0 },
-                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 40.0 }
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 40.0 },
               ],
             },
             {
@@ -811,7 +811,7 @@ module CCMS
               tests: [
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: true },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], result: 99.0 },
-                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 1.0 }
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], result: 1.0 },
               ],
             },
             {
@@ -819,9 +819,9 @@ module CCMS
               tests: [
                 { attributes: %w[GB_INPUT_B_3WP2_10A GB_INPUT_B_3WP2_8A], result: false },
                 { attributes: %w[GB_INPUT_N_3WP2_14A], omit_block: true },
-                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], omit_block: true }
+                { attributes: %w[MAINTHIRD_INPUT_N_3WP2_11A], omit_block: true },
               ],
-            }
+            },
           ].freeze
           examples.each do |example|
             example[:tests].each do |test|

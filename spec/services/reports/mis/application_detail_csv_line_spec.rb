@@ -528,7 +528,7 @@ module Reports
           "NSI and PB?",
           "PLC shares?",
           "Govt. stocks, bonds?, etc?",
-          "Life assurance?"
+          "Life assurance?",
         ]
       end
 
@@ -541,7 +541,7 @@ module Reports
           "NSI and PB value",
           "PLC shares value",
           "Govt. stocks, bonds value",
-          "Life assurance value"
+          "Life assurance value",
         ]
       end
 
@@ -552,7 +552,7 @@ module Reports
           "Timeshare?",
           "Land?",
           "Inheritance?",
-          "Money owed?"
+          "Money owed?",
         ]
       end
 
@@ -563,7 +563,7 @@ module Reports
           "Timeshare value",
           "Land value",
           "Inheritance value",
-          "Money owed value"
+          "Money owed value",
         ]
       end
 

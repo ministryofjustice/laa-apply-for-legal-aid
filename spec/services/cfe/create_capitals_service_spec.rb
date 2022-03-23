@@ -130,7 +130,7 @@ module CFE
           {
             description: "ISAs, National Savings Certificates and Premium Bonds",
             value: savings_amount.national_savings.to_s,
-          }
+          },
         ],
         non_liquid_capital: [
           {
@@ -146,7 +146,7 @@ module CFE
             value: other_assets_declaration.valuable_items_value.to_s,
           },
           { description: "Interest in a trust",
-            value: other_assets_declaration.trust_value.to_s }
+            value: other_assets_declaration.trust_value.to_s },
         ],
       }
       add_non_nil_accounts(payload, :current)
