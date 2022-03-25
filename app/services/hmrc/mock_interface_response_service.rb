@@ -8,6 +8,7 @@ module HMRC
       monthly_employment: { first_name: "Stevie", last_name: "Nicks", nino: "CC414771C", dob: "1977-07-07" },
       employment_tax_credits: { first_name: "Oakley", last_name: "Weller", nino: "AB476107D", dob: "1988-08-08" },
       eligible_employment: { first_name: "Leanne", last_name: "Conway", nino: "JA827365B", dob: "1977-03-08" },
+      pending_response: { first_name: "John", last_name: "Pending", nino: "KY123456D", dob: "2002-09-01" }
     }.freeze
 
     def self.call(*args)

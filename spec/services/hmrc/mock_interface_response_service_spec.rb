@@ -220,6 +220,18 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     }
   end
 
+  let(:pending_response) do
+    {
+      "submission": guid,
+      "status": "processing",
+      "_links": [
+        {
+          "href": "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f"
+        }
+      ]
+    }
+  end
+
   before do
     allow(SecureRandom).to receive(:uuid).and_return("dummy_uuid")
     service
@@ -238,6 +250,14 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
     it "updates the hmrc_response.response value" do
       expect(hmrc_response.reload.response).to match_json_expression employed_response
+    end
+
+    context "when the response is pending from HMRC" do
+      let(:applicant) { create :applicant, first_name: "John", last_name: "Pending", national_insurance_number: "KY123456D", date_of_birth: "2002-09-01" }
+
+      it "updates the hmrc_response.response value" do
+        expect(hmrc_response.reload.response).to match_json_expression pending_response
+      end
     end
 
     context "and is paid weekly" do
