@@ -51,7 +51,7 @@
 
     <section class="print-no-break">
       <% if @legal_aid_application.full_employment_details? %>
-        <%= render 'shared/check_answers/no_employed_income', read_only: true %>
+        <%= render 'shared/check_answers/full_employment_details', read_only: true %>
       <% end %>
     </section>
 

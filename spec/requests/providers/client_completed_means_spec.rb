@@ -83,7 +83,11 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
           let(:submit_button) { { continue_button: "Continue" } }
 
           context "employment income data was received from HMRC" do
-            before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true) }
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
+              allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(false)
+            end
+
             it "redirects to the employed income page" do
               subject
               expect(response).to redirect_to(providers_legal_aid_application_employment_income_path(legal_aid_application))
@@ -94,7 +98,19 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
             it "redirects to the no employed income page" do
               subject
-              expect(response).to redirect_to(providers_legal_aid_application_no_employment_income_path(legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_full_employment_details_path(legal_aid_application))
+            end
+          end
+
+          context "employment income data for multiple jobs was received from HMRC" do
+            before do
+              allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
+              allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(true)
+            end
+
+            it "redirects to the no employed income page" do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_full_employment_details_path(legal_aid_application))
             end
           end
 

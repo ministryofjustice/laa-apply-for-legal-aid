@@ -225,7 +225,7 @@ en:
           notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           gateway_evidence: Upload supporting evidence
-      no_employed_income:
+      full_employment_details:
         employment: Employment income
         full_employment_details: Your client's employment details
       no_link_cash_transaction_item:

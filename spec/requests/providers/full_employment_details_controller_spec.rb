@@ -1,33 +1,45 @@
 require "rails_helper"
 
-RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
+RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
 
-  before { create :hmrc_response, :use_case_one, legal_aid_application_id: application.id }
-
-  describe "GET /providers/applications/:id/no_employment_income" do
-    subject { get providers_legal_aid_application_no_employment_income_path(application) }
+  describe "GET /providers/applications/:id/full_employment_details" do
+    subject(:request) { get providers_legal_aid_application_full_employment_details_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { request }
+
       it_behaves_like "a provider not authenticated"
     end
 
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
-      it "returns http success" do
-        expect(response).to have_http_status(:ok)
+      context "when the no job data is returned" do
+        before { create :hmrc_response, :use_case_one, legal_aid_application_id: application.id }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context "when the applicant has multiple jobs" do
+        before { create :hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:id/no_employment_income" do
-    subject { patch providers_legal_aid_application_no_employment_income_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/full_employment_details" do
+    subject(:request) { patch providers_legal_aid_application_full_employment_details_path(application), params: params.merge(submit_button) }
+
     let(:full_employment_details) { Faker::Lorem.paragraph }
     let(:params) do
       {
@@ -40,10 +52,10 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
-      context "Form submitted with continue button" do
+      context "when form submitted with continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -58,7 +70,7 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
           expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
         end
 
-        context "invalid params" do
+        context "when params are invalid" do
           let(:full_employment_details) { "" }
 
           it "displays error" do
@@ -67,17 +79,17 @@ RSpec.describe Providers::NoEmploymentIncomesController, type: :request do
         end
       end
 
-      context "Form submitted with Save as draft button" do
+      context "when form submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
           }
         end
 
-        context "after success" do
+        context "when after success" do
           before do
             login_as provider
-            subject
+            request
             application.reload
           end
 

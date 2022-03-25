@@ -4,9 +4,13 @@
 
   <% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? %>
     <% if @legal_aid_application.hmrc_employment_income? %>
-      <%= render 'shared/check_answers/employed_income', read_only: false %>
+      <% if @legal_aid_application.has_multiple_employments? %>
+        <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+      <% else %>
+        <%= render 'shared/check_answers/employed_income', read_only: false %>
+      <% end %>
     <% else %>
-      <%= render 'shared/check_answers/no_employed_income', read_only: false %>
+      <%= render 'shared/check_answers/full_employment_details', read_only: false %>
     <% end %>
   <% end %>
 
