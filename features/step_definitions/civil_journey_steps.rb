@@ -364,7 +364,7 @@ Given("I start the means review journey with employment income for multiple jobs
     :with_applicant,
     :with_proceedings,
     :with_non_passported_state_machine,
-    :provider_assessing_means
+    :provider_assessing_means,
   )
 
   @hmrc_response = create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application: @legal_aid_application) # creates the employment and employment records as well
@@ -375,7 +375,7 @@ Given("I start the means review journey with employment income for multiple jobs
   visit Flow::KeyPoint.path_for(
     journey: :providers,
     key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application
+    legal_aid_application: @legal_aid_application,
   )
 end
 
