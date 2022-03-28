@@ -23,7 +23,7 @@ module Dashboard
       end
 
       def self.pending_submissions
-        CCMS::Submission.where.not(aasm_state: %w[failed completed]).count
+        CCMS::Submission.where.not(aasm_state: %w[failed completed abandoned]).count
       end
     end
   end
