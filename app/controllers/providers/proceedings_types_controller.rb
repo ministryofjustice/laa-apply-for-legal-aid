@@ -15,7 +15,7 @@ module Providers
       if run_transaction
         go_forward
       else
-        legal_aid_application.errors.add(:'proceeding-search-input', t(".search_and_select"))
+        legal_aid_application.errors.add(:"proceeding-search-input", t(".search_and_select"))
         proceeding_types
         excluded_codes
         render :index

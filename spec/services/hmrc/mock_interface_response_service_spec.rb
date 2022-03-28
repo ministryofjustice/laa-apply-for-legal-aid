@@ -35,7 +35,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           use_case: "use_case_one",
         },
         {
-          'individuals/matching/individual': {
+          "individuals/matching/individual": {
             firstName: "Langley",
             lastName: "Yorke",
             nino: "MN212451D",
@@ -43,7 +43,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           },
         },
         {
-          'income/paye/paye': {
+          "income/paye/paye": {
             income: [
               {
                 taxYear: "21-22",
@@ -137,73 +137,73 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           },
         },
         {
-          'income/sa/selfAssessment': {
+          "income/sa/selfAssessment": {
             registrations: [],
             taxReturns: [],
           },
         },
         {
-          'income/sa/pensions_and_state_benefits/selfAssessment': {
+          "income/sa/pensions_and_state_benefits/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/source/selfAssessment': {
+          "income/sa/source/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/employments/selfAssessment': {
+          "income/sa/employments/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/additional_information/selfAssessment': {
+          "income/sa/additional_information/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/partnerships/selfAssessment': {
+          "income/sa/partnerships/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/uk_properties/selfAssessment': {
+          "income/sa/uk_properties/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/foreign/selfAssessment': {
+          "income/sa/foreign/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/further_details/selfAssessment': {
+          "income/sa/further_details/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/interests_and_dividends/selfAssessment': {
+          "income/sa/interests_and_dividends/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/other/selfAssessment': {
+          "income/sa/other/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/summary/selfAssessment': {
+          "income/sa/summary/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'income/sa/trusts/selfAssessment': {
+          "income/sa/trusts/selfAssessment": {
             taxReturns: [],
           },
         },
         {
-          'employments/paye/employments': [
+          "employments/paye/employments": [
             {
               startDate: "2017-07-24",
               endDate: "2099-12-31",
@@ -211,10 +211,10 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           ],
         },
         {
-          'benefits_and_credits/working_tax_credit/applications': [],
+          "benefits_and_credits/working_tax_credit/applications": [],
         },
         {
-          'benefits_and_credits/child_tax_credit/applications': [],
+          "benefits_and_credits/child_tax_credit/applications": [],
         },
       ],
     }
