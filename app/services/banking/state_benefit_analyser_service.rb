@@ -33,7 +33,6 @@ module Banking
     end
 
     def load_state_benefit_types
-      state_benefit_list = CFE::ObtainStateBenefitTypesService.call
       state_benefit_list.each do |sb_hash|
         next if sb_hash["dwp_code"].nil?
 
@@ -102,6 +101,10 @@ module Banking
         @legal_aid_application.transaction_types << tt unless @legal_aid_application.transaction_types.include?(tt)
       end
       @legal_aid_application.save!
+    end
+
+    def state_benefit_list
+      CFE::ObtainStateBenefitTypesService.call
     end
   end
 end
