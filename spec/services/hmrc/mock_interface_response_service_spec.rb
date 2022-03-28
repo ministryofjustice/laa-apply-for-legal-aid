@@ -222,13 +222,84 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
   let(:pending_response) do
     {
-      "submission": guid,
-      "status": "processing",
-      "_links": [
+      submission: guid,
+      status: "processing",
+      _links: [
         {
-          "href": "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f"
+          href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f",
         }
-      ]
+      ],
+    }
+  end
+
+  let(:unknown_response) do
+    {
+      submission: guid,
+      status: "completed",
+      data: [
+        {
+          correlation_id: "794cb770-6024-4eba-ae59-5ae9857f0a2d",
+          use_case: "use_case_one",
+        },
+        {
+          'individuals/matching/individual': {
+            firstName: "Henry",
+            lastName: "Unknown",
+            nino: "WX311689D",
+            dateOfBirth: "1982-06-15",
+          },
+        },
+        {
+          'income/paye/paye': {
+            income: [
+              {
+                taxYear: "20-21",
+                payFrequency: "M1",
+                paymentDate: "2020-12-18",
+                paidHoursWorked: "D",
+                taxablePayToDate: 16_447.71,
+                totalTaxToDate: 1366.6,
+                dednsFromNetPay: "£0",
+                grossEarningsForNics: {
+                  inPayPeriod1: "Text",
+                },
+              },
+              {
+                taxYear: "20-21",
+                payFrequency: "M1",
+                paymentDate: "2020-11-18",
+                paidHoursWorked: "D",
+                taxablePayToDate: 14_156.63,
+                totalTaxToDate: 1122,
+                dednsFromNetPay: 0,
+                grossEarningsForNics: {
+                  inPayPeriod1: 2526,
+                },
+              },
+              {
+                taxYear: "20-21",
+                payFrequency: "M1",
+                paymentDate: "2020-10-28",
+                paidHoursWorked: "D",
+                taxablePayToDate: 11_865.55,
+                totalTaxToDate: 877.4,
+                dednsFromNetPay: "Text",
+                grossEarningsForNics: {
+                  inPayPeriod1: "£2526",
+                },
+              }
+            ],
+          },
+        },
+        {
+          'employments/paye/employments': [
+            {
+              startDate: "2017-07-24",
+              endDate: "Ongoing",
+            }
+          ],
+        }
+      ],
     }
   end
 
@@ -257,6 +328,14 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_response.reload.response).to match_json_expression pending_response
+      end
+    end
+
+    context "when the response from HMRC contains unexpected data" do
+      let(:applicant) { create :applicant, first_name: "Henry", last_name: "Unknown", national_insurance_number: "WX311689D", date_of_birth: "1982-06-15" }
+
+      it "updates the hmrc_response.response value" do
+        expect(hmrc_response.reload.response).to match_json_expression unknown_response
       end
     end
 

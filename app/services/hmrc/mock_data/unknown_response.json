@@ -1,0 +1,68 @@
+{
+  "submission": "@submission_id",
+  "status": "completed",
+  "data": [
+    {
+      "correlation_id": "794cb770-6024-4eba-ae59-5ae9857f0a2d",
+      "use_case": "use_case_one"
+    },
+    {
+      "individuals/matching/individual": {
+        "firstName": "Henry",
+        "lastName": "Unknown",
+        "nino": "WX311689D",
+        "dateOfBirth": "1982-06-15"
+      }
+    },
+    {
+      "income/paye/paye": {
+       "income": [
+          {
+            "taxYear": "20-21",
+            "payFrequency": "M1",
+            "paymentDate": "2020-12-18",
+            "paidHoursWorked": "D",
+            "taxablePayToDate": 16447.71,
+            "totalTaxToDate": 1366.6,
+            "dednsFromNetPay": "£0",
+            "grossEarningsForNics": {
+              "inPayPeriod1": "Text"
+            }
+          },
+          {
+            "taxYear": "20-21",
+            "payFrequency": "M1",
+            "paymentDate": "2020-11-18",
+            "paidHoursWorked": "D",
+            "taxablePayToDate": 14156.63,
+            "totalTaxToDate": 1122,
+            "dednsFromNetPay": 0,
+            "grossEarningsForNics": {
+              "inPayPeriod1": 2526
+            }
+          },
+          {
+            "taxYear": "20-21",
+            "payFrequency": "M1",
+            "paymentDate": "2020-10-28",
+            "paidHoursWorked": "D",
+            "taxablePayToDate": 11865.55,
+            "totalTaxToDate": 877.4,
+            "dednsFromNetPay": "Text",
+            "grossEarningsForNics": {
+              "inPayPeriod1": "£2526"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "employments/paye/employments": [
+        {
+          "startDate": "2017-07-24",
+          "endDate": "Ongoing"
+        }
+      ]
+    }
+  ]
+}
