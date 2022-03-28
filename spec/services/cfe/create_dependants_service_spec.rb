@@ -92,7 +92,7 @@ module CFE
             monthly_income: "8665.97",
             assets_value: "0.0",
             dependant_allowance: "0.0",
-          }
+          },
         ],
         errors: [],
         success: true,
@@ -142,7 +142,7 @@ module CFE
             monthly_income: "0.0",
             in_full_time_education: true,
             assets_value: "0.0",
-          }
+          },
         ],
       }
     end

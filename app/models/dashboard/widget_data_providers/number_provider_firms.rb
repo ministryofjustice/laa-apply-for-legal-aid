@@ -6,7 +6,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:number, name: "Firms")
+            Geckoboard::NumberField.new(:number, name: "Firms"),
           ],
         }
       end
@@ -16,7 +16,7 @@ module Dashboard
         [
           {
             "number" => provider_count,
-          }
+          },
         ]
       end
 

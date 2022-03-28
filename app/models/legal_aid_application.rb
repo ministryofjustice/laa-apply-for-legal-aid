@@ -111,7 +111,7 @@ class LegalAidApplication < ApplicationRecord
     attributes = [
       "application_ref",
       "concat(applicants.first_name, applicants.last_name)",
-      "ccms_submissions.case_ccms_reference"
+      "ccms_submissions.case_ccms_reference",
     ]
     clean_term = term.to_s.downcase.gsub(/[^0-9a-z\\s]/i, "")
     queries = attributes.map do |attribute|

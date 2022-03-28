@@ -28,7 +28,7 @@ module CFE
             loan_amount_outstanding: vehicle.payment_remaining,
             date_of_purchase: vehicle.purchased_on&.strftime("%Y-%m-%d"),
             in_regular_use: vehicle.used_regularly,
-          }
+          },
         ],
       }
     end

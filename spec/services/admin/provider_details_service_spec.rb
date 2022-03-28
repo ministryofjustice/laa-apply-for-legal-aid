@@ -221,12 +221,12 @@ module Admin
           { "id" => 2_047_672, "name" => "CREID@LOCAL-LAW.COM" },
           { "id" => 2_047_676, "name" => "MGUL@LOCAL-LAW.COM" },
           { "id" => 3_043_805, "name" => "SARAH SMITH" },
-          { "id" => 3_178_792, "name" => "DJXANKAZTAL" }
+          { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
         ],
         "feeEarners" => [],
         "providerOffices" => [
           { "id" => "146988", "name" => "LOCAL LAW & CO LTD-8M609S" },
-          { "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" }
+          { "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" },
         ],
       }
     end
@@ -251,12 +251,12 @@ module Admin
           { "id" => 2_047_682, "name" => "SSALAM@LOCAL-LAW.COM" },
           { "id" => 2_047_672, "name" => "CREID@LOCAL-LAW.COM" },
           { "id" => 2_047_676, "name" => "MGUL@LOCAL-LAW.COM" },
-          { "id" => 3_178_792, "name" => "DJXANKAZTAL" }
+          { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
         ],
         "feeEarners" => [],
         "providerOffices" => [
           { "id" => 146_988, "name" => "LOCAL LAW & CO LTD-8M609S" },
-          { "id" => 81_333, "name" => "LOCAL LAW & CO LTD-8B869F" }
+          { "id" => 81_333, "name" => "LOCAL LAW & CO LTD-8B869F" },
         ],
       }
     end
@@ -272,13 +272,13 @@ module Admin
           { "id" => 2_047_672, "name" => "CREID@LOCAL-LAW.COM" },
           { "id" => 2_047_676, "name" => "MGUL@LOCAL-LAW.COM" },
           { "id" => 3_043_805, "name" => "SARAH SMITH" },
-          { "id" => 3_178_792, "name" => "DJXANKAZTAL" }
+          { "id" => 3_178_792, "name" => "DJXANKAZTAL" },
         ],
         "feeEarners" => [],
         "providerOffices" => [
           { "id" => "146988", "name" => "LOCAL LAW & CO LTD-8M609S" },
           { "id" => "81333", "name" => "LOCAL LAW & CO LTD-8B869F" },
-          { "id" => "81334", "name" => "LOCAL LAW & CO LTD-8M609X" }
+          { "id" => "81334", "name" => "LOCAL LAW & CO LTD-8M609X" },
         ],
       }
     end

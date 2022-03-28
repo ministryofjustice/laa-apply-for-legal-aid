@@ -6,7 +6,7 @@ module Dashboard
       def self.dataset_definition
         {
           fields: [
-            Geckoboard::NumberField.new(:declined_open_banking, name: "Percentage that declined open banking consent")
+            Geckoboard::NumberField.new(:declined_open_banking, name: "Percentage that declined open banking consent"),
           ],
         }
       end
@@ -16,7 +16,7 @@ module Dashboard
         [
           {
             "declined_open_banking" => percentage_declining_consent,
-          }
+          },
         ]
       end
 

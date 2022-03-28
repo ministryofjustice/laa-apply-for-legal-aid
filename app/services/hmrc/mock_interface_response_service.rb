@@ -52,7 +52,7 @@ module HMRC
           },
           {
             error: "submitted client details could not be found in HMRC service",
-          }
+          },
         ],
       }
     end

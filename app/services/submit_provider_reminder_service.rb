@@ -23,7 +23,7 @@ private
   def mailer_args
     [
       application.id,
-      application_url
+      application_url,
     ]
   end
 

@@ -18,7 +18,7 @@ module Citizens
         legal_aid_application.application_ref,
         legal_aid_application.applicant.email_address,
         application_url,
-        legal_aid_application.applicant.full_name
+        legal_aid_application.applicant.full_name,
       ]
     end
 

@@ -43,7 +43,7 @@ module CFE
             income_type: "student_loan",
             frequency: "annual",
             amount: 3628.07,
-          }
+          },
         ],
       }.to_json
     end

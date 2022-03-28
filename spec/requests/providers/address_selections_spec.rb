@@ -74,7 +74,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
       [
         { lookup_id: "11", address_line_one: "1", address_line_two: "FAKE ROAD", city: "TEST CITY", postcode: "AA1 1AA" },
         { lookup_id: "12", address_line_one: "2", address_line_two: "FAKE ROAD", city: "TEST CITY", postcode: "AA1 1AA" },
-        { lookup_id: "13", address_line_one: "3", address_line_two: "FAKE ROAD", city: "TEST  CITY", postcode: "AA1 1AA" }
+        { lookup_id: "13", address_line_one: "3", address_line_two: "FAKE ROAD", city: "TEST  CITY", postcode: "AA1 1AA" },
       ]
     end
     let(:selected_address) { address_list.sample }

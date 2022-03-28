@@ -21,7 +21,7 @@ private
     [
       application.application_ref,
       applicant.email_address,
-      applicant.full_name
+      applicant.full_name,
     ]
   end
 

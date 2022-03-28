@@ -104,7 +104,7 @@ module CFE
                 date: benefits1.transaction_date.strftime("%Y-%m-%d"),
                 amount: benefits1.amount.abs.to_f,
                 client_id: benefits1.id,
-              }
+              },
             ],
           },
           {
@@ -124,7 +124,7 @@ module CFE
                 date: friends_or_family1.transaction_date.strftime("%Y-%m-%d"),
                 amount: friends_or_family1.amount.abs.to_f,
                 client_id: friends_or_family1.id,
-              }
+              },
             ],
           },
           {
@@ -144,9 +144,9 @@ module CFE
                 date: maintenance_in1.transaction_date.strftime("%Y-%m-%d"),
                 amount: maintenance_in1.amount.abs.to_f,
                 client_id: maintenance_in1.id,
-              }
+              },
             ],
-          }
+          },
         ],
         outgoings: [
           {
@@ -166,7 +166,7 @@ module CFE
                 date: child_care1.transaction_date.strftime("%Y-%m-%d"),
                 amount: child_care1.amount.abs.to_f,
                 client_id: child_care1.id,
-              }
+              },
             ],
           },
           {
@@ -186,7 +186,7 @@ module CFE
                 date: legal_aid1.transaction_date.strftime("%Y-%m-%d"),
                 amount: legal_aid1.amount.abs.to_f,
                 client_id: legal_aid1.id,
-              }
+              },
             ],
           },
           {
@@ -206,9 +206,9 @@ module CFE
                 date: maintenance_out1.transaction_date.strftime("%Y-%m-%d"),
                 amount: maintenance_out1.amount.abs.to_f,
                 client_id: maintenance_out1.id,
-              }
+              },
             ],
-          }
+          },
         ],
       }
     end

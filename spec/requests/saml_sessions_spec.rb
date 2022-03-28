@@ -230,13 +230,13 @@ RSpec.describe "SamlSessionsController", type: :request do
         {
           id: 2_017_809,
           name: username,
-        }
+        },
       ],
       providerOffices: [
         {
           id: 81_693,
           name: "Test1 and Co",
-        }
+        },
       ],
     }
   end

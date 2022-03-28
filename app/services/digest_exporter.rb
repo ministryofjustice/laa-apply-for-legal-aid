@@ -69,7 +69,7 @@ private
 
   def extraction_date
     [
-      "Extracted at: #{Time.zone.now}"
+      "Extracted at: #{Time.zone.now}",
     ]
   end
 

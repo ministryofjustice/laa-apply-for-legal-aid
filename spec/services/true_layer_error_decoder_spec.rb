@@ -71,7 +71,7 @@ RSpec.describe TrueLayerErrorDecoder do
     [
       "bank_data_import",
       "import_account_holders",
-      true_layer_error_hash.to_json
+      true_layer_error_hash.to_json,
     ]
   end
 

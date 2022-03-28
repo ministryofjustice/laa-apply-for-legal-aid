@@ -23,7 +23,7 @@ module CFEResults
                 {
                   ccms_code: "DA002",
                   result: "eligible",
-                }
+                },
               ],
             },
             gross_income: {
@@ -38,7 +38,7 @@ module CFEResults
                   ccms_code: "DA002",
                   upper_threshold: 999_999_999_999.0,
                   result: "pending",
-                }
+                },
               ],
             },
             disposable_income: {
@@ -70,7 +70,7 @@ module CFEResults
                   upper_threshold: 999_999_999_999.0,
                   lower_threshold: 315.0,
                   result: "pending",
-                }
+                },
               ],
             },
             capital: {
@@ -95,7 +95,7 @@ module CFEResults
                   lower_threshold: 3000.0,
                   upper_threshold: 999_999_999_999.0,
                   result: "eligible",
-                }
+                },
               ],
             },
           },
@@ -195,7 +195,7 @@ module CFEResults
                   {
                     description: "Online savings accounts",
                     value: 0.0,
-                  }
+                  },
                 ],
                 non_liquid: [{
                   description: "Interest in a trust",
@@ -209,7 +209,7 @@ module CFEResults
                     in_regular_use: false,
                     included_in_assessment: true,
                     assessed_value: 120.0,
-                  }
+                  },
                 ],
                 properties: {
                   main_home: {
@@ -238,7 +238,7 @@ module CFEResults
                       net_equity: 0.0,
                       main_home_equity_disregard: 0.0,
                       assessed_equity: 0.0,
-                    }
+                    },
                   ],
                 },
               },
@@ -437,7 +437,7 @@ module CFEResults
           {
             ccms_code: "SE014",
             result: "partially_eligible",
-          }
+          },
         ]
         result
       end
@@ -488,7 +488,7 @@ module CFEResults
                 tax: -104.10,
                 national_insurance: -18.66,
                 net_employment_income: 8898.84,
-              }
+              },
             ],
           },
           {
@@ -517,9 +517,9 @@ module CFEResults
                 tax: -104.10,
                 national_insurance: -18.66,
                 net_employment_income: 8898.84,
-              }
+              },
             ],
-          }
+          },
         ]
         result[:result_summary][:disposable_income][:employment_income] = employment_income
         result[:assessment][:gross_income][:employment_income] = jobs

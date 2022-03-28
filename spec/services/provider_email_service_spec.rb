@@ -16,7 +16,7 @@ RSpec.describe ProviderEmailService do
         application.id,
         provider.name,
         applicant.full_name,
-        provider.email
+        provider.email,
       ]
     end
 

@@ -116,7 +116,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         let(:expected_array) do
           [
             I18n.t("activemodel.errors.models.dependant.attributes.assets_value.blank"),
-            I18n.t("activemodel.errors.models.dependant.attributes.assets_value.not_a_number")
+            I18n.t("activemodel.errors.models.dependant.attributes.assets_value.not_a_number"),
           ]
         end
 
@@ -148,7 +148,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       let(:assets_value) { "" }
       let(:expected_array) do
         [
-          I18n.t("activemodel.errors.models.dependant.attributes.has_assets_more_than_threshold.blank_message")
+          I18n.t("activemodel.errors.models.dependant.attributes.has_assets_more_than_threshold.blank_message"),
         ]
       end
 

@@ -12,7 +12,7 @@ module GovUkFormHelper
   def yes_no_options(radio_hints = {})
     [
       RadioOption.new(true, I18n.t("generic.yes"), radio_hints[:yes]),
-      RadioOption.new(false, I18n.t("generic.no"), radio_hints[:no])
+      RadioOption.new(false, I18n.t("generic.no"), radio_hints[:no]),
     ]
   end
 

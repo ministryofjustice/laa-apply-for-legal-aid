@@ -6,7 +6,7 @@ module CFE
       CreateCapitalsService,
       CreateVehiclesService,
       CreatePropertiesService,
-      CreateExplicitRemarksService
+      CreateExplicitRemarksService,
     ].freeze
 
     NON_PASSPORTED_SERVICES = [
@@ -15,7 +15,7 @@ module CFE
       CreateStateBenefitsService,
       CreateOtherIncomeService,
       CreateIrregularIncomesService,
-      CreateEmploymentsService
+      CreateEmploymentsService,
     ].freeze
 
     def self.call(legal_aid_application_id)

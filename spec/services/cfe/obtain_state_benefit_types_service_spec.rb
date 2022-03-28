@@ -53,7 +53,7 @@ module CFE
             "label" => "earnings_top_up",
             "name" => "Earnings Top Up",
             "dwp_code" => nil,
-          }
+          },
         ].to_json
       end
     end

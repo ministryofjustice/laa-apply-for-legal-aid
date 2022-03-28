@@ -118,7 +118,7 @@ module LegalFramework
               chances_of_success: [],
               proceeding_children: [:application_children],
             },
-          }
+          },
         ],
       }
     end

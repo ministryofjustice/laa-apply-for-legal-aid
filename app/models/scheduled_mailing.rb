@@ -12,7 +12,7 @@ class ScheduledMailing < ApplicationRecord
     "technical-failure", # GOVUK Notify has reported that the mail cannot  be sent due to a technical failure
     "permanent-failure", # GOVUK Notify has reported a permanent failure (most likely, non-existent email address)
     "temporary-failure", # GOVUK Notify has reported a temporary failure
-    "cancelled" # Scheduled mail cancelled because it is no longer needed to be sent.
+    "cancelled", # Scheduled mail cancelled because it is no longer needed to be sent.
   ].freeze
 
   MONITORED_STATUSES = %w[processing created sending].freeze

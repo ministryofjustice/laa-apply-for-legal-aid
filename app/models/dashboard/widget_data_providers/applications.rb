@@ -11,7 +11,7 @@ module Dashboard
             Geckoboard::NumberField.new(:submitted_nonpassported_apps, name: "Submitted nonpassported applications"),
             Geckoboard::NumberField.new(:total_submitted_apps, name: "Total submitted applications"),
             Geckoboard::NumberField.new(:failed_apps, name: "Failed applications"),
-            Geckoboard::NumberField.new(:delegated_func_apps, name: "Delegated function applications")
+            Geckoboard::NumberField.new(:delegated_func_apps, name: "Delegated function applications"),
           ],
           unique_by: [:date],
         }

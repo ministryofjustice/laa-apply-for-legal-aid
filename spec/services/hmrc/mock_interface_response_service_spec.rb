@@ -20,7 +20,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           },
           {
             error: "submitted client details could not be found in HMRC service",
-          }
+          },
         ],
     }
   end
@@ -132,7 +132,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                   inPayPeriod1: 114.36,
                   ytd1: 781.8,
                 },
-              }
+              },
             ],
           },
         },
@@ -207,7 +207,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
             {
               startDate: "2017-07-24",
               endDate: "2099-12-31",
-            }
+            },
           ],
         },
         {
@@ -215,7 +215,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
         },
         {
           'benefits_and_credits/child_tax_credit/applications': [],
-        }
+        },
       ],
     }
   end
