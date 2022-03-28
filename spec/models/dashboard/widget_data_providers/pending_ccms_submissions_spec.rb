@@ -17,7 +17,7 @@ module Dashboard
       end
 
       describe ".data" do
-        let(:aasm_states) { CCMS::Submission.aasm.states.map(&:name) - %i[failed completed] }
+        let(:aasm_states) { CCMS::Submission.aasm.states.map(&:name) - %i[failed completed abandoned] }
         let(:expected_data) { [{ "number" => 4 }] }
 
         it "sends expected data" do
@@ -26,6 +26,7 @@ module Dashboard
           end
           create :ccms_submission, aasm_state: "failed"
           create :ccms_submission, aasm_state: "completed"
+          create :ccms_submission, aasm_state: "abandoned"
           expect(described_class.data).to eq expected_data
         end
       end
