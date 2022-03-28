@@ -1941,8 +1941,8 @@ Style/Lambda:
 # Cop supports --auto-correct.
 # Configuration parameters: .
 # SupportedStyles: same_as_string_literals, single_quotes, double_quotes
-Style/QuotedSymbols:
-  EnforcedStyle: single_quotes
+#Style/QuotedSymbols:
+#  EnforcedStyle: single_quotes
 
 # Offense count: 27
 # Cop supports --auto-correct.
