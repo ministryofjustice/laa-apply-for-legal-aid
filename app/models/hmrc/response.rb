@@ -2,7 +2,7 @@ module HMRC
   class Response < ApplicationRecord
     self.table_name = "hmrc_responses"
 
-    after_create :persist_parsed_response
+    after_update :persist_employment_records
 
     USE_CASES = %w[one two].freeze
     belongs_to :legal_aid_application, inverse_of: :hmrc_responses
@@ -26,7 +26,11 @@ module HMRC
 
   private
 
-    def persist_parsed_response
+    def persist_employment_records
+      return if response.blank?
+
+      return unless use_case == "one" && response["status"] == "completed"
+
       HMRC::ParsedResponse::Persistor.call(legal_aid_application)
     end
   end

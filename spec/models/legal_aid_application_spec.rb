@@ -1286,7 +1286,9 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when there are Employment records" do
-      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa } # employment records created from this
+      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
+
+      before { hmrc_response.__send__(:persist_employment_records) }
 
       it "returns true" do
         expect(laa.hmrc_employment_income?).to eq true

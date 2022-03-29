@@ -63,7 +63,8 @@ module HMRC
       end
 
       def employments_array
-        @employments_array ||= data_array.detect { |hash| hash.key?("employments/paye/employments") }["employments/paye/employments"]
+        employments_hash = data_array.find { |el| el.key?("employments/paye/employments") }
+        @employments_array ||= employments_hash&.fetch("employments/paye/employments")
       end
 
       def income_array

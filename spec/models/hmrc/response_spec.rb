@@ -80,5 +80,45 @@ module HMRC
         end
       end
     end
+
+    describe "persisting employment records after update" do
+      context "when it is not use case one" do
+        let(:hmrc_response) { create :hmrc_response, :use_case_two }
+
+        it "does not call HMRC::ParsedResponse::Persistor" do
+          expect(HMRC::ParsedResponse::Persistor).not_to receive(:call)
+          hmrc_response.update!(url: "my_url")
+        end
+
+        context "when it is use case one" do
+          context "when there is no response" do
+            let(:hmrc_response) { create :hmrc_response, :use_case_one, :nil_response }
+
+            it "does not call HMRC::ParsedResponse::Persistor" do
+              expect(HMRC::ParsedResponse::Persistor).not_to receive(:call)
+              hmrc_response.update!(url: "my_url")
+            end
+          end
+
+          context "when status is not completed" do
+            let(:hmrc_response) { create :hmrc_response, :use_case_one, :processing }
+
+            it "does not call HMRC::ParsedResponse::Persistor" do
+              expect(HMRC::ParsedResponse::Persistor).not_to receive(:call)
+              hmrc_response.update!(url: "my_url")
+            end
+          end
+
+          context "when status is completed" do
+            let(:hmrc_response) { create :hmrc_response, :use_case_one }
+
+            it "does not call HMRC::ParsedResponse::Persistor" do
+              expect(HMRC::ParsedResponse::Persistor).to receive(:call)
+              hmrc_response.update!(url: "my_url")
+            end
+          end
+        end
+      end
+    end
   end
 end
