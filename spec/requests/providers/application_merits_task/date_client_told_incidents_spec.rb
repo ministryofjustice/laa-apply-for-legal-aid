@@ -56,12 +56,12 @@ module Providers
         let(:params) do
           {
             application_merits_task_incident: {
-              'told_on(3i)': told_on_3i,
-              'told_on(2i)': told_on.month,
-              'told_on(1i)': told_on.year,
-              'occurred_on(3i)': occurred_on.day,
-              'occurred_on(2i)': occurred_on.month,
-              'occurred_on(1i)': occurred_on.year,
+              "told_on(3i)": told_on_3i,
+              "told_on(2i)": told_on.month,
+              "told_on(1i)": told_on.year,
+              "occurred_on(3i)": occurred_on.day,
+              "occurred_on(2i)": occurred_on.month,
+              "occurred_on(1i)": occurred_on.year,
             },
           }
         end

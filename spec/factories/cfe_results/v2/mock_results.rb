@@ -171,7 +171,7 @@ module CFEResults
                 properties: {
                   main_home: {
                     value: "5985.82",
-                    'outstanding_ mortgage': "7201.44",
+                    "outstanding_ mortgage": "7201.44",
                     percentage_owned: "1.87",
                     main_home: true,
                     shared_with_housing_assoc: false,
