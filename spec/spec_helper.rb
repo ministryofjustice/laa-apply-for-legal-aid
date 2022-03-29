@@ -91,6 +91,18 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # These two settings work together to allow you to limit a spec run
+  # to individual examples or groups you care about by tagging them with
+  # `:focus` metadata. When nothing is tagged with `:focus`, all examples
+  # get run.
+  # NOTE: ENV['CI'] is a variable that is populated on circleci, at least, which
+  # thereby prevents focused running in the CI pipeline.
+  #
+  # NOTE: you can also use `fit`, `fdescribe`, `fcontext` to focus specs
+  #
+  config.filter_run_including focus: true unless ENV["CI"]
+  config.run_all_when_everything_filtered = true
+
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be
