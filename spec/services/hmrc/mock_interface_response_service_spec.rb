@@ -227,7 +227,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
       _links: [
         {
           href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f",
-        }
+        },
       ],
     }
   end
@@ -242,7 +242,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           use_case: "use_case_one",
         },
         {
-          'individuals/matching/individual': {
+          "individuals/matching/individual": {
             firstName: "Henry",
             lastName: "Unknown",
             nino: "WX311689D",
@@ -250,7 +250,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
           },
         },
         {
-          'income/paye/paye': {
+          "income/paye/paye": {
             income: [
               {
                 taxYear: "20-21",
@@ -287,18 +287,18 @@ RSpec.describe HMRC::MockInterfaceResponseService do
                 grossEarningsForNics: {
                   inPayPeriod1: "£2526",
                 },
-              }
+              },
             ],
           },
         },
         {
-          'employments/paye/employments': [
+          "employments/paye/employments": [
             {
               startDate: "2017-07-24",
               endDate: "Ongoing",
-            }
+            },
           ],
-        }
+        },
       ],
     }
   end
