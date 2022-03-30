@@ -76,6 +76,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
         context "one above the halfway point" do
           before { worker.retry_count = 6 }
+
           let(:expected_error) do
             <<~MESSAGE
               CCMS submission id: #{submission.id} is failing
@@ -122,6 +123,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
         context "at MAX_RETRIES" do
           before { worker.retry_count = 10 }
+
           let(:expected_error) do
             <<~MESSAGE
               CCMS submission id:  failed

@@ -300,6 +300,7 @@ module CFE
           create :proceeding, :se013
           create :proceeding, :se014
         end
+
         let(:cfe_result) { with_mixed_proceeding_type_results }
         let(:expected_result_before_transformation) do
           [

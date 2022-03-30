@@ -19,6 +19,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
       describe "application_status" do
         context "pre_dwp_check" do
           before { allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(true) }
+
           it "has a status of pre dwp check" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "pre-dwp-check"
           end
@@ -37,6 +38,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
           end
+
           it "has a status of passported" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "passported"
           end
@@ -47,6 +49,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
           end
+
           it "has a status of passported" do
             expect(mail.govuk_notify_personalisation[:application_status]).to eq "non-passported"
           end

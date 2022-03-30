@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe AlertManager do
   before { Setting.setting.update(alert_via_sentry: sentry_setting) }
+
   let(:sample_sending_environment) { %i[production uat].sample }
 
   context "when setting is set to alert via Sentry" do
@@ -12,6 +13,7 @@ RSpec.describe AlertManager do
 
       context "production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
+
         it "delegates to Sentry" do
           expect(Sentry).to receive(:capture_exception).with(exception)
           described_class.capture_exception(exception)
@@ -50,6 +52,7 @@ RSpec.describe AlertManager do
 
       context "production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
+
         it "delegates to Sentry" do
           expect(Sentry).to receive(:capture_message).with(message)
           described_class.capture_message(message)
@@ -83,6 +86,7 @@ RSpec.describe AlertManager do
 
       context "production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
+
         it "delegates to SlackAlerter" do
           expect(SlackAlerter).to receive(:capture_exception).with(exception)
           described_class.capture_exception(exception)
@@ -113,6 +117,7 @@ RSpec.describe AlertManager do
 
       context "production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
+
         it "delegates to SlackAlerter" do
           expect(SlackAlerter).to receive(:capture_message).with(message)
           described_class.capture_message(message)

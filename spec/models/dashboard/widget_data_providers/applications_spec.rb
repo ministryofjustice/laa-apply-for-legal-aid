@@ -29,6 +29,7 @@ module Dashboard
 
       describe ".data" do
         before { create_apps }
+
         let(:date) { Date.new(2019, 12, 12) }
 
         it "returns the expected data" do

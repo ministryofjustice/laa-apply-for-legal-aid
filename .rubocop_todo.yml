@@ -497,37 +497,6 @@ RSpec/EmptyLineAfterExampleGroup:
     - 'spec/services/hmrc/parsed_response/persistor_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
 
-# Offense count: 299sus
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/factories/legal_aid_applications.rb'
-    - 'spec/forms/applicants/basic_details_form_spec.rb'
-    - 'spec/forms/providers/proceeding_merits_task/attempts_to_settle_form_spec.rb'
-    - 'spec/helpers/time_helper_spec.rb'
-    - 'spec/jobs/dashboard/applicant_email_job_spec.rb'
-    - 'spec/jobs/dashboard/feedback_item_job_spec.rb'
-    - 'spec/jobs/dashboard/provider_data_job_spec.rb'
-    - 'spec/jobs/dashboard/updater_job_spec.rb'
-    - 'spec/lib/alert_manager_spec.rb'
-    - 'spec/lib/omni_auth/strategies/true_layer_spec.rb'
-    - 'spec/mailers/feedback_mailer_spec.rb'
-    - 'spec/mailers/submit_application_reminder_mailer_spec.rb'
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/models/bank_account_spec.rb'
-    - 'spec/models/cfe/remarks_spec.rb'
-    - 'spec/models/cfe/v4/result_spec.rb'
-    - 'spec/models/dashboard/widget_data_providers/applications_spec.rb'
-    - 'spec/models/document_category_spec.rb'
-    - 'spec/models/hmrc/response_spec.rb'
-    - 'spec/models/legal_aid_application_spec.rb'
-    - 'spec/models/legal_framework/serializable_merits_task_list_spec.rb'
-    - 'spec/models/transaction_type_spec.rb'
-    - 'spec/presenters/bank_transaction_presenter_spec.rb'
-    - 'spec/workers/ccms/submission_process_worker_spec.rb'
-    - 'spec/workers/hmrc/result_worker_spec.rb'
-    - 'spec/workers/hmrc/submission_worker_spec.rb'
-
 # Offense count: 91
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterSubject:

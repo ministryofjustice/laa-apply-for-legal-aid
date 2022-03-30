@@ -7,6 +7,7 @@ module Dashboard
     describe "#perform" do
       context "job is not in the suspended list" do
         before { allow(HostEnv).to receive(:environment).and_return(:production) }
+
         it "instantiates widget with the specified parameter" do
           expect(Dashboard::Widget).to receive(:new).with("MyWidget").and_return(double("WidgetDataProvider", run: nil))
           described_class.perform_now("MyWidget")

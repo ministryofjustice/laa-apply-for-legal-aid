@@ -7,6 +7,7 @@ RSpec.describe LegalAidApplication, type: :model do
     subject { legal_aid_application.capture_policy_disregards? }
     context "calculation date nil" do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
+
       context "todays date before start of policy disregards" do
         it "returns false" do
           travel_to Time.zone.local(2021, 1, 7, 13, 45)
@@ -26,6 +27,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "calculation date set" do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(calculation_date) }
+
       context "todays date before start of policy disregards" do
         let(:calculation_date) { Date.new(2021, 1, 7) }
 
@@ -59,6 +61,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context "policy_disregards record exists" do
       context "none selected is true" do
         before { create :policy_disregards, legal_aid_application: legal_aid_application }
+
         it "returns false" do
           expect(legal_aid_application.policy_disregards?).to be false
         end
@@ -66,6 +69,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context "none selected is false" do
         before { create :policy_disregards, legal_aid_application: legal_aid_application, national_emergencies_trust: true }
+
         it "returns true" do
           expect(legal_aid_application.policy_disregards?).to be true
         end
@@ -193,6 +197,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context "but later, applicant first name updated" do
         before { applicant.update(first_name: Faker::Name.first_name) }
+
         let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: legal_aid_application } }
 
         it "returns true" do
@@ -359,6 +364,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#own_home?" do
     context "legal_aid_application.own_home is nil" do
       before { legal_aid_application.update!(own_home: nil) }
+
       it "returns false" do
         expect(legal_aid_application.own_home?).to eq(false)
       end
@@ -400,6 +406,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "has some assets" do
       before { legal_aid_application.update!(other_assets_declaration: create(:other_assets_declaration, :with_all_values)) }
+
       it "returns true" do
         expect(legal_aid_application.own_capital?).to eq(true)
       end
@@ -407,6 +414,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "has some savings" do
       before { legal_aid_application.update!(savings_amount: create(:savings_amount, :with_values)) }
+
       it "returns true" do
         expect(legal_aid_application.own_capital?).to eq(true)
       end
@@ -522,6 +530,7 @@ RSpec.describe LegalAidApplication, type: :model do
         legal_aid_application.applicant_details_checked!
         legal_aid_application.reload
       end
+
       it "resets property values" do
         expect(legal_aid_application.property_value).to be_blank
       end
@@ -727,6 +736,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context "benefit_check_result exists?" do
       context "passported" do
         before { create :benefit_check_result, :positive, legal_aid_application: legal_aid_application }
+
         context "No DWP Override" do
           it "returns true" do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
@@ -739,6 +749,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
         context "DWP override" do
           before { create :dwp_override, legal_aid_application: legal_aid_application }
+
           it "returns true" do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
           end
@@ -747,6 +758,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context "not passported" do
         before { create :benefit_check_result, legal_aid_application: legal_aid_application }
+
         context "No DWP override" do
           it "returns false" do
             expect(legal_aid_application.applicant_receives_benefit?).to be false
@@ -786,6 +798,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context "undetermined" do
         before { create :benefit_check_result, :undetermined, legal_aid_application: legal_aid_application }
+
         context "No DWP Override" do
           it "returns false" do
             expect(legal_aid_application.applicant_receives_benefit?).to be false
@@ -794,6 +807,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
         context "DWP Override" do
           before { create :dwp_override, :with_evidence, legal_aid_application: legal_aid_application }
+
           it "returns true" do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
           end
@@ -971,6 +985,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#parent_transaction_types" do
     before { Populators::TransactionTypePopulator.call }
+
     let(:benefits) { TransactionType.find_by(name: "benefits") }
     let(:excluded_benefits) { TransactionType.find_by(name: "excluded_benefits") }
     let(:pension) { TransactionType.find_by(name: "pension") }

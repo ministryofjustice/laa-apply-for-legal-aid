@@ -21,6 +21,7 @@ module Dashboard
       describe "#perform" do
         context "job is not in the suspended list" do
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
+
           it "calls the runs the geckoboard feedback updater" do
             expect_any_instance_of(Dashboard::SingleObject::Feedback).to receive(:run)
             subject
@@ -29,6 +30,7 @@ module Dashboard
 
         context "job is not in the suspended list" do
           before { allow(HostEnv).to receive(:environment).and_return(:uat) }
+
           it "calls the runs the geckoboard feedback updater" do
             expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
             subject
