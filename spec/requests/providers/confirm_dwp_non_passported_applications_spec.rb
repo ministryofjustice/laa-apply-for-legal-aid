@@ -9,6 +9,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -51,8 +52,10 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
       context "the employed journey feature flag is enabled" do
         before { Setting.setting.update!(enable_employed_journey: true) }
+
         context "the user has employed permissions" do
           before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+
           it "displays the HMRC inset text" do
             subject
             expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text"))
@@ -123,8 +126,10 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
         context "the employed journey feature flag is enabled" do
           before { Setting.setting.update!(enable_employed_journey: true) }
+
           context "the user has employed permissions" do
             before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+
             it "calls the HMRC::CreateResponsesService" do
               subject
               expect(HMRC::CreateResponsesService).to have_received(:call).once
@@ -174,8 +179,10 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
         context "the employed journey feature flag is enabled" do
           before { Setting.setting.update!(enable_employed_journey: true) }
+
           context "the user has employed permissions" do
             before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+
             it "does not call the HMRC::CreateResponsesService" do
               subject
               expect(HMRC::CreateResponsesService).to_not have_received(:call)
@@ -232,8 +239,10 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
       context "the employed journey feature flag is enabled" do
         before { Setting.setting.update!(enable_employed_journey: true) }
+
         context "the user has employed permissions" do
           before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+
           it "does not call the HMRC::CreateResponsesService" do
             subject
             expect(HMRC::CreateResponsesService).to_not have_received(:call)

@@ -10,6 +10,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -95,6 +96,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

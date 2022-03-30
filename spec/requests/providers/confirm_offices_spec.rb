@@ -11,6 +11,7 @@ RSpec.describe "provider confirm office", type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

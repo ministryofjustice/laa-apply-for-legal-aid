@@ -15,6 +15,7 @@ RSpec.describe "about financial assessments requests", type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -73,6 +74,7 @@ RSpec.describe "about financial assessments requests", type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

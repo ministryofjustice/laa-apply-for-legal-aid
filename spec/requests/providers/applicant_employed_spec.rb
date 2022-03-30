@@ -114,6 +114,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
   context "the employed journey feature flag is enabled" do
     before { Setting.setting.update!(enable_employed_journey: true) }
+
     subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
 
     let(:params) { { applicant: { employed: "true" } } }
@@ -123,6 +124,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
 
     context "applicant is employed and  the provider has employed permissions" do
       before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+
       it "redirects to the proceedings search page" do
         subject
         expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))

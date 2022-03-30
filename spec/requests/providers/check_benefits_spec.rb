@@ -56,6 +56,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       context "and the applicant has since been modified" do
         before { applicant.update(first_name: Faker::Name.first_name) }
+
         let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: application } }
 
         it "updates check_benefit_result" do
@@ -92,6 +93,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

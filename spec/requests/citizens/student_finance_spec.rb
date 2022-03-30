@@ -30,6 +30,7 @@ RSpec.describe "student_finance", type: :request do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params: params
       end
+
       let(:yes_or_no) { "true" }
 
       it "displays the annual amounts page" do
@@ -46,6 +47,7 @@ RSpec.describe "student_finance", type: :request do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params: params
       end
+
       let(:yes_or_no) { "false" }
 
       it "displays the identify types of outgoing page" do
@@ -62,6 +64,7 @@ RSpec.describe "student_finance", type: :request do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params: params
       end
+
       let(:yes_or_no) { "" }
 
       it "displays an error" do

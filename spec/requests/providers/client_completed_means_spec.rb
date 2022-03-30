@@ -10,6 +10,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -77,6 +78,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
       context "the employed journey feature flag is enabled" do
         before { Setting.setting.update!(enable_employed_journey: true) }
+
         context "the user has employed permissions" do
           before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
@@ -96,6 +98,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
           context "no employment income data was received from HMRC" do
             before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
+
             it "redirects to the no employed income page" do
               subject
               expect(response).to redirect_to(providers_legal_aid_application_full_employment_details_path(legal_aid_application))

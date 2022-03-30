@@ -161,6 +161,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       before do
         allow(Rails.configuration.x.admin_portal).to receive(:allow_reset).and_return(false)
       end
+
       it "raises an error" do
         expect { subject }.to raise_error("Legal Aid Application Destroy All action disabled")
       end
@@ -222,6 +223,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       before do
         allow(Rails.configuration.x.admin_portal).to receive(:allow_reset).and_return(false)
       end
+
       it "raises an error" do
         expect { subject }.to raise_error("Legal Aid Application Destroy action disabled")
       end
