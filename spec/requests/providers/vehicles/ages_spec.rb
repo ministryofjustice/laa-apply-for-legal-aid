@@ -40,6 +40,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
   end
@@ -119,6 +120,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
   end

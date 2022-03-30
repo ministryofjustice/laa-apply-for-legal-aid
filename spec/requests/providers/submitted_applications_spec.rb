@@ -93,6 +93,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
     shared_examples "employment data is not present" do
       before { subject }
+
       it "does not display the employment income table" do
         expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.benefits_in_kind")
         expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.monthly_income_before_tax")

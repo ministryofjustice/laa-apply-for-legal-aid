@@ -67,6 +67,7 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
 
       context "virus scanner is down" do
         before { allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false) }
+
         let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }
 
         it "does not save the object and raises a 500 error with text" do

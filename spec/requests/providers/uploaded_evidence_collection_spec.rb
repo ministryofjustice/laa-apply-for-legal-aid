@@ -12,6 +12,7 @@ module Providers
 
       context "when the provider is not authenticated" do
         before { subject }
+
         it_behaves_like "a provider not authenticated"
       end
 
@@ -37,6 +38,7 @@ module Providers
 
       context "when the provider is not authenticated" do
         before { subject }
+
         it_behaves_like "a provider not authenticated"
       end
 
@@ -404,6 +406,7 @@ module Providers
                 let(:missing_categories) { ["benefit_evidence"] }
 
                 before { attachment1.update!(attachment_type: "gateway_evidence") }
+
                 before { attachment2.update!(attachment_type: "employment_evidence") }
 
                 it "raises an error" do
@@ -417,6 +420,7 @@ module Providers
                 let(:missing_categories) { ["employment_evidence"] }
 
                 before { attachment1.update!(attachment_type: "gateway_evidence") }
+
                 before { attachment2.update!(attachment_type: "benefit_evidence") }
 
                 it "raises an error" do
