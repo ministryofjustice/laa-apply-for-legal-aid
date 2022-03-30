@@ -101,6 +101,7 @@ module CFE
                 allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
                 submission.fail!
               end
+
               it "records error in submission" do
                 submission_manager.call
                 expect(submission.error_message).to eq(message)

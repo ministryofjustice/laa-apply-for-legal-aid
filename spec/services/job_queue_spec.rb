@@ -10,6 +10,7 @@ RSpec.describe JobQueue do
 
   describe ".enqueued?" do
     before { allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue) }
+
     subject { described_class.enqueued?(EmailMonitorJob) }
 
     context "empty queue" do

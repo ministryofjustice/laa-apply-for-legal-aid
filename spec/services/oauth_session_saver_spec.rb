@@ -31,6 +31,7 @@ RSpec.describe OauthSessionSaver do
   describe ".get" do
     context "a record with the key exists" do
       before { redis.set(key, session.to_json) }
+
       it "returns the reconstituted session hash" do
         expect(described_class.get(key)).to eq session
       end
@@ -45,6 +46,7 @@ RSpec.describe OauthSessionSaver do
 
   describe ".destroy!" do
     before { redis.set(key, session.to_json) }
+
     it "deletes the record from the redis database" do
       described_class.destroy!(key)
       expect(redis.get(key)).to be_nil

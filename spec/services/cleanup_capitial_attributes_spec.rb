@@ -9,6 +9,7 @@ RSpec.describe CleanupCapitalAttributes do
       cleanup_capital_attributes.call
       legal_aid_application.reload
     end
+
     context "on own home set to no" do
       let(:test_condition) { :without_own_home }
 

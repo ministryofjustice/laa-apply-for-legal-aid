@@ -89,6 +89,7 @@ module CCMS
 
         context "attributes in ADDPROPERTY entity" do
           before { legal_aid_application.other_assets_declaration.update! second_home_value: 244_000 }
+
           it "generates all the attributes as false" do
             additional_property_false_attrs.each do |attr_pair|
               attr_name, user_defined = attr_pair
@@ -159,6 +160,7 @@ module CCMS
         context "global means main dwelling attribute" do
           context "applicant does not own main home" do
             before { legal_aid_application.update! own_home: "no" }
+
             it "omits all the attributes" do
               global_means_main_dwelling_attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :global_means, attr_name)
@@ -169,6 +171,7 @@ module CCMS
 
           context "applicant owns main home outright" do
             before { legal_aid_application.update! own_home: "owned_outright" }
+
             it "generates all the attributes as false" do
               global_means_main_dwelling_attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :global_means, attr_name)
@@ -180,6 +183,7 @@ module CCMS
 
           context "applicant owns main home with a mortgage" do
             before { legal_aid_application.update! own_home: "mortgage" }
+
             it "generates all the attributes as false" do
               global_means_main_dwelling_attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :global_means, attr_name)
@@ -202,6 +206,7 @@ module CCMS
 
             context "applicant has no land" do
               before { legal_aid_application.other_assets_declaration.update! land_value: 0 }
+
               it "does not insert attrs into the payload" do
                 conditional_land_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :land, attr_name)
@@ -233,6 +238,7 @@ module CCMS
             end
             context "applicant has no money due" do
               before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
+
               it "does not generate the attributes" do
                 money_due_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :money_due, attr_name)
@@ -265,6 +271,7 @@ module CCMS
 
             context "applicant does not have timeshare" do
               before { legal_aid_application.other_assets_declaration.update! timeshare_property_value: 0.0 }
+
               it "does not generate the attributes" do
                 conditional_timeshare_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :timeshare, attr_name)
@@ -287,6 +294,7 @@ module CCMS
 
             context "applicant doest not have a trust" do
               before { legal_aid_application.other_assets_declaration.update! trust_value: nil }
+
               it "does not generate the attributes" do
                 conditional_trust_attributes.each do |attr_name|
                   block = XmlExtractor.call(xml, :trust, attr_name)
@@ -299,6 +307,7 @@ module CCMS
           context "conditional valuable possessions attributes" do
             context "applicant has valuable possessions" do
               before { other_assets_decl.update! valuable_items_value: 878_787 }
+
               it "generates the attributes" do
                 conditional_valuable_possessions_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
@@ -310,6 +319,7 @@ module CCMS
 
             context "applicant does not have valuable possessions" do
               before { other_assets_decl.update! valuable_items_value: nil }
+
               it "goes not generate the attributes" do
                 conditional_valuable_possessions_attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :valuable_possessions, attr_name)
@@ -327,6 +337,7 @@ module CCMS
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: maintenance_transaction)
             end
+
             it "has attributes" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_12WP3_3A")
               expect(block).to have_boolean_response true
@@ -334,6 +345,7 @@ module CCMS
             end
             context "no payments" do
               before { legal_aid_application.transaction_types.delete_all }
+
               it "does not have attributes" do
                 block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_12WP3_3A")
                 expect(block).to have_boolean_response false
@@ -346,6 +358,7 @@ module CCMS
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: criminal_legal_aid_transaction)
             end
+
             it "has attributes" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP3_1A")
               expect(block).to have_boolean_response true
@@ -353,6 +366,7 @@ module CCMS
             end
             context "no payments" do
               before { legal_aid_application.transaction_types.delete_all }
+
               it "does not have attributes" do
                 block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP3_1A")
                 expect(block).to have_boolean_response false
@@ -366,6 +380,7 @@ module CCMS
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: childcare_out)
             end
+
             it "has attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INFER_B_12WP3_12A")
               expect(block).to have_boolean_response true
@@ -373,6 +388,7 @@ module CCMS
             end
             context "no childcare payments" do
               before { legal_aid_application.transaction_types.delete_all }
+
               it "does not have attribute block" do
                 block = XmlExtractor.call(xml, :global_means, "GB_INFER_B_12WP3_12A")
                 expect(block).to have_boolean_response false
@@ -460,6 +476,7 @@ module CCMS
                 proceeding.update!(used_delegated_functions_on: Date.yesterday, used_delegated_functions_reported_on: Date.current)
               end
             end
+
             it "generates the block with true" do
               block = XmlExtractor.call(xml, :global_merits, "EMERGENCY_DPS_APP_AMD")
               expect(block).to have_boolean_response true

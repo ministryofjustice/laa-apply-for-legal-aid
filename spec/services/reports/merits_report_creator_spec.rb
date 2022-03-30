@@ -109,6 +109,7 @@ RSpec.describe Reports::MeritsReportCreator do
           allow(legal_aid_application).to receive(:case_ccms_reference).and_return(nil)
           allow(legal_aid_application).to receive(:create_ccms_submission).and_return(ccms_submission)
         end
+
         it "creates a ccms submission" do
           expect(legal_aid_application.reload).to receive(:create_ccms_submission)
           expect_any_instance_of(described_class).to receive(:process_ccms_submission)

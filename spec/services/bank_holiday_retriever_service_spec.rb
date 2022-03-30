@@ -16,6 +16,7 @@ RSpec.describe BankHolidayRetriever, vcr: { cassette_name: "gov_uk_bank_holiday_
       before do
         expect(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
       end
+
       it "raises error" do
         expect { described_class.dates }.to raise_error(described_class::UnsuccessfulRetrievalError)
       end

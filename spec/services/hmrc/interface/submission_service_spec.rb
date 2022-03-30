@@ -18,6 +18,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
         headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
   end
+
   let(:application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:use_case) { "one" }
   let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application) }

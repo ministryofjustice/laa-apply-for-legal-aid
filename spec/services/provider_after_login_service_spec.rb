@@ -22,6 +22,7 @@ RSpec.describe ProviderAfterLoginService do
 
       context "provider cannot be found on Provider Details API" do
         before { expect(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiRecordNotFoundError) }
+
         it "updates the provider invalid login details" do
           subject
           expect(provider.invalid_login_details).to eq "api_details_user_not_found"
@@ -30,6 +31,7 @@ RSpec.describe ProviderAfterLoginService do
 
       context "provider found on Provider Details API" do
         before { expect(ProviderDetailsCreator).to receive(:call).with(provider) }
+
         it "does not update invalid login details" do
           subject
           expect(provider.invalid_login_details).to be_nil
@@ -43,6 +45,7 @@ RSpec.describe ProviderAfterLoginService do
 
       context "provider details API not available" do
         before { expect(ProviderDetailsCreator).to receive(:call).and_raise(ProviderDetailsRetriever::ApiError) }
+
         it "updates the provider invalid login details" do
           subject
           expect(provider.invalid_login_details).to eq "provider_details_api_error"

@@ -14,6 +14,7 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: "true_layer_bank
       before do
         allow(Net::HTTP).to receive(:get_response).with(uri).and_return(DummyErrorReturnObj.new)
       end
+
       it "raises error" do
         expect { described_class.banks }.to raise_error(described_class::UnsuccessfulRetrievalError)
       end

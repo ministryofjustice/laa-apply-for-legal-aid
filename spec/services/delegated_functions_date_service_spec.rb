@@ -62,6 +62,7 @@ RSpec.describe DelegatedFunctionsDateService do
             create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1
             create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2
           end
+
           it "deletes the scheduled mails" do
             subject
             expect(ScheduledMailing.where(mailer_klass: "SubmitApplicationReminderMailer", legal_aid_application_id: laa.id)).to be_empty

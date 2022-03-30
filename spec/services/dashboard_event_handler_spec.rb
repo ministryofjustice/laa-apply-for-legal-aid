@@ -22,6 +22,7 @@ RSpec.describe DashboardEventHandler do
       allow_any_instance_of(described_class).to receive(:provider_updated)
       allow_any_instance_of(described_class).to receive(:firm_created)
     end
+
     it "fires an application_created event" do
       expect_any_instance_of(described_class).to receive(:application_created).and_call_original
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(1).times
@@ -34,6 +35,7 @@ RSpec.describe DashboardEventHandler do
     before do
       allow_any_instance_of(described_class).to receive(:firm_created)
     end
+
     it "fires a ProviderDataJob event" do
       expect_any_instance_of(described_class).to receive(:provider_updated).and_call_original
       expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
@@ -127,6 +129,7 @@ RSpec.describe DashboardEventHandler do
       allow_any_instance_of(described_class).to receive(:provider_updated).and_call_original
       allow_any_instance_of(described_class).to receive(:application_created)
     end
+
     it "fires the submitted applications job" do
       expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(1).times

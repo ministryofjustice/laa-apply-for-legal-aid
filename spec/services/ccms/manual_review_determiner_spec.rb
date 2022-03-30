@@ -64,6 +64,7 @@ module CCMS
 
       context "manual review setting false" do
         before { setting.update! manually_review_all_cases: false }
+
         context "no DWP override" do
           context "passported" do
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
@@ -128,6 +129,7 @@ module CCMS
 
         context "with DWP override" do
           before { create :dwp_override, legal_aid_application: legal_aid_application }
+
           context "passported" do
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
 
@@ -210,6 +212,7 @@ module CCMS
 
       context "With DWP override" do
         before { create :dwp_override, legal_aid_application: legal_aid_application }
+
         it "adds the dwp review to the cfe result reasons" do
           expect(subject).to eq override_reaons
         end

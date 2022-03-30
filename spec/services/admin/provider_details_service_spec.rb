@@ -17,6 +17,7 @@ module Admin
     shared_examples "service handling error conditions" do
       context "user already exists in providers table" do
         before { Provider.create(username:) }
+
         let(:response_body) { nil }
         let(:http_status) { nil }
 
@@ -157,6 +158,7 @@ module Admin
             create_office firm, "146988", "8M609S"
             create_office firm, "81333", "8B869F"
           end
+
           let(:firm) { create_firm }
           let(:response_body) { sarah_smith_response.to_json }
 
@@ -180,6 +182,7 @@ module Admin
           before do
             create_office firm, "81333", "8B869F"
           end
+
           let(:firm) { create_firm }
           let(:response_body) { sarah_smith_response.to_json }
 

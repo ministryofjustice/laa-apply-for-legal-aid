@@ -38,6 +38,7 @@ RSpec.describe Flow::BaseFlowService do
       around(:each) do |example|
         I18n.with_locale(:cy) { example.run }
       end
+
       it "returns forward url with cy locale" do
         expect(subject.forward_path).to eq("/citizens/additional_accounts?locale=cy")
       end
