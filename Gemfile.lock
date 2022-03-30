@@ -771,7 +771,7 @@ DEPENDENCIES
   capybara (>= 3.36.0, < 4.0)
   cucumber
   cucumber-rails (>= 2.4.0)
-  data_migrate (>= 7.0.2)
+  data_migrate
   database_cleaner
   devise (>= 4.8.0)
   devise_saml_authenticatable (>= 1.7.0)
