@@ -46,7 +46,7 @@ module HMRC
       end
     end
 
-    describe "employment_income?" do
+    describe "#employment_income?" do
       context "when there is no hmrc data" do
         let(:response) { create :hmrc_response }
 
@@ -77,6 +77,49 @@ module HMRC
 
         it "returns true" do
           expect(response.employment_income?).to eq true
+        end
+      end
+    end
+
+    describe ".after_update" do
+      let(:persistor_class) { HMRC::ParsedResponse::Persistor }
+
+      before do
+        allow(persistor_class).to receive(:call)
+        hmrc_response.update!(url: "my_url")
+      end
+
+      context "with a use case two HMRC response" do
+        let(:hmrc_response) { create :hmrc_response, :use_case_two }
+
+        it "does not call HMRC::ParsedResponse::Persistor" do
+          expect(persistor_class).not_to have_received(:call)
+        end
+      end
+
+      context "with a use case one HMRC response" do
+        context "when there is no response" do
+          let(:hmrc_response) { create :hmrc_response, :use_case_one, :nil_response }
+
+          it "does not call HMRC::ParsedResponse::Persistor" do
+            expect(persistor_class).not_to have_received(:call)
+          end
+        end
+
+        context "when status is not completed" do
+          let(:hmrc_response) { create :hmrc_response, :use_case_one, :processing }
+
+          it "does not call HMRC::ParsedResponse::Persistor" do
+            expect(persistor_class).not_to have_received(:call)
+          end
+        end
+
+        context "when status is completed" do
+          let(:hmrc_response) { create :hmrc_response, :use_case_one }
+
+          it "calls HMRC::ParsedResponse::Persistor" do
+            expect(persistor_class).to have_received(:call)
+          end
         end
       end
     end

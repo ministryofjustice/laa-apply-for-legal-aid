@@ -16,6 +16,14 @@ module HMRC
         use_case { "two" }
       end
 
+      trait :nil_response do
+        response { nil }
+      end
+
+      trait :processing do
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, status: "processing") }
+      end
+
       trait :in_progress do
         submission_id { SecureRandom.uuid }
         url { "#{Rails.configuration.x.hmrc_interface.host}api/v1/submission/result/#{submission_id}" }

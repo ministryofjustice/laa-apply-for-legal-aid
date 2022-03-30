@@ -6,8 +6,8 @@ RSpec.describe "employed incomes request", type: :request do
   let(:provider) { application.provider }
 
   before do
-    # This will also create the corresponding employment and employment_payment records
-    create :hmrc_response, :use_case_one, legal_aid_application_id: application.id
+    hmrc_response = create(:hmrc_response, :use_case_one, legal_aid_application_id: application.id)
+    hmrc_response.__send__(:persist_employment_records)
   end
 
   describe "GET /providers/applications/:id/employed_income" do

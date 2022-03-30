@@ -11,8 +11,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
         let!(:hmrc_response) { create :hmrc_response, :example1_usecase1 }
 
         it "creates one employment record" do
-          persistor
-          expect(application.employments.count).to eq 1
+          expect { persistor }.to change { application.employments.count }.from(0).to(1)
         end
 
         it "creates 4 employment payment records with the expected data" do
@@ -49,12 +48,12 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
           expect(payments[3].net_employment_income).to eq 1578.54
         end
       end
+
       context "when HMRC response contains multiple employments" do
         let(:hmrc_response) { create :hmrc_response, :multiple_employments_usecase1 }
 
         it "creates 2 employment records" do
-          persistor
-          expect(application.employments.size).to eq 2
+          expect { persistor }.to change { application.employments.count }.from(0).to(2)
         end
 
         it "attaches the 4 employment payment records to only one of the employments" do

@@ -59,15 +59,19 @@ module HMRC
       end
 
       def paye_hash
-        @paye_hash ||= data_array.detect { |hash| hash.key?("income/paye/paye") }
-      end
-
-      def employments_array
-        @employments_array ||= data_array.detect { |hash| hash.key?("employments/paye/employments") }["employments/paye/employments"]
+        @paye_hash ||= data_array.find { |h| h.key?("income/paye/paye") }
       end
 
       def income_array
         @income_array ||= paye_hash.dig("income/paye/paye", "income")
+      end
+
+      def employments_hash
+        @employments_hash ||= data_array.find { |h| h.key?("employments/paye/employments") }
+      end
+
+      def employments_array
+        @employments_array ||= employments_hash&.fetch("employments/paye/employments")
       end
 
       def new_employment_payment(income_hash)
