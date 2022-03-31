@@ -22,7 +22,11 @@ private
       dl_contents = ""
       dl_contents << content_tag(:dt, standardize_key(key))
       value.each do |val|
-        dl_contents << format_hash(val)
+        dl_contents << if val.is_a?(Hash)
+                         format_hash(val)
+                       else
+                         content_tag(:dd, val)
+                       end
       end
       dl_contents.html_safe
     end
