@@ -65,7 +65,11 @@
           CFE result
         </summary>
         <section>
-          <%= format_hash(JSON.parse(cfe_submission.result&.result || empty_cfe_result)) %>
+          <% if cfe_submission.result&.result.nil? %>
+            <p class="govuk-body">No result available</p>
+          <% else %>
+            <%= format_hash(JSON.parse(cfe_submission.result&.result)) %>
+          <% end %>
         </section>
       </details>
     <% end %>
