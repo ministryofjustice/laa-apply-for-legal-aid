@@ -93,18 +93,13 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 gem "wicked_pdf"
 
 # interface to manage data
-gem "rails_admin", "~> 2.2", ">= 2.2.1"
+gem "rails_admin"
 
 # Manage security headers
 gem "secure_headers"
 
 # DFE formbuilder
 gem "govuk_design_system_formbuilder", ">= 3.0.1"
-
-# Sprockets isn't used by the app but is installed by rails as a dependency.
-# Versions >= 4 cause issues if app/assets/config/manifest.js is not present.
-# This pins sprockets to an earlier version to prevent those errors
-gem "sprockets", "< 4"
 
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
@@ -136,7 +131,6 @@ group :development do
   gem "pry-stack_explorer"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
 end
 
 group :test do
@@ -146,6 +140,7 @@ group :test do
   gem "cucumber-rails", ">= 2.4.0", require: false
   gem "database_cleaner"
   gem "launchy"
+  gem "rack-pjax"
   gem "rspec-sidekiq"
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 5.1"
