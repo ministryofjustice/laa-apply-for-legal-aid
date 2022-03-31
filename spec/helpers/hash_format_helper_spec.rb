@@ -26,6 +26,20 @@ RSpec.describe HashFormatHelper, type: :helper do
       end
     end
 
+    context "when passed an array of GUIDs" do
+      let(:source) do
+        { multiple_employments: %w[159de866-8a9e-44cf-86b4-a3ed01da0533 cb2dd4ff-6f61-4ef6-82c3-b4e02b1ac42a] }
+      end
+
+      let(:expected_response) do
+        '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Multiple Employments</dt>' \
+          "<dd>159de866-8a9e-44cf-86b4-a3ed01da0533</dd>" \
+          "<dd>cb2dd4ff-6f61-4ef6-82c3-b4e02b1ac42a</dd></dl>"
+      end
+
+      it { is_expected.to eql expected_response }
+    end
+
     context "when passed invalid data" do
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
