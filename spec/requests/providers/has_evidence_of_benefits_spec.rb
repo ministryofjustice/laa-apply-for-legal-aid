@@ -12,10 +12,8 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
   end
 
   let(:login) { login_as legal_aid_application.provider }
-  let(:enable_evidence_upload_flag) { false }
 
   before do
-    Setting.setting.update!(enable_evidence_upload: enable_evidence_upload_flag)
     login
     subject
   end
@@ -33,27 +31,13 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "evidence upload setting" do
-      context "when FALSE" do
-        it "tells the user that the caseworker will ask for evidence" do
-          expect(response.body.gsub("&#39;", %('))).to include I18n.t("providers.has_evidence_of_benefits.show.hint")
-        end
-
-        it "does not have a radio button hint" do
-          expect(response.body).not_to include I18n.t("providers.has_evidence_of_benefits.show.radio_hint_yes")
-        end
+    context "evidence upload" do
+      it "does not mention the caseworker in the main hint" do
+        expect(response.body).to include I18n.t("providers.has_evidence_of_benefits.show.evidence_hint")
       end
 
-      context "when TRUE" do
-        let(:enable_evidence_upload_flag) { true }
-
-        it "does not mention the caseworker in the main hint" do
-          expect(response.body).to include I18n.t("providers.has_evidence_of_benefits.show.evidence_hint")
-        end
-
-        it "shows hint about uploading later in the hint for the Yes radio" do
-          expect(response.body.gsub("&#39;", %('))).to include I18n.t("providers.has_evidence_of_benefits.show.radio_hint_yes")
-        end
+      it "shows hint about uploading later in the hint for the Yes radio" do
+        expect(response.body.gsub("&#39;", %('))).to include I18n.t("providers.has_evidence_of_benefits.show.radio_hint_yes")
       end
     end
   end

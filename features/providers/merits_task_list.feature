@@ -54,7 +54,7 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Attempts to settle\nCOMPLETED'
     When I click 'Save and continue'
-    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
+    Then I should be on a page showing 'Upload supporting evidence'
     And I click 'Save and continue'
     Then I should be on the 'check_merits_answers' page showing 'Check your answers and submit application'
     And the page is accessible
@@ -102,6 +102,7 @@ Feature: Merits task list
 
   @javascript
   Scenario: Uploading a file for statement of case
+    Given csrf is enabled
     Given I have completed a non-passported application and reached the merits task_list
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nNOT STARTED'
     When I click link 'Latest incident details'
@@ -119,18 +120,13 @@ Feature: Merits task list
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
-    When I attach a file
-    And I click 'Save and continue'
-    Then I should be on the 'statement_of_case' page showing 'Upload the selected file'
-    Then I click 'Upload'
+    When I upload an evidence file named 'hello_world.pdf'
     Then I should see 'hello_world.pdf'
     And I should see 'UPLOADED'
     When I click 'Delete'
     Then I should see 'hello_world.pdf has been successfully deleted'
     And I should not see 'UPLOADED'
+    Then I upload an evidence file named 'hello_world.pdf'
+    And I should see 'UPLOADED'
     When I click 'Save and continue'
-    Then I should be on the 'statement_of_case' page showing 'Attach a file or enter text'
-    When I attach a file
-    And I click 'Upload'
-    And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'

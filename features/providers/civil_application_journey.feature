@@ -635,6 +635,7 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application happy path no back button
+    Given csrf is enabled
     Given I complete the passported journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
@@ -700,8 +701,8 @@ Feature: Civil application journeys
     And I should not see "Client received legal help"
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
-    Then I upload a pdf file
-    Then I click 'Upload'
+    When I upload an evidence file named 'hello_world.pdf'
+
     Then I should not see "There was a problem uploading your file"
     Then I reload the page
     Then I should be on a page showing "hello_world.pdf"

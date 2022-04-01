@@ -8,14 +8,13 @@
       ) do |form| %>
 
     <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit, # attribute name
-                                            yes_no_options(yes: Setting.enable_evidence_upload? ? t('.radio_hint_yes') : nil), # collection
+                                            yes_no_options(yes: t('.radio_hint_yes')), # collection
                                             :value, # value method
                                             :label, # text method
                                             :radio_hint, #hint method,
                                             bold_labels: false,
                                             legend: { text: content_for(:page_title), tag: 'h1', size: 'xl' },
-                                            hint: { text: Setting.enable_evidence_upload? ? t('.evidence_hint') : t('.hint') } %>
-
+                                            hint: { text: t('.evidence_hint') } %>
     <%= next_action_buttons(
             show_draft: true,
             form: form

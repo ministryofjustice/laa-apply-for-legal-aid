@@ -11,7 +11,6 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let(:task_list) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
 
   before do
-    Setting.setting.update!(enable_evidence_upload: evidence_upload)
     legal_aid_application
     allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(task_list)
     login_provider
@@ -73,17 +72,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
-      context "when evidence upload setting  is off" do
-        let(:evidence_upload) { false }
-
-        it "redirects to the gateway evidence page" do
-          expect(response).to redirect_to(providers_legal_aid_application_gateway_evidence_path(legal_aid_application))
-        end
-      end
-
-      context "when setting is enabled" do
-        let(:evidence_upload) { true }
-
+      context "evidence uploadf" do
         context "when at least one evidence type is required" do
           it "should redirect to the new upload evidence page" do
             expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
@@ -92,8 +81,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       end
     end
 
-    context "when evidence upload setting is on but no documents required" do
-      let(:evidence_upload) { true }
+    context "when no documents required" do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001] }
       let(:task_list) { create :legal_framework_merits_task_list, :da001, legal_aid_application: legal_aid_application }
 
