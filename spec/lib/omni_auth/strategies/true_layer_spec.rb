@@ -52,6 +52,7 @@ module OmniAuth
         before do
           allow(subject).to receive(:callback_url).and_return(callback_url)
         end
+
         it "contains the redirect uri" do
           expect(subject.token_params[:redirect_uri]).to eq(callback_url)
         end

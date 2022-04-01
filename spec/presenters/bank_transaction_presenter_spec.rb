@@ -109,6 +109,7 @@ RSpec.describe BankTransactionPresenter do
 
       context "when there is no running balance value" do
         before { transaction.running_balance = nil }
+
         it { is_expected.to eq "Not available" }
       end
     end

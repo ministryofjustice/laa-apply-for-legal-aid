@@ -21,6 +21,7 @@ RSpec.describe TransactionType, type: :model do
 
   describe "#for_outgoing_type?" do
     before { create :transaction_type, :child_care }
+
     context "no such outgoing types exist" do
       it "returns false" do
         expect(described_class.for_outgoing_type?("maintenance_out")).to be false
@@ -29,6 +30,7 @@ RSpec.describe TransactionType, type: :model do
 
     context "outgoing types do exist" do
       before { create :transaction_type, :maintenance_out }
+
       it "returns true" do
         expect(described_class.for_outgoing_type?("maintenance_out")).to be true
       end
@@ -45,6 +47,7 @@ RSpec.describe TransactionType, type: :model do
 
   context "hierarchies" do
     before { Populators::TransactionTypePopulator.call }
+
     let(:benefits) { described_class.find_by(name: "benefits") }
     let(:excluded_benefits) { described_class.find_by(name: "excluded_benefits") }
     let(:pension) { described_class.find_by(name: "pension") }

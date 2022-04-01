@@ -78,6 +78,7 @@ RSpec.describe BankAccount, type: :model do
 
     context "transactions exist" do
       before { create_transactions }
+
       it "returns the running balance of the latest transaction" do
         expect(bank_account.latest_balance).to eq 415.26
       end

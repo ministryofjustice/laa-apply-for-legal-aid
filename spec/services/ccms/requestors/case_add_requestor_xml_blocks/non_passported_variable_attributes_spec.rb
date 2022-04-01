@@ -48,6 +48,7 @@ module CCMS
         context "family prospects" do
           context "50% or better" do
             before { chances_of_success.update! success_prospect: "likely" }
+
             let(:expected_results) do
               [
                 ["FAM_PROSP_50_OR_BETTER", true],
@@ -70,6 +71,7 @@ module CCMS
 
           context "marginal" do
             before { chances_of_success.update! success_prospect: "marginal" }
+
             let(:expected_results) do
               [
                 ["FAM_PROSP_50_OR_BETTER", false],
@@ -92,6 +94,7 @@ module CCMS
 
           context "poor" do
             before { chances_of_success.update! success_prospect: "poor" }
+
             let(:expected_results) do
               [
                 ["FAM_PROSP_50_OR_BETTER", false],
@@ -114,6 +117,7 @@ module CCMS
 
           context "borderline" do
             before { chances_of_success.update! success_prospect: "borderline" }
+
             let(:expected_results) do
               [
                 ["FAM_PROSP_50_OR_BETTER", false],
@@ -136,6 +140,7 @@ module CCMS
 
           context "not_known" do
             before { chances_of_success.update! success_prospect: "not_known" }
+
             let(:expected_results) do
               [
                 ["FAM_PROSP_50_OR_BETTER", false],
@@ -160,6 +165,7 @@ module CCMS
         context "CAPSHARE_INPUT_C_11WP2_9A" do
           context "applicant has no plc shares" do
             before { savings_amount.update! plc_shares: nil }
+
             it "does not generate the block" do
               block = XmlExtractor.call(xml, :plc_shares, "CAPSHARE_INPUT_C_11WP2_9A")
               expect(block).not_to be_present
@@ -168,6 +174,7 @@ module CCMS
 
           context "applicant has plc shares" do
             before { savings_amount.update! plc_shares: 12_566 }
+
             it "generates the block" do
               block = XmlExtractor.call(xml, :plc_shares, "CAPSHARE_INPUT_C_11WP2_9A")
               expect(block).to have_currency_response 12_566.0
@@ -179,6 +186,7 @@ module CCMS
         context "LIFEASSUR_INPUT_C_13WP2_16A" do
           context "applicant has no life assurance policies" do
             before { savings_amount.update! life_assurance_endowment_policy: 0.0 }
+
             it "does not generate the block" do
               block = XmlExtractor.call(xml, :life_assurance, "LIFEASSUR_INPUT_C_13WP2_16A")
               expect(block).not_to be_present
@@ -187,6 +195,7 @@ module CCMS
 
           context "applicant has life assurance policies" do
             before { savings_amount.update! life_assurance_endowment_policy: 42_518.38 }
+
             it "generates the block" do
               block = XmlExtractor.call(xml, :life_assurance, "LIFEASSUR_INPUT_C_13WP2_16A")
               expect(block).to have_currency_response 42_518.38
@@ -198,6 +207,7 @@ module CCMS
         context "THIRDPARTACC_INPUT_C_8WP2_14A" do
           context "applicant has no access to other peoples accounts" do
             before { savings_amount.update! other_person_account: nil }
+
             it "does not generate the block" do
               block = XmlExtractor.call(xml, :third_party_acct, "THIRDPARTACC_INPUT_C_8WP2_14A")
               expect(block).not_to be_present
@@ -206,6 +216,7 @@ module CCMS
 
           context "applicant has access to other persons account" do
             before { savings_amount.update! other_person_account: 128.22 }
+
             it "generates the block" do
               block = XmlExtractor.call(xml, :third_party_acct, "THIRDPARTACC_INPUT_C_8WP2_14A")
               expect(block).to have_currency_response 128.22
@@ -217,6 +228,7 @@ module CCMS
         context "Timeshare" do
           context "Applicant does not own timeshare" do
             before { other_assets_decl.update! timeshare_property_value: 0 }
+
             context "TIMESHARE_INPUT_B_6WP2_22A" do
               it "does not generate the block" do
                 block = XmlExtractor.call(xml, :timeshare, "TIMESHARE_INPUT_B_6WP2_22A")
@@ -234,6 +246,7 @@ module CCMS
 
           context "applicant owns timeshare" do
             before { other_assets_decl.update! timeshare_property_value: 95_355.0 }
+
             context "TIMESHARE_INPUT_B_6WP2_22A" do
               it "generates the block" do
                 block = XmlExtractor.call(xml, :timeshare, "TIMESHARE_INPUT_B_6WP2_22A")
@@ -255,6 +268,7 @@ module CCMS
         context "additional property" do
           context "applicant does not own additional property" do
             before { other_assets_decl.update! second_home_value: nil }
+
             let(:attrs) do
               %w[
                 ADDPROPERTY_INPUT_B_4WP2_16A
@@ -275,8 +289,10 @@ module CCMS
 
           context "applicant owns additional property" do
             before { other_assets_decl.update! second_home_value: 120_634, second_home_mortgage: 45_933 }
+
             context "applicant owns 100% of addtional property" do
               before { other_assets_decl.update! second_home_percentage: 100.0 }
+
               let(:attrs) do
                 {
                   "ADDPROPERTY_INPUT_B_4WP2_16A" => false,
@@ -305,6 +321,7 @@ module CCMS
 
             context "applicant shares ownership of additional property" do
               before { other_assets_decl.update! second_home_percentage: 50.0, second_home_mortgage: 0.0 }
+
               let(:attrs) do
                 {
                   "ADDPROPERTY_INPUT_B_4WP2_16A" => true,
@@ -338,6 +355,7 @@ module CCMS
 
           context "applicant has no vehicle" do
             before { vehicle.update! estimated_value: nil }
+
             let(:attrs) { %w[CARANDVEH_INPUT_B_14WP2_28A CARANDVEH_INPUT_C_14WP2_25A CARANDVEH_INPUT_C_14WP2_26A CARANDVEH_INPUT_D_14WP2_27] }
 
             it "does not generate the attributes" do
@@ -350,6 +368,7 @@ module CCMS
 
           context "applicant has vehicle" do
             before { vehicle.update! estimated_value: 6500, payment_remaining: 3215.66, purchased_on: 5.years.ago.to_date, used_regularly: regular_use }
+
             let(:regular_use) { true }
 
             context "CARANDVEH_INPUT_B_14WP2_28A In regular use?" do
@@ -587,6 +606,7 @@ module CCMS
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: rent_or_mortgage_payment)
             end
+
             let(:attrs) do
               %w[
                 GB_INPUT_B_13WP3_14A
@@ -605,6 +625,7 @@ module CCMS
 
             context "applicant does not pay rent or mortgage" do
               before { legal_aid_application.transaction_types.delete_all }
+
               let(:attrs) do
                 %w[
                   GB_INPUT_B_13WP3_14A

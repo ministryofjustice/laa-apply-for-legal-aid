@@ -67,6 +67,7 @@ module HMRC
         end
 
         before { response.response = response_data_with_no_employment_income }
+
         it "returns false" do
           expect(response.employment_income?).to eq false
         end

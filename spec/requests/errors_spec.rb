@@ -5,6 +5,7 @@ RSpec.describe ErrorsController, type: :request do
     describe "unknown page" do
       context "default locale" do
         before { get "/unknown/path" }
+
         it "redirect to page not found" do
           expect(response).to redirect_to("/error/page_not_found?locale=en")
         end
@@ -16,6 +17,7 @@ RSpec.describe ErrorsController, type: :request do
         end
 
         before { get "/unknown/path", params: { locale: "cy" } }
+
         it "redirect to page not found" do
           expect(response).to redirect_to("/error/page_not_found?locale=cy")
         end
@@ -25,6 +27,7 @@ RSpec.describe ErrorsController, type: :request do
     describe "object not found" do
       context "default locale" do
         before { get feedback_path(SecureRandom.uuid) }
+
         it "redirect to page not found" do
           expect(response).to redirect_to("/error/page_not_found?locale=en")
         end
@@ -36,6 +39,7 @@ RSpec.describe ErrorsController, type: :request do
         end
 
         before { get feedback_path(SecureRandom.uuid, locale: :cy) }
+
         it "redirect to page not found" do
           expect(response).to redirect_to("/error/page_not_found?locale=cy")
         end

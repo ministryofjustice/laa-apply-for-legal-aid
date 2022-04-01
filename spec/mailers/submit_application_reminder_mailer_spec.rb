@@ -48,6 +48,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
         allow(scheduled_mailing).to receive(:legal_aid_application).and_return(application)
         allow(application).to receive(:state).and_return("use_ccms")
       end
+
       it "returns false" do
         expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be false
       end

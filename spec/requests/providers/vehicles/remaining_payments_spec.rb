@@ -21,6 +21,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
   end
@@ -161,6 +162,7 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
   end

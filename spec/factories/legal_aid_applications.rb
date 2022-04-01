@@ -30,6 +30,7 @@ FactoryBot.define do
         state_machine = FactoryBot.build(:non_passported_state_machine, legal_aid_application: application)
         application.update!(state_machine:)
       end
+
       non_passported
     end
 
@@ -38,6 +39,7 @@ FactoryBot.define do
         state_machine = FactoryBot.build(:passported_state_machine, legal_aid_application: application)
         application.update!(state_machine:)
       end
+
       passported
     end
 

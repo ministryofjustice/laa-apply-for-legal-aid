@@ -26,6 +26,7 @@ module Providers
           let(:login) { nil }
 
           before { subject }
+
           it_behaves_like "a provider not authenticated"
         end
       end

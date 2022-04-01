@@ -6,6 +6,7 @@ module LegalFramework
       create :proceeding, :da004
       create :proceeding, :da001
     end
+
     let(:smtl) { described_class.new(dummy_response_hash) }
 
     describe ".new" do

@@ -45,6 +45,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
     context "with first name missing" do
       before { attr_list.delete(:first_name) }
+
       it "does not persist model" do
         expect { subject.save }.not_to change { Applicant.count }
       end
@@ -57,6 +58,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
     context "with an invalid NINO" do
       before { attributes[:national_insurance_number] = "foobar" }
+
       it "does not persist model" do
         expect { subject.save }.not_to change { Applicant.count }
       end
@@ -75,6 +77,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
       end
+
       context "with normal validation" do
         let(:in_test_mode) { "false" }
 

@@ -7,6 +7,7 @@ RSpec.describe PdfConverter do
     described_class.call(attachment.id)
   end
   before { allow(Libreconv).to receive(:convert) }
+
   context "when attachment is statement of case" do
     let(:statement_of_case) { create :statement_of_case }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }

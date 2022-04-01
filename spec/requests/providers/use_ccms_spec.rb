@@ -9,6 +9,7 @@ RSpec.describe Providers::UseCCMSController, type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -19,6 +20,7 @@ RSpec.describe Providers::UseCCMSController, type: :request do
 
       context "when state is not already use_ccms" do
         before { subject }
+
         it "returns http success" do
           expect(response).to have_http_status(:ok)
         end

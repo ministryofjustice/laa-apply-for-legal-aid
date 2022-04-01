@@ -64,6 +64,7 @@ module CFE
 
       context "with remarks that do not require a category" do
         before { populated_hash[:current_account_balance] = { residual_balance: [] } }
+
         let(:remarks_hash) { populated_hash }
 
         it "does not include the remarks in the hash of categories by reason" do

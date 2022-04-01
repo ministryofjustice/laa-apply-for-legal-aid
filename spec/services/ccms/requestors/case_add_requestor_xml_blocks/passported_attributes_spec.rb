@@ -78,6 +78,7 @@ module CCMS
         context "CHILD_PARTIES_C" do
           context "section8 proceeding" do
             before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return true }
+
             it "is true" do
               block = XmlExtractor.call(xml, :proceeding_merits, "CHILD_PARTIES_C")
               expect(block).to have_boolean_response(true)
@@ -86,6 +87,7 @@ module CCMS
 
           context "domestic abuse proceeding" do
             before { allow_any_instance_of(Proceeding).to receive(:section8?).and_return false }
+
             it "is false" do
               block = XmlExtractor.call(xml, :proceeding_merits, "CHILD_PARTIES_C")
               expect(block).to have_boolean_response(false)
@@ -518,6 +520,7 @@ module CCMS
 
         context "URGENT_HEARING_DATE" do
           before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
+
           it "inserts ccms submission date as string" do
             block = XmlExtractor.call(xml, :global_merits, "URGENT_HEARING_DATE")
             expect(block).to have_date_response legal_aid_application.calculation_date.strftime("%d-%m-%Y")
@@ -534,6 +537,7 @@ module CCMS
         context "GB_INPUT_B_2WP2_1A  - Applicant is a beneficiary of a will?" do
           context "not a beneficiary" do
             before { legal_aid_application.other_assets_declaration = create :other_assets_declaration, :all_nil }
+
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
               expect(block).to have_boolean_response false
@@ -551,6 +555,7 @@ module CCMS
         context "GB_INPUT_B_3WP2_1A - applicant has financial interest in his main home" do
           context "no financial interest" do
             before { expect(legal_aid_application).to receive(:own_home?).and_return(false) }
+
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
               expect(block).to have_boolean_response false
@@ -559,6 +564,7 @@ module CCMS
 
           context "a shared financial interest" do
             before { expect(legal_aid_application).to receive(:own_home?).and_return(true) }
+
             it "inserts true into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
               expect(block).to have_boolean_response true
@@ -569,6 +575,7 @@ module CCMS
         context "POLICE_NOTIFIED block" do
           context "police notified" do
             before { opponent.update(police_notified: true) }
+
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
               expect(block).to have_boolean_response true
@@ -577,6 +584,7 @@ module CCMS
 
           context "police NOT notified" do
             before { opponent.update(police_notified: false) }
+
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "POLICE_NOTIFIED")
               expect(block).to have_boolean_response false
@@ -599,6 +607,7 @@ module CCMS
 
           context "letter has been sent" do
             before { opponent.update(warning_letter_sent: true) }
+
             it "generates WARNING_LETTER_SENT block with true value" do
               block = XmlExtractor.call(xml, :global_merits, "WARNING_LETTER_SENT")
               expect(block).to have_boolean_response true
@@ -614,6 +623,7 @@ module CCMS
         context "INJ_RESPONDENT_CAPACITY" do
           context "opponent has capacity" do
             before { opponent.understands_terms_of_court_order = true }
+
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
               expect(block).to have_boolean_response true
@@ -622,6 +632,7 @@ module CCMS
 
           context "opponent does not have capacity" do
             before { opponent.understands_terms_of_court_order = false }
+
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "INJ_RESPONDENT_CAPACITY")
               expect(block).to have_boolean_response false
@@ -632,6 +643,7 @@ module CCMS
         context "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
           context "not a beneficiary" do
             before { legal_aid_application.other_assets_declaration.update(inherited_assets_value: 0) }
+
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_2WP2_1A")
               expect(block).to have_boolean_response false
@@ -649,6 +661,7 @@ module CCMS
         context "GB_INPUT_B_3WP2_1A - Applicant has a financial interest in main home?" do
           context "no interest" do
             before { expect(legal_aid_application).to receive(:own_home).and_return(false) }
+
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
               expect(block).to have_boolean_response false
@@ -656,6 +669,7 @@ module CCMS
           end
           context "has an interest" do
             before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
+
             it "inserts true into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_1A")
               expect(block).to have_boolean_response true
@@ -746,6 +760,7 @@ module CCMS
 
         context "DATE_CLIENT_VISITED_FIRM" do
           before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
+
           it "inserts today's date as a string" do
             block = XmlExtractor.call(xml, :global_merits, "DATE_CLIENT_VISITED_FIRM")
             expect(block).to have_date_response Time.zone.today.strftime("%d-%m-%Y")
@@ -772,6 +787,7 @@ module CCMS
 
         context "DATE_ASSESSMENT_STARTED" do
           before { allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today) }
+
           it "inserts today's date as a string" do
             %i[global_means global_merits].each do |entity|
               block = XmlExtractor.call(xml, entity, "DATE_ASSESSMENT_STARTED")
@@ -793,6 +809,7 @@ module CCMS
         context "BAIL_CONDITIONS_SET" do
           context "bail conditions set" do
             before { opponent.bail_conditions_set = true }
+
             it "is true" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
               expect(block).to have_boolean_response true
@@ -801,6 +818,7 @@ module CCMS
 
           context "bail conditions NOT set" do
             before { opponent.bail_conditions_set = false }
+
             it "is false" do
               block = XmlExtractor.call(xml, :global_merits, "BAIL_CONDITIONS_SET")
               expect(block).to have_boolean_response false
@@ -836,6 +854,7 @@ module CCMS
             let(:benefit_check_result) { create :benefit_check_result, :negative }
 
             before { legal_aid_application.benefit_check_result = benefit_check_result }
+
             it "uses the DWP benefit check result" do
               block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
               expect(block).to have_boolean_response false
@@ -940,6 +959,7 @@ module CCMS
 
           context "GB_INPUT_B_14WP2_8A no vehicle owned" do
             before { legal_aid_application.update(own_vehicle: false) }
+
             it "returns false when applicant does NOT own a vehicle" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_14WP2_8A")
               expect(block).to have_boolean_response false
@@ -1031,6 +1051,7 @@ module CCMS
                                                         peps_unit_trusts_capital_bonds_gov_stocks: peps_val,
                                                         life_assurance_endowment_policy: policy_val)
           end
+
           context "no investments of any type" do
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_9WP2_1A")
@@ -1079,6 +1100,7 @@ module CCMS
 
           context "applicant DOES NOT own additional property" do
             before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
+
             it "returns false when client does NOT own additiaonl property " do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
               expect(block).to have_boolean_response false
@@ -1089,6 +1111,7 @@ module CCMS
         context "GB_INPUT_B_5WP1_18A - does the applicant receive a passported benefit?" do
           context "no passported benefit" do
             before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(false) }
+
             it "inserts false into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_18A")
               expect(block).to have_boolean_response false
@@ -1097,6 +1120,7 @@ module CCMS
 
           context "receiving a passported benefit" do
             before { allow(legal_aid_application).to receive(:applicant_receives_benefit?).and_return(true) }
+
             it "inserts true into the attribute block" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_5WP1_18A")
               expect(block).to have_boolean_response true

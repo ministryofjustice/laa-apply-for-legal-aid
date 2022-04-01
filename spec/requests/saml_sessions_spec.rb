@@ -11,6 +11,7 @@ RSpec.describe "SamlSessionsController", type: :request do
 
   describe "DELETE /providers/sign_out" do
     before { sign_in provider }
+
     subject { delete destroy_provider_session_path }
 
     it "logs user out" do
@@ -43,6 +44,7 @@ RSpec.describe "SamlSessionsController", type: :request do
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return("true")
       end
+
       after { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return("false") }
 
       it "redirects to providers root" do

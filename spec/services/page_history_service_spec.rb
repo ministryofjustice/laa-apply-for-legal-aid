@@ -7,12 +7,14 @@ RSpec.describe PageHistoryService do
   let(:page_history) { %w[page_1 page_2] }
 
   before(:each) { redis.flushdb }
+
   after(:each) { redis.quit }
 
   subject { described_class.new(page_history_id:) }
 
   describe "#write" do
     before { subject.write(page_history) }
+
     it "creates a history record with the correct key" do
       expect(redis.keys).to eq [key]
     end
@@ -24,6 +26,7 @@ RSpec.describe PageHistoryService do
 
   describe "#read" do
     before { redis.set(key, page_history) }
+
     it "returns the correct history record" do
       expect(JSON.parse(subject.read)).to eq page_history
     end

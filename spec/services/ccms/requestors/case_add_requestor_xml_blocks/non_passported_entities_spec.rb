@@ -58,6 +58,7 @@ module CCMS
 
         context "entity CLINATIONAL" do
           before { savings_amount.update! national_savings: 1234 }
+
           context "applicant has national savings" do
             it "generates an entity block" do
               expect(xml).to have_means_entity "CLINATIONAL"
@@ -81,6 +82,7 @@ module CCMS
 
           context "applicant has no national savings" do
             before { savings_amount.update! national_savings: nil }
+
             it "does not generate the entity block" do
               expect(xml).not_to have_means_entity "CLINATIONAL"
             end
@@ -90,6 +92,7 @@ module CCMS
         context "entity VALUABLE_POSSESSION" do
           context "applicant has valuable_posssessions" do
             before { other_assets_decl.update! valuable_items_value: 878_787 }
+
             it "generates an entity block" do
               expect(xml).to have_means_entity "VALUABLE_POSSESSION"
             end
@@ -97,6 +100,7 @@ module CCMS
 
           context "applicant has no valuable_posssessions" do
             before { other_assets_decl.update! valuable_items_value: nil }
+
             it "generates an entity block" do
               doc = Nokogiri::XML(xml).remove_namespaces!
               entity_block = doc.xpath('//MeansAssesments//AssesmentDetails//Entity[EntityName = "VALUABLE_POSSESSION"]')
@@ -107,6 +111,7 @@ module CCMS
 
         context "entity CAPITAL_SHARE" do
           before { savings_amount.update! plc_shares: 1234 }
+
           context "applicant has capital shares" do
             it "generates an entity block" do
               expect(xml).to have_means_entity "CAPITAL_SHARE"
@@ -138,6 +143,7 @@ module CCMS
 
           context "applicant has no capital shares" do
             before { savings_amount.update! plc_shares: nil }
+
             it "does not generate the entity block" do
               expect(xml).not_to have_means_entity "CAPITAL_SHARE"
             end
@@ -248,6 +254,7 @@ module CCMS
         context "entity THIRDPARTACC" do
           context "the applicant has access to third party accounts" do
             before { legal_aid_application.savings_amount.update! other_person_account: 3_663_377 }
+
             it "generates the entity" do
               expect(xml).to have_means_entity "THIRDPARTACC"
             end
@@ -261,6 +268,7 @@ module CCMS
 
           context "applicant does not have access to thrid party accounts" do
             before { legal_aid_application.savings_amount.update! other_person_account: nil }
+
             it "does not generates the entity" do
               expect(xml).not_to have_means_entity "THIRDPARTACC"
             end
@@ -282,6 +290,7 @@ module CCMS
 
           context "client has no premium bonds" do
             before { legal_aid_application.savings_amount.update! national_savings: nil }
+
             it "does not generate the entity" do
               expect(xml).not_to have_means_entity "CLIPREMIUM"
             end
@@ -297,6 +306,7 @@ module CCMS
 
           context "applicant does not have money owing to them" do
             before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
+
             it "does not generate the entity block" do
               expect(xml).not_to have_means_entity "MONEY_DUE"
             end
@@ -324,6 +334,7 @@ module CCMS
 
           context "applicant does not have capital bonds" do
             before { legal_aid_application.savings_amount.update! peps_unit_trusts_capital_bonds_gov_stocks: nil }
+
             it "does not generates the entity block" do
               expect(xml).not_to have_means_entity "CLICAPITAL"
             end
@@ -400,6 +411,7 @@ module CCMS
               legal_aid_application.vehicle.destroy!
               legal_aid_application.reload
             end
+
             it "does not generates the entity block" do
               expect(xml).not_to have_means_entity "CAR_USED"
             end
@@ -409,6 +421,7 @@ module CCMS
         context "entity ADDPROPERTY" do
           context "applicant has additional property" do
             before { legal_aid_application.other_assets_declaration.update! second_home_value: 244_000 }
+
             it "generates entity block" do
               expect(xml).to have_means_entity "ADDPROPERTY"
             end
@@ -423,6 +436,7 @@ module CCMS
 
           context "applicant does not hae second property" do
             before { legal_aid_application.other_assets_declaration.update! second_home_value: nil }
+
             it "does not generates entity block" do
               expect(xml).not_to have_means_entity "ADDPROPERTY"
             end
@@ -438,6 +452,7 @@ module CCMS
 
           context "applicant has no shares" do
             before { legal_aid_application.savings_amount.update! plc_shares: nil }
+
             it "does not generate entity block" do
               expect(xml).not_to have_means_entity "CLISTOCK"
             end
@@ -459,6 +474,7 @@ module CCMS
 
           context "applicant has no life assurance" do
             before { legal_aid_application.savings_amount.update! life_assurance_endowment_policy: nil }
+
             it "does not generate entity block" do
               expect(xml).not_to have_means_entity "LIFE_ASSURANCE"
             end
@@ -468,6 +484,7 @@ module CCMS
         context "entity MAINTHIRD" do
           context "applicant does not own a property" do
             before { legal_aid_application.update! own_home: "no", property_value: nil, percentage_home: nil }
+
             it "does not generate entity block" do
               expect(xml).not_to have_means_entity "MAINTHIRD"
             end
@@ -475,6 +492,7 @@ module CCMS
 
           context "applicant owns 100% of a property" do
             before { legal_aid_application.update! property_value: 256_000, percentage_home: 100.0 }
+
             it "does not generate entity block" do
               expect(xml).not_to have_means_entity "MAINTHIRD"
             end
@@ -482,6 +500,7 @@ module CCMS
 
           context "applicant owns share of a property" do
             before { legal_aid_application.update! property_value: 256_000, percentage_home: 60.0 }
+
             it "generates entity block" do
               expect(xml).to have_means_entity "MAINTHIRD"
             end
@@ -503,6 +522,7 @@ module CCMS
 
           context "applicant has no inherited assets" do
             before { legal_aid_application.other_assets_declaration.update! inherited_assets_value: 0.0 }
+
             it "does not generate the entity block" do
               expect(xml).not_to have_means_entity "WILL"
             end
@@ -524,6 +544,7 @@ module CCMS
 
           context "applicant is not the beneficiary of a trust" do
             before { legal_aid_application.other_assets_declaration.update! trust_value: nil }
+
             it "does not generate the entity block" do
               expect(xml).not_to have_means_entity "TRUST"
             end

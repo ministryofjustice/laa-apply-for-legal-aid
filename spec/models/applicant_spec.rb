@@ -128,6 +128,7 @@ RSpec.describe Applicant, type: :model do
 
     context "when they receive friends and family income" do
       before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+
       it { is_expected.to be true }
     end
 

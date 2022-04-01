@@ -27,6 +27,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
 
   describe "GET /citizens/additional_accounts/new" do
     before { application.use_ccms!(:no_online_banking) }
+
     it "has reset the state and ccms_reason" do
       get new_citizens_additional_account_path(application)
       expect(application.reload.state).to eq "applicant_entering_means"

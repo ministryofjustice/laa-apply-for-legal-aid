@@ -272,6 +272,7 @@ module Reports
 
           context "multiple proceedings" do
             before { setup_multiple_proceedings }
+
             let(:expected_proceeding_types) { "Child arrangements order (contact), Inherent jurisdiction high court injunction, Non-molestation order" }
 
             it "generates multiple proceedings content" do
@@ -508,6 +509,7 @@ module Reports
 
           context "data begins with a vulnerable character" do
             before { firm.update!(name: "=malicious_code") }
+
             it "returns the escaped text" do
               expect(value_for("Firm name")).to eq "'=malicious_code"
             end

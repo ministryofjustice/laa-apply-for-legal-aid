@@ -20,6 +20,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
     context "unauthenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -130,6 +131,7 @@ RSpec.describe "check merits answers requests", type: :request do
       patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
     end
     before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
+
     let(:allow_ccms_submission) { true }
 
     context "logged in as an authenticated provider" do
@@ -199,6 +201,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
     context "unauthenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
   end
@@ -221,6 +224,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
     context "unauthenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -238,6 +242,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
       context "when evidence upload flag NOT set" do
         before { Setting.setting.update!(enable_evidence_upload: false) }
+
         it "redirects to gateway_evidence page" do
           subject
           expect(response).to redirect_to providers_legal_aid_application_gateway_evidence_path(application)

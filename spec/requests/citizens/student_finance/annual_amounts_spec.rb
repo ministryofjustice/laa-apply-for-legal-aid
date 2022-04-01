@@ -29,6 +29,7 @@ RSpec.describe "annual_amounts", type: :request do
 
     context "adds an amount" do
       before { get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) }
+
       let(:amount) { 2345 }
 
       it "displays the outgoing types page" do
@@ -64,6 +65,7 @@ RSpec.describe "annual_amounts", type: :request do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finances_annual_amount_path, params: params
       end
+
       let(:amount) { "" }
 
       it "displays an error" do

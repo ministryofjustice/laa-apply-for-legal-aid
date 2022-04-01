@@ -9,6 +9,7 @@ RSpec.describe "providers savings and investments", type: :request do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

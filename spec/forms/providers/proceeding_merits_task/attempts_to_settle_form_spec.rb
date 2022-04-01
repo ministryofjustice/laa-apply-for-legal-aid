@@ -8,6 +8,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleForm, type: :for
   describe "#save" do
     context "validation" do
       before { form.valid? }
+
       context "when the parameters are populated" do
         let(:attempts_made) { "some detail" }
 

@@ -11,6 +11,7 @@ module Providers
 
         context "authenticated" do
           before { login_as provider }
+
           it "returns success" do
             subject
             expect(response).to have_http_status(:ok)
@@ -26,6 +27,7 @@ module Providers
 
         context "unauthenticated" do
           before { subject }
+
           it_behaves_like "a provider not authenticated"
         end
       end
@@ -51,6 +53,7 @@ module Providers
 
         context "unauthenticated" do
           before { subject }
+
           it_behaves_like "a provider not authenticated"
         end
       end

@@ -33,6 +33,7 @@ module CCMS
           before do
             stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: response_body, status: 200)
           end
+
           let(:applicant_ccms_reference_in_example_response) { "4390016" }
 
           it "updates the applicant_ccms_reference" do
@@ -117,6 +118,7 @@ module CCMS
 
         context "applicant exists on CCMS but applicant details are not returned" do
           before { stub_request(:post, endpoint).with(body: /ClientInqRQ/).to_return(body: no_applicant_details_response_body, status: 200) }
+
           it_behaves_like "applicant does not exist on CCMS"
         end
       end

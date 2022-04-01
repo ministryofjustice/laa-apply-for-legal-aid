@@ -149,6 +149,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
     context "when the provider is not authenticated" do
       before { subject }
+
       let(:login) { nil }
 
       it_behaves_like "a provider not authenticated"

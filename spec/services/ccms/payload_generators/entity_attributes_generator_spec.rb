@@ -42,6 +42,7 @@ module CCMS
             before do
               allow_any_instance_of(described_class).to receive(:extract_raw_value).and_raise(TypeError, "type error")
             end
+
             it "captures the error" do
               config = {
                 value: 4664,

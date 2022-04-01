@@ -54,9 +54,11 @@ RSpec.describe Citizens::BanksController, type: :request do
 
     context "Welsh locale" do
       before { post citizens_banks_path, params: { provider_id: } }
+
       around(:each) do |example|
         I18n.with_locale(:cy) { example.run }
       end
+
       it "sets locale in the session" do
         expect(session[:locale]).to eq(:cy)
       end

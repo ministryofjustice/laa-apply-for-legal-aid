@@ -40,6 +40,7 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:login) { nil }
 
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 
@@ -56,6 +57,7 @@ RSpec.describe Providers::IncomeSummaryController do
         legal_aid_application.transaction_types << pension
         subject
       end
+
       it "does not display an Add additional income types section" do
         expect(response.body).not_to include(I18n.t("providers.income_summary.add_other_income.add_other_income"))
       end

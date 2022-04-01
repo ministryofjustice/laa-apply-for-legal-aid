@@ -91,6 +91,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
 
     context "unauthenticated" do
       before { subject }
+
       it_behaves_like "a provider not authenticated"
     end
 

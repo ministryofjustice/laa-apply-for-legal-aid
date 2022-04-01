@@ -82,6 +82,7 @@ RSpec.describe HMRC::ResultWorker do
       before do
         allow(hmrc_interface_service).to receive(:call).and_raise(HMRC::InterfaceError)
       end
+
       context "when @retry_count is" do
         context "below the halfway point" do
           before { worker.retry_count = 4 }
@@ -103,6 +104,7 @@ RSpec.describe HMRC::ResultWorker do
 
         context "one above the halfway point" do
           before { worker.retry_count = 6 }
+
           let(:expected_error) do
             <<~MESSAGE
               HMRC result check for id: #{hmrc_response.id} is failing, retry count at #{worker.retry_count}
