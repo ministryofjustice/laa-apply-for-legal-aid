@@ -631,27 +631,6 @@ Given("The means questions have been answered by the applicant") do
   )
 end
 
-Given("The means questions have been answered by the applicant on an application with section 8 proceedings") do
-  @legal_aid_application = create(
-    :application,
-    :with_applicant,
-    :with_proceedings,
-    :with_non_passported_state_machine,
-    :provider_assessing_means,
-    :with_policy_disregards,
-    :with_uncategorised_debit_transactions,
-    :with_uncategorised_credit_transactions,
-    explicit_proceedings: %i[da001 se013],
-    set_lead_proceeding: :da001,
-    )
-  login_as @legal_aid_application.provider
-  visit Flow::KeyPoint.path_for(
-    journey: :providers,
-    key_point: :start_after_applicant_completes_means,
-    legal_aid_application: @legal_aid_application,
-    )
-end
-
 Given("I add the details for a child dependant") do
   steps %(
     Then I fill "Name" with "Wednesday Adams"
