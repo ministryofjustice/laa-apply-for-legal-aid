@@ -27,7 +27,7 @@ RSpec.describe Reports::ReportsTypesCreator do
         {
           application_type: "A",
           submitted_to_ccms: "false",
-          capital_assessment_result: ["eligible"],
+          capital_assessment_result: %w[eligible],
           records_from_3i: "",
           records_from_2i: "",
           records_from_1i: "",
@@ -66,7 +66,7 @@ RSpec.describe Reports::ReportsTypesCreator do
             {
               application_type: "A",
               submitted_to_ccms: "false",
-              capital_assessment_result: ["eligible"],
+              capital_assessment_result: %w[eligible],
               records_from_3i: two_days_ago.year.to_s,
               records_from_2i: two_days_ago.month.to_s,
               records_from_1i: two_days_ago.day.to_s,
@@ -87,7 +87,7 @@ RSpec.describe Reports::ReportsTypesCreator do
             {
               application_type: "A",
               submitted_to_ccms: "false",
-              capital_assessment_result: ["eligible"],
+              capital_assessment_result: %w[eligible],
               records_from_3i: two_days_ago.year.to_s,
               records_from_2i: two_days_ago.month.to_s,
               records_from_1i: two_days_ago.day.to_s,
@@ -108,7 +108,7 @@ RSpec.describe Reports::ReportsTypesCreator do
             {
               application_type: "P",
               submitted_to_ccms: "false",
-              capital_assessment_result: ["eligible"],
+              capital_assessment_result: %w[eligible],
               records_from_3i: "",
               records_from_2i: "",
               records_from_1i: "",
@@ -130,7 +130,7 @@ RSpec.describe Reports::ReportsTypesCreator do
             {
               application_type: "NP",
               submitted_to_ccms: "false",
-              capital_assessment_result: ["eligible"],
+              capital_assessment_result: %w[eligible],
               records_from_3i: "",
               records_from_2i: "",
               records_from_1i: "",
@@ -152,7 +152,7 @@ RSpec.describe Reports::ReportsTypesCreator do
             {
               application_type: "A",
               submitted_to_ccms: "true",
-              capital_assessment_result: ["eligible"],
+              capital_assessment_result: %w[eligible],
               records_from_3i: "",
               records_from_2i: "",
               records_from_1i: "",
@@ -181,7 +181,7 @@ RSpec.describe Reports::ReportsTypesCreator do
         {
           application_type: "A",
           submitted_to_ccms: "false",
-          capital_assessment_result: ["pending"],
+          capital_assessment_result: %w[pending],
           records_from_3i: "",
           records_from_2i: "",
           records_from_1i: "",

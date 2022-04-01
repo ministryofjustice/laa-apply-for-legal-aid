@@ -65,7 +65,7 @@ private
     previous_page = page_history[-2]
 
     previous_page&.split("/")&.each_with_index do |section, i|
-      return previous_page.split("/")[i + 1] if ["applications"].include?(section)
+      return previous_page.split("/")[i + 1] if %w[applications].include?(section)
     end
   end
 
