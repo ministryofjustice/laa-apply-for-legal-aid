@@ -21,7 +21,7 @@ module CCMS
         @options = options
         @submission = submission
         @legal_aid_application = submission.legal_aid_application
-        @transaction_time_stamp = Time.current.to_fs(:ccms_date_time)
+        @transaction_time_stamp = Time.current.to_s(:ccms_date_time)
         @ccms_attribute_keys = attribute_configuration
       end
 
@@ -104,7 +104,7 @@ module CCMS
         xml.__send__(:"casebio:Proceedings") { generate_proceedings(xml) }
         xml.__send__(:"casebio:MeansAssesments") { generate_means_assessment(xml) }
         xml.__send__(:"casebio:MeritsAssesments") { generate_merits_assessment(xml) }
-        xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)) if @legal_aid_application.used_delegated_functions?
+        xml.__send__(:"casebio:DevolvedPowersDate", @legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)) if @legal_aid_application.used_delegated_functions?
         xml.__send__(:"casebio:ApplicationAmendmentType", @legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB")
         xml.__send__(:"casebio:LARDetails") { generate_lar_details(xml) }
       end
@@ -170,7 +170,7 @@ module CCMS
       end
 
       def generate_record_history(xml)
-        xml.__send__(:"common:DateCreated", Time.current.to_fs(:ccms_date_time))
+        xml.__send__(:"common:DateCreated", Time.current.to_s(:ccms_date_time))
         xml.__send__(:"common:LastUpdatedBy") do
           xml.__send__(:"common:UserLoginID", provider.username)
           xml.__send__(:"common:UserName", provider.username)
