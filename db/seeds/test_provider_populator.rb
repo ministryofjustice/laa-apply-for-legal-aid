@@ -1,7 +1,7 @@
 class TestProviderPopulator
   TEST_FIRMS = {
     "Test & Co" => [823, %w[1T823E 2T823E 3T823E]],
-    "Will-c & Co." => [910, ["1W910I"]],
+    "Will-c & Co." => [910, %w[1W910I]],
     "Test-sch & Co." => [1137, %w[2T113E:1 3T113E:2 4T113E:3 5T113E:4]],
     "Test2 & Co." => [824, %w[1T824E:5 2T824E:6 3T824E:7 4T824E:8]],
     "Test3 & Co." => [825, %w[3T823E:9 2T825E:10 3T825E:11]],

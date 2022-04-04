@@ -6,7 +6,7 @@ RSpec.describe OauthSessionSaver do
       "session_id" => "c38047b5f6a12c9de1540621ac8dc7d3",
       "current_application_id" => "583496de-f14e-46b5-bbff-8f95b4d6af22",
       "page_history_id" => "c121c57a-2802-4793-b700-af30b212d63b",
-      "warden.user.applicant.key" => [["50b98c1b-cf5d-428e-b32c-d20e9d1184dd"], nil],
+      "warden.user.applicant.key" => [%w[50b98c1b-cf5d-428e-b32c-d20e9d1184dd], nil],
       "_csrf_token" => "bHisWZcUID4DqymnSBSyJ31OghMf8cop4Aw/9RJ3T9c=",
       "provider_id" => "mock",
       "omniauth.state" => "6ab2a928a9ac79ff38ad32f73c47db3fce9a0a8f5d069a76",

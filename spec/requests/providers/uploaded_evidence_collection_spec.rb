@@ -274,7 +274,7 @@ module Providers
               end
 
               context "when benefits evidence is required" do
-                let(:missing_categories) { ["benefit_evidence"] }
+                let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises an error" do
                   subject
@@ -284,7 +284,7 @@ module Providers
               end
 
               context "when employment evidence is required" do
-                let(:missing_categories) { ["employment_evidence"] }
+                let(:missing_categories) { %w[employment_evidence] }
 
                 it "raises an error" do
                   subject
@@ -303,7 +303,7 @@ module Providers
             context "when all validation rules are satisfied" do
               let(:attachment_type) { "gateway_evidence" }
 
-              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(["gateway_evidence"]) }
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence]) }
 
               it "redirects to the next page" do
                 subject
@@ -332,7 +332,7 @@ module Providers
               end
 
               context "when benefits evidence is required" do
-                let(:missing_categories) { ["benefit_evidence"] }
+                let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises an error" do
                   subject
@@ -342,7 +342,7 @@ module Providers
               end
 
               context "when employment evidence is required" do
-                let(:missing_categories) { ["employment_evidence"] }
+                let(:missing_categories) { %w[employment_evidence] }
 
                 it "raises an error" do
                   subject
@@ -353,7 +353,7 @@ module Providers
 
               context "when files are uncategorised and mandatory evidence is missing" do
                 let(:attachment_type) { "uncategorised" }
-                let(:missing_categories) { ["benefit_evidence"] }
+                let(:missing_categories) { %w[benefit_evidence] }
 
                 it "raises two errors" do
                   subject
@@ -375,7 +375,7 @@ module Providers
             context "when all validation rules are satisfied" do
               let(:attachment_type) { "gateway_evidence" }
 
-              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(["gateway_evidence"]) }
+              before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence]) }
 
               it "redirects to the next page" do
                 subject
@@ -403,7 +403,7 @@ module Providers
               end
 
               context "when benefits evidence is required" do
-                let(:missing_categories) { ["benefit_evidence"] }
+                let(:missing_categories) { %w[benefit_evidence] }
 
                 before { attachment1.update!(attachment_type: "gateway_evidence") }
 
@@ -417,7 +417,7 @@ module Providers
               end
 
               context "when employment evidence is required" do
-                let(:missing_categories) { ["employment_evidence"] }
+                let(:missing_categories) { %w[employment_evidence] }
 
                 before { attachment1.update!(attachment_type: "gateway_evidence") }
 
@@ -483,7 +483,7 @@ module Providers
         subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
 
         before do
-          allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(["gateway_evidence"])
+          allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence])
           login_as provider
         end
 

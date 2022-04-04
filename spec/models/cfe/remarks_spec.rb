@@ -146,8 +146,8 @@ module CFE
             05bcd12c-6790-49bc-a1aa-490fba8d2624
           ],
         },
-        policy_disregards: [
-          "england_infected_blood_support",
+        policy_disregards: %w[
+          england_infected_blood_support
         ],
       }
     end

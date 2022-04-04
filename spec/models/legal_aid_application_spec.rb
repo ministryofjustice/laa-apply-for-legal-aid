@@ -1194,7 +1194,7 @@ RSpec.describe LegalAidApplication, type: :model do
     it "allows a valid document category to be added" do
       laa.required_document_categories << "benefit_evidence"
       laa.save!
-      expect(laa.required_document_categories).to eq ["benefit_evidence"]
+      expect(laa.required_document_categories).to eq %w[benefit_evidence]
     end
 
     it "allows multiple valid document categories to be added" do
