@@ -702,13 +702,8 @@ Feature: Civil application journeys
     Then I should be on a page showing "Provide a statement of case"
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     When I upload an evidence file named 'hello_world.pdf'
-
-    And show me the page
-
     Then I should not see "There was a problem uploading your file"
     Then I reload the page
-
-    And show me the page
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
