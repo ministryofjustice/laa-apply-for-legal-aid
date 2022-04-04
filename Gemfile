@@ -18,7 +18,7 @@ gem "oauth"
 gem "pg"
 gem "pg_dump_anonymize"
 gem "puma", "~> 5.6.4"
-gem "rails", "~> 6.1.5"
+gem "rails", "~> 7"
 gem "regexp-examples"
 gem "rexml"
 gem "savon", "~> 2.12.1"
@@ -129,7 +129,6 @@ group :development do
   gem "listen", ">= 3.0.5", "< 3.8"
   gem "pry-rescue"
   gem "pry-stack_explorer"
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
 end
 

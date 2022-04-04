@@ -88,7 +88,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         end
 
         it "displays correct used_delegated_functions_on answer" do
-          expect(used_delegated_functions_answer.content.strip).to eq(application.used_delegated_functions_on.to_s.strip)
+          expect(used_delegated_functions_answer.content.strip).to eq(application.used_delegated_functions_on.to_fs.strip)
         end
       end
 

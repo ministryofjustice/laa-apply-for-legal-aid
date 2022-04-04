@@ -14,7 +14,7 @@ private
   def personalise(feedback_id)
     feedback = Feedback.find(feedback_id)
     set_personalisation(
-      created_at: feedback.created_at&.to_s(:rfc822),
+      created_at: feedback.created_at&.to_fs(:rfc822),
       user_data: user_data(feedback),
       user_type: feedback.source,
       done_all_needed: yes_or_no(feedback),
