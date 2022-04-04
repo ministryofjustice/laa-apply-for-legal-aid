@@ -61,11 +61,6 @@ Then("I fill {string} with {string}") do |field, value|
   fill_in(name, with: value)
 end
 
-# Then("I upload a pdf file") do
-#   # attach_file("Attach a file", Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"))
-#   attach_file("dz-upload-button", Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"))
-# end
-
 Then("I reload the page") do
   visit current_path
 end

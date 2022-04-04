@@ -30,7 +30,7 @@ Given("csrf is enabled") do
 end
 
 And("I should see {int} uploaded files") do |int|
-  sleep 0.5
+  sleep 1
   delete_buttons = find_all(:xpath, "//td//input[contains(@class,'button-as-link')]")
   expect(delete_buttons.count).to eq int
 end
