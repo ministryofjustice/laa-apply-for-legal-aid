@@ -1,7 +1,3 @@
-<%
-  empty_cfe_result = {result: 'nil'}
-%>
-
 <%= back_link() %>
 <div class='govuk-body'>
   <h1 class="govuk-heading-l">Legal Aid Application</h1>
@@ -59,18 +55,18 @@
         <dd><%= cfe_submission.error_message ||= 'N/A' %></dd>
       </dl>
       <details>
+        <section>
+          <% if cfe_submission.result&.result %>
+            <%= format_hash(JSON.parse(cfe_submission.result.result)) %>
+          <% else %>
+            <p class="govuk-body">No result available</p>
+          <% end %>
+        </section>
         <summary class="govuk-heading-m govuk-details__summary"
           title="CFE result"
           aria-label="CFE result">
           CFE result
         </summary>
-        <section>
-          <% if cfe_submission.result&.result.nil? %>
-            <p class="govuk-body">No result available</p>
-          <% else %>
-            <%= format_hash(JSON.parse(cfe_submission.result&.result)) %>
-          <% end %>
-        </section>
       </details>
     <% end %>
   <% end %>
