@@ -25,7 +25,7 @@ class StatusController < ApiController
   end
 
   def data
-    redirect_to ENV["GOOGLE_DATA_STUDIO_URL"], allow_other_host: true
+    redirect_to ENV["GOOGLE_DATA_STUDIO_URL"]
   end
 
 private

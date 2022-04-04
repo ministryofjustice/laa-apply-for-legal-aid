@@ -1,24 +1,27 @@
 require_relative "boot"
 
 require "rails"
-require "rails/all"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_mailbox/engine"
+require "action_text/engine"
+require "action_view/railtie"
+require "action_cable/engine"
+# explicitly not loading 'sprockets/railtie'
+require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
 
 module LaaApplyForLegalAid
   class Application < Rails::Application
-    # If you're upgrading and haven't set `cookies_serializer` previously, your cookie serializer
-    # was `:marshal`. Convert all cookies to JSON, using the `:hybrid` formatter.
-    #
-    # If you're confident all your cookies are JSON formatted, you can switch to the `:json` formatter.
-    # Continue to use `:marshal` for backward-compatibility with old cookies.
-    #
-    # See https://guides.rubyonrails.org/action_controller_overview.html#cookies for more information.
-    config.action_dispatch.cookies_serializer = :hybrid
-    config.load_defaults 7.0
+    config.load_defaults "6.0"
     config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
 
-    config.active_record.legacy_connection_handling = false
     config.time_zone = "London"
 
     config.generators do |g|

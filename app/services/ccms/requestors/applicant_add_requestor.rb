@@ -46,7 +46,7 @@ module CCMS
 
       # this is all mandatory: we don't hold any of this data except date of birth
       def personal_information(xml)
-        xml.__send__(:"clientbio:DateOfBirth", applicant.date_of_birth.to_fs(:ccms_date))
+        xml.__send__(:"clientbio:DateOfBirth", applicant.date_of_birth.to_s(:ccms_date))
         xml.__send__(:"clientbio:Gender", "UNSPECIFIED")
         xml.__send__(:"clientbio:MaritalStatus", "U")
         xml.__send__(:"clientbio:VulnerableClient", false)
