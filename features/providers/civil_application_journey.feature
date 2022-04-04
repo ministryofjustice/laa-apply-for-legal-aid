@@ -704,6 +704,7 @@ Feature: Civil application journeys
     When I upload an evidence file named 'hello_world.pdf'
     Then I should not see "There was a problem uploading your file"
     Then I reload the page
+    And I sleep for 1 seconds
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
