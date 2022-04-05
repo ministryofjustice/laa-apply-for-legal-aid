@@ -31,7 +31,7 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
     end
 
     it "does not delete the transaction type" do
-      expect { subject }.not_to change { TransactionType.count }
+      expect { subject }.not_to change(TransactionType, :count)
     end
 
     it "removes the assocation with the transaction type" do

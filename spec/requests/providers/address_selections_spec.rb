@@ -109,7 +109,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         let(:lookup_id) { "" }
 
         it "does not create a new address record" do
-          expect { subject }.not_to change { Address.count }
+          expect { subject }.not_to change(Address, :count)
         end
 
         it "renders the address selection page" do

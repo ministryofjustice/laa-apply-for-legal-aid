@@ -61,7 +61,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
       end
 
       it "creates a vehicle" do
-        expect { subject }.to change { Vehicle.count }.by(1)
+        expect { subject }.to change(Vehicle, :count).by(1)
         expect(legal_aid_application.reload.vehicle).to be_present
       end
 
@@ -78,7 +78,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
         let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
 
         it "does not create a vehicle" do
-          expect { subject }.not_to change { Vehicle.count }
+          expect { subject }.not_to change(Vehicle, :count)
         end
 
         it "redirects to estimated value" do
@@ -104,7 +104,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
       end
 
       it "does not create a vehicle" do
-        expect { subject }.not_to change { Vehicle.count }
+        expect { subject }.not_to change(Vehicle, :count)
       end
 
       it "sets own_vehicle to false" do
@@ -120,7 +120,7 @@ RSpec.describe Providers::VehiclesController, type: :request do
         let(:legal_aid_application) { create :legal_aid_application, :with_vehicle, :passported }
 
         it "delete existing vehicle" do
-          expect { subject }.to change { Vehicle.count }.by(-1)
+          expect { subject }.to change(Vehicle, :count).by(-1)
         end
 
         it "redirects to offline account page on passported journey" do

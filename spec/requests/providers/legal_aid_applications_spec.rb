@@ -262,7 +262,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
       end
 
       it "does not create a new application record" do
-        expect { subject }.not_to change { LegalAidApplication.count }
+        expect { subject }.not_to change(LegalAidApplication, :count)
       end
 
       it "redirects to new applicant page " do

@@ -29,7 +29,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     it "generates a new check_benefit_result" do
-      expect { subject }.to change { BenefitCheckResult.count }.by(1)
+      expect { subject }.to change(BenefitCheckResult, :count).by(1)
     end
 
     it "has not transitioned the state" do
@@ -51,7 +51,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       it "does not generate a new one" do
         expect(BenefitCheckService).not_to receive(:call)
-        expect { subject }.to_not change { BenefitCheckResult.count }
+        expect { subject }.to_not change(BenefitCheckResult, :count)
       end
 
       context "and the applicant has since been modified" do

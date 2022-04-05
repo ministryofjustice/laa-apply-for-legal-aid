@@ -45,7 +45,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     end
 
     it "creates an applicant" do
-      expect { subject }.to change { Applicant.count }.by(1)
+      expect { subject }.to change(Applicant, :count).by(1)
       expect(applicant).to be_present
       expect(applicant.first_name).to eq(param_applicant[:first_name])
       expect(applicant.last_name).to eq(param_applicant[:last_name])
@@ -79,11 +79,11 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       end
 
       it "does not create applicant" do
-        expect { subject }.not_to change { Applicant.count }
+        expect { subject }.not_to change(Applicant, :count)
       end
 
       it "does not create application" do
-        expect { subject }.not_to change { LegalAidApplication.count }
+        expect { subject }.not_to change(LegalAidApplication, :count)
       end
     end
 
@@ -101,7 +101,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       end
 
       it "creates an applicant" do
-        expect { subject }.to change { Applicant.count }.by(1)
+        expect { subject }.to change(Applicant, :count).by(1)
         expect(applicant).to be_present
         expect(applicant.first_name).to eq(param_applicant[:first_name])
         expect(applicant.last_name).to eq(param_applicant[:last_name])

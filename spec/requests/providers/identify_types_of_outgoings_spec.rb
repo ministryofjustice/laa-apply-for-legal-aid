@@ -52,7 +52,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     end
 
     it "does not add transaction types to the application" do
-      expect { subject }.not_to change { LegalAidApplicationTransactionType.count }
+      expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)
     end
 
     it "should display an error" do
@@ -71,7 +71,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       let(:transaction_type_ids) { outgoing_types.map(&:id) }
 
       it "adds transaction types to the application" do
-        expect { subject }.to change { LegalAidApplicationTransactionType.count }.by(outgoing_types.length)
+        expect { subject }.to change(LegalAidApplicationTransactionType, :count).by(outgoing_types.length)
         expect(legal_aid_application.reload.transaction_types).to match_array(outgoing_types)
       end
 
@@ -103,7 +103,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       end
 
       it "does not delete transaction types" do
-        expect { subject }.not_to change { TransactionType.count }
+        expect { subject }.not_to change(TransactionType, :count)
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       let(:params) { { legal_aid_application: { none_selected: "true" } } }
 
       it "does not add transaction types to the application" do
-        expect { subject }.not_to change { LegalAidApplicationTransactionType.count }
+        expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)
       end
 
       it "redirects to the next step" do
@@ -128,7 +128,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
 
         it "removes transaction types from the application" do
-          expect { subject }.to change { LegalAidApplicationTransactionType.count }
+          expect { subject }.to change(LegalAidApplicationTransactionType, :count)
             .by(-outgoing_types.length)
         end
 

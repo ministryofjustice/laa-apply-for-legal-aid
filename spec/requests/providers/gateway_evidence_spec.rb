@@ -303,7 +303,7 @@ module Providers
         context "when only original file exists" do
           it "deletes the file" do
             attachment_id = original_file.id
-            expect { subject }.to change { Attachment.count }.by(-1)
+            expect { subject }.to change(Attachment, :count).by(-1)
             expect(Attachment.exists?(attachment_id)).to be(false)
           end
         end
@@ -312,7 +312,7 @@ module Providers
           let(:gateway_evidence) { create :gateway_evidence, :with_original_and_pdf_files_attached }
 
           it "deletes both attachments" do
-            expect { subject }.to change { Attachment.count }.by(-2)
+            expect { subject }.to change(Attachment, :count).by(-2)
           end
         end
       end

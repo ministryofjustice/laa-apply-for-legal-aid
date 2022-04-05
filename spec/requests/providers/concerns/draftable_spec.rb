@@ -52,7 +52,7 @@ RSpec.describe Providers::Draftable do
       end
 
       it "creates a new applicant associated with the application" do
-        expect { subject }.to change { Applicant.count }.by(1)
+        expect { subject }.to change(Applicant, :count).by(1)
 
         new_applicant = application.reload.applicant
         expect(new_applicant).to be_instance_of(Applicant)
@@ -79,7 +79,7 @@ RSpec.describe Providers::Draftable do
         end
 
         it "does NOT create a new applicant" do
-          expect { subject }.not_to change { Applicant.count }
+          expect { subject }.not_to change(Applicant, :count)
         end
       end
 
@@ -99,7 +99,7 @@ RSpec.describe Providers::Draftable do
         end
 
         it "creates a new applicant associated with the application" do
-          expect { subject }.to change { Applicant.count }.by(1)
+          expect { subject }.to change(Applicant, :count).by(1)
 
           new_applicant = application.reload.applicant
           expect(new_applicant).to be_instance_of(Applicant)
