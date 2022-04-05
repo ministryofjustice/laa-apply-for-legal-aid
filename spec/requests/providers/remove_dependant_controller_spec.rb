@@ -4,8 +4,10 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
   let(:login) { login_as legal_aid_application.provider }
+  let(:extra_dependant_count) { 0 }
 
   before do
+    create_list :dependant, extra_dependant_count, legal_aid_application: legal_aid_application
     login
     subject
   end
@@ -38,8 +40,25 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
     context "choose yes" do
       let(:remove_dependant) { "true" }
 
-      it "redirects to the has other dependants page" do
-        expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
+      context "when no dependants remain after deletion" do
+        it "redirects to the has_dependants page" do
+          expect(response).to redirect_to(providers_legal_aid_application_has_dependants_path(legal_aid_application))
+        end
+
+        it { expect(legal_aid_application.dependants.count).to eq 0 }
+
+        it "resets the has_dependants value" do
+          # this prevents the 'yes' checkbox being selected when the provider returns to the page
+          expect(legal_aid_application.has_dependants?).to be false
+        end
+      end
+
+      context "when dependants remain after the deletion" do
+        let(:extra_dependant_count) { 1 }
+
+        it "redirects to the has_other_dependants page" do
+          expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
+        end
       end
     end
 

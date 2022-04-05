@@ -8,6 +8,7 @@ module Providers
     def update
       if form.valid?
         dependant&.destroy! if form.remove_dependant?
+        legal_aid_application.update!(has_dependants: nil) unless legal_aid_application.dependants.any?
         return go_forward
       end
 
