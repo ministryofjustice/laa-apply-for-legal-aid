@@ -24,9 +24,9 @@ RSpec.describe Providers::DependantsController, type: :request do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/dependants/:dependant_id" do
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
-
     subject { get(providers_legal_aid_application_dependant_path(legal_aid_application, dependant)) }
+
+    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -40,6 +40,13 @@ RSpec.describe Providers::DependantsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/dependants/dependant_id" do
+    subject do
+      patch(
+        providers_legal_aid_application_dependant_path(legal_aid_application, dependant),
+        params:,
+      )
+    end
+
     let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
     let(:params) do
       {
@@ -56,13 +63,6 @@ RSpec.describe Providers::DependantsController, type: :request do
           assets_value: "",
         },
       }
-    end
-
-    subject do
-      patch(
-        providers_legal_aid_application_dependant_path(legal_aid_application, dependant),
-        params:,
-      )
     end
 
     context "when the parameters are valid" do

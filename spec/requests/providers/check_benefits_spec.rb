@@ -11,9 +11,9 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   let(:provider) { create :provider }
 
   describe "GET /providers/applications/:application_id/check_benefits", :vcr do
-    let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
-
     subject { get "/providers/applications/#{application.id}/check_benefits" }
+
+    let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
 
     before { login }
 

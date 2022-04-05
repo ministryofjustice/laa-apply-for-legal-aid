@@ -10,11 +10,11 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
   end
 
   describe "GET /providers/:application_id/applicant_employed" do
+    subject { get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application) }
+
     before do
       subject
     end
-
-    subject { get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application) }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -37,6 +37,13 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/applicant_employed" do
+    subject do
+      post(
+        providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+        params:,
+      )
+    end
+
     before do
       subject
     end
@@ -44,13 +51,6 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     let(:employed) { nil }
     let(:params) do
       { applicant: { employed: } }
-    end
-
-    subject do
-      post(
-        providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-        params:,
-      )
     end
 
     it "renders successfully" do
@@ -113,9 +113,9 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
   end
 
   context "the employed journey feature flag is enabled" do
-    before { Setting.setting.update!(enable_employed_journey: true) }
-
     subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
+
+    before { Setting.setting.update!(enable_employed_journey: true) }
 
     let(:params) { { applicant: { employed: "true" } } }
     let(:provider) { create :provider }

@@ -22,6 +22,8 @@ RSpec.describe Providers::ApplicantsController, type: :request do
   end
 
   describe "POST /providers/applicants" do
+    subject { post providers_applicants_path, params: params.merge(submit_button) }
+
     let(:submit_button) { {} }
     let(:param_applicant) { FactoryBot.attributes_for :applicant }
     let(:params) do
@@ -36,8 +38,6 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     let(:legal_aid_application) { provider.legal_aid_applications.last }
     let(:applicant) { legal_aid_application.applicant }
     let(:next_url) { providers_legal_aid_application_address_lookup_path(legal_aid_application) }
-
-    subject { post providers_applicants_path, params: params.merge(submit_button) }
 
     it "creates an application with the provider's office" do
       expect { subject }.to change { provider.legal_aid_applications.count }.by(1)

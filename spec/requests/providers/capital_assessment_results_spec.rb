@@ -4,6 +4,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET  /providers/applications/:legal_aid_application_id/capital_assessment_result" do
+    subject { get providers_legal_aid_application_capital_assessment_result_path(legal_aid_application) }
     let(:cfe_result) { create :cfe_v3_result }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
@@ -19,8 +20,6 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       login_provider
       subject
     end
-
-    subject { get providers_legal_aid_application_capital_assessment_result_path(legal_aid_application) }
 
     before { before_tasks }
 

@@ -42,6 +42,13 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:application_id/applicant_bank_account" do
+    subject do
+      patch(
+        "/providers/applications/#{application_id}/applicant_bank_account",
+        params:,
+      )
+    end
+
     let(:applicant_bank_account) { "false" }
     let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
     let(:params) do
@@ -51,13 +58,6 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           offline_savings_accounts:,
         },
       }
-    end
-
-    subject do
-      patch(
-        "/providers/applications/#{application_id}/applicant_bank_account",
-        params:,
-      )
     end
 
     context "the provider is authenticated" do

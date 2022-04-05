@@ -28,6 +28,8 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   end
 
   describe "PATCH /citizens/identify_types_of_income" do
+    subject { patch citizens_identify_types_of_income_path, params: params }
+
     let(:transaction_type_ids) { [] }
     let(:params) do
       {
@@ -36,8 +38,6 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
         },
       }
     end
-
-    subject { patch citizens_identify_types_of_income_path, params: params }
 
     it "does not add transaction types to the application" do
       expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)

@@ -3,6 +3,8 @@ require "sidekiq/testing"
 
 RSpec.describe "FeedbacksController", type: :request do
   describe "POST /feedback" do
+    subject { post feedback_index_path, params: params, headers: { "HTTP_REFERER" => originating_page } }
+
     let(:params) { { feedback: attributes_for(:feedback) } }
     let(:feedback) { Feedback.order(created_at: :asc).last }
     let(:feedback_params) { params[:feedback] }
@@ -26,8 +28,6 @@ RSpec.describe "FeedbacksController", type: :request do
 
       set_session(session_vars)
     end
-
-    subject { post feedback_index_path, params: params, headers: { "HTTP_REFERER" => originating_page } }
 
     describe "creation of feedback record" do
       context "any type of user" do

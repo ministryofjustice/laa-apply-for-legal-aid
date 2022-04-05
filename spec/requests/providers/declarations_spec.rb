@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::DeclarationsController, type: :request do
-  let(:provider) { create :provider }
-
   subject(:visit_page) { get(providers_declaration_path) }
+
+  let(:provider) { create :provider }
 
   describe "GET /providers/declaration" do
     before do

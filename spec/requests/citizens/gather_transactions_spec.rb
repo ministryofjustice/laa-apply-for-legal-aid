@@ -39,10 +39,10 @@ RSpec.describe "citizen accounts request", type: :request do
   end
 
   describe "GET /citizens/gather_transactions" do
+    subject { get citizens_gather_transactions_path }
+
     let(:worker_id) { SecureRandom.uuid }
     let(:worker) { {} }
-
-    subject { get citizens_gather_transactions_path }
 
     before do
       expect(ImportBankDataWorker).to receive(:perform_async).with(legal_aid_application.id).and_return(worker_id)

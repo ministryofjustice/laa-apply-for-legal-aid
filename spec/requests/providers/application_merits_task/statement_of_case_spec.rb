@@ -74,6 +74,8 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/statement_of_case" do
+        subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+
         let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
         let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
         let(:statement_of_case) { legal_aid_application.statement_of_case }
@@ -87,8 +89,6 @@ module Providers
         let(:upload_button) { { upload_button: "Upload" } }
         let(:button_clicked) { {} }
         let(:params) { { application_merits_task_statement_of_case: params_statement_of_case }.merge(button_clicked) }
-
-        subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
@@ -404,12 +404,12 @@ module Providers
       end
 
       describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case" do
+        subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+
         let(:statement_of_case) { create :statement_of_case, :with_original_file_attached }
         let(:legal_aid_application) { statement_of_case.legal_aid_application }
         let(:original_file) { statement_of_case.original_attachments.first }
         let(:params) { { attachment_id: statement_of_case.original_attachments.first.id } }
-
-        subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
 
         before do
           login_as provider

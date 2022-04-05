@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe Providers::Draftable do
   # Using providers/applicants#update to thoroughly test draftable behaviour
   describe "PATCH /providers/applications/:legal_aid_application_id/applicant" do
+    subject { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
+
     let(:application) { create :legal_aid_application }
     let(:provider) { application.provider }
     let(:params) do
@@ -21,8 +23,6 @@ RSpec.describe Providers::Draftable do
     before do
       login_as provider
     end
-
-    subject { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
 
     context "Form submitted using Continue button" do
       let(:submit_button) { { anything: "That is not draft_button" } }

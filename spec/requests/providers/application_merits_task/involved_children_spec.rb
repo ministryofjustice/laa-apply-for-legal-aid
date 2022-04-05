@@ -33,9 +33,9 @@ module Providers
       end
 
       describe "show: GET /providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
-        let(:child) { create :involved_child, legal_aid_application: application }
-
         subject { get providers_legal_aid_application_involved_child_path(application, child) }
+
+        let(:child) { create :involved_child, legal_aid_application: application }
 
         context "authenticated" do
           before { login_as provider }
@@ -59,6 +59,8 @@ module Providers
       end
 
       describe "update: PATCH providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
+        subject { patch providers_legal_aid_application_involved_child_path(application, child), params: params }
+
         let(:child) { create :involved_child, legal_aid_application: application }
         let(:new_full_name) { "#{child.full_name} Junior" }
 
@@ -70,8 +72,6 @@ module Providers
             "date_of_birth(1i)": "2020",
           } }
         end
-
-        subject { patch providers_legal_aid_application_involved_child_path(application, child), params: params }
 
         context "authenticated" do
           before { login_as provider }

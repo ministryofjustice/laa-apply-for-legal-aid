@@ -3,6 +3,8 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe HasOtherInvolvedChildrenController, type: :request do
+      subject { get providers_legal_aid_application_has_other_involved_children_path(application) }
+
       let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
       let(:provider) { application.provider }
       let(:child1) { create :involved_child, legal_aid_application: application }
@@ -12,8 +14,6 @@ module Providers
         allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
         login_as provider
       end
-
-      subject { get providers_legal_aid_application_has_other_involved_children_path(application) }
 
       describe "show: GET /providers/applications/:legal_aid_application_id/has_other_involved_children" do
         it "returns success" do
@@ -30,6 +30,8 @@ module Providers
       end
 
       describe "update: PATCH /providers/applications/:legal_aid_application_id/has_other_involved_children" do
+        subject { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params.merge(button_clicked) }
+
         let(:params) do
           {
             binary_choice_form: {
@@ -40,8 +42,6 @@ module Providers
         end
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
-
-        subject { patch providers_legal_aid_application_has_other_involved_children_path(application), params: params.merge(button_clicked) }
 
         context "Wants to add more children" do
           let(:radio_button) { "true" }
