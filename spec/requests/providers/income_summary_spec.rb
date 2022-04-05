@@ -79,6 +79,7 @@ RSpec.describe Providers::IncomeSummaryController do
   end
 
   describe "POST /providers/income_summary" do
+    subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
     let(:applicant) { create :applicant }
     let(:bank_provider) { create :bank_provider, applicant: applicant }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -87,7 +88,6 @@ RSpec.describe Providers::IncomeSummaryController do
 
     let(:submit_button) { { continue_button: "Continue" } }
 
-    subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
     before { subject }
 
     it "redirects to the next page" do
@@ -109,6 +109,7 @@ RSpec.describe Providers::IncomeSummaryController do
     end
 
     context "The transaction type category has no bank transactions" do
+      subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -117,7 +118,6 @@ RSpec.describe Providers::IncomeSummaryController do
 
       let(:submit_button) { { continue_button: "Continue" } }
 
-      subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
       before { subject }
 
       it "renders successfully" do

@@ -44,13 +44,13 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
     end
 
     context "when the provider is authenticated" do
+      subject do
+        patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
+      end
+
       before do
         allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
         login_as provider
-      end
-
-      subject do
-        patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
       end
 
       context "Form submitted using Continue button" do
@@ -96,11 +96,11 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
       end
 
       context "Form submitted using Save as draft button" do
-        let(:submit_button) { { draft_button: "Save as draft" } }
-
         subject do
           patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
         end
+
+        let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
           subject

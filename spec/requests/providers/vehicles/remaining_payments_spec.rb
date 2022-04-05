@@ -27,6 +27,13 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/vehicle/remaining_payment" do
+    subject do
+      patch(
+        providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application),
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:payment_remaining) { Faker::Commerce.price(range: 100..2000) }
     let(:payments_remain) { "true" }
     let(:params) do
@@ -39,13 +46,6 @@ RSpec.describe Providers::Vehicles::RemainingPaymentsController, type: :request 
     end
     let(:next_url) { providers_legal_aid_application_vehicles_age_path(legal_aid_application) }
     let(:submit_button) { {} }
-
-    subject do
-      patch(
-        providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application),
-        params: params.merge(submit_button),
-      )
-    end
 
     it "updates vehicle" do
       subject

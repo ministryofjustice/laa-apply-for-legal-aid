@@ -56,9 +56,9 @@ RSpec.describe Providers::LimitationsController, type: :request do
     end
 
     context "when delegated functions have not been used" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
-
       subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
+
+      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
 
       it "redirects to next page" do
         expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
@@ -66,11 +66,11 @@ RSpec.describe Providers::LimitationsController, type: :request do
     end
 
     context "when delegated functions have been used" do
+      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
+
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
       let(:proceeding_type) { legal_aid_application.proceeding_types.first }
       let(:provider) { legal_aid_application.provider }
-
-      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
       context "with the correct params" do
         context "when no limit extension is requested" do

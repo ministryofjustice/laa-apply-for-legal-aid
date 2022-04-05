@@ -34,6 +34,13 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
   end
 
   describe "PATCH /providers/identify_types_of_outgoing" do
+    subject do
+      patch(
+        providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application),
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:transaction_type_ids) { [] }
     let(:submit_button) { {} }
     let(:params) do
@@ -42,13 +49,6 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
           transaction_type_ids:,
         },
       }
-    end
-
-    subject do
-      patch(
-        providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application),
-        params: params.merge(submit_button),
-      )
     end
 
     it "does not add transaction types to the application" do

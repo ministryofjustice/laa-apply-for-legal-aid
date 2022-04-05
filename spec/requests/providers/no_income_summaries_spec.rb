@@ -32,6 +32,13 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/no_income_summary" do
+    subject do
+      patch(
+        "/providers/applications/#{application_id}/no_income_summary",
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:no_income_summaries) { "true" }
     let(:submit_button) { {} }
     let(:params) do
@@ -40,13 +47,6 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
           no_income_summaries:,
         },
       }
-    end
-
-    subject do
-      patch(
-        "/providers/applications/#{application_id}/no_income_summary",
-        params: params.merge(submit_button),
-      )
     end
 
     context "the provider is authenticated" do

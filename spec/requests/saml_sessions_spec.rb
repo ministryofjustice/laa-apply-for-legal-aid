@@ -10,9 +10,8 @@ RSpec.describe "SamlSessionsController", type: :request do
   let(:provider_details_api_reponse) { api_response.to_json }
 
   describe "DELETE /providers/sign_out" do
-    before { sign_in provider }
-
     subject { delete destroy_provider_session_path }
+    before { sign_in provider }
 
     it "logs user out" do
       subject

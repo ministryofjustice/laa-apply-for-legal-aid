@@ -41,6 +41,8 @@ module Providers
       end
 
       describe "PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children" do
+        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
+
         let(:params) do
           {
             proceeding_merits_task_proceeding_linked_child:
@@ -49,8 +51,6 @@ module Providers
         end
 
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
-
-        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
 
         context "all selected" do
           it "adds involved children to the proceeding" do
@@ -121,11 +121,11 @@ module Providers
         end
 
         context "Form submitted using Save as draft button" do
-          let(:submit_button) { { draft_button: "Save as draft" } }
-
           subject do
             patch providers_merits_task_list_linked_children_path(proceeding), params: params.merge(submit_button)
           end
+
+          let(:submit_button) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
             subject

@@ -56,6 +56,8 @@ module Providers
     end
 
     describe "PATCH /providers/applications/:legal_aid_application_id/uploaded_evidence_collection" do
+      subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
+
       let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
       let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
       let(:params_uploaded_evidence_collection) do
@@ -68,8 +70,6 @@ module Providers
       let(:delete_button) { { delete_button: "Delete" } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
-
-      subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
 
       before { login_as provider }
 
@@ -474,13 +474,13 @@ module Providers
       end
 
       context "Delete" do
+        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
+
         let(:button_clicked) { delete_button }
         let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
         let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
         let(:original_file) { uploaded_evidence_collection.original_attachments.first }
         let(:delete_params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
-
-        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
 
         before do
           allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence])

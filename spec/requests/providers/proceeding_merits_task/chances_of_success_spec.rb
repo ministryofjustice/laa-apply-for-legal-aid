@@ -32,6 +32,13 @@ module Providers
       end
 
       describe "POST /providers/merits_task_list/:id/chances_of_success" do
+        subject do
+          post(
+            providers_merits_task_list_chances_of_success_index_path(proceeding),
+            params: params.merge(submit_button),
+          )
+        end
+
         let(:success_prospect) { :poor }
         let!(:chances_of_success) do
           create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details",
@@ -42,13 +49,6 @@ module Providers
           { proceeding_merits_task_chances_of_success: { success_likely: } }
         end
         let(:submit_button) { {} }
-
-        subject do
-          post(
-            providers_merits_task_list_chances_of_success_index_path(proceeding),
-            params: params.merge(submit_button),
-          )
-        end
 
         it "sets chances_of_success to true" do
           expect { subject }.to change { chances_of_success.reload.success_likely }.to(true)

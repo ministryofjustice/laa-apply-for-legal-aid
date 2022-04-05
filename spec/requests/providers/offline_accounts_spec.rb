@@ -60,6 +60,8 @@ RSpec.describe "providers offine accounts", type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/savings_and_investment" do
+    subject { patch providers_legal_aid_application_offline_account_path(application), params: params.merge(submit_button) }
+
     let(:offline_current_accounts) { rand(1...1_000_000.0).round(2).to_s }
     let(:check_box_offline_current_accounts) { "true" }
     let(:params) do
@@ -70,8 +72,6 @@ RSpec.describe "providers offine accounts", type: :request do
         },
       }
     end
-
-    subject { patch providers_legal_aid_application_offline_account_path(application), params: params.merge(submit_button) }
 
     context "when the provider is authenticated" do
       before do

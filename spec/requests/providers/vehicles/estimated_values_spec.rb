@@ -27,17 +27,17 @@ RSpec.describe Providers::Vehicles::EstimatedValuesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/vehicle/estimated_value" do
-    let(:estimated_value) { Faker::Commerce.price(range: 2000..10_000) }
-    let(:params) { { vehicle: { estimated_value: } } }
-    let(:next_url) { providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application) }
-    let(:submit_button) { {} }
-
     subject do
       patch(
         providers_legal_aid_application_vehicles_estimated_value_path(legal_aid_application),
         params: params.merge(submit_button),
       )
     end
+
+    let(:estimated_value) { Faker::Commerce.price(range: 2000..10_000) }
+    let(:params) { { vehicle: { estimated_value: } } }
+    let(:next_url) { providers_legal_aid_application_vehicles_remaining_payment_path(legal_aid_application) }
+    let(:submit_button) { {} }
 
     it "updates vehicle" do
       subject

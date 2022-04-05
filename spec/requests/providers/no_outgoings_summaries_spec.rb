@@ -32,6 +32,13 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/no_outgoings_summary" do
+    subject do
+      patch(
+        "/providers/applications/#{application_id}/no_outgoings_summary",
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:confirm_no_outgoings) { "true" }
     let(:submit_button) { {} }
     let(:params) do
@@ -40,13 +47,6 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
           no_outgoings_summaries: confirm_no_outgoings,
         },
       }
-    end
-
-    subject do
-      patch(
-        "/providers/applications/#{application_id}/no_outgoings_summary",
-        params: params.merge(submit_button),
-      )
     end
 
     context "the provider is authenticated" do

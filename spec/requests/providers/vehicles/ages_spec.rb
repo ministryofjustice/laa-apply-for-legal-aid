@@ -46,6 +46,13 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/vehicle/purchase_date" do
+    subject do
+      patch(
+        providers_legal_aid_application_vehicles_age_path(legal_aid_application),
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:params) do
       {
         vehicle: {
@@ -55,13 +62,6 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
     end
     let(:next_url) { providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application) }
     let(:submit_button) { {} }
-
-    subject do
-      patch(
-        providers_legal_aid_application_vehicles_age_path(legal_aid_application),
-        params: params.merge(submit_button),
-      )
-    end
 
     it "updates vehicle" do
       subject
