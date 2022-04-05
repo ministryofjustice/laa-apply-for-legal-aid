@@ -32,7 +32,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       it "records the decision on the legal aid application" do
         legal_aid_application.reload
         expect(legal_aid_application.open_banking_consent).to be(true)
-        expect(legal_aid_application.open_banking_consent_choice_at.to_s(be_between(2.seconds.ago, 1.second.from_now)))
+        expect(legal_aid_application.open_banking_consent_choice_at.to_fs(be_between(2.seconds.ago, 1.second.from_now)))
       end
 
       it "updates application state" do
@@ -50,7 +50,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       it "records the decision on the legal aid application" do
         legal_aid_application.reload
         expect(legal_aid_application.open_banking_consent).to be(false)
-        expect(legal_aid_application.open_banking_consent_choice_at.to_s(be_between(2.seconds.ago, 1.second.from_now)))
+        expect(legal_aid_application.open_banking_consent_choice_at.to_fs(be_between(2.seconds.ago, 1.second.from_now)))
       end
 
       it "updates application state" do
