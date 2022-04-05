@@ -3,9 +3,10 @@ require "rails_helper"
 module Dashboard
   RSpec.describe ProviderDataJob do
     describe ".perform" do
+      subject { described_class.perform_now(provider) }
+
       let(:provider) { create :provider }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
-      subject { described_class.perform_now(provider) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
       let(:datasets_client) { double Geckoboard::DatasetsClient }

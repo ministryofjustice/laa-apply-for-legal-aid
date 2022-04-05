@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe PostSubmissionProcessingJob, type: :job do
+  subject { described_class.new.perform(application.id, feedback_url) }
+
   let(:application) { create :legal_aid_application }
   let(:feedback_url) { "www.example.com/feedback/new" }
-
-  subject { described_class.new.perform(application.id, feedback_url) }
 
   describe "SubmissionConfirmationMailer" do
     it "schedules an email for immediate delivery" do

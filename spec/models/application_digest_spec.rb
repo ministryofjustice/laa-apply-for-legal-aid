@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.describe ApplicationDigest do
   describe ".create_or_update!" do
+    subject { described_class.create_or_update!(laa.id) }
+
     let(:firm_name) { "Regional Legal Services" }
     let(:username) { "regional_user_1" }
     let(:firm) { create :firm, name: firm_name }
@@ -25,8 +27,6 @@ RSpec.describe ApplicationDigest do
     let(:laa_at_use_ccms) { create :legal_aid_application, :use_ccms }
 
     let(:digest) { described_class.find_by(legal_aid_application_id: laa.id) }
-
-    subject { described_class.create_or_update!(laa.id) }
 
     context "when a digest record already exists for this application" do
       before { create :application_digest, legal_aid_application_id: laa.id }

@@ -41,9 +41,9 @@ RSpec.describe UserTransactionsHelper, type: :helper do
   end
 
   describe "#payments_list" do
-    let(:transaction_type) { create :transaction_type, :maintenance_out }
-
     subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace:) }
+
+    let(:transaction_type) { create :transaction_type, :maintenance_out }
 
     context "for citizen" do
       let(:locale_namespace) { "transaction_types.names.citizens" }

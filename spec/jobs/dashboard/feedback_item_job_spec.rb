@@ -3,9 +3,10 @@ require "rails_helper"
 module Dashboard
   RSpec.describe FeedbackItemJob do
     describe ".perform" do
+      subject { described_class.perform_now(feedback) }
+
       let(:feedback) { create :feedback, :from_provider, satisfaction: 2, difficulty: 4 }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
-      subject { described_class.perform_now(feedback) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
       let(:datasets_client) { double Geckoboard::DatasetsClient }

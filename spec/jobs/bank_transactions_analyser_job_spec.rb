@@ -2,6 +2,8 @@ require "rails_helper"
 
 module Banking
   RSpec.describe BankTransactionsAnalyserJob, type: :job do
+    subject { described_class.perform_now(legal_aid_application) }
+
     let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :analysing_bank_transactions }
     let(:provider_email_service) { double(ProviderEmailService, send_email: true) }
 
@@ -11,8 +13,6 @@ module Banking
       allow(StateBenefitAnalyserService).to receive(:call).with(legal_aid_application)
       allow(ProviderEmailService).to receive(:new).with(legal_aid_application).and_return(provider_email_service)
     end
-
-    subject { described_class.perform_now(legal_aid_application) }
 
     describe "#perform" do
       it "calls the BankTransactionBalanceCalculator" do

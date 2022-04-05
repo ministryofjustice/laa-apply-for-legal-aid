@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe ApplicantAccountPresenter do
+  subject(:applicant_account_presenter) { described_class.new(applicant.bank_providers.first) }
+
   let!(:applicant) { create :applicant }
   let(:addresses) do
     [{ address: Faker::Address.building_number,
@@ -17,8 +19,6 @@ RSpec.describe ApplicantAccountPresenter do
   let!(:applicant_bank_account) do
     create(:bank_account, bank_provider_id: applicant_bank_provider.id, currency: "GBP")
   end
-
-  subject(:applicant_account_presenter) { described_class.new(applicant.bank_providers.first) }
 
   describe "#main_account_holder_name" do
     it "return last account name" do

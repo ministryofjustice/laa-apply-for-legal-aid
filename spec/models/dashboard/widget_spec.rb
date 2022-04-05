@@ -33,12 +33,12 @@ module Dashboard
   end
 
   RSpec.describe Widget do
+    subject { described_class.new("DummyWidgetDataProvider") }
+
     let(:geckoboard_client) { double Geckoboard::Client }
     let(:datasets_client) { double Geckoboard::DatasetsClient }
     let(:dataset) { double Geckoboard::Dataset }
     let(:dummy_data_provider_class) { Dashboard::WidgetDataProviders::DummyWidgetDataProvider }
-
-    subject { described_class.new("DummyWidgetDataProvider") }
 
     before do
       allow(Geckoboard).to receive(:client).and_return(geckoboard_client)

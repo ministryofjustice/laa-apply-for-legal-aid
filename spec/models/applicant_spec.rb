@@ -39,6 +39,8 @@ RSpec.describe Applicant, type: :model do
   # Main purpose: to ensure relationships to other object set so that destroying applicant destroys all objects
   # that then become redundant.
   describe ".destroy_all" do
+    subject { described_class.destroy_all }
+
     let!(:applicant) { create :applicant, :with_address }
     let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
     # Creating a bank transaction creates an applicant and the objects between it and the transaction
@@ -46,8 +48,6 @@ RSpec.describe Applicant, type: :model do
     let(:bank_provider) { bank_transaction.bank_account.bank_provider }
     let!(:bank_account_holder) { create :bank_account_holder, bank_provider: bank_provider }
     let!(:bank_error) { create :bank_error, applicant: applicant }
-
-    subject { described_class.destroy_all }
 
     it "removes everything it needs to" do
       expect(described_class.count).not_to be_zero
@@ -69,13 +69,13 @@ RSpec.describe Applicant, type: :model do
   end
 
   context "True Layer Token" do
+    subject { applicant.store_true_layer_token token: token, expires: token_expires_at }
+
     let(:token) { SecureRandom.uuid }
     # Note - JSON time doesn't include micro seconds so need to round to second to get consistent result
     let(:token_expires_at) { 10.minutes.from_now.round(0) }
     let(:data) { { token: token, expires: token_expires_at } }
     let(:applicant) { create :applicant }
-
-    subject { applicant.store_true_layer_token token: token, expires: token_expires_at }
 
     it "stores the data securely" do
       expect { subject }.to change(SecureData, :count).by(1)
@@ -102,9 +102,9 @@ RSpec.describe Applicant, type: :model do
   end
 
   describe "#age" do
-    let(:legal_aid_application) { build :legal_aid_application, :with_transaction_period, :with_applicant }
-
     subject { legal_aid_application.applicant.age }
+
+    let(:legal_aid_application) { build :legal_aid_application, :with_transaction_period, :with_applicant }
 
     it "returns the age of the applicant" do
       expect(subject).to be_kind_of(Integer)
@@ -206,10 +206,10 @@ RSpec.describe Applicant, type: :model do
   end
 
   describe "#mortgage_per_month" do
+    subject { legal_aid_application.applicant.mortgage_per_month }
+
     let(:legal_aid_application) { create :legal_aid_application, :with_everything }
     let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
-
-    subject { legal_aid_application.applicant.mortgage_per_month }
 
     context "when they pay a mortgage" do
       context "with cfe version 3 result" do

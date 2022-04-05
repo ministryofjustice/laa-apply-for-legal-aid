@@ -3,9 +3,9 @@ require "rails_helper"
 module OmniAuth
   module Strategies
     RSpec.describe TrueLayer do
-      let(:true_layer_root_url) { "https://auth.truelayer.com" }
-
       subject { described_class.new({}) }
+
+      let(:true_layer_root_url) { "https://auth.truelayer.com" }
 
       it "has the name true_layer" do
         expect(subject.name).to eq(:true_layer)
