@@ -41,7 +41,7 @@ RSpec.describe GovukEmails::Monitor do
         end
 
         it "schedules an undeliverable alert email" do
-          expect { subject }.to change { ScheduledMailing.count }.by(1)
+          expect { subject }.to change(ScheduledMailing, :count).by(1)
           undeliverable_mail = ScheduledMailing.order(:created_at).last
 
           expect(undeliverable_mail.legal_aid_application_id).to eq scheduled_mailing.legal_aid_application_id
@@ -62,7 +62,7 @@ RSpec.describe GovukEmails::Monitor do
         end
 
         it "does not schedules an undeliverable alert email" do
-          expect { subject }.not_to change { ScheduledMailing.count }
+          expect { subject }.not_to change(ScheduledMailing, :count)
         end
       end
     end

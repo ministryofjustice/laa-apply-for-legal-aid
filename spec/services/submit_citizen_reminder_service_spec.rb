@@ -12,7 +12,7 @@ RSpec.describe SubmitCitizenReminderService, :vcr do
 
   describe "#send_email" do
     it "creates two scheduled mailing records" do
-      expect { subject.send_email }.to change { ScheduledMailing.count }.by(2)
+      expect { subject.send_email }.to change(ScheduledMailing, :count).by(2)
     end
 
     context "sending the email" do

@@ -102,7 +102,7 @@ module Providers
             let(:new_full_name) { "" }
 
             it "does not update the child record" do
-              expect { subject }.not_to change { child.full_name }
+              expect { subject }.not_to change(child, :full_name)
             end
 
             it "renders the show page" do

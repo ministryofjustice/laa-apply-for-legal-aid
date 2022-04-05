@@ -80,7 +80,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
 
           it "does NOT create an new application record" do
-            expect { subject }.not_to change { LegalAidApplication.count }
+            expect { subject }.not_to change(LegalAidApplication, :count)
           end
 
           it "redirects to the percentage page" do
@@ -108,7 +108,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
 
           it "does NOT create an new application record" do
-            expect { subject }.not_to change { LegalAidApplication.count }
+            expect { subject }.not_to change(LegalAidApplication, :count)
           end
 
           it "redirects to the vehicles page" do
@@ -156,7 +156,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
 
           it "does NOT create an new application record" do
-            expect { subject }.not_to change { LegalAidApplication.count }
+            expect { subject }.not_to change(LegalAidApplication, :count)
           end
 
           it "redirects to the providers applications page" do
@@ -184,7 +184,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           let!(:shared_ownership) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
 
           it "does NOT create an new application record" do
-            expect { subject }.not_to change { LegalAidApplication.count }
+            expect { subject }.not_to change(LegalAidApplication, :count)
           end
 
           it "redirects to the savings and investments page" do

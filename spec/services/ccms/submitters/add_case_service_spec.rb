@@ -57,7 +57,7 @@ module CCMS
           let(:submission) { create :submission, :document_ids_obtained, legal_aid_application: legal_aid_application }
 
           it "writes a history record" do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "document_ids_obtained"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true
@@ -84,7 +84,7 @@ module CCMS
 
         context "there are no documents to upload" do
           it "writes a history record" do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "applicant_ref_obtained"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true

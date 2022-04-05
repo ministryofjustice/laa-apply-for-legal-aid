@@ -60,7 +60,7 @@ RSpec.describe Admin::SettingsController, type: :request do
     end
 
     it "create settings if they do not exist" do
-      expect { subject }.to change { Setting.count }.from(0).to(1)
+      expect { subject }.to change(Setting, :count).from(0).to(1)
     end
 
     it "redirects to the same page" do

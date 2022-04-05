@@ -6,7 +6,7 @@ RSpec.describe DocumentCategoryPopulator do
     let(:seed_file) { Rails.root.join("db/seeds/document_categories.csv") }
 
     it "create instances from the seed file" do
-      expect { described_class.call }.to change { DocumentCategory.count }.by(seed_file.readlines.size - 1)
+      expect { described_class.call }.to change(DocumentCategory, :count).by(seed_file.readlines.size - 1)
     end
 
     it "creates instances with correct data from the seed file" do
@@ -18,7 +18,7 @@ RSpec.describe DocumentCategoryPopulator do
       let!(:document_category) { create :document_category, :with_real_data }
 
       it "creates one less service_level" do
-        expect { described_class.call }.to change { DocumentCategory.count }.by(seed_file.readlines.size - 2)
+        expect { described_class.call }.to change(DocumentCategory, :count).by(seed_file.readlines.size - 2)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe DocumentCategoryPopulator do
         expect {
           described_class.call
           described_class.call
-        }.to change { DocumentCategory.count }.by(seed_file.readlines.size - 1)
+        }.to change(DocumentCategory, :count).by(seed_file.readlines.size - 1)
       end
     end
   end

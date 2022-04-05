@@ -53,18 +53,18 @@ RSpec.describe ProviderDetailsCreator do
 
   describe ".call" do
     it "creates the right firm" do
-      expect { subject }.to change { Firm.count }.by(1)
+      expect { subject }.to change(Firm, :count).by(1)
       expect(firm.ccms_id).to eq(ccms_firm.id.to_s)
       expect(firm.name).to eq(ccms_firm.name)
     end
 
     it "adds non passported permission to the firm" do
-      expect { subject }.to change { Firm.count }.by(1)
+      expect { subject }.to change(Firm, :count).by(1)
       expect(firm.permissions.map(&:role)).to match_array(["application.passported.*", "application.non_passported.*"])
     end
 
     it "creates the right offices" do
-      expect { subject }.to change { Office.count }.by(2)
+      expect { subject }.to change(Office, :count).by(2)
       expect(firm.offices.count).to eq(2)
       expect(office1.code).to eq(ccms_office1.code)
       expect(office2.code).to eq(ccms_office2.code)
@@ -118,7 +118,7 @@ RSpec.describe ProviderDetailsCreator do
       let!(:existing_office) { create :office, firm: existing_firm }
 
       it "uses existing firm" do
-        expect { subject }.not_to change { Firm.count }
+        expect { subject }.not_to change(Firm, :count)
         expect(provider.firm_id).to eq(existing_firm.id)
       end
 

@@ -31,7 +31,7 @@ RSpec.describe LegalAidApplications::SharedOwnershipForm, type: :form do
     let(:form_params) { params.merge(model: legal_aid_application) }
 
     it "does not create a new legal aid application " do
-      expect { @form.save }.not_to change { LegalAidApplication.count }
+      expect { @form.save }.not_to change(LegalAidApplication, :count)
     end
 
     it "saves updates record with new value of own home attribute" do

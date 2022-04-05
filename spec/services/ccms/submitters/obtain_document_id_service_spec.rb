@@ -103,11 +103,11 @@ module CCMS
             end
 
             it "changes the submission state to document_ids_obtained" do
-              expect { subject.call }.to change { submission.aasm_state }.to "document_ids_obtained"
+              expect { subject.call }.to change(submission, :aasm_state).to "document_ids_obtained"
             end
 
             it "writes a history record for each document" do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(5)
+              expect { subject.call }.to change(SubmissionHistory, :count).by(5)
             end
 
             it "updates the history records" do

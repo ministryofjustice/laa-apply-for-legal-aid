@@ -50,12 +50,12 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
 
       context "add new record" do
         it "adds a dwp override record" do
-          expect { subject }.to change { DWPOverride.count }.by(1)
+          expect { subject }.to change(DWPOverride, :count).by(1)
         end
 
         it "updates the same dwp override record" do
           subject
-          expect { subject }.not_to change { DWPOverride.count }
+          expect { subject }.not_to change(DWPOverride, :count)
         end
       end
 
@@ -68,7 +68,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
         let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }
 
         it "removes the record" do
-          expect { subject }.to change { DWPOverride.count }.by(-1)
+          expect { subject }.to change(DWPOverride, :count).by(-1)
         end
       end
 
@@ -82,7 +82,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
       let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }
 
       it "does not add a dwp override record" do
-        expect { subject }.not_to change { DWPOverride.count }
+        expect { subject }.not_to change(DWPOverride, :count)
       end
 
       it "continue to the proceedings search page" do

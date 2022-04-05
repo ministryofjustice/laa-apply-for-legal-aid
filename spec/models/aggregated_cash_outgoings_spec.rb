@@ -244,7 +244,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:params) { valid_params }
 
         it "creates the expected cash income records" do
-          expect { subject }.to change { CashTransaction.count }.by(6)
+          expect { subject }.to change(CashTransaction, :count).by(6)
         end
       end
 
@@ -253,7 +253,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
           let(:params) { non_numeric_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change { CashTransaction.count }
+            expect { subject }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
@@ -271,7 +271,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
           let(:params) { too_many_decimal_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change { CashTransaction.count }
+            expect { subject }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
@@ -289,7 +289,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
           let(:params) { negative_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change { CashTransaction.count }
+            expect { subject }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
@@ -307,7 +307,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
           let(:params) { missing_value_params }
 
           it "does not create the Cash Transaction records" do
-            expect { subject }.not_to change { CashTransaction.count }
+            expect { subject }.not_to change(CashTransaction, :count)
           end
 
           it "is not valid" do
@@ -332,7 +332,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:subject) { aco.update(corrected_valid_params) }
 
         it "does not change the record count when records updated" do
-          expect { subject }.to change { CashTransaction.count }.by(0)
+          expect { subject }.to change(CashTransaction, :count).by(0)
         end
 
         it "changes the preexisting amounts of the records" do
@@ -353,7 +353,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:subject) { aco.update(none_selected_params) }
 
         it "removes all records when none selected" do
-          expect { subject }.to change { CashTransaction.count }.by(-6)
+          expect { subject }.to change(CashTransaction, :count).by(-6)
         end
       end
 
@@ -361,7 +361,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:subject) { aco.update(additional_valid_params) }
 
         it "adds to prexisting transaction types" do
-          expect { subject }.to change { CashTransaction.count }.by(3)
+          expect { subject }.to change(CashTransaction, :count).by(3)
         end
       end
 
@@ -373,7 +373,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it "does not add to old records" do
-          expect { subject }.to change { CashTransaction.count }.by(0)
+          expect { subject }.to change(CashTransaction, :count).by(0)
         end
 
         it "updates the three previous months according to applicaiton calculation date" do

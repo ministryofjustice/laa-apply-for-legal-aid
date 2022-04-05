@@ -12,18 +12,18 @@ RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_ban
   end
 
   it "does not change the true_layer_bank object" do
-    expect { subject }.not_to change { true_layer_bank.reload }
+    expect { subject }.not_to change(true_layer_bank, :reload)
   end
 
   it "does not create a new true_layer_bank object" do
-    expect { subject }.not_to change { TrueLayerBank.count }
+    expect { subject }.not_to change(TrueLayerBank, :count)
   end
 
   context "when outdated" do
     let!(:true_layer_bank) { create :true_layer_bank, updated_at: stale_date }
 
     it "creates a new bank holiday instance" do
-      expect { subject }.to change { TrueLayerBank.count }.by(1)
+      expect { subject }.to change(TrueLayerBank, :count).by(1)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_ban
     let!(:true_layer_bank) { TrueLayerBank.create!(updated_at: stale_date) }
 
     it "does not create a new true_layer_bank object" do
-      expect { subject }.not_to change { TrueLayerBank.count }
+      expect { subject }.not_to change(TrueLayerBank, :count)
     end
 
     it "touches the existing true_layer_bank object" do

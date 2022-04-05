@@ -101,7 +101,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
     it "creates test legal_aid_applications" do
       number_new = TestApplicationCreationService::APPLICATION_TEST_TRAITS.size + TestApplicationCreationService::NON_PASSPORTED_TEST_TRAITS.size
-      expect { subject }.to change { LegalAidApplication.count }.by(number_new)
+      expect { subject }.to change(LegalAidApplication, :count).by(number_new)
     end
 
     it "redirects back to admin root" do
@@ -121,17 +121,17 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       it "deletes the legal_aid_applications" do
-        expect { subject }.to change { LegalAidApplication.count }.by(-count)
+        expect { subject }.to change(LegalAidApplication, :count).by(-count)
       end
 
       it "deletes the applicants too" do
-        expect { subject }.to change { Applicant.count }.by(-count)
+        expect { subject }.to change(Applicant, :count).by(-count)
       end
 
       it "deletes the outstanding scheduled mail" do
         scheduled_mail
         scheduled_mail2
-        expect { subject }.to change { ScheduledMailing.count }.by(-2)
+        expect { subject }.to change(ScheduledMailing, :count).by(-2)
       end
 
       it "redirects back to admin root" do
@@ -152,7 +152,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         let!(:another) { create :legal_aid_application, :with_everything }
 
         it "gets deleted too" do
-          expect { subject }.to change { LegalAidApplication.count }.to(0)
+          expect { subject }.to change(LegalAidApplication, :count).to(0)
         end
       end
     end
@@ -179,12 +179,12 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       it "deletes the legal_aid_application" do
-        expect { subject }.to change { LegalAidApplication.count }.by(-1)
+        expect { subject }.to change(LegalAidApplication, :count).by(-1)
         expect(LegalAidApplication.all).not_to include(application)
       end
 
       it "deletes the applicant too" do
-        expect { subject }.to change { Applicant.count }.by(-1)
+        expect { subject }.to change(Applicant, :count).by(-1)
       end
 
       it "redirects back to admin root" do
@@ -205,7 +205,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         let!(:application) { create :legal_aid_application, :at_assessment_submitted }
 
         it "gets deleted too" do
-          expect { subject }.to change { LegalAidApplication.count }.by(-1)
+          expect { subject }.to change(LegalAidApplication, :count).by(-1)
         end
       end
 
@@ -213,8 +213,8 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         let!(:application) { create :legal_aid_application }
 
         it "gets deleted too" do
-          expect { subject }.to change { LegalAidApplication.count }.by(-1)
-          expect { subject }.not_to change { Applicant.count }
+          expect { subject }.to change(LegalAidApplication, :count).by(-1)
+          expect { subject }.not_to change(Applicant, :count)
         end
       end
     end

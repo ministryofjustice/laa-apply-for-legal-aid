@@ -28,7 +28,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     let(:applicant) { Applicant.last }
 
     it "creates a new applicant" do
-      expect { subject.save }.to change { Applicant.count }.by(1)
+      expect { subject.save }.to change(Applicant, :count).by(1)
     end
 
     it "saves attributes to the new applicant" do
@@ -47,7 +47,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       before { attr_list.delete(:first_name) }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change { Applicant.count }
+        expect { subject.save }.not_to change(Applicant, :count)
       end
 
       it "errors to be present" do
@@ -60,7 +60,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       before { attributes[:national_insurance_number] = "foobar" }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change { Applicant.count }
+        expect { subject.save }.not_to change(Applicant, :count)
       end
 
       it "errors to be present" do
@@ -121,7 +121,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "invalid-date") }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change { Applicant.count }
+        expect { subject.save }.not_to change(Applicant, :count)
       end
 
       it "errors to be present" do
@@ -134,7 +134,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: 3.days.from_now) }
 
       it "does not persist model" do
-        expect { subject.save }.not_to change { Applicant.count }
+        expect { subject.save }.not_to change(Applicant, :count)
       end
 
       it "errors to be present" do
@@ -157,7 +157,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "is valid" do
-        expect { subject.save }.to change { Applicant.count }
+        expect { subject.save }.to change(Applicant, :count)
       end
 
       it "saves the date" do
@@ -180,7 +180,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "is not valid" do
-        expect { subject.save }.not_to change { Applicant.count }
+        expect { subject.save }.not_to change(Applicant, :count)
       end
 
       it "sets errors" do
@@ -194,7 +194,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     let(:applicant) { Applicant.last }
 
     it "creates a new applicant" do
-      expect { subject.save_as_draft }.to change { Applicant.count }.by(1)
+      expect { subject.save_as_draft }.to change(Applicant, :count).by(1)
     end
 
     it "saves attributes to the new applicant" do
@@ -220,7 +220,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will not save to the database" do
-        expect { subject.save_as_draft }.not_to change { Applicant.count }
+        expect { subject.save_as_draft }.not_to change(Applicant, :count)
       end
     end
 
@@ -259,7 +259,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
 
       it "will not save to the database" do
-        expect { subject.save_as_draft }.not_to change { Applicant.count }
+        expect { subject.save_as_draft }.not_to change(Applicant, :count)
       end
 
       it "will be invalid" do

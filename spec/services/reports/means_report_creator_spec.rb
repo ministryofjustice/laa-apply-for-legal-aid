@@ -36,7 +36,7 @@ RSpec.describe Reports::MeansReportCreator do
         before { allow(Rails.logger).to receive(:info) }
 
         it "does not attach a report if one already exists" do
-          expect { subject }.not_to change { Attachment.count }
+          expect { subject }.not_to change(Attachment, :count)
           expect(Rails.logger).to have_received(:info).with(expected_log).once
         end
 
@@ -50,7 +50,7 @@ RSpec.describe Reports::MeansReportCreator do
 
           it "creates a new report if the existing one is not downloadable" do
             # the count won';'t change as we delete one and create one
-            expect { subject }.not_to change { Attachment.count }
+            expect { subject }.not_to change(Attachment, :count)
             # check the original one has been deleted
             expect { attachment.reload }.to raise_error(ActiveRecord::RecordNotFound)
             expect(Rails.logger).to have_received(:info).with(expected_log)

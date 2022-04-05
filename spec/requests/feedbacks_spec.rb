@@ -32,7 +32,7 @@ RSpec.describe "FeedbacksController", type: :request do
     describe "creation of feedback record" do
       context "any type of user" do
         it "create a feedback" do
-          expect { subject }.to change { Feedback.count }.by(1)
+          expect { subject }.to change(Feedback, :count).by(1)
         end
 
         it "applies params to new feedback" do
@@ -74,7 +74,7 @@ RSpec.describe "FeedbacksController", type: :request do
           end
 
           it "schedules an email without an application id" do
-            expect { subject }.to change { ScheduledMailing.count }.by(1)
+            expect { subject }.to change(ScheduledMailing, :count).by(1)
             rec = ScheduledMailing.first
 
             expect(rec.mailer_klass).to eq "FeedbackMailer"
@@ -154,7 +154,7 @@ RSpec.describe "FeedbacksController", type: :request do
     end
 
     it "schedules an email" do
-      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      expect { subject }.to change(ScheduledMailing, :count).by(1)
       rec = ScheduledMailing.first
 
       expect(rec.mailer_klass).to eq "FeedbackMailer"
@@ -174,7 +174,7 @@ RSpec.describe "FeedbacksController", type: :request do
       let(:params) { { feedback: { satisfaction: "" } } }
 
       it "does not create a feedback to record browser data" do
-        expect { subject }.not_to change { Feedback.count }
+        expect { subject }.not_to change(Feedback, :count)
       end
 
       it "does not send an email" do

@@ -21,7 +21,7 @@ RSpec.describe ProviderEmailService do
     end
 
     it "schedules a mail for immediate delivery" do
-      expect { subject.send_email }.to change { ScheduledMailing.count }.by(1)
+      expect { subject.send_email }.to change(ScheduledMailing, :count).by(1)
 
       rec = ScheduledMailing.first
       expect(rec.legal_aid_application_id).to eq application.id

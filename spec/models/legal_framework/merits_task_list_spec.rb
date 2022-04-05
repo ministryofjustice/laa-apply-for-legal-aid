@@ -7,7 +7,7 @@ module LegalFramework
 
     describe ".create!" do
       it "adds a new record" do
-        expect { merits_task_list }.to change { described_class.count }.by(1)
+        expect { merits_task_list }.to change(described_class, :count).by(1)
       end
     end
 

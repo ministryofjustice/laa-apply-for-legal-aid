@@ -38,7 +38,7 @@ module Reports
           context "report already exists" do
             it "does not attach a report" do
               create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
-              expect { subject }.not_to change { Attachment.count }
+              expect { subject }.not_to change(Attachment, :count)
             end
           end
         end

@@ -18,7 +18,7 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
   describe "#save" do
     it "updates application" do
       expect { subject.save }
-        .to change { application.substantive_application }
+        .to change(application, :substantive_application)
         .from(nil)
         .to(substantive_application)
     end

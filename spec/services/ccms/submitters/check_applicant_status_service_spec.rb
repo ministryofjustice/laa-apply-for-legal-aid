@@ -31,15 +31,15 @@ module CCMS
 
             context "poll count remains below limit" do
               it "increments the poll count" do
-                expect { subject.call }.to change { submission.applicant_poll_count }.by 1
+                expect { subject.call }.to change(submission, :applicant_poll_count).by 1
               end
 
               it "does not change the state" do
-                expect { subject.call }.not_to change { submission.aasm_state }
+                expect { subject.call }.not_to change(submission, :aasm_state)
               end
 
               it "writes a history record" do
-                expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+                expect { subject.call }.to change(SubmissionHistory, :count).by(1)
                 expect(history.from_state).to eq "applicant_submitted"
                 expect(history.to_state).to eq "applicant_submitted"
                 expect(history.success).to be true
@@ -67,15 +67,15 @@ module CCMS
               end
 
               it "increments the poll count" do
-                expect { subject.call }.to change { submission.applicant_poll_count }.by 1
+                expect { subject.call }.to change(submission, :applicant_poll_count).by 1
               end
 
               it "does not change the state" do
-                expect { subject.call }.not_to change { submission.aasm_state }
+                expect { subject.call }.not_to change(submission, :aasm_state)
               end
 
               it "writes a history record" do
-                expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+                expect { subject.call }.to change(SubmissionHistory, :count).by(1)
                 expect(history.from_state).to eq "applicant_submitted"
                 expect(history.to_state).to eq "failed"
                 expect(history.success).to be false
@@ -100,15 +100,15 @@ module CCMS
             end
 
             it "changes the state to applicant_ref_obtained" do
-              expect { subject.call }.to change { submission.aasm_state }.to "applicant_ref_obtained"
+              expect { subject.call }.to change(submission, :aasm_state).to "applicant_ref_obtained"
             end
 
             it "updates the applicant_ccms_reference" do
-              expect { subject.call }.to change { submission.applicant_ccms_reference }.to expected_applicant_ccms_reference
+              expect { subject.call }.to change(submission, :applicant_ccms_reference).to expected_applicant_ccms_reference
             end
 
             it "writes a history record" do
-              expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+              expect { subject.call }.to change(SubmissionHistory, :count).by(1)
               expect(history.from_state).to eq "applicant_submitted"
               expect(history.to_state).to eq "applicant_ref_obtained"
               expect(history.success).to be true

@@ -10,7 +10,7 @@ RSpec.describe SecureData, type: :model do
     subject { described_class.create_and_store!(data) }
 
     it "creates a new instance" do
-      expect { subject }.to change { described_class.count }
+      expect { subject }.to change(described_class, :count)
     end
 
     it "returns the id of the new instance" do
@@ -33,7 +33,7 @@ RSpec.describe SecureData, type: :model do
     subject { secure_data.store(data) }
 
     it "changes the data" do
-      expect { subject }.to change { secure_data.data }
+      expect { subject }.to change(secure_data, :data)
     end
 
     it "does not match the data" do

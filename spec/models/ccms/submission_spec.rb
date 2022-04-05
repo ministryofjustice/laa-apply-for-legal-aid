@@ -116,12 +116,12 @@ module CCMS
     context "state change:" do
       describe "#obtain_case_ref" do
         it "changes state" do
-          expect { submission.obtain_case_ref }.to change { submission.aasm_state }.to("case_ref_obtained")
+          expect { submission.obtain_case_ref }.to change(submission, :aasm_state).to("case_ref_obtained")
         end
 
         context "with event fail" do
           it "changes state" do
-            expect { submission.fail }.to change { submission.aasm_state }.to("failed")
+            expect { submission.fail }.to change(submission, :aasm_state).to("failed")
           end
         end
 
@@ -129,7 +129,7 @@ module CCMS
           let(:state) { :case_created }
 
           it "changes state" do
-            expect { submission.complete }.to change { submission.aasm_state }.to("completed")
+            expect { submission.complete }.to change(submission, :aasm_state).to("completed")
           end
         end
       end

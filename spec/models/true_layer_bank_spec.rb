@@ -25,14 +25,14 @@ RSpec.describe TrueLayerBank, type: :model, vcr: { cassette_name: "true_layer_ba
       before { described_class.delete_all }
 
       it "creates a new instance" do
-        expect { described_class.available_banks }.to change { described_class.count }.from(0).to(1)
+        expect { described_class.available_banks }.to change(described_class, :count).from(0).to(1)
       end
 
       it "does not create duplicates" do
         expect {
           described_class.available_banks
           described_class.available_banks
-        }.to change { described_class.count }.from(0).to(1)
+        }.to change(described_class, :count).from(0).to(1)
       end
 
       it "returns api available_banks interesected with configured banks" do

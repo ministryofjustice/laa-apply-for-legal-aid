@@ -29,7 +29,7 @@ RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
 
     it "does not create a new applicant" do
       subject
-      expect { subject.save }.not_to change { LegalAidApplication.count }
+      expect { subject.save }.not_to change(LegalAidApplication, :count)
     end
 
     it "saves updates record with new value of own home attribute" do

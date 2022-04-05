@@ -23,7 +23,7 @@ RSpec.describe Citizens::ResendLinkRequestsController, type: :request do
 
     it "schedules an email without an application id" do
       allow_any_instance_of(described_class).to receive(:secure_id).and_return(secure_data_id)
-      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      expect { subject }.to change(ScheduledMailing, :count).by(1)
       rec = ScheduledMailing.first
 
       expect(rec.mailer_klass).to eq "ResendLinkRequestMailer"
