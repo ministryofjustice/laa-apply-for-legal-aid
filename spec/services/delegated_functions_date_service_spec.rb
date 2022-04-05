@@ -3,6 +3,8 @@ require "rails_helper"
 
 RSpec.describe DelegatedFunctionsDateService do
   describe "sets date on proceeding records", :vcr do
+    subject { described_class.call(laa) }
+
     let(:laa) { create :legal_aid_application }
     let!(:proceeding1) do
       create :proceeding, :da001,
@@ -13,8 +15,6 @@ RSpec.describe DelegatedFunctionsDateService do
     let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa }
     let(:df_date) { Date.new(2021, 5, 10) }
     let(:reported_date) { Date.new(2021, 5, 13) }
-
-    subject { described_class.call(laa) }
 
     around do |example|
       travel_to Time.zone.local(2021, 5, 13, 12, 0, 0)

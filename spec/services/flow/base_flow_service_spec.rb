@@ -3,6 +3,14 @@ require "rails_helper"
 class TestFlowService < Flow::BaseFlowService; end
 
 RSpec.describe Flow::BaseFlowService do
+  subject do
+    flow_service_class.new(
+      legal_aid_application:,
+      current_step:,
+      params:,
+    )
+  end
+
   let(:flow_service_class) do
     TestFlowService
   end
@@ -13,14 +21,6 @@ RSpec.describe Flow::BaseFlowService do
   end
   let(:legal_aid_application) { create :legal_aid_application }
   let(:params) { nil }
-
-  subject do
-    flow_service_class.new(
-      legal_aid_application:,
-      current_step:,
-      params:,
-    )
-  end
 
   before { flow_service_class.use_steps steps }
 

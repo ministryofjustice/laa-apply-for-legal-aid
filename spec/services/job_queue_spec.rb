@@ -9,9 +9,9 @@ RSpec.describe JobQueue do
   let(:other_job) { MockQueuedJob.new(ScheduledMailingsDeliveryJob, short_delay.from_now) }
 
   describe ".enqueued?" do
-    before { allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue) }
-
     subject { described_class.enqueued?(EmailMonitorJob) }
+
+    before { allow(Sidekiq::ScheduledSet).to receive(:new).and_return(job_queue) }
 
     context "empty queue" do
       let(:job_queue) { [] }

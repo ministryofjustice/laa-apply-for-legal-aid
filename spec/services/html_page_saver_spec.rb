@@ -2,13 +2,13 @@ require "rails_helper"
 
 RSpec.describe HtmlPageSaver do
   describe ".call" do
+    subject { described_class.call(html:, file_path:, asset_host:) }
+
     let(:html) { '<html><head><meta charset="utf-8"><meta a="b"></head></html>' }
     let(:file_path) { Rails.root.join("tmp/page.html") }
     let(:asset_host) { "http://localhost:3004" }
     let(:expected_html) { html.sub('"utf-8">', '"utf-8"><base href="http://localhost:3004" />') }
     let(:expected_file) { File.expand_path(file_path) }
-
-    subject { described_class.call(html:, file_path:, asset_host:) }
 
     before { expect(File).to receive(:write).with(expected_file, expected_html, mode: "wb") }
 

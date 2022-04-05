@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
+  subject { described_class.new(submission) }
+
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_applicant,
@@ -45,8 +47,6 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   end
   let(:document_upload_response) { ccms_data_from_file "document_upload_response.xml" }
   let(:transaction_request_id_in_example_response) { "20190301030405123456" }
-
-  subject { described_class.new(submission) }
 
   before do
     allow(CCMS::Requestors::DocumentUploadRequestor).to receive(:new).and_return(document_upload_requestor)

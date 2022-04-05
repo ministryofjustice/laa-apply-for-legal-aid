@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe BenefitCheckService do
+  subject { described_class.new(application) }
+
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
   let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
   let(:application) { create :application, applicant: applicant }
-
-  subject { described_class.new(application) }
 
   describe "#check_benefits", :vcr do
     let(:expected_params) do
