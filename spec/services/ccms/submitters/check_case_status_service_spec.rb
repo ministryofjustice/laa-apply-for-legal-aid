@@ -27,11 +27,11 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
 
         context "poll count remains below limit" do
           it "increments the poll count" do
-            expect { subject.call }.to change { submission.case_poll_count }.by 1
+            expect { subject.call }.to change(submission, :case_poll_count).by 1
           end
 
           it "does not change the state" do
-            expect { subject.call }.not_to change { submission.aasm_state }
+            expect { subject.call }.not_to change(submission, :aasm_state)
           end
 
           it "writes a history record" do
@@ -62,11 +62,11 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "increments the poll count" do
-            expect { subject.call }.to change { submission.case_poll_count }.by 1
+            expect { subject.call }.to change(submission, :case_poll_count).by 1
           end
 
           it "does not change the state" do
-            expect { subject.call }.not_to change { submission.aasm_state }
+            expect { subject.call }.not_to change(submission, :aasm_state)
           end
 
           it "writes a history record" do
@@ -101,7 +101,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         end
 
         it "changes the state to case_created" do
-          expect { subject.call }.to change { submission.aasm_state }.to "case_created"
+          expect { subject.call }.to change(submission, :aasm_state).to "case_created"
         end
 
         it "writes a history record" do

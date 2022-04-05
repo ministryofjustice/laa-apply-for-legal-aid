@@ -27,7 +27,7 @@ RSpec.describe PdfConverter do
         end
 
         it "creates an attachment record for the pdf" do
-          expect { subject }.to change { Attachment.count }.by 1
+          expect { subject }.to change(Attachment, :count).by 1
         end
       end
 
@@ -89,7 +89,7 @@ RSpec.describe PdfConverter do
         end
 
         it "creates an attachment record for the pdf" do
-          expect { subject }.to change { Attachment.count }.by 1
+          expect { subject }.to change(Attachment, :count).by 1
         end
       end
 

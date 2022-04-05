@@ -34,7 +34,7 @@ RSpec.describe TrueLayer::BankDataImportService do
     end
 
     it "imports the bank accounts" do
-      expect { subject }.to change { BankAccount.count }.by(mock_data[:accounts].count)
+      expect { subject }.to change(BankAccount, :count).by(mock_data[:accounts].count)
       mock_account_ids = mock_data[:accounts].pluck(:account_id).sort
       expect(bank_provider.bank_accounts.pluck(:true_layer_id).sort).to eq(mock_account_ids)
     end
@@ -47,12 +47,12 @@ RSpec.describe TrueLayer::BankDataImportService do
     end
 
     it "imports the bank account holders" do
-      expect { subject }.to change { BankAccountHolder.count }.by(mock_data[:account_holders].count)
+      expect { subject }.to change(BankAccountHolder, :count).by(mock_data[:account_holders].count)
     end
 
     it "imports the transactions" do
       mock_transaction_ids = mock_data[:accounts].flat_map { |a| a[:transactions].pluck(:transaction_id) }.sort
-      expect { subject }.to change { BankTransaction.count }.by(mock_transaction_ids.count)
+      expect { subject }.to change(BankTransaction, :count).by(mock_transaction_ids.count)
 
       transaction_ids = bank_provider.bank_accounts.flat_map(&:bank_transactions).pluck(:true_layer_id).sort
       expect(transaction_ids).to eq(mock_transaction_ids)
@@ -81,13 +81,13 @@ RSpec.describe TrueLayer::BankDataImportService do
 
       it "does not import anything" do
         expect { subject }
-          .to change { BankProvider.count }
+          .to change(BankProvider, :count)
           .by(0)
-          .and change { BankAccount.count }
+          .and change(BankAccount, :count)
           .by(0)
-          .and change { BankAccountHolder.count }
+          .and change(BankAccountHolder, :count)
           .by(0)
-          .and change { BankTransaction.count }
+          .and change(BankTransaction, :count)
           .by(0)
       end
 

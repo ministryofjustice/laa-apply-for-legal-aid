@@ -21,7 +21,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
       let(:period_end) { Date.parse("2021-01-07").beginning_of_day }
 
       it "does not delete any transactions" do
-        expect { subject }.not_to change { BankTransaction.count }
+        expect { subject }.not_to change(BankTransaction, :count)
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Banking::BankTransactionsTrimmer do
       let(:period_end) { Date.parse("2021-01-04").beginning_of_day }
 
       it "has deleted records happened on after 4/1/2021" do
-        expect { subject }.to change { BankTransaction.count }.by(-4)
+        expect { subject }.to change(BankTransaction, :count).by(-4)
         expect(application.bank_transactions.pluck(:happened_at)).not_to include("2021-01-05T01:00:00")
         expect(application.bank_transactions.pluck(:happened_at)).not_to include("2021-01-06T01:00:00")
       end

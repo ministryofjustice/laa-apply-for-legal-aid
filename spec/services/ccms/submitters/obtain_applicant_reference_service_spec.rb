@@ -47,7 +47,7 @@ module CCMS
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change(SubmissionHistory, :count).by(1)
             expect(latest_history.from_state).to eq "case_ref_obtained"
             expect(latest_history.to_state).to eq "applicant_ref_obtained"
             expect(latest_history.success).to be true
@@ -86,7 +86,7 @@ module CCMS
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change { SubmissionHistory.count }.by(2)
+            expect { subject.call }.to change(SubmissionHistory, :count).by(2)
             expect(latest_history.from_state).to eq "case_ref_obtained"
             expect(latest_history.to_state).to eq "applicant_submitted"
             expect(latest_history.success).to be true

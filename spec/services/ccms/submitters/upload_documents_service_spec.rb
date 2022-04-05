@@ -79,7 +79,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     end
 
     it "changes the submission state to completed" do
-      expect { subject.call }.to change { submission.aasm_state }.to "completed"
+      expect { subject.call }.to change(submission, :aasm_state).to "completed"
     end
 
     it "writes a history record for each document and on completion" do

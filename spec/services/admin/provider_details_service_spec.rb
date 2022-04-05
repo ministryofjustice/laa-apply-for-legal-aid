@@ -130,19 +130,19 @@ module Admin
           let(:response_body) { sarah_smith_response.to_json }
 
           it "creates the provider" do
-            expect { subject }.to change { Provider.count }.by(1)
+            expect { subject }.to change(Provider, :count).by(1)
             expect(Provider.exists?(username:)).to be true
           end
 
           it "creates the firm linked to the provider" do
-            expect { subject }.to change { Firm.count }.by(1)
+            expect { subject }.to change(Firm, :count).by(1)
             provider = Provider.find_by(username:)
             firm = provider.firm
             expect(firm.ccms_id).to eq "24493"
           end
 
           it "creates the offices linked to the firm" do
-            expect { subject }.to change { Office.count }.by(2)
+            expect { subject }.to change(Office, :count).by(2)
             firm = Firm.find_by(name: "LOCAL LAW & CO LTD")
             offices = firm.offices.order(:code)
             expect(offices.size).to eq 2
@@ -163,18 +163,18 @@ module Admin
           let(:response_body) { sarah_smith_response.to_json }
 
           it "creates the provider" do
-            expect { subject }.to change { Provider.count }.by(1)
+            expect { subject }.to change(Provider, :count).by(1)
             expect(Provider.exists?(username:)).to be true
           end
 
           it "links the provider to the firm" do
-            expect { subject }.not_to change { Firm.count }
+            expect { subject }.not_to change(Firm, :count)
             provider = Provider.find_by(username:)
             expect(provider.firm).to eq firm
           end
 
           it "does not add any offices" do
-            expect { subject }.not_to change { Office.count }
+            expect { subject }.not_to change(Office, :count)
           end
         end
 
@@ -187,18 +187,18 @@ module Admin
           let(:response_body) { sarah_smith_response.to_json }
 
           it "creates the provider" do
-            expect { subject }.to change { Provider.count }.by(1)
+            expect { subject }.to change(Provider, :count).by(1)
             expect(Provider.exists?(username:)).to be true
           end
 
           it "links the provider to the firm" do
-            expect { subject }.not_to change { Firm.count }
+            expect { subject }.not_to change(Firm, :count)
             provider = Provider.find_by(username:)
             expect(provider.firm).to eq firm
           end
 
           it "creates the additional offices" do
-            expect { subject }.to change { Office.count }.by(1)
+            expect { subject }.to change(Office, :count).by(1)
             expect(firm.reload.offices.map(&:code)).to match_array(%w[8M609S 8B869F])
           end
         end

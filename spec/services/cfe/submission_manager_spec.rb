@@ -55,7 +55,7 @@ module CFE
           let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
 
           it "creates a submission record" do
-            expect { submission_manager.call }.to change { Submission.count }.by(1)
+            expect { submission_manager.call }.to change(Submission, :count).by(1)
           end
 
           it "calls all the services it manages" do

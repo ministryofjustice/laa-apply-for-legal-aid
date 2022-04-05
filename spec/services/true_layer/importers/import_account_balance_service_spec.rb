@@ -29,7 +29,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
       end
 
       it "does not change the balance of the account" do
-        expect { subject }.not_to change { bank_account.balance }
+        expect { subject }.not_to change(bank_account, :balance)
       end
 
       it "returns an error" do

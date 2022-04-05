@@ -18,11 +18,11 @@ module LegalFramework
       end
 
       it "adds a new submission record" do
-        expect { service }.to change { Submission.count }.by(1)
+        expect { service }.to change(Submission, :count).by(1)
       end
 
       it "adds a merits task list record" do
-        expect { service }.to change { MeritsTaskList.count }.by(1)
+        expect { service }.to change(MeritsTaskList, :count).by(1)
       end
 
       context "merits task list exist" do
@@ -31,7 +31,7 @@ module LegalFramework
         end
 
         it "does not add a new merits task list record" do
-          expect { service }.not_to change { MeritsTaskList.count }
+          expect { service }.not_to change(MeritsTaskList, :count)
         end
 
         it "updates the existing merits task list" do

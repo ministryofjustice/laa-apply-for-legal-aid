@@ -11,7 +11,7 @@ module Populators
       let(:archived_credit_names) { %i[student_loan] }
 
       it "creates instances from names" do
-        expect { subject }.to change { TransactionType.count }.by(total)
+        expect { subject }.to change(TransactionType, :count).by(total)
       end
 
       it "assigns the names to the correct operation" do
@@ -27,7 +27,7 @@ module Populators
         let!(:debit_transaction_type) { create :transaction_type, :debit_with_standard_name }
 
         it "creates one less transaction type" do
-          expect { subject }.to change { TransactionType.count }.by(total - 2)
+          expect { subject }.to change(TransactionType, :count).by(total - 2)
         end
       end
 
@@ -36,7 +36,7 @@ module Populators
           expect {
             subject
             subject
-          }.to change { TransactionType.count }.by(total)
+          }.to change(TransactionType, :count).by(total)
         end
       end
 
