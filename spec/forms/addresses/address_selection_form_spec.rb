@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Addresses::AddressSelectionForm, type: :form do
+  subject(:form) { described_class.new(form_params.merge(model: applicant)) }
+
   let(:postcode) { "SW1H 9EA" }
   let(:lookup_id) { "123456" }
   let(:applicant) { create :applicant }
@@ -11,8 +13,6 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
       addresses: [Address.new(lookup_id:)],
     }
   end
-
-  subject(:form) { described_class.new(form_params.merge(model: applicant)) }
 
   describe "validations" do
     it "is valid with all the required attributes" do

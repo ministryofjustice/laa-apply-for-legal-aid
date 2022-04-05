@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::DependantForm, type: :form do
+  subject { described_class.new(params) }
+
   let(:dependant) { create :dependant, date_of_birth: nil }
   let(:date) { Faker::Date.birthday }
   let(:day) { date.strftime("%d") } # Two number day
@@ -26,8 +28,6 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
       assets_value:,
     }
   end
-
-  subject { described_class.new(params) }
 
   describe "valid?" do
     it "returns true when validations pass" do

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Incidents::ToldOnForm, type: :form do
+  subject { described_class.new(params.merge(model: incident)) }
+
   let(:incident) { create :incident }
   let(:told_on) { 3.days.ago.to_date }
   let(:occurred_on) { 5.days.ago.to_date }
@@ -9,8 +11,6 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
   let(:message) { I18n.t(error_locale, scope: i18n_scope) }
 
   let(:params) { { occurred_on:, told_on: } }
-
-  subject { described_class.new(params.merge(model: incident)) }
 
   describe "#save" do
     before do

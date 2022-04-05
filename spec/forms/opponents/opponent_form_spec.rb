@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Opponents::OpponentForm, type: :form do
+  subject { described_class.new(sample_params.merge(custom_params).merge(model: opponent)) }
   let(:opponent) { create :opponent }
   let(:custom_params) { {} }
   let(:sample_params) do
@@ -18,8 +19,6 @@ RSpec.describe Opponents::OpponentForm, type: :form do
   end
   let(:i18n_scope) { "activemodel.errors.models.application_merits_task/opponent.attributes" }
   let(:custom_params) { {} }
-
-  subject { described_class.new(sample_params.merge(custom_params).merge(model: opponent)) }
 
   describe "extrapolate_police_notified_details" do
     context "when loaded via params" do

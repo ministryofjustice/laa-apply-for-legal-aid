@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Applicants::BasicDetailsForm, type: :form do
+  subject { described_class.new(params) }
+
   describe ".model_name" do
     it 'should be "Applicant"' do
       expect(described_class.model_name).to eq("Applicant")
@@ -21,8 +23,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
   end
 
   let(:params) { attributes.slice(*attr_list).merge(model: legal_aid_application.build_applicant) }
-
-  subject { described_class.new(params) }
 
   describe "#save" do
     let(:applicant) { Applicant.last }

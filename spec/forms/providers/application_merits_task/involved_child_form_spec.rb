@@ -3,6 +3,8 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe InvolvedChildForm do
+      subject { described_class.new(params) }
+
       let(:earliest_date) { Date.new(2000, 1, 1) }
       let(:dob) { Faker::Date.between(from: earliest_date, to: Date.current) }
       let(:full_name) { Faker::Name.name }
@@ -14,8 +16,6 @@ module Providers
           date_of_birth_1i: dob.year.to_s,
         }
       end
-
-      subject { described_class.new(params) }
 
       describe "#valid?" do
         context "all fields valid" do

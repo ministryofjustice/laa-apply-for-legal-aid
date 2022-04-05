@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::HasEvidenceOfBenefitForm do
+  subject { described_class.new(params.merge(model: dwp_override)) }
+
   let(:dwp_override) { create :dwp_override, passporting_benefit: "Valid state benefit" }
   let(:has_evidence_of_benefit) { true }
   let(:params) do
@@ -8,8 +10,6 @@ RSpec.describe LegalAidApplications::HasEvidenceOfBenefitForm do
       has_evidence_of_benefit:,
     }
   end
-
-  subject { described_class.new(params.merge(model: dwp_override)) }
 
   describe "valid?" do
     it "returns true when validations pass" do

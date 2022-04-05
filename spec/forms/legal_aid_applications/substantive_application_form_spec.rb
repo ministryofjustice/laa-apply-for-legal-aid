@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
+  subject { described_class.new(params) }
+
   let(:used_delegated_functions_on) { 1.day.ago.to_date }
   let(:application) do
     create :legal_aid_application, :applicant_details_checked
@@ -12,8 +14,6 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
       model: application,
     }
   end
-
-  subject { described_class.new(params) }
 
   describe "#save" do
     it "updates application" do

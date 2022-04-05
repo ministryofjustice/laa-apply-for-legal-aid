@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
+  subject { described_class.new(form_params) }
+
   let(:savings_amount) { create :savings_amount }
   let(:attributes) { described_class::ATTRIBUTES }
   let(:check_box_attributes) { described_class::CHECK_BOXES_ATTRIBUTES }
@@ -8,8 +10,6 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
   let(:amount_params) { {} }
   let(:params) { amount_params.merge(check_box_params) }
   let(:form_params) { params.merge(model: savings_amount) }
-
-  subject { described_class.new(form_params) }
 
   describe "#save" do
     context "check boxes are checked" do
