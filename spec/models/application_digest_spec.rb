@@ -32,7 +32,7 @@ RSpec.describe ApplicationDigest do
       before { create :application_digest, legal_aid_application_id: laa.id }
 
       it "does not create a new record" do
-        expect { subject }.not_to change { described_class.count }
+        expect { subject }.not_to change(described_class, :count)
       end
 
       it "updates the values on the existing record" do
@@ -50,7 +50,7 @@ RSpec.describe ApplicationDigest do
     context "when no digest record exists for this application" do
       it "creates a new record" do
         VCR.use_cassette "bank_holidays" do
-          expect { subject }.to change { described_class.count }.by(1)
+          expect { subject }.to change(described_class, :count).by(1)
         end
       end
 

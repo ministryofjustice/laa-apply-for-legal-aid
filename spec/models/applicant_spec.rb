@@ -19,7 +19,7 @@ RSpec.describe Applicant, type: :model do
       let!(:existing_applicant) { create :applicant }
 
       it "allows another applicant to be created with same email" do
-        expect { create :applicant, email: existing_applicant.email }.to change { described_class.count }.by(1)
+        expect { create :applicant, email: existing_applicant.email }.to change(described_class, :count).by(1)
       end
     end
   end
@@ -78,7 +78,7 @@ RSpec.describe Applicant, type: :model do
     subject { applicant.store_true_layer_token token: token, expires: token_expires_at }
 
     it "stores the data securely" do
-      expect { subject }.to change { SecureData.count }.by(1)
+      expect { subject }.to change(SecureData, :count).by(1)
     end
 
     it "associates the applicant with the secure data" do

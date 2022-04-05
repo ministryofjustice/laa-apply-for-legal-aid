@@ -8,7 +8,7 @@ RSpec.describe PostSubmissionProcessingJob, type: :job do
 
   describe "SubmissionConfirmationMailer" do
     it "schedules an email for immediate delivery" do
-      expect { subject }.to change { ScheduledMailing.count }.by(1)
+      expect { subject }.to change(ScheduledMailing, :count).by(1)
       rec = ScheduledMailing.first
 
       expect(rec.mailer_klass).to eq "SubmissionConfirmationMailer"

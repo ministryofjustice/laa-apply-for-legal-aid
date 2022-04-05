@@ -12,18 +12,18 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
   end
 
   it "does not change the bank holiday" do
-    expect { subject }.not_to change { bank_holiday.reload }
+    expect { subject }.not_to change(bank_holiday, :reload)
   end
 
   it "does not create a new bank holiday" do
-    expect { subject }.not_to change { BankHoliday.count }
+    expect { subject }.not_to change(BankHoliday, :count)
   end
 
   context "when outdated" do
     let!(:bank_holiday) { create :bank_holiday, updated_at: stale_date }
 
     it "creates a new bank holiday instance" do
-      expect { subject }.to change { BankHoliday.count }.by(1)
+      expect { subject }.to change(BankHoliday, :count).by(1)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
     let!(:bank_holiday) { BankHoliday.create(updated_at: stale_date) }
 
     it "does not create a new bank holiday" do
-      expect { subject }.not_to change { BankHoliday.count }
+      expect { subject }.not_to change(BankHoliday, :count)
     end
 
     it "touches the existing bank holiday" do

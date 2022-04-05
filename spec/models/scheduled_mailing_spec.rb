@@ -21,7 +21,7 @@ RSpec.describe ScheduledMailing do
     it "creates a record in waiting state" do
       travel_to frozen_time
 
-      expect { subject }.to change { described_class.count }.by(1)
+      expect { subject }.to change(described_class, :count).by(1)
       rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.legal_aid_application_id).to eq legal_aid_application.id
@@ -46,7 +46,7 @@ RSpec.describe ScheduledMailing do
     end
 
     it "creates a record in waiting state with a scheduled time" do
-      expect { subject }.to change { described_class.count }.by(1)
+      expect { subject }.to change(described_class, :count).by(1)
       rec = described_class.first
       expect(rec.mailer_klass).to eq mailer_klass
       expect(rec.mailer_method).to eq mailer_method

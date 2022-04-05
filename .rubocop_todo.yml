@@ -621,33 +621,6 @@ RSpec/ExpectActual:
   Exclude:
     - 'spec/services/reports/means_report_creator_spec.rb'
 
-# Offense count: 203
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: method_call, block
-RSpec/ExpectChange:
-  Exclude:
-    - 'spec/forms/applicants/basic_details_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/own_home_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/substantive_application_form_spec.rb'
-    - 'spec/jobs/post_submission_processing_job_spec.rb'
-    - 'spec/jobs/reports_uploader_job_spec.rb'
-    - 'spec/models/aggregated_cash_income_spec.rb'
-    - 'spec/models/aggregated_cash_outgoings_spec.rb'
-    - 'spec/models/applicant_spec.rb'
-    - 'spec/models/application_digest_spec.rb'
-    - 'spec/models/bank_holiday_spec.rb'
-    - 'spec/models/ccms/opponent_id_spec.rb'
-    - 'spec/models/ccms/submission_spec.rb'
-    - 'spec/models/legal_aid_application_spec.rb'
-    - 'spec/models/legal_framework/merits_task_list_spec.rb'
-    - 'spec/models/scheduled_mailing_spec.rb'
-    - 'spec/models/secure_data_spec.rb'
-    - 'spec/models/true_layer_bank_spec.rb'
-    - 'spec/workers/bank_holiday_update_worker_spec.rb'
-    - 'spec/workers/true_layer_banks_update_worker_spec.rb'
-
 # Offense count: 55
 RSpec/ExpectInHook:
   Exclude:

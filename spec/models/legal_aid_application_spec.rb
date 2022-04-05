@@ -224,7 +224,7 @@ RSpec.describe LegalAidApplication, type: :model do
     subject { legal_aid_application.generate_secure_id }
 
     it "generates a new secure data object" do
-      expect { subject }.to change { SecureData.count }.by(1)
+      expect { subject }.to change(SecureData, :count).by(1)
     end
 
     it "returns the generated id" do
@@ -578,7 +578,7 @@ RSpec.describe LegalAidApplication, type: :model do
       expect(BankAccountHolder.count).not_to be_zero
       expect(BankError.count).not_to be_zero
       expect(LegalAidApplicationTransactionType.count).not_to be_zero
-      expect { subject }.to change { described_class.count }.to(0)
+      expect { subject }.to change(described_class, :count).to(0)
       expect(BenefitCheckResult.count).to be_zero
       expect(OtherAssetsDeclaration.count).to be_zero
       expect(SavingsAmount.count).to be_zero

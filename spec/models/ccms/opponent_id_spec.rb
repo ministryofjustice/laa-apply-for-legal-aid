@@ -30,7 +30,7 @@ module CCMS
 
         it "does not add another record" do
           expect(described_class.count).to eq 1
-          expect { described_class.next_serial_id }.not_to change { described_class.count }
+          expect { described_class.next_serial_id }.not_to change(described_class, :count)
         end
       end
     end

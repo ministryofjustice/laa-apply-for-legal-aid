@@ -20,7 +20,7 @@ RSpec.describe BankHoliday, type: :model, vcr: { cassette_name: "gov_uk_bank_hol
       before { described_class.delete_all }
 
       it "creates a new instance" do
-        expect { described_class.dates }.to change { described_class.count }.from(0).to(1)
+        expect { described_class.dates }.to change(described_class, :count).from(0).to(1)
       end
 
       it "returns api dates" do
@@ -31,7 +31,7 @@ RSpec.describe BankHoliday, type: :model, vcr: { cassette_name: "gov_uk_bank_hol
         expect {
           described_class.dates
           described_class.dates
-        }.to change { described_class.count }.from(0).to(1)
+        }.to change(described_class, :count).from(0).to(1)
       end
     end
   end

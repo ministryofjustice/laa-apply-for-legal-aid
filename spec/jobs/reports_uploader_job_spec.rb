@@ -21,7 +21,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
       let(:admin_report) { AdminReport.first }
 
       it "creates an admin report" do
-        expect { subject }.to change { AdminReport.count }.by(1)
+        expect { subject }.to change(AdminReport, :count).by(1)
       end
 
       it "attaches application_details report to admin report" do
@@ -46,7 +46,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
 
       it "does not create another record" do
         subject
-        expect { subject }.not_to change { AdminReport.count }
+        expect { subject }.not_to change(AdminReport, :count)
       end
 
       it "updates the existing record" do
