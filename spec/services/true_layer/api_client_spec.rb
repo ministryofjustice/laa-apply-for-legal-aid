@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe TrueLayer::ApiClient do
-  let(:token) { SecureRandom.hex }
-
   subject { described_class.new(token) }
+
+  let(:token) { SecureRandom.hex }
 
   describe "#provider" do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }

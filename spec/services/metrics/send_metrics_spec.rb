@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe Metrics::SendMetrics do
   describe "#call" do
+    subject { described_class.call }
+
     let(:metrics_service_host) { Faker::Internet.domain_word }
     let(:prometheus_client) { spy(PrometheusExporter::Client) }
     let(:prometheus_thread_sleep) { rand(1..10).to_f / 1000 }
-
-    subject { described_class.call }
 
     before do
       stub_const("Metrics::SendMetrics::PROMETHEUS_THREAD_SLEEP", prometheus_thread_sleep)

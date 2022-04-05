@@ -2,13 +2,13 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe ProviderEmailService do
+  subject { described_class.new(application) }
+
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
   let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe") }
   let(:provider) { create :provider, email: simulated_email_address }
   let(:application) { create(:application, applicant:, provider:) }
   let(:application_url) { "http://www.example.com/providers/applications/#{application.id}/client_completed_means?locale=en" }
-
-  subject { described_class.new(application) }
 
   describe "#send_email" do
     let(:mailer_args) do

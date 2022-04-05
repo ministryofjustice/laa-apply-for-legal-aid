@@ -2,6 +2,8 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe SubmitApplicationReminderService, :vcr do
+  subject { described_class.new(application) }
+
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
   let(:provider) { create :provider, email: simulated_email_address }
   let(:application) do
@@ -15,8 +17,6 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
            provider: provider
   end
-
-  subject { described_class.new(application) }
 
   describe "#send_email" do
     it "creates two scheduled mailing records" do

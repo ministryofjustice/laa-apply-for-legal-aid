@@ -1,6 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Reports::MeritsReportCreator do
+  subject do
+    # dont' match on path - webpacker keeps changing the second part of the path
+    VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
+      described_class.call(legal_aid_application)
+    end
+  end
+
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_proceedings,
@@ -16,13 +23,6 @@ RSpec.describe Reports::MeritsReportCreator do
   end
 
   let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
-
-  subject do
-    # dont' match on path - webpacker keeps changing the second part of the path
-    VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
-      described_class.call(legal_aid_application)
-    end
-  end
 
   describe ".call" do
     it "attaches merits_report.pdf to the application" do

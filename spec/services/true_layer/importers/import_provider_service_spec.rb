@@ -7,12 +7,12 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
   let(:applicant) { create :applicant, :with_true_layer_tokens }
 
   describe "#call" do
+    subject { described_class.call(api_client:, applicant:, token_expires_at:) }
+
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
     let(:bank_provider) { applicant.bank_providers.find_by(true_layer_provider_id: mock_provider[:provider][:provider_id]) }
     let(:existing_true_layer_provider_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant: applicant, true_layer_provider_id: existing_true_layer_provider_id }
-
-    subject { described_class.call(api_client:, applicant:, token_expires_at:) }
 
     context "request is successful" do
       before do

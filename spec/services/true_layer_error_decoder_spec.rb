@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe TrueLayerErrorDecoder do
+  subject { described_class.new(error_details) }
+
   let(:error_details) { true_layer_error_details_array }
   let(:error_description) { "TrueLayer's detailed explanation of the error" }
-
-  subject { described_class.new(error_details) }
 
   describe "#error_heading" do
     context "known error" do

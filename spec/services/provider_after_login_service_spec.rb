@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe ProviderAfterLoginService do
-  let(:service) { described_class.new(provider) }
-
   subject { service.call }
+
+  let(:service) { described_class.new(provider) }
 
   describe ".call" do
     context "provider does not have CCMS_Apply role" do

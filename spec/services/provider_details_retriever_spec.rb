@@ -2,11 +2,11 @@ require "rails_helper"
 DummyResponseStruct = Struct.new(:message, :code, :body)
 
 RSpec.describe ProviderDetailsRetriever do
+  subject { described_class.call(username) }
+
   let(:api_url) { "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails" }
   let(:provider) { create :provider }
   let(:username) { provider.username }
-
-  subject { described_class.call(username) }
 
   before do
     allow(Rails.configuration.x.provider_details).to receive(:url).and_return(api_url)

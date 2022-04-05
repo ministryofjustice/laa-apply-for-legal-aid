@@ -25,12 +25,12 @@ module Reports
       end
 
       describe ".call" do
+        subject { described_class.call(application) }
+
         let(:application) { create :legal_aid_application, :with_applicant, :at_assessment_submitted }
         let(:provider) { application.provider }
         let(:applicant) { application.applicant }
         let(:time) { Time.zone.local(2020, 9, 20, 2, 3, 44) }
-
-        subject { described_class.call(application) }
 
         it "returns an array of nine fields" do
           expect(subject.size).to eq 8

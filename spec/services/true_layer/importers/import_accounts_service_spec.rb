@@ -5,6 +5,8 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
   let(:api_client) { TrueLayer::ApiClient.new(bank_provider.token) }
 
   describe "#call" do
+    subject { described_class.call(api_client, bank_provider) }
+
     let(:mock_account1) { TrueLayerHelpers::MOCK_DATA[:accounts][0] }
     let(:mock_account2) { TrueLayerHelpers::MOCK_DATA[:accounts][1] }
     let(:bank_account1) { bank_provider.bank_accounts.find_by(true_layer_id: mock_account1[:account_id]) }
@@ -12,8 +14,6 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
     let!(:existing_bank_account) { create :bank_account_holder, bank_provider: bank_provider }
     let!(:existing_bank_account) { create :bank_account, bank_provider: bank_provider }
     let!(:existing_bank_account_transaction) { create :bank_transaction, bank_account: existing_bank_account }
-
-    subject { described_class.call(api_client, bank_provider) }
 
     context "request is successful" do
       before do

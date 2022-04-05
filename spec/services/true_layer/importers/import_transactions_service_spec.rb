@@ -6,6 +6,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
   describe "#call" do
+    subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
+
     let(:now) { "6/11/2018".to_datetime.beginning_of_day }
     let(:now_minus_3_month) { "5/08/2018".to_datetime.beginning_of_day }
     let(:mock_transaction1) { mock_account[:transactions][0] }
@@ -13,8 +15,6 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
     let(:transaction2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction2[:transaction_id]) }
     let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
-
-    subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
 
     context "request is successful" do
       before do

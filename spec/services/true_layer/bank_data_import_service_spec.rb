@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe TrueLayer::BankDataImportService do
+  subject { described_class.call(legal_aid_application:) }
+
   let(:token) { SecureRandom.hex }
   let(:token_expires_at) { 1.hour.from_now }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period, :with_non_passported_state_machine }
@@ -10,8 +12,6 @@ RSpec.describe TrueLayer::BankDataImportService do
     Setting.delete_all
     applicant.store_true_layer_token(token:, expires: token_expires_at)
   end
-
-  subject { described_class.call(legal_aid_application:) }
 
   describe "#call" do
     let(:bank_provider) { applicant.bank_providers.find_by(token: applicant.true_layer_secure_data_id) }
