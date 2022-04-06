@@ -46,6 +46,13 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/opponent" do
+        subject do
+          patch(
+            providers_legal_aid_application_opponent_path(legal_aid_application),
+            params: params.merge(button_clicked),
+          )
+        end
+
         let(:sample_opponent) { build :opponent, :police_notified_true }
         let(:full_name) { Faker::Name.name }
         let(:params) do
@@ -66,13 +73,6 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:opponent) { legal_aid_application.reload.opponent }
-
-        subject do
-          patch(
-            providers_legal_aid_application_opponent_path(legal_aid_application),
-            params: params.merge(button_clicked),
-          )
-        end
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)

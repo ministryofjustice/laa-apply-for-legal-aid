@@ -46,14 +46,14 @@ RSpec.describe Providers::EndOfApplicationsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/end_of_application" do
-    let(:params) { {} }
-
     subject do
       patch(
         providers_legal_aid_application_end_of_application_path(legal_aid_application),
         params:,
       )
     end
+
+    let(:params) { {} }
 
     it "redirects to next page" do
       subject

@@ -3,6 +3,8 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe ObtainDocumentIdService, :ccms do
+      subject { described_class.new(submission) }
+
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_applicant,
@@ -18,8 +20,6 @@ module CCMS
       let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file "document_id_request.xml" }
       let(:response_body) { ccms_data_from_file "document_id_response.xml" }
-
-      subject { described_class.new(submission) }
 
       around do |example|
         VCR.turn_off!

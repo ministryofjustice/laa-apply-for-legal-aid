@@ -24,16 +24,16 @@ RSpec.describe Providers::HasDependantsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/has_dependants" do
-    let(:has_dependants) { nil }
-    let(:params) do
-      { legal_aid_application: { has_dependants: } }
-    end
-
     subject do
       patch(
         providers_legal_aid_application_has_dependants_path(legal_aid_application),
         params:,
       )
+    end
+
+    let(:has_dependants) { nil }
+    let(:params) do
+      { legal_aid_application: { has_dependants: } }
     end
 
     it "renders successfully" do

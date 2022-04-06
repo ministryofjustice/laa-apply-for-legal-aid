@@ -43,6 +43,8 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/identify_types_of_income" do
+    subject { patch target_url, params: params.merge(submit_button) }
+
     let(:transaction_type_ids) { [] }
     let(:params) do
       {
@@ -52,8 +54,6 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
       }
     end
     let(:submit_button) { {} }
-
-    subject { patch target_url, params: params.merge(submit_button) }
 
     it "does not add transaction types to the application" do
       expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)

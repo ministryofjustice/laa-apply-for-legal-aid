@@ -34,6 +34,8 @@ module Providers
     end
 
     describe "PATCH /providers/applications/:legal_aid_application_id/gateway_evidence" do
+      subject { patch providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
+
       let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
       let(:gateway_evidence) { legal_aid_application.gateway_evidence }
       let(:params_gateway_evidence) do
@@ -45,8 +47,6 @@ module Providers
       let(:upload_button) { { upload_button: "Upload" } }
       let(:button_clicked) { {} }
       let(:params) { { gateway_evidence: params_gateway_evidence }.merge(button_clicked) }
-
-      subject { patch providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
 
       before { login_as provider }
 
@@ -288,12 +288,12 @@ module Providers
     end
 
     describe "DELETE /providers/applications/:legal_aid_application_id/gateway_evidence" do
+      subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
+
       let(:gateway_evidence) { create :gateway_evidence, :with_original_file_attached }
       let(:legal_aid_application) { gateway_evidence.legal_aid_application }
       let(:original_file) { gateway_evidence.original_attachments.first }
       let(:params) { { attachment_id: gateway_evidence.original_attachments.first.id } }
-
-      subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
 
       before do
         login_as provider

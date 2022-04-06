@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_banks_api", allow_playback_repeats: true } do
+  subject { true_layer_banks_update_worker.perform }
+
   let(:true_layer_banks_update_worker) { described_class.new }
   let(:stale_date) { Time.current.utc - described_class::UPDATE_INTERVAL - 2.hours }
   let!(:true_layer_bank) { create :true_layer_bank }
-
-  subject { true_layer_banks_update_worker.perform }
 
   it "returns true" do
     expect(subject).to be true

@@ -3,9 +3,10 @@ require "rails_helper"
 module Dashboard
   RSpec.describe ApplicantEmailJob do
     describe ".perform" do
+      subject { described_class.perform_now(application) }
+
       let(:application) { create :legal_aid_application, :with_applicant }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
-      subject { described_class.perform_now(application) }
 
       let(:geckoboard_client) { double Geckoboard::Client }
       let(:datasets_client) { double Geckoboard::DatasetsClient }

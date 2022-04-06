@@ -3,6 +3,8 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe AddCaseService, :ccms do
+      subject { described_class.new(submission) }
+
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_proceedings,
@@ -25,8 +27,6 @@ module CCMS
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices/CaseServices_ep" }
       let(:response_body) { ccms_data_from_file "case_add_response.xml" }
-
-      subject { described_class.new(submission) }
 
       around do |example|
         VCR.turn_off!

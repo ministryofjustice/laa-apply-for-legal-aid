@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :form, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
+  subject { described_class.call(proceedings_by_name) }
+
   let(:legal_aid_application) do
     create :legal_aid_application,
            :with_proceedings,
@@ -20,8 +22,6 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   let(:error_locale) { :defined_in_spec }
 
   let(:params) { update_proceeding_type_param_dates }
-
-  subject { described_class.call(proceedings_by_name) }
 
   describe "#save" do
     before do

@@ -82,11 +82,10 @@ module Admin
       context "user adds non-ascii characters to their name" do
         # we suspect that this comes from a cut and paste from MS into
         # the login box when parsed it returns BRAND%20NEW\u2011USER
+        subject { service.check }
         let(:username) { "brand new‑user" }
         let(:response_body) { sarah_smith_response.to_json }
         let(:http_status) { 200 }
-
-        subject { service.check }
 
         it "responds with :error" do
           expect(subject).to eq :error
@@ -123,9 +122,9 @@ module Admin
       end
 
       context "success" do
+        subject { service.create }
         let(:http_status) { 200 }
 
-        subject { service.create }
         context "no firm or offices pre-exist" do
           let(:response_body) { sarah_smith_response.to_json }
 

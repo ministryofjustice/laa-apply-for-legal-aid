@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe CFE::CreatePropertiesService do
+  subject { described_class.new submission }
+
   let(:property_value) { Faker::Number.number(digits: 6) }
   let(:outstanding_mortgage) { property_value / Faker::Number.number(digits: 2) }
   let(:percentage_owned) { Faker::Number.number(digits: 2) }
@@ -18,8 +20,6 @@ RSpec.describe CFE::CreatePropertiesService do
   let(:submission) do
     create :cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :vehicles_created
   end
-
-  subject { described_class.new submission }
 
   describe "#call" do
     let(:api_response) { { success: true }.to_json }

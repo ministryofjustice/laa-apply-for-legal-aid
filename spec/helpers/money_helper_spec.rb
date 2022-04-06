@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe MoneyHelper, type: :helper do
-  let(:balance) { 325.42 }
-
   subject(:humanized_balance) { value_with_currency_unit(balance, currency) }
+
+  let(:balance) { 325.42 }
 
   describe "#display_value_with_symbol" do
     context "when the currency is GBP" do

@@ -5,12 +5,6 @@ FormStruct = Struct.new(:happened_day, :happened_month, :happened_year)
 SuffixedFormStruct = Struct.new(:happened_3i, :happened_2i, :happened_1i)
 
 RSpec.describe DateFieldBuilder do
-  let(:form_date) { Time.zone.today }
-  let(:model_date) { 2.days.ago }
-  let(:model) { ModelStruct.new(model_date) }
-  let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.year) }
-  let(:suffix) { nil }
-
   subject do
     described_class.new(
       form:,
@@ -20,6 +14,12 @@ RSpec.describe DateFieldBuilder do
       suffix:,
     )
   end
+
+  let(:form_date) { Time.zone.today }
+  let(:model_date) { 2.days.ago }
+  let(:model) { ModelStruct.new(model_date) }
+  let(:form) { FormStruct.new(form_date.day, form_date.month, form_date.year) }
+  let(:suffix) { nil }
 
   describe "#fields" do
     it "returns three prefixed names for day, month, and year" do

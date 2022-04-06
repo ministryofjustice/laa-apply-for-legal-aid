@@ -3,6 +3,8 @@ require "rails_helper"
 module Reports
   module MIS
     RSpec.describe NonPassportedApplicationsReport do
+      subject { described_class.new.run }
+
       before do
         create_early_non_passported_application
         travel_to(8.minutes.ago) { create_non_passported_application }
@@ -10,8 +12,6 @@ module Reports
         travel_to(4.minutes.ago) { create_passported_application }
         travel_to(2.minutes.ago) { create_submitted_application }
       end
-
-      subject { described_class.new.run }
 
       describe "run" do
         let(:application) { LegalAidApplication.find_by(application_ref: "L-ATE") }

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::CalculationDateService do
+  subject { described_class.call(legal_aid_application) }
+
   let(:used_delegated_functions_on) { Faker::Date.backward }
   let(:transaction_period_finish_on) { Faker::Date.backward }
   let(:merits_submitted_at) { Faker::Date.backward }
@@ -16,8 +18,6 @@ RSpec.describe LegalAidApplications::CalculationDateService do
            benefit_check_result: benefit_check_result,
            merits_submitted_at: merits_submitted_at
   end
-
-  subject { described_class.call(legal_aid_application) }
 
   context "delegated functions are used" do
     it "returns date delegated functions were used" do

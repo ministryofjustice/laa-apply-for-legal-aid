@@ -19,6 +19,8 @@ module Providers
       end
 
       describe "update PATCH /providers/applications/:legal_aid_application_id/remove_involved_child/:id" do
+        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child2), params: params }
+
         let(:params) do
           {
             binary_choice_form: {
@@ -27,8 +29,6 @@ module Providers
             legal_aid_application_id: application.id,
           }
         end
-
-        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child2), params: params }
 
         context "child is removed" do
           let(:radio_button) { "true" }

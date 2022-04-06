@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Addresses::AddressForm, type: :form do
+  subject(:form) { described_class.new(address_params.merge(model: address)) }
+
   let(:address_line_one) { "Ministry Of Justice" }
   let(:address_line_two) { "102 Petty France" }
   let(:city) { "London" }
@@ -18,8 +20,6 @@ RSpec.describe Addresses::AddressForm, type: :form do
       postcode: postcode,
     }
   end
-
-  subject(:form) { described_class.new(address_params.merge(model: address)) }
 
   describe "validations" do
     it "is valid with all the required attributes" do

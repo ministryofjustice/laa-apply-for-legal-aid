@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Applicants::EmailForm, type: :form do
+  subject { described_class.new(params) }
+
   describe ".model_name" do
     it 'should be "Applicant"' do
       expect(described_class.model_name).to eq("Applicant")
@@ -17,8 +19,6 @@ RSpec.describe Applicants::EmailForm, type: :form do
       model: applicant,
     }
   end
-
-  subject { described_class.new(params) }
 
   describe "#save" do
     before do

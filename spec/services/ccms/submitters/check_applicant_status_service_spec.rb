@@ -3,12 +3,12 @@ require "rails_helper"
 module CCMS
   module Submitters
     RSpec.describe CheckApplicantStatusService, :ccms do
+      subject { described_class.new(submission) }
+
       let(:submission) { create :submission, :applicant_submitted }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:response_body) { ccms_data_from_file "applicant_add_status_response.xml" }
       let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/ClientServices/ClientServices_ep" }
-
-      subject { described_class.new(submission) }
 
       around do |example|
         VCR.turn_off!

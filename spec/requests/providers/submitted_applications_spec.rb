@@ -23,14 +23,14 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
 
   describe "GET /providers/applications/:legal_aid_application_id/submitted_application" do
+    subject do
+      get providers_legal_aid_application_submitted_application_path(legal_aid_application)
+    end
+
     before do
       legal_aid_application.reload
       login
       subject
-    end
-
-    subject do
-      get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
 
     it "renders successfully" do
@@ -72,6 +72,10 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   end
 
   describe "employment income table" do
+    subject do
+      get providers_legal_aid_application_submitted_application_path(legal_aid_application)
+    end
+
     let(:firm) { create :firm }
     let!(:provider) { create :provider, firm: firm }
     let!(:legal_aid_application) do
@@ -86,10 +90,6 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
     let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
     let!(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
     let(:translation_path) { "providers.submitted_applications.employment_income_table" }
-
-    subject do
-      get providers_legal_aid_application_submitted_application_path(legal_aid_application)
-    end
 
     shared_examples "employment data is not present" do
       before { subject }

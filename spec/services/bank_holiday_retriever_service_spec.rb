@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe BankHolidayRetriever, vcr: { cassette_name: "gov_uk_bank_holiday_api", allow_playback_repeats: true } do
-  let(:group) { "england-and-wales" }
-
   subject { described_class.new }
+
+  let(:group) { "england-and-wales" }
 
   describe ".dates" do
     it "returns same as instance dates for group" do

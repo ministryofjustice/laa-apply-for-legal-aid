@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.describe Banking::BankTransactionsTrimmer do
   describe ".call" do
+    subject { described_class.call(application) }
+
     let(:application) { create :legal_aid_application, :with_applicant }
     let(:applicant) { application.applicant }
     let(:bank) { create :bank_provider, applicant: applicant }
@@ -13,8 +15,6 @@ RSpec.describe Banking::BankTransactionsTrimmer do
       allow(application).to receive(:transaction_period_start_on).and_return(period_start)
       allow(application).to receive(:transaction_period_finish_on).and_return(period_end)
     end
-
-    subject { described_class.call(application) }
 
     context "all transactions are within the transaction period" do
       let(:period_start) { Date.parse("2020-10-05").beginning_of_day }

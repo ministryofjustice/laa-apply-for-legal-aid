@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe SecureApplicationFinder do
+  subject { described_class.new(secure_data_id) }
+
   let(:legal_aid_application) { create :legal_aid_application }
   let(:expired_at) { 1.hour.from_now }
   let(:secure_data_id) do
@@ -9,8 +11,6 @@ RSpec.describe SecureApplicationFinder do
       expired_at:,
     )
   end
-
-  subject { described_class.new(secure_data_id) }
 
   it "finds the application" do
     expect(subject.legal_aid_application).to eq(legal_aid_application)

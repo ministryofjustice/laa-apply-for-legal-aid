@@ -10,11 +10,11 @@ RSpec.describe Banking::StateBenefitAnalyserService do
   let!(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
 
   describe ".call" do
+    subject(:call) { described_class.call(legal_aid_application) }
+
     before do
       allow(CFE::ObtainStateBenefitTypesService).to receive(:call).and_return(dummy_benefits)
     end
-
-    subject(:call) { described_class.call(legal_aid_application) }
 
     context "there are no state benefit transactions" do
       let!(:transactions) { create_mix_of_non_benefit_transactions }

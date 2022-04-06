@@ -25,14 +25,14 @@ RSpec.describe "provider percentage share of home test", type: :request do
   end
 
   describe "PATCH #/providers/applications/:legal_aid_application_id/percentage_home" do
+    subject { patch providers_legal_aid_application_percentage_home_path(application), params: params.merge(submit_button) }
+
     let(:percentage_home) { "33.33" }
     let(:params) do
       {
         legal_aid_application: { percentage_home: },
       }
     end
-
-    subject { patch providers_legal_aid_application_percentage_home_path(application), params: params.merge(submit_button) }
 
     context "when the provider is authenticated" do
       before do

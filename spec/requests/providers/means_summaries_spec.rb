@@ -27,9 +27,9 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:login) { login_as provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/means_summary" do
-    let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type: transaction_type, bank_account: bank_account }
-
     subject { get providers_legal_aid_application_means_summary_path(legal_aid_application) }
+
+    let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type: transaction_type, bank_account: bank_account }
 
     before do
       login
@@ -82,12 +82,12 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means_summary" do
-    let(:params) { {} }
-
     subject do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
       patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params
     end
+
+    let(:params) { {} }
 
     context "unauthenticated" do
       before { subject }

@@ -218,10 +218,9 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#generate_secure_id" do
+    subject { legal_aid_application.generate_secure_id }
     let(:legal_aid_application) { create :legal_aid_application }
     let(:secure_data) { SecureData.last }
-
-    subject { legal_aid_application.generate_secure_id }
 
     it "generates a new secure data object" do
       expect { subject }.to change(SecureData, :count).by(1)
@@ -549,6 +548,7 @@ RSpec.describe LegalAidApplication, type: :model do
   # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
   # that then become redundant.
   describe ".destroy_all" do
+    subject { described_class.destroy_all }
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_everything,
@@ -561,8 +561,6 @@ RSpec.describe LegalAidApplication, type: :model do
     before do
       create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application
     end
-
-    subject { described_class.destroy_all }
 
     # A bit verbose, but minimises the SQL calls required to complete spec
     it "removes everything it needs to" do
@@ -702,6 +700,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#bank_transactions" do
+    subject { legal_aid_application.bank_transactions }
     let(:transaction_period_start_on) { "2019-08-10".to_date }
     let(:transaction_period_finish_on) { "2019-08-20".to_date }
     let(:date_before_start) { "2019-08-09 23:40 +0100".to_time }
@@ -721,8 +720,6 @@ RSpec.describe LegalAidApplication, type: :model do
     let!(:transaction_before_end) { create :bank_transaction, bank_account: bank_account, happened_at: date_before_end }
     let!(:transaction_after_end) { create :bank_transaction, bank_account: bank_account, happened_at: date_after_end }
     let(:transaction_ids) { subject.pluck(:id) }
-
-    subject { legal_aid_application.bank_transactions }
 
     it "returns the all transactions" do
       expect(transaction_ids).to include(transaction_after_start.id)
@@ -1139,6 +1136,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#proceedings_by_name" do
+    subject { laa.proceedings_by_name }
     let(:laa) { create :legal_aid_application }
 
     before do
@@ -1146,8 +1144,6 @@ RSpec.describe LegalAidApplication, type: :model do
       laa.proceedings << create(:proceeding, :se014)
       laa.proceedings << create(:proceeding, :da004)
     end
-
-    subject { laa.proceedings_by_name }
 
     it "returns an array of three items" do
       expect(subject.size).to eq 3

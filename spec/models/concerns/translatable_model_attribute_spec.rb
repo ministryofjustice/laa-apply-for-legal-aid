@@ -20,11 +20,11 @@ RSpec.describe TranslatableModelAttribute do
   end
 
   describe ".enum_ts" do
+    subject { klass.enum_ts(:satisfaction) }
+
     let(:klass) { Feedback }
     let(:satisfactions) { klass.satisfactions }
     let(:instance) { klass.new }
-
-    subject { klass.enum_ts(:satisfaction) }
 
     it "returns a hash with an entry for each state" do
       expect(subject.keys).to match_array satisfactions.keys.map(&:to_sym)

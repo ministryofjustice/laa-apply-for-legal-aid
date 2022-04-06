@@ -54,14 +54,14 @@ RSpec.describe "address requests", type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address" do
-    let(:submit_button) { {} }
-
     subject do
       patch(
         providers_legal_aid_application_address_path(legal_aid_application),
         params: address_params.merge(submit_button),
       )
     end
+
+    let(:submit_button) { {} }
 
     context "when the provider is not authenticated" do
       before { subject }

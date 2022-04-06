@@ -32,6 +32,8 @@ RSpec.describe Admin::SettingsController, type: :request do
   end
 
   describe "PATCH /admin/settings" do
+    subject { patch admin_settings_path, params: params }
+
     let(:params) do
       {
         setting: {
@@ -44,8 +46,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       }
     end
     let(:setting) { Setting.setting }
-
-    subject { patch admin_settings_path, params: params }
 
     after do
       Setting.delete_all

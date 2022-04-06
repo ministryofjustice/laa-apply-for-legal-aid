@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UseCCMSArbiter do
+  subject { described_class.call(laa) }
+
   let(:laa) { create :legal_aid_application, :with_applicant, :applicant_details_checked }
   let(:provider) { laa.provider }
   let(:applicant) { laa.applicant }
@@ -10,8 +12,6 @@ RSpec.describe UseCCMSArbiter do
     allow(provider).to receive(:passported_permissions?).and_return(provider_passported_permission)
     allow(provider).to receive(:non_passported_permissions?).and_return(provider_non_passported_permission)
   end
-
-  subject { described_class.call(laa) }
 
   context "applicant receives benefit" do
     let(:receives_benefit) { true }

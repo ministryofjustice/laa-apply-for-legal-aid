@@ -109,13 +109,13 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   end
 
   describe "DELETE /providers/:application_id/has_other_proceedings" do
+    subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+
     let(:params) do
       {
         ccms_code: legal_aid_application.proceedings.last.ccms_code,
       }
     end
-
-    subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
 
     context "remove proceeding" do
       it "removes one proceeding" do
@@ -133,11 +133,11 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
 
       context "delete lead proceeding" do
+        subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+
         let(:params) do
           { ccms_code: legal_aid_application.proceedings.first.ccms_code }
         end
-
-        subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
 
         it "sets a new lead proceeding when the original one is deleted" do
           subject

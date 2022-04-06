@@ -39,6 +39,13 @@ RSpec.describe "does client use online banking requests", type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking" do
+    subject do
+      patch(
+        "/providers/applications/#{application_id}/does-client-use-online-banking",
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:provider_received_citizen_consent) { "true" }
     let(:submit_button) { {} }
     let(:params) do
@@ -47,13 +54,6 @@ RSpec.describe "does client use online banking requests", type: :request do
           provider_received_citizen_consent:,
         },
       }
-    end
-
-    subject do
-      patch(
-        "/providers/applications/#{application_id}/does-client-use-online-banking",
-        params: params.merge(submit_button),
-      )
     end
 
     context "the provider is authenticated" do

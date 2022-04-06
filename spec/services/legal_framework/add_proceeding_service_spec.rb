@@ -2,10 +2,10 @@ require "rails_helper"
 
 module LegalFramework
   RSpec.describe AddProceedingService, :vcr do
+    subject { described_class.new(legal_aid_application) }
+
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:ccms_code) { "DA004" }
-
-    subject { described_class.new(legal_aid_application) }
 
     describe "#call" do
       context "correct params" do

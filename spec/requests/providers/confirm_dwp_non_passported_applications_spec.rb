@@ -74,13 +74,13 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
   describe "PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
     context "submitting with Continue button" do
+      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: params }
+
       let(:params) do
         {
           continue_button: "Continue",
         }
       end
-
-      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: params }
 
       before do
         login_as application.provider
@@ -207,13 +207,13 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
     end
 
     context "submitting with Save As Draft button" do
+      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: params }
+
       let(:params) do
         {
           draft_button: "Save as draft",
         }
       end
-
-      subject { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: params }
 
       before do
         login_as application.provider

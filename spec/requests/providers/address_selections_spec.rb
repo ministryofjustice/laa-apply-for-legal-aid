@@ -71,6 +71,8 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address_selections" do
+    subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }
+
     let(:address_list) do
       [
         { lookup_id: "11", address_line_one: "1", address_line_two: "FAKE ROAD", city: "TEST CITY", postcode: "AA1 1AA" },
@@ -91,8 +93,6 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         },
       }.merge(submit_button)
     end
-
-    subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }
 
     context "when the provider is not authenticated" do
       before { subject }

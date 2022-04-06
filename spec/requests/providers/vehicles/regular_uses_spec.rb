@@ -27,6 +27,13 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/vehicle/regular_use" do
+    subject do
+      patch(
+        providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application),
+        params: params.merge(submit_button),
+      )
+    end
+
     let(:used_regularly) { true }
     let(:params) do
       {
@@ -35,13 +42,6 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
     end
     let(:next_url) { providers_legal_aid_application_applicant_bank_account_path(legal_aid_application) }
     let(:submit_button) { {} }
-
-    subject do
-      patch(
-        providers_legal_aid_application_vehicles_regular_use_path(legal_aid_application),
-        params: params.merge(submit_button),
-      )
-    end
 
     it "updates vehicle" do
       subject

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
+  subject { described_class.new(form_params) }
+
   let(:application) { create :legal_aid_application, :with_applicant }
   let(:journey) { %i[providers citizens].sample }
   let(:restrictions_details) { Faker::Lorem.paragraph }
@@ -13,8 +15,6 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
     }
   end
   let(:form_params) { params.merge(model: application) }
-
-  subject { described_class.new(form_params) }
 
   describe "#save" do
     before do

@@ -4,6 +4,8 @@ FirmStruct = Struct.new(:id, :name)
 OfficeStruct = Struct.new(:id, :code)
 
 RSpec.describe ProviderDetailsCreator do
+  subject { described_class.call(provider) }
+
   let(:username) { Faker::Name.name }
   let(:provider) { create :provider, name: nil, username: username }
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
@@ -49,8 +51,6 @@ RSpec.describe ProviderDetailsCreator do
 
   before { allow(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_return(api_response) }
 
-  subject { described_class.call(provider) }
-
   describe ".call" do
     it "creates the right firm" do
       expect { subject }.to change(Firm, :count).by(1)
@@ -85,9 +85,9 @@ RSpec.describe ProviderDetailsCreator do
     end
 
     context "when the username matches" do
-      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
-
       subject { described_class.call(third_provider) }
+
+      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
 
       it "updates the contact_id of the provider" do
         expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
@@ -95,9 +95,9 @@ RSpec.describe ProviderDetailsCreator do
     end
 
     context "when the emails match" do
-      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
-
       subject { described_class.call(third_provider) }
+
+      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
 
       it "updates the contact_id of the provider" do
         expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])

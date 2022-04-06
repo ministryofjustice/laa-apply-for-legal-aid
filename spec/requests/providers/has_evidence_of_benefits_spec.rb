@@ -59,6 +59,8 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/has_evidence_of_benefit" do
+    subject { patch providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application), params: params }
+
     let(:has_evidence_of_benefit) { "true" }
     let(:params) do
       {
@@ -67,8 +69,6 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
         },
       }
     end
-
-    subject { patch providers_legal_aid_application_has_evidence_of_benefit_path(legal_aid_application), params: params }
 
     it "updates the state" do
       expect(legal_aid_application.reload.state).to eq "applicant_details_checked"

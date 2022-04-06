@@ -50,6 +50,13 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/date_client_told_incident" do
+        subject do
+          patch(
+            providers_legal_aid_application_date_client_told_incident_path(legal_aid_application),
+            params: params.merge(button_clicked),
+          )
+        end
+
         let(:told_on) { 3.days.ago.to_date }
         let(:occurred_on) { 5.days.ago.to_date }
         let(:told_on_3i) { told_on.day }
@@ -68,13 +75,6 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:incident) { legal_aid_application.reload.latest_incident }
-
-        subject do
-          patch(
-            providers_legal_aid_application_date_client_told_incident_path(legal_aid_application),
-            params: params.merge(button_clicked),
-          )
-        end
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)

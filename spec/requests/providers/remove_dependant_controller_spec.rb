@@ -25,6 +25,8 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/remove_dependants/:dependant_id" do
+    subject { patch providers_legal_aid_application_remove_dependant_path(legal_aid_application, dependant), params: params }
+
     let(:params) do
       {
         binary_choice_form: {
@@ -32,8 +34,6 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
         },
       }
     end
-
-    subject { patch providers_legal_aid_application_remove_dependant_path(legal_aid_application, dependant), params: params }
 
     context "choose yes" do
       let(:remove_dependant) { "true" }

@@ -52,16 +52,16 @@ RSpec.describe "providers shared ownership request test", type: :request do
   end
 
   describe "PATCH #/providers/applications/:legal_aid_application_id/shared_ownership" do
+    subject do
+      patch providers_legal_aid_application_shared_ownership_path(legal_aid_application), params: params.merge(submit_button)
+    end
+
     let(:params) do
       {
         legal_aid_application: {
           shared_ownership:,
         },
       }
-    end
-
-    subject do
-      patch providers_legal_aid_application_shared_ownership_path(legal_aid_application), params: params.merge(submit_button)
     end
 
     context "when the provider is authenticated" do

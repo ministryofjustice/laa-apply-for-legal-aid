@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Flow::KeyPoint do
+  subject { described_class.new(journey, key_point) }
+
   let(:journey) { :providers }
   let(:key_point) { :start_after_applicant_completes_means }
   let(:step) { :client_completed_means }
@@ -12,8 +14,6 @@ RSpec.describe Flow::KeyPoint do
       current_step: step,
     )
   end
-
-  subject { described_class.new(journey, key_point) }
 
   describe "#step" do
     it "returns the matching step" do

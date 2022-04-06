@@ -202,13 +202,13 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
 
   describe "PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
     context "Continue" do
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+
       let(:params) do
         {
           continue_button: "Continue",
         }
       end
-
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
         login_as application.provider
@@ -246,13 +246,13 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     end
 
     context "Save as draft" do
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+
       let(:params) do
         {
           draft_button: "Save as draft",
         }
       end
-
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 
       before do
         login_as application.provider

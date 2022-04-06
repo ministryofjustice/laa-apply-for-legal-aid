@@ -3,11 +3,11 @@ require "rails_helper"
 ErrorResponseStruct = Struct.new(:code, :body)
 
 RSpec.describe GovukEmails::DeliveryMan do
+  subject { described_class.call(scheduled_mailing.id) }
+
   let(:scheduled_mailing) { create :scheduled_mailing, :waiting }
   let(:mailer_klass) { scheduled_mailing.mailer_klass }
   let(:mailer_method) { scheduled_mailing.mailer_method }
-
-  subject { described_class.call(scheduled_mailing.id) }
 
   describe ".call" do
     context "mail is already being processed by another worker" do

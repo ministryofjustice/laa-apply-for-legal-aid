@@ -58,12 +58,12 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
     end
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-      end
-
       subject do
         patch providers_legal_aid_application_applicant_details_path(application), params: params
+      end
+
+      before do
+        login_as provider
       end
 
       context "Form submitted using Continue button" do
@@ -171,11 +171,11 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
       end
 
       context "Form submitted using Save as draft button" do
-        let(:submit_button) { { draft_button: "Save as draft" } }
-
         subject do
           patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button)
         end
+
+        let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
           subject

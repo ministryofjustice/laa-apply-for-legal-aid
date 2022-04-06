@@ -4,6 +4,8 @@ RSpec.describe "check passported answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_passported_answers" do
+    subject { get "/providers/applications/#{application.id}/check_passported_answers" }
+
     let(:vehicle) { create :vehicle, :populated }
     let(:own_vehicle) { true }
     let!(:application) do
@@ -15,8 +17,6 @@ RSpec.describe "check passported answers requests", type: :request do
              vehicle: vehicle,
              own_vehicle: own_vehicle
     end
-
-    subject { get "/providers/applications/#{application.id}/check_passported_answers" }
 
     context "unauthenticated" do
       before { subject }
@@ -256,6 +256,13 @@ RSpec.describe "check passported answers requests", type: :request do
   end
 
   describe "PATCH /providers/applications/:id/check_passported_answers/continue" do
+    subject do
+      patch(
+        "/providers/applications/#{application.id}/check_passported_answers/continue",
+        params:,
+      )
+    end
+
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -263,13 +270,6 @@ RSpec.describe "check passported answers requests", type: :request do
              :checking_passported_answers
     end
     let(:params) { {} }
-
-    subject do
-      patch(
-        "/providers/applications/#{application.id}/check_passported_answers/continue",
-        params:,
-      )
-    end
 
     context "logged in as an authenticated provider" do
       before do
@@ -324,6 +324,8 @@ RSpec.describe "check passported answers requests", type: :request do
   end
 
   describe 'PATCH "/providers/applications/:id/check_passported_answers/reset' do
+    subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
+
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -331,8 +333,6 @@ RSpec.describe "check passported answers requests", type: :request do
              :checking_passported_answers,
              :with_proceedings
     end
-
-    subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
 
     context "unauthenticated" do
       before { subject }

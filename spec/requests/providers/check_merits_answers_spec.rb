@@ -5,6 +5,7 @@ RSpec.describe "check merits answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_merits_answers" do
+    subject { get "/providers/applications/#{application.id}/check_merits_answers" }
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -15,8 +16,6 @@ RSpec.describe "check merits answers requests", type: :request do
              :provider_entering_merits,
              proceeding_count: 3
     end
-
-    subject { get "/providers/applications/#{application.id}/check_merits_answers" }
 
     context "unauthenticated" do
       before { subject }
@@ -120,6 +119,9 @@ RSpec.describe "check merits answers requests", type: :request do
   end
 
   describe "PATCH /providers/applications/:id/check_merits_answers/continue" do
+    subject do
+      patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
+    end
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -127,9 +129,6 @@ RSpec.describe "check merits answers requests", type: :request do
              :checking_merits_answers
     end
     let(:params) { {} }
-    subject do
-      patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
-    end
     before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
 
     let(:allow_ccms_submission) { true }
@@ -207,6 +206,7 @@ RSpec.describe "check merits answers requests", type: :request do
   end
 
   describe 'PATCH "/providers/applications/:id/check_merits_answers/reset' do
+    subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -219,8 +219,6 @@ RSpec.describe "check merits answers requests", type: :request do
     let!(:chances_of_success) do
       create :chances_of_success, :with_optional_text, proceeding: da004
     end
-
-    subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
 
     context "unauthenticated" do
       before { subject }

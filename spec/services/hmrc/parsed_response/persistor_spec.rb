@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe HMRC::ParsedResponse::Persistor do
-  let(:application) { hmrc_response.legal_aid_application }
-
   subject(:persistor) { described_class.call(application) }
+
+  let(:application) { hmrc_response.legal_aid_application }
 
   describe ".call" do
     context "when no employment records exist" do

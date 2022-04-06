@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Addresses::AddressLookupForm, type: :form do
+  subject(:form) { described_class.new(params) }
+
   let(:postcode) { "SW1H9AJ" }
   let(:address) { build :address }
   let(:params) { { postcode: postcode, model: address } }
-
-  subject(:form) { described_class.new(params) }
 
   describe "validations" do
     it "has no errors with normal postcode" do

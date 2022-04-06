@@ -40,9 +40,9 @@ module CCMS
       end
 
       context "unsuccessful response" do
-        let(:response_xml) { ccms_data_from_file "applicant_add_response_failure.xml" }
-
         subject { described_class.new(expected_tx_id, response_xml) }
+
+        let(:response_xml) { ccms_data_from_file "applicant_add_response_failure.xml" }
 
         describe "#success?" do
           it "is false" do

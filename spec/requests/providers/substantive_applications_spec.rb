@@ -38,6 +38,13 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/substantive_application" do
+    subject do
+      patch(
+        providers_legal_aid_application_substantive_application_path(legal_aid_application),
+        params: params.merge(button_clicked),
+      )
+    end
+
     let(:state) { :with_non_passported_state_machine }
     let(:substantive_application) { true }
     let(:params) do
@@ -48,13 +55,6 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       }
     end
     let(:button_clicked) { {} }
-
-    subject do
-      patch(
-        providers_legal_aid_application_substantive_application_path(legal_aid_application),
-        params: params.merge(button_clicked),
-      )
-    end
 
     it "updates the application" do
       legal_aid_application.reload

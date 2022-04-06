@@ -2,6 +2,8 @@ require "rails_helper"
 require "sidekiq/testing"
 
 RSpec.describe CitizenEmailService do
+  subject { described_class.new(application) }
+
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
   let(:applicant) { create(:applicant, first_name: "John", last_name: "Doe", email: simulated_email_address) }
   let(:firm) { create :firm }
@@ -9,8 +11,6 @@ RSpec.describe CitizenEmailService do
   let(:application) { create(:application, applicant:, provider:) }
   let(:secure_id) { SecureRandom.uuid }
   let(:citizen_url) { "http://www.example.com/citizens/legal_aid_applications/#{secure_id}?locale=en" }
-
-  subject { described_class.new(application) }
 
   describe "#send_email" do
     let(:mailer_args) do

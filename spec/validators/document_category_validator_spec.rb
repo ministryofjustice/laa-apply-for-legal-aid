@@ -8,11 +8,11 @@ end
 
 RSpec.describe DocumentCategoryValidator do
   context "Attachment" do
+    subject { Attachment.create! legal_aid_application: laa, attachment_type: attachment_type }
+
     let(:laa) { create :legal_aid_application }
     let(:invalid_attachment_type) { "xxx-zzz" }
     let(:valid_attachment_types) { DocumentCategoryValidator::VALID_DOCUMENT_TYPES }
-
-    subject { Attachment.create! legal_aid_application: laa, attachment_type: attachment_type }
 
     context "valid attachment types" do
       let(:attachment_type) { valid_attachment_types.sample }
@@ -34,10 +34,10 @@ RSpec.describe DocumentCategoryValidator do
   end
 
   context "DocumentCategory" do
+    subject { DocumentCategory.create! name: name }
+
     let(:invalid_name) { "xxx-zzz" }
     let(:valid_names) { DocumentCategoryValidator::VALID_DOCUMENT_TYPES }
-
-    subject { DocumentCategory.create! name: name }
 
     context "valid names " do
       let(:name) { valid_names.sample }
