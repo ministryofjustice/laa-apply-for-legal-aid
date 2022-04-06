@@ -703,9 +703,6 @@ Feature: Civil application journeys
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     When I upload an evidence file named 'hello_world.pdf'
     Then I should not see "There was a problem uploading your file"
-    Then I reload the page
-    # The sleep below is required to make this work on CircleCI
-    And I sleep for 2 seconds
     Then I should be on a page showing "hello_world.pdf"
     Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
