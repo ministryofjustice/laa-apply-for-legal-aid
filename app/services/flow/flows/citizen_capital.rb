@@ -4,10 +4,10 @@ module Flow
       STEPS = {
         identify_types_of_incomes: {
           path: ->(_) { urls.citizens_identify_types_of_income_path(locale: I18n.locale) },
-          forward: ->(application) do
+          forward: lambda do |application|
             application.transaction_types.credits.any? ? :cash_incomes : :student_finances
           end,
-          check_answers: ->(application) do
+          check_answers: lambda do |application|
             application.transaction_types.credits.any? ? :cash_incomes : :check_answers
           end,
         },
@@ -18,10 +18,10 @@ module Flow
         },
         student_finances: {
           path: ->(_) { urls.citizens_student_finance_path(locale: I18n.locale) },
-          forward: ->(application) do
+          forward: lambda do |application|
             application.receives_student_finance? ? :student_finances_annual_amounts : :identify_types_of_outgoings
           end,
-          check_answers: ->(application) do
+          check_answers: lambda do |application|
             application.receives_student_finance? ? :student_finances_annual_amounts : :check_answers
           end,
         },
@@ -32,7 +32,7 @@ module Flow
         },
         identify_types_of_outgoings: {
           path: ->(_) { urls.citizens_identify_types_of_outgoing_path(locale: I18n.locale) },
-          forward: ->(application) do
+          forward: lambda do |application|
             application.transaction_types.debits.any? ? :cash_outgoings : :check_answers
           end,
         },

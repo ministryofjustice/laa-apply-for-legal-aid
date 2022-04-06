@@ -4,14 +4,14 @@ module Flow
       STEPS = {
         has_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_dependants_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.has_dependants?
               :dependants
             else
               application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
             end
           end,
-          check_answers: ->(application) do
+          check_answers: lambda do |application|
             if application.has_dependants?
               if application.dependants.count.positive?
                 :has_other_dependants
@@ -29,14 +29,14 @@ module Flow
         },
         has_other_dependants: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_dependants_path(application) },
-          forward: ->(application, has_other_dependant) {
+          forward: lambda { |application, has_other_dependant|
             if has_other_dependant
               :dependants
             else
               application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
             end
           },
-          check_answers: ->(_application, has_other_dependant) {
+          check_answers: lambda { |_application, has_other_dependant|
             has_other_dependant ? :dependants : :means_summaries
           },
         },

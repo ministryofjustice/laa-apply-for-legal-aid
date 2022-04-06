@@ -107,7 +107,7 @@ class LegalAidApplication < ApplicationRecord
            to: :state_machine_proxy
 
   scope :latest, -> { order(created_at: :desc) }
-  scope :search, ->(term) do
+  scope :search, lambda { |term|
     attributes = [
       "application_ref",
       "concat(applicants.first_name, applicants.last_name)",
@@ -120,7 +120,7 @@ class LegalAidApplication < ApplicationRecord
     applications = queries.first
     queries[1..].each { |query| applications = applications.or(query) }
     applications
-  end
+  }
 
   scope :submitted_applications, -> { joins(:state_machine).where(state_machine_proxies: { aasm_state: CCMS_SUBMITTED_STATES }).order(created_at: :desc) }
 

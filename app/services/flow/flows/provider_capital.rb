@@ -28,7 +28,7 @@ module Flow
         },
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.own_capital? && application.checking_answers?
               :restrictions
             else
@@ -40,7 +40,7 @@ module Flow
         },
         other_assets: {
           path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.own_capital?
               :restrictions
             elsif application.capture_policy_disregards?
@@ -54,7 +54,7 @@ module Flow
         },
         restrictions: {
           path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.capture_policy_disregards?
               :policy_disregards
             else
@@ -78,7 +78,7 @@ module Flow
         },
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
               # either applicant has multiple jobs or no job data is returned even though they're employed
               if application.has_multiple_employments? || (application.applicant.employed? && !application.hmrc_employment_income?)

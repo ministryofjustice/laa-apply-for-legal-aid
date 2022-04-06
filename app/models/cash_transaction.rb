@@ -8,21 +8,21 @@ class CashTransaction < ApplicationRecord
 
   validates :month_number, inclusion: { in: [1, 2, 3] }
 
-  scope :credits, -> do
+  scope :credits, lambda {
     includes(:transaction_type)
       .where(transaction_types: { operation: :credit })
-  end
+  }
 
-  scope :debits, -> do
+  scope :debits, lambda {
     includes(:transaction_type)
       .where(transaction_types: { operation: :debit })
-  end
+  }
 
-  scope :by_parent_transaction_type, -> do
+  scope :by_parent_transaction_type, lambda {
     includes(:transaction_type)
       .where.not(transaction_type_id: nil)
       .group_by(&:parent_transaction_type)
-  end
+  }
 
   scope :for_transaction_type, ->(tt_id) { where(transaction_type_id: tt_id).order(transaction_date: :asc) }
 

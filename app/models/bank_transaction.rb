@@ -7,17 +7,17 @@ class BankTransaction < ApplicationRecord
 
   attr_accessor :previous_txn_id, :next_txn_id
 
-  scope :by_type, -> do
+  scope :by_type, lambda {
     includes(:transaction_type)
       .where.not(transaction_type_id: nil)
       .group_by(&:transaction_type)
-  end
+  }
 
-  scope :by_parent_transaction_type, -> do
+  scope :by_parent_transaction_type, lambda {
     includes(:transaction_type)
       .where.not(transaction_type_id: nil)
       .group_by(&:parent_transaction_type)
-  end
+  }
 
   scope :most_recent_first, -> { order(happened_at: :desc, created_at: :desc) }
 
