@@ -34,7 +34,7 @@ module CCMS
     end
 
     def review_reasons
-      cfe_review_reasons + application_review_reasons
+      (cfe_review_reasons + application_review_reasons).uniq
     end
 
     def review_categories_by_reason
@@ -55,7 +55,7 @@ module CCMS
       application_review_reasons = []
       application_review_reasons << :dwp_override if dwp_override
       application_review_reasons << :restrictions if has_restrictions?
-      application_review_reasons << :policy_disregards if policy_disregards? # can be removed when ap-3027 is complete
+      application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :further_employment_details if manually_entered_employment_information?
       application_review_reasons
     end
