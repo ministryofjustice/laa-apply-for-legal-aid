@@ -133,7 +133,8 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           expect(reasons).to eq ["Monthly value unknown (variations)",
                                  "Multiple employments",
                                  "Tax or NI refunds",
-                                 "Frequency unknown"]
+                                 "Frequency unknown",
+                                 "Restrictions on client's assets"]
           expect(parsed_response_body.css("#means-merits-report__caseworker-review-required-multiple_employments > dt").text.strip).to eq "Review categories - Multiple employments"
 
           amount_variation_categories = parsed_response_body.css("#review-reason-amount_variation").text.split("\n").map(&:strip)

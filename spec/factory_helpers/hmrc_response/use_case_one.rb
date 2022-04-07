@@ -286,7 +286,7 @@ module FactoryHelpers
                     grossEarningsForNics: { inPayPeriod1: 2345.29 },
                     totalEmployerNics: { inPayPeriod1: 221.94, ytd: 1014.56 },
                     employeeNics: { inPayPeriod1: -750.2, ytd1: 846.23 },
-                  }
+                  },
                 ],
               },
             },
@@ -305,7 +305,7 @@ module FactoryHelpers
             { "income/sa/trusts/selfAssessment" => { "taxReturns" => [] } },
             { "employments/paye/employments" => [{ startDate: "2013-04-22", endDate: "2099-12-31" }] },
             { "benefits_and_credits/working_tax_credit/applications" => [{ awards: [] }] },
-            { "benefits_and_credits/child_tax_credit/applications" => [{ awards: [] }] }
+            { "benefits_and_credits/child_tax_credit/applications" => [{ awards: [] }] },
           ],
         }
       end
