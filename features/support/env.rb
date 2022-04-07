@@ -32,7 +32,7 @@ allowed_sites = [
     [
       /__identify__/,
       /127.0.0.1.*(session|shutdown)/,
-      /chromedriver.storage.googleapis.com/,
+      /chromedriver\.storage\.googleapis\.com/,
     ].any? { |pattern| uri.to_s =~ pattern }
   end,
 ]

@@ -4,16 +4,16 @@ RSpec.describe HMRC::Interface::SubmissionService do
   subject(:interface) { described_class.new(hmrc_response) }
 
   before do
-    stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/oauth/token})
+    stub_request(:post, %r{http\.*laa-hmrc-interface\.*\.cloud-platform\.service\.justice\.gov\.uk/oauth/token})
       .to_return(
         status: 200,
         body: '{"access_token":"test-bearer-token","token_type":"Bearer","expires_in":7200,"created_at":1582809000}',
         headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
-    stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/create/.*})
+    stub_request(:post, %r{http\.*laa-hmrc-interface\.*\.cloud-platform\.service\.justice\.gov\.uk/api/v1/submission/create/\.*})
       .to_return(
         status: 202,
-        body: '{"id":"26b94ef2-5854-409a-8223-05f4b58368b7","_links":[{"href":"https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7"}]
+        body: '{"id":"26b94ef2-5854-409a-8223-05f4b58368b7","_links":[{"href":"https://main-laa-hmrc-interface-uat.cloud-platform.service\.justice\.gov.uk/api/v1/submission/status/26b94ef2-5854-409a-8223-05f4b58368b7"}]
 }',
         headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
@@ -43,7 +43,7 @@ RSpec.describe HMRC::Interface::SubmissionService do
 
     context "when an error occurs in the submission process" do
       before do
-        stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/create/.*})
+        stub_request(:post, %r{http\.*laa-hmrc-interface\.*\.cloud-platform\.service\.justice\.gov\.uk/api/v1/submission/create/\.*})
           .to_raise(StandardError)
       end
 
