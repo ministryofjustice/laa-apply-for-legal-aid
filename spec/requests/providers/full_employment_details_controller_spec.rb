@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
+  let(:before_actions) { {} }
 
   describe "GET /providers/applications/:id/full_employment_details" do
     subject(:request) { get providers_legal_aid_application_full_employment_details_path(application) }
