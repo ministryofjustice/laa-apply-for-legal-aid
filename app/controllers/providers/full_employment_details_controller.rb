@@ -1,6 +1,9 @@
 module Providers
   class FullEmploymentDetailsController < ProviderBaseController
+    delegate :hmrc_response_use_case_one, to: :legal_aid_application
+
     def show
+      message_sentry if hmrc_still_pending?
       @form = LegalAidApplications::FullEmploymentDetailsForm.new(model: legal_aid_application)
     end
 
@@ -17,6 +20,22 @@ module Providers
 
         params.require(:legal_aid_application).permit(:full_employment_details)
       end
+    end
+
+    def message_sentry
+      Sentry.capture_message("HMRC response still pending: correlation id: #{correlation_id}")
+    end
+
+    def correlation_id
+      return nil if hmrc_response_use_case_one.nil?
+
+      hmrc_response_use_case_one.correlation_id
+    end
+
+    def hmrc_still_pending?
+      return true if hmrc_response_use_case_one.nil?
+
+      hmrc_response_use_case_one.status == "processing"
     end
   end
 end
