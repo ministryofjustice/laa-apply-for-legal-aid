@@ -8,6 +8,10 @@ module Providers
     def update
       if form.valid?
         dependant&.destroy! if form.remove_dependant?
+        if legal_aid_application.dependants.count.zero?
+          legal_aid_application.update!(has_dependants: nil)
+          replace_last_page_in_history(providers_legal_aid_applications_path)
+        end
         return go_forward
       end
 
