@@ -191,6 +191,44 @@ module CCMS
             end
           end
         end
+
+        context "with policy_disregards" do
+          before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(true) }
+
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it "returns true" do
+            expect(subject).to be true
+          end
+        end
+
+        context "without policy_disregards" do
+          before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(false) }
+
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it "returns false" do
+            expect(subject).to be false
+          end
+        end
+
+        context "with further employment information" do
+          let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: true }
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it "returns true" do
+            expect(subject).to be true
+          end
+        end
+
+        context "without further employment information" do
+          let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: false }
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it "returns false" do
+            expect(subject).to be false
+          end
+        end
       end
     end
 
@@ -200,7 +238,9 @@ module CCMS
       let(:cfe_result) { double "CFE Result", remarks: cfe_remarks }
       let(:cfe_remarks) { double "CFE Remarks", review_reasons: review_reasons }
       let(:review_reasons) { %i[unknown_frequency multi_benefit] }
-      let(:override_reaons) { %i[unknown_frequency multi_benefit dwp_override] }
+      let(:override_reasons) { %i[unknown_frequency multi_benefit dwp_override] }
+      let(:further_employment_details_reasons) { %i[unknown_frequency multi_benefit further_employment_details] }
+      let(:restrictions_reasons) { %i[unknown_frequency multi_benefit restrictions] }
 
       before { allow_any_instance_of(cfe_submission.class).to receive(:result).and_return(cfe_result) }
 
@@ -214,7 +254,23 @@ module CCMS
         before { create :dwp_override, legal_aid_application: legal_aid_application }
 
         it "adds the dwp review to the cfe result reasons" do
-          expect(subject).to eq override_reaons
+          expect(subject).to eq override_reasons
+        end
+      end
+
+      context "with further employment information" do
+        let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: true }
+
+        it "adds further_employment_details to the review reasons" do
+          expect(subject).to eq further_employment_details_reasons
+        end
+      end
+
+      context "with restrictions" do
+        let(:legal_aid_application) { create :legal_aid_application, has_restrictions: true }
+
+        it "adds restrictions to the review reasons" do
+          expect(subject).to eq restrictions_reasons
         end
       end
     end
