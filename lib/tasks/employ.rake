@@ -2,7 +2,8 @@ desc "Temporary task to set employed journey up on localhost"
 task employ: :environment do
   raise "rake employ can only be used in development" unless Rails.env.development?
 
-  Setting.setting.update!(enable_employed_journey: true, enable_evidence_upload: true)
+  Setting.setting.update!(enable_employed_journey: true)
+  Rails.logger.warn "Employed journey feature flag enabled"
 
   employment_permission = Permission.find_by(role: "application.non_passported.employment.*")
 
@@ -12,4 +13,5 @@ task employ: :environment do
     firm.permissions << employment_permission
     firm.save!
   end
+  Rails.logger.warn "All firms (#{Firm.count}) enabled for employed applications"
 end
