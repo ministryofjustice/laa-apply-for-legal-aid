@@ -1,10 +1,9 @@
 Then("I debug the response body") do
-  fn = Rails.root.join('tmp/debug.html')
+  fn = Rails.root.join("tmp/debug.html")
   puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} output HTML file://#{fn}".yellow
-  File.open(fn, 'w') { |fp| fp.puts page.body }
+  File.open(fn, "w") { |fp| fp.puts page.body }
   puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
 end
-
 
 Then("I should be on a page showing {string}") do |title|
   expect(page).to have_content(title)
