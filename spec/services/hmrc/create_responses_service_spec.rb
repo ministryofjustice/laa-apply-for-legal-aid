@@ -67,6 +67,7 @@ RSpec.describe HMRC::CreateResponsesService do
       it "does not create any more hmrc_response records" do
         expect { call }.not_to change { legal_aid_application.hmrc_responses.count }
       end
+
       it "does not create any jobs to request the data" do
         expect { call }.not_to change(HMRC::SubmissionWorker.jobs, :size)
       end

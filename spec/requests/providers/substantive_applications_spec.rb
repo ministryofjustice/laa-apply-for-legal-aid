@@ -118,6 +118,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         end
       end
     end
+
     context "No selected" do
       let(:substantive_application) { false }
 

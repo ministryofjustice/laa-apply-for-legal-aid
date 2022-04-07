@@ -30,6 +30,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
           expect(subject[:items]).to be_empty
         end
       end
+
       context "no transactions" do
         let(:legal_aid_application) { create :legal_aid_application }
 

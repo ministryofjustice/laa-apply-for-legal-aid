@@ -153,6 +153,7 @@ RSpec.describe Applicant, type: :model do
 
           it { is_expected.to be true }
         end
+
         context "with cfe version 4 result" do
           let!(:cfe_result) { create :cfe_v4_result, :with_maintenance_received, submission: cfe_submission }
 
@@ -166,6 +167,7 @@ RSpec.describe Applicant, type: :model do
 
           it { is_expected.to be false }
         end
+
         context "with cfe version 4 result" do
           let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
 
@@ -183,6 +185,7 @@ RSpec.describe Applicant, type: :model do
 
           it { is_expected.to eq "150.00" }
         end
+
         context "with cfe version 4 result" do
           let!(:cfe_result) { create :cfe_v4_result, :with_maintenance_received, submission: cfe_submission }
 
@@ -196,6 +199,7 @@ RSpec.describe Applicant, type: :model do
 
           it { is_expected.to eq "0.00" }
         end
+
         context "with cfe version 4 result" do
           let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
 
@@ -223,6 +227,7 @@ RSpec.describe Applicant, type: :model do
           it { is_expected.to eq "0.00" }
         end
       end
+
       context "with cfe version 4 result" do
         let!(:cfe_result) { create :cfe_v4_result, :with_mortgage_costs, submission: cfe_submission }
 
@@ -247,6 +252,7 @@ RSpec.describe Applicant, type: :model do
         expect(applicant.valid_cfe_result_version?).to eq true
       end
     end
+
     context "with CFE version 4 result" do
       let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v4_result, applicant: applicant }
 
@@ -291,6 +297,7 @@ RSpec.describe Applicant, type: :model do
           expect(applicant.not_employed?).to be false
         end
       end
+
       context "employed and self employed" do
         it "returns false" do
           applicant = build :applicant, :employed, :self_employed

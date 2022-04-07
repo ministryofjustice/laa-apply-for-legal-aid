@@ -236,6 +236,7 @@ module CCMS
                 end
               end
             end
+
             context "applicant has no money due" do
               before { legal_aid_application.other_assets_declaration.update! money_owed_value: nil }
 
@@ -343,6 +344,7 @@ module CCMS
               expect(block).to have_boolean_response true
               expect(block).to be_user_defined
             end
+
             context "no payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
@@ -352,6 +354,7 @@ module CCMS
               end
             end
           end
+
           context "applicant criminal legal aid payments" do
             let(:criminal_legal_aid_transaction) { create :transaction_type, :debit, name: "legal_aid" }
 
@@ -364,6 +367,7 @@ module CCMS
               expect(block).to have_boolean_response true
               expect(block).to be_user_defined
             end
+
             context "no payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
@@ -386,6 +390,7 @@ module CCMS
               expect(block).to have_boolean_response true
               expect(block).to be_user_defined
             end
+
             context "no childcare payments" do
               before { legal_aid_application.transaction_types.delete_all }
 
@@ -483,6 +488,7 @@ module CCMS
               expect(block).not_to be_user_defined
             end
           end
+
           context "delegated functions NOT used" do
             it "generates the block with true" do
               block = XmlExtractor.call(xml, :global_merits, "EMERGENCY_DPS_APP_AMD")

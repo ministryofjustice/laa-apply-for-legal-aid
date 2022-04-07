@@ -39,6 +39,7 @@ module CCMS
           )
         end
       end
+
       describe "#transaction_request_id" do
         it "returns the id based on current time" do
           travel_to Time.zone.local(2019, 1, 1, 12, 15, 30) do

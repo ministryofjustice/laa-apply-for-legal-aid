@@ -23,6 +23,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
     it "matches the value in params" do
       expect(subject.outstanding_mortgage_amount).to eq(amount)
     end
+
     context "when no amount passed in" do
       let(:params) do
         { model: legal_aid_application }

@@ -120,6 +120,7 @@ RSpec.describe TransactionType, type: :model do
           expect(excluded_benefits.excluded_benefit?).to eq true
         end
       end
+
       context "not an excluded benefit type" do
         it "returns false" do
           expect(pension.excluded_benefit?).to eq false
@@ -159,6 +160,7 @@ RSpec.describe TransactionType, type: :model do
           expect(described_class.find_with_children(pension.id, excluded_benefits.id)).to match_array([pension, excluded_benefits])
         end
       end
+
       context "multiple ids with and without children" do
         it "returns the records and the children" do
           expect(described_class.find_with_children(pension.id, benefits.id)).to match_array([pension, benefits, excluded_benefits])

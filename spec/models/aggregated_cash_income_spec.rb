@@ -465,6 +465,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
           expect(aci.period(3)).to eq "October 2020"
         end
       end
+
       context "locale :cy" do
         around(:each) do |example|
           I18n.with_locale(:cy) { example.run }

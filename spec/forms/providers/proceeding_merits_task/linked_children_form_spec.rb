@@ -77,6 +77,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
         let(:linked_children_params) { ["guid-for-non-existent-child", "", ""] }
 
         it { expect { subject }.to_not change { proceeding.proceeding_linked_children.count } }
+
         it "it rolls back all changes" do
           expect(subject).to be false
           expect(proceeding.proceeding_linked_children.reload.map(&:involved_child_id)).to match_array initial_array

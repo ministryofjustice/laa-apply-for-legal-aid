@@ -26,6 +26,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
       before { valid? }
 
       it { is_expected.to be false }
+
       it "displays relevant errors" do
         expect(form.errors[:emergency_cost_override]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_override.blank")]
       end
@@ -48,6 +49,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
         before { valid? }
 
         it { is_expected.to be false }
+
         it "displays the relevant errors" do
           expect(form.errors[:emergency_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_requested.blank")]
         end
@@ -59,6 +61,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
         before { valid? }
 
         it { is_expected.to be false }
+
         it "displays the relevant errors" do
           expect(form.errors[:emergency_cost_reasons]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_reasons.blank")]
         end

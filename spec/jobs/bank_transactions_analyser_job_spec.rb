@@ -47,6 +47,7 @@ module Banking
             subject
           end
         end
+
         context "complete" do
           it "calls ProviderEmailService" do
             expect(provider_email_service).to receive(:send_email)
