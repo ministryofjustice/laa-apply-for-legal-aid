@@ -17,6 +17,13 @@ module FactoryHelpers
         expect(rec.response["status"]).to eq "completed"
         expect(rec.response["data"].size).to eq 19
       end
+
+      context "with processing trait" do
+        it "creates a record" do
+          rec = create :hmrc_response, :processing
+          ap rec
+        end
+      end
     end
   end
 end

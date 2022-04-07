@@ -22,7 +22,7 @@ RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
       end
 
       context "when the no job data is returned" do
-        let(:before_action) { create :hmrc_response, :nil_response, legal_aid_application_id: application.id }
+        let(:before_actions) { create :hmrc_response, :nil_response, legal_aid_application_id: application.id }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -30,6 +30,29 @@ RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
 
         it "displays the 'no data' message" do
           expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+        end
+      end
+
+      context "when the HMRC response is pending" do
+        let(:before_actions) { create :hmrc_response, :processing, legal_aid_application_id: application.id }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the 'no data' message" do
+          expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
+        end
+
+        describe "Sending a message to Sentry" do
+          let(:before_actions) do
+            create :hmrc_response, :processing, legal_aid_application_id: application.id
+            expect(Sentry).to receive(:capture_message).with(/HMRC response still pending: correlation id/)
+          end
+
+          it "sends the message to Sentry and is successful" do
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
 

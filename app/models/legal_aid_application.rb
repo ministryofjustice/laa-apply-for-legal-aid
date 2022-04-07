@@ -480,6 +480,10 @@ class LegalAidApplication < ApplicationRecord
     extra_employment_information? || full_employment_details.present?
   end
 
+  def hmrc_response_use_case_one
+    hmrc_responses.detect { |response| response.use_case == "one" }
+  end
+
 private
 
   def bank_transactions_by_type(type)

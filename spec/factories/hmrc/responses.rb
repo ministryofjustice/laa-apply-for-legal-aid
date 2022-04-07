@@ -21,7 +21,7 @@ module HMRC
       end
 
       trait :processing do
-        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, status: "processing") }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, status: "processing").response }
       end
 
       trait :in_progress do
