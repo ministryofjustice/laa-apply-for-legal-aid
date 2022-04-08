@@ -10,6 +10,9 @@ module HMRC
       eligible_employment: { first_name: "Leanne", last_name: "Conway", nino: "JA827365B", dob: "1977-03-08" },
       pending_response: { first_name: "John", last_name: "Pending", nino: "KY123456D", dob: "2002-09-01" },
       unknown_response: { first_name: "Henry", last_name: "Unknown", nino: "WX311689D", dob: "1982-06-15" },
+      weekly_single_employment: { first_name: "John", last_name: "Smith", nino: "AA333333A", dob: "1933-03-03" },
+      tax_refund: { first_name: "Lucky", last_name: "Taxpayer", nino: "BB222222B", dob: "2002-02-02" },
+      nic_refund: { first_name: "Nick", last_name: "Overpaid", nino: "CC444444C", dob: "2004-04-04" },
     }.freeze
 
     def self.call(*args)
