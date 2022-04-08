@@ -4,7 +4,7 @@ module Flow
       STEPS = {
         confirm_dwp_non_passported_applications: {
           path: ->(application) { urls.providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application) },
-          forward: ->(application, confirm_dwp_non_passported) do
+          forward: lambda do |application, confirm_dwp_non_passported|
             if confirm_dwp_non_passported
               application.change_state_machine_type("NonPassportedStateMachine")
               :applicant_employed
@@ -21,7 +21,7 @@ module Flow
         },
         received_benefit_confirmations: {
           path: ->(application) { urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
-          forward: ->(application, has_benefit) do
+          forward: lambda do |application, has_benefit|
             if has_benefit
               application.change_state_machine_type("PassportedStateMachine")
               :has_evidence_of_benefits
@@ -33,7 +33,7 @@ module Flow
         },
         has_evidence_of_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_has_evidence_of_benefit_path(application) },
-          forward: ->(application, has_evidence_of_benefit) do
+          forward: lambda do |application, has_evidence_of_benefit|
             if has_evidence_of_benefit
               application.change_state_machine_type("PassportedStateMachine")
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions

@@ -29,13 +29,13 @@ Sidekiq.configure_server do |config|
       chain.add PrometheusExporter::Instrumentation::Sidekiq
     end
 
-    config.death_handlers << ->(job, _ex) do
+    config.death_handlers << lambda { |job, _ex|
       PrometheusExporter::Client.default.send_json(
         type: "sidekiq",
         name: job["class"],
         dead: true,
       )
-    end
+    }
 
     config.on :startup do
       PrometheusExporter::Instrumentation::Process.start type: "sidekiq"

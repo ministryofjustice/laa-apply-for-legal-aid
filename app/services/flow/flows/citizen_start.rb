@@ -7,7 +7,7 @@ module Flow
         },
         consents: {
           path: ->(_) { urls.citizens_consent_path(locale: I18n.locale) },
-          forward: ->(application) do
+          forward: lambda do |application|
             application.open_banking_consent ? :banks : :contact_providers
           end,
         },
@@ -31,7 +31,7 @@ module Flow
         },
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path(locale: I18n.locale) },
-          forward: ->(application) do
+          forward: lambda do |application|
             application.has_offline_accounts? ? :contact_providers : :identify_types_of_incomes
           end,
         },

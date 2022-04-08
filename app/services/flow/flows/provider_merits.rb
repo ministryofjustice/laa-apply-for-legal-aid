@@ -5,7 +5,7 @@ module Flow
         start_involved_children_task: {
           # This allows the statement of case flow to check for involved children while allowing a standard path
           #  to :involved_children from :has_other_involved_children that always goes to the new children page
-          path: ->(application) do
+          path: lambda do |application|
             if application.involved_children.any?
               urls.providers_legal_aid_application_has_other_involved_children_path(application)
             else
@@ -14,7 +14,7 @@ module Flow
           end,
         },
         involved_children: {
-          path: ->(application, params) do
+          path: lambda do |application, params|
             involved_child_id = params.is_a?(Hash) && params.deep_symbolize_keys[:id]
             case involved_child_id
             when "new"
@@ -40,7 +40,7 @@ module Flow
           forward: ->(_application, has_other_involved_child) { has_other_involved_child ? :involved_children : :merits_task_lists },
         },
         remove_involved_child: {
-          forward: ->(application) {
+          forward: lambda { |application|
             if application.involved_children.count.positive?
               :has_other_involved_children
             else
@@ -64,11 +64,11 @@ module Flow
           check_answers: :check_merits_answers,
         },
         chances_of_success: {
-          path: ->(application) do
+          path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_chances_of_success_index_path(proceeding)
           end,
-          forward: ->(application) do
+          forward: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             if proceeding.chances_of_success.success_likely?
               :merits_task_lists
@@ -76,13 +76,13 @@ module Flow
               :success_prospects
             end
           end,
-          check_answers: ->(application) do
+          check_answers: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             proceeding.chances_of_success.success_likely? ? :check_merits_answers : :success_prospects
           end,
         },
         success_prospects: {
-          path: ->(application) do
+          path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_success_prospects_path(proceeding)
           end,
@@ -94,7 +94,7 @@ module Flow
           check_answers: :check_merits_answers,
         },
         linked_children: {
-          path: ->(application) do
+          path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
             urls.providers_merits_task_list_linked_children_path(proceeding)
           end,
@@ -103,7 +103,7 @@ module Flow
         },
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if Setting.enable_evidence_upload?
               application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers
             else

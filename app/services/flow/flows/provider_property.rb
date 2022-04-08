@@ -20,7 +20,7 @@ module Flow
         },
         shared_ownerships: {
           path: ->(application) { urls.providers_legal_aid_application_shared_ownership_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.shared_ownership?
               :percentage_homes
             else

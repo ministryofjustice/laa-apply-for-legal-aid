@@ -4,7 +4,7 @@ module Flow
       STEPS = {
         vehicles: {
           path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.own_vehicle?
               :vehicles_estimated_values
             elsif application.non_passported?

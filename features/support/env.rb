@@ -28,7 +28,7 @@ module Cucumber
 end
 
 allowed_sites = [
-  ->(uri) do
+  lambda do |uri|
     [
       /__identify__/,
       /127.0.0.1.*(session|shutdown)/,

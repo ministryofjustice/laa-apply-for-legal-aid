@@ -11,7 +11,7 @@ module Flow
         },
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if application.applicant_details_checked?
               :check_provider_answers
             else
@@ -38,7 +38,7 @@ module Flow
         },
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
               application.employment_journey_ineligible? ? :use_ccms_employed : :open_banking_consents
             else
@@ -52,7 +52,7 @@ module Flow
         },
         has_other_proceedings: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_proceedings_path(application) },
-          forward: ->(application, has_other_proceeding) do
+          forward: lambda do |application, has_other_proceeding|
             if has_other_proceeding
               :proceedings_types
             else
@@ -68,7 +68,7 @@ module Flow
         },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
-          forward: ->(_application, delegated_functions_used_over_month_ago) do
+          forward: lambda do |_application, delegated_functions_used_over_month_ago|
             delegated_functions_used_over_month_ago ? :confirm_multiple_delegated_functions : :limitations
           end,
           check_answers: :check_provider_answers,
@@ -76,7 +76,7 @@ module Flow
         },
         confirm_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_confirm_multiple_delegated_functions_path(application) },
-          forward: ->(_application, confirmed_dates) do
+          forward: lambda do |_application, confirmed_dates|
             confirmed_dates ? :limitations : :used_multiple_delegated_functions
           end,
         },
@@ -90,7 +90,7 @@ module Flow
         },
         check_benefits: {
           path: ->(application) { urls.providers_legal_aid_application_check_benefits_path(application) },
-          forward: ->(application, dwp_override_non_passported) do
+          forward: lambda do |application, dwp_override_non_passported|
             if application.applicant_receives_benefit?
               application.change_state_machine_type("PassportedStateMachine")
               application.used_delegated_functions? ? :substantive_applications : :capital_introductions
@@ -102,7 +102,7 @@ module Flow
         },
         substantive_applications: {
           path: ->(application) { urls.providers_legal_aid_application_substantive_application_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             return :delegated_confirmation unless application.substantive_application?
 
             application.applicant_receives_benefit? ? :capital_introductions : :non_passported_client_instructions
@@ -113,7 +113,7 @@ module Flow
         },
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
-          forward: ->(application) do
+          forward: lambda do |application|
             next_step = :non_passported_client_instructions
             next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
 

@@ -12,7 +12,7 @@ if %w[production].include?(Rails.env) && ENV["SENTRY_DSN"].present?
       HMRC::SentryIgnoreThisSidekiqFailError
     ]
 
-    config.before_send = ->(event, _hint) {
+    config.before_send = lambda { |event, _hint|
       event.extra[:sidekiq][:job]["args"].first["arguments"] = [] if event.extra.dig(:sidekiq, :job, "args")
 
       event.extra[:sidekiq][:jobstr] = {} if event.extra.dig(:sidekiq, :jobstr)
