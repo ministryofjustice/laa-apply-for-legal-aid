@@ -540,13 +540,6 @@ RSpec/ExampleWording:
     - 'spec/services/provider_details_creator_spec.rb'
     - 'spec/support/shared_examples/provider_auth_shared_examples.rb'
 
-# Offense count: 57
-# Cop supports --auto-correct.
-RSpec/ExcessiveDocstringSpacing:
-  Exclude:
-    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/validators/document_category_validator_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/ExpectActual:
