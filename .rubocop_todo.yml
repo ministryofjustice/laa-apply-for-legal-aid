@@ -565,13 +565,6 @@ RSpec/ExcessiveDocstringSpacing:
     - 'spec/requests/providers/merits_task_lists_controller_spec.rb'
     - 'spec/requests/providers/offline_accounts_spec.rb'
     - 'spec/requests/providers/savings_and_investments_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_entities_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
-    - 'spec/services/ccms/submitters/add_applicant_service_spec.rb'
-    - 'spec/services/ccms/submitters/add_case_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_applicant_status_service_spec.rb'
-    - 'spec/services/ccms/submitters/check_case_status_service_spec.rb'
     - 'spec/validators/document_category_validator_spec.rb'
 
 # Offense count: 1

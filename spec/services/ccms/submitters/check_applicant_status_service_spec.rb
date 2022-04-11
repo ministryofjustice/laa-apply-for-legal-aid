@@ -47,7 +47,7 @@ module CCMS
                 expect(history.request).not_to be_nil
               end
 
-              it "stores the reqeust body in the  submission history record" do
+              it "stores the reqeust body in the submission history record" do
                 subject.call
                 expect(history.request).to be_soap_envelope_with(
                   command: "clientbim:ClientAddUpdtStatusRQ",
@@ -82,7 +82,7 @@ module CCMS
                 expect(history.details).to match "Poll limit exceeded"
               end
 
-              it "stores the reqeust body in the  submission history record" do
+              it "stores the reqeust body in the submission history record" do
                 subject.call
                 expect(history.request).to be_soap_envelope_with(
                   command: "clientbim:ClientAddUpdtStatusRQ",
@@ -115,7 +115,7 @@ module CCMS
               expect(history.details).to be_nil
             end
 
-            it "stores the reqeust body in the  submission history record" do
+            it "stores the reqeust body in the submission history record" do
               subject.call
               expect(history.request).to be_soap_envelope_with(
                 command: "clientbim:ClientAddUpdtStatusRQ",

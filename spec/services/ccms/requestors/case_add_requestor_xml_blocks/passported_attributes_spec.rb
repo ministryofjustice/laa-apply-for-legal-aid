@@ -222,7 +222,7 @@ module CCMS
               expect(block).not_to be_present, "Expected block for valuable possessions entity not to be generated, but was \n #{block}"
             end
 
-            it "assigns the sequence number of 1 to the next entity " do
+            it "assigns the sequence number of 1 to the next entity" do
               bank_accounts_sequence = XmlExtractor.call(xml, :bank_accounts_sequence).text.to_i
               expect(bank_accounts_sequence).to eq 1
             end
@@ -534,7 +534,7 @@ module CCMS
           end
         end
 
-        context "GB_INPUT_B_2WP2_1A  - Applicant is a beneficiary of a will?" do
+        context "GB_INPUT_B_2WP2_1A - Applicant is a beneficiary of a will?" do
           context "not a beneficiary" do
             before { legal_aid_application.other_assets_declaration = create :other_assets_declaration, :all_nil }
 
@@ -1107,7 +1107,7 @@ module CCMS
           context "applicant DOES NOT own additional property" do
             before { expect(legal_aid_application.other_assets_declaration).to receive(:second_home_value).and_return(nil) }
 
-            it "returns false when client does NOT own additiaonl property " do
+            it "returns false when client does NOT own additiaonl property" do
               block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_4WP2_1A")
               expect(block).to have_boolean_response false
             end
