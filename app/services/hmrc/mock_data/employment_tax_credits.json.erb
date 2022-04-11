@@ -1,10 +1,10 @@
 {
-  "submission": "@submission_id",
+  "submission": "<%= @submission_id %>",
   "status": "completed",
   "data": [
     {
-      "correlation_id": "@submission_id",
-      "use_case": "@use_case_name"
+      "correlation_id": "<%= @submission_id %>",
+      "use_case": "<%= @use_case_name %>"
     },
     {
       "individuals/matching/individual": {
@@ -21,7 +21,7 @@
             "taxYear": "21-22",
             "payFrequency": "M1",
             "monthPayNumber": 9,
-            "paymentDate": "2021-12-17",
+            "paymentDate": "<%= @reference_date.strftime('%F') %>",
             "paidHoursWorked": "E",
             "taxablePayToDate": 18917.75,
             "taxablePay": 2464.75,
@@ -43,7 +43,7 @@
             "taxYear": "21-22",
             "payFrequency": "M1",
             "monthPayNumber": 8,
-            "paymentDate": "2021-11-25",
+            "paymentDate":  "<%= (@reference_date - 22.days).strftime('%F') %>",
             "paidHoursWorked": "E",
             "taxablePayToDate": 16453,
             "taxablePay": 2464.75,
@@ -65,7 +65,7 @@
             "taxYear": "21-22",
             "payFrequency": "M1",
             "monthPayNumber": 7,
-            "paymentDate": "2021-10-25",
+            "paymentDate": "<%= (@reference_date - 53.days).strftime('%F') %>",
             "paidHoursWorked": "E",
             "taxablePayToDate": 13988.25,
             "taxablePay": 2112.64,
@@ -87,7 +87,7 @@
             "taxYear": "21-22",
             "payFrequency": "M1",
             "monthPayNumber": 6,
-            "paymentDate": "2021-09-24",
+            "paymentDate": "<%= (@reference_date - 84.days).strftime('%F') %>",
             "paidHoursWorked": "E",
             "taxablePayToDate": 11875.61,
             "taxablePay": 1971.8,
@@ -109,7 +109,7 @@
             "taxYear": "21-22",
             "payFrequency": "M1",
             "monthPayNumber": 5,
-            "paymentDate": "2021-08-25",
+            "paymentDate": "<%= (@reference_date - 114.days).strftime('%F') %>",
             "paidHoursWorked": "E",
             "taxablePayToDate": 9903.81,
             "taxablePay": 2016.61,
