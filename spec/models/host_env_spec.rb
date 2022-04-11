@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe HostEnv do
   describe "root_url" do
-    it "returns the root  url" do
+    it "returns the root url" do
       expect(described_class.root_url).to eq "http://www.example.com/?locale=en"
     end
   end

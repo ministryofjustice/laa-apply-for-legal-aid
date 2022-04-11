@@ -662,7 +662,7 @@ RSpec.describe LegalAidApplication, type: :model do
     let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa, used_delegated_functions_on: date2 }
     let!(:proceeding3) { create :proceeding, :se014, legal_aid_application: laa }
 
-    context "there are application_proceeding_type records with dates " do
+    context "there are application_proceeding_type records with dates" do
       let(:date1) { Time.zone.today }
       let(:date2) { Time.zone.yesterday }
 
@@ -850,7 +850,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true) }
 
-    it "schedules a PostSubmissionProcessingJob " do
+    it "schedules a PostSubmissionProcessingJob" do
       expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
         legal_aid_application.id,
         feedback_url,
@@ -1083,7 +1083,7 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == "DA001" } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == "SE014" } }
 
-    it "returns an array of all the  chances of success records" do
+    it "returns an array of all the chances of success records" do
       cos_da001 = create :chances_of_success, proceeding: proceeding_da001
       cos_se014 = create :chances_of_success, proceeding: proceeding_se014
 

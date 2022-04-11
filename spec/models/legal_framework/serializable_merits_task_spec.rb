@@ -14,7 +14,7 @@ module LegalFramework
       context "no dependencies" do
         let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
 
-        it " stores empty array for dependencies" do
+        it "stores empty array for dependencies" do
           expect(serialized_merits_task.dependencies).to be_empty
         end
       end
