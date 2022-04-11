@@ -200,7 +200,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     end
   end
 
-  describe "PATCH  /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
     context "Continue" do
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
 

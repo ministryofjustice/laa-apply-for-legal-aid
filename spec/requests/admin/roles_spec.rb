@@ -29,7 +29,7 @@ RSpec.describe Admin::RolesController, type: :request do
     end
 
     context "when the search field is used" do
-      it " returns the relevant firm" do
+      it "returns the relevant firm" do
         expect(Firm.search("Nelson")).to eq([firm4])
       end
 

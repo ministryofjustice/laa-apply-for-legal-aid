@@ -4,7 +4,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
   include ActionView::Helpers::NumberHelper
   let(:login_provider) { login_as legal_aid_application.provider }
 
-  describe "GET  /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do
+  describe "GET /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do
     subject { get providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application) }
     let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
     let(:legal_aid_application) { cfe_result.legal_aid_application }

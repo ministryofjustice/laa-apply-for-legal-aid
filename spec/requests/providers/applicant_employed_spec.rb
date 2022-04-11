@@ -122,7 +122,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     let!(:legal_aid_application) { create :legal_aid_application, provider: provider, applicant: applicant }
     let(:applicant) { create :applicant }
 
-    context "applicant is employed and  the provider has employed permissions" do
+    context "applicant is employed and the provider has employed permissions" do
       before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
       it "redirects to the proceedings search page" do

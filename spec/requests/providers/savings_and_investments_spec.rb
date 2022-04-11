@@ -32,7 +32,7 @@ RSpec.describe "providers savings and investments", type: :request do
         context "applicant does not own home" do
           before { get providers_legal_aid_application_own_home_path(application) }
 
-          it "points to the own  home page" do
+          it "points to the own home page" do
             subject
             expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application, back: true))
           end
