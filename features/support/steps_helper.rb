@@ -1,3 +1,10 @@
+Then("I debug the response body") do
+  fn = Rails.root.join("tmp/debug.html")
+  puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} output HTML file://#{fn}".yellow
+  File.open(fn, "w") { |fp| fp.puts page.body }
+  puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+end
+
 Then("I should be on a page showing {string}") do |title|
   expect(page).to have_content(title)
 end
@@ -59,10 +66,6 @@ Then("I fill {string} with {string}") do |field, value|
   field.gsub!(/\s+/, "_")
   name = find("input[name*=#{field}], textarea[name*=#{field}], ##{field_id}")[:name]
   fill_in(name, with: value)
-end
-
-Then("I upload a pdf file") do
-  attach_file("Attach a file", Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"))
 end
 
 Then("I reload the page") do

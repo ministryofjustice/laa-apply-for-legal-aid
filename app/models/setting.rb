@@ -27,10 +27,6 @@ class Setting < ApplicationRecord
     setting.enable_employed_journey
   end
 
-  def self.enable_evidence_upload?
-    setting.enable_evidence_upload
-  end
-
   def self.setting
     Setting.first || Setting.create!
   end

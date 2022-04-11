@@ -8,6 +8,7 @@ Feature: Evidence upload
     Then I upload an evidence file named 'hello_world.docx'
     Then I should see 4 uploaded files
 
+
   @javascript @vcr
   Scenario: Categorising a file and validating that categorising a file is required to proceed
     When I have completed a non-passported application and reached the evidence upload page

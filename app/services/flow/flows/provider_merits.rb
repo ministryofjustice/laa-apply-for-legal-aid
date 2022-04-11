@@ -103,16 +103,7 @@ module Flow
         },
         merits_task_lists: {
           path: ->(application) { urls.providers_legal_aid_application_merits_task_list_path(application) },
-          forward: lambda do |application|
-            if Setting.enable_evidence_upload?
-              application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers
-            else
-              application.proceedings.size > 1 ? :gateway_evidences : :check_merits_answers
-              # TODO: check correct option, above is how it currently works. Below is how the ticket says it should work
-              # that is gateway_evidence upload page is only shown if a section8 proceeding exists
-              # application.section_8_proceedings? ? :gateway_evidences : :check_merits_answers
-            end
-          end,
+          forward: ->(application) { application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers },
         },
         uploaded_evidence_collections: {
           path: ->(application) { urls.providers_legal_aid_application_uploaded_evidence_collection_path(application) },

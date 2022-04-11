@@ -16,3 +16,7 @@ When(/^the feature flag for (.*?) is (enabled|disabled)$/) do |flag, enabled|
   value = enabled.eql?("enabled")
   Setting.setting.update!("#{flag}": value)
 end
+
+When(/^I sleep for (.*?) seconds$/) do |num_secs|
+  sleep num_secs.to_i
+end

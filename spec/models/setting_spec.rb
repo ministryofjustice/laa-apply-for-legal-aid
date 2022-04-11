@@ -13,7 +13,6 @@ RSpec.describe Setting do
         expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_employed_journey?).to be false
-        expect(rec.enable_evidence_upload?).to be false
       end
     end
 
@@ -27,7 +26,6 @@ RSpec.describe Setting do
           bank_transaction_filename: "my_special_file.csv",
           alert_via_sentry: true,
           enable_employed_journey: true,
-          enable_evidence_upload: true,
         )
       end
 
@@ -40,7 +38,6 @@ RSpec.describe Setting do
         expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_employed_journey?).to be true
-        expect(rec.enable_evidence_upload?).to be true
       end
     end
   end
@@ -56,7 +53,6 @@ RSpec.describe Setting do
       expect(described_class.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.enable_employed_journey?).to be false
-      expect(described_class.enable_evidence_upload?).to be false
     end
   end
 end

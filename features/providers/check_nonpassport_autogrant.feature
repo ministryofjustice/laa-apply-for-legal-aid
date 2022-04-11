@@ -72,8 +72,6 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
-    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
@@ -153,8 +151,6 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on the 'gateway_evidence' page showing 'Upload supporting evidence'
-    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers and submit application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
