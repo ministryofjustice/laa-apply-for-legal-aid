@@ -16,6 +16,7 @@ RSpec.describe "provider confirm office", type: :request do
       it "has the no permissions title" do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t("providers.invalid_logins.show.permission_title")))
       end
+
       it "has the correct body" do
         expect(response.body).to include(I18n.t("providers.invalid_logins.show.role.html", team_email: email))
       end
@@ -27,6 +28,7 @@ RSpec.describe "provider confirm office", type: :request do
       it "has the no permissions title" do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t("providers.invalid_logins.show.permission_title")))
       end
+
       it "has the correct body" do
         expect(response.body).to include(I18n.t("providers.invalid_logins.show.api_details_user_not_found.html", team_email: email))
       end
@@ -38,6 +40,7 @@ RSpec.describe "provider confirm office", type: :request do
       it "has the no error title" do
         expect(response.body).to include(HTMLEntities.new.encode(I18n.t("providers.invalid_logins.show.error_title")))
       end
+
       it "has the correct body" do
         expect(response.body).to include(I18n.t("providers.invalid_logins.show.provider_details_api_error.html", team_email: email))
       end

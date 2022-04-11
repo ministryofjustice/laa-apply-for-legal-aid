@@ -349,6 +349,7 @@ module CFE
             expect(eligible_result.vehicles?).to be true
           end
         end
+
         context "vehicles don't exist" do
           it "returns a boolean response if vehicles do not exist" do
             expect(with_no_vehicles.vehicles?).to be false
@@ -695,6 +696,7 @@ module CFE
             subject(:jobs) { with_employments.jobs }
             it { is_expected.to be_kind_of(Array) }
             it { is_expected.to_not be_empty }
+
             it "has a name" do
               expect(subject[0][:name]).to eq "Job 1"
               expect(subject[1][:name]).to eq "Job 2"

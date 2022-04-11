@@ -85,11 +85,13 @@ module CFE
             expect(additional_property.additional_property?).to be true
           end
         end
+
         context "not present" do
           it "returns false" do
             expect(no_additional_properties.additional_property?).to be false
           end
         end
+
         context "present but zero" do
           it "returns false" do
             expect(eligible_result.additional_property?).to be false

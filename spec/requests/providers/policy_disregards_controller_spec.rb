@@ -30,6 +30,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
       end
     end
   end
+
   describe "PATCH providers/applications/:id/policy_disregards" do
     let(:params) do
       {
@@ -72,6 +73,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
             expect(policy.london_emergencies_trust).to be false
           end
         end
+
         context "provider checking their answers" do
           let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
@@ -122,6 +124,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
         end
+
         context "and none of these checkbox is not selected" do
           let(:none_selected) { "" }
 

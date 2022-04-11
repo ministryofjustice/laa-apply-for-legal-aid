@@ -667,6 +667,7 @@ module CCMS
               expect(block).to have_boolean_response false
             end
           end
+
           context "has an interest" do
             before { expect(legal_aid_application).to receive(:own_home).and_return(true) }
 
@@ -718,6 +719,7 @@ module CCMS
               end
             end
           end
+
           context "FIRST_NAME" do
             it "inserts applicant's first name as a string" do
               %i[global_means global_merits].each do |entity|
@@ -726,6 +728,7 @@ module CCMS
               end
             end
           end
+
           context "POST_CODE" do
             it "inserts applicant's postcode as a string" do
               %i[global_means global_merits].each do |entity|
@@ -734,6 +737,7 @@ module CCMS
               end
             end
           end
+
           context "SURNAME" do
             it "inserts applicant's surname as a string" do
               %i[global_means global_merits].each do |entity|
@@ -742,6 +746,7 @@ module CCMS
               end
             end
           end
+
           context "SURNAME_AT_BIRTH" do
             it "inserts applicant's surname at birth as a string" do
               %i[global_means global_merits].each do |entity|
@@ -750,6 +755,7 @@ module CCMS
               end
             end
           end
+
           context "CLIENT_AGE" do
             it "inserts applicant's age as a number" do
               block = XmlExtractor.call(xml, :global_merits, "CLIENT_AGE")

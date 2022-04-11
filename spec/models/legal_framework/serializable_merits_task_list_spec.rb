@@ -87,6 +87,7 @@ module LegalFramework
             expect(smtl.task(:DA001, :proceeding_children).state).to eq :not_started
           end
         end
+
         context "proceeding type" do
           it "marks the task as complete" do
             smtl.mark_as_complete!(:DA004, :chances_of_success)

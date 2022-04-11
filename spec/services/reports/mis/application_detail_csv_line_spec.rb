@@ -401,6 +401,7 @@ module Reports
                 savings_amount_value_attrs.each { |attr| expect(value_for(attr)).to eq "" }
               end
             end
+
             context "savings amount record is all zeros" do
               it "generates Yes and zero for each attr" do
                 legal_aid_application.update! savings_amount: create(:savings_amount, :all_zero)
@@ -470,6 +471,7 @@ module Reports
               expect(value_for("Restriction details")).to eq ""
             end
           end
+
           context "with restrictions" do
             it "generates yes and the details" do
               legal_aid_application.update(has_restrictions: true, restrictions_details: "Bankrupt")

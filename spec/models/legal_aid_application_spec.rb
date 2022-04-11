@@ -335,6 +335,7 @@ RSpec.describe LegalAidApplication, type: :model do
         end
       end
     end
+
     context "transaction types do not have associated bank transactions" do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
@@ -533,12 +534,15 @@ RSpec.describe LegalAidApplication, type: :model do
       it "resets property values" do
         expect(legal_aid_application.property_value).to be_blank
       end
+
       it "resets outstanding mortgage" do
         expect(legal_aid_application.outstanding_mortgage_amount).to be_blank
       end
+
       it "resets shared ownership" do
         expect(legal_aid_application.shared_ownership).to be_blank
       end
+
       it "resets percentage home" do
         expect(legal_aid_application.percentage_home).to be_blank
       end
@@ -1250,6 +1254,7 @@ RSpec.describe LegalAidApplication, type: :model do
           expect(laa.online_current_accounts_balance).to be_nil
         end
       end
+
       context "only current" do
         let(:account_type) { "TRANSACTION" }
 

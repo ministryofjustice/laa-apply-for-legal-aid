@@ -43,6 +43,7 @@ RSpec.describe "FeedbacksController", type: :request do
           expect(feedback.improvement_suggestion).to eq(feedback_params[:improvement_suggestion])
         end
       end
+
       context "as a logged in provider" do
         let(:originating_page) { address_lookup_page }
 

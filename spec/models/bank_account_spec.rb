@@ -23,6 +23,7 @@ RSpec.describe BankAccount, type: :model do
         expect(bank_account.account_type_label).to eq("Bank Savings")
       end
     end
+
     context "transactions type" do
       it "returns Bank Current" do
         bank_account = create :bank_account, account_type: "TRANSACTION"
@@ -53,6 +54,7 @@ RSpec.describe BankAccount, type: :model do
       create :bank_transaction, :benefits, bank_account: bank_account
       expect(bank_account.has_benefits?).to eq true
     end
+
     it "returns false if benefits not present" do
       bank_account = create :bank_account
       create :bank_transaction, :with_meta_tax, bank_account: bank_account
@@ -66,6 +68,7 @@ RSpec.describe BankAccount, type: :model do
       create :bank_transaction, :benefits, bank_account: bank_account
       expect(bank_account.has_tax_credits?).to eq false
     end
+
     it "returns true if tax credits are present" do
       bank_account = create :bank_account
       create :bank_transaction, :with_meta_tax, bank_account: bank_account

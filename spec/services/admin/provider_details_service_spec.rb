@@ -66,6 +66,7 @@ module Admin
         it "responds :error" do
           expect(subject).to eq :error
         end
+
         it "explains in message" do
           subject
           expect(service.message).to eq "No entry for user sarah smith found in list of contacts returned by CCMS"
