@@ -19,33 +19,33 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
           payments = application.employments.first.employment_payments.order(:date)
           expect(payments.size).to eq 4
 
-          expect(payments[0].date).to eq Date.parse("2021-08-28")
-          expect(payments[0].gross).to eq 2345.29
-          expect(payments[0].benefits_in_kind).to eq 0.0
-          expect(payments[0].national_insurance).to eq(-185.79)
-          expect(payments[0].tax).to eq(-257.20)
-          expect(payments[0].net_employment_income).to eq 1902.3
+          expect(payments[0]).to have_attributes(date: Date.parse("2021-08-28"),
+                                                 gross: 2345.29,
+                                                 benefits_in_kind: 0.0,
+                                                 national_insurance: -185.79,
+                                                 tax: -257.20,
+                                                 net_employment_income: 1902.3)
 
-          expect(payments[1].date).to eq Date.parse("2021-09-28")
-          expect(payments[1].gross).to eq 2492.61
-          expect(payments[1].benefits_in_kind).to eq 0.0
-          expect(payments[1].national_insurance).to eq(-203.47)
-          expect(payments[1].tax).to eq(-286.6)
-          expect(payments[1].net_employment_income).to eq 2002.54
+          expect(payments[1]).to have_attributes(date: Date.parse("2021-09-28"),
+                                                 gross: 2492.61,
+                                                 benefits_in_kind: 0.0,
+                                                 national_insurance: -203.47,
+                                                 tax: -286.6,
+                                                 net_employment_income: 2002.54)
 
-          expect(payments[2].date).to eq Date.parse("2021-10-28")
-          expect(payments[2].gross).to eq 1868.98
-          expect(payments[2].benefits_in_kind).to eq 0.0
-          expect(payments[2].national_insurance).to eq(-128.64)
-          expect(payments[2].tax).to eq(-111)
-          expect(payments[2].net_employment_income).to eq 1629.34
+          expect(payments[2]).to have_attributes(date: Date.parse("2021-10-28"),
+                                                 gross: 1868.98,
+                                                 benefits_in_kind: 0.0,
+                                                 national_insurance: -128.64,
+                                                 tax: -111,
+                                                 net_employment_income: 1629.34)
 
-          expect(payments[3].date).to eq Date.parse("2021-11-28")
-          expect(payments[3].gross).to eq 1868.98
-          expect(payments[3].benefits_in_kind).to eq 0.0
-          expect(payments[3].national_insurance).to eq(-128.64)
-          expect(payments[3].tax).to eq(-161.8)
-          expect(payments[3].net_employment_income).to eq 1578.54
+          expect(payments[3]).to have_attributes(date: Date.parse("2021-11-28"),
+                                                 gross: 1868.98,
+                                                 benefits_in_kind: 0.0,
+                                                 national_insurance: -128.64,
+                                                 tax: -161.8,
+                                                 net_employment_income: 1578.54)
         end
       end
 
