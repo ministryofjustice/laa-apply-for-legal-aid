@@ -50,9 +50,9 @@
             <b><%= t('.ni') %></b>
             </td>
             <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 20%;">
-              <%= payment.tax > 0 ? "-#{gds_number_to_currency(payment.tax)}" : gds_number_to_currency(payment.tax) %>
+              <%= gds_number_to_currency(payment.tax) %>
               <br>
-              <%= payment.national_insurance > 0 ? "-#{gds_number_to_currency(payment.national_insurance)}" : gds_number_to_currency(payment.national_insurance) %>
+              <%= gds_number_to_currency(payment.national_insurance) %>
             </td>
           </tr>
           <% end %>

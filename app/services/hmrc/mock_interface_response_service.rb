@@ -3,13 +3,16 @@ module HMRC
     MATCHED = {
       single_employment: { first_name: "Langley", last_name: "Yorke", nino: "MN212451D", dob: "1992-07-22" },
       multiple_employments: { first_name: "Ida", last_name: "Paisley", nino: "OE726113A", dob: "1987-11-24" },
-      weekly_employment: { first_name: "Tom", last_name: "Waits", nino: "AA268555C", dob: "1955-05-05" },
-      four_weekly_employment: { first_name: "Jeremy", last_name: "Irons", nino: "BB313661B", dob: "1966-06-06" },
-      monthly_employment: { first_name: "Stevie", last_name: "Nicks", nino: "CC414771C", dob: "1977-07-07" },
+      weekly_multiple_employment: { first_name: "Tom", last_name: "Waits", nino: "AA268555C", dob: "1955-05-05" },
+      four_weekly_multiple_employment: { first_name: "Jeremy", last_name: "Irons", nino: "BB313661B", dob: "1966-06-06" },
+      monthly_employment_amount_variations: { first_name: "Stevie", last_name: "Nicks", nino: "CC414771C", dob: "1977-07-07" },
       employment_tax_credits: { first_name: "Oakley", last_name: "Weller", nino: "AB476107D", dob: "1988-08-08" },
       eligible_employment: { first_name: "Leanne", last_name: "Conway", nino: "JA827365B", dob: "1977-03-08" },
       pending_response: { first_name: "John", last_name: "Pending", nino: "KY123456D", dob: "2002-09-01" },
       unknown_response: { first_name: "Henry", last_name: "Unknown", nino: "WX311689D", dob: "1982-06-15" },
+      weekly_single_employment: { first_name: "John", last_name: "Smith", nino: "AA333333A", dob: "1933-03-03" },
+      tax_refund: { first_name: "Lucky", last_name: "Taxpayer", nino: "BB222222B", dob: "2002-02-02" },
+      nic_refund: { first_name: "Nick", last_name: "Overpaid", nino: "CC444444C", dob: "2004-04-04" },
     }.freeze
 
     def self.call(*args)

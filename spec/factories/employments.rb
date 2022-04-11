@@ -49,5 +49,45 @@ FactoryBot.define do
                net_employment_income: 1902.3
       end
     end
+
+    trait :with_irregularities do
+      after(:create) do |employment|
+        create :employment_payment,
+               employment: employment,
+               date: 1.day.ago,
+               gross: 1868.98,
+               benefits_in_kind: 0.0,
+               tax: -161.8,
+               national_insurance: -128.64,
+               net_employment_income: 1578.54
+
+        create :employment_payment,
+               employment: employment,
+               date: 10.days.ago,
+               gross: 1322.11,
+               benefits_in_kind: 0.0,
+               tax: 354.02,
+               national_insurance: -128.64,
+               net_employment_income: 1629.34
+
+        create :employment_payment,
+               employment: employment,
+               date: 33.days.ago,
+               gross: 2492.61,
+               benefits_in_kind: 0.0,
+               tax: -286.6,
+               national_insurance: 20.47,
+               net_employment_income: 2002.54
+
+        create :employment_payment,
+               employment: employment,
+               date: 39.days.ago,
+               gross: 2345.29,
+               benefits_in_kind: 0.0,
+               tax: -257.2,
+               national_insurance: -185.79,
+               net_employment_income: 1902.3
+      end
+    end
   end
 end

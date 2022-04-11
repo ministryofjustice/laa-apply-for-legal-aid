@@ -38,6 +38,11 @@ module HMRC
         use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :multiple_employments_usecase1).response }
       end
+
+      trait :all_remarks_usecase1 do
+        use_case { "one" }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :all_remarks_usecase1).response }
+      end
     end
   end
 end

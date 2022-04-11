@@ -98,6 +98,15 @@ module CFEResults
         trait :with_no_employments do
           result { CFEResults::V4::MockResults.with_no_employments.to_json }
         end
+
+        trait :with_employment_records_and_remarks do
+          after(:create) do |record|
+            record.legal_aid_application.employments << create(:employment, :with_irregularities)
+            record.legal_aid_application.employments << create(:employment)
+
+            record.update!(result: CFEResults::V4::MockResults.with_employment_remarks(record).to_json)
+          end
+        end
       end
     end
   end

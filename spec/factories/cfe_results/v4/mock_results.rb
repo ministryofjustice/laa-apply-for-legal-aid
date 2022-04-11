@@ -526,6 +526,34 @@ module CFEResults
         result
       end
 
+      def self.with_employment_remarks(record)
+        laa = record.legal_aid_application
+        employments = laa.employments.order(:name)
+        payments = employments.first.employment_payments
+        refunded_nic_ids = payments.select { |p| p.national_insurance > 0 }.map(&:id)
+        refunded_tax_ids = payments.select { |p| p.tax > 0 }.map(&:id)
+        result = with_employments
+        remarks = {
+          employment: {
+            multiple_employments: [employments.map(&:id)],
+          },
+          employment_gross_income: {
+            amount_variation: [payments.map(&:id)],
+            unknown_frequency: [payments.map(&:id)],
+          },
+          employment_nic: {
+            amount_variation: [payments.map(&:id)],
+            refunds: refunded_nic_ids,
+          },
+          employment_tax: {
+            amount_variation: [payments.map(&:id)],
+            refunds: refunded_tax_ids,
+          },
+        }
+        result[:assessment][:remarks] = remarks
+        result
+      end
+
       def self.with_no_employments
         result = eligible
         result[:result_summary][:disposable_income][:employment_income] = {}
