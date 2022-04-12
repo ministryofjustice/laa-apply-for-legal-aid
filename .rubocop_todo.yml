@@ -1436,15 +1436,6 @@ Rails/SaveBang:
     - 'spec/services/govuk_emails/monitor_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, flexible
-Rails/TimeZone:
-  Exclude:
-    - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'
-    - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
-
 # Offense count: 1
 Rake/DuplicateTask:
   Exclude:
