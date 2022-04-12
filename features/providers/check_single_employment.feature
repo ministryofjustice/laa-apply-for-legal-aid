@@ -81,8 +81,8 @@ Feature: check_single_employment
     Then I should be on a page showing "Upload supporting evidence"
     Then I upload an evidence file named 'hello_world.pdf'
     Then I sleep for 5 seconds
-    Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
-    Then I click 'Save and continue'
+    #Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
+    #Then I click 'Save and continue'
 
 
 
