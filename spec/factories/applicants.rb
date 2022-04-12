@@ -46,6 +46,14 @@ FactoryBot.define do
       end
     end
 
+    trait :langley_yorke do
+      first_name { 'Langley' }
+      last_name { 'Yorke' }
+      date_of_birth { Date.new(1992, 7, 22) }
+      email { Faker::Internet.safe_email }
+      national_insurance_number { 'MN212451D' }
+    end
+
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
     transient do
       with_bank_accounts { 0 }
