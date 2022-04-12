@@ -33,11 +33,8 @@ module HMRC
   private
 
     def persist_employment_records
-      return if response.blank?
-
-      return unless use_case == "one" && response["status"] == "completed"
-
-      HMRC::ParsedResponse::Persistor.call(legal_aid_application)
+      valid = HMRC::ParsedResponse::Validator.call(self, applicant: legal_aid_application.applicant)
+      HMRC::ParsedResponse::Persistor.call(legal_aid_application) if valid
     end
   end
 end

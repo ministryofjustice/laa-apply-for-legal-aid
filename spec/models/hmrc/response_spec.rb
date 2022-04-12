@@ -85,43 +85,36 @@ module HMRC
 
     describe ".after_update" do
       let(:persistor_class) { HMRC::ParsedResponse::Persistor }
+      let(:validator_class) { HMRC::ParsedResponse::Validator }
+      let(:hmrc_response) { create(:hmrc_response, :use_case_one, :with_legal_aid_applicant) }
 
-      before do
-        allow(persistor_class).to receive(:call)
+      it "calls HMRC::ParsedResponse::Validator" do
+        allow(validator_class).to receive(:call)
         hmrc_response.update!(url: "my_url")
+        expect(validator_class).to have_received(:call).with(hmrc_response, applicant: kind_of(Applicant))
       end
 
-      context "with a use case two HMRC response" do
-        let(:hmrc_response) { create :hmrc_response, :use_case_two }
+      context "when response is persistable" do
+        before do
+          allow(validator_class).to receive(:call).and_return(true)
+          allow(persistor_class).to receive(:call)
+          hmrc_response.update!(url: "my_url")
+        end
+
+        it "calls HMRC::ParsedResponse::Persistor" do
+          expect(persistor_class).to have_received(:call).with(hmrc_response.legal_aid_application)
+        end
+      end
+
+      context "when response is not persistable" do
+        before do
+          allow(validator_class).to receive(:call).and_return(false)
+          allow(persistor_class).to receive(:call)
+          hmrc_response.update!(url: "my_url")
+        end
 
         it "does not call HMRC::ParsedResponse::Persistor" do
           expect(persistor_class).not_to have_received(:call)
-        end
-      end
-
-      context "with a use case one HMRC response" do
-        context "when there is no response" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one, :nil_response }
-
-          it "does not call HMRC::ParsedResponse::Persistor" do
-            expect(persistor_class).not_to have_received(:call)
-          end
-        end
-
-        context "when status is not completed" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one, :processing }
-
-          it "does not call HMRC::ParsedResponse::Persistor" do
-            expect(persistor_class).not_to have_received(:call)
-          end
-        end
-
-        context "when status is completed" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one }
-
-          it "calls HMRC::ParsedResponse::Persistor" do
-            expect(persistor_class).to have_received(:call)
-          end
         end
       end
     end

@@ -7,6 +7,10 @@ module HMRC
       submission_id { SecureRandom.uuid }
       use_case { "one" }
 
+      trait :with_legal_aid_applicant do
+        legal_aid_application { build(:legal_aid_application, :with_applicant) }
+      end
+
       trait :use_case_one do
         use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id).response }
