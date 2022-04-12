@@ -91,6 +91,7 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     ast (2.4.2)
+    attr_extras (6.2.5)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.575.0)
@@ -459,6 +460,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    optimist (3.0.1)
     orm_adapter (0.5.0)
     os (1.1.4)
     overcommit (0.58.0)
@@ -470,6 +472,8 @@ GEM
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
+    patience_diff (1.2.0)
+      optimist (~> 3.0)
     pg (1.3.5)
     pg_dump_anonymize (0.1.2)
     prometheus_exporter (0.4.17)
@@ -674,6 +678,10 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     strscan (3.0.1)
+    super_diff (0.8.0)
+      attr_extras (>= 6.2.4)
+      diff-lcs
+      patience_diff
     sys-uname (1.2.2)
       ffi (~> 1.1)
     terminal-table (3.0.2)
@@ -816,6 +824,7 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   spring
+  super_diff
   tzinfo-data
   vcr
   webdack-uuid_migration (~> 1.4.0)

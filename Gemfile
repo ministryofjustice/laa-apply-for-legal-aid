@@ -146,6 +146,7 @@ group :test do
   gem "shoulda-matchers", "~> 5.1"
   gem "simplecov", require: false
   gem "simplecov-rcov"
+  gem "super_diff"
   gem "vcr"
   gem "webdrivers", "~> 5.0", ">= 5.0.0"
   gem "webmock"
