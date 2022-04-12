@@ -87,14 +87,6 @@
 #    - 'spec/support/flow_helpers.rb'
 #    - 'spec/support/xml_extractor.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Lint/RedundantDirGlobSort:
-  Exclude:
-    - 'db/seeds.rb'
-    - 'lib/tasks/helpers/cy_helper.rb'
-    - 'spec/rails_helper.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, BlockForwardingName.
