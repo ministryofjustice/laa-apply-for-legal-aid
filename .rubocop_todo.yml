@@ -1134,14 +1134,6 @@ RSpec/PredicateMatcher:
     - 'spec/requests/providers/check_provider_answers_spec.rb'
     - 'spec/requests/providers/own_home_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: numeric, symbolic
-RSpec/Rails/HttpStatus:
-  Exclude:
-    - 'spec/requests/v1/workers_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
