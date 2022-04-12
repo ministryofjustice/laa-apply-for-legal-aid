@@ -57,7 +57,7 @@ RSpec.describe "Firm" do
     end
 
     context "returns all records" do
-      it "returns all  record" do
+      it "returns all record" do
         expect(Firm.search("")).to match_array([firm3, firm2, firm])
       end
     end

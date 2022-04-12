@@ -47,7 +47,7 @@ module CCMS
             expect(history.details).to be_nil
           end
 
-          it "stores the reqeust body in the  submission history record" do
+          it "stores the reqeust body in the submission history record" do
             subject.call
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
@@ -125,7 +125,7 @@ module CCMS
             expect(history.success).to be false
           end
 
-          it "stores the reqeust body in the  submission history record" do
+          it "stores the reqeust body in the submission history record" do
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",

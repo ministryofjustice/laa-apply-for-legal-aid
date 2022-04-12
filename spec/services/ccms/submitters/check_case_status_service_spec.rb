@@ -42,7 +42,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
             expect(history.details).to be_nil
           end
 
-          it "stores the request body in the  submission history record" do
+          it "stores the request body in the submission history record" do
             subject.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddUpdtStatusRQ",
@@ -77,7 +77,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
             expect(history.details).to eq "Poll limit exceeded"
           end
 
-          it "stores the reqeust body in the  submission history record" do
+          it "stores the reqeust body in the submission history record" do
             subject.call
             expect(history.request).to be_soap_envelope_with(
               command: "casebim:CaseAddUpdtStatusRQ",
@@ -114,7 +114,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           expect(history.details).to be_nil
         end
 
-        it "stores the reqeust body in the  submission history record" do
+        it "stores the reqeust body in the submission history record" do
           subject.call
           expect(history.request).to be_soap_envelope_with(
             command: "casebim:CaseAddUpdtStatusRQ",
@@ -160,7 +160,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         expect(history.details).to match(/oops/)
       end
 
-      it "stores the reqeust body in the  submission history record" do
+      it "stores the reqeust body in the submission history record" do
         expect(history.request).to be_soap_envelope_with(
           command: "casebim:CaseAddUpdtStatusRQ",
           transaction_id: "20190101121530123456",

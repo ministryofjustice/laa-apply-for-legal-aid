@@ -263,7 +263,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
         expect { subject }.not_to change(LegalAidApplication, :count)
       end
 
-      it "redirects to new applicant page " do
+      it "redirects to new applicant page" do
         subject
         expect(response).to redirect_to(new_providers_applicant_path)
       end

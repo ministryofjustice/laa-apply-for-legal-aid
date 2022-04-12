@@ -248,13 +248,13 @@ module CFE
       end
 
       describe "capital_contribution_required?" do
-        context "contribution not required " do
+        context "contribution not required" do
           it "returns false for capital_contribution_required" do
             expect(eligible_result.capital_contribution_required?).to be false
           end
         end
 
-        context "contribution is required " do
+        context "contribution is required" do
           it "returns true for capital_contribution_required" do
             expect(contribution_required_result.capital_contribution_required?).to be true
           end
@@ -335,7 +335,7 @@ module CFE
       end
 
       describe "vehicle_disregard" do
-        it "returns the vehicle disregard for applicants vehicle " do
+        it "returns the vehicle disregard for applicants vehicle" do
           expect(eligible_result.vehicle_disregard).to eq 1784.61
         end
       end

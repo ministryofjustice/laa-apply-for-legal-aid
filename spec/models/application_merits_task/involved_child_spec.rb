@@ -23,7 +23,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "with  multiple embedded spaces" do
+      context "with multiple embedded spaces" do
         let(:full_name) { "Michael      Winner" }
 
         it "separates out first and last name" do

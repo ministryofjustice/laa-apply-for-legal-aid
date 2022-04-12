@@ -363,7 +363,7 @@ module Providers
             context "text is entered and an additional file is uploaded" do
               let(:entered_text) { "Now we have two attached files" }
 
-              it "updates the text and attaches  the additional file" do
+              it "updates the text and attaches the additional file" do
                 subject
                 expect(statement_of_case.reload.statement).to eq entered_text
                 expect(statement_of_case.original_attachments.count).to eq 3

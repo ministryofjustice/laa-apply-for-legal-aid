@@ -39,7 +39,7 @@ RSpec.describe DocumentCategoryValidator do
     let(:invalid_name) { "xxx-zzz" }
     let(:valid_names) { DocumentCategoryValidator::VALID_DOCUMENT_TYPES }
 
-    context "valid names " do
+    context "valid names" do
       let(:name) { valid_names.sample }
 
       it "does not fail when trying to create a record with an valid name" do

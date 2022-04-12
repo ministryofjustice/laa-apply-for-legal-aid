@@ -556,7 +556,7 @@ module CCMS
           context "maintenance payments" do
             subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
 
-            describe "are received by the applicant " do
+            describe "are received by the applicant" do
               let!(:cfe_result) { create :cfe_v3_result, :with_maintenance_received, submission: cfe_submission }
 
               context "GB_INPUT_C_8WP3_303A" do
