@@ -12,6 +12,7 @@ class TestProviderPopulator
     "Test firm for portal login" => [807, %w[9F805X:21 3X805Z:22]],
     "Ahern & Co." => [808, %w[9F808X:21 3X808Z:22]],
     "Groves & Co." => [989, %w[7F809X:23 4X809Z:24]],
+    "Sugarman & daughters" => [810, %w[6F810X:25 6X810Z:26]],
     "EDWARD HAYES LLP" => [19_537, %w[1T462U:85605]],
     "LAWRENCE & CO SOLICITORS CDS LLP" => [33_230, %w[0Q974B:85981]],
   }.freeze
@@ -32,6 +33,7 @@ class TestProviderPopulator
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
     "CG" => ["Groves & Co.", "chris.groves@digital.justice.gov.uk", 110, 599],
+    "jsugarman" => ["Sugarman & daughters", "joel.sugarman@digital.justice.gov.uk", 111, 600],
   }.freeze
 
   def run
