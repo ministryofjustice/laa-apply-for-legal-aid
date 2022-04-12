@@ -2,6 +2,7 @@ Feature: check_single_employment
   @javascript @vcr
   Scenario: I am able to complete an application for an employed applicant with a single employer
     Given I am logged in as a provider
+    And csrf is enabled
     And an applicant named Langley Yorke has completed his true layer interaction
     And the system is prepped for the employed journey
     Then I visit the applications page
@@ -10,7 +11,7 @@ Feature: check_single_employment
     Then I click 'Continue'
     Then I should be on a page showing "Review Langley Yorke's employment income"
     Then I choose "Yes"
-    Then I fill "legal-aid-application-extra-employment-information-details-field" with "Yorke also earns £50 pw"
+    Then I fill "legal-aid-application-extra-employment-information-details-field" with "Yorke also earns 50 gbp"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -34,7 +35,9 @@ Feature: check_single_employment
     Then I check "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
-    Then I check "None of these"
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
+    Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
     Then I check "None of these"
@@ -43,9 +46,9 @@ Feature: check_single_employment
     Then I click 'Save and continue'
     Then I should be on a page showing "We need to check if Langley Yorke can get legal aid"
     Then I click "Show all sections"
-
-    #add check that employment data appears on CYA
-
+    And I should be on a page showing "Employment income"
+    And I should be on a page showing "Fixed employment expenses deduction"
+    And I should be on a page showing "-£45"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     When I click link 'Latest incident details'
@@ -69,13 +72,17 @@ Feature: check_single_employment
     Then I fill "application-merits-task-statement-of-case-statement-field" with "Statement of case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
-    When I click the link 'Chances of success'
+    When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
     Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     Then I click 'Save and continue'
     Then I should be on a page showing "Upload supporting evidence"
+    Then I upload an evidence file named 'hello_world.pdf'
+    Then I sleep for 5 seconds
+    Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
+    Then I click 'Save and continue'
 
 
 
