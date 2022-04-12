@@ -1142,12 +1142,6 @@ RSpec/Rails/HttpStatus:
   Exclude:
     - 'spec/requests/v1/workers_spec.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-RSpec/ReceiveCounts:
-  Exclude:
-    - 'spec/services/dashboard_event_handler_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
