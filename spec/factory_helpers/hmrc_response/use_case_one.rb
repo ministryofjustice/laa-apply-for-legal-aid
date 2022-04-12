@@ -64,6 +64,14 @@ module FactoryHelpers
         end
       end
 
+      def invalid_data_type
+        @options = {
+          first_name: "John",
+          last_name: "Doe",
+          data: {},
+        }
+      end
+
       def example1_usecase1
         @options = {
           first_name: "John",

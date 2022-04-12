@@ -7,7 +7,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
 
   describe ".call" do
     context "when no employment records exist" do
-      context "when HMRC response contains one employment" do
+      context "with one employment in HMRC response" do
         let!(:hmrc_response) { create :hmrc_response, :example1_usecase1 }
 
         it "creates one employment record" do
@@ -49,7 +49,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
         end
       end
 
-      context "when HMRC response contains multiple employments" do
+      context "with multiple employments in HMRC response" do
         let(:hmrc_response) { create :hmrc_response, :multiple_employments_usecase1 }
 
         it "creates 2 employment records" do

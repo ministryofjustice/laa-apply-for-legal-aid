@@ -7,6 +7,7 @@ module HMRC
     USE_CASES = %w[one two].freeze
     belongs_to :legal_aid_application, inverse_of: :hmrc_responses
     validates :use_case, presence: true, inclusion: { in: USE_CASES, message: "Invalid use case" }
+    validates_with HMRC::ResponseValidator
 
     def self.use_case_one_for(laa_id)
       where(legal_aid_application_id: laa_id, use_case: "one").order(:created_at).last
@@ -28,8 +29,8 @@ module HMRC
 
     def persist_employment_records
       return if response.blank?
-
-      return unless use_case == "one" && response["status"] == "completed"
+      # return unless use_case == "one" && response["status"] == "completed"
+      return unless valid? && use_case == "one"
 
       HMRC::ParsedResponse::Persistor.call(legal_aid_application)
     end

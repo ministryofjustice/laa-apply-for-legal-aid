@@ -29,6 +29,26 @@ module HMRC
         url { "#{Rails.configuration.x.hmrc_interface.host}api/v1/submission/result/#{submission_id}" }
       end
 
+      trait :invalid_data_response do
+        use_case { "one" }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, data_array: {}).response }
+      end
+
+      trait :invalid_status_response do
+        use_case { "one" }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, status: "foobar").response }
+      end
+
+      trait :nil_submission_response do
+        use_case { "one" }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(nil).response }
+      end
+
+      trait :blank_submission_response do
+        use_case { "one" }
+        response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new("").response }
+      end
+
       trait :example1_usecase1 do
         use_case { "one" }
         response { ::FactoryHelpers::HMRCResponse::UseCaseOne.new(submission_id, named_data: :example1_usecase1).response }

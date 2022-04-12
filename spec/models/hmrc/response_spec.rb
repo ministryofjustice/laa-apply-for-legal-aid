@@ -4,16 +4,93 @@ module HMRC
   RSpec.describe Response, type: :model do
     subject(:response) { build(:hmrc_response) }
 
-    describe "validations" do
-      subject(:valid) { response.valid? }
+    context "when validating" do
       it "is valid with all valid attributes" do
-        expect(valid).to be true
+        expect(response).to be_valid
       end
 
       context "when the use case is not valid for apply" do
         let(:response) { build(:hmrc_response, use_case: "three") }
 
-        it { is_expected.to be false }
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:use_case)).to include("Invalid use case") }
+      end
+
+      # In validation, check for: submissions is present, status is valid - completed or processing, data is an array
+      # As per data structure in single_employment.json file: under individuals/matching/individual - check details match what we requested
+      # - Under income/paye/paye - income key is an array, iterate over and check format of payment date, gross earning for nics
+      # schema:
+      # hmrc response --> hmrc interface response schema --> expect valid response schema
+      #
+      # TODO: define acceptable scheme and validate against functionally
+      # context 'with invalid schema' do
+      # end
+
+      # data should be an array
+      context 'with invalid response "data" type' do
+        let(:response) { build(:hmrc_response, :invalid_data_response) }
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages[:response]).to include("response \"data\" must be an array") }
+      end
+
+      context 'with nil response "submission"' do
+        let(:response) { build(:hmrc_response, :nil_submission_response) }
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:response)).to include("response \"submission\" must be present") }
+      end
+
+      context 'with blank response "submission"' do
+        let(:response) { build(:hmrc_response, :blank_submission_response) }
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:response)).to include("response \"submission\" must be present") }
+      end
+
+      context 'with missing response "submission"' do
+        let(:response) { build(:hmrc_response, response: response_hash) }
+
+        let(:response_hash) do
+          { "status" => "completed",
+            "data" => [] }
+        end
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:response)).to include("response \"submission\" must be present") }
+      end
+
+      context 'with invalid response "status"' do
+        let(:response) { build(:hmrc_response, :invalid_status_response) }
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:response)).to include("response \"status\" must be one of allowed options") }
+      end
+
+      context 'with missing response "status"' do
+        let(:response) { build(:hmrc_response, response: response_hash) }
+
+        let(:response_hash) do
+          { "submission" => "completed",
+            "data" => [] }
+        end
+
+        before { response.validate }
+
+        it { expect(response).to be_invalid }
+        it { expect(response.errors.messages_for(:response)).to include("response \"status\" must be one of allowed options") }
       end
     end
 
@@ -57,6 +134,7 @@ module HMRC
 
       context "when the hmrc data does not contain employment income data" do
         let(:response) { create :hmrc_response }
+
         let(:response_data_with_no_employment_income) do
           { "submission" => "f3730ebf-4b56-4bc1-b419-417bdf2ce9d2",
             "status" => "completed",
@@ -99,16 +177,8 @@ module HMRC
       end
 
       context "with a use case one HMRC response" do
-        context "when there is no response" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one, :nil_response }
-
-          it "does not call HMRC::ParsedResponse::Persistor" do
-            expect(persistor_class).not_to have_received(:call)
-          end
-        end
-
-        context "when status is not completed" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one, :processing }
+        context "with nil response" do
+          let(:hmrc_response) { create(:hmrc_response, :use_case_one, :nil_response) }
 
           it "does not call HMRC::ParsedResponse::Persistor" do
             expect(persistor_class).not_to have_received(:call)
@@ -116,7 +186,7 @@ module HMRC
         end
 
         context "when status is completed" do
-          let(:hmrc_response) { create :hmrc_response, :use_case_one }
+          let(:hmrc_response) { create(:hmrc_response, :use_case_one) }
 
           it "calls HMRC::ParsedResponse::Persistor" do
             expect(persistor_class).to have_received(:call)
