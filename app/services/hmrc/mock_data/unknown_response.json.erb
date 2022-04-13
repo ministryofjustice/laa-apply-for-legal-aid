@@ -1,5 +1,5 @@
 {
-  "submission": "@submission_id",
+  "submission": "<%= @submission_id %>",
   "status": "completed",
   "data": [
     {
@@ -20,7 +20,7 @@
           {
             "taxYear": "20-21",
             "payFrequency": "M1",
-            "paymentDate": "2020-12-18",
+            "paymentDate": "<%= @reference_date.strftime('%F') %>",
             "paidHoursWorked": "D",
             "taxablePayToDate": 16447.71,
             "totalTaxToDate": 1366.6,
@@ -32,7 +32,7 @@
           {
             "taxYear": "20-21",
             "payFrequency": "M1",
-            "paymentDate": "2020-11-18",
+            "paymentDate": "<%= (@reference_date - 1.month).strftime('%F') %>",
             "paidHoursWorked": "D",
             "taxablePayToDate": 14156.63,
             "totalTaxToDate": 1122,
@@ -44,7 +44,7 @@
           {
             "taxYear": "20-21",
             "payFrequency": "M1",
-            "paymentDate": "2020-10-28",
+            "paymentDate": "<%= (@reference_date - 2.months).strftime('%F') %>",
             "paidHoursWorked": "D",
             "taxablePayToDate": 11865.55,
             "totalTaxToDate": 877.4,

@@ -28,6 +28,8 @@ module HMRC
       @hmrc_response = hmrc_response
       @application = @hmrc_response.legal_aid_application
       @submission_id = SecureRandom.uuid
+      @reference_date = @application.calculation_date || Time.zone.today
+      @use_case_name = "use_case_#{@hmrc_response.use_case}"
     end
 
     def call
@@ -63,8 +65,10 @@ module HMRC
     end
 
     def collate_response(scenario)
-      json_file = File.read("app/services/hmrc/mock_data/#{scenario}.json")
-      JSON.parse(json_file.gsub("@submission_id", @submission_id).gsub("@use_case_name", "use_case_#{@hmrc_response.use_case}"))
+      json_erb_text = File.read("app/services/hmrc/mock_data/#{scenario}.json.erb")
+      renderer = ERB.new(json_erb_text)
+      raw_json = renderer.result(binding)
+      JSON.parse(raw_json)
     end
   end
 end

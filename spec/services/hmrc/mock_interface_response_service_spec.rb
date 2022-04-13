@@ -279,7 +279,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
               {
                 taxYear: "20-21",
                 payFrequency: "M1",
-                paymentDate: "2020-10-28",
+                paymentDate: "2020-10-18",
                 paidHoursWorked: "D",
                 taxablePayToDate: 11_865.55,
                 totalTaxToDate: 877.4,
@@ -303,8 +303,11 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     }
   end
 
+  let(:additional_before_actions) { {} }
+
   before do
     allow(SecureRandom).to receive(:uuid).and_return("dummy_uuid")
+    additional_before_actions
     service
   end
 
@@ -318,6 +321,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
   context "when the applicant is known to the mock response service" do
     let(:applicant) { create :applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22" }
+    let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2021, 11, 30)) }
 
     it "updates the hmrc_response.response value" do
       expect(hmrc_response.reload.response).to match_json_expression employed_response
@@ -333,14 +337,16 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
     context "when the response from HMRC contains unexpected data" do
       let(:applicant) { create :applicant, first_name: "Henry", last_name: "Unknown", national_insurance_number: "WX311689D", date_of_birth: "1982-06-15" }
+      let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 18)) }
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_response.reload.response).to match_json_expression unknown_response
       end
     end
 
-    context "and is paid weekly" do
+    context "and is paid four-weekly" do
       let(:applicant) { create :applicant, first_name: "Jeremy", last_name: "Irons", national_insurance_number: "BB313661B", date_of_birth: "1966-06-06" }
+      let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 10)) }
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Jeremy"
@@ -350,6 +356,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
     context "and has multiple employments" do
       let(:applicant) { create :applicant, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24" }
+      let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 10)) }
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Ida"
@@ -361,6 +368,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
     context "and receives tax credits" do
       let(:applicant) { create :applicant, first_name: "Oakley", last_name: "Weller", national_insurance_number: "AB476107D", date_of_birth: "1988-08-08" }
+      let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2021, 12, 17)) }
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_data[1]["individuals/matching/individual"]["firstName"]).to eq "Oakley"

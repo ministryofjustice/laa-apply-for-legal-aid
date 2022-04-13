@@ -1,10 +1,10 @@
 {
-    "submission": "@submission_id",
+    "submission": "<%= @submission_id %>",
     "status": "completed",
     "data": [
       {
-        "correlation_id": "@submission_id",
-        "use_case": "@use_case_name"
+        "correlation_id": "<%= @submission_id %>",
+        "use_case": "<%= @use_case_name %>"
       },
       {
         "individuals/matching/individual": {
@@ -21,7 +21,7 @@
               "taxYear": "21-22",
               "payFrequency": "M1",
               "monthPayNumber": 8,
-              "paymentDate": "2021-11-30",
+              "paymentDate": "<%= @reference_date.strftime('%F') %>",
               "paidHoursWorked": "E",
               "taxablePayToDate": 1766.66,
               "taxablePay": 208.33,
@@ -43,7 +43,7 @@
               "taxYear": "21-22",
               "payFrequency": "M1",
               "monthPayNumber": 7,
-              "paymentDate": "2021-10-29",
+              "paymentDate": "<%= (@reference_date - 1.month).strftime('%F') %>",
               "paidHoursWorked": "E",
               "taxablePayToDate": 1558.33,
               "taxablePay": 308.33,
@@ -65,7 +65,7 @@
               "taxYear": "21-22",
               "payFrequency": "M1",
               "monthPayNumber": 6,
-              "paymentDate": "2021-09-30",
+              "paymentDate": "<%= (@reference_date - 2.months).strftime('%F') %>",
               "paidHoursWorked": "E",
               "taxablePayToDate": 1250,
               "taxablePay": 200,
@@ -87,7 +87,7 @@
               "taxYear": "21-22",
               "payFrequency": "M1",
               "monthPayNumber": 5,
-              "paymentDate": "2021-08-31",
+              "paymentDate": "<%= (@reference_date - 3.months).strftime('%F') %>",
               "paidHoursWorked": "E",
               "taxablePayToDate": 1050,
               "taxablePay": 175,
@@ -190,4 +190,3 @@
       }
     ]
   }
-  
