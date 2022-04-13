@@ -1,16 +1,16 @@
-Feature: check_mulitiple_employment
+Feature: check_pending_employment
   @javascript @vcr
-  Scenario: I am able to complete an application for an employed applicant with multiple employers
+  Scenario: I am able to complete an application for an employed applicant with pending HMRC request
     Given I am logged in as a provider
     And csrf is enabled
-    And an applicant named Ida Paisley has completed his true layer interaction
+    And an applicant named John Pending has completed his true layer interaction
     And the system is prepped for the employed journey
     Then I visit the applications page
-    Then I click link 'Ida Paisley'
-    Then I should be on a page showing "Continue Ida Paisley's financial assessment"
+    Then I click link 'John Pending'
+    Then I should be on a page showing "Continue John Pending's financial assessment"
     Then I click 'Continue'
-    Then I should be on a page showing "HMRC found a record of your client's employment"
-    Then I fill "legal-aid-application-full-employment-details-field" with "Paisley also earns 50 gbp"
+    Then I should be on a page showing "HMRC has no record of your client's employment in the last 3 months"
+    Then I fill "legal-aid-application-full-employment-details-field" with "Pending"
     Then I click 'Save and continue'
     Then I should be on a page showing "Your client's income"
     Then I choose "Yes"
@@ -41,13 +41,13 @@ Feature: check_mulitiple_employment
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
     Then I check "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Paisley also earns 50 gbp"
+    Then I should be on a page showing "Pending"
     Then I click 'Save and continue'
-    Then I should be on a page showing "We need to check if Ida Paisley can get legal aid"
-    Then I click "Show all sections"
-    And I should be on a page showing "Employment income"
-    And I should be on a page showing "Fixed employment expenses deduction"
-    And I should be on a page showing "-£45"
+    Then I should be on a page showing "We need to check if John Pending can get legal aid"
+    #Then I click "Show all sections"
+    #And I should be on a page showing "Employment income"
+    #And I should be on a page showing "Fixed employment expenses deduction"
+    #And I should be on a page showing "-£45"
     Then I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     When I click link 'Latest incident details'
