@@ -1,4 +1,5 @@
 
+
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
 [![Maintainability](https://api.codeclimate.com/v1/badges/687f23bf19d8c76a9467/maintainability)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/687f23bf19d8c76a9467/test_coverage)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/test_coverage)
@@ -100,6 +101,12 @@ HMRC_API_HOST=
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
 ```bash
 ADMIN_PASSWORD=
+```
+
+
+To install OS dependencies (MacOSX only):
+```
+brew bundle
 ```
 
 From the root of the project execute the following command:
