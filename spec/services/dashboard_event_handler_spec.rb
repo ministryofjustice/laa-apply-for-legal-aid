@@ -25,7 +25,7 @@ RSpec.describe DashboardEventHandler do
 
     it "fires an application_created event" do
       expect_any_instance_of(described_class).to receive(:application_created).and_call_original
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(1).times
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(:once)
 
       create :legal_aid_application
     end
@@ -38,7 +38,7 @@ RSpec.describe DashboardEventHandler do
 
     it "fires a ProviderDataJob event" do
       expect_any_instance_of(described_class).to receive(:provider_updated).and_call_original
-      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
+      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(:once)
 
       create :provider
     end
@@ -131,8 +131,8 @@ RSpec.describe DashboardEventHandler do
     end
 
     it "fires the submitted applications job" do
-      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(1).times
-      expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(1).times
+      expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(:once)
+      expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(:once)
       legal_aid_application.merits_complete!
     end
   end
@@ -141,7 +141,7 @@ RSpec.describe DashboardEventHandler do
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
 
     it "fires the applicant_email job" do
-      expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(1).times
+      expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(:once)
       CitizenEmailService.new(legal_aid_application).send_email
     end
   end

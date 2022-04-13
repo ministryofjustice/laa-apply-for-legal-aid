@@ -87,14 +87,6 @@
 #    - 'spec/support/flow_helpers.rb'
 #    - 'spec/support/xml_extractor.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Lint/RedundantDirGlobSort:
-  Exclude:
-    - 'db/seeds.rb'
-    - 'lib/tasks/helpers/cy_helper.rb'
-    - 'spec/rails_helper.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, BlockForwardingName.
@@ -1134,20 +1126,6 @@ RSpec/PredicateMatcher:
     - 'spec/requests/providers/check_provider_answers_spec.rb'
     - 'spec/requests/providers/own_home_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: numeric, symbolic
-RSpec/Rails/HttpStatus:
-  Exclude:
-    - 'spec/requests/v1/workers_spec.rb'
-
-# Offense count: 5
-# Cop supports --auto-correct.
-RSpec/ReceiveCounts:
-  Exclude:
-    - 'spec/services/dashboard_event_handler_spec.rb'
-
 # Offense count: 16
 RSpec/RepeatedDescription:
   Exclude:
@@ -1435,15 +1413,6 @@ Rails/SaveBang:
     - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
     - 'spec/services/govuk_emails/monitor_spec.rb'
     - 'spec/services/reports/mis/application_detail_csv_line_spec.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, flexible
-Rails/TimeZone:
-  Exclude:
-    - 'spec/services/banking/bank_transaction_balance_calculator_spec.rb'
-    - 'spec/services/banking/bank_transactions_trimmer_spec.rb'
 
 # Offense count: 1
 Rake/DuplicateTask:

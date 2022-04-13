@@ -39,7 +39,7 @@ private
   end
 
   def translation_files
-    Dir["#{@cy_dir}/*.yml"].sort
+    Dir["#{@cy_dir}/*.yml"]
   end
 
   def reverse_strings(filename)

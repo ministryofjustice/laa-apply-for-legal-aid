@@ -15,7 +15,7 @@ Seeder.monitor Firm
 Seeder.monitor Provider
 Seeder.monitor DocumentCategory
 
-Dir[Rails.root.join("db/seeds/*.rb")].sort.each do |seed|
+Dir[Rails.root.join("db/seeds/*.rb")].each do |seed|
   load seed
 end
 

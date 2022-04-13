@@ -36,8 +36,8 @@ module Banking
       seed_data.each do |row|
         create(:bank_transaction,
                bank_account:,
-               happened_at: Time.parse(row[0]).in_time_zone,
-               created_at: Time.parse(row[1]).in_time_zone,
+               happened_at: Time.zone.parse(row[0]),
+               created_at: Time.zone.parse(row[1]),
                operation: row[2],
                amount: row[3])
       end
