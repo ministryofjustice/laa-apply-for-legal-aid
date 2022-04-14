@@ -124,5 +124,31 @@ module HMRC
         end
       end
     end
+
+    describe "#status" do
+      context "normal payload" do
+        let(:response) { create :hmrc_response, :use_case_one }
+
+        it "returns a 'completed' status" do
+          expect(response.status).to eq "completed"
+        end
+      end
+
+      context "processing payload" do
+        let(:response) { create :hmrc_response, :processing }
+
+        it "returns a 'processing' status" do
+          expect(response.status).to eq "processing"
+        end
+      end
+
+      context "nil payload" do
+        let(:response) { create :hmrc_response, :nil_response }
+
+        it "returns nil" do
+          expect(response.status).to be_nil
+        end
+      end
+    end
   end
 end

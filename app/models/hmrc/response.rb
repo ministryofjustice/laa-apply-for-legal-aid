@@ -12,6 +12,12 @@ module HMRC
       where(legal_aid_application_id: laa_id, use_case: "one").order(:created_at).last
     end
 
+    def status
+      return nil if response.blank?
+
+      response["status"]
+    end
+
     def employment_income?
       return false if response.nil?
 
