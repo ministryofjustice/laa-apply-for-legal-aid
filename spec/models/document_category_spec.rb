@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe DocumentCategory, type: :model do
-  it {
-    is_expected.to respond_to(:name,
-                              :submit_to_ccms,
-                              :ccms_document_type,
-                              :display_on_evidence_upload,
-                              :mandatory)
-  }
+  subject(:document_category) { described_class.new }
+
+  it do
+    expect(document_category).to respond_to(:name,
+                                            :submit_to_ccms,
+                                            :ccms_document_type,
+                                            :display_on_evidence_upload,
+                                            :mandatory)
+  end
 
   describe ".populate" do
     it "calls the document_category_populator service" do

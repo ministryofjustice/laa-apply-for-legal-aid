@@ -32,7 +32,7 @@ module Dashboard
         end
 
         it "returns an array summarising the application" do
-          is_expected.to eql expected_response
+          expect(dashboard_applicant_email).to eq expected_response
         end
       end
 
