@@ -166,7 +166,7 @@
     </wsdl:binding>
     <wsdl:service name="CaseServices_ep">
         <wsdl:port name="CaseServices_pt" binding="tns:CaseServicesSOAPBinding">
-            <soap:address location="https://ccmssoagateway.uat.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep"/>
+            <soap:address location="http://ccms-soa-managed.stg.legalservices.gov.uk:7777/soa-infra/services/default/CaseServices/CaseServices_ep"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
