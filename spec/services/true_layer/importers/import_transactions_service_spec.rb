@@ -8,8 +8,8 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   describe "#call" do
     subject { described_class.call(api_client, bank_account, start_at: now_minus_3_month, finish_at: now) }
 
-    let(:now) { "6/11/2018".to_datetime.beginning_of_day }
-    let(:now_minus_3_month) { "5/08/2018".to_datetime.beginning_of_day }
+    let(:now) { "6/11/2018".to_date.beginning_of_day }
+    let(:now_minus_3_month) { "5/08/2018".to_date.beginning_of_day }
     let(:mock_transaction1) { mock_account[:transactions][0] }
     let(:mock_transaction2) { mock_account[:transactions][1] }
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }

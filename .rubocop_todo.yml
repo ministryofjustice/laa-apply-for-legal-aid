@@ -1423,11 +1423,3 @@ Rake/DuplicateTask:
 Rake/MethodDefinitionInTask:
   Exclude:
     - 'lib/tasks/db.rake'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: AllowCoercion.
-Style/DateTime:
-  Exclude:
-    - 'app/services/true_layer/api_client.rb'
-    - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
