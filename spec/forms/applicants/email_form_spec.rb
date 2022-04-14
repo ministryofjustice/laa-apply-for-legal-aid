@@ -3,12 +3,6 @@ require "rails_helper"
 RSpec.describe Applicants::EmailForm, type: :form do
   subject { described_class.new(params) }
 
-  describe ".model_name" do
-    it 'should be "Applicant"' do
-      expect(described_class.model_name).to eq("Applicant")
-    end
-  end
-
   let(:email) { Faker::Internet.safe_email }
   let(:applicant) { create :applicant, email: nil }
   let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
@@ -18,6 +12,12 @@ RSpec.describe Applicants::EmailForm, type: :form do
       email:,
       model: applicant,
     }
+  end
+
+  describe ".model_name" do
+    it 'should be "Applicant"' do
+      expect(described_class.model_name).to eq("Applicant")
+    end
   end
 
   describe "#save" do

@@ -736,13 +736,6 @@ RSpec/IteratedExpectation:
   Exclude:
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_dependant_child_attributes_spec.rb'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-RSpec/LetBeforeExamples:
-  Exclude:
-    - 'spec/forms/applicants/basic_details_form_spec.rb'
-    - 'spec/forms/applicants/email_form_spec.rb'
-
 # Offense count: 201
 RSpec/LetSetup:
   Exclude:
