@@ -47,7 +47,7 @@ RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
         describe "Sending a message to Sentry" do
           let(:before_actions) do
             create :hmrc_response, :processing, legal_aid_application_id: application.id
-            expect(Sentry).to receive(:capture_message).with(/HMRC response still pending: correlation id/)
+            expect(Sentry).to receive(:capture_message).with(/HMRC response still pending/)
           end
 
           it "sends the message to Sentry and is successful" do

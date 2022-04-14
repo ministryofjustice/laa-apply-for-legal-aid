@@ -125,25 +125,6 @@ module HMRC
       end
     end
 
-    describe "#correlation_id" do
-      context "normal payload" do
-        let(:uuid) { SecureRandom.uuid }
-        let(:response) { create :hmrc_response, :use_case_one, submission_id: uuid }
-
-        it "extracts the correlation id" do
-          expect(response.correlation_id).to eq uuid
-        end
-      end
-
-      context "nil payload" do
-        let(:response) { create :hmrc_response, :nil_response }
-
-        it "returns nil" do
-          expect(response.correlation_id).to be_nil
-        end
-      end
-    end
-
     describe "#status" do
       context "normal payload" do
         let(:response) { create :hmrc_response, :use_case_one }

@@ -23,13 +23,7 @@ module Providers
     end
 
     def message_sentry
-      Sentry.capture_message("HMRC response still pending: correlation id: #{correlation_id}")
-    end
-
-    def correlation_id
-      return nil if hmrc_response_use_case_one.nil?
-
-      hmrc_response_use_case_one.correlation_id
+      Sentry.capture_message("HMRC response still pending")
     end
 
     def hmrc_still_pending?
