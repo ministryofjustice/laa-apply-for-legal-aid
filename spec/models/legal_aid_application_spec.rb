@@ -1298,18 +1298,18 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "hmrc_employment_income?" do
-    let(:laa) { create :legal_aid_application }
-
     context "when there are no Employment records" do
+      let(:laa) { create(:legal_aid_application) }
+
+      before { laa.employments.destroy_all }
+
       it "returns false" do
         expect(laa.hmrc_employment_income?).to eq false
       end
     end
 
     context "when there are Employment records" do
-      let!(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
-
-      before { hmrc_response.__send__(:persist_employment_records) }
+      let(:laa) { create(:legal_aid_application, :with_employments) }
 
       it "returns true" do
         expect(laa.hmrc_employment_income?).to eq true
