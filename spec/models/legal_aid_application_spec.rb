@@ -1309,7 +1309,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when there are Employment records" do
-      let(:laa) { create(:legal_aid_application, :with_employments) }
+      let(:laa) { create(:legal_aid_application, :with_multiple_employments) }
 
       it "returns true" do
         expect(laa.hmrc_employment_income?).to eq true

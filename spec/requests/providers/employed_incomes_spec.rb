@@ -1,14 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "employed incomes request", type: :request do
-  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant }
-  let(:applicant) { create :applicant, :not_employed }
+  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :with_single_employment, applicant: applicant }
+  let(:applicant) { create(:applicant) }
   let(:provider) { application.provider }
-
-  before do
-    hmrc_response = create(:hmrc_response, :use_case_one, legal_aid_application_id: application.id)
-    hmrc_response.__send__(:persist_employment_records)
-  end
 
   describe "GET /providers/applications/:id/employed_income" do
     subject { get providers_legal_aid_application_employment_income_path(application) }
@@ -29,13 +24,17 @@ RSpec.describe "employed incomes request", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "displays correct text when applicant is not_employed" do
-        expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.not_employed"))
-        expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.hmrc_not_employed"))
+      context "when applicant is not employed" do
+        let(:applicant) { create(:applicant, :not_employed) }
+
+        it "displays correct text when applicant is not_employed" do
+          expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.not_employed"))
+          expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.hmrc_not_employed"))
+        end
       end
 
       context "when applicant is employed" do
-        let(:applicant) { create :applicant, :employed }
+        let(:applicant) { create(:applicant, :employed) }
 
         it "displays correct text" do
           expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.employed", name: applicant.full_name))
