@@ -498,13 +498,6 @@ RSpec/EmptyLineAfterSubject:
     - 'spec/services/pdf_converter_spec.rb'
     - 'spec/services/populators/transaction_type_populator_spec.rb'
 
-# Offense count: 43
-# Cop supports --auto-correct.
-# Configuration parameters: CustomTransform, IgnoredWords.
-RSpec/ExampleWording:
-  Exclude:
-    - 'spec/support/shared_examples/provider_auth_shared_examples.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/ExpectActual:
