@@ -151,6 +151,29 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(call).to be_truthy }
     end
 
+    context "when response data has \"individuals/matching/individual\" details matching request with case differences" do
+      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+
+      let(:valid_individual_response) do
+        { "firstName" => applicant.first_name.upcase,
+          "lastName" => applicant.last_name.upcase,
+          "nino" => applicant.national_insurance_number.downcase,
+          "dateOfBirth" => applicant.date_of_birth }
+      end
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "income/paye/paye" => { "income" => [] } },
+          ] }
+      end
+
+      it { expect(call).to be_truthy }
+    end
+
     context "when response data \"individuals/matching/individual\" details are missing" do
       let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
 
