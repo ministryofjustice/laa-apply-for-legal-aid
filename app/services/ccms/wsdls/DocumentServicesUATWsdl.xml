@@ -116,7 +116,7 @@
     </wsdl:binding>
     <wsdl:service name="DocumentServices_ep">
         <wsdl:port name="DocumentServices_pt" binding="tns:DocumentServicesSOAPBinding">
-            <soap:address location="http://ccms-soa-managed.stg.legalservices.gov.uk:7777/soa-infra/services/default/DocumentServices/DocumentServices_ep"/>
+            <soap:address location="http://ccms-soa-managed.stg.legalservices.gov.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

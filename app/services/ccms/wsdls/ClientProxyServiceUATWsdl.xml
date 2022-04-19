@@ -141,7 +141,7 @@
     </wsdl:binding>
     <wsdl:service name="ClientServices_ep">
         <wsdl:port name="ClientServices_pt" binding="tns:ClientServicesSOAPBinding">
-            <soap:address location="http://ccms-soa-managed.stg.legalservices.gov.uk:7777/soa-infra/services/default/ClientServices/ClientServices_ep"/>
+            <soap:address location="http://ccms-soa-managed.stg.legalservices.gov.uk/soa-infra/services/default/ClientServices/ClientServices_ep"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
