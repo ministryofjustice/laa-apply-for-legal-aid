@@ -545,7 +545,7 @@ module CCMS
         end
 
         context "attributes omitted from payload" do
-          it "should not be present" do
+          it "does not display the attributes in the payload" do
             omitted_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
