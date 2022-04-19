@@ -503,7 +503,6 @@ RSpec/EmptyLineAfterSubject:
 # Configuration parameters: CustomTransform, IgnoredWords.
 RSpec/ExampleWording:
   Exclude:
-    - 'spec/policies/legal_aid_application_policy_spec.rb'
     - 'spec/support/shared_examples/provider_auth_shared_examples.rb'
 
 # Offense count: 1
