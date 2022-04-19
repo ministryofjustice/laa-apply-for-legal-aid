@@ -169,7 +169,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       context "amounts are not valid" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
-        it "it empties amounts" do
+        it "empties amounts" do
           subject.save
           savings_amount.reload
           attributes.each do |attr|
