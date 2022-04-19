@@ -4,6 +4,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
   describe ".call" do
     subject(:call) { described_class.call(hmrc_response, applicant:) }
 
+    let(:instance) { described_class.new(hmrc_response, applicant:) }
     let(:applicant) { create(:legal_aid_application, :with_applicant).applicant }
 
     let(:valid_individual_response) do
@@ -35,8 +36,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when applicant is nil" do
-      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash) }
       let(:instance) { described_class.new(hmrc_response, applicant: nil) }
+      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash) }
 
       it { expect(instance.call).to be_falsey }
 
@@ -47,8 +48,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: nil) }
-      let(:instance) { described_class.new(hmrc_response, applicant:) }
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+      let(:response_hash) { nil }
 
       it { expect(call).to be_falsey }
 
@@ -59,12 +60,18 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response is empty hash" do
-      let(:hmrc_response) { create(:hmrc_response, response: {}) }
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+      let(:response_hash) { {} }
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message).size).to be >= 1
+      }
     end
 
-    context "when response status is not completed" do
+    context "when response status is not \"completed\"" do
       let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
 
       let(:response_hash) do
@@ -73,7 +80,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("response status must be \"completed\"")
+      }
     end
 
     context "when response submission is nil" do
@@ -85,7 +97,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("response submission must be present")
+      }
     end
 
     context "when response submission is blank" do
@@ -97,7 +114,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("response submission must be present")
+      }
     end
 
     context "when response submission is missing" do
@@ -108,7 +130,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("response submission must be present")
+      }
     end
 
     context "when response data is a hash" do
@@ -120,7 +147,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => {} }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("data must be an array")
+      }
     end
 
     context "when response data is nil" do
@@ -132,7 +164,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => nil }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("data must be an array")
+      }
     end
 
     context "when response data has \"individuals/matching/individual\" details matching request" do
@@ -185,7 +222,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           ] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+      }
     end
 
     context "when response data \"individuals/matching/individual\" details are empty" do
@@ -200,7 +242,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           ] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+      }
     end
 
     context "when response data \"individuals/matching/individual\" details has invalid dateOfBirth date" do
@@ -221,7 +268,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           ] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+      }
     end
 
     context "when response data \"individuals/matching/individual\" details do not match applicant" do
@@ -244,7 +296,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" is nil" do
@@ -256,7 +313,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [{ "income/paye/paye" => { "income" => nil } }] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("income must be an array")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" is hash" do
@@ -268,7 +330,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [{ "income/paye/paye" => { "income" => {} } }] }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("income must be an array")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains invalid inPayPeriod1 string" do
@@ -294,7 +361,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("inPayPeriod1 must be numeric")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid inPayPeriod1 float" do
@@ -383,7 +455,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("inPayPeriod1 must be numeric")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid format of paymentDate" do
@@ -438,7 +515,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains non-iso8601 format of paymentDate" do
@@ -465,7 +547,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
+      }
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains multiple paymentDates including one invalid" do
@@ -499,7 +586,12 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         }
       end
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
+      }
     end
 
     context "when response data is invalid" do
