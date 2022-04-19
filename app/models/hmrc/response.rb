@@ -33,8 +33,7 @@ module HMRC
   private
 
     def persist_employment_records
-      valid = HMRC::ParsedResponse::Validator.call(self, applicant: legal_aid_application.applicant)
-      HMRC::ParsedResponse::Persistor.call(legal_aid_application) if valid
+      HMRC::ParsedResponse::Persistor.call(self)
     end
   end
 end
