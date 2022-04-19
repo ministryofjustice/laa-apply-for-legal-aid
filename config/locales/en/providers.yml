@@ -256,6 +256,7 @@ en:
             be prosecuted
             need to pay a financial penalty
             have their legal aid stopped and have to pay back the costs
+        confirmation_checkbox: I confirm the above is correct and that I'll obtain a signed declaration from my client.
     check_passported_answers:
       show:
         h1-heading: Check your answers
