@@ -86,7 +86,7 @@ RSpec.describe "student_finance", type: :request do
       context "when saying no" do
         let(:yes_or_no) { "false" }
 
-        it "should redirect to the check answers page" do
+        it "redirects to the check answers page" do
           expect(response).to redirect_to(citizens_check_answers_path)
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe "student_finance", type: :request do
       context "when saying yes" do
         let(:yes_or_no) { "true" }
 
-        it "should redirect to the annual amounts page" do
+        it "redirects to the annual amounts page" do
           expect(response).to redirect_to(citizens_student_finances_annual_amount_path)
         end
       end

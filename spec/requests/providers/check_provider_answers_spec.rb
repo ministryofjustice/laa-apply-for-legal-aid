@@ -189,11 +189,11 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         subject
       end
 
-      it "should redirect back" do
+      it "redirects back" do
         expect(response).to redirect_to(providers_legal_aid_application_proceedings_types_path(application, back: true))
       end
 
-      it 'should change the stage back to "entering_applicant_details' do
+      it 'changes the stage back to "entering_applicant_details' do
         subject
         expect(application.reload.entering_applicant_details?).to be_truthy
       end

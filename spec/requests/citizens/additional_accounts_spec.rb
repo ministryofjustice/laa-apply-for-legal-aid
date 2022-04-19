@@ -57,7 +57,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it "should display an error" do
+    it "displays an error" do
       expect(response.body).to match("govuk-error-summary")
       expect(response.body).to include("Select yes if you have accounts with other banks")
     end
@@ -103,7 +103,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it "should display an error" do
+    it "displays an error" do
       expect(response.body).to match("govuk-error-summary")
       expect(response.body).to include("Select yes if you have current accounts you cannot access online")
     end

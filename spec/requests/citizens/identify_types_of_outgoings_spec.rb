@@ -44,7 +44,7 @@ RSpec.describe "IndentifyTypesOfOutgoingsController", type: :request do
       expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)
     end
 
-    it "should display an error" do
+    it "displays an error" do
       subject
       expect(response.body).to match("govuk-error-summary")
       expect(unescaped_response_body).to match(I18n.t("citizens.identify_types_of_outgoings.update.none_selected"))

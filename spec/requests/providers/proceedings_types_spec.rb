@@ -43,7 +43,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
             get providers_legal_aid_application_address_selection_path(legal_aid_application)
           end
 
-          it "should redirect to the address lookup page" do
+          it "redirects to the address lookup page" do
             subject
             expect(response.body).to have_back_link(providers_legal_aid_application_address_selection_path(legal_aid_application, back: true))
           end
@@ -54,7 +54,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
             get providers_legal_aid_application_address_path(legal_aid_application)
           end
 
-          it "should redirect to manual address pagelookup page" do
+          it "redirects to the manual address page lookup page" do
             subject
             expect(response.body).to have_back_link(providers_legal_aid_application_address_path(legal_aid_application, back: true))
           end

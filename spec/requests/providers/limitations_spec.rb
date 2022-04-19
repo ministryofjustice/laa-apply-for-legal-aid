@@ -103,7 +103,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
                                      emergency_cost_reasons: "this is just a test" } }
         end
 
-        it "should display an error" do
+        it "displays an error" do
           subject
           expect(response.body).to match("govuk-error-summary")
           expect(response.body).to include("Cost limit must be an amount of money, like 2,500")
