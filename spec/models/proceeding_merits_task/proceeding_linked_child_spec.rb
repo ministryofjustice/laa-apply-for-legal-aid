@@ -11,7 +11,7 @@ module ProceedingMeritsTask
       context "involved child belongs to this application" do
         let(:involved_child) { create :involved_child, legal_aid_application: laa }
 
-        it "it is valid" do
+        it "is valid" do
           expect(linked_child).to be_valid
         end
       end
