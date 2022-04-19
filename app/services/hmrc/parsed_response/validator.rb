@@ -23,7 +23,7 @@ module HMRC
         validate_response_income
         validate_response_individual
 
-        AlertManager.capture_message("HMRC Response is unacceptable") unless errors.empty?
+        AlertManager.capture_message("HMRC Response is unacceptable - #{errors.map(&:message).join(', ')}") unless errors.empty?
         errors.empty?
       end
 

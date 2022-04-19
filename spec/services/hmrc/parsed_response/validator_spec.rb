@@ -595,16 +595,24 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data is invalid" do
-      let(:hmrc_response) { create(:hmrc_response, response: nil) }
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "foobar",
+          "data" => [
+            { "individuals/matching/individual" => {} },
+            { "income/paye/paye" => { "income" => [] } },
+          ] }
+      end
 
       before do
         allow(AlertManager).to receive(:capture_message)
         call
       end
 
-      it "sends error response to AlertManager" do
-        call
-        expect(AlertManager).to have_received(:capture_message)
+      it "sends message to AlertManager with errors" do
+        expect(AlertManager).to have_received(:capture_message).with("HMRC Response is unacceptable - response status must be \"completed\", individual must match applicant")
       end
     end
   end
