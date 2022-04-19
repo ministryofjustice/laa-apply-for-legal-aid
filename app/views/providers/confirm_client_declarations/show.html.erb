@@ -1,0 +1,24 @@
+<%= page_template page_title: t('.h1-heading') do %>
+
+  <p class="govuk-body"><%= t('.text') %></p>
+
+  <% params = { provider_firm_name: @legal_aid_application.provider.firm.name } %>
+  <%= bullet_list_from_translation_array('providers.confirm_client_declarations.show.list', params: params) %>
+
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive"><%= t('.sign_app_text') %></span>
+      <%= t('.sign_app_text') %>
+    </strong>
+    <strong class="govuk-warning-text__text">
+      <%= list_from_translation_path '.confirm_client_declarations.show.warning' %>
+    </strong>
+  </div>
+
+  <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_confirm_client_declaration_path(@legal_aid_application),
+            method: :patch,
+            show_draft: true
+        ) %>
+<% end %>
