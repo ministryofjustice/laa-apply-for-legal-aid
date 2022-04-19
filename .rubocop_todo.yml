@@ -503,13 +503,13 @@ RSpec/EmptyLineAfterSubject:
 # Configuration parameters: CustomTransform, IgnoredWords.
 RSpec/ExampleWording:
   Exclude:
-    - 'spec/forms/applicants/basic_details_form_spec.rb'
-    - 'spec/forms/applicants/email_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/own_home_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
-    - 'spec/forms/providers/proceeding_merits_task/linked_children_form_spec.rb'
-    - 'spec/forms/savings_amounts/offline_accounts_form_spec.rb'
-    - 'spec/forms/savings_amounts/savings_amounts_form_spec.rb'
+#    - 'spec/forms/applicants/basic_details_form_spec.rb'
+#    - 'spec/forms/applicants/email_form_spec.rb'
+#    - 'spec/forms/legal_aid_applications/own_home_form_spec.rb'
+#    - 'spec/forms/legal_aid_applications/shared_ownership_form_spec.rb'
+#    - 'spec/forms/providers/proceeding_merits_task/linked_children_form_spec.rb'
+#    - 'spec/forms/savings_amounts/offline_accounts_form_spec.rb'
+#    - 'spec/forms/savings_amounts/savings_amounts_form_spec.rb'
     - 'spec/helpers/providers_helper_spec.rb'
     - 'spec/models/proceeding_merits_task/proceeding_linked_child_spec.rb'
     - 'spec/policies/legal_aid_application_policy_spec.rb'

@@ -4,7 +4,7 @@ RSpec.describe Applicants::EmailForm, type: :form do
   subject { described_class.new(params) }
 
   describe ".model_name" do
-    it 'should be "Applicant"' do
+    it 'is an "Applicant"' do
       expect(described_class.model_name).to eq("Applicant")
     end
   end

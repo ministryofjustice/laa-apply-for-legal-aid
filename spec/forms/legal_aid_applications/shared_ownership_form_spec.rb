@@ -11,7 +11,7 @@ RSpec.describe LegalAidApplications::SharedOwnershipForm, type: :form do
   end
 
   describe ".model_name" do
-    it 'should be "LegalAidApplication"' do
+    it 'is a "LegalAidApplication"' do
       expect(described_class.model_name).to eq("LegalAidApplication")
     end
   end
