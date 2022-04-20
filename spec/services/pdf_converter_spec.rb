@@ -6,6 +6,7 @@ RSpec.describe PdfConverter do
   subject do
     described_class.call(attachment.id)
   end
+
   before { allow(Libreconv).to receive(:convert) }
 
   context "when attachment is statement of case" do

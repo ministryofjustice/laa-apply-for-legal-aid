@@ -77,6 +77,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe "POST /admin/search" do
     subject { post admin_application_search_path(params) }
+
     let(:params) { nil }
 
     before { subject }
@@ -97,6 +98,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe "POST /admin/legal_aid_applications/create_test_applications" do
     subject { post create_test_applications_admin_legal_aid_applications_path }
+
     let(:count) { 1 }
 
     it "creates test legal_aid_applications" do
@@ -112,6 +114,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe "DELETE /admin/legal_aid_applications/destroy_all" do
     subject { delete destroy_all_admin_legal_aid_applications_path }
+
     let(:scheduled_mail) { create :scheduled_mailing, :due }
     let(:scheduled_mail2) { create :scheduled_mailing, :due }
 
@@ -170,6 +173,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
 
   describe "DELETE /admin/legal_aid_applications/:legal_aid_application_id/destroy" do
     subject { delete admin_legal_aid_application_path(application) }
+
     let(:application) { legal_aid_applications.first }
 
     context "when enabled" do

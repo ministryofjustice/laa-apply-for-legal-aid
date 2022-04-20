@@ -6,6 +6,7 @@ module HMRC
 
     describe "validations" do
       subject(:valid) { response.valid? }
+
       it "is valid with all valid attributes" do
         expect(valid).to be true
       end

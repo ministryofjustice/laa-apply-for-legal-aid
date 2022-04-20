@@ -476,11 +476,13 @@ module CFE
       describe "maintenance_per_month" do
         context "when maintenance is received" do
           subject(:maintenance_per_month) { with_maintenance.maintenance_per_month }
+
           it { is_expected.to eq 150.00 }
         end
 
         context "when maintenance is not received" do
           subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+
           it { is_expected.to eq 0.00 }
         end
       end
@@ -488,11 +490,13 @@ module CFE
       describe "mei_student_loan" do
         context "when student_loan is received" do
           subject(:mei_student_loan) { with_student_finance.mei_student_loan }
+
           it { is_expected.to eq 125.00 }
         end
 
         context "when student_loan is not received" do
           subject(:mei_student_loan) { eligible_result.mei_student_loan }
+
           it { is_expected.to eq 0.00 }
         end
       end
@@ -664,36 +668,43 @@ module CFE
         context "with employments" do
           describe "gross_income" do
             subject(:gross_income) { with_employments.employment_income_gross_income }
+
             it { is_expected.to eq 1041.00 }
           end
 
           describe "gross_income" do
             subject(:benefits_in_kind) { with_employments.employment_income_benefits_in_kind }
+
             it { is_expected.to eq 16.60 }
           end
 
           describe "tax" do
             subject(:tax) { with_employments.employment_income_tax }
+
             it { is_expected.to eq(-104.10) }
           end
 
           describe "national_insurance" do
             subject(:tax) { with_employments.employment_income_national_insurance }
+
             it { is_expected.to eq(-18.66) }
           end
 
           describe "fixed_employment_deduction" do
             subject(:tax) { with_employments.employment_income_fixed_employment_deduction }
+
             it { is_expected.to eq(-45.00) }
           end
 
           describe "net_employment_income" do
             subject(:tax) { with_employments.employment_income_net_employment_income }
+
             it { is_expected.to eq 8898.84 }
           end
 
           describe "jobs" do
             subject(:jobs) { with_employments.jobs }
+
             it { is_expected.to be_kind_of(Array) }
             it { is_expected.to_not be_empty }
 
@@ -705,6 +716,7 @@ module CFE
 
           describe "jobs?" do
             subject(:jobs?) { with_employments.jobs? }
+
             it { is_expected.to be(true) }
           end
         end
@@ -712,48 +724,57 @@ module CFE
         context "with no employments" do
           describe "employment_income" do
             subject(:employment_income) { with_no_employments.employment_income }
+
             it { is_expected.to be_kind_of(Hash) }
             it { is_expected.to be_empty }
           end
 
           describe "jobs" do
             subject(:jobs) { with_no_employments.jobs }
+
             it { is_expected.to be_kind_of(Array) }
             it { is_expected.to be_empty }
           end
 
           describe "jobs?" do
             subject(:jobs?) { with_no_employments.jobs? }
+
             it { is_expected.to be(false) }
           end
 
           describe "gross_income" do
             subject(:gross_income) { with_no_employments.employment_income_gross_income }
+
             it { is_expected.to eq 0.0 }
           end
 
           describe "gross_income" do
             subject(:benefits_in_kind) { with_no_employments.employment_income_benefits_in_kind }
+
             it { is_expected.to eq 0.0 }
           end
 
           describe "tax" do
             subject(:tax) { with_no_employments.employment_income_tax }
+
             it { is_expected.to eq 0.0 }
           end
 
           describe "national_insurance" do
             subject(:tax) { with_no_employments.employment_income_national_insurance }
+
             it { is_expected.to eq 0.0 }
           end
 
           describe "fixed_employment_deduction" do
             subject(:tax) { with_no_employments.employment_income_fixed_employment_deduction }
+
             it { is_expected.to eq 0.0 }
           end
 
           describe "net_employment_income" do
             subject(:tax) { with_no_employments.employment_income_net_employment_income }
+
             it { is_expected.to eq 0.0 }
           end
         end

@@ -181,6 +181,7 @@ RSpec.describe Dependant, type: :model do
 
   describe "assets_over_threshold?" do
     subject(:assets_over_threshold) { dependant.assets_over_threshold? }
+
     let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, assets_value: assets_value }
 
     context "when assets_value is nil" do

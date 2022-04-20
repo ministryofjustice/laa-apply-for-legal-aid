@@ -2,10 +2,12 @@ require "rails_helper"
 
 RSpec.describe LegalFramework::ProceedingTypes::All, :vcr do
   subject(:all) { described_class }
+
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/all" }
 
   describe ".call" do
     subject(:call) { all.call }
+
     before { call }
 
     it "makes one external call" do

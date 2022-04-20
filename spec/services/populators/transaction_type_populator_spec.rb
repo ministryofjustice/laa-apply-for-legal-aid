@@ -4,6 +4,7 @@ module Populators
   RSpec.describe TransactionTypePopulator do
     describe ".call" do
       subject { described_class.call }
+
       let(:names) { TransactionType::NAMES }
       let(:credit_names) { names[:credit] }
       let(:debit_names) { names[:debit] }

@@ -70,6 +70,7 @@ RSpec.describe "provider confirm office", type: :request do
 
   describe "PATCH providers/confirm_office" do
     subject { patch providers_confirm_office_path, params: params }
+
     let(:params) { { binary_choice_form: { confirm_office: "true" } } }
 
     context "when the provider is authenticated" do

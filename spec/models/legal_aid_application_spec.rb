@@ -5,6 +5,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#capture_policy_disregards?" do
     subject { legal_aid_application.capture_policy_disregards? }
+
     context "calculation date nil" do
       before { expect(legal_aid_application).to receive(:calculation_date).and_return(nil) }
 
@@ -219,6 +220,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#generate_secure_id" do
     subject { legal_aid_application.generate_secure_id }
+
     let(:legal_aid_application) { create :legal_aid_application }
     let(:secure_data) { SecureData.last }
 
@@ -553,6 +555,7 @@ RSpec.describe LegalAidApplication, type: :model do
   # that then become redundant.
   describe ".destroy_all" do
     subject { described_class.destroy_all }
+
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_everything,
@@ -705,6 +708,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#bank_transactions" do
     subject { legal_aid_application.bank_transactions }
+
     let(:transaction_period_start_on) { "2019-08-10".to_date }
     let(:transaction_period_finish_on) { "2019-08-20".to_date }
     let(:date_before_start) { "2019-08-09 23:40 +0100".to_time }
@@ -1141,6 +1145,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#proceedings_by_name" do
     subject { laa.proceedings_by_name }
+
     let(:laa) { create :legal_aid_application }
 
     before do

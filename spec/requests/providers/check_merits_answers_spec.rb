@@ -6,6 +6,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
   describe "GET /providers/applications/:id/check_merits_answers" do
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }
+
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -122,6 +123,7 @@ RSpec.describe "check merits answers requests", type: :request do
     subject do
       patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
     end
+
     let(:application) do
       create :legal_aid_application,
              :with_everything,
@@ -207,6 +209,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
   describe 'PATCH "/providers/applications/:id/check_merits_answers/reset' do
     subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
+
     let(:application) do
       create :legal_aid_application,
              :with_everything,

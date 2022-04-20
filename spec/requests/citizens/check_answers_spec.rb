@@ -34,6 +34,7 @@ RSpec.describe "check your answers requests", type: :request do
 
   describe "GET /citizens/check_answers" do
     subject { get "/citizens/check_answers" }
+
     before { subject }
 
     it "returns http success" do

@@ -19,6 +19,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
   describe "GET /providers/merits_task_list" do
     subject { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
+
     context "the record does not exist" do
       let(:task_list) { build :legal_framework_serializable_merits_task_list }
 

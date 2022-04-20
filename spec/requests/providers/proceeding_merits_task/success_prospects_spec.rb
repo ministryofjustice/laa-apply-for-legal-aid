@@ -32,6 +32,7 @@ module Providers
 
       describe "PATCH providers/merits_task_list/:id/success_prospects" do
         subject { patch providers_merits_task_list_success_prospects_path(proceeding), params: params.merge(submit_button) }
+
         let(:success_prospect) { "marginal" }
         let(:success_prospect_details) { Faker::Lorem.paragraph }
         let(:params) do

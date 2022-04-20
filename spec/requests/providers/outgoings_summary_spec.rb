@@ -97,6 +97,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
 
   describe "POST /providers/income_summary" do
     subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
+
     let(:applicant) { create :applicant }
     let(:bank_provider) { create :bank_provider, applicant: applicant }
     let(:bank_account) { create :bank_account, bank_provider: bank_provider }
@@ -127,6 +128,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
 
     context "The transaction type category has no bank transactions" do
       subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
+
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: applicant }
       let(:bank_account) { create :bank_account, bank_provider: bank_provider }

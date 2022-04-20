@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe ProblemController, type: :request do
   describe "GET /problem" do
     subject { get problem_index_path }
+
     before { subject }
 
     it "renders successfully" do

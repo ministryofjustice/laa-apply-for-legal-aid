@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
   subject(:form) { described_class.new(form_params) }
+
   let!(:application) { create :legal_aid_application, :with_applicant_and_address }
 
   let(:params) do

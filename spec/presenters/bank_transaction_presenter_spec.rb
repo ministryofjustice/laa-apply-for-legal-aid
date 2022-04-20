@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe BankTransactionPresenter do
   subject(:presenter) { described_class.new(transaction, remarks) }
+
   let(:account) { create :bank_account, account_type: "SAVINGS" }
   let(:transaction) { create :bank_transaction, :uncategorised_credit_transaction, bank_account: account }
   let(:remarks) { [] }
@@ -84,6 +85,7 @@ RSpec.describe BankTransactionPresenter do
 
     describe "flagged" do
       subject(:flagged) { presenter.build_transaction_hash[:flagged] }
+
       context "when no remarks are passed from the CFE result" do
         it { is_expected.to be nil }
       end
@@ -103,6 +105,7 @@ RSpec.describe BankTransactionPresenter do
 
     describe "balance_running_total" do
       subject(:balance_running_total) { presenter.build_transaction_hash[:balance_running_total] }
+
       context "when there is a running balance value" do
         it { is_expected.to eq transaction.running_balance }
       end
@@ -116,6 +119,7 @@ RSpec.describe BankTransactionPresenter do
 
     describe "account_type" do
       subject(:account_type) { presenter.build_transaction_hash[:account_type] }
+
       context "when the transaction is from a savings account" do
         it { is_expected.to eq "Bank Savings" }
       end
@@ -129,6 +133,7 @@ RSpec.describe BankTransactionPresenter do
 
     describe "account_name" do
       subject(:account_name) { presenter.build_transaction_hash[:account_name] }
+
       it { is_expected.to eq account.bank_and_account_name }
     end
 

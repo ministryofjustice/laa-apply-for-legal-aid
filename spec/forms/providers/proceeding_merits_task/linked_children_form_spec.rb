@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form do
   subject(:form) { described_class.new(params) }
+
   let(:params) { { linked_children: linked_children_params, model: proceeding } }
   let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se013], set_lead_proceeding: :da001 }
   let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE013") }
@@ -49,6 +50,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
 
   describe ".save" do
     subject(:save_form) { form.save }
+
     let(:linked_children_params) do
       legal_aid_application.involved_children.each_with_index.map { |child, index| index.zero? ? child.id : "" }
     end
