@@ -68,6 +68,7 @@ module Providers
       let(:draft_button) { { draft_button: "Save as draft" } }
       let(:upload_button) { { upload_button: "Upload" } }
       let(:delete_button) { { delete_button: "Delete" } }
+      let(:continue_button) { { continue_button: "Save and continue" } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
 
@@ -245,6 +246,8 @@ module Providers
       end
 
       context "Continue button pressed" do
+        let(:button_clicked) { continue_button }
+
         context "model has no files attached previously" do
           context "no files uploaded" do
             let(:params_uploaded_evidence_collection) { {} }

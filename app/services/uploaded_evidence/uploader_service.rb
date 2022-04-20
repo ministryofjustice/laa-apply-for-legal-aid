@@ -1,0 +1,20 @@
+module UploadedEvidence
+  class UploaderService < Base
+    def call
+      upload_form.upload_button_pressed = true
+      if upload_form.valid? && upload_form.save
+        @successful_upload = successful_upload
+      else
+        @error_message = error_message
+      end
+
+      RequiredDocumentCategoryAnalyser.call(legal_aid_application)
+      required_documents
+      attachment_type_options
+
+      @next_action = :show
+
+      self
+    end
+  end
+end
