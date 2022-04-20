@@ -474,11 +474,13 @@ module CFE
       describe "maintenance_per_month" do
         context "when maintenance is received" do
           subject(:maintenance_per_month) { with_maintenance.maintenance_per_month }
+
           it { is_expected.to eq 150.00 }
         end
 
         context "when maintenance is not received" do
           subject(:maintenance_per_month) { eligible_result.maintenance_per_month }
+
           it { is_expected.to eq 0.00 }
         end
       end
@@ -486,11 +488,13 @@ module CFE
       describe "mei_student_loan" do
         context "when student_loan is received" do
           subject(:mei_student_loan) { with_student_finance.mei_student_loan }
+
           it { is_expected.to eq 125.00 }
         end
 
         context "when student_loan is not received" do
           subject(:mei_student_loan) { eligible_result.mei_student_loan }
+
           it { is_expected.to eq 0.00 }
         end
       end

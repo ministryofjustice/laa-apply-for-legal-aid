@@ -38,6 +38,7 @@ RSpec.describe SavingsAmount, type: :model do
 
     context "has no savings and investments" do
       subject { create :savings_amount, :all_nil }
+
       it "returns false" do
         expect(subject.values?).to eq false
       end
