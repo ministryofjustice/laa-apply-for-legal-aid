@@ -311,12 +311,6 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker
-    - run:
-        name: Kubectl deployment setup staging
-        command: |
-          $(aws ecr get-login --region eu-west-2 --no-include-email)
-          setup-kube-auth
-          kubectl config use-context staging
     - *decrypt_secrets
     - *authenticate_k8s_live
     - deploy:
