@@ -452,9 +452,6 @@ RSpec/ContextWording:
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterSubject:
   Exclude:
-    - 'spec/forms/legal_aid_applications/emergency_cost_override_form_spec.rb'
-    - 'spec/forms/opponents/opponent_form_spec.rb'
-    - 'spec/forms/providers/proceeding_merits_task/linked_children_form_spec.rb'
     - 'spec/helpers/providers_helper_spec.rb'
     - 'spec/jobs/reports_uploader_job_spec.rb'
     - 'spec/policies/legal_aid_application_policy_spec.rb'
