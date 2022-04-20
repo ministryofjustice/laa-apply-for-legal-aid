@@ -23,7 +23,7 @@ module HMRC
         validate_response_income
         validate_response_individual
 
-        AlertManager.capture_message("HMRC Response is unacceptable - #{errors.map(&:message).join(', ')}") unless errors.empty?
+        send_message unless errors.empty?
         errors.empty?
       end
 
@@ -90,6 +90,10 @@ module HMRC
 
       def error(*args)
         Error.new(*args)
+      end
+
+      def send_message
+        AlertManager.capture_message("HMRC Response is unacceptable (id: #{hmrc_response.id}) - #{errors.map(&:message).join(', ')}")
       end
     end
   end

@@ -612,7 +612,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       end
 
       it "sends message to AlertManager with errors" do
-        expect(AlertManager).to have_received(:capture_message).with("HMRC Response is unacceptable - response status must be \"completed\", individual must match applicant")
+        expect(AlertManager).to have_received(:capture_message)
+                                  .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\", individual must match applicant")
       end
     end
   end
