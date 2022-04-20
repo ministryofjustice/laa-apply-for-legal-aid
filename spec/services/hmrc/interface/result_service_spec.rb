@@ -40,7 +40,7 @@ RSpec.describe HMRC::Interface::ResultService do
   let(:expected_status) { 200 }
 
   before do
-    stub_request(:post, %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/oauth/token})
+    stub_request(:post, %r{(http|https).*laa-hmrc-interface.*\.cloud-platform\.service\.justice\.gov\.uk/oauth/token})
       .to_return(
         status: 200,
         body: '{"access_token":"test-bearer-token","token_type":"Bearer","expires_in":7200,"created_at":1582809000}',
@@ -107,7 +107,7 @@ RSpec.describe HMRC::Interface::ResultService do
     end
 
     context "when an error occurs in the result process" do
-      let(:get_url) { %r{http.*laa-hmrc-interface.*.cloud-platform.service.justice.gov.uk/api/v1/submission/result/.*} }
+      let(:get_url) { %r{(http|https).*laa-hmrc-interface.*\.cloud-platform\.service\.justice\.gov\.uk/api/v1/submission/result/.*} }
 
       before do
         stub_request(:get, get_url)
