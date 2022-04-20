@@ -11,6 +11,7 @@ RSpec.describe "SamlSessionsController", type: :request do
 
   describe "DELETE /providers/sign_out" do
     subject { delete destroy_provider_session_path }
+
     before { sign_in provider }
 
     it "logs user out" do
@@ -211,6 +212,7 @@ RSpec.describe "SamlSessionsController", type: :request do
 
   describe "Login failed at LAA Portal" do
     subject { post provider_session_path }
+
     before { allow_any_instance_of(Devise::SessionsController).to receive(:create).and_raise(StandardError) }
 
     it "redirects to access denied" do

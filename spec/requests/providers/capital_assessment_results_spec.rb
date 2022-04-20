@@ -5,6 +5,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
   describe "GET /providers/applications/:legal_aid_application_id/capital_assessment_result" do
     subject { get providers_legal_aid_application_capital_assessment_result_path(legal_aid_application) }
+
     let(:cfe_result) { create :cfe_v3_result }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
@@ -266,6 +267,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
   describe "PATCH /providers/applications/:id/capital_assessment_result" do
     subject { patch providers_legal_aid_application_capital_assessment_result_path(legal_aid_application), params: params.merge(submit_button) }
+
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:params) { {} }
 

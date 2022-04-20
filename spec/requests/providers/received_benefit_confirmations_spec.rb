@@ -31,6 +31,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
 
   describe "PATCH /providers/applications/:legal_aid_application_id/received_benefit_confirmation" do
     subject { patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: params }
+
     let(:params) { { dwp_override: { passporting_benefit: nil } } }
 
     before do

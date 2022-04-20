@@ -27,6 +27,7 @@ RSpec.describe "provider restrictions request", type: :request do
 
   describe "PATCH /providers/applications/:id/restrictions" do
     subject { patch providers_legal_aid_application_restrictions_path(application), params: params.merge(submit_button) }
+
     let(:params) do
       {
         legal_aid_application: {

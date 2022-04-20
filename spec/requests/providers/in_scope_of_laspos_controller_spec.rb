@@ -9,6 +9,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
 
   describe "GET /providers/:application_id/in_scope_of_laspo" do
     subject { get providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application) }
+
     before { subject }
 
     it "returns http success" do

@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "providers legal aid application requests", type: :request do
   describe "GET /providers/applications" do
     subject { get providers_legal_aid_applications_path(params) }
+
     let(:legal_aid_application) { create :legal_aid_application }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
@@ -132,6 +133,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
   describe "GET /providers/applications/search" do
     subject { get search_providers_legal_aid_applications_path(params) }
+
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
@@ -252,6 +254,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
   describe "POST /providers/applications" do
     subject { post providers_legal_aid_applications_path }
+
     let(:legal_aid_application) { LegalAidApplication.last }
 
     context "when the provider is authenticated" do

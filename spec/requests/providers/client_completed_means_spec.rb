@@ -47,6 +47,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
   describe "PATCH /providers/applications/:id/client_completed_means" do
     subject { patch providers_legal_aid_application_client_completed_means_path(legal_aid_application), params: params.merge(submit_button) }
+
     let(:params) { {} }
 
     context "when the provider is authenticated" do

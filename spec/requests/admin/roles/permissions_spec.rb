@@ -28,6 +28,7 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
 
   describe "PATCH /index" do
     subject { patch admin_roles_permission_path(firm.id), params: params.merge }
+
     let(:params) { {} }
 
     context "Save and Continue button pressed with no changes" do
