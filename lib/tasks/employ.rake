@@ -1,6 +1,6 @@
 desc "Temporary task to set employed journey up on localhost"
 task employ: :environment do
-  raise "rake employ can only be used in development" unless Rails.env.development?
+  raise "rake employ can only be used in development" if HostEnv.production?
 
   Setting.setting.update!(enable_employed_journey: true)
   Rails.logger.warn "Employed journey feature flag enabled"
