@@ -3,7 +3,7 @@
               method: :patch,
               local: true) do |form| %>
 
-  <%= page_template page_title: t('.h1-heading') do %>
+  <%= page_template page_title: t('.h1-heading'), form: form do %>
 
     <p class="govuk-body"><%= t('.text') %></p>
 
@@ -21,7 +21,7 @@
       </strong>
     </div>
 
-    <p><%= form.govuk_check_box :confirm_client_declaration, true, '', multiple: false, label: {text: t('.confirmation_checkbox')} %></p>
+    <p><%= form.govuk_check_box :client_declaration_confirmed, true, '', multiple: false, label: {text: t('.confirmation_checkbox')} %></p>
 
     <%= next_action_buttons(
             form: form,
