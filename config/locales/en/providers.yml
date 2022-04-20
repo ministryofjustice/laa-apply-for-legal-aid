@@ -220,23 +220,6 @@ en:
     check_merits_answers:
       show:
         h1-heading: Check your answers and submit application
-        sub-heading: Confirm the following
-        text: "Your client agrees that:"
-        list:
-          a: they've instructed %{provider_firm_name} to represent them
-          b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
-          c: we can share their information with other government departments like the DWP and HMRC
-          d: we can check their details with bank and credit reference agencies
-          e: they may have to pay towards legal aid
-          f: they may have to repay the legal costs if they keep or gain property or money at the end of the case (the 'statutory charge')
-          g: the information they’ve given is complete and correct
-          h: they’ll report any changes to their financial situation immediately
-        sign_app_text: "If your client gives wrong or incomplete information, does not report changes, or is found to have committed benefit fraud, they may:"
-        warning:
-          list: |
-            be prosecuted
-            need to pay a financial penalty
-            have their legal aid stopped and have to pay back the costs
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
