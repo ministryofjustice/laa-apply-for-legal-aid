@@ -399,6 +399,7 @@ workflows:
           - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_uat:
+          context: laa-apply-for-legalaid-uat
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
@@ -435,10 +436,12 @@ workflows:
           - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_main_uat:
+          context: laa-apply-for-legalaid-uat
           requires:
             - build_and_push
           <<: *generic-slack-fail-post-step
       - delete_uat_branch:
+          context: laa-apply-for-legalaid-uat
           requires:
             - build_and_push
           <<: *generic-slack-fail-post-step
