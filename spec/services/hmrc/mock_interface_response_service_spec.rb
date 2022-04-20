@@ -226,7 +226,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
       status: "processing",
       _links: [
         {
-          href: "https://main-laa-hmrc-interface-uat.apps.live-1.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f",
+          href: "https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/api/v1/submission/status/2151e48d-b88b-4c1e-af97-7987295f687f",
         },
       ],
     }
