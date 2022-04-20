@@ -679,7 +679,7 @@ module CCMS
         end
 
         context "attributes hard coded to true" do
-          it "should be hard coded to true" do
+          it "hard codes the attributes to true" do
             attributes = [
               [:global_means, "APPLICATION_FROM_APPLY"],
               [:global_means, "GB_INPUT_B_38WP3_2SCREEN"],
@@ -803,7 +803,7 @@ module CCMS
         end
 
         context "attributes omitted from payload" do
-          it "should not be present" do
+          it "does not display the attributes in the payload" do
             omitted_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
@@ -1261,7 +1261,7 @@ module CCMS
             end
           end
 
-          it "should be type of boolean hard coded to false" do
+          it "returns a type of boolean hard coded to false" do
             false_attributes.each do |entity_attribute_pair|
               entity, attribute = entity_attribute_pair
               block = XmlExtractor.call(xml, entity, attribute)
@@ -1284,7 +1284,7 @@ module CCMS
           end
 
           context "PROCEEDING_LEVEL_OF_SERVICE" do
-            it "should be the name of the lead proceeding default level of service" do
+            it "displays the name of the lead proceeding default level of service" do
               block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
               expect(block).to have_text_response proceeding.default_level_of_service_name
             end
@@ -1303,7 +1303,7 @@ module CCMS
           end
 
           context "attributes hard coded to false" do
-            it "should be type of text hard coded to false" do
+            it "returns a type of text hard coded to false" do
               attributes = [
                 [:global_means, "COST_LIMIT_CHANGED_FLAG"],
                 [:global_merits, "COST_LIMIT_CHANGED_FLAG"],
@@ -1440,7 +1440,7 @@ module CCMS
             expect(block).to have_text_response "YES"
           end
 
-          it "should be hard coded with the correct notification" do
+          it "returns a hard coded response with the correct notification" do
             attributes = [
               [:proceeding_merits, "INJ_RECENT_INCIDENT_DETAIL"],
               [:global_merits, "INJ_REASON_POLICE_NOT_NOTIFIED"],

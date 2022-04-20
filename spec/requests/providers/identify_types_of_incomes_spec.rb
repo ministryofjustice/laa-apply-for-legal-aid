@@ -59,7 +59,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
       expect { subject }.not_to change(LegalAidApplicationTransactionType, :count)
     end
 
-    it "should display an error" do
+    it "displays an error" do
       subject
       expect(response.body).to match("govuk-error-summary")
       expect(unescaped_response_body).to match(I18n.t("generic.none_selected"))
@@ -79,7 +79,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
         expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
       end
 
-      it "should redirect to the next step" do
+      it "redirects to the next step" do
         expect(subject).to redirect_to(flow_forward_path)
       end
 

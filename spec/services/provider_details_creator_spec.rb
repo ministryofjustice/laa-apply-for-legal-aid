@@ -122,11 +122,11 @@ RSpec.describe ProviderDetailsCreator do
         expect(provider.firm_id).to eq(existing_firm.id)
       end
 
-      it "should add the new offices" do
+      it "adds the new offices" do
         expect { subject }.to change { existing_firm.reload.offices.count }.by(2)
       end
 
-      it "should update the name of the firm" do
+      it "updates the name of the firm" do
         expect { subject }.to change { existing_firm.reload.name }.to(ccms_firm.name)
       end
     end

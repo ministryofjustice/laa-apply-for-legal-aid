@@ -108,7 +108,7 @@ RSpec.describe "check merits answers requests", type: :request do
         expect(response.body).to include(I18n.t("shared.check_answers.merits.items.attempts_to_settle"))
       end
 
-      it 'should change the state to "checking_merits_answers"' do
+      it 'changes the state to "checking_merits_answers"' do
         expect(application.reload.checking_merits_answers?).to be_truthy
       end
 

@@ -9,7 +9,7 @@ RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
   let(:form_params) { params.merge(model: application) }
 
   describe ".model_name" do
-    it 'should be "LegalAidApplication"' do
+    it 'is "LegalAidApplication"' do
       expect(described_class.model_name).to eq("LegalAidApplication")
     end
   end

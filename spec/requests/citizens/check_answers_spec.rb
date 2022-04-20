@@ -55,7 +55,7 @@ RSpec.describe "check your answers requests", type: :request do
       expect(response.body).to have_change_link(:payments, citizens_identify_types_of_outgoing_path)
     end
 
-    it 'should change the state to "checking_citizen_answers"' do
+    it 'changes the state to "checking_citizen_answers"' do
       expect(legal_aid_application.reload.checking_citizen_answers?).to be_truthy
     end
 
@@ -122,11 +122,11 @@ RSpec.describe "check your answers requests", type: :request do
       subject
     end
 
-    it "should redirect back" do
+    it "redirects back" do
       expect(response).to redirect_to(citizens_identify_types_of_outgoing_path(back: true))
     end
 
-    it 'should change the state back to "applicant_entering_means"' do
+    it 'changes the state back to "applicant_entering_means"' do
       expect(legal_aid_application.reload.applicant_entering_means?).to be true
     end
   end

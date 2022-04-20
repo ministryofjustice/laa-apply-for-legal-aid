@@ -162,7 +162,7 @@ RSpec.describe "check passported answers requests", type: :request do
         end
       end
 
-      it 'should change the state to "checking_passported_answers"' do
+      it 'changes the state to "checking_passported_answers"' do
         expect(application.reload.checking_passported_answers?).to be_truthy
       end
 

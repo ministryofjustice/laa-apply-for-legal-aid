@@ -134,7 +134,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       context "amounts are not valid" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
-        it "it empties amounts" do
+        it "empties amounts" do
           subject.save
           savings_amount.reload
           expect(savings_amount.offline_current_accounts).to be_nil

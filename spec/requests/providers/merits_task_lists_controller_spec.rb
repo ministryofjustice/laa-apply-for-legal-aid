@@ -74,7 +74,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
       context "evidence uploadf" do
         context "when at least one evidence type is required" do
-          it "should redirect to the new upload evidence page" do
+          it "redirects to the new upload evidence page" do
             expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
           end
         end

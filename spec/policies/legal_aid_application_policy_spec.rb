@@ -25,7 +25,7 @@ RSpec.describe LegalAidApplicationPolicy do
     let(:legal_aid_application) { create(:legal_aid_application) }
     let(:provider) { create(:provider) }
 
-    it "should not allow any action" do
+    it "does not allow any action" do
       controller_actions.each do |action|
         expect(subject).not_to permit(action)
       end
@@ -39,7 +39,7 @@ RSpec.describe LegalAidApplicationPolicy do
     context "controller is pre-DWP check" do
       let(:authorization_context) { AuthorizationContext.new(provider, pre_dwp_check_controller) }
 
-      it "should permit all actions" do
+      it "permits all actions" do
         controller_actions.each do |action|
           expect(subject).to permit(action)
         end
