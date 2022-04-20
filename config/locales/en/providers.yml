@@ -219,7 +219,7 @@ en:
         national_insurance_number: National Insurance number
     check_merits_answers:
       show:
-        h1-heading: Check your answers and submit application
+        h1-heading: Check your answers
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
@@ -965,6 +965,50 @@ en:
         monthly_income_before_tax: Monthly income before tax
         national_insurance: National insurance
         tax: Tax
+
+    review_and_print_applications:
+      show:
+        back_home: Back to your applications
+        heading: Review and print your application
+        client_name: Client
+        case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
+        ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
+        print_button: Print application
+        client_details_heading: Client details
+        proceedings_details_heading: What you're applying for
+        income_payments_and_assets_heading: Income, regular payments and assets
+        income: Income
+        irregular_income: Irregular income
+        other_income: Other income
+        passported: Passported
+        payments: Regular payments
+        change: Change
+        emergency_cost_limit: Emergency cost limit
+        section_delegated:
+          heading: Delegated functions
+        section_emergency:
+          heading: Covered under an emergency certificate
+        section_substantive:
+          heading: Covered under a substantive certificate
+        section_client:
+          heading: Client details
+        section_next:
+          heading: What happens next
+          content: We'll check with the Department for Work and Pensions to see if your client receives benefits that qualify for legal aid.
+        section_proceeding:
+          heading: Scope of legal aid
+        client_declaration:
+          heading: Client declaration
+          signature: "Client signature:"
+          date: "Date:"
+      employment_income_table:
+        benefits_in_kind: Benefits in kind
+        employment_details: Employment details
+        heading: Income
+        monthly_income_before_tax: Monthly income before tax
+        national_insurance: National insurance
+        tax: Tax
+
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?
