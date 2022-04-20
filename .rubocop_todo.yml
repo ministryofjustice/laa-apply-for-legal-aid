@@ -448,15 +448,6 @@ RSpec/ContextWording:
     - 'spec/workers/hmrc/submission_worker_spec.rb'
     - 'spec/workers/import_bank_data_worker_spec.rb'
 
-# Offense count: 91
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterSubject:
-  Exclude:
-    - 'spec/helpers/providers_helper_spec.rb'
-    - 'spec/jobs/reports_uploader_job_spec.rb'
-    - 'spec/policies/legal_aid_application_policy_spec.rb'
-    - 'spec/presenters/bank_transaction_presenter_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/ExpectActual:
