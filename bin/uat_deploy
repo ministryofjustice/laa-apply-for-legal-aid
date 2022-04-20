@@ -4,7 +4,6 @@ deploy() {
   IMG_REPO="$ECR_ENDPOINT/$GITHUB_TEAM_NAME_SLUG/$REPO_NAME"
   RELEASE_BRANCH=$(echo $CIRCLE_BRANCH | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
   RELEASE_NAME="apply-$RELEASE_BRANCH"
-  LEGACY_RELEASE_HOST="$RELEASE_BRANCH-$UAT_HOST"
   RELEASE_HOST="$RELEASE_BRANCH-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk"
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
   IDENTIFIER="$INGRESS_NAME-${K8S_UAT_NAMESPACE}-green"
@@ -18,7 +17,7 @@ deploy() {
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="$IMG_REPO" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set ingress.hosts="{$RELEASE_HOST,$LEGACY_RELEASE_HOST}" \
+                --set ingress.hosts="$RELEASE_HOST" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER"
 }
 
