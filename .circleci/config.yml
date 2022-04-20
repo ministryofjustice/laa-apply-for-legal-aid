@@ -324,7 +324,7 @@ jobs:
         command: |
           helm upgrade apply-for-legal-aid ./helm_deploy/apply-for-legal-aid/. \
                         --install --wait \
-                        --namespace=${KUBE_ENV_STAGING_NAMESPACE} \
+                        --namespace=${K8S_NAMESPACE} \
                         --values ./helm_deploy/apply-for-legal-aid/values-staging.yaml \
                         --set image.repository="${ECR_ENDPOINT}/${GITHUB_TEAM_NAME_SLUG}/${REPO_NAME}" \
                         --set image.tag="${CIRCLE_SHA1}"
