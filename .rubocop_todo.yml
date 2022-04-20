@@ -487,16 +487,6 @@ RSpec/EmptyLineAfterSubject:
     - 'spec/requests/providers/received_benefit_confirmations_spec.rb'
     - 'spec/requests/providers/restrictions_spec.rb'
     - 'spec/requests/saml_sessions_spec.rb'
-    - 'spec/services/admin/provider_details_service_spec.rb'
-    - 'spec/services/ccms/attribute_configuration_spec.rb'
-    - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/non_passported_variable_attributes_spec.rb'
-    - 'spec/services/enable_ccms_submission_spec.rb'
-    - 'spec/services/hmrc/create_responses_service_spec.rb'
-    - 'spec/services/hmrc/interface/result_service_spec.rb'
-    - 'spec/services/legal_framework/proceeding_types/all_spec.rb'
-    - 'spec/services/legal_framework/proceeding_types/proceeding_spec.rb'
-    - 'spec/services/pdf_converter_spec.rb'
-    - 'spec/services/populators/transaction_type_populator_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

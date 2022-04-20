@@ -2,11 +2,13 @@ require "rails_helper"
 
 RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
   subject(:proceeding) { described_class }
+
   let(:ccms_code) { "DA004" }
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/#{ccms_code}" }
 
   describe ".call" do
     subject(:call) { proceeding.call(ccms_code) }
+
     before { call }
 
     it "makes one external call" do

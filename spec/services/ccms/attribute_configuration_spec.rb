@@ -94,6 +94,7 @@ module CCMS
 
     context "standard" do
       subject { described_class.new(application_type: :standard).config }
+
       it "returns the existing un-merged hash" do
         expect(subject).to eq YAML.load_file(mock_configuration[:standard]).deep_symbolize_keys
       end
@@ -101,6 +102,7 @@ module CCMS
 
     context "invalid application type" do
       subject { described_class.new(application_type: :unknown_type).config }
+
       it "raises" do
         expect { subject }.to raise_error ArgumentError, "Invalid application type"
       end

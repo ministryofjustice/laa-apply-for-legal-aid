@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe EnableCCMSSubmission do
   subject(:enable_ccms_submission) { described_class.call }
+
   before do
     allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(allow_ccms_submission_var)
     allow(Setting).to receive(:enable_ccms_submission?).and_return(allow_ccms_submission_setting)

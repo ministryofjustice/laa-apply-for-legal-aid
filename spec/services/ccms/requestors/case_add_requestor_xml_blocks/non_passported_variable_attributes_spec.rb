@@ -732,6 +732,7 @@ module CCMS
 
         describe "LAND_INPUT_C_5WP2_13A" do
           subject(:block) { XmlExtractor.call(xml, :global_means, "LAND_INPUT_C_5WP2_13A") }
+
           before { legal_aid_application.other_assets_declaration.land_value = land_value }
 
           context "when the applicant owns land" do
@@ -754,6 +755,7 @@ module CCMS
 
         describe "MONEYDUE_INPUT_C_15WP2_14A" do
           subject(:block) { XmlExtractor.call(xml, :global_means, "MONEYDUE_INPUT_C_15WP2_14A") }
+
           before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
 
           context "when the applicant has money owed to them" do
@@ -797,6 +799,7 @@ module CCMS
 
         describe "MONEYDUE_INPUT_T_15WP2_15A" do
           subject(:block) { XmlExtractor.call(xml, :global_means, "MONEYDUE_INPUT_T_15WP2_15A") }
+
           before { legal_aid_application.other_assets_declaration.money_owed_value = money_owed }
 
           context "when the applicant has money owed to them" do
@@ -849,6 +852,7 @@ module CCMS
               test[:attributes].each do |attribute|
                 context attribute.to_s do
                   subject(:block) { XmlExtractor.call(xml, :global_means, attribute) }
+
                   let(:true_false) { [true, false] }
                   let!(:percentage_home) { example[:input] }
 
@@ -868,6 +872,7 @@ module CCMS
 
           describe "GB_INPUT_B_3WP2_27A" do
             subject(:block) { XmlExtractor.call(xml, :global_means, "GB_INPUT_B_3WP2_27A") }
+
             before { legal_aid_application.own_home = ownership }
 
             context "when ownership of main dwelling is declared in capital" do
@@ -902,6 +907,7 @@ module CCMS
 
           describe "GB_INPUT_C_3WP2_5A" do
             subject(:block) { XmlExtractor.call(xml, :global_means, "GB_INPUT_C_3WP2_5A") }
+
             before { legal_aid_application.update(own_home: ownership, property_value: 55_123.00) }
 
             context "when ownership of main dwelling is declared in capital" do
@@ -935,6 +941,7 @@ module CCMS
 
           describe "GB_INPUT_C_3WP2_7A" do
             subject(:block) { XmlExtractor.call(xml, :global_means, "GB_INPUT_C_3WP2_7A") }
+
             before { legal_aid_application.update(own_home: ownership, property_value: 55_123.00, outstanding_mortgage_amount: 25_432.00) }
 
             context "when ownership of main dwelling is declared in capital" do

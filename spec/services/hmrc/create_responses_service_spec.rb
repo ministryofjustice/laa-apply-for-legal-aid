@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe HMRC::CreateResponsesService do
   subject(:create_service) { described_class.new(legal_aid_application) }
+
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:hmrc_use_dev_mock) { false }
 

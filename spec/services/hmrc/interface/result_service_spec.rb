@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe HMRC::Interface::ResultService do
   subject(:submission_result) { described_class.new(hmrc_response) }
+
   let(:hmrc_response) { create(:hmrc_response, :in_progress) }
   let(:expected_body) do
     {
