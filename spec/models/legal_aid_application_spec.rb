@@ -106,7 +106,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       it "leaves benefit_check_result empty" do
         legal_aid_application.add_benefit_check_result
-        expect(legal_aid_application.benefit_check_result).to be nil
+        expect(legal_aid_application.benefit_check_result).to be_nil
       end
     end
   end

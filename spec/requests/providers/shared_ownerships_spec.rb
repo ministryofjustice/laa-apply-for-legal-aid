@@ -89,7 +89,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           it "update legal_aid_application record" do
-            expect(legal_aid_application.shared_ownership).to be nil
+            expect(legal_aid_application.shared_ownership).to be_nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
@@ -117,7 +117,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           it "update legal_aid_application record" do
-            expect(legal_aid_application.shared_ownership).to be nil
+            expect(legal_aid_application.shared_ownership).to be_nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
             expect(legal_aid_application.percentage_home).to eq 100.0
@@ -165,7 +165,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           it "update legal_aid_application record" do
-            expect(legal_aid_application.shared_ownership).to be nil
+            expect(legal_aid_application.shared_ownership).to be_nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end
@@ -193,7 +193,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           it "update legal_aid_application record" do
-            expect(legal_aid_application.shared_ownership).to be nil
+            expect(legal_aid_application.shared_ownership).to be_nil
             subject
             expect(legal_aid_application.reload.shared_ownership).to eq shared_ownership
           end

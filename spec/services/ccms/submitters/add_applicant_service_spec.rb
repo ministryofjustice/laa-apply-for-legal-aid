@@ -91,7 +91,7 @@ module CCMS
             expect(history.success).to be false
             expect(history.details).to match(/#{error}/)
             expect(history.details).to match(/oops/)
-            expect(history.response).to be nil
+            expect(history.response).to be_nil
             expect(history.request).to be_soap_envelope_with(
               command: "clientbim:ClientAddRQ",
               transaction_id: "20190301030405123456",

@@ -36,7 +36,7 @@ module Providers
 
           context "no statement of case record exists for the application" do
             it "displays an empty text box" do
-              expect(legal_aid_application.statement_of_case).to be nil
+              expect(legal_aid_application.statement_of_case).to be_nil
               expect(response.body).to have_text_area_with_id_and_content("application-merits-task-statement-of-case-statement-field", "")
             end
           end

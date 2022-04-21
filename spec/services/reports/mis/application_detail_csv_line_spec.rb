@@ -191,7 +191,7 @@ module Reports
               expect(value_for("User name")).to eq "psr001"
               expect(value_for("Office ID")).to eq "1T823E"
               expect(value_for("State")).to eq "initiated"
-              expect(value_for("CCMS reason")).to be nil
+              expect(value_for("CCMS reason")).to be_nil
               expect(value_for("CCMS reference number")).to eq "42226668880"
               expect(value_for("DWP Overridden")).to eq "No"
               expect(value_for("Case Type")).to eq "Passported"

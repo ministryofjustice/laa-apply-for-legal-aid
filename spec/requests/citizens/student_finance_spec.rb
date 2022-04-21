@@ -72,7 +72,7 @@ RSpec.describe "student_finance", type: :request do
       end
 
       it "does not update the legal aid application record" do
-        expect(legal_aid_application.reload.student_finance).to be nil
+        expect(legal_aid_application.reload.student_finance).to be_nil
       end
     end
 

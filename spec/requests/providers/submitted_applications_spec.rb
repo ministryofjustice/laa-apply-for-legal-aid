@@ -47,7 +47,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
     it "hides print buttons when printing the page" do
       print_buttons.each do |print_button|
-        expect(print_button.ancestors.at_css(".no-print")).to_not be(nil)
+        expect(print_button.ancestors.at_css(".no-print")).to_not be_nil
       end
     end
 

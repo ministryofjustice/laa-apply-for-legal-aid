@@ -46,7 +46,7 @@ RSpec.describe BankTransactionPresenter do
         describe "debit" do
           subject(:debit) { presenter.build_transaction_hash[:debit] }
 
-          it { is_expected.to be nil }
+          it { is_expected.to be_nil }
         end
       end
 
@@ -56,7 +56,7 @@ RSpec.describe BankTransactionPresenter do
         describe "credit" do
           subject(:credit) { presenter.build_transaction_hash[:credit] }
 
-          it { is_expected.to be nil }
+          it { is_expected.to be_nil }
         end
 
         describe "debit" do
@@ -71,7 +71,7 @@ RSpec.describe BankTransactionPresenter do
       subject(:category) { presenter.build_transaction_hash[:category] }
 
       context "when the meta_data is empty" do
-        it { is_expected.to be nil }
+        it { is_expected.to be_nil }
       end
 
       context "when the transaction has been categorized" do
@@ -87,7 +87,7 @@ RSpec.describe BankTransactionPresenter do
       subject(:flagged) { presenter.build_transaction_hash[:flagged] }
 
       context "when no remarks are passed from the CFE result" do
-        it { is_expected.to be nil }
+        it { is_expected.to be_nil }
       end
 
       context "when a single remark is passed from the CFE result as a symbol" do

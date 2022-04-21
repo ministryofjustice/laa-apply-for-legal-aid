@@ -148,13 +148,13 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
           attributes_except_cash.each do |attr|
             val = savings_amount.__send__(attr)
-            expect(val).to be(nil), "Attr #{attr}: expected nil, got #{val}"
+            expect(val).to be_nil, "Attr #{attr}: expected nil, got #{val}"
           end
         end
 
         it "does not empty amount if a checkbox is checked" do
           subject.save
-          expect(savings_amount.reload.cash).not_to be(nil)
+          expect(savings_amount.reload.cash).not_to be_nil
         end
 
         it "returns true" do
@@ -174,7 +174,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
           attributes.each do |attr|
             val = savings_amount.__send__(attr)
-            expect(val).to be(nil), "Attr #{attr}: expected nil, got #{val}"
+            expect(val).to be_nil, "Attr #{attr}: expected nil, got #{val}"
           end
         end
 

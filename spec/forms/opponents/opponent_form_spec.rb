@@ -46,7 +46,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
         it "extrapolates the police_notified_details for display on the page" do
           expect(subject.police_notified).to eq "false"
           expect(subject.police_notified_details_false).to eq "reasons police not told"
-          expect(subject.police_notified_details_true).to be nil
+          expect(subject.police_notified_details_true).to be_nil
         end
       end
 
@@ -56,7 +56,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
 
         it "extrapolates the police_notified_details for display on the page" do
           expect(subject.police_notified).to eq "true"
-          expect(subject.police_notified_details_false).to be nil
+          expect(subject.police_notified_details_false).to be_nil
           expect(subject.police_notified_details_true).to eq "reasons police told"
         end
       end
@@ -197,10 +197,10 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
 
       it "updates the opponent" do
-        expect(opponent.understands_terms_of_court_order).to be(nil)
-        expect(opponent.warning_letter_sent).to be(nil)
-        expect(opponent.police_notified).to be(nil)
-        expect(opponent.bail_conditions_set).to be(nil)
+        expect(opponent.understands_terms_of_court_order).to be_nil
+        expect(opponent.warning_letter_sent).to be_nil
+        expect(opponent.police_notified).to be_nil
+        expect(opponent.bail_conditions_set).to be_nil
       end
     end
 
@@ -221,10 +221,10 @@ RSpec.describe Opponents::OpponentForm, type: :form do
         expect(opponent.understands_terms_of_court_order).to be(false)
         expect(opponent.warning_letter_sent).to be(false)
         expect(opponent.police_notified).to be(false)
-        expect(opponent.understands_terms_of_court_order_details).to be(nil)
-        expect(opponent.warning_letter_sent_details).to be(nil)
-        expect(opponent.police_notified_details).to be(nil)
-        expect(opponent.bail_conditions_set_details).to be(nil)
+        expect(opponent.understands_terms_of_court_order_details).to be_nil
+        expect(opponent.warning_letter_sent_details).to be_nil
+        expect(opponent.police_notified_details).to be_nil
+        expect(opponent.bail_conditions_set_details).to be_nil
       end
     end
   end

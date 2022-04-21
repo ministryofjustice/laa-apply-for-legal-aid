@@ -70,7 +70,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
           it "does not record the value in the legal aid application table" do
             legal_aid_application.reload
-            expect(legal_aid_application.outstanding_mortgage_amount).to be nil
+            expect(legal_aid_application.outstanding_mortgage_amount).to be_nil
           end
         end
       end
@@ -124,7 +124,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
 
           it "does not record the value in the legal aid application table" do
             legal_aid_application.reload
-            expect(legal_aid_application.outstanding_mortgage_amount).to be nil
+            expect(legal_aid_application.outstanding_mortgage_amount).to be_nil
           end
         end
       end
