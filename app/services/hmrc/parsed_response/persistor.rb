@@ -1,20 +1,29 @@
 module HMRC
   module ParsedResponse
     class Persistor
-      def self.call(application)
-        new(application).call
+      def self.call(hmrc_response)
+        new(hmrc_response).call
       end
 
-      def initialize(application)
-        @application = application
+      def initialize(hmrc_response)
+        @hmrc_response = hmrc_response
+        @application = hmrc_response.legal_aid_application
       end
 
       def call
+        return unless persistable?
+
         destroy_existing_employments if @application.employments.any?
         persist_response
       end
 
     private
+
+      attr_reader :hmrc_response
+
+      def persistable?
+        Validator.call(hmrc_response, applicant: @application.applicant)
+      end
 
       def destroy_existing_employments
         @application.employments.map(&:destroy!)
@@ -22,18 +31,14 @@ module HMRC
       end
 
       def persist_response
-        return if no_hmrc_response? || no_data_in_hmrc_response?
+        return if no_employments_in_response?
 
         create_employments
         create_employment_payments
         @application.save!
       end
 
-      def no_hmrc_response?
-        hmrc_response.nil?
-      end
-
-      def no_data_in_hmrc_response?
+      def no_employments_in_response?
         employments_array.nil?
       end
 
@@ -50,12 +55,12 @@ module HMRC
         end
       end
 
-      def hmrc_response
-        @hmrc_response ||= Response.use_case_one_for(@application.id).response
+      def response
+        @response ||= hmrc_response.response
       end
 
       def data_array
-        @data_array ||= hmrc_response["data"]
+        @data_array ||= response["data"]
       end
 
       def paye_hash

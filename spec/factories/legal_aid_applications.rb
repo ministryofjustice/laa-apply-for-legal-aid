@@ -10,6 +10,14 @@ FactoryBot.define do
       applicant { build :applicant, with_bank_accounts: with_bank_accounts }
     end
 
+    trait :with_single_employment do
+      employments { [association(:employment)] }
+    end
+
+    trait :with_multiple_employments do
+      employments { build_list(:employment, 3) }
+    end
+
     trait :with_applicant_and_address do
       transient do
         with_bank_accounts { 0 }

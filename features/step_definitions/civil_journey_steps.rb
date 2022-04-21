@@ -313,17 +313,15 @@ Given("I start the merits application and the applicant has uploaded transaction
   )
 end
 
-Given("I start the means review journey with employment income from HMRC") do
+Given("I start the means review journey with employment income for a single job from HMRC") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
+    :with_single_employment,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
-
-  @hmrc_response = create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application)
-  @hmrc_response.__send__(:persist_employment_records)
 
   @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
@@ -336,17 +334,12 @@ Given("I start the means review journey with employment income from HMRC") do
 end
 
 Given("I start the means review journey with no employment income from HMRC") do
-  @applicant = create(
-    :applicant,
-    :employed,
-  )
-
   @legal_aid_application = create(
     :application,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
-    applicant: @applicant,
+    applicant: build(:applicant, :employed),
   )
 
   @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
@@ -363,13 +356,11 @@ Given("I start the means review journey with employment income for multiple jobs
   @legal_aid_application = create(
     :application,
     :with_applicant,
+    :with_multiple_employments,
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
-
-  @hmrc_response = create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application: @legal_aid_application)
-  @hmrc_response.__send__(:persist_employment_records)
 
   @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
