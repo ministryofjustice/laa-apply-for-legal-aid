@@ -6,7 +6,7 @@ module HMRC
 
     USE_CASES = %w[one two].freeze
     belongs_to :legal_aid_application, inverse_of: :hmrc_responses
-    validates :use_case, presence: true, inclusion: { in: USE_CASES, message: "Invalid use case" }
+    validates :use_case, presence: true, inclusion: { in: USE_CASES }
 
     def self.use_case_one_for(laa_id)
       where(legal_aid_application_id: laa_id, use_case: "one").order(:created_at).last

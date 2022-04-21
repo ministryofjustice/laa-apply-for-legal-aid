@@ -11,7 +11,7 @@ module Admin
 
       def update
         firm.update!(firm_params)
-        redirect_to admin_root_path, notice: "Permissions have been updated"
+        redirect_to admin_root_path, notice: t("admin.roles.notice")
         #  should this redirect take you back to the admin_roles_path instead, useful if multiple firms are being updated
       end
 
