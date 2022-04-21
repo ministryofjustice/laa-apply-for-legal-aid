@@ -6,7 +6,7 @@ RSpec.describe TransactionType, type: :model do
       let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
 
       it "returns true with a valid income_type" do
-        expect(described_class.for_income_type?(credit_transaction["name"])).to eq true
+        expect(described_class.for_income_type?(credit_transaction["name"])).to be true
       end
     end
 
@@ -14,7 +14,7 @@ RSpec.describe TransactionType, type: :model do
       let!(:debit_transaction) { create :transaction_type, :debit_with_standard_name }
 
       it "returns false when a non valid income type is used" do
-        expect(described_class.for_income_type?(debit_transaction["name"])).to eq false
+        expect(described_class.for_income_type?(debit_transaction["name"])).to be false
       end
     end
   end
@@ -117,13 +117,13 @@ RSpec.describe TransactionType, type: :model do
     describe "#excluded_benefit?" do
       context "is excluded benefit type" do
         it "returns true" do
-          expect(excluded_benefits.excluded_benefit?).to eq true
+          expect(excluded_benefits.excluded_benefit?).to be true
         end
       end
 
       context "not an excluded benefit type" do
         it "returns false" do
-          expect(pension.excluded_benefit?).to eq false
+          expect(pension.excluded_benefit?).to be false
         end
       end
     end

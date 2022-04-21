@@ -65,7 +65,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
 
     it "updates vehicle" do
       subject
-      expect(vehicle.reload.more_than_three_years_old).to eq(true)
+      expect(vehicle.reload.more_than_three_years_old).to be(true)
     end
 
     it "redirects to next step" do
@@ -112,7 +112,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
 
       it "updates vehicle" do
         subject
-        expect(vehicle.reload.more_than_three_years_old).to eq(true)
+        expect(vehicle.reload.more_than_three_years_old).to be(true)
       end
     end
 

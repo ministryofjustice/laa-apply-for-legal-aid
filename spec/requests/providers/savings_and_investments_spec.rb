@@ -106,7 +106,7 @@ RSpec.describe "providers savings and investments", type: :request do
 
             it "sets none_selected to true" do
               subject
-              expect(savings_amount.reload.none_selected).to eq(true)
+              expect(savings_amount.reload.none_selected).to be(true)
             end
           end
 

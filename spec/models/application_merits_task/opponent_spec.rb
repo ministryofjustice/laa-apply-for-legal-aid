@@ -6,7 +6,7 @@ module ApplicationMeritsTask
       subject(:opponent) { build :opponent }
 
       it { expect(opponent.ccms_relationship_to_case).to eq "OPP" }
-      it { expect(opponent.ccms_child?).to eq false }
+      it { expect(opponent.ccms_child?).to be false }
       it { expect(opponent.ccms_opponent_relationship_to_case).to eq "Opponent" }
     end
 

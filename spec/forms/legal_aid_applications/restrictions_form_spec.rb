@@ -27,7 +27,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
     end
 
     it "updates applications has restriction" do
-      expect(application.has_restrictions).to eq true
+      expect(application.has_restrictions).to be true
     end
 
     context "has no restrictions" do
@@ -35,7 +35,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       let(:restrictions_details) { "" }
 
       it "saves false into has restrictions" do
-        expect(application.has_restrictions).to eq false
+        expect(application.has_restrictions).to be false
       end
 
       it "does not add restrictions details" do
@@ -75,7 +75,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       end
 
       it "updates the legal_aid_application restrictions information" do
-        expect(application.has_restrictions).to eq true
+        expect(application.has_restrictions).to be true
         expect(application.restrictions_details).to_not be_empty
       end
     end

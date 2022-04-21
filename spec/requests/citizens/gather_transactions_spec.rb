@@ -34,7 +34,7 @@ RSpec.describe "citizen accounts request", type: :request do
     end
 
     it "does not add its url to history" do
-      expect(page_history_service.read).to eq nil
+      expect(page_history_service.read).to be nil
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe "citizen accounts request", type: :request do
     end
 
     it "has reset the page history" do
-      expect(page_history_service.read).to eq nil
+      expect(page_history_service.read).to be nil
     end
 
     context "background worker is still working" do

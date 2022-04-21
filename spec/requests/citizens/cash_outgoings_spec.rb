@@ -47,7 +47,7 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
         end
 
         it "updates the model attribute for no cash outgoings to true" do
-          expect(legal_aid_application.reload.no_cash_outgoings).to eq(true)
+          expect(legal_aid_application.reload.no_cash_outgoings).to be(true)
         end
       end
     end

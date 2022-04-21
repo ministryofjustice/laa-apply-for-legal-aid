@@ -155,7 +155,7 @@ module Providers
           it "updates the model" do
             subject
             chances_of_success.reload
-            expect(chances_of_success.success_likely).to eq(true)
+            expect(chances_of_success.success_likely).to be(true)
             expect(chances_of_success.success_prospect).to eq("likely")
           end
         end

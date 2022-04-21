@@ -9,14 +9,14 @@ RSpec.describe IdPSettingsAdapter do
     end
 
     it "returns true" do
-      expect(described_class.mock_saml?).to eq(true)
+      expect(described_class.mock_saml?).to be(true)
     end
 
     context 'when set "false"' do
       let(:setting) { "false" }
 
       it "returns false" do
-        expect(described_class.mock_saml?).to eq(false)
+        expect(described_class.mock_saml?).to be(false)
       end
     end
   end

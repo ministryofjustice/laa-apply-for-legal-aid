@@ -21,7 +21,7 @@ RSpec.describe "SamlSessionsController", type: :request do
 
     it "records id of logged out provider in session" do
       subject
-      expect(session["signed_out"]).to eq true
+      expect(session["signed_out"]).to be true
     end
 
     it "records the signout page as the feedback return path" do

@@ -63,7 +63,7 @@ RSpec.describe "does client use online banking requests", type: :request do
       end
 
       it "updates the application" do
-        expect(application.reload.provider_received_citizen_consent).to eq(true)
+        expect(application.reload.provider_received_citizen_consent).to be(true)
       end
 
       context "applicant is not employed after negative benefit check result" do

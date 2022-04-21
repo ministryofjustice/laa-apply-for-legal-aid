@@ -134,7 +134,7 @@ RSpec.describe "address requests", type: :request do
 
         it "records that address lookup was used" do
           subject
-          expect(address.lookup_used).to eq(true)
+          expect(address.lookup_used).to be(true)
         end
       end
 

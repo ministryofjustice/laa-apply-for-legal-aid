@@ -73,11 +73,11 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 10.years.ago }
 
       it "returns false" do
-        expect(dependant.over_fifteen?).to eq(false)
+        expect(dependant.over_fifteen?).to be(false)
       end
 
       it "returns false" do
-        expect(dependant.sixteen_or_over?).to eq(false)
+        expect(dependant.sixteen_or_over?).to be(false)
       end
     end
 
@@ -85,11 +85,11 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 20.years.ago }
 
       it "returns true" do
-        expect(dependant.over_fifteen?).to eq(true)
+        expect(dependant.over_fifteen?).to be(true)
       end
 
       it "returns true" do
-        expect(dependant.sixteen_or_over?).to eq(true)
+        expect(dependant.sixteen_or_over?).to be(true)
       end
     end
 
@@ -97,11 +97,11 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 15.years.ago + 6.months }
 
       it "returns false" do
-        expect(dependant.over_fifteen?).to eq(false)
+        expect(dependant.over_fifteen?).to be(false)
       end
 
       it "returns false" do
-        expect(dependant.sixteen_or_over?).to eq(false)
+        expect(dependant.sixteen_or_over?).to be(false)
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 15.years.ago - 6.months }
 
       it "returns false" do
-        expect(dependant.over_fifteen?).to eq(false)
+        expect(dependant.over_fifteen?).to be(false)
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 10.years.ago }
 
       it "returns true" do
-        expect(dependant.eighteen_or_less?).to eq(true)
+        expect(dependant.eighteen_or_less?).to be(true)
       end
     end
 
@@ -127,7 +127,7 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 20.years.ago }
 
       it "returns false" do
-        expect(dependant.eighteen_or_less?).to eq(false)
+        expect(dependant.eighteen_or_less?).to be(false)
       end
     end
 
@@ -135,7 +135,7 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 18.years.ago + 6.months }
 
       it "returns true" do
-        expect(dependant.eighteen_or_less?).to eq(true)
+        expect(dependant.eighteen_or_less?).to be(true)
       end
     end
 
@@ -143,7 +143,7 @@ RSpec.describe Dependant, type: :model do
       let(:date_of_birth) { 18.years.ago - 6.months }
 
       it "returns true" do
-        expect(dependant.eighteen_or_less?).to eq(true)
+        expect(dependant.eighteen_or_less?).to be(true)
       end
     end
   end

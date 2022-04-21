@@ -242,7 +242,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           it "sets none_selected to true" do
-            expect(oad.reload.none_selected).to eq(true)
+            expect(oad.reload.none_selected).to be(true)
           end
         end
 

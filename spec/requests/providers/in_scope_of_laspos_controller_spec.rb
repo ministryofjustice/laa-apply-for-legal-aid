@@ -30,7 +30,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
       let(:params) { { legal_aid_application: { in_scope_of_laspo: true } } }
 
       it "updates the record" do
-        expect(legal_aid_application.reload.in_scope_of_laspo).to eq(true)
+        expect(legal_aid_application.reload.in_scope_of_laspo).to be(true)
       end
 
       it "redirects to the next page" do
@@ -42,7 +42,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
       let(:params) { { legal_aid_application: { in_scope_of_laspo: false } } }
 
       it "updates the record" do
-        expect(legal_aid_application.reload.in_scope_of_laspo).to eq(false)
+        expect(legal_aid_application.reload.in_scope_of_laspo).to be(false)
       end
 
       it "redirects to the next page" do

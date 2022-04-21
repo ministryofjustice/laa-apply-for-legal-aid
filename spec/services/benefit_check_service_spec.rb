@@ -65,7 +65,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
   end

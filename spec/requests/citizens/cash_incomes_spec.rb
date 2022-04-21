@@ -47,7 +47,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         end
 
         it "updates the model attribute for no cash income to true" do
-          expect(legal_aid_application.reload.no_cash_income).to eq(true)
+          expect(legal_aid_application.reload.no_cash_income).to be(true)
         end
       end
     end

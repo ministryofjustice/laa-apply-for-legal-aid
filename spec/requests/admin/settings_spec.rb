@@ -52,9 +52,9 @@ RSpec.describe Admin::SettingsController, type: :request do
 
     it "change settings values" do
       subject
-      expect(setting.mock_true_layer_data?).to eq(true)
-      expect(setting.allow_welsh_translation?).to eq(true)
-      expect(setting.enable_employed_journey?).to eq(true)
+      expect(setting.mock_true_layer_data?).to be(true)
+      expect(setting.allow_welsh_translation?).to be(true)
+      expect(setting.enable_employed_journey?).to be(true)
     end
 
     it "create settings if they do not exist" do

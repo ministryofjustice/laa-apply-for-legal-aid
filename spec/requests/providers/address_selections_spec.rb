@@ -136,7 +136,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
       it "records that the lookup service was used" do
         subject
-        expect(applicant.address.lookup_used).to eq(true)
+        expect(applicant.address.lookup_used).to be(true)
       end
 
       context "when an address already exists" do

@@ -19,7 +19,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
       end
 
       it "is successful" do
-        expect(subject.success?).to eq(true)
+        expect(subject.success?).to be(true)
       end
     end
 

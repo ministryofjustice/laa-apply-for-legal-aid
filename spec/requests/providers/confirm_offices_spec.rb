@@ -103,7 +103,7 @@ RSpec.describe "provider confirm office", type: :request do
         end
 
         it "clears the existing office" do
-          expect(provider.reload.selected_office).to eq nil
+          expect(provider.reload.selected_office).to be nil
         end
       end
     end

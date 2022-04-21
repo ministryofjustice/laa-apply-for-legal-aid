@@ -249,7 +249,7 @@ RSpec.describe Applicant, type: :model do
       let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v3_result, applicant: }
 
       it "returns true" do
-        expect(applicant.valid_cfe_result_version?).to eq true
+        expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
@@ -257,7 +257,7 @@ RSpec.describe Applicant, type: :model do
       let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v4_result, applicant: }
 
       it "returns true" do
-        expect(applicant.valid_cfe_result_version?).to eq true
+        expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
@@ -270,7 +270,7 @@ RSpec.describe Applicant, type: :model do
       end
 
       it "returns false" do
-        expect(applicant.valid_cfe_result_version?).to eq false
+        expect(applicant.valid_cfe_result_version?).to be false
       end
     end
   end

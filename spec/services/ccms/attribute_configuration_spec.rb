@@ -23,7 +23,7 @@ module CCMS
             expect(new_attr_block[:value]).to eq "#new attr in existing section"
             expect(new_attr_block[:br100_meaning]).to eq "Bank accounts: new attr"
             expect(new_attr_block[:response_type]).to eq "text"
-            expect(new_attr_block[:user_defined]).to eq true
+            expect(new_attr_block[:user_defined]).to be true
           end
         end
 
@@ -34,7 +34,7 @@ module CCMS
             expect(modified_attr_block[:value]).to eq "#new_bank_balance_method"
             expect(modified_attr_block[:br100_meaning]).to eq "Bank accounts: Current Balance"
             expect(modified_attr_block[:response_type]).to eq "currency"
-            expect(modified_attr_block[:user_defined]).to eq true
+            expect(modified_attr_block[:user_defined]).to be true
           end
         end
 
@@ -42,11 +42,11 @@ module CCMS
           it "adds the new value and leaves all the other unchanged" do
             modified_attr_block = subject[:bank_acct][:ACCOUNT_NUMBER]
             expect(modified_attr_block.keys).to eq %i[value br100_meaning response_type user_defined generate_block?]
-            expect(modified_attr_block[:generate_block?]).to eq false
+            expect(modified_attr_block[:generate_block?]).to be false
             expect(modified_attr_block[:value]).to eq "#bank_account_account_number"
             expect(modified_attr_block[:br100_meaning]).to eq "Bank accounts: Account number"
             expect(modified_attr_block[:response_type]).to eq "text"
-            expect(modified_attr_block[:user_defined]).to eq true
+            expect(modified_attr_block[:user_defined]).to be true
           end
         end
       end

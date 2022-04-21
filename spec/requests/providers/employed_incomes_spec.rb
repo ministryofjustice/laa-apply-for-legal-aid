@@ -72,7 +72,7 @@ RSpec.describe "employed incomes request", type: :request do
         end
 
         it "updates legal aid application restriction information" do
-          expect(application.reload.extra_employment_information).to eq true
+          expect(application.reload.extra_employment_information).to be true
           expect(application.reload.extra_employment_information_details).to_not be_empty
         end
 
@@ -124,7 +124,7 @@ RSpec.describe "employed incomes request", type: :request do
           end
 
           it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.extra_employment_information).to eq true
+            expect(application.extra_employment_information).to be true
             expect(application.extra_employment_information_details).to_not be_empty
           end
 

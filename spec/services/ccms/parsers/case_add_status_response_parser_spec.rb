@@ -12,7 +12,7 @@ module CCMS
 
             it "extracts the status" do
               parser = described_class.new(expected_tx_id, response_xml)
-              expect(parser.success?).to eq true
+              expect(parser.success?).to be true
             end
 
             it "raises if the transaction_request_ids dont match" do

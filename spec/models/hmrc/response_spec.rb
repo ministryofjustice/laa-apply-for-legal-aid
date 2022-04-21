@@ -68,7 +68,7 @@ RSpec.describe HMRC::Response, type: :model do
       let(:response) { create :hmrc_response }
 
       it "returns false" do
-        expect(response.employment_income?).to eq false
+        expect(response.employment_income?).to be false
       end
     end
 
@@ -86,7 +86,7 @@ RSpec.describe HMRC::Response, type: :model do
       before { response.response = response_data_with_no_employment_income }
 
       it "returns false" do
-        expect(response.employment_income?).to eq false
+        expect(response.employment_income?).to be false
       end
     end
 
@@ -94,7 +94,7 @@ RSpec.describe HMRC::Response, type: :model do
       let(:response) { create :hmrc_response, :use_case_one }
 
       it "returns true" do
-        expect(response.employment_income?).to eq true
+        expect(response.employment_income?).to be true
       end
     end
   end

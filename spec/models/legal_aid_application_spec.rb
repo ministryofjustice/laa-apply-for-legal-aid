@@ -101,12 +101,12 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:benefit_check_response) { false }
 
       it "returns false" do
-        expect(legal_aid_application.add_benefit_check_result).to eq false
+        expect(legal_aid_application.add_benefit_check_result).to be false
       end
 
       it "leaves benefit_check_result empty" do
         legal_aid_application.add_benefit_check_result
-        expect(legal_aid_application.benefit_check_result).to eq nil
+        expect(legal_aid_application.benefit_check_result).to be nil
       end
     end
   end
@@ -141,7 +141,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "in pre-dwp-check state" do
       it "is true" do
-        expect(legal_aid_application.pre_dwp_check?).to eq true
+        expect(legal_aid_application.pre_dwp_check?).to be true
       end
     end
 
@@ -150,7 +150,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:state) { :checking_non_passported_means }
 
       it "is false" do
-        expect(legal_aid_application.pre_dwp_check?).to eq false
+        expect(legal_aid_application.pre_dwp_check?).to be false
       end
     end
 
@@ -158,7 +158,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:state) { :checking_passported_answers }
 
       it "is false" do
-        expect(legal_aid_application.pre_dwp_check?).to eq false
+        expect(legal_aid_application.pre_dwp_check?).to be false
       end
     end
   end
@@ -170,13 +170,13 @@ RSpec.describe LegalAidApplication, type: :model do
       let!(:statement_of_case) { create :statement_of_case, :with_original_file_attached, legal_aid_application: }
 
       it "is true" do
-        expect(legal_aid_application.statement_of_case_uploaded?).to eq true
+        expect(legal_aid_application.statement_of_case_uploaded?).to be true
       end
     end
 
     context "no statement of case files attached" do
       it "is false" do
-        expect(legal_aid_application.statement_of_case_uploaded?).to eq false
+        expect(legal_aid_application.statement_of_case_uploaded?).to be false
       end
     end
   end
@@ -298,7 +298,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:shared_ownership_reason) { LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.first }
 
       it "return true that the applicant owns a share of a property" do
-        expect(legal_aid_application.shared_ownership?).to eq true
+        expect(legal_aid_application.shared_ownership?).to be true
       end
     end
 
@@ -306,7 +306,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:shared_ownership_reason) { LegalAidApplication::SHARED_OWNERSHIP_NO_REASONS.first }
 
       it "return true that the applicant owns a share of a property" do
-        expect(legal_aid_application.shared_ownership?).to eq false
+        expect(legal_aid_application.shared_ownership?).to be false
       end
     end
   end
@@ -324,7 +324,7 @@ RSpec.describe LegalAidApplication, type: :model do
         let!(:transaction_type) { create :transaction_type, :credit, name: "salary" }
 
         it "returns false" do
-          expect(legal_aid_application.uncategorised_transactions?(:credit)).to eq false
+          expect(legal_aid_application.uncategorised_transactions?(:credit)).to be false
         end
       end
 
@@ -333,7 +333,7 @@ RSpec.describe LegalAidApplication, type: :model do
         let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type:, bank_account: }
 
         it "returns false" do
-          expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq false
+          expect(legal_aid_application.uncategorised_transactions?(:debit)).to be false
         end
       end
     end
@@ -348,7 +348,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
       context "income transactions" do
         it "returns true" do
-          expect(legal_aid_application.uncategorised_transactions?(:credit)).to eq true
+          expect(legal_aid_application.uncategorised_transactions?(:credit)).to be true
         end
       end
 
@@ -357,7 +357,7 @@ RSpec.describe LegalAidApplication, type: :model do
         let!(:transaction_type) { create :transaction_type, :debit }
 
         it "returns true" do
-          expect(legal_aid_application.uncategorised_transactions?(:debit)).to eq true
+          expect(legal_aid_application.uncategorised_transactions?(:debit)).to be true
         end
       end
     end
@@ -368,7 +368,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { legal_aid_application.update!(own_home: nil) }
 
       it "returns false" do
-        expect(legal_aid_application.own_home?).to eq(false)
+        expect(legal_aid_application.own_home?).to be(false)
       end
     end
 
@@ -376,7 +376,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:legal_aid_application) { create :legal_aid_application, :without_own_home }
 
       it "returns false" do
-        expect(legal_aid_application.own_home?).to eq(false)
+        expect(legal_aid_application.own_home?).to be(false)
       end
     end
 
@@ -384,7 +384,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
 
       it "returns true" do
-        expect(legal_aid_application.own_home?).to eq(true)
+        expect(legal_aid_application.own_home?).to be(true)
       end
     end
   end
@@ -402,7 +402,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
 
       it "returns true" do
-        expect(legal_aid_application.own_capital?).to eq(true)
+        expect(legal_aid_application.own_capital?).to be(true)
       end
     end
 
@@ -410,7 +410,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { legal_aid_application.update!(other_assets_declaration: create(:other_assets_declaration, :with_all_values)) }
 
       it "returns true" do
-        expect(legal_aid_application.own_capital?).to eq(true)
+        expect(legal_aid_application.own_capital?).to be(true)
       end
     end
 
@@ -418,7 +418,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { legal_aid_application.update!(savings_amount: create(:savings_amount, :with_values)) }
 
       it "returns true" do
-        expect(legal_aid_application.own_capital?).to eq(true)
+        expect(legal_aid_application.own_capital?).to be(true)
       end
     end
   end
@@ -970,7 +970,7 @@ RSpec.describe LegalAidApplication, type: :model do
     context "when an application is created" do
       let(:application) { create :legal_aid_application, :with_proceedings }
 
-      it { expect(application.used_delegated_functions?).to eq false }
+      it { expect(application.used_delegated_functions?).to be false }
 
       context "and the used_delegated_functions is changed and saved" do
         subject { application.save }
@@ -1219,7 +1219,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:laa) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
 
       it "returns true" do
-        expect(laa.section_8_proceedings?).to eq true
+        expect(laa.section_8_proceedings?).to be true
       end
     end
 
@@ -1228,7 +1228,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let!(:proceeding) { create :proceeding, :da001, legal_aid_application: laa }
 
       it "returns false" do
-        expect(laa.section_8_proceedings?).to eq false
+        expect(laa.section_8_proceedings?).to be false
       end
     end
   end
@@ -1304,7 +1304,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { laa.employments.destroy_all }
 
       it "returns false" do
-        expect(laa.hmrc_employment_income?).to eq false
+        expect(laa.hmrc_employment_income?).to be false
       end
     end
 
@@ -1312,7 +1312,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:laa) { create(:legal_aid_application, :with_multiple_employments) }
 
       it "returns true" do
-        expect(laa.hmrc_employment_income?).to eq true
+        expect(laa.hmrc_employment_income?).to be true
       end
     end
   end
@@ -1343,7 +1343,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "when no employment information has been entered by the provider" do
       it "returns false" do
-        expect(laa.manually_entered_employment_information?).to eq false
+        expect(laa.manually_entered_employment_information?).to be false
       end
     end
 
@@ -1354,7 +1354,7 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       it "returns true" do
-        expect(laa.manually_entered_employment_information?).to eq true
+        expect(laa.manually_entered_employment_information?).to be true
       end
     end
 
@@ -1362,7 +1362,7 @@ RSpec.describe LegalAidApplication, type: :model do
       before { laa.update!(full_employment_details: "test details") }
 
       it "returns true" do
-        expect(laa.manually_entered_employment_information?).to eq true
+        expect(laa.manually_entered_employment_information?).to be true
       end
     end
 
