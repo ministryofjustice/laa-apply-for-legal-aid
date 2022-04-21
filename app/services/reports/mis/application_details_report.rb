@@ -1,3 +1,5 @@
+require "csv"
+
 module Reports
   module MIS
     class ApplicationDetailsReport
