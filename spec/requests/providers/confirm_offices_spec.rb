@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe "provider confirm office", type: :request do
   let(:firm) { create :firm }
-  let!(:office) { create :office, firm: firm }
-  let!(:office2) { create :office, firm: firm }
-  let(:provider) { create :provider, firm: firm, selected_office: office }
+  let!(:office) { create :office, firm: }
+  let!(:office2) { create :office, firm: }
+  let(:provider) { create :provider, firm:, selected_office: office }
 
   describe "GET providers/confirm_office" do
     subject { get providers_confirm_office_path }
@@ -59,7 +59,7 @@ RSpec.describe "provider confirm office", type: :request do
       end
 
       context "provider has not selected office" do
-        let(:provider) { create :provider, firm: firm, selected_office: nil }
+        let(:provider) { create :provider, firm:, selected_office: nil }
 
         it "redirects to the select office page" do
           expect(response).to redirect_to providers_select_office_path
@@ -69,7 +69,7 @@ RSpec.describe "provider confirm office", type: :request do
   end
 
   describe "PATCH providers/confirm_office" do
-    subject { patch providers_confirm_office_path, params: params }
+    subject { patch providers_confirm_office_path, params: }
 
     let(:params) { { binary_choice_form: { confirm_office: "true" } } }
 

@@ -15,7 +15,7 @@ RSpec.describe Reports::MeritsReportCreator do
            :generating_reports,
            explicit_proceedings: %i[da004],
            set_lead_proceeding: :da004,
-           ccms_submission: ccms_submission
+           ccms_submission:
   end
   let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
   let!(:chances_of_success) do
@@ -34,7 +34,7 @@ RSpec.describe Reports::MeritsReportCreator do
     end
 
     context "when an attachment record exists" do
-      let!(:attachment) { create :attachment, :merits_report, legal_aid_application: legal_aid_application }
+      let!(:attachment) { create :attachment, :merits_report, legal_aid_application: }
       let(:expected_log) { "ReportsCreator: Merits report already exists for #{legal_aid_application.id} and is downloadable" }
 
       before { allow(Rails.logger).to receive(:info) }
@@ -68,7 +68,7 @@ RSpec.describe Reports::MeritsReportCreator do
                :with_proceedings,
                :with_everything,
                :generating_reports,
-               ccms_submission: ccms_submission,
+               ccms_submission:,
                explicit_proceedings: %i[da004],
                set_lead_proceeding: :da004
       end

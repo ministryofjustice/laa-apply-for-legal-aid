@@ -636,7 +636,7 @@ end
 Given("Bank transactions exist") do
   bank_provider = create :bank_provider, applicant: @legal_aid_application.applicant
   bank_account = create :bank_account, bank_provider: bank_provider
-  create_list :bank_transaction, 6, :credit, bank_account: bank_account
+  create_list :bank_transaction, 6, :credit, bank_account:
 end
 
 Then("I click on the View statements and add transactions link for {string}") do |transaction_type_name|

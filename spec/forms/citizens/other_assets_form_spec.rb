@@ -100,7 +100,7 @@ RSpec.describe Citizens::OtherAssetsForm do
         check_box_land_value: "true",
         land_value: "1,234.55",
         check_box_valuable_items_value: "true",
-        valuable_items_value: valuable_items_value,
+        valuable_items_value:,
         check_box_inherited_assets_value: "true",
         inherited_assets_value: "3,500",
         check_box_money_owed_value: "true",

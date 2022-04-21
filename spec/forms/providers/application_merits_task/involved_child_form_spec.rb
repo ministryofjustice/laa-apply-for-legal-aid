@@ -36,7 +36,7 @@ module Providers
         context "missing date of birth" do
           let(:params) do
             {
-              full_name: full_name,
+              full_name:,
               date_of_birth_3i: "",
               date_of_birth_2i: "",
               date_of_birth_1i: "",
@@ -52,7 +52,7 @@ module Providers
         context "invalid date of birth" do
           let(:params) do
             {
-              full_name: full_name,
+              full_name:,
               date_of_birth_3i: "32",
               date_of_birth_2i: "2",
               date_of_birth_1i: "2021",

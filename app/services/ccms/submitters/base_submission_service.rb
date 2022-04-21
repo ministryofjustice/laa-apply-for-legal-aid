@@ -23,22 +23,22 @@ module CCMS
     private
 
       def create_history(from_state, to_state, xml_request, xml_response)
-        SubmissionHistory.create submission: submission,
-                                 from_state: from_state,
-                                 to_state: to_state,
+        SubmissionHistory.create submission:,
+                                 from_state:,
+                                 to_state:,
                                  success: true,
                                  request: xml_request,
                                  response: xml_response
       end
 
       def create_ccms_failure_history(from_state, error, xml_request, response: nil)
-        SubmissionHistory.create submission: submission,
-                                 from_state: from_state,
+        SubmissionHistory.create submission:,
+                                 from_state:,
                                  to_state: :failed,
                                  success: false,
                                  request: xml_request,
                                  details: error.is_a?(Exception) ? format_exception(error) : error,
-                                 response: response
+                                 response:
       end
 
       def format_exception(error)

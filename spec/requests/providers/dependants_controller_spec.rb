@@ -26,7 +26,7 @@ RSpec.describe Providers::DependantsController, type: :request do
   describe "GET /providers/applications/:legal_aid_application_id/dependants/:dependant_id" do
     subject { get(providers_legal_aid_application_dependant_path(legal_aid_application, dependant)) }
 
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+    let(:dependant) { create :dependant, legal_aid_application: }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -47,7 +47,7 @@ RSpec.describe Providers::DependantsController, type: :request do
       )
     end
 
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+    let(:dependant) { create :dependant, legal_aid_application: }
     let(:params) do
       {
         dependant: {

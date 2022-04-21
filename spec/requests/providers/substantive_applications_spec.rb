@@ -8,7 +8,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: [:da004],
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
-           applicant: applicant
+           applicant:
   end
 
   let(:applicant) { create :applicant, :not_employed }
@@ -97,7 +97,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       end
 
       context "and a dwp_override with evidence" do
-        let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: legal_aid_application }
+        let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: }
 
         it "redirects to capital introductions" do
           subject
@@ -108,7 +108,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       end
 
       context "and a dwp_override without evidence" do
-        let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: legal_aid_application }
+        let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: }
 
         it "redirects to non_passported_client_instructions" do
           subject

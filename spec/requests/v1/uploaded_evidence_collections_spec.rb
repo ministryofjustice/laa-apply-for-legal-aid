@@ -5,11 +5,11 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
   let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
-  let(:params) { { legal_aid_application_id: id, file: file } }
+  let(:params) { { legal_aid_application_id: id, file: } }
   let(:i18n_error_path) { "activemodel.errors.models.uploaded_evidence_collection.attributes.original_file" }
 
   describe "POST /v1/uploaded_evidence_collections" do
-    subject { post v1_uploaded_evidence_collections_path, params: params }
+    subject { post v1_uploaded_evidence_collections_path, params: }
 
     context "when the application exists" do
       it "returns http success" do

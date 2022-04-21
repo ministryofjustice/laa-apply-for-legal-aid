@@ -31,12 +31,12 @@ class Address < ApplicationRecord
 
   def to_json(*_args)
     {
-      address_line_one: address_line_one,
-      address_line_two: address_line_two,
-      city: city,
-      county: county,
-      postcode: postcode,
-      lookup_id: lookup_id,
+      address_line_one:,
+      address_line_two:,
+      city:,
+      county:,
+      postcode:,
+      lookup_id:,
     }.to_json
   end
 

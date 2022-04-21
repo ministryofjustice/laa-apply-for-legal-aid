@@ -54,8 +54,8 @@ class Applicant < ApplicationRecord
 
   def json_for_hmrc
     {
-      first_name: first_name,
-      last_name: last_name,
+      first_name:,
+      last_name:,
       dob: date_of_birth,
       nino: national_insurance_number,
     }

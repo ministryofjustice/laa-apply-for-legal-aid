@@ -3,7 +3,7 @@ require "sidekiq/testing"
 
 RSpec.describe "FeedbacksController", type: :request do
   describe "POST /feedback" do
-    subject { post feedback_index_path, params: params, headers: { "HTTP_REFERER" => originating_page } }
+    subject { post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page } }
 
     let(:params) { { feedback: attributes_for(:feedback) } }
     let(:feedback) { Feedback.order(created_at: :asc).last }
@@ -18,7 +18,7 @@ RSpec.describe "FeedbacksController", type: :request do
     let(:additional_accounts_page) { "http://localhost:3000/citizens/additional_accounts" }
     let(:originating_page) { "page_outside_apply_service" }
     let(:provider) { create :provider }
-    let(:application) { create :application, provider: provider }
+    let(:application) { create :application, provider: }
     let(:page_history_id) { SecureRandom.uuid }
     let(:page_history) { [address_lookup_page, "/feedback"] }
 

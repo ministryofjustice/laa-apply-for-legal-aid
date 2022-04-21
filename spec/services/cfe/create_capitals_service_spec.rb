@@ -166,7 +166,7 @@ module CFE
     def add_account(payload, description, value)
       return if value.nil?
 
-      payload[:bank_accounts] << { description: description, value: value }
+      payload[:bank_accounts] << { description:, value: }
     end
 
     def expected_payload_without_current_account

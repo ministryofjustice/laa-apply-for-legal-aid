@@ -18,7 +18,7 @@ RSpec.describe Providers::HasOtherDependantsController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/has_other_dependants" do
-    subject { patch providers_legal_aid_application_has_other_dependants_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_has_other_dependants_path(legal_aid_application), params: }
 
     let(:params) do
       {

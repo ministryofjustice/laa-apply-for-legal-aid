@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Provider, type: :model do
   let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: firm }
+  let(:provider) { create :provider, firm: }
 
   describe "#update_details" do
     context "firm exists" do
@@ -32,7 +32,7 @@ RSpec.describe Provider, type: :model do
   describe "#user_permissions" do
     context "no permissions for this provider, but one permission for firm" do
       let(:firm) { create :firm, :with_passported_permissions }
-      let(:provider) { create :provider, :with_no_permissions, firm: firm }
+      let(:provider) { create :provider, :with_no_permissions, firm: }
 
       it "returns the firms permissions" do
         expect(provider.user_permissions).to eq [passported_permission]
@@ -41,7 +41,7 @@ RSpec.describe Provider, type: :model do
 
     context "no permissions for provider and their firm" do
       let(:firm) { create :firm, :with_no_permissions }
-      let(:provider) { create :provider, :with_no_permissions, firm: firm }
+      let(:provider) { create :provider, :with_no_permissions, firm: }
       let(:AlertManager) { instance_double(Tracker) }
 
       it "returns false" do
@@ -56,7 +56,7 @@ RSpec.describe Provider, type: :model do
 
     context "permissions exist for both firm and provider" do
       let(:firm) { create :firm, :with_passported_and_non_passported_permissions }
-      let(:provider) { create :provider, :with_passported_permissions, firm: firm }
+      let(:provider) { create :provider, :with_passported_permissions, firm: }
 
       it "returns the permission for the provider" do
         expect(provider.user_permissions).to eq [passported_permission]
@@ -74,7 +74,7 @@ RSpec.describe Provider, type: :model do
   end
 
   describe "#cms_apply_role?" do
-    let(:provider) { create :provider, roles: roles }
+    let(:provider) { create :provider, roles: }
 
     before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 

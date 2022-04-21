@@ -32,7 +32,7 @@ RSpec.describe Admin::SettingsController, type: :request do
   end
 
   describe "PATCH /admin/settings" do
-    subject { patch admin_settings_path, params: params }
+    subject { patch admin_settings_path, params: }
 
     let(:params) do
       {

@@ -4,8 +4,8 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
-  let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
-  let(:application) { create :application, :checking_applicant_details, applicant: applicant }
+  let(:applicant) { create :applicant, last_name:, date_of_birth:, national_insurance_number: }
+  let(:application) { create :application, :checking_applicant_details, applicant: }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
   let(:provider) { create :provider }
@@ -13,7 +13,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   describe "GET /providers/applications/:application_id/check_benefits", :vcr do
     subject { get "/providers/applications/#{application.id}/check_benefits" }
 
-    let!(:address) { create :address, applicant: applicant, lookup_used: address_lookup_used }
+    let!(:address) { create :address, applicant:, lookup_used: address_lookup_used }
 
     before { login }
 
@@ -38,7 +38,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context "state is provider_entering_means" do
-      let(:application) { create :application, :provider_entering_means, applicant: applicant }
+      let(:application) { create :application, :provider_entering_means, applicant: }
 
       it "transitions from provider_entering_means" do
         subject
@@ -117,7 +117,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:application_id/check_benefit" do
-    subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: params }
+    subject { patch providers_legal_aid_application_check_benefit_path(application.id), params: }
 
     before do
       login
@@ -214,7 +214,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     before { login_as provider }
 
     context "application passported" do
-      let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant: applicant, provider: provider }
+      let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider: }
 
       context "permissions passported" do
         let(:provider) { create :provider, :with_passported_permissions }

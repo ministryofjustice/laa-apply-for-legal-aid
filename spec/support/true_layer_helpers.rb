@@ -14,12 +14,12 @@ module TrueLayerHelpers
 
   def stub_true_layer_accounts
     results = MOCK_DATA[:accounts]
-    stub_true_layer_endpoint("/data/v1/accounts", { results: results }.to_json)
+    stub_true_layer_endpoint("/data/v1/accounts", { results: }.to_json)
   end
 
   def stub_true_layer_account_holders
     results = MOCK_DATA[:account_holders]
-    stub_true_layer_endpoint("/data/v1/info", { results: results }.to_json)
+    stub_true_layer_endpoint("/data/v1/info", { results: }.to_json)
   end
 
   def stub_true_layer_account_balances
@@ -33,7 +33,7 @@ module TrueLayerHelpers
     MOCK_DATA[:accounts].each do |account|
       results = account[:transactions]
       account_id = account[:account_id]
-      stub_true_layer_endpoint(%r{/#{account_id}/transactions}, { results: results }.to_json)
+      stub_true_layer_endpoint(%r{/#{account_id}/transactions}, { results: }.to_json)
     end
   end
 

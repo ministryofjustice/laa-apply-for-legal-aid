@@ -23,7 +23,7 @@ RSpec.describe Citizens::CashOutgoingsController, type: :request do
   describe "PATCH /citizens/cash_outgoing" do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      patch citizens_cash_outgoing_path, params: params
+      patch citizens_cash_outgoing_path, params:
     end
 
     context "valid update" do

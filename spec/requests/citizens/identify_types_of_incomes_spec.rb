@@ -28,7 +28,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   end
 
   describe "PATCH /citizens/identify_types_of_income" do
-    subject { patch citizens_identify_types_of_income_path, params: params }
+    subject { patch citizens_identify_types_of_income_path, params: }
 
     let(:transaction_type_ids) { [] }
     let(:params) do
@@ -166,7 +166,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         legal_aid_application.check_citizen_answers!
-        patch citizens_identify_types_of_income_path, params: params
+        patch citizens_identify_types_of_income_path, params:
       end
 
       context "change to none selected" do

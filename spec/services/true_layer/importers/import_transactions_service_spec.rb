@@ -14,7 +14,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let(:mock_transaction2) { mock_account[:transactions][1] }
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
     let(:transaction2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction2[:transaction_id]) }
-    let!(:existing_transaction) { create :bank_transaction, bank_account: bank_account }
+    let!(:existing_transaction) { create :bank_transaction, bank_account: }
 
     context "request is successful" do
       before do

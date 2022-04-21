@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ApplicantEmployedController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+  let(:legal_aid_application) { create :legal_aid_application, applicant: }
   let(:applicant) { create :applicant }
   let(:login) { login_as legal_aid_application.provider }
 
@@ -27,7 +27,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     end
 
     context "when the application is in use_ccms state" do
-      let(:legal_aid_application) { create :legal_aid_application, :use_ccms_employed, applicant: applicant }
+      let(:legal_aid_application) { create :legal_aid_application, :use_ccms_employed, applicant: }
 
       it "sets the state back to applicant details checked and removes the reason" do
         expect(legal_aid_application.reload.state).to eq "applicant_details_checked"
@@ -68,7 +68,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     end
 
     describe "POST /providers/:application_id/applicant_employed" do
-      before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
+      before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
 
       context "valid params" do
         let(:params) { { applicant: { employed: "true" } } }
@@ -113,13 +113,13 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
   end
 
   context "the employed journey feature flag is enabled" do
-    subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: params }
+    subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
 
     before { Setting.setting.update!(enable_employed_journey: true) }
 
     let(:params) { { applicant: { employed: "true" } } }
     let(:provider) { create :provider }
-    let!(:legal_aid_application) { create :legal_aid_application, provider: provider, applicant: applicant }
+    let!(:legal_aid_application) { create :legal_aid_application, provider:, applicant: }
     let(:applicant) { create :applicant }
 
     context "applicant is employed and the provider has employed permissions" do

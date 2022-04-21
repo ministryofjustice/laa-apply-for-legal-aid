@@ -51,7 +51,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
   describe "POST /citizens/additional_accounts" do
     let(:params) { {} }
 
-    before { post citizens_additional_accounts_path, params: params }
+    before { post citizens_additional_accounts_path, params: }
 
     it "does not redirect if no choice submitted" do
       expect(response).to have_http_status(:ok)

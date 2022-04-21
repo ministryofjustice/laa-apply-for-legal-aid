@@ -8,7 +8,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let(:proceeding_names) do
     legal_aid_application.proceedings.map(&:meaning)
   end
-  let(:task_list) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+  let(:task_list) { create :legal_framework_merits_task_list, legal_aid_application: }
 
   before do
     legal_aid_application
@@ -84,7 +84,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
 
     context "when no documents required" do
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001] }
-      let(:task_list) { create :legal_framework_merits_task_list, :da001, legal_aid_application: legal_aid_application }
+      let(:task_list) { create :legal_framework_merits_task_list, :da001, legal_aid_application: }
 
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)

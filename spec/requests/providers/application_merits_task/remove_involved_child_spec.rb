@@ -19,7 +19,7 @@ module Providers
       end
 
       describe "update PATCH /providers/applications/:legal_aid_application_id/remove_involved_child/:id" do
-        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child2), params: params }
+        subject { patch providers_legal_aid_application_remove_involved_child_path(application, child2), params: }
 
         let(:params) do
           {

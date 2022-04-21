@@ -22,7 +22,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/in_scope_of_laspo" do
-    subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: }
 
     before { subject }
 

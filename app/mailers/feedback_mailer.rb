@@ -6,7 +6,7 @@ class FeedbackMailer < BaseApplyMailer
     template_name :feedback_notification
     legal_aid_application(legal_aid_application_id)
     personalise feedback_id
-    mail to: to
+    mail to:
   end
 
 private

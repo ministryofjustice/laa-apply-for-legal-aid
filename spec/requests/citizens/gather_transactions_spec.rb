@@ -4,7 +4,7 @@ RSpec.describe "citizen accounts request", type: :request do
   include ActionView::Helpers::NumberHelper
 
   let!(:applicant) { create :applicant }
-  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, :with_non_passported_state_machine, :awaiting_applicant, applicant: applicant }
+  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, :with_non_passported_state_machine, :awaiting_applicant, applicant: }
   let!(:applicant_bank_provider) { create(:bank_provider, applicant_id: applicant.id) }
   let!(:applicant_bank_account_holder) do
     create(:bank_account_holder, bank_provider_id: applicant_bank_provider.id,

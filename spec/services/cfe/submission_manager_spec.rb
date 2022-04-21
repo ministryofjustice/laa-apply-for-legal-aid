@@ -16,7 +16,7 @@ module CFE
       end
 
       context "when the application is passported" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
 
         it "completes process" do
           described_class.call(application.id)
@@ -25,7 +25,7 @@ module CFE
       end
 
       context "when the application is non-passported" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
 
         it "completes process" do
           described_class.call(application.id)
@@ -52,7 +52,7 @@ module CFE
         end
 
         context "passported application" do
-          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
 
           it "creates a submission record" do
             expect { submission_manager.call }.to change(Submission, :count).by(1)
@@ -112,7 +112,7 @@ module CFE
         end
 
         context "non-passported application" do
-          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: vehicle }
+          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
 
           it "calls all the services it manages" do
             expect(CreateAssessmentService).to receive(:call).and_return(true)

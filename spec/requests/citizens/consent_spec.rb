@@ -19,7 +19,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
   describe "PATCH /citizens/consent", type: :request do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      patch citizens_consent_path, params: params
+      patch citizens_consent_path, params:
     end
 
     context "when consent is granted" do

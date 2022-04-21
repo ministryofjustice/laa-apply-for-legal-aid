@@ -76,7 +76,7 @@ RSpec.describe "does client use online banking requests", type: :request do
                    :with_delegated_functions_on_proceedings,
                    explicit_proceedings: [:da004],
                    df_options: { DA004: [Time.zone.today, Time.zone.today] },
-                   applicant: applicant
+                   applicant:
           end
 
           let(:applicant) { create :applicant, :not_employed }
@@ -88,7 +88,7 @@ RSpec.describe "does client use online banking requests", type: :request do
 
         context "used_delegated_functions is false" do
           let(:application) do
-            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant: applicant
+            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:
           end
 
           let(:applicant) { create :applicant, :not_employed }

@@ -26,7 +26,7 @@ FactoryBot.define do
     trait :document_ids_obtained do
       aasm_state { "document_ids_obtained" }
       after :create do |submission|
-        create :submission_document, :id_obtained, submission: submission
+        create :submission_document, :id_obtained, submission:
       end
     end
   end

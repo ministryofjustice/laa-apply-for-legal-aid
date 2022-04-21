@@ -11,7 +11,7 @@ module Reports
                :with_uncategorised_credit_transactions,
                :with_cfe_v3_result,
                :generating_reports,
-               ccms_submission: ccms_submission
+               ccms_submission:
       end
       let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
 

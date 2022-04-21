@@ -7,7 +7,7 @@ RSpec.describe ProviderDetailsCreator do
   subject { described_class.call(provider) }
 
   let(:username) { Faker::Name.name }
-  let(:provider) { create :provider, name: nil, username: username }
+  let(:provider) { create :provider, name: nil, username: }
   let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
   let(:third_provider) { create :provider, name: nil, email: nil }
   let(:ccms_firm) { FirmStruct.new(rand(1..1000), Faker::Company.name) }
@@ -106,7 +106,7 @@ RSpec.describe ProviderDetailsCreator do
 
     context "selected office of provider is not returned by the API" do
       let(:selected_office) { create :office, code: "selected-office" }
-      let(:provider) { create :provider, selected_office: selected_office }
+      let(:provider) { create :provider, selected_office: }
 
       it "clears the selected office" do
         expect { subject }.to change { provider.reload.selected_office }.to(nil)

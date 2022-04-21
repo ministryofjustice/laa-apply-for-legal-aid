@@ -14,8 +14,8 @@ module CCMS
                :with_cfe_v3_result
       end
       let(:chances_of_success) { create :chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type }
-      let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: Faker::Number.number }
-      let!(:statement_of_case) { create :statement_of_case, legal_aid_application: legal_aid_application }
+      let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application:, case_ccms_reference: Faker::Number.number }
+      let!(:statement_of_case) { create :statement_of_case, legal_aid_application: }
       let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep" }
       let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file "document_id_request.xml" }
@@ -50,7 +50,7 @@ module CCMS
             create :attachment, :means_report, legal_aid_application: legal_aid_application
             create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
             create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
-            create :gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application
+            create :gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application:
           end
 
           let(:all_attachment_types) do
@@ -152,7 +152,7 @@ module CCMS
         # the microsecond :(
 
         context "when populating documents" do
-          let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
+          let!(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: }
           let(:error) { [CCMS::CCMSError, Savon::Error, StandardError] }
 
           before do
@@ -184,7 +184,7 @@ module CCMS
             expect { subject.call }.to raise_error(CCMSError, "failure populating document hash")
           end
 
-          let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application }
+          let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: }
 
           it "does not change the state" do
             expect(submission.aasm_state).to eq "applicant_ref_obtained"

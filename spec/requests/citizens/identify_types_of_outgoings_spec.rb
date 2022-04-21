@@ -29,7 +29,7 @@ RSpec.describe "IndentifyTypesOfOutgoingsController", type: :request do
   end
 
   describe "PATCH /citizens/identify_types_of_outgoing" do
-    subject { patch citizens_identify_types_of_outgoing_path, params: params }
+    subject { patch citizens_identify_types_of_outgoing_path, params: }
 
     let(:transaction_type_ids) { [] }
     let(:params) do

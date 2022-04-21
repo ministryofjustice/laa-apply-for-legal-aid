@@ -39,7 +39,7 @@ RSpec.describe "address requests", type: :request do
       end
 
       context "when the applicant already entered an address" do
-        let!(:address) { create :address, applicant: applicant }
+        let!(:address) { create :address, applicant: }
 
         it "fills the form with the existing address" do
           subject
@@ -101,7 +101,7 @@ RSpec.describe "address requests", type: :request do
       end
 
       context "with an already existing address" do
-        before { create :address, applicant: applicant }
+        before { create :address, applicant: }
 
         it "does not create a new address record" do
           expect { subject }.to_not change { applicant.addresses.count }

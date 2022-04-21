@@ -40,7 +40,7 @@ FactoryBot.define do
 
         create :employment_payment,
                id: "20210828-0000-0000-0000-123456789abc",
-               employment: employment,
+               employment:,
                date: Date.new(2021, 8, 28),
                gross: 2345.29,
                benefits_in_kind: 0.0,
@@ -80,7 +80,7 @@ FactoryBot.define do
                net_employment_income: 2002.54
 
         create :employment_payment,
-               employment: employment,
+               employment:,
                date: 39.days.ago,
                gross: 2345.29,
                benefits_in_kind: 0.0,

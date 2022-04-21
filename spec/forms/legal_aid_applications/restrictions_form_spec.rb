@@ -9,9 +9,9 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
   let(:has_restrictions) { "true" }
   let(:params) do
     {
-      has_restrictions: has_restrictions,
-      restrictions_details: restrictions_details,
-      journey: journey,
+      has_restrictions:,
+      restrictions_details:,
+      journey:,
     }
   end
   let(:form_params) { params.merge(model: application) }

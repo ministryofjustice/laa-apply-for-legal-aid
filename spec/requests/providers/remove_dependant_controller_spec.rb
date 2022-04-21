@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::RemoveDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
-  let(:dependant) { create :dependant, legal_aid_application: legal_aid_application }
+  let(:dependant) { create :dependant, legal_aid_application: }
   let(:login) { login_as legal_aid_application.provider }
   let(:extra_dependant_count) { 0 }
 
@@ -27,7 +27,7 @@ RSpec.describe Providers::RemoveDependantsController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/remove_dependants/:dependant_id" do
-    subject { patch providers_legal_aid_application_remove_dependant_path(legal_aid_application, dependant), params: params }
+    subject { patch providers_legal_aid_application_remove_dependant_path(legal_aid_application, dependant), params: }
 
     let(:params) do
       {

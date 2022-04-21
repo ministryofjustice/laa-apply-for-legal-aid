@@ -4,10 +4,10 @@ RSpec.describe "POST /v1/statement_of_case", type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
-  let(:params) { { legal_aid_application_id: id, file: file } }
+  let(:params) { { legal_aid_application_id: id, file: } }
 
   describe "POST /v1/statement_of_cases" do
-    subject { post v1_statement_of_cases_path, params: params }
+    subject { post v1_statement_of_cases_path, params: }
 
     context "when the application exists" do
       it "returns http success" do

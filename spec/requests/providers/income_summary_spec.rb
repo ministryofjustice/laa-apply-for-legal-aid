@@ -65,10 +65,10 @@ RSpec.describe Providers::IncomeSummaryController do
 
     context "with assigned (by type) transactions" do
       let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: applicant }
-      let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: bank_account }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [salary] }
+      let(:bank_provider) { create :bank_provider, applicant: }
+      let(:bank_account) { create :bank_account, bank_provider: }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
 
       it "displays bank transaction" do
         subject
@@ -82,10 +82,10 @@ RSpec.describe Providers::IncomeSummaryController do
     subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
 
     let(:applicant) { create :applicant }
-    let(:bank_provider) { create :bank_provider, applicant: applicant }
-    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-    let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: bank_account }
-    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [salary] }
+    let(:bank_provider) { create :bank_provider, applicant: }
+    let(:bank_account) { create :bank_account, bank_provider: }
+    let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: }
+    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
 
     let(:submit_button) { { continue_button: "Continue" } }
 
@@ -113,10 +113,10 @@ RSpec.describe Providers::IncomeSummaryController do
       subject { post providers_legal_aid_application_income_summary_index_path(legal_aid_application), params: submit_button }
 
       let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: applicant }
-      let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: bank_account }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [salary] }
+      let(:bank_provider) { create :bank_provider, applicant: }
+      let(:bank_account) { create :bank_account, bank_provider: }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
 
       let(:submit_button) { { continue_button: "Continue" } }
 
@@ -133,7 +133,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     context "no disregarded benefits are categorised" do
       let(:excluded_benefits) { create :transaction_type, :credit, name: "excluded_benefits" }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: applicant, transaction_types: [excluded_benefits] }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [excluded_benefits] }
 
       it "does not return an error" do
         expect(response.body).not_to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message"))

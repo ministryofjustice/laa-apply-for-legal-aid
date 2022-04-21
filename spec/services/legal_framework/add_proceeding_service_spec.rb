@@ -11,7 +11,7 @@ module LegalFramework
       context "correct params" do
         let(:params) do
           {
-            ccms_code: ccms_code,
+            ccms_code:,
           }
         end
 

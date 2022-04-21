@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Dependant, type: :model do
   let(:calculation_date) { Date.current }
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
-  let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, date_of_birth: date_of_birth }
+  let(:dependant) { create :dependant, legal_aid_application:, date_of_birth: }
 
   describe "#ordinal_number" do
     it "returns the correct ordinal_number" do
@@ -149,7 +149,7 @@ RSpec.describe Dependant, type: :model do
   end
 
   describe "ccms_relationship_to_client" do
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, relationship: relationship, date_of_birth: dob }
+    let(:dependant) { create :dependant, legal_aid_application:, relationship:, date_of_birth: dob }
 
     context "adult relative" do
       let(:relationship) { "adult_relative" }
@@ -182,7 +182,7 @@ RSpec.describe Dependant, type: :model do
   describe "assets_over_threshold?" do
     subject(:assets_over_threshold) { dependant.assets_over_threshold? }
 
-    let(:dependant) { create :dependant, legal_aid_application: legal_aid_application, assets_value: assets_value }
+    let(:dependant) { create :dependant, legal_aid_application:, assets_value: }
 
     context "when assets_value is nil" do
       let(:assets_value) { nil }

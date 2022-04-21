@@ -21,7 +21,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
       context "a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
-        let!(:address) { create :address, postcode: postcode, applicant: applicant }
+        let!(:address) { create :address, postcode:, applicant: }
 
         it "performs an address lookup with the provided postcode" do
           expect(AddressLookupService)
@@ -71,7 +71,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/address_selections" do
-    subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_address_selection_path(legal_aid_application), params: }
 
     let(:address_list) do
       [
@@ -140,7 +140,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
       end
 
       context "when an address already exists" do
-        before { create :address, applicant: applicant }
+        before { create :address, applicant: }
 
         it "does not create a new address record" do
           expect { subject }.to_not change { applicant.addresses.count }

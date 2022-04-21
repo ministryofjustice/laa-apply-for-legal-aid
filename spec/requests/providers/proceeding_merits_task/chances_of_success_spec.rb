@@ -3,7 +3,7 @@ require "rails_helper"
 module Providers
   module ProceedingMeritsTask
     RSpec.describe ChancesOfSuccessController, type: :request do
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014] }
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
       let!(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
@@ -41,8 +41,8 @@ module Providers
 
         let(:success_prospect) { :poor }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details",
-                                      proceeding: proceeding
+          create :chances_of_success, success_prospect:, success_prospect_details: "details",
+                                      proceeding:
         end
         let(:success_likely) { "true" }
         let(:params) do

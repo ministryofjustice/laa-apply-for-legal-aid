@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Banking::StateBenefitAnalyserService do
   let(:legal_aid_application) { create :legal_aid_application }
-  let(:applicant) { create :applicant, legal_aid_application: legal_aid_application, national_insurance_number: nino }
-  let(:bank_provider) { create :bank_provider, applicant: applicant }
-  let(:bank_account1) { create :bank_account, bank_provider: bank_provider }
+  let(:applicant) { create :applicant, legal_aid_application:, national_insurance_number: nino }
+  let(:bank_provider) { create :bank_provider, applicant: }
+  let(:bank_account1) { create :bank_account, bank_provider: }
   let(:nino) { "YS327299B" }
   let!(:included_benefit_transaction_type) { create :transaction_type, :benefits }
   let!(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }

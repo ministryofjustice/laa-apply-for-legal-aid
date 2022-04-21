@@ -9,14 +9,14 @@ namespace = ENV.fetch("HOST", "laa-apply")
 module Dashboard; end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: namespace } if redis_url
+  config.redis = { url: redis_url, namespace: } if redis_url
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_client_middleware config, expiration: 30.minutes
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: namespace } if redis_url
+  config.redis = { url: redis_url, namespace: } if redis_url
 
   # accepts :expiration (optional)
   Sidekiq::Status.configure_server_middleware config, expiration: 30.minutes

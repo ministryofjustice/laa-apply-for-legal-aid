@@ -11,8 +11,8 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
 
     let!(:transaction_type) { create :transaction_type }
     let(:bank_provider) { create :bank_provider, applicant: legal_aid_application.applicant }
-    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-    let(:bank_transaction) { create :bank_transaction, bank_account: bank_account, transaction_type: transaction_type }
+    let(:bank_account) { create :bank_account, bank_provider: }
+    let(:bank_transaction) { create :bank_transaction, bank_account:, transaction_type: }
     let(:login) { login_as provider }
 
     before { login }

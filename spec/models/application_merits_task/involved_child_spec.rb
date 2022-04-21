@@ -13,7 +13,7 @@ module ApplicationMeritsTask
     describe "#split_full_name" do
       subject { involved_child.split_full_name }
 
-      let(:involved_child) { build :involved_child, full_name: full_name }
+      let(:involved_child) { build :involved_child, full_name: }
 
       context "first name and last name" do
         let(:full_name) { "John Smith" }

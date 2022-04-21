@@ -15,7 +15,7 @@ module CFE
       let(:no_mortgage) { create :cfe_v2_result, :with_no_mortgage_costs }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v2_result }
       let(:contribution_and_restriction_result) { create :cfe_v2_result, :with_capital_contribution_required, submission: cfe_submission }
-      let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+      let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
       describe "#overview" do

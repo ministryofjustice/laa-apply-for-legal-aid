@@ -80,8 +80,8 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
         let(:hmrc_response) { create :hmrc_response, :example1_usecase1 }
         let(:employment) { create :employment, legal_aid_application: application }
 
-        let(:employment_payment1) { create :employment_payment, employment: employment }
-        let(:employment_payment2) { create :employment_payment, employment: employment }
+        let(:employment_payment1) { create :employment_payment, employment: }
+        let(:employment_payment2) { create :employment_payment, employment: }
         let!(:employment_payment_ids) { [employment_payment1.id, employment_payment2.id] }
         let!(:emp_id) { employment.id }
 

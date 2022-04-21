@@ -6,12 +6,12 @@ module CCMS
       context "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create :firm, name: "Firm1" }
-        let(:office) { create :office, firm: firm }
+        let(:office) { create :office, firm: }
         let(:savings_amount) { legal_aid_application.savings_amount }
         let(:other_assets_decl) { legal_aid_application.other_assets_declaration }
         let(:provider) do
           create :provider,
-                 firm: firm,
+                 firm:,
                  selected_office: office,
                  username: 4_953_649
         end
@@ -25,18 +25,18 @@ module CCMS
                  set_lead_proceeding: :da001,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 provider: provider,
-                 office: office,
-                 percentage_home: percentage_home
+                 provider:,
+                 office:,
+                 percentage_home:
         end
         let!(:proceeding) { legal_aid_application.reload.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, proceeding: proceeding
+          create :chances_of_success, :with_optional_text, proceeding:
         end
 
         let(:ccms_reference) { "300000054005" }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
-        let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference }
+        let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
@@ -474,10 +474,10 @@ module CCMS
           let!(:property_or_lodger) { create :transaction_type, :credit, name: "property_or_lodger" }
           let(:maintenance_in) { create :transaction_type, :credit, name: "maintenance_in" }
           let(:benefits) { create :transaction_type, :credit, name: "benefits" }
-          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-          let(:bank_provider) { create :bank_provider, applicant: applicant }
-          let(:bank_account) { create :bank_account, bank_provider: bank_provider }
-          let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
+          let(:bank_account) { create :bank_account, bank_provider: }
+          let(:bank_provider) { create :bank_provider, applicant: }
+          let(:bank_account) { create :bank_account, bank_provider: }
+          let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: }
           let(:applicant) { create :applicant, :with_address }
           let(:legal_aid_application) do
             create :legal_aid_application,
@@ -487,15 +487,15 @@ module CCMS
                    :with_proceedings,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
-                   provider: provider,
-                   office: office,
-                   applicant: applicant,
+                   provider:,
+                   office:,
+                   applicant:,
                    transaction_types: [benefits]
           end
 
           context "GB_INPUT_B_8WP3_310A" do
             context "when the applicant receives financial support" do
-              before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+              before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: }
 
               it "generates a block with the correct values" do
                 block = XmlExtractor.call(xml, :global_means, "GB_INPUT_B_8WP3_310A")
@@ -515,7 +515,7 @@ module CCMS
 
           context "rental income" do
             context "when the applicant receives rental income" do
-              before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: bank_account }
+              before { create :bank_transaction, :credit, transaction_type: property_or_lodger, bank_account: }
 
               let(:expected_results) do
                 [

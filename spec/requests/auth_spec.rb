@@ -10,7 +10,7 @@ RSpec.describe "AuthController", type: :request do
   end
 
   describe "GET failure" do
-    subject { get "/auth/failure", params: params }
+    subject { get "/auth/failure", params: }
 
     context "origin from citizens/banks" do
       let(:origin_path) { citizens_banks_path }

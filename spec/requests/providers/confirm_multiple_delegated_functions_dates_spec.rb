@@ -26,7 +26,7 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
 
   describe "PATCH" do
     subject do
-      patch providers_legal_aid_application_confirm_multiple_delegated_functions_path(legal_aid_application), params: params
+      patch providers_legal_aid_application_confirm_multiple_delegated_functions_path(legal_aid_application), params:
     end
 
     let(:params) { { binary_choice_form: { confirm_multiple_delegated_functions_date: confirmation } } }

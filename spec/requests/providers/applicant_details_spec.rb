@@ -59,7 +59,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
 
     context "when the provider is authenticated" do
       subject do
-        patch providers_legal_aid_application_applicant_details_path(application), params: params
+        patch providers_legal_aid_application_applicant_details_path(application), params:
       end
 
       before do

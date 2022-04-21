@@ -19,6 +19,6 @@ class SubmitApplicationReminderMailer < BaseApplyMailer
       delegated_functions_date: application.earliest_delegated_functions_date&.strftime("%-d %B %Y"),
       deadline_date: application["substantive_application_deadline_on"].strftime("%-d %B %Y"),
     )
-    mail to: to
+    mail to:
   end
 end

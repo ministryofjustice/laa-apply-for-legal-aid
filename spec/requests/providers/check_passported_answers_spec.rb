@@ -14,8 +14,8 @@ RSpec.describe "check passported answers requests", type: :request do
              :with_proceedings,
              :with_passported_state_machine,
              :provider_entering_means,
-             vehicle: vehicle,
-             own_vehicle: own_vehicle
+             vehicle:,
+             own_vehicle:
     end
 
     context "unauthenticated" do
@@ -211,8 +211,8 @@ RSpec.describe "check passported answers requests", type: :request do
                  :with_passported_state_machine,
                  :provider_entering_means,
                  :with_populated_policy_disregards,
-                 vehicle: vehicle,
-                 own_vehicle: own_vehicle
+                 vehicle:,
+                 own_vehicle:
         end
 
         it "displays yes for england infected scheme" do

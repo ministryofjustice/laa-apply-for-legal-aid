@@ -13,11 +13,11 @@ RSpec.describe Addresses::AddressForm, type: :form do
   let(:applicant_id) { applicant.id }
   let(:address_params) do
     {
-      address_line_one: address_line_one,
-      address_line_two: address_line_two,
-      city: city,
-      county: county,
-      postcode: postcode,
+      address_line_one:,
+      address_line_two:,
+      city:,
+      county:,
+      postcode:,
     }
   end
 

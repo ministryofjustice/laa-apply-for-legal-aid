@@ -15,7 +15,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
            explicit_proceedings: [:da004],
            set_lead_proceeding: :da004,
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
-           provider: provider
+           provider:
   end
 
   describe "#send_email" do

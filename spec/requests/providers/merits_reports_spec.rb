@@ -14,7 +14,7 @@ RSpec.describe Providers::MeritsReportsController, type: :request do
   end
 
   let(:login_provider) { login_as legal_aid_application.provider }
-  let!(:submission) { create :submission, legal_aid_application: legal_aid_application }
+  let!(:submission) { create :submission, legal_aid_application: }
   let(:before_subject) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/merits_report" do
