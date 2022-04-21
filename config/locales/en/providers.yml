@@ -932,6 +932,10 @@ en:
       show:
         heading: Review and print your application
         print_button: Print application
+        print_your_application: Print your application
+        print_the_application: Print the application and get your client to sign the declaration.
+        keep_a_copy: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
+        audit: You may need to show this if you’re audited by the LAA in the future.
 
     substantive_applications:
       show:
