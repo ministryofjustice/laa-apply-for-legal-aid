@@ -92,9 +92,6 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 # generating PDFs
 gem "wicked_pdf"
 
-# interface to manage data
-gem "rails_admin"
-
 # Manage security headers
 gem "secure_headers"
 
