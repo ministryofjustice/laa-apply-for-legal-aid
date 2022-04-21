@@ -129,7 +129,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         it "displays all expected employment-related remarks" do
           expect(parsed_response_body.css("#caseworker_review_required_answer").text.strip).to eq "Yes"
           reasons = parsed_response_body.css("#caseworker_review_reasons").text.split("\n").map(&:strip)
-          reasons.delete_if(&:blank?)
+          reasons.compact_blank!
           expect(reasons).to eq ["Monthly value unknown (variations)",
                                  "Multiple employments",
                                  "Tax or NI refunds",
@@ -138,15 +138,15 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           expect(parsed_response_body.css("#means-merits-report__caseworker-review-required-multiple_employments > dt").text.strip).to eq "Review categories - Multiple employments"
 
           amount_variation_categories = parsed_response_body.css("#review-reason-amount_variation").text.split("\n").map(&:strip)
-          amount_variation_categories.delete_if(&:blank?)
+          amount_variation_categories.compact_blank!
           expect(amount_variation_categories).to eq ["Employment gross income", "Employment National Insurance contributions", "Employment income tax"]
 
           unknown_frequency_categories = parsed_response_body.css("#review-reason-unknown_frequency").text.split("\n").map(&:strip)
-          unknown_frequency_categories.delete_if(&:blank?)
+          unknown_frequency_categories.compact_blank!
           expect(unknown_frequency_categories).to eq ["Employment gross income"]
 
           refunds_categories = parsed_response_body.css("#review-reason-refunds").text.split("\n").map(&:strip)
-          refunds_categories.delete_if(&:blank?)
+          refunds_categories.compact_blank!
           expect(refunds_categories).to eq ["Employment National Insurance contributions", "Employment income tax"]
         end
       end
