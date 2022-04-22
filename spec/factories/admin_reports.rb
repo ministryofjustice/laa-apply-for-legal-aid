@@ -1,3 +1,5 @@
+require "csv"
+
 FactoryBot.define do
   factory :admin_report do
     trait :with_reports_attached do

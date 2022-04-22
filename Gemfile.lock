@@ -65,10 +65,6 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.1.5)
       activesupport (= 6.1.5)
-    activemodel-serializers-xml (1.0.2)
-      activemodel (> 5.x)
-      activesupport (> 5.x)
-      builder (~> 3.1)
     activerecord (6.1.5)
       activemodel (= 6.1.5)
       activesupport (= 6.1.5)
@@ -371,18 +367,6 @@ GEM
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.2)
     jwt (2.3.0)
-    kaminari (1.2.2)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.2)
-      kaminari-activerecord (= 1.2.2)
-      kaminari-core (= 1.2.2)
-    kaminari-actionview (1.2.2)
-      actionview
-      kaminari-core (= 1.2.2)
-    kaminari-activerecord (1.2.2)
-      activerecord
-      kaminari-core (= 1.2.2)
-    kaminari-core (1.2.2)
     launchy (2.5.0)
       addressable (~> 2.7)
     libreconv (0.9.5)
@@ -411,7 +395,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nenv (0.3.0)
-    nested_form (0.3.2)
     nesty (1.0.2)
     net-imap (0.2.3)
       digest
@@ -528,12 +511,6 @@ GEM
     rails-i18n (7.0.3)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
-    rails_admin (3.0.0)
-      activemodel-serializers-xml (>= 1.0)
-      kaminari (>= 0.14, < 2.0)
-      nested_form (~> 0.3)
-      rails (>= 6.0, < 8)
-      turbo-rails (~> 1.0)
     railties (6.1.5)
       actionpack (= 6.1.5)
       activesupport (= 6.1.5)
@@ -690,9 +667,6 @@ GEM
     thread_safe (0.3.6)
     timeout (0.2.0)
     trailblazer-option (0.1.2)
-    turbo-rails (1.0.1)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.1)
@@ -801,7 +775,6 @@ DEPENDENCIES
   pundit
   rack-pjax
   rails (~> 6.1.5)
-  rails_admin
   redis-namespace
   regexp-examples
   rexml

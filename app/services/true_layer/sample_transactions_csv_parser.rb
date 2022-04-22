@@ -1,4 +1,5 @@
 require "csv"
+
 module TrueLayer
   class SampleTransactionsCsvParser
     def self.call

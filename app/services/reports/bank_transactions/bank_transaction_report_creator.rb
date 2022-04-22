@@ -1,3 +1,5 @@
+require "csv"
+
 module Reports
   module BankTransactions
     class BankTransactionReportCreator < BaseReportCreator

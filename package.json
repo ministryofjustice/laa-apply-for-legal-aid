@@ -14,8 +14,7 @@
     "govuk-frontend": "^4.0.1",
     "jest": "^27.5.1",
     "jquery": "^3.6.0",
-    "js-search": "^2.0.0",
-    "rails_admin": "3.0.0"
+    "js-search": "^2.0.0"
   },
   "devDependencies": {
     "jest-environment-jsdom": "^27.5.1",

@@ -412,8 +412,6 @@ Staging and UAT environments.
 - To monitor the worker jobs execution you can access `/sidekiq`:
     - User: `sidekiq`
     - Password: see `worker: webUiPassword` in the secrets (or `SIDEKIQ_WEB_UI_PASSWORD` env var)
-- To access to the Site Administration Dashboard you need to point to `/support`.
-  Credentials are the same as in the Admin Portal.
 
 - To monitor Slack alerts from our service:
     - [UAT](https://mojdt.slack.com/messages/GGW4FCZBL)
