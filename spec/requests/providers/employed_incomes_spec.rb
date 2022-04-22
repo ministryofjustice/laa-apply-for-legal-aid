@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "employed incomes request", type: :request do
-  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, applicant: }
-  let(:applicant) { create :applicant, :not_employed }
+  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_single_employment, applicant:) }
+  let(:applicant) { create(:applicant, :not_employed) }
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:id/employed_income" do
