@@ -1,0 +1,22 @@
+name: "Generate apply-base docker image"
+on:
+  schedule:
+    - cron:  '45 5 * * *'
+  workflow_dispatch:
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: |
+          docker build . --file ./docker/apply_base.dockerfile --tag ministryofjustice/apply-base:latest --tag ministryofjustice/apply-base:latest-$(cat .ruby-version)
+      - name: Push the Docker image
+        run: |
+          docker push ministryofjustice/apply-base:latest
+          docker push ministryofjustice/apply-base:latest-$(cat .ruby-version)
