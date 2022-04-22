@@ -31,7 +31,7 @@ en:
       search:
         error: Please enter a search criteria
     settings:
-      notice: "Settings have been updated"
+      notice: Settings have been updated
       show:
         heading_1: Settings
         labels:
@@ -103,7 +103,7 @@ en:
         passported: 'Passported'
         non_passported: 'Non-Passported'
     roles:
-      notice: "Permissions have been updated"
+      notice: Permissions have been updated
       index:
         heading_1: Search for the Provider firm name
       permissions:

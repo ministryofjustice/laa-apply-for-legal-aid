@@ -46,7 +46,8 @@ en:
           attributes:
             task_list:
               incomplete: You must complete every section before you can continue
-        hmrc:
+        hmrc/response:
           attributes:
             use_case:
-              blank: "Invalid use case"
+              blank: can't be blank
+              inclusion: Invalid use case
