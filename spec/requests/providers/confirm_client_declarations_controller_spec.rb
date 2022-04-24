@@ -5,10 +5,10 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:id/confirm_client_declaration" do
-    subject { get providers_legal_aid_application_confirm_client_declaration_path(application) }
+    subject(:request) { get providers_legal_aid_application_confirm_client_declaration_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -16,7 +16,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
       it "returns http success" do
@@ -30,11 +30,11 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:id/confirm_client_declaration" do
-    subject { patch providers_legal_aid_application_confirm_client_declaration_path(application), params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_confirm_client_declaration_path(application), params: }
 
     let(:params) do
       {
-        legal_aid_application: { client_declaration_confirmed: client_declaration_confirmed },
+        legal_aid_application: { client_declaration_confirmed: },
       }
     end
     let(:client_declaration_confirmed) { true }
@@ -42,25 +42,25 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
-      context "Form submitted with continue button" do
+      context "when form submitted with continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
           }
         end
 
-        context "client_declaration_confirmed checkbox checked" do
+        context "when client_declaration_confirmed checkbox checked" do
           it "updates legal aid application client_declaration_confirmed" do
             expect(application.reload.client_declaration_confirmed).to eq true
           end
         end
 
-        context "client_declaration_confirmed checkbox unchecked" do
-          let(:client_declaration_confirmed) {}
-          
+        context "when client_declaration_confirmed checkbox unchecked" do
+          let(:client_declaration_confirmed) { nil }
+
           it "does not update legal aid application client_declaration_confirmed" do
             expect(application.reload.client_declaration_confirmed).to eq false
           end
@@ -69,7 +69,27 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
             expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.client_declaration_confirmed.blank"))
           end
         end
+
+        context "when form submitted using Save as draft button" do
+          let(:params) { { draft_button: "Save as draft" } }
+
+          it "redirect provider to provider's applications page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_applications_path)
+          end
+
+          it "sets the application as draft" do
+            request
+            expect(application.reload).to be_draft
+          end
+        end
       end
+    end
+
+    context "when unauthenticated" do
+      before { request }
+
+      it_behaves_like "a provider not authenticated"
     end
   end
 end
