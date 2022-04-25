@@ -20,3 +20,23 @@ jobs:
         run: |
           docker push ministryofjustice/apply-base:latest
           docker push ministryofjustice/apply-base:latest-$(cat .ruby-version)
+      - name: Slack Notification on failure
+#        if: failure()
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          channel-id: 'apply-devtest'
+          payload: |
+            {
+              "text": "GitHub apply-base docker image Action build result: ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action build result: ${{ job.status }}\nAn error occurred while generating the apply-base docker image"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
