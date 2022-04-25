@@ -67,6 +67,10 @@ module CFEResults
           result { CFEResults::V4::MockResults.with_mortgage_costs.to_json }
         end
 
+        trait :with_housing_costs_difference do
+          result { CFEResults::V4::MockResults.with_housing_costs_difference.to_json }
+        end
+
         trait :with_monthly_income_equivalents do
           result { CFEResults::V4::MockResults.with_monthly_income_equivalents.to_json }
         end

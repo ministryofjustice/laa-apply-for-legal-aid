@@ -249,6 +249,10 @@ module CFE
       #                                                              #
       ################################################################
 
+      def net_housing_costs
+        disposable_income_summary[:net_housing_costs].abs
+      end
+
       def moe_housing
         monthly_outgoing_equivalents[:rent_or_mortgage].abs
       end
@@ -266,7 +270,7 @@ module CFE
       end
 
       def total_monthly_outgoings
-        moe_housing + moe_childcare + moe_maintenance_out + moe_legal_aid
+        net_housing_cost + moe_childcare + moe_maintenance_out + moe_legal_aid
       end
 
       def total_monthly_outgoings_including_tax_and_ni

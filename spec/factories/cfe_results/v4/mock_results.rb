@@ -323,6 +323,13 @@ module CFEResults
         result
       end
 
+      def self.with_housing_costs_difference
+        result = eligible
+        result[:result_summary][:disposable_income][:gross_housing_costs] = 1000.0
+        result[:result_summary][:disposable_income][:net_housing_costs] = 545.0
+        result
+      end
+
       def self.with_monthly_income_equivalents
         result = eligible
         other_income = result[:assessment][:gross_income][:other_income]

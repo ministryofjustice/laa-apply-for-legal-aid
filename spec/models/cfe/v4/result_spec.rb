@@ -470,6 +470,32 @@ module CFE
       end
 
       ################################################################
+      #  OUTGOINGS                                                   #
+      ################################################################
+
+      describe "#net_housing_costs" do
+        subject(:net_housing_costs) { instance.net_housing_costs }
+
+        let(:instance) { build(:cfe_v4_result, :with_housing_costs_difference) }
+
+        it "returns [:result_summary][:disposable_income][:net_housing_costs]" do
+          expect(net_housing_costs).to be 545.0
+        end
+      end
+
+      # describe "#moe_housing" do
+      # end
+
+      # describe "#moe_childcare" do
+      # end
+
+      # describe "#moe_maintenance_out" do
+      # end
+
+      # describe "#moe_legal_aid" do
+      # end
+
+      ################################################################
       #  DISPOSABLE INCOME                                           #
       ################################################################
 
