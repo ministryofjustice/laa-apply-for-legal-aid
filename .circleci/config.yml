@@ -34,7 +34,7 @@ executors:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
       - image: cimg/postgres:10.18
       - image: cimg/redis:5.0
-      - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
+      - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-478c089
 references:
   decrypt_secrets: &decrypt_secrets
     run:
