@@ -89,7 +89,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
     let(:login) { login_as legal_aid_application.provider }
     let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
     let!(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
-    let(:translation_path) { "providers.submitted_applications.employment_income_table" }
+    let(:translation_path) { "shared.employment_income_table" }
 
     shared_examples "employment data is not present" do
       before { subject }
@@ -133,7 +133,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
         it "displays the Other income header" do
           subject
-          expect(unescaped_response_body).to include I18n.t("providers.submitted_applications.show.other_income")
+          expect(unescaped_response_body).to include I18n.t("shared.review_application.other_income")
         end
 
         it "does not display the extra employment information details" do

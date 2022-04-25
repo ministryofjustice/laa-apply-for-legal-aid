@@ -83,21 +83,21 @@
   <div class="govuk-!-padding-bottom-6"></div>
   <h2 class="govuk-heading-l"><%= t('.income_payments_and_assets_heading') %></h2>
   <% if display_employment_income? %>
-      <%= render 'employment_income_table' %>
+    <%= render 'shared/employment_income_table' %>
   <% end %>
 
   <section class="print-no-break">
     <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= display_employment_income? ? t('.other_income') : t('.income') %></h3>
     <% if @legal_aid_application.applicant_receives_benefit? %>
-        <strong class="govuk-tag app-tag--capitalize">
-          <%= t('.passported') %>
-        </strong>
+      <strong class="govuk-tag app-tag--capitalize">
+        <%= t('.passported') %>
+      </strong>
     <% else %>
       <%= render(
-            'shared/check_answers/bank_transaction_table',
-            transaction_types: TransactionType.credits,
-            read_only: true
-          ) %>
+          'shared/check_answers/bank_transaction_table',
+          transaction_types: TransactionType.credits,
+          read_only: true
+        ) %>
     <% end %>
   </section>
 
