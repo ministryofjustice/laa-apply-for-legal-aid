@@ -211,6 +211,29 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(call).to be_truthy }
     end
 
+    context "when response data \"individuals/matching/individual\" details do not match applicant first name" do
+      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+
+      let(:response_hash) do
+        {
+          "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => {
+              "firstName" => "Name does not need to match",
+              "lastName" => applicant.last_name,
+              "nino" => applicant.national_insurance_number.downcase,
+              "dateOfBirth" => applicant.date_of_birth,
+            } },
+            { "income/paye/paye" => { "income" => [] } },
+          ],
+        }
+      end
+
+      it { expect(instance.call).to be_truthy }
+    end
+
     context "when response data \"individuals/matching/individual\" details are missing" do
       let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
 

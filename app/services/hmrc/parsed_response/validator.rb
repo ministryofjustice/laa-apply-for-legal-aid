@@ -60,7 +60,6 @@ module HMRC
       def validate_response_individual
         errors << error(:individual, "individual must match applicant") unless individual &&
           applicant &&
-          applicant.first_name.casecmp?(individual["firstName"]) &&
           applicant.last_name.casecmp?(individual["lastName"]) &&
           applicant.national_insurance_number.casecmp?(individual["nino"]) &&
           applicant.date_of_birth.iso8601 == individual["dateOfBirth"]
