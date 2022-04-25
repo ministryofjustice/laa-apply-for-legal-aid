@@ -108,20 +108,6 @@ module UploadedEvidence
       end
     end
 
-    def continue_or_draft
-      legal_aid_application.update!(draft: draft_selected?)
-
-      if legal_aid_application.draft?
-        redirect_to draft_target_endpoint
-      else
-        @controller.go_forward
-      end
-    end
-
-    def draft_target_endpoint
-      Providers::Draftable::ENDPOINT
-    end
-
     def uploaded_evidence_collection_params
       params[:uploaded_evidence_collection] = { original_file: [] } unless params.key?(:uploaded_evidence_collection)
       @controller.merge_with_model(uploaded_evidence_collection, provider_uploader: @controller.current_provider) do
