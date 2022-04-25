@@ -755,10 +755,15 @@ en:
       show:
         heading: Do you agree with the following?
         info: "Your client:"
-        list: |
-          uses online banking for all of their current accounts
-          will let a trusted third-party financial service provider called TrueLayer collect 3 months of their bank statements on behalf of the LAA
-          is not employed
+        employed:
+          list: |
+            uses online banking for all of their current accounts
+            will let a trusted third-party financial service provider called TrueLayer collect 3 months of their bank statements on behalf of the LAA
+        unemployed:
+          list: |
+            uses online banking for all of their current accounts
+            will let a trusted third-party financial service provider called TrueLayer collect 3 months of their bank statements on behalf of the LAA
+            is not employed
         details_summary: What is TrueLayer?
         details_content: |
           TrueLayer acts as a messenger between your client's bank and the LAA.
