@@ -4,7 +4,7 @@ module UploadedEvidence
   RSpec.describe Base do
     subject(:base_service_call) { described_class.call(controller) }
 
-    let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params: params }
+    let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params: }
 
     describe ".call" do
       context "with upload button pressed" do

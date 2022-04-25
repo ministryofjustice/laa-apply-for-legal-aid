@@ -5,7 +5,7 @@ module UploadedEvidence
     let(:laa) { create :legal_aid_application }
     let(:params) { {} }
 
-    let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params: params, legal_aid_application: laa }
+    let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }
 
     describe ".call" do
       let(:service_instance) { instance_double described_class }
