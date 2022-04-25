@@ -36,7 +36,7 @@ RSpec.describe "does client use online banking requests", type: :request do
         end
       end
     end
-  endspec/cassettes/Providers_ProceedingsTypesController/index_GET_/providers/applications/_legal_aid_application_id/proceedings_types/when_the_provider_is_authenticated/back_link/the_applicant_s_address_used_s_address_lookup_service/redirects_to_the_address_lookup_page.yml
+  end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/does-client-use-online-banking" do
     subject do
