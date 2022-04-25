@@ -28,7 +28,7 @@ RSpec.describe "student_finance", type: :request do
     context "responds YES to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        patch citizens_student_finance_path, params: params
+        patch citizens_student_finance_path, params:
       end
 
       let(:yes_or_no) { "true" }
@@ -45,7 +45,7 @@ RSpec.describe "student_finance", type: :request do
     context "responds NO to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        patch citizens_student_finance_path, params: params
+        patch citizens_student_finance_path, params:
       end
 
       let(:yes_or_no) { "false" }
@@ -62,7 +62,7 @@ RSpec.describe "student_finance", type: :request do
     context "No response is entered to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        patch citizens_student_finance_path, params: params
+        patch citizens_student_finance_path, params:
       end
 
       let(:yes_or_no) { "" }
@@ -72,7 +72,7 @@ RSpec.describe "student_finance", type: :request do
       end
 
       it "does not update the legal aid application record" do
-        expect(legal_aid_application.reload.student_finance).to be nil
+        expect(legal_aid_application.reload.student_finance).to be_nil
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe "student_finance", type: :request do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         legal_aid_application.check_citizen_answers!
-        patch citizens_student_finance_path, params: params
+        patch citizens_student_finance_path, params:
       end
 
       context "when saying no" do

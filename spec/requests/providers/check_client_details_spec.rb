@@ -41,7 +41,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_client_details" do
-    subject { patch "/providers/applications/#{application_id}/check_client_details", params: params }
+    subject { patch "/providers/applications/#{application_id}/check_client_details", params: }
 
     before do
       login_as application.provider

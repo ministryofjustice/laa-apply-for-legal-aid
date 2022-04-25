@@ -19,7 +19,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
 
     context "with existing older than three years flag" do
       let(:vehicle) { create :vehicle, purchased_on: nil, more_than_three_years_old: true }
-      let(:legal_aid_application) { create :legal_aid_application, vehicle: vehicle }
+      let(:legal_aid_application) { create :legal_aid_application, vehicle: }
 
       it "renders successfully" do
         subject
@@ -65,7 +65,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
 
     it "updates vehicle" do
       subject
-      expect(vehicle.reload.more_than_three_years_old).to eq(true)
+      expect(vehicle.reload.more_than_three_years_old).to be(true)
     end
 
     it "redirects to next step" do
@@ -112,7 +112,7 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
 
       it "updates vehicle" do
         subject
-        expect(vehicle.reload.more_than_three_years_old).to eq(true)
+        expect(vehicle.reload.more_than_three_years_old).to be(true)
       end
     end
 

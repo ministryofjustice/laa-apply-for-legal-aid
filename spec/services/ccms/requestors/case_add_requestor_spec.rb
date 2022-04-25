@@ -12,13 +12,13 @@ module CCMS
                  :with_positive_benefit_check_result,
                  :with_proceedings,
                  set_lead_proceeding: :da001,
-                 applicant: applicant,
-                 vehicle: vehicle,
-                 other_assets_declaration: other_assets_declaration,
-                 savings_amount: savings_amount,
-                 provider: provider,
-                 opponent: opponent,
-                 office: office
+                 applicant:,
+                 vehicle:,
+                 other_assets_declaration:,
+                 savings_amount:,
+                 provider:,
+                 opponent:,
+                 office:
         end
         let(:applicant) do
           create :applicant,
@@ -27,11 +27,11 @@ module CCMS
                  last_name: "Ledner",
                  national_insurance_number: "EG587804M",
                  date_of_birth: Date.new(1977, 4, 10),
-                 address: address
+                 address:
         end
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, proceeding: proceeding
+          create :chances_of_success, :with_optional_text, proceeding:
         end
         let(:vehicle) { create :vehicle, estimated_value: 3030, payment_remaining: 881, purchased_on: Date.new(2008, 8, 22), used_regularly: true }
         let(:other_assets_declaration) do
@@ -45,11 +45,11 @@ module CCMS
                  trust_value: 600
         end
         let(:address) { create :address, postcode: "GH08NY" }
-        let(:provider) { create :provider, username: "saturnina", firm: firm, email: "patrick_rath@example.net" }
+        let(:provider) { create :provider, username: "saturnina", firm:, email: "patrick_rath@example.net" }
         let(:firm) { create :firm, ccms_id: 169 }
         let(:opponent) { create :opponent, full_name: "Joffrey Test-Opponent", police_notified: true }
-        let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application: legal_aid_application }
-        let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+        let(:submission) { create :submission, :case_ref_obtained, case_ccms_reference: "300000000001", legal_aid_application: }
+        let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:office) { create :office, ccms_id: "4727432767" }
         let(:savings_amount) { create :savings_amount, :all_nil }
@@ -57,8 +57,8 @@ module CCMS
         let(:expected_soap_operation) { :create_case_application }
         let(:expected_xml) { requestor.__send__(:request_xml) }
         let(:requestor) { described_class.new(submission, {}) }
-        let!(:involved_child1) { create :involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application: legal_aid_application }
-        let!(:involved_child2) { create :involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application: legal_aid_application }
+        let!(:involved_child1) { create :involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application: }
+        let!(:involved_child2) { create :involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application: }
 
         before do
           legal_aid_application.reload

@@ -6,14 +6,14 @@ module ApplicationMeritsTask
       subject(:involved_child) { build :involved_child }
 
       it { expect(involved_child.ccms_relationship_to_case).to eq "CHILD" }
-      it { expect(involved_child.ccms_child?).to eq true }
+      it { expect(involved_child.ccms_child?).to be true }
       it { expect(involved_child.ccms_opponent_relationship_to_case).to eq "Child" }
     end
 
     describe "#split_full_name" do
       subject { involved_child.split_full_name }
 
-      let(:involved_child) { build :involved_child, full_name: full_name }
+      let(:involved_child) { build :involved_child, full_name: }
 
       context "first name and last name" do
         let(:full_name) { "John Smith" }

@@ -28,7 +28,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/has_other_proceedings" do
-    subject! { patch providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+    subject! { patch providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
     context "Form submitted with Save as draft button" do
       let(:params) { { legal_aid_application: { has_other_proceeding: "" }, draft_button: "Save and come back later" } }
@@ -109,7 +109,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   end
 
   describe "DELETE /providers/:application_id/has_other_proceedings" do
-    subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+    subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
     let(:params) do
       {
@@ -133,7 +133,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
       end
 
       context "delete lead proceeding" do
-        subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: params }
+        subject { delete providers_legal_aid_application_has_other_proceedings_path(legal_aid_application), params: }
 
         let(:params) do
           { ccms_code: legal_aid_application.proceedings.first.ccms_code }
@@ -141,7 +141,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
 
         it "sets a new lead proceeding when the original one is deleted" do
           subject
-          expect(legal_aid_application.proceedings[0].lead_proceeding).to eq true
+          expect(legal_aid_application.proceedings[0].lead_proceeding).to be true
         end
       end
     end

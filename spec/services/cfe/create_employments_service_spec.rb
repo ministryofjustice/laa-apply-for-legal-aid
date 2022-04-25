@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe CFE::CreateEmploymentsService do
   let(:submission) { create :cfe_submission, aasm_state: "irregular_income_created", legal_aid_application: laa }
   let(:service) { described_class.new(submission) }
-  let(:laa) { create :legal_aid_application, applicant: applicant }
+  let(:laa) { create :legal_aid_application, applicant: }
   let(:applicant) { create :applicant, :employed }
   let(:dummy_response) { dummy_response_hash.to_json }
 

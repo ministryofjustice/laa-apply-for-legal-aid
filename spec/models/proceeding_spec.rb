@@ -41,7 +41,7 @@ RSpec.describe Proceeding, type: :model do
       let(:proceeding) { create :proceeding, :se014 }
 
       it "returns true" do
-        expect(proceeding.section8?).to eq true
+        expect(proceeding.section8?).to be true
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe Proceeding, type: :model do
       let(:proceeding) { create :proceeding, :da001 }
 
       it "returns false" do
-        expect(proceeding.section8?).to eq false
+        expect(proceeding.section8?).to be false
       end
     end
   end

@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe "provider selects office", type: :request do
   let(:firm) { create :firm }
-  let!(:office1) { create :office, firm: firm }
-  let!(:office2) { create :office, firm: firm }
-  let!(:office3) { create :office, firm: firm }
+  let!(:office1) { create :office, firm: }
+  let!(:office2) { create :office, firm: }
+  let!(:office3) { create :office, firm: }
 
-  let(:provider) { create :provider, firm: firm, offices: [office1, office2] }
+  let(:provider) { create :provider, firm:, offices: [office1, office2] }
 
   describe "GET providers/select_office" do
     subject { get providers_select_office_path }
@@ -39,7 +39,7 @@ RSpec.describe "provider selects office", type: :request do
   end
 
   describe "PATCH providers/select_office" do
-    subject { patch providers_select_office_path, params: params }
+    subject { patch providers_select_office_path, params: }
 
     let(:params) do
       {

@@ -19,7 +19,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
   describe "PATCH /citizens/consent", type: :request do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      patch citizens_consent_path, params: params
+      patch citizens_consent_path, params:
     end
 
     context "when consent is granted" do
@@ -31,12 +31,12 @@ RSpec.describe Citizens::ConsentsController, type: :request do
 
       it "records the decision on the legal aid application" do
         legal_aid_application.reload
-        expect(legal_aid_application.open_banking_consent).to eq(true)
+        expect(legal_aid_application.open_banking_consent).to be(true)
         expect(legal_aid_application.open_banking_consent_choice_at.to_s(be_between(2.seconds.ago, 1.second.from_now)))
       end
 
       it "updates application state" do
-        expect(legal_aid_application.reload.applicant_entering_means?).to eq(true)
+        expect(legal_aid_application.reload.applicant_entering_means?).to be(true)
       end
     end
 
@@ -49,12 +49,12 @@ RSpec.describe Citizens::ConsentsController, type: :request do
 
       it "records the decision on the legal aid application" do
         legal_aid_application.reload
-        expect(legal_aid_application.open_banking_consent).to eq(false)
+        expect(legal_aid_application.open_banking_consent).to be(false)
         expect(legal_aid_application.open_banking_consent_choice_at.to_s(be_between(2.seconds.ago, 1.second.from_now)))
       end
 
       it "updates application state" do
-        expect(legal_aid_application.reload.use_ccms?).to eq(true)
+        expect(legal_aid_application.reload.use_ccms?).to be(true)
       end
     end
 

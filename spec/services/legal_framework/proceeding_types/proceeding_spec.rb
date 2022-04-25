@@ -20,7 +20,7 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
     end
 
     it "returns a success status" do
-      expect(call.success).to eq true
+      expect(call.success).to be true
     end
 
     it "returns details of the correct proceeding" do

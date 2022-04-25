@@ -228,7 +228,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:first_name) { Faker::Name.first_name }
       let(:params) do
         {
-          first_name: first_name,
+          first_name:,
           last_name: "",
           national_insurance_number: "",
           date_of_birth: "",
@@ -251,7 +251,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       let(:invalid_nino) { "invalid" }
       let(:params) do
         {
-          first_name: first_name,
+          first_name:,
           last_name: "",
           national_insurance_number: invalid_nino,
           date_of_birth: "",

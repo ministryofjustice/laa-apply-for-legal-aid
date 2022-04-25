@@ -11,19 +11,19 @@ module Reports
                set_lead_proceeding: :da004,
                df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
                application_ref: "L-X99-ZZZ",
-               applicant: applicant,
+               applicant:,
                own_home: own_home_status,
-               property_value: property_value,
+               property_value:,
                shared_ownership: shared_ownership_status,
                outstanding_mortgage_amount: outstanding_mortgage,
-               percentage_home: percentage_home,
-               provider: provider,
-               office: office,
-               benefit_check_result: benefit_check_result,
-               savings_amount: savings_amount,
-               other_assets_declaration: other_assets_declaration,
-               opponent: opponent,
-               ccms_submission: ccms_submission,
+               percentage_home:,
+               provider:,
+               office:,
+               benefit_check_result:,
+               savings_amount:,
+               other_assets_declaration:,
+               opponent:,
+               ccms_submission:,
                own_vehicle: false,
                merits_submitted_at: Time.current
       end
@@ -32,19 +32,19 @@ module Reports
         create :application,
                :with_proceedings,
                application_ref: "L-X99-ZZZ",
-               applicant: applicant,
+               applicant:,
                own_home: own_home_status,
-               property_value: property_value,
+               property_value:,
                shared_ownership: shared_ownership_status,
                outstanding_mortgage_amount: outstanding_mortgage,
-               percentage_home: percentage_home,
-               provider: provider,
-               office: office,
-               benefit_check_result: benefit_check_result,
-               savings_amount: savings_amount,
-               other_assets_declaration: other_assets_declaration,
-               opponent: opponent,
-               ccms_submission: ccms_submission,
+               percentage_home:,
+               provider:,
+               office:,
+               benefit_check_result:,
+               savings_amount:,
+               other_assets_declaration:,
+               opponent:,
+               ccms_submission:,
                own_vehicle: false,
                merits_submitted_at: Time.current
       end
@@ -54,28 +54,28 @@ module Reports
         create :chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
-               proceeding: proceeding
+               proceeding:
       end
 
       let(:applicant) do
         create :applicant,
                first_name: "Johnny",
                last_name: "WALKER",
-               date_of_birth: date_of_birth,
+               date_of_birth:,
                national_insurance_number: "JA293483A"
       end
 
       let(:provider) do
         create :provider,
                username: "psr001",
-               firm: firm
+               firm:
       end
 
       let(:firm) { create :firm, name: "Legal beagles" }
 
       let(:office) { create :office, code: "1T823E" }
 
-      let(:ccms_submission) { create :ccms_submission, case_ccms_reference: case_ccms_reference }
+      let(:ccms_submission) { create :ccms_submission, case_ccms_reference: }
 
       let(:benefit_check_result) { create :benefit_check_result, result: benefit_check_result_text }
 
@@ -89,33 +89,33 @@ module Reports
                plc_shares: plc_val,
                peps_unit_trusts_capital_bonds_gov_stocks: bonds_val,
                life_assurance_endowment_policy: la_val,
-               none_selected: none_selected
+               none_selected:
       end
 
       let(:other_assets_declaration) do
         create :other_assets_declaration,
-               second_home_value: second_home_value,
-               second_home_mortgage: second_home_mortgage,
-               second_home_percentage: second_home_percentage,
-               timeshare_property_value: timeshare_property_value,
-               land_value: land_value,
-               valuable_items_value: valuable_items_value,
-               inherited_assets_value: inherited_assets_value,
-               money_owed_value: money_owed_value,
-               trust_value: trust_value,
-               none_selected: none_selected
+               second_home_value:,
+               second_home_mortgage:,
+               second_home_percentage:,
+               timeshare_property_value:,
+               land_value:,
+               valuable_items_value:,
+               inherited_assets_value:,
+               money_owed_value:,
+               trust_value:,
+               none_selected:
       end
 
       let(:opponent) do
         create :opponent,
-               understands_terms_of_court_order: understands_terms_of_court_order,
-               understands_terms_of_court_order_details: understands_terms_of_court_order_details,
-               warning_letter_sent: warning_letter_sent,
-               warning_letter_sent_details: warning_letter_sent_details,
-               police_notified: police_notified,
-               police_notified_details: police_notified_details,
-               bail_conditions_set: bail_conditions_set,
-               bail_conditions_set_details: bail_conditions_set_details
+               understands_terms_of_court_order:,
+               understands_terms_of_court_order_details:,
+               warning_letter_sent:,
+               warning_letter_sent_details:,
+               police_notified:,
+               police_notified_details:,
+               bail_conditions_set:,
+               bail_conditions_set_details:
       end
 
       let(:proceeding_type) do
@@ -191,7 +191,7 @@ module Reports
               expect(value_for("User name")).to eq "psr001"
               expect(value_for("Office ID")).to eq "1T823E"
               expect(value_for("State")).to eq "initiated"
-              expect(value_for("CCMS reason")).to be nil
+              expect(value_for("CCMS reason")).to be_nil
               expect(value_for("CCMS reference number")).to eq "42226668880"
               expect(value_for("DWP Overridden")).to eq "No"
               expect(value_for("Case Type")).to eq "Passported"
@@ -335,10 +335,10 @@ module Reports
           context "vehicle" do
             let!(:vehicle) do
               create :vehicle,
-                     legal_aid_application: legal_aid_application,
+                     legal_aid_application:,
                      estimated_value: 12_000,
-                     payment_remaining: payment_remaining,
-                     used_regularly: used_regularly,
+                     payment_remaining:,
+                     used_regularly:,
                      purchased_on: purchase_date
             end
             let(:purchase_date) { Date.new(2020, 1, 1) }
@@ -579,7 +579,7 @@ module Reports
           create :chances_of_success,
                  success_prospect: prospect,
                  application_purpose: purpose,
-                 proceeding: proceeding
+                 proceeding:
         end
         legal_aid_application.reload
       end

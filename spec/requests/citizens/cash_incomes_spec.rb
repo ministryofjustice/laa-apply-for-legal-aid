@@ -23,7 +23,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
   describe "PATCH /citizens/cash_income" do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-      patch citizens_cash_income_path, params: params
+      patch citizens_cash_income_path, params:
     end
 
     context "valid update" do
@@ -47,7 +47,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         end
 
         it "updates the model attribute for no cash income to true" do
-          expect(legal_aid_application.reload.no_cash_income).to eq(true)
+          expect(legal_aid_application.reload.no_cash_income).to be(true)
         end
       end
     end

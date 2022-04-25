@@ -53,7 +53,7 @@ class LegalAidApplication < ApplicationRecord
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
   after_create do
-    ActiveSupport::Notifications.instrument "dashboard.application_created", id: id, state: state
+    ActiveSupport::Notifications.instrument "dashboard.application_created", id:, state:
   end
 
   after_save do

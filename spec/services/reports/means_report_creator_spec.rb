@@ -16,7 +16,7 @@ RSpec.describe Reports::MeansReportCreator do
                :with_everything,
                :with_cfe_v4_result,
                :generating_reports,
-               ccms_submission: ccms_submission,
+               ccms_submission:,
                explicit_proceedings: %i[da002 da006]
       end
       let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
@@ -30,7 +30,7 @@ RSpec.describe Reports::MeansReportCreator do
       end
 
       context "when an attachment record exists" do
-        let!(:attachment) { create :attachment, :means_report, legal_aid_application: legal_aid_application }
+        let!(:attachment) { create :attachment, :means_report, legal_aid_application: }
         let(:expected_log) { "ReportsCreator: Means report already exists for #{legal_aid_application.id} and is downloadable" }
 
         before { allow(Rails.logger).to receive(:info) }

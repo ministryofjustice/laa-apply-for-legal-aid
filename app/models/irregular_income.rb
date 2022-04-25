@@ -6,8 +6,8 @@ class IrregularIncome < ApplicationRecord
 
   def as_json(_options = nil)
     {
-      income_type: income_type,
-      frequency: frequency,
+      income_type:,
+      frequency:,
       amount: amount.to_f,
     }
   end

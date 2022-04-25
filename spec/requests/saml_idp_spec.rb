@@ -14,7 +14,7 @@ RSpec.describe SamlIdpController, type: :request do
       let(:username) { "test1" }
 
       context "Record for that provider exists in the database" do
-        before { create :provider, email: email, username: username }
+        before { create :provider, email:, username: }
 
         it "renders the saml auth form with the encoded request" do
           post saml_auth_path, params: login_params

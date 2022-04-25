@@ -7,7 +7,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
   describe "GET /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do
     subject { get providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application) }
 
-    let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: legal_aid_application }
+    let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { "shared.assessment_results" }

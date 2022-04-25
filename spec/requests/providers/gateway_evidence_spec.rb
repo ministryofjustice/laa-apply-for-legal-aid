@@ -34,13 +34,13 @@ module Providers
     end
 
     describe "PATCH /providers/applications/:legal_aid_application_id/gateway_evidence" do
-      subject { patch providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
+      subject { patch providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: }
 
       let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
       let(:gateway_evidence) { legal_aid_application.gateway_evidence }
       let(:params_gateway_evidence) do
         {
-          original_file: original_file,
+          original_file:,
         }
       end
       let(:draft_button) { { draft_button: "Save as draft" } }
@@ -69,7 +69,7 @@ module Providers
       context "upload button pressed" do
         let(:params_gateway_evidence) do
           {
-            original_file: original_file,
+            original_file:,
           }
         end
         let(:button_clicked) { upload_button }
@@ -93,7 +93,7 @@ module Providers
           end
 
           context "when gateway_evidence file already exists" do
-            let!(:gateway_evidence) { create :gateway_evidence, :with_multiple_files_attached, legal_aid_application: legal_aid_application }
+            let!(:gateway_evidence) { create :gateway_evidence, :with_multiple_files_attached, legal_aid_application: }
 
             it "updates the record" do
               subject
@@ -252,7 +252,7 @@ module Providers
         end
 
         context "model already has files attached" do
-          before { create :gateway_evidence, :with_original_file_attached, legal_aid_application: legal_aid_application }
+          before { create :gateway_evidence, :with_original_file_attached, legal_aid_application: }
 
           context "additional file uploaded" do
             it "attaches the file" do
@@ -288,7 +288,7 @@ module Providers
     end
 
     describe "DELETE /providers/applications/:legal_aid_application_id/gateway_evidence" do
-      subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: params }
+      subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: }
 
       let(:gateway_evidence) { create :gateway_evidence, :with_original_file_attached }
       let(:legal_aid_application) { gateway_evidence.legal_aid_application }

@@ -12,7 +12,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
     let(:mock_provider) { TrueLayerHelpers::MOCK_DATA[:provider] }
     let(:bank_provider) { applicant.bank_providers.find_by(true_layer_provider_id: mock_provider[:provider][:provider_id]) }
     let(:existing_true_layer_provider_id) { SecureRandom.hex }
-    let!(:existing_provider) { create :bank_provider, applicant: applicant, true_layer_provider_id: existing_true_layer_provider_id }
+    let!(:existing_provider) { create :bank_provider, applicant:, true_layer_provider_id: existing_true_layer_provider_id }
 
     context "request is successful" do
       before do
@@ -51,7 +51,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
 
       it "is successful" do
-        expect(subject.success?).to eq(true)
+        expect(subject.success?).to be(true)
       end
     end
 

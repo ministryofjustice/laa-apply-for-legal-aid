@@ -85,7 +85,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
 
           it "does not record the value in the legal aid application table" do
             legal_aid_application.reload
-            expect(legal_aid_application.property_value).to be nil
+            expect(legal_aid_application.property_value).to be_nil
           end
         end
       end

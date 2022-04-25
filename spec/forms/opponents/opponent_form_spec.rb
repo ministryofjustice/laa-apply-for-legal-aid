@@ -31,8 +31,8 @@ RSpec.describe Opponents::OpponentForm, type: :form do
           understands_terms_of_court_order_details: "terms of court order details ",
           warning_letter_sent: "false",
           warning_letter_sent_details: "warning letter sent details",
-          police_notified: police_notified,
-          police_notified_details: police_notified_details,
+          police_notified:,
+          police_notified_details:,
           bail_conditions_set: "true",
           bail_conditions_set_details: "bail condition set details",
           full_name: "Bob Smith",
@@ -46,7 +46,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
         it "extrapolates the police_notified_details for display on the page" do
           expect(subject.police_notified).to eq "false"
           expect(subject.police_notified_details_false).to eq "reasons police not told"
-          expect(subject.police_notified_details_true).to eq nil
+          expect(subject.police_notified_details_true).to be_nil
         end
       end
 
@@ -56,7 +56,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
 
         it "extrapolates the police_notified_details for display on the page" do
           expect(subject.police_notified).to eq "true"
-          expect(subject.police_notified_details_false).to eq nil
+          expect(subject.police_notified_details_false).to be_nil
           expect(subject.police_notified_details_true).to eq "reasons police told"
         end
       end
@@ -70,13 +70,13 @@ RSpec.describe Opponents::OpponentForm, type: :form do
     end
 
     it "updates the opponent" do
-      expect(opponent.understands_terms_of_court_order).to eq(false)
+      expect(opponent.understands_terms_of_court_order).to be(false)
       expect(opponent.understands_terms_of_court_order_details).to eq(sample_params["understands_terms_of_court_order_details"])
-      expect(opponent.warning_letter_sent).to eq(false)
+      expect(opponent.warning_letter_sent).to be(false)
       expect(opponent.warning_letter_sent_details).to eq(sample_params["warning_letter_sent_details"])
-      expect(opponent.police_notified).to eq(true)
+      expect(opponent.police_notified).to be(true)
       expect(opponent.police_notified_details).to eq(sample_params["police_notified_details_true"])
-      expect(opponent.bail_conditions_set).to eq(true)
+      expect(opponent.bail_conditions_set).to be(true)
       expect(opponent.bail_conditions_set_details).to eq(sample_params["bail_conditions_set_details"])
     end
 
@@ -91,8 +91,8 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
 
       it "updates the opponent" do
-        expect(opponent.understands_terms_of_court_order).to eq(true)
-        expect(opponent.warning_letter_sent).to eq(true)
+        expect(opponent.understands_terms_of_court_order).to be(true)
+        expect(opponent.warning_letter_sent).to be(true)
         expect(opponent.understands_terms_of_court_order_details).to eq("")
         expect(opponent.warning_letter_sent_details).to eq("")
       end
@@ -176,13 +176,13 @@ RSpec.describe Opponents::OpponentForm, type: :form do
     end
 
     it "updates the opponent" do
-      expect(opponent.understands_terms_of_court_order).to eq(false)
+      expect(opponent.understands_terms_of_court_order).to be(false)
       expect(opponent.understands_terms_of_court_order_details).to eq(sample_params["understands_terms_of_court_order_details"])
-      expect(opponent.warning_letter_sent).to eq(false)
+      expect(opponent.warning_letter_sent).to be(false)
       expect(opponent.warning_letter_sent_details).to eq(sample_params["warning_letter_sent_details"])
-      expect(opponent.police_notified).to eq(true)
+      expect(opponent.police_notified).to be(true)
       expect(opponent.police_notified_details).to eq(sample_params["police_notified_details_true"])
-      expect(opponent.bail_conditions_set).to eq(true)
+      expect(opponent.bail_conditions_set).to be(true)
       expect(opponent.bail_conditions_set_details).to eq(sample_params["bail_conditions_set_details"])
     end
 
@@ -197,10 +197,10 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
 
       it "updates the opponent" do
-        expect(opponent.understands_terms_of_court_order).to eq(nil)
-        expect(opponent.warning_letter_sent).to eq(nil)
-        expect(opponent.police_notified).to eq(nil)
-        expect(opponent.bail_conditions_set).to eq(nil)
+        expect(opponent.understands_terms_of_court_order).to be_nil
+        expect(opponent.warning_letter_sent).to be_nil
+        expect(opponent.police_notified).to be_nil
+        expect(opponent.bail_conditions_set).to be_nil
       end
     end
 
@@ -218,13 +218,13 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
 
       it "updates the opponent" do
-        expect(opponent.understands_terms_of_court_order).to eq(false)
-        expect(opponent.warning_letter_sent).to eq(false)
-        expect(opponent.police_notified).to eq(false)
-        expect(opponent.understands_terms_of_court_order_details).to eq(nil)
-        expect(opponent.warning_letter_sent_details).to eq(nil)
-        expect(opponent.police_notified_details).to eq(nil)
-        expect(opponent.bail_conditions_set_details).to eq(nil)
+        expect(opponent.understands_terms_of_court_order).to be(false)
+        expect(opponent.warning_letter_sent).to be(false)
+        expect(opponent.police_notified).to be(false)
+        expect(opponent.understands_terms_of_court_order_details).to be_nil
+        expect(opponent.warning_letter_sent_details).to be_nil
+        expect(opponent.police_notified_details).to be_nil
+        expect(opponent.bail_conditions_set_details).to be_nil
       end
     end
   end

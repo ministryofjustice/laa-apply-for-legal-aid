@@ -8,7 +8,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
       create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014]
     end
     let(:proceeding) { legal_aid_application.proceedings.first }
-    let(:chances_of_success) { create :chances_of_success, success_prospect: prospect, proceeding: proceeding }
+    let(:chances_of_success) { create :chances_of_success, success_prospect: prospect, proceeding: }
 
     context "likely" do
       let(:prospect) { "likely" }

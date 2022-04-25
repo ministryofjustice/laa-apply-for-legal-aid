@@ -121,7 +121,7 @@ RSpec.describe "check merits answers requests", type: :request do
 
   describe "PATCH /providers/applications/:id/check_merits_answers/continue" do
     subject do
-      patch "/providers/applications/#{application.id}/check_merits_answers/continue", params: params
+      patch "/providers/applications/#{application.id}/check_merits_answers/continue", params:
     end
 
     let(:application) do

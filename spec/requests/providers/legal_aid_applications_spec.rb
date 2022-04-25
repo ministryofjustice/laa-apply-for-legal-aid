@@ -94,7 +94,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          let!(:additional_applications) { create_list :legal_aid_application, 4, provider: provider }
+          let!(:additional_applications) { create_list :legal_aid_application, 4, provider: }
           let(:params) { { page_size: 3 } }
 
           it "show page information" do
@@ -109,7 +109,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
         end
 
         context "when an application has been discarded" do
-          before { create :legal_aid_application, :discarded, provider: provider }
+          before { create :legal_aid_application, :discarded, provider: }
 
           it "is excluded from the list" do
             subject
@@ -158,7 +158,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
       context "when searching for a Substantive application" do
         let(:search_term) { legal_aid_application.application_ref }
-        let(:params) { { search_term: search_term } }
+        let(:params) { { search_term: } }
 
         it "shows the application" do
           subject
@@ -185,7 +185,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
                  substantive_application_deadline_on: Time.zone.today + 3.days
         end
         let(:search_term) { legal_aid_application.application_ref }
-        let(:params) { { search_term: search_term } }
+        let(:params) { { search_term: } }
 
         it "shows the application" do
           subject
@@ -208,7 +208,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
                  merits_submitted_at: Time.zone.today
         end
         let(:search_term) { legal_aid_application.application_ref }
-        let(:params) { { search_term: search_term } }
+        let(:params) { { search_term: } }
 
         it "shows the application" do
           subject

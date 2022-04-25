@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::CheckProviderAnswersController, type: :request do
   let(:used_delegated_functions_on) { nil }
   let(:address) { create :address }
-  let(:applicant) { create :applicant, address: address }
+  let(:applicant) { create :applicant, address: }
   let(:application) do
     create(
       :legal_aid_application,
@@ -202,7 +202,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
     context "Continue" do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do
         {
@@ -246,7 +246,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
     end
 
     context "Save as draft" do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: params }
+      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do
         {

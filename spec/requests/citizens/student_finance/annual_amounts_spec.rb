@@ -38,7 +38,7 @@ RSpec.describe "annual_amounts", type: :request do
       end
 
       it "creates an irregular income record" do
-        expect { patch citizens_student_finances_annual_amount_path, params: params }.to change(IrregularIncome, :count).by(1)
+        expect { patch citizens_student_finances_annual_amount_path, params: }.to change(IrregularIncome, :count).by(1)
         irregular_income = legal_aid_application.irregular_incomes.first
         expect(irregular_income.amount).to eq 2345
         expect(irregular_income.frequency).to eq "annual"
@@ -46,13 +46,13 @@ RSpec.describe "annual_amounts", type: :request do
       end
 
       describe "update record" do
-        before { patch citizens_student_finances_annual_amount_path, params: params }
+        before { patch citizens_student_finances_annual_amount_path, params: }
 
         context "update amount" do
           let(:amount) { 5000 }
 
           it "updates the same record without creating a new one" do
-            expect { patch citizens_student_finances_annual_amount_path, params: params }.to change(IrregularIncome, :count).by(0)
+            expect { patch citizens_student_finances_annual_amount_path, params: }.to change(IrregularIncome, :count).by(0)
             irregular_income = legal_aid_application.irregular_incomes.first
             expect(irregular_income.amount).to eq 5000
           end
@@ -63,7 +63,7 @@ RSpec.describe "annual_amounts", type: :request do
     context "shows an error when field is empty" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        patch citizens_student_finances_annual_amount_path, params: params
+        patch citizens_student_finances_annual_amount_path, params:
       end
 
       let(:amount) { "" }

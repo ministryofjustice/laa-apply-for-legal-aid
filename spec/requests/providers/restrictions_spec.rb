@@ -53,7 +53,7 @@ RSpec.describe "provider restrictions request", type: :request do
         end
 
         it "updates legal aid application restriction information" do
-          expect(application.reload.has_restrictions).to eq true
+          expect(application.reload.has_restrictions).to be true
           expect(application.reload.restrictions_details).to_not be_empty
         end
 
@@ -152,7 +152,7 @@ RSpec.describe "provider restrictions request", type: :request do
           end
 
           it "updates the legal_aid_application.restrictions" do
-            expect(application.has_restrictions).to eq true
+            expect(application.has_restrictions).to be true
             expect(application.restrictions_details).to_not be_empty
           end
 

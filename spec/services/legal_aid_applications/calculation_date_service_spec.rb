@@ -14,9 +14,9 @@ RSpec.describe LegalAidApplications::CalculationDateService do
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: [:da004],
            df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_on] },
-           transaction_period_finish_on: transaction_period_finish_on,
-           benefit_check_result: benefit_check_result,
-           merits_submitted_at: merits_submitted_at
+           transaction_period_finish_on:,
+           benefit_check_result:,
+           merits_submitted_at:
   end
 
   context "delegated functions are used" do
@@ -28,9 +28,9 @@ RSpec.describe LegalAidApplications::CalculationDateService do
   context "delegated functions are not used" do
     let(:legal_aid_application) do
       create :legal_aid_application,
-             transaction_period_finish_on: transaction_period_finish_on,
-             benefit_check_result: benefit_check_result,
-             merits_submitted_at: merits_submitted_at
+             transaction_period_finish_on:,
+             benefit_check_result:,
+             merits_submitted_at:
     end
 
     context "applicant receives benefits" do

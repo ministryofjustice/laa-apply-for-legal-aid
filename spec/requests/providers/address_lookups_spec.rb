@@ -34,7 +34,7 @@ RSpec.describe Providers::AddressLookupsController, type: :request do
   end
 
   describe "PATCH/providers/applications/:legal_aid_application_id/address_lookup" do
-    subject { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_address_lookup_path(legal_aid_application), params: }
 
     let(:postcode) { "SW1H 9EA" }
     let(:normalized_postcode) { "SW1H9AE" }

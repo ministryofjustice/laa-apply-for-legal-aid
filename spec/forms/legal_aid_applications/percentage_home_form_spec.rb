@@ -5,7 +5,7 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
 
   let(:percentage_home) { rand(1...99.0).round(2) }
   let(:application) { create :legal_aid_application }
-  let(:params) { { percentage_home: percentage_home } }
+  let(:params) { { percentage_home: } }
   let(:form_params) { params.merge(model: application) }
 
   describe "#percentage_home" do
@@ -20,7 +20,7 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
     end
 
     it "returns true" do
-      expect(subject.save).to eq(true)
+      expect(subject.save).to be(true)
     end
 
     it "has no errors" do
@@ -29,7 +29,7 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
 
     shared_examples_for "it has an error" do
       it "returns false" do
-        expect(subject.save).to eq(false)
+        expect(subject.save).to be(false)
       end
 
       it "generates an error" do

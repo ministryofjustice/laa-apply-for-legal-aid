@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleForm, type: :form do
   subject(:form) { described_class.new(params) }
 
-  let(:params) { { attempts_made: attempts_made } }
+  let(:params) { { attempts_made: } }
 
   describe "#save" do
     context "validation" do

@@ -6,20 +6,20 @@ module CCMS
       context "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create :firm, name: "Firm1" }
-        let(:office) { create :office, firm: firm }
+        let(:office) { create :office, firm: }
         let(:savings_amount) { legal_aid_application.savings_amount }
         let(:other_assets_decl) { legal_aid_application.other_assets_declaration }
         let(:provider) do
           create :provider,
-                 firm: firm,
+                 firm:,
                  selected_office: office,
                  username: 4_953_649
         end
 
-        let!(:adult_dependant) { create :dependant, :over18, legal_aid_application: legal_aid_application, number: 3, assets_value: 8_000.01 }
+        let!(:adult_dependant) { create :dependant, :over18, legal_aid_application:, number: 3, assets_value: 8_000.01 }
         let(:ccms_reference) { "300000054005" }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
-        let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference }
+        let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
@@ -34,17 +34,17 @@ module CCMS
                    :with_proceedings,
                    populate_vehicle: true,
                    with_bank_accounts: 2,
-                   provider: provider,
-                   office: office
+                   provider:,
+                   office:
           end
           let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
           let!(:chances_of_success) do
-            create :chances_of_success, :with_optional_text, proceeding: proceeding
+            create :chances_of_success, :with_optional_text, proceeding:
           end
 
           context "with dependant children" do
-            let!(:younger_child) { create :dependant, :under15, legal_aid_application: legal_aid_application, number: 1, has_income: false, assets_value: 1_000 }
-            let!(:older_child) { create :dependant, :child16_to18, legal_aid_application: legal_aid_application, number: 2, has_income: true, assets_value: 0 }
+            let!(:younger_child) { create :dependant, :under15, legal_aid_application:, number: 1, has_income: false, assets_value: 1_000 }
+            let!(:older_child) { create :dependant, :child16_to18, legal_aid_application:, number: 2, has_income: true, assets_value: 0 }
 
             context "variable attributes" do
               context "attribute CLI_RES_PER_INPUT_T_12WP3_1A - Person residing: name" do

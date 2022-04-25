@@ -30,7 +30,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
         end
 
         it "has no errors" do
@@ -50,7 +50,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           }
         end
         it "returns false" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
         end
 
         it "generates errors" do
@@ -97,7 +97,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           let(:expected_error) { /must be 0 or more/ }
 
           it "returns false" do
-            expect(subject.save).to eq(false)
+            expect(subject.save).to be(false)
           end
 
           it "generates errors" do
@@ -148,17 +148,17 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
           attributes_except_cash.each do |attr|
             val = savings_amount.__send__(attr)
-            expect(val).to eq(nil), "Attr #{attr}: expected nil, got #{val}"
+            expect(val).to be_nil, "Attr #{attr}: expected nil, got #{val}"
           end
         end
 
         it "does not empty amount if a checkbox is checked" do
           subject.save
-          expect(savings_amount.reload.cash).not_to eq(nil)
+          expect(savings_amount.reload.cash).not_to be_nil
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
         end
 
         it "has no errors" do
@@ -174,12 +174,12 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
           savings_amount.reload
           attributes.each do |attr|
             val = savings_amount.__send__(attr)
-            expect(val).to eq(nil), "Attr #{attr}: expected nil, got #{val}"
+            expect(val).to be_nil, "Attr #{attr}: expected nil, got #{val}"
           end
         end
 
         it "returns false" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
           expect(subject.errors).not_to be_empty
         end
       end
@@ -193,7 +193,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:journey) { "citizens" }
 
         it "returns true" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
           expect(subject.errors[:check_box_cash]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected"))
         end
       end
@@ -206,7 +206,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
           expect(subject.errors).to be_empty
         end
       end

@@ -7,7 +7,7 @@ module CCMS
 
       let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_everything_and_address, populate_vehicle: true }
       let(:applicant) { legal_aid_application.applicant }
-      let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application }
+      let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: }
       let(:histories) { CCMS::SubmissionHistory.where(submission_id: submission.id).order(:created_at) }
       let(:latest_history) { histories.reload.last }
       let(:request_body) { ccms_data_from_file "applicant_search_request.xml" }

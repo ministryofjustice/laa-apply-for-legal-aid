@@ -67,7 +67,7 @@ RSpec.describe "about financial assessments requests", type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit" do
-    subject { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: params }
+    subject { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: }
 
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
     let(:params) { {} }

@@ -5,8 +5,8 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:provider) { create :provider }
   let(:applicant) { create :applicant }
   let(:transaction_type) { create :transaction_type }
-  let(:bank_provider) { create :bank_provider, applicant: applicant }
-  let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+  let(:bank_provider) { create :bank_provider, applicant: }
+  let(:bank_account) { create :bank_account, bank_provider: }
   let(:vehicle) { create :vehicle, :populated }
   let(:own_vehicle) { true }
   let(:legal_aid_application) do
@@ -18,10 +18,10 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            df_options: { DA001: Time.zone.today },
-           vehicle: vehicle,
-           own_vehicle: own_vehicle,
-           applicant: applicant,
-           provider: provider,
+           vehicle:,
+           own_vehicle:,
+           applicant:,
+           provider:,
            transaction_types: [transaction_type]
   end
   let(:login) { login_as provider }
@@ -29,7 +29,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   describe "GET /providers/applications/:legal_aid_application_id/means_summary" do
     subject { get providers_legal_aid_application_means_summary_path(legal_aid_application) }
 
-    let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type: transaction_type, bank_account: bank_account }
+    let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type:, bank_account: }
 
     before do
       login
@@ -84,7 +84,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   describe "PATCH /providers/applications/:legal_aid_application_id/means_summary" do
     subject do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
-      patch providers_legal_aid_application_means_summary_path(legal_aid_application), params: params
+      patch providers_legal_aid_application_means_summary_path(legal_aid_application), params:
     end
 
     let(:params) { {} }

@@ -6,10 +6,10 @@ module CCMS
       context "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
         let(:firm) { create :firm, name: "Firm1" }
-        let(:office) { create :office, firm: firm }
+        let(:office) { create :office, firm: }
         let(:provider) do
           create :provider,
-                 firm: firm,
+                 firm:,
                  selected_office: office,
                  username: 4_953_649
         end
@@ -23,20 +23,20 @@ module CCMS
                  set_lead_proceeding: :da001,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
-                 provider: provider,
-                 office: office
+                 provider:,
+                 office:
         end
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { "300000054005" }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application: legal_aid_application, case_ccms_reference: ccms_reference }
-        let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference }
+        let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
         let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let!(:success_prospect) { :likely }
         let!(:chances_of_success) do
-          create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details", proceeding: proceeding
+          create :chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:
         end
 
         before do
@@ -245,7 +245,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      vehicle: nil,
-                     office: office
+                     office:
             end
 
             it "does not generate the bank accounts entity" do
@@ -339,7 +339,7 @@ module CCMS
                      :with_positive_benefit_check_result,
                      with_bank_accounts: 2,
                      vehicle: nil,
-                     office: office
+                     office:
             end
 
             it "does not generate the vehicle entity" do
@@ -367,7 +367,7 @@ module CCMS
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
                      populate_vehicle: true,
-                     office: office
+                     office:
             end
 
             it "does not generate the wage slips entity" do
@@ -887,8 +887,8 @@ module CCMS
                      proceeding_count: 2,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
             let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
 
@@ -924,8 +924,8 @@ module CCMS
                      proceeding_count: 2,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
             let!(:da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
             let!(:chances_of_success) do
@@ -1364,8 +1364,8 @@ module CCMS
                      :with_positive_benefit_check_result,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
 
             it "REQUESTED_SCOPE should be populated with the scope limitation code" do
@@ -1392,12 +1392,12 @@ module CCMS
                      set_lead_proceeding: :da004,
                      populate_vehicle: true,
                      with_bank_accounts: 2,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details", proceeding: proceeding_da004
+              create :chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004
             end
 
             it "REQUESTED_SCOPE should populated with MULTIPLE in proceedings section" do
@@ -1536,12 +1536,12 @@ module CCMS
                      set_lead_proceeding: :da004,
                      explicit_proceedings: [:da004],
                      populate_vehicle: true,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
             let(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details", proceeding: proceeding_da004
+              create :chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004
             end
 
             it "returns false" do
@@ -1570,12 +1570,12 @@ module CCMS
                      explicit_proceedings: [:da004],
                      populate_vehicle: true,
                      with_bank_accounts: 1,
-                     provider: provider,
-                     office: office
+                     provider:,
+                     office:
             end
             let!(:proceeding_da004) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA004" } }
             let!(:chances_of_success) do
-              create :chances_of_success, success_prospect: success_prospect, success_prospect_details: "details", proceeding: proceeding_da004
+              create :chances_of_success, success_prospect:, success_prospect_details: "details", proceeding: proceeding_da004
             end
 
             it "returns Both" do

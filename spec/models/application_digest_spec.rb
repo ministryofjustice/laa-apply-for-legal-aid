@@ -7,7 +7,7 @@ RSpec.describe ApplicationDigest do
     let(:firm_name) { "Regional Legal Services" }
     let(:username) { "regional_user_1" }
     let(:firm) { create :firm, name: firm_name }
-    let(:provider) { create :provider, firm: firm, username: username }
+    let(:provider) { create :provider, firm:, username: }
     let(:creation_time) { Time.zone.local(2019, 1, 1, 12, 15, 30) }
     let(:creation_date) { creation_time.to_date }
     let(:submission_time) { creation_time + 3.days }
@@ -20,7 +20,7 @@ RSpec.describe ApplicationDigest do
                :with_everything,
                :with_proceedings,
                explicit_proceedings: %i[da001 se013 se014],
-               provider: provider,
+               provider:,
                merits_submitted_at: submission_time
       end
     end

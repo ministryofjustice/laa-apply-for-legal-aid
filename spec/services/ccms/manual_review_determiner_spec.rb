@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   RSpec.describe ManualReviewDeterminer, :ccms do
     let(:setting) { Setting.setting }
-    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
     let(:determiner) { described_class.new(legal_aid_application) }
     let(:legal_aid_application) { create :legal_aid_application }
 
@@ -40,7 +40,7 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create :dwp_override, legal_aid_application: legal_aid_application }
+          before { create :dwp_override, legal_aid_application: }
 
           context "passported, no contrib, no_restrictions" do
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
@@ -128,7 +128,7 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create :dwp_override, legal_aid_application: legal_aid_application }
+          before { create :dwp_override, legal_aid_application: }
 
           context "passported" do
             let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
@@ -236,7 +236,7 @@ module CCMS
       subject { determiner.review_reasons }
 
       let(:cfe_result) { double "CFE Result", remarks: cfe_remarks }
-      let(:cfe_remarks) { double "CFE Remarks", review_reasons: review_reasons }
+      let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
       let(:review_reasons) { %i[unknown_frequency multi_benefit] }
       let(:override_reasons) { %i[unknown_frequency multi_benefit dwp_override] }
       let(:further_employment_details_reasons) { %i[unknown_frequency multi_benefit further_employment_details] }
@@ -251,7 +251,7 @@ module CCMS
       end
 
       context "With DWP override" do
-        before { create :dwp_override, legal_aid_application: legal_aid_application }
+        before { create :dwp_override, legal_aid_application: }
 
         it "adds the dwp review to the cfe result reasons" do
           expect(subject).to eq override_reasons

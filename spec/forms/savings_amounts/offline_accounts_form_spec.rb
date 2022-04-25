@@ -30,7 +30,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
         end
 
         it "has no errors" do
@@ -46,7 +46,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           }
         end
         it "returns false" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
         end
 
         it "generates errors" do
@@ -123,7 +123,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
         end
 
         it "has no errors" do
@@ -142,7 +142,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns false" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
           expect(subject.errors).not_to be_empty
         end
       end
@@ -157,7 +157,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns true" do
-          expect(subject.save).to eq(true)
+          expect(subject.save).to be(true)
           expect(subject.errors).to be_empty
         end
       end
@@ -172,7 +172,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
 
         it "returns false" do
-          expect(subject.save).to eq(false)
+          expect(subject.save).to be(false)
         end
 
         it "displays an error message" do

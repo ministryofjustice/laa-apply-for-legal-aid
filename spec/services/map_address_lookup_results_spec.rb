@@ -20,7 +20,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "1 BIRKS"
         expect(address.address_line_two).to eq "SLAITHWAITE"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "OWLERS CLOUGH"
         expect(address.address_line_two).to eq "LOWER LAUNDS"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "29A MOOREND ROAD"
         expect(address.address_line_two).to eq "YARDLEY GOBION"
         expect(address.city).to eq "TOWCESTER"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "NN12 7UF"
       end
     end
@@ -82,7 +82,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "CHAPEL SHRED"
         expect(address.address_line_two).to eq "SLAITHWAITE"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -103,7 +103,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "GREYSTONES FARM"
         expect(address.address_line_two).to eq "BRADSHAW LANE"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -125,7 +125,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "PHILIP SUNLEY TRANSPORT LTD"
         expect(address.address_line_two).to eq "LOWER LAUND FARM, LOWER LAUNDS"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "THE LAITHE"
         expect(address.address_line_two).to eq "SLAITHWAITE"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -167,7 +167,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "GOAT HILL FARM"
         expect(address.address_line_two).to eq "2 GOAT HILL"
         expect(address.city).to eq "HUDDERSFIELD"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "HD7 5UZ"
       end
     end
@@ -189,7 +189,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "HARINGEY COUNCIL"
         expect(address.address_line_two).to eq "RIVER PARK HOUSE, 225 HIGH ROAD"
         expect(address.city).to eq "LONDON"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "N22 8HQ"
       end
     end
@@ -211,7 +211,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "CLYDE OFFICES"
         expect(address.address_line_two).to eq "2/3, 48 WEST GEORGE STREET"
         expect(address.city).to eq "GLASGOW"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "G2 1BP"
       end
     end
@@ -232,7 +232,7 @@ RSpec.describe MapAddressLookupResults do
         expect(address.address_line_one).to eq "FAKE HOUSE"
         expect(address.address_line_two).to eq "161 FAKE STREET"
         expect(address.city).to eq "LONDON"
-        expect(address.county).to be nil
+        expect(address.county).to be_nil
         expect(address.postcode).to eq "W1 1ZZ"
       end
     end

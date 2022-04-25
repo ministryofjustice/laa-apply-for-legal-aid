@@ -8,8 +8,8 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
   let(:applicant) { create :applicant }
   let(:form_params) do
     {
-      lookup_id: lookup_id,
-      postcode: postcode,
+      lookup_id:,
+      postcode:,
       addresses: [Address.new(lookup_id:)],
     }
   end

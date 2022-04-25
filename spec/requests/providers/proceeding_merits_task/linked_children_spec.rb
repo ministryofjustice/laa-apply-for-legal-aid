@@ -8,7 +8,7 @@ module Providers
       end
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
       let(:login) { login_as legal_aid_application.provider }
 
       before do
@@ -41,7 +41,7 @@ module Providers
       end
 
       describe "PATCH /providers/merits_task_lists/:merits_task_list_id/linked_children" do
-        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: params }
+        subject { patch providers_merits_task_list_linked_children_path(proceeding), params: }
 
         let(:params) do
           {

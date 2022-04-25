@@ -28,7 +28,7 @@ RSpec.describe "GET /v1/legal_aid_applications", type: :request do
     end
 
     context "when the application has a pre-existing scheduled mail" do
-      let!(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: legal_aid_application }
+      let!(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: }
 
       it "clears any scheduled mailings" do
         expect { subject }.to change { legal_aid_application.scheduled_mailings.first.cancelled_at }

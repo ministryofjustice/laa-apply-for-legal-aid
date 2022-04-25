@@ -69,7 +69,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
 
       before do
         create :proceeding_linked_child, proceeding: proceeding, involved_child: second_child
-        create :proceeding_linked_child, proceeding: proceeding, involved_child: third_child
+        create :proceeding_linked_child, proceeding:, involved_child: third_child
       end
 
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(-1) }

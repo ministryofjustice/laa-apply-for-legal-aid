@@ -56,13 +56,13 @@ module Providers
     end
 
     describe "PATCH /providers/applications/:legal_aid_application_id/uploaded_evidence_collection" do
-      subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params }
+      subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: }
 
       let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
       let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
       let(:params_uploaded_evidence_collection) do
         {
-          original_file: original_file,
+          original_file:,
         }
       end
       let(:draft_button) { { draft_button: "Save as draft" } }
@@ -76,7 +76,7 @@ module Providers
       context "upload button pressed" do
         let(:params_uploaded_evidence_collection) do
           {
-            original_file: original_file,
+            original_file:,
           }
         end
         let(:button_clicked) { upload_button }
@@ -108,7 +108,7 @@ module Providers
           end
 
           context "when uploaded_evidence_collection file already exists" do
-            let!(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_multiple_files_attached, legal_aid_application: legal_aid_application }
+            let!(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_multiple_files_attached, legal_aid_application: }
 
             it "updates the record" do
               subject
@@ -263,7 +263,7 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
               let(:missing_categories) { [] }
 
               before do
@@ -297,7 +297,7 @@ module Providers
 
           context "with a file uploaded" do
             let(:attachment_type) { "uncategorised" }
-            let(:attachment) { create :attachment, attachment_name: "test_file.pdf", attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:attachment) { create :attachment, attachment_name: "test_file.pdf", attachment_type:, legal_aid_application: }
             let(:params_uploaded_evidence_collection) { { attachment.id.to_s => attachment.attachment_type.to_s } }
 
             context "when all validation rules are satisfied" do
@@ -321,7 +321,7 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
               let(:missing_categories) { [] }
 
               before do
@@ -368,8 +368,8 @@ module Providers
 
           context "with multiple files uploaded" do
             let(:attachment_type) { "uncategorised" }
-            let(:attachment1) { create :attachment, attachment_name: "test_file1.pdf", attachment_type: attachment_type, legal_aid_application: legal_aid_application }
-            let(:attachment2) { create :attachment, attachment_name: "test_file2.pdf", attachment_type: attachment_type, legal_aid_application: legal_aid_application }
+            let(:attachment1) { create :attachment, attachment_name: "test_file1.pdf", attachment_type:, legal_aid_application: }
+            let(:attachment2) { create :attachment, attachment_name: "test_file2.pdf", attachment_type:, legal_aid_application: }
             let(:params_uploaded_evidence_collection) { { attachment1.id.to_s => attachment1.attachment_type.to_s, attachment2.id.to_s => attachment2.attachment_type.to_s } }
 
             context "when all validation rules are satisfied" do
@@ -392,7 +392,7 @@ module Providers
             end
 
             context "when mandatory evidence is missing" do
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: legal_aid_application }
+              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
               let(:missing_categories) { [] }
 
               before do

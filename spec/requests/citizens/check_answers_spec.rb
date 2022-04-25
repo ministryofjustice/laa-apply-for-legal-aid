@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "check your answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: firm }
+  let(:provider) { create :provider, firm: }
   let(:vehicle) { create :vehicle, :populated }
   let(:own_vehicle) { true }
   let(:credit) { create :transaction_type, :credit_with_standard_name }
@@ -15,15 +15,15 @@ RSpec.describe "check your answers requests", type: :request do
            :with_everything,
            :with_student_finance,
            :with_irregular_income,
-           vehicle: vehicle,
-           own_vehicle: own_vehicle,
-           has_restrictions: has_restrictions,
-           restrictions_details: restrictions_details,
-           provider: provider
+           vehicle:,
+           own_vehicle:,
+           has_restrictions:,
+           restrictions_details:,
+           provider:
   end
   let!(:application_transaction_types) do
     create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: credit
-    create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: debit
+    create :legal_aid_application_transaction_type, legal_aid_application:, transaction_type: debit
   end
 
   let(:has_restrictions) { true }

@@ -4,7 +4,7 @@ require "sidekiq/testing"
 RSpec.describe "SamlSessionsController", type: :request do
   let(:firm) { create :firm, offices: [office] }
   let(:office) { create :office }
-  let(:provider) { create :provider, firm: firm, selected_office: office, offices: [office], username: username }
+  let(:provider) { create :provider, firm:, selected_office: office, offices: [office], username: }
   let(:username) { "bob the builder" }
   let(:provider_details_api_url) { "#{Rails.configuration.x.provider_details.url}#{username.gsub(' ', '%20')}" }
   let(:provider_details_api_reponse) { api_response.to_json }
@@ -21,7 +21,7 @@ RSpec.describe "SamlSessionsController", type: :request do
 
     it "records id of logged out provider in session" do
       subject
-      expect(session["signed_out"]).to eq true
+      expect(session["signed_out"]).to be true
     end
 
     it "records the signout page as the feedback return path" do
@@ -71,7 +71,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "provider has the CCMS_Apply role" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
-          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: }
 
           it "calls the Provider details api" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
@@ -95,7 +95,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "provider does not have the CCMS_Apply role" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
-          let(:provider) { create :provider, :created_by_devise, :without_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :created_by_devise, :without_ccms_apply_role, username: }
 
           before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
@@ -118,7 +118,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "provider does not exist on Provider details api" do
           let(:api_response) { raw_404_response }
           let(:status) { 404 }
-          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: }
 
           it "calls the Provider details creator" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
@@ -139,7 +139,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "Provider details api is down" do
           let(:status) { 502 }
           let(:api_response) { blank_response }
-          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: }
 
           it "updates the invalid login details on the provider record" do
             subject
@@ -151,7 +151,7 @@ RSpec.describe "SamlSessionsController", type: :request do
       context "not first time signing in" do
         let(:api_response) { raw_details_response }
         let(:status) { 200 }
-        let(:provider) { create :provider, :with_ccms_apply_role, username: username }
+        let(:provider) { create :provider, :with_ccms_apply_role, username: }
 
         it "uses a worker to update details" do
           expect(HostEnv).to receive(:staging_or_production?).and_return(true)
@@ -172,7 +172,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "first time signing in" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
-          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :created_by_devise, :with_ccms_apply_role, username: }
 
           it "calls the Provider details api" do
             expect(ProviderDetailsCreator).to receive(:call).with(provider).and_call_original
@@ -196,7 +196,7 @@ RSpec.describe "SamlSessionsController", type: :request do
         context "not first time signing in" do
           let(:api_response) { raw_details_response }
           let(:status) { 200 }
-          let(:provider) { create :provider, :with_ccms_apply_role, username: username }
+          let(:provider) { create :provider, :with_ccms_apply_role, username: }
 
           it "does not schedule a job to update the provider details" do
             expect(HostEnv).to receive(:staging_or_production?).and_return(false)

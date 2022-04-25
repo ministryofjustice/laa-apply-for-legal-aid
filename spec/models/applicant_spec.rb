@@ -42,12 +42,12 @@ RSpec.describe Applicant, type: :model do
     subject { described_class.destroy_all }
 
     let!(:applicant) { create :applicant, :with_address }
-    let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+    let!(:legal_aid_application) { create :legal_aid_application, applicant: }
     # Creating a bank transaction creates an applicant and the objects between it and the transaction
     let!(:bank_transaction) { create :bank_transaction }
     let(:bank_provider) { bank_transaction.bank_account.bank_provider }
-    let!(:bank_account_holder) { create :bank_account_holder, bank_provider: bank_provider }
-    let!(:bank_error) { create :bank_error, applicant: applicant }
+    let!(:bank_account_holder) { create :bank_account_holder, bank_provider: }
+    let!(:bank_error) { create :bank_error, applicant: }
 
     it "removes everything it needs to" do
       expect(described_class.count).not_to be_zero
@@ -69,12 +69,12 @@ RSpec.describe Applicant, type: :model do
   end
 
   context "True Layer Token" do
-    subject { applicant.store_true_layer_token token: token, expires: token_expires_at }
+    subject { applicant.store_true_layer_token token:, expires: token_expires_at }
 
     let(:token) { SecureRandom.uuid }
     # Note - JSON time doesn't include micro seconds so need to round to second to get consistent result
     let(:token_expires_at) { 10.minutes.from_now.round(0) }
-    let(:data) { { token: token, expires: token_expires_at } }
+    let(:data) { { token:, expires: token_expires_at } }
     let(:applicant) { create :applicant }
 
     it "stores the data securely" do
@@ -119,15 +119,15 @@ RSpec.describe Applicant, type: :model do
     subject { legal_aid_application.applicant.receives_financial_support? }
 
     let(:applicant) { create :applicant }
-    let(:bank_provider) { create :bank_provider, applicant: applicant }
-    let(:bank_account) { create :bank_account, bank_provider: bank_provider }
+    let(:bank_provider) { create :bank_provider, applicant: }
+    let(:bank_account) { create :bank_account, bank_provider: }
     let!(:friends_or_family) { create :transaction_type, :credit, :friends_or_family }
     let(:benefits) { create :transaction_type, :credit, name: "benefits" }
-    let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: bank_account }
-    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: [benefits] }
+    let!(:benefits_bank_transaction) { create :bank_transaction, :credit, transaction_type: benefits, bank_account: }
+    let(:legal_aid_application) { create :legal_aid_application, applicant:, transaction_types: [benefits] }
 
     context "when they receive friends and family income" do
-      before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: bank_account }
+      before { create :bank_transaction, :credit, transaction_type: friends_or_family, bank_account: }
 
       it { is_expected.to be true }
     end
@@ -141,8 +141,8 @@ RSpec.describe Applicant, type: :model do
     let(:applicant) { create :applicant }
     let(:benefits) { create :transaction_type, :credit, name: "benefits" }
     let(:transaction_array) { [benefits] }
-    let(:legal_aid_application) { create :legal_aid_application, applicant: applicant, transaction_types: transaction_array }
-    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let(:legal_aid_application) { create :legal_aid_application, applicant:, transaction_types: transaction_array }
+    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
 
     describe "#receives_maintenance?" do
       subject { legal_aid_application.applicant.receives_maintenance? }
@@ -213,7 +213,7 @@ RSpec.describe Applicant, type: :model do
     subject { legal_aid_application.applicant.mortgage_per_month }
 
     let(:legal_aid_application) { create :legal_aid_application, :with_everything }
-    let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
 
     context "when they pay a mortgage" do
       context "with cfe version 3 result" do
@@ -246,23 +246,23 @@ RSpec.describe Applicant, type: :model do
     let(:applicant) { create :applicant }
 
     context "with CFE version 3 result" do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v3_result, applicant: applicant }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v3_result, applicant: }
 
       it "returns true" do
-        expect(applicant.valid_cfe_result_version?).to eq true
+        expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
     context "with CFE version 4 result" do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v4_result, applicant: applicant }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v4_result, applicant: }
 
       it "returns true" do
-        expect(applicant.valid_cfe_result_version?).to eq true
+        expect(applicant.valid_cfe_result_version?).to be true
       end
     end
 
     context "with CFE version out of scope result" do
-      let!(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+      let!(:legal_aid_application) { create :legal_aid_application, applicant: }
       let(:cfe_version_5_result) { double "CFE::V5::Result" }
 
       before do
@@ -270,7 +270,7 @@ RSpec.describe Applicant, type: :model do
       end
 
       it "returns false" do
-        expect(applicant.valid_cfe_result_version?).to eq false
+        expect(applicant.valid_cfe_result_version?).to be false
       end
     end
   end

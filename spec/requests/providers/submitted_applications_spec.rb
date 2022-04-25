@@ -3,19 +3,19 @@ require "rails_helper"
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create :firm }
-  let!(:provider) { create :provider, firm: firm }
+  let!(:provider) { create :provider, firm: }
   let!(:legal_aid_application) do
     create :legal_aid_application,
            :with_everything,
            :with_proceedings,
            :assessment_submitted,
            set_lead_proceeding: :da001,
-           provider: provider
+           provider:
   end
   let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
   let!(:chances_of_success) do
     create :chances_of_success,
-           proceeding: proceeding
+           proceeding:
   end
 
   let(:login) { login_as legal_aid_application.provider }
@@ -47,7 +47,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
     it "hides print buttons when printing the page" do
       print_buttons.each do |print_button|
-        expect(print_button.ancestors.at_css(".no-print")).to_not eq(nil)
+        expect(print_button.ancestors.at_css(".no-print")).to_not be_nil
       end
     end
 
@@ -77,17 +77,17 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
     end
 
     let(:firm) { create :firm }
-    let!(:provider) { create :provider, firm: firm }
+    let!(:provider) { create :provider, firm: }
     let!(:legal_aid_application) do
       create :legal_aid_application,
              :with_everything,
              :with_proceedings,
              :assessment_submitted,
              set_lead_proceeding: :da001,
-             provider: provider
+             provider:
     end
     let(:login) { login_as legal_aid_application.provider }
-    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
     let!(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
     let(:translation_path) { "providers.submitted_applications.employment_income_table" }
 

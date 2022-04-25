@@ -72,7 +72,7 @@ RSpec.describe HMRC::ResultWorker do
 
       it "raises a silently trapped error and does not change the response" do
         expect { perform }.to raise_error(HMRC::SentryIgnoreThisSidekiqFailError)
-        expect(hmrc_response.reload.response).to be nil
+        expect(hmrc_response.reload.response).to be_nil
       end
     end
 

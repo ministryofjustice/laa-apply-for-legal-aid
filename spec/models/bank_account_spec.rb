@@ -52,13 +52,13 @@ RSpec.describe BankAccount, type: :model do
     it "returns true if benefits present" do
       bank_account = create :bank_account
       create :bank_transaction, :benefits, bank_account: bank_account
-      expect(bank_account.has_benefits?).to eq true
+      expect(bank_account.has_benefits?).to be true
     end
 
     it "returns false if benefits not present" do
       bank_account = create :bank_account
       create :bank_transaction, :with_meta_tax, bank_account: bank_account
-      expect(bank_account.has_benefits?).to eq false
+      expect(bank_account.has_benefits?).to be false
     end
   end
 
@@ -66,13 +66,13 @@ RSpec.describe BankAccount, type: :model do
     it "returns false if tax credits not present" do
       bank_account = create :bank_account
       create :bank_transaction, :benefits, bank_account: bank_account
-      expect(bank_account.has_tax_credits?).to eq false
+      expect(bank_account.has_tax_credits?).to be false
     end
 
     it "returns true if tax credits are present" do
       bank_account = create :bank_account
       create :bank_transaction, :with_meta_tax, bank_account: bank_account
-      expect(bank_account.has_tax_credits?).to eq true
+      expect(bank_account.has_tax_credits?).to be true
     end
   end
 
@@ -97,7 +97,7 @@ RSpec.describe BankAccount, type: :model do
     def create_transactions
       create :bank_transaction, bank_account: bank_account, happened_at: 2.days.ago, running_balance: 300.44
       create :bank_transaction, bank_account: bank_account, happened_at: 2.days.ago, running_balance: 400.44
-      create :bank_transaction, bank_account: bank_account, happened_at: Date.current, running_balance: 415.26
+      create :bank_transaction, bank_account:, happened_at: Date.current, running_balance: 415.26
     end
   end
 

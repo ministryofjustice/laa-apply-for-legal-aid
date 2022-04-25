@@ -30,7 +30,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/received_benefit_confirmation" do
-    subject { patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: params }
+    subject { patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: }
 
     let(:params) { { dwp_override: { passporting_benefit: nil } } }
 
@@ -63,7 +63,7 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController, type: :request
       context "remove record when changed to none selected" do
         before do
           params = { dwp_override: { passporting_benefit: :universal_credit } }
-          patch "/providers/applications/#{application_id}/received_benefit_confirmation", params: params
+          patch "/providers/applications/#{application_id}/received_benefit_confirmation", params:
         end
 
         let(:params) { { dwp_override: { passporting_benefit: :none_selected } } }

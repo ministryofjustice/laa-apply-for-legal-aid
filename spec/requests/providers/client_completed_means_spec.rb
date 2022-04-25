@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ClientCompletedMeansController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, applicant: applicant }
+  let(:legal_aid_application) { create :legal_aid_application, applicant: }
   let(:applicant) { create :applicant, :employed }
   let(:provider) { legal_aid_application.provider }
 
@@ -123,7 +123,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             let(:transaction_type) { create :transaction_type, :salary }
             let(:applicant) { create :applicant, :not_employed }
             let(:legal_aid_application) do
-              create :legal_aid_application, applicant: applicant, transaction_types: [transaction_type]
+              create :legal_aid_application, applicant:, transaction_types: [transaction_type]
             end
 
             it "redirects to next page" do

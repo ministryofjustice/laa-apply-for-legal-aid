@@ -59,7 +59,7 @@ module Providers
       end
 
       describe "update: PATCH providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
-        subject { patch providers_legal_aid_application_involved_child_path(application, child), params: params }
+        subject { patch providers_legal_aid_application_involved_child_path(application, child), params: }
 
         let(:child) { create :involved_child, legal_aid_application: application }
         let(:new_full_name) { "#{child.full_name} Junior" }

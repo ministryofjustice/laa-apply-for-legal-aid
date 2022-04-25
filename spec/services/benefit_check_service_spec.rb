@@ -6,8 +6,8 @@ RSpec.describe BenefitCheckService do
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
-  let(:applicant) { create :applicant, last_name: last_name, date_of_birth: date_of_birth, national_insurance_number: national_insurance_number }
-  let(:application) { create :application, applicant: applicant }
+  let(:applicant) { create :applicant, last_name:, date_of_birth:, national_insurance_number: }
+  let(:application) { create :application, applicant: }
 
   describe "#check_benefits", :vcr do
     let(:expected_params) do
@@ -65,7 +65,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe BenefitCheckService do
       end
 
       it "returns false" do
-        expect(subject.call).to eq false
+        expect(subject.call).to be false
       end
     end
   end

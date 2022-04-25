@@ -8,7 +8,7 @@ module Providers
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
 
       describe "GET /providers/applications/:legal_aid_application_id/statement_of_case" do
         subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
@@ -36,7 +36,7 @@ module Providers
 
           context "no statement of case record exists for the application" do
             it "displays an empty text box" do
-              expect(legal_aid_application.statement_of_case).to be nil
+              expect(legal_aid_application.statement_of_case).to be_nil
               expect(response.body).to have_text_area_with_id_and_content("application-merits-task-statement-of-case-statement-field", "")
             end
           end
@@ -74,7 +74,7 @@ module Providers
       end
 
       describe "PATCH /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+        subject { patch providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
 
         let(:entered_text) { Faker::Lorem.paragraph(sentence_count: 3) }
         let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
@@ -82,7 +82,7 @@ module Providers
         let(:params_statement_of_case) do
           {
             statement: entered_text,
-            original_file: original_file,
+            original_file:,
           }
         end
         let(:draft_button) { { draft_button: "Save as draft" } }
@@ -106,7 +106,7 @@ module Providers
             let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
 
             context "and involved children exist" do
-              before { create :involved_child, legal_aid_application: legal_aid_application }
+              before { create :involved_child, legal_aid_application: }
 
               it "redirects to the next page" do
                 subject
@@ -131,7 +131,7 @@ module Providers
         context "uploading a file" do
           let(:params_statement_of_case) do
             {
-              original_file: original_file,
+              original_file:,
             }
           end
           let(:button_clicked) { upload_button }
@@ -332,7 +332,7 @@ module Providers
           end
 
           context "model already has files attached" do
-            before { create :statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application: legal_aid_application }
+            before { create :statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application: }
 
             context "text is empty" do
               let(:entered_text) { "" }
@@ -404,7 +404,7 @@ module Providers
       end
 
       describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case" do
-        subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: params }
+        subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
 
         let(:statement_of_case) { create :statement_of_case, :with_original_file_attached }
         let(:legal_aid_application) { statement_of_case.legal_aid_application }

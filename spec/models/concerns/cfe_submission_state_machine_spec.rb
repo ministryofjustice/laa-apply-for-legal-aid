@@ -20,7 +20,7 @@ module CFE
     context "results_obtained! event" do
       context "passported application" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "explicit_remarks_created" }
+        let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created" }
 
         it "transitions from explicit remarks created created to results obtained" do
           expect { submission.results_obtained! }.not_to raise_error
@@ -32,7 +32,7 @@ module CFE
         let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
 
         context "from properties_created state" do
-          let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "properties_created" }
+          let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "properties_created" }
 
           it "raises" do
             expect { submission.results_obtained! }.to raise_error AASM::InvalidTransition, /Event 'results_obtained' cannot transition from 'properties_created'/
@@ -42,7 +42,7 @@ module CFE
     end
 
     context "dependants_created! event" do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "explicit_remarks_created" }
+      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created" }
 
       context "passported" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
@@ -63,7 +63,7 @@ module CFE
     end
 
     context "outgoings_created! event" do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "dependants_created" }
+      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "dependants_created" }
 
       context "passported" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
@@ -84,7 +84,7 @@ module CFE
     end
 
     context "state_benefits_created! event" do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "outgoings_created" }
+      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "outgoings_created" }
 
       context "passported" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
@@ -105,7 +105,7 @@ module CFE
     end
 
     context "other_income_created! event" do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "state_benefits_created" }
+      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "state_benefits_created" }
 
       context "passported" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
@@ -126,7 +126,7 @@ module CFE
     end
 
     context "explicit_remarks_created! event" do
-      let(:submission) { create :cfe_submission, legal_aid_application: legal_aid_application, aasm_state: "properties_created" }
+      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "properties_created" }
 
       context "passported" do
         let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }

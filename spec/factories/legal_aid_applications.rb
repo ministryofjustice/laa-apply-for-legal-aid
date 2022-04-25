@@ -7,7 +7,7 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { build :applicant, with_bank_accounts: with_bank_accounts }
+      applicant { build :applicant, with_bank_accounts: }
     end
 
     trait :with_single_employment do
@@ -22,7 +22,7 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { build :applicant, :with_address, with_bank_accounts: with_bank_accounts }
+      applicant { build :applicant, :with_address, with_bank_accounts: }
     end
 
     trait :with_applicant_and_address_lookup do
@@ -662,7 +662,7 @@ FactoryBot.define do
           create :bank_transaction,
                  :benefits,
                  happened_at: count.days.ago,
-                 bank_account: bank_account,
+                 bank_account:,
                  operation: "credit",
                  meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
         end
@@ -677,7 +677,7 @@ FactoryBot.define do
           create :bank_transaction,
                  :benefits,
                  happened_at: count.days.ago,
-                 bank_account: bank_account,
+                 bank_account:,
                  operation: "credit",
                  meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
         end
@@ -689,7 +689,7 @@ FactoryBot.define do
         bank_provider = create :bank_provider, applicant: application.applicant
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: "credit"
+          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account:, operation: "credit"
         end
       end
     end
@@ -699,7 +699,7 @@ FactoryBot.define do
         bank_provider = create :bank_provider, applicant: application.applicant
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account: bank_account, operation: "debit"
+          create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account:, operation: "debit"
         end
       end
     end

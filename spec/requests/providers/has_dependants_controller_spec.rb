@@ -51,7 +51,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
     end
 
     describe "PATCH /providers/:application_id/has_dependants" do
-      before { patch providers_legal_aid_application_has_dependants_path(legal_aid_application), params: params }
+      before { patch providers_legal_aid_application_has_dependants_path(legal_aid_application), params: }
 
       context "valid params" do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }

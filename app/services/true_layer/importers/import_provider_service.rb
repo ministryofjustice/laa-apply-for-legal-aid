@@ -37,7 +37,7 @@ module TrueLayer
           true_layer_response: provider,
           credentials_id: provider[:credentials_id],
           token: applicant.true_layer_secure_data_id,
-          token_expires_at: token_expires_at,
+          token_expires_at:,
           name: provider[:provider][:display_name],
           true_layer_provider_id: provider[:provider][:provider_id],
         }

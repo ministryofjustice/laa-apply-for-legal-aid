@@ -97,7 +97,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
       it "creates an application as draft" do
         expect { subject }.to change { provider.legal_aid_applications.count }.by(1)
-        expect(legal_aid_application.draft?).to eq(true)
+        expect(legal_aid_application.draft?).to be(true)
       end
 
       it "creates an applicant" do
@@ -119,7 +119,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
 
         it "sets the application as draft" do
           subject
-          expect(legal_aid_application.draft?).to eq(true)
+          expect(legal_aid_application.draft?).to be(true)
         end
 
         it "leaves values blank" do

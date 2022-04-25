@@ -5,7 +5,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
 
   let(:postcode) { "SW1H9AJ" }
   let(:address) { build :address }
-  let(:params) { { postcode: postcode, model: address } }
+  let(:params) { { postcode:, model: address } }
 
   describe "validations" do
     it "has no errors with normal postcode" do

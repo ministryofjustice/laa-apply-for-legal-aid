@@ -22,7 +22,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
   end
 
   describe "PATCH /providers/:application_id/in_scope_of_laspo" do
-    subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: params }
+    subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: }
 
     before { subject }
 
@@ -30,7 +30,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
       let(:params) { { legal_aid_application: { in_scope_of_laspo: true } } }
 
       it "updates the record" do
-        expect(legal_aid_application.reload.in_scope_of_laspo).to eq(true)
+        expect(legal_aid_application.reload.in_scope_of_laspo).to be(true)
       end
 
       it "redirects to the next page" do
@@ -42,7 +42,7 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
       let(:params) { { legal_aid_application: { in_scope_of_laspo: false } } }
 
       it "updates the record" do
-        expect(legal_aid_application.reload.in_scope_of_laspo).to eq(false)
+        expect(legal_aid_application.reload.in_scope_of_laspo).to be(false)
       end
 
       it "redirects to the next page" do

@@ -4,8 +4,8 @@ module CCMS
   module PayloadGenerators
     RSpec.describe EntityAttributesGenerator, :ccms do
       let(:generator) { described_class.new(requestor, xml, entity_name, options) }
-      let(:requestor) { double CCMS::Requestors::CaseAddRequestor, submission: submission, ccms_attribute_keys: yaml_keys }
-      let(:submission) { double CCMS::Submission, id: "34343434", legal_aid_application: legal_aid_application }
+      let(:requestor) { double CCMS::Requestors::CaseAddRequestor, submission:, ccms_attribute_keys: yaml_keys }
+      let(:submission) { double CCMS::Submission, id: "34343434", legal_aid_application: }
       let(:legal_aid_application) { double LegalAidApplication }
       let(:entity_name) { :bank_acct }
       let(:yaml_keys) { YAML.load_file(Rails.root.join("spec/fixtures/files/ccms_keys/standard_ccms_keys.yml")) }

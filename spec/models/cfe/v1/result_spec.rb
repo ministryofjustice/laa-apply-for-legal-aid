@@ -11,7 +11,7 @@ module CFE
       let(:additional_property) { create :cfe_v1_result, :with_additional_properties }
       let(:capital_result) { contribution_required_result.capital }
       let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v1_result }
-      let(:cfe_submission) { create :cfe_submission, legal_aid_application: legal_aid_application }
+      let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
       let(:expected_capital_result_keys) do
         %i[
           total_liquid

@@ -11,7 +11,7 @@ module LegalFramework
       context "correct params" do
         let(:params) do
           {
-            ccms_code: ccms_code,
+            ccms_code:,
           }
         end
 
@@ -42,7 +42,7 @@ module LegalFramework
         end
 
         it "returns false" do
-          expect(subject.call(**params)).to eq false
+          expect(subject.call(**params)).to be false
         end
 
         it "does not call LeadProceedingAssignmentService" do
