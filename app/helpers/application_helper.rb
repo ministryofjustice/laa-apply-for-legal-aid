@@ -29,7 +29,7 @@ module ApplicationHelper
   def back_link(text: t("generic.back"), path: back_path, method: nil)
     return unless path
 
-    link_to_accessible text, path, class: "govuk-back-link", id: "back", method:
+    link_to_accessible text, path, class: "govuk-back-link no-print", id: "back", method:
   end
 
   def current_journey
@@ -84,7 +84,7 @@ module ApplicationHelper
   end
 
   def print_button(text)
-    content_tag :button, text, class: "govuk-button no-print print-button", type: "button"
+    content_tag :button, text, class: "govuk-button govuk-button--secondary no-print print-button", type: "button"
   end
 
   def start_button_label(button_text)

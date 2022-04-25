@@ -54,7 +54,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
 
         context "when client_declaration_confirmed checkbox checked" do
           it "updates legal aid application client_declaration_confirmed" do
-            expect(application.reload.client_declaration_confirmed).to eq true
+            expect(application.reload.client_declaration_confirmed).to be true
           end
         end
 
@@ -62,7 +62,7 @@ RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
           let(:client_declaration_confirmed) { nil }
 
           it "does not update legal aid application client_declaration_confirmed" do
-            expect(application.reload.client_declaration_confirmed).to eq false
+            expect(application.reload.client_declaration_confirmed).to be false
           end
 
           it "displays an error" do

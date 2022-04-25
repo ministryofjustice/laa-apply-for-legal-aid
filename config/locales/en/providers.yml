@@ -223,7 +223,7 @@ en:
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
-        text: "Your client agrees that:"
+        text: "%{applicant_name} agrees that:"
         list:
           a: they've instructed %{provider_firm_name} to represent them
           b_html: they've read the <a href="/privacy_policy">LAA privacy policy</a>
@@ -931,6 +931,7 @@ en:
     review_and_print_applications:
       show:
         heading: Review and print your application
+        print_heading:  Application for legal aid and client declaration
         print_button: Print application
         print_your_application: Print your application
         print_the_application: Print the application and get your client to sign the declaration.
