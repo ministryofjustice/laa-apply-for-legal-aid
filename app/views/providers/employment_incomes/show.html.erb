@@ -61,17 +61,15 @@
       </table>
     </div>
   </div>
-
-      <h2 class="govuk-heading-l"><%= t('.supplementary_question') %></h2>
-      <div class="govuk-hint"><%= t('.employment_hint') %></div>
-      <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t('generic.yes') } do %>
+      <%= form.govuk_radio_buttons_fieldset :extra_employment_information, legend: {text: t('.supplementary_question')}, hint: {text: t('.employment_hint')} do %>
+        <%= form.govuk_radio_button :extra_employment_information, true, link_errors: true, label: { text: t('generic.yes') } do %>
         <%= form.govuk_text_area :extra_employment_information_details,
                                  label: {text: t('.enter_details')},
                                  hint: {text: t('.details_hint')},
                                  rows: 5 %>
-
+        <% end %>
+        <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t('generic.no') } %>
       <% end %>
-      <%= form.govuk_radio_button :extra_employment_information, false, label: { text: t('generic.no') } %>
     <% end %>
 
     <%= next_action_buttons(
