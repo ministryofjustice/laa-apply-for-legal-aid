@@ -22,6 +22,7 @@ module HMRC
         validate_response_data
         validate_response_income
         validate_response_individual
+        validate_response_employments
 
         send_message unless errors.empty?
         errors.empty?
@@ -65,6 +66,10 @@ module HMRC
           applicant.date_of_birth.iso8601 == individual["dateOfBirth"]
       end
 
+      def validate_response_employments
+        errors << error(:employments, "employments must be present") unless employments && employments.present?
+      end
+
       def data
         @data ||= response&.dig("data")
       end
@@ -79,6 +84,10 @@ module HMRC
 
       def individual
         @individual ||= data&.find { |hash| hash["individuals/matching/individual"] }&.dig("individuals/matching/individual")
+      end
+
+      def employments
+        @employments ||= data&.find { |hash| hash["employments/paye/employments"] }&.dig("employments/paye/employments")
       end
 
       def valid_iso8601_date?(date)
