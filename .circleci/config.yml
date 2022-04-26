@@ -162,7 +162,7 @@ jobs:
             TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${DOCKER_HUB_USERNAME}'", "password": "'${DOCKER_HUB_PAT}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
             CI_VERSION_EXISTS=$(curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/ministryofjustice/apply-ci/tags | jq -r --arg RUBYVER "latest-$(cat .ruby-version)" '.results|.[]|select(.name==$RUBYVER)|.name|endswith($RUBYVER)')
             if [ "$CI_VERSION_EXISTS" = "true" ]; then
-              echo "latest-$(cat .ruby-version) image already exists"
+              echo "latest-$(cat .ruby-version) ci image already exists"
             else
               echo "${DOCKER_HUB_PAT}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
               docker build -f ./docker/apply_ci.dockerfile . -t ministryofjustice/apply-ci:latest-$(cat .ruby-version)
@@ -170,7 +170,7 @@ jobs:
             fi
             BASE_VERSION_EXISTS=$(curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/ministryofjustice/apply-base/tags | jq -r --arg RUBYVER "latest-$(cat .ruby-version)" '.results|.[]|select(.name==$RUBYVER)|.name|endswith($RUBYVER)')
             if [ "$BASE_VERSION_EXISTS" = "true" ]; then
-              echo "latest-$(cat .ruby-version) image already exists"
+              echo "latest-$(cat .ruby-version) base image already exists"
             else
               echo "${DOCKER_HUB_PAT}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
               docker build -f ./docker/apply_base.dockerfile . -t ministryofjustice/apply-base:latest-$(cat .ruby-version)
