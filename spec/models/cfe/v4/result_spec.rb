@@ -24,6 +24,7 @@ module CFE
       let(:contribution_and_restriction_result) { create :cfe_v4_result, :with_capital_contribution_required, submission: cfe_submission }
       let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
+      let(:mock_result) { CFEResults::V4::MockResults.eligible }
 
       describe "#overview" do
         subject { cfe_result.overview }
@@ -476,24 +477,57 @@ module CFE
       describe "#net_housing_costs" do
         subject(:net_housing_costs) { instance.net_housing_costs }
 
-        let(:instance) { build(:cfe_v4_result, :with_housing_costs_difference) }
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+        let(:result) { mock_result.tap { |mock| mock[:result_summary][:disposable_income][:net_housing_costs] = 111.11 } }
 
-        it "returns [:result_summary][:disposable_income][:net_housing_costs]" do
-          expect(net_housing_costs).to be 545.0
+        it "returns disposable_income net_housing_costs value" do
+          expect(net_housing_costs).to be 111.11
         end
       end
 
-      # describe "#moe_housing" do
-      # end
+      describe "#moe_housing" do
+        subject(:moe_housing) { instance.moe_housing }
 
-      # describe "#moe_childcare" do
-      # end
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+        let(:result) { mock_result.tap { |mock| mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:rent_or_mortgage] = 222.22 } }
 
-      # describe "#moe_maintenance_out" do
-      # end
+        it "returns monthly_equivalents rent_or_mortgage value" do
+          expect(moe_housing).to be 222.22
+        end
+      end
 
-      # describe "#moe_legal_aid" do
-      # end
+      describe "#moe_childcare" do
+        subject(:moe_childcare) { instance.moe_childcare }
+
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+        let(:result) { mock_result.tap { |mock| mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:child_care] = 333.33 } }
+
+        it "returns monthly_equivalents child_care value" do
+          expect(moe_childcare).to be 333.33
+        end
+      end
+
+      describe "#moe_maintenance_out" do
+        subject(:moe_maintenance_out) { instance.moe_maintenance_out }
+
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+        let(:result) { mock_result.tap { |mock| mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:maintenance_out] = 444.44 } }
+
+        it "returns monthly_equivalents maintenance_out value" do
+          expect(moe_maintenance_out).to be 444.44
+        end
+      end
+
+      describe "#moe_legal_aid" do
+        subject(:moe_legal_aid) { instance.moe_legal_aid }
+
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+        let(:result) { mock_result.tap { |mock| mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:legal_aid] = 555.55 } }
+
+        it "returns monthly_equivalents legal_aid value" do
+          expect(moe_legal_aid).to be 555.55
+        end
+      end
 
       ################################################################
       #  DISPOSABLE INCOME                                           #
@@ -629,15 +663,43 @@ module CFE
         end
       end
 
-      describe "total_monthly_outgoings" do
-        it "returns total monthly outgoings" do
-          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings).to eq 165.0
+      describe "#total_monthly_outgoings" do
+        subject(:total_monthly_outgoings) { instance.total_monthly_outgoings }
+
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+
+        let(:result) do
+          mock_result.tap do |mock|
+            mock[:result_summary][:disposable_income][:net_housing_costs] = 1.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:child_care] = 2.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:maintenance_out] = 3.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:legal_aid] = 4.0
+          end
+        end
+
+        it "returns sum of net_housing_costs, moe_childcare, moe_maintenance_out and moe_legal_aid" do
+          expect(total_monthly_outgoings).to be 10.0
         end
       end
 
-      describe "total_monthly_outgoings_including_tax_and_ni" do
+      describe "#total_monthly_outgoings_including_tax_and_ni" do
+        subject(:total_monthly_outgoings_including_tax_and_ni) { instance.total_monthly_outgoings_including_tax_and_ni }
+
+        let(:instance) { build(:cfe_v4_result, result: result.to_json) }
+
+        let(:result) do
+          mock_result.tap do |mock|
+            mock[:result_summary][:disposable_income][:net_housing_costs] = 1.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:child_care] = 2.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:maintenance_out] = 3.0
+            mock[:assessment][:disposable_income][:monthly_equivalents][:all_sources][:legal_aid] = 4.0
+            mock[:result_summary][:disposable_income][:employment_income][:tax] = -1.5
+            mock[:result_summary][:disposable_income][:employment_income][:national_insurance] = -1.5
+          end
+        end
+
         it "returns total monthly outgoings including tax and ni" do
-          expect(with_monthly_outgoing_equivalents.total_monthly_outgoings_including_tax_and_ni).to eq 530.79
+          expect(total_monthly_outgoings_including_tax_and_ni).to be 13.0
         end
       end
 

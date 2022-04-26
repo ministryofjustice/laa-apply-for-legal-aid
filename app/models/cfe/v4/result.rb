@@ -270,7 +270,7 @@ module CFE
       end
 
       def total_monthly_outgoings
-        net_housing_cost + moe_childcare + moe_maintenance_out + moe_legal_aid
+        net_housing_costs + moe_childcare + moe_maintenance_out + moe_legal_aid
       end
 
       def total_monthly_outgoings_including_tax_and_ni
