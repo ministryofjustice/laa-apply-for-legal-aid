@@ -14,12 +14,15 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         "dateOfBirth" => applicant.date_of_birth }
     end
 
+    let(:valid_employments_response) { [{}] }
+
     let(:valid_response_hash) do
       { "submission" => "must-be-present",
         "status" => "completed",
         "data" => [
           { "individuals/matching/individual" => valid_individual_response },
           { "income/paye/paye" => { "income" => [] } },
+          { "employments/paye/employments" => valid_employments_response },
         ] }
     end
 
@@ -182,6 +185,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [
             { "individuals/matching/individual" => valid_individual_response },
             { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => valid_employments_response },
           ] }
       end
 
@@ -205,6 +209,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [
             { "individuals/matching/individual" => valid_individual_response },
             { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => valid_employments_response },
           ] }
       end
 
@@ -227,6 +232,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
               "dateOfBirth" => applicant.date_of_birth,
             } },
             { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => valid_employments_response },
           ],
         }
       end
@@ -413,6 +419,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
                 ],
               },
             },
+            { "employments/paye/employments" => valid_employments_response },
           ],
         }
       end
@@ -441,6 +448,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
                 ],
               },
             },
+            { "employments/paye/employments" => valid_employments_response },
           ],
         }
       end
@@ -507,6 +515,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
                 ],
               },
             },
+            { "employments/paye/employments" => valid_employments_response },
           ],
         }
       end
@@ -617,6 +626,74 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       }
     end
 
+    context "when response data \"employments/paye/employments\" is valid" do
+      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => [{}] },
+          ] }
+      end
+
+      it { expect(call).to be_truthy }
+    end
+
+    context "when response data \"employments/paye/employments\" is missing" do
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [] }
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("employments must be present")
+      }
+    end
+
+    context "when response data \"employments/paye/employments\" is nil" do
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [{ "employments/paye/employments" => nil }] }
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("employments must be present")
+      }
+    end
+
+    context "when response data \"employments/paye/employments\" is empty" do
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [{ "employments/paye/employments" => [] }] }
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("employments must be present")
+      }
+    end
+
     context "when response data is invalid" do
       let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
 
@@ -624,8 +701,9 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         { "submission" => "must-be-present",
           "status" => "foobar",
           "data" => [
-            { "individuals/matching/individual" => {} },
+            { "individuals/matching/individual" => valid_individual_response },
             { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => valid_employments_response },
           ] }
       end
 
@@ -636,7 +714,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it "sends message to AlertManager with errors" do
         expect(AlertManager).to have_received(:capture_message)
-                                  .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\", individual must match applicant")
+                                  .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\"")
       end
     end
   end
