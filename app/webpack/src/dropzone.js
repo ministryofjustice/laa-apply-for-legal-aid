@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', event => {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
       maxFilesize: 7,
-      acceptedFiles: ACCEPTED_FILES.join(', ')
+      acceptedFiles: ACCEPTED_FILES.join(', '),
+      disablePreviews: true
     })
     dropzone.on('drop', () => {
       removeErrorMessages()
