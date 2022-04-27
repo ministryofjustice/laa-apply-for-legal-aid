@@ -32,21 +32,22 @@ module Reports
 
       describe "#run" do
         context "runs successfully" do
-          it "returns a csv string with a header line" do
-            csv_string = report.run
-            lines = csv_string.split("\n")
-            expect(lines.first).to match(/^Firm name,User name,Office ID/)
+          it "the name of a file based on current date and time" do
+            travel_to Time.zone.local(2022, 4, 27, 13, 22, 3).in_time_zone
+            filename = report.run
+            expect(filename.to_s).to match(/\/tmp\/admin_report_2022-04-27-13-22-03.csv$/)
+            travel_back
           end
 
-          it "returns a header and seven detail lines" do
-            csv_string = report.run
-            lines = csv_string.split("\n")
+          it "writes a header line and 7 detail lines to the csv file" do
+            filename = report.run
+            lines = File.read(filename).split("\n")
             expect(lines.size).to eq num_applications + 1
           end
         end
 
         context "exception" do
-          before { expect(report).to receive(:generate_csv_string).and_raise(RuntimeError) }
+          before { expect(report).to receive(:generate_temp_file).and_raise(RuntimeError) }
 
           it "notifies sentry" do
             expect(Sentry).to receive(:capture_message)

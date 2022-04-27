@@ -4,24 +4,25 @@ module Reports
   module MIS
     class ApplicationDetailsReport
       def run
-        generate_csv_string
+        generate_temp_file
+        tempfile_name
       rescue StandardError => e
         notify_error(e)
       end
 
     private
 
-      def generate_csv_string
-        CSV.generate do |csv|
+      def generate_temp_file
+        CSV.open(tempfile_name, "w") do |csv|
           csv << ApplicationDetailCsvLine.header_row
           legal_aid_application_ids.each do |laa_id|
             legal_aid_application = LegalAidApplication.find(laa_id)
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
           end
+        rescue StandardError => e
+          log "generate_csv_string - #{e.message}"
+          raise e
         end
-      rescue StandardError => e
-        log "generate_csv_string - #{e.message}"
-        raise e
       end
 
       def legal_aid_application_ids
@@ -36,6 +37,14 @@ module Reports
 
       def log(message)
         Rails.logger.info "ApplicationDetailsReport - #{message}"
+      end
+
+      def tempfile_name
+        @tempfile_name ||= Rails.root.join("tmp/admin_report_#{string_time}.csv")
+      end
+
+      def string_time
+        Time.zone.now.strftime("%F-%H-%M-%S")
       end
     end
   end
