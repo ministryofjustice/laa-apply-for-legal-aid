@@ -5,6 +5,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/687f23bf19d8c76a9467/test_coverage)](https://codeclimate.com/github/ministryofjustice/laa-apply-for-legal-aid/test_coverage)
 
 # LAA Apply for legal aid
+  
 
 The laa-apply-for-legal-aid system is a web service for solicitors that provide legal aid services. The service enables users to submit applications for legal aid on-line.
 
@@ -450,7 +451,7 @@ and are executed in order.
 
 We use the [data-migrate](https://github.com/ilyakatz/data-migrate/blob/master/README.md) gem for data migrations, i.e. when existing data in the database has to be changed.  These are stored in the `db/data` directory, and are also given a name prefixed with a timestamp.
 
-Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations 
+Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations
 that rely on the schema at a certain point in time are run at that time.
 
 
@@ -496,7 +497,7 @@ $ ./scripts/restore_anonymised_db.sh [branch-name]
 ```
 Where branch name is either the full git branch name or just the start of it e.g `ap-2555-anon-uat-db` or `ap-2555`
 
-It requires that you have kubectl authenticated and your context set to the `live` cluster. The `db_export.sh script` will save 
+It requires that you have kubectl authenticated and your context set to the `live` cluster. The `db_export.sh script` will save
 the anonymised database to your local `/tmp` folder. This script will copy the file to the `/tmp` folder on the selected UAT instance,
 drop the existing database and restore using the anonymised data.
 
@@ -519,7 +520,7 @@ The URL for this service should be set using the environment variable `CHECK_FIN
 
 ## Legal Framework API Service
 
-The URL for this service should be set using the environment variable  
+The URL for this service should be set using the environment variable
 `LEGAL_FRAMEWORK_API_HOST`
 
 ---
