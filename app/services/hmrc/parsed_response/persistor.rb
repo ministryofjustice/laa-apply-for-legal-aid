@@ -22,7 +22,7 @@ module HMRC
       attr_reader :hmrc_response
 
       def persistable?
-        Validator.call(hmrc_response, applicant: @application.applicant)
+        Validator.call(hmrc_response)
       end
 
       def destroy_existing_employments

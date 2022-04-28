@@ -2,18 +2,10 @@ require "rails_helper"
 
 RSpec.describe HMRC::ParsedResponse::Validator do
   describe ".call" do
-    subject(:call) { described_class.call(hmrc_response, applicant:) }
+    subject(:call) { described_class.call(hmrc_response) }
 
-    let(:instance) { described_class.new(hmrc_response, applicant:) }
-    let(:applicant) { create(:legal_aid_application, :with_applicant).applicant }
-
-    let(:valid_individual_response) do
-      { "firstName" => applicant.first_name,
-        "lastName" => applicant.last_name,
-        "nino" => applicant.national_insurance_number,
-        "dateOfBirth" => applicant.date_of_birth }
-    end
-
+    let(:instance) { described_class.new(hmrc_response) }
+    let(:valid_individual_response) { {} }
     let(:valid_employments_response) { [{}] }
 
     let(:valid_response_hash) do
@@ -33,7 +25,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when HRMC response use_case is \"two\"" do
-      let(:instance) { described_class.new(hmrc_response, applicant:) }
+      let(:instance) { described_class.new(hmrc_response) }
       let(:hmrc_response) { create(:hmrc_response, use_case: "two", response: valid_response_hash) }
 
       it { expect(instance.call).to be_falsey }
@@ -41,18 +33,6 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it {
         instance.call
         expect(instance.errors.collect(&:message)).to include("use_case must be \"one\", but was \"two\"")
-      }
-    end
-
-    context "when applicant is nil" do
-      let(:instance) { described_class.new(hmrc_response, applicant: nil) }
-      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash) }
-
-      it { expect(instance.call).to be_falsey }
-
-      it {
-        instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
       }
     end
 
@@ -181,7 +161,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       }
     end
 
-    context "when response data has \"individuals/matching/individual\" details matching request" do
+    context "when response data has \"individuals/matching/individual\" details present" do
       let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
@@ -196,54 +176,6 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       end
 
       it { expect(call).to be_truthy }
-    end
-
-    context "when response data has \"individuals/matching/individual\" details matching request with case differences" do
-      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-      let(:valid_individual_response) do
-        { "firstName" => applicant.first_name.upcase,
-          "lastName" => applicant.last_name.upcase,
-          "nino" => applicant.national_insurance_number.downcase,
-          "dateOfBirth" => applicant.date_of_birth }
-      end
-
-      let(:response_hash) do
-        { "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => valid_individual_response },
-            { "income/paye/paye" => { "income" => [] } },
-            { "employments/paye/employments" => valid_employments_response },
-          ] }
-      end
-
-      it { expect(call).to be_truthy }
-    end
-
-    context "when response data \"individuals/matching/individual\" details do not match applicant first name" do
-      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-      let(:response_hash) do
-        {
-          "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => {
-              "firstName" => "Name does not need to match",
-              "lastName" => applicant.last_name,
-              "nino" => applicant.national_insurance_number.downcase,
-              "dateOfBirth" => applicant.date_of_birth,
-            } },
-            { "income/paye/paye" => { "income" => [] } },
-            { "employments/paye/employments" => valid_employments_response },
-          ],
-        }
-      end
-
-      it { expect(instance.call).to be_truthy }
     end
 
     context "when response data \"individuals/matching/individual\" details are missing" do
@@ -261,81 +193,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
       it {
         instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
-      }
-    end
-
-    context "when response data \"individuals/matching/individual\" details are empty" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
-
-      let(:response_hash) do
-        { "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => {} },
-            { "income/paye/paye" => { "income" => [] } },
-          ] }
-      end
-
-      it { expect(instance.call).to be_falsey }
-
-      it {
-        instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
-      }
-    end
-
-    context "when response data \"individuals/matching/individual\" details has invalid dateOfBirth date" do
-      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-      let(:response_hash) do
-        { "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => {
-              "firstName" => legal_aid_application.applicant.first_name,
-              "lastName" => legal_aid_application.applicant.last_name,
-              "nino" => legal_aid_application.applicant.national_insurance_number,
-              "dateOfBirth" => "1999-99-99",
-            } },
-            { "income/paye/paye" => { "income" => [] } },
-          ] }
-      end
-
-      it { expect(instance.call).to be_falsey }
-
-      it {
-        instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
-      }
-    end
-
-    context "when response data \"individuals/matching/individual\" details do not match applicant" do
-      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-      let(:response_hash) do
-        {
-          "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => {
-              "firstName" => legal_aid_application.applicant.first_name,
-              "lastName" => legal_aid_application.applicant.last_name,
-              "nino" => "FOOBAR",
-              "dateOfBirth" => legal_aid_application.applicant.date_of_birth,
-            } },
-            { "income/paye/paye" => { "income" => [] } },
-          ],
-        }
-      end
-
-      it { expect(instance.call).to be_falsey }
-
-      it {
-        instance.call
-        expect(instance.errors.collect(&:message)).to include("individual must match applicant")
+        expect(instance.errors.collect(&:message)).to include("individual must be present")
       }
     end
 
