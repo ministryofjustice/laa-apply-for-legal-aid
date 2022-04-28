@@ -42,7 +42,7 @@ class Proceeding < ApplicationRecord
   end
 
   def default_level_of_service_level
-    "3"
+    section8? ? "1" : "3"
   end
 
   def default_level_of_service_name
