@@ -486,11 +486,11 @@ module Providers
         let(:delete_params) do
           {
             uploaded_evidence_collection: {
-              uploaded_evidence_collection.original_attachments.first.id => 'gateway_evidence'
+              uploaded_evidence_collection.original_attachments.first.id => "gateway_evidence",
             },
             delete_button: "Delete",
             attachment_id: uploaded_evidence_collection.original_attachments.first.id,
-            legal_aid_application_id: legal_aid_application.id
+            legal_aid_application_id: legal_aid_application.id,
           }
         end
 
@@ -524,11 +524,11 @@ module Providers
           let(:delete_params) do
             {
               uploaded_evidence_collection: {
-                uploaded_evidence_collection.original_attachments.first.id => 'gateway_evidence'
+                uploaded_evidence_collection.original_attachments.first.id => "gateway_evidence",
               },
               delete_button: "Delete",
-              attachment_id: 'unknown',
-              legal_aid_application_id: legal_aid_application.id
+              attachment_id: "unknown",
+              legal_aid_application_id: legal_aid_application.id,
             }
           end
 
