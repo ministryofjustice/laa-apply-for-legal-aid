@@ -477,13 +477,22 @@ module Providers
       end
 
       context "Delete" do
-        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: params.merge(delete_params) }
+        subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: delete_params }
 
         let(:button_clicked) { delete_button }
         let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
         let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
         let(:original_file) { uploaded_evidence_collection.original_attachments.first }
-        let(:delete_params) { { attachment_id: uploaded_evidence_collection.original_attachments.first.id } }
+        let(:delete_params) do
+          {
+            uploaded_evidence_collection: {
+              uploaded_evidence_collection.original_attachments.first.id => 'gateway_evidence'
+            },
+            delete_button: "Delete",
+            attachment_id: uploaded_evidence_collection.original_attachments.first.id,
+            legal_aid_application_id: legal_aid_application.id
+          }
+        end
 
         before do
           allow(DocumentCategory).to receive(:displayable_document_category_names).and_return(%w[gateway_evidence])
@@ -512,7 +521,16 @@ module Providers
         end
 
         context "when file not found" do
-          let(:delete_params) { { attachment_id: :unknown } }
+          let(:delete_params) do
+            {
+              uploaded_evidence_collection: {
+                uploaded_evidence_collection.original_attachments.first.id => 'gateway_evidence'
+              },
+              delete_button: "Delete",
+              attachment_id: 'unknown',
+              legal_aid_application_id: legal_aid_application.id
+            }
+          end
 
           it "returns http success" do
             subject

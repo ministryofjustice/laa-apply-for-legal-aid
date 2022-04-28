@@ -16,5 +16,9 @@ module UploadedEvidence
 
       self
     end
+
+    def submission_form
+      nil
+    end
   end
 end

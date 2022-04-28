@@ -31,15 +31,16 @@ module Providers
   private
 
     def copy_instance_variables
-      @successfully_deleted = @service.successfully_deleted
       @attachment_type_options = @service.attachment_type_options
+      @categorisation_errors = @service.categorisation_errors
+      @error_message = @service.error_message
       @evidence_type_translation = @service.evidence_type_translation
       @mandatory_evidence_errors = @service.mandatory_evidence_errors
-      @categorisation_errors = @service.categorisation_errors
-      @upload_form = @service.upload_form
       @required_documents = @service.required_documents
+      @submission_form = @service.submission_form
       @successful_upload = @service.successful_upload
-      @error_message = @service.error_message
+      @successfully_deleted = @service.successfully_deleted
+      @upload_form = @service.upload_form
       @uploaded_evidence_collection = @service.uploaded_evidence_collection
     end
   end
