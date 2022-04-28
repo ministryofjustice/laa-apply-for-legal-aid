@@ -33,9 +33,15 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when HRMC response use_case is \"two\"" do
+      let(:instance) { described_class.new(hmrc_response, applicant:) }
       let(:hmrc_response) { create(:hmrc_response, use_case: "two", response: valid_response_hash) }
 
-      it { expect(call).to be_falsey }
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("use_case must be \"one\", but was \"two\"")
+      }
     end
 
     context "when applicant is nil" do
@@ -695,8 +701,6 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data is invalid" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
-
       let(:response_hash) do
         { "submission" => "must-be-present",
           "status" => "foobar",
@@ -707,14 +711,31 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           ] }
       end
 
-      before do
-        allow(AlertManager).to receive(:capture_message)
-        call
+      context "with use_case \"one\"" do
+        let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: response_hash) }
+
+        before do
+          allow(AlertManager).to receive(:capture_message)
+          call
+        end
+
+        it "sends message to AlertManager with errors" do
+          expect(AlertManager).to have_received(:capture_message)
+                                    .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\"")
+        end
       end
 
-      it "sends message to AlertManager with errors" do
-        expect(AlertManager).to have_received(:capture_message)
-                                  .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\"")
+      context "with use_case \"two\"" do
+        let(:hmrc_response) { create(:hmrc_response, use_case: "two", response: response_hash) }
+
+        before do
+          allow(AlertManager).to receive(:capture_message)
+          call
+        end
+
+        it "does not send message to AlertManager with errors" do
+          expect(AlertManager).not_to have_received(:capture_message)
+        end
       end
     end
   end
