@@ -24,7 +24,7 @@ module HMRC
         validate_response_individual
         validate_response_employments
 
-        send_message unless errors.empty?
+        capture_errors unless errors_ignoreable?
         errors.empty?
       end
 
@@ -33,7 +33,7 @@ module HMRC
       attr_reader :hmrc_response, :response, :applicant
 
       def validate_use_case
-        errors << error(:use_case, "use_case must be \"one\"") if hmrc_response.use_case != "one"
+        errors << error(:use_case, "use_case must be \"one\", but was \"#{hmrc_response.use_case}\"") if hmrc_response.use_case != "one"
       end
 
       def validate_response
@@ -100,8 +100,12 @@ module HMRC
         Error.new(*args)
       end
 
-      def send_message
+      def capture_errors
         AlertManager.capture_message("HMRC Response is unacceptable (id: #{hmrc_response.id}) - #{errors.map(&:message).join(', ')}")
+      end
+
+      def errors_ignoreable?
+        errors.empty? || errors.map(&:attribute).include?(:use_case)
       end
     end
   end
