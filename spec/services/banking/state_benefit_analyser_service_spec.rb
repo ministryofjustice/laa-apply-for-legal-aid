@@ -68,6 +68,22 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           expect(legal_aid_application.transaction_types).to include(included_benefit_transaction_type)
           expect(legal_aid_application.transaction_types).to include(excluded_benefit_transaction_type)
         end
+
+        context "with child benefit under a new code HMRC CHILD BENEFIT" do
+          let!(:transactions) { [create(:bank_transaction, :credit, description: "HMRC CHILD BENEFIT", bank_account: bank_account1)] }
+
+          it "marks the transaction as a state benefit" do
+            subject
+            tx = legal_aid_application.reload.bank_transactions.first
+            expect(tx.transaction_type_id).to eq included_benefit_transaction_type.id
+          end
+
+          it "updates the meta data with the label of the state benefit" do
+            subject
+            tx = legal_aid_application.reload.bank_transactions.first
+            expect(tx.meta_data).to eq({ code: "HMRC CHILD BENEFIT", label: "hmrc_child_benefit", name: "Child Benefit", selected_by: "System" })
+          end
+        end
       end
 
       context "an excluded benefit" do
@@ -142,6 +158,14 @@ RSpec.describe Banking::StateBenefitAnalyserService do
           "label" => "child_benefit",
           "name" => "Child Benefit",
           "dwp_code" => "CHB",
+          "exclude_from_gross_income" => false,
+          "category" => nil,
+          "selected_by" => "System",
+        },
+        {
+          "label" => "hmrc_child_benefit",
+          "name" => "Child Benefit",
+          "dwp_code" => "HMRC CHILD BENEFIT",
           "exclude_from_gross_income" => false,
           "category" => nil,
           "selected_by" => "System",
