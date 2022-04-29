@@ -12,7 +12,9 @@ jobs:
     steps:
     - run: |
         echo PR #${{ github.event.number }} has been merged
-        echo delete UAT release here.....
+
+    - run: |
+        ./bin/delete_uat_deployment
 
   close_job:
     # this job will only run if the PR has been closed without being merged
@@ -21,4 +23,5 @@ jobs:
     steps:
     - run: |
         echo PR #${{ github.event.number }} has been closed without being merged
-        echo delete UAT release here.....
+    - run: |
+        ./bin/delete_uat_deployment
