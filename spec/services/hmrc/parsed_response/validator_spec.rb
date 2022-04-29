@@ -8,8 +8,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     let(:applicant) { create(:legal_aid_application, :with_applicant).applicant }
 
     let(:valid_individual_response) do
-      { "firstName" => applicant.first_name,
-        "lastName" => applicant.last_name,
+      { "firstName" => "not-checked",
+        "lastName" => "not-checked",
         "nino" => applicant.national_insurance_number,
         "dateOfBirth" => applicant.date_of_birth }
     end
@@ -198,13 +198,13 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(call).to be_truthy }
     end
 
-    context "when response data has \"individuals/matching/individual\" details matching request with case differences" do
+    context "when response data has \"individuals/matching/individual\" details matching but different name" do
       let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:valid_individual_response) do
-        { "firstName" => applicant.first_name.upcase,
-          "lastName" => applicant.last_name.upcase,
+        { "firstName" => "Foo",
+          "lastName" => "Bar",
           "nino" => applicant.national_insurance_number.downcase,
           "dateOfBirth" => applicant.date_of_birth }
       end
@@ -220,30 +220,6 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       end
 
       it { expect(call).to be_truthy }
-    end
-
-    context "when response data \"individuals/matching/individual\" details do not match applicant first name" do
-      let(:hmrc_response) { create(:hmrc_response, legal_aid_application:, response: response_hash) }
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
-      let(:response_hash) do
-        {
-          "submission" => "must-be-present",
-          "status" => "completed",
-          "data" => [
-            { "individuals/matching/individual" => {
-              "firstName" => "Name does not need to match",
-              "lastName" => applicant.last_name,
-              "nino" => applicant.national_insurance_number.downcase,
-              "dateOfBirth" => applicant.date_of_birth,
-            } },
-            { "income/paye/paye" => { "income" => [] } },
-            { "employments/paye/employments" => valid_employments_response },
-          ],
-        }
-      end
-
-      it { expect(instance.call).to be_truthy }
     end
 
     context "when response data \"individuals/matching/individual\" details are missing" do
