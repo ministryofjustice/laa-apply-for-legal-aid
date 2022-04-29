@@ -20,7 +20,7 @@ module Reports
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
           end
         rescue StandardError => e
-          log "generate_csv_string - #{e.message}"
+          log "#{self.class.name}##{__method__} - #{e.message}"
           raise e
         end
       end

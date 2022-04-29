@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ReportsUploaderJob, type: :job do
-  # subject { report_uploader.perform }
-
   let(:report_uploader) { described_class.new }
 
   describe "#expiration" do
