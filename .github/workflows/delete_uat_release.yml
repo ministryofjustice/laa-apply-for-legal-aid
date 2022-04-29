@@ -1,4 +1,4 @@
-name: Delete UAT release
+name: Delete UAT deployment
 
 on:
   pull_request:
