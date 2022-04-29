@@ -1,8 +1,8 @@
-name: On PR closed
+name: Delete UAT deployment
 
 on:
   pull_request:
-    types: [closed, reopened]
+    types: [closed]
 
 jobs:
   merge_job:
@@ -12,6 +12,7 @@ jobs:
     steps:
     - run: |
         echo PR #${{ github.event.number }} has been merged
+        echo delete UAT release here.....
 
   close_job:
     # this job will only run if the PR has been closed without being merged
@@ -21,10 +22,3 @@ jobs:
     - run: |
         echo PR #${{ github.event.number }} has been closed without being merged
         echo delete UAT release here.....
-
-  reopened_job:
-    if: github.event.pull_request.reopened == true
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo PR #${{ github.event.number }} has been reopened
