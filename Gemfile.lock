@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/nebulab/simple_command.git
-  revision: 48ecd83e6f8de6ef354f729109ed4c6e69aaf87c
+  revision: 210198e66f180702b8564e855a83aa1afb30f3fa
   branch: master
   specs:
-    simple_command (0.1.0)
+    simple_command (1.0.1)
 
 GEM
   remote: https://rubygems.org/
