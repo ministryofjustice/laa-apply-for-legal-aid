@@ -27,7 +27,6 @@
     "serialize-javascript": "^3.1.0",
     "acorn": "^7.1.1",
     "kind-of": "^6.0.3",
-    "node-forge": "^0.10.0",
     "yargs-parser": "^13.1.2",
     "is-svg": "^4.2.2",
     "ssri": "^8.0.1",
