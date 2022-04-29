@@ -25,7 +25,7 @@ gem "savon", "~> 2.12.1"
 gem "sentry-rails", ">= 4.8.0"
 gem "sentry-ruby"
 gem "sentry-sidekiq"
-gem "simple_command", github: "nebulab/simple_command", branch: "master"
+gem "simple_command"
 gem "tzinfo-data"
 gem "webdack-uuid_migration", "~> 1.4.0"
 
