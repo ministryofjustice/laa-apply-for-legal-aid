@@ -6,22 +6,22 @@ on:
 
 jobs:
   merge_job:
-    # this job will only run if the PR has been merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo PR #${{ github.event.number }} has been merged
-
+        echo "PR #${{ github.event.number }} has been merged"
     - run: |
         ./bin/delete_uat_deployment
 
   close_job:
-    # this job will only run if the PR has been closed without being merged
     if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - run: |
-        echo PR #${{ github.event.number }} has been closed without being merged
+        echo "PR #${{ github.event.number }} has been closed without being merged"
+    - run: |
+        ls -la ./bin/delete_uat_deployment
     - run: |
         ./bin/delete_uat_deployment
