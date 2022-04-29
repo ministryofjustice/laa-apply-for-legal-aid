@@ -65,7 +65,7 @@ RSpec.describe Proceeding, type: :model do
   describe "#default_level_of_service_level" do
     subject(:default_level_of_service_level) { proceeding.default_level_of_service_level }
 
-    context "when matter is domestic abuse" do
+    context "when matter is Domestic abuse" do
       let(:matter_code) { "MINJN" }
 
       it "returns \"3\", meaning \"Full representation\"" do
@@ -73,12 +73,28 @@ RSpec.describe Proceeding, type: :model do
       end
     end
 
-    context "when matter is section 8" do
+    context "when matter is \"Children - section 8\"" do
       let(:matter_code) { "KSEC8" }
 
       it "returns \"1\", meaning \"Family help (higher)\"" do
         expect(default_level_of_service_level).to eq "1"
       end
+    end
+  end
+
+  describe "#default_level_of_service_name" do
+    subject(:default_level_of_service_level) { proceeding.default_level_of_service_name }
+
+    context "when matter is Domestic abuse" do
+      let(:matter_code) { "MINJN" }
+
+      it { expect(default_level_of_service_level).to eq "Full Representation" }
+    end
+
+    context "when matter is \"Children - section 8\"" do
+      let(:matter_code) { "KSEC8" }
+
+      it { expect(default_level_of_service_level).to eq "Family Help (Higher)" }
     end
   end
 

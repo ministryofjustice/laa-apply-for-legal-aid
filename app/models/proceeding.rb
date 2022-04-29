@@ -1,12 +1,16 @@
 class Proceeding < ApplicationRecord
   FIRST_PROCEEDING_CASE_ID = 55_000_000
 
+  LevelOfService = Struct.new(:name, :level)
+
+  DEFAULT_LEVEL_OF_SERVICE_MAPPINGS = {
+    KSEC8: LevelOfService.new("Family Help (Higher)", "1"),
+    MINJN: LevelOfService.new("Full Representation", "3"),
+  }.with_indifferent_access.freeze
+
   belongs_to :legal_aid_application
-
   has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
-
   has_one :chances_of_success, class_name: "ProceedingMeritsTask::ChancesOfSuccess", dependent: :destroy
-
   has_many :proceeding_linked_children, class_name: "ProceedingMeritsTask::ProceedingLinkedChild", dependent: :destroy
 
   has_many :involved_children,
@@ -42,11 +46,15 @@ class Proceeding < ApplicationRecord
   end
 
   def default_level_of_service_level
-    section8? ? "1" : "3"
+    default_level_of_service.level
   end
 
   def default_level_of_service_name
-    "Full Representation"
+    default_level_of_service.name
+  end
+
+  def default_level_of_service
+    DEFAULT_LEVEL_OF_SERVICE_MAPPINGS[ccms_matter_code]
   end
 
   def highest_proceeding_case_id

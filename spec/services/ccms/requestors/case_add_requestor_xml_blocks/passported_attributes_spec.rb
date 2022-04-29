@@ -1275,18 +1275,38 @@ module CCMS
           end
 
           context "LEVEL_OF_SERVICE" do
-            it "is the service level number from the default level of service" do
-              %i[proceeding_merits proceeding].each do |entity|
-                block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
-                expect(block).to have_text_response proceeding.default_level_of_service_level
+            context "when lead proceeding is Domestic Abuse" do
+              it "displays the expected service level number from the default level of service" do
+                %i[proceeding_merits proceeding].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
+                  expect(block).to have_text_response("1")
+                end
+              end
+            end
+
+            context "when lead proceeding is \"Children - Section 8\"" do
+              it "displays the expected service level number from the default level of service" do
+                %i[proceeding_merits proceeding].each do |entity|
+                  block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
+                  expect(block).to have_text_response("3")
+                end
               end
             end
           end
 
           context "PROCEEDING_LEVEL_OF_SERVICE" do
-            it "displays the name of the lead proceeding default level of service" do
-              block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
-              expect(block).to have_text_response proceeding.default_level_of_service_name
+            context "when lead proceeding is Domestic Abuse" do
+              it "displays the name of the lead proceeding default level of service" do
+                block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
+                expect(block).to have_text_response("Full Representation")
+              end
+            end
+
+            context "when lead proceeding is \"Children - Section 8\"" do
+              it "displays the name of the lead proceeding default level of service" do
+                block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
+                expect(block).to have_text_response("Family Help (Higher)")
+              end
             end
           end
 
