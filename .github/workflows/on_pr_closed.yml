@@ -2,7 +2,7 @@ name: On PR closed
 
 on:
   pull_request:
-    types: [ closed ]
+    types: [closed, reopened]
 
 jobs:
   merge_job:
