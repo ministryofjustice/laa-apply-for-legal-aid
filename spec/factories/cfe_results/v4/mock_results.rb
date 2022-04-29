@@ -45,7 +45,7 @@ module CFEResults
               dependant_allowance: 0.0,
               gross_housing_costs: 0.0,
               housing_benefit: 0.0,
-              net_housing_costs: 0.0,
+              net_housing_costs: 125.0,
               maintenance_allowance: 0.0,
               total_outgoings_and_allowances: 0.0,
               total_disposable_income: 0.0,
@@ -341,6 +341,7 @@ module CFEResults
         monthly_equivalents = monthly_equivalents.transform_values { |x| x + 10 }
         other_income[:monthly_equivalents][:all_sources] = monthly_equivalents
         result[:assessment][:disposable_income] = other_income
+        result[:result_summary][:disposable_income][:net_housing_costs] += 10.0
 
         result
       end
