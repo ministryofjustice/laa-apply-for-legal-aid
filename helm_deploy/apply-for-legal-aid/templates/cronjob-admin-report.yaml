@@ -10,8 +10,8 @@ metadata:
 spec:
   schedule: '0 10,13,16,20 * * *'
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
