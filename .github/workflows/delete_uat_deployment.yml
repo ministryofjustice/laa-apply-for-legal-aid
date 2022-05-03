@@ -23,6 +23,9 @@ jobs:
     - name: Print helm version
       run: |
         helm version
+    - name: Print kubectl version
+      run: |
+        kubectl version
 
   merge_job:
     if: github.event.pull_request.merged == true
