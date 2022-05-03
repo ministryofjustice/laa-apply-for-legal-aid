@@ -19,6 +19,7 @@ Bundler.require(*Rails.groups)
 
 module LaaApplyForLegalAid
   class Application < Rails::Application
+    config.middleware.use Rack::Attack
     config.load_defaults "6.0"
     config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
 
