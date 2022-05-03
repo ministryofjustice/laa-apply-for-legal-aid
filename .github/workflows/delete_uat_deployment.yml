@@ -20,6 +20,9 @@ jobs:
     - name: Print apply release name
       run: |
         echo "apply-$(echo ${{ steps.extract_branch.outputs.branch }} | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
+    - name: Print helm version
+      run: |
+        helm version
 
   merge_job:
     if: github.event.pull_request.merged == true
