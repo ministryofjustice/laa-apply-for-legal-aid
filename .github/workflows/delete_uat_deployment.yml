@@ -18,7 +18,7 @@ jobs:
       run: |
         echo "Branch name is ${{ steps.extract_branch.outputs.branch }}"
     - name: Print apply release name
-      run |
+      run: |
         echo "apply-$(echo ${{ steps.extract_branch.outputs.branch }} | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
 
   merge_job:
