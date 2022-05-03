@@ -1,9 +1,8 @@
 #!/bin/sh
-echo "Deleting UAT deployment"
 
 function _delete_uat_deployment() {
-  # uat_release="apply-$(echo $MERGED_BRANCH | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
-  # echo "UAT release for branch $uat_release"
+  uat_release=$1
+  echo "Deleting UAT deployment release for branch \"$uat_release\"..."
 }
 
-_delete_uat_deployment
+_delete_uat_deployment $@
