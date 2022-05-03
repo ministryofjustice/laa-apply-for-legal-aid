@@ -1,14 +1,26 @@
 name: Delete UAT deployment
 
 on:
+  push:
   pull_request:
     types: [closed]
 
 jobs:
+  push_job:
+    if: github.event_name == 'push'
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - name: Print branch name
+      run: |
+        echo "Branch name is ${{ steps.extract_branch.outputs.branch }}""
+
   merge_job:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - run: |
         echo "PR #${{ github.event.number }} has been merged"
     - run: |
@@ -21,7 +33,5 @@ jobs:
     - uses: actions/checkout@v2
     - run: |
         echo "PR #${{ github.event.number }} has been closed without being merged"
-    - run: |
-        ls -la ./bin/delete_uat_deployment
     - run: |
         ./bin/delete_uat_deployment
