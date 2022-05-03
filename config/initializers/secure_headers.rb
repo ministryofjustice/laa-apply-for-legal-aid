@@ -1,5 +1,8 @@
+# rubocop:disable Lint/PercentStringArray
+connect_src = %w['self' https://www.google-analytics.com https://*.justice.gov.uk]
+connect_src << "http://localhost:*" if Rails.env.development?
+
 SecureHeaders::Configuration.configure do |config|
-  # rubocop:disable Lint/PercentStringArray
   config.csp = {
     default_src: %w['self'],
     img_src: %w['self'
@@ -10,7 +13,7 @@ SecureHeaders::Configuration.configure do |config|
     script_src: %w['self' nonce https://www.google-analytics.com https://www.googletagmanager.com],
     style_src: %w['self' 'unsafe-inline'],
     object_src: %w['none'],
-    connect_src: %w['self' https://www.google-analytics.com https://*.justice.gov.uk http://localhost:*],
+    connect_src:,
   }
-  # rubocop:enable Lint/PercentStringArray
 end
+# rubocop:enable Lint/PercentStringArray
