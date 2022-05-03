@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function _delete_uat_deployment() {
+_delete_uat_deployment() {
   uat_release=$1
   echo "Deleting UAT deployment release for branch \"$uat_release\"..."
 }
