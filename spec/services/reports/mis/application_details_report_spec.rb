@@ -59,7 +59,7 @@ module Reports
           before { allow_any_instance_of(ApplicationDetailCsvLine).to receive(:call).and_raise(StandardError, "fake error") }
 
           it "logs the error message" do
-            expect(Rails.logger).to receive(:info).with("ApplicationDetailsReport - Reports::MIS::ApplicationDetailsReport#generate_temp_file - fake error")
+            expect(Rails.logger).to receive(:info).with("ApplicationDetailsReport - StandardError :: fake error")
             report.run
           end
         end
