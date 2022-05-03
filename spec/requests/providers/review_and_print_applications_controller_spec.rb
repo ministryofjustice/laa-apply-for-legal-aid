@@ -1,0 +1,123 @@
+require "rails_helper"
+
+RSpec.describe Providers::ReviewAndPrintApplicationsController, type: :request do
+  let(:application) do
+    create :legal_aid_application,
+           :with_everything,
+           :with_proceedings,
+           :with_chances_of_success,
+           :with_attempts_to_settle,
+           :with_involved_children,
+           :provider_entering_merits,
+           proceeding_count: 3
+  end
+  let(:provider) { application.provider }
+
+  describe "GET /providers/applications/:id/review_and_print_application" do
+    subject(:request) { get providers_legal_aid_application_review_and_print_application_path(application) }
+
+    context "when the provider is not authenticated" do
+      before { request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the provider is authenticated" do
+      before do
+        login_as provider
+        request
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "displays the confirm client declaration page" do
+        expect(unescaped_response_body).to include(I18n.t("providers.review_and_print_applications.show.heading"))
+      end
+    end
+  end
+
+  describe "PATCH /providers/applications/:id/review_and_print_application/continue" do
+    subject(:request) { patch "/providers/applications/#{application.id}/review_and_print_application/continue", params: }
+
+    let(:application) do
+      create :legal_aid_application,
+             :with_everything,
+             :with_proceedings,
+             :checking_merits_answers
+    end
+    let(:allow_ccms_submission) { true }
+    let(:params) { {} }
+
+    before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
+
+    context "when logged in as an authenticated provider" do
+      before do
+        login_as application.provider
+      end
+
+      context "when continue button pressed" do
+        let(:submit_button) { { continue_button: "Continue" } }
+
+        it "updates the record" do
+          expect { request }.to change { application.reload.merits_submitted_at }.from(nil)
+          expect(application.reload).to be_generating_reports
+        end
+
+        it "redirects to next page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(application))
+        end
+
+        it "creates pdf reports" do
+          ReportsCreatorWorker.clear
+          expect(Reports::ReportsCreator).to receive(:call).with(application)
+          request
+          ReportsCreatorWorker.drain
+        end
+
+        it "sets the merits assessment to submitted" do
+          request
+          expect(application.reload.summary_state).to eq :submitted
+        end
+
+        context "when the Setting.enable_ccms_submission?is turned on" do
+          it "transitions to generating_reports state" do
+            request
+            expect(application.reload).to be_generating_reports
+          end
+        end
+
+        context "when the Setting.enable_ccms_submission? is turned off" do
+          let(:allow_ccms_submission) { false }
+
+          it "transitions to submission_paused state" do
+            request
+            expect(application.reload.state).to eq "submission_paused"
+          end
+        end
+      end
+
+      context "when form submitted using Save as draft button" do
+        let(:params) { { draft_button: "Save as draft" } }
+
+        it "redirect provider to provider's applications page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it "sets the application as draft" do
+          request
+          expect(application.reload).to be_draft
+        end
+      end
+    end
+
+    context "when unauthenticated" do
+      before { request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+  end
+end

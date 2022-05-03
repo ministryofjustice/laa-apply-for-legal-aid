@@ -12,31 +12,10 @@
         read_only: false
       ) %>
 
-  <div class="govuk-!-padding-bottom-6"></div>
-
-    <p class="govuk-heading-l"><%= t('.sub-heading') %></p>
-
-    <p class="govuk-body"><%= t('.text') %></p>
-
-    <% params = { provider_firm_name: @legal_aid_application.provider.firm.name } %>
-    <%= bullet_list_from_translation_array('providers.check_merits_answers.show.list', params: params) %>
-
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive"><%= t('.sign_app_text') %></span>
-        <%= t('.sign_app_text') %>
-      </strong>
-      <strong class="govuk-warning-text__text">
-        <%= list_from_translation_path '.check_merits_answers.show.warning' %>
-      </strong>
-    </div>
-
   <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
           method: :patch,
-          show_draft: true,
-          continue_button_text: t('generic.submit_and_continue')
+          show_draft: true
       ) %>
 
 <% end %>
