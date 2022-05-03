@@ -16,7 +16,10 @@ jobs:
       id: extract_branch
     - name: Print branch name
       run: |
-        echo "Branch name is ${{ steps.extract_branch.outputs.branch }}""
+        echo "Branch name is ${{ steps.extract_branch.outputs.branch }}"
+    - name: Print apply release name
+      run |
+        echo "apply-$(echo ${{ steps.extract_branch.outputs.branch }} | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
 
   merge_job:
     if: github.event.pull_request.merged == true
