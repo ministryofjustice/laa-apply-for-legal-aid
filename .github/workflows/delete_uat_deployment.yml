@@ -8,6 +8,7 @@ on:
 jobs:
   push_job:
     if: github.event_name == 'push'
+    steps:
     - name: Extract branch name
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
