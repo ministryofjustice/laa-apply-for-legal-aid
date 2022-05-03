@@ -8,6 +8,7 @@ on:
 jobs:
   push_job:
     if: github.event_name == 'push'
+    runs-on: ubuntu-latest
     steps:
     - name: Extract branch name
       shell: bash
