@@ -14,12 +14,20 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - name: Print branch name
+    - name: output branch name
+      run: echo ${{ steps.extract_branch.outputs.branch }}
+
+    - name: Extract release name
+      id: extract_release
+      shell: bash
+      run: |
+        branch=${{ steps.extract_branch.outputs.branch }
+        truncated_branch=$(echo $branch | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+        echo "##[set-output name=release;]$(echo "apply-${truncated_branch}")"
+    - name: Print branch and relase name
       run: |
         echo "Branch name is ${{ steps.extract_branch.outputs.branch }}"
-    - name: Print apply release name
-      run: |
-        echo "apply-$(echo ${{ steps.extract_branch.outputs.branch }} | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')"
+        echo "Release name is ${{ steps.extract_release.outputs.release }}"
     - name: Print helm version
       run: |
         helm version
