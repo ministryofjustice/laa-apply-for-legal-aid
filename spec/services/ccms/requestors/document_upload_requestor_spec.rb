@@ -12,7 +12,7 @@ module CCMS
 
       describe "XML request" do
         context "when sent a normal document" do
-          include_context "ccms soa configuration"
+          include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
@@ -30,7 +30,7 @@ module CCMS
         context "when sent a gateway evidence document" do
           let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "gateway_evidence_pdf") }
 
-          include_context "ccms soa configuration"
+          include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
@@ -48,7 +48,7 @@ module CCMS
         context "when sent a bank_transaction_report" do
           let(:requestor) { described_class.new(case_ccms_reference, document_id, document_encoded_base64, "my_login", "bank_transaction_report") }
 
-          include_context "ccms soa configuration"
+          include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
