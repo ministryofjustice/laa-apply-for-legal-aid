@@ -3,6 +3,7 @@ require "sidekiq/testing"
 
 RSpec.describe "FeedbacksController", type: :request do
   describe "POST /feedback" do
+    Rack::Attack.enabled = false
     subject { post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page } }
 
     let(:params) { { feedback: attributes_for(:feedback) } }
@@ -197,6 +198,38 @@ RSpec.describe "FeedbacksController", type: :request do
         subject
         expect(feedback.legal_aid_application_id).to eq application.id
         expect(feedback.originating_page).to eq "submission_feedback"
+      end
+    end
+
+    context "with Rack::Attack enabled" do
+      around do |test|
+        Rack::Attack.reset!
+        Rack::Attack.enabled = true
+        test.run
+        Rack::Attack.enabled = false
+      end
+
+      describe "when three feedbacks are submitted in quick succession" do
+        it "returns a 429 status for the final submission" do
+          post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
+          expect(response).to have_http_status(:ok)
+          expect(Feedback.count).to eq 1
+          post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
+          expect(response).to have_http_status(:ok)
+          expect(Feedback.count).to eq 2
+          post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
+          expect(response).to have_http_status(:too_many_requests)
+          expect(Feedback.count).to eq 2
+        end
+      end
+
+      describe "when feedback is submitted with crawlergo" do
+        let(:params) { { feedback: attributes_for(:feedback, improvement_suggestion: "Crawlergo is orsum") } }
+
+        it "returns a 403 status" do
+          subject
+          expect(response).to have_http_status(:forbidden)
+        end
       end
     end
   end
