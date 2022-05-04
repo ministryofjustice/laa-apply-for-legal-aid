@@ -144,6 +144,7 @@ module LaaApplyForLegalAid
     config.x.redis.base_url = ENV["REDIS_HOST"].present? && ENV["REDIS_PASSWORD"].present? ? "rediss://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:6379" : "redis://localhost:6379" # rubocop:disable Lint/RequireParentheses
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
+    config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
 
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
