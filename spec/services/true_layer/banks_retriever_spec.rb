@@ -8,7 +8,7 @@ RSpec.describe TrueLayer::BanksRetriever, vcr: { cassette_name: "true_layer_bank
       expect(described_class.banks).to eq(subject.banks)
     end
 
-    context "on failure" do
+    context "when there is a failure" do
       let(:uri) { URI.parse(described_class::API_URL_OPEN_BANKING) }
 
       before do

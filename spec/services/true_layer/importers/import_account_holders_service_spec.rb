@@ -13,7 +13,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
     let(:bank_account_holder2) { bank_provider.bank_account_holders.find_by(full_name: mock_account_holder2[:full_name]) }
     let!(:existing_bank_account_holder) { create :bank_account_holder, bank_provider: }
 
-    context "request is successful" do
+    context "when the request is successful" do
       before do
         stub_true_layer_account_holders
       end
@@ -37,7 +37,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountHoldersService do
       end
     end
 
-    context "request is not successful" do
+    context "when the request is not successful" do
       before do
         stub_true_layer_error
       end

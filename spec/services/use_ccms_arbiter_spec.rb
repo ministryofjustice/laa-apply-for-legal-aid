@@ -13,13 +13,13 @@ RSpec.describe UseCCMSArbiter do
     allow(provider).to receive(:non_passported_permissions?).and_return(provider_non_passported_permission)
   end
 
-  context "applicant receives benefit" do
+  context "when the applicant receives benefit" do
     let(:receives_benefit) { true }
 
-    context "provider does not have non-passported permissions" do
+    context "when the provider does not have non-passported permissions" do
       let(:provider_non_passported_permission) { false }
 
-      context "provider has passported permissions" do
+      context "when the provider has passported permissions" do
         let(:provider_passported_permission) { true }
 
         it "returns false" do
@@ -32,7 +32,7 @@ RSpec.describe UseCCMSArbiter do
         end
       end
 
-      context "provider does not have passported permissions" do
+      context "when the provider does not have passported permissions" do
         let(:provider_passported_permission) { false }
 
         it "returns true" do
@@ -46,10 +46,10 @@ RSpec.describe UseCCMSArbiter do
       end
     end
 
-    context "provider does have non-passported permissions" do
+    context "when the provider does have non-passported permissions" do
       let(:provider_non_passported_permission) { false }
 
-      context "provider has passported permissions" do
+      context "when the provider has passported permissions" do
         let(:provider_passported_permission) { true }
 
         it "returns false" do
@@ -62,7 +62,7 @@ RSpec.describe UseCCMSArbiter do
         end
       end
 
-      context "provider does not have passported permissions" do
+      context "when the provider does not have passported permissions" do
         let(:provider_passported_permission) { false }
 
         it "returns true" do
@@ -77,11 +77,11 @@ RSpec.describe UseCCMSArbiter do
     end
   end
 
-  context "applicant does not receive benefit" do
+  context "when the applicant does not receive benefit" do
     let(:receives_benefit) { false }
     let(:provider_passported_permission) { true }
 
-    context "provider has non_passported permissions" do
+    context "when the provider has non_passported permissions" do
       let(:provider_non_passported_permission) { true }
 
       it "returns false" do
@@ -94,7 +94,7 @@ RSpec.describe UseCCMSArbiter do
       end
     end
 
-    context "provider does not have passported permissions" do
+    context "when the provider does not have passported permissions" do
       let(:provider_non_passported_permission) { false }
 
       it "returns true" do

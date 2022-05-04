@@ -15,7 +15,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
     let!(:existing_bank_account) { create :bank_account, bank_provider: }
     let!(:existing_bank_account_transaction) { create :bank_transaction, bank_account: existing_bank_account }
 
-    context "request is successful" do
+    context "when the request is successful" do
       before do
         stub_true_layer_accounts
       end
@@ -44,7 +44,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountsService do
       end
     end
 
-    context "request is not successful" do
+    context "when the request is not successful" do
       before do
         stub_true_layer_error
       end
