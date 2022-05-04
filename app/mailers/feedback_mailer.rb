@@ -25,7 +25,7 @@ private
       provider_email: provider_email_phrase(feedback),
       application_reference: @legal_aid_application&.application_ref || "",
       application_status: application_status || "",
-      non_live_env: non_live_environment? ? "- non-live" : "",
+      non_live_env: non_live_environment? ? "- #{Rails.configuration.x.application.host}" : "",
     )
   end
 
@@ -53,7 +53,7 @@ private
   end
 
   def non_live_environment?
-    %w[staging uat localhost].any? { |env| Rails.configuration.x.application.host.include?(env) }
+    %w[staging uat localhost].filter_map { |env| env if Rails.configuration.x.application.host.include?(env) }.first
   end
 
   def provider_email_phrase(feedback)
