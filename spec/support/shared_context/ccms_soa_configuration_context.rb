@@ -8,7 +8,7 @@ RSpec.configure do |rspec|
   rspec.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-RSpec.shared_context "ccms soa configuration", shared_context: :metadata do
+RSpec.shared_context "with ccms soa configuration", shared_context: :metadata do
   before do
     allow(Rails.configuration.x).to receive(:ccms_soa).and_return(
       double(

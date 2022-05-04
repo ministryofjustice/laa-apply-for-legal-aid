@@ -2,7 +2,7 @@ module LegalFramework
   RSpec.shared_examples "a failed call to LegalFrameworkAPI" do
     # shared examples for testing failure conditions when posting to LegalFrameworkAPI Service
     #
-    context "http status 422" do
+    context "with http status 422" do
       before do
         stub_request(:post, service.legal_framework_url)
           .with(body: service.request_body)
@@ -31,7 +31,7 @@ module LegalFramework
       end
     end
 
-    context "other failing http status" do
+    context "with another failing http status" do
       before do
         stub_request(:post, service.legal_framework_url)
           .with(body: service.request_body)
@@ -56,7 +56,7 @@ module LegalFramework
       end
     end
 
-    context "connection error" do
+    context "when there is a connection error" do
       it "creates a LegalFramework::Submission error and writes a history record with a backtrace" do
         stub_request(:post, service.legal_framework_url).to_raise(Faraday::ConnectionFailed.new("my faraday connection failed"))
         expect {

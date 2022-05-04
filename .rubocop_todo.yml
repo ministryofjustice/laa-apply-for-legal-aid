@@ -439,9 +439,6 @@ RSpec/ContextWording:
     - 'spec/services/true_layer/importers/import_transactions_service_spec.rb'
     - 'spec/services/true_layer_error_decoder_spec.rb'
     - 'spec/services/use_ccms_arbiter_spec.rb'
-    - 'spec/support/shared_context/ccms_soa_configuration_context.rb'
-    - 'spec/support/shared_examples/cfe_failures_shared_examples.rb'
-    - 'spec/support/shared_examples/legal_framework_failures_shared_examples.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
