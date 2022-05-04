@@ -414,7 +414,7 @@ GEM
     notifications-ruby-client (5.3.0)
       jwt (>= 1.5, < 3)
     numerizer (0.1.1)
-    oauth (0.5.8)
+    oauth (0.5.10)
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
