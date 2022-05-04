@@ -443,10 +443,6 @@ RSpec/ContextWording:
     - 'spec/support/shared_examples/cfe_failures_shared_examples.rb'
     - 'spec/support/shared_examples/legal_framework_failures_shared_examples.rb'
     - 'spec/validators/document_category_validator_spec.rb'
-    - 'spec/workers/ccms/submission_process_worker_spec.rb'
-    - 'spec/workers/hmrc/result_worker_spec.rb'
-    - 'spec/workers/hmrc/submission_worker_spec.rb'
-    - 'spec/workers/import_bank_data_worker_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

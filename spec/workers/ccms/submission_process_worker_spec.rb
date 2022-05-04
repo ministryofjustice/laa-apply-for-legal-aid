@@ -20,7 +20,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
       subject
     end
 
-    context "the state changes to completed" do
+    context "when the state changes to completed" do
       before do
         allow(submission).to receive(:aasm_state).and_return(:complete)
         allow(submission).to receive(:completed?).and_return(true)
@@ -34,7 +34,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
 
     context "when an error occurs" do
       context "when @retry_count is" do
-        context "below the halfway point" do
+        context "when below the halfway point" do
           before { worker.retry_count = 4 }
 
           it "does not raise a sentry error" do
@@ -42,7 +42,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             subject
           end
 
-          context "raises a not tracked error" do
+          context "when a not tracked error is raised" do
             before do
               # this should trigger state_unchanged? and therefore SubmissionStateUnchanged
               allow(submission).to receive(:aasm_state).and_return(state)
@@ -54,7 +54,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           end
         end
 
-        context "on the halfway point" do
+        context "when at the halfway point" do
           before { worker.retry_count = 5 }
 
           it "does not raise a sentry error" do
@@ -62,7 +62,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             subject
           end
 
-          context "raises a not tracked error" do
+          context "when a not tracked error is raised" do
             before do
               # this should trigger state_unchanged? and therefore SubmissionStateUnchanged
               allow(submission).to receive(:aasm_state).and_return(state)
@@ -74,7 +74,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           end
         end
 
-        context "one above the halfway point" do
+        context "when one above the halfway point" do
           before { worker.retry_count = 6 }
 
           let(:expected_error) do
@@ -89,7 +89,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             subject
           end
 
-          context "raises a not tracked error" do
+          context "when a not tracked error is raised" do
             before do
               # this should trigger state_unchanged? and therefore SubmissionStateUnchanged
               allow(submission).to receive(:aasm_state).and_return(state)
@@ -101,7 +101,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           end
         end
 
-        context "above the halfway point" do
+        context "when above the halfway point" do
           before { worker.retry_count = 7 }
 
           it "does not raise a sentry error" do
@@ -109,7 +109,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             subject
           end
 
-          context "raises a not tracked error" do
+          context "when a not tracked error is raised" do
             before do
               # this should trigger state_unchanged? and therefore SubmissionStateUnchanged
               allow(submission).to receive(:aasm_state).and_return(state)
@@ -121,7 +121,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
           end
         end
 
-        context "at MAX_RETRIES" do
+        context "when at MAX_RETRIES" do
           before { worker.retry_count = 10 }
 
           let(:expected_error) do
@@ -138,7 +138,7 @@ RSpec.describe CCMS::SubmissionProcessWorker do
             subject
           end
 
-          context "raises a tracked error" do
+          context "when a tracked error is raised" do
             before do
               # this should trigger state_unchanged? and therefore SubmissionStateUnchanged
               allow(submission).to receive(:aasm_state).and_return(state)
