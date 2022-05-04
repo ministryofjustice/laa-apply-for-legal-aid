@@ -1,5 +1,5 @@
 {{- $schedule := include "apply-for-legal-aid.cronjob-schedule-metrics" . -}}
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ .Release.Name }}-metrics
