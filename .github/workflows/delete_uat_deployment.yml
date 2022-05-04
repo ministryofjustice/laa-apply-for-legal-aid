@@ -38,9 +38,9 @@ jobs:
     - name: List UAT deployments
       run: |
         kubectl get deployments
-    - name: List UAT deployments with helm
+    - name: List UAT deployments for branch using helm
       run: |
-        helm list
+        helm list | grep ${{ steps.extract_branch.outputs.branch }}
 
   merge_job:
     if: github.event.pull_request.merged == true
