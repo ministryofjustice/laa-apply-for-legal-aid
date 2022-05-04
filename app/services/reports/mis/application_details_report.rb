@@ -13,15 +13,17 @@ module Reports
     private
 
       def generate_temp_file
+        line_count = 0
         CSV.open(tempfile_name, "w") do |csv|
           csv << ApplicationDetailCsvLine.header_row
           legal_aid_application_ids.each do |laa_id|
             legal_aid_application = LegalAidApplication.find(laa_id)
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
+            line_count += 1
+            log "#{line_count} lines created" if (line_count % 100).zero?
           end
         rescue StandardError => e
-          log "#{self.class.name}##{__method__} - #{e.message}"
-          raise e
+          log "#{e.class} :: #{e.message}"
         end
       end
 
