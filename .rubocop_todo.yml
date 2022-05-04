@@ -442,7 +442,6 @@ RSpec/ContextWording:
     - 'spec/support/shared_context/ccms_soa_configuration_context.rb'
     - 'spec/support/shared_examples/cfe_failures_shared_examples.rb'
     - 'spec/support/shared_examples/legal_framework_failures_shared_examples.rb'
-    - 'spec/validators/document_category_validator_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
