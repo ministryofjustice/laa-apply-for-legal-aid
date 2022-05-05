@@ -248,6 +248,13 @@ Feature: Provider accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the page is accessible
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Confirm the following"
+    And the page is accessible
+    Then I select the first checkbox
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Review and print your application"
+    And the page is accessible
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
     And the page is accessible

@@ -115,6 +115,14 @@ module Flow
         },
         check_merits_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_merits_answers_path(application) },
+          forward: :confirm_client_declarations,
+        },
+        confirm_client_declarations: {
+          path: ->(application) { urls.providers_legal_aid_application_confirm_client_declaration_path(application) },
+          forward: :review_and_print_applications,
+        },
+        review_and_print_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_review_and_print_application_path(application) },
           forward: :end_of_applications,
         },
         end_of_applications: {

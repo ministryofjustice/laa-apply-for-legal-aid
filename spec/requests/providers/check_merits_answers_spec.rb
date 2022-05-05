@@ -96,11 +96,6 @@ RSpec.describe "check merits answers requests", type: :request do
         expect(response.body).to include(application.latest_incident.occurred_on.to_s)
       end
 
-      it "displays the warning text" do
-        expect(response.body).to include(I18n.t("providers.check_merits_answers.show.sign_app_text"))
-        expect(unescaped_response_body).to include(application.provider.firm.name)
-      end
-
       it "displays linked children" do
         expect(response.body).to include(I18n.t("shared.check_answers.merits.items.linked_children"))
       end
@@ -131,7 +126,6 @@ RSpec.describe "check merits answers requests", type: :request do
              :checking_merits_answers
     end
     let(:params) { {} }
-    before { allow(EnableCCMSSubmission).to receive(:call).and_return(allow_ccms_submission) }
 
     let(:allow_ccms_submission) { true }
 
@@ -143,59 +137,9 @@ RSpec.describe "check merits answers requests", type: :request do
       context "Continue button pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "updates the record" do
-          expect { subject }.to change { application.reload.merits_submitted_at }.from(nil)
-          expect(application.reload).to be_generating_reports
-        end
-      end
-
-      it "redirects to next page" do
-        subject
-        expect(response).to redirect_to(providers_legal_aid_application_end_of_application_path(application))
-      end
-
-      it "creates pdf reports" do
-        ReportsCreatorWorker.clear
-        expect(Reports::ReportsCreator).to receive(:call).with(application)
-        subject
-        ReportsCreatorWorker.drain
-      end
-
-      it "sets the merits assessment to submitted" do
-        subject
-        expect(application.reload.summary_state).to eq :submitted
-      end
-
-      context "when the Setting.enable_ccms_submission?" do
-        context "is turned on" do
-          it "transitions to generating_reports state" do
-            subject
-            expect(application.reload).to be_generating_reports
-            # expect(application.reload.state).to eq 'generating_reports'
-          end
-        end
-
-        context "is turned off" do
-          let(:allow_ccms_submission) { false }
-
-          it "transitions to submission_paused state" do
-            subject
-            expect(application.reload.state).to eq "submission_paused"
-          end
-        end
-      end
-
-      context "Form submitted using Save as draft button" do
-        let(:params) { { draft_button: "Save as draft" } }
-
-        it "redirect provider to provider's applications page" do
+        it "redirects to next page" do
           subject
-          expect(response).to redirect_to(providers_legal_aid_applications_path)
-        end
-
-        it "sets the application as draft" do
-          subject
-          expect(application.reload).to be_draft
+          expect(response).to redirect_to(providers_legal_aid_application_confirm_client_declaration_path(application))
         end
       end
     end

@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.1"
+ruby "3.1.2"
 
 gem "aasm", "~> 5.2.0"
 gem "active_model_serializers", "~> 0.10.13"
@@ -19,13 +19,14 @@ gem "pg"
 gem "pg_dump_anonymize"
 gem "puma", "~> 5.6.4"
 gem "rails", "~> 6.1.5", ">= 6.1.5.1"
+gem "rack-attack"
 gem "regexp-examples"
 gem "rexml"
 gem "savon", "~> 2.12.1"
 gem "sentry-rails", ">= 5.2.1"
 gem "sentry-ruby"
 gem "sentry-sidekiq"
-gem "simple_command", github: "nebulab/simple_command", branch: "master"
+gem "simple_command"
 gem "tzinfo-data"
 gem "webdack-uuid_migration", "~> 1.4.0"
 

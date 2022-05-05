@@ -227,6 +227,11 @@ Rails.application.routes.draw do
       resource :has_evidence_of_benefit, only: %i[show update]
       resource :employment_income, only: %i[show update]
       resource :full_employment_details, only: %i[show update]
+      resource :confirm_client_declaration, only: %i[show update]
+      resource :review_and_print_application, only: [:show] do
+        patch :continue
+        patch :reset
+      end
     end
 
     resources :merits_task_list, only: [] do

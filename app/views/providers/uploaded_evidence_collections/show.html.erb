@@ -30,7 +30,6 @@
       <%= render partial: 'uploaded_files', locals: { attachments: @legal_aid_application.uploaded_evidence_collection.original_attachments } %>
     </div>
     <div aria-live="assertive" class="govuk-visually-hidden" id="file-upload-status-message"></div>
-
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
 <% end %>

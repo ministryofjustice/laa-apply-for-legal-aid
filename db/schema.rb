@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_084008) do
+ActiveRecord::Schema.define(version: 2022_04_20_073516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -538,6 +538,7 @@ ActiveRecord::Schema.define(version: 2022_03_31_084008) do
     t.string "extra_employment_information_details"
     t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
+    t.datetime "client_declaration_confirmed_at"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

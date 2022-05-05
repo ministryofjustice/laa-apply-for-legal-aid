@@ -9,16 +9,16 @@
     "@rails/ujs": "^6.1.5",
     "@rails/webpacker": "^5.4.3",
     "acorn": "~8.7.1",
-    "axios": "^0.27.1",
+    "axios": "^0.27.2",
     "dropzone": "^6.0.0-beta.2",
     "govuk-frontend": "^4.0.1",
-    "jest": "^27.5.1",
+    "jest": "^28.0.2",
     "jquery": "^3.6.0",
     "js-search": "^2.0.0"
   },
   "devDependencies": {
-    "jest-environment-jsdom": "^27.5.1",
-    "jest-environment-jsdom-global": "^3.0.0",
+    "jest-environment-jsdom": "^28.0.2",
+    "jest-environment-jsdom-global": "^3.1.1",
     "standard": "^17.0.0",
     "webpack-dev-server": "^4.8.1"
   },
@@ -27,7 +27,6 @@
     "serialize-javascript": "^3.1.0",
     "acorn": "^7.1.1",
     "kind-of": "^6.0.3",
-    "node-forge": "^0.10.0",
     "yargs-parser": "^13.1.2",
     "is-svg": "^4.2.2",
     "ssri": "^8.0.1",
