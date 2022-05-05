@@ -19,7 +19,7 @@ function closeModal (modal) {
 function makeModalTabbable (modal, nonModalElems) {
   const dialogElements = modal.querySelectorAll('.modal-dialog')
   dialogElements.forEach((elem) => {
-    elem.setAttribute('tabindex', 2)
+    elem.setAttribute('tabindex', 0)
   })
   nonModalElems.forEach((elem) => {
     elem.setAttribute('data-previous-tabindex', elem.getAttribute('tabindex'))
