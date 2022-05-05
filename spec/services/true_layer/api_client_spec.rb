@@ -16,7 +16,7 @@ RSpec.describe TrueLayer::ApiClient do
       expect(subject.provider.value.first).to eq(mock_provider)
     end
 
-    context "result is not json" do
+    context "when the result is not json" do
       before do
         endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
         stub_request(:get, endpoint).to_return(body: "Boom!", status: 501)
@@ -27,7 +27,7 @@ RSpec.describe TrueLayer::ApiClient do
       end
     end
 
-    context "API cannot be reached" do
+    context "when the API cannot be reached" do
       before do
         endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
         stub_request(:get, endpoint).to_timeout

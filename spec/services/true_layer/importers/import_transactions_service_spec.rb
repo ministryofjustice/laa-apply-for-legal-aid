@@ -16,7 +16,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let(:transaction2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction2[:transaction_id]) }
     let!(:existing_transaction) { create :bank_transaction, bank_account: }
 
-    context "request is successful" do
+    context "when the request is successful" do
       before do
         stub_true_layer_transactions
       end
@@ -65,7 +65,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
       end
     end
 
-    context "request is not successful" do
+    context "when the request is not successful" do
       before do
         stub_true_layer_error
       end

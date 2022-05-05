@@ -7,7 +7,7 @@ RSpec.describe TrueLayerErrorDecoder do
   let(:error_description) { "TrueLayer's detailed explanation of the error" }
 
   describe "#error_heading" do
-    context "known error" do
+    context "when a known error occurs" do
       let(:error_code) { "account_temporarily_locked" }
 
       it "returns the correct translation" do
@@ -15,7 +15,7 @@ RSpec.describe TrueLayerErrorDecoder do
       end
     end
 
-    context "unknown error" do
+    context "when an unknown error occurs" do
       let(:error_code) { "flux_capacitor_outage" }
       let(:error_description) { "The flux capacitor is not working" }
 
@@ -31,7 +31,7 @@ RSpec.describe TrueLayerErrorDecoder do
   end
 
   describe "#error_details" do
-    context "known error" do
+    context "when a known error occurs" do
       let(:error_code) { "internal_server_error" }
 
       it "returns the correct translation" do
@@ -39,7 +39,7 @@ RSpec.describe TrueLayerErrorDecoder do
       end
     end
 
-    context "unknown error" do
+    context "when an unknown error occurs" do
       let(:error_code) { "flux_capacitor_outage" }
       let(:error_description) { "The flux capacitor is not working" }
 
@@ -50,7 +50,7 @@ RSpec.describe TrueLayerErrorDecoder do
   end
 
   describe "#show_link?" do
-    context "link shown" do
+    context "when the link is shown" do
       let(:error_code) { "wrong_credentials" }
 
       it "returns true" do
@@ -58,7 +58,7 @@ RSpec.describe TrueLayerErrorDecoder do
       end
     end
 
-    context "no link shown" do
+    context "when no link is shown" do
       let(:error_code) { "account_permanently_locked" }
 
       it "returns true" do

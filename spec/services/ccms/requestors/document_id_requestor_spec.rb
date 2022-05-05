@@ -11,7 +11,7 @@ module CCMS
 
       describe "XML request" do
         context "when the attachment is a means report" do
-          include_context "ccms soa configuration"
+          include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
@@ -29,7 +29,7 @@ module CCMS
         context "when the attachment is a bank transaction report" do
           let(:type) { "bank_transaction_report" }
 
-          include_context "ccms soa configuration"
+          include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
             allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)

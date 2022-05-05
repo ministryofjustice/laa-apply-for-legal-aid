@@ -9,7 +9,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
   describe "#call" do
     subject { described_class.call(api_client, bank_account) }
 
-    context "request is successful" do
+    context "when a request is successful" do
       before do
         stub_true_layer_account_balances
       end
@@ -23,7 +23,7 @@ RSpec.describe TrueLayer::Importers::ImportAccountBalanceService do
       end
     end
 
-    context "request is not successful" do
+    context "when a request is not successful" do
       before do
         stub_true_layer_error
       end

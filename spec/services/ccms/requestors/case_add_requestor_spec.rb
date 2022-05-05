@@ -88,7 +88,7 @@ module CCMS
         end
 
         context "when DF assigned scope limitations are present" do
-          context "DF not used" do
+          context "when DF are not used" do
             it "does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
@@ -98,7 +98,7 @@ module CCMS
             end
           end
 
-          context "DF actually used" do
+          context "when DF are actually used" do
             let(:df_date) { Date.parse("2020-11-23") }
 
             before do

@@ -14,7 +14,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
     let(:existing_true_layer_provider_id) { SecureRandom.hex }
     let!(:existing_provider) { create :bank_provider, applicant:, true_layer_provider_id: existing_true_layer_provider_id }
 
-    context "request is successful" do
+    context "when the request is successful" do
       before do
         stub_true_layer_provider
       end
@@ -34,7 +34,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
         expect(command.result).to eq(bank_provider)
       end
 
-      context "existing provider has same true_layer_provider_id" do
+      context "when the existing provider has the same true_layer_provider_id" do
         let(:existing_true_layer_provider_id) { mock_provider[:provider][:provider_id] }
 
         it "does not create another bank provider" do
@@ -55,7 +55,7 @@ RSpec.describe TrueLayer::Importers::ImportProviderService do
       end
     end
 
-    context "request is not successful" do
+    context "when the request is not successful" do
       before do
         stub_true_layer_error
       end

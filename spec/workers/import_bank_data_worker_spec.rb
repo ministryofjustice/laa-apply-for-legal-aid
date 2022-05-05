@@ -17,7 +17,7 @@ RSpec.describe ImportBankDataWorker, type: :worker do
     described_class.drain
   end
 
-  context "it generates an error" do
+  context "when an error is generated" do
     let(:api_error) do
       {
         error_description: "Feature not supported by the provider",

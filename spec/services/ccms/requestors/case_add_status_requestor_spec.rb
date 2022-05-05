@@ -8,7 +8,7 @@ module CCMS
       let(:requestor) { described_class.new(expected_tx_id, "my_login") }
 
       describe "XML request" do
-        include_context "ccms soa configuration"
+        include_context "with ccms soa configuration"
 
         it "generates the expected XML" do
           allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)

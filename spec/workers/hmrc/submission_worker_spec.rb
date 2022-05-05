@@ -46,7 +46,7 @@ RSpec.describe HMRC::SubmissionWorker do
       end
 
       context "when @retry_count is" do
-        context "below the halfway point" do
+        context "when below the halfway point" do
           before { worker.retry_count = 4 }
 
           it "raises an error but does not pass it to sentry" do
@@ -55,7 +55,7 @@ RSpec.describe HMRC::SubmissionWorker do
           end
         end
 
-        context "on the halfway point" do
+        context "when at the halfway point" do
           before { worker.retry_count = 5 }
 
           it "raises an error but does not pass it to sentry" do
@@ -64,7 +64,7 @@ RSpec.describe HMRC::SubmissionWorker do
           end
         end
 
-        context "one above the halfway point" do
+        context "when one above the halfway point" do
           before { worker.retry_count = 6 }
 
           let(:expected_error) do
@@ -79,7 +79,7 @@ RSpec.describe HMRC::SubmissionWorker do
           end
         end
 
-        context "above the halfway point" do
+        context "when above the halfway point" do
           before { worker.retry_count = 7 }
 
           it "raises an error but does not pass it to sentry" do
@@ -88,7 +88,7 @@ RSpec.describe HMRC::SubmissionWorker do
           end
         end
 
-        context "at MAX_RETRIES" do
+        context "when at MAX_RETRIES" do
           before { worker.retry_count = 10 }
 
           let(:expected_error) do

@@ -62,7 +62,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       expect(subject.success?).to be(true)
     end
 
-    context "the provider API call is failing" do
+    context "when the provider API call is failing" do
       before do
         endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/me"
         stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
@@ -73,7 +73,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
     end
 
-    context "a subsequent API call is failing" do
+    context "when a subsequent API call is failing" do
       before do
         endpoint = "#{TrueLayer::ApiClient::TRUE_LAYER_URL}/data/v1/accounts"
         stub_request(:get, endpoint).to_return(body: api_error.to_json, status: 501)
@@ -103,7 +103,7 @@ RSpec.describe TrueLayer::BankDataImportService do
       end
     end
 
-    context "mock_true_layer_data is on" do
+    context "when mock_true_layer_data is on" do
       let(:sample_data) { TrueLayer::SampleData }
 
       before { Setting.create!(mock_true_layer_data: true) }
