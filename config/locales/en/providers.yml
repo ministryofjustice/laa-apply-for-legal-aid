@@ -927,6 +927,7 @@ en:
       show:
         back_home: Back to your applications
         heading: Application for civil legal aid certificate
+        print_button: Print application
 
     review_and_print_applications:
       show:
