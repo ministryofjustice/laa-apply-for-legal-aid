@@ -20,8 +20,9 @@ module Reports
             legal_aid_application = LegalAidApplication.find(laa_id)
             csv << ApplicationDetailCsvLine.call(legal_aid_application)
             line_count += 1
-            log "#{line_count} lines created" if (line_count % 100).zero?
+            log "#{line_count} lines processed" if (line_count % 500).zero?
           end
+          log "#{line_count} lines written to tempfile"
         rescue StandardError => e
           log "#{e.class} :: #{e.message}"
         end
