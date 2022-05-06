@@ -16,11 +16,11 @@ RSpec.describe UseCCMSArbiter do
   context "when the applicant receives benefit" do
     let(:receives_benefit) { true }
 
-    context "when the provider does not have non-passported permissions" do
-      let(:provider_non_passported_permission) { false }
+    context "and the provider has passported permissions" do
+      let(:provider_passported_permission) { true }
 
-      context "when the provider has passported permissions" do
-        let(:provider_passported_permission) { true }
+      context "and the provider has non-passported permissions" do
+        let(:provider_non_passported_permission) { true }
 
         it "returns false" do
           expect(subject).to be false
@@ -32,8 +32,38 @@ RSpec.describe UseCCMSArbiter do
         end
       end
 
-      context "when the provider does not have passported permissions" do
-        let(:provider_passported_permission) { false }
+      context "and the provider does not have non-passported permissions" do
+        let(:provider_non_passported_permission) { false }
+
+        it "returns false" do
+          expect(subject).to be false
+        end
+
+        it "has not changed the state" do
+          subject
+          expect(laa.state).to eq "applicant_details_checked"
+        end
+      end
+    end
+
+    context "and the provider does not have passported permissions" do
+      let(:provider_passported_permission) { false }
+
+      context "and the provider has non-passported permissions" do
+        let(:provider_non_passported_permission) { true }
+
+        it "returns true" do
+          expect(subject).to be true
+        end
+
+        it "changes the state" do
+          subject
+          expect(laa.state).to eq "use_ccms"
+        end
+      end
+
+      context "and the provider does not have non-passported permissions" do
+        let(:provider_non_passported_permission) { false }
 
         it "returns true" do
           expect(subject).to be true
@@ -45,12 +75,16 @@ RSpec.describe UseCCMSArbiter do
         end
       end
     end
+  end
 
-    context "when the provider does have non-passported permissions" do
-      let(:provider_non_passported_permission) { false }
+  context "when the applicant does not receive benefit" do
+    let(:receives_benefit) { false }
 
-      context "when the provider has passported permissions" do
-        let(:provider_passported_permission) { true }
+    context "and the provider has passported permissions" do
+      let(:provider_passported_permission) { true }
+
+      context "and the provider has non-passported permissions" do
+        let(:provider_non_passported_permission) { true }
 
         it "returns false" do
           expect(subject).to be false
@@ -62,8 +96,8 @@ RSpec.describe UseCCMSArbiter do
         end
       end
 
-      context "when the provider does not have passported permissions" do
-        let(:provider_passported_permission) { false }
+      context "and the provider does not have non-passported permissions" do
+        let(:provider_non_passported_permission) { false }
 
         it "returns true" do
           expect(subject).to be true
@@ -75,35 +109,34 @@ RSpec.describe UseCCMSArbiter do
         end
       end
     end
-  end
 
-  context "when the applicant does not receive benefit" do
-    let(:receives_benefit) { false }
-    let(:provider_passported_permission) { true }
+    context "and the provider does not have passported permissions" do
+      let(:provider_passported_permission) { false }
 
-    context "when the provider has non_passported permissions" do
-      let(:provider_non_passported_permission) { true }
+      context "and the provider has non-passported permissions" do
+        let(:provider_non_passported_permission) { true }
 
-      it "returns false" do
-        expect(subject).to be false
+        it "returns false" do
+          expect(subject).to be false
+        end
+
+        it "has not changed the state" do
+          subject
+          expect(laa.state).to eq "applicant_details_checked"
+        end
       end
 
-      it "does not change the state" do
-        subject
-        expect(laa.state).to eq "applicant_details_checked"
-      end
-    end
+      context "and the provider does not have non-passported permissions" do
+        let(:provider_non_passported_permission) { false }
 
-    context "when the provider does not have passported permissions" do
-      let(:provider_non_passported_permission) { false }
+        it "returns true" do
+          expect(subject).to be true
+        end
 
-      it "returns true" do
-        expect(subject).to be true
-      end
-
-      it "changes the state on the application" do
-        subject
-        expect(laa.state).to eq "use_ccms"
+        it "changes the state on the application" do
+          subject
+          expect(laa.state).to eq "use_ccms"
+        end
       end
     end
   end
