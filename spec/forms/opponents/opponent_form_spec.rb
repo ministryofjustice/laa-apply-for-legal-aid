@@ -80,7 +80,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       expect(opponent.bail_conditions_set_details).to eq(sample_params["bail_conditions_set_details"])
     end
 
-    context "details are empty but they don't have to be entered" do
+    context "when details are empty but they don't have to be entered" do
       let(:custom_params) do
         {
           understands_terms_of_court_order: "true",
@@ -98,7 +98,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
     end
 
-    context "radio button are empty" do
+    context "when radio buttons are empty" do
       let(:custom_params) do
         {
           understands_terms_of_court_order: "",
@@ -131,7 +131,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
     end
 
-    context "details are empty even though they should be present" do
+    context "when details are empty even though they should be present" do
       let(:custom_params) do
         {
           understands_terms_of_court_order: "false",
@@ -186,7 +186,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       expect(opponent.bail_conditions_set_details).to eq(sample_params["bail_conditions_set_details"])
     end
 
-    context "radio button are empty" do
+    context "when radio buttons are empty" do
       let(:custom_params) do
         {
           understands_terms_of_court_order: "",
@@ -204,7 +204,7 @@ RSpec.describe Opponents::OpponentForm, type: :form do
       end
     end
 
-    context "details are empty even though they should be present" do
+    context "when details are empty even though they should be present" do
       let(:custom_params) do
         {
           understands_terms_of_court_order: "false",

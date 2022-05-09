@@ -51,7 +51,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
     context "with two character year" do
       let(:year) { date.strftime("%y") }
 
-      context "in 20th century" do
+      context "when in 20th century" do
         let(:date) { Faker::Date.between from: 99.years.ago, to: turn_of_century }
 
         it "constructs correct date" do
@@ -59,7 +59,7 @@ RSpec.describe LegalAidApplications::DependantForm, type: :form do
         end
       end
 
-      context "in 21st century" do
+      context "when in 21st century" do
         let(:date) { Faker::Date.between from: turn_of_century, to: Time.zone.today }
 
         it "constructs correct date" do
