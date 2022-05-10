@@ -183,9 +183,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           context "the user has employed permissions" do
             before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
-            it "does not call the HMRC::CreateResponsesService" do
+            it "calls the HMRC::CreateResponsesService" do
               subject
-              expect(HMRC::CreateResponsesService).to_not have_received(:call)
+              expect(HMRC::CreateResponsesService).to have_received(:call)
             end
           end
 

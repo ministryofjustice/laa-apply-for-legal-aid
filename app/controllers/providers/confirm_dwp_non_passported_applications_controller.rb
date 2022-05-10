@@ -68,11 +68,9 @@ module Providers
     end
 
     def make_hmrc_call?
-      correct_dwp_result? && employed_journey_enabled? && hmrc_call_enabled? && user_has_employment_permissions?
-    end
-
-    def display_hmrc_inset_text?
       employed_journey_enabled? && hmrc_call_enabled? && user_has_employment_permissions?
     end
+
+    alias_method :display_hmrc_inset_text?, :make_hmrc_call?
   end
 end
