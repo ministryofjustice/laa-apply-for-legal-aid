@@ -18,13 +18,13 @@ module Providers
       end
 
       describe "#valid?" do
-        context "all fields valid" do
+        context "when all fields are valid" do
           it "returns true" do
             expect(subject).to be_valid
           end
         end
 
-        context "missing name" do
+        context "when missing name" do
           let(:full_name) { "" }
 
           it "returns false" do
@@ -33,7 +33,7 @@ module Providers
           end
         end
 
-        context "missing date of birth" do
+        context "when missing date of birth" do
           let(:params) do
             {
               full_name:,
@@ -49,7 +49,7 @@ module Providers
           end
         end
 
-        context "invalid date of birth" do
+        context "with invalid date of birth" do
           let(:params) do
             {
               full_name:,

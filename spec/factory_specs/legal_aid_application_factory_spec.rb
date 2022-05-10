@@ -10,8 +10,8 @@ RSpec.describe "LegalAidApplication factory" do
         end
       end
 
-      context ":with_applicant specified" do
-        context ":with_bank_accounts not specified" do
+      context "when :with_applicant specified" do
+        context "and :with_bank_accounts not specified" do
           it "has an applicant but no bank accounts" do
             legal_aid_application = create :legal_aid_application, :with_applicant
             expect(legal_aid_application.applicant).to be_present
@@ -19,7 +19,7 @@ RSpec.describe "LegalAidApplication factory" do
           end
         end
 
-        context ":with_bank_accounts specified" do
+        context "when :with_bank_accounts specified" do
           it "has the specified number of bank accounts" do
             legal_aid_application = create :legal_aid_application, :with_applicant, with_bank_accounts: 3
             expect(legal_aid_application.applicant).to be_present
@@ -30,7 +30,7 @@ RSpec.describe "LegalAidApplication factory" do
     end
 
     describe "when used :with_everything" do
-      context ":with_bank_accounts not specified" do
+      context "and :with_bank_accounts not specified" do
         it "creates applicant but no bank accounts" do
           legal_aid_application = create :legal_aid_application, :with_everything
           expect(legal_aid_application.applicant).to be_present
@@ -38,7 +38,7 @@ RSpec.describe "LegalAidApplication factory" do
         end
       end
 
-      context ":with_bank_accounts specified" do
+      context "when :with_bank_accounts specified" do
         it "creates applicant and the specified number of bank accounts" do
           legal_aid_application = create :legal_aid_application, :with_everything, with_bank_accounts: 2
           expect(legal_aid_application.applicant).to be_present
