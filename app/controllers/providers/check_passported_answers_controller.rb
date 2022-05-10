@@ -29,9 +29,10 @@ module Providers
 
     def check_financial_eligibility
       started = Time.zone.now
-      CFE::SubmissionManager.call(legal_aid_application.id)
+      result = CFE::SubmissionManager.call(legal_aid_application.id)
       total_duration = ActiveSupport::Duration.build(Time.zone.now - started).inspect
       Rails.logger.info("CFE Submission :: Total call time for #{legal_aid_application.id} took #{total_duration}")
+      result
     end
   end
 end
