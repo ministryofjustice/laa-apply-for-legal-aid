@@ -78,4 +78,6 @@ Rails.application.configure do
 
   # Switch to determine whether or not o collect HMRC data
   config.x.collect_hmrc_data = true
+
+  config.x.legal_framework_api_host = "https://ap-3078-expose-service-levels-legal-framework-uat.cloud-platform.service.justice.gov.uk"
 end
