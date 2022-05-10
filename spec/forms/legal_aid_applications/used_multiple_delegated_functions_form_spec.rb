@@ -29,7 +29,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       proceedings.reload
     end
 
-    context "two of the three proceeding types have delegated functions" do
+    context "when two of the three proceeding types have delegated functions" do
       it "updates each proceeding" do
         expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
         expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil,
@@ -37,7 +37,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
                                                                                         used_delegated_functions_reported_on])
       end
 
-      context "date is just within 12 months ago" do
+      context "and the date is just within 12 months ago" do
         let(:used_delegated_functions_on) { today - 12.months + 3.days }
 
         it "is valid" do
@@ -104,7 +104,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
       end
     end
 
-    context "date is older than 12 months ago" do
+    context "when date is older than 12 months ago" do
       let(:used_delegated_functions_on) { 13.months.ago }
       let(:error_locale) { "used_delegated_functions_on.date_not_in_range" }
 

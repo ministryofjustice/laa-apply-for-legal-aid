@@ -42,11 +42,11 @@ RSpec.describe Applicants::EmailForm, type: :form do
       end
     end
 
-    context "stripping whitespace" do
+    context "when stripping whitespace" do
       let(:fake_email_address) { Faker::Internet.safe_email }
       let(:email) { "  #{fake_email_address}  " }
 
-      it "updates the applicant email with the email address without whitespece" do
+      it "updates the applicant email with the email address without whitespace" do
         subject.save
         expect(applicant.reload.email).to eq fake_email_address
       end

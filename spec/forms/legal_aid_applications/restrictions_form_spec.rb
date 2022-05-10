@@ -30,7 +30,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       expect(application.has_restrictions).to be true
     end
 
-    context "has no restrictions" do
+    context "when there are no restrictions" do
       let(:has_restrictions) { "false" }
       let(:restrictions_details) { "" }
 
@@ -43,7 +43,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
       end
     end
 
-    context "params invalid" do
+    context "with invalid params" do
       let(:has_restrictions) { "true" }
       let(:restrictions_details) { "" }
 
@@ -55,7 +55,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
         expect(subject.errors[:restrictions_details]).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.restrictions_details.#{journey}.blank")
       end
 
-      context "no restrictions present" do
+      context "with no restrictions present" do
         let(:has_restrictions) { "" }
 
         it "is invalid" do

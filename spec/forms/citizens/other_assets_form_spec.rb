@@ -5,7 +5,7 @@ RSpec.describe Citizens::OtherAssetsForm do
   let(:oad_with_second_home) { create :other_assets_declaration, :with_second_home }
   let(:oad_with_all_values) { create :other_assets_declaration, :with_all_values }
 
-  context "second home params" do
+  context "with second home params" do
     let(:valid_second_home_params) do
       { check_box_second_home: "yes",
         second_home_value: "859374.00",
@@ -35,7 +35,7 @@ RSpec.describe Citizens::OtherAssetsForm do
     end
 
     describe "instantiation" do
-      context "from an existing record" do
+      context "when from an existing record" do
         let(:form) { described_class.new(current_params(empty_oad)) }
 
         context "with values all nil" do
@@ -53,11 +53,11 @@ RSpec.describe Citizens::OtherAssetsForm do
         end
       end
 
-      context "from an existing record and form params" do
+      context "when from an existing record and form params" do
         let(:form) { described_class.new(form_params(empty_oad)) }
 
-        context "valid form params" do
-          context "all fields present" do
+        context "with valid form params" do
+          context "and all fields present" do
             let(:submitted_params) { valid_second_home_params }
 
             it "is valid" do
@@ -65,7 +65,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             end
           end
 
-          context "no fields present" do
+          context "with no fields present" do
             let(:submitted_params) { empty_second_home_params }
 
             it "is valid" do
@@ -74,8 +74,8 @@ RSpec.describe Citizens::OtherAssetsForm do
           end
         end
 
-        context "invalid form params" do
-          context "non-numeric characters" do
+        context "with invalid form params" do
+          context "and non-numeric characters" do
             let(:submitted_params) { alpha_second_home_params }
 
             it "is not valid" do
@@ -112,14 +112,14 @@ RSpec.describe Citizens::OtherAssetsForm do
     let(:valuable_items_value) { "566.0" }
 
     describe "instantiation" do
-      context "from an existing record" do
+      context "when from an existing record" do
         let(:form) { described_class.new(current_params(oad_with_all_values)) }
 
-        context "from an existing record and form params" do
+        context "when from an existing record and form params" do
           let(:form) { described_class.new(form_params(empty_oad)) }
 
-          context "valid form params" do
-            context "all fields present" do
+          context "with valid form params" do
+            context "and all fields present" do
               let(:submitted_params) { params }
 
               it "is valid" do
@@ -128,7 +128,7 @@ RSpec.describe Citizens::OtherAssetsForm do
               end
             end
 
-            context "no form fields present" do
+            context "with no form fields present" do
               let(:submitted_params) { { none_selected: "true" } }
 
               it "is valid" do
@@ -137,7 +137,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             end
           end
 
-          context "invalid form params" do
+          context "with invalid form params" do
             let(:submitted_params) { params }
 
             describe "when valuable_items_value is below threshold" do
@@ -150,7 +150,7 @@ RSpec.describe Citizens::OtherAssetsForm do
             end
           end
 
-          context "invalid params - each value suffixed with an x" do
+          context "with invalid params - each value suffixed with an x" do
             let(:submitted_params) { params.each { |_key, val| val.sub!(/$/, "x") } }
 
             it "is not valid" do

@@ -42,28 +42,28 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
       end
     end
 
-    context "percentage_home is empty" do
+    context "when percentage_home is empty" do
       let(:percentage_home) { "" }
       let(:expected_error) { I18n.t("activemodel.errors.models.legal_aid_application.attributes.percentage_home.blank") }
 
       it_behaves_like "it has an error"
     end
 
-    context "percentage_home is not a number" do
+    context "when percentage_home is not a number" do
       let(:percentage_home) { "one thousand percent!" }
       let(:expected_error) { I18n.t("activemodel.errors.models.legal_aid_application.attributes.percentage_home.not_a_number") }
 
       it_behaves_like "it has an error"
     end
 
-    context "percentage_home is less than 0" do
+    context "when percentage_home is less than 0" do
       let(:percentage_home) { -1 }
       let(:expected_error) { I18n.t("activemodel.errors.models.legal_aid_application.attributes.percentage_home.less_than_or_equal_to") }
 
       it_behaves_like "it has an error"
     end
 
-    context "percentage_home is more than 100" do
+    context "when percentage_home is more than 100" do
       let(:percentage_home) { 100.1 }
       let(:expected_error) { I18n.t("activemodel.errors.models.legal_aid_application.attributes.percentage_home.greater_than_or_equal_to") }
 

@@ -161,13 +161,6 @@ RSpec/ContextWording:
   Exclude:
     - 'spec/factory_specs/legal_aid_application_factory_spec.rb'
     - 'spec/factory_specs/v4/cfe_result_factory_spec.rb'
-    - 'spec/forms/applicants/email_form_spec.rb'
-    - 'spec/forms/citizens/other_assets_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/dependant_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/percentage_home_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/restrictions_form_spec.rb'
-    - 'spec/forms/legal_aid_applications/used_multiple_delegated_functions_form_spec.rb'
-    - 'spec/forms/opponents/opponent_form_spec.rb'
     - 'spec/forms/outstanding_mortgage_form_spec.rb'
     - 'spec/forms/providers/application_merits_task/involved_child_form_spec.rb'
     - 'spec/forms/providers/proceeding_merits_task/attempts_to_settle_form_spec.rb'

@@ -12,10 +12,10 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
   let(:form_params) { params.merge(model: savings_amount) }
 
   describe "#save" do
-    context "check boxes are checked" do
+    context "when check boxes are checked" do
       let(:check_box_params) { check_box_attributes.index_with { |_attr| "true" } }
 
-      context "amounts are valid" do
+      context "and the amounts are valid" do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "updates all amounts" do
@@ -67,22 +67,22 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context "amounts are empty" do
+      context "when the amounts are empty" do
         let(:amount_params) { attributes.index_with { |_attr| "" } }
         let(:expected_error) { /enter the( estimated)? total/i }
 
         it_behaves_like "it has an error"
       end
 
-      context "amounts are not numbers" do
+      context "when the amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
         let(:expected_error) { /must be an amount of money, like 60,000/ }
 
         it_behaves_like "it has an error"
       end
 
-      context "amounts are less than 0" do
-        context "that are not bank account attributes" do
+      context "when the amounts are less than 0" do
+        context "and are not bank account attributes" do
           let(:attribute_map) do
             {
               cash: /total.*cash savings/i,
@@ -115,7 +115,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context "amounts have a £ symbol" do
+      context "when the amounts have a £ symbol" do
         let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it "strips the values of £ symbols" do
@@ -132,14 +132,14 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       end
     end
 
-    context "some check boxes are unchecked" do
+    context "when some check boxes are unchecked" do
       let(:check_box_params) do
         boxes = check_box_attributes.index_with { |_attr| "" }
         boxes[:check_box_cash] = "true"
         boxes
       end
 
-      context "amounts are invalid" do
+      context "and the amounts are invalid" do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "empties amounts if checkbox is unchecked" do
@@ -166,7 +166,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context "amounts are not valid" do
+      context "when the amounts are not valid" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it "empties amounts" do
