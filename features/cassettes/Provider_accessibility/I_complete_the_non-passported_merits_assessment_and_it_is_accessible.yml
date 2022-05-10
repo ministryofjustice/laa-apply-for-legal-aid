@@ -5,12 +5,12 @@ http_interactions:
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"3d273839-7e9b-430c-aed3-90e957d2f1ec","proceeding_types":["DA001"]}'
+      string: '{"request_id":"4b7d09a4-f367-4d45-b07d-32b862d0677c","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.9.3
+      - Faraday v1.10.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 19 Jan 2022 09:31:16 GMT
+      - Tue, 10 May 2022 19:46:04 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,17 +43,17 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"0916d6a80c7ea4015330f055f0d57b56"
+      - W/"4d6806a59b09d171ceadda68350f5ead"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d9d1475bab98a954fa743e0cd0317aa2
+      - b5d41c5f6080e4f35b80d267ebbdcb6d
       X-Runtime:
-      - '0.023616'
+      - '0.028253'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"3d273839-7e9b-430c-aed3-90e957d2f1ec","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Wed, 19 Jan 2022 09:31:16 GMT
-recorded_with: VCR 6.0.0
+      string: '{"request_id":"4b7d09a4-f367-4d45-b07d-32b862d0677c","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Tue, 10 May 2022 19:46:04 GMT
+recorded_with: VCR 6.1.0
