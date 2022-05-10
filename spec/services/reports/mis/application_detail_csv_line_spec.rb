@@ -28,6 +28,33 @@ module Reports
                merits_submitted_at: Time.current
       end
 
+      let(:application_with_multiple_employments) do
+        create :application,
+               :with_proceedings,
+               :with_delegated_functions_on_proceedings,
+               :with_multiple_employments,
+               :with_full_employment_information,
+               explicit_proceedings: [:da004],
+               set_lead_proceeding: :da004,
+               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
+               application_ref: "L-X99-ZZZ",
+               applicant:,
+               own_home: own_home_status,
+               property_value:,
+               shared_ownership: shared_ownership_status,
+               outstanding_mortgage_amount: outstanding_mortgage,
+               percentage_home:,
+               provider:,
+               office:,
+               benefit_check_result:,
+               savings_amount:,
+               other_assets_declaration:,
+               opponent:,
+               ccms_submission:,
+               own_vehicle: false,
+               merits_submitted_at: Time.current
+      end
+
       let(:application_without_df) do
         create :application,
                :with_proceedings,
@@ -59,6 +86,7 @@ module Reports
 
       let(:applicant) do
         create :applicant,
+               :not_employed,
                first_name: "Johnny",
                last_name: "WALKER",
                date_of_birth:,
@@ -514,6 +542,81 @@ module Reports
 
             it "returns the escaped text" do
               expect(value_for("Firm name")).to eq "'=malicious_code"
+            end
+          end
+        end
+
+        context "HMRC data" do
+          context "when the applicant is unemployed" do
+            it "returns the expected data" do
+              expect(value_for("HMRC data")).to eq "No"
+              expect(value_for("Employment Status")).to eq "None"
+              expect(value_for("HMRC call successful")).to eq "No"
+              expect(value_for("Free text required")).to eq "No"
+              expect(value_for("Free text optional")).to eq "No"
+              expect(value_for("Multi Employment")).to eq "No"
+            end
+          end
+
+          context "when the applicant is employed" do
+            let(:legal_aid_application) do
+              create :application,
+                     :with_proceedings,
+                     :with_single_employment,
+                     :with_extra_employment_information,
+                     applicant:
+            end
+
+            let(:applicant) do
+              create :applicant,
+                     :employed,
+                     first_name: "Johnny",
+                     last_name: "WALKER",
+                     date_of_birth:,
+                     national_insurance_number: "JA293483A"
+            end
+
+            it "returns the expected data" do
+              expect(value_for("HMRC data")).to eq "No"
+              expect(value_for("Employment Status")).to eq "Employed"
+              expect(value_for("HMRC call successful")).to eq "Yes"
+              expect(value_for("Free text required")).to eq "No"
+              expect(value_for("Free text optional")).to eq "Yes"
+              expect(value_for("Multi Employment")).to eq "No"
+            end
+
+            context "when the applicant has multiple jobs" do
+              let(:legal_aid_application) { application_with_multiple_employments }
+
+              it "returns the expected data" do
+                expect(value_for("HMRC data")).to eq "No"
+                expect(value_for("Employment Status")).to eq "Employed"
+                expect(value_for("HMRC call successful")).to eq "No"
+                expect(value_for("Free text required")).to eq "Yes"
+                expect(value_for("Free text optional")).to eq "No"
+                expect(value_for("Multi Employment")).to eq "Yes"
+              end
+            end
+          end
+
+          context "when the applicant has multiple employment states" do
+            let(:applicant) do
+              create :applicant,
+                     :self_employed,
+                     :armed_forces,
+                     first_name: "Johnny",
+                     last_name: "WALKER",
+                     date_of_birth:,
+                     national_insurance_number: "JA293483A"
+            end
+
+            it "returns the expected data" do
+              expect(value_for("HMRC data")).to eq "No"
+              expect(value_for("Employment Status")).to eq "Self employed, Armed forces"
+              expect(value_for("HMRC call successful")).to eq "No"
+              expect(value_for("Free text required")).to eq "No"
+              expect(value_for("Free text optional")).to eq "No"
+              expect(value_for("Multi Employment")).to eq "No"
             end
           end
         end

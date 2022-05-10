@@ -161,6 +161,11 @@ module Reports
           "Application submitted",
           "Application deleted",
           "HMRC data",
+          "Employment Status",
+          "HMRC call successful",
+          "Free text required",
+          "Free text optional",
+          "Multi Employment",
         ]
       end
 
@@ -374,6 +379,11 @@ module Reports
 
       def hmrc_data
         @line << yesno(HMRC::Response.where(legal_aid_application_id: laa.id).present?)
+        @line << (laa.applicant.not_employed? ? "None" : employment_concatenation) # "Employment Status"
+        @line << yesno(laa.hmrc_employment_income? && !laa.has_multiple_employments?) # "HMRC call successful",
+        @line << yesno(laa.full_employment_details.present?) # "Free text required",
+        @line << yesno(laa.extra_employment_information_details.present?) # "Free text optional",
+        @line << yesno(laa.has_multiple_employments?) # "Multi Employment",
       end
 
       def yesno(value)
@@ -393,6 +403,18 @@ module Reports
         else
           ""
         end
+      end
+
+      def employment_concatenation
+        [
+          convert_employment_type_to_string("employed"),
+          convert_employment_type_to_string("self_employed"),
+          convert_employment_type_to_string("armed_forces"),
+        ].compact.join(", ")
+      end
+
+      def convert_employment_type_to_string(value)
+        value.humanize if laa.applicant.send("#{value}?")
       end
 
       def gateway_evidence_count
