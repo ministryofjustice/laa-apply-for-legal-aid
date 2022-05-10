@@ -37,7 +37,7 @@ allowed_sites = [
   end,
 ]
 
-WebMock.disable_net_connect!(allow: allowed_sites)
+WebMock.disable_net_connect!(allow: allowed_sites, net_http_connect_on_start: true)
 
 Webdrivers::Chromedriver.update
 
