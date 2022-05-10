@@ -12,11 +12,21 @@ class UseCCMSArbiter
   end
 
   def call
-    return false if legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
+    return false if applicant_receives_benefit_and_provider_has_passported_permissions?
 
-    return false if provider.non_passported_permissions?
+    return false if applicant_does_not_receive_benefit_and_provider_has_non_passported_permissions?
 
     legal_aid_application.use_ccms!(:non_passported) unless legal_aid_application.use_ccms?
     true
+  end
+
+private
+
+  def applicant_receives_benefit_and_provider_has_passported_permissions?
+    legal_aid_application.applicant_receives_benefit? && provider.passported_permissions?
+  end
+
+  def applicant_does_not_receive_benefit_and_provider_has_non_passported_permissions?
+    !legal_aid_application.applicant_receives_benefit? && provider.non_passported_permissions?
   end
 end
