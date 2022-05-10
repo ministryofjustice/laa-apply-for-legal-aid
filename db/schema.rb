@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 2022_05_12_125715) do
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
+  create_table "application_proceeding_types_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "involved_child_id", null: false
+    t.uuid "application_proceeding_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["application_proceeding_type_id", "involved_child_id"], name: "index_application_proceeding_involved_children"
+    t.index ["involved_child_id", "application_proceeding_type_id"], name: "index_involved_children_application_proceeding"
+  end
+
   create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "attachment_type"
@@ -719,6 +728,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_125715) do
     t.boolean "portal_enabled", default: true
     t.integer "contact_id"
     t.string "invalid_login_details"
+    t.boolean "cookies_enabled", default: true
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
