@@ -16,7 +16,14 @@ module CFE
       end
 
       context "when the application is passported" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
+        let(:application) do
+          create(:legal_aid_application,
+                 :with_everything,
+                 :with_proceedings,
+                 :with_positive_benefit_check_result,
+                 :applicant_entering_means,
+                 vehicle:)
+        end
 
         it "completes process" do
           described_class.call(application.id)
@@ -25,7 +32,14 @@ module CFE
       end
 
       context "when the application is non-passported" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
+        let(:application) do
+          create(:legal_aid_application,
+                 :with_everything,
+                 :with_proceedings,
+                 :with_negative_benefit_check_result,
+                 :applicant_entering_means,
+                 vehicle:)
+        end
 
         it "completes process" do
           described_class.call(application.id)

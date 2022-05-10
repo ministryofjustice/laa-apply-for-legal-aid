@@ -21,7 +21,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Mon, 27 Jul 2020 13:49:17 GMT
+      - Tue, 10 May 2022 14:53:43 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -34,5 +34,5 @@ http_interactions:
         Kaur Ubha"},{"id":9174953,"name":"Marilyn Willows"},{"id":2016673,"name":"Kamal
         Desor"},{"id":34419,"name":"Neeta Desor"}],"providerOffices":[{"id":81693,"name":"DESOR
         & CO-0B721W"}]}'
-  recorded_at: Mon, 27 Jul 2020 13:49:17 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Tue, 10 May 2022 14:53:43 GMT
+recorded_with: VCR 6.1.0
