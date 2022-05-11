@@ -1,5 +1,6 @@
 module Providers
   class CheckPassportedAnswersController < ProviderBaseController
+    include ::DurationLogger
     def show
       @proceeding = legal_aid_application.lead_proceeding
       @applicant = legal_aid_application.applicant
@@ -28,10 +29,10 @@ module Providers
     end
 
     def check_financial_eligibility
-      started = Time.zone.now
-      result = CFE::SubmissionManager.call(legal_aid_application.id)
-      total_duration = ActiveSupport::Duration.build(Time.zone.now - started).inspect
-      Rails.logger.info("CFE Submission :: Total call time for #{legal_aid_application.id} took #{total_duration}")
+      result = false
+      log_duration("CFE Submission :: Total call time for #{legal_aid_application.id}") do
+        result = CFE::SubmissionManager.call(legal_aid_application.id)
+      end
       result
     end
   end

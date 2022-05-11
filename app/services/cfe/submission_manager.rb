@@ -1,5 +1,6 @@
 module CFE
   class SubmissionManager
+    include ::DurationLogger
     COMMON_SERVICES = [
       CreateAssessmentService,
       CreateApplicantService,
@@ -47,7 +48,9 @@ module CFE
 
     def call_common_services
       COMMON_SERVICES.each do |service|
-        log_duration(service)
+        log_duration(service) do
+          service.call(submission)
+        end
       end
     end
 
@@ -55,15 +58,10 @@ module CFE
       return if submission.passported?
 
       NON_PASSPORTED_SERVICES.each do |service|
-        log_duration(service)
+        log_duration("CFE Submission :: call to #{service} for #{legal_aid_application_id}") do
+          service.call(submission)
+        end
       end
-    end
-
-    def log_duration(service)
-      started = Time.zone.now
-      service.call(submission)
-      total_duration = ActiveSupport::Duration.build(Time.zone.now - started).inspect
-      Rails.logger.info("CFE Submission :: call to #{service} for #{legal_aid_application_id} took #{total_duration}")
     end
   end
 end
