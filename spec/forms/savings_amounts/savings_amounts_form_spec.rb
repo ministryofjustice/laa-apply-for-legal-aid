@@ -184,7 +184,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
       end
 
-      context "if none of the check boxes are checked" do
+      context "when none of the check boxes are checked" do
         let(:check_box_params) do
           boxes = check_box_attributes.index_with { |_attr| "" }
           boxes[:none_selected] = ""
@@ -192,13 +192,13 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         end
         let(:journey) { "citizens" }
 
-        it "returns true" do
+        it "doesnt save and validation returns an error message" do
           expect(subject.save).to be(false)
           expect(subject.errors[:check_box_cash]).to include(I18n.t("activemodel.errors.models.savings_amount.attributes.base.#{journey}.none_selected"))
         end
       end
 
-      context "none of these check box is checked" do
+      context "when the 'none selected' check box is checked" do
         let(:check_box_params) do
           boxes = check_box_attributes.index_with { |_attr| "" }
           boxes[:none_selected] = "true"

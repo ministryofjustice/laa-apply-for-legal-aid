@@ -159,9 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/forms/providers/proceeding_merits_task/attempts_to_settle_form_spec.rb'
-    - 'spec/forms/savings_amounts/offline_accounts_form_spec.rb'
-    - 'spec/forms/savings_amounts/savings_amounts_form_spec.rb'
     - 'spec/helpers/accessible_navigation_helper_spec.rb'
     - 'spec/helpers/check_answer_url_helper_spec.rb'
     - 'spec/helpers/hash_format_helper_spec.rb'

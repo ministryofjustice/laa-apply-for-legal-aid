@@ -12,10 +12,10 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
   let(:form_params) { params.merge(model: savings_amount) }
 
   describe "#save" do
-    context "check boxes are checked" do
+    context "when check boxes are checked" do
       let(:check_box_params) { check_box_attributes.index_with { |_attr| "true" } }
 
-      context "amounts are valid" do
+      context "when amounts are valid" do
         let(:amount_params) { attributes.index_with { |_attr| rand(1...1_000_000.0).round(2).to_s } }
 
         it "updates all amounts" do
@@ -63,21 +63,21 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
       end
 
-      context "amounts are empty" do
+      context "when amounts are empty" do
         let(:amount_params) { attributes.index_with { |_attr| "" } }
         let(:expected_error) { /enter the( estimated)? total/i }
 
         it_behaves_like "it has an error"
       end
 
-      context "amounts are not numbers" do
+      context "when amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
         let(:expected_error) { /must be an amount of money, like 60,000/ }
 
         it_behaves_like "it has an error"
       end
 
-      context "amounts have a £ symbol" do
+      context "when amounts have a £ symbol" do
         let(:amount_params) { attributes.index_with { |_attr| "£#{rand(1...1_000_000.0).round(2)}" } }
 
         it "strips the values of £ symbols" do
@@ -94,7 +94,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       end
     end
 
-    context "some check boxes are unchecked" do
+    context "when some check boxes are unchecked" do
       let(:check_box_params) do
         {
           check_box_offline_current_accounts: "true",
@@ -103,7 +103,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         }
       end
 
-      context "amounts are invalid" do
+      context "when amounts are invalid" do
         let(:amount_params) do
           {
             offline_current_accounts: rand(1...1_000_000.0).round(2).to_s,
@@ -131,7 +131,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
       end
 
-      context "amounts are not valid" do
+      context "when amounts are not valid" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
 
         it "empties amounts" do
@@ -147,7 +147,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
       end
 
-      context "none of the amount check boxes is checked" do
+      context "when the 'none of these' check box is checked" do
         let(:check_box_params) do
           {
             check_box_offline_current_accounts: "",
@@ -162,7 +162,7 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
         end
       end
 
-      context "no check box at all is checked" do
+      context "when no check box at all is checked" do
         let(:check_box_params) do
           {
             check_box_offline_current_accounts: "",
