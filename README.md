@@ -219,15 +219,17 @@ Set `HMRC_API_HOST=<staging api>`
 
 Runs Rubocop, RSpec specs and Cucumber features
 
-```
+```sh
 bin/rake
 ```
 
-**NOTE:** To ensure the recorded VCRs used in the specs are up to date, run the tests as such:
+#### VCR cassettes
 
-```
-VCR_RECORD_MODE=all bin/rake
-```
+VCR is used to record interactions with external services and play back these stubs during test runs. To ensure the recorded cassettes used in the specs and features are up to date you should occasionally rerecord them.
+
+see [VCR Recording](docs/vcr_recording.md) for setup and recommended approaches to rerecording of cassettes.
+
+#### CCMS tests
 
 As of August 2021, rspec will ignore the CCMS tests. There are 600+ of them and they were taking >6 minutes to run.
 Removing them halved the time taken to run the entire test suite.  A full overnight run is now scheduled in CircleCI and, on failure, it will alert via the apply-dev channel in slack
