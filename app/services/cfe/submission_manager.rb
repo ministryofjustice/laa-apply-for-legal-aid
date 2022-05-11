@@ -1,5 +1,6 @@
 module CFE
   class SubmissionManager
+    include ::DurationLogger
     COMMON_SERVICES = [
       CreateAssessmentService,
       CreateApplicantService,
@@ -46,14 +47,24 @@ module CFE
     end
 
     def call_common_services
-      COMMON_SERVICES.each { |s| s.call(submission) }
+      COMMON_SERVICES.each do |service|
+        make_logged_call_to service
+      end
     end
 
     def call_non_passported_services
       return if submission.passported?
 
-      NON_PASSPORTED_SERVICES.each do |s|
-        s.call(submission)
+      NON_PASSPORTED_SERVICES.each do |service|
+        make_logged_call_to service
+      end
+    end
+
+  private
+
+    def make_logged_call_to(service)
+      log_duration("CFE Submission :: call to #{service} for #{legal_aid_application_id}") do
+        service.call(submission)
       end
     end
   end
