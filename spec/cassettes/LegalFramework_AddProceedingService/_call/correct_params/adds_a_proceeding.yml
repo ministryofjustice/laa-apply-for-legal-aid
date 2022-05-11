@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.9.3
+      - Faraday v1.10.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 18 Jan 2022 14:21:41 GMT
+      - Tue, 10 May 2022 13:34:00 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,13 +43,13 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"71e5a296f651ff6010b92ec57d9fdc81"
+      - W/"d3d7d16879b2bfbbfc53e34afe036620"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 86882a1cc64925b636f070cd0900797d
+      - 54f22d635336a217770d5a4569a288c4
       X-Runtime:
-      - '0.087780'
+      - '0.026562'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -65,6 +65,7 @@ http_interactions:
         in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
-        representation on the return date."}}}'
-  recorded_at: Tue, 18 Jan 2022 14:21:41 GMT
-recorded_with: VCR 6.0.0
+        representation on the return date."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Tue, 10 May 2022 13:34:00 GMT
+recorded_with: VCR 6.1.0

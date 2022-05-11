@@ -82,7 +82,7 @@ Feature: Civil application journeys
     Then proceeding search field is empty
 
   @javascript @vcr
-  Scenario: Completes the application using address lookup
+  Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'

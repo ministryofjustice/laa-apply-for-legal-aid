@@ -2,67 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: https://benefitchecker.dev.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>f770edb0-ca39-4a17-b7e5-12ae34ea5410</clientReference><nino>JA293483A</nino><surname>SERVICEEXCEPTION</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20190320</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
-    headers:
-      Soapaction:
-      - '"check"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '661'
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 500
-      message: ''
-    headers:
-      Date:
-      - Wed, 20 Mar 2019 16:45:02 GMT
-      Content-Type:
-      - text/xml;charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Amzn-Trace-Id:
-      - Root=1-5c926e0e-b7825105aa022d8848ef6f24;
-      Vary:
-      - Accept-Encoding
-    body:
-      encoding: ASCII-8BIT
-      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><soapenv:Fault><faultcode>soapenv:Server.generalException</faultcode><faultstring></faultstring><detail><ns1:benefitCheckerFaultException
-        xmlns:ns1="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns2:MessageCode
-        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">LSCBC959</ns2:MessageCode><ns3:MessageText
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">Service unavailable.</ns3:MessageText></ns1:benefitCheckerFaultException><ns4:exceptionName
-        xmlns:ns4="http://xml.apache.org/axis/">uk.gov.lsc.benefitchecker.data._1_0.BenefitCheckerFaultException</ns4:exceptionName><ns5:hostname
-        xmlns:ns5="http://xml.apache.org/axis/">a7ae279cd176</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
-  recorded_at: Wed, 20 Mar 2019 16:45:02 GMT
-- request:
-    method: post
     uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>988f8f19-9f91-4697-a944-2314a7d8c2ed</clientReference><nino>JA293483A</nino><surname>SERVICEEXCEPTION</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20220118</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:check><clientReference>d417c9e0-278e-42f4-a161-5d1f660ed4af</clientReference><nino>JA293483A</nino><surname>SERVICEEXCEPTION</surname><dateOfBirth>19800110</dateOfBirth><dateOfAward>20220510</dateOfAward><lscServiceName><BC_LSC_SERVICE_NAME></lscServiceName><clientOrgId><BC_CLIENT_ORG_ID></clientOrgId><clientUserId><BC_CLIENT_USER_ID></clientUserId></wsdl:check></env:Body></env:Envelope>
     headers:
       User-Agent:
-      - HTTPClient/1.0 (2.8.3, ruby 3.1.0 (2021-12-25))
+      - HTTPClient/1.0 (2.8.3, ruby 3.1.2 (2022-04-12))
       Accept:
       - "*/*"
       Date:
-      - Tue, 18 Jan 2022 14:24:54 GMT
+      - Tue, 10 May 2022 13:26:51 GMT
       Soapaction:
       - '"check"'
       Content-Type:
@@ -75,7 +27,7 @@ http_interactions:
       message:
     headers:
       Date:
-      - Tue, 18 Jan 2022 14:24:54 GMT
+      - Tue, 10 May 2022 13:26:51 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -83,7 +35,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-61e6cdb6-4b07aaa258e74bdc5c86b01c;
+      - Root=1-627a681b-7527dd2f3deb8c7b4d662962;
       Vary:
       - Accept-Encoding
     body:
@@ -94,6 +46,6 @@ http_interactions:
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">LSCBC959</ns2:MessageCode><ns3:MessageText
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">Service unavailable.</ns3:MessageText></ns1:benefitCheckerFaultException><ns4:exceptionName
         xmlns:ns4="http://xml.apache.org/axis/">uk.gov.lsc.benefitchecker.data._1_0.BenefitCheckerFaultException</ns4:exceptionName><ns5:hostname
-        xmlns:ns5="http://xml.apache.org/axis/">cbb3040bc2c3</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
-  recorded_at: Tue, 18 Jan 2022 14:24:54 GMT
-recorded_with: VCR 6.0.0
+        xmlns:ns5="http://xml.apache.org/axis/">d35892bdd582</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
+  recorded_at: Tue, 10 May 2022 13:26:51 GMT
+recorded_with: VCR 6.1.0
