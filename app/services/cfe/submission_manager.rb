@@ -48,9 +48,7 @@ module CFE
 
     def call_common_services
       COMMON_SERVICES.each do |service|
-        log_duration(service) do
-          service.call(submission)
-        end
+        make_logged_call_to service
       end
     end
 
@@ -58,9 +56,15 @@ module CFE
       return if submission.passported?
 
       NON_PASSPORTED_SERVICES.each do |service|
-        log_duration("CFE Submission :: call to #{service} for #{legal_aid_application_id}") do
-          service.call(submission)
-        end
+        make_logged_call_to service
+      end
+    end
+
+  private
+
+    def make_logged_call_to(service)
+      log_duration("CFE Submission :: call to #{service} for #{legal_aid_application_id}") do
+        service.call(submission)
       end
     end
   end
