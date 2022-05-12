@@ -9,7 +9,7 @@ module Providers
     def update
       @form = Providers::CookiesForm.new(form_params)
       if @form.save
-        @success = true
+        @successfully_saved = true
       end
       render :show
     end

@@ -1,4 +1,4 @@
-<% new_head_title = if @success
+<% new_head_title = if @successfully_saved
                       t('.success_message')
                     else
                       t('.page_title')
@@ -10,25 +10,9 @@
 
   <%= page_template page_title: t('.page_title'), head_title: new_head_title, template: :basic, form: form do %>
 
-    <% if @success %>
-      <div class="moj-banner">
-        <div class="moj-banner__message">
-          <h2 class="govuk-heading-m"><%= t('.success_message') %></h2>
-        </div>
-      </div>
-<!--    <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">-->
-<!--      <div class="govuk-notification-banner__header">-->
-<!--        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">-->
-<!--          Success-->
-<!--        </h2>-->
-<!--      </div>-->
-<!--      <div class="govuk-notification-banner__content">-->
-<!--        <h3 class="govuk-notification-banner__heading">-->
-<!--          Training outcome recorded and trainee withdrawn-->
-<!--        </h3>-->
-<!--        <p class="govuk-body">Contact <a class="govuk-notification-banner__link" href="#">example@department.gov.uk</a> if you think there's a problem.</p>-->
-<!--      </div>-->
-<!--    </div>-->
+    <% if @successfully_saved %>
+      <%= render partial: 'shared/partials/notification_banner',
+               locals: { success: true, heading_text: t('.success_message'), link_to: back_path, link_text: t('.go_back_link')} %>
     <% end %>
 
     <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
