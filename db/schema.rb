@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_20_073516) do
+ActiveRecord::Schema.define(version: 2022_05_12_125715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -131,6 +131,9 @@ ActiveRecord::Schema.define(version: 2022_04_20_073516) do
     t.integer "working_days_to_submit_df"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "employed", default: false, null: false
+    t.boolean "hmrc_data_used", default: false, null: false
+    t.boolean "referred_to_caseworker", default: false, null: false
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
