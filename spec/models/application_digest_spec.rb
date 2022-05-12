@@ -24,7 +24,7 @@ RSpec.describe ApplicationDigest do
                merits_submitted_at: submission_time
       end
     end
-    let(:laa_at_use_ccms) { create :legal_aid_application, :use_ccms }
+    let(:laa_at_use_ccms) { create :legal_aid_application, :use_ccms, :with_applicant }
 
     let(:digest) { described_class.find_by(legal_aid_application_id: laa.id) }
 
@@ -45,6 +45,28 @@ RSpec.describe ApplicationDigest do
         expect(digest.matter_types).to eq "Domestic Abuse;Section 8 orders"
         expect(digest.proceedings).to eq "DA001;SE013;SE014"
       end
+
+      describe "applicant employment status" do
+        context "when not employed" do
+          it "writes false to the digest record" do
+            subject
+            expect(digest.employed).to be false
+          end
+        end
+
+        context "when employed" do
+          before { laa.applicant.update(employed: true) }
+
+          it "writes true to the digest record" do
+            subject
+            expect(digest.employed).to be true
+          end
+        end
+      end
+
+      describe "hmrc_data_used"
+
+      describe "referred_to_caseworker"
     end
 
     context "when no digest record exists for this application" do

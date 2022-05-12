@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe DigestExtractor do
   describe ".call" do
-    let!(:laa1) { create :legal_aid_application, updated_at: 5.days.ago }
-    let!(:laa2) { create :legal_aid_application, updated_at: 3.days.ago }
-    let!(:laa3) { create :legal_aid_application, updated_at: 1.minute.ago }
+    let!(:laa1) { create :legal_aid_application, :with_applicant, updated_at: 5.days.ago }
+    let!(:laa2) { create :legal_aid_application, :with_applicant, updated_at: 3.days.ago }
+    let!(:laa3) { create :legal_aid_application, :with_applicant, updated_at: 1.minute.ago }
 
     before { Setting.setting.update!(digest_extracted_at: 4.days.ago) }
 

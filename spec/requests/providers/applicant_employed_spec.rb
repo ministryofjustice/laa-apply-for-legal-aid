@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::ApplicantEmployedController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, applicant: }
-  let(:applicant) { create :applicant }
+  let(:applicant) { create :applicant, employed: nil }
   let(:login) { login_as legal_aid_application.provider }
 
   before do

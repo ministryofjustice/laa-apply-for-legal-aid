@@ -1,6 +1,13 @@
 class ApplicationDigest < ApplicationRecord
   COLUMNS_TO_OMIT = %w[id updated_at created_at].freeze
-  BOOLEAN_COLUMNS = %w[use_ccms passported df_used].freeze
+  BOOLEAN_COLUMNS = %w[
+    use_ccms
+    passported
+    df_used
+    employed
+    hmrc_data_used
+    referred_to_caseworker
+  ].freeze
 
   class << self
     def create_or_update!(legal_aid_application_id)
@@ -32,6 +39,9 @@ class ApplicationDigest < ApplicationRecord
         earliest_df_date: laa.earliest_delegated_functions_date,
         df_reported_date: laa.earliest_delegated_functions_reported_date,
         working_days_to_report_df: working_days_to_report(laa),
+        employed: laa.applicant.employed?,
+        hmrc_data_used: true,
+        referred_to_caseworker: true,
       }
     end
 
