@@ -10,14 +10,14 @@ RSpec.describe ScheduledMailingsDeliveryJob do
     let!(:mailing_two) { create :scheduled_mailing, :due_later }
 
     describe "perform" do
-      context "calling DeliveryMan" do
+      context "when calling DeliveryMan" do
         it "calls DeliveryMan for each due item" do
           expect(GovukEmails::DeliveryMan).to receive(:call).with(mailing_one.id)
           subject
         end
       end
 
-      context "rescheduling the next Delivery job" do
+      context "when rescheduling the next Delivery job" do
         let(:short_delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY - 20.seconds }
         let(:early_job) { MockQueuedJob.new(described_class, short_delay.from_now) }
 
@@ -26,7 +26,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           allow(GovukEmails::DeliveryMan).to receive(:call)
         end
 
-        context "Delivery job already scheduled for a few seconds from now" do
+        context "when Delivery job is already scheduled for a few seconds from now" do
           let(:job_queue) { [early_job] }
 
           it "does not schedule another job" do
@@ -35,7 +35,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           end
         end
 
-        context "nothing in the queue" do
+        context "when nothing is in the queue" do
           let(:job_queue) { [] }
           let(:job) { double "Sidekiq Job", perform_later: nil }
           let(:delay) { ScheduledMailingsDeliveryJob::DEFAULT_DELAY }
@@ -47,7 +47,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
         end
       end
 
-      context "scheduling the Monitoring job" do
+      context "when scheduling the Monitoring job" do
         let(:short_delay) { EmailMonitorJob::DEFAULT_DELAY - 20.seconds }
         let(:early_job) { MockQueuedJob.new(EmailMonitorJob, short_delay.from_now) }
 
@@ -56,7 +56,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           allow(GovukEmails::DeliveryMan).to receive(:call)
         end
 
-        context "monitoring job already scheduled for a few seconds from now" do
+        context "when monitoring the job already scheduled for a few seconds from now" do
           let(:job_queue) { [early_job] }
 
           it "does not schedule another job" do
@@ -65,10 +65,10 @@ RSpec.describe ScheduledMailingsDeliveryJob do
           end
         end
 
-        context "nothing in the queue" do
+        context "when nothing is in the queue" do
           let(:job_queue) { [] }
 
-          it "starts a montoring job" do
+          it "starts a monitoring job" do
             expect(EmailMonitorJob).to receive(:perform_later)
             subject
           end

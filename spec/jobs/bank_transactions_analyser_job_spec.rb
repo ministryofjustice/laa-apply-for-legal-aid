@@ -36,8 +36,8 @@ module Banking
         expect(legal_aid_application.reload.state).to eq("provider_assessing_means")
       end
 
-      context "transactions analysis" do
-        context "pending" do
+      context "with transactions analysis" do
+        context "when pending" do
           before do
             allow_any_instance_of(NonPassportedStateMachine).to receive(:aasm_state).and_return("analysing_bank_transactions")
           end
@@ -48,7 +48,7 @@ module Banking
           end
         end
 
-        context "complete" do
+        context "when complete" do
           it "calls ProviderEmailService" do
             expect(provider_email_service).to receive(:send_email)
             subject

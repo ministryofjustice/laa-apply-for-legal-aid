@@ -14,7 +14,7 @@ RSpec.describe EmailMonitorJob, type: :job do
       described_class.new.perform
     end
 
-    context "no subsequent job in queue" do
+    context "with no subsequent job in queue" do
       let(:job) { double "Job", perform_later: nil }
 
       before { allow(GovukEmails::Monitor).to receive(:call).at_least(1) }
@@ -26,7 +26,7 @@ RSpec.describe EmailMonitorJob, type: :job do
       end
     end
 
-    context "subsequen monitor job already in queue" do
+    context "with subsequent monitor job already in queue" do
       before { allow(GovukEmails::Monitor).to receive(:call).at_least(1) }
 
       it "does not schedule another job" do
