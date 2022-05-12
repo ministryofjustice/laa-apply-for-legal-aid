@@ -6,7 +6,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
   describe "#policy_disregards_hash" do
     let(:result) { policy_disregards_list(policy_disregards) }
 
-    context "no disregards selected" do
+    context "with no disregards selected" do
       let(:policy_disregards) { create :policy_disregards, none_selected: true }
 
       it "does not return nil" do
@@ -18,7 +18,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
       end
     end
 
-    context "disregards selected" do
+    context "with disregards selected" do
       let(:policy_disregards) { create :policy_disregards, none_selected: false, england_infected_blood_support: true }
 
       it "returns the correct hash" do

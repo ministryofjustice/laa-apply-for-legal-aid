@@ -46,7 +46,7 @@ RSpec.describe TaskListHelper, type: :helper do
       end
     end
 
-    context "chances of success" do
+    context "with chances of success" do
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
 
       let(:expected) do

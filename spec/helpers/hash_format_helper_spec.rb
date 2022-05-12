@@ -18,7 +18,7 @@ RSpec.describe HashFormatHelper, type: :helper do
       it { is_expected.to eql expected_response }
     end
 
-    context "hash has key but no value" do
+    context "when hash has key but no value" do
       let(:source) { { result: nil } }
 
       it "returns empty string" do

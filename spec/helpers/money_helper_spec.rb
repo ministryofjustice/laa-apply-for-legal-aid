@@ -34,7 +34,7 @@ RSpec.describe MoneyHelper, type: :helper do
   describe "#number_to_currency_or_original_string" do
     let(:result) { number_to_currency_or_original_string(value) }
 
-    context "is a number" do
+    context "when a number" do
       let(:value) { BigDecimal("12_345.5", 12) }
 
       it "formats the currency" do
@@ -42,7 +42,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "invalid numeric string" do
+    context "when an invalid numeric string" do
       let(:value) { "12345.5678" }
 
       it "returns original value" do
@@ -50,7 +50,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "invalid alphanumeric string" do
+    context "when an invalid alphanumeric string" do
       let(:value) { "123xc45.5678" }
 
       it "returns original value" do
@@ -62,7 +62,7 @@ RSpec.describe MoneyHelper, type: :helper do
   describe "#number?" do
     let(:result) { number?(value) }
 
-    context "int numeric" do
+    context "when int numeric" do
       let(:value) { 12 }
 
       it "returns true when integer" do
@@ -70,7 +70,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string numeric" do
+    context "when string numeric" do
       let(:value) { "12.25" }
 
       it "returns true when numeric string" do
@@ -78,7 +78,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string word" do
+    context "when a string word" do
       let(:value) { "fifty" }
 
       it "returns false when not numeric string or integer" do
@@ -90,7 +90,7 @@ RSpec.describe MoneyHelper, type: :helper do
   describe "#valid_amount?" do
     let(:result) { valid_amount?(value) }
 
-    context "int numeric" do
+    context "when int numeric" do
       let(:value) { 12 }
 
       it "returns true when integer greater than zero" do
@@ -98,7 +98,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "int zero" do
+    context "when int zero" do
       let(:value) { 0 }
 
       it "returns true when integer zero" do
@@ -106,7 +106,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "int negative" do
+    context "when int negative" do
       let(:value) { -1 }
 
       it "returns false when integer less than zero" do
@@ -114,7 +114,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string numeric" do
+    context "when string numeric" do
       let(:value) { "12.25" }
 
       it "returns true when numeric string greater than zero" do
@@ -122,7 +122,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string negative" do
+    context "when string negative" do
       let(:value) { "-1" }
 
       it "returns false when numeric string less than zero" do
@@ -134,7 +134,7 @@ RSpec.describe MoneyHelper, type: :helper do
   describe "#gds_number_to_currency" do
     let(:result) { gds_number_to_currency(value) }
 
-    context "int pounds with pence" do
+    context "when int pounds with pence" do
       let(:value) { 12_345.2499 }
 
       it "displays pounds and pence" do
@@ -142,7 +142,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "int pounds only" do
+    context "when int pounds only" do
       let(:value) { 12_345.0000 }
 
       it "displays pounds only" do
@@ -150,7 +150,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string numeric pounds" do
+    context "when string numeric pounds" do
       let(:value) { "5000.0000" }
 
       it "displays pounds only" do
@@ -158,7 +158,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "string numeric pounds and pence" do
+    context "when string numeric pounds and pence" do
       let(:value) { "5000.2499" }
 
       it "displays pounds and pence" do
@@ -166,7 +166,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "preserves other options" do
+    context "when it preserves other options" do
       let(:value) { 12_345.25 }
       let(:opts) { { unit: "$", delimiter: " ", separator: "," } }
       let(:result) { gds_number_to_currency(value, opts) }
@@ -176,7 +176,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "returns when not numeric" do
+    context "when not numeric" do
       let(:value) { "fifty" }
 
       it "displays pounds only" do
@@ -184,7 +184,7 @@ RSpec.describe MoneyHelper, type: :helper do
       end
     end
 
-    context "BigDecimal" do
+    context "when a BigDecimal" do
       let(:value) { BigDecimal("12345.25") }
 
       it "displays pounds and pence when BigDecimal" do
