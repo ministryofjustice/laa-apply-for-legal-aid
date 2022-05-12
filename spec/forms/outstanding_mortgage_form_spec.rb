@@ -40,13 +40,13 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
       expect { subject.save }.not_to change { LegalAidApplication }
     end
 
-    context "is called" do
+    context "when it is called" do
       before do
         subject.save
         legal_aid_application.reload
       end
 
-      it "updates ammount" do
+      it "updates amount" do
         expect(legal_aid_application.outstanding_mortgage_amount).to eq(amount.to_d)
       end
 

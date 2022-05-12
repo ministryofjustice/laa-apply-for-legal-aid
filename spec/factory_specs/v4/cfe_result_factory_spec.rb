@@ -31,8 +31,8 @@ RSpec.describe "cfe_result version 4 factory" do
                                                     proceeding_types]
     end
 
-    context "within result_summary" do
-      context "within overall_result" do
+    context "when within result_summary" do
+      context "and within overall_result" do
         it "has required keys in matter_types" do
           expect(matter_types.first.keys).to match_array %i[matter_type result]
         end
@@ -42,12 +42,12 @@ RSpec.describe "cfe_result version 4 factory" do
         end
       end
 
-      context "within gross_income" do
+      context "when within gross_income" do
         it "has required keys" do
           expect(gross_income_summary.keys).to match_array %i[total_gross_income proceeding_types]
         end
 
-        context "within proceeding_types" do
+        context "and within proceeding_types" do
           let(:proceeding_types) { gross_income_summary[:proceeding_types].first }
 
           it "has required keys" do
@@ -56,7 +56,7 @@ RSpec.describe "cfe_result version 4 factory" do
         end
       end
 
-      context "within disposable_income" do
+      context "when within disposable_income" do
         it "has required keys" do
           expect(disposable_income_summary.keys).to match_array %i[dependant_allowance
                                                                    employment_income
@@ -70,7 +70,7 @@ RSpec.describe "cfe_result version 4 factory" do
                                                                    proceeding_types]
         end
 
-        context "within proceeding_types" do
+        context "and within proceeding_types" do
           let(:proceeding_types) { disposable_income_summary[:proceeding_types].first }
 
           it "has required keys" do
@@ -79,7 +79,7 @@ RSpec.describe "cfe_result version 4 factory" do
         end
       end
 
-      context "within capital" do
+      context "when within capital" do
         it "has required keys" do
           expect(capital_summary.keys).to match_array %i[total_liquid
                                                          total_non_liquid
@@ -93,7 +93,7 @@ RSpec.describe "cfe_result version 4 factory" do
                                                          proceeding_types]
         end
 
-        context "within proceeding_types" do
+        context "and within proceeding_types" do
           let(:proceeding_types) { capital_summary[:proceeding_types].first }
 
           it "has required keys" do
@@ -103,7 +103,7 @@ RSpec.describe "cfe_result version 4 factory" do
       end
     end
 
-    context "within assessment" do
+    context "when within assessment" do
       it "has required keys" do
         expect(assessment.keys).to match_array %i[id
                                                   client_reference_id
