@@ -4,7 +4,7 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
   let(:application) { create :legal_aid_application }
 
   describe "#check_answer_url_for" do
-    context "provider" do
+    context "when a provider" do
       it "returns the path" do
         url = check_answer_url_for(:providers, :own_homes, application)
         expect(url).to eq "/providers/applications/#{application.id}/own_home?locale=en"
@@ -25,15 +25,15 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
       end
     end
 
-    context "citizen" do
-      context "default locale" do
+    context "when a citizen" do
+      context "with default locale" do
         it "returns the path with en locale" do
           url = check_answer_url_for(:citizens, :consents)
           expect(url).to eq "/citizens/consent?locale=en"
         end
       end
 
-      context "Welsh locale" do
+      context "with Welsh locale" do
         around(:each) do |example|
           I18n.with_locale(:cy) { example.run }
         end

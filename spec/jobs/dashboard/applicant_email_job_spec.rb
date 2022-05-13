@@ -19,7 +19,7 @@ module Dashboard
       end
 
       describe "#perform" do
-        context "job is not in the suspended list" do
+        context "when job is not in the suspended list" do
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 
           it "calls the applicant email job" do
@@ -28,7 +28,7 @@ module Dashboard
           end
         end
 
-        context "job is in the suspended list" do
+        context "when job is in the suspended list" do
           before { allow(HostEnv).to receive(:environment).and_return(:development) }
 
           it "does not call the applicant email job" do
@@ -37,13 +37,13 @@ module Dashboard
           end
         end
 
-        context "job is sending email to an Apply team email" do
+        context "when job is sending email to an Apply team email" do
           let(:applicant) { create :applicant, email: Rails.configuration.x.email_domain.suffix }
           let(:application) { create :legal_aid_application, applicant: }
 
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 
-          context "in production environment" do
+          context "when in production environment" do
             before { allow(Rails.env).to receive(:production?).and_return(true) }
 
             it "does not call the applicant email job" do
@@ -52,7 +52,7 @@ module Dashboard
             end
           end
 
-          context "not in production environment" do
+          context "when not in production environment" do
             before { allow(Rails.env).to receive(:production?).and_return(false) }
 
             it "calls the applicant email job" do

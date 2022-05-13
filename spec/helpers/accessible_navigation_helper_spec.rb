@@ -81,21 +81,21 @@ RSpec.describe AccessibleNavigationHelper, type: :helper do
   end
 
   describe "#set_accessible_properties" do
-    context "standard html label" do
+    context "with standard html label" do
       it "sets aria-labels using the label name provided" do
         options = set_accessible_properties("name", {})
         expect(options).to eq({ aria: { label: "name" } })
       end
     end
 
-    context "html label with suffix" do
+    context "with html label with suffix" do
       it "sets aria-labels using the label name provided" do
         options = set_accessible_properties("Change", { suffix: "First Name" })
         expect(options).to eq({ aria: { label: "Change First Name" }, suffix: "First Name" })
       end
     end
 
-    context "html label with content tagging" do
+    context "with html label with content tagging" do
       it "sets aria-labels using just the content of the label name provided" do
         options = set_accessible_properties('Start now <svg label="label"></svg>', {})
         expect(options).to eq({ aria: { label: "Start now" } })

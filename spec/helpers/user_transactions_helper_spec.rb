@@ -16,7 +16,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
   describe "#incomings_list" do
     subject { helper.incomings_list(legal_aid_application.transaction_types.credits, locale_namespace:) }
 
-    context "for citizen" do
+    context "when for a citizen" do
       let(:locale_namespace) { "transaction_types.names.citizens" }
 
       it "returns correct hash" do
@@ -31,7 +31,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
         end
       end
 
-      context "no transactions" do
+      context "with no transactions" do
         let(:legal_aid_application) { create :legal_aid_application }
 
         it "returns nil" do
@@ -46,14 +46,14 @@ RSpec.describe UserTransactionsHelper, type: :helper do
 
     let(:transaction_type) { create :transaction_type, :maintenance_out }
 
-    context "for citizen" do
+    context "when for a citizen" do
       let(:locale_namespace) { "transaction_types.names.citizens" }
 
       it "returns correct hash" do
         expect(subject[:items].first.to_h).to match hash_result
       end
 
-      context "no transactions" do
+      context "with no transactions" do
         let(:legal_aid_application) { create :legal_aid_application }
 
         it "returns nil" do

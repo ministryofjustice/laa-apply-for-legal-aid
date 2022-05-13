@@ -5,7 +5,7 @@ RSpec.describe "I18n", :i18n do
   let(:i18n) { I18n::Tasks::BaseTask.new }
   let(:missing_keys) { i18n.missing_keys[locale] || I18n::Tasks::Data::Tree::Siblings.new }
 
-  context "English" do
+  context "with English" do
     let(:locale) { "en" }
 
     it "does not have missing keys" do
@@ -14,7 +14,7 @@ RSpec.describe "I18n", :i18n do
     end
   end
 
-  context "Welsh" do
+  context "with Welsh" do
     let(:locale) { "cy" }
     let(:welsh_paths) { ["/accessibility_statement", "/citizen", "/contact", "/error", "/feedback", "/privacy_policy"] }
 

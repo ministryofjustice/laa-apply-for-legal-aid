@@ -20,21 +20,25 @@ module Dashboard
       end
 
       describe "#perform" do
-        context "job is not in the suspended list" do
+        context "when in the production environment" do
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 
-          it "calls the runs the geckoboard feedback updater" do
-            expect_any_instance_of(Dashboard::SingleObject::Feedback).to receive(:run)
-            subject
+          context "and the job is not in the suspended list" do
+            it "runs the geckoboard feedback updater" do
+              expect_any_instance_of(Dashboard::SingleObject::Feedback).to receive(:run)
+              subject
+            end
           end
         end
 
-        context "job is not in the suspended list" do
+        context "when in the UAT environment" do
           before { allow(HostEnv).to receive(:environment).and_return(:uat) }
 
-          it "calls the runs the geckoboard feedback updater" do
-            expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
-            subject
+          context "and the job is not in the suspended list" do
+            it "does not run the geckoboard feedback updater" do
+              expect_any_instance_of(Dashboard::SingleObject::Feedback).not_to receive(:run)
+              subject
+            end
           end
         end
       end

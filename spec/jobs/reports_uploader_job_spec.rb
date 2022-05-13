@@ -21,7 +21,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
       filename
     end
 
-    context "AdminReport record does not exist" do
+    context "when AdminReport record does not exist" do
       before { AdminReport.delete_all }
 
       it "creates an admin report" do
@@ -42,7 +42,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
       end
     end
 
-    context "AdminReport record already exists" do
+    context "when AdminReport record already exists" do
       before { create :admin_report, :with_reports_attached }
 
       it "does not create another record" do
