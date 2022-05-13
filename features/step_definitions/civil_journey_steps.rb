@@ -316,7 +316,7 @@ end
 Given("I start the means review journey with employment income for a single job from HMRC") do
   @legal_aid_application = create(
     :application,
-    :with_applicant,
+    :with_employed_applicant,
     :with_single_employment,
     :with_proceedings,
     :with_non_passported_state_machine,
@@ -355,7 +355,7 @@ end
 Given("I start the means review journey with employment income for multiple jobs from HMRC") do
   @legal_aid_application = create(
     :application,
-    :with_applicant,
+    :with_employed_applicant,
     :with_multiple_employments,
     :with_proceedings,
     :with_non_passported_state_machine,
