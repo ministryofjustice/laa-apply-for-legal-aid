@@ -83,7 +83,7 @@ class ApplicationDigest < ApplicationRecord
 
     def determine_caseworker_review?(laa)
       # return false if the assessment hasn't been done yet
-      return false if laa.cfe_result.nil?
+      return false if laa.cfe_result.nil? || laa.cfe_result.result.nil?
 
       CCMS::ManualReviewDeterminer.new(laa).manual_review_required?
     end
