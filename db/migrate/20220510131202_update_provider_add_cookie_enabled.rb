@@ -1,5 +1,5 @@
 class UpdateProviderAddCookieEnabled < ActiveRecord::Migration[6.1]
   def change
-    add_column :providers, :cookies_enabled, :boolean, default: true
+    add_column :providers, :cookies_enabled, :boolean, default: nil
   end
 end

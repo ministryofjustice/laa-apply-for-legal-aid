@@ -447,6 +447,8 @@ en:
               blank: Tell us why legal aid should be granted
         provider:
           attributes:
+            cookies_enabled:
+              blank: Select if you would like to enable cookies
             selected_office_id:
               blank: Select an account number
             username:

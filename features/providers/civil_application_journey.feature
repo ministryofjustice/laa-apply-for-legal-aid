@@ -34,6 +34,19 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing 'office handling this application'
 
+  @javascript
+    Scenario: I am able to update my cookie preferences
+    Given I complete the journey as far as check your answers
+    And I click link 'Cookies'
+    Then I should be on a page showing 'Cookies on Apply for Legal Aid'
+    When I click 'Save changes'
+    Then I should be on a page showing 'Select if you would like to enable cookies'
+    When I choose 'Use this cookie to measure my website use'
+    And I click 'Save changes'
+    Then I should be on a page showing 'Your cookie settings were saved'
+    When I click link 'Go back to the page you were looking at'
+    Then I should be on a page showing 'Check your answers'
+
   @javascript @vcr
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
