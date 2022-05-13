@@ -43,7 +43,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
   describe ".eligible_for_delivery" do
     let(:scheduled_mailing) { create :scheduled_mailing, :due, legal_aid_application_id: application.id }
 
-    context "ineligible_state" do
+    context "with ineligible_state" do
       before do
         allow(scheduled_mailing).to receive(:legal_aid_application).and_return(application)
         allow(application).to receive(:state).and_return("use_ccms")
@@ -54,7 +54,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
       end
     end
 
-    context "elgible" do
+    context "when elgible" do
       it "returns true" do
         expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be true
       end

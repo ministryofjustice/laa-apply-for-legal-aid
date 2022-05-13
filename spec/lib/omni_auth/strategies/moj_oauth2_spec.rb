@@ -15,7 +15,7 @@ module OmniAuth
       let(:client_secret) { "my_client_secret" }
       let(:client) { ::OAuth2::Client.new(client_id, client_secret, {}) }
 
-      context "request_phase" do
+      context "when in request_phase" do
         before do
           allow(strategy).to receive(:session).and_return(example_session)
           allow(strategy).to receive(:authorize_params).and_return(example_auth_params)
@@ -38,7 +38,7 @@ module OmniAuth
         end
       end
 
-      context "callback phase" do
+      context "when in callback phase" do
         let(:mock_request) { double "request", params: example_request_params, scheme: "http", url: "my_url" }
 
         let(:my_access_token) { AccessTokenStruct.new(false) }

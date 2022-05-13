@@ -33,7 +33,7 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
   describe ".eligible_for_delivery?" do
     let(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: application }
 
-    context "it is eligible" do
+    context "when it is eligible" do
       let(:application) { create :legal_aid_application, :with_proceedings, :with_non_passported_state_machine, :at_client_completed_means }
 
       it "returns true" do
@@ -41,7 +41,7 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
       end
     end
 
-    context "it is not eligible" do
+    context "when it is not eligible" do
       let(:application) { create :legal_aid_application, :at_assessment_submitted }
 
       it "returns false" do
