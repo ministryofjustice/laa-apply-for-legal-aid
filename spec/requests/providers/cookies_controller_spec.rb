@@ -29,9 +29,9 @@ RSpec.describe Providers::CookiesController, type: :request do
   end
 
   describe "PATCH providers/cookies" do
-    subject(:request) { patch providers_cooky_path(provider), params: {} }
+    subject(:request) { patch providers_cooky_path(provider), params: }
 
-    let(:params)  { { provider: { cookies_enabled: {} } } }
+    let(:params)  { { provider: { cookies_enabled: } } }
 
     context "when the provider is authenticated" do
       before do
@@ -52,7 +52,7 @@ RSpec.describe Providers::CookiesController, type: :request do
       end
 
       context "when no is selected" do
-        let(:params) { { provider: { cookies_enabled: "false" } } }
+        let(:params) { { provider: { cookies_enabled: false } } }
 
         it "sets cookies enabled to false" do
           expect(provider.cookies_enabled).to be false
@@ -60,7 +60,7 @@ RSpec.describe Providers::CookiesController, type: :request do
       end
 
       context "when yes is selected" do
-        let(:params) { { provider: { cookies_enabled: "true" } } }
+        let(:params) { { provider: { cookies_enabled: true } } }
 
         it "sets cookies enabled to true" do
           expect(provider.cookies_enabled).to be true

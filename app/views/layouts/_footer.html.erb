@@ -15,8 +15,8 @@
 
           <li class="govuk-footer__inline-list-item">
 <!--      Currently we can only update and store cookie preferences for the provider, citizen users are shown the generic GOV.UK cookies page -->
-            <% if current_provider? %>
-              <%= link_to_accessible t('layouts.application.footer.cookies'), providers_cooky_path(@current_provider), class: 'govuk-footer__link' %>
+            <% if current_provider %>
+              <%= link_to_accessible t('layouts.application.footer.cookies'), providers_cooky_path(current_provider), class: 'govuk-footer__link' %>
             <% else %>
               <%= link_to_accessible t('layouts.application.footer.cookies'), "https://www.gov.uk/help/cookies", class: 'govuk-footer__link' %>
             <% end %>
