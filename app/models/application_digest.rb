@@ -40,8 +40,8 @@ class ApplicationDigest < ApplicationRecord
         df_reported_date: laa.earliest_delegated_functions_reported_date,
         working_days_to_report_df: working_days_to_report(laa),
         employed: laa.applicant.employed?,
-        hmrc_data_used: true,
-        referred_to_caseworker: true,
+        hmrc_data_used: determine_hmrc_data_used?(laa),
+        referred_to_caseworker: determine_caseworker_review?(laa),
       }
     end
 
@@ -63,6 +63,29 @@ class ApplicationDigest < ApplicationRecord
       return nil if laa.earliest_delegated_functions_reported_date.nil?
 
       WorkingDayCalculator.working_days_between(laa.earliest_delegated_functions_date, laa.earliest_delegated_functions_reported_date) + 1
+    end
+
+    def determine_hmrc_data_used?(laa)
+      status = HMRC::StatusAnalyzer.call(laa)
+      case status
+      when :employed_journey_not_enabled,
+        :provider_not_enabled_for_employed_journey,
+        :applicant_not_employed,
+        :hmrc_multiple_employments,
+        :no_hmrc_data
+        false
+      when :hmrc_single_employment
+        true
+      else
+        raise "Unexpected response from HMRC::StatusAnalyser #{status.inspect}"
+      end
+    end
+
+    def determine_caseworker_review?(laa)
+      # return false if the assessment hasn't been done yet
+      return false if laa.cfe_result.nil?
+
+      CCMS::ManualReviewDeterminer.new(laa).manual_review_required?
     end
   end
 

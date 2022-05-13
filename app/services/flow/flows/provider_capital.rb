@@ -88,21 +88,8 @@ module Flow
             when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
               application.income_types? ? :income_summary : :no_income_summaries
             else
-              raise "Unexpected hmrc status #{status}"
+              raise "Unexpected hmrc status #{status.inspect}"
             end
-
-            # if Setting.enable_employed_journey? && application.provider.employment_permissions?
-            #   # either applicant has multiple jobs or no job data is returned even though they're employed
-            #   if application.has_multiple_employments? || (application.applicant.employed? && !application.hmrc_employment_income?)
-            #     :full_employment_details
-            #   elsif application.hmrc_employment_income?
-            #     :employment_incomes
-            #   else
-            #     application.income_types? ? :income_summary : :no_income_summaries
-            #   end
-            # else
-            #   application.income_types? ? :income_summary : :no_income_summaries
-            # end
           end,
         },
         employment_incomes: {

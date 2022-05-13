@@ -97,6 +97,16 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             end
           end
 
+          context "unknown result obtained from HMRC::StatusAnalyzer" do
+            before do
+              allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(:xxx)
+            end
+
+            it "raises" do
+              expect { subject }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
+            end
+          end
+
           context "no employment income data was received from HMRC" do
             before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
 
