@@ -45,7 +45,7 @@ module HMRC
           end
         end
 
-        context "and applicant has multiple employements" do
+        context "and applicant has multiple employments" do
           before { create_list :employment, 2, legal_aid_application: laa }
 
           it "returns hmrc_multiple_employments" do
