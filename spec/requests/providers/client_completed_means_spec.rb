@@ -102,7 +102,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
               allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(:xxx)
             end
 
-            it "raises" do
+            it "raises an error" do
               expect { subject }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
             end
           end
