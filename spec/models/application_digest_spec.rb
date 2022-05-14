@@ -87,7 +87,7 @@ RSpec.describe ApplicationDigest do
             end
           end
 
-          context "but no hrmrc data" do
+          context "but no hmrc data" do
             let(:hmrc_status) { :no_hmrc_data }
 
             it "returns false" do
