@@ -115,7 +115,7 @@ RSpec.describe ApplicationDigest do
         context "when an unknown result is received from HMRC::StatusAnalyzer" do
           let(:hmrc_status) { :what_is_this? }
 
-          it "raises" do
+          it "raises an error" do
             expect { subject }.to raise_error RuntimeError, "Unexpected response from HMRC::StatusAnalyser :what_is_this?"
           end
         end
