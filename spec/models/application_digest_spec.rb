@@ -106,7 +106,7 @@ RSpec.describe ApplicationDigest do
           context "and single employment" do
             let(:hmrc_status) { :hmrc_single_employment }
 
-            it "returns false" do
+            it "returns true" do
               expect(digest.hmrc_data_used).to be true
             end
           end
