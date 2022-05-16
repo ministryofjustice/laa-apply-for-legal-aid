@@ -12,5 +12,10 @@ FactoryBot.define do
       role { "application.non_passported.*" }
       description { "Can create, view, modify non-passported applications" }
     end
+
+    trait :employed do
+      role { "application.non_passported.employment.*" }
+      description { "Can submit applications for employed applicants " }
+    end
   end
 end

@@ -79,17 +79,16 @@ module Flow
         client_completed_means: {
           path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
           forward: lambda do |application|
-            if Setting.enable_employed_journey? && application.provider.employment_permissions?
-              # either applicant has multiple jobs or no job data is returned even though they're employed
-              if application.has_multiple_employments? || (application.applicant.employed? && !application.hmrc_employment_income?)
-                :full_employment_details
-              elsif application.hmrc_employment_income?
-                :employment_incomes
-              else
-                application.income_types? ? :income_summary : :no_income_summaries
-              end
-            else
+            status = HMRC::StatusAnalyzer.call(application)
+            case status
+            when :hmrc_multiple_employments, :no_hmrc_data
+              :full_employment_details
+            when :hmrc_single_employment
+              :employment_incomes
+            when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
               application.income_types? ? :income_summary : :no_income_summaries
+            else
+              raise "Unexpected hmrc status #{status.inspect}"
             end
           end,
         },
