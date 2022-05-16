@@ -15,9 +15,9 @@ RSpec.describe FeedbackMailer, type: :mailer do
       expect(mail.delivery_method).to be_a(GovukNotifyRails::Delivery)
     end
 
-    context "personalisation" do
+    context "with personalisation" do
       describe "application_status" do
-        context "pre_dwp_check" do
+        context "with pre_dwp_check" do
           before { allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(true) }
 
           it "has a status of pre dwp check" do
@@ -33,7 +33,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
           end
         end
 
-        context "passported" do
+        context "when passported" do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
@@ -44,7 +44,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
           end
         end
 
-        context "non-passported" do
+        context "when non-passported" do
           before do
             allow_any_instance_of(LegalAidApplication).to receive(:pre_dwp_check?).and_return(false)
             allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)

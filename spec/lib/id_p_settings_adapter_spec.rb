@@ -22,7 +22,7 @@ RSpec.describe IdPSettingsAdapter do
   end
 
   describe "IdPSettingsAdapter.settings" do
-    context "UAT settings" do
+    context "with UAT settings" do
       it "returns a hash of settings" do
         allow(described_class).to receive(:mock_saml?).and_return(true)
         expect(described_class.settings(1)).to have_key(:private_key)
@@ -30,7 +30,7 @@ RSpec.describe IdPSettingsAdapter do
       end
     end
 
-    context "Non UAT settings" do
+    context "with non UAT settings" do
       it "returns a hash of settings" do
         allow(described_class).to receive(:mock_saml?).and_return(false)
         expect(described_class.settings(1)).to have_key(:issuer)

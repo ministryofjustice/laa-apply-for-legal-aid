@@ -159,18 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/lib/alert_manager_spec.rb'
-    - 'spec/lib/authorized_ip_ranges_spec.rb'
-    - 'spec/lib/id_p_settings_adapter_spec.rb'
-    - 'spec/lib/omni_auth/strategies/moj_oauth2_spec.rb'
-    - 'spec/lib/task_helpers/ccms_payload_yamlizer_spec.rb'
-    - 'spec/mailers/feedback_mailer_spec.rb'
-    - 'spec/mailers/submit_application_reminder_mailer_spec.rb'
-    - 'spec/mailers/submit_citizen_financial_reminder_mailer_spec.rb'
-    - 'spec/mailers/submit_provider_financial_reminder_mailer_spec.rb'
-    - 'spec/models/aggregated_cash_income_spec.rb'
-    - 'spec/models/aggregated_cash_outgoings_spec.rb'
-    - 'spec/models/applicant_spec.rb'
     - 'spec/models/application_digest_spec.rb'
     - 'spec/models/application_merits_task/involved_child_spec.rb'
     - 'spec/models/application_merits_task/opponent_spec.rb'

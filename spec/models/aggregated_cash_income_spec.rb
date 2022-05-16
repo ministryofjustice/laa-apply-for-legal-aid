@@ -28,7 +28,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       travel_back
     end
 
-    context "no cash income transaction records" do
+    context "with no cash income transaction records" do
       it "returns an empty model" do
         aci = described_class.find_by(legal_aid_application_id: application.id)
         expect(aci.check_box_benefits).to be_nil
@@ -56,7 +56,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         expect(aci.month3).to eq month3_tx_date
       end
 
-      context "delegated functions not used" do
+      context "when delegated functions not used" do
         it "sets the months based on the transaction period end date" do
           expect(application.used_delegated_functions?).to be false
           expect(application.transaction_period_finish_on).to eq Date.parse("2021-03-12")
@@ -66,7 +66,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "delegated functions are used" do
+      context "when delegated functions are used" do
         before do
           application.proceedings.first.update!(used_delegated_functions_on: Date.parse("2021-01-28"),
                                                 used_delegated_functions_reported_on: Date.parse("2021-01-28"))
@@ -83,7 +83,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
       end
     end
 
-    context "cash income transaction records exist" do
+    context "when cash income transaction records exist" do
       let!(:pension1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: pension }
       let!(:pension2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: pension }
       let!(:pension3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: pension }
@@ -139,8 +139,8 @@ RSpec.describe AggregatedCashIncome, type: :model do
       aci.update(params)
     end
 
-    context "valid params" do
-      context "none selected" do
+    context "with valid params" do
+      context "and none selected" do
         let(:params) { none_selected_params }
 
         it "is valid" do
@@ -152,7 +152,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "categories selected" do
+      context "with categories selected" do
         let(:params) { valid_params }
 
         it "is valid" do
@@ -175,8 +175,8 @@ RSpec.describe AggregatedCashIncome, type: :model do
       end
     end
 
-    context "invalid params" do
-      context "missing month value" do
+    context "with invalid params" do
+      context "and missing month value" do
         let(:params) { missing_month_params }
 
         it "is invalid" do
@@ -190,7 +190,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "amount negative" do
+      context "when amount negative" do
         let(:params) { valid_params.merge({ benefits1: "-1" }) }
 
         it "is invalid" do
@@ -203,7 +203,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "amount not numerical" do
+      context "when amount not numerical" do
         let(:params) { valid_params.merge({ benefits1: "$%^&" }) }
 
         it "is invalid" do
@@ -216,7 +216,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "amount too many decimals" do
+      context "when amount has too many decimals" do
         let(:params) { valid_params.merge({ benefits1: "9.99999" }) }
 
         it "is invalid" do
@@ -229,7 +229,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "no categories selected" do
+      context "with no categories selected" do
         let(:params) { { legal_aid_application_id: application.id } }
 
         it "is invalid" do
@@ -241,7 +241,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "none selected with values" do
+      context "when none selected with values" do
         let(:params) { none_selected_with_params }
 
         it "is invalid" do
@@ -256,12 +256,12 @@ RSpec.describe AggregatedCashIncome, type: :model do
   end
 
   describe "#update" do
-    context "previous values" do
+    context "with revious values" do
       before do
         aci.update(valid_params)
       end
 
-      context "upon successful validation" do
+      context "with successful validation" do
         let(:subject) { aci.update(additional_valid_params) }
 
         it "updates with previously selected checkboxes" do
@@ -286,10 +286,10 @@ RSpec.describe AggregatedCashIncome, type: :model do
       end
     end
 
-    context "no cash income records exist" do
+    context "when no cash income records exist" do
       let(:subject) { aci.update(params) }
 
-      context "valid params" do
+      context "with valid params" do
         let(:params) { valid_params }
 
         it "creates the expected cash income records" do
@@ -297,8 +297,8 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "invalid params" do
-        context "non-numeric values" do
+      context "with invalid params" do
+        context "and non-numeric values" do
           let(:params) { non_numeric_params }
 
           it "does not create the Cash Transaction records" do
@@ -316,7 +316,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
           end
         end
 
-        context "too many decimal numbers" do
+        context "with too many decimal numbers" do
           let(:params) { too_many_decimal_params }
 
           it "does not create the Cash Transaction records" do
@@ -334,7 +334,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
           end
         end
 
-        context "negative value" do
+        context "with a negative value" do
           let(:params) { negative_params }
 
           it "does not create the Cash Transaction records" do
@@ -352,7 +352,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
           end
         end
 
-        context "missing value" do
+        context "with missing value" do
           let(:params) { missing_value_params }
 
           it "does not create the Cash Transaction records" do
@@ -372,12 +372,12 @@ RSpec.describe AggregatedCashIncome, type: :model do
       end
     end
 
-    context "cash income records already exist" do
+    context "when cash income records already exist" do
       before do
         aci.update(valid_params)
       end
 
-      context "preexisting records" do
+      context "with preexisting records" do
         let(:subject) { aci.update(corrected_valid_params) }
 
         it "does not change the record count when records updated" do
@@ -398,7 +398,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "preexisting transaction types" do
+      context "with preexisting transaction types" do
         let(:subject) { aci.update(none_selected_params) }
 
         it "removes all records when none selected" do
@@ -406,7 +406,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "additional transaction types" do
+      context "with additional transaction types" do
         let(:subject) { aci.update(additional_valid_params) }
 
         it "adds to prexisting transaction types" do
@@ -414,7 +414,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "previous months preexisting" do
+      context "with previous months preexisting" do
         let(:subject) { aci.update(corrected_valid_params) }
 
         before do
@@ -442,7 +442,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
     end
   end
 
-  context "date labeling" do
+  context "with date labeling" do
     around(:each) do |example|
       travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)
       example.run
@@ -458,7 +458,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
     let(:aci) { described_class.find_by(legal_aid_application_id: application.id) }
 
     describe "#period" do
-      context "locale :en" do
+      context "with locale :en" do
         it "displays the start and end dates of the period" do
           expect(aci.period(1)).to eq "December 2020"
           expect(aci.period(2)).to eq "November 2020"
@@ -466,7 +466,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "locale :cy" do
+      context "with locale :cy" do
         around(:each) do |example|
           I18n.with_locale(:cy) { example.run }
         end
@@ -480,7 +480,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
     end
 
     describe "#month name" do
-      context "locale :en" do
+      context "with locale :en" do
         it "displays the month name" do
           expect(aci.month_name(1)).to eq "December"
           expect(aci.month_name(2)).to eq "November"
@@ -488,7 +488,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
       end
 
-      context "locale :cy" do
+      context "with locale :cy" do
         around(:each) do |example|
           I18n.with_locale(:cy) { example.run }
         end

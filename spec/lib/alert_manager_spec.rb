@@ -11,7 +11,7 @@ RSpec.describe AlertManager do
     describe ".capture_exception" do
       let(:exception) { RuntimeError.new("my new error") }
 
-      context "production environment" do
+      context "when in the production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
 
         it "delegates to Sentry" do
@@ -24,7 +24,7 @@ RSpec.describe AlertManager do
           described_class.capture_exception(exception)
         end
 
-        context "ignorable exception" do
+        context "with ignorable exception" do
           let(:exception) { Geckoboard::UnexpectedStatusError.new("You have exceeded the API rate limit blah blah blah") }
 
           it "ignores the error" do
@@ -34,7 +34,7 @@ RSpec.describe AlertManager do
         end
       end
 
-      context "non-production environment" do
+      context "when in a non-production environment" do
         it "does not pass on to sentry" do
           expect(Sentry).not_to receive(:capture_exception)
           described_class.capture_exception(exception)
@@ -50,7 +50,7 @@ RSpec.describe AlertManager do
     describe ".capture_message" do
       let(:message) { "This is my test message" }
 
-      context "production environment" do
+      context "when in the production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
 
         it "delegates to Sentry" do
@@ -64,7 +64,7 @@ RSpec.describe AlertManager do
         end
       end
 
-      context "non-production environment" do
+      context "when in a non-production environment" do
         it "does not pass on to sentry" do
           expect(Sentry).not_to receive(:capture_message)
           described_class.capture_exception(message)
@@ -84,7 +84,7 @@ RSpec.describe AlertManager do
     describe ".capture_exception" do
       let(:exception) { RuntimeError.new("my new error") }
 
-      context "production environment" do
+      context "when in the production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
 
         it "delegates to SlackAlerter" do
@@ -99,7 +99,7 @@ RSpec.describe AlertManager do
         end
       end
 
-      context "non-production environment" do
+      context "when in a non-production environment" do
         it "does not pass on to SlackAlerter" do
           expect(SlackAlerter).not_to receive(:capture_exception)
           described_class.capture_exception(exception)
@@ -115,7 +115,7 @@ RSpec.describe AlertManager do
     describe ".capture_message" do
       let(:message) { "This is my test message" }
 
-      context "production environment" do
+      context "when in a production environment" do
         before { allow(HostEnv).to receive(:environment).and_return(sample_sending_environment) }
 
         it "delegates to SlackAlerter" do
@@ -130,7 +130,7 @@ RSpec.describe AlertManager do
         end
       end
 
-      context "non-production environment" do
+      context "when in a non-production environment" do
         it "does not pass on to sentry" do
           expect(Sentry).not_to receive(:capture_message)
           described_class.capture_message(message)

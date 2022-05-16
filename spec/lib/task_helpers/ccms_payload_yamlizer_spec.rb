@@ -20,19 +20,19 @@ RSpec.describe CcmsPayloadYamlizer do
       }
     end
 
-    context "key does not exist in the hash" do
+    context "when key does not exist in the hash" do
       it "returns the same value" do
         expect(parser.__send__(:calculate_new_key, hash, "keyz")).to eq "keyz"
       end
     end
 
-    context "key_without_square_brackets is in the hash" do
+    context "when key_without_square_brackets is in the hash" do
       it "returns the key suffixed by [1]" do
         expect(parser.__send__(:calculate_new_key, hash, "key_a")).to eq "key_a[1]"
       end
     end
 
-    context "several keys exist" do
+    context "when several keys exist" do
       it "returns the next key in sequence" do
         expect(parser.__send__(:calculate_new_key, hash, "key_b")).to eq "key_b[3]"
       end
