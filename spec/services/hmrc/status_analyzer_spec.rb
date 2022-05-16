@@ -36,7 +36,7 @@ module HMRC
         end
       end
 
-      context "when provider_enabled_for_employement journey" do
+      context "when provider_enabled_for_employment journey" do
         context "and applicant not employed" do
           let(:applicant_employed) { false }
 
@@ -56,7 +56,7 @@ module HMRC
         context "and applicant has single employment" do
           before { create :employment, legal_aid_application: laa }
 
-          it "returns hmrc_multiple_employments" do
+          it "returns hmrc_single_employment" do
             expect(service_call).to eq :hmrc_single_employment
           end
         end
