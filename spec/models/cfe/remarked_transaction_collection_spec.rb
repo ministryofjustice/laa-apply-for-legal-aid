@@ -5,13 +5,13 @@ module CFE
     describe "#transactions" do
       let(:collection) { described_class.new }
 
-      context "empty collection" do
+      context "with empty collection" do
         it "returns an empty hash" do
           expect(collection.transactions).to eq({})
         end
       end
 
-      context "with_transactions" do
+      context "with with_transactions" do
         let(:tx_id1) { SecureRandom.uuid }
         let(:tx_id2) { SecureRandom.uuid }
         let(:category1) { :state_benefits }

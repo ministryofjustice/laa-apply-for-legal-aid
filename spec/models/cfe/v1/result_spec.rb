@@ -25,13 +25,13 @@ module CFE
       end
 
       describe "#overview" do
-        context "applicant is eligible" do
+        context "when applicant is eligible" do
           it "returns assessment result" do
             expect(eligible_result.overview).to eq "eligible"
           end
         end
 
-        context "applicant has contribution required and restrictions" do
+        context "when applicant has contribution required and restrictions" do
           it "returns manual_check_required" do
             expect(contribution_and_restriction_result.capital_contribution_required?).to be true
             expect(legal_aid_application.has_restrictions?).to be true
@@ -39,7 +39,7 @@ module CFE
           end
         end
 
-        context "applicant has contribution required and no restrictions" do
+        context "when applicant has contribution required and no restrictions" do
           it "returns manual_check_required" do
             expect(contribution_required_result.capital_contribution_required?).to be true
             expect(contribution_required_result.overview).to eq "capital_contribution_required"
@@ -48,19 +48,19 @@ module CFE
       end
 
       describe "#assessment_result" do
-        context "eligible" do
+        context "when eligible" do
           it "returns eligible" do
             expect(eligible_result.assessment_result).to eq "eligible"
           end
         end
 
-        context "not_eligible" do
+        context "when not_eligible" do
           it "returns not_eligible" do
             expect(not_eligible_result.assessment_result).to eq "not_eligible"
           end
         end
 
-        context "contribution_required" do
+        context "when contribution_required" do
           it "returns contribution_required" do
             expect(contribution_required_result.assessment_result).to eq "contribution_required"
           end
@@ -80,19 +80,19 @@ module CFE
       end
 
       describe "#additional_property?" do
-        context "present" do
+        context "when present" do
           it "returns true" do
             expect(additional_property.additional_property?).to be true
           end
         end
 
-        context "not present" do
+        context "when not present" do
           it "returns false" do
             expect(no_additional_properties.additional_property?).to be false
           end
         end
 
-        context "present but zero" do
+        context "when present but zero" do
           it "returns false" do
             expect(eligible_result.additional_property?).to be false
           end
@@ -123,7 +123,7 @@ module CFE
         end
       end
 
-      context "vehicles" do
+      context "with vehicles" do
         let(:result) { not_eligible_result }
         let(:vehicle) { result.vehicle }
 
@@ -159,7 +159,7 @@ module CFE
         end
       end
 
-      context "capital_items" do
+      context "with capital_items" do
         let(:result) { contribution_required_result }
 
         describe "#non_liquid_capital_items" do

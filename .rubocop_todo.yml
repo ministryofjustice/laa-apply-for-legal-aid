@@ -159,20 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/models/application_digest_spec.rb'
-    - 'spec/models/application_merits_task/involved_child_spec.rb'
-    - 'spec/models/application_merits_task/opponent_spec.rb'
-    - 'spec/models/attachment_spec.rb'
-    - 'spec/models/bank_account_spec.rb'
-    - 'spec/models/bank_transaction_spec.rb'
-    - 'spec/models/cash_transaction_spec.rb'
-    - 'spec/models/ccms/opponent_id_spec.rb'
-    - 'spec/models/ccms/submission_spec.rb'
-    - 'spec/models/cfe/remarked_transaction_collection_spec.rb'
-    - 'spec/models/cfe/remarked_transaction_spec.rb'
-    - 'spec/models/cfe/remarks_spec.rb'
-    - 'spec/models/cfe/v1/result_spec.rb'
-    - 'spec/models/cfe/v2/result_spec.rb'
     - 'spec/models/cfe/v3/result_spec.rb'
     - 'spec/models/cfe/v4/result_spec.rb'
     - 'spec/models/concerns/cfe_submission_state_machine_spec.rb'

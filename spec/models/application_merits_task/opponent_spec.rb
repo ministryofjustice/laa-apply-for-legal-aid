@@ -13,7 +13,7 @@ module ApplicationMeritsTask
     describe "CCMSOpponentIdGenerator concern" do
       let(:expected_id) { Faker::Number.number(digits: 8) }
 
-      context "ccms_opponent_id is nil" do
+      context "when ccms_opponent_id is nil" do
         before { expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
 
         let(:opponent) { create :opponent, ccms_opponent_id: nil }
@@ -28,7 +28,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "ccms_opponent_id is already populated" do
+      context "when ccms_opponent_id is already populated" do
         before { expect(CCMS::OpponentId).not_to receive(:next_serial_id) }
 
         let(:opponent) { create :opponent, ccms_opponent_id: 1234 }

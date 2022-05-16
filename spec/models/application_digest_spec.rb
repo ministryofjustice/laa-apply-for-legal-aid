@@ -167,15 +167,15 @@ RSpec.describe ApplicationDigest do
       end
     end
 
-    context "use_ccms" do
-      context "application is not at use_ccms" do
+    context "with use_ccms" do
+      context "when application is not at use_ccms" do
         it "is false" do
           subject
           expect(digest.use_ccms).to be false
         end
       end
 
-      context "application is at use_ccms" do
+      context "when application is at use_ccms" do
         it "is true" do
           described_class.create_or_update!(laa_at_use_ccms.id)
           digest = described_class.find_by(legal_aid_application_id: laa_at_use_ccms.id)
@@ -184,8 +184,8 @@ RSpec.describe ApplicationDigest do
       end
     end
 
-    context "passported" do
-      context "application is passported" do
+    context "when passported" do
+      context "when application is passported" do
         before do
           allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(true)
           subject
@@ -196,7 +196,7 @@ RSpec.describe ApplicationDigest do
         end
       end
 
-      context "application is NOT passported" do
+      context "when application is NOT passported" do
         before do
           allow_any_instance_of(LegalAidApplication).to receive(:passported?).and_return(false)
           subject
@@ -208,8 +208,8 @@ RSpec.describe ApplicationDigest do
       end
     end
 
-    context "delegated_functions" do
-      context "delegated_functions not used" do
+    context "with delegated_functions" do
+      context "and delegated_functions not used" do
         it "returns false and nils" do
           subject
           expect(digest.df_used).to be false
@@ -219,7 +219,7 @@ RSpec.describe ApplicationDigest do
         end
       end
 
-      context "delegated_functions used" do
+      context "and delegated_functions used" do
         before do
           # DF used on DA001 and SE014 only - used and reported dates specified in array
           # Good Friday on 2nd April, Easter Monday 5th April

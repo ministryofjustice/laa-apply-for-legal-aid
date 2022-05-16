@@ -17,14 +17,14 @@ RSpec.describe BankAccount, type: :model do
       expect(bank_account.account_type_label).to eq(not_defined_account_type)
     end
 
-    context "savings type" do
+    context "with savings type" do
       it "returns Bank Savings" do
         bank_account = create :bank_account, account_type: "SAVINGS"
         expect(bank_account.account_type_label).to eq("Bank Savings")
       end
     end
 
-    context "transactions type" do
+    context "with transactions type" do
       it "returns Bank Current" do
         bank_account = create :bank_account, account_type: "TRANSACTION"
         expect(bank_account.account_type_label).to eq("Bank Current")
@@ -79,7 +79,7 @@ RSpec.describe BankAccount, type: :model do
   describe "#latest_balance" do
     let(:bank_account) { create :bank_account }
 
-    context "transactions exist" do
+    context "when transactions exist" do
       before { create_transactions }
 
       it "returns the running balance of the latest transaction" do
@@ -87,7 +87,7 @@ RSpec.describe BankAccount, type: :model do
       end
     end
 
-    context "no bank transactions" do
+    context "with no bank transactions" do
       it "returns the balance from the bank account record" do
         expect(bank_account.bank_transactions.size).to eq 0
         expect(bank_account.latest_balance).to eq bank_account.balance
