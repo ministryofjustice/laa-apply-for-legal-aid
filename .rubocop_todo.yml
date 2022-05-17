@@ -159,13 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/models/cfe/v3/result_spec.rb'
-    - 'spec/models/cfe/v4/result_spec.rb'
-    - 'spec/models/concerns/cfe_submission_state_machine_spec.rb'
-    - 'spec/models/concerns/translatable_model_attribute_spec.rb'
-    - 'spec/models/dashboard/widget_data_providers/number_provider_firms_spec.rb'
-    - 'spec/models/dashboard/widget_data_providers/percentage_declined_open_banking_spec.rb'
-    - 'spec/models/dependant_spec.rb'
     - 'spec/models/firm_spec.rb'
     - 'spec/models/hmrc/response_spec.rb'
     - 'spec/models/host_env_spec.rb'

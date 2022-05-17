@@ -15,7 +15,7 @@ RSpec.describe Dependant, type: :model do
   end
 
   describe "#as_json" do
-    context "dependant has nil values" do
+    context "when dependant has nil values" do
       let(:dependant) do
         create :dependant,
                date_of_birth: Date.new(2019, 3, 2),
@@ -41,7 +41,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "dependant has values" do
+    context "when dependant has values" do
       let(:dependant) do
         create :dependant,
                date_of_birth: Date.new(2019, 3, 2),
@@ -69,7 +69,7 @@ RSpec.describe Dependant, type: :model do
   end
 
   describe "#over_fifteen?" do
-    context "Less than 15 years old" do
+    context "when less than 15 years old" do
       let(:date_of_birth) { 10.years.ago }
 
       it "returns false" do
@@ -81,7 +81,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "more than 15 years old" do
+    context "when more than 15 years old" do
       let(:date_of_birth) { 20.years.ago }
 
       it "returns true" do
@@ -93,7 +93,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "15 and a half years old" do
+    context "when 15 and a half years old" do
       let(:date_of_birth) { 15.years.ago + 6.months }
 
       it "returns false" do
@@ -105,7 +105,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "14 and a half years old" do
+    context "when 14 and a half years old" do
       let(:date_of_birth) { 15.years.ago - 6.months }
 
       it "returns false" do
@@ -115,7 +115,7 @@ RSpec.describe Dependant, type: :model do
   end
 
   describe "#eighteen_or_less?" do
-    context "Less than 18 years old" do
+    context "when less than 18 years old" do
       let(:date_of_birth) { 10.years.ago }
 
       it "returns true" do
@@ -123,7 +123,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "more than 18 years old" do
+    context "when more than 18 years old" do
       let(:date_of_birth) { 20.years.ago }
 
       it "returns false" do
@@ -131,7 +131,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "18 and a half years old" do
+    context "when 18 and a half years old" do
       let(:date_of_birth) { 18.years.ago + 6.months }
 
       it "returns true" do
@@ -139,7 +139,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "17 and a half years old" do
+    context "when 17 and a half years old" do
       let(:date_of_birth) { 18.years.ago - 6.months }
 
       it "returns true" do
@@ -151,7 +151,7 @@ RSpec.describe Dependant, type: :model do
   describe "ccms_relationship_to_client" do
     let(:dependant) { create :dependant, legal_aid_application:, relationship:, date_of_birth: dob }
 
-    context "adult relative" do
+    context "when adult relative" do
       let(:relationship) { "adult_relative" }
       let(:dob) { 20.years.ago }
 
@@ -160,7 +160,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "child aged fifteen or less" do
+    context "when child aged fifteen or less" do
       let(:relationship) { "child_relative" }
       let(:dob) { 13.years.ago }
 
@@ -169,7 +169,7 @@ RSpec.describe Dependant, type: :model do
       end
     end
 
-    context "child aged sixteen or more" do
+    context "when child aged sixteen or more" do
       let(:relationship) { "child_relative" }
       let(:dob) { 17.years.ago }
 
