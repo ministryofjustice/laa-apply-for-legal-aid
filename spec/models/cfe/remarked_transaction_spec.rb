@@ -15,7 +15,7 @@ module CFE
     end
 
     describe "#update" do
-      context "non-matching tx_id" do
+      context "with non-matching tx_id" do
         it "raises" do
           expect {
             transaction.update(SecureRandom.uuid, category, :unknown_frequency)
@@ -23,7 +23,7 @@ module CFE
         end
       end
 
-      context "non-matching category" do
+      context "with non-matching category" do
         it "raises" do
           expect {
             transaction.update(tx_id, :other_income, :unknown_frequency)
@@ -31,15 +31,15 @@ module CFE
         end
       end
 
-      context "adding a new reason" do
-        it "returns both the reasons in alphebetic order" do
+      context "when adding a new reason" do
+        it "returns both the reasons in alphabetical order" do
           transaction.update(tx_id, category, :amount_variation)
           expect(transaction.reasons).to eq(%i[amount_variation unknown_frequency])
         end
       end
 
-      context "adding duplicate reason" do
-        it "returns both the reasons in alphebetic order" do
+      context "when adding a duplicate reason" do
+        it "returns both the reasons in alphabetical order" do
           transaction.update(tx_id, category, :amount_variation)
           transaction.update(tx_id, category, :unknown_frequency)
           expect(transaction.reasons).to eq(%i[amount_variation unknown_frequency])

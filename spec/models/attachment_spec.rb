@@ -8,7 +8,7 @@ RSpec.describe Attachment do
   let!(:means1) { create :attachment, :means_report }
   let!(:bank) { create :attachment, :bank_transaction_report }
 
-  context "scopes" do
+  context "with scopes" do
     it "returns the expected collections" do
       expect(described_class.statement_of_case).to match_array [soc1, soc2]
       expect(described_class.merits_report).to match_array [merits1, merits2]

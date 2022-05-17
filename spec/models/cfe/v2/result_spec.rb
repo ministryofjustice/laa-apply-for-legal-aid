@@ -23,10 +23,10 @@ module CFE
 
         let(:application) { cfe_result.legal_aid_application }
 
-        context "manual check not required" do
+        context "when manual check not required" do
           before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(false) }
 
-          context "eligible" do
+          context "when eligible" do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
 
             it "returns eligible" do
@@ -34,7 +34,7 @@ module CFE
             end
           end
 
-          context "not_eligible" do
+          context "when not_eligible" do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
 
             it "returns not_eligible" do
@@ -42,7 +42,7 @@ module CFE
             end
           end
 
-          context "capital_contribution_required" do
+          context "with capital_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
 
             it "returns capital_contribution_required" do
@@ -50,7 +50,7 @@ module CFE
             end
           end
 
-          context "income_contribution_required" do
+          context "with income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
 
             it "returns income_contribution_required" do
@@ -58,7 +58,7 @@ module CFE
             end
           end
 
-          context "capital_and_income_contribution_required" do
+          context "with capital_and_income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
 
             it "returns capital_and_income_contribution_required" do
@@ -67,10 +67,10 @@ module CFE
           end
         end
 
-        context "manual check IS required and restrictions do not exist" do
+        context "when manual check IS required and restrictions do not exist" do
           before { allow(manual_review_determiner).to receive(:manual_review_required?).and_return(true) }
 
-          context "eligible" do
+          context "and eligible" do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
 
             it "returns eligible" do
@@ -78,7 +78,7 @@ module CFE
             end
           end
 
-          context "not_eligible" do
+          context "and not_eligible" do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
 
             it "returns not_eligible" do
@@ -86,7 +86,7 @@ module CFE
             end
           end
 
-          context "capital_contribution_required" do
+          context "with capital_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
 
             it "returns capital_contribution_required" do
@@ -94,7 +94,7 @@ module CFE
             end
           end
 
-          context "income_contribution_required" do
+          context "with income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
 
             it "returns income_contribution_required" do
@@ -102,7 +102,7 @@ module CFE
             end
           end
 
-          context "capital_and_income_contribution_required" do
+          context "with capital_and_income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
 
             it "returns capital_and_income_contribution_required" do
@@ -111,13 +111,13 @@ module CFE
           end
         end
 
-        context "manual check IS required and restrictions exist" do
+        context "when manual check IS required and restrictions exist" do
           before do
             allow(manual_review_determiner).to receive(:manual_review_required?).and_return(true)
             application.has_restrictions = true
           end
 
-          context "eligible" do
+          context "and eligible" do
             let(:cfe_result) { create :cfe_v2_result, :eligible }
 
             it "returns manual_check_required" do
@@ -125,7 +125,7 @@ module CFE
             end
           end
 
-          context "not_eligible" do
+          context "and not_eligible" do
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
 
             it "returns manual_check_required" do
@@ -133,7 +133,7 @@ module CFE
             end
           end
 
-          context "capital_contribution_required" do
+          context "when capital_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_contribution_required }
 
             it "returns manual_check_required" do
@@ -141,7 +141,7 @@ module CFE
             end
           end
 
-          context "income_contribution_required" do
+          context "when income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_income_contribution_required }
 
             it "returns manual_check_required" do
@@ -149,7 +149,7 @@ module CFE
             end
           end
 
-          context "capital_and_income_contribution_required" do
+          context "when capital_and_income_contribution_required" do
             let(:cfe_result) { create :cfe_v2_result, :with_capital_and_income_contributions_required }
 
             it "returns manual_check_required" do
@@ -160,19 +160,19 @@ module CFE
       end
 
       describe "#assessment_result" do
-        context "eligible" do
+        context "when eligible" do
           it "returns eligible" do
             expect(eligible_result.assessment_result).to eq "eligible"
           end
         end
 
-        context "not_eligible" do
+        context "when not_eligible" do
           it "returns not_eligible" do
             expect(not_eligible_result.assessment_result).to eq "not_eligible"
           end
         end
 
-        context "contribution_required" do
+        context "when contribution_required" do
           it "returns contribution_required" do
             expect(contribution_required_result.assessment_result).to eq "contribution_required"
           end
@@ -185,7 +185,7 @@ module CFE
         end
       end
 
-      context "disposable income" do
+      context "with disposable income" do
         let(:result) { income_contribution_required_result }
 
         describe "#income_contribution" do
@@ -234,13 +234,13 @@ module CFE
       end
 
       describe "eligible?" do
-        context "returns true" do
+        context "when returns true" do
           it "returns boolean response for eligible" do
             expect(eligible_result.eligible?).to be true
           end
         end
 
-        context "returns false" do
+        context "when returns false" do
           it "returns false response for eligible" do
             expect(not_eligible_result.eligible?).to be false
           end
@@ -248,13 +248,13 @@ module CFE
       end
 
       describe "capital_contribution_required?" do
-        context "contribution not required" do
+        context "when contribution not required" do
           it "returns false for capital_contribution_required" do
             expect(eligible_result.capital_contribution_required?).to be false
           end
         end
 
-        context "contribution is required" do
+        context "when contribution is required" do
           it "returns true for capital_contribution_required" do
             expect(contribution_required_result.capital_contribution_required?).to be true
           end
@@ -310,13 +310,13 @@ module CFE
       end
 
       describe "vehicles?" do
-        context "vehicle(s) exist" do
-          it "returns a boolean response if vehicles exist" do
+        context "when vehicle(s) exist" do
+          it "returns a boolean response" do
             expect(eligible_result.vehicles?).to be true
           end
 
-          context "vehicles dont exist"
-          it "returns a boolean response if vehicles exist" do
+          context "when vehicles do not exist"
+          it "returns a boolean response" do
             expect(no_vehicles.vehicles?).to be false
           end
         end
@@ -357,19 +357,19 @@ module CFE
       ################################################################
 
       describe "#additional_property?" do
-        context "present" do
+        context "when present" do
           it "returns true" do
             expect(additional_property.additional_property?).to be true
           end
         end
 
-        context "not present" do
+        context "when not present" do
           it "returns false" do
             expect(no_additional_properties.additional_property?).to be false
           end
         end
 
-        context "present but zero" do
+        context "when present but zero" do
           it "returns false" do
             expect(eligible_result.additional_property?).to be false
           end

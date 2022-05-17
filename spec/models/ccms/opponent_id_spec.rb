@@ -3,7 +3,7 @@ require "rails_helper"
 module CCMS
   RSpec.describe OpponentId do
     describe ".next_serial_id" do
-      context "no record in the ccms_opponent_ids table" do
+      context "with no record in the ccms_opponent_ids table" do
         it "creates one record" do
           expect(described_class.count).to be_zero
           described_class.next_serial_id
@@ -16,7 +16,7 @@ module CCMS
         end
       end
 
-      context "a record already exists in the ccms_opponent_ids table" do
+      context "when a record already exists in the ccms_opponent_ids table" do
         before { described_class.create!(serial_id: 88_123_456) }
 
         it "returns the next value" do

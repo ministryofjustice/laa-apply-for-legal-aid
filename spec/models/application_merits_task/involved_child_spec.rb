@@ -15,7 +15,7 @@ module ApplicationMeritsTask
 
       let(:involved_child) { build :involved_child, full_name: }
 
-      context "first name and last name" do
+      context "with first name and last name" do
         let(:full_name) { "John Smith" }
 
         it "separates out first and last name" do
@@ -31,7 +31,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "first name, middle name, last name" do
+      context "with first name, middle name, last name" do
         let(:full_name) { "Philip   Stephen    Richards" }
 
         it "separates out first and last name" do
@@ -39,7 +39,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "just last name" do
+      context "with just last name" do
         let(:full_name) { "Prince" }
 
         it "returns unspecified as first name" do
@@ -47,7 +47,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "double-barrelled names" do
+      context "with double-barrelled names" do
         let(:full_name) { "Jacob Rees-Mogg" }
 
         it "is not phased by the hyphen" do
@@ -55,7 +55,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "irish names" do
+      context "with Irish names" do
         let(:full_name) { "Daira O'Brien" }
 
         it "is not phased by the apostrophe" do
@@ -67,7 +67,7 @@ module ApplicationMeritsTask
     describe "CCMSOpponentIdGenerator concern" do
       let(:expected_id) { Faker::Number.number(digits: 8) }
 
-      context "ccms_opponent_id is nil" do
+      context "when ccms_opponent_id is nil" do
         before { expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(expected_id) }
 
         let(:involved_child) { create :involved_child, full_name: "John Doe", ccms_opponent_id: nil }
@@ -82,7 +82,7 @@ module ApplicationMeritsTask
         end
       end
 
-      context "ccms_opponent_id is already populated" do
+      context "when ccms_opponent_id is already populated" do
         before { expect(CCMS::OpponentId).not_to receive(:next_serial_id) }
 
         let(:involved_child) { create :involved_child, full_name: "John Doe", ccms_opponent_id: 4553 }

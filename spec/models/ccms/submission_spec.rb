@@ -15,7 +15,7 @@ module CCMS
              case_poll_count:
     end
 
-    context "Validations" do
+    context "with Validations" do
       it "errors if no legal aid application id is present" do
         submission.legal_aid_application = nil
         expect(submission).not_to be_valid
@@ -34,7 +34,7 @@ module CCMS
     describe "#process!" do
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
 
-      context "invalid state" do
+      context "with invalid state" do
         it "raises if state is invalid" do
           submission.aasm_state = "xxxxx"
           expect {
@@ -43,7 +43,7 @@ module CCMS
         end
       end
 
-      context "valid state" do
+      context "with valid state" do
         let(:service) { CCMS::Submitters::ObtainCaseReferenceService }
         let(:service_instance) { service.new(submission) }
 
@@ -57,7 +57,7 @@ module CCMS
           expect(service_instance).to receive(:call).with(no_args)
         end
 
-        context "case_ref_obtained state" do
+        context "with case_ref_obtained state" do
           let(:state) { :case_ref_obtained }
           let(:service) { CCMS::Submitters::ObtainApplicantReferenceService }
 
@@ -66,7 +66,7 @@ module CCMS
           end
         end
 
-        context "applicant_submitted state" do
+        context "with applicant_submitted state" do
           let(:state) { :applicant_submitted }
           let(:service) { CCMS::Submitters::CheckApplicantStatusService }
 
@@ -75,7 +75,7 @@ module CCMS
           end
         end
 
-        context "applicant_ref_obtained state" do
+        context "with applicant_ref_obtained state" do
           let(:state) { :applicant_ref_obtained }
           let(:service) { CCMS::Submitters::ObtainDocumentIdService }
 
@@ -84,7 +84,7 @@ module CCMS
           end
         end
 
-        context "case_submitted state" do
+        context "with case_submitted state" do
           let(:state) { :case_submitted }
           let(:service) { CCMS::Submitters::CheckCaseStatusService }
 
@@ -93,7 +93,7 @@ module CCMS
           end
         end
 
-        context "case_created state" do
+        context "with case_created state" do
           let(:state) { :case_created }
           let(:service) { CCMS::Submitters::UploadDocumentsService }
 
@@ -102,7 +102,7 @@ module CCMS
           end
         end
 
-        context "document_ids_obtained state" do
+        context "with document_ids_obtained state" do
           let(:state) { :document_ids_obtained }
           let(:service) { CCMS::Submitters::AddCaseService }
 
@@ -113,7 +113,7 @@ module CCMS
       end
     end
 
-    context "state change:" do
+    context "with state change:" do
       describe "#obtain_case_ref" do
         it "changes state" do
           expect { submission.obtain_case_ref }.to change(submission, :aasm_state).to("case_ref_obtained")
@@ -136,7 +136,7 @@ module CCMS
     end
 
     describe "#process_async!" do
-      context "submission is in initialised state" do
+      context "when submission is in initialised state" do
         it "calls SubmissionProcessWorker with a delay of 5 seconds" do
           expect(SubmissionProcessWorker).to receive(:perform_async).with(submission.id, submission.aasm_state)
           submission.process_async!

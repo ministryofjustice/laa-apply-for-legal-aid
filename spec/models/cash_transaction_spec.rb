@@ -39,7 +39,7 @@ RSpec.describe CashTransaction, type: :model do
     end
   end
 
-  context "date formatting" do
+  context "with date formatting" do
     let(:ctx) { create :cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1 }
 
     describe ".period_start" do

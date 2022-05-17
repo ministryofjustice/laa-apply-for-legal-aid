@@ -5,7 +5,7 @@ module CFE
     let(:remarks) { described_class.new(remarks_hash) }
 
     describe "#caseworker_review_required?" do
-      context "no remarks" do
+      context "with no remarks" do
         let(:remarks_hash) { empty_hash }
 
         it "returns false" do
@@ -13,7 +13,7 @@ module CFE
         end
       end
 
-      context "remarks exist" do
+      context "when remarks exist" do
         let(:remarks_hash) { populated_hash }
 
         it "returns false" do
@@ -23,7 +23,7 @@ module CFE
     end
 
     describe "#review_reasons" do
-      context "no remarks" do
+      context "with no remarks" do
         let(:remarks_hash) { empty_hash }
 
         it "returns empty array" do
@@ -41,7 +41,7 @@ module CFE
     end
 
     describe "#review_categories_by_reason" do
-      context "no remarks" do
+      context "with no remarks" do
         let(:remarks_hash) { empty_hash }
 
         it "returns empty hash" do
@@ -79,7 +79,7 @@ module CFE
     end
 
     describe "#review_transactions" do
-      context "no remarks" do
+      context "with no remarks" do
         let(:remarks_hash) { empty_hash }
         let(:collection) { remarks.review_transactions }
 
