@@ -403,6 +403,7 @@ workflows:
           - lint_checks
           <<: *generic-slack-fail-post-step
       - delete_dependabot_deployment:
+          context: laa-apply-for-legalaid-uat
           filters:
             branches:
               only:
