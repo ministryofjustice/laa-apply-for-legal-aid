@@ -17,7 +17,7 @@ module Dashboard
       end
 
       describe ".data" do
-        context "no one has ever logged in" do
+        context "when no one has ever logged in" do
           let(:expected_data) { [{ "number" => 0 }] }
 
           it "sends expected data" do
@@ -25,7 +25,7 @@ module Dashboard
           end
         end
 
-        context "five users over three firms" do
+        context "with five users over three firms" do
           let(:firm1) { create :firm }
           let(:firm2) { create :firm }
           let(:firm3) { create :firm }
