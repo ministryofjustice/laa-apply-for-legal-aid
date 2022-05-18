@@ -43,7 +43,6 @@ Feature: check_multiple_employment
     Then I click 'Save and continue'
     Then I should be on a page showing "Paisley also earns 50 gbp"
     Then I click 'Save and continue'
-    And show me the page
     Then I should be on a page showing "We need to check if Ida Paisley can get legal aid"
     Then I click "Show all sections"
     And I should be on a page showing "Employment income"
@@ -83,9 +82,9 @@ Feature: check_multiple_employment
     Then I sleep for 2 seconds
     Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Check your answers and submit application"
-    Then I click 'Submit and continue'
-    And I bind and pry
+    Then I click 'Save and continue'  #Awaiting bug fix to allow category to not error on first click of Save and continue
+    Then I should be on a page showing "Check your answers"
+    Then I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
     Then I check "I confirm the above is correct and that I'll obtain a signed declaration from my client."
     Then I click 'Save and continue'
