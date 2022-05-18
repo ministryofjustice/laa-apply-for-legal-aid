@@ -83,7 +83,8 @@ Feature: check_single_employment
     Then I sleep for 2 seconds
     Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
     Then I click 'Save and continue'
-    Then I click 'Save and continue'  #Awaiting bug fix to allow category to not error on first click of Save and continue
+    #Awaiting bug fix to allow category to not error on first click of Save and continue
+    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"

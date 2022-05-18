@@ -9,7 +9,7 @@ Given(/^the system is prepped for the employed journey$/) do
   end
 end
 
-Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$/) do | first_name, last_name |
+Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$/) do |first_name, last_name|
   @applicant = FactoryBot.create :applicant,
                                  :employed,
                                  "#{first_name}_#{last_name}".downcase.to_sym,
@@ -21,7 +21,7 @@ Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$
                                              :provider_assessing_means,
                                              :with_proceedings,
                                              applicant: @applicant,
-                                             provider_step: 'client_completed_means',
+                                             provider_step: "client_completed_means",
                                              provider: @registered_provider
   bank_account = @applicant.bank_accounts.first
   FactoryBot.create_list :bank_transaction, 2, :credit, bank_account: bank_account, amount: rand(1...1_500.0).round(2)
@@ -30,5 +30,3 @@ Given(/^an applicant named (\S+) (\S+) has completed his true layer interaction$
   HMRC::CreateResponsesService.call(@legal_aid_application)
   sleep 0.5 # give time for the after_update on HMRC::Response to do its thing
 end
-
-
