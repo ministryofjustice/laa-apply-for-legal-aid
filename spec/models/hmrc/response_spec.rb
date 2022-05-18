@@ -35,13 +35,13 @@ RSpec.describe HMRC::Response, type: :model do
   end
 
   describe ".use_case_for" do
-    context "there are application id does not exist" do
+    context "when the application id does not exist" do
       it "returns nil" do
         expect(described_class.use_case_one_for(SecureRandom.uuid)).to be_nil
       end
     end
 
-    context "there is only one use case one record with the specified application id" do
+    context "when there is only one use case one record with the specified application id" do
       let!(:response1) { create :hmrc_response, :use_case_one }
       let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
       let!(:response2) { create :hmrc_response, :use_case_one }
@@ -51,7 +51,7 @@ RSpec.describe HMRC::Response, type: :model do
       end
     end
 
-    context "there are multiple use case one records with the specified application id" do
+    context "when there are multiple use case one records with the specified application id" do
       let!(:response1) { create :hmrc_response, :use_case_one, created_at: 5.minutes.ago }
       let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
       let!(:response1_last) { create :hmrc_response, :use_case_one, legal_aid_application_id: response1.legal_aid_application_id }
@@ -123,7 +123,7 @@ RSpec.describe HMRC::Response, type: :model do
       end
     end
 
-    context "with an invalid HMR response" do
+    context "with an invalid HMRC response" do
       before do
         allow(HMRC::ParsedResponse::Validator).to receive(:call).and_return(false)
       end
@@ -135,7 +135,7 @@ RSpec.describe HMRC::Response, type: :model do
   end
 
   describe "#status" do
-    context "normal payload" do
+    context "with a normal payload" do
       let(:response) { create :hmrc_response, :use_case_one }
 
       it "returns a 'completed' status" do
@@ -143,7 +143,7 @@ RSpec.describe HMRC::Response, type: :model do
       end
     end
 
-    context "processing payload" do
+    context "when processing payload" do
       let(:response) { create :hmrc_response, :processing }
 
       it "returns a 'processing' status" do
@@ -151,7 +151,7 @@ RSpec.describe HMRC::Response, type: :model do
       end
     end
 
-    context "nil payload" do
+    context "with a nil payload" do
       let(:response) { create :hmrc_response, :nil_response }
 
       it "returns nil" do
