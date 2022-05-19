@@ -12,6 +12,7 @@ require "webmock/cucumber"
 require "factory_bot"
 require "webdrivers"
 require "axe-cucumber-steps"
+require "cucumber/rspec/doubles"
 
 # HACK: this method was available in cucumber 3.1 but not cucumber 4 and VCR relies on it to
 # generate cassette names.

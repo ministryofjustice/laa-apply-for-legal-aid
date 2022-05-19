@@ -46,6 +46,30 @@ FactoryBot.define do
       end
     end
 
+    trait :langley_yorke do
+      first_name { "Langley" }
+      last_name { "Yorke" }
+      date_of_birth { Date.new(1992, 7, 22) }
+      email { Faker::Internet.safe_email }
+      national_insurance_number { "MN212451D" }
+    end
+
+    trait :ida_paisley do
+      first_name { "Ida" }
+      last_name { "Paisley" }
+      date_of_birth { Date.new(1987, 11, 24) }
+      email { Faker::Internet.safe_email }
+      national_insurance_number { "OE726113A" }
+    end
+
+    trait :john_pending do
+      first_name { "John" }
+      last_name { "Pending" }
+      date_of_birth { Date.new(2002, 9, 1) }
+      email { Faker::Internet.safe_email }
+      national_insurance_number { "KY123456D" }
+    end
+
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
     transient do
       with_bank_accounts { 0 }
