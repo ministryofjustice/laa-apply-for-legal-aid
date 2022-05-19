@@ -50,14 +50,14 @@ RSpec.describe "Firm" do
     let!(:firm2) { create :firm, name: "Cage and Fish" }
     let!(:firm3) { create :firm, name: "Harvey Birdman & Co." }
 
-    context "search for a firm" do
+    context "when searching for a single firm" do
       it "returns a single record" do
         expect(Firm.search("Harvey")).to eq([firm3])
       end
     end
 
-    context "returns all records" do
-      it "returns all record" do
+    context "when no specific firm is searched for" do
+      it "returns all records" do
         expect(Firm.search("")).to match_array([firm3, firm2, firm])
       end
     end

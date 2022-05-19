@@ -13,7 +13,7 @@ RSpec.describe HostEnv do
       allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new(rails_env.to_s))
     end
 
-    context "development" do
+    context "when development" do
       let(:root_url) { "http://localhost:3000/" }
       let(:rails_env) { :development }
 
@@ -23,7 +23,7 @@ RSpec.describe HostEnv do
         end
       end
 
-      context "interrogations" do
+      context "with interrogations" do
         it "returns the correct values" do
           expect(described_class.development?).to be true
           expect(described_class.test?).to be false
@@ -35,7 +35,7 @@ RSpec.describe HostEnv do
       end
     end
 
-    context "test" do
+    context "when test" do
       let(:root_url) { "http://localhost:3000/" }
       let(:rails_env) { :test }
 
@@ -45,7 +45,7 @@ RSpec.describe HostEnv do
         end
       end
 
-      context "interrogations" do
+      context "with interrogations" do
         it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be true
@@ -57,7 +57,7 @@ RSpec.describe HostEnv do
       end
     end
 
-    context "uat" do
+    context "when UAT" do
       let(:root_url) { "https://mybranch-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
@@ -67,7 +67,7 @@ RSpec.describe HostEnv do
         end
       end
 
-      context "interrogations" do
+      context "with interrogations" do
         it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
@@ -79,7 +79,7 @@ RSpec.describe HostEnv do
       end
     end
 
-    context "staging" do
+    context "when staging" do
       let(:root_url) { "https://staging.apply-for-legal-aid.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
@@ -89,7 +89,7 @@ RSpec.describe HostEnv do
         end
       end
 
-      context "interrogations" do
+      context "with interrogations" do
         it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
@@ -101,7 +101,7 @@ RSpec.describe HostEnv do
       end
     end
 
-    context "production" do
+    context "when production" do
       let(:root_url) { "https://apply-for-legal-aid.service.justice.gov.uk" }
       let(:rails_env) { :production }
 
@@ -111,7 +111,7 @@ RSpec.describe HostEnv do
         end
       end
 
-      context "interrogations" do
+      context "with interrogations" do
         it "returns the correct values" do
           expect(described_class.development?).to be false
           expect(described_class.test?).to be false
@@ -123,7 +123,7 @@ RSpec.describe HostEnv do
       end
     end
 
-    context "unknown environment" do
+    context "when unknown environment" do
       let(:root_url) { "https://example.com" }
       let(:rails_env) { :production }
 

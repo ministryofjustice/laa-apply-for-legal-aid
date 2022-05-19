@@ -16,7 +16,7 @@ RSpec.describe IrregularIncome, type: :model do
       expect(subject).to be_valid
     end
 
-    context "invalid attributes" do
+    context "with invalid attributes" do
       before do
         subject.income_type = "medical_loan"
         subject.frequency = "annualzz"
