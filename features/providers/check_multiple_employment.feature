@@ -1,5 +1,5 @@
 Feature: check_multiple_employment
-  @javascript @vcr
+  @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to complete an application for an employed applicant with multiple employers
     Given I am logged in as a provider
     And csrf is enabled
