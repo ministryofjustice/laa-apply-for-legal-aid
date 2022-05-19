@@ -37,7 +37,7 @@ RSpec.describe Proceeding, type: :model do
   end
 
   describe "#section8?" do
-    context "section 8 proceeding" do
+    context "with section 8 proceeding" do
       let(:proceeding) { create :proceeding, :se014 }
 
       it "returns true" do
@@ -45,7 +45,7 @@ RSpec.describe Proceeding, type: :model do
       end
     end
 
-    context "non section 8 proceeding" do
+    context "with non-section 8 proceeding" do
       let(:proceeding) { create :proceeding, :da001 }
 
       it "returns false" do
@@ -54,7 +54,7 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
-  context "domestic abuse" do
+  context "with domestic abuse" do
     let(:matter_code) { "MINJN" }
 
     it "returns false" do
@@ -69,13 +69,13 @@ RSpec.describe Proceeding, type: :model do
   end
 
   describe "#used_delegated_functions?" do
-    context "df not used" do
+    context "when df not used" do
       it "returns false" do
         expect(proceeding.used_delegated_functions?).to be false
       end
     end
 
-    context "df_used" do
+    context "when df_used" do
       let(:df_date) { 2.days.ago }
 
       it "returns true" do
@@ -89,7 +89,7 @@ RSpec.describe Proceeding, type: :model do
 
     let(:proceeding) { create :proceeding, :da001, used_delegated_functions_on: df_date }
 
-    context "delegated functions not used" do
+    context "when delegated functions not used" do
       let(:df_date) { nil }
 
       it "returns false" do
@@ -97,7 +97,7 @@ RSpec.describe Proceeding, type: :model do
       end
     end
 
-    context "delegated functions used" do
+    context "when delegated functions used" do
       let(:df_date) { Time.zone.yesterday }
 
       it "returns true" do

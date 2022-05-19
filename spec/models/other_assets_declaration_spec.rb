@@ -14,13 +14,13 @@ RSpec.describe OtherAssetsDeclaration, type: :model do
   describe "#positive" do
     subject { create :other_assets_declaration }
 
-    context "has no savings" do
+    context "with no savings" do
       it "is negative" do
         expect(subject.positive?).to be(false)
       end
     end
 
-    context "has some savings" do
+    context "with some savings" do
       before { subject.update!(land_value: rand(1...1_000_000.0).round(2)) }
 
       it "is positive" do

@@ -11,7 +11,7 @@ module LegalFramework
         expect(serialized_merits_task.state).to eq :waiting_for_dependency
       end
 
-      context "no dependencies" do
+      context "with no dependencies" do
         let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
 
         it "stores empty array for dependencies" do
@@ -45,7 +45,7 @@ module LegalFramework
     end
 
     describe "#mark_as_complete!" do
-      context "has dependencies" do
+      context "with dependencies" do
         it "raises an exception" do
           expect {
             serialized_merits_task.mark_as_complete!
@@ -53,7 +53,7 @@ module LegalFramework
         end
       end
 
-      context "successful" do
+      context "when successful" do
         let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
 
         it "marks the task as complete" do

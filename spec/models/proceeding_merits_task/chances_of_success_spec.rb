@@ -10,7 +10,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
     let(:proceeding) { legal_aid_application.proceedings.first }
     let(:chances_of_success) { create :chances_of_success, success_prospect: prospect, proceeding: }
 
-    context "likely" do
+    context "when likely" do
       let(:prospect) { "likely" }
 
       it "generates the correct pretty text" do
@@ -18,15 +18,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
       end
     end
 
-    context "likely" do
-      let(:prospect) { "likely" }
-
-      it "generates the correct pretty text" do
-        expect(chances_of_success.pretty_success_prospect).to eq "Likely (>50%)"
-      end
-    end
-
-    context "marginal" do
+    context "when marginal" do
       let(:prospect) { "marginal" }
 
       it "generates the correct pretty text" do
@@ -34,7 +26,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
       end
     end
 
-    context "poor" do
+    context "when poor" do
       let(:prospect) { "poor" }
 
       it "generates the correct pretty text" do
@@ -42,7 +34,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
       end
     end
 
-    context "borderline" do
+    context "when borderline" do
       let(:prospect) { "borderline" }
 
       it "generates the correct pretty text" do
@@ -50,7 +42,7 @@ RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
       end
     end
 
-    context "not_known" do
+    context "when not_known" do
       let(:prospect) { "not_known" }
 
       it "generates the correct pretty text" do
