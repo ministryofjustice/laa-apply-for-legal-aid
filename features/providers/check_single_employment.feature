@@ -5,95 +5,122 @@ Feature: Check single employment
     And csrf is enabled
     And an applicant named Langley Yorke has completed his true layer interaction
     And the system is prepped for the employed journey
-    Then I visit the applications page
-    Then I click link 'Langley Yorke'
+
+    When I visit the applications page
+    And I click link 'Langley Yorke'
     Then I should be on a page showing "Continue Langley Yorke's financial assessment"
-    Then I click 'Continue'
+
+    When I click 'Continue'
     Then I should be on a page showing "Review Langley Yorke's employment income"
-    Then I choose "Yes"
-    Then I fill "legal-aid-application-extra-employment-information-details-field" with "Yorke also earns 50 gbp"
-    Then I click 'Save and continue'
+
+    When I choose "Yes"
+    And I fill "legal-aid-application-extra-employment-information-details-field" with "Yorke also earns 50 gbp"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I choose "Yes"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I choose "Yes"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which types of savings or investments does your client have?"
-    Then I check "None of these"
-    Then I click 'Save and continue'
+
+    When I check "None of these"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which types of assets does your client have?"
-    Then I click 'Save and continue'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
-    Then I check "None of these"
-    Then I click 'Save and continue'
+
+    When I check "None of these"
+    And I click 'Save and continue'
     Then I should be on a page showing "Yorke also earns 50 gbp"
-    Then I click 'Save and continue'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "We need to check if Langley Yorke can get legal aid"
-    Then I click "Show all sections"
-    And I should be on a page showing "Employment income"
+
+    When I click "Show all sections"
+    Then I should be on a page showing "Employment income"
     And I should be on a page showing "Fixed employment expenses deduction"
     And I should be on a page showing "-£45"
-    Then I click 'Save and continue'
+    And I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
+
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
-    Then I fill "application_merits_task_incident_told_on_3i" with "5"
-    Then I fill "application_merits_task_incident_told_on_2i" with "5"
-    Then I fill "application_merits_task_incident_told_on_1i" with "21"
-    Then I fill "application_merits_task_incident_occurred_on_3i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_1i" with "21"
-    Then I click 'Save and continue'
+
+    When I fill "application_merits_task_incident_told_on_3i" with "5"
+    And I fill "application_merits_task_incident_told_on_2i" with "5"
+    And I fill "application_merits_task_incident_told_on_1i" with "21"
+    And I fill "application_merits_task_incident_occurred_on_3i" with "4"
+    And I fill "application_merits_task_incident_occurred_on_2i" with "4"
+    And I fill "application_merits_task_incident_occurred_on_1i" with "21"
+    And I click 'Save and continue'
     Then I should be on a page showing 'Opponent details'
-    Then I fill "application-merits-task-opponent-full-name-field" with "Bob"
-    Then I choose "application-merits-task-opponent-understands-terms-of-court-order-true-field"
-    Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
-    Then I choose "application-merits-task-opponent-police-notified-true-field"
-    Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Single employment test"
-    Then I choose "application-merits-task-opponent-bail-conditions-set-field"
-    Then I click 'Save and continue'
+
+    When I fill "application-merits-task-opponent-full-name-field" with "Bob"
+    And I choose "application-merits-task-opponent-understands-terms-of-court-order-true-field"
+    And I choose "application-merits-task-opponent-warning-letter-sent-true-field"
+    And I choose "application-merits-task-opponent-police-notified-true-field"
+    And I fill "application-merits-task-opponent-police-notified-details-true-field" with "Single employment test"
+    And I choose "application-merits-task-opponent-bail-conditions-set-field"
+    And I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
-    Then I fill "application-merits-task-statement-of-case-statement-field" with "Statement of case"
-    Then I click 'Save and continue'
+
+    When I fill "application-merits-task-statement-of-case-statement-field" with "Statement of case"
+    And I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
+
     When I click link 'Chances of success'
     Then I should be on a page showing "Is the chance of a successful outcome 50% or better?"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I choose "Yes"
+    And I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
-    Then I click 'Save and continue'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Upload supporting evidence"
-    Then I upload an evidence file named 'hello_world.pdf'
-    Then I sleep for 2 seconds
-    Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
-    Then I click 'Save and continue'
-    #Awaiting bug fix to allow category to not error on first click of Save and continue
-    Then I click 'Save and continue'
+
+    When I upload an evidence file named 'hello_world.pdf'
+    And I sleep for 2 seconds
+    And I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
+    And I click 'Save and continue'
+    # TODO: remove double "save and continue" when bug fixed - see AP-3101
+    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I click 'Save and continue'
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Confirm the following"
-    Then I check "I confirm the above is correct and that I'll obtain a signed declaration from my client."
-    Then I click 'Save and continue'
+
+    When I check "I confirm the above is correct and that I'll obtain a signed declaration from my client."
+    And I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
-    Then I click 'Submit and continue'
+
+    When I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
-    Then I click 'View completed application'
+
+    When I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
 
 
