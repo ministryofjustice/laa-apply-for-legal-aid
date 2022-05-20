@@ -58,7 +58,6 @@ Feature: Check pending employment
 
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if John Pending can get legal aid"
-    
     When I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
 
@@ -101,8 +100,6 @@ Feature: Check pending employment
     And I sleep for 2 seconds
     Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
 
-    When I click 'Save and continue'
-    # TODO: remove double "save and continue" when bug fixed - see AP-3101 
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 

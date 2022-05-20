@@ -106,8 +106,6 @@ Feature: Check single employment
     And I sleep for 2 seconds
     And I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
     And I click 'Save and continue'
-    # TODO: remove double "save and continue" when bug fixed - see AP-3101
-    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 
     When I click 'Save and continue'

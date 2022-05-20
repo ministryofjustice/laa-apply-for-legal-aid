@@ -25,6 +25,7 @@ module Providers
       @service = UploadedEvidence::ListService.call(self)
       @required_documents = @service.required_documents
       @attachment_type_options = @service.attachment_type_options
+      @uploaded_evidence_collection = @service.uploaded_evidence_collection
       render partial: "uploaded_files", locals: { attachments: @service.uploaded_evidence_collection.original_attachments }
     end
 
