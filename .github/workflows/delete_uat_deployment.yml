@@ -14,23 +14,24 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - name: output branch name
-      run: echo ${{ steps.extract_branch.outputs.branch }}
 
     - name: Extract release name
       id: extract_release
       shell: bash
       run: |
-        branch=${{ steps.extract_branch.outputs.branch }
+        branch=${{ steps.extract_branch.outputs.branch }}
         truncated_branch=$(echo $branch | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
         echo "##[set-output name=release;]$(echo "apply-${truncated_branch}")"
-    - name: Print branch and relase name
+
+    - name: Print branch and release name
       run: |
         echo "Branch name is ${{ steps.extract_branch.outputs.branch }}"
         echo "Release name is ${{ steps.extract_release.outputs.release }}"
+
     - name: Print helm version
       run: |
         helm version
+
     - name: Authenticate to the cluster
       env:
         K8S_CLUSTER: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
@@ -43,12 +44,14 @@ jobs:
         kubectl config set-credentials circleci --token=${K8S_TOKEN}
         kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER}
-    - name: List UAT deployments
+
+    - name: List UAT deployments for release name with kubectl
       run: |
-        kubectl get deployments
-    - name: List UAT deployments for branch using helm
+        kubectl get deployments | grep ${{ steps.extract_release.outputs.release }}
+
+    - name: List UAT deployments for release name using helm
       run: |
-        helm list | grep ${{ steps.extract_branch.outputs.branch }}
+        helm list | grep ${{ steps.extract_release.outputs.release }}
 
   merge_job:
     if: github.event.pull_request.merged == true
