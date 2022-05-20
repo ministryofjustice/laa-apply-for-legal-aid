@@ -121,6 +121,7 @@ Rails.application.routes.draw do
     resource :select_office, only: %i[show update]
     resource :declaration, only: %i[show]
     resource :invalid_login, only: :show
+    resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[index create] do
       get :search, on: :collection

@@ -173,6 +173,30 @@ en:
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
+
+    cookies:
+      show:
+        page_title: Cookies on Apply for Legal Aid
+        success_message: Your cookie settings were saved
+        go_back_link: Go back to the page you were looking at
+        cookies_are_files: Cookies are files saved on your phone, tablet or computer when you visit a website.
+        we_use_cookies: We use cookies to store information about how you use Apply for legal aid, such as the pages you visit.
+        heading_2: Cookies that measure website use
+        we_use_ga: We use Google Analytics to measure how you use the service so we can improve it based on user needs.
+        we_do_not_allow: We do not allow Google to use or share the data about how you use this site.
+        google_analytics: Google Analytics sets cookies that store anonymised information about
+        list: |
+          how you got to the site
+          the pages you visit on Apply for legal aid, and how long you spend on each page
+          what you click on while you're visiting the site
+        use_this_cookie: Use this cookie to measure my website use
+        do_not_use: Do not use this cookie to measure my website use
+        heading_3: Strictly necessary cookies
+        these_essential_cookies: These essential cookies do things like remember your progress through a form.
+        they_always_need: They always need to be on.
+        find_out_more_link: Find out more about cookies on GOV.UK
+        save_changes_btn: Save changes
+
     confirm_dwp_non_passported_applications:
       show:
         'no': No, my client receives a passporting benefit

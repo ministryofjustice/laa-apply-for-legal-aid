@@ -719,6 +719,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_125715) do
     t.boolean "portal_enabled", default: true
     t.integer "contact_id"
     t.string "invalid_login_details"
+    t.boolean "cookies_enabled"
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"

@@ -23,6 +23,7 @@ en:
       problem_text: There is a problem
       yes_or_no: You must select either Yes or No
     home: Home
+    important: Important
     information: Information
     list: List
     'no': 'No'
