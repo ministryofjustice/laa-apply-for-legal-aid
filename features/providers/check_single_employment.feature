@@ -60,7 +60,7 @@ Feature: Check single employment
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if Langley Yorke can get legal aid"
 
-    When I click "Show all sections"
+    When I click "Open all"
     Then I should be on a page showing "Employment income"
     And I should be on a page showing "Fixed employment expenses deduction"
     And I should be on a page showing "-£45"
@@ -105,8 +105,6 @@ Feature: Check single employment
     When I upload an evidence file named 'hello_world.pdf'
     And I sleep for 2 seconds
     And I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
-    And I click 'Save and continue'
-    # TODO: remove double "save and continue" when bug fixed - see AP-3101
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
 
