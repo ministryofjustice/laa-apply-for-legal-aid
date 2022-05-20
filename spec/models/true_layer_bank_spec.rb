@@ -42,7 +42,7 @@ RSpec.describe TrueLayerBank, type: :model, vcr: { cassette_name: "true_layer_ba
         expect(described_class.available_banks).to eq(result)
       end
 
-      context "mock bank is enabled" do
+      context "when mock bank is enabled" do
         let(:enable_mock) { true }
 
         it "includes mock bank" do

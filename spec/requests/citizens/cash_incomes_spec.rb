@@ -26,8 +26,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
       patch citizens_cash_income_path, params:
     end
 
-    context "valid update" do
-      context "valid params" do
+    context "with valid update" do
+      context "and valid params" do
         let(:params) { valid_params }
 
         it "redirects to new action" do
@@ -39,7 +39,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         end
       end
 
-      context "none of the above" do
+      context "with none of the above" do
         let(:params) { nothing_selected }
 
         it "redirects to new action" do
@@ -52,8 +52,8 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
       end
     end
 
-    context "invalid update" do
-      context "invalid params" do
+    context "with invalid update" do
+      context "with invalid params" do
         let(:params) { invalid_params }
 
         it "returns http success" do
@@ -78,7 +78,7 @@ RSpec.describe Citizens::CashIncomesController, type: :request do
         end
       end
 
-      context "no params" do
+      context "with no params" do
         let(:params) { { aggregated_cash_income: { check_box_benefits: "" } } }
 
         it "shows an error if nothing selected" do

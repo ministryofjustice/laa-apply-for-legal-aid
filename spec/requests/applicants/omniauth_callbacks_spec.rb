@@ -76,7 +76,7 @@ RSpec.describe "applicants omniauth call back", type: :request do
       end
     end
 
-    context "on authentication failure" do
+    context "with authentication failure" do
       before do
         OmniAuth.config.mock_auth[:true_layer] = :invalid_credentials
 

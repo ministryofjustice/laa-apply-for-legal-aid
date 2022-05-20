@@ -159,21 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/models/true_layer_bank_spec.rb'
-    - 'spec/models/vehicle_spec.rb'
-    - 'spec/policies/legal_aid_application_policy_spec.rb'
-    - 'spec/presenters/applicant_account_presenter_spec.rb'
-    - 'spec/requests/admin/legal_aid_applications/submissions_controller_spec.rb'
-    - 'spec/requests/admin/legal_aid_applications_controller_spec.rb'
-    - 'spec/requests/admin/providers_spec.rb'
-    - 'spec/requests/admin/roles/permissions_spec.rb'
-    - 'spec/requests/admin/settings_spec.rb'
-    - 'spec/requests/admin_users/sessions_controller_spec.rb'
-    - 'spec/requests/applicants/omniauth_callbacks_spec.rb'
-    - 'spec/requests/auth_spec.rb'
-    - 'spec/requests/backable_spec.rb'
-    - 'spec/requests/citizens/bank_spec.rb'
-    - 'spec/requests/citizens/cash_incomes_spec.rb'
     - 'spec/requests/citizens/cash_outgoings_spec.rb'
     - 'spec/requests/citizens/check_answers_spec.rb'
     - 'spec/requests/citizens/consent_spec.rb'

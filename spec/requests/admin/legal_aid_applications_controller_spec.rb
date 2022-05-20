@@ -11,7 +11,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   describe "GET /admin/legal_aid_applications" do
     subject { get admin_legal_aid_applications_path(params) }
 
-    context "not from a whitelisted IP address" do
+    context "when not from a whitelisted IP address" do
       it "redirects to error page" do
         # stub the response to request.env['HTTP_X_REAL_IP']
         Rails.application.env_config["HTTP_X_REAL_IP"] = "55.6.7.8"
@@ -212,7 +212,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
         end
       end
 
-      context "application has no applicant" do
+      context "when application has no applicant" do
         let!(:application) { create :legal_aid_application }
 
         it "gets deleted too" do

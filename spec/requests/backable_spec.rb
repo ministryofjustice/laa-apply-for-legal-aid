@@ -34,7 +34,7 @@ RSpec.describe "Backable", :vcr, type: :request do
       expect(response.body).to have_back_link("#{page2}&back=true")
     end
 
-    context "we reload the current page several times" do
+    context "when we reload the current page several times" do
       before do
         get page3
         get page3
@@ -45,7 +45,7 @@ RSpec.describe "Backable", :vcr, type: :request do
       end
     end
 
-    context "we go back once" do
+    context "when we go back once" do
       it "redirects to same page without the param" do
         get "#{page2}&back=true"
         expect(response).to redirect_to(page2)

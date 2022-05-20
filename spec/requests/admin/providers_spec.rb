@@ -18,7 +18,7 @@ module Admin
         get admin_firm_providers_path(firm_id)
       end
 
-      context "all firms" do
+      context "with all firms" do
         let(:firm_id) { "0" }
 
         it "displays an appropriate heading" do
@@ -32,7 +32,7 @@ module Admin
         end
       end
 
-      context "firm specified" do
+      context "with firm specified" do
         let(:firm_id) { my_firm.id }
 
         it "displays a heading mentioning the firm name" do

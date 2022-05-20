@@ -4,7 +4,7 @@ RSpec.describe Vehicle, type: :model do
   describe "#purchased_on" do
     let(:vehicle) { create :vehicle, purchased_on:, more_than_three_years_old: }
 
-    context "purchased_on is populated" do
+    context "when purchased_on is populated" do
       let(:purchased_on) { 6.months.ago.to_date }
       let(:more_than_three_years_old) { nil }
 
@@ -13,10 +13,10 @@ RSpec.describe Vehicle, type: :model do
       end
     end
 
-    context "purchased_on is nil" do
+    context "when purchased_on is nil" do
       let(:purchased_on) { nil }
 
-      context "more than three years old" do
+      context "when more than three years old" do
         let(:more_than_three_years_old) { true }
 
         it "returns a date 4 years ago" do
@@ -24,7 +24,7 @@ RSpec.describe Vehicle, type: :model do
         end
       end
 
-      context "less than three years old" do
+      context "when less than three years old" do
         let(:more_than_three_years_old) { false }
 
         it "returns a date 2 years ago" do

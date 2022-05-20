@@ -26,7 +26,7 @@ RSpec.describe Citizens::BanksController, type: :request do
       expect(response.body).not_to include("mock")
     end
 
-    context "enable_mock is set to true" do
+    context "when enable_mock is set to true" do
       let(:enable_mock) { true }
 
       it "shows the mock bank" do
@@ -52,7 +52,7 @@ RSpec.describe Citizens::BanksController, type: :request do
       expect(session[:locale]).to eq(:en)
     end
 
-    context "Welsh locale" do
+    context "with Welsh locale" do
       before { post citizens_banks_path, params: { provider_id: } }
 
       around(:each) do |example|
@@ -64,7 +64,7 @@ RSpec.describe Citizens::BanksController, type: :request do
       end
     end
 
-    context "no bank was selected" do
+    context "with no bank selected" do
       let(:provider_id) { nil }
 
       it "returns http success" do

@@ -69,14 +69,14 @@ RSpec.describe Admin::SettingsController, type: :request do
     context "when the enable_ccms_submission is changed" do
       before { allow_any_instance_of(CCMS::RestartSubmissions).to receive(:call).and_return(true) }
 
-      context "from false to true" do
+      context "when from false to true" do
         it "calls CCMS::RestartSubmissions" do
           expect(CCMS::RestartSubmissions).to receive(:call)
           subject
         end
       end
 
-      context "from true to false" do
+      context "when from true to false" do
         let(:params) do
           {
             setting: {
@@ -95,7 +95,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       end
     end
 
-    context "Setting already exist" do
+    context "when Setting already exist" do
       before { Setting.create! }
 
       it "does not add another Setting object" do
@@ -103,7 +103,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       end
     end
 
-    context "no params where sent" do
+    context "when no params were sent" do
       let(:params) do
         {
           setting: {

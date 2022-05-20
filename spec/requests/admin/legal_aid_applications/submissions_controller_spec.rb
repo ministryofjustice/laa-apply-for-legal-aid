@@ -29,7 +29,7 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
     end
   end
 
-  context "Downloads" do
+  context "with Downloads" do
     let(:submission) { legal_aid_application.ccms_submission }
     let!(:history) { create(:ccms_submission_history, :with_xml, submission:) }
 
@@ -61,7 +61,7 @@ RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :reques
       end
     end
 
-    context "pdf" do
+    context "with pdf" do
       describe "GET download_means_report" do
         subject { get download_means_report_admin_legal_aid_applications_submission_path(legal_aid_application, format: :pdf) }
 
