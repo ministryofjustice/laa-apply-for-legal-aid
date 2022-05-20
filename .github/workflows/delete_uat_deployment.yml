@@ -51,23 +51,16 @@ jobs:
 
     - name: List UAT deployments for release name using helm
       run: |
-        helm list | grep ${{ steps.extract_release.outputs.release }}
+        release_name=${{ steps.extract_release.outputs.release }}
+        found=$(helm list --all | grep $release_name)
 
-        found=$(helm list | grep ${{ steps.extract_release.outputs.release }})
         if [[ ! -z "$found" ]]
         then
-          echo "delete ${{ steps.extract_release.outputs.release }} here..."
+          echo "Deleting UAT release ${release_name}..."
+          # helm delete $release_name
         else
-          echo "${{ steps.extract_release.outputs.release }} not found!"
+          echo "UAT release, ${release_name}, not found!"
         fi
-
-    - uses: actions/checkout@v2
-    - name: Setup tmate session
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      timeout-minutes: 15
-      with:
-        limit-access-to-actor: true
 
   merge_job:
     if: github.event.pull_request.merged == true
