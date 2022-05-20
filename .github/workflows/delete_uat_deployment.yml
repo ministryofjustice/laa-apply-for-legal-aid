@@ -61,6 +61,14 @@ jobs:
           echo "${{ steps.extract_release.outputs.release }} not found!"
         fi
 
+    - uses: actions/checkout@v2
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 15
+      with:
+        limit-access-to-actor: true
+
   merge_job:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
