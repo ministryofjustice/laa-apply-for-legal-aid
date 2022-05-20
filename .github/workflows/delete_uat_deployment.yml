@@ -1,6 +1,7 @@
 name: Delete UAT deployment
 
 on:
+  push:
   pull_request:
     types: [closed]
 
