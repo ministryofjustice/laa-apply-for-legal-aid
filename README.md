@@ -10,6 +10,7 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
 
 ## Table of Contents
 - [**Architecture Diagram**](#architecture-diagram)
+- [**Environment mappings**](docs/environment_mappings.md)
 - [**Documentation for developers**](#documentation-for-developers)
 - [**Dependencies**](#dependencies)
 - [**Initial setup**](#initial-setup)
