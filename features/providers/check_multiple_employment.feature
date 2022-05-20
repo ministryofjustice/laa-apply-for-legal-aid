@@ -59,7 +59,7 @@ Feature: Check multiple employment
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if Ida Paisley can get legal aid"
 
-    When I click "Open all"
+    When I click "Show all sections"
     Then I should be on a page showing "Employment income"
     And I should be on a page showing "Fixed employment expenses deduction"
     And I should be on a page showing "-£45"
