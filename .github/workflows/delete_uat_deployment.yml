@@ -53,6 +53,14 @@ jobs:
       run: |
         helm list | grep ${{ steps.extract_release.outputs.release }}
 
+        found=$(helm list | grep ${{ steps.extract_release.outputs.release }})
+        if [[ ! -z "$found" ]]
+        then
+          echo "delete ${{ steps.extract_release.outputs.release }} here..."
+        else
+          echo "${{ steps.extract_release.outputs.release }} not found!"
+        fi
+
   merge_job:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
