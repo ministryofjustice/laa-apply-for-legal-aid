@@ -58,7 +58,6 @@ Feature: Check pending employment
 
     When I click 'Save and continue'
     Then I should be on a page showing "We need to check if John Pending can get legal aid"
-
     When I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
 
