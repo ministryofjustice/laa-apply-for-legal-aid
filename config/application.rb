@@ -82,7 +82,8 @@ module LaaApplyForLegalAid
 
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
-    config.x.check_financial_eligibility_host = ENV["CHECK_FINANCIAL_ELIGIBILITY_HOST"]
+    # config.x.check_financial_eligibility_host = ENV["CHECK_FINANCIAL_ELIGIBILITY_HOST"]
+    config.x.check_financial_eligibility_host = "https://ap-3150-v4-default-check-financial-uat.cloud-platform.service.justice.gov.uk/"
 
     config.x.true_layer.client_id = ENV["TRUE_LAYER_CLIENT_ID"]
     config.x.true_layer.client_secret = ENV["TRUE_LAYER_CLIENT_SECRET"]
