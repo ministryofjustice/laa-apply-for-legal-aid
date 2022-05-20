@@ -1,7 +1,6 @@
 name: Delete UAT deployment
 
 on:
-  push:
   pull_request:
     types: [closed]
 
@@ -57,7 +56,7 @@ jobs:
         if [[ ! -z "$found" ]]
         then
           echo "Deleting UAT release ${release_name}..."
-          # helm delete $release_name
+          helm delete $release_name
         else
           echo "UAT release, ${release_name}, not found!"
         fi
