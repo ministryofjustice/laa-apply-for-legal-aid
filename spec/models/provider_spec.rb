@@ -5,13 +5,13 @@ RSpec.describe Provider, type: :model do
   let(:provider) { create :provider, firm: }
 
   describe "#update_details" do
-    context "firm exists" do
+    context "when firm exists" do
       it "does not call provider details creator immediately" do
         expect(ProviderDetailsCreator).not_to receive(:call).with(provider)
         provider.update_details
       end
 
-      context "staging or production" do
+      context "when staging or production" do
         it "schedules a background job" do
           expect(HostEnv).to receive(:staging_or_production?).and_return(true)
           expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id)
@@ -19,7 +19,7 @@ RSpec.describe Provider, type: :model do
         end
       end
 
-      context "not staging or production" do
+      context "when not staging or production" do
         it "does not schedule a background job" do
           expect(HostEnv).to receive(:staging_or_production?).and_return(false)
           expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
@@ -30,7 +30,7 @@ RSpec.describe Provider, type: :model do
   end
 
   describe "#user_permissions" do
-    context "no permissions for this provider, but one permission for firm" do
+    context "with no permissions for this provider, but one permission for firm" do
       let(:firm) { create :firm, :with_passported_permissions }
       let(:provider) { create :provider, :with_no_permissions, firm: }
 
@@ -39,7 +39,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "no permissions for provider and their firm" do
+    context "with no permissions for provider and their firm" do
       let(:firm) { create :firm, :with_no_permissions }
       let(:provider) { create :provider, :with_no_permissions, firm: }
       let(:AlertManager) { instance_double(Tracker) }
@@ -54,7 +54,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "permissions exist for both firm and provider" do
+    context "when permissions exist for both firm and provider" do
       let(:firm) { create :firm, :with_passported_and_non_passported_permissions }
       let(:provider) { create :provider, :with_passported_permissions, firm: }
 
@@ -78,7 +78,7 @@ RSpec.describe Provider, type: :model do
 
     before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
-    context "ccms_apply_role_present" do
+    context "with ccms_apply_role_present" do
       let(:roles) { "EMI,PUI_XXCCMS_BILL_PREPARATION,ZZZ,CCMS_Apply" }
 
       it "returns true" do
@@ -86,7 +86,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "ccms_apply role absesnt" do
+    context "with ccms_apply role absent" do
       let(:roles) { "EMI,PUI_XXCCMS_BILL_PREPARATION,ZZZ" }
 
       it "returns true" do
@@ -98,7 +98,7 @@ RSpec.describe Provider, type: :model do
   describe "#invalid_login?" do
     let(:provider) { create :provider, invalid_login_details: details }
 
-    context "details are nil" do
+    context "when details are nil" do
       let(:details) { nil }
 
       it "returns false" do
@@ -106,7 +106,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "details are empty string" do
+    context "when details are empty string" do
       let(:details) { "" }
 
       it "returns false" do
@@ -114,7 +114,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "details are present" do
+    context "when details are present" do
       let(:details) { "role" }
 
       it "returns true" do
@@ -124,8 +124,8 @@ RSpec.describe Provider, type: :model do
   end
 
   describe "#newly_created_by_devise?" do
-    context "sign_in_count of 1" do
-      context "no firm" do
+    context "with sign_in_count of 1" do
+      context "with no firm" do
         let(:provider) { create :provider, :created_by_devise }
 
         it "returns true" do
@@ -133,7 +133,7 @@ RSpec.describe Provider, type: :model do
         end
       end
 
-      context "firm exists" do
+      context "when firm exists" do
         let(:provider) { create :provider, sign_in_count: 1 }
 
         it "returns false" do
@@ -142,7 +142,7 @@ RSpec.describe Provider, type: :model do
       end
     end
 
-    context "login count greater than 1" do
+    context "with login count greater than 1" do
       let(:provider) { create :provider, sign_in_count: 4 }
 
       it "returns false" do

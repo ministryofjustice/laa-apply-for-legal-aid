@@ -159,16 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/models/legal_framework/serializable_merits_task_list_spec.rb'
-    - 'spec/models/legal_framework/serializable_merits_task_spec.rb'
-    - 'spec/models/other_assets_declaration_spec.rb'
-    - 'spec/models/proceeding_merits_task/chances_of_success_spec.rb'
-    - 'spec/models/proceeding_merits_task/proceeding_linked_child_spec.rb'
-    - 'spec/models/proceeding_spec.rb'
-    - 'spec/models/provider_spec.rb'
-    - 'spec/models/savings_amount_spec.rb'
-    - 'spec/models/scheduled_mailing_spec.rb'
-    - 'spec/models/transaction_type_spec.rb'
     - 'spec/models/true_layer_bank_spec.rb'
     - 'spec/models/vehicle_spec.rb'
     - 'spec/policies/legal_aid_application_policy_spec.rb'

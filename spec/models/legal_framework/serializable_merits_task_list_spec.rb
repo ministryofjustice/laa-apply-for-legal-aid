@@ -24,7 +24,7 @@ module LegalFramework
     end
 
     describe "#tasks_for" do
-      context "application group" do
+      context "with application group" do
         it "returns an array of serializable merits tasks" do
           tasks = smtl.tasks_for(:application)
           expect(tasks.size).to eq 3
@@ -33,7 +33,7 @@ module LegalFramework
         end
       end
 
-      context "ccms_code" do
+      context "with ccms_code" do
         it "returns an array of serializable merits tasks" do
           tasks = smtl.tasks_for(:DA004)
           expect(tasks.size).to eq 1
@@ -42,7 +42,7 @@ module LegalFramework
         end
       end
 
-      context "invalid_task_group" do
+      context "with invalid_task_group" do
         it "raises an exception" do
           expect { smtl.tasks_for(:XX001) }.to raise_error KeyError, "key not found: :XX001"
         end
@@ -50,7 +50,7 @@ module LegalFramework
     end
 
     describe "#mark_as_complete!" do
-      context "invalid task name" do
+      context "with invalid task name" do
         it "raises an exception" do
           expect {
             smtl.mark_as_complete!(:application, :rubbish)
@@ -58,7 +58,7 @@ module LegalFramework
         end
       end
 
-      context "invalid task group name" do
+      context "with invalid task group name" do
         it "raises an exception" do
           expect {
             smtl.mark_as_complete!(:fake, :incident_details)
@@ -66,7 +66,7 @@ module LegalFramework
         end
       end
 
-      context "task has dependencies" do
+      context "when task has dependencies" do
         it "raises an exception" do
           expect {
             smtl.mark_as_complete!(:DA001, :proceeding_children)
@@ -74,8 +74,8 @@ module LegalFramework
         end
       end
 
-      context "successful" do
-        context "application group" do
+      context "when successful" do
+        context "with application group" do
           it "marks the task as complete" do
             smtl.mark_as_complete!(:application, :incident_details)
             expect(smtl.task(:application, :incident_details).state).to eq :complete
@@ -88,7 +88,7 @@ module LegalFramework
           end
         end
 
-        context "proceeding type" do
+        context "with proceeding type" do
           it "marks the task as complete" do
             smtl.mark_as_complete!(:DA004, :chances_of_success)
             expect(smtl.task(:DA004, :chances_of_success).state).to eq :complete

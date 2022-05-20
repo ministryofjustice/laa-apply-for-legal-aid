@@ -4,13 +4,13 @@ RSpec.describe SavingsAmount, type: :model do
   describe "#positive" do
     subject { create :savings_amount }
 
-    context "has no savings" do
+    context "with no savings" do
       it "is negative" do
         expect(subject.positive?).to be(false)
       end
     end
 
-    context "has some savings" do
+    context "with some savings" do
       before { subject.update!(cash: rand(1...1_000_000.0).round(2)) }
 
       it "is positive" do
@@ -22,7 +22,7 @@ RSpec.describe SavingsAmount, type: :model do
   describe "#values?" do
     subject { create :savings_amount, :with_values }
 
-    context "has savings and investments" do
+    context "with savings and investments" do
       it "returns true" do
         expect(subject.values?).to be true
       end
@@ -36,7 +36,7 @@ RSpec.describe SavingsAmount, type: :model do
       end
     end
 
-    context "has no savings and investments" do
+    context "with no savings and investments" do
       subject { create :savings_amount, :all_nil }
 
       it "returns false" do

@@ -70,14 +70,14 @@ RSpec.describe ScheduledMailing do
   end
 
   describe "#waiting?" do
-    context "waiting" do
+    context "when waiting" do
       it "returns true" do
         rec = create :scheduled_mailing, :due
         expect(rec.waiting?).to be true
       end
     end
 
-    context "not waiting" do
+    context "when not waiting" do
       it "returns true" do
         rec = create :scheduled_mailing, :delivered
         expect(rec.waiting?).to be false
