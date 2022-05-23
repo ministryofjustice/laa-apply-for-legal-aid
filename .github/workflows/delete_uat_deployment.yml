@@ -64,6 +64,11 @@ jobs:
       - uses: actions/checkout@v3
       - id: foo
         uses: ./.github/actions/whatever
+        with:
+          k8s_cluster: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
+          k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
+          k8s_namespace: ${{ secrets.K8S_UAT_NAMESPACE }}
+          k8s_token: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
 
       # - name: Setup tmate session
       #   if: ${{ failure() }}

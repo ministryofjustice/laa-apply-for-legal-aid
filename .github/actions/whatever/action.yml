@@ -1,5 +1,19 @@
-name: 'Delete UAT deployment'
+name: "Delete UAT deployment"
 description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
+inputs:
+  k8s_cluster:
+    description: ""
+    required: true
+  k8s_cluster_cert:
+    description: ""
+    required: true
+  k8s_namespace:
+    description: ""
+    required: true
+  k8s_token:
+    description: ""
+    required: true
+
 outputs:
   branch-name:
     description: "Extracted branch name"
@@ -35,10 +49,10 @@ runs:
       id: authenticate_to_cluster
       shell: bash
       env:
-        K8S_CLUSTER: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
-        K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
-        K8S_NAMESPACE: ${{ secrets.K8S_UAT_NAMESPACE }}
-        K8S_TOKEN: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
+        K8S_CLUSTER: ${{ inputs.k8s_cluster }}
+        K8S_CLUSTER_CERT: ${{ inputs.k8s_cluster_cert }}
+        K8S_NAMESPACE: ${{ inputs.k8s_namespace }}
+        K8S_TOKEN: ${{ inputs.k8s_token }}
       run: |
         echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
