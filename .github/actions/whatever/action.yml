@@ -1,10 +1,18 @@
 name: 'Delete UAT deployment'
 description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
+outputs:
+  branch-name:
+  description: "Extracted branch name"
+  value: ${{ steps.extract_branch.outputs.branch }}
+  release-name:
+  description: "Extracted release name"
+  value: ${{ steps.extract_release.outputs.release }}
 runs:
   using: "composite"
   shell: bash
   steps:
     - name: Extract branch name
+      id: extract_branch
       shell: bash
       run: |
         if [ $GITHUB_EVENT_NAME == "pull_request" ]
@@ -15,7 +23,6 @@ runs:
         fi
 
         echo "##[set-output name=branch;]$(echo $branch)"
-      id: extract_branch
 
     - name: Extract release name
       id: extract_release
@@ -26,6 +33,8 @@ runs:
         echo "##[set-output name=release;]$(echo "apply-${truncated_branch}")"
 
     - name: Authenticate to the cluster
+      id: authenticate_to_cluster
+      shell: bash
       env:
         K8S_CLUSTER: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
         K8S_CLUSTER_CERT: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
@@ -39,6 +48,8 @@ runs:
         kubectl config use-context ${K8S_CLUSTER}
 
     - name: Delete UAT release
+      id: delete_release
+      shell: bash
       run: |
         release_name=${{ steps.extract_release.outputs.release }}
         found=$(helm list --all | grep $release_name)
