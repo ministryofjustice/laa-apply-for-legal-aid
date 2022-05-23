@@ -62,10 +62,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: delete UAT deployment action
+      - id: foo
         uses: ./.github/actions/delete-uat-employment
-
-      - uses: actions/checkout@v2
       - name: Setup tmate session
         if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
