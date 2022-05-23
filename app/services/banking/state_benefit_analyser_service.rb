@@ -93,7 +93,11 @@ module Banking
     end
 
     def keys
-      @keys ||= @state_benefit_codes.each_key.map { |x| x.gsub("/", '\/') }.join("|")
+      @keys ||= keys_as_string.gsub!("/", '\/')
+    end
+
+    def keys_as_string
+      @state_benefit_codes.keys.join("|")
     end
 
     def update_legal_aid_transaction_types
