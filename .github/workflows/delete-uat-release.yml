@@ -19,7 +19,7 @@ jobs:
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
           k8s_namespace: ${{ secrets.K8S_UAT_NAMESPACE }}
           k8s_token: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
-      - run: echo steps.delete_uat.outputs.delete-message
+      - run: echo ${{ steps.delete_uat.outputs.delete-message }}
         shell: bash
 
   close_job:
@@ -34,5 +34,5 @@ jobs:
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
           k8s_namespace: ${{ secrets.K8S_UAT_NAMESPACE }}
           k8s_token: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
-      - run: echo steps.delete_uat.outputs.delete-message
+      - run: echo ${{ steps.delete_uat.outputs.delete-message }}
         shell: bash
