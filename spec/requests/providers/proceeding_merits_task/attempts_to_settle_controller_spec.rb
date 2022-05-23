@@ -90,7 +90,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
             subject
 
             expect(unescaped_response_body).to include("There is a problem")
-            expect(unescaped_response_body).to include("Please provide details of the attempts made to settle")
+            expect(unescaped_response_body).to include("Enter details of any attempts to settle")
           end
         end
       end
