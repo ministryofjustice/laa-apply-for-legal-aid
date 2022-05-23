@@ -2,7 +2,7 @@ name: 'Delete UAT deployment'
 description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
 runs:
   using: "composite"
-  runs-on: ubuntu-latest
+  shell: bash
   steps:
     - name: Extract branch name
       shell: bash
