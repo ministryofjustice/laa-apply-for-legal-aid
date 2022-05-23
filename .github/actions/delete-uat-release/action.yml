@@ -20,6 +20,9 @@ outputs:
   release-name:
     description: "Extracted release name"
     value: ${{ steps.extract_release.outputs.release }}
+  delete-message:
+    description: "Extracted release name"
+    value: ${{ steps.delete_release.outputs.message }}
 
 runs:
   using: "composite"
@@ -69,8 +72,8 @@ runs:
 
         if [[ ! -z "$found" ]]
         then
-          echo "Deleting UAT release ${release_name}..."
           helm delete $release_name
+          echo "##[set-output name=message;]$(echo "Deleted UAT release ${release_name}...")"
         else
-          echo "UAT release, ${release_name}, not found!"
+          echo "##[set-output name=message;]$(echo "echo "UAT release, ${release_name}, not found!")"
         fi

@@ -12,12 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Delete UAT release action
+        id: delete_uat
         uses: ./.github/actions/delete-uat-release
         with:
           k8s_cluster: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
           k8s_namespace: ${{ secrets.K8S_UAT_NAMESPACE }}
           k8s_token: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
+      - run: echo steps.delete_uat.outputs.delete-message
+        shell: bash
 
   close_job:
     if: github.event.pull_request.merged == false
@@ -31,3 +34,5 @@ jobs:
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
           k8s_namespace: ${{ secrets.K8S_UAT_NAMESPACE }}
           k8s_token: ${{ secrets.K8S_UAT_TOKEN_LIVE }}
+      - run: echo steps.delete_uat.outputs.delete-message
+        shell: bash
