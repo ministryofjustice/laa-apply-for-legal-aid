@@ -1,0 +1,79 @@
+name: "Delete UAT deployment"
+description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
+inputs:
+  k8s_cluster:
+    description: "Kubernetes cluster name"
+    required: true
+  k8s_cluster_cert:
+    description: "Kubernete cluster certificate"
+    required: true
+  k8s_namespace:
+    description: "Kubernetes cluster namespace"
+    required: true
+  k8s_token:
+    description: "Kubernetes authentication token"
+    required: true
+outputs:
+  branch-name:
+    description: "Extracted branch name"
+    value: ${{ steps.extract_branch.outputs.branch }}
+  release-name:
+    description: "Extracted release name"
+    value: ${{ steps.extract_release.outputs.release }}
+  delete-message:
+    description: "Extracted release name"
+    value: ${{ steps.delete_release.outputs.message }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Extract branch name
+      id: extract_branch
+      shell: bash
+      run: |
+        if [ $GITHUB_EVENT_NAME == "pull_request" ]
+        then
+          branch=$GITHUB_HEAD_REF
+        else
+          branch=${GITHUB_REF#refs/heads/}
+        fi
+
+        echo "##[set-output name=branch;]$(echo $branch)"
+
+    - name: Extract release name
+      id: extract_release
+      shell: bash
+      run: |
+        branch=${{ steps.extract_branch.outputs.branch }}
+        truncated_branch=$(echo $branch | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+        echo "##[set-output name=release;]$(echo "apply-${truncated_branch}")"
+
+    - name: Authenticate to the cluster
+      id: authenticate_to_cluster
+      shell: bash
+      env:
+        K8S_CLUSTER: ${{ inputs.k8s_cluster }}
+        K8S_CLUSTER_CERT: ${{ inputs.k8s_cluster_cert }}
+        K8S_NAMESPACE: ${{ inputs.k8s_namespace }}
+        K8S_TOKEN: ${{ inputs.k8s_token }}
+      run: |
+        echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
+        kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
+        kubectl config set-credentials circleci --token=${K8S_TOKEN}
+        kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=circleci --namespace=${K8S_NAMESPACE}
+        kubectl config use-context ${K8S_CLUSTER}
+
+    - name: Delete UAT release
+      id: delete_release
+      shell: bash
+      run: |
+        release_name=${{ steps.extract_release.outputs.release }}
+        found=$(helm list --all | grep $release_name || [[ $? == 1 ]])
+
+        if [[ ! -z "$found" ]]
+        then
+          helm delete $release_name
+          echo "##[set-output name=message;]$(echo "Deleted UAT release ${release_name}!")"
+        else
+          echo "##[set-output name=message;]$(echo "UAT release, ${release_name}, not found!")"
+        fi
