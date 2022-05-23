@@ -72,7 +72,7 @@ runs:
         release_name=${{ steps.extract_release.outputs.release }}
         echo "2"
         found=$(helm list --all | grep $release_name)
-        echo ${{ $found }}
+        echo $found
         echo "3"
 
         if [[ ! -z "$found" ]]
