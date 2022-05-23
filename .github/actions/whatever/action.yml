@@ -2,11 +2,11 @@ name: 'Delete UAT deployment'
 description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
 outputs:
   branch-name:
-  description: "Extracted branch name"
-  value: ${{ steps.extract_branch.outputs.branch }}
+    description: "Extracted branch name"
+    value: ${{ steps.extract_branch.outputs.branch }}
   release-name:
-  description: "Extracted release name"
-  value: ${{ steps.extract_release.outputs.release }}
+    description: "Extracted release name"
+    value: ${{ steps.extract_release.outputs.release }}
 runs:
   using: "composite"
   shell: bash
