@@ -73,7 +73,7 @@ runs:
         if [[ ! -z "$found" ]]
         then
           helm delete $release_name
-          echo "##[set-output name=message;]$(echo "Deleted UAT release ${release_name}...")"
+          echo "##[set-output name=message;]$(echo "Deleted UAT release ${release_name}!")"
         else
-          echo "##[set-output name=message;]$(echo "echo "UAT release, ${release_name}, not found!")"
+          echo "##[set-output name=message;]$(echo "UAT release, ${release_name}, not found!")"
         fi
