@@ -1,4 +1,4 @@
-name: Delete UAT deployment
+name: Delete UAT release
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Delete UAT release action
-        uses: ./.github/actions/whatever
+        uses: ./.github/actions/delete-uat-release
         with:
           k8s_cluster: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Delete UAT release action
-        uses: ./.github/actions/whatever
+        uses: ./.github/actions/delete-uat-release
         with:
           k8s_cluster: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}
           k8s_cluster_cert: ${{ secrets.K8S_CLUSTER_CERT_LIVE }}
