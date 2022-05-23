@@ -28,6 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Delete UAT release action
+        id: delete_uat
         uses: ./.github/actions/delete-uat-release
         with:
           k8s_cluster: ${{ secrets.K8S_CLUSTER_NAME_LIVE }}

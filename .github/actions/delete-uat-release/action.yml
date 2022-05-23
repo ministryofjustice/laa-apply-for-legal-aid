@@ -67,18 +67,15 @@ runs:
       id: delete_release
       shell: bash
       run: |
-        echo "1"
-        echo ${{ steps.extract_release.outputs.release }}
         release_name=${{ steps.extract_release.outputs.release }}
-        echo "2"
         found=$(helm list --all | grep $release_name || [[ $? == 1 ]])
-        echo $found
-        echo "3"
 
         if [[ ! -z "$found" ]]
         then
+          echo "found $release_name"
           helm delete $release_name
           echo "##[set-output name=message;]$(echo "Deleted UAT release ${release_name}!")"
         else
+          echo "did not find $release_name"
           echo "##[set-output name=message;]$(echo "UAT release, ${release_name}, not found!")"
         fi
