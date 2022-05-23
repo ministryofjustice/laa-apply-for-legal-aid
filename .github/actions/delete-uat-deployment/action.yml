@@ -1,15 +1,8 @@
-name: Delete UAT deployment
-
-on:
-  pull_request:
-    types:
-      - closed
-
-jobs:
-  merge_job:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
+name: 'Delete UAT deployment'
+description: 'Deletes a UAT deployment with a name mathcing the merged/closed branch'
+runs:
+  using: "composite"
+  steps:
     - name: Extract branch name
       shell: bash
       run: |
@@ -56,19 +49,3 @@ jobs:
         else
           echo "UAT release, ${release_name}, not found!"
         fi
-
-  close_job:
-    if: github.event.pull_request.merged == false
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: delete UAT deployment action
-        uses: ./.github/actions/delete-uat-employment
-
-      - uses: actions/checkout@v2
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 15
-        with:
-          limit-access-to-actor: true
