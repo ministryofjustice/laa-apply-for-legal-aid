@@ -2,7 +2,8 @@ name: Delete UAT deployment
 
 on:
   pull_request:
-    types: [closed]
+    types:
+      - closed
 
 jobs:
   merge_job:
@@ -90,3 +91,11 @@ jobs:
         else
           echo "UAT release, ${release_name}, not found!"
         fi
+
+    - uses: actions/checkout@v2
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 15
+      with:
+        limit-access-to-actor: true
