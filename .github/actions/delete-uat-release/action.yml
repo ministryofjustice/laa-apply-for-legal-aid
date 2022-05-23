@@ -67,8 +67,13 @@ runs:
       id: delete_release
       shell: bash
       run: |
+        echo "1"
+        echo ${{ steps.extract_release.outputs.release }}
         release_name=${{ steps.extract_release.outputs.release }}
+        echo "2"
         found=$(helm list --all | grep $release_name)
+        echo ${{ $found }}
+        echo "3"
 
         if [[ ! -z "$found" ]]
         then
