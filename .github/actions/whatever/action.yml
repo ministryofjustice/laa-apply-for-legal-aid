@@ -9,7 +9,6 @@ outputs:
     value: ${{ steps.extract_release.outputs.release }}
 runs:
   using: "composite"
-  shell: bash
   steps:
     - name: Extract branch name
       id: extract_branch
