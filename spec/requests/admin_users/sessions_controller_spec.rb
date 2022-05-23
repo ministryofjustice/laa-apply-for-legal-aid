@@ -18,7 +18,7 @@ RSpec.describe AdminUsers::SessionsController, type: :request do
       expect(unescaped_response_body).to include("admin_user_username")
     end
 
-    context "in production environment" do
+    context "when in production environment" do
       before do
         allow(Rails.configuration.x.admin_portal).to receive(:show_form).and_return(false)
       end

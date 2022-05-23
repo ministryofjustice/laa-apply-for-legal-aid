@@ -31,13 +31,13 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
 
     let(:params) { {} }
 
-    context "Save and Continue button pressed with no changes" do
+    context "when Save and Continue button pressed with no changes" do
       it "redirects to main admin page" do
         expect(subject).to redirect_to(admin_root_path)
       end
     end
 
-    context "Save and Continue button pressed with new permission changes" do
+    context "when Save and Continue button pressed with new permission changes" do
       let!(:permission2) { create :permission, :non_passported }
       let!(:params) do
         {
