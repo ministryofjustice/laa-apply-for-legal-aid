@@ -42,7 +42,7 @@ runs:
       shell: bash
       run: |
         branch=${{ steps.extract_branch.outputs.branch }}
-        truncated_branch=$(echo $branch | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
+        truncated_branch=$(echo $branch | tr '[:upper:]' '[:lower:]' | sed 's:^\w*\/::' | tr -s ' _/[]().' '-' | cut -c1-30 | sed 's/-$//')
         echo "##[set-output name=release;]$(echo "apply-${truncated_branch}")"
 
     - name: Authenticate to the cluster
