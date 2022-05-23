@@ -93,7 +93,7 @@ module Banking
     end
 
     def keys
-      @keys ||= @state_benefit_codes.keys.join("|").gsub("/", '\/')
+      @keys ||= @state_benefit_codes.keys.join("|").gsub!("/", '\/')
     end
 
     def update_legal_aid_transaction_types
