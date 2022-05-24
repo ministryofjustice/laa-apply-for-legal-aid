@@ -19,7 +19,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         login_as provider
       end
 
-      context "a postcode has been entered before", :vcr do
+      context "when a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
         let!(:address) { create :address, postcode:, applicant: }
 
@@ -38,7 +38,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
           expect(unescaped_response_body).to match("[1-9]{1}[0-9]? addresses found")
         end
 
-        context "but the lookup does not return any valid results" do
+        context "and the lookup does not return any valid results" do
           let(:postcode) { "XX1 1XX" }
           let(:form_heading) { "Enter your client's correspondence address" }
           let(:error_message) { "We could not find any addresses for that postcode. Enter the address manually." }
@@ -53,7 +53,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         end
       end
 
-      context "no postcode have been entered yet" do
+      context "when no postcode have been entered yet" do
         before { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
         it "redirects to the postcode entering page" do
@@ -153,7 +153,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "with form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

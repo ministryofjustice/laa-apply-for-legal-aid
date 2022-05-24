@@ -60,13 +60,13 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       }
     end
 
-    context "the provider is authenticated" do
+    context "when the provider is authenticated" do
       before do
         login_as provider
         subject
       end
 
-      context "neither option is chosen" do
+      context "when neither option is chosen" do
         let(:applicant_bank_account) { nil }
 
         it "shows an error" do
@@ -74,14 +74,14 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
         end
       end
 
-      context "The NO option is chosen" do
+      context "when NO option is chosen" do
         let(:applicant_bank_account) { "false" }
 
         it "redirects to the savings and investments page" do
           expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
         end
 
-        context "savings amount is not nil" do
+        context "when savings amount is not nil" do
           let(:offline_savings_accounts) { "" }
 
           it "resets the account balance to nil for offline savings account" do
@@ -90,10 +90,10 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
         end
       end
 
-      context "The YES option is chosen" do
+      context "when the YES option is chosen" do
         let(:applicant_bank_account) { "true" }
 
-        context "no amount is entered" do
+        context "when no amount is entered" do
           let(:offline_savings_accounts) { "" }
 
           it "displays the correct error" do
@@ -101,7 +101,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           end
         end
 
-        context "an invalid input is entered" do
+        context "when an invalid input is entered" do
           let(:offline_savings_accounts) { "abc" }
 
           it "displays the correct error" do
@@ -109,7 +109,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           end
         end
 
-        context "a valid savings amount is entered" do
+        context "when a valid savings amount is entered" do
           let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
 
           it "updates the savings amount" do
