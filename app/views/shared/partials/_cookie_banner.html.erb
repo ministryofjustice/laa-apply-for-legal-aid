@@ -1,0 +1,61 @@
+<div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on [name of service]">
+  <div class="govuk-cookie-banner__message govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m"><%= t('.title') %></h2>
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body"><%= t('.we_use_some') %></p>
+          <p class="govuk-body"><%= t('.wed_also_lie') %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button value="accept" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
+        <%= t('.accept') %>
+      </button>
+      <button value="reject" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
+        <%= t('.reject') %>
+      </button>
+      <a class="govuk-link" href="#"><%= t('.view') %></a>
+    </div>
+  </div>
+
+  <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body"><%= t('.accepted') %><a class="govuk-link" href="#"><%= t('.link_text') %></a><%= t('.any_time') %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button class="govuk-button" data-module="govuk-button">
+        <%= t('.hide') %>
+      </button>
+    </div>
+  </div>
+
+  <div class="govuk-cookie-banner__message govuk-width-container" role="alert" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body"><%= t('.rejected') %><a class="govuk-link" href="#"><%= t('.link_text') %></a><%= t('.any_time') %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button class="govuk-button" data-module="govuk-button">
+        <%= t('.hide') %>
+      </button>
+    </div>
+  </div>
+</div>
