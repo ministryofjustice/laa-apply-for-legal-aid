@@ -59,7 +59,7 @@ RSpec.describe "citizen accounts request", type: :request do
       expect(page_history_service.read).to be_nil
     end
 
-    context "background worker is still working" do
+    context "when background worker is still working" do
       let(:worker) { { "status" => "working" } }
 
       it "returns http success" do
@@ -80,7 +80,7 @@ RSpec.describe "citizen accounts request", type: :request do
       end
     end
 
-    context "background worker generated an error" do
+    context "when background worker has generated an error" do
       let(:error) { true_layer_error }
       let(:worker) { { "status" => "complete", "errors" => true_layer_error.to_json } }
 

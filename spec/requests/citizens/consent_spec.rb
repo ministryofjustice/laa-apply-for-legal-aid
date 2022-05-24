@@ -58,7 +58,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
       end
     end
 
-    context "no values given" do
+    context "with no values given" do
       let(:params) { { legal_aid_application: { open_banking_consent: nil } } }
 
       it "returns an error" do
