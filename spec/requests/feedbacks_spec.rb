@@ -31,7 +31,7 @@ RSpec.describe "FeedbacksController", type: :request do
     end
 
     describe "creation of feedback record" do
-      context "any type of user" do
+      context "with any type of user" do
         it "create a feedback" do
           expect { subject }.to change(Feedback, :count).by(1)
         end
@@ -45,7 +45,7 @@ RSpec.describe "FeedbacksController", type: :request do
         end
       end
 
-      context "as a logged in provider" do
+      context "when as a logged in provider" do
         let(:originating_page) { address_lookup_page }
 
         before { sign_in provider }
@@ -57,7 +57,7 @@ RSpec.describe "FeedbacksController", type: :request do
           expect(feedback.originating_page).to eq URI(address_lookup_page).path.split("/").last
         end
 
-        context "gives feedback during application" do
+        context "and gives feedback during application" do
           let(:page_history) do
             [originating_page, "/feedback/new"]
           end
@@ -70,7 +70,7 @@ RSpec.describe "FeedbacksController", type: :request do
           end
         end
 
-        context "gives feedback outside of an application" do
+        context "and gives feedback outside of an application" do
           let(:page_history) do
             ["/feedback/new"]
           end
@@ -96,7 +96,7 @@ RSpec.describe "FeedbacksController", type: :request do
         end
       end
 
-      context "as a provider after logging out" do
+      context "when as a provider after logging out" do
         let(:originating_page) { address_lookup_page }
         let(:params) { { feedback: attributes_for(:feedback), signed_out: true } }
 
@@ -108,7 +108,7 @@ RSpec.describe "FeedbacksController", type: :request do
         end
       end
 
-      context "as an applicant" do
+      context "when as an applicant" do
         let(:originating_page) { additional_accounts_page }
         let(:session_vars) do
           {
@@ -132,7 +132,7 @@ RSpec.describe "FeedbacksController", type: :request do
       expect(feedback.source).to eq("Unknown")
     end
 
-    context "provider feedback" do
+    context "with provider feedback" do
       let(:originating_page) { address_lookup_page }
 
       it "contains provider email" do
@@ -142,11 +142,11 @@ RSpec.describe "FeedbacksController", type: :request do
       end
     end
 
-    context "provider feedback" do
+    context "with applicant feedback" do
       let(:originating_page) { additional_accounts_page }
       let(:session_vars) { { current_application_id: application.id } }
 
-      context "no appliction id in the page history" do
+      context "with no application id in the page history" do
         it "contains provider email" do
           subject
           expect(feedback.source).to eq "Applicant"
@@ -190,7 +190,7 @@ RSpec.describe "FeedbacksController", type: :request do
       end
     end
 
-    context "submitting feedback using link in submission email" do
+    context "when submitting feedback using link in submission email" do
       let(:application) { create :legal_aid_application }
       let(:params) { { feedback: attributes_for(:feedback), application_id: application.id, submission_feedback: "true" } }
 
@@ -254,7 +254,7 @@ RSpec.describe "FeedbacksController", type: :request do
       expect(response.body).to include('<input type="hidden" name="submission_feedback" id="submission_feedback" value="false" autocomplete="off" />')
     end
 
-    context "has come here as applicant or signed in provider" do
+    context "when here as applicant or signed in provider" do
       let(:session_vars) { {} }
 
       it "hash a hidden form field with no value" do
@@ -262,7 +262,7 @@ RSpec.describe "FeedbacksController", type: :request do
       end
     end
 
-    context "provider signed out" do
+    context "with provider signed out" do
       let(:provider) { create :provider }
 
       before do
@@ -305,7 +305,7 @@ RSpec.describe "FeedbacksController", type: :request do
       expect(response.body).to include("<input type=\"hidden\" name=\"application_id\" id=\"application_id\" value=\"#{application.id}\" autocomplete=\"off\" />")
     end
 
-    context "has come here as applicant or signed in provider" do
+    context "when here as applicant or signed in provider" do
       let(:session_vars) { {} }
 
       it "hash a hidden form field with no value" do
