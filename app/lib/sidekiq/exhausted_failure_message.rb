@@ -22,6 +22,7 @@ module Sidekiq
         "HMRC::SubmissionWorker" => "HMRC submission id",
         "HMRC::ResultWorker" => "HMRC result check for id",
         "CCMS::SubmissionProcessWorker" => "CCMS submission id",
+        "PdfConverterWorker" => "Attachment id",
       }[@msg["class"]]
     end
   end
