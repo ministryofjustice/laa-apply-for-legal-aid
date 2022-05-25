@@ -5904,10 +5904,10 @@ jest-each@^28.1.0:
     jest-util "^28.1.0"
     pretty-format "^28.1.0"
 
-jest-environment-jsdom-global@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-global/-/jest-environment-jsdom-global-3.1.1.tgz#c04aa8f62b1775b4313318bd829d61ae77eb88e5"
-  integrity sha512-VWKXMCBiSKc7P2cAW/ke0AQPcI8MOObJFcCeJ8bebNWyqc7EaFN+LHEPTeVyjrksw2WCVVzwI71mQa5TLUs/xA==
+jest-environment-jsdom-global@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-global/-/jest-environment-jsdom-global-3.1.2.tgz#278f50f9fa8ea3301f9f3697b912f3571dab9dd8"
+  integrity sha512-Suq/B0c8OVUYrx05j8ynKqKMzNCTNll72SLxzoTeBtjnsbrScM2Az0dBEBPN8EVTuP1lcgWN0tV0M9+hfkvXHQ==
 
 jest-environment-jsdom@^28.1.0:
   version "28.1.0"
