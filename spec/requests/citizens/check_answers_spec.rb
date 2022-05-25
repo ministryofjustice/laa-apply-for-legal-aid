@@ -65,7 +65,7 @@ RSpec.describe "check your answers requests", type: :request do
       expect(response.body).to include(html_compare(firm.name))
     end
 
-    context "firms with special characters in the name" do
+    context "with firms with special characters in the name" do
       let(:firm) { create :firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!") }
 
       it "finds the firm even though it has special characters" do
