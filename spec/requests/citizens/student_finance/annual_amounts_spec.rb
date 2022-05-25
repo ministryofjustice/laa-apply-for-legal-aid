@@ -27,7 +27,7 @@ RSpec.describe "annual_amounts", type: :request do
       }
     end
 
-    context "adds an amount" do
+    context "when an amount is added" do
       before { get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) }
 
       let(:amount) { 2345 }
@@ -48,7 +48,7 @@ RSpec.describe "annual_amounts", type: :request do
       describe "update record" do
         before { patch citizens_student_finances_annual_amount_path, params: }
 
-        context "update amount" do
+        context "with update amount" do
           let(:amount) { 5000 }
 
           it "updates the same record without creating a new one" do
@@ -60,7 +60,7 @@ RSpec.describe "annual_amounts", type: :request do
       end
     end
 
-    context "shows an error when field is empty" do
+    context "when field is empty" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finances_annual_amount_path, params:
