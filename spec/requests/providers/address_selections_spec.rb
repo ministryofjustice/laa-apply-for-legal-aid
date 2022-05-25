@@ -19,7 +19,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         login_as provider
       end
 
-      context "a postcode has been entered before", :vcr do
+      context "when a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
         let!(:address) { create :address, postcode:, applicant: }
 
@@ -53,7 +53,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         end
       end
 
-      context "no postcode have been entered yet" do
+      context "when no postcode have been entered yet" do
         before { get providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
         it "redirects to the postcode entering page" do
@@ -153,7 +153,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "when form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

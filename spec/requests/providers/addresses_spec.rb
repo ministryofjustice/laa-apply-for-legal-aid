@@ -117,7 +117,7 @@ RSpec.describe "address requests", type: :request do
         end
       end
 
-      context "a previous address lookup failed" do
+      context "when a previous address lookup failed" do
         let(:address_params) do
           {
             address:
@@ -138,7 +138,7 @@ RSpec.describe "address requests", type: :request do
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "when form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do
