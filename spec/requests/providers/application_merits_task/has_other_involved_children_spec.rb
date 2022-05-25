@@ -79,6 +79,12 @@ module Providers
             expect(response.body).to include("Do you need to add another child?")
           end
 
+          it "displays the correct error message" do
+            subject
+            expect(unescaped_response_body).to include("There is a problem")
+            expect(unescaped_response_body).to include("Select yes if you need to add another child")
+          end
+
           it "does not set the task to complete" do
             subject
             expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :not_started/)
