@@ -714,5 +714,24 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         end
       end
     end
+
+    context "when client details are not found by HMRC" do
+      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: response_hash) }
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "failed",
+          "data" => [{ "error" => "submitted client details could not be found in HMRC service" }] }
+      end
+
+      before do
+        allow(AlertManager).to receive(:capture_message)
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it "does not send message to AlertManager with errors" do
+        expect(AlertManager).not_to have_received(:capture_message)
+      end
+    end
   end
 end
