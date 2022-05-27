@@ -704,6 +704,39 @@ RSpec.describe LegalAidApplication, type: :model do
         expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
       end
     end
+
+    context "when the lead application has a smaller substantive cost limit" do
+      let(:legal_aid_application) { create :legal_aid_application }
+      let!(:proceeding1) { create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true }
+      let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: }
+
+      it "takes the largest cost value" do
+        expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
+      end
+    end
+  end
+
+  describe "substantive_cost_limitation" do
+    subject(:substantive_cost_limitation) { legal_aid_application.substantive_cost_limitation }
+
+    let(:legal_aid_application) { create :legal_aid_application }
+    let!(:proceeding1) { create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true }
+    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 10_000 }
+
+    context "when the provider accepts the default" do
+      it { is_expected.to eq 10_000 }
+    end
+
+    context "when the provider has overridden a smaller default" do
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               substantive_cost_override: true,
+               substantive_cost_requested: 12_000,
+               substantive_cost_reasons: "something... something... reasons"
+      end
+
+      it { is_expected.to eq 12_000 }
+    end
   end
 
   describe "#bank_transactions" do

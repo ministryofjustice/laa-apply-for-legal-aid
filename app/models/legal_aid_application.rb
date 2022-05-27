@@ -10,6 +10,7 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
   SECURE_ID_DAYS_TO_EXPIRE = 7
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
+  MAX_SUBSTANTIVE_COST_LIMIT = 25_000
   CCMS_SUBMITTED_STATES = %w[generating_reports submitting_assessment assessment_submitted].freeze
   POLICY_DISREGARDS_START_DATE = Rails.configuration.x.policy_disregards_start_date
 
@@ -381,10 +382,20 @@ class LegalAidApplication < ApplicationRecord
     default_substantive_cost_limitation
   end
 
-  delegate :substantive_cost_limitation, to: :lead_proceeding
+  def substantive_cost_overridable?
+    substantive_cost_limitation.present? && default_substantive_cost_limitation < MAX_SUBSTANTIVE_COST_LIMIT
+  end
+
+  def substantive_cost_limitation
+    if substantive_cost_override
+      substantive_cost_requested
+    else
+      default_substantive_cost_limitation
+    end
+  end
 
   def default_substantive_cost_limitation
-    lead_proceeding.substantive_cost_limitation
+    proceedings.map(&:substantive_cost_limitation).max
   end
 
   def default_delegated_functions_cost_limitation
