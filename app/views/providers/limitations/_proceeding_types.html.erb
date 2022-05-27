@@ -1,4 +1,9 @@
-<%= page_template(page_title: t('.h1-heading')) do %>
+<%= form_with(model: @form,
+              url: providers_legal_aid_application_limitations_path(@legal_aid_application),
+              method: :patch,
+              local: true) do |form| %>
+  <%= page_template(page_title: t('.h1-heading'), template: :basic, form: form) do %>
+  <h1 class="govuk-heading-xl"><%= t('.h1-heading') %></h1>
   <h2 class="govuk-heading-l">
     <%= t('.proceedings_heading') %>
   </h2>
@@ -9,20 +14,13 @@
                locals: {translation_path: 'providers.limitations.show'} %>
   </dl>
 
-  <h2 class="govuk-heading-l">
-    <%= t('.cost_heading') %>
-  </h2>
-  <p class="govuk-body">
-  <div class="govuk-!-padding-bottom-1"></div>
-  <p><%= t('.substantive_certificate') %>: <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
-  </p>
+    <%= render partial: 'providers/limitations/cost_limits',
+               locals: { title_translation_path: '.cost_heading', form: form } %>
+    <div class="govuk-!-padding-bottom-6"></div>
 
-  <div class="govuk-!-padding-bottom-6"></div>
-
-  <%= next_action_buttons_with_form(
-        url: providers_legal_aid_application_limitations_path,
-        method: :patch,
-        show_draft: true
-      ) %>
-
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form
+        ) %>
+  <% end %>
 <% end %>

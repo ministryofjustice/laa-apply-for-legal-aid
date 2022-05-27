@@ -294,6 +294,7 @@ en:
         section_substantive:
           heading: Covered under a substantive certificate
         emergency_cost_limit: Emergency cost limit
+        substantive_cost_limit: Substantive cost limit
 
     applicant_bank_accounts:
       show:
@@ -589,16 +590,23 @@ en:
         form_of_service_type: Full representation
         incurrable_costs: "Costs you can incur: "
         allowable_work: "Work you can do: "
+      cost_limits:
+        cost_heading: Cost limits
+        substantive_certificate: Substantive certificate
+        default_substantive_limit_is: The default substantive cost limit is
+        substantive_cost_override_question: Do you want to request a higher substantive cost limit?
+        enter_substantive_cost_limit: Enter a new substantive cost limit
+        enter_substantive_cost_reasons: Tell us why you need a higher substantive cost limit
       proceeding_types_with_df:
         h1-heading: What you're applying for
         proceedings_heading: Proceedings
         cost_heading: Cost limits
-        cost_override_question: Do you want to request a higher cost limit?
+        cost_override_question: Do you want to request a higher emergency cost limit?
         enter_cost_limit: Enter a new emergency cost limit
-        enter_cost_reasons: Tell us why you need a higher cost limit
+        enter_cost_reasons: Tell us why you need a higher emergency cost limit
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
-        default_limit_is: The default cost limit is
+        default_limit_is: The default emergency cost limit is
         form_of_service: "Form of service: "
         form_of_service_type: Full representation
         incurrable_costs: "Costs you can incur: "
