@@ -37,7 +37,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       expect(application.reload.state).to eq "checking_applicant_details"
     end
 
-    context "state is provider_entering_means" do
+    context "when state is provider_entering_means" do
       let(:application) { create :application, :provider_entering_means, applicant: }
 
       it "transitions from provider_entering_means" do
@@ -80,7 +80,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
     end
 
-    context "the benefit check service is down" do
+    context "when the benefit check service is down" do
       before { allow(BenefitCheckService).to receive(:call).and_return(false) }
 
       it "redirects to the Problem page" do
@@ -126,7 +126,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       subject
     end
 
-    context "Form submitted with Continue button" do
+    context "with form submitted with Continue button" do
       let(:params) do
         {
           continue_button: "Continue",
@@ -173,7 +173,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
     end
 
-    context "Form submitted with Save as draft button" do
+    context "with form submitted with Save as draft button" do
       let(:params) do
         {
           draft_button: "Save as draft",
@@ -213,10 +213,10 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   describe "allowed to continue or use ccms?" do
     before { login_as provider }
 
-    context "application passported" do
+    context "with application passported" do
       let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider: }
 
-      context "permissions passported" do
+      context "with permissions passported" do
         let(:provider) { create :provider, :with_passported_permissions }
 
         it "allows us to continue" do
@@ -225,7 +225,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
         end
       end
 
-      context "no permissions" do
+      context "with no permissions" do
         let(:provider) { create :provider, :with_no_permissions }
 
         it "allows us to continue" do

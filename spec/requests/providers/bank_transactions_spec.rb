@@ -47,7 +47,7 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
       expect { subject }.to change { bank_transaction.reload.meta_data }.to(nil)
     end
 
-    context "bank_transaction does not belong to this application" do
+    context "when bank_transaction does not belong to this application" do
       let(:bank_account) { create :bank_account }
 
       it "does not remove the assocation with the transaction type" do

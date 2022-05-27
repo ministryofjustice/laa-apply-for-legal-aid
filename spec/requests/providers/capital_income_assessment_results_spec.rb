@@ -24,9 +24,9 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
     before { before_tasks }
 
-    context "no restrictions" do
+    context "with no restrictions" do
       context "without policy disregards" do
-        context "eligible" do
+        context "when eligible" do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -96,7 +96,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       context "with policy disregards" do
         let(:add_policy_disregards?) { true }
 
-        context "eligible" do
+        context "when eligible" do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -175,7 +175,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
 
       context "without policy disregards" do
-        context "eligible" do
+        context "when eligible" do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -233,7 +233,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       context "with policy disregards" do
         let(:add_policy_disregards?) { true }
 
-        context "eligible" do
+        context "when eligible" do
           let!(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -304,7 +304,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         subject
       end
 
-      context "eligible" do
+      context "when eligible" do
         let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
         it "returns http success" do
@@ -399,14 +399,14 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
     end
 
-    context "unauthenticated" do
+    context "when unauthenticated" do
       let(:before_tasks) { subject }
       let!(:cfe_result) { create :cfe_v3_result, :eligible }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "unknown result" do
+    context "with unknown result" do
       let(:cfe_result) { create :cfe_v3_result, result: {}.to_json }
       let(:before_tasks) do
         login_provider
@@ -417,7 +417,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
     end
 
-    context "enable_employed_journey is true" do
+    context "when enable_employed_journey is true" do
       let(:before_tasks) do
         Setting.setting.update!(enable_employed_journey: true)
         allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
@@ -425,7 +425,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         subject
       end
 
-      context "applicant has employment(s)" do
+      context "when applicant has employment(s)" do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
         let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
         let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <b>" }
@@ -465,7 +465,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
       end
 
-      context "applicant has no employment(s)" do
+      context "when applicant has no employment(s)" do
         let(:cfe_result) { create :cfe_v4_result, :with_no_employments }
 
         it "does not display employment income" do
@@ -475,7 +475,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
     end
 
-    context "enable_employed_journey is false" do
+    context "when enable_employed_journey is false" do
       let(:before_tasks) do
         Setting.setting.update!(enable_employed_journey: false)
         allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(false)
@@ -483,7 +483,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         subject
       end
 
-      context "applicant has employment(s)" do
+      context "when applicant has employment(s)" do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
 
         it "does not display employment income" do
@@ -492,7 +492,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
       end
 
-      context "applicant has no employment(s)" do
+      context "when applicant has no employment(s)" do
         let(:cfe_result) { create :cfe_v4_result, :with_employments }
 
         it "does not display employment income" do
@@ -515,7 +515,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         subject
       end
 
-      context "Continue button pressed" do
+      context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to the merits task list" do
@@ -523,7 +523,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
       end
 
-      context "Save as draft button pressed" do
+      context "when the save as draft button is pressed" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

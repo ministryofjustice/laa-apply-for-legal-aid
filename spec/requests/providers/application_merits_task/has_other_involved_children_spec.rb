@@ -43,7 +43,7 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
 
-        context "Wants to add more children" do
+        context "when adding more children" do
           let(:radio_button) { "true" }
 
           it "redirects to new involved child" do
@@ -57,7 +57,7 @@ module Providers
           end
         end
 
-        context "does not want to add more children" do
+        context "when not adding more children" do
           let(:radio_button) { "false" }
 
           it "redirects to merits_task_list" do
@@ -71,7 +71,7 @@ module Providers
           end
         end
 
-        context "neither yes nor no selected" do
+        context "with neither yes nor no selected" do
           let(:radio_button) { "" }
 
           it "re-renders the show page" do

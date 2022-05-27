@@ -34,14 +34,14 @@ module Providers
             expect(response.body).not_to match 'id="application-merits-task-statement-of-case-original-file-error"'
           end
 
-          context "no statement of case record exists for the application" do
+          context "when no statement of case record exists for the application" do
             it "displays an empty text box" do
               expect(legal_aid_application.statement_of_case).to be_nil
               expect(response.body).to have_text_area_with_id_and_content("application-merits-task-statement-of-case-statement-field", "")
             end
           end
 
-          context "statement of case record already exists for the application" do
+          context "when statement of case record already exists for the application" do
             let(:soc) { legal_aid_application.create_statement_of_case(statement: "This is my case statement") }
 
             it "displays the details of the statement on the page" do
@@ -128,7 +128,7 @@ module Providers
           end
         end
 
-        context "uploading a file" do
+        context "when uploading a file" do
           let(:params_statement_of_case) do
             {
               original_file:,
@@ -146,7 +146,7 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
-          context "word document" do
+          context "when a word document" do
             let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
             let(:button_clicked) { upload_button }
 
@@ -187,7 +187,7 @@ module Providers
               expect(response.body).to include(error)
             end
 
-            context "no file chosen" do
+            context "with no file chosen" do
               let(:original_file) { nil }
 
               it "does not update the record" do
@@ -203,7 +203,7 @@ module Providers
             end
           end
 
-          context "virus scanner is down" do
+          context "when virus scanner is down" do
             before do
               allow_any_instance_of(MalwareScanResult).to receive(:scanner_working).with(any_args).and_return(false)
             end
@@ -216,9 +216,9 @@ module Providers
           end
         end
 
-        context "Continue button pressed" do
-          context "model has no files attached previously" do
-            context "file is empty and text is empty" do
+        context "when continue button pressed" do
+          context "and model has no files attached previously" do
+            context "and file is empty and text is empty" do
               let(:params_statement_of_case) do
                 {
                   statement: "",
@@ -232,7 +232,7 @@ module Providers
               end
             end
 
-            context "file is empty but text is entered" do
+            context "when file is empty but text is entered" do
               let(:params_statement_of_case) do
                 {
                   statement: entered_text,
@@ -246,7 +246,7 @@ module Providers
               end
             end
 
-            context "text is empty but file is present" do
+            context "when text is empty but file is present" do
               let(:entered_text) { "" }
 
               it "updates the file" do
@@ -256,7 +256,7 @@ module Providers
               end
             end
 
-            context "file is invalid content type" do
+            context "when file is invalid content type" do
               let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
               it "does not save the object and raise an error" do
@@ -267,7 +267,7 @@ module Providers
               end
             end
 
-            context "file is invalid mime type but has valid content_type" do
+            context "when file is invalid mime type but has valid content_type" do
               let(:original_file) { uploaded_file("spec/fixtures/files/zip.zip", "application/zip") }
 
               before do
@@ -282,7 +282,7 @@ module Providers
               end
             end
 
-            context "file is too big" do
+            context "when file is too big" do
               before { allow(StatementOfCases::StatementOfCaseForm).to receive(:max_file_size).and_return(0) }
 
               it "does not save the object and raise an error" do
@@ -293,7 +293,7 @@ module Providers
               end
             end
 
-            context "file is empty" do
+            context "when file is empty" do
               let(:original_file) { uploaded_file("spec/fixtures/files/empty_file.pdf", "application/pdf") }
 
               it "does not save the object and raise an error" do
@@ -304,7 +304,7 @@ module Providers
               end
             end
 
-            context "on error" do
+            context "when an error occurs" do
               let(:entered_text) { "" }
               let(:original_file) { nil }
 
@@ -318,7 +318,7 @@ module Providers
                 expect(response.body).to match 'id="application-merits-task-statement-of-case-original-file-error"'
               end
 
-              context "file contains a malware" do
+              context "when file contains a malware" do
                 let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
                 it "does not save the object and raise an error" do
@@ -331,13 +331,13 @@ module Providers
             end
           end
 
-          context "model already has files attached" do
+          context "when model already has files attached" do
             before { create :statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application: }
 
-            context "text is empty" do
+            context "and text is empty" do
               let(:entered_text) { "" }
 
-              context "no additional file uploaded" do
+              context "with no additional file uploaded" do
                 let(:params_statement_of_case) do
                   {
                     statement: entered_text,
@@ -351,7 +351,7 @@ module Providers
                 end
               end
 
-              context "additional file uploaded" do
+              context "when additional file uploaded" do
                 it "attaches the file" do
                   subject
                   expect(statement_of_case.reload.statement).to eq("")
@@ -360,7 +360,7 @@ module Providers
               end
             end
 
-            context "text is entered and an additional file is uploaded" do
+            context "when text is entered and an additional file is uploaded" do
               let(:entered_text) { "Now we have two attached files" }
 
               it "updates the text and attaches the additional file" do
@@ -372,7 +372,7 @@ module Providers
           end
         end
 
-        context "Save as draft" do
+        context "when save as draft is selected" do
           let(:button_clicked) { draft_button }
 
           it "updates the record" do
@@ -391,7 +391,7 @@ module Providers
             expect(response).to redirect_to provider_draft_endpoint
           end
 
-          context "nothing specified" do
+          context "with nothing specified" do
             let(:entered_text) { "" }
             let(:original_file) { nil }
 

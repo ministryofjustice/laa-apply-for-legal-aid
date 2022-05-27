@@ -87,7 +87,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
       end
     end
 
-    context "Form submitted using Save as draft button" do
+    context "with form submitted using Save as draft button" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do

@@ -70,7 +70,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     describe "POST /providers/:application_id/applicant_employed" do
       before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
 
-      context "valid params" do
+      context "with valid params" do
         let(:params) { { applicant: { employed: "true" } } }
 
         it "updates the record" do
@@ -78,13 +78,13 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
           expect(applicant.reload.employed).to be true
         end
 
-        context "yes" do
+        context "when yes" do
           it "redirects to the use ccms employed page" do
             expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
           end
         end
 
-        context "no" do
+        context "when no" do
           let(:params) { { applicant: { employed: "false" } } }
 
           it "redirects to the open banking consents page" do
@@ -93,7 +93,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         end
       end
 
-      context "invalid params - nothing specified" do
+      context "with invalid params - nothing specified" do
         let(:params) { {} }
 
         it "returns http_success" do
@@ -112,7 +112,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     end
   end
 
-  context "the employed journey feature flag is enabled" do
+  context "when the employed journey feature flag is enabled" do
     subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
 
     before { Setting.setting.update!(enable_employed_journey: true) }
@@ -122,7 +122,7 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     let!(:legal_aid_application) { create :legal_aid_application, provider:, applicant: }
     let(:applicant) { create :applicant }
 
-    context "applicant is employed and the provider has employed permissions" do
+    context "when applicant is employed and the provider has employed permissions" do
       before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
       it "redirects to the proceedings search page" do

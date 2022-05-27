@@ -105,7 +105,7 @@ module Providers
           let(:full_name) { "   John   Doe  " }
           let(:sample_opponent) { build :opponent, :police_notified_true, warning_letter_sent_details: "  extra    space  " }
 
-          context "fullname" do
+          context "with fullname" do
             it "removes excess whitespaces" do
               subject
               expect(opponent.reload.full_name).to eq "John Doe"

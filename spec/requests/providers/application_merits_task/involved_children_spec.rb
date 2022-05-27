@@ -9,7 +9,7 @@ module Providers
       describe "new: GET /providers/applications/:legal_aid_application_id/involved_children/new" do
         subject { get new_providers_legal_aid_application_involved_child_path(application) }
 
-        context "authenticated" do
+        context "when authenticated" do
           before { login_as provider }
 
           it "returns success" do
@@ -25,7 +25,7 @@ module Providers
           end
         end
 
-        context "unauthenticated" do
+        context "when unauthenticated" do
           before { subject }
 
           it_behaves_like "a provider not authenticated"
@@ -37,7 +37,7 @@ module Providers
 
         let(:child) { create :involved_child, legal_aid_application: application }
 
-        context "authenticated" do
+        context "when authenticated" do
           before { login_as provider }
 
           it "returns success" do
@@ -51,7 +51,7 @@ module Providers
           end
         end
 
-        context "unauthenticated" do
+        context "when unauthenticated" do
           before { subject }
 
           it_behaves_like "a provider not authenticated"
@@ -73,10 +73,10 @@ module Providers
           } }
         end
 
-        context "authenticated" do
+        context "when authenticated" do
           before { login_as provider }
 
-          context "valid parameters" do
+          context "with valid parameters" do
             it "updates the child record" do
               subject
               expect(child.reload.full_name).to eq new_full_name
@@ -98,7 +98,7 @@ module Providers
             end
           end
 
-          context "invalid params" do
+          context "with invalid params" do
             let(:new_full_name) { "" }
 
             it "does not update the child record" do
