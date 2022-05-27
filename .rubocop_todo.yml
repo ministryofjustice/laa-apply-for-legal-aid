@@ -159,21 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/requests/citizens/cash_outgoings_spec.rb'
-    - 'spec/requests/citizens/check_answers_spec.rb'
-    - 'spec/requests/citizens/consent_spec.rb'
-    - 'spec/requests/citizens/gather_transactions_spec.rb'
-    - 'spec/requests/citizens/identify_types_of_incomes_spec.rb'
-    - 'spec/requests/citizens/identify_types_of_outgoings_spec.rb'
-    - 'spec/requests/citizens/legal_aid_applications_spec.rb'
-    - 'spec/requests/citizens/student_finance/annual_amounts_spec.rb'
-    - 'spec/requests/citizens/student_finance_spec.rb'
-    - 'spec/requests/errors_spec.rb'
-    - 'spec/requests/feedbacks_spec.rb'
-    - 'spec/requests/providers/address_lookups_spec.rb'
-    - 'spec/requests/providers/address_selections_spec.rb'
-    - 'spec/requests/providers/addresses_spec.rb'
-    - 'spec/requests/providers/applicant_bank_accounts_spec.rb'
     - 'spec/requests/providers/applicant_details_spec.rb'
     - 'spec/requests/providers/applicant_employed_spec.rb'
     - 'spec/requests/providers/applicants_spec.rb'

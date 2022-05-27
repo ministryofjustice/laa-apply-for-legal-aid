@@ -19,7 +19,7 @@ RSpec.describe "citizen home requests", type: :request do
       expect(session["page_history_id"]).not_to be_nil
     end
 
-    context "the link is not set to expire" do
+    context "when the link is not set to expire" do
       let(:secure_id) do
         SecureData.create_and_store!(
           legal_aid_application: { id: application_id },
@@ -84,7 +84,7 @@ RSpec.describe "citizen home requests", type: :request do
       expect(unescaped_response_body).to include(application.provider.firm.name.html_safe)
     end
 
-    context "if a provider is logged in" do
+    context "when a provider is logged in" do
       let(:provider_username) { "stepriponikas.bonstart" }
       let(:provider) { create :provider, username: provider_username }
 

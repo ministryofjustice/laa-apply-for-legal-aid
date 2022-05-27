@@ -153,7 +153,7 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       end
     end
 
-    context "the wrong transaction type is passed in" do
+    context "when the wrong transaction type is passed in" do
       let!(:income_types) { create_list :transaction_type, 3, :debit_with_standard_name }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
@@ -162,14 +162,14 @@ RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
       end
     end
 
-    context "When checking citizen answers" do
+    context "when checking citizen answers" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         legal_aid_application.check_citizen_answers!
         patch citizens_identify_types_of_income_path, params:
       end
 
-      context "change to none selected" do
+      context "with change to none selected" do
         let(:params) { { legal_aid_application: { none_selected: "true" } } }
 
         it "redirects to the check answers page" do

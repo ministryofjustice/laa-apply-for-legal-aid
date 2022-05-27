@@ -123,7 +123,7 @@ RSpec.describe "IndentifyTypesOfOutgoingsController", type: :request do
       end
     end
 
-    context "the wrong transaction type is passed in" do
+    context "when the wrong transaction type is passed in" do
       let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
       let(:transaction_type_ids) { income_types.map(&:id) }
 

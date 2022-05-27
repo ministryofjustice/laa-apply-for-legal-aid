@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 10 May 2022 14:02:42 GMT
+      - Thu, 26 May 2022 11:18:22 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Transfer-Encoding:
@@ -135,5 +135,5 @@ http_interactions:
         \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
         \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
         : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 10 May 2022 14:02:42 GMT
+  recorded_at: Thu, 26 May 2022 11:18:22 GMT
 recorded_with: VCR 6.1.0

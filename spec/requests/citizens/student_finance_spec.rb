@@ -25,7 +25,7 @@ RSpec.describe "student_finance", type: :request do
       } }
     end
 
-    context "responds YES to student finance" do
+    context "when responds YES to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params:
@@ -42,7 +42,7 @@ RSpec.describe "student_finance", type: :request do
       end
     end
 
-    context "responds NO to student finance" do
+    context "when responds NO to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params:
@@ -59,7 +59,7 @@ RSpec.describe "student_finance", type: :request do
       end
     end
 
-    context "No response is entered to student finance" do
+    context "when no response is entered to student finance" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params:
@@ -76,7 +76,7 @@ RSpec.describe "student_finance", type: :request do
       end
     end
 
-    context "When checking citizen answers" do
+    context "when checking citizen answers" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         legal_aid_application.check_citizen_answers!
