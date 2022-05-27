@@ -55,12 +55,13 @@ runs:
         K8S_CLUSTER: ${{ inputs.k8s_cluster }}
         K8S_CLUSTER_CERT: ${{ inputs.k8s_cluster_cert }}
         K8S_NAMESPACE: ${{ inputs.k8s_namespace }}
+        K8S_SERVICE_ACCOUNT: ${{ inputs.k8s_service_account }}
         K8S_TOKEN: ${{ inputs.k8s_token }}
       run: |
         echo -n ${K8S_CLUSTER_CERT} | base64 -d > ./ca.crt
         kubectl config set-cluster ${K8S_CLUSTER} --certificate-authority=./ca.crt --server=https://${K8S_CLUSTER}
-        kubectl config set-credentials circleci --token=${K8S_TOKEN}
-        kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=circleci --namespace=${K8S_NAMESPACE}
+        kubectl config set-credentials github-action --token=${K8S_TOKEN}
+        kubectl config set-context ${K8S_CLUSTER} --cluster=${K8S_CLUSTER} --user=github-action --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER}
 
     - name: Delete UAT release
