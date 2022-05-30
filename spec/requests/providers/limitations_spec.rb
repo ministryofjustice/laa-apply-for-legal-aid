@@ -56,12 +56,51 @@ RSpec.describe Providers::LimitationsController, type: :request do
     end
 
     context "when delegated functions have not been used" do
-      subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
+      context "and the maximum substantive cost limit is at the threshold" do
+        subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
 
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+        let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
 
-      it "redirects to next page" do
-        expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        it "redirects to next page" do
+          expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+        end
+      end
+
+      context "and the maximum substantive cost limit is below the threshold" do
+        subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
+
+        let(:legal_aid_application) { create :legal_aid_application }
+
+        before do
+          create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true, used_delegated_functions_on: nil
+          create :proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: nil
+        end
+
+        context "when no substantive limit extension is requested" do
+          let(:params) do
+            { legal_aid_application: { substantive_cost_override: false,
+                                       substantive_cost_requested: nil,
+                                       substantive_cost_reasons: nil } }
+          end
+
+          it "redirects to next page" do
+            expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+          end
+        end
+
+        context "with the incorrect params" do
+          let(:params) do
+            { legal_aid_application: { substantive_cost_override: true,
+                                       substantive_cost_requested: "non numeric response",
+                                       substantive_cost_reasons: "this is just a test" } }
+          end
+
+          it "displays an error" do
+            subject
+            expect(response.body).to match("govuk-error-summary")
+            expect(response.body).to include("Substantive cost limit must be an amount of money, like 2,500")
+          end
+        end
       end
     end
 
@@ -73,9 +112,9 @@ RSpec.describe Providers::LimitationsController, type: :request do
       let(:provider) { legal_aid_application.provider }
 
       context "with the correct params" do
-        context "when no limit extension is requested" do
+        context "when no limit extensions are requested" do
           let(:params) do
-            { legal_aid_application: { emergency_cost_override: false } }
+            { legal_aid_application: { emergency_cost_override: false, substantive_cost_override: false } }
           end
 
           it "redirects to next page" do
@@ -87,7 +126,10 @@ RSpec.describe Providers::LimitationsController, type: :request do
           let(:params) do
             { legal_aid_application: { emergency_cost_override: true,
                                        emergency_cost_requested: 3_000.0,
-                                       emergency_cost_reasons: "this is just a test" } }
+                                       emergency_cost_reasons: "this is just a test",
+                                       substantive_cost_override: false,
+                                       substantive_cost_requested: nil,
+                                       substantive_cost_reasons: nil } }
           end
 
           it "redirects to next page" do
@@ -100,13 +142,16 @@ RSpec.describe Providers::LimitationsController, type: :request do
         let(:params) do
           { legal_aid_application: { emergency_cost_override: true,
                                      emergency_cost_requested: "non numeric response",
-                                     emergency_cost_reasons: "this is just a test" } }
+                                     emergency_cost_reasons: "this is just a test",
+                                     substantive_cost_override: false,
+                                     substantive_cost_requested: nil,
+                                     substantive_cost_reasons: nil } }
         end
 
         it "displays an error" do
           subject
           expect(response.body).to match("govuk-error-summary")
-          expect(response.body).to include("Cost limit must be an amount of money, like 2,500")
+          expect(response.body).to include("Emergency cost limit must be an amount of money, like 2,500")
         end
       end
     end
