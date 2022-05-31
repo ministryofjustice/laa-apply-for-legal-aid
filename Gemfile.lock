@@ -722,13 +722,13 @@ DEPENDENCIES
   browser
   business
   byebug
-  capybara (>= 3.36.0, < 4.0)
+  capybara (>= 3, < 4.0)
   cucumber
-  cucumber-rails (>= 2.4.0)
+  cucumber-rails (>= 2)
   data_migrate
   database_cleaner
-  devise (>= 4.8.0)
-  devise_saml_authenticatable (>= 1.7.0)
+  devise
+  devise_saml_authenticatable
   dibber
   discard (~> 1.2)
   dotenv-rails (>= 2.7.6)
@@ -758,10 +758,10 @@ DEPENDENCIES
   net-smtp
   nokogiri (>= 1.12.5)
   oauth
-  omniauth (>= 2.0.0)
-  omniauth-google-oauth2 (>= 0.8.1)
-  omniauth-oauth2 (>= 1.7.1)
-  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth
+  omniauth-google-oauth2
+  omniauth-oauth2
+  omniauth-rails_csrf_protection (~> 1.0.1)
   overcommit
   pagy
   pg
@@ -787,7 +787,7 @@ DEPENDENCIES
   savon (~> 2.12.1)
   secure_headers
   selenium-webdriver
-  sentry-rails (>= 4.8.0)
+  sentry-rails
   sentry-ruby
   sentry-sidekiq
   shoulda-matchers (~> 5.1)

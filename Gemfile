@@ -19,11 +19,11 @@ gem "pg"
 gem "pg_dump_anonymize"
 gem "puma", "~> 5.6.4"
 gem "rack-attack"
-gem "rails", "~> 6.1.5", ">= 6.1.5.1"
+gem "rails", "~> 6.1.5"
 gem "regexp-examples"
 gem "rexml"
 gem "savon", "~> 2.12.1"
-gem "sentry-rails", ">= 5.3.1"
+gem "sentry-rails"
 gem "sentry-ruby"
 gem "sentry-sidekiq"
 gem "simple_command"
@@ -34,12 +34,12 @@ gem "webdack-uuid_migration", "~> 1.4.0"
 gem "bootsnap", ">= 1.1.0", require: false
 
 # Authentication
-gem "devise", ">= 4.8.1" # User authentication
-gem "devise_saml_authenticatable", ">= 1.9.0"
-gem "omniauth", ">= 2.1.0"
-gem "omniauth-google-oauth2", ">= 1.0.1"
-gem "omniauth-oauth2", ">= 1.7.2" # Provide Oauth2 strategy framework
-gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.1"
+gem "devise" # User authentication
+gem "devise_saml_authenticatable"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-oauth2" # Provide Oauth2 strategy framework
+gem "omniauth-rails_csrf_protection", "~> 1.0.1"
 
 # Improve backtrace in nested error recues
 gem "nesty"
@@ -116,7 +116,7 @@ group :development, :test do
   gem "rubocop-performance"
 
   # Available in dev env for generators
-  gem "rspec-rails", "~> 5.1", ">= 5.1.2"
+  gem "rspec-rails", "~> 5.1"
 end
 
 group :development do
@@ -133,9 +133,9 @@ end
 
 group :test do
   gem "axe-core-cucumber"
-  gem "capybara", ">= 3.37.1", "< 4.0"
+  gem "capybara", ">= 3", "< 4.0"
   gem "cucumber", require: false
-  gem "cucumber-rails", ">= 2.5.1", require: false
+  gem "cucumber-rails", ">= 2", require: false
   gem "database_cleaner"
   gem "launchy"
   gem "rack-pjax"
