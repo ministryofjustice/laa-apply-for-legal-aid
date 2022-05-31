@@ -168,7 +168,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Harassment - injunction'
     Then I should be on a page showing 'Emergency certificate'
     Then I should be on a page showing 'Substantive certificate'
-    Then I should be on a page showing "Do you want to request a higher cost limit?"
+    Then I should be on a page showing "Do you want to request a higher emergency cost limit?"
     When I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
@@ -182,8 +182,6 @@ Feature: Civil application journeys
     Then I should be on a page showing 'FGM Protection Order Not used'
     Then I should be on a page showing 'Harassment - injunction' with a date of 2 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Occupation order' with a date of 35 days ago using '%-d %B %Y' format
-    Then I should be on a page showing 'Covered under an emergency certificate'
-    Then I should be on a page showing 'Covered under a substantive certificate'
 
   @javascript @vcr
   Scenario: Completes the application using address lookup
@@ -211,7 +209,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "What you're applying for"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Covered under a substantive certificate'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
     Then I choose 'Yes'
@@ -326,7 +323,7 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     And I should be on a page showing "Emergency certificate"
-    And I should be on a page showing "Substantive certificate"
+    And I should be on a page showing "default substantive cost limit"
     Then I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
@@ -359,7 +356,7 @@ Feature: Civil application journeys
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Substantive certificate"
+    Then I should be on a page showing "default substantive cost limit"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -389,7 +386,7 @@ Feature: Civil application journeys
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Substantive certificate"
+    Then I should be on a page showing "default substantive cost limit"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
@@ -453,7 +450,7 @@ Feature: Civil application journeys
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Substantive certificate"
+    Then I should be on a page showing "default substantive cost limit"
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
