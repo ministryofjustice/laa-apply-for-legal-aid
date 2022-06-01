@@ -33,6 +33,11 @@ Given("I have an existing office") do
   @registered_provider.update!(selected_office: office)
 end
 
+Given("I have not yet updated my cookie preferences") do
+  provider = create(:provider, cookies_enabled: nil)
+  login_as provider
+end
+
 Given(/^I visit the applications page$/) do
   visit providers_legal_aid_applications_path
 end
