@@ -1,15 +1,17 @@
 module V1
   class ProvidersController < ApiController
+    ALLOWED_ACTIONS = %w[accept reject].freeze
+
     def update
       provider = Provider.find_by(id: params[:id])
       action = params[:provider][:action]
-      if provider && action
+      if provider.nil? || ALLOWED_ACTIONS.exclude?(action)
+        render "", status: :bad_request
+      else
         provider.cookies_enabled = action == "accept"
         provider.save!
 
         render "", status: :ok
-      else
-        render "", status: :bad_request
       end
     end
   end
