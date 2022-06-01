@@ -675,6 +675,8 @@ en:
         client_details_heading: Client details
         applying_for: What you’re applying for
         delegated_functions: Delegated functions
+        emergency_cost_limit: Emergency cost limit
+        substantive_cost_limit: Substantive cost limit
     means_reports:
       caseworker_review:
         required: Caseworker review required?
