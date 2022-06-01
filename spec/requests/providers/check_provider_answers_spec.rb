@@ -48,10 +48,6 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
         expect(unescaped_response_body).to include("Check your answers")
       end
 
-      it "displays the correct proceeding" do
-        expect(unescaped_response_body).to include(application.proceedings[0].substantive_scope_limitation_description)
-      end
-
       context "delegated functions not used" do
         let(:application) do
           create(
