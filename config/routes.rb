@@ -87,6 +87,7 @@ Rails.application.routes.draw do
     resources :workers, only: [:show]
     resources :statement_of_cases, only: [:create]
     resources :uploaded_evidence_collections, only: [:create]
+    resources :providers, only: [:update]
   end
 
   namespace :citizens do
