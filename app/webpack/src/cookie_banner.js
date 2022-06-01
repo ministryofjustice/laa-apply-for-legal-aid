@@ -23,7 +23,7 @@ function initCookieBanner (cookieBanner) {
         const providerId = document.getElementById('provider-id').textContent.trim()
         const btnValue = e.target.value
         updateCookiePreferences(providerId, btnValue).then(() => {
-          const mainContent = cookieBanner.querySelector('#main-content')
+          const mainContent = cookieBanner.querySelector('#main-cookie-content')
           const newContent = cookieBanner.querySelector(`#${btnValue}-content`)
           hide(mainContent)
           show(newContent)
