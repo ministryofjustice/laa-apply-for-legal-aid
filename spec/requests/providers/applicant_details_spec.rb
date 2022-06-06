@@ -24,7 +24,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context "has already got applicant info" do
+      context "and has already got applicant info" do
         let(:applicant) { create(:applicant) }
         let(:application) { create(:legal_aid_application, applicant:) }
 
@@ -66,7 +66,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         login_as provider
       end
 
-      context "Form submitted using Continue button" do
+      context "with form submitted using Continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -85,7 +85,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
           expect(new_applicant).to be_instance_of(Applicant)
         end
 
-        context "applicant details has trailing white spaces" do
+        context "when applicant details has trailing white spaces" do
           let(:params) do
             {
               applicant: {
@@ -170,7 +170,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "with form submitted using Save as draft button" do
         subject do
           patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button)
         end
@@ -187,7 +187,7 @@ RSpec.describe Providers::ApplicantDetailsController, type: :request do
         end
       end
 
-      context "dates contain alpha characters" do
+      context "when dates contain alpha characters" do
         let(:params) do
           {
             applicant: {

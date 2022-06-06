@@ -159,19 +159,6 @@ RSpec/BeforeAfterAll:
 # Prefixes: when, with, without
 RSpec/ContextWording:
   Exclude:
-    - 'spec/requests/providers/applicant_details_spec.rb'
-    - 'spec/requests/providers/applicant_employed_spec.rb'
-    - 'spec/requests/providers/applicants_spec.rb'
-    - 'spec/requests/providers/application_merits_task/has_other_involved_children_spec.rb'
-    - 'spec/requests/providers/application_merits_task/involved_children_spec.rb'
-    - 'spec/requests/providers/application_merits_task/opponents_spec.rb'
-    - 'spec/requests/providers/application_merits_task/remove_involved_child_spec.rb'
-    - 'spec/requests/providers/application_merits_task/statement_of_case_spec.rb'
-    - 'spec/requests/providers/bank_transactions_spec.rb'
-    - 'spec/requests/providers/capital_assessment_results_spec.rb'
-    - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
-    - 'spec/requests/providers/check_benefits_spec.rb'
-    - 'spec/requests/providers/check_client_details_spec.rb'
     - 'spec/requests/providers/check_merits_answers_spec.rb'
     - 'spec/requests/providers/check_passported_answers_spec.rb'
     - 'spec/requests/providers/check_provider_answers_spec.rb'

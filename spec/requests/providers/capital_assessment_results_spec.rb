@@ -24,9 +24,9 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
     before { before_tasks }
 
-    context "no restrictions" do
-      context "no policy disregards" do
-        context "eligible" do
+    context "with no restrictions" do
+      context "and no policy disregards" do
+        context "when eligible" do
           it "returns http success" do
             expect(response).to have_http_status(:ok)
           end
@@ -64,7 +64,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       context "with policy disregards" do
         let(:add_policy_disregards?) { true }
 
-        context "eligible" do
+        context "when eligible" do
           it "returns http success" do
             expect(response).to have_http_status(:ok)
           end
@@ -116,7 +116,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       context "with policy disregards" do
         let(:add_policy_disregards?) { true }
 
-        context "eligible" do
+        context "when eligible" do
           let(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -146,7 +146,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context "with no policy disregards" do
-        context "eligible" do
+        context "when eligible" do
           let(:cfe_result) { create :cfe_v3_result, :eligible }
 
           it "returns http success" do
@@ -183,7 +183,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         subject
       end
 
-      context "eligible" do
+      context "when eligible" do
         let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
         it "returns http success" do
@@ -249,13 +249,13 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
     end
 
-    context "unauthenticated" do
+    context "when unauthenticated" do
       let(:before_tasks) { subject }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "unknown result" do
+    context "with unknown result" do
       let(:cfe_result) { create :cfe_v3_result, result: {}.to_json }
       let(:before_tasks) { login_provider }
 
@@ -278,7 +278,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         subject
       end
 
-      context "Continue button pressed" do
+      context "when continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to the merits task list" do
@@ -291,7 +291,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
       end
 
-      context "Save as draft button pressed" do
+      context "when save as draft button is pressed" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

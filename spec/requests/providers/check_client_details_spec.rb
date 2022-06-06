@@ -48,7 +48,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
       subject
     end
 
-    context "correct client details" do
+    context "with correct client details" do
       let(:params) { { binary_choice_form: { check_client_details: "true" } } }
 
       it "continue to the received benefit confirmations page" do
@@ -56,7 +56,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
       end
     end
 
-    context "incorrect client details" do
+    context "with incorrect client details" do
       let(:params) { { binary_choice_form: { check_client_details: "false" } } }
 
       it "continue to the applicant details page" do
@@ -64,7 +64,7 @@ RSpec.describe Providers::CheckClientDetailsController, type: :request do
       end
     end
 
-    context "validation error" do
+    context "with validation error" do
       let(:params) { { binary_choice_form: { check_client_details: nil } } }
 
       it "displays an error if nothing selected" do

@@ -30,7 +30,7 @@ module Providers
           }
         end
 
-        context "child is removed" do
+        context "when child is removed" do
           let(:radio_button) { "true" }
 
           it "deletes the involved child record" do
@@ -54,7 +54,7 @@ module Providers
           end
         end
 
-        context "child is not removed" do
+        context "when child is not removed" do
           let(:radio_button) { "false" }
 
           it "does not delete a record" do
@@ -67,7 +67,7 @@ module Providers
           end
         end
 
-        context "neither yes nor no specified" do
+        context "with neither yes nor no specified" do
           let(:radio_button) { "" }
 
           it "does not delete a record" do
