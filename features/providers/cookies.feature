@@ -3,7 +3,7 @@ Feature: Cookies
   Scenario: I am able to update my cookie preferences via the cookies page
     Given I complete the journey as far as check your answers
     And I click link 'Cookies'
-    Then I should be on a page showing 'Cookies on Apply for Legal Aid'
+    Then I should be on a page showing 'Cookies on Apply for legal aid'
     When I click 'Save changes'
     Then I should be on a page showing 'Select if you would like to enable cookies'
     When I choose 'Use this cookie to measure my website use'
@@ -21,7 +21,7 @@ Feature: Cookies
     And I click link "Make a new application"
     And I click link "Apply for legal aid"
     Then I am on the legal aid applications
-    Then I should see 'Cookies on Apply for Legal Aid'
+    Then I should see 'Cookies on Apply for legal aid'
     When I click 'Accept analytics cookies'
     Then I should see "You've accepted analytics cookies."
     When I click 'Hide'

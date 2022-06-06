@@ -3,7 +3,7 @@ en:
   shared:
     partials:
       cookie_banner:
-        title: Cookies on Apply for Legal Aid
+        title: Cookies on Apply for legal aid
         we_use_some: We use some essential cookies to make this service work.
         wed_also_lie: "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
         accept: Accept analytics cookies
