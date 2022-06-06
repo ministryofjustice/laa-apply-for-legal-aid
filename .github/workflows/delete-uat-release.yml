@@ -21,3 +21,11 @@ jobs:
       - name: Result
         shell: bash
         run: echo ${{ steps.delete_uat.outputs.delete-message }}
+
+      - uses: actions/checkout@v3
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
+        with:
+          limit-access-to-actor: true
