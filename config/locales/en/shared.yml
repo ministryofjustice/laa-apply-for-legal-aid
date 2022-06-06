@@ -11,7 +11,7 @@ en:
         view: View cookies
         accepted: "You've accepted analytics cookies. You can "
         rejected: "You've rejected analytics cookies. You can "
-        any_time: at any time
+        any_time: " at any time"
         link_text: change your cookie settings
         hide: Hide this message
       modal_dialogue:

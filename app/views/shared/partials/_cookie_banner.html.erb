@@ -20,9 +20,7 @@
       <button value="reject" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
         <%= t('.reject') %>
       </button>
-      <a class="govuk-link" href="<%= providers_cooky_path(current_provider) %>">
-        <%= t('.view') %>
-      </a>
+      <%= link_to_accessible t('.view'), providers_cooky_path(current_provider), class: 'govuk-link' %>
     </div>
   </div>
 
@@ -32,7 +30,11 @@
       <div class="govuk-grid-column-two-thirds">
 
         <div class="govuk-cookie-banner__content">
-          <p class="govuk-body"><%= t('.accepted') %><a class="govuk-link" href="#"><%= t('.link_text') %></a><%= t('.any_time') %></p>
+          <p class="govuk-body">
+            <%= t('.accepted') %>
+            <%= link_to_accessible t('.link_text'), providers_cooky_path(current_provider), class: 'govuk-link' %>
+            <%= t('.any_time') %>
+          </p>
         </div>
       </div>
     </div>
@@ -50,7 +52,10 @@
       <div class="govuk-grid-column-two-thirds">
 
         <div class="govuk-cookie-banner__content">
-          <p class="govuk-body"><%= t('.rejected') %><a class="govuk-link" href="#"><%= t('.link_text') %></a><%= t('.any_time') %></p>
+          <p class="govuk-body">
+            <%= t('.rejected') %>
+            <%= link_to_accessible t('.link_text'), providers_cooky_path(current_provider), class: 'govuk-link' %>
+            <%= t('.any_time') %>
         </div>
       </div>
     </div>
