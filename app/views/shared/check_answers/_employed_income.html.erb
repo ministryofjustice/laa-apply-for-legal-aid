@@ -21,11 +21,10 @@
       ) %>
 
   <% if @legal_aid_application.extra_employment_information? %>
-    <%= check_answer_no_link(
+    <%= check_long_question_no_link(
           name: :extra_employment_information_details,
           question: t('.employment_details'),
           answer: @legal_aid_application.extra_employment_information_details,
-          read_only: read_only
         ) %>
   <% end %>
 </dl>
