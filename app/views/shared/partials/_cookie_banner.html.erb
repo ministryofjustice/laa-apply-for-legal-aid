@@ -20,7 +20,9 @@
       <button value="reject" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
         <%= t('.reject') %>
       </button>
-      <a class="govuk-link" href="#"><%= t('.view') %></a>
+      <a class="govuk-link" href="<%= providers_cooky_path(current_provider) %>">
+        <%= t('.view') %>
+      </a>
     </div>
   </div>
 
