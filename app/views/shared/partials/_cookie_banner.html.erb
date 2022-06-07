@@ -1,0 +1,69 @@
+<div class="govuk-cookie-banner" id="cookie-banner" data-nosnippet role="region" aria-label="Cookies on Apply for legal aid">
+  <div class="govuk-cookie-banner__message govuk-width-container" id="main-cookie-content">
+    <span class="hidden" aria-hidden="true" id="provider-id"><%= current_provider.id %></span>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m"><%= t('.title') %></h2>
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body"><%= t('.we_use_some') %></p>
+          <p class="govuk-body"><%= t('.wed_also_lie') %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button value="accept" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
+        <%= t('.accept') %>
+      </button>
+      <button value="reject" type="button" name="cookies" class="govuk-button" data-module="govuk-button">
+        <%= t('.reject') %>
+      </button>
+      <%= link_to_accessible t('.view'), providers_cooky_path(current_provider), class: 'govuk-link' %>
+    </div>
+  </div>
+
+  <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="accept-content" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body">
+            <%= t('.accepted') %>
+            <%= link_to_accessible t('.link_text'), providers_cooky_path(current_provider), class: 'govuk-link' %>
+            <%= t('.any_time') %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button value="hide" class="govuk-button" data-module="govuk-button">
+        <%= t('.hide') %>
+      </button>
+    </div>
+  </div>
+
+  <div class="govuk-cookie-banner__message govuk-width-container" role="alert" id="reject-content" hidden>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-cookie-banner__content">
+          <p class="govuk-body">
+            <%= t('.rejected') %>
+            <%= link_to_accessible t('.link_text'), providers_cooky_path(current_provider), class: 'govuk-link' %>
+            <%= t('.any_time') %>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button value="hide" class="govuk-button" data-module="govuk-button">
+        <%= t('.hide') %>
+      </button>
+    </div>
+  </div>
+</div>

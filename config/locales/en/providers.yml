@@ -176,7 +176,7 @@ en:
 
     cookies:
       show:
-        page_title: Cookies on Apply for Legal Aid
+        page_title: Cookies on Apply for legal aid
         success_message: Your cookie settings were saved
         go_back_link: Go back to the page you were looking at
         cookies_are_files: Cookies are files saved on your phone, tablet or computer when you visit a website.
