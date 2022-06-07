@@ -385,6 +385,16 @@ Given("I start the journey as far as the start of the vehicle section") do
   )
 end
 
+Given(/^I view the limitations for an application with proceedings (at|below) the max threshold( with delegated_functions)?/) do |threshold, include_df|
+  limit = threshold.eql?("at") ? 25_000 : 5_000
+  @legal_aid_application = create :legal_aid_application, :with_applicant_and_address
+  create :proceeding, :da006, legal_aid_application: @legal_aid_application, substantive_cost_limitation: limit, lead_proceeding: true, used_delegated_functions_on: nil
+  create :proceeding, :se013, legal_aid_application: @legal_aid_application, substantive_cost_limitation: limit, used_delegated_functions_on: nil
+  steps %(And I used delegated functions) if include_df
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_limitations_path(@legal_aid_application))
+end
+
 Given("I have completed a non-passported application and reached the merits task_list") do
   @legal_aid_application = create(
     :application,

@@ -305,13 +305,22 @@ en:
               not_a_number: Mortgage amount must be an amount of money, like 60,000
               too_many_decimals: Mortgage amount must not include more than 2 decimal numbers
             emergency_cost_override:
-              blank: Select yes if you want to request a higher cost limit
+              blank: Select yes if you want to request a higher emergency cost limit
             emergency_cost_requested:
               blank: Enter a new emergency cost limit
-              not_a_number: Cost limit must be an amount of money, like 2,500
-              greater_than_or_equal_to: The new cost limit cannot be less than 0
+              not_a_number: Emergency cost limit must be an amount of money, like 2,500
+              greater_than_or_equal_to: The new emergency cost limit cannot be less than 0
             emergency_cost_reasons:
-              blank: Tell us why you need a higher cost limit
+              blank: Tell us why you need a higher emergency cost limit
+            substantive_cost_override:
+              blank: Select yes if you want to request a higher substantive cost limit
+            substantive_cost_requested:
+              blank: Enter a new substantive cost limit
+              not_a_number: Substantive cost limit must be an amount of money, like 2,500
+              greater_than_or_equal_to: The new substantive cost limit cannot be less than 0
+              less_than_or_equal_to: The new substantive cost limit cannot be more than £25,000
+            substantive_cost_reasons:
+              blank: Tell us why you need a higher substantive cost limit
             extra_employment_information:
               blank: Select yes if you need to tell us anything else about your client's employment
             extra_employment_information_details:

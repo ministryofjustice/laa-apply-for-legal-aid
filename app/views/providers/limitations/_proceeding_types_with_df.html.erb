@@ -44,13 +44,8 @@
       <%= form.govuk_radio_button(:emergency_cost_override, false, label: {text:  t('generic.no')}) %>
     <% end %>
 
-    <h2 class="govuk-heading-m">
-      <%= t('.substantive_certificate') %>
-    </h2>
-
-      <div class="govuk-!-padding-bottom-1"></div>
-      <p><%= t('.default_limit_is') %> <strong><%= gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation,  precision: 0) %></strong></p>
-    </p>
+    <%= render partial: 'providers/limitations/cost_limits',
+               locals: { title_translation_path: '.substantive_certificate', form: form } %>
 
     <div class="govuk-!-padding-bottom-6"></div>
 

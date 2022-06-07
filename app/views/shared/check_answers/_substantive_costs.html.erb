@@ -1,0 +1,19 @@
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_no_link(
+        name: :emergency_cost_override,
+        question: t('.request_higher_limit'),
+        answer: yes_no(@legal_aid_application.substantive_cost_override)
+      ) %>
+  <% if @legal_aid_application.substantive_cost_override %>
+    <%= check_answer_no_link(
+          name: :cost_requested,
+          question: t(".new_cost_limit"),
+          answer: gds_number_to_currency(@legal_aid_application.substantive_cost_requested,  precision: 2)
+        ) %>
+    <%= check_answer_no_link(
+          name: :cost_reasons,
+          question: t(".new_limit_reasons"),
+          answer: @legal_aid_application.substantive_cost_reasons
+        ) %>
+  <% end %>
+</dl>

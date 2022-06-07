@@ -38,7 +38,7 @@ Feature: Provider accessibility
     When I select 'I have not used delegated functions'
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Substantive certificate"
+    Then I should be on a page showing "default substantive cost limit"
     And the page is accessible
     Then I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'

@@ -8,7 +8,7 @@ module Providers
     end
 
     def update
-      if @legal_aid_application.used_delegated_functions?
+      if form_needs_checking?
         clear_limit_and_reason
         @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
@@ -19,17 +19,27 @@ module Providers
 
   private
 
+    def form_needs_checking?
+      legal_aid_application.used_delegated_functions? || @legal_aid_application.substantive_cost_overridable?
+    end
+
     def clear_limit_and_reason
       atc = params[:legal_aid_application]
-      return unless atc[:emergency_cost_override].to_s == "false"
 
-      atc[:emergency_cost_requested] = nil
-      atc[:emergency_cost_reasons] = nil
+      atc[:emergency_cost_requested] = nil if atc[:emergency_cost_override].to_s == "false"
+      atc[:emergency_cost_reasons] = nil if atc[:emergency_cost_override].to_s == "false"
+      atc[:substantive_cost_requested] = nil if atc[:substantive_cost_override].to_s == "false"
+      atc[:substantive_cost_reasons] = nil if atc[:substantive_cost_override].to_s == "false"
     end
 
     def form_params
       merge_with_model(legal_aid_application) do
-        params.require(:legal_aid_application).permit(:emergency_cost_override, :emergency_cost_requested, :emergency_cost_reasons)
+        params.require(:legal_aid_application).permit(:emergency_cost_override,
+                                                      :emergency_cost_requested,
+                                                      :emergency_cost_reasons,
+                                                      :substantive_cost_override,
+                                                      :substantive_cost_requested,
+                                                      :substantive_cost_reasons)
       end
     end
   end
