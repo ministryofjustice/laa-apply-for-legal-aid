@@ -81,14 +81,10 @@ RSpec.describe TrueLayer::BankDataImportService do
 
       it "does not import anything" do
         expect { subject }
-          .to change(BankProvider, :count)
-          .by(0)
-          .and change(BankAccount, :count)
-          .by(0)
-          .and change(BankAccountHolder, :count)
-          .by(0)
-          .and change(BankTransaction, :count)
-          .by(0)
+          .to not_change(BankProvider, :count)
+          .and not_change(BankAccount, :count)
+          .and not_change(BankAccountHolder, :count)
+          .and not_change(BankTransaction, :count)
       end
 
       it "returns an error" do
