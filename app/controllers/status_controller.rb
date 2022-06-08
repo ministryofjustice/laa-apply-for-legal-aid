@@ -25,7 +25,7 @@ class StatusController < ApiController
   end
 
   def data
-    redirect_to ENV["GOOGLE_DATA_STUDIO_URL"]
+    redirect_to ENV.fetch("GOOGLE_DATA_STUDIO_URL", nil)
   end
 
 private

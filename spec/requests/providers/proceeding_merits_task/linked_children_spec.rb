@@ -67,7 +67,7 @@ module Providers
           end
 
           it "does not add involved children to the proceeding" do
-            expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
+            expect { subject }.not_to change { proceeding.proceeding_linked_children.count }
           end
         end
 
@@ -115,7 +115,7 @@ module Providers
 
           context "record already exists" do
             it "makes no changes if already selected records are left selected" do
-              expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(0)
+              expect { subject }.not_to change { proceeding.proceeding_linked_children.count }
             end
           end
         end

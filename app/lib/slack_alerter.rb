@@ -29,7 +29,7 @@ class SlackAlerter
     end
 
     def slack_alert_email
-      ENV["SLACK_ALERT_EMAIL"]
+      ENV.fetch("SLACK_ALERT_EMAIL", nil)
     end
   end
 

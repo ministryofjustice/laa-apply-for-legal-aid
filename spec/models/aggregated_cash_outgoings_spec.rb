@@ -332,7 +332,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         let(:subject) { aco.update(corrected_valid_params) }
 
         it "does not change the record count when records updated" do
-          expect { subject }.to change(CashTransaction, :count).by(0)
+          expect { subject }.not_to change(CashTransaction, :count)
         end
 
         it "changes the preexisting amounts of the records" do
@@ -373,7 +373,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it "does not add to old records" do
-          expect { subject }.to change(CashTransaction, :count).by(0)
+          expect { subject }.not_to change(CashTransaction, :count)
         end
 
         it "updates the three previous months according to applicaiton calculation date" do

@@ -4,7 +4,7 @@ require "sentry-sidekiq"
 
 if %w[production].include?(Rails.env) && ENV["SENTRY_DSN"].present?
   Sentry.init do |config|
-    config.dsn = ENV["SENTRY_DSN"]
+    config.dsn = ENV.fetch("SENTRY_DSN", nil)
 
     filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters.map(&:to_s))
     config.excluded_exceptions += %w[

@@ -87,7 +87,7 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = false
 
-  Rails.application.routes.default_url_options[:host] = ENV["HOST"]
+  Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST", nil)
 
   config.active_storage.service = :amazon
   config.x.application.host_url = "https://#{config.x.application.host}"
@@ -95,7 +95,7 @@ Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
 
-  config.x.policy_disregards_start_date = Date.parse(ENV["POLICY_DISREGARDS_START_DATE"] || "2021-1-8")
+  config.x.policy_disregards_start_date = Date.parse(ENV.fetch("POLICY_DISREGARDS_START_DATE", "2021-1-8"))
 
   # set the id of the Digest Export spreadsheet to use in this environment
   config.x.digest_export.spreadsheet_id = "1dXnEdiqqP_fOeWzDsbXY83lwwK8pvf8j4jsUqaGnGMs"

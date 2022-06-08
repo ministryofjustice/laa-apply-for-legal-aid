@@ -80,7 +80,7 @@ module Providers
         end
 
         it "creates a new opponent with the values entered" do
-          expect { subject }.to change { ::ApplicationMeritsTask::Opponent.count }.by(1)
+          expect { subject }.to change(::ApplicationMeritsTask::Opponent, :count).by(1)
           expect(opponent.understands_terms_of_court_order).to eq(sample_opponent.understands_terms_of_court_order)
           expect(opponent.understands_terms_of_court_order_details).to eq(sample_opponent.understands_terms_of_court_order_details)
           expect(opponent.warning_letter_sent).to eq(sample_opponent.warning_letter_sent)

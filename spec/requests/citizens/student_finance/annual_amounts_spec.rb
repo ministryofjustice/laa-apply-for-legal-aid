@@ -52,7 +52,7 @@ RSpec.describe "annual_amounts", type: :request do
           let(:amount) { 5000 }
 
           it "updates the same record without creating a new one" do
-            expect { patch citizens_student_finances_annual_amount_path, params: }.to change(IrregularIncome, :count).by(0)
+            expect { patch citizens_student_finances_annual_amount_path, params: }.not_to change(IrregularIncome, :count)
             irregular_income = legal_aid_application.irregular_incomes.first
             expect(irregular_income.amount).to eq 5000
           end

@@ -129,7 +129,7 @@ RSpec.describe HMRC::Response, type: :model do
       end
 
       it "does not create an employment record" do
-        expect { trigger_update }.to change { hmrc_response.legal_aid_application.employments.count }.by(0)
+        expect { trigger_update }.not_to change { hmrc_response.legal_aid_application.employments.count }
       end
     end
   end
