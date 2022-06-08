@@ -233,8 +233,8 @@ RSpec.describe StatusController, type: :request do
 
   describe "#data" do
     before do
-      allow(ENV).to receive(:[])
-                      .with("GOOGLE_DATA_STUDIO_URL")
+      allow(ENV).to receive(:fetch)
+                      .with("GOOGLE_DATA_STUDIO_URL", nil)
                       .and_return("https://fake.datastudio.com/")
     end
 
