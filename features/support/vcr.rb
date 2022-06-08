@@ -16,14 +16,14 @@ VCR.configure do |vcr_config|
     uri = URI(request.uri)
     uri.to_s.include?("__identify__") || uri.to_s =~ /127.0.0.1.*(session|shutdown)/
   end
-  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV["GOVUK_NOTIFY_API_KEY"] }
-  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV["ORDNANACE_SURVEY_API_KEY"] }
-  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV["BC_LSC_SERVICE_NAME"] }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV["BC_CLIENT_ORG_ID"] }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV["BC_CLIENT_USER_ID"] }
-  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT>") { ENV["LAA_PORTAL_IDP_CERT"] }
-  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT>") { ENV["LAA_PORTAL_IDP_CERT_FINGERPRINT"] }
-  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM>") { ENV["LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM"] }
+  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
+  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV.fetch("ORDNANACE_SURVEY_API_KEY", nil) }
+  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV.fetch("BC_CLIENT_ORG_ID", nil) }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV.fetch("BC_CLIENT_USER_ID", nil) }
+  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT>") { ENV.fetch("LAA_PORTAL_IDP_CERT", nil) }
+  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT>") { ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT", nil) }
+  vcr_config.filter_sensitive_data("<LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM>") { ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM", nil) }
 end
 
 VCR.cucumber_tags do |t|

@@ -11,7 +11,7 @@ RSpec.describe "sidekiq WEB UI", type: :request do
     context "with the right authentication" do
       it "is successful" do
         username = "sidekiq"
-        password = ENV["SIDEKIQ_WEB_UI_PASSWORD"]
+        password = ENV.fetch("SIDEKIQ_WEB_UI_PASSWORD", nil)
         get sidekiq_web_path, headers: {
           "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials(username, password),
         }

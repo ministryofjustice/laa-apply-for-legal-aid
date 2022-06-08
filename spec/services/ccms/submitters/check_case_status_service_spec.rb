@@ -35,7 +35,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "case_submitted"
             expect(history.to_state).to eq "case_submitted"
             expect(history.success).to be true
@@ -70,7 +70,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           end
 
           it "writes a history record" do
-            expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+            expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
             expect(history.from_state).to eq "case_submitted"
             expect(history.to_state).to eq "failed"
             expect(history.success).to be false
@@ -105,7 +105,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         end
 
         it "writes a history record" do
-          expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(1)
+          expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(1)
           expect(history.from_state).to eq "case_submitted"
           expect(history.to_state).to eq "case_created"
           expect(history.request).to eq case_add_status_request

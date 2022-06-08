@@ -82,7 +82,7 @@ module Providers
         end
 
         it "creates a new incident with the values entered" do
-          expect { subject }.to change { ::ApplicationMeritsTask::Incident.count }.by(1)
+          expect { subject }.to change(::ApplicationMeritsTask::Incident, :count).by(1)
           expect(incident.told_on).to eq(told_on)
           expect(incident.occurred_on).to eq(occurred_on)
         end

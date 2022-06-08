@@ -60,11 +60,11 @@ VCR.configure do |vcr_config|
   }
   vcr_config.configure_rspec_metadata!
   vcr_config.debug_logger = $stdout if vcr_debug
-  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV["GOVUK_NOTIFY_API_KEY"] }
-  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV["ORDNANACE_SURVEY_API_KEY"] }
-  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV["BC_LSC_SERVICE_NAME"] }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV["BC_CLIENT_ORG_ID"] }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV["BC_CLIENT_USER_ID"] }
+  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
+  vcr_config.filter_sensitive_data("<ORDNANACE_SURVEY_API_KEY>") { ENV.fetch("ORDNANACE_SURVEY_API_KEY", nil) }
+  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV.fetch("BC_CLIENT_ORG_ID", nil) }
+  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV.fetch("BC_CLIENT_USER_ID", nil) }
 end
 
 RSpec.configure do |config|
@@ -111,3 +111,6 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.disable_monkey_patching!
 end
+
+# Define negation matchers
+RSpec::Matchers.define_negated_matcher :not_change, :change

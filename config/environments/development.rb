@@ -61,7 +61,7 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = true
 
-  config.x.application.host = ENV["HOST"] || "localhost:#{ENV.fetch('PORT', 3002)}"
+  config.x.application.host = ENV.fetch("HOST") { "localhost:#{ENV.fetch('PORT', 3002)}" }
   Rails.application.routes.default_url_options[:host] = config.x.application.host
 
   config.active_storage.service = :local

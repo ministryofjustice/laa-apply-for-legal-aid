@@ -12,7 +12,7 @@ RSpec.describe HMRC::ParsedResponse::Persistor do
       let!(:hmrc_response) { create(:hmrc_response, :example1_usecase1) }
 
       it "does not create employment records" do
-        expect { persistor }.to change { application.employments.count }.by(0)
+        expect { persistor }.not_to change { application.employments.count }
       end
     end
 

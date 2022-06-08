@@ -83,7 +83,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
     end
 
     it "writes a history record for each document and on completion" do
-      expect { subject.call }.to change { CCMS::SubmissionHistory.count }.by(5)
+      expect { subject.call }.to change(CCMS::SubmissionHistory, :count).by(5)
     end
 
     it "writes a history record on completion that updates the state" do

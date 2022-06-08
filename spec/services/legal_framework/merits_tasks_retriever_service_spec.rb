@@ -41,7 +41,7 @@ module LegalFramework
           end
 
           it "stores a submission history record" do
-            expect { service.call }.to change { LegalFramework::SubmissionHistory.count }
+            expect { service.call }.to change(LegalFramework::SubmissionHistory, :count)
           end
         end
       end
