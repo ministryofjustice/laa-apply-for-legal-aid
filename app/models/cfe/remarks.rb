@@ -27,6 +27,7 @@ module CFE
     def populate_review_transactions
       collection = RemarkedTransactionCollection.new
       @hash.each do |category, reason_hashes|
+        next if category.starts_with?("employment_")
         break if reason_hashes.is_a?(Array)
 
         reason_hashes.each do |reason, tx_ids|
