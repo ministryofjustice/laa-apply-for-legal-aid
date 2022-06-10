@@ -387,7 +387,7 @@ GEM
     multi_json (1.15.0)
     multi_test (0.1.2)
     multi_xml (0.6.0)
-    multipart-post (2.2.0)
+    multipart-post (2.2.2)
     nenv (0.3.0)
     nesty (1.0.2)
     net-imap (0.2.3)
