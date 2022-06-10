@@ -67,7 +67,7 @@ module Providers
       end
       let(:draft_button) { { draft_button: "Save as draft" } }
       let(:upload_button) { { upload_button: "Upload" } }
-      let(:delete_button) { { delete_button: "Delete" } }
+      let(:delete_button) { { delete_button: "" } }
       let(:continue_button) { { continue_button: "Save and continue" } }
       let(:button_clicked) { {} }
       let(:params) { { uploaded_evidence_collection: params_uploaded_evidence_collection }.merge(button_clicked) }
@@ -488,7 +488,7 @@ module Providers
             uploaded_evidence_collection: {
               uploaded_evidence_collection.original_attachments.first.id => "gateway_evidence",
             },
-            delete_button: "Delete",
+            delete_button: "",
             attachment_id: uploaded_evidence_collection.original_attachments.first.id,
             legal_aid_application_id: legal_aid_application.id,
           }
@@ -526,7 +526,7 @@ module Providers
               uploaded_evidence_collection: {
                 uploaded_evidence_collection.original_attachments.first.id => "gateway_evidence",
               },
-              delete_button: "Delete",
+              delete_button: "",
               attachment_id: "unknown",
               legal_aid_application_id: legal_aid_application.id,
             }
