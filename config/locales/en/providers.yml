@@ -691,6 +691,7 @@ en:
           employment_gross_income: Employment gross income
           employment_tax: Employment income tax
           employment_nic: Employment National Insurance contributions
+          employment_payment: Employment payment
           state_benefit_payment: State benefits
           other_income_payment: Other income
           outgoings_housing_cost: Housing payments
