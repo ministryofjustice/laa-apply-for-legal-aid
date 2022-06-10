@@ -122,6 +122,45 @@ module CFE
           expect(tx.reasons).to eq [:unknown_frequency]
         end
       end
+
+      context "with duplicate reason and transaction for non-employment category remark" do
+        let(:duplicate_remarks) do
+          {
+            some_other_category: {
+              amount_variation: %w[
+                d55743b5-c1c4-4c9a-98a3-bad709aac422
+              ],
+            },
+          }
+        end
+
+        # NOTE: hash key order is significant due to `break` statement
+        let(:remarks_hash) { duplicate_remarks.merge!(populated_hash) }
+
+        it "raises \"Category mismatch\" error" do
+          expect { remarks.review_transactions }.to raise_error(/category/i)
+        end
+      end
+
+      context "with duplicate reason and transaction for employment category remark" do
+        let(:employment_remarks) do
+          {
+            employment_tax: {
+              refunds: %w[d55743b5-c1c4-4c9a-98a3-bad709aac422],
+            },
+            employment_nic: {
+              refunds: %w[d55743b5-c1c4-4c9a-98a3-bad709aac422],
+            },
+          }
+        end
+
+        # NOTE: hash key order is significant due to `break` statement
+        let(:remarks_hash) { employment_remarks.merge!(populated_hash) }
+
+        it "does not raise \"Category mismatch\" error" do
+          expect { remarks.review_transactions }.not_to raise_error
+        end
+      end
     end
 
     def empty_hash
