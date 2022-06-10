@@ -16,12 +16,26 @@ en:
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         send_client_link: Send link
         title: Give your client temporary access to the service
+    address_lookups:
+      show:
+        address_manual_link: Enter address manually
+        heading: Enter your client's correspondence address
+        label: Postcode
+        submit_button: Find address
     address_selections:
       show:
+        heading: Enter your client's correspondence address
         link_text: I cannot find the address
         select_address_label: Select an address
         addresses_found_text:
           { one: "1 address found", other: "%{count} addresses found" }
+    addresses:
+      show:
+        heading: Enter your client's correspondence address
+        address_manual_link: Enter address manually
+        label_1: postcode
+        postcode: Postcode
+        submit_button: Find address
     applicant_employed:
       index:
         heading_1: What is your client's employment status?

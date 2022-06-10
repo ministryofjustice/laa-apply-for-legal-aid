@@ -13,6 +13,10 @@ en:
       too_many_decimals: Amount must not include more than 2 decimal numbers
     applicant_bank_accounts:
       blank: Select yes if your client has savings accounts they cannot access online
+    address:
+      no_results: We could not find any addresses for that postcode. Enter the address manually.
+      unsuccessful: Sorry, there is a problem with the service. Please enter the address manually.
+      service_unavailable: Sorry, there is a problem with the service. Please enter the address manually.
     title_prefix: Error
     messages:
       already_confirmed: was already confirmed, please try signing in
