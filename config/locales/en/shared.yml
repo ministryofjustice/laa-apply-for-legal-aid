@@ -288,7 +288,7 @@ en:
     forms:
       applicant_form:
         page_title: Enter your client's details
-        full_name: Full name
+        name: Name
         email_label: Email address
         nino_label: National Insurance number
       date_input_fields:
