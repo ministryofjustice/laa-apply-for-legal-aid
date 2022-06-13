@@ -4,6 +4,7 @@ const screenReaderMessageDelay = 1000 // wait before updating the screenreader m
 
 const ERR_GENERIC = 'There was a problem uploading FILENAME - try again'
 const FILE_SIZE_ERR = 'FILENAME is larger than 7MB'
+const ZERO_BYTE_ERR = 'FILENAME has no content'
 const ERR_CONTENT_TYPE = 'FILENAME is not a valid file type'
 const ACCEPTED_FILES = [
   // dropzone checks both the mimetype and the file extension so this list covers everything
@@ -94,7 +95,13 @@ document.addEventListener('DOMContentLoaded', event => {
       },
       maxFilesize: 7,
       acceptedFiles: ACCEPTED_FILES.join(', '),
-      disablePreviews: true
+      disablePreviews: true,
+      accept: function(file, done) {
+        if (file.size == 0) {
+          done("Empty files will not be uploaded.");
+        }
+        else { done(); }
+      },
     })
     dropzone.on('drop', () => {
       removeErrorMessages()
@@ -125,6 +132,8 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg = ERR_CONTENT_TYPE.replace('FILENAME', file.name)
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR.replace('FILENAME', file.name)
+      } else if (file.size == 0) {
+        errorMsg = ZERO_BYTE_ERR.replace('FILENAME', file.name)
       } else if (response.error !== '') {
         errorMsg = response.error
       } else {
