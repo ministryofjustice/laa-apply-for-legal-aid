@@ -11,8 +11,9 @@
 
     <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
       <%= form.govuk_date_field :told_on, legend: { text: t("shared.forms.date_input_fields.told_on_label") },
-                                hint: { text: t("shared.forms.date_input_fields.told_on_hint")} %>
-      <%= form.govuk_date_field :occurred_on, legend: { text: t("shared.forms.date_input_fields.occurred_on_label") } %>
+                                hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0))} %>
+      <%= form.govuk_date_field :occurred_on, legend: { text: t("shared.forms.date_input_fields.occurred_on_label") },
+                                hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0))} %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>

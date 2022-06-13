@@ -227,7 +227,7 @@ cy:
         occurred_on_label: "?rucco tnedicni eht did nehW"
         told_on_label: "?tnedicni esuba citsemod tsetal eht tuoba uoy tcatnoc tneilc
           ruoy did nehW"
-        told_on_hint: .9102 3 13 elpmaxe roF
+        date_hint: ".%{options} ,elpmaxe roF"
         used_delegated_functions_on_label: snoitcnuf detageled desu uoy etaD
         used_delegated_functions_on_hint: ".%{options} ,elpmaxe roF"
       policy_disregards:
