@@ -920,8 +920,8 @@ Then("I am on the application confirmation page") do
   expect(page).to have_content("Application created")
 end
 
-Then("I am on the legal aid applications") do
-  expect(page).to have_content("Your applications")
+Then("I am on the legal aid applications page") do
+  expect(page).to have_content("Applications")
 end
 
 Then("I am on the About the Financial Assessment page") do

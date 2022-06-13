@@ -75,7 +75,7 @@ Feature: Provider accessibility
     Then I should be on a page showing 'Application created'
     And the page is accessible
     When I click link 'Back to your applications'
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
     And the page is accessible
 
   @javascript @vcr

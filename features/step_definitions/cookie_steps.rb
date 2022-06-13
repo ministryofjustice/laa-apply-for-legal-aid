@@ -9,7 +9,7 @@ Given("I start the journey without cookie preferences") do
 
     When I visit the application service
     And I click link "Start"
-    Then I am on the legal aid applications
+    Then I am on the legal aid applications page
     And I should see 'Cookies on Apply for legal aid'
   )
 end

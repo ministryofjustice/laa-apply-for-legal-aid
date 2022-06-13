@@ -8,7 +8,7 @@ Feature: Deleting applications
     Then the delete modal should open
     And I should be on the '/applications' page showing 'Are you sure you want to delete this application?'
     When I click 'Yes, delete it'
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
     And I should not see the previously created application
 
   @javascript
@@ -19,14 +19,14 @@ Feature: Deleting applications
     Then the delete modal should open
     And I should be on the '/applications' page showing 'Are you sure you want to delete this application?'
     Then I click the close button for the modal
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
     And the delete modal should not be visible
     And I should not see 'Are you sure you want to delete this application?'
     Then I click delete for the previously created application
     Then the delete modal should open
     Then I should be on the '/applications' page showing 'Are you sure you want to delete this application?'
     When I click 'No, do not delete it'
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
     And the delete modal should not be visible
     And I should not see 'Are you sure you want to delete this application?'
 
