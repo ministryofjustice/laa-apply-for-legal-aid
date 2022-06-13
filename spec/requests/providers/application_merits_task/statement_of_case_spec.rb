@@ -183,7 +183,7 @@ module Providers
 
             it "returns error message" do
               subject
-              error = I18n.t("#{i18n_error_path}.content_type_invalid")
+              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
               expect(response.body).to include(error)
             end
 
