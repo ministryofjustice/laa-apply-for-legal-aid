@@ -10,7 +10,7 @@ RSpec.describe TimeHelper, type: :helper do
     end
 
     it "returns a valid date" do
-      expect(helper.number_of_days_ago(days)).to eq "29 09 2020"
+      expect(helper.number_of_days_ago(days)).to eq "29  9 2020"
     end
   end
 end
