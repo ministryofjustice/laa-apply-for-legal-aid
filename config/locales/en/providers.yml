@@ -541,7 +541,7 @@ en:
           html: Your login details were not found on the CCMS system.  Please check your credentials and try again.  If the issue persists, please email <a href="mailto:%{team_email}">%{team_email}</a>
     legal_aid_applications:
       index:
-        heading_1: Your applications
+        heading_1: Applications
         current_applications: Current applications
         search_applications: Search applications
       search:
