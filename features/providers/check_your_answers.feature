@@ -274,7 +274,7 @@ Feature: Checking answers backwards and forwards
       Then I choose "Yes"
       Then I fill "Payment remaining" with "2000"
       And I click "Save and continue"
-      Then I should be on a page showing "Did your client buy the vehicle over 3 years ago?"
+      Then I should be on a page showing "Was the vehicle bought over 3 years ago?"
       Then I choose 'Yes'
       And I click "Save and continue"
       Then I should be on a page showing "Is the vehicle in regular use?"
