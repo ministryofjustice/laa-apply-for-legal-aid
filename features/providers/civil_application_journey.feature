@@ -6,7 +6,7 @@ Feature: Civil application journeys
     And I click link "Start"
     And I click link "Make a new application"
     And I click link "Apply for legal aid"
-    Then I am on the legal aid applications
+    Then I am on the legal aid applications page
 
   @javascript
   Scenario: I am able to select an office
@@ -14,7 +14,7 @@ Feature: Civil application journeys
     Then I visit the select office page
     Then I choose 'London'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
 
   @javascript
   Scenario: I am able to confirm my office
@@ -23,7 +23,7 @@ Feature: Civil application journeys
     Then I visit the confirm office page
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Your applications'
+    Then I should be on a page showing 'Applications'
 
   @javascript
   Scenario: I am able to change my registered office
