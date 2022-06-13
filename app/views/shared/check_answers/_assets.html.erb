@@ -70,6 +70,8 @@
         read_only: read_only
       ) %>
 
+  <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
+
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>
       <%= check_answer_one_change_link(
@@ -82,5 +84,5 @@
     <% end %>
   </section>
 
-  <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
+
 </section>
