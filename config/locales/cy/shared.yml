@@ -218,7 +218,7 @@ cy:
     forms:
       applicant_form:
         page_title: sliated s'tneilc ruoy retnE
-        full_name: eman lluF
+        name: emaN
         email_label: sserdda liamE
         nino_label: rebmun ecnarusnI lanoitaN
       date_input_fields:
