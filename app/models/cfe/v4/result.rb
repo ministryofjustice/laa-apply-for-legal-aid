@@ -334,7 +334,7 @@ module CFE
       end
 
       def jobs?
-        jobs.any?
+        jobs&.any?
       end
 
     private
