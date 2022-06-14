@@ -718,6 +718,12 @@ module CFE
             subject(:jobs?) { with_employments.jobs? }
 
             it { is_expected.to be(true) }
+
+            context "without employment_income" do
+              before { allow(with_employments).to receive(:jobs).and_return(nil) }
+
+              it { is_expected.to be_falsey }
+            end
           end
         end
 
