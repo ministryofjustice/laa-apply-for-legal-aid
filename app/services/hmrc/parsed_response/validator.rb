@@ -103,6 +103,10 @@ module HMRC
         AlertManager.capture_message("HMRC Response is unacceptable (id: #{hmrc_response.id}) - #{errors.map(&:message).join(', ')}")
       end
 
+      def invalid_use_case_found?
+        errors.map(&:attribute).include?(:use_case)
+      end
+
       def client_details_not_found?
         data&.include?({ "error" => "submitted client details could not be found in HMRC service" })
       end
@@ -116,7 +120,7 @@ module HMRC
       end
 
       def errors_ignoreable?
-        errors.empty? || errors.map(&:attribute).include?(:use_case) || hmrc_not_found?
+        errors.empty? || invalid_use_case_found? || hmrc_not_found?
       end
     end
   end

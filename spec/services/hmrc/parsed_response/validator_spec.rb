@@ -730,6 +730,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
+        call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
@@ -767,6 +768,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
+        call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
