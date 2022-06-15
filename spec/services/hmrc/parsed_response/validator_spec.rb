@@ -733,5 +733,42 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
+
+    context "when client has no employments recorded by HMRC" do
+      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: response_hash) }
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "income/paye/paye" => { "income" => [] } },
+            { "income/sa/selfAssessment" => { "registrations" => [], "taxReturns" => [] } },
+            { "income/sa/pensions_and_state_benefits/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/source/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/employments/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/additional_information/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/partnerships/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/uk_properties/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/foreign/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/further_details/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/interests_and_dividends/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/other/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/summary/selfAssessment" => { "taxReturns" => [] } },
+            { "income/sa/trusts/selfAssessment" => { "taxReturns" => [] } },
+            { "employments/paye/employments" => [] },
+            { "benefits_and_credits/working_tax_credit/applications" => [{ "awards" => [] }] },
+          ] }
+      end
+
+      before do
+        allow(AlertManager).to receive(:capture_message)
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it "does not send message to AlertManager with errors" do
+        expect(AlertManager).not_to have_received(:capture_message)
+      end
+    end
   end
 end

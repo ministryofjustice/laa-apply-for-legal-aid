@@ -107,8 +107,12 @@ module HMRC
         { "error" => "submitted client details could not be found in HMRC service" }
       end
 
+      def no_employments_found
+        errors == [error(:employments, "employments must be present")]
+      end
+
       def errors_ignoreable?
-        errors.empty? || errors.map(&:attribute).include?(:use_case) || data&.include?(client_details_not_found)
+        errors.empty? || errors.map(&:attribute).include?(:use_case) || data&.include?(client_details_not_found) || no_employments_found
       end
     end
   end
