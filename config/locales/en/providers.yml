@@ -1068,7 +1068,7 @@ en:
           use_car_valuation_sites: You can use car valuation websites to find this out.
       ages:
         show:
-          heading: Did your client buy the vehicle over 3 years ago?
+          heading: Was the vehicle bought over 3 years ago?
       regular_uses:
         show:
           heading: Is the vehicle in regular use?
