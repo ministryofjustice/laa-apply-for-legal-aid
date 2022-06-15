@@ -546,6 +546,6 @@ en:
             payments_remain:
               blank: Select yes if there are any payments left on the vehicle
             more_than_three_years_old:
-              blank: Select yes if your client bought the vehicle over 3 years ago
+              blank: Select yes if the vehicle was bought over 3 years ago
             used_regularly:
               blank: Select yes if the vehicle is in regular use
