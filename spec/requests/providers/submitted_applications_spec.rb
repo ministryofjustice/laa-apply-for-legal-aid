@@ -159,6 +159,12 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
         it_behaves_like "employment data is not present"
       end
+
+      context "when application has an older CFE Result version object" do
+        let(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+
+        it_behaves_like "employment data is not present"
+      end
     end
 
     context "when the employed journey is not enabled" do

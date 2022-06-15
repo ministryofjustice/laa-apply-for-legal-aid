@@ -79,6 +79,12 @@ module CFE
         end
       end
 
+      describe "#version" do
+        subject(:version) { eligible_result.version }
+
+        it { expect(version).to be 1 }
+      end
+
       describe "#additional_property?" do
         context "when present" do
           it "returns true" do

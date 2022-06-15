@@ -12,13 +12,5 @@ module Providers
       end
       continue_or_draft
     end
-
-  private
-
-    def display_employment_income?
-      Setting.enable_employed_journey? &&
-        @legal_aid_application.provider.employment_permissions? &&
-        @legal_aid_application.cfe_result.jobs?
-    end
   end
 end

@@ -247,6 +247,12 @@ module CFE
         end
       end
 
+      describe "#version" do
+        subject(:version) { eligible_result.version }
+
+        it { expect(version).to be 2 }
+      end
+
       describe "capital_contribution_required?" do
         context "when contribution not required" do
           it "returns false for capital_contribution_required" do
