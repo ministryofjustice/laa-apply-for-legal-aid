@@ -198,6 +198,12 @@ module CFE
         end
       end
 
+      describe "#version" do
+        subject(:version) { eligible_result.version }
+
+        it { expect(version).to be 4 }
+      end
+
       describe "#version_4?" do
         it "returns boolean response for cfe version check" do
           expect(eligible_result.version_4?).to be true
