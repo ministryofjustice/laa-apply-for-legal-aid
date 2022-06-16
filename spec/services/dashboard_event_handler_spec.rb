@@ -83,7 +83,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with_state completed" do
+    context "saved with state completed" do
       let(:state) { "completed" }
 
       it "fires the Applications job" do
@@ -95,7 +95,7 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
-    context "saved with_state abandoned" do
+    context "saved with state abandoned" do
       let(:state) { "abandoned" }
 
       it "does not fire additional Application jobs" do
