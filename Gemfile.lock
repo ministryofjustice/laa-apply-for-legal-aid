@@ -222,7 +222,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    erb_lint (0.1.1)
+    erb_lint (0.1.2)
       activesupport
       better_html (~> 1.0.7)
       html_tokenizer
@@ -382,7 +382,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.15.0)
+    minitest (5.16.0)
     msgpack (1.5.2)
     multi_json (1.15.0)
     multi_test (0.1.2)
@@ -732,7 +732,7 @@ DEPENDENCIES
   dibber
   discard (~> 1.2)
   dotenv-rails (>= 2.7.6)
-  erb_lint (= 0.1.1)
+  erb_lint (= 0.1.2)
   factory_bot_rails (>= 6.2.0)
   faker (>= 1.9.1)
   geckoboard-ruby
