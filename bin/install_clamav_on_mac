@@ -10,6 +10,7 @@ TMP_FOLDER=$DB_FOLDER/tmp
 RUN_FOLDER=/usr/local/var/run/clamav
 LOG_FOLDER=/usr/local/var/log
 CLAMD_LOG_FILE=$LOG_FOLDER/clamd.log
+CLAMD_SOCKET_FILE=$RUN_FOLDER/clamd.socket
 CLAMD_ERROR_LOG_FILE=$LOG_FOLDER/clamd.error.log
 FRESHCLAM_LOG_FILE=$LOG_FOLDER/freshclam.log
 FRESHCLAM_ERROR_LOG_FILE=$LOG_FOLDER/freshclam.error.log
@@ -49,6 +50,7 @@ sudo mkdir -p "$RUN_FOLDER"
 [ -e "$CLAMD_ERROR_LOG_FILE" ] || sudo touch "$CLAMD_ERROR_LOG_FILE"
 [ -e "$FRESHCLAM_LOG_FILE" ] || sudo touch "$FRESHCLAM_LOG_FILE"
 [ -e "$FRESHCLAM_ERROR_LOG_FILE" ] || sudo touch "$FRESHCLAM_ERROR_LOG_FILE"
+[ -e "$CLAMD_SOCKET_FILE" ] || sudo touch "$CLAMD_SOCKET_FILE"
 sudo chown -R root:wheel "$CONFIG_FOLDER"
 sudo chown -R clamav:clamav "$DB_FOLDER"
 sudo chown -R clamav:clamav "$TMP_FOLDER"
