@@ -32,10 +32,10 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Then I should be on a page showing "Your client’s bank accounts"
   Then I choose 'No'
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of savings or investments does your client have?"
+  Then I should be on a page showing "Which savings or investments does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of assets does your client have?"
+  Then I should be on a page showing "Which assets does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'
@@ -75,10 +75,10 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I should be on a page showing "Your client’s bank accounts"
   Then I choose 'No'
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of savings or investments does your client have?"
+  Then I should be on a page showing "Which savings or investments does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of assets does your client have?"
+  Then I should be on a page showing "Which assets does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'
@@ -116,10 +116,10 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   Then I should be on a page showing "Your client’s bank accounts"
   Then I choose 'No'
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of savings or investments does your client have?"
+  Then I should be on a page showing "Which savings or investments does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
-  Then I should be on a page showing "Which types of assets does your client have?"
+  Then I should be on a page showing "Which assets does your client have?"
   Then I select "None of these"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'

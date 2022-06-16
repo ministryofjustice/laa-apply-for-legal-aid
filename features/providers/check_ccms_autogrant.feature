@@ -6,11 +6,11 @@ Feature: Checking ccms means does NOT auto grant
     Then I visit the applications page
     Then I view the previously created application
     Then I click 'Save and continue'
-    Then I am on the "Which types of savings or investments does your client have?" page
+    Then I am on the "Which savings or investments does your client have?" page
     And I check 'Money not in a bank account'
     Then I fill "savings-amount-cash-field" with "4000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
     Then I check "None of these"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets"
@@ -72,10 +72,10 @@ Feature: Checking ccms means does NOT auto grant
     Then I visit the applications page
     Then I view the previously created application
     Then I click 'Save and continue'
-    Then I am on the "Which types of savings or investments does your client have?" page
+    Then I am on the "Which savings or investments does your client have?" page
     Then I check "None of these"
     Then I click 'Save and continue'
-    Then I am on the "Which types of assets does your client have?" page
+    Then I am on the "Which assets does your client have?" page
     Then I check "None of these"
     Then I click 'Save and continue'
     Then I am on the "Select if your client has received payments from these schemes or charities" page

@@ -817,7 +817,7 @@ en:
         radio_yes: Yes, I agree
     other_assets:
       show:
-        h1-heading: Which types of assets does your client have?
+        h1-heading: Which assets does your client have?
       second_home_conditional_checkbox:
         check_box_second_home: Second property or holiday home
         second_home_mortgage: Enter the outstanding mortgage amount
@@ -916,7 +916,7 @@ en:
             their assets are held under a restraint order
     savings_and_investments:
       show:
-        h1-heading: Which types of savings or investments does your client have?
+        h1-heading: Which savings or investments does your client have?
         none_selected: None of these
     select_offices:
       show:
