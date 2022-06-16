@@ -730,6 +730,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
+        call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
@@ -742,21 +743,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           "data" => [
             { "individuals/matching/individual" => valid_individual_response },
             { "income/paye/paye" => { "income" => [] } },
-            { "income/sa/selfAssessment" => { "registrations" => [], "taxReturns" => [] } },
-            { "income/sa/pensions_and_state_benefits/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/source/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/employments/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/additional_information/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/partnerships/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/uk_properties/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/foreign/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/further_details/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/interests_and_dividends/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/other/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/summary/selfAssessment" => { "taxReturns" => [] } },
-            { "income/sa/trusts/selfAssessment" => { "taxReturns" => [] } },
             { "employments/paye/employments" => [] },
-            { "benefits_and_credits/working_tax_credit/applications" => [{ "awards" => [] }] },
           ] }
       end
 
@@ -767,6 +754,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
+        call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
