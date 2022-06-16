@@ -103,7 +103,7 @@ group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails", ">= 2.7.6"
-  gem "erb_lint", "0.1.1", require: false
+  gem "erb_lint", "0.1.2", require: false
   gem "hirb"
   gem "htmlentities"
   gem "i18n-tasks"
