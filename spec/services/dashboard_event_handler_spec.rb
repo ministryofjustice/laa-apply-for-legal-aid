@@ -95,6 +95,19 @@ RSpec.describe DashboardEventHandler do
       end
     end
 
+    context "saved with_state abandoned" do
+      let(:state) { "abandoned" }
+
+      it "does not fire additional Application jobs" do
+        # one is fired from creating the LegalAidApplication required by the ccms_submission factory
+        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("Applications").at_most(1).times
+      end
+
+      it "fires the PendingCCMSSubmissions job" do
+        expect { subject }.to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions").once
+      end
+    end
+
     context "saved with document_ids_obtained" do
       let(:state) { "document_ids_obtained" }
 
