@@ -13,6 +13,7 @@ module HMRC
       weekly_single_employment: { first_name: "John", last_name: "Smith", nino: "AA333333A", dob: "1933-03-03" },
       tax_refund: { first_name: "Lucky", last_name: "Taxpayer", nino: "BB222222B", dob: "2002-02-02" },
       nic_refund: { first_name: "Nick", last_name: "Overpaid", nino: "CC444444C", dob: "2004-04-04" },
+      no_employments: { first_name: "Claudia", last_name: "Fournier", nino: "JC928374B", dob: "1977-05-19" },
     }.freeze
 
     def self.call(*args)

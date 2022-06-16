@@ -730,6 +730,31 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
+        call
+        expect(AlertManager).not_to have_received(:capture_message)
+      end
+    end
+
+    context "when client has no employments recorded by HMRC" do
+      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: response_hash) }
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "income/paye/paye" => { "income" => [] } },
+            { "employments/paye/employments" => [] },
+          ] }
+      end
+
+      before do
+        allow(AlertManager).to receive(:capture_message)
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it "does not send message to AlertManager with errors" do
+        call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
