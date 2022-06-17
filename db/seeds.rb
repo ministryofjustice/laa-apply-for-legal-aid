@@ -18,6 +18,7 @@ Seeder.monitor DocumentCategory
 Dir[Rails.root.join("db/seeds/*.rb")].each do |seed|
   load seed
 end
+Rake::Task["employ"].invoke if Rails.env.development?
 
 Rails.logger.info Seeder.report.join("\n")
 Rails.logger.info "Seeding completed"
