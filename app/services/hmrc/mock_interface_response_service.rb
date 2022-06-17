@@ -14,8 +14,8 @@ module HMRC
       tax_refund: { first_name: "Lucky", last_name: "Taxpayer", nino: "BB222222B", dob: "2002-02-02" },
       nic_refund: { first_name: "Nick", last_name: "Overpaid", nino: "CC444444C", dob: "2004-04-04" },
       no_employments: { first_name: "Claudia", last_name: "Fournier", nino: "JC928374B", dob: "1977-05-19" },
-      recently_employed: { first_name: "John", last_name: "Jobseeker", nino: "EE555555E", dob: "2005-05-05"},
-      formerly_employed: { first_name: "Mark", last_name: "Slacker", nino: "AA123456A", dob: "2006-06-06"}
+      recently_employed: { first_name: "John", last_name: "Jobseeker", nino: "EE555555E", dob: "2005-05-05" },
+      formerly_employed: { first_name: "Mark", last_name: "Slacker", nino: "AA123456A", dob: "2006-06-06" },
     }.freeze
 
     def self.call(*args)
