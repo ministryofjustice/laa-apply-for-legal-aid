@@ -70,6 +70,15 @@ FactoryBot.define do
       national_insurance_number { "KY123456D" }
     end
 
+    trait :john_jobseeker do
+      not_employed
+      first_name { "John" }
+      last_name { "Jobseeker" }
+      date_of_birth { Date.new(2005, 5, 5) }
+      email { Faker::Internet.safe_email }
+      national_insurance_number { "EE555555E" }
+    end
+
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
     transient do
       with_bank_accounts { 0 }

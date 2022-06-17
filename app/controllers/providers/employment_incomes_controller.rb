@@ -1,6 +1,6 @@
 module Providers
   class EmploymentIncomesController < ProviderBaseController
-    before_action :employments
+    before_action :employments_and_payments
 
     def show
       @applicant = applicant
@@ -19,8 +19,9 @@ module Providers
       @applicant ||= legal_aid_application.applicant
     end
 
-    def employments
+    def employments_and_payments
       @employments = @legal_aid_application.employments
+      @eligible_employment_payments = @legal_aid_application.eligible_employment_payments
     end
 
     def form_params

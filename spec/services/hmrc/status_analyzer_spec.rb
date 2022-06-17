@@ -15,7 +15,7 @@ module HMRC
       end
 
       let(:feature_flag) { true }
-      let(:laa) { create :legal_aid_application, :with_applicant }
+      let(:laa) { create :legal_aid_application, :with_applicant, :with_transaction_period }
       let(:provider_employed_permissions) { true }
       let(:applicant_employed) { true }
 
@@ -37,10 +37,30 @@ module HMRC
       end
 
       context "when provider_enabled_for_employment journey" do
-        context "and applicant not employed" do
+        context "and applicant not employed and no eligible payments" do
           let(:applicant_employed) { false }
 
           it "returns not employed" do
+            expect(service_call).to eq :applicant_not_employed
+          end
+        end
+
+        context "with applicant not employed but eligible employment payments exist" do
+          let(:applicant_employed) { false }
+
+          before { create :employment, :with_payments_in_transaction_period, legal_aid_application: laa }
+
+          it "returns :unexpected_employment_data" do
+            expect(service_call).to eq :unexpected_employment_data
+          end
+        end
+
+        context "with applicant not employed and non-eligible employment payments exist" do
+          let(:applicant_employed) { false }
+
+          before { create :employment, :with_payments_before_transaction_period, legal_aid_application: laa }
+
+          it "returns :unexpected_employment_data" do
             expect(service_call).to eq :applicant_not_employed
           end
         end

@@ -297,6 +297,14 @@ class LegalAidApplication < ApplicationRecord
     extra_employment_information_details.present? || full_employment_details.present?
   end
 
+  def employment_payments
+    employments.map(&:employment_payments).flatten
+  end
+
+  def eligible_employment_payments
+    employment_payments.select { |p| p.date >= transaction_period_start_on }
+  end
+
   def outstanding_mortgage?
     outstanding_mortgage_amount?
   end
