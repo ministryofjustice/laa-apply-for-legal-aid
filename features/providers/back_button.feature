@@ -36,7 +36,7 @@
 #    Then I select "Money not in a bank account"
 #    Then I fill "Cash" with "10000"
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing "Which types of assets does your client have?"
+#    Then I should be on a page showing "Which assets does your client have?"
 #    Then I select "Land"
 #    Then I fill "Land value" with "50000"
 #    Then I click 'Save and continue'
@@ -53,7 +53,7 @@
 #    Then I click link "Back"
 #    Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Which types of assets does your client have?"
+#    Then I should be on a page showing "Which assets does your client have?"
 #    Then I click link "Back"
 #    Then I should be on a page showing "Which types of savings or investments does your client have?"
 #    Then I click link "Back"

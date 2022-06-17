@@ -111,7 +111,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing 'Which types of savings or investments does your client have?'
+    Then I should be on a page showing 'Which savings or investments does your client have?'
     Then I select 'Money not in a bank account'
     Then I fill 'cash' with '456.33'
     Then I click 'Save and continue'
@@ -129,7 +129,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
-    Then I should be on a page showing 'Which types of savings or investments does your client have?'
+    Then I should be on a page showing 'Which savings or investments does your client have?'
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -142,7 +142,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
-    Then I should be on a page showing 'Which types of assets does your client have?'
+    Then I should be on a page showing 'Which assets does your client have?'
     Then I select 'Land'
     Then I fill 'land_value' with '20,000'
     Then I click 'Save and continue'
@@ -159,7 +159,7 @@ Feature: Checking answers backwards and forwards
     Then I view the previously created application
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
-    Then I should be on a page showing 'Which types of assets does your client have?'
+    Then I should be on a page showing 'Which assets does your client have?'
     Then I select 'None of these'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
@@ -224,7 +224,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to view savings via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Savings and investments'
-      Then I should be on a page showing 'Which types of savings or investments does your client have?'
+      Then I should be on a page showing 'Which savings or investments does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'
@@ -233,7 +233,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to view other assets via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Other assets'
-      Then I should be on a page showing 'Which types of assets does your client have?'
+      Then I should be on a page showing 'Which assets does your client have?'
       Then I click 'Save and continue'
       Then I click 'Save and continue'
       Then I should be on a page showing 'Check your answers'

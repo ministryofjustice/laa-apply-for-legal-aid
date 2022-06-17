@@ -175,11 +175,11 @@ Feature: Provider accessibility
     And the page is accessible
     Then I fill 'Offline savings accounts' with '3000'
     And I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
     And the page is accessible
     Then I select "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
     And the page is accessible
     Then I select "Any valuable items worth £500 or more"
     And I fill 'Valuable items value' with '600'

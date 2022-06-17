@@ -10,13 +10,17 @@
       ) %>
 
 </dl>
-
 <% if @legal_aid_application.has_restrictions %>
-  <div class="govuk-body wrap-text govuk-!-margin-bottom-4">
-    <%= @legal_aid_application.restrictions_details %>
-  </div>
-
+  <dl class="govuk-summary-list govuk-!-margin-bottom-0">
+    <%= check_answer_link(
+          name: :restrictions_details,
+          url: check_answer_url_for(journey_type, :restrictions, @legal_aid_application),
+          question: "Details of restrictions",
+          answer: @legal_aid_application.restrictions_details,
+          no_border: @legal_aid_application.has_restrictions?,
+          read_only: read_only
+        ) %>
+  </dl>
   <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-full" style="width: 100%;">
 <% end %>
-
 <div class=" govuk-!-margin-bottom-9"></div>

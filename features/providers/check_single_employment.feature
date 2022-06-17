@@ -40,11 +40,11 @@ Feature: Check single employment
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
 
     When I check "None of these"
     And I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
 
     When I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"

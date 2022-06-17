@@ -523,10 +523,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "Your client’s bank accounts"
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
@@ -578,10 +578,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "Your client’s bank accounts"
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
     Then I select "None of these"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
@@ -665,11 +665,11 @@ Feature: Civil application journeys
     Then I select "Current account"
     Then I fill "offline_current_accounts" with "-10"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
     Then I select "Money not in a bank account"
     Then I fill "Cash" with "10000"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of assets does your client have?"
+    Then I should be on a page showing "Which assets does your client have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
     Then I click 'Save and continue'
@@ -774,7 +774,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Which bank accounts does your client have?"
     Then I select 'None of these'
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of savings or investments does your client have?"
+    Then I should be on a page showing "Which savings or investments does your client have?"
 
   @javascript @vcr
   Scenario: Going to the search page
@@ -789,14 +789,14 @@ Feature: Civil application journeys
   Scenario: Using the back button to change none_of_these checkboxes
     Given I am checking the applicant's means answers
     When I click Check Your Answers Change link for 'Savings and investments'
-    Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
+    Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
     When I select "None of these"
     And I click "Save and continue"
     And I click "Save and continue"
     Then I should be on the 'means_summary' page showing 'Check your answers'
     When I click link "Back"
     When I click link "Back"
-    Then I should be on the "savings_and_investment" page showing "Which types of savings or investments does your client have?"
+    Then I should be on the "savings_and_investment" page showing "Which savings or investments does your client have?"
     When I deselect "None of these"
     And I click "Save and continue"
     Then I should be on the "savings_and_investment" page showing "Select if your client has any of these savings or investments"
@@ -805,12 +805,12 @@ Feature: Civil application journeys
     And I click "Save and continue"
     Then I should be on the 'means_summary' page showing 'Check your answers'
     When I click Check Your Answers Change link for 'Other assets'
-    Then I should be on the "other_assets" page showing "Which types of assets does your client have?"
+    Then I should be on the "other_assets" page showing "Which assets does your client have?"
     When I select "None of these"
     And I click "Save and continue"
     Then I should be on a page showing "Check your answers"
     When I click link "Back"
-    Then I should be on the "other_assets" page showing "Which types of assets does your client have?"
+    Then I should be on the "other_assets" page showing "Which assets does your client have?"
     When I deselect "None of these"
     And I click "Save and continue"
     Then I should be on the "other_assets" page showing "Select if your client has any of these types of assets"

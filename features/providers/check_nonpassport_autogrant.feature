@@ -23,11 +23,11 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Your client’s bank accounts" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Which types of savings or investments does your client have?" page
+    Then I am on the "Which savings or investments does your client have?" page
     And I check "savings-amount-check-box-cash-true-field"
     Then I fill "savings-amount-cash-field" with "4000"
     Then I click 'Save and continue'
-    Then I am on the "Which types of assets does your client have?" page
+    Then I am on the "Which assets does your client have?" page
     Then I check "other-assets-declaration-none-selected-true-field"
     Then I click 'Save and continue'
     Then I am on the "Is your client prohibited from selling or borrowing against their assets?" page
@@ -107,11 +107,11 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I am on the "Your client’s bank accounts" page
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I am on the "Which types of savings or investments does your client have?" page
+    Then I am on the "Which savings or investments does your client have?" page
     And I check "savings-amount-check-box-cash-true-field"
     Then I fill "savings-amount-cash-field" with "1000"
     Then I click 'Save and continue'
-    Then I am on the "Which types of assets does your client have?" page
+    Then I am on the "Which assets does your client have?" page
     Then I check "other-assets-declaration-none-selected-true-field"
     Then I click 'Save and continue'
     Then I am on the "Is your client prohibited from selling or borrowing against their assets?" page
