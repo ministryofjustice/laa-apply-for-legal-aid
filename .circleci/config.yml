@@ -344,17 +344,6 @@ jobs:
         command: |
           ./bin/clean_up_ecr
 
-  delete_uat_branch:
-    executor: cloud-platform-executor
-    steps:
-    - checkout
-    - setup_remote_docker
-    - *setup_uat_kubectl
-    - run:
-        name: Delete UAT release
-        command: |
-          ./bin/delete_uat_release
-
   delete_dependabot_deployment:
     executor: cloud-platform-executor
     steps:
@@ -428,11 +417,6 @@ workflows:
           requires:
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - delete_uat_branch:
-          context: laa-apply-for-legalaid-uat
-          requires:
-            - build_and_push
-          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
             - lint_checks
@@ -493,7 +477,6 @@ workflows:
           type: approval
           requires:
             - deploy_staging
-            - delete_uat_branch
             - slack/on-hold
       - deploy_production:
           context: laa-apply-for-legalaid-production
