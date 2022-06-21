@@ -1429,7 +1429,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context "with one employment with no employment payments" do
         before { create :employment, legal_aid_application: laa }
 
-        it "returns and empty collections" do
+        it "returns an empty collections" do
           expect(laa.eligible_employment_payments).to be_empty
         end
       end

@@ -121,7 +121,7 @@ Feature: Check multiple employment
     Then I should be on a page showing "Application for civil legal aid certificate"
 
   @javascript @vcr @hmrc_use_dev_mock
-  Scenario: I am able to continue if applicant is unemployed buy has income from previous employment
+  Scenario: I am able to continue if applicant is unemployed but has income from previous employment
     Given I am logged in as a provider
     And csrf is enabled
     And an applicant named John Jobseeker has completed his true layer interaction
