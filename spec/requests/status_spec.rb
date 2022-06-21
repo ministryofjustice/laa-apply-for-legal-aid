@@ -60,7 +60,7 @@ RSpec.describe StatusController, type: :request do
 
     context "when an infrastructure problem exists" do
       before do
-        allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad)
+        allow(ActiveRecord::Base.connection).to receive(:active?).and_raise(PG::ConnectionBad, "error")
         allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
 
         connection = double("connection")
