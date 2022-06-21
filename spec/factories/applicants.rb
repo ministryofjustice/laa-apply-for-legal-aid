@@ -76,7 +76,7 @@ FactoryBot.define do
       last_name { "Jobseeker" }
       date_of_birth { Date.new(2005, 5, 5) }
       email { Faker::Internet.safe_email }
-      national_insurance_number { "EE555555E" }
+      national_insurance_number { "BB123456B" }
     end
 
     # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
