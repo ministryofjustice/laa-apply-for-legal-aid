@@ -476,6 +476,41 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       }
     end
 
+    context "when response data \"income/paye/paye\" \"income\" contains multiple inPayPeriod1 including one zero" do
+      let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
+
+      let(:response_hash) do
+        {
+          "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "employments/paye/employments" => valid_employments_response },
+            {
+              "income/paye/paye" => {
+                "income" => [
+                  {
+                    "paymentDate" => "2021-01-01",
+                    "grossEarningsForNics" => {
+                      "inPayPeriod1" => 2345.29,
+                    },
+                  },
+                  {
+                    "paymentDate" => "2021-01-01",
+                    "grossEarningsForNics" => {
+                      "inPayPeriod1" => 0,
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        }
+      end
+
+      it { expect(instance.call).to be_truthy }
+    end
+
     context "when response data \"income/paye/paye\" \"income\" contains valid format of paymentDate" do
       let(:hmrc_response) { create(:hmrc_response, response: response_hash) }
 
