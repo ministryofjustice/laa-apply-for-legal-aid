@@ -89,5 +89,37 @@ FactoryBot.define do
                net_employment_income: 1902.3
       end
     end
+
+    trait :with_payments_in_transaction_period do
+      after(:create) do |employment|
+        start_date = employment.legal_aid_application.transaction_period_start_on + 2.days
+        [start_date + 2.days, start_date + 32.days, start_date + 64.days].each do |payment_date|
+          create :employment_payment,
+                 employment:,
+                 date: payment_date,
+                 gross: 2345.29,
+                 benefits_in_kind: 0.0,
+                 tax: -257.2,
+                 national_insurance: -185.79,
+                 net_employment_income: 1902.3
+        end
+      end
+    end
+
+    trait :with_payments_before_transaction_period do
+      after(:create) do |employment|
+        start_date = employment.legal_aid_application.transaction_period_start_on - 92.days
+        [start_date + 2.days, start_date + 32.days, start_date + 64.days].each do |payment_date|
+          create :employment_payment,
+                 employment:,
+                 date: payment_date,
+                 gross: 2345.29,
+                 benefits_in_kind: 0.0,
+                 tax: -257.2,
+                 national_insurance: -185.79,
+                 net_employment_income: 1902.3
+        end
+      end
+    end
   end
 end

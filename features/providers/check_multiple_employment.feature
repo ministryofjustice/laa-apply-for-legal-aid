@@ -119,3 +119,18 @@ Feature: Check multiple employment
 
     When I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
+
+  @javascript @vcr @hmrc_use_dev_mock
+  Scenario: I am able to continue if applicant is unemployed but has income from previous employment
+    Given I am logged in as a provider
+    And csrf is enabled
+    And an applicant named John Jobseeker has completed his true layer interaction
+    And the system is prepped for the employed journey
+
+    When I visit the applications page
+    And I click link 'John Jobseeker'
+    Then I should be on a page showing "Continue John Jobseeker's financial assessment"
+
+    When I click 'Continue'
+    Then I should be on a page showing "HMRC found a record of your client's employment"
+

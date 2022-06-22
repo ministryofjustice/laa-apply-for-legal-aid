@@ -1408,6 +1408,79 @@ RSpec.describe LegalAidApplication, type: :model do
         expect(laa.hmrc_response_use_case_one).to eq use_case_one
       end
     end
+
+    describe "#eligible_employment_payments" do
+      let(:laa) { create :legal_aid_application, :with_transaction_period }
+
+      context "with one employment with employment payments" do
+        before do
+          emp = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp, date: 1.month.ago
+          create :employment_payment, employment: emp, date: 2.months.ago
+        end
+
+        it "returns two employment records" do
+          payments = laa.eligible_employment_payments
+          expect(payments.size).to eq 2
+          expect(payments.map(&:class).uniq).to eq [EmploymentPayment]
+        end
+      end
+
+      context "with one employment with no employment payments" do
+        before { create :employment, legal_aid_application: laa }
+
+        it "returns an empty collections" do
+          expect(laa.eligible_employment_payments).to be_empty
+        end
+      end
+
+      context "with no employments" do
+        it "returns an empty collection" do
+          expect(laa.eligible_employment_payments).to be_empty
+        end
+      end
+
+      context "with multiple employments" do
+        before do
+          emp1 = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp1, date: 1.month.ago
+          create :employment_payment, employment: emp1, date: 2.months.ago
+          emp2 = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp2, date: 1.month.ago
+        end
+
+        it "returns one collection of three records" do
+          expect(laa.eligible_employment_payments.size).to eq 3
+        end
+      end
+
+      context "with all payments before start of transaction period" do
+        before do
+          emp1 = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
+          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
+          emp2 = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month
+        end
+
+        it "returns an empty collection" do
+          expect(laa.eligible_employment_payments).to be_empty
+        end
+      end
+
+      context "with one payment in transaction period, others before" do
+        before do
+          emp1 = create :employment, legal_aid_application: laa
+          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
+          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days
+          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
+        end
+
+        it "returns a collection of just the one record in the transaction period" do
+          expect(laa.eligible_employment_payments.size).to eq 1
+        end
+      end
+    end
   end
 
 private

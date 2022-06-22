@@ -1,21 +1,25 @@
 require "rails_helper"
 
 RSpec.describe "employed incomes request", type: :request do
-  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_single_employment, applicant:) }
+  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_transaction_period, :with_single_employment, applicant:) }
   let(:applicant) { create(:applicant, :not_employed) }
   let(:provider) { application.provider }
+  let(:setup_tasks) { {} }
 
   describe "GET /providers/applications/:id/employed_income" do
     subject { get providers_legal_aid_application_employment_income_path(application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before do
+        subject
+      end
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "when the provider is authenticated" do
       before do
+        setup_tasks
         login_as provider
         subject
       end
@@ -24,8 +28,11 @@ RSpec.describe "employed incomes request", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context "when applicant is not employed" do
+      context "when applicant is not employed but has employment payment records" do
         let(:applicant) { create(:applicant, :not_employed) }
+        let(:setup_tasks) do
+          create :employment, :with_payments_in_transaction_period, legal_aid_application: application
+        end
 
         it "displays correct text when applicant is not_employed" do
           expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.not_employed"))
