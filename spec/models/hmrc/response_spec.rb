@@ -113,7 +113,7 @@ RSpec.describe HMRC::Response, type: :model do
       expect(persistor_class).to have_received(:call).with(hmrc_response)
     end
 
-    context "with a valid HMR response" do
+    context "with a valid HMRC response" do
       before do
         allow(HMRC::ParsedResponse::Validator).to receive(:call).and_return(true)
       end

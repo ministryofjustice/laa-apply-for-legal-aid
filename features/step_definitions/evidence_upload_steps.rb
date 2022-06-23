@@ -41,7 +41,7 @@ Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |
 end
 
 Then(/^I should be able to delete ['|"](.*?)['|"]/) do |filename|
-  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//input[contains(@class,'button-as-link')]").click
+  find(:xpath, "//td[text()='#{filename}']/following-sibling::td//button[contains(@class,'button-as-link')]").click
 end
 
 Given("csrf is enabled") do
@@ -50,6 +50,6 @@ end
 
 And("I should see {int} uploaded files") do |int|
   sleep 1
-  delete_buttons = find_all(:xpath, "//td//input[contains(@class,'button-as-link')]")
+  delete_buttons = find_all(:xpath, "//td//button[contains(@class,'button-as-link')]")
   expect(delete_buttons.count).to eq int
 end

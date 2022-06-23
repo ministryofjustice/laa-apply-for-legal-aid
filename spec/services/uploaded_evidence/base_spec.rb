@@ -26,7 +26,7 @@ module UploadedEvidence
       end
 
       context "with delete button pressed" do
-        let(:params) { { delete_button: "Delete" } }
+        let(:params) { { delete_button: "" } }
 
         it "calls the DeletionService" do
           expect(DeletionService).to receive(:call).with(controller)

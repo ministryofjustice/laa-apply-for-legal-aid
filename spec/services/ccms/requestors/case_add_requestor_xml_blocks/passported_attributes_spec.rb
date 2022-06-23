@@ -70,7 +70,7 @@ module CCMS
 
             it "is populated with the delegated functions date" do
               block = XmlExtractor.call(xml, :devolved_powers_date)
-              expect(block.children.text).to eq legal_aid_application.used_delegated_functions_on.to_s(:ccms_date)
+              expect(block.children.text).to eq legal_aid_application.used_delegated_functions_on.to_fs(:ccms_date)
             end
           end
         end

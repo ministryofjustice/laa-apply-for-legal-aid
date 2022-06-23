@@ -87,11 +87,20 @@ module UploadedEvidence
     end
 
     def delete_button_pressed?
-      params[:delete_button].present?
+      button_pressed?(:delete_button)
     end
 
     def save_and_continue_button_pressed?
       params[:continue_button].present?
+    end
+
+    def button_pressed?(button)
+      # does the parameter exist?
+      return false if params[button].nil?
+
+      # The current helper renders the buttons with a content value rather than
+      # an attribute therefore it will be present but have an empty string
+      params[button].empty?
     end
 
     def passporting_benefit

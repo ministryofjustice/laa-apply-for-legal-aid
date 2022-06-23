@@ -36,7 +36,7 @@ module CCMS
         xml.__send__(:"clientbim:ClientInfo") do
           xml.__send__(:"clientbio:FirstName", @applicant.first_name)
           xml.__send__(:"clientbio:Surname", @applicant.last_name)
-          xml.__send__(:"clientbio:DateOfBirth", @applicant.date_of_birth.to_s(:ccms_date))
+          xml.__send__(:"clientbio:DateOfBirth", @applicant.date_of_birth.to_fs(:ccms_date))
           xml.__send__(:"clientbio:NINumber", @applicant.national_insurance_number)
         end
       end

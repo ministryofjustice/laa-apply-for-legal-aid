@@ -36,7 +36,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
       it "shows the client bank account name and balance" do
         subject
         expect(unescaped_response_body).to include(bank_provider.name)
-        expect(response.body).to include(bank_account.balance.to_s(:delimited))
+        expect(response.body).to include(bank_account.balance.to_fs(:delimited))
       end
     end
   end
@@ -113,7 +113,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           let(:offline_savings_accounts) { rand(1...1_000_000.0).round(2) }
 
           it "updates the savings amount" do
-            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts.to_s))
+            expect(legal_aid_application.reload.savings_amount.offline_savings_accounts).to eq(BigDecimal(offline_savings_accounts.to_fs))
           end
 
           it "redirects to the savings and investments page" do

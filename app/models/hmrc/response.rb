@@ -33,6 +33,8 @@ module HMRC
   private
 
     def persist_employment_records
+      return unless saved_changes?
+
       HMRC::ParsedResponse::Persistor.call(self)
     end
   end
