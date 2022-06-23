@@ -17,5 +17,10 @@ FactoryBot.define do
       role { "application.non_passported.employment.*" }
       description { "Can submit applications for employed applicants " }
     end
+
+    trait :bank_statement_upload do
+      role { "application.non_passported.bank_statement_upload.*" }
+      description { "Can upload bank statements" }
+    end
   end
 end
