@@ -14,8 +14,6 @@
         <%= t('.info') %>
       </p>
 
-      <%= list_from_translation_path(".open_banking_consents.show.#{@legal_aid_application.applicant_employed? ? "employed" : "unemployed"}") %>
-
       <details class="govuk-details" data-module="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text">
@@ -31,18 +29,30 @@
         </div>
       </details>
 
-      <%= form.govuk_radio_button(
-              :provider_received_citizen_consent,
-              true,
-              link_errors: true,
-              label: {text: t('.radio_yes')}
-          ) %>
+      <h2 class="govuk-heading-m">
+        <%= t('.provider_instructions.heading') %>
+      </h2>
 
-      <%= form.govuk_radio_button(
+      <%= numbered_list_from_translation_path('.open_banking_consents.show.provider_instructions') %>
+
+      <%= form.govuk_radio_buttons_fieldset(
               :provider_received_citizen_consent,
-              false,
-              label: {text: t('.radio_no')}
-          ) %>
+              legend: { size: 'm', tag: 'h2', text: t('.radio_legend') }
+              ) do %>
+        <%= form.govuk_radio_button(
+                :provider_received_citizen_consent,
+                true,
+                link_errors: true,
+                label: {text: t('.radio_yes.label')},
+                hint: {text: t('.radio_yes.hint')}
+            ) %>
+
+        <%= form.govuk_radio_button(
+                :provider_received_citizen_consent,
+                false,
+                label: {text: t('.radio_no.label')}
+            ) %>
+      <% end %>
 
       <div class="govuk-!-padding-bottom-5"></div>
 

@@ -806,17 +806,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
-        heading: Do you agree with the following?
-        info: "Your client:"
-        employed:
-          list: |
-            uses online banking for all of their current accounts
-            will let a trusted third-party financial service provider called TrueLayer collect 3 months of their bank statements on behalf of the LAA
-        unemployed:
-          list: |
-            uses online banking for all of their current accounts
-            will let a trusted third-party financial service provider called TrueLayer collect 3 months of their bank statements on behalf of the LAA
-            is not employed
+        heading: We need your client's bank statements from the last 3 months
+        info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
         details_summary: What is TrueLayer?
         details_content: |
           TrueLayer acts as a messenger between your client's bank and the LAA.
@@ -828,8 +819,23 @@ en:
             not see your client's online banking sign-in details
             not share your client's data with anyone other than the LAA
             not have ongoing access to your client's bank accounts
-        radio_no: No, I do not agree
-        radio_yes: Yes, I agree
+        provider_instructions:
+          heading: How your client can share their bank statements
+          list: |
+            They access 'Apply for legal aid' using a link we'll send them in an email.
+            They select the banks they use online banking with.
+            We redirect your client to their bank's website or app.
+            They give consent for TrueLayer to securely access their account details.
+            TrueLayer shares their bank statements with us.
+        radio_legend: Can your client share their bank statements with us via TrueLayer?
+        radio_no:
+          label: 'No'
+          hint: |
+            You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements
+        radio_yes:
+          label: 'Yes'
+          hint: |
+            Your client must have an email address and use online banking for all of their current accounts.
     other_assets:
       show:
         h1-heading: Which assets does your client have?
