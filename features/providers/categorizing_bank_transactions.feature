@@ -9,7 +9,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Your client's income"
     Then I choose "No"
     Then I click 'Save and continue'
-    And I should be on a page showing 'Which types of income does your client receive?'
+    And I should be on a page showing 'Which payments does your client receive?'
     And I should see 'Benefits'
     And I should see 'Financial help from friends or family'
     And I should see 'Maintenance payments'

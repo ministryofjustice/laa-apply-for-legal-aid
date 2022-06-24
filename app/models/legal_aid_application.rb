@@ -78,6 +78,7 @@ class LegalAidApplication < ApplicationRecord
            :complete_passported_means!,
            :enter_applicant_details!,
            :provider_confirm_applicant_eligibility!,
+           :provider_assess_means!,
            :provider_enter_means!,
            :provider_enter_merits!,
            :provider_used_delegated_functions!,
@@ -501,6 +502,10 @@ class LegalAidApplication < ApplicationRecord
 
   def hmrc_response_use_case_one
     hmrc_responses.detect { |response| response.use_case == "one" }
+  end
+
+  def uploading_bank_statements?
+    provider.bank_statement_upload_permissions? && !provider_received_citizen_consent?
   end
 
 private

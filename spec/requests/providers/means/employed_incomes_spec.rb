@@ -52,7 +52,7 @@ RSpec.describe "employed incomes request", type: :request do
   end
 
   describe "PATCH /providers/applications/:id/means/employed_income" do
-    subject(:patch_employment_income) { patch providers_legal_aid_application_means_employment_income_path(application), params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_means_employment_income_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
@@ -68,7 +68,6 @@ RSpec.describe "employed incomes request", type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        patch_employment_income
       end
 
       context "when Form submitted with continue button" do
@@ -79,13 +78,34 @@ RSpec.describe "employed incomes request", type: :request do
         end
 
         it "updates legal aid application restriction information" do
+          request
           expect(application.reload.extra_employment_information).to be true
           expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
-        context "when the provider has confirmed the information" do
-          it "redirects to income summary page" do
-            expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
+        context "when provider does not have bank_statement_upload permissions" do
+          before do
+            provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          end
+
+          context "when the provider has confirmed the information" do
+            it "redirects to income summary page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
+            end
+          end
+        end
+
+        context "when provider does have bank_statement_upload permissions" do
+          before do
+            provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          end
+
+          context "when the provider has permission to upload bank statements" do
+            it "redirects to identify_types_of_incomes page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
+            end
           end
         end
 
@@ -95,6 +115,7 @@ RSpec.describe "employed incomes request", type: :request do
           let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [salary, benefits] }
 
           it "redirects to check passported answers" do
+            request
             expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(application))
           end
         end
@@ -103,6 +124,7 @@ RSpec.describe "employed incomes request", type: :request do
           let(:extra_employment_information_details) { "" }
 
           it "displays error" do
+            request
             expect(response.body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
           end
 
@@ -110,6 +132,7 @@ RSpec.describe "employed incomes request", type: :request do
             let(:extra_employment_information) { "" }
 
             it "displays error" do
+              request
               expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information.blank"))
             end
           end
@@ -126,7 +149,7 @@ RSpec.describe "employed incomes request", type: :request do
         context "and after success" do
           before do
             login_as provider
-            patch_employment_income
+            request
             application.reload
           end
 
