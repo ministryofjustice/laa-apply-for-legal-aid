@@ -85,7 +85,7 @@ Feature: Provider accessibility
     And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which types of income does your client receive?"
+    Then I should be on a page showing "Which payments does your client receive?"
     And the page is accessible
     Then I select 'Benefits'
     And I click 'Save and continue'
@@ -114,7 +114,7 @@ Feature: Provider accessibility
     And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which regular payments does your client make?"
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
     And the page is accessible
     Then I select 'Housing payments'
     Then I click 'Save and continue'

@@ -518,7 +518,7 @@ en:
 
     identify_types_of_outgoings:
       show:
-        page_heading: Which regular payments does your client make?
+        page_heading: Which payments does your client make?
       update:
         none_selected: Select if your client makes any regular payments
     income_summary:
@@ -669,7 +669,7 @@ en:
           page_heading: Select payments your client receive in cash
       identify_types_of_incomes:
         show:
-          page_heading: Which types of income does your client receive?
+          page_heading: Which payments does your client receive?
         update:
           none_selected: Select if your client receives any types of income
       has_dependants:

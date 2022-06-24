@@ -43,7 +43,6 @@ en:
     cash_incomes:
       show:
         page_heading: Select payments you receive in cash
-
     cash_outgoings:
       show:
         page_heading: Select payments you make in cash
