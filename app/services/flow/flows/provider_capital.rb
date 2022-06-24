@@ -42,6 +42,7 @@ module Flow
               :outgoings_summary
             end
           end,
+<<<<<<< HEAD
           check_answers: lambda do |application|
             if application.uploading_bank_statements?
               application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries
@@ -55,6 +56,13 @@ module Flow
           forward: :has_dependants,
           check_answers: :means_summaries,
         },
+=======
+        },
+        cash_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
+          forward: :has_dependants,
+        },
+>>>>>>> Add provider means flow
         # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
@@ -137,13 +145,20 @@ module Flow
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
           forward: lambda do |application|
+<<<<<<< HEAD
             if application.uploading_bank_statements?
+=======
+            if application.provider.bank_statement_upload_permissions?
+>>>>>>> Add provider means flow
               :identify_types_of_incomes
             else
               application.income_types? ? :income_summary : :no_income_summaries
             end
           end,
+<<<<<<< HEAD
           check_answers: :means_summaries,
+=======
+>>>>>>> Add provider means flow
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
