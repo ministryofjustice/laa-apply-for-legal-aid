@@ -10,3 +10,5 @@ means_report,TRUE,ADMIN1,FALSE,FALSE
 merits_report,TRUE,ADMIN1,FALSE,FALSE
 statement_of_case,FALSE,,FALSE,FALSE
 statement_of_case_pdf,TRUE,ADMIN1,FALSE,FALSE
+bank_statement_evidence,FALSE,,FALSE,FALSE
+bank_statement_evidence_pdf,TRUE,BSTMT,FALSE,FALSE
