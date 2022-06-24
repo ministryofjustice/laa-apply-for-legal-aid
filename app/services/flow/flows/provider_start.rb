@@ -114,11 +114,20 @@ module Flow
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
           forward: lambda do |application|
-            next_step = :non_passported_client_instructions
-            next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
-
-            application.provider_received_citizen_consent? ? next_step : :use_ccms
+            if application.open_banking_consent?
+              next_step = :non_passported_client_instructions
+              next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
+              application.provider_received_citizen_consent? ? next_step : :use_ccms
+            else
+              next_step = :bank_statement_uploads
+              next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
+            end
+            next_step
           end,
+        },
+        bank_statement_uploads: {
+          path: ->(application) { urls.providers_legal_aid_application_bank_statement_uploads_path(application) },
+          forward: :non_passported_provider_flow_todo,
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },

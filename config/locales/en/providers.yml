@@ -472,6 +472,24 @@ en:
         feedback_suffix: " to help us improve this service."
         view_completed_application: View completed application
         back_to_your_applications: Back to your applications
+    bank_statement_uploads:
+      show:
+        h1-heading: Upload bank statements
+        info: We need bank statements from the last 3 months for all of your client's bank accounts.
+        h2-heading: Uploaded files
+        no_files: Files uploaded will appear here.
+        upload_file: Upload files
+        size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
+        dropzone_message: Drag and drop files here or
+        choose_files_btn: Choose files
+        file_not_uploaded_error: Upload the selected file
+      uploaded_files:
+        delete: Delete
+        filename: Filename
+        size: Size
+        status: Status
+        uploaded: Uploaded
+        title: Files added
     uploaded_evidence_collections:
       upload_evidence:
         single_item: "Use this page to provide evidence of %{evidence_type}."
