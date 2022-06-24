@@ -8,12 +8,40 @@ module Flow
         },
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
-          forward: :income_summary,
+          forward: lambda do |application|
+            if application.uploading_bank_statements?
+              application.transaction_types.credits.any? ? :cash_incomes : :student_finances
+            else
+              :income_summary
+            end
+          end,
+          check_answers: :means_summaries,
+        },
+        cash_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
+          forward: :student_finances,
+          check_answers: :means_summaries,
+        },
+        student_finances: {
+          path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
+          forward: :identify_types_of_outgoings,
+          check_answers: :means_summaries,
         },
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
-          forward: :outgoings_summary,
+          forward: lambda do |application|
+            if application.uploading_bank_statements?
+              application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+            else
+              :outgoings_summary
+            end
+          end,
         },
+        cash_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
+          forward: :has_dependants,
+        },
+        # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
         applicant_bank_accounts: {
@@ -94,7 +122,13 @@ module Flow
         },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
-          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
+          forward: lambda do |application|
+            if application.provider.bank_statement_upload_permissions?
+              :identify_types_of_incomes
+            else
+              application.income_types? ? :income_summary : :no_income_summaries
+            end
+          end,
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },

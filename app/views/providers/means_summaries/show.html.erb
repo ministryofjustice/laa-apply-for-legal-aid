@@ -2,6 +2,10 @@
 
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
 
+  <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
+    <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence) %>
+  <% end %>
+
   <% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? %>
     <% if @legal_aid_application.hmrc_employment_income? %>
       <% if @legal_aid_application.has_multiple_employments? %>
@@ -20,6 +24,7 @@
          url: :income_summary,
           transaction_types: TransactionType.credits
       ) %>
+
   <% if @legal_aid_application.value_of_student_finance %>
     <h3 class="govuk-heading-m"><%= t('.student_finance.heading') %></h3>
 
