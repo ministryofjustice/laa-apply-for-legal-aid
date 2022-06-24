@@ -203,8 +203,8 @@ Feature: Civil application journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose 'Yes, I agree'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
@@ -260,8 +260,8 @@ Feature: Civil application journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose 'Yes, I agree'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
@@ -383,8 +383,8 @@ Feature: Civil application journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose 'Yes, I agree'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
@@ -408,8 +408,8 @@ Feature: Civil application journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose 'No, I do not agree'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing 'You need to complete this application in CCMS'
 
@@ -475,8 +475,8 @@ Feature: Civil application journeys
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose 'Yes, I agree'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     Then I click link 'Continue'
