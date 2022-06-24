@@ -809,9 +809,14 @@ en:
         heading: We need your client's bank statements from the last 3 months
         info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
         details_summary: What is TrueLayer?
-        details_content: |
-          TrueLayer acts as a messenger between your client's bank and the LAA.
-          It lets your client quickly and securely share their bank statements without having to gather physical bank statements.
+        details_content_html: |
+          <a href='https://truelayer.com/data' target="_blank">TrueLayer</a> is a trusted third-party financial service
+          provider that acts as a messenger between your client's bank and the LAA.
+          <br>
+          <br>
+          It allows your client to quickly and securely share their bank statements without having to gather physical bank statements.
+          <br>
+          <br>
           They’re regulated by the Financial Conduct Authority (FCA) and will:
         details:
           list: |
