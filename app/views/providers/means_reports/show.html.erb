@@ -1,4 +1,7 @@
 <%= page_template page_title: t('.heading'), back_link: :none do %>
+  <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
+  <% @cfe_result = cfe_result if @cfe_result.nil? %>
+  <% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
 
   <%= render 'shared/application_ref', legal_aid_application: @legal_aid_application %>
 
