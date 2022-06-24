@@ -87,10 +87,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController, type: :request
     end
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-        request
-      end
+      before { login_as provider }
 
       context "when form submitted with continue button" do
         let(:submit_button) do
@@ -100,41 +97,58 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController, type: :request
         end
 
         it "updates legal aid application employment details" do
+          request
           expect(application.reload.full_employment_details).to eq full_employment_details
         end
 
-        it "redirects to income summary page" do
-          expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
+        context "when uploading bank statements" do
+          before do
+            application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+            application.update!(provider_received_citizen_consent: false)
+          end
+
+          it "redirects to identify_types_of_income page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
+          end
+        end
+
+        context "when not uploading bank statements" do
+          before do
+            application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+            application.update!(provider_received_citizen_consent: true)
+          end
+
+          it "redirects to income_summary or no_income_summary page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
+                            .or redirect_to(providers_legal_aid_application_income_summary_index_path(application))
+          end
         end
 
         context "when params are invalid" do
           let(:full_employment_details) { "" }
 
           it "displays error" do
+            request
             expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.full_employment_details.blank"))
           end
         end
       end
 
       context "when form submitted with Save as draft button" do
-        let(:submit_button) do
-          {
-            draft_button: "Save as draft",
-          }
-        end
+        let(:submit_button) { { draft_button: "Save as draft" } }
 
         context "when after success" do
-          before do
-            login_as provider
-            request
-            application.reload
-          end
+          before { login_as provider }
 
           it "updates the legal_aid_application.extra_employment_information" do
-            expect(application.full_employment_details).to eq full_employment_details
+            request
+            expect(application.reload.full_employment_details).to eq full_employment_details
           end
 
           it "redirects to the list of applications" do
+            request
             expect(response).to redirect_to providers_legal_aid_applications_path
           end
         end
