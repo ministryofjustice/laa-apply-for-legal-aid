@@ -12,6 +12,7 @@ module V1
       return render json: { error: original_file_error_for(:file_virus, file_name: file.original_filename) }, status: :bad_request if malware_scan.virus_found?
       return render json: { error: original_file_error_for(:system_down) }, status: :bad_request unless malware_scan.scanner_working
 
+      legal_aid_application.statement_of_case.update(statement: extract_text(file))
       legal_aid_application.attachments.create document: file,
                                                attachment_type: ATTACHMENT_TYPE,
                                                original_filename: file.original_filename,
@@ -23,6 +24,13 @@ module V1
 
     def provider_uploader
       legal_aid_application.provider
+    end
+
+    def extract_text(file)
+      image = RTesseract.new(file.tempfile.path.to_s)
+      image.to_s
+    rescue StandardError
+      String.empty
     end
 
     def error_path
