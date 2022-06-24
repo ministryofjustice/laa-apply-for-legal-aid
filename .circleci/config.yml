@@ -412,11 +412,6 @@ workflows:
           requires:
           - lint_checks
           <<: *generic-slack-fail-post-step
-      - deploy_main_uat:
-          context: laa-apply-for-legalaid-uat
-          requires:
-            - build_and_push
-          <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
             - lint_checks
@@ -424,6 +419,13 @@ workflows:
       - integration_tests:
           requires:
             - lint_checks
+          <<: *generic-slack-fail-post-step
+      - deploy_main_uat:
+          context: laa-apply-for-legalaid-uat
+          requires:
+            - integration_tests
+            - unit_tests
+            - build_and_push
           <<: *generic-slack-fail-post-step
       - deploy_staging:
           context: laa-apply-for-legalaid-staging
@@ -472,12 +474,13 @@ workflows:
               ]
             }
           requires:
+            - deploy_main_uat
             - deploy_staging
       - hold_production:
           type: approval
           requires:
+            - deploy_main_uat
             - deploy_staging
-            - slack/on-hold
       - deploy_production:
           context: laa-apply-for-legalaid-production
           requires:
