@@ -7,6 +7,8 @@ module Flow
           forward: lambda do |application|
             if application.has_dependants?
               :dependants
+            elsif application.uploading_bank_statements?
+              :own_homes
             else
               application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
             end
@@ -32,6 +34,8 @@ module Flow
           forward: lambda { |application, has_other_dependant|
             if has_other_dependant
               :dependants
+            elsif application.uploading_bank_statements?
+              :own_homes
             else
               application.outgoing_types? ? :outgoings_summary : :no_outgoings_summaries
             end

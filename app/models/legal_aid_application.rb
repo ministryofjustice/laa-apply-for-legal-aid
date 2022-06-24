@@ -503,6 +503,10 @@ class LegalAidApplication < ApplicationRecord
     hmrc_responses.detect { |response| response.use_case == "one" }
   end
 
+  def uploading_bank_statements?
+    provider.bank_statement_upload_permissions? && !provider_received_citizen_consent?
+  end
+
 private
 
   def bank_transactions_by_type(type)

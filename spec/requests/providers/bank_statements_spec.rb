@@ -288,10 +288,9 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        # TODO: this will need to change to the new provider means flow
-        it "redirects to check_your_answers" do
+        it "redirects to identify_types_of_incomes" do
           request
-          expect(response).to redirect_to providers_legal_aid_application_check_provider_answers_path
+          expect(response).to redirect_to providers_legal_aid_application_means_identify_types_of_income_path
         end
       end
 

@@ -8,11 +8,34 @@ module Flow
         },
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
-          forward: :income_summary,
+          forward: lambda do |application|
+            if application.uploading_bank_statements?
+              application.transaction_types.credits.any? ? :cash_incomes : :student_finances
+            else
+              :income_summary
+            end
+          end,
+          check_answers: :means_summaries,
+        },
+        cash_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
+          forward: :student_finances,
+          check_answers: :means_summaries,
+        },
+        student_finances: {
+          path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
+          forward: :identify_types_of_outgoings,
+          check_answers: :means_summaries,
         },
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
-          forward: :outgoings_summary,
+          forward: lambda do |application|
+            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+          end,
+        },
+        cash_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
+          forward: :has_dependants,
         },
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
