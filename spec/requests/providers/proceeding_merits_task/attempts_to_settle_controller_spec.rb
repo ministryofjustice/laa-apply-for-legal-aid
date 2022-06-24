@@ -53,7 +53,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         login_as provider
       end
 
-      context "Form submitted using Continue button" do
+      context "when Form submitted using Continue button" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects provider back to the merits task list" do
@@ -95,7 +95,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "when Form submitted using Save as draft button" do
         subject do
           patch providers_merits_task_list_attempts_to_settle_path(proceeding), params: params.merge(submit_button)
         end

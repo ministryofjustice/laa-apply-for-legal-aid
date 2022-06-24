@@ -39,7 +39,7 @@ RSpec.describe "provider percentage share of home test", type: :request do
         login_as provider
       end
 
-      context "Submitted with Continue button" do
+      context "when submitted with Continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -78,7 +78,7 @@ RSpec.describe "provider percentage share of home test", type: :request do
         end
       end
 
-      context "Submitted with Save as draft button" do
+      context "when submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
