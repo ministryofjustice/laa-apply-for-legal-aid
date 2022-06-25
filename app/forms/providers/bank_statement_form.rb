@@ -1,6 +1,6 @@
 module Providers
-  class BankStatementUploadForm < BaseFileUploaderForm
-    form_for BankStatementUpload
+  class BankStatementForm < BaseFileUploaderForm
+    form_for BankStatement
 
     attr_accessor :statement, :original_file, :original_filename, :provider_uploader, :upload_button_pressed
 
@@ -22,7 +22,7 @@ module Providers
 
     def create_attachment(original_file)
       model.legal_aid_application.attachments.create document: original_file,
-                                                     attachment_type: "client_bank_statement",
+                                                     attachment_type: "bank_statement_evidence",
                                                      original_filename: @original_file.original_filename,
                                                      attachment_name: sequenced_attachment_name
     end

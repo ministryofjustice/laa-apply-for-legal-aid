@@ -86,7 +86,7 @@ Rails.application.routes.draw do
     resources :legal_aid_applications, only: [:destroy]
     resources :workers, only: [:show]
     resources :statement_of_cases, only: [:create]
-    resources :bank_statement_uploads, only: [:create]
+    resources :bank_statements, only: [:create]
     resources :uploaded_evidence_collections, only: [:create]
     resources :providers, only: [:update]
   end
@@ -152,8 +152,8 @@ Rails.application.routes.draw do
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"
-      resource :bank_statement_uploads, only: %i[show update destroy] do
-        get "/list", to: "bank_statement_uploads#list"
+      resource :bank_statements, only: %i[show update destroy] do
+        get "/list", to: "bank_statements#list"
       end
       resource :capital_introduction, only: %i[show update]
       resources :check_provider_answers, only: [:index] do

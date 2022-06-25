@@ -1,7 +1,7 @@
 module V1
-  class BankStatementUploadsController < ApiController
+  class BankStatementsController < ApiController
     include MalwareScanning
-    ATTACHMENT_TYPE = "client_bank_statement".freeze
+    ATTACHMENT_TYPE = "bank_statement_evidence".freeze
 
     def create
       return head :not_found unless legal_aid_application
@@ -26,7 +26,7 @@ module V1
     end
 
     def error_path
-      "bank_statement_upload"
+      "bank_statement"
     end
 
     def legal_aid_application
@@ -38,8 +38,8 @@ module V1
     end
 
     def sequenced_attachment_name
-      if legal_aid_application.attachments.statement_of_case.any?
-        most_recent_name = legal_aid_application.attachments.bank_statement_uploads.order(:attachment_name).last.attachment_name
+      if legal_aid_application.attachments.bank_statement_evidence.any?
+        most_recent_name = legal_aid_application.attachments.bank_statement_evidence.order(:attachment_name).last.attachment_name
         increment_name(most_recent_name)
       else
         ATTACHMENT_TYPE

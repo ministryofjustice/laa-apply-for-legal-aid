@@ -119,14 +119,14 @@ module Flow
               next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
               application.provider_received_citizen_consent? ? next_step : :use_ccms
             else
-              next_step = :bank_statement_uploads
+              next_step = :bank_statements
               next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
             end
             next_step
           end,
         },
-        bank_statement_uploads: {
-          path: ->(application) { urls.providers_legal_aid_application_bank_statement_uploads_path(application) },
+        bank_statements: {
+          path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
           forward: :non_passported_provider_flow_todo,
         },
         email_addresses: {

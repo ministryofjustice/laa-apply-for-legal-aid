@@ -20,7 +20,7 @@
 
   <%= form_with(
           model: @form,
-          url: providers_legal_aid_application_bank_statement_uploads_path,
+          url: providers_legal_aid_application_bank_statements_path,
           method: :patch,
           local: true,
           html: { id: 'file-upload-form' }
@@ -44,7 +44,7 @@
             <div class="govuk-hint"><%= t('.size_hint') %></div>
 
             <span class="hidden" aria-hidden="true" id="application-id"><%= @form.model.legal_aid_application_id %></span>
-            <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/bank_statement_uploads"></span>
+            <span class="hidden" aria-hidden="true" id="dropzone-url" data-url="/v1/bank_statements"></span>
             <p id="dropzone-file-error" class="govuk-error-message dropzone-error hidden">
               <span class="govuk-visually-hidden">Error:</span>
             </p>
@@ -93,7 +93,7 @@
 
   <%= form_with(
         model: @form,
-        url: providers_legal_aid_application_bank_statement_uploads_path,
+        url: providers_legal_aid_application_bank_statements_path,
         method: :patch,
         local: true
     ) do |form| %>

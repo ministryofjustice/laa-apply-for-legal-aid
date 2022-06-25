@@ -1,5 +1,5 @@
 module Providers
-  class BankStatementUploadsController < ProviderBaseController
+  class BankStatementsController < ProviderBaseController
     def show
       populate_form
     end
@@ -8,8 +8,6 @@ module Providers
       if upload_button_pressed?
         perform_upload
       else
-        # TODO: needed?
-        # update_task(:application, :bank_statement_uploads)
         render :show unless save_continue_or_draft(@form)
       end
     end
@@ -22,17 +20,13 @@ module Providers
     end
 
     def list
-      render partial: "providers/bank_statement_uploads/uploaded_files", locals: { attachments: legal_aid_application.attachments.client_bank_statement }
+      render partial: "providers/bank_statements/uploaded_files", locals: { attachments: legal_aid_application.attachments.bank_statement_evidence }
     end
 
   private
 
-    def task_list_should_update?
-      application_has_task_list? && !draft_selected?
-    end
-
     def populate_form
-      @form = BankStatementUploadForm.new(model: legal_aid_application.bank_statement_uploads.build)
+      @form = BankStatementForm.new(model: bank_statement)
     end
 
     def perform_upload
@@ -52,13 +46,13 @@ module Providers
     end
 
     def files_deleted_message(deleted_file_name)
-      I18n.t("activemodel.attributes.bank_statement_uploads.file_deleted", file_name: deleted_file_name)
+      I18n.t("activemodel.attributes.bank_statement.file_deleted", file_name: deleted_file_name)
     end
 
     def successful_upload
       return if form.errors.present?
 
-      I18n.t("activemodel.attributes.bank_statement_upload.file_uploaded", file_name: form.original_file.original_filename)
+      I18n.t("activemodel.attributes.bank_statement.file_uploaded", file_name: form.original_file.original_filename)
     end
 
     def upload_button_pressed?
@@ -66,15 +60,20 @@ module Providers
     end
 
     def form
-      @form ||= BankStatementUploadForm.new(bank_statement_upload_params)
+      @form ||= BankStatementForm.new(bank_statement_params)
     end
 
-    def bank_statement_upload_params
-      params[:bank_statement_upload] = { original_file: [], statement: nil } unless params.key?(:bank_statement_upload)
+    def bank_statement_params
+      params[:bank_statement] = { original_file: [], statement: nil } unless params.key?(:bank_statement)
 
-      merge_with_model(bank_statement_upload, provider_uploader: current_provider) do
-        params.require(:bank_statement_uploads).permit(:statement, :original_file)
+      merge_with_model(bank_statement, provider_uploader: current_provider) do
+        params.require(:bank_statement).permit(:original_file)
       end
+    end
+
+    def bank_statement
+      # @bank_statement ||= legal_aid_application.bank_statement || legal_aid_application.build_bank_statement
+      @bank_statement ||= legal_aid_application.build_bank_statement
     end
 
     def delete_original_and_pdf_files
