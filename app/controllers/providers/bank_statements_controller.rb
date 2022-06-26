@@ -8,7 +8,7 @@ module Providers
       if upload_button_pressed?
         perform_upload
       else
-        render :show unless save_continue_or_draft(@form)
+        render :show unless save_continue_or_draft(form)
       end
     end
 
@@ -72,8 +72,7 @@ module Providers
     end
 
     def bank_statement
-      # @bank_statement ||= legal_aid_application.bank_statement || legal_aid_application.build_bank_statement
-      @bank_statement ||= legal_aid_application.build_bank_statement
+      @bank_statement ||= legal_aid_application.bank_statements.build
     end
 
     def delete_original_and_pdf_files

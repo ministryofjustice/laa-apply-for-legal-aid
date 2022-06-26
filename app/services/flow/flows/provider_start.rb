@@ -127,7 +127,7 @@ module Flow
         },
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
-          forward: :non_passported_provider_flow_todo,
+          forward: :use_ccms,
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },

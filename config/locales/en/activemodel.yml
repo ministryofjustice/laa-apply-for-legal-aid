@@ -68,7 +68,7 @@ en:
       uploaded_evidence_collection:
         file_uploaded: "%{file_name} has been successfully uploaded."
         file_deleted: "%{file_name} has been successfully deleted."
-      bank_statements:
+      bank_statement:
         file_uploaded: "%{file_name} has been successfully uploaded."
         file_deleted: "%{file_name} has been successfully deleted."
       vehicle:
