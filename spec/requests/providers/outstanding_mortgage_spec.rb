@@ -47,7 +47,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
         subject
       end
 
-      context "Submitted with the Continue button" do
+      context "when submitted with the Continue button" do
         context "when an outstanding mortgage value is entered" do
           context "with valid values" do
             it "records the value in the legal aid application table" do
@@ -75,7 +75,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
         end
       end
 
-      context "Submitted with the Save as draft button" do
+      context "when submitted with the Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",

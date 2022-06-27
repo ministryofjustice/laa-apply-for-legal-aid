@@ -52,7 +52,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
         login_as provider
       end
 
-      context "Submitted with Continue button" do
+      context "when submitted with Continue button" do
         let(:submit_button) do
           { continue_button: "Continue" }
         end
@@ -61,7 +61,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           patch providers_legal_aid_application_policy_disregards_path(policy.legal_aid_application), params: params.merge(submit_button)
         end
 
-        context "valid params" do
+        context "with valid params" do
           it "updates the record" do
             policy.reload
             expect(policy.england_infected_blood_support).to be true
@@ -74,7 +74,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           end
         end
 
-        context "provider checking their answers" do
+        context "with provider checking their answers" do
           let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
 
           it "redirects to check passported answers" do
@@ -82,7 +82,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           end
         end
 
-        context "provider checking citizen's answers" do
+        context "with provider checking citizen's answers" do
           let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
 
           it "redirects to means summary page" do
@@ -92,7 +92,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
         end
       end
 
-      context "has nothing" do
+      context "with nothing" do
         let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
         let(:policy) { create :policy_disregards, legal_aid_application: application }
         let(:none_selected) { "true" }
@@ -116,7 +116,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           patch providers_legal_aid_application_policy_disregards_path(policy.legal_aid_application), params: empty_params.merge(submit_button)
         end
 
-        context "with none of these checkbox selected" do
+        context "with 'none of these' checkbox selected" do
           let(:none_selected) { "true" }
 
           it "redirects to check passported answers" do
@@ -125,7 +125,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
           end
         end
 
-        context "and none of these checkbox is not selected" do
+        context "with 'none of these' checkbox not selected" do
           let(:none_selected) { "" }
 
           it "the response includes the error message" do
