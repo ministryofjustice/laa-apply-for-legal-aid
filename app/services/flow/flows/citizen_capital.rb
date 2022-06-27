@@ -18,15 +18,6 @@ module Flow
         },
         student_finances: {
           path: ->(_) { urls.citizens_student_finance_path(locale: I18n.locale) },
-          forward: lambda do |application|
-            application.receives_student_finance? ? :student_finances_annual_amounts : :identify_types_of_outgoings
-          end,
-          check_answers: lambda do |application|
-            application.receives_student_finance? ? :student_finances_annual_amounts : :check_answers
-          end,
-        },
-        student_finances_annual_amounts: {
-          path: ->(_) { urls.citizens_student_finances_annual_amount_path(locale: I18n.locale) },
           forward: :identify_types_of_outgoings,
           check_answers: :check_answers,
         },

@@ -393,3 +393,12 @@ cy:
     restrictions:
       restrictions: stessa s'tneilc ruoy no snoitcirtseR
       none: enoN
+    means:
+      student_finances:
+        student_finances:
+          field_set_header: "?ecnanif tneduts teg uoy oD"
+          hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
+        annual_amounts:
+          annual_amounts:
+            field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
+            hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

@@ -164,12 +164,3 @@ cy:
         check_inbox: ".xobni liame ruoy kcehC"
         valid_until: ".snosaer ytiruces rof syad 7 rof evitca niamer ylno lliw knil
           wen ruoY"
-    student_finances:
-      show:
-        field_set_header: "?ecnanif tneduts teg uoy oD"
-        hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
-      annual_amounts:
-        show:
-          field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum
-            woH"
-          hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

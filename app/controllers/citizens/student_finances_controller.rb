@@ -1,27 +1,38 @@
 module Citizens
   class StudentFinancesController < CitizenBaseController
     def show
-      @form = LegalAidApplications::StudentFinanceForm.new(model: legal_aid_application)
+      @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income)
     end
 
     def update
-      @form = LegalAidApplications::StudentFinanceForm.new(form_params)
-
-      if @form.save
-        go_forward
+      @form = ::StudentFinances::AnnualAmountForm.new(form_params)
+      if student_finance
+        legal_aid_application.update!(student_finance:)
+        if student_finance == "false" || @form.save
+          return go_forward
+        end
       else
-        render :show
+        @form.errors.add(:student_finance, I18n.t("activemodel.errors.models.legal_aid_application.attributes.student_finance.blank"))
       end
+      render :show
     end
 
   private
 
-    def form_params
-      merge_with_model(legal_aid_application) do
-        next {} unless params[:legal_aid_application]
+    def irregular_income
+      legal_aid_application.irregular_incomes.find_by(income_type: "student_loan")
+    end
 
-        params.require(:legal_aid_application).permit(:student_finance)
+    def form_params
+      merge_with_model(irregular_income) do
+        return {} unless params[:irregular_income]
+
+        params.require(:irregular_income).permit(:amount).merge({ income_type: "student_loan", frequency: "annual", legal_aid_application_id: legal_aid_application.id })
       end
+    end
+
+    def student_finance
+      @student_finance ||= params[:irregular_income][:student_finance]
     end
   end
 end

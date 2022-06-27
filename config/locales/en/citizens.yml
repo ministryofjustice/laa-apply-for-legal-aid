@@ -144,11 +144,4 @@ en:
         page_title: We've sent you a new link
         check_inbox: Check your email inbox.
         valid_until: Your new link will only remain active for 7 days for security reasons.
-    student_finances:
-      show:
-        field_set_header: Do you get student finance?
-        hint: This includes any type of student loan, grant or bursary.
-      annual_amounts:
-        show:
-          field_set_header: How much student finance will you get this academic year?
-          hint: Check your student finance entitlement letter.
+

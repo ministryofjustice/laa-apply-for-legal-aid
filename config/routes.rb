@@ -107,9 +107,6 @@ Rails.application.routes.draw do
     resource :cash_income, only: %i[show update]
     resource :cash_outgoing, only: %i[show update]
     resource :student_finance, only: %i[show update]
-    namespace :student_finances do
-      resource :annual_amount, only: %i[show update]
-    end
     resource :identify_types_of_outgoing, only: %i[show update]
     resource :means_test_result, only: [:show]
   end
@@ -128,6 +125,7 @@ Rails.application.routes.draw do
       namespace :means do
         resource :full_employment_details, only: %i[show update]
         resource :employment_income, only: %i[show update]
+        resource :student_finance, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]

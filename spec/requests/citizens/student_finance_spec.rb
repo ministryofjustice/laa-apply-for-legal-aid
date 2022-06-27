@@ -20,25 +20,60 @@ RSpec.describe "student_finance", type: :request do
 
   describe "PATCH /citizens/student_finance" do
     let(:params) do
-      { legal_aid_application: {
-        student_finance: yes_or_no,
-      } }
+      {
+        irregular_income: {
+          amount:,
+          student_finance:,
+        },
+      }
     end
 
-    context "when responds YES to student finance" do
+    context "when it adds an amount" do
+      before { get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id) }
+
+      let(:amount) { 2345 }
+      let(:student_finance) { "true" }
+
+      it "displays the outgoing types page" do
+        patch citizens_student_finance_path, params: params
+        expect(response).to redirect_to(citizens_identify_types_of_outgoing_path)
+      end
+
+      it "creates an irregular income record" do
+        expect { patch citizens_student_finance_path, params: }.to change(IrregularIncome, :count).by(1)
+        irregular_income = legal_aid_application.irregular_incomes.first
+        expect(irregular_income.amount).to eq 2345
+        expect(irregular_income.frequency).to eq "annual"
+        expect(irregular_income.income_type).to eq "student_loan"
+      end
+
+      describe "update record" do
+        before { patch citizens_student_finance_path, params: }
+
+        context "when amount is updated" do
+          let(:amount) { 5000 }
+          let(:student_finance) { "true" }
+
+          it "updates the same record without creating a new one" do
+            expect { patch citizens_student_finance_path, params: }.not_to change(IrregularIncome, :count)
+            irregular_income = legal_aid_application.irregular_incomes.first
+            expect(irregular_income.amount).to eq 5000
+          end
+        end
+      end
+    end
+
+    context "when amount field is empty" do
       before do
         get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
         patch citizens_student_finance_path, params:
       end
 
-      let(:yes_or_no) { "true" }
+      let(:amount) { "" }
+      let(:student_finance) { "true" }
 
-      it "displays the annual amounts page" do
-        expect(response).to redirect_to(citizens_student_finances_annual_amount_path)
-      end
-
-      it "updates the legal aid application record" do
-        expect(legal_aid_application.reload.student_finance).to be true
+      it "displays an error" do
+        expect(response.body).to include I18n.t("activemodel.errors.models.irregular_income.attributes.amount.blank")
       end
     end
 
@@ -48,7 +83,8 @@ RSpec.describe "student_finance", type: :request do
         patch citizens_student_finance_path, params:
       end
 
-      let(:yes_or_no) { "false" }
+      let(:student_finance) { "false" }
+      let(:amount) { "" }
 
       it "displays the identify types of outgoing page" do
         expect(response).to redirect_to(citizens_identify_types_of_outgoing_path)
@@ -56,47 +92,6 @@ RSpec.describe "student_finance", type: :request do
 
       it "updates the legal aid application record" do
         expect(legal_aid_application.reload.student_finance).to be false
-      end
-    end
-
-    context "when no response is entered to student finance" do
-      before do
-        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        patch citizens_student_finance_path, params:
-      end
-
-      let(:yes_or_no) { "" }
-
-      it "displays an error" do
-        expect(response.body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.student_finance.blank"))
-      end
-
-      it "does not update the legal aid application record" do
-        expect(legal_aid_application.reload.student_finance).to be_nil
-      end
-    end
-
-    context "when checking citizen answers" do
-      before do
-        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
-        legal_aid_application.check_citizen_answers!
-        patch citizens_student_finance_path, params:
-      end
-
-      context "when saying no" do
-        let(:yes_or_no) { "false" }
-
-        it "redirects to the check answers page" do
-          expect(response).to redirect_to(citizens_check_answers_path)
-        end
-      end
-
-      context "when saying yes" do
-        let(:yes_or_no) { "true" }
-
-        it "redirects to the annual amounts page" do
-          expect(response).to redirect_to(citizens_student_finances_annual_amount_path)
-        end
       end
     end
   end
