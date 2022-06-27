@@ -15,6 +15,12 @@ FactoryBot.define do
       attachment_name { "means_report.pdf" }
     end
 
+    trait :bank_statement do
+      attachment_type { "bank_statement_evidence" }
+      sequence(:attachment_name) { |n| "bank_statement_#{n}" }
+      sequence(:original_filename) { |n| "fake_bank_statement_#{n}.pdf" }
+    end
+
     trait :bank_transaction_report do
       attachment_type { "bank_transaction_report" }
       attachment_name { "bank_transaction_report.csv" }

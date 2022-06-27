@@ -213,6 +213,16 @@ en:
           attributes:
             attachment_type:
               invalid: "'%{attachment_type}' is invalid"
+        bank_statement:
+          attributes:
+            original_file:
+              content_type_invalid: "%{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
+              file_empty: "%{file_name} has no content"
+              file_too_big: "%{file_name} must be smaller than %{size}MB"
+              file_virus: "%{file_name} contains a virus"
+              system_down: There was a problem uploading your file - try again
+              no_file_chosen: You must choose at least one file
+              blank: Attach a file
         dependant:
           attributes:
             name:
