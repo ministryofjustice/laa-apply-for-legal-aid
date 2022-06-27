@@ -97,7 +97,7 @@ module Flow
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
         },
         full_employment_details: {
-          path: ->(application) { urls.providers_legal_aid_application_full_employment_details_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
         },
         income_summary: {

@@ -125,6 +125,9 @@ Rails.application.routes.draw do
     resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[index create] do
+      namespace :means do
+        resource :full_employment_details, only: %i[show update]
+      end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
@@ -228,7 +231,6 @@ Rails.application.routes.draw do
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]
       resource :employment_income, only: %i[show update]
-      resource :full_employment_details, only: %i[show update]
       resource :confirm_client_declaration, only: %i[show update]
       resource :review_and_print_application, only: [:show] do
         patch :continue

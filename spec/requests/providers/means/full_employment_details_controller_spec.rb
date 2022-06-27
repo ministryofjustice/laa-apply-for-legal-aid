@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
+RSpec.describe Providers::Means::FullEmploymentDetailsController, type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
   let(:before_actions) { {} }
 
-  describe "GET /providers/applications/:id/full_employment_details" do
-    subject(:request) { get providers_legal_aid_application_full_employment_details_path(application) }
+  describe "GET /providers/applications/:id/means/full_employment_details" do
+    subject(:request) { get providers_legal_aid_application_means_full_employment_details_path(application) }
 
     context "when the provider is not authenticated" do
       before { request }
@@ -74,8 +74,8 @@ RSpec.describe Providers::FullEmploymentDetailsController, type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:id/full_employment_details" do
-    subject(:request) { patch providers_legal_aid_application_full_employment_details_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/means/full_employment_details" do
+    subject(:request) { patch providers_legal_aid_application_means_full_employment_details_path(application), params: params.merge(submit_button) }
 
     let(:full_employment_details) { Faker::Lorem.paragraph }
     let(:params) do
