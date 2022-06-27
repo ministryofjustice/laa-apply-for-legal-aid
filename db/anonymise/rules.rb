@@ -57,6 +57,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     true_layer_response: nil,
     bank_name: -> { Faker::Bank.name },
   },
+  bank_statements: {},
   bank_transactions: {
     description: -> { Faker::Company.industry },
     true_layer_response: nil,
