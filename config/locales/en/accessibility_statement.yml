@@ -5,7 +5,7 @@ en:
       h1-heading: Accessibility statement
       using_service: Using this service
       responsibility: "The Legal Aid Agency (LAA) is responsible for the ‘Apply for legal aid’ service."
-      we_want: 
+      we_want:
         heading: "We want as many people as possible to be able to use this service. For example, that means you should be able to:"
         list: |
           change colours, contrast levels and fonts
@@ -13,14 +13,14 @@ en:
           navigate most of the website using just a keyboard
           navigate most of the website using speech recognition software
           listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
-      ability_net: 
+      ability_net:
         prefix: AbilityNet has advice on making your device easier to use
         suffix: " if you have a disability."
       no_access: What to do if you cannot access part of this service
-      contact: If you need information on this service in a different format, contact apply-for-legal-aid@digital.justice.gov.uk
+      contact: If you need information on this service in a different format, contact apply-for-civil-legal-aid@digital.justice.gov.uk
       accessibility:
         problems: Reporting accessibility problems
-        contact: We’re always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact apply-for-legal-aid@digital.justice.gov.uk giving details of the issue and any assistive technology you are using.
+        contact: We’re always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we’re not meeting the requirements of the accessibility regulations, contact apply-for-civil-legal-aid@digital.justice.gov.uk giving details of the issue and any assistive technology you are using.
         info_1: Technical information about this service’s accessibility
         info_2: The LAA is committed to making its service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
         compliance:
