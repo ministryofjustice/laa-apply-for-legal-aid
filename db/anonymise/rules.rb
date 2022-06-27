@@ -31,7 +31,9 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     national_insurance_number: -> { Faker::Base.regexify(NINO_REGEXP) },
   },
   application_digests: {},
-  attachments: {},
+  attachments: {
+    original_filename: -> { "#{Faker::Bank.name}.pdf" },
+  },
   attempts_to_settles: {
     attempts_made: -> { Faker::Lorem.sentence },
   },
