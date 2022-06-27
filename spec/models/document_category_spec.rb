@@ -19,8 +19,10 @@ RSpec.describe DocumentCategory, type: :model do
   describe ".displayable_document_category_names" do
     before { described_class.populate }
 
+    let(:expected_categories) { %w[bank_statement_evidence benefit_evidence employment_evidence gateway_evidence uncategorised] }
+
     it "returns an array of names to display on evidence upload page" do
-      expect(described_class.displayable_document_category_names).to eq %w[benefit_evidence employment_evidence gateway_evidence uncategorised]
+      expect(described_class.displayable_document_category_names).to match_array(expected_categories)
     end
   end
 
@@ -30,17 +32,19 @@ RSpec.describe DocumentCategory, type: :model do
     let(:expected_categories) do
       %w[
         bank_transaction_report
+        bank_statement_evidence
         benefit_evidence_pdf
         employment_evidence_pdf
         gateway_evidence_pdf
         means_report
         merits_report
         statement_of_case_pdf
+
       ]
     end
 
     it "returns an array of names that should be uploaded to CCMS" do
-      expect(described_class.submittable_category_names).to eq expected_categories
+      expect(described_class.submittable_category_names).to match_array(expected_categories)
     end
   end
 end
