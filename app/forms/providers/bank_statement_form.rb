@@ -2,7 +2,7 @@ module Providers
   class BankStatementForm < BaseFileUploaderForm
     form_for BankStatement
 
-    attr_accessor :statement, :original_file, :original_filename, :provider_uploader, :upload_button_pressed
+    attr_accessor :original_file, :original_filename, :provider_uploader, :upload_button_pressed
 
     def exclude_from_model
       %i[upload_button_pressed original_file original_filename]
