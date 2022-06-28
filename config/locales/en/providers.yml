@@ -515,11 +515,7 @@ en:
         status: Status
         uploaded: Uploaded
         title: Uploaded files
-    identify_types_of_incomes:
-      show:
-        page_heading: Which types of income does your client receive?
-      update:
-        none_selected: Select if your client receives any types of income
+
     identify_types_of_outgoings:
       show:
         page_heading: Which regular payments does your client make?
@@ -671,6 +667,11 @@ en:
       cash_incomes:
         show:
           page_heading: Select payments your client receive in cash
+      identify_types_of_incomes:
+        show:
+          page_heading: Which types of income does your client receive?
+        update:
+          none_selected: Select if your client receives any types of income
     means_summaries:
       show:
         h1-heading: Check your answers

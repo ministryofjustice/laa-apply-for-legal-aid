@@ -2,13 +2,13 @@ require "rails_helper"
 
 RSpec.describe Citizens::IdentifyTypesOfIncomesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
+  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+  let(:income_types_without_children) { TransactionType.not_children.where(id: income_types.map(&:id)) }
   let(:secure_id) { legal_aid_application.generate_secure_id }
+
   before do
     get citizens_legal_aid_application_path(secure_id)
   end
-
-  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
-  let(:income_types_without_children) { TransactionType.not_children.where(id: income_types.map(&:id)) }
 
   describe "GET /citizens/identify_types_of_income" do
     before do

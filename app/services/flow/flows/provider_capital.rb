@@ -7,7 +7,7 @@ module Flow
           forward: :own_homes,
         },
         identify_types_of_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_identify_types_of_income_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
           forward: :income_summary,
         },
         identify_types_of_outgoings: {

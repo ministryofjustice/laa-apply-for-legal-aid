@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Providers::IdentifyTypesOfIncomesController do
+RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   let(:legal_aid_application) { create :legal_aid_application }
-  let(:target_url) { providers_legal_aid_application_identify_types_of_income_path(legal_aid_application) }
+  let(:target_url) { providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application) }
   let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
   let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
@@ -12,7 +12,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
     login
   end
 
-  describe "GET /providers/applications/:legal_aid_application_id/identify_types_of_income" do
+  describe "GET /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
     subject { get target_url }
 
     it "returns http success" do
@@ -42,7 +42,7 @@ RSpec.describe Providers::IdentifyTypesOfIncomesController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/identify_types_of_income" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
     subject { patch target_url, params: params.merge(submit_button) }
 
     let(:transaction_type_ids) { [] }

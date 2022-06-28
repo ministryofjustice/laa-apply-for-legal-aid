@@ -129,6 +129,7 @@ Rails.application.routes.draw do
         resource :employment_income, only: %i[show update]
         resource :student_finance, only: %i[show update]
         resource :cash_income, only: %i[show update]
+        resource :identify_types_of_income, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -186,7 +187,7 @@ Rails.application.routes.draw do
       end
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
-      resource :identify_types_of_income, only: %i[show update]
+
       resource :identify_types_of_outgoing, only: %i[show update]
       resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
@@ -202,7 +203,6 @@ Rails.application.routes.draw do
       resources :involved_children, only: %i[new show update], controller: "application_merits_task/involved_children"
       resource :has_other_involved_children, only: %i[show update], controller: "application_merits_task/has_other_involved_children"
       resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
-
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
       resource :no_income_summary, only: %i[show update]

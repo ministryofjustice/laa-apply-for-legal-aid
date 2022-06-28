@@ -71,7 +71,7 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
         let(:no_income_summaries) { "false" }
 
         it "redirects to the identify income types page" do
-          expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_income_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
         end
       end
     end
