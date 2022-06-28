@@ -92,7 +92,9 @@ Shoulda::Matchers.configure do |config|
 end
 
 def uploaded_file(path, content_type = nil, binary: false)
-  Rack::Test::UploadedFile.new(Rails.root.join(path), content_type, binary)
+  file = Rack::Test::UploadedFile.new(Rails.root.join(path), content_type, binary)
+  binding.pry
+  file
 end
 
 # method to enable session vars to be set in request spec.
