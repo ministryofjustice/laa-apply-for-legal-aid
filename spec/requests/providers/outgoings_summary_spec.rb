@@ -50,14 +50,14 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
       expect(parsed_response_body.css("ol li h2#outgoing-type-#{other_transaction_type.name}").size).to be_zero
     end
 
-    context "not all transaction types selected" do
+    context "without all transaction types selected" do
       it "displays an Add additional outgoings types section" do
         subject
         expect(response.body).to include(I18n.t("providers.outgoings_summary.add_other_outgoings.add_other_outgoings"))
       end
     end
 
-    context "all transaction types selected" do
+    context "with all transaction types selected" do
       let(:legal_aid_application) do
         create(
           :legal_aid_application,
@@ -118,7 +118,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
       it_behaves_like "a provider not authenticated"
     end
 
-    context "Form submitted with Save as draft button" do
+    context "when Form submitted with Save as draft button" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do
@@ -126,7 +126,7 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
       end
     end
 
-    context "The transaction type category has no bank transactions" do
+    context "when the transaction type category has no bank transactions" do
       subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
 
       let(:applicant) { create :applicant }

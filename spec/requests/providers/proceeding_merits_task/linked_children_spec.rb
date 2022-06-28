@@ -52,13 +52,13 @@ module Providers
 
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
 
-        context "all selected" do
+        context "with all selected" do
           it "adds involved children to the proceeding" do
             expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
           end
         end
 
-        context "none selected" do
+        context "with none selected" do
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
@@ -71,7 +71,7 @@ module Providers
           end
         end
 
-        context "some selected" do
+        context "with some selected" do
           let(:params) do
             {
               proceeding_merits_task_proceeding_linked_child:
@@ -100,7 +100,7 @@ module Providers
             subject
           end
 
-          context "remove record" do
+          context "when removing a record" do
             let(:new_params) do
               {
                 proceeding_merits_task_proceeding_linked_child:
@@ -113,14 +113,14 @@ module Providers
             end
           end
 
-          context "record already exists" do
+          context "when record already exists" do
             it "makes no changes if already selected records are left selected" do
               expect { subject }.not_to change { proceeding.proceeding_linked_children.count }
             end
           end
         end
 
-        context "Form submitted using Save as draft button" do
+        context "when Form submitted using Save as draft button" do
           subject do
             patch providers_merits_task_list_linked_children_path(proceeding), params: params.merge(submit_button)
           end
