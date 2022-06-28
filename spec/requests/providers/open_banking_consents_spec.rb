@@ -36,22 +36,6 @@ RSpec.describe "does client use online banking requests", type: :request do
           expect(application.reload.state).to eq "provider_confirming_applicant_eligibility"
         end
       end
-
-      context "when the applicant is employed" do
-        let(:applicant) { create :applicant, :employed }
-
-        it "does not show the bullet point about being unemployed" do
-          expect(unescaped_response_body).not_to include("is not employed")
-        end
-      end
-
-      context "when applicant is not employed" do
-        let(:applicant) { create :applicant, :not_employed }
-
-        it "does show the bullet point about being unemployed" do
-          expect(unescaped_response_body).to include("is not employed")
-        end
-      end
     end
   end
 

@@ -283,13 +283,14 @@ Feature: Non-passported applicant journeys
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I choose 'Yes'
+    When I choose 'Yes'
     And I click 'Save and continue'
-    And I should be on a page showing "What is your client's employment status?"
-    And I select "None of the above"
-    When I click 'Save and continue'
-    Then I should be on the 'does-client-use-online-banking' page showing 'Do you agree with the following?'
-    Then I choose 'Yes'
+    Then I should be on a page showing "What is your client's employment status?"
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
+    When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'non_passported_client_instructions' page showing 'What your client has to do'
     When I click link 'Continue'
@@ -356,15 +357,15 @@ Feature: Non-passported applicant journeys
     Given I start the application with a negative benefit check result
     And I used delegated functions
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I choose 'Yes'
+    When I choose 'Yes'
     Then I click 'Save and continue'
-    And I should be on a page showing "What is your client's employment status?"
+    And I should be on a page with title "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page showing "Do you agree with the following?"
-    Then I choose "Yes, I agree"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Do you want to make a substantive application now?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Do you want to make a substantive application now?"
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "You told us you've used delegated functions"

@@ -58,9 +58,9 @@ Feature: Provider accessibility
     And the page is accessible
     When I select 'None of the above'
     And I click 'Save and continue'
-    Then I should be on a page showing 'Do you agree with the following?'
+    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     And the page is accessible
-    Then I choose 'Yes, I agree'
+    Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing 'What your client has to do'
     And the page is accessible
