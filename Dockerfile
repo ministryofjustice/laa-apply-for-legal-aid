@@ -35,6 +35,10 @@ RUN apk --no-cache add --virtual build-dependencies \
                   wkhtmltopdf \
                   bash \
                   tesseract-ocr \
+                  pkgconfig \
+                  imagemagick \
+                  imagemagick-dev \
+                  imagemagick-libs\
                   py3-pip
 RUN pip3 install awscli
 
