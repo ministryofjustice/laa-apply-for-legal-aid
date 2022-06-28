@@ -92,7 +92,9 @@ references:
   update_packages: &update_packages
     run:
       name: Update packages
-      command: sudo apt-get update
+      command: |
+        sudo apt-get update
+        sudo apt-get install libmagickwand-dev
 
   restore_gems_cache: &restore_gems_cache
     restore_cache:
