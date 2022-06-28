@@ -15,6 +15,12 @@ FactoryBot.define do
       attachment_name { "means_report.pdf" }
     end
 
+    trait :bank_statement do
+      attachment_type { "bank_statement_evidence" }
+      sequence(:attachment_name) { |n| "bank_statement_#{n}" }
+      sequence(:original_filename) { "original_filename.pdf" }
+    end
+
     trait :bank_transaction_report do
       attachment_type { "bank_transaction_report" }
       attachment_name { "bank_transaction_report.csv" }
@@ -26,9 +32,11 @@ FactoryBot.define do
     end
 
     after(:create) do |attachment|
+      filepath = Rails.root.join("spec/fixtures/files/documents/hello_world.pdf")
+
       attachment.document.attach(
-        io: File.open(Rails.root.join("spec/fixtures/files/documents/hello_world.pdf")),
-        filename: attachment.attachment_name,
+        io: File.open(filepath),
+        filename: File.basename(filepath),
         content_type: "application/pdf",
       )
     end

@@ -105,7 +105,11 @@ module Flow
           forward: lambda do |application|
             return :delegated_confirmation unless application.substantive_application?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :non_passported_client_instructions
+            if application.applicant_receives_benefit?
+              :capital_introductions
+            else
+              application.provider.bank_statement_upload_permissions? ? :bank_statements : :non_passported_client_instructions
+            end
           end,
         },
         delegated_confirmation: {
@@ -117,8 +121,16 @@ module Flow
             next_step = :non_passported_client_instructions
             next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
 
-            application.provider_received_citizen_consent? ? next_step : :use_ccms
+            if application.provider.bank_statement_upload_permissions?
+              application.provider_received_citizen_consent? ? next_step : :bank_statements
+            else
+              application.provider_received_citizen_consent? ? next_step : :use_ccms
+            end
           end,
+        },
+        bank_statements: {
+          path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
+          forward: :check_provider_answers,
         },
         email_addresses: {
           path: ->(application) { urls.providers_legal_aid_application_email_address_path(application) },
