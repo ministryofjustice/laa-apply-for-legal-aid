@@ -87,7 +87,7 @@ RSpec.describe "provider other assets requests", type: :request do
         login_as provider
       end
 
-      context "Submitted with Continue button" do
+      context "when submitted with Continue button" do
         let(:submit_button) do
           { continue_button: "Continue" }
         end
@@ -96,7 +96,7 @@ RSpec.describe "provider other assets requests", type: :request do
           patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
         end
 
-        context "valid params" do
+        context "with valid params" do
           it "updates the record" do
             oad.reload
             expect(oad.second_home_value).to eq 875_123
@@ -110,7 +110,7 @@ RSpec.describe "provider other assets requests", type: :request do
             expect(oad.trust_value).to eq 1_234.56
           end
 
-          context "has other_assets" do
+          context "with other_assets" do
             let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
             let(:application) { oad.legal_aid_application }
 
@@ -126,7 +126,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has savings and investments" do
+          context "with savings and investments" do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
             let(:none_selected) { "true" }
@@ -146,7 +146,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has own home" do
+          context "with own home" do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { "true" }
@@ -163,7 +163,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "checking answers" do
+          context "when checking answers" do
             let(:application) { create :legal_aid_application, :without_own_home, :checking_passported_answers }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { "true" }
@@ -179,7 +179,7 @@ RSpec.describe "provider other assets requests", type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(oad.legal_aid_application))
             end
 
-            context "provider checking citizen's answers" do
+            context "with provider checking citizen's answers" do
               let(:application) { create :legal_aid_application, :without_own_home, :with_non_passported_state_machine, :checking_non_passported_means }
 
               it "redirects to means summary page" do
@@ -188,7 +188,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has nothing" do
+          context "with nothing" do
             let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:none_selected) { "true" }
@@ -234,7 +234,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
         end
 
-        context "none of these checkbox is selected" do
+        context "when 'none of these' checkbox is selected" do
           let(:params) do
             {
               other_assets_declaration: { none_selected: "true" },
@@ -246,7 +246,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
         end
 
-        context "invalid params - nothing specified" do
+        context "with invalid params - nothing specified" do
           let(:params) do
             {
               other_assets_declaration: {
@@ -274,14 +274,14 @@ RSpec.describe "provider other assets requests", type: :request do
         end
       end
 
-      context "Submitted with Save as draft button" do
+      context "when submitted with Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         before do
           patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
         end
 
-        context "valid params" do
+        context "with valid params" do
           it "updates the record" do
             oad.reload
             expect(oad.second_home_value).to eq 875_123
@@ -299,7 +299,7 @@ RSpec.describe "provider other assets requests", type: :request do
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
-          context "has other_assets" do
+          context "with other_assets" do
             let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
             let(:application) { oad.legal_aid_application }
 
@@ -311,7 +311,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has savings and investments" do
+          context "with savings and investments" do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
 
@@ -330,7 +330,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has own home" do
+          context "with own home" do
             let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
             let(:oad) { create :other_assets_declaration, legal_aid_application: application }
             let(:params) { empty_params }
@@ -344,7 +344,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
           end
 
-          context "has nothing" do
+          context "with nothing" do
             let(:oad) { create :other_assets_declaration }
             let(:application) { oad.legal_aid_application }
             let(:params) { empty_params }
@@ -359,7 +359,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
         end
 
-        context "invalid params" do
+        context "with invalid params" do
           let(:params) do
             {
               other_assets_declaration: {

@@ -50,7 +50,7 @@ module Providers
             subject
           end
 
-          context "Continue button pressed" do
+          context "with Continue button pressed" do
             let(:submit_button) do
               {
                 continue_button: "Continue",
@@ -67,7 +67,7 @@ module Providers
             end
           end
 
-          context "Save as draft button pressed" do
+          context "with Save as draft button pressed" do
             let(:submit_button) do
               {
                 draft_button: "Save as draft",
@@ -83,7 +83,7 @@ module Providers
               expect(response).to redirect_to providers_legal_aid_applications_path
             end
 
-            context "nothing specified" do
+            context "with nothing specified" do
               let(:success_prospect) { nil }
               let(:success_prospect_details) { nil }
 

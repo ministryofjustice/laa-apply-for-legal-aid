@@ -72,7 +72,7 @@ module Providers
           expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
-        context "false is selected" do
+        context "when false is selected" do
           let(:success_likely) { "false" }
 
           it "sets chances_of_success to false" do
@@ -98,7 +98,7 @@ module Providers
             expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
           end
 
-          context "success_prospect was :likely" do
+          context "when success_prospect was :likely" do
             let(:success_prospect) { :likely }
 
             it "sets success_prospect to nil" do
@@ -107,7 +107,7 @@ module Providers
           end
         end
 
-        context "user has come from the check_merits_answer page" do
+        context "when user has come from the check_merits_answer page" do
           let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :checking_merits_answers, explicit_proceedings: %i[da001 se014] }
 
           it "redirects back to the answers page" do
@@ -116,7 +116,7 @@ module Providers
           end
         end
 
-        context "nothing is selected" do
+        context "when nothing is selected" do
           let(:params) { {} }
 
           it "renders successfully" do
@@ -135,7 +135,7 @@ module Providers
           end
         end
 
-        context "Form submitted using Save as draft button" do
+        context "when Form submitted using Save as draft button" do
           let(:submit_button) { { draft_button: "Save as draft" } }
 
           it "redirects provider to provider's applications page" do
