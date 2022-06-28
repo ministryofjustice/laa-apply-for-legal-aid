@@ -130,6 +130,10 @@ Rails.application.routes.draw do
         resource :student_finance, only: %i[show update]
         resource :cash_income, only: %i[show update]
         resource :identify_types_of_income, only: %i[show update]
+        resource :has_dependants, only: %i[show update]
+        resources :dependants, only: %i[new show update]
+        resources :remove_dependants, only: %i[show update]
+        resource :has_other_dependants, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -143,10 +147,6 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
-      resource :has_dependants, only: %i[show update]
-      resources :dependants, only: %i[new show update]
-      resources :remove_dependants, only: %i[show update]
-      resource :has_other_dependants, only: %i[show update]
       resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]

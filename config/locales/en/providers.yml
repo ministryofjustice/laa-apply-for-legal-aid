@@ -672,6 +672,52 @@ en:
           page_heading: Which types of income does your client receive?
         update:
           none_selected: Select if your client receives any types of income
+      has_dependants:
+        show:
+          page_title: "Does your client have any dependants?"
+          existing: "You have added %{count}"
+          info: "A dependant is a child or adult who:"
+          list: |
+            lives with your client
+            depends on your client for financial support
+          extra_info: Do not include your client's partner if they have one.
+      dependants:
+        new:
+          page_title: Enter dependant details
+        show:
+          page_title: Amend dependant details
+        form:
+          name: Name
+          date_of_birth: Date of birth
+          dob_hint: For example, 31 3 1980.
+          relationship: What is their relationship to your client?
+          option:
+            child_relative: They're a child relative
+            adult_relative: They're an adult relative
+            hint:
+              child_relative: For example, your child, grandchild, niece or nephew.
+              adult_relative: For example, a parent, grandparent, aunt or uncle.
+          in_full_time_education: "Are they in full-time education or training?"
+          has_income:
+            question: Does this dependant receive any income?
+            hint: For example, money from a job, apprenticeship, or student loan or grant.
+            enter_monthly_income: Enter the amount they get each month
+          has_assets_more_than_threshold:
+            question: Does this dependant have assets worth more than £8,000?
+            hint: For example, property, cash savings or shares.
+            enter_assets_value: Enter the total asset value
+      has_other_dependants:
+        show:
+          page_title: Does your client have any other dependants?
+          existing: "You have added %{count}"
+          remove: Remove
+          warning:
+            delete: Are you sure you want to delete this dependant?
+          error: Select yes if they have other dependants
+      remove_dependants:
+        show:
+          page_title: "Are you sure you want to remove %{name}?"
+          error: Select yes if you wish to delete the dependant
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -1111,49 +1157,4 @@ en:
         page_title: Enter your client's email address
         label: Email address
         hint: We'll use this to send your client a link to the service.
-    has_dependants:
-      show:
-        page_title: "Does your client have any dependants?"
-        existing: "You have added %{count}"
-        info: "A dependant is a child or adult who:"
-        list: |
-          lives with your client
-          depends on your client for financial support
-        extra_info: Do not include your client's partner if they have one.
-    dependants:
-      new:
-        page_title: Enter dependant details
-      show:
-        page_title: Amend dependant details
-      form:
-        name: Name
-        date_of_birth: Date of birth
-        dob_hint: For example, 31 3 1980.
-        relationship: What is their relationship to your client?
-        option:
-          child_relative: They're a child relative
-          adult_relative: They're an adult relative
-          hint:
-            child_relative: For example, your child, grandchild, niece or nephew.
-            adult_relative: For example, a parent, grandparent, aunt or uncle.
-        in_full_time_education: "Are they in full-time education or training?"
-        has_income:
-          question: Does this dependant receive any income?
-          hint: For example, money from a job, apprenticeship, or student loan or grant.
-          enter_monthly_income: Enter the amount they get each month
-        has_assets_more_than_threshold:
-          question: Does this dependant have assets worth more than £8,000?
-          hint: For example, property, cash savings or shares.
-          enter_assets_value: Enter the total asset value
-    has_other_dependants:
-      show:
-        page_title: Does your client have any other dependants?
-        existing: "You have added %{count}"
-        remove: Remove
-        warning:
-          delete: Are you sure you want to delete this dependant?
-        error: Select yes if they have other dependants
-    remove_dependants:
-      show:
-        page_title: "Are you sure you want to remove %{name}?"
-        error: Select yes if you wish to delete the dependant
+

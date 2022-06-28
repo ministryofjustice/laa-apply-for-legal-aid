@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::HasDependantsController, type: :request do
+RSpec.describe Providers::Means::HasDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:login) { login_as legal_aid_application.provider }
 
@@ -9,8 +9,8 @@ RSpec.describe Providers::HasDependantsController, type: :request do
     subject
   end
 
-  describe "GET /providers/:application_id/has_dependants" do
-    subject { get providers_legal_aid_application_has_dependants_path(legal_aid_application) }
+  describe "GET /providers/:application_id/means/has_dependants" do
+    subject { get providers_legal_aid_application_means_has_dependants_path(legal_aid_application) }
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -23,10 +23,10 @@ RSpec.describe Providers::HasDependantsController, type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/has_dependants" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/means/has_dependants" do
     subject do
       patch(
-        providers_legal_aid_application_has_dependants_path(legal_aid_application),
+        providers_legal_aid_application_means_has_dependants_path(legal_aid_application),
         params:,
       )
     end
@@ -51,7 +51,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
     end
 
     describe "PATCH /providers/:application_id/has_dependants" do
-      before { patch providers_legal_aid_application_has_dependants_path(legal_aid_application), params: }
+      before { patch providers_legal_aid_application_means_has_dependants_path(legal_aid_application), params: }
 
       context "valid params" do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }
@@ -62,7 +62,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
 
         context "yes" do
           it "redirects to the add dependant details page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
+            expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
           end
         end
 
@@ -95,7 +95,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
         it "redirects to the add dependant details page" do
-          expect(response).to redirect_to(new_providers_legal_aid_application_dependant_path(legal_aid_application))
+          expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
         end
       end
 
@@ -107,7 +107,7 @@ RSpec.describe Providers::HasDependantsController, type: :request do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
         it "redirects to the has other dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_has_other_dependants_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
         end
       end
 

@@ -1,5 +1,5 @@
 <%= form_with(
-        url: providers_legal_aid_application_has_other_dependants_path,
+        url: providers_legal_aid_application_means_has_other_dependants_path,
         model: @form,
         method: :patch,
         local: true
@@ -16,7 +16,7 @@
           <dt class="govuk-summary-list__actions">
             <%= link_to_accessible(
                   t('generic.change'),
-                  providers_legal_aid_application_dependant_path(@legal_aid_application, dependant),
+                  providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant),
                   class: 'govuk-link change-link',
                   suffix: dependant.name
                 ) %>
@@ -25,7 +25,7 @@
             <dd class="govuk-summary-list__actions">
               <%= link_to_accessible(
                       t('.remove'),
-                      providers_legal_aid_application_remove_dependant_path(@legal_aid_application, dependant),
+                      providers_legal_aid_application_means_remove_dependant_path(@legal_aid_application, dependant),
                       class: 'govuk-link change-link',
                       suffix: dependant.name
                   ) %>

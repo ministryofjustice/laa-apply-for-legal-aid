@@ -92,7 +92,7 @@ RSpec.describe Providers::IncomeSummaryController do
     before { subject }
 
     it "redirects to the next page" do
-      expect(response).to redirect_to(providers_legal_aid_application_has_dependants_path(legal_aid_application))
+      expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
     end
 
     context "when the provider is not authenticated" do
