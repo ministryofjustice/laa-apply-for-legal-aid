@@ -44,7 +44,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         subject
       end
 
-      context "Continue button pressed" do
+      context "when continue button is pressed" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -52,7 +52,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         end
 
         context "when a property value is entered" do
-          context "property is mortgaged" do
+          context "when property is mortgaged" do
             let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_mortgaged }
 
             it "redirects to the outstanding mortgage question" do
@@ -60,7 +60,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
             end
           end
 
-          context "property is owned outright" do
+          context "when property is owned outright" do
             let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
 
             it "redirects to the shared question" do
@@ -90,7 +90,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         end
       end
 
-      context "Save as draft button pressed" do
+      context "when Save as draft button is pressed" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
@@ -98,7 +98,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
         end
 
         context "when a property value is entered" do
-          context "property is mortgaged" do
+          context "when property is mortgaged" do
             let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_mortgaged }
 
             it "redirects to the outstanding mortgage question" do
@@ -106,7 +106,7 @@ RSpec.describe Providers::PropertyValuesController, type: :request do
             end
           end
 
-          context "property is owned outright" do
+          context "when property is owned outright" do
             let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
 
             it "redirects provider to provider's applications page" do

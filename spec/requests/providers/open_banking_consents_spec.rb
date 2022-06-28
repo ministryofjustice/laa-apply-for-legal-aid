@@ -29,7 +29,7 @@ RSpec.describe "does client use online banking requests", type: :request do
         expect(unescaped_response_body).to include(I18n.t("providers.open_banking_consents.show.heading"))
       end
 
-      context "the application is in use_ccms state" do
+      context "when the application is in use_ccms state" do
         let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :use_ccms }
 
         it "resets the state to provider_confirming_applicant_eligibility" do
@@ -57,7 +57,7 @@ RSpec.describe "does client use online banking requests", type: :request do
       }
     end
 
-    context "the provider is authenticated" do
+    context "when the provider is authenticated" do
       before do
         login_as provider
         subject
@@ -67,8 +67,8 @@ RSpec.describe "does client use online banking requests", type: :request do
         expect(application.reload.provider_received_citizen_consent).to be(true)
       end
 
-      context "applicant is not employed after negative benefit check result" do
-        context "used_delegated_functions is true" do
+      context "when applicant is not employed after negative benefit check result" do
+        context "when used_delegated_functions is true" do
           let(:application) do
             create :legal_aid_application,
                    :with_non_passported_state_machine,
@@ -87,7 +87,7 @@ RSpec.describe "does client use online banking requests", type: :request do
           end
         end
 
-        context "used_delegated_functions is false" do
+        context "when used_delegated_functions is false" do
           let(:application) do
             create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:
           end
@@ -100,12 +100,12 @@ RSpec.describe "does client use online banking requests", type: :request do
         end
       end
 
-      context "positive benefit check result" do
+      context "with positive benefit check result" do
         it "redirects to the client instructions page" do
           expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
         end
 
-        context "provider_received_citizen_consent is false" do
+        context "when provider_received_citizen_consent is false" do
           let(:provider_received_citizen_consent) { "false" }
 
           it "redirects to the use ccms page" do
@@ -114,7 +114,7 @@ RSpec.describe "does client use online banking requests", type: :request do
         end
       end
 
-      context "no option is chosen" do
+      context "when no option is chosen" do
         let(:params) { {} }
 
         it "shows an error" do
@@ -122,7 +122,7 @@ RSpec.describe "does client use online banking requests", type: :request do
         end
       end
 
-      context "Form submitted using Save as draft button" do
+      context "when form submitted using Save as draft button" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         it "redirects provider to provider's applications page" do

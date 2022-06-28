@@ -35,7 +35,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
       end
 
       describe "back link" do
-        context "the applicant's address used s address lookup service", :vcr do
+        context "when the applicant's address used address lookup service", :vcr do
           let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address_lookup }
 
           before do
@@ -49,7 +49,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
           end
         end
 
-        context "the applicant's address used manual entry" do
+        context "when the applicant's address used manual entry" do
           before do
             get providers_legal_aid_application_address_path(legal_aid_application)
           end
@@ -122,7 +122,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
         subject
       end
 
-      context "LegalFramework::ProceedingTypesService call returns false" do
+      context "when LegalFramework::ProceedingTypesService call returns false" do
         let(:proceeding_type_service) { double(LegalFramework::ProceedingTypesService, add: false) }
         let(:add_proceeding_service) { double(LegalFramework::AddProceedingService, call: false) }
 
