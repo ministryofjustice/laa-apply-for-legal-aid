@@ -27,9 +27,11 @@
   <% end %>
   </tbody>
 </table>
-<div>
-  <h2 class="govuk-heading-m">Text of last file scanned by tesseract</h2>
-  <p class="govuk-body">
-    <%= @legal_aid_application.statement_of_case.statement %>
-  </p>
-</div>
+<% if @legal_aid_application.statement_of_case %>
+  <div>
+    <h2 class="govuk-heading-m">Text of last file scanned by tesseract</h2>
+    <p class="govuk-body">
+      <%= @legal_aid_application.statement_of_case.statement %>
+    </p>
+  </div>
+<% end %>
