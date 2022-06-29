@@ -2,7 +2,7 @@ module Providers
   module Means
     class StudentFinancesController < ProviderBaseController
       def show
-        @form = LegalAidApplications::StudentFinanceForm.new(model: legal_aid_application)
+        @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income)
       end
 
       # :nocov:

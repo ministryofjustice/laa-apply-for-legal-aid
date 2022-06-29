@@ -395,10 +395,10 @@ cy:
       none: enoN
     means:
       student_finances:
-        student_finances:
-          field_set_header: "?ecnanif tneduts teg uoy oD"
-          hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
-        annual_amounts:
-          annual_amounts:
-            field_set_header: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
-            hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"
+        field_set_header_provider: "?ecnanif tneduts teg tneilc ruoy seoD"
+        field_set_header: "?ecnanif tneduts teg uoy oD"
+        hint: ".yrasrub ro tnarg ,naol tneduts fo epyt yna sedulcni sihT"
+        amount: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
+        amount_provider: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
+        amount_hint: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"
+        amount_hint_provider: ".rettel tnemeltitne ecnanif tneduts ruoy kcehC"

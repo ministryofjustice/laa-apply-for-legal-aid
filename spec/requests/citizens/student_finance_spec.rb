@@ -94,5 +94,19 @@ RSpec.describe "student_finance", type: :request do
         expect(legal_aid_application.reload.student_finance).to be false
       end
     end
+
+    context "when student finance is nil" do
+      before do
+        get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
+        patch citizens_student_finance_path, params:
+      end
+
+      let(:student_finance) { nil }
+      let(:amount) { "" }
+
+      it "displays an error" do
+        expect(response.body).to include I18n.t("activemodel.errors.models.legal_aid_application.attributes.student_finance.blank")
+      end
+    end
   end
 end
