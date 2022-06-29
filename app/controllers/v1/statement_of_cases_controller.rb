@@ -33,7 +33,7 @@ module V1
     def extract_text(file)
       path = get_file_path(file)
 
-      image = RTesseract.new(path)
+      image = RTesseract.new(path, { psm: 1 })
       image.to_s
     rescue StandardError => e
       Rails.logger.info e.message
