@@ -91,7 +91,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
       context "with acceptable bank statement" do
         let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf", binary: true) }
 
-        fit "adds an attachment object" do
+        it "adds an attachment object" do
           expect { request }.to change(legal_aid_application.attachments, :count).by(1)
         end
 
@@ -333,7 +333,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
       let(:button_clicked) { draft_button }
 
       context "when no file uploaded successfully" do
-        before do
+        it "blah blah blah" do
           expect(legal_aid_application.attachments).to be_empty
           expect(legal_aid_application.bank_statements).to be_empty
         end
@@ -353,7 +353,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
 
         before do
-          post v1_bank_statements_path, params: { legal_aid_application_id: id, file: file }
+          post v1_bank_statements_path, params: { legal_aid_application_id: id, file: }
           # TODO: this should be positive
           # expect(legal_aid_application.reload.attachments).not_to be_empty
           # expect(legal_aid_application.reload.bank_statements).not_to be_empty

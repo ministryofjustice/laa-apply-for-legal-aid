@@ -13,10 +13,14 @@ module Providers
     end
 
     def destroy
-      original_file = delete_original_and_pdf_files
-      @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
-      populate_form
-      render :show
+      if upload_button_pressed?
+        perform_upload
+      else
+        original_file = delete_original_and_pdf_files
+        @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
+        populate_form
+        render :show
+      end
     end
 
     def list
