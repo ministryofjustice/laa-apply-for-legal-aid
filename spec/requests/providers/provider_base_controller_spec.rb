@@ -8,14 +8,14 @@ module Providers
     let(:provider_in_same_firm) { create :provider, firm: provider.firm }
     let(:provider_in_different_firm) { create :provider }
 
-    context "GET requests" do
+    context "when making GET requests" do
       describe "GET /providers/applications/:legal_aid_application_id/address/edit" do
         before do
           login_as logged_in_provider
           get providers_legal_aid_application_address_path(legal_aid_application)
         end
 
-        context "provider who created legal aid application" do
+        context "when provider who created legal aid application" do
           let(:logged_in_provider) { provider }
 
           it "is successful" do
@@ -23,7 +23,7 @@ module Providers
           end
         end
 
-        context "provider in same firm" do
+        context "when provider in same firm" do
           let(:logged_in_provider) { provider_in_same_firm }
 
           it "is successful" do
@@ -31,7 +31,7 @@ module Providers
           end
         end
 
-        context "provider in different firm" do
+        context "when provider in different firm" do
           let(:logged_in_provider) { provider_in_different_firm }
 
           it "is redirected to the access denied page" do
@@ -47,7 +47,7 @@ module Providers
         patch providers_legal_aid_application_address_path(legal_aid_application), params: address_params
       end
 
-      context "provider who created legal aid application" do
+      context "when provider who created legal aid application" do
         let(:logged_in_provider) { provider }
 
         it "is successful" do
@@ -55,7 +55,7 @@ module Providers
         end
       end
 
-      context "provider in same firm" do
+      context "when provider in same firm" do
         let(:logged_in_provider) { provider_in_same_firm }
 
         it "is successful" do
@@ -63,7 +63,7 @@ module Providers
         end
       end
 
-      context "provider in different firm" do
+      context "when provider in different firm" do
         let(:logged_in_provider) { provider_in_different_firm }
 
         it "is redirected to the access denied page" do

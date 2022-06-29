@@ -29,7 +29,7 @@ RSpec.describe "providers offine accounts", type: :request do
       end
 
       describe "back link" do
-        context "applicant does not own home" do
+        context "when applicant does not own home" do
           before { get providers_legal_aid_application_own_home_path(application) }
 
           it "points to the own home page" do
@@ -38,7 +38,7 @@ RSpec.describe "providers offine accounts", type: :request do
           end
         end
 
-        context "applicant owns home with shared ownership" do
+        context "when applicant owns home with shared ownership" do
           before { get providers_legal_aid_application_percentage_home_path(application) }
 
           it "points to percentage owned page" do
@@ -47,7 +47,7 @@ RSpec.describe "providers offine accounts", type: :request do
           end
         end
 
-        context "applicant owns home sole ownership" do
+        context "when applicant owns home sole ownership" do
           before { get providers_legal_aid_application_shared_ownership_path(application) }
 
           it "points to the shared ownership page" do
@@ -78,14 +78,14 @@ RSpec.describe "providers offine accounts", type: :request do
         login_as application.provider
       end
 
-      context "Submitted with Continue button" do
+      context "when submitted with Continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
           }
         end
 
-        context "not in checking passported answers state" do
+        context "when not in checking passported answers state" do
           it "updates the offline_current_accounts amount" do
             expect { subject }.to change { savings_amount.reload.offline_current_accounts.to_s }.to(offline_current_accounts)
           end
@@ -101,7 +101,7 @@ RSpec.describe "providers offine accounts", type: :request do
             expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
           end
 
-          context "none of these checkbox is selected" do
+          context "when 'none of these' checkbox is selected" do
             let(:params) { { savings_amount: { no_account_selected: "true" } } }
 
             it "sets no_account_selected to true" do
@@ -142,7 +142,7 @@ RSpec.describe "providers offine accounts", type: :request do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
           end
 
-          context "no savings" do
+          context "with no savings" do
             let(:offline_current_accounts) { 0 }
             let(:offline_savings_accounts) { 0 }
 
@@ -150,7 +150,7 @@ RSpec.describe "providers offine accounts", type: :request do
               expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
             end
 
-            context "provider_entering_merits" do
+            context "when provider_entering_merits" do
               let(:state) { :provider_entering_merits }
 
               it "redirects to the restrictions page" do
@@ -161,7 +161,7 @@ RSpec.describe "providers offine accounts", type: :request do
         end
       end
 
-      context "Submitted with Save as draft button" do
+      context "when submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
