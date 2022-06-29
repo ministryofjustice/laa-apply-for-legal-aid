@@ -6,6 +6,7 @@ SecureHeaders::Configuration.configure do |config|
   config.csp = {
     default_src: %w['self'],
     img_src: %w['self'
+                data:
                 https://www.google-analytics.com
                 www.googletagmanager.com
                 https://truelayer-client-logos.s3-eu-west-1.amazonaws.com
