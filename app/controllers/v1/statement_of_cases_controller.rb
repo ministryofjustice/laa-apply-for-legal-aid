@@ -55,12 +55,14 @@ module V1
     def convert_pdf_return_path(uploaded_file)
       in_path = uploaded_file.path
       out_path = "#{in_path}--all-pages.png"
-      im = Magick::ImageList.new(in_path)
-      result = im.append(true).write(out_path)
+      `magick convert -density 288 "#{in_path}" -quality 85 -append #{out_path}`
+      # im = Magick::ImageList.new(in_path)
+      # result = im.density("288").append(true).write(out_path)
       Rails.logger.info "-------------"
       Rails.logger.info out_path
       Rails.logger.info "-------------"
-      result.filename
+      # result.filename
+      out_path
     end
 
     def error_path
