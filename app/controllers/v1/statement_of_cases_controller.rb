@@ -33,8 +33,10 @@ module V1
     def extract_text(file)
       path = get_file_path(file)
 
-      image = RTesseract.new(path, { psm: 1 })
-      image.to_s
+      image = RTesseract.new(path, { dpi: "288", psm: 1 })
+      full_text = image.to_s
+      stripped_text = full_text.scan(/(Date[\s\S]*?(?=\n.*Continued|End balance))/)
+      stripped_text.join("\n\n")
     rescue StandardError => e
       Rails.logger.info e.message
       ""
