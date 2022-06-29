@@ -134,20 +134,22 @@ Rails.application.routes.draw do
         resources :dependants, only: %i[new show update]
         resources :remove_dependants, only: %i[show update]
         resource :has_other_dependants, only: %i[show update]
+        resource :own_home, only: %i[show update]
+        resource :property_value, only: %i[show update]
+        resource :shared_ownership, only: %i[show update]
+        resource :percentage_home, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
       resource :in_scope_of_laspo, only: %i[show update]
-      resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
-      resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
@@ -169,7 +171,6 @@ Rails.application.routes.draw do
       resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
-      resource :percentage_home, only: %i[show update]
       resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
@@ -180,7 +181,6 @@ Rails.application.routes.draw do
       resource :applicant_bank_account, only: %i[show update]
       resource :offline_account, only: %i[show update]
       resource :savings_and_investment, only: %i[show update]
-      resource :shared_ownership, only: %i[show update]
       resource :check_passported_answers, only: [:show] do
         patch :continue
         patch :reset

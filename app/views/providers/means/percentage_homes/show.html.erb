@@ -1,6 +1,6 @@
 <%= form_with(model: @form,
               scope: :legal_aid_application,
-              url: providers_legal_aid_application_percentage_home_path(@legal_aid_application),
+              url: providers_legal_aid_application_means_percentage_home_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
   <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>

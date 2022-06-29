@@ -56,7 +56,7 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
       end
 
       it "redirects to the dependants" do
-        expect(response).to redirect_to(providers_legal_aid_application_own_home_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
       end
 
       context "neither option is chosen" do

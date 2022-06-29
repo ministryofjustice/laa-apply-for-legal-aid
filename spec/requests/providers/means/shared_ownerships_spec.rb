@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe "providers shared ownership request test", type: :request do
   let!(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
 
-  describe "GET #/providers/applications/:legal_aid_application_id/shared_ownership" do
-    subject { get providers_legal_aid_application_shared_ownership_path(legal_aid_application) }
+  describe "GET #/providers/applications/:legal_aid_application_id/means/shared_ownership" do
+    subject { get providers_legal_aid_application_means_shared_ownership_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -40,20 +40,20 @@ RSpec.describe "providers shared ownership request test", type: :request do
         end
 
         context "applicant owns home outright" do
-          before { get providers_legal_aid_application_property_value_path(legal_aid_application) }
+          before { get providers_legal_aid_application_means_property_value_path(legal_aid_application) }
 
           it "points to the property value page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_property_value_path(legal_aid_application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_property_value_path(legal_aid_application, back: true))
           end
         end
       end
     end
   end
 
-  describe "PATCH #/providers/applications/:legal_aid_application_id/shared_ownership" do
+  describe "PATCH #/providers/applications/:legal_aid_application_id/means/shared_ownership" do
     subject do
-      patch providers_legal_aid_application_shared_ownership_path(legal_aid_application), params: params.merge(submit_button)
+      patch providers_legal_aid_application_means_shared_ownership_path(legal_aid_application), params: params.merge(submit_button)
     end
 
     let(:params) do
@@ -85,7 +85,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
 
           it "redirects to the percentage page" do
             subject
-            expect(response).to redirect_to providers_legal_aid_application_percentage_home_path(legal_aid_application)
+            expect(response).to redirect_to providers_legal_aid_application_means_percentage_home_path(legal_aid_application)
           end
 
           it "update legal_aid_application record" do
@@ -99,7 +99,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
 
             it "redirects to the next step in flow" do
               subject
-              expect(response).to redirect_to providers_legal_aid_application_percentage_home_path(legal_aid_application)
+              expect(response).to redirect_to providers_legal_aid_application_means_percentage_home_path(legal_aid_application)
             end
           end
         end

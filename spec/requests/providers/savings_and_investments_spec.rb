@@ -30,25 +30,25 @@ RSpec.describe "providers savings and investments", type: :request do
 
       describe "back link" do
         context "applicant does not own home" do
-          before { get providers_legal_aid_application_own_home_path(application) }
+          before { get providers_legal_aid_application_means_own_home_path(application) }
 
           it "points to the own home page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_own_home_path(application, back: true))
           end
         end
 
         context "applicant owns home with shared ownership" do
-          before { get providers_legal_aid_application_percentage_home_path(application) }
+          before { get providers_legal_aid_application_means_percentage_home_path(application) }
 
           it "points to percentage owned page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_percentage_home_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_percentage_home_path(application, back: true))
           end
         end
 
         context "applicant owns home sole ownership" do
-          before { get providers_legal_aid_application_shared_ownership_path(application) }
+          before { get providers_legal_aid_application_means_shared_ownership_path(application) }
 
           it "points to the shared ownership page" do
             subject

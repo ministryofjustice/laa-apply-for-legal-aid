@@ -718,6 +718,27 @@ en:
         show:
           page_title: "Are you sure you want to remove %{name}?"
           error: Select yes if you wish to delete the dependant
+      own_homes:
+        show:
+          h1-heading: Does your client own the home that they live in?
+          mortgage: Yes, with a mortgage or loan
+          'no': 'No'
+          owned_outright: Yes, owned outright
+      property_values:
+        show:
+          h1-heading: How much is your client's home worth?
+          hint: You can use property websites to find the estimated value.
+      shared_ownerships:
+        show:
+          heading_1: Does your client own their home with anyone else?
+          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+          housing_assocation_or_landlord: Yes, a housing association or landlord
+          no_sole_owner: No, they're the sole owner
+          partner_or_ex_partner: Yes, a partner or ex-partner
+      percentage_homes:
+        show:
+          h1-heading: What % share of their home does your client legally own?
+          percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -941,20 +962,7 @@ en:
       show:
         h1-heading: What is the outstanding mortgage?
         field_set_header: What is the outstanding mortgage on your client's home?
-    own_homes:
-      show:
-        h1-heading: Does your client own the home that they live in?
-        mortgage: Yes, with a mortgage or loan
-        'no': 'No'
-        owned_outright: Yes, owned outright
-    percentage_homes:
-      show:
-        h1-heading: What % share of their home does your client legally own?
-        percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
-    property_values:
-      show:
-        h1-heading: How much is your client's home worth?
-        hint: You can use property websites to find the estimated value.
+
     proceedings_types:
       create:
         search_and_select: Search for and select a proceeding
@@ -1008,13 +1016,7 @@ en:
     select_offices:
       show:
         h1-heading: Select the account number of the office handling this application
-    shared_ownerships:
-      show:
-        heading_1: Does your client own their home with anyone else?
-        friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-        housing_assocation_or_landlord: Yes, a housing association or landlord
-        no_sole_owner: No, they're the sole owner
-        partner_or_ex_partner: Yes, a partner or ex-partner
+
     start:
       index:
         apply_for_legal_aid_heading: Apply for legal aid
@@ -1046,7 +1048,6 @@ en:
         back_home: Back to your applications
         heading: Application for civil legal aid certificate
         print_button: Print application
-
     review_and_print_applications:
       show:
         heading: Review and print your application
@@ -1056,7 +1057,6 @@ en:
         print_the_application: Print the application and get your client to sign the declaration.
         keep_a_copy: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
         audit: You may need to show this if you’re audited by the LAA in the future.
-
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?
@@ -1156,5 +1156,5 @@ en:
       show:
         page_title: Enter your client's email address
         label: Email address
-        hint: We'll use this to send your client a link to the service.
+        hint: We'll use this to send your client a link to the service.+
 

@@ -29,30 +29,45 @@ RSpec.describe "providers offine accounts", type: :request do
       end
 
       describe "back link" do
+<<<<<<< HEAD
         context "when applicant does not own home" do
           before { get providers_legal_aid_application_own_home_path(application) }
+=======
+        context "applicant does not own home" do
+          before { get providers_legal_aid_application_means_own_home_path(application) }
+>>>>>>> b6237b2b7 (AP-3260 Move home ownership controllers to Providers::Means namespace)
 
           it "points to the own home page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_own_home_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_own_home_path(application, back: true))
           end
         end
 
+<<<<<<< HEAD
         context "when applicant owns home with shared ownership" do
           before { get providers_legal_aid_application_percentage_home_path(application) }
+=======
+        context "applicant owns home with shared ownership" do
+          before { get providers_legal_aid_application_means_percentage_home_path(application) }
+>>>>>>> b6237b2b7 (AP-3260 Move home ownership controllers to Providers::Means namespace)
 
           it "points to percentage owned page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_percentage_home_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_percentage_home_path(application, back: true))
           end
         end
 
+<<<<<<< HEAD
         context "when applicant owns home sole ownership" do
           before { get providers_legal_aid_application_shared_ownership_path(application) }
+=======
+        context "applicant owns home sole ownership" do
+          before { get providers_legal_aid_application_means_shared_ownership_path(application) }
+>>>>>>> b6237b2b7 (AP-3260 Move home ownership controllers to Providers::Means namespace)
 
           it "points to the shared ownership page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_shared_ownership_path(application, back: true))
           end
         end
       end

@@ -7,7 +7,7 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
     context "when a provider" do
       it "returns the path" do
         url = check_answer_url_for(:providers, :own_homes, application)
-        expect(url).to eq "/providers/applications/#{application.id}/own_home?locale=en"
+        expect(url).to eq "/providers/applications/#{application.id}/means/own_home?locale=en"
       end
 
       context "when params are provided" do
@@ -21,7 +21,7 @@ RSpec.describe CheckAnswerUrlHelper, type: :helper do
 
       it "returns the path with anchor" do
         url = check_answer_url_for(:providers, :property_values, application)
-        expect(url).to eq "/providers/applications/#{application.id}/property_value?locale=en#property_value"
+        expect(url).to eq "/providers/applications/#{application.id}/means/property_value?locale=en#property_value"
       end
     end
 

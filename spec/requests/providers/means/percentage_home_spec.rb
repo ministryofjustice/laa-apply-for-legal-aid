@@ -3,8 +3,8 @@ RSpec.describe "provider percentage share of home test", type: :request do
   let!(:application) { create :legal_aid_application, :with_applicant }
   let(:provider) { application.provider }
 
-  describe "GET #/providers/applications/:legal_aid_application_id/percentage_home" do
-    subject { get providers_legal_aid_application_percentage_home_path(application) }
+  describe "GET #/providers/applications/:legal_aid_application_id/means/percentage_home" do
+    subject { get providers_legal_aid_application_means_percentage_home_path(application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -24,8 +24,8 @@ RSpec.describe "provider percentage share of home test", type: :request do
     end
   end
 
-  describe "PATCH #/providers/applications/:legal_aid_application_id/percentage_home" do
-    subject { patch providers_legal_aid_application_percentage_home_path(application), params: params.merge(submit_button) }
+  describe "PATCH #/providers/applications/:legal_aid_application_id/means/./spec/services/reports/means_report_creator_spec.rb:68percentage_home" do
+    subject { patch providers_legal_aid_application_means_percentage_home_path(application), params: params.merge(submit_button) }
 
     let(:percentage_home) { "33.33" }
     let(:params) do

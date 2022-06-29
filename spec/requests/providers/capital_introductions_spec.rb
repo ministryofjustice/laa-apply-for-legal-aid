@@ -48,7 +48,7 @@ RSpec.describe Providers::CapitalIntroductionsController, type: :request do
     end
 
     it "redirects to next page" do
-      expect(subject).to redirect_to(providers_legal_aid_application_own_home_path(legal_aid_application))
+      expect(subject).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
     end
   end
 end
