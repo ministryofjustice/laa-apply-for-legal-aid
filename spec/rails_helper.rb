@@ -93,7 +93,6 @@ end
 
 def uploaded_file(path, content_type = nil, binary: false)
   file = Rack::Test::UploadedFile.new(Rails.root.join(path), content_type, binary)
-  binding.pry
   file
 end
 

@@ -5,7 +5,6 @@ module Providers
     end
 
     def update
-      binding.pry
       if upload_button_pressed?
         perform_upload
       else

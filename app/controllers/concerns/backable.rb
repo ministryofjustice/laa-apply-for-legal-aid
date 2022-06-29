@@ -57,6 +57,9 @@ module Backable
     end
 
     def add_page_to_history
+      url = request.fullpath
+      return if url.to_s.end_with?("/list")
+
       page_history_service.write(page_history << request.fullpath)
     end
 
