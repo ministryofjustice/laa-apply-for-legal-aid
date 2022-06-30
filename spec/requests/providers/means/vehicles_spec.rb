@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Providers::VehiclesController, type: :request do
+RSpec.describe Providers::Means::VehiclesController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
 
-  describe "GET /providers/applications/:legal_aid_application_id/vehicle" do
-    subject { get providers_legal_aid_application_vehicle_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/means/vehicle" do
+    subject { get providers_legal_aid_application_means_vehicle_path(legal_aid_application) }
 
     it "renders successfully" do
       subject
@@ -23,10 +23,10 @@ RSpec.describe Providers::VehiclesController, type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/vehicle" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/means/vehicle" do
     subject do
       patch(
-        providers_legal_aid_application_vehicle_path(legal_aid_application),
+        providers_legal_aid_application_means_vehicle_path(legal_aid_application),
         params:,
       )
     end

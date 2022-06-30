@@ -138,6 +138,7 @@ Rails.application.routes.draw do
         resource :property_value, only: %i[show update]
         resource :shared_ownership, only: %i[show update]
         resource :percentage_home, only: %i[show update]
+        resource :vehicle, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -171,7 +172,6 @@ Rails.application.routes.draw do
       resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
-      resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
         resource :remaining_payment, only: %i[show update]

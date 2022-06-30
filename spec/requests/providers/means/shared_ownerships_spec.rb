@@ -113,7 +113,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
 
           it "redirects to the vehicles page" do
             subject
-            expect(response).to redirect_to providers_legal_aid_application_vehicle_path(legal_aid_application)
+            expect(response).to redirect_to providers_legal_aid_application_means_vehicle_path(legal_aid_application)
           end
 
           it "update legal_aid_application record" do

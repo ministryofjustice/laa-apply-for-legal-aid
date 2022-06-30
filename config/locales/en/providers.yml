@@ -739,6 +739,10 @@ en:
         show:
           h1-heading: What % share of their home does your client legally own?
           percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
+      vehicles:
+        show:
+          heading: Does your client own a vehicle?
+          hint: This includes cars, vans and motorcyles.
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -1131,9 +1135,6 @@ en:
         correct_date: This date is correct
         different_date: I used delegated functions on a different date
     vehicles:
-      show:
-        heading: Does your client own a vehicle?
-        hint: This includes cars, vans and motorcyles.
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?

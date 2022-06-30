@@ -52,7 +52,7 @@ RSpec.describe "providers savings and investments", type: :request do
 
           it "points to the shared ownership page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_shared_ownership_path(application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_shared_ownership_path(application, back: true))
           end
         end
       end
