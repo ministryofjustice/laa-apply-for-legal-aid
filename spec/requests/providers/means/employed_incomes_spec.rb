@@ -6,12 +6,12 @@ RSpec.describe "employed incomes request", type: :request do
   let(:provider) { application.provider }
   let(:setup_tasks) { {} }
 
-  describe "GET /providers/applications/:id/employed_income" do
-    subject { get providers_legal_aid_application_employment_income_path(application) }
+  describe "GET /providers/applications/:id/means/employed_income" do
+    subject(:get_employment_income) { get providers_legal_aid_application_means_employment_income_path(application) }
 
     context "when the provider is not authenticated" do
       before do
-        subject
+        get_employment_income
       end
 
       it_behaves_like "a provider not authenticated"
@@ -21,7 +21,7 @@ RSpec.describe "employed incomes request", type: :request do
       before do
         setup_tasks
         login_as provider
-        subject
+        get_employment_income
       end
 
       it "returns http success" do
@@ -35,8 +35,8 @@ RSpec.describe "employed incomes request", type: :request do
         end
 
         it "displays correct text when applicant is not_employed" do
-          expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.not_employed"))
-          expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.hmrc_not_employed"))
+          expect(unescaped_response_body).to include(I18n.t("providers.means.employment_incomes.show.not_employed"))
+          expect(unescaped_response_body).to include(I18n.t("providers.means.employment_incomes.show.hmrc_not_employed"))
         end
       end
 
@@ -44,15 +44,15 @@ RSpec.describe "employed incomes request", type: :request do
         let(:applicant) { create(:applicant, :employed) }
 
         it "displays correct text" do
-          expect(unescaped_response_body).to include(I18n.t("providers.employment_incomes.show.employed", name: applicant.full_name))
-          expect(unescaped_response_body).not_to include(I18n.t("providers.employment_incomes.show.hmrc_not_employed"))
+          expect(unescaped_response_body).to include(I18n.t("providers.means.employment_incomes.show.employed", name: applicant.full_name))
+          expect(unescaped_response_body).not_to include(I18n.t("providers.means.employment_incomes.show.hmrc_not_employed"))
         end
       end
     end
   end
 
-  describe "PATCH /providers/applications/:id/employed_income" do
-    subject { patch providers_legal_aid_application_employment_income_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/means/employed_income" do
+    subject(:patch_employment_income) { patch providers_legal_aid_application_means_employment_income_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
@@ -68,10 +68,10 @@ RSpec.describe "employed incomes request", type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        patch_employment_income
       end
 
-      context "Form submitted with continue button" do
+      context "when Form submitted with continue button" do
         let(:submit_button) do
           {
             continue_button: "Continue",
@@ -80,7 +80,7 @@ RSpec.describe "employed incomes request", type: :request do
 
         it "updates legal aid application restriction information" do
           expect(application.reload.extra_employment_information).to be true
-          expect(application.reload.extra_employment_information_details).to_not be_empty
+          expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
         context "when the provider has confirmed the information" do
@@ -99,14 +99,14 @@ RSpec.describe "employed incomes request", type: :request do
           end
         end
 
-        context "invalid params" do
+        context "with invalid params" do
           let(:extra_employment_information_details) { "" }
 
           it "displays error" do
             expect(response.body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.extra_employment_information_details.blank"))
           end
 
-          context "no params" do
+          context "with no params" do
             let(:extra_employment_information) { "" }
 
             it "displays error" do
@@ -116,23 +116,23 @@ RSpec.describe "employed incomes request", type: :request do
         end
       end
 
-      context "Form submitted with Save as draft button" do
+      context "when Form submitted with Save as draft button" do
         let(:submit_button) do
           {
             draft_button: "Save as draft",
           }
         end
 
-        context "after success" do
+        context "and after success" do
           before do
             login_as provider
-            subject
+            patch_employment_income
             application.reload
           end
 
           it "updates the legal_aid_application.extra_employment_information" do
             expect(application.extra_employment_information).to be true
-            expect(application.extra_employment_information_details).to_not be_empty
+            expect(application.extra_employment_information_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do
