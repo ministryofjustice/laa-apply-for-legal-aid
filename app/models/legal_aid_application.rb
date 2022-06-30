@@ -293,6 +293,10 @@ class LegalAidApplication < ApplicationRecord
     applicant_updated_after_benefit_check_result_updated?
   end
 
+  def bank_statement_evidence_required?
+    provider_received_citizen_consent == false
+  end
+
   def employment_evidence_required?
     extra_employment_information_details.present? || full_employment_details.present?
   end

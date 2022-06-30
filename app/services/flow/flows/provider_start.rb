@@ -117,7 +117,11 @@ module Flow
             next_step = :non_passported_client_instructions
             next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
 
-            application.provider_received_citizen_consent? ? next_step : :use_ccms
+            if application.provider.bank_statement_upload_permissions?
+              next_step
+            else
+              application.provider_received_citizen_consent? ? next_step : :use_ccms
+            end
           end,
         },
         email_addresses: {

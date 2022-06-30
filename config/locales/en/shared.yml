@@ -226,6 +226,7 @@ en:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
           gateway_evidence: Gateway evidence
+          bank_statement_evidence: Bank statement evidence
         items:
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?

@@ -462,6 +462,7 @@ en:
         section_8_evidence: Use this page to provide optional gateway evidence.
         single_non_specific_item: "Use this page to provide %{item}."
         list_text: 'Use this page to upload:'
+        bank_statement_evidence: evidence of your client's banks statements
         benefit_evidence: evidence that your client receives %{benefit}
         employment_evidence: evidence of your client's employment
         gateway_evidence: gateway evidence for Section 8 proceedings (optional)
