@@ -98,7 +98,7 @@ RSpec.describe "providers savings and investments", type: :request do
 
           it "redirects to the next step in Citizen jouney" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_other_assets_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_other_assets_path(application))
           end
 
           context "none of these checkbox is selected" do

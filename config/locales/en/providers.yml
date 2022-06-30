@@ -747,6 +747,22 @@ en:
         show:
           h1-heading: Which savings or investments does your client have?
           none_selected: None of these
+      other_assets:
+        show:
+          h1-heading: Which assets does your client have?
+        second_home_conditional_checkbox:
+          check_box_second_home: Second property or holiday home
+          second_home_mortgage: Enter the outstanding mortgage amount
+          second_home_percentage: Enter the share your client owns
+          second_home_value: Enter the estimated value
+    other_assets:
+      show:
+        h1-heading: Which assets does your client have?
+      second_home_conditional_checkbox:
+        check_box_second_home: Second property or holiday home
+        second_home_mortgage: Enter the outstanding mortgage amount
+        second_home_percentage: Enter the share your client owns
+        second_home_value: Enter the estimated value
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -931,14 +947,7 @@ en:
           label: 'Yes'
           hint: |
             Your client must have an email address and use online banking for all of their current accounts.
-    other_assets:
-      show:
-        h1-heading: Which assets does your client have?
-      second_home_conditional_checkbox:
-        check_box_second_home: Second property or holiday home
-        second_home_mortgage: Enter the outstanding mortgage amount
-        second_home_percentage: Enter the share your client owns
-        second_home_value: Enter the estimated value
+
     policy_disregards:
       show:
         h1-heading: Select if your client has received payments from these schemes or charities

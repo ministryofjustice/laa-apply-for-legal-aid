@@ -140,6 +140,7 @@ Rails.application.routes.draw do
         resource :percentage_home, only: %i[show update]
         resource :vehicle, only: %i[show update]
         resource :savings_and_investment, only: %i[show update]
+        resource :other_assets, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -153,7 +154,6 @@ Rails.application.routes.draw do
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
       resource :check_benefit, only: %i[index update]
-      resource :other_assets, only: %i[show update]
       resource :policy_disregards, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
         get "/list", to: "application_merits_task/statement_of_cases#list"

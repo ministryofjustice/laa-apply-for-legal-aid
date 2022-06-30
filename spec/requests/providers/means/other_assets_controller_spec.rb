@@ -6,8 +6,8 @@ RSpec.describe "provider other assets requests", type: :request do
   let(:application_id) { application.id }
   let(:provider) { application.provider }
 
-  describe "GET providers/applications/:id/other_assets" do
-    subject { get providers_legal_aid_application_other_assets_path(application) }
+  describe "GET providers/applications/:id/means/other_assets" do
+    subject { get providers_legal_aid_application_means_other_assets_path(application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -31,7 +31,7 @@ RSpec.describe "provider other assets requests", type: :request do
     end
   end
 
-  describe "PATCH providers/applications/:id/other_assets" do
+  describe "PATCH providers/applications/:id/means/other_assets" do
     let(:params) do
       {
         other_assets_declaration: {
@@ -93,7 +93,7 @@ RSpec.describe "provider other assets requests", type: :request do
         end
 
         before do
-          patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
+          patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
         end
 
         context "with valid params" do
@@ -115,7 +115,7 @@ RSpec.describe "provider other assets requests", type: :request do
             let(:application) { oad.legal_aid_application }
 
             before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
             end
 
             it "redirects to capital restrictions" do
@@ -135,7 +135,7 @@ RSpec.describe "provider other assets requests", type: :request do
               application.create_savings_amount!
               application.savings_amount.cash = rand(1...1_000_000.0).round(2)
               application.savings_amount.save!
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
             it "redirects to capital restrictions" do
@@ -152,7 +152,7 @@ RSpec.describe "provider other assets requests", type: :request do
             let(:none_selected) { "true" }
 
             before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
             it "redirects to capital restrictions" do
@@ -169,7 +169,7 @@ RSpec.describe "provider other assets requests", type: :request do
             let(:none_selected) { "true" }
 
             before do
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
             it "redirects to checking answers" do
@@ -196,7 +196,7 @@ RSpec.describe "provider other assets requests", type: :request do
 
             before do
               allow_any_instance_of(LegalAidApplication).to receive(:capture_policy_disregards?).and_return(policy_disregards)
-              patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: empty_params.merge(submit_button)
             end
 
             context "with none of these checkbox selected" do
@@ -278,7 +278,7 @@ RSpec.describe "provider other assets requests", type: :request do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
         before do
-          patch providers_legal_aid_application_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
+          patch providers_legal_aid_application_means_other_assets_path(oad.legal_aid_application), params: params.merge(submit_button)
         end
 
         context "with valid params" do
@@ -319,7 +319,7 @@ RSpec.describe "provider other assets requests", type: :request do
               application.create_savings_amount!
               application.savings_amount.cash = rand(1...1_000_000.0).round(2)
               application.savings_amount.save!
-              patch providers_legal_aid_application_other_assets_path(application), params: empty_params.merge(submit_button)
+              patch providers_legal_aid_application_means_other_assets_path(application), params: empty_params.merge(submit_button)
             end
 
             it "redirects to provider applications page" do

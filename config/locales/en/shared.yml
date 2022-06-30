@@ -431,6 +431,25 @@ en:
                 other_person_account: Enter the estimated total in all accounts
                 peps_unit_trusts_capital_bonds_gov_stocks: Enter the total value of all owned
                 plc_shares: Enter the total value of all owned
+              other_assets:
+                check_box_valuable_items_value: Any valuable items worth £500 or more
+                check_box_land_value: Land
+                check_box_inherited_assets_value: Money or assets from the estate of a person who has died
+                check_box_money_owed_value: Money owed to them, including from a private mortgage
+                check_box_second_home_mortgage: Second property or holiday home outstanding mortgage amount
+                check_box_second_home_percentage: Second property or holiday home percentage owned
+                check_box_second_home_value: Second property or holiday home estimated value
+                check_box_second_home: Second property or holiday home
+                check_box_timeshare_property_value: Timeshare property
+                check_box_trust_value: Interest in a trust
+                valuable_items_value: Enter the estimated total value
+                land_value: Enter the estimated value
+                inherited_assets_value: Enter the estimated total value
+                money_owed_value: Enter the estimated amount owed
+                timeshare_property_value: Enter the value, minus any loan and sale costs
+                trust_value: Enter the estimated total value
+                hint:
+                  check_box_valuable_items_value: For example, jewellery, art or antiques – do not include wedding or engagement rings, furniture, clothing or tools used for work.
       shared_ownership_form:
         friend_family_member_or_other_individual: Yes, a friend, family member or other individual
         housing_assocation_or_landlord: Yes, a housing association or landlord

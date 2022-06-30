@@ -1,5 +1,5 @@
 <%= form_with(model: @form,
-              url: providers_legal_aid_application_other_assets_path(@legal_aid_application),
+              url: providers_legal_aid_application_means_other_assets_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
   <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
@@ -12,7 +12,7 @@
           <%= render partial: '/shared/forms/revealing_checkbox/attribute',
                      collection: Citizens::OtherAssetsForm::VALUABLE_ITEMS_VALUE_ATTRIBUTE,
                      locals: { model: @form, form: form } %>
-          <%= render partial: '/providers/other_assets/second_home_conditional_checkbox', locals: { model: @form, form: form } %>
+          <%= render partial: '/providers/means/other_assets/second_home_conditional_checkbox', locals: { model: @form, form: form } %>
           <%= render partial: '/shared/forms/revealing_checkbox/attribute',
                      collection: Citizens::OtherAssetsForm::SINGLE_VALUE_ATTRIBUTES,
                      locals: { model: @form, form: form } %>
