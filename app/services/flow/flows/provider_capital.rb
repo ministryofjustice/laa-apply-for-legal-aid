@@ -27,7 +27,7 @@ module Flow
           check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         savings_and_investments: {
-          path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_savings_and_investment_path(application) },
           forward: lambda do |application|
             if application.own_capital? && application.checking_answers?
               :restrictions

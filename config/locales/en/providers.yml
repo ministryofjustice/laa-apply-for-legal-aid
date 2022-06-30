@@ -743,6 +743,10 @@ en:
         show:
           heading: Does your client own a vehicle?
           hint: This includes cars, vans and motorcyles.
+      savings_and_investments:
+        show:
+          h1-heading: Which savings or investments does your client have?
+          none_selected: None of these
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -1013,14 +1017,9 @@ en:
             their home has been repossessed
             their assets are the subject matter of dispute (SMOD)
             their assets are held under a restraint order
-    savings_and_investments:
-      show:
-        h1-heading: Which savings or investments does your client have?
-        none_selected: None of these
     select_offices:
       show:
         h1-heading: Select the account number of the office handling this application
-
     start:
       index:
         apply_for_legal_aid_heading: Apply for legal aid

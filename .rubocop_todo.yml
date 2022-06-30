@@ -201,7 +201,7 @@ RSpec/ContextWording:
     - 'spec/requests/providers/received_benefit_confirmations_spec.rb'
     - 'spec/requests/providers/means/remove_dependant_controller_spec.rb'
     - 'spec/requests/providers/restrictions_spec.rb'
-    - 'spec/requests/providers/savings_and_investments_spec.rb'
+    - 'spec/requests/providers/means/savings_and_investments_spec.rb'
     - 'spec/requests/providers/select_offices_spec.rb'
     - 'spec/requests/providers/means/shared_ownerships_spec.rb'
     - 'spec/requests/providers/substantive_applications_spec.rb'
@@ -736,7 +736,7 @@ RSpec/NamedSubject:
     - 'spec/requests/providers/received_benefit_confirmations_spec.rb'
     - 'spec/requests/providers/means/remove_dependant_controller_spec.rb'
     - 'spec/requests/providers/restrictions_spec.rb'
-    - 'spec/requests/providers/savings_and_investments_spec.rb'
+    - 'spec/requests/providers/means/savings_and_investments_spec.rb'
     - 'spec/requests/providers/select_offices_spec.rb'
     - 'spec/requests/providers/means/shared_ownerships_spec.rb'
     - 'spec/requests/providers/start_spec.rb'
@@ -911,7 +911,7 @@ RSpec/RepeatedExample:
   Exclude:
     - 'spec/requests/providers/check_merits_answers_spec.rb'
     - 'spec/requests/providers/offline_accounts_spec.rb'
-    - 'spec/requests/providers/savings_and_investments_spec.rb'
+    - 'spec/requests/providers/means/savings_and_investments_spec.rb'
     - 'spec/services/ccms/requestors/case_add_requestor_xml_blocks/passported_attributes_spec.rb'
     - 'spec/services/provider_after_login_service_spec.rb'
 

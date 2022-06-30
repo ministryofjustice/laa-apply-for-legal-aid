@@ -113,7 +113,7 @@ RSpec.describe "providers offine accounts", type: :request do
 
           it "redirects to the next step in Citizen jouney" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(application))
           end
 
           context "when 'none of these' checkbox is selected" do
@@ -169,7 +169,7 @@ RSpec.describe "providers offine accounts", type: :request do
               let(:state) { :provider_entering_merits }
 
               it "redirects to the restrictions page" do
-                expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(application))
+                expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(application))
               end
             end
           end

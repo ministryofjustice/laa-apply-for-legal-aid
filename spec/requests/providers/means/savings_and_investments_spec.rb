@@ -4,8 +4,8 @@ RSpec.describe "providers savings and investments", type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount }
   let(:savings_amount) { application.savings_amount }
 
-  describe "GET /providers/applications/:legal_aid_application_id/savings_and_investment" do
-    subject { get providers_legal_aid_application_savings_and_investment_path(application) }
+  describe "GET /providers/applications/:legal_aid_application_id/means/savings_and_investment" do
+    subject { get providers_legal_aid_application_means_savings_and_investment_path(application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -59,8 +59,8 @@ RSpec.describe "providers savings and investments", type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/savings_and_investment" do
-    subject { patch providers_legal_aid_application_savings_and_investment_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:legal_aid_application_id/means/savings_and_investment" do
+    subject { patch providers_legal_aid_application_means_savings_and_investment_path(application), params: params.merge(submit_button) }
 
     let(:cash) { rand(1...1_000_000.0).round(2).to_s }
     let(:check_box_cash) { "true" }

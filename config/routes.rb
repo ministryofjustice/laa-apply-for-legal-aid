@@ -139,6 +139,7 @@ Rails.application.routes.draw do
         resource :shared_ownership, only: %i[show update]
         resource :percentage_home, only: %i[show update]
         resource :vehicle, only: %i[show update]
+        resource :savings_and_investment, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
@@ -180,7 +181,6 @@ Rails.application.routes.draw do
       end
       resource :applicant_bank_account, only: %i[show update]
       resource :offline_account, only: %i[show update]
-      resource :savings_and_investment, only: %i[show update]
       resource :check_passported_answers, only: [:show] do
         patch :continue
         patch :reset
