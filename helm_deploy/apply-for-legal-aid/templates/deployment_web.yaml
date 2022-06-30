@@ -63,10 +63,10 @@ spec:
           resources:
             limits:
               cpu: 1000m
-              memory: 2Gi
+              memory: 3Gi
             requests:
               cpu: 10m
-              memory: 512Mi
+              memory: 1Gi
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
