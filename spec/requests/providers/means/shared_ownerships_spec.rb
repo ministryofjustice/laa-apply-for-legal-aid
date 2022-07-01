@@ -128,7 +128,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
 
             it "redirects to check answers page" do
               subject
-              expect(response).to redirect_to providers_legal_aid_application_restrictions_path(legal_aid_application)
+              expect(response).to redirect_to providers_legal_aid_application_means_restrictions_path(legal_aid_application)
             end
           end
         end

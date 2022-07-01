@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Providers::PolicyDisregardsController, type: :request do
+RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
   let(:application) { create :application, :with_applicant }
   let(:policy) { application.create_policy_disregards! }
   let(:application_id) { application.id }
   let(:provider) { application.provider }
 
-  describe "GET providers/applications/:id/policy_disregards" do
-    subject { get providers_legal_aid_application_policy_disregards_path(application) }
+  describe "GET providers/applications/:id/means/policy_disregards" do
+    subject { get providers_legal_aid_application_means_policy_disregards_path(application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -26,12 +26,12 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
       end
 
       it "displays the show page" do
-        expect(response.body).to include I18n.t("providers.policy_disregards.show.h1-heading")
+        expect(response.body).to include I18n.t("providers.means.policy_disregards.show.h1-heading")
       end
     end
   end
 
-  describe "PATCH providers/applications/:id/policy_disregards" do
+  describe "PATCH providers/applications/:id/means/policy_disregards" do
     let(:params) do
       {
         policy_disregards: {
@@ -58,7 +58,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
         end
 
         before do
-          patch providers_legal_aid_application_policy_disregards_path(policy.legal_aid_application), params: params.merge(submit_button)
+          patch providers_legal_aid_application_means_policy_disregards_path(policy.legal_aid_application), params: params.merge(submit_button)
         end
 
         context "with valid params" do
@@ -113,7 +113,7 @@ RSpec.describe Providers::PolicyDisregardsController, type: :request do
         let(:submit_button) { { continue_button: "Continue" } }
 
         before do
-          patch providers_legal_aid_application_policy_disregards_path(policy.legal_aid_application), params: empty_params.merge(submit_button)
+          patch providers_legal_aid_application_means_policy_disregards_path(policy.legal_aid_application), params: empty_params.merge(submit_button)
         end
 
         context "with 'none of these' checkbox selected" do

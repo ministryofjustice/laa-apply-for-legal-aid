@@ -142,7 +142,7 @@ RSpec.describe "check passported answers requests", type: :request do
         expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_percentage_home_path(application, anchor: "percentage_home"))
         expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
         expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
-        expect(response.body).to include(providers_legal_aid_application_restrictions_path(application))
+        expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
       end
 
       it "displays the correct savings details" do

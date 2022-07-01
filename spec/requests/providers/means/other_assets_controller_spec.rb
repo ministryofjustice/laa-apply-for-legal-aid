@@ -122,7 +122,7 @@ RSpec.describe "provider other assets requests", type: :request do
               expect(application.reload.other_assets?).to be true
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
             end
           end
 
@@ -142,7 +142,7 @@ RSpec.describe "provider other assets requests", type: :request do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be false
               expect(application.savings_amount?).to be true
-              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
             end
           end
 
@@ -159,7 +159,7 @@ RSpec.describe "provider other assets requests", type: :request do
               expect(application.reload.other_assets?).to be false
               expect(application.own_home?).to be true
               expect(application.savings_amount?).to be false
-              expect(response).to redirect_to(providers_legal_aid_application_restrictions_path(oad.legal_aid_application))
+              expect(response).to redirect_to(providers_legal_aid_application_means_restrictions_path(oad.legal_aid_application))
             end
           end
 
@@ -204,7 +204,7 @@ RSpec.describe "provider other assets requests", type: :request do
                 expect(application.reload.other_assets?).to be false
                 expect(application.own_home?).to be false
                 expect(application.savings_amount?).to be false
-                expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
+                expect(response).to redirect_to(providers_legal_aid_application_means_policy_disregards_path(application))
               end
 
               context "when the calculation date is prior to the policy disregards date" do

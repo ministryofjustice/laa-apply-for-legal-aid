@@ -53,7 +53,7 @@ module Flow
           check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         restrictions: {
-          path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_restrictions_path(application) },
           forward: lambda do |application|
             if application.capture_policy_disregards?
               :policy_disregards
@@ -64,7 +64,7 @@ module Flow
           check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
         },
         policy_disregards: {
-          path: ->(application) { urls.providers_legal_aid_application_policy_disregards_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
           forward: ->(application) { application.passported? ? :check_passported_answers : :means_summaries },
           check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
         },

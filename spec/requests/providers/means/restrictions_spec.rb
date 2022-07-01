@@ -4,8 +4,8 @@ RSpec.describe "provider restrictions request", type: :request do
   let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
   let(:provider) { application.provider }
 
-  describe "GET /providers/applications/:id/restrictions" do
-    subject { get providers_legal_aid_application_restrictions_path(application) }
+  describe "GET /providers/applications/:id/means/restrictions" do
+    subject { get providers_legal_aid_application_means_restrictions_path(application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -25,8 +25,8 @@ RSpec.describe "provider restrictions request", type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:id/restrictions" do
-    subject { patch providers_legal_aid_application_restrictions_path(application), params: params.merge(submit_button) }
+  describe "PATCH /providers/applications/:id/means/restrictions" do
+    subject { patch providers_legal_aid_application_means_restrictions_path(application), params: params.merge(submit_button) }
 
     let(:params) do
       {
@@ -54,7 +54,7 @@ RSpec.describe "provider restrictions request", type: :request do
 
         it "updates legal aid application restriction information" do
           expect(application.reload.has_restrictions).to be true
-          expect(application.reload.restrictions_details).to_not be_empty
+          expect(application.reload.restrictions_details).not_to be_empty
         end
 
         context "when the citizen has completed the non-passported path" do
@@ -72,7 +72,7 @@ RSpec.describe "provider restrictions request", type: :request do
             end
 
             it "redirects to policy disregards" do
-              expect(response).to redirect_to(providers_legal_aid_application_policy_disregards_path(application))
+              expect(response).to redirect_to(providers_legal_aid_application_means_policy_disregards_path(application))
             end
           end
 
@@ -153,7 +153,7 @@ RSpec.describe "provider restrictions request", type: :request do
 
           it "updates the legal_aid_application.restrictions" do
             expect(application.has_restrictions).to be true
-            expect(application.restrictions_details).to_not be_empty
+            expect(application.restrictions_details).not_to be_empty
           end
 
           it "redirects to the list of applications" do
