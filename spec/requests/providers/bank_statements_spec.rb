@@ -103,10 +103,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.to change(legal_aid_application.attachments, :count).by(1)
         end
 
-        it "adds a bank_statement object" do
-          expect { request }.to change(legal_aid_application.bank_statements, :count).by(1)
-        end
-
         it "enqueues job to convert uploaded attachment document to pdf" do
           expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
           expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
@@ -124,7 +120,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "sets attachment_name to model name" do
           request
-          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("bank_statement")
+          expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("bank_statement_evidence")
         end
 
         context "with background job processing" do
@@ -151,12 +147,12 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         end
 
         context "when the application has one bank statment attachment already" do
-          let(:bank_statement_evidence) { create(:attachment, :bank_statement, attachment_name: "bank_statement") }
+          let(:bank_statement_evidence) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
           let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement_evidence]) }
 
           it "increments the attachment name" do
             request
-            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[bank_statement bank_statement_1])
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_name)).to match_array(%w[bank_statement_evidence bank_statement_evidence_1])
           end
         end
       end
@@ -166,10 +162,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "does not add attachment object" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
-        end
-
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
         it "does not enqueue job to convert upload to pdf" do
@@ -194,10 +186,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
-        end
-
         it "does not enqueue job to convert upload to pdf" do
           expect { request }.not_to change(PdfConverterWorker.jobs, :size)
         end
@@ -220,10 +208,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
-        end
-
         it "does not enqueue job to convert upload to pdf" do
           expect { request }.not_to change(PdfConverterWorker.jobs, :size)
         end
@@ -244,10 +228,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "does not add attachment object" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
-        end
-
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
         it "does not enqueue job to convert upload to pdf" do
@@ -297,10 +277,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
-        end
-
         # TODO: this will need to change to the new provider means flow
         it "redirects to check_your_answers" do
           request
@@ -311,10 +287,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
       context "with no files attached" do
         it "does not add attachment object" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
-        end
-
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
         it "renders :show, again" do
@@ -346,10 +318,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
-        end
-
         it "redirects to provider\'s application list" do
           request
           expect(response).to redirect_to providers_legal_aid_applications_path
@@ -359,10 +327,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
       context "with no files attached" do
         it "does not add attachment object" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
-        end
-
-        it "does not add a bank_statement object" do
-          expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
         it "redirects to provider\'s application list" do
@@ -391,10 +355,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         expect { request }.to change(legal_aid_application.attachments, :count).by(-1)
       end
 
-      it "deletes the bank_statement object" do
-        expect { request }.to change(legal_aid_application.bank_statements, :count).by(-1)
-      end
-
       it "returns http success" do
         request
         expect(response).to have_http_status(:ok)
@@ -409,6 +369,18 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         request
         expect(response.body).to have_selector("div.govuk-notification-banner", text: "acceptable.pdf has been successfully deleted")
       end
+
+      context "with background job processing" do
+        around do |example|
+          Sidekiq::Testing.inline!
+          example.run
+          Sidekiq::Testing.fake!
+        end
+
+        it "deletes original attachment and converted pdf attachment" do
+          expect { request }.to change(legal_aid_application.attachments, :count).by(-2)
+        end
+      end
     end
 
     context "with non-existent file" do
@@ -416,10 +388,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
       it "does not delete any attachment objects" do
         expect { request }.not_to change(legal_aid_application.attachments, :count)
-      end
-
-      it "does not delete any bank_statement objects" do
-        expect { request }.not_to change(legal_aid_application.bank_statements, :count)
       end
 
       it "returns http success" do

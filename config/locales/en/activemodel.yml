@@ -213,16 +213,6 @@ en:
           attributes:
             attachment_type:
               invalid: "'%{attachment_type}' is invalid"
-        bank_statement:
-          attributes:
-            original_file:
-              content_type_invalid: "%{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
-              file_empty: "%{file_name} has no content"
-              file_too_big: "%{file_name} must be smaller than %{size}MB"
-              file_virus: "%{file_name} contains a virus"
-              system_down: There was a problem uploading your file - try again
-              no_file_chosen: Upload your client's bank statements
-              blank: Attach a file
         dependant:
           attributes:
             name:
@@ -475,6 +465,15 @@ en:
               blank: Select an account number
             username:
               already_exists: There is already a user with that username
+        providers/bank_statement_form:
+          attributes:
+            original_file:
+              content_type_invalid: "%{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
+              file_empty: "%{file_name} has no content"
+              file_too_big: "%{file_name} must be smaller than %{size}MB"
+              file_virus: "%{file_name} contains a virus"
+              no_file_chosen: Upload your client's bank statements
+              system_down: There was a problem uploading your file - try again
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only

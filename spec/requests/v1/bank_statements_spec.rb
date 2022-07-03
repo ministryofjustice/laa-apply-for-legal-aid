@@ -26,18 +26,9 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
         expect { request }.to change { legal_aid_application.reload.attachments.count }.by 1
       end
 
-      it "adds the bank statement object to the legal aid application" do
-        expect { request }.to change { legal_aid_application.reload.bank_statements.count }.by 1
-      end
-
       it "enqueues job to convert uploaded attachment document to pdf" do
         expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
         expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
-      end
-
-      it "links the bank statement object to the attachment object" do
-        request
-        expect(legal_aid_application.reload.bank_statements.last.attachment).to have_attributes(original_filename: "hello_world.pdf")
       end
 
       it "attachment has expected attributes" do
@@ -111,7 +102,6 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
         it "does not save the object and raises a 400 error with text" do
           request
           expect(legal_aid_application.attachments.count).to be 0
-          expect(legal_aid_application.bank_statements.count).to be 0
           expect(response.status).to eq 400
           expect(response.body).to include("malware.doc contains a virus")
         end

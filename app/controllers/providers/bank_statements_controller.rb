@@ -2,9 +2,9 @@ module Providers
   class BankStatementsController < ProviderBaseController
     skip_back_history_for :list
 
-    def show
-      populate_form
-    end
+    before_action :set_form, only: %i[show update destroy]
+
+    def show; end
 
     def update
       if upload_button_pressed?
@@ -19,7 +19,6 @@ module Providers
     def destroy
       original_file = delete_original_and_pdf_files
       @successfully_deleted = files_deleted_message(original_file.original_filename) unless original_file.nil?
-      populate_form
       render :show
     end
 
@@ -43,13 +42,8 @@ module Providers
       render :show
     end
 
-    # we do not use the model here but it needs to be passed to keep inheritance happy :)
-    def populate_form
-      @form = BankStatementForm.new(model: bank_statement)
-    end
-
-    def bank_statement
-      @bank_statement ||= legal_aid_application.bank_statements.build
+    def set_form
+      @form = BankStatementForm.new(bank_statement_form_params)
     end
 
     def form
@@ -86,14 +80,16 @@ module Providers
     end
 
     def delete_attachment(attachment)
-      bank_statement = legal_aid_application.bank_statements.find_by(attachment_id: attachment.id)
-      bank_statement.destroy!
       attachment.document.purge_later
       attachment.destroy!
     end
 
     def attachment_id
-      params[:attachment_id]
+      attachment_params[:attachment_id]
+    end
+
+    def attachment_params
+      params.permit(:attachment_id)
     end
   end
 end

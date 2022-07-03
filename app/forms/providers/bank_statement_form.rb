@@ -1,9 +1,29 @@
 module Providers
-  class BankStatementForm < BaseFileUploaderForm
-    # this is just a patch to mock the current pattern as we
-    # are not passing model params from the controller
-    # and not relying on there being a model instance
-    form_for BankStatement
+  class BankStatementForm
+    include ActiveModel::Model
+    include ActiveModel::Validations::Callbacks
+    include MalwareScanning
+
+    ATTACHMENT_TYPE = "bank_statement_evidence".freeze
+    ATTACHMENT_TYPE_CAPTURE = /^#{ATTACHMENT_TYPE}_(\d+)$/
+
+    MAX_FILE_SIZE = 7.megabytes
+
+    ALLOWED_CONTENT_TYPES = %w[
+      application/pdf
+      application/msword
+      application/vnd.oasis.opendocument.text
+      text/rtf
+      text/plain
+      application/rtf
+      image/jpeg
+      image/png
+      image/tiff
+      image/bmp
+      image/x-bitmap
+    ].freeze
+
+    WORD_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document".freeze
 
     attr_accessor :original_file,
                   :original_filename,
@@ -12,9 +32,20 @@ module Providers
 
     validate :at_least_one_file_or_draft
 
+    def self.max_file_size
+      MAX_FILE_SIZE
+    end
+
+    # rubocop:disable Rails/SaveBang
+    def save_as_draft
+      @draft = true
+      save
+    end
+    # rubocop:enable Rails/SaveBang
+
     # Files already uploaded and created with bank statement associations
     # so we do not need to save anything at this point, only to validate that
-    # there is one or more bank statements or the the application is draft
+    # there is one or more bank statements or the application is draft
     def save
       valid?
     end
@@ -36,6 +67,15 @@ module Providers
 
   private
 
+    def validate_original_file
+      self.original_filename = original_file.original_filename
+      scanner_down(original_file)
+      malware_scan(original_file)
+      file_empty(original_file)
+      disallowed_content_type(original_file)
+      too_big(original_file)
+    end
+
     def at_least_one_file_or_draft
       return if any_bank_statements_or_draft?
 
@@ -46,40 +86,77 @@ module Providers
       legal_aid_application.attachments.bank_statement_evidence.any? || draft?
     end
 
+    def draft?
+      @draft
+    end
+
     # can be shared with v1 bank statement controller
     def create_attachment(file)
       attachment = legal_aid_application
-                    .attachments.create!(document: file,
-                                         attachment_type: "bank_statement_evidence",
-                                         original_filename: file.original_filename,
-                                         attachment_name: sequenced_attachment_name)
-
-      legal_aid_application
-        .bank_statements
-        .create!(legal_aid_application_id: legal_aid_application.id,
-                 provider_uploader_id: provider_uploader.id,
-                 attachment_id: attachment.id)
+                     .attachments.create!(document: file,
+                                          attachment_type: "bank_statement_evidence",
+                                          original_filename: file.original_filename,
+                                          attachment_name: sequenced_attachment_name)
 
       PdfConverterWorker.perform_async(attachment.id)
+    end
+
+    def too_big(original_file)
+      return if original_file_size(original_file) <= self.class.max_file_size
+
+      error_options = { size: self.class.max_file_size / 1.megabyte, file_name: @original_filename }
+      errors.add(:original_file, original_file_error_for(:file_too_big, error_options))
+    end
+
+    def file_empty(original_file)
+      return if File.size(original_file.tempfile) > 1
+
+      errors.add(:original_file, original_file_error_for(:file_empty, file_name: @original_filename))
+    end
+
+    def disallowed_content_type(original_file)
+      return if Marcel::Magic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
+      return if original_file.content_type == WORD_DOCUMENT
+
+      errors.add(:original_file, original_file_error_for(:content_type_invalid, file_name: @original_filename))
+    end
+
+    def scanner_down(original_file)
+      return if malware_scan_result(original_file).scanner_working
+
+      errors.add(:original_file, original_file_error_for(:system_down, file_name: @original_filename))
+    end
+
+    def malware_scan(original_file)
+      return unless malware_scan_result(original_file).virus_found?
+
+      errors.add(:original_file, original_file_error_for(:file_virus, file_name: @original_filename))
     end
 
     # can be shared with v1 bank statement controller
     def sequenced_attachment_name
       if legal_aid_application.attachments.bank_statement_evidence.any?
-        most_recent_name = legal_aid_application.attachments.bank_statement_evidence.order(:attachment_name).last.attachment_name
+        most_recent_name = legal_aid_application.attachments.bank_statement_evidence.order(:created_at, :attachment_name).last.attachment_name
         increment_name(most_recent_name)
       else
-        name
+        ATTACHMENT_TYPE
       end
     end
 
-    def validate_original_file
-      self.original_filename = original_file.original_filename
-      scanner_down(original_file)
-      malware_scan(original_file)
-      file_empty(original_file)
-      disallowed_content_type(original_file)
-      too_big(original_file)
+    def increment_name(most_recent_name)
+      if most_recent_name == ATTACHMENT_TYPE
+        "#{ATTACHMENT_TYPE}_1"
+      else
+        most_recent_name =~ ATTACHMENT_TYPE_CAPTURE
+        "#{ATTACHMENT_TYPE}_#{Regexp.last_match(1).to_i + 1}"
+      end
     end
+
+    def error_path
+      "providers/bank_statement_form"
+    end
+    # def original_file_error_for(error_type, options = {})
+    #   I18n.t("activemodel.errors.models.#{error_path}.attributes.original_file.#{error_type}", **options)
+    # end
   end
 end

@@ -2,6 +2,7 @@ module V1
   class BankStatementsController < ApiController
     include MalwareScanning
     ATTACHMENT_TYPE = "bank_statement_evidence".freeze
+    ATTACHMENT_TYPE_CAPTURE = /^#{ATTACHMENT_TYPE}_(\d+)$/
 
     def create
       return head :not_found unless legal_aid_application
@@ -19,12 +20,6 @@ module V1
                               original_filename: file.original_filename,
                               attachment_name: sequenced_attachment_name)
 
-      legal_aid_application
-        .bank_statements
-        .create!(legal_aid_application_id: legal_aid_application.id,
-                 provider_uploader_id: provider_uploader.id,
-                 attachment_id: attachment.id)
-
       PdfConverterWorker.perform_async(attachment.id)
 
       head :ok
@@ -34,10 +29,6 @@ module V1
 
     def provider_uploader
       legal_aid_application.provider
-    end
-
-    def error_path
-      "bank_statement"
     end
 
     def legal_aid_application
@@ -59,13 +50,16 @@ module V1
     end
 
     def increment_name(most_recent_name)
-      name = ATTACHMENT_TYPE
-      if most_recent_name == name
-        "#{name}_1"
+      if most_recent_name == ATTACHMENT_TYPE
+        "#{ATTACHMENT_TYPE}_1"
       else
-        most_recent_name =~ /^#{name}_(\d+)$/
-        "#{name}_#{Regexp.last_match(1).to_i + 1}"
+        most_recent_name =~ ATTACHMENT_TYPE_CAPTURE
+        "#{ATTACHMENT_TYPE}_#{Regexp.last_match(1).to_i + 1}"
       end
+    end
+
+    def error_path
+      "providers/bank_statement_form"
     end
   end
 end

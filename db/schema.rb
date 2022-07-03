@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_24_064406) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_111338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -209,17 +209,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_064406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
-  end
-
-  create_table "bank_statements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "legal_aid_application_id", null: false
-    t.uuid "attachment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "provider_uploader_id"
-    t.index ["attachment_id"], name: "index_bank_statements_on_attachment_id"
-    t.index ["legal_aid_application_id"], name: "index_bank_statements_on_legal_aid_application_id"
-    t.index ["provider_uploader_id"], name: "index_bank_statements_on_provider_uploader_id"
   end
 
   create_table "bank_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -856,9 +845,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_24_064406) do
   add_foreign_key "bank_accounts", "bank_providers"
   add_foreign_key "bank_errors", "applicants"
   add_foreign_key "bank_providers", "applicants"
-  add_foreign_key "bank_statements", "attachments"
-  add_foreign_key "bank_statements", "legal_aid_applications"
-  add_foreign_key "bank_statements", "providers", column: "provider_uploader_id"
   add_foreign_key "bank_transactions", "bank_accounts"
   add_foreign_key "benefit_check_results", "legal_aid_applications"
   add_foreign_key "ccms_submission_documents", "ccms_submissions", column: "submission_id"
