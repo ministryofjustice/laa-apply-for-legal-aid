@@ -107,6 +107,11 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.to change(legal_aid_application.bank_statements, :count).by(1)
         end
 
+        it "enqueues job to convert uploaded attachment document to pdf" do
+          expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
+          expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
+        end
+
         it "stores the original filename" do
           request
           expect(legal_aid_application.reload.attachments.last.original_filename).to eq "acceptable.pdf"
@@ -120,6 +125,29 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         it "sets attachment_name to model name" do
           request
           expect(legal_aid_application.reload.attachments.last.attachment_name).to eq("bank_statement")
+        end
+
+        context "with background job processing" do
+          around do |example|
+            Sidekiq::Testing.inline!
+            example.run
+            Sidekiq::Testing.fake!
+          end
+
+          it "adds 2 attachments" do
+            expect { request }.to change(legal_aid_application.attachments, :count).by(2)
+          end
+
+          it "adds original and converted attachments types" do
+            request
+            expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[bank_statement_evidence bank_statement_evidence_pdf])
+          end
+
+          it "associates pdf converted attachment to original attachment" do
+            request
+            original_attachment = legal_aid_application.attachments.find_by(attachment_type: "bank_statement_evidence")
+            expect(original_attachment.pdf_attachment_id).not_to be_nil
+          end
         end
 
         context "when the application has one bank statment attachment already" do
@@ -144,6 +172,10 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
+        it "does not enqueue job to convert upload to pdf" do
+          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+        end
+
         it "returns http success" do
           request
           expect(response).to have_http_status(:ok)
@@ -164,6 +196,10 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "does not add a bank_statement object" do
           expect { request }.not_to change(legal_aid_application.bank_statements, :count)
+        end
+
+        it "does not enqueue job to convert upload to pdf" do
+          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
         end
 
         it "returns http success" do
@@ -188,6 +224,10 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.bank_statements, :count)
         end
 
+        it "does not enqueue job to convert upload to pdf" do
+          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+        end
+
         it "returns http success" do
           request
           expect(response).to have_http_status(:ok)
@@ -208,6 +248,10 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "does not add a bank_statement object" do
           expect { request }.not_to change(legal_aid_application.bank_statements, :count)
+        end
+
+        it "does not enqueue job to convert upload to pdf" do
+          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
         end
 
         it "returns http success" do

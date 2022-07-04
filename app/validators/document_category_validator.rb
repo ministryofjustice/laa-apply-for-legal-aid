@@ -17,6 +17,7 @@ class DocumentCategoryValidator < ActiveModel::Validator
     statement_of_case
     statement_of_case_pdf
     bank_statement_evidence
+    bank_statement_evidence_pdf
   ].freeze
 
   def validate(record)

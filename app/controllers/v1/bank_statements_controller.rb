@@ -25,6 +25,8 @@ module V1
                  provider_uploader_id: provider_uploader.id,
                  attachment_id: attachment.id)
 
+      PdfConverterWorker.perform_async(attachment.id)
+
       head :ok
     end
 

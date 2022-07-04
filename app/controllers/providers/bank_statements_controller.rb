@@ -11,7 +11,6 @@ module Providers
         perform_upload
       elsif save_continue_or_draft(form)
         nil
-        # TODO: convert_new_files_to_pdf
       else
         render :show
       end
@@ -77,12 +76,6 @@ module Providers
 
       I18n.t("activemodel.attributes.bank_statement.file_uploaded", file_name: form.original_file.original_filename)
     end
-
-    # def convert_new_files_to_pdf
-    #   statement_of_case.original_attachments.each do |attachment|
-    #     PdfConverterWorker.perform_async(attachment.id)
-    #   end
-    # end
 
     def delete_original_and_pdf_files
       original_attachment = Attachment.find(attachment_id)

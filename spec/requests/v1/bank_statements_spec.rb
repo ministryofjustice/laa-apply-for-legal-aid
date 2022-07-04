@@ -30,6 +30,11 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
         expect { request }.to change { legal_aid_application.reload.bank_statements.count }.by 1
       end
 
+      it "enqueues job to convert uploaded attachment document to pdf" do
+        expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
+        expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
+      end
+
       it "links the bank statement object to the attachment object" do
         request
         expect(legal_aid_application.reload.bank_statements.last.attachment).to have_attributes(original_filename: "hello_world.pdf")
@@ -42,6 +47,29 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
                               attachment_type: "bank_statement_evidence",
                               original_filename: "hello_world.pdf",
                               attachment_name: "bank_statement_evidence")
+      end
+
+      context "with background job processing" do
+        around do |example|
+          Sidekiq::Testing.inline!
+          example.run
+          Sidekiq::Testing.fake!
+        end
+
+        it "adds 2 attachments" do
+          expect { request }.to change(legal_aid_application.attachments, :count).by(2)
+        end
+
+        it "adds original and converted attachments types" do
+          request
+          expect(legal_aid_application.reload.attachments.pluck(:attachment_type)).to match_array(%w[bank_statement_evidence bank_statement_evidence_pdf])
+        end
+
+        it "associates pdf converted attachment to original attachment" do
+          request
+          original_attachment = legal_aid_application.attachments.find_by(attachment_type: "bank_statement_evidence")
+          expect(original_attachment.pdf_attachment_id).not_to be_nil
+        end
       end
 
       context "when the application has no bank statements" do

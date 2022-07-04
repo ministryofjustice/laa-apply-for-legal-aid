@@ -59,6 +59,8 @@ module Providers
         .create!(legal_aid_application_id: legal_aid_application.id,
                  provider_uploader_id: provider_uploader.id,
                  attachment_id: attachment.id)
+
+      PdfConverterWorker.perform_async(attachment.id)
     end
 
     # can be shared with v1 bank statement controller
