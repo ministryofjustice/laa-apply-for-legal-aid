@@ -6,15 +6,12 @@ module Citizens
 
     def update
       @form = ::StudentFinances::AnnualAmountForm.new(form_params)
-      if student_finance
+      if @form.save
         legal_aid_application.update!(student_finance:)
-        if student_finance == "false" || @form.save
-          return go_forward
-        end
+        go_forward
       else
-        @form.errors.add(:student_finance, I18n.t("activemodel.errors.models.legal_aid_application.attributes.student_finance.blank"))
+        render :show
       end
-      render :show
     end
 
   private
@@ -27,7 +24,7 @@ module Citizens
       merge_with_model(irregular_income) do
         return {} unless params[:irregular_income]
 
-        params.require(:irregular_income).permit(:amount).merge({ income_type: "student_loan", frequency: "annual", legal_aid_application_id: legal_aid_application.id })
+        params.require(:irregular_income).permit(:amount, :student_finance).merge({ income_type: "student_loan", frequency: "annual", legal_aid_application_id: legal_aid_application.id })
       end
     end
 
