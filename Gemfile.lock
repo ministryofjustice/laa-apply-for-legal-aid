@@ -422,7 +422,7 @@ GEM
       jwt (>= 1.5, < 3)
     numerizer (0.1.1)
     oauth (0.5.10)
-    oauth2 (1.4.9)
+    oauth2 (1.4.10)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
