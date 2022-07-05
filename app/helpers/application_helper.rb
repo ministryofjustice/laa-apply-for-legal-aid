@@ -4,7 +4,7 @@ module ApplicationHelper
     link_url = providers_legal_aid_applications_url if request.path_info.include?("providers")
     link_to_accessible(t("layouts.application.header.title"),
                        link_url,
-                       class: "govuk-header__link govuk-header__link--service-name")
+                       class: "govuk-heading-m govuk-!-margin-bottom-0 govuk-header__link govuk-header__service-name")
   end
 
   def html_title
