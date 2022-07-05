@@ -2,6 +2,9 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
+
+  # TODO: remove nocov in controller and re-enable disabled tests and let statements below
+  #  once the flow ticket (AP-3264) is complete
   # let!(:child_care) { create :transaction_type, :child_care }
   # let!(:maintenance_out) { create :transaction_type, :maintenance_out }
   let(:next_flow_step) { flow_forward_path }

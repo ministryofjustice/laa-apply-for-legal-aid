@@ -5,6 +5,9 @@ module Providers
 
       def show; end
 
+      # TODO: remove nocov and re-enable disabled tests in the
+      #  controller once the flow ticket ()AP-3264) is complete
+      # :nocov:
       def update
         if aggregated_cash_outgoings.update(form_params)
           update_no_cash_outgoings(form_params)
@@ -34,6 +37,7 @@ module Providers
         val = params.permit(:none_selected)[:none_selected] == "true"
         legal_aid_application.update!(no_cash_outgoings: val)
       end
+      # :nocov:
     end
   end
 end

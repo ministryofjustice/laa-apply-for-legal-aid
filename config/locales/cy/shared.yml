@@ -221,6 +221,9 @@ cy:
         name: emaN
         email_label: sserdda liamE
         nino_label: rebmun ecnarusnI lanoitaN
+      cash_outgoings_form:
+        info: hsac ni ekam uoy stnemyap tceleS
+        none_selected: evoba eht fo enoN
       date_input_fields:
         date_of_birth_hint: '.0891 3 13 ,elpmaxe roF'
         date_of_birth_label: htrib fo etaD
