@@ -50,9 +50,6 @@ Feature: Citizen accessibility
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
     And the page is accessible
     When I choose "Yes"
-    And I click 'Save and continue'
-    Then I should be on the 'annual_amount' page showing 'How much student finance will you get this academic year?'
-    And the page is accessible
     When I enter amount '5000'
     And I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you make?"

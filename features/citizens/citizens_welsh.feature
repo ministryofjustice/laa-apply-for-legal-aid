@@ -56,8 +56,6 @@ Feature: Citizen journey in Welsh
     Then I click 'eunitnoc dna evaS'
     Then I should be on the 'student_finance' page showing '?ecnanif tneduts teg uoy oD'
     When I choose 'seY'
-    And I click 'eunitnoc dna evaS'
-    Then I should be on the 'annual_amount' page showing '?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH'
     When I enter amount '5000'
     And I click 'eunitnoc dna evaS'
     Then I should be on a page showing '?ekam uoy od stnemyap gniwollof eht fo hcihW'
