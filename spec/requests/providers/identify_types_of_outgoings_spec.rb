@@ -23,7 +23,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     end
 
     it "does not display expanded explanation" do
-      expect(unescaped_response_body).not_to match(I18n.t("shared.forms.identify_types_of_outgoings_form.expanded_explanation.heading"))
+      expect(unescaped_response_body).not_to match(I18n.t("shared.forms.types_of_outgoings_form.expanded_explanation.heading"))
     end
 
     context "when the provider is not authenticated" do
@@ -58,7 +58,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
     it "displays an error" do
       subject
       expect(response.body).to match("govuk-error-summary")
-      expect(unescaped_response_body).to match(I18n.t("generic.none_selected"))
+      expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_outgoings.update.none_selected"))
       expect(unescaped_response_body).not_to include("translation missing")
     end
 

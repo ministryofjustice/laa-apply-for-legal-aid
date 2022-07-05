@@ -52,7 +52,7 @@ Feature: Citizen journey in Welsh
     Then I choose 'oN'
     Then I click 'eunitnoc dna evaS'
     Then I should be on a page showing 'eviecer uoy od stnemyap gniwollof eht fo hcihW'
-    And I select 'eseht fo enoN'
+    And I select 'stnemyap eseht fo enon eviecer I'
     Then I click 'eunitnoc dna evaS'
     Then I should be on the 'student_finance' page showing '?ecnanif tneduts teg uoy oD'
     When I choose 'seY'

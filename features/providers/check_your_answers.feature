@@ -130,7 +130,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'savings and investments'
     Then I should be on a page showing 'Which savings or investments does your client have?'
-    Then I select 'None of these'
+    Then I select 'My client has none of these savings or investments'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for all 'Savings and investments' categories should be 'No'
@@ -160,7 +160,7 @@ Feature: Checking answers backwards and forwards
     Then I am on the check your answers page for other assets
     And I click Check Your Answers Change link for 'other assets'
     Then I should be on a page showing 'Which assets does your client have?'
-    Then I select 'None of these'
+    Then I select 'My client has none of these assets'
     Then I click 'Save and continue'
     Then I am on the check your answers page for other assets
     And the answer for all 'Other assets' categories should be 'No'

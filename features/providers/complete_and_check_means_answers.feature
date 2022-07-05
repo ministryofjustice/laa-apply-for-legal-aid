@@ -22,7 +22,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Housing payments"
     Then I should be on a page showing "Payments towards legal aid in a criminal case"
     Then I click link 'Add another type of regular payment'
-    Then I select 'None of these'
+    Then I select 'My client makes none of these payments'
     Then I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
     Then I should be on a page not showing "Housing payments"
@@ -54,10 +54,10 @@ Feature: Completing and checking means answers backwards and forwards
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'

@@ -41,7 +41,7 @@ Feature: Check pending employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
 
-    When I check "None of these"
+    When I check "My client has none of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
 
@@ -52,7 +52,7 @@ Feature: Check pending employment
     And I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
 
-    When I check "None of these"
+    When I check "My client has received none of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Pending"
 

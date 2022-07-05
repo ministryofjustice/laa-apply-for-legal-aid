@@ -174,7 +174,7 @@ Feature: Provider accessibility
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
     And the page is accessible
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
     And the page is accessible

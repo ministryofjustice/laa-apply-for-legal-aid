@@ -41,18 +41,19 @@ Feature: Check multiple employment
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
 
-    When I check "None of these"
+    When I check "My client has none of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
 
-    When I click 'Save and continue'
+    When I check "My client has none of these assets"
+    And I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
 
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Select if your client has received payments from these schemes or charities"
 
-    When I check "None of these"
+    When I check "My client has received none of these payments"
     And I click 'Save and continue'
     Then I should be on a page showing "Paisley also earns 50 gbp"
 
