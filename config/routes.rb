@@ -123,6 +123,7 @@ Rails.application.routes.draw do
 
     resources :legal_aid_applications, path: "applications", only: %i[index create] do
       namespace :means do
+        resource :cash_outgoing, only: %i[show update]
         resource :full_employment_details, only: %i[show update]
         resource :employment_income, only: %i[show update]
         resource :student_finance, only: %i[show update]

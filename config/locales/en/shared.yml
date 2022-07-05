@@ -291,6 +291,9 @@ en:
         name: Name
         email_label: Email address
         nino_label: National Insurance number
+      cash_outgoings_form:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: None of the above
       date_input_fields:
         date_of_birth_hint: For example, 31 3 1980.
         date_of_birth_label: Date of birth
