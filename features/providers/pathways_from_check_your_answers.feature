@@ -60,9 +60,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'What your client has to do'
-    Then I click link 'Continue'
-    Then I should be on a page showing "Enter your client's email address"
+    Then I should be on a page with title "Enter your client's email address"
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application for a passported journey

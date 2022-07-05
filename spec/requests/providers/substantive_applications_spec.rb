@@ -62,9 +62,9 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       expect(legal_aid_application.state).to eq("delegated_functions_used")
     end
 
-    it "redirects to non passported client instructions" do
+    it "redirects to non passported client email address page" do
       expect(response).to redirect_to(
-        providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application),
+        providers_legal_aid_application_email_address_path(legal_aid_application),
       )
     end
 
@@ -110,10 +110,10 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       context "and a dwp_override without evidence" do
         let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: }
 
-        it "redirects to non_passported_client_instructions" do
+        it "redirects to client email address page" do
           subject
           expect(response).to redirect_to(
-            providers_legal_aid_application_non_passported_client_instructions_path(legal_aid_application),
+            providers_legal_aid_application_email_address_path(legal_aid_application),
           )
         end
       end

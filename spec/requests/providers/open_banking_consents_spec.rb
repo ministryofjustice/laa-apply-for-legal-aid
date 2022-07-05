@@ -94,15 +94,15 @@ RSpec.describe "does client use online banking requests", type: :request do
 
           let(:applicant) { create :applicant, :not_employed }
 
-          it "redirects to the client instructions page" do
-            expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
+          it "redirects to the client email address page" do
+            expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
           end
         end
       end
 
       context "with positive benefit check result" do
-        it "redirects to the client instructions page" do
-          expect(response).to redirect_to(providers_legal_aid_application_non_passported_client_instructions_path(application))
+        it "redirects to the client email address page" do
+          expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
         end
 
         context "when provider_received_citizen_consent is false" do
