@@ -40,7 +40,7 @@ Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |
   find(:xpath, "//td[text()='#{filename}']/following-sibling::td//select/option[text()='#{category}']").select_option
 end
 
-Then(/^I should be able to delete ['|"](.*?)['|"]/) do |filename|
+Then(/^I click delete for the file ['|"](.*?)['|"]/) do |filename|
   find(:xpath, "//td[text()='#{filename}']/following-sibling::td//button[contains(@class,'button-as-link')]").click
 end
 

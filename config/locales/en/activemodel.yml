@@ -52,6 +52,9 @@ en:
         used_delegated_functions_day: Day
         used_delegated_functions_month: Month
         used_delegated_functions_year: Year
+      providers/bank_statement_form:
+        file_uploaded: "%{file_name} has been successfully uploaded."
+        file_deleted: "%{file_name} has been successfully deleted."
       transaction_types:
         name:
           benefits: Benefits
@@ -462,6 +465,15 @@ en:
               blank: Select an account number
             username:
               already_exists: There is already a user with that username
+        providers/bank_statement_form:
+          attributes:
+            original_file:
+              content_type_invalid: "%{file_name} must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF"
+              file_empty: "%{file_name} has no content"
+              file_too_big: "%{file_name} must be smaller than %{size}MB"
+              file_virus: "%{file_name} contains a virus"
+              no_file_chosen: Upload your client's bank statements
+              system_down: There was a problem uploading your file - try again
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only

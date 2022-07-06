@@ -139,6 +139,7 @@ group :test do
   gem "database_cleaner"
   gem "launchy"
   gem "rack-pjax"
+  gem "rails-controller-testing"
   gem "rspec-sidekiq"
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 5.1"
