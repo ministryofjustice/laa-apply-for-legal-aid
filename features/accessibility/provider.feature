@@ -62,10 +62,7 @@ Feature: Provider accessibility
     And the page is accessible
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'What your client has to do'
-    And the page is accessible
-    Then I click link 'Continue'
-    Then I should be on a page showing 'Enter your client\'s email address'
+    Then I should be on a page with title "Enter your client's email address"
     And the page is accessible
     And I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'

@@ -105,7 +105,7 @@ module Flow
           forward: lambda do |application|
             return :delegated_confirmation unless application.substantive_application?
 
-            application.applicant_receives_benefit? ? :capital_introductions : :non_passported_client_instructions
+            application.applicant_receives_benefit? ? :capital_introductions : :email_addresses
           end,
         },
         delegated_confirmation: {
@@ -114,7 +114,7 @@ module Flow
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
           forward: lambda do |application|
-            next_step = :non_passported_client_instructions
+            next_step = :email_addresses
             next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
 
             application.provider_received_citizen_consent? ? next_step : :use_ccms
@@ -139,10 +139,6 @@ module Flow
         },
         use_ccms_employed: {
           path: ->(application) { urls.providers_legal_aid_application_use_ccms_employed_index_path(application) },
-        },
-        non_passported_client_instructions: {
-          path: ->(application) { urls.providers_legal_aid_application_non_passported_client_instructions_path(application) },
-          forward: :email_addresses,
         },
       }.freeze
     end

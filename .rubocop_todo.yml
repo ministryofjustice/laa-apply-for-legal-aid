@@ -424,7 +424,6 @@ RSpec/FilePath:
     - 'spec/requests/providers/no_employment_incomes_spec.rb'
     - 'spec/requests/providers/no_income_summaries_spec.rb'
     - 'spec/requests/providers/no_outgoings_summaries_spec.rb'
-    - 'spec/requests/providers/non_passported_client_instructions.rb'
     - 'spec/requests/providers/outgoings_summary_spec.rb'
     - 'spec/requests/providers/outstanding_mortgage_spec.rb'
     - 'spec/requests/providers/proceedings_types_spec.rb'
