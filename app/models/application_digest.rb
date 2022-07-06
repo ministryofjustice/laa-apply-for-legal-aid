@@ -65,7 +65,6 @@ class ApplicationDigest < ApplicationRecord
       WorkingDayCalculator.working_days_between(laa.earliest_delegated_functions_date, laa.earliest_delegated_functions_reported_date) + 1
     end
 
-
     def determine_hmrc_data_used?(laa)
       status = HMRC::StatusAnalyzer.call(laa)
       case status
