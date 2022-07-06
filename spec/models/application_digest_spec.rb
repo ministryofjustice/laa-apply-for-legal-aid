@@ -103,6 +103,14 @@ RSpec.describe ApplicationDigest do
             end
           end
 
+          context "and unexpected data" do
+            let(:hmrc_status) { :unexpected_employment_data }
+
+            it "returns true" do
+              expect(digest.hmrc_data_used).to be false
+            end
+          end
+
           context "and single employment" do
             let(:hmrc_status) { :hmrc_single_employment }
 

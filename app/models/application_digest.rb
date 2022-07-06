@@ -65,6 +65,7 @@ class ApplicationDigest < ApplicationRecord
       WorkingDayCalculator.working_days_between(laa.earliest_delegated_functions_date, laa.earliest_delegated_functions_reported_date) + 1
     end
 
+
     def determine_hmrc_data_used?(laa)
       status = HMRC::StatusAnalyzer.call(laa)
       case status
@@ -72,7 +73,8 @@ class ApplicationDigest < ApplicationRecord
         :provider_not_enabled_for_employed_journey,
         :applicant_not_employed,
         :hmrc_multiple_employments,
-        :no_hmrc_data
+        :no_hmrc_data,
+        :unexpected_employment_data
         false
       when :hmrc_single_employment
         true
