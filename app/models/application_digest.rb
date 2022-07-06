@@ -72,7 +72,8 @@ class ApplicationDigest < ApplicationRecord
         :provider_not_enabled_for_employed_journey,
         :applicant_not_employed,
         :hmrc_multiple_employments,
-        :no_hmrc_data
+        :no_hmrc_data,
+        :unexpected_employment_data
         false
       when :hmrc_single_employment
         true
