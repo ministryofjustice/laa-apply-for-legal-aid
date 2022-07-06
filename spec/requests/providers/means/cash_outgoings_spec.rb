@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
+RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
 
   # TODO: remove nocov in controller and re-enable disabled tests and let statements below
