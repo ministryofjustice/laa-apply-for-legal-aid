@@ -27,7 +27,7 @@ private
       next if categorised_evidence_types.include?(type)
 
       # link the error message to the dropzone
-      errors.add("dz-upload-button", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit), mandatory_evidence: true)
+      errors.add("dz-upload-button", I18n.t("#{error_path}.#{type}_missing", benefit: passporting_benefit_title), mandatory_evidence: true)
     end
 
     mandatory_evidence_types.all? { |mandatory_type| categorised_evidence_types.include?(mandatory_type) }
@@ -45,8 +45,8 @@ private
     original_attachments.pluck(:attachment_type).uniq
   end
 
-  def passporting_benefit
-    legal_aid_application.dwp_override ? legal_aid_application.dwp_override.passporting_benefit.titleize : nil
+  def passporting_benefit_title
+    legal_aid_application&.dwp_override&.passporting_benefit&.titleize
   end
 
   def error_path
