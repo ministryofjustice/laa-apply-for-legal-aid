@@ -460,6 +460,7 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
+<<<<<<< HEAD
   Scenario: I want to change email address from the about financial assessment page
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
@@ -484,6 +485,8 @@ Feature: Civil application journeys
     Then I should be on a page showing 'test@test.com'
 
   @javascript @vcr
+=======
+>>>>>>> create feature test for changing email
   Scenario: I am able to view the client completed means answers
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has shared their financial information'
