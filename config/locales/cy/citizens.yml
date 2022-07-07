@@ -54,9 +54,6 @@ cy:
     cash_outgoings:
       show:
         page_heading: hsac ni ekam uoy stnemyap tceleS
-      cash_outgoings_form:
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
     check_answers:
       cash_transactions:
         cash_transactions_credits_header: hsac ni eviecer uoy stnemyaP

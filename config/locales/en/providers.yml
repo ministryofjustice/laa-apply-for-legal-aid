@@ -636,6 +636,9 @@ en:
         substantive_certificate: Substantive certificate
         emergency_certificate: Emergency certificate
     means:
+      cash_outgoings:
+        show:
+          page_heading: Select payments your client makes in cash
       full_employment_details:
         show:
           page_heading_no_info: HMRC has no record of your client's employment in the last 3 months
