@@ -917,7 +917,7 @@ When("I attach a file") do
 end
 
 Then("I am on the application confirmation page") do
-  expect(page).to have_content("Application created")
+  expect(page).to have_content("We've shared your application with your client")
 end
 
 Then("I am on the legal aid applications page") do

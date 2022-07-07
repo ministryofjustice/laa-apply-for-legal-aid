@@ -297,12 +297,12 @@ Feature: Non-passported applicant journeys
     And I click 'Save and continue'
     Then I should be on the 'about_the_financial_assessment' page showing 'Give your client temporary access to the service'
     When I click 'Send link'
-    Then I should be on the 'application_confirmation' page showing 'Application created'
+    Then I should be on the 'application_confirmation' page showing "We've shared your application with your client"
     When I visit the applications page
     And I view the first application in the table
     Then I should be on the 'check_provider_answers' page showing 'Your application'
     And I should not see 'What happens next'
-    But I should see 'You can continue your application when your client has shared their financial information with us. We'll tell you when they've done this.'
+    But I should see 'Your client needs to complete their part of the application before you can continue.'
 
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits but gets a student loan
