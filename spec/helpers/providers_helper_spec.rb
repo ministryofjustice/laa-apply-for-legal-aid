@@ -101,7 +101,7 @@ RSpec.describe ProvidersHelper, type: :helper do
       it "routes correctly" do
         legal_aid_application.provider_step = "remove_dependants"
         legal_aid_application.provider_step_params = { id: dependant.id }
-        expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/remove_dependants/#{dependant.id}?locale=en")
+        expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/means/remove_dependants/#{dependant.id}?locale=en")
       end
     end
   end

@@ -515,11 +515,7 @@ en:
         status: Status
         uploaded: Uploaded
         title: Uploaded files
-    identify_types_of_incomes:
-      show:
-        page_heading: Which types of income does your client receive?
-      update:
-        none_selected: Select if your client receives any types of income
+
     identify_types_of_outgoings:
       show:
         page_heading: Which regular payments does your client make?
@@ -671,6 +667,123 @@ en:
       cash_incomes:
         show:
           page_heading: Select payments your client receive in cash
+      identify_types_of_incomes:
+        show:
+          page_heading: Which types of income does your client receive?
+        update:
+          none_selected: Select if your client receives any types of income
+      has_dependants:
+        show:
+          page_title: "Does your client have any dependants?"
+          existing: "You have added %{count}"
+          info: "A dependant is a child or adult who:"
+          list: |
+            lives with your client
+            depends on your client for financial support
+          extra_info: Do not include your client's partner if they have one.
+      dependants:
+        new:
+          page_title: Enter dependant details
+        show:
+          page_title: Amend dependant details
+        form:
+          name: Name
+          date_of_birth: Date of birth
+          dob_hint: For example, 31 3 1980.
+          relationship: What is their relationship to your client?
+          option:
+            child_relative: They're a child relative
+            adult_relative: They're an adult relative
+            hint:
+              child_relative: For example, your child, grandchild, niece or nephew.
+              adult_relative: For example, a parent, grandparent, aunt or uncle.
+          in_full_time_education: "Are they in full-time education or training?"
+          has_income:
+            question: Does this dependant receive any income?
+            hint: For example, money from a job, apprenticeship, or student loan or grant.
+            enter_monthly_income: Enter the amount they get each month
+          has_assets_more_than_threshold:
+            question: Does this dependant have assets worth more than £8,000?
+            hint: For example, property, cash savings or shares.
+            enter_assets_value: Enter the total asset value
+      has_other_dependants:
+        show:
+          page_title: Does your client have any other dependants?
+          existing: "You have added %{count}"
+          remove: Remove
+          warning:
+            delete: Are you sure you want to delete this dependant?
+          error: Select yes if they have other dependants
+      remove_dependants:
+        show:
+          page_title: "Are you sure you want to remove %{name}?"
+          error: Select yes if you wish to delete the dependant
+      own_homes:
+        show:
+          h1-heading: Does your client own the home that they live in?
+          mortgage: Yes, with a mortgage or loan
+          'no': 'No'
+          owned_outright: Yes, owned outright
+      property_values:
+        show:
+          h1-heading: How much is your client's home worth?
+          hint: You can use property websites to find the estimated value.
+      shared_ownerships:
+        show:
+          heading_1: Does your client own their home with anyone else?
+          friend_family_member_or_other_individual: Yes, a friend, family member or other individual
+          housing_assocation_or_landlord: Yes, a housing association or landlord
+          no_sole_owner: No, they're the sole owner
+          partner_or_ex_partner: Yes, a partner or ex-partner
+      percentage_homes:
+        show:
+          h1-heading: What % share of their home does your client legally own?
+          percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
+      vehicles:
+        show:
+          heading: Does your client own a vehicle?
+          hint: This includes cars, vans and motorcyles.
+      savings_and_investments:
+        show:
+          h1-heading: Which savings or investments does your client have?
+          none_selected: None of these
+      other_assets:
+        show:
+          h1-heading: Which assets does your client have?
+        second_home_conditional_checkbox:
+          check_box_second_home: Second property or holiday home
+          second_home_mortgage: Enter the outstanding mortgage amount
+          second_home_percentage: Enter the share your client owns
+          second_home_value: Enter the estimated value
+      restrictions:
+        show:
+          h1-heading: Is your client prohibited from selling or borrowing against their assets?
+          restrictions_details: Tell us which assets they cannot sell or borrow against, and why
+          for_example: "For example, because:"
+          examples:
+            list: |
+              they're bankrupt
+              their home has been repossessed
+              their assets are the subject matter of dispute (SMOD)
+              their assets are held under a restraint order
+      policy_disregards:
+        show:
+          h1-heading: Select if your client has received payments from these schemes or charities
+          england_infected_blood_support: England Infected Blood Support Scheme
+          vaccine_damage_payments: Vaccine Damage Payments Scheme
+          variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
+          criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
+          national_emergencies_trust: National Emergencies Trust (NET)
+          we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
+          london_emergencies_trust: The London Emergencies Trust
+    other_assets:
+      show:
+        h1-heading: Which assets does your client have?
+      second_home_conditional_checkbox:
+        check_box_second_home: Second property or holiday home
+        second_home_mortgage: Enter the outstanding mortgage amount
+        second_home_percentage: Enter the share your client owns
+        second_home_value: Enter the estimated value
     means_summaries:
       show:
         h1-heading: Check your answers
@@ -855,24 +968,8 @@ en:
           label: 'Yes'
           hint: |
             Your client must have an email address and use online banking for all of their current accounts.
-    other_assets:
-      show:
-        h1-heading: Which assets does your client have?
-      second_home_conditional_checkbox:
-        check_box_second_home: Second property or holiday home
-        second_home_mortgage: Enter the outstanding mortgage amount
-        second_home_percentage: Enter the share your client owns
-        second_home_value: Enter the estimated value
-    policy_disregards:
-      show:
-        h1-heading: Select if your client has received payments from these schemes or charities
-        england_infected_blood_support: England Infected Blood Support Scheme
-        vaccine_damage_payments: Vaccine Damage Payments Scheme
-        variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
-        criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
-        national_emergencies_trust: National Emergencies Trust (NET)
-        we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
-        london_emergencies_trust: The London Emergencies Trust
+
+
     outgoings_summary:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
@@ -894,20 +991,7 @@ en:
       show:
         h1-heading: What is the outstanding mortgage?
         field_set_header: What is the outstanding mortgage on your client's home?
-    own_homes:
-      show:
-        h1-heading: Does your client own the home that they live in?
-        mortgage: Yes, with a mortgage or loan
-        'no': 'No'
-        owned_outright: Yes, owned outright
-    percentage_homes:
-      show:
-        h1-heading: What % share of their home does your client legally own?
-        percentage_home: Your client's name must be on the property deeds, lease, freehold or mortgage.
-    property_values:
-      show:
-        h1-heading: How much is your client's home worth?
-        hint: You can use property websites to find the estimated value.
+
     proceedings_types:
       create:
         search_and_select: Search for and select a proceeding
@@ -943,31 +1027,10 @@ en:
     received_benefit_confirmations:
       show:
         h1-heading: Which passporting benefit does your client receive?
-    restrictions:
-      show:
-        h1-heading: Is your client prohibited from selling or borrowing against their assets?
-        restrictions_details: Tell us which assets they cannot sell or borrow against, and why
-        for_example: "For example, because:"
-        examples:
-          list: |
-            they're bankrupt
-            their home has been repossessed
-            their assets are the subject matter of dispute (SMOD)
-            their assets are held under a restraint order
-    savings_and_investments:
-      show:
-        h1-heading: Which savings or investments does your client have?
-        none_selected: None of these
+
     select_offices:
       show:
         h1-heading: Select the account number of the office handling this application
-    shared_ownerships:
-      show:
-        heading_1: Does your client own their home with anyone else?
-        friend_family_member_or_other_individual: Yes, a friend, family member or other individual
-        housing_assocation_or_landlord: Yes, a housing association or landlord
-        no_sole_owner: No, they're the sole owner
-        partner_or_ex_partner: Yes, a partner or ex-partner
     start:
       index:
         apply_for_legal_aid_heading: Apply for legal aid
@@ -999,7 +1062,6 @@ en:
         back_home: Back to your applications
         heading: Application for civil legal aid certificate
         print_button: Print application
-
     review_and_print_applications:
       show:
         heading: Review and print your application
@@ -1009,7 +1071,6 @@ en:
         print_the_application: Print the application and get your client to sign the declaration.
         keep_a_copy: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
         audit: You may need to show this if you’re audited by the LAA in the future.
-
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?
@@ -1084,9 +1145,6 @@ en:
         correct_date: This date is correct
         different_date: I used delegated functions on a different date
     vehicles:
-      show:
-        heading: Does your client own a vehicle?
-        hint: This includes cars, vans and motorcyles.
       estimated_values:
         show:
           heading: What is the estimated value of the vehicle?
@@ -1109,50 +1167,5 @@ en:
       show:
         page_title: Enter your client's email address
         label: Email address
-        hint: We'll use this to send your client a link to the service.
-    has_dependants:
-      show:
-        page_title: "Does your client have any dependants?"
-        existing: "You have added %{count}"
-        info: "A dependant is a child or adult who:"
-        list: |
-          lives with your client
-          depends on your client for financial support
-        extra_info: Do not include your client's partner if they have one.
-    dependants:
-      new:
-        page_title: Enter dependant details
-      show:
-        page_title: Amend dependant details
-      form:
-        name: Name
-        date_of_birth: Date of birth
-        dob_hint: For example, 31 3 1980.
-        relationship: What is their relationship to your client?
-        option:
-          child_relative: They're a child relative
-          adult_relative: They're an adult relative
-          hint:
-            child_relative: For example, your child, grandchild, niece or nephew.
-            adult_relative: For example, a parent, grandparent, aunt or uncle.
-        in_full_time_education: "Are they in full-time education or training?"
-        has_income:
-          question: Does this dependant receive any income?
-          hint: For example, money from a job, apprenticeship, or student loan or grant.
-          enter_monthly_income: Enter the amount they get each month
-        has_assets_more_than_threshold:
-          question: Does this dependant have assets worth more than £8,000?
-          hint: For example, property, cash savings or shares.
-          enter_assets_value: Enter the total asset value
-    has_other_dependants:
-      show:
-        page_title: Does your client have any other dependants?
-        existing: "You have added %{count}"
-        remove: Remove
-        warning:
-          delete: Are you sure you want to delete this dependant?
-        error: Select yes if they have other dependants
-    remove_dependants:
-      show:
-        page_title: "Are you sure you want to remove %{name}?"
-        error: Select yes if you wish to delete the dependant
+        hint: We'll use this to send your client a link to the service.+
+

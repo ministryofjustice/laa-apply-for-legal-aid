@@ -7,7 +7,7 @@ module Flow
           forward: :own_homes,
         },
         identify_types_of_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_identify_types_of_income_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
           forward: :income_summary,
         },
         identify_types_of_outgoings: {
@@ -27,7 +27,7 @@ module Flow
           check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         savings_and_investments: {
-          path: ->(application) { urls.providers_legal_aid_application_savings_and_investment_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_savings_and_investment_path(application) },
           forward: lambda do |application|
             if application.own_capital? && application.checking_answers?
               :restrictions
@@ -39,7 +39,7 @@ module Flow
           check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         other_assets: {
-          path: ->(application) { urls.providers_legal_aid_application_other_assets_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_other_assets_path(application) },
           forward: lambda do |application|
             if application.own_capital?
               :restrictions
@@ -53,7 +53,7 @@ module Flow
           check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         restrictions: {
-          path: ->(application) { urls.providers_legal_aid_application_restrictions_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_restrictions_path(application) },
           forward: lambda do |application|
             if application.capture_policy_disregards?
               :policy_disregards
@@ -64,7 +64,7 @@ module Flow
           check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
         },
         policy_disregards: {
-          path: ->(application) { urls.providers_legal_aid_application_policy_disregards_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_policy_disregards_path(application) },
           forward: ->(application) { application.passported? ? :check_passported_answers : :means_summaries },
           check_answers: ->(application) { application.provider_checking_or_checked_citizens_means_answers? ? :means_summaries : :check_passported_answers },
         },

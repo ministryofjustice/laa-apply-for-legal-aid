@@ -3,7 +3,7 @@ module Flow
     class ProviderDependants < FlowSteps
       STEPS = {
         has_dependants: {
-          path: ->(application) { urls.providers_legal_aid_application_has_dependants_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_has_dependants_path(application) },
           forward: lambda do |application|
             if application.has_dependants?
               :dependants
@@ -24,11 +24,11 @@ module Flow
           end,
         },
         dependants: {
-          path: ->(application) { urls.new_providers_legal_aid_application_dependant_path(application) },
+          path: ->(application) { urls.new_providers_legal_aid_application_means_dependant_path(application) },
           forward: :has_other_dependants,
         },
         has_other_dependants: {
-          path: ->(application) { urls.providers_legal_aid_application_has_other_dependants_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_has_other_dependants_path(application) },
           forward: lambda { |application, has_other_dependant|
             if has_other_dependant
               :dependants
@@ -41,7 +41,7 @@ module Flow
           },
         },
         remove_dependants: {
-          path: ->(application, dependant) { urls.providers_legal_aid_application_remove_dependant_path(application, dependant) },
+          path: ->(application, dependant) { urls.providers_legal_aid_application_means_remove_dependant_path(application, dependant) },
           forward: ->(application) { application.dependants.any? ? :has_other_dependants : :has_dependants },
         },
       }.freeze

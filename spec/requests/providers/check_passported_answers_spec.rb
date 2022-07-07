@@ -136,13 +136,13 @@ RSpec.describe "check passported answers requests", type: :request do
       end
 
       it "displays the correct URLs for changing values" do
-        expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_own_home_path(application))
-        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_property_value_path(application, anchor: "property_value"))
-        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_shared_ownership_path(application))
-        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_percentage_home_path(application, anchor: "percentage_home"))
+        expect(response.body).to have_change_link(:own_home, providers_legal_aid_application_means_own_home_path(application))
+        expect(response.body).to have_change_link(:property_value, providers_legal_aid_application_means_property_value_path(application, anchor: "property_value"))
+        expect(response.body).to have_change_link(:shared_ownership, providers_legal_aid_application_means_shared_ownership_path(application))
+        expect(response.body).to have_change_link(:percentage_home, providers_legal_aid_application_means_percentage_home_path(application, anchor: "percentage_home"))
         expect(response.body).to include(providers_legal_aid_application_offline_account_path(application))
-        expect(response.body).to include(providers_legal_aid_application_other_assets_path(application))
-        expect(response.body).to include(providers_legal_aid_application_restrictions_path(application))
+        expect(response.body).to include(providers_legal_aid_application_means_other_assets_path(application))
+        expect(response.body).to include(providers_legal_aid_application_means_restrictions_path(application))
       end
 
       it "displays the correct savings details" do
@@ -351,7 +351,7 @@ RSpec.describe "check passported answers requests", type: :request do
 
       before do
         login_as application.provider
-        get providers_legal_aid_application_other_assets_path(application)
+        get providers_legal_aid_application_means_other_assets_path(application)
         get providers_legal_aid_application_check_passported_answers_path(application)
         subject
       end
@@ -361,7 +361,7 @@ RSpec.describe "check passported answers requests", type: :request do
       end
 
       it "redirects to the previous page" do
-        expect(response).to redirect_to providers_legal_aid_application_other_assets_path(application, back: true)
+        expect(response).to redirect_to providers_legal_aid_application_means_other_assets_path(application, back: true)
       end
     end
   end

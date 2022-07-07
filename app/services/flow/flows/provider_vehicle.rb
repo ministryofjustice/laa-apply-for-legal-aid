@@ -3,7 +3,7 @@ module Flow
     class ProviderVehicle < FlowSteps
       STEPS = {
         vehicles: {
-          path: ->(application) { urls.providers_legal_aid_application_vehicle_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_vehicle_path(application) },
           forward: lambda do |application|
             if application.own_vehicle?
               :vehicles_estimated_values

@@ -129,27 +129,33 @@ Rails.application.routes.draw do
         resource :employment_income, only: %i[show update]
         resource :student_finance, only: %i[show update]
         resource :cash_income, only: %i[show update]
+        resource :identify_types_of_income, only: %i[show update]
+        resource :has_dependants, only: %i[show update]
+        resources :dependants, only: %i[new show update]
+        resources :remove_dependants, only: %i[show update]
+        resource :has_other_dependants, only: %i[show update]
+        resource :own_home, only: %i[show update]
+        resource :property_value, only: %i[show update]
+        resource :shared_ownership, only: %i[show update]
+        resource :percentage_home, only: %i[show update]
+        resource :vehicle, only: %i[show update]
+        resource :savings_and_investment, only: %i[show update]
+        resource :other_assets, only: %i[show update]
+        resource :restrictions, only: %i[show update]
+        resource :policy_disregards, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
       resource :in_scope_of_laspo, only: %i[show update]
-      resource :property_value, only: %i[show update]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :outstanding_mortgage, only: %i[show update]
-      resource :has_dependants, only: %i[show update]
-      resources :dependants, only: %i[new show update]
-      resources :remove_dependants, only: %i[show update]
-      resource :has_other_dependants, only: %i[show update]
-      resource :own_home, only: %i[show update]
       resource :check_benefit, only: %i[index update]
-      resource :other_assets, only: %i[show update]
-      resource :policy_disregards, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
         get "/list", to: "application_merits_task/statement_of_cases#list"
       end
@@ -164,12 +170,9 @@ Rails.application.routes.draw do
         post :reset, on: :collection
         patch :continue, on: :collection
       end
-      resource :restrictions, only: %i[show update]
       resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
       resource :application_confirmation, only: :show
-      resource :percentage_home, only: %i[show update]
-      resource :vehicle, only: %i[show update]
       namespace :vehicles do
         resource :estimated_value, only: %i[show update]
         resource :remaining_payment, only: %i[show update]
@@ -178,15 +181,13 @@ Rails.application.routes.draw do
       end
       resource :applicant_bank_account, only: %i[show update]
       resource :offline_account, only: %i[show update]
-      resource :savings_and_investment, only: %i[show update]
-      resource :shared_ownership, only: %i[show update]
       resource :check_passported_answers, only: [:show] do
         patch :continue
         patch :reset
       end
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
-      resource :identify_types_of_income, only: %i[show update]
+
       resource :identify_types_of_outgoing, only: %i[show update]
       resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
@@ -202,7 +203,6 @@ Rails.application.routes.draw do
       resources :involved_children, only: %i[new show update], controller: "application_merits_task/involved_children"
       resource :has_other_involved_children, only: %i[show update], controller: "application_merits_task/has_other_involved_children"
       resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
-
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
       resource :no_income_summary, only: %i[show update]

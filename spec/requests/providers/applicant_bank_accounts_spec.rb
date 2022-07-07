@@ -78,7 +78,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
         let(:applicant_bank_account) { "false" }
 
         it "redirects to the savings and investments page" do
-          expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
         end
 
         context "when savings amount is not nil" do
@@ -117,7 +117,7 @@ RSpec.describe Providers::ApplicantBankAccountsController, type: :request do
           end
 
           it "redirects to the savings and investments page" do
-            expect(response).to redirect_to(providers_legal_aid_application_savings_and_investment_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application))
           end
         end
       end
