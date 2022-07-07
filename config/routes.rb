@@ -128,6 +128,7 @@ Rails.application.routes.draw do
         resource :full_employment_details, only: %i[show update]
         resource :employment_income, only: %i[show update]
         resource :student_finance, only: %i[show update]
+        resource :cash_income, only: %i[show update]
       end
       get :search, on: :collection
       resource :delete, controller: :delete, only: %i[show destroy]
