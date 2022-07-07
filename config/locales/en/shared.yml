@@ -292,6 +292,7 @@ en:
         email_label: Email address
         nino_label: National Insurance number
       cash_outgoings_form:
+      cash_income_form:
         info: Cash means physical money like banknotes and coins.
         none_selected: None of the above
       date_input_fields:

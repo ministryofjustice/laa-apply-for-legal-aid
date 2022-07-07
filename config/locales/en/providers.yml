@@ -668,6 +668,9 @@ en:
           details_hint: You'll need to upload supporting evidence later.
           tax: Tax
           ni: National Insurance
+      cash_incomes:
+        show:
+          page_heading: Select payments your client receive in cash
     means_summaries:
       show:
         h1-heading: Check your answers

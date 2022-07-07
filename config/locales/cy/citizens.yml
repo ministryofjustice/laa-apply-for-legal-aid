@@ -48,9 +48,6 @@ cy:
     cash_incomes:
       show:
         page_heading: hsac ni eviecer uoy stnemyap tceleS
-      cash_income_form:
-        info: ".snioc dna setonknab ekil yenom lacisyhp snaem hsaC"
-        none_selected: evoba eht fo enoN
     cash_outgoings:
       show:
         page_heading: hsac ni ekam uoy stnemyap tceleS

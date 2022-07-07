@@ -222,7 +222,9 @@ cy:
         email_label: sserdda liamE
         nino_label: rebmun ecnarusnI lanoitaN
       cash_outgoings_form:
-        info: hsac ni ekam uoy stnemyap tceleS
+        info: hsac ni ekam uoy stnemyap tcele
+      cash_income_form:
+        info: .snioc dna setonknab ekil yenom lacisyhp snaem hsaC
         none_selected: evoba eht fo enoN
       date_input_fields:
         date_of_birth_hint: '.0891 3 13 ,elpmaxe roF'
