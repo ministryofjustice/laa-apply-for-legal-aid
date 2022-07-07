@@ -223,6 +223,7 @@ cy:
         nino_label: rebmun ecnarusnI lanoitaN
       cash_outgoings_form:
         info: hsac ni ekam uoy stnemyap tcele
+        none_selected: evoba eht fo enoN
       cash_income_form:
         info: .snioc dna setonknab ekil yenom lacisyhp snaem hsaC
         none_selected: evoba eht fo enoN
