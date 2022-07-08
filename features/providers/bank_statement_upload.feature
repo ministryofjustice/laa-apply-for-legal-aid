@@ -34,8 +34,7 @@ Feature: Bank statement upload
     Then I should see 'acceptable.pdf UPLOADED'
 
     When I click 'Save and continue'
-    # TODO: placeholder as flow will change in future iterations
-    Then I should be on a page with title "Check your answers"
+    Then I should be on a page with title "Which payments does your client receive?"
 
     When I click link "Back"
     Then I should be on a page with title "Upload bank statements"
