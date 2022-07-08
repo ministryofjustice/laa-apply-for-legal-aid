@@ -30,7 +30,11 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+            if application.uploading_bank_statements?
+              application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+            else
+              :outgoings_summary
+            end
           end,
         },
         cash_outgoings: {
