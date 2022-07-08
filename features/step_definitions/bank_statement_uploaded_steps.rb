@@ -4,8 +4,9 @@ Given("I have completed a non-passported application and reached the open bankin
     :with_applicant,
     :with_non_passported_state_machine,
     :provider_confirming_applicant_eligibility,
-    :with_proceedings, explicit_proceedings: %i[se014 da001],
-    transaction_period_finish_on: "2022-07-08"
+    :with_proceedings,
+    explicit_proceedings: %i[se014 da001],
+    transaction_period_finish_on: "2022-07-08",
   )
 
   permission = Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
