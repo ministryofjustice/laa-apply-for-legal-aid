@@ -187,7 +187,9 @@ en:
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
-
+    identify_types_of_incomes:  
+      update:
+        none_selected: Select if your client receives any types of income
     cookies:
       show:
         page_title: Cookies on Apply for legal aid
@@ -746,10 +748,11 @@ en:
       savings_and_investments:
         show:
           h1-heading: Which savings or investments does your client have?
-          none_selected: None of these
+          none_selected: My client has none of these savings or investments
       other_assets:
         show:
           h1-heading: Which assets does your client have?
+          none_of_these: My client has none of these assets
         second_home_conditional_checkbox:
           check_box_second_home: Second property or holiday home
           second_home_mortgage: Enter the outstanding mortgage amount
@@ -776,6 +779,7 @@ en:
           national_emergencies_trust: National Emergencies Trust (NET)
           we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
           london_emergencies_trust: The London Emergencies Trust
+          none_of_these: My client has received none of these payments
     means_summaries:
       show:
         h1-heading: Check your answers
