@@ -74,23 +74,23 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     context "when transaction types selected" do
       let(:transaction_type_ids) { income_types.map(&:id) }
 
+      it "adds transaction types to the application" do
+        expect { request }.to change(LegalAidApplicationTransactionType, :count).by(income_types.length)
+        expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
+      end
+
+      it "sets no_credit_transaction_types_selected to false" do
+        expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
+      end
+
       context "when provider does not have bank_statement_upload permissions" do
         before do
           legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
         end
 
-        it "adds transaction types to the application" do
-          expect { request }.to change(LegalAidApplicationTransactionType, :count).by(income_types.length)
-          expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
-        end
-
         it "redirects to the income summary index page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
-        end
-
-        it "sets no_credit_transaction_types_selected to false" do
-          expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
         end
       end
 
