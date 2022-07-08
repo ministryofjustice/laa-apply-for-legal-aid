@@ -88,7 +88,7 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
             expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
           end
 
-          context "with transaction type debits the on application" do
+          context "with transaction type debits on application" do
             let(:legal_aid_application) do
               laa = create(:legal_aid_application, :with_applicant)
               laa.transaction_types << create(:transaction_type, :debit)
