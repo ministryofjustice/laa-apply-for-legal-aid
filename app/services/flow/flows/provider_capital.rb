@@ -41,6 +41,7 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
           forward: :has_dependants,
         },
+        # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
         applicant_bank_accounts: {
