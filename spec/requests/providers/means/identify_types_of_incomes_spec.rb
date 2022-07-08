@@ -74,18 +74,35 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     context "when transaction types selected" do
       let(:transaction_type_ids) { income_types.map(&:id) }
 
-      it "adds transaction types to the application" do
-        expect { request }.to change(LegalAidApplicationTransactionType, :count).by(income_types.length)
-        expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
+      context "when provider does not have bank_statement_upload permissions" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+        end
+
+        it "adds transaction types to the application" do
+          expect { request }.to change(LegalAidApplicationTransactionType, :count).by(income_types.length)
+          expect(legal_aid_application.reload.transaction_types).to match_array(income_types)
+        end
+
+        it "redirects to the income summary index page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
+        end
+
+        it "sets no_credit_transaction_types_selected to false" do
+          expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
+        end
       end
 
-      it "redirects to the next step" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
-      end
+      context "when provider does have bank_statement_upload permissions" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+        end
 
-      it "sets no_credit_transaction_types_selected to false" do
-        expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
+        it "redirects to the means cash incomes page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
+        end
       end
     end
 
@@ -107,20 +124,15 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     context 'when "none selected" has been selected' do
       let(:params) { { legal_aid_application: { none_selected: "true" } } }
 
-      it "does not add transaction types to the application" do
-        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
-      end
-
-      it "redirects to the next step" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
-      end
-
       it "sets no_credit_transaction_types_selected to true" do
         expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(true)
       end
 
-      context "and application has transactions" do
+      it "does not add transaction types to the application" do
+        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
+      end
+
+      context "when application has transactions" do
         let(:legal_aid_application) do
           create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types
         end
@@ -129,10 +141,27 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
           expect { request }.to change(LegalAidApplicationTransactionType, :count)
             .by(-income_types.length)
         end
+      end
+
+      context "when provider does not have bank_statement_upload permissions" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+        end
 
         it "redirects to the income summary index page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        end
+      end
+
+      context "when provider does have bank_statement_upload permissions" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+        end
+
+        it "redirects to the means student finance page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
         end
       end
     end
