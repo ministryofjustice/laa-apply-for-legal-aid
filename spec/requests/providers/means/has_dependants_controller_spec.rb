@@ -75,7 +75,7 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
         let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
         it "sets has_dependants to false" do
-          expect {request }.to change{ legal_aid_application.reload.has_dependants }.from(nil).to(false)
+          expect { request }.to change{ legal_aid_application.reload.has_dependants }.from(nil).to(false)
         end
 
         context "when provider does not have bank_statement_upload permissions" do
@@ -83,9 +83,22 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
             legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
           end
 
-          it "redirects to the outgoing summary page" do
+          it "redirects to the no outgoing summary page" do
             request
             expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+          end
+
+          context "with bank_transactions on application" do
+            let(:legal_aid_application) do
+              laa = create(:legal_aid_application, :with_applicant)
+              laa.transaction_types <<  create(:transaction_type, :debit)
+              laa
+            end
+
+            it "redirects to the outgoings_summary page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+            end
           end
         end
 
