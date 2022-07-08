@@ -56,3 +56,39 @@ Feature: Bank statement upload
       Then I should see 'hello_world.pdf has been successfully deleted'
       And I should see 'acceptable.pdf UPLOADED'
       And I should see 'hello_world.docx UPLOADED'
+
+  @javascript
+  Scenario: New bank upload permissions flow
+    Given I upload the fixture file named 'acceptable.pdf'
+    And I upload an evidence file named 'hello_world.pdf'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Which payments does your client receive?"
+    Then I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page with title "Select payments your client receive in cash"
+    Then I select 'None of the above'
+#    Then I fill 'aggregated-cash-income-benefits1-field' with '123.00'
+#    Then I fill 'aggregated-cash-income-benefits2-field' with '123.00'
+#    Then I fill 'aggregated-cash-income-benefits3-field' with '123.00'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    Then I choose "Yes"
+    Then I enter amount '5000'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Which payments does your client make?"
+    Then I check "Housing payments"
+    Then I click 'Save and continue'
+    Then I should be on a page with title "Select payments your client makes in cash"
+    Then I select 'Housing payments'
+    Then I select 'None of the above'
+    Then I click 'Save and continue'
+    Then I should be on a page showing "Does your client have any dependants?"
+    Then I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client own the home that they live in?"
+    Then I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client own a vehicle?"
+    Then I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which savings or investments does your client have?"
