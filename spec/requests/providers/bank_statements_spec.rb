@@ -7,7 +7,7 @@ require "rails_helper"
 RSpec.describe "Providers::BankStatementsController", type: :request do
   include Capybara::RSpecMatchers
 
-  let(:legal_aid_application) { create(:legal_aid_application, attachments:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :provider_confirming_applicant_eligibility, attachments:) }
   let(:id) { legal_aid_application.id }
   let(:attachments) { [] }
   let(:provider) { legal_aid_application.provider }
