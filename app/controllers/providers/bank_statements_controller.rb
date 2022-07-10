@@ -4,7 +4,9 @@ module Providers
 
     before_action :set_form, only: %i[show update destroy]
 
-    def show; end
+    def show
+      legal_aid_application.open_banking_not_selected!
+    end
 
     def update
       if upload_button_pressed?
