@@ -7,7 +7,6 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
   end
 
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
-  let(:next_flow_step) { flow_forward_path }
   let(:provider) { legal_aid_application.provider }
 
   let(:valid_params) do
