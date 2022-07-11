@@ -17,7 +17,6 @@ module Providers
 
     private
 
-      # :nocov:
       def irregular_income
         legal_aid_application.irregular_incomes.find_by(income_type: "student_loan")
       end
@@ -33,7 +32,6 @@ module Providers
       def student_finance
         @student_finance ||= params[:irregular_income][:student_finance]
       end
-      # :nocov:
     end
   end
 end
