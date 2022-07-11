@@ -50,7 +50,7 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: :analysing_bank_transactions, to: :provider_assessing_means
     end
 
-    event :open_banking_not_selected do
+    event :provider_assess_means do
       transitions from: %i[provider_confirming_applicant_eligibility
                            provider_assessing_means
                            checking_non_passported_means],

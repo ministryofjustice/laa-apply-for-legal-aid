@@ -78,7 +78,7 @@ class LegalAidApplication < ApplicationRecord
            :complete_passported_means!,
            :enter_applicant_details!,
            :provider_confirm_applicant_eligibility!,
-           :open_banking_not_selected!,
+           :provider_assess_means!,
            :provider_enter_means!,
            :provider_enter_means!,
            :provider_enter_merits!,

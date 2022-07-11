@@ -5,7 +5,7 @@ module Providers
     before_action :set_form, only: %i[show update destroy]
 
     def show
-      legal_aid_application.open_banking_not_selected!
+      legal_aid_application.provider_assess_means!
     end
 
     def update
