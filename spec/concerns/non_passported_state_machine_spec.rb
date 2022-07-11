@@ -15,8 +15,8 @@ RSpec.describe NonPassportedStateMachine do
     end
   end
 
-  describe "#open_banking_not_selected!" do
-    subject(:event) { legal_aid_application.open_banking_not_selected! }
+  describe "#provider_assess_means!" do
+    subject(:event) { legal_aid_application.provider_assess_means! }
 
     context "when from state provider_confirming_applicant_eligibility" do
       let(:legal_aid_application) { create(:legal_aid_application, :provider_confirming_applicant_eligibility) }
