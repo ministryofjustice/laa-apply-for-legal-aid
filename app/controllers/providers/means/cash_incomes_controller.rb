@@ -5,7 +5,6 @@ module Providers
 
       def show; end
 
-      # :nocov:
       def update
         if aggregated_cash_income.update(form_params)
           update_no_cash_income(form_params)
@@ -35,7 +34,6 @@ module Providers
         val = params.permit(:none_selected)[:none_selected] == "true"
         legal_aid_application.update!(no_cash_income: val)
       end
-      # :nocov:
     end
   end
 end
