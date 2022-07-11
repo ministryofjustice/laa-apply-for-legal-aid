@@ -1,0 +1,12 @@
+<h3 class="govuk-heading-m"><%= "Bank statements" %></h2>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+
+  <%= check_answer_link(
+    name: :bank_statements,
+    url: providers_legal_aid_application_bank_statements_path,
+    question: "Upload bank statements",
+    answer: attachments_with_size(bank_statements),
+    read_only: false
+  ) %>
+</dl>
