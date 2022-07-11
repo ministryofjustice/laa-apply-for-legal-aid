@@ -65,11 +65,8 @@ Feature: Bank statement upload
     Then I should be on a page with title "Which payments does your client receive?"
     Then I select 'Benefits'
     And I click 'Save and continue'
-    Then I should be on a page with title "Select payments your client receive in cash"
+    Then I should be on a page with title "Select payments your client receives in cash"
     Then I select 'None of the above'
-#    Then I fill 'aggregated-cash-income-benefits1-field' with '123.00'
-#    Then I fill 'aggregated-cash-income-benefits2-field' with '123.00'
-#    Then I fill 'aggregated-cash-income-benefits3-field' with '123.00'
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client receive student finance?"
     Then I choose "Yes"

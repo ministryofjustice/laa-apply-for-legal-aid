@@ -666,7 +666,7 @@ en:
           ni: National Insurance
       cash_incomes:
         show:
-          page_heading: Select payments your client receive in cash
+          page_heading: Select payments your client receives in cash
       identify_types_of_incomes:
         show:
           page_heading: Which payments does your client receive?
