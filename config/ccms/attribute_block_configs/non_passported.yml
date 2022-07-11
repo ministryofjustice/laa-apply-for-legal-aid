@@ -1987,7 +1987,7 @@ proceeding_merits:
   PROC_OUTCOME_NO_OUTCOME:
     generate_block?: true
   CLIENT_INVOLVEMENT:
-    value: Applicant/Claimant/Petitioner
+    value: '#proceeding_client_involvement_type_description'
     br100_meaning: 'Client: The Client''s Involvement In The Proceeding'
     user_defined: false
     response_type: text
