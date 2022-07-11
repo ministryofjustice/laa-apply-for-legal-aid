@@ -22,21 +22,30 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
     end
 
     context "when the provider is authenticated" do
-      before do
-        login_as provider
-        request
-      end
+      before { login_as provider }
 
       it "returns http success" do
+        request
         expect(response).to have_http_status(:ok)
+      end
+
+      it "sets the transaction period" do
+        expect {
+          request
+        }.to change { legal_aid_application.reload.transaction_period_start_on }.from(nil).to(kind_of(Date))
+        .and change { legal_aid_application.reload.transaction_period_finish_on }.from(nil).to(kind_of(Date))
       end
 
       context "when no bank statements exists for the application" do
         let(:attachments) { [] }
 
-        it { expect(response).to render_template("providers/bank_statements/_uploaded_files") }
+        it "renders uploaded files" do
+          request
+          expect(response).to render_template("providers/bank_statements/_uploaded_files")
+        end
 
         it "displays fallback text" do
+          request
           expect(response.body).to include("Files uploaded will appear here")
         end
       end
@@ -47,6 +56,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         # NOTE: factory implicitily attachs the hello_world.pdf
         it "displays the name of the uploaded file on the page" do
+          request
           expect(response.body).to include("hello_world.pdf")
         end
       end
