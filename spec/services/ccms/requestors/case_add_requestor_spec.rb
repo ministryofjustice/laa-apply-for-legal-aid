@@ -87,6 +87,18 @@ module CCMS
           end
         end
 
+        context "when the proceeding type has a chosen client involvement type" do
+          before { proceeding.update!(client_involvement_type_ccms_code: "D", client_involvement_type_description: "Defendant/respondent") }
+
+          it "generates the expected code" do
+            expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+            travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+              test_data_xml = ccms_data_from_file "non_default_client_involvement_type.xml"
+              expect(expected_xml).to eq test_data_xml
+            end
+          end
+        end
+
         context "when DF assigned scope limitations are present" do
           context "when DF are not used" do
             it "does not add the extra scope limitation to the XML, and specifies the AA001 for requested scope" do
