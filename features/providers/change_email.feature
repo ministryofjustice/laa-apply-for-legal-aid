@@ -18,10 +18,10 @@ Feature: Change applicant email address
     Then I am on the About the Financial Assessment page
     And I click link 'Change'
     Then I should be on a page showing 'Email address'
-    Then I fill 'email' with 'test@test.com'
+    Then I fill 'email' with 'testagain@test.com'
     Then I click 'Save and continue'
     Then I am on the About the Financial Assessment page
-    Then I should be on a page showing 'test@test.com'
+    Then I should be on a page showing 'testagain@test.com'
 
   @javascript @vcr
   Scenario: I want to change the applicant email address once the email has been sent

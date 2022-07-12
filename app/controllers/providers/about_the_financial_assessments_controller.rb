@@ -10,9 +10,7 @@ module Providers
       return continue_or_draft if draft_selected?
 
       unless legal_aid_application.applicant_entering_means?
-        unless legal_aid_application.awaiting_applicant?
-          legal_aid_application.await_applicant!
-        end
+        legal_aid_application.await_applicant! unless legal_aid_application.awaiting_applicant?
         CitizenEmailService.new(legal_aid_application).send_email
         SubmitCitizenReminderService.new(legal_aid_application).send_email
       end
