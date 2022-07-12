@@ -300,7 +300,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "redirects to identify_types_of_incomes" do
           request
-          expect(response).to redirect_to providers_legal_aid_application_means_identify_types_of_income_path
+          expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path
         end
       end
 
