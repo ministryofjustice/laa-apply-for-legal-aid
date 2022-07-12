@@ -24,10 +24,10 @@ Feature: Non-passported applicant journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'
@@ -132,10 +132,10 @@ Feature: Non-passported applicant journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'
@@ -195,10 +195,10 @@ Feature: Non-passported applicant journeys
     Then I choose 'No'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'
@@ -265,10 +265,10 @@ Feature: Non-passported applicant journeys
     And I fill 'offline savings accounts' with '456.33'
     Then I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on a page showing "Is your client prohibited from selling or borrowing against their assets?"
     Then I choose 'Yes'
@@ -339,10 +339,10 @@ Feature: Non-passported applicant journeys
     Then I choose 'No'
     And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    When I select "None of these"
+    When I select "My client has none of these savings or investments"
     And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "None of these"
+    Then I select "My client has none of these assets"
     Then I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
     When I select 'England Infected Blood Support Scheme'

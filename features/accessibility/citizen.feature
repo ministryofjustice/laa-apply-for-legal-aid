@@ -45,7 +45,7 @@ Feature: Citizen accessibility
     Then I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you receive?"
     And the page is accessible
-    And I select 'None of these'
+    And I select 'I receive none of these payments'
     Then I click 'Save and continue'
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
     And the page is accessible

@@ -33,13 +33,13 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Then I choose 'No'
   Then I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these savings or investments"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which assets does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these assets"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "None of these"
+  When I select "My client has received none of these payments"
   And I click 'Save and continue'
   Then I should be on the 'means_summary' page showing 'Check your answers'
   And the answer for 'extra_employment_information' should be 'Yes'
@@ -76,13 +76,13 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I choose 'No'
   Then I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these savings or investments"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which assets does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these assets"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "None of these"
+  When I select "My client has received none of these payments"
   And I click 'Save and continue'
   Then I should be on the 'means_summary' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'
@@ -117,13 +117,13 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   Then I choose 'No'
   Then I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these savings or investments"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which assets does your client have?"
-  Then I select "None of these"
+  Then I select "My client has none of these assets"
   Then I click 'Save and continue'
   Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-  When I select "None of these"
+  When I select "My client has received none of these payments"
   And I click 'Save and continue'
   Then I should be on the 'means_summary' page showing 'Check your answers'
   And the answer for 'full_employment_details' should be 'all the details about employment'

@@ -60,14 +60,14 @@ Feature: Citizen journey
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you receive?"
-    And I select 'None of these'
+    And I select 'I receive none of these payments'
     Then I click 'Save and continue'
     Then I should be on the 'student_finance' page showing 'Do you get student finance?'
     When I choose "Yes"
     When I enter amount '5000'
     And I click 'Save and continue'
     Then I should be on a page showing "Which of the following payments do you make?"
-    And I select 'None of these'
+    And I select 'I make none of these payments'
     Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page not showing 'Excluded Benefits'

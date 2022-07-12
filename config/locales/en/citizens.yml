@@ -43,10 +43,15 @@ en:
     cash_incomes:
       show:
         page_heading: Select payments you receive in cash
-
+      cash_income_form:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: I receive none of these payments in cash
     cash_outgoings:
       show:
         page_heading: Select payments you make in cash
+      cash_outgoings_form:
+        info: Cash means physical money like banknotes and coins.
+        none_selected: I make none of these payments in cash
     check_answers:
       cash_transactions:
         cash_transactions_credits_header: Payments you receive in cash
