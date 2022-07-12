@@ -34,7 +34,7 @@ Feature: Bank statement upload
     Then I should see 'acceptable.pdf UPLOADED'
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Which payments does your client receive?"
+    Then I should be on a page showing "The information on this page has been provided by HMRC"
 
     When I click link "Back"
     Then I should be on a page with title "Upload bank statements"
@@ -61,6 +61,11 @@ Feature: Bank statement upload
   Scenario: New bank upload permissions flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
+    When I click 'Save and continue'
+    Then I should be on a page showing "The information on this page has been provided by HMRC"
+    Then I should be on a page showing "Do you need to tell us anything else about your client's employment?"
+
+    When I choose "No"
     When I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 

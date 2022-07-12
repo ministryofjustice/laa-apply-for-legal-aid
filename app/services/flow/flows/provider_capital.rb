@@ -122,7 +122,13 @@ module Flow
         },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
-          forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
+          forward: lambda do |application|
+            if application.provider.bank_statement_upload_permissions?
+              :identify_types_of_incomes
+            else
+              application.income_types? ? :income_summary : :no_income_summaries
+            end
+          end,
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
