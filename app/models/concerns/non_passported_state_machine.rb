@@ -8,10 +8,14 @@ class NonPassportedStateMachine < BaseStateMachine
     state :provider_assessing_means
     state :checking_non_passported_means
 
+    # TODO: remove the state in the section below
+    # provider_assessing_means
+
     event :provider_confirm_applicant_eligibility do
       transitions from: %i[
         applicant_details_checked
         delegated_functions_used
+        provider_assessing_means
         provider_confirming_applicant_eligibility
       ],
                   to: :provider_confirming_applicant_eligibility

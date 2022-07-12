@@ -935,6 +935,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
+        online_banking_question: Does your client use online banking?
+        email_address_question: Does your client have an email address?
         heading: We need your client's bank statements from the last 3 months
         info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
         details_summary: What is TrueLayer?
@@ -961,15 +963,12 @@ en:
             We redirect your client to their bank's website or app.
             They give consent for TrueLayer to securely access their account details.
             TrueLayer shares their bank statements with us.
-        radio_legend: Can your client share their bank statements with us via TrueLayer?
         radio_no:
           label: 'No'
           hint: |
             You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements
         radio_yes:
           label: 'Yes'
-          hint: |
-            Your client must have an email address and use online banking for all of their current accounts.
 
 
     outgoings_summary:
