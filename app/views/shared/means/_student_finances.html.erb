@@ -4,8 +4,7 @@
 <%= page_template page_title: page_title, form: form, template: :basic do %>
   <%= form.govuk_radio_buttons_fieldset :student_finance,
                                         hint: {text: t('.hint')},
-                                        legend: {text: content_for(:page_title), tag: 'h1',
-                                          size: 'xl'} do %>
+                                        legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} do %>
     <%= form.govuk_radio_button(:student_finance, true, label: { text: t('generic.yes') } ) do %>
       <%= form.govuk_text_field(
           :amount,

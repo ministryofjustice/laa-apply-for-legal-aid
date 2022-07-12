@@ -80,7 +80,6 @@ class LegalAidApplication < ApplicationRecord
            :provider_confirm_applicant_eligibility!,
            :provider_assess_means!,
            :provider_enter_means!,
-           :provider_enter_means!,
            :provider_enter_merits!,
            :provider_used_delegated_functions!,
            :reset!,

@@ -1513,7 +1513,7 @@ RSpec.describe LegalAidApplication, type: :model do
           end
         end
 
-        context "when client permission to use true later not specified" do
+        context "when client permission to use true layer not specified" do
           let(:consent) { nil }
 
           it "returns true" do
