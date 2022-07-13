@@ -3,7 +3,6 @@ Feature: Bank statement upload
   Background:
     Given csrf is enabled
     And I have completed a non-passported application and reached the open banking consent with bank statement upload enabled
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     And I should be on a page showing "Does your client use online banking?"
 
     When I choose 'No'

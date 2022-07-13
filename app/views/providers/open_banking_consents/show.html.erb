@@ -9,10 +9,11 @@
 
     <%= page_template page_title: t('.heading'), form: form, template: :basic do %>
 
-      <h2 class="govuk-heading-xl"><%= t('.heading') %></h2>
-
       <%= form.govuk_radio_buttons_fieldset(:provider_received_citizen_consent,
-                                            legend: { size: 's', tag: 'h2', text: t('.online_banking_question') }) do %>
+                                            legend: { size: 'xl', tag: 'h2', text: page_title }) do %>
+
+        <div class="govuk-!-padding-bottom-5"></div>
+
         <%= form.govuk_radio_button(:provider_received_citizen_consent, true, link_errors: true, label: {text: t('generic.yes')} ) %>
         <%= form.govuk_radio_button(:provider_received_citizen_consent, false, label: {text:  t('generic.no')}) %>
       <% end %>
