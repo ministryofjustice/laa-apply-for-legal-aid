@@ -131,6 +131,7 @@ module Flow
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
           forward: :employment_incomes,
+          check_answers: :means_summaries,
         },
 
         email_addresses: {

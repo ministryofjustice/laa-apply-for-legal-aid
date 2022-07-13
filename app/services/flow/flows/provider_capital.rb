@@ -15,7 +15,13 @@ module Flow
               :income_summary
             end
           end,
-          check_answers: :means_summaries,
+          check_answers: lambda do |application|
+            if application.uploading_bank_statements?
+              application.transaction_types.credits.any? ? :cash_incomes : :means_summaries
+            else
+              :income_summary
+            end
+          end,
         },
         cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
@@ -36,10 +42,18 @@ module Flow
               :outgoings_summary
             end
           end,
+          check_answers: lambda do |application|
+            if application.uploading_bank_statements?
+              application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries
+            else
+              :outgoings_summary
+            end
+          end,
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
           forward: :has_dependants,
+          check_answers: :means_summaries,
         },
         # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
@@ -129,10 +143,12 @@ module Flow
               application.income_types? ? :income_summary : :no_income_summaries
             end
           end,
+          check_answers: :means_summaries,
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
           forward: ->(application) { application.income_types? ? :income_summary : :no_income_summaries },
+          check_answers: :means_summaries,
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },

@@ -6,7 +6,7 @@ module Providers
 
     def show
       legal_aid_application.set_transaction_period
-      legal_aid_application.provider_assess_means!
+      legal_aid_application.provider_assess_means! unless legal_aid_application.checking_non_passported_means?
     end
 
     def update
