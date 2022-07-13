@@ -75,6 +75,11 @@ en:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
     assessment_results:
+      no_cfe_result:
+        heading: A caseworker needs to review your application
+        cannot_calculate: We cannot calculate your client's financial eligibility yet because you uploaded bank statements
+        caseworker_check: A caseworker will check your client's bank statements to see if they need to pay towards legal aid.
+        continue: Continue your application to provide details of the case
       eligible:
         heading: "%{name} could be eligible for legal aid"
         details:
