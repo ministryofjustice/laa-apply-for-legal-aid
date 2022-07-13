@@ -18,11 +18,12 @@
     <% end %>
   <% end %>
 
+  <% income_url = @legal_aid_application.provider.bank_statement_upload_permissions? ? :identify_types_of_incomes : :income_summary %>
   <%= render(
          'shared/check_answers/income_summary',
          income_type: t('.credits-section-heading'),
-         url: :income_summary,
-          transaction_types: TransactionType.credits
+         url: income_url,
+         transaction_types: TransactionType.credits
       ) %>
 
   <% if @legal_aid_application.value_of_student_finance %>
@@ -31,10 +32,11 @@
     <p><%= t('.student_finance.info_html', student_finance: value_with_currency_unit(@legal_aid_application.value_of_student_finance, t('currency.gbp'))) %></p>
   <% end %>
 
+  <% outgoings_url = @legal_aid_application.provider.bank_statement_upload_permissions? ? :identify_types_of_outgoings : :outgoings_summary %>
   <%= render(
           'shared/check_answers/income_summary',
           income_type: t('.debits-section-heading'),
-          url: :outgoings_summary,
+          url: outgoings_url,
           transaction_types: TransactionType.debits
       ) %>
 
