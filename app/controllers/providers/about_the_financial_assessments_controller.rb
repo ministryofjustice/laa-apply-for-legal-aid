@@ -9,8 +9,8 @@ module Providers
     def update
       return continue_or_draft if draft_selected?
 
-      unless legal_aid_application.applicant_entering_means?
-        legal_aid_application.await_applicant! unless legal_aid_application.awaiting_applicant?
+      if ready_for_citizen_to_enter_financial_details?
+        legal_aid_application.await_applicant!
         CitizenEmailService.new(legal_aid_application).send_email
         SubmitCitizenReminderService.new(legal_aid_application).send_email
       end
@@ -18,6 +18,10 @@ module Providers
     end
 
   private
+
+    def ready_for_citizen_to_enter_financial_details?
+      !legal_aid_application.applicant_entering_means?
+    end
 
     def start_after_means_complete_path
       Flow::KeyPoint.path_for(

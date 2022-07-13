@@ -20,6 +20,7 @@ class NonPassportedStateMachine < BaseStateMachine
     event :await_applicant do
       transitions from: :provider_confirming_applicant_eligibility, to: :awaiting_applicant
       transitions from: :delegated_functions_used, to: :awaiting_applicant
+      transitions from: :awaiting_applicant, to: :awaiting_applicant
     end
 
     event :applicant_enter_means do
