@@ -6,6 +6,12 @@ module Providers
     end
 
     def update
+      if legal_aid_application.provider.bank_statement_upload_permissions?
+        redirect_to providers_legal_aid_application_capital_income_assessment_result_path
+        legal_aid_application.provider_enter_merits!
+        return
+      end
+
       unless draft_selected? || legal_aid_application.provider_entering_merits?
         redirect_to(problem_index_path) && return unless check_financial_eligibility
 
