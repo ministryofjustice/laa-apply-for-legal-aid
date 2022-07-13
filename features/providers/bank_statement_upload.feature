@@ -119,3 +119,54 @@ Feature: Bank statement upload
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
+
+  @javascript
+  Scenario: Checking answers for bank statement upload flow
+    Given the feature flag for enable_employed_journey is enabled
+    And I have completed a non-passported employed application with bank statement upload as far as the end of the means section
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for 'bank statements'
+    And I upload an evidence file named 'hello_world.pdf'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    And I should see 'hello_world.pdf'
+#
+#    When I click Check Your Answers Change link for 'employment'
+#    Then I should be on a page showing 'This information has been provided by HMRC'
+#    When I select 'No'
+#    And I click 'Save and continue'
+#    Then I should be on the 'means_summary' page showing 'Check your answers'
+#    And the answer for 'employment notes' should be 'No'
+
+    When I click Check Your Answers Change link for 'income'
+    And I check 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page with title 'Select payments your client receives in cash'
+    When I check 'None of the above'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for 'income'
+    And I check 'My client receives none of these payments'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for 'outgoings'
+    And I check 'Maintenance payments to a former partner'
+    And I click 'Save and continue'
+    Then I should be on a page with title 'Select payments your client makes in cash'
+    When I check 'None of the above'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for 'outgoings'
+    And I check 'My client makes none of these payments'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+
+
+
+
+
