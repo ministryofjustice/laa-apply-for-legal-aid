@@ -7,10 +7,10 @@
 
   <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
 
-    <%= page_template page_title: t('.heading'), form: form, template: :basic do %>
+    <%= page_template page_title: t('.online_banking_question'), form: form, template: :basic do %>
 
       <%= form.govuk_radio_buttons_fieldset(:provider_received_citizen_consent,
-                                            legend: { size: 'xl', tag: 'h2', text: page_title }) do %>
+                                            legend: { size: 'xl', tag: 'h2', text:t('.online_banking_question') }) do %>
 
         <div class="govuk-!-padding-bottom-5"></div>
 

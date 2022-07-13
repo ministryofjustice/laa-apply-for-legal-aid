@@ -929,7 +929,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
-        heading: Does your client use online banking?
+        online_banking_question: Does your client use online banking?
+        heading: We need your client's bank statements from the last 3 months
         info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
         details_summary: What is TrueLayer?
         details_content_html: |
