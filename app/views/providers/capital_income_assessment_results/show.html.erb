@@ -1,6 +1,8 @@
+<% head_title = @legal_aid_application.provider.bank_statement_upload_permissions? ? ".no_cfe_assessment" : ".tab_title.#{@cfe_result.assessment_result}" %>
+
 <%= page_template(
         page_title: t(".page_title", result: t(".result.#{@cfe_result.assessment_result}") ),
-        head_title: t(".tab_title.#{@cfe_result.assessment_result}" ),
+        head_title: t(head_title),
         template: :basic,
         column_width: :full
     ) do %>
@@ -9,7 +11,7 @@
     <%= render @result_partial %>
   </div>
 
-  <%= render 'result_details' %>
+  <%= render 'result_details' unless @legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists? %>
 
   <br><br>
 
