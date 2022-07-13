@@ -4565,7 +4565,7 @@ main_dwelling:
     user_defined: true
 proceeding_means:
   CLIENT_INVOLVEMENT_TYPE:
-    value: A
+    value: '#proceeding_client_involvement_type_ccms_code'
     br100_meaning:
     response_type: text
     user_defined: true
@@ -5172,7 +5172,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   CLIENT_INVOLVEMENT_TYPE:
-    value: A
+    value: '#proceeding_client_involvement_type_ccms_code'
     br100_meaning: Client Involvement Type
     response_type: text
     user_defined: true

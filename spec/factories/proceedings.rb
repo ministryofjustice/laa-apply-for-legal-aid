@@ -27,6 +27,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :da002 do
@@ -56,6 +58,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :da005 do
@@ -82,6 +86,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :da006 do
@@ -108,6 +114,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :da004 do
@@ -134,6 +142,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :se013 do
@@ -162,6 +172,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
     trait :se014 do
@@ -190,6 +202,8 @@ FactoryBot.define do
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
   end
 end

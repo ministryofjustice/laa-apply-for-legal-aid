@@ -1,8 +1,6 @@
 module LegalFramework
   module ProceedingTypes
-    class All
-      PATH = "/proceeding_types/all".freeze
-
+    class All < BaseApiCall
       class ProceedingTypeStruct
         attr_reader :ccms_code, :meaning, :description, :ccms_category_law, :ccms_matter_code, :ccms_matter
 
@@ -16,30 +14,12 @@ module LegalFramework
         end
       end
 
-      def self.call
-        new.call
-      end
-
       def call
         JSON.parse(request.body).map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
       end
 
-    private
-
-      def request
-        conn.get url
-      end
-
-      def conn
-        @conn ||= Faraday.new(url:, headers:)
-      end
-
-      def url
-        "#{Rails.configuration.x.legal_framework_api_host}#{PATH}"
-      end
-
-      def headers
-        { "Content-Type" => "application/json" }
+      def path
+        "/proceeding_types/all"
       end
     end
   end
