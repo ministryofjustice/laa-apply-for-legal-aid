@@ -41,6 +41,7 @@ RSpec.describe Admin::SettingsController, type: :request do
           allow_welsh_translation: "true",
           enable_employed_journey: "true",
           enable_ccms_submission: "true",
+          enable_cfe_v5: "true",
         },
       }
     end
@@ -55,6 +56,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.enable_employed_journey?).to be(true)
+      expect(setting.enable_cfe_v5?).to be(true)
     end
 
     it "create settings if they do not exist" do
