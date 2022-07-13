@@ -5,25 +5,83 @@
       local: true
     ) do |form| %>
 
+  <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
     <%= page_template page_title: t('.heading'), form: form, template: :basic do %>
 
-    <h2 class="govuk-heading-xl"><%= t('.heading') %></h2>
+      <h2 class="govuk-heading-xl"><%= t('.heading') %></h2>
 
-    <%= form.govuk_radio_buttons_fieldset(:provider_received_citizen_consent,
-                                          legend: { size: 's', tag: 'h2', text: t('.email_address_question') }) do %>
-      <%= form.govuk_radio_button(:provider_received_citizen_consent, true, link_errors: true, label: {text: t('generic.yes')} ) %>
-      <%= form.govuk_radio_button(:provider_received_citizen_consent, false, label: {text:  t('generic.no')}) %>
-    <% end %>
-    <%= form.govuk_radio_buttons_fieldset(:uses_online_banking, legend: { size: 's', tag: 'h2', text: t('.online_banking_question') }) do %>
-      <%= form.govuk_radio_button(:uses_online_banking, true, link_errors: true, label: {text: t('generic.yes')} ) %>
-      <%= form.govuk_radio_button(:uses_online_banking, false, label: {text:  t('generic.no')}) %>
+      <%= form.govuk_radio_buttons_fieldset(:provider_received_citizen_consent,
+                                            legend: { size: 's', tag: 'h2', text: t('.email_address_question') }) do %>
+        <%= form.govuk_radio_button(:provider_received_citizen_consent, true, link_errors: true, label: {text: t('generic.yes')} ) %>
+        <%= form.govuk_radio_button(:provider_received_citizen_consent, false, label: {text:  t('generic.no')}) %>
+      <% end %>
+      <%= form.govuk_radio_buttons_fieldset(:uses_online_banking, legend: { size: 's', tag: 'h2', text: t('.online_banking_question') }) do %>
+        <%= form.govuk_radio_button(:uses_online_banking, true, link_errors: true, label: {text: t('generic.yes')} ) %>
+        <%= form.govuk_radio_button(:uses_online_banking, false, label: {text:  t('generic.no')}) %>
 
-      <div class="govuk-!-padding-bottom-5"></div>
+        <div class="govuk-!-padding-bottom-5"></div>
 
-      <%= next_action_buttons(
+        <%= next_action_buttons(
               show_draft: true,
               form: form
-          ) %>
+            ) %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= page_template page_title: t('.heading'), form: form, template: :basic do %>
+
+      <%= form.govuk_radio_buttons_fieldset :provider_received_citizen_consent,
+                                            legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+
+        <p class="govuk-body govuk-!-padding-top-4">
+          <%= t('.info') %>
+        </p>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            <%= t('.details_summary') %>
+          </span>
+          </summary>
+          <div class="govuk-details__text">
+            <%= t('.details_content_html') %>
+            <%= list_from_translation_path('.open_banking_consents.show.details') %>
+          </div>
+        </details>
+
+        <h2 class="govuk-heading-m">
+          <%= t('.provider_instructions.heading') %>
+        </h2>
+
+        <%= numbered_list_from_translation_path('.open_banking_consents.show.provider_instructions') %>
+
+        <%= form.govuk_radio_buttons_fieldset(
+          :provider_received_citizen_consent,
+          legend: { size: 'm', tag: 'h2', text: t('.radio_legend') }
+        ) do %>
+          <%= form.govuk_radio_button(
+                :provider_received_citizen_consent,
+                true,
+                link_errors: true,
+                label: {text: t('.radio_yes.label')},
+                hint: {text: t('.radio_yes.hint')}
+              ) %>
+          <% radio_button_no_options = { label: { text: t('.radio_no.label')} }
+             radio_button_no_options.merge!(hint: { text: t('.radio_no.hint') }) if @legal_aid_application.provider.bank_statement_upload_permissions? %>
+          <%= form.govuk_radio_button(
+                :provider_received_citizen_consent,
+                false,
+                **radio_button_no_options
+              ) %>
+        <% end %>
+
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <%= next_action_buttons(
+              show_draft: true,
+              form: form
+            ) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

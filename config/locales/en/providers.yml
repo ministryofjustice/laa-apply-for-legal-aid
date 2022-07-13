@@ -963,12 +963,15 @@ en:
             We redirect your client to their bank's website or app.
             They give consent for TrueLayer to securely access their account details.
             TrueLayer shares their bank statements with us.
+        radio_legend: Can your client share their bank statements with us via TrueLayer?
         radio_no:
           label: 'No'
           hint: |
             You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements
         radio_yes:
           label: 'Yes'
+          hint: |
+            Your client must have an email address and use online banking for all of their current accounts.
 
 
     outgoings_summary:
