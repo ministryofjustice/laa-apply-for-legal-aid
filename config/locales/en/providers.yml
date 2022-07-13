@@ -187,7 +187,7 @@ en:
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
-    identify_types_of_incomes:  
+    identify_types_of_incomes:
       update:
         none_selected: Select if your client receives any types of income
     cookies:
@@ -929,6 +929,8 @@ en:
         no_account_selected: None of these
     open_banking_consents:
       show:
+        online_banking_question: Does your client use online banking?
+        email_address_question: Does your client have an email address?
         heading: We need your client's bank statements from the last 3 months
         info: Your client can quickly and securely share their bank statements with us online via a third-party called TrueLayer.
         details_summary: What is TrueLayer?
