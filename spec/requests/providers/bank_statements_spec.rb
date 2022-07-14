@@ -327,8 +327,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
           it "redirects to income_summary OR no_income_summaries" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
-                            .or redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
           end
         end
 
