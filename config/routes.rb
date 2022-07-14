@@ -220,6 +220,7 @@ Rails.application.routes.draw do
         patch "remove_transaction_type", on: :member
       end
       resource :means_summary, only: %i[show update]
+      resource :no_eligibility_assessment, only: %i[show update]
       resource :used_multiple_delegated_functions, only: %i[show update]
       resource :confirm_multiple_delegated_functions, only: %i[show update]
       resource :use_ccms, only: %i[show]
