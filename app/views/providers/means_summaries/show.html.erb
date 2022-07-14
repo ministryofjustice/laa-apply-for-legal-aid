@@ -1,8 +1,9 @@
+<% bank_statement_upload = @legal_aid_application.provider.bank_statement_upload_permissions? %>
 <%= page_template(page_title: t('.h1-heading')) do %>
 
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>
 
-  <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
+  <% if bank_statement_upload %>
     <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence) %>
   <% end %>
 
@@ -18,7 +19,7 @@
     <% end %>
   <% end %>
 
-  <% income_url = @legal_aid_application.provider.bank_statement_upload_permissions? ? :identify_types_of_incomes : :income_summary %>
+  <% income_url = bank_statement_upload ? :identify_types_of_incomes : :income_summary %>
   <%= render(
          'shared/check_answers/income_summary',
          income_type: t('.credits-section-heading'),
@@ -26,14 +27,11 @@
          transaction_types: TransactionType.credits
       ) %>
 
-  <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
+  <% if @legal_aid_application.value_of_student_finance || bank_statement_upload %>
     <%= render 'shared/check_answers/student_finance', read_only: false %>
-  <% elsif @legal_aid_application.value_of_student_finance %>
-    <h3 class="govuk-heading-m"><%= t('.student_finance.heading') %></h3>
-    <p><%= t('.student_finance.info_html', student_finance: value_with_currency_unit(@legal_aid_application.value_of_student_finance, t('currency.gbp'))) %></p>
   <% end %>
 
-  <% outgoings_url = @legal_aid_application.provider.bank_statement_upload_permissions? ? :identify_types_of_outgoings : :outgoings_summary %>
+  <% outgoings_url = bank_statement_upload ? :identify_types_of_outgoings : :outgoings_summary %>
   <%= render(
           'shared/check_answers/income_summary',
           income_type: t('.debits-section-heading'),
