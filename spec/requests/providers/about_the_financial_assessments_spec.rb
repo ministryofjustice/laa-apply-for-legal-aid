@@ -101,11 +101,16 @@ RSpec.describe "about financial assessments requests", type: :request do
           allow(mocked_email_service).to receive(:send_email)
         end
 
-        context "but has already been submitted by the provider" do
+        context "and has already been submitted by the provider" do
           let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant) }
 
-          it "does not send an email to the citizen" do
-            expect(CitizenEmailService).not_to receive(:new)
+          it "does not change the application state" do
+            expect { subject }.not_to change { application.reload.state }
+          end
+
+          it "sends a new email to the citizen" do
+            expect(CitizenEmailService).to receive(:new).with(application).and_return(mocked_email_service)
+            expect(mocked_email_service).to receive(:send_email)
 
             begin
               subject

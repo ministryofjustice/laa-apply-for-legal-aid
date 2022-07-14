@@ -69,7 +69,7 @@ Feature: Provider accessibility
     Then I should be on a page showing 'Give your client temporary access to the service'
     And the page is accessible
     When I click 'Send link'
-    Then I should be on a page showing 'Application created'
+    Then I should be on a page showing "We've shared your application with your client"
     And the page is accessible
     When I click link 'Back to your applications'
     Then I should be on a page showing 'Applications'

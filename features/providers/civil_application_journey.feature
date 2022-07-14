@@ -460,30 +460,6 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
-  Scenario: I want to change email address from the about financial assessment page
-    Given I complete the journey as far as check your answers
-    Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    And I should be on a page showing "What is your client's employment status?"
-    And I select "None of the above"
-    When I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
-    Then I should be on a page with title "Enter your client's email address"
-    Then I fill 'email' with 'test@test.com'
-    Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
-    And I click link 'Change'
-    Then I should be on a page showing 'Email address'
-    Then I fill 'email' with 'test@test.com'
-    Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
-    Then I should be on a page showing 'test@test.com'
-
-  @javascript @vcr
   Scenario: I am able to view the client completed means answers
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has shared their financial information'
