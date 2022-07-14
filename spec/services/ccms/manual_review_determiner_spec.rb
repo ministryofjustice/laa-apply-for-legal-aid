@@ -229,6 +229,21 @@ module CCMS
             expect(subject).to be false
           end
         end
+
+        context "with uploaded_bank_statements" do
+          let(:provider) { create :provider, :with_bank_statement_upload_permissions }
+          let(:legal_aid_application) { create :legal_aid_application, attachments: [bank_statement], provider: }
+          let(:bank_statement) { create :attachment, :bank_statement }
+
+          # let!(:cfe_result) { nil }
+          # this test needs to be nil for cfe_result so need to inbterceopt the error
+          # reported when cfe_result is nil as we dont expect a cfe resullt for these cases.
+          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+
+          it "returns true" do
+            expect(subject).to be true
+          end
+        end
       end
     end
 
