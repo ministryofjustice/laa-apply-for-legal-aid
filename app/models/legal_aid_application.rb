@@ -508,6 +508,10 @@ class LegalAidApplication < ApplicationRecord
     provider.bank_statement_upload_permissions? && !provider_received_citizen_consent?
   end
 
+  def uploaded_bank_statements?
+    provider.bank_statement_upload_permissions? && attachments.bank_statement_evidence.exists?
+  end
+
 private
 
   def bank_transactions_by_type(type)
