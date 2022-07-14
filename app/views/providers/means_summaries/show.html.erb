@@ -26,9 +26,10 @@
          transaction_types: TransactionType.credits
       ) %>
 
-  <% if @legal_aid_application.value_of_student_finance %>
+  <% if @legal_aid_application.provider.bank_statement_upload_permissions? %>
+    <%= render 'shared/check_answers/student_finance', read_only: false %>
+  <% elsif @legal_aid_application.value_of_student_finance %>
     <h3 class="govuk-heading-m"><%= t('.student_finance.heading') %></h3>
-
     <p><%= t('.student_finance.info_html', student_finance: value_with_currency_unit(@legal_aid_application.value_of_student_finance, t('currency.gbp'))) %></p>
   <% end %>
 

@@ -266,6 +266,10 @@ en:
         no_transactions: "No"
         html:
           no_transactions: "No"
+      student_finance:
+        heading: Student finance
+        does_your_client: Does your client receive student finance?
+        how_much: Amount of student finance
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:
