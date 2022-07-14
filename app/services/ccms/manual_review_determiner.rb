@@ -30,7 +30,8 @@ module CCMS
         capital_contribution_required? ||
         has_restrictions? ||
         policy_disregards? ||
-        manually_entered_employment_information?
+        manually_entered_employment_information? ||
+        uploaded_bank_statements
     end
 
     def review_reasons
@@ -62,6 +63,10 @@ module CCMS
 
     def manually_review_all_non_passported?
       Setting.manually_review_all_cases? && non_passported?
+    end
+
+    def uploaded_bank_statements
+      legal_aid_application.provider.bank_statement_upload_permissions? && legal_aid_application.attachments.bank_statement_evidence.exists?
     end
   end
 end
