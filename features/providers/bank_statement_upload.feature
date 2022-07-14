@@ -60,7 +60,7 @@ Feature: Bank statement upload
     And I should see 'hello_world.docx UPLOADED'
 
   @javascript
-  Scenario: New bank upload permissions flow
+  Scenario: Bank statement upload permissions flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     When I click 'Save and continue'
