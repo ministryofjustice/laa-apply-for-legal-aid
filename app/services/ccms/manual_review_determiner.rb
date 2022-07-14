@@ -16,7 +16,7 @@ module CCMS
              :has_restrictions?,
              :policy_disregards?,
              :manually_entered_employment_information?,
-             :uploaded_bank_statements?, to: :legal_aid_application
+             :uploading_bank_statements?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
@@ -32,7 +32,7 @@ module CCMS
         has_restrictions? ||
         policy_disregards? ||
         manually_entered_employment_information? ||
-        uploaded_bank_statements?
+        uploading_bank_statements?
     end
 
     def review_reasons
@@ -59,7 +59,7 @@ module CCMS
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :further_employment_details if manually_entered_employment_information?
-      application_review_reasons << :uploaded_bank_statements if uploaded_bank_statements?
+      application_review_reasons << :uploaded_bank_statements if uploading_bank_statements?
       application_review_reasons
     end
 

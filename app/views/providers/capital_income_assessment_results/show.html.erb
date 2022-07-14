@@ -13,7 +13,7 @@
 
   <%= render 'result_details' unless @legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists? %>
 
-  <br><br>
+  <div class="govuk-!-padding-bottom-6"></div>
 
   <%= next_action_buttons_with_form(
           url: providers_legal_aid_application_capital_income_assessment_result_path(@legal_aid_application),
