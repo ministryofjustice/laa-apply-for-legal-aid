@@ -2,7 +2,9 @@ Feature: Bank statement upload
 
   Background:
     Given csrf is enabled
+    And the system is prepped for the employed journey
     And I have completed a non-passported application and reached the open banking consent with bank statement upload enabled
+    And the application's applicant is employed and has a matching HMRC response
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
     And I should be on a page showing "You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements"
@@ -164,9 +166,3 @@ Feature: Bank statement upload
     And I check 'My client makes none of these payments'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-
-
-
-
-
-
