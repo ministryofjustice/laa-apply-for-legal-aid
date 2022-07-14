@@ -6,7 +6,7 @@ module Providers
     end
 
     def update
-      if legal_aid_application.provider.bank_statement_upload_permissions?  && @legal_aid_application.attachments.bank_statement_evidence.exists?
+      if legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists?
         legal_aid_application.provider_enter_merits!
         continue_or_draft
         return
