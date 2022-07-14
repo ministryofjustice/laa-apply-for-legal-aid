@@ -270,6 +270,7 @@ en:
         heading: Student finance
         does_your_client: Does your client receive student finance?
         how_much: Amount of student finance
+        info_html: '<strong>%{student_finance}</strong> this academic year.'
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:

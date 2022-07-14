@@ -188,7 +188,7 @@ en:
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
-    identify_types_of_incomes:  
+    identify_types_of_incomes:
       update:
         none_selected: Select if your client receives any types of income
     cookies:
@@ -788,9 +788,6 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's income and outgoings
-        student_finance:
-          heading: Student finance
-          info_html: '<strong>%{student_finance}</strong> this academic year.'
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?

@@ -120,6 +120,10 @@ Feature: Bank statement upload
     Given the feature flag for enable_employed_journey is enabled
     And I have completed a non-passported employed application with bank statement upload as far as the end of the means section
     Then I should be on the 'means_summary' page showing 'Check your answers'
+    And I should see 'Upload bank statements'
+    And I should see 'Does your client receive student finance?'
+    And the answer for 'student finance question' should be 'No'
+    And I should not see 'Which bank accounts does your client have?'
 
     When I click Check Your Answers Change link for 'bank statements'
     And I upload an evidence file named 'hello_world.pdf'
@@ -139,6 +143,14 @@ Feature: Bank statement upload
     And I check 'My client receives none of these payments'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    When I click Check Your Answers Change link for 'student finance'
+    And I choose 'Yes'
+    And I enter amount '5000'
+    And I click 'Save and continue'
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+    And the answer for 'student finance question' should be 'Yes'
+    And the answer for 'student finance annual amount' should be '£5,000'
 
     When I click Check Your Answers Change link for 'outgoings'
     And I check 'Maintenance payments to a former partner'
