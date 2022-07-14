@@ -15,7 +15,8 @@ module CCMS
              :non_passported?,
              :has_restrictions?,
              :policy_disregards?,
-             :manually_entered_employment_information?, to: :legal_aid_application
+             :manually_entered_employment_information?,
+             :uploaded_bank_statements?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
@@ -30,7 +31,8 @@ module CCMS
         capital_contribution_required? ||
         has_restrictions? ||
         policy_disregards? ||
-        manually_entered_employment_information?
+        manually_entered_employment_information? ||
+        uploaded_bank_statements?
     end
 
     def review_reasons
@@ -57,11 +59,18 @@ module CCMS
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :further_employment_details if manually_entered_employment_information?
+      application_review_reasons << :uploaded_bank_statements if uploaded_bank_statements?
       application_review_reasons
     end
 
     def manually_review_all_non_passported?
       Setting.manually_review_all_cases? && non_passported?
     end
+
+    # def uploaded_bank_statements?
+    #   legal_aid_application.provider.bank_statement_upload_permissions? &&
+    #     legal_aid_application.attachments.bank_statement_evidence.exists? &&
+    #     legal_aid_application.cfe_result.nil? # not sure if this final and is reequired, might be overkill, but we should not be making the cfe call with these cases
+    # end
   end
 end
