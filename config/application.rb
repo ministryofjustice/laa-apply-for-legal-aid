@@ -19,6 +19,9 @@ module LaaApplyForLegalAid
     config.action_dispatch.cookies_serializer = :hybrid
     config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
 
+    # Changes in rails 7.0.3.1 prevented Synbols being used in serialised fields
+    # this overrides the setting and allows the code(and tests) to run as normal
+    config.active_record.yaml_column_permitted_classes = [Symbol]
     config.active_record.legacy_connection_handling = false
     config.time_zone = "London"
 
