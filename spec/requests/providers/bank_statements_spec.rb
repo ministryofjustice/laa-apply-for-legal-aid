@@ -298,9 +298,48 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "redirects to identify_types_of_incomes" do
-          request
-          expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path
+        context "when HMRC response status is hmrc_multiple_employments" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_multiple_employments
+          end
+
+          it "redirects to full_employment_details" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_means_full_employment_details_path(legal_aid_application)
+          end
+        end
+
+        context "when HMRC response status is hmrc_single_employment" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :hmrc_single_employment
+          end
+
+          it "redirects to employment_incomes" do
+            request
+            expect(response).to redirect_to providers_legal_aid_application_means_employment_income_path(legal_aid_application)
+          end
+        end
+
+        context "when HMRC response status is applicant_not_employed" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
+          end
+
+          it "redirects to income_summary OR no_income_summaries" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+                            .or redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
+          end
+        end
+
+        context "when HMRC response status is unexpected" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :foobar
+          end
+
+          it "raises error" do
+            expect { request }.to raise_error RuntimeError, "Unexpected hmrc status :foobar"
+          end
         end
       end
 

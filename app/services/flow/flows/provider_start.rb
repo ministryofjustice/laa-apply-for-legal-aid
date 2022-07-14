@@ -130,7 +130,19 @@ module Flow
         },
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
-          forward: :employment_incomes,
+          forward: lambda do |application|
+            status = HMRC::StatusAnalyzer.call(application)
+            case status
+            when :hmrc_multiple_employments, :no_hmrc_data
+              :full_employment_details
+            when :hmrc_single_employment, :unexpected_employment_data
+              :employment_incomes
+            when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
+              application.income_types? ? :income_summary : :no_income_summaries
+            else
+              raise "Unexpected hmrc status #{status.inspect}"
+            end
+          end,
           check_answers: :means_summaries,
         },
 
