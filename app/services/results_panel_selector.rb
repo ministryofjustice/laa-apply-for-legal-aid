@@ -17,12 +17,6 @@ class ResultsPanelSelector
 
 private
 
-  def no_cfe_result?
-    if @legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists?
-      "_no_cfe_result"
-    end
-  end
-
   def cfe_result
     @cfe_result ||= @legal_aid_application.cfe_result.overview
   end

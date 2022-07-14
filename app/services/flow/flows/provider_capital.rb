@@ -184,7 +184,13 @@ module Flow
         },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
-          forward: :capital_income_assessment_results,
+          forward: lambda do |application|
+            application.uploaded_bank_statements? ? :no_eligibility_assessments : :capital_income_assessment_results
+          end,
+        },
+        no_eligibility_assessments: {
+          path: ->(application) { urls.providers_legal_aid_application_no_eligibility_assessment_path(application) },
+          forward: :merits_task_lists,
         },
         capital_income_assessment_results: {
           path: ->(application) { urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
