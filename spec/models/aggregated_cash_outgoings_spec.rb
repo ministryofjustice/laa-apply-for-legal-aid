@@ -141,7 +141,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         def error_msg(name, month)
-          "Enter the cash amount you paid #{name} in #{month}"
+          "Enter the cash amount paid #{name} in #{month}"
         end
       end
 
@@ -192,7 +192,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
         end
 
         it "populates the errors" do
-          expect(aco.errors.full_messages).to eq ["Cash outgoings Select if you make these payments in cash"]
+          expect(aco.errors.full_messages).to eq ["Cash outgoings Select any payments made in cash"]
         end
       end
 
@@ -317,7 +317,7 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
 
           it "populates the errors" do
             subject
-            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash amount you paid for housing in #{month1_name}"
+            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash amount paid for housing in #{month1_name}"
           end
         end
       end
