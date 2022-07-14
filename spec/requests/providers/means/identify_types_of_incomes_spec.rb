@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   let(:legal_aid_application) { create :legal_aid_application }
-  let(:target_url) { providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application) }
   let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
   let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
@@ -13,7 +12,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   end
 
   describe "GET /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
-    subject(:request) { get target_url }
+    subject(:request) { get providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application) }
 
     it "returns http success" do
       request
@@ -43,7 +42,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
-    subject(:request) { patch target_url, params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:transaction_type_ids) { [] }
     let(:params) do
@@ -172,6 +171,58 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
       it "does not add the transaction types" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
+      end
+    end
+
+    context "when checking answers" do
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_non_passported_state_machine,
+               :checking_non_passported_means
+      end
+
+      let(:params) { { legal_aid_application: { none_selected: "true" } } }
+
+      context "with bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+        end
+
+        context "without transaction type credits" do
+          before do
+            legal_aid_application.transaction_types.destroy_all
+          end
+
+          it "redirects to means_summaries" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+          end
+        end
+
+        context "with transaction type credits" do
+          before do
+            legal_aid_application.transaction_types << create(:transaction_type, :credit)
+            legal_aid_application.transaction_types << create(:transaction_type, :debit)
+          end
+
+          it "redirects to cash_incomes", skip: "TODO" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
+          end
+        end
+      end
+
+      context "without bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: true)
+        end
+
+        it "redirects to income_summary" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        end
       end
     end
 
