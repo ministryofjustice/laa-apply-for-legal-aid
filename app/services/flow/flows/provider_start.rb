@@ -139,7 +139,15 @@ module Flow
             when :hmrc_single_employment, :unexpected_employment_data
               :employment_incomes
             when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
+<<<<<<< HEAD
               :identify_types_of_incomes
+=======
+              if application.uploading_bank_statements?
+                :identify_types_of_incomes
+              else
+                application.income_types? ? :income_summary : :no_income_summaries
+              end
+>>>>>>> fixup - passing feature tests including employment journey
             else
               raise "Unexpected hmrc status #{status.inspect}"
             end
