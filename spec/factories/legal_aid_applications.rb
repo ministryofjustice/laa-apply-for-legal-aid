@@ -429,6 +429,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_attached_bank_statement do
+      after(:create) do |application|
+        create(:attachment, :bank_statement, legal_aid_application: application)
+      end
+    end
+
     trait :with_gateway_evidence do
       after(:create) do |application|
         create(:gateway_evidence, :with_original_file_attached, legal_aid_application: application)

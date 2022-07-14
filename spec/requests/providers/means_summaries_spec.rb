@@ -113,6 +113,16 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
           expect(legal_aid_application.reload.provider_entering_merits?).to be true
         end
 
+        context "when provider does not have bank_statement_upload permissions" do
+          before do
+            legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          end
+
+          it "redirects to the capital income assessment page" do
+            expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
+          end
+        end
+
         context "Form submitted using Save as draft button" do
           let(:params) { { draft_button: "Save as draft" } }
 
@@ -133,6 +143,24 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
         it "redirects to the problem page" do
           expect(response).to redirect_to(problem_index_path)
         end
+      end
+    end
+
+    context "logged in as authenticated provider with bank statement upload permissions" do
+      before do
+        login
+        legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+      end
+
+      it "redirects to the no assessment result page" do
+        create :attachment, :bank_statement, legal_aid_application: legal_aid_application
+        subject
+        expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
+      end
+
+      it "expect cfe_result to be nil" do
+        subject
+        expect(legal_aid_application.cfe_result).to be_nil
       end
     end
   end

@@ -8,7 +8,7 @@ class ResultsPanelSelector
   end
 
   def call
-    return "shared/assessment_results/no_cfe_result" if @legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists?
+    return "shared/assessment_results/no_cfe_result" if @legal_aid_application.uploading_bank_statements?
     return eligible_or_non_eligible if %w[eligible not_eligible].include?(assessment_result)
     return "shared/assessment_results/manual_check_required" if restrictions? || disregards? || manually_entered_employment_information?
 
@@ -16,12 +16,6 @@ class ResultsPanelSelector
   end
 
 private
-
-  def no_cfe_result?
-    if @legal_aid_application.provider.bank_statement_upload_permissions? && @legal_aid_application.attachments.bank_statement_evidence.exists?
-      "_no_cfe_result"
-    end
-  end
 
   def cfe_result
     @cfe_result ||= @legal_aid_application.cfe_result.overview
