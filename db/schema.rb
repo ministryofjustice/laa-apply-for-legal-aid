@@ -15,23 +15,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.uuid "record_id", null: false
     t.string "record_type", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "actor_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "actor_permissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "permittable_type"
     t.uuid "permittable_id"
     t.uuid "permission_id"
@@ -52,58 +52,58 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["permittable_type", "permittable_id"], name: "index_actor_permissions_on_permittable_type_and_permittable_id"
   end
 
-  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "address_line_one"
     t.string "address_line_two"
     t.string "city"
     t.string "county"
     t.string "postcode"
     t.uuid "applicant_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "organisation"
     t.boolean "lookup_used", default: false, null: false
     t.string "lookup_id"
     t.index ["applicant_id"], name: "index_addresses_on_applicant_id"
   end
 
-  create_table "admin_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "admin_reports", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "admin_users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.integer "failed_attempts", default: 0, null: false
-    t.datetime "locked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "locked_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "applicants", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.date "date_of_birth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "last_name"
     t.string "email"
     t.string "national_insurance_number"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.string "true_layer_secure_data_id"
     t.boolean "employed"
-    t.datetime "remember_created_at"
+    t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
   end
 
-  create_table "application_digests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "application_digests", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "firm_name", null: false
     t.string "provider_username", null: false
@@ -136,17 +136,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_application_digests_on_legal_aid_application_id", unique: true
   end
 
-  create_table "attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "attachment_type"
     t.uuid "pdf_attachment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "attachment_name"
     t.text "original_filename"
   end
 
-  create_table "attempts_to_settles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "attempts_to_settles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "attempts_made"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -156,18 +156,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["proceeding_id"], name: "index_attempts_to_settles_on_proceeding_id"
   end
 
-  create_table "bank_account_holders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_account_holders", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_provider_id", null: false
     t.json "true_layer_response"
     t.string "full_name"
     t.json "addresses"
     t.date "date_of_birth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["bank_provider_id"], name: "index_bank_account_holders_on_bank_provider_id"
   end
 
-  create_table "bank_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_accounts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_provider_id", null: false
     t.json "true_layer_response"
     t.json "true_layer_balance_response"
@@ -177,41 +177,41 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.string "account_number"
     t.string "sort_code"
     t.decimal "balance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "account_type"
     t.index ["bank_provider_id"], name: "index_bank_accounts_on_bank_provider_id"
   end
 
-  create_table "bank_errors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_errors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "applicant_id", null: false
     t.string "bank_name"
     t.text "error"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["applicant_id"], name: "index_bank_errors_on_applicant_id"
   end
 
-  create_table "bank_holidays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_holidays", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "dates"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "bank_providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_providers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "applicant_id", null: false
     t.json "true_layer_response"
     t.string "credentials_id"
     t.string "token"
-    t.datetime "token_expires_at"
+    t.datetime "token_expires_at", precision: nil
     t.string "name"
     t.string "true_layer_provider_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
   end
 
-  create_table "bank_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "bank_transactions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bank_account_id", null: false
     t.json "true_layer_response"
     t.string "true_layer_id"
@@ -220,9 +220,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.string "currency"
     t.string "operation"
     t.string "merchant"
-    t.datetime "happened_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "happened_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "transaction_type_id"
     t.string "meta_data"
     t.decimal "running_balance"
@@ -231,16 +231,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["transaction_type_id"], name: "index_bank_transactions_on_transaction_type_id"
   end
 
-  create_table "benefit_check_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "benefit_check_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "result"
     t.string "dwp_ref"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
-  create_table "cash_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cash_transactions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
     t.decimal "amount"
     t.date "transaction_date"
@@ -251,42 +251,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id", "transaction_type_id", "month_number"], name: "cash_transactions_unique", unique: true
   end
 
-  create_table "ccms_opponent_ids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_opponent_ids", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "serial_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "ccms_submission_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submission_documents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "status"
     t.string "document_type"
     t.string "ccms_document_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "attachment_id"
   end
 
-  create_table "ccms_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id", null: false
     t.string "from_state"
     t.string "to_state"
     t.boolean "success"
     t.text "details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "request"
     t.text "response"
     t.index ["submission_id"], name: "index_ccms_submission_histories_on_submission_id"
   end
 
-  create_table "ccms_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ccms_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "applicant_ccms_reference"
     t.string "case_ccms_reference"
     t.string "aasm_state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "applicant_add_transaction_id"
     t.integer "applicant_poll_count", default: 0
     t.string "case_add_transaction_id"
@@ -294,16 +294,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_ccms_submissions_on_legal_aid_application_id"
   end
 
-  create_table "cfe_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "submission_id"
     t.text "result"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "type", default: "CFE::V1::Result"
   end
 
-  create_table "cfe_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "url"
     t.string "http_method"
@@ -312,24 +312,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.text "response_payload"
     t.string "error_message"
     t.string "error_backtrace"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "cfe_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "cfe_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "assessment_id"
     t.string "aasm_state"
     t.string "error_message"
     t.text "cfe_result"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
-  create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "chances_of_successes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "application_purpose"
     t.string "success_prospect"
     t.text "success_prospect_details"
@@ -343,7 +343,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
-  create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "debugs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "debug_type"
     t.string "legal_aid_application_id"
     t.string "session_id"
@@ -357,13 +357,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.string "browser_details"
   end
 
-  create_table "dependants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "dependants", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "number"
     t.string "name"
     t.date "date_of_birth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "relationship"
     t.decimal "monthly_income"
     t.boolean "has_income"
@@ -373,7 +373,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_dependants_on_legal_aid_application_id"
   end
 
-  create_table "document_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "document_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.boolean "submit_to_ccms", default: false, null: false
     t.string "ccms_document_type"
@@ -383,7 +383,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "dwp_overrides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "dwp_overrides", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "passporting_benefit"
     t.boolean "has_evidence_of_benefit"
@@ -392,7 +392,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_dwp_overrides_on_legal_aid_application_id", unique: true
   end
 
-  create_table "employment_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "employment_payments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "employment_id"
     t.date "date", null: false
     t.decimal "gross", default: "0.0", null: false
@@ -405,7 +405,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["employment_id"], name: "index_employment_payments_on_employment_id"
   end
 
-  create_table "employments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "employments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -413,12 +413,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_employments_on_legal_aid_application_id"
   end
 
-  create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "feedbacks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "done_all_needed"
     t.integer "satisfaction"
     t.text "improvement_suggestion"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "os"
     t.string "browser"
     t.string "browser_version"
@@ -429,14 +429,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.uuid "legal_aid_application_id"
   end
 
-  create_table "firms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "firms", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "ccms_id"
     t.string "name"
   end
 
-  create_table "gateway_evidences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "gateway_evidences", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.uuid "provider_uploader_id"
     t.datetime "created_at", null: false
@@ -445,7 +445,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["provider_uploader_id"], name: "index_gateway_evidences_on_provider_uploader_id"
   end
 
-  create_table "hmrc_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "hmrc_responses", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "submission_id"
     t.string "use_case"
     t.json "response"
@@ -456,17 +456,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_hmrc_responses_on_legal_aid_application_id"
   end
 
-  create_table "incidents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "incidents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.date "occurred_on"
     t.text "details"
     t.uuid "legal_aid_application_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.date "told_on"
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
 
-  create_table "involved_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "involved_children", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "full_name"
     t.date "date_of_birth"
@@ -476,7 +476,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
   end
 
-  create_table "irregular_incomes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "irregular_incomes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "legal_aid_application_id"
     t.string "income_type"
     t.string "frequency"
@@ -485,23 +485,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "transaction_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["legal_aid_application_id"], name: "laa_trans_type_on_legal_aid_application_id"
     t.index ["transaction_type_id"], name: "laa_trans_type_on_transaction_type_id"
   end
 
-  create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_aid_applications", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
     t.boolean "open_banking_consent"
-    t.datetime "open_banking_consent_choice_at"
+    t.datetime "open_banking_consent_choice_at", precision: nil
     t.string "own_home"
     t.decimal "property_value", precision: 10, scale: 2
     t.string "shared_ownership"
@@ -513,8 +513,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.date "transaction_period_start_on"
     t.date "transaction_period_finish_on"
     t.boolean "transactions_gathered"
-    t.datetime "completed_at"
-    t.datetime "declaration_accepted_at"
+    t.datetime "completed_at", precision: nil
+    t.datetime "declaration_accepted_at", precision: nil
     t.json "provider_step_params"
     t.boolean "own_vehicle"
     t.date "substantive_application_deadline_on"
@@ -527,8 +527,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
     t.boolean "student_finance"
-    t.datetime "discarded_at"
-    t.datetime "merits_submitted_at"
+    t.datetime "discarded_at", precision: nil
+    t.datetime "merits_submitted_at", precision: nil
     t.boolean "in_scope_of_laspo"
     t.boolean "emergency_cost_override"
     t.decimal "emergency_cost_requested"
@@ -540,7 +540,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
     t.string "full_employment_details"
-    t.datetime "client_declaration_confirmed_at"
+    t.datetime "client_declaration_confirmed_at", precision: nil
     t.boolean "substantive_cost_override"
     t.decimal "substantive_cost_requested"
     t.string "substantive_cost_reasons"
@@ -551,7 +551,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end
 
-  create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_merits_task_lists", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.text "serialized_data"
     t.datetime "created_at", null: false
@@ -559,7 +559,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "idx_lfa_merits_task_lists_on_legal_aid_application_id"
   end
 
-  create_table "legal_framework_submission_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_submission_histories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "submission_id"
     t.string "url"
     t.string "http_method"
@@ -572,7 +572,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "legal_framework_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "legal_framework_submissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "request_id"
     t.string "error_message"
@@ -582,21 +582,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_legal_framework_submissions_on_legal_aid_application_id"
   end
 
-  create_table "malware_scan_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "malware_scan_results", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "uploader_type"
     t.uuid "uploader_id"
     t.boolean "virus_found", null: false
     t.text "scan_result"
     t.json "file_details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "scanner_working"
     t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
-  create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "offices", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "ccms_id"
     t.string "code"
     t.uuid "firm_id"
@@ -610,7 +610,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["provider_id"], name: "index_offices_providers_on_provider_id"
   end
 
-  create_table "opponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "opponents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.boolean "understands_terms_of_court_order"
     t.text "understands_terms_of_court_order_details"
@@ -620,14 +620,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.text "police_notified_details"
     t.boolean "bail_conditions_set"
     t.text "bail_conditions_set_details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "full_name"
     t.integer "ccms_opponent_id"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 
-  create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "other_assets_declarations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value"
     t.decimal "second_home_mortgage"
@@ -638,19 +638,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.decimal "inherited_assets_value"
     t.decimal "money_owed_value"
     t.decimal "trust_value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "none_selected"
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
 
-  create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "permissions", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "role"
     t.string "description"
     t.index ["role"], name: "index_permissions_on_role", unique: true
   end
 
-  create_table "policy_disregards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "policy_disregards", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "england_infected_blood_support"
     t.boolean "vaccine_damage_payments"
     t.boolean "variant_creutzfeldt_jakob_disease"
@@ -665,7 +665,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["legal_aid_application_id"], name: "index_policy_disregards_on_legal_aid_application_id"
   end
 
-  create_table "proceedings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceedings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.integer "proceeding_case_id"
     t.boolean "lead_proceeding", default: false, null: false
@@ -689,13 +689,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.string "category_of_law", null: false
     t.string "category_law_code", null: false
     t.string "ccms_matter_code"
-    t.string "client_involvement_type_ccms_code", null: false
-    t.string "client_involvement_type_description", null: false
+    t.string "client_involvement_type_ccms_code"
+    t.string "client_involvement_type_description"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
   end
 
-  create_table "proceedings_linked_children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "proceedings_linked_children", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_id"
     t.uuid "involved_child_id"
     t.datetime "created_at", null: false
@@ -704,17 +704,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["proceeding_id", "involved_child_id"], name: "index_proceeding_involved_child", unique: true
   end
 
-  create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "providers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "type"
     t.text "roles"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "office_codes"
     t.uuid "firm_id"
     t.uuid "selected_office_id"
@@ -730,7 +730,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
-  create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "savings_amounts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "offline_current_accounts"
     t.decimal "cash"
@@ -739,49 +739,49 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.decimal "plc_shares"
     t.decimal "peps_unit_trusts_capital_bonds_gov_stocks"
     t.decimal "life_assurance_endowment_policy"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "none_selected"
     t.decimal "offline_savings_accounts"
     t.boolean "no_account_selected"
     t.index ["legal_aid_application_id"], name: "index_savings_amounts_on_legal_aid_application_id"
   end
 
-  create_table "scheduled_mailings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scheduled_mailings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "mailer_klass", null: false
     t.string "mailer_method", null: false
     t.string "arguments", null: false
-    t.datetime "scheduled_at", null: false
-    t.datetime "sent_at"
-    t.datetime "cancelled_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "scheduled_at", precision: nil, null: false
+    t.datetime "sent_at", precision: nil
+    t.datetime "cancelled_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "status"
     t.string "addressee"
     t.string "govuk_message_id"
   end
 
-  create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "secure_data", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "settings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "mock_true_layer_data", default: false, null: false
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
-    t.datetime "digest_extracted_at", default: "1970-01-01 00:00:01"
+    t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
     t.boolean "enable_employed_journey", default: false, null: false
   end
 
-  create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "state_machine_proxies", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "type"
     t.string "aasm_state"
@@ -790,35 +790,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.string "ccms_reason"
   end
 
-  create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "statement_of_cases", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "statement"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "provider_uploader_id"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
   end
 
-  create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "transaction_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "operation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order"
-    t.datetime "archived_at"
+    t.datetime "archived_at", precision: nil
     t.boolean "other_income", default: false
     t.string "parent_id"
     t.index ["parent_id"], name: "index_transaction_types_on_parent_id"
   end
 
-  create_table "true_layer_banks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "true_layer_banks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.text "banks"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "uploaded_evidence_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "uploaded_evidence_collections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.uuid "provider_uploader_id"
     t.datetime "created_at", null: false
@@ -827,14 +827,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_123323) do
     t.index ["provider_uploader_id"], name: "index_uploaded_evidence_collections_on_provider_uploader_id"
   end
 
-  create_table "vehicles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "vehicles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "estimated_value"
     t.decimal "payment_remaining"
     t.date "purchased_on"
     t.boolean "used_regularly"
     t.uuid "legal_aid_application_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "more_than_three_years_old"
     t.index ["legal_aid_application_id"], name: "index_vehicles_on_legal_aid_application_id"
   end
