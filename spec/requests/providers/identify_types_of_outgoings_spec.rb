@@ -181,6 +181,57 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       end
     end
 
+    context "when checking answers" do
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_non_passported_state_machine,
+               :checking_non_passported_means
+      end
+
+      let(:params) { { legal_aid_application: { none_selected: "true" } } }
+
+      context "with bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+        end
+
+        context "without transaction type debits" do
+          before do
+            legal_aid_application.transaction_types.destroy_all
+          end
+
+          it "redirects to means_summaries" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+          end
+        end
+
+        context "with transaction type debits" do
+          before do
+            legal_aid_application.transaction_types << create(:transaction_type, :debit)
+          end
+
+          it "redirects to cash_outgoings", skip: "TODO" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+          end
+        end
+      end
+
+      context "without bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: true)
+        end
+
+        it "redirects to outgoings_summary" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+        end
+      end
+    end
+
     context "when the provider is not authenticated" do
       before { request }
 

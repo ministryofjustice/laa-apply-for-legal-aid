@@ -175,6 +175,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when checking answers" do
+      subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
+
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_non_passported_state_machine,
