@@ -108,7 +108,7 @@ Feature: Bank statement upload
     And I click 'Save and continue'
     Then I should be on a page with title "Which assets does your client have?"
 
-    When I select 'None of these'
+    When I select 'My client has none of these assets'
     And I click 'Save and continue'
     Then I should be on a page with title "Is your client prohibited from selling or borrowing against their assets?"
 
