@@ -2,142 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9EA
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v1.10.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 10 May 2022 19:45:24 GMT
-      Content-Type:
-      - application/json;charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Request-Context:
-      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
-      Vary:
-      - Origin,Accept-Encoding,key
-      Omse-Category:
-      - premium
-      Omse-Transaction-Count:
-      - '60'
-      Omse-Premium-Count:
-      - '0'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-    body:
-      encoding: ASCII-8BIT
-      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
-        \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
-        : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"92\",\r\n    \"output_srs\"
-        : \"EPSG:27700\"\r\n  },\r\n  \"results\" : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\"
-        : \"100023337883\",\r\n      \"UDPRN\" : \"23749699\",\r\n      \"ADDRESS\"
-        : \"SUPER FIRM LTD, 84, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
-        : \"SUPER FIRM LTD\",\r\n      \"BUILDING_NUMBER\" : \"84\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529526.39,\r\n
-        \     \"Y_COORDINATE\" : 179490.43,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CR07\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Restaurant / Cafeteria\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216527\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1B\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n
-        \     \"UDPRN\" : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT
-        POLICE, 98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
-        : \"BRITISH TRANSPORT POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n
-        \     \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n
-        \     \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\"
-        : 529558.47,\r\n      \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" :
-        \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\"
-        : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work
-        Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"PARENT_UPRN\" : \"100023337884\",\r\n      \"LAST_UPDATE_DATE\" :
-        \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n      \"BLPU_STATE_DATE\"
-        : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n
-        \     \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1Q\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337884\",\r\n
-        \     \"UDPRN\" : \"23749702\",\r\n      \"ADDRESS\" : \"TRANSPORT FOR LONDON,
-        98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"TRANSPORT
-        FOR LONDON\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"1\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
-        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"PP\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Property Shell\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1F\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n
-        \     \"UDPRN\" : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE,
-        LONDON, SW1H 9EA\",\r\n      \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
-        \     \"Y_COORDINATE\" : 179499.2,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CT08\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Station / Interchange
-        / Terminal / Halt\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216526\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1A\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n
-        \     \"UDPRN\" : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY
-        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n
-        \     \"BUILDING_NUMBER\" : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
-        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
-        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529576.0,\r\n
-        \     \"Y_COORDINATE\" : 179549.0,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000001796535716\",\r\n
-        \     \"PARENT_UPRN\" : \"10033604583\",\r\n      \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n
-        \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 10 May 2022 19:45:24 GMT
-- request:
-    method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/all
     body:
       encoding: US-ASCII
@@ -365,4 +229,229 @@ http_interactions:
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1652211929647</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
   recorded_at: Tue, 10 May 2022 19:45:29 GMT
+- request:
+    method: get
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/proceeding_types/all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Fri, 15 Jul 2022 16:13:54 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Request-Id:
+      - 1e82fd2541132dd0444fcfde4d39d187
+      X-Runtime:
+      - '0.001555'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Fri, 15 Jul 2022 16:13:54 GMT
+- request:
+    method: get
+    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANACE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9EA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 15 Jul 2022 16:20:42 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Request-Context:
+      - appId=cid-v1:cd7023ed-37c2-4bb3-b1f3-cd441a39a9ae
+      Vary:
+      - Origin,Accept-Encoding,key
+      Omse-Category:
+      - premium
+      Omse-Transaction-Count:
+      - '60'
+      Omse-Premium-Count:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
+        \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
+        : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"93\",\r\n    \"output_srs\"
+        : \"EPSG:27700\"\r\n  },\r\n  \"results\" : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\"
+        : \"100023337883\",\r\n      \"UDPRN\" : \"23749699\",\r\n      \"ADDRESS\"
+        : \"SUPER FIRM LTD, 84, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
+        : \"SUPER FIRM LTD\",\r\n      \"BUILDING_NUMBER\" : \"84\",\r\n      \"THOROUGHFARE_NAME\"
+        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
+        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529526.39,\r\n
+        \     \"Y_COORDINATE\" : 179490.43,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"CR07\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Restaurant / Cafeteria\",\r\n
+        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
+        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
+        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
+        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216527\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1B\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n
+        \     \"UDPRN\" : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT
+        POLICE, 98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\"
+        : \"BRITISH TRANSPORT POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n
+        \     \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n
+        \     \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\"
+        : 529558.47,\r\n      \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" :
+        \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\"
+        : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work
+        Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
+        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
+        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
+        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
+        \     \"PARENT_UPRN\" : \"100023337884\",\r\n      \"LAST_UPDATE_DATE\" :
+        \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n      \"BLPU_STATE_DATE\"
+        : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n
+        \     \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1Q\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337884\",\r\n
+        \     \"UDPRN\" : \"23749702\",\r\n      \"ADDRESS\" : \"TRANSPORT FOR LONDON,
+        98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"TRANSPORT
+        FOR LONDON\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
+        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
+        : \"SW1H 9EA\",\r\n      \"RPC\" : \"1\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
+        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"PP\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Property Shell\",\r\n
+        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
+        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
+        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
+        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1F\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n
+        \     \"UDPRN\" : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE,
+        LONDON, SW1H 9EA\",\r\n      \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\"
+        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
+        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
+        \     \"Y_COORDINATE\" : 179499.2,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"CT08\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Station / Interchange
+        / Terminal / Halt\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
+        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
+        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
+        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216526\",\r\n
+        \     \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n      \"ENTRY_DATE\" : \"19/03/2001\",\r\n
+        \     \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
+        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
+        : \"1A\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n
+        \     \"UDPRN\" : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY
+        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n
+        \     \"BUILDING_NUMBER\" : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
+        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
+        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529576.0,\r\n
+        \     \"Y_COORDINATE\" : 179549.0,\r\n      \"STATUS\" : \"APPROVED\",\r\n
+        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
+        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
+        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
+        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
+        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
+        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
+        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
+        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000001796535716\",\r\n
+        \     \"PARENT_UPRN\" : \"10033604583\",\r\n      \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n
+        \     \"ENTRY_DATE\" : \"15/06/2020\",\r\n      \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n
+        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
+        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1N\"\r\n    }\r\n  } ]\r\n}"
+  recorded_at: Fri, 15 Jul 2022 16:20:42 GMT
+- request:
+    method: get
+    uri: http://localhost:4001/proceeding_types/all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"9af4379273434cda5cca5b49200a2797"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e9be8ccb-caf9-45ea-b396-b135722098ed
+      X-Runtime:
+      - '0.113005'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3siY2Ntc19jb2RlIjoiREEwMDYiLCJtZWFuaW5nIjoiRXh0ZW5kLCB2YXJpYXRpb24gb3IgZGlzY2hhcmdlIC0gUGFydCBJViIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gdG8gZXh0ZW5kLCB2YXJ5IG9yIGRpc2NoYXJnZSBhbiBvcmRlciB1bmRlciBQYXJ0IElWIEZhbWlseSBMYXcgQWN0IDE5OTYiLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA3IiwibWVhbmluZyI6IkZvcmNlZCBtYXJyaWFnZSBwcm90ZWN0aW9uIG9yZGVyIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBmb3JjZWQgbWFycmlhZ2UgcHJvdGVjdGlvbiBvcmRlciIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDMiLCJtZWFuaW5nIjoiSGFyYXNzbWVudCAtIGluanVuY3Rpb24iLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIGluIGFuIGFjdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiB1bmRlciBzZWN0aW9uIDMgUHJvdGVjdGlvbiBmcm9tIEhhcmFzc21lbnQgQWN0IDE5OTcuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwMSIsIm1lYW5pbmciOiJJbmhlcmVudCBqdXJpc2RpY3Rpb24gaGlnaCBjb3VydCBpbmp1bmN0aW9uIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYW4gaW5qdW5jdGlvbiwgb3JkZXIgb3IgZGVjbGFyYXRpb24gdW5kZXIgdGhlIGluaGVyZW50IGp1cmlzZGljdGlvbiBvZiB0aGUgY291cnQuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAwNCIsIm1lYW5pbmciOiJOb24tbW9sZXN0YXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIG5vbi1tb2xlc3RhdGlvbiBvcmRlci4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IkRBMDA1IiwibWVhbmluZyI6Ik9jY3VwYXRpb24gb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhbiBvY2N1cGF0aW9uIG9yZGVyLiIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6Ik1JTkpOIiwiY2Ntc19tYXR0ZXIiOiJEb21lc3RpYyBhYnVzZSJ9LHsiY2Ntc19jb2RlIjoiREEwMDIiLCJtZWFuaW5nIjoiVmFyaWF0aW9uIG9yIGRpc2NoYXJnZSB1bmRlciBzZWN0aW9uIDUgcHJvdGVjdGlvbiBmcm9tIGhhcmFzc21lbnQgYWN0IDE5OTciLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIHRvIHZhcnkgb3IgZGlzY2hhcmdlIGFuIG9yZGVyIHVuZGVyIHNlY3Rpb24gNSBQcm90ZWN0aW9uIGZyb20gSGFyYXNzbWVudCBBY3QgMTk5NyB3aGVyZSB0aGUgcGFydGllcyBhcmUgYXNzb2NpYXRlZCBwZXJzb25zIChhcyBkZWZpbmVkIGJ5IFBhcnQgSVYgRmFtaWx5IExhdyBBY3QgMTk5NikuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiTUlOSk4iLCJjY21zX21hdHRlciI6IkRvbWVzdGljIGFidXNlIn0seyJjY21zX2NvZGUiOiJEQTAyMCIsIm1lYW5pbmciOiJGR00gUHJvdGVjdGlvbiBPcmRlciIsImRlc2NyaXB0aW9uIjoiVG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgRmVtYWxlIEdlbml0YWwgTXV0aWxhdGlvbiBQcm90ZWN0aW9uIE9yZGVyIHVuZGVyIHRoZSBGZW1hbGUgR2VuaXRhbCBNdXRpbGF0aW9uIEFjdC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJNSU5KTiIsImNjbXNfbWF0dGVyIjoiRG9tZXN0aWMgYWJ1c2UifSx7ImNjbXNfY29kZSI6IlNFMDAzIiwibWVhbmluZyI6IlByb2hpYml0ZWQgc3RlcHMgb3JkZXIiLCJkZXNjcmlwdGlvbiI6InRvIGJlIHJlcHJlc2VudGVkIG9uIGFuIGFwcGxpY2F0aW9uIGZvciBhIHByb2hpYml0ZWQgc3RlcHMgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAwNCIsIm1lYW5pbmciOiJTcGVjaWZpYyBJc3N1ZSBPcmRlciIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgc3BlY2lmaWMgaXNzdWUgb3JkZXIuIiwiY2Ntc19jYXRlZ29yeV9sYXciOiJGYW1pbHkiLCJjY21zX21hdHRlcl9jb2RlIjoiS1NFQzgiLCJjY21zX21hdHRlciI6IkNoaWxkcmVuIC0gc2VjdGlvbiA4In0seyJjY21zX2NvZGUiOiJTRTAxMyIsIm1lYW5pbmciOiJDaGlsZCBhcnJhbmdlbWVudHMgb3JkZXIgKGNvbnRhY3QpIiwiZGVzY3JpcHRpb24iOiJ0byBiZSByZXByZXNlbnRlZCBvbiBhbiBhcHBsaWNhdGlvbiBmb3IgYSBjaGlsZCBhcnJhbmdlbWVudHMgb3JkZXItd2hvIHRoZSBjaGlsZChyZW4pIHNwZW5kIHRpbWUgd2l0aC4iLCJjY21zX2NhdGVnb3J5X2xhdyI6IkZhbWlseSIsImNjbXNfbWF0dGVyX2NvZGUiOiJLU0VDOCIsImNjbXNfbWF0dGVyIjoiQ2hpbGRyZW4gLSBzZWN0aW9uIDgifSx7ImNjbXNfY29kZSI6IlNFMDE0IiwibWVhbmluZyI6IkNoaWxkIGFycmFuZ2VtZW50cyBvcmRlciAocmVzaWRlbmNlKSIsImRlc2NyaXB0aW9uIjoidG8gYmUgcmVwcmVzZW50ZWQgb24gYW4gYXBwbGljYXRpb24gZm9yIGEgY2hpbGQgYXJyYW5nZW1lbnRzIG9yZGVyIOKAk3doZXJlIHRoZSBjaGlsZChyZW4pIHdpbGwgbGl2ZSIsImNjbXNfY2F0ZWdvcnlfbGF3IjoiRmFtaWx5IiwiY2Ntc19tYXR0ZXJfY29kZSI6IktTRUM4IiwiY2Ntc19tYXR0ZXIiOiJDaGlsZHJlbiAtIHNlY3Rpb24gOCJ9XQ==
+  recorded_at: Fri, 15 Jul 2022 16:20:43 GMT
 recorded_with: VCR 6.1.0

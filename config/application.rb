@@ -75,7 +75,9 @@ module LaaApplyForLegalAid
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
 
-    # config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
+    config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
+
+    config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
     #############################################################################################
     #                                                                                           #
@@ -85,11 +87,8 @@ module LaaApplyForLegalAid
     #                                                                                           #
     #                                                                                           #
     #############################################################################################
-    config.x.legal_framework_api_host = "https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk"
-
-    config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
-
-    config.x.check_financial_eligibility_host = ENV.fetch("CHECK_FINANCIAL_ELIGIBILITY_HOST", nil)
+    config.x.check_financial_eligibility_host = "https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk"
+    # config.x.check_financial_eligibility_host = ENV.fetch("CHECK_FINANCIAL_ELIGIBILITY_HOST", nil)
 
     config.x.true_layer.client_id = ENV.fetch("TRUE_LAYER_CLIENT_ID", nil)
     config.x.true_layer.client_secret = ENV.fetch("TRUE_LAYER_CLIENT_SECRET", nil)
