@@ -146,24 +146,23 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       end
     end
 
-    # TODO: is the below test still needed for coverage?
-    # context "logged in as authenticated provider with bank statement upload permissions" do
-    #   before do
-    #     login
-    #     legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-    #   end
-    #
-    #   it "redirects to the no assessment result page" do
-    #     create :attachment, :bank_statement, legal_aid_application: legal_aid_application
-    #     subject
-    #     expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
-    #   end
-    #
-    #   it "expect cfe_result to be nil" do
-    #     subject
-    #     expect(legal_aid_application.cfe_result).to be_nil
-    #   end
-    # end
+    context "logged in as authenticated provider with bank statement upload permissions" do
+      before do
+        login
+        legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+      end
+
+      it "redirects to the no assessment result page" do
+        create :attachment, :bank_statement, legal_aid_application: legal_aid_application
+        subject
+        expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
+      end
+
+      it "expect cfe_result to be nil" do
+        subject
+        expect(legal_aid_application.cfe_result).to be_nil
+      end
+    end
   end
 
   def yes_no(value)
