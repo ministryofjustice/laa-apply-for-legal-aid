@@ -3,7 +3,6 @@ Feature: Bank statement upload
   Background:
     Given csrf is enabled
     And I have completed a non-passported application and reached the open banking consent with bank statement upload enabled
-    And the application's applicant is employed and has a matching HMRC response
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
     And I should be on a page showing "You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements"
@@ -35,7 +34,7 @@ Feature: Bank statement upload
     Then I should see 'acceptable.pdf UPLOADED'
 
     When I click 'Save and continue'
-    Then I should be on a page showing "The information on this page has been provided by HMRC"
+    Then I should be on a page with title "Which payments does your client receive?"
 
     When I click link "Back"
     Then I should be on a page with title "Upload bank statements"
@@ -62,12 +61,6 @@ Feature: Bank statement upload
   Scenario: Bank statement upload permissions flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
-    When I click 'Save and continue'
-    And I sleep for 2 seconds
-    Then I should be on a page showing "The information on this page has been provided by HMRC"
-    Then I should be on a page showing "Do you need to tell us anything else about your client's employment?"
-
-    When I choose "No"
     When I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 
@@ -131,16 +124,8 @@ Feature: Bank statement upload
     When I click Check Your Answers Change link for 'bank statements'
     And I upload an evidence file named 'hello_world.pdf'
     And I click 'Save and continue'
-    And I sleep for 2 seconds
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'hello_world.pdf'
-#
-#    When I click Check Your Answers Change link for 'employment'
-#    Then I should be on a page showing 'This information has been provided by HMRC'
-#    When I select 'No'
-#    And I click 'Save and continue'
-#    Then I should be on the 'means_summary' page showing 'Check your answers'
-#    And the answer for 'employment notes' should be 'No'
 
     When I click Check Your Answers Change link for 'income'
     And I check 'Benefits'

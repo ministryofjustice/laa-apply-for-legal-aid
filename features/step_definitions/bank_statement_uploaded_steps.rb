@@ -20,24 +20,6 @@ Given("I have completed a non-passported application and reached the open bankin
   visit(providers_legal_aid_application_open_banking_consents_path(@legal_aid_application))
 end
 
-Given("the application's applicant is employed and has a matching HMRC response") do
-  @legal_aid_application.applicant.update!(employed: true)
-
-  matching_response = FactoryHelpers::HMRCResponse::UseCaseOne.new(SecureRandom.uuid,
-                                                                   firstname: @legal_aid_application.applicant.first_name,
-                                                                   lastname: @legal_aid_application.applicant.last_name,
-                                                                   nino: @legal_aid_application.applicant.national_insurance_number,
-                                                                   dob: @legal_aid_application.applicant.date_of_birth).response
-
-  create(:hmrc_response,
-         use_case: "one",
-         response: matching_response,
-         legal_aid_application: @legal_aid_application)
-
-  # trigger after update hook to create employments/employment_payments
-  @legal_aid_application.hmrc_responses.map { |hmrc_response| hmrc_response.update!(url: "my_url") }
-end
-
 Given("I have completed a non-passported employed application with bank statement upload as far as the end of the means section") do
   @legal_aid_application = create(
     :application,
