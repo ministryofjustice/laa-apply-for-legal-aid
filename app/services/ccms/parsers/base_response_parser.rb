@@ -16,6 +16,7 @@ module CCMS
 
       def parse(data_method)
         check_matching_transaction_request_ids if expect_transaction_request_id_in_response?
+        raise_mismatch_error if ni_mismatch?
 
         extract_result_status
         __send__(data_method)
@@ -57,6 +58,10 @@ module CCMS
         @status ||= doc.xpath(status_path).text
       end
 
+      def ni_mismatch?
+        doc.xpath("/Envelope/Body/#{response_type}/ClientList/Client/MatchLevelInd").text.eql?("Number Not Matched")
+      end
+
       def exception
         @exception ||= doc.xpath("/Envelope/Body/#{response_type}/HeaderRS/Status/Exceptions/StatusCode").text
       end
@@ -69,6 +74,10 @@ module CCMS
       def extract_exception_and_message
         @success = false
         @message = "Server side exception: #{exception}: #{exception_status_text}"
+      end
+
+      def raise_mismatch_error
+        raise CCMSError, "Mismatched NI NUmber for request id: #{@transaction_request_id}"
       end
 
       def exception_status_text

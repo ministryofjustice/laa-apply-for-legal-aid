@@ -7,6 +7,7 @@ module CCMS
         let(:no_results_response_xml) { ccms_data_from_file "applicant_search_response_no_results.xml" }
         let(:one_result_response_xml) { ccms_data_from_file "applicant_search_response_one_result.xml" }
         let(:multiple_results_response_xml) { ccms_data_from_file "applicant_search_response_multiple_results.xml" }
+        let(:single_response_mismatch_xml) { ccms_data_from_file "applicant_search_response_mismatch.xml" }
         let(:parser) { described_class.new(Faker::Number.number(digits: 20), no_results_response_xml) }
         let(:expected_tx_id) { "20190301030405123456" }
 
@@ -91,6 +92,17 @@ module CCMS
               parser.record_count
               expect(parser.message).to eq "Success: End of Get Party details process."
             end
+          end
+        end
+
+        context "there is one applicant returned but the NI Number doesn't match" do
+          let(:parser) { described_class.new(expected_tx_id, single_response_mismatch_xml) }
+          let(:expected_tx_id) { "202206241623547511370989944" }
+
+          it "raises if the NI Number doesn't match" do
+            expect {
+              parser.record_count
+            }.to raise_error CCMS::CCMSError, "Mismatched NI NUmber for request id: #{expected_tx_id}"
           end
         end
       end
