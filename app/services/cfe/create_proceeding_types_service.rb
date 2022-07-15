@@ -12,17 +12,17 @@ module CFE
 
   private
 
+    def proceedings
+      @submission.legal_aid_application.proceedings.order(:ccms_code)
+    end
+
     def proceeding_type_details
-      @submission.legal_aid_application.proceedings.map { |rec| { ccms_code: rec.ccms_code, client_involvement_type: rec.client_involvement_type_ccms_code } }
+      proceedings.map { |rec| { ccms_code: rec.ccms_code, client_involvement_type: rec.client_involvement_type_ccms_code } }
     end
 
     def process_response
-      @submission.applicant_created!
+      @submission.proceeding_types_created!
       true
-    end
-
-    def applicant
-      legal_aid_application.applicant
     end
   end
 end

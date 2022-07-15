@@ -39,6 +39,10 @@ module CFE
       result_hash[:version] == "4"
     end
 
+    def version_5?
+      result_hash[:version] == "5"
+    end
+
     ################################################################
     #                                                              #
     #  MAIN HOME VALUES                                            #
@@ -140,7 +144,7 @@ module CFE
     ################################################################
 
     def pensioner_capital_disregard
-      if version_4?
+      if version_4? || version_5?
         -1 * capital_summary[:pensioner_capital_disregard]&.to_d
       else
         -1 * capital[:pensioner_capital_disregard]&.to_d

@@ -18,7 +18,7 @@ module CFE
     end
 
     def proceeding_types
-      return {} if Setting.setting.enable_cfe_v5?
+      return {} if Setting.enable_cfe_v5?
 
       {
         proceeding_types: {

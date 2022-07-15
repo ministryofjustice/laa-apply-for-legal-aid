@@ -27,6 +27,10 @@ class Setting < ApplicationRecord
     setting.enable_employed_journey
   end
 
+  def self.enable_cfe_v5?
+    setting.enable_cfe_v5?
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

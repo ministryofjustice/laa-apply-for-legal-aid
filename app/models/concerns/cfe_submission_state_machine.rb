@@ -32,11 +32,8 @@ module CFESubmissionStateMachine
       end
 
       event :applicant_created do
-        if Setting.setting.enable_cfe_v5?
-          transitions from: :proceeding_types_created, to: :applicant_created
-        else
-          transitions from: :assessment_created, to: :applicant_created
-        end
+        transitions from: :proceeding_types_created, to: :applicant_created
+        transitions from: :assessment_created, to: :applicant_created
       end
 
       event :capitals_created do

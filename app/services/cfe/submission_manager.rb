@@ -59,7 +59,7 @@ module CFE
     end
 
     def call_common_services
-      common_services = Setting.setting.enable_cfe_v5? ? COMMON_SERVICES_V5 : COMMON_SERVICES_V4
+      common_services = Setting.enable_cfe_v5? ? COMMON_SERVICES_V5 : COMMON_SERVICES_V4
       common_services.each do |service|
         make_logged_call_to service
       end
