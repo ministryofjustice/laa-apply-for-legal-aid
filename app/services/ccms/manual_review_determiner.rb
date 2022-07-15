@@ -22,7 +22,12 @@ module CCMS
 
     def initialize(legal_aid_application)
       @legal_aid_application = legal_aid_application
-      raise "Unable to determine whether Manual review is required before means assessment" if legal_aid_application.cfe_result.nil?
+      if legal_aid_application.uploaded_bank_statements?
+        nil
+      elsif legal_aid_application.cfe_result.nil?
+        raise "Unable to determine whether Manual review is required before means assessment"
+      end
+      # raise "Unable to determine whether Manual review is required before means assessment" if legal_aid_application.cfe_result.nil?
     end
 
     def manual_review_required?
@@ -36,11 +41,11 @@ module CCMS
     end
 
     def review_reasons
-      (cfe_review_reasons + application_review_reasons).uniq
+      cfe_result ? (cfe_review_reasons + application_review_reasons).uniq : application_review_reasons.uniq
     end
 
     def review_categories_by_reason
-      cfe_result.remarks.review_categories_by_reason
+      cfe_result ? cfe_result.remarks.review_categories_by_reason : nil
     end
 
   private
@@ -50,7 +55,7 @@ module CCMS
     end
 
     def cfe_review_reasons
-      cfe_result.remarks.review_reasons
+      cfe_result ? cfe_result.remarks.review_reasons : nil
     end
 
     def application_review_reasons

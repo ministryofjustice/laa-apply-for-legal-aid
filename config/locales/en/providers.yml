@@ -189,7 +189,7 @@ en:
         title_html: You need to use <abbr title='Client and Cost Management System'>CCMS</abbr> for this application
         head_title: You need to use CCMS for this application
         we_checked: "We checked with the DWP and your client does not receive:"
-    identify_types_of_incomes:  
+    identify_types_of_incomes:
       update:
         none_selected: Select if your client receives any types of income
     cookies:
@@ -892,6 +892,7 @@ en:
           further_employment_details: Further employment details
           multiple_employments: Multiple employments
           refunds: Tax or NI refunds
+          uploaded_bank_statements: Bank statements have been manually uploaded
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review
