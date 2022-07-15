@@ -6,7 +6,7 @@ module Providers
     end
 
     def update
-      unless draft_selected? || legal_aid_application.provider_entering_merits?
+      unless draft_selected? || legal_aid_application.provider_entering_merits? || legal_aid_application.uploading_bank_statements?
         redirect_to(problem_index_path) && return unless check_financial_eligibility
 
         legal_aid_application.provider_enter_merits!
