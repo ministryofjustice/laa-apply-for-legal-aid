@@ -75,7 +75,17 @@ module LaaApplyForLegalAid
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
 
-    config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
+    # config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
+
+    #############################################################################################
+    #                                                                                           #
+    #                                                                                           #
+    #                   TEMPORARY FIX FOR TESTING INTERACTION WITH V5 of CFE                    #
+    #                                                                                           #
+    #                                                                                           #
+    #                                                                                           #
+    #############################################################################################
+    config.x.legal_framework_api_host = "https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk"
 
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
