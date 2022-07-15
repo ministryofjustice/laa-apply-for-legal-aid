@@ -230,7 +230,7 @@ module CCMS
           end
         end
 
-        context "with uploaded_bank_statements" do
+        context "with uploading_bank_statements" do
           let(:provider) { create :provider, :with_bank_statement_upload_permissions }
           let(:legal_aid_application) { create :legal_aid_application, attachments: [bank_statement], provider: }
           let(:bank_statement) { create :attachment, :bank_statement }
