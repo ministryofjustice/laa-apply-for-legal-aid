@@ -27,7 +27,6 @@ Feature: Provider accessibility
     Then I should be on the 'proceedings_types' page showing 'Search for legal proceedings'
     And the page is accessible
     Then I search for proceeding 'Non-molestation order'
-    Then I click 'Save and continue'
     Then I choose a 'Non-molestation order' radio button
     Then I click 'Save and continue'
     Then I should be on a page showing 'Do you want to add another proceeding?'
