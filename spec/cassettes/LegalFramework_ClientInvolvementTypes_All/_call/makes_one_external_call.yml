@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 08 Jul 2022 09:18:15 GMT
+      - Sat, 16 Jul 2022 13:18:26 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -47,14 +47,14 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3804844f70d97da83c4ee4be1bb4b3cb
+      - 8adb7fd39ca9eaa2081ce943f9e098c4
       X-Runtime:
-      - '0.268443'
+      - '0.011258'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"Z","description":"Joined party"},{"ccms_code":"I","description":"Intervenor"}]'
-  recorded_at: Fri, 08 Jul 2022 09:18:15 GMT
+  recorded_at: Sat, 16 Jul 2022 13:18:26 GMT
 recorded_with: VCR 6.1.0

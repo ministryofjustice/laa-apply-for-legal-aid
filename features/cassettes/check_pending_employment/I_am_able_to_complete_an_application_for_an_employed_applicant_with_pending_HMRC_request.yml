@@ -806,10 +806,2268 @@ http_interactions:
   recorded_at: Thu, 19 May 2022 11:28:39 GMT
 - request:
     method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"2002-09-01","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2585181f1e2ea1d5146395a1d3953e1f
+      X-Runtime:
+      - '0.097161'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Current accounts","value":"462683.68"},{"description":"Online
+        current accounts","value":"956043.92"}],"non_liquid_capital":[{"description":"Timeshare
+        property","value":"990140.85"},{"description":"Land","value":"822357.94"},{"description":"Any
+        valuable items worth more than £500","value":"540180.84"},{"description":"Money
+        or assets from the estate of a person who has died","value":"922926.2"},{"description":"Money
+        owed to applicant","value":"125531.01"},{"description":"Interest in a trust","value":"290008.46"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ccc8bf25998aaceb561797d174be3883
+      X-Runtime:
+      - '0.120135'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e90fa55c3085b08e51cfd1a55dd29786
+      X-Runtime:
+      - '0.019787'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"798858.36","outstanding_mortgage":"757432.5","percentage_owned":"66.87","shared_with_housing_assoc":true},"additional_properties":[{"value":"339438.71","outstanding_mortgage":"364475.22","percentage_owned":"80.63","shared_with_housing_assoc":false}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d045704c73e625e9092fc749bd9fde24
+      X-Runtime:
+      - '0.060105'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/explicit_remarks
+    body:
+      encoding: UTF-8
+      string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4796f75d593bf6708e6dc94d218c5dfb
+      X-Runtime:
+      - '0.019852'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/dependants
+    body:
+      encoding: UTF-8
+      string: '{"dependants":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2b4db4524dff7fbb2ed1997849969fd3
+      X-Runtime:
+      - '0.016993'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/outgoings
+    body:
+      encoding: UTF-8
+      string: '{"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7608df9f36699fee0dcffa19e28ec5db
+      X-Runtime:
+      - '0.093465'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:25 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/state_benefits
+    body:
+      encoding: UTF-8
+      string: '{"state_benefits":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3d30dd8540e569e38ec5320695cc83c9
+      X-Runtime:
+      - '0.083391'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/other_incomes
+    body:
+      encoding: UTF-8
+      string: '{"other_incomes":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4c3abc44bf553934cc342c927ec02420
+      X-Runtime:
+      - '0.090515'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/irregular_incomes
+    body:
+      encoding: UTF-8
+      string: '{"payments":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5918e4a54f898309d85e6f25b2e86910
+      X-Runtime:
+      - '0.032931'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/employments
+    body:
+      encoding: UTF-8
+      string: '{"employment_income":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e712a6339635fdd6dcd22b08eff9e26f
+      X-Runtime:
+      - '0.031287'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea/cash_transactions
+    body:
+      encoding: UTF-8
+      string: '{"income":[],"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 37d2121418c28c55c3ecbe7187d7dd24
+      X-Runtime:
+      - '0.049977'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: get
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/ca0fa617-d1c5-43c2-991e-80c9cf6329ea
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 11:20:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"346af76655dc738c19dff8249c471463"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5d44b21159dc813096a195d969ecbb3f
+      X-Runtime:
+      - '0.139418'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ2ZXJzaW9uIjoiNCIsInRpbWVzdGFtcCI6IjIwMjItMDctMTZUMTE6MjA6MjYuNzc1WiIsInN1Y2Nlc3MiOnRydWUsInJlc3VsdF9zdW1tYXJ5Ijp7Im92ZXJhbGxfcmVzdWx0Ijp7InJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCIsImNhcGl0YWxfY29udHJpYnV0aW9uIjo1MTA2ODcyLjksImluY29tZV9jb250cmlidXRpb24iOjAuMCwibWF0dGVyX3R5cGVzIjpbeyJtYXR0ZXJfdHlwZSI6ImRvbWVzdGljX2FidXNlIiwicmVzdWx0IjoiY29udHJpYnV0aW9uX3JlcXVpcmVkIn1dLCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsInJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCJ9XX0sImdyb3NzX2luY29tZSI6eyJ0b3RhbF9ncm9zc19pbmNvbWUiOjAuMCwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJ1cHBlcl90aHJlc2hvbGQiOjk5OTk5OTk5OTk5OS4wLCJyZXN1bHQiOiJlbGlnaWJsZSJ9XX0sImRpc3Bvc2FibGVfaW5jb21lIjp7ImRlcGVuZGFudF9hbGxvd2FuY2UiOjAuMCwiZ3Jvc3NfaG91c2luZ19jb3N0cyI6MC4wLCJob3VzaW5nX2JlbmVmaXQiOjAuMCwibmV0X2hvdXNpbmdfY29zdHMiOjAuMCwibWFpbnRlbmFuY2VfYWxsb3dhbmNlIjowLjAsInRvdGFsX291dGdvaW5nc19hbmRfYWxsb3dhbmNlcyI6MC4wLCJ0b3RhbF9kaXNwb3NhYmxlX2luY29tZSI6MC4wLCJlbXBsb3ltZW50X2luY29tZSI6eyJncm9zc19pbmNvbWUiOjAuMCwiYmVuZWZpdHNfaW5fa2luZCI6MC4wLCJ0YXgiOjAuMCwibmF0aW9uYWxfaW5zdXJhbmNlIjowLjAsImZpeGVkX2VtcGxveW1lbnRfZGVkdWN0aW9uIjowLjAsIm5ldF9lbXBsb3ltZW50X2luY29tZSI6MC4wfSwiaW5jb21lX2NvbnRyaWJ1dGlvbiI6MC4wLCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsInVwcGVyX3RocmVzaG9sZCI6OTk5OTk5OTk5OTk5LjAsImxvd2VyX3RocmVzaG9sZCI6MzE1LjAsInJlc3VsdCI6ImVsaWdpYmxlIn1dfSwiY2FwaXRhbCI6eyJ0b3RhbF9saXF1aWQiOjE0MTg3MjcuNiwidG90YWxfbm9uX2xpcXVpZCI6MzY5MTE0NS4zLCJ0b3RhbF92ZWhpY2xlIjowLjAsInRvdGFsX3Byb3BlcnR5IjowLjAsInRvdGFsX21vcnRnYWdlX2FsbG93YW5jZSI6OTk5OTk5OTk5OTk5LjAsInRvdGFsX2NhcGl0YWwiOjUxMDk4NzIuOSwicGVuc2lvbmVyX2NhcGl0YWxfZGlzcmVnYXJkIjowLjAsImNhcGl0YWxfY29udHJpYnV0aW9uIjo1MTA2ODcyLjksImFzc2Vzc2VkX2NhcGl0YWwiOjUxMDk4NzIuOSwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJsb3dlcl90aHJlc2hvbGQiOjMwMDAuMCwidXBwZXJfdGhyZXNob2xkIjo5OTk5OTk5OTk5OTkuMCwicmVzdWx0IjoiY29udHJpYnV0aW9uX3JlcXVpcmVkIn1dfX0sImFzc2Vzc21lbnQiOnsiaWQiOiJjYTBmYTYxNy1kMWM1LTQzYzItOTkxZS04MGM5Y2Y2MzI5ZWEiLCJjbGllbnRfcmVmZXJlbmNlX2lkIjoiTC1XRlItTEpMIiwic3VibWlzc2lvbl9kYXRlIjoiMjAyMi0wNy0xNiIsImFwcGxpY2FudCI6eyJkYXRlX29mX2JpcnRoIjoiMjAwMi0wOS0wMSIsImludm9sdmVtZW50X3R5cGUiOiJhcHBsaWNhbnQiLCJoYXNfcGFydG5lcl9vcHBvbmVudCI6ZmFsc2UsInJlY2VpdmVzX3F1YWxpZnlpbmdfYmVuZWZpdCI6ZmFsc2UsInNlbGZfZW1wbG95ZWQiOmZhbHNlfSwiZ3Jvc3NfaW5jb21lIjp7ImVtcGxveW1lbnRfaW5jb21lIjpbXSwiaXJyZWd1bGFyX2luY29tZSI6eyJtb250aGx5X2VxdWl2YWxlbnRzIjp7InN0dWRlbnRfbG9hbiI6MC4wfX0sInN0YXRlX2JlbmVmaXRzIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsiYWxsX3NvdXJjZXMiOjAuMCwiY2FzaF90cmFuc2FjdGlvbnMiOjAuMCwiYmFua190cmFuc2FjdGlvbnMiOltdfX0sIm90aGVyX2luY29tZSI6eyJtb250aGx5X2VxdWl2YWxlbnRzIjp7ImFsbF9zb3VyY2VzIjp7ImZyaWVuZHNfb3JfZmFtaWx5IjowLjAsIm1haW50ZW5hbmNlX2luIjowLjAsInByb3BlcnR5X29yX2xvZGdlciI6MC4wLCJwZW5zaW9uIjowLjB9LCJiYW5rX3RyYW5zYWN0aW9ucyI6eyJmcmllbmRzX29yX2ZhbWlseSI6MC4wLCJtYWludGVuYW5jZV9pbiI6MC4wLCJwcm9wZXJ0eV9vcl9sb2RnZXIiOjAuMCwicGVuc2lvbiI6MC4wfSwiY2FzaF90cmFuc2FjdGlvbnMiOnsiZnJpZW5kc19vcl9mYW1pbHkiOjAuMCwibWFpbnRlbmFuY2VfaW4iOjAuMCwicHJvcGVydHlfb3JfbG9kZ2VyIjowLjAsInBlbnNpb24iOjAuMH19fX0sImRpc3Bvc2FibGVfaW5jb21lIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsiYWxsX3NvdXJjZXMiOnsiY2hpbGRfY2FyZSI6MC4wLCJyZW50X29yX21vcnRnYWdlIjowLjAsIm1haW50ZW5hbmNlX291dCI6MC4wLCJsZWdhbF9haWQiOjAuMH0sImJhbmtfdHJhbnNhY3Rpb25zIjp7ImNoaWxkX2NhcmUiOjAuMCwicmVudF9vcl9tb3J0Z2FnZSI6MC4wLCJtYWludGVuYW5jZV9vdXQiOjAuMCwibGVnYWxfYWlkIjowLjB9LCJjYXNoX3RyYW5zYWN0aW9ucyI6eyJjaGlsZF9jYXJlIjowLjAsInJlbnRfb3JfbW9ydGdhZ2UiOjAuMCwibWFpbnRlbmFuY2Vfb3V0IjowLjAsImxlZ2FsX2FpZCI6MC4wfX0sImNoaWxkY2FyZV9hbGxvd2FuY2UiOjAuMCwiZGVkdWN0aW9ucyI6eyJkZXBlbmRhbnRzX2FsbG93YW5jZSI6MC4wLCJkaXNyZWdhcmRlZF9zdGF0ZV9iZW5lZml0cyI6MC4wfX0sImNhcGl0YWwiOnsiY2FwaXRhbF9pdGVtcyI6eyJsaXF1aWQiOlt7ImRlc2NyaXB0aW9uIjoiQ3VycmVudCBhY2NvdW50cyIsInZhbHVlIjo0NjI2ODMuNjh9LHsiZGVzY3JpcHRpb24iOiJPbmxpbmUgY3VycmVudCBhY2NvdW50cyIsInZhbHVlIjo5NTYwNDMuOTJ9XSwibm9uX2xpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJUaW1lc2hhcmUgcHJvcGVydHkiLCJ2YWx1ZSI6OTkwMTQwLjg1fSx7ImRlc2NyaXB0aW9uIjoiTGFuZCIsInZhbHVlIjo4MjIzNTcuOTR9LHsiZGVzY3JpcHRpb24iOiJBbnkgdmFsdWFibGUgaXRlbXMgd29ydGggbW9yZSB0aGFuIMKjNTAwIiwidmFsdWUiOjU0MDE4MC44NH0seyJkZXNjcmlwdGlvbiI6Ik1vbmV5IG9yIGFzc2V0cyBmcm9tIHRoZSBlc3RhdGUgb2YgYSBwZXJzb24gd2hvIGhhcyBkaWVkIiwidmFsdWUiOjkyMjkyNi4yfSx7ImRlc2NyaXB0aW9uIjoiTW9uZXkgb3dlZCB0byBhcHBsaWNhbnQiLCJ2YWx1ZSI6MTI1NTMxLjAxfSx7ImRlc2NyaXB0aW9uIjoiSW50ZXJlc3QgaW4gYSB0cnVzdCIsInZhbHVlIjoyOTAwMDguNDZ9XSwidmVoaWNsZXMiOltdLCJwcm9wZXJ0aWVzIjp7Im1haW5faG9tZSI6eyJ2YWx1ZSI6Nzk4ODU4LjM2LCJvdXRzdGFuZGluZ19tb3J0Z2FnZSI6NzU3NDMyLjUsInBlcmNlbnRhZ2Vfb3duZWQiOjY2Ljg3LCJtYWluX2hvbWUiOnRydWUsInNoYXJlZF93aXRoX2hvdXNpbmdfYXNzb2MiOnRydWUsInRyYW5zYWN0aW9uX2FsbG93YW5jZSI6MjM5NjUuNzUsImFsbG93YWJsZV9vdXRzdGFuZGluZ19tb3J0Z2FnZSI6NzU3NDMyLjUsIm5ldF92YWx1ZSI6MTc0NjAuMTEsIm5ldF9lcXVpdHkiOi0yNDcyMDEuNjYsIm1haW5faG9tZV9lcXVpdHlfZGlzcmVnYXJkIjoxMDAwMDAuMCwiYXNzZXNzZWRfZXF1aXR5IjowLjB9LCJhZGRpdGlvbmFsX3Byb3BlcnRpZXMiOlt7InZhbHVlIjozMzk0MzguNzEsIm91dHN0YW5kaW5nX21vcnRnYWdlIjozNjQ0NzUuMjIsInBlcmNlbnRhZ2Vfb3duZWQiOjgwLjYzLCJtYWluX2hvbWUiOmZhbHNlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjoxMDE4My4xNiwiYWxsb3dhYmxlX291dHN0YW5kaW5nX21vcnRnYWdlIjozNjQ0NzUuMjIsIm5ldF92YWx1ZSI6LTM1MjE5LjY3LCJuZXRfZXF1aXR5IjotMjgzOTcuNjIsIm1haW5faG9tZV9lcXVpdHlfZGlzcmVnYXJkIjowLjAsImFzc2Vzc2VkX2VxdWl0eSI6MC4wfV19fX0sInJlbWFya3MiOnsiY3VycmVudF9hY2NvdW50X2JhbGFuY2UiOnsicmVzaWR1YWxfYmFsYW5jZSI6W119fX19
+  recorded_at: Sat, 16 Jul 2022 11:20:26 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"2002-09-01","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5d4d70a54a1697e26f86fad7ce124a16
+      X-Runtime:
+      - '0.027725'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:46 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Current accounts","value":"-427543.26"},{"description":"Online
+        current accounts","value":"572816.57"}],"non_liquid_capital":[{"description":"Timeshare
+        property","value":"476500.27"},{"description":"Land","value":"939879.63"},{"description":"Any
+        valuable items worth more than £500","value":"80064.74"},{"description":"Money
+        or assets from the estate of a person who has died","value":"180517.19"},{"description":"Money
+        owed to applicant","value":"7778.48"},{"description":"Interest in a trust","value":"485917.98"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4010454a38e515f7d4eaf05838616efc
+      X-Runtime:
+      - '0.090829'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:46 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2af4fd5b3253e50748c1d46be8140a2a
+      X-Runtime:
+      - '0.030178'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:46 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"584424.88","outstanding_mortgage":"335245.1","percentage_owned":"26.45","shared_with_housing_assoc":false},"additional_properties":[{"value":"266557.91","outstanding_mortgage":"342131.02","percentage_owned":"39.5","shared_with_housing_assoc":false}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 071c8aacf79389b05ac6a366c79f6c80
+      X-Runtime:
+      - '0.037857'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/explicit_remarks
+    body:
+      encoding: UTF-8
+      string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - adc9f7ae7a73b9dae6ffff7585b47da9
+      X-Runtime:
+      - '0.037629'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/dependants
+    body:
+      encoding: UTF-8
+      string: '{"dependants":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0a6f29b26a83393dc008a7ed7545f7ae
+      X-Runtime:
+      - '0.014649'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/outgoings
+    body:
+      encoding: UTF-8
+      string: '{"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 942e70ef66d3bfa0f0a54ae49b67e37f
+      X-Runtime:
+      - '0.012371'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/state_benefits
+    body:
+      encoding: UTF-8
+      string: '{"state_benefits":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 06d6db804a685dc314b263617a5477ae
+      X-Runtime:
+      - '0.027256'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/other_incomes
+    body:
+      encoding: UTF-8
+      string: '{"other_incomes":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d0c2f77ee92077850f3e79386a4f68ff
+      X-Runtime:
+      - '0.014425'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/irregular_incomes
+    body:
+      encoding: UTF-8
+      string: '{"payments":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - daabb8cc2e38ecfb08912c14f3c33cec
+      X-Runtime:
+      - '0.017995'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/employments
+    body:
+      encoding: UTF-8
+      string: '{"employment_income":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0f5a4a2d8c36030454a0cc30953550d7
+      X-Runtime:
+      - '0.023553'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8/cash_transactions
+    body:
+      encoding: UTF-8
+      string: '{"income":[],"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - '05784c6d509c179761dda8851984b485'
+      X-Runtime:
+      - '0.020429'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 12:40:47 GMT
+- request:
+    method: get
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/1bf21e30-7776-4761-8d52-af6219288ea8
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 12:40:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"beb70b5aaf86c118c6305c2888af5479"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 126f5d81a2c7416611dfe99cb50e86e5
+      X-Runtime:
+      - '0.149759'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ2ZXJzaW9uIjoiNCIsInRpbWVzdGFtcCI6IjIwMjItMDctMTZUMTI6NDA6NDguMDUxWiIsInN1Y2Nlc3MiOnRydWUsInJlc3VsdF9zdW1tYXJ5Ijp7Im92ZXJhbGxfcmVzdWx0Ijp7InJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCIsImNhcGl0YWxfY29udHJpYnV0aW9uIjoyNzQwNDc0Ljg2LCJpbmNvbWVfY29udHJpYnV0aW9uIjowLjAsIm1hdHRlcl90eXBlcyI6W3sibWF0dGVyX3R5cGUiOiJkb21lc3RpY19hYnVzZSIsInJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCJ9XSwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJyZXN1bHQiOiJjb250cmlidXRpb25fcmVxdWlyZWQifV19LCJncm9zc19pbmNvbWUiOnsidG90YWxfZ3Jvc3NfaW5jb21lIjowLjAsInByb2NlZWRpbmdfdHlwZXMiOlt7ImNjbXNfY29kZSI6IkRBMDAxIiwidXBwZXJfdGhyZXNob2xkIjo5OTk5OTk5OTk5OTkuMCwicmVzdWx0IjoiZWxpZ2libGUifV19LCJkaXNwb3NhYmxlX2luY29tZSI6eyJkZXBlbmRhbnRfYWxsb3dhbmNlIjowLjAsImdyb3NzX2hvdXNpbmdfY29zdHMiOjAuMCwiaG91c2luZ19iZW5lZml0IjowLjAsIm5ldF9ob3VzaW5nX2Nvc3RzIjowLjAsIm1haW50ZW5hbmNlX2FsbG93YW5jZSI6MC4wLCJ0b3RhbF9vdXRnb2luZ3NfYW5kX2FsbG93YW5jZXMiOjAuMCwidG90YWxfZGlzcG9zYWJsZV9pbmNvbWUiOjAuMCwiZW1wbG95bWVudF9pbmNvbWUiOnsiZ3Jvc3NfaW5jb21lIjowLjAsImJlbmVmaXRzX2luX2tpbmQiOjAuMCwidGF4IjowLjAsIm5hdGlvbmFsX2luc3VyYW5jZSI6MC4wLCJmaXhlZF9lbXBsb3ltZW50X2RlZHVjdGlvbiI6MC4wLCJuZXRfZW1wbG95bWVudF9pbmNvbWUiOjAuMH0sImluY29tZV9jb250cmlidXRpb24iOjAuMCwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJ1cHBlcl90aHJlc2hvbGQiOjk5OTk5OTk5OTk5OS4wLCJsb3dlcl90aHJlc2hvbGQiOjMxNS4wLCJyZXN1bHQiOiJlbGlnaWJsZSJ9XX0sImNhcGl0YWwiOnsidG90YWxfbGlxdWlkIjo1NzI4MTYuNTcsInRvdGFsX25vbl9saXF1aWQiOjIxNzA2NTguMjksInRvdGFsX3ZlaGljbGUiOjAuMCwidG90YWxfcHJvcGVydHkiOjAuMCwidG90YWxfbW9ydGdhZ2VfYWxsb3dhbmNlIjo5OTk5OTk5OTk5OTkuMCwidG90YWxfY2FwaXRhbCI6Mjc0MzQ3NC44NiwicGVuc2lvbmVyX2NhcGl0YWxfZGlzcmVnYXJkIjowLjAsImNhcGl0YWxfY29udHJpYnV0aW9uIjoyNzQwNDc0Ljg2LCJhc3Nlc3NlZF9jYXBpdGFsIjoyNzQzNDc0Ljg2LCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsImxvd2VyX3RocmVzaG9sZCI6MzAwMC4wLCJ1cHBlcl90aHJlc2hvbGQiOjk5OTk5OTk5OTk5OS4wLCJyZXN1bHQiOiJjb250cmlidXRpb25fcmVxdWlyZWQifV19fSwiYXNzZXNzbWVudCI6eyJpZCI6IjFiZjIxZTMwLTc3NzYtNDc2MS04ZDUyLWFmNjIxOTI4OGVhOCIsImNsaWVudF9yZWZlcmVuY2VfaWQiOiJMLVAyTi0wWVciLCJzdWJtaXNzaW9uX2RhdGUiOiIyMDIyLTA3LTE2IiwiYXBwbGljYW50Ijp7ImRhdGVfb2ZfYmlydGgiOiIyMDAyLTA5LTAxIiwiaW52b2x2ZW1lbnRfdHlwZSI6ImFwcGxpY2FudCIsImhhc19wYXJ0bmVyX29wcG9uZW50IjpmYWxzZSwicmVjZWl2ZXNfcXVhbGlmeWluZ19iZW5lZml0IjpmYWxzZSwic2VsZl9lbXBsb3llZCI6ZmFsc2V9LCJncm9zc19pbmNvbWUiOnsiZW1wbG95bWVudF9pbmNvbWUiOltdLCJpcnJlZ3VsYXJfaW5jb21lIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsic3R1ZGVudF9sb2FuIjowLjB9fSwic3RhdGVfYmVuZWZpdHMiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJhbGxfc291cmNlcyI6MC4wLCJjYXNoX3RyYW5zYWN0aW9ucyI6MC4wLCJiYW5rX3RyYW5zYWN0aW9ucyI6W119fSwib3RoZXJfaW5jb21lIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsiYWxsX3NvdXJjZXMiOnsiZnJpZW5kc19vcl9mYW1pbHkiOjAuMCwibWFpbnRlbmFuY2VfaW4iOjAuMCwicHJvcGVydHlfb3JfbG9kZ2VyIjowLjAsInBlbnNpb24iOjAuMH0sImJhbmtfdHJhbnNhY3Rpb25zIjp7ImZyaWVuZHNfb3JfZmFtaWx5IjowLjAsIm1haW50ZW5hbmNlX2luIjowLjAsInByb3BlcnR5X29yX2xvZGdlciI6MC4wLCJwZW5zaW9uIjowLjB9LCJjYXNoX3RyYW5zYWN0aW9ucyI6eyJmcmllbmRzX29yX2ZhbWlseSI6MC4wLCJtYWludGVuYW5jZV9pbiI6MC4wLCJwcm9wZXJ0eV9vcl9sb2RnZXIiOjAuMCwicGVuc2lvbiI6MC4wfX19fSwiZGlzcG9zYWJsZV9pbmNvbWUiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJhbGxfc291cmNlcyI6eyJjaGlsZF9jYXJlIjowLjAsInJlbnRfb3JfbW9ydGdhZ2UiOjAuMCwibWFpbnRlbmFuY2Vfb3V0IjowLjAsImxlZ2FsX2FpZCI6MC4wfSwiYmFua190cmFuc2FjdGlvbnMiOnsiY2hpbGRfY2FyZSI6MC4wLCJyZW50X29yX21vcnRnYWdlIjowLjAsIm1haW50ZW5hbmNlX291dCI6MC4wLCJsZWdhbF9haWQiOjAuMH0sImNhc2hfdHJhbnNhY3Rpb25zIjp7ImNoaWxkX2NhcmUiOjAuMCwicmVudF9vcl9tb3J0Z2FnZSI6MC4wLCJtYWludGVuYW5jZV9vdXQiOjAuMCwibGVnYWxfYWlkIjowLjB9fSwiY2hpbGRjYXJlX2FsbG93YW5jZSI6MC4wLCJkZWR1Y3Rpb25zIjp7ImRlcGVuZGFudHNfYWxsb3dhbmNlIjowLjAsImRpc3JlZ2FyZGVkX3N0YXRlX2JlbmVmaXRzIjowLjB9fSwiY2FwaXRhbCI6eyJjYXBpdGFsX2l0ZW1zIjp7ImxpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJDdXJyZW50IGFjY291bnRzIiwidmFsdWUiOi00Mjc1NDMuMjZ9LHsiZGVzY3JpcHRpb24iOiJPbmxpbmUgY3VycmVudCBhY2NvdW50cyIsInZhbHVlIjo1NzI4MTYuNTd9XSwibm9uX2xpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJUaW1lc2hhcmUgcHJvcGVydHkiLCJ2YWx1ZSI6NDc2NTAwLjI3fSx7ImRlc2NyaXB0aW9uIjoiTGFuZCIsInZhbHVlIjo5Mzk4NzkuNjN9LHsiZGVzY3JpcHRpb24iOiJBbnkgdmFsdWFibGUgaXRlbXMgd29ydGggbW9yZSB0aGFuIMKjNTAwIiwidmFsdWUiOjgwMDY0Ljc0fSx7ImRlc2NyaXB0aW9uIjoiTW9uZXkgb3IgYXNzZXRzIGZyb20gdGhlIGVzdGF0ZSBvZiBhIHBlcnNvbiB3aG8gaGFzIGRpZWQiLCJ2YWx1ZSI6MTgwNTE3LjE5fSx7ImRlc2NyaXB0aW9uIjoiTW9uZXkgb3dlZCB0byBhcHBsaWNhbnQiLCJ2YWx1ZSI6Nzc3OC40OH0seyJkZXNjcmlwdGlvbiI6IkludGVyZXN0IGluIGEgdHJ1c3QiLCJ2YWx1ZSI6NDg1OTE3Ljk4fV0sInZlaGljbGVzIjpbXSwicHJvcGVydGllcyI6eyJtYWluX2hvbWUiOnsidmFsdWUiOjU4NDQyNC44OCwib3V0c3RhbmRpbmdfbW9ydGdhZ2UiOjMzNTI0NS4xLCJwZXJjZW50YWdlX293bmVkIjoyNi40NSwibWFpbl9ob21lIjp0cnVlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjoxNzUzMi43NSwiYWxsb3dhYmxlX291dHN0YW5kaW5nX21vcnRnYWdlIjozMzUyNDUuMSwibmV0X3ZhbHVlIjoyMzE2NDcuMDMsIm5ldF9lcXVpdHkiOjYxMjcwLjY0LCJtYWluX2hvbWVfZXF1aXR5X2Rpc3JlZ2FyZCI6MTAwMDAwLjAsImFzc2Vzc2VkX2VxdWl0eSI6MC4wfSwiYWRkaXRpb25hbF9wcm9wZXJ0aWVzIjpbeyJ2YWx1ZSI6MjY2NTU3LjkxLCJvdXRzdGFuZGluZ19tb3J0Z2FnZSI6MzQyMTMxLjAyLCJwZXJjZW50YWdlX293bmVkIjozOS41LCJtYWluX2hvbWUiOmZhbHNlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjo3OTk2Ljc0LCJhbGxvd2FibGVfb3V0c3RhbmRpbmdfbW9ydGdhZ2UiOjM0MjEzMS4wMiwibmV0X3ZhbHVlIjotODM1NjkuODUsIm5ldF9lcXVpdHkiOi0zMzAxMC4wOSwibWFpbl9ob21lX2VxdWl0eV9kaXNyZWdhcmQiOjAuMCwiYXNzZXNzZWRfZXF1aXR5IjowLjB9XX19fSwicmVtYXJrcyI6e319fQ==
+  recorded_at: Sat, 16 Jul 2022 12:40:48 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-LPH-P5L","submission_date":"2022-07-16","proceeding_types":{"ccms_codes":["DA001"]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"81f1f180765af7251baec678e27be34a"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0e37545efdf4c811e69a1b5dcd38264d
+      X-Runtime:
+      - '0.050549'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"assessment_id":"66c1959b-737a-4983-a94b-cf2f82c1dcbf","errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:33 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/applicant
+    body:
+      encoding: UTF-8
+      string: '{"applicant":{"date_of_birth":"2002-09-01","involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":false}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1fd426aa033fb82673e091b66c988a9e
+      X-Runtime:
+      - '0.022205'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/capitals
+    body:
+      encoding: UTF-8
+      string: '{"bank_accounts":[{"description":"Current accounts","value":"-251924.93"},{"description":"Online
+        savings accounts","value":"813299.62"}],"non_liquid_capital":[{"description":"Timeshare
+        property","value":"950239.46"},{"description":"Land","value":"285407.24"},{"description":"Any
+        valuable items worth more than £500","value":"235196.26"},{"description":"Money
+        or assets from the estate of a person who has died","value":"200922.63"},{"description":"Money
+        owed to applicant","value":"101970.14"},{"description":"Interest in a trust","value":"301391.8"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3b039c33d28a2cd58ee083e5bf301448
+      X-Runtime:
+      - '0.030132'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/vehicles
+    body:
+      encoding: UTF-8
+      string: '{"vehicles":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 90635fcd20d3a4eaef43f2ee34a5082d
+      X-Runtime:
+      - '0.015544'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/properties
+    body:
+      encoding: UTF-8
+      string: '{"properties":{"main_home":{"value":"853751.21","outstanding_mortgage":"411936.7","percentage_owned":"20.84","shared_with_housing_assoc":false},"additional_properties":[{"value":"897664.28","outstanding_mortgage":"437529.02","percentage_owned":"53.32","shared_with_housing_assoc":false}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - dfb98efd4e28180b332edefaab023479
+      X-Runtime:
+      - '0.030564'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/explicit_remarks
+    body:
+      encoding: UTF-8
+      string: '{"explicit_remarks":[{"category":"policy_disregards","details":[]}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a0b4c1e743556afa0477399b034f25bf
+      X-Runtime:
+      - '0.085546'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/dependants
+    body:
+      encoding: UTF-8
+      string: '{"dependants":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1ecaba1e715f20855357ec9ca3b47abf
+      X-Runtime:
+      - '0.029516'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/outgoings
+    body:
+      encoding: UTF-8
+      string: '{"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 14182c41805881159188a65fc4a4d65c
+      X-Runtime:
+      - '0.045328'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:34 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/state_benefits
+    body:
+      encoding: UTF-8
+      string: '{"state_benefits":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2bd0a12ca93a5b970413af2a332fb868
+      X-Runtime:
+      - '0.021505'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:35 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/other_incomes
+    body:
+      encoding: UTF-8
+      string: '{"other_incomes":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - c7fce1e2fcf8793b96d5629d5b820e06
+      X-Runtime:
+      - '0.053071'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:35 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/irregular_incomes
+    body:
+      encoding: UTF-8
+      string: '{"payments":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 317420429aafae7b607a991808399fd4
+      X-Runtime:
+      - '0.071791'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:35 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/employments
+    body:
+      encoding: UTF-8
+      string: '{"employment_income":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f7a7b6aed0a3fde0df7d0998396fa7d5
+      X-Runtime:
+      - '0.023327'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:35 GMT
+- request:
+    method: post
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf/cash_transactions
+    body:
+      encoding: UTF-8
+      string: '{"income":[],"outgoings":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"e156c1de751f0fc41f3ce5edefd256d2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 397987ef75968b3348ee36d86ffd5461
+      X-Runtime:
+      - '0.016783'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"errors":[]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:35 GMT
+- request:
+    method: get
+    uri: https://ap-3297-client-involvement-cal-check-financial-uat.cloud-platform.service.justice.gov.uk/assessments/66c1959b-737a-4983-a94b-cf2f82c1dcbf
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=4
+      User-Agent:
+      - Faraday v1.10.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 16 Jul 2022 15:51:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"68e674c250d102583cb5cdcbd00d67b9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - eee8e3389dcbd085c25daf6e36a367b5
+      X-Runtime:
+      - '0.569829'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ2ZXJzaW9uIjoiNCIsInRpbWVzdGFtcCI6IjIwMjItMDctMTZUMTU6NTE6MzYuMzQyWiIsInN1Y2Nlc3MiOnRydWUsInJlc3VsdF9zdW1tYXJ5Ijp7Im92ZXJhbGxfcmVzdWx0Ijp7InJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCIsImNhcGl0YWxfY29udHJpYnV0aW9uIjozMTE2NDEyLjIzLCJpbmNvbWVfY29udHJpYnV0aW9uIjowLjAsIm1hdHRlcl90eXBlcyI6W3sibWF0dGVyX3R5cGUiOiJkb21lc3RpY19hYnVzZSIsInJlc3VsdCI6ImNvbnRyaWJ1dGlvbl9yZXF1aXJlZCJ9XSwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJyZXN1bHQiOiJjb250cmlidXRpb25fcmVxdWlyZWQifV19LCJncm9zc19pbmNvbWUiOnsidG90YWxfZ3Jvc3NfaW5jb21lIjowLjAsInByb2NlZWRpbmdfdHlwZXMiOlt7ImNjbXNfY29kZSI6IkRBMDAxIiwidXBwZXJfdGhyZXNob2xkIjo5OTk5OTk5OTk5OTkuMCwicmVzdWx0IjoiZWxpZ2libGUifV19LCJkaXNwb3NhYmxlX2luY29tZSI6eyJkZXBlbmRhbnRfYWxsb3dhbmNlIjowLjAsImdyb3NzX2hvdXNpbmdfY29zdHMiOjAuMCwiaG91c2luZ19iZW5lZml0IjowLjAsIm5ldF9ob3VzaW5nX2Nvc3RzIjowLjAsIm1haW50ZW5hbmNlX2FsbG93YW5jZSI6MC4wLCJ0b3RhbF9vdXRnb2luZ3NfYW5kX2FsbG93YW5jZXMiOjAuMCwidG90YWxfZGlzcG9zYWJsZV9pbmNvbWUiOjAuMCwiZW1wbG95bWVudF9pbmNvbWUiOnsiZ3Jvc3NfaW5jb21lIjowLjAsImJlbmVmaXRzX2luX2tpbmQiOjAuMCwidGF4IjowLjAsIm5hdGlvbmFsX2luc3VyYW5jZSI6MC4wLCJmaXhlZF9lbXBsb3ltZW50X2RlZHVjdGlvbiI6MC4wLCJuZXRfZW1wbG95bWVudF9pbmNvbWUiOjAuMH0sImluY29tZV9jb250cmlidXRpb24iOjAuMCwicHJvY2VlZGluZ190eXBlcyI6W3siY2Ntc19jb2RlIjoiREEwMDEiLCJ1cHBlcl90aHJlc2hvbGQiOjk5OTk5OTk5OTk5OS4wLCJsb3dlcl90aHJlc2hvbGQiOjMxNS4wLCJyZXN1bHQiOiJlbGlnaWJsZSJ9XX0sImNhcGl0YWwiOnsidG90YWxfbGlxdWlkIjo4MTMyOTkuNjIsInRvdGFsX25vbl9saXF1aWQiOjIwNzUxMjcuNTMsInRvdGFsX3ZlaGljbGUiOjAuMCwidG90YWxfcHJvcGVydHkiOjIzMDk4NS4wOCwidG90YWxfbW9ydGdhZ2VfYWxsb3dhbmNlIjo5OTk5OTk5OTk5OTkuMCwidG90YWxfY2FwaXRhbCI6MzExOTQxMi4yMywicGVuc2lvbmVyX2NhcGl0YWxfZGlzcmVnYXJkIjowLjAsImNhcGl0YWxfY29udHJpYnV0aW9uIjozMTE2NDEyLjIzLCJhc3Nlc3NlZF9jYXBpdGFsIjozMTE5NDEyLjIzLCJwcm9jZWVkaW5nX3R5cGVzIjpbeyJjY21zX2NvZGUiOiJEQTAwMSIsImxvd2VyX3RocmVzaG9sZCI6MzAwMC4wLCJ1cHBlcl90aHJlc2hvbGQiOjk5OTk5OTk5OTk5OS4wLCJyZXN1bHQiOiJjb250cmlidXRpb25fcmVxdWlyZWQifV19fSwiYXNzZXNzbWVudCI6eyJpZCI6IjY2YzE5NTliLTczN2EtNDk4My1hOTRiLWNmMmY4MmMxZGNiZiIsImNsaWVudF9yZWZlcmVuY2VfaWQiOiJMLUxQSC1QNUwiLCJzdWJtaXNzaW9uX2RhdGUiOiIyMDIyLTA3LTE2IiwiYXBwbGljYW50Ijp7ImRhdGVfb2ZfYmlydGgiOiIyMDAyLTA5LTAxIiwiaW52b2x2ZW1lbnRfdHlwZSI6ImFwcGxpY2FudCIsImhhc19wYXJ0bmVyX29wcG9uZW50IjpmYWxzZSwicmVjZWl2ZXNfcXVhbGlmeWluZ19iZW5lZml0IjpmYWxzZSwic2VsZl9lbXBsb3llZCI6ZmFsc2V9LCJncm9zc19pbmNvbWUiOnsiZW1wbG95bWVudF9pbmNvbWUiOltdLCJpcnJlZ3VsYXJfaW5jb21lIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsic3R1ZGVudF9sb2FuIjowLjB9fSwic3RhdGVfYmVuZWZpdHMiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJhbGxfc291cmNlcyI6MC4wLCJjYXNoX3RyYW5zYWN0aW9ucyI6MC4wLCJiYW5rX3RyYW5zYWN0aW9ucyI6W119fSwib3RoZXJfaW5jb21lIjp7Im1vbnRobHlfZXF1aXZhbGVudHMiOnsiYWxsX3NvdXJjZXMiOnsiZnJpZW5kc19vcl9mYW1pbHkiOjAuMCwibWFpbnRlbmFuY2VfaW4iOjAuMCwicHJvcGVydHlfb3JfbG9kZ2VyIjowLjAsInBlbnNpb24iOjAuMH0sImJhbmtfdHJhbnNhY3Rpb25zIjp7ImZyaWVuZHNfb3JfZmFtaWx5IjowLjAsIm1haW50ZW5hbmNlX2luIjowLjAsInByb3BlcnR5X29yX2xvZGdlciI6MC4wLCJwZW5zaW9uIjowLjB9LCJjYXNoX3RyYW5zYWN0aW9ucyI6eyJmcmllbmRzX29yX2ZhbWlseSI6MC4wLCJtYWludGVuYW5jZV9pbiI6MC4wLCJwcm9wZXJ0eV9vcl9sb2RnZXIiOjAuMCwicGVuc2lvbiI6MC4wfX19fSwiZGlzcG9zYWJsZV9pbmNvbWUiOnsibW9udGhseV9lcXVpdmFsZW50cyI6eyJhbGxfc291cmNlcyI6eyJjaGlsZF9jYXJlIjowLjAsInJlbnRfb3JfbW9ydGdhZ2UiOjAuMCwibWFpbnRlbmFuY2Vfb3V0IjowLjAsImxlZ2FsX2FpZCI6MC4wfSwiYmFua190cmFuc2FjdGlvbnMiOnsiY2hpbGRfY2FyZSI6MC4wLCJyZW50X29yX21vcnRnYWdlIjowLjAsIm1haW50ZW5hbmNlX291dCI6MC4wLCJsZWdhbF9haWQiOjAuMH0sImNhc2hfdHJhbnNhY3Rpb25zIjp7ImNoaWxkX2NhcmUiOjAuMCwicmVudF9vcl9tb3J0Z2FnZSI6MC4wLCJtYWludGVuYW5jZV9vdXQiOjAuMCwibGVnYWxfYWlkIjowLjB9fSwiY2hpbGRjYXJlX2FsbG93YW5jZSI6MC4wLCJkZWR1Y3Rpb25zIjp7ImRlcGVuZGFudHNfYWxsb3dhbmNlIjowLjAsImRpc3JlZ2FyZGVkX3N0YXRlX2JlbmVmaXRzIjowLjB9fSwiY2FwaXRhbCI6eyJjYXBpdGFsX2l0ZW1zIjp7ImxpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJDdXJyZW50IGFjY291bnRzIiwidmFsdWUiOi0yNTE5MjQuOTN9LHsiZGVzY3JpcHRpb24iOiJPbmxpbmUgc2F2aW5ncyBhY2NvdW50cyIsInZhbHVlIjo4MTMyOTkuNjJ9XSwibm9uX2xpcXVpZCI6W3siZGVzY3JpcHRpb24iOiJUaW1lc2hhcmUgcHJvcGVydHkiLCJ2YWx1ZSI6OTUwMjM5LjQ2fSx7ImRlc2NyaXB0aW9uIjoiTGFuZCIsInZhbHVlIjoyODU0MDcuMjR9LHsiZGVzY3JpcHRpb24iOiJBbnkgdmFsdWFibGUgaXRlbXMgd29ydGggbW9yZSB0aGFuIMKjNTAwIiwidmFsdWUiOjIzNTE5Ni4yNn0seyJkZXNjcmlwdGlvbiI6Ik1vbmV5IG9yIGFzc2V0cyBmcm9tIHRoZSBlc3RhdGUgb2YgYSBwZXJzb24gd2hvIGhhcyBkaWVkIiwidmFsdWUiOjIwMDkyMi42M30seyJkZXNjcmlwdGlvbiI6Ik1vbmV5IG93ZWQgdG8gYXBwbGljYW50IiwidmFsdWUiOjEwMTk3MC4xNH0seyJkZXNjcmlwdGlvbiI6IkludGVyZXN0IGluIGEgdHJ1c3QiLCJ2YWx1ZSI6MzAxMzkxLjh9XSwidmVoaWNsZXMiOltdLCJwcm9wZXJ0aWVzIjp7Im1haW5faG9tZSI6eyJ2YWx1ZSI6ODUzNzUxLjIxLCJvdXRzdGFuZGluZ19tb3J0Z2FnZSI6NDExOTM2LjcsInBlcmNlbnRhZ2Vfb3duZWQiOjIwLjg0LCJtYWluX2hvbWUiOnRydWUsInNoYXJlZF93aXRoX2hvdXNpbmdfYXNzb2MiOmZhbHNlLCJ0cmFuc2FjdGlvbl9hbGxvd2FuY2UiOjI1NjEyLjU0LCJhbGxvd2FibGVfb3V0c3RhbmRpbmdfbW9ydGdhZ2UiOjQxMTkzNi43LCJuZXRfdmFsdWUiOjQxNjIwMS45NywibmV0X2VxdWl0eSI6ODY3MzYuNDksIm1haW5faG9tZV9lcXVpdHlfZGlzcmVnYXJkIjoxMDAwMDAuMCwiYXNzZXNzZWRfZXF1aXR5IjowLjB9LCJhZGRpdGlvbmFsX3Byb3BlcnRpZXMiOlt7InZhbHVlIjo4OTc2NjQuMjgsIm91dHN0YW5kaW5nX21vcnRnYWdlIjo0Mzc1MjkuMDIsInBlcmNlbnRhZ2Vfb3duZWQiOjUzLjMyLCJtYWluX2hvbWUiOmZhbHNlLCJzaGFyZWRfd2l0aF9ob3VzaW5nX2Fzc29jIjpmYWxzZSwidHJhbnNhY3Rpb25fYWxsb3dhbmNlIjoyNjkyOS45MywiYWxsb3dhYmxlX291dHN0YW5kaW5nX21vcnRnYWdlIjo0Mzc1MjkuMDIsIm5ldF92YWx1ZSI6NDMzMjA1LjMzLCJuZXRfZXF1aXR5IjoyMzA5ODUuMDgsIm1haW5faG9tZV9lcXVpdHlfZGlzcmVnYXJkIjowLjAsImFzc2Vzc2VkX2VxdWl0eSI6MjMwOTg1LjA4fV19fX0sInJlbWFya3MiOnt9fX0=
+  recorded_at: Sat, 16 Jul 2022 15:51:36 GMT
+- request:
+    method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"d4d94781-6c9d-4f52-be7c-1b8ac55debda","proceeding_types":["DA001"]}'
+      string: '{"request_id":"2a8cf9ca-acf3-4d92-b23f-591563e2bcc5","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
@@ -825,7 +3083,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 May 2022 11:28:41 GMT
+      - Sat, 16 Jul 2022 15:51:37 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -847,17 +3105,17 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"0ee4d9f689dc70148363b45d3544ccb8"
+      - W/"e093908f22adfe376f6e58985e929975"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c4cd0b2ff058403c54646f8e4a54a151
+      - c17ef27ccc3425f7687eedae4b005fc1
       X-Runtime:
-      - '0.025655'
+      - '0.030824'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"d4d94781-6c9d-4f52-be7c-1b8ac55debda","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Thu, 19 May 2022 11:28:41 GMT
+      string: '{"request_id":"2a8cf9ca-acf3-4d92-b23f-591563e2bcc5","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Sat, 16 Jul 2022 15:51:37 GMT
 recorded_with: VCR 6.1.0

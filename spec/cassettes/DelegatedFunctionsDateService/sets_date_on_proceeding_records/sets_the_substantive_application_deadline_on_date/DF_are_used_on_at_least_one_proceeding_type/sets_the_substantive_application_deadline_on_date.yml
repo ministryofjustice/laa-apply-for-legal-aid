@@ -36,16 +36,19 @@ http_interactions:
       - 'default-src https: ''self'' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk;
         img-src ''self'' data: *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk
         www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net
-        www.googletagmanager.com lux.speedcurve.com assets.digital.cabinet-office.gov.uk;
-        script-src ''self'' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com
+        www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com
+        lux.speedcurve.com assets.digital.cabinet-office.gov.uk; script-src ''self''
+        *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com
         ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com
-        www.gstatic.com www.signin.service.gov.uk *.ytimg.com www.youtube.com www.youtube-nocookie.com
+        www.region1.google-analytics.com region1.google-analytics.com www.gstatic.com
+        www.signin.service.gov.uk *.ytimg.com www.youtube.com www.youtube-nocookie.com
         hmrc-uk.digital.nuance.com ''unsafe-inline''; style-src ''self'' *.publishing.service.gov.uk
         www.gov.uk *.dev.gov.uk www.gstatic.com ''unsafe-inline''; font-src ''self''
         *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk data:; connect-src ''self''
         *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com
         ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com
-        lux.speedcurve.com www.tax.service.gov.uk hmrc-uk.digital.nuance.com hmpowebchat.klick2contact.com
+        www.region1.google-analytics.com region1.google-analytics.com lux.speedcurve.com
+        www.tax.service.gov.uk hmrc-uk.digital.nuance.com hmpowebchat.klick2contact.com
         omni.eckoh.uk www.signin.service.gov.uk; object-src ''none''; frame-src ''self''
         *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.youtube.com www.youtube-nocookie.com;
         report-uri https://jhpno0hk6b.execute-api.eu-west-2.amazonaws.com/production'
@@ -60,23 +63,23 @@ http_interactions:
       X-Frame-Options:
       - ALLOWALL
       X-Request-Id:
-      - b5e153ff-a785-4ea9-94d8-648a4f0bfa85
+      - 6d6ae667-fc54-4f94-9464-891e61ea02a0
       Fastly-Backend-Name:
       - origin
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 10 May 2022 13:34:04 GMT
+      - Sat, 16 Jul 2022 13:33:37 GMT
       Age:
-      - '417'
+      - '1299'
       X-Served-By:
-      - cache-lon4263-LON
+      - cache-lhr7350-LHR
       X-Cache:
-      - MISS, HIT
+      - HIT, HIT
       X-Cache-Hits:
-      - '2'
+      - '1'
       X-Timer:
-      - S1652189644.142426,VS0,VE0
+      - S1657978418.749464,VS0,VE1
       Vary:
       - Accept-Encoding
     body:
