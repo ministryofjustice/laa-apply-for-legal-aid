@@ -5,8 +5,6 @@ module Providers
         @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income)
       end
 
-      # :nocov:
-      # Can be tested once this controller is added to a flow
       def update
         @form = ::StudentFinances::AnnualAmountForm.new(form_params)
         if @form.save
@@ -16,11 +14,9 @@ module Providers
           render :show
         end
       end
-    # :nocov:
 
     private
 
-      # :nocov:
       def irregular_income
         legal_aid_application.irregular_incomes.find_by(income_type: "student_loan")
       end
@@ -36,7 +32,6 @@ module Providers
       def student_finance
         @student_finance ||= params[:irregular_income][:student_finance]
       end
-      # :nocov:
     end
   end
 end

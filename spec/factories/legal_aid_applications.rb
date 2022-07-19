@@ -130,6 +130,7 @@ FactoryBot.define do
 
     trait :checking_non_passported_means do
       before(:create) do |application|
+        application.change_state_machine_type("NonPassportedStateMachine")
         application.state_machine_proxy.update!(aasm_state: :checking_non_passported_means)
       end
     end
@@ -166,6 +167,7 @@ FactoryBot.define do
 
     trait :provider_confirming_applicant_eligibility do
       before(:create) do |application|
+        application.change_state_machine_type("NonPassportedStateMachine")
         application.state_machine_proxy.update!(aasm_state: :provider_confirming_applicant_eligibility)
       end
     end

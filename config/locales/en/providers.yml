@@ -519,10 +519,13 @@ en:
         status: Status
         uploaded: Uploaded
         title: Uploaded files
+    has_other_dependants:
+      show:
+        error: Select yes if they have other dependants
 
     identify_types_of_outgoings:
       show:
-        page_heading: Which regular payments does your client make?
+        page_heading: Which payments does your client make?
       update:
         none_selected: Select if your client makes any regular payments
     income_summary:
@@ -670,10 +673,10 @@ en:
           ni: National Insurance
       cash_incomes:
         show:
-          page_heading: Select payments your client receive in cash
+          page_heading: Select payments your client receives in cash
       identify_types_of_incomes:
         show:
-          page_heading: Which types of income does your client receive?
+          page_heading: Which payments does your client receive?
         update:
           none_selected: Select if your client receives any types of income
       has_dependants:
@@ -717,7 +720,6 @@ en:
           remove: Remove
           warning:
             delete: Are you sure you want to delete this dependant?
-          error: Select yes if they have other dependants
       remove_dependants:
         show:
           page_title: "Are you sure you want to remove %{name}?"
@@ -786,9 +788,6 @@ en:
       show:
         h1-heading: Check your answers
         h2-heading: Your client's income and outgoings
-        student_finance:
-          heading: Student finance
-          info_html: '<strong>%{student_finance}</strong> this academic year.'
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?

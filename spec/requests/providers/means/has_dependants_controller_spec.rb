@@ -4,127 +4,172 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application }
   let(:login) { login_as legal_aid_application.provider }
 
-  before do
-    login
-    subject
-  end
+  before { login }
 
   describe "GET /providers/:application_id/means/has_dependants" do
-    subject { get providers_legal_aid_application_means_has_dependants_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_has_dependants_path(legal_aid_application) }
 
     it "returns http success" do
+      request
       expect(response).to have_http_status(:ok)
     end
 
     context "when the provider is not authenticated" do
       let(:login) { nil }
+
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/has_dependants" do
-    subject do
+    subject(:request) do
       patch(
         providers_legal_aid_application_means_has_dependants_path(legal_aid_application),
         params:,
       )
     end
 
-    let(:has_dependants) { nil }
-    let(:params) do
-      { legal_aid_application: { has_dependants: } }
-    end
-
-    it "renders successfully" do
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "displays error" do
-      expect(response.body).to include("govuk-error-summary")
-    end
-
     context "when the provider is not authenticated" do
       let(:login) { nil }
+      let(:params) { nil }
+
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    describe "PATCH /providers/:application_id/has_dependants" do
-      before { patch providers_legal_aid_application_means_has_dependants_path(legal_aid_application), params: }
-
-      context "valid params" do
-        let(:params) { { legal_aid_application: { has_dependants: "true" } } }
-
-        it "updates the record" do
-          expect(legal_aid_application.reload.has_dependants).to be true
-        end
-
-        context "yes" do
-          it "redirects to the add dependant details page" do
-            expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
-          end
-        end
-
-        context "no" do
-          let(:params) { { legal_aid_application: { has_dependants: "false" } } }
-
-          it "redirects to the outgoing summary page" do
-            expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
-          end
-        end
+    context "when has_dependants is nil" do
+      let(:has_dependants) { nil }
+      let(:params) do
+        { legal_aid_application: { has_dependants: } }
       end
 
-      context "while provider checking answers of citizen and no" do
-        let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-                 :checking_non_passported_means
-        end
-        let(:params) { { legal_aid_application: { has_dependants: "false" } } }
-
-        it "redirects to the means summary page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
-        end
+      it "renders successfully" do
+        request
+        expect(response).to have_http_status(:ok)
       end
 
-      context "while provider checking answers of citizen and no dependants and yes" do
-        let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-                 :checking_non_passported_means
-        end
+      it "displays error" do
+        request
+        expect(response.body).to include("govuk-error-summary")
+      end
+    end
+
+    context "valid params" do
+      context "when provider answers yes" do
         let(:params) { { legal_aid_application: { has_dependants: "true" } } }
+
+        it "sets has_dependants to true" do
+          expect { request }.to change { legal_aid_application.reload.has_dependants }.from(nil).to(true)
+        end
 
         it "redirects to the add dependant details page" do
+          request
           expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
         end
       end
 
-      context "while provider checking answers of citizen and previously added dependants and yes" do
-        let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-                 :checking_non_passported_means, :with_dependant
-        end
-        let(:params) { { legal_aid_application: { has_dependants: "true" } } }
+      context "when provider answers no" do
+        let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
-        it "redirects to the has other dependants page" do
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
+        it "sets has_dependants to false" do
+          expect { request }.to change { legal_aid_application.reload.has_dependants }.from(nil).to(false)
+        end
+
+        context "when provider does not have bank_statement_upload permissions" do
+          before do
+            legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          end
+
+          it "redirects to the no outgoing summary page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+          end
+
+          context "with transaction type debits on application" do
+            let(:legal_aid_application) do
+              laa = create(:legal_aid_application, :with_applicant)
+              laa.transaction_types << create(:transaction_type, :debit)
+              laa
+            end
+
+            it "redirects to the outgoings_summary page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+            end
+          end
+        end
+
+        context "when provider does have bank_statement_upload permissions" do
+          before do
+            legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          end
+
+          it "redirects to the means own homes page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
+          end
         end
       end
+    end
 
-      context "invalid params - nothing specified" do
-        let(:params) { {} }
+    context "when provider checking answers of citizen and no" do
+      let(:legal_aid_application) do
+        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means
+      end
+      let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
-        it "returns http_success" do
-          expect(response).to have_http_status(:ok)
-        end
+      it "redirects to the means summary page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+      end
+    end
 
-        it "does not update the record" do
-          expect(legal_aid_application.reload.has_dependants).to be_nil
-        end
+    context "when provider checking answers of citizen and no dependants and yes" do
+      let(:legal_aid_application) do
+        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means
+      end
+      let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
-        it "the response includes the error message" do
-          expect(response.body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_dependants.blank"))
-        end
+      it "redirects to the add dependant details page" do
+        request
+        expect(response).to redirect_to(new_providers_legal_aid_application_means_dependant_path(legal_aid_application))
+      end
+    end
+
+    context "when provider checking answers of citizen and previously added dependants and yes" do
+      let(:legal_aid_application) do
+        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means, :with_dependant
+      end
+      let(:params) { { legal_aid_application: { has_dependants: "true" } } }
+
+      it "redirects to the has other dependants page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))
+      end
+    end
+
+    context "invalid params - nothing specified" do
+      let(:params) { {} }
+
+      it "returns http_success" do
+        request
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "does not update the record" do
+        request
+        expect(legal_aid_application.reload.has_dependants).to be_nil
+      end
+
+      it "the response includes the error message" do
+        request
+        expect(response.body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.has_dependants.blank"))
       end
     end
   end

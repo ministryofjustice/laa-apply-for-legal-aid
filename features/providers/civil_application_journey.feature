@@ -467,7 +467,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Your client's income"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
     Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
@@ -526,7 +526,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Your client's income"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which types of income does your client receive?"
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
     Then I select 'Benefits'
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"

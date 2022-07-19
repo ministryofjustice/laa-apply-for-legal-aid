@@ -184,9 +184,9 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it "populates the errors" do
-          expect(aci.errors[:maintenance_in1][0]).to eq "Enter the cash amount you received in maintenance in #{month1_name}"
-          expect(aci.errors[:benefits1][0]).to eq "Enter the cash amount you received in benefits in #{month1_name}"
-          expect(aci.errors[:benefits3][0]).to eq "Enter the cash amount you received in benefits in #{month3_name}"
+          expect(aci.errors[:maintenance_in1][0]).to eq "Enter the cash amount received in maintenance in #{month1_name}"
+          expect(aci.errors[:benefits1][0]).to eq "Enter the cash amount received in benefits in #{month1_name}"
+          expect(aci.errors[:benefits3][0]).to eq "Enter the cash amount received in benefits in #{month3_name}"
         end
       end
 
@@ -237,7 +237,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
         end
 
         it "populates the errors" do
-          expect(aci.errors.full_messages).to eq ["Cash income Select if you receive these payments in cash"]
+          expect(aci.errors.full_messages).to eq ["Cash income Select any payments received in cash"]
         end
       end
 
@@ -366,7 +366,7 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
           it "populates the errors" do
             subject
-            expect(aci.errors[:benefits1]).to include "Enter the cash amount you received in benefits in #{month1_name}"
+            expect(aci.errors[:benefits1]).to include "Enter the cash amount received in benefits in #{month1_name}"
           end
         end
       end

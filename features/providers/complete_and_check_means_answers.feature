@@ -14,7 +14,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page showing "Your client's outgoings"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which regular payments does your client make?"
+    Then I should be on a page showing "Which payments does your client make?"
     Then I select 'Housing payments'
     Then I select 'Payments towards legal aid in a criminal case'
     Then I click 'Save and continue'
@@ -66,7 +66,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I click Check Your Answers Change link for 'Outgoings'
     Then I should be on a page showing "Sort your client's regular payments into categories"
     Then I click link 'Add another type of regular payment'
-    Then I should be on a page showing 'Which regular payments does your client make?'
+    Then I should be on a page showing 'Which payments does your client make?'
     Then I select 'Payments towards legal aid in a criminal case'
     Then I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
