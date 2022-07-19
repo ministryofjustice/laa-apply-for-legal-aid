@@ -66,11 +66,5 @@ module CCMS
     def manually_review_all_non_passported?
       Setting.manually_review_all_cases? && non_passported?
     end
-
-    # def uploaded_bank_statements?
-    #   legal_aid_application.provider.bank_statement_upload_permissions? &&
-    #     legal_aid_application.attachments.bank_statement_evidence.exists? &&
-    #     legal_aid_application.cfe_result.nil? # not sure if this final and is reequired, might be overkill, but we should not be making the cfe call with these cases
-    # end
   end
 end
