@@ -41,25 +41,25 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
       end
 
       context "when the continue button is pressed" do
-        let(:submit_button) { { continue_button: "Continue" } }
+        let(:submit_button) { { continue_button: "Save and continue" } }
 
         it "redirects to the merits task list" do
           expect(request).to redirect_to(providers_legal_aid_application_merits_task_list_path)
         end
       end
 
-      # context "when the save as draft button is pressed" do
-      #   let(:submit_button) { { draft_button: "Save as draft" } }
-      #
-      #   it "redirects provider to provider's applications page" do
-      #     subject
-      #     expect(response).to redirect_to(providers_legal_aid_applications_path)
-      #   end
-      #
-      #   it "sets the application as draft" do
-      #     expect(legal_aid_application.reload).to be_draft
-      #   end
-      # end
+      context "when the save as draft button is pressed" do
+        let(:submit_button) { { draft_button: "Save as draft" } }
+
+        it "redirects provider to provider's applications page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_applications_path)
+        end
+
+        it "sets the application as draft" do
+          expect(legal_aid_application.reload).to be_draft
+        end
+      end
     end
   end
 end
