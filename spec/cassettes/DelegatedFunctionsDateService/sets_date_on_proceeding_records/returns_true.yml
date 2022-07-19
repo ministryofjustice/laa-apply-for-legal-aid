@@ -36,22 +36,20 @@ http_interactions:
       - 'default-src https: ''self'' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk;
         img-src ''self'' data: *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk
         www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net
-        www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com
-        lux.speedcurve.com assets.digital.cabinet-office.gov.uk; script-src ''self''
-        *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com
-        ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com
-        www.region1.google-analytics.com region1.google-analytics.com www.gstatic.com
-        www.signin.service.gov.uk *.ytimg.com www.youtube.com www.youtube-nocookie.com
+        www.googletagmanager.com www.region1.google-analytics.com lux.speedcurve.com
+        assets.digital.cabinet-office.gov.uk; script-src ''self'' *.publishing.service.gov.uk
+        www.gov.uk *.dev.gov.uk www.google-analytics.com ssl.google-analytics.com
+        stats.g.doubleclick.net www.googletagmanager.com www.region1.google-analytics.com
+        www.gstatic.com www.signin.service.gov.uk *.ytimg.com www.youtube.com www.youtube-nocookie.com
         hmrc-uk.digital.nuance.com ''unsafe-inline''; style-src ''self'' *.publishing.service.gov.uk
         www.gov.uk *.dev.gov.uk www.gstatic.com ''unsafe-inline''; font-src ''self''
         *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk data:; connect-src ''self''
         *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com
         ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com
-        www.region1.google-analytics.com region1.google-analytics.com lux.speedcurve.com
-        www.tax.service.gov.uk hmrc-uk.digital.nuance.com hmpowebchat.klick2contact.com
-        omni.eckoh.uk www.signin.service.gov.uk; object-src ''none''; frame-src ''self''
-        *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.youtube.com www.youtube-nocookie.com;
-        report-uri https://jhpno0hk6b.execute-api.eu-west-2.amazonaws.com/production'
+        www.region1.google-analytics.com lux.speedcurve.com www.tax.service.gov.uk
+        hmrc-uk.digital.nuance.com hmpowebchat.klick2contact.com omni.eckoh.uk www.signin.service.gov.uk;
+        object-src ''none''; frame-src ''self'' *.publishing.service.gov.uk www.gov.uk
+        *.dev.gov.uk www.youtube.com www.youtube-nocookie.com; report-uri https://jhpno0hk6b.execute-api.eu-west-2.amazonaws.com/production'
       Etag:
       - W/"0e7762b476e58d07887e9473a2798d71"
       Permissions-Policy:
@@ -63,23 +61,23 @@ http_interactions:
       X-Frame-Options:
       - ALLOWALL
       X-Request-Id:
-      - 6d6ae667-fc54-4f94-9464-891e61ea02a0
+      - 1165ea16-6c7a-4b8d-95a8-90ed4d8ba3b3
       Fastly-Backend-Name:
       - origin
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 16 Jul 2022 13:33:37 GMT
+      - Tue, 19 Jul 2022 11:30:43 GMT
       Age:
-      - '1298'
+      - '3314'
       X-Served-By:
-      - cache-lhr7378-LHR
+      - cache-lcy19251-LCY
       X-Cache:
       - HIT, HIT
       X-Cache-Hits:
-      - '2'
+      - '46'
       X-Timer:
-      - S1657978417.389240,VS0,VE0
+      - S1658230243.054411,VS0,VE0
       Vary:
       - Accept-Encoding
     body:

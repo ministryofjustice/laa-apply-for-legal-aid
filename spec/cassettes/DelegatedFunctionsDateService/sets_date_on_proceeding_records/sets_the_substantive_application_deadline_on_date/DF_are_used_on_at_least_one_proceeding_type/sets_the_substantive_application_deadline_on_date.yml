@@ -69,17 +69,17 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 16 Jul 2022 13:33:37 GMT
+      - Tue, 19 Jul 2022 11:30:43 GMT
       Age:
-      - '1299'
+      - '1217'
       X-Served-By:
-      - cache-lhr7350-LHR
+      - cache-lhr7365-LHR
       X-Cache:
       - HIT, HIT
       X-Cache-Hits:
-      - '1'
+      - '25'
       X-Timer:
-      - S1657978418.749464,VS0,VE1
+      - S1658230244.686690,VS0,VE0
       Vary:
       - Accept-Encoding
     body:

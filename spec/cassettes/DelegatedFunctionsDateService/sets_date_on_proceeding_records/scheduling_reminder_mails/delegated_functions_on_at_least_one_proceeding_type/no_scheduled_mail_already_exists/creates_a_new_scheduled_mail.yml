@@ -63,23 +63,23 @@ http_interactions:
       X-Frame-Options:
       - ALLOWALL
       X-Request-Id:
-      - 6d6ae667-fc54-4f94-9464-891e61ea02a0
+      - 94e91963-9934-4877-8ebf-4f7f08dca45a
       Fastly-Backend-Name:
       - origin
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 16 Jul 2022 13:33:37 GMT
+      - Tue, 19 Jul 2022 11:30:43 GMT
       Age:
-      - '1298'
+      - '3276'
       X-Served-By:
-      - cache-lhr7340-LHR
+      - cache-lon4231-LON
       X-Cache:
       - HIT, HIT
       X-Cache-Hits:
-      - '1'
+      - '7'
       X-Timer:
-      - S1657978418.531272,VS0,VE1
+      - S1658230244.506989,VS0,VE0
       Vary:
       - Accept-Encoding
     body:
