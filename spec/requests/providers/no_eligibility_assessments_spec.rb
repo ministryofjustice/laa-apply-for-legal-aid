@@ -7,7 +7,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
     subject(:request) { get providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application) }
 
     let!(:applicant) { create :applicant }
-    let(:legal_aid_application) { create :legal_aid_application, :with_attached_bank_statement, applicant: }
+    let(:legal_aid_application) { create :legal_aid_application, :with_attached_bank_statement, :checking_non_passported_means, applicant: }
 
     context "when provider has bank_statement_upload_permissions?" do
       before do
@@ -29,7 +29,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
   end
 
   describe "PATCH /providers/applications/:id/capital_income_assessment_result" do
-    subject(:request) { patch providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application) }
+    subject(:request) { patch providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
     let(:params) { {} }
@@ -37,19 +37,19 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
     context "when the provider is authenticated" do
       before do
         login_provider
-        request
       end
 
       context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Save and continue" } }
 
         it "redirects to the merits task list" do
+          request
           expect(request).to redirect_to(providers_legal_aid_application_merits_task_list_path)
         end
       end
 
       context "when the save as draft button is pressed" do
-        let(:submit_button) { { draft_button: "Save as draft" } }
+        let(:submit_button) { { draft_button: "Save and come back later" } }
 
         it "redirects provider to provider's applications page" do
           request
@@ -57,6 +57,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
         end
 
         it "sets the application as draft" do
+          request
           expect(legal_aid_application.reload).to be_draft
         end
       end
