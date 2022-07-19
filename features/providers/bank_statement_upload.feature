@@ -3,9 +3,7 @@ Feature: Bank statement upload
   Background:
     Given csrf is enabled
     And I have completed a non-passported application and reached the open banking consent with bank statement upload enabled
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
-    And I should be on a page showing "You'll need to upload bank statements. Your application may take longer to process as a caseworker will need to check your client's bank statements"
+    And I should be on a page showing "Does your client use online banking?"
 
     When I choose 'No'
     And I click 'Save and continue'
