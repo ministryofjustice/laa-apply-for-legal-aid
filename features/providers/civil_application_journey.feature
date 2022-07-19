@@ -5,6 +5,8 @@ Feature: Civil application journeys
     Given I visit the application service
     And I click link "Start"
     And I click link "Make a new application"
+    And I click "Accept analytics cookies"
+    And show me the page
     And I click link "Apply for legal aid"
     Then I am on the legal aid applications page
 
