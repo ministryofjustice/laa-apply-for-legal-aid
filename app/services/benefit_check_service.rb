@@ -12,7 +12,7 @@ class BenefitCheckService
     puts ">>>>>>>>>>>> BENEFIT CHECK SERVICE #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
     puts USE_MOCK
     puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-    return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production
+    return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
 
     # rubocop:enable Rails/Output
     new(application).call
