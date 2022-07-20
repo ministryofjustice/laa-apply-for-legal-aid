@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 16 Jul 2022 15:49:05 GMT
+      - Wed, 20 Jul 2022 08:49:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -29,7 +29,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Request-Id:
-      - 2a2b714d-62b5-4e5f-866f-106344096e6b
+      - c08f11b3-102c-4560-8dd5-0079c640ebf3
       Content-Security-Policy:
       - default-src 'none'; frame-ancestors 'none'
       X-Frame-Options:
@@ -45,7 +45,7 @@ http_interactions:
       Referrer-Policy:
       - no-referrer
       X-Envoy-Upstream-Service-Time:
-      - '88'
+      - '90'
       Vary:
       - Accept-Encoding
       Cf-Cache-Status:
@@ -55,7 +55,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 72bbe2c52ecc7785-LHR
+      - 72da721ccad3718d-LHR
     body:
       encoding: ASCII-8BIT
       string: '[{"provider_id":"ob-revolut","display_name":"Revolut","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/revolut.svg","scopes":["info","accounts","balance","transactions","direct_debits","standing_orders","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}},{"provider_id":"ob-lloyds-business","display_name":"Lloyds
@@ -95,7 +95,7 @@ http_interactions:
         France","country":"fr","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/revolut.svg","scopes":["info","accounts","balance","transactions","direct_debits","standing_orders","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}},{"provider_id":"ob-ulster-ie","display_name":"Ulster
         Bank ROI","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/ulster.svg","scopes":["info","accounts","balance","transactions","cards","direct_debits","standing_orders","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}},{"provider_id":"ob-natwest","display_name":"NatWest","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/natwest.svg","scopes":["info","accounts","balance","transactions","cards","direct_debits","standing_orders","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}},{"provider_id":"ob-transferwise-ie","display_name":"Wise
         Ireland","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/transferwise.svg","scopes":["info","accounts","balance","transactions","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}},{"provider_id":"ob-ptsb","display_name":"PTSB","country":"ie","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/ie/logos/ptsb.svg","scopes":["accounts","balance","transactions","cards","direct_debits","standing_orders","offline_access"],"provider_scope_mappings":{"info":["accounts","info"],"accounts":["accounts"],"balance":["accounts","balance"],"transactions":["accounts","transactions"],"cards":["info","cards"],"offline_access":["offline_access"],"direct_debits":["accounts","direct_debits"],"standing_orders":["accounts","standing_orders"],"beneficiaries":["accounts","beneficiaries"],"scheduled_payments":["scheduled_payments"],"info_name":["accounts","info_name"],"info_date_of_birth":["accounts","info_date_of_birth"],"info_addresses":["accounts","info_addresses"],"info_phone_numbers":["accounts","info_phone_numbers"],"info_email_addresses":["accounts","info_email_addresses"]}}]'
-  recorded_at: Sat, 16 Jul 2022 15:49:05 GMT
+  recorded_at: Wed, 20 Jul 2022 08:49:49 GMT
 - request:
     method: get
     uri: https://auth.truelayer.com/api/providers/oauth
@@ -117,7 +117,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 16 Jul 2022 15:49:05 GMT
+      - Wed, 20 Jul 2022 08:49:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -125,7 +125,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Request-Id:
-      - e74b735d-20cb-4064-bbc0-afa29155517f
+      - 5a5d61e7-7745-4641-9ac3-fca013d28242
       Content-Security-Policy:
       - default-src 'none'; frame-ancestors 'none'
       X-Frame-Options:
@@ -141,7 +141,7 @@ http_interactions:
       Referrer-Policy:
       - no-referrer
       X-Envoy-Upstream-Service-Time:
-      - '122'
+      - '100'
       Vary:
       - Accept-Encoding
       Cf-Cache-Status:
@@ -151,9 +151,9 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 72bbe2c67eef7755-LHR
+      - 72da721e2ce2772c-LHR
     body:
       encoding: ASCII-8BIT
       string: '[{"provider_id":"oauth-amex","display_name":"Amex","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/amex.svg","scopes":["info","balance","transactions","cards","offline_access"],"provider_scope_mappings":{}},{"provider_id":"oauth-starling","display_name":"Starling","country":"uk","logo_url":"https://truelayer-provider-assets.s3.amazonaws.com/global/logos/starling.svg","scopes":["info","accounts","balance","transactions","offline_access"],"provider_scope_mappings":{}}]'
-  recorded_at: Sat, 16 Jul 2022 15:49:05 GMT
+  recorded_at: Wed, 20 Jul 2022 08:49:49 GMT
 recorded_with: VCR 6.1.0

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/merits_tasks
     body:
       encoding: UTF-8
-      string: '{"request_id":"6fa1e742-1f44-409c-9d92-d72bab1dbe08","proceeding_types":["DA001"]}'
+      string: '{"request_id":"a5dac0af-e4b4-45d6-985b-6bb1ef6030af","proceeding_types":["DA001"]}'
     headers:
       Content-Type:
       - application/json
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 16 Jul 2022 15:59:44 GMT
+      - Wed, 20 Jul 2022 09:05:20 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,17 +43,17 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"18609370bd04b9e185ecdb5b434d41c7"
+      - W/"30c5fc1f19bd9dff1752f25518a1ddef"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cd4e122b6957e2c013c622048de94efd
+      - b77404e1ac70dd00d214906641a379f0
       X-Runtime:
-      - '0.031404'
+      - '0.107745'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"6fa1e742-1f44-409c-9d92-d72bab1dbe08","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
-  recorded_at: Sat, 16 Jul 2022 15:59:44 GMT
+      string: '{"request_id":"a5dac0af-e4b4-45d6-985b-6bb1ef6030af","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Wed, 20 Jul 2022 09:05:20 GMT
 recorded_with: VCR 6.1.0
