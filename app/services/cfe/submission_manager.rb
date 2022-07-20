@@ -1,8 +1,20 @@
 module CFE
   class SubmissionManager
     include ::DurationLogger
-    COMMON_SERVICES = [
+
+    # TODO: remove COMMON_SERVICES_V4 and code in #common_services method to use it once CFE V4 deprecated
+    COMMON_SERVICES_V4 = [
       CreateAssessmentService,
+      CreateApplicantService,
+      CreateCapitalsService,
+      CreateVehiclesService,
+      CreatePropertiesService,
+      CreateExplicitRemarksService,
+    ].freeze
+
+    COMMON_SERVICES_V5 = [
+      CreateAssessmentService,
+      CreateProceedingTypesService,
       CreateApplicantService,
       CreateCapitalsService,
       CreateVehiclesService,
@@ -47,7 +59,8 @@ module CFE
     end
 
     def call_common_services
-      COMMON_SERVICES.each do |service|
+      common_services = Setting.enable_cfe_v5? ? COMMON_SERVICES_V5 : COMMON_SERVICES_V4
+      common_services.each do |service|
         make_logged_call_to service
       end
     end

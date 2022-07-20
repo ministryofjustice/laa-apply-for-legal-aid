@@ -14,10 +14,12 @@ module CFE
       {
         client_reference_id: legal_aid_application.application_ref,
         submission_date: legal_aid_application.calculation_date.strftime("%Y-%m-%d"),
-      }.merge(options)
+      }.merge(proceeding_types)
     end
 
-    def options
+    def proceeding_types
+      return {} if Setting.enable_cfe_v5?
+
       {
         proceeding_types: {
           ccms_codes: legal_aid_application.proceedings.map(&:ccms_code),

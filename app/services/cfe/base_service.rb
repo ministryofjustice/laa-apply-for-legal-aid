@@ -30,7 +30,7 @@ module CFE
     end
 
     def version
-      "4"
+      Setting.enable_cfe_v5? ? "5" : "4"
     end
 
     def conn

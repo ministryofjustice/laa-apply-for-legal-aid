@@ -7,6 +7,7 @@ module CFESubmissionStateMachine
     aasm do
       state :initialised, initial: true
       state :assessment_created
+      state :proceeding_types_created
       state :applicant_created
       state :capitals_created
       state :vehicles_created
@@ -26,7 +27,12 @@ module CFESubmissionStateMachine
         transitions from: :initialised, to: :assessment_created
       end
 
+      event :proceeding_types_created do
+        transitions from: :assessment_created, to: :proceeding_types_created
+      end
+
       event :applicant_created do
+        transitions from: :proceeding_types_created, to: :applicant_created
         transitions from: :assessment_created, to: :applicant_created
       end
 
@@ -81,6 +87,7 @@ module CFESubmissionStateMachine
 
       event :fail do
         transitions from: :initialised, to: :failed
+        transitions from: :proceeding_types_created, to: :failed
         transitions from: :assessment_created, to: :failed
         transitions from: :applicant_created, to: :failed
         transitions from: :capitals_created, to: :failed
