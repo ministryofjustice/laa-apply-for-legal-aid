@@ -108,7 +108,7 @@ module Flow
             if application.applicant_receives_benefit?
               :capital_introductions
             else
-              application.provider.bank_statement_upload_permissions? ? :bank_statements : :email_addresses
+              application.uploading_bank_statements? ? :bank_statements : :email_addresses
             end
           end,
         },
@@ -118,16 +118,28 @@ module Flow
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
           forward: lambda do |application|
-            next_step = :email_addresses
+            next_step = :open_banking_guidance
             next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
 
-            if application.provider.bank_statement_upload_permissions?
+            if application.uploading_bank_statements?
               application.provider_received_citizen_consent? ? next_step : :bank_statements
             else
               application.provider_received_citizen_consent? ? next_step : :use_ccms
             end
           end,
         },
+
+        open_banking_guidance: {
+          path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
+          forward: lambda do |application|
+            if application.provider_consent?
+              :email_addresses
+            else
+              application.uploading_bank_statements? ? :bank_statements : :use_ccms
+            end
+          end,
+        },
+
         bank_statements: {
           path: ->(application) { urls.providers_legal_aid_application_bank_statements_path(application) },
           forward: lambda do |application|
