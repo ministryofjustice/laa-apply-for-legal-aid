@@ -8,6 +8,9 @@ class BenefitCheckService
   end
 
   def self.call(application)
+    puts ">>>>>>>>>>>> BENEFIT CHECK SERVICE #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+    puts USE_MOCK
+    puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
     return MockBenefitCheckService.call(application) if USE_MOCK && !Rails.env.production?
 
     new(application).call
