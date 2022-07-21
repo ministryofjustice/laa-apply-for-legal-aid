@@ -6,6 +6,7 @@ module CCMS
       describe "parsing applicant search responses" do
         let(:no_results_response_xml) { ccms_data_from_file "applicant_search_response_no_results.xml" }
         let(:one_result_response_xml) { ccms_data_from_file "applicant_search_response_one_result.xml" }
+        let(:number_not_matched_response_xml) { ccms_data_from_file "applicant_search_response_number_not_matched.xml" }
         let(:multiple_results_response_xml) { ccms_data_from_file "applicant_search_response_multiple_results.xml" }
         let(:parser) { described_class.new(Faker::Number.number(digits: 20), no_results_response_xml) }
         let(:expected_tx_id) { "20190301030405123456" }
@@ -90,6 +91,17 @@ module CCMS
             it "returns status and message" do
               parser.record_count
               expect(parser.message).to eq "Success: End of Get Party details process."
+            end
+          end
+        end
+
+        context "Number not matched" do
+          let(:expected_tx_id) { "202206241623547511370989944" }
+          let(:parser) { described_class.new(expected_tx_id, number_not_matched_response_xml) }
+
+          describe "#applicant_ccms_reference" do
+            it "returns nil" do
+              expect(parser.applicant_ccms_reference).to be_nil
             end
           end
         end
