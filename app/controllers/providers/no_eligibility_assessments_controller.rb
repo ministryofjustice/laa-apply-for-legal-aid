@@ -12,9 +12,7 @@ module Providers
     end
 
     def submission
-      # need to add a new aasm_state for cfe checks to indicate it was bypassed
       @submission ||= CFE::Submission.create!(legal_aid_application_id: legal_aid_application.id, aasm_state: "cfe_not_called")
-      # @submission ||= CFE::Submission.create!(legal_aid_application_id: legal_aid_application.id)
     end
 
     def write_cfe_result

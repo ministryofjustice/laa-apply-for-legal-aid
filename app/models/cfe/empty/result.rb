@@ -87,34 +87,6 @@ module CFE
         Remarks.new(assessment[:remarks])
       end
 
-      # def results_by_proceeding_type
-      #   # transforms:
-      #   #
-      #   # [
-      #   #     {
-      #   #         :ccms_code => "DA004",
-      #   #         :result    => "contribution_required"
-      #   #     },
-      #   #     {
-      #   #         :ccms_code => "SE013",
-      #   #         :result    => "ineligible"
-      #   #     }
-      #   # ]
-      #   #
-      #   # into:
-      #   # {
-      #   #     "Non-molestation order"              => "Yes",
-      #   #     "Child arrangements order (contact)" => "No"
-      #   # }
-      #   #
-      #
-      #   results = {}
-      #   overall_result[:proceeding_types].each do |hash|
-      #     results[proceeding_meaning(hash[:ccms_code])] = elig_yes_no(hash[:result])
-      #   end
-      #   results
-      # end
-
       ################################################################
       #                                                              #
       #  INCOME VALUES                                               #
@@ -168,10 +140,6 @@ module CFE
       #  VEHICLE                                                     #
       #                                                              #
       ################################################################
-      #
-      # def vehicle
-      #   vehicles.first
-      # end
 
       def vehicles?
         vehicles.any?
@@ -297,18 +265,6 @@ module CFE
         employment_income[:fixed_employment_deduction] || 0.0
       end
 
-    # def employment_income_net_employment_income
-    #   employment_income[:net_employment_income] || 0.0
-    # end
-
-    # def jobs
-    #   gross_income_breakdown[:employment_income]
-    # end
-
-    # def jobs?
-    #   jobs&.any?
-    # end
-
     private
 
       def min_threshold(proceeding_types_array, threshold_method)
@@ -328,14 +284,6 @@ module CFE
         # stub out zero values if not found until CFE is updated
         disposable_income_breakdown[:deductions] || { dependants_allowance: 0.0, disregarded_state_benefits: 0.0 }
       end
-
-      # def proceeding_meaning(ccms_code)
-      #   Proceeding.find_by(ccms_code:).meaning
-      # end
-      #
-      # def elig_yes_no(result)
-      #   result == "ineligible" ? I18n.t("generic.no") : I18n.t("generic.yes")
-      # end
     end
   end
 end
