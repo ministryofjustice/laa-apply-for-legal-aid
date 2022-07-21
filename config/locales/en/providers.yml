@@ -971,6 +971,42 @@ en:
           label: 'Yes'
           hint: |
             Your client must have an email address and use online banking for all of their current accounts.
+    open_banking_guidances:
+      show:
+        heading_h1: Share bank statements with online banking
+        your_client_can: Your client can share their bank statements with us through online banking via a third party called TrueLayer.
+        its_a_fast: It's a fast, safe and accurate way to access your client's transactions and means your client does not need to gather statements.
+        details_summary: What is TrueLayer?
+        details_content_html: |
+          <a href='https://truelayer.com/data' target="_blank">TrueLayer</a> is a trusted third-party financial service
+          provider that acts as a messenger between your client's bank and the LAA.
+          <br>
+          <br>
+          It needs one-time, read-only access to your client's bank account information. If your client agrees, TrueLayer will securely collect
+          3 months of statements and share them with the LAA.
+          <br>
+          <br>
+          They’re regulated by the Financial Conduct Authority (FCA) and will:
+        details:
+          list: |
+            not store your client's bank account details
+            not see your client's online banking sign-in details
+            not share your client's data with anyone other than the LAA
+            not have ongoing access to your client's bank accounts
+        heading_h2: How it works
+        list_heading_one: 1. Get started
+        your_client_will: Your client will receive an email clearly labelled from the Legal Aid Agency (LAA) asking them to share 3 months of bank statements.
+        theres_a_link: There's a link in the email directing them to 'Apply for legal aid' to get started.
+        list_heading_two: 2. Select a bank
+        your_client_selects: Your client selects their bank then signs in to their online banking website or app.
+        list_heading_three: 3. Choose which accounts to share
+        your_client_chooses: Your client chooses the accounts they want to share. Bank statements from the last 3 months will be shared securely with the LAA.
+        list_heading_four: 4. Confirmation
+        your_client_will_see: Your client will see a message confirming they've successfully shared their bank statements. They'll be asked if they have any more bank accounts to share.
+        list_heading_five: 5. What happens next
+        you_need_to: You need to sort your client's transactions into categories so we can understand their financial situation and process your application quickly.
+        download_button: Download this guidance
+        can_your_client_share: Can your client share their bank statements using online banking?
     other_assets:
       show:
         h1-heading: Which assets does your client have?
