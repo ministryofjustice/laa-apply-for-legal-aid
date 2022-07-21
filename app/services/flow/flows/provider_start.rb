@@ -135,7 +135,7 @@ module Flow
             if client_can_use_truelayer
               :email_addresses
             else
-              application.uploading_bank_statements? ? :bank_statements : :use_ccms
+              application.provider.bank_statement_upload_permissions? ? :bank_statements : :use_ccms
             end
           end,
         },

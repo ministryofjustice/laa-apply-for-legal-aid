@@ -1,6 +1,9 @@
 module Providers
   class OpenBankingGuidancesController < ProviderBaseController
     def show
+      legal_aid_application.reset_from_use_ccms! if legal_aid_application.use_ccms?
+      legal_aid_application.provider_confirm_applicant_eligibility!
+
       form
     end
 
