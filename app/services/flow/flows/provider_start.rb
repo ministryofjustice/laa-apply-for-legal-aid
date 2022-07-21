@@ -129,10 +129,10 @@ module Flow
           end,
         },
 
-        open_banking_guidance: {
+        open_banking_guidances: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_guidance_path(application) },
-          forward: lambda do |application|
-            if application.provider_consent?
+          forward: lambda do |application, client_can_use_truelayer|
+            if client_can_use_truelayer
               :email_addresses
             else
               application.uploading_bank_statements? ? :bank_statements : :use_ccms

@@ -29,34 +29,43 @@
     <h3 class="govuk-heading-m"><%= t('.list_heading_one') %></h3>
     <p class="govuk-body"><%= t('.your_client_will') %></p>
     <p class="govuk-body"><%= t('.theres_a_link') %></p>
-    <div class="govuk-!-padding-2"></div>
-    <img src="<%= asset_pack_path 'media/images/open_banking/select_bank.png' %>" alt="select your bank">
-
-    <div class="govuk-!-padding-4"></div>
 
     <h3 class="govuk-heading-m"><%= t('.list_heading_two') %></h3>
     <p class="govuk-body"><%= t('.your_client_selects') %></p>
-    <div class="govuk-!-padding-2"></div>
-    <img src="<%= asset_pack_path 'media/images/open_banking/sharing.png' %>" alt="select your bank">
+    <img src="<%= asset_pack_path 'media/images/open_banking/select_bank.png' %>" alt="select your bank">
 
     <div class="govuk-!-padding-4"></div>
 
     <h3 class="govuk-heading-m"><%= t('.list_heading_three') %></h3>
     <p class="govuk-body"><%= t('.your_client_chooses') %></p>
-    <div class="govuk-!-padding-2"></div>
-    <img src="<%= asset_pack_path 'media/images/open_banking/shared.png' %>" alt="select your bank">
+    <img src="<%= asset_pack_path 'media/images/open_banking/sharing.png' %>" alt="select your bank">
 
     <div class="govuk-!-padding-4"></div>
 
     <h3 class="govuk-heading-m"><%= t('.list_heading_four') %></h3>
     <p class="govuk-body"><%= t('.your_client_will_see') %></p>
-    <div class="govuk-!-padding-2"></div>
-    <img src="<%= asset_pack_path 'media/images/open_banking/success.png' %>" alt="select your bank">
+    <img src="<%= asset_pack_path 'media/images/open_banking/shared.png' %>" alt="select your bank">
 
     <div class="govuk-!-padding-4"></div>
 
     <h3 class="govuk-heading-m"><%= t('.list_heading_five') %></h3>
     <p class="govuk-body"><%= t('.you_need_to') %></p>
+    <img src="<%= asset_pack_path 'media/images/open_banking/success.png' %>" alt="select your bank">
+    <div class="govuk-!-padding-2"></div>
+
+    <%= print_button t('.download_button') %>
+
+    <%= form.govuk_collection_radio_buttons :can_client_use_truelayer,
+                                            yes_no_options,
+                                            :value,
+                                            :label,
+                                            legend: {text: t(".can_your_client_share"), size: 'm', tag: 'h2'} %>
+
+    <div class="govuk-!-padding-2"></div>
+
+    <%= next_action_buttons(
+          show_draft: true,
+          form: form) %>
 
   <% end %>
 <% end %>
