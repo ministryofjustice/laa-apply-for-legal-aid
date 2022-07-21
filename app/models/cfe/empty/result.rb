@@ -40,7 +40,7 @@ module CFE
       end
 
       def income_contribution
-        disposable_income[:income_contribution]
+        0.0
       end
 
       def capital_summary
