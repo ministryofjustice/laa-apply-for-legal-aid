@@ -19,6 +19,10 @@ module CFE
         CFE::Empty::EmptyResult.blank_cfe_result[:assessment]
       end
 
+      def disposable_income
+        disposable_income_summary[:total_disposable_income]
+      end
+
       def capital_contribution_required?
         capital_assessment_result == "contribution_required"
       end
