@@ -28,7 +28,7 @@ module CFE
       end
 
       def capital_contribution
-        capital[:capital_contribution].to_d
+        capital[:capital_contribution]
       end
 
       def income_assessment_result
