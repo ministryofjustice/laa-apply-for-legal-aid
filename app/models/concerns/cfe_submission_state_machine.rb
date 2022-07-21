@@ -22,9 +22,14 @@ module CFESubmissionStateMachine
       state :results_obtained
       state :employments_created
       state :failed
+      state :cfe_not_called
 
       event :assessment_created do
         transitions from: :initialised, to: :assessment_created
+      end
+
+      event :cfe_not_called do
+        transitions from: :initialised, to: :cfe_not_called
       end
 
       event :proceeding_types_created do
@@ -101,6 +106,7 @@ module CFESubmissionStateMachine
         transitions from: :explicit_remarks_created, to: :failed
         transitions from: :cash_transactions_created, to: :failed
         transitions from: :employments_created, to: :failed
+        transitions from: :cfe_not_called, to: :failed
       end
     end
   end
