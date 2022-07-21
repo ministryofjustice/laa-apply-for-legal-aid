@@ -1,4 +1,4 @@
-<% bank_statement_upload = @legal_aid_application.provider.bank_statement_upload_permissions? %>
+<% bank_statement_upload = @legal_aid_application.uploading_bank_statements? %>
 <%= page_template(page_title: t('.h1-heading')) do %>
 
   <h2 class="govuk-heading-l"><%= t('.h2-heading') %></h2>

@@ -15,13 +15,19 @@ module CCMS
              :non_passported?,
              :has_restrictions?,
              :policy_disregards?,
-             :manually_entered_employment_information?, to: :legal_aid_application
+             :manually_entered_employment_information?,
+             :uploading_bank_statements?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
 
     def initialize(legal_aid_application)
+      # TODO: this if/else needs tidying up in ap-3338 where we will create a blank cfe_result for these cases
       @legal_aid_application = legal_aid_application
-      raise "Unable to determine whether Manual review is required before means assessment" if legal_aid_application.cfe_result.nil?
+      if legal_aid_application.uploading_bank_statements?
+        nil
+      elsif legal_aid_application.cfe_result.nil?
+        raise "Unable to determine whether Manual review is required before means assessment"
+      end
     end
 
     def manual_review_required?
@@ -30,7 +36,8 @@ module CCMS
         capital_contribution_required? ||
         has_restrictions? ||
         policy_disregards? ||
-        manually_entered_employment_information?
+        manually_entered_employment_information? ||
+        uploading_bank_statements?
     end
 
     def review_reasons
@@ -57,6 +64,7 @@ module CCMS
       application_review_reasons << :restrictions if has_restrictions?
       application_review_reasons << :policy_disregards if policy_disregards?
       application_review_reasons << :further_employment_details if manually_entered_employment_information?
+      application_review_reasons << :uploaded_bank_statements if uploading_bank_statements?
       application_review_reasons
     end
 

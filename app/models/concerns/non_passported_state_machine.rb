@@ -13,6 +13,7 @@ class NonPassportedStateMachine < BaseStateMachine
         applicant_details_checked
         delegated_functions_used
         provider_confirming_applicant_eligibility
+        provider_assessing_means
       ],
                   to: :provider_confirming_applicant_eligibility
     end

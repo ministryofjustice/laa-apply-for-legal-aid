@@ -8,6 +8,7 @@ class ResultsPanelSelector
   end
 
   def call
+    return "shared/assessment_results/no_cfe_result" if @legal_aid_application.uploading_bank_statements?
     return eligible_or_non_eligible if %w[eligible not_eligible].include?(assessment_result)
     return "shared/assessment_results/manual_check_required" if restrictions? || disregards? || manually_entered_employment_information?
 
