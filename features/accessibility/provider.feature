@@ -66,7 +66,7 @@ Feature: Provider accessibility
     And the page is accessible
     And I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Give your client temporary access to the service'
+    Then I should be on a page showing 'Send your client a link to access the service'
     And the page is accessible
     When I click 'Send link'
     Then I should be on a page showing "We've shared your application with your client"
