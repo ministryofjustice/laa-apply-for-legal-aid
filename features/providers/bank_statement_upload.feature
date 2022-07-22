@@ -69,7 +69,9 @@ Feature: Bank statement upload
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     When I click 'Save and continue'
-    sleep 2
+
+    And I sleep for 2 seconds
+
     Then I should be on a page with title "Which payments does your client receive?"
 
     When I select 'Benefits'
