@@ -65,94 +65,84 @@ RSpec.describe "does client use online banking requests", type: :request do
         expect(application.reload.provider_received_citizen_consent).to be(true)
       end
 
-      context "when applicant is not employed after negative benefit check result" do
-        context "when used_delegated_functions is true" do
-          let(:application) do
-            create :legal_aid_application,
-                   :with_non_passported_state_machine,
-                   :applicant_details_checked,
-                   :with_proceedings,
-                   :with_delegated_functions_on_proceedings,
-                   explicit_proceedings: [:da004],
-                   df_options: { DA004: [Time.zone.today, Time.zone.today] },
-                   applicant:
-          end
+      context "when used_delegated_functions is true" do
+        let(:application) do
+          create :legal_aid_application,
+                 :with_non_passported_state_machine,
+                 :applicant_details_checked,
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: [:da004],
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] },
+                 applicant:
+        end
 
-          let(:applicant) { create :applicant, :not_employed }
+        let(:applicant) { create :applicant, :not_employed }
 
-          it "redirects to the substantive application page" do
+        it "redirects to the substantive application page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(application))
+        end
+      end
+
+      context "when used_delegated_functions is false" do
+        let(:application) do
+          create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:
+        end
+
+        let(:applicant) { create :applicant, :not_employed }
+
+        it "redirects to the open banking guidance page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_open_banking_guidance_path(application))
+        end
+      end
+
+      context "when provider is bank statement upload enabled" do
+        before do
+          permission = build(:permission, :bank_statement_upload)
+          application.provider.permissions << permission
+        end
+
+        context "when provider_received_citizen_consent is false" do
+          let(:provider_received_citizen_consent) { "false" }
+
+          it "redirects to the bank statement upload page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
           end
         end
 
-        context "when used_delegated_functions is false" do
-          let(:application) do
-            create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:
-          end
+        context "when provider_received_citizen_consent is true" do
+          let(:provider_received_citizen_consent) { "true" }
 
-          let(:applicant) { create :applicant, :not_employed }
-
-          it "redirects to the client email address page" do
+          it "redirects to the open banking guidance page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_open_banking_guidance_path(application))
           end
         end
       end
 
-      # TODO: no context defined here - what is a "positive benefit check result" value?
-      context "when positive benefit check result" do
-        it "redirects to the client email address page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
+      context "when provider is not bank statement upload enabled" do
+        before do
+          application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
         end
 
-        context "when provider is bank statement upload enabled" do
-          before do
-            permission = build(:permission, :bank_statement_upload)
-            application.provider.permissions << permission
-          end
+        context "when provider_received_citizen_consent is false" do
+          let(:provider_received_citizen_consent) { "false" }
 
-          context "when provider_received_citizen_consent is false" do
-            let(:provider_received_citizen_consent) { "false" }
-
-            it "redirects to the bank statement upload page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_bank_statements_path(application))
-            end
-          end
-
-          context "when provider_received_citizen_consent is true" do
-            let(:provider_received_citizen_consent) { "true" }
-
-            it "redirects to the client email address page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
-            end
+          it "redirects to the use ccms page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
           end
         end
 
-        context "when provider is not bank statement upload enabled" do
-          before do
-            application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          end
+        context "when provider_received_citizen_consent is true" do
+          let(:provider_received_citizen_consent) { "true" }
 
-          context "when provider_received_citizen_consent is false" do
-            let(:provider_received_citizen_consent) { "false" }
-
-            it "redirects to the use ccms page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_use_ccms_path(application))
-            end
-          end
-
-          context "when provider_received_citizen_consent is true" do
-            let(:provider_received_citizen_consent) { "true" }
-
-            it "redirects to the client email address page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_email_address_path(application))
-            end
+          it "redirects to the open banking guidance page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_open_banking_guidance_path(application))
           end
         end
       end
