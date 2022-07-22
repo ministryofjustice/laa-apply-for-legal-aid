@@ -925,7 +925,7 @@ Then("I am on the legal aid applications page") do
 end
 
 Then("I am on the About the Financial Assessment page") do
-  expect(page).to have_content("Give your client temporary access to the service")
+  expect(page).to have_content("Send your client a link to access the service")
 end
 
 Then("I am on the check your answers page for other assets") do

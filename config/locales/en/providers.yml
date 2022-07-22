@@ -6,16 +6,11 @@ en:
         activity: |
           The link will be active for 7 days for security reasons.
           Your client can request a new link if they access the service after the link has expired.
-        list:
-          list: |
-            share 3 months of bank statements
-            tell us about their income and outgoings
-        sign_in_para: "We'll send your client an email with a link to the service so they can:"
         section_2:
           heading: Your client's email address
         secure_link_para: Send an email to your client with a secure link to the online assessment.
         send_client_link: Send link
-        title: Give your client temporary access to the service
+        title: Send your client a link to access the service
     address_lookups:
       show:
         address_manual_link: Enter address manually
