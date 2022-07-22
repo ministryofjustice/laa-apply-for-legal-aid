@@ -1003,8 +1003,8 @@ en:
         list_heading_two: 2. Select a bank
         your_client_selects: Your client selects their bank then signs in to their online banking website or app.
         image_alt_1: GOV.UK page asking the user to select from a list of banks.
-        list_heading_three: 3. Choose which accounts to share
-        your_client_chooses: Your client chooses the accounts they want to share. Bank statements from the last 3 months will be shared securely with the LAA.
+        list_heading_three: 3. Share bank accounts
+        your_client_chooses: Your client must share all of their bank accounts, including joint accounts and accounts with no money in them. Bank statements from the last 3 months will be shared securely with the LAA.
         image_alt_2: Online banking app asking the user to select the accounts they want to share.
         list_heading_four: 4. Confirmation
         your_client_will_see: Your client will see a message confirming they've successfully shared their bank statements. They'll be asked if they have any more bank accounts to share.
