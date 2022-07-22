@@ -1223,4 +1223,4 @@ Layout/LineContinuationLeadingSpace:
   Exclude:
     - 'spec/requests/providers/capital_assessment_results_spec.rb'
     - 'spec/requests/providers/capital_income_assessment_results_spec.rb'
-   
+
