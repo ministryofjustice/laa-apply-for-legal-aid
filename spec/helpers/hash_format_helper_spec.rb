@@ -4,10 +4,10 @@ RSpec.describe HashFormatHelper, type: :helper do
   let(:source) { { key: "value", sub_hash: { sub_key: "sub_value" }, array_hash: [{ array_one: "array_value" }, { array_two: "array_value" }] } }
   let(:expected_response) do
     '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Key</dt><dd>Value</dd></dl>' \
-      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Hash</dt>'\
-      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Key</dt><dd>Sub_value</dd></dl></dl>'\
-      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Hash</dt>'\
-      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array One</dt><dd>Array_value</dd></dl>'\
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Hash</dt>' \
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Sub Key</dt><dd>Sub_value</dd></dl></dl>' \
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Hash</dt>' \
+      '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array One</dt><dd>Array_value</dd></dl>' \
       '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Array Two</dt><dd>Array_value</dd></dl></dl>'
   end
 
