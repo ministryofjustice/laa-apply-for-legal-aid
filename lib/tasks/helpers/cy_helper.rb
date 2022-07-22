@@ -34,7 +34,7 @@ private
   def copy_en_to_cy
     Rails.logger.info "copying en locale to cy"
     en_files = FILES_TO_TRANSLATE.map { |f| Rails.root.join("config/locales/en/#{f}.yml").to_s }
-    FileUtils.mkdir @cy_dir unless File.exist?(@cy_dir)
+    FileUtils.mkdir_p @cy_dir
     FileUtils.cp en_files, @cy_dir, verbose: true
   end
 

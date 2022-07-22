@@ -5,11 +5,11 @@ class PassportedStateMachine < BaseStateMachine
 
     event :provider_enter_means do
       transitions from: %i[
-        applicant_details_checked
-        delegated_functions_used
-        provider_entering_means
-        use_ccms
-      ],
+                    applicant_details_checked
+                    delegated_functions_used
+                    provider_entering_means
+                    use_ccms
+                  ],
                   to: :provider_entering_means,
                   after: proc { |_legal_aid_application|
                     update!(ccms_reason: nil) unless ccms_reason.nil?
@@ -18,10 +18,10 @@ class PassportedStateMachine < BaseStateMachine
 
     event :check_passported_answers do
       transitions from: %i[
-        provider_entering_means
-        delegated_functions_used
-        provider_entering_merits
-      ],
+                    provider_entering_means
+                    delegated_functions_used
+                    provider_entering_merits
+                  ],
                   to: :checking_passported_answers
     end
 

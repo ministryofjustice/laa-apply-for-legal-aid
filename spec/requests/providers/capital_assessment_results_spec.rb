@@ -95,7 +95,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
           it "displays the correct result" do
             expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
+            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
                                                        " amount may change because they received disregarded scheme or charity payments.")
           end
         end
@@ -137,7 +137,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
           it "displays manual check required" do
             expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
+            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
                                                        " amount may change because:")
             expect(unescaped_response_body).to include("they received disregarded scheme or charity payments")
             expect(unescaped_response_body).to include("they're prohibited from selling or borrowing against their assets")
@@ -167,7 +167,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
           it "displays manual check required" do
             expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
+            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
                                                        " amount may change because they're prohibited from selling or borrowing against their assets.")
           end
         end
@@ -192,8 +192,8 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
         it "displays the correct result" do
           expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-          expect(unescaped_response_body).to include("We calculated that your client does not need to pay towards legal"\
-                                                     " aid, but this may change because you entered further details about"\
+          expect(unescaped_response_body).to include("We calculated that your client does not need to pay towards legal" \
+                                                     " aid, but this may change because you entered further details about" \
                                                      " their employment.")
         end
       end
@@ -208,8 +208,8 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
         it "displays the correct result" do
           expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-          expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
-                                                     " amount may change because you entered further details about their"\
+          expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
+                                                     " amount may change because you entered further details about their" \
                                                      " employment.")
         end
 
@@ -222,7 +222,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
           it "displays the correct result" do
             expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
+            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
                                                        " amount may change because:")
             expect(unescaped_response_body).to include("they received disregarded scheme or charity payments")
             expect(unescaped_response_body).to include("you entered further details about their employment")
@@ -239,7 +239,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
           it "displays the correct result" do
             expect(unescaped_response_body).to include(I18n.t("manual_check_required.heading", name: applicant_name, scope: locale_scope))
-            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the"\
+            expect(unescaped_response_body).to include("We calculated that your client should pay towards legal aid, but the" \
                                                        " amount may change because:")
             expect(unescaped_response_body).to include("they received disregarded scheme or charity payments")
             expect(unescaped_response_body).to include("they're prohibited from selling or borrowing against their assets")

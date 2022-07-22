@@ -50,7 +50,7 @@ module Reports
           let(:tempfile) { Rails.root.join("tmp/bank_transactions.csv") }
 
           it "creates a local file" do
-            File.unlink(tempfile) if File.exist?(tempfile)
+            FileUtils.rm_rf(tempfile)
             subject
             expect(File.exist?(tempfile)).to be true
           end

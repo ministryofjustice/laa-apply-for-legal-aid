@@ -36,58 +36,58 @@ class BaseStateMachine < ApplicationRecord
 
     event :enter_applicant_details do
       transitions from: %i[
-        initiated
-        applicant_details_checked
-        provider_entering_means
-        checking_applicant_details
-        use_ccms
-      ],
+                    initiated
+                    applicant_details_checked
+                    provider_entering_means
+                    checking_applicant_details
+                    use_ccms
+                  ],
                   to: :entering_applicant_details
     end
 
     event :check_applicant_details do
       transitions from: %i[
-        entering_applicant_details
-        applicant_details_checked
-        provider_confirming_applicant_eligibility
-        use_ccms
-      ],
+                    entering_applicant_details
+                    applicant_details_checked
+                    provider_confirming_applicant_eligibility
+                    use_ccms
+                  ],
                   to: :checking_applicant_details
     end
 
     event :applicant_details_checked do
       transitions from: %i[
-        provider_entering_means
-        checking_applicant_details
-        provider_confirming_applicant_eligibility
-        use_ccms
-        delegated_functions_used
-      ],
+                    provider_entering_means
+                    checking_applicant_details
+                    provider_confirming_applicant_eligibility
+                    use_ccms
+                    delegated_functions_used
+                  ],
                   to: :applicant_details_checked,
                   after: proc { |legal_aid_application| CleanupCapitalAttributes.call(legal_aid_application) }
     end
 
     event :provider_used_delegated_functions do
       transitions from: %i[
-        provider_entering_means
-        applicant_details_checked
-        delegated_functions_used
-        checking_applicant_details
-        provider_confirming_applicant_eligibility
-      ],
+                    provider_entering_means
+                    applicant_details_checked
+                    delegated_functions_used
+                    checking_applicant_details
+                    provider_confirming_applicant_eligibility
+                  ],
                   to: :delegated_functions_used
     end
 
     event :use_ccms do
       transitions from: %i[
-        initiated
-        entering_applicant_details
-        applicant_details_checked
-        delegated_functions_used
-        provider_confirming_applicant_eligibility
-        applicant_entering_means
-        use_ccms
-      ],
+                    initiated
+                    entering_applicant_details
+                    applicant_details_checked
+                    delegated_functions_used
+                    provider_confirming_applicant_eligibility
+                    applicant_entering_means
+                    use_ccms
+                  ],
                   to: :use_ccms,
                   after: proc { |reason|
                     raise "Invalid ccms_reason" unless reason.in?(VALID_CCMS_REASONS)
@@ -110,12 +110,12 @@ class BaseStateMachine < ApplicationRecord
 
     event :check_merits_answers do
       transitions from: %i[
-        provider_entering_merits
-        checked_merits_answers
-        provider_entering_merits
-        submitting_assessment
-        assessment_submitted
-      ],
+                    provider_entering_merits
+                    checked_merits_answers
+                    provider_entering_merits
+                    submitting_assessment
+                    assessment_submitted
+                  ],
                   to: :checking_merits_answers
     end
 
