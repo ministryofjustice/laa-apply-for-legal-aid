@@ -10,11 +10,11 @@ class NonPassportedStateMachine < BaseStateMachine
 
     event :provider_confirm_applicant_eligibility do
       transitions from: %i[
-        applicant_details_checked
-        delegated_functions_used
-        provider_confirming_applicant_eligibility
-        provider_assessing_means
-      ],
+                    applicant_details_checked
+                    delegated_functions_used
+                    provider_confirming_applicant_eligibility
+                    provider_assessing_means
+                  ],
                   to: :provider_confirming_applicant_eligibility
     end
 
