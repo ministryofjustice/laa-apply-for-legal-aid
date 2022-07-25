@@ -39,7 +39,7 @@ module Flow
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: lambda do |application|
-            next_step = application.applicant_employed? == false && application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
+            next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
 
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
               application.employment_journey_ineligible? ? :use_ccms_employed : next_step
