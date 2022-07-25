@@ -65,7 +65,7 @@ module CCMS
           log: false,
           log_level: :debug,
           open_timeout: 180,
-          read_timeout: 180
+          read_timeout: 180,
         )
       end
       # :nocov:
