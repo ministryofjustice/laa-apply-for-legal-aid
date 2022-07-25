@@ -39,10 +39,12 @@ module Flow
         applicant_employed: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_employed_index_path(application) },
           forward: lambda do |application|
+            next_step = application.applicant_employed? == false && application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
+
             if Setting.enable_employed_journey? && application.provider.employment_permissions?
-              application.employment_journey_ineligible? ? :use_ccms_employed : :open_banking_consents
+              application.employment_journey_ineligible? ? :use_ccms_employed : next_step
             else
-              application.applicant_not_employed? ? :open_banking_consents : :use_ccms_employed
+              application.applicant_not_employed? ? next_step : :use_ccms_employed
             end
           end,
         },
@@ -108,7 +110,7 @@ module Flow
             if application.applicant_receives_benefit?
               :capital_introductions
             else
-              application.uploading_bank_statements? ? :bank_statements : :open_banking_guidances
+              :open_banking_consents
             end
           end,
         },
@@ -118,13 +120,10 @@ module Flow
         open_banking_consents: {
           path: ->(application) { urls.providers_legal_aid_application_open_banking_consents_path(application) },
           forward: lambda do |application|
-            next_step = :open_banking_guidances
-            next_step = :substantive_applications if application.applicant_employed? == false && application.used_delegated_functions?
-
-            if application.uploading_bank_statements?
-              application.provider_received_citizen_consent? ? next_step : :bank_statements
+            if application.provider_received_citizen_consent?
+              :open_banking_guidances
             else
-              application.provider_received_citizen_consent? ? next_step : :use_ccms
+              application.uploading_bank_statements? ? :bank_statements : :use_ccms
             end
           end,
         },
