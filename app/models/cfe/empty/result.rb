@@ -59,6 +59,10 @@ module CFE
         assessment[:capital]
       end
 
+      def capital_assessment_result
+        0.0
+      end
+
       def gross_income_breakdown
         assessment[:gross_income]
       end
