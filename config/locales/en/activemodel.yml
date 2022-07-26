@@ -232,7 +232,7 @@ en:
               greater_than: Income amount must be more than zero
               too_many_decimals: Amount must not include more than 2 decimal numbers
             relationship:
-              blank: "Select if they are a child relative or adult relative"
+              blank: Select if they are a child dependant or adult dependant
             has_assets_more_than_threshold:
               blank_message: "Select yes if they have assets worth more than £8,000"
             assets_value:
