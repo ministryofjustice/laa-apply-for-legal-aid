@@ -18,7 +18,7 @@
             <%= t('.details_summary') %>
           </span>
       </summary>
-      <div class="govuk-details__text">
+      <div class="govuk-details__text govuk-!-padding-bottom-1">
         <%= t('.details_content_html') %>
         <%= list_from_translation_path('.open_banking_consents.show.details') %>
       </div>
@@ -52,9 +52,9 @@
     <p class="govuk-body"><%= t('.you_need_to') %></p>
     <div class="govuk-!-padding-2"></div>
 
-    <%= print_button t('.download_button') %>
-
-    <div class="govuk-!-padding-2"></div>
+<!--    TODO add this back in later -->
+    <%#= print_button t('.download_button') %>
+<!--    <div class="govuk-!-padding-2"></div>-->
 
     <%= form.govuk_collection_radio_buttons :can_client_use_truelayer,
                                             yes_no_options,
