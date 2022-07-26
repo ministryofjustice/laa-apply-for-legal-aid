@@ -192,6 +192,7 @@ jobs:
         name: Run ruby tests
         command: |
           TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+          echo "${TESTFILES}"
           bundle exec rspec --format progress \
           --format RspecJunitFormatter \
           -o /tmp/test-results/rspec/rspec.xml \

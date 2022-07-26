@@ -29,11 +29,11 @@ When("I have completed a non-passported application and reached the statement of
 end
 
 Then(/^I upload an evidence file named ['|"](.*?)['|"]/) do |filename|
-  attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: "dz-hidden-input", make_visible: true)
+  attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: "dz-hidden-input", make_visible: true, wait: 15)
 end
 
 Then(/^I upload the fixture file named ['|"](.*?)['|"]/) do |filename|
-  attach_file(Rails.root.join("spec/fixtures/files/#{filename}"), class: "dz-hidden-input", make_visible: true)
+  attach_file(Rails.root.join("spec/fixtures/files/#{filename}"), class: "dz-hidden-input", make_visible: true, wait: 15)
 end
 
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|
