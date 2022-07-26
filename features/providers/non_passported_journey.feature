@@ -289,7 +289,6 @@ Feature: Non-passported applicant journeys
     When I select "None of the above"
     And I click 'Save and continue'
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on a page with title "Share bank statements with online banking"
@@ -365,8 +364,5 @@ Feature: Non-passported applicant journeys
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to make a substantive application now?"
     When I choose "No"
-    And I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    When I choose "Yes"
     And I click 'Save and continue'
     Then I should be on a page showing "You told us you've used delegated functions"
