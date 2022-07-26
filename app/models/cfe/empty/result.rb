@@ -39,6 +39,10 @@ module CFE
         result_summary[:overall_result][:income_contribution]
       end
 
+      def income_contribution_required?
+        income_assessment_result == "contribution_required"
+      end
+
       def capital_summary
         result_summary[:capital]
       end

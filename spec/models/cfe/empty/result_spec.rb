@@ -319,6 +319,12 @@ module CFE
         end
       end
 
+      describe "income_contribution_required?" do
+        it "returns false for income_contribution_required?" do
+          expect(empty_cfe_result.income_contribution_required?).to be false
+        end
+      end
+
       describe "capital_assessment_result" do
         it "returns no_assessment for capital_assessment_result" do
           expect(empty_cfe_result.capital_assessment_result).to eq "no_assessment"
