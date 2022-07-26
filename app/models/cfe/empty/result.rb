@@ -32,7 +32,7 @@ module CFE
       end
 
       def income_assessment_result
-        disposable_income[:assessment_result]
+        "no_assessment"
       end
 
       def income_contribution_required?
