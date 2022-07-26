@@ -14,6 +14,7 @@ class BaseFileUploaderForm < BaseForm
     image/tiff
     image/bmp
     image/x-bitmap
+    csv
   ].freeze
 
   WORD_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document".freeze

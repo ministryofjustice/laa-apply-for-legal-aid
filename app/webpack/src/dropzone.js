@@ -8,7 +8,7 @@ const ZERO_BYTE_ERR = 'FILENAME has no content'
 const ERR_CONTENT_TYPE = 'FILENAME is not a valid file type'
 const ACCEPTED_FILES = [
   // dropzone checks both the mimetype and the file extension so this list covers everything
-  '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf',
+  '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf', '.csv',
   'application/pdf',
   'application/msword',
   'application/vnd.oasis.opendocument.text',
