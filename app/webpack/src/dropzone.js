@@ -8,7 +8,7 @@ const ZERO_BYTE_ERR = 'FILENAME has no content'
 const ERR_CONTENT_TYPE = 'FILENAME is not a valid file type'
 const ACCEPTED_FILES = [
   // dropzone checks both the mimetype and the file extension so this list covers everything
-  '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf', '.csv',
+  '.doc', '.docx', '.rtf', '.odt', '.jpg', '.jpeg', '.bpm', '.png', '.tif', '.tiff', '.pdf',
   'application/pdf',
   'application/msword',
   'application/vnd.oasis.opendocument.text',
@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', event => {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
     const chooseFilesBtn = document.querySelector('#dz-upload-button')
+    url.includes("bank_statement") ? ACCEPTED_FILES.push('.csv') : ACCEPTED_FILES
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
