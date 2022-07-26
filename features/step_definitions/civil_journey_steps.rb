@@ -636,7 +636,7 @@ Given("I add the details for a child dependant") do
   steps %(
     Then I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 17 year old
-    And I choose "They're a child relative"
+    And I choose "Child dependant"
     And I choose option "dependant-in-full-time-education-field"
     And I choose option "dependant-has-income-field"
     And I choose option "dependant-has-assets-more-than-threshold-field"
