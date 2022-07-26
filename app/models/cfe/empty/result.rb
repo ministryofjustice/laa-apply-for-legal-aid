@@ -19,28 +19,24 @@ module CFE
         CFE::Empty::EmptyResult.blank_cfe_result[:assessment]
       end
 
-      def disposable_income
-        disposable_income_summary[:total_disposable_income]
-      end
+      # def disposable_income
+      #   disposable_income_summary[:total_disposable_income]
+      # end
 
       def capital_contribution_required?
         capital_assessment_result == "contribution_required"
       end
 
       def capital_contribution
-        capital[:capital_contribution]
+        result_summary[:overall_result][:capital_contribution]
       end
 
       def income_assessment_result
         "no_assessment"
       end
 
-      def income_contribution_required?
-        income_assessment_result == "contribution_required"
-      end
-
       def income_contribution
-        0.0
+        result_summary[:overall_result][:income_contribution]
       end
 
       def capital_summary
@@ -60,7 +56,7 @@ module CFE
       end
 
       def capital_assessment_result
-        0.0
+        "no_assessment"
       end
 
       def gross_income_breakdown
