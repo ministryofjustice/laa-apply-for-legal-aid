@@ -54,7 +54,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
         let(:attachments) { [attachment] }
         let(:attachment) { create(:attachment, :bank_statement) }
 
-        # NOTE: factory implicitily attachs the hello_world.pdf
+        # NOTE: factory implicitly attaches the hello_world.pdf
         it "displays the name of the uploaded file on the page" do
           request
           expect(response.body).to include("hello_world.pdf")
@@ -106,6 +106,20 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
     context "when upload button clicked" do
       let(:button_clicked) { upload_button }
 
+      context "when the file is a csv" do
+        let(:file) { uploaded_file("spec/fixtures/files/sample_csv.csv", "text/csv") }
+
+        it "saves the object" do
+          request
+          expect(legal_aid_application.reload.attachments.length).to match(1)
+        end
+
+        it "stores the original filename" do
+          request
+          expect(legal_aid_application.reload.attachments.last.original_filename).to eq "sample_csv.csv"
+        end
+      end
+
       context "with acceptable bank statement" do
         let(:file) { uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") }
 
@@ -156,7 +170,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
           end
         end
 
-        context "when the application has one bank statment attachment already" do
+        context "when the application has one bank statement attachment already" do
           let(:bank_statement_evidence) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
           let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement_evidence]) }
 
@@ -240,7 +254,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
         it "displays error indicating file is of the wrong content type" do
           request
-          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("zip.zip must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF")
+          expect(response.body).to have_selector("h2", text: "There is a problem").and have_link("zip.zip must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF")
         end
       end
 

@@ -24,6 +24,7 @@ module Providers
     ].freeze
 
     WORD_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document".freeze
+    CSV_DOCUMENT = "text/csv".freeze
 
     attr_accessor :original_file,
                   :original_filename,
@@ -116,7 +117,9 @@ module Providers
 
     def disallowed_content_type
       return if Marcel::Magic.by_magic(original_file)&.type.in?(ALLOWED_CONTENT_TYPES)
+      # TODO: why isn't the file_type being caught in ALLOWED_CONTENT_TYPES?
       return if original_file.content_type == WORD_DOCUMENT
+      return if original_file.content_type == CSV_DOCUMENT
 
       errors.add(:original_file, :content_type_invalid, file_name: original_filename)
     end
