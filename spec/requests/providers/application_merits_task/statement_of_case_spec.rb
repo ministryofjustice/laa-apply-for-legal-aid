@@ -146,6 +146,23 @@ module Providers
             expect(response).to have_http_status(:ok)
           end
 
+          context "when the file is a csv" do
+            let(:original_file) { uploaded_file("spec/fixtures/files/sample_csv.csv", "text/csv") }
+            let(:button_clicked) { upload_button }
+
+            it "does not save the object" do
+              subject
+              expect(legal_aid_application.reload.attachments.length).to match(0)
+              expect(statement_of_case).to be_nil
+            end
+
+            it "returns error message" do
+              subject
+              error = I18n.t("#{i18n_error_path}.content_type_invalid", file_name: original_file.original_filename)
+              expect(response.body).to include(error)
+            end
+          end
+
           context "when a word document" do
             let(:original_file) { uploaded_file("spec/fixtures/files/documents/hello_world.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") }
             let(:button_clicked) { upload_button }
