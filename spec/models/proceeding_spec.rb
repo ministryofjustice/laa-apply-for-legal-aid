@@ -2,12 +2,14 @@ require "rails_helper"
 
 RSpec.describe Proceeding, type: :model do
   let(:matter_code) { "KSEC8" }
+  let(:df_used) { nil }
   let(:df_date) { nil }
   let(:proceeding) do
     create :proceeding,
            :da001,
            proceeding_case_id: 55_123_456,
            ccms_matter_code: matter_code,
+           used_delegated_functions: df_used,
            used_delegated_functions_on: df_date
   end
 
@@ -68,41 +70,25 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
-  describe "#used_delegated_functions?" do
-    context "when df not used" do
-      it "returns false" do
-        expect(proceeding.used_delegated_functions?).to be false
-      end
-    end
-
-    context "when df_used" do
-      let(:df_date) { 2.days.ago }
-
-      it "returns true" do
-        expect(proceeding.used_delegated_functions?).to be true
-      end
-    end
-  end
-
   describe "used_delegated_functions?" do
-    subject { proceeding.used_delegated_functions? }
+    subject(:used_delegated_functions?) { proceeding.used_delegated_functions? }
 
-    let(:proceeding) { create :proceeding, :da001, used_delegated_functions_on: df_date }
+    context "when delegated functions question not answered" do
+      it { is_expected.to be false }
+    end
 
     context "when delegated functions not used" do
+      let(:df_used) { false }
       let(:df_date) { nil }
 
-      it "returns false" do
-        expect(subject).to be false
-      end
+      it { is_expected.to be false }
     end
 
     context "when delegated functions used" do
+      let(:df_used) { true }
       let(:df_date) { Time.zone.yesterday }
 
-      it "returns true" do
-        expect(subject).to be true
-      end
+      it { is_expected.to be true }
     end
   end
 

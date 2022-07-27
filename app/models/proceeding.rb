@@ -26,7 +26,7 @@ class Proceeding < ApplicationRecord
   end
 
   def used_delegated_functions?
-    used_delegated_functions_on.present?
+    used_delegated_functions.eql?(true) && used_delegated_functions_on.present?
   end
 
   def case_p_num
