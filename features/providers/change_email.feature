@@ -12,6 +12,9 @@ Feature: Change applicant email address
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
     Then I choose 'Yes'
     Then I click 'Save and continue'
+    Then I should be on a page with title 'Share bank statements with online banking'
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
     Then I should be on a page with title "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
@@ -34,6 +37,9 @@ Feature: Change applicant email address
     And I select "None of the above"
     When I click 'Save and continue'
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
+    Then I should be on a page with title 'Share bank statements with online banking'
     Then I choose 'Yes'
     Then I click 'Save and continue'
     Then I should be on a page showing "Enter your client's email address"

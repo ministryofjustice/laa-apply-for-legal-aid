@@ -79,6 +79,8 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         end
 
         context "when yes" do
+          let(:params) { { applicant: { employed: "true" } } }
+
           it "redirects to the use ccms employed page" do
             expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
           end
@@ -87,8 +89,28 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
         context "when no" do
           let(:params) { { applicant: { employed: "false" } } }
 
-          it "redirects to the open banking consents page" do
-            expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+          context "when used delegated functions is false" do
+            it "redirects to the open banking consents page" do
+              expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+            end
+          end
+
+          context "when used_delegated_functions is true" do
+            let(:legal_aid_application) do
+              create :legal_aid_application,
+                     :with_non_passported_state_machine,
+                     :applicant_details_checked,
+                     :with_proceedings,
+                     :with_delegated_functions_on_proceedings,
+                     explicit_proceedings: [:da004],
+                     df_options: { DA004: [Time.zone.today, Time.zone.today] },
+                     applicant:
+            end
+
+            it "redirects to the substantive application page" do
+              request
+              expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
+            end
           end
         end
       end
@@ -125,9 +147,29 @@ RSpec.describe Providers::ApplicantEmployedController, type: :request do
     context "when applicant is employed and the provider has employed permissions" do
       before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
-      it "redirects to the proceedings search page" do
-        subject
-        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+      context "when use delegated functions is false" do
+        it "redirects to the open banking consents page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+        end
+      end
+
+      context "when used_delegated_functions is true" do
+        let(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_non_passported_state_machine,
+                 :applicant_details_checked,
+                 :with_proceedings,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: [:da004],
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] },
+                 applicant:
+        end
+
+        it "redirects to the substantive application page" do
+          subject
+          expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
+        end
       end
     end
   end

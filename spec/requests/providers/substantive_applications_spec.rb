@@ -62,64 +62,62 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
       expect(legal_aid_application.state).to eq("delegated_functions_used")
     end
 
-    it "redirects to non passported client email address page" do
-      expect(response).to redirect_to(
-        providers_legal_aid_application_email_address_path(legal_aid_application),
-      )
-    end
+    context "when yes is selected" do
+      let(:substantive_application) { true }
 
-    context "with positive benefit check" do
-      let(:legal_aid_application) do
-        create(
-          :legal_aid_application,
-          :with_positive_benefit_check_result,
-          :with_passported_state_machine,
-          :applicant_details_checked,
-        )
-      end
-
-      it "redirects to capital introductions" do
-        expect(response).to redirect_to(
-          providers_legal_aid_application_capital_introduction_path(legal_aid_application),
-        )
-      end
-    end
-
-    context "with a negative benefit check" do
-      let(:ignore_subject) { true }
-      let(:legal_aid_application) do
-        create(
-          :legal_aid_application,
-          :with_negative_benefit_check_result,
-          :with_non_passported_state_machine,
-          :applicant_details_checked,
-        )
-      end
-
-      context "and a dwp_override with evidence" do
-        let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: }
+      context "with positive benefit check" do
+        let(:legal_aid_application) do
+          create(
+            :legal_aid_application,
+            :with_positive_benefit_check_result,
+            :with_passported_state_machine,
+            :applicant_details_checked,
+          )
+        end
 
         it "redirects to capital introductions" do
-          subject
           expect(response).to redirect_to(
             providers_legal_aid_application_capital_introduction_path(legal_aid_application),
           )
         end
       end
 
-      context "and a dwp_override without evidence" do
-        let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: }
-
-        it "redirects to client email address page" do
-          subject
-          expect(response).to redirect_to(
-            providers_legal_aid_application_email_address_path(legal_aid_application),
+      context "with a negative benefit check" do
+        let(:ignore_subject) { true }
+        let(:legal_aid_application) do
+          create(
+            :legal_aid_application,
+            :with_negative_benefit_check_result,
+            :with_non_passported_state_machine,
+            :applicant_details_checked,
           )
+        end
+
+        context "and a dwp_override with evidence" do
+          let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: }
+
+          it "redirects to capital introductions" do
+            subject
+            expect(response).to redirect_to(
+              providers_legal_aid_application_capital_introduction_path(legal_aid_application),
+            )
+          end
+        end
+
+        context "and a dwp_override without evidence" do
+          let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: }
+
+          it "redirects to the open banking consents page" do
+            subject
+            expect(response).to redirect_to(
+              providers_legal_aid_application_open_banking_consents_path(legal_aid_application),
+            )
+          end
         end
       end
     end
 
-    context "No selected" do
+    context "when no is selected" do
       let(:substantive_application) { false }
 
       it "updates the application" do
@@ -128,7 +126,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         expect(legal_aid_application.state).to eq("delegated_functions_used")
       end
 
-      it "redirects to online banking" do
+      it "redirects to the delegated confirmation page" do
         expect(response).to redirect_to(providers_legal_aid_application_delegated_confirmation_index_path)
       end
     end

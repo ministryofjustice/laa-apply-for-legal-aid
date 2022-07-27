@@ -162,6 +162,7 @@ Rails.application.routes.draw do
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"
+      resource :open_banking_guidance, only: %i[show update]
       resource :bank_statements, only: %i[show update destroy] do
         get "/list", to: "bank_statements#list"
       end

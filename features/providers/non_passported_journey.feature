@@ -289,9 +289,11 @@ Feature: Non-passported applicant journeys
     When I select "None of the above"
     And I click 'Save and continue'
     Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    And I should be on a page showing "Can your client share their bank statements with us via TrueLayer?"
     When I choose 'Yes'
     And I click 'Save and continue'
+    Then I should be on a page with title "Share bank statements with online banking"
+    Then I choose 'Yes'
+    Then I click 'Save and continue'
     Then I should be on the 'email_address' page showing "Enter your client's email address"
     When I enter the email address 'test@example.com'
     And I click 'Save and continue'
@@ -360,9 +362,6 @@ Feature: Non-passported applicant journeys
     And I should be on a page with title "What is your client's employment status?"
     And I select "None of the above"
     When I click 'Save and continue'
-    Then I should be on a page with title "We need your client's bank statements from the last 3 months"
-    When I choose "Yes"
-    And I click 'Save and continue'
     Then I should be on a page with title "Do you want to make a substantive application now?"
     When I choose "No"
     And I click 'Save and continue'
