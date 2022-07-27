@@ -148,7 +148,7 @@ jobs:
         command: bin/rails javascript_tests
     - run:
         name: Run Rubocop
-        command:  bundle exec rubocop
+        command:  bundle exec rubocop --server
     - run:
         name: Run erblint
         command: bin/rails erblint
