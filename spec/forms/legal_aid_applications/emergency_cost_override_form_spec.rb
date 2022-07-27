@@ -89,8 +89,8 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
     context "when delegated_functions used" do
       before do
-        create :proceeding, :da001, legal_aid_application:, substantive_cost_limitation:, lead_proceeding: true, used_delegated_functions_on: 35.days.ago.to_date
-        create :proceeding, :da004, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: 36.days.ago.to_date
+        create :proceeding, :da001, legal_aid_application:, substantive_cost_limitation:, lead_proceeding: true, used_delegated_functions: true, used_delegated_functions_on: 35.days.ago.to_date
+        create :proceeding, :da004, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions: true, used_delegated_functions_on: 36.days.ago.to_date
       end
 
       context "and the maximum substantive cost limit is below the threshold" do

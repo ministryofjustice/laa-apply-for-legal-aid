@@ -238,7 +238,7 @@ RSpec.describe ApplicationDigest do
           }
           laa.proceedings.each do |proceeding|
             used_date, reported_date = dates[proceeding.ccms_code]
-            proceeding.update!(used_delegated_functions_on: used_date, used_delegated_functions_reported_on: reported_date)
+            proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: used_date, used_delegated_functions_reported_on: reported_date)
           end
           laa.reload
         end

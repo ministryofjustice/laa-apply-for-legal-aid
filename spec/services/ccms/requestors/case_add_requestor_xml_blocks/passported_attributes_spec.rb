@@ -64,7 +64,7 @@ module CCMS
           context "on a Delegated Functions case" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
-                proceeding.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
 
@@ -483,7 +483,7 @@ module CCMS
           context "delegated functions used" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
-                proceeding.update!(used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today)
               end
             end
 

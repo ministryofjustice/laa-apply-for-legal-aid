@@ -68,7 +68,8 @@ RSpec.describe AggregatedCashIncome, type: :model do
 
       context "when delegated functions are used" do
         before do
-          application.proceedings.first.update!(used_delegated_functions_on: Date.parse("2021-01-28"),
+          application.proceedings.first.update!(used_delegated_functions: true,
+                                                used_delegated_functions_on: Date.parse("2021-01-28"),
                                                 used_delegated_functions_reported_on: Date.parse("2021-01-28"))
           application.reload
         end
