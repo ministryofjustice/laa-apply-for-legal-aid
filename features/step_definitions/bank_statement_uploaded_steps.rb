@@ -1,4 +1,4 @@
-Given("I have completed a non-passported application and reached the open banking consent with bank statement upload enabled") do
+Given("I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled") do
   Setting.setting.update!(enable_employed_journey: true)
 
   @legal_aid_application = create(
@@ -7,6 +7,7 @@ Given("I have completed a non-passported application and reached the open bankin
     :with_non_passported_state_machine,
     :provider_confirming_applicant_eligibility,
     :with_proceedings,
+    :with_employed_applicant,
     explicit_proceedings: %i[se014 da001],
     transaction_period_finish_on: "2022-07-08",
   )

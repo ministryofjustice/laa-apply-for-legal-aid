@@ -3,7 +3,7 @@ Feature: Bank statement flow
   @javascript
   Scenario: Bank statement upload permissions flow
     Given csrf is enabled
-    And I have completed a non-passported application and reached the open banking consent with bank statement upload enabled
+    And I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled
     And I should be on a page showing "Does your client use online banking?"
 
     When I choose 'No'
@@ -14,6 +14,10 @@ Feature: Bank statement flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     When I click 'Save and continue'
+    Then I should be on a page with title "HMRC has no record of your client's employment in the last 3 months"
+
+    When I fill "legal-aid-application-full-employment-details-field" with "Applicant also earns 50 gbp, some extra details about employment"
+    And I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 
     When I select 'Benefits'
