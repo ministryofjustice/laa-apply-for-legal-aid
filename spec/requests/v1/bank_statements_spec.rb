@@ -73,7 +73,7 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
         end
       end
 
-      context "when the application has one bank statment attachment already" do
+      context "when the application has one bank statement attachment already" do
         let(:bank_statement_evidence) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
         let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bank_statement_evidence]) }
 
@@ -84,7 +84,7 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
         end
       end
 
-      context "when the application has multiple attachments for statement of case already" do
+      context "when the application has multiple attachments for bank statement already" do
         let(:bs1) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence") }
         let(:bs2) { create(:attachment, :bank_statement, attachment_name: "bank_statement_evidence_1") }
         let!(:legal_aid_application) { create(:legal_aid_application, attachments: [bs1, bs2]) }
@@ -93,6 +93,15 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
           request
           expect(legal_aid_application.attachments.count).to be 3
           expect(legal_aid_application.attachments.order(:attachment_name).last.attachment_name).to eql("bank_statement_evidence_2")
+        end
+      end
+
+      context "when the file is a csv" do
+        let(:file) { uploaded_file("spec/fixtures/files/sample_csv.csv", "text/csv") }
+
+        it "saves the object" do
+          request
+          expect(legal_aid_application.attachments.count).to be 1
         end
       end
 

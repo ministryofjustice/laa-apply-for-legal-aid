@@ -465,7 +465,7 @@ en:
         info: We need bank statements from the last 3 months for all of your client's bank accounts.
         h2-heading: Uploaded files
         upload_file: Upload files
-        size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF or PDF.
+        size_hint: The maximum file size is 7MB. Files must be a DOC, DOCX, RTF, ODT, JPG, BMP, PNG, TIF, CSV or PDF.
         dropzone_message: Drag and drop files here or
         choose_files_btn: Choose files
         file_not_uploaded_error: Upload the selected file
