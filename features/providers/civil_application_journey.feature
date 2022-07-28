@@ -77,7 +77,7 @@ Feature: Civil application journeys
     Then I select an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Save and continue'
     And I should be on a page showing "What does your client want legal aid for?"
-    And I search for proceeding 'app'
+    And I search for proceeding 'dom'
     Then proceeding suggestions has results
     When I click clear search
     Then the results section is empty
@@ -474,37 +474,70 @@ Feature: Civil application journeys
   Scenario: I am able to view the client completed means answers
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has shared their financial information'
-    Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
-    Then I select 'Benefits'
+    When I click 'Continue'
+    Then I should be on a page showing "Which payments does your client receive?"
+    When I select 'Benefits'
     And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+
+    When I select 'Housing'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+
+    When I select 'Housing payments'
+    Then I enter rent_or_mortgage1 '100'
+    Then I enter rent_or_mortgage2 '100'
+    Then I enter rent_or_mortgage3 '100'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's income into categories"
+
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select benefits payments'
+    Then I select the first checkbox
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    When I click 'Save and continue'
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select housing payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose 'No'
-    Then I click 'Save and continue'
+
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
-    Then I click 'Save and continue'
+
+    When I select "My client has none of these savings or investments"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"
@@ -531,45 +564,8 @@ Feature: Civil application journeys
 
   @javascript @vcr
   Scenario: Completes the merits application for applicant that does not receive passported benefits
-    Given I start the merits application and the applicant has uploaded transaction data
-    Then I should be on a page showing 'Your client has shared their financial information'
-    Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
-    Then I select 'Benefits'
-    And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    And I click 'Save and continue'
-    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose 'No'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
-    Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    Then I select "My client has received none of these payments"
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'may need to pay towards legal aid'
-    Then I click 'Save and continue'
+    Given I have completed the non-passported means assessment and start the merits assessment
+#     Deleted lots of steps going through the provider finance questions as the scenario doesn't require going through these steps
     Then I should be on the 'merits_task_list' page showing 'Latest incident details\nNOT STARTED'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'

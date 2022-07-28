@@ -43,25 +43,6 @@ Feature: Citizen accessibility
     And the page is accessible
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you receive?"
-    And the page is accessible
-    And I select 'I receive none of these payments'
-    Then I click 'Save and continue'
-    Then I should be on the 'student_finance' page showing 'Do you get student finance?'
-    And the page is accessible
-    When I choose "Yes"
-    When I enter amount '5000'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you make?"
-    And the page is accessible
-    Then I select "Housing payments"
-    Then I click 'Save and continue'
-    Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
-    Then I select 'Housing payments'
-    Then I enter rent_or_mortgage1 '100'
-    Then I enter rent_or_mortgage2 '100'
-    Then I enter rent_or_mortgage3 '100'
-    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     And the page is accessible
     Then I click "Agree and submit"

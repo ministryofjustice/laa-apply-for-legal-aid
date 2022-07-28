@@ -83,32 +83,9 @@ RSpec.describe "employed incomes request", type: :request do
           expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
-        context "when provider is on passported journey" do
-          before do
-            provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-            application.update!(provider_received_citizen_consent: nil)
-          end
-
-          context "when the provider has confirmed the information" do
-            it "redirects to income summary page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
-            end
-          end
-        end
-
-        context "when provider is on bank statement upload journey" do
-          before do
-            provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-            application.update!(provider_received_citizen_consent: false)
-          end
-
-          context "when the provider has permission to upload bank statements" do
-            it "redirects to identify_types_of_incomes page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
-            end
-          end
+        it "redirects to income summary page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
         end
 
         context "when the applicant has reported income" do
@@ -118,7 +95,7 @@ RSpec.describe "employed incomes request", type: :request do
 
           it "redirects to check passported answers" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
           end
         end
 

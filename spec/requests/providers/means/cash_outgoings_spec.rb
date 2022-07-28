@@ -64,23 +64,58 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
     context "with valid params" do
       let(:params) { valid_params }
 
-      it "redirects to has_dependants" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
-      end
-
       it "updates the model attribute for no cash outgoings to false" do
         expect { request }.to change { legal_aid_application.reload.no_cash_outgoings }.from(nil).to(false)
+      end
+
+      context "with previously selected income categories" do
+        let(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+        let!(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant,
+                 :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types
+        end
+
+        it "redirects to income summary page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        end
+      end
+
+      context "with outgoings categories but no income categories" do
+        let(:outgoings_categories) { create_list :transaction_type, 3, :debit_with_standard_name }
+        let(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_applicant,
+                 :with_non_passported_state_machine,
+                 :applicant_entering_means,
+                 transaction_types: outgoings_categories
+        end
+
+        it "redirects to the outgoings summary page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+        end
+      end
+
+      context "with no income categories and no outgoings categories" do
+        let(:params) { nothing_selected_params }
+        let(:legal_aid_application) do
+          create :legal_aid_application,
+                 :with_applicant,
+                 :with_non_passported_state_machine,
+                 :applicant_entering_means,
+                 transaction_types: []
+        end
+
+        it "redirects to the dependants page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
       end
     end
 
     context "with nothing selected of the above" do
       let(:params) { nothing_selected_params }
-
-      it "redirects to has_dependants" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
-      end
 
       it "updates the model attribute for no cash outgoings to true" do
         expect { request }.to change { legal_aid_application.reload.no_cash_outgoings }.from(nil).to(true)

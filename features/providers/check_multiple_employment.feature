@@ -15,17 +15,48 @@ Feature: Check multiple employment
 
     When I fill "legal-aid-application-full-employment-details-field" with "Paisley also earns 50 gbp"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client's income"
+#
+#    Then I click 'Continue'
+    Then I should be on a page showing "Which payments does your client receive?"
 
-    When I choose "Yes"
+    When I select 'Benefits'
     And I click 'Save and continue'
-    Then I should be on a page showing "Does your client have any dependants?"
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
+    Then I should be on a page showing "Which payments does your client make?"
 
-    When I choose "Yes"
+    When I select 'Housing payments'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    And I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    Then I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select housing payments'
+
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    Then the page is accessible
+    Then I click 'Save and continue'
+    Then I should be on the 'dependants' page showing "Does your client have any dependants?"
+
+    When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 

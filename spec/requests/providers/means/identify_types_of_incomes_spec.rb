@@ -90,19 +90,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
         it "redirects to the income summary index page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path)
-        end
-      end
-
-      context "when provider is on bank statement upload journey" do
-        before do
-          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-          legal_aid_application.update!(provider_received_citizen_consent: false)
-        end
-
-        it "redirects to the means cash incomes page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
         end
       end
     end
@@ -152,7 +140,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
         it "redirects to the income summary index page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+          expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
         end
       end
 
