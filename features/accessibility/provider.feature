@@ -82,21 +82,42 @@ Feature: Provider accessibility
   @javascript @vcr
   Scenario: I complete the non-passported means assessment and it is accessible
     Given I start the merits application with bank transactions with no transaction type category
+    And I used delegated functions
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     And the page is accessible
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    And the page is accessible
-    Then I choose "No"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Which payments does your client receive?"
     And the page is accessible
-    Then I select 'Benefits'
+    When I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+    And the page is accessible
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    And the page is accessible
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Which payments does your client make?"
+    And the page is accessible
+    When I select 'Housing payments'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+    And the page is accessible
+    When I select "None of the above"
     And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And the page is accessible
-    Then I click the first link 'View statements and add transactions'
+    And I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select benefits payments'
+    And the page is accessible
+    Then I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+    And the page is accessible
+    Then I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select housing payments'
     And the page is accessible
     Then I select the first checkbox
     And I click 'Save and continue'
@@ -113,20 +134,6 @@ Feature: Provider accessibility
     Then I should be on a page showing "Does your client have any other dependants?"
     And the page is accessible
     Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    And the page is accessible
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
-    And the page is accessible
-    Then I select 'Housing payments'
-    Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    Then I click the first link 'View statements and add transactions'
-    And the page is accessible
-    Then I select the first checkbox
-    And I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     And the page is accessible

@@ -40,23 +40,7 @@ en:
         hint: Select one bank at a time. You'll be able to select more later if you have accounts with different banks.
       create:
         error: Select a bank
-    cash_incomes:
-      show:
-        page_heading: Select payments you receive in cash
-      cash_income_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: I receive none of these payments in cash
-    cash_outgoings:
-      show:
-        page_heading: Select payments you make in cash
-      cash_outgoings_form:
-        info: Cash means physical money like banknotes and coins.
-        none_selected: I make none of these payments in cash
     check_answers:
-      cash_transactions:
-        cash_transactions_credits_header: Payments you receive in cash
-        cash_transactions_debits_header: Payments you make in cash
-        none: None
       index:
         h1-heading: Check your answers and submit information
         bank_accounts:
@@ -67,14 +51,7 @@ en:
           sort_code: Sort code
           balance: Balance
         link_other_account: Add another bank account
-        payments_receive_heading: Payments you receive
-        payments_make_heading: Payments you make
         submit_button: Agree and submit
-        income_outgoings: Your income and outgoings
-      student_finance:
-        student_finance: Student finance
-        do_you_get: Do you get student finance?
-        how_much: How much student finance will you get this academic year?
     contact_providers:
       show:
         title: Contact your solicitor to continue your application
@@ -102,16 +79,6 @@ en:
     has_offline_accounts:
       new:
         error: Select yes if you have current accounts you cannot access online
-    identify_types_of_incomes:
-      show:
-        page_heading: Which of the following payments do you receive?
-      update:
-        none_selected: Select if you receive any types of income
-    identify_types_of_outgoings:
-      show:
-        page_heading: Which of the following payments do you make?
-      update:
-        none_selected: Select if you make any regular payments
     legal_aid_applications:
       index:
         case_reference: 'Case reference:'

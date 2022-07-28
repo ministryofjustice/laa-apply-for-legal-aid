@@ -4,8 +4,6 @@ RSpec.describe "check your answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: }
-  let(:vehicle) { create :vehicle, :populated }
-  let(:own_vehicle) { true }
   let(:credit) { create :transaction_type, :credit_with_standard_name }
   let(:debit) { create :transaction_type, :debit_with_standard_name }
   let!(:legal_aid_application) do
@@ -13,12 +11,6 @@ RSpec.describe "check your answers requests", type: :request do
            :with_non_passported_state_machine,
            :applicant_entering_means,
            :with_everything,
-           :with_student_finance,
-           :with_irregular_income,
-           vehicle:,
-           own_vehicle:,
-           has_restrictions:,
-           restrictions_details:,
            provider:
   end
   let!(:application_transaction_types) do
@@ -43,17 +35,6 @@ RSpec.describe "check your answers requests", type: :request do
 
     it "displays the correct section headings" do
       expect(response.body).to include("Your bank accounts")
-      expect(response.body).to include("Payments you receive")
-      expect(response.body).to include("Payments you receive in cash")
-      expect(response.body).to include("Payments you make")
-      expect(response.body).to include("Payments you make in cash")
-      expect(response.body).to include("Do you get student finance?")
-      expect(response.body).to include("How much student finance will you get this academic year?")
-    end
-
-    it "displays the correct URLs for changing values" do
-      expect(response.body).to have_change_link(:incomings, citizens_identify_types_of_income_path)
-      expect(response.body).to have_change_link(:payments, citizens_identify_types_of_outgoing_path)
     end
 
     it 'changes the state to "checking_citizen_answers"' do
@@ -110,25 +91,6 @@ RSpec.describe "check your answers requests", type: :request do
     it "syncs the application" do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       subject
-    end
-  end
-
-  describe "PATCH /citizens/check_answers/reset" do
-    subject { patch "/citizens/check_answers/reset" }
-
-    before do
-      legal_aid_application.check_citizen_answers!
-      get citizens_identify_types_of_outgoing_path
-      get citizens_check_answers_path
-      subject
-    end
-
-    it "redirects back" do
-      expect(response).to redirect_to(citizens_identify_types_of_outgoing_path(back: true))
-    end
-
-    it 'changes the state back to "applicant_entering_means"' do
-      expect(legal_aid_application.reload.applicant_entering_means?).to be true
     end
   end
 end

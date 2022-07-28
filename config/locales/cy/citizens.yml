@@ -45,17 +45,7 @@ cy:
           eb ll'uoY .emit a ta knab eno tceleS"
       create:
         error: knab a tceleS
-    cash_incomes:
-      show:
-        page_heading: hsac ni eviecer uoy stnemyap tceleS
-    cash_outgoings:
-      show:
-        page_heading: hsac ni ekam uoy stnemyap tceleS
     check_answers:
-      cash_transactions:
-        cash_transactions_credits_header: hsac ni eviecer uoy stnemyaP
-        cash_transactions_debits_header: hsac ni ekam uoy stnemyaP
-        none: enoN
       index:
         h1-heading: noitamrofni timbus dna srewsna ruoy kcehC
         bank_accounts:
@@ -66,14 +56,7 @@ cy:
           sort_code: edoc troS
           balance: ecnalaB
         link_other_account: tnuocca knab rehtona ddA
-        payments_receive_heading: eviecer uoy stnemyaP
-        payments_make_heading: ekam uoy stnemyaP
         submit_button: timbus dna eergA
-        income_outgoings: sgniogtuo dna emocni ruoY
-      student_finance:
-        student_finance: ecnanif tnedutS
-        do_you_get: "?ecnanif tneduts teg uoy oD"
-        how_much: "?raey cimedaca siht teg uoy lliw ecnanif tneduts hcum woH"
     contact_providers:
       show:
         title: noitacilppa ruoy eunitnoc ot roticilos ruoy tcatnoC
@@ -106,16 +89,6 @@ cy:
     has_offline_accounts:
       new:
         error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
-    identify_types_of_incomes:
-      show:
-        page_heading: "?eviecer uoy od stnemyap gniwollof eht fo hcihW"
-      update:
-        none_selected: emocni fo sepyt yna eviecer uoy fi tceleS
-    identify_types_of_outgoings:
-      show:
-        page_heading: "?ekam uoy od stnemyap gniwollof eht fo hcihW"
-      update:
-        none_selected: stnemyap raluger yna ekam uoy fi tceleS
     legal_aid_applications:
       index:
         case_reference: ":ecnerefer esaC"

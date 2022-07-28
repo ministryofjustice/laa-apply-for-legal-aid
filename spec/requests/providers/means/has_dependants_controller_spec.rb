@@ -78,41 +78,9 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
           expect { request }.to change { legal_aid_application.reload.has_dependants }.from(nil).to(false)
         end
 
-        context "when provider is on passported journey" do
-          before do
-            legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-            legal_aid_application.update!(provider_received_citizen_consent: nil)
-          end
-
-          it "redirects to the no outgoing summary page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
-          end
-
-          context "with transaction type debits on application" do
-            let(:legal_aid_application) do
-              laa = create(:legal_aid_application, :with_applicant)
-              laa.transaction_types << create(:transaction_type, :debit)
-              laa
-            end
-
-            it "redirects to the outgoings_summary page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
-            end
-          end
-        end
-
-        context "when provider is on bank statement upload journey" do
-          before do
-            legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-            legal_aid_application.update!(provider_received_citizen_consent: false)
-          end
-
-          it "redirects to the means own homes page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
-          end
+        it "redirects to the own home page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
         end
       end
     end

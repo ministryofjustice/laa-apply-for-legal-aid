@@ -11,7 +11,7 @@ module Providers
   private
 
     def define_action_list
-      @action_list = %w[sort_transactions dependants capital]
+      @action_list = %w[income_outgoings sort_transactions dependants capital]
       @action_list.prepend("review_employment") if employed_journey?
     end
 

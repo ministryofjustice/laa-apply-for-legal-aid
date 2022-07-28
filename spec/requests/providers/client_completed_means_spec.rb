@@ -32,8 +32,8 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
           expect(response.body).not_to include("Review their employment details")
         end
 
-        it "includes sorting transactions as first point" do
-          expect(response.body).to include("1. Sort their bank transactions into categories")
+        it "includes income and outgoings as first point" do
+          expect(response.body).to include("1. Tell us about their income and outgoings")
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          expect(subject).to redirect_to(providers_legal_aid_application_no_income_summary_path)
+          expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             end
 
             it "redirects to next page" do
-              expect(subject).to redirect_to(providers_legal_aid_application_income_summary_index_path)
+              expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
             end
           end
         end
