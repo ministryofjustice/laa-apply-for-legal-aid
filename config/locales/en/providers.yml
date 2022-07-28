@@ -707,10 +707,10 @@ en:
           dob_hint: For example, 31 3 1980.
           relationship: What is their relationship to your client?
           option:
-            child_relative: They're a child relative
-            adult_relative: They're an adult relative
+            child_relative: Child dependant
+            adult_relative: Adult dependant
             hint:
-              child_relative: For example, your child, grandchild, niece or nephew.
+              child_relative: For example, a child, grandchild, niece or nephew.
               adult_relative: For example, a parent, grandparent, aunt or uncle.
           in_full_time_education: "Are they in full-time education or training?"
           has_income:

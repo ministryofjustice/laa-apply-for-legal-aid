@@ -94,7 +94,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Granny Addams"
     And I enter a date of birth for a 80 year old
-    When I choose "They're an adult relative"
+    When I choose "Adult dependant"
     And I choose option "dependant-in-full-time-education-field"
     And I choose option "dependant-has-income-true-field"
     And I fill "monthly income" with "4321"

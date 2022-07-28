@@ -97,7 +97,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Pugsley Adams"
     And I enter a date of birth for a 21 year old
-    And I choose "They're a child relative"
+    And I choose "Child dependant"
     And I choose option "dependant-in-full-time-education-true-field"
     And I choose option "dependant-has-income-true-field"
     And I fill "monthly income" with "1234"
@@ -109,7 +109,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Granny Addams"
     And I enter a date of birth for a 80 year old
-    When I choose "They're an adult relative"
+    When I choose "Adult dependant"
     And I choose option "dependant-in-full-time-education-field"
     And I choose option "dependant-has-income-true-field"
     And I fill "monthly income" with "4321"
@@ -156,7 +156,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Wednesday Adams"
     And I enter a date of birth for a 14 year old
-    And I choose "They're a child relative"
+    And I choose "Child dependant"
     And I choose option "dependant-in-full-time-education-field"
     And I choose option "dependant-has-income-field"
     And I choose option "dependant-has-assets-more-than-threshold-field"
@@ -167,7 +167,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'dependants/new' page showing "Enter dependant details"
     When I fill "Name" with "Pugsley Addams"
     And I enter a date of birth for a 10 year old
-    And I choose "They're a child relative"
+    And I choose "Child dependant"
     And I choose option "dependant-in-full-time-education-field"
     And I choose option "dependant-has-income-field"
     And I choose option "dependant-has-assets-more-than-threshold-field"
