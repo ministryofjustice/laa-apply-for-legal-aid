@@ -79,6 +79,7 @@ module LegalAidApplications
         delegated_functions_date = date_field&.form_date
 
         proceeding.update(
+          used_delegated_functions: delegated_functions_date.present?,
           used_delegated_functions_on: delegated_functions_date,
           used_delegated_functions_reported_on: delegated_functions_reported_date(delegated_functions_date),
         )
