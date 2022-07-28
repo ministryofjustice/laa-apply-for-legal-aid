@@ -299,7 +299,7 @@ en:
               blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             open_banking_consents:
               providers:
-                blank: Select yes if you agree
+                blank: Select yes if your client uses online banking
               citizens:
                 blank_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
             outstanding_mortgage_amount:
