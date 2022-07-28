@@ -410,7 +410,8 @@ end
 
 Given("I used delegated functions") do
   @legal_aid_application.proceedings.each do |proceeding|
-    proceeding.update!(used_delegated_functions_on: Date.current,
+    proceeding.update!(used_delegated_functions: true,
+                       used_delegated_functions_on: Date.current,
                        used_delegated_functions_reported_on: Date.current)
     proceeding.save!
   end
