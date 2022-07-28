@@ -74,7 +74,7 @@ RSpec.describe "citizen additional accounts request test", type: :request do
       let(:params) { { binary_choice_form: { additional_account: "false" } } }
 
       it "redirects to /citizens/identify_types_of_income(.:format)" do
-        expect(response).to redirect_to(citizens_identify_types_of_income_path)
+        expect(response).to redirect_to(citizens_check_answers_path)
       end
     end
   end

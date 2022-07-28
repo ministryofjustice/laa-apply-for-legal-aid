@@ -2,18 +2,26 @@ module Flow
   module Flows
     class ProviderCapital < FlowSteps
       STEPS = {
-        capital_introductions: {
-          path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
-          forward: :own_homes,
+        client_completed_means: {
+          path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
+          forward: lambda do |application|
+            status = HMRC::StatusAnalyzer.call(application)
+            case status
+            when :hmrc_multiple_employments, :no_hmrc_data
+              :full_employment_details
+            when :hmrc_single_employment, :unexpected_employment_data
+              :employment_incomes
+            when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
+              :identify_types_of_incomes
+            else
+              raise "Unexpected hmrc status #{status.inspect}"
+            end
+          end,
         },
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
           forward: lambda do |application|
-            if application.uploading_bank_statements?
-              application.transaction_types.credits.any? ? :cash_incomes : :student_finances
-            else
-              :income_summary
-            end
+            application.transaction_types.credits.any? ? :cash_incomes : :student_finances
           end,
           check_answers: lambda do |application|
             if application.uploading_bank_statements?
@@ -36,11 +44,7 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            if application.uploading_bank_statements?
-              application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
-            else
-              :outgoings_summary
-            end
+            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
           end,
           check_answers: lambda do |application|
             if application.uploading_bank_statements?
@@ -55,6 +59,7 @@ module Flow
           forward: :has_dependants,
           check_answers: :means_summaries,
         },
+
         # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
@@ -118,22 +123,6 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_capital_assessment_result_path(application) },
           forward: :merits_task_lists,
         },
-        client_completed_means: {
-          path: ->(application) { urls.providers_legal_aid_application_client_completed_means_path(application) },
-          forward: lambda do |application|
-            status = HMRC::StatusAnalyzer.call(application)
-            case status
-            when :hmrc_multiple_employments, :no_hmrc_data
-              :full_employment_details
-            when :hmrc_single_employment, :unexpected_employment_data
-              :employment_incomes
-            when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
-              application.income_types? ? :income_summary : :no_income_summaries
-            else
-              raise "Unexpected hmrc status #{status.inspect}"
-            end
-          end,
-        },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
           forward: lambda do |application|
@@ -181,6 +170,10 @@ module Flow
         outgoing_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_outgoing_transactions_path(application, params.slice(:transaction_type)) },
           forward: :outgoings_summary,
+        },
+        capital_introductions: {
+          path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
+          forward: :own_homes,
         },
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
