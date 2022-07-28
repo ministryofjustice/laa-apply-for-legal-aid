@@ -3,7 +3,7 @@ module Providers
     def show
       write_cfe_result
       legal_aid_application.provider_enter_merits! unless legal_aid_application.provider_entering_merits?
-      @result_partial = ResultsPanelSelector.call(legal_aid_application)
+      @result_partial = "shared/assessment_results/no_cfe_result"
     end
 
     def update
