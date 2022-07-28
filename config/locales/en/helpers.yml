@@ -54,3 +54,5 @@ en:
           <<: *true_false
         enable_evidence_upload:
           <<: *true_false
+        enable_min_loop:
+          <<: *true_false
