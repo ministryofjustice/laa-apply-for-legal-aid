@@ -77,7 +77,7 @@ en:
     assessment_results:
       no_cfe_result:
         heading: A caseworker needs to review your application
-        cannot_calculate: We cannot calculate your client's financial eligibility yet because you uploaded bank statements.
+        cannot_calculate: We cannot calculate your client's financial eligibility yet because you uploaded bank statements
         caseworker_check: A caseworker will check your client's bank statements to see if they need to pay towards legal aid.
         continue: Continue your application to provide details of the case
       eligible:

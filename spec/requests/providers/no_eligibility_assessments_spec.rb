@@ -7,7 +7,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
     subject(:request) { get providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application) }
 
     let!(:applicant) { create :applicant }
-    let(:legal_aid_application) { create :legal_aid_application, :with_attached_bank_statement, :checking_non_passported_means, :with_proceedings, applicant: }
+    let(:legal_aid_application) { create :legal_aid_application, :with_attached_bank_statement, :checking_non_passported_means, applicant: }
 
     context "when provider has bank_statement_upload_permissions?" do
       before do
