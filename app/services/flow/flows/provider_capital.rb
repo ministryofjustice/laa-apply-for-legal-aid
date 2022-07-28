@@ -44,7 +44,7 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+            application.transaction_types.debits.any? ? :cash_outgoings : :income_summary
           end,
           check_answers: lambda do |application|
             if application.uploading_bank_statements?
@@ -56,8 +56,36 @@ module Flow
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
+          forward: lambda do |application|
+            application.income_types? ? :income_summary : :no_income_summaries
+          end,
+          check_answers: :means_summaries,
+        },
+        income_summary: {
+          path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
+          forward: :outgoings_summary,
+          check_answers: :means_summaries,
+        },
+        no_income_summaries: {
+          path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
+          forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :outgoings_summary : :identify_types_of_incomes },
+        },
+        outgoings_summary: {
+          path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
           forward: :has_dependants,
           check_answers: :means_summaries,
+        },
+        no_outgoings_summaries: {
+          path: ->(application) { urls.providers_legal_aid_application_no_outgoings_summary_path(application) },
+          forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :has_dependants : :identify_types_of_outgoings },
+        },
+        incoming_transactions: {
+          path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
+          forward: :income_summary,
+        },
+        outgoing_transactions: {
+          path: ->(application, params) { urls.providers_legal_aid_application_outgoing_transactions_path(application, params.slice(:transaction_type)) },
+          forward: :outgoings_summary,
         },
 
         # Dependant steps here (see ProviderDependants)
@@ -144,32 +172,6 @@ module Flow
             end
           end,
           check_answers: :means_summaries,
-        },
-        income_summary: {
-          path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: :has_dependants,
-          check_answers: :means_summaries,
-        },
-        no_income_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
-          forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :has_dependants : :identify_types_of_incomes },
-        },
-        outgoings_summary: {
-          path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
-          forward: :own_homes,
-          check_answers: :means_summaries,
-        },
-        no_outgoings_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_no_outgoings_summary_path(application) },
-          forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :own_homes : :identify_types_of_outgoings },
-        },
-        incoming_transactions: {
-          path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
-          forward: :income_summary,
-        },
-        outgoing_transactions: {
-          path: ->(application, params) { urls.providers_legal_aid_application_outgoing_transactions_path(application, params.slice(:transaction_type)) },
-          forward: :outgoings_summary,
         },
         capital_introductions: {
           path: ->(application) { urls.providers_legal_aid_application_capital_introduction_path(application) },
