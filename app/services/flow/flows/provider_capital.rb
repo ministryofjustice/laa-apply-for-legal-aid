@@ -44,41 +44,50 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :income_summary
+            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
           end,
           check_answers: lambda do |application|
-            if application.uploading_bank_statements?
-              application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries
-            else
-              :outgoings_summary
-            end
+            application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
           end,
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
-          forward: lambda do |application|
-            application.income_types? ? :income_summary : :no_income_summaries
-          end,
+          forward: :applicant_bank_accounts,
           check_answers: :means_summaries,
+        },
+        # this page is not mentioned in the flow but we have a required question on it and this is the only
+        # place we replay the accounts back to the provider. I have added it here because it is just before we ask users
+        # to organise the transactions from these accounts.
+        applicant_bank_accounts: {
+          path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
+          forward: :income_summary,
+          check_answers: :means_summaries,
+        },
+        offline_accounts: {
+          path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
+          forward: :savings_and_investments,
+          check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: :outgoings_summary,
           check_answers: :means_summaries,
         },
-        no_income_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
-          forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :outgoings_summary : :identify_types_of_incomes },
-        },
+        # I dont think these are needed - if so remove from flow and assciated views and controllers
+        # no_income_summaries: {
+        #   path: ->(application) { urls.providers_legal_aid_application_no_income_summary_path(application) },
+        #   forward: ->(_, has_confirm_no_income) { has_confirm_no_income ? :outgoings_summary : :identify_types_of_incomes },
+        # },
         outgoings_summary: {
           path: ->(application) { urls.providers_legal_aid_application_outgoings_summary_index_path(application) },
           forward: :has_dependants,
           check_answers: :means_summaries,
         },
-        no_outgoings_summaries: {
-          path: ->(application) { urls.providers_legal_aid_application_no_outgoings_summary_path(application) },
-          forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :has_dependants : :identify_types_of_outgoings },
-        },
+        # I dont think these are needed - if so remove from flow and assciated views and controllers
+        # no_outgoings_summaries: {
+        #   path: ->(application) { urls.providers_legal_aid_application_no_outgoings_summary_path(application) },
+        #   forward: ->(_, has_confirm_no_outgoings) { has_confirm_no_outgoings ? :has_dependants : :identify_types_of_outgoings },
+        # },
         incoming_transactions: {
           path: ->(application, params) { urls.providers_legal_aid_application_incoming_transactions_path(application, params.slice(:transaction_type)) },
           forward: :income_summary,
@@ -91,16 +100,7 @@ module Flow
         # Dependant steps here (see ProviderDependants)
         # Property steps here (see ProviderProperty)
         # Vehicle steps here (see ProviderVehicle)
-        applicant_bank_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
-          forward: :savings_and_investments,
-          check_answers: :means_summaries,
-        },
-        offline_accounts: {
-          path: ->(application) { urls.providers_legal_aid_application_offline_account_path(application) },
-          forward: :savings_and_investments,
-          check_answers: ->(application) { application.checking_non_passported_means? ? :means_summaries : :check_passported_answers },
-        },
+
         savings_and_investments: {
           path: ->(application) { urls.providers_legal_aid_application_means_savings_and_investment_path(application) },
           forward: lambda do |application|
@@ -153,13 +153,7 @@ module Flow
         },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
-          forward: lambda do |application|
-            if application.uploading_bank_statements?
-              :identify_types_of_incomes
-            else
-              application.income_types? ? :income_summary : :no_income_summaries
-            end
-          end,
+          forward: :identify_types_of_incomes,
           check_answers: :means_summaries,
         },
         full_employment_details: {

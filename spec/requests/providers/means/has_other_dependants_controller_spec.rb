@@ -40,7 +40,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
 
       it "redirects to the outgoings summary page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
       end
 
       context "when provider is on passported journey" do
@@ -56,7 +56,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
 
           it "redirects to the outgoings summary index page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
           end
         end
 
@@ -67,7 +67,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
 
           it "redirects to the no outgoings summary index page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
           end
         end
       end

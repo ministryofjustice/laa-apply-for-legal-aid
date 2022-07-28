@@ -56,7 +56,7 @@ RSpec.describe Providers::NoIncomeSummariesController, type: :request do
       end
 
       it "redirects to the dependants" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
       end
 
       context "neither option is chosen" do

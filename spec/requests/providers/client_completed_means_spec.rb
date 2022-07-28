@@ -59,7 +59,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          expect(subject).to redirect_to(providers_legal_aid_application_no_income_summary_path)
+          expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path)
         end
       end
 
@@ -137,7 +137,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
             end
 
             it "redirects to next page" do
-              expect(subject).to redirect_to(providers_legal_aid_application_income_summary_index_path)
+              expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path)
             end
           end
         end

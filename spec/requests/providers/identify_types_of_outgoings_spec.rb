@@ -81,38 +81,19 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         expect { request }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(false)
       end
 
-      context "when provider is on passported journey" do
-        before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          legal_aid_application.update!(provider_received_citizen_consent: nil)
-        end
-
-        it "redirects to the outgoings summary page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
-        end
+      it "redirects to the means cash outgoings page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
       end
+    end
 
-      context "when provider is on bank statement upload journey" do
-        before do
-          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-          legal_aid_application.update!(provider_received_citizen_consent: false)
-        end
+    context "Form submitted with Save as draft button" do
+      let(:transaction_type_ids) { [] }
+      let(:submit_button) { { draft_button: "Save as draft" } }
 
-        it "redirects to the means cash outgoings page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
-        end
-      end
-
-      context "Form submitted with Save as draft button" do
-        let(:transaction_type_ids) { [] }
-        let(:submit_button) { { draft_button: "Save as draft" } }
-
-        it "redirects to the list of applications" do
-          request
-          expect(response).to redirect_to providers_legal_aid_applications_path
-        end
+      it "redirects to the list of applications" do
+        request
+        expect(response).to redirect_to providers_legal_aid_applications_path
       end
     end
 
@@ -120,12 +101,17 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       let(:other_transaction_type) { create :transaction_type, :credit }
       let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type] }
 
-      it "does not remove existing transation of other type" do
+      it "does not remove existing transactions of other type" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
       end
 
       it "does not delete transaction types" do
         expect { request }.not_to change(TransactionType, :count)
+      end
+
+      it "redirects to the income summary page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
       end
     end
 
@@ -151,28 +137,9 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      context "when provider is on passported journey" do
-        before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          legal_aid_application.update!(provider_received_citizen_consent: nil)
-        end
-
-        it "redirects to the outgoings summary page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
-        end
-      end
-
-      context "when provider is on bank statement upload journey" do
-        before do
-          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-          legal_aid_application.update!(provider_received_citizen_consent: false)
-        end
-
-        it "redirects to the means has dependants page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
-        end
+      it "redirects to the means has dependants page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
       end
     end
 
@@ -221,17 +188,18 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      context "without bank statement uploads" do
-        before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          legal_aid_application.update!(provider_received_citizen_consent: true)
-        end
-
-        it "redirects to outgoings_summary" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
-        end
-      end
+      # removing the bank_statement permissions from the provider flow around here
+      # context "without bank statement uploads" do
+      #   before do
+      #     legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+      #     legal_aid_application.update!(provider_received_citizen_consent: true)
+      #   end
+      #
+      #   it "redirects to outgoings_summary" do
+      #     request
+      #     expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+      #   end
+      # end
     end
 
     context "when the provider is not authenticated" do

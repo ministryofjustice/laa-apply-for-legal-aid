@@ -66,7 +66,7 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
 
       it "redirects to has_dependants" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash outgoings to false" do
@@ -79,7 +79,7 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
 
       it "redirects to has_dependants" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash outgoings to true" do
