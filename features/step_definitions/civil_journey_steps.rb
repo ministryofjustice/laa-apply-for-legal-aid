@@ -659,6 +659,7 @@ Given("The means questions have been answered by the applicant") do
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
+    # as we dont categorise on applicant side this traits should be removed, but I expect they will break many tests
     :with_uncategorised_debit_transactions,
     :with_uncategorised_credit_transactions,
     explicit_proceedings: %i[da001 da005],
