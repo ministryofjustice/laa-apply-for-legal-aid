@@ -14,25 +14,40 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Then I should be on the 'employment_income' page showing "Enter details about your client’s employment"
   When I fill "legal aid application extra employment information details error" with "some extra details about employment"
   And I click 'Save and continue'
-  Then I should be on the 'no_income_summary' page showing "Your client's income"
-  Then I choose 'Yes'
-  Then I click 'Save and continue'
+  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I select "My client receives none of these payments"
+  And I click 'Save and continue'
+  Then I should be on a page showing "Does your client receive student finance?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+  Then I select "My client makes none of these payments"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+  #  This case has no category types selected so there are no transactions to add
+  And I click 'Save and continue'
+  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+  #  This case has no category types selected so there are no transactions to add
+  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client's outgoings"
-  Then I choose "Yes"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own the home that they live in?"
-  Then I choose "No"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client’s bank accounts"
-  Then I choose 'No'
-  Then I click 'Save and continue'
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
+
   Then I select "My client has none of these savings or investments"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which assets does your client have?"
@@ -57,23 +72,38 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
   Then I fill "legal aid application full employment details error" with "all the details about employment"
   And I click 'Save and continue'
-  Then I should be on the 'no_income_summary' page showing "Your client's income"
-  Then I choose 'Yes'
-  Then I click 'Save and continue'
+
+  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I select "My client receives none of these payments"
+  And I click 'Save and continue'
+  Then I should be on a page showing "Does your client receive student finance?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+  Then I select "My client makes none of these payments"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+  #  This case has no category types selected so there are no transactions to add
+  And I click 'Save and continue'
+  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+  #  This case has no category types selected so there are no transactions to add
+  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client's outgoings"
-  Then I choose "Yes"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own the home that they live in?"
-  Then I choose "No"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
   Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client’s bank accounts"
-  Then I choose 'No'
   Then I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
   Then I select "My client has none of these savings or investments"
@@ -98,25 +128,42 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
   Then I fill "legal aid application full employment details error" with "all the details about employment"
   And I click 'Save and continue'
-  Then I should be on the 'no_income_summary' page showing "Your client's income"
-  Then I choose 'Yes'
-  Then I click 'Save and continue'
+
+  Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+  Then I select "My client receives none of these payments"
+  And I click 'Save and continue'
+  Then I should be on a page showing "Does your client receive student finance?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+  Then I select "My client makes none of these payments"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+  #  This case has no category types selected so there are no transactions to add
+  And I click 'Save and continue'
+  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+  #  This case has no category types selected so there are no transactions to add
+  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client's outgoings"
-  Then I choose "Yes"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own the home that they live in?"
-  Then I choose "No"
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
-  Then I choose "No"
-  Then I click 'Save and continue'
-  Then I should be on a page showing "Your client’s bank accounts"
-  Then I choose 'No'
-  Then I click 'Save and continue'
+
+  When I choose "No"
+  And I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
+
   Then I select "My client has none of these savings or investments"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which assets does your client have?"

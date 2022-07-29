@@ -44,7 +44,7 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :has_dependants
+            application.transaction_types.debits.any? ? :cash_outgoings : :applicant_bank_accounts
           end,
           check_answers: lambda do |application|
             application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
@@ -158,13 +158,7 @@ module Flow
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
-          forward: lambda do |application|
-            if application.uploading_bank_statements?
-              :identify_types_of_incomes
-            else
-              application.income_types? ? :income_summary : :no_income_summaries
-            end
-          end,
+          forward: :identify_types_of_incomes,
           check_answers: :means_summaries,
         },
         capital_introductions: {

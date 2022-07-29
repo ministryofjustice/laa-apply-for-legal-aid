@@ -87,7 +87,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
       end
     end
 
-    context "Form submitted with Save as draft button" do
+    context "when form submitted with Save as draft button" do
       let(:transaction_type_ids) { [] }
       let(:submit_button) { { draft_button: "Save as draft" } }
 
@@ -139,7 +139,7 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
 
       it "redirects to the means has dependants page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
       end
     end
 
@@ -187,19 +187,6 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
           end
         end
       end
-
-      # removing the bank_statement permissions from the provider flow around here
-      # context "without bank statement uploads" do
-      #   before do
-      #     legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-      #     legal_aid_application.update!(provider_received_citizen_consent: true)
-      #   end
-      #
-      #   it "redirects to outgoings_summary" do
-      #     request
-      #     expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
-      #   end
-      # end
     end
 
     context "when the provider is not authenticated" do

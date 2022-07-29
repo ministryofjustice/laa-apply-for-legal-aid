@@ -474,37 +474,72 @@ Feature: Civil application journeys
   Scenario: I am able to view the client completed means answers
     Given I start the merits application and the applicant has uploaded transaction data
     Then I should be on a page showing 'Your client has shared their financial information'
-    Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
-    Then I select 'Benefits'
+    When I click 'Continue'
+    Then I should be on a page showing "Which payments does your client receive?"
+    When I select 'Benefits'
     And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+
+    When I select 'Housing'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
+
+    When I select 'Housing payments'
+    Then I enter rent_or_mortgage1 '100'
+    Then I enter rent_or_mortgage2 '100'
+    Then I enter rent_or_mortgage3 '100'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Your client’s bank accounts"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's income into categories"
+
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     And I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select benefits payments'
+#    Then I save and open screenshot
+#    the screenshot shows that the checkboxes are not being rendered on the page for some reason
+    Then I select the first checkbox
     And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    When I click 'Save and continue'
+    Then I should be on the 'outgoing_summary' page showing "Sort your client's payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select childcare payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I choose "Yes"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose 'No'
-    Then I click 'Save and continue'
+
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
-    Then I click 'Save and continue'
+
+    When I select "My client has none of these savings or investments"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "Land"
     Then I fill "Land value" with "50000"

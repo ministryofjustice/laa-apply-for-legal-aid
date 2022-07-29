@@ -64,9 +64,9 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
     context "with valid params" do
       let(:params) { valid_params }
 
-      it "redirects to has_dependants" do
+      it "redirects to applicant_bank_accounts" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash outgoings to false" do
@@ -77,9 +77,9 @@ RSpec.describe "Providers::Means::CashOutgoingsController", type: :request do
     context "with nothing selected of the above" do
       let(:params) { nothing_selected_params }
 
-      it "redirects to has_dependants" do
+      it "redirects to applicant_bank_accounts" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
       end
 
       it "updates the model attribute for no cash outgoings to true" do

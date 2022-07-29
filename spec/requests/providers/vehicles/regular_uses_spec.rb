@@ -40,7 +40,7 @@ RSpec.describe Providers::Vehicles::RegularUsesController, type: :request do
         vehicle: { used_regularly: used_regularly.to_s },
       }
     end
-    let(:next_url) { providers_legal_aid_application_applicant_bank_account_path(legal_aid_application) }
+    let(:next_url) { providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application) }
     let(:submit_button) { {} }
 
     it "updates vehicle" do

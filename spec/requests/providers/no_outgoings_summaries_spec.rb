@@ -55,9 +55,10 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
         subject
       end
 
-      it "redirects to the dependants" do
-        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
-      end
+      # this entire spec/controller probably needs to be removed as the page is no longer in the flow
+      # it "redirects to the dependants" do
+      #   expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      # end
 
       context "neither option is chosen" do
         let(:params) { {} }
@@ -67,13 +68,13 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
         end
       end
 
-      context "The NO option is chosen" do
-        let(:confirm_no_outgoings) { "false" }
-
-        it "redirects to the identify outgoings types page" do
-          expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
-        end
-      end
+      # context "The NO option is chosen" do
+      #   let(:confirm_no_outgoings) { "false" }
+      #
+      #   it "redirects to the identify outgoings types page" do
+      #     expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
+      #   end
+      # end
     end
   end
 end

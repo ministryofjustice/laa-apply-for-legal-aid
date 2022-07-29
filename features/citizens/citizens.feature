@@ -59,16 +59,6 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you receive?"
-    And I select 'I receive none of these payments'
-    Then I click 'Save and continue'
-    Then I should be on the 'student_finance' page showing 'Do you get student finance?'
-    When I choose "Yes"
-    When I enter amount '5000'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you make?"
-    And I select 'I make none of these payments'
-    Then I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page not showing 'Excluded Benefits'
     Then I should be on a page showing "Confirm the following"
@@ -101,28 +91,6 @@ Feature: Citizen journey
     Then I should be on a page showing "Do you have accounts with other banks?"
     Then I choose "No"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you receive?"
-    And I select 'Benefits'
-    Then I click 'Save and continue'
-    Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
-    Then I select 'Benefits'
-    Then I enter benefits1 '100'
-    Then I enter benefits2 '100'
-    Then I enter benefits3 '100'
-    And I click 'Save and continue'
-    Then I should be on the 'student_finance' page showing 'Do you get student finance?'
-    When I choose "Yes"
-    When I enter amount '5000'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which of the following payments do you make?"
-    Then I select "Housing payments"
-    Then I click 'Save and continue'
-    Then I should be on the 'cash_outgoing' page showing 'Select payments you make in cash'
-    Then I select 'Housing payments'
-    Then I enter rent_or_mortgage1 '100'
-    Then I enter rent_or_mortgage2 '100'
-    Then I enter rent_or_mortgage3 '100'
-    And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I should be on a page not showing 'Excluded Benefits'
     Then I should be on a page showing "Confirm the following"
@@ -130,25 +98,6 @@ Feature: Citizen journey
     Then I should be on a page showing "You've shared your financial information"
     Then I click link "feedback"
     Then I should be on a page showing "How easy or difficult was it to use this service?"
-
-  @javascript
-  Scenario: I want to change income types via the check your answers page
-    Given I have completed an application
-    And I complete the citizen journey as far as check your answers
-    Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Benefits'
-    And I click Check Your Answers Change link for 'incomings'
-    Then I should be on a page showing 'Which of the following payments do you receive?'
-    Then I select 'Maintenance payments'
-    And I click 'Save and continue'
-    Then I should be on the 'cash_income' page showing 'Select payments you receive in cash'
-    Then I select 'Maintenance payments'
-    Then I enter maintenance_in1 '100'
-    Then I enter maintenance_in2 '100'
-    Then I enter maintenance_in3 '100'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Check your answers'
-    Then I should be on a page showing 'Maintenance payments from a former partner Yes'
 
   @javascript
   Scenario: I want to add another bank account via the check your answers page

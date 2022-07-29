@@ -1,6 +1,8 @@
 Feature: Non-passported applicant journeys
   @javascript
   Scenario: Completes a minimal merits application for applicant that does not receive benefits
+    # Is this test necessary? In this test the client doesnt enter any categories, this is just the standard journey which we are testing
+    # extensively elsewhere and it differs significantly from what is below
     Given I start the merits application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
@@ -48,6 +50,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
+    Then I save and open screenshot
     And I click 'Save and continue'
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
