@@ -296,8 +296,44 @@ module CFE
       end
 
       describe "total_gross_income" do
-        it "returns total gross income" do
+        it "returns zero for total gross income" do
           expect(empty_cfe_result.total_gross_income).to eq 0.0
+        end
+      end
+
+      describe "capital_contribution" do
+        it "returns zero for capital_contribution" do
+          expect(empty_cfe_result.capital_contribution).to eq 0.0
+        end
+      end
+
+      describe "capital_contribution_required?" do
+        it "returns false for capital_contribution_required" do
+          expect(empty_cfe_result.capital_contribution_required?).to be false
+        end
+      end
+
+      describe "income_assessment_result" do
+        it "returns no_assessment for income_assessment_result" do
+          expect(empty_cfe_result.income_assessment_result).to eq "no_assessment"
+        end
+      end
+
+      describe "income_contribution_required?" do
+        it "returns false for income_contribution_required?" do
+          expect(empty_cfe_result.income_contribution_required?).to be false
+        end
+      end
+
+      describe "capital_assessment_result" do
+        it "returns no_assessment for capital_assessment_result" do
+          expect(empty_cfe_result.capital_assessment_result).to eq "no_assessment"
+        end
+      end
+
+      describe "income_contribution" do
+        it "returns zero for income_contribution" do
+          expect(empty_cfe_result.income_contribution).to eq 0.0
         end
       end
 
