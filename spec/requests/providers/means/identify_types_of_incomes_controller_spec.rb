@@ -44,7 +44,6 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
     subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
 
-    let(:transaction_type_ids) { [] }
     let(:params) do
       {
         legal_aid_application: {
@@ -52,22 +51,27 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         },
       }
     end
+
     let(:submit_button) { {} }
 
-    it "does not add transaction types to the application" do
-      expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
-    end
+    context "when transaction types not selected" do
+      let(:transaction_type_ids) { [] }
 
-    it "displays an error" do
-      request
-      expect(response.body).to match("govuk-error-summary")
-      expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_incomes.update.none_selected"))
-      expect(unescaped_response_body).not_to include("translation missing")
-    end
+      it "does not add transaction types to the application" do
+        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
+      end
 
-    it "returns http success" do
-      request
-      expect(response).to have_http_status(:ok)
+      it "displays an error" do
+        request
+        expect(response.body).to match("govuk-error-summary")
+        expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_incomes.update.none_selected"))
+        expect(unescaped_response_body).not_to include("translation missing")
+      end
+
+      it "returns http success" do
+        request
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context "when transaction types selected" do
@@ -96,7 +100,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when application has transaction types of other kind" do
+      let(:transaction_type_ids) { [] }
       let(:other_transaction_type) { create :transaction_type, :debit }
+
       let(:legal_aid_application) do
         create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]
       end
@@ -121,14 +127,13 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
       end
 
-      context "when application has transactions" do
+      context "when application has existing transactions" do
         let(:legal_aid_application) do
           create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types
         end
 
         it "removes transaction types from the application" do
-          expect { request }.to change(LegalAidApplicationTransactionType, :count)
-            .by(-income_types.length)
+          expect { request }.to change(LegalAidApplicationTransactionType, :count).by(-3)
         end
       end
 
@@ -234,6 +239,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
     context "when submitted with Save as draft" do
       let(:submit_button) { { draft_button: "Save as draft" } }
+      let(:transaction_type_ids) { [] }
 
       it "redirects to the list of applications" do
         request
