@@ -60,7 +60,9 @@ module Flow
         # to organise the transactions from these accounts.
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
-          forward: :income_summary,
+          forward: lambda do |application|
+            application.transaction_types.credits.any? ? :income_summary : :outgoings_summary
+          end,
           check_answers: :means_summaries,
         },
         offline_accounts: {
@@ -70,7 +72,9 @@ module Flow
         },
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
-          forward: :outgoings_summary,
+          forward: lambda do |application|
+            application.transaction_types.debits.any? ? :outgoings_summary : :has_dependants
+          end,
           check_answers: :means_summaries,
         },
         # I dont think these are needed - if so remove from flow and assciated views and controllers
