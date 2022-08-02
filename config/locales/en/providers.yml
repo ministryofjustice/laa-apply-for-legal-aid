@@ -329,8 +329,14 @@ en:
         what_to_do: "Your client has shared their financial information. You need to do the following:"
         review_employment_heading: Review their employment details
         review_employment_text: We'll show you the information HMRC shared with us.
-        sort_transactions_heading: Sort their bank transactions into categories
-        sort_transactions_text: Your client selected the categories their income and outgoings fall into. View their bank statements and sort transactions into these categories.
+        income_outgoings_heading: Tell us about their income and outgoings
+        income_outgoings_text: We need to know if your client
+        income_outgoings:
+          list: |
+            receives certain types of income (for example, benefits)
+            has certain regular outgoings (for example, childcare)
+        sort_transactions_heading: Assign categories to bank transactions
+        sort_transactions_text: View your client's bank statements and assign a category to each transaction (for example, housing).
         dependants_heading: Tell us about their dependants
         dependants_text: Provide details of your client's dependants (if they have any).
         capital_heading: Tell us about their capital
