@@ -58,7 +58,7 @@ class TransactionType < ApplicationRecord
   end
 
   def self.find_with_children(*ids)
-    all_ids = (ids + TransactionType.where(parent_id: ids).pluck(:id)).flatten
+    all_ids = (ids + TransactionType.where(parent_id: ids.compact).pluck(:id)).flatten
     where(id: all_ids)
   end
 
