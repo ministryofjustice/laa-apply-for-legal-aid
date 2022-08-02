@@ -408,6 +408,30 @@ Given("I have completed a non-passported application and reached the merits task
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
+Given("I have started an application and reached the proceedings list") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_address_lookup,
+    :with_proceedings,
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
+end
+
+Given("I have started an application with multiple proceedings") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_address_lookup,
+    :with_proceedings,
+    explicit_proceedings: %i[da001 se013],
+    set_lead_proceeding: :da001,
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
+end
+
 Given("I used delegated functions") do
   @legal_aid_application.proceedings.each do |proceeding|
     proceeding.update!(used_delegated_functions: true,
