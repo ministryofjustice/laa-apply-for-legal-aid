@@ -1,0 +1,16 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<div class="govuk-grid-row" id="app-check-your-answers__delegated_functions">
+  <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m"><%= proceeding.meaning %></h2>
+  </div>
+</div>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+        name: :"#{proceeding.name}_used_delegated_functions_on",
+        url: providers_legal_aid_application_delegated_function_path(@legal_aid_application, proceeding),
+        question: t('.question'),
+        answer: proceeding.used_delegated_functions_on&.strftime('%-d %B %Y') || t(".not_used"),
+        read_only: read_only
+      ) %>
+</dl>
