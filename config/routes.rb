@@ -222,8 +222,9 @@ Rails.application.routes.draw do
       end
       resource :means_summary, only: %i[show update]
       resource :no_eligibility_assessment, only: %i[show update]
-      resource :used_multiple_delegated_functions, only: %i[show update]
-      resource :confirm_multiple_delegated_functions, only: %i[show update]
+      resource :used_multiple_delegated_functions, only: %i[show update] # TODO: Delete after mini loop implemented
+      resource :confirm_multiple_delegated_functions, only: %i[show update] # TODO: Refactor after mini loop
+      resources :delegated_functions, only: %i[show update]
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
       resource :substantive_application, only: %i[show update]
