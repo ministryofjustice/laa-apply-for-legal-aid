@@ -53,6 +53,10 @@ class Provider < ApplicationRecord
     user_permissions.map(&:role).include?("application.non_passported.bank_statement_upload.*")
   end
 
+  def full_section_8_permissions?
+    user_permissions.map(&:role).include?("application.full_section_8.*")
+  end
+
   def ccms_apply_role?
     return true if Rails.configuration.x.laa_portal.mock_saml == "true"
 
