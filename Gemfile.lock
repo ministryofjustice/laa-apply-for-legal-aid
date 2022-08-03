@@ -236,7 +236,7 @@ GEM
       rainbow
       rubocop
       smart_properties
-    erubi (1.10.0)
+    erubi (1.11.0)
     eventmachine (1.2.7)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
