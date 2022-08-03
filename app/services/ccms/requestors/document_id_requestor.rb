@@ -33,9 +33,9 @@ module CCMS
 
       def document_type(xml)
         case @document_type
-        when "bank_transaction_report"
+        in "bank_transaction_report" | "bank_statement_evidence_pdf"
           xml.__send__(:"casebio:DocumentType", "BSTMT")
-        when "gateway_evidence_pdf"
+        in "gateway_evidence_pdf"
           xml.__send__(:"casebio:DocumentType", "STATE")
         else
           xml.__send__(:"casebio:DocumentType", "ADMIN1")
