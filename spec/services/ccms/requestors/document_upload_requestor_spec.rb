@@ -75,7 +75,7 @@ module CCMS
               transaction_id: expected_tx_id,
               matching: %w[
                 <casebio:DocumentType>BSTMT</casebio:DocumentType>
-                <casebio:FileExtension>csv</casebio:FileExtension>
+                <casebio:FileExtension>pdf</casebio:FileExtension>
               ],
             )
           end
