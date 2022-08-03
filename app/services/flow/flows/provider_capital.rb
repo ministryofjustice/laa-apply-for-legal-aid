@@ -44,7 +44,13 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :applicant_bank_accounts
+            if application.transaction_types.debits.any?
+              :cash_outgoings
+            elsif application.transaction_types.credits.any?
+              :income_summary
+            else
+              :has_dependants
+            end
           end,
           check_answers: lambda do |application|
             application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
@@ -52,7 +58,15 @@ module Flow
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
-          forward: :applicant_bank_accounts,
+          forward: lambda do |application|
+            if application.transaction_types.credits.any?
+              :income_summary
+            elsif application.transaction_types.debits.any?
+              :outgoings_summary
+            else
+              :has_dependants
+            end
+          end,
           check_answers: :means_summaries,
         },
         # this page is not mentioned in the flow but we have a required question on it and this is the only
@@ -60,9 +74,7 @@ module Flow
         # to organise the transactions from these accounts.
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },
-          forward: lambda do |application|
-            application.transaction_types.credits.any? ? :income_summary : :outgoings_summary
-          end,
+          forward: :savings_and_investments,
           check_answers: :means_summaries,
         },
         offline_accounts: {
