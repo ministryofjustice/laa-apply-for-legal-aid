@@ -192,7 +192,7 @@ GEM
     cucumber-wire (6.2.1)
       cucumber-core (~> 10.1, >= 10.1.0)
       cucumber-cucumber-expressions (~> 14.0, >= 14.0.0)
-    data_migrate (8.0.0)
+    data_migrate (8.1.1)
       activerecord (>= 5.0)
       railties (>= 5.0)
     database_cleaner (2.0.1)
@@ -236,7 +236,7 @@ GEM
       rainbow
       rubocop
       smart_properties
-    erubi (1.10.0)
+    erubi (1.11.0)
     eventmachine (1.2.7)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
