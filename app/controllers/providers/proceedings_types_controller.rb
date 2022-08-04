@@ -40,7 +40,7 @@ module Providers
     end
 
     def proceeding_types
-      @proceeding_types ||= LegalFramework::ProceedingTypes::All.call
+      @proceeding_types ||= LegalFramework::ProceedingTypes::All.call(provider: current_provider)
     end
 
     def excluded_codes

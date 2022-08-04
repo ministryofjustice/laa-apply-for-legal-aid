@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.uuid "record_id", null: false
     t.string "record_type", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", precision: nil, null: false
+    t.datetime "created_at", null: false
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", precision: nil, null: false
+    t.datetime "created_at", null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -59,8 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "county"
     t.string "postcode"
     t.uuid "applicant_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "organisation"
     t.boolean "lookup_used", default: false, null: false
     t.string "lookup_id"
@@ -77,34 +77,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.integer "failed_attempts", default: 0, null: false
-    t.datetime "locked_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.date "date_of_birth"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "email"
     t.string "national_insurance_number"
     t.string "confirmation_token"
-    t.datetime "confirmed_at", precision: nil
-    t.datetime "confirmation_sent_at", precision: nil
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at", precision: nil
+    t.datetime "locked_at"
     t.string "true_layer_secure_data_id"
-    t.datetime "remember_created_at", precision: nil
-    t.string "remember_token"
     t.boolean "employed"
+    t.datetime "remember_created_at"
+    t.string "remember_token"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
@@ -140,8 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.uuid "legal_aid_application_id"
     t.string "attachment_type"
     t.uuid "pdf_attachment_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "attachment_name"
     t.text "original_filename"
   end
@@ -162,8 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "full_name"
     t.json "addresses"
     t.date "date_of_birth"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["bank_provider_id"], name: "index_bank_account_holders_on_bank_provider_id"
   end
 
@@ -177,8 +177,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "account_number"
     t.string "sort_code"
     t.decimal "balance"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "account_type"
     t.index ["bank_provider_id"], name: "index_bank_accounts_on_bank_provider_id"
   end
@@ -187,15 +187,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.uuid "applicant_id", null: false
     t.string "bank_name"
     t.text "error"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["applicant_id"], name: "index_bank_errors_on_applicant_id"
   end
 
   create_table "bank_holidays", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "dates"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bank_providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -203,11 +203,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.json "true_layer_response"
     t.string "credentials_id"
     t.string "token"
-    t.datetime "token_expires_at", precision: nil
+    t.datetime "token_expires_at"
     t.string "name"
     t.string "true_layer_provider_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["applicant_id"], name: "index_bank_providers_on_applicant_id"
   end
 
@@ -220,9 +220,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "currency"
     t.string "operation"
     t.string "merchant"
-    t.datetime "happened_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "happened_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "transaction_type_id"
     t.string "meta_data"
     t.decimal "running_balance"
@@ -235,8 +235,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.uuid "legal_aid_application_id", null: false
     t.string "result"
     t.string "dwp_ref"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_benefit_check_results_on_legal_aid_application_id"
   end
 
@@ -262,8 +262,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "status"
     t.string "document_type"
     t.string "ccms_document_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "attachment_id"
   end
 
@@ -273,8 +273,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "to_state"
     t.boolean "success"
     t.text "details"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "request"
     t.text "response"
     t.index ["submission_id"], name: "index_ccms_submission_histories_on_submission_id"
@@ -285,8 +285,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "applicant_ccms_reference"
     t.string "case_ccms_reference"
     t.string "aasm_state"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "applicant_add_transaction_id"
     t.integer "applicant_poll_count", default: 0
     t.string "case_add_transaction_id"
@@ -298,8 +298,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.uuid "legal_aid_application_id"
     t.uuid "submission_id"
     t.text "result"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "type", default: "CFE::V1::Result"
   end
 
@@ -312,8 +312,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.text "response_payload"
     t.string "error_message"
     t.string "error_backtrace"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cfe_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -322,14 +322,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "aasm_state"
     t.string "error_message"
     t.text "cfe_result"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_cfe_submissions_on_legal_aid_application_id"
   end
 
   create_table "chances_of_successes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "application_purpose"
     t.string "success_prospect"
     t.text "success_prospect_details"
@@ -362,8 +362,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.integer "number"
     t.string "name"
     t.date "date_of_birth"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "relationship"
     t.decimal "monthly_income"
     t.boolean "has_income"
@@ -417,8 +417,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.boolean "done_all_needed"
     t.integer "satisfaction"
     t.text "improvement_suggestion"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "os"
     t.string "browser"
     t.string "browser_version"
@@ -430,8 +430,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
   end
 
   create_table "firms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "ccms_id"
     t.string "name"
   end
@@ -460,8 +460,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.date "occurred_on"
     t.text "details"
     t.uuid "legal_aid_application_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.date "told_on"
     t.index ["legal_aid_application_id"], name: "index_incidents_on_legal_aid_application_id"
   end
@@ -488,20 +488,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
   create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.uuid "transaction_type_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "laa_trans_type_on_legal_aid_application_id"
     t.index ["transaction_type_id"], name: "laa_trans_type_on_transaction_type_id"
   end
 
   create_table "legal_aid_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "application_ref"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "applicant_id"
     t.boolean "has_offline_accounts"
     t.boolean "open_banking_consent"
-    t.datetime "open_banking_consent_choice_at", precision: nil
+    t.datetime "open_banking_consent_choice_at"
     t.string "own_home"
     t.decimal "property_value", precision: 10, scale: 2
     t.string "shared_ownership"
@@ -513,8 +513,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.date "transaction_period_start_on"
     t.date "transaction_period_finish_on"
     t.boolean "transactions_gathered"
-    t.datetime "completed_at", precision: nil
-    t.datetime "declaration_accepted_at", precision: nil
+    t.datetime "completed_at"
+    t.datetime "declaration_accepted_at"
     t.json "provider_step_params"
     t.boolean "own_vehicle"
     t.date "substantive_application_deadline_on"
@@ -527,8 +527,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.boolean "no_debit_transaction_types_selected"
     t.boolean "provider_received_citizen_consent"
     t.boolean "student_finance"
-    t.datetime "discarded_at", precision: nil
-    t.datetime "merits_submitted_at", precision: nil
+    t.datetime "discarded_at"
+    t.datetime "merits_submitted_at"
     t.boolean "in_scope_of_laspo"
     t.boolean "emergency_cost_override"
     t.decimal "emergency_cost_requested"
@@ -536,11 +536,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
-    t.datetime "client_declaration_confirmed_at", precision: nil
+    t.datetime "client_declaration_confirmed_at"
     t.boolean "substantive_cost_override"
     t.decimal "substantive_cost_requested"
     t.string "substantive_cost_reasons"
@@ -588,15 +588,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.boolean "virus_found", null: false
     t.text "scan_result"
     t.json "file_details"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "scanner_working"
     t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader_type_and_uploader_id"
   end
 
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "ccms_id"
     t.string "code"
     t.uuid "firm_id"
@@ -620,8 +620,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.text "police_notified_details"
     t.boolean "bail_conditions_set"
     t.text "bail_conditions_set_details"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "full_name"
     t.integer "ccms_opponent_id"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
@@ -638,8 +638,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.decimal "inherited_assets_value"
     t.decimal "money_owed_value"
     t.decimal "trust_value"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "none_selected"
     t.index ["legal_aid_application_id"], name: "index_other_assets_declarations_on_legal_aid_application_id", unique: true
   end
@@ -689,8 +689,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "category_of_law", null: false
     t.string "category_law_code", null: false
     t.string "ccms_matter_code"
-    t.string "client_involvement_type_ccms_code"
-    t.string "client_involvement_type_description"
+    t.string "client_involvement_type_ccms_code", null: false
+    t.string "client_involvement_type_description", null: false
     t.boolean "used_delegated_functions"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
@@ -710,12 +710,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "type"
     t.text "roles"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "office_codes"
     t.uuid "firm_id"
     t.uuid "selected_office_id"
@@ -740,8 +740,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.decimal "plc_shares"
     t.decimal "peps_unit_trusts_capital_bonds_gov_stocks"
     t.decimal "life_assurance_endowment_policy"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "none_selected"
     t.decimal "offline_savings_accounts"
     t.boolean "no_account_selected"
@@ -753,11 +753,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.string "mailer_klass", null: false
     t.string "mailer_method", null: false
     t.string "arguments", null: false
-    t.datetime "scheduled_at", precision: nil, null: false
-    t.datetime "sent_at", precision: nil
-    t.datetime "cancelled_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "scheduled_at", null: false
+    t.datetime "sent_at"
+    t.datetime "cancelled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "status"
     t.string "addressee"
     t.string "govuk_message_id"
@@ -765,20 +765,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
 
   create_table "secure_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "data"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "mock_true_layer_data", default: false, null: false
     t.boolean "manually_review_all_cases", default: true
     t.string "bank_transaction_filename", default: "db/sample_data/bank_transactions.csv"
     t.boolean "allow_welsh_translation", default: false, null: false
     t.boolean "enable_ccms_submission", default: true, null: false
     t.boolean "alert_via_sentry", default: true, null: false
-    t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
+    t.datetime "digest_extracted_at", default: "1970-01-01 00:00:01"
     t.boolean "enable_employed_journey", default: false, null: false
     t.boolean "enable_cfe_v5", default: false
     t.boolean "enable_mini_loop", default: false, null: false
@@ -796,8 +796,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
   create_table "statement_of_cases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.text "statement"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "provider_uploader_id"
     t.index ["legal_aid_application_id"], name: "index_statement_of_cases_on_legal_aid_application_id"
     t.index ["provider_uploader_id"], name: "index_statement_of_cases_on_provider_uploader_id"
@@ -806,10 +806,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
   create_table "transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "operation"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "sort_order"
-    t.datetime "archived_at", precision: nil
+    t.datetime "archived_at"
     t.boolean "other_income", default: false
     t.string "parent_id"
     t.index ["parent_id"], name: "index_transaction_types_on_parent_id"
@@ -817,8 +817,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
 
   create_table "true_layer_banks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "banks"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "uploaded_evidence_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -836,8 +836,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_125202) do
     t.date "purchased_on"
     t.boolean "used_regularly"
     t.uuid "legal_aid_application_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "more_than_three_years_old"
     t.index ["legal_aid_application_id"], name: "index_vehicles_on_legal_aid_application_id"
   end
