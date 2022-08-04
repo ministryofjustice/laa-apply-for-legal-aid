@@ -58,5 +58,13 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
         expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.in_scope_of_laspo.blank"))
       end
     end
+
+    context "Form submitted with Save as draft button" do
+      let(:params) { { legal_aid_application: { in_scope_of_laspo: false }, draft_button: "Save and come back later" } }
+
+      it "redirects to the list of applications" do
+        expect(response).to redirect_to providers_legal_aid_applications_path
+      end
+    end
   end
 end

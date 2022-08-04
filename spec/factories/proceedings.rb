@@ -4,6 +4,17 @@ FactoryBot.define do
 
     sequence(:proceeding_case_id) { |n| n + 55_000_000 }
 
+    trait :without_cit do
+      client_involvement_type_ccms_code { nil }
+      client_involvement_type_description { nil }
+    end
+
+    trait :with_df_date do
+      used_delegated_functions { true }
+      used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
+      used_delegated_functions_reported_on { Time.zone.today }
+    end
+
     trait :da001 do
       lead_proceeding { true }
       ccms_code { "DA001" }
@@ -20,6 +31,7 @@ FactoryBot.define do
         'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
          To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
       end
+      used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "inherent_jurisdiction_high_court_injunction" }
@@ -51,6 +63,7 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
+      used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "variation_or_discharge_under_section_protection_from_harassment_act" }
@@ -79,6 +92,7 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
+      used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "occupation_order" }
@@ -107,6 +121,7 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
+      used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "extend_variation_or_discharge_part_iv" }
@@ -135,6 +150,7 @@ FactoryBot.define do
          final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
          of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
       end
+      used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "nonmolestation_order" }
@@ -165,6 +181,7 @@ FactoryBot.define do
         'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
         To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
       end
+      used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_contact" }
@@ -195,6 +212,7 @@ FactoryBot.define do
         'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
         To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
       end
+      used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_residence" }

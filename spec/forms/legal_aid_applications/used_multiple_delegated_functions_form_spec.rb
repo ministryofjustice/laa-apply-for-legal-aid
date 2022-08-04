@@ -31,6 +31,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
     context "when two of the three proceeding types have delegated functions" do
       it "updates each proceeding" do
+        expect(proceedings.map(&:used_delegated_functions)).to match_array([false, true, true])
         expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
         expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil,
                                                                                         used_delegated_functions_reported_on,
@@ -45,6 +46,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
         end
 
         it "updates the application types with no reported on date" do
+          expect(proceedings.map(&:used_delegated_functions)).to match_array([false, true, true])
           expect(proceedings.map(&:used_delegated_functions_on)).to match_array([nil, used_delegated_functions_on, used_delegated_functions_on])
           expect(proceedings.map(&:used_delegated_functions_reported_on)).to match_array([nil, Date.current, Date.current])
         end
@@ -64,6 +66,7 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
 
       it "updates the proceedings delegated function dates to nil" do
         proceedings.each do |type|
+          expect(type.used_delegated_functions).to be false
           expect(type.used_delegated_functions_reported_on).to be_nil
           expect(type.used_delegated_functions_on).to be_nil
         end

@@ -114,7 +114,7 @@ module CCMS
             let(:df_date) { Date.parse("2020-11-23") }
 
             before do
-              proceeding.update!(used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
+              proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
               legal_aid_application.reload
             end
 

@@ -20,5 +20,15 @@ module Providers
         params.require(:legal_aid_application).permit(:in_scope_of_laspo)
       end
     end
+
+    def continue_or_draft
+      legal_aid_application.update!(draft: draft_selected?)
+
+      if legal_aid_application.draft?
+        redirect_to draft_target_endpoint
+      else
+        go_forward(legal_aid_application)
+      end
+    end
   end
 end

@@ -58,14 +58,23 @@ module Flow
             if has_other_proceeding
               :proceedings_types
             else
-              application.section_8_proceedings? ? :in_scope_of_laspos : :used_multiple_delegated_functions
+              application.section_8_proceedings? ? :in_scope_of_laspos : Flow::ProceedingLoop.next_step(application)
             end
           end,
         },
         in_scope_of_laspos: {
           path: ->(application) { urls.providers_legal_aid_application_in_scope_of_laspo_path(application) },
-          forward: :used_multiple_delegated_functions,
+          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
           carry_on_sub_flow: true,
+          check_answers: :check_provider_answers,
+        },
+        delegated_functions: {
+          path: lambda do |application|
+            proceeding = Flow::ProceedingLoop.next_proceeding(application)
+            urls.providers_legal_aid_application_delegated_function_path(application, proceeding)
+          end,
+          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
+          carry_on_sub_flow: false,
           check_answers: :check_provider_answers,
         },
         used_multiple_delegated_functions: {

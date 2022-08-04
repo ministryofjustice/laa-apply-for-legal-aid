@@ -478,7 +478,7 @@ module CCMS
           context "delegated functions used" do
             before do
               legal_aid_application.proceedings.each do |proceeding|
-                proceeding.update!(used_delegated_functions_on: Date.yesterday, used_delegated_functions_reported_on: Date.current)
+                proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Date.yesterday, used_delegated_functions_reported_on: Date.current)
               end
             end
 

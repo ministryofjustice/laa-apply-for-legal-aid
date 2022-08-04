@@ -440,6 +440,8 @@ en:
               none_selected: Select if your client has received any of these payments
         proceedings:
           attributes:
+            used_delegated_functions:
+              blank: Select yes if you have used delegated functions for this proceeding
             used_delegated_functions_on:
               nothing_selected: Select proceedings you've used delegated functions for
               none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
