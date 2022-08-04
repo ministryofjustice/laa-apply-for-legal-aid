@@ -892,6 +892,7 @@ en:
           further_employment_details: Further employment details
           multiple_employments: Multiple employments
           refunds: Tax or NI refunds
+          uploaded_bank_statements: Bank statements uploaded
       show:
         heading: Means report
         caseworker-review-section-heading: Caseworker Review
