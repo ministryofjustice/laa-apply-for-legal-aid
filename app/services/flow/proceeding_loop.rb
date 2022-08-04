@@ -16,7 +16,12 @@ module Flow
       return :used_multiple_delegated_functions unless Setting.enable_mini_loop?
 
       if application_before_loop? || application_inside_proceeding_loop?
-        :delegated_functions # TODO: This may update to the CIT page when it gets added as the next step of the mini loop
+        case @application.provider_step
+        when "delegated_functions", "in_scope_of_laspos", "has_other_proceedings"
+          :client_involvement_type
+        when "client_involvement_type"
+          :delegated_functions
+        end
       else
         :limitations
       end
