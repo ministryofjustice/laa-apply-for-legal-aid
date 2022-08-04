@@ -604,11 +604,12 @@ GEM
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    savon (2.12.1)
+    savon (2.13.0)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)
-      httpi (~> 2.3)
+      httpi (>= 2.4.5)
+      mail (~> 2.5)
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
@@ -787,7 +788,7 @@ DEPENDENCIES
   rubocop-govuk
   rubocop-performance
   ruby-saml-idp!
-  savon (~> 2.12.1)
+  savon (~> 2.13.0)
   secure_headers
   selenium-webdriver
   sentry-rails (>= 4.8.0)
