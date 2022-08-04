@@ -1251,4 +1251,8 @@ en:
         page_title: Enter your client's email address
         label: Email address
         hint: We'll use this to send your client a link to the service.+
+    proceeding_loop:
+      client_involvement_type:
+        show:
+          question: What is your client’s role in this proceeding?
 

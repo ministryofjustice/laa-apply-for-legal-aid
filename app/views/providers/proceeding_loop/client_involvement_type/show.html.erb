@@ -1,0 +1,21 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_client_involvement_type_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= page_template page_title: @proceeding.meaning, template: :basic, form: form do %>
+    <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
+    <%= form.govuk_collection_radio_buttons(:client_involvement_type_ccms_code,
+                                            @form.client_involvement_types,
+                                            :ccms_code,
+                                            :description,
+                                            legend: {size: 'xl', tag: 'h1', text: content_for(:page_title)},
+                                            hint: { text: t('.question'), class: 'govuk-heading-m' }) %>
+
+    <%= next_action_buttons(
+          form: form,
+          show_draft: true
+        ) %>
+  <% end %>
+<% end %>
