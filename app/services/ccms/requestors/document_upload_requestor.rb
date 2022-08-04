@@ -45,6 +45,9 @@ module CCMS
         when "bank_transaction_report"
           xml.__send__(:"casebio:DocumentType", "BSTMT")
           xml.__send__(:"casebio:FileExtension", "csv")
+        when "bank_statement_evidence_pdf"
+          xml.__send__(:"casebio:DocumentType", "BSTMT")
+          xml.__send__(:"casebio:FileExtension", "pdf")
         when "gateway_evidence_pdf"
           xml.__send__(:"casebio:DocumentType", "STATE")
           xml.__send__(:"casebio:FileExtension", "pdf")

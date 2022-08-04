@@ -11,6 +11,8 @@ module CCMS
 
       describe "XML request" do
         context "when the attachment is a means report" do
+          let(:type) { "means_report" }
+
           include_context "with ccms soa configuration"
 
           it "generates the expected XML" do
@@ -26,7 +28,7 @@ module CCMS
           end
         end
 
-        context "when the attachment is a bank transaction report" do
+        context "when the attachment is a bank_transaction_report" do
           let(:type) { "bank_transaction_report" }
 
           include_context "with ccms soa configuration"
@@ -38,6 +40,42 @@ module CCMS
               transaction_id: expected_tx_id,
               matching: %w[
                 <casebio:DocumentType>BSTMT</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when the attachment is a bank_statement_evidence_pdf" do
+          let(:type) { "bank_statement_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>BSTMT</casebio:DocumentType>
+                <casebio:Channel>E</casebio:Channel>
+              ],
+            )
+          end
+        end
+
+        context "when sent a gateway evidence document" do
+          let(:type) { "gateway_evidence_pdf" }
+
+          include_context "with ccms soa configuration"
+
+          it "generates the expected XML" do
+            allow(requestor).to receive(:transaction_request_id).and_return(expected_tx_id)
+            expect(requestor.formatted_xml).to be_soap_envelope_with(
+              command: "casebim:DocumentUploadRQ",
+              transaction_id: expected_tx_id,
+              matching: %w[
+                <casebio:DocumentType>STATE</casebio:DocumentType>
                 <casebio:Channel>E</casebio:Channel>
               ],
             )
