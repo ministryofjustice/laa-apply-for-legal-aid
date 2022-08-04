@@ -26,7 +26,7 @@
   <% if Setting.enable_mini_loop? %>
     <% @legal_aid_application.proceedings.in_order_of_addition.each do |proceeding| %>
       <%= render(
-            'shared/check_answers/delegated_function_details',
+            'shared/check_answers/proceeding_details',
             proceeding: proceeding,
             read_only: @read_only
           ) %>
