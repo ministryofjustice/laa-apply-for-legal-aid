@@ -33,18 +33,38 @@
   </dl>
 
   <% if @legal_aid_application.non_passported? %>
-    <h2 class="govuk-heading-m">
-      <%= t('.income_result_heading') %>
-    </h2>
+    <% if @legal_aid_application.uploading_bank_statements? %>
+      <section class="print-no-break">
+        <%= render('shared/check_answers/income_categories', read_only: true) %>
+      </section>
 
-    <%= render 'shared/check_answers/income_result', read_only: true %>
+      <section class="print-no-break">
+        <%= render('shared/check_answers/income_cash_payments', read_only: true) %>
+      </section>
 
-    <section class="print-no-break">
+      <section class="print-no-break">
+        <%= render('shared/check_answers/outgoings_categories', read_only: true) %>
+      </section>
+
+      <section class="print-no-break">
+        <%= render('shared/check_answers/outgoings_cash_payments', read_only: true) %>
+      </section>
+    <% end %>
+
+    <% unless @legal_aid_application.uploading_bank_statements? %>
       <h2 class="govuk-heading-m">
-        <%= t('.income_details_heading') %>
+        <%= t('.income_result_heading') %>
       </h2>
-      <%= render 'shared/check_answers/income_details' %>
-    </section>
+
+      <%= render 'shared/check_answers/income_result', read_only: true %>
+
+      <section class="print-no-break">
+        <h2 class="govuk-heading-m">
+          <%= t('.income_details_heading') %>
+        </h2>
+        <%= render 'shared/check_answers/income_details' %>
+      </section>
+    <% end %>
 
     <section class="print-no-break">
       <% if @legal_aid_application.extra_employment_information? %>
@@ -60,19 +80,21 @@
 
     <div class="govuk-!-padding-bottom-8"></div>
 
-    <section class="print-no-break">
-      <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
-      <%= render 'shared/check_answers/outgoings_details' %>
-    </section>
+    <% unless @legal_aid_application.uploading_bank_statements? %>
+      <section class="print-no-break">
+        <h2 class="govuk-heading-l"><%= t('.debits-section-heading') %></h2>
+        <%= render 'shared/check_answers/outgoings_details' %>
+      </section>
 
-    <div class="govuk-!-padding-bottom-8"></div>
+      <div class="govuk-!-padding-bottom-8"></div>
 
-    <section class="print-no-break">
-      <h2 class="govuk-heading-l"><%= t('.deductions-section-heading') %></h2>
-      <%= render 'shared/check_answers/deductions_details' %>
-    </section>
+      <section class="print-no-break">
+        <h2 class="govuk-heading-l"><%= t('.deductions-section-heading') %></h2>
+        <%= render 'shared/check_answers/deductions_details' %>
+      </section>
 
-    <div class="govuk-!-padding-bottom-8"></div>
+      <div class="govuk-!-padding-bottom-8"></div>
+    <% end %>
 
     <section class="print-no-break">
       <h2 class="govuk-heading-l"><%= t('.caseworker-review-section-heading') %></h2>
@@ -81,11 +103,15 @@
 
   <% end %>
 
-  <h2 class="govuk-heading-m">
-    <%= t('.capital_result_heading') %>
-  </h2>
+  <% unless @legal_aid_application.uploading_bank_statements? %>
+    <section class="print-no-break">
+      <h2 class="govuk-heading-m">
+        <%= t('.capital_result_heading') %>
+      </h2>
 
-  <%= render 'shared/check_answers/capital_result', read_only: true %>
+      <%= render 'shared/check_answers/capital_result', read_only: true %>
+    </section>
+  <% end %>
 
   <h2 class="govuk-heading-m">
     <%= t('.assets_heading') %>
@@ -99,4 +125,10 @@
       <%= render partial: 'caseworker_review', locals: { manual_review_determiner: @manual_review_determiner } %>
     </section>
   <% end %>
+<% end %>
+
+<% if @legal_aid_application.uploading_bank_statements? %>
+  <section class="print-no-break">
+    <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+  </section>
 <% end %>

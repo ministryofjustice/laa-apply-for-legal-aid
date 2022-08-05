@@ -901,6 +901,7 @@ en:
         debits-section-heading: Outgoings
         deductions-section-heading: Deductions
         proceeding_eligibility: Proceeding eligibility
+        evidence_upload_heading: Supporting evidence
     no_income_summaries:
       show:
         page_heading: "Your client's income"

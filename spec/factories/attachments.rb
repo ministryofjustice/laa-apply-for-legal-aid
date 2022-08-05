@@ -31,7 +31,7 @@ FactoryBot.define do
       attachment_name { "uploaded_evidence_collection" }
     end
 
-    after(:create) do |attachment|
+    after(:build) do |attachment|
       filepath = Rails.root.join("spec/fixtures/files/documents/hello_world.pdf")
 
       attachment.document.attach(
