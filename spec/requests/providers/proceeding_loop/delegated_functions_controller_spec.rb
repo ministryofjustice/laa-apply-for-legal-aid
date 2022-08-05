@@ -27,9 +27,10 @@ RSpec.describe "DelegatedFunctionsController", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "displays the email label" do
+      it "displays the proceeding header" do
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
+        expect(response.body).to include("Have you used delegated functions for this proceeding?")
       end
     end
   end
