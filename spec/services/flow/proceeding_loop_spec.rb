@@ -30,6 +30,8 @@ RSpec.describe Flow::ProceedingLoop do
       context "when the user enters the loop for the first time" do
         let(:provider_step) { "has_other_proceedings" }
 
+        before { allow(legal_aid_application).to receive(:provider_step_params).and_return({}) }
+
         it { is_expected.to be :client_involvement_type }
       end
 
@@ -48,6 +50,14 @@ RSpec.describe Flow::ProceedingLoop do
           before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
           it { is_expected.to be :client_involvement_type }
+
+          context "and the delegated_function date is over a month old" do
+            before do
+              legal_aid_application.proceedings.in_order_of_addition.second.update!(used_delegated_functions_on: 35.days.ago)
+            end
+
+            it { is_expected.to be :confirm_delegated_functions_date }
+          end
         end
       end
 
