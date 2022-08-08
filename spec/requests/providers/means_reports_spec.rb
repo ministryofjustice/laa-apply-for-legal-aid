@@ -215,7 +215,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
                explicit_proceedings: %i[da002 da006])
       end
 
-      # TODO: move this to a factory and/orfind a way to append pemissions nicely
+      # TODO: move this to a factory and/or find a way to append pemissions nicely
       let(:provider) do
         create(:provider, :with_bank_statement_upload_permissions).tap do |provider|
           non_passported = Permission.find_by(role: "application.non_passported.*")
@@ -234,6 +234,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           .to have_selector("h2", text: "Client details")
           .and have_selector("h2", text: "Passported means")
           .and have_selector("h2", text: "Declared income categories")
+          .and have_selector("h2", text: "Student finance")
           .and have_selector("h2", text: "Declared cash income")
           .and have_selector("h2", text: "Declared outgoings categories")
           .and have_selector("h2", text: "Declared cash outgoings")
