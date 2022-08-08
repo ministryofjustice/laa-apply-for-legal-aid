@@ -115,6 +115,13 @@ function showResults (results, inputText) {
       // const element = $('#' + code)
       const element = document.getElementById(code);
 
+      // if the provider does not have full-section-8 permissions, then codes will only contain
+      // those proceeding types that are not full-section-8 (filtered out bt the LegalFramework::ProceedingTypes::All service),
+      // so we just ignore them here if they aren't in the list
+      if (element == null) {
+        return;
+      }
+
       // We want to highlight anything in the label or hint text that
       // matches the user's search criteria
       const label = element.querySelector('label');
