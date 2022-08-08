@@ -1259,7 +1259,6 @@ en:
           question: Have you used delegated functions for this proceeding?
       confirm_delegated_functions_date:
         show:
-          heading: Check delegated functions date
-          radios_heading: Is this date correct?
-          warning_text: The date you entered is over one month old.
+          question: Did you use delegated functions for this proceeding on %{date}?
+          warning_text: The date you said you used delegated functions is over one month old.
           details_incorrect: No, I need to change this date
