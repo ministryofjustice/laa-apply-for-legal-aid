@@ -33,7 +33,9 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr, type: :request d
       end
 
       it "displays the proceeding header" do
-        expect(response.body).to include("Check delegated functions date")
+        expect(response.body).to include("Proceeding 1")
+        expect(response.body).to include("Inherent jurisdiction high court injunction")
+        expect(response.body).to include("The date you said you used delegated functions is over one month old.")
       end
     end
   end
