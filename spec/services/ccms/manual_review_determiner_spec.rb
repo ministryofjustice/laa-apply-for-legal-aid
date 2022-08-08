@@ -288,6 +288,18 @@ module CCMS
           expect(subject).to eq restrictions_reasons
         end
       end
+
+      context "with uploaded bank statements" do
+        let(:legal_aid_application) { create(:legal_aid_application) }
+
+        before do
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return true
+        end
+
+        it "adds uploaded_bank_statements to the review reasons" do
+          expect(subject).to include(:uploaded_bank_statements)
+        end
+      end
     end
   end
 end
