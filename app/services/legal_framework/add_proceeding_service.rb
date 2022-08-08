@@ -40,11 +40,9 @@ module LegalFramework
         category_of_law: proceeding_type.ccms_category_law,
         category_law_code: proceeding_type.ccms_category_law_code,
         ccms_matter_code: proceeding_type.ccms_matter_code,
-        # TODO: These two fields will, once the designs are complete need to be populated from
-        # from providers decisions, until then we hard code the new values
-        # which match the current values we send to CCMS by default
-        client_involvement_type_ccms_code: "A",
-        client_involvement_type_description: "Applicant/claimant/petitioner",
+        # TODO: remove the following lines when the mini-loop feature flag is removed
+        client_involvement_type_ccms_code: Setting.enable_mini_loop? ? nil : "A",
+        client_involvement_type_description: Setting.enable_mini_loop? ? nil : "Applicant/claimant/petitioner",
       }
     end
 

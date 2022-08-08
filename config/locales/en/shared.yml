@@ -285,6 +285,8 @@ en:
         section_laspo:
           heading: LASPO
           question: Are the Section 8 proceedings you're applying for in scope of LASPO?
+      client_involvement_type_details:
+        question: Client role
       delegated_function_details:
         question: Delegated functions
         not_used: Not used

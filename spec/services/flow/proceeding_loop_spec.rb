@@ -30,15 +30,25 @@ RSpec.describe Flow::ProceedingLoop do
       context "when the user enters the loop for the first time" do
         let(:provider_step) { "has_other_proceedings" }
 
-        it { is_expected.to be :delegated_functions }
+        it { is_expected.to be :client_involvement_type }
       end
 
       context "when the user is on the second of three proceedings" do
-        let(:provider_step) { "delegated_functions" }
+        context "and is on the client involvement page" do
+          let(:provider_step) { "client_involvement_type" }
 
-        before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
-        it { is_expected.to be :delegated_functions }
+          it { is_expected.to be :delegated_functions }
+        end
+
+        context "and is on the delegated_function page" do
+          let(:provider_step) { "delegated_functions" }
+
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
+
+          it { is_expected.to be :client_involvement_type }
+        end
       end
 
       context "when the user is on the final of the three proceedings" do

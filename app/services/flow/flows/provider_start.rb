@@ -68,13 +68,22 @@ module Flow
           carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
+        client_involvement_type: {
+          path: lambda do |application|
+            proceeding = Flow::ProceedingLoop.next_proceeding(application)
+            urls.providers_legal_aid_application_client_involvement_type_path(application, proceeding)
+          end,
+          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of CIT affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
         delegated_functions: {
           path: lambda do |application|
             proceeding = Flow::ProceedingLoop.next_proceeding(application)
             urls.providers_legal_aid_application_delegated_function_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: false,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,
         },
         used_multiple_delegated_functions: {

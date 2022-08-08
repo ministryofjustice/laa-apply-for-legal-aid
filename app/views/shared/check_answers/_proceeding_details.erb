@@ -1,0 +1,19 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<div class="govuk-grid-row" id="app-check-your-answers__delegated_functions">
+  <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m"><%= proceeding.meaning %></h2>
+  </div>
+</div>
+
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= render(
+        'shared/check_answers/delegated_function_details',
+        proceeding: proceeding,
+        read_only: @read_only
+      ) %>
+  <%= render(
+        'shared/check_answers/client_involvement_type_details',
+        proceeding: proceeding,
+        read_only: @read_only
+      ) %>
+</dl>

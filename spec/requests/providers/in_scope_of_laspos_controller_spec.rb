@@ -24,7 +24,12 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
   describe "PATCH /providers/:application_id/in_scope_of_laspo" do
     subject { patch providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application), params: }
 
-    before { subject }
+    before do
+      allow(Setting).to receive(:enable_mini_loop?).and_return(mini_loop?)
+      subject
+    end
+
+    let(:mini_loop?) { false }
 
     context "choose yes" do
       let(:params) { { legal_aid_application: { in_scope_of_laspo: true } } }
@@ -47,6 +52,15 @@ RSpec.describe Providers::InScopeOfLasposController, type: :request do
 
       it "redirects to the next page" do
         expect(response).to redirect_to(next_flow_step)
+      end
+
+      context "when the mini_loop flag is on" do
+        let(:mini_loop?) { true }
+
+        it "redirects to the next page" do
+          proceeding_id = legal_aid_application.proceedings.first.id
+          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
+        end
       end
     end
 
