@@ -1,7 +1,7 @@
 module LegalFramework
   class BaseApiCall
-    def self.call
-      new.call
+    def self.call(params = nil)
+      params.nil? ? new.call : new(params).call
     end
 
   private
