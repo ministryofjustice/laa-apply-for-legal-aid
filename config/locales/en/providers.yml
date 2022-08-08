@@ -849,9 +849,18 @@ en:
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
     means_reports:
-      benefit_check_heading: &benefit_check_heading Passported means
-      benefit_check_question: &question_receives_benefit In receipt of passporting benefit
+      adult_dependants: Adult dependants
+      assets_heading: &assets_heading Property, savings and other assets
+      benefit_check_heading: Passported means
+      benefit_check_question: In receipt of passporting benefit
+      capital_result_heading: &capital_result_heading Capital result
       caseworker_review_section_heading: Caseworker Review
+      child_dependants: Child dependants
+      deductions-section-heading: &deductions-section-heading Deductions
+      debits-section-heading: &debits-section-heading Outgoings
+      dependants_heading: Dependants
+      income_details_heading: &income_details_heading Income
+      income_result_heading: &income_result_heading Income result
       proceeding_eligibility: Proceeding eligibility
       caseworker_review:
         required: Caseworker review required?
@@ -893,20 +902,13 @@ en:
           refunds: Tax or NI refunds
           uploaded_bank_statements: Bank statements uploaded
       show:
-        assets_heading: &assets_heading Property, savings and other assets
-        capital_result_heading: &capital_result_heading Capital result
         client_details_heading: Client details
-        debits-section-heading: &debits-section-heading Outgoings
-        deductions-section-heading: &deductions-section-heading Deductions
         evidence_upload_heading: Supporting evidence
         heading: Means report
-        income_details_heading: &income_details_heading Income
-        income_result_heading: &income_result_heading Income result
       without_cfe_result_details:
         assets_heading: *assets_heading
         income_details_heading: *income_details_heading
         income_result_heading: *income_result_heading
-        question_receives_benefit: *question_receives_benefit
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading
@@ -914,7 +916,6 @@ en:
         deductions-section-heading: *deductions-section-heading
         income_details_heading: *income_details_heading
         income_result_heading: *income_result_heading
-        question_receives_benefit: *question_receives_benefit
 
     no_income_summaries:
       show:
