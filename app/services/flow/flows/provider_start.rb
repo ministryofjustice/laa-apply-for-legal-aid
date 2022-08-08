@@ -73,7 +73,7 @@ module Flow
             proceeding = Flow::ProceedingLoop.next_proceeding(application)
             urls.providers_legal_aid_application_client_involvement_type_path(application, proceeding)
           end,
-          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
+          forward: :delegated_functions,
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of CIT affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,
         },
