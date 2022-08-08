@@ -35,7 +35,7 @@
   <% if @legal_aid_application.non_passported? %>
     <% if @legal_aid_application.uploading_bank_statements? %>
       <section class="print-no-break">
-        <%= render('shared/check_answers/income_categories', read_only: true) %>
+        <%= render('income_categories', read_only: true) %>
       </section>
 
       <section class="print-no-break">
@@ -43,15 +43,15 @@
       </section>
 
       <section class="print-no-break">
-        <%= render('shared/check_answers/income_cash_payments', read_only: true) %>
+        <%= render('income_cash_payments', read_only: true) %>
       </section>
 
       <section class="print-no-break">
-        <%= render('shared/check_answers/outgoings_categories', read_only: true) %>
+        <%= render('outgoings_categories', read_only: true) %>
       </section>
 
       <section class="print-no-break">
-        <%= render('shared/check_answers/outgoings_cash_payments', read_only: true) %>
+        <%= render('outgoings_cash_payments', read_only: true) %>
       </section>
     <% end %>
 
