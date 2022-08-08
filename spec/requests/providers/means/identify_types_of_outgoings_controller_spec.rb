@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
+RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
   let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
@@ -95,6 +95,11 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         request
         expect(response).to redirect_to providers_legal_aid_applications_path
       end
+
+      it "redirects to the cash outgoings page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+      end
     end
 
     context "when application has transaction types of other kind" do
@@ -137,13 +142,33 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      it "redirects to the means has dependants page" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_applicant_bank_account_path(legal_aid_application))
+      context "with previously selected income categories" do
+        let(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+        let!(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant,
+                 :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types
+        end
+
+        it "redirects to the income summary page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        end
+      end
+
+      context "with no previously selected income categories" do
+        let!(:legal_aid_application) do
+          create :legal_aid_application, :with_applicant,
+                 :with_non_passported_state_machine, :applicant_entering_means, transaction_types: []
+        end
+
+        it "redirects to the has dependants page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
       end
     end
 
-    context "the wrong transaction type is passed in" do
+    context "when the wrong transaction type is passed in" do
       let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
       let(:transaction_type_ids) { income_types.map(&:id) }
 

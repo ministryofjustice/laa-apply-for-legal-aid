@@ -91,8 +91,34 @@ RSpec.describe Providers::IncomeSummaryController do
 
     before { subject }
 
-    it "redirects to the next page" do
-      expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+    context "with no outgoings categories previously selected" do
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_applicant,
+               :with_non_passported_state_machine,
+               :applicant_entering_means,
+               transaction_types: []
+      end
+
+      it "redirects to the dependants page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+      end
+    end
+
+    context "with outgoings categories" do
+      let!(:maintenance_out) { create :transaction_type, :debit, name: "maintenance_out" }
+      let(:legal_aid_application) do
+        create :legal_aid_application,
+               :with_applicant,
+               :with_non_passported_state_machine,
+               :applicant_entering_means,
+               transaction_types: [maintenance_out]
+      end
+
+      it "redirects to the outgoings summary page" do
+        expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+      end
     end
 
     context "when the provider is not authenticated" do

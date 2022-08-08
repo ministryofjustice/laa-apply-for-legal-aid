@@ -32,8 +32,8 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
           expect(response.body).not_to include("Review their employment details")
         end
 
-        it "includes sorting transactions as first point" do
-          expect(response.body).to include("1. Sort their bank transactions into categories")
+        it "includes income and outgoings as first point" do
+          expect(response.body).to include("1. Tell us about their income and outgoings")
         end
       end
 

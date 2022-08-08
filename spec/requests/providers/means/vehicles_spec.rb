@@ -100,7 +100,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
     context 'with option "false"' do
       let(:own_vehicle) { "false" }
       let(:target_url) do
-        providers_legal_aid_application_means_savings_and_investment_path(legal_aid_application)
+        providers_legal_aid_application_applicant_bank_account_path(legal_aid_application)
       end
 
       it "does not create a vehicle" do
