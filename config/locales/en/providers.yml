@@ -849,6 +849,10 @@ en:
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
     means_reports:
+      benefit_check_heading: &benefit_check_heading Passported means
+      benefit_check_question: &question_receives_benefit In receipt of passporting benefit
+      caseworker_review_section_heading: Caseworker Review
+      proceeding_eligibility: Proceeding eligibility
       caseworker_review:
         required: Caseworker review required?
         reasons: Review reasons
@@ -889,19 +893,29 @@ en:
           refunds: Tax or NI refunds
           uploaded_bank_statements: Bank statements uploaded
       show:
-        heading: Means report
-        caseworker-review-section-heading: Caseworker Review
+        assets_heading: &assets_heading Property, savings and other assets
+        capital_result_heading: &capital_result_heading Capital result
         client_details_heading: Client details
-        benefit_check_heading: Passported means
-        capital_result_heading: Capital result
-        income_result_heading: Income result
-        assets_heading: Property, savings and other assets
-        question_receives_benefit: In receipt of passporting benefit
-        income_details_heading: Income
-        debits-section-heading: Outgoings
-        deductions-section-heading: Deductions
-        proceeding_eligibility: Proceeding eligibility
+        debits-section-heading: &debits-section-heading Outgoings
+        deductions-section-heading: &deductions-section-heading Deductions
         evidence_upload_heading: Supporting evidence
+        heading: Means report
+        income_details_heading: &income_details_heading Income
+        income_result_heading: &income_result_heading Income result
+      without_cfe_result_details:
+        assets_heading: *assets_heading
+        income_details_heading: *income_details_heading
+        income_result_heading: *income_result_heading
+        question_receives_benefit: *question_receives_benefit
+      with_cfe_result_details:
+        assets_heading: *assets_heading
+        capital_result_heading: *capital_result_heading
+        debits-section-heading: *debits-section-heading
+        deductions-section-heading: *deductions-section-heading
+        income_details_heading: *income_details_heading
+        income_result_heading: *income_result_heading
+        question_receives_benefit: *question_receives_benefit
+
     no_income_summaries:
       show:
         page_heading: "Your client's income"
