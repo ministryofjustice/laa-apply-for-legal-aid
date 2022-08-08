@@ -86,6 +86,15 @@ module Flow
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,
         },
+        confirm_delegated_functions_date: {
+          path: lambda do |application|
+            proceeding = Flow::ProceedingLoop.next_proceeding(application)
+            urls.providers_legal_aid_application_confirm_delegated_functions_date_path(application, proceeding)
+          end,
+          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
         used_multiple_delegated_functions: {
           path: ->(application) { urls.providers_legal_aid_application_used_multiple_delegated_functions_path(application) },
           forward: lambda do |_application, delegated_functions_used_over_month_ago|
