@@ -55,14 +55,31 @@ RSpec.describe "DelegatedFunctionsController", type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
+        post_df
       end
 
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          post_df
           expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+        end
+
+        context "and the date is more than a month old" do
+          let(:params) do
+            {
+              proceeding: {
+                used_delegated_functions: true,
+                "used_delegated_functions_on(3i)": 35.days.ago.day.to_s,
+                "used_delegated_functions_on(2i)": 35.days.ago.month.to_s,
+                "used_delegated_functions_on(1i)": 35.days.ago.year.to_s,
+              },
+            }
+          end
+
+          it "redirects to the confirmation page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
+          end
         end
       end
     end
