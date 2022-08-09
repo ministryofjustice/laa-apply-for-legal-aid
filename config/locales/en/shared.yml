@@ -202,6 +202,9 @@ en:
         offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
         total: '%{text} total'
+      bank_statements:
+        section_heading: Bank statements
+        bank_statement_question: Uploaded bank statements
       capital_result:
         contribution: Capital contribution
         lower_limit_label: Capital lower limit
