@@ -34,10 +34,6 @@ Feature: Check pending employment
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
-
-    When I choose "No"
-    And I click 'Save and continue'
     Then I should be on a page showing "Sort your client's income into categories"
 
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
@@ -61,6 +57,11 @@ Feature: Check pending employment
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Your client’s bank accounts"
 
     When I choose "No"
     And I click 'Save and continue'

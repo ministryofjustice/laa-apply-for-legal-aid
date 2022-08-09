@@ -5,14 +5,45 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     And Bank transactions exist
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I am on the "Your client's income" page
-    Then I choose "binary-choice-form-no-income-summaries-true-field"
+
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+    When I select "None of the above"
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "Childcare"
+    And I click 'Save and continue'
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select childcare payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I am on the "Does your client have any dependants?" page
+
+    When I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
+
     Then I choose "legal-aid-application-has-dependants-field"
-    Then I click 'Save and continue'
-    Then I am on the "Your client's outgoings" page
-    Then I choose "binary-choice-form-no-outgoings-summaries-true-field"
     Then I click 'Save and continue'
     Then I am on the "Does your client own the home that they live in?" page
     Then I choose "legal-aid-application-own-home-no-field"
@@ -89,14 +120,44 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     And Bank transactions exist
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I am on the "Your client's income" page
-    Then I choose "binary-choice-form-no-income-summaries-true-field"
+
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+    When I select "None of the above"
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "Childcare"
+    And I click 'Save and continue'
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select childcare payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I am on the "Does your client have any dependants?" page
+
+    When I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "legal-aid-application-has-dependants-field"
-    Then I click 'Save and continue'
-    Then I am on the "Your client's outgoings" page
-    Then I choose "binary-choice-form-no-outgoings-summaries-true-field"
     Then I click 'Save and continue'
     Then I am on the "Does your client own the home that they live in?" page
     Then I choose "legal-aid-application-own-home-no-field"

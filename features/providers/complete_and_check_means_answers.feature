@@ -23,29 +23,26 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-    When I choose "No"
-    And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    Then I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    Then I click 'Save and continue'
 
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
     And I click 'Save and continue'
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    Then I click the first link 'View statements and add transactions'
+
+    When I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select childcare payments'
-    Then I select the first checkbox
+    When I select the first checkbox
     And I click 'Save and continue'
     Then I click 'Save and continue'
 
     When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
   @javascript @vcr
@@ -72,10 +69,7 @@ Feature: Completing and checking means answers backwards and forwards
 
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
 
-    When I choose "No"
-    And I click 'Save and continue'
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click the first link 'View statements and add transactions'
     Then I should be on a page showing 'Select benefits payments'
@@ -98,8 +92,13 @@ Feature: Completing and checking means answers backwards and forwards
     Then I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
+    When I choose "No"
+    And I click 'Save and continue'
+
+    Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+    When I choose "No"
+    And I click 'Save and continue'
+
     Then I should be on a page showing "Which savings or investments does your client have?"
     Then I select "My client has none of these savings or investments"
     Then I click 'Save and continue'

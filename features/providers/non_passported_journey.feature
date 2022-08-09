@@ -203,7 +203,7 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "My client has none of these assets"
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or\ charities'
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
