@@ -42,7 +42,7 @@ module Flow
           check_answers: :means_summaries,
         },
         identify_types_of_outgoings: {
-          path: ->(application) { urls.providers_legal_aid_application_identify_types_of_outgoing_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
             if application.transaction_types.debits.any?
               :cash_outgoings

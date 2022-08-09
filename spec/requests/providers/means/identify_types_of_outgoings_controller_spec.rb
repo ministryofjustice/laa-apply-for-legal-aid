@@ -8,8 +8,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
   before { login }
 
-  describe "GET /providers/identify_types_of_outgoing" do
-    subject(:request) { get providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/means/identify_types_of_outgoing" do
+    subject(:request) { get providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application) }
 
     before { request }
 
@@ -35,10 +35,10 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
   end
 
-  describe "PATCH /providers/identify_types_of_outgoing" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_outgoing" do
     subject(:request) do
       patch(
-        providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application),
+        providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application),
         params: params.merge(submit_button),
       )
     end
@@ -60,7 +60,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     it "displays an error" do
       request
       expect(response.body).to match("govuk-error-summary")
-      expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_outgoings.update.none_selected"))
+      expect(unescaped_response_body).to match(I18n.t("providers.means.identify_types_of_outgoings.update.none_selected"))
       expect(unescaped_response_body).not_to include("translation missing")
     end
 

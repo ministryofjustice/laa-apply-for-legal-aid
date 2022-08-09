@@ -72,7 +72,7 @@ RSpec.describe Providers::NoOutgoingsSummariesController, type: :request do
       #   let(:confirm_no_outgoings) { "false" }
       #
       #   it "redirects to the identify outgoings types page" do
-      #     expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path(legal_aid_application))
+      #     expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application))
       #   end
       # end
     end
