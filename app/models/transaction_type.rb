@@ -69,10 +69,6 @@ class TransactionType < ApplicationRecord
     find_with_children(top_level_id)
   end
 
-  def citizens_label_name
-    label_name(journey: :citizens)
-  end
-
   def providers_label_name
     label_name(journey: :providers)
   end

@@ -201,9 +201,7 @@ Rails.application.routes.draw do
       resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
-      resource :no_income_summary, only: %i[show update]
       resources :outgoings_summary, only: %i[index create]
-      resource :no_outgoings_summary, only: %i[show update]
       resource :incoming_transactions, only: [] do
         get "/:transaction_type", to: "incoming_transactions#show", as: ""
         patch "/:transaction_type", to: "incoming_transactions#update"
