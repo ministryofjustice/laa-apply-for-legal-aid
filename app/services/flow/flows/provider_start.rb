@@ -88,7 +88,8 @@ module Flow
         },
         confirm_delegated_functions_date: {
           path: lambda do |application|
-            proceeding = Flow::ProceedingLoop.next_proceeding(application)
+            # get the proceeding that has just been submitted, not the next `incomplete` one
+            proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_confirm_delegated_functions_date_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
