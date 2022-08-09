@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl id="capital-result-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :total_capital_assessed,
         question: t('.total'),
