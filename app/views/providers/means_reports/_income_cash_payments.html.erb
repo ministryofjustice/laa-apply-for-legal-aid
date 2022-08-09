@@ -7,7 +7,7 @@ cash_credits = @legal_aid_application.cash_transactions.credits.order(:transacti
 credit_categories = TransactionType.credits.not_children
 %>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl id="income-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <% credit_categories.each do |category| %>
     <% if credits.pluck(:transaction_type_id).include?(category.id) %>
       <% if cash_credits.pluck(:transaction_type_id).include?(category.id) %>
