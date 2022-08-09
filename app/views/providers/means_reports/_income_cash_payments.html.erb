@@ -1,6 +1,5 @@
-<h2 class="govuk-heading-m"><%= "Declared cash income" %></h2>
+<h2 class="govuk-heading-m"><%= t('providers.means_reports.income_cash_payments_heading') %></h2>
 
-<!-- TODO: move ruby to controller or presenter?! -->
 <%
 credits = @legal_aid_application.legal_aid_application_transaction_types.credits
 cash_credits = @legal_aid_application.cash_transactions.credits.order(:transaction_date)

@@ -859,9 +859,14 @@ en:
       deductions-section-heading: &deductions-section-heading Deductions
       debits-section-heading: &debits-section-heading Outgoings
       dependants_heading: Dependants
+      income_cash_payments_heading: Declared cash income
+      income_categories_heading: Declared income categories
       income_details_heading: &income_details_heading Income
       income_result_heading: &income_result_heading Income result
+      outgoings_cash_payments_heading: Declared cash outgoings
+      outgoings_categories_heading: Declared outgoings categories
       proceeding_eligibility: Proceeding eligibility
+      student_finance_heading: Student finance
       caseworker_review:
         required: Caseworker review required?
         reasons: Review reasons
