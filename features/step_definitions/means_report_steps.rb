@@ -5,11 +5,12 @@ Given("I have completed a non-passported employed application with bank statemen
     :legal_aid_application,
     :with_proceedings,
     :with_everything,
+    :with_dependant,
     :with_cfe_empty_result,
     :with_extra_employment_information,
     :with_full_employment_information,
-    :assessment_submitted,
     :with_chances_of_success,
+    :assessment_submitted,
     provider_received_citizen_consent: false,
     attachments: [build(:attachment, :bank_statement)],
     explicit_proceedings: %i[da002 da006],
@@ -47,6 +48,10 @@ end
 
 Then("the Dependants questions should exist:") do |table|
   expect_questions_in(selector: "#dependants-questions", expected: table)
+end
+
+Then("the Dependants detail questions should exist:") do |table|
+  expect_questions_in(selector: "#app-check-your-answers__dependants_1_items", expected: table)
 end
 
 Then("the Declared outgoings categories questions should exist:") do |table|

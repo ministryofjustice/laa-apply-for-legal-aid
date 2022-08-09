@@ -51,13 +51,21 @@ Feature: Means report
     # TODO: setup cash incomes for test application
     # Then the Declared cash income questions should exist:
     #  | question |
-    #  | blah |
+    #  | Benefits |
 
-    # TODO: setup dependants for test application
     And the Dependants questions should exist:
       | question |
       | Child dependants |
       | Adult dependants |
+
+    And the Dependants detail questions should exist:
+      | question |
+      | Name |
+      | Date of birth |
+      | What is their relationship to your client? |
+      | Are they in full-time education or training? |
+      | Do they receive any income? |
+      | Do they have assets worth more than £8,000? |
 
     And the Declared outgoings categories questions should exist:
       | question |
@@ -67,9 +75,9 @@ Feature: Means report
       | Payments towards legal aid in a criminal case |
 
     # TODO: setup cash outgoings for test application
-    # Then the Declared cash income questions should exist:
+    # Then the Declared cash outgoings questions should exist:
     #  | question |
-    #  | blah |
+    #  | Housing payments |
 
     And the Employment notes questions should exist:
       | question |
