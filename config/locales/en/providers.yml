@@ -552,7 +552,7 @@ en:
         page_heading: "Sort your client's income into categories"
         student_finance: Student finance
         select: View statements and add transactions
-        subheading: Your client told us they receive the following types of income.
+        subheading: You told us your client receives the types of payments listed below.
         you_need_to:
           text: "You need to:"
           list: |
@@ -927,37 +927,6 @@ en:
         deductions-section-heading: *deductions-section-heading
         income_details_heading: *income_details_heading
         income_result_heading: *income_result_heading
-
-    no_income_summaries:
-      show:
-        page_heading: "Your client's income"
-        subheading:
-          text: "Your client has told us they do not receive:"
-          list: |
-            benefits
-            financial help from family or friends
-            maintenance payments
-            income from a property or lodger
-            pension payments
-        is_this_correct: Is this correct?
-        no_radio: No, my client receives one or more of these
-        student_finance:
-          heading: Student finance
-          info_html: '<strong>%{student_finance}</strong> this academic year.'
-        error: Select yes if your client does not receive these payments
-    no_outgoings_summaries:
-      show:
-        page_heading: "Your client's outgoings"
-        subheading:
-          text: "Your client has told us they do not pay:"
-          list: |
-            housing payments
-            childcare payments
-            spousal or child maintenance
-            for legal aid in a criminal case
-        is_this_correct: Is this correct?
-        no_radio: No, my client has one or more of these outgoings
-        error: Select yes if your client does not make these payments
     offline_accounts:
       show:
         h1-heading: Which bank accounts does your client have?
@@ -1071,7 +1040,7 @@ en:
           add transactions to each category
         other_heading: Other outgoings
         page_heading: Sort your client's regular payments into categories
-        payment_types: Your client told us they make the types of payments listed on this page.
+        payment_types: You told us your client makes the types of payments listed below.
         select:
           rent_or_mortgage: View statements and add transactions
           child_care: View statements and add transactions
