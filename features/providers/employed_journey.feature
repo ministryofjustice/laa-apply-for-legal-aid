@@ -24,17 +24,6 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
   Then I select "My client makes none of these payments"
   And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-
-  #  This case has no category types selected so there are no transactions to add
-  And I click 'Save and continue'
-  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-  #  This case has no category types selected so there are no transactions to add
-  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
   When I choose "No"
@@ -44,6 +33,11 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   When I choose "No"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+
   When I choose "No"
   And I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
@@ -83,17 +77,6 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
   Then I select "My client makes none of these payments"
   And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
-
-  When I choose "No"
-  And I click 'Save and continue'
-  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-
-  #  This case has no category types selected so there are no transactions to add
-  And I click 'Save and continue'
-  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-  #  This case has no category types selected so there are no transactions to add
-  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
   When I choose "No"
@@ -103,6 +86,11 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   When I choose "No"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
+
   Then I choose "No"
   Then I click 'Save and continue'
   Then I should be on a page showing "Which savings or investments does your client have?"
@@ -138,18 +126,8 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   And I click 'Save and continue'
   Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
   Then I select "My client makes none of these payments"
-  And I click 'Save and continue'
-  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
 
-  When I choose "No"
   And I click 'Save and continue'
-  Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-
-  #  This case has no category types selected so there are no transactions to add
-  And I click 'Save and continue'
-  Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-  #  This case has no category types selected so there are no transactions to add
-  When I click 'Save and continue'
   Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
   When I choose "No"
@@ -159,6 +137,10 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   When I choose "No"
   And I click 'Save and continue'
   Then I should be on a page showing "Does your client own a vehicle?"
+
+  When I choose "No"
+  And I click 'Save and continue'
+  Then I should be on the 'applicant_bank_account' page showing "Your client’s bank accounts"
 
   When I choose "No"
   And I click 'Save and continue'

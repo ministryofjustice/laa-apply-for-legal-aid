@@ -200,7 +200,7 @@ Given("I have completed the non-passported means assessment and start the merits
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
-Given("I start the merits application") do
+Given("I start the means application") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -224,6 +224,7 @@ Given("I start the merits application with bank transactions with no transaction
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_entering_merits,
+    :with_transaction_period,
     :with_uncategorised_credit_transactions,
     :with_uncategorised_debit_transactions,
   )
