@@ -49,16 +49,17 @@ module CheckAnswersHelper
     )
   end
 
-  def check_long_questions_single_change_link(url:, question:, answer_hash:, name:, read_only: false)
-    render(
-      "shared/check_answers/one_change_link_long_answers_section",
-      url:,
-      name:,
-      question:,
-      answer_hash:,
-      read_only:,
-    )
-  end
+  # Not used currently, left in for now in case the future CYA changes require it
+  # def check_long_questions_single_change_link(url:, question:, answer_hash:, name:, read_only: false)
+  #   render(
+  #     "shared/check_answers/one_change_link_long_answers_section",
+  #     url:,
+  #     name:,
+  #     question:,
+  #     answer_hash:,
+  #     read_only:,
+  #   )
+  # end
 
   def check_long_question_no_link(question:, answer:, name:, no_border: false)
     render(
@@ -70,15 +71,16 @@ module CheckAnswersHelper
     )
   end
 
-  def check_long_question_for_cash_transactions(name:, question:, legal_aid_application:, transaction_type:)
-    render(
-      "shared/check_answers/no_link_cash_transaction_item",
-      name:,
-      question:,
-      legal_aid_application:,
-      transaction_type:,
-    )
-  end
+  # Not used currently but will probably be implemented in AP-3366
+  # def check_long_question_for_cash_transactions(name:, question:, legal_aid_application:, transaction_type:)
+  #   render(
+  #     "shared/check_answers/no_link_cash_transaction_item",
+  #     name:,
+  #     question:,
+  #     legal_aid_application:,
+  #     transaction_type:,
+  #   )
+  # end
 
   def number_to_currency_or_na(number)
     number.to_d == BigDecimal("999_999_999_999.0") ? "N/a" : gds_number_to_currency(number)

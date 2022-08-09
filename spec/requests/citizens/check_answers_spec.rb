@@ -93,29 +93,4 @@ RSpec.describe "check your answers requests", type: :request do
       subject
     end
   end
-
-  # TODO: this test relies on change links in the page which have been removed
-  # the design on miro calls for change links on the accounts but we dont already have that
-  # and what would we change? should we actually be linking to /additional_accounts
-  # bear in mind there is no option to remove account details so the change link is misleading
-  # in that it cannot be changed or removed
-  #
-  # describe "PATCH /citizens/check_answers/reset" do
-  #   subject { patch "/citizens/check_answers/reset" }
-  #
-  #   before do
-  #     legal_aid_application.check_citizen_answers!
-  #     get citizens_identify_types_of_outgoing_path
-  #     get citizens_check_answers_path
-  #     subject
-  #   end
-  #
-  #   it "redirects back" do
-  #     expect(response).to redirect_to(citizens_identify_types_of_outgoing_path(back: true))
-  #   end
-  #
-  #   it 'changes the state back to "applicant_entering_means"' do
-  #     expect(legal_aid_application.reload.applicant_entering_means?).to be true
-  #   end
-  # end
 end

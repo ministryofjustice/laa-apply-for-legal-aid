@@ -21,11 +21,11 @@ module Flow
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
           forward: lambda do |application|
-            application.transaction_types.credits.any? ? :cash_incomes : :student_finances
+            application.income_types? ? :cash_incomes : :student_finances
           end,
           check_answers: lambda do |application|
             if application.uploading_bank_statements?
-              application.transaction_types.credits.any? ? :cash_incomes : :means_summaries
+              application.income_types? ? :cash_incomes : :means_summaries
             else
               :income_summary
             end
@@ -44,24 +44,24 @@ module Flow
         identify_types_of_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_outgoing_path(application) },
           forward: lambda do |application|
-            if application.transaction_types.debits.any?
+            if application.outgoing_types?
               :cash_outgoings
-            elsif application.transaction_types.credits.any?
+            elsif application.income_types?
               :income_summary
             else
               :has_dependants
             end
           end,
           check_answers: lambda do |application|
-            application.transaction_types.debits.any? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
+            application.outgoing_types? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
           end,
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
           forward: lambda do |application|
-            if application.transaction_types.credits.any?
+            if application.income_types?
               :income_summary
-            elsif application.transaction_types.debits.any?
+            elsif application.outgoing_types?
               :outgoings_summary
             else
               :has_dependants
@@ -85,7 +85,7 @@ module Flow
         income_summary: {
           path: ->(application) { urls.providers_legal_aid_application_income_summary_index_path(application) },
           forward: lambda do |application|
-            application.transaction_types.debits.any? ? :outgoings_summary : :has_dependants
+            application.outgoing_types? ? :outgoings_summary : :has_dependants
           end,
           check_answers: :means_summaries,
         },
