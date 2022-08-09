@@ -428,11 +428,6 @@ en:
           - you've told your client they may need to repay the legal costs if they keep or gain property or money at the end of their case (the ‘statutory charge’)
           - you'll provide complete and correct information
         continue_button: Agree and continue
-    delegated_functions:
-      show:
-        single_proceeding: Proceeding 1
-        multi_proceeding: Proceeding %{position} of %{total}
-        question: Have you used delegated functions for this proceeding?
     delegated_confirmation:
       index:
         page-heading: You told us you've used delegated functions
@@ -1252,7 +1247,12 @@ en:
         label: Email address
         hint: We'll use this to send your client a link to the service.+
     proceeding_loop:
+      single_proceeding: Proceeding 1
+      multi_proceeding: Proceeding %{position} of %{total}
       client_involvement_type:
         show:
           question: What is your client’s role in this proceeding?
+      delegated_functions:
+        show:
+          question: Have you used delegated functions for this proceeding?
 
