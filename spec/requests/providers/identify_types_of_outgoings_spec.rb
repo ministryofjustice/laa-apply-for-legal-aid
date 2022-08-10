@@ -81,9 +81,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         expect { request }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(false)
       end
 
-      context "when provider does not have bank_statement_upload permissions" do
+      context "when provider is on passported journey" do
         before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: nil)
         end
 
         it "redirects to the outgoings summary page" do
@@ -92,9 +93,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      context "when provider does have bank_statement_upload permissions" do
+      context "when provider is on bank statement upload journey" do
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
         it "redirects to the means cash outgoings page" do
@@ -149,9 +151,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      context "when provider does not have bank_statement_upload permissions" do
+      context "when provider is on passported journey" do
         before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: nil)
         end
 
         it "redirects to the outgoings summary page" do
@@ -160,9 +163,10 @@ RSpec.describe Providers::IdentifyTypesOfOutgoingsController do
         end
       end
 
-      context "when provider does have bank_statement_upload permissions" do
+      context "when provider is on bank statement upload journey" do
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
         it "redirects to the means has dependants page" do

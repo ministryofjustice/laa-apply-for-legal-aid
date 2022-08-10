@@ -83,9 +83,10 @@ RSpec.describe "employed incomes request", type: :request do
           expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
-        context "when provider does not have bank_statement_upload permissions" do
+        context "when provider is on passported journey" do
           before do
-            provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+            provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+            application.update!(provider_received_citizen_consent: nil)
           end
 
           context "when the provider has confirmed the information" do
@@ -96,9 +97,10 @@ RSpec.describe "employed incomes request", type: :request do
           end
         end
 
-        context "when provider does have bank_statement_upload permissions" do
+        context "when provider is on bank statement upload journey" do
           before do
             provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+            application.update!(provider_received_citizen_consent: false)
           end
 
           context "when the provider has permission to upload bank statements" do
