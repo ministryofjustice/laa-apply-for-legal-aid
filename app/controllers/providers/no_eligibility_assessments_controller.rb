@@ -15,18 +15,16 @@ module Providers
     end
 
     def cfe_assessment_or_mock
-      employed_and_hmrc_response? ? check_financial_eligibility : write_cfe_result
-    end
-
-    def employed_and_hmrc_response?
-      @legal_aid_application.applicant.employed? && !@legal_aid_application.hmrc_responses.empty?
-      # Is one of these to be preferred? Both positive below seems like it would be better?
-      # @legal_aid_application.applicant.employed? && @legal_aid_application.hmrc_responses.exists?
+      employed_and_hmrc_response? ? check_financial_eligibility : write_mock_cfe_result
     end
 
   private
 
-    def write_cfe_result
+    def employed_and_hmrc_response?
+      @legal_aid_application.applicant.employed? && @legal_aid_application.hmrc_responses.exists?
+    end
+
+    def write_mock_cfe_result
       CFE::Empty::Result.create!(
         legal_aid_application_id: legal_aid_application.id,
         submission_id: submission.id,
