@@ -112,6 +112,12 @@ Then("the following sections should exist:") do |table|
   end
 end
 
+Then("the following sections should not exist:") do |table|
+  table.hashes.each do |row|
+    expect(page).not_to have_selector(row[:tag], text: row[:section]), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+  end
+end
+
 Then("the Client details questions should exist:") do |table|
   expect_questions_in(selector: "#client-details-questions", expected: table)
 end

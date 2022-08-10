@@ -28,6 +28,14 @@ Feature: Means report
       | h2  | Payments from scheme or charities |
       | h3  | Bank statements |
 
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Income result |
+      | h2  | Income |
+      | h2  | Outgoings |
+      | h2  | Deductions |
+      | h2  | Capital result |
+
     And the Client details questions should exist:
       | question |
       | First name |
@@ -173,6 +181,16 @@ Feature: Means report
       | h3  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
 
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Declared income categories |
+      | h2  | Student finance |
+      | h2  | Declared cash income |
+      | h2  | Dependants |
+      | h2  | Declared outgoings categories |
+      | h2  | Declared cash outgoings |
+      | h3  | Bank statements |
+
     And the Client details questions should exist:
       | question |
       | First name |
@@ -297,9 +315,24 @@ Feature: Means report
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Which bank accounts does your client have? |
-      | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h3  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h2  | Caseworker Review |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Income result |
+      | h2  | Income |
+      | h2  | Outgoings |
+      | h2  | Deductions |
+      | h2  | Declared income categories |
+      | h2  | Student finance |
+      | h2  | Declared cash income |
+      | h2  | Dependants |
+      | h2  | Declared outgoings categories |
+      | h2  | Declared cash outgoings |
+      | h3  | Bank statements |
+
+
