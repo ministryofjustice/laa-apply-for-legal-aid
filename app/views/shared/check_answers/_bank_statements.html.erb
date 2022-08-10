@@ -6,8 +6,8 @@
 
   <%= check_answer_link(
     name: :bank_statements,
-    url: providers_legal_aid_application_bank_statements_path,
-    question: t('.bank_statement_question'),
+    url: providers_legal_aid_application_bank_statements_path(@legal_aid_application),
+    question: "Upload bank statements",
     answer: attachments_with_size(bank_statements),
     read_only: read_only
   ) %>
