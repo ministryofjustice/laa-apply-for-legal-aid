@@ -5,9 +5,9 @@ Feature: Means report
     Given I have completed a non-passported employed application with bank statement uploads
     When I view the means report
 
-    Then the following sections should exit:
+    Then the following sections should exist:
       | tag | section |
-      | h2  | Client detail |
+      | h2  | Client details |
       | h2  | Passported means |
       | h2  | Declared income categories |
       | h2  | Student finance |
@@ -150,12 +150,12 @@ Feature: Means report
       | Upload bank statements |
 
   Scenario: For a non-passported truelayer bank transactions journey
-    Given I have completed a non-passported application with truelayer uploads
+    Given I have completed a non-passported application with truelayer
     When I view the means report
 
-    Then the following sections should exit:
+    Then the following sections should exist:
       | tag | section |
-      | h2  | Client detail |
+      | h2  | Client details |
       | h2  | Proceeding eligibility |
       | h2  | Passported means |
       | h2  | Income result |
@@ -283,6 +283,23 @@ Feature: Means report
       | We Love Manchester Emergency Fund |
       | The London Emergencies Trust |
 
-  # TODO:
   Scenario: For a passported journey
+    Given I have completed a passported application
+    When I view the means report
 
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Proceeding eligibility |
+      | h2  | Passported means |
+      | h2  | Capital result |
+      | h2  | Property, savings and other assets |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Which bank accounts does your client have? |
+      | h2  | Property, savings and other assets |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h3  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+      | h2  | Caseworker Review |
