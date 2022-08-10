@@ -296,7 +296,7 @@ Feature: Checking answers backwards and forwards
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statement upload as far as the end of the means section
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should see 'Upload bank statements'
+    And I should see 'Uploaded bank statements'
     And I should see 'Does your client receive student finance?'
     And the answer for 'student finance question' should be 'No'
     And I should not see 'Which bank accounts does your client have?'
