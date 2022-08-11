@@ -914,7 +914,7 @@ en:
         client_details_heading: Client details
         evidence_upload_heading: Supporting evidence
         heading: Means report
-      without_cfe_result_details:
+      with_bank_statement_uploads:
         assets_heading: *assets_heading
         income_details_heading: *income_details_heading
         income_result_heading: Employed income result

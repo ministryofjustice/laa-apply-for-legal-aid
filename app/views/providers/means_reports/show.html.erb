@@ -14,7 +14,7 @@
         read_only: true) %>
 
    <% if @legal_aid_application.uploading_bank_statements? %>
-    <%= render 'without_cfe_result_details' %>
+    <%= render 'with_bank_statement_uploads' %>
    <% else %>
     <%= render 'with_cfe_result_details' %>
    <% end %>
