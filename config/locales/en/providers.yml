@@ -867,6 +867,10 @@ en:
       outgoings_categories_heading: Declared outgoings categories
       proceeding_eligibility: Proceeding eligibility
       student_finance_heading: Student finance
+      income_cash_payments:
+        none: None
+      outgoings_cash_payments:
+        none: None
       caseworker_review:
         required: Caseworker review required?
         reasons: Review reasons
@@ -913,7 +917,7 @@ en:
       without_cfe_result_details:
         assets_heading: *assets_heading
         income_details_heading: *income_details_heading
-        income_result_heading: *income_result_heading
+        income_result_heading: Employed Income result
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading

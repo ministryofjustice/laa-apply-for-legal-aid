@@ -1,6 +1,7 @@
 <%= render 'receives_benefits' %>
 
 <% if @legal_aid_application.non_passported? %>
+
   <section class="print-no-break">
     <%= render('income_categories', read_only: true) %>
   </section>
@@ -29,6 +30,14 @@
     <% if @legal_aid_application.extra_employment_information? %>
       <%= render 'shared/check_answers/employed_income', read_only: true %>
     <% end %>
+  </section>
+
+  <h2 class="govuk-heading-m">
+    <%= t('.income_result_heading') %>
+  </h2>
+
+  <section class="print-no-break">
+    <%= render 'shared/check_answers/income_result', read_only: true %>
   </section>
 
   <section class="print-no-break">
