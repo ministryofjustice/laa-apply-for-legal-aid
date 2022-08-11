@@ -3,10 +3,17 @@ require Rails.root.join("spec/factory_helpers/cfe_employment_remarks_adder")
 
 RSpec.describe Providers::MeansReportsController, type: :request do
   include ActionView::Helpers::NumberHelper
+  include Capybara::RSpecMatchers
 
   let(:legal_aid_application) do
-    create :legal_aid_application, :with_proceedings, :with_everything, :with_cfe_v4_result, :assessment_submitted, explicit_proceedings: %i[da002 da006]
+    create(:legal_aid_application,
+           :with_proceedings,
+           :with_everything,
+           :with_cfe_v4_result,
+           :assessment_submitted,
+           explicit_proceedings: %i[da002 da006])
   end
+
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create :submission, legal_aid_application: }
   let(:cfe_result) { legal_aid_application.cfe_result }
@@ -30,6 +37,43 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       expect(response).to have_http_status(:ok)
     end
 
+    it "displays application reference" do
+      expect(response.body).to have_content("Apply service case reference:")
+        .and have_content(legal_aid_application.application_ref)
+    end
+
+    it "displays the CCMS case reference" do
+      expect(unescaped_response_body).to include(submission.case_ccms_reference)
+    end
+
+    it "includes non passported applicable sections" do
+      expect(response.body).to have_selector("h2", text: "Client details")
+      .and have_selector("h2", text: "Proceeding eligibility")
+        .and have_selector("h2", text: "Passported means")
+        .and have_selector("h2", text: "Income result")
+        .and have_selector("h2", text: "Income")
+        .and have_selector("h2", text: "Outgoings")
+        .and have_selector("h2", text: "Deductions")
+        .and have_selector("h2", text: "Capital result")
+        .and have_selector("h2", text: "Caseworker Review")
+        .and have_selector("h2", text: "Property, savings and other assets")
+        .and have_selector("h2", text: "Which bank accounts does your client have?")
+        .and have_selector("h2", text: "Which savings or investments does your client have?")
+        .and have_selector("h2", text: "Which assets does your client have?")
+        .and have_selector("h3", text: "Restrictions on your client's assets") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+        .and have_selector("h2", text: "Payments from scheme or charities")
+    end
+
+    it "excludes bank statement upload applicable sections" do
+      expect(response.body).not_to have_selector("h2", text: "Declared income categories")
+      expect(response.body).not_to have_selector("h2", text: "Student finance")
+      expect(response.body).not_to have_selector("h2", text: "Declared cash income")
+      expect(response.body).not_to have_selector("h2", text: "Dependants")
+      expect(response.body).not_to have_selector("h2", text: "Declared outgoings categories")
+      expect(response.body).not_to have_selector("h2", text: "Declared cash outgoings")
+      expect(response.body).not_to have_selector("h3", text: "Bank statements")
+    end
+
     it "displays all sources for Benefits" do
       expect(unescaped_response_body).to include("Benefits")
       expect(unescaped_response_body).to include("£75")
@@ -43,14 +87,6 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     it "displays student loan" do
       expect(unescaped_response_body).to include("Student loan or grant")
       expect(unescaped_response_body).to include("£0")
-    end
-
-    it "displays the application ref number" do
-      expect(unescaped_response_body).to include(legal_aid_application.application_ref)
-    end
-
-    it "displays the CCMS case reference" do
-      expect(unescaped_response_body).to include(submission.case_ccms_reference)
     end
 
     it "displays the total capital assessed" do
@@ -72,12 +108,14 @@ RSpec.describe Providers::MeansReportsController, type: :request do
     context "when employed feature flag is set to false" do
       let(:before_subject) { Setting.setting.update!(enable_employed_journey: false) }
 
-      it "does not display employment lines" do
-        expect(unescaped_response_body).not_to include("Gross employment income")
-        expect(unescaped_response_body).not_to include("Income tax")
-        expect(unescaped_response_body).not_to include("National insurance")
-        expect(unescaped_response_body).not_to include("Fixed employment deduction")
-        expect(unescaped_response_body).not_to include("Employment notes")
+      it "does not display employment details" do
+        expect(response.body).not_to have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+        expect(response.body).not_to have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+        expect(unescaped_response_body).to exclude("Gross employment income")
+        expect(unescaped_response_body).to exclude("Income tax")
+        expect(unescaped_response_body).to exclude("National insurance")
+        expect(unescaped_response_body).to exclude("Fixed employment deduction")
+        expect(unescaped_response_body).to exclude("Employment notes")
       end
     end
 
@@ -87,15 +125,17 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       context "when the applicant is employed and HMRC returns employment data" do
         let(:before_subject) do
           legal_aid_application.applicant.update!(employed: true)
-          legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: "Made redundant")
+          legal_aid_application.update!(extra_employment_information: true,
+                                        extra_employment_information_details: "Made redundant")
         end
 
-        it "displays the employment lines" do
-          expect(unescaped_response_body).to include("Gross employment income")
-          expect(unescaped_response_body).to include("Income tax")
-          expect(unescaped_response_body).to include("National insurance")
-          expect(unescaped_response_body).to include("Fixed employment deduction")
-          expect(unescaped_response_body).to include("Employment notes")
+        it "displays the employment details" do
+          expect(response.body)
+            .to have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+            .and have_content("Gross employment income")
+            .and have_content("Income tax")
+            .and have_content("National insurance")
+            .and have_content("Fixed employment deduction")
         end
       end
 
@@ -106,8 +146,10 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         end
 
         it "displays the manually entered employment details" do
-          expect(unescaped_response_body).to include("Your client's employment details")
-          expect(unescaped_response_body).to include("Test employment details")
+          expect(response.body)
+          .to have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+          .and have_content("Your client's employment details")
+          .and have_content("Test employment details")
         end
       end
 
@@ -115,11 +157,12 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         let(:before_subject) { legal_aid_application.applicant.update!(employed: false) }
 
         it "does not display the employment lines" do
-          expect(unescaped_response_body).to_not include("Gross employment income")
-          expect(unescaped_response_body).to_not include("Income tax")
-          expect(unescaped_response_body).to_not include("National insurance")
-          expect(unescaped_response_body).to_not include("Fixed employment deduction")
-          expect(unescaped_response_body).to_not include("Employment notes")
+          expect(response.body)
+            .to exclude("Gross employment income")
+            .and exclude("Income tax")
+            .and exclude("National insurance")
+            .and exclude("Fixed employment deduction")
+            .and exclude("Employment notes")
         end
       end
 
@@ -156,6 +199,66 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       let(:login_provider) { nil }
 
       it_behaves_like "a provider not authenticated"
+    end
+
+    context "with bank statement upload journey application" do
+      let(:legal_aid_application) do
+        create(:legal_aid_application,
+               :with_proceedings,
+               :with_everything,
+               :with_cfe_empty_result,
+               :with_extra_employment_information,
+               :with_full_employment_information,
+               :assessment_submitted,
+               provider:,
+               provider_received_citizen_consent: false,
+               attachments: [build(:attachment, :bank_statement)],
+               explicit_proceedings: %i[da002 da006])
+      end
+
+      # TODO: move this to a factory and/or find a way to append pemissions nicely
+      let(:provider) do
+        create(:provider, :with_bank_statement_upload_permissions).tap do |provider|
+          non_passported = Permission.find_by(role: "application.non_passported.*")
+          non_passported = create(:permission, :non_passported) if non_passported.nil?
+          provider.permissions << non_passported
+        end
+      end
+
+      it "displays application_ref" do
+        expect(response.body).to have_content("Apply service case reference:")
+          .and have_content(legal_aid_application.application_ref)
+      end
+
+      it "includes non passported bank statement upload applicable sections" do
+        expect(response.body)
+          .to have_selector("h2", text: "Client details")
+          .and have_selector("h2", text: "Passported means")
+          .and have_selector("h2", text: "Declared income categories")
+          .and have_selector("h2", text: "Student finance")
+          .and have_selector("h2", text: "Declared cash income")
+          .and have_selector("h2", text: "Dependants")
+          .and have_selector("h2", text: "Declared outgoings categories")
+          .and have_selector("h2", text: "Declared cash outgoings")
+          .and have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+          .and have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+          .and have_selector("h2", text: "Caseworker Review")
+          .and have_selector("h2", text: "Property, savings and other assets")
+          .and have_selector("h2", text: "Which savings or investments does your client have?")
+          .and have_selector("h2", text: "Which assets does your client have?")
+          .and have_selector("h3", text: "Restrictions on your client's assets") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+          .and have_selector("h2", text: "Payments from scheme or charities")
+          .and have_selector("h3", text: "Bank statements") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+      end
+
+      # TODO: some kind of compound expectation would be good here (but `.and` does not work with negated matchers)
+      it "excludes passported and truelayer applicable sections" do
+        expect(response.body).not_to have_selector("h2", text: "Income result")
+        expect(response.body).not_to have_selector("h2", text: "Income")
+        expect(response.body).not_to have_selector("h2", text: "Outgoings")
+        expect(response.body).not_to have_selector("h2", text: "Deductions")
+        expect(response.body).not_to have_selector("h2", text: "Capital result")
+      end
     end
   end
 end

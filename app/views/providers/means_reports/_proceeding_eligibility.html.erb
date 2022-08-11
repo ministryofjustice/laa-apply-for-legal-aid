@@ -1,4 +1,6 @@
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<h2 class="govuk-heading-m"><%= t('providers.means_reports.proceeding_eligibility') %></h2>
+
+<dl id="proceeding-eligibility-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <% results.each do |proceeding_type, result| %>
     <%= check_answer_link(
           name: proceeding_type,

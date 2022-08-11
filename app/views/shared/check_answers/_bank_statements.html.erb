@@ -1,10 +1,12 @@
 <h3 class="govuk-heading-m"><%= t('.section_heading') %></h3>
 
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
 
   <%= check_answer_link(
     name: :bank_statements,
-    url: providers_legal_aid_application_bank_statements_path,
+    url: providers_legal_aid_application_bank_statements_path(@legal_aid_application),
     question: t('.bank_statement_question'),
     answer: attachments_with_size(bank_statements),
     read_only: read_only

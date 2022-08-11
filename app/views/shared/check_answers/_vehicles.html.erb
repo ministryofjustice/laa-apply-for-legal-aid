@@ -3,7 +3,7 @@
   <%= t(".#{journey_type}.heading") %>
 </h3>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl id="vehicles-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
         name: :vehicles,
         url: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),

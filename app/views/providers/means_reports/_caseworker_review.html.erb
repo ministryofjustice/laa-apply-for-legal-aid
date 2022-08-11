@@ -1,44 +1,48 @@
-<section>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <section class="print-no-break">
+    <h2 class="govuk-heading-l"><%= t('providers.means_reports.caseworker_review_section_heading') %></h2>
 
-    <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
-      <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-        <%= t(".required") %>
-      </dt>
-      <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_required_answer">
-        <%= yes_no(manual_review_determiner.manual_review_required?) %>
-      </dd>
-    </div>
+    <section>
+      <dl id="caseworker-review-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
 
-    <% if manual_review_determiner.manual_review_required? %>
-
-      <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
-        <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-          <%= t(".reasons") %>
-        </dt>
-        <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_reasons">
-          <% manual_review_determiner.review_reasons.each do |reason| %>
-            <%= t(".reason.#{reason}") %>
-            <br>
-          <% end %>
-        </dd>
-      </div>
-
-      <% manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
-        <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required-#{reason}" %>">
+        <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
           <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-            <%= t(".category-#{reason}") %>
+            <%= t(".required") %>
           </dt>
-          <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>" id="<%= "review-reason-#{reason}" %>">
-            <% categories.each do |category| %>
-              <%= t(".category.#{category}") %>
-              <br>
-            <% end %>
+          <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_required_answer">
+            <%= yes_no(@manual_review_determiner.manual_review_required?) %>
           </dd>
         </div>
-      <% end %>
 
-    <% end %>
-  </dl>
-  <hr>
+        <% if @manual_review_determiner.manual_review_required? %>
+
+          <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required" %>">
+            <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+              <%= t(".reasons") %>
+            </dt>
+            <dd class="<%= "govuk-summary-list__value govuk-!-text-align-right" %>" id="caseworker_review_reasons">
+              <% @manual_review_determiner.review_reasons.each do |reason| %>
+                <%= t(".reason.#{reason}") %>
+                <br>
+              <% end %>
+            </dd>
+          </div>
+
+          <% @manual_review_determiner.review_categories_by_reason&.each do |reason, categories| %>
+            <div class="<%= "govuk-summary-list__row  normal-word-break govuk-summary-list__row--no-border" %>" id="<%= "means-merits-report__caseworker-review-required-#{reason}" %>">
+              <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
+                <%= t(".category-#{reason}") %>
+              </dt>
+              <dd class="<%= "govuk-summary-list__value ovuk-!-text-align-right" %>" id="<%= "review-reason-#{reason}" %>">
+                <% categories.each do |category| %>
+                  <%= t(".category.#{category}") %>
+                  <br>
+                <% end %>
+              </dd>
+            </div>
+          <% end %>
+
+        <% end %>
+      </dl>
+      <hr>
+    </section>
 </section>

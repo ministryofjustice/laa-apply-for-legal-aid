@@ -1,6 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <h3 class="govuk-heading-m"><%= t('shared.check_answers.assets.property.heading') %></h3>
-<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+<dl id="property-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_link(
           name: :own_home,
           url: check_answer_url_for(journey_type, :own_homes, @legal_aid_application),

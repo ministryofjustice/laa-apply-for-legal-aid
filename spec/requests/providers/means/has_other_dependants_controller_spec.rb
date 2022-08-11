@@ -43,9 +43,10 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
         expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
       end
 
-      context "when provider does not have bank_statement_upload permissions" do
+      context "when provider is on passported journey" do
         before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: nil)
         end
 
         context "with transaction type debits on application" do
@@ -71,9 +72,10 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
         end
       end
 
-      context "when provider does have bank_statement_upload permissions" do
+      context "when provider is on bank statement upload journey" do
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
         it "redirects to the means student finance page" do

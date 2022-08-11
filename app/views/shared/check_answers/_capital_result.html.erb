@@ -1,32 +1,31 @@
-<section class="print-no-break">
-  <% read_only = false unless local_assigns.key?(:read_only) %>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%= check_answer_link(
-          name: :total_capital_assessed,
-          question: t('.total'),
-          answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_capital),
-          read_only: read_only
-        ) %>
+<% read_only = false unless local_assigns.key?(:read_only) %>
 
-    <%= check_answer_link(
-          name: :capital_lower_limit,
-          question: t('.lower_limit_label'),
-          answer: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit),
-          read_only: read_only
-        ) %>
+<dl id="capital-result-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
+  <%= check_answer_link(
+        name: :total_capital_assessed,
+        question: t('.total'),
+        answer: gds_number_to_currency(@legal_aid_application.cfe_result.total_capital),
+        read_only: read_only
+      ) %>
 
-    <%= check_answer_link(
-          name: :capital_upper_limit,
-          question: t('.upper_limit_label'),
-          answer: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit),
-          read_only: read_only
-        ) %>
+  <%= check_answer_link(
+        name: :capital_lower_limit,
+        question: t('.lower_limit_label'),
+        answer: gds_number_to_currency(Rails.configuration.x.capital_result.lower_limit),
+        read_only: read_only
+      ) %>
 
-    <%= check_answer_link(
-          name: :capital_contribution,
-          question: t('.contribution'),
-          answer: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
-          read_only: read_only
-        ) %>
-  </dl>
-</section>
+  <%= check_answer_link(
+        name: :capital_upper_limit,
+        question: t('.upper_limit_label'),
+        answer: gds_number_to_currency(Rails.configuration.x.capital_result.upper_limit),
+        read_only: read_only
+      ) %>
+
+  <%= check_answer_link(
+        name: :capital_contribution,
+        question: t('.contribution'),
+        answer: gds_number_to_currency(@legal_aid_application.cfe_result.capital_contribution),
+        read_only: read_only
+      ) %>
+</dl>

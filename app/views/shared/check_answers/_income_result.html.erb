@@ -1,6 +1,6 @@
 <section class="print-no-break">
   <% read_only = false unless local_assigns.key?(:read_only) %>
-  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <dl id="income-result-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
     <%= check_answer_link(
             name: :total_gross_income_assessed,
             question: t('.total_gross_income'),

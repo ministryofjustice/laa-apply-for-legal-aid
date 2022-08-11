@@ -849,6 +849,24 @@ en:
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
     means_reports:
+      adult_dependants: Adult dependants
+      assets_heading: &assets_heading Property, savings and other assets
+      benefit_check_heading: Passported means
+      benefit_check_question: In receipt of passporting benefit
+      capital_result_heading: &capital_result_heading Capital result
+      caseworker_review_section_heading: Caseworker Review
+      child_dependants: Child dependants
+      deductions-section-heading: &deductions-section-heading Deductions
+      debits-section-heading: &debits-section-heading Outgoings
+      dependants_heading: Dependants
+      income_cash_payments_heading: Declared cash income
+      income_categories_heading: Declared income categories
+      income_details_heading: &income_details_heading Income
+      income_result_heading: &income_result_heading Income result
+      outgoings_cash_payments_heading: Declared cash outgoings
+      outgoings_categories_heading: Declared outgoings categories
+      proceeding_eligibility: Proceeding eligibility
+      student_finance_heading: Student finance
       caseworker_review:
         required: Caseworker review required?
         reasons: Review reasons
@@ -889,18 +907,21 @@ en:
           refunds: Tax or NI refunds
           uploaded_bank_statements: Bank statements uploaded
       show:
-        heading: Means report
-        caseworker-review-section-heading: Caseworker Review
         client_details_heading: Client details
-        benefit_check_heading: Passported means
-        capital_result_heading: Capital result
-        income_result_heading: Income result
-        assets_heading: Property, savings and other assets
-        question_receives_benefit: In receipt of passporting benefit
-        income_details_heading: Income
-        debits-section-heading: Outgoings
-        deductions-section-heading: Deductions
-        proceeding_eligibility: Proceeding eligibility
+        evidence_upload_heading: Supporting evidence
+        heading: Means report
+      without_cfe_result_details:
+        assets_heading: *assets_heading
+        income_details_heading: *income_details_heading
+        income_result_heading: *income_result_heading
+      with_cfe_result_details:
+        assets_heading: *assets_heading
+        capital_result_heading: *capital_result_heading
+        debits-section-heading: *debits-section-heading
+        deductions-section-heading: *deductions-section-heading
+        income_details_heading: *income_details_heading
+        income_result_heading: *income_result_heading
+
     no_income_summaries:
       show:
         page_heading: "Your client's income"
