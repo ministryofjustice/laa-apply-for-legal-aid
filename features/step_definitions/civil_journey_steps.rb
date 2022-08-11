@@ -721,6 +721,16 @@ And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
   end
 end
 
+And(/^I should (see|not see) a govuk formatted date from ['|"](.*?)['|"] days ago$/) do |visibility, number|
+  date = number.to_i.days.ago
+  text = date.strftime("%-d %B %Y")
+  if visibility == "see"
+    expect(page).to have_content(/#{text}/)
+  else
+    expect(page).not_to have_content(text)
+  end
+end
+
 When(/^I click clear search$/) do
   page.find("#clear-proceeding-search").click
 end
