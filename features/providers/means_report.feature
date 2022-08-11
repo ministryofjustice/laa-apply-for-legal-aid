@@ -155,7 +155,7 @@ Feature: Means report
 
     And the "Bank statements" questions should exist:
       | question |
-      | Upload bank statements |
+      | Uploaded bank statements |
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
