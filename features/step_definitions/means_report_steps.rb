@@ -108,13 +108,13 @@ end
 
 Then("the following sections should exist:") do |table|
   table.hashes.each do |row|
-    expect(page).to have_selector(row[:tag], text: row[:section]), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+    expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
   end
 end
 
 Then("the following sections should not exist:") do |table|
   table.hashes.each do |row|
-    expect(page).not_to have_selector(row[:tag], text: row[:section]), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+    expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
   end
 end
 

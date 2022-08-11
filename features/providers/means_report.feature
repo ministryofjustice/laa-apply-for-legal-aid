@@ -9,13 +9,13 @@ Feature: Means report
       | tag | section |
       | h2  | Client details |
       | h2  | Passported means |
-      | h2  | Income result |
       | h2  | Declared income categories |
       | h2  | Student finance |
       | h2  | Declared cash income |
       | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
+      | h2  | Employed income result |
       | h3  | Employment notes |
       | h3  | Employment income |
       | h2  | Caseworker Review |
@@ -31,7 +31,9 @@ Feature: Means report
 
     Then the following sections should not exist:
       | tag | section |
-      | h2  | "Income" |
+      | h2  | Proceeding eligibility |
+      | h2  | Income result |
+      | h2  | Income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Capital result |
@@ -185,6 +187,7 @@ Feature: Means report
       | tag | section |
       | h2  | Declared income categories |
       | h2  | Student finance |
+      | h2  | Employed income result |
       | h2  | Declared cash income |
       | h2  | Dependants |
       | h2  | Declared outgoings categories |
@@ -325,6 +328,7 @@ Feature: Means report
       | tag | section |
       | h2  | Income result |
       | h2  | Income |
+      | h2  | Employed income result |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Declared income categories |

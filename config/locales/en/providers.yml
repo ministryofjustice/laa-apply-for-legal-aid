@@ -917,7 +917,7 @@ en:
       without_cfe_result_details:
         assets_heading: *assets_heading
         income_details_heading: *income_details_heading
-        income_result_heading: Employed Income result
+        income_result_heading: Employed income result
       with_cfe_result_details:
         assets_heading: *assets_heading
         capital_result_heading: *capital_result_heading
