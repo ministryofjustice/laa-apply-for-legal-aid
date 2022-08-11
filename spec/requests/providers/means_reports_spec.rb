@@ -46,7 +46,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       expect(unescaped_response_body).to include(submission.case_ccms_reference)
     end
 
-    it "includes non passported applicable sections" do
+    it "includes non passported truelayer applicable sections" do
       expect(response.body).to have_selector("h2", text: "Client details")
       .and have_selector("h2", text: "Proceeding eligibility")
         .and have_selector("h2", text: "Passported means")
@@ -234,13 +234,13 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         expect(response.body)
           .to have_selector("h2", text: "Client details")
           .and have_selector("h2", text: "Passported means")
-          .and have_selector("h2", text: "Income result")
           .and have_selector("h2", text: "Declared income categories")
           .and have_selector("h2", text: "Student finance")
           .and have_selector("h2", text: "Declared cash income")
           .and have_selector("h2", text: "Dependants")
           .and have_selector("h2", text: "Declared outgoings categories")
           .and have_selector("h2", text: "Declared cash outgoings")
+          .and have_selector("h2", text: "Employed income result")
           .and have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
           .and have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
           .and have_selector("h2", text: "Caseworker Review")
@@ -254,6 +254,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
 
       # TODO: some kind of compound expectation would be good here (but `.and` does not work with negated matchers)
       it "excludes passported and truelayer applicable sections" do
+        expect(response.body).not_to have_selector("h2", text: "Proceeding eligibility")
         expect(response.body).not_to have_selector("h2", text: "Outgoings")
         expect(response.body).not_to have_selector("h2", text: "Deductions")
         expect(response.body).not_to have_selector("h2", text: "Capital result")
