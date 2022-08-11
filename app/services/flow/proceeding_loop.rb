@@ -22,7 +22,7 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "delegated_functions", "in_scope_of_laspos", "has_other_proceedings"
+        when "delegated_functions", "in_scope_of_laspos", "has_other_proceedings", "confirm_delegated_functions_date"
           :client_involvement_type
         when "client_involvement_type"
           :delegated_functions
