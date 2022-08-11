@@ -18,9 +18,7 @@
   </section>
 
   <section class="print-no-break">
-    <% if @legal_aid_application.legal_aid_application_transaction_types.any? %>
-      <%= render('income_cash_payments', read_only: true) %>
-    <% end %>
+    <%= render('income_cash_payments', read_only: true) %>
   </section>
 
   <section class="print-no-break">
@@ -32,9 +30,7 @@
   </section>
 
   <section class="print-no-break">
-    <% if @legal_aid_application.legal_aid_application_transaction_types.any? %>
-      <%= render('outgoings_cash_payments', read_only: true) %>
-    <% end %>
+    <%= render('outgoings_cash_payments', read_only: true) %>
   </section>
 
   <section class="print-no-break">

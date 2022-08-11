@@ -9,6 +9,7 @@ Feature: Means report
       | tag | section |
       | h2  | Client details |
       | h2  | Passported means |
+      | h2  | Income result |
       | h2  | Declared income categories |
       | h2  | Student finance |
       | h2  | Declared cash income |
@@ -30,8 +31,7 @@ Feature: Means report
 
     Then the following sections should not exist:
       | tag | section |
-      | h2  | Income result |
-      | h2  | Income |
+      | h2  | "Income" |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Capital result |

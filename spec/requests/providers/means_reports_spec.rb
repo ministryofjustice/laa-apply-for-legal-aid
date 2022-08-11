@@ -234,6 +234,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         expect(response.body)
           .to have_selector("h2", text: "Client details")
           .and have_selector("h2", text: "Passported means")
+          .and have_selector("h2", text: "Income result")
           .and have_selector("h2", text: "Declared income categories")
           .and have_selector("h2", text: "Student finance")
           .and have_selector("h2", text: "Declared cash income")
@@ -253,8 +254,6 @@ RSpec.describe Providers::MeansReportsController, type: :request do
 
       # TODO: some kind of compound expectation would be good here (but `.and` does not work with negated matchers)
       it "excludes passported and truelayer applicable sections" do
-        expect(response.body).not_to have_selector("h2", text: "Income result")
-        expect(response.body).not_to have_selector("h2", text: "Income")
         expect(response.body).not_to have_selector("h2", text: "Outgoings")
         expect(response.body).not_to have_selector("h2", text: "Deductions")
         expect(response.body).not_to have_selector("h2", text: "Capital result")
