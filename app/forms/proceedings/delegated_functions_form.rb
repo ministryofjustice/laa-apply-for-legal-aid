@@ -28,14 +28,19 @@ module Proceedings
     end
 
     def save
-      model.used_delegated_functions_reported_on = Time.zone.today if used_delegated_functions&.to_s == "true"
+      if used_delegated_functions&.to_s == "true"
+        attributes[:used_delegated_functions_reported_on] = Time.zone.today
+      else
+        attributes[:used_delegated_functions_reported_on] = nil
+        attributes[:used_delegated_functions_on] = nil
+      end
       super
     end
 
   private
 
     def used_delegated_functions_presence
-      errors.add(:used_delegated_functions, I18n.t("#{error_base_path}.used_delegated_functions.blank")) if used_delegated_functions.blank?
+      errors.add(:used_delegated_functions, I18n.t("#{error_base_path}.used_delegated_functions.blank")) if used_delegated_functions.to_s.blank?
     end
 
     def validate_date

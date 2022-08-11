@@ -30,6 +30,21 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       end
     end
 
+    context "when provider changes yes to no" do
+      let(:proceeding) { create :proceeding, :da002 }
+      let(:params) do
+        {
+          used_delegated_functions: false,
+        }
+      end
+
+      it "updates the proceeding to remove the previous values" do
+        expect(proceeding.reload.used_delegated_functions).to be false
+        expect(proceeding.reload.used_delegated_functions_on).to be_nil
+        expect(proceeding.reload.used_delegated_functions_reported_on).to be_nil
+      end
+    end
+
     context "when the user selects nothing" do
       let(:used_df?) { nil }
       let(:df_date) { nil }
