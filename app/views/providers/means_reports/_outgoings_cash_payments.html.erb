@@ -6,6 +6,9 @@ cash_debits = @legal_aid_application.cash_transactions.debits.order(:transaction
 debit_categories = TransactionType.debits
 %>
 
+<% if !@legal_aid_application.transaction_types.debits.exists? %>
+  <div class="govuk-body>"> <%= t('.none') %> </div>
+<% end %>
 <dl id="outgoings-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
   <% debit_categories.each do |category| %>
     <% if debits.pluck(:transaction_type_id).include?(category.id) %>

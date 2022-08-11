@@ -867,6 +867,10 @@ en:
       outgoings_categories_heading: Declared outgoings categories
       proceeding_eligibility: Proceeding eligibility
       student_finance_heading: Student finance
+      income_cash_payments:
+        none: None
+      outgoings_cash_payments:
+        none: None
       caseworker_review:
         required: Caseworker review required?
         reasons: Review reasons
