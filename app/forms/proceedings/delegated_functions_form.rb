@@ -83,7 +83,7 @@ module Proceedings
     end
 
     def used_delegated_functions_on_presence_required?
-      return false if used_delegated_functions.to_s == "false"
+      return false if used_delegated_functions.to_s == "false" || draft?
 
       draft_and_not_partially_complete_date?
     end
