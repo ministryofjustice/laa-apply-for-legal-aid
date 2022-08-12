@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments//proceeding_types
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_types":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=5
+      User-Agent:
+      - Faraday v1.10.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Fri, 12 Aug 2022 14:43:33 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '34'
+      Connection:
+      - keep-alive
+      X-Request-Id:
+      - 99732ff98f04a5dce910439e4f61d115
+      X-Runtime:
+      - '0.001511'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"status":404,"error":"Not Found"}'
+  recorded_at: Fri, 12 Aug 2022 14:43:33 GMT
+recorded_with: VCR 6.1.0

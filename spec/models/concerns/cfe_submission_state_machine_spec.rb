@@ -18,19 +18,7 @@ module CFE
     end
 
     context "when applicant_created! event" do
-      context "with enable_cfe_v5 feature flag disabled" do
-        it "transitions from applicant_created to applicant_created" do
-          submission = create :cfe_submission, aasm_state: "assessment_created"
-          submission.applicant_created!
-          expect(submission.applicant_created?).to be true
-        end
-      end
-
-      context "with enable_cfe_v5 feature flag enabled" do
-        before do
-          Setting.setting.update(enable_cfe_v5: true)
-        end
-
+      context "with CFE V5" do
         it "transitions from proceeding_types_created to applicant_created" do
           submission = create :cfe_submission, aasm_state: "proceeding_types_created"
           submission.applicant_created!

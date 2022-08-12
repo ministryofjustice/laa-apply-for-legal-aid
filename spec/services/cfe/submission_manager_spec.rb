@@ -74,6 +74,7 @@ module CFE
 
           it "calls all the services it manages" do
             expect(CreateAssessmentService).to receive(:call).and_return(true)
+            expect(CreateProceedingTypesService).to receive(:call).and_return(true)
             expect(CreateApplicantService).to receive(:call).and_return(true)
             expect(CreateCapitalsService).to receive(:call).and_return(true)
             expect(CreatePropertiesService).to receive(:call).and_return(true)
@@ -130,6 +131,7 @@ module CFE
 
           it "calls all the services it manages" do
             expect(CreateAssessmentService).to receive(:call).and_return(true)
+            expect(CreateProceedingTypesService).to receive(:call).and_return(true)
             expect(CreateApplicantService).to receive(:call).and_return(true)
             expect(CreateCapitalsService).to receive(:call).and_return(true)
             expect(CreatePropertiesService).to receive(:call).and_return(true)

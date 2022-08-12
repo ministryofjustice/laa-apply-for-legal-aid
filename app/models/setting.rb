@@ -27,10 +27,6 @@ class Setting < ApplicationRecord
     setting.enable_employed_journey
   end
 
-  def self.enable_cfe_v5?
-    setting.enable_cfe_v5?
-  end
-
   def self.enable_mini_loop?
     setting.enable_mini_loop?
   end

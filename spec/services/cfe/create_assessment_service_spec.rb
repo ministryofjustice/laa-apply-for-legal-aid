@@ -35,7 +35,7 @@ module CFE
       describe "successful post" do
         before do
           stub_request(:post, service.cfe_url)
-            .with(body: expected_payload_hash.to_json, headers: headers(version: 4))
+            .with(body: expected_payload_hash.to_json, headers: headers(version: 5))
             .to_return(body: dummy_response)
         end
 
@@ -69,9 +69,6 @@ module CFE
       {
         client_reference_id: application.application_ref,
         submission_date: Time.zone.today.strftime("%Y-%m-%d"),
-        proceeding_types: {
-          ccms_codes: application.proceedings.map(&:ccms_code),
-        },
       }
     end
 

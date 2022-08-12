@@ -23,7 +23,6 @@ module Admin
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
                                       :enable_employed_journey,
-                                      :enable_cfe_v5,
                                       :enable_mini_loop)
     end
 

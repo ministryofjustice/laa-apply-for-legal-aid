@@ -41,7 +41,6 @@ RSpec.describe Admin::SettingsController, type: :request do
           allow_welsh_translation: "true",
           enable_employed_journey: "true",
           enable_ccms_submission: "true",
-          enable_cfe_v5: "true",
           enable_mini_loop: "true",
         },
       }
@@ -57,7 +56,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.enable_employed_journey?).to be(true)
-      expect(setting.enable_cfe_v5?).to be(true)
       expect(setting.enable_mini_loop?).to be(true)
     end
 
