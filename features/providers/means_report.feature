@@ -89,6 +89,18 @@ Feature: Means report
     #  | question |
     #  | Housing payments |
 
+    And the Employment income result questions should exist:
+      | question |
+      | Total gross income assessed |
+      | Total disposable income assessed |
+
+    And the Employment income result questions should not exist:
+      | question |
+      | Gross income limit |
+      | Disposable income lower limit |
+      | Disposable income upper limit |
+      | Income contribution |
+
     And the Employment notes questions should exist:
       | question |
       | Do you need to tell us anything else about your client's employment? |
@@ -338,5 +350,3 @@ Feature: Means report
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
       | h3  | Bank statements |
-
-
