@@ -454,6 +454,10 @@ FactoryBot.define do
       provider_received_citizen_consent { true }
     end
 
+    trait :without_open_banking_consent do
+      provider_received_citizen_consent { false }
+    end
+
     trait :with_consent do
       open_banking_consent { true }
     end
@@ -677,6 +681,20 @@ FactoryBot.define do
       provider_step { :end_of_application }
     end
 
+    trait :with_maintenance_in_category do
+      after :create do |application|
+        maintenance_in = TransactionType.where(name: "maintenance_in").first || create(:transaction_type, :maintenance_in)
+        application.transaction_types << maintenance_in
+      end
+    end
+
+    trait :with_maintenance_out_category do
+      after :create do |application|
+        maintenance_out = TransactionType.where(name: "maintenance_out").first || create(:transaction_type, :maintenance_out)
+        application.transaction_types << maintenance_out
+      end
+    end
+
     trait :with_bank_transactions do
       after :create do |application|
         bank_provider = create :bank_provider, applicant: application.applicant
@@ -709,6 +727,39 @@ FactoryBot.define do
       end
     end
 
+    trait :with_fixed_benefits_transactions do
+      after :create do |application|
+        bank_provider = create :bank_provider, applicant: application.applicant
+        bank_account = create :bank_account, bank_provider: bank_provider
+        [90, 60, 30].each do |count|
+          create :bank_transaction,
+                 :benefits,
+                 happened_at: count.days.ago,
+                 amount: 111,
+                 bank_account:,
+                 operation: "credit",
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
+        end
+      end
+    end
+
+    trait :with_fixed_benefits_cash_transactions do
+      after :create do |application|
+        benefits = TransactionType.where(name: "benefits").first || create(:transaction_type, :benefits)
+
+        [90, 60, 30].each do |count|
+          create(:cash_transaction,
+                 legal_aid_application: application,
+                 transaction_type: benefits,
+                 transaction_date: count.days.ago.to_date,
+                 amount: 111,
+                 month_number: count / 30)
+
+          application.transaction_types << benefits
+        end
+      end
+    end
+
     trait :with_uncategorised_credit_transactions do
       after :create do |application|
         bank_provider = create :bank_provider, applicant: application.applicant
@@ -725,6 +776,38 @@ FactoryBot.define do
         bank_account = create :bank_account, bank_provider: bank_provider
         [90, 60, 30].each do |count|
           create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account:, operation: "debit"
+        end
+      end
+    end
+
+    trait :with_fixed_rent_or_mortage_transactions do
+      after :create do |application|
+        bank_provider = create :bank_provider, applicant: application.applicant
+        bank_account = create :bank_account, bank_provider: bank_provider
+        [90, 60, 30].each do |count|
+          create(:bank_transaction,
+                 :rent_or_mortgage,
+                 happened_at: count.days.ago,
+                 amount: 111,
+                 bank_account:,
+                 operation: "debit")
+        end
+      end
+    end
+
+    trait :with_fixed_rent_or_mortage_cash_transactions do
+      after :create do |application|
+        rent_or_mortgage = TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage)
+
+        [90, 60, 30].each do |count|
+          create(:cash_transaction,
+                 legal_aid_application: application,
+                 transaction_type: rent_or_mortgage,
+                 transaction_date: count.days.ago.to_date,
+                 amount: 222,
+                 month_number: count / 30)
+
+          application.transaction_types << rent_or_mortgage
         end
       end
     end

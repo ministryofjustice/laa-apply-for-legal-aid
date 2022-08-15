@@ -11,6 +11,8 @@ Given("I have completed a non-passported employed application and reached the op
 
   @legal_aid_application = create(
     :application,
+    :with_single_employment,
+    :with_extra_employment_information,
     :with_non_passported_state_machine,
     :provider_confirming_applicant_eligibility,
     :with_proceedings,
@@ -33,21 +35,31 @@ Given("I have completed a non-passported employed application and reached the op
 end
 
 Given("I have completed a non-passported employed application with bank statement upload as far as the end of the means section") do
+  Setting.setting.update!(enable_employed_journey: true)
+
   @legal_aid_application = create(
     :application,
+    :with_proceedings,
     :with_employed_applicant,
     :with_single_employment,
+    :with_extra_employment_information,
+    :without_open_banking_consent,
+    :with_fixed_benefits_cash_transactions,
+    :with_maintenance_in_category,
+    :with_fixed_rent_or_mortage_cash_transactions,
+    :with_maintenance_out_category,
+    :with_own_home_mortgaged,
+    :with_policy_disregards,
     :with_non_passported_state_machine,
     :checking_non_passported_means,
-    :with_proceedings,
     explicit_proceedings: %i[se014 da001],
     transaction_period_finish_on: "2022-07-08",
   )
 
   create :attachment, :bank_statement, legal_aid_application: @legal_aid_application
 
-  permission = Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.permissions << permission
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
 
   login_as @legal_aid_application.provider

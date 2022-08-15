@@ -509,6 +509,10 @@ class LegalAidApplication < ApplicationRecord
     provider.bank_statement_upload_permissions? && (!citizen_consent_given || attachments.bank_statement_evidence.exists?)
   end
 
+  def has_transaction_type?(transaction_type)
+    legal_aid_application_transaction_types.map(&:transaction_type_id).include?(transaction_type.id)
+  end
+
 private
 
   def bank_transactions_by_type(type)

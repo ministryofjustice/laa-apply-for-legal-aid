@@ -157,7 +157,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
     end
 
-    context "the wrong transaction type is passed in" do
+    context "when the wrong transaction type is passed in" do
       let!(:income_types) { create_list :transaction_type, 3, :debit_with_standard_name }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
@@ -185,7 +185,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
         context "without transaction type credits" do
           before do
-            legal_aid_application.transaction_types.destroy_all
+            legal_aid_application.transaction_types.credits.destroy_all
           end
 
           it "redirects to means_summaries" do
@@ -194,7 +194,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
           end
         end
 
-        context "with transaction type credits" do
+        context "with credit transaction types" do
           let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :credit).id] } } }
 
           it "redirects to cash_incomes" do
@@ -210,14 +210,29 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
           legal_aid_application.update!(provider_received_citizen_consent: true)
         end
 
-        it "redirects to income_summary" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        context "without credit transaction types" do
+          before do
+            legal_aid_application.transaction_types.credits.destroy_all
+          end
+
+          it "redirects to income_summary" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+          end
+        end
+
+        context "with credit transaction types" do
+          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :credit).id] } } }
+
+          it "redirects to cash_incomes" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path(legal_aid_application))
+          end
         end
       end
     end
 
-    context "submitted with Save as draft" do
+    context "when submitted with Save as draft" do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects to the list of applications" do

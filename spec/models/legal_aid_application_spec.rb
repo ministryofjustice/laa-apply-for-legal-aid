@@ -1522,6 +1522,34 @@ RSpec.describe LegalAidApplication, type: :model do
         end
       end
     end
+
+    describe "#has_transaction_type?" do
+      subject { laa.has_transaction_type?(transaction_type) }
+
+      let!(:benefits) { create(:transaction_type, :benefits) }
+      let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+
+      context "when application has that transaction type" do
+        let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+        let(:transaction_type) { benefits }
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when application does not have that transaction type" do
+        let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+        let(:transaction_type) { rent_or_mortgage }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context "when application does not have any transaction types" do
+        let(:laa) { create :legal_aid_application, transaction_types: [] }
+        let(:transaction_type) { benefits }
+
+        it { is_expected.to be_falsey }
+      end
+    end
   end
 
 private

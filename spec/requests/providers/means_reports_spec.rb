@@ -60,7 +60,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         .and have_selector("h2", text: "Which bank accounts does your client have?")
         .and have_selector("h2", text: "Which savings or investments does your client have?")
         .and have_selector("h2", text: "Which assets does your client have?")
-        .and have_selector("h3", text: "Restrictions on your client's assets") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+        .and have_selector("h2", text: "Restrictions on your client's assets")
         .and have_selector("h2", text: "Payments from scheme or charities")
     end
 
@@ -131,7 +131,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
 
         it "displays the employment details" do
           expect(response.body)
-            .to have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
+            .to have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
             .and have_content("Gross employment income")
             .and have_content("Income tax")
             .and have_content("National insurance")
@@ -241,13 +241,12 @@ RSpec.describe Providers::MeansReportsController, type: :request do
           .and have_selector("h2", text: "Declared outgoings categories")
           .and have_selector("h2", text: "Declared cash outgoings")
           .and have_selector("h2", text: "Employed income result")
-          .and have_selector("h3", text: "Employment notes") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
           .and have_selector("h3", text: "Employment income") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
           .and have_selector("h2", text: "Caseworker Review")
           .and have_selector("h2", text: "Property, savings and other assets")
           .and have_selector("h2", text: "Which savings or investments does your client have?")
           .and have_selector("h2", text: "Which assets does your client have?")
-          .and have_selector("h3", text: "Restrictions on your client's assets") # TODO: should this be an H2 (it can for means report but have impacts CYA pages)
+          .and have_selector("h2", text: "Restrictions on your client's assets")
           .and have_selector("h2", text: "Payments from scheme or charities")
           .and have_selector("h3", text: "Bank statements") # TODO: should this be an H2 (it can for means report but impacts CYA pages)
       end
