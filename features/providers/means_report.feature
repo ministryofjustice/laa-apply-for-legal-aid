@@ -9,13 +9,13 @@ Feature: Means report
       | tag | section |
       | h2  | Client details |
       | h2  | Passported means |
-      | h2  | Income result |
       | h2  | Declared income categories |
       | h2  | Student finance |
       | h2  | Declared cash income |
       | h2  | Dependants |
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
+      | h2  | Employed income result |
       | h3  | Employment notes |
       | h3  | Employment income |
       | h2  | Caseworker Review |
@@ -31,7 +31,9 @@ Feature: Means report
 
     Then the following sections should not exist:
       | tag | section |
-      | h2  | "Income" |
+      | h2  | Proceeding eligibility |
+      | h2  | Income result |
+      | h2  | Income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Capital result |
@@ -86,6 +88,18 @@ Feature: Means report
     # Then the Declared cash outgoings questions should exist:
     #  | question |
     #  | Housing payments |
+
+    And the Employment income result questions should exist:
+      | question |
+      | Total gross income assessed |
+      | Total disposable income assessed |
+
+    And the Employment income result questions should not exist:
+      | question |
+      | Gross income limit |
+      | Disposable income lower limit |
+      | Disposable income upper limit |
+      | Income contribution |
 
     And the Employment notes questions should exist:
       | question |
@@ -185,6 +199,7 @@ Feature: Means report
       | tag | section |
       | h2  | Declared income categories |
       | h2  | Student finance |
+      | h2  | Employed income result |
       | h2  | Declared cash income |
       | h2  | Dependants |
       | h2  | Declared outgoings categories |
@@ -325,6 +340,7 @@ Feature: Means report
       | tag | section |
       | h2  | Income result |
       | h2  | Income |
+      | h2  | Employed income result |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Declared income categories |
@@ -334,5 +350,3 @@ Feature: Means report
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
       | h3  | Bank statements |
-
-

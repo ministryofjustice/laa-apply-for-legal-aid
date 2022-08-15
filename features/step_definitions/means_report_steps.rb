@@ -108,13 +108,13 @@ end
 
 Then("the following sections should exist:") do |table|
   table.hashes.each do |row|
-    expect(page).to have_selector(row[:tag], text: row[:section]), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+    expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
   end
 end
 
 Then("the following sections should not exist:") do |table|
   table.hashes.each do |row|
-    expect(page).not_to have_selector(row[:tag], text: row[:section]), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
+    expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
   end
 end
 
@@ -166,6 +166,14 @@ Then("the Declared outgoings categories questions should exist:") do |table|
   expect_questions_in(selector: "#outgoings-category-questions", expected: table)
 end
 
+Then("the Employment income result questions should exist:") do |table|
+  expect_questions_in(selector: "#income-result-questions", expected: table)
+end
+
+Then("the Employment income result questions should not exist:") do |table|
+  expect_questions_in(selector: "#income-result-questions", expected: table, negate: true)
+end
+
 Then("the Employment notes questions should exist:") do |table|
   expect_questions_in(selector: "#employment-notes-questions", expected: table)
 end
@@ -206,10 +214,14 @@ Then("the \"Bank statements\" questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__bank_statements", expected: table)
 end
 
-def expect_questions_in(expected:, selector:)
+def expect_questions_in(expected:, selector:, negate: false)
   within(selector) do
     expected.hashes.each do |row|
-      expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      if negate
+        expect(page).not_to have_selector("dt", text: row[:question]), "expected not to find tag \"dt\" with text: \"#{row[:question]}\""
+      else
+        expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      end
     end
   end
 end
