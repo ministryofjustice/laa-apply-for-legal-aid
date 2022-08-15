@@ -182,9 +182,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        context "without transaction type debits" do
+        context "without debit transaction type" do
           before do
-            legal_aid_application.transaction_types.destroy_all
+            legal_aid_application.transaction_types.debits.destroy_all
           end
 
           it "redirects to means_summaries" do
@@ -193,7 +193,34 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           end
         end
 
-        context "with transaction type debits" do
+        context "with debit transaction type" do
+          let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
+
+          it "redirects to cash_outgoings" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+          end
+        end
+      end
+
+      context "without bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: true)
+        end
+
+        context "without debit transaction types" do
+          before do
+            legal_aid_application.transaction_types.debits.destroy_all
+          end
+
+          it "redirects to income_summary" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+          end
+        end
+
+        context "with debit transaction types" do
           let(:params) { { legal_aid_application: { transaction_type_ids: [create(:transaction_type, :debit).id] } } }
 
           it "redirects to cash_outgoings" do

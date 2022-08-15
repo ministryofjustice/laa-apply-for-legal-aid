@@ -294,7 +294,7 @@ Given("I start the application with a negative benefit check result and no used 
   )
 end
 
-Given("I start the merits application and the applicant has uploaded transaction data") do
+Given("I start the means application and the applicant has uploaded transaction data") do
   # These changes are to add existing categories (as would have been selected by the applicant)
   # to the application e.g. housing, benefits, the categories are now selected by the provider
   # so should not be necessary, however in practice this means that the checkboxes are not being populated
@@ -769,10 +769,10 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   end
 end
 
-Given("I click Check Your Answers Change link for {string}") do |field_name|
-  field_name.downcase!
-  field_name.gsub!(/\s+/, "_")
-  within "#app-check-your-answers__#{field_name}" do
+Given("I click Check Your Answers Change link for {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  within "#app-check-your-answers__#{question_id}" do
     click_link("Change")
   end
 end

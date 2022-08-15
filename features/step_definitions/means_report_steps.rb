@@ -9,6 +9,8 @@ Given("I have completed a non-passported employed application with bank statemen
     :with_cfe_empty_result,
     :with_extra_employment_information,
     :with_full_employment_information,
+    :with_fixed_benefits_cash_transactions,
+    :with_fixed_rent_or_mortage_cash_transactions,
     :with_chances_of_success,
     :assessment_submitted,
     provider_received_citizen_consent: false,
@@ -150,6 +152,10 @@ Then("the Declared income categories questions should exist:") do |table|
   expect_questions_in(selector: "#income-category-questions", expected: table)
 end
 
+Then("the Declared cash income questions should exist:") do |table|
+  expect_questions_in(selector: "#income-cash-payments-questions", expected: table)
+end
+
 Then("the Student finance questions should exist:") do |table|
   expect_questions_in(selector: "#student-finance-questions", expected: table)
 end
@@ -164,6 +170,10 @@ end
 
 Then("the Declared outgoings categories questions should exist:") do |table|
   expect_questions_in(selector: "#outgoings-category-questions", expected: table)
+end
+
+Then("the Declared cash outgoings questions should exist:") do |table|
+  expect_questions_in(selector: "#outgoings-cash-payments-questions", expected: table)
 end
 
 Then("the Employment income result questions should exist:") do |table|

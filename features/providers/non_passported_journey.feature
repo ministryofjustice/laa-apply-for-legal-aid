@@ -221,7 +221,7 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
-  Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
+  Scenario: Complete an application for applicant that does not receive benefits with no dependants but other values
     Given I start the means application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'

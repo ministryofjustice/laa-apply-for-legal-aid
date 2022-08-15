@@ -14,10 +14,11 @@ Feature: Bank statement flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     When I click 'Save and continue'
-    Then I should be on a page with title "HMRC has no record of your client's employment in the last 3 months"
+    Then I should be on a page with title matching "Review .*'s employment income"
+    And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
 
-    When I fill "legal-aid-application-full-employment-details-field" with "Applicant also earns 50 gbp, some extra details about employment"
-    And I click 'Save and continue'
+    # TODO: extra employment info already been filled in by factory - amend application setup so we can complete here?
+    When I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 
     When I select 'Benefits'
@@ -39,21 +40,6 @@ Feature: Bank statement flow
 
     When I select 'Housing payments'
     But I select 'None of the above'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's income into categories"
-
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    And I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select benefits payments'
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    And I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-
-    When I click the first link 'View statements and add transactions'
-    Then I should be on a page showing 'Select housing payments'
-    When I select the first checkbox
-    And I click 'Save and continue'
     And I click 'Save and continue'
     Then I should be on a page with title "Does your client have any dependants?"
 

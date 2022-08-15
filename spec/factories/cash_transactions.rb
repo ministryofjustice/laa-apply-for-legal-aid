@@ -18,5 +18,9 @@ FactoryBot.define do
       transaction_date { Time.zone.today.at_beginning_of_month - 3.months }
       month_number { 3 }
     end
+
+    trait :rent_or_mortgage do
+      transaction_type { TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage) }
+    end
   end
 end

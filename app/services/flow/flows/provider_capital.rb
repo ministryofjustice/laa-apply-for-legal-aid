@@ -24,17 +24,15 @@ module Flow
             application.income_types? ? :cash_incomes : :student_finances
           end,
           check_answers: lambda do |application|
-            if application.uploading_bank_statements?
-              application.income_types? ? :cash_incomes : :means_summaries
-            else
-              :income_summary
-            end
+            return :cash_incomes if application.income_types?
+
+            application.uploading_bank_statements? ? :means_summaries : :income_summary
           end,
         },
         cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
           forward: :student_finances,
-          check_answers: :means_summaries,
+          check_answers: ->(application) { application.uploading_bank_statements? ? :means_summaries : :income_summary },
         },
         student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
@@ -53,12 +51,16 @@ module Flow
             end
           end,
           check_answers: lambda do |application|
-            application.outgoing_types? ? :cash_outgoings : :means_summaries # could this intend to point to outgoings_summary? need to check CYA behaviour
+            return :cash_outgoings if application.outgoing_types?
+
+            application.uploading_bank_statements? ? :means_summaries : :outgoings_summary
           end,
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },
           forward: lambda do |application|
+            return :has_dependants if application.uploading_bank_statements?
+
             if application.income_types?
               :income_summary
             elsif application.outgoing_types?
@@ -67,7 +69,7 @@ module Flow
               :has_dependants
             end
           end,
-          check_answers: :means_summaries,
+          check_answers: ->(application) { application.uploading_bank_statements? ? :means_summaries : :outgoings_summary },
         },
         applicant_bank_accounts: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_bank_account_path(application) },

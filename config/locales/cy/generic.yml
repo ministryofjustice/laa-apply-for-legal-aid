@@ -26,6 +26,7 @@ cy:
     list: tsiL
     'no': 'oN'
     menu: uneM
+    none: enoN
     none_declared: deralced enoN
     none_selected: eseht fo enoN
     not_completed: detelpmoc toN

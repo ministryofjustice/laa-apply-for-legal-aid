@@ -802,7 +802,13 @@ en:
     means_summaries:
       show:
         h1-heading: Check your answers
-        h2-heading: Your client's income and outgoings
+        capital-section-heading: Your client's capital
+        what_happens_next:
+          heading: What happens next
+          text: We'll use your answers to check your client's financial eligibility for legal aid.
+      income_assessment:
+        income-heading: Your client's income
+        outgoings-heading: Your client's outgoings
         dependants:
           heading: Dependants
           has_dependants: Does your client have any dependants?
@@ -814,12 +820,13 @@ en:
           in_full_time_education: Are they in full-time education or training?
           income: Do they receive any income?
           assets: Do they have assets worth more than £8,000?
-        capital-section-heading: Your client's capital
-        credits-section-heading: Income
-        debits-section-heading: Outgoings
-        what_happens_next:
-          heading: What happens next
-          text: We'll use your answers to check your client's financial eligibility for legal aid.
+        credits-section-heading: What payments does your client receive?
+        debits-section-heading: What payments does your client make?
+      income_cash_payments:
+        heading: Payments your client receives in cash
+      outgoings_cash_payments:
+        heading: Payments your client makes in cash
+
     merits_task_lists:
       show:
         page_heading: Provide details of the case
