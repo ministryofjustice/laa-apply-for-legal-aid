@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :employment do
     legal_aid_application
-    sequence(:name) { |n| "Job #{n}" }
+    sequence(:name) { |n| "Job %05d" % n }
 
     trait :example1_usecase1 do
       id { "12345678-1234-1234-1234-123456789abc" }

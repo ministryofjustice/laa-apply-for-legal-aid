@@ -25,7 +25,7 @@ RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
     end
 
     context "when the client_involvement_type submitted is missing" do
-      let(:cit) { nil }
+      let(:cit) { "" }
 
       it "is invalid" do
         expect(cit_form).to be_invalid
