@@ -14,7 +14,7 @@ Feature: mini-loop
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
-  Scenario: When the application has a multiple proceedings and I'm using delegated functions
+  Scenario: When the application has multiple proceedings and I'm using delegated functions
     Given the feature flag for enable_mini_loop is enabled
     And I have started an application with multiple proceedings and reached the check your answers page
     When I click Check Your Answers Change link for 'inherent_jurisdiction_high_court_injunction_used_delegated_functions_on'
