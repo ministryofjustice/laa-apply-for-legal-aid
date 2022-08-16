@@ -10,6 +10,7 @@ module Providers
 
       def update
         @form = Proceedings::DelegatedFunctionsForm.new(form_params)
+        DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
         render :show unless save_continue_or_draft(@form)
       end
 

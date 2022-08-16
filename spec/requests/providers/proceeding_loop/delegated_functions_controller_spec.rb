@@ -38,6 +38,8 @@ RSpec.describe "DelegatedFunctionsController", type: :request do
   describe "POST /providers/applications/:legal_aid_application_id/delegated_functions/:proceeding_id" do
     subject(:post_df) { patch "/providers/applications/#{application_id}/delegated_functions/#{proceeding_id}", params: }
 
+    before { allow(DelegatedFunctionsDateService).to receive(:call).and_return(true) }
+
     let(:params) do
       {
         proceeding: {
