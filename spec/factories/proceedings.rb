@@ -9,6 +9,11 @@ FactoryBot.define do
       client_involvement_type_description { nil }
     end
 
+    trait :with_cit_z do
+      client_involvement_type_ccms_code { "Z" }
+      client_involvement_type_description { "Description for client involvement type Z" }
+    end
+
     trait :with_df_date do
       used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }

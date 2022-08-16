@@ -7,7 +7,6 @@ module Settings
                   :allow_welsh_translation,
                   :enable_ccms_submission,
                   :enable_employed_journey,
-                  :enable_cfe_v5,
                   :enable_mini_loop
 
     validates :mock_true_layer_data,
@@ -15,7 +14,6 @@ module Settings
               :allow_welsh_translation,
               :enable_ccms_submission,
               :enable_employed_journey,
-              :enable_cfe_v5,
               :enable_mini_loop,
               presence: true
   end

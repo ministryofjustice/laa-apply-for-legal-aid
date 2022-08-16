@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
   subject(:cit_form) { described_class.new(form_params) }
 
-  let(:proceeding) { create :proceeding, :da001, :without_cit }
+  let(:proceeding) { create :proceeding, :da001, :with_cit_z }
   let(:params) do
     {
       client_involvement_type_ccms_code: cit,
@@ -25,7 +25,7 @@ RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
     end
 
     context "when the client_involvement_type submitted is missing" do
-      let(:cit) { nil }
+      let(:cit) { "" }
 
       it "is invalid" do
         expect(cit_form).to be_invalid
