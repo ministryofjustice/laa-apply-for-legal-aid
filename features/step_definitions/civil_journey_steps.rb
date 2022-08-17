@@ -419,6 +419,22 @@ Given("I have started an application and reached the proceedings list") do
   steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
 end
 
+Given("I have started an application with multiple proceedings and reached the check your answers page") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_address_lookup,
+    :with_proceedings,
+    :at_entering_applicant_details,
+    :with_delegated_functions_on_proceedings,
+    explicit_proceedings: %i[da001 se013],
+    df_options: { DA001: [10.days.ago, 10.days.ago], SE013: nil },
+    substantive_application_deadline_on: 10.days.from_now,
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Check your answers')
+end
+
 Given("I have started an application with multiple proceedings") do
   @legal_aid_application = create(
     :legal_aid_application,
@@ -698,6 +714,16 @@ And("I search for proceeding {string}") do |proceeding_search|
 end
 
 And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
+  if visibility == "see"
+    expect(page).to have_content(/#{text}/)
+  else
+    expect(page).not_to have_content(text)
+  end
+end
+
+And(/^I should (see|not see) a govuk formatted date from ['|"](.*?)['|"] days ago$/) do |visibility, number|
+  date = number.to_i.days.ago
+  text = date.strftime("%-d %B %Y")
   if visibility == "see"
     expect(page).to have_content(/#{text}/)
   else

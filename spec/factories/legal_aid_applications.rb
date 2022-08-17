@@ -321,7 +321,7 @@ FactoryBot.define do
           next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
           df_date, reported_date = evaluator.df_options[ccms_code]
-          proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
+          proceeding.update!(used_delegated_functions: df_date.present?, used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
         end
       end
     end
