@@ -6,6 +6,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
            :at_applicant_details_checked,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
+           :with_substantive_application_deadline_on,
            explicit_proceedings: [:da004],
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
            applicant:
@@ -28,6 +29,11 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
+    end
+
+    it "renders the date correctly" do
+      target_date = SubstantiveApplicationDeadlineCalculator.call(legal_aid_application.earliest_delegated_functions_date)
+      expect(response.body).to include("You must submit a substantive application by #{target_date.strftime('%e %B %Y')}")
     end
 
     context "when not authenticated" do
