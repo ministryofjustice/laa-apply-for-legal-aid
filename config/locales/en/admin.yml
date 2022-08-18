@@ -41,7 +41,8 @@ en:
           enable_ccms_submission: Allow CCMS submissions
           enable_employed_journey: Allow employed applications
           enable_evidence_upload: Enable the new evidence upload feature
-          enable_mini_loop: Enable mini loop for proceeding types
+          enable_mini_loop: Enable mini loop for proceeding types/CIT and DF
+          enable_loop: Enable loop for proceeding types/levels of service
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -52,6 +53,7 @@ en:
           enable_employed_journey: Select Yes to allow solicitors to submit applications for employed applicants
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           enable_mini_loop: Select Yes to turn on mini loop for proceeding type choices for CIT and DF
+          enable_loop: Select Yes to turn on the extended loop for proceeding type choices for levels of service
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications

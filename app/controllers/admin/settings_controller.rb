@@ -23,7 +23,8 @@ module Admin
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
                                       :enable_employed_journey,
-                                      :enable_mini_loop)
+                                      :enable_mini_loop,
+                                      :enable_loop)
     end
 
     def setting

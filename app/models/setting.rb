@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.enable_mini_loop?
   end
 
+  def self.enable_loop?
+    setting.enable_loop?
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
