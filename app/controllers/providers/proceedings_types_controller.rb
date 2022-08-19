@@ -44,7 +44,7 @@ module Providers
     end
 
     def excluded_codes
-      @excluded_codes ||= legal_aid_application.proceedings&.map { |p| p.ccms_code }&.join(",")
+      @excluded_codes ||= legal_aid_application.proceedings&.map(&:ccms_code)&.join(",")
     end
   end
 end
