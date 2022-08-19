@@ -57,9 +57,9 @@ Metrics/ModuleLength:
     - 'spec/**/*'
 
 Metrics/CyclomaticComplexity:
-  IgnoredMethods:
+  AllowedMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
 
 Metrics/PerceivedComplexity:
-  IgnoredMethods:
+  AllowedMethods:
     - 'cli_arg_version' # from bin/bundle - auto generated method
