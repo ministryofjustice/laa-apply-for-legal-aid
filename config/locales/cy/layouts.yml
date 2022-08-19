@@ -27,8 +27,7 @@ cy:
         gov_uk_link_title: egapemoh KU.VOG eht ot oG
         feedback: kcabdeef
         phase: ateb
-        phase_banner_text_1: ruoy – ecivres wen a si sihT
-        phase_banner_text_2: ".ti evorpmi ot su pleh lliw"
+        phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: dia lagel rof ylppA
     logout:
       admin: tuo ngis nimdA

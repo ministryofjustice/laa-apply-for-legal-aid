@@ -99,6 +99,9 @@ gem "secure_headers"
 # DFE formbuilder
 gem "govuk_design_system_formbuilder", ">= 3.0.1"
 
+# DFE ViewComponent library
+gem "govuk-components"
+
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
