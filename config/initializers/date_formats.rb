@@ -1,5 +1,6 @@
-# The below hotfix overrides the rails 7 removal of to_s and
-# allows our default format to be applied rather than having
+# The below hotfix overrides the rails 7 removal of to_s
+# https://guides.rubyonrails.org/7_0_release_notes.html#active-support-deprecations
+# and allows our default format to be applied rather than having
 # to find each date and manually add `.to_fs` to the end of it
 require "date"
 
