@@ -1,64 +1,80 @@
 require "rails_helper"
 
-RSpec.describe "Firm" do
-  let!(:firm) { create :firm, name: "Testing, Test & Co" }
+RSpec.describe Firm, type: :model do
+  describe ".search" do
+    context "when a search term is given" do
+      it "returns firms whose name matches the search term" do
+        _firm1 = create(:firm, name: "Testing, Test & Co.")
+        firm2 = create(:firm, name: "Cage and Fish")
+        firm3 = create(:firm, name: "Fish & Co.")
+        search_term = "Fish"
 
-  describe "#permissions" do
-    context "when there are no permissions" do
-      let!(:default_permission) { create :permission }
-      let(:firm_with_no_permission) { create :firm }
+        firms = described_class.search(search_term)
 
-      before do
-        allow_any_instance_of(Firm).to receive(:passported_permission_id).and_return(default_permission.id)
-      end
-
-      it "has a default permission" do
-        expect(firm_with_no_permission.permissions).to eq [default_permission]
+        expect(firms).to contain_exactly(firm2, firm3)
       end
     end
 
-    context "when there are permissions" do
-      let(:default_permission) { Permission.find_by(role: "application.passported.*") }
-      let!(:permission1) { create :permission }
-      let!(:permission2) { create :permission }
+    context "when the search term is empty" do
+      it "returns all firms" do
+        firm1 = create(:firm, name: "Testing, Test & Co")
+        firm2 = create(:firm, name: "Cage and Fish")
+        search_term = ""
 
-      context "with just the default permission" do
-        it "returns the default permission" do
-          expect(firm.reload.permissions).to eq [default_permission]
-        end
-      end
+        firms = described_class.search(search_term)
 
-      context "with additional permissions added" do
-        before do
-          firm.permissions << permission2
-          firm.permissions << permission1
-          firm.save!
-        end
-
-        it "returns the correct permissions" do
-          expect(firm.reload.permissions).to match_array [default_permission, permission2, permission1]
-        end
-
-        it "returns all permissions" do
-          expect(firm.permissions.all).to match_array [default_permission, permission2, permission1]
-        end
+        expect(firms).to contain_exactly(firm1, firm2)
       end
     end
   end
 
-  describe "search" do
-    let!(:firm2) { create :firm, name: "Cage and Fish" }
-    let!(:firm3) { create :firm, name: "Harvey Birdman & Co." }
+  describe ".after_commit callback" do
+    context "when a firm is created" do
+      it "fires the dashboard.firm_created event" do
+        firm = build(:firm)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
 
-    context "when searching for a single firm" do
-      it "returns a single record" do
-        expect(Firm.search("Harvey")).to eq([firm3])
+        firm.save!
+
+        expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.firm_created")
       end
     end
 
-    context "when no specific firm is searched for" do
-      it "returns all records" do
-        expect(Firm.search("")).to match_array([firm3, firm2, firm])
+    context "when a firm is updated" do
+      it "does not fire the dashboard.firm_created event" do
+        firm = create(:firm)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        firm.update!(name: "Updated Co.")
+
+        expect(ActiveSupport::Notifications).not_to have_received(:instrument).with("dashboard.firm_created")
+      end
+    end
+  end
+
+  describe "#permissions" do
+    context "when there are no permissions set" do
+      it "returns the default permission" do
+        default_permission = create(:permission, :passported)
+        firm = create(:firm, :with_no_permissions)
+
+        permissions = firm.permissions
+
+        expect(permissions).to contain_exactly(default_permission)
+      end
+    end
+
+    context "when there are permissions set" do
+      it "returns the correct permissions" do
+        default_permission = create(:permission, :passported)
+        employed_permission = create(:permission, :employed)
+        firm = create(:firm, :with_no_permissions)
+        firm.permissions << employed_permission
+        firm.save!
+
+        permissions = firm.permissions
+
+        expect(permissions).to contain_exactly(default_permission, employed_permission)
       end
     end
   end

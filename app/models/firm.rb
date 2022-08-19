@@ -10,7 +10,7 @@ class Firm < ApplicationRecord
     self.permission_ids = [passported_permission_id]
   end
 
-  after_create do
+  after_commit on: :create do
     ActiveSupport::Notifications.instrument "dashboard.firm_created"
   end
 

@@ -3,6 +3,70 @@ require "rails_helper"
 RSpec.describe LegalAidApplication, type: :model do
   let(:legal_aid_application) { create :legal_aid_application }
 
+  describe ".after_commit callback" do
+    context "when an application is created" do
+      it "fires the dashboard.application_created event" do
+        legal_aid_application = build(:legal_aid_application)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.save!
+
+        expect(ActiveSupport::Notifications).to have_received(:instrument).with(
+          "dashboard.application_created",
+          id: legal_aid_application.id,
+          state: legal_aid_application.state,
+        )
+      end
+
+      it "fires the dashboard.declined_open_banking event if consent to open banking is changed" do
+        legal_aid_application = build(:legal_aid_application, open_banking_consent: false)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.save!
+
+        expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.declined_open_banking")
+      end
+
+      it "does not fire the dashboard.declined_open_banking event if consent to open banking is not changed" do
+        legal_aid_application = build(:legal_aid_application)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.save!
+
+        expect(ActiveSupport::Notifications).not_to have_received(:instrument).with("dashboard.declined_open_banking")
+      end
+    end
+
+    context "when an application is updated" do
+      it "does not fire the dashboard.application_created event" do
+        legal_aid_application = create(:legal_aid_application)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.update!(has_dependants: true)
+
+        expect(ActiveSupport::Notifications).not_to have_received(:instrument).with("dashboard.application_created")
+      end
+
+      it "fires the dashboard.declined_open_banking event if consent to open banking is changed" do
+        legal_aid_application = create(:legal_aid_application, open_banking_consent: false)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.update!(open_banking_consent: true)
+
+        expect(ActiveSupport::Notifications).to have_received(:instrument).with("dashboard.declined_open_banking")
+      end
+
+      it "does not fire the dashboard.declined_open_banking event if consent to open banking is not changed" do
+        legal_aid_application = create(:legal_aid_application)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        legal_aid_application.update!(has_dependants: true)
+
+        expect(ActiveSupport::Notifications).not_to have_received(:instrument).with("dashboard.declined_open_banking")
+      end
+    end
+  end
+
   describe "#capture_policy_disregards?" do
     subject { legal_aid_application.capture_policy_disregards? }
 

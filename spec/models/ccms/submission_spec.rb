@@ -15,6 +15,38 @@ module CCMS
              case_poll_count:
     end
 
+    describe ".after_commit callback" do
+      context "when a submission is created" do
+        it "fires the dashboard.ccms_submission_saved event" do
+          submission = build(:submission, aasm_state: :initialised)
+          allow(ActiveSupport::Notifications).to receive(:instrument)
+
+          submission.save!
+
+          expect(ActiveSupport::Notifications).to have_received(:instrument).with(
+            "dashboard.ccms_submission_saved",
+            id: submission.id,
+            state: "initialised",
+          )
+        end
+      end
+
+      context "when a submission is updated" do
+        it "fires the dashboard.ccms_submission_saved event" do
+          submission = create(:submission, aasm_state: :initialised)
+          allow(ActiveSupport::Notifications).to receive(:instrument)
+
+          submission.update!(aasm_state: "completed")
+
+          expect(ActiveSupport::Notifications).to have_received(:instrument).with(
+            "dashboard.ccms_submission_saved",
+            id: submission.id,
+            state: "completed",
+          )
+        end
+      end
+    end
+
     context "with Validations" do
       it "errors if no legal aid application id is present" do
         submission.legal_aid_application = nil

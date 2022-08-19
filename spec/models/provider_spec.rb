@@ -4,6 +4,36 @@ RSpec.describe Provider, type: :model do
   let(:firm) { create :firm }
   let(:provider) { create :provider, firm: }
 
+  describe ".after_commit callback" do
+    context "when a provider is created" do
+      it "fires the dashboard.provider_updated event" do
+        provider = build(:provider)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        provider.save!
+
+        expect(ActiveSupport::Notifications).to have_received(:instrument).with(
+          "dashboard.provider_updated",
+          provider_id: provider.id,
+        )
+      end
+    end
+
+    context "when a provider is updated" do
+      it "does not fire the dashboard.provider_updated event" do
+        provider = create(:provider)
+        allow(ActiveSupport::Notifications).to receive(:instrument)
+
+        provider.update!(name: "Updated Provider")
+
+        expect(ActiveSupport::Notifications).not_to have_received(:instrument).with(
+          "dashboard.provider_updated",
+          provider_id: provider.id,
+        )
+      end
+    end
+  end
+
   describe "#update_details" do
     context "when firm exists" do
       it "does not call provider details creator immediately" do

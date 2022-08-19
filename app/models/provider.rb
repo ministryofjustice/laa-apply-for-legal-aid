@@ -11,7 +11,7 @@ class Provider < ApplicationRecord
   has_many :actor_permissions, as: :permittable
   has_many :permissions, through: :actor_permissions
 
-  after_create do
+  after_commit on: :create do
     ActiveSupport::Notifications.instrument "dashboard.provider_updated", provider_id: id
   end
 

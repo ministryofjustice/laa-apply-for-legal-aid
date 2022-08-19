@@ -10,7 +10,7 @@ module CCMS
     validates :legal_aid_application_id, presence: true
     # rubocop:enable Rails/RedundantPresenceValidationOnBelongsTo
 
-    after_save do
+    after_commit on: %i[create update] do
       ActiveSupport::Notifications.instrument "dashboard.ccms_submission_saved", id:, state: aasm_state
     end
 
