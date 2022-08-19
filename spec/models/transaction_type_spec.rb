@@ -1,6 +1,46 @@
 require "rails_helper"
 
+RSpec.shared_context "with credit and debit transaction types" do
+  let(:credit_transaction_type) { create(:transaction_type, :benefits) }
+  let(:debit_transaction_type) { create(:transaction_type, :rent_or_mortgage) }
+
+  before do
+    credit_transaction_type
+    debit_transaction_type
+  end
+end
+
 RSpec.describe TransactionType, type: :model do
+  describe ".all" do
+    subject(:all) { described_class.all }
+
+    include_context "with credit and debit transaction types"
+
+    it "returns all" do
+      expect(all).to contain_exactly(credit_transaction_type, debit_transaction_type)
+    end
+  end
+
+  describe ".credits" do
+    subject(:credits) { described_class.credits }
+
+    include_context "with credit and debit transaction types"
+
+    it "returns just the credit types" do
+      expect(credits).to contain_exactly(credit_transaction_type)
+    end
+  end
+
+  describe ".debits" do
+    subject(:debits) { described_class.debits }
+
+    include_context "with credit and debit transaction types"
+
+    it "returns just the debit types" do
+      expect(debits).to contain_exactly(debit_transaction_type)
+    end
+  end
+
   describe "#for_income_type?" do
     context "when checks that a boolean response is returned" do
       let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
