@@ -9,7 +9,8 @@ namespace :settings do
                     enable_ccms_submission: true,
                     enable_employed_journey: false,
                     enable_evidence_upload: false,
-                    enable_mini_loop: false)
+                    enable_mini_loop: false,
+                    enable_loop: false)
 
     pp Setting.first
   end

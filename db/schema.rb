@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_12_134746) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_18_102535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -781,6 +781,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_134746) do
     t.datetime "digest_extracted_at", default: "1970-01-01 00:00:01"
     t.boolean "enable_employed_journey", default: false, null: false
     t.boolean "enable_mini_loop", default: false, null: false
+    t.boolean "enable_loop", default: false, null: false
   end
 
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

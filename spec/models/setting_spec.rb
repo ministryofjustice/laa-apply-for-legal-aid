@@ -14,6 +14,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_employed_journey?).to be false
         expect(rec.enable_mini_loop?).to be false
+        expect(rec.enable_loop?).to be false
       end
     end
 
@@ -28,6 +29,7 @@ RSpec.describe Setting do
           alert_via_sentry: true,
           enable_employed_journey: true,
           enable_mini_loop: true,
+          enable_loop: true,
         )
       end
 
@@ -41,6 +43,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_employed_journey?).to be true
         expect(rec.enable_mini_loop?).to be true
+        expect(rec.enable_loop?).to be true
       end
     end
   end
@@ -57,6 +60,7 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.enable_employed_journey?).to be false
       expect(described_class.enable_mini_loop?).to be false
+      expect(described_class.enable_loop?).to be false
     end
   end
 end
