@@ -59,10 +59,10 @@ Documentation of certain parts of the system which are particularly complex can 
 
 * Ruby version
     * Ruby version 3.x
-    * Rails 6.0.3
+    * Rails 7.0.x
 
 * System dependencies
-    * postgres 10.13
+    * postgres
     * redis
     * yarn
     * wkhtmltopdf
@@ -91,13 +91,6 @@ git-crypt unlock
 ```
 
 Copy the `.env.sample` file and name the new file `.env.development`
-
-To get the tests running you will need to obtain and set values for the following:
-```bash
-CHECK_FINANCIAL_ELIGIBILITY_HOST=
-LEGAL_FRAMEWORK_API_HOST=
-HMRC_API_HOST=
-```
 
 To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
 ```bash
@@ -213,9 +206,10 @@ foreman start -f Procfile
 Ensure you have an `.env.test` file. This can be the same as your .env.development file. In addition you should set the following.
 
 Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
-Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth
-Set `LEGAL_FRAMEWORK_API_HOST=<staging api>
-Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>
+Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth.
+Set `LOCAL_CLAMAV=true`
+Set `LEGAL_FRAMEWORK_API_HOST=<staging api>`
+Set `CHECK_FINANCIAL_ELIGIBILITY_HOST=<staging api>`
 Set `HMRC_API_HOST=<staging api>`
 
 Runs Rubocop, RSpec specs and Cucumber features
@@ -295,19 +289,6 @@ helm delete --namespace=laa-apply-for-legalaid-uat <name-of-the-release>
 ```
 
 ## Dev: running locally
-
-### LAA Portal Authentication dev setup
-
-Add the following to .env.development
-```
-LAA_PORTAL_IDP_SSO_TARGET_URL=https://portal.tst.legalservices.gov.uk/oamfed/idp/samlv20
-LAA_PORTAL_IDP_CERT=< LAA_PORTAL_IDP_CERT (dev)>
-LAA_PORTAL_CERTIFICATE=< LAA_PORTAL_CERTIFICATE (dev)>
-LAA_PORTAL_SECRET_KEY=< LAA_PORTAL_SECRET_KEY(dev)>
-LAA_PORTAL_MOCK_SAML=false
-```
-** Note the above keys can be found in LastPass
-
 ### Authentication
 
 #### Live
@@ -453,7 +434,7 @@ and are executed in order.
 
 We use the [data-migrate](https://github.com/ilyakatz/data-migrate/blob/master/README.md) gem for data migrations, i.e. when existing data in the database has to be changed.  These are stored in the `db/data` directory, and are also given a name prefixed with a timestamp.
 
-Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations 
+Running `rake db:migrate:with_data` will run schema and data migrations in the order of their timestamps, so that data migrations
 that rely on the schema at a certain point in time are run at that time.
 
 
@@ -499,7 +480,7 @@ $ ./scripts/restore_anonymised_db.sh [branch-name]
 ```
 Where branch name is either the full git branch name or just the start of it e.g `ap-2555-anon-uat-db` or `ap-2555`
 
-It requires that you have kubectl authenticated and your context set to the `live` cluster. The `db_export.sh script` will save 
+It requires that you have kubectl authenticated and your context set to the `live` cluster. The `db_export.sh script` will save
 the anonymised database to your local `/tmp` folder. This script will copy the file to the `/tmp` folder on the selected UAT instance,
 drop the existing database and restore using the anonymised data.
 
@@ -518,12 +499,11 @@ this functionality, set the environment variable `TRUE_LAYER_ENABLE_MOCK` to `"t
 
 ## Check Financial Eligibility Service
 
-The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_HOST`
+The URL for this service should be set using the environment variable `CHECK_FINANCIAL_ELIGIBILITY_HOST`.
 
 ## Legal Framework API Service
 
-The URL for this service should be set using the environment variable  
-`LEGAL_FRAMEWORK_API_HOST`
+The URL for this service should be set using the environment variable `LEGAL_FRAMEWORK_API_HOST`.
 
 ---
 
