@@ -1,6 +1,12 @@
 FactoryBot.define do
   factory :proceeding do
     legal_aid_application
+    substantive_level_of_service { "3" }
+    substantive_level_of_service_name { "Full Representation" }
+    substantive_level_of_service_stage { "8" }
+    emergency_level_of_service { "3" }
+    emergency_level_of_service_name { "Full Representation" }
+    emergency_level_of_service_stage { "8" }
 
     sequence(:proceeding_case_id) { |n| n + 55_000_000 }
 
@@ -12,6 +18,10 @@ FactoryBot.define do
     trait :with_cit_z do
       client_involvement_type_ccms_code { "Z" }
       client_involvement_type_description { "Description for client involvement type Z" }
+    end
+
+    trait :without_df_date do
+      used_delegated_functions { false }
     end
 
     trait :with_df_date do
