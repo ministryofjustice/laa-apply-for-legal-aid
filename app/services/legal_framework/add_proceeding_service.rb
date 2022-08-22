@@ -10,7 +10,9 @@ module LegalFramework
       @ccms_code = params[:ccms_code]
 
       ActiveRecord::Base.transaction do
-        Proceeding.create(proceeding_attrs.merge(scope_limitation_attrs))
+        default_attrs = proceeding_attrs
+        attrs = Setting.enable_loop? ? default_attrs : default_attrs.merge(scope_limitation_attrs)
+        Proceeding.create(attrs)
         LeadProceedingAssignmentService.call(@legal_aid_application)
       end
       true
