@@ -180,7 +180,7 @@ RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
         expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.blank", category: "in maintenance", month: expected_month))
       end
 
-      it "shows an error for an invalid amount" do
+      it "shows an error for an invalid type" do
         expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.invalid_type"))
       end
 

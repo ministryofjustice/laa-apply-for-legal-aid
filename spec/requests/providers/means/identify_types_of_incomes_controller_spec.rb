@@ -88,7 +88,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
           legal_aid_application.update!(provider_received_citizen_consent: nil)
         end
 
-        it "redirects to the income summary index page" do
+        it "redirects to the cash income page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
         end
@@ -101,7 +101,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]
       end
 
-      it "does not remove existing transation of other type" do
+      it "does not remove existing transaction of other type" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
       end
 
@@ -138,7 +138,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
           legal_aid_application.update!(provider_received_citizen_consent: nil)
         end
 
-        it "redirects to the income summary index page" do
+        it "redirects to the means student finance page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
         end

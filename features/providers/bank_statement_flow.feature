@@ -17,7 +17,6 @@ Feature: Bank statement flow
     Then I should be on a page with title matching "Review .*'s employment income"
     And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
 
-    # TODO: extra employment info already been filled in by factory - amend application setup so we can complete here?
     When I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 

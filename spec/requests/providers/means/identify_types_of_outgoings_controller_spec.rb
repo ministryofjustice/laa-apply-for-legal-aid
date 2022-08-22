@@ -214,7 +214,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
             legal_aid_application.transaction_types.debits.destroy_all
           end
 
-          it "redirects to income_summary" do
+          it "redirects to outgoings_summary" do
             request
             expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
           end
