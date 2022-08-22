@@ -5,8 +5,12 @@ RSpec.describe "DelegatedFunctionsController", type: :request do
   let(:application_id) { application.id }
   let(:proceeding_id) { application.proceedings.first.id }
   let(:provider) { application.provider }
+  let(:enable_loop?) { false }
 
-  before { allow(Setting).to receive(:enable_mini_loop?).and_return(true) } # TODO: Remove when the mini-loop feature flag is removed
+  before do
+    allow(Setting).to receive(:enable_mini_loop?).and_return(true) # TODO: Remove when the mini-loop feature flag is removed
+    allow(Setting).to receive(:enable_loop?).and_return(enable_loop?) # TODO: Remove when the mini-loop feature flag is removed
+  end
 
   describe "GET /providers/applications/:legal_aid_application_id/delegated_functions/:proceeding_id" do
     subject(:get_df) { get "/providers/applications/#{application_id}/delegated_functions/#{proceeding_id}" }
@@ -63,8 +67,37 @@ RSpec.describe "DelegatedFunctionsController", type: :request do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to next page" do
-          expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+        context "when the enable_loop function is off" do
+          it "redirects to next page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+          end
+        end
+
+        context "when the enable_loop function is on" do
+          let(:enable_loop?) { true }
+
+          context "and the proceeding has used delegated functions" do
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: true,
+                  "used_delegated_functions_on(3i)": 5.days.ago.day.to_s,
+                  "used_delegated_functions_on(2i)": 5.days.ago.month.to_s,
+                  "used_delegated_functions_on(1i)": 5.days.ago.year.to_s,
+                },
+              }
+            end
+
+            it "redirects to next page" do
+              expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
+            end
+          end
+
+          context "and the proceeding has not used delegated functions" do
+            it "redirects to next page" do
+              expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+            end
+          end
         end
 
         context "and the date is more than a month old" do
