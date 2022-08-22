@@ -42,13 +42,13 @@ class Proceeding < ApplicationRecord
     ccms_matter_code == "MINJN"
   end
 
-  def default_level_of_service_level
-    "3"
-  end
-
-  def default_level_of_service_name
-    "Full Representation"
-  end
+  # def default_level_of_service_level
+  #   "3"
+  # end
+  #
+  # def default_level_of_service_name
+  #   "Full Representation"
+  # end
 
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
