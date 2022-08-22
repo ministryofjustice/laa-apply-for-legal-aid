@@ -4581,7 +4581,7 @@ proceeding_means:
     response_type: text
     user_defined: false
   LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_default_level_of_service_level'
+    value: '#lead_proceeding_substantive_level_of_service'
     br100_meaning: Form of Service
     response_type: text
     user_defined: true
@@ -4748,7 +4748,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_default_level_of_service_level'
+    value: '#lead_proceeding_substantive_level_of_service'
     br100_meaning: Form of Service
     response_type: text
     user_defined: true
@@ -5256,7 +5256,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   PROCEEDING_LEVEL_OF_SERVICE:
-    value: '#lead_proceeding_default_level_of_service_name'
+    value: '#lead_proceeding_substantive_level_of_service_name'
     br100_meaning: 'Proc: The Proceeding Form Of Service'
     response_type: text
     user_defined: false

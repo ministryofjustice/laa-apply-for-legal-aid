@@ -220,8 +220,8 @@ module CCMS
         xml.__send__(:"casebio:ProceedingType", proceeding.ccms_code)
         xml.__send__(:"casebio:ProceedingDescription", proceeding.description)
         xml.__send__(:"casebio:MatterType", proceeding.ccms_matter_code)
-        xml.__send__(:"casebio:LevelOfService", proceeding.default_level_of_service_level)
-        xml.__send__(:"casebio:Stage", 8) # TODO: CCMS placeholder - This will need reviewing when we add more proceedings and/or matter types
+        xml.__send__(:"casebio:LevelOfService", proceeding.substantive_level_of_service)
+        xml.__send__(:"casebio:Stage", proceeding.substantive_level_of_service_stage)
         xml.__send__(:"casebio:ClientInvolvementType", proceeding.client_involvement_type_ccms_code)
         xml.__send__(:"casebio:ScopeLimitations") { generate_scope_limitations(xml, proceeding) }
       end
