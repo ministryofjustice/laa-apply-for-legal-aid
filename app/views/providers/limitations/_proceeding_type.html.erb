@@ -1,6 +1,6 @@
 <div class="govuk-summary-list__row--no-border">
   <dd class="govuk-summary-list__key govuk-!-padding-bottom-0">
-    <h3 class="govuk-heading-m"><%= proceeding_type.meaning %></h3>
+    <h3 class="govuk-heading-m"><%= proceeding.meaning %></h3>
   </dd>
   <dd class="govuk-summary-list__actions">
     <%= link_to_accessible(t('generic.change'),
@@ -24,11 +24,10 @@
       </summary>
 
       <div class="govuk-details__text">
-        <% proceeding = proceeding_type.proceeding %>
         <% if proceeding.used_delegated_functions_on %>
           <h4 class="govuk-heading-m"><%= t('.emergency_certificate') %></h4>
           <p><strong><%= t('.form_of_service') %></strong>
-            <%= t('.form_of_service_type') %>
+            <%= proceeding.emergency_level_of_service_name %>
           </p>
           <p><strong><%= t('.allowable_work') %></strong>
             <%= proceeding.delegated_functions_scope_limitation_description %>
@@ -36,7 +35,7 @@
         <% end %>
         <h4 class="govuk-heading-m"><%= t('.substantive_certificate') %></h4>
         <p><strong><%= t('.form_of_service') %></strong>
-          <%= t('.form_of_service_type') %>
+          <%= proceeding.substantive_level_of_service_name %>
         </p>
         <p><strong><%= t('.allowable_work') %></strong>
           <%= proceeding.substantive_scope_limitation_description %>
