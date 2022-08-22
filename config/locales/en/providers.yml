@@ -1264,3 +1264,6 @@ en:
           question: Did you use delegated functions for this proceeding on %{date}?
           warning_text: The date you said you used delegated functions is over one month old.
           details_incorrect: No, I need to change this date
+      substantive_defaults:
+        show:
+          question: Do you want to use the default level of service and scope for the substantive application?
