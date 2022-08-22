@@ -101,6 +101,7 @@ gem "govuk_design_system_formbuilder", ">= 3.0.1"
 
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
+  gem "bundler-audit"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails", ">= 2.7.6"
   gem "erb_lint", "0.1.3", require: false
