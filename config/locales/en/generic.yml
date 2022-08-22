@@ -57,6 +57,7 @@ en:
     upload_file: Upload a file
     view: View
     'yes': 'Yes'
+    yes_but_none: Yes, but none specified
     uploading: Uploading...
     ordinal_number:
       1: first

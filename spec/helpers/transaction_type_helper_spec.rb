@@ -3,10 +3,10 @@ require "rails_helper"
 RSpec.describe TransactionTypeHelper, type: :helper do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
-  describe "#anwser_for_transaction_type" do
+  describe "#answer_for_transaction_type" do
     subject do
       transaction_type = instance_double(TransactionType, id: "a-stubbed-uuid")
-      helper.anwser_for_transaction_type(legal_aid_application:,
+      helper.answer_for_transaction_type(legal_aid_application:,
                                          transaction_type:)
     end
 
