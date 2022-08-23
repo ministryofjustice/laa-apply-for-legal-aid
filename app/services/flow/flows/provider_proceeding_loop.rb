@@ -38,6 +38,24 @@ module Flow
             Flow::ProceedingLoop.next_step(application) == :delegated_functions ? :delegated_functions : :check_provider_answers
           end,
         },
+        emergency_defaults: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_emergency_default_path(application, proceeding)
+          end,
+          forward: :substantive_defaults,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
+        substantive_defaults: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_substantive_default_path(application, proceeding)
+          end,
+          forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
       }.freeze
     end
   end
