@@ -1,6 +1,7 @@
 module Flow
   class ProceedingLoop
     LOOP_CONTROLLERS = %w[client_involvement_type delegated_functions confirm_delegated_functions_date].freeze
+    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults substantive_defaults].freeze
 
     def initialize(application)
       @application = application
@@ -22,10 +23,18 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "delegated_functions", "in_scope_of_laspos", "has_other_proceedings", "confirm_delegated_functions_date"
+        when "in_scope_of_laspos", "has_other_proceedings", "substantive_defaults"
           :client_involvement_type
         when "client_involvement_type"
           :delegated_functions
+        when "delegated_functions", "confirm_delegated_functions_date"
+          if Setting.enable_loop?
+            current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
+          else
+            :client_involvement_type
+          end
+        when "emergency_defaults"
+          :substantive_defaults
         end
       end
     end
@@ -48,7 +57,11 @@ module Flow
     end
 
     def application_inside_proceeding_loop?
-      LOOP_CONTROLLERS.include?(@application.provider_step)
+      controllers.include?(@application.provider_step)
+    end
+
+    def controllers
+      @controllers ||= Setting.enable_loop? ? LOOP_CONTROLLERS + EXTENDED_LOOP_CONTROLLERS : LOOP_CONTROLLERS
     end
 
     def date_confirmation_required
@@ -59,7 +72,7 @@ module Flow
     alias_method :date_confirmation_required?, :date_confirmation_required
 
     def at_end_of_loop?
-      final_proceeding_in_loop.id == @application.provider_step_params["id"] && %w[delegated_functions confirm_delegated_functions_date].include?(@application.provider_step)
+      final_proceeding_in_loop.id == @application.provider_step_params["id"] && controllers[-2..].include?(@application.provider_step)
     end
 
     def final_proceeding_in_loop
