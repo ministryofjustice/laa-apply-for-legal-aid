@@ -10,7 +10,7 @@ Given("I have completed a non-passported application with open banking transacti
     :with_single_employment,
     :with_extra_employment_information,
     :with_non_passported_state_machine,
-    :with_savings_amount,
+    :with_fixed_offline_savings_accounts,
     :with_restrictions,
     :with_maintenance_in_category,
     :with_fixed_benefits_transactions,

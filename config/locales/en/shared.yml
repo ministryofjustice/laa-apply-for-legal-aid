@@ -197,7 +197,7 @@ en:
           property_value: How much is your client's home worth?
           shared_ownership: Does your client own their home with anyone else?
       offline_savings_accounts:
-        heading: Which bank accounts does your client have?
+        heading: Does your client have any savings account they cannot access online?
         offline_savings_accounts: Has savings accounts they cannot access online
         offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
