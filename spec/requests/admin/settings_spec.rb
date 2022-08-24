@@ -43,6 +43,7 @@ RSpec.describe Admin::SettingsController, type: :request do
           enable_ccms_submission: "true",
           enable_mini_loop: "true",
           enable_loop: "true",
+          enhanced_bank_upload: "true",
         },
       }
     end
@@ -59,6 +60,7 @@ RSpec.describe Admin::SettingsController, type: :request do
       expect(setting.enable_employed_journey?).to be(true)
       expect(setting.enable_mini_loop?).to be(true)
       expect(setting.enable_loop?).to be(true)
+      expect(setting.enhanced_bank_upload?).to be(true)
     end
 
     it "create settings if they do not exist" do

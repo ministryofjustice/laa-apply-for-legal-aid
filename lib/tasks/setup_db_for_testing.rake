@@ -10,7 +10,8 @@ namespace :settings do
                     enable_employed_journey: false,
                     enable_evidence_upload: false,
                     enable_mini_loop: false,
-                    enable_loop: false)
+                    enable_loop: false,
+                    enhanced_bank_upload: false)
 
     pp Setting.first
   end
