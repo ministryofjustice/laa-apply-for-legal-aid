@@ -547,11 +547,7 @@ en:
         col_description: Description
         remove_link: Remove
       index:
-        academic_year_html: '<strong>%{student_finance}</strong> this academic year.'
-        following_payments: Your client also told us they received the following payments. These will be included in the financial eligibility calculation.
-        other_heading: Other income
         page_heading: "Sort your client's income into categories"
-        student_finance: Student finance
         select: View statements and add transactions
         subheading: You told us your client receives the types of payments listed below.
         you_need_to:
@@ -1046,11 +1042,9 @@ en:
       add_other_outgoings:
         add_other_outgoings: Add another type of regular payment
       index:
-        following_payments: Your client also told us they made the following payments. These will be included in the financial eligibility calculation.
         list: |
           view your client's bank statements
           add transactions to each category
-        other_heading: Other outgoings
         page_heading: Sort your client's regular payments into categories
         payment_types: You told us your client makes the types of payments listed below.
         select:
