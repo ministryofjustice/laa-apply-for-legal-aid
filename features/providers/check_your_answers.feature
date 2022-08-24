@@ -371,10 +371,10 @@ Feature: Checking answers backwards and forwards
     And the "What payments does your client receive?" section's questions and answers should exist:
       | question | answer |
       | Benefits | £666.00 |
-      | Financial help from friends or family | No |
+      | Financial help from friends or family | None |
       | Maintenance payments from a former partner | Yes, but none specified |
-      | Income from a property or lodger | No |
-      | Pension | No |
+      | Income from a property or lodger | None |
+      | Pension | None |
 
     And the "Payments your client receives in cash" section's questions should exist:
       | question |
@@ -383,9 +383,9 @@ Feature: Checking answers backwards and forwards
     And the "What payments does your client make?" section's questions and answers should exist:
       | question | answer |
       | Housing payments | £999.00 |
-      | Childcare payments | No |
+      | Childcare payments | None |
       | Maintenance payments to a former partner | Yes, but none specified |
-      | Payments towards legal aid in a criminal case | No |
+      | Payments towards legal aid in a criminal case | None |
 
     And the "Payments your client makes in cash" section's questions should exist:
       | question |
@@ -424,10 +424,10 @@ Feature: Checking answers backwards and forwards
     And the "What payments does your client receive?" section's questions and answers should exist:
       | question | answer |
       | Benefits | Yes |
-      | Financial help from friends or family | No |
+      | Financial help from friends or family | None |
       | Maintenance payments from a former partner | Yes |
-      | Income from a property or lodger | No |
-      | Pension | No |
+      | Income from a property or lodger | None |
+      | Pension | None |
 
     And the "Payments your client receives in cash" section's questions should exist:
       | question |
@@ -436,9 +436,9 @@ Feature: Checking answers backwards and forwards
     And the "What payments does your client make?" section's questions and answers should exist:
       | question | answer |
       | Housing payments | Yes |
-      | Childcare payments | No |
+      | Childcare payments | None |
       | Maintenance payments to a former partner | Yes |
-      | Payments towards legal aid in a criminal case | No |
+      | Payments towards legal aid in a criminal case | None |
 
     And the "Payments your client makes in cash" section's questions should exist:
       | question |

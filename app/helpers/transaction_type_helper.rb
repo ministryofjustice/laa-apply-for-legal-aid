@@ -35,7 +35,7 @@ module TransactionTypeHelper
     elsif has_transaction_type && total.positive?
       legal_aid_application.uploading_bank_statements? ? t("generic.yes") : number_to_currency(total)
     else
-      t("generic.no")
+      t("generic.none")
     end
   end
 end

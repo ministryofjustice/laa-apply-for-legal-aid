@@ -39,7 +39,7 @@ RSpec.describe TransactionTypeHelper, type: :helper do
           allow(legal_aid_application).to receive(:transactions_total_by_category).and_return("irrelevant-but-stub-needed")
         end
 
-        it { is_expected.to eql("No") }
+        it { is_expected.to eql("None") }
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe TransactionTypeHelper, type: :helper do
           allow(legal_aid_application).to receive(:transactions_total_by_category).and_return("irrelevant-but-stub-needed")
         end
 
-        it { is_expected.to eql("No") }
+        it { is_expected.to eql("None") }
       end
     end
   end
