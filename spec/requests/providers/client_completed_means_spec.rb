@@ -77,68 +77,64 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         end
       end
 
-      context "the employed journey feature flag is enabled" do
-        before { Setting.setting.update!(enable_employed_journey: true) }
+      context "the user has employed permissions" do
+        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
 
-        context "the user has employed permissions" do
-          before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
+        let(:submit_button) { { continue_button: "Continue" } }
 
+        context "employment income data was received from HMRC" do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
+            allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(false)
+          end
+
+          it "redirects to the employed income page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_means_employment_income_path(legal_aid_application))
+          end
+        end
+
+        context "unknown result obtained from HMRC::StatusAnalyzer" do
+          before do
+            allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(:xxx)
+          end
+
+          it "raises an error" do
+            expect { subject }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
+          end
+        end
+
+        context "no employment income data was received from HMRC" do
+          before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
+
+          it "redirects to the no employed income page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
+          end
+        end
+
+        context "employment income data for multiple jobs was received from HMRC" do
+          before do
+            allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
+            allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(true)
+          end
+
+          it "redirects to the no employed income page" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
+          end
+        end
+
+        context "transactions exist, and applicant is not employed" do
           let(:submit_button) { { continue_button: "Continue" } }
-
-          context "employment income data was received from HMRC" do
-            before do
-              allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
-              allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(false)
-            end
-
-            it "redirects to the employed income page" do
-              subject
-              expect(response).to redirect_to(providers_legal_aid_application_means_employment_income_path(legal_aid_application))
-            end
+          let(:transaction_type) { create :transaction_type, :salary }
+          let(:applicant) { create :applicant, :not_employed }
+          let(:legal_aid_application) do
+            create :legal_aid_application, applicant:, transaction_types: [transaction_type]
           end
 
-          context "unknown result obtained from HMRC::StatusAnalyzer" do
-            before do
-              allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(:xxx)
-            end
-
-            it "raises an error" do
-              expect { subject }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
-            end
-          end
-
-          context "no employment income data was received from HMRC" do
-            before { allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(false) }
-
-            it "redirects to the no employed income page" do
-              subject
-              expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
-            end
-          end
-
-          context "employment income data for multiple jobs was received from HMRC" do
-            before do
-              allow_any_instance_of(LegalAidApplication).to receive(:hmrc_employment_income?).and_return(true)
-              allow_any_instance_of(LegalAidApplication).to receive(:has_multiple_employments?).and_return(true)
-            end
-
-            it "redirects to the no employed income page" do
-              subject
-              expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
-            end
-          end
-
-          context "transactions exist, and applicant is not employed" do
-            let(:submit_button) { { continue_button: "Continue" } }
-            let(:transaction_type) { create :transaction_type, :salary }
-            let(:applicant) { create :applicant, :not_employed }
-            let(:legal_aid_application) do
-              create :legal_aid_application, applicant:, transaction_types: [transaction_type]
-            end
-
-            it "redirects to next page" do
-              expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
-            end
+          it "redirects to next page" do
+            expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
           end
         end
       end

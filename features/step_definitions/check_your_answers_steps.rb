@@ -1,8 +1,6 @@
 require "rspec/expectations"
 
 Given("I have completed a non-passported application with open banking transactions") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,

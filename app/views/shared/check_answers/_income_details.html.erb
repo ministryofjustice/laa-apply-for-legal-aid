@@ -15,7 +15,7 @@
         student_loan: :mei_student_loan,
         pension: :mei_pension
         }
-      item_list = Setting.enable_employed_journey? && @legal_aid_application.applicant.employed? ? employed_items.merge(non_employed_items) : non_employed_items
+      item_list = @legal_aid_application.applicant.employed? ? employed_items.merge(non_employed_items) : non_employed_items
       item_list.each do |name, value_method|
     %>
       <%= render 'shared/means_report/item', name: name, scope: 'income', value_method: value_method, suppress_border: name == :pension %>

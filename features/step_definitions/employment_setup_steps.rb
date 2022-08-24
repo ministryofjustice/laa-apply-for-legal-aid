@@ -1,5 +1,4 @@
 Given(/^the system is prepped for the employed journey$/) do
-  Setting.setting.update!(enable_employed_journey: true)
   employment_permission = Permission.find_by(role: "application.non_passported.employment.*")
   Provider.all.each do |provider|
     next if provider.permissions.include?(employment_permission)

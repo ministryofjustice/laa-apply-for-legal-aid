@@ -73,6 +73,8 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
   describe "employment income table" do
     subject do
+      allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
+      login
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
 
@@ -106,79 +108,57 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
       end
     end
 
-    context "when the employed journey is enabled" do
-      before do
-        Setting.setting.update!(enable_employed_journey: true)
-        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
-        login
+    context "when employment data is present" do
+      it "displays the employment income table" do
+        subject
+        expect(unescaped_response_body).to include I18n.t("#{translation_path}.heading")
+        expect(unescaped_response_body).to include I18n.t("#{translation_path}.benefits_in_kind")
+        expect(unescaped_response_body).to include I18n.t("#{translation_path}.monthly_income_before_tax")
+        expect(unescaped_response_body).to include I18n.t("#{translation_path}.national_insurance")
+        expect(unescaped_response_body).to include I18n.t("#{translation_path}.tax")
       end
 
-      context "when employment data is present" do
-        it "displays the employment income table" do
-          subject
-          expect(unescaped_response_body).to include I18n.t("#{translation_path}.heading")
-          expect(unescaped_response_body).to include I18n.t("#{translation_path}.benefits_in_kind")
-          expect(unescaped_response_body).to include I18n.t("#{translation_path}.monthly_income_before_tax")
-          expect(unescaped_response_body).to include I18n.t("#{translation_path}.national_insurance")
-          expect(unescaped_response_body).to include I18n.t("#{translation_path}.tax")
-        end
-
-        it "populates the employment income table with the correct data" do
-          subject
-          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_benefits_in_kind)
-          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_gross_income)
-          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_national_insurance)
-          expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_tax)
-        end
-
-        it "displays the Other income header" do
-          subject
-          expect(unescaped_response_body).to include I18n.t("shared.review_application.other_income")
-        end
-
-        it "does not display the extra employment information details" do
-          subject
-          expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.employment_details")
-        end
-
-        context "when employment details have been entered by the solicitor" do
-          before do
-            legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: "test details")
-            subject
-          end
-
-          it "displays the extra employment information details" do
-            expect(unescaped_response_body).to include I18n.t("#{translation_path}.employment_details")
-            expect(unescaped_response_body).to include "test details"
-          end
-        end
+      it "populates the employment income table with the correct data" do
+        subject
+        expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_benefits_in_kind)
+        expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_gross_income)
+        expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_national_insurance)
+        expect(unescaped_response_body).to include gds_number_to_currency(cfe_result.employment_income_tax)
       end
 
-      context "when employment data is not present" do
-        let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
-
-        it_behaves_like "employment data is not present"
+      it "displays the Other income header" do
+        subject
+        expect(unescaped_response_body).to include I18n.t("shared.review_application.other_income")
       end
 
-      context "when application has an older CFE Result version object" do
-        let(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+      it "does not display the extra employment information details" do
+        subject
+        expect(unescaped_response_body).not_to include I18n.t("#{translation_path}.employment_details")
+      end
 
-        it_behaves_like "employment data is not present"
+      context "when employment details have been entered by the solicitor" do
+        before do
+          legal_aid_application.update!(extra_employment_information: true, extra_employment_information_details: "test details")
+          subject
+        end
+
+        it "displays the extra employment information details" do
+          expect(unescaped_response_body).to include I18n.t("#{translation_path}.employment_details")
+          expect(unescaped_response_body).to include "test details"
+        end
       end
     end
 
-    context "when the employed journey is not enabled" do
-      context "when employment data is present" do
-        let(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
+    context "when employment data is not present" do
+      let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
 
-        it_behaves_like "employment data is not present"
-      end
+      it_behaves_like "employment data is not present"
+    end
 
-      context "when employment data is not present" do
-        let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
+    context "when application has an older CFE Result version object" do
+      let(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
 
-        it_behaves_like "employment data is not present"
-      end
+      it_behaves_like "employment data is not present"
     end
   end
 end

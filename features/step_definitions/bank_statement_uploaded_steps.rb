@@ -1,6 +1,4 @@
 Given("I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   # These changes are to add existing categories (as would have been selected by the applicant)
   # to the application e.g. housing, benefits, the categories are now selected by the provider
   # so should not be necessary, however in practice this means that the checkboxes are not being populated
@@ -33,8 +31,6 @@ Given("I have completed a non-passported employed application and reached the op
 end
 
 Given("I have completed a non-passported employed application with bank statement upload as far as the end of the means section") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   @legal_aid_application = create(
     :application,
     :with_proceedings,

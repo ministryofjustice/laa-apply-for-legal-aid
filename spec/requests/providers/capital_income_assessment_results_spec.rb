@@ -16,7 +16,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
     let(:before_tasks) do
       create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
-
+      allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
       Setting.setting.update!(manually_review_all_cases: false)
       login_provider
       subject
@@ -27,7 +27,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
     context "with no restrictions" do
       context "without policy disregards" do
         context "when eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -39,7 +39,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when not eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :not_eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :not_eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -51,7 +51,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -63,7 +63,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -75,7 +75,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -97,7 +97,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -109,7 +109,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when not eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :not_eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :not_eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -121,7 +121,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -135,7 +135,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -149,7 +149,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -176,7 +176,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
       context "without policy disregards" do
         context "when eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -188,7 +188,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -202,7 +202,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -216,7 +216,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -234,7 +234,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let!(:cfe_result) { create :cfe_v3_result, :eligible }
+          let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -246,7 +246,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -262,7 +262,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when income contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_income_contribution_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -278,7 +278,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
         end
 
         context "when both income and capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_and_income_contributions_required }
+          let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -401,13 +401,13 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
 
     context "when unauthenticated" do
       let(:before_tasks) { subject }
-      let!(:cfe_result) { create :cfe_v3_result, :eligible }
+      let!(:cfe_result) { create :cfe_v4_result, :eligible }
 
       it_behaves_like "a provider not authenticated"
     end
 
     context "with unknown result" do
-      let(:cfe_result) { create :cfe_v3_result, result: {}.to_json }
+      let(:cfe_result) { create :cfe_v4_result, result: {}.to_json }
       let(:before_tasks) do
         login_provider
       end
@@ -417,88 +417,52 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
     end
 
-    context "when enable_employed_journey is true" do
-      let(:before_tasks) do
-        Setting.setting.update!(enable_employed_journey: true)
-        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
-        login_provider
-        subject
+    context "when applicant has employment(s)" do
+      let(:cfe_result) { create :cfe_v4_result, :with_employments }
+      let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
+      let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <b>" }
+      let(:monthly_income_before_tax) { I18n.t("providers.capital_income_assessment_results.employment_income.monthly_income_before_tax") }
+      let(:benefits_in_kind) { I18n.t("providers.capital_income_assessment_results.employment_income.benefits_in_kind") }
+      let(:tax) { I18n.t("providers.capital_income_assessment_results.employment_income.tax") }
+      let(:national_insurance) { I18n.t("providers.capital_income_assessment_results.employment_income.national_insurance") }
+      let(:fixed_employment_deduction) { I18n.t("providers.capital_income_assessment_results.employment_income.fixed_employment_deduction") }
+      let(:total_employment) { I18n.t("providers.capital_income_assessment_results.employment_income.total") }
+      let(:total_outgoings) { I18n.t("providers.capital_income_assessment_results.outgoings.total_outgoings") }
+      let(:total_other_income) { I18n.t("providers.capital_income_assessment_results.other_income.total") }
+      let(:total_deductions) { I18n.t("providers.capital_income_assessment_results.deductions.total_deductions") }
+      let(:total_disposable_income) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_income") }
+      let(:total_disposable_outgoings) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_outgoings") }
+      let(:total_disposable_deductions) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_deductions") }
+      let(:total_disposable) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_disposable") }
+
+      it "displays the employment income" do
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.title"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
+        expect(unescaped_response_body).to include(monthly_income_before_tax + td + gds_number_to_currency(cfe_result.employment_income_gross_income))
+        expect(unescaped_response_body).to include(benefits_in_kind + td + gds_number_to_currency(cfe_result.employment_income_benefits_in_kind))
+        expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
+        expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
+        expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
+        expect(unescaped_response_body).to include(total_employment + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
       end
 
-      context "when applicant has employment(s)" do
-        let(:cfe_result) { create :cfe_v4_result, :with_employments }
-        let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
-        let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <b>" }
-        let(:monthly_income_before_tax) { I18n.t("providers.capital_income_assessment_results.employment_income.monthly_income_before_tax") }
-        let(:benefits_in_kind) { I18n.t("providers.capital_income_assessment_results.employment_income.benefits_in_kind") }
-        let(:tax) { I18n.t("providers.capital_income_assessment_results.employment_income.tax") }
-        let(:national_insurance) { I18n.t("providers.capital_income_assessment_results.employment_income.national_insurance") }
-        let(:fixed_employment_deduction) { I18n.t("providers.capital_income_assessment_results.employment_income.fixed_employment_deduction") }
-        let(:total_employment) { I18n.t("providers.capital_income_assessment_results.employment_income.total") }
-        let(:total_outgoings) { I18n.t("providers.capital_income_assessment_results.outgoings.total_outgoings") }
-        let(:total_other_income) { I18n.t("providers.capital_income_assessment_results.other_income.total") }
-        let(:total_deductions) { I18n.t("providers.capital_income_assessment_results.deductions.total_deductions") }
-        let(:total_disposable_income) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_income") }
-        let(:total_disposable_outgoings) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_outgoings") }
-        let(:total_disposable_deductions) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_deductions") }
-        let(:total_disposable) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_disposable") }
-
-        it "displays the employment income" do
-          expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.title"))
-          expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-          expect(unescaped_response_body).to include(monthly_income_before_tax + td + gds_number_to_currency(cfe_result.employment_income_gross_income))
-          expect(unescaped_response_body).to include(benefits_in_kind + td + gds_number_to_currency(cfe_result.employment_income_benefits_in_kind))
-          expect(unescaped_response_body).to include(tax + td + gds_number_to_currency(cfe_result.employment_income_tax))
-          expect(unescaped_response_body).to include(national_insurance + td + gds_number_to_currency(cfe_result.employment_income_national_insurance))
-          expect(unescaped_response_body).to include(fixed_employment_deduction + td + gds_number_to_currency(cfe_result.employment_income_fixed_employment_deduction))
-          expect(unescaped_response_body).to include(total_employment + td + gds_number_to_currency(cfe_result.employment_income_net_employment_income))
-        end
-
-        it "displays the correct totals" do
-          expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
-          expect(unescaped_response_body).to include(total_other_income + td + gds_number_to_currency(cfe_result.total_gross_income))
-          expect(unescaped_response_body).to include(total_deductions + td + gds_number_to_currency(cfe_result.total_deductions))
-          expect(unescaped_response_body).to include(total_disposable_income + td + gds_number_to_currency(cfe_result.total_monthly_income_including_employment_income))
-          expect(unescaped_response_body).to include(total_disposable_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings_including_tax_and_ni))
-          expect(unescaped_response_body).to include(total_disposable_deductions + td + gds_number_to_currency(cfe_result.total_deductions_including_fixed_employment_allowance))
-          expect(unescaped_response_body).to include(total_disposable + td_bold + gds_number_to_currency(cfe_result.total_disposable_income_assessed))
-        end
-      end
-
-      context "when applicant has no employment(s)" do
-        let(:cfe_result) { create :cfe_v4_result, :with_no_employments }
-
-        it "does not display employment income" do
-          expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-          expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
-        end
+      it "displays the correct totals" do
+        expect(unescaped_response_body).to include(total_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings))
+        expect(unescaped_response_body).to include(total_other_income + td + gds_number_to_currency(cfe_result.total_gross_income))
+        expect(unescaped_response_body).to include(total_deductions + td + gds_number_to_currency(cfe_result.total_deductions))
+        expect(unescaped_response_body).to include(total_disposable_income + td + gds_number_to_currency(cfe_result.total_monthly_income_including_employment_income))
+        expect(unescaped_response_body).to include(total_disposable_outgoings + td + gds_number_to_currency(cfe_result.total_monthly_outgoings_including_tax_and_ni))
+        expect(unescaped_response_body).to include(total_disposable_deductions + td + gds_number_to_currency(cfe_result.total_deductions_including_fixed_employment_allowance))
+        expect(unescaped_response_body).to include(total_disposable + td_bold + gds_number_to_currency(cfe_result.total_disposable_income_assessed))
       end
     end
 
-    context "when enable_employed_journey is false" do
-      let(:before_tasks) do
-        Setting.setting.update!(enable_employed_journey: false)
-        allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(false)
-        login_provider
-        subject
-      end
+    context "when applicant has no employment(s)" do
+      let(:cfe_result) { create :cfe_v4_result, :with_no_employments }
 
-      context "when applicant has employment(s)" do
-        let(:cfe_result) { create :cfe_v4_result, :with_employments }
-
-        it "does not display employment income" do
-          expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-          expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
-        end
-      end
-
-      context "when applicant has no employment(s)" do
-        let(:cfe_result) { create :cfe_v4_result, :with_employments }
-
-        it "does not display employment income" do
-          expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
-          expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
-        end
+      it "does not display employment income" do
+        expect(unescaped_response_body).not_to include(I18n.t("providers.capital_income_assessment_results.employment_income.title"))
+        expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.income"))
       end
     end
   end

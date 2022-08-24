@@ -1,6 +1,4 @@
 Given("I have completed a non-passported employed application with bank statement uploads") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -27,8 +25,6 @@ Given("I have completed a non-passported employed application with bank statemen
 end
 
 Given("I have completed a non-passported application with truelayer") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
@@ -67,8 +63,6 @@ Given("I have completed a non-passported application with truelayer") do
 end
 
 Given("I have completed a passported application") do
-  Setting.setting.update!(enable_employed_journey: true)
-
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,

@@ -50,8 +50,6 @@ en:
           <<: *true_false
         allow_welsh_translation:
           <<: *true_false
-        enable_employed_journey:
-          <<: *true_false
         enable_evidence_upload:
           <<: *true_false
         enable_mini_loop:

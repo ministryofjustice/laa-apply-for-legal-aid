@@ -5,7 +5,6 @@ module HMRC
     describe ".call" do
       subject(:service_call) { described_class.call(laa) }
       before do
-        Setting.setting.update!(enable_employed_journey: feature_flag)
         if provider_employed_permissions
           permission = create :permission, :employed
           laa.provider.firm.permissions << permission
@@ -18,15 +17,6 @@ module HMRC
       let(:laa) { create :legal_aid_application, :with_applicant, :with_transaction_period }
       let(:provider_employed_permissions) { true }
       let(:applicant_employed) { true }
-
-      context "when employed journey flag not set to true" do
-        let(:feature_flag) { false }
-        let(:provider_employed_permissions) { false }
-
-        it "returns employed_journey_not_enabled" do
-          expect(service_call).to eq :employed_journey_not_enabled
-        end
-      end
 
       context "when provider not enabled for employment journey" do
         let(:provider_employed_permissions) { false }

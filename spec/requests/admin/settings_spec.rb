@@ -39,7 +39,6 @@ RSpec.describe Admin::SettingsController, type: :request do
         setting: {
           mock_true_layer_data: "true",
           allow_welsh_translation: "true",
-          enable_employed_journey: "true",
           enable_ccms_submission: "true",
           enable_mini_loop: "true",
           enable_loop: "true",
@@ -57,7 +56,6 @@ RSpec.describe Admin::SettingsController, type: :request do
       subject
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
-      expect(setting.enable_employed_journey?).to be(true)
       expect(setting.enable_mini_loop?).to be(true)
       expect(setting.enable_loop?).to be(true)
       expect(setting.enhanced_bank_upload?).to be(true)
@@ -88,7 +86,6 @@ RSpec.describe Admin::SettingsController, type: :request do
             setting: {
               mock_true_layer_data: "true",
               allow_welsh_translation: "true",
-              enable_employed_journey: "true",
               enable_ccms_submission: "false",
             },
           }

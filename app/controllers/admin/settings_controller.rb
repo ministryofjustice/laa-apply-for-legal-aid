@@ -22,7 +22,6 @@ module Admin
                                       :manually_review_all_cases,
                                       :allow_welsh_translation,
                                       :enable_ccms_submission,
-                                      :enable_employed_journey,
                                       :enable_mini_loop,
                                       :enable_loop,
                                       :enhanced_bank_upload)

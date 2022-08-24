@@ -41,7 +41,7 @@ module Flow
           forward: lambda do |application|
             next_step = application.used_delegated_functions? ? :substantive_applications : :open_banking_consents
 
-            if Setting.enable_employed_journey? && application.provider.employment_permissions?
+            if application.provider.employment_permissions?
               application.employment_journey_ineligible? ? :use_ccms_employed : next_step
             else
               application.applicant_not_employed? ? next_step : :use_ccms_employed

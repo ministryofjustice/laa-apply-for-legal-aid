@@ -55,10 +55,6 @@ module Providers
       form.correct_dwp_result?
     end
 
-    def employed_journey_enabled?
-      Setting.enable_employed_journey?
-    end
-
     def hmrc_call_enabled?
       Rails.configuration.x.collect_hmrc_data
     end
@@ -68,7 +64,7 @@ module Providers
     end
 
     def make_hmrc_call?
-      employed_journey_enabled? && hmrc_call_enabled? && user_has_employment_permissions?
+      hmrc_call_enabled? && user_has_employment_permissions?
     end
 
     alias_method :display_hmrc_inset_text?, :make_hmrc_call?

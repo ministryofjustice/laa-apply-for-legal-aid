@@ -2,7 +2,6 @@ Feature: Employed journey
 
 @javascript
 Scenario: Completing the means journey for an employed applicant with HMRC data
-  Given the feature flag for enable_employed_journey is enabled
   Given I start the means review journey with employment income for a single job from HMRC
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
@@ -57,7 +56,6 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
 
 @javascript
 Scenario: Completing the means journey for an employed applicant with no HMRC data
-  Given the feature flag for enable_employed_journey is enabled
   Given I start the means review journey with no employment income from HMRC
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
@@ -107,7 +105,6 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
 
 @javascript
 Scenario: Completing the means journey for an employed applicant with multiple jobs
-  Given the feature flag for enable_employed_journey is enabled
   Given I start the means review journey with employment income for multiple jobs from HMRC
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
