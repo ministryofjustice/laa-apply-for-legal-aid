@@ -1267,3 +1267,6 @@ en:
       substantive_defaults:
         show:
           question: Do you want to use the default level of service and scope for the substantive application?
+      emergency_defaults:
+        show:
+          question: For the emergency application, do you want to use the default level of service and scope?
