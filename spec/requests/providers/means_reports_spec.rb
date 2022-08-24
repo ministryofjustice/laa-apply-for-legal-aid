@@ -58,7 +58,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
         .and have_selector("h2", text: "Caseworker Review")
         .and have_selector("h2", text: "Property, savings and other assets")
         .and have_selector("h2", text: "Which bank accounts does your client have?")
-        .and have_selector("h3", text: "Does your client have any savings account they cannot access online?")
+        .and have_selector("h3", text: "Does your client have any savings accounts they cannot access online?")
         .and have_selector("h2", text: "Which savings or investments does your client have?")
         .and have_selector("h2", text: "Which assets does your client have?")
         .and have_selector("h2", text: "Restrictions on your client's assets")
