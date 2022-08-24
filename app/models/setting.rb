@@ -35,6 +35,10 @@ class Setting < ApplicationRecord
     setting.enable_loop?
   end
 
+  def self.enhanced_bank_upload?
+    setting.enhanced_bank_upload?
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

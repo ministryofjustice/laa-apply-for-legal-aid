@@ -24,7 +24,8 @@ module Admin
                                       :enable_ccms_submission,
                                       :enable_employed_journey,
                                       :enable_mini_loop,
-                                      :enable_loop)
+                                      :enable_loop,
+                                      :enhanced_bank_upload)
     end
 
     def setting
