@@ -221,6 +221,7 @@ Rails.application.routes.draw do
       resources :confirm_delegated_functions_date, only: %i[show update], controller: "proceeding_loop/confirm_delegated_functions_date"
       resources :client_involvement_type, only: %i[show update], controller: "proceeding_loop/client_involvement_type"
       resources :substantive_defaults, only: %i[show update], controller: "proceeding_loop/substantive_defaults"
+      resources :emergency_defaults, only: %i[show update], controller: "proceeding_loop/emergency_defaults"
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
       resource :substantive_application, only: %i[show update]
