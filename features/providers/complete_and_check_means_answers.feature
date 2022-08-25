@@ -5,76 +5,141 @@ Feature: Completing and checking means answers backwards and forwards
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+    When I select "None of the above"
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "Childcare"
+    And I click 'Save and continue'
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    And I click 'Save and continue'
+    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select childcare payments'
+    When I select the first checkbox
+    And I click 'Save and continue'
     Then I click 'Save and continue'
+
+    When I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Which payments does your client make?"
-    Then I select 'Housing payments'
-    Then I select 'Payments towards legal aid in a criminal case'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I should be on a page showing "Housing payments"
-    Then I should be on a page showing "Payments towards legal aid in a criminal case"
-    Then I click link 'Add another type of regular payment'
-    Then I select 'My client makes none of these payments'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I should be on a page not showing "Housing payments"
-    Then I should be on a page not showing "Payments towards legal aid in a criminal case"
-    Then I click 'Save and continue'
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
 
   @javascript @vcr
   Scenario: I navigate to the Check your answers page and then add some outgoing transaction types
     Given The means questions have been answered by the applicant
     Then I should be on a page showing 'Your client has shared their financial information'
-    Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+
+    When I click 'Continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+
+    When I select 'Benefits'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client receives in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+
+    When I select "Childcare"
+    And I click 'Save and continue'
+    Then I should be on the 'cash_outgoing' page showing "Select payments your client makes in cash"
+
+    When I select "None of the above"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's income into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select benefits payments'
+
+    When I select the first checkbox
+    And I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's income into categories"
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's regular payments into categories"
+
+    When I click the first link 'View statements and add transactions'
+    Then I should be on a page showing 'Select childcare payments'
+
+    When I select the first checkbox
+    And I click 'Save and continue'
+    Then I should be on a page with title "Sort your client's regular payments into categories"
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does your client have any dependants?"
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
-    Then I choose "No"
+
+    When I choose "No"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own a vehicle?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose 'No'
-    Then I click 'Save and continue'
+
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Your client’s bank accounts"
+
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which savings or investments does your client have?"
-    Then I select "My client has none of these savings or investments"
-    Then I click 'Save and continue'
+
+    When I select "My client has none of these savings or investments"
+    And I click 'Save and continue'
     Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
-    Then I click 'Save and continue'
+
+    When I select "My client has none of these assets"
+    And I click 'Save and continue'
     Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
+
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    Then I click Check Your Answers Change link for 'Outgoings'
+
+    When I click Check Your Answers Change link for "What payments does your client make?"
+    Then I should be on a page with title "Which payments does your client make?"
+
+    When I click 'Save and continue'
+    Then I should be on a page with title "Select payments your client makes in cash"
+
+    When I click 'Save and continue'
     Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I click link 'Add another type of regular payment'
+
+    When I click link 'Add another type of regular payment'
     Then I should be on a page showing 'Which payments does your client make?'
-    Then I select 'Payments towards legal aid in a criminal case'
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Sort your client's regular payments into categories"
-    Then I should be on a page showing "Payments towards legal aid in a criminal case"
-    Then I click link 'View statements and add transactions'
-    Then I select the first checkbox
+
+    When I click 'Save and continue'
+    Then I should be on a page showing "Select payments your client makes in cash"
     And I click 'Save and continue'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "Sort your client's regular payments into categories"
+
+    When I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript

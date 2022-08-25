@@ -40,7 +40,7 @@ RSpec.describe "student_finance", type: :request do
 
       it "redirects to the identify_types_of_outgoing page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path)
+        expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path)
       end
 
       it "creates an irregular income record" do
@@ -92,7 +92,7 @@ RSpec.describe "student_finance", type: :request do
 
       it "redirects to the identify_types_of_outgoing page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_identify_types_of_outgoing_path)
+        expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path)
       end
 
       it "updates the legal aid application record" do

@@ -1,0 +1,29 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
+    </div>
+    <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
+        <p>
+            <%= link_to_accessible(t('generic.change'),
+                                   check_answer_url_for(:providers,
+                                                        :cash_outgoings,
+                                                        @legal_aid_application),
+                                   class: 'govuk-link change-link', suffix: t('.heading')) %>
+        </p>
+    </div>
+</div>
+
+<% if !@legal_aid_application.transaction_types.debits.exists? %>
+  <div class="govuk-body>"> <%= t('generic.none') %> </div>
+<% end %>
+
+<dl id="outgoings-cash-payments-questions" class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= t('.heading').parameterize %>">
+  <% TransactionType.debits.each do |category| %>
+     <%= check_answer_for_cash_transactions(
+          name: "outgoings_cash_payments_#{category.label_name}",
+          question: category.label_name,
+          legal_aid_application: @legal_aid_application,
+          transaction_type: category
+      ) %>
+  <% end %>
+</dl>

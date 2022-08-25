@@ -14,10 +14,10 @@ Feature: Bank statement flow
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     When I click 'Save and continue'
-    Then I should be on a page with title "HMRC has no record of your client's employment in the last 3 months"
+    Then I should be on a page with title matching "Review .*'s employment income"
+    And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
 
-    When I fill "legal-aid-application-full-employment-details-field" with "Applicant also earns 50 gbp, some extra details about employment"
-    And I click 'Save and continue'
+    When I click 'Save and continue'
     Then I should be on a page with title "Which payments does your client receive?"
 
     When I select 'Benefits'

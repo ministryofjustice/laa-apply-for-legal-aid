@@ -25,4 +25,17 @@ module TransactionTypeHelper
       content:,
     )
   end
+
+  def answer_for_transaction_type(legal_aid_application:, transaction_type:)
+    total = legal_aid_application.transactions_total_by_category(transaction_type.id)
+    has_transaction_type = legal_aid_application.has_transaction_type?(transaction_type)
+
+    if has_transaction_type && total.zero?
+      legal_aid_application.uploading_bank_statements? ? t("generic.yes") : t("generic.yes_but_none")
+    elsif has_transaction_type && total.positive?
+      legal_aid_application.uploading_bank_statements? ? t("generic.yes") : number_to_currency(total)
+    else
+      t("generic.none")
+    end
+  end
 end

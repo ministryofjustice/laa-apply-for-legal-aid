@@ -1,0 +1,45 @@
+<% bank_statement_upload = @legal_aid_application.uploading_bank_statements? %>
+
+<h2 class="govuk-heading-l"><%= t('.income-heading') %></h2>
+
+<% if bank_statement_upload %>
+  <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: false) %>
+<% end %>
+
+<% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? %>
+  <% if @legal_aid_application.hmrc_employment_income? %>
+    <% if @legal_aid_application.has_multiple_employments? %>
+      <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+    <% else %>
+      <%= render 'shared/check_answers/employed_income', read_only: false %>
+    <% end %>
+  <% else %>
+    <%= render 'shared/check_answers/full_employment_details', read_only: false %>
+  <% end %>
+<% end %>
+
+<%= render(
+      'shared/check_answers/income_summary',
+      income_type: t('.credits-section-heading'),
+      url: :identify_types_of_incomes,
+      transaction_types: TransactionType.credits
+    ) %>
+
+<%= render('income_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
+
+<%= render 'shared/check_answers/student_finance', read_only: false %>
+
+<h2 class="govuk-heading-l"><%= t('.outgoings-heading') %></h2>
+
+<%= render(
+      'shared/check_answers/income_summary',
+      income_type: t('.debits-section-heading'),
+      url: :identify_types_of_outgoings,
+      transaction_types: TransactionType.debits
+    ) %>
+
+<%= render('outgoings_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
+
+<h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
+
+<%= render 'shared/check_answers/dependants' %>

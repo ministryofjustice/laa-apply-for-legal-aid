@@ -200,7 +200,7 @@ Given("I have completed the non-passported means assessment and start the merits
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
-Given("I start the merits application") do
+Given("I start the means application") do
   @legal_aid_application = create(
     :application,
     :with_applicant,
@@ -224,6 +224,7 @@ Given("I start the merits application with bank transactions with no transaction
     :with_proceedings,
     :with_non_passported_state_machine,
     :provider_entering_merits,
+    :with_transaction_period,
     :with_uncategorised_credit_transactions,
     :with_uncategorised_debit_transactions,
   )
@@ -293,18 +294,32 @@ Given("I start the application with a negative benefit check result and no used 
   )
 end
 
-Given("I start the merits application and the applicant has uploaded transaction data") do
+Given("I start the means application and the applicant has uploaded transaction data") do
+  # These changes are to add existing categories (as would have been selected by the applicant)
+  # to the application e.g. housing, benefits, the categories are now selected by the provider
+  # so should not be necessary, however in practice this means that the checkboxes are not being populated
+  # on the page for the transactions pages so I have made the tests pass in the current format for now.
+  @applicant = create :applicant,
+                      :employed,
+                      with_bank_accounts: 1
+
   @legal_aid_application = create(
     :application,
-    :with_applicant,
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
     :with_transaction_period,
     :with_benefits_transactions,
-    :with_proceedings, explicit_proceedings: [:da001],
-                       set_lead_proceeding: :da001
+    :with_proceedings,
+    applicant: @applicant,
+    explicit_proceedings: [:da001],
+    set_lead_proceeding: :da001,
   )
+
+  bank_account = @applicant.bank_accounts.first
+  create_list :bank_transaction, 2, :credit, bank_account: bank_account, amount: rand(1...1_500.0).round(2)
+  create_list :bank_transaction, 3, :debit, bank_account: bank_account,  amount: rand(1...1_500.0).round(2)
+
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -660,6 +675,7 @@ Given("The means questions have been answered by the applicant") do
     :with_non_passported_state_machine,
     :provider_assessing_means,
     :with_policy_disregards,
+    # as we dont categorise on applicant side this traits should be removed, but I expect they will break many tests
     :with_uncategorised_debit_transactions,
     :with_uncategorised_credit_transactions,
     explicit_proceedings: %i[da001 da005],
@@ -753,10 +769,10 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   end
 end
 
-Given("I click Check Your Answers Change link for {string}") do |field_name|
-  field_name.downcase!
-  field_name.gsub!(/\s+/, "_")
-  within "#app-check-your-answers__#{field_name}" do
+Given("I click Check Your Answers Change link for {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  within "#app-check-your-answers__#{question_id}" do
     click_link("Change")
   end
 end

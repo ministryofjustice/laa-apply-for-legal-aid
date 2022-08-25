@@ -28,6 +28,7 @@ en:
     list: List
     'no': 'No'
     menu: Menu
+    none: None
     none_declared: None declared
     none_selected: None of these
     not_completed: Not completed
@@ -56,6 +57,7 @@ en:
     upload_file: Upload a file
     view: View
     'yes': 'Yes'
+    yes_but_none: Yes, but none specified
     uploading: Uploading...
     ordinal_number:
       1: first

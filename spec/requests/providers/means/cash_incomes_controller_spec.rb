@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Providers::Means::CashIncomesController", type: :request do
+RSpec.describe Providers::Means::CashIncomesController, type: :request do
   before do
     create(:transaction_type, :benefits)
     legal_aid_application.set_transaction_period
@@ -122,6 +122,40 @@ RSpec.describe "Providers::Means::CashIncomesController", type: :request do
 
       it "shows an error if nothing selected" do
         expect(response.body).to include(I18n.t("activemodel.errors.models.aggregated_cash_income.credits.attributes.cash_income.blank"))
+      end
+    end
+
+    context "when checking answers" do
+      let(:legal_aid_application) do
+        create(:legal_aid_application,
+               :with_non_passported_state_machine,
+               :checking_non_passported_means)
+      end
+
+      let(:params) { valid_params }
+
+      context "with bank statement upload flow" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+        end
+
+        it "redirects to means_summaries" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
+        end
+      end
+
+      context "without bank statement uploads" do
+        before do
+          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
+          legal_aid_application.update!(provider_received_citizen_consent: true)
+        end
+
+        it "redirects to income_summary" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        end
       end
     end
   end

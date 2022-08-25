@@ -1,4 +1,4 @@
-<%= page_template page_title: t('.page_heading'), show_errors_for: @legal_aid_application  do %>
+<%= page_template page_title: t('.page_heading'), show_errors_for: @legal_aid_application do %>
 
 <%
   errors = @legal_aid_application.errors.messages
@@ -32,18 +32,6 @@
       <%= render partial: 'add_other_outgoings' %>
     <% end %>
   </ol>
-
-  <% if @legal_aid_application.cash_transactions.debits.exists? %>
-    <div class="govuk-!-padding-bottom-4"></div>
-
-    <h2 class="govuk-heading-l"><%= t('.other_heading') %></h2>
-
-    <p class="gov-body"><%= t('.following_payments') %></p>
-  <% end %>
-
-  <% if @legal_aid_application.cash_transactions.debits.exists? %>
-    <%= render partial: 'shared/cash_transactions' %>
-  <% end %>
 
   <div class="govuk-!-padding-bottom-6"></div>
 

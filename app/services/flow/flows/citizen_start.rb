@@ -32,7 +32,7 @@ module Flow
         additional_accounts: {
           path: ->(_) { urls.citizens_additional_accounts_path(locale: I18n.locale) },
           forward: lambda do |application|
-            application.has_offline_accounts? ? :contact_providers : :identify_types_of_incomes
+            application.has_offline_accounts? ? :contact_providers : :check_answers
           end,
         },
       }.freeze

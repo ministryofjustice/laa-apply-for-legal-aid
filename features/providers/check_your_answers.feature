@@ -292,10 +292,11 @@ Feature: Checking answers backwards and forwards
       Then I am on the read only version of the check your answers page
 
   @javascript
-  Scenario: Checking answers for bank statement upload flow
+  Scenario: I am able to view and amend provider means answers for bank statement upload flow
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statement upload as far as the end of the means section
     Then I should be on the 'means_summary' page showing 'Check your answers'
+
     And I should see 'Uploaded bank statements'
     And I should see 'Does your client receive student finance?'
     And the answer for 'student finance question' should be 'No'
@@ -307,7 +308,7 @@ Feature: Checking answers backwards and forwards
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'hello_world.pdf'
 
-    When I click Check Your Answers Change link for 'income'
+    When I click Check Your Answers Change link for "What payments does your client receive?"
     And I check 'Benefits'
     And I click 'Save and continue'
     Then I should be on a page with title 'Select payments your client receives in cash'
@@ -315,7 +316,7 @@ Feature: Checking answers backwards and forwards
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for 'income'
+    When I click Check Your Answers Change link for "What payments does your client receive?"
     And I check 'My client receives none of these payments'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
@@ -328,7 +329,7 @@ Feature: Checking answers backwards and forwards
     And the answer for 'student finance question' should be 'Yes'
     And the answer for 'student finance annual amount' should be '£5,000'
 
-    When I click Check Your Answers Change link for 'outgoings'
+    When I click Check Your Answers Change link for "What payments does your client make?"
     And I check 'Maintenance payments to a former partner'
     And I click 'Save and continue'
     Then I should be on a page with title 'Select payments your client makes in cash'
@@ -336,7 +337,102 @@ Feature: Checking answers backwards and forwards
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
-    When I click Check Your Answers Change link for 'outgoings'
+    When I click Check Your Answers Change link for "What payments does your client make?"
     And I check 'My client makes none of these payments'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
+
+  @javascript
+  Scenario: I am able to see all necessary sections for a non-passported open banking flow
+    Given I have completed a non-passported application with open banking transactions
+    And I am viewing the means summary check your anwsers page
+
+    Then the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | What payments does your client receive? |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | What payments does your client make? |
+      | h2  | Your client's capital |
+      | h3  | Property |
+      | h3  | Vehicles |
+    # | h3  | Which bank accounts does your client have? |
+      | h3  | Does your client have any savings accounts they cannot access online? |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+
+    And I should not see "Payments your client receives in cash"
+    And I should not see "Payments your client makes in cash"
+
+    And the "What payments does your client receive?" section's questions and answers should exist:
+      | question | answer |
+      | Benefits | £666.00 |
+      | Financial help from friends or family | None |
+      | Maintenance payments from a former partner | Yes, but none specified |
+      | Income from a property or lodger | None |
+      | Pension | None |
+
+    And the "What payments does your client make?" section's questions and answers should exist:
+      | question | answer |
+      | Housing payments | £999.00 |
+      | Childcare payments | None |
+      | Maintenance payments to a former partner | Yes, but none specified |
+      | Payments towards legal aid in a criminal case | None |
+
+  @javascript
+  Scenario: I am able to see all necessary sections for a non-passported bank statement upload flow
+    Given csrf is enabled
+    And I have completed a non-passported employed application with bank statement upload as far as the end of the means section
+    Then I should be on the 'means_summary' page showing 'Check your answers'
+
+    Then the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h2  | Your client's income |
+      | h3  | Bank statements |
+      | h3  | Employment income |
+      | h3  | What payments does your client receive? |
+      | h3  | Payments your client receives in cash |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | What payments does your client make? |
+      | h3  | Payments your client makes in cash |
+      | h2  | Your client's capital |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+
+    And the "Bank statements" questions should exist:
+      | question |
+      | Uploaded bank statements |
+
+    And the "What payments does your client receive?" section's questions and answers should exist:
+      | question | answer |
+      | Benefits | Yes |
+      | Financial help from friends or family | None |
+      | Maintenance payments from a former partner | Yes |
+      | Income from a property or lodger | None |
+      | Pension | None |
+
+    And the "Payments your client receives in cash" section's questions should exist:
+      | question |
+      | Benefits |
+
+    And the "What payments does your client make?" section's questions and answers should exist:
+      | question | answer |
+      | Housing payments | Yes |
+      | Childcare payments | None |
+      | Maintenance payments to a former partner | Yes |
+      | Payments towards legal aid in a criminal case | None |
+
+    And the "Payments your client makes in cash" section's questions should exist:
+      | question |
+      | Housing payments |

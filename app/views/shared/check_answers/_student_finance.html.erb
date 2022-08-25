@@ -7,7 +7,7 @@
       <% unless read_only %>
         <p>
           <%= link_to_accessible(t('generic.change'), providers_legal_aid_application_means_student_finance_path(@legal_aid_application),
-                                 class: 'govuk-link change-link') %>
+                                 class: 'govuk-link change-link', suffix: t('.heading')) %>
         </p>
       <% end %>
     </div>

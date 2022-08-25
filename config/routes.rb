@@ -104,11 +104,6 @@ Rails.application.routes.draw do
       patch :reset, on: :collection
       patch :continue, on: :collection
     end
-    resource :identify_types_of_income, only: %i[show update]
-    resource :cash_income, only: %i[show update]
-    resource :cash_outgoing, only: %i[show update]
-    resource :student_finance, only: %i[show update]
-    resource :identify_types_of_outgoing, only: %i[show update]
     resource :means_test_result, only: [:show]
   end
 
@@ -130,6 +125,7 @@ Rails.application.routes.draw do
         resource :student_finance, only: %i[show update]
         resource :cash_income, only: %i[show update]
         resource :identify_types_of_income, only: %i[show update]
+        resource :identify_types_of_outgoing, only: %i[show update]
         resource :has_dependants, only: %i[show update]
         resources :dependants, only: %i[new show update]
         resources :remove_dependants, only: %i[show update]
@@ -189,7 +185,6 @@ Rails.application.routes.draw do
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
 
-      resource :identify_types_of_outgoing, only: %i[show update]
       resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
       resource :merits_task_list, only: %i[show update]
@@ -206,9 +201,7 @@ Rails.application.routes.draw do
       resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
-      resource :no_income_summary, only: %i[show update]
       resources :outgoings_summary, only: %i[index create]
-      resource :no_outgoings_summary, only: %i[show update]
       resource :incoming_transactions, only: [] do
         get "/:transaction_type", to: "incoming_transactions#show", as: ""
         patch "/:transaction_type", to: "incoming_transactions#update"

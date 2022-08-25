@@ -101,29 +101,9 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController, type: :request
           expect(application.reload.full_employment_details).to eq full_employment_details
         end
 
-        context "when uploading bank statements" do
-          before do
-            application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-            application.update!(provider_received_citizen_consent: false)
-          end
-
-          it "redirects to identify_types_of_income page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
-          end
-        end
-
-        context "when not uploading bank statements" do
-          before do
-            application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-            application.update!(provider_received_citizen_consent: true)
-          end
-
-          it "redirects to income_summary or no_income_summary page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_no_income_summary_path(application))
-                            .or redirect_to(providers_legal_aid_application_income_summary_index_path(application))
-          end
+        it "redirects to identify_types_of_income page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
         end
 
         context "when params are invalid" do

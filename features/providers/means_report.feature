@@ -16,7 +16,6 @@ Feature: Means report
       | h2  | Declared outgoings categories |
       | h2  | Declared cash outgoings |
       | h2  | Employed income result |
-      | h3  | Employment notes |
       | h3  | Employment income |
       | h2  | Caseworker Review |
       | h2  | Property, savings and other assets |
@@ -25,7 +24,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
-      | h3  | Restrictions on your client's assets |
+      | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h3  | Bank statements |
 
@@ -58,10 +57,9 @@ Feature: Means report
       | question |
       | Student loan or grant (per year) |
 
-    # TODO: setup cash incomes for test application
-    # Then the Declared cash income questions should exist:
-    #  | question |
-    #  | Benefits |
+    Then the Declared cash income questions should exist:
+      | question |
+      | Benefits |
 
     And the Dependants questions should exist:
       | question |
@@ -84,10 +82,9 @@ Feature: Means report
       | Maintenance payments to a former partner |
       | Payments towards legal aid in a criminal case |
 
-    # TODO: setup cash outgoings for test application
-    # Then the Declared cash outgoings questions should exist:
-    #  | question |
-    #  | Housing payments |
+    Then the Declared cash outgoings questions should exist:
+      | question |
+      | Housing payments |
 
     And the Employment income result questions should exist:
       | question |
@@ -192,7 +189,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
-      | h3  | Restrictions on your client's assets |
+      | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
 
     Then the following sections should not exist:
@@ -332,7 +329,7 @@ Feature: Means report
       | h2  | Which bank accounts does your client have? |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
-      | h3  | Restrictions on your client's assets |
+      | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
       | h2  | Caseworker Review |
 

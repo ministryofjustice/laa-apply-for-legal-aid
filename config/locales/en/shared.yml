@@ -197,7 +197,7 @@ en:
           property_value: How much is your client's home worth?
           shared_ownership: Does your client own their home with anyone else?
       offline_savings_accounts:
-        heading: Bank accounts
+        heading: Does your client have any savings accounts they cannot access online?
         offline_savings_accounts: Has savings accounts they cannot access online
         offline_savings_amount: Amount in offline savings accounts
       bank_transaction_table:
@@ -228,7 +228,7 @@ en:
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
       employed_income:
-        employment: Employment notes
+        employment: Employment income
         employment_question: Do you need to tell us anything else about your client's employment?
         employment_details: Details
       income_result:

@@ -38,9 +38,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
     context "when providers chooses no" do
       let(:has_other_dependant) { "false" }
 
-      it "redirects to the outgoings summary page" do
+      it "redirects to the own home page" do
         request
-        expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
       end
 
       context "when provider is on passported journey" do
@@ -56,7 +56,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
 
           it "redirects to the outgoings summary index page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
           end
         end
 
@@ -65,9 +65,9 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
             legal_aid_application.transaction_types.destroy_all
           end
 
-          it "redirects to the no outgoings summary index page" do
+          it "redirects to the own home page" do
             request
-            expect(response).to redirect_to(providers_legal_aid_application_no_outgoings_summary_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
           end
         end
       end
@@ -78,7 +78,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
           legal_aid_application.update!(provider_received_citizen_consent: false)
         end
 
-        it "redirects to the means student finance page" do
+        it "redirects to the own home page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_means_own_home_path(legal_aid_application))
         end

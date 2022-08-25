@@ -1,18 +1,22 @@
 Feature: Non-passported applicant journeys
   @javascript
-  Scenario: Completes a minimal merits application for applicant that does not receive benefits
-    Given I start the merits application
+  Scenario: Completes a minimal application for applicant that does not receive benefits
+    # Is this test necessary? In this test the client doesnt enter any categories, this is just the standard journey which we are testing
+    # extensively elsewhere and it differs significantly from what is below
+    Given I start the means application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    And I should not see 'Student finance'
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select "My client receives none of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "My client makes none of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
@@ -39,52 +43,55 @@ Feature: Non-passported applicant journeys
     Given I start the merits application with bank transactions with no transaction type category
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "No"
-    Then I click 'Save and continue'
+
     Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
     Then I select 'Benefits'
     And I click 'Save and continue'
+
+    Then I should be on a page with title "Select payments your client receives in cash"
+    When I select 'None of the above'
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Does your client receive student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select 'Housing'
+    And I click 'Save and continue'
+
+    Then I should be on a page with title "Select payments your client makes in cash"
+    When I select 'None of the above'
+    And I click 'Save and continue'
+
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
     Then I click 'Save and continue'
-    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
-    Then I select 'Housing payments'
-    And I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    When I click link 'Add another type of regular payment'
-    And I select 'Childcare payments'
-    Then I click 'Save and continue'
-    Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
-    Then I click 'Save and continue'
+
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I click the last link 'View statements and add transactions'
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I should be on a page showing 'Does your client own the home that they live in?'
 
+    Then I click 'Save and continue'
+    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
   @javascript
-  Scenario: Complete a merits application for applicant that does not receive benefits with dependants
-    Given I start the merits application
+  Scenario: Complete an application for an applicant that does not receive benefits with dependants
+    Given I start the means application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select "My client receives none of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "My client makes none of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
     Then I click 'Save and continue'
@@ -119,9 +126,6 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'has_other_dependants' page showing "Does your client have any other dependants?"
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
     Then I click 'Save and continue'
@@ -144,12 +148,18 @@ Feature: Non-passported applicant journeys
 
   @javascript
   Scenario: Complete a merits application for applicant that does not receive benefits with a child dependant
-    Given I start the merits application
+    Given I start the means application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select "My client receives none of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "My client makes none of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "Yes"
     Then I click 'Save and continue'
@@ -182,9 +192,6 @@ Feature: Non-passported applicant journeys
     And I should not see 'Pugsley Addams'
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "No"
     Then I click 'Save and continue'
@@ -200,7 +207,7 @@ Feature: Non-passported applicant journeys
     Then I should be on a page showing "Which assets does your client have?"
     Then I select "My client has none of these assets"
     Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
+    Then I should be on the 'policy_disregards' page showing 'schemes or\ charities'
     When I select 'England Infected Blood Support Scheme'
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
@@ -214,18 +221,21 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'means_summary' page showing 'Check your answers'
 
   @javascript
-  Scenario: Complete a merits application for applicant that does not receive benefits with no dependants but other values
-    Given I start the merits application
+  Scenario: Complete an application for applicant that does not receive benefits with no dependants but other values
+    Given I start the means application
     Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
     Then I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
+    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
+    Then I select "My client receives none of these payments"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Does your client receive student finance?"
+    When I choose "No"
+    And I click 'Save and continue'
+    Then I should be on the 'identify_types_of_outgoing' page showing "Which payments does your client make?"
+    Then I select "My client makes none of these payments"
+    And I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
     Then I choose "No"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
     Then I click 'Save and continue'
     Then I should be on a page showing "Does your client own the home that they live in?"
     Then I choose "Yes, with a mortgage or loan"
@@ -305,52 +315,6 @@ Feature: Non-passported applicant journeys
     Then I should be on the 'check_provider_answers' page showing 'Your application'
     And I should not see 'What happens next'
     But I should see 'Your client needs to complete their part of the application before you can continue.'
-
-  @javascript
-  Scenario: Complete a merits application for applicant that does not receive benefits but gets a student loan
-    Given I start the merits application with student finance
-    Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
-    When I click 'Continue'
-    Then I should be on a page showing "Your client's income"
-    Then I should be on a page showing "Student finance"
-    Then I choose "No"
-    And I click 'Save and continue'
-    Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
-    Then I select 'Benefits'
-    And I click 'Save and continue'
-    Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
-    And I should see 'Student finance'
-    And I should see 'this academic year.'
-    Then I click the first link 'View statements and add transactions'
-    Then I select the first checkbox
-    And I click 'Save and continue'
-    Then I click 'Save and continue'
-    Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
-    When I choose "No"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Your client's outgoings"
-    Then I choose "Yes"
-    Then I click 'Save and continue'
-    Then I should be on a page showing "Does your client own the home that they live in?"
-    When I choose "No"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Does your client own a vehicle?"
-    When I choose "No"
-    And I click "Save and continue"
-    Then I should be on a page showing "Your client’s bank accounts"
-    Then I choose 'No'
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which savings or investments does your client have?"
-    When I select "My client has none of these savings or investments"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Which assets does your client have?"
-    Then I select "My client has none of these assets"
-    Then I click 'Save and continue'
-    Then I should be on the 'policy_disregards' page showing 'schemes or charities'
-    When I select 'England Infected Blood Support Scheme'
-    And I click 'Save and continue'
-    Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should see 'Student finance'
 
   @javascript
   Scenario: Fill in the Applicant employment information after negative benefit check result and used delegated functions
