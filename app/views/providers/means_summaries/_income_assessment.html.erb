@@ -25,7 +25,7 @@
       transaction_types: TransactionType.credits
     ) %>
 
-<%= render 'income_cash_payments', read_only: false %>
+<%= render('income_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
 <%= render 'shared/check_answers/student_finance', read_only: false %>
 
@@ -38,7 +38,7 @@
       transaction_types: TransactionType.debits
     ) %>
 
-<%= render 'outgoings_cash_payments', read_only: false %>
+<%= render('outgoings_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
 <h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>
 

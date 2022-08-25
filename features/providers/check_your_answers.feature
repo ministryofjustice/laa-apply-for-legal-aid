@@ -353,11 +353,9 @@ Feature: Checking answers backwards and forwards
       | h2  | Your client's income |
       | h3  | Employment income |
       | h3  | What payments does your client receive? |
-      | h3  | Payments your client receives in cash |
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
-      | h3  | Payments your client makes in cash |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -368,6 +366,9 @@ Feature: Checking answers backwards and forwards
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
 
+    And I should not see "Payments your client receives in cash"
+    And I should not see "Payments your client makes in cash"
+
     And the "What payments does your client receive?" section's questions and answers should exist:
       | question | answer |
       | Benefits | £666.00 |
@@ -376,20 +377,12 @@ Feature: Checking answers backwards and forwards
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "Payments your client receives in cash" section's questions should exist:
-      | question |
-      | Benefits |
-
     And the "What payments does your client make?" section's questions and answers should exist:
       | question | answer |
       | Housing payments | £999.00 |
       | Childcare payments | None |
       | Maintenance payments to a former partner | Yes, but none specified |
       | Payments towards legal aid in a criminal case | None |
-
-    And the "Payments your client makes in cash" section's questions should exist:
-      | question |
-      | Housing payments |
 
   @javascript
   Scenario: I am able to see all necessary sections for a non-passported bank statement upload flow
