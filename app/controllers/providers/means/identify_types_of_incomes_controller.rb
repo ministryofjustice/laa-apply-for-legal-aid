@@ -6,7 +6,7 @@ module Providers
       end
 
       def update
-        synchronize_credit_transaction_types_and_cash_transactions
+        synchronize_credit_transaction_types
 
         if none_selected?
           legal_aid_application.update!(no_credit_transaction_types_selected: true)
@@ -42,7 +42,7 @@ module Providers
         params[:legal_aid_application][:none_selected] == "true"
       end
 
-      def synchronize_credit_transaction_types_and_cash_transactions
+      def synchronize_credit_transaction_types
         existing_credit_tt_ids = legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type_id)
 
         keep = transaction_types.each_with_object([]) do |form_tt, arr|
@@ -50,17 +50,20 @@ module Providers
           arr.append(form_tt.id)
         end
 
-        destroy_all_credit_transaction_types_and_cash_transactions(except: keep)
+        destroy_all_credit_transaction_types(except: keep)
       end
 
       def add_transaction_type(transaction_type)
         legal_aid_application.transaction_types << transaction_type
       end
 
-      def destroy_all_credit_transaction_types_and_cash_transactions(except:)
+      def destroy_all_credit_transaction_types(except:)
         LegalAidApplication.transaction do
-          legal_aid_application.legal_aid_application_transaction_types.credits.where.not(transaction_type_id: except).destroy_all
-          legal_aid_application.cash_transactions.credits.where.not(transaction_type_id: except).destroy_all
+          legal_aid_application
+            .legal_aid_application_transaction_types
+            .credits
+            .where.not(transaction_type_id: except)
+            .destroy_all
         end
       end
     end
