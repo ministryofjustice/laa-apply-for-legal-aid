@@ -270,6 +270,30 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         request
         expect(response).to redirect_to providers_legal_aid_applications_path
       end
+
+      context "with existing credit and debit cash transactions" do
+        let(:benefits_credit) { create(:transaction_type, :benefits) }
+        let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+
+        let(:legal_aid_application) do
+          laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          laa
+        end
+
+        it "removes all debit cash transactions" do
+          expect { request }.to change { legal_aid_application.cash_transactions.debits.present? }.from(true).to(false)
+        end
+
+        it "does not remove any credit cash transactions" do
+          expect { request }.not_to change { legal_aid_application.cash_transactions.credits.present? }.from(true)
+        end
+      end
     end
   end
 end
