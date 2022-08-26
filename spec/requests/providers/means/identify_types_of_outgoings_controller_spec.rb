@@ -4,6 +4,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
   let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
+  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
   let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
 
   before { login }
@@ -115,22 +116,47 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         expect { request }.to change { legal_aid_application.reload.no_debit_transaction_types_selected }.to(true)
       end
 
-      context "when application has transactions" do
+      context "when application has existing transaction categories" do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types + income_types
         end
 
-        it "removes transaction types from the application" do
-          expect { request }.to change(LegalAidApplicationTransactionType, :count)
-            .by(-outgoing_types.length)
+        it "removes debit transaction types from the application" do
+          expect { request }.to change(legal_aid_application.legal_aid_application_transaction_types, :count).by(-3)
+        end
+      end
+
+      context "with existing credit and debit cash transactions" do
+        let(:benefits_credit) { create(:transaction_type, :benefits) }
+        let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+
+        let(:legal_aid_application) do
+          laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          laa
+        end
+
+        it "removes all debit cash transactions" do
+          expect { request }.to change { legal_aid_application.cash_transactions.debits.present? }.from(true).to(false)
+        end
+
+        it "does not remove any credit cash transactions" do
+          expect { request }.not_to change { legal_aid_application.cash_transactions.credits.present? }.from(true)
         end
       end
 
       context "with previously selected income categories" do
-        let(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
-        let!(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant,
-                 :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_applicant,
+                 :with_non_passported_state_machine,
+                 :applicant_entering_means,
+                 transaction_types: income_types)
         end
 
         it "redirects to the income summary page" do
@@ -140,9 +166,12 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       end
 
       context "with no previously selected income categories" do
-        let!(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant,
-                 :with_non_passported_state_machine, :applicant_entering_means, transaction_types: []
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_applicant,
+                 :with_non_passported_state_machine,
+                 :applicant_entering_means,
+                 transaction_types: [])
         end
 
         it "redirects to the has dependants page" do
@@ -153,7 +182,6 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when the wrong transaction type is passed in" do
-      let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
       it "does not add the transaction types" do

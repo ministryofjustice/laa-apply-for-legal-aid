@@ -816,18 +816,6 @@ FactoryBot.define do
       end
     end
 
-    # TODO: prefer in spec definition?!
-    #
-    # trait :with_benefits_cash_transactions do
-    #   after :create do |application|
-    #     tt = create(:transaction_type, :benefits)
-    #     application.transaction_types << tt
-    #     create(:cash_transaction, legal_aid_application: application, transaction_type: tt, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
-    #     create(:cash_transaction, legal_aid_application: application, transaction_type: tt, amount: 102, month_number: 2, transaction_date: 1.month.ago)
-    #     create(:cash_transaction, legal_aid_application: application, transaction_type: tt, amount: 103, month_number: 3, transaction_date: 2.months.ago)
-    #   end
-    # end
-
     trait :with_cfe_v1_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application
