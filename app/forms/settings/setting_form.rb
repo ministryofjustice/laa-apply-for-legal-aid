@@ -8,7 +8,8 @@ module Settings
                   :enable_ccms_submission,
                   :enable_employed_journey,
                   :enable_mini_loop,
-                  :enable_loop
+                  :enable_loop,
+                  :enhanced_bank_upload
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -17,6 +18,7 @@ module Settings
               :enable_employed_journey,
               :enable_mini_loop,
               :enable_loop,
+              :enhanced_bank_upload,
               presence: true
   end
 end
