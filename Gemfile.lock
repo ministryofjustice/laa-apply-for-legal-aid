@@ -149,8 +149,12 @@ GEM
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    colorize (0.8.1)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
+    console1984 (0.1.25)
+      colorize
+      parser
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -728,6 +732,7 @@ DEPENDENCIES
   business
   byebug
   capybara (>= 3.36.0, < 4.0)
+  console1984
   cucumber
   cucumber-rails (>= 2.4.0)
   data_migrate

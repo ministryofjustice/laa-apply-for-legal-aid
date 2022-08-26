@@ -5,6 +5,7 @@ ruby "3.1.2"
 
 gem "aasm", "~> 5.3.0"
 gem "active_model_serializers", "~> 0.10.13"
+gem "console1984"
 gem "data_migrate"
 gem "discard", "~> 1.2"
 gem "geckoboard-ruby"
