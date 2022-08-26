@@ -43,7 +43,6 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       )
     end
 
-    let(:transaction_type_ids) { [] }
     let(:submit_button) { {} }
     let(:params) do
       {
@@ -53,20 +52,24 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       }
     end
 
-    it "does not add transaction types to the application" do
-      expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
-    end
+    context "when no transaction types selected" do
+      let(:transaction_type_ids) { [] }
 
-    it "displays an error" do
-      request
-      expect(response.body).to match("govuk-error-summary")
-      expect(unescaped_response_body).to match(I18n.t("providers.means.identify_types_of_outgoings.update.none_selected"))
-      expect(unescaped_response_body).not_to include("translation missing")
-    end
+      it "does not add transaction types to the application" do
+        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
+      end
 
-    it "returns http success" do
-      request
-      expect(response).to have_http_status(:ok)
+      it "displays an error" do
+        request
+        expect(response.body).to match("govuk-error-summary")
+        expect(unescaped_response_body).to match(I18n.t("providers.means.identify_types_of_outgoings.update.none_selected"))
+        expect(unescaped_response_body).not_to include("translation missing")
+      end
+
+      it "returns http success" do
+        request
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context "when transaction types selected" do
@@ -87,17 +90,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
       end
     end
 
-    context "when form submitted with Save as draft button" do
-      let(:transaction_type_ids) { [] }
-      let(:submit_button) { { draft_button: "Save as draft" } }
-
-      it "redirects to the list of applications" do
-        request
-        expect(response).to redirect_to providers_legal_aid_applications_path
-      end
-    end
-
     context "when application has transaction types of other kind" do
+      let(:transaction_type_ids) { [] }
       let(:other_transaction_type) { create :transaction_type, :credit }
       let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type] }
 
@@ -232,11 +226,22 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
     end
 
     context "when the provider is not authenticated" do
+      let(:login) { nil }
+      let(:transaction_type_ids) { [] }
+
       before { request }
 
-      let(:login) { nil }
-
       it_behaves_like "a provider not authenticated"
+    end
+
+    context "when form submitted with Save as draft button" do
+      let(:transaction_type_ids) { [] }
+      let(:submit_button) { { draft_button: "Save as draft" } }
+
+      it "redirects to the list of applications" do
+        request
+        expect(response).to redirect_to providers_legal_aid_applications_path
+      end
     end
   end
 end
