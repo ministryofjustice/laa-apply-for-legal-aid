@@ -16,7 +16,7 @@ module CFE
     end
 
     def process_response
-      @submission.explicit_remarks_created!
+      @submission.in_progress!
     end
   end
 end

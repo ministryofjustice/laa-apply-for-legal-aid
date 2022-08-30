@@ -47,7 +47,7 @@ module CFE
     end
 
     def process_response
-      @submission.cash_transactions_created!
+      @submission.in_progress!
     end
   end
 end

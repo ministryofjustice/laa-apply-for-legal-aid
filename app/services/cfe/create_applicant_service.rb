@@ -19,7 +19,7 @@ module CFE
   private
 
     def process_response
-      @submission.applicant_created!
+      @submission.in_progress!
       true
     end
 

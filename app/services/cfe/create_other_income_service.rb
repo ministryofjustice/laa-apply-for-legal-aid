@@ -13,7 +13,7 @@ module CFE
   private
 
     def process_response
-      @submission.other_income_created!
+      @submission.in_progress!
     end
 
     def other_income_data

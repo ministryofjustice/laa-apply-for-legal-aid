@@ -34,7 +34,7 @@ module CFE
   private
 
     def process_response
-      @submission.capitals_created!
+      @submission.in_progress!
     end
 
     def other_assets_declaration

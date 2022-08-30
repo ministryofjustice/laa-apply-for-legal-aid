@@ -13,7 +13,7 @@ module CFE
   private
 
     def process_response
-      @submission.dependants_created!
+      @submission.in_progress!
     end
 
     def dependants_data

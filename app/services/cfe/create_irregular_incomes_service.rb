@@ -14,7 +14,7 @@ module CFE
     end
 
     def process_response
-      @submission.irregular_income_created!
+      @submission.in_progress!
     end
   end
 end

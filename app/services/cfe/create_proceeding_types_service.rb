@@ -21,7 +21,7 @@ module CFE
     end
 
     def process_response
-      @submission.proceeding_types_created!
+      @submission.in_progress!
       true
     end
   end

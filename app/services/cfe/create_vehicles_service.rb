@@ -34,7 +34,7 @@ module CFE
     end
 
     def process_response
-      @submission.vehicles_created!
+      @submission.in_progress!
     end
 
     def vehicle

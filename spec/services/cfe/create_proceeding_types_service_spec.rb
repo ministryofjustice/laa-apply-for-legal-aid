@@ -40,10 +40,10 @@ module CFE
               .to_return(body: dummy_response)
           end
 
-          it "updates the submission record from assessment_created to applicant_created" do
+          it "updates the state on the submission record from assessment_created to to in_progress" do
             expect(submission.aasm_state).to eq "assessment_created"
             described_class.call(submission)
-            expect(submission.aasm_state).to eq "proceeding_types_created"
+            expect(submission.aasm_state).to eq "in_progress"
           end
 
           it "creates a submission_history record" do

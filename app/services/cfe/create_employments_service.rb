@@ -11,7 +11,7 @@ module CFE
     end
 
     def process_response
-      @submission.employments_created!
+      @submission.in_progress!
     end
 
   private

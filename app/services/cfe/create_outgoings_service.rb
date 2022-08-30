@@ -13,7 +13,7 @@ module CFE
   private
 
     def process_response
-      @submission.outgoings_created!
+      @submission.in_progress!
     end
 
     def build_transactions

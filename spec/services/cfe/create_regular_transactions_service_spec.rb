@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe CFE::CreateRegularTransactionsService do
   let(:application) { create(:legal_aid_application, :with_applicant) }
   let(:service) { described_class.new(submission) }
-  let(:submission) { create(:cfe_submission, aasm_state: "employments_created", legal_aid_application: application) }
+  let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
   let(:dummy_response) { { success: true }.to_json }
 
   describe "#cfe_url" do
@@ -91,7 +91,7 @@ RSpec.describe CFE::CreateRegularTransactionsService do
       end
 
       it "updates the submission record from employments_created to regular_transactions_created" do
-        expect { call }.to change(submission, :aasm_state).from("employments_created").to("regular_transactions_created")
+        expect { call }.to change(submission, :aasm_state).from("assessment_created").to("in_progress")
       end
 
       it "creates a submission_history record" do

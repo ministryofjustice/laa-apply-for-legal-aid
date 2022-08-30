@@ -38,7 +38,7 @@ module CFE
     end
 
     def process_response
-      submission.properties_created!
+      submission.in_progress!
     end
 
     def main_home_shared_with_housing_association_or_landlord?

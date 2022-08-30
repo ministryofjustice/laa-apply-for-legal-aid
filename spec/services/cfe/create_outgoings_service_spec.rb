@@ -5,7 +5,7 @@ module CFE
     let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_applicant) }
     let(:bank_provider) { create(:bank_provider, applicant: application.applicant) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let(:submission) { create(:cfe_submission, aasm_state: "dependants_created", legal_aid_application: application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
 
     describe "#cfe_url" do
@@ -25,10 +25,10 @@ module CFE
         context "no bank transactions at all" do
           let(:expected_payload_hash) { empty_payload }
 
-          it "updates the submission record from state_benefits_created to outgoings_created" do
-            expect(submission.aasm_state).to eq "dependants_created"
+          it "updates the state on the submission record from assessment_created to in_progress" do
+            expect(submission.aasm_state).to eq "assessment_created"
             described_class.call(submission)
-            expect(submission.aasm_state).to eq "outgoings_created"
+            expect(submission.aasm_state).to eq "in_progress"
           end
 
           def empty_payload
@@ -43,10 +43,10 @@ module CFE
 
           before { create_bank_transactions }
 
-          it "updates the submission record from dependants_created to outgoings_created" do
-            expect(submission.aasm_state).to eq "dependants_created"
+          it "updates the state on the submission record from assessment_created to to in_progress" do
+            expect(submission.aasm_state).to eq "assessment_created"
             described_class.call(submission)
-            expect(submission.aasm_state).to eq "outgoings_created"
+            expect(submission.aasm_state).to eq "in_progress"
           end
 
           it "creates a submission_history record" do

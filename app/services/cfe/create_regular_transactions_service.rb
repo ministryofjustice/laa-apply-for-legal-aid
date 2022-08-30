@@ -13,7 +13,7 @@ module CFE
   private
 
     def process_response
-      submission.regular_transactions_created!
+      submission.in_progress!
     end
 
     def regular_transactions

@@ -5,7 +5,7 @@ module CFE
     let!(:application) { create(:legal_aid_application, :with_applicant, with_bank_accounts: 6) }
     let!(:other_assets_declaration) { my_other_asset_declaration }
     # let!(:savings_amount) { my_savings_amount }
-    let(:submission) { create(:cfe_submission, aasm_state: "applicant_created", legal_aid_application: application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -44,10 +44,10 @@ module CFE
 
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-        it "updates the submission record from applicant_created to capitals_created" do
-          expect(submission.aasm_state).to eq "applicant_created"
+        it "updates the state on the submission record from assessment_created to in_progress" do
+          expect(submission.aasm_state).to eq "assessment_created"
           described_class.call(submission)
-          expect(submission.aasm_state).to eq "capitals_created"
+          expect(submission.aasm_state).to eq "in_progress"
         end
 
         it "creates a submission_history record" do
@@ -74,9 +74,9 @@ module CFE
 
         it "does not send any data for current account" do
           stub_request(:post, service.cfe_url).with(body: expected_payload_without_current_account.to_json).to_return(body: dummy_response)
-          expect(submission.aasm_state).to eq "applicant_created"
+          expect(submission.aasm_state).to eq "assessment_created"
           described_class.call(submission)
-          expect(submission.aasm_state).to eq "capitals_created"
+          expect(submission.aasm_state).to eq "in_progress"
         end
       end
     end

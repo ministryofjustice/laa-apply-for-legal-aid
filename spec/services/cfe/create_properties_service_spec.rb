@@ -18,7 +18,7 @@ RSpec.describe CFE::CreatePropertiesService do
     )
   end
   let(:submission) do
-    create(:cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :vehicles_created)
+    create(:cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :assessment_created)
   end
 
   describe "#call" do
@@ -52,7 +52,7 @@ RSpec.describe CFE::CreatePropertiesService do
     end
 
     it "changes the submission state" do
-      expect { subject.call }.to change { submission.reload.properties_created? }.from(false).to(true)
+      expect { subject.call }.to change { submission.reload.in_progress? }.from(false).to(true)
     end
 
     it "generates a Submission History" do

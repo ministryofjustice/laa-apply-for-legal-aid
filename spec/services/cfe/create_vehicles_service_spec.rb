@@ -3,7 +3,7 @@ require "rails_helper"
 module CFE
   RSpec.describe CreateVehiclesService do
     let(:application) { create(:legal_aid_application) }
-    let(:submission) { create(:cfe_submission, aasm_state: "capitals_created", legal_aid_application: application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -42,10 +42,10 @@ module CFE
 
         let!(:vehicle) { create(:vehicle, :populated, legal_aid_application: application) }
 
-        it "updates the submission record from assessment_created to applicant_created" do
-          expect(submission.aasm_state).to eq "capitals_created"
+        it "updates the state on the submission record from assessment_created to in_progress" do
+          expect(submission.aasm_state).to eq "assessment_created"
           described_class.call(submission)
-          expect(submission.aasm_state).to eq "vehicles_created"
+          expect(submission.aasm_state).to eq "in_progress"
         end
 
         it "creates a submission_history record" do

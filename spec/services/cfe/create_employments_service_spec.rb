@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CFE::CreateEmploymentsService do
-  let(:submission) { create(:cfe_submission, aasm_state: "irregular_income_created", legal_aid_application: laa) }
+  let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: laa) }
   let(:service) { described_class.new(submission) }
   let(:laa) { create(:legal_aid_application, applicant:) }
   let(:applicant) { create(:applicant, :employed) }
@@ -42,10 +42,10 @@ RSpec.describe CFE::CreateEmploymentsService do
     let(:expected_payload) { full_payload }
     let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa) }
 
-    it "updates the state on the submission record from irregular_income_created to employments_created" do
-      expect(submission.aasm_state).to eq "irregular_income_created"
+    it "updates the state on the submission record from assessment_created to in_progress" do
+      expect(submission.aasm_state).to eq "assessment_created"
       described_class.call(submission)
-      expect(submission.aasm_state).to eq "employments_created"
+      expect(submission.aasm_state).to eq "in_progress"
     end
 
     it "creates a submission_history record" do

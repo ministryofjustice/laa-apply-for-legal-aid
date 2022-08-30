@@ -5,7 +5,7 @@ module CFE
     let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_applicant) }
     let(:bank_provider) { create(:bank_provider, applicant: application.applicant) }
     let(:bank_account) { create(:bank_account, bank_provider:) }
-    let(:submission) { create(:cfe_submission, aasm_state: "state_benefits_created", legal_aid_application: application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
     let(:today) { Time.zone.today.strftime("%Y-%m-%d") }
@@ -30,10 +30,10 @@ module CFE
           describe "successful calls" do
             let(:expected_payload_hash) { empty_payload }
 
-            it "updates the submission record from state_benefits_created to other_income_created" do
-              expect(submission.aasm_state).to eq "state_benefits_created"
+            it "updates the state on the submission record from assessment_created to in_progress" do
+              expect(submission.aasm_state).to eq "assessment_created"
               described_class.call(submission)
-              expect(submission.aasm_state).to eq "other_income_created"
+              expect(submission.aasm_state).to eq "in_progress"
             end
           end
 
@@ -42,10 +42,10 @@ module CFE
 
             before { create_non_other_income_bank_transactions }
 
-            it "updates the submission record from state_benefits_created to other_income_created" do
-              expect(submission.aasm_state).to eq "state_benefits_created"
+            it "updates the state on the submission record from assessment_created to in_progress" do
+              expect(submission.aasm_state).to eq "assessment_created"
               described_class.call(submission)
-              expect(submission.aasm_state).to eq "other_income_created"
+              expect(submission.aasm_state).to eq "in_progress"
             end
           end
 
@@ -54,10 +54,10 @@ module CFE
 
             before { create_other_income_bank_transactions }
 
-            it "updates the submission record from state_benefits_created to other_income_created" do
-              expect(submission.aasm_state).to eq "state_benefits_created"
+            it "updates the state on the submission record from assessment_created to to in_progress" do
+              expect(submission.aasm_state).to eq "assessment_created"
               described_class.call(submission)
-              expect(submission.aasm_state).to eq "other_income_created"
+              expect(submission.aasm_state).to eq "in_progress"
             end
 
             it "creates a submission_history record" do
