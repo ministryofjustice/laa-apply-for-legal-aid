@@ -29,6 +29,7 @@ module CFE
       CreateOtherIncomeService,
       CreateIrregularIncomesService,
       CreateEmploymentsService,
+      CreateCashTransactionsService,
     ].freeze
 
     def self.call(legal_aid_application_id)
@@ -44,7 +45,6 @@ module CFE
     def call
       call_common_services
       call_non_passported_services
-      CreateCashTransactionsService.call(submission) unless submission.passported?
       ObtainAssessmentResultService.call(submission)
       true
     rescue SubmissionError => e
