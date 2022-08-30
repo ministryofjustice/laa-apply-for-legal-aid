@@ -149,12 +149,6 @@ module CFE
             submission_manager.call
           end
 
-          it "does not call the CreateCashTransactionsService" do
-            expect(CreateCashTransactionsService).not_to receive(:call)
-
-            submission_manager.call
-          end
-
           describe "#submission" do
             it "associates the application with the submission" do
               expect(submission.legal_aid_application_id).to eq application.id
