@@ -211,12 +211,16 @@ RSpec.describe "FeedbacksController", type: :request do
 
       describe "when three feedbacks are submitted in quick succession" do
         it "returns a 429 status for the final submission" do
+          freeze_time
+
           post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
           expect(response).to have_http_status(:ok)
           expect(Feedback.count).to eq 1
+
           post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
           expect(response).to have_http_status(:ok)
           expect(Feedback.count).to eq 2
+
           post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page }
           expect(response).to have_http_status(:too_many_requests)
           expect(Feedback.count).to eq 2
