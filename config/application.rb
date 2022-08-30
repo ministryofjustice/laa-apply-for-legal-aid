@@ -111,8 +111,6 @@ module LaaApplyForLegalAid
     config.x.hmrc_interface.client_secret = ENV.fetch("HMRC_API_SECRET", nil)
     config.x.hmrc_interface.duration_check = ENV.fetch("HMRC_DURATION_CHECK", 3)
 
-    config.x.db_url = Rails.env.production? ? "postgres://#{ENV.fetch('POSTGRES_USER', nil)}:#{ENV.fetch('POSTGRES_PASSWORD', nil)}@#{ENV.fetch('POSTGRES_HOST', nil)}:5432/#{ENV.fetch('POSTGRES_DATABASE', nil)}" : "postgres://localhost:5432/apply_for_legal_aid_dev"
-
     config.active_job.queue_adapter = :sidekiq
 
     config.x.slack_alert_email = ENV.fetch("SLACK_ALERT_EMAIL", nil)
