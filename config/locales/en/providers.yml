@@ -638,6 +638,7 @@ en:
         incurrable_costs: "Costs you can incur: "
         allowable_work: "Work you can do: "
       proceeding_type:
+        client_role: "Client role: "
         details_heading: Scope limitations
         allowable_work: "Work you can do: "
         form_of_service: "Form of service: "
