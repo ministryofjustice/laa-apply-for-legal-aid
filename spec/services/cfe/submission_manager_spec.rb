@@ -15,6 +15,7 @@ module CFE
 
       before do
         allow(Rails.configuration.x).to receive(:check_financial_eligibility_host).and_return(staging_host)
+        submission.update!(aasm_state: "in_progress")
       end
 
       context "when the application is passported" do

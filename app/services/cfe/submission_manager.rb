@@ -13,9 +13,13 @@ module CFE
     end
 
     def call
-      services.each do |service|
-        make_logged_call_to service
+      make_logged_call_to CreateAssessmentService
+      Async do |task|
+        services.each do |service|
+          task.async { make_logged_call_to service }
+        end
       end
+      make_logged_call_to ObtainAssessmentResultService
       true
     rescue SubmissionError => e
       submission.error_message = e.message
