@@ -51,6 +51,12 @@ module LegalFramework
               expect(proceeding.delegated_functions_scope_limitation_code).to be_nil
               expect(proceeding.delegated_functions_scope_limitation_meaning).to be_nil
               expect(proceeding.delegated_functions_scope_limitation_description).to be_nil
+              expect(proceeding.substantive_level_of_service).to be_nil
+              expect(proceeding.substantive_level_of_service_name).to be_nil
+              expect(proceeding.substantive_level_of_service_stage).to be_nil
+              expect(proceeding.emergency_level_of_service).to be_nil
+              expect(proceeding.emergency_level_of_service_name).to be_nil
+              expect(proceeding.emergency_level_of_service_stage).to be_nil
             end
           end
 
@@ -64,6 +70,12 @@ module LegalFramework
               expect(proceeding.delegated_functions_scope_limitation_code).not_to be_nil
               expect(proceeding.delegated_functions_scope_limitation_meaning).not_to be_nil
               expect(proceeding.delegated_functions_scope_limitation_description).not_to be_nil
+              expect(proceeding.substantive_level_of_service).to be 3
+              expect(proceeding.substantive_level_of_service_name).to eql "Full Representation"
+              expect(proceeding.substantive_level_of_service_stage).to be 8
+              expect(proceeding.emergency_level_of_service).to be 3
+              expect(proceeding.emergency_level_of_service_name).to eql "Full Representation"
+              expect(proceeding.emergency_level_of_service_stage).to be 8
             end
           end
         end
