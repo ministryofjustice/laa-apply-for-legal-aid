@@ -38,7 +38,7 @@ module CFE
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
 
             it "returns not_eligible" do
-              expect(subject).to eq "not_eligible"
+              expect(subject).to eq "ineligible"
             end
           end
 
@@ -82,7 +82,7 @@ module CFE
             let(:cfe_result) { create :cfe_v2_result, :not_eligible }
 
             it "returns not_eligible" do
-              expect(subject).to eq "not_eligible"
+              expect(subject).to eq "ineligible"
             end
           end
 
@@ -168,7 +168,7 @@ module CFE
 
         context "when not_eligible" do
           it "returns not_eligible" do
-            expect(not_eligible_result.assessment_result).to eq "not_eligible"
+            expect(not_eligible_result.assessment_result).to eq "ineligible"
           end
         end
 
