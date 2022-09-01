@@ -74,7 +74,7 @@ RSpec.describe LegalAidApplicationTransactionType, type: :model do
     context "when destroying object instance" do
       let(:action) { instance.destroy! }
 
-      it "does not call cascade_delete_cash_transactions" do
+      it "calls cascade_delete_cash_transactions" do
         action
         expect(instance).to have_received(:cascade_delete_cash_transactions)
       end
