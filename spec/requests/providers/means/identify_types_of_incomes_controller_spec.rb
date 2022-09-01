@@ -67,8 +67,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       it "displays an error" do
         request
         expect(response.body).to match("govuk-error-summary")
-        expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_incomes.update.none_selected"))
-        expect(unescaped_response_body).not_to include("translation missing")
+        expect(unescaped_response_body).to match("Select if your client receives any types of income")
       end
 
       it "returns http success" do
