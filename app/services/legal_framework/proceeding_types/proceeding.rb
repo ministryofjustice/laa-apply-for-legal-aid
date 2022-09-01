@@ -12,7 +12,8 @@ module LegalFramework
                     :ccms_category_law,
                     :ccms_matter,
                     :cost_limitations,
-                    :default_scope_limitations
+                    :default_scope_limitations,
+                    :service_levels
 
         def initialize(json_response)
           response = JSON.parse(json_response)
@@ -27,6 +28,7 @@ module LegalFramework
           @ccms_matter = response["ccms_matter"]
           @cost_limitations = response["cost_limitations"]
           @default_scope_limitations = response["default_scope_limitations"]
+          @service_levels = response["service_levels"]
         end
       end
 
