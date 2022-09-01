@@ -222,6 +222,8 @@ Rails.application.routes.draw do
       resources :client_involvement_type, only: %i[show update], controller: "proceeding_loop/client_involvement_type"
       resources :substantive_defaults, only: %i[show update], controller: "proceeding_loop/substantive_defaults"
       resources :emergency_defaults, only: %i[show update], controller: "proceeding_loop/emergency_defaults"
+      resources :substantive_level_of_service, only: %i[show update], controller: "proceeding_loop/substantive_level_of_service"
+      resources :emergency_level_of_service, only: %i[show update], controller: "proceeding_loop/emergency_level_of_service"
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
       resource :substantive_application, only: %i[show update]
