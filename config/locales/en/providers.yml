@@ -64,7 +64,7 @@ en:
         page_title: "Capital Assessment Result: %{result}"
         result:
           eligible: Eligible
-          not_eligible: Not Eligible
+          ineligible: Not Eligible
           contribution_required: Contribution required
           partially_eligible: Partially eligible
       result_details:
