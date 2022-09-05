@@ -206,11 +206,17 @@ RSpec.describe TransactionType, type: :model do
           expect(described_class.find_with_children(pension.id, benefits.id)).to match_array([pension, benefits, excluded_benefits])
         end
       end
+
+      context "with nil" do
+        it "returns empty array" do
+          expect(described_class.find_with_children(nil)).to match_array([])
+        end
+      end
     end
 
     describe ".any_type_of" do
       context "with name of record with children" do
-        it "returns record and its chidlren" do
+        it "returns record and its children" do
           expect(described_class.any_type_of("benefits")).to match_array([benefits, excluded_benefits])
         end
       end

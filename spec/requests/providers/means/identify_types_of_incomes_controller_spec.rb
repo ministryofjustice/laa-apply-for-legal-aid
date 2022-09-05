@@ -2,14 +2,13 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   let(:legal_aid_application) { create :legal_aid_application }
+  let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
   let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
   let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
 
-  before do
-    login
-  end
+  before { login }
 
   describe "GET /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
     subject(:request) { get providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application) }
@@ -42,9 +41,14 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
-    subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:request) do
+      patch(
+        providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application),
+        params: params.merge(submit_button),
+      )
+    end
 
-    let(:transaction_type_ids) { [] }
+    let(:submit_button) { {} }
     let(:params) do
       {
         legal_aid_application: {
@@ -52,22 +56,25 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         },
       }
     end
-    let(:submit_button) { {} }
 
-    it "does not add transaction types to the application" do
-      expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
-    end
+    context "when no transaction types selected" do
+      let(:transaction_type_ids) { [] }
 
-    it "displays an error" do
-      request
-      expect(response.body).to match("govuk-error-summary")
-      expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_incomes.update.none_selected"))
-      expect(unescaped_response_body).not_to include("translation missing")
-    end
+      it "does not add transaction types to the application" do
+        expect { request }.not_to change(legal_aid_application.legal_aid_application_transaction_types, :count)
+      end
 
-    it "returns http success" do
-      request
-      expect(response).to have_http_status(:ok)
+      it "displays an error" do
+        request
+        expect(response.body).to match("govuk-error-summary")
+        expect(unescaped_response_body).to match(I18n.t("providers.identify_types_of_incomes.update.none_selected"))
+        expect(unescaped_response_body).not_to include("translation missing")
+      end
+
+      it "returns http success" do
+        request
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context "when transaction types selected" do
@@ -82,24 +89,16 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
         expect { request }.to change { legal_aid_application.reload.no_credit_transaction_types_selected }.to(false)
       end
 
-      context "when provider is on passported journey" do
-        before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          legal_aid_application.update!(provider_received_citizen_consent: nil)
-        end
-
-        it "redirects to the cash income page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
-        end
+      it "redirects to the cash income page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_cash_income_path)
       end
     end
 
     context "when application has transaction types of other kind" do
+      let(:transaction_type_ids) { [] }
       let(:other_transaction_type) { create :transaction_type, :debit }
-      let(:legal_aid_application) do
-        create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]
-      end
+      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type] }
 
       it "does not remove existing transaction of other type" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
@@ -118,42 +117,88 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
 
       it "does not add transaction types to the application" do
-        expect { request }.not_to change(LegalAidApplicationTransactionType, :count)
+        expect { request }.not_to change(legal_aid_application.legal_aid_application_transaction_types, :count)
       end
 
-      context "when application has transactions" do
+      it "redirects to the means student finance page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+      end
+
+      context "when application has existing transaction categories" do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types
+          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types + outgoing_types
         end
 
-        it "removes transaction types from the application" do
-          expect { request }.to change(LegalAidApplicationTransactionType, :count)
-            .by(-income_types.length)
+        it "removes credit transaction types from the application" do
+          expect { request }.to change(legal_aid_application.legal_aid_application_transaction_types, :count).by(-3)
         end
       end
 
-      context "when provider is on passported journey" do
-        before do
-          legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy!
-          legal_aid_application.update!(provider_received_citizen_consent: nil)
+      context "with existing credit and debit cash transactions" do
+        let(:benefits_credit) { create(:transaction_type, :benefits) }
+        let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+
+        let(:legal_aid_application) do
+          laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          laa
         end
 
-        it "redirects to the means student finance page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
+        it "removes all credit cash transactions" do
+          expect { request }.to change { legal_aid_application.cash_transactions.credits.present? }.from(true).to(false)
+        end
+
+        it "does not remove any debit cash transactions" do
+          expect { request }.not_to change { legal_aid_application.cash_transactions.debits.present? }.from(true)
         end
       end
+    end
 
-      context "when provider is on bank statement upload journey" do
-        before do
-          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-          legal_aid_application.update!(provider_received_citizen_consent: false)
-        end
+    context "when existing transaction types are deselected" do
+      let(:transaction_type_ids) { [friends_or_family_credit.id] }
 
-        it "redirects to the means student finance page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_student_finance_path(legal_aid_application))
-        end
+      let(:benefits_credit) { create(:transaction_type, :benefits) }
+      let(:friends_or_family_credit) { create(:transaction_type, :friends_or_family) }
+      let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+
+      let(:legal_aid_application) do
+        laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, friends_or_family_credit, rent_or_mortgage_debit])
+        laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+        laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+        laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+        laa.cash_transactions.create!(transaction_type_id: friends_or_family_credit.id, amount: 201, month_number: 1, transaction_date: Time.zone.now.to_date)
+        laa.cash_transactions.create!(transaction_type_id: friends_or_family_credit.id, amount: 202, month_number: 2, transaction_date: 1.month.ago)
+        laa.cash_transactions.create!(transaction_type_id: friends_or_family_credit.id, amount: 203, month_number: 3, transaction_date: 2.months.ago)
+        laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+        laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+        laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+        laa
+      end
+
+      it "synchronizes credit transaction types" do
+        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to match_array [benefits_credit, friends_or_family_credit]
+        request
+        expect(legal_aid_application.legal_aid_application_transaction_types.credits.map(&:transaction_type)).to match_array [friends_or_family_credit]
+      end
+
+      it "does not remove existing debit transaction types" do
+        expect { request }.not_to change(legal_aid_application.legal_aid_application_transaction_types.debits, :count)
+      end
+
+      it "synchronizes credit transaction types cash transactions" do
+        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to match_array [benefits_credit, friends_or_family_credit]
+        request
+        expect(legal_aid_application.cash_transactions.credits.map(&:transaction_type).uniq).to match_array [friends_or_family_credit]
+      end
+
+      it "does not remove any debit cash transactions" do
+        expect { request }.not_to change(legal_aid_application.cash_transactions.debits, :count)
       end
     end
 
@@ -232,12 +277,52 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
     end
 
+    context "when the provider is not authenticated" do
+      let(:login) { nil }
+      let(:transaction_type_ids) { [] }
+
+      before { request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
     context "when submitted with Save as draft" do
-      let(:submit_button) { { draft_button: "Save as draft" } }
+      let(:params) do
+        {
+          draft_button: "Save as draft",
+          legal_aid_application: {
+            none_selected: "true",
+          },
+        }
+      end
 
       it "redirects to the list of applications" do
         request
         expect(response).to redirect_to providers_legal_aid_applications_path
+      end
+
+      context "with existing credit and debit cash transactions" do
+        let(:benefits_credit) { create(:transaction_type, :benefits) }
+        let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+
+        let(:legal_aid_application) do
+          laa = create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [benefits_credit, rent_or_mortgage_debit])
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 101, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 102, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: benefits_credit.id, amount: 103, month_number: 3, transaction_date: 2.months.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 301, month_number: 1, transaction_date: Time.zone.now.to_date)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 302, month_number: 2, transaction_date: 1.month.ago)
+          laa.cash_transactions.create!(transaction_type_id: rent_or_mortgage_debit.id, amount: 303, month_number: 3, transaction_date: 2.months.ago)
+          laa
+        end
+
+        it "removes all credit cash transactions" do
+          expect { request }.to change { legal_aid_application.cash_transactions.credits.present? }.from(true).to(false)
+        end
+
+        it "does not remove any debit cash transactions" do
+          expect { request }.not_to change { legal_aid_application.cash_transactions.debits.present? }.from(true)
+        end
       end
     end
   end
