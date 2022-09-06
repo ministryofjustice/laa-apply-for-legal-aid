@@ -4,7 +4,7 @@ class CurrencyCleaner
   PURE_NUMERIC_REGEX = /^-?\d+\.?\d+?$/
 
   def initialize(value)
-    @original_value = value
+    @original_value = value.to_s
   end
 
   # will remove all commas if valid i.e. followed by 3 digits
