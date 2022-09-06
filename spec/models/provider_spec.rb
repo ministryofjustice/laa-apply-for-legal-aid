@@ -186,4 +186,28 @@ RSpec.describe Provider, type: :model do
       end
     end
   end
+
+  describe "#enhanced_bank_upload_permissions?" do
+    context "when the provider does not have enhanced bank upload permissions" do
+      it "returns false" do
+        provider = build_stubbed(:provider)
+
+        permission = provider.enhanced_bank_upload_permissions?
+
+        expect(permission).to be(false)
+      end
+    end
+
+    context "when the provider has enhanced bank upload permissions" do
+      it "returns true" do
+        provider = build_stubbed(:provider)
+        enhanced_bank_upload_permission = build_stubbed(:permission, :enhanced_bank_upload)
+        allow(provider).to receive(:permissions).and_return([enhanced_bank_upload_permission])
+
+        permission = provider.enhanced_bank_upload_permissions?
+
+        expect(permission).to be(true)
+      end
+    end
+  end
 end

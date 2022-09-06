@@ -5,6 +5,7 @@ class PermissionsPopulator
     "application.non_passported.employment.*" => "Can create, edit, delete employment applications",
     "application.non_passported.bank_statement_upload.*" => "Can upload bank statements",
     "application.full_section_8.*" => "Can use full set of section 8 proceedings",
+    "application.non_passported.enhanced_bank_upload.*" => "Can use enhanced bank upload journey",
   }.freeze
 
   def self.run

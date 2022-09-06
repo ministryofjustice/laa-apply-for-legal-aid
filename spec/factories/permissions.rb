@@ -27,5 +27,10 @@ FactoryBot.define do
       role { "application.full_section_8.*" }
       description { "Can use full set of section 8 proceedings" }
     end
+
+    trait :enhanced_bank_upload do
+      role { "application.non_passported.enhanced_bank_upload.*" }
+      description { "Can use enhanced bank upload journey" }
+    end
   end
 end
