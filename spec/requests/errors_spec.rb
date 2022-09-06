@@ -57,7 +57,7 @@ RSpec.describe ErrorsController, type: :request do
     end
 
     it "displays the correct header" do
-      expect(response.body).to include("Page not found")
+      expect(page).to have_css("h1", text: t("page_not_found.page_title"))
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe ErrorsController, type: :request do
     end
 
     it "displays the correct header" do
-      expect(unescaped_response_body).to match(I18n.t("errors.show.assessment_already_completed.page_title"))
+      expect(page).to have_css("h1", text: t("assessment_already_completed.page_title"))
     end
   end
 
@@ -85,7 +85,11 @@ RSpec.describe ErrorsController, type: :request do
     end
 
     it "displays the correct header" do
-      expect(response.body).to match(/Access denied/)
+      expect(page).to have_css("h1", text: t("access_denied.page_title"))
     end
+  end
+
+  def t(key, **options)
+    I18n.t(key, scope: %i[errors show], **options)
   end
 end

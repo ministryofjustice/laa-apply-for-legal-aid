@@ -132,6 +132,9 @@ group :development do
 end
 
 group :test do
+  gem "action_dispatch-testing-integration-capybara",
+      github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.1.0",
+      require: "action_dispatch/testing/integration/capybara/rspec"
   gem "axe-core-cucumber"
   gem "capybara", ">= 3.36.0", "< 4.0"
   gem "cucumber", require: false
