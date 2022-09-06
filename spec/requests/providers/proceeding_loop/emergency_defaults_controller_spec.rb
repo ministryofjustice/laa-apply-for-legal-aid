@@ -73,8 +73,32 @@ RSpec.describe "EmergencyDefaultsController", :vcr, type: :request do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to next page" do
-          expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+        context "when the provider accepts the defaults" do
+          let(:params) do
+            {
+              proceeding: {
+                accepted_emergency_defaults: true,
+              },
+            }
+          end
+
+          it "redirects to next page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+          end
+        end
+
+        context "when the provider does not accept the defaults" do
+          let(:params) do
+            {
+              proceeding: {
+                accepted_emergency_defaults: false,
+              },
+            }
+          end
+
+          it "redirects to next page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application_id, proceeding_id))
+          end
         end
 
         context "when checking answers" do

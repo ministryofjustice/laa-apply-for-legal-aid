@@ -43,4 +43,37 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
       end
     end
   end
+
+  describe "POST /providers/applications/:legal_aid_application_id/substantive_level_of_service/:proceeding_id" do
+    subject(:post_sd) { patch "/providers/applications/#{application_id}/substantive_level_of_service/#{proceeding_id}", params: }
+
+    let(:params) do
+      {
+        proceeding: {
+          substantive_level_of_service: 3,
+        },
+      }
+    end
+
+    context "when the provider is not authenticated" do
+      before { post_sd }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the provider is authenticated" do
+      before do
+        login_as provider
+        post_sd
+      end
+
+      context "when the Continue button is pressed" do
+        let(:submit_button) { { continue_button: "Continue" } }
+
+        it "redirects to next page" do
+          expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+        end
+      end
+    end
+  end
 end

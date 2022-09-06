@@ -85,15 +85,55 @@ RSpec.describe Flow::ProceedingLoop do
         context "and is on the emergency_defaults page" do
           let(:loop_on?) { true }
           let(:provider_step) { "emergency_defaults" }
+          let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
+
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => proceeding.id }) }
+
+          context "and the user accepts the defaults" do
+            before { proceeding.update!(accepted_emergency_defaults: true) }
+
+            it { is_expected.to be :substantive_defaults }
+          end
+
+          context "and the user does not accept the defaults" do
+            before { proceeding.update!(accepted_emergency_defaults: false) }
+
+            it { is_expected.to be :emergency_level_of_service }
+          end
+        end
+
+        context "and is on the substantive_defaults page" do
+          let(:loop_on?) { true }
+          let(:provider_step) { "substantive_defaults" }
+          let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
+
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => proceeding.id }) }
+
+          context "and the user accepts the defaults" do
+            before { proceeding.update!(accepted_substantive_defaults: true) }
+
+            it { is_expected.to be :client_involvement_type }
+          end
+
+          context "and the user does not accept the defaults" do
+            before { proceeding.update!(accepted_emergency_defaults: false) }
+
+            it { is_expected.to be :substantive_level_of_service }
+          end
+        end
+
+        context "and is on the emergency_level_of_service page" do
+          let(:loop_on?) { true }
+          let(:provider_step) { "emergency_level_of_service" }
 
           before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
           it { is_expected.to be :substantive_defaults }
         end
 
-        context "and is on the substantive_defaults page" do
+        context "and is on the substantive_level_of_service page" do
           let(:loop_on?) { true }
-          let(:provider_step) { "substantive_defaults" }
+          let(:provider_step) { "substantive_level_of_service" }
 
           before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 

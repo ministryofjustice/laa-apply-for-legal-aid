@@ -43,7 +43,10 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_emergency_default_path(application, proceeding)
           end,
-          forward: :substantive_defaults,
+          forward: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
+          end,
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,
         },
@@ -51,6 +54,27 @@ module Flow
           path: lambda do |application|
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_substantive_default_path(application, proceeding)
+          end,
+          forward: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            proceeding.accepted_substantive_defaults ? Flow::ProceedingLoop.next_step(application) : :substantive_level_of_service
+          end,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
+        emergency_level_of_service: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_emergency_level_of_service_path(application, proceeding)
+          end,
+          forward: :substantive_defaults,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
+        substantive_level_of_service: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_substantive_level_of_service_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
