@@ -54,6 +54,7 @@ en:
         col_date: Date
         col_description: Description
         remove_link: Remove
+        caption: "Transactions added for %{category}"
 
     capital_assessment_results:
       additional_property:
