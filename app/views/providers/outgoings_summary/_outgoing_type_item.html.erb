@@ -23,7 +23,7 @@
   </h2>
   <%= content_tag(:div, class: 'app-task-list__items', id: "list-item-#{name}") do %>
     <% if bank_transactions.present? %>
-      <%= render 'providers/bank_transactions/list_selected', bank_transactions: bank_transactions %>
+      <%= render 'providers/bank_transactions/list_selected', category: name, bank_transactions: bank_transactions %>
       <%= transaction_link %>
     <% else %>
       <p class="app-task-list__item">

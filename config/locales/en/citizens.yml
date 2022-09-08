@@ -18,6 +18,7 @@ en:
         account_number_heading: Account Number
         balance_heading: Balance
         sort_code_heading: Sort Code
+        table_caption: Your added accounts
         type_heading: Type
         your_accounts: Your bank accounts
         link_other_account: Add another bank account

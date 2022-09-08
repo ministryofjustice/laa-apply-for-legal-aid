@@ -235,6 +235,7 @@ en:
       show:
         heading: Check delegated functions dates
         radios_heading: Are these dates correct?
+        table_caption: Delegated functions dates
         error:
           blank_plural: Select yes if these dates are correct
           blank_singular: Select yes if this date is correct
@@ -251,6 +252,7 @@ en:
       show:
         error: Select if your client's details are correct or not
         title: Check your client's details
+        table_caption: Your client's details
         details_correct: These details are correct
         details_incorrect: I need to change these details
         name: Name
@@ -380,6 +382,7 @@ en:
         show:
           page_title: You have added %{count}
           existing: You have added %{count}
+          table_caption: Children added
           remove: Remove
           add_another: Do you need to add another child?
       remove_involved_child:
@@ -671,6 +674,7 @@ en:
           hmrc_not_employed: "You told us your client is not employed but HMRC shared the following information with us:"
           supplementary_question: Do you need to tell us anything else about your client's employment?
           employment_hint: For example, if they get cash in hand pay, have zero-hours contracts, or recently started or ended employment.
+          table_caption: Your client's employment details
           date: Date
           income: Income
           deductions: Deductions
