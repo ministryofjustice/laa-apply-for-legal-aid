@@ -47,16 +47,6 @@
     ) %>
 
     <%= form.govuk_collection_radio_buttons(
-        :enable_employed_journey,
-        yes_no_options,
-        :value,
-        :label,
-        inline: true,
-        hint: { text: t('.hints.enable_employed_journey')},
-        legend: { text: t('.labels.enable_employed_journey') }
-    ) %>
-
-    <%= form.govuk_collection_radio_buttons(
           :enable_mini_loop,
           yes_no_options,
           :value,

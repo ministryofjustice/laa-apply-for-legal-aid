@@ -13,7 +13,7 @@
         </span>
         </h2>
       </div>
-        <% if Setting.enable_employed_journey? && @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
+        <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
           <%= render 'employment_income' %>
         <% end %>
         <%= render 'other_income' %>

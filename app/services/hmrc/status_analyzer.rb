@@ -18,8 +18,6 @@ module HMRC
     end
 
     def call
-      return :employed_journey_not_enabled unless Setting.enable_employed_journey?
-
       return :provider_not_enabled_for_employed_journey unless provider.employment_permissions?
 
       return :applicant_not_employed if applicant_not_employed && no_employment_payments

@@ -1,176 +1,174 @@
 require "rails_helper"
 
 RSpec.describe Providers::ApplicantEmployedController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, applicant: }
-  let(:applicant) { create :applicant, employed: nil }
-  let(:login) { login_as legal_aid_application.provider }
-
-  before do
-    login
-  end
-
-  describe "GET /providers/:application_id/applicant_employed" do
-    subject { get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application) }
-
-    before do
-      subject
-    end
-
-    it "returns http success" do
-      expect(response).to have_http_status(:ok)
-    end
-
+  describe "GET /providers/applications/:legal_aid_application_id/applicant_employed" do
     context "when the provider is not authenticated" do
-      let(:login) { nil }
+      it "redirects the user to the login page" do
+        legal_aid_application = create(:legal_aid_application)
 
-      it_behaves_like "a provider not authenticated"
+        get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application)
+
+        expect(response).to redirect_to(new_provider_session_path)
+      end
+    end
+
+    context "when the provider is authenticated" do
+      it "returns http success" do
+        legal_aid_application = create(:legal_aid_application)
+        login_as legal_aid_application.provider
+
+        get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application)
+
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context "when the application is in use_ccms state" do
-      let(:legal_aid_application) { create :legal_aid_application, :use_ccms_employed, applicant: }
-
       it "sets the state back to applicant details checked and removes the reason" do
+        legal_aid_application = create(:legal_aid_application, :use_ccms_employed)
+        login_as legal_aid_application.provider
+
+        get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application)
+
         expect(legal_aid_application.reload.state).to eq "applicant_details_checked"
         expect(legal_aid_application.ccms_reason).to be_nil
       end
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/applicant_employed" do
-    subject do
-      post(
-        providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-        params:,
-      )
-    end
-
-    before do
-      subject
-    end
-
-    let(:employed) { nil }
-    let(:params) do
-      { applicant: { employed: } }
-    end
-
-    it "renders successfully" do
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "displays error" do
-      expect(response.body).to include("govuk-error-summary")
-    end
-
+  describe "POST /providers/applications/:legal_aid_application_id/applicant_employed" do
     context "when the provider is not authenticated" do
-      let(:login) { nil }
+      it "redirects the user to the login page" do
+        legal_aid_application = create(:legal_aid_application)
 
-      it_behaves_like "a provider not authenticated"
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: {}
+
+        expect(response).to redirect_to(new_provider_session_path)
+      end
     end
 
-    describe "POST /providers/:application_id/applicant_employed" do
-      before { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
+    context "with invalid params" do
+      it "renders an error and does not update the record" do
+        applicant = create(:applicant, employed: nil)
+        legal_aid_application = create(:legal_aid_application, applicant:)
+        login_as legal_aid_application.provider
 
-      context "with valid params" do
-        let(:params) { { applicant: { employed: "true" } } }
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: {}
 
-        it "updates the record" do
-          applicant = legal_aid_application.reload.applicant
-          expect(applicant.reload.employed).to be true
-        end
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("govuk-error-summary")
+        expect(response.body).to include(I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected"))
+        expect(legal_aid_application.reload.applicant.employed).to be_nil
+      end
+    end
 
-        context "when yes" do
-          let(:params) { { applicant: { employed: "true" } } }
+    context "with valid params" do
+      it "updates the record" do
+        applicant = create(:applicant, employed: nil)
+        legal_aid_application = create(:legal_aid_application, applicant:)
+        login_as legal_aid_application.provider
 
-          it "redirects to the use ccms employed page" do
-            expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
-          end
-        end
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "true" } }
 
-        context "when no" do
-          let(:params) { { applicant: { employed: "false" } } }
+        applicant = legal_aid_application.reload.applicant
+        expect(applicant).to be_employed
+      end
+    end
 
-          context "when used delegated functions is false" do
-            it "redirects to the open banking consents page" do
-              expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
-            end
-          end
+    context "when the provider has employment permissions and the application is ineligible for employment journey" do
+      it "redirects to the use ccms employed page" do
+        applicant = create(:applicant, self_employed: true)
+        legal_aid_application = create(:legal_aid_application, applicant:)
+        provider = legal_aid_application.provider
+        grant_employment_journey_permissions(provider)
+        login_as provider
 
-          context "when used_delegated_functions is true" do
-            let(:legal_aid_application) do
-              create :legal_aid_application,
-                     :with_non_passported_state_machine,
-                     :applicant_details_checked,
-                     :with_proceedings,
-                     :with_delegated_functions_on_proceedings,
-                     explicit_proceedings: [:da004],
-                     df_options: { DA004: [Time.zone.today, Time.zone.today] },
-                     applicant:
-            end
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "true" } }
 
-            it "redirects to the substantive application page" do
-              request
-              expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
-            end
-          end
-        end
+        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+      end
+    end
+
+    context "when the provider has employment permissions and the applicant is eligible for employment journey" do
+      it "redirects to the substantive applications page for applications that used delegated functions" do
+        legal_aid_application = create(
+          :legal_aid_application,
+          :with_proceedings,
+          :with_delegated_functions_on_proceedings,
+          df_options: { DA001: [Date.yesterday, Date.current] },
+        )
+        provider = legal_aid_application.provider
+        grant_employment_journey_permissions(provider)
+        login_as provider
+
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "true" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
       end
 
-      context "with invalid params - nothing specified" do
-        let(:params) { {} }
+      it "redirects to the open banking consent page for applications that have not used delegated functions" do
+        legal_aid_application = create(:legal_aid_application)
+        provider = legal_aid_application.provider
+        grant_employment_journey_permissions(provider)
+        login_as provider
 
-        it "returns http_success" do
-          expect(response).to have_http_status(:ok)
-        end
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "true" } }
 
-        it "does not update the record" do
-          applicant = legal_aid_application.reload.applicant
-          expect(applicant.reload.employed).to be_nil
-        end
+        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
+      end
+    end
 
-        it "includes the error message in the response" do
-          expect(response.body).to include(I18n.t("activemodel.errors.models.applicant.attributes.base.none_selected"))
-        end
+    context "when the provider does not have employment permissions and the applicant is employed" do
+      it "redirects to the use ccms employed page" do
+        legal_aid_application = create(:legal_aid_application)
+        provider = legal_aid_application.provider
+        login_as provider
+
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "true" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
+      end
+    end
+
+    context "when the provider does not have employment permissions and the applicant is not employed" do
+      it "redirects to the substantive applications page for applications that used delegated functions" do
+        legal_aid_application = create(
+          :legal_aid_application,
+          :with_proceedings,
+          :with_delegated_functions_on_proceedings,
+          df_options: { DA001: [Date.yesterday, Date.current] },
+        )
+        provider = legal_aid_application.provider
+        login_as provider
+
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "false" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
+      end
+
+      it "redirects to the open banking consent page for applications that have not used delegated functions" do
+        legal_aid_application = create(:legal_aid_application)
+        provider = legal_aid_application.provider
+        login_as provider
+
+        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
+             params: { applicant: { employed: "false" } }
+
+        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
       end
     end
   end
 
-  context "when the employed journey feature flag is enabled" do
-    subject { post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: }
-
-    before { Setting.setting.update!(enable_employed_journey: true) }
-
-    let(:params) { { applicant: { employed: "true" } } }
-    let(:provider) { create :provider }
-    let!(:legal_aid_application) { create :legal_aid_application, provider:, applicant: }
-    let(:applicant) { create :applicant }
-
-    context "when applicant is employed and the provider has employed permissions" do
-      before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
-      context "when use delegated functions is false" do
-        it "redirects to the open banking consents page" do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
-        end
-      end
-
-      context "when used_delegated_functions is true" do
-        let(:legal_aid_application) do
-          create :legal_aid_application,
-                 :with_non_passported_state_machine,
-                 :applicant_details_checked,
-                 :with_proceedings,
-                 :with_delegated_functions_on_proceedings,
-                 explicit_proceedings: [:da004],
-                 df_options: { DA004: [Time.zone.today, Time.zone.today] },
-                 applicant:
-        end
-
-        it "redirects to the substantive application page" do
-          subject
-          expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
-        end
-      end
-    end
+  def grant_employment_journey_permissions(provider)
+    permission = create(:permission, :employed)
+    provider.permissions << permission
+    provider.save!
   end
 end

@@ -106,93 +106,76 @@ RSpec.describe Providers::MeansReportsController, type: :request do
       expect(unescaped_response_body).to include(gds_number_to_currency(cfe_result.capital_contribution))
     end
 
-    context "when employed feature flag is set to false" do
-      let(:before_subject) { Setting.setting.update!(enable_employed_journey: false) }
+    context "when the applicant is employed and HMRC returns employment data" do
+      let(:before_subject) do
+        legal_aid_application.applicant.update!(employed: true)
+        legal_aid_application.update!(extra_employment_information: true,
+                                      extra_employment_information_details: "Made redundant")
+      end
 
-      it "does not display employment details" do
-        expect(response.body).not_to have_selector("h3", text: "Employment notes")
-        expect(response.body).not_to have_selector("h3", text: "Employment income")
-        expect(unescaped_response_body).to exclude("Gross employment income")
-        expect(unescaped_response_body).to exclude("Income tax")
-        expect(unescaped_response_body).to exclude("National insurance")
-        expect(unescaped_response_body).to exclude("Fixed employment deduction")
-        expect(unescaped_response_body).to exclude("Employment notes")
+      it "displays the employment details" do
+        expect(response.body)
+          .to have_selector("h3", text: "Employment income")
+          .and have_content("Gross employment income")
+          .and have_content("Income tax")
+          .and have_content("National insurance")
+          .and have_content("Fixed employment deduction")
+          .and have_content("Made redundant")
       end
     end
 
-    context "when employed feature flag is set to true" do
-      before(:all) { Setting.setting.update!(enable_employed_journey: true) }
-
-      context "when the applicant is employed and HMRC returns employment data" do
-        let(:before_subject) do
-          legal_aid_application.applicant.update!(employed: true)
-          legal_aid_application.update!(extra_employment_information: true,
-                                        extra_employment_information_details: "Made redundant")
-        end
-
-        it "displays the employment details" do
-          expect(response.body)
-            .to have_selector("h3", text: "Employment income")
-            .and have_content("Gross employment income")
-            .and have_content("Income tax")
-            .and have_content("National insurance")
-            .and have_content("Fixed employment deduction")
-        end
+    context "when the applicant is employed but HMRC does not return employment data" do
+      let(:before_subject) do
+        legal_aid_application.applicant.update!(employed: true)
+        legal_aid_application.update!(full_employment_details: "Test employment details")
       end
 
-      context "when the applicant is employed but HMRC does not return employment data" do
-        let(:before_subject) do
-          legal_aid_application.applicant.update!(employed: true)
-          legal_aid_application.update!(full_employment_details: "Test employment details")
-        end
-
-        it "displays the manually entered employment details" do
-          expect(response.body)
+      it "displays the manually entered employment details" do
+        expect(response.body)
           .to have_selector("h3", text: "Employment income")
           .and have_content("Your client's employment details")
           .and have_content("Test employment details")
-        end
       end
+    end
 
-      context "when the applicant is not employed" do
-        let(:before_subject) { legal_aid_application.applicant.update!(employed: false) }
+    context "when the applicant is not employed" do
+      let(:before_subject) { legal_aid_application.applicant.update!(employed: false) }
 
-        it "does not display the employment lines" do
-          expect(response.body)
-            .to exclude("Gross employment income")
-            .and exclude("Income tax")
-            .and exclude("National insurance")
-            .and exclude("Fixed employment deduction")
-            .and exclude("Employment notes")
-        end
+      it "does not display the employment lines" do
+        expect(response.body)
+          .to exclude("Gross employment income")
+          .and exclude("Income tax")
+          .and exclude("National insurance")
+          .and exclude("Fixed employment deduction")
+          .and exclude("Employment notes")
       end
+    end
 
-      context "with employment remarks" do
-        let(:before_subject) { FactoryHelpers::CFEEmploymentRemarksAdder.call(cfe_result) }
+    context "with employment remarks" do
+      let(:before_subject) { FactoryHelpers::CFEEmploymentRemarksAdder.call(cfe_result) }
 
-        it "displays all expected employment-related remarks" do
-          expect(parsed_response_body.css("#caseworker_review_required_answer").text.strip).to eq "Yes"
-          reasons = parsed_response_body.css("#caseworker_review_reasons").text.split("\n").map(&:strip)
-          reasons.compact_blank!
-          expect(reasons).to eq ["Monthly value unknown (variations)",
-                                 "Multiple employments",
-                                 "Tax or NI refunds",
-                                 "Frequency unknown",
-                                 "Restrictions on client's assets"]
-          expect(parsed_response_body.css("#means-merits-report__caseworker-review-required-multiple_employments > dt").text.strip).to eq "Review categories - Multiple employments"
+      it "displays all expected employment-related remarks" do
+        expect(parsed_response_body.css("#caseworker_review_required_answer").text.strip).to eq "Yes"
+        reasons = parsed_response_body.css("#caseworker_review_reasons").text.split("\n").map(&:strip)
+        reasons.compact_blank!
+        expect(reasons).to eq ["Monthly value unknown (variations)",
+                               "Multiple employments",
+                               "Tax or NI refunds",
+                               "Frequency unknown",
+                               "Restrictions on client's assets"]
+        expect(parsed_response_body.css("#means-merits-report__caseworker-review-required-multiple_employments > dt").text.strip).to eq "Review categories - Multiple employments"
 
-          amount_variation_categories = parsed_response_body.css("#review-reason-amount_variation").text.split("\n").map(&:strip)
-          amount_variation_categories.compact_blank!
-          expect(amount_variation_categories).to eq ["Employment gross income", "Employment National Insurance contributions", "Employment income tax"]
+        amount_variation_categories = parsed_response_body.css("#review-reason-amount_variation").text.split("\n").map(&:strip)
+        amount_variation_categories.compact_blank!
+        expect(amount_variation_categories).to eq ["Employment gross income", "Employment National Insurance contributions", "Employment income tax"]
 
-          unknown_frequency_categories = parsed_response_body.css("#review-reason-unknown_frequency").text.split("\n").map(&:strip)
-          unknown_frequency_categories.compact_blank!
-          expect(unknown_frequency_categories).to eq ["Employment gross income"]
+        unknown_frequency_categories = parsed_response_body.css("#review-reason-unknown_frequency").text.split("\n").map(&:strip)
+        unknown_frequency_categories.compact_blank!
+        expect(unknown_frequency_categories).to eq ["Employment gross income"]
 
-          refunds_categories = parsed_response_body.css("#review-reason-refunds").text.split("\n").map(&:strip)
-          refunds_categories.compact_blank!
-          expect(refunds_categories).to eq ["Employment National Insurance contributions", "Employment income tax"]
-        end
+        refunds_categories = parsed_response_body.css("#review-reason-refunds").text.split("\n").map(&:strip)
+        refunds_categories.compact_blank!
+        expect(refunds_categories).to eq ["Employment National Insurance contributions", "Employment income tax"]
       end
     end
 

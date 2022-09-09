@@ -303,7 +303,7 @@ FactoryBot.define do
     # date in an array for each proceeding ccms_code.
     # example:
     #   {
-    #     DA001: [Date.yesterday, Date.today],
+    #     DA001: [Date.yesterday, Date.current],
     #     DA004: [nil, nil],
     #     SE013: [2.days.ago, 1.day.ago]
     #   }
