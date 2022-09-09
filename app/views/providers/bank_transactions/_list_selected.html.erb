@@ -1,4 +1,5 @@
 <table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t('.caption', category: category) %></caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th class="govuk-table__header" scope="col"><%= t('.col_date') %></th>
@@ -21,14 +22,14 @@
         </td>
         <td class="govuk-table__cell">
           <%= button_to_accessible(
+                t('.remove_link'),
                 remove_transaction_type_providers_legal_aid_application_bank_transaction_path(@legal_aid_application, bank_transaction),
                 method: :patch,
                 class: 'button-as-link',
                 form_class: 'remote-remove-transaction',
+                suffix: bank_transaction.description + " " + value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) + " " + l(bank_transaction.happened_at.to_date, format: :short_date),
                 remote: true
-              ) do %>
-                <%= t('.remove_link') %><span class="govuk-visually-hidden"> <%= bank_transaction.description %> <%= value_with_currency_unit(bank_transaction.amount, bank_transaction.currency) %></span>
-              <% end %>
+              ) %>
         </td>
       </tr>
     <% end %>
