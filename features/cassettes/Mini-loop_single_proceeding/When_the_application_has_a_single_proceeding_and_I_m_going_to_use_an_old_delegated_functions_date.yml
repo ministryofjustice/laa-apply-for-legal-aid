@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 12:27:21 GMT
+      - Mon, 12 Sep 2022 14:07:29 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -47,9 +47,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ba7be032f4ac435c1a0e7f0279baa73b
+      - 5300c1c5d54d23bd7ea4057789b10484
       X-Runtime:
-      - '0.003920'
+      - '0.004978'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -57,7 +57,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 12:27:21 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:29 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -68,7 +68,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -79,7 +79,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 12:27:22 GMT
+      - Mon, 12 Sep 2022 14:07:30 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -105,9 +105,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f7b40e9e6f5455ba52d4752eeafe0eeb
+      - 70261357f87bc5370773b5e7a856774e
       X-Runtime:
-      - '0.004953'
+      - '0.056440'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -115,5 +115,5 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 12:27:22 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:30 GMT
 recorded_with: VCR 6.1.0

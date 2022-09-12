@@ -1,4 +1,4 @@
-Feature: Mini-loop
+Feature: Mini-loop single proceeding
   @javascript @vcr
   Scenario: When the application has a single proceeding and I'm not using delegated functions
     Given the feature flag for enable_mini_loop is enabled
