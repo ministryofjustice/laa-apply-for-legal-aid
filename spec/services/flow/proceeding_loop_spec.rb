@@ -164,6 +164,19 @@ RSpec.describe Flow::ProceedingLoop do
       it { is_expected.to eq first_proceeding }
     end
 
+    context "when the user is on the final page of the second proceeding" do
+      let(:provider_step) { "delegated_functions" }
+
+      before do
+        allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => second_proceeding.id })
+        first_proceeding.update!(used_delegated_functions: false)
+        second_proceeding.update!(used_delegated_functions: false)
+        third_proceeding.update!(used_delegated_functions: false)
+      end
+
+      it { is_expected.to eq third_proceeding }
+    end
+
     context "when the user has added an extra proceeding from the check your answers page" do
       let(:provider_step) { "has_other_proceedings" }
       let!(:new_proceeding) { create(:proceeding, :se014, legal_aid_application:) }

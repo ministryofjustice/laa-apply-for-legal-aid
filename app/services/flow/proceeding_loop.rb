@@ -41,7 +41,13 @@ module Flow
 
     def next_proceeding
       proceeding = next_incomplete_proceeding
-      proceeding = @application.proceedings.in_order_of_addition.first if next_incomplete_proceeding.nil?
+      if next_incomplete_proceeding.nil?
+        proceeding = if at_final_page_for_proceeding? && current_proceeding_id.present?
+                       @application.proceedings.in_order_of_addition[current_proceeding_position + 1]
+                     else
+                       @application.proceedings.in_order_of_addition.first
+                     end
+      end
       proceeding
     end
 
@@ -72,7 +78,11 @@ module Flow
     alias_method :date_confirmation_required?, :date_confirmation_required
 
     def at_end_of_loop?
-      final_proceeding_in_loop.id == @application.provider_step_params["id"] && controllers[-2..].include?(@application.provider_step)
+      final_proceeding_in_loop.id == @application.provider_step_params["id"] && at_final_page_for_proceeding?
+    end
+
+    def at_final_page_for_proceeding?
+      controllers[-2..].include?(@application.provider_step)
     end
 
     def final_proceeding_in_loop
@@ -83,10 +93,18 @@ module Flow
       @next_incomplete_proceeding ||= @application.proceedings.in_order_of_addition.incomplete.first
     end
 
-    def current_proceeding
-      return nil if @application.provider_step_params["id"].nil?
+    def current_proceeding_id
+      @current_proceeding_id ||= @application.provider_step_params.present? && @application.provider_step_params["id"] ? @application.provider_step_params["id"] : nil
+    end
 
-      @current_proceeding ||= @application.proceedings.find(@application.provider_step_params["id"])
+    def current_proceeding_position
+      @current_proceeding_position ||= @application.proceedings.in_order_of_addition.pluck(:id).index current_proceeding_id
+    end
+
+    def current_proceeding
+      return nil if current_proceeding_id.nil?
+
+      @current_proceeding ||= @application.proceedings.find(current_proceeding_id)
     end
   end
 end

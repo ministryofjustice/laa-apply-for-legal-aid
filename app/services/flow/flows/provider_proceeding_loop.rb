@@ -13,10 +13,11 @@ module Flow
         },
         delegated_functions: {
           path: lambda do |application, first_visit|
-            proceeding = if first_visit.nil?
-                           Flow::ProceedingLoop.next_proceeding(application)
-                         else
+            proceeding = if application.provider_step_params["id"]
+                           # coming from a page with a proceeding.id in provider_step_params
                            Proceeding.find(application.provider_step_params["id"])
+                         elsif first_visit.nil?
+                           Flow::ProceedingLoop.next_proceeding(application)
                          end
             urls.providers_legal_aid_application_delegated_function_path(application, proceeding)
           end,
