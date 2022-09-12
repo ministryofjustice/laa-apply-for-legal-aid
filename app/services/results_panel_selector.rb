@@ -8,7 +8,7 @@ class ResultsPanelSelector
   end
 
   def call
-    return eligible_or_non_eligible if %w[eligible not_eligible].include?(assessment_result)
+    return eligible_or_non_eligible if %w[eligible ineligible].include?(assessment_result)
     return "shared/assessment_results/manual_check_required" if restrictions? || disregards? || manually_entered_employment_information?
 
     "shared/assessment_results/#{cfe_result}#{capital_contribution}#{income_contribution}"

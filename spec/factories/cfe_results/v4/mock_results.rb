@@ -250,7 +250,7 @@ module CFEResults
 
       def self.not_eligible
         not_eligible_result = eligible
-        not_eligible_result[:result_summary][:overall_result][:result] = "not_eligible"
+        not_eligible_result[:result_summary][:overall_result][:result] = "ineligible"
         not_eligible_result[:result_summary][:overall_result][:proceeding_types].each do |pt|
           pt[:result] = "not_eligible"
         end

@@ -176,7 +176,7 @@ RSpec.describe "cfe_result version 4 factory" do
     include_examples "has the correct structure for v4"
 
     it "is not eligible with no contributions" do
-      expect(cfe_result.assessment_result).to eq "not_eligible"
+      expect(cfe_result.assessment_result).to eq "ineligible"
       expect(cfe_result.capital_contribution).to be_zero
       expect(cfe_result.income_contribution).to be_zero
     end

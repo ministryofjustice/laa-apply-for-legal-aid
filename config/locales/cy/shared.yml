@@ -50,7 +50,7 @@ cy:
           legal aid.
         - You still need to provide details of the case before we can decide if they’re
           eligible.
-      not_eligible:
+      ineligible:
         heading: dia lagel teg ot ylekilnu si %{name}
         detail: ".latipac elbasopsid hcum oot evah yeht esuaceb si sihT"
       capital_contribution_required:

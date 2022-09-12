@@ -181,7 +181,7 @@ module CCMS
             end
           end
 
-          context "not eligble" do
+          context "not eligible" do
             let!(:cfe_result) { create :cfe_v3_result, :not_eligible, submission: cfe_submission }
 
             it "returns zero" do

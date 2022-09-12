@@ -65,7 +65,7 @@ en:
         page_title: "Capital Assessment Result: %{result}"
         result:
           eligible: Eligible
-          not_eligible: Not Eligible
+          ineligible: Not Eligible
           contribution_required: Contribution required
           partially_eligible: Partially eligible
       result_details:
@@ -78,12 +78,12 @@ en:
         page_title: "Capital and Income Assessment Result: %{result}"
         tab_title:
           eligible: Your client could be eligible for free legal aid
-          not_eligible: Your client is unlikely to get legal aid
+          ineligible: Your client is unlikely to get legal aid
           contribution_required: Your client must pay towards legal aid
           partially_eligible: Your client must pay towards legal aid
         result:
           eligible: Eligible
-          not_eligible: Not eligible
+          ineligible: Not eligible
           contribution_required: Contribution required
           partially_eligible: Partially eligible
       result_details:

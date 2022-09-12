@@ -220,9 +220,9 @@ module CFEResults
 
       def self.not_eligible
         not_eligible_result = eligible
-        not_eligible_result[:assessment][:assessment_result] = "not_eligible"
+        not_eligible_result[:assessment][:assessment_result] = "ineligible"
         not_eligible_result[:assessment][:disposable_income][:assessment_result] = "not_eligible"
-        not_eligible_result[:assessment][:capital][:assessment_result] = "not_eligible"
+        not_eligible_result[:assessment][:capital][:assessment_result] = "ineligible"
         not_eligible_result
       end
 

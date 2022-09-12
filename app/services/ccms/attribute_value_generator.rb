@@ -281,7 +281,7 @@ module CCMS
       case cfe_result.assessment_result
       when "eligible", "contribution_required", "partially_eligible", "no_assessment"
         "In Scope"
-      when "not_eligible"
+      when "ineligible"
         "Out Of Scope"
       else
         raise "Unexpected assessment result: #{cfe_result.assessment_result}"

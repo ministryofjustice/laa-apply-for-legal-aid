@@ -85,7 +85,7 @@ en:
         details:
           - Based on their financial situation, your client may not have to pay towards legal aid.
           - You still need to provide details of the case before we can decide if they’re eligible.
-      not_eligible:
+      ineligible:
         heading: "%{name} is unlikely to get legal aid"
         detail: This is because they have too much disposable capital.
       capital_contribution_required:
