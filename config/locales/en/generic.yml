@@ -59,6 +59,7 @@ en:
     'yes': 'Yes'
     yes_but_none: Yes, but none specified
     uploading: Uploading...
+    warning_assistive: Warning
     ordinal_number:
       1: first
       2: second
