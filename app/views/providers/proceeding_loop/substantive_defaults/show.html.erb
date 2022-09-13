@@ -4,9 +4,9 @@
       method: :patch,
       local: true
     ) do |form| %>
-  <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
-  <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
   <%= page_template template: :basic, form: form do %>
+    <span class="govuk-caption-l"><%= position_in_array(@proceeding) %></span>
+    <h1 class="govuk-heading-xl"><%= @proceeding.meaning %></h1>
     <%= form.govuk_radio_buttons_fieldset :accepted_substantive_defaults,
                                           inline: true,
                                           legend: { size: 'l', tag: 'h2', text: t('.question') } do %>
