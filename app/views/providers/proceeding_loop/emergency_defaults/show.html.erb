@@ -11,13 +11,13 @@
                                           inline: true,
                                           legend: { size: 'l', tag: 'h2', text: t('.question') } do %>
       <p>
-        <strong>Default level of service:</strong> <%= form.object.emergency_level_of_service_name %>
+        <strong><%= t('.los_header') %></strong> <%= form.object.emergency_level_of_service_name %>
         <br>
         <br>
-        <strong>Default scope:</strong> <%= form.object.delegated_functions_scope_limitation_meaning %>
+        <strong><%= t('.scope_header') %></strong> <%= form.object.delegated_functions_scope_limitation_meaning %>
         <br>
         <br>
-        <strong>Scope description:</strong> <%= form.object.delegated_functions_scope_limitation_description %>
+        <strong><%= t('.scope_description_header') %></strong> <%= form.object.delegated_functions_scope_limitation_description %>
       </p>
       <%= form.hidden_field :emergency_level_of_service %>
       <%= form.hidden_field :emergency_level_of_service_name %>
