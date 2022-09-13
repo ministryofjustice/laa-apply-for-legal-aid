@@ -13,13 +13,7 @@
   </dl>
 </div>
 
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive"><%= t('generic.warning_assistive') %></span>
-    <%= t('.warning') %>
-  </strong>
-</div>
+<%= govuk_warning_text(text: t('.warning')) %>
 
 <%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
   <%= form.submit(

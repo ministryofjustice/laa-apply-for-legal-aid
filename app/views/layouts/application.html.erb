@@ -80,13 +80,9 @@
           </div>
         <% end %>
         <% if flash[:notice] %>
-          <div class='govuk-warning-text'>
-            <span class='govuk-warning-text__icon' aria-hidden='true'>!</span>
-            <strong class='govuk-warning-text__text'>
-              <span class='govuk-warning-text__assistive'>Notice</span>
-              <%= flash[:notice] %>
-            </strong>
-          </div>
+          <%= govuk_warning_text(icon_fallback_text: t('.header.notice')) do %>
+            <%= flash[:notice] %>
+          <% end %>
         <% end %>
 
         <%= yield %>

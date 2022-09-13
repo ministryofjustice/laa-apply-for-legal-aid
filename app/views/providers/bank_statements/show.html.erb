@@ -37,13 +37,7 @@
           <%= t('.info') %>
         </p>
 
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive"><%= t('generic.warning_assistive') %></span>
-          <%= t('.warning') %>
-        </strong>
-      </div>
+      <%= govuk_warning_text(text: t('.warning')) %>
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden <%= form_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
