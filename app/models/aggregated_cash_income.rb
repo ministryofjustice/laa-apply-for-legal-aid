@@ -25,4 +25,12 @@ class AggregatedCashIncome < BaseAggregatedCashTransaction
 
     save_cash_transaction_records
   end
+
+  def cash_income_options
+    if Setting.enhanced_bank_upload?
+      legal_aid_application.regular_transactions.credits.map(&:transaction_type)
+    else
+      legal_aid_application.transaction_types.not_children.credits
+    end
+  end
 end

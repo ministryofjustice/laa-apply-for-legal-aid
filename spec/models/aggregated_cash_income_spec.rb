@@ -443,6 +443,68 @@ RSpec.describe AggregatedCashIncome, type: :model do
     end
   end
 
+  describe "#cash_income_options" do
+    context "when the enhanced bank upload setting is enabled" do
+      it "returns options based on the legal aid application's regular payment transaction types" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application.set_transaction_period
+        _benefits_payment = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        _maintenance_in_payment = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: maintenance_in,
+        )
+        _pension_transaction = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: pension,
+        )
+        aggregated_cash_income = described_class.new(
+          legal_aid_application_id: legal_aid_application.id,
+        )
+
+        cash_income_options = aggregated_cash_income.cash_income_options
+
+        expect(cash_income_options).to contain_exactly(benefits, maintenance_in)
+      end
+    end
+
+    context "when the enhanced bank upload setting is disabled" do
+      it "returns options based on the legal aid application's transaction types" do
+        Setting.setting.update!(enhanced_bank_upload: false)
+        legal_aid_application = create(:legal_aid_application)
+        legal_aid_application.set_transaction_period
+        _benefits_payment = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        _maintenance_in_payment = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: maintenance_in,
+        )
+        _pension_transaction = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: pension,
+        )
+        aggregated_cash_income = described_class.new(
+          legal_aid_application_id: legal_aid_application.id,
+        )
+
+        cash_income_options = aggregated_cash_income.cash_income_options
+
+        expect(cash_income_options).to contain_exactly(pension)
+      end
+    end
+  end
+
   context "with date labeling" do
     around(:each) do |example|
       travel_to Time.zone.local(2021, 1, 4, 13, 24, 44)

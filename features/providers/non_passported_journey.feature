@@ -94,9 +94,17 @@ Feature: Non-passported applicant journeys
     Then I select "Pension"
     Then I fill "Pension amount" with "100"
     Then I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
-
     And I click "Save and continue"
+
     Then I should be on a page with title "Select payments your client receives in cash"
+
+    When I select "Pension"
+    Then I enter pension1 "100"
+    Then I enter pension2 "200"
+    Then I enter pension3 "150"
+    And I click "Save and continue"
+
+    Then I should be on a page showing "Does your client receive student finance?"
 
   @javascript
   Scenario: Complete an application for an applicant that does not receive benefits with dependants

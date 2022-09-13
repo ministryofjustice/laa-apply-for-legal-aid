@@ -14,11 +14,12 @@ class BaseAggregatedCashTransaction
   validate :validate_at_least_one_selected
   validate :checkbox_integrity
 
+  attr_reader :legal_aid_application
   attr_accessor :month1, :month2, :month3
 
   def initialize(legal_aid_application_id:)
     super
-    legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
+    @legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
     @month1 = legal_aid_application.calculation_date.beginning_of_month - 1.month
     @month2 = month1 - 1.month
     @month3 = month2 - 1.month
