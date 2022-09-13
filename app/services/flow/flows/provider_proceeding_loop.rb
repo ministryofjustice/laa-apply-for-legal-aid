@@ -12,13 +12,8 @@ module Flow
           check_answers: :check_provider_answers,
         },
         delegated_functions: {
-          path: lambda do |application, first_visit|
-            proceeding = if application.provider_step_params["id"]
-                           # coming from a page with a proceeding.id in provider_step_params
-                           Proceeding.find(application.provider_step_params["id"])
-                         elsif first_visit.nil?
-                           Flow::ProceedingLoop.next_proceeding(application)
-                         end
+          path: lambda do |application|
+            proceeding = application.provider_step_params["id"]
             urls.providers_legal_aid_application_delegated_function_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
