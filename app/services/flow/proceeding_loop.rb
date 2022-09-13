@@ -82,6 +82,9 @@ module Flow
     end
 
     def at_final_page_for_proceeding?
+      # this checks if the current provider step is in the last two values in controllers
+      # this is because confirm_delegated_functions_date is optional so
+      # delegated_functions or confirm_delegated_functions_date could both be the final page
       controllers[-2..].include?(@application.provider_step)
     end
 
