@@ -1,4 +1,4 @@
-Feature: mini-loop
+Feature: mini-loop check-your-answers
   @javascript @vcr
   Scenario: When the application has multiple proceedings and I'm using delegated functions
     Given the feature flag for enable_mini_loop is enabled

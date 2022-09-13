@@ -1278,7 +1278,7 @@ module CCMS
             it "is the service level number from the default level of service" do
               %i[proceeding_merits proceeding].each do |entity|
                 block = XmlExtractor.call(xml, entity, "LEVEL_OF_SERVICE")
-                expect(block).to have_text_response proceeding.default_level_of_service_level
+                expect(block).to have_text_response proceeding.substantive_level_of_service.to_s
               end
             end
           end
@@ -1286,7 +1286,7 @@ module CCMS
           context "PROCEEDING_LEVEL_OF_SERVICE" do
             it "displays the name of the lead proceeding default level of service" do
               block = XmlExtractor.call(xml, :proceeding_merits, "PROCEEDING_LEVEL_OF_SERVICE")
-              expect(block).to have_text_response proceeding.default_level_of_service_name
+              expect(block).to have_text_response proceeding.substantive_level_of_service_name
             end
           end
 

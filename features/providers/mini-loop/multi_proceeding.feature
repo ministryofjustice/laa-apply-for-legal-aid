@@ -1,6 +1,6 @@
-Feature: mini-loop
+Feature: mini-loop multi proceeding
   @javascript @vcr
-  Scenario: When the application has a single proceeding and I'm using delegated functions
+  Scenario: When the application has multiple proceedings and I'm using delegated functions
     Given the feature flag for enable_mini_loop is enabled
     And I have started an application with multiple proceedings
     When I choose 'No'
@@ -22,7 +22,6 @@ Feature: mini-loop
     And I enter the 'delegated functions on' date of 5 days ago
     When I click 'Save and continue'
     Then I should be on the 'limitations' page showing 'Inherent jurisdiction high court injunction'
-
 
   @javascript @vcr
   Scenario: When the application has multiple proceedings and I'm going to use an old delegated functions date

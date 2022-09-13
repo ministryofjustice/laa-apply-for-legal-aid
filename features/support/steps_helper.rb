@@ -30,6 +30,10 @@ Then("I click link {string}") do |link_name|
   click_link(link_name)
 end
 
+Then("I click the {string} link {int} times") do |link_name, number|
+  number.times { click_link(link_name) }
+end
+
 Then("I click the first link {string}") do |link_name|
   first(:link, link_name).click
 end
@@ -48,6 +52,10 @@ end
 
 Then("I click {string}") do |button_name|
   click_button(button_name)
+end
+
+Then("I click {string} {int} times") do |button_name, number|
+  number.times { click_button(button_name) }
 end
 
 Then("I scroll down") do

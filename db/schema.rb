@@ -674,12 +674,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_162240) do
     t.string "description", null: false
     t.decimal "substantive_cost_limitation", null: false
     t.decimal "delegated_functions_cost_limitation", null: false
-    t.string "substantive_scope_limitation_code", null: false
-    t.string "substantive_scope_limitation_meaning", null: false
-    t.string "substantive_scope_limitation_description", null: false
-    t.string "delegated_functions_scope_limitation_code", null: false
-    t.string "delegated_functions_scope_limitation_meaning", null: false
-    t.string "delegated_functions_scope_limitation_description", null: false
+    t.string "substantive_scope_limitation_code"
+    t.string "substantive_scope_limitation_meaning"
+    t.string "substantive_scope_limitation_description"
+    t.string "delegated_functions_scope_limitation_code"
+    t.string "delegated_functions_scope_limitation_meaning"
+    t.string "delegated_functions_scope_limitation_description"
     t.date "used_delegated_functions_on"
     t.date "used_delegated_functions_reported_on"
     t.datetime "created_at", null: false
@@ -692,6 +692,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_162240) do
     t.string "client_involvement_type_ccms_code", null: false
     t.string "client_involvement_type_description", null: false
     t.boolean "used_delegated_functions"
+    t.integer "emergency_level_of_service"
+    t.string "emergency_level_of_service_name"
+    t.integer "emergency_level_of_service_stage"
+    t.integer "substantive_level_of_service"
+    t.string "substantive_level_of_service_name"
+    t.integer "substantive_level_of_service_stage"
+    t.boolean "accepted_emergency_defaults"
+    t.boolean "accepted_substantive_defaults"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
   end

@@ -64,12 +64,6 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
-  describe "#default_level_of_service_level" do
-    it "returns hard coded value" do
-      expect(proceeding.default_level_of_service_level).to eq "3"
-    end
-  end
-
   describe "used_delegated_functions?" do
     subject(:used_delegated_functions?) { proceeding.used_delegated_functions? }
 

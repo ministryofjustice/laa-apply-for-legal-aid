@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 11:01:21 GMT
+      - Mon, 12 Sep 2022 14:07:19 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -47,9 +47,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9ec6e0112acb1b734b2dca17c1a89824
+      - 06e7572f82528288bd67a047ee880fc7
       X-Runtime:
-      - '0.052977'
+      - '0.005361'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -57,7 +57,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 11:01:21 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:19 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -68,7 +68,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -79,7 +79,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 11:01:21 GMT
+      - Mon, 12 Sep 2022 14:07:20 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -105,9 +105,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 911c5a77f259d9e28bb1f5f2bfc679aa
+      - d0f910cc2709e405212694d4b5dc42ba
       X-Runtime:
-      - '0.044000'
+      - '0.030768'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -115,7 +115,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 11:01:21 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:20 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -126,7 +126,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -137,7 +137,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 11:01:22 GMT
+      - Mon, 12 Sep 2022 14:07:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -163,9 +163,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 72035077d070e658aeb96a0fe93201e5
+      - c25e1732c0d0655eced157dcf0cd54de
       X-Runtime:
-      - '0.004616'
+      - '0.003454'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -173,7 +173,7 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 11:01:22 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:21 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
@@ -184,7 +184,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.0
+      - Faraday v1.10.2
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -195,7 +195,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 04 Aug 2022 11:01:23 GMT
+      - Mon, 12 Sep 2022 14:07:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -221,9 +221,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 7ba54a73501a99cb5beafadbf9a33eb3
+      - cc98547d9b5830fff2da22471089af19
       X-Runtime:
-      - '0.004425'
+      - '0.003611'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -231,5 +231,5 @@ http_interactions:
       string: '[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]'
-  recorded_at: Thu, 04 Aug 2022 11:01:23 GMT
+  recorded_at: Mon, 12 Sep 2022 14:07:21 GMT
 recorded_with: VCR 6.1.0

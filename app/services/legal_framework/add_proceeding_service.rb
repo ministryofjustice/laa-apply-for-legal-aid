@@ -10,7 +10,10 @@ module LegalFramework
       @ccms_code = params[:ccms_code]
 
       ActiveRecord::Base.transaction do
-        Proceeding.create(proceeding_attrs.merge(scope_limitation_attrs))
+        default_attrs = proceeding_attrs
+        attrs = Setting.enable_loop? ? default_attrs : default_attrs.merge(scope_limitation_attrs)
+        Proceeding.create(attrs)
+        # Proceeding.create(proceeding_attrs.merge(scope_limitation_attrs))
         LeadProceedingAssignmentService.call(@legal_aid_application)
       end
       true
@@ -54,6 +57,12 @@ module LegalFramework
         delegated_functions_scope_limitation_code: proceeding_type.default_scope_limitations.dig("delegated_functions", "code"),
         delegated_functions_scope_limitation_meaning: proceeding_type.default_scope_limitations.dig("delegated_functions", "meaning"),
         delegated_functions_scope_limitation_description: proceeding_type.default_scope_limitations.dig("delegated_functions", "description"),
+        substantive_level_of_service: 3,
+        substantive_level_of_service_name: "Full Representation",
+        substantive_level_of_service_stage: 8,
+        emergency_level_of_service: 3,
+        emergency_level_of_service_name: "Full Representation",
+        emergency_level_of_service_stage: 8,
       }
     end
   end
