@@ -1,6 +1,4 @@
 class Setting < ApplicationRecord
-  self.ignored_columns = %i[enable_employed_journey]
-
   def self.mock_true_layer_data?
     setting.mock_true_layer_data?
   end
