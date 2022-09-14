@@ -6,7 +6,8 @@ class DummyClass
 
   attr_accessor :val1, :val2, :val3
 
-  validates :val1, :val2, :val3, currency: { greater_than_or_equal_to: 0 }, allow_blank: true
+  validates :val1, :val2, currency: { greater_than_or_equal_to: 0 }, allow_blank: true
+  validates :val3, currency: { greater_than_or_equal_to: 0 }
 end
 
 RSpec.describe CurrencyValidator do
@@ -15,11 +16,12 @@ RSpec.describe CurrencyValidator do
 
     it "raises not numeric errors on each invalid field" do
       dummy.val1 = "abc"
-      dummy.val2 = "qwe"
+      dummy.val2 = ""
+      dummy.val3 = nil
       expect(dummy).to be_invalid
       expect(dummy.errors[:val1]).to eq ["is not a number"]
-      expect(dummy.errors[:val2]).to eq ["is not a number"]
-      expect(dummy.errors[:val3]).to be_empty
+      expect(dummy.errors[:val2]).to be_empty
+      expect(dummy.errors[:val3]).to eq ["is not a number"]
     end
 
     it "errors if given negative number" do
@@ -28,7 +30,6 @@ RSpec.describe CurrencyValidator do
       expect(dummy).to be_invalid
       expect(dummy.errors[:val1]).to eq ["must be greater than or equal to 0"]
       expect(dummy.errors[:val2]).to be_empty
-      expect(dummy.errors[:val3]).to be_empty
     end
 
     it "validates ok with £ and commas" do
@@ -37,7 +38,6 @@ RSpec.describe CurrencyValidator do
       expect(dummy).to be_invalid
       expect(dummy.errors[:val1]).to eq ["must be greater than or equal to 0"]
       expect(dummy.errors[:val2]).to be_empty
-      expect(dummy.errors[:val3]).to be_empty
     end
 
     it "does not clean the number if invalid" do
@@ -54,7 +54,6 @@ RSpec.describe CurrencyValidator do
       expect(dummy).to be_invalid
       expect(dummy.errors.details[:val1].first[:error]).to eq :too_many_decimals
       expect(dummy.errors.details[:val2].first[:error]).to eq :too_many_decimals
-      expect(dummy.errors[:val3]).to be_empty
       expect(dummy.val1).to eq "1,234.123"
       expect(dummy.val2).to eq "£1,234.8888"
     end
@@ -65,7 +64,6 @@ RSpec.describe CurrencyValidator do
       expect(dummy).to be_invalid
       expect(dummy.errors.details[:val1].first[:error]).to eq :not_a_number
       expect(dummy.errors.details[:val2].first[:error]).to eq :not_a_number
-      expect(dummy.errors[:val3]).to be_empty
       expect(dummy.val1).to eq "1,23.00"
       expect(dummy.val2).to eq "-£1,23"
     end
