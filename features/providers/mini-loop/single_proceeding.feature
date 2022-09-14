@@ -41,7 +41,7 @@ Feature: Mini-loop single proceeding
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 35 days ago
     When I click 'Save and continue'
-    Then I should see 'Proceeding 1\nInherent jurisdiction high court injunction\n!\nThe date you said you used delegated functions is over one month old.'
+    Then I should see 'Proceeding 1\nInherent jurisdiction high court injunction\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'limitations' page showing 'Inherent jurisdiction high court injunction'
