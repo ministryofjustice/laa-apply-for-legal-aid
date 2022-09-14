@@ -20,7 +20,7 @@
     "jest-environment-jsdom": "^29.0.2",
     "jest-environment-jsdom-global": "^4.0.0",
     "standard": "^17.0.0",
-    "webpack-dev-server": "^4.10.1"
+    "webpack-dev-server": "^4.11.0"
   },
   "resolutions": {
     "minimist": "^1.2.2",
