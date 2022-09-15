@@ -163,6 +163,29 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe "#income_types?" do
+    it "returns true if transaction type credits exist" do
+      benefits = build_stubbed(:transaction_type, :benefits)
+      transaction_types = class_double(TransactionType, credits: [benefits])
+      legal_aid_application = build_stubbed(:legal_aid_application)
+      allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+
+      income_types_exist = legal_aid_application.income_types?
+
+      expect(income_types_exist).to be true
+    end
+
+    it "returns false if no transaction type credits exist" do
+      transaction_types = class_double(TransactionType, credits: [])
+      legal_aid_application = build_stubbed(:legal_aid_application)
+      allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+
+      income_types_exist = legal_aid_application.income_types?
+
+      expect(income_types_exist).to be false
+    end
+  end
+
   describe "#statement_of_case_uploaded?" do
     let(:legal_aid_application) { create :legal_aid_application }
 
