@@ -8,7 +8,8 @@ module Proceedings
                   :emergency_level_of_service_stage,
                   :delegated_functions_scope_limitation_code,
                   :delegated_functions_scope_limitation_meaning,
-                  :delegated_functions_scope_limitation_description
+                  :delegated_functions_scope_limitation_description,
+                  :additional_params
 
     validates :accepted_emergency_defaults, presence: { unless: :draft? }
 
@@ -21,6 +22,7 @@ module Proceedings
       self.delegated_functions_scope_limitation_code = @defaults["default_scope"]["code"]
       self.delegated_functions_scope_limitation_meaning = @defaults["default_scope"]["meaning"]
       self.delegated_functions_scope_limitation_description = @defaults["default_scope"]["description"]
+      self.additional_params = @defaults["default_scope"]["additional_params"]
     end
 
     def save

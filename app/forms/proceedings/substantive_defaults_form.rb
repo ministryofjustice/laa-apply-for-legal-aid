@@ -8,7 +8,8 @@ module Proceedings
                   :substantive_level_of_service_stage,
                   :substantive_scope_limitation_meaning,
                   :substantive_scope_limitation_description,
-                  :substantive_scope_limitation_code
+                  :substantive_scope_limitation_code,
+                  :additional_params
 
     validates :accepted_substantive_defaults, presence: { unless: :draft? }
 
@@ -21,6 +22,7 @@ module Proceedings
       self.substantive_scope_limitation_meaning = @defaults["default_scope"]["meaning"]
       self.substantive_scope_limitation_description = @defaults["default_scope"]["description"]
       self.substantive_scope_limitation_code = @defaults["default_scope"]["code"]
+      self.additional_params = @defaults["default_scope"]["additional_params"]
     end
 
     def save
