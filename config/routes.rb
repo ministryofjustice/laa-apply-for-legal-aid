@@ -124,6 +124,7 @@ Rails.application.routes.draw do
         resource :employment_income, only: %i[show update]
         resource :student_finance, only: %i[show update]
         resource :cash_income, only: %i[show update]
+        resource :regular_incomes, only: %i[show update]
         resource :identify_types_of_income, only: %i[show update]
         resource :identify_types_of_outgoing, only: %i[show update]
         resource :has_dependants, only: %i[show update]

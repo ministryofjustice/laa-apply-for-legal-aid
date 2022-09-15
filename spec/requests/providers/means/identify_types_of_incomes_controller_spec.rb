@@ -38,6 +38,19 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
       it_behaves_like "a provider not authenticated"
     end
+
+    context "when the enhanced_bank_upload setting is enabled" do
+      it "redirects to the identify income types page" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        legal_aid_application = create(:legal_aid_application)
+        provider = legal_aid_application.provider
+        login_as provider
+
+        get providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)
+
+        expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+      end
+    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/identify_types_of_income" do
@@ -284,6 +297,19 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       before { request }
 
       it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the enhanced_bank_upload setting is enabled" do
+      it "redirects to the identify income types page" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        legal_aid_application = create(:legal_aid_application)
+        provider = legal_aid_application.provider
+        login_as provider
+
+        patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)
+
+        expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
+      end
     end
 
     context "when submitted with Save as draft" do

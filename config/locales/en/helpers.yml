@@ -11,6 +11,15 @@ en:
         postcode: This must be a UK postcode, for example SW1A 2AA.
       applicant:
         national_insurance_number: For example, 'QQ 12 34 56 C'.
+      providers_means_regular_income_form:
+        income_types: Select all that apply
+        income_types_options:
+          benefits: For example, Child Benefit or tax credits
+          friends_or_family: >-
+            Select if a friend or relative regularly gives your client money to help with
+            living costs. Do not include one-off payments.
+          maintenance_in: This includes child maintenance
+          pension: Include State, workplace and personal pensions
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
@@ -28,6 +37,19 @@ en:
       legal_aid_application:
         own_vehicle:
           <<: *true_false
+      providers_means_regular_income_form:
+        benefits_amount: Enter amount
+        friends_or_family_amount: Enter amount
+        maintenance_in_amount: Enter amount
+        property_or_lodger_amount: Enter amount
+        pension_amount: Enter amount
+        income_types_options:
+          benefits: Benefits
+          friends_or_family: Financial help from friends or family
+          maintenance_in: Maintenance payments from a former partner
+          property_or_lodger: Income from a property or lodger
+          none: My client receives none of these payments
+          pension: Pension
       application_merits_task/opponent: &opponent
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
@@ -58,3 +80,11 @@ en:
           <<: *true_false
         enhanced_bank_upload:
           <<: *true_false
+    legend:
+      providers_means_regular_income_form:
+        benefits_frequency: Select frequency
+        friends_or_family_frequency: Select frequency
+        maintenance_in_frequency: Select frequency
+        property_or_lodger_frequency: Select frequency
+        pension_frequency: Select frequency
+        income_types: Which of the following payments does your client receive?

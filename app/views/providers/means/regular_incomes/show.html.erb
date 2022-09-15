@@ -1,0 +1,18 @@
+<%= form_with model: @form, url: providers_legal_aid_application_means_regular_incomes_path(@legal_aid_application), method: :patch do |f| %>
+  <%= page_template page_title: page_title, template: :basic, form: f do %>
+    <%= f.govuk_check_boxes_fieldset :income_types, legend: {size: "xl", tag: "h1"} do %>
+      <% @form.class::INCOME_TYPES.each_with_index do |income_type, index| %>
+        <%= f.govuk_check_box :income_types, income_type, link_errors: index == 0 do %>
+          <%= f.govuk_text_field "#{income_type}_amount".to_sym, width: "one-quarter", prefix_text: "£" %>
+          <%= f.govuk_collection_radio_buttons "#{income_type}_frequency".to_sym, RegularTransaction::FREQUENCIES, :itself, ->(option) { option.humanize }, legend: {tag: "p", size: "s"} %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_check_box_divider %>
+
+      <%= f.govuk_check_box :income_types, @form.none_selected, exclusive: true %>
+    <% end %>
+
+    <%= f.govuk_submit t("generic.save_and_continue") %>
+  <% end %>
+<% end %>

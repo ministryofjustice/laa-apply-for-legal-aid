@@ -50,6 +50,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :involved_children, class_name: "ApplicationMeritsTask::InvolvedChild", dependent: :destroy
   has_many :hmrc_responses, class_name: "HMRC::Response", dependent: :destroy, inverse_of: :legal_aid_application
   has_many :employments, dependent: :destroy
+  has_many :regular_transactions, dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -217,7 +218,11 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def income_types?
-    transaction_types.credits.any?
+    if Setting.enhanced_bank_upload?
+      regular_transactions.credits.any?
+    else
+      transaction_types.credits.any?
+    end
   end
 
   def outgoing_types?

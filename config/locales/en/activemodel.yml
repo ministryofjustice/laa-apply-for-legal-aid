@@ -484,6 +484,40 @@ en:
               file_virus: "%{file_name} contains a virus"
               no_file_chosen: Upload your client's bank statements
               system_down: There was a problem uploading your file - try again
+        providers/means/regular_income_form:
+          attributes:
+            benefits_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount of benefits received
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            benefits_frequency:
+              inclusion: Select how often your client receives benefits
+            friends_or_family_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount received from friends or family
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            friends_or_family_frequency:
+              inclusion: Select how often your client receives income from friends or family
+            income_types:
+              blank: Select at least one of the options
+            maintenance_in_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount of maintenance received
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            maintenance_in_frequency:
+              inclusion: Select how often your client receives maintenance
+            property_or_lodger_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount received from property or lodgers
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            property_or_lodger_frequency:
+              inclusion: Select how often your client receives income from property or lodgers
+            pension_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount of pension received
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            pension_frequency:
+              inclusion: Select how often your client receives pension income
         reports:
           application_type: Select if you want to search all cases or a particular type
           submitted_to_ccms: Select if you want to search cases submitted to CCMS only

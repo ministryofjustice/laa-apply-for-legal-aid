@@ -163,6 +163,56 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe "#income_types?" do
+    context "when enhanced bank upload journey is enabled" do
+      it "returns true if regular payment credits exist" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        benefits = build_stubbed(:regular_transaction, :benefits)
+        regular_transactions = class_double(RegularTransaction, credits: [benefits])
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application).to receive(:regular_transactions).and_return(regular_transactions)
+
+        income_types_exist = legal_aid_application.income_types?
+
+        expect(income_types_exist).to be true
+      end
+
+      it "returns false if no regular payment credits exist" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        regular_transactions = class_double(RegularTransaction, credits: [])
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application).to receive(:regular_transactions).and_return(regular_transactions)
+
+        income_types_exist = legal_aid_application.income_types?
+
+        expect(income_types_exist).to be false
+      end
+    end
+
+    context "when enhanced bank upload journey is disabled" do
+      it "returns true if transaction type credits exist" do
+        benefits = build_stubbed(:transaction_type, :benefits)
+        transaction_types = class_double(TransactionType, credits: [benefits])
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+
+        income_types_exist = legal_aid_application.income_types?
+
+        expect(income_types_exist).to be true
+      end
+
+      it "returns false if no transaction type credits exist" do
+        transaction_types = class_double(TransactionType, credits: [])
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+
+        income_types_exist = legal_aid_application.income_types?
+
+        expect(income_types_exist).to be false
+      end
+    end
+  end
+
   describe "#statement_of_case_uploaded?" do
     let(:legal_aid_application) { create :legal_aid_application }
 
