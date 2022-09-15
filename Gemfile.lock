@@ -699,7 +699,7 @@ GEM
     tzinfo-data (1.2022.3)
       tzinfo (>= 1.0.0)
     uber (0.1.0)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     vcr (6.1.0)
     version_gem (1.1.0)
     view_component (2.69.0)
