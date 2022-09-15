@@ -1,6 +1,8 @@
 module Providers
   module Means
     class IdentifyTypesOfOutgoingsController < ProviderBaseController
+      before_action :redirect_if_enhanced_bank_upload_enabled
+
       def show
         @none_selected = legal_aid_application.no_debit_transaction_types_selected?
       end
@@ -64,6 +66,12 @@ module Providers
             .debits
             .where.not(transaction_type_id: except)
             .destroy_all
+        end
+      end
+
+      def redirect_if_enhanced_bank_upload_enabled
+        if Setting.enhanced_bank_upload?
+          redirect_to providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application)
         end
       end
     end

@@ -14,12 +14,18 @@ en:
       providers_means_regular_income_form:
         income_types: Select all that apply
         income_types_options:
-          benefits: For example, Child Benefit or tax credits
+          benefits: For example, Child Benefit or tax credits.
           friends_or_family: >-
             Select if a friend or relative regularly gives your client money to help with
             living costs. Do not include one-off payments.
-          maintenance_in: This includes child maintenance
-          pension: Include State, workplace and personal pensions
+          maintenance_in: This includes child maintenance.
+          pension: Include State, workplace and personal pensions.
+      providers_means_regular_outgoings_form:
+        outgoing_types: Select all that apply
+        outgoing_types_options:
+          rent_or_mortgage: For example, rent, mortgage or board and lodging.
+          child_care: For example, to a childminder, nanny or nursery.
+          maintenance_out: This includes child maintenance.
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
@@ -50,6 +56,17 @@ en:
           property_or_lodger: Income from a property or lodger
           none: My client receives none of these payments
           pension: Pension
+      providers_means_regular_outgoings_form:
+        rent_or_mortgage_amount: Enter amount
+        child_care_amount: Enter amount
+        maintenance_out_amount: Enter amount
+        legal_aid_amount: Enter amount
+        outgoing_types_options:
+          rent_or_mortgage: Housing payments
+          child_care: Childcare payments
+          maintenance_out: Maintenance payments to a former partner
+          legal_aid: Payments towards legal aid in a criminal case
+          none: My client makes none of these payments
       application_merits_task/opponent: &opponent
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
@@ -88,3 +105,9 @@ en:
         property_or_lodger_frequency: Select frequency
         pension_frequency: Select frequency
         income_types: Which of the following payments does your client receive?
+      providers_means_regular_outgoings_form:
+        rent_or_mortgage_frequency: Select frequency
+        child_care_frequency: Select frequency
+        maintenance_out_frequency: Select frequency
+        legal_aid_frequency: Select frequency
+        outgoing_types: Which of the following payments does your client make?

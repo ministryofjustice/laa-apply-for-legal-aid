@@ -51,7 +51,7 @@ module Flow
         },
         student_finances: {
           path: ->(application) { urls.providers_legal_aid_application_means_student_finance_path(application) },
-          forward: :identify_types_of_outgoings,
+          forward: -> { Setting.enhanced_bank_upload? ? :regular_outgoings : :identify_types_of_outgoings },
           check_answers: :means_summaries,
         },
         identify_types_of_outgoings: {
@@ -70,6 +70,17 @@ module Flow
 
             application.uploading_bank_statements? ? :means_summaries : :outgoings_summary
           end,
+        },
+        regular_outgoings: {
+          path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoing_path(application) },
+          forward: lambda do |application|
+            if application.outgoing_types?
+              :cash_outgoings
+            else
+              :has_dependants
+            end
+          end,
+          check_answers: ->(application) { application.outgoing_types? ? :cash_outgoings : :means_summaries },
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },

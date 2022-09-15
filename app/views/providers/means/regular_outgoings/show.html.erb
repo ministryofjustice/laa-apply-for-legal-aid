@@ -1,0 +1,18 @@
+<%= form_with model: @form, url: providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application), method: :patch do |f| %>
+  <%= page_template page_title: page_title, template: :basic, form: f do %>
+    <%= f.govuk_check_boxes_fieldset :outgoing_types, legend: {size: "xl"} do %>
+      <% @form.outgoing_transaction_types.each_with_index do |outgoing_type, index| %>
+        <%= f.govuk_check_box :outgoing_types, outgoing_type.name, link_errors: index == 0 do %>
+          <%= f.govuk_text_field "#{outgoing_type.name}_amount".to_sym, width: "one-quarter", prefix_text: "£" %>
+          <%= f.govuk_collection_radio_buttons "#{outgoing_type.name}_frequency".to_sym, RegularPayment::FREQUENCIES, :itself, ->(option) { option.humanize }, legend: {tag: "p", size: "s"} %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_check_box_divider %>
+
+      <%= f.govuk_check_box :outgoing_types, @form.none_selected, exclusive: true %>
+    <% end %>
+
+    <%= f.govuk_submit t("generic.save_and_continue") %>
+  <% end %>
+<% end %>
