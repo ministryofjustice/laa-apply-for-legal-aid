@@ -216,6 +216,32 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         expect(legal_aid_application.regular_transactions)
           .to contain_exactly(regular_outgoing_payment)
       end
+
+      it "destroys any existing cash income transactions" do
+        legal_aid_application = create(:legal_aid_application)
+        benefits = create(:transaction_type, :benefits)
+        child_care = create(:transaction_type, :child_care)
+        _benefits_cash_transaction = create(
+          :cash_transaction,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        child_care_cash_transaction = create(
+          :cash_transaction,
+          legal_aid_application:,
+          transaction_type: child_care,
+        )
+        params = {
+          "income_types" => ["", "none"],
+          "legal_aid_application" => legal_aid_application,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.cash_transactions)
+          .to contain_exactly(child_care_cash_transaction)
+      end
     end
 
     context "when the correct attributes are provided" do
@@ -254,15 +280,17 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be false
       end
 
-      it "updates an application's regular transactions" do
+      it "updates an application's regular income transactions" do
         legal_aid_application = create(:legal_aid_application)
         benefits = create(:transaction_type, :benefits)
         pension = create(:transaction_type, :pension)
-        maintenance_in = create(:transaction_type, :maintenance_in)
-        _maintenance_in_payment = create(
+        maintenance_out = create(:transaction_type, :maintenance_out)
+        _maintenance_out_transaction = create(
           :regular_transaction,
           legal_aid_application:,
-          transaction_type: maintenance_in,
+          transaction_type: maintenance_out,
+          amount: 100,
+          frequency: "weekly",
         )
         params = {
           "income_types" => ["", benefits.name, pension.name],
@@ -279,9 +307,42 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         form.save
 
         regular_transactions = legal_aid_application.regular_transactions
-        expect(regular_transactions.count).to eq 2
+        expect(regular_transactions.count).to eq 3
         expect(regular_transactions.pluck(:transaction_type_id, :amount, :frequency))
-          .to contain_exactly([benefits.id, 250.50, "weekly"], [pension.id, 100, "monthly"])
+          .to contain_exactly(
+            [benefits.id, 250.50, "weekly"],
+            [pension.id, 100, "monthly"],
+            [maintenance_out.id, 100, "weekly"],
+          )
+      end
+
+      it "destroys any existing cash income transactions" do
+        legal_aid_application = create(:legal_aid_application)
+        benefits = create(:transaction_type, :benefits)
+        pension = create(:transaction_type, :pension)
+        child_care = create(:transaction_type, :child_care)
+        _benefits_cash_transaction = create(
+          :cash_transaction,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        child_care_cash_transaction = create(
+          :cash_transaction,
+          legal_aid_application:,
+          transaction_type: child_care,
+        )
+        params = {
+          "income_types" => ["", pension.name],
+          "pension_amount" => "250.50",
+          "pension_frequency" => "weekly",
+          "legal_aid_application" => legal_aid_application,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.cash_transactions)
+          .to contain_exactly(child_care_cash_transaction)
       end
     end
   end

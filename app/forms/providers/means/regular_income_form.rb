@@ -27,6 +27,7 @@ module Providers
         ApplicationRecord.transaction do
           legal_aid_application.update!(no_credit_transaction_types_selected: none_selected?)
           legal_aid_application.regular_transactions.credits.destroy_all
+          legal_aid_application.cash_transactions.credits.destroy_all
 
           unless none_selected?
             regular_transactions.each(&:save)
