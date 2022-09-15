@@ -63,7 +63,7 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_emergency_level_of_service_path(application, proceeding)
           end,
-          forward: :substantive_defaults,
+          forward: :emergency_scope_limitations,
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,
         },
@@ -71,6 +71,24 @@ module Flow
           path: lambda do |application|
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_substantive_level_of_service_path(application, proceeding)
+          end,
+          forward: :substantive_scope_limitations,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
+        emergency_scope_limitations: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_emergency_scope_limitation_path(application, proceeding)
+          end,
+          forward: :substantive_defaults,
+          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          check_answers: :check_provider_answers,
+        },
+        substantive_scope_limitations: {
+          path: lambda do |application|
+            proceeding = Proceeding.find(application.provider_step_params["id"])
+            urls.providers_legal_aid_application_substantive_scope_limitation_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise

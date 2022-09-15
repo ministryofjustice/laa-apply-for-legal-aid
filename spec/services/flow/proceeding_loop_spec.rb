@@ -128,12 +128,30 @@ RSpec.describe Flow::ProceedingLoop do
 
           before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
-          it { is_expected.to be :substantive_defaults }
+          it { is_expected.to be :emergency_scope_limitations }
         end
 
         context "and is on the substantive_level_of_service page" do
           let(:loop_on?) { true }
           let(:provider_step) { "substantive_level_of_service" }
+
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
+
+          it { is_expected.to be :substantive_scope_limitations }
+        end
+
+        context "and is on the emergency_scope_limitations page" do
+          let(:loop_on?) { true }
+          let(:provider_step) { "emergency_scope_limitations" }
+
+          before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
+
+          it { is_expected.to be :substantive_defaults }
+        end
+
+        context "and is on the substantive_scope_limitations page" do
+          let(:loop_on?) { true }
+          let(:provider_step) { "substantive_scope_limitations" }
 
           before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 

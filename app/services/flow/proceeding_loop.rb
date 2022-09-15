@@ -1,7 +1,7 @@
 module Flow
   class ProceedingLoop
     LOOP_CONTROLLERS = %w[client_involvement_type delegated_functions confirm_delegated_functions_date].freeze
-    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults emergency_level_of_service substantive_defaults substantive_level_of_service].freeze
+    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults emergency_level_of_service emergency_scope_limitations substantive_defaults substantive_level_of_service substantive_scope_limitations].freeze
 
     def initialize(application)
       @application = application
@@ -23,7 +23,7 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "in_scope_of_laspos", "has_other_proceedings", "substantive_level_of_service"
+        when "in_scope_of_laspos", "has_other_proceedings", "substantive_scope_limitations"
           :client_involvement_type
         when "client_involvement_type"
           :delegated_functions
@@ -38,6 +38,10 @@ module Flow
         when "substantive_defaults"
           current_proceeding.accepted_substantive_defaults ? :client_involvement_type : :substantive_level_of_service
         when "emergency_level_of_service"
+          :emergency_scope_limitations
+        when "substantive_level_of_service"
+          :substantive_scope_limitations
+        when "emergency_scope_limitations"
           :substantive_defaults
         end
       end
@@ -89,7 +93,7 @@ module Flow
       # this checks if the current provider step is in the last two values in controllers
       # this is because confirm_delegated_functions_date is optional so
       # delegated_functions or confirm_delegated_functions_date could both be the final page
-      controllers[-2..].include?(@application.provider_step)
+      controllers[-3..].include?(@application.provider_step)
     end
 
     def final_proceeding_in_loop

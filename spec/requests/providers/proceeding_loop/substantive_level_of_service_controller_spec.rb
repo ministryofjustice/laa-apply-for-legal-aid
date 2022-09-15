@@ -92,7 +92,7 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "redirects to next page" do
-          expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+          expect(response.body).to redirect_to(providers_legal_aid_application_substantive_scope_limitation_path(application_id, proceeding_id))
         end
       end
     end
