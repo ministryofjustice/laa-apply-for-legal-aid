@@ -3,6 +3,7 @@ FactoryBot.define do
     legal_aid_application
     transaction_type
     amount { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
+    month_number { 1 }
 
     trait :credit_month1 do
       transaction_date { Time.zone.today.at_beginning_of_month - 1.month }

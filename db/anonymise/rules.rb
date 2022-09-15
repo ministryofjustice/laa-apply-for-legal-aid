@@ -142,6 +142,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     name: -> { Faker::Name.name },
     email: -> { Faker::Internet.email },
   },
+  regular_transactions: {},
   savings_amounts: {},
   scheduled_mailings: {
     # Should we just not export this?

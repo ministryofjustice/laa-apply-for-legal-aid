@@ -12,7 +12,11 @@ module Flow
             when :hmrc_single_employment, :unexpected_employment_data
               :employment_incomes
             when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
-              :identify_types_of_incomes
+              if Setting.enhanced_bank_upload?
+                :regular_incomes
+              else
+                :identify_types_of_incomes
+              end
             else
               raise "Unexpected hmrc status #{status.inspect}"
             end
@@ -20,6 +24,17 @@ module Flow
         },
         identify_types_of_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_identify_types_of_income_path(application) },
+          forward: lambda do |application|
+            application.income_types? ? :cash_incomes : :student_finances
+          end,
+          check_answers: lambda do |application|
+            return :cash_incomes if application.income_types?
+
+            application.uploading_bank_statements? ? :means_summaries : :income_summary
+          end,
+        },
+        regular_incomes: {
+          path: ->(application) { urls.providers_legal_aid_application_means_regular_incomes_path(application) },
           forward: lambda do |application|
             application.income_types? ? :cash_incomes : :student_finances
           end,

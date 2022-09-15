@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_144657) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_15_104106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -739,6 +739,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_144657) do
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
+  create_table "regular_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.uuid "transaction_type_id", null: false
+    t.decimal "amount", null: false
+    t.string "frequency", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_regular_transactions_on_legal_aid_application_id"
+    t.index ["transaction_type_id"], name: "index_regular_transactions_on_transaction_type_id"
+  end
+
   create_table "savings_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "offline_current_accounts"
@@ -885,6 +896,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_144657) do
   add_foreign_key "proceedings", "legal_aid_applications"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
+  add_foreign_key "regular_transactions", "legal_aid_applications", on_delete: :cascade
+  add_foreign_key "regular_transactions", "transaction_types"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "scheduled_mailings", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
