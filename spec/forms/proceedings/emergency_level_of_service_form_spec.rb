@@ -43,9 +43,9 @@ RSpec.describe Proceedings::EmergencyLevelOfServiceForm, :vcr, type: :form do
         expect(form).to be_invalid
       end
 
-      #   it "generates the expected error message" do
-      #     expect(form.errors.map(&:attribute)).to eq [:selected_emergency_service_levels]
-      #   end
+      it "generates the expected error message" do
+        expect(form.errors.map(&:attribute)).to eq [:emergency_level_of_service]
+      end
     end
   end
 end

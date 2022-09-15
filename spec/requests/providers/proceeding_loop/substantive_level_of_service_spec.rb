@@ -58,7 +58,7 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
                  substantive_application_deadline_on: 10.days.from_now)
         end
 
-        it "displays a message that the level of service cannot be changed" do
+        it "asks the user to select a level of service" do
           expect(response.body).to include("For the substantive application, select the level of service")
         end
       end
@@ -66,7 +66,7 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/substantive_level_of_service/:proceeding_id" do
-    subject(:post_sd) { patch "/providers/applications/#{application_id}/substantive_level_of_service/#{proceeding_id}", params: }
+    subject(:post_slos) { patch "/providers/applications/#{application_id}/substantive_level_of_service/#{proceeding_id}", params: }
 
     let(:params) do
       {
@@ -77,7 +77,7 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
     end
 
     context "when the provider is not authenticated" do
-      before { post_sd }
+      before { post_slos }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -85,7 +85,7 @@ RSpec.describe "SubstantiveLevelOfServiceController", :vcr, type: :request do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        post_sd
+        post_slos
       end
 
       context "when the Continue button is pressed" do
