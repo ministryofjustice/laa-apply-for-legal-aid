@@ -1,0 +1,5 @@
+class ScopeLimitation < ApplicationRecord
+  belongs_to :proceeding
+
+  enum scope_type: { substantive: 0, emergency: 1 }
+end
