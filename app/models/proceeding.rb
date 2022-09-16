@@ -13,6 +13,8 @@ class Proceeding < ApplicationRecord
            through: :proceeding_linked_children,
            source: :involved_child
 
+  has_many :scope_limitations, dependent: :destroy
+
   scope :in_order_of_addition, -> { order(:created_at) }
   scope :incomplete, -> { where(used_delegated_functions: nil) }
   scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
