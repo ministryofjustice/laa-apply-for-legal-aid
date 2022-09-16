@@ -24,15 +24,25 @@ module Proceedings
     end
 
     def save
-      if accepted_emergency_defaults&.to_s == "false"
+      case accepted_emergency_defaults&.to_s
+      when "false"
         attributes[:emergency_level_of_service] = nil
         attributes[:emergency_level_of_service_name] = nil
         attributes[:emergency_level_of_service_stage] = nil
-        attributes[:delegated_functions_scope_limitation_code] = nil
-        attributes[:delegated_functions_scope_limitation_meaning] = nil
-        attributes[:delegated_functions_scope_limitation_description] = nil
+      when "true"
+        model.scope_limitations.create!(scope_type: :emergency,
+                                        code: delegated_functions_scope_limitation_code,
+                                        meaning: delegated_functions_scope_limitation_meaning,
+                                        description: delegated_functions_scope_limitation_description)
       end
       super
+    end
+
+    def exclude_from_model
+      %i[additional_params
+         delegated_functions_scope_limitation_code
+         delegated_functions_scope_limitation_meaning
+         delegated_functions_scope_limitation_description]
     end
   end
 end
