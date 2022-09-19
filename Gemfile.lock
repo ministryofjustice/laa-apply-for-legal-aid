@@ -18,7 +18,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.3.0)
+    aasm (5.3.1)
       concurrent-ruby (~> 1.0)
     actioncable (7.0.4)
       actionpack (= 7.0.4)
@@ -746,7 +746,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aasm (~> 5.3.0)
+  aasm (~> 5.3.1)
   action_dispatch-testing-integration-capybara!
   active_model_serializers (~> 0.10.13)
   addressable
