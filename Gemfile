@@ -148,7 +148,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-sidekiq"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 5.1"
+  gem "shoulda-matchers", "~> 5.2"
   gem "simplecov", require: false
   gem "simplecov-rcov"
   gem "super_diff"
