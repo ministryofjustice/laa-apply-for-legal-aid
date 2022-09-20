@@ -28,6 +28,7 @@ en:
         phase: beta
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: Apply for legal aid
+        notice: Notice
     logout:
       admin: Admin sign out
       provider: Sign out

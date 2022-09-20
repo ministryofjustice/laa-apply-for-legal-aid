@@ -8,8 +8,7 @@
   <% end %>
 </ul>
 
-<div class="govuk-warning-text declaration-warning">
-  <span class="govuk-warning-text__icon" aria-hidden="true" style="top: 30px;">!</span>
+<%= govuk_warning_text do %>
   <p class="govuk-body">
     <strong><%= t('.warning_list_summary') %>:</strong>
   </p>
@@ -19,4 +18,4 @@
       <li><strong><%= warning %></strong></li>
     <% end %>
   </ul>
-</div>
+<% end %>

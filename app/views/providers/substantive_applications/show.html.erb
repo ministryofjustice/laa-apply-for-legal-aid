@@ -17,13 +17,7 @@
       <%= form.govuk_radio_button :substantive_application, false, label: { text: t('.no_start_later') } %>
     <% end %>
 
-    <div class='govuk-warning-text'>
-      <span class='govuk-warning-text__icon' aria-hidden='true'>!</span>
-      <strong class='govuk-warning-text__text'>
-        <span class='govuk-warning-text__assistive'>Notice</span>
-        <%= t('.must_submit_by', deadline: @form.substantive_application_deadline_on) %>
-      </strong>
-    </div>
+    <%= govuk_warning_text(text: t('.must_submit_by', deadline: @form.substantive_application_deadline_on) ) %>
 
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>

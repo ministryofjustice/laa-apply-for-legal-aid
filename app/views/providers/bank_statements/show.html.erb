@@ -37,6 +37,8 @@
           <%= t('.info') %>
         </p>
 
+      <%= govuk_warning_text(text: t('.warning')) %>
+
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden <%= form_error_class %>" id="dropzone-form-group" aria-labelledby="dropzone-label">
             <label class="govuk-label govuk-label--m" id="dropzone-label">

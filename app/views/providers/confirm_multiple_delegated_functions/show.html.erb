@@ -11,13 +11,9 @@
 
       <%= govuk_fieldset_header page_title %>
 
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive"><%= t(".#{scope}.warning_text") %></span>
-          <%= t(".#{scope}.warning_text") %>
-        </strong>
-      </div>
+      <%= govuk_warning_text(icon_fallback_text: t(".#{scope}.warning_text")) do %>
+        <%= t(".#{scope}.warning_text") %>
+      <% end %>
 
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m govuk-visually-hidden"><%= t('.table_caption') %></caption>
