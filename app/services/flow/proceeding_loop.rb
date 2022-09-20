@@ -1,7 +1,7 @@
 module Flow
   class ProceedingLoop
     LOOP_CONTROLLERS = %w[client_involvement_type delegated_functions confirm_delegated_functions_date].freeze
-    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults substantive_defaults].freeze
+    EXTENDED_LOOP_CONTROLLERS = %w[emergency_defaults emergency_level_of_service substantive_defaults substantive_level_of_service].freeze
 
     def initialize(application)
       @application = application
@@ -23,7 +23,7 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "in_scope_of_laspos", "has_other_proceedings", "substantive_defaults"
+        when "in_scope_of_laspos", "has_other_proceedings", "substantive_level_of_service"
           :client_involvement_type
         when "client_involvement_type"
           :delegated_functions
@@ -34,6 +34,10 @@ module Flow
             :client_involvement_type
           end
         when "emergency_defaults"
+          current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
+        when "substantive_defaults"
+          current_proceeding.accepted_substantive_defaults ? :client_involvement_type : :substantive_level_of_service
+        when "emergency_level_of_service"
           :substantive_defaults
         end
       end

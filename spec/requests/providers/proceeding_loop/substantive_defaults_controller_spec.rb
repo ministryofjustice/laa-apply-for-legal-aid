@@ -73,8 +73,24 @@ RSpec.describe "SubstantiveDefaultsController", :vcr, type: :request do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to next page" do
-          expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+        context "when the provider accepts the defaults" do
+          let(:params) do
+            {
+              proceeding: {
+                accepted_substantive_defaults: true,
+              },
+            }
+          end
+
+          it "redirects to next page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
+          end
+        end
+
+        context "when the provider does not accept the defaults" do
+          it "redirects to next page" do
+            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_level_of_service_path(application_id, proceeding_id))
+          end
         end
 
         context "when checking answers" do
