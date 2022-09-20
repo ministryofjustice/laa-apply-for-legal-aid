@@ -33,7 +33,7 @@ class ApplicationRequirementSetup
       copy_sample_files
       setup_database
       remove_logs
-      npm_install
+      yarn_install
       restart
       install_clam_av
     end
@@ -65,9 +65,9 @@ class ApplicationRequirementSetup
     system! 'bin/rails log:clear tmp:clear'
   end
 
-  def npm_install
+  def yarn_install
     puts "\n== Installing JavaScript dependencies =="
-    system! 'npm install'
+    system! 'yarn install'
   end
 
   def restart
