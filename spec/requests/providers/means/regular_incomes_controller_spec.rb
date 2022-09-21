@@ -150,32 +150,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
       end
     end
 
-    context "when checking answers for an application uploading bank statements and none is selected" do
-      it "updates the application and redirects to the means summaries page" do
-        Setting.setting.update!(enhanced_bank_upload: true)
-        non_passported_permission = create(:permission, :non_passported)
-        bank_statement_permission = create(:permission, :bank_statement_upload)
-        provider = create(:provider, permissions: [non_passported_permission, bank_statement_permission])
-        legal_aid_application = create(
-          :legal_aid_application,
-          :with_non_passported_state_machine,
-          :checking_non_passported_means,
-          provider_received_citizen_consent: false,
-          no_credit_transaction_types_selected: false,
-          provider:,
-        )
-        login_as provider
-        login_as provider
-        params = { providers_means_regular_income_form: { transaction_type_ids: ["", "none"] } }
-
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
-
-        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
-        expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
-      end
-    end
-
-    context "when checking answers for an application not uploading bank statements and none is selected" do
+    context "when checking answers and none is selected" do
       it "updates the application and redirects to the income summary page" do
         Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
@@ -190,7 +165,7 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application), params: params
 
-        expect(response).to redirect_to(providers_legal_aid_application_income_summary_index_path(legal_aid_application))
+        expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(legal_aid_application))
         expect(legal_aid_application.reload.no_credit_transaction_types_selected).to be true
       end
     end

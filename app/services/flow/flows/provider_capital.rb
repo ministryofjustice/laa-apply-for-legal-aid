@@ -33,17 +33,7 @@ module Flow
             application.uploading_bank_statements? ? :means_summaries : :income_summary
           end,
         },
-        regular_incomes: {
-          path: ->(application) { urls.providers_legal_aid_application_means_regular_incomes_path(application) },
-          forward: lambda do |application|
-            application.income_types? ? :cash_incomes : :student_finances
-          end,
-          check_answers: lambda do |application|
-            return :cash_incomes if application.income_types?
-
-            application.uploading_bank_statements? ? :means_summaries : :income_summary
-          end,
-        },
+        regular_incomes: Flow::Steps::RegularIncomeStep,
         cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
           forward: :student_finances,
