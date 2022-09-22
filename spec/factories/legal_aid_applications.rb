@@ -816,6 +816,13 @@ FactoryBot.define do
       end
     end
 
+    trait :with_regular_transactions do
+      after(:create) do |application|
+        create(:regular_transaction, :maintenance_in, legal_aid_application: application)
+        create(:regular_transaction, :maintenance_out, legal_aid_application: application)
+      end
+    end
+
     trait :with_cfe_v1_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application

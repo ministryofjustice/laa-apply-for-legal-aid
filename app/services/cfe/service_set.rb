@@ -13,7 +13,7 @@ module CFE
       ObtainAssessmentResultService,
     ].freeze
 
-    NON_PASSPORTED_SERVICES = [
+    NON_PASSPORTED_WITH_BANK_TRANSACTIONS_SERVICES = [
       CreateAssessmentService,
       CreateProceedingTypesService,
       CreateApplicantService,
@@ -31,6 +31,22 @@ module CFE
       ObtainAssessmentResultService,
     ].freeze
 
+    NON_PASSPORTED_WITH_REGULAR_TRANSACTIONS_SERVICES = [
+      CreateAssessmentService,
+      CreateProceedingTypesService,
+      CreateApplicantService,
+      CreateCapitalsService,
+      CreateVehiclesService,
+      CreatePropertiesService,
+      CreateExplicitRemarksService,
+      CreateDependantsService,
+      CreateIrregularIncomesService,
+      CreateEmploymentsService,
+      CreateRegularTransactionsService,
+      CreateCashTransactionsService,
+      ObtainAssessmentResultService,
+    ].freeze
+
     def self.call(object)
       new(object).call
     end
@@ -40,10 +56,18 @@ module CFE
     end
 
     def call
+      service_set
+    end
+
+  private
+
+    def service_set
       if object.passported?
         PASSPORTED_SERVICES
+      elsif object.non_passported? && object.using_enhanced_bank_upload?
+        NON_PASSPORTED_WITH_REGULAR_TRANSACTIONS_SERVICES
       elsif object.non_passported?
-        NON_PASSPORTED_SERVICES
+        NON_PASSPORTED_WITH_BANK_TRANSACTIONS_SERVICES
       else
         raise ArgumentError, "#{object.class} does not have a set of CFE submission services!"
       end

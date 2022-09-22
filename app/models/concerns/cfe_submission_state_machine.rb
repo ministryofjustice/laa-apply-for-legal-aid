@@ -18,6 +18,7 @@ module CFESubmissionStateMachine
       state :other_income_created
       state :irregular_income_created
       state :explicit_remarks_created
+      state :regular_transactions_created
       state :cash_transactions_created
       state :results_obtained
       state :employments_created
@@ -71,14 +72,20 @@ module CFESubmissionStateMachine
 
       event :irregular_income_created do
         transitions from: :other_income_created, to: :irregular_income_created, guard: :non_passported?
+        transitions from: :dependants_created, to: :irregular_income_created, guard: :non_passported?
       end
 
       event :employments_created do
         transitions from: :irregular_income_created, to: :employments_created, guard: :non_passported?
       end
 
+      event :regular_transactions_created do
+        transitions from: :employments_created, to: :regular_transactions_created, guard: :non_passported?
+      end
+
       event :cash_transactions_created do
         transitions from: :employments_created, to: :cash_transactions_created, guard: :non_passported?
+        transitions from: :regular_transactions_created, to: :cash_transactions_created, guard: :non_passported?
       end
 
       event :explicit_remarks_created do
@@ -104,6 +111,7 @@ module CFESubmissionStateMachine
         transitions from: :other_income_created, to: :failed
         transitions from: :irregular_income_created, to: :failed
         transitions from: :explicit_remarks_created, to: :failed
+        transitions from: :regular_transactions_created, to: :failed
         transitions from: :cash_transactions_created, to: :failed
         transitions from: :employments_created, to: :failed
         transitions from: :cfe_not_called, to: :failed

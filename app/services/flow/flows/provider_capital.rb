@@ -213,7 +213,16 @@ module Flow
         means_summaries: {
           path: ->(application) { urls.providers_legal_aid_application_means_summary_path(application) },
           forward: lambda do |application|
-            application.uploading_bank_statements? ? :no_eligibility_assessments : :capital_income_assessment_results
+            if application.using_enhanced_bank_upload? || !application.uploading_bank_statements?
+              :capital_income_assessment_results
+            else
+              :no_eligibility_assessments
+            end
+            if application.uploading_bank_statements?
+              application.using_enhanced_bank_upload? ? :capital_income_assessment_results : :no_eligibility_assessments
+            else
+              :capital_income_assessment_results
+            end
           end,
         },
         no_eligibility_assessments: {
