@@ -30,6 +30,10 @@ FactoryBot.define do
       used_delegated_functions_reported_on { Time.zone.today }
     end
 
+    transient do
+      no_scope_limitations { false }
+    end
+
     trait :da001 do
       lead_proceeding { true }
       ccms_code { "DA001" }
@@ -37,9 +41,9 @@ FactoryBot.define do
       description { "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court." }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "FM062" }
@@ -73,9 +77,9 @@ FactoryBot.define do
       end
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "AA019" }
@@ -107,9 +111,9 @@ FactoryBot.define do
       description { "to be represented on an application for an occupation order." }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "AA019" }
@@ -141,9 +145,9 @@ FactoryBot.define do
       description { "to be represented on an application to extend, vary or discharge an order under Part IV Family Law Act 1996. " }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "AA019" }
@@ -175,9 +179,9 @@ FactoryBot.define do
       description { "to be represented on an application for a non-molestation order." }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "AA019" }
@@ -209,9 +213,9 @@ FactoryBot.define do
       description { "to be represented on an application for a child arrangements order –where the child(ren) will live" }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "FM059" }
@@ -245,9 +249,9 @@ FactoryBot.define do
       description { "to be represented on an application for a child arrangements order –where the child(ren) will live" }
       substantive_cost_limitation { 25_000 }
       delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding|
-        create(:scope_limitation, :emergency, proceeding:)
-        create(:scope_limitation, :substantive, proceeding:)
+      after(:create) do |proceeding, evaluator|
+        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
+        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
       # substantive_scope_limitation_code { "FM059" }
