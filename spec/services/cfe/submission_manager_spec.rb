@@ -147,16 +147,47 @@ module CFE
               submission.fail!
             end
 
+            it "creates CFE Submission for the legal aid application" do
+              expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
+            end
+
             it "records error in submission" do
-              submission_manager.call
+              expect { submission_manager.call }.to change(submission, :aasm_state).from("initialised").to("failed")
               expect(submission.error_message).to eq(message)
               expect(submission).to be_failed
+            end
+
+            it "captures error" do
+              expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
+              submission_manager.call
+            end
+
+            context "when state already :failed" do
+              before do
+                submission.fail!
+                allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, "my second error")
+              end
+
+              it "does not change state from failed" do
+                expect { submission_manager.call }.not_to change(submission, :aasm_state).from("failed")
+              end
+
+              it "records subsequent error message for submission" do
+                submission_manager.call
+                expect(submission.error_message).to eq("my second error")
+                expect(submission).to be_failed
+              end
+
+              it "captures subsequent error" do
+                expect(AlertManager).to receive(:capture_exception).with(message_contains("my second error"))
+                submission_manager.call
+              end
             end
           end
         end
       end
 
-      context "with a non-passported application" do
+      context "with a non-passported truelayer application" do
         let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
 
         it "creates a submission record for the application" do
