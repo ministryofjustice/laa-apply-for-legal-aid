@@ -65,9 +65,9 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
 
           it "creates a scope_limitation object" do
             expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.where(scope_type: :emergency).first.code).to eq "CV117"
-            expect(proceeding.scope_limitations.where(scope_type: :emergency).first.meaning).to eq "Interim order inc. return date"
-            expect(proceeding.scope_limitations.where(scope_type: :emergency).first.description).to eq "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date."
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
+                                                                                                    meaning: "Interim order inc. return date",
+                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.")
           end
         end
       end
