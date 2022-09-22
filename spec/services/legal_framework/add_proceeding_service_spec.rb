@@ -44,13 +44,11 @@ module LegalFramework
           context "is on" do
             let(:enable_loop) { true }
 
+            it "does not create scope_limitations" do
+              expect(proceeding.reload.scope_limitations.count).to eq 0
+            end
+
             it "does not populate the scope_limitation_attrs" do
-              expect(proceeding.substantive_scope_limitation_code).to be_nil
-              expect(proceeding.substantive_scope_limitation_meaning).to be_nil
-              expect(proceeding.substantive_scope_limitation_description).to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_code).to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_meaning).to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_description).to be_nil
               expect(proceeding.substantive_level_of_service).to be_nil
               expect(proceeding.substantive_level_of_service_name).to be_nil
               expect(proceeding.substantive_level_of_service_stage).to be_nil
@@ -63,13 +61,11 @@ module LegalFramework
           context "is off" do
             let(:enable_loop) { false }
 
+            it "creates scope_limitations" do
+              expect(proceeding.reload.scope_limitations.count).to eq 2
+            end
+
             it "populates the scope_limitation_attrs" do
-              expect(proceeding.substantive_scope_limitation_code).not_to be_nil
-              expect(proceeding.substantive_scope_limitation_meaning).not_to be_nil
-              expect(proceeding.substantive_scope_limitation_description).not_to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_code).not_to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_meaning).not_to be_nil
-              expect(proceeding.delegated_functions_scope_limitation_description).not_to be_nil
               expect(proceeding.substantive_level_of_service).to be 3
               expect(proceeding.substantive_level_of_service_name).to eql "Full Representation"
               expect(proceeding.substantive_level_of_service_stage).to be 8
