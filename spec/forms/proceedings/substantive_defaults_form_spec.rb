@@ -37,9 +37,9 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
 
           it "creates a scope_limitation object" do
             expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.where(scope_type: :substantive).first.code).to eq "AA019"
-            expect(proceeding.scope_limitations.where(scope_type: :substantive).first.meaning).to eq "Injunction FLA-to final hearing"
-            expect(proceeding.scope_limitations.where(scope_type: :substantive).first.description).to eq "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings)."
+            expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "AA019",
+                                                                                                      meaning: "Injunction FLA-to final hearing",
+                                                                                                      description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
           end
         end
       end
