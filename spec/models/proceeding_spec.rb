@@ -86,6 +86,12 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
+  describe "#delegated_functions_scope_limitation_meaning" do # TEMP for coverage
+    subject(:delegated_functions_scope_limitation_meaning) { proceeding.delegated_functions_scope_limitation_meaning }
+
+    it { is_expected.not_to be_nil }
+  end
+
   describe "#proceeding_case_p_num" do
     it "prefixes the proceeding case id with P_" do
       legal_aid_application = create :legal_aid_application, :with_proceedings
