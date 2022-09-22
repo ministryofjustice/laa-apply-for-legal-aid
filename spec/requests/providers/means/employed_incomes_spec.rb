@@ -83,17 +83,24 @@ RSpec.describe "employed incomes request", type: :request do
           expect(application.reload.extra_employment_information_details).not_to be_empty
         end
 
-        it "redirects to income summary page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
+        context "when the application is using the enhanced bank upload journey" do
+          let(:application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
+
+          before do
+            Setting.setting.update!(enhanced_bank_upload: true)
+            permission = create(:permission, :bank_statement_upload)
+            provider.permissions << permission
+            provider.save!
+          end
+
+          it "redirects to the regular income page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(application))
+          end
         end
 
-        context "when the applicant has reported income" do
-          let!(:salary) { create :transaction_type, :credit, name: "salary" }
-          let!(:benefits) { create :transaction_type, :credit, name: "benefits" }
-          let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [salary, benefits] }
-
-          it "redirects to check passported answers" do
+        context "when the application is not using the enhanced bank upload journey" do
+          it "redirects to the identify types of income page" do
             request
             expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(application))
           end

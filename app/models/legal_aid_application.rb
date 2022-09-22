@@ -507,15 +507,26 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def uploading_bank_statements?
-    citizen_consent_given = provider_received_citizen_consent.nil? ? true : provider_received_citizen_consent?
-    provider.bank_statement_upload_permissions? && (!citizen_consent_given || attachments.bank_statement_evidence.exists?)
+    return false unless provider.bank_statement_upload_permissions?
+
+    !client_open_banking_consent? || attachments.bank_statement_evidence.exists?
   end
 
   def has_transaction_type?(transaction_type)
     legal_aid_application_transaction_types.map(&:transaction_type_id).include?(transaction_type.id)
   end
 
+  def using_enhanced_bank_upload?
+    Setting.enhanced_bank_upload? && uploading_bank_statements?
+  end
+
 private
+
+  def client_open_banking_consent?
+    return true if provider_received_citizen_consent.nil?
+
+    provider_received_citizen_consent?
+  end
 
   def bank_transactions_by_type(type)
     bank_transactions.__send__(type).order(happened_at: :desc).by_parent_transaction_type

@@ -1575,6 +1575,68 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe "#using_enhanced_bank_upload?" do
+    context "when the `enhanced_bank_upload` setting is enabled, and the " \
+            "application is uploading bank statements" do
+      it "returns true" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application)
+          .to receive(:uploading_bank_statements?)
+          .and_return(true)
+
+        result = legal_aid_application.using_enhanced_bank_upload?
+
+        expect(result).to be true
+      end
+    end
+
+    context "when the `enhanced_bank_upload` setting is enabled, but the " \
+            "application is not uploading bank statements" do
+      it "returns false" do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application)
+          .to receive(:uploading_bank_statements?)
+          .and_return(false)
+
+        result = legal_aid_application.using_enhanced_bank_upload?
+
+        expect(result).to be false
+      end
+    end
+
+    context "when the `enhanced_bank_upload` setting is disabled, and the " \
+            "application is uploading bank statements" do
+      it "returns false" do
+        Setting.setting.update!(enhanced_bank_upload: false)
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application)
+          .to receive(:uploading_bank_statements?)
+          .and_return(true)
+
+        result = legal_aid_application.using_enhanced_bank_upload?
+
+        expect(result).to be false
+      end
+    end
+
+    context "when the `enhanced_bank_upload` setting is disabled, and the " \
+            "application is not uploading bank statements" do
+      it "returns false" do
+        Setting.setting.update!(enhanced_bank_upload: false)
+        legal_aid_application = build_stubbed(:legal_aid_application)
+        allow(legal_aid_application)
+          .to receive(:uploading_bank_statements?)
+          .and_return(false)
+
+        result = legal_aid_application.using_enhanced_bank_upload?
+
+        expect(result).to be false
+      end
+    end
+  end
+
 private
 
   def uploaded_evidence_output
