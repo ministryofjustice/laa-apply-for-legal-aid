@@ -677,7 +677,7 @@ GEM
       hashie
       version_gem (~> 1.1)
     socksify (1.7.1)
-    spring (4.0.0)
+    spring (4.1.0)
     strscan (3.0.4)
     super_diff (0.9.0)
       attr_extras (>= 6.2.4)
