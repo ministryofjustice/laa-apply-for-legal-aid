@@ -3,6 +3,111 @@ require "rails_helper"
 RSpec.describe LegalAidApplication, type: :model do
   let(:legal_aid_application) { create :legal_aid_application }
 
+  # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
+  # that then become redundant.
+  describe ".destroy_all" do
+    subject { described_class.destroy_all }
+
+    let!(:legal_aid_application) do
+      create :legal_aid_application,
+             :with_everything,
+             :with_multiple_proceedings_inc_section8,
+             :with_negative_benefit_check_result,
+             :with_bank_transactions,
+             :with_chances_of_success
+    end
+
+    before do
+      create :legal_aid_application_transaction_type, legal_aid_application:
+    end
+
+    # A bit verbose, but minimises the SQL calls required to complete spec
+    it "removes everything it needs to" do
+      expect(BenefitCheckResult.count).not_to be_zero
+      expect(OtherAssetsDeclaration.count).not_to be_zero
+      expect(SavingsAmount.count).not_to be_zero
+      expect(ApplicationMeritsTask::StatementOfCase.count).not_to be_zero
+      expect(ProceedingMeritsTask::ChancesOfSuccess.count).not_to be_zero
+      expect(Applicant.count).not_to be_zero
+      expect(BankAccount.count).not_to be_zero
+      expect(BankTransaction.count).not_to be_zero
+      expect(BankProvider.count).not_to be_zero
+      expect(BankAccountHolder.count).not_to be_zero
+      expect(BankError.count).not_to be_zero
+      expect(LegalAidApplicationTransactionType.count).not_to be_zero
+      expect { subject }.to change(described_class, :count).to(0)
+      expect(BenefitCheckResult.count).to be_zero
+      expect(OtherAssetsDeclaration.count).to be_zero
+      expect(SavingsAmount.count).to be_zero
+      expect(ApplicationMeritsTask::StatementOfCase.count).to be_zero
+      expect(ProceedingMeritsTask::ChancesOfSuccess.count).to be_zero
+      expect(Applicant.count).to be_zero
+      expect(BankAccount.count).to be_zero
+      expect(BankTransaction.count).to be_zero
+      expect(BankProvider.count).to be_zero
+      expect(BankAccountHolder.count).to be_zero
+      expect(BankError.count).to be_zero
+      expect(LegalAidApplicationTransactionType.count).to be_zero
+    end
+
+    it "leaves object it should not affect" do
+      expect(TransactionType.count).not_to be_zero
+      subject
+      expect(TransactionType.count).not_to be_zero
+    end
+  end
+
+  describe ".search" do
+    let!(:application1) { create :legal_aid_application, application_ref: "L-123-ABC" }
+    let(:jacob) { create :applicant, first_name: "Jacob", last_name: "Rees-Mogg" }
+    let!(:application2) { create :legal_aid_application, applicant: jacob }
+    let(:ccms_submission) { create :submission, case_ccms_reference: "300000000009" }
+    let!(:application3) { create :legal_aid_application, ccms_submission: }
+    let(:non_alphanum) { /[^0-9a-zA-Z]/.random_example }
+
+    it "matches application_ref" do
+      [
+        "L 123 ABC",
+        "L123ABC",
+        "l123abc",
+        "L/123/ABC",
+        "L123#{non_alphanum}ABC",
+      ].each do |term|
+        expect(described_class.search(term)).to include(application1), term
+      end
+      expect(described_class.search("something")).not_to include(application1)
+    end
+
+    it "matches applicant's name" do
+      [
+        "Rees-Mogg",
+        "Jacob Rees-Mogg",
+        "Jacob Rees'Mogg",
+        "reesmogg",
+        "smog",
+        "cobree",
+        "sMOg",
+        "jac#{non_alphanum}ob",
+      ].each do |term|
+        expect(described_class.search(term)).to include(application2), term
+      end
+      expect(described_class.search("something")).not_to include(application2)
+    end
+
+    it "matches ccms case reference number" do
+      [
+        "300",
+        "0",
+        "9",
+        "09",
+        "0#{non_alphanum}9",
+      ].each do |term|
+        expect(described_class.search(term)).to include(application3), term
+      end
+      expect(described_class.search("something")).not_to include(application3)
+    end
+  end
+
   describe "#capture_policy_disregards?" do
     subject { legal_aid_application.capture_policy_disregards? }
 
@@ -274,6 +379,38 @@ RSpec.describe LegalAidApplication, type: :model do
     it 'is created with a default state of "initiated"' do
       expect(legal_aid_application.state).to eq("initiated")
     end
+
+    context "when initialising a new object" do
+      it "instantiates the default state machine" do
+        expect(legal_aid_application.state_machine_proxy.type).to eq "PassportedStateMachine"
+        expect(legal_aid_application.state).to eq "initiated"
+      end
+    end
+
+    context "with advancing state" do
+      it "advances state and saves" do
+        legal_aid_application.enter_applicant_details!
+        expect(legal_aid_application.state).to eq "entering_applicant_details"
+      end
+    end
+
+    context "when loading an existing record and advancing state" do
+      before { legal_aid_application.enter_applicant_details! }
+
+      it "is in the expected state and can be advanced" do
+        expect(legal_aid_application.state).to eq "entering_applicant_details"
+        legal_aid_application.check_applicant_details!
+        expect(legal_aid_application.state).to eq "checking_applicant_details"
+      end
+    end
+
+    context "when switching state machines" do
+      it "switches to the new state machine" do
+        expect(legal_aid_application.state_machine).to be_instance_of(PassportedStateMachine)
+        legal_aid_application.change_state_machine_type("NonPassportedStateMachine")
+        expect(legal_aid_application.state_machine).to be_instance_of(NonPassportedStateMachine)
+      end
+    end
   end
 
   describe "#merits_complete!" do
@@ -446,7 +583,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe "set_transaction_period" do
+  describe "#set_transaction_period" do
     subject { legal_aid_application.set_transaction_period }
 
     it "sets start" do
@@ -542,7 +679,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe "attributes are synced on applicant_details_checked" do
+  describe "#applicant_details_checked" do
     let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details }
 
     it "passes application to keep in sync service" do
@@ -571,60 +708,6 @@ RSpec.describe LegalAidApplication, type: :model do
       it "resets percentage home" do
         expect(legal_aid_application.percentage_home).to be_blank
       end
-    end
-  end
-
-  # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
-  # that then become redundant.
-  describe ".destroy_all" do
-    subject { described_class.destroy_all }
-
-    let!(:legal_aid_application) do
-      create :legal_aid_application,
-             :with_everything,
-             :with_multiple_proceedings_inc_section8,
-             :with_negative_benefit_check_result,
-             :with_bank_transactions,
-             :with_chances_of_success
-    end
-
-    before do
-      create :legal_aid_application_transaction_type, legal_aid_application:
-    end
-
-    # A bit verbose, but minimises the SQL calls required to complete spec
-    it "removes everything it needs to" do
-      expect(BenefitCheckResult.count).not_to be_zero
-      expect(OtherAssetsDeclaration.count).not_to be_zero
-      expect(SavingsAmount.count).not_to be_zero
-      expect(ApplicationMeritsTask::StatementOfCase.count).not_to be_zero
-      expect(ProceedingMeritsTask::ChancesOfSuccess.count).not_to be_zero
-      expect(Applicant.count).not_to be_zero
-      expect(BankAccount.count).not_to be_zero
-      expect(BankTransaction.count).not_to be_zero
-      expect(BankProvider.count).not_to be_zero
-      expect(BankAccountHolder.count).not_to be_zero
-      expect(BankError.count).not_to be_zero
-      expect(LegalAidApplicationTransactionType.count).not_to be_zero
-      expect { subject }.to change(described_class, :count).to(0)
-      expect(BenefitCheckResult.count).to be_zero
-      expect(OtherAssetsDeclaration.count).to be_zero
-      expect(SavingsAmount.count).to be_zero
-      expect(ApplicationMeritsTask::StatementOfCase.count).to be_zero
-      expect(ProceedingMeritsTask::ChancesOfSuccess.count).to be_zero
-      expect(Applicant.count).to be_zero
-      expect(BankAccount.count).to be_zero
-      expect(BankTransaction.count).to be_zero
-      expect(BankProvider.count).to be_zero
-      expect(BankAccountHolder.count).to be_zero
-      expect(BankError.count).to be_zero
-      expect(LegalAidApplicationTransactionType.count).to be_zero
-    end
-
-    it "leaves object it should not affect" do
-      expect(TransactionType.count).not_to be_zero
-      subject
-      expect(TransactionType.count).not_to be_zero
     end
   end
 
@@ -707,7 +790,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe "default_cost_limitations" do
+  describe "#default_cost_limitations" do
     context "when substantive" do
       let(:application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
 
@@ -739,7 +822,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe "substantive_cost_limitation" do
+  describe "#substantive_cost_limitation" do
     subject(:substantive_cost_limitation) { legal_aid_application.substantive_cost_limitation }
 
     let(:legal_aid_application) { create :legal_aid_application }
@@ -919,64 +1002,13 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  describe "complete means event" do
+  describe "#complete_non_passported_means!" do
     let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
 
     it "runs the complete means service and the bank transaction analyser" do
       expect(ApplicantCompleteMeans).to receive(:call).with(legal_aid_application)
       expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application)
       legal_aid_application.complete_non_passported_means!
-    end
-  end
-
-  describe ".search" do
-    let!(:application1) { create :legal_aid_application, application_ref: "L-123-ABC" }
-    let(:jacob) { create :applicant, first_name: "Jacob", last_name: "Rees-Mogg" }
-    let!(:application2) { create :legal_aid_application, applicant: jacob }
-    let(:ccms_submission) { create :submission, case_ccms_reference: "300000000009" }
-    let!(:application3) { create :legal_aid_application, ccms_submission: }
-    let(:non_alphanum) { /[^0-9a-zA-Z]/.random_example }
-
-    it "matches application_ref" do
-      [
-        "L 123 ABC",
-        "L123ABC",
-        "l123abc",
-        "L/123/ABC",
-        "L123#{non_alphanum}ABC",
-      ].each do |term|
-        expect(described_class.search(term)).to include(application1), term
-      end
-      expect(described_class.search("something")).not_to include(application1)
-    end
-
-    it "matches applicant's name" do
-      [
-        "Rees-Mogg",
-        "Jacob Rees-Mogg",
-        "Jacob Rees'Mogg",
-        "reesmogg",
-        "smog",
-        "cobree",
-        "sMOg",
-        "jac#{non_alphanum}ob",
-      ].each do |term|
-        expect(described_class.search(term)).to include(application2), term
-      end
-      expect(described_class.search("something")).not_to include(application2)
-    end
-
-    it "matches ccms case reference number" do
-      [
-        "300",
-        "0",
-        "9",
-        "09",
-        "0#{non_alphanum}9",
-      ].each do |term|
-        expect(described_class.search(term)).to include(application3), term
-      end
-      expect(described_class.search("something")).not_to include(application3)
     end
   end
 
@@ -1086,42 +1118,10 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
-  context "when initialising a new object" do
-    it "instantiates the default state machine" do
-      expect(legal_aid_application.state_machine_proxy.type).to eq "PassportedStateMachine"
-      expect(legal_aid_application.state).to eq "initiated"
-    end
-  end
+  describe "#provider_assessing_means?" do
+    context "with delegated state machine methods" do
+      let(:application) { create :legal_aid_application, :with_passported_state_machine }
 
-  context "with advancing state" do
-    it "advances state and saves" do
-      legal_aid_application.enter_applicant_details!
-      expect(legal_aid_application.state).to eq "entering_applicant_details"
-    end
-  end
-
-  context "when loading an existing record and advancing state" do
-    before { legal_aid_application.enter_applicant_details! }
-
-    it "is in the expected state and can be advanced" do
-      expect(legal_aid_application.state).to eq "entering_applicant_details"
-      legal_aid_application.check_applicant_details!
-      expect(legal_aid_application.state).to eq "checking_applicant_details"
-    end
-  end
-
-  context "when switching state machines" do
-    it "switches to the new state machine" do
-      expect(legal_aid_application.state_machine).to be_instance_of(PassportedStateMachine)
-      legal_aid_application.change_state_machine_type("NonPassportedStateMachine")
-      expect(legal_aid_application.state_machine).to be_instance_of(NonPassportedStateMachine)
-    end
-  end
-
-  context "with delegated state machine methods" do
-    let(:application) { create :legal_aid_application, :with_passported_state_machine }
-
-    describe "#provider_assessing_means" do
       it "returns false" do
         expect(application.provider_assessing_means?).to be false
       end
@@ -1421,157 +1421,157 @@ RSpec.describe LegalAidApplication, type: :model do
         expect(laa.manually_entered_employment_information?).to be true
       end
     end
+  end
 
-    describe "#hmrc_response_use_case_one" do
-      let(:laa) { create :legal_aid_application }
-      let!(:use_case_one) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
-      let!(:use_case_two) { create :hmrc_response, :use_case_two, legal_aid_application: laa }
+  describe "#hmrc_response_use_case_one" do
+    let(:laa) { create :legal_aid_application }
+    let!(:use_case_one) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
+    let!(:use_case_two) { create :hmrc_response, :use_case_two, legal_aid_application: laa }
 
-      it "returns the use case one record" do
-        expect(laa.hmrc_response_use_case_one).to eq use_case_one
+    it "returns the use case one record" do
+      expect(laa.hmrc_response_use_case_one).to eq use_case_one
+    end
+  end
+
+  describe "#eligible_employment_payments" do
+    let(:laa) { create :legal_aid_application, :with_transaction_period }
+
+    context "with one employment with employment payments" do
+      before do
+        emp = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp, date: 1.month.ago
+        create :employment_payment, employment: emp, date: 2.months.ago
+      end
+
+      it "returns two employment records" do
+        payments = laa.eligible_employment_payments
+        expect(payments.size).to eq 2
+        expect(payments.map(&:class).uniq).to eq [EmploymentPayment]
       end
     end
 
-    describe "#eligible_employment_payments" do
-      let(:laa) { create :legal_aid_application, :with_transaction_period }
+    context "with one employment with no employment payments" do
+      before { create :employment, legal_aid_application: laa }
 
-      context "with one employment with employment payments" do
-        before do
-          emp = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp, date: 1.month.ago
-          create :employment_payment, employment: emp, date: 2.months.ago
-        end
-
-        it "returns two employment records" do
-          payments = laa.eligible_employment_payments
-          expect(payments.size).to eq 2
-          expect(payments.map(&:class).uniq).to eq [EmploymentPayment]
-        end
-      end
-
-      context "with one employment with no employment payments" do
-        before { create :employment, legal_aid_application: laa }
-
-        it "returns an empty collections" do
-          expect(laa.eligible_employment_payments).to be_empty
-        end
-      end
-
-      context "with no employments" do
-        it "returns an empty collection" do
-          expect(laa.eligible_employment_payments).to be_empty
-        end
-      end
-
-      context "with multiple employments" do
-        before do
-          emp1 = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp1, date: 1.month.ago
-          create :employment_payment, employment: emp1, date: 2.months.ago
-          emp2 = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp2, date: 1.month.ago
-        end
-
-        it "returns one collection of three records" do
-          expect(laa.eligible_employment_payments.size).to eq 3
-        end
-      end
-
-      context "with all payments before start of transaction period" do
-        before do
-          emp1 = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
-          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
-          emp2 = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month
-        end
-
-        it "returns an empty collection" do
-          expect(laa.eligible_employment_payments).to be_empty
-        end
-      end
-
-      context "with one payment in transaction period, others before" do
-        before do
-          emp1 = create :employment, legal_aid_application: laa
-          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
-          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days
-          create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
-        end
-
-        it "returns a collection of just the one record in the transaction period" do
-          expect(laa.eligible_employment_payments.size).to eq 1
-        end
+      it "returns an empty collections" do
+        expect(laa.eligible_employment_payments).to be_empty
       end
     end
 
-    describe "#uploading_bank_statements?" do
-      let(:laa) { create :legal_aid_application, provider:, provider_received_citizen_consent: consent }
+    context "with no employments" do
+      it "returns an empty collection" do
+        expect(laa.eligible_employment_payments).to be_empty
+      end
+    end
 
-      context "when provider does not have bank statement upload role" do
-        let(:provider) { create :provider }
-        let(:consent) { nil }
+    context "with multiple employments" do
+      before do
+        emp1 = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp1, date: 1.month.ago
+        create :employment_payment, employment: emp1, date: 2.months.ago
+        emp2 = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp2, date: 1.month.ago
+      end
+
+      it "returns one collection of three records" do
+        expect(laa.eligible_employment_payments.size).to eq 3
+      end
+    end
+
+    context "with all payments before start of transaction period" do
+      before do
+        emp1 = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
+        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
+        emp2 = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month
+      end
+
+      it "returns an empty collection" do
+        expect(laa.eligible_employment_payments).to be_empty
+      end
+    end
+
+    context "with one payment in transaction period, others before" do
+      before do
+        emp1 = create :employment, legal_aid_application: laa
+        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
+        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days
+        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
+      end
+
+      it "returns a collection of just the one record in the transaction period" do
+        expect(laa.eligible_employment_payments.size).to eq 1
+      end
+    end
+  end
+
+  describe "#uploading_bank_statements?" do
+    let(:laa) { create :legal_aid_application, provider:, provider_received_citizen_consent: consent }
+
+    context "when provider does not have bank statement upload role" do
+      let(:provider) { create :provider }
+      let(:consent) { nil }
+
+      it "returns false" do
+        expect(laa.uploading_bank_statements?).to be false
+      end
+    end
+
+    context "when provider has bank statement upload role" do
+      let(:provider) { create :provider, :with_bank_statement_upload_permissions }
+
+      context "when client permission to use true layer received" do
+        let(:consent) { true }
 
         it "returns false" do
           expect(laa.uploading_bank_statements?).to be false
         end
       end
 
-      context "when provider has bank statement upload role" do
-        let(:provider) { create :provider, :with_bank_statement_upload_permissions }
+      context "when client permission to use true layer not received" do
+        let(:consent) { false }
 
-        context "when client permission to use true layer received" do
-          let(:consent) { true }
-
-          it "returns false" do
-            expect(laa.uploading_bank_statements?).to be false
-          end
+        it "returns true" do
+          expect(laa.uploading_bank_statements?).to be true
         end
+      end
 
-        context "when client permission to use true layer not received" do
-          let(:consent) { false }
+      context "when client permission to use true layer not specified" do
+        let(:consent) { nil }
 
-          it "returns true" do
-            expect(laa.uploading_bank_statements?).to be true
-          end
-        end
-
-        context "when client permission to use true layer not specified" do
-          let(:consent) { nil }
-
-          it "returns false" do
-            expect(laa.uploading_bank_statements?).to be false
-          end
+        it "returns false" do
+          expect(laa.uploading_bank_statements?).to be false
         end
       end
     end
+  end
 
-    describe "#has_transaction_type?" do
-      subject { laa.has_transaction_type?(transaction_type) }
+  describe "#has_transaction_type?" do
+    subject { laa.has_transaction_type?(transaction_type) }
 
-      let!(:benefits) { create(:transaction_type, :benefits) }
-      let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+    let!(:benefits) { create(:transaction_type, :benefits) }
+    let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
 
-      context "when application has that transaction type" do
-        let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
-        let(:transaction_type) { benefits }
+    context "when application has that transaction type" do
+      let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+      let(:transaction_type) { benefits }
 
-        it { is_expected.to be_truthy }
-      end
+      it { is_expected.to be_truthy }
+    end
 
-      context "when application does not have that transaction type" do
-        let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
-        let(:transaction_type) { rent_or_mortgage }
+    context "when application does not have that transaction type" do
+      let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+      let(:transaction_type) { rent_or_mortgage }
 
-        it { is_expected.to be_falsey }
-      end
+      it { is_expected.to be_falsey }
+    end
 
-      context "when application does not have any transaction types" do
-        let(:laa) { create :legal_aid_application, transaction_types: [] }
-        let(:transaction_type) { benefits }
+    context "when application does not have any transaction types" do
+      let(:laa) { create :legal_aid_application, transaction_types: [] }
+      let(:transaction_type) { benefits }
 
-        it { is_expected.to be_falsey }
-      end
+      it { is_expected.to be_falsey }
     end
   end
 
