@@ -50,6 +50,8 @@ class LegalAidApplication < ApplicationRecord
   has_many :involved_children, class_name: "ApplicationMeritsTask::InvolvedChild", dependent: :destroy
   has_many :hmrc_responses, class_name: "HMRC::Response", dependent: :destroy, inverse_of: :legal_aid_application
   has_many :employments, dependent: :destroy
+  has_many :regular_transactions, dependent: :destroy
+  has_many :regular_incomes, -> { credits }, class_name: "RegularTransaction"
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref

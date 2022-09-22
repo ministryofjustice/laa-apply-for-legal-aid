@@ -11,6 +11,8 @@ en:
         postcode: This must be a UK postcode, for example SW1A 2AA.
       applicant:
         national_insurance_number: For example, 'QQ 12 34 56 C'.
+      providers_means_regular_income_form:
+        transaction_type_ids: Select all that apply
       student_finance: This includes any type of student loan, grant or bursary.
     label:
       applicant:
@@ -28,6 +30,12 @@ en:
       legal_aid_application:
         own_vehicle:
           <<: *true_false
+      providers_means_regular_income_form:
+        benefits_amount: Enter amount
+        friends_or_family_amount: Enter amount
+        maintenance_in_amount: Enter amount
+        property_or_lodger_amount: Enter amount
+        pension_amount: Enter amount
       application_merits_task/opponent: &opponent
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
         warning_letter_sent_details: Tell us why a warning letter has not been sent
@@ -58,3 +66,11 @@ en:
           <<: *true_false
         enhanced_bank_upload:
           <<: *true_false
+    legend:
+      providers_means_regular_income_form:
+        benefits_frequency: Select frequency
+        friends_or_family_frequency: Select frequency
+        maintenance_in_frequency: Select frequency
+        property_or_lodger_frequency: Select frequency
+        pension_frequency: Select frequency
+        transaction_type_ids: Which of the following payments does your client receive?
