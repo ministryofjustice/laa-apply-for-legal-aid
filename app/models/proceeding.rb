@@ -44,13 +44,37 @@ class Proceeding < ApplicationRecord
     ccms_matter_code == "MINJN"
   end
 
-  # def default_level_of_service_level
-  #   "3"
-  # end
-  #
-  # def default_level_of_service_name
-  #   "Full Representation"
-  # end
+  def substantive_scope_limitations
+    scope_limitations.where(scope_type: :substantive)
+  end
+
+  def emergency_scope_limitations
+    scope_limitations.where(scope_type: :emergency)
+  end
+
+  def substantive_scope_limitation_code
+    substantive_scope_limitations.first.code
+  end
+
+  def substantive_scope_limitation_meaning
+    substantive_scope_limitations.first.meaning
+  end
+
+  def substantive_scope_limitation_description
+    substantive_scope_limitations.first.description
+  end
+
+  def delegated_functions_scope_limitation_code
+    emergency_scope_limitations.first.code
+  end
+
+  def delegated_functions_scope_limitation_meaning
+    emergency_scope_limitations.first.meaning
+  end
+
+  def delegated_functions_scope_limitation_description
+    emergency_scope_limitations.first.description
+  end
 
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first
