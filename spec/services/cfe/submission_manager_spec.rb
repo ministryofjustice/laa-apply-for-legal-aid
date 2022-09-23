@@ -49,19 +49,57 @@ module CFE
     end
 
     describe "#call" do
+      let(:passported_services) do
+        [
+          CreateAssessmentService,
+          CreateProceedingTypesService,
+          CreateApplicantService,
+          CreateCapitalsService,
+          CreateVehiclesService,
+          CreatePropertiesService,
+          CreateExplicitRemarksService,
+          ObtainAssessmentResultService,
+        ]
+      end
+
+      let(:non_passported_services) do
+        [
+          CreateAssessmentService,
+          CreateProceedingTypesService,
+          CreateApplicantService,
+          CreateCapitalsService,
+          CreateVehiclesService,
+          CreatePropertiesService,
+          CreateExplicitRemarksService,
+          CreateDependantsService,
+          CreateOutgoingsService,
+          CreateStateBenefitsService,
+          CreateOtherIncomeService,
+          CreateIrregularIncomesService,
+          CreateEmploymentsService,
+          CreateCashTransactionsService,
+          ObtainAssessmentResultService,
+        ]
+      end
+
+      let(:non_passported_only_services) do
+        [
+          CreateDependantsService,
+          CreateOutgoingsService,
+          CreateStateBenefitsService,
+          CreateOtherIncomeService,
+          CreateIrregularIncomesService,
+          CreateEmploymentsService,
+          CreateCashTransactionsService,
+        ]
+      end
+
       before do
-        allow(CreateAssessmentService).to receive(:call).and_return(true)
-        allow(CreateApplicantService).to receive(:call).and_return(true)
-        allow(CreateCapitalsService).to receive(:call).and_return(true)
-        allow(CreatePropertiesService).to receive(:call).and_return(true)
-        allow(CreateVehiclesService).to receive(:call).and_return(true)
-        allow(CreateStateBenefitsService).to receive(:call).and_return(true)
-        allow(CreateDependantsService).to receive(:call).and_return(true)
-        allow(CreateOtherIncomeService).to receive(:call).and_return(true)
-        allow(CreateExplicitRemarksService).to receive(:call).and_return(true)
-        allow(ObtainAssessmentResultService).to receive(:call).and_return(true)
-        allow(CreateIrregularIncomesService).to receive(:call).and_return(true)
-        allow(CreateCashTransactionsService).to receive(:call).and_return(true)
+        all_services = non_passported_services | passported_services
+
+        all_services.each do |service|
+          allow(service).to receive(:call).and_return(true)
+        end
       end
 
       context "with a passported application" do
@@ -72,26 +110,17 @@ module CFE
         end
 
         it "calls expected services" do
-          expect(CreateAssessmentService).to receive(:call).once
-          expect(CreateProceedingTypesService).to receive(:call).once
-          expect(CreateApplicantService).to receive(:call).once
-          expect(CreateCapitalsService).to receive(:call).once
-          expect(CreatePropertiesService).to receive(:call).once
-          expect(CreateVehiclesService).to receive(:call).once
-          expect(CreateExplicitRemarksService).to receive(:call).once
-          expect(ObtainAssessmentResultService).to receive(:call).once
-
           submission_manager.call
+
+          expect(passported_services).to all(have_received(:call).once)
         end
 
         it "does not call the services only required for non-passported applications" do
-          expect(CreateStateBenefitsService).not_to receive(:call)
-          expect(CreateDependantsService).not_to receive(:call)
-          expect(CreateOtherIncomeService).not_to receive(:call)
-          expect(CreateIrregularIncomesService).not_to receive(:call)
-          expect(CreateCashTransactionsService).not_to receive(:call)
-
           submission_manager.call
+
+          non_passported_only_services.each do |service|
+            expect(service).not_to have_received(:call)
+          end
         end
 
         context "on submission error" do
@@ -135,23 +164,9 @@ module CFE
         end
 
         it "calls expected services" do
-          expect(CreateAssessmentService).to receive(:call).once
-          expect(CreateProceedingTypesService).to receive(:call).once
-          expect(CreateApplicantService).to receive(:call).once
-          expect(CreateCapitalsService).to receive(:call).once
-          expect(CreatePropertiesService).to receive(:call).once
-          expect(CreateVehiclesService).to receive(:call).once
-          expect(ObtainAssessmentResultService).to receive(:call).once
-          expect(CreateStateBenefitsService).to receive(:call).once
-          expect(CreateDependantsService).to receive(:call).once
-          expect(CreateOutgoingsService).to receive(:call).once
-          expect(CreateOtherIncomeService).to receive(:call).once
-          expect(CreateExplicitRemarksService).to receive(:call).once
-          expect(CreateIrregularIncomesService).to receive(:call).once
-          expect(CreateCashTransactionsService).to receive(:call).once
-          expect(CreateEmploymentsService).to receive(:call).once
-
           submission_manager.call
+
+          expect(non_passported_services).to all(have_received(:call).once)
         end
       end
     end
