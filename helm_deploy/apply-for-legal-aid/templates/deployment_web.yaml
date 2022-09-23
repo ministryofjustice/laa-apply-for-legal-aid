@@ -52,13 +52,13 @@ spec:
             httpGet:
               path: /status
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 360
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /status
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 360
             timeoutSeconds: 10
           resources:
             limits:
