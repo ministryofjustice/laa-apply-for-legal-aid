@@ -49,7 +49,10 @@ Feature: Enhanced bank upload check your answers
     And the answer for "student finance annual amount" should be "£5,000"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And I check "Maintenance payments to a former partner"
+    And I fill "Maintenance out amount" with "1000"
+    And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
 
     And I click "Save and continue"
     Then I should be on a page with title "Select payments your client makes in cash"

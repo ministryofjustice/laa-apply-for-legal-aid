@@ -43,6 +43,8 @@ Feature: Enhanced bank upload flow
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
+    And I should see "Benefits"
+    And I should see "Pension"
     And the page is accessible
 
     When I select "None of the above"
@@ -53,5 +55,25 @@ Feature: Enhanced bank upload flow
     When I choose "Yes"
     And I enter amount "2000"
     And I click "Save and continue"
-    Then I should be on a page with title "Which payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And the page is accessible
+
+    When I select "Housing"
+    And I fill "Rent or mortgage amount" with "500"
+    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-monthly-field"
+
+    Then I select "Childcare"
+    And I fill "Child care amount" with "100"
+    And I choose "providers-means-regular-outgoings-form-child-care-frequency-weekly-field"
+
+    When I click "Save and continue"
+    Then I should be on a page with title "Select payments your client makes in cash"
+    And I should see "Housing"
+    And I should see "Childcare"
+    And I should not see "Maintenance payments to a former partner"
+    And I should not see "Payments towards legal aid in a criminal case"
+    And the page is accessible
+
+    When I select "None of the above"
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client have any dependants?"

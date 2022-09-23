@@ -63,3 +63,11 @@
   float: left;
   margin-right: govuk-spacing(2);
 }
+
+#uploaded-files-table-container {
+  word-wrap: break-word;
+}
+
+.govuk-notification-banner {
+  word-wrap: break-word;
+}

@@ -12,5 +12,9 @@ FactoryBot.define do
     trait :maintenance_in do
       association :transaction_type, :maintenance_in
     end
+
+    trait :maintenance_out do
+      association :transaction_type, :maintenance_out
+    end
   end
 end
