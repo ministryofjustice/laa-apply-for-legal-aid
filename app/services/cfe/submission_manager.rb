@@ -2,7 +2,7 @@ module CFE
   class SubmissionManager
     include ::DurationLogger
 
-    COMMON_SERVICES_V5 = [
+    PASSPORTED_SERVICES = [
       CreateAssessmentService,
       CreateProceedingTypesService,
       CreateApplicantService,
@@ -13,6 +13,13 @@ module CFE
     ].freeze
 
     NON_PASSPORTED_SERVICES = [
+      CreateAssessmentService,
+      CreateProceedingTypesService,
+      CreateApplicantService,
+      CreateCapitalsService,
+      CreateVehiclesService,
+      CreatePropertiesService,
+      CreateExplicitRemarksService,
       CreateDependantsService,
       CreateOutgoingsService,
       CreateStateBenefitsService,
@@ -33,7 +40,7 @@ module CFE
     end
 
     def call
-      call_common_services
+      call_passported_services
       call_non_passported_services
       ObtainAssessmentResultService.call(submission)
       true
@@ -48,8 +55,12 @@ module CFE
       @submission ||= Submission.create!(legal_aid_application_id:)
     end
 
-    def call_common_services
-      COMMON_SERVICES_V5.each do |service|
+  private
+
+    def call_passported_services
+      return unless submission.passported?
+
+      PASSPORTED_SERVICES.each do |service|
         make_logged_call_to service
       end
     end
@@ -61,8 +72,6 @@ module CFE
         make_logged_call_to service
       end
     end
-
-  private
 
     def make_logged_call_to(service)
       log_duration("CFE Submission :: call to #{service} for #{legal_aid_application_id}") do

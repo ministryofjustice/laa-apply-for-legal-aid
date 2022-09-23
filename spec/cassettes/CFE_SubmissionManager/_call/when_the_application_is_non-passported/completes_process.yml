@@ -865,4 +865,60 @@ http_interactions:
       encoding: UTF-8
       string: '{"success":true,"errors":[]}'
   recorded_at: Fri, 12 Aug 2022 13:57:02 GMT
+- request:
+    method: post
+    uri: https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk/assessments
+    body:
+      encoding: UTF-8
+      string: '{"client_reference_id":"L-52X-P62","submission_date":"2022-09-23"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json;version=5
+      User-Agent:
+      - Faraday v1.10.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 23 Sep 2022 10:24:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept
+      Etag:
+      - W/"902bd1298082ee8f4425cbbc71d11339"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9d015db6fe7b93ef2dd30e379c159fde
+      X-Runtime:
+      - '0.097943'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"assessment_id":"874486f0-8e0b-4f2f-96e6-d02c4b139f57","errors":[]}'
+  recorded_at: Fri, 23 Sep 2022 10:24:16 GMT
 recorded_with: VCR 6.1.0
