@@ -78,26 +78,6 @@ Feature: Non-passported applicant journeys
     Then I click 'Save and continue'
     Then I should be on the 'has_dependants' page showing "Does your client have any dependants?"
 
-  @javascript @vcr
-  Scenario: Selects and categorises bank transactions with enhanced bank upload setting enabled
-    Given I start the merits application with bank transactions with no transaction type category
-    And the feature flag for enhanced_bank_upload is enabled
-    Then I should be on the "client_completed_means" page showing "Your client has shared their financial information"
-    Then I click "Continue"
-
-    Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
-
-    Then I select "Benefits"
-    Then I fill "Benefits amount" with "500"
-    Then I choose "providers-means-regular-income-form-benefits-frequency-weekly-field"
-
-    Then I select "Pension"
-    Then I fill "Pension amount" with "100"
-    Then I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
-
-    And I click "Save and continue"
-    Then I should be on a page with title "Select payments your client receives in cash"
-
   @javascript
   Scenario: Complete an application for an applicant that does not receive benefits with dependants
     Given I start the means application
