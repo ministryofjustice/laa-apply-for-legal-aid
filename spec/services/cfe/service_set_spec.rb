@@ -9,7 +9,7 @@ RSpec.describe CFE::ServiceSet do
       let(:object) { double(Object, passported?: true, non_passported?: true) }
 
       it "returns set of passported CFE::Service classes" do
-        expect(call).to contain_exactly(
+        expect(call).to match([
           CFE::CreateAssessmentService,
           CFE::CreateProceedingTypesService,
           CFE::CreateApplicantService,
@@ -18,7 +18,7 @@ RSpec.describe CFE::ServiceSet do
           CFE::CreatePropertiesService,
           CFE::CreateExplicitRemarksService,
           CFE::ObtainAssessmentResultService,
-        )
+        ])
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe CFE::ServiceSet do
       let(:object) { double(Object, passported?: false, non_passported?: true) }
 
       it "returns set of non passported CFE::Service classes" do
-        expect(call).to contain_exactly(
+        expect(call).to match([
           CFE::CreateAssessmentService,
           CFE::CreateProceedingTypesService,
           CFE::CreateApplicantService,
@@ -42,7 +42,7 @@ RSpec.describe CFE::ServiceSet do
           CFE::CreateEmploymentsService,
           CFE::CreateCashTransactionsService,
           CFE::ObtainAssessmentResultService,
-        )
+        ])
       end
     end
 
