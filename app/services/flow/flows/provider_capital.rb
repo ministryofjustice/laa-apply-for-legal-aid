@@ -12,7 +12,7 @@ module Flow
             when :hmrc_single_employment, :unexpected_employment_data
               :employment_incomes
             when :employed_journey_not_enabled, :provider_not_enabled_for_employed_journey, :applicant_not_employed
-              if Setting.enhanced_bank_upload?
+              if application.using_enhanced_bank_upload?
                 :regular_incomes
               else
                 :identify_types_of_incomes
@@ -173,12 +173,24 @@ module Flow
         },
         employment_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_employment_income_path(application) },
-          forward: :identify_types_of_incomes,
+          forward: lambda do |application|
+            if application.using_enhanced_bank_upload?
+              :regular_incomes
+            else
+              :identify_types_of_incomes
+            end
+          end,
           check_answers: :means_summaries,
         },
         full_employment_details: {
           path: ->(application) { urls.providers_legal_aid_application_means_full_employment_details_path(application) },
-          forward: :identify_types_of_incomes,
+          forward: lambda do |application|
+            if application.using_enhanced_bank_upload?
+              :regular_incomes
+            else
+              :identify_types_of_incomes
+            end
+          end,
           check_answers: :means_summaries,
         },
         capital_introductions: {
