@@ -2,16 +2,6 @@ module CFE
   class SubmissionManager
     include ::DurationLogger
 
-    # TODO: remove COMMON_SERVICES_V4 and code in #common_services method to use it once CFE V4 deprecated
-    COMMON_SERVICES_V4 = [
-      CreateAssessmentService,
-      CreateApplicantService,
-      CreateCapitalsService,
-      CreateVehiclesService,
-      CreatePropertiesService,
-      CreateExplicitRemarksService,
-    ].freeze
-
     COMMON_SERVICES_V5 = [
       CreateAssessmentService,
       CreateProceedingTypesService,
