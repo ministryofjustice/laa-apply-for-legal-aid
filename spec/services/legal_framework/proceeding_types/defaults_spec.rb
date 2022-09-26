@@ -6,7 +6,7 @@ RSpec.describe LegalFramework::ProceedingTypes::Defaults, :vcr do
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types_defaults" }
 
   describe ".call" do
-    subject(:call) { defaults.call(proceeding) }
+    subject(:call) { defaults.call(proceeding, false) }
 
     before { call }
 

@@ -3,12 +3,13 @@ module LegalFramework
     class Defaults
       PATH = "/proceeding_type_defaults".freeze
 
-      def self.call(proceeding)
-        new(proceeding).call
+      def self.call(proceeding, emergency)
+        new(proceeding, emergency).call
       end
 
-      def initialize(proceeding)
+      def initialize(proceeding, emergency)
         @proceeding = proceeding
+        @emergency = emergency
       end
 
       def call
@@ -20,7 +21,7 @@ module LegalFramework
       def request_body
         {
           proceeding_type_ccms_code: @proceeding.ccms_code,
-          delegated_functions_used: @proceeding.used_delegated_functions,
+          delegated_functions_used: @emergency,
           client_involvement_type: @proceeding.client_involvement_type_ccms_code,
         }.to_json
       end
