@@ -1,6 +1,6 @@
+@javascript @clamav
 Feature: Evidence upload
 
-  @javascript @vcr
   Scenario: Uploading a file
     Given csrf is enabled
     When I have completed a non-passported application and reached the evidence upload page
@@ -8,7 +8,6 @@ Feature: Evidence upload
     Then I upload an evidence file named 'hello_world.docx'
     Then I should see 4 uploaded files
 
-  @javascript @vcr
   Scenario: Categorising a file and validating that categorising a file is required to proceed
     When I have completed a non-passported application and reached the evidence upload page
     Then I should be on a page showing 'Uncategorised'
@@ -18,7 +17,6 @@ Feature: Evidence upload
     Then I should see 'Upload supporting evidence'
     And I should see 'Select a category for each uploaded file'
 
-  @javascript @vcr
   Scenario: Deleting a file
     When I have completed a non-passported application and reached the evidence upload page
     Then I should be on a page showing 'Upload supporting evidence'

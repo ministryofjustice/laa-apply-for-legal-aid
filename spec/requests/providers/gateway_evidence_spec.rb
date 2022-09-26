@@ -239,7 +239,7 @@ module Providers
             end
           end
 
-          context "file contains a malware" do
+          context "file contains a malware", clamav: true do
             let(:original_file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
             it "does not save the object and raise an error" do

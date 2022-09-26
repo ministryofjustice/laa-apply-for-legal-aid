@@ -100,7 +100,7 @@ Feature: Merits task list
     When I click 'Save and come back later'
     Then I should be on the 'applications' page showing 'Applications'
 
-  @javascript
+  @javascript @clamav
   Scenario: Uploading a file for statement of case
     Given csrf is enabled
     Given I have completed a non-passported application and reached the merits task_list

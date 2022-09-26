@@ -1,6 +1,6 @@
+@javascript @clamav
 Feature: Bank statement upload
 
-  @javascript
   Scenario: Uploading a file
     Given csrf is enabled
     And I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled
@@ -40,7 +40,6 @@ Feature: Bank statement upload
     When I click 'Save and come back later'
     Then I should be on a page with title "Applications"
 
-  @javascript
   Scenario: Deleting a file
 
     Given csrf is enabled

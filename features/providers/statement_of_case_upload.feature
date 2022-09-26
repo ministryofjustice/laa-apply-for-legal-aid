@@ -1,4 +1,4 @@
-@javascript @vcr
+@javascript @vcr @clamav
 Feature: Statement of case upload
 
   Background:
