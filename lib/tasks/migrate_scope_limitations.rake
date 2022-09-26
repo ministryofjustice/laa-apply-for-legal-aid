@@ -18,13 +18,19 @@ namespace :migrate do
                                                  meaning: proceeding.substantive_scope_limitation_meaning,
                                                  description: proceeding.substantive_scope_limitation_description)
             end
-            next unless proceeding.used_delegated_functions? && proceeding.delegated_functions_scope_limitation_code.present?
-
-            ScopeLimitation.find_or_create_by!(proceeding:,
-                                               scope_type: :emergency,
-                                               code: proceeding.delegated_functions_scope_limitation_code,
-                                               meaning: proceeding.delegated_functions_scope_limitation_meaning,
-                                               description: proceeding.delegated_functions_scope_limitation_description)
+            if proceeding.used_delegated_functions? && proceeding.delegated_functions_scope_limitation_code.present?
+              ScopeLimitation.find_or_create_by!(proceeding:,
+                                                 scope_type: :emergency,
+                                                 code: proceeding.delegated_functions_scope_limitation_code,
+                                                 meaning: proceeding.delegated_functions_scope_limitation_meaning,
+                                                 description: proceeding.delegated_functions_scope_limitation_description)
+            end
+            proceeding.update!(substantive_scope_limitation_code: nil,
+                               substantive_scope_limitation_meaning: nil,
+                               substantive_scope_limitation_description: nil,
+                               delegated_functions_scope_limitation_code: nil,
+                               delegated_functions_scope_limitation_meaning: nil,
+                               delegated_functions_scope_limitation_description: nil)
           end
         end
       end
