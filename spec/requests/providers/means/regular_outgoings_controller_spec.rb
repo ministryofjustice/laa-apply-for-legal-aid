@@ -12,6 +12,11 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
     subject(:request) { get providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
+      it "returns http found" do
+        request
+        expect(response).to have_http_status(:found)
+      end
+
       it "redirects to the provider login page" do
         request
         expect(response).to redirect_to(new_provider_session_path)
