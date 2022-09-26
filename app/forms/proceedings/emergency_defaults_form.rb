@@ -14,7 +14,7 @@ module Proceedings
 
     def initialize(*args)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model]))
+      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
       self.emergency_level_of_service = @defaults["default_level_of_service"]["level"]
       self.emergency_level_of_service_name = @defaults["default_level_of_service"]["name"]
       self.emergency_level_of_service_stage = @defaults["default_level_of_service"]["stage"]
