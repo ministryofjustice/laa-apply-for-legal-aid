@@ -46,15 +46,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "FM062" }
-      # substantive_scope_limitation_meaning { "Final hearing" }
-      # substantive_scope_limitation_description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-      #    To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
-      # end
       used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
@@ -82,16 +73,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "AA019" }
-      # substantive_scope_limitation_meaning { "Injunction FLA-to final hearing" }
-      # substantive_scope_limitation_description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
-      #    final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
-      #    of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
-      # end
       used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
@@ -116,16 +97,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "AA019" }
-      # substantive_scope_limitation_meaning { "Injunction FLA-to final hearing" }
-      # substantive_scope_limitation_description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
-      #    final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
-      #    of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
-      # end
       used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
@@ -150,16 +121,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "AA019" }
-      # substantive_scope_limitation_meaning { "Injunction FLA-to final hearing" }
-      # substantive_scope_limitation_description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
-      #    final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
-      #    of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
-      # end
       used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
@@ -184,16 +145,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "AA019" }
-      # substantive_scope_limitation_meaning { "Injunction FLA-to final hearing" }
-      # substantive_scope_limitation_description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a
-      #    final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration
-      #    of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).'
-      # end
       used_delegated_functions { true }
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
@@ -218,18 +169,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "FM059" }
-      # substantive_scope_limitation_meaning { "FHH Children" }
-      # substantive_scope_limitation_description do
-      #   'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-      #   To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
-      # end
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-      #   To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
-      # end
       used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
@@ -254,18 +193,6 @@ FactoryBot.define do
         create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
       end
 
-      # substantive_scope_limitation_code { "FM059" }
-      # substantive_scope_limitation_meaning { "FHH Children" }
-      # substantive_scope_limitation_description do
-      #   'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-      #   To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
-      # end
-      # delegated_functions_scope_limitation_code { "CV117" }
-      # delegated_functions_scope_limitation_meaning { "Interim order inc. return date" }
-      # delegated_functions_scope_limitation_description do
-      #   'Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.
-      #   To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing.'
-      # end
       used_delegated_functions { nil }
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
