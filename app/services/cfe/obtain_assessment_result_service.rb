@@ -40,11 +40,11 @@ module CFE
     end
 
     def write_cfe_result
-      CFE::V4::Result.create!(
+      CFE::V5::Result.create!(
         legal_aid_application_id: legal_aid_application.id,
         submission_id: @submission.id,
         result: @response.body,
-        type: "CFE::V4::Result",
+        type: "CFE::V5::Result",
       )
     end
   end
