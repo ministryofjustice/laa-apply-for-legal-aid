@@ -49,55 +49,102 @@ module CFE
     end
 
     describe "#call" do
-      context "standard submission" do
-        before do
-          allow(CreateAssessmentService).to receive(:call).and_return(true)
-          allow(CreateApplicantService).to receive(:call).and_return(true)
-          allow(CreateCapitalsService).to receive(:call).and_return(true)
-          allow(CreatePropertiesService).to receive(:call).and_return(true)
-          allow(CreateVehiclesService).to receive(:call).and_return(true)
-          allow(CreateStateBenefitsService).to receive(:call).and_return(true)
-          allow(CreateDependantsService).to receive(:call).and_return(true)
-          allow(CreateOtherIncomeService).to receive(:call).and_return(true)
-          allow(CreateExplicitRemarksService).to receive(:call).and_return(true)
-          allow(ObtainAssessmentResultService).to receive(:call).and_return(true)
-          allow(CreateIrregularIncomesService).to receive(:call).and_return(true)
-          allow(CreateCashTransactionsService).to receive(:call).and_return(true)
+      let(:passported_services) do
+        [
+          CreateAssessmentService,
+          CreateProceedingTypesService,
+          CreateApplicantService,
+          CreateCapitalsService,
+          CreateVehiclesService,
+          CreatePropertiesService,
+          CreateExplicitRemarksService,
+          ObtainAssessmentResultService,
+        ]
+      end
+
+      let(:non_passported_services) do
+        [
+          CreateAssessmentService,
+          CreateProceedingTypesService,
+          CreateApplicantService,
+          CreateCapitalsService,
+          CreateVehiclesService,
+          CreatePropertiesService,
+          CreateExplicitRemarksService,
+          CreateDependantsService,
+          CreateOutgoingsService,
+          CreateStateBenefitsService,
+          CreateOtherIncomeService,
+          CreateIrregularIncomesService,
+          CreateEmploymentsService,
+          CreateCashTransactionsService,
+          ObtainAssessmentResultService,
+        ]
+      end
+
+      let(:non_passported_only_services) do
+        [
+          CreateDependantsService,
+          CreateOutgoingsService,
+          CreateStateBenefitsService,
+          CreateOtherIncomeService,
+          CreateIrregularIncomesService,
+          CreateEmploymentsService,
+          CreateCashTransactionsService,
+        ]
+      end
+
+      before do
+        all_services = non_passported_services | passported_services
+
+        all_services.each do |service|
+          allow(service).to receive(:call).and_return(true)
+        end
+      end
+
+      context "with a passported application" do
+        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
+
+        it "creates a submission record for the application" do
+          expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
         end
 
-        context "passported application" do
-          let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
+        it "calls expected services" do
+          submission_manager.call
 
-          it "creates a submission record" do
-            expect { submission_manager.call }.to change(Submission, :count).by(1)
+          expect(passported_services).to all(have_received(:call).once)
+        end
+
+        it "does not call the services only required for non-passported applications" do
+          submission_manager.call
+
+          non_passported_only_services.each do |service|
+            expect(service).not_to have_received(:call)
+          end
+        end
+
+        context "on submission error" do
+          let(:message) { Faker::Lorem.sentence }
+
+          before do
+            allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
           end
 
-          it "calls all the services it manages" do
-            expect(CreateAssessmentService).to receive(:call).and_return(true)
-            expect(CreateProceedingTypesService).to receive(:call).and_return(true)
-            expect(CreateApplicantService).to receive(:call).and_return(true)
-            expect(CreateCapitalsService).to receive(:call).and_return(true)
-            expect(CreatePropertiesService).to receive(:call).and_return(true)
-            expect(CreateVehiclesService).to receive(:call).and_return(true)
-            expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
-            expect(CreateExplicitRemarksService).to receive(:call).and_return(true)
+          it "records error in submission" do
+            submission_manager.call
+            expect(submission.error_message).to eq(message)
+            expect(submission).to be_failed
+          end
+
+          it "captures error" do
+            expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
             submission_manager.call
           end
 
-          it "does not call the services only required for non-passported applications" do
-            expect(CreateStateBenefitsService).not_to receive(:call)
-            expect(CreateDependantsService).not_to receive(:call)
-            expect(CreateOtherIncomeService).not_to receive(:call)
-            expect(CreateIrregularIncomesService).not_to receive(:call)
-            expect(CreateCashTransactionsService).not_to receive(:call)
-            submission_manager.call
-          end
-
-          context "on submission error" do
-            let(:message) { Faker::Lorem.sentence }
-
+          context "does not change state if already :failed" do
             before do
               allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
+              submission.fail!
             end
 
             it "records error in submission" do
@@ -105,56 +152,33 @@ module CFE
               expect(submission.error_message).to eq(message)
               expect(submission).to be_failed
             end
-
-            it "captures error" do
-              expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
-              submission_manager.call
-            end
-
-            context "does not change state if already :failed" do
-              before do
-                allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
-                submission.fail!
-              end
-
-              it "records error in submission" do
-                submission_manager.call
-                expect(submission.error_message).to eq(message)
-                expect(submission).to be_failed
-              end
-            end
           end
         end
+      end
 
-        context "non-passported application" do
-          let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
+      context "with a non-passported application" do
+        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
 
-          it "calls all the services it manages" do
-            expect(CreateAssessmentService).to receive(:call).and_return(true)
-            expect(CreateProceedingTypesService).to receive(:call).and_return(true)
-            expect(CreateApplicantService).to receive(:call).and_return(true)
-            expect(CreateCapitalsService).to receive(:call).and_return(true)
-            expect(CreatePropertiesService).to receive(:call).and_return(true)
-            expect(CreateVehiclesService).to receive(:call).and_return(true)
-            expect(ObtainAssessmentResultService).to receive(:call).and_return(true)
-            expect(CreateStateBenefitsService).to receive(:call).and_return(true)
-            expect(CreateDependantsService).to receive(:call).and_return(true)
-            expect(CreateOutgoingsService).to receive(:call).and_return(true)
-            expect(CreateOtherIncomeService).to receive(:call).and_return(true)
-            expect(CreateExplicitRemarksService).to receive(:call).and_return(true)
-            expect(CreateIrregularIncomesService).to receive(:call).and_return(true)
-            expect(CreateCashTransactionsService).to receive(:call).and_return(true)
-            expect(CreateEmploymentsService).to receive(:call).and_return(true)
-
-            submission_manager.call
-          end
-
-          describe "#submission" do
-            it "associates the application with the submission" do
-              expect(submission.legal_aid_application_id).to eq application.id
-            end
-          end
+        it "creates a submission record for the application" do
+          expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
         end
+
+        it "calls expected services" do
+          submission_manager.call
+
+          expect(non_passported_services).to all(have_received(:call).once)
+        end
+      end
+    end
+
+    describe "#submission" do
+      subject(:submission) { described_class.new(application.id).submission }
+
+      let(:application) { create(:legal_aid_application) }
+
+      it "creates and returns submission record for the application" do
+        expect { submission }.to change(application.cfe_submissions, :count).by(1)
+        expect(submission).to be_a(CFE::Submission)
       end
     end
   end
