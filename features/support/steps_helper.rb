@@ -5,6 +5,12 @@ Then("I debug the response body") do
   puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
 end
 
+Then("I print the response body html") do
+  puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+  puts page.body
+  puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
+end
+
 Then("I should be on a page showing {string}") do |title|
   expect(page).to have_content(title)
 end
