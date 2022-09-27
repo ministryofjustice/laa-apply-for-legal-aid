@@ -42,6 +42,11 @@ Then("I click the last link {string}") do |link_name|
   all(:link, link_name).last.click
 end
 
+Then("I open the section {string}") do |section|
+  section = page.find(".govuk-details__summary-text", text: section)
+  section.click
+end
+
 Then("I select {string}") do |option|
   check(option, allow_label_click: true)
 end

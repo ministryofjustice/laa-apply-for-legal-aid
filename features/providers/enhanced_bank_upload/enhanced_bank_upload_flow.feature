@@ -23,7 +23,15 @@ Feature: Enhanced bank upload flow
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
+    And I should see 'Disregarded benefits'
     And the page is accessible
+
+    When I open the section 'Disregarded benefits'
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Carer and disability benefits |
+      | h2  | Low income benefits |
+      | h2  | Other benefits |
 
     When I check "Benefits"
     And I fill "Benefits amount" with "500"
