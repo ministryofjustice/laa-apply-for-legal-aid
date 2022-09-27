@@ -86,7 +86,11 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
-  describe "#delegated_functions_scope_limitation_meaning" do # TEMP for coverage
+  describe "#delegated_functions_scope_limitation_meaning" do
+    # TODO: This is TEMP for coverage
+    # This was not being explicitly tested and caused a code-coverage drop, it can be
+    # removed once the helper methods for single scope limitation values are removed from
+    # the proceeding object
     subject(:delegated_functions_scope_limitation_meaning) { proceeding.delegated_functions_scope_limitation_meaning }
 
     it { is_expected.not_to be_nil }
