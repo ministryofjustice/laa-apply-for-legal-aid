@@ -30,10 +30,12 @@ end
 
 Then(/^I upload an evidence file named ['|"](.*?)['|"]/) do |filename|
   attach_file(Rails.root.join("spec/fixtures/files/documents/#{filename}"), class: "dz-hidden-input", make_visible: true, wait: 30)
+  expect(page).to have_content("#{filename} UPLOADED")
 end
 
 Then(/^I upload the fixture file named ['|"](.*?)['|"]/) do |filename|
   attach_file(Rails.root.join("spec/fixtures/files/#{filename}"), class: "dz-hidden-input", make_visible: true, wait: 30)
+  expect(page).to have_content("#{filename} UPLOADED")
 end
 
 Then(/^I should be able to categorise ['|"](.*?)['|"] as ['|"](.*?)['|"]$/) do |filename, category|

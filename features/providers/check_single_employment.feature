@@ -130,7 +130,6 @@ Feature: Check single employment
     Then I should be on a page showing "Upload supporting evidence"
 
     When I upload an evidence file named 'hello_world.pdf'
-    And I sleep for 2 seconds
     And I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
     And I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
@@ -147,7 +146,3 @@ Feature: Check single employment
 
     When I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-
-
-
-

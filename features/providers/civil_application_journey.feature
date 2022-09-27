@@ -703,8 +703,6 @@ Feature: Civil application journeys
     Then I fill "Application merits task statement of case statement field" with "Statement of case"
     When I upload an evidence file named 'hello_world.pdf'
     Then I should not see "There was a problem uploading your file"
-    Then I should be on a page showing "hello_world.pdf"
-    Then I should be on a page showing "UPLOADED"
     Then I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Chances of success\nNOT STARTED'
     When I click link 'Chances of success'

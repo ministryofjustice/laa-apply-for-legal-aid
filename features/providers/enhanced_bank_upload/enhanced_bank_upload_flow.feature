@@ -13,10 +13,7 @@ Feature: Enhanced bank upload flow
 
     Given I upload the fixture file named "acceptable.pdf"
     And I upload an evidence file named "hello_world.pdf"
-    Then I should see "acceptable.pdf UPLOADED"
-    And I should see "hello_world.pdf UPLOADED"
-
-    When I click "Save and continue"
+    And I click "Save and continue"
     Then I should be on a page with title matching "Review .*'s employment income"
     And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
     And the page is accessible

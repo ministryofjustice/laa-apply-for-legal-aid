@@ -121,12 +121,9 @@ Feature: Merits task list
     When I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     When I upload an evidence file named 'hello_world.pdf'
-    Then I should see 'hello_world.pdf'
-    And I should see 'UPLOADED'
-    When I click 'Delete'
+    Then I click 'Delete'
     Then I should see 'hello_world.pdf has been successfully deleted'
     And I should not see 'UPLOADED'
     Then I upload an evidence file named 'hello_world.pdf'
-    And I should see 'UPLOADED'
     When I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'

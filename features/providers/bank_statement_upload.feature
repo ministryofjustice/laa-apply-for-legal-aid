@@ -28,9 +28,7 @@ Feature: Bank statement upload
     And I should see govuk error summary "Upload your client's bank statements"
 
     When I upload the fixture file named 'acceptable.pdf'
-    Then I should see 'acceptable.pdf UPLOADED'
-
-    When I click 'Save and continue'
+    And I click 'Save and continue'
     Then I should be on a page with title matching "Review .*'s employment income"
 
     When I click link "Back"
@@ -55,9 +53,6 @@ Feature: Bank statement upload
     Given I upload the fixture file named 'acceptable.pdf'
     And I upload an evidence file named 'hello_world.pdf'
     And I upload an evidence file named 'hello_world.docx'
-    Then I should see 'acceptable.pdf UPLOADED'
-    And I should see 'hello_world.pdf UPLOADED'
-    And I should see 'hello_world.docx UPLOADED'
 
     When I click delete for the file 'hello_world.pdf'
     Then I should see 'hello_world.pdf has been successfully deleted'

@@ -131,7 +131,6 @@ Feature: Check multiple employment
     Then I should be on a page showing "Upload supporting evidence"
 
     When I upload an evidence file named 'hello_world.pdf'
-    And I sleep for 2 seconds
     Then I should be able to categorise 'hello_world.pdf' as 'Employment evidence'
 
     When I click 'Save and continue'
@@ -163,4 +162,3 @@ Feature: Check multiple employment
 
     When I click 'Continue'
     Then I should be on a page showing "HMRC found a record of your client's employment"
-
