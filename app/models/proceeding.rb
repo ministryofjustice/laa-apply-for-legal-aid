@@ -13,6 +13,8 @@ class Proceeding < ApplicationRecord
            through: :proceeding_linked_children,
            source: :involved_child
 
+  has_many :scope_limitations, dependent: :destroy
+
   scope :in_order_of_addition, -> { order(:created_at) }
   scope :incomplete, -> { where(used_delegated_functions: nil) }
   scope :using_delegated_functions, -> { where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
@@ -42,13 +44,37 @@ class Proceeding < ApplicationRecord
     ccms_matter_code == "MINJN"
   end
 
-  # def default_level_of_service_level
-  #   "3"
-  # end
-  #
-  # def default_level_of_service_name
-  #   "Full Representation"
-  # end
+  def substantive_scope_limitations
+    scope_limitations.where(scope_type: :substantive)
+  end
+
+  def emergency_scope_limitations
+    scope_limitations.where(scope_type: :emergency)
+  end
+
+  def substantive_scope_limitation_code
+    self["substantive_scope_limitation_code"] || substantive_scope_limitations&.first&.code
+  end
+
+  def substantive_scope_limitation_meaning
+    self["substantive_scope_limitation_meaning"] || substantive_scope_limitations&.first&.meaning
+  end
+
+  def substantive_scope_limitation_description
+    self["substantive_scope_limitation_description"] || substantive_scope_limitations&.first&.description
+  end
+
+  def delegated_functions_scope_limitation_code
+    self["delegated_functions_scope_limitation_code"] || emergency_scope_limitations&.first&.code
+  end
+
+  def delegated_functions_scope_limitation_meaning
+    self["delegated_functions_scope_limitation_meaning"] || emergency_scope_limitations&.first&.meaning
+  end
+
+  def delegated_functions_scope_limitation_description
+    self["delegated_functions_scope_limitation_description"] || emergency_scope_limitations&.first&.description
+  end
 
   def highest_proceeding_case_id
     rec = self.class.order(proceeding_case_id: :desc).first

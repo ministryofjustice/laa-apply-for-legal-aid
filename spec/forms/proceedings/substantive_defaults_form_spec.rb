@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
   subject(:form) { described_class.new(form_params) }
 
-  let(:proceeding) { create :proceeding, :da001, :without_df_date, :with_cit_z }
+  let(:proceeding) { create :proceeding, :da001, :without_df_date, :with_cit_z, no_scope_limitations: true }
   let(:params) do
     {
       accepted_substantive_defaults: accepted,
@@ -14,7 +14,9 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
   describe "#save" do
     subject(:save_form) { form.save }
 
-    before { save_form }
+    before { save_form unless skip_subject }
+
+    let(:skip_subject) { false }
 
     context "when the submission is valid" do
       context "and the user accepts the defaults" do
@@ -28,9 +30,17 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
           expect(proceeding.substantive_level_of_service).to eq 3
           expect(proceeding.substantive_level_of_service_name).to eq "Full Representation"
           expect(proceeding.substantive_level_of_service_stage).to eq 8
-          expect(proceeding.substantive_scope_limitation_code).to eq "FM062"
-          expect(proceeding.substantive_scope_limitation_meaning).to eq "Final hearing"
-          expect(proceeding.substantive_scope_limitation_description).to eq "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order."
+        end
+
+        context "without calling the subject" do
+          let(:skip_subject) { true }
+
+          it "creates a scope_limitation object" do
+            expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
+            expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "AA019",
+                                                                                                      meaning: "Injunction FLA-to final hearing",
+                                                                                                      description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
+          end
         end
       end
 
@@ -45,9 +55,14 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
           expect(proceeding.substantive_level_of_service).to be_nil
           expect(proceeding.substantive_level_of_service_name).to be_nil
           expect(proceeding.substantive_level_of_service_stage).to be_nil
-          expect(proceeding.substantive_scope_limitation_meaning).to be_nil
-          expect(proceeding.substantive_scope_limitation_description).to be_nil
-          expect(proceeding.substantive_scope_limitation_code).to be_nil
+        end
+
+        context "without calling the subject" do
+          let(:skip_subject) { true }
+
+          it "does not create a scope_limitation object" do
+            expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+          end
         end
       end
     end
@@ -61,6 +76,14 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
 
       it "generates the expected error message" do
         expect(form.errors.map(&:attribute)).to eq [:accepted_substantive_defaults]
+      end
+
+      context "without calling the subject" do
+        let(:skip_subject) { true }
+
+        it "does not create a scope_limitation object" do
+          expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+        end
       end
     end
   end

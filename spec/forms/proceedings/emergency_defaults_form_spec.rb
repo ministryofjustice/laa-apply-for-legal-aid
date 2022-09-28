@@ -35,7 +35,9 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
   describe "#save" do
     subject(:save_form) { form.save }
 
-    before { save_form }
+    before { save_form unless skip_subject }
+
+    let(:skip_subject) { false }
 
     context "when the submission is valid" do
       context "and the user accepts the defaults" do
@@ -45,9 +47,6 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
             emergency_level_of_service: 3,
             emergency_level_of_service_name: "Full Representation",
             emergency_level_of_service_stage: 8,
-            delegated_functions_scope_limitation_code: "CV117",
-            delegated_functions_scope_limitation_meaning: "Interim order inc. return date",
-            delegated_functions_scope_limitation_description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
           }
         end
 
@@ -59,9 +58,17 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
           expect(proceeding.reload.emergency_level_of_service).to eq 3
           expect(proceeding.reload.emergency_level_of_service_name).to eq "Full Representation"
           expect(proceeding.reload.emergency_level_of_service_stage).to eq 8
-          expect(proceeding.reload.delegated_functions_scope_limitation_code).to eq "CV117"
-          expect(proceeding.reload.delegated_functions_scope_limitation_meaning).to eq "Interim order inc. return date"
-          expect(proceeding.reload.delegated_functions_scope_limitation_description).to eq "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date."
+        end
+
+        context "without calling the subject" do
+          let(:skip_subject) { true }
+
+          it "creates a scope_limitation object" do
+            expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
+                                                                                                    meaning: "Interim order inc. return date",
+                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.")
+          end
         end
       end
 
@@ -76,9 +83,14 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
           expect(proceeding.reload.emergency_level_of_service).to be_nil
           expect(proceeding.reload.emergency_level_of_service_name).to be_nil
           expect(proceeding.reload.emergency_level_of_service_stage).to be_nil
-          expect(proceeding.reload.delegated_functions_scope_limitation_code).to be_nil
-          expect(proceeding.reload.delegated_functions_scope_limitation_meaning).to be_nil
-          expect(proceeding.reload.delegated_functions_scope_limitation_description).to be_nil
+        end
+
+        context "without calling the subject" do
+          let(:skip_subject) { true }
+
+          it "does not create a scope_limitation object" do
+            expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+          end
         end
       end
     end
@@ -92,6 +104,14 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
 
       it "generates the expected error message" do
         expect(form.errors.map(&:attribute)).to eq [:accepted_emergency_defaults]
+      end
+
+      context "without calling the subject" do
+        let(:skip_subject) { true }
+
+        it "does not create a scope_limitation object" do
+          expect { save_form }.not_to change(proceeding.scope_limitations, :count)
+        end
       end
     end
   end

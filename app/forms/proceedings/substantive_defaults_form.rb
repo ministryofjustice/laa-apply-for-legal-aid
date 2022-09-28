@@ -14,7 +14,7 @@ module Proceedings
 
     def initialize(*args)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model]))
+      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
       self.substantive_level_of_service = @defaults["default_level_of_service"]["level"]
       self.substantive_level_of_service_name = @defaults["default_level_of_service"]["name"]
       self.substantive_level_of_service_stage = @defaults["default_level_of_service"]["stage"]
@@ -24,15 +24,25 @@ module Proceedings
     end
 
     def save
-      if accepted_substantive_defaults&.to_s == "false"
+      case accepted_substantive_defaults&.to_s
+      when "false"
         attributes[:substantive_level_of_service] = nil
         attributes[:substantive_level_of_service_name] = nil
         attributes[:substantive_level_of_service_stage] = nil
-        attributes[:substantive_scope_limitation_meaning] = nil
-        attributes[:substantive_scope_limitation_description] = nil
-        attributes[:substantive_scope_limitation_code] = nil
+      when "true"
+        model.scope_limitations.create!(scope_type: :substantive,
+                                        code: substantive_scope_limitation_code,
+                                        meaning: substantive_scope_limitation_meaning,
+                                        description: substantive_scope_limitation_description)
       end
       super
+    end
+
+    def exclude_from_model
+      %i[additional_params
+         substantive_scope_limitation_code
+         substantive_scope_limitation_meaning
+         substantive_scope_limitation_description]
     end
   end
 end

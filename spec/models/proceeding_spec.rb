@@ -86,6 +86,16 @@ RSpec.describe Proceeding, type: :model do
     end
   end
 
+  describe "#delegated_functions_scope_limitation_meaning" do
+    # TODO: This is TEMP for coverage
+    # This was not being explicitly tested and caused a code-coverage drop, it can be
+    # removed once the helper methods for single scope limitation values are removed from
+    # the proceeding object
+    subject(:delegated_functions_scope_limitation_meaning) { proceeding.delegated_functions_scope_limitation_meaning }
+
+    it { is_expected.not_to be_nil }
+  end
+
   describe "#proceeding_case_p_num" do
     it "prefixes the proceeding case id with P_" do
       legal_aid_application = create :legal_aid_application, :with_proceedings
