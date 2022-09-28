@@ -34,10 +34,12 @@ Feature: Enhanced bank upload flow
       | h2  | Other benefits |
 
     When I check "Benefits"
+    Then I should not see "Monthly"
     And I fill "Benefits amount" with "500"
-    And I choose "providers-means-regular-income-form-benefits-frequency-weekly-field"
+    And I choose "providers-means-regular-income-form-benefits-frequency-every-week-field"
 
     Then I check "Pension"
+    Then I should see "Monthly"
     And I fill "Pension amount" with "100"
     And I choose "providers-means-regular-income-form-pension-frequency-monthly-field"
 
@@ -60,11 +62,11 @@ Feature: Enhanced bank upload flow
 
     When I select "Housing"
     And I fill "Rent or mortgage amount" with "500"
-    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-monthly-field"
+    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-every-two-weeks-field"
 
     Then I select "Childcare"
     And I fill "Child care amount" with "100"
-    And I choose "providers-means-regular-outgoings-form-child-care-frequency-weekly-field"
+    And I choose "providers-means-regular-outgoings-form-child-care-frequency-every-week-field"
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client makes in cash"

@@ -17,7 +17,7 @@
                                  width: "one-quarter",
                                  prefix_text: "£" %>
           <%= f.govuk_collection_radio_buttons "#{transaction_type.name}_frequency".to_sym,
-                                               RegularTransaction::FREQUENCIES,
+                                               @form.frequencies(transaction_type),
                                                :itself,
                                                ->(option) { option.humanize },
                                                legend: {tag: "p", size: "s"} %>

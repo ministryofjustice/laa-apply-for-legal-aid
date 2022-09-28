@@ -1,5 +1,5 @@
 class RegularTransaction < ApplicationRecord
-  FREQUENCIES = %w[weekly monthly].freeze
+  FREQUENCIES = %w[every_week every_two_weeks every_four_weeks monthly total_in_last_three_months].freeze
 
   belongs_to :legal_aid_application
   belongs_to :transaction_type
