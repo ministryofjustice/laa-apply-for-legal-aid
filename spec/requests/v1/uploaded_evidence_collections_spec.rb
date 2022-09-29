@@ -54,7 +54,7 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
         end
       end
 
-      context "file contains a malware" do
+      context "file contains a malware", clamav: true do
         let(:file) { uploaded_file("spec/fixtures/files/malware.doc") }
 
         it "does not save the object and raises an error" do
