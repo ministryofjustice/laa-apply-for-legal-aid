@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :scope_limitation do
-    proceeding
+    proceeding { create :proceeding, :da001 }
 
     trait :emergency do
       scope_type { 1 }
@@ -12,11 +12,25 @@ FactoryBot.define do
       end
     end
 
+    trait :emergency_cv118 do
+      scope_type { 1 }
+      code { "CV118" }
+      meaning { "Hearing" }
+      description { "Limited to all steps up to and including the hearing on [see additional limitation notes]" }
+    end
+
     trait :substantive do
       scope_type { 0 }
       code { "FM062" }
       meaning { "Final hearing" }
       description { "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order." }
+    end
+
+    trait :substantive_CV119 do
+      scope_type { 0 }
+      code { "CV119" }
+      meaning { "General Report" }
+      description { "Limited to obtaining a report from [see additional limitation notes]" }
     end
   end
 end
