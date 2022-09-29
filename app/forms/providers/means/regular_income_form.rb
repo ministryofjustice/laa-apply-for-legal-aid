@@ -12,6 +12,12 @@ module Providers
         pension
       ].freeze
 
+      DISREGARDED_BENEFIT_CATEGORIES = %w[
+        carer_and_disability
+        low_income
+        other
+      ].freeze
+
       attr_reader :transaction_type_ids, :legal_aid_application
 
       INCOME_TYPES.each do |income_type|
@@ -60,6 +66,10 @@ module Providers
 
       def transaction_type_options
         TransactionType.not_children.credits
+      end
+
+      def disregarded_benefit_categories
+        DISREGARDED_BENEFIT_CATEGORIES
       end
 
       def none_selected
