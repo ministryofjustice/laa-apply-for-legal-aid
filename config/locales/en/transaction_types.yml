@@ -38,6 +38,12 @@ en:
         child_care: for childcare
         maintenance_out: in maintenance
         legal_aid: towards legal aid
+    frequencies:
+      weekly: Every week
+      two_weekly: Every two weeks
+      four_weekly: Every four weeks
+      monthly: Monthly
+      three_monthly: Total in the last three months
     table_label:
       benefits: Benefits
       child_care: Childcare

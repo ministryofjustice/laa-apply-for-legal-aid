@@ -76,10 +76,6 @@ module Providers
         "none"
       end
 
-      def frequencies(transaction_type)
-        transaction_type.name == "benefits" ? RegularTransaction::FREQUENCIES.without("monthly") : RegularTransaction::FREQUENCIES
-      end
-
     private
 
       def assign_regular_transaction_attributes
