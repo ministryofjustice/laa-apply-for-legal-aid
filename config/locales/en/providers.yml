@@ -705,9 +705,9 @@ en:
             friends_or_family: >-
               Select if a friend or relative regularly gives your client money to help with
               living costs. Do not include one-off payments.
-            maintenance_in: This includes child maintenance
+            maintenance_in: This includes child maintenance.
             property_or_lodger: ""
-            pension: Include State, workplace and personal pensions
+            pension: Include State, workplace and personal pensions.
           labels:
             benefits: Benefits
             friends_or_family: Financial help from friends or family
@@ -754,6 +754,19 @@ en:
               War Widow(er) Pension
               Widow's Pension lump sum payments
               Windrush Compensation Scheme Payments
+      regular_outgoings:
+        show:
+          hints:
+            rent_or_mortgage: For example, rent, mortgage or board and lodging.
+            child_care: For example, to a childminder, nanny or nursery.
+            maintenance_out: This includes child maintenance
+            legal_aid: ""
+          labels:
+            rent_or_mortgage: Housing payments
+            child_care: Childcare payments
+            maintenance_out: Maintenance payments to a former partner
+            legal_aid: Payments towards legal aid in a criminal case
+            none: My client makes none of these payments
       has_dependants:
         show:
           page_title: "Does your client have any dependants?"

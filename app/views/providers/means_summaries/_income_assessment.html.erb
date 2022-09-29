@@ -34,7 +34,7 @@
 <%= render(
       'shared/check_answers/income_summary',
       income_type: t('.debits-section-heading'),
-      url: :identify_types_of_outgoings,
+      url:  @legal_aid_application.using_enhanced_bank_upload? ? :regular_outgoings : :identify_types_of_outgoings,
       transaction_types: TransactionType.debits
     ) %>
 

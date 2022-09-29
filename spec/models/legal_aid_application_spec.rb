@@ -291,6 +291,26 @@ RSpec.describe LegalAidApplication, type: :model do
     end
   end
 
+  describe "#outgoing_types?" do
+    context "when debit transaction types exist" do
+      let(:rent_or_mortgage_debit) { create(:transaction_type, :rent_or_mortgage) }
+      let(:legal_aid_application) { create(:legal_aid_application, transaction_types: [rent_or_mortgage_debit]) }
+
+      it "returns true" do
+        expect(legal_aid_application.reload.outgoing_types?).to be true
+      end
+    end
+
+    context "when no debit transaction types exist" do
+      let(:benefits_credit) { create(:transaction_type, :benefits) }
+      let(:legal_aid_application) { create(:legal_aid_application, transaction_types: [benefits_credit]) }
+
+      it "returns false" do
+        expect(legal_aid_application.outgoing_types?).to be false
+      end
+    end
+  end
+
   describe "#statement_of_case_uploaded?" do
     let(:legal_aid_application) { create :legal_aid_application }
 

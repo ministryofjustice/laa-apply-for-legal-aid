@@ -52,6 +52,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :employments, dependent: :destroy
   has_many :regular_transactions, dependent: :destroy
   has_many :regular_incomes, -> { credits }, class_name: "RegularTransaction"
+  has_many :regular_outgoings, -> { debits }, class_name: "RegularTransaction"
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref

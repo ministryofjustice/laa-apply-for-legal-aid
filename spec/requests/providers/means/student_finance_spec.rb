@@ -34,14 +34,41 @@ RSpec.describe "student_finance", type: :request do
       }
     end
 
-    context "when irregular incomes do not already exist" do
+    context "when the enhanced bank upload setting is enabled" do
       let(:amount) { 2345 }
       let(:student_finance) { "true" }
+      let(:legal_aid_application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
+
+      before do
+        Setting.setting.update!(enhanced_bank_upload: true)
+        permission = create(:permission, :bank_statement_upload)
+        provider.permissions << permission
+        provider.save!
+      end
+
+      it "redirects to the regular outgoings page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_regular_outgoings_path(legal_aid_application))
+      end
+    end
+
+    context "when the enhanced bank upload setting is not enabled" do
+      let(:amount) { 2345 }
+      let(:student_finance) { "true" }
+
+      before do
+        Setting.setting.update!(enhanced_bank_upload: false)
+      end
 
       it "redirects to the identify_types_of_outgoing page" do
         request
         expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path)
       end
+    end
+
+    context "when irregular incomes do not already exist" do
+      let(:amount) { 2345 }
+      let(:student_finance) { "true" }
 
       it "creates an irregular income record" do
         expect { request }.to change(IrregularIncome, :count).by(1)
@@ -89,11 +116,6 @@ RSpec.describe "student_finance", type: :request do
     context "when responds NO to student finance" do
       let(:student_finance) { "false" }
       let(:amount) { "" }
-
-      it "redirects to the identify_types_of_outgoing page" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path)
-      end
 
       it "updates the legal aid application record" do
         expect { request }.to change { legal_aid_application.reload.student_finance }.from(nil).to(false)
