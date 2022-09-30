@@ -522,6 +522,10 @@ class LegalAidApplication < ApplicationRecord
     Setting.enhanced_bank_upload? && uploading_bank_statements?
   end
 
+  def housing_payments?
+    transaction_types.for_outgoing_type?(:rent_or_mortgage)
+  end
+
 private
 
   def client_open_banking_consent?
@@ -552,7 +556,7 @@ private
   end
 
   def add_uncategorised_transaction_error(transaction_type)
-    return if transaction_type.name == "excluded_benefits"
+    return if transaction_type.disregarded_benefit?
 
     errors.add(transaction_type.name, I18n.t("activemodel.errors.models.legal_aid_application.attributes.uncategorised_bank_transactions.message"))
   end

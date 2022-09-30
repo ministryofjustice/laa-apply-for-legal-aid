@@ -41,7 +41,7 @@ RSpec.describe TransactionType, type: :model do
     end
   end
 
-  describe "#for_income_type?" do
+  describe ".for_income_type?" do
     context "when checks that a boolean response is returned" do
       let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
 
@@ -59,7 +59,7 @@ RSpec.describe TransactionType, type: :model do
     end
   end
 
-  describe "#for_outgoing_type?" do
+  describe ".for_outgoing_type?" do
     before { create :transaction_type, :child_care }
 
     context "when no such outgoing types exist" do
@@ -90,6 +90,7 @@ RSpec.describe TransactionType, type: :model do
 
     let(:benefits) { described_class.find_by(name: "benefits") }
     let(:excluded_benefits) { described_class.find_by(name: "excluded_benefits") }
+    let(:housing_benefit) { described_class.find_by(name: "housing_benefit") }
     let(:pension) { described_class.find_by(name: "pension") }
 
     describe "not_children scope" do
@@ -112,34 +113,6 @@ RSpec.describe TransactionType, type: :model do
       end
     end
 
-    describe "#parent?" do
-      context "when is a parent" do
-        it "returns true" do
-          expect(benefits.parent?).to be true
-        end
-      end
-
-      context "when is not a parent" do
-        it "returns true" do
-          expect(pension.parent?).to be false
-        end
-      end
-    end
-
-    describe "#parent" do
-      context "when is not a child" do
-        it "returns nil" do
-          expect(pension.parent).to be_nil
-        end
-      end
-
-      context "when is a child" do
-        it "returns the parent record" do
-          expect(excluded_benefits.parent).to eq benefits
-        end
-      end
-    end
-
     describe "parent_or_self" do
       context "when is not a child" do
         it "returns self" do
@@ -154,16 +127,16 @@ RSpec.describe TransactionType, type: :model do
       end
     end
 
-    describe "#excluded_benefit?" do
-      context "when a excluded benefit type" do
+    describe "#disregarded_benefit?" do
+      context "when a disregarded benefit type" do
         it "returns true" do
-          expect(excluded_benefits.excluded_benefit?).to be true
+          expect(excluded_benefits.disregarded_benefit?).to be true
         end
       end
 
-      context "when not an excluded benefit type" do
+      context "when not a disregarded benefit type" do
         it "returns false" do
-          expect(pension.excluded_benefit?).to be false
+          expect(pension.disregarded_benefit?).to be false
         end
       end
     end
@@ -177,59 +150,7 @@ RSpec.describe TransactionType, type: :model do
 
       context "with record with children" do
         it "returns an array of children" do
-          expect(benefits.children).to eq [excluded_benefits]
-        end
-      end
-    end
-
-    describe ".find_with_children" do
-      context "with one id with no children" do
-        it "return the one record" do
-          expect(described_class.find_with_children(pension.id)).to eq [pension]
-        end
-      end
-
-      context "with one id with children" do
-        it "returns the parent and child" do
-          expect(described_class.find_with_children(benefits.id)).to match_array([benefits, excluded_benefits])
-        end
-      end
-
-      context "with multiple ids all without children" do
-        it "returns just the records" do
-          expect(described_class.find_with_children(pension.id, excluded_benefits.id)).to match_array([pension, excluded_benefits])
-        end
-      end
-
-      context "with multiple ids with and without children" do
-        it "returns the records and the children" do
-          expect(described_class.find_with_children(pension.id, benefits.id)).to match_array([pension, benefits, excluded_benefits])
-        end
-      end
-
-      context "with nil" do
-        it "returns empty array" do
-          expect(described_class.find_with_children(nil)).to match_array([])
-        end
-      end
-    end
-
-    describe ".any_type_of" do
-      context "with name of record with children" do
-        it "returns record and its children" do
-          expect(described_class.any_type_of("benefits")).to match_array([benefits, excluded_benefits])
-        end
-      end
-
-      context "with name of record with no children" do
-        it "returns just that record in an array" do
-          expect(described_class.any_type_of("pension")).to eq [pension]
-        end
-      end
-
-      context "with name that does not exist" do
-        it "returns an empty collection" do
-          expect(described_class.any_type_of("xxx")).to be_empty
+          expect(benefits.children).to contain_exactly(excluded_benefits, housing_benefit)
         end
       end
     end

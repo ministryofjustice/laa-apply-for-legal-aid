@@ -6,6 +6,7 @@ class TransactionType < ApplicationRecord
     credit: %i[
       benefits
       excluded_benefits
+      housing_benefit
       friends_or_family
       maintenance_in
       property_or_lodger
@@ -20,7 +21,10 @@ class TransactionType < ApplicationRecord
     ],
   }.freeze
 
-  EXCLUDED_BENEFITS = "excluded_benefits".freeze
+  DISREGARDED_BENEFITS = %w[
+    excluded_benefits
+    housing_benefit
+  ].freeze
 
   OTHER_INCOME_TYPES = %w[
     friends_or_family
@@ -32,6 +36,7 @@ class TransactionType < ApplicationRecord
 
   HIERARCHIES = {
     excluded_benefits: :benefits,
+    housing_benefit: :benefits,
   }.freeze
 
   scope :active, -> { where(archived_at: nil) }
@@ -45,55 +50,39 @@ class TransactionType < ApplicationRecord
     income_for(transaction_type_name).any?
   end
 
+  def self.for_outgoing_type?(transaction_type_name)
+    outgoing_for(transaction_type_name).any?
+  end
+
   def self.other_income
-    TransactionType.where(other_income: true)
+    where(other_income: true)
   end
 
   def label_name(journey: :citizens)
     I18n.t("transaction_types.names.#{journey}.#{name}")
   end
 
-  def self.for_outgoing_type?(transaction_type_name)
-    outgoing_for(transaction_type_name).any?
-  end
-
-  def self.find_with_children(*ids)
-    all_ids = (ids + TransactionType.where(parent_id: ids.compact).pluck(:id)).flatten
-    where(id: all_ids)
-  end
-
-  def self.any_type_of(name)
-    top_level_id = TransactionType.find_by(name:)&.id
-    return [] if top_level_id.nil?
-
-    find_with_children(top_level_id)
-  end
-
   def providers_label_name
     label_name(journey: :providers)
   end
 
-  def excluded_benefit?
-    name == EXCLUDED_BENEFITS
+  def disregarded_benefit?
+    name.in?(DISREGARDED_BENEFITS)
   end
 
   def child?
     parent_id.present?
   end
 
-  def parent?
-    TransactionType.where(parent_id: id).any?
-  end
-
-  def parent
-    TransactionType.find_by(id: parent_id)
-  end
-
   def children
-    TransactionType.where(parent_id: id)
+    self.class.where(parent_id: id)
   end
 
   def parent_or_self
-    parent_id.present? ? parent : self
+    if parent_id.present?
+      self.class.find(parent_id)
+    else
+      self
+    end
   end
 end

@@ -32,6 +32,11 @@ en:
       legal_aid_application:
         own_vehicle:
           <<: *true_false
+      providers_means_housing_benefit_form:
+        housing_benefit_amount: Enter amount
+        housing_benefit_options:
+          "true": "Yes"
+          "false": "No"
       providers_means_regular_income_form:
         benefits_amount: Enter amount
         friends_or_family_amount: Enter amount
@@ -74,6 +79,9 @@ en:
         enhanced_bank_upload:
           <<: *true_false
     legend:
+      providers_means_housing_benefit_form:
+        housing_benefit: Does your client receive housing benefits?
+        housing_benefit_frequency: Select frequency
       providers_means_regular_income_form:
         benefits_frequency: Select frequency
         friends_or_family_frequency: Select frequency

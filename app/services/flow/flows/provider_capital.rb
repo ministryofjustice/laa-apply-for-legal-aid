@@ -76,13 +76,28 @@ module Flow
         regular_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_regular_outgoings_path(application) },
           forward: lambda do |application|
-            if application.outgoing_types?
+            if application.housing_payments?
+              :housing_benefits
+            elsif application.outgoing_types?
               :cash_outgoings
             else
               :has_dependants
             end
           end,
-          check_answers: ->(application) { application.outgoing_types? ? :cash_outgoings : :means_summaries },
+          check_answers: lambda do |application|
+            if application.housing_payments?
+              :housing_benefits
+            elsif application.outgoing_types?
+              :cash_outgoings
+            else
+              :means_summaries
+            end
+          end,
+        },
+        housing_benefits: {
+          path: ->(application) { urls.providers_legal_aid_application_means_housing_benefits_path(application) },
+          forward: :cash_outgoings,
+          check_answers: :cash_outgoings,
         },
         cash_outgoings: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_outgoing_path(application) },

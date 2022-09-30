@@ -3,7 +3,7 @@ module UserTransactionsHelper
 
   def incomings_list(incomings, locale_namespace:)
     items = TransactionType.credits&.map do |income_type|
-      next if income_type.excluded_benefit?
+      next if income_type.disregarded_benefit?
 
       TransactionItemStruct.new(t("#{locale_namespace}.#{income_type.name}"),
                                 income_type.name,

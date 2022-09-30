@@ -1,7 +1,7 @@
 module Providers
   class TransactionsController < ProviderBaseController
     def show
-      if transaction_type.name == "excluded_benefits" && !disregarded_state_benefits_list
+      if transaction_type.disregarded_benefit? && !disregarded_state_benefits_list
         redirect_to(problem_index_path) && return
       end
 

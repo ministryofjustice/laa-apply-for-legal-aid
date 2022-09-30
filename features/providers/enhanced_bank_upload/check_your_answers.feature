@@ -86,6 +86,27 @@ Feature: Enhanced bank upload check your answers
     And I should see "Monthly"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
+    And I check "Housing payments"
+    And I fill "Rent or mortgage amount" with "500"
+    And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-monthly-field"
+
+    When I click "Save and continue"
+    Then I should be on the "housing_benefits" page showing "Does your client receive housing benefits?"
+
+    When I choose "Yes"
+    And I enter amount "100"
+    And I choose "Every week"
+
+    And I click "Save and continue"
+    Then I should be on a page with title "Select payments your client makes in cash"
+
+    When I check "None of the above"
+    And I click "Save and continue"
+    Then I should be on the "means_summary" page showing "Check your answers"
+
+    When I click Check Your Answers Change link for "What payments does your client make?"
+    Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And I check "My client makes none of these payments"
     And I click "Save and continue"
     Then I should be on the "means_summary" page showing "Check your answers"

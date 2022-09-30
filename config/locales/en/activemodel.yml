@@ -497,6 +497,16 @@ en:
               file_virus: "%{file_name} contains a virus"
               no_file_chosen: Upload your client's bank statements
               system_down: There was a problem uploading your file - try again
+        providers/means/housing_benefit_form:
+          attributes:
+            housing_benefit:
+              inclusion: Select one of the options
+            housing_benefit_amount:
+              greater_than: Enter a number greater than 0
+              not_a_number: Enter the amount of housing benefit received
+              too_many_decimals: Enter a number with no more than 2 decimal places
+            housing_benefit_frequency:
+              inclusion: Select how often your client receives housing benefit
         providers/means/regular_income_form:
           attributes:
             benefits_amount:

@@ -87,6 +87,10 @@ module Providers
         destroy_legal_aid_application_transaction_types!
         destroy_regular_outgoing_transactions!
         destroy_cash_outgoing_transactions!
+
+        unless housing_payments_selected?
+          destroy_housing_benefit_transactions!
+        end
       end
 
       def destroy_legal_aid_application_transaction_types!
@@ -109,6 +113,24 @@ module Providers
           .cash_transactions
           .debits
           .where.not(transaction_type_id: transaction_type_ids)
+          .destroy_all
+      end
+
+      def housing_payments_selected?
+        transaction_types.exists?(name: "rent_or_mortgage")
+      end
+
+      def destroy_housing_benefit_transactions!
+        legal_aid_application
+          .legal_aid_application_transaction_types
+          .includes(:transaction_type)
+          .where(transaction_type: { name: "housing_benefit" })
+          .destroy_all
+
+        legal_aid_application
+          .regular_transactions
+          .includes(:transaction_type)
+          .where(transaction_type: { name: "housing_benefit" })
           .destroy_all
       end
 

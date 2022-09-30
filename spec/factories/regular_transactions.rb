@@ -16,5 +16,9 @@ FactoryBot.define do
     trait :maintenance_out do
       association :transaction_type, :maintenance_out
     end
+
+    trait :housing_benefit do
+      association :transaction_type, :housing_benefit
+    end
   end
 end

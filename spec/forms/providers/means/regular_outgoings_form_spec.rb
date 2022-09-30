@@ -218,6 +218,29 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         expect(legal_aid_application.cash_transactions)
           .to contain_exactly(cash_transaction)
       end
+
+      it "does not update an application's housing benefit transactions" do
+        legal_aid_application = create(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
+        legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        housing_benefit = create(
+          :regular_transaction,
+          :housing_benefit,
+          legal_aid_application:,
+        )
+        form = described_class.new(legal_aid_application:)
+
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to contain_exactly(legal_aid_application_transaction_type)
+        expect(legal_aid_application.regular_transactions)
+          .to contain_exactly(housing_benefit)
+      end
     end
 
     context "when none is selected" do
@@ -289,6 +312,32 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         expect(legal_aid_application.regular_transactions)
           .to contain_exactly(regular_income_transaction)
       end
+
+      it "destroys any existing housing benefit transactions" do
+        legal_aid_application = create(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
+        _legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        _housing_benefit = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        params = {
+          "transaction_type_ids" => ["", "none"],
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to be_empty
+        expect(legal_aid_application.regular_transactions).to be_empty
+      end
     end
 
     context "when the correct attributes are provided" do
@@ -355,6 +404,68 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         expect(regular_transactions.count).to eq 2
         expect(regular_transactions.pluck(:transaction_type_id, :amount, :frequency))
           .to contain_exactly([rent_or_mortgage.id, 250.50, "weekly"], [child_care.id, 100, "monthly"])
+      end
+
+      it "destroys any existing housing benefit transactions if housing " \
+         "payments are not selected" do
+        legal_aid_application = create(:legal_aid_application)
+        child_care = create(:transaction_type, :child_care)
+        transaction_type = create(:transaction_type, :housing_benefit)
+        legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        housing_benefit = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        params = {
+          "transaction_type_ids" => ["", child_care.id],
+          "child_care_amount" => "100",
+          "child_care_frequency" => "monthly",
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .not_to include(legal_aid_application_transaction_type)
+        expect(legal_aid_application.regular_transactions)
+          .not_to include(housing_benefit)
+      end
+
+      it "does not destroy housing benefit transactions if housing payments " \
+         "are selected" do
+        legal_aid_application = create(:legal_aid_application)
+        rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
+        transaction_type = create(:transaction_type, :housing_benefit)
+        legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        housing_benefit = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type:,
+        )
+        params = {
+          "transaction_type_ids" => ["", rent_or_mortgage.id],
+          "rent_or_mortgage_amount" => "250.50",
+          "rent_or_mortgage_frequency" => "weekly",
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to include(legal_aid_application_transaction_type)
+        expect(legal_aid_application.regular_transactions)
+          .to include(housing_benefit)
       end
     end
   end
