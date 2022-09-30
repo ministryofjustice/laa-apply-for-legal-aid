@@ -27,13 +27,15 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   let(:login) { login_as provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/means_summary" do
-    subject { get providers_legal_aid_application_means_summary_path(legal_aid_application) }
+    subject(:request) do
+      get providers_legal_aid_application_means_summary_path(legal_aid_application)
+    end
 
     let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type:, bank_account: }
 
     before do
       login
-      subject
+      request
     end
 
     it "returns http success" do
@@ -82,84 +84,123 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means_summary" do
-    subject do
+    subject(:request) do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
       patch providers_legal_aid_application_means_summary_path(legal_aid_application), params:
     end
 
     let(:params) { {} }
 
-    context "unauthenticated" do
-      before { subject }
+    context "when unauthenticated" do
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
 
-    context "logged in as an authenticated provider" do
+    context "when logged in as an authenticated provider" do
       before do
         login
         allow(CFE::SubmissionManager).to receive(:call).with(legal_aid_application.id).and_return(cfe_result)
-        subject
       end
 
-      context "call to Check Financial Eligibility Service is successful" do
+      context "with a successful Check Financial Eligibility Service call" do
         let(:cfe_result) { true }
 
-        it "redirects along the successful path" do
-          expect(response).to redirect_to flow_forward_path
-        end
-
         it "transitions to provider_entering_merits state" do
+          request
           expect(legal_aid_application.reload.provider_entering_merits?).to be true
         end
 
-        context "when provider does not have bank_statement_upload permissions" do
+        context "when provider has bank_statement_upload permissions and enhanced_bank_upload is disabled" do
           before do
-            legal_aid_application.provider.permissions.find_by(role: "application.non_passported.bank_statement_upload.*")&.destroy
+            allow(Setting).to receive(:enhanced_bank_upload?).and_return(false)
+            legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+            legal_aid_application.update!(provider_received_citizen_consent: false)
           end
 
-          it "redirects to the capital income assessment page" do
-            expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
+          it "redirects to the no eligibility assessment page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
+          end
+
+          it "does not calls CFE::SubmissionManager" do
+            request
+            expect(CFE::SubmissionManager).not_to have_received(:call)
           end
         end
 
-        context "Form submitted using Save as draft button" do
-          let(:params) { { draft_button: "Save as draft" } }
+        context "when provider has bank_statement_upload permissions and enhanced_bank_upload is enabled" do
+          before do
+            allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
+            legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+            legal_aid_application.update!(provider_received_citizen_consent: false)
+          end
+
+          it "redirects to the capital income assessment page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
+          end
+
+          it "calls CFE::SubmissionManager" do
+            request
+            expect(CFE::SubmissionManager).to have_received(:call).with(legal_aid_application.id)
+          end
+        end
+
+        context "when provider is not uploading bank statements" do
+          before do
+            legal_aid_application.update!(provider_received_citizen_consent: true)
+          end
+
+          it "redirects to the capital income assessment page" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_capital_income_assessment_result_path(legal_aid_application))
+          end
+
+          it "calls CFE::SubmissionManager" do
+            request
+            expect(CFE::SubmissionManager).to have_received(:call).with(legal_aid_application.id)
+          end
+        end
+
+        context "when form submitted using Save as draft button" do
+          let(:params) { { draft_button: "irrelevant" } }
 
           it "redirects provider to provider's applications page" do
-            subject
+            request
             expect(response).to redirect_to(providers_legal_aid_applications_path)
           end
 
           it "sets the application as draft" do
+            request
             expect(legal_aid_application.reload).to be_draft
+          end
+
+          it "does not calls CFE::SubmissionManager" do
+            request
+            expect(CFE::SubmissionManager).not_to have_received(:call)
           end
         end
       end
 
-      context "call to Check Financial Eligibility Service is unsuccessful" do
+      context "when call to Check Financial Eligibility Service is unsuccessful" do
         let(:cfe_result) { false }
 
         it "redirects to the problem page" do
+          request
           expect(response).to redirect_to(problem_index_path)
         end
       end
     end
 
-    context "logged in as authenticated provider with bank statement upload permissions" do
+    context "when in as authenticated provider with bank statement upload permissions" do
       before do
         login
         legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
       end
 
-      it "redirects to the no assessment result page" do
-        create :attachment, :bank_statement, legal_aid_application: legal_aid_application
-        subject
-        expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
-      end
-
       it "expect cfe_result to be nil" do
-        subject
+        request
         expect(legal_aid_application.cfe_result).to be_nil
       end
     end

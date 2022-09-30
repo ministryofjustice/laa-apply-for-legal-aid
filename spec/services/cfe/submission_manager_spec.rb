@@ -2,13 +2,15 @@ require "rails_helper"
 
 module CFE
   RSpec.describe SubmissionManager do
-    let(:vehicle) { build :vehicle, :populated }
     let(:submission_manager) { described_class.new(application.id) }
     let(:submission) { submission_manager.submission }
     let(:call_result) { true }
 
     describe ".call", vcr: { record: :new_episodes } do
+      subject(:call) { described_class.call(application.id) }
+
       let(:staging_host) { "https://check-financial-eligibility-staging.cloud-platform.service.justice.gov.uk" }
+      let(:vehicle) { build(:vehicle, :populated) }
       let(:last_submission_history) { SubmissionHistory.order(created_at: :asc).last }
 
       before do
@@ -26,7 +28,7 @@ module CFE
         end
 
         it "completes process" do
-          described_class.call(application.id)
+          call
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
         end
       end
@@ -42,13 +44,40 @@ module CFE
         end
 
         it "completes process" do
-          described_class.call(application.id)
+          call
+          expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
+        end
+      end
+
+      context "when the application is non-passported with enhanced bank statement upload enabled" do
+        let(:application) do
+          create(:legal_aid_application,
+                 :with_everything,
+                 :with_proceedings,
+                 :with_negative_benefit_check_result,
+                 :applicant_entering_means,
+                 :with_regular_transactions,
+                 vehicle:,
+                 provider: build(:provider, :with_bank_statement_upload_permissions),
+                 attachments: [build(:attachment, :bank_statement)])
+        end
+
+        before do
+          allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
+        end
+
+        it "completes process" do
+          call
           expect(last_submission_history.http_response_status).to eq(200), last_submission_history.inspect
         end
       end
     end
 
     describe "#call" do
+      let(:all_services) do
+        passported_services | non_passported_truelayer_services | non_passported_bank_statement_services
+      end
+
       let(:passported_services) do
         [
           CreateAssessmentService,
@@ -62,7 +91,7 @@ module CFE
         ]
       end
 
-      let(:non_passported_services) do
+      let(:non_passported_truelayer_services) do
         [
           CreateAssessmentService,
           CreateProceedingTypesService,
@@ -82,7 +111,25 @@ module CFE
         ]
       end
 
-      let(:non_passported_only_services) do
+      let(:non_passported_bank_statement_services) do
+        [
+          CreateAssessmentService,
+          CreateProceedingTypesService,
+          CreateApplicantService,
+          CreateCapitalsService,
+          CreateVehiclesService,
+          CreatePropertiesService,
+          CreateExplicitRemarksService,
+          CreateDependantsService,
+          CreateIrregularIncomesService,
+          CreateEmploymentsService,
+          CreateRegularTransactionsService,
+          CreateCashTransactionsService,
+          ObtainAssessmentResultService,
+        ]
+      end
+
+      let(:passported_excluded_services) do
         [
           CreateDependantsService,
           CreateOutgoingsService,
@@ -90,20 +137,27 @@ module CFE
           CreateOtherIncomeService,
           CreateIrregularIncomesService,
           CreateEmploymentsService,
+          CreateRegularTransactionsService,
           CreateCashTransactionsService,
         ]
       end
 
-      before do
-        all_services = non_passported_services | passported_services
+      let(:bank_statement_excluded_services) do
+        [
+          CreateOutgoingsService,
+          CreateStateBenefitsService,
+          CreateOtherIncomeService,
+        ]
+      end
 
+      before do
         all_services.each do |service|
           allow(service).to receive(:call).and_return(true)
         end
       end
 
       context "with a passported application" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, vehicle: }
+        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, :with_vehicle }
 
         it "creates a submission record for the application" do
           expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
@@ -118,46 +172,14 @@ module CFE
         it "does not call the services only required for non-passported applications" do
           submission_manager.call
 
-          non_passported_only_services.each do |service|
+          passported_excluded_services.each do |service|
             expect(service).not_to have_received(:call)
-          end
-        end
-
-        context "on submission error" do
-          let(:message) { Faker::Lorem.sentence }
-
-          before do
-            allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
-          end
-
-          it "records error in submission" do
-            submission_manager.call
-            expect(submission.error_message).to eq(message)
-            expect(submission).to be_failed
-          end
-
-          it "captures error" do
-            expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
-            submission_manager.call
-          end
-
-          context "does not change state if already :failed" do
-            before do
-              allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, message)
-              submission.fail!
-            end
-
-            it "records error in submission" do
-              submission_manager.call
-              expect(submission.error_message).to eq(message)
-              expect(submission).to be_failed
-            end
           end
         end
       end
 
-      context "with a non-passported application" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, vehicle: }
+      context "with a non-passported truelayer application" do
+        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, :with_vehicle }
 
         it "creates a submission record for the application" do
           expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
@@ -166,7 +188,83 @@ module CFE
         it "calls expected services" do
           submission_manager.call
 
-          expect(non_passported_services).to all(have_received(:call).once)
+          expect(non_passported_truelayer_services).to all(have_received(:call).once)
+        end
+      end
+
+      context "with a non-passported bank statement upload application" do
+        let(:application) do
+          create(:legal_aid_application,
+                 :with_everything,
+                 :with_negative_benefit_check_result,
+                 :applicant_entering_means,
+                 provider: build(:provider, :with_bank_statement_upload_permissions),
+                 attachments: [build(:attachment, :bank_statement)])
+        end
+
+        before do
+          allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
+        end
+
+        it "creates a submission record for the application" do
+          expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
+        end
+
+        it "calls expected services" do
+          submission_manager.call
+
+          expect(non_passported_bank_statement_services).to all(have_received(:call).once)
+        end
+
+        it "does not call services" do
+          submission_manager.call
+
+          bank_statement_excluded_services.each do |service|
+            expect(service).not_to have_received(:call)
+          end
+        end
+      end
+
+      context "when submission error raised" do
+        before do
+          allow(CreateAssessmentService)
+            .to receive(:call).and_raise(SubmissionError, message)
+        end
+
+        let(:application) { create(:legal_aid_application) }
+        let(:message) { Faker::Lorem.sentence }
+
+        it "records error in submission" do
+          submission_manager.call
+          expect(submission.error_message).to eq(message)
+          expect(submission).to be_failed
+        end
+
+        it "captures error" do
+          expect(AlertManager).to receive(:capture_exception).with(message_contains(message))
+          submission_manager.call
+        end
+
+        context "when state already :failed" do
+          before do
+            submission.fail!
+            allow(CreateAssessmentService).to receive(:call).and_raise(SubmissionError, "my second error")
+          end
+
+          it "does not change state from failed" do
+            expect { submission_manager.call }.not_to change(submission, :aasm_state).from("failed")
+          end
+
+          it "records subsequent error message for submission" do
+            submission_manager.call
+            expect(submission.error_message).to eq("my second error")
+            expect(submission).to be_failed
+          end
+
+          it "captures subsequent error" do
+            expect(AlertManager).to receive(:capture_exception).with(message_contains("my second error"))
+            submission_manager.call
+          end
         end
       end
     end
