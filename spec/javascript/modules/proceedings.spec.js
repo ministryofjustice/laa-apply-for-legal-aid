@@ -28,7 +28,7 @@ describe('ProceedingsTypes.searchResults', () => {
     })
 
     it('polls the correct endpoint that ends with searches', () => {
-      expect(axios.post.mock.calls).toMatchObject(new RegExp('/proceeding_types/searches'))
+      expect(axios.post.mock.calls).toMatchObject(/\/proceeding_types\/searches/)
     })
 
     it('returns correct values', () => {
