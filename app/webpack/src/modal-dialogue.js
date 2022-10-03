@@ -81,7 +81,7 @@ async function deleteApplication (applicationId) {
   const url = `/v1/legal_aid_applications/${applicationId}`
   const response = await axios({
     method: 'delete',
-    url: url
+    url
   })
   return response.status
 }
@@ -93,7 +93,7 @@ function startModal (modal, previouslyFocusedElement, nonModalElems) {
   announceModal()
 
   // Get the button and span elements that close the modal
-  const closeButtons = modal.querySelectorAll('.close-modal');
+  const closeButtons = modal.querySelectorAll('.close-modal')
   closeButtons.forEach((btn) => {
     btn.addEventListener('click', (event) => {
       event.preventDefault()

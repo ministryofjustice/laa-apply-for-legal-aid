@@ -5,8 +5,8 @@ async function updateCookiePreferences (providerId, action) {
   const url = `/v1/providers/${providerId}`
   const response = await axios({
     method: 'patch',
-    url: url,
-    data: { provider: { action: action } }
+    url,
+    data: { provider: { action } }
   })
   return response.status
 }

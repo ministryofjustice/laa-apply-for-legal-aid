@@ -1,39 +1,39 @@
-import axios from 'axios';
-import * as ProceedingsTypes from 'proceedings';
+import axios from 'axios'
+import * as ProceedingsTypes from 'proceedings'
 
-jest.mock('axios');
+jest.mock('axios')
 
-beforeEach(() => jest.resetAllMocks());
+beforeEach(() => jest.resetAllMocks())
 
-afterEach(() => jest.restoreAllMocks());
+afterEach(() => jest.restoreAllMocks())
 
 describe('ProceedingsTypes.searchResults', () => {
-  let result;
+  let result
 
   beforeEach(async () => {
     axios.mockResolvedValue({ data: { data: [] } })
-         .mockResolvedValueOnce({ data: { data: ['proceeding_type1', 'proceeding_type2'] } });
-  });
+      .mockResolvedValueOnce({ data: { data: ['proceeding_type1', 'proceeding_type2'] } })
+  })
 
   describe('searching single word', () => {
-    const searchTerm = 'family';
-    const excludeCodes = '';
-    const host = 'hhtp://example.com';
+    const searchTerm = 'family'
+    const excludeCodes = ''
+    const host = 'hhtp://example.com'
     beforeEach(async () => {
-      result = await ProceedingsTypes.searchResults(host, searchTerm, excludeCodes);
-    });
+      result = await ProceedingsTypes.searchResults(host, searchTerm, excludeCodes)
+    })
 
     it('calls axios.post once', () => {
-      expect(axios).toHaveBeenCalledTimes(1);
-    });
+      expect(axios).toHaveBeenCalledTimes(1)
+    })
 
     it('polls the correct endpoint that ends with searches', () => {
-      expect(axios.post.mock.calls).toMatchObject(new RegExp('/proceeding_types/searches'));
-    });
+      expect(axios.post.mock.calls).toMatchObject(new RegExp('/proceeding_types/searches'))
+    })
 
     it('returns correct values', () => {
-      expect(result).toEqual(['proceeding_type1', 'proceeding_type2']);
-    });
+      expect(result).toEqual(['proceeding_type1', 'proceeding_type2'])
+    })
 
     describe('returns successful values for up to 3 failed match attempts before resetting', () => {
       const searchResultValues = [
@@ -41,20 +41,20 @@ describe('ProceedingsTypes.searchResults', () => {
         [searchTerm, 2, ['proceeding_type1', 'proceeding_type2']],
         [searchTerm, 3, ['proceeding_type1', 'proceeding_type2']],
         [searchTerm, 4, []]
-      ];
+      ]
 
       test.each(searchResultValues)(
         'Call searchResults %number of times',
         (term, number, expected) => {
           Array.from(Array(number)).forEach(() => {
-            result = ProceedingsTypes.searchResults(term);
-          });
+            result = ProceedingsTypes.searchResults(term)
+          })
 
-          return expect(result).resolves.toEqual(expected);
+          return expect(result).resolves.toEqual(expected)
         }
-      );
-    });
-  });
+      )
+    })
+  })
 
   describe('searching multiple words', () => {
     describe('returns successful values if no matches and previous search term similar', () => {
@@ -62,17 +62,17 @@ describe('ProceedingsTypes.searchResults', () => {
         ['Domesti Abu', 'domes abuse', ['proceeding_type1', 'proceeding_type2']],
         ['domes abuse', 'domestic', ['proceeding_type1', 'proceeding_type2']],
         ['domestic', 'sid', []]
-      ];
+      ]
 
       test.each(searchResultValues)(
         'Call searchResults %number of times',
         async (previousSearchTerm, nextSearchTerm, expected) => {
-          const excludedCodes = ''; // not needed for this test 
-          await ProceedingsTypes.searchResults('http://fakehost.com', previousSearchTerm, excludedCodes);
-          result = ProceedingsTypes.searchResults('http://fakehost.com', nextSearchTerm, excludedCodes);
-          return expect(result).resolves.toEqual(expected);
+          const excludedCodes = '' // not needed for this test
+          await ProceedingsTypes.searchResults('http://fakehost.com', previousSearchTerm, excludedCodes)
+          result = ProceedingsTypes.searchResults('http://fakehost.com', nextSearchTerm, excludedCodes)
+          return expect(result).resolves.toEqual(expected)
         }
-      );
-    });
-  });
-});
+      )
+    })
+  })
+})
