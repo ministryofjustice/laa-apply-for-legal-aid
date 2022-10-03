@@ -72,7 +72,7 @@ module Proceedings
   private
 
     def hearing_date_required?
-      !draft? && additional_params.present?
+      !draft? && accepted_emergency_defaults.to_s == "true" && additional_params.present?
     end
 
     def exclude_from_model

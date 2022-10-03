@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
+RSpec.describe Proceedings::EmergencyDefaultsForm, vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_applicant_with_df" }, type: :form do
   subject(:form) { described_class.new(form_params) }
 
   let(:proceeding) do
@@ -31,6 +31,105 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, :vcr, type: :form do
     }
   end
   let(:form_params) { params.merge(model: proceeding) }
+
+  describe "validation" do
+    subject(:form_valid?) { form.valid? }
+
+    context "when the user doesn't answer the question" do
+      let(:accepted) { "" }
+
+      it { is_expected.to be false }
+    end
+
+    context "when the user does not accept the defaults" do
+      let(:accepted) { "false" }
+
+      it { is_expected.to be true }
+    end
+
+    context "when the user accepts the defaults and no additional input is required" do
+      let(:params) do
+        {
+          accepted_emergency_defaults: true,
+          emergency_level_of_service: 3,
+          emergency_level_of_service_name: "Full Representation",
+          emergency_level_of_service_stage: 8,
+        }
+      end
+
+      it { is_expected.to be true }
+    end
+
+    context "when additional input is required", vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_defendant_with_df" } do
+      let(:proceeding) { create :proceeding, :da001, :with_cit_d, :with_df_date }
+
+      context "when the user accepts the defaults but additional input not supplied" do
+        let(:params) do
+          {
+            accepted_emergency_defaults: true,
+            emergency_level_of_service: 3,
+            emergency_level_of_service_name: "Full Representation",
+            emergency_level_of_service_stage: 8,
+            additional_params: { name: "hearing_date" },
+            hearing_date_1i: nil,
+            hearing_date_2i: nil,
+            hearing_date_3i: nil,
+          }
+        end
+
+        it { is_expected.to be false }
+
+        it "returns the expected error messages" do
+          form_valid?
+          expect(form.errors.messages).to eql({ hearing_date: ["Enter a valid hearing date"] })
+        end
+      end
+
+      context "when the user accepts the defaults but additional input is incomplete" do
+        let(:params) do
+          {
+            accepted_emergency_defaults: true,
+            emergency_level_of_service: 3,
+            emergency_level_of_service_name: "Full Representation",
+            emergency_level_of_service_stage: 8,
+            additional_params: { name: "hearing_date" },
+            hearing_date_1i: Time.zone.today.year,
+            hearing_date_2i: nil,
+            hearing_date_3i: nil,
+          }
+        end
+
+        it { is_expected.to be false }
+
+        it "returns the expected error messages" do
+          form_valid?
+          expect(form.errors.messages).to eql({ hearing_date: ["Enter a valid hearing date"] })
+        end
+      end
+
+      context "when the user accepts the defaults and additional input is complete" do
+        let(:params) do
+          {
+            accepted_emergency_defaults: true,
+            emergency_level_of_service: 3,
+            emergency_level_of_service_name: "Full Representation",
+            emergency_level_of_service_stage: 8,
+            additional_params: { name: "hearing_date" },
+            hearing_date_1i: Time.zone.today.year,
+            hearing_date_2i: Time.zone.today.month,
+            hearing_date_3i: Time.zone.today.day,
+          }
+        end
+
+        it { is_expected.to be true }
+
+        it "returns no error messages" do
+          form_valid?
+          expect(form.errors.messages).to be_empty
+        end
+      end
+    end
+  end
 
   describe "#save" do
     subject(:save_form) { form.save }
