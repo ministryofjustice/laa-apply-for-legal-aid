@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', event => {
       acceptedFiles: ACCEPTED_FILES.join(', '),
       disablePreviews: true,
       accept: function (file, done) {
-        if (file.size == 0) {
+        if (file.size === 0) {
           done('Empty files will not be uploaded.')
         } else { done() }
       }
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg = ERR_CONTENT_TYPE.replace('FILENAME', file.name)
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR.replace('FILENAME', file.name)
-      } else if (file.size == 0) {
+      } else if (file.size === 0) {
         errorMsg = ZERO_BYTE_ERR.replace('FILENAME', file.name)
       } else if (response.error !== '') {
         errorMsg = response.error
