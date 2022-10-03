@@ -2,6 +2,12 @@ module Proceedings
   class SubstantiveDefaultsForm < BaseForm
     form_for Proceeding
 
+    # TODO: dated 3 OCT 2022 @colinbruce Additional data requirements
+    # The full method of handling additional data was not implemented for substantive defaults
+    # this is because at the time of writing, no default substantive proceedings had additional
+    # data requirements.  If at some point in the future, a new category of law that requires
+    # it is  implemented, the functionality can be duplicated from the emergency_defaults form
+
     attr_accessor :accepted_substantive_defaults,
                   :substantive_level_of_service,
                   :substantive_level_of_service_name,
