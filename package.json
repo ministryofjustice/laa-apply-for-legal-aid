@@ -49,5 +49,11 @@
       "app/webpack/src",
       "app/webpack/src/modules"
     ]
+  },
+  "standard": {
+    "env": [
+      "jest",
+      "jquery"
+    ]
   }
 }
