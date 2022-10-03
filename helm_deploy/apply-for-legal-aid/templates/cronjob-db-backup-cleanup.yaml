@@ -12,10 +12,9 @@ spec:
   schedule: '{{ $schedule }}'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: {{ .Values.cronjobs.failedJobsHistoryLimit | default 0 }}
+  failedJobsHistoryLimit: 0
   jobTemplate:
     spec:
-      backoffLimit: {{ .Values.jobs.backoffLimit | default 6 }}
       template:
         spec:
           containers:
