@@ -223,7 +223,7 @@ GEM
     devise_saml_authenticatable (1.9.0)
       devise (> 2.0.0)
       ruby-saml (~> 1.7)
-    dibber (0.6.0)
+    dibber (0.7.0)
     diff-lcs (1.5.0)
     discard (1.2.1)
       activerecord (>= 4.2, < 8)
