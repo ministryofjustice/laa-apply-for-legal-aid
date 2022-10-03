@@ -17,7 +17,7 @@ module Proceedings
 
     validates :accepted_emergency_defaults, presence: { unless: :draft? }
     validates :hearing_date, presence: true, if: :hearing_date_required?
-    validates :hearing_date, date: true, allow_nil: true
+    validates :hearing_date, date: true, allow_nil: true, if: :hearing_date_required?
 
     def initialize(*args)
       super
