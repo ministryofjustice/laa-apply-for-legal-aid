@@ -357,9 +357,8 @@ GEM
     htmlentities (4.3.4)
     http_parser.rb (0.8.0)
     httpclient (2.8.3)
-    httpi (2.5.0)
+    httpi (3.0.1)
       rack
-      socksify
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     i18n-tasks (1.0.12)
@@ -669,7 +668,6 @@ GEM
     snaky_hash (2.0.0)
       hashie
       version_gem (~> 1.1)
-    socksify (1.7.1)
     spring (4.1.0)
     super_diff (0.9.0)
       attr_extras (>= 6.2.4)
@@ -701,9 +699,9 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    wasabi (3.7.0)
+    wasabi (3.8.0)
       addressable
-      httpi (~> 2.0)
+      httpi (~> 3.0)
       nokogiri (>= 1.4.2)
     webdack-uuid_migration (1.4.0)
       activerecord (>= 4.0)
