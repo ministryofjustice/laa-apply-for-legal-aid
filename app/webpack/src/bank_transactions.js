@@ -21,6 +21,6 @@ document.addEventListener('DOMContentLoaded', event => {
   document.body.addEventListener('ajax:error', function (event) {
     const elem = event.target
     if (!elem.classList.contains('remote-remove-transaction')) return
-    location.reload() // reloads page - because if it has failed, the row may have been removed behind the scenes
+    window.location.reload() // reloads page - because if it has failed, the row may have been removed behind the scenes
   })
 })

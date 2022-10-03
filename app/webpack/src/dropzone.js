@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', event => {
       // reload the partial to see the uploaded files
       const fileSection = document.querySelector('#uploaded-files-table-container')
       const url = window.location.pathname + '/list'
-      const xmlHttp = new XMLHttpRequest()
+      const xmlHttp = new XMLHttpRequest() // eslint-disable-line no-undef
       xmlHttp.open('GET', url, false) // false for synchronous request
       xmlHttp.send(null)
       fileSection.innerHTML = xmlHttp.responseText
