@@ -11,10 +11,10 @@ spec:
   schedule: '15 2 * * *'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: {{ .Values.cronjobs.failedJobsHistoryLimit | default 1 }}
+  failedJobsHistoryLimit: {{ .Values.cronjobs_failedJobsHistoryLimit | default 1 }}
   jobTemplate:
     spec:
-      backoffLimit: {{ .Values.jobs.backoffLimit | default 6 }}
+      backoffLimit: {{ .Values.jobs_backoffLimit | default 6 }}
       template:
         metadata:
           labels:
