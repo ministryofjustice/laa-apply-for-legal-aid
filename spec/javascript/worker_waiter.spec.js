@@ -16,14 +16,14 @@ afterEach(() => {
 })
 
 describe('worker is complete after 2 API calls', () => {
-  const worker_id = Math.random().toString(36).slice(-5) // random string
+  const workerId = Math.random().toString(36).slice(-5) // random string
 
   beforeEach(() => {
     axios.get
       .mockResolvedValueOnce({ data: { status: 'working' } })
       .mockResolvedValueOnce({ data: { status: 'complete' } })
     jest.spyOn(Worker, 'checkWorkerStatus')
-    document.body.innerHTML = `<div class="worker-waiter" data-worker-id="${worker_id}"></div>`
+    document.body.innerHTML = `<div class="worker-waiter" data-worker-id="${workerId}"></div>`
   })
 
   afterEach(() => {
@@ -31,7 +31,7 @@ describe('worker is complete after 2 API calls', () => {
   })
 
   it('polls the correct endpoint twice', async () => {
-    const endpoint = `/v1/workers/${worker_id}`
+    const endpoint = `/v1/workers/${workerId}`
 
     await Worker.checkWorkerStatus().then((data) => {
       expect(axios.get.mock.calls).toMatchObject([[endpoint]])

@@ -1,8 +1,8 @@
 const axios = require('axios').default
 
 async function checkWorkerStatus () {
-  const worker_id = document.querySelector('.worker-waiter').getAttribute('data-worker-id')
-  const response = await axios.get(`/v1/workers/${worker_id}`)
+  const workerId = document.querySelector('.worker-waiter').getAttribute('data-worker-id')
+  const response = await axios.get(`/v1/workers/${workerId}`)
   return response.data
 }
 
@@ -20,8 +20,8 @@ function waitForWorker () {
 }
 
 function workerResponse (data, waitForWorker) {
-  const working_statuses = ['queued', 'working']
-  if (data && working_statuses.includes(data.status)) {
+  const workingStatuses = ['queued', 'working']
+  if (data && workingStatuses.includes(data.status)) {
     waitForWorker()
   } else {
     window.location.reload()
