@@ -9,6 +9,7 @@ class ProviderDetailsCreator
     @provider = provider
     @passported_permission = Permission.find_by(role: "application.passported.*")
     @non_passported_permission = Permission.find_by(role: "application.non_passported.*")
+    @employed_journey_permission = Permission.find_by(role: "application.non_passported.employment.*")
   end
 
   def call
@@ -38,6 +39,7 @@ private
     end
     current_firm.permissions << @passported_permission unless current_firm.permissions.include?(@passported_permission)
     current_firm.permissions << @non_passported_permission unless current_firm.permissions.include?(@non_passported_permission)
+    current_firm.permissions << @employed_journey_permission unless current_firm.permissions.include?(@employed_journey_permission)
     current_firm
   end
 
