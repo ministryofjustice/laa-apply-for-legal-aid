@@ -218,11 +218,6 @@ module Flow
             else
               :no_eligibility_assessments
             end
-            if application.uploading_bank_statements?
-              application.using_enhanced_bank_upload? ? :capital_income_assessment_results : :no_eligibility_assessments
-            else
-              :capital_income_assessment_results
-            end
           end,
         },
         no_eligibility_assessments: {
