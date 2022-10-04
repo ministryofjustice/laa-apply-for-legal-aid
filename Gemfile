@@ -102,6 +102,9 @@ gem "govuk_design_system_formbuilder", ">= 3.0.1"
 # DFE ViewComponent library
 gem "govuk-components"
 
+# Catching unsafe migrations in development
+gem "strong_migrations"
+
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
