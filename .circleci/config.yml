@@ -16,6 +16,7 @@ executors:
         environment:
           - RAILS_ENV=test
           - TZ: "Europe/London"
+          - CI: true
   cloud-platform-executor:
     docker:
       - image: ministryofjustice/cloud-platform-tools:2.1
@@ -32,6 +33,7 @@ executors:
       - image: ministryofjustice/apply-ci:latest-3.1.2
         environment:
           GITHUB_TEAM_NAME_SLUG: laa-apply-for-legal-aid
+          CI: true
       - image: cimg/postgres:10.18
       - image: cimg/redis:5.0
       - image: ghcr.io/ministryofjustice/hmpps-clamav:latest
