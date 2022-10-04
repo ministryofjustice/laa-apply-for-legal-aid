@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   # See also catch all route at end of config/routes.rb
   rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
 
+  around_action :n_plus_one_detection, unless: -> { Rails.env.production? }
+
 private
 
   def page_not_found
@@ -25,5 +27,12 @@ private
   def convert_date_params(params)
     # gsub finds ([digit]i) and replaces with _[digit]i
     params.transform_keys! { |key| key.gsub(/\((\di)\)/, '_\\1') }
+  end
+
+  def n_plus_one_detection
+    Prosopite.scan
+    yield
+  ensure
+    Prosopite.finish
   end
 end

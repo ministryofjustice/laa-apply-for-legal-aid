@@ -118,6 +118,10 @@ group :development, :test do
   gem "rubocop-govuk", require: false
   gem "rubocop-performance"
 
+  # Detecting N+1 queries
+  gem "pg_query"
+  gem "prosopite"
+
   # Available in dev env for generators
   gem "rspec-rails", "~> 5.1"
 end

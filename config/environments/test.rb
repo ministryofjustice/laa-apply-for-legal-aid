@@ -78,4 +78,9 @@ Rails.application.configure do
 
   # Switch to determine whether or not o collect HMRC data
   config.x.collect_hmrc_data = true
+
+  config.after_initialize do
+    Prosopite.rails_logger = true
+    Prosopite.raise = true
+  end
 end
