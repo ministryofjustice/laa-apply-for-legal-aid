@@ -24,19 +24,57 @@ Given("I have completed a non-passported employed application with bank statemen
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed a non-passported application with truelayer") do
+Given("I have completed a non-passported employed application with enhanced bank statement uploads") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
-    :with_applicant_and_address,
+    :with_employed_applicant,
     :with_non_passported_state_machine,
-    :with_savings_amount,
     :with_merits_statement_of_case,
     :with_opponent,
     :with_restrictions,
     :with_incident,
     :with_vehicle,
     :with_transaction_period,
+    :with_extra_employment_information,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_fixed_offline_accounts,
+    :with_dependant,
+    :with_cfe_v5_result,
+    :with_chances_of_success,
+    :with_own_home_mortgaged,
+    :assessment_submitted,
+    property_value: rand(1...1_000_000.0).round(2),
+    outstanding_mortgage_amount: rand(1...1_000_000.0).round(2),
+    shared_ownership: LegalAidApplication::SHARED_OWNERSHIP_YES_REASONS.sample,
+    percentage_home: rand(1...99.0).round(2),
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+    provider_received_citizen_consent: false,
+    attachments: [build(:attachment, :bank_statement)],
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+Given("I have completed a non-passported application with truelayer") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_employed_applicant,
+    :with_non_passported_state_machine,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_restrictions,
+    :with_incident,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_extra_employment_information,
     :with_other_assets_declaration,
     :with_policy_disregards,
     :with_savings_amount,
@@ -134,6 +172,10 @@ Then("the Deductions questions should exist:") do |table|
   expect_questions_in(selector: "#deductions-details-questions", expected: table)
 end
 
+Then("the Deductions questions should not exist:") do |table|
+  expect_questions_in(selector: "#deductions-details-questions", expected: table, negate: true)
+end
+
 Then("the Capital result questions should exist:") do |table|
   expect_questions_in(selector: "#capital-result-questions", expected: table)
 end
@@ -190,6 +232,10 @@ Then("the Caseworker review questions should exist:") do |table|
   expect_questions_in(selector: "#caseworker-review-questions", expected: table)
 end
 
+Then("the Caseworker review section should contain:") do |table|
+  expect_questions_and_answers_in(selector: "#caseworker-review-questions", expected: table)
+end
+
 Then("the Property questions should exist:") do |table|
   expect_questions_in(selector: "#property-questions", expected: table)
 end
@@ -200,6 +246,9 @@ end
 
 Then("the \"Which banks accounts does your client have?\" questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__bank_accounts_items", expected: table)
+
+Then("the \"Does your client have any savings accounts they cannot access online?\" questions should exist:") do |table|
+  expect_questions_in(selector: "[data-test=\"offline-savings-accounts\"]", expected: table)
 end
 
 Then("the \"Which savings or investments does your client have?\" questions should exist:") do |table|
@@ -230,6 +279,15 @@ def expect_questions_in(expected:, selector:, negate: false)
       else
         expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
       end
+    end
+  end
+end
+
+def expect_questions_and_answers_in(expected:, selector:)
+  within(selector) do
+    expected.hashes.each do |row|
+      expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      expect(page).to have_selector("dd", text: row[:answer]), "expected to find tag \"dd\" with text: \"#{row[:answer]}\""
     end
   end
 end

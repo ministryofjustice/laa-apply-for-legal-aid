@@ -16,7 +16,7 @@
             read_only: read_only
         ) %>
 
-  <% if !@legal_aid_application.uploading_bank_statements? %>
+  <% if @legal_aid_application.using_enhanced_bank_upload? || !@legal_aid_application.uploading_bank_statements? %>
     <%= check_answer_link(
             name: :gross_income_limit,
             question: t('.gross_income_limit'),

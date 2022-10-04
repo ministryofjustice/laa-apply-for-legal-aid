@@ -1,12 +1,7 @@
 <section>
   <dl id="deductions-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-    <%
-      {
-          dependants_allowance: :dependants_allowance,
-          disregarded_state_benefits: :disregarded_state_benefits
-      }.each do |name, value_method|
-    %>
-      <%= render 'shared/means_report/item', name: name, scope: 'deductions', value_method: value_method, suppress_border: name == :disregarded_state_benefits %>
+    <% deductions_detail_items(@legal_aid_application).each do |item| %>
+      <%= render 'shared/means_report/item', item.to_h %>
     <% end %>
     <%= render 'shared/means_report/total', name: 'total_deductions', value_method: :total_deductions %>
   </dl>

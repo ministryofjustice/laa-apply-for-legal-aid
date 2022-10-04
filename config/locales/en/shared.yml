@@ -154,7 +154,8 @@ en:
           student_loan: Student loan or grant
           pension: Pension
         outgoing:
-          housing: Housing payments
+          housing: "Housing payments%{addendum}"
+          housing_addendum: " (any declared housing benefits have been deducted from this total)"
           childcare: Childcare payments
           maintenance_out: Maintenance payments to a former partner
           legal_aid: Payments towards legal aid in a criminal case

@@ -13,7 +13,7 @@
         applicant: @legal_aid_application.applicant,
         read_only: true) %>
 
-   <% if @legal_aid_application.uploading_bank_statements? %>
+   <% if @legal_aid_application.uploading_bank_statements? && !@legal_aid_application.using_enhanced_bank_upload? %>
     <%= render 'with_bank_statement_uploads' %>
    <% else %>
     <%= render 'with_cfe_result_details' %>
