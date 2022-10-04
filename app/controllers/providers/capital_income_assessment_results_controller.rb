@@ -18,7 +18,7 @@ module Providers
     def handle_unknown
       return if KNOWN_RESULTS.include?(@cfe_result.assessment_result)
 
-      raise "Unknown capital_assessment_result: '#{@cfe_result.assessment_result}'"
+      raise "Unknown capital_income_assessment_result: '#{@cfe_result.assessment_result}'"
     end
   end
 end

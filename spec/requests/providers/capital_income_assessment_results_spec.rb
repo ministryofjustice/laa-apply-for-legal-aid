@@ -413,7 +413,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
       end
 
       it "raises error" do
-        expect { subject }.to raise_error(/Unknown capital_assessment_result/)
+        expect { subject }.to raise_error(/Unknown capital_income_assessment_result/)
       end
     end
 
