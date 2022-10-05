@@ -19,7 +19,7 @@ RSpec.describe ApplicationDigest do
                :assessment_submitted,
                :with_everything,
                :with_proceedings,
-               :with_cfe_v4_result,
+               :with_cfe_v5_result,
                explicit_proceedings: %i[da001 se013 se014],
                provider:,
                merits_submitted_at: submission_time
