@@ -25,7 +25,7 @@ module Providers
     end
 
     def selected_transaction_ids
-      params[:transaction_ids].select(&:present?)
+      params[:transaction_ids]&.select(&:present?)
     end
 
     def transaction_type
