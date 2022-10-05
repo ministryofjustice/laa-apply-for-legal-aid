@@ -44,18 +44,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
       before { login_as application.provider }
 
       context "the user has employed permissions" do
-        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
         it "displays the HMRC inset text" do
           subject
           expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text"))
-        end
-      end
-
-      context "the user does not have employed permissions" do
-        it "does not display the HMRC inset text" do
-          subject
-          expect(unescaped_response_body).not_to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_inset_text"))
         end
       end
     end
@@ -106,20 +97,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           expect(application.reload.state_machine_proxy.type).to eq "NonPassportedStateMachine"
         end
 
-        context "the user has employed permissions" do
-          before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
-          it "calls the HMRC::CreateResponsesService" do
-            subject
-            expect(HMRC::CreateResponsesService).to have_received(:call).once
-          end
-        end
-
-        context "the user does not have employed permissions" do
-          it "does not call the HMRC::CreateResponsesService" do
-            subject
-            expect(HMRC::CreateResponsesService).not_to have_received(:call)
-          end
+        it "calls the HMRC::CreateResponsesService" do
+          subject
+          expect(HMRC::CreateResponsesService).to have_received(:call).once
         end
       end
 
@@ -148,20 +128,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
           expect(application.reload.state_machine_proxy.type).to eq "PassportedStateMachine"
         end
 
-        context "the user has employed permissions" do
-          before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
-          it "calls the HMRC::CreateResponsesService" do
-            subject
-            expect(HMRC::CreateResponsesService).to have_received(:call)
-          end
-        end
-
-        context "the user has does not have employed permissions" do
-          it "does not call the HMRC::CreateResponsesService" do
-            subject
-            expect(HMRC::CreateResponsesService).to_not have_received(:call)
-          end
+        it "calls the HMRC::CreateResponsesService" do
+          subject
+          expect(HMRC::CreateResponsesService).to have_received(:call)
         end
       end
 
@@ -197,20 +166,9 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         expect(application.reload).to be_draft
       end
 
-      context "the user has employed permissions" do
-        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
-        it "does not call the HMRC::CreateResponsesService" do
-          subject
-          expect(HMRC::CreateResponsesService).to_not have_received(:call)
-        end
-      end
-
-      context "the user has does not have employed permissions" do
-        it "does not call the HMRC::CreateResponsesService" do
-          subject
-          expect(HMRC::CreateResponsesService).to_not have_received(:call)
-        end
+      it "does not call the HMRC::CreateResponsesService" do
+        subject
+        expect(HMRC::CreateResponsesService).to_not have_received(:call)
       end
     end
   end
