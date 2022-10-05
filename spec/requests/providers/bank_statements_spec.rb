@@ -303,6 +303,7 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
 
       context "with files already attached" do
         before do
+          create(:applicant, :employed, legal_aid_application:)
           patch(providers_legal_aid_application_bank_statements_path(legal_aid_application),
                 params: { upload_button: "Upload",
                           original_file: uploaded_file("spec/fixtures/files/acceptable.pdf", "application/pdf") })
@@ -352,7 +353,6 @@ RSpec.describe "Providers::BankStatementsController", type: :request do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
             Setting.setting.update!(enhanced_bank_upload: true)
             permissions = [
-              create(:permission, :employed),
               create(:permission, :bank_statement_upload),
             ]
             provider.permissions << permissions
