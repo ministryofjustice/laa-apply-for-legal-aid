@@ -148,6 +148,9 @@ jobs:
         name: Run JavaScript tests
         command: bin/rails javascript_tests
     - run:
+        name: Run StandardJS
+        command: yarn run standardjs
+    - run:
         name: Run Rubocop
         command:  bundle exec rubocop
     - run:
