@@ -38,6 +38,9 @@
   },
   "jest": {
     "testEnvironment": "jest-environment-jsdom-global",
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios/.*)"
+    ],
     "roots": [
       "spec/javascript"
     ],
