@@ -9,6 +9,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
            :with_everything,
            :with_proceedings,
            :assessment_submitted,
+           :with_cfe_v4_result,
            set_lead_proceeding: :da001,
            provider:
   end

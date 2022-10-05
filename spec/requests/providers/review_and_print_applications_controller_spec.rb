@@ -8,6 +8,7 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController, type: :request d
            :with_chances_of_success,
            :with_attempts_to_settle,
            :with_involved_children,
+           :with_cfe_v4_result,
            :provider_entering_merits,
            proceeding_count: 3
   end
