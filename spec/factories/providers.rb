@@ -9,7 +9,9 @@ FactoryBot.define do
       passported = create(:permission, :passported) if passported.nil?
       non_passported = Permission.find_by(role: "application.non_passported.*")
       non_passported = create(:permission, :non_passported) if non_passported.nil?
-      [passported, non_passported]
+      non_passported_employed = Permission.find_by(role: "application.non_passported.employment.*")
+      non_passported_employed = create(:permission, :employed) if non_passported_employed.nil?
+      [passported, non_passported, non_passported_employed]
     end
     portal_enabled { true }
 
