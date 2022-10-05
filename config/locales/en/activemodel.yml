@@ -450,6 +450,9 @@ en:
               blank: Select a level of service
             substantive_level_of_service:
               blank: Select a level of service
+            hearing_date:
+              blank: Enter a valid hearing date
+              date_not_valid: Enter a valid hearing date
         proceedings:
           attributes:
             used_delegated_functions:
