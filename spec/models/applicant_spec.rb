@@ -261,6 +261,14 @@ RSpec.describe Applicant, type: :model do
       end
     end
 
+    context "with CFE version 5 result" do
+      let!(:legal_aid_application) { create :legal_aid_application, :with_cfe_v5_result, applicant: }
+
+      it "returns true" do
+        expect(applicant.valid_cfe_result_version?).to be true
+      end
+    end
+
     context "with CFE version out of scope result" do
       let!(:legal_aid_application) { create :legal_aid_application, applicant: }
       let(:cfe_version_5_result) { double "CFE::V5::Result" }

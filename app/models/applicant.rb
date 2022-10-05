@@ -82,7 +82,7 @@ class Applicant < ApplicationRecord
   end
 
   def valid_cfe_result_version?
-    [CFE::V3::Result, CFE::V4::Result].any? { |klass| cfe_result_type == klass.to_s }
+    [CFE::V3::Result, CFE::V4::Result, CFE::V5::Result].any? { |klass| cfe_result_type == klass.to_s }
   end
 
   def mortgage_per_month
