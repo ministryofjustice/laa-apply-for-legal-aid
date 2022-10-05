@@ -55,14 +55,6 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         login_as provider
       end
 
-      context "Continue button pressed" do
-        let(:submit_button) { { continue_button: "Continue" } }
-
-        it "redirects to next page" do
-          expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
-        end
-      end
-
       context "Save as draft button pressed" do
         let(:submit_button) { { draft_button: "Save as draft" } }
 
@@ -77,9 +69,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
         end
       end
 
-      context "the user has employed permissions" do
-        before { allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true) }
-
+      context "Continue button pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
         context "employment income data was received from HMRC" do
