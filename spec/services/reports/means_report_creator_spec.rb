@@ -14,7 +14,7 @@ RSpec.describe Reports::MeansReportCreator do
         create :legal_aid_application,
                :with_proceedings,
                :with_everything,
-               :with_cfe_v4_result,
+               :with_cfe_v5_result,
                :generating_reports,
                ccms_submission:,
                explicit_proceedings: %i[da002 da006]

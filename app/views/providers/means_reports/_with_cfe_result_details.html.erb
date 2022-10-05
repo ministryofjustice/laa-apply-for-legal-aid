@@ -1,4 +1,4 @@
-<% if @legal_aid_application.cfe_result&.version_4? %>
+<% if @legal_aid_application.cfe_result.version >= 4 %>
   <%= render 'proceeding_eligibility', results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
 <% end %>
 
