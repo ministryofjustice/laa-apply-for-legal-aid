@@ -12,7 +12,11 @@
           <%= t('.income_calculation') %>
         </span>
         </h2>
+        <p class="govuk-hint"><%= t('.hint_text') %></p>
       </div>
+        <% if @legal_aid_application.uploading_bank_statements? %>
+        <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+    <% end %>
         <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
           <%= render 'employment_income' %>
         <% end %>
