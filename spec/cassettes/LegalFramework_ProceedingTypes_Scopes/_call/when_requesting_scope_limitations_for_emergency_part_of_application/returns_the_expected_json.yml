@@ -5,7 +5,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
     body:
       encoding: UTF-8
-      string: '{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3}'
+      string: '{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":1}'
     headers:
       Content-Type:
       - application/json
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 03 Oct 2022 13:12:13 GMT
+      - Thu, 06 Oct 2022 06:25:43 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -43,41 +43,38 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"fe7d4a007b02ddd1dd487818f5968325"
+      - W/"e4059fd56353079e6aafd99152943d92"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ca61ce3d3bba497cad7e94cc3b34c2ee
+      - d5ed472bf233d0da1e7741f85d763451
       X-Runtime:
-      - '0.240794'
+      - '0.108517'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
-        Representation","stage":8,"scope_limitations":[{"code":"FM007","meaning":"Blood
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE013","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":1},"level_of_service":{"level":1,"name":"Family
+        Help (Higher)","stage":1,"scope_limitations":[{"code":"FM007","meaning":"Blood
         Tests or DNA Tests","description":"Limited to all steps up to and including
-        the obtaining of blood tests or DNA tests and thereafter a solicitor''s report.","additional_params":[]},{"code":"FM019","meaning":"Exchange
+        the obtaining of blood tests or DNA tests and thereafter a solicitor''s report.","additional_params":[]},{"code":"FM004","meaning":"CAFCASS
+        report","description":"Limited to all steps up to and including the Children
+        and Family Reporter''s Report and thereafter a solicitor''s report.","additional_params":[]},{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"FM019","meaning":"Exchange
         of Evidence","description":"Limited to all steps up to and including the exchange
         of evidence (including any welfare officer''s/guardian ad litem''s report)
         and directions appointments but not including a final contested hearing and
         thereafter to a solicitors report (or if so advised a Counsel''s opinion)
-        on the issues and prospects of success.","additional_params":[]},{"code":"FM039","meaning":"Final
-        hearing(CAFCASS rept)priv law only","description":"Limited to all steps up
-        to and including the final hearing save in the event of a Court and Family
-        Reporter''s/Children''s Guardian''s report unfavourable to the client, in
-        which case the certificate is thereafter limited to a Solicitor''s report
-        or, if the Solicitor so advises, external Counsel''s opinion or the opinion
-        of an external solicitor with higher court advocacy rights on the merits of
-        the matter continuing on a contested basis.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
+        on the issues and prospects of success.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
         to all steps up to and including the hearing on [see additional limitation
         notes]","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV027","meaning":"Hearing/Adjournment","description":"Limited
         to all steps (including any adjournment thereof) up to and including the hearing
-        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"FM049","meaning":"Hearing-children","description":"Limited
-        to all steps up to and including trial/final hearing and any action necessary
-        to implement (but not enforce) the judgment or order.","additional_params":[]},{"code":"CV117","meaning":"Interim
+        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV117","meaning":"Interim
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
-        representation on the return date.","additional_params":[]}]}}'
-  recorded_at: Mon, 03 Oct 2022 13:12:13 GMT
+        representation on the return date.","additional_params":[]},{"code":"FM015","meaning":"Section
+        37 Report","description":"Limited to a section 37 report only.","additional_params":[]}]}}'
+  recorded_at: Thu, 06 Oct 2022 06:25:43 GMT
 recorded_with: VCR 6.1.0

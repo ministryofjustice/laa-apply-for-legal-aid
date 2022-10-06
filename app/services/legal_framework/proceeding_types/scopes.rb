@@ -3,13 +3,14 @@ module LegalFramework
     class Scopes
       PATH = "/proceeding_type_scopes".freeze
 
-      def self.call(proceeding, level_of_service_code)
-        new(proceeding, level_of_service_code).call
+      def self.call(proceeding, emergency)
+        new(proceeding, emergency).call
       end
 
-      def initialize(proceeding, level_of_service_code)
+      def initialize(proceeding, emergency)
         @proceeding = proceeding
-        @level_of_service_code = level_of_service_code
+        @level_of_service_code = emergency ? proceeding.emergency_level_of_service : proceeding.substantive_level_of_service
+        @emergency = emergency
       end
 
       def call
@@ -21,7 +22,7 @@ module LegalFramework
       def request_body
         {
           proceeding_type_ccms_code: @proceeding.ccms_code,
-          delegated_functions_used: @proceeding.used_delegated_functions,
+          delegated_functions_used: @emergency,
           client_involvement_type: @proceeding.client_involvement_type_ccms_code,
           level_of_service_code: @level_of_service_code,
         }.to_json

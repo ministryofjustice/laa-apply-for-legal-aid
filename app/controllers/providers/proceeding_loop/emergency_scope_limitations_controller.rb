@@ -36,7 +36,7 @@ module Providers
       end
 
       def scopes
-        @scopes ||= JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, proceeding.emergency_level_of_service))["level_of_service"]["scope_limitations"]
+        @scopes ||= JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
       end
 
       def draft_selected?
