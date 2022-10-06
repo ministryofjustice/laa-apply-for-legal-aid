@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 if ENV["CIRCLE_JOB"]
-  require_relative "../../spec/simplecov_helper"
   namespace :simplecov do
-    desc "Merge coverage results"
-    task merge_coverage_results: :environment do
-      SimpleCovHelper.merge_coverage_results
-    end
-
     desc "Process coverage results"
     task process_coverage: :environment do
-      SimpleCovHelper.process_coverage
+      require "simplecov"
+
+      SimpleCov.collate Dir["./coverage_results/.resultset*.json"], "rails" do
+        minimum_coverage line: 100
+        refuse_coverage_drop :line, :branch
+      end
     end
   end
 end

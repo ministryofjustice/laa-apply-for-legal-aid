@@ -209,30 +209,11 @@ jobs:
         name: Stash Coverage Results
         command: |
           mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json
     - persist_to_workspace:
         root: .
         paths:
           - coverage_results
-
-  coverage:
-    executor: linting-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Merge coverage
-          command: |
-            bundle exec rake simplecov:merge_coverage_results
-      - run:
-          name: Process coverage
-          command: |
-            bundle exec rake simplecov:process_coverage
-      - store_artifacts:
-          path: ~/project/coverage
-          destination: coverage
 
   integration_tests:
     parallelism: 3
@@ -259,6 +240,30 @@ jobs:
         path: tmp/capybara
     - store_test_results:
         path: /tmp/test-results/cucumber
+    - run:
+        name: Stash Coverage Results
+        command: |
+          mkdir coverage_results
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json
+    - persist_to_workspace:
+        root: .
+        paths:
+          - coverage_results
+
+  coverage:
+    executor: linting-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Process coverage
+          command: |
+            bundle exec rake simplecov:process_coverage
+      - store_artifacts:
+          path: ~/project/coverage
+          destination: coverage
 
   build_and_push:
     executor: basic-executor
@@ -387,13 +392,14 @@ workflows:
           requires:
             - lint_checks
           <<: *generic-slack-fail-post-step
-      - coverage:
-          requires:
-            - unit_tests
-          <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
           - lint_checks
+          <<: *generic-slack-fail-post-step
+      - coverage:
+          requires:
+            - unit_tests
+            - integration_tests
           <<: *generic-slack-fail-post-step
       - delete_dependabot_deployment:
           context: laa-apply-for-legalaid-uat
