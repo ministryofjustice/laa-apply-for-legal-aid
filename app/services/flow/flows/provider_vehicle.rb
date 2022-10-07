@@ -7,8 +7,8 @@ module Flow
           forward: lambda do |application|
             if application.own_vehicle?
               :vehicles_estimated_values
-            elsif application.non_passported?
-              application.uploading_bank_statements? ? :savings_and_investments : :applicant_bank_accounts
+            elsif application.non_passported? && !application.uploading_bank_statements?
+              :applicant_bank_accounts
             else
               :offline_accounts
             end
@@ -31,8 +31,8 @@ module Flow
         vehicles_regular_uses: {
           path: ->(application) { urls.providers_legal_aid_application_vehicles_regular_use_path(application) },
           forward: lambda do |application|
-            if application.non_passported?
-              application.uploading_bank_statements? ? :savings_and_investments : :applicant_bank_accounts
+            if application.non_passported? && !application.uploading_bank_statements?
+              :applicant_bank_accounts
             else
               :offline_accounts
             end
