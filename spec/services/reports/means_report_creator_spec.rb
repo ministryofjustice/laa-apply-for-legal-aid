@@ -1,15 +1,23 @@
 require "rails_helper"
 
 RSpec.describe Reports::MeansReportCreator do
-  subject do
-    # dont' match on path - webpacker keeps changing the second part of the path
-    VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
-      described_class.call(legal_aid_application)
-    end
-  end
-
   describe ".call" do
-    context "V4 CFE result" do
+    subject(:call) do
+      # dont' match on path - webpacker keeps changing the second part of the path
+      VCR.use_cassette("stylesheets2", match_requests_on: %i[method host headers]) do
+        described_class.call(legal_aid_application)
+      end
+    end
+
+    shared_examples "successful means_report creator" do
+      it "creates means_report attachment with expected attributes" do
+        expect { call }.to change { legal_aid_application.reload.means_report }.from(nil).to(kind_of(Attachment))
+        expect(legal_aid_application.means_report.document.content_type).to eq("application/pdf")
+        expect(legal_aid_application.means_report.document.filename).to eq("means_report.pdf")
+      end
+    end
+
+    context "with V5 CFE result" do
       let(:legal_aid_application) do
         create :legal_aid_application,
                :with_proceedings,
@@ -19,14 +27,48 @@ RSpec.describe Reports::MeansReportCreator do
                ccms_submission:,
                explicit_proceedings: %i[da002 da006]
       end
+
       let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
 
-      it "attaches means_report.pdf to the application" do
-        expect(Providers::MeansReportsController.renderer).to receive(:render).and_call_original
-        subject
-        legal_aid_application.reload
-        expect(legal_aid_application.means_report.document.content_type).to eq("application/pdf")
-        expect(legal_aid_application.means_report.document.filename).to eq("means_report.pdf")
+      context "with a passported application" do
+        before do
+          allow(legal_aid_application).to receive(:passported?).and_return(true)
+          allow(legal_aid_application).to receive(:non_passported?).and_return(false)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
+          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+        end
+
+        it_behaves_like "successful means_report creator"
+      end
+
+      context "with a non-passported truelayer application" do
+        before do
+          allow(legal_aid_application).to receive(:non_passported?).and_return(true)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
+          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+        end
+
+        it_behaves_like "successful means_report creator"
+      end
+
+      context "with a non-passported bank statement upload application" do
+        before do
+          allow(legal_aid_application).to receive(:non_passported?).and_return(true)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
+          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+        end
+
+        it_behaves_like "successful means_report creator"
+      end
+
+      context "with non-passported enhanced bank statement upload application" do
+        before do
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
+          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(true)
+        end
+
+        it_behaves_like "successful means_report creator"
       end
 
       context "when an attachment record exists" do
@@ -36,7 +78,7 @@ RSpec.describe Reports::MeansReportCreator do
         before { allow(Rails.logger).to receive(:info) }
 
         it "does not attach a report if one already exists" do
-          expect { subject }.not_to change(Attachment, :count)
+          expect { call }.not_to change(Attachment, :count)
           expect(Rails.logger).to have_received(:info).with(expected_log).once
         end
 
@@ -50,7 +92,7 @@ RSpec.describe Reports::MeansReportCreator do
 
           it "creates a new report if the existing one is not downloadable" do
             # the count won';'t change as we delete one and create one
-            expect { subject }.not_to change(Attachment, :count)
+            expect { call }.not_to change(Attachment, :count)
             # check the original one has been deleted
             expect { attachment.reload }.to raise_error(ActiveRecord::RecordNotFound)
             expect(Rails.logger).to have_received(:info).with(expected_log)
@@ -58,20 +100,20 @@ RSpec.describe Reports::MeansReportCreator do
         end
       end
 
-      context "ccms case ref does not exist" do
+      context "when a ccms case ref does not exist" do
         let(:ccms_submission) { create :ccms_submission }
 
         before do
-          allow_any_instance_of(CCMS::Submission).to receive(:process!).with(any_args).and_return(true)
+          allow(ccms_submission).to receive(:process!).and_return(true)
         end
 
         it "processes the existing ccms submission" do
           expect(legal_aid_application.reload.ccms_submission).to receive(:process!)
-          subject
+          call
         end
       end
 
-      context "ccms submission does not exist" do
+      context "when ccms submission does not exist" do
         let(:ccms_submission) { nil }
 
         before do
@@ -86,7 +128,7 @@ RSpec.describe Reports::MeansReportCreator do
         it "creates a ccms submission" do
           expect(legal_aid_application.reload).to receive(:create_ccms_submission)
           expect(nil).to receive(:process!)
-          subject
+          call
         end
       end
     end
