@@ -1,11 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Providers::IncomeSummaryController do
-  let!(:salary) { create :transaction_type, :credit, name: "salary" }
   let!(:benefits) { create :transaction_type, :credit, name: "benefits" }
   let!(:maintenance) { create :transaction_type, :credit, name: "maintenance_in" }
   let!(:pension) { create :transaction_type, :credit, name: "pension" }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [salary, benefits] }
+  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [pension, benefits] }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
 
@@ -23,7 +22,7 @@ RSpec.describe Providers::IncomeSummaryController do
 
     it "displays a section for all transaction types linked to this application" do
       subject
-      [salary, benefits].pluck(:name).each do |name|
+      [pension, benefits].pluck(:name).each do |name|
         legend = I18n.t("transaction_types.names.providers.#{name}")
         expect(parsed_response_body.css("ol li##{name} h2").text).to match(/#{legend}/)
       end
@@ -67,8 +66,8 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:applicant) { create :applicant }
       let(:bank_provider) { create :bank_provider, applicant: }
       let(:bank_account) { create :bank_account, bank_provider: }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
+      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: pension, bank_account: }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension] }
 
       it "displays bank transaction" do
         subject
@@ -84,8 +83,8 @@ RSpec.describe Providers::IncomeSummaryController do
     let(:applicant) { create :applicant }
     let(:bank_provider) { create :bank_provider, applicant: }
     let(:bank_account) { create :bank_account, bank_provider: }
-    let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: salary, bank_account: }
-    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
+    let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: pension, bank_account: }
+    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension] }
 
     let(:submit_button) { { continue_button: "Continue" } }
 
@@ -142,7 +141,7 @@ RSpec.describe Providers::IncomeSummaryController do
       let(:bank_provider) { create :bank_provider, applicant: }
       let(:bank_account) { create :bank_account, bank_provider: }
       let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [salary] }
+      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [pension] }
 
       let(:submit_button) { { continue_button: "Continue" } }
 

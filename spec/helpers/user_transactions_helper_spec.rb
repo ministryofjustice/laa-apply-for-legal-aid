@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe UserTransactionsHelper, type: :helper do
-  let(:transaction_type) { create :transaction_type, :salary }
+  let(:transaction_type) { create :transaction_type, :pension }
   let(:legal_aid_application) do
     create :legal_aid_application, :with_applicant, transaction_types: [transaction_type]
   end

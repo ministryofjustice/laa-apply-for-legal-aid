@@ -51,12 +51,6 @@ FactoryBot.define do
       sort_order { 20 }
     end
 
-    trait :salary do
-      name { "salary" }
-      operation { "credit" }
-      sort_order { 10 }
-    end
-
     trait :maintenance_in do
       name { "maintenance_in" }
       operation { "credit" }

@@ -1049,7 +1049,6 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#transaction_types" do
     let(:legal_aid_application) { create :legal_aid_application }
     let!(:ff) { create :transaction_type, :friends_or_family }
-    let!(:salary) { create :transaction_type, :salary }
     let!(:maintenance) { create :transaction_type, :maintenance_out }
     let!(:child_care) { create :transaction_type, :child_care }
     let!(:ff_tt) { create :legal_aid_application_transaction_type, transaction_type: ff, legal_aid_application: }
