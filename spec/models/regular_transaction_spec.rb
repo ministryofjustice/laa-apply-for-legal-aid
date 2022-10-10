@@ -97,4 +97,28 @@ RSpec.describe RegularTransaction, type: :model do
       expect(records).to contain_exactly(debit_payment)
     end
   end
+
+  describe ".frequencies_for" do
+    context "when transaction type is benefits" do
+      it "does not include monthly in the frequencies" do
+        benefits = create(:transaction_type, :benefits)
+
+        frequencies = described_class.frequencies_for(benefits)
+
+        expect(frequencies.count).to eq(4)
+        expect(frequencies).not_to include("monthly")
+      end
+    end
+
+    context "when transaction type is not benefits" do
+      it "includes monthly in the frequencies" do
+        child_care = create(:transaction_type, :child_care)
+
+        frequencies = described_class.frequencies_for(child_care)
+
+        expect(frequencies.count).to eq(5)
+        expect(frequencies).to include("monthly")
+      end
+    end
+  end
 end

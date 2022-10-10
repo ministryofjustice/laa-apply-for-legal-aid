@@ -23,7 +23,7 @@ Feature: Enhanced bank upload check your answers
 
     When I check "Benefits"
     And I fill "Benefits amount" with "1000"
-    And I choose "providers-means-regular-income-form-benefits-frequency-monthly-field"
+    And I choose "providers-means-regular-income-form-benefits-frequency-two-weekly-field"
 
     When I click "Save and continue"
     Then I should be on a page with title "Select payments your client receives in cash"
