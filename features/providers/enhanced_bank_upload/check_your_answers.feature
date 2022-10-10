@@ -27,6 +27,7 @@ Feature: Enhanced bank upload check your answers
 
     And I should see "Uploaded bank statements"
     And I should see 'Does your client receive student finance?'
+    And I should not see 'Does your client have any savings accounts they cannot access online?'
 
     When I click Check Your Answers Change link for "bank statements"
     And I upload an evidence file named "hello_world.pdf"

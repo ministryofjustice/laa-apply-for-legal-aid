@@ -318,7 +318,6 @@ Feature: Checking answers backwards and forwards
 
     And I should see 'Uploaded bank statements'
     And I should see 'Does your client receive student finance?'
-    And the answer for 'student finance question' should be 'No'
     And I should not see 'Does your client have any savings accounts they cannot access online?'
 
     When I click Check Your Answers Change link for 'bank statements'
