@@ -1,4 +1,4 @@
-import { hide, show } from './helpers';
+import { hide, show } from './helpers'
 
 const ERROR_MESSAGE_TEXT = 'Upload the selected file'
 
@@ -37,4 +37,3 @@ document.addEventListener('DOMContentLoaded', event => {
     })
   }
 })
-

@@ -1,5 +1,5 @@
 // Allows blocks of CSS code to be enabled only when no JavaScript is present.
-// 
+//
 // Usage:
 //   The following CSS will set `display: none;` where JavaScript is present,
 //   and `display: block;` where no JavaScript is present.
@@ -15,8 +15,8 @@
 document.addEventListener('DOMContentLoaded', event => {
   document.querySelectorAll('.no-script').forEach(function (obj) {
     obj.classList.add('hidden')
-  });
+  })
   document.querySelectorAll('.script').forEach(function (obj) {
     obj.classList.remove('hidden')
   })
-});
+})

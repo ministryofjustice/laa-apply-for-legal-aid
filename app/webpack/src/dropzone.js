@@ -50,7 +50,7 @@ function addErrorMessage (msg) {
   errorSummary.focus()
 }
 
-function removeErrorMessages() {
+function removeErrorMessages () {
   document.querySelectorAll('.dropzone-error').forEach((dzError) => {
     if (dzError) {
       dzError.querySelectorAll('div').forEach(div => {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', event => {
     const applicationId = document.querySelector('#application-id').textContent.trim()
     const url = document.querySelector('#dropzone-url').getAttribute('data-url')
     const chooseFilesBtn = document.querySelector('#dz-upload-button')
-    url.includes("bank_statement") ? ACCEPTED_FILES.push('text/csv') : ACCEPTED_FILES
+    url.includes('bank_statement') ? ACCEPTED_FILES.push('text/csv') : ACCEPTED_FILES // eslint-disable-line no-unused-expressions
 
     chooseFilesBtn.addEventListener('click', (e) => {
       e.preventDefault() // prevent submitting form by default
@@ -90,19 +90,18 @@ document.addEventListener('DOMContentLoaded', event => {
     })
 
     const dropzone = new Dropzone(dropzoneElem, {
-      url: url,
+      url,
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
       maxFilesize: 7,
       acceptedFiles: ACCEPTED_FILES.join(', '),
       disablePreviews: true,
-      accept: function(file, done) {
-        if (file.size == 0) {
-          done("Empty files will not be uploaded.");
-        }
-        else { done(); }
-      },
+      accept: function (file, done) {
+        if (file.size === 0) {
+          done('Empty files will not be uploaded.')
+        } else { done() }
+      }
     })
     dropzone.on('drop', () => {
       removeErrorMessages()
@@ -121,11 +120,11 @@ document.addEventListener('DOMContentLoaded', event => {
       // reload the partial to see the uploaded files
       const fileSection = document.querySelector('#uploaded-files-table-container')
       const url = window.location.pathname + '/list'
-      const xmlHttp = new XMLHttpRequest()
+      const xmlHttp = new XMLHttpRequest() // eslint-disable-line no-undef
       xmlHttp.open('GET', url, false) // false for synchronous request
       xmlHttp.send(null)
       fileSection.innerHTML = xmlHttp.responseText
-      setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay);
+      setTimeout(() => { statusMessage.innerText = 'Your files have been uploaded successfully.' }, screenReaderMessageDelay)
     })
     dropzone.on('error', (file, response) => {
       let errorMsg = ''
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', event => {
         errorMsg = ERR_CONTENT_TYPE.replace('FILENAME', file.name)
       } else if (file.size >= 7000000) {
         errorMsg = FILE_SIZE_ERR.replace('FILENAME', file.name)
-      } else if (file.size == 0) {
+      } else if (file.size === 0) {
         errorMsg = ZERO_BYTE_ERR.replace('FILENAME', file.name)
       } else if (response.error !== '') {
         errorMsg = response.error

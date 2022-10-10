@@ -28,4 +28,4 @@ PreCommit:
     enabled: true
     command: ['standard']
     requires_files: true
-    include: 'app/webpack/src'
+    include: 'app/webpack/**/*.js'

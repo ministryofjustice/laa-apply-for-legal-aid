@@ -1,5 +1,5 @@
 import axios from 'axios'
-import * as Worker from 'worker_waiter';
+import * as Worker from 'worker_waiter'
 
 jest.mock('axios')
 
@@ -7,39 +7,39 @@ beforeAll(() => {
   Object.defineProperty(window, 'location', {
     value: { reload: jest.fn() }
   })
-});
+})
 
-beforeEach(() => jest.resetAllMocks() )
+beforeEach(() => jest.resetAllMocks())
 
 afterEach(() => {
-  jest.restoreAllMocks();
-});
+  jest.restoreAllMocks()
+})
 
 describe('worker is complete after 2 API calls', () => {
-  const worker_id = Math.random().toString(36).slice(-5) // random string
+  const workerId = Math.random().toString(36).slice(-5) // random string
 
   beforeEach(() => {
     axios.get
-    .mockResolvedValueOnce({ data: { status: 'working' } })
-    .mockResolvedValueOnce({ data: { status: 'complete' } })
-    jest.spyOn(Worker, 'checkWorkerStatus');
-    document.body.innerHTML = `<div class="worker-waiter" data-worker-id="${worker_id}"></div>`
+      .mockResolvedValueOnce({ data: { status: 'working' } })
+      .mockResolvedValueOnce({ data: { status: 'complete' } })
+    jest.spyOn(Worker, 'checkWorkerStatus')
+    document.body.innerHTML = `<div class="worker-waiter" data-worker-id="${workerId}"></div>`
   })
 
   afterEach(() => {
-    jest.restoreAllMocks();
-  });
+    jest.restoreAllMocks()
+  })
 
-  it('polls the correct endpoint twice', async() => {
-    const endpoint = `/v1/workers/${worker_id}`
+  it('polls the correct endpoint twice', async () => {
+    const endpoint = `/v1/workers/${workerId}`
 
     await Worker.checkWorkerStatus().then((data) => {
       expect(axios.get.mock.calls).toMatchObject([[endpoint]])
-      expect(data).toMatchObject({"status": "working"})
+      expect(data).toMatchObject({ status: 'working' })
     })
     await Worker.checkWorkerStatus().then((data) => {
-      expect(axios.get.mock.calls).toMatchObject([[endpoint],[endpoint]])
-      expect(data).toMatchObject({"status": "complete"})
+      expect(axios.get.mock.calls).toMatchObject([[endpoint], [endpoint]])
+      expect(data).toMatchObject({ status: 'complete' })
     })
   })
 })
@@ -50,8 +50,8 @@ describe('workerResponse', () => {
   })
 
   afterEach(() => {
-    jest.restoreAllMocks();
-  });
+    jest.restoreAllMocks()
+  })
 
   it('calls worker again when status is working', () => {
     Worker.workerResponse({

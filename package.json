@@ -2,6 +2,7 @@
   "name": "laa-apply-for-legal-aid",
   "private": true,
   "scripts": {
+    "standardjs": "standard",
     "test": "jest"
   },
   "dependencies": {
@@ -48,6 +49,12 @@
       "node_modules",
       "app/webpack/src",
       "app/webpack/src/modules"
+    ]
+  },
+  "standard": {
+    "env": [
+      "jest",
+      "jquery"
     ]
   }
 }
