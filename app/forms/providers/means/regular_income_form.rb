@@ -31,7 +31,8 @@ module Providers
       def initialize(params = {})
         @none_selected = none_selected.in?(params["transaction_type_ids"] || [])
         @legal_aid_application = params.delete(:legal_aid_application)
-        @transaction_type_ids = params["transaction_type_ids"] || @legal_aid_application.transaction_type_ids
+        @transaction_type_ids = params["transaction_type_ids"] ||
+          @legal_aid_application.transaction_types.credits.not_children.pluck(:id)
 
         assign_regular_transaction_attributes
 

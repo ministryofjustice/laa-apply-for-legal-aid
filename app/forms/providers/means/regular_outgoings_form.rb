@@ -3,12 +3,18 @@ module Providers
     class RegularOutgoingsForm
       include ActiveModel::Model
 
-      OUTGOING_TYPES = %w[rent_or_mortgage child_care maintenance_out legal_aid].freeze
+      OUTGOING_TYPES = %w[
+        rent_or_mortgage
+        child_care
+        maintenance_out
+        legal_aid
+      ].freeze
 
       attr_reader :transaction_type_ids, :legal_aid_application
 
       OUTGOING_TYPES.each do |outgoing_type|
-        attr_accessor "#{outgoing_type}_amount".to_sym, "#{outgoing_type}_frequency".to_sym
+        attr_accessor "#{outgoing_type}_amount".to_sym,
+                      "#{outgoing_type}_frequency".to_sym
       end
 
       validates :transaction_type_ids, presence: true, unless: :none_selected?
@@ -17,7 +23,8 @@ module Providers
       def initialize(params = {})
         @none_selected = none_selected.in?(params["transaction_type_ids"] || [])
         @legal_aid_application = params.delete(:legal_aid_application)
-        @transaction_type_ids = params["transaction_type_ids"] || @legal_aid_application.transaction_type_ids
+        @transaction_type_ids = params["transaction_type_ids"] ||
+          @legal_aid_application.transaction_types.debits.not_children.pluck(:id)
 
         assign_regular_transaction_attributes
 

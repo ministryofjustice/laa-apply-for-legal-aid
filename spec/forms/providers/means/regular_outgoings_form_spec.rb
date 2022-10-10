@@ -2,7 +2,7 @@ require "rails_helper"
 
 # rubocop:disable Rails/SaveBang
 RSpec.describe Providers::Means::RegularOutgoingsForm do
-  describe "validations" do
+  describe "#validate" do
     context "when neither a outgoing type or none are selected" do
       it "is invalid" do
         params = { "transaction_type_ids" => [""] }
@@ -118,6 +118,51 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         form = described_class.new(params)
 
         expect(form).to be_valid
+      end
+    end
+  end
+
+  describe "#new" do
+    context "when the application has regular transactions" do
+      it "assigns attributes for the non-children debit transactions" do
+        legal_aid_application = create(:legal_aid_application)
+        maintenance_out = create(:transaction_type, :maintenance_out)
+        child = create(
+          :transaction_type,
+          name: "child_transaction_type",
+          operation: "debit",
+          parent_id: maintenance_out.id,
+        )
+        _child_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: child,
+        )
+        _maintenance_out_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: maintenance_out,
+        )
+        _child_transaction = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: child,
+          amount: 100,
+          frequency: "weekly",
+        )
+        _maintenance_out_transaction = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: maintenance_out,
+          amount: 250,
+          frequency: "weekly",
+        )
+
+        form = described_class.new(legal_aid_application:)
+
+        expect(form.transaction_type_ids).to contain_exactly(maintenance_out.id)
+        expect(form.maintenance_out_amount).to eq(250)
+        expect(form.maintenance_out_frequency).to eq("weekly")
       end
     end
   end
