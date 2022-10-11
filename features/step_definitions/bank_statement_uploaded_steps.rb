@@ -43,6 +43,7 @@ Given("I have completed a non-passported employed application with bank statemen
     :with_fixed_rent_or_mortage_cash_transactions,
     :with_maintenance_out_category,
     :with_own_home_mortgaged,
+    :with_savings_amount,
     :with_policy_disregards,
     :with_non_passported_state_machine,
     :checking_non_passported_means,

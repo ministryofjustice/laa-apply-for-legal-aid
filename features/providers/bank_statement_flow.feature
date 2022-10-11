@@ -55,6 +55,10 @@ Feature: Bank statement flow
 
     When I choose "No"
     And I click 'Save and continue'
+    Then I should be on a page with title "Which bank accounts does your client have?"
+
+    When I select 'None of these'
+    And I click 'Save and continue'
     Then I should be on a page with title "Which savings or investments does your client have?"
 
     When I select "Money not in a bank account"

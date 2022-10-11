@@ -62,7 +62,7 @@ module CapitalHelper
   end
 
   def capital_amount_attributes(capital)
-    return capital&.amount_attributes if @legal_aid_application.passported?
+    return capital&.amount_attributes if @legal_aid_application.passported? || @legal_aid_application.uploading_bank_statements?
 
     capital&.amount_attributes&.reject { |c| c == "offline_savings_accounts" }
   end

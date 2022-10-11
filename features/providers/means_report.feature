@@ -21,7 +21,7 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
-      | h2  | Property, savings and other assets |
+      | h2  | Which bank accounts does your client have? |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
@@ -127,6 +127,11 @@ Feature: Means report
       | Are there any payments left on the vehicle? |
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
+
+    And the "Which banks accounts does your client have?" questions should exist:
+      | question |
+      | Current account |
+      | Savings account |
 
     And the "Which savings or investments does your client have?" questions should exist:
       | question |

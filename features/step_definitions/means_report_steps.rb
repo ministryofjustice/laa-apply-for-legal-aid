@@ -198,6 +198,10 @@ Then("the Vehicles questions should exist:") do |table|
   expect_questions_in(selector: "#vehicles-questions", expected: table)
 end
 
+Then("the \"Which banks accounts does your client have?\" questions should exist:") do |table|
+  expect_questions_in(selector: "#app-check-your-answers__bank_accounts_items", expected: table)
+end
+
 Then("the \"Which savings or investments does your client have?\" questions should exist:") do |table|
   expect_questions_in(selector: "#app-check-your-answers__savings_and_investments_items", expected: table)
 end

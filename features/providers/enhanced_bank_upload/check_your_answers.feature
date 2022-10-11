@@ -6,8 +6,28 @@ Feature: Enhanced bank upload check your answers
     And I have completed a non-passported employed application with enhanced bank upload as far as the end of the means section
     Then I should be on the "means_summary" page showing "Check your answers"
 
+    And the following sections should exist:
+      | tag | section |
+      | h1  | Check your answers |
+      | h3  | Bank statements |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | What payments does your client receive? |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | What payments does your client make? |
+      | h2  | Your client's capital |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Which bank accounts does your client have? |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+
     And I should see "Uploaded bank statements"
-    And I should not see "Which bank accounts does your client have?"
+    And I should see 'Does your client receive student finance?'
+    And I should not see 'Does your client have any savings accounts they cannot access online?'
 
     When I click Check Your Answers Change link for "bank statements"
     And I upload an evidence file named "hello_world.pdf"
