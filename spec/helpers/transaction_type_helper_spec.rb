@@ -10,7 +10,7 @@ RSpec.describe TransactionTypeHelper, type: :helper do
                                          transaction_type:)
     end
 
-    context "when on bank statment upload journey" do
+    context "when on bank statement upload journey" do
       before do
         allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
       end
@@ -74,6 +74,31 @@ RSpec.describe TransactionTypeHelper, type: :helper do
 
         it { is_expected.to eql("None") }
       end
+    end
+  end
+
+  describe "#regular_transaction_answer_by_type" do
+    subject do
+      helper.regular_transaction_answer_by_type(legal_aid_application:,
+                                                transaction_type: benefits)
+    end
+
+    let(:benefits) { create(:transaction_type, :benefits) }
+
+    context "when regular transactions exist" do
+      before do
+        create(:regular_transaction,
+               legal_aid_application:,
+               transaction_type: benefits,
+               amount: 250,
+               frequency: "weekly")
+      end
+
+      it { is_expected.to eq(["£250.00", "Every week"]) }
+    end
+
+    context "when no regular transactions exist" do
+      it { is_expected.to eql("None") }
     end
   end
 end

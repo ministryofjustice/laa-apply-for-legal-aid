@@ -105,8 +105,7 @@ RSpec.describe RegularTransaction, type: :model do
 
         frequencies = described_class.frequencies_for(benefits)
 
-        expect(frequencies.count).to eq(4)
-        expect(frequencies).not_to include("monthly")
+        expect(frequencies).to match(%w[weekly two_weekly four_weekly three_monthly])
       end
     end
 
@@ -116,8 +115,7 @@ RSpec.describe RegularTransaction, type: :model do
 
         frequencies = described_class.frequencies_for(child_care)
 
-        expect(frequencies.count).to eq(5)
-        expect(frequencies).to include("monthly")
+        expect(frequencies).to match(%w[weekly two_weekly four_weekly monthly three_monthly])
       end
     end
   end
