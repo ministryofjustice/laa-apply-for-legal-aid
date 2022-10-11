@@ -120,6 +120,15 @@ RSpec.describe Flow::ProceedingLoop do
 
             it { is_expected.to be :substantive_level_of_service }
           end
+
+          context "when used_delegated functions_date > one month ago - test for ap-3537" do
+            before do
+              proceeding.update!(accepted_substantive_defaults: true)
+              legal_aid_application.proceedings.in_order_of_addition.second.update!(used_delegated_functions_on: 35.days.ago)
+            end
+
+            it { is_expected.to be :client_involvement_type }
+          end
         end
 
         context "and is on the emergency_level_of_service page" do
