@@ -21,23 +21,6 @@ require "sidekiq/testing"
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
 
-unless ENV["NOCOVERAGE"]
-  SimpleCov.start do
-    add_filter "config/initializers/"
-    add_filter "spec/"
-    add_filter "services/migration_helpers/"
-    add_filter "config/environments/"
-    minimum_coverage 100 unless ENV["CIRCLE_JOB"]
-  end
-
-  unless ENV["CIRCLE_JOB"]
-    SimpleCov.at_exit do
-      say("<%= color('Code coverage below 100%', RED) %>") if SimpleCov.result.coverage_statistics[:line].percent < SimpleCov.minimum_coverage[:line]
-      SimpleCov.result.format!
-    end
-  end
-end
-
 WebMock.disable_net_connect!
 
 RSpec::Sidekiq.configure do |config|
