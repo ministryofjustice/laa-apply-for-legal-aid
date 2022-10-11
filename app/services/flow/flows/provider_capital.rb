@@ -38,11 +38,7 @@ module Flow
           forward: lambda do |application|
             application.income_types? ? :cash_incomes : :student_finances
           end,
-          check_answers: lambda do |application|
-            return :cash_incomes if application.income_types?
-
-            application.uploading_bank_statements? ? :means_summaries : :income_summary
-          end,
+          check_answers: ->(application) { application.income_types? ? :cash_incomes : :means_summaries },
         },
         cash_incomes: {
           path: ->(application) { urls.providers_legal_aid_application_means_cash_income_path(application) },
