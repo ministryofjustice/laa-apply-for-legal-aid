@@ -3,7 +3,6 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-
   <%= check_answer_link(
     name: :bank_statements,
     url: providers_legal_aid_application_bank_statements_path(@legal_aid_application),

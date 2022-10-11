@@ -11,13 +11,26 @@
     </div>
 </div>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= income_type.parameterize %>">
+<% if @legal_aid_application.using_enhanced_bank_upload? %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= income_type.parameterize %>">
     <% transaction_types.each do |transaction_type| %>
-      <%= check_answer_for_transaction_types(
+      <%= check_answer_for_regular_transactions(
             name: transaction_type.label_name,
             question: transaction_type.label_name,
             legal_aid_application: @legal_aid_application,
             transaction_type: transaction_type
           ) %>
     <% end %>
-</dl>
+  </dl>
+<% else %>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= income_type.parameterize %>">
+      <% transaction_types.each do |transaction_type| %>
+        <%= check_answer_for_transaction_types(
+              name: transaction_type.label_name,
+              question: transaction_type.label_name,
+              legal_aid_application: @legal_aid_application,
+              transaction_type: transaction_type
+            ) %>
+      <% end %>
+  </dl>
+<% end %>

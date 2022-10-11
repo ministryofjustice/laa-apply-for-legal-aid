@@ -89,7 +89,11 @@ en:
       result_details:
         capital_calculation: Capital calculation
         income_calculation: Income calculation
-        client_eligibility_calculation: How we calculated your client's eligibility
+        client_eligibility_calculation: How we calculated your client's financial eligibility
+        hint_text: We calculated these calendar monthly figures using the information you and your client provided.
+      bank_statements:
+        title: Bank statements
+        uploaded: Uploaded bank statements
       disposable_income:
         title: Disposable income
         total_income: Total income

@@ -31,6 +31,8 @@ Feature: Enhanced bank upload check your answers
     When I check "None of the above"
     And I click "Save and continue"
     Then I should be on the "means_summary" page showing "Check your answers"
+    And I should see "1,000.00"
+    And I should see "Every two weeks"
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
@@ -51,7 +53,7 @@ Feature: Enhanced bank upload check your answers
     When I click Check Your Answers Change link for "What payments does your client make?"
     Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And I check "Maintenance payments to a former partner"
-    And I fill "Maintenance out amount" with "1000"
+    And I fill "Maintenance out amount" with "500"
     And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
 
     And I click "Save and continue"
@@ -60,6 +62,8 @@ Feature: Enhanced bank upload check your answers
     When I check "None of the above"
     And I click "Save and continue"
     Then I should be on the "means_summary" page showing "Check your answers"
+    And I should see "£500.00"
+    And I should see "Monthly"
 
     When I click Check Your Answers Change link for "What payments does your client make?"
     And I check "My client makes none of these payments"

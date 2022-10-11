@@ -13,13 +13,19 @@
         </span>
         </h2>
       </div>
-        <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
-          <%= render 'employment_income' %>
-        <% end %>
-        <%= render 'other_income' %>
-        <%= render 'outgoings' %>
-        <%= render 'deductions' %>
-        <%= render 'disposable_income' %>
+      <div class="govuk-accordion__section-content">
+        <p class="govuk-hint"><%= t('.hint_text') %></p>
+      </div>
+      <% if @legal_aid_application.uploading_bank_statements? %>
+        <%= render('bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+      <% end %>
+      <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
+        <%= render 'employment_income' %>
+      <% end %>
+      <%= render 'other_income' %>
+      <%= render 'outgoings' %>
+      <%= render 'deductions' %>
+      <%= render 'disposable_income' %>
     </div>
 
     <div class="govuk-accordion__section ">

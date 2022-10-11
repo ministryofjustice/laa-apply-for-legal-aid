@@ -38,4 +38,13 @@ module TransactionTypeHelper
       t("generic.none")
     end
   end
+
+  def regular_transaction_answer_by_type(legal_aid_application:, transaction_type:)
+    regular_transaction = legal_aid_application.regular_transactions.find_by(transaction_type:)
+    if regular_transaction
+      [number_to_currency(regular_transaction.amount), t("transaction_types.frequencies.#{regular_transaction.frequency}")]
+    else
+      t("generic.none")
+    end
+  end
 end
