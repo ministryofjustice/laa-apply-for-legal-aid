@@ -107,10 +107,10 @@ Feature: Means report
       | question |
       | Your client's employment details |
 
-    And the Caseworker review questions should exist:
-      | question |
-      | Caseworker review required? |
-      | Review reasons |
+    And the Caseworker review section should contain:
+      | question | answer |
+      | Caseworker review required? | Yes |
+      | Review reasons | Bank statements uploaded |
 
     And the Property questions should exist:
       | question |
@@ -128,7 +128,7 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
-    And the "Which banks accounts does your client have?" questions should exist:
+    And the "Which bank accounts does your client have?", for static bank account totals, questions should exist:
       | question |
       | Current account |
       | Savings account |
@@ -173,6 +173,172 @@ Feature: Means report
       | question |
       | Uploaded bank statements |
 
+  Scenario: For a non-passported enhanced bank statement upload journey
+    Given the feature flag for enhanced_bank_upload is enabled
+    And I have completed a non-passported employed application with enhanced bank statement uploads
+    When I view the means report
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | Proceeding eligibility |
+      | h2  | Passported means |
+      | h2  | Income result |
+      | h2  | Income |
+      | h3  | Employment income |
+      | h2  | Outgoings |
+      | h2  | Deductions |
+      | h2  | Caseworker Review |
+      | h2  | Capital result |
+      | h2  | Property, savings and other assets |
+      | h3  | Property |
+      | h3  | Vehicles |
+      | h2  | Which bank accounts does your client have? |
+      | h2  | Which savings or investments does your client have? |
+      | h2  | Which assets does your client have? |
+      | h2  | Restrictions on your client's assets |
+      | h2  | Payments from scheme or charities |
+      | h3  | Bank statements |
+
+    Then the following sections should not exist:
+      | h3  | Does your client have any savings accounts they cannot access online? |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Declared income categories |
+      | h2  | Student finance |
+      | h2  | Employed income result |
+      | h2  | Declared cash income |
+      | h2  | Dependants |
+      | h2  | Declared outgoings categories |
+      | h2  | Declared cash outgoings |
+
+    And the Client details questions should exist:
+      | question |
+      | First name |
+      | Last name |
+      | Date of birth |
+      | Age at computation date |
+      | National Insurance number |
+
+    And the Proceeding eligibility questions should exist:
+      | question |
+      | Extend, variation or discharge - Part IV |
+      | Variation or discharge under section 5 protection from harassment act 1997r |
+
+    And the Income result questions should exist:
+      | question |
+      | Total gross income assessed |
+      | Total disposable income assessed |
+      | Gross income limit |
+      | Disposable income lower limit |
+      | Disposable income upper limit |
+      | Income contribution |
+
+    And the Income questions should exist:
+      | question |
+      | Gross employment income |
+      | Income tax |
+      | National insurance |
+      | Fixed employment deduction |
+      | Benefits |
+      | Financial help from friends or family |
+      | Maintenance payments |
+      | Income from property or lodger |
+      | Student loan or grant |
+      | Pension |
+      | Total income |
+
+    And the Employment notes questions should exist:
+      | Do you need to tell us anything else about your client's employment? |
+      | Details |
+
+    And the Outgoings questions should exist:
+      | question |
+      | Housing payments (any declared housing benefits have been deducted from this total) |
+      | Childcare payments |
+      | Maintenance payments to a former partner |
+      | Payments towards legal aid in a criminal cas |
+      | Total outgoings |
+
+    And the Deductions questions should exist:
+      | question |
+      | Dependants allowance |
+      | Total deductions |
+
+    And the Deductions questions should not exist:
+      | question |
+      | Income from benefits excluded from calculation |
+
+    And the Caseworker review section should contain:
+      | question | answer |
+      | Caseworker review required? | Yes |
+      | Review reasons | Bank statements uploaded |
+
+    And the Capital result questions should exist:
+      | question |
+      | Total capital assessed |
+      | Capital lower limit |
+      | Capital upper limit |
+      | Capital contribution |
+
+    And the Property questions should exist:
+      | question |
+      | Does your client own the home they live in? |
+      | How much is your client's home worth? |
+      | What is the outstanding mortgage on your client's home? |
+      | Does your client own their home with anyone else? |
+      | What % share of their home does your client legally own? |
+
+    And the Vehicles questions should exist:
+      | question |
+      | Does your client own a vehicle? |
+      | What is the estimated value of the vehicle? |
+      | Are there any payments left on the vehicle? |
+      | The vehicle was bought more than three years ago? |
+      | Is the vehicle in regular use? |
+
+    And the "Which bank accounts does your client have?", for static bank account totals, questions should exist:
+      | question |
+      | Current account |
+      | Savings account |
+
+    And the "Which savings or investments does your client have?" questions should exist:
+      | question |
+      | Money not in a bank account |
+      | Access to another person's bank account |
+      | ISAs, National Savings Certificates and Premium Bonds |
+      | Shares in a PLC |
+      | PEPs, unit trusts, capital bonds and government stocks |
+      | Life assurance and endowment policies not linked to a mortgage |
+
+    And the "Which assets does your client have?" questions should exist:
+      | question |
+      | Timeshare property |
+      | Land |
+      | Any valuable items worth £500 or more |
+      | Money or assets from the estate of a person who has died |
+      | Money owed to them, including from a private mortgage |
+      | Interest in a trust |
+      | Second property or holiday home estimated value |
+      | Second property or holiday home outstanding mortgage amount |
+      | Second property or holiday home percentage owned |
+
+    And the "Restrictions on your client's assets" questions should exist:
+      | question |
+      | Is your client prohibited from selling or borrowing against their assets? |
+      | Details of restrictions |
+
+    And the "Payments from scheme or charities" questions should exist:
+      | question |
+      | England Infected Blood Support Scheme |
+      | Vaccine Damage Payments Scheme |
+      | Variant Creutzfeldt-Jakob disease (vCJD) Trust |
+      | Criminal Injuries Compensation Scheme |
+      | National Emergencies Trust (NET) |
+      | We Love Manchester Emergency Fund |
+      | The London Emergencies Trust |
+
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed a non-passported application with truelayer
     When I view the means report
@@ -184,6 +350,7 @@ Feature: Means report
       | h2  | Passported means |
       | h2  | Income result |
       | h2  | Income |
+      | h3  | Employment income |
       | h2  | Outgoings |
       | h2  | Deductions |
       | h2  | Caseworker Review |
@@ -191,6 +358,8 @@ Feature: Means report
       | h2  | Property, savings and other assets |
       | h3  | Property |
       | h3  | Vehicles |
+      | h2  | Which bank accounts does your client have? |
+      | h3  | Does your client have any savings accounts they cannot access online? |
       | h2  | Property, savings and other assets |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
@@ -232,6 +401,10 @@ Feature: Means report
 
     And the Income questions should exist:
       | question |
+      | Gross employment income |
+      | Income tax |
+      | National insurance |
+      | Fixed employment deduction |
       | Benefits |
       | Financial help from friends or family |
       | Maintenance payments |
@@ -240,6 +413,10 @@ Feature: Means report
       | Pension |
       | Total income |
 
+    And the Employment notes questions should exist:
+      | Do you need to tell us anything else about your client's employment? |
+      | Details |
+
     And the Outgoings questions should exist:
       | question |
       | Housing payments |
@@ -247,6 +424,8 @@ Feature: Means report
       | Maintenance payments to a former partner |
       | Payments towards legal aid in a criminal cas |
       | Total outgoings |
+
+    And I should not see "housing benefits have been deducted"
 
     And the Deductions questions should exist:
       | question |
@@ -282,6 +461,16 @@ Feature: Means report
       | The vehicle was bought more than three years ago? |
       | Is the vehicle in regular use? |
 
+    And the "Which bank accounts does your client have?", for open banking accounts, questions should exist:
+      | question |
+      | Current account |
+      | Savings account |
+
+    And the "Does your client have any savings accounts they cannot access online?" questions should exist:
+      | question |
+      | Has savings accounts they cannot access online |
+      | Amount in offline savings accounts |
+
     And the "Which savings or investments does your client have?" questions should exist:
       | question |
       | Money not in a bank account |
@@ -293,15 +482,15 @@ Feature: Means report
 
     And the "Which assets does your client have?" questions should exist:
       | question |
-      | Second property or holiday home estimated value |
-      | Second property or holiday home outstanding mortgage amount |
-      | Second property or holiday home percentage owned |
       | Timeshare property |
       | Land |
       | Any valuable items worth £500 or more |
       | Money or assets from the estate of a person who has died |
       | Money owed to them, including from a private mortgage |
       | Interest in a trust |
+      | Second property or holiday home estimated value |
+      | Second property or holiday home outstanding mortgage amount |
+      | Second property or holiday home percentage owned |
 
     And the "Restrictions on your client's assets" questions should exist:
       | question |

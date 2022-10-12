@@ -407,6 +407,10 @@ FactoryBot.define do
       savings_amount { build(:savings_amount, :all_zero, offline_savings_accounts: 1001) }
     end
 
+    trait :with_fixed_offline_accounts do
+      savings_amount { build(:savings_amount, :all_zero, offline_current_accounts: 1001, offline_savings_accounts: 1002) }
+    end
+
     trait :with_substantive_application_deadline_on do
       after(:create) do |application|
         application.update!(substantive_application_deadline_on: SubstantiveApplicationDeadlineCalculator.call(application.earliest_delegated_functions_date))

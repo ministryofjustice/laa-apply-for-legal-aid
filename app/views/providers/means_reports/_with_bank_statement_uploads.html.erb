@@ -1,7 +1,6 @@
 <%= render 'receives_benefits' %>
 
 <% if @legal_aid_application.non_passported? %>
-
   <section class="print-no-break">
     <%= render('income_categories', read_only: true) %>
   </section>

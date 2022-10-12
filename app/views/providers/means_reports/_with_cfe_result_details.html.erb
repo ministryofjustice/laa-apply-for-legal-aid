@@ -66,3 +66,9 @@
 <% if @legal_aid_application.passported? && @manual_review_determiner.manual_review_required? %>
     <%= render 'caseworker_review' %>
 <% end %>
+
+<% if @legal_aid_application.uploading_bank_statements? %>
+<section class="print-no-break">
+  <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+</section>
+<% end %>

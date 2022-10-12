@@ -16,7 +16,7 @@
 
     <% if read_only %>
       <h2 class="govuk-heading-m"><%= t('.assets.bank_accounts') %></h2>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-test="applicant-bank-accounts">
 
         <%= check_answer_link(
               name: :online_current_accounts,
