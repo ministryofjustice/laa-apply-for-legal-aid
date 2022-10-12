@@ -5,7 +5,6 @@ RSpec.describe MeansReportHelper, type: :helper do
   let(:applicant) { build_stubbed(:applicant) }
 
   shared_examples "transaction type item list" do
-    it { is_expected.to all(be_kind_of(Struct)) }
     it { is_expected.to all(respond_to(:to_h)) }
   end
 
@@ -15,7 +14,7 @@ RSpec.describe MeansReportHelper, type: :helper do
     it_behaves_like "transaction type item list"
 
     it "has expected items" do
-      expect(items.map(&:name)).to eql(%i[housing childcare maintenance_out legal_aid])
+      expect(items.map(&:name)).to eq(%i[housing childcare maintenance_out legal_aid])
     end
 
     context "with housing item" do
@@ -27,7 +26,7 @@ RSpec.describe MeansReportHelper, type: :helper do
         end
 
         it "addendum matches expected text" do
-          expect(housing_item.addendum).to eql(" (any declared housing benefits have been deducted from this total)")
+          expect(housing_item.addendum).to eq(" (any declared housing benefits have been deducted from this total)")
         end
       end
 
