@@ -322,6 +322,7 @@ Feature: Checking answers backwards and forwards
 
     When I click Check Your Answers Change link for 'bank statements'
     And I upload an evidence file named 'hello_world.pdf'
+    Then I should see "hello_world.pdf UPLOADED"
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
     And I should see 'hello_world.pdf'
