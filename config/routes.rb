@@ -189,6 +189,7 @@ Rails.application.routes.draw do
 
       resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
+      resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
