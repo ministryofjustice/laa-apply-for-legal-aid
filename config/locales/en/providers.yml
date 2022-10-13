@@ -430,6 +430,10 @@ en:
           status: Status
           uploaded: Uploaded
           title: Files added
+      client_denial_of_allegations:
+        show:
+          h1-heading: Does the client wholly or substantially deny any allegations?
+          no-hint: As the allegation has not been denied, give us more information to explain why you think there is merit in this application.
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
@@ -918,6 +922,7 @@ en:
         children_application: Children involved in this application
         children_proceeding: Children involved in this proceeding
         attempts_to_settle: Attempts to settle
+        client_denial_of_allegation: Client denial of allegation
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -931,6 +936,7 @@ en:
           has_other_involved_children: has_other_involved_children
           children_proceeding: linked_children
           attempts_to_settle: attempts_to_settle
+          client_denial_of_allegation: client_denial_of_allegation
     merits_reports:
       show:
         heading: Merits report
