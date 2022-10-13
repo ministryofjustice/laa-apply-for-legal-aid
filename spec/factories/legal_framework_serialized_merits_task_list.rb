@@ -55,5 +55,31 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :da001_as_defendant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              children_application: [],
+              statement_of_case: [],
+              client_denial_of_allegation: [],
+              client_offer_of_undertakings: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+          ],
+        }
+      end
+    end
   end
 end
