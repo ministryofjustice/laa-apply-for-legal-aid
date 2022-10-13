@@ -5,6 +5,7 @@
   </h2>
   <ul class="app-task-list__items">
     <% tasks.each do |task| %>
+      <% next if task.state.eql?(:ignored) %>
       <%= task_list_item(
               name: task.name,
               status: task.state,
