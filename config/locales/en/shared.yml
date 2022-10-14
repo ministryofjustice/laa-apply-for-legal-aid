@@ -248,6 +248,7 @@ en:
         statement-of-case-heading: Statement of case
         gateway-evidence-heading: Supporting evidence
         evidence_upload_heading: Supporting evidence
+        client_denial_of_allegation_heading: Client denial of allegation
         evidence_types:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
