@@ -4,177 +4,297 @@ FirmStruct = Struct.new(:id, :name)
 OfficeStruct = Struct.new(:id, :code)
 
 RSpec.describe ProviderDetailsCreator do
-  subject { described_class.call(provider) }
-
-  let(:username) { Faker::Name.name }
-  let(:provider) { create :provider, name: nil, username: }
-  let(:other_provider) { create :provider, name: nil, email: Faker::Internet.safe_email }
-  let(:third_provider) { create :provider, name: nil, email: nil }
-  let(:ccms_firm) { FirmStruct.new(rand(1..1000), Faker::Company.name) }
-  let(:ccms_office1) { OfficeStruct.new(rand(1..100), random_vendor_code) }
-  let(:ccms_office2) { OfficeStruct.new(rand(101..200), random_vendor_code) }
-  let(:contact_id) { rand(101..200) }
-  let(:api_response) do
-    {
-      providerFirmId: ccms_firm.id,
-      contactUserId: rand(101..200),
-      contacts: [
-        {
-          id: contact_id,
-          name: username,
-        },
-        {
-          id: rand(101..200),
-          name: other_provider.email,
-        },
-        {
-          id: rand(101..200),
-          name: third_provider.username,
-        },
-      ],
-      feeEarners: [],
-      providerOffices: [
-        {
-          id: ccms_office1.id,
-          name: "#{ccms_firm.name}-#{ccms_office1.code}",
-        },
-        {
-          id: ccms_office2.id,
-          name: "#{ccms_firm.name}-#{ccms_office2.code}",
-        },
-      ],
-    }
-  end
-  let(:firm) { provider.firm }
-  let(:office1) { firm.offices.find_by(ccms_id: ccms_office1.id) }
-  let(:office2) { firm.offices.find_by(ccms_id: ccms_office2.id) }
-
-  before { allow(ProviderDetailsRetriever).to receive(:call).with(provider.username).and_return(api_response) }
-
   describe ".call" do
-    it "creates the right firm" do
-      expect { subject }.to change(Firm, :count).by(1)
-      expect(firm.ccms_id).to eq(ccms_firm.id.to_s)
-      expect(firm.name).to eq(ccms_firm.name)
-    end
+    context "when the firm does not exist" do
+      it "creates the firm" do
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office = OfficeStruct.new(1, "6D424Y")
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
 
-    it "adds non passported permission to the firm" do
-      expect { subject }.to change(Firm, :count).by(1)
-      expect(firm.permissions.map(&:role)).to match_array(["application.passported.*", "application.non_passported.*"])
-    end
+        described_class.call(provider)
 
-    it "creates the right offices" do
-      expect { subject }.to change(Office, :count).by(2)
-      expect(firm.offices.count).to eq(2)
-      expect(office1.code).to eq(ccms_office1.code)
-      expect(office2.code).to eq(ccms_office2.code)
-    end
+        expect(provider.firm).to have_attributes(
+          ccms_id: "1",
+          name: "Test Firm",
+        )
+      end
 
-    it "updates the name of the provider" do
-      expect { subject }.to change { provider.reload.name }.to("")
-    end
+      it "adds non-passported permissions to the firm" do
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office = OfficeStruct.new(1, "6D424Y")
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
 
-    it "updates the contact_id of the provider" do
-      expect { subject }.to change { provider.reload.contact_id }.to(contact_id)
-    end
+        described_class.call(provider)
 
-    context "when the names match" do
-      it "updates the contact_id of the provider" do
-        expect { subject }.to change { provider.reload.contact_id }.to(api_response[:contacts][0][:id])
+        firm_roles = provider.firm.permissions.collect(&:role)
+        expect(firm_roles).to contain_exactly(
+          "application.passported.*",
+          "application.non_passported.*",
+        )
+      end
+
+      it "creates the offices" do
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office1 = OfficeStruct.new(1, "6D424Y")
+        ccms_office2 = OfficeStruct.new(2, "4C880Q")
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office1, ccms_office2],
+        )
+
+        described_class.call(provider)
+
+        offices = provider.firm.offices
+        expect(offices).to contain_exactly(
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office1.id.to_s,
+            code: ccms_office1.code,
+          ),
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office2.id.to_s,
+            code: ccms_office2.code,
+          ),
+        )
+      end
+
+      it "updates the provider" do
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office = OfficeStruct.new(1, "6D424Y")
+        provider = create(:provider, name: nil, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
+
+        described_class.call(provider)
+
+        expect(provider).to have_attributes(
+          name: "",
+          contact_id: 104,
+        )
       end
     end
 
-    context "when the username matches" do
-      subject { described_class.call(third_provider) }
-
-      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
-
-      it "updates the contact_id of the provider" do
-        expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
-      end
-    end
-
-    context "when the emails match" do
-      subject { described_class.call(third_provider) }
-
-      before { allow(ProviderDetailsRetriever).to receive(:call).with(third_provider.username).and_return(api_response) }
-
-      it "updates the contact_id of the provider" do
-        expect { subject }.to change { third_provider.reload.contact_id }.to(api_response[:contacts][2][:id])
-      end
-    end
-
-    context "selected office of provider is not returned by the API" do
-      let(:selected_office) { create :office, code: "selected-office" }
-      let(:provider) { create :provider, selected_office: }
-
+    context "when the provider's office is not returned from the API" do
       it "clears the selected office" do
-        expect { subject }.to change { provider.reload.selected_office }.to(nil)
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office = OfficeStruct.new(1, "6D424Y")
+        office = create(:office, code: "6D456C")
+        provider = create(
+          :provider,
+          username: "test-user",
+          selected_office: office,
+        )
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
+
+        described_class.call(provider)
+
+        expect(provider.selected_office).to be_nil
       end
     end
 
-    context "firm already exists with one of the offices" do
-      let!(:existing_firm) { create :firm, ccms_id: ccms_firm.id, name: "foobar" }
-      let!(:existing_office) { create :office, firm: existing_firm }
+    context "when the provider's office is returned from the API" do
+      it "does not clear the selected office" do
+        ccms_firm = FirmStruct.new(1, "Test Firm")
+        ccms_office = OfficeStruct.new(1, "6D456C")
+        office = create(
+          :office,
+          ccms_id: ccms_office.id,
+          code: ccms_office.code,
+        )
+        provider = create(
+          :provider,
+          username: "test-user",
+          selected_office: office,
+        )
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
 
-      it "uses existing firm" do
-        expect { subject }.not_to change(Firm, :count)
-        expect(provider.firm_id).to eq(existing_firm.id)
-      end
+        described_class.call(provider)
 
-      it "adds the new offices" do
-        expect { subject }.to change { existing_firm.reload.offices.count }.by(2)
-      end
-
-      it "updates the name of the firm" do
-        expect { subject }.to change { existing_firm.reload.name }.to(ccms_firm.name)
+        expect(provider.selected_office).to eq(office)
       end
     end
 
-    context "another provider has the same firm but a different set of offices" do
-      let(:provider2) { create :provider }
-      let(:ccms_office3) { OfficeStruct.new(rand(201..300), rand(201..300).to_s) }
-      let(:api_response2) do
-        {
-          providerFirmId: ccms_firm.id,
-          contactUserId: rand(101..200),
-          contacts: [
-            {
-              id: rand(101..200),
-              name: Faker::Name.name,
-            },
-          ],
-          providerOffices: [
-            {
-              id: ccms_office2.id,
-              name: "#{ccms_firm.name}-#{ccms_office2.code}",
-            },
-            {
-              id: ccms_office3.id,
-              name: "#{ccms_firm.name}-#{ccms_office3.code}",
-            },
-          ],
-        }
-      end
-      let(:firm) { provider.firm }
-      let(:office3) { firm.offices.find_by(ccms_id: ccms_office3.id) }
+    context "when the firm already exists with one of the offices" do
+      it "does not create the firm" do
+        ccms_firm = FirmStruct.new(1, "Existing Firm")
+        ccms_office = OfficeStruct.new(1, "6D456C")
+        existing_firm = create(
+          :firm,
+          ccms_id: ccms_firm.id,
+          name: "Existing Firm",
+        )
+        _existing_office = create(
+          :office,
+          firm: existing_firm,
+          ccms_id: ccms_office.id,
+          code: ccms_office.code,
+        )
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
 
-      before do
-        allow(ProviderDetailsRetriever).to receive(:call).with(provider2.username).and_return(api_response2)
-        described_class.call(provider2)
-        subject
-        provider.reload
-        provider2.reload
+        described_class.call(provider)
+
+        expect(provider.firm).to eq(existing_firm)
       end
 
-      it "does not add all offices to both providers" do
-        expect(provider.offices).to contain_exactly(office1, office2)
-        expect(provider2.offices).to contain_exactly(office2, office3)
+      it "updates the firms offices" do
+        ccms_firm = FirmStruct.new(1, "Existing Firm")
+        ccms_office1 = OfficeStruct.new(1, "6D456C")
+        ccms_office2 = OfficeStruct.new(2, "4C880Q")
+        existing_firm = create(
+          :firm,
+          ccms_id: ccms_firm.id,
+          name: "Existing Firm",
+        )
+        existing_office = create(
+          :office,
+          firm: existing_firm,
+          ccms_id: ccms_office1.id,
+          code: ccms_office1.code,
+        )
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office1, ccms_office2],
+        )
+
+        described_class.call(provider)
+
+        expect(existing_firm.offices).to contain_exactly(
+          existing_office,
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office2.id.to_s,
+            code: ccms_office2.code,
+          ),
+        )
+      end
+
+      it "updates the firm's name" do
+        ccms_firm = FirmStruct.new(1, "New Firm Name")
+        ccms_office = OfficeStruct.new(1, "6D456C")
+        existing_firm = create(
+          :firm,
+          ccms_id: ccms_firm.id,
+          name: "Old Firm Name",
+        )
+        _existing_office = create(
+          :office,
+          firm: existing_firm,
+          ccms_id: ccms_office.id,
+          code: ccms_office.code,
+        )
+        provider = create(:provider, username: "test-user")
+        stub_provider_details_retriever(
+          provider:,
+          firm: ccms_firm,
+          offices: [ccms_office],
+        )
+
+        described_class.call(provider)
+
+        expect(existing_firm.reload.name).to eq("New Firm Name")
+      end
+    end
+
+    context "when another provider has the same firm, but different offices" do
+      it "only adds offices to the correct provider" do
+        ccms_firm = FirmStruct.new(1, "New Firm Name")
+        ccms_office1 = OfficeStruct.new(1, "6D456C")
+        ccms_office2 = OfficeStruct.new(2, "4C880Q")
+        ccms_office3 = OfficeStruct.new(3, "9R678Y")
+        provider = create(:provider, username: "test-user")
+        other_provider = create(:provider, username: "other-user")
+        stub_provider_details_retriever(
+          provider:,
+          contact_id: 105,
+          firm: ccms_firm,
+          offices: [ccms_office1, ccms_office2],
+        )
+        stub_provider_details_retriever(
+          provider: other_provider,
+          contact_id: 106,
+          firm: ccms_firm,
+          offices: [ccms_office2, ccms_office3],
+        )
+
+        described_class.call(provider)
+        described_class.call(other_provider)
+
+        expect(provider.offices).to contain_exactly(
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office1.id.to_s,
+            code: ccms_office1.code,
+          ),
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office2.id.to_s,
+            code: ccms_office2.code,
+          ),
+        )
+
+        expect(other_provider.offices).to contain_exactly(
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office2.id.to_s,
+            code: ccms_office2.code,
+          ),
+          have_attributes(
+            class: Office,
+            ccms_id: ccms_office3.id.to_s,
+            code: ccms_office3.code,
+          ),
+        )
       end
     end
   end
 
-  def random_vendor_code
-    "#{rand(9)}#{rand(65..90).chr}#{rand(100..999)}#{rand(65..90).chr}"
+  def stub_provider_details_retriever(provider:, firm:, offices:, contact_id: 104)
+    allow(ProviderDetailsRetriever)
+      .to receive(:call)
+      .with(provider.username)
+      .and_return(api_response(provider:, firm:, offices:, contact_id:))
+  end
+
+  def api_response(provider:, firm:, offices:, contact_id:)
+    {
+      providerFirmId: firm.id,
+      contactUserId: 146,
+      contacts: [{ id: contact_id, name: provider.username }],
+      feeEarners: [],
+      providerOffices: offices.map do |office|
+        { id: office.id, name: "#{firm.name}-#{office.code}" }
+      end,
+    }
   end
 end
