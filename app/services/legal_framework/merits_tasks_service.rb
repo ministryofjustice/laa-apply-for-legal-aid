@@ -14,6 +14,7 @@ module LegalFramework
       @response = merits_tasks(submission)
 
       smtl = SerializableMeritsTaskList.new(@response)
+      ignore_unknown_questions(smtl)
       update_merits_task_list(smtl.to_yaml)
       smtl
     rescue SubmissionError => e
@@ -43,6 +44,20 @@ module LegalFramework
 
     def submission
       @submission ||= Submission.create!(legal_aid_application_id: @legal_aid_application.id)
+    end
+
+    def ignore_unknown_questions(smtl)
+      # loop through and mark any questions that cannot be found
+      # as ignored - this can then remove them from the view
+      smtl.tasks[:application].each do |task|
+        task.mark_as_ignored! if I18n.t(task.name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing")
+      end
+      smtl.tasks[:proceedings].each do |_proceeding, values|
+        values[:tasks].each do |task|
+          task.mark_as_ignored! if I18n.t(task.name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing")
+        end
+      end
+      smtl
     end
   end
 end
