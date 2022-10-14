@@ -235,31 +235,33 @@ Feature: Means report
       | Disposable income upper limit |
       | Income contribution |
 
-    And the Income questions should exist:
-      | question |
-      | Gross employment income |
-      | Income tax |
-      | National insurance |
-      | Fixed employment deduction |
-      | Benefits |
-      | Financial help from friends or family |
-      | Maintenance payments |
-      | Income from property or lodger |
-      | Student loan or grant |
-      | Pension |
-      | Total income |
+    And the Income questions and answers should match:
+      | question | answer |
+      | Gross employment income | £2,143.97 |
+      | Income tax | -£204.15 |
+      | National insurance | -£161.64 |
+      | Fixed employment deduction | -£45 |
+      | Benefits | £75 |
+      | Financial help from friends or family | £0 |
+      | Maintenance payments | £0 |
+      | Income from property or lodger | £0 |
+      | Student loan or grant | £0 |
+      | Pension | £0 |
+
+    And I should see "Total income"
 
     And the Employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details |
 
-    And the Outgoings questions should exist:
-      | question |
-      | Housing payments (any declared housing benefits have been deducted from this total) |
-      | Childcare payments |
-      | Maintenance payments to a former partner |
-      | Payments towards legal aid in a criminal cas |
-      | Total outgoings |
+    And the Outgoings questions and answers should match:
+      | question | answer |
+      | Housing payments (any declared housing benefits have been deducted from this total) | £125 |
+      | Childcare payments | £0 |
+      | Maintenance payments to a former partner | £0 |
+      | Payments towards legal aid in a criminal case | £0 |
+
+    And I should see "Total outgoings"
 
     And the Deductions questions should exist:
       | question |
@@ -399,33 +401,33 @@ Feature: Means report
       | Disposable income upper limit |
       | Income contribution |
 
-    And the Income questions should exist:
-      | question |
-      | Gross employment income |
-      | Income tax |
-      | National insurance |
-      | Fixed employment deduction |
-      | Benefits |
-      | Financial help from friends or family |
-      | Maintenance payments |
-      | Income from property or lodger |
-      | Student loan or grant |
-      | Pension |
-      | Total income |
+    And the Income questions and answers should match:
+      | question | answer |
+      | Gross employment income | £2,143.97 |
+      | Income tax | -£204.15 |
+      | National insurance | -£161.64 |
+      | Fixed employment deduction | -£45 |
+      | Benefits | £75 |
+      | Financial help from friends or family | £0 |
+      | Maintenance payments | £0 |
+      | Income from property or lodger | £0 |
+      | Student loan or grant | £0 |
+      | Pension | £0 |
+
+    And I should see "Total income"
 
     And the Employment notes questions should exist:
       | Do you need to tell us anything else about your client's employment? |
       | Details |
 
-    And the Outgoings questions should exist:
-      | question |
-      | Housing payments |
-      | Childcare payments |
-      | Maintenance payments to a former partner |
-      | Payments towards legal aid in a criminal cas |
-      | Total outgoings |
+    And the Outgoings questions and answers should match:
+      | question | answer |
+      | Housing payments | £125 |
+      | Childcare payments | £0 |
+      | Maintenance payments to a former partner | £0 |
+      | Payments towards legal aid in a criminal case | £0 |
 
-    And I should not see "housing benefits have been deducted"
+    And I should see "Total outgoings"
 
     And the Deductions questions should exist:
       | question |

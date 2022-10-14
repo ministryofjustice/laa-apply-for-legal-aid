@@ -45,6 +45,8 @@ class TransactionType < ApplicationRecord
   scope :income_for, ->(transaction_type_name) { active.where(operation: :credit, name: transaction_type_name) }
   scope :outgoing_for, ->(transaction_type_name) { active.where(operation: :debit, name: transaction_type_name) }
   scope :not_children, -> { where(parent_id: nil) }
+  scope :without_disregarded_benefits, -> { not_children }
+  scope :without_housing_benefits, -> { where.not(name: "housing_benefit") }
 
   def self.for_income_type?(transaction_type_name)
     income_for(transaction_type_name).any?

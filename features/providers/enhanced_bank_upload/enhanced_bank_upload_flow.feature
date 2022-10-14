@@ -23,7 +23,7 @@ Feature: Enhanced bank upload flow
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
-    And I should see 'Disregarded benefits'
+    And I should see govuk-details 'Disregarded benefits'
     And the page is accessible
 
     When I open the section 'Disregarded benefits'
