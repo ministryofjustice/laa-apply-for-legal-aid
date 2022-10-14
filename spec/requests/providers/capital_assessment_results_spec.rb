@@ -284,11 +284,6 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         it "redirects to the merits task list" do
           expect(subject).to redirect_to(providers_legal_aid_application_merits_task_list_path)
         end
-
-        it "creates a task list" do
-          subject
-          expect(LegalFramework::MeritsTasksService).to have_received(:call).with(legal_aid_application)
-        end
       end
 
       context "when save as draft button is pressed" do
