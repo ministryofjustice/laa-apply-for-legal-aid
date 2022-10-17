@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_13_114916) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_130541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -856,6 +856,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_114916) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "undertakings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.boolean "offered"
+    t.string "additional_information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_undertakings_on_legal_aid_application_id"
+  end
+
   create_table "uploaded_evidence_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.uuid "provider_uploader_id"
@@ -920,6 +929,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_114916) do
   add_foreign_key "scope_limitations", "proceedings"
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
+  add_foreign_key "undertakings", "legal_aid_applications"
   add_foreign_key "uploaded_evidence_collections", "legal_aid_applications"
   add_foreign_key "vehicles", "legal_aid_applications"
 end
