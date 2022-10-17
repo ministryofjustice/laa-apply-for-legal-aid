@@ -9,8 +9,8 @@
                     back_link: {},
                     form: form) do %>
     <%= form.govuk_radio_buttons_fieldset :denies_all, legend: {size: 'xl', tag: 'h1', text: page_title} do %>
-      <%= form.govuk_radio_button :denies_all, true, label: {text: t('generic.yes')} %>
-      <%= form.govuk_radio_button :denies_all, false, link_errors: true, label: {text: t('generic.no')} do %>
+      <%= form.govuk_radio_button :denies_all, true, link_errors: true, label: {text: t('generic.yes')} %>
+      <%= form.govuk_radio_button :denies_all, false, label: {text: t('generic.no')} do %>
         <%= form.govuk_text_area :additional_information, label: {text: t('.no-hint')}, rows: 5 %>
       <% end %>
 
