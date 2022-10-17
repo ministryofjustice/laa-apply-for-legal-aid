@@ -80,12 +80,14 @@ FactoryBot.define do
       name { "excluded_benefits" }
       operation { "credit" }
       sort_order { 40 }
+      parent_id { "fake-benefits-uuid" }
     end
 
     trait :housing_benefit do
       name { "housing_benefit" }
       operation { "credit" }
       sort_order { 50 }
+      parent_id { "fake-benefits-uuid" }
     end
 
     trait :rent_or_mortgage do

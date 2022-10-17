@@ -891,6 +891,9 @@ en:
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
+      housing_benefits:
+        heading: Housing benefits
+        does_your_client: Does your client receive housing benefits?
       income_assessment:
         income-heading: Your client's income
         outgoings-heading: Your client's outgoings

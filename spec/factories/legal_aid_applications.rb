@@ -827,6 +827,22 @@ FactoryBot.define do
       end
     end
 
+    trait :with_housing_benefit_regular_transaction do
+      after(:build) do |application|
+        application.applicant_in_receipt_of_housing_benefit = true
+      end
+
+      after(:create) do |application|
+        create(:regular_transaction, :housing_benefit, legal_aid_application: application, amount: 1_200.00, frequency: "three_monthly")
+      end
+    end
+
+    trait :with_rent_or_mortgage_regular_transaction do
+      after(:create) do |application|
+        create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly")
+      end
+    end
+
     trait :with_cfe_v1_result do
       after :create do |application|
         cfe_submission = create :cfe_submission, legal_aid_application: application

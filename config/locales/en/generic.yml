@@ -5,6 +5,7 @@ en:
     address:
       postcode: Postcode
       postcode_label: postcode
+    amount: Amount
     attach_file: Attach a file
     back: Back
     back_to_your_applications: Back to your applications

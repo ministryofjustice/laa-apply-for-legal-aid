@@ -38,6 +38,8 @@
       transaction_types: @debit_transaction_types
     ) %>
 
+<%= render('housing_benefits', read_only: false) if @legal_aid_application.using_enhanced_bank_upload? %>
+
 <%= render('outgoings_cash_payments', read_only: false) if @legal_aid_application.uploading_bank_statements? %>
 
 <h2 class="govuk-heading-l"><%= t('.dependants.heading') %></h2>

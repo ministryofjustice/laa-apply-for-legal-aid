@@ -18,7 +18,11 @@ FactoryBot.define do
     end
 
     trait :housing_benefit do
-      association :transaction_type, :housing_benefit
+      transaction_type { TransactionType.where(name: "housing_benefit").first || create(:transaction_type, :housing_benefit) }
+    end
+
+    trait :rent_or_mortgage do
+      transaction_type { TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage) }
     end
   end
 end
