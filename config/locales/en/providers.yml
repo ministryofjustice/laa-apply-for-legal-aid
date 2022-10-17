@@ -1001,7 +1001,7 @@ en:
           multiple_employments: Multiple employments
           refunds: Tax or NI refunds
           uploaded_bank_statements: Bank statements uploaded
-          ineligible: Ineligible
+          ineligible: Applicant is ineligible
       show:
         client_details_heading: Client details
         evidence_upload_heading: Supporting evidence
