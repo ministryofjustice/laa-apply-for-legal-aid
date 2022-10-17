@@ -10,18 +10,11 @@ linters:
   Rubocop:
     enabled: true
     exclude:
-      - "**/app/views/accessibility_statement/*"
       - "**/app/views/admin/**/*"
-      - "**/app/views/admin_users/**/*"
       - "**/app/views/citizens/**/*"
-      - "**/app/views/contacts/*"
-      - "**/app/views/errors/**/*"
       - "**/app/views/feedback/*"
       - "**/app/views/layouts/*"
-      - "**/app/views/privacy_policy/*"
-      - "**/app/views/problem/*"
       - "**/app/views/providers/**/*"
-      - "**/app/views/saml_idp/**/*"
       - "**/app/views/shared/**/*"
       - "**/app/views/shared/*"
     rubocop_config:
