@@ -8,6 +8,13 @@ module Providers
       validate :denies_all_presence
       validates :additional_information, presence: true, if: :requires_additional_information?
 
+      def save
+        additional_information&.clear if denies_all?
+        super
+      end
+
+    private
+
       def denies_all_presence
         errors.add(:denies_all, :blank) if denies_all.to_s.blank?
       end
@@ -18,11 +25,6 @@ module Providers
 
       def requires_additional_information?
         denies_all.to_s == "false"
-      end
-
-      def save
-        additional_information&.clear if denies_all?
-        super
       end
     end
   end
