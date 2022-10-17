@@ -364,7 +364,7 @@ Feature: Checking answers backwards and forwards
   @javascript
   Scenario: I am able to see all necessary sections for a non-passported open banking flow
     Given I have completed a non-passported application with open banking transactions
-    And I am viewing the means summary check your anwsers page
+    And I am viewing the means summary check your answers page
 
     Then the following sections should exist:
       | tag | section |
@@ -378,7 +378,6 @@ Feature: Checking answers backwards and forwards
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-    # | h3  | Which bank accounts does your client have? |
       | h3  | Does your client have any savings accounts they cannot access online? |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
