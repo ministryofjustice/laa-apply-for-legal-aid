@@ -24,7 +24,7 @@
 
     <%= form.govuk_fieldset legend: {text: page_title, tag: 'h1', size: 'xl'} do %>
 
-      <div class="govuk-inset-text"><%= t('.hint_text') %></div>
+      <%= govuk_inset_text(text: t(".hint_text")) %>
 
       <%= form.govuk_file_field :original_file, label: {text: t('generic.upload_file'), size: 'm'},
                                 hint: {text: t('.size_hint')} %>

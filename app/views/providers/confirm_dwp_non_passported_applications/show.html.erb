@@ -17,9 +17,7 @@
                                               classes: ['govuk-!-margin-top-4'] %>
 
       <% if display_hmrc_inset_text? %>
-        <div class="govuk-inset-text">
-          <%= t('.hmrc_inset_text') %>
-        </div>
+        <%= govuk_inset_text(text: t(".hmrc_inset_text")) %>
       <% end %>
 
       <% if @form.errors.any? %>

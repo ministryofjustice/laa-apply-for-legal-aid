@@ -13,9 +13,9 @@
       <p id="delete-case-name"></p>
       <p id="delete-case-ref"></p>
     </div>
-    <div class="govuk-error-summary__body govuk-inset-text">
-      <%= t('.warning.delete_consequence') %>
-    </div>
+
+    <%= govuk_inset_text(text: t(".warning.delete_consequence")) %>
+
     <%= button_to_accessible(
           t('.confirm_delete'),
           nil,
