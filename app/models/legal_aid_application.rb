@@ -222,7 +222,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def income_types?
-    transaction_types.credits.any?
+    transaction_types.credits.without_housing_benefits.any?
   end
 
   def outgoing_types?
@@ -525,6 +525,10 @@ class LegalAidApplication < ApplicationRecord
 
   def housing_payments?
     transaction_types.for_outgoing_type?(:rent_or_mortgage)
+  end
+
+  def housing_benefit_regular_transaction_applicable?
+    using_enhanced_bank_upload? && housing_payments?
   end
 
 private

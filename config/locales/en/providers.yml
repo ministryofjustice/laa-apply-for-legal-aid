@@ -700,6 +700,9 @@ en:
       cash_incomes:
         show:
           page_heading: Select payments your client receives in cash
+      housing_benefits:
+        show:
+          page_heading: Does your client receive housing benefits?
       identify_types_of_incomes:
         show:
           page_heading: Which payments does your client receive?
@@ -891,7 +894,7 @@ en:
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
-      housing_benefits:
+      housing_benefit:
         heading: Housing benefits
         does_your_client: Does your client receive housing benefits?
       income_assessment:

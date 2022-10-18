@@ -269,25 +269,30 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#income_types?" do
-    it "returns true if transaction type credits exist" do
-      benefits = build_stubbed(:transaction_type, :benefits)
-      transaction_types = class_double(TransactionType, credits: [benefits])
-      legal_aid_application = build_stubbed(:legal_aid_application)
-      allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+    subject(:income_types?) { legal_aid_application.income_types? }
 
-      income_types_exist = legal_aid_application.income_types?
+    context "when transaction type credits exist" do
+      before do
+        legal_aid_application.transaction_types << build(:transaction_type, :benefits)
+      end
 
-      expect(income_types_exist).to be true
+      it { is_expected.to be true }
     end
 
-    it "returns false if no transaction type credits exist" do
-      transaction_types = class_double(TransactionType, credits: [])
-      legal_aid_application = build_stubbed(:legal_aid_application)
-      allow(legal_aid_application).to receive(:transaction_types).and_return(transaction_types)
+    context "when transaction type credits do not exist" do
+      before do
+        legal_aid_application.transaction_types = []
+      end
 
-      income_types_exist = legal_aid_application.income_types?
+      it { is_expected.to be false }
+    end
 
-      expect(income_types_exist).to be false
+    context "when housing benefit transaction type credits do exist" do
+      before do
+        legal_aid_application.transaction_types << build(:transaction_type, :housing_benefit)
+      end
+
+      it { is_expected.to be false }
     end
   end
 

@@ -6,23 +6,23 @@ FactoryBot.define do
     frequency { "weekly" }
 
     trait :benefits do
-      association :transaction_type, :benefits
+      transaction_type { TransactionType.find_by(name: "benefits") || create(:transaction_type, :benefits) }
     end
 
     trait :maintenance_in do
-      association :transaction_type, :maintenance_in
+      transaction_type { TransactionType.find_by(name: "maintenance_in") || create(:transaction_type, :maintenance_in) }
     end
 
     trait :maintenance_out do
-      association :transaction_type, :maintenance_out
+      transaction_type { TransactionType.find_by(name: "maintenance_out") || create(:transaction_type, :maintenance_out) }
     end
 
     trait :housing_benefit do
-      transaction_type { TransactionType.where(name: "housing_benefit").first || create(:transaction_type, :housing_benefit) }
+      transaction_type { TransactionType.find_by(name: "housing_benefit") || create(:transaction_type, :housing_benefit) }
     end
 
     trait :rent_or_mortgage do
-      transaction_type { TransactionType.where(name: "rent_or_mortgage").first || create(:transaction_type, :rent_or_mortgage) }
+      transaction_type { TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage) }
     end
   end
 end

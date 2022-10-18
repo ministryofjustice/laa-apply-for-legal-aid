@@ -105,14 +105,14 @@ module Providers
         legal_aid_application
           .legal_aid_application_transaction_types
           .credits
-          .where.not(transaction_type_id: transaction_type_ids)
+          .where.not(transaction_type_id: transaction_type_ids_to_keep)
           .destroy_all
       end
 
       def destroy_regular_income_transactions!
         legal_aid_application
           .regular_incomes
-          .without(existing_income_regular_transactions)
+          .where.not(transaction_type_id: transaction_type_ids_to_keep)
           .destroy_all
       end
 
@@ -120,18 +120,20 @@ module Providers
         legal_aid_application
           .cash_transactions
           .credits
-          .where.not(transaction_type_id: transaction_type_ids)
+          .where.not(transaction_type_id: transaction_type_ids_to_keep)
           .destroy_all
       end
 
-      def existing_income_regular_transactions
-        legal_aid_application
-          .regular_incomes
-          .where(transaction_type_id: transaction_type_ids)
+      def transaction_type_ids_to_keep
+        transaction_type_ids.append(housing_benefit_id)
+      end
+
+      def housing_benefit_id
+        @housing_benefit_id || TransactionType.find_by(name: "housing_benefit")&.id
       end
 
       def build_legal_aid_application_transaction_types
-        transaction_type_ids.each do |transaction_type_id|
+        transaction_type_ids.compact_blank.each do |transaction_type_id|
           next if transaction_type_id.in?(legal_aid_application.transaction_type_ids)
 
           legal_aid_application.legal_aid_application_transaction_types.build(

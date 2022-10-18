@@ -132,6 +132,8 @@ module Providers
           .includes(:transaction_type)
           .where(transaction_type: { name: "housing_benefit" })
           .destroy_all
+
+        legal_aid_application.update!(applicant_in_receipt_of_housing_benefit: nil)
       end
 
       def existing_outgoing_regular_transactions

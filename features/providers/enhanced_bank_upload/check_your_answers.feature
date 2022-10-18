@@ -99,6 +99,9 @@ Feature: Enhanced bank upload check your answers
     And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
 
     And I click "Save and continue"
+    Then I should be on a page with title "Does your client receive housing benefits?"
+
+    And I click "Save and continue"
     Then I should be on a page with title "Select payments your client makes in cash"
 
     When I check "None of the above"

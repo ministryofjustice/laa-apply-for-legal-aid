@@ -822,6 +822,9 @@ FactoryBot.define do
 
     trait :with_regular_transactions do
       after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "maintenance_in") || create(:transaction_type, :maintenance_in))
+        application.transaction_types << (TransactionType.find_by(name: "maintenance_out") || create(:transaction_type, :maintenance_out))
+
         create(:regular_transaction, :maintenance_in, legal_aid_application: application)
         create(:regular_transaction, :maintenance_out, legal_aid_application: application)
       end
@@ -833,12 +836,14 @@ FactoryBot.define do
       end
 
       after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "housing_benefit") || create(:transaction_type, :housing_benefit))
         create(:regular_transaction, :housing_benefit, legal_aid_application: application, amount: 1_200.00, frequency: "three_monthly")
       end
     end
 
     trait :with_rent_or_mortgage_regular_transaction do
       after(:create) do |application|
+        application.transaction_types << (TransactionType.find_by(name: "rent_or_mortgage") || create(:transaction_type, :rent_or_mortgage))
         create(:regular_transaction, :rent_or_mortgage, legal_aid_application: application, amount: 1_600.00, frequency: "three_monthly")
       end
     end
