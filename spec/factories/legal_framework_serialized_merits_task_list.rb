@@ -40,7 +40,6 @@ FactoryBot.define do
             tasks: {
               latest_incident_details: [],
               opponent_details: [],
-              children_application: [],
               statement_of_case: [],
             },
           },
@@ -64,7 +63,6 @@ FactoryBot.define do
             tasks: {
               latest_incident_details: [],
               opponent_details: [],
-              children_application: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -75,6 +73,39 @@ FactoryBot.define do
               ccms_code: "DA001",
               tasks: {
                 chances_of_success: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+    trait :da001_as_defendant_and_child_section_8 do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              statement_of_case: [],
+              client_denial_of_allegation: [],
+              client_offer_of_undertakings: [],
+              children_application: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "SE014",
+              tasks: {
+                chances_of_success: [],
+                children_proceeding: [:children_application],
+                attempts_to_settle: [],
               },
             },
           ],
