@@ -756,7 +756,7 @@ Then(/^proceeding search field is empty$/) do
 end
 
 Then(/^the results section is empty$/) do
-  expect(page).to_not have_css("#proceeding-list .proceeding-item")
+  expect(page).not_to have_css("#proceeding-list .proceeding-item")
 end
 
 Then(/^proceeding suggestions has (results|no results)$/) do |results|
@@ -765,7 +765,7 @@ Then(/^proceeding suggestions has (results|no results)$/) do |results|
   when "results"
     expect(page).to have_css("#proceeding-list .proceeding-item")
   when "no results"
-    expect(page).to_not have_css("#proceeding-list .proceeding-item")
+    expect(page).not_to have_css("#proceeding-list .proceeding-item")
   end
 end
 
@@ -825,7 +825,7 @@ Then("the answer for all {string} categories should be {string}") do |field_name
   wrong_answer = expected_answer == "No" ? "Yes" : "No"
   within "#app-check-your-answers__#{field_name}_items" do # search within the section to check that all answers are yes/no
     expect(page).to have_text(expected_answer)
-    expect(page).to_not have_text(wrong_answer)
+    expect(page).not_to have_text(wrong_answer)
   end
 end
 
@@ -838,7 +838,7 @@ Then("I click the close button for the modal") do
 end
 
 Then("the delete modal should not be visible") do
-  expect(page).to_not have_css("modal-dialog")
+  expect(page).not_to have_css("modal-dialog")
 end
 
 Then("I select a proceeding type and continue") do

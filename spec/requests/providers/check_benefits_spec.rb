@@ -51,7 +51,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       it "does not generate a new one" do
         expect(BenefitCheckService).not_to receive(:call)
-        expect { subject }.to_not change(BenefitCheckResult, :count)
+        expect { subject }.not_to change(BenefitCheckResult, :count)
       end
 
       context "and the applicant has since been modified" do

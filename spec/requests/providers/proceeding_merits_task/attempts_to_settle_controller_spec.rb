@@ -113,7 +113,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
 
         it "does not set the task to complete" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).not_to match(/name: :attempts_to_settle\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
       end
     end

@@ -117,7 +117,7 @@ RSpec.describe DashboardEventHandler do
       end
 
       it "does not fire a PendingCCMSSubmissions job" do
-        expect { subject }.to_not have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions")
+        expect { subject }.not_to have_enqueued_job(Dashboard::UpdaterJob).with("PendingCCMSSubmissions")
       end
     end
   end

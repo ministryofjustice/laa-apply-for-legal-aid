@@ -16,7 +16,7 @@ RSpec.describe Reports::ReportsCreator do
     it "creates reports and update state" do
       expect(Reports::MeritsReportCreator).to receive(:call).with(legal_aid_application)
       expect(Reports::MeansReportCreator).to receive(:call).with(legal_aid_application)
-      expect(Reports::BankTransactions::BankTransactionReportCreator).to_not receive(:call).with(legal_aid_application)
+      expect(Reports::BankTransactions::BankTransactionReportCreator).not_to receive(:call).with(legal_aid_application)
       subject
       legal_aid_application.reload
       expect(legal_aid_application.state).to eq("submitting_assessment")

@@ -46,7 +46,7 @@ module Populators
 
         it "sets the archived_at date in the database" do
           subject
-          expect(TransactionType.find_by(name: "council_tax").archived_at).to_not be_nil
+          expect(TransactionType.find_by(name: "council_tax").archived_at).not_to be_nil
         end
 
         it "does not set the archived_at date in the database for active transaction types" do

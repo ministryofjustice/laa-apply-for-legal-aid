@@ -30,7 +30,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
 
       it "puts scope limitations in a details section" do
         expect(parsed_response_body.css("details").text).to include(I18n.t("providers.limitations.proceeding_types.substantive_certificate"))
-        expect(unescaped_response_body).to_not include(I18n.t("providers.limitations.proceeding_types_with_df.cost_override_question"))
+        expect(unescaped_response_body).not_to include(I18n.t("providers.limitations.proceeding_types_with_df.cost_override_question"))
       end
 
       context "when delegated functions have been used" do

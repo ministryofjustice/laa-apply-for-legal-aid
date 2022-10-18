@@ -10,7 +10,7 @@ RSpec.describe Address, type: :model do
   it "is not valid without a building name and street address" do
     subject.address_line_one = ""
     subject.address_line_two = ""
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:address_line_one]).to include("can't be blank")
   end
 
@@ -26,19 +26,19 @@ RSpec.describe Address, type: :model do
 
   it "is not valid without a town or city" do
     subject.city = nil
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:city]).to include("can't be blank")
   end
 
   it "is not valid when a postcode is not provided" do
     subject.postcode = nil
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:postcode]).to include("can't be blank")
   end
 
   it "is not valid if the postcode entered is not in the correct format" do
     subject.postcode = "1GIR00A"
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:postcode]).to include("is not in the right format")
   end
 

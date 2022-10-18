@@ -712,7 +712,7 @@ module CFE
             subject(:jobs) { with_employments.jobs }
 
             it { is_expected.to be_kind_of(Array) }
-            it { is_expected.to_not be_empty }
+            it { is_expected.not_to be_empty }
 
             it "has a name" do
               expect(subject[0][:name]).to eq "Job 1"

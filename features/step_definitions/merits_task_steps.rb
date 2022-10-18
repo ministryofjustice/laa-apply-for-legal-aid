@@ -23,6 +23,6 @@ Then(/^I should (see|not see) regex (.*?)$/) do |visible, text|
   if visible.eql?("see")
     expect(page).to have_content(/#{text}/)
   else
-    expect(page).to_not have_content(/#{text}/)
+    expect(page).not_to have_content(/#{text}/)
   end
 end
