@@ -37,7 +37,13 @@ module Flow
         },
         has_other_involved_children: {
           path: ->(application) { urls.providers_legal_aid_application_has_other_involved_children_path(application) },
-          forward: ->(_application, has_other_involved_child) { has_other_involved_child ? :involved_children : :merits_task_lists },
+          forward: lambda { |application, has_other_involved_child|
+            if has_other_involved_child
+              :involved_children
+            else
+              Flow::MeritsLoop.forward_flow(application, :application)
+            end
+          },
         },
         remove_involved_child: {
           forward: lambda { |application|
