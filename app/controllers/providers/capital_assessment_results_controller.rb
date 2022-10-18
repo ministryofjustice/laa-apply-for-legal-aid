@@ -10,7 +10,6 @@ module Providers
     end
 
     def update
-      LegalFramework::MeritsTasksService.call(legal_aid_application)
       continue_or_draft
     end
 

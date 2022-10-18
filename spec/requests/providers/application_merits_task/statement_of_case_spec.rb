@@ -102,6 +102,16 @@ module Providers
         end
 
         describe "redirect on success" do
+          context "when the application only has domestic abuse proceedings" do
+            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+            let(:smtl) { create :legal_framework_merits_task_list, :da001, legal_aid_application: }
+
+            it "redirects to the next page" do
+              subject
+              expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+            end
+          end
+
           context "when the application has a section 8 proceeding" do
             let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
 

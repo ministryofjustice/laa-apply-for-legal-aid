@@ -114,6 +114,15 @@ module Providers
             subject
             expect(response).to redirect_to(providers_legal_aid_application_check_merits_answers_path(legal_aid_application))
           end
+
+          context "when the user updates to say no" do
+            let(:success_likely) { "false" }
+
+            it "redirects back to the answers page" do
+              subject
+              expect(response).to redirect_to(providers_merits_task_list_success_prospects_path(proceeding))
+            end
+          end
         end
 
         context "when nothing is selected" do

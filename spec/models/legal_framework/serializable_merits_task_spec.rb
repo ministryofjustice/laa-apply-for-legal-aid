@@ -62,5 +62,24 @@ module LegalFramework
         end
       end
     end
+
+    describe "#mark_as_ignored!" do
+      context "with dependencies" do
+        it "raises an exception" do
+          expect {
+            serialized_merits_task.mark_as_ignored!
+          }.to raise_error RuntimeError, /Unmet dependency/
+        end
+      end
+
+      context "when successful" do
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
+
+        it "marks the task as ignored" do
+          serialized_merits_task.mark_as_ignored!
+          expect(serialized_merits_task.state).to eq :ignored
+        end
+      end
+    end
   end
 end

@@ -248,6 +248,7 @@ en:
         statement-of-case-heading: Statement of case
         gateway-evidence-heading: Supporting evidence
         evidence_upload_heading: Supporting evidence
+        client_denial_of_allegation_heading: Client denial of allegation
         evidence_types:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
@@ -267,6 +268,7 @@ en:
           notification_of_latest_incident: When did your client contact you about the latest domestic abuse incident?
           date_of_latest_incident: When did the incident occur?
           gateway_evidence: Upload supporting evidence
+          allegation_denies_all: Does the client wholly or substantially deny any allegations?
       full_employment_details:
         employment: Employment income
         full_employment_details: Your client's employment details

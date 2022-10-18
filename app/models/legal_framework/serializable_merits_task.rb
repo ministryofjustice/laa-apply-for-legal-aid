@@ -20,5 +20,11 @@ module LegalFramework
 
       @state = :complete
     end
+
+    def mark_as_ignored!
+      raise "Unmet dependency #{@dependencies.join(',')} for task #{@name}" if @dependencies.any?
+
+      @state = :ignored
+    end
   end
 end

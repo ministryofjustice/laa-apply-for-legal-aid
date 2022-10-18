@@ -33,6 +33,11 @@ module LegalFramework
       unblock_dependant_tasks(task_name)
     end
 
+    def mark_as_ignored!(task_group, task_name)
+      task(task_group, task_name).mark_as_ignored!
+      unblock_dependant_tasks(task_name)
+    end
+
     def self.new_from_serialized(yaml_string)
       YAML.safe_load(yaml_string, permitted_classes: SAFE_SERIALIZABLE_CLASSES, aliases: true)
     end
@@ -59,7 +64,7 @@ module LegalFramework
     end
 
     def serialize_proceeding_types_tasks
-      @lfa_response[:proceeding_types].each do |proceeding_type_hash|
+      loop_proceedings.each do |proceeding_type_hash|
         ccms_code = proceeding_type_hash[:ccms_code].to_sym
         proceeding_name = Proceeding.find_by(ccms_code:).meaning
         @tasks[:proceedings][ccms_code] = { name: proceeding_name, tasks: [] }
@@ -67,6 +72,10 @@ module LegalFramework
           @tasks[:proceedings][ccms_code][:tasks] << SerializableMeritsTask.new(task_name, dependencies:)
         end
       end
+    end
+
+    def loop_proceedings
+      Setting.enable_mini_loop? ? @lfa_response[:proceedings] : @lfa_response[:proceeding_types]
     end
   end
 end

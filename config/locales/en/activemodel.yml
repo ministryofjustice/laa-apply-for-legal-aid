@@ -165,6 +165,12 @@ en:
               date_is_in_the_future: Date of birth must be in the past
             full_name:
               blank: Enter the child's full name
+        application_merits_task/allegation:
+          attributes:
+            denies_all:
+              blank: Select yes if the client wholly or substantially denies any allegations
+            additional_information:
+              blank: Enter information to explain the merit of this application
         application_merits_task/opponent:
           attributes:
             full_name:
