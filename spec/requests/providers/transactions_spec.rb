@@ -6,7 +6,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
   let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
-  let(:transaction_type) { create :transaction_type }
+  let(:transaction_type) { create :transaction_type, :maintenance_in }
   let(:bank_provider) { create :bank_provider, applicant: }
   let(:bank_account) { create :bank_account, bank_provider: }
   let(:cfe_state_benefits_url) { "#{Rails.configuration.x.check_financial_eligibility_host}/state_benefit_type" }
@@ -30,7 +30,7 @@ RSpec.describe Providers::TransactionsController, type: :request do
 
     context "When there are transactions" do
       let(:not_matching_operation) { (TransactionType::NAMES.keys.map(&:to_s) - [transaction_type.operation.to_s]).first }
-      let(:other_transaction_type) { create :transaction_type, name: (TransactionType::NAMES[transaction_type.operation.to_sym] - [transaction_type.name.to_sym]).sample }
+      let(:other_transaction_type) { create :transaction_type, :pension }
       let!(:bank_transaction_matching) { create :bank_transaction, bank_account:, operation: transaction_type.operation }
       let!(:bank_transaction_selected) { create :bank_transaction, bank_account:, operation: transaction_type.operation, transaction_type: }
       let!(:bank_transaction_not_matching) { create :bank_transaction, bank_account:, operation: not_matching_operation }

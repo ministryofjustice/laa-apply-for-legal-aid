@@ -64,7 +64,7 @@ RSpec.describe RegularTransaction, type: :model do
           legal_aid_application:,
           transaction_type: benefits,
           amount: "1500.50",
-          frequency: "monthly",
+          frequency: "weekly",
         )
 
         expect(record).to be_valid

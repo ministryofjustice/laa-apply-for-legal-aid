@@ -23,7 +23,7 @@ Feature: Enhanced bank upload flow
 
     When I click "Save and continue"
     Then I should be on the "regular_incomes" page showing "Which of the following payments does your client receive?"
-    And I should see 'Disregarded benefits'
+    And I should see govuk-details 'Disregarded benefits'
     And the page is accessible
 
     When I open the section 'Disregarded benefits'
@@ -60,7 +60,7 @@ Feature: Enhanced bank upload flow
     Then I should be on the "regular_outgoings" page showing "Which of the following payments does your client make?"
     And the page is accessible
 
-    When I select "Housing"
+    When I select "Housing payments"
     And I fill "Rent or mortgage amount" with "500"
     And I choose "providers-means-regular-outgoings-form-rent-or-mortgage-frequency-three-monthly-field"
 
@@ -69,6 +69,16 @@ Feature: Enhanced bank upload flow
     And I choose "providers-means-regular-outgoings-form-child-care-frequency-four-weekly-field"
 
     When I click "Save and continue"
+    Then I should be on the "housing_benefits" page showing "Does your client receive housing benefits?"
+    And the page is accessible
+
+    When I choose "Yes"
+    And I enter amount "100"
+    And I choose "Every week"
+    And I click "Save and continue"
+    Then I should be on a page with title "Select payments your client makes in cash"
+    And the page is accessible
+
     Then I should be on a page with title "Select payments your client makes in cash"
     And I should see "Housing"
     And I should see "Childcare"

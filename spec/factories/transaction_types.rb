@@ -12,16 +12,17 @@ end
 
 FactoryBot.define do
   factory :transaction_type do
-    name { TransactionType::NAMES.values.flatten.sample }
-    operation { TransactionType::NAMES.keys.sample }
+    name { "pension" }
+    operation { "credit" }
 
     trait :debit do
-      name { TransactionType::NAMES[:debit].sample }
-      operation { :debit }
+      name { "maintenance_out" }
+      operation { "debit" }
     end
+
     trait :credit do
-      TransactionType::NAMES[:credit].sample
-      operation { :credit }
+      name { "maintenance_in" }
+      operation { "credit" }
     end
 
     trait :credit_with_standard_name do
@@ -31,7 +32,7 @@ FactoryBot.define do
       operation { :credit }
 
       after(:create) do |record|
-        if record.name == "excluded_benefits"
+        if record.disregarded_benefit?
           parent = TransactionType.find_or_create_by(name: "benefits", operation: "credit")
           record.update!(parent_id: parent.id)
         end
@@ -49,12 +50,6 @@ FactoryBot.define do
       name { "friends_or_family" }
       operation { "credit" }
       sort_order { 20 }
-    end
-
-    trait :salary do
-      name { "salary" }
-      operation { "credit" }
-      sort_order { 10 }
     end
 
     trait :maintenance_in do
@@ -85,6 +80,12 @@ FactoryBot.define do
       name { "excluded_benefits" }
       operation { "credit" }
       sort_order { 40 }
+    end
+
+    trait :housing_benefit do
+      name { "housing_benefit" }
+      operation { "credit" }
+      sort_order { 50 }
     end
 
     trait :rent_or_mortgage do

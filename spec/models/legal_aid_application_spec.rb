@@ -1049,7 +1049,6 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#transaction_types" do
     let(:legal_aid_application) { create :legal_aid_application }
     let!(:ff) { create :transaction_type, :friends_or_family }
-    let!(:salary) { create :transaction_type, :salary }
     let!(:maintenance) { create :transaction_type, :maintenance_out }
     let!(:child_care) { create :transaction_type, :child_care }
     let!(:ff_tt) { create :legal_aid_application_transaction_type, transaction_type: ff, legal_aid_application: }
@@ -1653,6 +1652,30 @@ RSpec.describe LegalAidApplication, type: :model do
         result = legal_aid_application.using_enhanced_bank_upload?
 
         expect(result).to be false
+      end
+    end
+  end
+
+  describe "#housing_payments?" do
+    context "when the application has a rent_or_mortgage transaction type" do
+      it "returns true" do
+        legal_aid_application = create(:legal_aid_application)
+        transaction_type = create(:transaction_type, :rent_or_mortgage)
+        _rent_or_mortgage = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
+
+        expect(legal_aid_application.housing_payments?).to be true
+      end
+    end
+
+    context "when the application does not have a rent_or_mortgage transaction type" do
+      it "returns false" do
+        legal_aid_application = build_stubbed(:legal_aid_application)
+
+        expect(legal_aid_application.housing_payments?).to be false
       end
     end
   end

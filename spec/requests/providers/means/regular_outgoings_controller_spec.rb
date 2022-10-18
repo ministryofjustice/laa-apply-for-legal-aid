@@ -84,14 +84,11 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
     end
 
     context "when regular transactions are selected" do
-      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
       let(:child_care) { create(:transaction_type, :child_care) }
       let(:params) do
         {
           providers_means_regular_outgoings_form: {
-            transaction_type_ids: [rent_or_mortgage.id, child_care.id],
-            rent_or_mortgage_amount: 250,
-            rent_or_mortgage_frequency: "weekly",
+            transaction_type_ids: [child_care.id],
             child_care_amount: 100,
             child_care_frequency: "monthly",
           },
@@ -112,7 +109,25 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         request
         outgoing_transaction_types = legal_aid_application.regular_transactions.debits
         expect(outgoing_transaction_types.pluck(:transaction_type_id, :amount, :frequency))
-          .to contain_exactly([rent_or_mortgage.id, 250, "weekly"], [child_care.id, 100, "monthly"])
+          .to contain_exactly([child_care.id, 100, "monthly"])
+      end
+    end
+
+    context "when housing payments are selected" do
+      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+      let(:params) do
+        {
+          providers_means_regular_outgoings_form: {
+            transaction_type_ids: [rent_or_mortgage.id],
+            rent_or_mortgage_amount: 100,
+            rent_or_mortgage_frequency: "monthly",
+          },
+        }
+      end
+
+      it "redirects to the housing payments page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
       end
     end
 
@@ -182,14 +197,11 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
           no_debit_transaction_types_selected: false,
         )
       end
-      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
       let(:child_care) { create(:transaction_type, :child_care) }
       let(:params) do
         {
           providers_means_regular_outgoings_form: {
-            transaction_type_ids: [rent_or_mortgage.id, child_care.id],
-            rent_or_mortgage_amount: 250,
-            rent_or_mortgage_frequency: "weekly",
+            transaction_type_ids: [child_care.id],
             child_care_amount: 100,
             child_care_frequency: "monthly",
           },
@@ -200,12 +212,38 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
         request
         identified_outgoing = legal_aid_application.regular_transactions.debits
         expect(identified_outgoing.pluck(:transaction_type_id, :amount, :frequency))
-          .to contain_exactly([rent_or_mortgage.id, 250, "weekly"], [child_care.id, 100, "monthly"])
+          .to contain_exactly([child_care.id, 100, "monthly"])
       end
 
       it "redirects to the cash outgoing page" do
         request
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+      end
+    end
+
+    context "when checking answers and housing payments are selected" do
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :with_non_passported_state_machine,
+          :checking_non_passported_means,
+          no_debit_transaction_types_selected: false,
+        )
+      end
+      let(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+      let(:params) do
+        {
+          providers_means_regular_outgoings_form: {
+            transaction_type_ids: [rent_or_mortgage.id],
+            rent_or_mortgage_amount: 100,
+            rent_or_mortgage_frequency: "monthly",
+          },
+        }
+      end
+
+      it "redirects to the housing benefit page" do
+        request
+        expect(response).to redirect_to(providers_legal_aid_application_means_housing_benefits_path(legal_aid_application))
       end
     end
   end

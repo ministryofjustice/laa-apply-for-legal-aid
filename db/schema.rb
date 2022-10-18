@@ -553,6 +553,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_114916) do
     t.boolean "substantive_cost_override"
     t.decimal "substantive_cost_requested"
     t.string "substantive_cost_reasons"
+    t.boolean "applicant_in_receipt_of_housing_benefit"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

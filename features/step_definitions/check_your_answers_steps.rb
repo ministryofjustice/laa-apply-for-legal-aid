@@ -48,18 +48,16 @@ Then("the {string} section's questions should exist:") do |section, table|
   expect_questions_in(selector: "[data-check-your-answers-section=\"#{section}\"]", expected: table)
 end
 
-Then("the {string} section's questions and answers should exist:") do |section, table|
+Then("the {string} section's questions and answers should match:") do |section, table|
   section = section.parameterize
-  expect_questions_and_anwsers_in(selector: "[data-check-your-answers-section=\"#{section}\"]", expected: table)
+  expect_matching_questions_and_answers(actual_selector: "[data-check-your-answers-section=\"#{section}\"]", expected_table: table)
 end
 
-def expect_questions_and_anwsers_in(expected:, selector:)
-  expected = expected.hashes.map(&:symbolize_keys)
-  actual = actual_questions_and_anwsers_in(selector:)
+def expect_matching_questions_and_answers(actual_selector:, expected_table:)
+  expected = expected_table.hashes.map(&:symbolize_keys)
+  actual = actual_questions_and_anwsers_in(selector: actual_selector)
 
-  expected.each do |row|
-    expect(actual).to include(row), "expected to find question with \"dt\" tag including \"#{row[:question]}\" and answer with tag \"dd\" including text: \"#{row[:answer]}\""
-  end
+  expect(actual).to match_array(expected)
 end
 
 def actual_questions_and_anwsers_in(selector:)

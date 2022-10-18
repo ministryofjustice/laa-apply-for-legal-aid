@@ -378,7 +378,6 @@ Feature: Checking answers backwards and forwards
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
-    # | h3  | Which bank accounts does your client have? |
       | h3  | Does your client have any savings accounts they cannot access online? |
       | h2  | Which savings or investments does your client have? |
       | h2  | Which assets does your client have? |
@@ -388,15 +387,16 @@ Feature: Checking answers backwards and forwards
     And I should not see "Payments your client receives in cash"
     And I should not see "Payments your client makes in cash"
 
-    And the "What payments does your client receive?" section's questions and answers should exist:
+    And the "What payments does your client receive?" section's questions and answers should match:
       | question | answer |
       | Benefits | £666.00 |
+      | Disregarded benefits | None |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | Yes, but none specified |
       | Income from a property or lodger | None |
       | Pension | None |
 
-    And the "What payments does your client make?" section's questions and answers should exist:
+    And the "What payments does your client make?" section's questions and answers should match:
       | question | answer |
       | Housing payments | £999.00 |
       | Childcare payments | None |
@@ -433,7 +433,7 @@ Feature: Checking answers backwards and forwards
       | question |
       | Uploaded bank statements |
 
-    And the "What payments does your client receive?" section's questions and answers should exist:
+    And the "What payments does your client receive?" section's questions and answers should match:
       | question | answer |
       | Benefits | Yes |
       | Financial help from friends or family | None |
@@ -445,7 +445,7 @@ Feature: Checking answers backwards and forwards
       | question |
       | Benefits |
 
-    And the "What payments does your client make?" section's questions and answers should exist:
+    And the "What payments does your client make?" section's questions and answers should match:
       | question | answer |
       | Housing payments | Yes |
       | Childcare payments | None |

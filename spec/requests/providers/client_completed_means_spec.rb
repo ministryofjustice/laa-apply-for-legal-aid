@@ -127,7 +127,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
         context "transactions exist, and applicant is not employed" do
           let(:submit_button) { { continue_button: "Continue" } }
-          let(:transaction_type) { create :transaction_type, :salary }
+          let(:transaction_type) { create :transaction_type, :pension }
           let(:applicant) { create :applicant, :not_employed }
           let(:legal_aid_application) do
             create :legal_aid_application, applicant:, transaction_types: [transaction_type]

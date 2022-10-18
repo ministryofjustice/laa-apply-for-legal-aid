@@ -28,14 +28,14 @@ RSpec.describe ProvidersHelper, type: :helper do
 
     it "incoming_transactions should return the right URL with param" do
       legal_aid_application.provider_step = "incoming_transactions"
-      legal_aid_application.provider_step_params = { transaction_type: :salary }
-      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/incoming_transactions/salary?locale=en")
+      legal_aid_application.provider_step_params = { transaction_type: :pension }
+      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/incoming_transactions/pension?locale=en")
     end
 
     it "outgoing_transactions should return the right URL with param" do
       legal_aid_application.provider_step = "outgoing_transactions"
-      legal_aid_application.provider_step_params = { transaction_type: :salary }
-      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/salary?locale=en")
+      legal_aid_application.provider_step_params = { transaction_type: :pension }
+      expect(url_for_application(legal_aid_application)).to eq("/providers/applications/#{legal_aid_application.id}/outgoing_transactions/pension?locale=en")
     end
 
     context "when saved as draft and amending involved child" do

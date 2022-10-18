@@ -5,7 +5,7 @@ class RegularTransaction < ApplicationRecord
   belongs_to :transaction_type
 
   validates :amount, currency: { greater_than: 0 }
-  validates :frequency, inclusion: { in: FREQUENCIES }
+  validates :frequency, inclusion: { in: ->(transaction) { frequencies_for(transaction.transaction_type) } }
 
   def self.credits
     includes(:transaction_type).where(transaction_types: { operation: :credit })

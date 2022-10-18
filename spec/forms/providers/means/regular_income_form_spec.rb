@@ -122,15 +122,32 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
   describe "#new" do
     context "when the application has regular transactions" do
-      it "assigns the correct attributes" do
+      it "assigns attributes for the non-children credit transactions" do
         legal_aid_application = create(:legal_aid_application)
         benefits = create(:transaction_type, :benefits)
-        _transaction_type = create(
+        excluded_benefits = create(
+          :transaction_type,
+          :excluded_benefits,
+          parent_id: benefits.id,
+        )
+        _excluded_benefits_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: excluded_benefits,
+        )
+        _benefits_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
           transaction_type: benefits,
         )
-        _regular_transaction = create(
+        _excluded_benefits_transaction = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: excluded_benefits,
+          amount: 100,
+          frequency: "weekly",
+        )
+        _benefits_transaction = create(
           :regular_transaction,
           legal_aid_application:,
           transaction_type: benefits,

@@ -11,3 +11,7 @@ Then("I should see govuk error summary {string}") do |error_text|
   expect(summary).to have_selector("#error-summary-title", text: "There is a problem")
   expect(summary).to have_link(error_text)
 end
+
+Then("I should see govuk-details {string}") do |text|
+  expect(page).to have_selector(".govuk-details", text:)
+end
