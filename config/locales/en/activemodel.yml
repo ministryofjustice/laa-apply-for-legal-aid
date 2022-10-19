@@ -505,8 +505,8 @@ en:
               system_down: There was a problem uploading your file - try again
         providers/means/housing_benefit_form:
           attributes:
-            housing_benefit:
-              inclusion: Select one of the options
+            transaction_type_ids:
+              blank: Select whether your client receives housing benefit
             housing_benefit_amount:
               greater_than: Enter a number greater than 0
               not_a_number: Enter the amount of housing benefit received

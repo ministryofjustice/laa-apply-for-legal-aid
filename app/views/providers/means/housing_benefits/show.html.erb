@@ -1,9 +1,15 @@
 <%= form_with model: @form,
               url: providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application),
               method: :patch do |f| %>
-  <%= page_template page_title: t('.page_heading'), template: :basic, form: f do %>
-    <%= f.govuk_radio_buttons_fieldset :housing_benefit, legend: {tag: "h1", size: "xl"} do %>
-      <%= f.govuk_radio_button :housing_benefit, "true", link_errors: true do %>
+  <%= page_template page_title: t(".page_heading"), template: :basic, form: f do %>
+
+    <%= f.govuk_radio_buttons_fieldset :transaction_type_ids, legend: {tag: "h1", size: "xl"} do %>
+
+      <%= f.govuk_radio_button :transaction_type_ids,
+                               @form.housing_benefit_transaction_type.id,
+                               link_errors: true,
+                               label: { text: t(".labels.housing_benefit.yes") },
+                               checked: @form.housing_benefit_selected? do %>
         <%= f.govuk_text_field :housing_benefit_amount, width: "one-quarter", prefix_text: "£" %>
         <%= f.govuk_collection_radio_buttons :housing_benefit_frequency,
                                              @form.frequency_options,
@@ -12,7 +18,10 @@
                                              legend: {tag: "p", size: "s"} %>
       <% end %>
 
-      <%= f.govuk_radio_button :housing_benefit, "false" %>
+      <%= f.govuk_radio_button :transaction_type_ids,
+                               @form.none_selected,
+                               label: { text: t(".labels.housing_benefit.no") },
+                               checked: @form.applicant_in_receipt_of_housing_benefit == false && !@form.housing_benefit_selected? %>
     <% end %>
 
     <%= f.govuk_submit t("generic.save_and_continue") %>
