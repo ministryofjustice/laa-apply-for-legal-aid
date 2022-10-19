@@ -68,6 +68,11 @@ module Flow
           forward: :merits_task_lists,
           check_answers: :check_merits_answers,
         },
+        client_offered_undertakings: {
+          # path: ->(application) { urls.providers_legal_aid_application_client_offered_undertakings_path(application) }, # not needed until flow handling updated
+          forward: :merits_task_lists,
+          check_answers: :check_merits_answers,
+        },
         chances_of_success: {
           path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])

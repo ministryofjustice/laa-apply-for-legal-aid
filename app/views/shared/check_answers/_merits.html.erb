@@ -135,6 +135,26 @@
   </section>
 <% end %>
 
+<% if @legal_aid_application.undertaking %>
+  <div class="govuk-!-padding-bottom-6"></div>
+  <section class="print-no-break">
+    <h2 class="govuk-heading-m"><%= t('.client_offer_of_undertakings_heading') %></h2>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_link(
+            name: :undertaking_offered,
+            url: providers_legal_aid_application_client_offered_undertakings_path,
+            question: t('.items.undertaking_offered'),
+            answer: yes_no(undertaking.offered),
+            no_border: true,
+            read_only: read_only
+          ) %>
+    </dl>
+    <div class='govuk-body'><%= undertaking.additional_information %></div>
+    <%= render 'shared/check_answers/section_break' if undertaking.additional_information %>
+  </section>
+<% end %>
+
 <% if @legal_aid_application.section_8_proceedings? %>
   <div class="govuk-!-padding-bottom-6"></div>
   <section class="print-no-break">

@@ -171,6 +171,12 @@ en:
               blank: Select yes if the client wholly or substantially denies any allegations
             additional_information:
               blank: Enter information to explain the merit of this application
+        application_merits_task/undertaking:
+          attributes:
+            offered:
+              blank: Select yes if the client has offered undertakings
+            additional_information:
+              blank: Enter information to explain the merit of this application
         application_merits_task/opponent:
           attributes:
             full_name:
