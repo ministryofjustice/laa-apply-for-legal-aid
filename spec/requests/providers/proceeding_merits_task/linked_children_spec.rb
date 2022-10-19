@@ -53,8 +53,15 @@ module Providers
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
 
         context "with all selected" do
+          before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success) }
+
           it "adds involved children to the proceeding" do
             expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
+          end
+
+          it "redirects to the next unanswered question" do
+            subject
+            expect(response).to redirect_to(providers_merits_task_list_attempts_to_settle_path(proceeding))
           end
         end
 

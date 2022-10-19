@@ -96,9 +96,32 @@ module Providers
           expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
-        it "redirects to the next page" do
-          subject
-          expect(response).to redirect_to(flow_forward_path)
+        context "when no other tasks are complete" do
+          it "redirects to the next incomplete question" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_date_client_told_incident_path(legal_aid_application))
+          end
+        end
+
+        context "when the first task is complete" do
+          before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
+
+          it "redirects to the next incomplete question" do
+            subject
+            expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(legal_aid_application))
+          end
+        end
+
+        context "when the all but one task is complete" do
+          before do
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+          end
+
+          it "redirects to the final question" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+          end
         end
 
         context "when attributes have trailing whitespaces" do

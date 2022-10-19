@@ -9,8 +9,10 @@ module Providers
       let(:provider) { application.provider }
       let(:child1) { create :involved_child, legal_aid_application: application }
       let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: application }
+      let(:next_page) { :merits_task_lists }
 
       before do
+        allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(next_page)
         allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
         login_as provider
       end

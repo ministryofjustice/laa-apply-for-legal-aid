@@ -5,6 +5,9 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
   let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
   let(:provider) { legal_aid_application.provider }
   let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
+  let(:next_page) { :merits_task_lists }
+
+  before { allow(Flow::MeritsLoop).to receive(:forward_flow).and_return(next_page) }
 
   describe "GET /providers/applications/merits_task_list/:merits_task_list_id/attempts_to_settle" do
     subject { get providers_merits_task_list_attempts_to_settle_path(proceeding) }

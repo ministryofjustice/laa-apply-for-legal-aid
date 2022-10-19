@@ -3,11 +3,13 @@ require "rails_helper"
 module Providers
   module ProceedingMeritsTask
     RSpec.describe SuccessProspectsController, type: :request do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+      let!(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014] }
+      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
       let(:proceeding_two) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
-
       let(:provider) { legal_aid_application.provider }
+
+      before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
       describe "GET /providers/merits_task_list/:id/success_prospects" do
         subject { get providers_merits_task_list_success_prospects_path(proceeding) }

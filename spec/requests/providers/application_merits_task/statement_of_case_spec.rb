@@ -92,6 +92,8 @@ module Providers
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
           login_as provider
         end
 
@@ -106,9 +108,29 @@ module Providers
             let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
             let(:smtl) { create :legal_framework_merits_task_list, :da001, legal_aid_application: }
 
+            before do
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            end
+
             it "redirects to the next page" do
               subject
               expect(response).to redirect_to providers_legal_aid_application_merits_task_list_path(legal_aid_application)
+            end
+          end
+
+          context "when the application only has domestic abuse proceedings and is a defendant" do
+            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+            let(:smtl) { create :legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application: }
+
+            before do
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            end
+
+            it "redirects to the next page" do
+              subject
+              expect(response).to redirect_to providers_legal_aid_application_client_denial_of_allegation_path(legal_aid_application)
             end
           end
 
@@ -116,7 +138,11 @@ module Providers
             let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
 
             context "and involved children exist" do
-              before { create :involved_child, legal_aid_application: }
+              before do
+                create(:involved_child, legal_aid_application:)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+              end
 
               it "redirects to the next page" do
                 subject
@@ -125,7 +151,7 @@ module Providers
 
               it "sets the task to complete" do
                 subject
-                expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
+                expect(legal_aid_application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
               end
             end
 
