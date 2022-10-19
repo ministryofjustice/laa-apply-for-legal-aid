@@ -13,7 +13,7 @@
     <% else %>
       <%= render 'shared/check_answers/employed_income', read_only: false %>
     <% end %>
-  <% else %>
+  <% elsif @legal_aid_application.applicant_employed? %>
     <%= render 'shared/check_answers/full_employment_details', read_only: false %>
   <% end %>
 <% end %>

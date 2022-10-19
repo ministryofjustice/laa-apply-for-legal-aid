@@ -39,7 +39,7 @@ Given("I have completed a non-passported application with open banking transacti
   login_as @legal_aid_application.provider
 end
 
-And("I am viewing the means summary check your anwsers page") do
+And("I am viewing the means summary check your answers page") do
   visit(providers_legal_aid_application_means_summary_path(@legal_aid_application))
 end
 
