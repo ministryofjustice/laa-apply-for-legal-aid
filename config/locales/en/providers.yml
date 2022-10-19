@@ -125,7 +125,7 @@ en:
         total: Total
       outgoings:
         title: Outgoings
-        housing_costs: Housing payments
+        housing_costs: Housing costs
         childcare_costs: Childcare payments
         maintenance_out: Maintenance payments to a former partner
         legal_aid: Payments towards legal aid in a criminal case
