@@ -165,6 +165,8 @@ RSpec.describe Providers::Means::RegularIncomeForm do
   end
 
   describe "#save" do
+    let!(:housing_benefit) { create(:transaction_type, :housing_benefit) }
+
     context "when the form is invalid" do
       it "returns false" do
         legal_aid_application = build_stubbed(:legal_aid_application)
@@ -218,30 +220,28 @@ RSpec.describe Providers::Means::RegularIncomeForm do
     end
 
     context "when none is selected" do
-      it "returns true" do
-        legal_aid_application = create(:legal_aid_application)
-        params = {
+      let(:params) do
+        {
           "transaction_type_ids" => ["", "none"],
           legal_aid_application:,
         }
-        form = described_class.new(params)
+      end
 
+      let(:legal_aid_application) { create(:legal_aid_application) }
+      let(:benefits) { create(:transaction_type, :benefits) }
+      let(:child_care) { create(:transaction_type, :child_care) }
+
+      it "returns true" do
+        form = described_class.new(params)
         result = form.save
 
         expect(result).to be true
       end
 
       it "updates `no_credit_transaction_types_selected` on the application" do
-        legal_aid_application = create(
-          :legal_aid_application,
-          no_credit_transaction_types_selected: false,
-        )
-        params = {
-          "transaction_type_ids" => ["", "none"],
-          legal_aid_application:,
-        }
-        form = described_class.new(params)
+        legal_aid_application.update!(no_credit_transaction_types_selected: false)
 
+        form = described_class.new(params)
         form.save
 
         expect(legal_aid_application.reload.no_credit_transaction_types_selected)
@@ -249,9 +249,6 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       end
 
       it "destroys any existing income transaction types" do
-        legal_aid_application = create(:legal_aid_application)
-        benefits = create(:transaction_type, :benefits)
-        child_care = create(:transaction_type, :child_care)
         _income_transaction_type = create(
           :legal_aid_application_transaction_type,
           legal_aid_application:,
@@ -262,22 +259,34 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           legal_aid_application:,
           transaction_type: child_care,
         )
-        params = {
-          "transaction_type_ids" => ["", "none"],
-          legal_aid_application:,
-        }
-        form = described_class.new(params)
 
+        form = described_class.new(params)
         form.save
 
         expect(legal_aid_application.legal_aid_application_transaction_types)
           .to contain_exactly(outgoing_transaction_type)
       end
 
+      it "does not destroy any existing housing benefit transaction types" do
+        _income_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        housing_benefit_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type: housing_benefit,
+        )
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.legal_aid_application_transaction_types)
+          .to contain_exactly(housing_benefit_transaction_type)
+      end
+
       it "destroys any existing income regular transactions" do
-        legal_aid_application = create(:legal_aid_application)
-        benefits = create(:transaction_type, :benefits)
-        child_care = create(:transaction_type, :child_care)
         _income_regular_transaction = create(
           :regular_transaction,
           legal_aid_application:,
@@ -288,22 +297,34 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           legal_aid_application:,
           transaction_type: child_care,
         )
-        params = {
-          "transaction_type_ids" => ["", "none"],
-          legal_aid_application:,
-        }
-        form = described_class.new(params)
 
+        form = described_class.new(params)
         form.save
 
         expect(legal_aid_application.regular_transactions)
           .to contain_exactly(outgoing_regular_transaction)
       end
 
+      it "does not destroy any existing housing benefit regular transactions" do
+        _income_regular_transaction = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: benefits,
+        )
+        housing_benefit_regular_transaction = create(
+          :regular_transaction,
+          legal_aid_application:,
+          transaction_type: housing_benefit,
+        )
+
+        form = described_class.new(params)
+        form.save
+
+        expect(legal_aid_application.regular_transactions)
+          .to contain_exactly(housing_benefit_regular_transaction)
+      end
+
       it "destroys any existing cash transactions" do
-        legal_aid_application = create(:legal_aid_application)
-        benefits = create(:transaction_type, :benefits)
-        child_care = create(:transaction_type, :child_care)
         _income_cash_transaction = create(
           :cash_transaction,
           legal_aid_application:,
@@ -314,12 +335,8 @@ RSpec.describe Providers::Means::RegularIncomeForm do
           legal_aid_application:,
           transaction_type: child_care,
         )
-        params = {
-          "transaction_type_ids" => ["", "none"],
-          legal_aid_application:,
-        }
-        form = described_class.new(params)
 
+        form = described_class.new(params)
         form.save
 
         expect(legal_aid_application.cash_transactions)

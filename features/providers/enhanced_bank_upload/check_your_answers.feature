@@ -16,7 +16,8 @@ Feature: Enhanced bank upload check your answers
       | h3  | Student finance |
       | h2  | Your client's outgoings |
       | h3  | What payments does your client make? |
-      # | h2  | Housing benefit | # TODO:
+      | h3  | Housing benefits |
+      | h3  | Payments your client makes in cash |
       | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
@@ -37,6 +38,18 @@ Feature: Enhanced bank upload check your answers
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
       | Pension | None |
+
+    And the "What payments does your client make?" section's questions and answers should match:
+      | question | answer |
+      | Housing payments | £1,600.00\nTotal in the last three months |
+      | Childcare payments | None |
+      | Maintenance payments to a former partner | None |
+      | Payments towards legal aid in a criminal case | None |
+
+    And the "Housing benefits" section's questions and answers should match:
+      | question | answer |
+      | Does your client receive housing benefits? | Yes |
+      | Amount | £1,200.00\nTotal in the last three months |
 
     When I click Check Your Answers Change link for "bank statements"
     And I upload an evidence file named "hello_world.pdf"
@@ -84,6 +97,9 @@ Feature: Enhanced bank upload check your answers
     And I check "Maintenance payments to a former partner"
     And I fill "Maintenance out amount" with "500"
     And I choose "providers-means-regular-outgoings-form-maintenance-out-frequency-monthly-field"
+
+    And I click "Save and continue"
+    Then I should be on a page with title "Does your client receive housing benefits?"
 
     And I click "Save and continue"
     Then I should be on a page with title "Select payments your client makes in cash"

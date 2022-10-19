@@ -25,6 +25,8 @@ Given "I have completed a non-passported employed application with enhanced bank
     :with_employed_applicant,
     :with_single_employment,
     :with_extra_employment_information,
+    :with_rent_or_mortgage_regular_transaction,
+    :with_housing_benefit_regular_transaction,
     :with_savings_amount,
     :with_policy_disregards,
     :without_open_banking_consent,

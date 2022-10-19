@@ -338,6 +338,18 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           .to be_empty
         expect(legal_aid_application.regular_transactions).to be_empty
       end
+
+      it "updates application as not applicant_in_receipt_of_housing_benefit" do
+        legal_aid_application = create(:legal_aid_application, applicant_in_receipt_of_housing_benefit: true)
+
+        params = {
+          "transaction_type_ids" => ["", "none"],
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        expect { form.save }.to change(legal_aid_application, :applicant_in_receipt_of_housing_benefit).from(true).to(nil)
+      end
     end
 
     context "when the correct attributes are provided" do

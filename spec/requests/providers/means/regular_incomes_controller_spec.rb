@@ -67,6 +67,8 @@ RSpec.describe Providers::Means::RegularIncomesController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/regular_incomes" do
+    before { create(:transaction_type, :housing_benefit) }
+
     context "when none is selected" do
       it "updates the application and redirects to the student finance page" do
         Setting.setting.update!(enhanced_bank_upload: true)

@@ -103,7 +103,7 @@ module Providers
       end
 
       def housing_benefit_regular_transaction
-        @legal_aid_application
+        legal_aid_application
           .regular_transactions
           .includes(:transaction_type)
           .find_by(transaction_type: { name: "housing_benefit" })
