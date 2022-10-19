@@ -1,4 +1,5 @@
-const axios = require('axios').default
+// const axios = require('axios').default
+import axios from 'axios';
 
 async function checkWorkerStatus () {
   const workerId = document.querySelector('.worker-waiter').getAttribute('data-worker-id')
