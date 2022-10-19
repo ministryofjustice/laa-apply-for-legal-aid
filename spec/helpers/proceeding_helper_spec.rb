@@ -30,4 +30,26 @@ RSpec.describe ProceedingHelper, type: :helper do
       end
     end
   end
+
+  describe "#scope_limits" do
+    subject(:scope_limitations) { scope_limits(proceeding, scope_type) }
+
+    let(:proceeding) { create :proceeding, :se013, no_scope_limitations: true, scope_limitations: [scope_limitation1, scope_limitation2, scope_limitation3, scope_limitation4] }
+    let(:scope_limitation1) { create :scope_limitation, :emergency_cv118, hearing_date: Date.yesterday }
+    let(:scope_limitation2) { create :scope_limitation, :emergency }
+    let(:scope_limitation3) { create :scope_limitation, :substantive }
+    let(:scope_limitation4) { create :scope_limitation, :substantive_CV119, limitation_note: "a handwriting expert" }
+
+    context "when scope type is emergency" do
+      let(:scope_type) { "emergency" }
+
+      it { is_expected.to eq ["Hearing<br>Date: #{Date.yesterday.strftime('%e %B %Y')}", "Interim order inc. return date"] }
+    end
+
+    context "when scope type is substantive" do
+      let(:scope_type) { "substantive" }
+
+      it { is_expected.to eq ["Final hearing", "General Report<br>Note: a handwriting expert"] }
+    end
+  end
 end
