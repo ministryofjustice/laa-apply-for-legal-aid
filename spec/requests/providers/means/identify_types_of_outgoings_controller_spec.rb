@@ -89,6 +89,18 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         request
         expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
       end
+
+      context "with bank statement upload flow" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+        end
+
+        it "redirects to the means cash outgoings page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
+        end
+      end
     end
 
     context "when application has transaction types of other kind" do
@@ -177,6 +189,26 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
         it "redirects to the has dependants page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+        end
+      end
+
+      context "with bank statement upload flow" do
+        before do
+          legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
+          legal_aid_application.update!(provider_received_citizen_consent: false)
+        end
+
+        let(:maintenance_in) { create(:transaction_type, :maintenance_in) }
+
+        context "with existing credits and no debits selected" do
+          before do
+            legal_aid_application.transaction_types << maintenance_in
+          end
+
+          it "redirects to has_dependants" do
+            request
+            expect(response).to redirect_to(providers_legal_aid_application_means_has_dependants_path(legal_aid_application))
+          end
         end
       end
     end

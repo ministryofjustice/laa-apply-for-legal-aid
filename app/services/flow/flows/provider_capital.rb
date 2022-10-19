@@ -57,7 +57,7 @@ module Flow
           forward: lambda do |application|
             if application.outgoing_types?
               :cash_outgoings
-            elsif application.income_types?
+            elsif application.income_types? && !application.uploading_bank_statements?
               :income_summary
             else
               :has_dependants
