@@ -31,6 +31,10 @@ module CFE
       assessment_result == "partially_eligible"
     end
 
+    def ineligible?
+      assessment_result == "ineligible"
+    end
+
     def version
       result_hash.fetch(:version, "1").to_i
     end

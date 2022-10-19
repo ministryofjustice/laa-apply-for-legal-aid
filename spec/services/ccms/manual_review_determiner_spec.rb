@@ -250,7 +250,7 @@ module CCMS
     describe "#review_reasons" do
       subject { determiner.review_reasons }
 
-      let(:cfe_result) { double "CFE Result", remarks: cfe_remarks }
+      let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: false }
       let(:cfe_remarks) { double "CFE Remarks", review_reasons: }
       let(:review_reasons) { %i[unknown_frequency multi_benefit] }
       let(:override_reasons) { %i[unknown_frequency multi_benefit dwp_override] }
@@ -298,6 +298,14 @@ module CCMS
 
         it "adds uploaded_bank_statements to the review reasons" do
           expect(subject).to include(:uploaded_bank_statements)
+        end
+      end
+
+      context "with cfe result ineligible" do
+        let(:cfe_result) { double "CFE Result", remarks: cfe_remarks, ineligible?: true }
+
+        it "adds ineligible to the review reasons" do
+          expect(subject).to include(:ineligible)
         end
       end
     end
