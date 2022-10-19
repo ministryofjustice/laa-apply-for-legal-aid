@@ -90,7 +90,7 @@ module Providers
           it "does not set the task to complete" do
             subject
             serialized_merits_task_list = legal_aid_application.legal_framework_merits_task_list.reload.serialized_data
-            expect(serialized_merits_task_list).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
+            expect(serialized_merits_task_list).not_to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
 
           it "redirects to next page" do
@@ -158,7 +158,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to_not match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).not_to match(/name: :chances_of_success\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
 
           it "updates the model" do

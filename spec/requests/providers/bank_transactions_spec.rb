@@ -51,7 +51,7 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
       let(:bank_account) { create :bank_account }
 
       it "does not remove the assocation with the transaction type" do
-        expect { subject }.to_not change { bank_transaction.reload.transaction_type }
+        expect { subject }.not_to change { bank_transaction.reload.transaction_type }
       end
 
       it "redirects to page_not_found" do

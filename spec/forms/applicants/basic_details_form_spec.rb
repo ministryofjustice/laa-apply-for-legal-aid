@@ -88,7 +88,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
         it "invalid NINO is still invalid" do
           subject.national_insurance_number = invalid_nino
-          expect(subject).to_not be_valid
+          expect(subject).not_to be_valid
         end
 
         it "valid NINO is still valid" do
@@ -107,7 +107,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
         it "invalid NINO is still invalid" do
           subject.national_insurance_number = invalid_nino
-          expect(subject).to_not be_valid
+          expect(subject).not_to be_valid
         end
 
         it "valid NINO is still valid" do

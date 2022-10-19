@@ -17,11 +17,11 @@ module LegalFramework
       end
 
       it "is not empty" do
-        expect(merits_task_list.task_list).to_not be_empty
+        expect(merits_task_list.task_list).not_to be_empty
       end
 
       it "has no complete states" do
-        expect(merits_task_list.serialized_data).to_not include("state: :complete")
+        expect(merits_task_list.serialized_data).not_to include("state: :complete")
       end
     end
 

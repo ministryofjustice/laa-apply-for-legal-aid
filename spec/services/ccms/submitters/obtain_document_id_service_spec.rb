@@ -91,7 +91,7 @@ module CCMS
             it "populates the ccms_document_id for each document" do
               subject.call
               submission.submission_documents.each do |document|
-                expect(document.ccms_document_id).to_not be_nil
+                expect(document.ccms_document_id).not_to be_nil
               end
             end
 

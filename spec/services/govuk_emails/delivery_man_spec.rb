@@ -77,7 +77,7 @@ RSpec.describe GovukEmails::DeliveryMan do
         end
 
         it "is does not get sent to Sentry" do
-          expect(Sentry).to_not receive(:capture_exception)
+          expect(Sentry).not_to receive(:capture_exception)
           subject
         end
       end

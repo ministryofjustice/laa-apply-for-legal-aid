@@ -104,7 +104,7 @@ RSpec.describe "address requests", type: :request do
         before { create :address, applicant: }
 
         it "does not create a new address record" do
-          expect { subject }.to_not change { applicant.addresses.count }
+          expect { subject }.not_to change { applicant.addresses.count }
         end
 
         it "updates the current address" do

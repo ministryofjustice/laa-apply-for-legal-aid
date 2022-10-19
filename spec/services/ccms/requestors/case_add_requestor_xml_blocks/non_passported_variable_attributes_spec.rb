@@ -619,7 +619,7 @@ module CCMS
               attrs.each do |attr_name|
                 block = XmlExtractor.call(xml, :global_means, attr_name)
                 expect(block).to have_boolean_response true
-                expect(block).to_not be_user_defined
+                expect(block).not_to be_user_defined
               end
             end
 
@@ -638,7 +638,7 @@ module CCMS
                 attrs.each do |attr_name|
                   block = XmlExtractor.call(xml, :global_means, attr_name)
                   expect(block).to have_boolean_response false
-                  expect(block).to_not be_user_defined
+                  expect(block).not_to be_user_defined
                 end
               end
             end
@@ -748,7 +748,7 @@ module CCMS
             let(:land_value) { 0.0 }
 
             it "does not generate the block" do
-              expect(block).to_not be_present
+              expect(block).not_to be_present
             end
           end
         end
@@ -771,7 +771,7 @@ module CCMS
             let(:money_owed) { 0.0 }
 
             it "does not generate the block" do
-              expect(block).to_not be_present
+              expect(block).not_to be_present
             end
           end
         end
@@ -792,7 +792,7 @@ module CCMS
               before { chances_of_success.update! success_prospect: test[:input] }
 
               it { is_expected.to have_text_response test[:result] }
-              it { is_expected.to_not be_user_defined }
+              it { is_expected.not_to be_user_defined }
             end
           end
         end
@@ -815,7 +815,7 @@ module CCMS
             let(:money_owed) { 0.0 }
 
             it "does not generate the block" do
-              expect(block).to_not be_present
+              expect(block).not_to be_present
             end
           end
         end
@@ -858,7 +858,7 @@ module CCMS
 
                   it "returns #{test[:result]} when percentage_home is set to #{test[:input]}" do
                     if test[:omit_block]
-                      expect(block).to_not be_present
+                      expect(block).not_to be_present
                     elsif true_false.include? test[:result]
                       expect(block).to have_boolean_response test[:result]
                     else
@@ -934,7 +934,7 @@ module CCMS
               let(:ownership) { "no" }
 
               it "does not generate the block" do
-                expect(block).to_not be_present
+                expect(block).not_to be_present
               end
             end
           end
@@ -949,7 +949,7 @@ module CCMS
                 let(:ownership) { "owned_outright" }
 
                 it "does not generate the block" do
-                  expect(block).to_not be_present
+                  expect(block).not_to be_present
                 end
               end
 
@@ -967,7 +967,7 @@ module CCMS
               let(:ownership) { "no" }
 
               it "does not generate the block" do
-                expect(block).to_not be_present
+                expect(block).not_to be_present
               end
             end
           end

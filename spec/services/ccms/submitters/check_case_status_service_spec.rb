@@ -109,7 +109,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
           expect(history.from_state).to eq "case_submitted"
           expect(history.to_state).to eq "case_created"
           expect(history.request).to eq case_add_status_request
-          expect(history.request).to_not be_nil
+          expect(history.request).not_to be_nil
           expect(history.success).to be true
           expect(history.details).to be_nil
         end
@@ -154,7 +154,7 @@ RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
         expect(history.from_state).to eq "case_submitted"
         expect(history.to_state).to eq "failed"
         expect(history.request).to eq case_add_status_request
-        expect(history.request).to_not be_nil
+        expect(history.request).not_to be_nil
         expect(history.success).to be false
         expect(history.details).to match(/#{error}/)
         expect(history.details).to match(/oops/)

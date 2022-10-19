@@ -76,7 +76,7 @@ RSpec.describe LegalAidApplications::RestrictionsForm, type: :form do
 
       it "updates the legal_aid_application restrictions information" do
         expect(application.has_restrictions).to be true
-        expect(application.restrictions_details).to_not be_empty
+        expect(application.restrictions_details).not_to be_empty
       end
     end
   end

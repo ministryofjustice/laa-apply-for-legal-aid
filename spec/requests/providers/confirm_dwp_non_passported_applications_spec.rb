@@ -160,7 +160,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
         context "the user has does not have employed permissions" do
           it "does not call the HMRC::CreateResponsesService" do
             subject
-            expect(HMRC::CreateResponsesService).to_not have_received(:call)
+            expect(HMRC::CreateResponsesService).not_to have_received(:call)
           end
         end
       end
@@ -202,14 +202,14 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :
 
         it "does not call the HMRC::CreateResponsesService" do
           subject
-          expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          expect(HMRC::CreateResponsesService).not_to have_received(:call)
         end
       end
 
       context "the user has does not have employed permissions" do
         it "does not call the HMRC::CreateResponsesService" do
           subject
-          expect(HMRC::CreateResponsesService).to_not have_received(:call)
+          expect(HMRC::CreateResponsesService).not_to have_received(:call)
         end
       end
     end

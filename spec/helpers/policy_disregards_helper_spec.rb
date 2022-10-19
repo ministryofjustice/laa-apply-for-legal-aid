@@ -10,7 +10,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
       let(:policy_disregards) { create :policy_disregards, none_selected: true }
 
       it "does not return nil" do
-        expect(policy_disregards_list(policy_disregards)).to_not be_nil
+        expect(policy_disregards_list(policy_disregards)).not_to be_nil
       end
 
       it "returns the correct hash" do
