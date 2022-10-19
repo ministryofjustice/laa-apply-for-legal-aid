@@ -26,7 +26,7 @@ PreCommit:
     requires_files: true
   StandardJS:
     enabled: true
-    command: ['standard']
+    command: ['yarn', 'run', 'standard']
     requires_files: true
     include: 'app/webpack/**/*.js'
   DBAnonymizer:
