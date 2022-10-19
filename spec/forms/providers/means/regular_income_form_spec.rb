@@ -165,6 +165,8 @@ RSpec.describe Providers::Means::RegularIncomeForm do
   end
 
   describe "#save" do
+    let!(:housing_benefit) { create(:transaction_type, :housing_benefit) }
+
     context "when the form is invalid" do
       it "returns false" do
         legal_aid_application = build_stubbed(:legal_aid_application)
@@ -228,7 +230,6 @@ RSpec.describe Providers::Means::RegularIncomeForm do
       let(:legal_aid_application) { create(:legal_aid_application) }
       let(:benefits) { create(:transaction_type, :benefits) }
       let(:child_care) { create(:transaction_type, :child_care) }
-      let(:housing_benefit) { create(:transaction_type, :housing_benefit) }
 
       it "returns true" do
         form = described_class.new(params)

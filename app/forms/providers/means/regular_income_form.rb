@@ -125,15 +125,15 @@ module Providers
       end
 
       def transaction_type_ids_to_keep
-        transaction_type_ids.append(housing_benefit_id)
+        @transaction_type_ids_to_keep ||= transaction_type_ids + [housing_benefit_id]
       end
 
       def housing_benefit_id
-        @housing_benefit_id || TransactionType.find_by(name: "housing_benefit")&.id
+        @housing_benefit_id ||= TransactionType.find_by!(name: "housing_benefit").id
       end
 
       def build_legal_aid_application_transaction_types
-        transaction_type_ids.compact_blank.each do |transaction_type_id|
+        transaction_type_ids.each do |transaction_type_id|
           next if transaction_type_id.in?(legal_aid_application.transaction_type_ids)
 
           legal_aid_application.legal_aid_application_transaction_types.build(
