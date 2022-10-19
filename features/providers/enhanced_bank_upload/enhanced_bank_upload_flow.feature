@@ -69,7 +69,7 @@ Feature: Enhanced bank upload flow
     And I choose "providers-means-regular-outgoings-form-child-care-frequency-four-weekly-field"
 
     When I click "Save and continue"
-    Then I should be on the "housing_benefits" page showing "Does your client receive housing benefits?"
+    Then I should be on the "housing_benefits" page showing "Does your client receive housing benefit?"
     And the page is accessible
 
     When I choose "Yes"

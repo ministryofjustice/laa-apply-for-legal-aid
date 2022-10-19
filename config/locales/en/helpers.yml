@@ -77,7 +77,7 @@ en:
           <<: *true_false
     legend:
       providers_means_housing_benefit_form:
-        transaction_type_ids: Does your client receive housing benefits?
+        transaction_type_ids: Does your client receive housing benefit?
         housing_benefit_frequency: Select frequency
       providers_means_regular_income_form:
         benefits_frequency: Select frequency

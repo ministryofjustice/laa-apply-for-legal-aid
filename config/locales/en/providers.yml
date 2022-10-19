@@ -706,7 +706,7 @@ en:
             housing_benefit:
               "yes": "Yes"
               "no": "No"
-          page_heading: Does your client receive housing benefits?
+          page_heading: Does your client receive housing benefit?
       identify_types_of_incomes:
         show:
           page_heading: Which payments does your client receive?
@@ -899,8 +899,8 @@ en:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
       housing_benefit:
-        heading: Housing benefits
-        does_your_client: Does your client receive housing benefits?
+        heading: Housing benefit
+        does_your_client: Does your client receive housing benefit?
       income_assessment:
         income-heading: Your client's income
         outgoings-heading: Your client's outgoings
