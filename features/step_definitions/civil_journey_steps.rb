@@ -463,6 +463,33 @@ Given("I have started an application with multiple proceedings") do
   steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
 end
 
+Given("I have started an application where the client is a defendant on the domestic abuse proceeding") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_applicant_and_address_lookup,
+    :with_proceedings,
+    explicit_proceedings: %i[da001 se013],
+    set_lead_proceeding: :da001,
+  )
+  login_as @legal_aid_application.provider
+  visit(providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application))
+  steps %(Then I should be on a page showing 'Do you want to add another proceeding?')
+  proceeding = @legal_aid_application.proceedings.find_by(ccms_code: "DA001")
+  proceeding.update(
+    client_involvement_type_ccms_code: "D",
+    client_involvement_type_description: "Defendant/respondent",
+    used_delegated_functions: false,
+  )
+  proceeding = @legal_aid_application.proceedings.find_by(ccms_code: "SE013")
+  proceeding.update(
+    used_delegated_functions: false,
+  )
+end
+
+And("I visit the merits question page") do
+  visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
+end
+
 Given("I used delegated functions") do
   @legal_aid_application.proceedings.each do |proceeding|
     proceeding.update!(used_delegated_functions: true,
