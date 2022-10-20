@@ -21,15 +21,15 @@ Feature: Merits task list
     And I fill "Bail conditions set details" with "Foo bar"
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
-    When I fill "Application merits task statement of case statement field" with "Statement of case"
-    And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
     When I fill "Full Name" with "John Doe Jr"
     And I enter a 'date_of_birth' for a 14 year old
     When I click 'Save and continue'
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
     When I choose 'No'
+    And I click 'Save and continue'
+    Then I should be on a page showing "Provide a statement of case"
+    When I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nCOMPLETED'
     And I should see 'Children involved in this proceeding\nNOT STARTED'
@@ -42,13 +42,9 @@ Feature: Merits task list
     Then I should be on the 'chances_of_success' page showing 'Is the chance of a successful outcome 50% or better?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Chances of success\nCOMPLETED'
-    When I click link 'Children involved in this proceeding'
     Then I should be on the 'linked_children' page showing 'Which children are covered under this proceeding?'
     When I select 'John Doe Jr'
     And I click 'Save and continue'
-    Then I should be on the 'merits_task_list' page showing 'Children involved in this proceeding\nCOMPLETED'
-    When I click link 'Attempts to settle'
     Then I should be on the 'attempts_to_settle' page showing 'What attempts have been made to settle the matter?'
     When I fill "Attempts made" with "A settlement attempt"
     And I click 'Save and continue'
@@ -84,9 +80,6 @@ Feature: Merits task list
     And I fill "Bail conditions set details" with "Foo bar"
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
-    Then I should be on a page showing "Provide a statement of case"
-    When I fill "Application merits task statement of case statement field" with "Statement of case"
-    And I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
     When I fill "Full Name" with "John Doe Jr"
     And I enter a 'date_of_birth' for a 14 year old
@@ -119,6 +112,13 @@ Feature: Merits task list
     And I fill "Bail conditions set details" with "Foo bar"
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
+    Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
+    When I fill "Full Name" with "John Doe Jr"
+    And I enter a 'date_of_birth' for a 14 year old
+    When I click 'Save and continue'
+    Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on a page showing "Provide a statement of case"
     When I upload an evidence file named 'hello_world.pdf'
     Then I should see 'hello_world.pdf'
@@ -129,4 +129,4 @@ Feature: Merits task list
     Then I upload an evidence file named 'hello_world.pdf'
     And I should see 'UPLOADED'
     When I click 'Save and continue'
-    Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
+    Then I should be on the 'merits_task_list' page showing 'Statement of case\nCOMPLETED'
