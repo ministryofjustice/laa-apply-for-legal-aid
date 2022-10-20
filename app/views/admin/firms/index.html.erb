@@ -22,9 +22,11 @@
             <td class="govuk-table__cell"><%= firm.name %></td>
             <td class="govuk-table__cell"><%= firm.providers.count %></td>
             <td class="govuk-table__cell">
-              <% firm.permissions.each do |permission| %>
-                <li><%= permission.description %></li>
-              <% end %>
+              <ul>
+                <% firm.permissions.each do |permission| %>
+                  <li><%= permission.description %></li>
+                <% end %>
+              </ul>
             </td>
             <td class="govuk-table__cell"><%= link_to_accessible t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
           </tr>
