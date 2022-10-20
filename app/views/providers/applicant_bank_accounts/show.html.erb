@@ -42,8 +42,7 @@
                                   checked: (@form.offline_savings_accounts.present? || @form.errors.include?(:offline_savings_accounts)) do %>
         <%= form.govuk_text_field(
               :offline_savings_accounts,
-              label: {text: :offline_savings_accounts, hidden: true},
-              hint: { text: t('.hints.offline_savings_amount')},
+              label: {text: t('.offline_savings_amount_label')},
               value: number_to_currency_or_original_string(@form.offline_savings_accounts),
               prefix_text: t('currency.gbp'),
               width: 5

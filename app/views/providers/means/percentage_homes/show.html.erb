@@ -5,17 +5,15 @@
               local: true) do |form| %>
   <%= page_template page_title: t('.h1-heading'), template: :basic, form: form do %>
 
-    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
-      <%= form.govuk_text_field(
-              :percentage_home,
-              value: @form.percentage_home,
-              label: {text: :percentage_home, hidden: true},
-              hint: {text: t('.percentage_home')},
-              width: 5,
-              suffix_text: '%'
-          ) %>
-    <% end %>
-    <div class="govuk-!-padding-bottom-4"></div>
+    <%= form.govuk_text_field(
+            :percentage_home,
+            value: @form.percentage_home,
+            label: { size: 'xl', tag: 'h1', text: page_title },
+            hint: {text: t('.percentage_home')},
+            width: 5,
+            suffix_text: '%'
+        ) %>
+
     <%= next_action_buttons(
             show_draft: true,
             form: form
