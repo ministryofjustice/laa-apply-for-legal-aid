@@ -115,7 +115,8 @@
       GOVUK.details.started = true
       // Get the collection of details elements, but if that's empty
       // then we don't need to bother with the rest of the scripting
-      if ((list = container.getElementsByTagName('details')).length === 0) {
+      const detailsEls = container.getElementsByTagName('details')
+      if (detailsEls.length === 0) {
         return
       }
       // else iterate through them to apply their initial state
