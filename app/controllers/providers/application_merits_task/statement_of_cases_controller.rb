@@ -6,10 +6,10 @@ module Providers
       end
 
       def update
+        form
         if upload_button_pressed?
           perform_upload
-        elsif save_continue_or_draft(form)
-          update_task(:application, :statement_of_case)
+        elsif update_task_save_continue_or_draft(:application, :statement_of_case)
           convert_new_files_to_pdf
         else
           render :show
