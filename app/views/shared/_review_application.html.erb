@@ -124,7 +124,7 @@
     <% else %>
       <%= render(
           'shared/check_answers/bank_transaction_table',
-          transaction_types: TransactionType.credits,
+          transaction_types: TransactionType.credits.without_housing_benefits,
           read_only: true
         ) %>
     <% end %>
