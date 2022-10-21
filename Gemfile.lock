@@ -684,7 +684,7 @@ GEM
     uber (0.1.0)
     unicode-display_width (2.3.0)
     vcr (6.1.0)
-    version_gem (1.1.0)
+    version_gem (1.1.1)
     view_component (2.69.0)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
