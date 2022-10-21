@@ -506,13 +506,13 @@ en:
         providers/means/housing_benefit_form:
           attributes:
             transaction_type_ids:
-              blank: Select whether your client receives housing benefit
+              blank: Select yes if your client receives Housing Benefit
             housing_benefit_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of housing benefit received
+              not_a_number: Enter the amount of Housing Benefit received
               too_many_decimals: Enter a number with no more than 2 decimal places
             housing_benefit_frequency:
-              inclusion: Select how often your client receives housing benefit
+              inclusion: Select how often your client receives Housing Benefit
         providers/means/regular_income_form:
           attributes:
             benefits_amount:
