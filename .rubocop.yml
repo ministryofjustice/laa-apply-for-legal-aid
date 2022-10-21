@@ -25,6 +25,11 @@ AllCops:
   - 'tmp/**/*'
   - 'log/**/*'
 
+RSpec/ExampleLength:
+  Enabled: true
+  CountAsOne: ['array', 'hash', 'heredoc']
+  Max: 10
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
