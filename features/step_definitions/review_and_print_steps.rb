@@ -1,0 +1,140 @@
+Given("I have completed a bank statement upload application with merits") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_everything,
+    :with_dependant,
+    :with_cfe_empty_result,
+    :with_extra_employment_information,
+    :with_full_employment_information,
+    :with_fixed_benefits_cash_transactions,
+    :with_fixed_rent_or_mortage_cash_transactions,
+    :with_chances_of_success,
+    :assessment_submitted,
+    provider_received_citizen_consent: false,
+    attachments: [build(:attachment, :bank_statement)],
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+Given("I have completed an enhanced bank statement upload application with merits") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_employed_applicant,
+    :with_non_passported_state_machine,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_restrictions,
+    :with_incident,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_extra_employment_information,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_fixed_offline_accounts,
+    :with_dependant,
+    :with_cfe_v5_result,
+    :with_chances_of_success,
+    :with_own_home_mortgaged,
+    :assessment_submitted,
+    property_value: 599_999.99,
+    outstanding_mortgage_amount: 399_999.99,
+    shared_ownership: "partner_or_ex_partner",
+    percentage_home: 33.33,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+    provider_received_citizen_consent: false,
+    attachments: [build(:attachment, :bank_statement)],
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+Given("I have completed truelayer application with merits") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_employed_applicant,
+    :with_non_passported_state_machine,
+    :with_restrictions,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_extra_employment_information,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_savings_amount,
+    :with_open_banking_consent,
+    :with_consent,
+    :with_dependant,
+    :with_own_home_mortgaged,
+    :with_cfe_v5_result,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
+    :assessment_submitted,
+    property_value: 599_999.99,
+    outstanding_mortgage_amount: 399_999.99,
+    shared_ownership: "partner_or_ex_partner",
+    percentage_home: 33.33,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+Given("I have completed a passported application with merits") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_applicant_and_address,
+    :with_passported_state_machine,
+    :with_restrictions,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_fixed_offline_accounts,
+    :with_own_home_mortgaged,
+    :with_cfe_v5_result,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
+    :assessment_submitted,
+    provider_received_citizen_consent: true,
+    property_value: 599_999.99,
+    outstanding_mortgage_amount: 399_999.99,
+    shared_ownership: "partner_or_ex_partner",
+    percentage_home: 33.33,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
+When("I view the review and print your application page") do
+  visit(providers_legal_aid_application_review_and_print_application_path(@legal_aid_application))
+end
