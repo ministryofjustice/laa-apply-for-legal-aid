@@ -2,9 +2,9 @@
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl"><%= t('.apply_for_legal_aid_heading') %></h1>
 
-    <div class="govuk-inset-text">
+    <%= govuk_inset_text do %>
       <p class="govuk-body"><%= t('.must_be_provider') %></p>
-    </div>
+    <% end %>
 
     <p class="govuk-body"><%= t('.domestic_violence_or_abuse_only') %></p>
 

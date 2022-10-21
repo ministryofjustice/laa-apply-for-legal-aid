@@ -7,9 +7,10 @@
 
     <%= page_template page_title: t('.title_html'),  head_title: t('.head_title'), form: form do %>
 
-      <div class="govuk-inset-text">
+      <%= govuk_inset_text do %>
         <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.inset_text') %></p>
-      </div>
+      <% end %>
+
       <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text"

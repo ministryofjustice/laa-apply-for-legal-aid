@@ -24,6 +24,6 @@
   <p class="govuk-body"><%= t('.what-happens-next') %></p>
 <% end %>
 
-<div class="govuk-inset-text">
+<%= govuk_inset_text do %>
   <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t('.feedback_prefix'), new_feedback_path %><%= t('.feedback_suffix') %></p>
-</div>
+<% end %>
