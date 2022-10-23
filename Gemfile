@@ -23,7 +23,7 @@ gem "rails"
 gem "regexp-examples"
 gem "rexml"
 gem "savon", "~> 2.13.1"
-gem "sentry-rails", ">= 4.8.0"
+gem "sentry-rails", ">= 5.5.0"
 gem "sentry-ruby"
 gem "sentry-sidekiq"
 gem "simple_command"
@@ -34,12 +34,12 @@ gem "webdack-uuid_migration", "~> 1.4.0"
 gem "bootsnap", ">= 1.1.0", require: false
 
 # Authentication
-gem "devise", ">= 4.8.0" # User authentication
-gem "devise_saml_authenticatable", ">= 1.7.0"
-gem "omniauth", ">= 2.0.0"
-gem "omniauth-google-oauth2", ">= 0.8.1"
-gem "omniauth-oauth2", ">= 1.7.1" # Provide Oauth2 strategy framework
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "devise", ">= 4.8.1" # User authentication
+gem "devise_saml_authenticatable", ">= 1.9.0"
+gem "omniauth", ">= 2.1.0"
+gem "omniauth-google-oauth2", ">= 1.1.1"
+gem "omniauth-oauth2", ">= 1.8.0" # Provide Oauth2 strategy framework
+gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.1"
 
 # Improve backtrace in nested error recues
 gem "nesty"
@@ -108,7 +108,7 @@ gem "strong_migrations"
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "dotenv-rails", ">= 2.7.6"
+  gem "dotenv-rails", ">= 2.8.1"
   gem "erb_lint", "0.2.0", require: false
   gem "hirb"
   gem "htmlentities"
@@ -122,7 +122,7 @@ group :development, :test do
   gem "rubocop-performance"
 
   # Available in dev env for generators
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 6.0", ">= 6.0.1"
 end
 
 group :development do
@@ -142,9 +142,9 @@ group :test do
       github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.1.0",
       require: "action_dispatch/testing/integration/capybara/rspec"
   gem "axe-core-cucumber"
-  gem "capybara", ">= 3.36.0", "< 4.0"
+  gem "capybara", ">= 3.37.1", "< 4.0"
   gem "cucumber", require: false
-  gem "cucumber-rails", ">= 2.4.0", require: false
+  gem "cucumber-rails", ">= 2.6.1", require: false
   gem "database_cleaner"
   gem "launchy"
   gem "rack-pjax"
