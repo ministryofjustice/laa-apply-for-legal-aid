@@ -1,13 +1,13 @@
 <%= page_template page_title: t('.heading_1'), back_link: :none do %>
   <p class="govuk-body">
-    <b> <%= t('.name') %></b>
+    <strong> <%= t('.name') %></strong>
     <%= current_applicant.first_name %>
     <%= current_applicant.last_name %>
     <br>
-    <b><%= t('.case_reference') %></b>
+    <strong><%= t('.case_reference') %></strong>
     <%= current_applicant.legal_aid_application.application_ref %>
     <br>
-    <b><%= t('.your_solicitor') %></b>
+    <strong><%= t('.your_solicitor') %></strong>
     <%= current_applicant.legal_aid_application.provider.firm.name %>
   </p>
 

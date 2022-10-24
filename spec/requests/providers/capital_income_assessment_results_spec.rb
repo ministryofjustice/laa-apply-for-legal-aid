@@ -420,7 +420,7 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :reque
     context "when applicant has employment(s)" do
       let(:cfe_result) { create :cfe_v4_result, :with_employments }
       let(:td) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    " }
-      let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <b>" }
+      let(:td_bold) { "\n  </th>\n  <td class=\"govuk-table__cell govuk-table__cell--numeric\">\n    <strong>" }
       let(:monthly_income_before_tax) { I18n.t("providers.capital_income_assessment_results.employment_income.monthly_income_before_tax") }
       let(:benefits_in_kind) { I18n.t("providers.capital_income_assessment_results.employment_income.benefits_in_kind") }
       let(:tax) { I18n.t("providers.capital_income_assessment_results.employment_income.tax") }

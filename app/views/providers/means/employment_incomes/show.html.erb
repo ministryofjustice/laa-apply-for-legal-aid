@@ -44,11 +44,11 @@
           <% employment.employment_payments.each do |payment| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell" style="width: 25%;"><%= l(payment.date, format: :short_date) %></td>
-            <td class="govuk-table__cell" style="width: 10%;"><b><%= t('.gross') %></b></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><b></b><%= gds_number_to_currency(payment.gross) %></td>
-            <td class="govuk-table__cell" style="width: 35%;"><b><%= t('.tax') %></b>
+            <td class="govuk-table__cell" style="width: 10%;"><strong><%= t('.gross') %></strong></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 10%;"><strong></strong><%= gds_number_to_currency(payment.gross) %></td>
+            <td class="govuk-table__cell" style="width: 35%;"><strong><%= t('.tax') %></strong>
             <br>
-            <b><%= t('.ni') %></b>
+            <strong><%= t('.ni') %></strong>
             </td>
             <td class="govuk-table__cell govuk-table__cell--numeric" style="width: 20%;">
               <%= gds_number_to_currency(payment.tax) %>
