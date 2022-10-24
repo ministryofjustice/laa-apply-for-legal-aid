@@ -140,18 +140,6 @@ When("I view the means report") do
   visit(providers_legal_aid_application_means_report_path(@legal_aid_application, debug: true))
 end
 
-Then("the following sections should exist:") do |table|
-  table.hashes.each do |row|
-    expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
-  end
-end
-
-Then("the following sections should not exist:") do |table|
-  table.hashes.each do |row|
-    expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
-  end
-end
-
 Then("the Client details questions should exist:") do |table|
   expect_questions_in(selector: "#client-details-questions", expected: table)
 end

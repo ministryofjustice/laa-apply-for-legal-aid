@@ -2,6 +2,8 @@ Given("I have completed a bank statement upload application with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
+    :with_employed_applicant,
+    :with_single_employment,
     :with_everything,
     :with_dependant,
     :with_cfe_empty_result,
@@ -29,6 +31,7 @@ Given("I have completed an enhanced bank statement upload application with merit
     :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
+    :with_rent_or_mortgage_regular_transaction,
     :with_merits_statement_of_case,
     :with_opponent,
     :with_restrictions,

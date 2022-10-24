@@ -13,15 +13,16 @@ Feature: Review and print your application
       | h2  | Covered under a substantive certificate |
       | h2  | Covered under a substantive certificate |
       | h2  | Emergency cost limit |
-      # | h3  | TODO |
-      # | h3  | Bank statements |
-      # | h2  | Your client's income |
-      # | h3  | Employment income |
-      # | h3  | What payments does your client receive? |
-      # | h3  | Student finance |
-      # | h2  | Your client's outgoings |
-      # | h3  | What payments does your client make? |
-      # | h2  | Your client's capital |
+      | h3  | Bank statements |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | Payments your client receives |
+      | h3  | Payments your client receives in cash |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+      | h3  | Payments your client makes in cash|
+      | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Which bank accounts does your client have? |
@@ -35,6 +36,12 @@ Feature: Review and print your application
       | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
       | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Income, regular payments and assets |
+      | h3  | Income |
+      | h3  | Regular payments |
 
   Scenario: For a non-passported enhanced bank statement upload journey
     Given the feature flag for enhanced_bank_upload is enabled
@@ -49,15 +56,15 @@ Feature: Review and print your application
       | h2  | Covered under a substantive certificate |
       | h2  | Covered under a substantive certificate |
       | h2  | Emergency cost limit |
-      # | h3  | TODO |
-      # | h3  | Bank statements |
-      # | h2  | Your client's income |
-      # | h3  | Employment income |
-      # | h3  | What payments does your client receive? |
-      # | h3  | Student finance |
-      # | h2  | Your client's outgoings |
-      # | h3  | What payments does your client make? |
-      # | h2  | Your client's capital |
+      | h3  | Bank statements |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | Payments your client receives |
+      | h3  | Housing Benefit |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+      | h2  | Your client's capital |
       | h3  | Property |
       | h3  | Vehicles |
       | h2  | Which bank accounts does your client have? |
@@ -71,6 +78,12 @@ Feature: Review and print your application
       | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
       | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Income, regular payments and assets |
+      | h3  | Income |
+      | h3  | Regular payments |
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed truelayer application with merits
@@ -101,6 +114,18 @@ Feature: Review and print your application
       | h2  | Variation or discharge under section 5 protection from harassment act 1997r |
       | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | Payments your client receives |
+      | h3  | Payments your client receives in cash |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+      | h3  | Payments your client makes in cash|
+      | h2  | Your client's capital |
 
     And the "Income, regular payments and assets" review section should contain:
      | question |
@@ -147,10 +172,19 @@ Feature: Review and print your application
       | h2  | Extend, variation or discharge - Part IV |
       | h1  | Print your application |
 
-    And the "Income, regular payments and assets" review section should contain:
-     | question |
-     | Passported |
+    Then the following sections should not exist:
+      | tag | section |
+      | h2  | Your client's income |
+      | h3  | Employment income |
+      | h3  | Payments your client receives |
+      | h3  | Payments your client receives in cash |
+      | h3  | Student finance |
+      | h2  | Your client's outgoings |
+      | h3  | Payments your client makes |
+      | h3  | Payments your client makes in cash|
+      | h2  | Your client's capital |
 
+    And I should see "Passported"
     And I should not see "Benefits total"
     And I should not see "Housing benefit total"
     And I should not see "Disregarded benefits total"

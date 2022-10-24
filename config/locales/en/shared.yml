@@ -223,6 +223,9 @@ en:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested
         new_limit_reasons: Reason
+      housing_benefit:
+        heading: Housing Benefit
+        does_your_client: Does your client receive Housing Benefit?
       substantive_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested
@@ -231,6 +234,8 @@ en:
         employment: Employment income
         employment_question: Do you need to tell us anything else about your client's employment?
         employment_details: Details
+      income_cash_payments:
+        heading: Payments your client receives in cash
       income_result:
         total_disposable_income: Total disposable income assessed
         total_gross_income: Total gross income assessed
@@ -283,6 +288,10 @@ en:
         does_your_client: Does your client receive student finance?
         how_much: Amount of student finance
         info_html: '<strong>%{student_finance}</strong> this academic year.'
+      income_cash_payments:
+        heading: Payments your client receives in cash
+      outgoings_cash_payments:
+        heading: Payments your client makes in cash
       proceedings_details:
         proceeding: Proceeding
         section_proceeding:
@@ -585,18 +594,24 @@ en:
       restrictions: Restrictions on your client's assets
       none: None
     review_application:
+      income_payments_and_assets:
+        heading: Income, regular payments and assets
+        income: Income
+        other_income: Other income
+        passported: Passported
+        payments: Regular payments
+      income_payments_and_assets_for_bank_statement_upload:
+        capital-heading: Your client's capital
+        credits-section-heading: Payments your client receives
+        debits-section-heading: Payments your client makes
+        income-heading: Your client's income
+        outgoings-heading: Your client's outgoings
       questions_and_answers:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
         client_details_heading: Client details
         proceedings_details_heading: What you're applying for
-        income_payments_and_assets_heading: Income, regular payments and assets
-        income: Income
-        irregular_income: Irregular income
-        other_income: Other income
-        passported: Passported
-        payments: Regular payments
         change: Change
         emergency_cost_limit: Emergency cost limit
         substantive_cost_limit: Substantive cost limit
