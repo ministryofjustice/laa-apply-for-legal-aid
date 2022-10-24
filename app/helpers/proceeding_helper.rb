@@ -11,11 +11,10 @@ module ProceedingHelper
   end
 
   def scope_limits(proceeding, scope_type)
-    scope_limits = []
-    proceeding.scope_limitations.where(scope_type:).each do |scope_limitation|
-      scope_limits << scope_limitation_meaning(scope_limitation)
-    end
-    scope_limits
+    proceeding
+      .scope_limitations
+      .where(scope_type:)
+      .map { |scope_limitation| scope_limitation_meaning(scope_limitation) }
   end
 
 private
