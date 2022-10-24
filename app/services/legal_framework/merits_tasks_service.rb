@@ -2,6 +2,8 @@ module LegalFramework
   class MeritsTasksService
     attr_reader :legal_aid_application
 
+    FULL_SECTION_8_TASKS = %i[specific_issue prohibited_steps	nature_of_urgency opponents_application reason_for_new_application why_matter_opposed].freeze
+
     def self.call(legal_aid_application)
       new(legal_aid_application).call
     end
@@ -14,7 +16,7 @@ module LegalFramework
       @response = merits_tasks(submission)
 
       smtl = SerializableMeritsTaskList.new(@response)
-      ignore_unknown_questions(smtl)
+      ignore_questions(smtl)
       update_merits_task_list(smtl.to_yaml)
       smtl
     rescue SubmissionError => e
@@ -46,18 +48,25 @@ module LegalFramework
       @submission ||= Submission.create!(legal_aid_application_id: @legal_aid_application.id)
     end
 
-    def ignore_unknown_questions(smtl)
+    def ignore_questions(smtl)
       # loop through and mark any questions that cannot be found
-      # as ignored - this can then remove them from the view
+      # as ignored - they can then be hidden in the view
       smtl.tasks[:application].each do |task|
-        task.mark_as_ignored! if I18n.t(task.name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing")
+        task.mark_as_ignored! if ignore_task?(task.name)
       end
       smtl.tasks[:proceedings].each do |_proceeding, values|
         values[:tasks].each do |task|
-          task.mark_as_ignored! if I18n.t(task.name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing")
+          task.mark_as_ignored! if ignore_task?(task.name)
         end
       end
       smtl
+    end
+
+    def ignore_task?(task_name)
+      [
+        I18n.t(task_name, scope: "providers.merits_task_lists.task_list_item").include?("translation missing"),
+        (Setting.enable_loop?.eql?(false) && FULL_SECTION_8_TASKS.include?(task_name)),
+      ].any?(true)
     end
   end
 end
