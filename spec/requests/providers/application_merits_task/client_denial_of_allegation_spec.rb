@@ -77,9 +77,17 @@ module Providers
           expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_denial_of_allegation\n\s+dependencies: \*\d\n\s+state: :complete/)
         end
 
-        it "redirects to the next page" do
-          post_client_denial
-          expect(response).to redirect_to(flow_forward_path)
+        context "when all previous tasks are completed" do
+          before do
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
+          end
+
+          it "redirects to the next page" do
+            post_client_denial
+            expect(response).to redirect_to(providers_legal_aid_application_client_offered_undertakings_path(legal_aid_application))
+          end
         end
 
         context "when not authenticated" do

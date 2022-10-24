@@ -89,7 +89,6 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
