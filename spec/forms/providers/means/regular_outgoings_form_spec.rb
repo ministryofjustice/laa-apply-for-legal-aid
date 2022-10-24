@@ -241,6 +241,22 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         expect(legal_aid_application.regular_transactions)
           .to contain_exactly(housing_benefit)
       end
+
+      it "does not update the application" do
+        legal_aid_application = create(
+          :legal_aid_application,
+          no_debit_transaction_types_selected: false,
+          applicant_in_receipt_of_housing_benefit: true,
+        )
+        form = described_class.new(legal_aid_application:)
+
+        form.save
+
+        expect(legal_aid_application.reload).to have_attributes(
+          no_debit_transaction_types_selected: false,
+          applicant_in_receipt_of_housing_benefit: true,
+        )
+      end
     end
 
     context "when none is selected" do
@@ -257,10 +273,11 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
         expect(result).to be true
       end
 
-      it "updates `no_debit_transaction_types_selected` on the application" do
+      it "updates the application" do
         legal_aid_application = create(
           :legal_aid_application,
           no_debit_transaction_types_selected: false,
+          applicant_in_receipt_of_housing_benefit: true,
         )
         params = {
           "transaction_type_ids" => ["", "none"],
@@ -270,8 +287,10 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
 
         form.save
 
-        expect(legal_aid_application.reload.no_debit_transaction_types_selected)
-          .to be true
+        expect(legal_aid_application.reload).to have_attributes(
+          no_debit_transaction_types_selected: true,
+          applicant_in_receipt_of_housing_benefit: nil,
+        )
       end
 
       it "does not create any regular transactions" do
@@ -478,6 +497,50 @@ RSpec.describe Providers::Means::RegularOutgoingsForm do
           .to include(legal_aid_application_transaction_type)
         expect(legal_aid_application.regular_transactions)
           .to include(housing_benefit)
+      end
+
+      it "updates applicant_in_receipt_of_housing_benefit if housing payments" \
+         "are not selected" do
+        legal_aid_application = create(
+          :legal_aid_application,
+          applicant_in_receipt_of_housing_benefit: false,
+        )
+        child_care = create(:transaction_type, :child_care)
+        params = {
+          "transaction_type_ids" => ["", child_care.id],
+          "child_care_amount" => "100",
+          "child_care_frequency" => "monthly",
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.reload).to have_attributes(
+          applicant_in_receipt_of_housing_benefit: nil,
+        )
+      end
+
+      it "does not update `applicant_in_receipt_of_housing_benefit if housing" \
+         "payments are selected" do
+        legal_aid_application = create(
+          :legal_aid_application,
+          applicant_in_receipt_of_housing_benefit: false,
+        )
+        rent_or_mortgage = create(:transaction_type, :rent_or_mortgage)
+        params = {
+          "transaction_type_ids" => ["", rent_or_mortgage.id],
+          "rent_or_mortgage_amount" => "250.50",
+          "rent_or_mortgage_frequency" => "weekly",
+          legal_aid_application:,
+        }
+        form = described_class.new(params)
+
+        form.save
+
+        expect(legal_aid_application.reload).to have_attributes(
+          applicant_in_receipt_of_housing_benefit: false,
+        )
       end
     end
   end

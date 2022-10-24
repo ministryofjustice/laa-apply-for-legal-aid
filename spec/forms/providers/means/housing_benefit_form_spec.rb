@@ -10,6 +10,11 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           applicant_in_receipt_of_housing_benefit: true,
         )
         transaction_type = create(:transaction_type, :housing_benefit)
+        _legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
         _housing_benefit = create(
           :regular_transaction,
           legal_aid_application:,
@@ -22,7 +27,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         form = described_class.new(params)
 
         expect(form).to have_attributes(
-          housing_benefit: true,
+          applicant_in_receipt_of_housing_benefit: true,
           housing_benefit_amount: 500,
           housing_benefit_frequency: "weekly",
         )
@@ -40,7 +45,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         form = described_class.new(params)
 
         expect(form).to have_attributes(
-          housing_benefit: false,
+          applicant_in_receipt_of_housing_benefit: false,
           housing_benefit_amount: nil,
           housing_benefit_frequency: nil,
         )
@@ -58,7 +63,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         form = described_class.new(params)
 
         expect(form).to have_attributes(
-          housing_benefit: nil,
+          applicant_in_receipt_of_housing_benefit: nil,
           housing_benefit_amount: nil,
           housing_benefit_frequency: nil,
         )
@@ -67,10 +72,11 @@ RSpec.describe Providers::Means::HousingBenefitForm do
   end
 
   describe "#validate" do
-    context "when neither true or false is selected" do
+    context "when no housing benefit option is selected" do
       it "is invalid" do
         legal_aid_application = build_stubbed(:legal_aid_application)
         params = {
+          "transaction_type_ids" => "",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -79,15 +85,15 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         form = described_class.new(params)
 
         expect(form).to be_invalid
-        expect(form.errors).to be_added(:housing_benefit, :inclusion, value: nil)
+        expect(form.errors).to be_added(:transaction_type_ids, :blank)
       end
     end
 
-    context "when housing benefit is false" do
+    context "when the applicant does not receive housing benefit" do
       it "is valid" do
         legal_aid_application = build_stubbed(:legal_aid_application)
         params = {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -99,12 +105,13 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       end
     end
 
-    context "when housing benefit is true, but amount is blank" do
+    context "when the applicant receives housing benefit, but amount is blank" do
       it "is invalid" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = build_stubbed(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -121,12 +128,13 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       end
     end
 
-    context "when housing benefit is true, but amount is invalid" do
+    context "when the applicant receives housing benefit, but amount is invalid" do
       it "is invalid" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = build_stubbed(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "-100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -144,12 +152,13 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       end
     end
 
-    context "when housing benefit is true, but frequency is blank" do
+    context "when the applicant receives housing benefit, but frequency is blank" do
       it "is invalid" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = build_stubbed(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -166,12 +175,13 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       end
     end
 
-    context "when housing benefit is true, but frequency is invalid" do
+    context "when the applicant receives housing benefit, but frequency is invalid" do
       it "is invalid" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = build_stubbed(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "invalid",
           legal_aid_application:,
@@ -192,8 +202,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       it "is valid" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = build_stubbed(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -243,8 +254,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       it "does not update an application's transaction types" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = create(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -259,8 +271,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
       it "does not update an application's regular transactions" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         legal_aid_application = create(:legal_aid_application)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -276,8 +289,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
     context "when housing benefit is false" do
       it "returns true" do
         legal_aid_application = create(:legal_aid_application)
+        _transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -294,8 +308,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           :legal_aid_application,
           applicant_in_receipt_of_housing_benefit: true,
         )
+        _transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -317,7 +332,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           transaction_type:,
         )
         params = {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -338,7 +353,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           transaction_type:,
         )
         params = {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
           legal_aid_application:,
@@ -354,9 +369,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
     context "when housing benefit is true" do
       it "returns true" do
         legal_aid_application = create(:legal_aid_application)
-        _housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -373,9 +388,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
           :legal_aid_application,
           applicant_in_receipt_of_housing_benefit: true,
         )
-        _housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -390,9 +405,9 @@ RSpec.describe Providers::Means::HousingBenefitForm do
 
       it "updates the application's transaction types" do
         legal_aid_application = create(:legal_aid_application)
-        housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -402,14 +417,14 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         form.save
 
         expect(legal_aid_application.transaction_types)
-          .to contain_exactly(housing_benefit)
+          .to contain_exactly(transaction_type)
       end
 
       it "updates the application's regular transactions" do
         legal_aid_application = create(:legal_aid_application)
-        housing_benefit = create(:transaction_type, :housing_benefit)
+        transaction_type = create(:transaction_type, :housing_benefit)
         params = {
-          "housing_benefit" => "true",
+          "transaction_type_ids" => transaction_type.id,
           "housing_benefit_amount" => "100",
           "housing_benefit_frequency" => "weekly",
           legal_aid_application:,
@@ -422,7 +437,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
         expect(regular_transactions.count).to eq 1
         expect(regular_transactions.first).to have_attributes(
           legal_aid_application:,
-          transaction_type: housing_benefit,
+          transaction_type:,
           amount: 100,
           frequency: "weekly",
         )
@@ -443,7 +458,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
             transaction_type:,
           )
           params = {
-            "housing_benefit" => "true",
+            "transaction_type_ids" => transaction_type.id,
             "housing_benefit_amount" => "200",
             "housing_benefit_frequency" => "monthly",
             legal_aid_application:,
@@ -467,7 +482,7 @@ RSpec.describe Providers::Means::HousingBenefitForm do
             frequency: "weekly",
           )
           params = {
-            "housing_benefit" => "true",
+            "transaction_type_ids" => transaction_type.id,
             "housing_benefit_amount" => "200",
             "housing_benefit_frequency" => "monthly",
             legal_aid_application:,

@@ -702,6 +702,10 @@ en:
           page_heading: Select payments your client receives in cash
       housing_benefits:
         show:
+          labels:
+            housing_benefit:
+              "yes": "Yes"
+              "no": "No"
           page_heading: Does your client receive housing benefits?
       identify_types_of_incomes:
         show:

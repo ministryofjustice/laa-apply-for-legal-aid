@@ -7,6 +7,7 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
     it "returns ok" do
       _housing_benefit = create(:transaction_type, :housing_benefit)
       legal_aid_application = create(:legal_aid_application)
+      _transaction_type = create(:transaction_type, :housing_benefit)
       provider = legal_aid_application.provider
       login_as provider
 
@@ -21,12 +22,18 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
           :legal_aid_application,
           applicant_in_receipt_of_housing_benefit: true,
         )
+        transaction_type = create(:transaction_type, :housing_benefit)
+        _legal_aid_application_transaction_type = create(
+          :legal_aid_application_transaction_type,
+          legal_aid_application:,
+          transaction_type:,
+        )
         housing_benefit = create(
           :regular_transaction,
-          :housing_benefit,
           amount: 100,
           frequency: "weekly",
           legal_aid_application:,
+          transaction_type:,
         )
         provider = legal_aid_application.provider
         login_as provider
@@ -34,7 +41,7 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
         get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
 
         expect(page).to have_checked_field(
-          "providers_means_housing_benefit_form[housing_benefit]",
+          "providers_means_housing_benefit_form[transaction_type_ids]",
         )
         expect(page).to have_field(
           "providers_means_housing_benefit_form[housing_benefit_amount]",
@@ -89,11 +96,12 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
         :legal_aid_application,
         applicant_in_receipt_of_housing_benefit: nil,
       )
+      _transaction_type = create(:transaction_type, :housing_benefit)
       provider = legal_aid_application.provider
       login_as provider
       params = {
         "providers_means_housing_benefit_form" => {
-          "housing_benefit" => "false",
+          "transaction_type_ids" => "none",
           "housing_benefit_amount" => "",
           "housing_benefit_frequency" => "",
         },
@@ -112,11 +120,12 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
           :legal_aid_application,
           applicant_in_receipt_of_housing_benefit: nil,
         )
+        _transaction_type = create(:transaction_type, :housing_benefit)
         provider = legal_aid_application.provider
         login_as provider
         params = {
           "providers_means_housing_benefit_form" => {
-            "housing_benefit" => "",
+            "transaction_type_ids" => "",
             "housing_benefit_amount" => "",
             "housing_benefit_frequency" => "",
           },
@@ -125,7 +134,7 @@ RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
         patch providers_legal_aid_application_means_housing_benefits_path(legal_aid_application), params: params
 
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(page).to have_css("p", class: "govuk-error-message", text: "Select one of the options")
+        expect(page).to have_css("p", class: "govuk-error-message", text: "Select yes if your client receives Housing Benefit")
         expect(legal_aid_application.reload.applicant_in_receipt_of_housing_benefit).to be_nil
       end
     end

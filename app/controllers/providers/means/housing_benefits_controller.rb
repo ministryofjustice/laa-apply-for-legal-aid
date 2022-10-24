@@ -22,7 +22,7 @@ module Providers
       def housing_benefit_params
         params
           .require(:providers_means_housing_benefit_form)
-          .permit(:housing_benefit, :housing_benefit_amount, :housing_benefit_frequency)
+          .permit(:transaction_type_ids, :housing_benefit_amount, :housing_benefit_frequency)
           .merge(legal_aid_application:)
       end
 
