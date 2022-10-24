@@ -128,7 +128,7 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
 
       it "displays the Other income header" do
         subject
-        expect(unescaped_response_body).to include I18n.t("shared.review_application.other_income")
+        expect(unescaped_response_body).to include I18n.t("shared.review_application.questions_and_answers.other_income")
       end
 
       it "does not display the extra employment information details" do

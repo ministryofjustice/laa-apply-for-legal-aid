@@ -10,7 +10,6 @@ Given("I have completed a bank statement upload application with merits") do
     :with_fixed_benefits_cash_transactions,
     :with_fixed_rent_or_mortage_cash_transactions,
     :with_chances_of_success,
-    :assessment_submitted,
     provider_received_citizen_consent: false,
     attachments: [build(:attachment, :bank_statement)],
     explicit_proceedings: %i[da002 da006],
@@ -44,7 +43,6 @@ Given("I have completed an enhanced bank statement upload application with merit
     :with_cfe_v5_result,
     :with_chances_of_success,
     :with_own_home_mortgaged,
-    :assessment_submitted,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
     shared_ownership: "partner_or_ex_partner",
@@ -84,7 +82,6 @@ Given("I have completed truelayer application with merits") do
     :with_opponent,
     :with_incident,
     :with_chances_of_success,
-    :assessment_submitted,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
     shared_ownership: "partner_or_ex_partner",
@@ -118,7 +115,6 @@ Given("I have completed a passported application with merits") do
     :with_opponent,
     :with_incident,
     :with_chances_of_success,
-    :assessment_submitted,
     provider_received_citizen_consent: true,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
@@ -137,4 +133,14 @@ end
 
 When("I view the review and print your application page") do
   visit(providers_legal_aid_application_review_and_print_application_path(@legal_aid_application))
+end
+
+Then("the \"Income, regular payments and assets\" review section should contain:") do |table|
+  expectations = table.hashes.map(&:symbolize_keys)
+
+  within(".income_payments_and_assets") do
+    expectations.each do |expectated|
+      expect(page).to have_css(".govuk-table__cell", text: expectated[:question])
+    end
+  end
 end

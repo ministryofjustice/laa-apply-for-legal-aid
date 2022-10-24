@@ -102,6 +102,11 @@
         ) %>
   <% end %>
 
+  <% if @legal_aid_application.uploading_bank_statements? %>
+    render "income_payments_and_assets"
+  <% else %>
+  <% end %>
+
   <section class="income_payments_and_assets page_break_before">
     <div class="govuk-!-padding-bottom-6"></div>
     <h2 class="govuk-heading-l"><%= t('.income_payments_and_assets_heading') %></h2>
