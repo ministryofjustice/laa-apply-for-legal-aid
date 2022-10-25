@@ -30,20 +30,20 @@ Given("I have completed a non-passported employed application with enhanced bank
     :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
-    :with_merits_statement_of_case,
-    :with_opponent,
-    :with_restrictions,
-    :with_incident,
     :with_vehicle,
     :with_transaction_period,
     :with_extra_employment_information,
     :with_other_assets_declaration,
     :with_policy_disregards,
+    :with_restrictions,
     :with_fixed_offline_accounts,
     :with_dependant,
     :with_cfe_v5_result,
-    :with_chances_of_success,
     :with_own_home_mortgaged,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
     :assessment_submitted,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
@@ -68,10 +68,7 @@ Given("I have completed a non-passported application with truelayer") do
     :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
-    :with_merits_statement_of_case,
-    :with_opponent,
     :with_restrictions,
-    :with_incident,
     :with_vehicle,
     :with_transaction_period,
     :with_extra_employment_information,
@@ -82,8 +79,11 @@ Given("I have completed a non-passported application with truelayer") do
     :with_consent,
     :with_dependant,
     :with_cfe_v5_result,
-    :with_chances_of_success,
     :with_own_home_mortgaged,
+    :with_merits_statement_of_case,
+    :with_incident,
+    :with_opponent,
+    :with_chances_of_success,
     :assessment_submitted,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
@@ -107,18 +107,18 @@ Given("I have completed a passported application") do
     :with_applicant_and_address,
     :with_passported_state_machine,
     :with_savings_amount,
-    :with_merits_statement_of_case,
-    :with_opponent,
     :with_restrictions,
-    :with_incident,
     :with_vehicle,
     :with_transaction_period,
     :with_other_assets_declaration,
     :with_policy_disregards,
     :with_savings_amount,
     :with_cfe_v5_result,
-    :with_chances_of_success,
     :with_own_home_mortgaged,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
     :assessment_submitted,
     provider_received_citizen_consent: true,
     property_value: 599_999.99,
@@ -138,18 +138,6 @@ end
 
 When("I view the means report") do
   visit(providers_legal_aid_application_means_report_path(@legal_aid_application, debug: true))
-end
-
-Then("the following sections should exist:") do |table|
-  table.hashes.each do |row|
-    expect(page).to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
-  end
-end
-
-Then("the following sections should not exist:") do |table|
-  table.hashes.each do |row|
-    expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
-  end
 end
 
 Then("the Client details questions should exist:") do |table|

@@ -1,14 +1,18 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
     </div>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
         <p>
+          <% unless read_only %>
             <%= link_to_accessible(t('generic.change'),
                                    check_answer_url_for(:providers,
                                                         :cash_outgoings,
                                                         @legal_aid_application),
                                    class: 'govuk-link change-link', suffix: t('.heading')) %>
+          <% end %>
         </p>
     </div>
 </div>

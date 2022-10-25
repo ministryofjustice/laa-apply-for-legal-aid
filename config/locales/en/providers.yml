@@ -898,9 +898,6 @@ en:
         what_happens_next:
           heading: What happens next
           text: We'll use your answers to check your client's financial eligibility for legal aid.
-      housing_benefit:
-        heading: Housing Benefit
-        does_your_client: Does your client receive Housing Benefit?
       income_assessment:
         income-heading: Your client's income
         outgoings-heading: Your client's outgoings
@@ -917,10 +914,6 @@ en:
           assets: Do they have assets worth more than £8,000?
         credits-section-heading: What payments does your client receive?
         debits-section-heading: What payments does your client make?
-      income_cash_payments:
-        heading: Payments your client receives in cash
-      outgoings_cash_payments:
-        heading: Payments your client makes in cash
 
     merits_task_lists:
       show:
