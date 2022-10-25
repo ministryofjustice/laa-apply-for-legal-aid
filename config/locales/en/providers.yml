@@ -720,7 +720,7 @@ en:
       regular_incomes:
         show:
           hints:
-            benefits: For example, Child Benefit or tax credits
+            benefits: For example, Child Benefit or tax credits. Do not include Housing Benefit or any other disregarded benefits.
             friends_or_family: >-
               Select if a friend or relative regularly gives your client money to help with
               living costs. Do not include one-off payments.
