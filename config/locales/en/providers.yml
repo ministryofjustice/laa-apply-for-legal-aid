@@ -371,6 +371,13 @@ en:
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
+      specific_issue:
+        show:
+          h1-heading:
+            applicant: What specific issue do you want to determine at court?
+            non-applicant: What specific issue is the other party seeking at court?
+          hint-text: Enter the specific issue.  Specific issue proceeding cannot be used for a change of name application
+          confirmed: I confirm this specific issue proceeding is not for a change of name application
     application_merits_task:
       involved_children:
         new:

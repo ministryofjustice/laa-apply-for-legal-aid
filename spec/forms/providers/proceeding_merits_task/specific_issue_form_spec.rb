@@ -28,7 +28,7 @@ RSpec.describe Providers::ProceedingMeritsTask::SpecificIssueForm, type: :form d
         it { is_expected.to be_invalid }
 
         it "records the error message" do
-          expect(form.errors[:confirmed]).to eq ["Please confirm this is not for a change of name application"]
+          expect(form.errors[:confirmed]).to eq ["You must confirm this specific issue proceeding is not for a change of name application"]
         end
       end
 
