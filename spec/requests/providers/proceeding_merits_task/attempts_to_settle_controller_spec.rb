@@ -64,6 +64,24 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
           expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
         end
 
+        context "when there are multiple completed tasks" do
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se004]) }
+          let(:smtl) { create(:legal_framework_merits_task_list, :da001_and_se004, legal_aid_application:) }
+          let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE004") }
+
+          before do
+            allow(Flow::MeritsLoop).to receive(:forward_flow).and_call_original
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE004, :chances_of_success)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE004, :children_proceeding)
+          end
+
+          it "routes to the specific issue task" do
+            subject
+            expect(response).to redirect_to(providers_merits_task_list_specific_issue_path(proceeding))
+          end
+        end
+
         context "when the application is in draft" do
           let(:legal_aid_application) do
             create(:legal_aid_application,
