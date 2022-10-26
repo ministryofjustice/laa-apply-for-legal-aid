@@ -114,11 +114,11 @@ module Proceedings
     end
 
     def additional_hearing_date_param?(code)
-      additional_params_for(code).map { |ap| ap["name"] }.include? "hearing_date"
+      additional_params_for(code).pluck("name").include? "hearing_date"
     end
 
     def additional_limitation_note_param?(code)
-      additional_params_for(code).map { |ap| ap["name"] }.include? "limitation_note"
+      additional_params_for(code).pluck("name").include? "limitation_note"
     end
 
     def hearing_dates
