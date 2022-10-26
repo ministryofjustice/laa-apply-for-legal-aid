@@ -938,6 +938,7 @@ en:
         attempts_to_settle: Attempts to settle
         client_denial_of_allegation: Client denial of allegation
         client_offer_of_undertakings: Client offer of undertaking
+        specific_issue: Specific Issue
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -953,6 +954,7 @@ en:
           attempts_to_settle: attempts_to_settle
           client_denial_of_allegation: client_denial_of_allegation
           client_offer_of_undertakings: client_offered_undertakings
+          specific_issue: specific_issue
     merits_reports:
       show:
         heading: Merits report
