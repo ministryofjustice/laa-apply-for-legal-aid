@@ -7,7 +7,7 @@ require "csv"
 #
 class CCMSPayloadAnalyser
   def initialize
-    @doc = File.open(Rails.root.join("ccms_integration/example_payloads/NonPassportedFullMonty.xml")) { |f| Nokogiri::XML(f).remove_namespaces! }
+    @doc = Rails.root.join("ccms_integration/example_payloads/NonPassportedFullMonty.xml").open { |f| Nokogiri::XML(f).remove_namespaces! }
     # NOTE: Assessments is mispelt Assesment in XML file!
     @sections = %w[MeansAssesments MeritsAssesments]
   end

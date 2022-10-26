@@ -62,7 +62,7 @@ module CCMS
 
       # :nocov:
       def save_request(case_type)
-        File.open(Rails.root.join("ccms_integration/generated/add_#{case_type}_case_request.xml"), "w") do |fp|
+        Rails.root.join("ccms_integration/generated/add_#{case_type}_case_request.xml").open("w") do |fp|
           fp.puts request_xml
         end
       end

@@ -14,7 +14,7 @@ module Reports
     private
 
       def generate_csv_locally
-        File.open(Rails.root.join("tmp/bank_transactions.csv"), "wb") do |fp|
+        Rails.root.join("tmp/bank_transactions.csv").open("wb") do |fp|
           fp.puts generate_csv
         end
       end
