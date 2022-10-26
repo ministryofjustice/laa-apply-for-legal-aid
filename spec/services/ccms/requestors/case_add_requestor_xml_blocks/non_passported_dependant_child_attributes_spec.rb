@@ -94,7 +94,7 @@ module CCMS
               context "attribute CLI_RES_PER_INPUT_T_12WP3_17A - Person residing: relationship to client" do
                 before do
                   legal_aid_application.dependants.map(&:destroy!)
-                  create(:dependant, legal_aid_application: legal_aid_application, date_of_birth: dob, relationship: relationship)
+                  create(:dependant, legal_aid_application:, date_of_birth: dob, relationship:)
                   legal_aid_application.reload
                 end
 

@@ -107,7 +107,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
 
         Setting.setting.update!(manually_review_all_cases: false)
-        create(:applicant, legal_aid_application: legal_aid_application, first_name: "Stepriponikas", last_name: "Bonstart")
+        create(:applicant, legal_aid_application:, first_name: "Stepriponikas", last_name: "Bonstart")
         legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah"
         login_provider
         subject

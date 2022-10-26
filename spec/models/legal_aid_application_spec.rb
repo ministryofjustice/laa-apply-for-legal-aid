@@ -1041,10 +1041,10 @@ RSpec.describe LegalAidApplication, type: :model do
     it "returns the result associated with the most recent CFE::Submission" do
       travel(-10.minutes) do
         legal_aid_application = create(:legal_aid_application)
-        submission1 = create(:cfe_submission, legal_aid_application: legal_aid_application)
+        submission1 = create(:cfe_submission, legal_aid_application:)
         create(:cfe_v3_result, submission: submission1)
       end
-      submission2 = create(:cfe_submission, legal_aid_application: legal_aid_application)
+      submission2 = create(:cfe_submission, legal_aid_application:)
       result2 = create(:cfe_v3_result, submission: submission2)
 
       expect(legal_aid_application.cfe_result).to eq result2
@@ -1109,8 +1109,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application parent, child and stand-alone transaction types" do
       before do
-        create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension)
-        create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: benefits)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits)
         create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits)
       end
 
@@ -1121,7 +1121,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application child and stand-alone transaction types" do
       before do
-        create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
         create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits)
       end
 
@@ -1132,7 +1132,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application parent and stand-alone transaction types" do
       before do
-        create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
         create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits)
       end
 
@@ -1328,7 +1328,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:bank_provider) { create(:bank_provider, applicant: laa.applicant) }
 
       before do
-        create(:bank_account, bank_provider: bank_provider, account_type: account_type, balance: balance1)
+        create(:bank_account, bank_provider:, account_type:, balance: balance1)
         create(:bank_account, bank_provider:, account_type:, balance: balance2)
       end
 
@@ -1365,7 +1365,7 @@ RSpec.describe LegalAidApplication, type: :model do
       let(:bank_provider) { create(:bank_provider, applicant: laa.applicant) }
 
       before do
-        create(:bank_account, bank_provider: bank_provider, account_type: "SAVINGS", balance: balance1)
+        create(:bank_account, bank_provider:, account_type: "SAVINGS", balance: balance1)
         create(:bank_account, bank_provider:, account_type: "SAVINGS", balance: balance2)
       end
 

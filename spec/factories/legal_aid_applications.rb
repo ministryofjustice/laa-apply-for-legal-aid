@@ -706,8 +706,8 @@ FactoryBot.define do
     trait :with_bank_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
-        create(:bank_account_holder, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
+        create(:bank_account_holder, bank_provider:)
         create(:bank_error, applicant: application.applicant)
         [90, 60, 30].each do |count|
           create(:bank_transaction,
@@ -723,7 +723,7 @@ FactoryBot.define do
     trait :with_benefits_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :benefits,
@@ -738,7 +738,7 @@ FactoryBot.define do
     trait :with_fixed_benefits_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :benefits,
@@ -771,7 +771,7 @@ FactoryBot.define do
     trait :with_uncategorised_credit_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account:, operation: "credit")
         end
@@ -781,7 +781,7 @@ FactoryBot.define do
     trait :with_uncategorised_debit_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account:, operation: "debit")
         end
@@ -791,7 +791,7 @@ FactoryBot.define do
     trait :with_fixed_rent_or_mortage_transactions do
       after :create do |application|
         bank_provider = create(:bank_provider, applicant: application.applicant)
-        bank_account = create(:bank_account, bank_provider: bank_provider)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :rent_or_mortgage,

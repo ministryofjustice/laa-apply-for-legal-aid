@@ -68,7 +68,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       let(:linked_children_params) { [first_child.id, "", ""] }
 
       before do
-        create(:proceeding_linked_child, proceeding: proceeding, involved_child: second_child)
+        create(:proceeding_linked_child, proceeding:, involved_child: second_child)
         create(:proceeding_linked_child, proceeding:, involved_child: third_child)
       end
 

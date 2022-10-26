@@ -70,9 +70,9 @@ module CFE
           end
 
           def create_categorised_bank_transactions
-            create(:bank_transaction, :rent_or_mortgage, bank_account: bank_account, happened_at: 10.days.ago, amount: 1150.0)
-            create(:bank_transaction, :rent_or_mortgage, bank_account: bank_account, happened_at: 40.days.ago, amount: 1150.0)
-            create(:bank_transaction, :child_care, bank_account: bank_account, happened_at: 15.days.ago, amount: 234.56)
+            create(:bank_transaction, :rent_or_mortgage, bank_account:, happened_at: 10.days.ago, amount: 1150.0)
+            create(:bank_transaction, :rent_or_mortgage, bank_account:, happened_at: 40.days.ago, amount: 1150.0)
+            create(:bank_transaction, :child_care, bank_account:, happened_at: 15.days.ago, amount: 234.56)
             create(:bank_transaction, :child_care, bank_account:, happened_at: 45.days.ago, amount: 266.0)
           end
 

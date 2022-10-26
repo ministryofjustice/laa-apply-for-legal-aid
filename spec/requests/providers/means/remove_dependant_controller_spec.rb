@@ -7,7 +7,7 @@ RSpec.describe Providers::Means::RemoveDependantsController, type: :request do
   let(:extra_dependant_count) { 0 }
 
   before do
-    create_list(:dependant, extra_dependant_count, legal_aid_application: legal_aid_application)
+    create_list(:dependant, extra_dependant_count, legal_aid_application:)
     login
     subject
   end

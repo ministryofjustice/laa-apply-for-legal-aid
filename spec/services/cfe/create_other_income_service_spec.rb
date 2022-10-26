@@ -148,8 +148,8 @@ module CFE
 
     def create_non_other_income_bank_transactions
       Populators::TransactionTypePopulator.call
-      create(:bank_transaction, :benefits, bank_account: bank_account)
-      create(:bank_transaction, :child_care, bank_account: bank_account)
+      create(:bank_transaction, :benefits, bank_account:)
+      create(:bank_transaction, :child_care, bank_account:)
       create(:bank_transaction, :rent_or_mortgage, bank_account:)
     end
 

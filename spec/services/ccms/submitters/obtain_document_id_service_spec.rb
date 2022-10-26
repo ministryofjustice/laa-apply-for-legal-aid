@@ -46,10 +46,10 @@ module CCMS
 
         context "the application has documents to upload" do
           before do
-            create(:attachment, :merits_report, legal_aid_application: legal_aid_application)
-            create(:attachment, :means_report, legal_aid_application: legal_aid_application)
-            create(:attachment, :bank_transaction_report, legal_aid_application: legal_aid_application)
-            create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: legal_aid_application)
+            create(:attachment, :merits_report, legal_aid_application:)
+            create(:attachment, :means_report, legal_aid_application:)
+            create(:attachment, :bank_transaction_report, legal_aid_application:)
+            create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:)
             create(:gateway_evidence, :with_original_and_pdf_files_attached, legal_aid_application:)
           end
 

@@ -86,7 +86,7 @@ FactoryBot.define do
 
     after(:build) do |applicant, evaluator|
       if evaluator.with_bank_accounts > 0
-        provider = create(:bank_provider, applicant: applicant)
+        provider = create(:bank_provider, applicant:)
         evaluator.with_bank_accounts.times do
           create(:bank_account, bank_provider: provider)
         end

@@ -14,7 +14,7 @@ RSpec.describe "check your answers requests", type: :request do
            provider:)
   end
   let!(:application_transaction_types) do
-    create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: credit)
+    create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: credit)
     create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: debit)
   end
 
