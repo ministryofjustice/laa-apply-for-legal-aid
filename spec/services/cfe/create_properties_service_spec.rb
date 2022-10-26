@@ -42,8 +42,13 @@ RSpec.describe CFE::CreatePropertiesService do
       VCR.turn_on!
     end
 
-    it "sends data to endpoint" do
+    it "sends expected payload to configured endpoint" do
       subject.call
+
+      expect(
+        a_request(:post, subject.cfe_url)
+          .with(body: subject.request_body),
+      ).to have_been_made.once
     end
 
     it "changes the submission state" do

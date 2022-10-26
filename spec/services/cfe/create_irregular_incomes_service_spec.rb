@@ -26,8 +26,13 @@ module CFE
         stub_request(:post, service.cfe_url).with(body: expected_payload).to_return(body: dummy_response)
       end
 
-      it "formats the payload and calls CFE API" do
+      it "sends expected payload to configured endpoint" do
         described_class.call(submission)
+
+        expect(
+          a_request(:post, service.cfe_url)
+            .with(body: expected_payload),
+        ).to have_been_made.once
       end
 
       it "progresses the submission state" do
