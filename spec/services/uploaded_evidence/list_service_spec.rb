@@ -19,11 +19,12 @@ module UploadedEvidence
     describe ".call" do
       let(:service_instance) { instance_double described_class }
 
-      it "instantiates and instance of ListService and calls :call" do
+      it "instantiates an instance of ListService and calls :call" do
         allow(described_class).to receive(:new).with(controller).and_return(service_instance)
         allow(service_instance).to receive(:call).and_return(service_instance)
 
         described_class.call(controller)
+        expect(service_instance).to have_received(:call)
       end
     end
 

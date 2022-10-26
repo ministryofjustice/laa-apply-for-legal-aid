@@ -22,8 +22,8 @@ RSpec.describe Metrics::SendMetrics do
       subject
     end
 
-    it "sleeps during twice the time of a prometheus loop" do
-      allow_any_instance_of(Object).to receive(:sleep).with(prometheus_thread_sleep * 2)
+    it "sleeps for twice the time of a prometheus loop" do
+      expect_any_instance_of(Object).to receive(:sleep).with(prometheus_thread_sleep * 2)
       subject
     end
 

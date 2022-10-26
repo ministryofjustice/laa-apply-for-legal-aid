@@ -22,7 +22,7 @@ RSpec.describe ProvidersHelper do
     it "does not crash" do
       (provider_controller_names - excluded_controllers).each do |controller_name|
         legal_aid_application.provider_step = controller_name
-        url_for_application(legal_aid_application)
+        expect { url_for_application(legal_aid_application) }.not_to raise_error
       end
     end
 

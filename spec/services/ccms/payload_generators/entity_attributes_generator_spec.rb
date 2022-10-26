@@ -63,7 +63,7 @@ module CCMS
             let(:config) { { generate_block?: true } }
 
             it "returns true" do
-              generator.__send__(:evaluate_generate_block_method, config)
+              expect(generator.__send__(:evaluate_generate_block_method, config)).to be true
             end
           end
 
@@ -71,7 +71,7 @@ module CCMS
             let(:config) { { generate_block?: false } }
 
             it "returns false" do
-              generator.__send__(:evaluate_generate_block_method, config)
+              expect(generator.__send__(:evaluate_generate_block_method, config)).to be false
             end
           end
 

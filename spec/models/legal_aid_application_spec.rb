@@ -1413,7 +1413,13 @@ RSpec.describe LegalAidApplication do
 
     context "when evidence has been uploaded" do
       it "returns a hash of evidence filenames grouped by category" do
-        deep_match(laa.uploaded_evidence_by_category, uploaded_evidence_output)
+        actual = laa.uploaded_evidence_by_category
+        expected = uploaded_evidence_output
+
+        expect(actual.keys.sort).to eq expected.keys.sort
+        actual.each do |key, ids|
+          expect(ids).to match_array(expected[key])
+        end
       end
     end
   end
@@ -1692,12 +1698,5 @@ private
       "benefit_evidence" => ["Fake Benefit Evidence 1", "Fake Benefit Evidence 2"],
       "gateway_evidence" => ["Fake Gateway Evidence 1", "Fake Gateway Evidence 2"],
     }
-  end
-
-  def deep_match(actual, expected)
-    expect(actual.keys.sort).to eq expected.keys.sort
-    actual.each do |key, ids|
-      expect(ids).to match_array(expected[key])
-    end
   end
 end
