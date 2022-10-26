@@ -84,7 +84,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
     end
 
     it "updates the state machine type" do
-      expect(legal_aid_application.reload.state_machine).to be_a_kind_of PassportedStateMachine
+      expect(legal_aid_application.reload.state_machine).to be_a PassportedStateMachine
     end
 
     context "choose no" do
@@ -100,7 +100,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       end
 
       it "updates the state machine type" do
-        expect(legal_aid_application.reload.state_machine).to be_a_kind_of NonPassportedStateMachine
+        expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
       end
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       end
 
       it "updates the state machine type" do
-        expect(legal_aid_application.reload.state_machine).to be_a_kind_of NonPassportedStateMachine
+        expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
       end
     end
 

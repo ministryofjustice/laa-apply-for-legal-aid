@@ -30,7 +30,7 @@ RSpec.describe ReportsUploaderJob do
 
       it "attaches generated file to admin report" do
         report_uploader.perform
-        expect(admin_report.reload.application_details_report).to be_a_kind_of(ActiveStorage::Attached::One)
+        expect(admin_report.reload.application_details_report).to be_a(ActiveStorage::Attached::One)
       end
 
       context "when submitted applications report is attached" do

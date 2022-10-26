@@ -344,7 +344,7 @@ module CFE
 
       describe "vehicle" do
         it "returns a vehicle" do
-          expect(eligible_result.vehicle).to be_kind_of(Hash)
+          expect(eligible_result.vehicle).to be_a(Hash)
           expect(eligible_result.vehicle[:value].to_d).to eq 120.0
         end
       end
@@ -711,7 +711,7 @@ module CFE
           describe "jobs" do
             subject(:jobs) { with_employments.jobs }
 
-            it { is_expected.to be_kind_of(Array) }
+            it { is_expected.to be_a(Array) }
             it { is_expected.not_to be_empty }
 
             it "has a name" do
@@ -737,14 +737,14 @@ module CFE
           describe "with employment_income" do
             subject(:employment_income) { with_no_employments.employment_income }
 
-            it { is_expected.to be_kind_of(Hash) }
+            it { is_expected.to be_a(Hash) }
             it { is_expected.to be_empty }
           end
 
           describe "jobs" do
             subject(:jobs) { with_no_employments.jobs }
 
-            it { is_expected.to be_kind_of(Array) }
+            it { is_expected.to be_a(Array) }
             it { is_expected.to be_empty }
           end
 

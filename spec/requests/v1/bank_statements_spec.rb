@@ -34,7 +34,7 @@ RSpec.describe "POST /v1/bank_statements" do
       it "attachment has expected attributes" do
         request
         expect(legal_aid_application.reload.attachments.last)
-          .to have_attributes(document: be_kind_of(ActiveStorage::Attached::One),
+          .to have_attributes(document: be_a(ActiveStorage::Attached::One),
                               attachment_type: "bank_statement_evidence",
                               original_filename: "hello_world.pdf",
                               attachment_name: "bank_statement_evidence")

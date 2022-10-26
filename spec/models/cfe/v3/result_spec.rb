@@ -273,7 +273,7 @@ module CFE
 
       describe "vehicle" do
         it "returns a vehicle" do
-          expect(eligible_result.vehicle).to be_kind_of(Hash)
+          expect(eligible_result.vehicle).to be_a(Hash)
           expect(eligible_result.vehicle[:value].to_d).to eq 1784.61
         end
       end

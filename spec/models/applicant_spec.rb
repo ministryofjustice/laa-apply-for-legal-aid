@@ -107,7 +107,7 @@ RSpec.describe Applicant do
     let(:legal_aid_application) { build(:legal_aid_application, :with_transaction_period, :with_applicant) }
 
     it "returns the age of the applicant" do
-      expect(subject).to be_kind_of(Integer)
+      expect(subject).to be_a(Integer)
     end
 
     it "sets the child? value" do

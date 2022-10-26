@@ -310,7 +310,7 @@ module CFE
 
       describe "vehicle" do
         it "returns a vehicle" do
-          expect(eligible_result.vehicle).to be_kind_of(Hash)
+          expect(eligible_result.vehicle).to be_a(Hash)
           expect(eligible_result.vehicle[:value].to_d).to eq 1784.61
         end
       end
@@ -459,7 +459,7 @@ module CFE
 
       describe "childcare_costs" do
         it "returns the childcare costs as a hash" do
-          expect(eligible_result.childcare_costs).to be_kind_of(Hash)
+          expect(eligible_result.childcare_costs).to be_a(Hash)
           expect(eligible_result.childcare_costs).to include(:amount)
           expect(eligible_result.childcare_costs).to include(:payment_date)
         end
@@ -467,7 +467,7 @@ module CFE
 
       describe "maintenance_costs" do
         it "returns the maintenance costs as a hash" do
-          expect(eligible_result.maintenance_costs).to be_kind_of(Hash)
+          expect(eligible_result.maintenance_costs).to be_a(Hash)
           expect(eligible_result.maintenance_costs).to include(:amount)
           expect(eligible_result.maintenance_costs).to include(:payment_date)
         end
