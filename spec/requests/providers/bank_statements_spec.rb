@@ -410,7 +410,7 @@ RSpec.describe "Providers::BankStatementsController" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "redirects to provider\'s application list" do
+        it "redirects to provider's application list" do
           request
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
@@ -421,7 +421,7 @@ RSpec.describe "Providers::BankStatementsController" do
           expect { request }.not_to change(legal_aid_application.attachments, :count)
         end
 
-        it "redirects to provider\'s application list" do
+        it "redirects to provider's application list" do
           request
           expect(response).to redirect_to providers_legal_aid_applications_path
         end
