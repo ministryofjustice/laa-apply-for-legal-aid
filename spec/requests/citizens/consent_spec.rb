@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Citizens::ConsentsController, type: :request do
+RSpec.describe Citizens::ConsentsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
 
   describe "GET /citizens/consent" do
@@ -16,7 +16,7 @@ RSpec.describe Citizens::ConsentsController, type: :request do
     end
   end
 
-  describe "PATCH /citizens/consent", type: :request do
+  describe "PATCH /citizens/consent" do
     before do
       get citizens_legal_aid_application_path(legal_aid_application.generate_secure_id)
       patch citizens_consent_path, params:

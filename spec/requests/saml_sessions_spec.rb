@@ -1,7 +1,7 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe "SamlSessionsController", type: :request do
+RSpec.describe "SamlSessionsController" do
   let(:firm) { create(:firm, offices: [office]) }
   let(:office) { create(:office) }
   let(:provider) { create(:provider, firm:, selected_office: office, offices: [office], username:) }

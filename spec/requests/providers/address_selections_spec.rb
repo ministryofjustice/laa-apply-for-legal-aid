@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::AddressSelectionsController, type: :request do
+RSpec.describe Providers::AddressSelectionsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }

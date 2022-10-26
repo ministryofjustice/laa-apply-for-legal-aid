@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MoneyHelper, type: :helper do
+RSpec.describe MoneyHelper do
   subject(:humanized_balance) { value_with_currency_unit(balance, currency) }
 
   let(:balance) { 325.42 }

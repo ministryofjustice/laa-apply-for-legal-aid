@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe InvolvedChildrenController, type: :request do
+    RSpec.describe InvolvedChildrenController do
       let(:application) { create(:legal_aid_application) }
       let(:provider) { application.provider }
 

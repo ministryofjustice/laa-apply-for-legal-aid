@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
+RSpec.describe ProceedingMeritsTask::ChancesOfSuccess do
   describe "#pretty_success_propsect" do
     let(:pt_da) { create(:proceeding_type, :with_real_data) }
     let(:pt_s8) { create(:proceeding_type, :as_section_8_child_residence) }

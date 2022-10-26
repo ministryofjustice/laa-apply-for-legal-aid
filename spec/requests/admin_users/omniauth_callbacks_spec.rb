@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "admin users omniauth call back", type: :request do
+RSpec.describe "admin users omniauth call back" do
   around(:example) do |example|
     OmniAuth.config.test_mode = true
     example.run

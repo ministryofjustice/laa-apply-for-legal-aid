@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
+RSpec.describe UndeliverableEmailAlertMailer do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:failure_reason) { "permanently-failed" }
   let(:mailer) { "NotifyMailer" }

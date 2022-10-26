@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SecureData, type: :model do
+RSpec.describe SecureData do
   let(:secure_data) { create(:secure_data) }
   let(:data) { { foo: "bar" } }
 

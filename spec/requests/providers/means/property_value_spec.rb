@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::PropertyValuesController, type: :request do
+RSpec.describe Providers::Means::PropertyValuesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:secure_id) { legal_aid_application.generate_secure_id }
 
@@ -26,7 +26,7 @@ RSpec.describe Providers::Means::PropertyValuesController, type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:id/means/property_value", type: :request do
+  describe "PATCH /providers/applications/:id/means/property_value" do
     subject { patch providers_legal_aid_application_means_property_value_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:params) do

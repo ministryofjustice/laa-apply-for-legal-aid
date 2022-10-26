@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "citizen home requests", type: :request do
+RSpec.describe "citizen home requests" do
   let(:completed_at) { nil }
   let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant, completed_at:) }
   let(:application_id) { application.id }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SubmitCitizenFinancialReminderMailer, type: :mailer do
+RSpec.describe SubmitCitizenFinancialReminderMailer do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_everything, :with_non_passported_state_machine) }
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }

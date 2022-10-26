@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ReviewAndPrintApplicationsController, type: :request do
+RSpec.describe Providers::ReviewAndPrintApplicationsController do
   let(:application) do
     create(:legal_aid_application,
            :with_everything,

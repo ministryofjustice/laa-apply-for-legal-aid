@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe HMRC::Response, type: :model do
+RSpec.describe HMRC::Response do
   subject(:response) { build(:hmrc_response) }
 
   context "when validating" do

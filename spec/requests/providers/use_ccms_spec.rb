@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::UseCCMSController, type: :request do
+RSpec.describe Providers::UseCCMSController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 

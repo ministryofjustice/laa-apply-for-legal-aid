@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "check your answers requests", type: :request do
+RSpec.describe "check your answers requests" do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create(:firm) }
   let(:provider) { create(:provider, firm:) }

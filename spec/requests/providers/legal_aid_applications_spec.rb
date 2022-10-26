@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "providers legal aid application requests", type: :request do
+RSpec.describe "providers legal aid application requests" do
   describe "GET /providers/applications" do
     subject { get providers_legal_aid_applications_path(params) }
 

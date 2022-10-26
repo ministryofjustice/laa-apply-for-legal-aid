@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProvidersHelper, type: :helper do
+RSpec.describe ProvidersHelper do
   let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
   let(:provider_routes) do
     Rails.application.routes.routes.select do |route|

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PolicyDisregardsHelper, type: :helper do
+RSpec.describe PolicyDisregardsHelper do
   include ApplicationHelper
 
   describe "#policy_disregards_hash" do

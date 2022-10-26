@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module LegalFramework
-  RSpec.describe SerializableMeritsTask, type: :model do
+  RSpec.describe SerializableMeritsTask do
     let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: [:application_children]) }
 
     describe ".new" do

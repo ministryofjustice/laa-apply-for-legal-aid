@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Admin::RolesController, type: :request do
+RSpec.describe Admin::RolesController do
   let(:admin_user) { create(:admin_user) }
   let!(:firm) { create(:firm, name: "Noodle, Legs & Co.") }
   let!(:firm2) { create(:firm, name: "McKenzie, Brackman, Chaney and Kuzak") }

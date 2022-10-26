@@ -3,7 +3,7 @@ require "sidekiq/testing"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe StatementOfCasesController, type: :request do
+    RSpec.describe StatementOfCasesController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }

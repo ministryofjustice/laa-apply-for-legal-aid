@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe DependantHelper, type: :helper do
+RSpec.describe DependantHelper do
   include ApplicationHelper
   let(:dependant) { create(:dependant) }
 

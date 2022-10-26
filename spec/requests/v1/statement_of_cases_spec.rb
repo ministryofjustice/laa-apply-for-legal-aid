@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "POST /v1/statement_of_case", type: :request do
+RSpec.describe "POST /v1/statement_of_case" do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::FullEmploymentDetailsController, type: :request do
+RSpec.describe Providers::Means::FullEmploymentDetailsController do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine) }
   let(:provider) { application.provider }
   let(:before_actions) { {} }

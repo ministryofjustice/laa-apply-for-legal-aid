@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
+RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
   let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
   let(:provider) { legal_aid_application.provider }

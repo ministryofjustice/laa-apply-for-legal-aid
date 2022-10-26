@@ -2,7 +2,7 @@ require "rails_helper"
 require "sidekiq/testing"
 
 module Providers
-  RSpec.describe UploadedEvidenceCollectionsController, type: :request do
+  RSpec.describe UploadedEvidenceCollectionsController do
     let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
     let(:provider) { legal_aid_application.provider }
     let(:i18n_error_path) { "activemodel.errors.models.uploaded_evidence_collection.attributes.original_file" }

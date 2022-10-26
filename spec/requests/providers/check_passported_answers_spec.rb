@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "check passported answers requests", type: :request do
+RSpec.describe "check passported answers requests" do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_passported_answers" do

@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Providers
   module ProceedingMeritsTask
-    RSpec.describe SuccessProspectsController, type: :request do
+    RSpec.describe SuccessProspectsController do
       let!(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014]) }
       let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }

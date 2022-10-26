@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::BankTransactionsController, type: :request do
+RSpec.describe Providers::BankTransactionsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 

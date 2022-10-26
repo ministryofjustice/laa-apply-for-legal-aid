@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ReportsUploaderJob, type: :job do
+RSpec.describe ReportsUploaderJob do
   let(:report_uploader) { described_class.new }
 
   describe "#expiration" do

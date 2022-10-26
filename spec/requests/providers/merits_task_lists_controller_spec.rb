@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeritsTaskListsController, type: :request do
+RSpec.describe Providers::MeritsTaskListsController do
   let(:login_provider) { login_as legal_aid_application.provider }
   let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
   let(:evidence_upload) { false }

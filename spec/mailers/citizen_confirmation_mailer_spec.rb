@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe CitizenConfirmationMailer, type: :mailer do
+RSpec.describe CitizenConfirmationMailer do
   let(:app_id) { SecureRandom.uuid }
   let(:email) { Faker::Internet.safe_email }
   let(:client_name) { Faker::Name.name }

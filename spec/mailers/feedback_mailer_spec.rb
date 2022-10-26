@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe FeedbackMailer, type: :mailer do
+RSpec.describe FeedbackMailer do
   describe "notify" do
     let(:feedback) { create(:feedback) }
     let(:application) { create(:application) }

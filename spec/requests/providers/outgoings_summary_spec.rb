@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::OutgoingsSummaryController, type: :request do
+RSpec.describe Providers::OutgoingsSummaryController do
   let(:transaction_type) { create(:transaction_type, :debit_with_standard_name) }
   let(:other_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
   let!(:legal_aid) { create(:transaction_type, :debit, name: "legal_aid") }

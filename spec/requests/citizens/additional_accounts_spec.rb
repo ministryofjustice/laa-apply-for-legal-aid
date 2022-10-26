@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "citizen additional accounts request test", type: :request do
+RSpec.describe "citizen additional accounts request test" do
   let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CheckProviderAnswersController, type: :request do
+RSpec.describe Providers::CheckProviderAnswersController do
   let(:used_delegated_functions_on) { nil }
   let(:address) { create(:address) }
   let(:applicant) { create(:applicant, address:) }

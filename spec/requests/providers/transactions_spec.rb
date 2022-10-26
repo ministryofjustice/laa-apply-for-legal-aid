@@ -1,7 +1,7 @@
 require "rails_helper"
 require Rails.root.join("spec/factories/cfe_results/state_benefit_types/mock_state_benefit_type_result")
 
-RSpec.describe Providers::TransactionsController, type: :request do
+RSpec.describe Providers::TransactionsController do
   include ActionView::Helpers::NumberHelper
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
   let(:applicant) { legal_aid_application.applicant }

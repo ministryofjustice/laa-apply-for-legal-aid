@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe IrregularIncome, type: :model do
+RSpec.describe IrregularIncome do
   let(:application) { create(:legal_aid_application) }
 
   before do

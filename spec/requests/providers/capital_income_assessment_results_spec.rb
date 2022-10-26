@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CapitalIncomeAssessmentResultsController, type: :request do
+RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
   include ActionView::Helpers::NumberHelper
   let(:login_provider) { login_as legal_aid_application.provider }
 

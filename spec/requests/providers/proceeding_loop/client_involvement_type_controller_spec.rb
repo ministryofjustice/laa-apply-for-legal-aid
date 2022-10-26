@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "ClientInvolvementTypeController", :vcr, type: :request do
+RSpec.describe "ClientInvolvementTypeController", :vcr do
   let(:application) { create(:legal_aid_application, :with_proceedings) }
   let(:application_id) { application.id }
   let(:proceeding_id) { application.proceedings.first.id }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "PATCH /v1/providers", type: :request do
+RSpec.describe "PATCH /v1/providers" do
   let(:provider) { create(:provider, cookies_enabled: nil) }
   let(:id) { provider.id }
   let(:action) { "" }

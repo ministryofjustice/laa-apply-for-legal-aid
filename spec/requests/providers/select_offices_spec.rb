@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "provider selects office", type: :request do
+RSpec.describe "provider selects office" do
   let(:firm) { create(:firm) }
   let!(:office1) { create(:office, firm:) }
   let!(:office2) { create(:office, firm:) }

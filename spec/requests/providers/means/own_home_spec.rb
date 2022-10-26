@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "provider own home requests", type: :request do
+RSpec.describe "provider own home requests" do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 

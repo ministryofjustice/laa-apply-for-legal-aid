@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Test::GenerateErrorController, type: :request do
+RSpec.describe Test::GenerateErrorController do
   describe "GET trapped_error" do
     it "calls the Alert Manager" do
       expect(AlertManager).to receive(:capture_exception)

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProceedingHelper, type: :helper do
+RSpec.describe ProceedingHelper do
   describe "#position_in_array" do
     subject(:array_position) { position_in_array(proceeding) }
 

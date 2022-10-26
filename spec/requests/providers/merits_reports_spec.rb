@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeritsReportsController, type: :request do
+RSpec.describe Providers::MeritsReportsController do
   let(:legal_aid_application) do
     create(:legal_aid_application,
            :with_proceedings,

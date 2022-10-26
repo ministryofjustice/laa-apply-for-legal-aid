@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe BankAccount, type: :model do
+RSpec.describe BankAccount do
   describe "#account_type_label" do
     let(:not_defined_account_type) { "LIFE_ISA" }
 

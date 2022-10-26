@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ApplicantsController, type: :request do
+RSpec.describe Providers::ApplicantsController do
   let(:office) { create(:office) }
   let(:provider) { create(:provider, selected_office: office) }
   let(:login) { login_as provider }

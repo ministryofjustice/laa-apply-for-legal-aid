@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
+RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
   let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
   let(:proceedings) { legal_aid_application.proceedings }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }

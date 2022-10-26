@@ -2,7 +2,7 @@ require "rails_helper"
 
 module CFE
   module V4
-    RSpec.describe Result, type: :model do
+    RSpec.describe Result do
       let(:eligible_result) { create(:cfe_v4_result) }
       let(:partially_eligible_result) { create(:cfe_v4_result, :partially_eligible) }
       let(:not_eligible_result) { create(:cfe_v4_result, :not_eligible) }

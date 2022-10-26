@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "GET /v1/legal_aid_applications", type: :request do
+RSpec.describe "GET /v1/legal_aid_applications" do
   let(:legal_aid_application) { create(:legal_aid_application, :with_everything, substantive_application_deadline_on: 1.day.ago) }
   let(:id) { legal_aid_application.id }
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
+RSpec.describe "POST /v1/uploaded_evidence_collections" do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
   let(:id) { legal_aid_application.id }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::EndOfApplicationsController, type: :request do
+RSpec.describe Providers::EndOfApplicationsController do
   let(:legal_aid_application) { create(:legal_aid_application, :assessment_submitted) }
   let(:login) { login_as legal_aid_application.provider }
 

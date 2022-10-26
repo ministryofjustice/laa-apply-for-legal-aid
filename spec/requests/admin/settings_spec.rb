@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Admin::SettingsController, type: :request do
+RSpec.describe Admin::SettingsController do
   let(:admin_user) { create(:admin_user) }
 
   before do

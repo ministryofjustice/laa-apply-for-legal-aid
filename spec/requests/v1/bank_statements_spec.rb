@@ -7,7 +7,7 @@ require "rails_helper"
 # are handled by the javascript in dropzone.js and never reach this
 # endpoint so are not tested here.
 #
-RSpec.describe "POST /v1/bank_statements", type: :request do
+RSpec.describe "POST /v1/bank_statements" do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }

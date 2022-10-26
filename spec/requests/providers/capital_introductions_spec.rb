@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CapitalIntroductionsController, type: :request do
+RSpec.describe Providers::CapitalIntroductionsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_applicant_details) }
   let(:provider) { legal_aid_application.provider }
 

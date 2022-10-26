@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SamlIdpController, type: :request do
+RSpec.describe SamlIdpController do
   describe "POST /saml/auth" do
     let(:saml_request) { encode_saml_request }
     let(:password) { "password" }

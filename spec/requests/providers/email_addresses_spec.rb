@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "update client email address before application confirmation", type: :request do
+RSpec.describe "update client email address before application confirmation" do
   let(:application) { create(:legal_aid_application) }
   let(:application_id) { application.id }
   let(:provider) { application.provider }

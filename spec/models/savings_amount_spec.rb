@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SavingsAmount, type: :model do
+RSpec.describe SavingsAmount do
   describe "#positive" do
     subject { create(:savings_amount) }
 

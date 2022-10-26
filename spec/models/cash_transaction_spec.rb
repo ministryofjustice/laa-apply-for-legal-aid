@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe CashTransaction, type: :model do
+RSpec.describe CashTransaction do
   let(:application1) { create(:legal_aid_application) }
   let(:application2) { create(:legal_aid_application) }
   let(:benefits) { create(:transaction_type, :benefits) }

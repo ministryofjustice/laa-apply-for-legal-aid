@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AttachmentsHelper, type: :helper do
+RSpec.describe AttachmentsHelper do
   let(:application) { create(:legal_aid_application) }
 
   describe "#attachments_with_size" do

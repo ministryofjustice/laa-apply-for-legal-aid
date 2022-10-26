@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Citizens::ContactProvidersController, type: :request do
+RSpec.describe Citizens::ContactProvidersController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
 
   describe "GET /citizens/contact_provider" do

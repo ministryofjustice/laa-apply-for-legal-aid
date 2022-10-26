@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
+RSpec.describe SubmitApplicationReminderMailer do
   let(:application) do
     create(:legal_aid_application,
            :with_applicant,

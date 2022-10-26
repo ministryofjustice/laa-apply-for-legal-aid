@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Address, type: :model do
+RSpec.describe Address do
   subject { build(:address) }
 
   it "is valid with all valid attributes" do

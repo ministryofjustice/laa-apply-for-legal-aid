@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::OpenBankingGuidancesController, type: :request do
+RSpec.describe Providers::OpenBankingGuidancesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :provider_confirming_applicant_eligibility) }
   let(:id) { legal_aid_application.id }
   let(:provider) { legal_aid_application.provider }

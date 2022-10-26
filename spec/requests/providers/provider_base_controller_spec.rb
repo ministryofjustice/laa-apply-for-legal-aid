@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Providers
-  RSpec.describe ProviderBaseController, type: :request do
+  RSpec.describe ProviderBaseController do
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:applicant) { legal_aid_application.applicant }
     let(:provider) { legal_aid_application.provider }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "sidekiq WEB UI", type: :request do
+RSpec.describe "sidekiq WEB UI" do
   describe "GET /sidekiq" do
     it "returns unauthorized status" do
       get sidekiq_web_path

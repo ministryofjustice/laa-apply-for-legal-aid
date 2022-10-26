@@ -1,7 +1,7 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe "FeedbacksController", type: :request do
+RSpec.describe "FeedbacksController" do
   describe "POST /feedback" do
     Rack::Attack.enabled = false
     subject { post feedback_index_path, params:, headers: { "HTTP_REFERER" => originating_page } }

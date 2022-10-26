@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeansSummariesController, type: :request do
+RSpec.describe Providers::MeansSummariesController do
   include ActionView::Helpers::NumberHelper
   let(:provider) { create(:provider) }
   let(:applicant) { create(:applicant) }

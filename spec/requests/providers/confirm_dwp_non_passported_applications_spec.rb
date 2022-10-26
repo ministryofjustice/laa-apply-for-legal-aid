@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController, type: :request do
+RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:application_id) { application.id }
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "citizen accounts request", type: :request do
+RSpec.describe "citizen accounts request" do
   include ActionView::Helpers::NumberHelper
 
   let!(:applicant) { create(:applicant) }

@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe ClientDenialOfAllegationsController, type: :request do
+    RSpec.describe ClientDenialOfAllegationsController do
       let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:login_provider) { login_as legal_aid_application.provider }
       let(:smtl) { create(:legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application:) }

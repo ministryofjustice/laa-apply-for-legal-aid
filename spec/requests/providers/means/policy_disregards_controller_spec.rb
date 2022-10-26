@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
+RSpec.describe Providers::Means::PolicyDisregardsController do
   let(:application) { create(:application, :with_applicant) }
   let(:policy) { application.create_policy_disregards! }
   let(:application_id) { application.id }

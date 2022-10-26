@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe RegularTransaction, type: :model do
+RSpec.describe RegularTransaction do
   describe "#validate" do
     context "when amount is blank" do
       it "is invalid" do

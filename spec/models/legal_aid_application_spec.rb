@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LegalAidApplication, type: :model do
+RSpec.describe LegalAidApplication do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "providers shared ownership request test", type: :request do
+RSpec.describe "providers shared ownership request test" do
   let!(:legal_aid_application) { create(:legal_aid_application, :with_own_home_mortgaged) }
 
   describe "GET #/providers/applications/:legal_aid_application_id/means/shared_ownership" do

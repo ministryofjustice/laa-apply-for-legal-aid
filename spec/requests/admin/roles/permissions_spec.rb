@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Admin::Roles::PermissionsController, type: :request do
+RSpec.describe Admin::Roles::PermissionsController do
   let(:admin_user) { create(:admin_user) }
   let!(:firm) { create(:firm, :with_passported_permissions, name: "McKenzie, Brackman, Chaney and Kuzak") }
 

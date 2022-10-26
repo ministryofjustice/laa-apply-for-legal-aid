@@ -10,7 +10,7 @@ RSpec.shared_context "with credit and debit transaction types" do
   end
 end
 
-RSpec.describe TransactionType, type: :model do
+RSpec.describe TransactionType do
   describe ".all" do
     subject(:all) { described_class.all }
 

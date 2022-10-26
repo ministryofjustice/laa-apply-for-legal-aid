@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "accessibility statement page", type: :request do
+RSpec.describe "accessibility statement page" do
   describe "GET /accessibility_statement" do
     it "returns renders successfully" do
       get accessibility_statement_index_path

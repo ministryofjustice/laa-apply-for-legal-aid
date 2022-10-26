@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "about financial assessments requests", type: :request do
+RSpec.describe "about financial assessments requests" do
   let(:application) { create(:legal_aid_application, :with_applicant) }
 
   describe "GET /providers/applications/:legal_aid_application_id/about_the_financial_assessment" do

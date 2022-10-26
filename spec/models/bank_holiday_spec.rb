@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe BankHoliday, type: :model, vcr: { cassette_name: "gov_uk_bank_holiday_api", allow_playback_repeats: true } do
+RSpec.describe BankHoliday, vcr: { cassette_name: "gov_uk_bank_holiday_api", allow_playback_repeats: true } do
   let(:api_dates) { BankHolidayRetriever.dates }
   let!(:bank_holiday) { create(:bank_holiday) }
 

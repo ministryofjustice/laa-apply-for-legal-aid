@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "does client use online banking requests", type: :request do
+RSpec.describe "does client use online banking requests" do
   let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:) }
   let(:application_id) { application.id }
   let(:provider) { application.provider }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Vehicle, type: :model do
+RSpec.describe Vehicle do
   describe "#purchased_on" do
     let(:vehicle) { create(:vehicle, purchased_on:, more_than_three_years_old:) }
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::SubmittedApplicationsController, type: :request do
+RSpec.describe Providers::SubmittedApplicationsController do
   include ActionView::Helpers::NumberHelper
   let(:firm) { create(:firm) }
   let!(:provider) { create(:provider, firm:) }

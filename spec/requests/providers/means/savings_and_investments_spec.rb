@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "providers savings and investments", type: :request do
+RSpec.describe "providers savings and investments" do
   let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount) }
   let(:savings_amount) { application.savings_amount }
 

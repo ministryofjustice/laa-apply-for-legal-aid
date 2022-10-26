@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::CashIncomesController, type: :request do
+RSpec.describe Providers::Means::CashIncomesController do
   before do
     create(:transaction_type, :benefits)
     legal_aid_application.set_transaction_period

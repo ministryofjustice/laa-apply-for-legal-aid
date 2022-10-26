@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
+RSpec.describe Providers::ConfirmClientDeclarationsController do
   let(:application) { create(:legal_aid_application) }
   let(:provider) { application.provider }
 

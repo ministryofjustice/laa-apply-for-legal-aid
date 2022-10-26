@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
+RSpec.describe Providers::ProceedingsTypesController, :vcr do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
   let(:provider) { legal_aid_application.provider }
 

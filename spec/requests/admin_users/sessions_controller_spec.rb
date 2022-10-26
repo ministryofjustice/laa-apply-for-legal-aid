@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AdminUsers::SessionsController, type: :request do
+RSpec.describe AdminUsers::SessionsController do
   describe "GET admin_users/sessions#new" do
     let(:subject) { get new_admin_user_session_path }
 

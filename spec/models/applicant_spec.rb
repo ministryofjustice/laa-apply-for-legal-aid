@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Applicant, type: :model do
+RSpec.describe Applicant do
   describe "on validation" do
     subject { described_class.new }
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe EmailMonitorJob, type: :job do
+RSpec.describe EmailMonitorJob do
   describe "perform" do
     let!(:waiting) { create(:scheduled_mailing, :due) }
     let!(:created) { create(:scheduled_mailing, :created) }

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Admin
-  RSpec.describe ProvidersController, type: :request do
+  RSpec.describe ProvidersController do
     let(:admin_user) { create(:admin_user) }
 
     before { sign_in admin_user }

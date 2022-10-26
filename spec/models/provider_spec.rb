@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Provider, type: :model do
+RSpec.describe Provider do
   let(:firm) { create(:firm) }
   let(:provider) { create(:provider, firm:) }
 

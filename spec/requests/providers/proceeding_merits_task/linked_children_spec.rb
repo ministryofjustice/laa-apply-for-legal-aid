@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Providers
   module ProceedingMeritsTask
-    RSpec.describe LinkedChildrenController, type: :request do
+    RSpec.describe LinkedChildrenController do
       let!(:legal_aid_application) do
         create(:legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se014], set_lead_proceeding: :da001)
       end

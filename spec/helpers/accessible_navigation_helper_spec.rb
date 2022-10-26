@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AccessibleNavigationHelper, type: :helper do
+RSpec.describe AccessibleNavigationHelper do
   describe "#link_to_accessible" do
     let(:name) { "Start now" }
     let(:path) { "test_path" }

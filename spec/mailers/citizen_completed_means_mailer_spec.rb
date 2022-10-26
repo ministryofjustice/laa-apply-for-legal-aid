@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe CitizenCompletedMeansMailer, type: :mailer do
+RSpec.describe CitizenCompletedMeansMailer do
   let(:application) { create(:legal_aid_application, :with_everything) }
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }

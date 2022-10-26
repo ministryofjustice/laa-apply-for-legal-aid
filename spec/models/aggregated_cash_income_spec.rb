@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AggregatedCashIncome, type: :model do
+RSpec.describe AggregatedCashIncome do
   let(:aci) { described_class.new(legal_aid_application_id: application.id) }
   let(:application) { create(:legal_aid_application, :with_proceedings) }
   let(:categories) { %i[benefits maintenance_in] }

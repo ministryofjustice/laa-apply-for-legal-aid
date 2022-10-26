@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "security text page", type: :request do
+RSpec.describe "security text page" do
   describe "GET /.well-known/security.txt" do
     it "redirects successfully" do
       get "/.well-known/security.txt"

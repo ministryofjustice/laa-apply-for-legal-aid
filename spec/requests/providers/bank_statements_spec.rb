@@ -4,7 +4,7 @@ require "rails_helper"
 # 1. see v1/bank_statements_controller for requests that would come from dropzone/ajax
 # 2. see cucumber features for full JS enabled integration tests.
 #
-RSpec.describe "Providers::BankStatementsController", type: :request do
+RSpec.describe "Providers::BankStatementsController" do
   include Capybara::RSpecMatchers
 
   let(:legal_aid_application) { create(:legal_aid_application, :provider_confirming_applicant_eligibility, attachments:) }

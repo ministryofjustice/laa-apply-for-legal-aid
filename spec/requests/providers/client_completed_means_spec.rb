@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ClientCompletedMeansController, type: :request do
+RSpec.describe Providers::ClientCompletedMeansController do
   let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
   let(:applicant) { create(:applicant, :employed) }
   let(:provider) { legal_aid_application.provider }

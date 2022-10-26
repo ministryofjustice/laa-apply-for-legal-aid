@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::LimitationsController, type: :request do
+RSpec.describe Providers::LimitationsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, set_lead_proceeding: :da001) }
   let(:provider) { legal_aid_application.provider }
 

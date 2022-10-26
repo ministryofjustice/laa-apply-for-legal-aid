@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ProvidersController, type: :request do
+RSpec.describe Providers::ProvidersController do
   subject { get providers_provider_path }
 
   let(:provider) { create(:provider) }

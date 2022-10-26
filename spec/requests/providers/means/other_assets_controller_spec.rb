@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "provider other assets requests", type: :request do
+RSpec.describe "provider other assets requests" do
   let(:application) { create(:application, :with_applicant) }
   let(:oad) { application.create_other_assets_declaration! }
   let(:application_id) { application.id }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CheckBenefitsController, type: :request do
+RSpec.describe Providers::CheckBenefitsController do
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }

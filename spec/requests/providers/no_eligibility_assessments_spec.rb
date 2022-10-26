@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request do
+RSpec.describe "Providers::NoEligibilityAssessmentsController" do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/no_eligibility_assessments" do

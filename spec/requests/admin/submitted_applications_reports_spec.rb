@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Admin::SubmittedApplicationsReportsController, type: :request do
+RSpec.describe Admin::SubmittedApplicationsReportsController do
   let(:count) { 3 }
   let!(:legal_aid_applications) { create_list(:legal_aid_application, count, :with_applicant, :with_ccms_submission, :submitted_to_ccms) }
   let!(:unsubmitted_application) { create(:legal_aid_application, :with_applicant) }

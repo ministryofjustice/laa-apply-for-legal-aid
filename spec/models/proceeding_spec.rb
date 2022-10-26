@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Proceeding, type: :model do
+RSpec.describe Proceeding do
   let(:matter_code) { "KSEC8" }
   let(:df_used) { nil }
   let(:df_date) { nil }

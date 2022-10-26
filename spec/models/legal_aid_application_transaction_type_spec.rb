@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LegalAidApplicationTransactionType, type: :model do
+RSpec.describe LegalAidApplicationTransactionType do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:credit_transaction_type) { create(:transaction_type, :credit_with_standard_name) }
   let(:debit_transaction_type) { create(:transaction_type, :debit_with_standard_name) }

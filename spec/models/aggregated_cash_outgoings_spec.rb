@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AggregatedCashOutgoings, type: :model do
+RSpec.describe AggregatedCashOutgoings do
   let(:aco) { described_class.new(legal_aid_application_id: application.id) }
   let(:application) { create(:legal_aid_application) }
   let(:categories) { %i[rent_or_mortgage maintenance_out] }
