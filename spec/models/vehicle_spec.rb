@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Vehicle, type: :model do
   describe "#purchased_on" do
-    let(:vehicle) { create :vehicle, purchased_on:, more_than_three_years_old: }
+    let(:vehicle) { create(:vehicle, purchased_on:, more_than_three_years_old:) }
 
     context "when purchased_on is populated" do
       let(:purchased_on) { 6.months.ago.to_date }

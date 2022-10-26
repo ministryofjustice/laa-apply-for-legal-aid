@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
-  let(:application) { create :application, :with_applicant }
+  let(:application) { create(:application, :with_applicant) }
   let(:policy) { application.create_policy_disregards! }
   let(:application_id) { application.id }
   let(:provider) { application.provider }
@@ -75,7 +75,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
         end
 
         context "with provider checking their answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
           it "redirects to check passported answers" do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
@@ -83,7 +83,7 @@ RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
         end
 
         context "with provider checking citizen's answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
           it "redirects to means summary page" do
             subject
@@ -93,8 +93,8 @@ RSpec.describe Providers::Means::PolicyDisregardsController, type: :request do
       end
 
       context "with nothing" do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:policy) { create :policy_disregards, legal_aid_application: application }
+        let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+        let(:policy) { create(:policy_disregards, legal_aid_application: application) }
         let(:none_selected) { "true" }
         let(:empty_params) do
           {

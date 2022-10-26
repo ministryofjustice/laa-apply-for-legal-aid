@@ -4,7 +4,7 @@ RSpec.describe Addresses::AddressLookupForm, type: :form do
   subject(:form) { described_class.new(params) }
 
   let(:postcode) { "SW1H9AJ" }
-  let(:address) { build :address }
+  let(:address) { build(:address) }
   let(:params) { { postcode:, model: address } }
 
   describe "validations" do

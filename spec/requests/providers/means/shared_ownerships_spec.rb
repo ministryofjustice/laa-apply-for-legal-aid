@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "providers shared ownership request test", type: :request do
-  let!(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
+  let!(:legal_aid_application) { create(:legal_aid_application, :with_own_home_mortgaged) }
 
   describe "GET #/providers/applications/:legal_aid_application_id/means/shared_ownership" do
     subject { get providers_legal_aid_application_means_shared_ownership_path(legal_aid_application) }
@@ -95,7 +95,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           context "while checking answers" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the next step in flow" do
               subject
@@ -124,7 +124,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           context "while checking answers" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
             it "redirects to check answers page" do
               subject
@@ -171,7 +171,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           context "while checking answers" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
               subject
@@ -199,7 +199,7 @@ RSpec.describe "providers shared ownership request test", type: :request do
           end
 
           context "while checking answers" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_passported_answers }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_passported_answers) }
 
             it "redirects to the applications list page" do
               subject

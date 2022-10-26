@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :request, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
   let(:proceedings) { legal_aid_application.proceedings }
   let(:proceedings_by_name) { legal_aid_application.proceedings_by_name }
   let(:login_provider) { login_as legal_aid_application.provider }
@@ -54,11 +54,11 @@ RSpec.describe Providers::UsedMultipleDelegatedFunctionsController, type: :reque
 
   describe "PATCH /providers/applications/:legal_aid_application_id/used_multiple_delegated_functions" do
     let!(:legal_aid_application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_proceedings,
              :with_delegated_functions_on_proceedings,
              proceeding_count: 2,
-             df_options: { DA001: Time.zone.today, DA004: Time.zone.today }
+             df_options: { DA001: Time.zone.today, DA004: Time.zone.today })
     end
     let(:today) { Time.zone.today }
     let(:used_delegated_functions_on) { rand(19).days.ago.to_date }

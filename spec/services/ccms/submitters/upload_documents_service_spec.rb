@@ -4,7 +4,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
   subject { described_class.new(submission) }
 
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_applicant,
            :with_proceedings,
            :with_opponent,
@@ -12,28 +12,28 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
            :with_means_report,
            :with_merits_report,
            :with_bank_transaction_report,
-           :submitting_assessment
+           :submitting_assessment)
   end
-  let!(:proceeding) { create :proceeding, :da001, legal_aid_application: }
-  let!(:chances_of_success) { create :chances_of_success, proceeding: }
-  let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application: }
+  let!(:proceeding) { create(:proceeding, :da001, legal_aid_application:) }
+  let!(:chances_of_success) { create(:chances_of_success, proceeding:) }
+  let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }
   let(:statement_of_case_attachment) { statement_of_case.original_attachments.first }
   let(:means_report_attachment) { legal_aid_application.means_report }
   let(:merits_report_attachment) { legal_aid_application.merits_report }
   let(:bank_transaction_report_attachment) { legal_aid_application.bank_transaction_report }
-  let!(:statement_of_case_submission_document) { create :submission_document, :id_obtained, submission:, attachment_id: statement_of_case_attachment.id }
-  let!(:means_report_document) { create :submission_document, :id_obtained, submission:, document_type: :means_report, attachment_id: means_report_attachment.id }
-  let!(:merits_report_document) { create :submission_document, :id_obtained, submission:, document_type: :merits_report, attachment_id: merits_report_attachment.id }
+  let!(:statement_of_case_submission_document) { create(:submission_document, :id_obtained, submission:, attachment_id: statement_of_case_attachment.id) }
+  let!(:means_report_document) { create(:submission_document, :id_obtained, submission:, document_type: :means_report, attachment_id: means_report_attachment.id) }
+  let!(:merits_report_document) { create(:submission_document, :id_obtained, submission:, document_type: :merits_report, attachment_id: merits_report_attachment.id) }
   let!(:bank_transaction_report_document) do
-    create :submission_document, :id_obtained, submission:, document_type: :bank_transaction_report, attachment_id: bank_transaction_report_attachment.id
+    create(:submission_document, :id_obtained, submission:, document_type: :bank_transaction_report, attachment_id: bank_transaction_report_attachment.id)
   end
   let(:expected_response) { ccms_data_from_file "case_add_status_response.xml" }
 
   let(:submission) do
-    create :submission,
+    create(:submission,
            :case_created,
            legal_aid_application:,
-           case_ccms_reference: Faker::Number.number(digits: 9)
+           case_ccms_reference: Faker::Number.number(digits: 9))
   end
 
   let(:histories) { CCMS::SubmissionHistory.order(:created_at).where(submission_id: submission.id) }

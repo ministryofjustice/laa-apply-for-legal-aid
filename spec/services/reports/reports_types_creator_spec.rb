@@ -1,22 +1,22 @@
 require "rails_helper"
 
 RSpec.describe Reports::ReportsTypesCreator do
-  let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: }
+  let(:firm) { create(:firm) }
+  let(:provider) { create(:provider, firm:) }
   let!(:application_non_passported) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_everything,
            :at_assessment_submitted,
            :with_negative_benefit_check_result,
            :with_ccms_submission_completed,
-           provider:
+           provider:)
   end
   let!(:application_passported) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_everything,
            :at_assessment_submitted,
            :with_positive_benefit_check_result,
-           provider:
+           provider:)
   end
 
   let(:report) { described_class.call(params) }

@@ -5,7 +5,7 @@ RSpec.describe LegalAidApplications::SubstantiveApplicationForm, type: :form do
 
   let(:used_delegated_functions_on) { 1.day.ago.to_date }
   let(:application) do
-    create :legal_aid_application, :applicant_details_checked
+    create(:legal_aid_application, :applicant_details_checked)
   end
   let(:substantive_application) { false }
   let(:params) do

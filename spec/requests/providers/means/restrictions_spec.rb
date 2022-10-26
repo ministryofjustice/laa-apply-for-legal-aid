@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "provider restrictions request", type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
+  let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine) }
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:id/means/restrictions" do
@@ -60,7 +60,7 @@ RSpec.describe "provider restrictions request", type: :request do
         context "when the citizen has completed the non-passported path" do
           context "and the calculation date is after the start date" do
             let(:application) do
-              create :legal_aid_application,
+              create(:legal_aid_application,
                      :with_applicant,
                      :non_passported,
                      :with_non_passported_state_machine,
@@ -68,7 +68,7 @@ RSpec.describe "provider restrictions request", type: :request do
                      :with_proceedings,
                      :with_delegated_functions_on_proceedings,
                      explicit_proceedings: [:da004],
-                     df_options: { DA004: [1.day.ago, Date.new(2021, 1, 9)] }
+                     df_options: { DA004: [1.day.ago, Date.new(2021, 1, 9)] })
             end
 
             it "redirects to policy disregards" do
@@ -78,7 +78,7 @@ RSpec.describe "provider restrictions request", type: :request do
 
           context "and the calculation date is before the start date" do
             let(:application) do
-              create :legal_aid_application,
+              create(:legal_aid_application,
                      :with_applicant,
                      :non_passported,
                      :with_non_passported_state_machine,
@@ -86,7 +86,7 @@ RSpec.describe "provider restrictions request", type: :request do
                      :with_proceedings,
                      :with_delegated_functions_on_proceedings,
                      explicit_proceedings: [:da004],
-                     df_options: { DA004: [Date.new(2020, 12, 19), Date.new(2020, 12, 19)] }
+                     df_options: { DA004: [Date.new(2020, 12, 19), Date.new(2020, 12, 19)] })
             end
 
             it "redirects to check passported answers" do
@@ -96,7 +96,7 @@ RSpec.describe "provider restrictions request", type: :request do
         end
 
         context "provider on passported route" do
-          let(:application) { create :legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :checking_passported_answers }
+          let(:application) { create(:legal_aid_application, :with_applicant, :passported, :with_passported_state_machine, :checking_passported_answers) }
 
           it "redirects to check passported answers" do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path(application))
@@ -120,7 +120,7 @@ RSpec.describe "provider restrictions request", type: :request do
         end
 
         context "provider checking their answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :checking_passported_answers) }
 
           it "redirects to check passported answers" do
             expect(response).to redirect_to(providers_legal_aid_application_check_passported_answers_path)
@@ -128,7 +128,7 @@ RSpec.describe "provider restrictions request", type: :request do
         end
 
         context "provider checking citizen's answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
           it "redirects to means summary page" do
             subject

@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe PopulateUploadFormService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:params) { nil }
     let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }
     let(:required_document_categories) { %w[gateway_evidence employment_evidence] }

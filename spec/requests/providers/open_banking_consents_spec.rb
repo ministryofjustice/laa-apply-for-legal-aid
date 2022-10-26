@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "does client use online banking requests", type: :request do
-  let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant: }
+  let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :applicant_details_checked, applicant:) }
   let(:application_id) { application.id }
   let(:provider) { application.provider }
-  let(:applicant) { create :applicant }
+  let(:applicant) { create(:applicant) }
 
   describe "GET /providers/applications/:legal_aid_application_id/applicant" do
     subject(:request) { get "/providers/applications/#{application_id}/does-client-use-online-banking" }
@@ -30,7 +30,7 @@ RSpec.describe "does client use online banking requests", type: :request do
       end
 
       context "when the application is in use_ccms state" do
-        let(:application) { create :legal_aid_application, :with_non_passported_state_machine, :use_ccms }
+        let(:application) { create(:legal_aid_application, :with_non_passported_state_machine, :use_ccms) }
 
         it "resets the state to provider_confirming_applicant_eligibility" do
           expect(application.reload.state).to eq "provider_confirming_applicant_eligibility"

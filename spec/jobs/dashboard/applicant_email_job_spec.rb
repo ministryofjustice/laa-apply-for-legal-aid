@@ -5,7 +5,7 @@ module Dashboard
     describe ".perform" do
       subject { described_class.perform_now(application) }
 
-      let(:application) { create :legal_aid_application, :with_applicant }
+      let(:application) { create(:legal_aid_application, :with_applicant) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
 
       let(:geckoboard_client) { double Geckoboard::Client }
@@ -38,8 +38,8 @@ module Dashboard
         end
 
         context "when job is sending email to an Apply team email" do
-          let(:applicant) { create :applicant, email: Rails.configuration.x.email_domain.suffix }
-          let(:application) { create :legal_aid_application, applicant: }
+          let(:applicant) { create(:applicant, email: Rails.configuration.x.email_domain.suffix) }
+          let(:application) { create(:legal_aid_application, applicant:) }
 
           before { allow(HostEnv).to receive(:environment).and_return(:production) }
 

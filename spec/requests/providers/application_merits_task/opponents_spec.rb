@@ -3,9 +3,9 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe OpponentsController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:login_provider) { login_as legal_aid_application.provider }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
+      let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
       let(:proceeding) { laa.proceedings.detect { |p| p.ccms_code == "SE014" } }
 
       describe "GET /providers/applications/:legal_aid_application_id/opponent" do
@@ -28,8 +28,8 @@ module Providers
         end
 
         context "with an existing opponent" do
-          let(:opponent) { create :opponent }
-          let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], opponent: }
+          let(:opponent) { create(:opponent) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014], opponent:) }
 
           it "renders successfully" do
             expect(response).to have_http_status(:ok)
@@ -53,7 +53,7 @@ module Providers
           )
         end
 
-        let(:sample_opponent) { build :opponent, :police_notified_true }
+        let(:sample_opponent) { build(:opponent, :police_notified_true) }
         let(:full_name) { Faker::Name.name }
         let(:params) do
           {
@@ -126,7 +126,7 @@ module Providers
 
         context "when attributes have trailing whitespaces" do
           let(:full_name) { "   John   Doe  " }
-          let(:sample_opponent) { build :opponent, :police_notified_true, warning_letter_sent_details: "  extra    space  " }
+          let(:sample_opponent) { build(:opponent, :police_notified_true, warning_letter_sent_details: "  extra    space  ") }
 
           context "with fullname" do
             it "removes excess whitespaces" do

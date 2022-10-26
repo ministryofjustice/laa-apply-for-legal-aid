@@ -43,7 +43,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
     end
 
     context "when AdminReport record already exists" do
-      before { create :admin_report, :with_reports_attached }
+      before { create(:admin_report, :with_reports_attached) }
 
       it "does not create another record" do
         expect { report_uploader.perform }.not_to change(AdminReport, :count)

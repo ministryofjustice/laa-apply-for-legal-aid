@@ -2,20 +2,20 @@ require "rails_helper"
 
 RSpec.describe "check your answers requests", type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: }
-  let(:credit) { create :transaction_type, :credit_with_standard_name }
-  let(:debit) { create :transaction_type, :debit_with_standard_name }
+  let(:firm) { create(:firm) }
+  let(:provider) { create(:provider, firm:) }
+  let(:credit) { create(:transaction_type, :credit_with_standard_name) }
+  let(:debit) { create(:transaction_type, :debit_with_standard_name) }
   let!(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_non_passported_state_machine,
            :applicant_entering_means,
            :with_everything,
-           provider:
+           provider:)
   end
   let!(:application_transaction_types) do
-    create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: credit
-    create :legal_aid_application_transaction_type, legal_aid_application:, transaction_type: debit
+    create(:legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: credit)
+    create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: debit)
   end
 
   let(:has_restrictions) { true }
@@ -47,7 +47,7 @@ RSpec.describe "check your answers requests", type: :request do
     end
 
     context "with firms with special characters in the name" do
-      let(:firm) { create :firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!") }
+      let(:firm) { create(:firm, name: %q(O'Keefe & Sons - "Pay less with  <The master builders>!")) }
 
       it "finds the firm even though it has special characters" do
         subject

@@ -2,20 +2,20 @@ require "rails_helper"
 
 RSpec.describe Providers::SubmittedApplicationsController, type: :request do
   include ActionView::Helpers::NumberHelper
-  let(:firm) { create :firm }
-  let!(:provider) { create :provider, firm: }
+  let(:firm) { create(:firm) }
+  let!(:provider) { create(:provider, firm:) }
   let!(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_everything,
            :with_proceedings,
            :assessment_submitted,
            set_lead_proceeding: :da001,
-           provider:
+           provider:)
   end
   let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
   let!(:chances_of_success) do
-    create :chances_of_success,
-           proceeding:
+    create(:chances_of_success,
+           proceeding:)
   end
 
   let(:login) { login_as legal_aid_application.provider }
@@ -78,19 +78,19 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
 
-    let(:firm) { create :firm }
-    let!(:provider) { create :provider, firm: }
+    let(:firm) { create(:firm) }
+    let!(:provider) { create(:provider, firm:) }
     let!(:legal_aid_application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
              :assessment_submitted,
              set_lead_proceeding: :da001,
-             provider:
+             provider:)
     end
     let(:login) { login_as legal_aid_application.provider }
-    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
-    let!(:cfe_result) { create :cfe_v4_result, :with_employments, submission: cfe_submission }
+    let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
+    let!(:cfe_result) { create(:cfe_v4_result, :with_employments, submission: cfe_submission) }
     let(:translation_path) { "shared.employment_income_table" }
 
     shared_examples "employment data is not present" do
@@ -150,13 +150,13 @@ RSpec.describe Providers::SubmittedApplicationsController, type: :request do
     end
 
     context "when employment data is not present" do
-      let(:cfe_result) { create :cfe_v4_result, :with_no_employments, submission: cfe_submission }
+      let(:cfe_result) { create(:cfe_v4_result, :with_no_employments, submission: cfe_submission) }
 
       it_behaves_like "employment data is not present"
     end
 
     context "when application has an older CFE Result version object" do
-      let(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+      let(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
       it_behaves_like "employment data is not present"
     end

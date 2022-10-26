@@ -8,14 +8,14 @@ RSpec.describe "check merits answers requests", type: :request do
     subject { get "/providers/applications/#{application.id}/check_merits_answers" }
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
              :with_chances_of_success,
              :with_attempts_to_settle,
              :with_involved_children,
              :provider_entering_merits,
-             proceeding_count: 3
+             proceeding_count: 3)
     end
 
     context "unauthenticated" do
@@ -120,10 +120,10 @@ RSpec.describe "check merits answers requests", type: :request do
     end
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
-             :checking_merits_answers
+             :checking_merits_answers)
     end
     let(:params) { {} }
 
@@ -155,16 +155,16 @@ RSpec.describe "check merits answers requests", type: :request do
     subject { patch "/providers/applications/#{application.id}/check_merits_answers/reset" }
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
              :checking_merits_answers,
-             explicit_proceedings: %i[da004]
+             explicit_proceedings: %i[da004])
     end
     let(:da004) { application.proceedings.find_by(ccms_code: "DA004") }
 
     let!(:chances_of_success) do
-      create :chances_of_success, :with_optional_text, proceeding: da004
+      create(:chances_of_success, :with_optional_text, proceeding: da004)
     end
 
     context "unauthenticated" do

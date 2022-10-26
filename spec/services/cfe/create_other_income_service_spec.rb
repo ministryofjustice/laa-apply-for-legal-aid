@@ -2,10 +2,10 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateOtherIncomeService do
-    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :with_applicant }
-    let(:bank_provider) { create :bank_provider, applicant: application.applicant }
-    let(:bank_account) { create :bank_account, bank_provider: }
-    let(:submission) { create :cfe_submission, aasm_state: "state_benefits_created", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_applicant) }
+    let(:bank_provider) { create(:bank_provider, applicant: application.applicant) }
+    let(:bank_account) { create(:bank_account, bank_provider:) }
+    let(:submission) { create(:cfe_submission, aasm_state: "state_benefits_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
     let(:today) { Time.zone.today.strftime("%Y-%m-%d") }
@@ -148,9 +148,9 @@ module CFE
 
     def create_non_other_income_bank_transactions
       Populators::TransactionTypePopulator.call
-      create :bank_transaction, :benefits, bank_account: bank_account
-      create :bank_transaction, :child_care, bank_account: bank_account
-      create :bank_transaction, :rent_or_mortgage, bank_account:
+      create(:bank_transaction, :benefits, bank_account: bank_account)
+      create(:bank_transaction, :child_care, bank_account: bank_account)
+      create(:bank_transaction, :rent_or_mortgage, bank_account:)
     end
 
     def create_other_income_bank_transactions
@@ -163,7 +163,7 @@ module CFE
 
     def create_series_of_bank_transaction(trait, bank_account, amounts)
       amounts.each_with_index do |amount, index|
-        create :bank_transaction, trait, bank_account:, amount:, happened_at: index.weeks.ago
+        create(:bank_transaction, trait, bank_account:, amount:, happened_at: index.weeks.ago)
       end
     end
   end

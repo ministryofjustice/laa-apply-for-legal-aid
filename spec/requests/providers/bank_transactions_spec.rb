@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::BankTransactionsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 
   describe "PATCH providers/bank_transactions/:id/remove_transaction_type" do
@@ -9,10 +9,10 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
       patch remove_transaction_type_providers_legal_aid_application_bank_transaction_path(legal_aid_application, bank_transaction)
     end
 
-    let!(:transaction_type) { create :transaction_type }
-    let(:bank_provider) { create :bank_provider, applicant: legal_aid_application.applicant }
-    let(:bank_account) { create :bank_account, bank_provider: }
-    let(:bank_transaction) { create :bank_transaction, bank_account:, transaction_type: }
+    let!(:transaction_type) { create(:transaction_type) }
+    let(:bank_provider) { create(:bank_provider, applicant: legal_aid_application.applicant) }
+    let(:bank_account) { create(:bank_account, bank_provider:) }
+    let(:bank_transaction) { create(:bank_transaction, bank_account:, transaction_type:) }
     let(:login) { login_as provider }
 
     before { login }
@@ -48,7 +48,7 @@ RSpec.describe Providers::BankTransactionsController, type: :request do
     end
 
     context "when bank_transaction does not belong to this application" do
-      let(:bank_account) { create :bank_account }
+      let(:bank_account) { create(:bank_account) }
 
       it "does not remove the assocation with the transaction type" do
         expect { subject }.not_to change { bank_transaction.reload.transaction_type }

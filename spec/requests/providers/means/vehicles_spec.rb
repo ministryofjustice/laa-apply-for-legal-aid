@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::VehiclesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
@@ -75,7 +75,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
       end
 
       context "and exiting vehicle" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle) }
 
         it "does not create a vehicle" do
           expect { subject }.not_to change(Vehicle, :count)
@@ -88,7 +88,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
       end
 
       context "while checking answers" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :checking_passported_answers }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to next page" do
           subject
@@ -117,7 +117,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
       end
 
       context "and existing vehicle" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_vehicle, :passported }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle, :passported) }
 
         it "delete existing vehicle" do
           expect { subject }.to change(Vehicle, :count).by(-1)
@@ -130,7 +130,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
       end
 
       context "while checking answers" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_non_passported_means) }
 
         it "redirects to non-passported check answers page" do
           subject
@@ -139,7 +139,7 @@ RSpec.describe Providers::Means::VehiclesController, type: :request do
       end
 
       context "while checking passported answers" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_passported_state_machine, :checking_passported_answers }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_passported_state_machine, :checking_passported_answers) }
 
         it "redirects to passported check answers page" do
           subject

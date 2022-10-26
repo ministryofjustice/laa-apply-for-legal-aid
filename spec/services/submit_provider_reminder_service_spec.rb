@@ -5,8 +5,8 @@ RSpec.describe SubmitProviderReminderService, :vcr do
   subject { described_class.new(application) }
 
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
-  let(:provider) { create :provider, email: simulated_email_address }
-  let(:application) { create :application, :with_applicant, provider: }
+  let(:provider) { create(:provider, email: simulated_email_address) }
+  let(:application) { create(:application, :with_applicant, provider:) }
   let(:application_url) { "http://test.com" }
 
   describe "#send_email" do

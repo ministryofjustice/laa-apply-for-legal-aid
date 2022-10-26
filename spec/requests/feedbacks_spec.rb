@@ -9,7 +9,7 @@ RSpec.describe "FeedbacksController", type: :request do
     let(:params) { { feedback: attributes_for(:feedback) } }
     let(:feedback) { Feedback.order(created_at: :asc).last }
     let(:feedback_params) { params[:feedback] }
-    let(:provider) { create :provider }
+    let(:provider) { create(:provider) }
     let(:session_vars) do
       {
         "page_history_id" => page_history_id,
@@ -18,8 +18,8 @@ RSpec.describe "FeedbacksController", type: :request do
     let(:address_lookup_page) { "http://localhost:3000/providers/applications/#{application.id}/address_lookup" }
     let(:additional_accounts_page) { "http://localhost:3000/citizens/additional_accounts" }
     let(:originating_page) { "page_outside_apply_service" }
-    let(:provider) { create :provider }
-    let(:application) { create :application, provider: }
+    let(:provider) { create(:provider) }
+    let(:application) { create(:application, provider:) }
     let(:page_history_id) { SecureRandom.uuid }
     let(:page_history) { [address_lookup_page, "/feedback"] }
 
@@ -191,7 +191,7 @@ RSpec.describe "FeedbacksController", type: :request do
     end
 
     context "when submitting feedback using link in submission email" do
-      let(:application) { create :legal_aid_application }
+      let(:application) { create(:legal_aid_application) }
       let(:params) { { feedback: attributes_for(:feedback), application_id: application.id, submission_feedback: "true" } }
 
       it "adds signed-out submission_feedback specific attributes" do
@@ -267,7 +267,7 @@ RSpec.describe "FeedbacksController", type: :request do
     end
 
     context "with provider signed out" do
-      let(:provider) { create :provider }
+      let(:provider) { create(:provider) }
 
       before do
         sign_in provider
@@ -287,7 +287,7 @@ RSpec.describe "FeedbacksController", type: :request do
 
   describe "GET /submission_feedback/:application_ref" do
     let(:session_vars) { {} }
-    let(:application) { create :legal_aid_application }
+    let(:application) { create(:legal_aid_application) }
 
     before do
       get "/submission_feedback/#{application.application_ref}"
@@ -319,8 +319,8 @@ RSpec.describe "FeedbacksController", type: :request do
   end
 
   describe "GET /feedback/:id" do
-    let(:feedback) { create :feedback }
-    let(:provider) { create :provider }
+    let(:feedback) { create(:feedback) }
+    let(:provider) { create(:provider) }
 
     before do
       sign_in provider

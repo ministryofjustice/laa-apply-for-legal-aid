@@ -36,8 +36,8 @@ module FactoryHelpers
   private
 
     def create_employment_records
-      FactoryBot.create :employment, :with_irregularities, legal_aid_application: @laa
-      FactoryBot.create :employment, legal_aid_application: @laa
+      FactoryBot.create(:employment, :with_irregularities, legal_aid_application: @laa)
+      FactoryBot.create(:employment, legal_aid_application: @laa)
     end
   end
 end

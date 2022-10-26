@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Flow::MeritsLoop do
   subject(:merits_loop) { described_class.new(legal_aid_application, group) }
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
-  let(:merits_task_list) { create :legal_framework_merits_task_list, :da001_as_defendant_and_child_section_8, legal_aid_application: }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
+  let(:merits_task_list) { create(:legal_framework_merits_task_list, :da001_as_defendant_and_child_section_8, legal_aid_application:) }
 
   describe ".forward_flow" do
     subject(:forward_flow) { merits_loop.forward_flow }

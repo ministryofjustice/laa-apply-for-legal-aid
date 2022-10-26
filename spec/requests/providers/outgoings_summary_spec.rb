@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::OutgoingsSummaryController, type: :request do
-  let(:transaction_type) { create :transaction_type, :debit_with_standard_name }
-  let(:other_transaction_type) { create :transaction_type, :debit_with_standard_name }
-  let!(:legal_aid) { create :transaction_type, :debit, name: "legal_aid" }
+  let(:transaction_type) { create(:transaction_type, :debit_with_standard_name) }
+  let(:other_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
+  let!(:legal_aid) { create(:transaction_type, :debit, name: "legal_aid") }
   let(:legal_aid_application) do
     create(
       :legal_aid_application,
@@ -74,12 +74,12 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
     end
 
     context "with assigned (by type) transactions" do
-      let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: }
-      let(:bank_account) { create :bank_account, bank_provider: }
-      let(:transaction_type) { create :transaction_type, :debit }
-      let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type:, bank_account: }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type] }
+      let(:applicant) { create(:applicant) }
+      let(:bank_provider) { create(:bank_provider, applicant:) }
+      let(:bank_account) { create(:bank_account, bank_provider:) }
+      let(:transaction_type) { create(:transaction_type, :debit) }
+      let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
 
       it "displays bank transaction" do
         subject
@@ -98,11 +98,11 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
   describe "POST /providers/income_summary" do
     subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
 
-    let(:applicant) { create :applicant }
-    let(:bank_provider) { create :bank_provider, applicant: }
-    let(:bank_account) { create :bank_account, bank_provider: }
-    let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type:, bank_account: }
-    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type] }
+    let(:applicant) { create(:applicant) }
+    let(:bank_provider) { create(:bank_provider, applicant:) }
+    let(:bank_account) { create(:bank_account, bank_provider:) }
+    let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
 
     let(:submit_button) { { continue_button: "Continue" } }
 
@@ -129,12 +129,12 @@ RSpec.describe Providers::OutgoingsSummaryController, type: :request do
     context "when the transaction type category has no bank transactions" do
       subject { post providers_legal_aid_application_outgoings_summary_index_path(legal_aid_application), params: submit_button }
 
-      let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: }
-      let(:bank_account) { create :bank_account, bank_provider: }
-      let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: nil, bank_account: }
-      let(:transaction_type) { create :transaction_type, :debit }
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type] }
+      let(:applicant) { create(:applicant) }
+      let(:bank_provider) { create(:bank_provider, applicant:) }
+      let(:bank_account) { create(:bank_account, bank_provider:) }
+      let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type: nil, bank_account:) }
+      let(:transaction_type) { create(:transaction_type, :debit) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, applicant:, transaction_types: [transaction_type]) }
 
       let(:submit_button) { { continue_button: "Continue" } }
 

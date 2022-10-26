@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Provider, type: :model do
-  let(:firm) { create :firm }
-  let(:provider) { create :provider, firm: }
+  let(:firm) { create(:firm) }
+  let(:provider) { create(:provider, firm:) }
 
   describe "#update_details" do
     context "when firm exists" do
@@ -31,8 +31,8 @@ RSpec.describe Provider, type: :model do
 
   describe "#user_permissions" do
     context "with no permissions for this provider, but one permission for firm" do
-      let(:firm) { create :firm, :with_passported_permissions }
-      let(:provider) { create :provider, :with_no_permissions, firm: }
+      let(:firm) { create(:firm, :with_passported_permissions) }
+      let(:provider) { create(:provider, :with_no_permissions, firm:) }
 
       it "returns the firms permissions" do
         expect(provider.user_permissions).to eq [passported_permission]
@@ -40,8 +40,8 @@ RSpec.describe Provider, type: :model do
     end
 
     context "with no permissions for provider and their firm" do
-      let(:firm) { create :firm, :with_no_permissions }
-      let(:provider) { create :provider, :with_no_permissions, firm: }
+      let(:firm) { create(:firm, :with_no_permissions) }
+      let(:provider) { create(:provider, :with_no_permissions, firm:) }
       let(:AlertManager) { instance_double(Tracker) }
 
       it "returns false" do
@@ -55,8 +55,8 @@ RSpec.describe Provider, type: :model do
     end
 
     context "when permissions exist for both firm and provider" do
-      let(:firm) { create :firm, :with_passported_and_non_passported_permissions }
-      let(:provider) { create :provider, :with_passported_permissions, firm: }
+      let(:firm) { create(:firm, :with_passported_and_non_passported_permissions) }
+      let(:provider) { create(:provider, :with_passported_permissions, firm:) }
 
       it "returns the permission for the provider" do
         expect(provider.user_permissions).to eq [passported_permission]
@@ -74,7 +74,7 @@ RSpec.describe Provider, type: :model do
   end
 
   describe "#cms_apply_role?" do
-    let(:provider) { create :provider, roles: }
+    let(:provider) { create(:provider, roles:) }
 
     before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
 
@@ -96,7 +96,7 @@ RSpec.describe Provider, type: :model do
   end
 
   describe "#invalid_login?" do
-    let(:provider) { create :provider, invalid_login_details: details }
+    let(:provider) { create(:provider, invalid_login_details: details) }
 
     context "when details are nil" do
       let(:details) { nil }
@@ -126,7 +126,7 @@ RSpec.describe Provider, type: :model do
   describe "#newly_created_by_devise?" do
     context "with sign_in_count of 1" do
       context "with no firm" do
-        let(:provider) { create :provider, :created_by_devise }
+        let(:provider) { create(:provider, :created_by_devise) }
 
         it "returns true" do
           expect(provider.newly_created_by_devise?).to be true
@@ -134,7 +134,7 @@ RSpec.describe Provider, type: :model do
       end
 
       context "when firm exists" do
-        let(:provider) { create :provider, sign_in_count: 1 }
+        let(:provider) { create(:provider, sign_in_count: 1) }
 
         it "returns false" do
           expect(provider.newly_created_by_devise?).to be false
@@ -143,7 +143,7 @@ RSpec.describe Provider, type: :model do
     end
 
     context "with login count greater than 1" do
-      let(:provider) { create :provider, sign_in_count: 4 }
+      let(:provider) { create(:provider, sign_in_count: 4) }
 
       it "returns false" do
         expect(provider.newly_created_by_devise?).to be false
@@ -153,7 +153,7 @@ RSpec.describe Provider, type: :model do
 
   describe "#bank_statement_upload_permissions?" do
     context "when provider does not have bank statement upload permissions" do
-      let(:provider) { create :provider, :with_no_permissions }
+      let(:provider) { create(:provider, :with_no_permissions) }
 
       it "returns false" do
         expect(provider.bank_statement_upload_permissions?).to be false
@@ -161,7 +161,7 @@ RSpec.describe Provider, type: :model do
     end
 
     context "when provider has bank statement upload permissions" do
-      let(:provider) { create :provider, :with_bank_statement_upload_permissions }
+      let(:provider) { create(:provider, :with_bank_statement_upload_permissions) }
 
       it "returns true" do
         expect(provider.bank_statement_upload_permissions?).to be true
@@ -171,7 +171,7 @@ RSpec.describe Provider, type: :model do
 
   describe "#full_section_8_permissions?" do
     context "when provider does not have full section 8 permissions" do
-      let(:provider) { create :provider, :with_no_permissions }
+      let(:provider) { create(:provider, :with_no_permissions) }
 
       it "returns false" do
         expect(provider.full_section_8_permissions?).to be false
@@ -179,7 +179,7 @@ RSpec.describe Provider, type: :model do
     end
 
     context "when provider has full section 8 permissions" do
-      let(:provider) { create :provider, :with_full_section_8_permissions }
+      let(:provider) { create(:provider, :with_full_section_8_permissions) }
 
       it "returns true" do
         expect(provider.full_section_8_permissions?).to be true

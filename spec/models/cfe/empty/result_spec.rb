@@ -3,8 +3,8 @@ require "rails_helper"
 module CFE
   module Empty
     RSpec.describe Result, type: :model do
-      let(:empty_cfe_result) { create :cfe_empty_result }
-      let(:legal_aid_application) { create :legal_aid_application, :with_cfe_empty_result }
+      let(:empty_cfe_result) { create(:cfe_empty_result) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_cfe_empty_result) }
       let(:manual_review_determiner) { CCMS::ManualReviewDeterminer.new(application) }
 
       describe "#assessment_result" do

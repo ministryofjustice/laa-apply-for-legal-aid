@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::OpenBankingGuidancesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :provider_confirming_applicant_eligibility }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :provider_confirming_applicant_eligibility) }
   let(:id) { legal_aid_application.id }
   let(:provider) { legal_aid_application.provider }
 
@@ -29,7 +29,7 @@ RSpec.describe Providers::OpenBankingGuidancesController, type: :request do
       end
 
       context "when the application is in use_ccms state" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :use_ccms }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :use_ccms) }
 
         it "resets the state to provider_confirming_applicant_eligibility" do
           expect(legal_aid_application.reload.state).to eq "provider_confirming_applicant_eligibility"

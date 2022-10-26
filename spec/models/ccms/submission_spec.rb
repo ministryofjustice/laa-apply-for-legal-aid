@@ -6,13 +6,13 @@ module CCMS
     let(:state) { :initialised }
     let(:applicant_poll_count) { 0 }
     let(:case_poll_count) { 0 }
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, :submitting_assessment }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_other_assets_declaration, :with_savings_amount, :submitting_assessment) }
     let(:submission) do
-      create :submission,
+      create(:submission,
              legal_aid_application:,
              aasm_state: state,
              applicant_poll_count:,
-             case_poll_count:
+             case_poll_count:)
     end
 
     context "with Validations" do
@@ -24,7 +24,7 @@ module CCMS
     end
 
     describe "initial state" do
-      let(:submission) { create :submission }
+      let(:submission) { create(:submission) }
 
       it "puts new records into the initial state" do
         expect(submission.aasm_state).to eq "initialised"

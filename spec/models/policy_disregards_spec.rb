@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe PolicyDisregards, type: :model do
-  let(:application) { create :legal_aid_application, :with_single_policy_disregard }
+  let(:application) { create(:legal_aid_application, :with_single_policy_disregard) }
 
   let(:expected_json) do
     {

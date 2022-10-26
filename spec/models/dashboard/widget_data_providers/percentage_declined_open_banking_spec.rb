@@ -18,8 +18,8 @@ module Dashboard
 
       describe ".data" do
         context "with no to open banking consent" do
-          let(:application) { create :legal_aid_application, open_banking_consent: false }
-          let(:application2) { create :legal_aid_application, open_banking_consent: true }
+          let(:application) { create(:legal_aid_application, open_banking_consent: false) }
+          let(:application2) { create(:legal_aid_application, open_banking_consent: true) }
           let(:expected_data) { [{ "declined_open_banking" => 50 }] }
 
           before do
@@ -33,7 +33,7 @@ module Dashboard
         end
 
         context "with yes to open banking consent" do
-          let(:application) { create :legal_aid_application, open_banking_consent: true }
+          let(:application) { create(:legal_aid_application, open_banking_consent: true) }
           let(:expected_data) { [{ "declined_open_banking" => 0 }] }
 
           before { application }

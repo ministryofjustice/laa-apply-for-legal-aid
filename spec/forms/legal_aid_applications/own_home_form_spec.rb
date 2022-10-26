@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe LegalAidApplications::OwnHomeForm, type: :form do
   subject { described_class.new(form_params) }
 
-  let!(:application) { create :legal_aid_application, :with_applicant_and_address }
+  let!(:application) { create(:legal_aid_application, :with_applicant_and_address) }
 
   let(:params) { { own_home: "mortgage" } }
   let(:form_params) { params.merge(model: application) }

@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Provider access", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
-  let(:other_provider) { create :provider }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:other_provider) { create(:provider) }
 
   it "allows provider to access page in flow until submission" do
     login_as legal_aid_application.provider

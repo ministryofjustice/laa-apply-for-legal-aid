@@ -5,7 +5,7 @@ RSpec.describe ProviderDetailsRetriever do
   subject { described_class.call(username) }
 
   let(:api_url) { "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails" }
-  let(:provider) { create :provider }
+  let(:provider) { create(:provider) }
   let(:username) { provider.username }
 
   before do
@@ -33,7 +33,7 @@ RSpec.describe ProviderDetailsRetriever do
     end
 
     context "with real API", vcr: { cassette_name: "provider_details_api" } do
-      let(:provider) { create :provider, :with_provider_details_api_username }
+      let(:provider) { create(:provider, :with_provider_details_api_username) }
       let(:escaped_username) { CGI.escape(provider.username) }
 
       it_behaves_like "get response from API"
@@ -44,7 +44,7 @@ RSpec.describe ProviderDetailsRetriever do
       end
 
       context "username with space", vcr: { cassette_name: "encoded_provider_details_api" } do
-        let(:provider) { create :provider, username: "ROB R" }
+        let(:provider) { create(:provider, username: "ROB R") }
         let(:escaped_username) { URI.encode_www_form_component(provider.username).gsub("+", "%20") }
 
         it "encodes with a %20 in place of a space" do

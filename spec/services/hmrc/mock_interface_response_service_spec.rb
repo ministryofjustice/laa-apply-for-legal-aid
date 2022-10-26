@@ -3,9 +3,9 @@ require "rails_helper"
 RSpec.describe HMRC::MockInterfaceResponseService do
   subject(:service) { described_class.call(hmrc_response) }
 
-  let(:applicant) { create :applicant }
-  let(:application) { create :legal_aid_application, applicant: }
-  let(:hmrc_response) { create :hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid }
+  let(:applicant) { create(:applicant) }
+  let(:application) { create(:legal_aid_application, applicant:) }
+  let(:hmrc_response) { create(:hmrc_response, :use_case_one, legal_aid_application: application, submission_id: guid) }
   let(:guid) { SecureRandom.uuid }
   let(:hmrc_data) { hmrc_response.response["data"] }
   let(:not_found_response) do
@@ -320,7 +320,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
   end
 
   context "when the applicant is known to the mock response service" do
-    let(:applicant) { create :applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22" }
+    let(:applicant) { create(:applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22") }
     let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2021, 11, 30)) }
 
     it "updates the hmrc_response.response value" do
@@ -328,7 +328,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context "when the response is pending from HMRC" do
-      let(:applicant) { create :applicant, first_name: "John", last_name: "Pending", national_insurance_number: "KY123456D", date_of_birth: "2002-09-01" }
+      let(:applicant) { create(:applicant, first_name: "John", last_name: "Pending", national_insurance_number: "KY123456D", date_of_birth: "2002-09-01") }
 
       it "updates the hmrc_response.response value" do
         expect(hmrc_response.reload.response).to match_json_expression pending_response
@@ -336,7 +336,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context "when the response from HMRC contains unexpected data" do
-      let(:applicant) { create :applicant, first_name: "Henry", last_name: "Unknown", national_insurance_number: "WX311689D", date_of_birth: "1982-06-15" }
+      let(:applicant) { create(:applicant, first_name: "Henry", last_name: "Unknown", national_insurance_number: "WX311689D", date_of_birth: "1982-06-15") }
       let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 18)) }
 
       it "updates the hmrc_response.response value" do
@@ -345,7 +345,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context "and is paid four-weekly" do
-      let(:applicant) { create :applicant, first_name: "Jeremy", last_name: "Irons", national_insurance_number: "BB313661B", date_of_birth: "1966-06-06" }
+      let(:applicant) { create(:applicant, first_name: "Jeremy", last_name: "Irons", national_insurance_number: "BB313661B", date_of_birth: "1966-06-06") }
       let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 10)) }
 
       it "updates the hmrc_response.response value" do
@@ -355,7 +355,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context "and has multiple employments" do
-      let(:applicant) { create :applicant, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24" }
+      let(:applicant) { create(:applicant, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24") }
       let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2020, 12, 10)) }
 
       it "updates the hmrc_response.response value" do
@@ -367,7 +367,7 @@ RSpec.describe HMRC::MockInterfaceResponseService do
     end
 
     context "and receives tax credits" do
-      let(:applicant) { create :applicant, first_name: "Oakley", last_name: "Weller", national_insurance_number: "AB476107D", date_of_birth: "1988-08-08" }
+      let(:applicant) { create(:applicant, first_name: "Oakley", last_name: "Weller", national_insurance_number: "AB476107D", date_of_birth: "1988-08-08") }
       let(:additional_before_actions) { allow(application).to receive(:calculation_date).and_return(Date.new(2021, 12, 17)) }
 
       it "updates the hmrc_response.response value" do

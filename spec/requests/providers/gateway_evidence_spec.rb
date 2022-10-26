@@ -3,7 +3,7 @@ require "sidekiq/testing"
 
 module Providers
   RSpec.describe GatewayEvidencesController, type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
     let(:provider) { legal_aid_application.provider }
     let(:i18n_error_path) { "activemodel.errors.models.gateway_evidence.attributes.original_file" }
 
@@ -93,7 +93,7 @@ module Providers
           end
 
           context "when gateway_evidence file already exists" do
-            let!(:gateway_evidence) { create :gateway_evidence, :with_multiple_files_attached, legal_aid_application: }
+            let!(:gateway_evidence) { create(:gateway_evidence, :with_multiple_files_attached, legal_aid_application:) }
 
             it "updates the record" do
               subject
@@ -252,7 +252,7 @@ module Providers
         end
 
         context "model already has files attached" do
-          before { create :gateway_evidence, :with_original_file_attached, legal_aid_application: }
+          before { create(:gateway_evidence, :with_original_file_attached, legal_aid_application:) }
 
           context "additional file uploaded" do
             it "attaches the file" do
@@ -290,7 +290,7 @@ module Providers
     describe "DELETE /providers/applications/:legal_aid_application_id/gateway_evidence" do
       subject { delete providers_legal_aid_application_gateway_evidence_path(legal_aid_application), params: }
 
-      let(:gateway_evidence) { create :gateway_evidence, :with_original_file_attached }
+      let(:gateway_evidence) { create(:gateway_evidence, :with_original_file_attached) }
       let(:legal_aid_application) { gateway_evidence.legal_aid_application }
       let(:original_file) { gateway_evidence.original_attachments.first }
       let(:params) { { attachment_id: gateway_evidence.original_attachments.first.id } }
@@ -309,7 +309,7 @@ module Providers
         end
 
         context "when a PDF exists" do
-          let(:gateway_evidence) { create :gateway_evidence, :with_original_and_pdf_files_attached }
+          let(:gateway_evidence) { create(:gateway_evidence, :with_original_and_pdf_files_attached) }
 
           it "deletes both attachments" do
             expect { subject }.to change(Attachment, :count).by(-2)

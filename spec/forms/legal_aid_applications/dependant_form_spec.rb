@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe LegalAidApplications::DependantForm, type: :form do
   subject { described_class.new(params) }
 
-  let(:dependant) { create :dependant, date_of_birth: nil }
+  let(:dependant) { create(:dependant, date_of_birth: nil) }
   let(:date) { Faker::Date.birthday }
   let(:day) { date.strftime("%d") } # Two number day
   let(:month) { date.strftime("%m") } # Two number month

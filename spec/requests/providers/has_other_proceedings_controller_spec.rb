@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Providers::HasOtherProceedingsController, type: :request do
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
-           explicit_proceedings: %i[da001 da002]
+           explicit_proceedings: %i[da001 da002])
   end
 
   let(:provider) { legal_aid_application.provider }
@@ -55,7 +55,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context "when the user is checking answers and has deleted the domestic abuse proceeding but left the section 8" do
-      let(:legal_aid_application) { create :legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false }
+      let(:legal_aid_application) { create(:legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false) }
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
       it "redirects to the page to add another proceeding type" do
@@ -73,7 +73,7 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
     end
 
     context "with only Section 8 proceedings selected" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013] }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013]) }
 
       context "choose no" do
         let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
@@ -95,9 +95,9 @@ RSpec.describe Providers::HasOtherProceedingsController, type: :request do
 
     context "with at least one domestic abuse and at least one section 8 proceeding" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
-               explicit_proceedings: %i[da004 se014]
+               explicit_proceedings: %i[da004 se014])
       end
 
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }

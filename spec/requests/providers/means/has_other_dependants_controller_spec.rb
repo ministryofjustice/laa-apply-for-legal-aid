@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 
   before { login_as provider }
@@ -104,7 +104,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
     end
 
     context "when provider checking answers of citizen and more dependants" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
       let(:has_other_dependant) { "true" }
 
       it "redirects to the page to add another dependant" do
@@ -114,7 +114,7 @@ RSpec.describe Providers::Means::HasOtherDependantsController, type: :request do
     end
 
     context "when provider checking answers of citizen and no more dependants" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
       let(:has_other_dependant) { "false" }
 
       it "redirects to the means summary page" do

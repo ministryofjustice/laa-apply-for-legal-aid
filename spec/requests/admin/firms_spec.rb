@@ -2,8 +2,8 @@ require "rails_helper"
 
 module Admin
   RSpec.describe FirmsController, type: :request do
-    let(:admin_user) { create :admin_user }
-    let!(:firms) { create_list :firm, 3 }
+    let(:admin_user) { create(:admin_user) }
+    let!(:firms) { create_list(:firm, 3) }
 
     before { sign_in admin_user }
 

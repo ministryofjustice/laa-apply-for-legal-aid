@@ -5,7 +5,7 @@ ErrorResponseStruct = Struct.new(:code, :body)
 RSpec.describe GovukEmails::DeliveryMan do
   subject { described_class.call(scheduled_mailing.id) }
 
-  let(:scheduled_mailing) { create :scheduled_mailing, :waiting }
+  let(:scheduled_mailing) { create(:scheduled_mailing, :waiting) }
   let(:mailer_klass) { scheduled_mailing.mailer_klass }
   let(:mailer_method) { scheduled_mailing.mailer_method }
 
@@ -55,14 +55,14 @@ RSpec.describe GovukEmails::DeliveryMan do
       context "mail cannot be sent with current API key" do
         # this simulates trying to send a message in staging that generates the following error
         # BadRequestError: Can’t send to this recipient using a team-only API key
-        let(:scheduled_mailing) { create :scheduled_mailing, :waiting, legal_aid_application: application }
+        let(:scheduled_mailing) { create(:scheduled_mailing, :waiting, legal_aid_application: application) }
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_applicant,
                  :with_proceedings,
                  :with_delegated_functions_on_proceedings,
                  explicit_proceedings: [:da004],
-                 df_options: { DA004: [Time.zone.today, Time.zone.today] }
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] })
         end
         let(:response_error_stub) { ErrorResponseStruct.new(400, "BadRequestError: Can’t send to this recipient using a team-only API key") }
 

@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe DeletionService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }
 
     describe ".call" do
@@ -18,7 +18,7 @@ module UploadedEvidence
     end
 
     describe "#call" do
-      let!(:attachment) { create :attachment, :uploaded_evidence_collection, original_filename: "my_dummy_file.pdf" }
+      let!(:attachment) { create(:attachment, :uploaded_evidence_collection, original_filename: "my_dummy_file.pdf") }
       let(:params) { { delete_button: "Delete", attachment_id: attachment.id } }
       let(:service) { described_class.new(controller) }
 

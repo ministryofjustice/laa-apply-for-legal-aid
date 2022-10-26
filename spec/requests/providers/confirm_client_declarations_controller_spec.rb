@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ConfirmClientDeclarationsController, type: :request do
-  let(:application) { create :legal_aid_application }
+  let(:application) { create(:legal_aid_application) }
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:id/confirm_client_declaration" do

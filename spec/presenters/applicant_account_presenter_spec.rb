@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ApplicantAccountPresenter do
   subject(:applicant_account_presenter) { described_class.new(applicant.bank_providers.first) }
 
-  let!(:applicant) { create :applicant }
+  let!(:applicant) { create(:applicant) }
   let(:addresses) do
     [{ address: Faker::Address.building_number,
        city: Faker::Address.city,

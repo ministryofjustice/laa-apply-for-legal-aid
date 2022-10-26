@@ -2,9 +2,9 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateIrregularIncomesService do
-    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-    let(:submission) { create :cfe_submission, aasm_state: "other_income_created", legal_aid_application: application }
-    let!(:irregular_income) { create :irregular_income, legal_aid_application: application, amount: 3628.07 }
+    let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
+    let(:submission) { create(:cfe_submission, aasm_state: "other_income_created", legal_aid_application: application) }
+    let!(:irregular_income) { create(:irregular_income, legal_aid_application: application, amount: 3628.07) }
     let(:service) { described_class.new(submission) }
 
     describe "#cfe_url" do

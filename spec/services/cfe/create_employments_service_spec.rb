@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe CFE::CreateEmploymentsService do
-  let(:submission) { create :cfe_submission, aasm_state: "irregular_income_created", legal_aid_application: laa }
+  let(:submission) { create(:cfe_submission, aasm_state: "irregular_income_created", legal_aid_application: laa) }
   let(:service) { described_class.new(submission) }
-  let(:laa) { create :legal_aid_application, applicant: }
-  let(:applicant) { create :applicant, :employed }
+  let(:laa) { create(:legal_aid_application, applicant:) }
+  let(:applicant) { create(:applicant, :employed) }
   let(:dummy_response) { dummy_response_hash.to_json }
 
   describe "#cfe_url" do
@@ -16,7 +16,7 @@ RSpec.describe CFE::CreateEmploymentsService do
 
   describe "#request_body" do
     context "applicant not employed" do
-      let(:applicant) { create :applicant, :not_employed }
+      let(:applicant) { create(:applicant, :not_employed) }
 
       it "returns empty payload" do
         expect(service.request_body).to eq empty_payload.to_json
@@ -24,8 +24,8 @@ RSpec.describe CFE::CreateEmploymentsService do
     end
 
     context "applicant employed" do
-      let(:applicant) { create :applicant, :employed }
-      let!(:employment) { create :employment, :example1_usecase1, legal_aid_application: laa }
+      let(:applicant) { create(:applicant, :employed) }
+      let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa) }
 
       it "returns full payload" do
         expect(service.request_body).to eq full_payload.to_json
@@ -38,9 +38,9 @@ RSpec.describe CFE::CreateEmploymentsService do
       stub_request(:post, service.cfe_url).with(body: expected_payload.to_json).to_return(body: dummy_response)
     end
 
-    let(:applicant) { create :applicant, :employed }
+    let(:applicant) { create(:applicant, :employed) }
     let(:expected_payload) { full_payload }
-    let!(:employment) { create :employment, :example1_usecase1, legal_aid_application: laa }
+    let!(:employment) { create(:employment, :example1_usecase1, legal_aid_application: laa) }
 
     it "updates the state on the submission record from irregular_income_created to employments_created" do
       expect(submission.aasm_state).to eq "irregular_income_created"
@@ -67,7 +67,7 @@ RSpec.describe CFE::CreateEmploymentsService do
       let(:expected_payload_hash) { full_payload }
 
       before do
-        create :hmrc_response, :example1_usecase1, legal_aid_application: laa
+        create(:hmrc_response, :example1_usecase1, legal_aid_application: laa)
       end
 
       it_behaves_like "a failed call to CFE"

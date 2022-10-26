@@ -4,8 +4,8 @@ module LegalFramework
   RSpec.describe MeritsTasksRetrieverService do
     before { allow(Setting).to receive(:enable_mini_loop?).and_return(enable_mini_loop) } # TODO: Remove when the mini-loop feature flag is removed
 
-    let(:application) { create :legal_aid_application, :with_proceedings }
-    let(:submission) { create :legal_framework_submission, legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_proceedings) }
+    let(:submission) { create(:legal_framework_submission, legal_aid_application: application) }
     let(:dummy_response) { dummy_response_hash.to_json }
     let(:service) { described_class.new(submission) }
     let(:orig_api_url) { "#{Rails.configuration.x.legal_framework_api_host}/merits_tasks" }

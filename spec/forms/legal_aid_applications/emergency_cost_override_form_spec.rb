@@ -6,7 +6,7 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
   describe "validation" do
     subject(:valid?) { form.valid? }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address) }
     let(:form_params) { params.merge(model: legal_aid_application) }
 
     context "when delegated_functions are not used" do
@@ -25,8 +25,8 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
         let(:substantive_reasons) { nil }
 
         before do
-          create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true, used_delegated_functions_on: nil
-          create :proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: nil
+          create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true, used_delegated_functions_on: nil)
+          create(:proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: nil)
         end
 
         context "when no parameters sent" do
@@ -89,8 +89,8 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
     context "when delegated_functions used" do
       before do
-        create :proceeding, :da001, legal_aid_application:, substantive_cost_limitation:, lead_proceeding: true, used_delegated_functions: true, used_delegated_functions_on: 35.days.ago.to_date
-        create :proceeding, :da004, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions: true, used_delegated_functions_on: 36.days.ago.to_date
+        create(:proceeding, :da001, legal_aid_application:, substantive_cost_limitation:, lead_proceeding: true, used_delegated_functions: true, used_delegated_functions_on: 35.days.ago.to_date)
+        create(:proceeding, :da004, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions: true, used_delegated_functions_on: 36.days.ago.to_date)
       end
 
       context "and the maximum substantive cost limit is below the threshold" do

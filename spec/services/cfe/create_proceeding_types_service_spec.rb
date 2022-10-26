@@ -2,14 +2,14 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateProceedingTypesService do
-    let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, transaction_period_finish_on: Time.zone.today }
-    let(:submission) { create :cfe_submission, aasm_state: "assessment_created", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result, transaction_period_finish_on: Time.zone.today) }
+    let(:submission) { create(:cfe_submission, aasm_state: "assessment_created", legal_aid_application: application) }
     let(:dummy_response) { dummy_response_hash.to_json }
     let(:service) { described_class.new(submission) }
 
     before do
-      create :proceeding, :da001, legal_aid_application: application, client_involvement_type_ccms_code: "Z"
-      create :proceeding, :se013, legal_aid_application: application, client_involvement_type_ccms_code: "A"
+      create(:proceeding, :da001, legal_aid_application: application, client_involvement_type_ccms_code: "Z")
+      create(:proceeding, :se013, legal_aid_application: application, client_involvement_type_ccms_code: "A")
     end
 
     describe "#cfe_url" do

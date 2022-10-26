@@ -4,16 +4,16 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
   let(:national_insurance_number) { "JA293483A" }
-  let(:applicant) { create :applicant, last_name:, date_of_birth:, national_insurance_number: }
-  let(:application) { create :application, :checking_applicant_details, applicant: }
+  let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:) }
+  let(:application) { create(:application, :checking_applicant_details, applicant:) }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
-  let(:provider) { create :provider }
+  let(:provider) { create(:provider) }
 
   describe "GET /providers/applications/:application_id/check_benefits", :vcr do
     subject { get "/providers/applications/#{application.id}/check_benefits" }
 
-    let!(:address) { create :address, applicant:, lookup_used: address_lookup_used }
+    let!(:address) { create(:address, applicant:, lookup_used: address_lookup_used) }
 
     before { login }
 
@@ -38,7 +38,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context "when state is provider_entering_means" do
-      let(:application) { create :application, :provider_entering_means, applicant: }
+      let(:application) { create(:application, :provider_entering_means, applicant:) }
 
       it "transitions from provider_entering_means" do
         subject
@@ -47,7 +47,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context "when the check_benefit_result already exists" do
-      let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: application }
+      let!(:benefit_check_result) { create(:benefit_check_result, legal_aid_application: application) }
 
       it "does not generate a new one" do
         expect(BenefitCheckService).not_to receive(:call)
@@ -57,7 +57,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       context "and the applicant has since been modified" do
         before { applicant.update(first_name: Faker::Name.first_name) }
 
-        let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: application } }
+        let!(:benefit_check_result) { travel(-10.minutes) { create(:benefit_check_result, legal_aid_application: application) } }
 
         it "updates check_benefit_result" do
           expect(BenefitCheckService).to receive(:call).and_call_original
@@ -98,7 +98,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context "when the check benefit result is positive" do
-      let(:application) { create :legal_aid_application, :with_applicant, :with_proceedings, :with_positive_benefit_check_result, :at_checking_applicant_details }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_proceedings, :with_positive_benefit_check_result, :at_checking_applicant_details) }
 
       it "displays the passported result page" do
         subject
@@ -107,7 +107,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     end
 
     context "when the check benefit result is negative" do
-      let(:application) { create :legal_aid_application, :with_applicant, :with_proceedings, :with_negative_benefit_check_result, :at_checking_applicant_details }
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_proceedings, :with_negative_benefit_check_result, :at_checking_applicant_details) }
 
       it "displays the confirm dwp non passported_applications page" do
         subject
@@ -134,7 +134,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check_benefit_results is positive" do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "displays the capital introduction page" do
           expect(response).to redirect_to providers_legal_aid_application_capital_introduction_path(application)
@@ -142,7 +142,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check benefit result is negative" do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "displays the applicant employed page" do
           expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
@@ -150,7 +150,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check benefit result is undetermined" do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_undetermined_benefit_check_result) }
 
         it "displays the applicant employed page" do
           expect(response).to redirect_to providers_legal_aid_application_applicant_employed_index_path(application)
@@ -159,12 +159,12 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
 
       context "when delegated functions used" do
         let!(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_positive_benefit_check_result,
                  :with_proceedings,
                  :with_delegated_functions_on_proceedings,
                  explicit_proceedings: [:da004],
-                 df_options: { DA004: [Time.zone.today, Time.zone.today] }
+                 df_options: { DA004: [Time.zone.today, Time.zone.today] })
         end
 
         it "displays the substantive application page" do
@@ -181,7 +181,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check_benefit_results is positive" do
-        let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "displays the providers applications page" do
           expect(response).to redirect_to providers_legal_aid_applications_path
@@ -193,7 +193,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check benefit result is negative" do
-        let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "displays providers applications page" do
           expect(response).to redirect_to providers_legal_aid_applications_path
@@ -201,7 +201,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "when the check benefit result is undetermined" do
-        let(:application) { create :legal_aid_application, :with_undetermined_benefit_check_result }
+        let(:application) { create(:legal_aid_application, :with_undetermined_benefit_check_result) }
 
         it "displays providers applications page" do
           expect(response).to redirect_to providers_legal_aid_applications_path
@@ -214,10 +214,10 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
     before { login_as provider }
 
     context "with application passported" do
-      let(:application) { create :legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider: }
+      let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result, :checking_applicant_details, applicant:, provider:) }
 
       context "with permissions passported" do
-        let(:provider) { create :provider, :with_passported_permissions }
+        let(:provider) { create(:provider, :with_passported_permissions) }
 
         it "allows us to continue" do
           get "/providers/applications/#{application.id}/check_benefits"
@@ -226,7 +226,7 @@ RSpec.describe Providers::CheckBenefitsController, type: :request do
       end
 
       context "with no permissions" do
-        let(:provider) { create :provider, :with_no_permissions }
+        let(:provider) { create(:provider, :with_no_permissions) }
 
         it "allows us to continue" do
           get "/providers/applications/#{application.id}/check_benefits"

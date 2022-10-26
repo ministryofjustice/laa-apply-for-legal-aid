@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::DependantsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:login) { login_as legal_aid_application.provider }
 
   before do
@@ -26,7 +26,7 @@ RSpec.describe Providers::Means::DependantsController, type: :request do
   describe "GET /providers/applications/:legal_aid_application_id/means/dependants/:dependant_id" do
     subject { get(providers_legal_aid_application_means_dependant_path(legal_aid_application, dependant)) }
 
-    let(:dependant) { create :dependant, legal_aid_application: }
+    let(:dependant) { create(:dependant, legal_aid_application:) }
 
     it "renders successfully" do
       expect(response).to have_http_status(:ok)
@@ -47,7 +47,7 @@ RSpec.describe Providers::Means::DependantsController, type: :request do
       )
     end
 
-    let(:dependant) { create :dependant, legal_aid_application: }
+    let(:dependant) { create(:dependant, legal_aid_application:) }
     let(:params) do
       {
         dependant: {
@@ -72,7 +72,7 @@ RSpec.describe Providers::Means::DependantsController, type: :request do
     end
 
     context "while provider checking answers of citizen" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :checking_non_passported_means) }
 
       it "redirects to the has other dependants page" do
         expect(response).to redirect_to(providers_legal_aid_application_means_has_other_dependants_path(legal_aid_application))

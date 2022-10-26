@@ -4,12 +4,12 @@ RSpec.describe Reports::ReportsCreator do
   subject { described_class.call(legal_aid_application) }
 
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
            :with_ccms_submission,
            :with_everything,
            :with_passported_state_machine,
-           :generating_reports
+           :generating_reports)
   end
 
   describe ".call" do
@@ -24,13 +24,13 @@ RSpec.describe Reports::ReportsCreator do
 
     context "when the application is non-passported and has transactions" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_everything,
                :with_ccms_submission,
                :with_benefits_transactions,
                :with_uncategorised_credit_transactions,
-               :generating_reports
+               :generating_reports)
       end
 
       it "creates reports and updates the state" do

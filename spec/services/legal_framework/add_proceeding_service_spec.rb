@@ -4,7 +4,7 @@ module LegalFramework
   RSpec.describe AddProceedingService, :vcr do
     subject { described_class.new(legal_aid_application) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:ccms_code) { "DA004" }
 
     describe "#call" do
@@ -20,7 +20,7 @@ module LegalFramework
         end
 
         context "proceedings already exist" do
-          let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceedings }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
 
           it "adds another proceeding type" do
             subject.call(**params)

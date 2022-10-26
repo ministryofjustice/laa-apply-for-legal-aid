@@ -2,13 +2,13 @@ require "rails_helper"
 
 RSpec.describe Providers::MeritsTaskListsController, type: :request do
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
   let(:evidence_upload) { false }
 
   let(:proceeding_names) do
     legal_aid_application.proceedings.map(&:meaning)
   end
-  let(:task_list) { create :legal_framework_merits_task_list, legal_aid_application: }
+  let(:task_list) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
   before do
     legal_aid_application
@@ -21,7 +21,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
     subject { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
 
     context "the record does not exist" do
-      let(:task_list) { build :legal_framework_serializable_merits_task_list }
+      let(:task_list) { build(:legal_framework_serializable_merits_task_list) }
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
@@ -39,7 +39,7 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
     context "the record already exists" do
       before do
         login_provider
-        create :legal_framework_merits_task_list, legal_aid_application: legal_aid_application
+        create(:legal_framework_merits_task_list, legal_aid_application: legal_aid_application)
         subject
       end
 
@@ -83,8 +83,8 @@ RSpec.describe Providers::MeritsTaskListsController, type: :request do
     end
 
     context "when no documents required" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da001] }
-      let(:task_list) { create :legal_framework_merits_task_list, :da001, legal_aid_application: }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da001]) }
+      let(:task_list) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
 
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)

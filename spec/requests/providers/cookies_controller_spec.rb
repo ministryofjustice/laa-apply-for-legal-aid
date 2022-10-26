@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::CookiesController, type: :request do
-  let(:provider) { create :provider }
+  let(:provider) { create(:provider) }
 
   describe "GET providers/cookies" do
     subject(:request) { get providers_cooky_path(provider) }

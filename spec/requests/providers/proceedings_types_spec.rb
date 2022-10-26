@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_proceedings }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_proceedings) }
   let(:provider) { legal_aid_application.provider }
 
   describe "index: GET /providers/applications/:legal_aid_application_id/proceedings_types" do
@@ -36,7 +36,7 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
 
       describe "back link" do
         context "when the applicant's address used address lookup service", :vcr do
-          let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address_lookup }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address_lookup) }
 
           before do
             legal_aid_application.applicant.address.update!(postcode: "YO4B0LJ")
@@ -96,10 +96,10 @@ RSpec.describe Providers::ProceedingsTypesController, :vcr, type: :request do
 
     context "with proceedings" do
       let!(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_proceedings,
-               set_lead_proceeding: :da001
+               set_lead_proceeding: :da001)
       end
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
       let(:params) do

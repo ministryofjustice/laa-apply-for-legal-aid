@@ -4,16 +4,16 @@ module Reports
   module BankTransactions
     RSpec.describe BankTransactionReportCreator do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_everything,
                :with_benefits_transactions,
                :with_uncategorised_credit_transactions,
                :with_cfe_v3_result,
                :generating_reports,
-               ccms_submission:
+               ccms_submission:)
       end
-      let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
+      let(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
 
       let(:remarks) { CFE::Remarks.new(populated_remarks_hash) }
       let(:remarked_transaction) { double CFE::RemarkedTransaction, reasons: %i[amount_variation unknown_frequency] }
@@ -37,7 +37,7 @@ module Reports
 
           context "report already exists" do
             it "does not attach a report" do
-              create :attachment, :bank_transaction_report, legal_aid_application: legal_aid_application
+              create(:attachment, :bank_transaction_report, legal_aid_application: legal_aid_application)
               expect { subject }.not_to change(Attachment, :count)
             end
           end

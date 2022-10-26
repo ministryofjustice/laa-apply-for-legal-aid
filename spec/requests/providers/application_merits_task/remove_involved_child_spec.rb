@@ -3,9 +3,9 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe HasOtherInvolvedChildrenController, type: :request do
-      let(:application) { create :legal_aid_application }
+      let(:application) { create(:legal_aid_application) }
       let(:provider) { application.provider }
-      let!(:child2) { create :involved_child, legal_aid_application: application }
+      let!(:child2) { create(:involved_child, legal_aid_application: application) }
 
       before { login_as provider }
 
@@ -45,7 +45,7 @@ module Providers
           end
 
           context "and another child exists" do
-            let!(:child1) { create :involved_child, legal_aid_application: application }
+            let!(:child1) { create(:involved_child, legal_aid_application: application) }
 
             it "redirects back to the has_other_involved_children page" do
               subject

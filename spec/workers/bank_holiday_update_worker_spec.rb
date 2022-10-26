@@ -5,7 +5,7 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
 
   let(:bank_holiday_update_worker) { described_class.new }
   let(:stale_date) { Time.current.utc - described_class::UPDATE_INTERVAL - 2.hours }
-  let!(:bank_holiday) { create :bank_holiday }
+  let!(:bank_holiday) { create(:bank_holiday) }
 
   it "returns true" do
     expect(subject).to be true
@@ -20,7 +20,7 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
   end
 
   context "when outdated" do
-    let!(:bank_holiday) { create :bank_holiday, updated_at: stale_date }
+    let!(:bank_holiday) { create(:bank_holiday, updated_at: stale_date) }
 
     it "creates a new bank holiday instance" do
       expect { subject }.to change(BankHoliday, :count).by(1)
@@ -41,7 +41,7 @@ RSpec.describe BankHolidayUpdateWorker, vcr: { cassette_name: "gov_uk_bank_holid
   end
 
   context "when data retrieval fails" do
-    let!(:bank_holiday) { create :bank_holiday, updated_at: stale_date }
+    let!(:bank_holiday) { create(:bank_holiday, updated_at: stale_date) }
 
     it "raises error" do
       allow(BankHolidayRetriever).to receive(:dates).and_raise(BankHolidayRetriever::UnsuccessfulRetrievalError)

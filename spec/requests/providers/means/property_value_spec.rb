@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::PropertyValuesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:secure_id) { legal_aid_application.generate_secure_id }
 
   describe "GET /providers/applications/:id/means/property_value" do
@@ -53,7 +53,7 @@ RSpec.describe Providers::Means::PropertyValuesController, type: :request do
 
         context "when a property value is entered" do
           context "when property is mortgaged" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_mortgaged }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_mortgaged) }
 
             it "redirects to the outstanding mortgage question" do
               expect(response).to redirect_to providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application)
@@ -61,7 +61,7 @@ RSpec.describe Providers::Means::PropertyValuesController, type: :request do
           end
 
           context "when property is owned outright" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_owned_outright) }
 
             it "redirects to the shared question" do
               expect(response).to redirect_to providers_legal_aid_application_means_shared_ownership_path(legal_aid_application)
@@ -99,7 +99,7 @@ RSpec.describe Providers::Means::PropertyValuesController, type: :request do
 
         context "when a property value is entered" do
           context "when property is mortgaged" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_mortgaged }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_mortgaged) }
 
             it "redirects to the outstanding mortgage question" do
               expect(response).to redirect_to providers_legal_aid_applications_path
@@ -107,7 +107,7 @@ RSpec.describe Providers::Means::PropertyValuesController, type: :request do
           end
 
           context "when property is owned outright" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_own_home_owned_outright }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_owned_outright) }
 
             it "redirects provider to provider's applications page" do
               expect(response).to redirect_to providers_legal_aid_applications_path

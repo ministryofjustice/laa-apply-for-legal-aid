@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe "citizen accounts request", type: :request do
   include ActionView::Helpers::NumberHelper
 
-  let!(:applicant) { create :applicant }
-  let!(:legal_aid_application) { create :legal_aid_application, :with_transaction_period, :with_non_passported_state_machine, :awaiting_applicant, applicant: }
+  let!(:applicant) { create(:applicant) }
+  let!(:legal_aid_application) { create(:legal_aid_application, :with_transaction_period, :with_non_passported_state_machine, :awaiting_applicant, applicant:) }
   let(:addresses) do
     [{ address: Faker::Address.building_number,
        city: Faker::Address.city,

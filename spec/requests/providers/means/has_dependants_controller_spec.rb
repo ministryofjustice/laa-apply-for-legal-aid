@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::HasDependantsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:login) { login_as legal_aid_application.provider }
 
   before { login }
@@ -87,8 +87,8 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
 
     context "when provider checking answers of citizen and no" do
       let(:legal_aid_application) do
-        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means
+        create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means)
       end
       let(:params) { { legal_aid_application: { has_dependants: "false" } } }
 
@@ -100,8 +100,8 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
 
     context "when provider checking answers of citizen and no dependants and yes" do
       let(:legal_aid_application) do
-        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means
+        create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means)
       end
       let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 
@@ -113,8 +113,8 @@ RSpec.describe Providers::Means::HasDependantsController, type: :request do
 
     context "when provider checking answers of citizen and previously added dependants and yes" do
       let(:legal_aid_application) do
-        create :legal_aid_application, :with_applicant, :with_non_passported_state_machine,
-               :checking_non_passported_means, :with_dependant
+        create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine,
+               :checking_non_passported_means, :with_dependant)
       end
       let(:params) { { legal_aid_application: { has_dependants: "true" } } }
 

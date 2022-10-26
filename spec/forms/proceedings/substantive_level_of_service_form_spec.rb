@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Proceedings::SubstantiveLevelOfServiceForm, :vcr, type: :form do
   subject(:form) { described_class.new(form_params) }
 
-  let(:proceeding) { create :proceeding, :se014, :without_df_date, :with_cit_z }
+  let(:proceeding) { create(:proceeding, :se014, :without_df_date, :with_cit_z) }
   let(:params) do
     {
       substantive_level_of_service:,

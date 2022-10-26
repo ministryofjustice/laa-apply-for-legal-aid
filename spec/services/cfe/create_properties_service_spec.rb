@@ -18,7 +18,7 @@ RSpec.describe CFE::CreatePropertiesService do
     )
   end
   let(:submission) do
-    create :cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :vehicles_created
+    create(:cfe_submission, assessment_id: SecureRandom.uuid, aasm_state: :vehicles_created)
   end
 
   describe "#call" do
@@ -124,7 +124,7 @@ RSpec.describe CFE::CreatePropertiesService do
 
     context "with two properties" do
       let!(:other_assets_declaration) do
-        create :other_assets_declaration, :with_second_home, legal_aid_application:
+        create(:other_assets_declaration, :with_second_home, legal_aid_application:)
       end
       let(:submission) do
         create(

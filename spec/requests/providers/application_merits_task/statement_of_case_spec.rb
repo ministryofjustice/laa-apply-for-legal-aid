@@ -4,11 +4,11 @@ require "sidekiq/testing"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe StatementOfCasesController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { legal_aid_application.provider }
       let(:soc) { nil }
       let(:i18n_error_path) { "activemodel.errors.models.application_merits_task/statement_of_case.attributes.original_file" }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
+      let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/statement_of_case" do
         subject { get providers_legal_aid_application_statement_of_case_path(legal_aid_application) }
@@ -105,8 +105,8 @@ module Providers
 
         describe "redirect on success" do
           context "when the application only has domestic abuse proceedings" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
-            let(:smtl) { create :legal_framework_merits_task_list, :da001, legal_aid_application: }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
+            let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
 
             before do
               legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
@@ -120,8 +120,8 @@ module Providers
           end
 
           context "when the application only has domestic abuse proceedings and is a defendant" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
-            let(:smtl) { create :legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application: }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
+            let(:smtl) { create(:legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application:) }
 
             before do
               legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
@@ -135,7 +135,7 @@ module Providers
           end
 
           context "when the application has a section 8 proceeding" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8) }
 
             context "and involved children exist" do
               before do
@@ -385,7 +385,7 @@ module Providers
           end
 
           context "when model already has files attached" do
-            before { create :statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application: }
+            before { create(:statement_of_case, :with_empty_text, :with_original_file_attached, legal_aid_application:) }
 
             context "and text is empty" do
               let(:entered_text) { "" }
@@ -459,7 +459,7 @@ module Providers
       describe "DELETE /providers/applications/:legal_aid_application_id/statement_of_case" do
         subject { delete providers_legal_aid_application_statement_of_case_path(legal_aid_application), params: }
 
-        let(:statement_of_case) { create :statement_of_case, :with_original_file_attached }
+        let(:statement_of_case) { create(:statement_of_case, :with_original_file_attached) }
         let(:legal_aid_application) { statement_of_case.legal_aid_application }
         let(:original_file) { statement_of_case.original_attachments.first }
         let(:params) { { attachment_id: statement_of_case.original_attachments.first.id } }
@@ -478,7 +478,7 @@ module Providers
           end
 
           context "when a PDF exists" do
-            let(:statement_of_case) { create :statement_of_case, :with_original_and_pdf_files_attached }
+            let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached) }
 
             it "deletes both attachments" do
               expect { subject }.to change(Attachment, :count).by(-2)

@@ -14,7 +14,7 @@ RSpec.describe CCMS::RestartSubmissions do
 
   context "when two applications are paused" do
     before do
-      create_list :legal_aid_application, 2, :submission_paused
+      create_list(:legal_aid_application, 2, :submission_paused)
     end
 
     it { is_expected.to eql "2 CCMS submissions restarted" }

@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe DraftService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:params) { {} }
 
     let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }

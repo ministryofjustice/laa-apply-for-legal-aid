@@ -4,7 +4,7 @@ module Reports
   module MIS
     RSpec.describe ApplicationDetailCsvLine do
       let(:legal_aid_application) do
-        create :application,
+        create(:application,
                :with_proceedings,
                :with_delegated_functions_on_proceedings,
                explicit_proceedings: [:da004],
@@ -25,11 +25,11 @@ module Reports
                opponent:,
                ccms_submission:,
                own_vehicle: false,
-               merits_submitted_at: Time.current
+               merits_submitted_at: Time.current)
       end
 
       let(:application_with_multiple_employments) do
-        create :application,
+        create(:application,
                :with_proceedings,
                :with_delegated_functions_on_proceedings,
                :with_multiple_employments,
@@ -52,11 +52,11 @@ module Reports
                opponent:,
                ccms_submission:,
                own_vehicle: false,
-               merits_submitted_at: Time.current
+               merits_submitted_at: Time.current)
       end
 
       let(:application_without_df) do
-        create :application,
+        create(:application,
                :with_proceedings,
                application_ref: "L-X99-ZZZ",
                applicant:,
@@ -73,42 +73,42 @@ module Reports
                opponent:,
                ccms_submission:,
                own_vehicle: false,
-               merits_submitted_at: Time.current
+               merits_submitted_at: Time.current)
       end
 
       let(:proceeding) { legal_aid_application.proceedings.first }
       let!(:chances_of_success) do
-        create :chances_of_success,
+        create(:chances_of_success,
                success_prospect: prospect,
                application_purpose: purpose,
-               proceeding:
+               proceeding:)
       end
 
       let(:applicant) do
-        create :applicant,
+        create(:applicant,
                :not_employed,
                first_name: "Johnny",
                last_name: "WALKER",
                date_of_birth:,
-               national_insurance_number: "JA293483A"
+               national_insurance_number: "JA293483A")
       end
 
       let(:provider) do
-        create :provider,
+        create(:provider,
                username: "psr001",
-               firm:
+               firm:)
       end
 
-      let(:firm) { create :firm, name: "Legal beagles" }
+      let(:firm) { create(:firm, name: "Legal beagles") }
 
-      let(:office) { create :office, code: "1T823E" }
+      let(:office) { create(:office, code: "1T823E") }
 
-      let(:ccms_submission) { create :ccms_submission, case_ccms_reference: }
+      let(:ccms_submission) { create(:ccms_submission, case_ccms_reference:) }
 
-      let(:benefit_check_result) { create :benefit_check_result, result: benefit_check_result_text }
+      let(:benefit_check_result) { create(:benefit_check_result, result: benefit_check_result_text) }
 
       let(:savings_amount) do
-        create :savings_amount,
+        create(:savings_amount,
                offline_current_accounts: current_acct_val,
                offline_savings_accounts: savings_acct_val,
                cash: cash_val,
@@ -117,11 +117,11 @@ module Reports
                plc_shares: plc_val,
                peps_unit_trusts_capital_bonds_gov_stocks: bonds_val,
                life_assurance_endowment_policy: la_val,
-               none_selected:
+               none_selected:)
       end
 
       let(:other_assets_declaration) do
-        create :other_assets_declaration,
+        create(:other_assets_declaration,
                second_home_value:,
                second_home_mortgage:,
                second_home_percentage:,
@@ -131,11 +131,11 @@ module Reports
                inherited_assets_value:,
                money_owed_value:,
                trust_value:,
-               none_selected:
+               none_selected:)
       end
 
       let(:opponent) do
-        create :opponent,
+        create(:opponent,
                understands_terms_of_court_order:,
                understands_terms_of_court_order_details:,
                warning_letter_sent:,
@@ -143,14 +143,14 @@ module Reports
                police_notified:,
                police_notified_details:,
                bail_conditions_set:,
-               bail_conditions_set_details:
+               bail_conditions_set_details:)
       end
 
       let(:proceeding_type) do
-        create :proceeding_type,
+        create(:proceeding_type,
                meaning: "Proceeding type meaning",
                description: "Proceeding type description",
-               ccms_matter: "Matter type"
+               ccms_matter: "Matter type")
       end
 
       let(:case_ccms_reference) { "42226668880" }
@@ -200,7 +200,7 @@ module Reports
       let(:used_delegated_functions_reported_on) { Date.new(2020, 2, 21) }
       let(:today) { Time.zone.today.strftime("%F") }
 
-      let(:v4_cfe_result) { create :cfe_v4_result }
+      let(:v4_cfe_result) { create(:cfe_v4_result) }
 
       before do
         allow(legal_aid_application).to receive(:cfe_result).and_return(v4_cfe_result)
@@ -362,12 +362,12 @@ module Reports
 
           context "vehicle" do
             let!(:vehicle) do
-              create :vehicle,
+              create(:vehicle,
                      legal_aid_application:,
                      estimated_value: 12_000,
                      payment_remaining:,
                      used_regularly:,
-                     purchased_on: purchase_date
+                     purchased_on: purchase_date)
             end
             let(:purchase_date) { Date.new(2020, 1, 1) }
             let(:used_regularly) { true }
@@ -560,20 +560,20 @@ module Reports
 
           context "when the applicant is employed" do
             let(:legal_aid_application) do
-              create :application,
+              create(:application,
                      :with_proceedings,
                      :with_single_employment,
                      :with_extra_employment_information,
-                     applicant:
+                     applicant:)
             end
 
             let(:applicant) do
-              create :applicant,
+              create(:applicant,
                      :employed,
                      first_name: "Johnny",
                      last_name: "WALKER",
                      date_of_birth:,
-                     national_insurance_number: "JA293483A"
+                     national_insurance_number: "JA293483A")
             end
 
             it "returns the expected data" do
@@ -601,13 +601,13 @@ module Reports
 
           context "when the applicant has multiple employment states" do
             let(:applicant) do
-              create :applicant,
+              create(:applicant,
                      :self_employed,
                      :armed_forces,
                      first_name: "Johnny",
                      last_name: "WALKER",
                      date_of_birth:,
-                     national_insurance_number: "JA293483A"
+                     national_insurance_number: "JA293483A")
             end
 
             it "returns the expected data" do
@@ -677,12 +677,12 @@ module Reports
       def setup_multiple_proceedings
         legal_aid_application.proceedings.map(&:destroy)
         %i[da001 da004 se013].each do |trait|
-          proceeding = create :proceeding, trait, legal_aid_application: legal_aid_application
+          proceeding = create(:proceeding, trait, legal_aid_application: legal_aid_application)
 
-          create :chances_of_success,
+          create(:chances_of_success,
                  success_prospect: prospect,
                  application_purpose: purpose,
-                 proceeding:
+                 proceeding:)
         end
         legal_aid_application.reload
       end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "providers savings and investments", type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount }
+  let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount) }
   let(:savings_amount) { application.savings_amount }
 
   describe "GET /providers/applications/:legal_aid_application_id/means/savings_and_investment" do
@@ -144,7 +144,7 @@ RSpec.describe "providers savings and investments", type: :request do
         end
 
         context "when in checking passported answers state" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_passported_state_machine, :checking_passported_answers }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount, :with_passported_state_machine, :checking_passported_answers) }
           let(:submit_button) do
             {
               continue_button: "Continue",
@@ -168,7 +168,7 @@ RSpec.describe "providers savings and investments", type: :request do
         end
 
         context "provider checking citizen's answers" do
-          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, :checking_non_passported_means }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, :checking_non_passported_means) }
           let(:submit_button) do
             {
               continue_button: "Continue",

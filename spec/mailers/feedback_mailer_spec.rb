@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe FeedbackMailer, type: :mailer do
   describe "notify" do
-    let(:feedback) { create :feedback }
-    let(:application) { create :application }
+    let(:feedback) { create(:feedback) }
+    let(:application) { create(:application) }
     let(:application_id) { application.id }
     let(:mail) { described_class.notify(feedback.id, application_id) }
 
@@ -26,7 +26,7 @@ RSpec.describe FeedbackMailer, type: :mailer do
         end
 
         context "when application state is not a pre_dwp_check state" do
-          let(:application) { create :application, :assessment_submitted }
+          let(:application) { create(:application, :assessment_submitted) }
 
           it "does not have a status of pre dwp check" do
             expect(mail.govuk_notify_personalisation[:application_status]).not_to eq "pre-dwp-check"

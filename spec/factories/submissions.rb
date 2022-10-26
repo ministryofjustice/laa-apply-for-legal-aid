@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :submission, class: CCMS::Submission do
-    legal_aid_application { create :legal_aid_application }
+    legal_aid_application { create(:legal_aid_application) }
     sequence(:case_ccms_reference) { |n| sprintf("300000%<number>06d", number: n) }
 
     trait :case_ref_obtained do
@@ -26,7 +26,7 @@ FactoryBot.define do
     trait :document_ids_obtained do
       aasm_state { "document_ids_obtained" }
       after :create do |submission|
-        create :submission_document, :id_obtained, submission:
+        create(:submission_document, :id_obtained, submission:)
       end
     end
   end

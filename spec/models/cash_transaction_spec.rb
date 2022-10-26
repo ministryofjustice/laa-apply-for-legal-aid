@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe CashTransaction, type: :model do
-  let(:application1) { create :legal_aid_application }
-  let(:application2) { create :legal_aid_application }
-  let(:benefits) { create :transaction_type, :benefits }
-  let(:pension) { create :transaction_type, :pension }
+  let(:application1) { create(:legal_aid_application) }
+  let(:application2) { create(:legal_aid_application) }
+  let(:benefits) { create(:transaction_type, :benefits) }
+  let(:pension) { create(:transaction_type, :pension) }
 
   before do
     @benefits_transactions = []
@@ -15,10 +15,10 @@ RSpec.describe CashTransaction, type: :model do
 
   def cash_transactions_for(application, multiplier)
     (1..3).each do |number|
-      benefits_transaction = create :cash_transaction, transaction_type: benefits, legal_aid_application: application, transaction_date: number.month.ago,
-                                                       amount: 100 * multiplier, month_number: number
-      pension_transaction = create :cash_transaction, transaction_type: pension, legal_aid_application: application, transaction_date: number.month.ago, amount: 200 * multiplier,
-                                                      month_number: number
+      benefits_transaction = create(:cash_transaction, transaction_type: benefits, legal_aid_application: application, transaction_date: number.month.ago,
+                                                       amount: 100 * multiplier, month_number: number)
+      pension_transaction = create(:cash_transaction, transaction_type: pension, legal_aid_application: application, transaction_date: number.month.ago, amount: 200 * multiplier,
+                                                      month_number: number)
       @benefits_transactions << benefits_transaction
       @pension_transactions << pension_transaction
     end
@@ -40,7 +40,7 @@ RSpec.describe CashTransaction, type: :model do
   end
 
   context "with date formatting" do
-    let(:ctx) { create :cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1 }
+    let(:ctx) { create(:cash_transaction, transaction_date: Date.new(2021, 2, 2), month_number: 1) }
 
     describe ".period_start" do
       it "displays 1st day and month of transaction date" do

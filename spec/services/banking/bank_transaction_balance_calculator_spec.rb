@@ -4,11 +4,11 @@ module Banking
   RSpec.describe BankTransactionBalanceCalculator do
     subject { described_class.call(application) }
 
-    let(:application) { create :legal_aid_application, :with_applicant }
+    let(:application) { create(:legal_aid_application, :with_applicant) }
     let(:applicant) { application.applicant }
-    let(:bank) { create :bank_provider, applicant: }
-    let(:acct1) { create :bank_account, bank_provider: bank, balance: 733.44 }
-    let(:acct2) { create :bank_account, bank_provider: bank, balance: 2.36 }
+    let(:bank) { create(:bank_provider, applicant:) }
+    let(:acct1) { create(:bank_account, bank_provider: bank, balance: 733.44) }
+    let(:acct2) { create(:bank_account, bank_provider: bank, balance: 2.36) }
 
     before do
       populate_all_transactions

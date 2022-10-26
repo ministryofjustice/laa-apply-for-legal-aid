@@ -13,7 +13,7 @@ module FactoryHelpers
       end
 
       it "can be used inside a factory" do
-        rec = create :hmrc_response, :use_case_one
+        rec = create(:hmrc_response, :use_case_one)
         expect(rec.response["status"]).to eq "completed"
         expect(rec.response["data"].size).to eq 19
       end

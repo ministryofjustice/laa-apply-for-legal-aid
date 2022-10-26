@@ -147,7 +147,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "with no traits" do
-    let(:cfe_result) { create :cfe_v4_result }
+    let(:cfe_result) { create(:cfe_v4_result) }
 
     include_examples "has the correct structure for v4"
 
@@ -159,7 +159,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :eligible" do
-    let(:cfe_result) { create :cfe_v4_result, :eligible }
+    let(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
     include_examples "has the correct structure for v4"
 
@@ -171,7 +171,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :not_eligible" do
-    let(:cfe_result) { create :cfe_v4_result, :not_eligible }
+    let(:cfe_result) { create(:cfe_v4_result, :not_eligible) }
 
     include_examples "has the correct structure for v4"
 
@@ -183,7 +183,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "no capital" do
-    let(:cfe_result) { create :cfe_v4_result, :no_capital }
+    let(:cfe_result) { create(:cfe_v4_result, :no_capital) }
 
     include_examples "has the correct structure for v4"
 
@@ -195,7 +195,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_capital_contribution_required" do
-    let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
+    let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
 
     include_examples "has the correct structure for v4"
 
@@ -207,7 +207,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :no_additional_properties" do
-    let(:cfe_result) { create :cfe_v4_result, :no_additional_properties }
+    let(:cfe_result) { create(:cfe_v4_result, :no_additional_properties) }
 
     include_examples "has the correct structure for v4"
 
@@ -223,7 +223,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_additional_properties" do
-    let(:cfe_result) { create :cfe_v4_result, :with_additional_properties }
+    let(:cfe_result) { create(:cfe_v4_result, :with_additional_properties) }
 
     include_examples "has the correct structure for v4"
 
@@ -239,7 +239,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_no_vehicles" do
-    let(:cfe_result) { create :cfe_v4_result, :with_no_vehicles }
+    let(:cfe_result) { create(:cfe_v4_result, :with_no_vehicles) }
 
     include_examples "has the correct structure for v4"
 
@@ -255,7 +255,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait: with_maintenance_received" do
-    let(:cfe_result) { create :cfe_v4_result, :with_maintenance_received }
+    let(:cfe_result) { create(:cfe_v4_result, :with_maintenance_received) }
 
     include_examples "has the correct structure for v4"
 
@@ -267,7 +267,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_mortgage_costs" do
-    let(:cfe_result) { create :cfe_v4_result, :with_mortgage_costs }
+    let(:cfe_result) { create(:cfe_v4_result, :with_mortgage_costs) }
 
     include_examples "has the correct structure for v4"
 
@@ -283,7 +283,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_income_contribution_required" do
-    let(:cfe_result) { create :cfe_v4_result, :with_income_contribution_required }
+    let(:cfe_result) { create(:cfe_v4_result, :with_income_contribution_required) }
 
     include_examples "has the correct structure for v4"
 
@@ -295,7 +295,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_capital_and_income_contributions_required" do
-    let(:cfe_result) { create :cfe_v4_result, :with_capital_and_income_contributions_required }
+    let(:cfe_result) { create(:cfe_v4_result, :with_capital_and_income_contributions_required) }
 
     include_examples "has the correct structure for v4"
     it "requires both contributions" do
@@ -306,7 +306,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_total_deductions" do
-    let(:cfe_result) { create :cfe_v4_result, :with_total_deductions }
+    let(:cfe_result) { create(:cfe_v4_result, :with_total_deductions) }
 
     include_examples "has the correct structure for v4"
     it "has total deductions" do
@@ -315,7 +315,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_total_gross_income" do
-    let(:cfe_result) { create :cfe_v4_result, :with_total_gross_income }
+    let(:cfe_result) { create(:cfe_v4_result, :with_total_gross_income) }
 
     include_examples "has the correct structure for v4"
     it "has total deductions" do
@@ -324,7 +324,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_mortgage_costs" do
-    let(:cfe_result) { create :cfe_v4_result, :with_mortgage_costs }
+    let(:cfe_result) { create(:cfe_v4_result, :with_mortgage_costs) }
 
     include_examples "has the correct structure for v4"
 
@@ -334,7 +334,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_monthly_income_equivalents" do
-    let(:cfe_result) { create :cfe_v4_result, :with_monthly_income_equivalents }
+    let(:cfe_result) { create(:cfe_v4_result, :with_monthly_income_equivalents) }
 
     include_examples "has the correct structure for v4"
 
@@ -347,7 +347,7 @@ RSpec.describe "cfe_result version 4 factory" do
   end
 
   describe "trait :with_monthly_outgoing_equivalents" do
-    let(:cfe_result) { create :cfe_v4_result, :with_monthly_outgoing_equivalents }
+    let(:cfe_result) { create(:cfe_v4_result, :with_monthly_outgoing_equivalents) }
 
     include_examples "has the correct structure for v4"
 

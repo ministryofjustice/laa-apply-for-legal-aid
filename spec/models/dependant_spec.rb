@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Dependant, type: :model do
   let(:calculation_date) { Date.current }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date }
-  let(:dependant) { create :dependant, legal_aid_application:, date_of_birth: }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, transaction_period_finish_on: calculation_date) }
+  let(:dependant) { create(:dependant, legal_aid_application:, date_of_birth:) }
 
   describe "#ordinal_number" do
     it "returns the correct ordinal_number" do
@@ -17,14 +17,14 @@ RSpec.describe Dependant, type: :model do
   describe "#as_json" do
     context "when dependant has nil values" do
       let(:dependant) do
-        create :dependant,
+        create(:dependant,
                date_of_birth: Date.new(2019, 3, 2),
                in_full_time_education: nil,
                has_assets_more_than_threshold: nil,
                has_income: nil,
                relationship: nil,
                monthly_income: nil,
-               assets_value: nil
+               assets_value: nil)
       end
       let(:expected_hash) do
         {
@@ -43,14 +43,14 @@ RSpec.describe Dependant, type: :model do
 
     context "when dependant has values" do
       let(:dependant) do
-        create :dependant,
+        create(:dependant,
                date_of_birth: Date.new(2019, 3, 2),
                in_full_time_education: true,
                has_assets_more_than_threshold: false,
                has_income: true,
                relationship: "adult_relative",
                monthly_income: 123.45,
-               assets_value: 6789.0
+               assets_value: 6789.0)
       end
       let(:expected_hash) do
         {
@@ -149,7 +149,7 @@ RSpec.describe Dependant, type: :model do
   end
 
   describe "ccms_relationship_to_client" do
-    let(:dependant) { create :dependant, legal_aid_application:, relationship:, date_of_birth: dob }
+    let(:dependant) { create(:dependant, legal_aid_application:, relationship:, date_of_birth: dob) }
 
     context "when adult relative" do
       let(:relationship) { "adult_relative" }
@@ -182,7 +182,7 @@ RSpec.describe Dependant, type: :model do
   describe "assets_over_threshold?" do
     subject(:assets_over_threshold) { dependant.assets_over_threshold? }
 
-    let(:dependant) { create :dependant, legal_aid_application:, assets_value: }
+    let(:dependant) { create(:dependant, legal_aid_application:, assets_value:) }
 
     context "when assets_value is nil" do
       let(:assets_value) { nil }

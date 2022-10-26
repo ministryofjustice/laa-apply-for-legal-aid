@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CheckAnswerUrlHelper, type: :helper do
-  let(:application) { create :legal_aid_application }
+  let(:application) { create(:legal_aid_application) }
 
   describe "#check_answer_url_for" do
     context "when a provider" do

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TranslatableModelAttribute do
-  let(:record) { create :legal_aid_application }
+  let(:record) { create(:legal_aid_application) }
 
   describe "#enum_t" do
     context "when translation exists" do

@@ -2,10 +2,10 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateCapitalsService do
-    let!(:application) { create :legal_aid_application, :with_applicant, with_bank_accounts: 6 }
+    let!(:application) { create(:legal_aid_application, :with_applicant, with_bank_accounts: 6) }
     let!(:other_assets_declaration) { my_other_asset_declaration }
     # let!(:savings_amount) { my_savings_amount }
-    let(:submission) { create :cfe_submission, aasm_state: "applicant_created", legal_aid_application: application }
+    let(:submission) { create(:cfe_submission, aasm_state: "applicant_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -82,30 +82,30 @@ module CFE
     end
 
     def my_other_asset_declaration
-      create :other_assets_declaration,
+      create(:other_assets_declaration,
              :with_all_values,
              legal_aid_application: application,
              inherited_assets_value: nil,
-             money_owed_value: 0.0
+             money_owed_value: 0.0)
     end
 
     def my_savings_amount
-      create :savings_amount,
+      create(:savings_amount,
              :with_values,
              legal_aid_application: application,
              plc_shares: nil,
              peps_unit_trusts_capital_bonds_gov_stocks: 0.0,
-             life_assurance_endowment_policy: nil
+             life_assurance_endowment_policy: nil)
     end
 
     def savings_amount_with_nil_current_account
-      create :savings_amount,
+      create(:savings_amount,
              :with_values,
              legal_aid_application: application,
              offline_current_accounts: nil,
              plc_shares: nil,
              peps_unit_trusts_capital_bonds_gov_stocks: 0.0,
-             life_assurance_endowment_policy: nil
+             life_assurance_endowment_policy: nil)
     end
 
     def expected_payload_hash

@@ -13,7 +13,7 @@ RSpec.describe DigestExporter do
     let(:rows) { ApplicationDigest.order(:created_at).map(&:to_google_sheet_row) }
 
     before do
-      create_list :application_digest, 4
+      create_list(:application_digest, 4)
     end
 
     it "loads all the digest records" do

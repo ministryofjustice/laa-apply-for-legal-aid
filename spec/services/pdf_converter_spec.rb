@@ -10,7 +10,7 @@ RSpec.describe PdfConverter do
   before { allow(Libreconv).to receive(:convert) }
 
   context "when attachment is statement of case" do
-    let(:statement_of_case) { create :statement_of_case }
+    let(:statement_of_case) { create(:statement_of_case) }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }
     let(:original_file) { statement_of_case.original_files.first }
     let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }
@@ -72,7 +72,7 @@ RSpec.describe PdfConverter do
   end
 
   context "when attachment is gateway evidence" do
-    let(:gateway_evidence) { create :gateway_evidence }
+    let(:gateway_evidence) { create(:gateway_evidence) }
     let(:file) { FileStruct.new("hello_world.pdf", "application/pdf") }
     let(:original_file) { gateway_evidence.original_files.first }
     let(:filepath) { "#{Rails.root}/spec/fixtures/files/documents/#{file.name}" }

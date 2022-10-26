@@ -3,7 +3,7 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe InvolvedChildrenController, type: :request do
-      let(:application) { create :legal_aid_application }
+      let(:application) { create(:legal_aid_application) }
       let(:provider) { application.provider }
 
       describe "new: GET /providers/applications/:legal_aid_application_id/involved_children/new" do
@@ -35,7 +35,7 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
         subject { get providers_legal_aid_application_involved_child_path(application, child) }
 
-        let(:child) { create :involved_child, legal_aid_application: application }
+        let(:child) { create(:involved_child, legal_aid_application: application) }
 
         context "when authenticated" do
           before { login_as provider }
@@ -61,7 +61,7 @@ module Providers
       describe "update: PATCH providers/applications/:legal_aid_application_id/involved_children/:involved_child_id" do
         subject { patch providers_legal_aid_application_involved_child_path(application, child), params: }
 
-        let(:child) { create :involved_child, legal_aid_application: application }
+        let(:child) { create(:involved_child, legal_aid_application: application) }
         let(:new_full_name) { "#{child.full_name} Junior" }
 
         let(:params) do

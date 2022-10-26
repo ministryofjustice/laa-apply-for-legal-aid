@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "GET /v1/legal_aid_applications", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_everything, substantive_application_deadline_on: 1.day.ago }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_everything, substantive_application_deadline_on: 1.day.ago) }
   let(:id) { legal_aid_application.id }
 
   describe "GET /v1/legal_aid_applications/:id" do
@@ -28,7 +28,7 @@ RSpec.describe "GET /v1/legal_aid_applications", type: :request do
     end
 
     context "when the application has a pre-existing scheduled mail" do
-      let!(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: }
+      let!(:scheduled_mailing) { create(:scheduled_mailing, legal_aid_application:) }
 
       it "clears any scheduled mailings" do
         expect { subject }.to change { legal_aid_application.scheduled_mailings.first.cancelled_at }

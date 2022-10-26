@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe ListService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:params) { nil }
     let(:required_document_categories) { %w[gateway_evidence employment_evidence] }
 

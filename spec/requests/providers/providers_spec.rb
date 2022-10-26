@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::ProvidersController, type: :request do
   subject { get providers_provider_path }
 
-  let(:provider) { create :provider }
+  let(:provider) { create(:provider) }
 
   before do
     login_as provider

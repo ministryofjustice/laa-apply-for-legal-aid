@@ -6,7 +6,7 @@ RSpec.describe Providers::Means::CashIncomesController, type: :request do
     legal_aid_application.set_transaction_period
   end
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_passported_state_machine, :provider_entering_means }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_passported_state_machine, :provider_entering_means) }
   let(:next_flow_step) { flow_forward_path }
   let(:provider) { legal_aid_application.provider }
 

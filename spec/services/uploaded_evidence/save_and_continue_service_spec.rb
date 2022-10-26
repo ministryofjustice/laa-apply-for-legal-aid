@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe SaveAndContinueService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:params) { nil }
 
     let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }
@@ -21,8 +21,8 @@ module UploadedEvidence
     describe "#call" do
       let(:service) { described_class.new(controller) }
       let(:submission_form) { instance_double Providers::UploadedEvidenceSubmissionForm, model: }
-      let(:att1) { create :attachment, :uploaded_evidence_collection, attachment_type: "uncategorised" }
-      let(:att2) { create :attachment, :uploaded_evidence_collection, attachment_type: "employment_evidence" }
+      let(:att1) { create(:attachment, :uploaded_evidence_collection, attachment_type: "uncategorised") }
+      let(:att2) { create(:attachment, :uploaded_evidence_collection, attachment_type: "employment_evidence") }
 
       before { allow(service).to receive(:submission_form).and_return(submission_form) }
 

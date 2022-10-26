@@ -1,6 +1,6 @@
 require "rails_helper"
 RSpec.describe "provider percentage share of home test", type: :request do
-  let!(:application) { create :legal_aid_application, :with_applicant }
+  let!(:application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { application.provider }
 
   describe "GET #/providers/applications/:legal_aid_application_id/means/percentage_home" do

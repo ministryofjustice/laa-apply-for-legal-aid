@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe AggregatedCashOutgoings, type: :model do
   let(:aco) { described_class.new(legal_aid_application_id: application.id) }
-  let(:application) { create :legal_aid_application }
+  let(:application) { create(:legal_aid_application) }
   let(:categories) { %i[rent_or_mortgage maintenance_out] }
-  let!(:rent_or_mortgage) { create :transaction_type, :rent_or_mortgage }
-  let!(:maintenance_out) { create :transaction_type, :maintenance_out }
-  let!(:legal_aid) { create :transaction_type, :legal_aid }
+  let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
+  let!(:maintenance_out) { create(:transaction_type, :maintenance_out) }
+  let!(:legal_aid) { create(:transaction_type, :legal_aid) }
   let(:month1_tx_date) { Time.zone.today.beginning_of_month - 1.month }
   let(:month2_tx_date) { Time.zone.today.beginning_of_month - 2.months }
   let(:month3_tx_date) { Time.zone.today.beginning_of_month - 3.months }
@@ -46,9 +46,9 @@ RSpec.describe AggregatedCashOutgoings, type: :model do
     end
 
     context "when cash income transaction records exist" do
-      let!(:maintenance_out1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out }
-      let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
-      let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
+      let!(:maintenance_out1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out) }
+      let!(:maintenance_out3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out) }
       let(:month_1_date) { Date.new(2020, 12, 1) }
       let(:month_2_date) { Date.new(2020, 11, 1) }
       let(:month_3_date) { Date.new(2020, 10, 1) }

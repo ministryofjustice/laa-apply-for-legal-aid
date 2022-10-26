@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe GovukEmails::Monitor do
-  let(:scheduled_mailing) { create :scheduled_mailing, :processing }
+  let(:scheduled_mailing) { create(:scheduled_mailing, :processing) }
   let(:response) { double GovukEmails::Email, status: }
 
   before do

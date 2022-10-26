@@ -6,7 +6,7 @@ module CCMS
       subject { described_class.new(submission) }
 
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_chances_of_success,
                :with_everything_and_address,
@@ -15,15 +15,15 @@ module CCMS
                explicit_proceedings: [:da001],
                set_lead_proceeding: :da001,
                office_id: office.id,
-               populate_vehicle: true
+               populate_vehicle: true)
       end
       let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, proceeding:
+        create(:chances_of_success, :with_optional_text, proceeding:)
       end
       let(:applicant) { legal_aid_application.applicant }
-      let(:office) { create :office }
-      let(:submission) { create :submission, :applicant_ref_obtained, legal_aid_application: }
+      let(:office) { create(:office) }
+      let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:endpoint) { "https://sitsoa10.laadev.co.uk/soa-infra/services/default/CaseServices/CaseServices_ep" }
       let(:response_body) { ccms_data_from_file "case_add_response.xml" }
@@ -54,7 +54,7 @@ module CCMS
         end
 
         context "there are documents to upload" do
-          let(:submission) { create :submission, :document_ids_obtained, legal_aid_application: }
+          let(:submission) { create(:submission, :document_ids_obtained, legal_aid_application:) }
 
           it "writes a history record" do
             expect { subject.call }.to change(SubmissionHistory, :count).by(1)

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::UseCCMSEmployedController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/use_ccms_employed" do

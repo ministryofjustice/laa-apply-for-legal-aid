@@ -8,7 +8,7 @@ require "rails_helper"
 # endpoint so are not tested here.
 #
 RSpec.describe "POST /v1/bank_statements", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
   let(:params) { { legal_aid_application_id: id, file: } }
@@ -64,7 +64,7 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
       end
 
       context "when the application has no bank statements" do
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [] }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: []) }
 
         it "does not increment the attachment name" do
           request

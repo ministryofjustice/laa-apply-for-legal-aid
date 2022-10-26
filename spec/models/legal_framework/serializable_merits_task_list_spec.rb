@@ -3,8 +3,8 @@ require "rails_helper"
 module LegalFramework
   RSpec.describe SerializableMeritsTaskList, type: :model do
     before do
-      create :proceeding, :da004
-      create :proceeding, :da001
+      create(:proceeding, :da004)
+      create(:proceeding, :da001)
     end
 
     let(:smtl) { described_class.new(dummy_response_hash) }

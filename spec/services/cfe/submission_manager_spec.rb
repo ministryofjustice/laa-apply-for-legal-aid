@@ -157,7 +157,7 @@ module CFE
       end
 
       context "with a passported application" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, :with_vehicle }
+        let(:application) { create(:legal_aid_application, :with_everything, :with_positive_benefit_check_result, :applicant_entering_means, :with_vehicle) }
 
         it "creates a submission record for the application" do
           expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)
@@ -179,7 +179,7 @@ module CFE
       end
 
       context "with a non-passported truelayer application" do
-        let(:application) { create :legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, :with_vehicle }
+        let(:application) { create(:legal_aid_application, :with_everything, :with_negative_benefit_check_result, :applicant_entering_means, :with_vehicle) }
 
         it "creates a submission record for the application" do
           expect { submission_manager.call }.to change(application.cfe_submissions, :count).by(1)

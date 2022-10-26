@@ -2,8 +2,8 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateExplicitRemarksService do
-    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result, :with_single_policy_disregard }
-    let(:submission) { create :cfe_submission, aasm_state: "properties_created", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result, :with_single_policy_disregard) }
+    let(:submission) { create(:cfe_submission, aasm_state: "properties_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
 
     describe "#cfe_url" do

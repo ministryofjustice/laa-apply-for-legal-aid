@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "citizen home requests", type: :request do
   let(:completed_at) { nil }
-  let(:application) { create :application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant, completed_at: }
+  let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant, completed_at:) }
   let(:application_id) { application.id }
   let(:secure_id) { application.generate_secure_id }
   let(:applicant_first_name) { application.applicant.first_name }
@@ -86,7 +86,7 @@ RSpec.describe "citizen home requests", type: :request do
 
     context "when a provider is logged in" do
       let(:provider_username) { "stepriponikas.bonstart" }
-      let(:provider) { create :provider, username: provider_username }
+      let(:provider) { create(:provider, username: provider_username) }
 
       before { sign_in provider }
 

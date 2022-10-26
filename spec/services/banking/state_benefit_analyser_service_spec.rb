@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Banking::StateBenefitAnalyserService do
-  let(:legal_aid_application) { create :legal_aid_application }
-  let(:applicant) { create :applicant, legal_aid_application:, national_insurance_number: nino }
-  let(:bank_provider) { create :bank_provider, applicant: }
-  let(:bank_account1) { create :bank_account, bank_provider: }
+  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:applicant) { create(:applicant, legal_aid_application:, national_insurance_number: nino) }
+  let(:bank_provider) { create(:bank_provider, applicant:) }
+  let(:bank_account1) { create(:bank_account, bank_provider:) }
   let(:nino) { "YS327299B" }
-  let!(:included_benefit_transaction_type) { create :transaction_type, :benefits }
-  let!(:excluded_benefit_transaction_type) { create :transaction_type, :excluded_benefits }
+  let!(:included_benefit_transaction_type) { create(:transaction_type, :benefits) }
+  let!(:excluded_benefit_transaction_type) { create(:transaction_type, :excluded_benefits) }
 
   describe ".call" do
     subject(:call) { described_class.call(legal_aid_application) }
@@ -214,7 +214,7 @@ RSpec.describe Banking::StateBenefitAnalyserService do
     end
 
     def create_mix_of_non_benefit_transactions
-      transactions = create_list :bank_transaction, 3, bank_account: bank_account1
+      transactions = create_list(:bank_transaction, 3, bank_account: bank_account1)
       transactions.sort_by(&:id)
     end
   end

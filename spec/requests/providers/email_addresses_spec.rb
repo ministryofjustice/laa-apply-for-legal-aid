@@ -34,7 +34,7 @@ RSpec.describe "update client email address before application confirmation", ty
   describe "PATCH /providers/applications/:legal_aid_application_id/email_address" do
     subject { patch "/providers/applications/#{application_id}/email_address", params: }
 
-    let(:application) { create :legal_aid_application }
+    let(:application) { create(:legal_aid_application) }
     let(:provider) { application.provider }
     let(:params) do
       {

@@ -10,8 +10,8 @@ RSpec.describe Applicants::EmailForm, type: :form do
   end
 
   let(:email) { Faker::Internet.safe_email }
-  let(:applicant) { create :applicant, email: nil }
-  let(:legal_aid_application) { create :legal_aid_application, applicant: }
+  let(:applicant) { create(:applicant, email: nil) }
+  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
 
   let(:params) do
     {

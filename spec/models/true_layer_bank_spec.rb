@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe TrueLayerBank, type: :model, vcr: { cassette_name: "true_layer_banks_api", allow_playback_repeats: true } do
   let(:api_banks) { TrueLayer::BanksRetriever.banks }
-  let!(:true_layer_bank) { create :true_layer_bank }
+  let!(:true_layer_bank) { create(:true_layer_bank) }
   let(:enable_mock) { false }
 
   before do

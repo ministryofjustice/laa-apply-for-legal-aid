@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
-  let(:application) { create :legal_aid_application, :with_applicant }
+  let(:application) { create(:legal_aid_application, :with_applicant) }
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }
   let(:application_url) { "test" }
@@ -31,10 +31,10 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
   end
 
   describe ".eligible_for_delivery?" do
-    let(:scheduled_mailing) { create :scheduled_mailing, legal_aid_application: application }
+    let(:scheduled_mailing) { create(:scheduled_mailing, legal_aid_application: application) }
 
     context "when it is eligible" do
-      let(:application) { create :legal_aid_application, :with_proceedings, :with_non_passported_state_machine, :at_client_completed_means }
+      let(:application) { create(:legal_aid_application, :with_proceedings, :with_non_passported_state_machine, :at_client_completed_means) }
 
       it "returns true" do
         expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be true
@@ -42,7 +42,7 @@ RSpec.describe SubmitProviderFinancialReminderMailer, type: :mailer do
     end
 
     context "when it is not eligible" do
-      let(:application) { create :legal_aid_application, :at_assessment_submitted }
+      let(:application) { create(:legal_aid_application, :at_assessment_submitted) }
 
       it "returns false" do
         expect(described_class.eligible_for_delivery?(scheduled_mailing)).to be false

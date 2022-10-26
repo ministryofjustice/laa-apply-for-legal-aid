@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:failure_reason) { "permanently-failed" }
   let(:mailer) { "NotifyMailer" }
   let(:mail_method) { "citizen_start_email" }
@@ -10,7 +10,7 @@ RSpec.describe UndeliverableEmailAlertMailer, type: :mailer do
   let(:url) { "http://localhost/start_my_application/some_secret_id" }
   let(:applicant_name) { "John Doe" }
   let(:provider_firm) { "Acme Solicitors" }
-  let(:scheduled_mailing) { create :scheduled_mailing, :citizen_start_email, :failed, legal_aid_application_id: legal_aid_application.id }
+  let(:scheduled_mailing) { create(:scheduled_mailing, :citizen_start_email, :failed, legal_aid_application_id: legal_aid_application.id) }
 
   describe "#notify_apply_team" do
     let(:mail) { described_class.notify_apply_team(scheduled_mailing.id) }

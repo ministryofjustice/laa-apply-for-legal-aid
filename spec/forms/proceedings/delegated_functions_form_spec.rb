@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
   subject(:df_form) { described_class.new(form_params) }
 
-  let(:proceeding) { create :proceeding, :da001 }
+  let(:proceeding) { create(:proceeding, :da001) }
   let(:params) do
     {
       used_delegated_functions: used_df?,
@@ -31,7 +31,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
     end
 
     context "when provider changes yes to no" do
-      let(:proceeding) { create :proceeding, :da002 }
+      let(:proceeding) { create(:proceeding, :da002) }
       let(:params) do
         {
           used_delegated_functions: false,

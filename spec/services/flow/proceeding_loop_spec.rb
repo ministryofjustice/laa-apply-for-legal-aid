@@ -15,7 +15,7 @@ RSpec.describe Flow::ProceedingLoop do
 
     context "when the mini-loop feature flag is off" do
       let(:mini_loop_on?) { false }
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create(:legal_aid_application) }
 
       it { is_expected.to be :used_multiple_delegated_functions }
     end

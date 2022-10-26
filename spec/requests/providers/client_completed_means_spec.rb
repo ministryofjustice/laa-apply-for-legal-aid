@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Providers::ClientCompletedMeansController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, applicant: }
-  let(:applicant) { create :applicant, :employed }
+  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
+  let(:applicant) { create(:applicant, :employed) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:id/client_completed_means" do
@@ -26,7 +26,7 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
       end
 
       context "when the applicant is not employed" do
-        let(:applicant) { create :applicant, :not_employed }
+        let(:applicant) { create(:applicant, :not_employed) }
 
         it "does not include reviewing employment details in action list" do
           expect(response.body).not_to include("Review their employment details")
@@ -127,10 +127,10 @@ RSpec.describe Providers::ClientCompletedMeansController, type: :request do
 
         context "transactions exist, and applicant is not employed" do
           let(:submit_button) { { continue_button: "Continue" } }
-          let(:transaction_type) { create :transaction_type, :pension }
-          let(:applicant) { create :applicant, :not_employed }
+          let(:transaction_type) { create(:transaction_type, :pension) }
+          let(:applicant) { create(:applicant, :not_employed) }
           let(:legal_aid_application) do
-            create :legal_aid_application, applicant:, transaction_types: [transaction_type]
+            create(:legal_aid_application, applicant:, transaction_types: [transaction_type])
           end
 
           it "redirects to next page" do
