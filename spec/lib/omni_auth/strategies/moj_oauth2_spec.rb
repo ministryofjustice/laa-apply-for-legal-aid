@@ -62,7 +62,7 @@ module OmniAuth
       end
 
       def example_session
-        HashWithIndifferentAccess.new(
+        ActiveSupport::HashWithIndifferentAccess.new(
           {
             "session_id" => "c38047b5f6a12c9de1540621ac8dc7d3",
             "current_application_id" => "583496de-f14e-46b5-bbff-8f95b4d6af22",
@@ -76,7 +76,7 @@ module OmniAuth
       end
 
       def example_auth_params
-        HashWithIndifferentAccess.new(
+        ActiveSupport::HashWithIndifferentAccess.new(
           {
             "state" => omniauth_state,
             "scope" => "info accounts balance transactions",
@@ -89,7 +89,7 @@ module OmniAuth
       end
 
       def example_request_params
-        HashWithIndifferentAccess.new(
+        ActiveSupport::HashWithIndifferentAccess.new(
           {
             state: omniauth_state,
           },
@@ -97,7 +97,7 @@ module OmniAuth
       end
 
       def example_environment
-        HashWithIndifferentAccess.new(
+        ActiveSupport::HashWithIndifferentAccess.new(
           {
             "omniauth.auth" => {},
           },

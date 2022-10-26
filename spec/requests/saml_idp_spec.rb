@@ -67,7 +67,7 @@ RSpec.describe SamlIdpController do
     end
 
     def new_params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         {
           "locale" => "en",
           "controller" => "saml_sessions",
@@ -77,7 +77,7 @@ RSpec.describe SamlIdpController do
     end
 
     def login_params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         {
           "SAMLRequest" => saml_request,
           "email" => email,
