@@ -1,6 +1,10 @@
 class FeedbackController < ApplicationController
   before_action :update_return_path, :update_locale
 
+  def show
+    @feedback = Feedback.find(params[:id])
+  end
+
   def new
     @journey = source
     @feedback = Feedback.new
@@ -28,10 +32,6 @@ class FeedbackController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @feedback = Feedback.find(params[:id])
   end
 
 private

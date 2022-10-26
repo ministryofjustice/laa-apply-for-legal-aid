@@ -4,6 +4,8 @@ module Citizens
 
     # User passes in the Secure Id at the start of the journey. If login succeeds, they
     # are redirected to index where the first page is displayed.
+    def index; end
+
     def show
       session[:journey_type] = :citizens
       return expired if application_error == :expired
@@ -12,8 +14,6 @@ module Citizens
       legal_aid_application.applicant_enter_means!
       start_applicant_flow
     end
-
-    def index; end
 
   private
 

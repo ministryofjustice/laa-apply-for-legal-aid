@@ -7,16 +7,16 @@ module Citizens
       additional_account_form
     end
 
+    def new
+      legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
+      offline_account_form
+    end
+
     def create
       return go_additional_account if additional_account_form_valid_and_additional_account?
       return go_forward if additional_account_form.valid?
 
       render :index
-    end
-
-    def new
-      legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
-      offline_account_form
     end
 
     def update

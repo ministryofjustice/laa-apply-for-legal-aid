@@ -1,11 +1,11 @@
 module Providers
   module ApplicationMeritsTask
     class InvolvedChildrenController < ProviderBaseController
-      def new
+      def show
         @form = InvolvedChildForm.new(model: involved_child)
       end
 
-      def show
+      def new
         @form = InvolvedChildForm.new(model: involved_child)
       end
 
