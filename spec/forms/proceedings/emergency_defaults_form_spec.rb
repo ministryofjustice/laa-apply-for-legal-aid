@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Proceedings::EmergencyDefaultsForm, vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_applicant_with_df" }, type: :form do
+RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_applicant_with_df" } do
   subject(:form) { described_class.new(form_params) }
 
   let(:proceeding) do
