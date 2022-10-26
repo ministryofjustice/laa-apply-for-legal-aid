@@ -738,7 +738,7 @@ RSpec.describe LegalAidApplication do
 
   describe "#create_app_ref" do
     it "generates an application_ref when the application is created" do
-      legal_aid_application = described_class.create!(provider: (create(:provider)))
+      legal_aid_application = described_class.create!(provider: create(:provider))
       expect(legal_aid_application.application_ref).to match(/L(-[ABCDEFHJKLMNPRTUVWXY0-9]{3}){2}/)
     end
   end
