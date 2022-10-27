@@ -15,7 +15,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
     before { call }
 
     context "without full section 8 permissions" do
-      let(:provider) { create :provider }
+      let(:provider) { create(:provider) }
 
       it "makes one external call" do
         expect(a_request(:get, uri)).to have_been_made.times(1)
@@ -27,7 +27,7 @@ RSpec.describe LegalFramework::ProceedingTypes::All do
     end
 
     context "with full section 8 permissions" do
-      let(:provider) { create :provider, :with_full_section_8_permissions }
+      let(:provider) { create(:provider, :with_full_section_8_permissions) }
 
       it "returns all the proceedings" do
         expect(call.map(&:ccms_code)).to match_array %w[DA001 SE097 DA003 SE016E DA006]

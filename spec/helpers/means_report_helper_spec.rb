@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MeansReportHelper, type: :helper do
+RSpec.describe MeansReportHelper do
   let(:legal_aid_application) { build_stubbed(:legal_aid_application, applicant:) }
   let(:applicant) { build_stubbed(:applicant) }
 

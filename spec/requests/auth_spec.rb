@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "AuthController", type: :request do
+RSpec.describe "AuthController" do
   let(:params) do
     {
       "message" => "provider_error",

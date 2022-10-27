@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "contact page", type: :request do
+RSpec.describe "contact page" do
   describe "GET /contact" do
     it "returns renders successfully" do
       get contact_path

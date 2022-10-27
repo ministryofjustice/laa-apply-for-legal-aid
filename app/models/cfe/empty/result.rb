@@ -296,7 +296,7 @@ module CFE
     private
 
       def min_threshold(proceeding_types_array, threshold_method)
-        threshold = proceeding_types_array.map { |pt| pt[threshold_method] }.min
+        threshold = proceeding_types_array.pluck(threshold_method).min
         threshold == MAX_VALUE ? "N/a" : threshold
       end
 

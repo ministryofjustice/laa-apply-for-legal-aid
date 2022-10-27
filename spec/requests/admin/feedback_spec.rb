@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Admin::FeedbackController, type: :request do
+RSpec.describe Admin::FeedbackController do
   let(:count) { 2 }
-  let(:admin_user) { create :admin_user }
+  let(:admin_user) { create(:admin_user) }
   let(:params) { {} }
 
   before do
-    create :feedback, satisfaction: "satisfied"
-    create_list :feedback, count
+    create(:feedback, satisfaction: "satisfied")
+    create_list(:feedback, count)
     sign_in admin_user
   end
 

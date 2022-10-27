@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe TimeHelper, type: :helper do
+RSpec.describe TimeHelper do
   describe "number_of_days_ago" do
     let(:days) { 2 }
 

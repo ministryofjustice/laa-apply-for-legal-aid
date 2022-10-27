@@ -5,7 +5,7 @@ RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_ban
 
   let(:true_layer_banks_update_worker) { described_class.new }
   let(:stale_date) { Time.current.utc - described_class::UPDATE_INTERVAL - 2.hours }
-  let!(:true_layer_bank) { create :true_layer_bank }
+  let!(:true_layer_bank) { create(:true_layer_bank) }
 
   it "returns true" do
     expect(subject).to be true
@@ -20,7 +20,7 @@ RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_ban
   end
 
   context "when outdated" do
-    let!(:true_layer_bank) { create :true_layer_bank, updated_at: stale_date }
+    let!(:true_layer_bank) { create(:true_layer_bank, updated_at: stale_date) }
 
     it "creates a new bank holiday instance" do
       expect { subject }.to change(TrueLayerBank, :count).by(1)
@@ -41,7 +41,7 @@ RSpec.describe TrueLayerBanksUpdateWorker, vcr: { cassette_name: "true_layer_ban
   end
 
   context "when data retrieval fails" do
-    let!(:true_layer_bank) { create :true_layer_bank, updated_at: stale_date }
+    let!(:true_layer_bank) { create(:true_layer_bank, updated_at: stale_date) }
 
     it "raises error" do
       allow(TrueLayer::BanksRetriever).to receive(:banks).and_raise(TrueLayer::BanksRetriever::UnsuccessfulRetrievalError)

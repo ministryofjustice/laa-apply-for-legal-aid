@@ -2,9 +2,9 @@ require "rails_helper"
 
 module LegalFramework
   RSpec.describe MeritsTasksService do
-    let(:application) { create :legal_aid_application, :with_proceedings }
+    let(:application) { create(:legal_aid_application, :with_proceedings) }
     let(:service) { described_class.call(application) }
-    let(:submission) { create :legal_framework_submission }
+    let(:submission) { create(:legal_framework_submission) }
 
     before do
       double MeritsTasksRetrieverService, submission: submission

@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe CitizenCompleteMeansJob, :vcr, type: :job do
+RSpec.describe CitizenCompleteMeansJob, :vcr do
   subject { described_class.new.perform(legal_aid_application.id) }
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
-  let!(:scheduled_mail) { create :scheduled_mailing, :citizen_financial_reminder, legal_aid_application: }
-  let!(:scheduled_mail2) { create :scheduled_mailing, :citizen_financial_reminder, legal_aid_application: }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
+  let!(:scheduled_mail) { create(:scheduled_mailing, :citizen_financial_reminder, legal_aid_application:) }
+  let!(:scheduled_mail2) { create(:scheduled_mailing, :citizen_financial_reminder, legal_aid_application:) }
 
   describe "cancelling emails" do
     it "calls cancel on the scheduled emails" do

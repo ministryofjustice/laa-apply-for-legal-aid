@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
+RSpec.describe Providers::Means::CashOutgoingsController do
   before do
     create(:transaction_type, :child_care)
     legal_aid_application.set_transaction_period
   end
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
   let(:provider) { legal_aid_application.provider }
 
   let(:valid_params) do
@@ -75,10 +75,10 @@ RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
         end
 
         context "with income categories" do
-          let(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+          let(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
           let!(:legal_aid_application) do
-            create :legal_aid_application, :with_applicant,
-                   :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types
+            create(:legal_aid_application, :with_applicant,
+                   :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types)
           end
 
           it "redirects to income summary page" do
@@ -88,13 +88,13 @@ RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
         end
 
         context "with outgoings categories but no income categories" do
-          let(:outgoings_categories) { create_list :transaction_type, 3, :debit_with_standard_name }
+          let(:outgoings_categories) { create_list(:transaction_type, 3, :debit_with_standard_name) }
           let(:legal_aid_application) do
-            create :legal_aid_application,
+            create(:legal_aid_application,
                    :with_applicant,
                    :with_non_passported_state_machine,
                    :applicant_entering_means,
-                   transaction_types: outgoings_categories
+                   transaction_types: outgoings_categories)
           end
 
           it "redirects to the outgoings summary page" do
@@ -106,11 +106,11 @@ RSpec.describe Providers::Means::CashOutgoingsController, type: :request do
         context "without income or outgoings categories" do
           let(:params) { nothing_selected_params }
           let(:legal_aid_application) do
-            create :legal_aid_application,
+            create(:legal_aid_application,
                    :with_applicant,
                    :with_non_passported_state_machine,
                    :applicant_entering_means,
-                   transaction_types: []
+                   transaction_types: [])
           end
 
           it "redirects to the has dependants page" do

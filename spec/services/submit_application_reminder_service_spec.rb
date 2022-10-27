@@ -5,9 +5,9 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
   subject { described_class.new(application) }
 
   let(:simulated_email_address) { Rails.configuration.x.simulated_email_address }
-  let(:provider) { create :provider, email: simulated_email_address }
+  let(:provider) { create(:provider, email: simulated_email_address) }
   let(:application) do
-    create :application,
+    create(:application,
            :with_applicant,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
@@ -15,7 +15,7 @@ RSpec.describe SubmitApplicationReminderService, :vcr do
            explicit_proceedings: [:da004],
            set_lead_proceeding: :da004,
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
-           provider:
+           provider:)
   end
 
   describe "#send_email" do

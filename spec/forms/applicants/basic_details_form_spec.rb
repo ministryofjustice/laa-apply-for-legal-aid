@@ -9,8 +9,8 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
   end
 
-  let(:attributes) { attributes_for :applicant }
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:attributes) { attributes_for(:applicant) }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:legal_aid_application_id) { legal_aid_application.id }
 
   let(:attr_list) do
@@ -303,7 +303,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
 
     context "with an existing applicant passed in" do
-      let(:applicant) { create :applicant }
+      let(:applicant) { create(:applicant) }
       let(:params) { attributes.slice(*attr_list).merge(model: applicant) }
 
       it "returns the applicant" do
@@ -312,7 +312,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     end
 
     context "with no attributes but populated model" do
-      let(:applicant) { create :applicant }
+      let(:applicant) { create(:applicant) }
       let(:params) { { model: applicant } }
 
       it "populates attributes from model" do

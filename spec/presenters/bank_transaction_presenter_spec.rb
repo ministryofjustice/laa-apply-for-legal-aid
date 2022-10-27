@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe BankTransactionPresenter do
   subject(:presenter) { described_class.new(transaction, remarks) }
 
-  let(:account) { create :bank_account, account_type: "SAVINGS" }
-  let(:transaction) { create :bank_transaction, :uncategorised_credit_transaction, bank_account: account }
+  let(:account) { create(:bank_account, account_type: "SAVINGS") }
+  let(:transaction) { create(:bank_transaction, :uncategorised_credit_transaction, bank_account: account) }
   let(:remarks) { [] }
 
   it { is_expected.to be_a described_class }
@@ -51,7 +51,7 @@ RSpec.describe BankTransactionPresenter do
       end
 
       context "when the bank transaction is a debit" do
-        let(:transaction) { create :bank_transaction, :uncategorised_debit_transaction }
+        let(:transaction) { create(:bank_transaction, :uncategorised_debit_transaction) }
 
         describe "credit" do
           subject(:credit) { presenter.build_transaction_hash[:credit] }
@@ -75,7 +75,7 @@ RSpec.describe BankTransactionPresenter do
       end
 
       context "when the transaction has been categorized" do
-        let(:transaction) { create :bank_transaction, :benefits }
+        let(:transaction) { create(:bank_transaction, :benefits) }
 
         it "displays the transaction_type name" do
           expect(category).to eq "Child Benefit"
@@ -125,7 +125,7 @@ RSpec.describe BankTransactionPresenter do
       end
 
       context "when the transaction is from a current account" do
-        let(:account) { create :bank_account, account_type: "TRANSACTION" }
+        let(:account) { create(:bank_account, account_type: "TRANSACTION") }
 
         it { is_expected.to eq "Bank Current" }
       end

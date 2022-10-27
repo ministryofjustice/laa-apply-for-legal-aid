@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "GET /v1/workers", type: :request do
+RSpec.describe "GET /v1/workers" do
   describe "GET /v1/workers/:worker_id" do
     subject { get v1_worker_path(id: worker_id) }
 

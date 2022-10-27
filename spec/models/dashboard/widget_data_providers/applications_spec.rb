@@ -124,31 +124,31 @@ module Dashboard
         end
 
         def create_new(num)
-          FactoryBot.create_list :legal_aid_application, num
+          FactoryBot.create_list(:legal_aid_application, num)
         end
 
         def create_ccms_submisson_failure(num)
-          FactoryBot.create_list :ccms_submission, num, aasm_state: "failed"
+          FactoryBot.create_list(:ccms_submission, num, aasm_state: "failed")
         end
 
         def create_df(num)
-          FactoryBot.create_list :legal_aid_application, num, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+          FactoryBot.create_list(:legal_aid_application, num, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date })
         end
 
         def create_non_passported(num)
-          FactoryBot.create_list :legal_aid_application, num, :non_passported, merits_submitted_at: Time.zone.today
+          FactoryBot.create_list(:legal_aid_application, num, :non_passported, merits_submitted_at: Time.zone.today)
         end
 
         def create_passported(num)
-          FactoryBot.create_list :legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }, merits_submitted_at: Time.zone.today
+          FactoryBot.create_list(:legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }, merits_submitted_at: Time.zone.today)
         end
 
         def create_incomplete_passported(num)
-          FactoryBot.create_list :legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+          FactoryBot.create_list(:legal_aid_application, num, :passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date })
         end
 
         def create_incomplete_non_passported(num)
-          FactoryBot.create_list :legal_aid_application, num, :non_passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date }
+          FactoryBot.create_list(:legal_aid_application, num, :non_passported, :with_proceedings, :with_delegated_functions_on_proceedings, df_options: { DA001: df_date, DA004: df_date })
         end
 
         def df_date

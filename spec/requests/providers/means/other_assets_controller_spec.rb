@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "provider other assets requests", type: :request do
-  let(:application) { create :application, :with_applicant }
+RSpec.describe "provider other assets requests" do
+  let(:application) { create(:application, :with_applicant) }
   let(:oad) { application.create_other_assets_declaration! }
   let(:application_id) { application.id }
   let(:provider) { application.provider }
@@ -111,7 +111,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with other_assets" do
-            let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
+            let(:oad) { create(:other_assets_declaration, land_value: rand(1...1_000_000.0).round(2)) }
             let(:application) { oad.legal_aid_application }
 
             before do
@@ -127,7 +127,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with savings and investments" do
-            let(:oad) { create :other_assets_declaration }
+            let(:oad) { create(:other_assets_declaration) }
             let(:application) { oad.legal_aid_application }
             let(:none_selected) { "true" }
 
@@ -147,8 +147,8 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with own home" do
-            let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
-            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:application) { create(:legal_aid_application, :with_own_home_mortgaged) }
+            let(:oad) { create(:other_assets_declaration, legal_aid_application: application) }
             let(:none_selected) { "true" }
 
             before do
@@ -164,8 +164,8 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "when checking answers" do
-            let(:application) { create :legal_aid_application, :without_own_home, :checking_passported_answers }
-            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:application) { create(:legal_aid_application, :without_own_home, :checking_passported_answers) }
+            let(:oad) { create(:other_assets_declaration, legal_aid_application: application) }
             let(:none_selected) { "true" }
 
             before do
@@ -180,7 +180,7 @@ RSpec.describe "provider other assets requests", type: :request do
             end
 
             context "with provider checking citizen's answers" do
-              let(:application) { create :legal_aid_application, :without_own_home, :with_non_passported_state_machine, :checking_non_passported_means }
+              let(:application) { create(:legal_aid_application, :without_own_home, :with_non_passported_state_machine, :checking_non_passported_means) }
 
               it "redirects to means summary page" do
                 expect(response).to redirect_to(providers_legal_aid_application_means_summary_path(application))
@@ -189,8 +189,8 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with nothing" do
-            let(:application) { create :legal_aid_application, :with_positive_benefit_check_result }
-            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+            let(:oad) { create(:other_assets_declaration, legal_aid_application: application) }
             let(:none_selected) { "true" }
             let(:policy_disregards) { true }
 
@@ -209,12 +209,12 @@ RSpec.describe "provider other assets requests", type: :request do
 
               context "when the calculation date is prior to the policy disregards date" do
                 let(:application) do
-                  create :legal_aid_application,
+                  create(:legal_aid_application,
                          :with_positive_benefit_check_result,
                          :with_proceedings,
                          :with_delegated_functions_on_proceedings,
                          explicit_proceedings: [:da004],
-                         df_options: { DA004: [Date.new(2021, 1, 5), Date.new(2021, 1, 5)] }
+                         df_options: { DA004: [Date.new(2021, 1, 5), Date.new(2021, 1, 5)] })
                 end
                 let(:policy_disregards) { false }
 
@@ -300,7 +300,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with other_assets" do
-            let(:oad) { create :other_assets_declaration, land_value: rand(1...1_000_000.0).round(2) }
+            let(:oad) { create(:other_assets_declaration, land_value: rand(1...1_000_000.0).round(2)) }
             let(:application) { oad.legal_aid_application }
 
             it "redirects to provider applications page" do
@@ -312,7 +312,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with savings and investments" do
-            let(:oad) { create :other_assets_declaration }
+            let(:oad) { create(:other_assets_declaration) }
             let(:application) { oad.legal_aid_application }
 
             before do
@@ -331,8 +331,8 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with own home" do
-            let(:application) { create :legal_aid_application, :with_own_home_mortgaged }
-            let(:oad) { create :other_assets_declaration, legal_aid_application: application }
+            let(:application) { create(:legal_aid_application, :with_own_home_mortgaged) }
+            let(:oad) { create(:other_assets_declaration, legal_aid_application: application) }
             let(:params) { empty_params }
             let(:none_selected) { "true" }
 
@@ -345,7 +345,7 @@ RSpec.describe "provider other assets requests", type: :request do
           end
 
           context "with nothing" do
-            let(:oad) { create :other_assets_declaration }
+            let(:oad) { create(:other_assets_declaration) }
             let(:application) { oad.legal_aid_application }
             let(:params) { empty_params }
             let(:none_selected) { "true" }

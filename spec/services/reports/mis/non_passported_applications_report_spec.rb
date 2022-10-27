@@ -39,49 +39,49 @@ module Reports
 
       def create_early_non_passported_application
         travel_to(Time.zone.local(2020, 9, 1, 2, 3, 4)) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_applicant,
                  :with_proceedings,
                  :with_negative_benefit_check_result,
                  :with_non_passported_state_machine,
                  :at_client_completed_means,
-                 application_ref: "L-EAR-LY"
+                 application_ref: "L-EAR-LY")
         end
       end
 
       def create_non_passported_application
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_negative_benefit_check_result,
                :with_non_passported_state_machine,
                :at_client_completed_means,
-               application_ref: "L-ATE"
+               application_ref: "L-ATE")
       end
 
       def create_non_passported_application_use_ccms
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_negative_benefit_check_result,
                :with_non_passported_state_machine,
                :use_ccms_employed,
-               application_ref: "L-USE-CCMS"
+               application_ref: "L-USE-CCMS")
       end
 
       def create_passported_application
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_passported_state_machine,
                :with_positive_benefit_check_result,
-               application_ref: "L-PASS"
+               application_ref: "L-PASS")
       end
 
       def create_submitted_application
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_negative_benefit_check_result,
                :with_non_passported_state_machine,
                :at_assessment_submitted,
-               application_ref: "L-SUBMITTED"
+               application_ref: "L-SUBMITTED")
       end
     end
   end

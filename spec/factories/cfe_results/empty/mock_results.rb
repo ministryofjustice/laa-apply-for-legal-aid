@@ -201,9 +201,7 @@ module CFEResults
                 },
               },
             },
-            remarks: {
-
-            },
+            remarks: {},
           },
         }
       end

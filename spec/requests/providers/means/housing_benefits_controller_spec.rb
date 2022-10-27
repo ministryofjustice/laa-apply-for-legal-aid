@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::Means::HousingBenefitsController, type: :request do
+RSpec.describe Providers::Means::HousingBenefitsController do
   before { Setting.setting.update!(enhanced_bank_upload: true) }
 
   describe "GET /providers/applications/:legal_aid_application_id/means/housing_benefits" do

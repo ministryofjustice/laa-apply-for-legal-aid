@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
+RSpec.describe SubmitApplicationReminderMailer do
   let(:application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_applicant,
            :with_proceedings,
            :with_everything,
            :with_delegated_functions_on_proceedings,
            df_options: { DA001: 10.days.ago },
-           substantive_application_deadline_on: 10.days.from_now
+           substantive_application_deadline_on: 10.days.from_now)
   end
   let(:email) { Faker::Internet.safe_email }
   let(:provider_name) { Faker::Name.name }
@@ -41,7 +41,7 @@ RSpec.describe SubmitApplicationReminderMailer, type: :mailer do
   end
 
   describe ".eligible_for_delivery" do
-    let(:scheduled_mailing) { create :scheduled_mailing, :due, legal_aid_application_id: application.id }
+    let(:scheduled_mailing) { create(:scheduled_mailing, :due, legal_aid_application_id: application.id) }
 
     context "with ineligible_state" do
       before do

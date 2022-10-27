@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CCMS::SubmissionProcessWorker do
   let(:state) { :initialised }
-  let(:submission) { create :submission, aasm_state: state }
+  let(:submission) { create(:submission, aasm_state: state) }
   let(:worker) { described_class.new }
 
   before do

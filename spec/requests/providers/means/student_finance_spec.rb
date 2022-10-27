@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "student_finance", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine }
+RSpec.describe "student_finance" do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine) }
   let(:provider) { legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/means/student_finance" do

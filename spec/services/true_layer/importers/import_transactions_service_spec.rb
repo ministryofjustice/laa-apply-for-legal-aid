@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe TrueLayer::Importers::ImportTransactionsService do
   let(:mock_account) { TrueLayerHelpers::MOCK_DATA[:accounts].first }
-  let(:bank_account) { create :bank_account, true_layer_id: mock_account[:account_id] }
+  let(:bank_account) { create(:bank_account, true_layer_id: mock_account[:account_id]) }
   let(:api_client) { TrueLayer::ApiClient.new(bank_account.bank_provider.token) }
 
   describe "#call" do
@@ -14,7 +14,7 @@ RSpec.describe TrueLayer::Importers::ImportTransactionsService do
     let(:mock_transaction2) { mock_account[:transactions][1] }
     let(:transaction1) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction1[:transaction_id]) }
     let(:transaction2) { bank_account.bank_transactions.find_by(true_layer_id: mock_transaction2[:transaction_id]) }
-    let!(:existing_transaction) { create :bank_transaction, bank_account: }
+    let!(:existing_transaction) { create(:bank_transaction, bank_account:) }
 
     context "when the request is successful" do
       before do

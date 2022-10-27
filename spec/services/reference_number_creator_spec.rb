@@ -12,8 +12,8 @@ RSpec.describe ReferenceNumberCreator do
       let(:existing_reference_number) { "L-AAA-AAA" }
       let(:other_existing_reference_number) { "L-BBB-BBB" }
       let(:third_reference_number) { "L-CCC-CCC" }
-      let!(:legal_aid_application) { create :legal_aid_application, application_ref: existing_reference_number }
-      let!(:other_legal_aid_application) { create :legal_aid_application, application_ref: other_existing_reference_number }
+      let!(:legal_aid_application) { create(:legal_aid_application, application_ref: existing_reference_number) }
+      let!(:other_legal_aid_application) { create(:legal_aid_application, application_ref: other_existing_reference_number) }
 
       before do
         allow(subject)

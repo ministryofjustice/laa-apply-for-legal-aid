@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::CheckClientDetailsController, type: :request do
+RSpec.describe Providers::CheckClientDetailsController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :with_applicant_and_address) }
   let(:application_id) { application.id }
 

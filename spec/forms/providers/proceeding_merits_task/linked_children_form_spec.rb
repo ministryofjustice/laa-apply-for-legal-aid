@@ -4,7 +4,7 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
   subject(:form) { described_class.new(params) }
 
   let(:params) { { linked_children: linked_children_params, model: proceeding } }
-  let(:legal_aid_application) { create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se013], set_lead_proceeding: :da001 }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se013], set_lead_proceeding: :da001) }
   let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE013") }
   let(:linked_children_params) { nil }
 
@@ -68,8 +68,8 @@ RSpec.describe Providers::ProceedingMeritsTask::LinkedChildrenForm, type: :form 
       let(:linked_children_params) { [first_child.id, "", ""] }
 
       before do
-        create :proceeding_linked_child, proceeding: proceeding, involved_child: second_child
-        create :proceeding_linked_child, proceeding:, involved_child: third_child
+        create(:proceeding_linked_child, proceeding:, involved_child: second_child)
+        create(:proceeding_linked_child, proceeding:, involved_child: third_child)
       end
 
       it { expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(-1) }

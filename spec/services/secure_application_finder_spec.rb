@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SecureApplicationFinder do
   subject { described_class.new(secure_data_id) }
 
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:expired_at) { 1.hour.from_now }
   let(:secure_data_id) do
     SecureData.create_and_store!(

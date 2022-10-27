@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ExceptionAlertMailer, type: :mailer do
+RSpec.describe ExceptionAlertMailer do
   let(:environment) { "production" }
   let(:details) { "alert details" }
   let(:dummy_email_address) { "john@example.com" }

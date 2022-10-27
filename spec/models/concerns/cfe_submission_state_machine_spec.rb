@@ -4,7 +4,7 @@ module CFE
   RSpec.describe CFESubmissionStateMachine do
     context "with initial state" do
       it "creates an application in initialised state" do
-        submission = create :cfe_submission
+        submission = create(:cfe_submission)
         expect(submission.initialised?).to be true
       end
     end
@@ -12,7 +12,7 @@ module CFE
     context "with assessment_created! event" do
       subject(:event!) { submission.assessment_created! }
 
-      let(:submission) { create :cfe_submission }
+      let(:submission) { create(:cfe_submission) }
 
       it "transitions from initialised to assessment_created" do
         expect { event! }.to change(submission, :aasm_state).from("initialised").to("assessment_created")
@@ -21,7 +21,7 @@ module CFE
     end
 
     context "with applicant_created! event" do
-      let(:submission) { create :cfe_submission, aasm_state: start_state }
+      let(:submission) { create(:cfe_submission, aasm_state: start_state) }
 
       context "when starting from proceeding_types_created" do
         let(:start_state) { "proceeding_types_created" }
@@ -45,7 +45,7 @@ module CFE
     context "with proceeding_types_created! event" do
       subject(:event!) { submission.proceeding_types_created! }
 
-      let(:submission) { create :cfe_submission, aasm_state: "assessment_created" }
+      let(:submission) { create(:cfe_submission, aasm_state: "assessment_created") }
 
       it "transitions from assessment_created to proceeding_types_created" do
         expect { event! }.to change(submission, :aasm_state).from("assessment_created").to("proceeding_types_created")
@@ -56,10 +56,10 @@ module CFE
     context "with dependants_created! event" do
       subject(:event!) { submission.dependants_created! }
 
-      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created" }
+      let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created") }
 
       context "when passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'dependants_created' cannot transition from 'explicit_remarks_created'/
@@ -67,7 +67,7 @@ module CFE
       end
 
       context "when non_passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "transitions from explicit_remarks_created to dependants_created" do
           expect { event! }.to change(submission, :aasm_state).from("explicit_remarks_created").to("dependants_created")
@@ -79,10 +79,10 @@ module CFE
     context "with outgoings_created! event" do
       subject(:event!) { submission.outgoings_created! }
 
-      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "dependants_created" }
+      let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "dependants_created") }
 
       context "when passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'outgoings_created' cannot transition from 'dependants_created'/
@@ -90,7 +90,7 @@ module CFE
       end
 
       context "when non_passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "transitions from properties created to dependants_created" do
           expect { event! }.to change(submission, :aasm_state).from("dependants_created").to("outgoings_created")
@@ -102,10 +102,10 @@ module CFE
     context "with state_benefits_created! event" do
       subject(:event!) { submission.state_benefits_created! }
 
-      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "outgoings_created" }
+      let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "outgoings_created") }
 
       context "when passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'state_benefits_created' cannot transition from 'outgoings_created'/
@@ -113,7 +113,7 @@ module CFE
       end
 
       context "when non_passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "transitions from properties created to dependants_created" do
           expect { event! }.to change(submission, :aasm_state).from("outgoings_created").to("state_benefits_created")
@@ -125,10 +125,10 @@ module CFE
     context "with other_income_created! event" do
       subject(:event!) { submission.other_income_created! }
 
-      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "state_benefits_created" }
+      let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "state_benefits_created") }
 
       context "when passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'other_income_created' cannot transition from 'state_benefits_created'/
@@ -136,7 +136,7 @@ module CFE
       end
 
       context "when non_passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "transitions from state_benefits_created to other_income_created" do
           expect { event! }.to change(submission, :aasm_state).from("state_benefits_created").to("other_income_created")
@@ -148,10 +148,10 @@ module CFE
     context "with explicit_remarks_created! event" do
       subject(:event!) { submission.explicit_remarks_created! }
 
-      let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "properties_created" }
+      let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "properties_created") }
 
       context "when passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
 
         it "transitions from state_benefits_created to other_income_created" do
           expect { event! }.to change(submission, :aasm_state).from("properties_created").to("explicit_remarks_created")
@@ -160,7 +160,7 @@ module CFE
       end
 
       context "when non_passported" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         it "transitions from state_benefits_created to other_income_created" do
           expect { event! }.to change(submission, :aasm_state).from("properties_created").to("explicit_remarks_created")
@@ -173,8 +173,8 @@ module CFE
       subject(:event!) { submission.results_obtained! }
 
       context "with passported application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created" }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+        let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created") }
 
         it "transitions from explicit remarks created created to results obtained" do
           expect { event! }.to change(submission, :aasm_state).from("explicit_remarks_created").to("results_obtained")
@@ -183,10 +183,10 @@ module CFE
       end
 
       context "with non_passported_application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         context "with from properties_created state" do
-          let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "properties_created" }
+          let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "properties_created") }
 
           it "raise InvalidTransition error" do
             expect { event! }.to raise_error AASM::InvalidTransition, /Event 'results_obtained' cannot transition from 'properties_created'/
@@ -199,8 +199,8 @@ module CFE
       let(:event!) { submission.cash_transactions_created! }
 
       context "with passported application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created" }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+        let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "explicit_remarks_created") }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'cash_transactions_created' cannot transition from 'explicit_remarks_created'/
@@ -208,10 +208,10 @@ module CFE
       end
 
       context "with non_passported_application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         context "when starting from from employments_created state" do
-          let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "employments_created" }
+          let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "employments_created") }
 
           it "transitions to expected state" do
             expect { event! }.to change(submission, :aasm_state).from("employments_created").to("cash_transactions_created")
@@ -220,7 +220,7 @@ module CFE
         end
 
         context "when starting from from regular_transactions_created state" do
-          let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "regular_transactions_created" }
+          let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "regular_transactions_created") }
 
           it "transitions to expected state" do
             expect { event! }.to change(submission, :aasm_state).from("regular_transactions_created").to("cash_transactions_created")
@@ -234,8 +234,8 @@ module CFE
       let(:event!) { submission.regular_transactions_created! }
 
       context "with passported application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-        let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "employments_created" }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+        let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "employments_created") }
 
         it "raise InvalidTransition error" do
           expect { event! }.to raise_error AASM::InvalidTransition, /Event 'regular_transactions_created' cannot transition from 'employments_created'/
@@ -243,10 +243,10 @@ module CFE
       end
 
       context "with non_passported_application" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
 
         context "when starting from from employments_created state" do
-          let(:submission) { create :cfe_submission, legal_aid_application:, aasm_state: "employments_created" }
+          let(:submission) { create(:cfe_submission, legal_aid_application:, aasm_state: "employments_created") }
 
           it "transitions to expected state" do
             expect { event! }.to change(submission, :aasm_state).from("employments_created").to("regular_transactions_created")
@@ -261,7 +261,7 @@ module CFE
 
       it "transitions to failed from all states except failed and results obtained" do
         states.each do |state|
-          submission = create :cfe_submission, aasm_state: state
+          submission = create(:cfe_submission, aasm_state: state)
           expect { submission.fail! }.not_to raise_error
           expect(submission.failed?).to be true
         end

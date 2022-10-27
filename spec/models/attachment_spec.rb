@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Attachment do
-  let!(:soc1) { create :attachment }
-  let!(:soc2) { create :attachment }
-  let!(:merits1) { create :attachment, :merits_report }
-  let!(:merits2) { create :attachment, :merits_report }
-  let!(:means1) { create :attachment, :means_report }
-  let!(:bank) { create :attachment, :bank_transaction_report }
+  let!(:soc1) { create(:attachment) }
+  let!(:soc2) { create(:attachment) }
+  let!(:merits1) { create(:attachment, :merits_report) }
+  let!(:merits2) { create(:attachment, :merits_report) }
+  let!(:means1) { create(:attachment, :means_report) }
+  let!(:bank) { create(:attachment, :bank_transaction_report) }
 
   context "with scopes" do
     it "returns the expected collections" do

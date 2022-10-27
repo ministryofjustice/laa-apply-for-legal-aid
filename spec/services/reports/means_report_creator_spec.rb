@@ -19,16 +19,16 @@ RSpec.describe Reports::MeansReportCreator do
 
     context "with V5 CFE result" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_everything,
                :with_cfe_v5_result,
                :generating_reports,
                ccms_submission:,
-               explicit_proceedings: %i[da002 da006]
+               explicit_proceedings: %i[da002 da006])
       end
 
-      let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
+      let(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
 
       context "with a passported application" do
         before do
@@ -72,7 +72,7 @@ RSpec.describe Reports::MeansReportCreator do
       end
 
       context "when an attachment record exists" do
-        let!(:attachment) { create :attachment, :means_report, legal_aid_application: }
+        let!(:attachment) { create(:attachment, :means_report, legal_aid_application:) }
         let(:expected_log) { "ReportsCreator: Means report already exists for #{legal_aid_application.id} and is downloadable" }
 
         before { allow(Rails.logger).to receive(:info) }
@@ -101,7 +101,7 @@ RSpec.describe Reports::MeansReportCreator do
       end
 
       context "when a ccms case ref does not exist" do
-        let(:ccms_submission) { create :ccms_submission }
+        let(:ccms_submission) { create(:ccms_submission) }
 
         before do
           allow(ccms_submission).to receive(:process!).and_return(true)

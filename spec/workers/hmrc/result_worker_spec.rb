@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe HMRC::ResultWorker do
   subject(:worker) { described_class.new }
 
-  let(:application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
+  let(:application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
   let(:hmrc_response) { create(:hmrc_response, :use_case_one, :in_progress, legal_aid_application: application, response: nil) }
 
   describe ".perform" do

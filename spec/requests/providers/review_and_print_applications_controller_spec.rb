@@ -1,15 +1,15 @@
 require "rails_helper"
 
-RSpec.describe Providers::ReviewAndPrintApplicationsController, type: :request do
+RSpec.describe Providers::ReviewAndPrintApplicationsController do
   let(:application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_everything,
            :with_proceedings,
            :with_chances_of_success,
            :with_attempts_to_settle,
            :with_involved_children,
            :provider_entering_merits,
-           proceeding_count: 3
+           proceeding_count: 3)
   end
   let(:provider) { application.provider }
 
@@ -42,10 +42,10 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController, type: :request d
     subject(:request) { patch "/providers/applications/#{application.id}/review_and_print_application/continue", params: }
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
-             :checking_merits_answers
+             :checking_merits_answers)
     end
     let(:allow_ccms_submission) { true }
     let(:params) { {} }

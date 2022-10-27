@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::ApplicantEmployedController, type: :request do
+RSpec.describe Providers::ApplicantEmployedController do
   describe "GET /providers/applications/:legal_aid_application_id/applicant_employed" do
     context "when the provider is not authenticated" do
       it "redirects the user to the login page" do

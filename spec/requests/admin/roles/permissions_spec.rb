@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Admin::Roles::PermissionsController, type: :request do
-  let(:admin_user) { create :admin_user }
-  let!(:firm) { create :firm, :with_passported_permissions, name: "McKenzie, Brackman, Chaney and Kuzak" }
+RSpec.describe Admin::Roles::PermissionsController do
+  let(:admin_user) { create(:admin_user) }
+  let!(:firm) { create(:firm, :with_passported_permissions, name: "McKenzie, Brackman, Chaney and Kuzak") }
 
   before { sign_in admin_user }
 
@@ -38,7 +38,7 @@ RSpec.describe Admin::Roles::PermissionsController, type: :request do
     end
 
     context "when Save and Continue button pressed with new permission changes" do
-      let!(:permission2) { create :permission, :non_passported }
+      let!(:permission2) { create(:permission, :non_passported) }
       let!(:params) do
         {
           firm: {

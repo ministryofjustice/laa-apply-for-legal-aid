@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
+RSpec.describe Providers::HasEvidenceOfBenefitsController do
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_dwp_override,
            :checking_applicant_details,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: %i[da004],
-           df_options: { DA004: [Time.zone.now, Time.zone.now] }
+           df_options: { DA004: [Time.zone.now, Time.zone.now] })
   end
 
   let(:login) { login_as legal_aid_application.provider }
@@ -59,7 +59,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     end
 
     context "application state is already applicant_details_checked" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :applicant_details_checked }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_dwp_override, :applicant_details_checked) }
 
       it "does not update the state" do
         expect(legal_aid_application).not_to receive(:applicant_details_checked!)
@@ -76,7 +76,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     end
 
     context "does not use delegated functions" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_dwp_override, :applicant_details_checked }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_dwp_override, :applicant_details_checked) }
 
       it "redirects to the upload capital introductions page" do
         expect(response).to redirect_to(providers_legal_aid_application_capital_introduction_path(legal_aid_application))
@@ -84,7 +84,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
     end
 
     it "updates the state machine type" do
-      expect(legal_aid_application.reload.state_machine).to be_a_kind_of PassportedStateMachine
+      expect(legal_aid_application.reload.state_machine).to be_a PassportedStateMachine
     end
 
     context "choose no" do
@@ -100,7 +100,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
       end
 
       it "updates the state machine type" do
-        expect(legal_aid_application.reload.state_machine).to be_a_kind_of NonPassportedStateMachine
+        expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
       end
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController, type: :request do
       end
 
       it "updates the state machine type" do
-        expect(legal_aid_application.reload.state_machine).to be_a_kind_of NonPassportedStateMachine
+        expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
       end
     end
 

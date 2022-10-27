@@ -2,8 +2,8 @@ require "rails_helper"
 require "sidekiq/testing"
 
 module Providers
-  RSpec.describe UploadedEvidenceCollectionsController, type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+  RSpec.describe UploadedEvidenceCollectionsController do
+    let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
     let(:provider) { legal_aid_application.provider }
     let(:i18n_error_path) { "activemodel.errors.models.uploaded_evidence_collection.attributes.original_file" }
 
@@ -109,7 +109,7 @@ module Providers
           end
 
           context "when uploaded_evidence_collection file already exists" do
-            let!(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_multiple_files_attached, legal_aid_application: }
+            let!(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_multiple_files_attached, legal_aid_application:) }
 
             it "updates the record" do
               subject
@@ -266,7 +266,7 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
+              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
               let(:missing_categories) { [] }
 
               before do
@@ -300,7 +300,7 @@ module Providers
 
           context "with a file uploaded" do
             let(:attachment_type) { "uncategorised" }
-            let(:attachment) { create :attachment, attachment_name: "test_file.pdf", attachment_type:, legal_aid_application: }
+            let(:attachment) { create(:attachment, attachment_name: "test_file.pdf", attachment_type:, legal_aid_application:) }
             let(:params_uploaded_evidence_collection) { { attachment.id.to_s => attachment.attachment_type.to_s } }
 
             context "when all validation rules are satisfied" do
@@ -324,7 +324,7 @@ module Providers
 
             context "when mandatory evidence is missing" do
               let(:attachment_type) { "gateway_evidence" }
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
+              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
               let(:missing_categories) { [] }
 
               before do
@@ -371,8 +371,8 @@ module Providers
 
           context "with multiple files uploaded" do
             let(:attachment_type) { "uncategorised" }
-            let(:attachment1) { create :attachment, attachment_name: "test_file1.pdf", attachment_type:, legal_aid_application: }
-            let(:attachment2) { create :attachment, attachment_name: "test_file2.pdf", attachment_type:, legal_aid_application: }
+            let(:attachment1) { create(:attachment, attachment_name: "test_file1.pdf", attachment_type:, legal_aid_application:) }
+            let(:attachment2) { create(:attachment, attachment_name: "test_file2.pdf", attachment_type:, legal_aid_application:) }
             let(:params_uploaded_evidence_collection) { { attachment1.id.to_s => attachment1.attachment_type.to_s, attachment2.id.to_s => attachment2.attachment_type.to_s } }
 
             context "when all validation rules are satisfied" do
@@ -395,7 +395,7 @@ module Providers
             end
 
             context "when mandatory evidence is missing" do
-              let!(:dwp_override) { create :dwp_override, legal_aid_application: }
+              let!(:dwp_override) { create(:dwp_override, legal_aid_application:) }
               let(:missing_categories) { [] }
 
               before do
@@ -480,7 +480,7 @@ module Providers
         subject { patch providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application), params: delete_params }
 
         let(:button_clicked) { delete_button }
-        let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_file_attached }
+        let(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_original_file_attached) }
         let(:legal_aid_application) { uploaded_evidence_collection.legal_aid_application }
         let(:original_file) { uploaded_evidence_collection.original_attachments.first }
         let(:delete_params) do
@@ -513,7 +513,7 @@ module Providers
         end
 
         context "when a PDF exists" do
-          let(:uploaded_evidence_collection) { create :uploaded_evidence_collection, :with_original_and_pdf_files_attached }
+          let(:uploaded_evidence_collection) { create(:uploaded_evidence_collection, :with_original_and_pdf_files_attached) }
 
           it "deletes both attachments" do
             expect { subject }.to change(Attachment, :count).by(-2)

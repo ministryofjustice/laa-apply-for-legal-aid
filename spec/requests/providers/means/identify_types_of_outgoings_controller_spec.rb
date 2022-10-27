@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
-  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
-  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
-  let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
+  let!(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
+  let!(:outgoing_types) { create_list(:transaction_type, 3, :debit_with_standard_name) }
 
   before { login }
 
@@ -105,8 +105,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
     context "when application has transaction types of other kind" do
       let(:transaction_type_ids) { [] }
-      let(:other_transaction_type) { create :transaction_type, :credit }
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type] }
+      let(:other_transaction_type) { create(:transaction_type, :credit) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: [other_transaction_type]) }
 
       it "does not remove existing transactions of other type" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
@@ -130,7 +130,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
       context "when application has existing transaction categories" do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types + income_types
+          create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: outgoing_types + income_types)
         end
 
         it "removes debit transaction types from the application" do
@@ -223,9 +223,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
 
     context "when checking answers" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_non_passported_means
+               :checking_non_passported_means)
       end
 
       let(:params) { { legal_aid_application: { none_selected: "true" } } }

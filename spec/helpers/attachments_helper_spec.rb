@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe AttachmentsHelper, type: :helper do
-  let(:application) { create :legal_aid_application }
+RSpec.describe AttachmentsHelper do
+  let(:application) { create(:legal_aid_application) }
 
   describe "#attachments_with_size" do
     context "with attachments" do
-      let!(:statement_of_case) { create :statement_of_case, :with_original_file_attached, legal_aid_application: application }
+      let!(:statement_of_case) { create(:statement_of_case, :with_original_file_attached, legal_aid_application: application) }
       let(:attachments) { statement_of_case.original_attachments }
 
       it "returns array of file names with their file size" do
@@ -22,8 +22,8 @@ RSpec.describe AttachmentsHelper, type: :helper do
     end
 
     context "without original_filename" do
-      let(:attachment1) { create :attachment, original_filename: nil }
-      let(:attachment2) { create :attachment, original_filename: "fake name" }
+      let(:attachment1) { create(:attachment, original_filename: nil) }
+      let(:attachment2) { create(:attachment, original_filename: "fake name") }
       let(:attachments) { [attachment1, attachment2] }
 
       it "returns attachment_type name in its place" do

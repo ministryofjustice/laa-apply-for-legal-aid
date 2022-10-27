@@ -1,8 +1,8 @@
 require "rails_helper"
 
 module LegalFramework
-  RSpec.describe MeritsTaskList, type: :model do
-    let(:application) { create :legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8 }
+  RSpec.describe MeritsTaskList do
+    let(:application) { create(:legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8) }
     let(:merits_task_list) { described_class.create!(legal_aid_application_id: application.id, serialized_data: dummy_serialized_merits_task_list.to_yaml) }
 
     describe ".create!" do
@@ -83,7 +83,7 @@ module LegalFramework
     end
 
     def dummy_serialized_merits_task_list
-      build :legal_framework_serializable_merits_task_list
+      build(:legal_framework_serializable_merits_task_list)
     end
   end
 end

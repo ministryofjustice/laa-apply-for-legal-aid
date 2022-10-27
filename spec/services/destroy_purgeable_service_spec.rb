@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe DestroyPurgeableService do
-  let!(:nil_rec) { create :legal_aid_application, purgeable_on: nil, updated_at: 731.days.ago }
-  let!(:tomorrow_rec) { create :legal_aid_application, purgeable_on: Time.zone.tomorrow, updated_at: 731.days.ago }
-  let!(:yesterday_rec) { create :legal_aid_application, purgeable_on: Time.zone.yesterday, updated_at: 731.days.ago }
-  let!(:today_rec) { create :legal_aid_application, purgeable_on: Time.zone.today, updated_at: 731.days.ago }
-  let!(:recently_updated_rec) { create :legal_aid_application, purgeable_on: Time.zone.yesterday, updated_at: 729.days.ago }
+  let!(:nil_rec) { create(:legal_aid_application, purgeable_on: nil, updated_at: 731.days.ago) }
+  let!(:tomorrow_rec) { create(:legal_aid_application, purgeable_on: Time.zone.tomorrow, updated_at: 731.days.ago) }
+  let!(:yesterday_rec) { create(:legal_aid_application, purgeable_on: Time.zone.yesterday, updated_at: 731.days.ago) }
+  let!(:today_rec) { create(:legal_aid_application, purgeable_on: Time.zone.today, updated_at: 731.days.ago) }
+  let!(:recently_updated_rec) { create(:legal_aid_application, purgeable_on: Time.zone.yesterday, updated_at: 729.days.ago) }
 
   before { described_class.call }
 

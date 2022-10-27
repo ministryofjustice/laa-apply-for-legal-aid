@@ -1,7 +1,7 @@
 require "rails_helper"
 require "sidekiq/testing"
 
-RSpec.describe "applicants omniauth call back", type: :request do
+RSpec.describe "applicants omniauth call back" do
   around(:example) do |example|
     OmniAuth.config.test_mode = true
     example.run
@@ -12,8 +12,8 @@ RSpec.describe "applicants omniauth call back", type: :request do
   let(:token) { SecureRandom.uuid }
   let(:expires_at) { 1.hour.from_now.round }
   let(:true_layer_expires_at) { expires_at.to_i }
-  let(:applicant) { create :applicant }
-  let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :awaiting_applicant, applicant: }
+  let(:applicant) { create(:applicant) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :awaiting_applicant, applicant:) }
   let(:bank_provider) { applicant.bank_providers.find_by(token:) }
 
   before do

@@ -10,7 +10,7 @@ RSpec.describe DocumentCategoryValidator do
   context "with Attachment" do
     subject { Attachment.create! legal_aid_application: laa, attachment_type: }
 
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:invalid_attachment_type) { "xxx-zzz" }
     let(:valid_attachment_types) { DocumentCategoryValidator::VALID_DOCUMENT_TYPES }
 

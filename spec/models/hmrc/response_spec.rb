@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe HMRC::Response, type: :model do
+RSpec.describe HMRC::Response do
   subject(:response) { build(:hmrc_response) }
 
   context "when validating" do
@@ -42,9 +42,9 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "when there is only one use case one record with the specified application id" do
-      let!(:response1) { create :hmrc_response, :use_case_one }
-      let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
-      let!(:response2) { create :hmrc_response, :use_case_one }
+      let!(:response1) { create(:hmrc_response, :use_case_one) }
+      let!(:response_uc2) { create(:hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id) }
+      let!(:response2) { create(:hmrc_response, :use_case_one) }
 
       it "returns the record for the application we specify" do
         expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1
@@ -52,10 +52,10 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "when there are multiple use case one records with the specified application id" do
-      let!(:response1) { create :hmrc_response, :use_case_one, created_at: 5.minutes.ago }
-      let!(:response_uc2) { create :hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id }
-      let!(:response1_last) { create :hmrc_response, :use_case_one, legal_aid_application_id: response1.legal_aid_application_id }
-      let!(:response2) { create :hmrc_response, :use_case_one }
+      let!(:response1) { create(:hmrc_response, :use_case_one, created_at: 5.minutes.ago) }
+      let!(:response_uc2) { create(:hmrc_response, :use_case_two, legal_aid_application_id: response1.legal_aid_application_id) }
+      let!(:response1_last) { create(:hmrc_response, :use_case_one, legal_aid_application_id: response1.legal_aid_application_id) }
+      let!(:response2) { create(:hmrc_response, :use_case_one) }
 
       it "returns the last created use case one record for the specified application id" do
         expect(described_class.use_case_one_for(response1.legal_aid_application_id)).to eq response1_last
@@ -65,7 +65,7 @@ RSpec.describe HMRC::Response, type: :model do
 
   describe "#employment_income?" do
     context "when there is no hmrc data" do
-      let(:response) { create :hmrc_response }
+      let(:response) { create(:hmrc_response) }
 
       it "returns false" do
         expect(response.employment_income?).to be false
@@ -73,7 +73,7 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "when the hmrc data does not contain employment income data" do
-      let(:response) { create :hmrc_response }
+      let(:response) { create(:hmrc_response) }
       let(:response_data_with_no_employment_income) do
         { "submission" => "f3730ebf-4b56-4bc1-b419-417bdf2ce9d2",
           "status" => "completed",
@@ -91,7 +91,7 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "when the hmrc data contains employment income data" do
-      let(:response) { create :hmrc_response, :use_case_one }
+      let(:response) { create(:hmrc_response, :use_case_one) }
 
       it "returns true" do
         expect(response.employment_income?).to be true
@@ -136,7 +136,7 @@ RSpec.describe HMRC::Response, type: :model do
 
   describe "#status" do
     context "with a normal payload" do
-      let(:response) { create :hmrc_response, :use_case_one }
+      let(:response) { create(:hmrc_response, :use_case_one) }
 
       it "returns a 'completed' status" do
         expect(response.status).to eq "completed"
@@ -144,7 +144,7 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "when processing payload" do
-      let(:response) { create :hmrc_response, :processing }
+      let(:response) { create(:hmrc_response, :processing) }
 
       it "returns a 'processing' status" do
         expect(response.status).to eq "processing"
@@ -152,7 +152,7 @@ RSpec.describe HMRC::Response, type: :model do
     end
 
     context "with a nil payload" do
-      let(:response) { create :hmrc_response, :nil_response }
+      let(:response) { create(:hmrc_response, :nil_response) }
 
       it "returns nil" do
         expect(response.status).to be_nil

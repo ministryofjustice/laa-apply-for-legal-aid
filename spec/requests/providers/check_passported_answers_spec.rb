@@ -1,21 +1,21 @@
 require "rails_helper"
 
-RSpec.describe "check passported answers requests", type: :request do
+RSpec.describe "check passported answers requests" do
   include ActionView::Helpers::NumberHelper
 
   describe "GET /providers/applications/:id/check_passported_answers" do
     subject { get "/providers/applications/#{application.id}/check_passported_answers" }
 
-    let(:vehicle) { create :vehicle, :populated }
+    let(:vehicle) { create(:vehicle, :populated) }
     let(:own_vehicle) { true }
     let!(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
              :with_passported_state_machine,
              :provider_entering_means,
              vehicle:,
-             own_vehicle:
+             own_vehicle:)
     end
 
     context "unauthenticated" do
@@ -70,12 +70,12 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant does not have any savings" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :with_no_savings,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "displays no categories selected in the savings and investments section" do
@@ -87,12 +87,12 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant does not have any other assets" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :with_no_other_assets,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "displays that no other assets have been declared" do
@@ -104,12 +104,12 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant does not have any capital restrictions" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :with_passported_state_machine,
                  :provider_entering_means,
-                 has_restrictions: false
+                 has_restrictions: false)
         end
 
         it "displays that no capital restrictions have been declared" do
@@ -121,13 +121,13 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant does not have any capital" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_applicant,
                  :with_proceedings,
                  :with_policy_disregards,
                  :without_own_home,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "does not display capital restrictions" do
@@ -168,12 +168,12 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant does not own home" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :without_own_home,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "does not display property value" do
@@ -189,12 +189,12 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant owns home without mortgage" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :with_own_home_owned_outright,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "does not display property value" do
@@ -205,14 +205,14 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant received england infected blood scheme" do
         let!(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_proceedings,
                  :with_passported_state_machine,
                  :provider_entering_means,
                  :with_populated_policy_disregards,
                  vehicle:,
-                 own_vehicle:
+                 own_vehicle:)
         end
 
         it "displays yes for england infected scheme" do
@@ -222,13 +222,13 @@ RSpec.describe "check passported answers requests", type: :request do
 
       context "applicant is sole owner of home" do
         let(:application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_no_other_assets,
                  :with_proceedings,
                  :with_home_sole_owner,
                  :with_passported_state_machine,
-                 :provider_entering_means
+                 :provider_entering_means)
         end
 
         it "does not display percentage owned" do
@@ -264,10 +264,10 @@ RSpec.describe "check passported answers requests", type: :request do
     end
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_passported_state_machine,
-             :checking_passported_answers
+             :checking_passported_answers)
     end
     let(:params) { {} }
 
@@ -327,11 +327,11 @@ RSpec.describe "check passported answers requests", type: :request do
     subject { patch "/providers/applications/#{application.id}/check_passported_answers/reset" }
 
     let(:application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_passported_state_machine,
              :checking_passported_answers,
-             :with_proceedings
+             :with_proceedings)
     end
 
     context "unauthenticated" do
@@ -342,11 +342,11 @@ RSpec.describe "check passported answers requests", type: :request do
 
     context "logged in as an authenticated provider" do
       let(:application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_everything,
                :with_proceedings,
                :with_passported_state_machine,
-               :provider_entering_means
+               :provider_entering_means)
       end
 
       before do

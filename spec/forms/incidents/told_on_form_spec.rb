@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Incidents::ToldOnForm, type: :form do
   subject { described_class.new(params.merge(model: incident)) }
 
-  let(:incident) { create :incident }
+  let(:incident) { create(:incident) }
   let(:told_on) { 3.days.ago.to_date }
   let(:occurred_on) { 5.days.ago.to_date }
   let(:i18n_scope) { "activemodel.errors.models.application_merits_task/incident.attributes" }
@@ -103,7 +103,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
 
     context "without occurred on date" do
       let(:occurred_on) { "" }
-      let(:incident) { create :incident, occurred_on: nil }
+      let(:incident) { create(:incident, occurred_on: nil) }
       let(:error_locale) { "occurred_on.blank" }
 
       it "is invalid" do
@@ -117,7 +117,7 @@ RSpec.describe Incidents::ToldOnForm, type: :form do
 
     context "without told on date" do
       let(:told_on) { "" }
-      let(:incident) { create :incident, told_on: nil }
+      let(:incident) { create(:incident, told_on: nil) }
       let(:error_locale) { "told_on.blank" }
 
       it "is invalid" do

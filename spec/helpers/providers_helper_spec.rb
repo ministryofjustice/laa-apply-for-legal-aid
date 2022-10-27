@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe ProvidersHelper, type: :helper do
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+RSpec.describe ProvidersHelper do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
   let(:provider_routes) do
     Rails.application.routes.routes.select do |route|
       route.defaults[:controller].to_s.split("/")[0] == "providers" &&
@@ -22,7 +22,7 @@ RSpec.describe ProvidersHelper, type: :helper do
     it "does not crash" do
       (provider_controller_names - excluded_controllers).each do |controller_name|
         legal_aid_application.provider_step = controller_name
-        url_for_application(legal_aid_application)
+        expect { url_for_application(legal_aid_application) }.not_to raise_error
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe ProvidersHelper, type: :helper do
     end
 
     context "when saved as draft and returning to a started involved child" do
-      let(:partial_record) { create :involved_child, legal_aid_application:, date_of_birth: nil }
+      let(:partial_record) { create(:involved_child, legal_aid_application:, date_of_birth: nil) }
 
       it do
         legal_aid_application.provider_step = "involved_children"
@@ -96,7 +96,7 @@ RSpec.describe ProvidersHelper, type: :helper do
     end
 
     context "when removing a dependant" do
-      let(:dependant) { create :dependant, legal_aid_application: }
+      let(:dependant) { create(:dependant, legal_aid_application:) }
 
       it "routes correctly" do
         legal_aid_application.provider_step = "remove_dependants"

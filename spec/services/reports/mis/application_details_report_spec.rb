@@ -4,28 +4,28 @@ module Reports
   module MIS
     RSpec.describe ApplicationDetailsReport do
       let!(:unsubmitted_applications) do
-        create_list :legal_aid_application, 3,
+        create_list(:legal_aid_application, 3,
                     :with_proceedings,
                     :with_applicant,
-                    :with_passported_state_machine
+                    :with_passported_state_machine)
       end
       let!(:submitted_applications) do
-        create_list :legal_aid_application, 3,
+        create_list(:legal_aid_application, 3,
                     :with_passported_state_machine,
                     :with_applicant,
                     :with_proceedings,
                     :with_chances_of_success,
                     :at_assessment_submitted,
-                    :with_merits_submitted_at
+                    :with_merits_submitted_at)
       end
       let!(:applications_being_submitted) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_passported_state_machine,
                :with_applicant,
                :with_proceedings,
                :with_chances_of_success,
                :at_submitting_assessment,
-               :with_merits_submitted_at
+               :with_merits_submitted_at)
       end
       let(:num_applications) { (unsubmitted_applications + submitted_applications + [applications_being_submitted]).flatten.size }
       let(:report) { described_class.new }

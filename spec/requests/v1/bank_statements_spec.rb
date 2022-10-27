@@ -7,8 +7,8 @@ require "rails_helper"
 # are handled by the javascript in dropzone.js and never reach this
 # endpoint so are not tested here.
 #
-RSpec.describe "POST /v1/bank_statements", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+RSpec.describe "POST /v1/bank_statements" do
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
   let(:params) { { legal_aid_application_id: id, file: } }
@@ -34,7 +34,7 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
       it "attachment has expected attributes" do
         request
         expect(legal_aid_application.reload.attachments.last)
-          .to have_attributes(document: be_kind_of(ActiveStorage::Attached::One),
+          .to have_attributes(document: be_a(ActiveStorage::Attached::One),
                               attachment_type: "bank_statement_evidence",
                               original_filename: "hello_world.pdf",
                               attachment_name: "bank_statement_evidence")
@@ -64,7 +64,7 @@ RSpec.describe "POST /v1/bank_statements", type: :request do
       end
 
       context "when the application has no bank statements" do
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [] }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: []) }
 
         it "does not increment the attachment name" do
           request

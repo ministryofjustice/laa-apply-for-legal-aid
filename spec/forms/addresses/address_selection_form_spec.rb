@@ -5,7 +5,7 @@ RSpec.describe Addresses::AddressSelectionForm, type: :form do
 
   let(:postcode) { "SW1H 9EA" }
   let(:lookup_id) { "123456" }
-  let(:applicant) { create :applicant }
+  let(:applicant) { create(:applicant) }
   let(:form_params) do
     {
       lookup_id:,

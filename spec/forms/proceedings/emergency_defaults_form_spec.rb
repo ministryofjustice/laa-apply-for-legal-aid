@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe Proceedings::EmergencyDefaultsForm, vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_applicant_with_df" }, type: :form do
+RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_applicant_with_df" } do
   subject(:form) { described_class.new(form_params) }
 
   let(:proceeding) do
-    create :proceeding,
+    create(:proceeding,
            lead_proceeding: true,
            ccms_code: "DA001",
            meaning: "Inherent jurisdiction high court injunction",
@@ -23,7 +23,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, vcr: { cassette_name: "Procee
            client_involvement_type_description: "Applicant/Claimant/Petitioner",
            emergency_level_of_service: nil,
            emergency_level_of_service_name: nil,
-           emergency_level_of_service_stage: nil
+           emergency_level_of_service_stage: nil)
   end
   let(:params) do
     {
@@ -61,7 +61,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, vcr: { cassette_name: "Procee
     end
 
     context "when additional input is required", vcr: { cassette_name: "Proceedings_EmergencyDefaultsForm/da001_defendant_with_df" } do
-      let(:proceeding) { create :proceeding, :da001, :with_cit_d, :with_df_date }
+      let(:proceeding) { create(:proceeding, :da001, :with_cit_d, :with_df_date) }
 
       context "when the user accepts the defaults but additional input not supplied" do
         let(:params) do

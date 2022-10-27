@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
   subject(:form) { described_class.new(form_params) }
 
-  let(:proceeding) { create :proceeding, :da001, :without_df_date, :with_cit_z, no_scope_limitations: true }
+  let(:proceeding) { create(:proceeding, :da001, :without_df_date, :with_cit_z, no_scope_limitations: true) }
   let(:params) do
     {
       accepted_substantive_defaults: accepted,

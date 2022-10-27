@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "SubstantiveScopeLimitationsController", :vcr, type: :request do
+RSpec.describe "SubstantiveScopeLimitationsController", :vcr do
   let(:application) do
     create(:legal_aid_application,
            :with_proceedings,

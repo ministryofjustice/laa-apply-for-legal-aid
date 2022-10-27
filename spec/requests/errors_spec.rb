@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ErrorsController, type: :request do
+RSpec.describe ErrorsController do
   describe "actions that result in error pages being shown" do
     describe "unknown page" do
       context "with default locale" do

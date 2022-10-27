@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe CCMS::Submitters::CheckCaseStatusService, :ccms do
   subject { described_class.new(submission) }
 
-  let(:submission) { create :submission, :case_submitted }
+  let(:submission) { create(:submission, :case_submitted) }
   let(:case_add_status_requestor) { double CCMS::Requestors::CaseAddStatusRequestor }
   let(:history) { CCMS::SubmissionHistory.find_by(submission_id: submission.id) }
   let(:case_add_status_response) { ccms_data_from_file "case_add_status_response.xml" }

@@ -172,8 +172,7 @@ module CFEResults
               assessment_result: "eligible",
               capital_contribution: "0.0",
             },
-            remarks: {
-            },
+            remarks: {},
           },
         }
       end

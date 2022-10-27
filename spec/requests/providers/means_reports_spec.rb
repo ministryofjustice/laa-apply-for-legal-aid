@@ -1,7 +1,7 @@
 require "rails_helper"
 require Rails.root.join("spec/factory_helpers/cfe_employment_remarks_adder")
 
-RSpec.describe Providers::MeansReportsController, type: :request do
+RSpec.describe Providers::MeansReportsController do
   include ActionView::Helpers::NumberHelper
   include Capybara::RSpecMatchers
 
@@ -15,7 +15,7 @@ RSpec.describe Providers::MeansReportsController, type: :request do
   end
 
   let(:login_provider) { login_as legal_aid_application.provider }
-  let!(:submission) { create :submission, legal_aid_application: }
+  let!(:submission) { create(:submission, legal_aid_application:) }
   let(:cfe_result) { legal_aid_application.cfe_result }
   let(:before_subject) { nil }
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "EmergencyLevelOfServiceController", :vcr, type: :request do
+RSpec.describe "EmergencyLevelOfServiceController", :vcr do
   let(:application) do
     create(:legal_aid_application,
            :with_proceedings,

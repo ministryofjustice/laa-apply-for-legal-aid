@@ -5,19 +5,19 @@ module CCMS
     RSpec.describe NonPassportedCaseAddRequestor, :ccms do
       context "XML request" do
         let(:expected_tx_id) { "201904011604570390059770666" }
-        let(:firm) { create :firm, name: "Firm1" }
-        let(:office) { create :office, firm: }
+        let(:firm) { create(:firm, name: "Firm1") }
+        let(:office) { create(:office, firm:) }
         let(:savings_amount) { legal_aid_application.savings_amount }
         let(:other_assets_decl) { legal_aid_application.other_assets_declaration }
         let(:provider) do
-          create :provider,
+          create(:provider,
                  firm:,
                  selected_office: office,
-                 username: 4_953_649
+                 username: 4_953_649)
         end
 
         let(:legal_aid_application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_everything,
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
@@ -27,18 +27,18 @@ module CCMS
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider:,
-                 office:
+                 office:)
         end
 
         let!(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, proceeding:
+          create(:chances_of_success, :with_optional_text, proceeding:)
         end
         let(:opponent) { legal_aid_application.opponent }
         let(:ccms_reference) { "300000054005" }
-        let(:submission) { create :submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference }
-        let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
-        let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+        let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
+        let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
+        let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let(:success_prospect) { :likely }
@@ -333,7 +333,7 @@ module CCMS
 
         context "global means outgoing attributes" do
           context "maintenance payments" do
-            let(:maintenance_transaction) { create :transaction_type, :debit, name: "maintenance_out" }
+            let(:maintenance_transaction) { create(:transaction_type, :debit, name: "maintenance_out") }
 
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: maintenance_transaction)
@@ -356,7 +356,7 @@ module CCMS
           end
 
           context "applicant criminal legal aid payments" do
-            let(:criminal_legal_aid_transaction) { create :transaction_type, :debit, name: "legal_aid" }
+            let(:criminal_legal_aid_transaction) { create(:transaction_type, :debit, name: "legal_aid") }
 
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: criminal_legal_aid_transaction)
@@ -379,7 +379,7 @@ module CCMS
           end
 
           context "childcare payments" do
-            let(:childcare_out) { create :transaction_type, :debit, name: "child_care" }
+            let(:childcare_out) { create(:transaction_type, :debit, name: "child_care") }
 
             before do
               create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: childcare_out)

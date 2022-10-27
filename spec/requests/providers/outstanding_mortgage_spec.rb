@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Providers::OutstandingMortgagesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+RSpec.describe Providers::OutstandingMortgagesController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
   let(:params) do
     {
@@ -32,7 +32,7 @@ RSpec.describe Providers::OutstandingMortgagesController, type: :request do
     end
   end
 
-  describe "PATCH /providers/applications/:id/outstanding_mortgage", type: :request do
+  describe "PATCH /providers/applications/:id/outstanding_mortgage" do
     subject { patch providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:submit_button) do

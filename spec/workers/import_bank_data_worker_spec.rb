@@ -4,7 +4,7 @@ require "sidekiq/testing"
 RSpec.describe ImportBankDataWorker, type: :worker do
   let(:token) { SecureRandom.hex }
   let(:token_expires_at) { 1.hour.from_now.round }
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
   let(:applicant) { legal_aid_application.applicant }
   let(:worker_id) { described_class.perform_async(legal_aid_application.id) }
 

@@ -8,15 +8,15 @@ FactoryBot.define do
     employed { false }
 
     trait :with_address do
-      addresses { build_list :address, 1 }
+      addresses { build_list(:address, 1) }
     end
 
     trait :with_address_for_xml_fixture do
-      addresses { build_list :address, 1, :with_address_for_xml_fixture }
+      addresses { build_list(:address, 1, :with_address_for_xml_fixture) }
     end
 
     trait :with_address_lookup do
-      addresses { build_list :address, 1, :is_lookup_used }
+      addresses { build_list(:address, 1, :is_lookup_used) }
     end
 
     trait :not_employed do
@@ -86,9 +86,9 @@ FactoryBot.define do
 
     after(:build) do |applicant, evaluator|
       if evaluator.with_bank_accounts > 0
-        provider = create :bank_provider, applicant: applicant
+        provider = create(:bank_provider, applicant:)
         evaluator.with_bank_accounts.times do
-          create :bank_account, bank_provider: provider
+          create(:bank_account, bank_provider: provider)
         end
       end
     end

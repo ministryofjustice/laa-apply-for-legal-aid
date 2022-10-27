@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Opponents::OpponentForm, type: :form do
   subject { described_class.new(sample_params.merge(custom_params).merge(model: opponent)) }
 
-  let(:opponent) { create :opponent }
+  let(:opponent) { create(:opponent) }
   let(:custom_params) { {} }
   let(:sample_params) do
     {

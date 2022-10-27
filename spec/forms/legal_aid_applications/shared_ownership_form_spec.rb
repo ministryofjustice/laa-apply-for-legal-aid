@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe LegalAidApplications::SharedOwnershipForm, type: :form do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant_and_address }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address) }
   let(:attributes) { legal_aid_application.attributes }
   let(:params) { { shared_ownership: "No" } }
   let(:form_params) { params.merge(model: legal_aid_application) }

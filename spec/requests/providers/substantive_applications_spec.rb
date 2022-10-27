@@ -1,18 +1,18 @@
 require "rails_helper"
-RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
+RSpec.describe Providers::SubstantiveApplicationsController, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
   let(:state) { :with_passported_state_machine }
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :at_applicant_details_checked,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            :with_substantive_application_deadline_on,
            explicit_proceedings: [:da004],
            df_options: { DA004: [Time.zone.today, Time.zone.today] },
-           applicant:
+           applicant:)
   end
 
-  let(:applicant) { create :applicant, :not_employed }
+  let(:applicant) { create(:applicant, :not_employed) }
   let(:login_provider) { login_as legal_aid_application.provider }
   let(:ignore_subject) { false }
 
@@ -100,7 +100,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         end
 
         context "and a dwp_override with evidence" do
-          let!(:dwp_override) { create :dwp_override, :with_evidence, legal_aid_application: }
+          let!(:dwp_override) { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           it "redirects to capital introductions" do
             subject
@@ -111,7 +111,7 @@ RSpec.describe Providers::SubstantiveApplicationsController, type: :request, vcr
         end
 
         context "and a dwp_override without evidence" do
-          let!(:dwp_override) { create :dwp_override, :with_no_evidence, legal_aid_application: }
+          let!(:dwp_override) { create(:dwp_override, :with_no_evidence, legal_aid_application:) }
 
           it "redirects to the open banking consents page" do
             subject

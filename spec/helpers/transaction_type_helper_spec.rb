@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe TransactionTypeHelper, type: :helper do
+RSpec.describe TransactionTypeHelper do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe "#answer_for_transaction_type" do

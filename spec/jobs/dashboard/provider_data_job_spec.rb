@@ -5,7 +5,7 @@ module Dashboard
     describe ".perform" do
       subject { described_class.perform_now(provider) }
 
-      let(:provider) { create :provider }
+      let(:provider) { create(:provider) }
       let(:suspended_list) { Rails.configuration.x.suspended_dashboard_updater_jobs }
 
       let(:geckoboard_client) { double Geckoboard::Client }

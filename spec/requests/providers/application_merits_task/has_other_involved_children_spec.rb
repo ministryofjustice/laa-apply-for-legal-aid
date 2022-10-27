@@ -2,13 +2,13 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe HasOtherInvolvedChildrenController, type: :request do
+    RSpec.describe HasOtherInvolvedChildrenController do
       subject { get providers_legal_aid_application_has_other_involved_children_path(application) }
 
-      let(:application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+      let(:application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:provider) { application.provider }
-      let(:child1) { create :involved_child, legal_aid_application: application }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: application }
+      let(:child1) { create(:involved_child, legal_aid_application: application) }
+      let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
       let(:next_page) { :merits_task_lists }
 
       before do

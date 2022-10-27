@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "providers offine accounts", type: :request do
-  let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount }
+RSpec.describe "providers offine accounts" do
+  let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount) }
   let(:savings_amount) { application.savings_amount }
 
   describe "GET /providers/applications/:legal_aid_application_id/offline_account" do
@@ -129,7 +129,7 @@ RSpec.describe "providers offine accounts", type: :request do
 
         context "when in checking citizen answers state" do
           let(:state) { :checking_citizen_answers }
-          let(:application) { create :legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, state }
+          let(:application) { create(:legal_aid_application, :with_applicant, :with_savings_amount, :with_non_passported_state_machine, state) }
           let(:submit_button) do
             {
               continue_button: "Continue",

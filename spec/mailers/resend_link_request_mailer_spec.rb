@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe ResendLinkRequestMailer, type: :mailer do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+RSpec.describe ResendLinkRequestMailer do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:application_url) { "https://this_is_a_test.com" }
   let(:mail) do
     described_class.notify(

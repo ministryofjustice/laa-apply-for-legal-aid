@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ManualReviewDetailer do
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe ".call" do
     context "no restrictions, no policy disregards. no extra employment information" do

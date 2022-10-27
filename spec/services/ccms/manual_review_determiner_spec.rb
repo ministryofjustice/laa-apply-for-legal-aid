@@ -3,9 +3,9 @@ require "rails_helper"
 module CCMS
   RSpec.describe ManualReviewDeterminer, :ccms do
     let(:setting) { Setting.setting }
-    let!(:cfe_submission) { create :cfe_submission, legal_aid_application: }
+    let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
     let(:determiner) { described_class.new(legal_aid_application) }
-    let(:legal_aid_application) { create :legal_aid_application }
+    let(:legal_aid_application) { create(:legal_aid_application) }
 
     describe "#manual_review_required?" do
       subject { determiner.manual_review_required? }
@@ -21,8 +21,8 @@ module CCMS
 
         context "no DWP override" do
           context "passported, no contrib, no_restrictions" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns false" do
               expect(subject).to be false
@@ -30,8 +30,8 @@ module CCMS
           end
 
           context "non-passported, no contrib" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
+            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(subject).to be true
@@ -40,11 +40,11 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create :dwp_override, legal_aid_application: }
+          before { create(:dwp_override, legal_aid_application:) }
 
           context "passported, no contrib, no_restrictions" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result) }
+            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(subject).to be true
@@ -52,8 +52,8 @@ module CCMS
           end
 
           context "non-passported, no contrib" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result }
-            let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
+            let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
             it "returns true" do
               expect(subject).to be true
@@ -67,10 +67,10 @@ module CCMS
 
         context "no DWP override" do
           context "passported" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true) }
 
             context "contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(subject).to be true
@@ -78,7 +78,7 @@ module CCMS
             end
 
             context "no contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "restrictions" do
                 it "returns false" do
@@ -97,10 +97,10 @@ module CCMS
           end
 
           context "non-passported" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true) }
 
             context "contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(subject).to be true
@@ -108,7 +108,7 @@ module CCMS
             end
 
             context "no contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "restrictions" do
                 it "returns false" do
@@ -128,13 +128,13 @@ module CCMS
         end
 
         context "with DWP override" do
-          before { create :dwp_override, legal_aid_application: }
+          before { create(:dwp_override, legal_aid_application:) }
 
           context "passported" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_positive_benefit_check_result, has_restrictions: true) }
 
             context "contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(subject).to be true
@@ -142,7 +142,7 @@ module CCMS
             end
 
             context "no contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "restrictions" do
                 it "returns false" do
@@ -161,10 +161,10 @@ module CCMS
           end
 
           context "non-passported" do
-            let(:legal_aid_application) { create :legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true }
+            let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, has_restrictions: true) }
 
             context "contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required, submission: cfe_submission) }
 
               it "returns true" do
                 expect(subject).to be true
@@ -172,7 +172,7 @@ module CCMS
             end
 
             context "no contribution" do
-              let!(:cfe_result) { create :cfe_v3_result, submission: cfe_submission }
+              let!(:cfe_result) { create(:cfe_v3_result, submission: cfe_submission) }
 
               context "restrictions" do
                 it "returns false" do
@@ -195,7 +195,7 @@ module CCMS
         context "with policy_disregards" do
           before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(true) }
 
-          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(subject).to be true
@@ -205,7 +205,7 @@ module CCMS
         context "without policy_disregards" do
           before { allow(legal_aid_application).to receive(:policy_disregards?).and_return(false) }
 
-          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
             expect(subject).to be false
@@ -213,8 +213,8 @@ module CCMS
         end
 
         context "with further employment information" do
-          let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: true }
-          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+          let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: true) }
+          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns true" do
             expect(subject).to be true
@@ -222,8 +222,8 @@ module CCMS
         end
 
         context "without further employment information" do
-          let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: false }
-          let!(:cfe_result) { create :cfe_v4_result, submission: cfe_submission }
+          let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: false) }
+          let!(:cfe_result) { create(:cfe_v4_result, submission: cfe_submission) }
 
           it "returns false" do
             expect(subject).to be false
@@ -266,7 +266,7 @@ module CCMS
       end
 
       context "With DWP override" do
-        before { create :dwp_override, legal_aid_application: }
+        before { create(:dwp_override, legal_aid_application:) }
 
         it "adds the dwp review to the cfe result reasons" do
           expect(subject).to eq override_reasons
@@ -274,7 +274,7 @@ module CCMS
       end
 
       context "with further employment information" do
-        let(:legal_aid_application) { create :legal_aid_application, extra_employment_information: true }
+        let(:legal_aid_application) { create(:legal_aid_application, extra_employment_information: true) }
 
         it "adds further_employment_details to the review reasons" do
           expect(subject).to eq further_employment_details_reasons
@@ -282,7 +282,7 @@ module CCMS
       end
 
       context "with restrictions" do
-        let(:legal_aid_application) { create :legal_aid_application, has_restrictions: true }
+        let(:legal_aid_application) { create(:legal_aid_application, has_restrictions: true) }
 
         it "adds restrictions to the review reasons" do
           expect(subject).to eq restrictions_reasons

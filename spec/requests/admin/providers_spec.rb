@@ -1,8 +1,8 @@
 require "rails_helper"
 
 module Admin
-  RSpec.describe ProvidersController, type: :request do
-    let(:admin_user) { create :admin_user }
+  RSpec.describe ProvidersController do
+    let(:admin_user) { create(:admin_user) }
 
     before { sign_in admin_user }
 
@@ -11,9 +11,9 @@ module Admin
       let(:your_firm) { Firm.create(name: "You and Yours Partners") }
 
       before do
-        create :provider, username: "Johnny Me", firm: my_firm
-        create :provider, username: "Amy Me", firm: my_firm
-        create :provider, username: "Edward Yu", firm: your_firm
+        create(:provider, username: "Johnny Me", firm: my_firm)
+        create(:provider, username: "Amy Me", firm: my_firm)
+        create(:provider, username: "Edward Yu", firm: your_firm)
 
         get admin_firm_providers_path(firm_id)
       end

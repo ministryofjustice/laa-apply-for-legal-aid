@@ -1,20 +1,20 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeritsReportsController, type: :request do
+RSpec.describe Providers::MeritsReportsController do
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
            :with_everything,
            :assessment_submitted,
-           explicit_proceedings: %i[da004]
+           explicit_proceedings: %i[da004])
   end
   let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
   let!(:chances_of_success) do
-    create :chances_of_success, :with_optional_text, proceeding: da004
+    create(:chances_of_success, :with_optional_text, proceeding: da004)
   end
 
   let(:login_provider) { login_as legal_aid_application.provider }
-  let!(:submission) { create :submission, legal_aid_application: }
+  let!(:submission) { create(:submission, legal_aid_application:) }
   let(:before_subject) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/merits_report" do

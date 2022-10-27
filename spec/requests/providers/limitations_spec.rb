@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Providers::LimitationsController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
+RSpec.describe Providers::LimitationsController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, set_lead_proceeding: :da001) }
   let(:provider) { legal_aid_application.provider }
 
   before do
@@ -34,7 +34,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
       end
 
       context "when delegated functions have been used" do
-        let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004) }
         let(:provider) { legal_aid_application.provider }
 
         it "shows the correct text" do
@@ -59,7 +59,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
       context "and the maximum substantive cost limit is at the threshold" do
         subject { patch providers_legal_aid_application_limitations_path(legal_aid_application) }
 
-        let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
         it "redirects to next page" do
           expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
@@ -69,11 +69,11 @@ RSpec.describe Providers::LimitationsController, type: :request do
       context "and the maximum substantive cost limit is below the threshold" do
         subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
-        let(:legal_aid_application) { create :legal_aid_application }
+        let(:legal_aid_application) { create(:legal_aid_application) }
 
         before do
-          create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true, used_delegated_functions_on: nil
-          create :proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: nil
+          create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true, used_delegated_functions_on: nil)
+          create(:proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 8_000, used_delegated_functions_on: nil)
         end
 
         context "when no substantive limit extension is requested" do
@@ -107,7 +107,7 @@ RSpec.describe Providers::LimitationsController, type: :request do
     context "when delegated functions have been used" do
       subject { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
 
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004) }
       let(:proceeding_type) { legal_aid_application.proceeding_types.first }
       let(:provider) { legal_aid_application.provider }
 

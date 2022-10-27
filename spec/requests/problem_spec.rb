@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProblemController, type: :request do
+RSpec.describe ProblemController do
   describe "GET /problem" do
     subject { get problem_index_path }
 

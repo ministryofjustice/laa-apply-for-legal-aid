@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :scope_limitation do
-    proceeding { create :proceeding, :da001 }
+    proceeding { create(:proceeding, :da001) }
 
     trait :emergency do
       scope_type { 1 }

@@ -10,7 +10,7 @@ RSpec.shared_context "with credit and debit transaction types" do
   end
 end
 
-RSpec.describe TransactionType, type: :model do
+RSpec.describe TransactionType do
   describe ".all" do
     subject(:all) { described_class.all }
 
@@ -43,7 +43,7 @@ RSpec.describe TransactionType, type: :model do
 
   describe ".for_income_type?" do
     context "when checks that a boolean response is returned" do
-      let!(:credit_transaction) { create :transaction_type, :credit_with_standard_name }
+      let!(:credit_transaction) { create(:transaction_type, :credit_with_standard_name) }
 
       it "returns true with a valid income_type" do
         expect(described_class.for_income_type?(credit_transaction["name"])).to be true
@@ -51,7 +51,7 @@ RSpec.describe TransactionType, type: :model do
     end
 
     context "with checks for boolean response" do
-      let!(:debit_transaction) { create :transaction_type, :debit_with_standard_name }
+      let!(:debit_transaction) { create(:transaction_type, :debit_with_standard_name) }
 
       it "returns false when a non valid income type is used" do
         expect(described_class.for_income_type?(debit_transaction["name"])).to be false
@@ -60,7 +60,7 @@ RSpec.describe TransactionType, type: :model do
   end
 
   describe ".for_outgoing_type?" do
-    before { create :transaction_type, :child_care }
+    before { create(:transaction_type, :child_care) }
 
     context "when no such outgoing types exist" do
       it "returns false" do
@@ -69,7 +69,7 @@ RSpec.describe TransactionType, type: :model do
     end
 
     context "when outgoing types do exist" do
-      before { create :transaction_type, :maintenance_out }
+      before { create(:transaction_type, :maintenance_out) }
 
       it "returns true" do
         expect(described_class.for_outgoing_type?("maintenance_out")).to be true

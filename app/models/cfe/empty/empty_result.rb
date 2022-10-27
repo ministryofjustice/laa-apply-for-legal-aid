@@ -201,9 +201,7 @@ module CFE
                 },
               },
             },
-            remarks: {
-
-            },
+            remarks: {},
           },
         }
       end

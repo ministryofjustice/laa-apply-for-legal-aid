@@ -2,9 +2,9 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateAssessmentService do
-    let(:application) { create :legal_aid_application, :with_proceedings }
-    let!(:applicant) { create :applicant, legal_aid_application: application }
-    let(:submission) { create :cfe_submission, aasm_state: "initialised", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_proceedings) }
+    let!(:applicant) { create(:applicant, legal_aid_application: application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "initialised", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 

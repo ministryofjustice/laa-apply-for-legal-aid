@@ -6,6 +6,13 @@
 class SamlSessionsController < Devise::SamlSessionsController
   before_action :update_locale
 
+  def create
+    super
+    update_provider_details
+  rescue StandardError
+    redirect_to error_path(:access_denied)
+  end
+
   def destroy
     session["signed_out"] = true
     session["feedback_return_path"] = destroy_provider_session_path
@@ -15,13 +22,6 @@ class SamlSessionsController < Devise::SamlSessionsController
     else
       redirect_to new_feedback_path
     end
-  end
-
-  def create
-    super
-    update_provider_details
-  rescue StandardError
-    redirect_to error_path(:access_denied)
   end
 
   def after_sign_in_path_for(_provider)

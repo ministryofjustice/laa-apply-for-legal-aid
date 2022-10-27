@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :request do
+RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController do
   let!(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
-           df_options: { DA001: [Time.zone.now, Time.zone.now] }
+           df_options: { DA001: [Time.zone.now, Time.zone.now] })
   end
   let(:login_provider) { login_as legal_aid_application.provider }
 
@@ -58,11 +58,11 @@ RSpec.describe Providers::ConfirmMultipleDelegatedFunctionsController, type: :re
 
       context "when the legal aid app has multiple DF dates over a month" do
         let!(:legal_aid_application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_proceedings,
                  :with_delegated_functions_on_proceedings,
                  proceeding_count: 2,
-                 df_options: { DA001: 35.days.ago.to_date, DA004: 36.days.ago.to_date }
+                 df_options: { DA001: 35.days.ago.to_date, DA004: 36.days.ago.to_date })
         end
 
         it "error pluralised" do

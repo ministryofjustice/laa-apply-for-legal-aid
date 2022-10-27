@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Providers::ApplicantsController, type: :request do
-  let(:office) { create :office }
-  let(:provider) { create :provider, selected_office: office }
+RSpec.describe Providers::ApplicantsController do
+  let(:office) { create(:office) }
+  let(:provider) { create(:provider, selected_office: office) }
   let(:login) { login_as provider }
 
   before { login }
@@ -25,7 +25,7 @@ RSpec.describe Providers::ApplicantsController, type: :request do
     subject { post providers_applicants_path, params: params.merge(submit_button) }
 
     let(:submit_button) { {} }
-    let(:param_applicant) { FactoryBot.attributes_for :applicant }
+    let(:param_applicant) { FactoryBot.attributes_for(:applicant) }
     let(:params) do
       {
         applicant: param_applicant.merge(

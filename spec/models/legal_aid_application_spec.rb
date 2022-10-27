@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe LegalAidApplication, type: :model do
-  let(:legal_aid_application) { create :legal_aid_application }
+RSpec.describe LegalAidApplication do
+  let(:legal_aid_application) { create(:legal_aid_application) }
 
   # Main purpose: to ensure relationships to other objects set so that destroying application destroys all objects
   # that then become redundant.
@@ -9,16 +9,16 @@ RSpec.describe LegalAidApplication, type: :model do
     subject { described_class.destroy_all }
 
     let!(:legal_aid_application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_everything,
              :with_multiple_proceedings_inc_section8,
              :with_negative_benefit_check_result,
              :with_bank_transactions,
-             :with_chances_of_success
+             :with_chances_of_success)
     end
 
     before do
-      create :legal_aid_application_transaction_type, legal_aid_application:
+      create(:legal_aid_application_transaction_type, legal_aid_application:)
     end
 
     # A bit verbose, but minimises the SQL calls required to complete spec
@@ -58,11 +58,11 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe ".search" do
-    let!(:application1) { create :legal_aid_application, application_ref: "L-123-ABC" }
-    let(:jacob) { create :applicant, first_name: "Jacob", last_name: "Rees-Mogg" }
-    let!(:application2) { create :legal_aid_application, applicant: jacob }
-    let(:ccms_submission) { create :submission, case_ccms_reference: "300000000009" }
-    let!(:application3) { create :legal_aid_application, ccms_submission: }
+    let!(:application1) { create(:legal_aid_application, application_ref: "L-123-ABC") }
+    let(:jacob) { create(:applicant, first_name: "Jacob", last_name: "Rees-Mogg") }
+    let!(:application2) { create(:legal_aid_application, applicant: jacob) }
+    let(:ccms_submission) { create(:submission, case_ccms_reference: "300000000009") }
+    let!(:application3) { create(:legal_aid_application, ccms_submission:) }
     let(:non_alphanum) { /[^0-9a-zA-Z]/.random_example }
 
     it "matches application_ref" do
@@ -166,7 +166,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "when policy_disregards record exists" do
       context "when none selected is true" do
-        before { create :policy_disregards, legal_aid_application: }
+        before { create(:policy_disregards, legal_aid_application:) }
 
         it "returns false" do
           expect(legal_aid_application.policy_disregards?).to be false
@@ -174,7 +174,7 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context "when none selected is false" do
-        before { create :policy_disregards, legal_aid_application:, national_emergencies_trust: true }
+        before { create(:policy_disregards, legal_aid_application:, national_emergencies_trust: true) }
 
         it "returns true" do
           expect(legal_aid_application.policy_disregards?).to be true
@@ -219,19 +219,19 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#lead_application_proceeding_type" do
     context "when application proceeding types exist" do
       let!(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_applicant,
                :with_proceedings,
                set_lead_proceeding: :da001,
-               explicit_proceedings: %i[se014 da001]
+               explicit_proceedings: %i[se014 da001])
       end
       let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
       let(:se014) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, proceeding: da004
+        create(:chances_of_success, :with_optional_text, proceeding: da004)
       end
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, proceeding: se014
+        create(:chances_of_success, :with_optional_text, proceeding: se014)
       end
 
       it "returns the lead proceeding" do
@@ -242,7 +242,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#pre_dwp_check?" do
     let(:state) { :initiated }
-    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, state }
+    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, state) }
 
     context "when in pre-dwp-check state" do
       it "is true" do
@@ -251,7 +251,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when in non-passported state" do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :with_applicant, state }
+      let!(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :with_applicant, state) }
       let(:state) { :checking_non_passported_means }
 
       it "is false" do
@@ -317,10 +317,10 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#statement_of_case_uploaded?" do
-    let(:legal_aid_application) { create :legal_aid_application }
+    let(:legal_aid_application) { create(:legal_aid_application) }
 
     context "with statement of case files attached" do
-      let!(:statement_of_case) { create :statement_of_case, :with_original_file_attached, legal_aid_application: }
+      let!(:statement_of_case) { create(:statement_of_case, :with_original_file_attached, legal_aid_application:) }
 
       it "is true" do
         expect(legal_aid_application.statement_of_case_uploaded?).to be true
@@ -335,7 +335,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "benefit_check_result_needs_updating?" do
-    let!(:legal_aid_application) { create :legal_aid_application, :with_applicant, :at_entering_applicant_details }
+    let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :at_entering_applicant_details) }
     let(:applicant) { legal_aid_application.applicant }
 
     it "is true if no benefit check results" do
@@ -343,7 +343,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "with up to date benefit check results" do
-      let!(:benefit_check_result) { create :benefit_check_result, legal_aid_application: }
+      let!(:benefit_check_result) { create(:benefit_check_result, legal_aid_application:) }
 
       it "returns false" do
         expect(legal_aid_application).not_to be_benefit_check_result_needs_updating
@@ -352,7 +352,7 @@ RSpec.describe LegalAidApplication, type: :model do
       context "but later, applicant first name updated" do
         before { applicant.update(first_name: Faker::Name.first_name) }
 
-        let!(:benefit_check_result) { travel(-10.minutes) { create :benefit_check_result, legal_aid_application: } }
+        let!(:benefit_check_result) { travel(-10.minutes) { create(:benefit_check_result, legal_aid_application:) } }
 
         it "returns true" do
           expect(legal_aid_application).to be_benefit_check_result_needs_updating
@@ -374,7 +374,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#generate_secure_id" do
     subject { legal_aid_application.generate_secure_id }
 
-    let(:legal_aid_application) { create :legal_aid_application }
+    let(:legal_aid_application) { create(:legal_aid_application) }
     let(:secure_data) { SecureData.last }
 
     it "generates a new secure data object" do
@@ -498,15 +498,15 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#uncategorised_transactions?" do
     context "when transaction types have associated bank transactions" do
-      let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: }
-      let(:bank_account) { create :bank_account, bank_provider: }
-      let!(:transaction_type) { create :transaction_type, :credit, name: "salary" }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type:, bank_account: }
-      let(:legal_aid_application) { create :legal_aid_application, applicant:, transaction_types: [transaction_type] }
+      let(:applicant) { create(:applicant) }
+      let(:bank_provider) { create(:bank_provider, applicant:) }
+      let(:bank_account) { create(:bank_account, bank_provider:) }
+      let!(:transaction_type) { create(:transaction_type, :credit, name: "salary") }
+      let!(:bank_transaction) { create(:bank_transaction, :credit, transaction_type:, bank_account:) }
+      let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [transaction_type]) }
 
       context "with income transactions" do
-        let!(:transaction_type) { create :transaction_type, :credit, name: "salary" }
+        let!(:transaction_type) { create(:transaction_type, :credit, name: "salary") }
 
         it "returns false" do
           expect(legal_aid_application.uncategorised_transactions?(:credit)).to be false
@@ -514,8 +514,8 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context "with outgoing transactions" do
-        let(:transaction_type) { create :transaction_type, :debit }
-        let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type:, bank_account: }
+        let(:transaction_type) { create(:transaction_type, :debit) }
+        let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type:, bank_account:) }
 
         it "returns false" do
           expect(legal_aid_application.uncategorised_transactions?(:debit)).to be false
@@ -524,12 +524,12 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when transaction types do not have associated bank transactions" do
-      let(:applicant) { create :applicant }
-      let(:bank_provider) { create :bank_provider, applicant: }
-      let(:bank_account) { create :bank_account, bank_provider: }
-      let!(:transaction_type) { create :transaction_type, :credit, name: "salary" }
-      let!(:bank_transaction) { create :bank_transaction, :credit, transaction_type: nil, bank_account: }
-      let(:legal_aid_application) { create :legal_aid_application, applicant:, transaction_types: [transaction_type] }
+      let(:applicant) { create(:applicant) }
+      let(:bank_provider) { create(:bank_provider, applicant:) }
+      let(:bank_account) { create(:bank_account, bank_provider:) }
+      let!(:transaction_type) { create(:transaction_type, :credit, name: "salary") }
+      let!(:bank_transaction) { create(:bank_transaction, :credit, transaction_type: nil, bank_account:) }
+      let(:legal_aid_application) { create(:legal_aid_application, applicant:, transaction_types: [transaction_type]) }
 
       context "with income transactions" do
         it "returns true" do
@@ -538,8 +538,8 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context "with outgoing transactions" do
-        let!(:bank_transaction) { create :bank_transaction, :debit, transaction_type: nil, bank_account: }
-        let!(:transaction_type) { create :transaction_type, :debit }
+        let!(:bank_transaction) { create(:bank_transaction, :debit, transaction_type: nil, bank_account:) }
+        let!(:transaction_type) { create(:transaction_type, :debit) }
 
         it "returns true" do
           expect(legal_aid_application.uncategorised_transactions?(:debit)).to be true
@@ -558,7 +558,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'when legal_aid_application.own_home is "no"' do
-      let(:legal_aid_application) { create :legal_aid_application, :without_own_home }
+      let(:legal_aid_application) { create(:legal_aid_application, :without_own_home) }
 
       it "returns false" do
         expect(legal_aid_application.own_home?).to be(false)
@@ -566,7 +566,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context 'when legal_aid_application.own_home is not "no"' do
-      let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_own_home_mortgaged) }
 
       it "returns true" do
         expect(legal_aid_application.own_home?).to be(true)
@@ -576,7 +576,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#own_capital?" do
     context "with no home, savings or assets" do
-      let(:legal_aid_application) { create :legal_aid_application, own_home: nil }
+      let(:legal_aid_application) { create(:legal_aid_application, own_home: nil) }
 
       it "returns nil" do
         expect(legal_aid_application.own_capital?).to be false
@@ -584,7 +584,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "with own home" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_own_home_mortgaged }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_own_home_mortgaged) }
 
       it "returns true" do
         expect(legal_aid_application.own_capital?).to be(true)
@@ -623,12 +623,12 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "when delegated functions are used" do
       let!(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_delegated_functions_on_proceedings,
                explicit_proceedings: [:da004],
                set_lead_proceeding: :da004,
-               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] }
+               df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] })
       end
       let(:proceedings) { legal_aid_application.proceedings }
       let!(:used_delegated_functions_reported_on) { Time.zone.today }
@@ -644,7 +644,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#submitted_to_ccms?" do
     context "when application not submitted to ccms" do
-      let(:legal_aid_application) { create :legal_aid_application }
+      let(:legal_aid_application) { create(:legal_aid_application) }
 
       it "returns false" do
         expect(legal_aid_application.submitted_to_ccms?).to be(false)
@@ -652,7 +652,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when application submitted to ccms" do
-      let(:legal_aid_application) { create :legal_aid_application, :submitted_to_ccms }
+      let(:legal_aid_application) { create(:legal_aid_application, :submitted_to_ccms) }
 
       it "returns true" do
         expect(legal_aid_application.submitted_to_ccms?).to be(true)
@@ -662,7 +662,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#proceedings_used_delegated_functions?" do
     context "when application uses df" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004 }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004) }
 
       it "returns true" do
         expect(legal_aid_application.proceedings_used_delegated_functions?).to be(true)
@@ -670,7 +670,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when application does not use df" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
       it "returns false" do
         expect(legal_aid_application.proceedings_used_delegated_functions?).to be(false)
@@ -680,7 +680,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#read_only?" do
     context "when provider application not submitted" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine) }
 
       it "returns false" do
         expect(legal_aid_application.read_only?).to be(false)
@@ -688,7 +688,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when provider submitted" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means) }
 
       it "returns true" do
         expect(legal_aid_application.read_only?).to be(true)
@@ -696,7 +696,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when checking citizen answers?" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers) }
 
       it "returns true" do
         expect(legal_aid_application.read_only?).to be(true)
@@ -705,7 +705,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#applicant_details_checked" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details) }
 
     it "passes application to keep in sync service" do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
@@ -738,7 +738,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#create_app_ref" do
     it "generates an application_ref when the application is created" do
-      legal_aid_application = described_class.create!(provider: (create :provider))
+      legal_aid_application = described_class.create!(provider: create(:provider))
       expect(legal_aid_application.application_ref).to match(/L(-[ABCDEFHJKLMNPRTUVWXY0-9]{3}){2}/)
     end
   end
@@ -767,12 +767,12 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#used_delegated_functions?" do
     let!(:legal_aid_application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_proceedings,
              :with_delegated_functions_on_proceedings,
              explicit_proceedings: [:da004],
              set_lead_proceeding: :da004,
-             df_options: { DA004: [Time.zone.now, Time.zone.now] }
+             df_options: { DA004: [Time.zone.now, Time.zone.now] })
     end
 
     context "when delegated functions used" do
@@ -782,7 +782,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when delegated functions not used" do
-      let!(:legal_aid_application) { create :legal_aid_application, :with_proceedings }
+      let!(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
       it "returns false" do
         expect(legal_aid_application.used_delegated_functions?).to be false
@@ -791,10 +791,10 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#earliest_delegated_functions_date" do
-    let(:laa) { create :legal_aid_application }
-    let!(:proceeding1) { create :proceeding, :da001, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date1 }
-    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date2 }
-    let!(:proceeding3) { create :proceeding, :se014, legal_aid_application: laa }
+    let(:laa) { create(:legal_aid_application) }
+    let!(:proceeding1) { create(:proceeding, :da001, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date1) }
+    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application: laa, used_delegated_functions: true, used_delegated_functions_on: date2) }
+    let!(:proceeding3) { create(:proceeding, :se014, legal_aid_application: laa) }
 
     context "when there are application_proceeding_type records with dates" do
       let(:date1) { Time.zone.today }
@@ -817,7 +817,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#default_cost_limitations" do
     context "when substantive" do
-      let(:application) { create :legal_aid_application, :with_proceedings, set_lead_proceeding: :da001 }
+      let(:application) { create(:legal_aid_application, :with_proceedings, set_lead_proceeding: :da001) }
 
       it "returns the substantive cost limitation for the first proceeding type" do
         expect(application.default_cost_limitation).to eq 25_000.0
@@ -825,10 +825,10 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "with delegated functions" do
-      let(:legal_aid_application) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004) }
       let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, proceeding: da004
+        create(:chances_of_success, :with_optional_text, proceeding: da004)
       end
 
       it "returns the substantive cost limitation for the proceeding" do
@@ -837,9 +837,9 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when the lead application has a smaller substantive cost limit" do
-      let(:legal_aid_application) { create :legal_aid_application }
-      let!(:proceeding1) { create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true }
-      let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: }
+      let(:legal_aid_application) { create(:legal_aid_application) }
+      let!(:proceeding1) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
+      let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application:) }
 
       it "takes the largest cost value" do
         expect(legal_aid_application.default_cost_limitation).to eq 25_000.0
@@ -850,9 +850,9 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#substantive_cost_limitation" do
     subject(:substantive_cost_limitation) { legal_aid_application.substantive_cost_limitation }
 
-    let(:legal_aid_application) { create :legal_aid_application }
-    let!(:proceeding1) { create :proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true }
-    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 10_000 }
+    let(:legal_aid_application) { create(:legal_aid_application) }
+    let!(:proceeding1) { create(:proceeding, :da006, legal_aid_application:, substantive_cost_limitation: 5_000, lead_proceeding: true) }
+    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application:, substantive_cost_limitation: 10_000) }
 
     context "when the provider accepts the default" do
       it { is_expected.to eq 10_000 }
@@ -860,10 +860,10 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "when the provider has overridden a smaller default" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                substantive_cost_override: true,
                substantive_cost_requested: 12_000,
-               substantive_cost_reasons: "something... something... reasons"
+               substantive_cost_reasons: "something... something... reasons")
       end
 
       it { is_expected.to eq 12_000 }
@@ -880,17 +880,17 @@ RSpec.describe LegalAidApplication, type: :model do
     let(:date_before_end)   { "2019-08-20 23:40 +0100".to_time }
     let(:date_after_end)    { "2019-08-21 00:20 +0100".to_time }
     let(:legal_aid_application) do
-      create :legal_aid_application,
+      create(:legal_aid_application,
              :with_applicant,
              transaction_period_start_on:,
-             transaction_period_finish_on:
+             transaction_period_finish_on:)
     end
-    let(:bank_provider) { create :bank_provider, applicant: legal_aid_application.applicant }
-    let(:bank_account) { create :bank_account, bank_provider: }
-    let!(:transaction_before_start) { create :bank_transaction, bank_account:, happened_at: date_before_start }
-    let!(:transaction_after_start) { create :bank_transaction, bank_account:, happened_at: date_after_start }
-    let!(:transaction_before_end) { create :bank_transaction, bank_account:, happened_at: date_before_end }
-    let!(:transaction_after_end) { create :bank_transaction, bank_account:, happened_at: date_after_end }
+    let(:bank_provider) { create(:bank_provider, applicant: legal_aid_application.applicant) }
+    let(:bank_account) { create(:bank_account, bank_provider:) }
+    let!(:transaction_before_start) { create(:bank_transaction, bank_account:, happened_at: date_before_start) }
+    let!(:transaction_after_start) { create(:bank_transaction, bank_account:, happened_at: date_after_start) }
+    let!(:transaction_before_end) { create(:bank_transaction, bank_account:, happened_at: date_before_end) }
+    let!(:transaction_after_end) { create(:bank_transaction, bank_account:, happened_at: date_after_end) }
     let(:transaction_ids) { subject.pluck(:id) }
 
     it "returns the all transactions" do
@@ -904,7 +904,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "applicant_receives_benefit?" do
     context "when benefit_check_result exists?" do
       context "when passported" do
-        before { create :benefit_check_result, :positive, legal_aid_application: }
+        before { create(:benefit_check_result, :positive, legal_aid_application:) }
 
         context "with no DWP Override" do
           it "returns true" do
@@ -917,7 +917,7 @@ RSpec.describe LegalAidApplication, type: :model do
         end
 
         context "with DWP override" do
-          before { create :dwp_override, legal_aid_application: }
+          before { create(:dwp_override, legal_aid_application:) }
 
           it "returns true" do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
@@ -926,7 +926,7 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context "when not passported" do
-        before { create :benefit_check_result, legal_aid_application: }
+        before { create(:benefit_check_result, legal_aid_application:) }
 
         context "with no DWP override" do
           it "returns false" do
@@ -940,7 +940,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
         context "with DWP Override" do
           context "when the provider selects yes for evidence" do
-            before { create :dwp_override, :with_evidence, legal_aid_application: }
+            before { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
             it "returns true" do
               expect(legal_aid_application.applicant_receives_benefit?).to be true
@@ -952,7 +952,7 @@ RSpec.describe LegalAidApplication, type: :model do
           end
 
           context "when the provider selects no for evidence" do
-            before { create :dwp_override, :with_no_evidence, legal_aid_application: }
+            before { create(:dwp_override, :with_no_evidence, legal_aid_application:) }
 
             it "returns false" do
               expect(legal_aid_application.applicant_receives_benefit?).to be false
@@ -966,7 +966,7 @@ RSpec.describe LegalAidApplication, type: :model do
       end
 
       context "when undetermined" do
-        before { create :benefit_check_result, :undetermined, legal_aid_application: }
+        before { create(:benefit_check_result, :undetermined, legal_aid_application:) }
 
         context "with no DWP Override" do
           it "returns false" do
@@ -975,7 +975,7 @@ RSpec.describe LegalAidApplication, type: :model do
         end
 
         context "with DWP Override" do
-          before { create :dwp_override, :with_evidence, legal_aid_application: }
+          before { create(:dwp_override, :with_evidence, legal_aid_application:) }
 
           it "returns true" do
             expect(legal_aid_application.applicant_receives_benefit?).to be true
@@ -992,7 +992,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#generated_reports" do
-    let(:legal_aid_application) { create :legal_aid_application, :generating_reports }
+    let(:legal_aid_application) { create(:legal_aid_application, :generating_reports) }
     let(:submit_applications_to_ccms) { true }
 
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms) }
@@ -1013,7 +1013,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#submitted_assessment" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :checking_merits_answers }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_merits_answers) }
     let(:feedback_url) { "http://test/feedback/new" }
 
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true) }
@@ -1028,7 +1028,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#complete_non_passported_means!" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers) }
 
     it "runs the complete means service and the bank transaction analyser" do
       expect(ApplicantCompleteMeans).to receive(:call).with(legal_aid_application)
@@ -1040,24 +1040,24 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#cfe_result" do
     it "returns the result associated with the most recent CFE::Submission" do
       travel(-10.minutes) do
-        legal_aid_application = create :legal_aid_application
-        submission1 = create :cfe_submission, legal_aid_application: legal_aid_application
-        create :cfe_v3_result, submission: submission1
+        legal_aid_application = create(:legal_aid_application)
+        submission1 = create(:cfe_submission, legal_aid_application:)
+        create(:cfe_v3_result, submission: submission1)
       end
-      submission2 = create :cfe_submission, legal_aid_application: legal_aid_application
-      result2 = create :cfe_v3_result, submission: submission2
+      submission2 = create(:cfe_submission, legal_aid_application:)
+      result2 = create(:cfe_v3_result, submission: submission2)
 
       expect(legal_aid_application.cfe_result).to eq result2
     end
   end
 
   describe "#transaction_types" do
-    let(:legal_aid_application) { create :legal_aid_application }
-    let!(:ff) { create :transaction_type, :friends_or_family }
-    let!(:maintenance) { create :transaction_type, :maintenance_out }
-    let!(:child_care) { create :transaction_type, :child_care }
-    let!(:ff_tt) { create :legal_aid_application_transaction_type, transaction_type: ff, legal_aid_application: }
-    let!(:maintenance_tt) { create :legal_aid_application_transaction_type, transaction_type: maintenance, legal_aid_application: }
+    let(:legal_aid_application) { create(:legal_aid_application) }
+    let!(:ff) { create(:transaction_type, :friends_or_family) }
+    let!(:maintenance) { create(:transaction_type, :maintenance_out) }
+    let!(:child_care) { create(:transaction_type, :child_care) }
+    let!(:ff_tt) { create(:legal_aid_application_transaction_type, transaction_type: ff, legal_aid_application:) }
+    let!(:maintenance_tt) { create(:legal_aid_application_transaction_type, transaction_type: maintenance, legal_aid_application:) }
 
     it "returns an array of transaction type records" do
       expect(legal_aid_application.transaction_types).to eq [ff, maintenance]
@@ -1080,7 +1080,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "after_save hook" do
     context "when an application is created" do
-      let(:application) { create :legal_aid_application, :with_proceedings }
+      let(:application) { create(:legal_aid_application, :with_proceedings) }
 
       it { expect(application.used_delegated_functions?).to be false }
 
@@ -1109,9 +1109,9 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application parent, child and stand-alone transaction types" do
       before do
-        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
-        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: benefits
-        create :legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits)
       end
 
       it "returns parent and stand-alone" do
@@ -1121,8 +1121,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application child and stand-alone transaction types" do
       before do
-        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
-        create :legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: excluded_benefits)
       end
 
       it "returns parent and stand-alone" do
@@ -1132,8 +1132,8 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with legal aid application parent and stand-alone transaction types" do
       before do
-        create :legal_aid_application_transaction_type, legal_aid_application: legal_aid_application, transaction_type: pension
-        create :legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: pension)
+        create(:legal_aid_application_transaction_type, legal_aid_application:, transaction_type: benefits)
       end
 
       it "returns parent and stand-alone" do
@@ -1144,7 +1144,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#provider_assessing_means?" do
     context "with delegated state machine methods" do
-      let(:application) { create :legal_aid_application, :with_passported_state_machine }
+      let(:application) { create(:legal_aid_application, :with_passported_state_machine) }
 
       it "returns false" do
         expect(application.provider_assessing_means?).to be false
@@ -1163,33 +1163,33 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#chances of success" do
-    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4 }
+    let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4) }
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == "DA001" } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == "SE014" } }
 
     it "returns an array of all the chances of success records" do
-      cos_da001 = create :chances_of_success, proceeding: proceeding_da001
-      cos_se014 = create :chances_of_success, proceeding: proceeding_se014
+      cos_da001 = create(:chances_of_success, proceeding: proceeding_da001)
+      cos_se014 = create(:chances_of_success, proceeding: proceeding_se014)
 
       expect(laa.chances_of_success).to match_array([cos_da001, cos_se014])
     end
   end
 
   describe "#attempts_to_settle" do
-    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4 }
+    let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4) }
     let(:proceeding_da001) { laa.proceedings.detect { |p| p.ccms_code == "DA001" } }
     let(:proceeding_se014) { laa.proceedings.detect { |p| p.ccms_code == "SE014" } }
 
     it "returns an array of attempt_to_settle records attached to the application" do
-      ats_da001 = create :attempts_to_settles, proceeding: proceeding_da001
-      ats_se014 = create :attempts_to_settles, proceeding: proceeding_se014
+      ats_da001 = create(:attempts_to_settles, proceeding: proceeding_da001)
+      ats_se014 = create(:attempts_to_settles, proceeding: proceeding_se014)
 
       expect(laa.attempts_to_settles).to match_array([ats_da001, ats_se014])
     end
   end
 
   describe "#lead_proceeding" do
-    let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
+    let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004) }
     let(:proceeding_da004) { laa.proceedings.detect { |p| p.ccms_code == "DA004" } }
 
     it "returns the domestic abuse proceeding" do
@@ -1199,7 +1199,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#find or set lead proceeding" do
     context "with lead proceeding already set" do
-      let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004 }
+      let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004) }
       let(:da004) { laa.proceedings.find_by(ccms_code: "DA004") }
 
       it "returns the lead proceeding" do
@@ -1208,7 +1208,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "with no lead proceeding set" do
-      let(:laa) { create :legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: false }
+      let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: false) }
 
       it "returns one of the domestic abuse proceedings" do
         expect(laa.lead_proceeding).to be_nil
@@ -1226,7 +1226,7 @@ RSpec.describe LegalAidApplication, type: :model do
   describe "#proceedings_by_name" do
     subject { laa.proceedings_by_name }
 
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
 
     before do
       laa.proceedings << create(:proceeding, :se013)
@@ -1257,7 +1257,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "lowest_chances_of_success" do
     it "returns text representation of the lowest chance of success" do
-      laa = create :legal_aid_application, :with_proceedings, proceeding_count: 3
+      laa = create(:legal_aid_application, :with_proceedings, proceeding_count: 3)
       prospects = %w[likely borderline marginal]
       laa.proceedings.each_with_index do |proceeding, i|
         proceeding.chances_of_success = create(:chances_of_success, proceeding:,
@@ -1268,7 +1268,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "required_document_categories" do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
 
     before { allow(DocumentCategory).to receive(:displayable_document_category_names).and_return %w[benefit_evidence gateway_evidence] }
 
@@ -1296,7 +1296,7 @@ RSpec.describe LegalAidApplication, type: :model do
 
   describe "#section_8_proceedings?" do
     context "with section 8 proceedings" do
-      let(:laa) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+      let(:laa) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
 
       it "returns true" do
         expect(laa.section_8_proceedings?).to be true
@@ -1304,8 +1304,8 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "without section 8 proceedings" do
-      let(:laa) { create :legal_aid_application }
-      let!(:proceeding) { create :proceeding, :da001, legal_aid_application: laa }
+      let(:laa) { create(:legal_aid_application) }
+      let!(:proceeding) { create(:proceeding, :da001, legal_aid_application: laa) }
 
       it "returns false" do
         expect(laa.section_8_proceedings?).to be false
@@ -1314,7 +1314,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#online_current_accounts_balance" do
-    let(:laa) { create :legal_aid_application, :with_applicant }
+    let(:laa) { create(:legal_aid_application, :with_applicant) }
 
     context "with no current accounts" do
       it "returns nil" do
@@ -1325,11 +1325,11 @@ RSpec.describe LegalAidApplication, type: :model do
     context "with bank accounts" do
       let(:balance1) { BigDecimal(rand(1...1_000_000.0), 2) }
       let(:balance2) { BigDecimal(rand(1...1_000_000.0), 2) }
-      let(:bank_provider) { create :bank_provider, applicant: laa.applicant }
+      let(:bank_provider) { create(:bank_provider, applicant: laa.applicant) }
 
       before do
-        create :bank_account, bank_provider: bank_provider, account_type: account_type, balance: balance1
-        create :bank_account, bank_provider:, account_type:, balance: balance2
+        create(:bank_account, bank_provider:, account_type:, balance: balance1)
+        create(:bank_account, bank_provider:, account_type:, balance: balance2)
       end
 
       context "with only savings" do
@@ -1351,7 +1351,7 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#online_savings_accounts_balance" do
-    let(:laa) { create :legal_aid_application, :with_applicant }
+    let(:laa) { create(:legal_aid_application, :with_applicant) }
 
     context "with no current accounts" do
       it "returns nil" do
@@ -1362,11 +1362,11 @@ RSpec.describe LegalAidApplication, type: :model do
     context "with bank accounts" do
       let(:balance1) { BigDecimal(rand(1...1_000_000.0), 2) }
       let(:balance2) { BigDecimal(rand(1...1_000_000.0), 2) }
-      let(:bank_provider) { create :bank_provider, applicant: laa.applicant }
+      let(:bank_provider) { create(:bank_provider, applicant: laa.applicant) }
 
       before do
-        create :bank_account, bank_provider: bank_provider, account_type: "SAVINGS", balance: balance1
-        create :bank_account, bank_provider:, account_type: "SAVINGS", balance: balance2
+        create(:bank_account, bank_provider:, account_type: "SAVINGS", balance: balance1)
+        create(:bank_account, bank_provider:, account_type: "SAVINGS", balance: balance2)
       end
 
       context "with only savings" do
@@ -1398,8 +1398,8 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "uploaded_evidence_by_category" do
-    let(:laa) { create :legal_aid_application }
-    let!(:evidence) { create :uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa }
+    let(:laa) { create(:legal_aid_application) }
+    let!(:evidence) { create(:uploaded_evidence_collection, :with_multiple_evidence_types_attached, legal_aid_application: laa) }
 
     before { DocumentCategory.populate }
 
@@ -1413,13 +1413,19 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "when evidence has been uploaded" do
       it "returns a hash of evidence filenames grouped by category" do
-        deep_match(laa.uploaded_evidence_by_category, uploaded_evidence_output)
+        actual = laa.uploaded_evidence_by_category
+        expected = uploaded_evidence_output
+
+        expect(actual.keys.sort).to eq expected.keys.sort
+        actual.each do |key, ids|
+          expect(ids).to match_array(expected[key])
+        end
       end
     end
   end
 
   describe "manually_entered_employment_information?" do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
 
     context "when no employment information has been entered by the provider" do
       it "returns false" do
@@ -1448,9 +1454,9 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#hmrc_response_use_case_one" do
-    let(:laa) { create :legal_aid_application }
-    let!(:use_case_one) { create :hmrc_response, :use_case_one, legal_aid_application: laa }
-    let!(:use_case_two) { create :hmrc_response, :use_case_two, legal_aid_application: laa }
+    let(:laa) { create(:legal_aid_application) }
+    let!(:use_case_one) { create(:hmrc_response, :use_case_one, legal_aid_application: laa) }
+    let!(:use_case_two) { create(:hmrc_response, :use_case_two, legal_aid_application: laa) }
 
     it "returns the use case one record" do
       expect(laa.hmrc_response_use_case_one).to eq use_case_one
@@ -1458,13 +1464,13 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#eligible_employment_payments" do
-    let(:laa) { create :legal_aid_application, :with_transaction_period }
+    let(:laa) { create(:legal_aid_application, :with_transaction_period) }
 
     context "with one employment with employment payments" do
       before do
-        emp = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp, date: 1.month.ago
-        create :employment_payment, employment: emp, date: 2.months.ago
+        emp = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp, date: 1.month.ago)
+        create(:employment_payment, employment: emp, date: 2.months.ago)
       end
 
       it "returns two employment records" do
@@ -1475,7 +1481,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "with one employment with no employment payments" do
-      before { create :employment, legal_aid_application: laa }
+      before { create(:employment, legal_aid_application: laa) }
 
       it "returns an empty collections" do
         expect(laa.eligible_employment_payments).to be_empty
@@ -1490,11 +1496,11 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with multiple employments" do
       before do
-        emp1 = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp1, date: 1.month.ago
-        create :employment_payment, employment: emp1, date: 2.months.ago
-        emp2 = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp2, date: 1.month.ago
+        emp1 = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp1, date: 1.month.ago)
+        create(:employment_payment, employment: emp1, date: 2.months.ago)
+        emp2 = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp2, date: 1.month.ago)
       end
 
       it "returns one collection of three records" do
@@ -1504,11 +1510,11 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with all payments before start of transaction period" do
       before do
-        emp1 = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
-        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
-        emp2 = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month
+        emp1 = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days)
+        create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days)
+        emp2 = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp2, date: laa.transaction_period_start_on - 1.month)
       end
 
       it "returns an empty collection" do
@@ -1518,10 +1524,10 @@ RSpec.describe LegalAidApplication, type: :model do
 
     context "with one payment in transaction period, others before" do
       before do
-        emp1 = create :employment, legal_aid_application: laa
-        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days
-        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days
-        create :employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days
+        emp1 = create(:employment, legal_aid_application: laa)
+        create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 3.days)
+        create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on + 2.days)
+        create(:employment_payment, employment: emp1, date: laa.transaction_period_start_on - 10.days)
       end
 
       it "returns a collection of just the one record in the transaction period" do
@@ -1531,10 +1537,10 @@ RSpec.describe LegalAidApplication, type: :model do
   end
 
   describe "#uploading_bank_statements?" do
-    let(:laa) { create :legal_aid_application, provider:, provider_received_citizen_consent: consent }
+    let(:laa) { create(:legal_aid_application, provider:, provider_received_citizen_consent: consent) }
 
     context "when provider does not have bank statement upload role" do
-      let(:provider) { create :provider }
+      let(:provider) { create(:provider) }
       let(:consent) { nil }
 
       it "returns false" do
@@ -1543,7 +1549,7 @@ RSpec.describe LegalAidApplication, type: :model do
     end
 
     context "when provider has bank statement upload role" do
-      let(:provider) { create :provider, :with_bank_statement_upload_permissions }
+      let(:provider) { create(:provider, :with_bank_statement_upload_permissions) }
 
       context "when client permission to use true layer received" do
         let(:consent) { true }
@@ -1578,21 +1584,21 @@ RSpec.describe LegalAidApplication, type: :model do
     let!(:rent_or_mortgage) { create(:transaction_type, :rent_or_mortgage) }
 
     context "when application has that transaction type" do
-      let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+      let(:laa) { create(:legal_aid_application, transaction_types: [benefits]) }
       let(:transaction_type) { benefits }
 
       it { is_expected.to be_truthy }
     end
 
     context "when application does not have that transaction type" do
-      let(:laa) { create :legal_aid_application, transaction_types: [benefits] }
+      let(:laa) { create(:legal_aid_application, transaction_types: [benefits]) }
       let(:transaction_type) { rent_or_mortgage }
 
       it { is_expected.to be_falsey }
     end
 
     context "when application does not have any transaction types" do
-      let(:laa) { create :legal_aid_application, transaction_types: [] }
+      let(:laa) { create(:legal_aid_application, transaction_types: []) }
       let(:transaction_type) { benefits }
 
       it { is_expected.to be_falsey }
@@ -1692,12 +1698,5 @@ private
       "benefit_evidence" => ["Fake Benefit Evidence 1", "Fake Benefit Evidence 2"],
       "gateway_evidence" => ["Fake Gateway Evidence 1", "Fake Gateway Evidence 2"],
     }
-  end
-
-  def deep_match(actual, expected)
-    expect(actual.keys.sort).to eq expected.keys.sort
-    actual.each do |key, ids|
-      expect(ids).to match_array(expected[key])
-    end
   end
 end

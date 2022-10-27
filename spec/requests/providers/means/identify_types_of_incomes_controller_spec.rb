@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
-  let(:legal_aid_application) { create :legal_aid_application }
-  let!(:outgoing_types) { create_list :transaction_type, 3, :debit_with_standard_name }
-  let!(:income_types) { create_list :transaction_type, 3, :credit_with_standard_name }
+  let(:legal_aid_application) { create(:legal_aid_application) }
+  let!(:outgoing_types) { create_list(:transaction_type, 3, :debit_with_standard_name) }
+  let!(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
   let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
@@ -97,8 +97,8 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
     context "when application has transaction types of other kind" do
       let(:transaction_type_ids) { [] }
-      let(:other_transaction_type) { create :transaction_type, :debit }
-      let(:legal_aid_application) { create :legal_aid_application, :with_applicant, transaction_types: [other_transaction_type] }
+      let(:other_transaction_type) { create(:transaction_type, :debit) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, transaction_types: [other_transaction_type]) }
 
       it "does not remove existing transaction of other type" do
         expect { request }.not_to change { legal_aid_application.transaction_types.count }
@@ -127,7 +127,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
 
       context "when application has existing transaction categories" do
         let(:legal_aid_application) do
-          create :legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types + outgoing_types
+          create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, transaction_types: income_types + outgoing_types)
         end
 
         it "removes credit transaction types from the application" do
@@ -203,7 +203,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
     end
 
     context "when the wrong transaction type is passed in" do
-      let!(:income_types) { create_list :transaction_type, 3, :debit_with_standard_name }
+      let!(:income_types) { create_list(:transaction_type, 3, :debit_with_standard_name) }
       let(:transaction_type_ids) { income_types.map(&:id) }
 
       it "does not add the transaction types" do
@@ -215,9 +215,9 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
 
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_non_passported_state_machine,
-               :checking_non_passported_means
+               :checking_non_passported_means)
       end
 
       let(:params) { { legal_aid_application: { none_selected: "true" } } }

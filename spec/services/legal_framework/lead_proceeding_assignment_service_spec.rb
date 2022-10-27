@@ -8,7 +8,7 @@ module LegalFramework
     let(:p_da2) { laa.proceedings.where(ccms_code: "DA004").first }
     let(:p_s81) { laa.proceedings.where(ccms_code: "SE013").first }
     let(:p_s82) { laa.proceedings.where(ccms_code: "SE014").first }
-    let(:laa) { create :legal_aid_application, :with_proceedings, explicit_proceedings:, set_lead_proceeding: false }
+    let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings:, set_lead_proceeding: false) }
 
     context "when a lead proceeding already exists" do
       let(:explicit_proceedings) { %i[da001 da004 se013 se014] }

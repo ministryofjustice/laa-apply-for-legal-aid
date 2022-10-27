@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe UseCCMSArbiter do
   subject { described_class.call(laa) }
 
-  let(:laa) { create :legal_aid_application, :with_applicant, :applicant_details_checked }
+  let(:laa) { create(:legal_aid_application, :with_applicant, :applicant_details_checked) }
   let(:provider) { laa.provider }
   let(:applicant) { laa.applicant }
 

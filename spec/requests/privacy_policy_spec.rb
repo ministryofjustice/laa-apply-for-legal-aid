@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "privacy policy page", type: :request do
+RSpec.describe "privacy policy page" do
   describe "GET /privacy_policy" do
     it "returns renders successfully" do
       get privacy_policy_index_path

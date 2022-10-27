@@ -6,8 +6,8 @@ RSpec.describe ApplicationDigest do
 
     let(:firm_name) { "Regional Legal Services" }
     let(:username) { "regional_user_1" }
-    let(:firm) { create :firm, name: firm_name }
-    let(:provider) { create :provider, firm:, username: }
+    let(:firm) { create(:firm, name: firm_name) }
+    let(:provider) { create(:provider, firm:, username:) }
     let(:creation_time) { Time.zone.local(2019, 1, 1, 12, 15, 30) }
     let(:creation_date) { creation_time.to_date }
     let(:submission_time) { creation_time + 3.days }
@@ -15,22 +15,22 @@ RSpec.describe ApplicationDigest do
 
     let(:laa) do
       travel_to creation_time do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :assessment_submitted,
                :with_everything,
                :with_proceedings,
                :with_cfe_v5_result,
                explicit_proceedings: %i[da001 se013 se014],
                provider:,
-               merits_submitted_at: submission_time
+               merits_submitted_at: submission_time)
       end
     end
-    let(:laa_at_use_ccms) { create :legal_aid_application, :use_ccms, :with_applicant }
+    let(:laa_at_use_ccms) { create(:legal_aid_application, :use_ccms, :with_applicant) }
 
     let(:digest) { described_class.find_by(legal_aid_application_id: laa.id) }
 
     context "when a digest record already exists for this application" do
-      before { create :application_digest, legal_aid_application_id: laa.id }
+      before { create(:application_digest, legal_aid_application_id: laa.id) }
 
       it "does not create a new record" do
         expect { subject }.not_to change(described_class, :count)

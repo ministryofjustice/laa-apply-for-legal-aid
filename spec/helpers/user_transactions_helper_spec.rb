@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe UserTransactionsHelper, type: :helper do
-  let(:transaction_type) { create :transaction_type, :pension }
+RSpec.describe UserTransactionsHelper do
+  let(:transaction_type) { create(:transaction_type, :pension) }
   let(:legal_aid_application) do
-    create :legal_aid_application, :with_applicant, transaction_types: [transaction_type]
+    create(:legal_aid_application, :with_applicant, transaction_types: [transaction_type])
   end
   let(:locale_namespace) { "" }
 
@@ -24,7 +24,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
       end
 
       context "with excluded state benefit" do
-        let(:transaction_type) { create :transaction_type, :excluded_benefits }
+        let(:transaction_type) { create(:transaction_type, :excluded_benefits) }
 
         it "returns correct hash" do
           expect(subject[:items]).to be_empty
@@ -32,7 +32,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
       end
 
       context "with no transactions" do
-        let(:legal_aid_application) { create :legal_aid_application }
+        let(:legal_aid_application) { create(:legal_aid_application) }
 
         it "returns nil" do
           expect(subject).to be_nil
@@ -44,7 +44,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
   describe "#payments_list" do
     subject { helper.payments_list(legal_aid_application.transaction_types.debits, locale_namespace:) }
 
-    let(:transaction_type) { create :transaction_type, :maintenance_out }
+    let(:transaction_type) { create(:transaction_type, :maintenance_out) }
 
     context "when for a citizen" do
       let(:locale_namespace) { "transaction_types.names.citizens" }
@@ -54,7 +54,7 @@ RSpec.describe UserTransactionsHelper, type: :helper do
       end
 
       context "with no transactions" do
-        let(:legal_aid_application) { create :legal_aid_application }
+        let(:legal_aid_application) { create(:legal_aid_application) }
 
         it "returns nil" do
           expect(subject).to be_nil

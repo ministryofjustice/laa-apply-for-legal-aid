@@ -24,8 +24,8 @@ module Populators
       end
 
       context "when transaction types exist" do
-        let!(:credit_transaction_type) { create :transaction_type, name: "pension", operation: "credit" }
-        let!(:debit_transaction_type) { create :transaction_type, :debit_with_standard_name }
+        let!(:credit_transaction_type) { create(:transaction_type, name: "pension", operation: "credit") }
+        let!(:debit_transaction_type) { create(:transaction_type, :debit_with_standard_name) }
 
         it "creates one less transaction type" do
           expect { subject }.to change(TransactionType, :count).by(total - 2)
@@ -42,7 +42,7 @@ module Populators
       end
 
       context "when a transaction type has been removed from the model" do
-        let!(:old_transaction_type) { create :transaction_type, name: :council_tax }
+        let!(:old_transaction_type) { create(:transaction_type, name: :council_tax) }
 
         it "sets the archived_at date in the database" do
           subject

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe HashFormatHelper, type: :helper do
+RSpec.describe HashFormatHelper do
   let(:source) { { key: "value", sub_hash: { sub_key: "sub_value" }, array_hash: [{ array_one: "array_value" }, { array_two: "array_value" }] } }
   let(:expected_response) do
     '<dl class="govuk-body kvp govuk-!-margin-bottom-0"><dt>Key</dt><dd>Value</dd></dl>' \

@@ -1,10 +1,10 @@
 require "rails_helper"
 
 module Banking
-  RSpec.describe BankTransactionsAnalyserJob, type: :job do
+  RSpec.describe BankTransactionsAnalyserJob do
     subject { described_class.perform_now(legal_aid_application) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_non_passported_state_machine, :analysing_bank_transactions }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :analysing_bank_transactions) }
     let(:provider_email_service) { double(ProviderEmailService, send_email: true) }
 
     before do

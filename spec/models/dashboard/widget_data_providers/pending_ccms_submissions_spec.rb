@@ -22,11 +22,11 @@ module Dashboard
 
         it "sends expected data" do
           4.times do
-            create :ccms_submission, aasm_state: aasm_states.sample
+            create(:ccms_submission, aasm_state: aasm_states.sample)
           end
-          create :ccms_submission, aasm_state: "failed"
-          create :ccms_submission, aasm_state: "completed"
-          create :ccms_submission, aasm_state: "abandoned"
+          create(:ccms_submission, aasm_state: "failed")
+          create(:ccms_submission, aasm_state: "completed")
+          create(:ccms_submission, aasm_state: "abandoned")
           expect(described_class.data).to eq expected_data
         end
       end

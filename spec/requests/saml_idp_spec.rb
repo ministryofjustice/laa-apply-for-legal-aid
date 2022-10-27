@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SamlIdpController, type: :request do
+RSpec.describe SamlIdpController do
   describe "POST /saml/auth" do
     let(:saml_request) { encode_saml_request }
     let(:password) { "password" }
@@ -14,7 +14,7 @@ RSpec.describe SamlIdpController, type: :request do
       let(:username) { "test1" }
 
       context "Record for that provider exists in the database" do
-        before { create :provider, email:, username: }
+        before { create(:provider, email:, username:) }
 
         it "renders the saml auth form with the encoded request" do
           post saml_auth_path, params: login_params
@@ -67,7 +67,7 @@ RSpec.describe SamlIdpController, type: :request do
     end
 
     def new_params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         {
           "locale" => "en",
           "controller" => "saml_sessions",
@@ -77,7 +77,7 @@ RSpec.describe SamlIdpController, type: :request do
     end
 
     def login_params
-      HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         {
           "SAMLRequest" => saml_request,
           "email" => email,

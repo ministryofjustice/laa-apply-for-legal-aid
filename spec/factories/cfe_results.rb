@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :cfe_v1_result, class: CFE::V1::Result do
-    submission { create :cfe_submission }
+    submission { create(:cfe_submission) }
     legal_aid_application { submission.legal_aid_application }
     result { CFEResults::V1::MockResults.eligible.to_json }
 
@@ -30,7 +30,7 @@ FactoryBot.define do
   end
 
   factory :cfe_v2_result, class: CFE::V2::Result do
-    submission { create :cfe_submission }
+    submission { create(:cfe_submission) }
     legal_aid_application { submission.legal_aid_application }
     result { CFEResults::V2::MockResults.eligible.to_json }
 

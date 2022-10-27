@@ -4,12 +4,12 @@ RSpec.describe LegalAidApplications::UsedMultipleDelegatedFunctionsForm, type: :
   subject { described_class.call(proceedings_by_name) }
 
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: %i[da004 da001 se014],
            set_lead_proceeding: :da001,
-           df_options: { DA001: [used_delegated_functions_on, used_delegated_functions_reported_on] }
+           df_options: { DA001: [used_delegated_functions_on, used_delegated_functions_reported_on] })
   end
   let(:pt_without_df) { 1 }
   let(:proceedings) { legal_aid_application.proceedings }

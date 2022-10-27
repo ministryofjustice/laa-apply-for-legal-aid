@@ -4,7 +4,7 @@ RSpec.describe LegalAidApplications::PercentageHomeForm, type: :form do
   subject { described_class.new(form_params) }
 
   let(:percentage_home) { rand(1...99.0).round(2) }
-  let(:application) { create :legal_aid_application }
+  let(:application) { create(:legal_aid_application) }
   let(:params) { { percentage_home: } }
   let(:form_params) { params.merge(model: application) }
 

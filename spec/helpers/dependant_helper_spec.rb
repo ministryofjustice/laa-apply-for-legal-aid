@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe DependantHelper, type: :helper do
+RSpec.describe DependantHelper do
   include ApplicationHelper
-  let(:dependant) { create :dependant }
+  let(:dependant) { create(:dependant) }
 
   describe "#dependant_hash" do
     subject(:dependant_helper) { dependant_hash(dependant) }

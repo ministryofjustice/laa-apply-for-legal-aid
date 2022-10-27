@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe Admin::LegalAidApplicationsController, type: :request do
+RSpec.describe Admin::LegalAidApplicationsController do
   let(:count) { 3 }
-  let!(:legal_aid_applications) { create_list :legal_aid_application, count, :with_applicant, :with_non_passported_state_machine, :with_ccms_submission }
-  let(:admin_user) { create :admin_user }
+  let!(:legal_aid_applications) { create_list(:legal_aid_application, count, :with_applicant, :with_non_passported_state_machine, :with_ccms_submission) }
+  let(:admin_user) { create(:admin_user) }
   let(:params) { {} }
 
   before { sign_in admin_user }
@@ -115,8 +115,8 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
   describe "DELETE /admin/legal_aid_applications/destroy_all" do
     subject { delete destroy_all_admin_legal_aid_applications_path }
 
-    let(:scheduled_mail) { create :scheduled_mailing, :due }
-    let(:scheduled_mail2) { create :scheduled_mailing, :due }
+    let(:scheduled_mail) { create(:scheduled_mailing, :due) }
+    let(:scheduled_mail2) { create(:scheduled_mailing, :due) }
 
     context "when enabled" do
       before do
@@ -152,7 +152,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       context "with a lot of associations" do
-        let!(:another) { create :legal_aid_application, :with_everything }
+        let!(:another) { create(:legal_aid_application, :with_everything) }
 
         it "gets deleted too" do
           expect { subject }.to change(LegalAidApplication, :count).to(0)
@@ -205,7 +205,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       context "with a lot of associations" do
-        let!(:application) { create :legal_aid_application, :at_assessment_submitted }
+        let!(:application) { create(:legal_aid_application, :at_assessment_submitted) }
 
         it "gets deleted too" do
           expect { subject }.to change(LegalAidApplication, :count).by(-1)
@@ -213,7 +213,7 @@ RSpec.describe Admin::LegalAidApplicationsController, type: :request do
       end
 
       context "when application has no applicant" do
-        let!(:application) { create :legal_aid_application }
+        let!(:application) { create(:legal_aid_application) }
 
         it "gets deleted too" do
           expect { subject }.to change(LegalAidApplication, :count).by(-1)

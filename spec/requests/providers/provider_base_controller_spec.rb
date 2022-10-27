@@ -1,12 +1,12 @@
 require "rails_helper"
 
 module Providers
-  RSpec.describe ProviderBaseController, type: :request do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+  RSpec.describe ProviderBaseController do
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:applicant) { legal_aid_application.applicant }
     let(:provider) { legal_aid_application.provider }
-    let(:provider_in_same_firm) { create :provider, firm: provider.firm }
-    let(:provider_in_different_firm) { create :provider }
+    let(:provider_in_same_firm) { create(:provider, firm: provider.firm) }
+    let(:provider_in_different_firm) { create(:provider) }
 
     context "when making GET requests" do
       describe "GET /providers/applications/:legal_aid_application_id/address/edit" do

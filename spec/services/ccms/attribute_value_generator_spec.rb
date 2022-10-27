@@ -2,7 +2,7 @@ require "rails_helper"
 
 module CCMS
   RSpec.describe AttributeValueGenerator, :ccms do
-    let(:submission) { create :submission }
+    let(:submission) { create(:submission) }
     let(:value_generator) { described_class.new(submission) }
 
     describe "#method_missing" do

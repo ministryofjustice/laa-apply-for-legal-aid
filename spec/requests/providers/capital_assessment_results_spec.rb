@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
+RSpec.describe Providers::CapitalAssessmentResultsController do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/capital_assessment_result" do
     subject { get providers_legal_aid_application_capital_assessment_result_path(legal_aid_application) }
 
-    let(:cfe_result) { create :cfe_v3_result }
+    let(:cfe_result) { create(:cfe_v3_result) }
     let(:legal_aid_application) { cfe_result.legal_aid_application }
-    let!(:applicant) { create :applicant, with_bank_accounts: 2, legal_aid_application: }
+    let!(:applicant) { create(:applicant, with_bank_accounts: 2, legal_aid_application:) }
     let(:applicant_name) { legal_aid_application.applicant_full_name }
     let(:locale_scope) { "shared.assessment_results" }
     let(:add_policy_disregards?) { false }
@@ -37,7 +37,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when not eligible" do
-          let(:cfe_result) { create :cfe_v3_result, :not_eligible }
+          let(:cfe_result) { create(:cfe_v3_result, :not_eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -49,7 +49,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -75,7 +75,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when not eligible" do
-          let(:cfe_result) { create :cfe_v3_result, :not_eligible }
+          let(:cfe_result) { create(:cfe_v3_result, :not_eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -87,7 +87,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when capital contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -107,7 +107,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         create(:policy_disregards, :with_selected_value, legal_aid_application:) if add_policy_disregards?
 
         Setting.setting.update!(manually_review_all_cases: false)
-        create :applicant, legal_aid_application: legal_aid_application, first_name: "Stepriponikas", last_name: "Bonstart"
+        create(:applicant, legal_aid_application:, first_name: "Stepriponikas", last_name: "Bonstart")
         legal_aid_application.update has_restrictions: true, restrictions_details: "Blah blah"
         login_provider
         subject
@@ -117,7 +117,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         let(:add_policy_disregards?) { true }
 
         context "when eligible" do
-          let(:cfe_result) { create :cfe_v3_result, :eligible }
+          let(:cfe_result) { create(:cfe_v3_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -129,7 +129,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -147,7 +147,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
 
       context "with no policy disregards" do
         context "when eligible" do
-          let(:cfe_result) { create :cfe_v3_result, :eligible }
+          let(:cfe_result) { create(:cfe_v3_result, :eligible) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -159,7 +159,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
         end
 
         context "when contribution required" do
-          let(:cfe_result) { create :cfe_v3_result, :with_capital_contribution_required }
+          let(:cfe_result) { create(:cfe_v3_result, :with_capital_contribution_required) }
 
           it "returns http success" do
             expect(response).to have_http_status(:ok)
@@ -184,7 +184,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context "when eligible" do
-        let!(:cfe_result) { create :cfe_v4_result, :eligible }
+        let!(:cfe_result) { create(:cfe_v4_result, :eligible) }
 
         it "returns http success" do
           expect(response).to have_http_status(:ok)
@@ -199,7 +199,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
       end
 
       context "when capital contribution required" do
-        let(:cfe_result) { create :cfe_v4_result, :with_capital_contribution_required }
+        let(:cfe_result) { create(:cfe_v4_result, :with_capital_contribution_required) }
         let(:add_policy_disregards?) { false }
 
         it "returns http success" do
@@ -256,7 +256,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
     end
 
     context "with unknown result" do
-      let(:cfe_result) { create :cfe_v3_result, result: {}.to_json }
+      let(:cfe_result) { create(:cfe_v3_result, result: {}.to_json) }
       let(:before_tasks) { login_provider }
 
       it "raises error" do
@@ -268,7 +268,7 @@ RSpec.describe Providers::CapitalAssessmentResultsController, type: :request do
   describe "PATCH /providers/applications/:id/capital_assessment_result" do
     subject { patch providers_legal_aid_application_capital_assessment_result_path(legal_aid_application), params: params.merge(submit_button) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:params) { {} }
 
     context "when the provider is authenticated" do

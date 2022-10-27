@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Admin::ReportsController, type: :request do
-  let(:admin_user) { create :admin_user }
+RSpec.describe Admin::ReportsController do
+  let(:admin_user) { create(:admin_user) }
 
   before { sign_in admin_user }
 
@@ -28,7 +28,7 @@ RSpec.describe Admin::ReportsController, type: :request do
     subject { get admin_application_details_csv_path(format: :csv) }
 
     before do
-      create :admin_report, :with_reports_attached
+      create(:admin_report, :with_reports_attached)
     end
 
     it "renders successfully" do

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ScheduledMailing do
   let(:mailer_klass) { "NotifyMailer" }
   let(:mailer_method) { "notify" }
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:addressee) { Faker::Internet.safe_email }
   let(:mailer_args) { [:one, :two, "three"] }
   let(:frozen_time) { Time.zone.now }
@@ -59,7 +59,7 @@ RSpec.describe ScheduledMailing do
   end
 
   describe "#cancel" do
-    let(:rec) { create :scheduled_mailing }
+    let(:rec) { create(:scheduled_mailing) }
 
     it "updates the cancelled at column" do
       travel_to frozen_time
@@ -72,26 +72,26 @@ RSpec.describe ScheduledMailing do
   describe "#waiting?" do
     context "when waiting" do
       it "returns true" do
-        rec = create :scheduled_mailing, :due
+        rec = create(:scheduled_mailing, :due)
         expect(rec.waiting?).to be true
       end
     end
 
     context "when not waiting" do
       it "returns true" do
-        rec = create :scheduled_mailing, :delivered
+        rec = create(:scheduled_mailing, :delivered)
         expect(rec.waiting?).to be false
       end
     end
   end
 
   describe "scopes" do
-    let!(:waiting_due) { create :scheduled_mailing, :due }
-    let!(:waiting_due_later) { create :scheduled_mailing, :due_later }
-    let!(:processing) { create :scheduled_mailing, :processing }
-    let!(:failed) { create :scheduled_mailing, :failed }
-    let!(:created) { create :scheduled_mailing, :created }
-    let!(:sending) { create :scheduled_mailing, :sending }
+    let!(:waiting_due) { create(:scheduled_mailing, :due) }
+    let!(:waiting_due_later) { create(:scheduled_mailing, :due_later) }
+    let!(:processing) { create(:scheduled_mailing, :processing) }
+    let!(:failed) { create(:scheduled_mailing, :failed) }
+    let!(:created) { create(:scheduled_mailing, :created) }
+    let!(:sending) { create(:scheduled_mailing, :sending) }
 
     describe "waiting" do
       it "picks only waiting status" do

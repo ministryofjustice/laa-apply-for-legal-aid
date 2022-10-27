@@ -5,14 +5,14 @@ RSpec.describe DelegatedFunctionsDateService do
   describe "sets date on proceeding records", :vcr do
     subject { described_class.call(laa) }
 
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let!(:proceeding1) do
-      create :proceeding, :da001,
+      create(:proceeding, :da001,
              legal_aid_application: laa,
              used_delegated_functions_on: df_date,
-             used_delegated_functions_reported_on: reported_date
+             used_delegated_functions_reported_on: reported_date)
     end
-    let!(:proceeding2) { create :proceeding, :se013, legal_aid_application: laa }
+    let!(:proceeding2) { create(:proceeding, :se013, legal_aid_application: laa) }
     let(:df_date) { Date.new(2021, 5, 10) }
     let(:reported_date) { Date.new(2021, 5, 13) }
 
@@ -59,8 +59,8 @@ RSpec.describe DelegatedFunctionsDateService do
 
         context "scheduled mail already exists" do
           before do
-            create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1
-            create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2
+            create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1)
+            create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2)
           end
 
           it "deletes the scheduled mails" do
@@ -76,8 +76,8 @@ RSpec.describe DelegatedFunctionsDateService do
 
         context "scheduled mail already exists" do
           before do
-            create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1
-            create :scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2
+            create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time1)
+            create(:scheduled_mailing, :waiting, legal_aid_application: laa, scheduled_at: scheduled_time2)
           end
 
           it "replaces existing email with one with new date" do

@@ -26,16 +26,16 @@ module Dashboard
         end
 
         context "with five users over three firms" do
-          let(:firm1) { create :firm }
-          let(:firm2) { create :firm }
-          let(:firm3) { create :firm }
+          let(:firm1) { create(:firm) }
+          let(:firm2) { create(:firm) }
+          let(:firm3) { create(:firm) }
 
           before do
-            create :provider, username: "user1-firm1", firm: firm1
-            create :provider, username: "user2-firm1", firm: firm1
-            create :provider, username: "user1-firm2", firm: firm2
-            create :provider, username: "user2-firm2", firm: firm2
-            create :provider, username: "user1-firm3", firm: firm3
+            create(:provider, username: "user1-firm1", firm: firm1)
+            create(:provider, username: "user2-firm1", firm: firm1)
+            create(:provider, username: "user1-firm2", firm: firm2)
+            create(:provider, username: "user2-firm2", firm: firm2)
+            create(:provider, username: "user1-firm3", firm: firm3)
           end
 
           it "expects the firm count to include all firms" do

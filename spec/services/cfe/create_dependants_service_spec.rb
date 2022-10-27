@@ -2,8 +2,8 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateDependantsService do
-    let(:application) { create :legal_aid_application, :with_negative_benefit_check_result }
-    let(:submission) { create :cfe_submission, aasm_state: "explicit_remarks_created", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application, :with_negative_benefit_check_result) }
+    let(:submission) { create(:cfe_submission, aasm_state: "explicit_remarks_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -106,7 +106,7 @@ module CFE
     end
 
     def create_dependants
-      create :dependant, :over18,
+      create(:dependant, :over18,
              number: 1,
              date_of_birth: 19.years.ago,
              relationship: "adult_relative",
@@ -114,8 +114,8 @@ module CFE
              name: "Stepriponikas Bonstart",
              monthly_income: 180.0,
              in_full_time_education: false,
-             assets_value: 10_000.0
-      create :dependant, :under18,
+             assets_value: 10_000.0)
+      create(:dependant, :under18,
              number: 2,
              relationship: "child_relative",
              date_of_birth: 10.years.ago,
@@ -123,7 +123,7 @@ module CFE
              name: "Aztec Bonstart",
              monthly_income: 0.0,
              in_full_time_education: true,
-             assets_value: 0.0
+             assets_value: 0.0)
     end
 
     def loaded_payload

@@ -1,16 +1,16 @@
 require "rails_helper"
 
-RSpec.describe Providers::MeansSummariesController, type: :request do
+RSpec.describe Providers::MeansSummariesController do
   include ActionView::Helpers::NumberHelper
-  let(:provider) { create :provider }
-  let(:applicant) { create :applicant }
-  let(:transaction_type) { create :transaction_type }
-  let(:bank_provider) { create :bank_provider, applicant: }
-  let(:bank_account) { create :bank_account, bank_provider: }
-  let(:vehicle) { create :vehicle, :populated }
+  let(:provider) { create(:provider) }
+  let(:applicant) { create(:applicant) }
+  let(:transaction_type) { create(:transaction_type) }
+  let(:bank_provider) { create(:bank_provider, applicant:) }
+  let(:bank_account) { create(:bank_account, bank_provider:) }
+  let(:vehicle) { create(:vehicle, :populated) }
   let(:own_vehicle) { true }
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_negative_benefit_check_result,
            :with_non_passported_state_machine,
            :provider_assessing_means,
@@ -22,7 +22,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
            own_vehicle:,
            applicant:,
            provider:,
-           transaction_types: [transaction_type]
+           transaction_types: [transaction_type])
   end
   let(:login) { login_as provider }
 
@@ -31,7 +31,7 @@ RSpec.describe Providers::MeansSummariesController, type: :request do
       get providers_legal_aid_application_means_summary_path(legal_aid_application)
     end
 
-    let!(:bank_transactions) { create_list :bank_transaction, 3, transaction_type:, bank_account: }
+    let!(:bank_transactions) { create_list(:bank_transaction, 3, transaction_type:, bank_account:) }
 
     before do
       login

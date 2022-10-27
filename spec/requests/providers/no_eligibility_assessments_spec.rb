@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request do
+RSpec.describe "Providers::NoEligibilityAssessmentsController" do
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/no_eligibility_assessments" do
     subject(:request) { get providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_attached_bank_statement, :with_transaction_period, :checking_non_passported_means, :with_proceedings, :with_employed_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_attached_bank_statement, :with_transaction_period, :checking_non_passported_means, :with_proceedings, :with_employed_applicant) }
 
     context "when provider has bank_statement_upload_permissions?" do
       before do
@@ -35,7 +35,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
         before do
           allow(legal_aid_application).to receive(:calculation_date).and_return(Time.zone.today)
           allow(CFE::SubmissionManager).to receive(:call)
-          create :hmrc_response, :use_case_one, legal_aid_application_id: legal_aid_application.id
+          create(:hmrc_response, :use_case_one, legal_aid_application_id: legal_aid_application.id)
         end
 
         it "calls cfe when hmrc data exists" do
@@ -49,7 +49,7 @@ RSpec.describe "Providers::NoEligibilityAssessmentsController", type: :request d
   describe "PATCH /providers/applications/:id/capital_income_assessment_result" do
     subject(:request) { patch providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application), params: params.merge(submit_button) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:params) { {} }
 
     context "when the provider is authenticated" do

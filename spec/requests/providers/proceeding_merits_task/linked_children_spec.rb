@@ -2,13 +2,13 @@ require "rails_helper"
 
 module Providers
   module ProceedingMeritsTask
-    RSpec.describe LinkedChildrenController, type: :request do
+    RSpec.describe LinkedChildrenController do
       let!(:legal_aid_application) do
-        create :legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se014], set_lead_proceeding: :da001
+        create(:legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se014], set_lead_proceeding: :da001)
       end
       let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
       let(:involved_children_names) { legal_aid_application.involved_children.map(&:full_name) }
-      let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
+      let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
       let(:login) { login_as legal_aid_application.provider }
 
       before do

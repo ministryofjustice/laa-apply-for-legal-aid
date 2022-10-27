@@ -27,7 +27,7 @@ RSpec.describe DashboardEventHandler do
       expect_any_instance_of(described_class).to receive(:application_created).and_call_original
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("Applications").at_least(:once)
 
-      create :legal_aid_application
+      create(:legal_aid_application)
     end
   end
 
@@ -40,19 +40,19 @@ RSpec.describe DashboardEventHandler do
       expect_any_instance_of(described_class).to receive(:provider_updated).and_call_original
       expect(Dashboard::ProviderDataJob).to receive(:perform_later).at_least(:once)
 
-      create :provider
+      create(:provider)
     end
   end
 
   context "firm_created" do
     it "fires a NumberProviderFirms job" do
       expect(Dashboard::UpdaterJob).to receive(:perform_later).with("NumberProviderFirms")
-      create :firm
+      create(:firm)
     end
   end
 
   context "ccms_submission_saved" do
-    subject { create :ccms_submission, aasm_state: state }
+    subject { create(:ccms_submission, aasm_state: state) }
 
     before { ActiveJob::Base.queue_adapter = :test }
 
@@ -125,16 +125,16 @@ RSpec.describe DashboardEventHandler do
   context "feedback_created" do
     it "fires the FeedbackItemJob job" do
       expect(Dashboard::FeedbackItemJob).to receive(:perform_later)
-      create :feedback
+      create(:feedback)
     end
   end
 
   context "application completed" do
     let(:legal_aid_application) do
-      create :legal_aid_application, :with_proceedings,
+      create(:legal_aid_application, :with_proceedings,
              :with_delegated_functions_on_proceedings,
              explicit_proceedings: [:da004],
-             df_options: { DA004: [rand(12).days.ago.to_date, Time.zone.now] }
+             df_options: { DA004: [rand(12).days.ago.to_date, Time.zone.now] })
     end
 
     before do
@@ -151,7 +151,7 @@ RSpec.describe DashboardEventHandler do
   end
 
   context "applicant_emailed" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
     it "fires the applicant_email job" do
       expect(Dashboard::ApplicantEmailJob).to receive(:perform_later).at_least(:once)

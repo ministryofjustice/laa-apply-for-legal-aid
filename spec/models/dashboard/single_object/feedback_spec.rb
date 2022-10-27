@@ -15,7 +15,7 @@ module Dashboard
         allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
       end
 
-      let(:feedback) { create :feedback, :from_provider, satisfaction: 2, difficulty: 4 }
+      let(:feedback) { create(:feedback, :from_provider, satisfaction: 2, difficulty: 4) }
 
       it { is_expected.to be_a described_class }
 

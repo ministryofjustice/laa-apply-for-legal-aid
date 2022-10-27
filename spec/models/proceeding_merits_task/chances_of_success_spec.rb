@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe ProceedingMeritsTask::ChancesOfSuccess, type: :model do
+RSpec.describe ProceedingMeritsTask::ChancesOfSuccess do
   describe "#pretty_success_propsect" do
-    let(:pt_da) { create :proceeding_type, :with_real_data }
-    let(:pt_s8) { create :proceeding_type, :as_section_8_child_residence }
+    let(:pt_da) { create(:proceeding_type, :with_real_data) }
+    let(:pt_s8) { create(:proceeding_type, :as_section_8_child_residence) }
     let(:legal_aid_application) do
-      create :legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014]
+      create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se014])
     end
     let(:proceeding) { legal_aid_application.proceedings.first }
-    let(:chances_of_success) { create :chances_of_success, success_prospect: prospect, proceeding: }
+    let(:chances_of_success) { create(:chances_of_success, success_prospect: prospect, proceeding:) }
 
     context "when likely" do
       let(:prospect) { "likely" }

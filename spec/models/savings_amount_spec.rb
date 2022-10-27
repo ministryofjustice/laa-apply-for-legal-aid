@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SavingsAmount, type: :model do
+RSpec.describe SavingsAmount do
   describe "#positive" do
-    subject { create :savings_amount }
+    subject { create(:savings_amount) }
 
     context "with no savings" do
       it "is negative" do
@@ -20,7 +20,7 @@ RSpec.describe SavingsAmount, type: :model do
   end
 
   describe "#values?" do
-    subject { create :savings_amount, :with_values }
+    subject { create(:savings_amount, :with_values) }
 
     context "with savings and investments" do
       it "returns true" do
@@ -29,7 +29,7 @@ RSpec.describe SavingsAmount, type: :model do
     end
 
     context "when it has a single value, set to 0" do
-      subject { create :savings_amount, offline_current_accounts: 0_0 }
+      subject { create(:savings_amount, offline_current_accounts: 0_0) }
 
       it "returns true" do
         expect(subject.values?).to be true
@@ -37,7 +37,7 @@ RSpec.describe SavingsAmount, type: :model do
     end
 
     context "with no savings and investments" do
-      subject { create :savings_amount, :all_nil }
+      subject { create(:savings_amount, :all_nil) }
 
       it "returns false" do
         expect(subject.values?).to be false

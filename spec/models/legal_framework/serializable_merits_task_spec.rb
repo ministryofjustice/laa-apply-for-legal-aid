@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module LegalFramework
-  RSpec.describe SerializableMeritsTask, type: :model do
+  RSpec.describe SerializableMeritsTask do
     let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: [:application_children]) }
 
     describe ".new" do
@@ -23,7 +23,7 @@ module LegalFramework
     describe "#remove_dependency" do
       subject(:remove_dependency) { legal_framework_serializable_merits_task.remove_dependency(parameter) }
 
-      let(:legal_framework_serializable_merits_task) { build :legal_framework_serializable_merits_task, dependencies: [:application_children] }
+      let(:legal_framework_serializable_merits_task) { build(:legal_framework_serializable_merits_task, dependencies: [:application_children]) }
 
       before { remove_dependency }
 

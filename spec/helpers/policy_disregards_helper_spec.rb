@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe PolicyDisregardsHelper, type: :helper do
+RSpec.describe PolicyDisregardsHelper do
   include ApplicationHelper
 
   describe "#policy_disregards_hash" do
     let(:result) { policy_disregards_list(policy_disregards) }
 
     context "with no disregards selected" do
-      let(:policy_disregards) { create :policy_disregards, none_selected: true }
+      let(:policy_disregards) { create(:policy_disregards, none_selected: true) }
 
       it "does not return nil" do
         expect(policy_disregards_list(policy_disregards)).not_to be_nil
@@ -19,7 +19,7 @@ RSpec.describe PolicyDisregardsHelper, type: :helper do
     end
 
     context "with disregards selected" do
-      let(:policy_disregards) { create :policy_disregards, none_selected: false, england_infected_blood_support: true }
+      let(:policy_disregards) { create(:policy_disregards, none_selected: false, england_infected_blood_support: true) }
 
       it "returns the correct hash" do
         expect(policy_disregards_list(policy_disregards)).to eq(expected_result)

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CleanupCapitalAttributes do
   describe "#sync" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_everything, test_condition }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_everything, test_condition) }
     let(:cleanup_capital_attributes) { described_class.new(legal_aid_application) }
 
     before do

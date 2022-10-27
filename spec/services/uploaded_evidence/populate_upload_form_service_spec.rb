@@ -2,7 +2,7 @@ require "rails_helper"
 
 module UploadedEvidence
   RSpec.describe PopulateUploadFormService do
-    let(:laa) { create :legal_aid_application }
+    let(:laa) { create(:legal_aid_application) }
     let(:params) { nil }
     let(:controller) { instance_double Providers::UploadedEvidenceCollectionsController, params:, legal_aid_application: laa }
     let(:required_document_categories) { %w[gateway_evidence employment_evidence] }
@@ -17,11 +17,12 @@ module UploadedEvidence
     describe ".call" do
       let(:service_instance) { instance_double described_class }
 
-      it "instantiates and instance of PopulateUploadFormService and calls :call" do
+      it "instantiates an instance of PopulateUploadFormService and calls :call" do
         allow(described_class).to receive(:new).with(controller).and_return(service_instance)
         allow(service_instance).to receive(:call).and_return(service_instance)
 
         described_class.call(controller)
+        expect(service_instance).to have_received(:call)
       end
     end
 

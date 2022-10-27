@@ -2,33 +2,33 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateCashTransactionsService do
-    let!(:application) { create :legal_aid_application, :with_applicant }
-    let!(:benefits) { create :transaction_type, :benefits }
-    let!(:friends_or_family) { create :transaction_type, :friends_or_family }
-    let!(:maintenance_in) { create :transaction_type, :maintenance_in }
-    let!(:benefits1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: benefits }
-    let!(:benefits2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: benefits }
-    let!(:benefits3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: benefits }
-    let!(:friends_or_family1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: friends_or_family }
-    let!(:friends_or_family2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: friends_or_family }
-    let!(:friends_or_family3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: friends_or_family }
-    let!(:maintenance_in1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in }
-    let!(:maintenance_in2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in }
-    let!(:maintenance_in3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in }
-    let!(:child_care) { create :transaction_type, :child_care }
-    let!(:legal_aid) { create :transaction_type, :legal_aid }
-    let!(:maintenance_out) { create :transaction_type, :maintenance_out }
-    let!(:child_care1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: child_care }
-    let!(:child_care2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: child_care }
-    let!(:child_care3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: child_care }
-    let!(:legal_aid1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: legal_aid }
-    let!(:legal_aid2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: legal_aid }
-    let!(:legal_aid3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: legal_aid }
-    let!(:maintenance_out1) { create :cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out }
-    let!(:maintenance_out2) { create :cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out }
-    let!(:maintenance_out3) { create :cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out }
+    let!(:application) { create(:legal_aid_application, :with_applicant) }
+    let!(:benefits) { create(:transaction_type, :benefits) }
+    let!(:friends_or_family) { create(:transaction_type, :friends_or_family) }
+    let!(:maintenance_in) { create(:transaction_type, :maintenance_in) }
+    let!(:benefits1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: benefits) }
+    let!(:benefits2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: benefits) }
+    let!(:benefits3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: benefits) }
+    let!(:friends_or_family1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: friends_or_family) }
+    let!(:friends_or_family2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: friends_or_family) }
+    let!(:friends_or_family3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: friends_or_family) }
+    let!(:maintenance_in1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:maintenance_in2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:maintenance_in3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_in) }
+    let!(:child_care) { create(:transaction_type, :child_care) }
+    let!(:legal_aid) { create(:transaction_type, :legal_aid) }
+    let!(:maintenance_out) { create(:transaction_type, :maintenance_out) }
+    let!(:child_care1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: child_care) }
+    let!(:child_care2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: child_care) }
+    let!(:child_care3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: child_care) }
+    let!(:legal_aid1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: legal_aid) }
+    let!(:legal_aid2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: legal_aid) }
+    let!(:legal_aid3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: legal_aid) }
+    let!(:maintenance_out1) { create(:cash_transaction, :credit_month1, legal_aid_application: application, transaction_type: maintenance_out) }
+    let!(:maintenance_out2) { create(:cash_transaction, :credit_month2, legal_aid_application: application, transaction_type: maintenance_out) }
+    let!(:maintenance_out3) { create(:cash_transaction, :credit_month3, legal_aid_application: application, transaction_type: maintenance_out) }
 
-    let(:submission) { create :cfe_submission, aasm_state: "employments_created", legal_aid_application: application }
+    let(:submission) { create(:cfe_submission, aasm_state: "employments_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 

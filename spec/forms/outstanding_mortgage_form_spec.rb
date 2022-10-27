@@ -4,7 +4,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
   subject { described_class.new(params) }
 
   let(:legal_aid_application) do
-    create :legal_aid_application, outstanding_mortgage_amount: nil
+    create(:legal_aid_application, outstanding_mortgage_amount: nil)
   end
   let(:amount) { rand(1...1_000_000.0).round(2).to_s }
   let(:params) do
@@ -17,7 +17,7 @@ RSpec.describe LegalAidApplications::OutstandingMortgageForm, type: :form do
   describe "#outstanding_mortgage_amount" do
     let(:existing_amount) { rand(1...1_000_000.0).round(2).to_s }
     let(:legal_aid_application) do
-      create :legal_aid_application, outstanding_mortgage_amount: existing_amount
+      create(:legal_aid_application, outstanding_mortgage_amount: existing_amount)
     end
 
     it "matches the value in params" do

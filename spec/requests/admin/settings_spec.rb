@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Admin::SettingsController, type: :request do
-  let(:admin_user) { create :admin_user }
+RSpec.describe Admin::SettingsController do
+  let(:admin_user) { create(:admin_user) }
 
   before do
     Setting.delete_all

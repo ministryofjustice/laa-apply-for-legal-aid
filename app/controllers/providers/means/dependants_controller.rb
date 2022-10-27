@@ -1,11 +1,11 @@
 module Providers
   module Means
     class DependantsController < ProviderBaseController
-      def new
+      def show
         @form = LegalAidApplications::DependantForm.new(model: dependant)
       end
 
-      def show
+      def new
         @form = LegalAidApplications::DependantForm.new(model: dependant)
       end
 

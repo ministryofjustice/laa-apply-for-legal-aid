@@ -30,7 +30,7 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
      { "code" => "FM015", "meaning" => "Section 37 Report", "description" => "Limited to a section 37 report only.", "additional_params" => [] }]
   end
 
-  let(:proceeding) { create :proceeding, :se013, :without_df_date, :with_cit_z, no_scope_limitations: true }
+  let(:proceeding) { create(:proceeding, :se013, :without_df_date, :with_cit_z, no_scope_limitations: true) }
   let(:scope_type) { "substantive" }
   let(:scope_codes) { ["", "CV027"] }
   let(:hearing_date_cv027_1i) { "2022" }

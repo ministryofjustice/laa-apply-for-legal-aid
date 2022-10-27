@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::AddressSelectionsController, type: :request do
+RSpec.describe Providers::AddressSelectionsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
@@ -21,7 +21,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
 
       context "when a postcode has been entered before", :vcr do
         let(:postcode) { "SW1H 9EA" }
-        let!(:address) { create :address, postcode:, applicant: }
+        let!(:address) { create(:address, postcode:, applicant:) }
 
         it "performs an address lookup with the provided postcode" do
           expect(AddressLookupService)
@@ -140,7 +140,7 @@ RSpec.describe Providers::AddressSelectionsController, type: :request do
       end
 
       context "when an address already exists" do
-        before { create :address, applicant: }
+        before { create(:address, applicant:) }
 
         it "does not create a new address record" do
           expect { subject }.not_to change { applicant.addresses.count }

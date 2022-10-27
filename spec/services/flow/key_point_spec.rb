@@ -6,7 +6,7 @@ RSpec.describe Flow::KeyPoint do
   let(:journey) { :providers }
   let(:key_point) { :start_after_applicant_completes_means }
   let(:step) { :client_completed_means }
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:flow) do
     Flow::BaseFlowService.flow_service_for(
       journey,

@@ -23,6 +23,7 @@ class RemoveProceedingsScopeLimitations < ActiveRecord::Migration[7.0]
     end
   end
 
+  # rubocop:disable Rails/WhereNotWithMultipleConditions
   def any_proceeding_data_present?
     Proceeding.where.not(substantive_scope_limitation_code: nil,
                          substantive_scope_limitation_meaning: nil,
@@ -31,4 +32,5 @@ class RemoveProceedingsScopeLimitations < ActiveRecord::Migration[7.0]
                          delegated_functions_scope_limitation_meaning: nil,
                          delegated_functions_scope_limitation_description: nil).count.positive?
   end
+  # rubocop:enable Rails/WhereNotWithMultipleConditions
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Admin::LegalAidApplications::SubmissionsController, type: :request do
-  let(:admin_user) { create :admin_user }
+RSpec.describe Admin::LegalAidApplications::SubmissionsController do
+  let(:admin_user) { create(:admin_user) }
   let(:legal_aid_application) { create(:legal_aid_application, :with_everything, :with_ccms_submission) }
 
   before { sign_in admin_user }

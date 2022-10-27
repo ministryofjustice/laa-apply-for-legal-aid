@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe "providers legal aid application requests", type: :request do
+RSpec.describe "providers legal aid application requests" do
   describe "GET /providers/applications" do
     subject { get providers_legal_aid_applications_path(params) }
 
-    let(:legal_aid_application) { create :legal_aid_application }
+    let(:legal_aid_application) { create(:legal_aid_application) }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
-    let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
+    let(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
     let(:params) { {} }
 
     context "when the provider is not authenticated" do
@@ -27,7 +27,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
       end
 
       context "provider is not a portal_enabled user" do
-        let(:provider) { create :provider, :without_portal_enabled }
+        let(:provider) { create(:provider, :without_portal_enabled) }
 
         it "redirects to error page" do
           subject
@@ -46,10 +46,10 @@ RSpec.describe "providers legal aid application requests", type: :request do
       end
 
       context "when legal_aid_application current path set" do
-        let!(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
-        let!(:legal_aid_application) { create :legal_aid_application, provider_step: :applicant_details }
-        let!(:other_provider_in_same_firm_application) { create :legal_aid_application, provider: other_provider_in_same_firm, provider_step: :applicant_details }
-        let!(:other_provider_application) { create :legal_aid_application, provider: other_provider, provider_step: :applicant_details }
+        let!(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
+        let!(:legal_aid_application) { create(:legal_aid_application, provider_step: :applicant_details) }
+        let!(:other_provider_in_same_firm_application) { create(:legal_aid_application, provider: other_provider_in_same_firm, provider_step: :applicant_details) }
+        let!(:other_provider_application) { create(:legal_aid_application, provider: other_provider, provider_step: :applicant_details) }
 
         it "includes a link to the legal aid application's current path" do
           subject
@@ -68,7 +68,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
       end
 
       context "when legal_aid_application current path is unknown" do
-        let!(:legal_aid_application) { create :legal_aid_application, provider_step: :unknown }
+        let!(:legal_aid_application) { create(:legal_aid_application, provider_step: :unknown) }
 
         it "links to start of journey" do
           subject
@@ -94,7 +94,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
         context "and more applications than page size" do
           # Creating 4 additional means there are now 5 applications
-          let!(:additional_applications) { create_list :legal_aid_application, 4, provider: }
+          let!(:additional_applications) { create_list(:legal_aid_application, 4, provider:) }
           let(:params) { { page_size: 3 } }
 
           it "show page information" do
@@ -109,7 +109,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
         end
 
         context "when an application has been discarded" do
-          before { create :legal_aid_application, :discarded, provider: }
+          before { create(:legal_aid_application, :discarded, provider:) }
 
           it "is excluded from the list" do
             subject
@@ -134,10 +134,10 @@ RSpec.describe "providers legal aid application requests", type: :request do
   describe "GET /providers/applications/search" do
     subject { get search_providers_legal_aid_applications_path(params) }
 
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
     let(:other_provider) { create(:provider) }
-    let(:other_provider_in_same_firm) { create :provider, firm: provider.firm }
+    let(:other_provider_in_same_firm) { create(:provider, firm: provider.firm) }
     let(:params) { {} }
 
     context "when the provider is not authenticated" do
@@ -176,13 +176,13 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
       context "when searching for an incomplete Emergency application with a substantive due date" do
         let(:legal_aid_application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_applicant,
                  :with_proceedings,
                  :with_delegated_functions_on_proceedings,
                  explicit_proceedings: [:da004],
                  df_options: { DA004: [Time.zone.today, Time.zone.today] },
-                 substantive_application_deadline_on: Time.zone.today + 3.days
+                 substantive_application_deadline_on: Time.zone.today + 3.days)
         end
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: } }
@@ -197,7 +197,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
 
       context "when searching for an Emergency application with a substantive due date and the application has been submitted" do
         let(:legal_aid_application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_applicant,
                  :with_everything,
                  :with_proceedings,
@@ -205,7 +205,7 @@ RSpec.describe "providers legal aid application requests", type: :request do
                  explicit_proceedings: [:da004],
                  df_options: { DA004: [Time.zone.today, Time.zone.today] },
                  substantive_application_deadline_on: Time.zone.today + 3.days,
-                 merits_submitted_at: Time.zone.today
+                 merits_submitted_at: Time.zone.today)
         end
         let(:search_term) { legal_aid_application.application_ref }
         let(:params) { { search_term: } }

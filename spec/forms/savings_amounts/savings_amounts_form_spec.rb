@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
   subject { described_class.new(form_params) }
 
-  let(:savings_amount) { create :savings_amount }
+  let(:savings_amount) { create(:savings_amount) }
   let(:attributes) { described_class::ATTRIBUTES }
   let(:check_box_attributes) { described_class::CHECK_BOXES_ATTRIBUTES }
   let(:check_box_params) { {} }

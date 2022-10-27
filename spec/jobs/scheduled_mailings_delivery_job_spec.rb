@@ -5,9 +5,9 @@ RSpec.describe ScheduledMailingsDeliveryJob do
   subject { described_class.new.perform }
 
   describe "ScheduledMailingsDeliveryJob" do
-    let(:application) { create :application, :with_everything }
-    let!(:mailing_one) { create :scheduled_mailing, :due, legal_aid_application_id: application.id }
-    let!(:mailing_two) { create :scheduled_mailing, :due_later }
+    let(:application) { create(:application, :with_everything) }
+    let!(:mailing_one) { create(:scheduled_mailing, :due, legal_aid_application_id: application.id) }
+    let!(:mailing_two) { create(:scheduled_mailing, :due_later) }
 
     describe "perform" do
       context "when calling DeliveryMan" do

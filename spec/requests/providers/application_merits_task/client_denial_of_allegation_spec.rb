@@ -2,10 +2,10 @@ require "rails_helper"
 
 module Providers
   module ApplicationMeritsTask
-    RSpec.describe ClientDenialOfAllegationsController, type: :request do
-      let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
+    RSpec.describe ClientDenialOfAllegationsController do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
       let(:login_provider) { login_as legal_aid_application.provider }
-      let(:smtl) { create :legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application: }
+      let(:smtl) { create(:legal_framework_merits_task_list, :da001_as_defendant, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/client_denial_of_allegation" do
         subject(:client_denial) { get providers_legal_aid_application_client_denial_of_allegation_path(legal_aid_application) }
@@ -26,8 +26,8 @@ module Providers
         end
 
         context "with an existing allegation" do
-          let(:allegation) { create :allegation, :with_data }
-          let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8, allegation: }
+          let(:allegation) { create(:allegation, :with_data) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8, allegation:) }
 
           it "renders successfully" do
             expect(response).to have_http_status(:ok)

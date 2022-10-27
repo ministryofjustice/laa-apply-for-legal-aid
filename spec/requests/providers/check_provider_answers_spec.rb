@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe Providers::CheckProviderAnswersController, type: :request do
+RSpec.describe Providers::CheckProviderAnswersController do
   let(:used_delegated_functions_on) { nil }
-  let(:address) { create :address }
-  let(:applicant) { create :applicant, address: }
+  let(:address) { create(:address) }
+  let(:applicant) { create(:applicant, address:) }
   let(:application) do
     create(
       :legal_aid_application,
@@ -110,7 +110,7 @@ RSpec.describe Providers::CheckProviderAnswersController, type: :request do
       end
 
       context "when an address includes an organisation but no address_line_one" do
-        let(:address) { create :address, address_line_one: "Honeysuckle Cottage", address_line_two: "Station Road", city: "Dartford", county: "", postcode: "DA4 0EN" }
+        let(:address) { create(:address, address_line_one: "Honeysuckle Cottage", address_line_two: "Station Road", city: "Dartford", county: "", postcode: "DA4 0EN") }
 
         it "formats the address correctly" do
           expect(unescaped_response_body).to include("Honeysuckle Cottage<br>Station Road<br>Dartford<br>DA4 0EN")

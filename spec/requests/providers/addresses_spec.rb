@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "address requests", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+RSpec.describe "address requests" do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:applicant) { legal_aid_application.applicant }
   let(:provider) { legal_aid_application.provider }
   let(:address) { applicant.address }
@@ -39,7 +39,7 @@ RSpec.describe "address requests", type: :request do
       end
 
       context "when the applicant already entered an address" do
-        let!(:address) { create :address, applicant: }
+        let!(:address) { create(:address, applicant:) }
 
         it "fills the form with the existing address" do
           subject
@@ -101,7 +101,7 @@ RSpec.describe "address requests", type: :request do
       end
 
       context "with an already existing address" do
-        before { create :address, applicant: }
+        before { create(:address, applicant:) }
 
         it "does not create a new address record" do
           expect { subject }.not_to change { applicant.addresses.count }

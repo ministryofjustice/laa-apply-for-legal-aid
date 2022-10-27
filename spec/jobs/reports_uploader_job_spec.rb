@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ReportsUploaderJob, type: :job do
+RSpec.describe ReportsUploaderJob do
   let(:report_uploader) { described_class.new }
 
   describe "#expiration" do
@@ -30,7 +30,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
 
       it "attaches generated file to admin report" do
         report_uploader.perform
-        expect(admin_report.reload.application_details_report).to be_a_kind_of(ActiveStorage::Attached::One)
+        expect(admin_report.reload.application_details_report).to be_a(ActiveStorage::Attached::One)
       end
 
       context "when submitted applications report is attached" do
@@ -43,7 +43,7 @@ RSpec.describe ReportsUploaderJob, type: :job do
     end
 
     context "when AdminReport record already exists" do
-      before { create :admin_report, :with_reports_attached }
+      before { create(:admin_report, :with_reports_attached) }
 
       it "does not create another record" do
         expect { report_uploader.perform }.not_to change(AdminReport, :count)

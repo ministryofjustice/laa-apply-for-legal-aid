@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "Firm" do
-  let!(:firm) { create :firm, name: "Testing, Test & Co" }
+  let!(:firm) { create(:firm, name: "Testing, Test & Co") }
 
   describe "#permissions" do
     context "when there are no permissions" do
-      let!(:default_permission) { create :permission }
-      let(:firm_with_no_permission) { create :firm }
+      let!(:default_permission) { create(:permission) }
+      let(:firm_with_no_permission) { create(:firm) }
 
       before do
         allow_any_instance_of(Firm).to receive(:passported_permission_id).and_return(default_permission.id)
@@ -19,8 +19,8 @@ RSpec.describe "Firm" do
 
     context "when there are permissions" do
       let(:default_permission) { Permission.find_by(role: "application.passported.*") }
-      let!(:permission1) { create :permission }
-      let!(:permission2) { create :permission }
+      let!(:permission1) { create(:permission) }
+      let!(:permission2) { create(:permission) }
 
       context "with just the default permission" do
         it "returns the default permission" do
@@ -47,8 +47,8 @@ RSpec.describe "Firm" do
   end
 
   describe "search" do
-    let!(:firm2) { create :firm, name: "Cage and Fish" }
-    let!(:firm3) { create :firm, name: "Harvey Birdman & Co." }
+    let!(:firm2) { create(:firm, name: "Cage and Fish") }
+    let!(:firm3) { create(:firm, name: "Harvey Birdman & Co.") }
 
     context "when searching for a single firm" do
       it "returns a single record" do

@@ -10,26 +10,26 @@ RSpec.describe BankTransaction do
 
     context "when transaction type is not a child" do
       it "returns the transaction type" do
-        trx = create :bank_transaction, :credit, transaction_type: pension
+        trx = create(:bank_transaction, :credit, transaction_type: pension)
         expect(trx.parent_transaction_type).to eq pension
       end
     end
 
     context "when transaction type is a child" do
       it "returns the transaction type parent" do
-        trx = create :bank_transaction, :credit, transaction_type: excluded_benefits
+        trx = create(:bank_transaction, :credit, transaction_type: excluded_benefits)
         expect(trx.parent_transaction_type).to eq benefits
       end
     end
 
     describe "with scope by parent_transaction_type" do
       it "groups the transactions keyed by parent transaction type" do
-        trx_p1 = create :bank_transaction, :credit, transaction_type: pension
-        trx_p2 = create :bank_transaction, :credit, transaction_type: pension
-        trx_b1 = create :bank_transaction, :credit, transaction_type: benefits
-        trx_b2 = create :bank_transaction, :credit, transaction_type: benefits
-        trx_eb1 = create :bank_transaction, :credit, transaction_type: excluded_benefits
-        trx_eb2 = create :bank_transaction, :credit, transaction_type: excluded_benefits
+        trx_p1 = create(:bank_transaction, :credit, transaction_type: pension)
+        trx_p2 = create(:bank_transaction, :credit, transaction_type: pension)
+        trx_b1 = create(:bank_transaction, :credit, transaction_type: benefits)
+        trx_b2 = create(:bank_transaction, :credit, transaction_type: benefits)
+        trx_eb1 = create(:bank_transaction, :credit, transaction_type: excluded_benefits)
+        trx_eb2 = create(:bank_transaction, :credit, transaction_type: excluded_benefits)
 
         grouped_transactions = described_class.by_parent_transaction_type
         expect(grouped_transactions[pension]).to match_array [trx_p1, trx_p2]
@@ -40,7 +40,7 @@ RSpec.describe BankTransaction do
 
   context "with serialization of meta data" do
     context "and meta data is null" do
-      let(:tx) { create :bank_transaction }
+      let(:tx) { create(:bank_transaction) }
 
       it "returns nil" do
         expect(tx.meta_data).to be_nil
@@ -56,7 +56,7 @@ RSpec.describe BankTransaction do
 
     context "when meta data is populated" do
       it "returns a hash" do
-        bt = create :bank_transaction, :with_meta
+        bt = create(:bank_transaction, :with_meta)
         expect(bt.meta_data[:code]).to eq "UC"
         expect(bt.meta_data[:name]).to eq "Universal credit"
         expect(bt.meta_data[:label]).to eq "universal_credit"

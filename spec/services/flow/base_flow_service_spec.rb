@@ -18,7 +18,7 @@ RSpec.describe Flow::BaseFlowService do
     Flow::Flows::CitizenStart::STEPS
       .deep_merge(Flow::Flows::CitizenEnd::STEPS)
   end
-  let(:legal_aid_application) { create :legal_aid_application }
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:params) { nil }
 
   before { flow_service_class.use_steps steps }

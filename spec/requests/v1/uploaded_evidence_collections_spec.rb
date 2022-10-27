@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+RSpec.describe "POST /v1/uploaded_evidence_collections" do
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:uploaded_evidence_collection) { legal_aid_application.uploaded_evidence_collection }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
@@ -22,7 +22,7 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
       end
 
       context "when the application has no attachments" do
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [] }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: []) }
 
         it "does not increment the attachment name" do
           subject
@@ -32,8 +32,8 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
       end
 
       context "when the application has one attachment already" do
-        let(:attachment) { create :attachment, :uploaded_evidence_collection }
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [attachment] }
+        let(:attachment) { create(:attachment, :uploaded_evidence_collection) }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: [attachment]) }
 
         it "increments the attachment name" do
           subject
@@ -43,9 +43,9 @@ RSpec.describe "POST /v1/uploaded_evidence_collections", type: :request do
       end
 
       context "when the application has multiple evidence attachments already" do
-        let(:uec1) { create :attachment, :uploaded_evidence_collection }
-        let(:uec2) { create :attachment, :uploaded_evidence_collection, attachment_name: "uploaded_evidence_collection_1" }
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [uec1, uec2] }
+        let(:uec1) { create(:attachment, :uploaded_evidence_collection) }
+        let(:uec2) { create(:attachment, :uploaded_evidence_collection, attachment_name: "uploaded_evidence_collection_1") }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: [uec1, uec2]) }
 
         it "increments the attachment name" do
           subject

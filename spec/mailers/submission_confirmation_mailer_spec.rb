@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe SubmissionConfirmationMailer, type: :mailer do
+RSpec.describe SubmissionConfirmationMailer do
   describe ".notify" do
-    let(:legal_aid_application) { create :legal_aid_application, :with_applicant }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
     let(:provider) { legal_aid_application.provider }
     let(:applicant) { legal_aid_application.applicant }
     let(:feedback_url) { "www.example.com/feedback/new" }

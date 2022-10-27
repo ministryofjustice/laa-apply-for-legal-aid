@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe Providers::Vehicles::AgesController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_vehicle }
+RSpec.describe Providers::Vehicles::AgesController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_vehicle) }
   let(:vehicle) { legal_aid_application.vehicle }
   let(:login) { login_as legal_aid_application.provider }
 
@@ -18,8 +18,8 @@ RSpec.describe Providers::Vehicles::AgesController, type: :request do
     end
 
     context "with existing older than three years flag" do
-      let(:vehicle) { create :vehicle, purchased_on: nil, more_than_three_years_old: true }
-      let(:legal_aid_application) { create :legal_aid_application, vehicle: }
+      let(:vehicle) { create(:vehicle, purchased_on: nil, more_than_three_years_old: true) }
+      let(:legal_aid_application) { create(:legal_aid_application, vehicle:) }
 
       it "renders successfully" do
         subject

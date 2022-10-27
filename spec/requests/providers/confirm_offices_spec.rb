@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe "provider confirm office", type: :request do
-  let(:firm) { create :firm }
-  let!(:office) { create :office, firm: }
-  let!(:office2) { create :office, firm: }
-  let(:provider) { create :provider, firm:, selected_office: office }
+RSpec.describe "provider confirm office" do
+  let(:firm) { create(:firm) }
+  let!(:office) { create(:office, firm:) }
+  let!(:office2) { create(:office, firm:) }
+  let(:provider) { create(:provider, firm:, selected_office: office) }
 
   describe "GET providers/confirm_office" do
     subject { get providers_confirm_office_path }
@@ -16,7 +16,7 @@ RSpec.describe "provider confirm office", type: :request do
     end
 
     context "invalid login" do
-      let(:provider) { create :provider, invalid_login_details: "role" }
+      let(:provider) { create(:provider, invalid_login_details: "role") }
 
       before do
         login_as provider
@@ -59,7 +59,7 @@ RSpec.describe "provider confirm office", type: :request do
       end
 
       context "provider has not selected office" do
-        let(:provider) { create :provider, firm:, selected_office: nil }
+        let(:provider) { create(:provider, firm:, selected_office: nil) }
 
         it "redirects to the select office page" do
           expect(response).to redirect_to providers_select_office_path

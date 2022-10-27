@@ -35,7 +35,7 @@ RSpec.describe LegalAidApplicationPolicy do
 
   context "with provider who created the application" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_negative_benefit_check_result, provider:) }
-    let(:provider) { create :provider, :with_no_permissions }
+    let(:provider) { create(:provider, :with_no_permissions) }
 
     context "when controller is pre-DWP check" do
       let(:authorization_context) { AuthorizationContext.new(provider, pre_dwp_check_controller) }
@@ -52,7 +52,7 @@ RSpec.describe LegalAidApplicationPolicy do
       let(:authorization_context) { AuthorizationContext.new(provider, post_dwp_check_controller) }
 
       context "when provider has passported rights" do
-        let(:provider)  { create :provider, :with_passported_permissions }
+        let(:provider)  { create(:provider, :with_passported_permissions) }
 
         it "permits all actions" do
           controller_actions.each do |action|
@@ -62,7 +62,7 @@ RSpec.describe LegalAidApplicationPolicy do
       end
 
       context "when provider does not have passported rights" do
-        let(:provider) { create :provider, :with_non_passported_permissions }
+        let(:provider) { create(:provider, :with_non_passported_permissions) }
 
         it "does not permit any actions" do
           controller_actions.each do |action|
@@ -77,7 +77,7 @@ RSpec.describe LegalAidApplicationPolicy do
       let(:authorization_context) { AuthorizationContext.new(provider, post_dwp_check_controller) }
 
       context "when provider has non-passported rights" do
-        let(:provider) { create :provider, :with_non_passported_permissions }
+        let(:provider) { create(:provider, :with_non_passported_permissions) }
 
         it "permits all actions" do
           controller_actions.each do |action|
@@ -87,7 +87,7 @@ RSpec.describe LegalAidApplicationPolicy do
       end
 
       context "when provider does not have non-passported rights" do
-        let(:provider) { create :provider, :with_passported_permissions }
+        let(:provider) { create(:provider, :with_passported_permissions) }
 
         it "does not permit any actions" do
           controller_actions.each do |action|

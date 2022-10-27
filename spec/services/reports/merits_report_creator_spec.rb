@@ -9,20 +9,20 @@ RSpec.describe Reports::MeritsReportCreator do
   end
 
   let(:legal_aid_application) do
-    create :legal_aid_application,
+    create(:legal_aid_application,
            :with_proceedings,
            :with_everything,
            :generating_reports,
            explicit_proceedings: %i[da004],
            set_lead_proceeding: :da004,
-           ccms_submission:
+           ccms_submission:)
   end
   let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
   let!(:chances_of_success) do
-    create :chances_of_success, :with_optional_text, proceeding: da004
+    create(:chances_of_success, :with_optional_text, proceeding: da004)
   end
 
-  let(:ccms_submission) { create :ccms_submission, :case_ref_obtained }
+  let(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
 
   describe ".call" do
     it "attaches merits_report.pdf to the application" do
@@ -34,7 +34,7 @@ RSpec.describe Reports::MeritsReportCreator do
     end
 
     context "when an attachment record exists" do
-      let!(:attachment) { create :attachment, :merits_report, legal_aid_application: }
+      let!(:attachment) { create(:attachment, :merits_report, legal_aid_application:) }
       let(:expected_log) { "ReportsCreator: Merits report already exists for #{legal_aid_application.id} and is downloadable" }
 
       before { allow(Rails.logger).to receive(:info) }
@@ -64,21 +64,21 @@ RSpec.describe Reports::MeritsReportCreator do
 
     context "ccms case ref does not exist" do
       let(:legal_aid_application) do
-        create :legal_aid_application,
+        create(:legal_aid_application,
                :with_proceedings,
                :with_everything,
                :generating_reports,
                ccms_submission:,
                explicit_proceedings: %i[da004],
-               set_lead_proceeding: :da004
+               set_lead_proceeding: :da004)
       end
 
       let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
       let!(:chances_of_success) do
-        create :chances_of_success, :with_optional_text, proceeding: da004
+        create(:chances_of_success, :with_optional_text, proceeding: da004)
       end
 
-      let(:ccms_submission) { create :ccms_submission }
+      let(:ccms_submission) { create(:ccms_submission) }
 
       before do
         allow_any_instance_of(CCMS::Submission).to receive(:process!).with(any_args).and_return(true)
@@ -91,18 +91,18 @@ RSpec.describe Reports::MeritsReportCreator do
 
       context "ccms submission does not exist" do
         let!(:legal_aid_application) do
-          create :legal_aid_application,
+          create(:legal_aid_application,
                  :with_proceedings,
                  :with_everything,
                  :generating_reports,
                  explicit_proceedings: %i[da004],
-                 set_lead_proceeding: :da004
+                 set_lead_proceeding: :da004)
         end
-        let(:ccms_submission) { create :ccms_submission }
+        let(:ccms_submission) { create(:ccms_submission) }
 
         let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
         let!(:chances_of_success) do
-          create :chances_of_success, :with_optional_text, proceeding: da004
+          create(:chances_of_success, :with_optional_text, proceeding: da004)
         end
 
         before do

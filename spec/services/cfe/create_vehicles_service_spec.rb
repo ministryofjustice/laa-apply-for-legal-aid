@@ -2,8 +2,8 @@ require "rails_helper"
 
 module CFE
   RSpec.describe CreateVehiclesService do
-    let(:application) { create :legal_aid_application }
-    let(:submission) { create :cfe_submission, aasm_state: "capitals_created", legal_aid_application: application }
+    let(:application) { create(:legal_aid_application) }
+    let(:submission) { create(:cfe_submission, aasm_state: "capitals_created", legal_aid_application: application) }
     let(:service) { described_class.new(submission) }
     let(:dummy_response) { dummy_response_hash.to_json }
 
@@ -16,7 +16,7 @@ module CFE
 
     describe "#request payload" do
       context "vehicle record is present" do
-        let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
+        let!(:vehicle) { create(:vehicle, :populated, legal_aid_application: application) }
 
         it "creates the expected payload from the values in the applicant" do
           expect(service.request_body).to eq expected_payload_hash.to_json
@@ -40,7 +40,7 @@ module CFE
       describe "successful post" do
         before { stub_request(:post, service.cfe_url).with(body: expected_payload_hash.to_json).to_return(body: dummy_response) }
 
-        let!(:vehicle) { create :vehicle, :populated, legal_aid_application: application }
+        let!(:vehicle) { create(:vehicle, :populated, legal_aid_application: application) }
 
         it "updates the submission record from assessment_created to applicant_created" do
           expect(submission.aasm_state).to eq "capitals_created"

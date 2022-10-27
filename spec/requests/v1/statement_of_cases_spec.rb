@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "POST /v1/statement_of_case", type: :request do
-  let(:legal_aid_application) { create :legal_aid_application }
+RSpec.describe "POST /v1/statement_of_case" do
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:id) { legal_aid_application.id }
   let(:file) { uploaded_file("spec/fixtures/files/documents/hello_world.pdf", "application/pdf") }
   let(:params) { { legal_aid_application_id: id, file: } }
@@ -20,7 +20,7 @@ RSpec.describe "POST /v1/statement_of_case", type: :request do
       end
 
       context "when the application has no statement of case" do
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [] }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: []) }
 
         it "does not increment the attachment name" do
           subject
@@ -30,8 +30,8 @@ RSpec.describe "POST /v1/statement_of_case", type: :request do
       end
 
       context "when the application has one attachment for statement of case already" do
-        let(:statement_of_case) { create :attachment, attachment_name: "statement_of_case" }
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [statement_of_case] }
+        let(:statement_of_case) { create(:attachment, attachment_name: "statement_of_case") }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: [statement_of_case]) }
 
         it "increments the attachment name" do
           subject
@@ -41,9 +41,9 @@ RSpec.describe "POST /v1/statement_of_case", type: :request do
       end
 
       context "when the application has multiple attachments for statement of case already" do
-        let(:soc1) { create :attachment, attachment_name: "statement_of_case" }
-        let(:soc2) { create :attachment, attachment_name: "statement_of_case_1" }
-        let(:legal_aid_application) { create :legal_aid_application, attachments: [soc1, soc2] }
+        let(:soc1) { create(:attachment, attachment_name: "statement_of_case") }
+        let(:soc2) { create(:attachment, attachment_name: "statement_of_case_1") }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: [soc1, soc2]) }
 
         it "increments the attachment name" do
           subject

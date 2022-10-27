@@ -15,7 +15,7 @@ module Dashboard
         allow(geckoboard_client).to receive(:datasets).and_return(datasets_client)
       end
 
-      let(:application) { create :legal_aid_application, :with_applicant }
+      let(:application) { create(:legal_aid_application, :with_applicant) }
 
       it { is_expected.to be_a described_class }
 

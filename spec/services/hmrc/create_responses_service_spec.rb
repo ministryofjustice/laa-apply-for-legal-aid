@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe HMRC::CreateResponsesService do
   subject(:create_service) { described_class.new(legal_aid_application) }
 
-  let(:legal_aid_application) { create :legal_aid_application, :with_applicant, :with_transaction_period }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_transaction_period) }
   let(:hmrc_use_dev_mock) { false }
 
   before do
@@ -63,7 +63,7 @@ RSpec.describe HMRC::CreateResponsesService do
     end
 
     context "when requests already exist" do
-      let!(:hmrc_response) { create :hmrc_response, legal_aid_application: }
+      let!(:hmrc_response) { create(:hmrc_response, legal_aid_application:) }
 
       it "does not create any more hmrc_response records" do
         expect { call }.not_to change { legal_aid_application.hmrc_responses.count }

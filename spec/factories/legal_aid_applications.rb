@@ -7,7 +7,7 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { build :applicant, with_bank_accounts: }
+      applicant { build(:applicant, with_bank_accounts:) }
     end
 
     trait :with_employed_applicant do
@@ -15,7 +15,7 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { build :applicant, employed: true, with_bank_accounts: }
+      applicant { build(:applicant, employed: true, with_bank_accounts:) }
     end
 
     trait :with_single_employment do
@@ -39,11 +39,11 @@ FactoryBot.define do
       transient do
         with_bank_accounts { 0 }
       end
-      applicant { build :applicant, :with_address, with_bank_accounts: }
+      applicant { build(:applicant, :with_address, with_bank_accounts:) }
     end
 
     trait :with_applicant_and_address_lookup do
-      applicant { build :applicant, :with_address_lookup }
+      applicant { build(:applicant, :with_address_lookup) }
     end
 
     #######################################################
@@ -281,14 +281,14 @@ FactoryBot.define do
           (0..evaluator.proceeding_count - 1).each do |i|
             trait = traits[i]
             lead = evaluator.set_lead_proceeding == trait || (evaluator.set_lead_proceeding == true && trait == :da001)
-            create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
+            create(:proceeding, trait, legal_aid_application: application, lead_proceeding: lead)
           end
         else
           evaluator.explicit_proceedings.each do |trait|
             next if Proceeding.exists?(ccms_code: trait.to_s.upcase)
 
             lead = evaluator.set_lead_proceeding == trait
-            create :proceeding, trait, legal_aid_application: application, lead_proceeding: lead
+            create(:proceeding, trait, legal_aid_application: application, lead_proceeding: lead)
           end
         end
       end
@@ -346,12 +346,12 @@ FactoryBot.define do
 
     trait :with_involved_children do
       after(:create) do |application|
-        3.times { create :involved_child, legal_aid_application: application }
+        3.times { create(:involved_child, legal_aid_application: application) }
       end
     end
 
     trait :with_dwp_override do
-      dwp_override { build :dwp_override }
+      dwp_override { build(:dwp_override) }
       with_non_passported_state_machine
     end
 
@@ -380,27 +380,27 @@ FactoryBot.define do
     end
 
     trait :with_other_assets_declaration do
-      other_assets_declaration { build :other_assets_declaration, :with_all_values }
+      other_assets_declaration { build(:other_assets_declaration, :with_all_values) }
     end
 
     trait :with_no_other_assets do
-      other_assets_declaration { build :other_assets_declaration, :all_nil }
+      other_assets_declaration { build(:other_assets_declaration, :all_nil) }
     end
 
     trait :with_policy_disregards do
-      policy_disregards { build :policy_disregards }
+      policy_disregards { build(:policy_disregards) }
     end
 
     trait :with_single_policy_disregard do
-      policy_disregards { build :policy_disregards, :with_selected_value }
+      policy_disregards { build(:policy_disregards, :with_selected_value) }
     end
 
     trait :with_populated_policy_disregards do
-      policy_disregards { build :policy_disregards, :with_selected_values }
+      policy_disregards { build(:policy_disregards, :with_selected_values) }
     end
 
     trait :with_savings_amount do
-      savings_amount { build :savings_amount, :with_values }
+      savings_amount { build(:savings_amount, :with_values) }
     end
 
     trait :with_fixed_offline_savings_accounts do
@@ -418,11 +418,11 @@ FactoryBot.define do
     end
 
     trait :with_no_savings do
-      savings_amount { build :savings_amount, :all_nil }
+      savings_amount { build(:savings_amount, :all_nil) }
     end
 
     trait :with_no_other_assets do
-      other_assets_declaration { build :other_assets_declaration, :all_nil }
+      other_assets_declaration { build(:other_assets_declaration, :all_nil) }
     end
 
     trait :with_merits_statement_of_case do
@@ -450,7 +450,7 @@ FactoryBot.define do
     end
 
     trait :with_opponent do
-      opponent { build :opponent }
+      opponent { build(:opponent) }
     end
 
     trait :with_restrictions do
@@ -479,7 +479,7 @@ FactoryBot.define do
     end
 
     trait :with_incident do
-      latest_incident { build :incident }
+      latest_incident { build(:incident) }
     end
 
     trait :with_everything do
@@ -529,11 +529,11 @@ FactoryBot.define do
     end
 
     trait :with_negative_benefit_check_result do
-      benefit_check_result { build :benefit_check_result }
+      benefit_check_result { build(:benefit_check_result) }
     end
 
     trait :with_positive_benefit_check_result do
-      benefit_check_result { build :benefit_check_result, :positive }
+      benefit_check_result { build(:benefit_check_result, :positive) }
     end
 
     trait :passported do
@@ -558,7 +558,7 @@ FactoryBot.define do
     end
 
     trait :with_undetermined_benefit_check_result do
-      benefit_check_result { build :benefit_check_result, :undetermined }
+      benefit_check_result { build(:benefit_check_result, :undetermined) }
     end
 
     trait :non_passported do
@@ -705,48 +705,48 @@ FactoryBot.define do
 
     trait :with_bank_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
-        create :bank_account_holder, bank_provider: bank_provider
-        create :bank_error, applicant: application.applicant
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
+        create(:bank_account_holder, bank_provider:)
+        create(:bank_error, applicant: application.applicant)
         [90, 60, 30].each do |count|
-          create :bank_transaction,
+          create(:bank_transaction,
                  :benefits,
                  happened_at: count.days.ago,
                  bank_account:,
                  operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
         end
       end
     end
 
     trait :with_benefits_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
-          create :bank_transaction,
+          create(:bank_transaction,
                  :benefits,
                  happened_at: count.days.ago,
                  bank_account:,
                  operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
         end
       end
     end
 
     trait :with_fixed_benefits_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
-          create :bank_transaction,
+          create(:bank_transaction,
                  :benefits,
                  happened_at: count.days.ago,
                  amount: 111,
                  bank_account:,
                  operation: "credit",
-                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" }
+                 meta_data: { code: "CHB", label: "child_benefit", name: "Child Benefit" })
         end
       end
     end
@@ -770,28 +770,28 @@ FactoryBot.define do
 
     trait :with_uncategorised_credit_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account:, operation: "credit"
+          create(:bank_transaction, :uncategorised_credit_transaction, happened_at: count.days.ago, bank_account:, operation: "credit")
         end
       end
     end
 
     trait :with_uncategorised_debit_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
-          create :bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account:, operation: "debit"
+          create(:bank_transaction, :uncategorised_debit_transaction, happened_at: count.days.ago, bank_account:, operation: "debit")
         end
       end
     end
 
     trait :with_fixed_rent_or_mortage_transactions do
       after :create do |application|
-        bank_provider = create :bank_provider, applicant: application.applicant
-        bank_account = create :bank_account, bank_provider: bank_provider
+        bank_provider = create(:bank_provider, applicant: application.applicant)
+        bank_account = create(:bank_account, bank_provider:)
         [90, 60, 30].each do |count|
           create(:bank_transaction,
                  :rent_or_mortgage,
@@ -850,75 +850,75 @@ FactoryBot.define do
 
     trait :with_cfe_v1_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v1_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v1_result, submission: cfe_submission)
       end
     end
 
     trait :with_cfe_v2_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v2_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v2_result, submission: cfe_submission)
       end
     end
 
     trait :with_cfe_v3_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v3_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v3_result, submission: cfe_submission)
       end
     end
 
     trait :with_cfe_v4_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v4_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v4_result, submission: cfe_submission)
       end
     end
 
     trait :with_cfe_v5_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_v5_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_v5_result, submission: cfe_submission)
       end
     end
 
     trait :with_cfe_empty_result do
       after :create do |application|
-        cfe_submission = create :cfe_submission, legal_aid_application: application
-        create :cfe_empty_result, submission: cfe_submission
+        cfe_submission = create(:cfe_submission, legal_aid_application: application)
+        create(:cfe_empty_result, submission: cfe_submission)
       end
     end
 
     trait :with_means_report do
       with_cfe_v3_result
       after :create do |application|
-        create :attachment, :means_report, legal_aid_application: application
+        create(:attachment, :means_report, legal_aid_application: application)
       end
     end
 
     trait :with_bank_transaction_report do
       with_cfe_v3_result
       after :create do |application|
-        create :attachment, :bank_transaction_report, legal_aid_application: application
+        create(:attachment, :bank_transaction_report, legal_aid_application: application)
       end
     end
 
     trait :with_merits_report do
       after :create do |application|
-        create :attachment, :merits_report, legal_aid_application: application
+        create(:attachment, :merits_report, legal_aid_application: application)
       end
     end
 
     trait :with_ccms_submission do
       after :create do |application|
-        create :ccms_submission, :case_created, legal_aid_application: application
+        create(:ccms_submission, :case_created, legal_aid_application: application)
       end
     end
 
     trait :with_ccms_submission_completed do
       after :create do |application|
-        create :ccms_submission, :case_created, :case_completed, legal_aid_application: application
+        create(:ccms_submission, :case_created, :case_completed, legal_aid_application: application)
       end
     end
 

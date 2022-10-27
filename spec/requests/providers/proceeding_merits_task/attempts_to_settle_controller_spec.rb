@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type: :request do
-  let(:legal_aid_application) { create :legal_aid_application, :with_multiple_proceedings_inc_section8 }
-  let(:smtl) { create :legal_framework_merits_task_list, legal_aid_application: }
+RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
+  let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
+  let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application:) }
   let(:provider) { legal_aid_application.provider }
   let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE014") }
   let(:next_page) { :merits_task_lists }
@@ -66,9 +66,9 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController, type
 
         context "when the application is in draft" do
           let(:legal_aid_application) do
-            create :legal_aid_application,
+            create(:legal_aid_application,
                    :with_multiple_proceedings_inc_section8,
-                   :draft
+                   :draft)
           end
 
           it "redirects provider back to the merits task list" do

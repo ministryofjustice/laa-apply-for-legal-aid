@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe DocumentCategory, type: :model do
+RSpec.describe DocumentCategory do
   it {
     is_expected.to respond_to(:name,
                               :submit_to_ccms,

@@ -2,16 +2,16 @@ require "rails_helper"
 
 module CFE
   module V1
-    RSpec.describe Result, type: :model do
-      let(:eligible_result) { create :cfe_v1_result }
-      let(:not_eligible_result) { create :cfe_v1_result, :not_eligible }
-      let(:contribution_required_result) { create :cfe_v1_result, :contribution_required }
-      let(:contribution_and_restriction_result) { create :cfe_v1_result, :contribution_required, submission: cfe_submission }
-      let(:no_additional_properties) { create :cfe_v1_result, :no_additional_properties }
-      let(:additional_property) { create :cfe_v1_result, :with_additional_properties }
+    RSpec.describe Result do
+      let(:eligible_result) { create(:cfe_v1_result) }
+      let(:not_eligible_result) { create(:cfe_v1_result, :not_eligible) }
+      let(:contribution_required_result) { create(:cfe_v1_result, :contribution_required) }
+      let(:contribution_and_restriction_result) { create(:cfe_v1_result, :contribution_required, submission: cfe_submission) }
+      let(:no_additional_properties) { create(:cfe_v1_result, :no_additional_properties) }
+      let(:additional_property) { create(:cfe_v1_result, :with_additional_properties) }
       let(:capital_result) { contribution_required_result.capital }
-      let(:legal_aid_application) { create :legal_aid_application, :with_restrictions, :with_cfe_v1_result }
-      let(:cfe_submission) { create :cfe_submission, legal_aid_application: }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_restrictions, :with_cfe_v1_result) }
+      let(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
       let(:expected_capital_result_keys) do
         %i[
           total_liquid
