@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_26_095914) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_27_065931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -717,6 +717,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_26_095914) do
     t.index ["proceeding_id", "involved_child_id"], name: "index_proceeding_involved_child", unique: true
   end
 
+  create_table "prohibited_steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id", null: false
+    t.boolean "uk_removal"
+    t.string "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proceeding_id"], name: "index_prohibited_steps_on_proceeding_id"
+  end
+
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "username", null: false
     t.string "type"
@@ -930,6 +939,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_26_095914) do
   add_foreign_key "opponents", "legal_aid_applications"
   add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "proceedings", "legal_aid_applications"
+  add_foreign_key "prohibited_steps", "proceedings"
   add_foreign_key "providers", "firms"
   add_foreign_key "providers", "offices", column: "selected_office_id"
   add_foreign_key "regular_transactions", "legal_aid_applications", on_delete: :cascade
