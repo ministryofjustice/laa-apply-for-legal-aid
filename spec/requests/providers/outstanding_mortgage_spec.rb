@@ -11,7 +11,7 @@ RSpec.describe Providers::OutstandingMortgagesController do
   end
 
   describe "GET /providers/applications/:id/outstanding_mortgage" do
-    subject { get providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application) }
+    subject { get providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { subject }
@@ -33,7 +33,7 @@ RSpec.describe Providers::OutstandingMortgagesController do
   end
 
   describe "PATCH /providers/applications/:id/outstanding_mortgage" do
-    subject { patch providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
+    subject { patch providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:submit_button) do
       { continue_button: "Continue" }

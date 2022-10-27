@@ -56,7 +56,7 @@ RSpec.describe Providers::Means::PropertyValuesController do
             let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_own_home_mortgaged) }
 
             it "redirects to the outstanding mortgage question" do
-              expect(response).to redirect_to providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application)
+              expect(response).to redirect_to providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application)
             end
           end
 

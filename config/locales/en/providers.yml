@@ -327,7 +327,7 @@ en:
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
         hints:
           offline_savings_accounts: For example, a Post Office savings account.
-          offline_savings_amount: Enter the total amount in all accounts.
+        offline_savings_amount_label: Enter the total amount in all accounts.
     can_client_use_truelayers:
       show:
         error: Select if your client can share their bank statements using online banking
@@ -869,6 +869,10 @@ en:
           second_home_mortgage: Enter the outstanding mortgage amount
           second_home_percentage: Enter the share your client owns
           second_home_value: Enter the estimated value
+      outstanding_mortgages:
+        show:
+          h1-heading: What is the outstanding mortgage?
+          field_set_header: What is the outstanding mortgage on your client's home?
       restrictions:
         show:
           h1-heading: Is your client prohibited from selling or borrowing against their assets?
@@ -1150,10 +1154,6 @@ en:
           maintenance_out: View statements and add transactions
           legal_aid: View statements and add transactions
         you_need_to: "You need to:"
-    outstanding_mortgages:
-      show:
-        h1-heading: What is the outstanding mortgage?
-        field_set_header: What is the outstanding mortgage on your client's home?
 
     proceedings_types:
       create:
