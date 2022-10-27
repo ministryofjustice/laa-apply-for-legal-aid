@@ -37,6 +37,7 @@ module Flow
         client_denial_of_allegation: :client_denial_of_allegations,
         client_offer_of_undertakings: :client_offered_undertakings,
         specific_issue: :specific_issue,
+        prohibited_steps: :prohibited_steps,
       }[task]
     end
 
