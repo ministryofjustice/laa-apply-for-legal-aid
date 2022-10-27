@@ -1,47 +1,33 @@
 <div class="govuk-details govuk-!-margin-top-6" data-module="govuk-details">
-    <h2 class="govuk-heading-l">
-      <%= t('.client_eligibility_calculation') %>
-    </h2>
+  <h2 class="govuk-heading-l">
+    <%= t('.client_eligibility_calculation') %>
+  </h2>
 
-  <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-breakdown">
+  <%= govuk_accordion do |accordion| %>
+    <% accordion.section(heading_text: t(".income_calculation")) do %>
+      <p class="govuk-hint"><%= t(".hint_text") %></p>
 
-    <div class="govuk-accordion__section ">
-      <div class="govuk-accordion__section-header">
-        <h2 class="govuk-accordion__section-heading">
-        <span class="govuk-accordion__section-button" id="accordion-income-calculation">
-          <%= t('.income_calculation') %>
-        </span>
-        </h2>
-      </div>
-      <div class="govuk-accordion__section-content">
-        <p class="govuk-hint"><%= t('.hint_text') %></p>
-      </div>
       <% if @legal_aid_application.uploading_bank_statements? %>
-        <%= render('bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+        <%= render("bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
       <% end %>
-      <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
-        <%= render 'employment_income' %>
-      <% end %>
-      <%= render 'other_income' %>
-      <%= render 'outgoings' %>
-      <%= render 'deductions' %>
-      <%= render 'disposable_income' %>
-    </div>
 
-    <div class="govuk-accordion__section ">
-      <div class="govuk-accordion__section-header">
-        <h2 class="govuk-accordion__section-heading">
-        <span class="govuk-accordion__section-button" id="accordion-capital-calculation">
-          <%= t('.capital_calculation') %>
-        </span>
-        </h2>
-      </div>
-        <%= render 'shared/property_results' %>
-        <%= render 'shared/vehicle_results' %>
-        <%= render 'shared/savings_and_investments' %>
-        <%= render 'shared/other_assets' %>
-        <%= render 'shared/total_capital' %>
-        <%= render 'shared/restrictions' %>
-    </div>
-  </div>
+      <% if @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? %>
+        <%= render "employment_income" %>
+      <% end %>
+
+      <%= render "other_income" %>
+      <%= render "outgoings" %>
+      <%= render "deductions" %>
+      <%= render "disposable_income" %>
+    <% end %>
+
+    <%= accordion.section(heading_text: t(".capital_calculation")) do %>
+      <%= render "shared/property_results" %>
+      <%= render "shared/vehicle_results" %>
+      <%= render "shared/savings_and_investments" %>
+      <%= render "shared/other_assets" %>
+      <%= render "shared/total_capital" %>
+      <%= render "shared/restrictions" %>
+    <% end %>
+  <% end %>
 </div>
