@@ -368,6 +368,10 @@ en:
           hint-text: Tell us if correspondence or mediation has been tried, or if no attempts have been made.
           attempts_made: Details
           error: Enter details of any attempts to settle
+      prohibited_steps:
+        show:
+          h1-heading: Is the prohibited step to prevent removal from the UK?
+          no-hint: What are you asking to be prohibited?
       success_prospects:
         show:
           h1-heading: What is the chance of a successful outcome?
