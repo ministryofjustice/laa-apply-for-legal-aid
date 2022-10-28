@@ -943,6 +943,7 @@ en:
         client_denial_of_allegation: Client denial of allegation
         client_offer_of_undertakings: Client offer of undertaking
         specific_issue: Specific Issue
+        prohibited_steps: Prohibited steps
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -959,6 +960,7 @@ en:
           client_denial_of_allegation: client_denial_of_allegation
           client_offer_of_undertakings: client_offered_undertakings
           specific_issue: specific_issue
+          prohibited_steps: prohibited_steps
     merits_reports:
       show:
         heading: Merits report
