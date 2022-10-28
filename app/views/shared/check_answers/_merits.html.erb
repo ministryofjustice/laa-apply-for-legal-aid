@@ -257,6 +257,23 @@
             ) %>
       </dl>
     <% end %>
+    <% if proceeding.prohibited_steps %>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-0 print-remove-border">
+        <%= check_answer_link(
+              name: :statement_of_case,
+              name: "#{proceeding.id}_prohibited_steps".to_sym,
+              url: providers_merits_task_list_prohibited_steps_path(proceeding),
+              question: t('.items.prohibited_steps'),
+              answer: yes_no(proceeding.prohibited_steps.uk_removal),
+              read_only: read_only,
+              no_border: true
+            ) %>
+      </dl>
+      <% unless proceeding.prohibited_steps.uk_removal %>
+        <div class="govuk-body"><%= proceeding.prohibited_steps.details %></div>
+      <% end %>
+      <%= render 'shared/check_answers/section_break' %>
+  <% end %>
   </section>
 <% end %>
 
