@@ -44,27 +44,54 @@ module LegalFramework
       end
 
       context "when a new question is returned by LFA that we cannot handle" do
-        before { allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_return(work_in_progress_response_hash) }
-
-        let(:expected_application_tasks) do
-          [
-            { name: :latest_incident_details, state: :not_started },
-            { name: :opponent_details, state: :not_started },
-            { name: :children_application, state: :not_started },
-            { name: :new_question_from_lfa, state: :ignored },
-          ]
+        before do
+          allow(Setting).to receive(:enable_loop?).and_return(enable_loop)
+          allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_return(work_in_progress_response_hash)
+          allow(I18n).to receive(:t).and_call_original
+          allow(I18n).to receive(:t).with(:nature_of_urgency, scope: "providers.merits_task_lists.task_list_item").and_return("nature_of_urgency")
+          # these two lines are only needed until the actual nature_of_urgency question is added
         end
 
-        let(:expected_proceeding_tasks) do
-          [
-            { name: :chances_of_success, state: :not_started },
-            { name: :new_proceeding_question_from_lfa, state: :ignored },
-          ]
+        context "and the enable_loop feature flag is off" do
+          let(:enable_loop) { false }
+          let(:expected_application_tasks) do
+            [
+              { name: :nature_of_urgency, state: :ignored },
+              { name: :latest_incident_details, state: :not_started },
+              { name: :opponent_details, state: :not_started },
+              { name: :children_application, state: :not_started },
+              { name: :new_question_from_lfa, state: :ignored },
+            ]
+          end
+
+          let(:expected_proceeding_tasks) do
+            [
+              { name: :chances_of_success, state: :not_started },
+              { name: :new_proceeding_question_from_lfa, state: :ignored },
+            ]
+          end
+
+          it "section 8 and unknown tasks are marked as ignore" do
+            expect(service.tasks[:application].map { |task| { name: task.name, state: task.state } }).to eq expected_application_tasks
+            expect(service.tasks[:proceedings][:DA001][:tasks].map { |task| { name: task.name, state: task.state } }).to eq expected_proceeding_tasks
+          end
         end
 
-        it "is marked as ignore" do
-          expect(service.tasks[:application].map { |task| { name: task.name, state: task.state } }).to eq expected_application_tasks
-          expect(service.tasks[:proceedings][:DA001][:tasks].map { |task| { name: task.name, state: task.state } }).to eq expected_proceeding_tasks
+        context "and the enable_loop feature flag is on" do
+          let(:enable_loop) { true }
+          let(:expected_application_tasks) do
+            [
+              { name: :nature_of_urgency, state: :not_started },
+              { name: :latest_incident_details, state: :not_started },
+              { name: :opponent_details, state: :not_started },
+              { name: :children_application, state: :not_started },
+              { name: :new_question_from_lfa, state: :ignored },
+            ]
+          end
+
+          it "section 8 task is shown but unknown tasks are still marked as ignore" do
+            expect(service.tasks[:application].map { |task| { name: task.name, state: task.state } }).to eq expected_application_tasks
+          end
         end
       end
 
@@ -106,6 +133,7 @@ module LegalFramework
         request_id: submission.id,
         application: {
           tasks: {
+            nature_of_urgency: [], # This has been created in LFA but should only be shown when the enable_loop flag is set
             latest_incident_details: [],
             opponent_details: [],
             children_application: [],
