@@ -81,8 +81,10 @@ module Providers
             end
 
             it "updates the record" do
-              expect(proceeding_two.specific_issue.reload.details).to eq(details)
-              expect(proceeding_two.specific_issue.reload.confirmed).to eq(confirmed)
+              expect(proceeding_two.specific_issue.reload).to have_attributes(
+                details:,
+                confirmed:,
+              )
             end
 
             it "redirects to provider applications home page" do
