@@ -172,6 +172,10 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     additional_information: -> { Faker::Lorem.sentence },
   },
   uploaded_evidence_collections: {},
+  urgencies: {
+    nature_of_urgency: -> { Faker::Lorem.sentence },
+    additional_information: -> { Faker::Lorem.sentence },
+  },
   vehicles: {},
 }
 @rules

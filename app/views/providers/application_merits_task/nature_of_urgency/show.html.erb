@@ -1,0 +1,14 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_nature_of_urgency_path,
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= page_template(page_title: t('.h1-heading'),
+                      template: :basic,
+                      back_link: {},
+                      form: form) do %>
+    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title} do %>
+    <% end %>
+  <% end %>
+<% end %>
