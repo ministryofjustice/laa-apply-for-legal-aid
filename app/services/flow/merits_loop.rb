@@ -39,6 +39,7 @@ module Flow
         specific_issue: :specific_issue,
         prohibited_steps: :prohibited_steps,
         laspo: :in_scope_of_laspos,
+        nature_of_urgency: :nature_of_urgency,
       }[task]
     end
 

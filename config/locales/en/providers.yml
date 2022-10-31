@@ -960,6 +960,7 @@ en:
         specific_issue: Specific Issue
         prohibited_steps: Prohibited steps
         laspo: Section 8 and LASPO
+        nature_of_urgency: Nature of urgency and hearing date
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -978,6 +979,7 @@ en:
           specific_issue: specific_issue
           prohibited_steps: prohibited_steps
           laspo: in_scope_of_laspo
+          nature_of_urgency: nature_of_urgency
     merits_reports:
       show:
         heading: Merits report

@@ -896,7 +896,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111422) do
   create_table "urgencies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.string "nature_of_urgency", null: false
-    t.boolean "hearing_date_set", default: false, null: false
+    t.boolean "hearing_date_set"
     t.date "hearing_date"
     t.string "additional_information"
     t.datetime "created_at", null: false

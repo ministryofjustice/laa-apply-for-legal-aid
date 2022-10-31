@@ -177,6 +177,11 @@ en:
               blank: Select yes if the client has offered undertakings
             additional_information:
               blank: Enter information to explain the merit of this application
+        application_merits_task/urgency:
+          attributes:
+            hearing_date:
+              blank: Enter a valid hearing date
+              date_not_valid: Enter a valid hearing date
         application_merits_task/opponent:
           attributes:
             full_name:
