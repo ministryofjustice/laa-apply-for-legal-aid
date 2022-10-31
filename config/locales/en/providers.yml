@@ -455,6 +455,11 @@ en:
       nature_of_urgency:
         show:
           h1-heading: What is the nature of the urgency?
+          no-hint: Give details of the specific work needed as a matter of urgency
+          hearing-date-set: Has a date been set for the hearing?
+          hearing-date: Enter the date
+          hearing-date-hint: For example, 12 11 2007
+          additional-information: Give us any information you have about when the hearing is likely to be held
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
