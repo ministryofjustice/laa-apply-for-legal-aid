@@ -134,6 +134,21 @@ module Providers
             end
           end
 
+          context "when the application has delegated functions on one or more more proceedings" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_proceedings_inc_section8) }
+            let(:smtl) { create(:legal_framework_merits_task_list, :da001_and_child_section_8_with_delegated_functions, legal_aid_application:) }
+
+            before do
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            end
+
+            it "redirects to the next page" do
+              subject
+              expect(response).to redirect_to providers_legal_aid_application_nature_of_urgency_path(legal_aid_application)
+            end
+          end
+
           context "when the application has a section 8 proceeding" do
             let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_multiple_proceedings_inc_section8) }
 
