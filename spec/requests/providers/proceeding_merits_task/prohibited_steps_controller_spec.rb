@@ -25,6 +25,12 @@ module Providers
 
           it_behaves_like "a provider not authenticated"
         end
+
+        context "when authenticated as a different provider" do
+          let(:login_provider) { login_as create(:provider) }
+
+          it_behaves_like "an authenticated provider from a different firm"
+        end
       end
 
       describe "PATCH /providers/applications/merits_task_list/:merits_task_list_id/prohibited_steps" do
