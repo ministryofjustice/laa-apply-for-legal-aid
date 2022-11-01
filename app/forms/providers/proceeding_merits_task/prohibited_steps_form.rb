@@ -7,13 +7,13 @@ module Providers
 
       validates :uk_removal, inclusion: { in: %w[true false] }
       validates :details, presence: true, if: :requires_details?
-
-      def save
-        details&.clear if uk_removal?
-        super
-      end
+      before_validation :clear_details, if: :uk_removal?
 
     private
+
+      def clear_details
+        attributes["details"] = nil
+      end
 
       def uk_removal?
         uk_removal.to_s == "true"

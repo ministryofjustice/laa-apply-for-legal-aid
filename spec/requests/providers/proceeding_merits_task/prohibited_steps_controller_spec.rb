@@ -63,7 +63,7 @@ module Providers
         it "creates a new prohibited_steps with the values entered" do
           expect { post_prohibited_steps }.to change(::ProceedingMeritsTask::ProhibitedSteps, :count).by(1)
           expect(prohibited_steps.uk_removal).to be_truthy
-          expect(prohibited_steps.details).to eq ""
+          expect(prohibited_steps.details).to be_nil
         end
 
         it "sets the task to complete" do
