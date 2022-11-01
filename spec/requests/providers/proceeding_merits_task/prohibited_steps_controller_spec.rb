@@ -108,6 +108,18 @@ module Providers
           end
         end
 
+        context "when a previous record exists and when saving new parameters" do
+          let(:prohibited_steps) { create(:prohibited_steps, :with_data, proceeding:) }
+          let(:uk_removal) { "true" }
+          let(:details) { "additional data about steps" } # simulates changing yes/no but leaving textarea populated but hidden
+
+          it "overwrites the values" do
+            expect(prohibited_steps).to have_attributes(uk_removal: false, details: "additional data about steps")
+            post_prohibited_steps
+            expect(prohibited_steps.reload).to have_attributes(uk_removal: true, details: nil)
+          end
+        end
+
         context "when save as draft selected" do
           let(:button_clicked) { draft_button }
 
