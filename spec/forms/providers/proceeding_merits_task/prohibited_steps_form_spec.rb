@@ -11,7 +11,7 @@ module Providers
           details:,
         }
       end
-      let(:uk_removal) { true }
+      let(:uk_removal) { "true" }
       let(:details) { nil }
 
       describe "#valid?" do
@@ -28,7 +28,7 @@ module Providers
         end
 
         context "when uk_removal is false" do
-          let(:uk_removal) { false }
+          let(:uk_removal) { "false" }
 
           context "and the additional information is missing" do
             it { expect(prohibited_steps_form).to be_invalid }

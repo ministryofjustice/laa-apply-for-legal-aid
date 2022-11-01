@@ -5,7 +5,7 @@ module Providers
 
       attr_accessor :uk_removal, :details, :proceeding_id
 
-      validate :uk_removal_presence
+      validates :uk_removal, inclusion: { in: %w[true false] }
       validates :details, presence: true, if: :requires_details?
 
       def save
@@ -14,10 +14,6 @@ module Providers
       end
 
     private
-
-      def uk_removal_presence
-        errors.add(:uk_removal, :blank) if uk_removal.to_s.blank?
-      end
 
       def uk_removal?
         uk_removal.to_s == "true"

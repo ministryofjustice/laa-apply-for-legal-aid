@@ -35,7 +35,7 @@ module Providers
           )
         end
 
-        let(:uk_removal) { true }
+        let(:uk_removal) { "true" }
         let(:details) { "" }
         let(:params) do
           {
@@ -87,7 +87,7 @@ module Providers
         end
 
         context "when incomplete" do
-          let(:uk_removal) { false }
+          let(:uk_removal) { "false" }
           let(:details) { "" }
           let(:regex) { /name: :prohibited_steps\n\s+dependencies: \*\d+\n\s+state: :not_started/ }
 
