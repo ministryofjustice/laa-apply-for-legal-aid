@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_111422) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_01_141154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -904,6 +904,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111422) do
     t.index ["legal_aid_application_id"], name: "index_urgencies_on_legal_aid_application_id"
   end
 
+  create_table "vary_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id", null: false
+    t.string "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proceeding_id"], name: "index_vary_orders_on_proceeding_id"
+  end
+
   create_table "vehicles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "estimated_value"
     t.decimal "payment_remaining"
@@ -964,5 +972,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111422) do
   add_foreign_key "undertakings", "legal_aid_applications"
   add_foreign_key "uploaded_evidence_collections", "legal_aid_applications"
   add_foreign_key "urgencies", "legal_aid_applications"
+  add_foreign_key "vary_orders", "proceedings"
   add_foreign_key "vehicles", "legal_aid_applications"
 end
