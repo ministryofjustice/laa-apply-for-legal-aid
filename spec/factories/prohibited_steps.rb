@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :prohibited_steps, class: "ProceedingMeritsTask::ProhibitedSteps" do
     uk_removal { true }
-    legal_aid_application
+    proceeding
 
     trait :with_data do
       uk_removal { false }
