@@ -27,7 +27,7 @@
           rows: 8
         ) %>
     <%= form.govuk_check_boxes_fieldset :confirmed, legend: nil do %>
-      <p><%= form.govuk_check_box :confirmed, true, '', multiple: false, label: { text: t('.confirmed') } %></p>
+      <p><%= form.govuk_check_box :confirmed, true, '', multiple: false, link_errors: true, label: { text: t('.confirmed') } %></p>
     <% end %>
     <%= next_action_buttons(show_draft: true, form: form) %>
   <% end %>
