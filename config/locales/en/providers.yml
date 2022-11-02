@@ -947,6 +947,7 @@ en:
         client_offer_of_undertakings: Client offer of undertaking
         specific_issue: Specific Issue
         prohibited_steps: Prohibited steps
+        laspo: Section 8 and LASPO
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -964,6 +965,7 @@ en:
           client_offer_of_undertakings: client_offered_undertakings
           specific_issue: specific_issue
           prohibited_steps: prohibited_steps
+          laspo: in_scope_of_laspo
     merits_reports:
       show:
         heading: Merits report
