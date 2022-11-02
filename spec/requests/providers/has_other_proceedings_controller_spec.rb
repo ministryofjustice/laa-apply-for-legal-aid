@@ -102,8 +102,8 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      it "redirects to the LASPO page" do
-        expect(response).to redirect_to(providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application))
+      it "no longer redirects to the LASPO page, but continues to delegated functions" do
+        expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
       end
     end
   end
