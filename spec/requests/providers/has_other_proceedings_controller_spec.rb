@@ -62,8 +62,9 @@ RSpec.describe Providers::HasOtherProceedingsController do
       let(:legal_aid_application) { create(:legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false) }
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      it "redirects to the page to add another proceeding type" do
-        expect(response.body).to include(I18n.t("providers.has_other_proceedings.show.must_add_domestic_abuse"))
+      it "stays on the page and displays an error" do
+        expect(response).to have_http_status(:ok)
+        expect(page).to have_error_message("has_other_proceeding.must_add_domestic_abuse")
       end
     end
 
@@ -72,7 +73,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
       it "stays on the page if there is a validation error" do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include(I18n.t("providers.has_other_proceedings.show.error"))
+        expect(page).to have_error_message("has_other_proceeding.blank")
       end
     end
 
@@ -84,7 +85,7 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
         it "stays on the page and displays an error" do
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include(I18n.t("providers.has_other_proceedings.show.must_add_domestic_abuse"))
+          expect(page).to have_error_message("has_other_proceeding.must_add_domestic_abuse")
         end
       end
 
@@ -118,6 +119,13 @@ RSpec.describe Providers::HasOtherProceedingsController do
           expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
         end
       end
+    end
+
+    def have_error_message(key)
+      have_css(
+        ".govuk-error-summary__list > li",
+        text: I18n.t(key, scope: "activemodel.errors.models.legal_aid_application.attributes"),
+      )
     end
   end
 

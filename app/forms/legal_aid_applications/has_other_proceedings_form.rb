@@ -4,9 +4,8 @@ module LegalAidApplications
 
     attr_accessor :has_other_proceeding
 
-    validate :radio_button_selected?
-
-    validate :at_least_one_domestic_abuse
+    validates :has_other_proceeding, presence: true, unless: :draft?
+    validate :at_least_one_domestic_abuse, unless: -> { draft? || has_other_proceeding? }
 
     delegate :proceedings, to: :model
 
@@ -14,18 +13,15 @@ module LegalAidApplications
       @draft = true
     end
 
-    def radio_button_selected?
-      return if draft?
-
-      errors.add(:has_other_proceeding, I18n.t("providers.has_other_proceedings.show.error")) if @has_other_proceeding.blank?
+    def has_other_proceeding?
+      @has_other_proceeding == "true"
     end
 
+  private
+
     def at_least_one_domestic_abuse
-      return if draft? || has_other_proceeding == "true"
-
-      return if proceedings_include_domestic_abuse?
-
-      errors.add(:has_other_proceeding, I18n.t("providers.has_other_proceedings.show.must_add_domestic_abuse"))
+      errors.add(:has_other_proceeding, :must_add_domestic_abuse) unless
+        proceedings_include_domestic_abuse?
     end
 
     def exclude_from_model
@@ -33,11 +29,7 @@ module LegalAidApplications
     end
 
     def proceedings_include_domestic_abuse?
-      proceedings.map(&:domestic_abuse?).include?(true)
-    end
-
-    def has_other_proceeding?
-      @has_other_proceeding == "true"
+      proceedings.any?(&:domestic_abuse?)
     end
   end
 end
