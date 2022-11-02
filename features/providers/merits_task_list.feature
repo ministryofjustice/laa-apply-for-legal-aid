@@ -31,6 +31,9 @@ Feature: Merits task list
     Then I should be on a page showing "Provide a statement of case"
     When I fill "Application merits task statement of case statement field" with "Statement of case"
     And I click 'Save and continue'
+    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application\nCOMPLETED'
     And I should see 'Children involved in this proceeding\nNOT STARTED'
     When I click the first link 'Chances of success'
@@ -129,4 +132,7 @@ Feature: Merits task list
     Then I upload an evidence file named 'hello_world.pdf'
     And I should see 'UPLOADED'
     When I click 'Save and continue'
+    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Statement of case\nCOMPLETED'
