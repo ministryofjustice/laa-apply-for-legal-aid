@@ -31,11 +31,11 @@ RSpec.describe "providers shared ownership request test" do
 
       describe "back link" do
         context "applicant owns with mortgage" do
-          before { get providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application) }
+          before { get providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application) }
 
           it "points to oustanding mortgage page" do
             subject
-            expect(response.body).to have_back_link(providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application, back: true))
+            expect(response.body).to have_back_link(providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application, back: true))
           end
         end
 

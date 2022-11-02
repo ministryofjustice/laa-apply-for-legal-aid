@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Providers::OutstandingMortgagesController do
+RSpec.describe Providers::Means::OutstandingMortgagesController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
   let(:params) do
@@ -11,10 +11,10 @@ RSpec.describe Providers::OutstandingMortgagesController do
   end
 
   describe "GET /providers/applications/:id/outstanding_mortgage" do
-    subject { get providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application) }
+    subject(:request) { get providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
-      before { subject }
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -22,7 +22,7 @@ RSpec.describe Providers::OutstandingMortgagesController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
       it "returns http success" do
@@ -33,7 +33,7 @@ RSpec.describe Providers::OutstandingMortgagesController do
   end
 
   describe "PATCH /providers/applications/:id/outstanding_mortgage" do
-    subject { patch providers_legal_aid_application_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
+    subject(:request) { patch providers_legal_aid_application_means_outstanding_mortgage_path(legal_aid_application), params: params.merge(submit_button) }
 
     let(:submit_button) do
       { continue_button: "Continue" }
@@ -44,7 +44,7 @@ RSpec.describe Providers::OutstandingMortgagesController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        subject
+        request
       end
 
       context "when submitted with the Continue button" do

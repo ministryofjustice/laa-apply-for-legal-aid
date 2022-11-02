@@ -49,7 +49,7 @@ en:
         info_2: Any personal data shared with a data processor for this purpose will be governed by model contract clauses under data protection law.
       details_of_transfer:
         header: Details of transfers to third country and safeguards
-        info_1: "It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to the European Economic Area (EEA)"
+        info_1: "It may sometimes be necessary to transfer personal information overseas. When this is needed, information may be transferred to the European Economic Area (EEA)."
         info_2: Any transfers made will be in full compliance with all aspects of the data protection law.
       retention_period:
         header: Retention period for information collected
@@ -89,7 +89,7 @@ en:
             withdraw consent at any time where relevant
             lodge a complaint with the supervisory authority
       more_details:
-        header: "The Data Protection Officer:"
+        header: "The Data Protection Officer"
         info_1: "The Data Protection Officer can provide details on:"
         list: |
           agreements we have with other organisations for sharing information
