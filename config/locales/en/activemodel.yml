@@ -319,13 +319,13 @@ en:
                 blank: Select yes if there are restrictions that prevent you from selling or borrowing against your assets
               providers:
                 blank: Select yes if your client is prohibited from selling or borrowing against their assets
-            in_scope_of_laspo:
-              blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             open_banking_consents:
               providers:
                 blank: Select yes if your client uses online banking
               citizens:
                 blank_html: Select yes if you agree to share your bank account information with the <abbr title='Legal Aid Agency'>LAA</abbr>
+            in_scope_of_laspo:
+              blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             outstanding_mortgage_amount:
               blank: Enter the outstanding mortgage amount
               greater_than_or_equal_to: Mortgage amount must be 0 or more
