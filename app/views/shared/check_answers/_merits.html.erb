@@ -156,6 +156,36 @@
   </section>
 <% end %>
 
+<% if @legal_aid_application.urgency %>
+  <div class="govuk-!-padding-bottom-6"></div>
+  <section class="print-no-break">
+    <%= check_answer_change_link(
+      name: :nature_of_urgency_heading,
+      url: providers_legal_aid_application_nature_of_urgency_path,
+      question: t('.nature_of_urgency_heading'),
+      read_only: read_only
+    ) %>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_no_link(
+        name: :nature_of_urgency,
+        question: t('.items.nature_of_urgency'),
+        answer: urgency.nature_of_urgency,
+        read_only: read_only
+      ) %>
+    </dl>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_no_link(
+        name: :hearing_date_set,
+        question: t('.items.hearing_date_set'),
+        answer: sanitize("#{yes_no(urgency.hearing_date_set)}<br>#{urgency.hearing_date}#{urgency.additional_information}"),
+        read_only: read_only
+      ) %>
+    </dl>
+  </section>
+<% end %>
+
 <% if @legal_aid_application.section_8_proceedings? %>
   <section class="print-no-break govuk-!-padding-top-6">
     <%= check_answer_change_link(
