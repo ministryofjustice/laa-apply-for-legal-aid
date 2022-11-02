@@ -258,6 +258,7 @@ Rails.application.routes.draw do
       resources :chances_of_success, only: %i[index create], controller: "proceeding_merits_task/chances_of_success"
       resource :success_prospects, only: %i[show update], controller: "proceeding_merits_task/success_prospects"
       resource :specific_issue, only: %i[show update], controller: "proceeding_merits_task/specific_issue"
+      resource :vary_order, only: %i[show update], controller: "proceeding_merits_task/vary_order"
     end
   end
 

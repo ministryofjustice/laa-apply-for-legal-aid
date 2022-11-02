@@ -1,0 +1,15 @@
+<%= form_with(
+      builder: GOVUKDesignSystemFormBuilder::FormBuilder,
+      model: @form,
+      url: providers_merits_task_list_vary_order_path(@proceeding),
+      method: :patch,
+      local: true
+    ) do |form| %>
+  <%= page_template(page_title: t('.h1-heading'),
+                    template: :basic,
+                    back_link: {},
+                    form: form) do %>
+    <%= form.govuk_text_area :details, label: {text: t('.hint-text')}, rows: 5 %>
+    <%= next_action_buttons(show_draft: true, form: form) %>
+  <% end %>
+<% end %>

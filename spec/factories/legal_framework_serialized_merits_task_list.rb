@@ -219,5 +219,30 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :da002_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              statement_of_case: [],
+              nature_of_urgency: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
+              },
+            },
+          ],
+        }
+      end
+    end
   end
 end
