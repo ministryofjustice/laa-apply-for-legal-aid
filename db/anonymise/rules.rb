@@ -140,6 +140,9 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   policy_disregards: {},
   proceedings: {},
   proceedings_linked_children: {},
+  prohibited_steps: {
+    details: -> { Faker::Lorem.sentence },
+  },
   providers: {
     username: -> { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" },
     name: -> { Faker::Name.name },

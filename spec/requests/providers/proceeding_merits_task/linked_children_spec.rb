@@ -53,15 +53,35 @@ module Providers
         before { legal_aid_application&.legal_framework_merits_task_list&.mark_as_complete!(:application, :children_application) }
 
         context "with all selected" do
-          before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success) }
+          context "when the application has a Child arrangements order (residence) proceeding" do
+            before { legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE014, :chances_of_success) }
 
-          it "adds involved children to the proceeding" do
-            expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
+            it "adds involved children to the proceeding" do
+              expect { subject }.to change { proceeding.proceeding_linked_children.count }.by(3)
+            end
+
+            it "redirects to the next unanswered question" do
+              subject
+              expect(response).to redirect_to(providers_merits_task_list_attempts_to_settle_path(proceeding))
+            end
           end
 
-          it "redirects to the next unanswered question" do
-            subject
-            expect(response).to redirect_to(providers_merits_task_list_attempts_to_settle_path(proceeding))
+          context "when the application contains a prohibited steps proceeding" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_involved_children, :with_proceedings, explicit_proceedings: %i[da001 se003]) }
+            let(:smtl) { create(:legal_framework_merits_task_list, :da001_as_defendant_se003, legal_aid_application:) }
+            let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE003") }
+
+            context "and all other steps are complete" do
+              before do
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE003, :chances_of_success)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE003, :attempts_to_settle)
+              end
+
+              it "redirects to the prohibited steps question" do
+                subject
+                expect(response).to redirect_to(providers_merits_task_list_prohibited_steps_path(proceeding))
+              end
+            end
           end
         end
 

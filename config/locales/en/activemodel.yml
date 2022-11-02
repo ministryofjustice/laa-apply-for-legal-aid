@@ -217,6 +217,12 @@ en:
               system_down: There was a problem uploading your file - try again
               no_file_chosen: You must choose at least one file
               blank: Attach a file or enter text
+        proceeding_merits_task/prohibited_steps:
+          attributes:
+            uk_removal:
+              inclusion: Select yes if the prohibited step is to remove your client from the UK
+            details:
+              blank: Enter information to explain what you would like prohibited
         applications/proceedings_form:
           attributes:
             code:
