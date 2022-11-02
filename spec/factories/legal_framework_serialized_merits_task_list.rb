@@ -11,6 +11,7 @@ FactoryBot.define do
             opponent_details: [],
             children_application: [],
             statement_of_case: [],
+            laspo: [],
           },
         },
         proceeding_types: [
@@ -91,6 +92,7 @@ FactoryBot.define do
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
               children_application: [],
+              laspo: [],
             },
           },
           proceeding_types: [
@@ -125,6 +127,7 @@ FactoryBot.define do
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
               children_application: [],
+              laspo: [],
             },
           },
           proceeding_types: [
@@ -160,6 +163,7 @@ FactoryBot.define do
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
               children_application: [],
+              laspo: [],
             },
           },
           proceeding_types: [
