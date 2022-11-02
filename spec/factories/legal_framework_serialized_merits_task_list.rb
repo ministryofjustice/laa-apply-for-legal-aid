@@ -112,5 +112,39 @@ FactoryBot.define do
         }
       end
     end
+    trait :da001_and_se004 do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              statement_of_case: [],
+              client_denial_of_allegation: [],
+              client_offer_of_undertakings: [],
+              children_application: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "SE004",
+              tasks: {
+                chances_of_success: [],
+                children_proceeding: [:children_application],
+                attempts_to_settle: [],
+                specific_issue: [],
+              },
+            },
+          ],
+        }
+      end
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_130541) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_26_095914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -820,6 +820,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_130541) do
     t.boolean "enhanced_bank_upload", default: false, null: false
   end
 
+  create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id", null: false
+    t.boolean "confirmed"
+    t.string "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proceeding_id"], name: "index_specific_issues_on_proceeding_id"
+  end
+
   create_table "state_machine_proxies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id"
     t.string "type"
@@ -928,6 +937,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_130541) do
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "scheduled_mailings", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "scope_limitations", "proceedings"
+  add_foreign_key "specific_issues", "proceedings"
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "statement_of_cases", "providers", column: "provider_uploader_id"
   add_foreign_key "undertakings", "legal_aid_applications"

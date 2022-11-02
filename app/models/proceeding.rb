@@ -4,7 +4,7 @@ class Proceeding < ApplicationRecord
   belongs_to :legal_aid_application
 
   has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
-
+  has_one :specific_issue, class_name: "ProceedingMeritsTask::SpecificIssue", dependent: :destroy
   has_one :chances_of_success, class_name: "ProceedingMeritsTask::ChancesOfSuccess", dependent: :destroy
 
   has_many :proceeding_linked_children, class_name: "ProceedingMeritsTask::ProceedingLinkedChild", dependent: :destroy

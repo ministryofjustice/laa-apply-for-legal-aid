@@ -221,6 +221,12 @@ en:
           attributes:
             code:
               blank: A proceeding must be selected
+        proceeding_merits_task/specific_issue:
+          attributes:
+            details:
+              blank: Enter details of the specific issue
+            confirmed:
+              blank: You must confirm this specific issue proceeding is not for a change of name application
         attachment:
           attributes:
             attachment_type:

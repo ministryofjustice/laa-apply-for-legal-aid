@@ -246,6 +246,17 @@
             ) %>
       </dl>
     <% end %>
+    <% if proceeding.specific_issue %>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+        <%= check_answer_link(
+              name: "#{proceeding.id}_specific_issue".to_sym,
+              url: providers_merits_task_list_specific_issue_path(proceeding),
+              question: t('.items.specific_issue'),
+              answer: proceeding.specific_issue.details,
+              read_only: read_only
+            ) %>
+      </dl>
+    <% end %>
   </section>
 <% end %>
 
