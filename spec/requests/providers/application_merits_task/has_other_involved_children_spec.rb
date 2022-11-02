@@ -61,15 +61,22 @@ module Providers
 
         context "when not adding more children" do
           let(:radio_button) { "false" }
+          let(:next_page) { :in_scope_of_laspos }
 
-          it "redirects to merits_task_list" do
+          before do
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
+          end
+
+          it "redirects to in scope of laspo" do
             subject
-            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
+            expect(response).to redirect_to(providers_legal_aid_application_in_scope_of_laspo_path(application))
           end
 
           it "sets the task to complete" do
             subject
-            expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+            expect(application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
           end
         end
 
