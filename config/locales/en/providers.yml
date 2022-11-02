@@ -1377,13 +1377,15 @@ en:
           details_incorrect: No, I need to change this date
       substantive_defaults:
         show:
+          h2_header: Substantive application
           question: Do you want to use the default level of service and scope for the substantive application?
           los_header: "Default level of service:"
           scope_header: "Default scope:"
           scope_description_header: "Scope description:"
       emergency_defaults:
         show:
-          question: For the emergency application, do you want to use the default level of service and scope?
+          h2_header: Emergency application
+          question: Do you want to use the default level of service and scope for the emergency application?
           los_header: "Default level of service:"
           scope_header: "Default scope:"
           scope_description_header: "Scope description:"

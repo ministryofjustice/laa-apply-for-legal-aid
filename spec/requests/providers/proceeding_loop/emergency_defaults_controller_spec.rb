@@ -40,7 +40,7 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
       it "displays the proceeding header" do
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
-        expect(response.body).to include("For the emergency application, do you want to use the default level of service and scope?")
+        expect(response.body).to include("Do you want to use the default level of service and scope for the emergency application?")
       end
     end
   end
