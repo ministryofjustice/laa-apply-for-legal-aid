@@ -12,16 +12,14 @@
             form: form
         ) do %>
 
-    <%= form.govuk_fieldset legend: {size: 'xl', tag: 'h1', text: page_title},
-                            caption: { text: @proceeding.meaning, size: 'xl' } do %>
-      <%= form.govuk_text_area(
+    <%= form.govuk_text_area(
           :attempts_made,
-          label: nil,
+          label: { size: 'xl', tag: 'h1', text: page_title },
+          caption: { text: @proceeding.meaning, size: 'xl' },
           hint: { text: t('.hint-text') },
           legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},
           rows: 8
         ) %>
-    <% end %>
 
     <div class="govuk-!-padding-bottom-2"></div>
 

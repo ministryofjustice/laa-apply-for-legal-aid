@@ -14,7 +14,7 @@ module Flow
           carry_on_sub_flow: true,
         },
         outstanding_mortgages: {
-          path: ->(application) { urls.providers_legal_aid_application_outstanding_mortgage_path(application) },
+          path: ->(application) { urls.providers_legal_aid_application_means_outstanding_mortgage_path(application) },
           forward: :shared_ownerships,
           carry_on_sub_flow: true,
         },

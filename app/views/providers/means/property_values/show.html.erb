@@ -6,16 +6,14 @@
         local: true) do |form| %>
   <%= page_template page_title: t('.h1-heading'), form: form, template: :basic do %>
 
-    <%= form.govuk_fieldset legend: { size: 'xl', tag: 'h1', text: page_title }  do %>
-      <%= form.govuk_text_field(
-              :property_value,
-              label: {text: :property_value, hidden: true},
-              hint: {text: t('.hint')},
-              value: number_to_currency_or_original_string(@form.property_value),
-              prefix_text: t('currency.gbp'),
-              width: 'one-third',
-              ) %>
-    <% end %>
+    <%= form.govuk_text_field(
+          :property_value,
+          label: {text: page_title, size: 'xl', tag: 'h1'},
+          hint: {text: t('.hint')},
+          value: number_to_currency_or_original_string(@form.property_value),
+          prefix_text: t('currency.gbp'),
+          width: 'one-third',
+          ) %>
 
     <%= next_action_buttons(
             show_draft: true,

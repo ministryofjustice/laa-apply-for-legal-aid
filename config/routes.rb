@@ -133,6 +133,7 @@ Rails.application.routes.draw do
         resources :dependants, only: %i[new show update]
         resources :remove_dependants, only: %i[show update]
         resource :has_other_dependants, only: %i[show update]
+        resource :outstanding_mortgage, only: %i[show update]
         resource :own_home, only: %i[show update]
         resource :property_value, only: %i[show update]
         resource :shared_ownership, only: %i[show update]
@@ -153,7 +154,6 @@ Rails.application.routes.draw do
       resource :address, only: %i[show update]
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
-      resource :outstanding_mortgage, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
         get "/list", to: "application_merits_task/statement_of_cases#list"
