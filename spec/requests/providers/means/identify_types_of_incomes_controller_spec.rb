@@ -211,6 +211,20 @@ RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
       end
     end
 
+    context "when benefits selected" do
+      let(:transaction_type_ids) { [benefits.id] }
+      let(:benefits) { create(:transaction_type, :benefits) }
+
+      before do
+        create(:transaction_type, :excluded_benefits, parent_id: benefits.id)
+      end
+
+      it "adds excluded_benefits transaction type as well as benefits" do
+        expect { request }.to change(LegalAidApplicationTransactionType, :count).by(2)
+        expect(legal_aid_application.reload.transaction_types.pluck(:name)).to match_array(%w[benefits excluded_benefits])
+      end
+    end
+
     context "when checking answers" do
       subject(:request) { patch providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application), params: params.merge(submit_button) }
 

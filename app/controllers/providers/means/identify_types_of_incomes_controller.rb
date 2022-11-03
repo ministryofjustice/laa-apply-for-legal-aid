@@ -26,12 +26,17 @@ module Providers
 
     private
 
-      def legal_aid_application_params
-        params.require(:legal_aid_application).permit(transaction_type_ids: [])
+      def transaction_type_params
+        params
+          .require(:legal_aid_application)
+          .permit(:none_selected, transaction_type_ids: [])
       end
 
       def transaction_types
-        @transaction_types ||= TransactionType.credits.where(id: legal_aid_application_params[:transaction_type_ids])
+        @transaction_types ||= TransactionType
+          .credits
+          .without_housing_benefits
+          .with_children(ids: transaction_type_params[:transaction_type_ids])
       end
 
       def transaction_types_selected?
@@ -39,11 +44,11 @@ module Providers
       end
 
       def none_selected?
-        params[:legal_aid_application][:none_selected] == "true"
+        transaction_type_params[:none_selected] == "true"
       end
 
       def synchronize_credit_transaction_types
-        existing_credit_transaction_type_ids = legal_aid_application.transaction_types.credits.not_children.pluck(:id)
+        existing_credit_transaction_type_ids = legal_aid_application.transaction_types.credits.pluck(:id)
 
         keep = transaction_types.each_with_object([]) do |form_tt, arr|
           add_transaction_type(form_tt) if existing_credit_transaction_type_ids.exclude?(form_tt.id)
