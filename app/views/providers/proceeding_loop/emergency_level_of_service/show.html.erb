@@ -10,19 +10,11 @@
     <% if form.object.levels_of_service.length > 1 %>
       <%= form.govuk_radio_buttons_fieldset(:emergency_level_of_service, legend: { text: t('.instruction'), tag: 'h2', size: 'm'} ) do %>
         <% form.object.levels_of_service.each do |level| %>
+          <% hint = level["name"] == "Full Representation" ? t('.hint_text') : '' %>
           <%= form.govuk_radio_button :emergency_level_of_service, level["level"],
                                       link_errors: true,
-                                      label: { text: level["name"] } do %>
-            <% if level["name"] == "Full Representation" %>
-              <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                  <span class="govuk-warning-text__assistive"><%= t('.warning') %></span>
-                  <%= t('.warning') %>
-                </strong>
-              </div>
-            <% end %>
-          <% end %>
+                                      label: { text: level["name"] },
+                                      hint: { text: hint } %>
         <% end %>
       <% end %>
     <% else %>
