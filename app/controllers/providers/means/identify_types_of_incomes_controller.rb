@@ -31,7 +31,8 @@ module Providers
       end
 
       def transaction_types
-        @transaction_types ||= TransactionType.credits.where(id: legal_aid_application_params[:transaction_type_ids])
+        @transaction_types ||= TransactionType.credits.find_with_children(legal_aid_application_params[:transaction_type_ids])
+        # @transaction_types ||= TransactionType.credits.where(id: legal_aid_application_params[:transaction_type_ids])
       end
 
       def transaction_types_selected?
