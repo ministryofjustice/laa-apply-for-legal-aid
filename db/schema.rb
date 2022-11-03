@@ -645,6 +645,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_162032) do
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 
+  create_table "opponents_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proceeding_id", null: false
+    t.boolean "has_opponents_application"
+    t.string "reason_for_applying"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proceeding_id"], name: "index_opponents_applications_on_proceeding_id"
+  end
+
   create_table "other_assets_declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "legal_aid_application_id", null: false
     t.decimal "second_home_value"
@@ -965,6 +974,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_02_162032) do
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"
   add_foreign_key "opponents", "legal_aid_applications"
+  add_foreign_key "opponents_applications", "proceedings"
   add_foreign_key "policy_disregards", "legal_aid_applications"
   add_foreign_key "proceedings", "legal_aid_applications"
   add_foreign_key "prohibited_steps", "proceedings"

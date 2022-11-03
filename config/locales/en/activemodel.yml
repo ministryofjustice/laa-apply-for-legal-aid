@@ -240,9 +240,9 @@ en:
               blank: Enter information to explain what you would like prohibited
         proceeding_merits_task/opponents_application:
           attributes:
-            uk_removal:
+            has_opponents_application:
               inclusion: Select yes if you have a copy of the opponent's application to the court or a copy of the court order
-            details:
+            reason_for_applying:
               blank: Enter information to explain why you are applying for legal aid at this stage
         applications/proceedings_form:
           attributes:
