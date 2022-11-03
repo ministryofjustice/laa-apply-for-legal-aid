@@ -256,6 +256,7 @@ Rails.application.routes.draw do
     end
 
     resources :merits_task_list, only: [] do
+      resource :opponents_application, only: %i[show update], controller: "proceeding_merits_task/opponents_application"
       resource :attempts_to_settle, only: %i[show update], controller: "proceeding_merits_task/attempts_to_settle"
       resource :linked_children, only: %i[show update], controller: "proceeding_merits_task/linked_children"
       resource :prohibited_steps, only: %i[show update], controller: "proceeding_merits_task/prohibited_steps"

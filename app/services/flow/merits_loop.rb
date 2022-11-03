@@ -42,6 +42,7 @@ module Flow
         laspo: :in_scope_of_laspos,
         nature_of_urgency: :nature_of_urgencies,
         vary_order: :vary_order,
+        opponents_application: :opponents_application,
       }[task]
     end
 
