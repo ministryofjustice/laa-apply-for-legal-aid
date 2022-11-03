@@ -179,9 +179,15 @@ en:
               blank: Enter information to explain the merit of this application
         application_merits_task/urgency:
           attributes:
+            nature_of_urgency:
+              blank: Enter the nature of the urgency
+            hearing_date_set:
+              blank: Select yes if the hearing date has been set
             hearing_date:
               blank: Enter a valid hearing date
               date_not_valid: Enter a valid hearing date
+            additional_information:
+              blank: Enter any information about when the hearing is likely to be held
         application_merits_task/opponent:
           attributes:
             full_name:
