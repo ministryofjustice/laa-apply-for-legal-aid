@@ -2,8 +2,23 @@ require "rails_helper"
 
 RSpec.describe Providers::Means::IdentifyTypesOfIncomesController do
   let(:legal_aid_application) { create(:legal_aid_application) }
-  let!(:outgoing_types) { create_list(:transaction_type, 3, :debit_with_standard_name) }
-  let!(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
+
+  let!(:outgoing_types) do
+    [
+      create(:transaction_type, :rent_or_mortgage),
+      create(:transaction_type, :maintenance_out),
+      create(:transaction_type, :child_care),
+    ]
+  end
+
+  let!(:income_types) do
+    [
+      create(:transaction_type, :benefits),
+      create(:transaction_type, :pension),
+      create(:transaction_type, :maintenance_in),
+    ]
+  end
+
   let(:non_child_income_types) { income_types.reject(&:child?) }
   let(:provider) { legal_aid_application.provider }
   let(:login) { login_as provider }
