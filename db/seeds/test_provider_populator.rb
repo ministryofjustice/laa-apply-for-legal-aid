@@ -44,17 +44,20 @@ class TestProviderPopulator
     return if HostEnv.production?
 
     TEST_PROVIDERS.each { |username, details| populate_provider(username, details) }
-    populate_firm_permissions
+    populate_all_firm_permissions
   end
 
 private
 
-  def populate_firm_permissions
+  def populate_all_firm_permissions
     passported_permission = Permission.find_by(role: "application.passported.*")
     non_passported_permission = Permission.find_by(role: "application.non_passported.*")
+    employment_permission = Permission.find_by(role: "application.non_passported.employment.*")
+
     Firm.all.each do |firm|
-      firm.permissions << passported_permission unless firm.permissions.map(&:role).include?("application.passported.*")
-      firm.permissions << non_passported_permission unless firm.permissions.map(&:role).include?("application.non_passported.*")
+      firm.permissions << passported_permission unless firm.permissions.include?(passported_permission)
+      firm.permissions << non_passported_permission unless firm.permissions.include?(non_passported_permission)
+      firm.permissions << employment_permission unless firm.permissions.include?(employment_permission)
       firm.save!
     end
   end
