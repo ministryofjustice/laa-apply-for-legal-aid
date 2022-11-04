@@ -85,6 +85,42 @@ RSpec.describe TransactionType do
     end
   end
 
+  describe ".with_children" do
+    subject(:with_children) { described_class.with_children(ids:) }
+
+    let!(:benefits) { create(:transaction_type, :benefits) }
+    let!(:maintenance_in) { create(:transaction_type, :maintenance_in) }
+    let!(:excluded_benefits) do
+      create(
+        :transaction_type,
+        :excluded_benefits,
+        parent_id: benefits.id,
+      )
+    end
+
+    context "when ids are present" do
+      let(:ids) { [benefits.id, maintenance_in.id] }
+
+      it "returns only matching transaction types and their children" do
+        _maintenance_out = create(:transaction_type, :maintenance_out)
+
+        expect(with_children).to contain_exactly(
+          benefits,
+          excluded_benefits,
+          maintenance_in,
+        )
+      end
+    end
+
+    context "when ids are not present" do
+      let(:ids) { nil }
+
+      it "returns an empty relation" do
+        expect(with_children).to be_empty
+      end
+    end
+  end
+
   context "with hierarchies" do
     before { Populators::TransactionTypePopulator.call }
 

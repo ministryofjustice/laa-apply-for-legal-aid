@@ -46,6 +46,7 @@ Feature: Non-passported applicant journeys
 
     Then I should be on the 'identify_types_of_income' page showing "Which payments does your client receive?"
     Then I select 'Benefits'
+    And I select 'Financial help from friends or family'
     And I click 'Save and continue'
 
     Then I should be on a page with title "Select payments your client receives in cash"
@@ -65,9 +66,26 @@ Feature: Non-passported applicant journeys
     And I click 'Save and continue'
 
     Then I should be on the 'income_summary' page showing "Sort your client's income into categories"
+    And the following sections should exist:
+      | tag | section |
+      | h2  | 1. Benefits |
+      | h2  | Disregarded benefits |
+      | h2  | 2. Financial help from friends or family |
+
+    And I should not see "Housing benefit"
+
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
     And I click 'Save and continue'
+
+    Then I click the '2nd' link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+
+    Then I click the '3rd' link 'View statements and add transactions'
+    Then I select the first checkbox
+    And I click 'Save and continue'
+
     Then I click 'Save and continue'
 
     Then I should be on the 'outgoings_summary' page showing "Sort your client's regular payments into categories"
