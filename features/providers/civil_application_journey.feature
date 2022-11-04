@@ -247,9 +247,6 @@ Feature: Civil application journeys
     Then I should be on a page showing 'Do you want to add another proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?"
-    When I choose 'No'
-    Then I click 'Save and continue'
     Then I should be on the 'used_multiple_delegated_functions' page showing 'Which proceedings have you used delegated functions for?'
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'

@@ -406,6 +406,9 @@ en:
       date_client_told_incidents:
         show:
           h1-heading: Latest incident details
+      in_scope_of_laspos:
+        show:
+          page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
       opponents:
         show:
           h1-heading: Opponent details
@@ -948,6 +951,7 @@ en:
         client_offer_of_undertakings: Client offer of undertaking
         specific_issue: Specific Issue
         prohibited_steps: Prohibited steps
+        laspo: Section 8 and LASPO
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -965,6 +969,7 @@ en:
           client_offer_of_undertakings: client_offered_undertakings
           specific_issue: specific_issue
           prohibited_steps: prohibited_steps
+          laspo: in_scope_of_laspo
     merits_reports:
       show:
         heading: Merits report
@@ -1190,9 +1195,6 @@ en:
         remove: Remove
         error: Select yes if you want to add another proceeding
         must_add_domestic_abuse: You must add at least one domestic abuse proceeding
-    in_scope_of_laspos:
-      show:
-        page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
     providers:
       show:
         account_number: Account number

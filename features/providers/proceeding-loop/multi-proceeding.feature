@@ -6,9 +6,6 @@ Feature: proceeding-loop
     And I have started an application with multiple proceedings
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?"
-    When I choose 'No'
-    And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 2\nInherent jurisdiction high court injunction\nWhat is your client’s role in this proceeding?'
     When I choose 'Applicant/claimant/petitioner'
     And I click 'Save and continue'
@@ -23,6 +20,7 @@ Feature: proceeding-loop
     And I enter the 'delegated functions on' date of 5 days ago
     When I click 'Save and continue'
     When I click the 'back' link 5 times
-    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?"
+    Then I should be on the 'has_other_proceedings' page showing "Do you want to add another proceeding?"
+    When I choose 'No'
     When I click 'Save and continue' 5 times
     Then I should be on the 'limitations' page showing 'Inherent jurisdiction high court injunction'

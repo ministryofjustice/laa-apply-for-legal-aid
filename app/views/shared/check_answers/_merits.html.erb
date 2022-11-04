@@ -157,9 +157,7 @@
 <% end %>
 
 <% if @legal_aid_application.section_8_proceedings? %>
-  <div class="govuk-!-padding-bottom-6"></div>
-  <section class="print-no-break">
-
+  <section class="print-no-break govuk-!-padding-top-6">
     <%= check_answer_change_link(
         name: :involved_children,
         url: providers_legal_aid_application_has_other_involved_children_path(@legal_aid_application),
@@ -167,7 +165,7 @@
         read_only: read_only
       ) %>
     <% @legal_aid_application.involved_children.each_with_index do |child, i| %>
-      <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <dl class="govuk-summary-list govuk-!-margin-bottom-2 ">
         <%= check_answer_no_link(
               name: "involved_child_#{i+1}".to_sym,
               question: "#{t('.items.child')} #{i+1}",
@@ -177,6 +175,16 @@
             ) %>
       </dl>
     <% end %>
+    <h2 class="govuk-heading-m govuk-!-padding-top-6"><%= t '.laspo.heading' %></h2>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <%= check_answer_link(
+            name: :in_scope_of_laspo,
+            url: providers_legal_aid_application_in_scope_of_laspo_path(@legal_aid_application),
+            question: t('.laspo.question'),
+            answer: yes_no(@legal_aid_application.in_scope_of_laspo),
+            read_only: read_only
+          ) %>
+    </dl>
   </section>
 <% end %>
 

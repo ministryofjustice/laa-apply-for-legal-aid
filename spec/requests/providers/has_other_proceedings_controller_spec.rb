@@ -9,8 +9,12 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
+  let(:mini_loop?) { false }
 
-  before { login_as provider }
+  before do
+    allow(Setting).to receive(:enable_mini_loop?).and_return(mini_loop?)
+    login_as provider
+  end
 
   describe "GET /providers/:application_id/has_other_proceedings" do
     subject! do
@@ -102,8 +106,17 @@ RSpec.describe Providers::HasOtherProceedingsController do
 
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      it "redirects to the LASPO page" do
-        expect(response).to redirect_to(providers_legal_aid_application_in_scope_of_laspo_path(legal_aid_application))
+      it "redirects to multiple delegated functions" do
+        expect(response).to redirect_to(providers_legal_aid_application_used_multiple_delegated_functions_path(legal_aid_application))
+      end
+
+      context "when the mini-loop is on" do
+        let(:mini_loop?) { true }
+
+        it "redirects to the first incomplete proceedings client involvement type page" do
+          proceeding_id = legal_aid_application.proceedings.in_order_of_addition.incomplete.first.id
+          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
+        end
       end
     end
   end

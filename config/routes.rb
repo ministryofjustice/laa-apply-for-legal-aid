@@ -148,7 +148,6 @@ Rails.application.routes.draw do
       resource :delete, controller: :delete, only: %i[show destroy]
       resources :proceedings_types, only: %i[index create]
       resource :has_other_proceedings, only: %i[show update destroy]
-      resource :in_scope_of_laspo, only: %i[show update]
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :address, only: %i[show update]
@@ -192,6 +191,7 @@ Rails.application.routes.draw do
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
       resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
       resource :client_offered_undertakings, only: %i[show update], controller: "application_merits_task/client_offered_undertakings"
+      resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do

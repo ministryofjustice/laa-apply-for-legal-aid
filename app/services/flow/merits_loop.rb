@@ -38,6 +38,7 @@ module Flow
         client_offer_of_undertakings: :client_offered_undertakings,
         specific_issue: :specific_issue,
         prohibited_steps: :prohibited_steps,
+        laspo: :in_scope_of_laspos,
       }[task]
     end
 

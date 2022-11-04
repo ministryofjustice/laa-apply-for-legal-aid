@@ -106,9 +106,6 @@ Feature: Pathways from check your answers
     And I should be on a page showing 'Child arrangements order (contact)'
     Then I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?"
-    Then I choose 'Yes'
-    And I click 'Save and continue'
     Then I should be on a page showing 'Which proceedings have you used delegated functions for?'
     Then I select 'I have not used delegated functions'
     And I click 'Save and continue'
@@ -117,8 +114,6 @@ Feature: Pathways from check your answers
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
     And I should be on a page showing 'Child arrangements order (contact)'
-    And I should be on a page showing 'LASPO'
-    And the answer for 'in scope of laspo' should be 'Yes'
 
   @javascript @vcr
   Scenario: I go back and change the delegated functions on an application with multiple proceedings
