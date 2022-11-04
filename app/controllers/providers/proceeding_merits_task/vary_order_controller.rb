@@ -7,7 +7,7 @@ module Providers
 
       def update
         @form = VaryOrderForm.new(form_params.merge(proceeding_id: proceeding.id))
-        render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :reason_for_new_application)
+        render :show unless update_task_save_continue_or_draft(proceeding.ccms_code.to_sym, :vary_order)
       end
 
     private
