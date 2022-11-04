@@ -80,6 +80,7 @@ FactoryBot.define do
         }
       end
     end
+
     trait :da001_as_defendant_and_child_section_8 do
       lfa_response do
         {

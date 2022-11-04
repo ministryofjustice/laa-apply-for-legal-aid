@@ -210,30 +210,6 @@ FactoryBot.define do
       client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
-    trait :se007 do
-      lead_proceeding { false }
-      ccms_code { "SE007" }
-      meaning { "Vary/Discharge Prohib Steps Order-S8" }
-      description { "to be represented on an application to vary or discharge a prohibited steps order." }
-      substantive_cost_limitation { 25_000 }
-      delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
-      after(:create) do |proceeding, evaluator|
-        create(:scope_limitation, :emergency, proceeding:) unless evaluator.no_scope_limitations
-        create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
-      end
-
-      used_delegated_functions { nil }
-      used_delegated_functions_on { nil }
-      used_delegated_functions_reported_on { nil }
-      name { "vary_discharge_prohib_steps_s8" }
-      matter_type { "Section 8 orders" }
-      category_of_law { "Family" }
-      category_law_code { "MAT" }
-      ccms_matter_code { "KSEC8" }
-      client_involvement_type_ccms_code { "A" }
-      client_involvement_type_description { "Applicant/Claimant/Petitioner" }
-    end
-
     trait :se013 do
       lead_proceeding { false }
       ccms_code { "SE013" }

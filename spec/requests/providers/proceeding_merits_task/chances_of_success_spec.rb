@@ -168,6 +168,30 @@ module Providers
             expect(chances_of_success.success_prospect).to eq("likely")
           end
         end
+
+        context "when Form submitted using Continue button" do
+          let(:submit_button) { { continue_button: "Continue" } }
+
+          it "redirects provider back to the merits task list" do
+            subject
+            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+          end
+
+          context "with vary order issue task that is incomplete" do
+            let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da002]) }
+            let(:smtl) { create(:legal_framework_merits_task_list, :da002_as_applicant, legal_aid_application:) }
+            let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA002") }
+
+            before do
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA002, :chances_of_success)
+            end
+
+            it "routes to the specific issue task" do
+              subject
+              expect(response).to redirect_to(providers_merits_task_list_vary_order_path(proceeding))
+            end
+          end
+        end
       end
     end
   end

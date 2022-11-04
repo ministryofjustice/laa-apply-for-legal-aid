@@ -82,24 +82,6 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
           end
         end
 
-        context "when the vary order issue task is incomplete" do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se007]) }
-          let(:smtl) { create(:legal_framework_merits_task_list, :da001_and_se007, legal_aid_application:) }
-          let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE007") }
-
-          before do
-            allow(Flow::MeritsLoop).to receive(:forward_flow).and_call_original
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE007, :chances_of_success)
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE007, :children_proceeding)
-          end
-
-          it "routes to the specific issue task" do
-            subject
-            expect(response).to redirect_to(providers_merits_task_list_vary_order_path(proceeding))
-          end
-        end
-
         context "when the application is in draft" do
           let(:legal_aid_application) do
             create(:legal_aid_application,

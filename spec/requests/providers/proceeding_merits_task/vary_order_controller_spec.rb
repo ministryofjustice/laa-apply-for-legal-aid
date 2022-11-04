@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se007]) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da002]) }
   let(:login_provider) { login_as legal_aid_application.provider }
-  let(:smtl) { create(:legal_framework_merits_task_list, :da001_and_se007, legal_aid_application:) }
-  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "SE007") }
+  let(:smtl) { create(:legal_framework_merits_task_list, :da002_as_applicant, legal_aid_application:) }
+  let(:proceeding) { legal_aid_application.proceedings.find_by(ccms_code: "DA002") }
 
   describe "GET /providers/applications/merits_task_list/:merits_task_list_id/vary_order" do
     subject(:get_vary_order) { get providers_merits_task_list_vary_order_path(proceeding) }
@@ -63,8 +63,8 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "sets the vary_order task to complete" do
         post_vary_order
-        deserialized_se007_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :SE007, :tasks)
-        expect(deserialized_se007_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :complete))
+        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
+        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :complete))
       end
 
       it "redirects" do
@@ -83,8 +83,8 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "does not set the vary_order task to complete" do
         post_vary_order
-        deserialized_se007_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :SE007, :tasks)
-        expect(deserialized_se007_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :not_started))
+        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
+        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :not_started))
       end
     end
 
@@ -93,6 +93,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :nature_of_urgency)
       end
 
       it "redirects to the first proceeding merits task" do
@@ -101,15 +102,13 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       end
     end
 
-    context "when all previous application and proceeding merits tasks are completed for SE007" do
+    context "when all previous application and proceeding merits tasks are completed for DA002" do
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE007, :chances_of_success)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE007, :children_proceeding)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:SE007, :attempts_to_settle)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :nature_of_urgency)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA002, :chances_of_success)
       end
 
       it "redirects to the providers merits task list page" do
@@ -142,8 +141,8 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "does not set the task to complete" do
         post_vary_order
-        deserialized_se007_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :SE007, :tasks)
-        expect(deserialized_se007_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :not_started))
+        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
+        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :reason_for_new_application, state: :not_started))
       end
     end
   end
