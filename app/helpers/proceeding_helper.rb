@@ -11,21 +11,22 @@ module ProceedingHelper
   end
 
   def scope_limits(proceeding, scope_type)
-    proceeding
-      .scope_limitations
-      .where(scope_type:)
-      .map { |scope_limitation| scope_limitation_meaning(scope_limitation) }
+    scope_limitations = proceeding.scope_limitations
+                                  .where(scope_type:)
+                                  .map { |scope_limitation| scope_limitation_details(scope_limitation) }
+                                  .join("<br><br>")
+    sanitize(scope_limitations)
   end
 
 private
 
-  def scope_limitation_meaning(scope_limitation)
-    scope_limitation_meaning = scope_limitation.meaning
+  def scope_limitation_details(scope_limitation)
+    scope_limitation_details = "#{scope_limitation.meaning}<br>#{scope_limitation.description}"
     if scope_limitation.hearing_date
-      scope_limitation_meaning += "<br>Date: #{scope_limitation.hearing_date}"
+      scope_limitation_details += "<br>Date: #{scope_limitation.hearing_date}"
     elsif scope_limitation.limitation_note
-      scope_limitation_meaning += "<br>Note: #{scope_limitation.limitation_note}"
+      scope_limitation_details += "<br>Note: #{scope_limitation.limitation_note}"
     end
-    sanitize(scope_limitation_meaning)
+    scope_limitation_details
   end
 end

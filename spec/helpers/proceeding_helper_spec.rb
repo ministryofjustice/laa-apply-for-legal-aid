@@ -40,6 +40,7 @@ RSpec.describe ProceedingHelper do
           :scope_limitation,
           :emergency,
           meaning: "Special hearing",
+          description: "Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.",
           hearing_date: Date.new(2022, 12, 25),
         ),
         create(
@@ -79,10 +80,7 @@ RSpec.describe ProceedingHelper do
       let(:scope_type) { "emergency" }
 
       it "returns only the emergency scope limitation meanings" do
-        expect(scope_limitations).to contain_exactly(
-          "Special hearing<br>Date: 25 December 2022",
-          "Interim order",
-        )
+        expect(scope_limitations).to eq "Special hearing<br>Limited to Family Help (Higher) and to all steps necessary to negotiate and conclude a settlement.<br>Date: 25 December 2022<br><br>Interim order<br>Limited to all steps up to and including the hearing on [see additional limitation notes]"
       end
     end
 
@@ -90,10 +88,7 @@ RSpec.describe ProceedingHelper do
       let(:scope_type) { "substantive" }
 
       it "returns only the substantive scope limitation meanings" do
-        expect(scope_limitations).to contain_exactly(
-          "Final heading",
-          "General report<br>Note: This is a note",
-        )
+        expect(scope_limitations).to eq "Final heading<br>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.<br><br>General report<br>Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.<br>Note: This is a note"
       end
     end
   end
