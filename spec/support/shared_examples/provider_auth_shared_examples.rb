@@ -5,7 +5,7 @@ RSpec.shared_examples "a provider not authenticated" do
 end
 
 RSpec.shared_examples "an authenticated provider from a different firm" do
-  it "redirects the user to the login page" do
+  it "redirects the user to the access denied page" do
     expect(response).to redirect_to(error_path(:access_denied))
   end
 end
