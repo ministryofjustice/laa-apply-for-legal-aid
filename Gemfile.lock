@@ -96,6 +96,10 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     ast (2.4.2)
+    async (2.3.1)
+      console (~> 1.10)
+      io-event (~> 1.1)
+      timers (~> 4.1)
     attr_extras (7.0.0)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
@@ -163,6 +167,8 @@ GEM
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.2.0)
     connection_pool (2.3.0)
+    console (1.16.2)
+      fiber-local
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -274,6 +280,7 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.15.5)
+    fiber-local (1.0.0)
     formatador (1.1.0)
     geckoboard-ruby (0.4.0)
     globalid (1.1.0)
@@ -373,6 +380,7 @@ GEM
     ice_nine (0.11.2)
     iniparse (1.5.0)
     interception (0.5)
+    io-event (1.1.6)
     jmespath (1.6.2)
     json (2.6.3)
     json_expressions (0.9.0)
@@ -685,6 +693,7 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     timeout (0.3.1)
+    timers (4.3.5)
     trailblazer-option (0.1.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -740,6 +749,7 @@ DEPENDENCIES
   action_dispatch-testing-integration-capybara!
   active_model_serializers (~> 0.10.13)
   addressable
+  async
   awesome_print (~> 1.9.2)
   aws-sdk-s3
   axe-core-cucumber
