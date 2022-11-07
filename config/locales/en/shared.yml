@@ -274,6 +274,8 @@ en:
           attempts_to_settle: What attempts have been made to settle the matter?
           specific_issue: What specific issue do you want to determine at court?
           prohibited_steps: Is the prohibited step to prevent removal from the UK?
+          opponents_application_question: Do you have a copy of the opponent's application to the court or a copy of the court order?
+          opponents_application_reason: Reason for applying for legal aid at this stage
           understands_terms_of_court_order: Does the opponent have the mental capacity to understand the terms of a court order?
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?

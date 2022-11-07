@@ -342,6 +342,26 @@
             ) %>
       </dl>
     <% end %>
+    <% if proceeding.opponents_application %>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+        <%= check_answer_link(
+              name: "#{proceeding.id}_opponents_application".to_sym,
+              url: providers_merits_task_list_opponents_application_path(proceeding),
+              question: t('.items.opponents_application_question'),
+              answer: yes_no(proceeding.opponents_application.has_opponents_application),
+              read_only: read_only
+            ) %>
+        <% if proceeding.opponents_application.reason_for_applying %>
+          <%= check_answer_link(
+                name: "#{proceeding.id}_opponents_application".to_sym,
+                url: providers_merits_task_list_opponents_application_path(proceeding),
+                question: t('.items.opponents_application_reason'),
+                answer: proceeding.opponents_application.reason_for_applying,
+                read_only: read_only
+              ) %>
+        <% end %>
+      </dl>
+    <% end %>
   </section>
 <% end %>
 
