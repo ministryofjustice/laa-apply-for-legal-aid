@@ -145,7 +145,7 @@ module Providers
 
             it "redirects to the next page" do
               subject
-              expect(response).to redirect_to providers_legal_aid_application_urgencies_path(legal_aid_application)
+              expect(response).to redirect_to providers_legal_aid_application_nature_of_urgencies_path(legal_aid_application)
             end
           end
 

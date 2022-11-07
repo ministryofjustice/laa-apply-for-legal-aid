@@ -1,6 +1,6 @@
 module Providers
   module ApplicationMeritsTask
-    class UrgenciesController < ProviderBaseController
+    class NatureOfUrgenciesController < ProviderBaseController
       def show
         @form = ApplicationMeritsTask::NatureOfUrgencyForm.new(model: urgency)
       end

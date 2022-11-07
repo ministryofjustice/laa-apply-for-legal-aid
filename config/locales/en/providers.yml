@@ -452,7 +452,7 @@ en:
         show:
           h1-heading: Has the client offered undertakings?
           no-hint: Tell us why the client has not offered undertakings. This will help us assess the application
-      urgencies:
+      nature_of_urgencies:
         show:
           h1-heading: What is the nature of the urgency?
           no-hint: Give details of the specific work needed as a matter of urgency
@@ -979,7 +979,7 @@ en:
           specific_issue: specific_issue
           prohibited_steps: prohibited_steps
           laspo: in_scope_of_laspo
-          nature_of_urgency: urgencies
+          nature_of_urgency: nature_of_urgencies
     merits_reports:
       show:
         heading: Merits report
