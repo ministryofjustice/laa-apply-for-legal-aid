@@ -218,6 +218,26 @@
   </section>
 <% end %>
 
+<% if @legal_aid_application.matter_opposition %>
+  <section class="print-no-break govuk-!-padding-top-6">
+    <%= check_answer_change_link(
+      name: :matter_opposed_reason_heading,
+      url: providers_legal_aid_application_matter_opposed_reason_path(@legal_aid_application),
+      question: t(".matter_opposed_reason_heading"),
+      read_only: read_only
+    ) %>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_no_link(
+        name: :matter_opposed_reason,
+        question: t(".items.matter_opposed_reason"),
+        answer: @legal_aid_application.matter_opposition.reason,
+        read_only: read_only
+      ) %>
+    </dl>
+  </section>
+<% end %>
+
 <%# TODO: The gateway evidence may not exist for an application transitioning to MP feature %>
 <% if gateway_evidence %>
   <div class="govuk-!-padding-bottom-6"></div>
