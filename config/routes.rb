@@ -192,7 +192,7 @@ Rails.application.routes.draw do
       resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
       resource :client_offered_undertakings, only: %i[show update], controller: "application_merits_task/client_offered_undertakings"
       resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
-      resource :nature_of_urgency, only: %i[show update], controller: "application_merits_task/nature_of_urgency"
+      resource :urgencies, only: %i[show update], controller: "application_merits_task/urgencies"
       resource :merits_task_list, only: %i[show update]
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
