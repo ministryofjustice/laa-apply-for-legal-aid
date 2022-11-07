@@ -258,6 +258,7 @@ en:
         evidence_upload_heading: Supporting evidence
         client_denial_of_allegation_heading: Client denial of allegation
         client_offer_of_undertakings_heading: Client offer of undertakings
+        nature_of_urgency_heading: Nature of urgency and hearing date
         evidence_types:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
@@ -281,6 +282,8 @@ en:
           gateway_evidence: Upload supporting evidence
           allegation_denies_all: Does the client wholly or substantially deny any allegations?
           undertaking_offered: Has the client offered undertakings?
+          nature_of_urgency: What is the nature of the urgency?
+          hearing_date_set: Has a date been set for the hearing?
       full_employment_details:
         employment: Employment income
         full_employment_details: Your client's employment details

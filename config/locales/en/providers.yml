@@ -452,6 +452,14 @@ en:
         show:
           h1-heading: Has the client offered undertakings?
           no-hint: Tell us why the client has not offered undertakings. This will help us assess the application
+      nature_of_urgencies:
+        show:
+          h1-heading: What is the nature of the urgency?
+          no-hint: Give details of the specific work needed as a matter of urgency
+          hearing-date-set: Has a date been set for the hearing?
+          hearing-date: Enter the date
+          hearing-date-hint: For example, 12 11 2007
+          additional-information: Give us any information you have about when the hearing is likely to be held
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
@@ -952,6 +960,7 @@ en:
         specific_issue: Specific Issue
         prohibited_steps: Prohibited steps
         laspo: Section 8 and LASPO
+        nature_of_urgency: Nature of urgency and hearing date
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -970,6 +979,7 @@ en:
           specific_issue: specific_issue
           prohibited_steps: prohibited_steps
           laspo: in_scope_of_laspo
+          nature_of_urgency: nature_of_urgencies
     merits_reports:
       show:
         heading: Merits report
