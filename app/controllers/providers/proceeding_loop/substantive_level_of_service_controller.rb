@@ -8,7 +8,13 @@ module Providers
 
       def update
         @form = Proceedings::SubstantiveLevelOfServiceForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        if @form.save
+          return continue_or_draft if draft_selected?
+
+          go_forward(work_type: :substantive)
+        else
+          render :show
+        end
       end
 
     private

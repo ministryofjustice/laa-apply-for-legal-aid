@@ -1412,6 +1412,11 @@ en:
       delegated_functions:
         show:
           question: Have you used delegated functions for this proceeding?
+      final_hearings:
+        show:
+          question: Has the case been listed for a final contested hearing?
+          hearing: When is the hearing?
+          details: Why have you selected full representation without a final hearing date?
       confirm_delegated_functions_date:
         show:
           question: Did you use delegated functions for this proceeding on %{date}?
