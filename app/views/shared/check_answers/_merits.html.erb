@@ -124,7 +124,7 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-2">
       <%= check_answer_link(
             name: :allegation_denies_all,
-            url: providers_legal_aid_application_client_denial_of_allegation_path,
+            url: providers_legal_aid_application_client_denial_of_allegation_path(@legal_aid_application),
             question: t('.items.allegation_denies_all'),
             answer: yes_no(allegation.denies_all),
             no_border: true,
@@ -144,7 +144,7 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-2">
       <%= check_answer_link(
             name: :undertaking_offered,
-            url: providers_legal_aid_application_client_offered_undertakings_path,
+            url: providers_legal_aid_application_client_offered_undertakings_path(@legal_aid_application),
             question: t('.items.undertaking_offered'),
             answer: yes_no(undertaking.offered),
             no_border: true,
@@ -161,7 +161,7 @@
   <section class="print-no-break">
     <%= check_answer_change_link(
       name: :nature_of_urgency_heading,
-      url: providers_legal_aid_application_nature_of_urgencies_path,
+      url: providers_legal_aid_application_nature_of_urgencies_path(@legal_aid_application),
       question: t('.nature_of_urgency_heading'),
       read_only: read_only
     ) %>
