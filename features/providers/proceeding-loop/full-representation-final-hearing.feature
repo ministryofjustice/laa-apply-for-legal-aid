@@ -42,7 +42,7 @@ Feature: Choosing full representation level of service in proceeding loop
     When I choose 'No'
     And I fill "final-hearing-details-field" with "Valid reasons for not listing the proceeding"
     And I click 'Save and continue'
-    Then I should see 'For the substantive application, select the scope' 
+    Then I should see 'For the substantive application, select the scope'
     When I select 'Blood Tests or DNA Tests'
     And I click 'Save and continue'
     Then I should be on the 'limitations' page showing 'Inherent jurisdiction high court injunction'
