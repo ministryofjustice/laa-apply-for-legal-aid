@@ -154,6 +154,7 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :check_benefit, only: %i[index update]
+      resource :has_national_insurance_number, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
         get "/list", to: "application_merits_task/statement_of_cases#list"
       end
