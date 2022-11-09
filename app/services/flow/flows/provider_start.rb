@@ -80,6 +80,10 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
           forward: :check_provider_answers,
         },
+        has_national_insurance_numbers: {
+          path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },
+          forward: :check_provider_answers,
+        },
         check_provider_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
           forward: :check_benefits,

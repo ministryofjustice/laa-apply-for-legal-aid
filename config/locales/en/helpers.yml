@@ -10,7 +10,7 @@ en:
       address_lookup:
         postcode: This must be a UK postcode, for example SW1A 2AA.
       applicant:
-        national_insurance_number: For example, 'QQ 12 34 56 C'.
+        national_insurance_number: For example, QQ 12 34 56 C
       providers_means_regular_income_form:
         transaction_type_ids: Select all that apply. Do not include Housing Benefit or any other disregarded benefits.
       providers_means_regular_outgoings_form:
