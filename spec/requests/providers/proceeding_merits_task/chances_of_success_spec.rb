@@ -172,9 +172,22 @@ module Providers
         context "when Form submitted using Continue button" do
           let(:submit_button) { { continue_button: "Continue" } }
 
-          it "redirects provider back to the merits task list" do
-            subject
-            expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+          context "with all other tasks complete" do
+            before do
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA001, :opponents_application)
+            end
+
+            it "redirects provider back to the merits task list" do
+              subject
+              expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
+            end
+          end
+
+          context "with opponents application task incomplete" do
+            it "redirects provider to the opponents application task page" do
+              subject
+              expect(response).to redirect_to(providers_merits_task_list_opponents_application_path(proceeding))
+            end
           end
 
           context "with vary order issue task that is incomplete" do
