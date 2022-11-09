@@ -32,14 +32,6 @@ RSpec.describe Proceeding do
                               :used_delegated_functions_reported_on)
   }
 
-  it { is_expected.to have_one(:attempts_to_settle).dependent(:destroy) }
-  it { is_expected.to have_one(:chances_of_success).dependent(:destroy) }
-  it { is_expected.to have_one(:vary_order).dependent(:destroy) }
-
-  it { is_expected.to have_many(:proceeding_linked_children).dependent(:destroy) }
-  it { is_expected.to have_many(:involved_children).through(:proceeding_linked_children).source(:involved_child) }
-  it { is_expected.to have_many(:scope_limitations).dependent(:destroy) }
-
   describe "#case_p_num" do
     it "returns formatted proceeding case id" do
       expect(proceeding.case_p_num).to eq "P_55123456"

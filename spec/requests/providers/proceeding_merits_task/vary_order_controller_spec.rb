@@ -32,7 +32,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
   end
 
   describe "PATCH /providers/applications/merits_task_list/:merits_task_list_id/vary_order" do
-    subject(:post_vary_order) do
+    subject(:patch_vary_order) do
       patch(
         providers_merits_task_list_vary_order_path(proceeding),
         params: params.merge(button_clicked),
@@ -57,18 +57,18 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       let(:details) { "reason for new application to vary the order" }
 
       it "creates a new vary_order with the values entered" do
-        expect { post_vary_order }.to change(ProceedingMeritsTask::VaryOrder, :count).by(1)
+        expect { patch_vary_order }.to change(ProceedingMeritsTask::VaryOrder, :count).by(1)
         expect(proceeding.reload.vary_order.details).to eql("reason for new application to vary the order")
       end
 
       it "sets the vary_order task to complete" do
-        post_vary_order
+        patch_vary_order
         deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
         expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :complete))
       end
 
       it "redirects" do
-        post_vary_order
+        patch_vary_order
         expect(response).to have_http_status(:redirect)
       end
     end
@@ -77,12 +77,12 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       let(:details) { "" }
 
       it "renders show with ok" do
-        post_vary_order
+        patch_vary_order
         expect(response).to have_http_status(:ok).and render_template("providers/proceeding_merits_task/vary_order/show")
       end
 
       it "does not set the vary_order task to complete" do
-        post_vary_order
+        patch_vary_order
         deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
         expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :not_started))
       end
@@ -97,7 +97,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       end
 
       it "redirects to the first proceeding merits task" do
-        post_vary_order
+        patch_vary_order
         expect(response).to redirect_to(providers_merits_task_list_chances_of_success_index_path(proceeding))
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       end
 
       it "redirects to the providers merits task list page" do
-        post_vary_order
+        patch_vary_order
         expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(legal_aid_application))
       end
     end
@@ -127,7 +127,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       end
 
       it "overwrites the values" do
-        expect { post_vary_order }.to change { proceeding.reload.vary_order.details }.from("my first detailed reason").to("my second detailed reason")
+        expect { patch_vary_order }.to change { proceeding.reload.vary_order.details }.from("my first detailed reason").to("my second detailed reason")
       end
     end
 
@@ -135,12 +135,12 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
       let(:button_clicked) { draft_button }
 
       it "redirects to provider draft endpoint" do
-        post_vary_order
+        patch_vary_order
         expect(response).to redirect_to provider_draft_endpoint
       end
 
       it "does not set the task to complete" do
-        post_vary_order
+        patch_vary_order
         deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
         expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :not_started))
       end
