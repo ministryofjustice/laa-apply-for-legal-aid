@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_161139) do
     t.boolean "employed"
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
+    t.boolean "has_national_insurance_number"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true
