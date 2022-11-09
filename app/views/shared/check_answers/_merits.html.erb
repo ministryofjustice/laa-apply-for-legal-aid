@@ -310,7 +310,18 @@
         <div class="govuk-body"><%= proceeding.prohibited_steps.details %></div>
       <% end %>
       <%= render 'shared/check_answers/section_break' %>
-  <% end %>
+    <% end %>
+    <% if proceeding.vary_order %>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+        <%= check_answer_link(
+              name: "#{proceeding.id}_vary_order".to_sym,
+              url: providers_merits_task_list_vary_order_path(proceeding),
+              question: t('.items.vary_order'),
+              answer: proceeding.vary_order.details,
+              read_only: read_only
+            ) %>
+      </dl>
+    <% end %>
   </section>
 <% end %>
 

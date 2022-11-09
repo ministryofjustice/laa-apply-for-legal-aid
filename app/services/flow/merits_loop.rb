@@ -40,6 +40,7 @@ module Flow
         prohibited_steps: :prohibited_steps,
         laspo: :in_scope_of_laspos,
         nature_of_urgency: :nature_of_urgencies,
+        vary_order: :vary_order,
       }[task]
     end
 

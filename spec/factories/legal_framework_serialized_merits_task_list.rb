@@ -80,6 +80,7 @@ FactoryBot.define do
         }
       end
     end
+
     trait :da001_as_defendant_and_child_section_8 do
       lfa_response do
         {
@@ -213,6 +214,31 @@ FactoryBot.define do
                 chances_of_success: [],
                 children_proceeding: [:children_application],
                 attempts_to_settle: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :da002_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              statement_of_case: [],
+              nature_of_urgency: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
               },
             },
           ],
