@@ -138,6 +138,9 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     police_notified_details: -> { Faker::Lorem.sentence },
     bail_conditions_set_details: -> { Faker::Lorem.sentence },
   },
+  opponents_applications: {
+    reason_for_applying: -> { Faker::Lorem.sentence },
+  },
   other_assets_declarations: {},
   permissions: {},
   policy_disregards: {},

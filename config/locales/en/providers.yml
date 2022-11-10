@@ -362,6 +362,11 @@ en:
       chances_of_success:
         index:
           h1-heading: Is the chance of a successful outcome 50% or better?
+      opponents_application:
+        show:
+          h1_heading: Do you have a copy of the opponent's application to the court or a copy of the court order?
+          hint_text: We will ask you to upload this evidence at the end of your application.
+          reason_question: Why are you applying for legal aid at this stage?
       attempts_to_settle:
         show:
           h1-heading: What attempts have been made to settle the matter?
@@ -970,6 +975,7 @@ en:
         laspo: Section 8 and LASPO
         nature_of_urgency: Nature of urgency and hearing date
         vary_order: Reason for new application
+        opponents_application: Opponent application
         states:
           not_started: Not started
           waiting_for_dependency: Cannot start yet
@@ -991,6 +997,7 @@ en:
           laspo: in_scope_of_laspo
           nature_of_urgency: nature_of_urgencies
           vary_order: vary_order
+          opponents_application: opponents_application
     merits_reports:
       show:
         heading: Merits report

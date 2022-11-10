@@ -3,6 +3,7 @@ class Proceeding < ApplicationRecord
 
   belongs_to :legal_aid_application
 
+  has_one :opponents_application, class_name: "ProceedingMeritsTask::OpponentsApplication", dependent: :destroy
   has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
   has_one :specific_issue, class_name: "ProceedingMeritsTask::SpecificIssue", dependent: :destroy
   has_one :vary_order, class_name: "ProceedingMeritsTask::VaryOrder", dependent: :destroy

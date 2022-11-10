@@ -139,6 +139,7 @@ FactoryBot.define do
               ccms_code: "DA001",
               tasks: {
                 chances_of_success: [],
+                opponents_application: [],
               },
             },
             {

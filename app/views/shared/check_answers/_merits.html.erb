@@ -271,16 +271,19 @@
             answer: yes_no(proceeding.chances_of_success.success_likely),
             read_only: read_only
           ) %>
-      <%= check_answer_link(
-            name: "#{proceeding.id}_success_prospect".to_sym,
-            url: providers_merits_task_list_success_prospects_path(proceeding),
-            question: t('.items.success_prospect'),
-            answer: t("shared.forms.success_prospect.#{proceeding.chances_of_success.success_prospect}"),
-            read_only: read_only
-          ) unless proceeding.chances_of_success.success_likely? %>
+        <%= check_answer_link(
+              name: "#{proceeding.id}_success_prospect".to_sym,
+              url: providers_merits_task_list_success_prospects_path(proceeding),
+              question: t('.items.success_prospect'),
+              answer: t("shared.forms.success_prospect.#{proceeding.chances_of_success.success_prospect}"),
+              read_only: read_only
+            ) unless proceeding.chances_of_success.success_likely? %>
     </dl>
 
-    <div class='govuk-body'><%= proceeding.chances_of_success.success_prospect_details %></div>
+    <% if proceeding.chances_of_success.success_prospect_details %>
+      <div class='govuk-body'><%= proceeding.chances_of_success.success_prospect_details %></div>
+      <hr>
+    <% end %>
 
     <% if proceeding.attempts_to_settle %>
       <dl class="govuk-summary-list govuk-!-margin-bottom-2">
@@ -340,6 +343,26 @@
               answer: proceeding.vary_order.details,
               read_only: read_only
             ) %>
+      </dl>
+    <% end %>
+    <% if proceeding.opponents_application %>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-2 govuk-!-margin-top-2">
+        <%= check_answer_link(
+              name: "#{proceeding.id}_opponents_application".to_sym,
+              url: providers_merits_task_list_opponents_application_path(proceeding),
+              question: t('.items.opponents_application_question'),
+              answer: yes_no(proceeding.opponents_application.has_opponents_application),
+              read_only: read_only
+            ) %>
+        <% if proceeding.opponents_application.reason_for_applying %>
+          <%= check_answer_link(
+                name: "#{proceeding.id}_opponents_application".to_sym,
+                url: providers_merits_task_list_opponents_application_path(proceeding),
+                question: t('.items.opponents_application_reason'),
+                answer: proceeding.opponents_application.reason_for_applying,
+                read_only: read_only
+              ) %>
+        <% end %>
       </dl>
     <% end %>
   </section>
