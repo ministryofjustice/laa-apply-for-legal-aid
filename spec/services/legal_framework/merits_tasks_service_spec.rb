@@ -47,9 +47,6 @@ module LegalFramework
         before do
           allow(Setting).to receive(:enable_loop?).and_return(enable_loop)
           allow(MeritsTasksRetrieverService).to receive(:call).with(any_args).and_return(work_in_progress_response_hash)
-          allow(I18n).to receive(:t).and_call_original
-          allow(I18n).to receive(:t).with(:nature_of_urgency, scope: "providers.merits_task_lists.task_list_item").and_return("nature_of_urgency")
-          # these two lines are only needed until the actual nature_of_urgency question is added
         end
 
         context "and the enable_loop feature flag is off" do
