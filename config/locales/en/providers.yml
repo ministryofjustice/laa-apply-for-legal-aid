@@ -413,6 +413,9 @@ en:
       in_scope_of_laspos:
         show:
           page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
+      matter_opposed_reasons:
+        show:
+          page_heading: Why is the matter opposed by your client or the other party?
       opponents:
         show:
           h1-heading: Opponent details
@@ -957,6 +960,7 @@ en:
         statement_of_case: Statement of case
         chances_of_success: Chances of success
         children_application: Children involved in this application
+        why_matter_opposed: Why the matter is opposed
         children_proceeding: Children involved in this proceeding
         attempts_to_settle: Attempts to settle
         client_denial_of_allegation: Client denial of allegation
@@ -976,6 +980,7 @@ en:
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
           children_application: involved_child
+          why_matter_opposed: matter_opposed_reason
           has_other_involved_children: has_other_involved_children
           children_proceeding: linked_children
           attempts_to_settle: attempts_to_settle

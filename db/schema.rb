@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_01_141154) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_02_162032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -604,6 +604,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_141154) do
     t.index ["uploader_type", "uploader_id"], name: "index_malware_scan_results_on_uploader"
   end
 
+  create_table "matter_oppositions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "legal_aid_application_id", null: false
+    t.text "reason", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_matter_oppositions_on_legal_aid_application_id"
+  end
+
   create_table "offices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
@@ -952,6 +960,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_01_141154) do
   add_foreign_key "legal_aid_applications", "providers"
   add_foreign_key "legal_framework_merits_task_lists", "legal_aid_applications"
   add_foreign_key "legal_framework_submissions", "legal_aid_applications"
+  add_foreign_key "matter_oppositions", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "offices", "firms"
   add_foreign_key "offices_providers", "offices"
   add_foreign_key "offices_providers", "providers"

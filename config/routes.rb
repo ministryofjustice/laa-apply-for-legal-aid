@@ -249,6 +249,10 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
+
+      scope module: :application_merits_task do
+        resource :matter_opposed_reason, only: %i[show update]
+      end
     end
 
     resources :merits_task_list, only: [] do

@@ -32,6 +32,7 @@ module Flow
         statement_of_case: :statement_of_cases,
         children_application: :start_involved_children_task,
         children_proceeding: :linked_children,
+        why_matter_opposed: :matter_opposed_reasons,
         attempts_to_settle: :attempts_to_settle,
         chances_of_success: :chances_of_success,
         client_denial_of_allegation: :client_denial_of_allegations,

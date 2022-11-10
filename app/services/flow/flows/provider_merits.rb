@@ -89,6 +89,11 @@ module Flow
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },
+        matter_opposed_reasons: {
+          path: ->(application) { urls.providers_legal_aid_application_matter_opposed_reason_path(application) },
+          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
+          check_answers: :check_merits_answers,
+        },
         chances_of_success: {
           path: lambda do |application|
             proceeding = application.proceedings.find(application.provider_step_params["merits_task_list_id"])
