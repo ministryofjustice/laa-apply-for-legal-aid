@@ -32,3 +32,5 @@ PreCommit:
   DBAnonymizer:
     enabled: true
     command: ['ruby', './scripts/migration_hook.rb']
+    requires_files: true
+    include: 'db/migrate/*.rb'
