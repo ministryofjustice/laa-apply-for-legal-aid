@@ -41,6 +41,7 @@ Feature: Provider accessibility
     And the page is accessible
     When I click 'Save and continue'
     Then I should be on a page with title "Does the client have a National Insurance number?"
+    And the page is accessible
     And I choose "Yes"
     And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'

@@ -13,12 +13,12 @@ module Flow
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
           forward: lambda do |application|
             if application.applicant_details_checked?
-              :check_provider_answers
+              :has_national_insurance_numbers
             else
               :address_lookups
             end
           end,
-          check_answers: :check_provider_answers,
+          check_answers: :has_national_insurance_numbers,
         },
         address_lookups: {
           path: ->(application) { urls.providers_legal_aid_application_address_lookup_path(application) },

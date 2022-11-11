@@ -27,3 +27,24 @@ Then("the following sections should not exist:") do |table|
     expect(page).not_to have_selector(row[:tag], text: /\A#{Regexp.quote(row[:section])}\z/), "expected not to find tag \"#{row[:tag]}\" with text: \"#{row[:section]}\""
   end
 end
+
+def expect_questions_in(expected:, selector:, negate: false)
+  within(selector) do
+    expected.hashes.each do |row|
+      if negate
+        expect(page).not_to have_selector("dt", text: row[:question]), "expected not to find tag \"dt\" with text: \"#{row[:question]}\""
+      else
+        expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      end
+    end
+  end
+end
+
+def expect_questions_and_answers_in(expected:, selector:)
+  within(selector) do
+    expected.hashes.each do |row|
+      expect(page).to have_selector("dt", text: row[:question]), "expected to find tag \"dt\" with text: \"#{row[:question]}\""
+      expect(page).to have_selector("dd", text: row[:answer]), "expected to find tag \"dd\" with text: \"#{row[:answer]}\""
+    end
+  end
+end
