@@ -17,7 +17,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     %i[
       first_name
       last_name
-      national_insurance_number
       date_of_birth
     ]
   end
@@ -56,67 +55,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with an invalid NINO" do
-      before { attributes[:national_insurance_number] = "foobar" }
-
-      it "does not persist model" do
-        expect { subject.save }.not_to change(Applicant, :count)
-      end
-
-      it "errors to be present" do
-        subject.save
-        expect(subject.errors[:national_insurance_number]).to match_array(["Enter a valid National Insurance number"])
-      end
-    end
-
-    context "with test national insurance numbers" do
-      let(:test_nino) { "JS130161E" }
-      let(:invalid_nino) { "QQ12AS23RR" }
-      let(:valid_nino) { "JA123456D" }
-
-      before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
-      end
-
-      context "with normal validation" do
-        let(:in_test_mode) { "false" }
-
-        it "test nino is invalid" do
-          subject.national_insurance_number = test_nino
-          expect(subject).to be_invalid
-        end
-
-        it "invalid NINO is still invalid" do
-          subject.national_insurance_number = invalid_nino
-          expect(subject).not_to be_valid
-        end
-
-        it "valid NINO is still valid" do
-          subject.national_insurance_number = valid_nino
-          expect(subject).to be_valid
-        end
-      end
-
-      context "with test level validation" do
-        let(:in_test_mode) { "true" }
-
-        it "test NINO is valid" do
-          subject.national_insurance_number = test_nino
-          expect(subject).to be_valid
-        end
-
-        it "invalid NINO is still invalid" do
-          subject.national_insurance_number = invalid_nino
-          expect(subject).not_to be_valid
-        end
-
-        it "valid NINO is still valid" do
-          subject.national_insurance_number = valid_nino
-          expect(subject).to be_valid
-        end
-      end
-    end
-
     context "with an invalid date" do
       let(:attributes) { attributes_for(:applicant).merge(date_of_birth: "invalid-date") }
 
@@ -148,7 +86,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         {
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
-          national_insurance_number: attributes[:national_insurance_number],
           date_of_birth_1i: attributes[:date_of_birth].year.to_s,
           date_of_birth_2i: attributes[:date_of_birth].month.to_s,
           date_of_birth_3i: attributes[:date_of_birth].day.to_s,
@@ -171,7 +108,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         {
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
-          national_insurance_number: attributes[:national_insurance_number],
           date_of_birth_1i: "10",
           date_of_birth_2i: "21",
           date_of_birth_3i: "44",
@@ -204,57 +140,14 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
       end
     end
 
-    context "with empty input" do
+    context "with an invalid date_of_birth entry input" do
       let(:params) do
         {
-          first_name: "",
-          last_name: "",
-          national_insurance_number: "",
-          date_of_birth: "",
-        }
-      end
-
-      it "will be valid" do
-        subject.save_as_draft
-        expect(subject).to be_valid
-      end
-
-      it "will not save to the database" do
-        expect { subject.save_as_draft }.not_to change(Applicant, :count)
-      end
-    end
-
-    context "with mostly empty input" do
-      let(:first_name) { Faker::Name.first_name }
-      let(:params) do
-        {
-          first_name:,
-          last_name: "",
-          national_insurance_number: "",
-          date_of_birth: "",
-        }
-      end
-
-      it "will save the entered attribute" do
-        subject.save_as_draft
-        expect(Applicant.last.first_name).to eq(first_name)
-      end
-
-      it "will not save anything to null attributes" do
-        subject.save_as_draft
-        expect(Applicant.last.last_name).to be_nil
-      end
-    end
-
-    context "with an invalid entry input" do
-      let(:first_name) { Faker::Name.first_name }
-      let(:invalid_nino) { "invalid" }
-      let(:params) do
-        {
-          first_name:,
-          last_name: "",
-          national_insurance_number: invalid_nino,
-          date_of_birth: "",
+          first_name: "Fred",
+          last_name: "Bloggs",
+          date_of_birth_1i: "0001",
+          date_of_birth_2i: "13",
+          date_of_birth_3i: "32",
         }
       end
 
@@ -269,8 +162,75 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
 
       it "will preserve the input" do
         subject.save_as_draft
-        expect(subject.first_name).to eq(first_name)
-        expect(subject.national_insurance_number).to eq(invalid_nino)
+        expect(subject.first_name).to eq("Fred")
+      end
+    end
+
+    context "with no first name or last name" do
+      let(:params) do
+        {
+          first_name: "",
+          last_name: "",
+          date_of_birth_1i: "1999",
+          date_of_birth_2i: "12",
+          date_of_birth_3i: "31",
+        }
+      end
+
+      it "will not save to the database" do
+        expect { subject.save_as_draft }.not_to change(Applicant, :count)
+      end
+
+      it "will be invalid" do
+        subject.save_as_draft
+        expect(subject).to be_invalid
+      end
+
+      it "will preserve the valid input" do
+        subject.save_as_draft
+        expect(subject.date_of_birth).to eq(Date.new(1999, 12, 31))
+      end
+    end
+
+    context "with no first name but with last name" do
+      let(:params) do
+        {
+          first_name: "",
+          last_name: "Bloggs",
+          date_of_birth_1i: "1999",
+          date_of_birth_2i: "12",
+          date_of_birth_3i: "31",
+        }
+      end
+
+      it "will save to the database" do
+        expect { subject.save_as_draft }.to change(Applicant, :count)
+      end
+
+      it "will be invalid" do
+        subject.save_as_draft
+        expect(subject).to be_valid
+      end
+    end
+
+    context "with last name but no first name" do
+      let(:params) do
+        {
+          first_name: "Fred",
+          last_name: "",
+          date_of_birth_1i: "1999",
+          date_of_birth_2i: "12",
+          date_of_birth_3i: "31",
+        }
+      end
+
+      it "will save to the database" do
+        expect { subject.save_as_draft }.to change(Applicant, :count)
+      end
+
+      it "will be valid" do
+        subject.save_as_draft
+        expect(subject).to be_valid
       end
     end
 
@@ -281,7 +241,6 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
         {
           first_name: attributes[:first_name],
           last_name: attributes[:last_name],
-          national_insurance_number: attributes[:national_insurance_number],
           date_of_birth_2i: "10",
           date_of_birth_3i: "4",
           model: applicant,

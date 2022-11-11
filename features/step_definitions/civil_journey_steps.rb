@@ -504,8 +504,9 @@ Given("I complete the journey as far as check your answers") do
     :applicant,
     first_name: "Test",
     last_name: "User",
-    national_insurance_number: "CB987654A",
     date_of_birth: "03-04-1999",
+    has_national_insurance_number: true,
+    national_insurance_number: "CB987654A",
   )
   create(
     :address,
@@ -543,7 +544,7 @@ Given("I complete the journey as far as check client details with multiple proce
   steps %(Then I should be on a page showing 'Check your answers')
 end
 
-Given("I complete the passported journey as far as check your answers") do
+Given("I complete the passported journey as far as check your answers for client details") do
   applicant = create(
     :applicant,
     first_name: "Test",

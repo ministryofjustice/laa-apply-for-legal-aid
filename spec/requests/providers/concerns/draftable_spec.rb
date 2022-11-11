@@ -2,7 +2,9 @@ require "rails_helper"
 
 RSpec.describe Providers::Draftable do
   # Using providers/applicants#update to thoroughly test draftable behaviour
-  describe "PATCH /providers/applications/:legal_aid_application_id/applicant" do
+  #  ^^ ideally we should be using an anonymous class or similar to test a mixin
+  #
+  describe "PATCH /providers/applications/:legal_aid_application_id/applicant_details" do
     subject { patch providers_legal_aid_application_applicant_details_path(application), params: params.merge(submit_button) }
 
     let(:application) { create(:legal_aid_application) }
@@ -12,7 +14,6 @@ RSpec.describe Providers::Draftable do
         applicant: {
           first_name: "John",
           last_name: "Doe",
-          national_insurance_number: "AA 12 34 56 C",
           "date_of_birth(1i)": "1981",
           "date_of_birth(2i)": "07",
           "date_of_birth(3i)": "11",
@@ -66,7 +67,8 @@ RSpec.describe Providers::Draftable do
         let(:params) do
           {
             applicant: {
-              national_insurance_number: "invalid",
+              first_name: "",
+              last_name: "",
             },
           }
         end
@@ -75,7 +77,8 @@ RSpec.describe Providers::Draftable do
           subject
 
           expect(unescaped_response_body).to include("There is a problem")
-          expect(unescaped_response_body).to include("applicant-national-insurance-number-field-error")
+          expect(unescaped_response_body).to include("applicant-first-name-field-error")
+          expect(unescaped_response_body).to include("applicant-last-name-field-error")
         end
 
         it "does NOT create a new applicant" do
@@ -87,8 +90,8 @@ RSpec.describe Providers::Draftable do
         let(:params) do
           {
             applicant: {
+              first_name: "",
               last_name: "Doe",
-              national_insurance_number: "AA 12 34 56 C",
             },
           }
         end

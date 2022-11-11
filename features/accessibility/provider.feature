@@ -16,7 +16,6 @@ Feature: Provider accessibility
     And the page is accessible
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     And the page is accessible
@@ -40,7 +39,11 @@ Feature: Provider accessibility
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     And the page is accessible
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'
@@ -209,7 +212,7 @@ Feature: Provider accessibility
 
   @javascript @vcr
   Scenario: I complete the client details section of a passported application and it is accessible
-    Given I complete the passported journey as far as check your answers
+    Given I complete the passported journey as far as check your answers for client details
     Then I should be on a page showing 'Check your answers'
     And the page is accessible
     Then I click 'Save and continue'

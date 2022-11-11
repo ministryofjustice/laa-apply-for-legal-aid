@@ -357,7 +357,6 @@ en:
         page_title: Enter your client's details
         name: Name
         email_label: Email address
-        nino_label: National Insurance number
       cash_outgoings_form:
         info: Cash means physical money like banknotes and coins.
         none_selected: None of the above

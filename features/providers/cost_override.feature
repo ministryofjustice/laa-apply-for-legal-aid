@@ -4,7 +4,6 @@ Feature: Emergency cost override
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'
     And I enter the date of birth '03-04-1999'
-    And I enter national insurance number 'CB987654A'
     When I click 'Save and continue'
     Then I am on the postcode entry page
     When I enter a postcode 'SW1H 9EA'
@@ -26,17 +25,25 @@ Feature: Emergency cost override
     Then I should be on a page showing "What you're applying for"
     And I should see 'Do you want to request a higher emergency cost limit?'
     When I choose 'No'
-    And I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     When I click link "Back"
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    When I click link "Back"
     Then I should be on a page showing "What you're applying for"
-    Then I should be on a page showing "Do you want to request a higher emergency cost limit?"
+    Then I should see "Do you want to request a higher emergency cost limit?"
     When I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
-    And I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
-    Then I should be on a page showing "Emergency cost limit"
+    Then I should see "Emergency cost limit"
 
   @javascript @vcr
   Scenario: Provider should be able to request a higher substantive cost limit when the default substantive cost limit is below the 25,000 threshold
