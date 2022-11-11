@@ -63,17 +63,11 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_emergency_level_of_service_path(application, proceeding)
           end,
-          forward: lambda do |application|
-            proceeding = Proceeding.find(application.provider_step_params["id"])
-            # TODO: @colinbruce 10 Nov 2022
-            # Refactor this - re-calling the API is slow, inefficient
-            # and error prone. Try and identify a way of seeing if they
-            # changed the value from the default before submitting
-            default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))["default_level_of_service"]["name"]
-            if proceeding.substantive_level_of_service_name.casecmp("full representation").zero? && proceeding.substantive_level_of_service_name != default
+          forward: lambda do |_application, options|
+            if options[:changed_to_full_rep]
               :final_hearings
             else
-              :substantive_scope_limitations
+              :emergency_scope_limitations
             end
           end,
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
@@ -84,14 +78,8 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             urls.providers_legal_aid_application_substantive_level_of_service_path(application, proceeding)
           end,
-          forward: lambda do |application|
-            proceeding = Proceeding.find(application.provider_step_params["id"])
-            # TODO: @colinbruce 10 Nov 2022
-            # Refactor this - re-calling the API is slow, inefficient
-            # and error prone. Try and identify a way of seeing if they
-            # changed the value from the default before submitting
-            default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))["default_level_of_service"]["name"]
-            if proceeding.substantive_level_of_service_name.casecmp("full representation").zero? && proceeding.substantive_level_of_service_name != default
+          forward: lambda do |_application, options|
+            if options[:changed_to_full_rep]
               :final_hearings
             else
               :substantive_scope_limitations
@@ -101,12 +89,12 @@ module Flow
           check_answers: :check_provider_answers,
         },
         final_hearings: {
-          path: lambda do |application, work_type|
+          path: lambda do |application, options|
             proceeding = Proceeding.find(application.provider_step_params["id"])
-            urls.providers_legal_aid_application_final_hearings_path(application, proceeding, work_type)
+            urls.providers_legal_aid_application_final_hearings_path(application, proceeding, options[:work_type])
           end,
-          forward: lambda do |_application, work_type|
-            work_type.to_sym == :substantive ? :substantive_scope_limitations : :emergency_scope_limitations
+          forward: lambda do |_application, options|
+            options[:work_type].to_sym == :substantive ? :substantive_scope_limitations : :emergency_scope_limitations
           end,
           carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
           check_answers: :check_provider_answers,

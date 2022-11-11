@@ -10,7 +10,8 @@ RSpec.describe "EmergencyLevelOfServiceController", :vcr do
            substantive_application_deadline_on: 10.days.from_now)
   end
   let(:application_id) { application.id }
-  let(:proceeding_id) { application.proceedings.first.id }
+  let(:proceeding) { application.proceedings.first }
+  let(:proceeding_id) { proceeding.id }
   let(:provider) { application.provider }
 
   before do
@@ -71,10 +72,11 @@ RSpec.describe "EmergencyLevelOfServiceController", :vcr do
     let(:params) do
       {
         proceeding: {
-          emergency_level_of_service: 3,
+          emergency_level_of_service:,
         },
       }
     end
+    let(:emergency_level_of_service) { 3 }
 
     context "when the provider is not authenticated" do
       before { post_elos }
@@ -85,14 +87,55 @@ RSpec.describe "EmergencyLevelOfServiceController", :vcr do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        post_elos
       end
 
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        it "redirects to next page" do
+        it "redirects to emergency_scope_limitation page" do
+          post_elos
           expect(response.body).to redirect_to(providers_legal_aid_application_emergency_scope_limitation_path(application_id, proceeding_id))
+        end
+
+        context "when the parameters are invalid" do
+          before do
+            proceeding.update!(emergency_level_of_service: nil, emergency_level_of_service_name: nil, emergency_level_of_service_stage: nil)
+            post_elos
+          end
+
+          let(:emergency_level_of_service) { nil }
+
+          it "returns http_success" do
+            expect(response).to have_http_status(:ok)
+          end
+
+          it "the response includes the error message" do
+            expect(response.body).to include("Select a level of service")
+          end
+        end
+
+        context "when the provider changes the default LoS to Full representation" do
+          before do
+            allow(LegalFramework::ProceedingTypes::Defaults).to receive(:call).and_return(
+              {
+                "success" => true,
+                "requested_params" => { "proceeding_type_ccms_code" => "DA001", "delegated_functions_used" => true, "client_involvement_type" => "A" },
+                "default_level_of_service" => { "level" => 1, "name" => "FHH Children", "stage" => 8 },
+                "default_scope" =>
+                  {
+                    "code" => "CV117",
+                    "meaning" => "Interim order inc. return date",
+                    "description" => "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                    "additional_params" => [],
+                  },
+              }.to_json,
+            )
+          end
+
+          it "redirects to final_hearing page" do
+            post_elos
+            expect(response.body).to redirect_to(providers_legal_aid_application_final_hearings_path(application_id, proceeding_id, :emergency))
+          end
         end
       end
     end

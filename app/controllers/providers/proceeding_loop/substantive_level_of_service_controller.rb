@@ -8,13 +8,9 @@ module Providers
 
       def update
         @form = Proceedings::SubstantiveLevelOfServiceForm.new(form_params)
-        if @form.save
-          return continue_or_draft if draft_selected?
-
-          go_forward(work_type: :substantive)
-        else
-          render :show
-        end
+        default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))["default_level_of_service"]["level"].to_s
+        changed_to_full_rep = @form.attributes["substantive_level_of_service"] == "3" && @form.attributes["substantive_level_of_service"] != default
+        render :show unless save_continue_or_draft(@form, work_type: :substantive, changed_to_full_rep:)
       end
 
     private
