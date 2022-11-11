@@ -5,7 +5,7 @@
       local: true
   ) do |form| %>
 
-  <%= page_template page_title: t('.page_title'), template: :basic, form: form do %>
+  <%= page_template page_title: t('.page_title'), form: form do %>
     <%= form.govuk_radio_buttons_fieldset :has_national_insurance_number,
                                           legend: { text: t('.question'), size: 'm'} do %>
       <%= form.govuk_radio_button(

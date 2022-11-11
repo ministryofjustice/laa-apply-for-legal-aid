@@ -31,10 +31,21 @@
       ) if :age.in?(attributes) %>
 
   <%= check_answer_link(
+        name: :address,
+        url: change_address_link(applicant),
+        question: t('.address'),
+        answer: address_with_line_breaks(address),
+        read_only: read_only,
+      ) if :address.in?(attributes) %>
+
+  <%= check_answer_link(
         name: :national_insurance_number,
-        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :national_insurance_number),
+        url: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
         question: t('.nino'),
-        answer: applicant.national_insurance_number,
+        answer: [
+                  yes_no(applicant.has_national_insurance_number?),
+                  applicant.national_insurance_number,
+                ],
         read_only: read_only,
       ) if :national_insurance_number.in?(attributes) %>
 
@@ -46,11 +57,4 @@
         read_only: read_only,
       ) if :email.in?(attributes) %>
 
-  <%= check_answer_link(
-        name: :address,
-        url: change_address_link(applicant),
-        question: t('.address'),
-        answer: address_with_line_breaks(address),
-        read_only: read_only,
-      ) if :address.in?(attributes) %>
 </dl>

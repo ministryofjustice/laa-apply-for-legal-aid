@@ -558,6 +558,7 @@ Given("I complete the passported journey as far as check your answers for client
     address_line_one: "Transport For London",
     address_line_two: "98 Petty France",
     city: "London",
+    county: nil,
     postcode: "SW1H 9EA",
     lookup_used: true,
     applicant:,
