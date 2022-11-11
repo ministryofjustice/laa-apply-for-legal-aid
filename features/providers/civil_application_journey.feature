@@ -47,7 +47,6 @@ Feature: Civil application journeys
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -69,7 +68,6 @@ Feature: Civil application journeys
     Then I should be on the Applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -88,7 +86,6 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -161,7 +158,11 @@ Feature: Civil application journeys
     When I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I should be on a page showing 'Proceeding 1 FGM Protection Order'
     Then I should be on a page showing 'Proceeding 2 Occupation order'
@@ -177,7 +178,6 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -196,7 +196,11 @@ Feature: Civil application journeys
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
@@ -224,7 +228,6 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'XX1 1XX'
@@ -251,7 +254,11 @@ Feature: Civil application journeys
     Then I select 'I have not used delegated functions'
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
@@ -278,8 +285,7 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
     Then I enter name 'Test', 'Walker'
-    Then I enter the date of birth '10-01-1980'
-    Then I enter national insurance number 'JA293483A'
+    Then I enter the date of birth '10-1-1980'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -315,7 +321,11 @@ Feature: Civil application journeys
     Then I choose 'Yes'
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
@@ -325,7 +335,6 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
-    Then I enter national insurance number 'JA293483B'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -345,7 +354,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483B'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
@@ -355,7 +368,6 @@ Feature: Civil application journeys
     When I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
     Then I enter the date of birth '10-12-1961'
-    Then I enter national insurance number 'JA293483B'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'
@@ -376,6 +388,10 @@ Feature: Civil application journeys
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     Then I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not receive a passporting benefit – is this correct?"
@@ -420,7 +436,9 @@ Feature: Civil application journeys
     Given I complete the journey as far as check your answers
     And I click Check Your Answers Change link for 'First name'
     Then I enter the first name 'Bartholomew'
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     And the answer for 'First name' should be 'Bartholomew'
 
@@ -440,7 +458,11 @@ Feature: Civil application journeys
     Then I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'CB987654A'
+    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr
@@ -633,7 +655,7 @@ Feature: Civil application journeys
   @javascript @vcr
   Scenario: Receives benefits and completes the application happy path no back button
     Given csrf is enabled
-    Given I complete the passported journey as far as check your answers
+    Given I complete the passported journey as far as check your answers for client details
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Continue'
@@ -841,8 +863,11 @@ Feature: Civil application journeys
     Then I should be on a page showing "Enter your client's details"
     Then I enter name 'Kyle', 'Walker'
     Then I enter the date of birth '10-1-1980'
-    Then I enter national insurance number 'JA293483A'
-    Then I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    And I choose "Yes"
+    And I enter national insurance number 'JA293483A'
+    When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client receives a passporting benefit"
@@ -911,7 +936,6 @@ Feature: Civil application journeys
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
     Then I enter the date of birth '03-04-1999'
-    Then I enter national insurance number 'CB987654A'
     Then I click 'Save and continue'
     Then I am on the postcode entry page
     Then I enter a postcode 'SW1H 9EA'

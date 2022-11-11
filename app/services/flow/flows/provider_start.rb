@@ -78,7 +78,7 @@ module Flow
         },
         limitations: {
           path: ->(application) { urls.providers_legal_aid_application_limitations_path(application) },
-          forward: :check_provider_answers,
+          forward: :has_national_insurance_numbers,
         },
         has_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_has_national_insurance_number_path(application) },

@@ -62,7 +62,7 @@ RSpec.describe Providers::LimitationsController do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings) }
 
         it "redirects to next page" do
-          expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+          expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
 
@@ -118,7 +118,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
 
@@ -133,7 +133,7 @@ RSpec.describe Providers::LimitationsController do
           end
 
           it "redirects to next page" do
-            expect(subject).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+            expect(subject).to redirect_to(providers_legal_aid_application_has_national_insurance_number_path(legal_aid_application))
           end
         end
       end

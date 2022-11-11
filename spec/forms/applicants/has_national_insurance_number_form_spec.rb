@@ -82,9 +82,27 @@ RSpec.describe Applicants::HasNationalInsuranceNumberForm, type: :form do
     context "with yes chosen and a known invalid test national insurance number provided" do
       let(:params) { { model: applicant, has_national_insurance_number: "true", national_insurance_number: "JS130161E" } }
 
-      before { call_save }
+      before do
+        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
+        call_save
+      end
 
-      it { expect(instance).to be_valid, "was invalid with errors: #{instance.errors.messages}" }
+      context "when configured to use mock portal SAML login" do
+        let(:in_test_mode) { "true" }
+
+        it { expect(instance).to be_valid, "was invalid with errors: #{instance.errors.messages}" }
+      end
+
+      context "when configured to use real portal SAML login" do
+        let(:in_test_mode) { "false" }
+
+        it { expect(instance).to be_invalid }
+
+        it "adds custom invalid error message" do
+          error_messages = instance.errors.messages.values.flatten
+          expect(error_messages).to include("Enter a valid National Insurance number")
+        end
+      end
     end
 
     context "with no chosen" do

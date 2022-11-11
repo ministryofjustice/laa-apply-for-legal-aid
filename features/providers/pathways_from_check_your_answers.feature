@@ -14,7 +14,7 @@ Feature: Pathways from check your answers
 
   @javascript @vcr
   Scenario: I do not use delegated functions for a passported journey
-    Given I complete the passported journey as far as check your answers
+    Given I complete the passported journey as far as check your answers for client details
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Continue'
@@ -58,7 +58,7 @@ Feature: Pathways from check your answers
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application for a passported journey
-    Given I complete the passported journey as far as check your answers
+    Given I complete the passported journey as far as check your answers for client details
     And a "bank holiday" exists in the database
     And I used delegated functions
     Then I click 'Save and continue'
@@ -110,7 +110,9 @@ Feature: Pathways from check your answers
     Then I select 'I have not used delegated functions'
     And I click 'Save and continue'
     Then I should be on the 'limitations' page showing "What you're applying for"
-    And I click 'Save and continue'
+    When I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+    When I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
     And I should be on a page showing 'Child arrangements order (contact)'

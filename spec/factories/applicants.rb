@@ -4,6 +4,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday }
     email { Faker::Internet.safe_email }
+    has_national_insurance_number { true }
     national_insurance_number { Faker::Base.regexify(Applicant::NINO_REGEXP) }
     employed { false }
 
