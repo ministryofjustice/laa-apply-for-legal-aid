@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2022_11_09_161647) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_13_212453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -712,8 +711,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_161647) do
     t.string "category_of_law", null: false
     t.string "category_law_code", null: false
     t.string "ccms_matter_code"
-    t.string "client_involvement_type_ccms_code", null: false
-    t.string "client_involvement_type_description", null: false
     t.boolean "used_delegated_functions"
     t.integer "emergency_level_of_service"
     t.string "emergency_level_of_service_name"
@@ -723,6 +720,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_161647) do
     t.integer "substantive_level_of_service_stage"
     t.boolean "accepted_emergency_defaults"
     t.boolean "accepted_substantive_defaults"
+    t.string "client_involvement_type_ccms_code"
+    t.string "client_involvement_type_description"
     t.index ["legal_aid_application_id"], name: "index_proceedings_on_legal_aid_application_id"
     t.index ["proceeding_case_id"], name: "index_proceedings_on_proceeding_case_id", unique: true
   end
