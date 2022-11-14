@@ -235,6 +235,7 @@ Rails.application.routes.draw do
       resources :emergency_scope_limitations, only: %i[show update], controller: "proceeding_loop/emergency_scope_limitations"
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
+      resource :no_national_insurance_number, only: %i[show update]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show
