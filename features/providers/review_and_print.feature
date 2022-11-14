@@ -135,6 +135,7 @@ Feature: Review and print your application
       | Maintenance payments from a former partner total |
       | Income from a property or lodger total |
       | Pension total |
+      | Student loan |
 
     And I should not see "Housing benefit total"
 

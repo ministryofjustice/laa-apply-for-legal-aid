@@ -85,6 +85,7 @@ Given("I have completed truelayer application with merits") do
     :with_opponent,
     :with_incident,
     :with_chances_of_success,
+    :with_irregular_income,
     property_value: 599_999.99,
     outstanding_mortgage_amount: 399_999.99,
     shared_ownership: "partner_or_ex_partner",
