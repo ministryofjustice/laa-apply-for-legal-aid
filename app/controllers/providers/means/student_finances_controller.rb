@@ -2,13 +2,13 @@ module Providers
   module Means
     class StudentFinancesController < ProviderBaseController
       def show
-        @form = ::StudentFinances::AnnualAmountForm.new(model: irregular_income)
+        @form = ::StudentFinances::AnnualAmountForm.new(model: student_finance)
       end
 
       def update
-        @form = ::StudentFinances::AnnualAmountForm.new(form_params)
+        @form = ::StudentFinances::AnnualAmountForm.new(student_finance_params)
+
         if @form.save
-          legal_aid_application.update!(student_finance:)
           go_forward
         else
           render :show
@@ -17,20 +17,17 @@ module Providers
 
     private
 
-      def irregular_income
+      def student_finance
         legal_aid_application.irregular_incomes.find_by(income_type: "student_loan")
       end
 
-      def form_params
-        merge_with_model(irregular_income) do
-          return {} unless params[:irregular_income]
-
-          params.require(:irregular_income).permit(:amount, :student_finance).merge({ income_type: "student_loan", frequency: "annual", legal_aid_application_id: legal_aid_application.id })
+      def student_finance_params
+        merge_with_model(student_finance) do
+          params
+            .require(:irregular_income)
+            .permit(:amount, :student_finance)
+            .merge(legal_aid_application:)
         end
-      end
-
-      def student_finance
-        @student_finance ||= params[:irregular_income][:student_finance]
       end
     end
   end
