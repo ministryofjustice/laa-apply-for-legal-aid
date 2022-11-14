@@ -1,5 +1,6 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
+    include ApplicantDetailsCheckable
     helper_method :display_hmrc_inset_text?
 
     def show
@@ -27,14 +28,6 @@ module Providers
         radio_buttons_input_name: :correct_dwp_result,
         form_params:,
       )
-    end
-
-    def details_checked!
-      legal_aid_application.applicant_details_checked!
-    end
-
-    def details_checked?
-      legal_aid_application.applicant_details_checked?
     end
 
     def form_params
