@@ -3,8 +3,9 @@ require "rails_helper"
 RSpec.describe Providers::CheckBenefitsController do
   let(:last_name) { "WALKER" }
   let(:date_of_birth) { "1980/01/10".to_date }
+  let(:has_national_insurance_number) { true }
   let(:national_insurance_number) { "JA293483A" }
-  let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:) }
+  let(:applicant) { create(:applicant, last_name:, date_of_birth:, national_insurance_number:, has_national_insurance_number:) }
   let(:application) { create(:application, :checking_applicant_details, applicant:) }
   let(:address_lookup_used) { true }
   let(:login) { login_as application.provider }
