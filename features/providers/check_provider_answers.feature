@@ -32,6 +32,9 @@ Feature: Checking client details answers backwards and forwards
 
     When I enter name 'Fred', 'Bloggs'
     And I click 'Save and continue'
+    Then I should be on a page with title "Does the client have a National Insurance number?"
+
+    When I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
     And the "Client details" check you answers section should contain:
       | question | answer |
