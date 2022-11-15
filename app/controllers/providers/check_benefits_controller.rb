@@ -1,6 +1,7 @@
 module Providers
   class CheckBenefitsController < ProviderBaseController
     include PreDWPCheckVisible
+    include ApplicantDetailsCheckable
 
     helper_method :should_use_ccms?
 
@@ -19,14 +20,6 @@ module Providers
     end
 
   private
-
-    def details_checked!
-      legal_aid_application.applicant_details_checked!
-    end
-
-    def details_checked?
-      legal_aid_application.applicant_details_checked?
-    end
 
     def check_benefits
       redirect_to problem_index_path unless legal_aid_application.add_benefit_check_result

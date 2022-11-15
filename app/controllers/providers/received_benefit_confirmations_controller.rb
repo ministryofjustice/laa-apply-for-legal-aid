@@ -1,5 +1,7 @@
 module Providers
   class ReceivedBenefitConfirmationsController < ProviderBaseController
+    include ApplicantDetailsCheckable
+
     def show
       @form = Providers::ReceivedBenefitConfirmationForm.new(model: dwp_override)
     end
@@ -22,14 +24,6 @@ module Providers
 
     def benefit?
       form_params[:passporting_benefit] != "none_selected"
-    end
-
-    def details_checked!
-      legal_aid_application.applicant_details_checked!
-    end
-
-    def details_checked?
-      legal_aid_application.applicant_details_checked?
     end
 
     def form_params

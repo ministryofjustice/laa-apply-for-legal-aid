@@ -1,5 +1,7 @@
 module Providers
   class HasEvidenceOfBenefitsController < ProviderBaseController
+    include ApplicantDetailsCheckable
+
     def show
       @form = LegalAidApplications::HasEvidenceOfBenefitForm.new(model: dwp_override)
       passporting_benefit
@@ -32,14 +34,6 @@ module Providers
 
     def passporting_benefit
       @passporting_benefit ||= passporting_benefit_translation
-    end
-
-    def details_checked!
-      legal_aid_application.applicant_details_checked!
-    end
-
-    def details_checked?
-      legal_aid_application.applicant_details_checked?
     end
 
     def dwp_override
