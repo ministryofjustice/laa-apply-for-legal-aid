@@ -321,11 +321,11 @@ Feature: Checking answers backwards and forwards
     And I should not see 'Does your client have any savings accounts they cannot access online?'
 
     When I click Check Your Answers Change link for 'bank statements'
-    And I upload an evidence file named 'hello_world.pdf'
     Then I should see "hello_world.pdf UPLOADED"
+    And I upload an evidence file named 'hello_world1.pdf'
+    Then I should see "hello_world1.pdf UPLOADED"
     And I click 'Save and continue'
     Then I should be on the 'means_summary' page showing 'Check your answers'
-    And I should see 'hello_world.pdf'
 
     When I click Check Your Answers Change link for "What payments does your client receive?"
     And I check 'Benefits'
