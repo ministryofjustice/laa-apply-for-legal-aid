@@ -11,13 +11,7 @@ module Flow
         },
         applicant_details: {
           path: ->(application) { urls.providers_legal_aid_application_applicant_details_path(application) },
-          forward: lambda do |application|
-            if application.applicant_details_checked?
-              :has_national_insurance_numbers
-            else
-              :address_lookups
-            end
-          end,
+          forward: :address_lookups,
           check_answers: :has_national_insurance_numbers,
         },
         address_lookups: {
