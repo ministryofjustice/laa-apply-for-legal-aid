@@ -30,7 +30,7 @@ RSpec.describe "FinalHearingsController" do
       it "displays the proceeding header" do
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
-        expect(response.body).to include("Has the case been listed for a final contested hearing?")
+        expect(response.body).to include("Has the proceeding been listed for a final contested hearing?")
       end
     end
   end
@@ -84,7 +84,7 @@ RSpec.describe "FinalHearingsController" do
             end
 
             it "the response includes the error message" do
-              expect(response.body).to include("Select yes if the case has been listed for a final hearing")
+              expect(response.body).to include("Select yes if the proceeding has been listed for a final hearing")
             end
           end
 

@@ -179,9 +179,9 @@ en:
               blank: &invalid_hearing_date Enter a valid final hearing date
               date_not_valid: *invalid_hearing_date
             details:
-              blank: Enter information to explain why this has not been listed for a final hearing
+              blank: Enter details to explain why you have selected full representation without a final hearing date
             listed:
-              inclusion: Select yes if the case has been listed for a final hearing
+              inclusion: Select yes if the proceeding has been listed for a final hearing
         application_merits_task/matter_opposition:
           attributes:
             reason:

@@ -1414,7 +1414,7 @@ en:
           question: Have you used delegated functions for this proceeding?
       final_hearings:
         show:
-          question: Has the case been listed for a final contested hearing?
+          question: Has the proceeding been listed for a final contested hearing?
           hearing: When is the hearing?
           details: Why have you selected full representation without a final hearing date?
       confirm_delegated_functions_date:

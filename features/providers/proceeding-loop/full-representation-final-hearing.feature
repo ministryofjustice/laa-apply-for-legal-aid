@@ -38,7 +38,7 @@ Feature: Choosing full representation level of service in proceeding loop
     Then I should see 'Proceeding 2 of 2\nChild arrangements order \(contact\)\nFor the substantive application, select the level of service'
     When I choose 'Full Representation'
     And I click 'Save and continue'
-    Then I should see 'Has the case been listed for a final contested hearing?'
+    Then I should see 'Has the proceeding been listed for a final contested hearing?'
     When I choose 'No'
     And I fill "final-hearing-details-field" with "Valid reasons for not listing the proceeding"
     And I click 'Save and continue'
