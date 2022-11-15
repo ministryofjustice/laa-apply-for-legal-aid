@@ -321,6 +321,16 @@ en:
         section_delegated:
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
+      level_of_service:
+        emergency:
+          question: Emergency level of service
+        substantive:
+          question: Substantive level of service
+      scope_limits:
+        emergency:
+          question: Emergency scope limitations
+        substantive:
+          question: Substantive scope limitations
       proceeding_details_section:
         heading: proceeding details
         client_role: Client role
