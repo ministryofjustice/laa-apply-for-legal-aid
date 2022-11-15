@@ -21,11 +21,21 @@
     <% end %>
   </section>
 
-  <!-- TODO: fix this for truelayer journey -->
   <% if @legal_aid_application.irregular_incomes.any? %>
     <%= render 'shared/irregular_incomes_table',
                irregular_incomes: @legal_aid_application.irregular_incomes,
                period: @legal_aid_application.year_to_calculation_date %>
+  <% else %>
+    <section>
+      <dl class="govuk-summary-list govuk-!-margin-top-6">
+        <%= check_answer_no_link(
+            name: :student_finance_question,
+            question: t("shared.check_answers.student_finance.does_your_client"),
+            answer: yes_no(@legal_aid_application.receives_student_finance?),
+            read_only: true,
+          ) %>
+      </dl>
+    </section>
   <% end %>
 
   <section class="print-no-break">

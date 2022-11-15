@@ -144,6 +144,12 @@ Feature: Review and print your application
     And I should see "Maintenance payments to a former partner"
     And I should see "Payments towards legal aid in a criminal case"
 
+  Scenario: For a non-passported truelayer bank transactions journey without student finance
+    Given I have completed truelayer application with merits and no student finance
+    When I view the review and print your application page
+    Then I should not see "Student loan"
+    And the answer to the "Does your client receive student finance?" question should be "No"
+
   Scenario: For a passported journey
     Given I have completed a passported application with merits
     When I view the review and print your application page

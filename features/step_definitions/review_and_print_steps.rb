@@ -101,6 +101,44 @@ Given("I have completed truelayer application with merits") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have completed truelayer application with merits and no student finance") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_employed_applicant,
+    :with_non_passported_state_machine,
+    :with_restrictions,
+    :with_vehicle,
+    :with_transaction_period,
+    :with_extra_employment_information,
+    :with_other_assets_declaration,
+    :with_policy_disregards,
+    :with_savings_amount,
+    :with_open_banking_consent,
+    :with_consent,
+    :with_dependant,
+    :with_own_home_mortgaged,
+    :with_cfe_v5_result,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
+    property_value: 599_999.99,
+    outstanding_mortgage_amount: 399_999.99,
+    shared_ownership: "partner_or_ex_partner",
+    percentage_home: 33.33,
+    explicit_proceedings: %i[da002 da006],
+    set_lead_proceeding: :da002,
+    student_finance: false,
+  )
+
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
+  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
+  @legal_aid_application.provider.save!
+
+  login_as @legal_aid_application.provider
+end
+
 Given("I have completed a passported application with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
@@ -147,4 +185,10 @@ Then("the \"Income, regular payments and assets\" review section should contain:
       expect(page).to have_css(".govuk-table__cell", text: expectated[:question])
     end
   end
+end
+
+Then("the answer to the {string} question should be {string}") do |question, answer|
+  question = find("dt", text: question)
+  answer = question.sibling("dd", text: answer)
+  expect(answer).to be_truthy
 end
