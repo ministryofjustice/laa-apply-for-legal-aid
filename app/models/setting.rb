@@ -35,6 +35,10 @@ class Setting < ApplicationRecord
     setting.enhanced_bank_upload?
   end
 
+  def self.means_test_review_phase_one?
+    setting.means_test_review_phase_one
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

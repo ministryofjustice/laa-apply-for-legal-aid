@@ -76,6 +76,16 @@
           legend: { text: t('.labels.enhanced_bank_upload') }
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :means_test_review_phase_one,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t('.hints.means_test_review_phase_one')},
+          legend: { text: t('.labels.means_test_review_phase_one') }
+        ) %>
+
     <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
   <% end %>
 <% end %>

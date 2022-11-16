@@ -43,6 +43,7 @@ RSpec.describe Admin::SettingsController do
           enable_mini_loop: "true",
           enable_loop: "true",
           enhanced_bank_upload: "true",
+          means_test_review_phase_one: "true",
         },
       }
     end
@@ -59,6 +60,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.enable_mini_loop?).to be(true)
       expect(setting.enable_loop?).to be(true)
       expect(setting.enhanced_bank_upload?).to be(true)
+      expect(setting.means_test_review_phase_one?).to be(true)
     end
 
     it "create settings if they do not exist" do
