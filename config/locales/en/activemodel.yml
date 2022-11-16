@@ -109,6 +109,7 @@ en:
             national_insurance_number:
               blank: Enter a National Insurance number
               not_valid: Enter a valid National Insurance number
+              invalid: Enter a valid National Insurance number
             employed:
               blank: Select yes if your client is employed
             base:

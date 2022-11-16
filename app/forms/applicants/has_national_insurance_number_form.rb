@@ -6,9 +6,12 @@ module Applicants
 
     before_validation :normalise_national_insurance_number
 
-    validates :has_national_insurance_number, inclusion: %w[true false], unless: :draft?
-    validates :national_insurance_number, presence: true, if: :has_national_insurance_number?, unless: :draft?
-    validate :validate_national_insurance_number
+    validates :has_national_insurance_number, inclusion: { in: %w[true false] }, unless: :draft?
+
+    with_options unless: :draft?, if: :has_national_insurance_number? do |form|
+      form.validates :national_insurance_number, presence: true
+      form.validates :national_insurance_number, format: { with: Applicant::NINO_REGEXP }, unless: proc { national_insurance_number.blank? || skip_regex_validation? }
+    end
 
   private
 
@@ -20,13 +23,8 @@ module Applicants
       national_insurance_number.upcase!
     end
 
-    def validate_national_insurance_number
-      return unless has_national_insurance_number?
-      return if draft? && national_insurance_number.blank?
-      return if skip_known_test_ninos?
-      return if Applicant::NINO_REGEXP.match?(national_insurance_number)
-
-      errors.add(:national_insurance_number, :not_valid)
+    def skip_regex_validation?
+      test_level_validation? && known_test_ninos.include?(national_insurance_number)
     end
 
     def skip_known_test_ninos?
