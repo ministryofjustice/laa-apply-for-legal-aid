@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template">
   <head>
-    <%= render partial: 'layouts/google_tag_manager' if cookies_enabled? %>
+    <%= render partial: "layouts/google_tag_manager" if cookies_enabled? %>
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <title><%= html_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'styles', media: 'all' %>
+    <%= stylesheet_pack_tag "styles", media: "all" %>
     <noscript>
       <style>
         .proceeding-item { display: block; }
         #search-field { display: none; }
       </style>
     </noscript>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag "application" %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0b0c0c">
 
-    <%= favicon_pack_tag 'favicon.ico' %>
-    <link rel="shortcut icon" href="<%= asset_pack_path('media/images/favicon.ico') %>" type="image/x-icon">
-    <link rel="mask-icon" href="<%= asset_pack_path('media/images/govuk-mask-icon.svg') %>" color="#0b0c0c">
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_pack_path('media/images/govuk-apple-touch-icon-180x180.png') %>">
-    <link rel="apple-touch-icon" sizes="167x167" href="<%= asset_pack_path('media/images/govuk-apple-touch-icon-167x167.png') %>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_pack_path('media/images/govuk-apple-touch-icon-152x152.png') %>">
-    <link rel="apple-touch-icon" href="<%= asset_pack_path('media/images/govuk-apple-touch-icon.png') %>">
+    <%= favicon_pack_tag "favicon.ico" %>
+    <link rel="shortcut icon" href="<%= asset_pack_path("media/images/favicon.ico") %>" type="image/x-icon">
+    <link rel="mask-icon" href="<%= asset_pack_path("media/images/govuk-mask-icon.svg") %>" color="#0b0c0c">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_pack_path("media/images/govuk-apple-touch-icon-180x180.png") %>">
+    <link rel="apple-touch-icon" sizes="167x167" href="<%= asset_pack_path("media/images/govuk-apple-touch-icon-167x167.png") %>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_pack_path("media/images/govuk-apple-touch-icon-152x152.png") %>">
+    <link rel="apple-touch-icon" href="<%= asset_pack_path("media/images/govuk-apple-touch-icon.png") %>">
 
     <!--[if !IE 8]> <link href="/govuk-frontend/all.css" rel="stylesheet"/> <![endif]-->
 
@@ -33,11 +33,11 @@
 
     <!--[if lt IE 9]> <script src="/html5-shiv/html5shiv.js"></script> <![endif]-->
 
-    <meta property="og:image" content="<%= asset_pack_path('media/images/govuk-opengraph-image.png') %>">
+    <meta property="og:image" content="<%= asset_pack_path("media/images/govuk-opengraph-image.png") %>">
   </head>
 
   <body class="govuk-template__body ">
-    <%= render partial: 'layouts/google_tag_manager_no_script' if google_tag_present? %>
+    <%= render partial: "layouts/google_tag_manager_no_script" if google_tag_present? %>
     <script nonce="<%= content_security_policy_script_nonce %>">
       document.body.className = (
         (document.body.className)
@@ -48,14 +48,14 @@
 
     <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
-    <%= render partial: 'layouts/header' %>
+    <%= render partial: "layouts/header" %>
 
     <div class="govuk-width-container">
       <%= govuk_phase_banner(
-        tag: {text: t(".header.phase")},
-        text: t(".header.phase_banner_html", link: govuk_link_to(t(".header.feedback"), new_feedback_path)),
-        classes: "no-print"
-      ) %>
+            tag: { text: t(".header.phase") },
+            text: t(".header.phase_banner_html", link: govuk_link_to(t(".header.feedback"), new_feedback_path)),
+            classes: "no-print",
+          ) %>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half show-empty">
@@ -71,7 +71,7 @@
 
       <main class="govuk-main-wrapper " id="main-content" role="main">
         <div id="print-logo">
-          <%= image_pack_tag('crest.svg', alt: "government-crest", style: "height=58") %>
+          <%= image_pack_tag("crest.svg", alt: "government-crest", style: "height=58") %>
           Legal Aid Agency
         </div>
         <% if flash[:error] %>
@@ -80,7 +80,7 @@
           </div>
         <% end %>
         <% if flash[:notice] %>
-          <%= govuk_warning_text(icon_fallback_text: t('.header.notice')) do %>
+          <%= govuk_warning_text(icon_fallback_text: t(".header.notice")) do %>
             <%= flash[:notice] %>
           <% end %>
         <% end %>
@@ -89,6 +89,6 @@
       </main>
     </div>
 
-    <%= render partial: 'layouts/footer' %>
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>
