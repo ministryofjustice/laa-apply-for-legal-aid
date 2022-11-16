@@ -43,6 +43,7 @@ en:
           enable_mini_loop: Enable mini loop for proceeding types/CIT and DF
           enable_loop: Enable loop for proceeding types/levels of service
           enhanced_bank_upload: Enable categorisation for the enhanced bank upload journey
+          means_test_review_phase_one: Enable changes for MTR Phase 1
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -54,6 +55,7 @@ en:
           enable_mini_loop: Select Yes to turn on mini loop for proceeding type choices for CIT and DF
           enable_loop: Select Yes to turn on the extended loop for proceeding type choices for levels of service
           enhanced_bank_upload: Select Yes to turn on the enhanced bank upload journey
+          means_test_review_phase_one: Select Yes to turn on the Means Test Review Phase One changes
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications

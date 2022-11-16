@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_164239) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_10_161139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -844,6 +844,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_164239) do
     t.boolean "enable_mini_loop", default: false, null: false
     t.boolean "enable_loop", default: false, null: false
     t.boolean "enhanced_bank_upload", default: false, null: false
+    t.boolean "means_test_review_phase_one", default: false, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
