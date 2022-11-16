@@ -24,6 +24,12 @@
           read_only: @read_only
         ) %>
     <%= render(
+          'shared/check_answers/final_hearing',
+          proceeding: proceeding,
+          level_of_service: :emergency,
+          read_only: @read_only
+        ) %>
+    <%= render(
           'shared/check_answers/scope_limits',
           proceeding: proceeding,
           level_of_service: :emergency,
@@ -32,6 +38,12 @@
   <% end %>
   <%= render(
         'shared/check_answers/level_of_service',
+        proceeding: proceeding,
+        level_of_service: :substantive,
+        read_only: @read_only
+      ) %>
+  <%= render(
+        'shared/check_answers/final_hearing',
         proceeding: proceeding,
         level_of_service: :substantive,
         read_only: @read_only

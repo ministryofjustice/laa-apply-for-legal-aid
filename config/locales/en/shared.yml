@@ -321,6 +321,11 @@ en:
         section_delegated:
           used_delegated_functions: Have you used delegated functions?
           used_delegated_functions_on: Date you used delegated functions
+      final_hearing:
+        date:
+          question: Final hearing date
+        details:
+          question: Reasons for not listing final hearing
       level_of_service:
         emergency:
           question: Emergency level of service
