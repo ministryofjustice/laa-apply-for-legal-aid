@@ -264,6 +264,10 @@ en:
           benefit_evidence: Benefit evidence
           employment_evidence: Employment evidence
           gateway_evidence: Gateway evidence
+          court_application_or_order: Court application or order
+          court_order: Court order
+          court_application: Court application
+          expert_report: Expert report
         items:
           prospects_of_success: Is the chance of a successful outcome 50% or better?
           success_prospect: What is the chance of a successful outcome?

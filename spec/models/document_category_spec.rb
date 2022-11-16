@@ -19,7 +19,18 @@ RSpec.describe DocumentCategory do
   describe ".displayable_document_category_names" do
     before { described_class.populate }
 
-    let(:expected_categories) { %w[benefit_evidence employment_evidence gateway_evidence uncategorised] }
+    let(:expected_categories) do
+      %w[
+        benefit_evidence
+        employment_evidence
+        gateway_evidence
+        uncategorised
+        court_application_or_order
+        court_application
+        court_order
+        expert_report
+      ]
+    end
 
     it "returns an array of names to display on evidence upload page" do
       expect(described_class.displayable_document_category_names).to match_array(expected_categories)
@@ -39,6 +50,10 @@ RSpec.describe DocumentCategory do
         means_report
         merits_report
         statement_of_case_pdf
+        court_application_or_order_pdf
+        court_application_pdf
+        court_order_pdf
+        expert_report_pdf
       ]
     end
 
