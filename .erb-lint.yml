@@ -12,7 +12,6 @@ linters:
     exclude:
       - "**/app/views/admin/**/*"
       - "**/app/views/citizens/**/*"
-      - "**/app/views/feedback/*"
       - "**/app/views/layouts/*"
       - "**/app/views/providers/**/*"
       - "**/app/views/shared/**/*"
