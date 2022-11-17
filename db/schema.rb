@@ -651,6 +651,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_18_095617) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "full_name"
     t.integer "ccms_opponent_id"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["legal_aid_application_id"], name: "index_opponents_on_legal_aid_application_id"
   end
 
