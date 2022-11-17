@@ -34,6 +34,7 @@ module Proceedings
     def save
       return false unless super
 
+      model.scope_limitations.where(scope_type: :emergency).destroy_all
       case accepted_emergency_defaults&.to_s
       when "true"
         new_scope = {

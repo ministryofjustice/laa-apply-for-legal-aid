@@ -32,6 +32,7 @@ module Proceedings
     end
 
     def save
+      model.scope_limitations.where(scope_type: :substantive).destroy_all
       case accepted_substantive_defaults&.to_s
       when "false"
         attributes[:substantive_level_of_service] = nil

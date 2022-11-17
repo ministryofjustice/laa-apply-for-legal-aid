@@ -182,6 +182,39 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           end
         end
 
+        context "and the proceeding already has scope limitations" do
+          before do
+            proceeding.scope_limitations.create!(
+              scope_type: 1,
+              code: "CV118",
+              meaning: "Hearing",
+              description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+            )
+          end
+
+          let(:skip_subject) { true }
+          let(:params) do
+            {
+              accepted_emergency_defaults: true,
+              emergency_level_of_service: 3,
+              emergency_level_of_service_name: "Full Representation",
+              emergency_level_of_service_stage: 8,
+              hearing_date_3i: Date.yesterday.day,
+              hearing_date_2i: Date.yesterday.month,
+              hearing_date_1i: Date.yesterday.year,
+            }
+          end
+
+          it "deletes the existing emergency scope limitations and creates one new emergency scope limitation" do
+            save_form
+            expect(proceeding.scope_limitations.where(scope_type: :emergency).count).to eq 1
+            expect(proceeding.scope_limitations.find_by(scope_type: :emergency)).to have_attributes(code: "CV117",
+                                                                                                    meaning: "Interim order inc. return date",
+                                                                                                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                                                                                                    hearing_date: Date.yesterday)
+          end
+        end
+
         context "without calling the subject" do
           let(:skip_subject) { true }
 
