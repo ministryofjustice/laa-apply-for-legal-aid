@@ -262,6 +262,7 @@ Rails.application.routes.draw do
         resource :in_scope_of_laspo, only: %i[show update]
         resource :opponents_name, only: %i[show update]
         resource :opponents_mental_capacity, only: %i[show update]
+        resource :domestic_abuse_summary, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
         resource :nature_of_urgencies, only: %i[show update]
         resource :opponent, only: %i[show update]
