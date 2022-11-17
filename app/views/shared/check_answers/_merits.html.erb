@@ -27,20 +27,13 @@
   </section>
 <% end %>
 
-<div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">
-
-  <%= check_answer_change_link(
-        name: :opponent_details,
-        url: providers_legal_aid_application_opponent_path(@legal_aid_application),
-        question: t('.opponent-heading'),
-        read_only: read_only
-      ) %>
-
+  <h2 class="govuk-heading-m govuk-!-padding-top-6"><%= t '.opponent-heading' %></h2>
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
+    <%= check_answer_link(
           name: :full_name,
           question: t('.items.full_name'),
+          url: providers_legal_aid_application_opponents_name_path(@legal_aid_application),
           answer: opponent.full_name,
           read_only: read_only
         ) %>
@@ -49,9 +42,10 @@
   <%= render 'shared/check_answers/section_break' unless opponent.full_name %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
+    <%= check_answer_link(
           name: :understands_terms_of_court_order,
           question: t('.items.understands_terms_of_court_order'),
+          url: providers_legal_aid_application_opponents_mental_capacity_path(@legal_aid_application),
           answer: yes_no(opponent.understands_terms_of_court_order),
           no_border: !opponent.understands_terms_of_court_order,
           read_only: read_only
@@ -62,9 +56,10 @@
   <%= render 'shared/check_answers/section_break' unless opponent.understands_terms_of_court_order %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
+    <%= check_answer_link(
           name: :warning_letter_sent,
           question: t('.items.warning_letter_sent'),
+          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
           answer: yes_no(opponent.warning_letter_sent),
           no_border: !opponent.warning_letter_sent,
           read_only: read_only
@@ -75,9 +70,10 @@
   <%= render 'shared/check_answers/section_break' unless opponent.warning_letter_sent %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
+    <%= check_answer_link(
           name: :police_notified,
           question: t('.items.police_notified'),
+          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
           answer: yes_no(opponent.police_notified),
           no_border: true,
           read_only: read_only
@@ -88,9 +84,10 @@
   <%= render 'shared/check_answers/section_break' %>
 
   <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_no_link(
+    <%= check_answer_link(
           name: :bail_conditions_set,
           question: t('.items.bail_conditions_set'),
+          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
           answer: yes_no(opponent.bail_conditions_set),
           no_border: opponent.bail_conditions_set,
           read_only: read_only
