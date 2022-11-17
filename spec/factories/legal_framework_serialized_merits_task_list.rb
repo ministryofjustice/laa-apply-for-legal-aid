@@ -44,7 +44,10 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              # opponent_details: [],
               statement_of_case: [],
             },
           },
@@ -67,7 +70,10 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              # opponent_details: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -92,7 +98,10 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              # opponent_details: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -128,7 +137,8 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -166,7 +176,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -203,7 +215,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               nature_of_urgency: [],
               children_application: [],
@@ -237,7 +251,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               nature_of_urgency: [],
             },

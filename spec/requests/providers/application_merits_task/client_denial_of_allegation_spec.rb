@@ -80,7 +80,9 @@ module Providers
         context "when all previous tasks are completed" do
           before do
             legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
             legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
           end
 

@@ -100,19 +100,7 @@ module Providers
 
           it "redirects to the next incomplete question" do
             patch_das
-            expect(response).to redirect_to(new_providers_legal_aid_application_opponents_name_path(legal_aid_application))
-          end
-        end
-
-        context "when the all but one task is complete" do
-          before do
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-            legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
-          end
-
-          it "redirects to the final question" do
-            patch_das
-            expect(response).to redirect_to(providers_legal_aid_application_statement_of_case_path(legal_aid_application))
+            expect(response).to redirect_to(providers_legal_aid_application_opponents_name_path(legal_aid_application))
           end
         end
 
