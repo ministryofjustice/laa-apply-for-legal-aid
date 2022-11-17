@@ -261,6 +261,7 @@ Rails.application.routes.draw do
 
       scope module: :application_merits_task do
         resource :opponents_name, only: %i[show update]
+        resource :opponents_mental_capacity, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
       end
     end

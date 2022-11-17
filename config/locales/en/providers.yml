@@ -426,6 +426,11 @@ en:
           h1-heading: Opponent's name
           first_name: First name
           last_name: Last name
+      opponents_mental_capacities:
+        show:
+          h1-heading: Does the opponent have the mental capacity to understand the terms of a court order?
+          first_name: First name
+          last_name: Last name
       opponents:
         show:
           h1-heading: Opponent details

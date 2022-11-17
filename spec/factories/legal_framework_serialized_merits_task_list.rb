@@ -9,7 +9,7 @@ FactoryBot.define do
           tasks: {
             latest_incident_details: [],
             opponent_name: [],
-            # opponent_mental_capacity: [],
+            opponent_mental_capacity: [],
             # domestic_abuse_summary: [],
             # opponent_details: [],
             children_application: [],
