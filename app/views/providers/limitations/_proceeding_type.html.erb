@@ -30,7 +30,7 @@
             <%= proceeding.emergency_level_of_service_name %>
           </p>
           <p><strong><%= t('.allowable_work') %></strong>
-            <%= proceeding.delegated_functions_scope_limitation_description %>
+            <%= scope_limits(proceeding, "emergency") %>
           </p>
         <% end %>
         <h4 class="govuk-heading-m"><%= t('.substantive_certificate') %></h4>
@@ -38,7 +38,7 @@
           <%= proceeding.substantive_level_of_service_name %>
         </p>
         <p><strong><%= t('.allowable_work') %></strong>
-          <%= proceeding.substantive_scope_limitation_description %>
+          <%= scope_limits(proceeding, "substantive") %>
         </p>
       </div>
     </details>
