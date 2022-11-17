@@ -260,6 +260,7 @@ Rails.application.routes.draw do
       end
 
       scope module: :application_merits_task do
+        resource :opponents_name, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
       end
     end

@@ -150,8 +150,10 @@ cy:
               blank: tnedicni eht fo sliated retnE
         application_merits_task/opponent:
           attributes:
-            full_name:
-              blank: eman s'tnenoppo eht retnE
+            first_name:
+              blank: eman tsrif s'tnenoppo eht retnE
+            last_name:
+              blank: eman tsal s'tnenoppo eht retnE
             understands_terms_of_court_order:
               blank: redro truoc a fo smret eht dnatsrednu ot yticapac latnem eht
                 sah tnenoppo eht fi sey tceleS

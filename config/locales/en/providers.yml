@@ -421,6 +421,11 @@ en:
       matter_opposed_reasons:
         show:
           page_heading: Why is the matter opposed by your client or the other party?
+      opponents_names:
+        show:
+          h1-heading: Opponent's name
+          first_name: First name
+          last_name: Last name
       opponents:
         show:
           h1-heading: Opponent details
@@ -969,6 +974,9 @@ en:
         proceeding_heading: Enter details for each proceeding
       task_list_item:
         latest_incident_details: Latest incident details
+        opponent_name: "Opponent's name"
+#        opponent_mental_capacity: "Opponent's mental capacity"
+#        domestic_abuse_summary: Domestic abuse summary
         opponent_details: Opponent details
         statement_of_case: Statement of case
         chances_of_success: Chances of success
@@ -990,6 +998,9 @@ en:
           complete: Completed
         urls:
           latest_incident_details: date_client_told_incident
+          opponent_name: opponents_name
+#          opponent_mental_capacity: opponents_mental_capacity
+#          domestic_abuse_summary: domestic_abuse_summary
           opponent_details: opponent
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
