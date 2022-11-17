@@ -35,7 +35,11 @@ RSpec.describe Opponents::NameForm, type: :form do
     subject(:save_form) { name_form.save }
 
     it "creates a new opponent" do
-      expect { save_form }.to change(ApplicationMeritsTask::Opponent, count).by(1)
+      save_form
+      expect(opponent).to have_attributes(
+        first_name: "Bob",
+        last_name: "Smith",
+      )
     end
   end
 end
