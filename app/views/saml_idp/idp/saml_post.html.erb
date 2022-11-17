@@ -7,9 +7,9 @@
   </head>
   <body>
     <%= form_tag(provider_session_url) do %>
-      <%= hidden_field_tag('SAMLResponse', @saml_response) %>
-      <%= hidden_field_tag('RelayState', params[:RelayState]) %>
-      <%= submit_tag 'Submit' %>
+      <%= hidden_field_tag("SAMLResponse", @saml_response) %>
+      <%= hidden_field_tag("RelayState", params[:RelayState]) %>
+      <%= submit_tag "Submit" %>
     <% end %>
   </body>
 </html>

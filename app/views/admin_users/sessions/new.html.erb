@@ -1,21 +1,21 @@
-<%= page_template page_title: t('.heading'), back_link: :none do %>
+<%= page_template page_title: t(".heading"), back_link: :none do %>
   <% if @show_sign_in %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="govuk-form-group">
-        <%= f.label :username, class: 'govuk-label' %>
-        <%= f.text_field :username, autofocus: true, class: 'govuk-input govuk-input--width-20' %>
+        <%= f.label :username, class: "govuk-label" %>
+        <%= f.text_field :username, autofocus: true, class: "govuk-input govuk-input--width-20" %>
       </div>
 
       <div class="govuk-form-group">
-        <%= f.label :password, class: 'govuk-label' %>
-        <%= f.password_field :password, autocomplete: 'current-password', class: 'govuk-input govuk-input--width-20' %>
+        <%= f.label :password, class: "govuk-label" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "govuk-input govuk-input--width-20" %>
       </div>
 
       <div class="actions">
-        <%= f.submit t('.button'), class: 'govuk-button' %>
+        <%= f.submit t(".button"), class: "govuk-button" %>
       </div>
     <% end %>
   <% end %>
 <% end %>
 
-<%= link_to_accessible(t('.google_login'), omniauth_login_start_path(:google_oauth2), method: :post) %>
+<%= link_to_accessible(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>

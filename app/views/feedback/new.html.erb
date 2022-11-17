@@ -1,50 +1,50 @@
-<%= page_template page_title: t('.title'), show_errors_for: @feedback, back_link: back_button, success_message: success_message do %>
+<%= page_template page_title: t(".title"), show_errors_for: @feedback, back_link: back_button, success_message: do %>
   <%= form_for(@feedback, url: feedback_index_path) do |form| %>
-    <% applicant_email_hint = @journey == :citizen ? t('.applicant_email_hint') : '' %>
+    <% applicant_email_hint = @journey == :citizen ? t(".applicant_email_hint") : "" %>
     <%= form.govuk_collection_radio_buttons(
-            :done_all_needed,
-            yes_no_options,
-            :value,
-            :label,
-            inline: true,
+          :done_all_needed,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          legend: {
+            text: t(".done_all_needed"),
+          },
+        ) %>
+
+    <%= Feedback.enum_radio_buttons(
+          form, :difficulty,
+          order: :reverse,
+          args: {
             legend: {
-              text: t('.done_all_needed'),
-            }
+              text: t(".difficulty"),
+            },
+          }
         ) %>
 
     <%= Feedback.enum_radio_buttons(
-            form, :difficulty,
-            order: :reverse,
-            args: {
-                legend: {
-                  text: t('.difficulty'),
-                }
-            }
-        ) %>
-
-    <%= Feedback.enum_radio_buttons(
-            form, :satisfaction,
-            order: :reverse,
-            args: {
-                legend: {
-                  text: t('.satisfaction'),
-                }
-            }
+          form, :satisfaction,
+          order: :reverse,
+          args: {
+            legend: {
+              text: t(".satisfaction"),
+            },
+          }
         ) %>
 
     <%= form.govuk_text_area(
-            :improvement_suggestion,
-            label: {text: t('.improvement_suggestion'), size: 'm'},
-            hint: {text: applicant_email_hint},
-            rows: 4,
-            width: 'full'
+          :improvement_suggestion,
+          label: { text: t(".improvement_suggestion"), size: "m" },
+          hint: { text: applicant_email_hint },
+          rows: 4,
+          width: "full",
         ) %>
 
-    <%= hidden_field_tag 'signed_out', @signed_out %>
-    <%= hidden_field_tag 'application_id', @application_id %>
-    <%= hidden_field_tag 'submission_feedback', @submission_feedback %>
+    <%= hidden_field_tag "signed_out", @signed_out %>
+    <%= hidden_field_tag "application_id", @application_id %>
+    <%= hidden_field_tag "submission_feedback", @submission_feedback %>
 
-    <%= form.govuk_submit t('generic.send') %>
+    <%= form.govuk_submit t("generic.send") %>
 
   <% end %>
 <% end %>

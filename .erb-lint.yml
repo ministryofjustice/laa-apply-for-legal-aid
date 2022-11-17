@@ -1,4 +1,5 @@
 ---
+EnableDefaultLinters: true
 linters:
   ErbSafety:
     enabled: true
@@ -6,3 +7,20 @@ linters:
       - '**/app/views/layouts/_google_tag_manager.html.erb'
   HardCodedString:
     enabled: false
+  Rubocop:
+    enabled: true
+    exclude:
+      - "**/app/views/admin/**/*"
+      - "**/app/views/citizens/**/*"
+      - "**/app/views/providers/**/*"
+      - "**/app/views/shared/**/*"
+      - "**/app/views/shared/*"
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+      Layout/InitialIndentation:
+        Enabled: false
+      Layout/TrailingEmptyLines:
+        Enabled: false
+      Lint/UselessAssignment:
+        Enabled: false
