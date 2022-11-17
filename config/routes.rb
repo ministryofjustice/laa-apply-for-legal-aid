@@ -188,7 +188,6 @@ Rails.application.routes.draw do
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
 
-      resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
       resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
       resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
       resource :client_offered_undertakings, only: %i[show update], controller: "application_merits_task/client_offered_undertakings"

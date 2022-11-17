@@ -54,7 +54,9 @@ module LegalFramework
       context "when all tasks are complete" do
         before do
           merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-          merits_task_list.mark_as_complete!(:application, :opponent_details)
+          merits_task_list.mark_as_complete!(:application, :opponent_name)
+          merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+          merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
           merits_task_list.mark_as_complete!(:application, :children_application)
           merits_task_list.mark_as_complete!(:application, :statement_of_case)
           merits_task_list.mark_as_complete!(:application, :why_matter_opposed)
@@ -71,7 +73,9 @@ module LegalFramework
       context "when all tasks are complete or ignored" do
         before do
           merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-          merits_task_list.mark_as_complete!(:application, :opponent_details)
+          merits_task_list.mark_as_complete!(:application, :opponent_name)
+          merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+          merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
           merits_task_list.mark_as_complete!(:application, :children_application)
           merits_task_list.mark_as_ignored!(:application, :statement_of_case)
           merits_task_list.mark_as_complete!(:application, :why_matter_opposed)

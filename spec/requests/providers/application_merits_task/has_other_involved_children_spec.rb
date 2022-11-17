@@ -62,7 +62,9 @@ module Providers
 
           before do
             application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-            application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
             application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
           end
 

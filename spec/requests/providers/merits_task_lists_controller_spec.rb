@@ -62,7 +62,9 @@ RSpec.describe Providers::MeritsTaskListsController do
     context "when all tasks are complete" do
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :why_matter_opposed)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
@@ -75,7 +77,7 @@ RSpec.describe Providers::MeritsTaskListsController do
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)
       end
 
-      context "evidence uploadf" do
+      context "evidence upload" do
         context "when at least one evidence type is required" do
           it "redirects to the new upload evidence page" do
             expect(response).to redirect_to(providers_legal_aid_application_uploaded_evidence_collection_path(legal_aid_application))
@@ -90,7 +92,9 @@ RSpec.describe Providers::MeritsTaskListsController do
 
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA001, :chances_of_success)
         patch providers_legal_aid_application_merits_task_list_path(legal_aid_application)

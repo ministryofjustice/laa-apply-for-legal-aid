@@ -93,7 +93,9 @@ module Providers
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
           legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
           login_as provider
         end
 
@@ -110,7 +112,9 @@ module Providers
 
             before do
               legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
             end
 
             it "redirects to the next page" do
@@ -125,7 +129,9 @@ module Providers
 
             before do
               legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
             end
 
             it "redirects to the next page" do
@@ -140,7 +146,9 @@ module Providers
 
             before do
               legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+              legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
             end
 
             it "redirects to the next page" do
@@ -156,7 +164,9 @@ module Providers
               before do
                 create(:involved_child, legal_aid_application:)
                 legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_mental_capacity)
+                legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :domestic_abuse_summary)
               end
 
               it "redirects to the next page" do
