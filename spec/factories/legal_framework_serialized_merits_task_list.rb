@@ -10,7 +10,7 @@ FactoryBot.define do
             latest_incident_details: [],
             opponent_name: [],
             opponent_mental_capacity: [],
-            # domestic_abuse_summary: [],
+            domestic_abuse_summary: [],
             # opponent_details: [],
             children_application: [],
             statement_of_case: [],

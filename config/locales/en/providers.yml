@@ -431,6 +431,15 @@ en:
           h1-heading: Does the opponent have the mental capacity to understand the terms of a court order?
           first_name: First name
           last_name: Last name
+      domestic_abuse_summaries:
+        show:
+          h1-heading: Opponent details
+          warning_letter_sent: Has a warning letter been sent to the opponent?
+          police_notified: Have the police been notified?
+          bail_conditions_set: Have bail conditions been set?
+          bail_conditions_set_yes: Give details of the bail conditions, including the date they're likely to end
+          police_notified_no: Tell us why the police have not been notified
+          police_notified_yes: Tell us what action they've taken (if any), including dates and the outcome
       opponents:
         show:
           h1-heading: Opponent details
@@ -980,8 +989,8 @@ en:
       task_list_item:
         latest_incident_details: Latest incident details
         opponent_name: "Opponent's name"
-#        opponent_mental_capacity: "Opponent's mental capacity"
-#        domestic_abuse_summary: Domestic abuse summary
+        opponent_mental_capacity: "Opponent's mental capacity"
+        domestic_abuse_summary: Domestic abuse summary
         opponent_details: Opponent details
         statement_of_case: Statement of case
         chances_of_success: Chances of success
@@ -1004,8 +1013,8 @@ en:
         urls:
           latest_incident_details: date_client_told_incident
           opponent_name: opponents_name
-#          opponent_mental_capacity: opponents_mental_capacity
-#          domestic_abuse_summary: domestic_abuse_summary
+          opponent_mental_capacity: opponents_mental_capacity
+          domestic_abuse_summary: domestic_abuse_summary
           opponent_details: opponent
           statement_of_case: statement_of_case
           chances_of_success: chances_of_success_index
