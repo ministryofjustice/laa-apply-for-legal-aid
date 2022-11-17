@@ -205,8 +205,10 @@ en:
               blank: Enter any information about when the hearing is likely to be held
         application_merits_task/opponent:
           attributes:
-            full_name:
-              blank: Enter the opponent's name
+            first_name:
+              blank: Enter the opponent's first name
+            last_name:
+              blank: Enter the opponent's last name
             understands_terms_of_court_order:
               blank: Select yes if the opponent has the mental capacity to understand the terms of a court order
             warning_letter_sent:
