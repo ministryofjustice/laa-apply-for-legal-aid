@@ -4,7 +4,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     date_of_birth { Faker::Date.birthday }
     email { Faker::Internet.safe_email }
-    national_insurance_number { Faker::Base.regexify(Applicant::NINO_REGEXP) }
+    national_insurance_number { "JA123456D" }
     employed { false }
 
     trait :with_address do
