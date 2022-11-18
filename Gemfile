@@ -97,7 +97,7 @@ gem "wicked_pdf"
 gem "secure_headers"
 
 # DFE formbuilder
-gem "govuk_design_system_formbuilder", ">= 3.0.1"
+gem "govuk_design_system_formbuilder"
 
 # DFE ViewComponent library
 gem "govuk-components"
