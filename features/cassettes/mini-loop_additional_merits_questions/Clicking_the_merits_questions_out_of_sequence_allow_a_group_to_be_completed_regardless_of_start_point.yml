@@ -54,6 +54,6 @@ http_interactions:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"6a408691-aa40-4a3a-9e15-295c68bf07fe","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[],"client_denial_of_allegation":[],"client_offer_of_undertakings":[],"children_application":[]}},"proceedings":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}},{"ccms_code":"SE013","tasks":{"chances_of_success":[],"children_proceeding":["children_application"],"attempts_to_settle":[]}}]}'
+      string: '{"request_id":"6a408691-aa40-4a3a-9e15-295c68bf07fe","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_name":[],"opponent_mental_capacity":[],"domestic_abuse_summary":[],"statement_of_case":[],"client_denial_of_allegation":[],"client_offer_of_undertakings":[],"children_application":[]}},"proceedings":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}},{"ccms_code":"SE013","tasks":{"chances_of_success":[],"children_proceeding":["children_application"],"attempts_to_settle":[]}}]}'
   recorded_at: Wed, 19 Oct 2022 14:10:54 GMT
 recorded_with: VCR 6.1.0
