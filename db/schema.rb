@@ -545,9 +545,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_161139) do
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.date "purgeable_on"
-    t.string "required_document_categories", default: [], null: false, array: true
     t.boolean "extra_employment_information"
     t.string "extra_employment_information_details"
+    t.string "required_document_categories", default: [], null: false, array: true
     t.string "full_employment_details"
     t.datetime "client_declaration_confirmed_at"
     t.boolean "substantive_cost_override"
