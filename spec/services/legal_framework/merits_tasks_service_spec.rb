@@ -55,7 +55,9 @@ module LegalFramework
             [
               { name: :nature_of_urgency, state: :ignored },
               { name: :latest_incident_details, state: :not_started },
-              { name: :opponent_details, state: :not_started },
+              { name: :opponent_name, state: :not_started },
+              { name: :opponent_mental_capacity, state: :not_started },
+              { name: :domestic_abuse_summary, state: :not_started },
               { name: :children_application, state: :not_started },
               { name: :new_question_from_lfa, state: :ignored },
             ]
@@ -80,7 +82,9 @@ module LegalFramework
             [
               { name: :nature_of_urgency, state: :not_started },
               { name: :latest_incident_details, state: :not_started },
-              { name: :opponent_details, state: :not_started },
+              { name: :opponent_name, state: :not_started },
+              { name: :opponent_mental_capacity, state: :not_started },
+              { name: :domestic_abuse_summary, state: :not_started },
               { name: :children_application, state: :not_started },
               { name: :new_question_from_lfa, state: :ignored },
             ]
@@ -110,7 +114,9 @@ module LegalFramework
         application: {
           tasks: {
             latest_incident_details: [],
-            opponent_details: [],
+            opponent_name: [],
+            opponent_mental_capacity: [],
+            domestic_abuse_summary: [],
             children_application: [],
           },
         },
@@ -132,7 +138,9 @@ module LegalFramework
           tasks: {
             nature_of_urgency: [], # This has been created in LFA but should only be shown when the enable_loop flag is set
             latest_incident_details: [],
-            opponent_details: [],
+            opponent_name: [],
+            opponent_mental_capacity: [],
+            domestic_abuse_summary: [],
             children_application: [],
             new_question_from_lfa: [], # This has been created in LFA but is not yet handled by a controller in Apply
           },
