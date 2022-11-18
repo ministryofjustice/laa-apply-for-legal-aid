@@ -710,8 +710,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_10_161139) do
     t.string "category_of_law", null: false
     t.string "category_law_code", null: false
     t.string "ccms_matter_code"
-    t.string "client_involvement_type_ccms_code", null: false
-    t.string "client_involvement_type_description", null: false
+    t.string "client_involvement_type_ccms_code"
+    t.string "client_involvement_type_description"
     t.boolean "used_delegated_functions"
     t.integer "emergency_level_of_service"
     t.string "emergency_level_of_service_name"
