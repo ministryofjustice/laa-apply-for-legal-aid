@@ -1,5 +1,7 @@
 module ProceedingMeritsTask
   class ChancesOfSuccess < ApplicationRecord
+    self.ignored_columns += %w[application_proceeding_type_id]
+
     belongs_to :proceeding
 
     PRETTY_SUCCESS_PROSPECTS = {
