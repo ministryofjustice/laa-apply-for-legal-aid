@@ -1269,13 +1269,14 @@ en:
         apply_for_legal_aid_heading: Apply for legal aid
         domestic_violence_or_abuse_only: Use this service to apply for civil legal aid in domestic violence or abuse cases.
         must_be_provider: You must be a civil or family legal aid provider to use this service.
-        use_ccms_list:
+        before_you_start:
+          conditions: |
+            You can only use this service if your client is single (unless their
+            partner is the opponent in the case)
           heading: Before you start
-          list: |
-            has a National Insurance number
-            is single (unless their partner is the opponent in the case)
-          title: "You can only use this service if your client:"
-        use_ccms_para_html: Use the Client and Cost Management System (<abbr title='Client and Cost Management System'>CCMS</abbr>) for all other applications.
+        use_ccms_para_html: |
+          Use the Client and Cost Management System (<abbr title='Client and
+          Cost Management System'>CCMS</abbr>) for all other applications.
     start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
