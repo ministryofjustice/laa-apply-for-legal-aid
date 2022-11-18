@@ -9,49 +9,49 @@
   <%= render(
         'shared/check_answers/delegated_function_details',
         proceeding: proceeding,
-        read_only: @read_only
+        read_only: read_only
       ) %>
   <%= render(
         'shared/check_answers/client_involvement_type_details',
         proceeding: proceeding,
-        read_only: @read_only
+        read_only: read_only
       ) %>
   <% if proceeding.used_delegated_functions? %>
     <%= render(
           'shared/check_answers/level_of_service',
           proceeding: proceeding,
           level_of_service: :emergency,
-          read_only: @read_only
+          read_only: read_only
         ) %>
     <%= render(
           'shared/check_answers/final_hearing',
           proceeding: proceeding,
           level_of_service: :emergency,
-          read_only: @read_only
+          read_only: read_only
         ) %>
     <%= render(
           'shared/check_answers/scope_limits',
           proceeding: proceeding,
           level_of_service: :emergency,
-          read_only: @read_only
+          read_only: read_only
         ) %>
   <% end %>
   <%= render(
         'shared/check_answers/level_of_service',
         proceeding: proceeding,
         level_of_service: :substantive,
-        read_only: @read_only
+        read_only: read_only
       ) %>
   <%= render(
         'shared/check_answers/final_hearing',
         proceeding: proceeding,
         level_of_service: :substantive,
-        read_only: @read_only
+        read_only: read_only
       ) %>
   <%= render(
         'shared/check_answers/scope_limits',
         proceeding: proceeding,
         level_of_service: :substantive,
-        read_only: @read_only
+        read_only: read_only
       ) %>
 </dl>
