@@ -2368,6 +2368,6 @@ http_interactions:
       - max-age=15724800; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"request_id":"937a0e1a-7c6b-41fc-9bf4-5a37b0cce45e","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_details":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+      string: '{"request_id":"937a0e1a-7c6b-41fc-9bf4-5a37b0cce45e","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_name":[],"opponent_mental_capacity":[],"domestic_abuse_summary":[],"statement_of_case":[]}},"proceeding_types":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
   recorded_at: Mon, 15 Aug 2022 11:33:01 GMT
 recorded_with: VCR 6.1.0
