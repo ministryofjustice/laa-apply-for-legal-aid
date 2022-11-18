@@ -72,7 +72,7 @@ RSpec.describe Applicants::BasicDetailsForm, type: :form do
     context "with test national insurance numbers" do
       let(:test_nino) { "JS130161E" }
       let(:invalid_nino) { "QQ12AS23RR" }
-      let(:valid_nino) { Faker::Base.regexify(Applicant::NINO_REGEXP) }
+      let(:valid_nino) { "JA123456D" }
 
       before do
         allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
