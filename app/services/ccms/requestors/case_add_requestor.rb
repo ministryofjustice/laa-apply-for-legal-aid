@@ -127,7 +127,6 @@ module CCMS
       end
 
       def generate_opponent(xml, opponent)
-        first_name, last_name = opponent.split_full_name
         xml.__send__(:"casebio:OtherParty") do
           xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{opponent.generate_ccms_opponent_id}")
           xml.__send__(:"casebio:SharedInd", false)
@@ -135,8 +134,8 @@ module CCMS
             xml.__send__(:"casebio:Person") do
               xml.__send__(:"casebio:Name") do
                 xml.__send__(:"common:Title", "")
-                xml.__send__(:"common:Surname", last_name)
-                xml.__send__(:"common:FirstName", first_name)
+                xml.__send__(:"common:Surname", opponent.last_name)
+                xml.__send__(:"common:FirstName", opponent.first_name)
               end
               xml.__send__(:"casebio:Address")
               xml.__send__(:"casebio:RelationToClient", "NONE")

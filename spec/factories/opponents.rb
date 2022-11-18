@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :opponent, class: "ApplicationMeritsTask::Opponent" do
     legal_aid_application
-    full_name { Faker::Name.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     understands_terms_of_court_order { "false" }
     understands_terms_of_court_order_details { Faker::Lorem.paragraph }
     warning_letter_sent { "false" }
@@ -12,7 +13,8 @@ FactoryBot.define do
     bail_conditions_set_details { Faker::Lorem.paragraph }
 
     trait :irish do
-      full_name { "Daira O'Braien" }
+      first_name { "Daira" }
+      last_name { "O'Braien" }
     end
 
     trait :police_notified_false do
