@@ -1,32 +1,32 @@
-<%= page_template page_title: t('.heading_1'), back_link: :none do %>
+<%= page_template page_title: t(".heading_1"), back_link: :none do %>
   <p class="govuk-body">
-    <strong> <%= t('.name') %></strong>
+    <strong> <%= t(".name") %></strong>
     <%= current_applicant.first_name %>
     <%= current_applicant.last_name %>
     <br>
-    <strong><%= t('.case_reference') %></strong>
+    <strong><%= t(".case_reference") %></strong>
     <%= current_applicant.legal_aid_application.application_ref %>
     <br>
-    <strong><%= t('.your_solicitor') %></strong>
+    <strong><%= t(".your_solicitor") %></strong>
     <%= current_applicant.legal_aid_application.provider.firm.name %>
   </p>
 
-  <p class="govuk-body"><%= t('.we_need_to_check') %></p>
+  <p class="govuk-body"><%= t(".we_need_to_check") %></p>
 
-  <h2 class="govuk-heading-m"><%= t('.how_we_do_this_heading') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".how_we_do_this_heading") %></h2>
 
   <% (1..4).each do |number| %>
     <p class="govuk-body"><%= t(".how_we_do_this_body_#{number}") %></p>
   <% end %>
 
-  <h2 class="govuk-heading-m"><%= t('.what_you_will_need') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".what_you_will_need") %></h2>
 
-  <p class="govuk-body"><%= t('.online_banking_details') %></p>
+  <p class="govuk-body"><%= t(".online_banking_details") %></p>
 
   <%= link_to_accessible start_button_label(:start_now),
-              forward_path,
-              class: 'govuk-button govuk-button--start govuk-!-margin-top-2',
-              role: 'button',
-              id: 'start' %>
+                         forward_path,
+                         class: "govuk-button govuk-button--start govuk-!-margin-top-2",
+                         role: "button",
+                         id: "start" %>
 
 <% end %>

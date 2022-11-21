@@ -1,17 +1,17 @@
 <% content_for(:panel) do %>
   <div class="govuk-panel govuk-panel--confirmation">
     <h1 class="govuk-panel__title govuk-!-padding-top-4">
-      <%= t('.completed_financial_assessment') %>
+      <%= t(".completed_financial_assessment") %>
     </h1>
     <div class="govuk-panel__body">
       <dl class="govuk-list inline-list">
         <dt>
-          <strong><%= t('.name') %>:</strong>
+          <strong><%= t(".name") %>:</strong>
         </dt>
         <dd><%= @applicant.full_name %></dd>
 
         <dt>
-          <strong><%= t('.reference_number') %>:</strong>
+          <strong><%= t(".reference_number") %>:</strong>
         </dt>
         <dd><%= @legal_aid_application.application_ref %></dd>
       </dl>
@@ -19,11 +19,11 @@
   </div>
 <% end %>
 
-<%= page_template page_title: t('.page-heading'), head_title: t('.completed_financial_assessment'), back_link: :none do %>
-  <p class="govuk-body"><%= t('.solicitors-actions') %></p>
-  <p class="govuk-body"><%= t('.what-happens-next') %></p>
+<%= page_template page_title: t(".page-heading"), head_title: t(".completed_financial_assessment"), back_link: :none do %>
+  <p class="govuk-body"><%= t(".solicitors-actions") %></p>
+  <p class="govuk-body"><%= t(".what-happens-next") %></p>
 <% end %>
 
 <%= govuk_inset_text do %>
-  <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t('.feedback_prefix'), new_feedback_path %><%= t('.feedback_suffix') %></p>
+  <p class="govuk-body govuk-!-padding-bottom-2"><%= link_to_accessible t(".feedback_prefix"), new_feedback_path %><%= t(".feedback_suffix") %></p>
 <% end %>

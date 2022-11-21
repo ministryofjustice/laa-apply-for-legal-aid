@@ -1,9 +1,9 @@
-<%= page_template page_title: t('.page_title'), back_link: :none do %>
+<%= page_template page_title: t(".page_title"), back_link: :none do %>
   <p class="govuk-body">
     <%= link_to_accessible(
-          t('.new_link_request'),
+          t(".new_link_request"),
           citizens_resend_link_request_path(params[:id]),
-          method: :patch
+          method: :patch,
         ) %>
   </p>
 <% end %>
