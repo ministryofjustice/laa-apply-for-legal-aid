@@ -17,10 +17,10 @@ Given("I have completed a bank statement upload application with merits") do
     explicit_proceedings: %i[da002 da006],
     set_lead_proceeding: :da002,
   )
-
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
 end
@@ -59,6 +59,7 @@ Given("I have completed an enhanced bank statement upload application with merit
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
 end
@@ -97,6 +98,7 @@ Given("I have completed truelayer application with merits") do
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
 end
@@ -131,7 +133,7 @@ Given("I have completed truelayer application with merits and no student finance
     set_lead_proceeding: :da002,
     student_finance: false,
   )
-
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
@@ -169,6 +171,7 @@ Given("I have completed a passported application with merits") do
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
+  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
 
   login_as @legal_aid_application.provider
 end

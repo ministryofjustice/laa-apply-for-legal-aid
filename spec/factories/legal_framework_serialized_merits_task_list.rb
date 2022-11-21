@@ -63,6 +63,38 @@ FactoryBot.define do
       end
     end
 
+    trait :da001_da005_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              # opponent_details: [],
+              statement_of_case: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "DA005",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
     trait :da001_as_defendant do
       lfa_response do
         {
@@ -261,6 +293,40 @@ FactoryBot.define do
           proceeding_types: [
             {
               ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :da002_da006_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              statement_of_case: [],
+              nature_of_urgency: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
+              },
+            },
+            {
+              ccms_code: "DA006",
               tasks: {
                 chances_of_success: [],
                 vary_order: [],
