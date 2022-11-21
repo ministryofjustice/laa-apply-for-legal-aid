@@ -3,18 +3,18 @@
       <table class="govuk-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col"><%= t('.applicant_name') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.application_ref') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.ccms_ref_html') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.provider_firm') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.provider_username') %></th>
-            <th class="govuk-table__header" scope="col"><%= t('.submission_date') %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".applicant_name") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".application_ref") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".ccms_ref_html") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".provider_firm") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".provider_username") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".submission_date") %></th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           <% @applications.each do |application| %>
             <tr class="govuk-table__row">
-              <td class="govuk-table__cell case-full-name"><%= application.applicant_full_name || t('generic.undefined') %></td>
+              <td class="govuk-table__cell case-full-name"><%= application.applicant_full_name || t("generic.undefined") %></td>
               <td class="govuk-table__cell case-reference-number"><%= application.application_ref %></td>
               <td class="govuk-table__cell case-reference-number"><%= application.ccms_submission.case_ccms_reference %></td>
               <td class="govuk-table__cell case-reference-number"><%= application.provider.firm.name %></td>

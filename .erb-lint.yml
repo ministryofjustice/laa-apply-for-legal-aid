@@ -10,7 +10,6 @@ linters:
   Rubocop:
     enabled: true
     exclude:
-      - "**/app/views/admin/**/*"
       - "**/app/views/citizens/**/*"
       - "**/app/views/providers/**/*"
       - "**/app/views/shared/**/*"

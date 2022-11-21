@@ -1,9 +1,9 @@
-<%= page_template page_title: t('.heading_1'), back_link: :none do %>
+<%= page_template page_title: t(".heading_1"), back_link: :none do %>
   <%= form_with(
         model: @form,
         url: admin_settings_path,
         method: :patch,
-        local: true
+        local: true,
       ) do |form| %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -12,39 +12,39 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t('.hints.mock_true_layer_data', bank_transaction_filename: Setting.bank_transaction_filename)},
-          legend: { text: t('.labels.mock_true_layer_data') }
+          hint: { text: t(".hints.mock_true_layer_data", bank_transaction_filename: Setting.bank_transaction_filename) },
+          legend: { text: t(".labels.mock_true_layer_data") },
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
-      :manually_review_all_cases,
-      yes_no_options,
-      :value,
-      :label,
-      inline: true,
-      hint: { text: t('.hints.manually_review_all_cases')},
-      legend: { text: t('.labels.manually_review_all_cases') }
-    ) %>
+          :manually_review_all_cases,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.manually_review_all_cases") },
+          legend: { text: t(".labels.manually_review_all_cases") },
+        ) %>
 
     <%= form.govuk_collection_radio_buttons(
-      :allow_welsh_translation,
-      yes_no_options,
-      :value,
-      :label,
-      inline: true,
-      hint: { text: t('.hints.allow_welsh_translation')},
-      legend: { text: t('.labels.allow_welsh_translation') }
-    ) %>
+          :allow_welsh_translation,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.allow_welsh_translation") },
+          legend: { text: t(".labels.allow_welsh_translation") },
+        ) %>
 
     <%= form.govuk_collection_radio_buttons(
-        :enable_ccms_submission,
-        yes_no_options,
-        :value,
-        :label,
-        inline: true,
-        hint: { text: t('.hints.enable_ccms_submission')},
-        legend: { text: t('.labels.enable_ccms_submission') }
-    ) %>
+          :enable_ccms_submission,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.enable_ccms_submission") },
+          legend: { text: t(".labels.enable_ccms_submission") },
+        ) %>
 
     <%= form.govuk_collection_radio_buttons(
           :enable_mini_loop,
@@ -52,8 +52,8 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t('.hints.enable_mini_loop')},
-          legend: { text: t('.labels.enable_mini_loop') }
+          hint: { text: t(".hints.enable_mini_loop") },
+          legend: { text: t(".labels.enable_mini_loop") },
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -62,8 +62,8 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t('.hints.enable_loop')},
-          legend: { text: t('.labels.enable_loop') }
+          hint: { text: t(".hints.enable_loop") },
+          legend: { text: t(".labels.enable_loop") },
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -72,8 +72,8 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t('.hints.enhanced_bank_upload')},
-          legend: { text: t('.labels.enhanced_bank_upload') }
+          hint: { text: t(".hints.enhanced_bank_upload") },
+          legend: { text: t(".labels.enhanced_bank_upload") },
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
@@ -82,10 +82,10 @@
           :value,
           :label,
           inline: true,
-          hint: { text: t('.hints.means_test_review_phase_one')},
-          legend: { text: t('.labels.means_test_review_phase_one') }
+          hint: { text: t(".hints.means_test_review_phase_one") },
+          legend: { text: t(".labels.means_test_review_phase_one") },
         ) %>
 
-    <%= form.submit(t('generic.submit'), class: 'govuk-button form-button') %>
+    <%= form.submit(t("generic.submit"), class: "govuk-button form-button") %>
   <% end %>
 <% end %>
