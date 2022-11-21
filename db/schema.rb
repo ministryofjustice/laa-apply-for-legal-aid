@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_13_212453) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_095617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -160,9 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_212453) do
     t.text "attempts_made"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "application_proceeding_type_id"
     t.uuid "proceeding_id", null: false
-    t.index ["application_proceeding_type_id"], name: "index_attempts_to_settles_on_application_proceeding_type_id"
     t.index ["proceeding_id"], name: "index_attempts_to_settles_on_proceeding_id"
   end
 
@@ -344,9 +342,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_212453) do
     t.string "success_prospect"
     t.text "success_prospect_details"
     t.boolean "success_likely"
-    t.uuid "application_proceeding_type_id"
     t.uuid "proceeding_id", null: false
-    t.index ["application_proceeding_type_id"], name: "index_chances_of_successes_on_application_proceeding_type_id"
     t.index ["proceeding_id"], name: "index_chances_of_successes_on_proceeding_id"
   end
 
