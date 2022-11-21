@@ -6,16 +6,19 @@ RSpec.describe Providers::MeritsReportsController do
            :with_proceedings,
            :with_everything,
            :assessment_submitted,
-           explicit_proceedings: %i[da004])
+           explicit_proceedings: %i[da001])
   end
-  let(:da004) { legal_aid_application.proceedings.find_by(ccms_code: "DA004") }
+  let(:da001) { legal_aid_application.proceedings.find_by(ccms_code: "DA001") }
   let!(:chances_of_success) do
-    create(:chances_of_success, :with_optional_text, proceeding: da004)
+    create(:chances_of_success, :with_optional_text, proceeding: da001)
   end
 
   let(:login_provider) { login_as legal_aid_application.provider }
   let!(:submission) { create(:submission, legal_aid_application:) }
   let(:before_subject) { nil }
+  let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
+
+  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
   describe "GET /providers/applications/:legal_aid_application_id/merits_report" do
     subject do

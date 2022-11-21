@@ -15,8 +15,11 @@ RSpec.describe "check merits answers requests" do
              :with_attempts_to_settle,
              :with_involved_children,
              :provider_entering_merits,
-             proceeding_count: 3)
+             explicit_proceedings: %i[da001 se014])
     end
+    let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
+
+    before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
     context "unauthenticated" do
       before { subject }
@@ -123,11 +126,14 @@ RSpec.describe "check merits answers requests" do
       create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
-             :checking_merits_answers)
+             :checking_merits_answers,
+             explicit_proceedings: %i[da001 se014])
     end
     let(:params) { {} }
-
     let(:allow_ccms_submission) { true }
+    let(:smtl) { create(:legal_framework_merits_task_list, legal_aid_application: application) }
+
+    before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
     context "logged in as an authenticated provider" do
       before do
@@ -159,12 +165,12 @@ RSpec.describe "check merits answers requests" do
              :with_everything,
              :with_proceedings,
              :checking_merits_answers,
-             explicit_proceedings: %i[da004])
+             explicit_proceedings: %i[da001])
     end
-    let(:da004) { application.proceedings.find_by(ccms_code: "DA004") }
-
+    let(:da001) { application.proceedings.find_by(ccms_code: "DA001") }
+    let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application: application) }
     let!(:chances_of_success) do
-      create(:chances_of_success, :with_optional_text, proceeding: da004)
+      create(:chances_of_success, :with_optional_text, proceeding: da001)
     end
 
     context "unauthenticated" do
@@ -175,6 +181,7 @@ RSpec.describe "check merits answers requests" do
 
     context "logged in as an authenticated provider" do
       before do
+        allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
         login_as application.provider
         get providers_legal_aid_application_end_of_application_path(application)
         get providers_legal_aid_application_check_merits_answers_path(application)
@@ -194,6 +201,7 @@ RSpec.describe "check merits answers requests" do
 
       context "when there are required document categories" do
         before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
           allow(LegalAidApplication).to receive(:find_by).and_return(application)
           allow(application).to receive(:evidence_is_required?).and_return(true)
         end
