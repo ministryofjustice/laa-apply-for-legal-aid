@@ -1,0 +1,8 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<%= check_answer_no_link(
+      name: :"#{proceeding.name}_scope_limitations",
+      # url: send("providers_legal_aid_application_#{level_of_service}_level_of_service_path", @legal_aid_application, proceeding),
+      question: t(".#{level_of_service}.question"),
+      answer: scope_limits(proceeding, level_of_service),
+      read_only: read_only
+    ) %>

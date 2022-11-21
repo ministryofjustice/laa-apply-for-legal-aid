@@ -99,6 +99,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     improvement_suggestion: -> { Faker::Lorem.paragraph(sentence_count: 2) },
     email: -> { Faker::Internet.email },
   },
+  final_hearings: {},
   firms: {
     name: -> { "#{Faker::Company.name}\n" },
   },

@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 11 Nov 2022 08:48:28 GMT
+      - Fri, 11 Nov 2022 09:31:12 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -47,9 +47,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1fbfcebfb17c05dd7bcbbcd92559f3b2
+      - dfe5f30a3683607077043b09f217b661
       X-Runtime:
-      - '0.066670'
+      - '0.045328'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -65,7 +65,7 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 11 Nov 2022 08:48:28 GMT
+  recorded_at: Fri, 11 Nov 2022 09:31:12 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -87,7 +87,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 11 Nov 2022 08:48:28 GMT
+      - Fri, 11 Nov 2022 09:31:13 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -113,9 +113,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 28dd79076e82bbbf8c436ae5b52bb385
+      - 40e8593ef44c577a8a25a5f536f00ba9
       X-Runtime:
-      - '0.015542'
+      - '0.018651'
       Strict-Transport-Security:
       - max-age=15724800; includeSubDomains
     body:
@@ -125,5 +125,5 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Fri, 11 Nov 2022 08:48:28 GMT
+  recorded_at: Fri, 11 Nov 2022 09:31:13 GMT
 recorded_with: VCR 6.1.0

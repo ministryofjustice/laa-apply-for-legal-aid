@@ -1,0 +1,20 @@
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<% final_hearings = proceeding.final_hearings.send(level_of_service) %>
+<% if final_hearings.any? %>
+  <% final_hearing = final_hearings.first %>
+  <% if final_hearing.listed? %>
+    <%= check_answer_no_link(
+          name: :"#{proceeding.name}_final_hearing",
+          question: t(".date.question"),
+          answer: final_hearing.date,
+          read_only: read_only
+        ) %>
+  <% else %>
+    <%= check_answer_no_link(
+          name: :"#{proceeding.name}_final_hearing",
+          question: t(".details.question"),
+          answer: final_hearing.details,
+          read_only: read_only
+        ) %>
+  <% end %>
+<% end %>

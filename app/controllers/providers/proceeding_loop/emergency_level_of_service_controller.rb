@@ -8,7 +8,9 @@ module Providers
 
       def update
         @form = Proceedings::EmergencyLevelOfServiceForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))["default_level_of_service"]["level"].to_s
+        changed_to_full_rep = @form.attributes["emergency_level_of_service"] == "3" && @form.attributes["emergency_level_of_service"] != default
+        render :show unless save_continue_or_draft(@form, work_type: :emergency, changed_to_full_rep:)
       end
 
     private

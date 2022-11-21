@@ -252,6 +252,13 @@ Rails.application.routes.draw do
         patch :reset
       end
 
+      scope module: :proceeding_loop do
+        resource :final_hearings, only: [] do
+          get "/:id/:work_type", to: "final_hearings#show", as: ""
+          patch "/:id/:work_type", to: "final_hearings#update"
+        end
+      end
+
       scope module: :application_merits_task do
         resource :matter_opposed_reason, only: %i[show update]
       end

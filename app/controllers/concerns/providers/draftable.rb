@@ -27,20 +27,20 @@ module Providers
       ENDPOINT
     end
 
-    def save_continue_or_draft(form)
+    def save_continue_or_draft(form, **args)
       draft_selected? ? form.save_as_draft : form.save
       return false if form.invalid?
 
-      continue_or_draft
+      continue_or_draft(**args)
     end
 
-    def continue_or_draft
+    def continue_or_draft(args = nil)
       legal_aid_application.update!(draft: draft_selected?)
 
       if legal_aid_application.draft?
         redirect_to draft_target_endpoint
       else
-        go_forward
+        go_forward(args)
       end
     end
 
