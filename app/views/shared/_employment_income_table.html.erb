@@ -1,13 +1,13 @@
 <section class="print-no-break">
-  <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
+  <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
   <table class="govuk-table govuk-!-margin-bottom-3">
     <caption class="govuk-table__caption govuk-!-padding-bottom-2">
-      <%= t('date.date_period', from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)) %>
+      <%= t("date.date_period", from: date_from(@legal_aid_application), to: date_to(@legal_aid_application)) %>
     </caption>
     <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <%= t('.monthly_income_before_tax') %>
+            <%= t(".monthly_income_before_tax") %>
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">
             <%= gds_number_to_currency @legal_aid_application.cfe_result.employment_income_gross_income %>
@@ -15,7 +15,7 @@
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <%= t('.benefits_in_kind') %>
+            <%= t(".benefits_in_kind") %>
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">
             <%= gds_number_to_currency @legal_aid_application.cfe_result.employment_income_benefits_in_kind %>
@@ -23,7 +23,7 @@
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <%= t('.tax') %>
+            <%= t(".tax") %>
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">
             <%= gds_number_to_currency @legal_aid_application.cfe_result.employment_income_tax %>
@@ -31,7 +31,7 @@
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <%= t('.national_insurance') %>
+            <%= t(".national_insurance") %>
           </td>
           <td class="govuk-table__cell govuk-table__cell--numeric">
             <%= gds_number_to_currency @legal_aid_application.cfe_result.employment_income_national_insurance %>
@@ -40,7 +40,7 @@
         <% if @legal_aid_application.extra_employment_information %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <%= t('.employment_details') %>
+              <%= t(".employment_details") %>
             </td>
             <td class="govuk-table__cell govuk-table__cell--numeric">
               <%= gds_number_to_currency @legal_aid_application.extra_employment_information_details %>
