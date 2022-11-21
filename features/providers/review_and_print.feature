@@ -128,13 +128,14 @@ Feature: Review and print your application
       | h2  | Your client's capital |
 
     And the "Income, regular payments and assets" review section should contain:
-     | question |
-     | Benefits total |
-     | Disregarded benefits total |
-     | Financial help from friends or family total |
-     | Maintenance payments from a former partner total |
-     | Income from a property or lodger total |
-     | Pension total |
+      | question |
+      | Benefits total |
+      | Disregarded benefits total |
+      | Financial help from friends or family total |
+      | Maintenance payments from a former partner total |
+      | Income from a property or lodger total |
+      | Pension total |
+      | Student loan |
 
     And I should not see "Housing benefit total"
 
@@ -142,6 +143,12 @@ Feature: Review and print your application
     And I should see "Childcare payments"
     And I should see "Maintenance payments to a former partner"
     And I should see "Payments towards legal aid in a criminal case"
+
+  Scenario: For a non-passported truelayer bank transactions journey without student finance
+    Given I have completed truelayer application with merits and no student finance
+    When I view the review and print your application page
+    Then I should not see "Student loan"
+    And the answer to the "Does your client receive student finance?" question should be "No"
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits

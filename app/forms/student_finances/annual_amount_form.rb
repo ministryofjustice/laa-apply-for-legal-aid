@@ -2,34 +2,43 @@ module StudentFinances
   class AnnualAmountForm < BaseForm
     form_for IrregularIncome
 
-    attr_accessor :income_type, :frequency, :amount, :legal_aid_application_id, :student_finance
+    attr_accessor :student_finance, :amount, :legal_aid_application
 
-    validates :amount,
-              currency: {
-                greater_than_or_equal_to: 0,
-                allow_blank: true,
-              },
-              presence: { unless: :amount_ignorable? }
-    validate :student_finance_presence
+    validates :student_finance, inclusion: { in: %w[true false] }
+    validates :amount, currency: { greater_than_or_equal_to: 0 }, if: :student_finance?
 
-    def attributes_to_clean
-      [:amount]
+    def save
+      return false unless valid?
+
+      ApplicationRecord.transaction do
+        legal_aid_application.update!(student_finance:)
+
+        if student_finance?
+          super
+        else
+          legal_aid_application.irregular_incomes.student_finance.destroy_all
+        end
+      end
+
+      true
+    end
+
+  private
+
+    def student_finance?
+      student_finance == "true"
     end
 
     def exclude_from_model
       [:student_finance]
     end
 
-  private
-
-    def student_finance_presence
-      return if draft? || student_finance.present?
-
-      errors.add(:student_finance, I18n.t("activemodel.errors.models.legal_aid_application.attributes.student_finance.blank"))
+    def attributes_to_clean
+      [:amount]
     end
 
-    def amount_ignorable?
-      draft? || student_finance != "true"
+    def assignable_attributes
+      super.merge(income_type: :student_loan, frequency: :annual)
     end
   end
 end
