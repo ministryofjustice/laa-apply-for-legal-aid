@@ -8,59 +8,64 @@ RSpec.describe Providers::ApplicantsController do
   before { login }
 
   describe "GET /providers/applicants/new" do
-    subject { get new_providers_applicant_path }
+    subject(:request) { get new_providers_applicant_path }
 
     it "renders successfully" do
-      subject
+      request
       expect(response).to have_http_status(:ok)
     end
 
     it "does not prefix page title with error label" do
-      subject
+      request
       expect(response.body).not_to match(/<title>#{I18n.t('errors.title_prefix')}:/)
     end
   end
 
   describe "POST /providers/applicants" do
-    subject { post providers_applicants_path, params: params.merge(submit_button) }
+    subject(:request) { post providers_applicants_path, params: params.merge(submit_button) }
 
     let(:submit_button) { {} }
-    let(:param_applicant) { FactoryBot.attributes_for(:applicant) }
+
     let(:params) do
       {
-        applicant: param_applicant.merge(
-          "date_of_birth(1i)": param_applicant[:date_of_birth].year.to_s,
-          "date_of_birth(2i)": param_applicant[:date_of_birth].month.to_s,
-          "date_of_birth(3i)": param_applicant[:date_of_birth].day.to_s,
-        ).except(:date_of_birth),
+        applicant: {
+          first_name: "John",
+          last_name: "Doe",
+          "date_of_birth(1i)": "1981",
+          "date_of_birth(2i)": "07",
+          "date_of_birth(3i)": "11",
+        },
       }
     end
+
     let(:legal_aid_application) { provider.legal_aid_applications.last }
     let(:applicant) { legal_aid_application.applicant }
-    let(:next_url) { providers_legal_aid_application_address_lookup_path(legal_aid_application) }
 
     it "creates an application with the provider's office" do
-      expect { subject }.to change { provider.legal_aid_applications.count }.by(1)
+      expect { request }.to change { provider.legal_aid_applications.count }.by(1)
       expect(legal_aid_application.office.id).to eq(provider.selected_office.id)
     end
 
     it "creates an applicant" do
-      expect { subject }.to change(Applicant, :count).by(1)
-      expect(applicant).to be_present
-      expect(applicant.first_name).to eq(param_applicant[:first_name])
-      expect(applicant.last_name).to eq(param_applicant[:last_name])
-      expect(applicant.national_insurance_number).to eq(param_applicant[:national_insurance_number])
-      expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
+      expect { request }.to change(Applicant, :count).by(1)
+
+      expect(applicant).to have_attributes(
+        first_name: "John",
+        last_name: "Doe",
+        date_of_birth: Date.new(1981, 7, 11),
+        national_insurance_number: nil,
+        email: nil,
+      )
     end
 
     it "redirects to next page" do
-      subject
-      expect(response).to redirect_to(next_url)
+      request
+      expect(response).to redirect_to(providers_legal_aid_application_address_lookup_path(legal_aid_application))
     end
 
     it "back link on the next page is to applicant's details page" do
       get new_providers_applicant_path
-      subject
+      request
       follow_redirect!
       expect(response.body).to have_back_link(providers_legal_aid_application_applicant_details_path(legal_aid_application, back: true))
     end
@@ -69,21 +74,21 @@ RSpec.describe Providers::ApplicantsController do
       let(:params) { { applicant: { first_name: "bob" } } }
 
       it "displays errors" do
-        subject
+        request
         expect(response.body).to include("govuk-error-summary")
       end
 
       it "prefixes page title with error label" do
-        subject
+        request
         expect(response.body).to match(/<title>#{I18n.t('errors.title_prefix')}:/)
       end
 
       it "does not create applicant" do
-        expect { subject }.not_to change(Applicant, :count)
+        expect { request }.not_to change(Applicant, :count)
       end
 
       it "does not create application" do
-        expect { subject }.not_to change(LegalAidApplication, :count)
+        expect { request }.not_to change(LegalAidApplication, :count)
       end
     end
 
@@ -91,39 +96,42 @@ RSpec.describe Providers::ApplicantsController do
       let(:submit_button) { { draft_button: "Save as draft" } }
 
       it "redirects provider to provider's applications page" do
-        subject
+        request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
       it "creates an application as draft" do
-        expect { subject }.to change { provider.legal_aid_applications.count }.by(1)
+        expect { request }.to change { provider.legal_aid_applications.count }.by(1)
         expect(legal_aid_application.draft?).to be(true)
       end
 
       it "creates an applicant" do
-        expect { subject }.to change(Applicant, :count).by(1)
-        expect(applicant).to be_present
-        expect(applicant.first_name).to eq(param_applicant[:first_name])
-        expect(applicant.last_name).to eq(param_applicant[:last_name])
-        expect(applicant.national_insurance_number).to eq(param_applicant[:national_insurance_number])
-        expect(applicant.date_of_birth).to eq(param_applicant[:date_of_birth])
+        expect { request }.to change(Applicant, :count).by(1)
+
+        expect(applicant).to have_attributes(
+          first_name: "John",
+          last_name: "Doe",
+          date_of_birth: Date.new(1981, 7, 11),
+          national_insurance_number: nil,
+          email: nil,
+        )
       end
 
       context "with blank entries" do
         let(:params) { { applicant: { first_name: "bob" } } }
 
         it "redirects provider to provider's applications page" do
-          subject
+          request
           expect(response).to redirect_to(providers_legal_aid_applications_path)
         end
 
         it "sets the application as draft" do
-          subject
+          request
           expect(legal_aid_application.draft?).to be(true)
         end
 
         it "leaves values blank" do
-          subject
+          request
           expect(applicant.last_name).to be_blank
           expect(applicant.national_insurance_number).to be_blank
         end
@@ -133,7 +141,7 @@ RSpec.describe Providers::ApplicantsController do
     context "when the provider is not authenticated" do
       let(:login) { nil }
 
-      before { subject }
+      before { request }
 
       it_behaves_like "a provider not authenticated"
     end

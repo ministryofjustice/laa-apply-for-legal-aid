@@ -154,6 +154,7 @@ Rails.application.routes.draw do
       resource :address_lookup, only: %i[show update]
       resource :address_selection, only: %i[show update]
       resource :check_benefit, only: %i[index update]
+      resource :has_national_insurance_number, only: %i[show update]
       resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
         get "/list", to: "application_merits_task/statement_of_cases#list"
       end
@@ -234,6 +235,7 @@ Rails.application.routes.draw do
       resources :emergency_scope_limitations, only: %i[show update], controller: "proceeding_loop/emergency_scope_limitations"
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
+      resource :no_national_insurance_number, only: %i[show update]
       resource :substantive_application, only: %i[show update]
       resource :end_of_application, only: %i[show update]
       resource :submitted_application, only: :show

@@ -198,7 +198,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
     context "Continue" do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
+      subject(:request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do
         {
@@ -212,18 +212,18 @@ RSpec.describe Providers::CheckProviderAnswersController do
       end
 
       it "redirects to next step" do
-        subject
+        request
         expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
       end
 
-      context "non passported" do
+      context "when already non passported" do
         it "redirects to the check benefits page" do
-          subject
+          request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
       end
 
-      context "passported" do
+      context "when already passported" do
         let(:application) do
           create(
             :legal_aid_application,
@@ -235,8 +235,26 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
 
         it "redirects to the check benefits page" do
-          subject
+          request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+        end
+      end
+
+      context "when no national insurance number provided" do
+        let(:application) do
+          create(
+            :legal_aid_application,
+            :at_entering_applicant_details,
+            :with_proceedings,
+            applicant:,
+          )
+        end
+
+        let(:applicant) { create(:applicant, national_insurance_number: nil) }
+
+        it "redirects to the no national insurance number page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_no_national_insurance_number_path(application))
         end
       end
     end

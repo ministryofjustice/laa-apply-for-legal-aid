@@ -102,6 +102,8 @@ en:
               invalid: Enter an email address in the correct format, such as name@example.com
             first_name:
               blank: Enter first name
+            has_national_insurance_number:
+              inclusion: Select yes if the client has a National Insurance number
             last_name:
               blank: Enter last name
             national_insurance_number:

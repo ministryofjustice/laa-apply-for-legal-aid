@@ -11,11 +11,13 @@
              address: @address,
              read_only: @read_only) %>
 
-  <h2 class="govuk-heading-m"><%= t '.section_next.heading' %></h2>
+  <% if @applicant.national_insurance_number? %>
+    <h2 class="govuk-heading-m"><%= t '.section_next.heading' %></h2>
 
-  <p class="govuk-body govuk-!-margin-bottom-9">
-    <%= t '.section_next.content' %>
-  </p>
+    <p class="govuk-body govuk-!-margin-bottom-9">
+      <%= t '.section_next.content' %>
+    </p>
+  <% end %>
 
   <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_check_provider_answers_path,

@@ -10,11 +10,11 @@
 
     <p class="govuk-body"><%= t('.use_ccms_para_html') %></p>
 
-    <h2 class="govuk-heading-m"><%= t('.use_ccms_list.heading') %></h2>
+    <h2 class="govuk-heading-m"><%= t('.before_you_start.heading') %></h2>
 
-    <p class="govuk-body"><%= t('.use_ccms_list.title') %></p>
-
-    <%= list_from_translation_path '.start.index.use_ccms_list' %>
+    <p class="govuk-body">
+      <%= t('.before_you_start.conditions') %>
+    </p>
 
     <%= link_to_accessible start_button_label(:start_now),
                 providers_legal_aid_applications_path,
