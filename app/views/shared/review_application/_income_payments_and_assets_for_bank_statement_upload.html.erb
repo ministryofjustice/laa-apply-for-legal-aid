@@ -1,62 +1,62 @@
 <section class="income_payments_and_assets page_break_before">
   <div class="govuk-!-padding-bottom-6"></div>
-  <h2 class="govuk-heading-l"><%= t('.income-heading') %></h2>
+  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
 
-  <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
+  <%= render("shared/check_answers/bank_statements", bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.provider.employment_permissions? %>
       <% if @legal_aid_application.hmrc_employment_income? %>
         <% if @legal_aid_application.has_multiple_employments? %>
-          <%= render 'shared/check_answers/full_employment_details', read_only: true %>
+          <%= render "shared/check_answers/full_employment_details", read_only: true %>
         <% else %>
-          <%= render 'shared/check_answers/employed_income', read_only: true %>
+          <%= render "shared/check_answers/employed_income", read_only: true %>
         <% end %>
       <% elsif @legal_aid_application.applicant_employed? %>
-        <%= render 'shared/check_answers/full_employment_details', read_only: true %>
+        <%= render "shared/check_answers/full_employment_details", read_only: true %>
       <% end %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <%= render(
-        'shared/check_answers/income_summary',
-        income_type: t('.credits-section-heading'),
-        url: @legal_aid_application.using_enhanced_bank_upload? ? :regular_incomes : :identify_types_of_incomes,
-        transaction_types: TransactionType.credits.without_disregarded_benefits,
-        read_only: true
-      ) %>
+          "shared/check_answers/income_summary",
+          income_type: t(".credits-section-heading"),
+          url: @legal_aid_application.using_enhanced_bank_upload? ? :regular_incomes : :identify_types_of_incomes,
+          transaction_types: TransactionType.credits.without_disregarded_benefits,
+          read_only: true,
+        ) %>
   </section>
 
   <section class="print-no-break">
-    <%= render('shared/check_answers/housing_benefit', read_only: true) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
+    <%= render("shared/check_answers/housing_benefit", read_only: true) if @legal_aid_application.housing_benefit_regular_transaction_applicable? %>
   </section>
 
   <section class="print-no-break">
-    <%= render('shared/check_answers/income_cash_payments', read_only: true) %>
+    <%= render("shared/check_answers/income_cash_payments", read_only: true) %>
   </section>
 
-  <%= render 'shared/check_answers/student_finance', read_only: true %>
+  <%= render "shared/check_answers/student_finance", read_only: true %>
 
   <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= t('.outgoings-heading') %></h2>
+    <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
 
     <%= render(
-        'shared/check_answers/income_summary',
-        income_type: t('.debits-section-heading'),
-        url: @legal_aid_application.using_enhanced_bank_upload? ? :regular_outgoings : :identify_types_of_outgoings,
-        transaction_types: TransactionType.debits,
-        read_only: true
-      ) %>
+          "shared/check_answers/income_summary",
+          income_type: t(".debits-section-heading"),
+          url: @legal_aid_application.using_enhanced_bank_upload? ? :regular_outgoings : :identify_types_of_outgoings,
+          transaction_types: TransactionType.debits,
+          read_only: true,
+        ) %>
   </section>
 
   <section class="print-no-break">
-    <%= render('shared/check_answers/outgoings_cash_payments', read_only: true) %>
+    <%= render("shared/check_answers/outgoings_cash_payments", read_only: true) %>
   </section>
 
   <section class="print-no-break govuk-!-padding-top-8">
-    <h2 class="govuk-heading-l"><%= t('.capital-heading') %></h2>
+    <h2 class="govuk-heading-l"><%= t(".capital-heading") %></h2>
 
-    <%= render 'shared/check_answers/assets', read_only: true %>
+    <%= render "shared/check_answers/assets", read_only: true %>
   </section>
 </section>

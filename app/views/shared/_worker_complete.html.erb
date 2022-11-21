@@ -1,9 +1,7 @@
-<%
-heading = locals[:heading] || nil
-intro_text = locals[:intro_text] || nil
-balance_text = locals[:balance_text] || nil
-continue_text = locals[:continue_text] || nil
-%>
+<% heading = locals[:heading] || nil %>
+<% intro_text = locals[:intro_text] || nil %>
+<% balance_text = locals[:balance_text] || nil %>
+<% continue_text = locals[:continue_text] || nil %>
 
 <%= page_template page_title: heading do %>
   <p>
@@ -13,7 +11,7 @@ continue_text = locals[:continue_text] || nil
     <%= balance_text %>
   </p>
   <div class="govuk-!-padding-top-3">
-    <%= next_action_link(continue_text: continue_text) %>
+    <%= next_action_link(continue_text:) %>
   </div>
   <span role="status" id="complete"></span>
 <% end %>

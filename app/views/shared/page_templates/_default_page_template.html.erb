@@ -1,5 +1,5 @@
-<%= render(partial: 'shared/forms/error_summary', locals: { model: show_errors_for }) if show_errors_for %>
-<%= render(partial: 'shared/forms/success_message', locals: { success_message: success_message }) if success_message.present? %>
+<%= render(partial: "shared/forms/error_summary", locals: { model: show_errors_for }) if show_errors_for %>
+<%= render(partial: "shared/forms/success_message", locals: { success_message: }) if success_message.present? %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-<%= column_width %>">
     <%= form.govuk_error_summary if form %>
@@ -12,7 +12,7 @@
         </h2>
       <% end %>
     <% else %>
-      <%= page_heading **page_heading_options %>
+      <%= page_heading(**page_heading_options) %>
     <% end %>
     <%= content %>
   </div>

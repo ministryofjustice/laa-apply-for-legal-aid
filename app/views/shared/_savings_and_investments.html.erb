@@ -1,13 +1,13 @@
 <% if @cfe_result.liquid_capital_items.any? %>
-  <h2 class="govuk-heading-m"><%= t('.savings_and_investments') %></h2>
+  <h2 class="govuk-heading-m"><%= t(".savings_and_investments") %></h2>
   <table class="govuk-table">
     <tbody>
       <% @cfe_result.liquid_capital_items.each do |item| %>
         <% if capital_items_to_display?(@legal_aid_application, item) %>
-          <%= render partial: 'shared/results_detail_row', locals: {caption:  item_description(@legal_aid_application, item), value: gds_number_to_currency(item[:value]) } %>
+          <%= render partial: "shared/results_detail_row", locals: { caption: item_description(@legal_aid_application, item), value: gds_number_to_currency(item[:value]) } %>
         <% end %>
       <% end %>
-    <%= render partial: 'shared/results_total_row', locals: { caption: t('.assessed_amount'), value: gds_number_to_currency(@cfe_result.total_savings) } %>
+    <%= render partial: "shared/results_total_row", locals: { caption: t(".assessed_amount"), value: gds_number_to_currency(@cfe_result.total_savings) } %>
     </tbody>
   </table>
 <% end %>

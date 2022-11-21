@@ -11,8 +11,9 @@ linters:
     enabled: true
     exclude:
       - "**/app/views/providers/**/*"
-      - "**/app/views/shared/**/*"
-      - "**/app/views/shared/*"
+      - "**/app/views/shared/check_answers/*"
+      - "**/app/views/shared/forms/**/*"
+      - "**/app/views/shared/forms/*"
     rubocop_config:
       inherit_from:
         - .rubocop.yml
