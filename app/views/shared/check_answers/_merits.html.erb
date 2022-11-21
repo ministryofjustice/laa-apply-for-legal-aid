@@ -55,47 +55,49 @@
 
   <%= render 'shared/check_answers/section_break' unless opponent.understands_terms_of_court_order %>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :warning_letter_sent,
-          question: t('.items.warning_letter_sent'),
-          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-          answer: yes_no(opponent.warning_letter_sent),
-          no_border: !opponent.warning_letter_sent,
-          read_only: read_only
-        ) %>
-  </dl>
-  <div class='govuk-body'><%= opponent.warning_letter_sent_details %></div>
+  <% if task_list_includes?(@legal_aid_application, :domestic_abuse_summary) %>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_link(
+            name: :warning_letter_sent,
+            question: t('.items.warning_letter_sent'),
+            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+            answer: yes_no(opponent.warning_letter_sent),
+            no_border: !opponent.warning_letter_sent,
+            read_only: read_only
+          ) %>
+    </dl>
+    <div class='govuk-body'><%= opponent.warning_letter_sent_details %></div>
 
-  <%= render 'shared/check_answers/section_break' unless opponent.warning_letter_sent %>
+    <%= render 'shared/check_answers/section_break' unless opponent.warning_letter_sent %>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :police_notified,
-          question: t('.items.police_notified'),
-          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-          answer: yes_no(opponent.police_notified),
-          no_border: true,
-          read_only: read_only
-        ) %>
-  </dl>
-  <div class='govuk-body'><%= opponent.police_notified_details %></div>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_link(
+            name: :police_notified,
+            question: t('.items.police_notified'),
+            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+            answer: yes_no(opponent.police_notified),
+            no_border: true,
+            read_only: read_only
+          ) %>
+    </dl>
+    <div class='govuk-body'><%= opponent.police_notified_details %></div>
 
-  <%= render 'shared/check_answers/section_break' %>
+    <%= render 'shared/check_answers/section_break' %>
 
-  <dl class="govuk-summary-list govuk-!-margin-bottom-2">
-    <%= check_answer_link(
-          name: :bail_conditions_set,
-          question: t('.items.bail_conditions_set'),
-          url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
-          answer: yes_no(opponent.bail_conditions_set),
-          no_border: opponent.bail_conditions_set,
-          read_only: read_only
-        ) %>
-  </dl>
-  <div class='govuk-body'><%= opponent.bail_conditions_set_details %></div>
+    <dl class="govuk-summary-list govuk-!-margin-bottom-2">
+      <%= check_answer_link(
+            name: :bail_conditions_set,
+            question: t('.items.bail_conditions_set'),
+            url: providers_legal_aid_application_domestic_abuse_summary_path(@legal_aid_application),
+            answer: yes_no(opponent.bail_conditions_set),
+            no_border: opponent.bail_conditions_set,
+            read_only: read_only
+          ) %>
+    </dl>
+    <div class='govuk-body'><%= opponent.bail_conditions_set_details %></div>
 
-  <%= render 'shared/check_answers/section_break' if opponent.bail_conditions_set %>
+    <%= render 'shared/check_answers/section_break' if opponent.bail_conditions_set %>
+  <% end %>
 </section>
 <div class="govuk-!-padding-bottom-6"></div>
 <section class="print-no-break">
