@@ -1272,7 +1272,7 @@ en:
         before_you_start:
           conditions: |
             You can only use this service if your client is single (unless their
-            partner is the opponent in the case)
+            partner is the opponent in the case).
           heading: Before you start
         use_ccms_para_html: |
           Use the Client and Cost Management System (<abbr title='Client and
