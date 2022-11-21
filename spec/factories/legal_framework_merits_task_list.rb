@@ -30,5 +30,13 @@ FactoryBot.define do
     trait :da002_as_applicant do
       serialized_data { build(:legal_framework_serializable_merits_task_list, :da002_as_applicant).to_yaml }
     end
+
+    trait :da002_da006_as_applicant do
+      serialized_data { build(:legal_framework_serializable_merits_task_list, :da002_da006_as_applicant).to_yaml }
+    end
+
+    trait :da001_da005_as_applicant do
+      serialized_data { build(:legal_framework_serializable_merits_task_list, :da001_da005_as_applicant).to_yaml }
+    end
   end
 end
