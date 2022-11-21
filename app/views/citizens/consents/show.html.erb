@@ -2,21 +2,21 @@
       model: @form,
       url: citizens_consent_path,
       method: :patch,
-      local: true
+      local: true,
     ) do |form| %>
 
-    <%= page_template page_title: t('.title_html'),  head_title: t('.head_title'), form: form do %>
+    <%= page_template page_title: t(".title_html"), head_title: t(".head_title"), form: do %>
 
       <%= govuk_inset_text do %>
-        <p class="govuk-body govuk-!-padding-bottom-2"><%= t('.inset_text') %></p>
+        <p class="govuk-body govuk-!-padding-bottom-2"><%= t(".inset_text") %></p>
       <% end %>
 
       <details class="govuk-details govuk-!-margin-top-4" data-module="govuk-details">
         <summary class="govuk-details__summary">
           <span class="govuk-details__summary-text"
-            title="<%= t('.summary_heading') %>"
-            aria-label="<%= t('.summary_heading') %>">
-            <%= t('.summary_heading') %>
+            title="<%= t(".summary_heading") %>"
+            aria-label="<%= t(".summary_heading") %>">
+            <%= t(".summary_heading") %>
           </span>
         </summary>
 
@@ -40,18 +40,16 @@
       </details>
 
       <%= form.govuk_collection_radio_buttons(
-              :open_banking_consent,
-              yes_no_options,
-              :value,
-              :label,
-              legend: {
-                  text: t('.title_html'),
-                  hidden: true
-              }
+            :open_banking_consent,
+            yes_no_options,
+            :value,
+            :label,
+            legend: {
+              text: t(".title_html"),
+              hidden: true,
+            },
           ) %>
 
-    <%= next_action_buttons(
-      form: form
-      ) %>
+    <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>

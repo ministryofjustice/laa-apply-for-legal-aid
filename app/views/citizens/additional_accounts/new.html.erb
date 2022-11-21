@@ -2,15 +2,15 @@
               url: citizens_additional_account_path(id: :update),
               method: :patch,
               local: true) do |form| %>
-  <%= page_template page_title: t('.field_set_header'), template: :basic, form: form do %>
+  <%= page_template page_title: t(".field_set_header"), template: :basic, form: do %>
 
     <%= form.govuk_collection_radio_buttons :has_offline_accounts,
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            hint: {text: t('.hint')},
-                                            legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'} %>
+                                            hint: { text: t(".hint") },
+                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" } %>
 
-    <%= next_action_buttons(form: form) %>
+    <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>
