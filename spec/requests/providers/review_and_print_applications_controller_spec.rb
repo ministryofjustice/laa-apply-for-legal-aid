@@ -12,6 +12,9 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
            proceeding_count: 3)
   end
   let(:provider) { application.provider }
+  let(:smtl) { create(:legal_framework_merits_task_list, :da001_da004_se014, legal_aid_application: application) }
+
+  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
 
   describe "GET /providers/applications/:id/review_and_print_application" do
     subject(:request) { get providers_legal_aid_application_review_and_print_application_path(application) }
@@ -45,7 +48,8 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
       create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
-             :checking_merits_answers)
+             :checking_merits_answers,
+             proceeding_count: 3)
     end
     let(:allow_ccms_submission) { true }
     let(:params) { {} }
