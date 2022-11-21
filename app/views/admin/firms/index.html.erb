@@ -1,6 +1,6 @@
 <%= govuk_fieldset_header do %>
   <h1 class="govuk-fieldset__heading">
-    <%= label_tag(t('.heading_1'), page_title) %>
+    <%= label_tag(t(".heading_1"), page_title) %>
   </h1>
 <% end %>
 
@@ -9,10 +9,10 @@
     <table class="govuk-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t('.firm') %></th>
-          <th class="govuk-table__header" scope="col"><%= t('.num_users') %></th>
-          <th class="govuk-table__header govuk-!-width-one-half" scope="col"><%= t('.permissions') %></th>
-          <th class="govuk-table__header" scope="col"><%= t('.action') %></th>
+          <th class="govuk-table__header govuk-!-width-one-quarter" scope="col"><%= t(".firm") %></th>
+          <th class="govuk-table__header" scope="col"><%= t(".num_users") %></th>
+          <th class="govuk-table__header govuk-!-width-one-half" scope="col"><%= t(".permissions") %></th>
+          <th class="govuk-table__header" scope="col"><%= t(".action") %></th>
         </tr>
       </thead>
 
@@ -28,7 +28,14 @@
                 <% end %>
               </ul>
             </td>
-            <td class="govuk-table__cell"><%= link_to_accessible t('.view_users'), admin_firm_providers_path(firm), id: "firm-#{firm.id}", method: :get %></td>
+            <td class="govuk-table__cell">
+              <%= link_to_accessible(
+                    t(".view_users"),
+                    admin_firm_providers_path(firm),
+                    id: "firm-#{firm.id}",
+                    method: :get,
+                  ) %>
+            </td>
           </tr>
         <% end %>
       </tbody>

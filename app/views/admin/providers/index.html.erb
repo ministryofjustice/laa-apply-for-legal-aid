@@ -1,6 +1,6 @@
 <%= govuk_fieldset_header do %>
   <h1 class="govuk-fieldset__heading">
-    <% title = @firm.present? ? t('.heading_1', firm_name: @firm.name) : t('.all_firms_heading_1') %>
+    <% title = @firm.present? ? t(".heading_1", firm_name: @firm.name) : t(".all_firms_heading_1") %>
     <label for="#{title.downcase}">
       <%= title %>
     </label>
@@ -12,8 +12,8 @@
     <table class="govuk-table">
       <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th class="govuk-table__header" scope="col"><%= t('.username') %></th>
-        <th class="govuk-table__header" scope="col"><%= t('.email_address') %></th>
+        <th class="govuk-table__header" scope="col"><%= t(".username") %></th>
+        <th class="govuk-table__header" scope="col"><%= t(".email_address") %></th>
       </tr>
       </thead>
 
