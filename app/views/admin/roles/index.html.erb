@@ -1,8 +1,8 @@
 <%= page_template(
-  page_title: t('.heading_1'),
-  column_width: :full,
-  back_link: :none
-  ) do %>
+      page_title: t(".heading_1"),
+      column_width: :full,
+      back_link: :none,
+    ) do %>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -11,13 +11,13 @@
           <%= form_tag(admin_roles_path, method: :get, name: "firm-search-input") do %>
             <%= text_field_tag(:search, params[:search], class: "govuk-input", autocomplete: "off") %>
         </div>
-            <%= submit_tag ("Search"), name: nil, class: 'govuk-button' %>
-      </div>
+            <%= submit_tag "Search", name: nil, class: "govuk-button" %>
           <% end %>
+      </div>
 
       <div class="govuk-grid-row govuk-!-margin-top-0">
         <ul id="firms-list" class="govuk-grid-column-full govuk-list govuk-!-margin-bottom-0">
-          <%= render partial: 'form', collection: @provider_firms, as: :provider_firm %>
+          <%= render partial: "form", collection: @provider_firms, as: :provider_firm %>
         </ul>
       </div>
     </div>

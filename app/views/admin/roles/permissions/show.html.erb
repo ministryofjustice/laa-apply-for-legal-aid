@@ -1,14 +1,14 @@
 <%= page_template(
-  page_title: t('.heading_1', firm_name: @firm.name),
-  column_width: :full,
-  back_link: :none
-  ) do %>
+      page_title: t(".heading_1", firm_name: @firm.name),
+      column_width: :full,
+      back_link: :none,
+    ) do %>
 
   <%= form_with(
-          model: @firm,
-          url: admin_roles_permission_path,
-          method: :patch,
-          local: true
+        model: @firm,
+        url: admin_roles_permission_path,
+        method: :patch,
+        local: true,
       ) do |form| %>
 
     <div class="govuk-!-margin-top-0govuk-!-padding-bottom-2">
@@ -19,8 +19,8 @@
               <% for perm in @permissions %>
                   <div class="govuk-checkboxes">
                     <div class="govuk-checkboxes__item">
-                      <%= check_box_tag  "firm[permission_ids][]", perm.id, @firm.permissions.include?(perm), class: 'govuk-checkboxes__input' %>
-                      <%= label_tag perm.role, perm.description, class: 'govuk-label govuk-checkboxes__label' %>
+                      <%= check_box_tag "firm[permission_ids][]", perm.id, @firm.permissions.include?(perm), class: "govuk-checkboxes__input" %>
+                      <%= label_tag perm.role, perm.description, class: "govuk-label govuk-checkboxes__label" %>
                     </div>
                   </div>
                 <br>
@@ -34,8 +34,8 @@
     <div class="govuk-!-padding-bottom-4"></div>
 
     <%= next_action_buttons(
-            form: form,
-            show_draft: false
+          form:,
+          show_draft: false,
         ) %>
   <% end %>
 <% end %>

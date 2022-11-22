@@ -1,18 +1,18 @@
 <%= page_template(
-        page_title: t('.h1-heading'),
-        back_link: {
-            path: reset_citizens_check_answers_path,
-            method: :patch
-        }
+      page_title: t(".h1-heading"),
+      back_link: {
+        path: reset_citizens_check_answers_path,
+        method: :patch,
+      },
     ) do %>
 
-  <%= render 'bank_accounts' %>
+  <%= render "bank_accounts" %>
 
-  <%= render 'shared/applicant_declaration' %>
+  <%= render "shared/applicant_declaration" %>
 
   <%= next_action_buttons_with_form(
-          url: continue_citizens_check_answers_path,
-          method: :patch,
-          continue_button_text: t('.submit_button')
+        url: continue_citizens_check_answers_path,
+        method: :patch,
+        continue_button_text: t(".submit_button"),
       ) %>
 <% end %>

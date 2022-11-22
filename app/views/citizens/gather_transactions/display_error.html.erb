@@ -7,13 +7,13 @@
   <% if @error_decoder.show_link? %>
     <p class="govuk-body">
       <%= link_to_accessible(
-              t('.bank_selection_link'),
-              citizens_banks_path
+            t(".bank_selection_link"),
+            citizens_banks_path,
           ) %>
     </p>
   <% else %>
     <p class="govuk-body">
-      <%= t('true_layer_errors.close_tab') %>
+      <%= t("true_layer_errors.close_tab") %>
     </p>
   <% end %>
 <% end %>

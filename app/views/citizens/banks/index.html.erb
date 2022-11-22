@@ -1,15 +1,15 @@
-<%= page_template page_title: t('.title'), template: :basic do %>
+<%= page_template page_title: t(".title"), template: :basic do %>
 
     <%= form_with(local: true) do |form| %>
       <div class="govuk-radios bank-selection">
         <%= form.govuk_radio_buttons_fieldset(:provider_id,
-                                              legend: {text: content_for(:page_title), tag: 'h1', size: 'xl'},
-                                              hint: {text: t('.hint')}) do %>
-          <%= render partial: 'shared/error' if @error %>
+                                              legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                              hint: { text: t(".hint") }) do %>
+          <%= render partial: "shared/error" if @error %>
           <% TrueLayerBank.available_banks.each do |bank| %>
             <%= form.govuk_radio_button :provider_id, bank[:provider_id], label: -> do %>
                 <div class="bank-logo">
-                  <%= image_tag(bank[:logo_url], alt:'') if bank[:logo_url] %>
+                  <%= image_tag(bank[:logo_url], alt: "") if bank[:logo_url] %>
                 </div>
                 <span><%= bank[:display_name] %></span>
               <% end %>
@@ -17,14 +17,14 @@
         <% end %>
       </div>
 
-    <h2 class="govuk-heading-m"><%= t('.what_happens_next') %></h2>
-    <p class="govuk-body"><%= t('.connect') %></p>
+    <h2 class="govuk-heading-m"><%= t(".what_happens_next") %></h2>
+    <p class="govuk-body"><%= t(".connect") %></p>
     <ul class="govuk-list govuk-list--bullet">
-      <li><%= t '.bullet_1' %></li>
-      <li><%= t '.bullet_2_html' %></li>
+      <li><%= t ".bullet_1" %></li>
+      <li><%= t ".bullet_2_html" %></li>
     </ul>
-    <p class="govuk-body"><%= t('.every_account') %></p>
+    <p class="govuk-body"><%= t(".every_account") %></p>
 
-    <%= form.submit(t('generic.save_and_continue'), class: 'govuk-button form-button') %>
+    <%= form.submit(t("generic.save_and_continue"), class: "govuk-button form-button") %>
   <% end %>
 <% end %>
