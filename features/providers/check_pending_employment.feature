@@ -107,7 +107,7 @@ Feature: Check pending employment
     When I choose "Yes"
     And I click 'Save and continue'
 
-    Then I should be on a page showing "Opponent details"
+    Then I should be on a page showing "Domestic abuse summary"
     And I choose "application-merits-task-opponent-warning-letter-sent-true-field"
     And I choose "application-merits-task-opponent-police-notified-true-field"
     And I fill "application-merits-task-opponent-police-notified-details-true-field" with "Single employment test"

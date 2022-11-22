@@ -434,7 +434,7 @@ en:
           last_name: Last name
       domestic_abuse_summaries:
         show:
-          h1-heading: Opponent details
+          h1-heading: Domestic abuse summary
           warning_letter_sent: Has a warning letter been sent to the opponent?
           police_notified: Have the police been notified?
           bail_conditions_set: Have bail conditions been set?
