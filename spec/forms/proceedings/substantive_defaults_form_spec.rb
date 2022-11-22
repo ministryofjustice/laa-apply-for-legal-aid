@@ -42,6 +42,27 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
                                                                                                       description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
           end
         end
+
+        context "when the proceeding already has scope limitations" do
+          before do
+            proceeding.scope_limitations.create!(
+              scope_type: 0,
+              code: "CV118",
+              meaning: "Hearing",
+              description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+            )
+          end
+
+          let(:skip_subject) { true }
+
+          it "deletes the existing substantive scope limitations and creates one new substantive scope limitation" do
+            save_form
+            expect(proceeding.scope_limitations.where(scope_type: :substantive).count).to eq 1
+            expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "AA019",
+                                                                                                      meaning: "Injunction FLA-to final hearing",
+                                                                                                      description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
+          end
+        end
       end
 
       context "and the user rejects the defaults" do
