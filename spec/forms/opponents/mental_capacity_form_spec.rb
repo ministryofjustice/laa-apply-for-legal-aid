@@ -34,9 +34,12 @@ RSpec.describe Opponents::MentalCapacityForm, type: :form do
   describe "#save" do
     subject(:save_form) { mental_capacity_form.save }
 
-    it "creates a new opponent" do
+    it "updates the opponent with our chosen params" do
       save_form
-      expect(opponent.understands_terms_of_court_order_details).to eq "New understands terms of court order details"
+      expect(opponent).to have_attributes(
+        understands_terms_of_court_order: false,
+        understands_terms_of_court_order_details: "New understands terms of court order details",
+      )
     end
   end
 end

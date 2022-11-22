@@ -146,9 +146,16 @@ RSpec.describe Opponents::DomesticAbuseSummaryForm, type: :form do
   describe "#save" do
     subject(:save_form) { das_form.save }
 
-    it "creates a new opponent" do
+    it "updates the opponent with our chosen params" do
       save_form
-      expect(das_form).to have_attributes(police_notified_details_true: "New reasons police not notified details")
+      expect(das_form).to have_attributes(
+        warning_letter_sent: "false",
+        warning_letter_sent_details: "New warning letter sent details",
+        police_notified: "true",
+        police_notified_details_true: "New reasons police not notified details",
+        bail_conditions_set: "true",
+        bail_conditions_set_details: "New bail conditions set details",
+      )
     end
   end
 end
