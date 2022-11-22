@@ -74,7 +74,7 @@ module Providers
 
         it "sets the task to complete" do
           post_client_denial
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_denial_of_allegation\n\s+dependencies: \*\d\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_denial_of_allegation\n\s+dependencies: \*\d+\n\s+state: :complete/)
         end
 
         context "when all previous tasks are completed" do
@@ -101,7 +101,7 @@ module Providers
         context "when incomplete" do
           let(:denies_all) { false }
           let(:additional_information) { "" }
-          let(:regex) { /name: :client_denial_of_allegation\n\s+dependencies: \*\d\n\s+state: :not_started/ }
+          let(:regex) { /name: :client_denial_of_allegation\n\s+dependencies: \*\d+\n\s+state: :not_started/ }
 
           it "renders show" do
             post_client_denial
@@ -124,7 +124,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_client_denial
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_denial_of_allegation\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_denial_of_allegation\n\s+dependencies: \*\d+\n\s+state: :not_started/)
           end
         end
       end

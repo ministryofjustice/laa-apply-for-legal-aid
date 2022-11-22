@@ -55,7 +55,7 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:urgency) { legal_aid_application.reload.urgency }
-        let(:not_started_regex) { /name: :nature_of_urgency\n\s+dependencies: \*\d\n\s+state: :not_started/ }
+        let(:not_started_regex) { /name: :nature_of_urgency\n\s+dependencies: \*\d+\n\s+state: :not_started/ }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)

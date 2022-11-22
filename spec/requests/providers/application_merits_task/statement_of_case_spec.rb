@@ -166,7 +166,7 @@ module Providers
 
               it "sets the task to complete" do
                 subject
-                expect(legal_aid_application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :complete/)
+                expect(legal_aid_application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d+\n\s+state: :complete/)
               end
             end
 
@@ -451,7 +451,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :statement_of_case\n\s+dependencies: \*\d+\n\s+state: :not_started/)
           end
 
           it "redirects to provider draft endpoint" do

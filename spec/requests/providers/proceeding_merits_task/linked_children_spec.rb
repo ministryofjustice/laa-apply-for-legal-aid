@@ -165,7 +165,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).not_to match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :complete/)
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).not_to match(/name: :children_proceeding\n\s+dependencies: \*\d+\n\s+state: :complete/)
           end
         end
       end

@@ -89,7 +89,7 @@ module Providers
 
         it "sets the task to complete" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d+\n\s+state: :complete/)
         end
 
         it "redirects to the next page" do
@@ -107,7 +107,7 @@ module Providers
 
         context "when incomplete" do
           let(:told_on_3i) { "" }
-          let(:regex) { /name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/ }
+          let(:regex) { /name: :latest_incident_details\n\s+dependencies: \*\d+\n\s+state: :not_started/ }
 
           it "renders show" do
             subject
@@ -154,7 +154,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :latest_incident_details\n\s+dependencies: \*\d+\n\s+state: :not_started/)
           end
         end
       end

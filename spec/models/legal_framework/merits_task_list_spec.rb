@@ -34,8 +34,8 @@ module LegalFramework
 
       it "updates the task list" do
         # match pattern => key: :value, newline, any amount of spaces, repeat
-        expect(merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
-        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :not_started/)
+        expect(merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d+\n\s+state: :complete/)
+        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n\s+dependencies: \*\d+\n\s+state: :not_started/)
       end
     end
 
