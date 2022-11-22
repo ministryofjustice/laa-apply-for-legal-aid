@@ -39,13 +39,7 @@
         <% end %>
       </ul>
 
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon govuk_two_line_warning" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive"><%= t('.warning_text') %></span>
-          <%= t('.warning_text') %>
-        </strong>
-      </div>
+      <%= govuk_warning_text(text: t(".warning_text")) %>
 
       <div class="dropzone__upload">
         <div class="govuk-form-group script hidden" id="dropzone-form-group" aria-labelledby="dropzone-label">
