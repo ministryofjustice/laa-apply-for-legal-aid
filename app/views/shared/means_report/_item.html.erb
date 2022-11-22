@@ -1,11 +1,9 @@
-<%
-  addendum = local_assigns[:addendum] || nil
-  suppress_border = suppress_border || false
-  css_border_klass = suppress_border ? 'govuk-summary-list__row--no-border' : ''
-%>
+<% addendum = local_assigns[:addendum] || nil %>
+<% suppress_border ||= false %>
+<% css_border_klass = suppress_border ? "govuk-summary-list__row--no-border" : "" %>
 <div class="<%= "govuk-summary-list__row  normal-word-break #{css_border_klass}" %>" id="<%= "means-merits-report__#{name}" %>">
   <dt class="<%= "govuk-summary-list__key govuk-!-width-one-half" %>">
-    <%= t(".#{scope}.#{name}", addendum: addendum) %>
+    <%= t(".#{scope}.#{name}", addendum:) %>
   </dt>
   <!--  in-line styling due to issues around pdf generation in our production envs -->
   <dd class="govuk-summary-list__value govuk-!-text-align-right">

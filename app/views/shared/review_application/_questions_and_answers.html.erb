@@ -1,17 +1,17 @@
 <div class="print-header-wrapper">
   <dl class="govuk-list inline-list print-header">
     <dt>
-      <strong><%= t('.client_name') %>:</strong>
+      <strong><%= t(".client_name") %>:</strong>
     </dt>
     <dd><%= @legal_aid_application.applicant_full_name %></dd>
 
     <dt>
-      <strong><%= t('.case_reference_html') %>:</strong>
+      <strong><%= t(".case_reference_html") %>:</strong>
     </dt>
     <dd><%= @legal_aid_application.application_ref %></dd>
 
     <dt>
-      <strong><%= t('.ccms_reference_html') %>:</strong>
+      <strong><%= t(".ccms_reference_html") %>:</strong>
     </dt>
     <dd><%= @legal_aid_application.case_ccms_reference %></dd>
   </dl>
@@ -19,59 +19,59 @@
 
 <div class="print-position-correction">
   <section class="client_details print-no-break">
-    <h2 class="govuk-heading-l"><%= t('.client_details_heading') %></h2>
+    <h2 class="govuk-heading-l"><%= t(".client_details_heading") %></h2>
     <%= render(
-          'shared/check_answers/client_details',
+          "shared/check_answers/client_details",
           attributes: %i[first_name last_name date_of_birth national_insurance_number email address],
           applicant: @legal_aid_application.applicant,
           address: @legal_aid_application.applicant.address,
-          read_only: true
+          read_only: true,
         ) %>
   </section>
 
   <section class="proceeding_details print-no-break">
-    <h2 class="govuk-heading-m"><%= t('.proceedings_details_heading') %></h2>
+    <h2 class="govuk-heading-m"><%= t(".proceedings_details_heading") %></h2>
     <% if Setting.enable_mini_loop? %>
     <% @legal_aid_application.proceedings.each do |proceeding| %>
       <%= render(
-        'shared/check_answers/proceeding_details_section',
-        proceeding: proceeding,
-        read_only: true
-      ) %>
+            "shared/check_answers/proceeding_details_section",
+            proceeding:,
+            read_only: true,
+          ) %>
     <% end %>
   <% else %>
 
     <%= render(
-          'shared/check_answers/proceedings_details',
+          "shared/check_answers/proceedings_details",
           proceeding_types: @legal_aid_application.proceedings,
           legal_aid_application: @legal_aid_application,
-          read_only: true
+          read_only: true,
         ) %>
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t '.section_delegated.heading' %></h2>
+        <h2 class="govuk-heading-m"><%= t ".section_delegated.heading" %></h2>
       </div>
     </div>
 
     <%= render(
-          'shared/check_answers/delegated_functions',
+          "shared/check_answers/delegated_functions",
           legal_aid_application: @legal_aid_application,
-          read_only: true
+          read_only: true,
         ) %>
 
     <% if @legal_aid_application.used_delegated_functions? %>
-      <h2 class="govuk-heading-m"><%= t '.section_emergency.heading' %></h2>
+      <h2 class="govuk-heading-m"><%= t ".section_emergency.heading" %></h2>
       <%= render(
-            'shared/check_answers/emergency_limitations',
-            legal_aid_application: @legal_aid_application
+            "shared/check_answers/emergency_limitations",
+            legal_aid_application: @legal_aid_application,
           ) %>
     <% end %>
 
-    <h2 class="govuk-heading-m"><%= t('.section_substantive.heading') %></h2>
+    <h2 class="govuk-heading-m"><%= t(".section_substantive.heading") %></h2>
     <%= render(
-          'shared/check_answers/substantive_limitations',
-          legal_aid_application: @legal_aid_application
+          "shared/check_answers/substantive_limitations",
+          legal_aid_application: @legal_aid_application,
         ) %>
 
   <% end %>
@@ -80,26 +80,26 @@
   <% if @legal_aid_application.used_delegated_functions? %>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t '.emergency_cost_limit' %></h2>
+        <h2 class="govuk-heading-m"><%= t ".emergency_cost_limit" %></h2>
       </div>
     </div>
     <%= render(
-          'shared/check_answers/emergency_costs',
+          "shared/check_answers/emergency_costs",
           legal_aid_application: @legal_aid_application,
-          read_only: true
+          read_only: true,
         ) %>
   <% end %>
 
   <% if @legal_aid_application.substantive_cost_overridable? %>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m"><%= t '.substantive_cost_limit' %></h2>
+        <h2 class="govuk-heading-m"><%= t ".substantive_cost_limit" %></h2>
       </div>
     </div>
     <%= render(
-          'shared/check_answers/substantive_costs',
+          "shared/check_answers/substantive_costs",
           legal_aid_application: @legal_aid_application,
-          read_only: true
+          read_only: true,
         ) %>
   <% end %>
 
@@ -111,33 +111,33 @@
 
   <section class="merits page_break_before">
     <%= render(
-      "shared/check_answers/merits",
-      incident: @legal_aid_application.latest_incident,
-      statement_of_case: @legal_aid_application.statement_of_case,
-      gateway_evidence: @legal_aid_application&.gateway_evidence,
-      opponent: @legal_aid_application.opponent,
-      allegation: @legal_aid_application&.allegation,
-      undertaking: @legal_aid_application&.undertaking,
-      urgency: @legal_aid_application&.urgency,
-      read_only: true
-    ) %>
+          "shared/check_answers/merits",
+          incident: @legal_aid_application.latest_incident,
+          statement_of_case: @legal_aid_application.statement_of_case,
+          gateway_evidence: @legal_aid_application&.gateway_evidence,
+          opponent: @legal_aid_application.opponent,
+          allegation: @legal_aid_application&.allegation,
+          undertaking: @legal_aid_application&.undertaking,
+          urgency: @legal_aid_application&.urgency,
+          read_only: true,
+        ) %>
   </section>
 
   <section id="client-declaration" class="only-print print-no-break page_break_before">
     <div class="govuk-!-padding-bottom-6"></div>
-    <h2 class="govuk-heading-l"><%= t('.client_declaration.heading') %></h2>
+    <h2 class="govuk-heading-l"><%= t(".client_declaration.heading") %></h2>
 
-    <%= render 'shared/applicant_declaration' %>
+    <%= render "shared/applicant_declaration" %>
 
     <dl class="govuk-summary-list govuk-summary-list--no-border">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key print-bottom-gap">
-          <%= t('.client_declaration.signature') %>
+          <%= t(".client_declaration.signature") %>
         </dt>
       </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          <%= t('.client_declaration.date') %>
+          <%= t(".client_declaration.date") %>
         </dt>
       </div>
     </dl>
