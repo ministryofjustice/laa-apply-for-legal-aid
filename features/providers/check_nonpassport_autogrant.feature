@@ -88,7 +88,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on a page showing "Opponent details"
+    Then I should be on a page showing "Domestic abuse summary"
     Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
     Then I choose "application-merits-task-opponent-police-notified-true-field"
     Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike non passported test"
@@ -207,7 +207,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
     When I choose "Yes"
     And I click 'Save and continue'
-    Then I should be on a page showing "Opponent details"
+    Then I should be on a page showing "Domestic abuse summary"
     Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
     Then I choose "application-merits-task-opponent-police-notified-true-field"
     Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike non passported test"
