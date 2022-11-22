@@ -4,7 +4,7 @@ module TransactionTypeHelper
 
     tag_classes = %w[table-category govuk-body-s]
     label = t("activemodel.attributes.transaction_types.name.#{object.transaction_type.name}")
-    content = gov_uk_tag(text: label, classes: tag_classes).html_safe
+    content = govuk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
       id: "Category-#{object.id}",
@@ -17,7 +17,7 @@ module TransactionTypeHelper
     label = t("activemodel.attributes.transaction_types.name.#{transaction_type.name}")
     tag_classes = %w[table-category govuk-body-s table-category-vacant]
 
-    content = gov_uk_tag(text: label, classes: tag_classes).html_safe
+    content = govuk_tag(text: label, classes: tag_classes).html_safe
 
     sort_column_cell(
       id: "Category-#{object.id}",

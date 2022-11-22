@@ -47,7 +47,7 @@
               <% end %>
 
               <%= sort_column_cell(sort_by: application.enum_t(:summary_state)) do %>
-                <%= gov_uk_tag text: application.enum_t(:summary_state), status: application.summary_state, classes: ['govuk-!-margin-1'] %>
+                <%= govuk_tag(text: application.enum_t(:summary_state), colour: application.summary_state == :submitted ? "green" : "blue") %>
               <% end %>
               <td>
                 <% unless application.summary_state == :submitted %>
