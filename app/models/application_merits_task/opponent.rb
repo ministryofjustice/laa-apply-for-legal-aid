@@ -1,6 +1,5 @@
 module ApplicationMeritsTask
   class Opponent < ApplicationRecord
-    include NameSplitHelper
     include CCMSOpponentIdGenerator
 
     belongs_to :legal_aid_application
@@ -18,7 +17,7 @@ module ApplicationMeritsTask
     end
 
     def full_name
-      attributes["full_name"] || "#{first_name} #{last_name}".strip
+      "#{first_name} #{last_name}".strip
     end
   end
 end
