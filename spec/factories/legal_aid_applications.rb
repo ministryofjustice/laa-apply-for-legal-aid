@@ -299,7 +299,7 @@ FactoryBot.define do
     # This trait must be specified after the :with_proceedings trait.
     #
     # Takes a hash as a mandatory parameter, passing
-    # delegated_functions_date and delegated_functions_reported_date
+    # used_delegated_functions_on and used_delegated_functions_reported_on
     # date in an array for each proceeding ccms_code.
     # example:
     #   {
@@ -320,8 +320,10 @@ FactoryBot.define do
           proceeding = application.proceedings.detect { |p| p.ccms_code == ccms_code.to_s }
           next if proceeding.nil? # silently ignore if df_options specify a proceeding ccms_code which isn't attached to this application
 
-          df_date, reported_date = evaluator.df_options[ccms_code]
-          proceeding.update!(used_delegated_functions: df_date.present?, used_delegated_functions_on: df_date, used_delegated_functions_reported_on: reported_date)
+          used_delegated_functions_on, used_delegated_functions_reported_on = evaluator.df_options[ccms_code]
+          proceeding.update!(used_delegated_functions: used_delegated_functions_on.present?,
+                             used_delegated_functions_on:,
+                             used_delegated_functions_reported_on:)
         end
       end
     end

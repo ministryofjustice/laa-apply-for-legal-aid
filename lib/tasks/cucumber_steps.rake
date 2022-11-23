@@ -12,7 +12,7 @@ namespace :cucumber do
 
     results = []
     Dir.glob(File.join(step_definition_dir, "**/*.rb")).each do |step_file|
-      File.new(step_file).read.each_line.each_with_index do |line, number|
+      File.new(step_file).read.each_line.with_index do |line, number|
         next unless line =~ /^\s*(Given|When|Then)\((.+)\)\s*do$/
 
         name = Regexp.last_match(2).delete("/").delete("^").delete("$").delete("'").delete('"')
