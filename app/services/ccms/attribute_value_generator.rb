@@ -308,7 +308,12 @@ module CCMS
     end
 
     def multiple_scope_limitations?(proceeding)
-      proceeding.scope_limitations.where(scope_type: :emergency).count > 1 || proceeding.scope_limitations.where(scope_type: :substantive).count > 1
+      proceeding
+        .scope_limitations
+        .select(:scope_type)
+        .group(:scope_type)
+        .count
+        .any? { |_type, count| count > 1 }
     end
 
     def other_party_full_name(options)
