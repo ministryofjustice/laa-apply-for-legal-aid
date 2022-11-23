@@ -164,7 +164,7 @@ module CCMS
             /<common:Attribute> <common:Attribute>REQUESTED_SCOPE<\/common:Attribute> <common:ResponseType>text<\/common:ResponseType> <common:ResponseValue>MULTIPLE<\/common:ResponseValue> <common:UserDefinedInd>true<\/common:UserDefinedInd> <\/common:Attribute>/
           end
 
-          context "when DF are present" do
+          context "when DF have not been used" do
             it "generates the expected scope limitations" do
               expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
               travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
@@ -180,7 +180,7 @@ module CCMS
             end
           end
 
-          context "when DF are actually used" do
+          context "when DF are used" do
             let(:df_date) { Date.parse("2020-11-23") }
 
             before do
