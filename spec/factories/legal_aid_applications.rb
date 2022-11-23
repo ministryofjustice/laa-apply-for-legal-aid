@@ -68,6 +68,10 @@ FactoryBot.define do
       passported
     end
 
+    trait :with_non_means_tested_state_machine do
+      state_machine factory: :non_means_tested_state_machine
+    end
+
     trait :initiated do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :initiated)
@@ -543,15 +547,31 @@ FactoryBot.define do
     end
 
     trait :with_negative_benefit_check_result do
-      benefit_check_result { build(:benefit_check_result) }
+      benefit_check_result { build(:benefit_check_result, :negative) }
     end
 
     trait :with_positive_benefit_check_result do
       benefit_check_result { build(:benefit_check_result, :positive) }
     end
 
+    trait :with_undetermined_benefit_check_result do
+      benefit_check_result { build(:benefit_check_result, :undetermined) }
+    end
+
+    trait :with_skipped_benefit_check_result do
+      benefit_check_result { build(:benefit_check_result, :skipped) }
+    end
+
     trait :passported do
       with_positive_benefit_check_result
+    end
+
+    trait :non_passported do
+      with_negative_benefit_check_result
+    end
+
+    trait :non_means_tested do
+      with_skipped_benefit_check_result
     end
 
     trait :with_attempts_to_settle do
@@ -569,14 +589,6 @@ FactoryBot.define do
           proceeding.chances_of_success = create(:chances_of_success, success_prospect: evaluator.prospect, proceeding:)
         end
       end
-    end
-
-    trait :with_undetermined_benefit_check_result do
-      benefit_check_result { build(:benefit_check_result, :undetermined) }
-    end
-
-    trait :non_passported do
-      with_negative_benefit_check_result
     end
 
     trait :draft do

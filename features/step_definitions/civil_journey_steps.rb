@@ -932,7 +932,7 @@ Then(/^I enter the purchase date '(\d+-\d+-\d+)'$/) do |purchase_date|
   fill_in("purchased_on_year", with: year)
 end
 
-Then("I enter the {string} date of {int} days ago") do |name, number|
+Then(/^I enter the (.*) date of (\d+) day(?:s)? ago$/) do |name, number|
   name.gsub!(/\s+/, "_")
   date = number.days.ago
   fields = page.all("input[name*=#{name}]")
