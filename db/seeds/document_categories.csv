@@ -12,3 +12,11 @@ statement_of_case,FALSE,,FALSE,FALSE
 statement_of_case_pdf,TRUE,ADMIN1,FALSE,FALSE
 bank_statement_evidence,FALSE,,FALSE,FALSE
 bank_statement_evidence_pdf,TRUE,BSTMT,FALSE,FALSE
+court_application,FALSE,,TRUE,FALSE
+court_application_pdf,TRUE,ADMIN1,FALSE,FALSE
+court_order,FALSE,,TRUE,TRUE
+court_order_pdf,TRUE,ADMIN1,FALSE,FALSE
+expert_report,FALSE,,TRUE,FALSE
+expert_report_pdf,TRUE,ADMIN1,FALSE,FALSE
+court_application_or_order,FALSE,,TRUE,TRUE
+court_application_or_order_pdf,TRUE,ADMIN1,FALSE,FALSE

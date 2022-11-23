@@ -333,6 +333,18 @@ FactoryBot.define do
       end
     end
 
+    trait :with_opponents_application_proceeding do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :da001, :opponents_application)
+      end
+    end
+
+    trait :with_final_hearing_proceeding do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :da001, :final_hearing)
+      end
+    end
+
     trait :with_dependant do
       transient do
         dependant_count { 1 }

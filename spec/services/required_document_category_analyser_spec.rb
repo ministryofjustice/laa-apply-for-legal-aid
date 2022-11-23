@@ -70,5 +70,32 @@ RSpec.describe RequiredDocumentCategoryAnalyser do
         expect(application.required_document_categories).to eq %w[employment_evidence]
       end
     end
+
+    context "when the application has a proceeding with opponent_application has_opponent_application true" do
+      let(:application) { create(:legal_aid_application, :with_opponents_application_proceeding) }
+
+      it "updates the required_document_categories with court_application_or_order" do
+        subject
+        expect(application.required_document_categories).to eq %w[court_application_or_order]
+      end
+    end
+
+    context "when the application has a proceeding with final_hearing listed true" do
+      let(:application) { create(:legal_aid_application, :with_final_hearing_proceeding) }
+
+      it "updates the required_document_categories with court_order and expert_report" do
+        subject
+        expect(application.required_document_categories).to match_array %w[court_order expert_report]
+      end
+    end
+
+    context "when the application has a proceeding with opponent_application has_opponent_application true and final_hearing listed true" do
+      let(:application) { create(:legal_aid_application, :with_opponents_application_proceeding, :with_final_hearing_proceeding) }
+
+      it "updates the required_document_categories with court_order and expert_report" do
+        subject
+        expect(application.required_document_categories).to match_array %w[court_application court_order expert_report]
+      end
+    end
   end
 end

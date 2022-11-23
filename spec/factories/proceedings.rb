@@ -257,5 +257,17 @@ FactoryBot.define do
       client_involvement_type_ccms_code { "A" }
       client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
+
+    trait :opponents_application do
+      after(:create) do |proceeding|
+        create(:opponents_application, proceeding:)
+      end
+    end
+
+    trait :final_hearing do
+      after(:create) do |proceeding|
+        create(:final_hearing, proceeding:)
+      end
+    end
   end
 end

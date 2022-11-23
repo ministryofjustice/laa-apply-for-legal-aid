@@ -18,6 +18,14 @@ class DocumentCategoryValidator < ActiveModel::Validator
     statement_of_case_pdf
     bank_statement_evidence
     bank_statement_evidence_pdf
+    court_application
+    court_application_pdf
+    court_order
+    court_order_pdf
+    expert_report
+    expert_report_pdf
+    court_application_or_order
+    court_application_or_order_pdf
   ].freeze
 
   def validate(record)
