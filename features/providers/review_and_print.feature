@@ -191,7 +191,7 @@ Feature: Review and print your application
       | h3  | Payments your client makes in cash|
       | h2  | Your client's capital |
 
-    And I should see "Passported"
+    And I should see "PASSPORTED"
     And I should not see "Benefits total"
     And I should not see "Housing benefit total"
     And I should not see "Disregarded benefits total"

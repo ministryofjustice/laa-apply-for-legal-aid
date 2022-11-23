@@ -25,7 +25,7 @@
       <% attachments.order(:created_at).each do |attachment| %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell"><%= attachment.document.filename %></td>
-          <td class="govuk-table__cell"><span class="govuk-tag"><%= t('.uploaded') %></span></td>
+          <td class="govuk-table__cell"><%= govuk_tag(text: t(".uploaded")) %></td>
           <td class="govuk-table__cell">
             <%= button_to_accessible(
                   t('.delete'),

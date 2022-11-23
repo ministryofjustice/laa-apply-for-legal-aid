@@ -9,9 +9,7 @@
   <section class="print-no-break">
     <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= display_employment_income? ? t(".other_income") : t(".income") %></h3>
     <% if @legal_aid_application.applicant_receives_benefit? %>
-      <strong class="govuk-tag app-tag--capitalize">
-        <%= t(".passported") %>
-      </strong>
+      <%= govuk_tag(text: t(".passported")) %>
     <% else %>
       <%= render(
             "shared/check_answers/bank_transaction_table",
@@ -41,9 +39,7 @@
   <section class="print-no-break">
     <h3 class="govuk-heading-m govuk-!-padding-top-8"><%= t(".payments") %></h3>
     <% if @legal_aid_application.applicant_receives_benefit? %>
-      <strong class="govuk-tag app-tag--capitalize">
-        <%= t(".passported") %>
-      </strong>
+      <%= govuk_tag(text: t(".passported")) %>
     <% else %>
       <%= render(
             "shared/check_answers/bank_transaction_table",

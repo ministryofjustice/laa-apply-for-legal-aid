@@ -90,10 +90,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
   }
 }
 
-strong.app-tag--capitalize {
-  text-transform: capitalize
-}
-
 .print-no-break > .govuk-body {
   word-wrap: break-word;
 }

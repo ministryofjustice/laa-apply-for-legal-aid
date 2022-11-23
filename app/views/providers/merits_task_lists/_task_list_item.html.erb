@@ -7,5 +7,10 @@
       <p><%= formatted_name %></p>
     <% end %>
   </span>
-  <strong class="govuk-tag <%= tag_class %> app-task-list__tag" id="<%= name %>_status"><%= t(".states.#{status}") %></strong>
+  <%= govuk_tag(
+      text: t(".states.#{status}"),
+      colour: tag_colour,
+      classes: "app-task-list__tag",
+      html_attributes: { id: "#{name}_status" }
+    ) %>
 </li>

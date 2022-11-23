@@ -650,7 +650,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-    And I should not see "Passported"
+    And I should not see "PASSPORTED"
 
   @javascript @vcr
   Scenario: Receives benefits and completes the application happy path no back button
@@ -752,7 +752,7 @@ Feature: Civil application journeys
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'
     Then I should be on a page showing "Application for civil legal aid certificate"
-    Then I should be on a page showing "Passported"
+    Then I should be on a page showing "PASSPORTED"
 
   @javascript @vcr
   Scenario: Enter feedback within provider journey
