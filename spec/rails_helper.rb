@@ -79,6 +79,7 @@ RSpec.configure do |config|
   # https://github.com/plataformatec/devise#controller-tests
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Capybara::RSpecMatchers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|
