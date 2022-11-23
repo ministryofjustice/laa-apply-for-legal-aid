@@ -26,16 +26,26 @@ module LegalFramework
     end
 
     describe ".mark_as_complete" do
-      subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, :children_application) }
+      subject(:mark_as_complete) { merits_task_list.mark_as_complete!(:application, task_name) }
 
-      before { mark_as_complete }
+      let(:task_name) { :latest_incident_details }
 
       it { is_expected.to be true }
 
-      it "updates the task list" do
-        # match pattern => key: :value, newline, any amount of spaces, repeat
-        expect(merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
-        expect(merits_task_list.serialized_data).to match(/name: :children_proceeding\n\s+dependencies: \*\d\n\s+state: :not_started/)
+      it "updates the state of the task" do
+        mark_as_complete
+        expect(merits_task_list).to have_completed_task(:application, :latest_incident_details)
+      end
+
+      context "when the completed task updates a sub task" do
+        let(:task_name) { :children_application }
+
+        it "updates the task list and dependencies" do
+          expect(merits_task_list).to have_task_in_state(:SE014, :children_proceeding, :waiting_for_dependency)
+          mark_as_complete
+          expect(merits_task_list).to have_completed_task(:application, :children_application)
+          expect(merits_task_list).to have_not_started_task(:SE014, :children_proceeding)
+        end
       end
     end
 
