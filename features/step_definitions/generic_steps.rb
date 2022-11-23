@@ -7,8 +7,12 @@ Then("I should be on a page with title matching {string}") do |title|
 end
 
 Then("I should see govuk error summary {string}") do |error_text|
-  summary = page.find('.govuk-error-summary[role="alert"]')
-  expect(summary).to have_selector("#error-summary-title", text: "There is a problem")
+  summary = page.find("div.govuk-error-summary > div[role='alert']")
+  expect(summary).to have_css(
+    "h2",
+    class: "govuk-error-summary__title",
+    text: "There is a problem",
+  )
   expect(summary).to have_link(error_text)
 end
 

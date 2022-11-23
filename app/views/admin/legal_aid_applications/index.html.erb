@@ -5,27 +5,29 @@
     ) do %>
   <%= render partial: "shared/error" if @error %>
 
-  <div id="confirm-delete" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary" data-cancel-text="<%= t(".cancel_delete") %>" hidden>
-    <h2 class="govuk-error-summary__title" id="error-summary-title">
-      <span id="delete-message"></span>
-    </h2>
-    <div class="govuk-body-m" id="delete-case-details">
-      <p id="delete-case-name"></p>
-      <p id="delete-case-ref"></p>
+  <div id="confirm-delete" class="govuk-error-summary" tabindex="-1" data-module="govuk-error-summary" data-cancel-text="<%= t(".cancel_delete") %>" hidden>
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        <span id="delete-message"></span>
+      </h2>
+      <div class="govuk-body-m" id="delete-case-details">
+        <p id="delete-case-name"></p>
+        <p id="delete-case-ref"></p>
+      </div>
+
+      <%= govuk_inset_text(text: t(".warning.delete_consequence")) %>
+
+      <%= if destroy_enabled?
+            button_to_accessible(
+              t(".confirm_delete"),
+              nil,
+              method: :delete,
+              class: "govuk-button govuk-button--warning govuk-!-margin-bottom-1 govuk-!-margin-top-4",
+              id: "confirm-delete-button",
+              disabled: "true",
+            )
+          end %>
     </div>
-
-    <%= govuk_inset_text(text: t(".warning.delete_consequence")) %>
-
-    <%= if destroy_enabled?
-          button_to_accessible(
-            t(".confirm_delete"),
-            nil,
-            method: :delete,
-            class: "govuk-button govuk-button--warning govuk-!-margin-bottom-1 govuk-!-margin-top-4",
-            id: "confirm-delete-button",
-            disabled: "true",
-          )
-        end %>
   </div>
 
   <%= if create_test_applications_enabled?
