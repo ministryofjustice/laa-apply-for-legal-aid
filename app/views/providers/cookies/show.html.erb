@@ -11,8 +11,10 @@
   <%= page_template page_title: t('.page_title'), head_title: new_head_title, template: :basic, form: form do %>
 
     <% if @successfully_saved %>
-      <%= render partial: 'shared/partials/notification_banner',
-               locals: { success: true, heading_text: t('.success_message'), link_to: back_path, link_text: t('.go_back_link')} %>
+      <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
+        <% notification_banner.heading(text: t('.success_message')) %>
+        <%= link_to t(".go_back_link"), back_path %>
+      <% end %>
     <% end %>
 
     <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
