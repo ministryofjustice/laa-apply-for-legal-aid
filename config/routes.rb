@@ -243,6 +243,7 @@ Rails.application.routes.draw do
       resource :merits_report, only: :show
       resource :means_report, only: :show
       resource :confirm_dwp_non_passported_applications, only: %i[show update]
+      resource :confirm_non_means_tested_applications, only: %i[show update]
       resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: %i[show update]
       resource :has_evidence_of_benefit, only: %i[show update]

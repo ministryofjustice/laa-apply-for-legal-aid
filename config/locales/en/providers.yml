@@ -236,6 +236,7 @@ en:
         singular:
           details_correct: This date is correct
           details_incorrect: I need to change this date
+
     confirm_multiple_delegated_functions:
       show:
         heading: Check delegated functions dates
@@ -250,6 +251,12 @@ en:
         singular:
           warning_text: The date you entered is over one month old.
           details_incorrect: No, I need to change this date
+
+    confirm_non_means_tested_applications:
+      show:
+        title: No means test required as client is under 18
+        tab_title: No means test required
+
     correct_dwp_results:
       show:
         error: Select yes if your client does not receive a passporting benefit.

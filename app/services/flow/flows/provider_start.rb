@@ -86,9 +86,18 @@ module Flow
         },
         check_provider_answers: {
           path: ->(application) { urls.providers_legal_aid_application_check_provider_answers_path(application) },
-          forward: lambda do |application|
-            application.applicant.national_insurance_number? ? :check_benefits : :no_national_insurance_numbers
+          forward: lambda do |application, no_means_test_required|
+            if no_means_test_required
+              application.change_state_machine_type("NonMeansTestedStateMachine")
+              :confirm_non_means_tested_applications
+            else
+              application.applicant.national_insurance_number? ? :check_benefits : :no_national_insurance_numbers
+            end
           end,
+        },
+        confirm_non_means_tested_applications: {
+          path: ->(application) { urls.providers_legal_aid_application_confirm_non_means_tested_applications_path(application) },
+          forward: :merits_task_lists,
         },
         no_national_insurance_numbers: {
           path: ->(application) { urls.providers_legal_aid_application_no_national_insurance_number_path(application) },

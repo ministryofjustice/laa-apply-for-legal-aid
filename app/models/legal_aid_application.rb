@@ -293,6 +293,10 @@ class LegalAidApplication < ApplicationRecord
     !passported?
   end
 
+  def non_means_tested?
+    !!state_machine.is_a?(NonMeansTestedStateMachine)
+  end
+
   def benefit_check_result_needs_updating?
     return true unless benefit_check_result
 

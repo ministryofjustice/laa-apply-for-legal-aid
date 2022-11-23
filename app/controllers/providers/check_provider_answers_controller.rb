@@ -15,10 +15,14 @@ module Providers
     end
 
     def continue
-      continue_or_draft
+      continue_or_draft(no_means_test_required?)
     end
 
   private
+
+    def no_means_test_required?
+      legal_aid_application.applicant.no_means_test_required?
+    end
 
     def set_variables
       @applicant = legal_aid_application.applicant
