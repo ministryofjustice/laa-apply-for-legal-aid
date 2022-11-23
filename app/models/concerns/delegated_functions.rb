@@ -3,12 +3,6 @@ module DelegatedFunctions
     proceedings.any?(&:used_delegated_functions?)
   end
 
-  # TODO: move the logic from the method below into used_delegated_functions? method above
-  # and remove the associated tests for this method on legal_aid_application
-  def proceedings_used_delegated_functions?
-    proceedings.any?(&:used_delegated_functions?)
-  end
-
   def used_delegated_functions_on
     earliest_delegated_functions_date
   end

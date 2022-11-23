@@ -103,7 +103,7 @@ module CCMS
     end
 
     def app_amendment_type(_options)
-      legal_aid_application.proceedings_used_delegated_functions? ? "SUBDP" : "SUB"
+      legal_aid_application.used_delegated_functions? ? "SUBDP" : "SUB"
     end
 
     def provider_firm_id(_options)
@@ -218,11 +218,11 @@ module CCMS
     end
 
     def application_substantive?(_options)
-      !legal_aid_application.proceedings_used_delegated_functions?
+      !legal_aid_application.used_delegated_functions?
     end
 
     def proceeding_proceeding_application_type(_options)
-      legal_aid_application.proceedings_used_delegated_functions? ? "Both" : "Substantive"
+      legal_aid_application.used_delegated_functions? ? "Both" : "Substantive"
     end
 
     def no_warning_letter_sent?(_options)
