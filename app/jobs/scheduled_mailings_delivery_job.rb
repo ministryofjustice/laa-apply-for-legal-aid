@@ -9,6 +9,8 @@ class ScheduledMailingsDeliveryJob < ApplicationJob
     end
     reschedule unless JobQueue.enqueued?(ScheduledMailingsDeliveryJob)
     EmailMonitorJob.perform_later unless JobQueue.enqueued?(EmailMonitorJob)
+  rescue ActiveRecord::StatementInvalid
+    Sentry.capture_message("Database for #{ENV.fetch('APP_BRANCH', 'unknown branch')} not available to send scheduled mailings")
   end
 
   def reschedule

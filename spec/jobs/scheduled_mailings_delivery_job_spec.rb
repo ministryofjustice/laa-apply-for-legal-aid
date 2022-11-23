@@ -2,7 +2,7 @@ require "rails_helper"
 require Rails.root.join("spec/mock_objects/mock_queued_job")
 
 RSpec.describe ScheduledMailingsDeliveryJob do
-  subject { described_class.new.perform }
+  subject(:perform) { described_class.new.perform }
 
   describe "ScheduledMailingsDeliveryJob" do
     let(:application) { create(:application, :with_everything) }
@@ -13,7 +13,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
       context "when calling DeliveryMan" do
         it "calls DeliveryMan for each due item" do
           expect(GovukEmails::DeliveryMan).to receive(:call).with(mailing_one.id)
-          subject
+          perform
         end
       end
 
@@ -31,7 +31,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "does not schedule another job" do
             expect(described_class).not_to receive(:set)
-            subject
+            perform
           end
         end
 
@@ -42,7 +42,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "schedules another delivery job" do
             expect(described_class).to receive(:set).with(wait: delay).and_return(job)
-            subject
+            perform
           end
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "does not schedule another job" do
             expect(EmailMonitorJob).not_to receive(:perform_later)
-            subject
+            perform
           end
         end
 
@@ -70,8 +70,19 @@ RSpec.describe ScheduledMailingsDeliveryJob do
 
           it "starts a monitoring job" do
             expect(EmailMonitorJob).to receive(:perform_later)
-            subject
+            perform
           end
+        end
+      end
+
+      context "when the database tables cannot be found" do
+        before do
+          allow(ScheduledMailing).to receive(:waiting).and_raise(ActiveRecord::StatementInvalid, 'PG::UndefinedTable: ERROR: relation "scheduled_mailings" does not exist')
+        end
+
+        it "raises a single error, rather than one per email" do
+          expect(Sentry).to receive(:capture_message).with(/not available to send scheduled mailings/)
+          perform
         end
       end
     end
