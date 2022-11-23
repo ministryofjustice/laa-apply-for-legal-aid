@@ -1,5 +1,6 @@
-<%= render partial: 'shared/partials/notification_banner',
-           locals: { heading_text: t('.banner.your_client_needs_to') } %>
+<%= govuk_notification_banner(title_text: t("generic.important")) do |notification_banner| %>
+  <% notification_banner.heading(text: t(".banner.your_client_needs_to")) %>
+<% end %>
 
   <p class="govuk-body"><%= t '.sent_email_text', email: @legal_aid_application.applicant.email %></p>
 

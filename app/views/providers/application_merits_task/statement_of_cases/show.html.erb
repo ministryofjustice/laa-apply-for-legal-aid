@@ -14,8 +14,9 @@
     ) do %>
 
   <% if @successfully_deleted %>
-    <%= render partial: 'shared/partials/notification_banner',
-             locals: { success: true, heading_text: @successfully_deleted } %>
+    <%= govuk_notification_banner(title_text: t("generic.success"), success: true) do |notification_banner| %>
+      <% notification_banner.heading(text: @successfully_deleted) %>
+    <% end %>
   <% end %>
 
   <%= form_with(
