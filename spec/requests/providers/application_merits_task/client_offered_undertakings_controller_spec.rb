@@ -60,7 +60,6 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:undertaking) { legal_aid_application.reload.undertaking }
-        let(:not_started_regex) { /name: :client_offer_of_undertakings\n\s+dependencies: \*\d\n\s+state: :not_started/ }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
@@ -75,7 +74,7 @@ module Providers
 
         it "sets the task to complete" do
           post_client_undertakings
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :client_offer_of_undertakings\n\s+dependencies: \*\d\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:application, :client_offer_of_undertakings)
         end
 
         it "redirects to the next page" do
@@ -102,7 +101,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_client_undertakings
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(not_started_regex)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :client_offer_of_undertakings)
           end
         end
 
@@ -116,7 +115,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_client_undertakings
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(not_started_regex)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :client_offer_of_undertakings)
           end
         end
       end

@@ -65,7 +65,7 @@ module Providers
             end
 
             it "sets the task to complete" do
-              expect(legal_aid_application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :specific_issue\n\s+dependencies: \*\d+\n\s+state: :complete/)
+              expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:SE004, :specific_issue)
             end
 
             it "redirects to the next page" do

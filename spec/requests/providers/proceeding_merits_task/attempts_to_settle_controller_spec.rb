@@ -101,7 +101,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
 
         it "updates the task list" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :attempts_to_settle\n\s+dependencies: \*\d+\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:SE014, :attempts_to_settle)
         end
 
         context "when the params are not valid" do
@@ -134,7 +134,7 @@ RSpec.describe Providers::ProceedingMeritsTask::AttemptsToSettleController do
 
         it "does not set the task to complete" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).not_to match(/name: :attempts_to_settle\n\s+dependencies: \*\d+\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:SE014, :attempts_to_settle)
         end
       end
     end
