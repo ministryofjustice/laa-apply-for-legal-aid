@@ -5,8 +5,6 @@ require "rails_helper"
 # 2. see cucumber features for full JS enabled integration tests.
 #
 RSpec.describe "Providers::BankStatementsController" do
-  include Capybara::RSpecMatchers
-
   let(:legal_aid_application) { create(:legal_aid_application, :provider_confirming_applicant_eligibility, attachments:) }
   let(:id) { legal_aid_application.id }
   let(:attachments) { [] }

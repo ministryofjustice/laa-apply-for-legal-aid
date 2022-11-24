@@ -1,19 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Providers::HasNationalInsuranceNumbersController do
-  include Capybara::RSpecMatchers
-
-  let(:legal_aid_application) do
-    create(:legal_aid_application)
-  end
-
+  let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
   let(:next_flow_step) { flow_forward_path }
   let(:mini_loop?) { false }
 
-  before do
-    login_as provider
-  end
+  before { login_as provider }
 
   describe "#pre_dwp_check?" do
     it { expect(described_class.new.pre_dwp_check?).to be true }
@@ -26,8 +19,10 @@ RSpec.describe Providers::HasNationalInsuranceNumbersController do
 
     it "renders page with expected heading" do
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template("providers/has_national_insurance_numbers/show")
-      expect(response.body).to include("Does the client have a National Insurance number?")
+      expect(page).to have_css(
+        "h1",
+        text: "Does the client have a National Insurance number?",
+      )
     end
   end
 

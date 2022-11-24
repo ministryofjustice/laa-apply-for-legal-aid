@@ -3,7 +3,6 @@ require Rails.root.join("spec/factory_helpers/cfe_employment_remarks_adder")
 
 RSpec.describe Providers::MeansReportsController do
   include ActionView::Helpers::NumberHelper
-  include Capybara::RSpecMatchers
 
   let(:legal_aid_application) do
     create(:legal_aid_application,
