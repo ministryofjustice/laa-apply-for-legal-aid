@@ -52,6 +52,9 @@ Feature: Non-means-tested applicant journeys
     Then I should be on a page with title "No means test required"
     And I should be on a page showing "No means test required as client is under 18"
 
+    When I click 'Continue'
+    Then I should be on a page with title "Provide details of the case"
+
   @javascript @vcr
   Scenario: Completes a minimal application for applicant that is under 18 without MTR phase 1 enabled
     Given I am logged in as a provider
