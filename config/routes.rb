@@ -195,6 +195,7 @@ Rails.application.routes.draw do
       resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
       resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
+
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
         get "/list", to: "uploaded_evidence_collections#list"
@@ -265,14 +266,17 @@ Rails.application.routes.draw do
     end
 
     resources :merits_task_list, only: [] do
-      resource :opponents_application, only: %i[show update], controller: "proceeding_merits_task/opponents_application"
-      resource :attempts_to_settle, only: %i[show update], controller: "proceeding_merits_task/attempts_to_settle"
-      resource :linked_children, only: %i[show update], controller: "proceeding_merits_task/linked_children"
-      resource :prohibited_steps, only: %i[show update], controller: "proceeding_merits_task/prohibited_steps"
-      resources :chances_of_success, only: %i[index create], controller: "proceeding_merits_task/chances_of_success"
-      resource :success_prospects, only: %i[show update], controller: "proceeding_merits_task/success_prospects"
-      resource :specific_issue, only: %i[show update], controller: "proceeding_merits_task/specific_issue"
-      resource :vary_order, only: %i[show update], controller: "proceeding_merits_task/vary_order"
+      scope module: :proceeding_merits_task do
+        resources :chances_of_success, only: %i[index create]
+
+        resource :attempts_to_settle, only: %i[show update], controller: "attempts_to_settle"
+        resource :linked_children, only: %i[show update]
+        resource :opponents_application, only: %i[show update], controller: "opponents_application"
+        resource :prohibited_steps, only: %i[show update]
+        resource :specific_issue, only: %i[show update], controller: "specific_issue"
+        resource :success_prospects, only: %i[show update]
+        resource :vary_order, only: %i[show update], controller: "vary_order"
+      end
     end
   end
 
