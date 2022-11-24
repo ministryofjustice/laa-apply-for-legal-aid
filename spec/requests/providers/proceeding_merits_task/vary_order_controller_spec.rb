@@ -63,8 +63,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "sets the vary_order task to complete" do
         patch_vary_order
-        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
-        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :complete))
+        expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:DA002, :vary_order)
       end
 
       it "redirects" do
@@ -83,8 +82,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "does not set the vary_order task to complete" do
         patch_vary_order
-        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
-        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :not_started))
+        expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:DA002, :vary_order)
       end
     end
 
@@ -141,8 +139,7 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
 
       it "does not set the task to complete" do
         patch_vary_order
-        deserialized_da002_tasks = legal_aid_application.legal_framework_merits_task_list.task_list.tasks.dig(:proceedings, :DA002, :tasks)
-        expect(deserialized_da002_tasks).to include(an_object_having_attributes(name: :vary_order, state: :not_started))
+        expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:DA002, :vary_order)
       end
     end
   end

@@ -93,7 +93,7 @@ module Providers
 
         it "sets the task to complete" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:application, :opponent_details)
         end
 
         context "when no other tasks are complete" do
@@ -161,7 +161,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_details)
           end
         end
 
@@ -175,7 +175,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :opponent_details\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_details)
           end
         end
       end

@@ -53,7 +53,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
           end
         end
 
@@ -73,7 +73,7 @@ module Providers
 
           it "sets the task to complete" do
             subject
-            expect(application.reload.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :complete/)
+            expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :children_application)
           end
         end
 
@@ -93,7 +93,7 @@ module Providers
 
           it "does not set the task to complete" do
             subject
-            expect(application.legal_framework_merits_task_list.serialized_data).to match(/name: :children_application\n\s+dependencies: \*\d\n\s+state: :not_started/)
+            expect(application.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
           end
         end
       end

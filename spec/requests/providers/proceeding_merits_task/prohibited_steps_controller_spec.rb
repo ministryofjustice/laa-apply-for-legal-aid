@@ -68,7 +68,7 @@ module Providers
 
         it "sets the task to complete" do
           post_prohibited_steps
-          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :prohibited_steps\n\s+dependencies: \*\d+\n\s+state: :complete/)
+          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:SE003, :prohibited_steps)
         end
 
         context "when all previous tasks are completed" do
@@ -95,7 +95,6 @@ module Providers
         context "when incomplete" do
           let(:uk_removal) { "false" }
           let(:details) { "" }
-          let(:regex) { /name: :prohibited_steps\n\s+dependencies: \*\d+\n\s+state: :not_started/ }
 
           it "renders show" do
             post_prohibited_steps
@@ -104,7 +103,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_prohibited_steps
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(regex)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:SE003, :prohibited_steps)
           end
         end
 
@@ -130,7 +129,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_prohibited_steps
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :prohibited_steps\n\s+dependencies: \*\d+\n\s+state: :not_started/)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:SE003, :prohibited_steps)
           end
         end
       end

@@ -55,7 +55,6 @@ module Providers
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:urgency) { legal_aid_application.reload.urgency }
-        let(:not_started_regex) { /name: :nature_of_urgency\n\s+dependencies: \*\d\n\s+state: :not_started/ }
 
         before do
           allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl)
@@ -112,7 +111,7 @@ module Providers
 
           it "does not set the task to complete" do
             post_nature_of_urgencies
-            expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(not_started_regex)
+            expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :nature_of_urgency)
           end
         end
       end
