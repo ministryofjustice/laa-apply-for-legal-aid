@@ -214,15 +214,7 @@ Rails.application.routes.draw do
       resource :no_eligibility_assessment, only: %i[show update]
       resource :used_multiple_delegated_functions, only: %i[show update] # TODO: Delete after mini loop implemented
       resource :confirm_multiple_delegated_functions, only: %i[show update] # TODO: Refactor after mini loop
-      resources :delegated_functions, only: %i[show update], controller: "proceeding_loop/delegated_functions"
-      resources :confirm_delegated_functions_date, only: %i[show update], controller: "proceeding_loop/confirm_delegated_functions_date"
-      resources :client_involvement_type, only: %i[show update], controller: "proceeding_loop/client_involvement_type"
-      resources :substantive_defaults, only: %i[show update], controller: "proceeding_loop/substantive_defaults"
-      resources :emergency_defaults, only: %i[show update], controller: "proceeding_loop/emergency_defaults"
-      resources :substantive_level_of_service, only: %i[show update], controller: "proceeding_loop/substantive_level_of_service"
-      resources :emergency_level_of_service, only: %i[show update], controller: "proceeding_loop/emergency_level_of_service"
-      resources :substantive_scope_limitations, only: %i[show update], controller: "proceeding_loop/substantive_scope_limitations"
-      resources :emergency_scope_limitations, only: %i[show update], controller: "proceeding_loop/emergency_scope_limitations"
+
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
       resource :no_national_insurance_number, only: %i[show update]
@@ -243,6 +235,16 @@ Rails.application.routes.draw do
       end
 
       scope module: :proceeding_loop do
+        resources :delegated_functions, only: %i[show update]
+        resources :confirm_delegated_functions_date, only: %i[show update]
+        resources :client_involvement_type, only: %i[show update]
+        resources :substantive_defaults, only: %i[show update]
+        resources :emergency_defaults, only: %i[show update]
+        resources :substantive_level_of_service, only: %i[show update]
+        resources :emergency_level_of_service, only: %i[show update]
+        resources :substantive_scope_limitations, only: %i[show update]
+        resources :emergency_scope_limitations, only: %i[show update]
+
         resource :final_hearings, only: [] do
           get "/:id/:work_type", to: "final_hearings#show", as: ""
           patch "/:id/:work_type", to: "final_hearings#update"
