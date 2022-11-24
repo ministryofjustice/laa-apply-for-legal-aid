@@ -53,6 +53,8 @@ class BaseStateMachine < ApplicationRecord
                     use_ccms
                   ],
                   to: :checking_applicant_details
+
+      transitions from: :provider_entering_merits, to: :checking_applicant_details, gaurd: :non_means_tested?
     end
 
     event :applicant_details_checked do
@@ -106,6 +108,7 @@ class BaseStateMachine < ApplicationRecord
 
     event :provider_enter_merits do
       transitions from: :checking_non_passported_means, to: :provider_entering_merits
+      transitions from: :applicant_details_checked, to: :provider_entering_merits, guard: :non_means_tested?
     end
 
     event :check_merits_answers do
