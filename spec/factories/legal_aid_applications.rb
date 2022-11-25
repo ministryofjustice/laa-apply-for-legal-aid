@@ -674,6 +674,14 @@ FactoryBot.define do
       provider_step { :check_provider_answers }
     end
 
+    trait :at_provider_entering_merits do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :provider_entering_merits)
+      end
+
+      provider_step { :merits_task_lists }
+    end
+
     trait :at_checking_merits_answers do
       with_proceedings
       with_merits_statement_of_case

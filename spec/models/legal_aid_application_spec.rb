@@ -686,12 +686,19 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#applicant_details_checked" do
+  describe "#applicant_details_checked!" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_everything, :without_own_home, :checking_applicant_details) }
 
     it "passes application to keep in sync service" do
       expect(CleanupCapitalAttributes).to receive(:call).with(legal_aid_application)
       legal_aid_application.applicant_details_checked!
+    end
+
+    it "transitions to applicant_details_checked" do
+      expect { legal_aid_application.applicant_details_checked! }
+        .to change { legal_aid_application.reload.state }
+          .from("checking_applicant_details")
+          .to("applicant_details_checked")
     end
 
     context "and attributes changed" do
@@ -714,6 +721,29 @@ RSpec.describe LegalAidApplication do
 
       it "resets percentage home" do
         expect(legal_aid_application.percentage_home).to be_blank
+      end
+    end
+
+    context "when transitioning from provider_entering_merits" do
+      let(:legal_aid_application) { create(:legal_aid_application, :at_provider_entering_merits) }
+
+      context "with non means tested application" do
+        before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(true) }
+
+        it "transitions to applicant_details_checked" do
+          expect { legal_aid_application.applicant_details_checked! }
+            .to change { legal_aid_application.reload.state }
+              .from("provider_entering_merits")
+              .to("applicant_details_checked")
+        end
+      end
+
+      context "with means tested application" do
+        before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(false) }
+
+        it "raises AASM::InvalidTransition error" do
+          expect { legal_aid_application.applicant_details_checked! }.to raise_error AASM::InvalidTransition
+        end
       end
     end
   end
@@ -883,93 +913,201 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "applicant_receives_benefit?" do
+  describe "#applicant_receives_benefit?" do
+    subject(:applicant_receives_benefit?) { legal_aid_application.applicant_receives_benefit? }
+
     context "when benefit_check_result exists?" do
-      context "when passported" do
-        before { create(:benefit_check_result, :positive, legal_aid_application:) }
+      context "with postive result" do
+        before { build(:benefit_check_result, :positive, legal_aid_application:) }
 
         context "with no DWP Override" do
-          it "returns true" do
-            expect(legal_aid_application.applicant_receives_benefit?).to be true
-          end
-
-          it "returns true for the aliased method #passported?" do
-            expect(legal_aid_application.passported?).to be true
-          end
+          it { expect(applicant_receives_benefit?).to be true }
         end
 
-        context "with DWP override" do
-          before { create(:dwp_override, legal_aid_application:) }
+        context "with DWP Override" do
+          before { build(:dwp_override, legal_aid_application:) }
 
-          it "returns true" do
-            expect(legal_aid_application.applicant_receives_benefit?).to be true
-          end
+          it { expect(applicant_receives_benefit?).to be true }
         end
       end
 
-      context "when not passported" do
-        before { create(:benefit_check_result, legal_aid_application:) }
+      context "with negative result" do
+        before { build(:benefit_check_result, :negative, legal_aid_application:) }
 
         context "with no DWP override" do
-          it "returns false" do
-            expect(legal_aid_application.applicant_receives_benefit?).to be false
-          end
-
-          it "returns true for the alias non_passported" do
-            expect(legal_aid_application.non_passported?).to be true
-          end
+          it { expect(applicant_receives_benefit?).to be false }
         end
 
         context "with DWP Override" do
           context "when the provider selects yes for evidence" do
-            before { create(:dwp_override, :with_evidence, legal_aid_application:) }
+            before { build(:dwp_override, :with_evidence, legal_aid_application:) }
 
-            it "returns true" do
-              expect(legal_aid_application.applicant_receives_benefit?).to be true
-            end
-
-            it "returns false for the alias non_passported" do
-              expect(legal_aid_application.non_passported?).to be false
-            end
+            it { expect(applicant_receives_benefit?).to be true }
           end
 
           context "when the provider selects no for evidence" do
-            before { create(:dwp_override, :with_no_evidence, legal_aid_application:) }
+            before { build(:dwp_override, :with_no_evidence, legal_aid_application:) }
 
-            it "returns false" do
-              expect(legal_aid_application.applicant_receives_benefit?).to be false
-            end
-
-            it "returns true for the alias non_passported" do
-              expect(legal_aid_application.non_passported?).to be true
-            end
+            it { expect(applicant_receives_benefit?).to be false }
           end
         end
       end
 
-      context "when undetermined" do
-        before { create(:benefit_check_result, :undetermined, legal_aid_application:) }
+      context "with undetermined result" do
+        before { build(:benefit_check_result, :undetermined, legal_aid_application:) }
 
         context "with no DWP Override" do
-          it "returns false" do
-            expect(legal_aid_application.applicant_receives_benefit?).to be false
-          end
+          it { expect(applicant_receives_benefit?).to be false }
         end
 
         context "with DWP Override" do
-          before { create(:dwp_override, :with_evidence, legal_aid_application:) }
+          before { build(:dwp_override, :with_evidence, legal_aid_application:) }
 
-          it "returns true" do
-            expect(legal_aid_application.applicant_receives_benefit?).to be true
-          end
+          it { expect(applicant_receives_benefit?).to be true }
         end
+      end
+
+      context "with skipped result" do
+        before { build(:benefit_check_result, :skipped, legal_aid_application:) }
+
+        it { expect(applicant_receives_benefit?).to be false }
       end
     end
 
     context "when benefit_check_result does not exist" do
-      it "returns false" do
-        expect(legal_aid_application.applicant_receives_benefit?).to be false
+      it { expect(applicant_receives_benefit?).to be false }
+    end
+  end
+
+  describe "#passported?" do
+    it "is alias of #applicant_receives_benefit?" do
+      expect(legal_aid_application.method(:passported?)).to eql(legal_aid_application.method(:applicant_receives_benefit?))
+    end
+  end
+
+  describe "#non_passported?" do
+    subject(:non_passported?) { legal_aid_application.non_passported? }
+
+    context "when benefit_check_result exists?" do
+      context "with postive result" do
+        before { build(:benefit_check_result, :positive, legal_aid_application:) }
+
+        context "with no DWP Override" do
+          it { expect(non_passported?).to be false }
+        end
+
+        context "with DWP Override" do
+          before { build(:dwp_override, legal_aid_application:) }
+
+          it { expect(non_passported?).to be false }
+        end
       end
+
+      context "with negative result" do
+        before { build(:benefit_check_result, :negative, legal_aid_application:) }
+
+        context "with no DWP override" do
+          it { expect(non_passported?).to be true }
+        end
+
+        context "with DWP Override" do
+          context "when the provider selects yes for evidence" do
+            before { build(:dwp_override, :with_evidence, legal_aid_application:) }
+
+            it { expect(non_passported?).to be false }
+          end
+
+          context "when the provider selects no for evidence" do
+            before { build(:dwp_override, :with_no_evidence, legal_aid_application:) }
+
+            it { expect(non_passported?).to be true }
+          end
+        end
+      end
+
+      context "with undetermined result" do
+        before { build(:benefit_check_result, :undetermined, legal_aid_application:) }
+
+        context "with no DWP Override" do
+          it { expect(non_passported?).to be true }
+        end
+
+        context "with DWP Override" do
+          before { build(:dwp_override, :with_evidence, legal_aid_application:) }
+
+          it { expect(non_passported?).to be false }
+        end
+      end
+
+      context "with skipped result" do
+        before { build(:benefit_check_result, :skipped, legal_aid_application:) }
+
+        it { expect(non_passported?).to be true }
+      end
+    end
+
+    context "without benefit_check_result" do
+      before { legal_aid_application.benefit_check_result&.destroy }
+
+      it { expect(non_passported?).to be true }
+    end
+
+    context "when non_means_tested? is true" do
+      before do
+        legal_aid_application.change_state_machine_type("NonMeansTestedStateMachine")
+      end
+
+      context "with positive benefit_check_result" do
+        before { build(:benefit_check_result, :positive, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with negative benefit_check_result" do
+        before { build(:benefit_check_result, :negative, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with undetermined benefit_check_result" do
+        before { build(:benefit_check_result, :undetermined, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "without benefit_check_result" do
+        before { legal_aid_application.benefit_check_result&.destroy }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with skipped benefit_check_result" do
+        before { build(:benefit_check_result, :skipped, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+    end
+  end
+
+  describe "#non_means_tested?" do
+    subject { legal_aid_application.non_means_tested? }
+
+    context "when application is on non means tested journey" do
+      before { legal_aid_application.change_state_machine_type("NonMeansTestedStateMachine") }
+
+      it { is_expected.to be true }
+    end
+
+    context "when application is on passported journey" do
+      before { legal_aid_application.change_state_machine_type("PassportedStateMachine") }
+
+      it { is_expected.to be false }
+    end
+
+    context "when application is on non passported journey" do
+      before { legal_aid_application.change_state_machine_type("NonPassportedStateMachine") }
+
+      it { is_expected.to be false }
     end
   end
 
