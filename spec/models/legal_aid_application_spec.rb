@@ -1016,8 +1016,46 @@ RSpec.describe LegalAidApplication do
       end
     end
 
-    context "when benefit_check_result does not exist" do
+    context "without benefit_check_result" do
+      before { legal_aid_application.benefit_check_result&.destroy }
+
       it { expect(non_passported?).to be true }
+    end
+
+    context "when non_means_tested? is true" do
+      before do
+        legal_aid_application.change_state_machine_type("NonMeansTestedStateMachine")
+      end
+
+      context "with positive benefit_check_result" do
+        before { build(:benefit_check_result, :positive, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with negative benefit_check_result" do
+        before { build(:benefit_check_result, :negative, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with undetermined benefit_check_result" do
+        before { build(:benefit_check_result, :undetermined, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "without benefit_check_result" do
+        before { legal_aid_application.benefit_check_result&.destroy }
+
+        it { expect(non_passported?).to be false }
+      end
+
+      context "with skipped benefit_check_result" do
+        before { build(:benefit_check_result, :skipped, legal_aid_application:) }
+
+        it { expect(non_passported?).to be false }
+      end
     end
   end
 
