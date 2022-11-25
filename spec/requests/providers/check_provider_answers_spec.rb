@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Providers::CheckProviderAnswersController do
-  let(:used_delegated_functions_on) { nil }
-  let(:address) { create(:address) }
-  let(:applicant) { create(:applicant, address:) }
   let(:application) do
     create(
       :legal_aid_application,
@@ -14,9 +11,11 @@ RSpec.describe Providers::CheckProviderAnswersController do
       set_lead_proceeding: :da001,
     )
   end
+
+  let(:applicant) { create(:applicant, :with_address) }
   let(:application_id) { application.id }
   let(:parsed_html) { Nokogiri::HTML(response.body) }
-  let!(:proceeding_name) { application.lead_proceeding.name }
+  let(:proceeding_name) { application.lead_proceeding.name }
   let(:used_delegated_functions_answer) { parsed_html.at_css("#app-check-your-answers__#{proceeding_name}_used_delegated_functions_on .govuk-summary-list__value") }
 
   describe "GET /providers/applications/:legal_aid_application_id/check_provider_answers" do
@@ -111,6 +110,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
 
       context "when an address includes an organisation but no address_line_one" do
         let(:address) { create(:address, address_line_one: "Honeysuckle Cottage", address_line_two: "Station Road", city: "Dartford", county: "", postcode: "DA4 0EN") }
+        let(:applicant) { create(:applicant, address:) }
 
         it "formats the address correctly" do
           expect(unescaped_response_body).to include("Honeysuckle Cottage<br>Station Road<br>Dartford<br>DA4 0EN")
@@ -197,7 +197,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
-    context "Continue" do
+    context "when Continue clicked" do
       subject(:request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do
@@ -211,19 +211,88 @@ RSpec.describe Providers::CheckProviderAnswersController do
         application.check_applicant_details!
       end
 
-      it "redirects to next step" do
-        request
-        expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+      shared_examples "non means tested flow" do
+        it "redirects to no means test required confirmation page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_confirm_non_means_tested_applications_path(application))
+        end
+
+        it "marks application as non means tested" do
+          expect { request }.to change { application.reload.non_means_tested? }.from(false).to(true)
+        end
       end
 
-      context "when already non passported" do
-        it "redirects to the check benefits page" do
+      context "when passported with no benefit_check_result (default)" do
+        let(:application) do
+          create(
+            :legal_aid_application,
+            :at_entering_applicant_details,
+            :with_proceedings,
+            applicant:,
+            set_lead_proceeding: :da001,
+          )
+        end
+
+        it "redirects to check benefits page" do
           request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
       end
 
-      context "when already passported" do
+      context "when already non passported with negative benefit_check_result" do
+        it "redirects to the check benefits page" do
+          request
+          expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
+        end
+
+        context "with MTR phase one enabled and applicant under 18" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:applicant) { create(:applicant, :under_18) }
+
+          it_behaves_like "non means tested flow"
+
+          it "switches to non means tested state machine" do
+            expect { request }.to change { application.reload.state_machine }.from(NonPassportedStateMachine).to(NonMeansTestedStateMachine)
+          end
+
+          it "switches the non passported check" do
+            expect { request }.to change { application.reload.non_passported? }.from(true).to(false)
+          end
+        end
+
+        context "with MTR phase one enabled and applicant under 18 on earliest date delegated functions used" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:application) do
+            create(:legal_aid_application,
+                   :with_non_passported_state_machine,
+                   :at_entering_applicant_details,
+                   :with_proceedings,
+                   explicit_proceedings: %i[da001 se013],
+                   set_lead_proceeding: :da001,
+                   applicant:).tap do |laa|
+              laa.proceedings
+                .find_by(ccms_code: "DA001")
+                .update!(used_delegated_functions: true,
+                         used_delegated_functions_on: 7.days.ago,
+                         used_delegated_functions_reported_on: Date.current)
+
+              laa.proceedings
+                .find_by(ccms_code: "SE013")
+                .update!(used_delegated_functions: true,
+                         used_delegated_functions_on: 1.day.ago,
+                         used_delegated_functions_reported_on: Date.current)
+            end
+          end
+
+          let(:applicant) { create(:applicant, :under_18_as_of, as_of: 7.days.ago) }
+
+          it_behaves_like "non means tested flow"
+        end
+      end
+
+      context "when already passported with positive benefit_check_result" do
         let(:application) do
           create(
             :legal_aid_application,
@@ -238,9 +307,21 @@ RSpec.describe Providers::CheckProviderAnswersController do
           request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
+
+        context "with MTR phase one enabled and applicant under 18" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:applicant) { create(:applicant, :under_18) }
+
+          it_behaves_like "non means tested flow"
+
+          it "switches to non means tested state machine" do
+            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
+          end
+        end
       end
 
-      context "when no national insurance number provided" do
+      context "when no national insurance number provided and no benefit_check_result" do
         let(:application) do
           create(
             :legal_aid_application,
@@ -256,10 +337,22 @@ RSpec.describe Providers::CheckProviderAnswersController do
           request
           expect(response).to redirect_to(providers_legal_aid_application_no_national_insurance_number_path(application))
         end
+
+        context "with MTR phase one enabled and applicant under 18" do
+          before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+          let(:applicant) { create(:applicant, :under_18) }
+
+          it_behaves_like "non means tested flow"
+
+          it "switches to non means tested state machine" do
+            expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
+          end
+        end
       end
     end
 
-    context "Save as draft" do
+    context "When Save as draft clicked" do
       subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do

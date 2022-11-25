@@ -558,20 +558,12 @@ FactoryBot.define do
       benefit_check_result { build(:benefit_check_result, :undetermined) }
     end
 
-    trait :with_skipped_benefit_check_result do
-      benefit_check_result { build(:benefit_check_result, :skipped) }
-    end
-
     trait :passported do
       with_positive_benefit_check_result
     end
 
     trait :non_passported do
       with_negative_benefit_check_result
-    end
-
-    trait :non_means_tested do
-      with_skipped_benefit_check_result
     end
 
     trait :with_attempts_to_settle do
