@@ -15,5 +15,9 @@ FactoryBot.define do
     trait :undetermined do
       result { "Undetermined" }
     end
+
+    trait :skipped do
+      result { "skipped:some_reason" }
+    end
   end
 end
