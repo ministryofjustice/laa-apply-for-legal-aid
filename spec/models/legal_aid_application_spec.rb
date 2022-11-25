@@ -955,6 +955,72 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#non_passported?" do
+    subject(:non_passported?) { legal_aid_application.non_passported? }
+
+    context "when benefit_check_result exists?" do
+      context "with postive result" do
+        before { build(:benefit_check_result, :positive, legal_aid_application:) }
+
+        context "with no DWP Override" do
+          it { expect(non_passported?).to be false }
+        end
+
+        context "with DWP Override" do
+          before { build(:dwp_override, legal_aid_application:) }
+
+          it { expect(non_passported?).to be false }
+        end
+      end
+
+      context "with negative result" do
+        before { build(:benefit_check_result, :negative, legal_aid_application:) }
+
+        context "with no DWP override" do
+          it { expect(non_passported?).to be true }
+        end
+
+        context "with DWP Override" do
+          context "when the provider selects yes for evidence" do
+            before { build(:dwp_override, :with_evidence, legal_aid_application:) }
+
+            it { expect(non_passported?).to be false }
+          end
+
+          context "when the provider selects no for evidence" do
+            before { build(:dwp_override, :with_no_evidence, legal_aid_application:) }
+
+            it { expect(non_passported?).to be true }
+          end
+        end
+      end
+
+      context "with undetermined result" do
+        before { build(:benefit_check_result, :undetermined, legal_aid_application:) }
+
+        context "with no DWP Override" do
+          it { expect(non_passported?).to be true }
+        end
+
+        context "with DWP Override" do
+          before { build(:dwp_override, :with_evidence, legal_aid_application:) }
+
+          it { expect(non_passported?).to be false }
+        end
+      end
+
+      context "with skipped result" do
+        before { build(:benefit_check_result, :skipped, legal_aid_application:) }
+
+        it { expect(non_passported?).to be true }
+      end
+    end
+
+    context "when benefit_check_result does not exist" do
+      it { expect(non_passported?).to be true }
+    end
+  end
+
   describe "#generated_reports" do
     let(:legal_aid_application) { create(:legal_aid_application, :generating_reports) }
     let(:submit_applications_to_ccms) { true }
