@@ -285,7 +285,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def non_means_tested?
-    !!state_machine.is_a?(NonMeansTestedStateMachine)
+    applicant&.no_means_test_required?
   end
 
   def benefit_check_result_needs_updating?

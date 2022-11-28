@@ -197,6 +197,12 @@ RSpec.describe Providers::CheckProviderAnswersController do
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/check_provider_answers/continue" do
+    shared_examples "age_for_means_test_purposes updater" do
+      it "updates age_for_means_test_purposes" do
+        expect { request }.to change { applicant.reload.age_for_means_test_purposes }.from(nil).to(instance_of(Integer))
+      end
+    end
+
     context "when Continue clicked" do
       subject(:request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
@@ -237,6 +243,8 @@ RSpec.describe Providers::CheckProviderAnswersController do
           request
           expect(response).to redirect_to(providers_legal_aid_application_check_benefits_path(application))
         end
+
+        it_behaves_like "age_for_means_test_purposes updater"
       end
 
       context "when already non passported with negative benefit_check_result" do
@@ -251,6 +259,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
+          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(NonPassportedStateMachine).to(NonMeansTestedStateMachine)
@@ -289,6 +298,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18_as_of, as_of: 7.days.ago) }
 
           it_behaves_like "non means tested flow"
+          it_behaves_like "age_for_means_test_purposes updater"
         end
       end
 
@@ -314,6 +324,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
+          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
@@ -344,6 +355,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
           let(:applicant) { create(:applicant, :under_18) }
 
           it_behaves_like "non means tested flow"
+          it_behaves_like "age_for_means_test_purposes updater"
 
           it "switches to non means tested state machine" do
             expect { request }.to change { application.reload.state_machine }.from(PassportedStateMachine).to(NonMeansTestedStateMachine)
@@ -353,7 +365,7 @@ RSpec.describe Providers::CheckProviderAnswersController do
     end
 
     context "When Save as draft clicked" do
-      subject { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
+      subject(:request) { patch "/providers/applications/#{application_id}/check_provider_answers/continue", params: }
 
       let(:params) do
         {
@@ -364,20 +376,21 @@ RSpec.describe Providers::CheckProviderAnswersController do
       before do
         login_as application.provider
         application.check_applicant_details!
-        subject
-        application.reload
       end
 
+      it_behaves_like "age_for_means_test_purposes updater"
+
       it "redirects to provider legal applications home page" do
+        request
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it 'changes the state to "applicant_details_checked"' do
-        expect(application).not_to be_applicant_details_checked
+      it "does not change the state to \"applicant_details_checked\"" do
+        expect { request }.not_to change { application.reload.state }.from("checking_applicant_details")
       end
 
       it "sets application as draft" do
-        expect(application).to be_draft
+        expect { request }.to change { application.reload.draft? }.from(false).to(true)
       end
     end
   end

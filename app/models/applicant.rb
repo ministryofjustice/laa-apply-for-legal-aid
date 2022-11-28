@@ -46,7 +46,8 @@ class Applicant < ApplicationRecord
 
   def no_means_test_required?
     Setting.means_test_review_phase_one? &&
-      AgeCalculator.call(date_of_birth, legal_aid_application.used_delegated_functions_on || Date.current) < 18
+      age_for_means_test_purposes.present? &&
+      age_for_means_test_purposes < 18
   end
 
   def child?

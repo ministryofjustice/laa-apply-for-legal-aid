@@ -1053,9 +1053,10 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when non_means_tested? is true" do
-      before do
-        legal_aid_application.change_state_machine_type("NonMeansTestedStateMachine")
-      end
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+      let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
 
       context "with positive benefit_check_result" do
         before { build(:benefit_check_result, :positive, legal_aid_application:) }
@@ -1092,22 +1093,50 @@ RSpec.describe LegalAidApplication do
   describe "#non_means_tested?" do
     subject { legal_aid_application.non_means_tested? }
 
-    context "when application is on non means tested journey" do
-      before { legal_aid_application.change_state_machine_type("NonMeansTestedStateMachine") }
+    let(:legal_aid_application) { build(:legal_aid_application, applicant:) }
 
-      it { is_expected.to be true }
+    context "when means_test_review_phase_one? enabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+      context "with applicant age of 17" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
+
+        it { is_expected.to be true }
+      end
+
+      context "with applicant age of 18" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: 18) }
+
+        it { is_expected.to be false }
+      end
+
+      context "with applicant age of nil" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
+
+        it { is_expected.to be false }
+      end
     end
 
-    context "when application is on passported journey" do
-      before { legal_aid_application.change_state_machine_type("PassportedStateMachine") }
+    context "when means_test_review_phase_one? disabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
 
-      it { is_expected.to be false }
-    end
+      context "with applicant age of 17" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
 
-    context "when application is on non passported journey" do
-      before { legal_aid_application.change_state_machine_type("NonPassportedStateMachine") }
+        it { is_expected.to be false }
+      end
 
-      it { is_expected.to be false }
+      context "with applicant age of 18" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: 18) }
+
+        it { is_expected.to be false }
+      end
+
+      context "with applicant age of nil" do
+        let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
+
+        it { is_expected.to be false }
+      end
     end
   end
 
