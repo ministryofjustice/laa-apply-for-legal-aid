@@ -155,9 +155,6 @@ Rails.application.routes.draw do
       resource :address_selection, only: %i[show update]
       resource :check_benefit, only: %i[index update]
       resource :has_national_insurance_number, only: %i[show update]
-      resource :statement_of_case, only: %i[show update destroy], controller: "application_merits_task/statement_of_cases" do
-        get "/list", to: "application_merits_task/statement_of_cases#list"
-      end
       resources :check_benefits, only: [:index]
       resources :applicant_employed, only: %i[index create]
       resource :open_banking_consents, only: %i[show update], path: "does-client-use-online-banking"
@@ -188,13 +185,8 @@ Rails.application.routes.draw do
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
 
-      resource :opponent, only: %i[show update], controller: "application_merits_task/opponents"
-      resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
-      resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
-      resource :client_offered_undertakings, only: %i[show update], controller: "application_merits_task/client_offered_undertakings"
-      resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
-      resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
+
       resource :gateway_evidence, only: %i[show update destroy]
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
         get "/list", to: "uploaded_evidence_collections#list"
@@ -203,9 +195,7 @@ Rails.application.routes.draw do
         patch :continue
         patch :reset
       end
-      resources :involved_children, only: %i[new show update], controller: "application_merits_task/involved_children"
-      resource :has_other_involved_children, only: %i[show update], controller: "application_merits_task/has_other_involved_children"
-      resources :remove_involved_child, only: %i[show update], controller: "application_merits_task/remove_involved_child"
+
       resource :client_completed_means, only: %i[show update]
       resources :income_summary, only: %i[index create]
       resources :outgoings_summary, only: %i[index create]
@@ -224,15 +214,7 @@ Rails.application.routes.draw do
       resource :no_eligibility_assessment, only: %i[show update]
       resource :used_multiple_delegated_functions, only: %i[show update] # TODO: Delete after mini loop implemented
       resource :confirm_multiple_delegated_functions, only: %i[show update] # TODO: Refactor after mini loop
-      resources :delegated_functions, only: %i[show update], controller: "proceeding_loop/delegated_functions"
-      resources :confirm_delegated_functions_date, only: %i[show update], controller: "proceeding_loop/confirm_delegated_functions_date"
-      resources :client_involvement_type, only: %i[show update], controller: "proceeding_loop/client_involvement_type"
-      resources :substantive_defaults, only: %i[show update], controller: "proceeding_loop/substantive_defaults"
-      resources :emergency_defaults, only: %i[show update], controller: "proceeding_loop/emergency_defaults"
-      resources :substantive_level_of_service, only: %i[show update], controller: "proceeding_loop/substantive_level_of_service"
-      resources :emergency_level_of_service, only: %i[show update], controller: "proceeding_loop/emergency_level_of_service"
-      resources :substantive_scope_limitations, only: %i[show update], controller: "proceeding_loop/substantive_scope_limitations"
-      resources :emergency_scope_limitations, only: %i[show update], controller: "proceeding_loop/emergency_scope_limitations"
+
       resource :use_ccms, only: %i[show]
       resources :use_ccms_employed, only: %i[index]
       resource :no_national_insurance_number, only: %i[show update]
@@ -253,6 +235,16 @@ Rails.application.routes.draw do
       end
 
       scope module: :proceeding_loop do
+        resources :delegated_functions, only: %i[show update]
+        resources :confirm_delegated_functions_date, only: %i[show update]
+        resources :client_involvement_type, only: %i[show update]
+        resources :substantive_defaults, only: %i[show update]
+        resources :emergency_defaults, only: %i[show update]
+        resources :substantive_level_of_service, only: %i[show update]
+        resources :emergency_level_of_service, only: %i[show update]
+        resources :substantive_scope_limitations, only: %i[show update]
+        resources :emergency_scope_limitations, only: %i[show update]
+
         resource :final_hearings, only: [] do
           get "/:id/:work_type", to: "final_hearings#show", as: ""
           patch "/:id/:work_type", to: "final_hearings#update"
@@ -260,19 +252,35 @@ Rails.application.routes.draw do
       end
 
       scope module: :application_merits_task do
+        resources :involved_children, only: %i[new show update]
+        resources :remove_involved_child, only: %i[show update]
+
+        resource :client_denial_of_allegation, only: %i[show update]
+        resource :client_offered_undertakings, only: %i[show update]
+        resource :date_client_told_incident, only: %i[show update]
+        resource :has_other_involved_children, only: %i[show update]
+        resource :in_scope_of_laspo, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
+        resource :nature_of_urgencies, only: %i[show update]
+        resource :opponent, only: %i[show update]
+        resource :statement_of_case, only: %i[show update destroy] do
+          get "/list", to: "statement_of_cases#list"
+        end
       end
     end
 
     resources :merits_task_list, only: [] do
-      resource :opponents_application, only: %i[show update], controller: "proceeding_merits_task/opponents_application"
-      resource :attempts_to_settle, only: %i[show update], controller: "proceeding_merits_task/attempts_to_settle"
-      resource :linked_children, only: %i[show update], controller: "proceeding_merits_task/linked_children"
-      resource :prohibited_steps, only: %i[show update], controller: "proceeding_merits_task/prohibited_steps"
-      resources :chances_of_success, only: %i[index create], controller: "proceeding_merits_task/chances_of_success"
-      resource :success_prospects, only: %i[show update], controller: "proceeding_merits_task/success_prospects"
-      resource :specific_issue, only: %i[show update], controller: "proceeding_merits_task/specific_issue"
-      resource :vary_order, only: %i[show update], controller: "proceeding_merits_task/vary_order"
+      scope module: :proceeding_merits_task do
+        resources :chances_of_success, only: %i[index create]
+
+        resource :attempts_to_settle, only: %i[show update], controller: "attempts_to_settle"
+        resource :linked_children, only: %i[show update]
+        resource :opponents_application, only: %i[show update], controller: "opponents_application"
+        resource :prohibited_steps, only: %i[show update]
+        resource :specific_issue, only: %i[show update], controller: "specific_issue"
+        resource :success_prospects, only: %i[show update]
+        resource :vary_order, only: %i[show update], controller: "vary_order"
+      end
     end
   end
 
