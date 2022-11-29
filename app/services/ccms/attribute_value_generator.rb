@@ -302,9 +302,18 @@ module CCMS
 
     def proceeding_cost_limitation(options)
       proceeding = options[:proceeding]
-      return "MULTIPLE" if proceeding.used_delegated_functions?
+      return "MULTIPLE" if proceeding.used_delegated_functions? || multiple_scope_limitations?(proceeding)
 
       proceeding.substantive_scope_limitation_code
+    end
+
+    def multiple_scope_limitations?(proceeding)
+      proceeding
+        .scope_limitations
+        .select(:scope_type)
+        .group(:scope_type)
+        .count
+        .any? { |_type, count| count > 1 }
     end
 
     def other_party_full_name(options)

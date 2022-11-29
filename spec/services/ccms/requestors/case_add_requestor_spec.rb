@@ -127,6 +127,82 @@ module CCMS
             end
           end
         end
+
+        context "when multiple scope limitations are present" do
+          before do
+            proceeding.scope_limitations.create!(
+              scope_type: 1,
+              code: "FM062",
+              meaning: "Final hearing",
+              description: "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.",
+            )
+            proceeding.scope_limitations.create!(
+              scope_type: 0,
+              code: "CV118",
+              meaning: "Hearing",
+              description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+            )
+          end
+
+          let(:substantive_scope_limitation_one_xml) do
+            /<casebio:ScopeLimitation> <casebio:ScopeLimitation>CV118<\/casebio:ScopeLimitation> <casebio:ScopeLimitationWording>Limited to all steps up to and including the hearing on \[see additional limitation notes\]<\/casebio:ScopeLimitationWording> <casebio:DelegatedFunctionsApply>false<\/casebio:DelegatedFunctionsApply> <\/casebio:ScopeLimitation>/
+          end
+
+          let(:substantive_scope_limitation_two_xml) do
+            /<casebio:ScopeLimitation> <casebio:ScopeLimitation>FM062<\/casebio:ScopeLimitation> <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement \(but not enforce\) the order\.<\/casebio:ScopeLimitationWording> <casebio:DelegatedFunctionsApply>false<\/casebio:DelegatedFunctionsApply> <\/casebio:ScopeLimitation>/
+          end
+
+          let(:emergency_scope_limitation_one_xml) do
+            /<casebio:ScopeLimitation> <casebio:ScopeLimitation>CV117<\/casebio:ScopeLimitation> <casebio:ScopeLimitationWording>Limited to Family Help \(Higher\) and to all steps necessary to negotiate and conclude a settlement\. To include the issue of proceedings and representation in those proceedings save in relation to or at a contested final hearing\.<\/casebio:ScopeLimitationWording> <casebio:DelegatedFunctionsApply>true<\/casebio:DelegatedFunctionsApply> <\/casebio:ScopeLimitation>/
+          end
+
+          let(:emergency_scope_limitation_two_xml) do
+            /<casebio:ScopeLimitation> <casebio:ScopeLimitation>FM062<\/casebio:ScopeLimitation> <casebio:ScopeLimitationWording>Limited to all steps up to and including final hearing and any action necessary to implement \(but not enforce\) the order\.<\/casebio:ScopeLimitationWording> <casebio:DelegatedFunctionsApply>true<\/casebio:DelegatedFunctionsApply> <\/casebio:ScopeLimitation>/
+          end
+
+          let(:requested_scope_xml) do
+            /<common:Attribute> <common:Attribute>REQUESTED_SCOPE<\/common:Attribute> <common:ResponseType>text<\/common:ResponseType> <common:ResponseValue>MULTIPLE<\/common:ResponseValue> <common:UserDefinedInd>true<\/common:UserDefinedInd> <\/common:Attribute>/
+          end
+
+          context "when DF have not been used" do
+            it "generates the expected scope limitations" do
+              expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+              travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+                expect(expected_xml.squish).to match substantive_scope_limitation_one_xml
+                expect(expected_xml.squish).to match substantive_scope_limitation_two_xml
+                expect(expected_xml.squish).not_to match emergency_scope_limitation_one_xml
+                expect(expected_xml.squish).not_to match emergency_scope_limitation_two_xml
+              end
+            end
+
+            it "specifies MULTIPLE for requested scope" do
+              expect(expected_xml.squish).to match requested_scope_xml
+            end
+          end
+
+          context "when DF are used" do
+            let(:df_date) { Date.parse("2020-11-23") }
+
+            before do
+              proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: df_date, used_delegated_functions_reported_on: df_date)
+              legal_aid_application.reload
+            end
+
+            it "generates the expected scope limitations" do
+              expect(CCMS::OpponentId).to receive(:next_serial_id).and_return(88_123_456, 88_123_457, 88_123_458)
+              travel_to Time.zone.parse("2020-11-24T11:54:29.000") do
+                expect(expected_xml.squish).to match substantive_scope_limitation_one_xml
+                expect(expected_xml.squish).to match substantive_scope_limitation_two_xml
+                expect(expected_xml.squish).to match emergency_scope_limitation_one_xml
+                expect(expected_xml.squish).to match emergency_scope_limitation_two_xml
+              end
+            end
+
+            it "specifies MULTIPLE for requested scope" do
+              expect(expected_xml.squish).to match requested_scope_xml
+            end
+          end
+        end
       end
     end
   end

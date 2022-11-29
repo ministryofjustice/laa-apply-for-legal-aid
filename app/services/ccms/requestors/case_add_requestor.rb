@@ -226,17 +226,21 @@ module CCMS
       end
 
       def generate_scope_limitations(xml, proceeding)
-        xml.__send__(:"casebio:ScopeLimitation") do
-          xml.__send__(:"casebio:ScopeLimitation", proceeding.substantive_scope_limitation_code)
-          xml.__send__(:"casebio:ScopeLimitationWording", proceeding.substantive_scope_limitation_description)
-          xml.__send__(:"casebio:DelegatedFunctionsApply", false)
+        proceeding.scope_limitations.where(scope_type: :substantive).each do |scope_limitation|
+          xml.__send__(:"casebio:ScopeLimitation") do
+            xml.__send__(:"casebio:ScopeLimitation", scope_limitation.code)
+            xml.__send__(:"casebio:ScopeLimitationWording", scope_limitation.description)
+            xml.__send__(:"casebio:DelegatedFunctionsApply", false)
+          end
         end
         return if proceeding.used_delegated_functions_on.nil?
 
-        xml.__send__(:"casebio:ScopeLimitation") do
-          xml.__send__(:"casebio:ScopeLimitation", proceeding.delegated_functions_scope_limitation_code)
-          xml.__send__(:"casebio:ScopeLimitationWording", proceeding.delegated_functions_scope_limitation_description)
-          xml.__send__(:"casebio:DelegatedFunctionsApply", true)
+        proceeding.scope_limitations.where(scope_type: :emergency).each do |scope_limitation|
+          xml.__send__(:"casebio:ScopeLimitation") do
+            xml.__send__(:"casebio:ScopeLimitation", scope_limitation.code)
+            xml.__send__(:"casebio:ScopeLimitationWording", scope_limitation.description)
+            xml.__send__(:"casebio:DelegatedFunctionsApply", true)
+          end
         end
       end
 
