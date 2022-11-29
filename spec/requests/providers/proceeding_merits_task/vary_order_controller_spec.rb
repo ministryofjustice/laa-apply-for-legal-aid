@@ -89,7 +89,6 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
     context "when all previous application merits tasks are completed" do
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :nature_of_urgency)
       end
@@ -103,7 +102,6 @@ RSpec.describe Providers::ProceedingMeritsTask::VaryOrderController do
     context "when all previous application and proceeding merits tasks are completed for DA002" do
       before do
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :latest_incident_details)
-        legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_details)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :statement_of_case)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:application, :nature_of_urgency)
         legal_aid_application.legal_framework_merits_task_list.mark_as_complete!(:DA002, :chances_of_success)

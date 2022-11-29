@@ -16,5 +16,9 @@ module ApplicationMeritsTask
     def ccms_opponent_relationship_to_case
       "Opponent"
     end
+
+    def full_name
+      attributes["full_name"] || "#{first_name} #{last_name}".strip
+    end
   end
 end

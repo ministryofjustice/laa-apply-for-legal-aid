@@ -11,6 +11,10 @@ module TaskListHelper
     )
   end
 
+  def task_list_includes?(legal_aid_application, task_name)
+    legal_aid_application.legal_framework_merits_task_list.serialized_data.match?(/name: :#{task_name}\n\s+dependencies: \*\d+/)
+  end
+
 private
 
   def _task_url(name, legal_aid_application, status)

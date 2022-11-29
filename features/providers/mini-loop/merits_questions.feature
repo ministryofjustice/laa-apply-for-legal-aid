@@ -7,7 +7,9 @@ Feature: mini-loop additional merits questions
     And I have started an application where the client is a defendant on the domestic abuse proceeding
     When I visit the merits question page
     Then I should see "Latest incident details"
-    And I should see "Opponent details"
+    And I should see "Opponent's name"
+    And I should see "Opponent's mental capacity"
+    And I should see "Domestic abuse summary"
     And I should see "Statement of case"
     And I should see "Client denial of allegation"
     And I should see "Children involved in this application"
@@ -19,9 +21,14 @@ Feature: mini-loop additional merits questions
     When I enter the 'told' date of 2 days ago
     And I enter the 'occurred' date of 2 days ago
     When I click 'Save and continue'
-    Then I should be on a page showing "Opponent details"
-    When I fill "Full Name" with "John Doe"
-    And I choose option "Application merits task opponent understands terms of court order True field"
+    Then I should be on a page showing "Opponent's name"
+    When I fill "First Name" with "John"
+    And I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Domestic abuse summary"
     And I choose option "Application merits task opponent warning letter sent True field"
     And I choose option "Application merits task opponent police notified True field"
     And I choose option "Application merits task opponent bail conditions set True field"
@@ -43,7 +50,9 @@ Feature: mini-loop additional merits questions
     And I click 'Save and continue'
     Then I should be on a page showing "Provide details of the case"
     And I should see "Latest incident details\nCOMPLETED"
-    And I should see "Opponent details\nCOMPLETED"
+    And I should see "Opponent's name\nCOMPLETED"
+    And I should see "Opponent's mental capacity\nCOMPLETED"
+    And I should see "Domestic abuse summary\nCOMPLETED"
     And I should see "Statement of case\nCOMPLETED"
     And I should see "Client denial of allegation\nCOMPLETED"
     And I should see "Client offer of undertaking\nCOMPLETED"

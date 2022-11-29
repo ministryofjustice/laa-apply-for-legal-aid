@@ -1,32 +1,16 @@
 module Opponents
-  class OpponentForm < BaseForm
+  class DomesticAbuseSummaryForm < BaseForm
     form_for ApplicationMeritsTask::Opponent
 
-    attr_accessor :understands_terms_of_court_order, :understands_terms_of_court_order_details,
-                  :warning_letter_sent, :warning_letter_sent_details,
+    attr_accessor :warning_letter_sent, :warning_letter_sent_details,
                   :police_notified, :police_notified_details, :police_notified_details_true, :police_notified_details_false,
-                  :bail_conditions_set, :bail_conditions_set_details, :full_name
+                  :bail_conditions_set, :bail_conditions_set_details
 
-    before_validation :clear_details, :clear_bail_details, :interpolate_police_notified_details
-
-    before_validation do
-      squish_whitespaces(:full_name)
-    end
+    before_validation :clear_warning_details, :clear_bail_details, :interpolate_police_notified_details
 
     def exclude_from_model
       %i[police_notified_details_true police_notified_details_false]
     end
-
-    validates :full_name,
-              presence: true,
-              unless: :draft?
-
-    validates :understands_terms_of_court_order, presence: true, unless: :draft?
-    validates(
-      :understands_terms_of_court_order_details,
-      presence: true,
-      if: proc { |form| !form.draft? && form.understands_terms_of_court_order.to_s == "false" },
-    )
 
     validates :warning_letter_sent, presence: true, unless: :draft?
     validates(
@@ -80,12 +64,8 @@ module Opponents
       attributes[field] = police_notified_details
     end
 
-    def clear_details
-      %i[understands_terms_of_court_order warning_letter_sent].each do |attr|
-        details = "#{attr}_details"
-        attr_value = __send__(attr)
-        __send__(details)&.clear if attr_value.to_s == "true"
-      end
+    def clear_warning_details
+      warning_letter_sent&.clear if warning_letter_sent_details.to_s == "true"
     end
 
     def clear_bail_details

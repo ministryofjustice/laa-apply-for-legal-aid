@@ -28,7 +28,9 @@ module Flow
     def convert_task_to_flow_name(task)
       {
         latest_incident_details: :date_client_told_incidents,
-        opponent_details: :opponents,
+        opponent_name: :opponents_names,
+        opponent_mental_capacity: :opponents_mental_capacities,
+        domestic_abuse_summary: :domestic_abuse_summaries,
         statement_of_case: :statement_of_cases,
         children_application: :start_involved_children_task,
         children_proceeding: :linked_children,

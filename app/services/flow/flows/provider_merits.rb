@@ -59,8 +59,18 @@ module Flow
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },
-        opponents: {
-          path: ->(application) { urls.providers_legal_aid_application_opponent_path(application) },
+        opponents_names: {
+          path: ->(application) { urls.providers_legal_aid_application_opponents_name_path(application) },
+          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
+          check_answers: :check_merits_answers,
+        },
+        opponents_mental_capacities: {
+          path: ->(application) { urls.providers_legal_aid_application_opponents_mental_capacity_path(application) },
+          forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
+          check_answers: :check_merits_answers,
+        },
+        domestic_abuse_summaries: {
+          path: ->(application) { urls.providers_legal_aid_application_domestic_abuse_summary_path(application) },
           forward: ->(application) { Flow::MeritsLoop.forward_flow(application, :application) },
           check_answers: :check_merits_answers,
         },

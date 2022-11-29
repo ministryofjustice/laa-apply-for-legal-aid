@@ -90,7 +90,7 @@
 #    Then I enter the 'told' date of 2 days ago
 #    Then I enter the 'occurred' date of 2 days ago
 #    Then I click 'Save and continue'
-#    Then I should be on a page showing "Opponent details"
+#    Then I should be on a page showing "Domestic abuse summary"
 #    Then I fill "Full Name" with "John Doe"
 #    Then I choose option "Application merits task opponent understands terms of court order True field"
 #    Then I choose option "Application merits task opponent warning letter sent True field"
@@ -129,7 +129,7 @@
 #    Then I click link "Back"
 #    Then I should be on a page showing "Provide a statement of case"
 #    Then I click link "Back"
-#    Then I should be on a page showing "Opponent details"
+#    Then I should be on a page showing "Domestic abuse summary"
 #    Then I click link "Back"
 #    Then I should be on a page showing "Latest incident details"
 #    Then I click link "Back"

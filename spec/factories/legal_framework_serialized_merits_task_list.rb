@@ -8,7 +8,10 @@ FactoryBot.define do
         application: {
           tasks: {
             latest_incident_details: [],
-            opponent_details: [],
+            opponent_name: [],
+            opponent_mental_capacity: [],
+            domestic_abuse_summary: [],
+            # opponent_details: [],
             children_application: [],
             statement_of_case: [],
             why_matter_opposed: [],
@@ -41,13 +44,88 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
             },
           },
           proceeding_types: [
             {
               ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :da001_da004_se014 do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              children_application: [],
+              statement_of_case: [],
+              why_matter_opposed: [],
+              laspo: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "DA004",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "SE014",
+              tasks: {
+                chances_of_success: [],
+                children_proceeding: [:children_application],
+                attempts_to_settle: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :da001_da005_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              statement_of_case: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "DA005",
               tasks: {
                 chances_of_success: [],
               },
@@ -64,7 +142,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -89,7 +169,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -125,7 +207,8 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -163,7 +246,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               client_denial_of_allegation: [],
               client_offer_of_undertakings: [],
@@ -200,7 +285,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               nature_of_urgency: [],
               children_application: [],
@@ -234,7 +321,9 @@ FactoryBot.define do
           application: {
             tasks: {
               latest_incident_details: [],
-              opponent_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
               statement_of_case: [],
               nature_of_urgency: [],
             },
@@ -242,6 +331,40 @@ FactoryBot.define do
           proceeding_types: [
             {
               ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :da002_da006_as_applicant do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_name: [],
+              opponent_mental_capacity: [],
+              domestic_abuse_summary: [],
+              statement_of_case: [],
+              nature_of_urgency: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA002",
+              tasks: {
+                chances_of_success: [],
+                vary_order: [],
+              },
+            },
+            {
+              ccms_code: "DA006",
               tasks: {
                 chances_of_success: [],
                 vary_order: [],

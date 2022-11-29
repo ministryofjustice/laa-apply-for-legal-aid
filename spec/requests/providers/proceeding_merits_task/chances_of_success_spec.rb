@@ -69,7 +69,7 @@ module Providers
 
         it "updates the task list" do
           subject
-          expect(legal_aid_application.legal_framework_merits_task_list).to have_completed_task(:DA001, :chances_of_success)
+          expect(legal_aid_application.legal_framework_merits_task_list.serialized_data).to match(/name: :chances_of_success\n\s+dependencies: \*\d+\n\s+state: :complete/)
         end
 
         context "when false is selected" do

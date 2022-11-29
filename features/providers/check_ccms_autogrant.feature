@@ -36,9 +36,15 @@ Feature: Checking ccms means does NOT auto grant
     Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
     Then I fill "application_merits_task_incident_occurred_on_1i" with "20"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Opponent details'
-    Then I fill "application-merits-task-opponent-full-name-field" with "Bob"
-    Then I choose "application-merits-task-opponent-understands-terms-of-court-order-true-field"
+    Then I should be on a page showing "Opponent's name"
+    When I fill "First Name" with "John"
+    And I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Domestic abuse summary"
+    And I choose option "Application merits task opponent warning letter sent True field"
     Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
     Then I choose "application-merits-task-opponent-police-notified-true-field"
     Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike test"
@@ -96,9 +102,14 @@ Feature: Checking ccms means does NOT auto grant
     Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
     Then I fill "application_merits_task_incident_occurred_on_1i" with "20"
     Then I click 'Save and continue'
-    Then I should be on a page showing 'Opponent details'
-    Then I fill "application-merits-task-opponent-full-name-field" with "Bob"
-    Then I choose "application-merits-task-opponent-understands-terms-of-court-order-true-field"
+    Then I should be on a page showing "Opponent's name"
+    When I fill "First Name" with "John"
+    And I fill "Last Name" with "Doe"
+    When I click 'Save and continue'
+    Then I should be on a page showing "Does the opponent have the mental capacity to understand the terms of a court order?"
+    When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page showing "Domestic abuse summary"
     Then I choose "application-merits-task-opponent-warning-letter-sent-true-field"
     Then I choose "application-merits-task-opponent-police-notified-true-field"
     Then I fill "application-merits-task-opponent-police-notified-details-true-field" with "Mike test"

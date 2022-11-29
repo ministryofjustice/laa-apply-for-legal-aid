@@ -184,7 +184,11 @@ Rails.application.routes.draw do
       end
       resource :capital_assessment_result, only: %i[show update]
       resource :capital_income_assessment_result, only: %i[show update]
-
+      resource :date_client_told_incident, only: %i[show update], controller: "application_merits_task/date_client_told_incidents"
+      resource :client_denial_of_allegation, only: %i[show update], controller: "application_merits_task/client_denial_of_allegations"
+      resource :client_offered_undertakings, only: %i[show update], controller: "application_merits_task/client_offered_undertakings"
+      resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
+      resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
 
       resource :gateway_evidence, only: %i[show update destroy]
@@ -260,6 +264,9 @@ Rails.application.routes.draw do
         resource :date_client_told_incident, only: %i[show update]
         resource :has_other_involved_children, only: %i[show update]
         resource :in_scope_of_laspo, only: %i[show update]
+        resource :opponents_name, only: %i[show update]
+        resource :opponents_mental_capacity, only: %i[show update]
+        resource :domestic_abuse_summary, only: %i[show update]
         resource :matter_opposed_reason, only: %i[show update]
         resource :nature_of_urgencies, only: %i[show update]
         resource :opponent, only: %i[show update]

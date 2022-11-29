@@ -9,6 +9,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
            :with_everything,
            :with_proceedings,
            :assessment_submitted,
+           explicit_proceedings: %i[da001],
            set_lead_proceeding: :da001,
            provider:)
   end
@@ -21,6 +22,9 @@ RSpec.describe Providers::SubmittedApplicationsController do
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
+  let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
+
+  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(legal_aid_application).and_return(smtl) }
 
   describe "GET /providers/applications/:legal_aid_application_id/submitted_application" do
     subject do
