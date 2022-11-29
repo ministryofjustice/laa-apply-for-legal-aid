@@ -70,7 +70,7 @@ RSpec.describe Providers::CheckBenefitsController do
     context "with known issue" do
       let(:last_name) { "O" }
 
-      it "set benefit check result as known" do
+      it "skips benefit check marking it as a known issue" do
         subject
         expect(application.reload.benefit_check_result&.result).to eq("skipped:known_issue")
       end
