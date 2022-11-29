@@ -14,7 +14,6 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_mini_loop?).to be false
         expect(rec.enable_loop?).to be false
-        expect(rec.enhanced_bank_upload?).to be false
       end
     end
 
@@ -29,7 +28,6 @@ RSpec.describe Setting do
           alert_via_sentry: true,
           enable_mini_loop: true,
           enable_loop: true,
-          enhanced_bank_upload: true,
         )
       end
 
@@ -43,7 +41,6 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.enable_mini_loop?).to be true
         expect(rec.enable_loop?).to be true
-        expect(rec.enhanced_bank_upload?).to be true
       end
     end
   end
@@ -60,7 +57,7 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.enable_mini_loop?).to be false
       expect(described_class.enable_loop?).to be false
-      expect(described_class.enhanced_bank_upload?).to be false
+      expect(described_class.enhanced_bank_upload?).to be true
       expect(described_class.means_test_review_phase_one?).to be false
     end
   end

@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.describe Providers::Means::RegularIncomesController do
   describe "GET /providers/applications/:legal_aid_application_id/means/regular_incomes" do
     it "returns ok" do
-      Setting.setting.update!(enhanced_bank_upload: true)
       legal_aid_application = create(:legal_aid_application)
       provider = legal_aid_application.provider
       login_as provider
@@ -15,7 +14,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when the application has regular transactions" do
       it "renders the income data" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(:legal_aid_application)
         benefits = create(:transaction_type, :benefits)
         _transaction_type = create(
@@ -52,18 +50,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
         expect(response).to redirect_to(new_provider_session_path)
       end
     end
-
-    context "when the enhanced_bank_upload setting is not enabled" do
-      it "redirects to the identify income types page" do
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        get providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
-
-        expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
-      end
-    end
   end
 
   describe "PATCH /providers/applications/:legal_aid_application_id/means/regular_incomes" do
@@ -71,7 +57,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when none is selected" do
       it "updates the application and redirects to the student finance page" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
           :legal_aid_application,
           no_credit_transaction_types_selected: false,
@@ -93,7 +78,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when regular transactions are selected" do
       it "updates the application and redirects to the cash income page" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
           :legal_aid_application,
           no_credit_transaction_types_selected: true,
@@ -124,7 +108,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when the form is invalid" do
       it "returns unprocessable entity, renders errors, and does not update the application" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
           :legal_aid_application,
           no_credit_transaction_types_selected: nil,
@@ -154,7 +137,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when checking answers and none is selected" do
       it "updates the application and redirects to the means summaries page" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
           :legal_aid_application,
           :with_non_passported_state_machine,
@@ -174,7 +156,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
 
     context "when checking answers and regular transactions are selected" do
       it "updates the application and redirects to the cash income page" do
-        Setting.setting.update!(enhanced_bank_upload: true)
         legal_aid_application = create(
           :legal_aid_application,
           :with_non_passported_state_machine,
@@ -212,18 +193,6 @@ RSpec.describe Providers::Means::RegularIncomesController do
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
         expect(response).to redirect_to(new_provider_session_path)
-      end
-    end
-
-    context "when the enhanced_bank_upload setting is not enabled" do
-      it "redirects to the identify income types page" do
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
-
-        expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
       end
     end
   end

@@ -111,27 +111,8 @@ RSpec.describe Providers::MeansSummariesController do
           expect(legal_aid_application.reload.provider_entering_merits?).to be true
         end
 
-        context "when provider has bank_statement_upload permissions and enhanced_bank_upload is disabled" do
+        context "when provider has bank_statement_upload permissions and has not received open banking consent" do
           before do
-            allow(Setting).to receive(:enhanced_bank_upload?).and_return(false)
-            legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
-            legal_aid_application.update!(provider_received_citizen_consent: false)
-          end
-
-          it "redirects to the no eligibility assessment page" do
-            request
-            expect(response).to redirect_to(providers_legal_aid_application_no_eligibility_assessment_path(legal_aid_application))
-          end
-
-          it "does not calls CFE::SubmissionManager" do
-            request
-            expect(CFE::SubmissionManager).not_to have_received(:call)
-          end
-        end
-
-        context "when provider has bank_statement_upload permissions and enhanced_bank_upload is enabled" do
-          before do
-            allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
             legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
             legal_aid_application.update!(provider_received_citizen_consent: false)
           end

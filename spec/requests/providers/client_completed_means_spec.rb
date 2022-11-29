@@ -137,10 +137,10 @@ RSpec.describe Providers::ClientCompletedMeansController do
             expect(subject).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
           end
 
-          context "when application is using enhanced bank upload journey" do
+          context "when application is using bank upload journey" do
             before { allow_any_instance_of(LegalAidApplication).to receive(:using_enhanced_bank_upload?).and_return(true) }
 
-            it "redirects to the identify incomes page" do
+            it "redirects to the regular incomes page" do
               expect(subject).to redirect_to(providers_legal_aid_application_means_regular_incomes_path(legal_aid_application))
             end
           end

@@ -9,8 +9,7 @@ namespace :settings do
                     enable_ccms_submission: true,
                     enable_evidence_upload: false,
                     enable_mini_loop: false,
-                    enable_loop: false,
-                    enhanced_bank_upload: false)
+                    enable_loop: false)
 
     pp Setting.first
   end

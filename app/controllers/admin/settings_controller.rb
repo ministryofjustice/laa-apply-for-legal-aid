@@ -24,7 +24,6 @@ module Admin
                                       :enable_ccms_submission,
                                       :enable_mini_loop,
                                       :enable_loop,
-                                      :enhanced_bank_upload,
                                       :means_test_review_phase_one)
     end
 

@@ -1,9 +1,8 @@
-Feature: Enhanced bank upload flow
+Feature: Bank statement upload journey happy path
   @javascript
-  Scenario: Enhanced bank statement upload journey
+  Scenario: I can upload bank statements and answer transaction questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
-    And the feature flag for enhanced_bank_upload is enabled
-    And I have completed a non-passported employed application with enhanced bank upload as far as the open banking consent page
+    And I have completed a non-passported employed application with bank statements as far as the open banking consent page
     Then I should be on a page showing "Does your client use online banking?"
 
     When I choose "No"

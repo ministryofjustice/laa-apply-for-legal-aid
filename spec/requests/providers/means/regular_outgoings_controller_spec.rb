@@ -26,26 +26,9 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
     context "when the provider is authenticated" do
       before { login_as provider }
 
-      context "when the enhanced bank upload setting is enabled" do
-        before do
-          Setting.setting.update!(enhanced_bank_upload: true)
-        end
-
-        it "returns http success" do
-          request
-          expect(response).to have_http_status(:ok)
-        end
-      end
-
-      context "when the enhanced_bank_upload setting is not enabled" do
-        before do
-          Setting.setting.update!(enhanced_bank_upload: false)
-        end
-
-        it "redirects to the identify types of outgoings page" do
-          request
-          expect(response).to redirect_to(providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application))
-        end
+      it "returns http success" do
+        request
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -58,10 +41,7 @@ RSpec.describe Providers::Means::RegularOutgoingsController do
       )
     end
 
-    before do
-      login_as provider
-      Setting.setting.update!(enhanced_bank_upload: true)
-    end
+    before { login_as provider }
 
     context "when none is selected" do
       let(:params) do

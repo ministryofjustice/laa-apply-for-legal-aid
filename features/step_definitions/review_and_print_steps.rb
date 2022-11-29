@@ -3,33 +3,6 @@ Given("I have completed a bank statement upload application with merits") do
     :legal_aid_application,
     :with_proceedings,
     :with_employed_applicant,
-    :with_single_employment,
-    :with_everything,
-    :with_dependant,
-    :with_cfe_empty_result,
-    :with_extra_employment_information,
-    :with_full_employment_information,
-    :with_fixed_benefits_cash_transactions,
-    :with_fixed_rent_or_mortage_cash_transactions,
-    :with_chances_of_success,
-    provider_received_citizen_consent: false,
-    attachments: [build(:attachment, :bank_statement)],
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-  )
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
-  create :legal_framework_merits_task_list, :da002_da006_as_applicant, legal_aid_application: @legal_aid_application
-
-  login_as @legal_aid_application.provider
-end
-
-Given("I have completed an enhanced bank statement upload application with merits") do
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
-    :with_employed_applicant,
     :with_non_passported_state_machine,
     :with_rent_or_mortgage_regular_transaction,
     :with_merits_statement_of_case,

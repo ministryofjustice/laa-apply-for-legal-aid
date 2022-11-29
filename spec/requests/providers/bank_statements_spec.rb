@@ -333,7 +333,7 @@ RSpec.describe "Providers::BankStatementsController" do
         end
 
         context "when HMRC response status is applicant_not_employed, " \
-                "but application is not using enhanced bank upload journey" do
+                "but application is not using bank upload journey" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
           end
@@ -345,10 +345,9 @@ RSpec.describe "Providers::BankStatementsController" do
         end
 
         context "when HMRC response status is applicant_not_employed, " \
-                "and application is using enhanced bank upload journey" do
+                "and application is using bank upload journey" do
           before do
             allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
-            Setting.setting.update!(enhanced_bank_upload: true)
             permissions = [
               create(:permission, :employed),
               create(:permission, :bank_statement_upload),

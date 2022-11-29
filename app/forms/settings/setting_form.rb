@@ -8,7 +8,6 @@ module Settings
                   :enable_ccms_submission,
                   :enable_mini_loop,
                   :enable_loop,
-                  :enhanced_bank_upload,
                   :means_test_review_phase_one
 
     validates :mock_true_layer_data,
@@ -17,7 +16,6 @@ module Settings
               :enable_ccms_submission,
               :enable_mini_loop,
               :enable_loop,
-              :enhanced_bank_upload,
               :means_test_review_phase_one,
               presence: true
   end

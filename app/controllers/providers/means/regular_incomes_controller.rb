@@ -1,8 +1,6 @@
 module Providers
   module Means
     class RegularIncomesController < ProviderBaseController
-      before_action :redirect_unless_enhanced_bank_upload_enabled
-
       def show
         @form = RegularIncomeForm.new(legal_aid_application:)
       end
@@ -30,12 +28,6 @@ module Providers
         RegularIncomeForm::INCOME_TYPES.map { |income_type|
           ["#{income_type}_amount".to_sym, "#{income_type}_frequency".to_sym]
         }.flatten
-      end
-
-      def redirect_unless_enhanced_bank_upload_enabled
-        unless Setting.enhanced_bank_upload?
-          redirect_to providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)
-        end
       end
     end
   end
