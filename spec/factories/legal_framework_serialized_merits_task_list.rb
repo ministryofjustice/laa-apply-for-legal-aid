@@ -11,7 +11,6 @@ FactoryBot.define do
             opponent_name: [],
             opponent_mental_capacity: [],
             domestic_abuse_summary: [],
-            # opponent_details: [],
             children_application: [],
             statement_of_case: [],
             why_matter_opposed: [],
@@ -368,6 +367,40 @@ FactoryBot.define do
               tasks: {
                 chances_of_success: [],
                 vary_order: [],
+              },
+            },
+          ],
+        }
+      end
+    end
+
+    trait :broken_opponent do
+      lfa_response do
+        {
+          request_id: SecureRandom.uuid,
+          application: {
+            tasks: {
+              latest_incident_details: [],
+              opponent_details: [],
+              children_application: [],
+              statement_of_case: [],
+              why_matter_opposed: [],
+              laspo: [],
+            },
+          },
+          proceeding_types: [
+            {
+              ccms_code: "DA001",
+              tasks: {
+                chances_of_success: [],
+              },
+            },
+            {
+              ccms_code: "SE014",
+              tasks: {
+                chances_of_success: [],
+                children_proceeding: [:children_application],
+                attempts_to_settle: [],
               },
             },
           ],

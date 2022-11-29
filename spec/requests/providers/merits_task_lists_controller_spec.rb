@@ -56,6 +56,21 @@ RSpec.describe Providers::MeritsTaskListsController do
         proceeding_names.each { |name| expect(response.body).to include(name) }
       end
     end
+
+    context "the task list was started before the opponent split was implemented" do
+      let(:task_list) { create(:legal_framework_merits_task_list, :broken_opponent, legal_aid_application:) }
+
+      before do
+        subject
+      end
+
+      it "calls the OpponentTaskUpdateService and replaces the opponent_details task and returns http success" do
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Opponent&#39;s name")
+        expect(response.body).to include("Opponent&#39;s mental capacity")
+        expect(response.body).to include("Domestic abuse summary")
+      end
+    end
   end
 
   describe "PATCH /providers/merits_task_list" do
