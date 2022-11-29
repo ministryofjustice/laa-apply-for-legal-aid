@@ -1,18 +1,23 @@
 require "rails_helper"
 
 RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
-  let(:application) do
-    create(:legal_aid_application,
-           :with_proceedings,
-           :with_applicant_and_address,
-           :with_non_means_tested_state_machine,
-           :at_checking_applicant_details)
-  end
-
   let(:application_id) { application.id }
+  let(:applicant) { build(:applicant, :under_18_for_means_test_purposes) }
+
+  before do
+    allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
+  end
 
   describe "GET /providers/applications/:legal_aid_application_id/confirm_non_means_tested_applications" do
     subject(:request) { get "/providers/applications/#{application_id}/confirm_non_means_tested_applications" }
+
+    let(:application) do
+      create(:legal_aid_application,
+             :with_proceedings,
+             :with_applicant_and_address,
+             :at_checking_applicant_details,
+             applicant:)
+    end
 
     context "when the provider is not authenticated" do
       before { request }
@@ -25,23 +30,15 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
         login_as application.provider
       end
 
-      it "is successful" do
-        request
-        expect(response).to be_successful
-      end
-
-      it { expect(request).to render_template("providers/confirm_non_means_tested_applications/show") }
-
-      it "transitions the application state to applicant details check" do
-        expect { request }
-          .to change { application.reload.state }
-          .from("checking_applicant_details")
-          .to("applicant_details_checked")
-      end
-
       context "without delegated functions" do
-        it "displays expected content" do
-          request
+        it "updates application state and renders template successfully with expected content", :aggregate_failures do
+          expect { request }
+            .to change { application.reload.state }
+            .from("checking_applicant_details")
+            .to("applicant_details_checked")
+
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template("providers/confirm_non_means_tested_applications/show")
           expect(page).to have_content("No means test required as client is under 18")
         end
       end
@@ -55,8 +52,14 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
                      used_delegated_functions_reported_on: Date.current)
         end
 
-        it "displays expected content" do
-          request
+        it "updates application state and renders template successfully with expected content", :aggregate_failures do
+          expect { request }
+            .to change { application.reload.state }
+            .from("checking_applicant_details")
+            .to("applicant_details_checked")
+
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template("providers/confirm_non_means_tested_applications/show")
           expect(page).to have_content("You do not need to do a means test as your client was under 18 when you first used delegated functions on this case")
         end
       end
@@ -79,6 +82,14 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
   describe "PATCH /providers/applications/:legal_aid_application_id/confirm_non_means_tested_applications" do
     subject(:request) { patch "/providers/applications/#{application_id}/confirm_non_means_tested_applications", params: }
+
+    let(:application) do
+      create(:legal_aid_application,
+             :with_proceedings,
+             :with_applicant_and_address,
+             :at_applicant_details_checked,
+             applicant:)
+    end
 
     context "when submitting with Continue button" do
       let(:params) do
@@ -106,8 +117,8 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
           .to("no_assessment")
       end
 
-      it "redirects to the merits task list page" do
-        request
+      it "updates application statre and redirects to the merits task list", :aggregate_failures do
+        expect { request }.to change { application.reload.state }.from("applicant_details_checked").to("provider_entering_merits")
         expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
       end
     end
@@ -121,15 +132,15 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
       before do
         login_as application.provider
-        request
       end
 
-      it "redirects provider to provider's applications page" do
+      it "sets draft status and redirects provider to provider's applications page", :aggregate_failures do
+        expect { request }.to change { application.reload.draft? }.from(false).to(true)
         expect(response).to redirect_to(providers_legal_aid_applications_path)
       end
 
-      it "sets the application as draft" do
-        expect(application.reload).to be_draft
+      it "leaves application in \"applicant_details_checked\" state" do
+        expect { request }.not_to change { application.reload.state }.from("applicant_details_checked")
       end
     end
   end

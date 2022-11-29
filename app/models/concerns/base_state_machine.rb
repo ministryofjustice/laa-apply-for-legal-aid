@@ -2,6 +2,7 @@ class BaseStateMachine < ApplicationRecord
   self.table_name = "state_machine_proxies"
 
   belongs_to :legal_aid_application
+  delegate :non_means_tested?, to: :legal_aid_application
 
   VALID_CCMS_REASONS = %i[
     employed
@@ -54,7 +55,7 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :checking_applicant_details
 
-      transitions from: :provider_entering_merits, to: :checking_applicant_details, gaurd: :non_means_tested?
+      transitions from: :provider_entering_merits, to: :checking_applicant_details, guard: :non_means_tested?
     end
 
     event :applicant_details_checked do
@@ -67,6 +68,8 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :applicant_details_checked,
                   after: proc { |legal_aid_application| CleanupCapitalAttributes.call(legal_aid_application) }
+
+      transitions from: :provider_entering_merits, to: :applicant_details_checked, guard: proc { non_means_tested? }
     end
 
     event :provider_used_delegated_functions do
@@ -120,6 +123,8 @@ class BaseStateMachine < ApplicationRecord
                     assessment_submitted
                   ],
                   to: :checking_merits_answers
+
+      transitions from: :applicant_details_checked, to: :checking_merits_answers, guard: :non_means_tested?
     end
 
     event :generate_reports do

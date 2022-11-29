@@ -42,6 +42,10 @@ FactoryBot.define do
       date_of_birth { 18.years.ago + 1.day }
     end
 
+    trait :under_18_for_means_test_purposes do
+      age_for_means_test_purposes { 17 }
+    end
+
     trait :under_18_as_of do
       transient do
         as_of { Date.current }
