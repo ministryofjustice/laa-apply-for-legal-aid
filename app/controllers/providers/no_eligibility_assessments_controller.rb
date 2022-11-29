@@ -1,5 +1,7 @@
 module Providers
   class NoEligibilityAssessmentsController < ProviderBaseController
+    include CFEResultMockable
+
     def show
       cfe_assessment_or_mock
       legal_aid_application.provider_enter_merits! unless legal_aid_application.provider_entering_merits?
@@ -10,27 +12,14 @@ module Providers
       continue_or_draft
     end
 
-    def submission
-      CFE::Submission.create!(legal_aid_application_id: legal_aid_application.id, aasm_state: "cfe_not_called")
-    end
-
     def cfe_assessment_or_mock
-      employed_and_hmrc_response? ? check_financial_eligibility : write_mock_cfe_result
+      employed_and_hmrc_response? ? check_financial_eligibility : mark_as_cfe_result_skipped!
     end
 
   private
 
     def employed_and_hmrc_response?
       @legal_aid_application.applicant.employed? && @legal_aid_application.hmrc_responses.exists?
-    end
-
-    def write_mock_cfe_result
-      CFE::Empty::Result.create!(
-        legal_aid_application_id: legal_aid_application.id,
-        submission_id: submission.id,
-        result: CFE::Empty::EmptyResult.blank_cfe_result.to_json,
-        type: "CFE::Empty::Result",
-      )
     end
 
     def check_financial_eligibility
