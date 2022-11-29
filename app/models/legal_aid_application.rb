@@ -144,15 +144,6 @@ class LegalAidApplication < ApplicationRecord
     proceedings.find_by(lead_proceeding: true)
   end
 
-  def find_or_set_lead_proceeding
-    lead_proc = lead_proceeding
-    if lead_proc.nil?
-      lead_proc = proceedings.detect { |p| p.ccms_code =~ /^DA/ }
-      lead_proc.update! lead_proceeding: true
-    end
-    lead_proc
-  end
-
   def proceedings_by_name
     # returns an array of ProceedingStruct containing:
     # - name of the proceeding type
