@@ -24,6 +24,7 @@ module LegalFramework
       @merits_task_list.task_list.tasks[:application] = @application_tasks - [legacy_opponent_step]
       @merits_task_list.serialized_data = @merits_task_list.task_list.to_yaml
       @merits_task_list.save!
+      Rails.logger.info("OpponentTaskUpdateService - processed for #{@legal_aid_application.id}, original state was #{legacy_opponent_step.state}")
     end
 
   private
