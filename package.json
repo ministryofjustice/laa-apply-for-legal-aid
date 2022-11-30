@@ -29,6 +29,7 @@
     "glob-parent": "^5.1.2",
     "is-svg": "^4.2.2",
     "kind-of": "^6.0.3",
+    "loader-utils": "^1.4.2",
     "minimist": "^1.2.2",
     "normalize-url": "^4.5.1",
     "nth-check": "^2.1.1",
