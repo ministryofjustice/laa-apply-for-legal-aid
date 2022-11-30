@@ -14,4 +14,15 @@ class UndeliverableEmailAlertMailer < BaseApplyMailer
 
     mail to: Rails.configuration.x.support_email_address
   end
+
+  def notify_provider(provider_email, application_ref, applicant_name, applicant_email)
+    template_name :client_email_failed_provider_alert
+    set_personalisation(
+      ref_number: application_ref,
+      applicant_name:,
+      applicant_email:,
+    )
+
+    mail to: provider_email
+  end
 end
