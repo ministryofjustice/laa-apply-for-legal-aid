@@ -25,6 +25,7 @@ module Providers
       if merits_task_list.nil?
         LegalFramework::MeritsTasksService.call(@legal_aid_application).tasks
       else
+        LegalFramework::OpponentTaskUpdateService.call(@legal_aid_application)
         merits_task_list.task_list.tasks
       end
     end
