@@ -23,6 +23,9 @@
   .only-print, .only-print * {
     display: inherit !important;
   }
+  .pagebreak {
+    page-break-before: always;
+  }
 }
 
 .page_break_before {
