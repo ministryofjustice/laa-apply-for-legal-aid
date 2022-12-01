@@ -26,20 +26,23 @@ module LegalFramework
 
     context "when there are no lead proceedings" do
       let(:explicit_proceedings) { %i[se013 se014 da001] }
+      let(:first_proceeding) { laa.proceedings.in_order_of_addition.first }
 
-      it "sets the domestic abuse proceeding as lead" do
+      it "sets the proceeding added first as the lead proceeding" do
         subject
-        expect(p_s81.lead_proceeding?).to be false
-        expect(p_s82.lead_proceeding?).to be false
-        expect(p_da1.lead_proceeding?).to be true
+        expect(first_proceeding.lead_proceeding?).to be true
+        laa.proceedings.in_order_of_addition[1..].each do |proceeding|
+          expect(proceeding.lead_proceeding?).to be false
+        end
       end
     end
 
     context "when there are no domestic abuse proceedings" do
       let(:explicit_proceedings) { %i[se013 se014] }
 
-      it "changes nothing" do
-        expect(p_s81.lead_proceeding?).to be false
+      it "sets the proceeding added first as the lead proceeding" do
+        subject
+        expect(p_s81.lead_proceeding?).to be true
         expect(p_s82.lead_proceeding?).to be false
       end
     end

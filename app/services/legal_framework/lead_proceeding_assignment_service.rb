@@ -21,7 +21,7 @@ module LegalFramework
   private
 
     def assign_new_lead
-      new_lead_proceeding = @legal_aid_application.proceedings.detect(&:domestic_abuse?)
+      new_lead_proceeding = @legal_aid_application.proceedings.in_order_of_addition.first
       return if new_lead_proceeding.nil?
 
       new_lead_proceeding.update!(lead_proceeding: true)

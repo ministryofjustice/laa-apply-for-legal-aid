@@ -1179,32 +1179,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#find or set lead proceeding" do
-    context "with lead proceeding already set" do
-      let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: :da004) }
-      let(:da004) { laa.proceedings.find_by(ccms_code: "DA004") }
-
-      it "returns the lead proceeding" do
-        expect(laa.find_or_set_lead_proceeding).to eq da004
-      end
-    end
-
-    context "with no lead proceeding set" do
-      let(:laa) { create(:legal_aid_application, :with_proceedings, proceeding_count: 4, set_lead_proceeding: false) }
-
-      it "returns one of the domestic abuse proceedings" do
-        expect(laa.lead_proceeding).to be_nil
-        lead_proc = laa.find_or_set_lead_proceeding
-        expect(lead_proc.ccms_code).to match(/^DA/)
-      end
-
-      it "has set the lead proceeding to true" do
-        lead_proc = laa.find_or_set_lead_proceeding
-        expect(lead_proc.lead_proceeding).to be true
-      end
-    end
-  end
-
   describe "#proceedings_by_name" do
     subject { laa.proceedings_by_name }
 
