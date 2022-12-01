@@ -23,20 +23,34 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "in_scope_of_laspos", "has_other_proceedings", "substantive_scope_limitations"
-          :client_involvement_type
+        when "has_other_proceedings", "substantive_scope_limitations"
+          if @application.checking_answers?
+            :limitations
+          else
+            :client_involvement_type
+          end
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
           if Setting.enable_loop?
             current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
+          elsif @application.checking_answers?
+            :limitations
           else
             :client_involvement_type
           end
         when "emergency_defaults"
           current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
         when "substantive_defaults"
-          current_proceeding.accepted_substantive_defaults ? :client_involvement_type : :substantive_level_of_service
+          if current_proceeding.accepted_substantive_defaults
+            if @application.checking_answers?
+              :limitations
+            else
+              :client_involvement_type
+            end
+          else
+            :substantive_level_of_service
+          end
         when "emergency_level_of_service"
           :emergency_scope_limitations
         when "substantive_level_of_service"
