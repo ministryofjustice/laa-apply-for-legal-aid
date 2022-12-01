@@ -103,7 +103,12 @@
         ) %>
   <% end %>
 
-  <% if @legal_aid_application.uploading_bank_statements? %>
+  <% if @legal_aid_application.applicant.no_means_test_required? %>
+    <section class="print-no-break govuk-!-margin-bottom-6">
+      <h2 class="govuk-heading-l"><%= t(".no_means_test_income_heading") %></h2>
+      <%= govuk_tag(text: t(".non_means_tested"), classes: ["govuk-!-margin-bottom-4"]) %>
+    </section>
+  <% elsif @legal_aid_application.uploading_bank_statements? %>
     <%= render "shared/review_application/income_payments_and_assets_for_bank_statement_upload" %>
   <% else %>
     <%= render "shared/review_application/income_payments_and_assets" %>
