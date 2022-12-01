@@ -55,8 +55,4 @@ class PassportedStateMachine < BaseStateMachine
   def provider_checking_or_checked_citizens_means_answers?
     false
   end
-
-  def allow_ccms_submission?
-    EnableCCMSSubmission.call
-  end
 end

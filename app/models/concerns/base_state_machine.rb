@@ -4,6 +4,10 @@ class BaseStateMachine < ApplicationRecord
   belongs_to :legal_aid_application
   delegate :non_means_tested?, to: :legal_aid_application
 
+  def allow_ccms_submission?
+    EnableCCMSSubmission.call
+  end
+
   VALID_CCMS_REASONS = %i[
     employed
     no_online_banking

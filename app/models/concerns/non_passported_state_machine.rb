@@ -80,8 +80,4 @@ class NonPassportedStateMachine < BaseStateMachine
   def provider_checking_or_checked_citizens_means_answers?
     checking_non_passported_means? || provider_entering_merits?
   end
-
-  def allow_ccms_submission?
-    EnableCCMSSubmission.call
-  end
 end
