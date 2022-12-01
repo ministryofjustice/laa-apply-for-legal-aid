@@ -160,8 +160,8 @@ RSpec.describe "DelegatedFunctionsController" do
           end
 
           context "when the date is within the last month" do
-            it "redirects to check provider answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application_id))
+            it "continues through the sub flow" do
+              expect(response).to redirect_to(providers_legal_aid_application_limitations_path(application_id))
             end
           end
 

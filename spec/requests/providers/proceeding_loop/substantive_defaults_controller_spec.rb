@@ -107,8 +107,8 @@ RSpec.describe "SubstantiveDefaultsController", :vcr do
           before { application.reload }
 
           context "when the date is within the last month" do
-            it "redirects to check provider answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application_id))
+            it "continues through the sub flow" do
+              expect(response).to redirect_to(providers_legal_aid_application_substantive_level_of_service_path(application_id))
             end
           end
         end
