@@ -439,7 +439,7 @@ Given("I have started an application with multiple proceedings and reached the c
     :legal_aid_application,
     :with_applicant_and_address_lookup,
     :with_proceedings,
-    :at_entering_applicant_details,
+    :at_checking_applicant_details,
     :with_delegated_functions_on_proceedings,
     explicit_proceedings: %i[da001 se013],
     df_options: { DA001: [10.days.ago, 10.days.ago], SE013: nil },
@@ -802,6 +802,14 @@ Given("I click Check Your Answers Change link for {string}") do |question|
   question_id = question.parameterize(separator: "_")
 
   within "#app-check-your-answers__#{question_id}" do
+    click_link("Change")
+  end
+end
+
+Given("I click Check Your Answers Change link for proceeding {string}") do |question|
+  question_id = question.parameterize(separator: "_")
+
+  within "#app-check-your-answers__proceeding_#{question_id}" do
     click_link("Change")
   end
 end
