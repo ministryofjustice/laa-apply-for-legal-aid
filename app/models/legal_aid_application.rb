@@ -507,7 +507,7 @@ class LegalAidApplication < ApplicationRecord
   def uploading_bank_statements?
     return false unless provider.bank_statement_upload_permissions?
 
-    !client_open_banking_consent? || attachments.bank_statement_evidence.exists?
+    client_not_given_consent_to_open_banking? || attachments.bank_statement_evidence.exists?
   end
 
   def has_transaction_type?(transaction_type)
@@ -524,10 +524,8 @@ class LegalAidApplication < ApplicationRecord
 
 private
 
-  def client_open_banking_consent?
-    return true if provider_received_citizen_consent.nil?
-
-    provider_received_citizen_consent?
+  def client_not_given_consent_to_open_banking?
+    provider_received_citizen_consent == false
   end
 
   def bank_transactions_by_type(type)
