@@ -22,8 +22,8 @@ RSpec.describe CFE::ServiceSet do
       end
     end
 
-    context "when object is non_passported? but not using_enhanced_bank_upload?" do
-      let(:object) { double(Object, passported?: false, non_passported?: true, using_enhanced_bank_upload?: false) }
+    context "when object is non_passported? but not uploading_bank_statements?" do
+      let(:object) { double(Object, passported?: false, non_passported?: true, uploading_bank_statements?: false) }
 
       it "returns set of non passported CFE::Service classes" do
         expect(call).to match([
@@ -46,8 +46,8 @@ RSpec.describe CFE::ServiceSet do
       end
     end
 
-    context "when object is non_passported? and using_enhanced_bank_upload?" do
-      let(:object) { double(Object, passported?: false, non_passported?: true, using_enhanced_bank_upload?: true) }
+    context "when object is non_passported? and uploading_bank_statements?" do
+      let(:object) { double(Object, passported?: false, non_passported?: true, uploading_bank_statements?: true) }
 
       it "returns set of non passported CFE::Service classes" do
         expect(call).to match([

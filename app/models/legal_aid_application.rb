@@ -514,16 +514,12 @@ class LegalAidApplication < ApplicationRecord
     legal_aid_application_transaction_types.map(&:transaction_type_id).include?(transaction_type.id)
   end
 
-  def using_enhanced_bank_upload?
-    Setting.enhanced_bank_upload? && uploading_bank_statements?
-  end
-
   def housing_payments?
     transaction_types.for_outgoing_type?(:rent_or_mortgage)
   end
 
   def housing_benefit_regular_transaction_applicable?
-    using_enhanced_bank_upload? && housing_payments?
+    uploading_bank_statements? && housing_payments?
   end
 
 private

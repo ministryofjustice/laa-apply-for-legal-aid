@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<% if @legal_aid_application.using_enhanced_bank_upload? %>
+<% if @legal_aid_application.uploading_bank_statements? %>
   <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= income_type.parameterize %>">
     <% transaction_types.each do |transaction_type| %>
       <%= check_answer_for_regular_transactions(

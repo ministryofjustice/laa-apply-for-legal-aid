@@ -1,6 +1,4 @@
 class Setting < ApplicationRecord
-  self.ignored_columns += %w[enhanced_bank_upload]
-
   def self.mock_true_layer_data?
     setting.mock_true_layer_data?
   end
@@ -31,10 +29,6 @@ class Setting < ApplicationRecord
 
   def self.enable_loop?
     setting.enable_loop?
-  end
-
-  def self.enhanced_bank_upload?
-    true
   end
 
   def self.means_test_review_phase_one?

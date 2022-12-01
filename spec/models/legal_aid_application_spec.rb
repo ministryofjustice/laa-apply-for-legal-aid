@@ -1728,36 +1728,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#using_enhanced_bank_upload?" do
-    context "when the `enhanced_bank_upload` setting is enabled, and the " \
-            "application is uploading bank statements" do
-      it "returns true" do
-        legal_aid_application = build_stubbed(:legal_aid_application)
-        allow(legal_aid_application)
-          .to receive(:uploading_bank_statements?)
-          .and_return(true)
-
-        result = legal_aid_application.using_enhanced_bank_upload?
-
-        expect(result).to be true
-      end
-    end
-
-    context "when the `enhanced_bank_upload` setting is enabled, but the " \
-            "application is not uploading bank statements" do
-      it "returns false" do
-        legal_aid_application = build_stubbed(:legal_aid_application)
-        allow(legal_aid_application)
-          .to receive(:uploading_bank_statements?)
-          .and_return(false)
-
-        result = legal_aid_application.using_enhanced_bank_upload?
-
-        expect(result).to be false
-      end
-    end
-  end
-
   describe "#housing_payments?" do
     context "when the application has a rent_or_mortgage transaction type" do
       it "returns true" do

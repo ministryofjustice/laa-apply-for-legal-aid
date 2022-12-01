@@ -35,7 +35,7 @@ RSpec.describe Reports::MeansReportCreator do
           allow(legal_aid_application).to receive(:passported?).and_return(true)
           allow(legal_aid_application).to receive(:non_passported?).and_return(false)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
         end
 
         it_behaves_like "successful means_report creator"
@@ -45,7 +45,7 @@ RSpec.describe Reports::MeansReportCreator do
         before do
           allow(legal_aid_application).to receive(:non_passported?).and_return(true)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
         end
 
         it_behaves_like "successful means_report creator"
@@ -55,7 +55,7 @@ RSpec.describe Reports::MeansReportCreator do
         before do
           allow(legal_aid_application).to receive(:non_passported?).and_return(true)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(true)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
         end
 
         it_behaves_like "successful means_report creator"

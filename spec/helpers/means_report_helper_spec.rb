@@ -20,9 +20,9 @@ RSpec.describe MeansReportHelper do
     context "with housing item" do
       subject(:housing_item) { items.first }
 
-      context "when an application is using_enhanced_bank_upload?" do
+      context "when an application is uploading_bank_statements?" do
         before do
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(true)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
         end
 
         it "addendum matches expected text" do
@@ -30,9 +30,9 @@ RSpec.describe MeansReportHelper do
         end
       end
 
-      context "when an application is not using_enhanced_bank_upload?" do
+      context "when an application is not uploading_bank_statements?" do
         before do
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
+          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false)
         end
 
         it "addendum is nil" do
@@ -82,16 +82,16 @@ RSpec.describe MeansReportHelper do
 
     it_behaves_like "transaction type item list"
 
-    context "when application is not using_enhanced_bank_upload?" do
-      before { allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false) }
+    context "when application is not uploading_bank_statements?" do
+      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
 
       it "has expected items" do
         expect(items.map(&:name)).to eql(%i[dependants_allowance disregarded_state_benefits])
       end
     end
 
-    context "when application is using_enhanced_bank_upload?" do
-      before { allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(true) }
+    context "when application is uploading_bank_statements?" do
+      before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
 
       it "has expected items" do
         expect(items.map(&:name)).to eql(%i[dependants_allowance])

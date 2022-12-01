@@ -16,7 +16,6 @@
           read_only:,
         ) %>
 
-  <% if @legal_aid_application.using_enhanced_bank_upload? || !@legal_aid_application.uploading_bank_statements? %>
     <%= check_answer_link(
           name: :gross_income_limit,
           question: t(".gross_income_limit"),
@@ -44,6 +43,5 @@
           answer: gds_number_to_currency(@legal_aid_application.cfe_result.income_contribution),
           read_only:,
         ) %>
-    <% end %>
   </dl>
 </section>

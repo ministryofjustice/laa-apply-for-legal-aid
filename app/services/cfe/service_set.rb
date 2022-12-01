@@ -64,7 +64,7 @@ module CFE
     def service_set
       if object.passported?
         PASSPORTED_SERVICES
-      elsif object.non_passported? && object.using_enhanced_bank_upload?
+      elsif object.non_passported? && object.uploading_bank_statements?
         NON_PASSPORTED_WITH_REGULAR_TRANSACTIONS_SERVICES
       elsif object.non_passported?
         NON_PASSPORTED_WITH_BANK_TRANSACTIONS_SERVICES
