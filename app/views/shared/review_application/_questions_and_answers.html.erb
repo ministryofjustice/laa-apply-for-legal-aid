@@ -103,7 +103,7 @@
         ) %>
   <% end %>
 
-  <% if @legal_aid_application.applicant.no_means_test_required? %>
+  <% if @legal_aid_application.non_means_tested? %>
     <section class="print-no-break govuk-!-margin-bottom-6">
       <h2 class="govuk-heading-l"><%= t(".no_means_test_income_heading") %></h2>
       <%= govuk_tag(text: t(".non_means_tested"), classes: ["govuk-!-margin-bottom-4"]) %>

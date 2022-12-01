@@ -107,6 +107,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page showing "Review and print your application"
+    And I should see 'NON MEANS TESTED'
 
     When I click 'Submit and continue'
     Then I should be on a page showing "Application complete"

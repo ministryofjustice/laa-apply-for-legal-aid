@@ -46,6 +46,10 @@ FactoryBot.define do
       applicant { build(:applicant, :with_address_lookup) }
     end
 
+    trait :with_under_18_applicant do
+      applicant { build(:applicant, :with_address, date_of_birth: Date.current - 16.years, age_for_means_test_purposes: 16) }
+    end
+
     #######################################################
     #        TRAITS TO SET STATE                          #
     #######################################################
