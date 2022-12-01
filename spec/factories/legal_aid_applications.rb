@@ -76,6 +76,10 @@ FactoryBot.define do
       state_machine factory: :non_means_tested_state_machine
     end
 
+    trait :with_base_state_machine do
+      state_machine factory: :base_state_machine
+    end
+
     trait :initiated do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :initiated)

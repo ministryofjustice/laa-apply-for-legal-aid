@@ -122,7 +122,6 @@ class BaseStateMachine < ApplicationRecord
       transitions from: %i[
                     provider_entering_merits
                     checked_merits_answers
-                    provider_entering_merits
                     submitting_assessment
                     assessment_submitted
                   ],
