@@ -1,57 +1,70 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <dl id="client-details-questions" class="govuk-summary-list govuk-!-margin-bottom-9">
-  <%= check_answer_link(
-        name: :first_name,
-        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
-        question: t('.first_name'),
-        answer: applicant.first_name,
-        read_only: read_only,
-      ) if :first_name.in?(attributes) %>
+  <% if :first_name.in?(attributes) %>
+    <%= check_answer_link(
+          name: :first_name,
+          url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :first_name),
+          question: t(".first_name"),
+          answer: applicant.first_name,
+          read_only:,
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :last_name,
-        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
-        question: t('.last_name'),
-        answer: applicant.last_name,
-        read_only: read_only,
-      ) if :last_name.in?(attributes) %>
+  <% if :last_name.in?(attributes) %>
+    <%= check_answer_link(
+          name: :last_name,
+          url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :last_name),
+          question: t(".last_name"),
+          answer: applicant.last_name,
+          read_only:,
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :date_of_birth,
-        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
-        question: t('.dob'),
-        answer: applicant.date_of_birth,
-        read_only: read_only,
-      ) if :date_of_birth.in?(attributes) %>
+  <% if :date_of_birth.in?(attributes) %>
+    <%= check_answer_link(
+          name: :date_of_birth,
+          url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :date_of_birth),
+          question: t(".dob"),
+          answer: applicant.date_of_birth,
+          read_only:,
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :age,
-        question: t('.age_question'),
-        answer: t('.age', years: applicant.age),
-      ) if :age.in?(attributes) %>
+  <% if :age.in?(attributes) %>
+    <%= check_answer_link(
+          name: :age,
+          question: t(".age_question"),
+          answer: t(".age", years: applicant.age),
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :address,
-        url: change_address_link(applicant),
-        question: t('.address'),
-        answer: address_with_line_breaks(address),
-        read_only: read_only,
-      ) if :address.in?(attributes) %>
+  <% if :address.in?(attributes) %>
+    <%= check_answer_link(
+          name: :address,
+          url: change_address_link(applicant),
+          question: t(".address"),
+          answer: address_with_line_breaks(address),
+          read_only:,
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :national_insurance_number,
-        url: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
-        question: t('.nino'),
-        answer: applicant.national_insurance_number || t('generic.not_provided'),
-        read_only: read_only,
-      ) if :national_insurance_number.in?(attributes) %>
+  <% if :national_insurance_number.in?(attributes) %>
+    <%= check_answer_link(
+          name: :national_insurance_number,
+          url: providers_legal_aid_application_has_national_insurance_number_path(@legal_aid_application),
+          question: t(".nino"),
+          answer: applicant.national_insurance_number || t("generic.not_provided"),
+          read_only:,
+        ) %>
+  <% end %>
 
-  <%= check_answer_link(
-        name: :email,
-        url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
-        question: t('.email'),
-        answer: applicant.email,
-        read_only: read_only,
-      ) if :email.in?(attributes) %>
-
+  <% if :email.in?(attributes) %>
+    <%= check_answer_link(
+          name: :email,
+          url: providers_legal_aid_application_applicant_details_path(@legal_aid_application, anchor: :email),
+          question: t(".email"),
+          answer: applicant.email,
+          read_only:,
+        ) %>
+  <% end %>
 </dl>

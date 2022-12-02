@@ -7,14 +7,14 @@
           name: :"#{proceeding.name}_final_hearing",
           question: t(".date.question"),
           answer: final_hearing.date,
-          read_only: read_only
+          read_only:,
         ) %>
   <% else %>
     <%= check_answer_no_link(
           name: :"#{proceeding.name}_final_hearing",
           question: t(".details.question"),
           answer: final_hearing.details,
-          read_only: read_only
+          read_only:,
         ) %>
   <% end %>
 <% end %>

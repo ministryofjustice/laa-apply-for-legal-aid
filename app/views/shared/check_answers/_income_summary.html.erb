@@ -7,9 +7,12 @@
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
       <% unless read_only %>
         <p>
-            <%= link_to_accessible(t('generic.change'),
-                                   check_answer_url_for(:providers, url, @legal_aid_application),
-                                   class: 'govuk-link change-link', suffix: income_type) %>
+            <%= link_to_accessible(
+                  t("generic.change"),
+                  check_answer_url_for(:providers, url, @legal_aid_application),
+                  class: "govuk-link change-link",
+                  suffix: income_type,
+                ) %>
         </p>
       <% end %>
     </div>
@@ -22,7 +25,7 @@
             name: transaction_type.label_name,
             question: transaction_type.label_name,
             legal_aid_application: @legal_aid_application,
-            transaction_type: transaction_type
+            transaction_type:,
           ) %>
     <% end %>
   </dl>
@@ -33,7 +36,7 @@
               name: transaction_type.label_name,
               question: transaction_type.label_name,
               legal_aid_application: @legal_aid_application,
-              transaction_type: transaction_type
+              transaction_type:,
             ) %>
       <% end %>
   </dl>

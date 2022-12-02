@@ -1,4 +1,4 @@
-<% read_only = local_assigns[:read_only] ? read_only : false %>
+<% read_only = false unless local_assigns[:read_only] %>
 <h3 class="govuk-heading-m">
   <%= t(".#{journey_type}.heading") %>
 </h3>
@@ -9,38 +9,40 @@
         url: check_answer_url_for(journey_type, :vehicles, @legal_aid_application),
         question: t(".#{journey_type}.own"),
         answer: yes_no(@legal_aid_application.own_vehicle?),
-        read_only: read_only,
+        read_only:,
       ) %>
 
-  <%= check_answer_link(
-        name: :vehicles_estimated_values,
-        url: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
-        question: t(".#{journey_type}.estimated_value"),
-        answer: gds_number_to_currency(@legal_aid_application.vehicle.estimated_value),
-        read_only: read_only,
-      ) if @legal_aid_application.own_vehicle? %>
+  <% if @legal_aid_application.own_vehicle? %>
+    <%= check_answer_link(
+          name: :vehicles_estimated_values,
+          url: check_answer_url_for(journey_type, :vehicles_estimated_values, @legal_aid_application),
+          question: t(".#{journey_type}.estimated_value"),
+          answer: gds_number_to_currency(@legal_aid_application.vehicle.estimated_value),
+          read_only:,
+        ) %>
 
-  <%= check_answer_link(
-        name: :vehicles_remaining_payments,
-        url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
-        question: t(".#{journey_type}.payment_remaining"),
-        answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
-        read_only: read_only,
-      ) if @legal_aid_application.own_vehicle? %>
+    <%= check_answer_link(
+          name: :vehicles_remaining_payments,
+          url: check_answer_url_for(journey_type, :vehicles_remaining_payments, @legal_aid_application),
+          question: t(".#{journey_type}.payment_remaining"),
+          answer: gds_number_to_currency(@legal_aid_application.vehicle.payment_remaining),
+          read_only:,
+        ) %>
 
-  <%= check_answer_link(
-        name: :vehicles_ages,
-        url: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
-        question: t(".#{journey_type}.more_than_three_years_old"),
-        answer: yes_no(@legal_aid_application.vehicle.more_than_three_years_old?),
-        read_only: read_only,
-      ) if @legal_aid_application.own_vehicle? %>
+    <%= check_answer_link(
+          name: :vehicles_ages,
+          url: check_answer_url_for(journey_type, :vehicles_ages, @legal_aid_application),
+          question: t(".#{journey_type}.more_than_three_years_old"),
+          answer: yes_no(@legal_aid_application.vehicle.more_than_three_years_old?),
+          read_only:,
+        ) %>
 
-  <%= check_answer_link(
-        name: :vehicles_regular_uses,
-        url: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
-        question: t(".#{journey_type}.used_regularly"),
-        answer: yes_no(@legal_aid_application.vehicle.used_regularly),
-        read_only: read_only,
-      ) if @legal_aid_application.own_vehicle? %>
+    <%= check_answer_link(
+          name: :vehicles_regular_uses,
+          url: check_answer_url_for(journey_type, :vehicles_regular_uses, @legal_aid_application),
+          question: t(".#{journey_type}.used_regularly"),
+          answer: yes_no(@legal_aid_application.vehicle.used_regularly),
+          read_only:,
+        ) %>
+  <% end %>
 </dl>

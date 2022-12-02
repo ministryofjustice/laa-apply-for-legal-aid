@@ -1,21 +1,21 @@
 <div class="govuk-summary-list govuk-!-margin-bottom-9">
   <dl class="govuk-summary-list govuk-summary-list--no-border">
     <%= check_answer_link(
-            name: "dependants",
-            url: providers_legal_aid_application_means_has_dependants_path,
-            question: t('providers.means_summaries.income_assessment.dependants.has_dependants'),
-            answer: yes_no(@legal_aid_application.has_dependants)
+          name: "dependants",
+          url: providers_legal_aid_application_means_has_dependants_path,
+          question: t("providers.means_summaries.income_assessment.dependants.has_dependants"),
+          answer: yes_no(@legal_aid_application.has_dependants),
         ) %>
   </dl>
 </div>
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
     <%= check_answer_one_change_link(
-      name: "dependants_#{index + 1}",
-      url: providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant),
-      question: "Dependant #{index + 1}: #{dependant.name}",
-      answer_hash: dependant_hash(dependant),
-      read_only: false
-    ) %>
+          name: "dependants_#{index + 1}",
+          url: providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant),
+          question: "Dependant #{index + 1}: #{dependant.name}",
+          answer_hash: dependant_hash(dependant),
+          read_only: false,
+        ) %>
   <% end %>
 <% end %>

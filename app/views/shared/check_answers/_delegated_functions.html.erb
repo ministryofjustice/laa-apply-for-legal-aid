@@ -5,8 +5,8 @@
           name: :"#{proceeding_struct.name}_used_delegated_functions_on",
           url: :show_blank_action,
           question: proceeding_struct.meaning,
-          answer: proceeding_struct.proceeding.used_delegated_functions_on&.strftime('%-d %B %Y') || t(".not_used"),
-          read_only: read_only
+          answer: proceeding_struct.proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".not_used"),
+          read_only:,
         ) %>
   <% end %>
 </dl>

@@ -1,89 +1,87 @@
-<%
-  read_only = false unless local_assigns.key?(:read_only)
-  online_savings_accounts = @legal_aid_application.online_savings_accounts_balance
-  online_current_accounts = @legal_aid_application.online_current_accounts_balance
-%>
+<% read_only = false unless local_assigns.key?(:read_only) %>
+<% online_savings_accounts = @legal_aid_application.online_savings_accounts_balance %>
+<% online_current_accounts = @legal_aid_application.online_current_accounts_balance %>
 
 <section class="print-no-break">
-  <%= render 'shared/check_answers/property', read_only: read_only %>
+  <%= render "shared/check_answers/property", read_only: %>
 </section>
 
 <section class="print-no-break">
-  <%= render 'shared/check_answers/vehicles', read_only: read_only %>
+  <%= render "shared/check_answers/vehicles", read_only: %>
 
   <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
     <!-- non-passported truelayer only -->
 
     <% if read_only %>
-      <h2 class="govuk-heading-m"><%= t('.assets.bank_accounts') %></h2>
+      <h2 class="govuk-heading-m"><%= t(".assets.bank_accounts") %></h2>
       <dl class="govuk-summary-list govuk-!-margin-bottom-9" data-test="applicant-bank-accounts">
 
         <%= check_answer_link(
               name: :online_current_accounts,
               url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-              question: t('.assets.current_account'),
-              answer: online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t('generic.none_declared'),
-              read_only: read_only,
+              question: t(".assets.current_account"),
+              answer: online_current_accounts.present? ? gds_number_to_currency(online_current_accounts) : t("generic.none_declared"),
+              read_only:,
             ) %>
         <%= check_answer_link(
               name: :online_savings_accounts,
               url: check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-              question: t('.assets.savings_account'),
-              answer: online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t('generic.none_declared'),
-              read_only: read_only,
+              question: t(".assets.savings_account"),
+              answer: online_savings_accounts.present? ? gds_number_to_currency(online_savings_accounts) : t("generic.none_declared"),
+              read_only:,
             ) %>
       </dl>
     <% end %>
 
-    <%= render 'shared/check_answers/offline_savings_accounts', read_only: read_only %>
+    <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
   <% else %>
     <!-- passported and non-passported bank statement uploaded -->
 
     <%= check_answer_one_change_link(
           name: :bank_accounts,
           url: check_answer_url_for(journey_type, :offline_accounts, @legal_aid_application),
-          question: t('.assets.bank_accounts'),
+          question: t(".assets.bank_accounts"),
           answer_hash: capital_accounts_list(
             @legal_aid_application.savings_amount,
-            locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
+            locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
           ),
-          read_only: read_only
+          read_only:,
         ) %>
   <% end %>
 
   <%= check_answer_one_change_link(
         name: :savings_and_investments,
         url: check_answer_url_for(journey_type, :savings_and_investments, @legal_aid_application),
-        question: t('.assets.savings_and_investments'),
+        question: t(".assets.savings_and_investments"),
         answer_hash: capital_assets_list(
           @legal_aid_application.savings_amount,
-          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_"
+          locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.savings_and_investments.check_box_",
         ),
-        read_only: read_only
+        read_only:,
       ) %>
 
   <%= check_answer_one_change_link(
         name: :other_assets,
         url: check_answer_url_for(journey_type, :other_assets, @legal_aid_application),
-        question: t('.assets.other_assets'),
+        question: t(".assets.other_assets"),
         answer_hash: capital_amounts_list(
           @legal_aid_application.other_assets_declaration,
           locale_namespace: "shared.forms.revealing_checkbox.attribute.#{journey_type}.other_assets.check_box_",
-          percentage_values: [:second_home_percentage]
+          percentage_values: [:second_home_percentage],
         ),
-        read_only: read_only
+        read_only:,
       ) %>
 
-  <%= render('shared/check_answers/restrictions', read_only: read_only) if @legal_aid_application.own_capital? %>
+  <%= render("shared/check_answers/restrictions", read_only:) if @legal_aid_application.own_capital? %>
 
   <section class="print-no-break">
     <% if @legal_aid_application.policy_disregards.present? %>
       <%= check_answer_one_change_link(
             name: :policy_disregards,
             url: check_answer_url_for(journey_type, :policy_disregards, @legal_aid_application),
-            question: t('.assets.policy_disregards'),
+            question: t(".assets.policy_disregards"),
             answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
-            read_only: read_only
+            read_only:,
           ) %>
     <% end %>
   </section>

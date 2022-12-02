@@ -1,34 +1,35 @@
 <div class="govuk-grid-row" id="app-check-your-answers__housing_benefit">
   <div class="govuk-grid-column-two-thirds">
-    <h3 class="govuk-heading-m"><%= t('.heading') %></h3>
+    <h3 class="govuk-heading-m"><%= t(".heading") %></h3>
   </div>
   <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
     <% unless read_only %>
       <p>
         <%= link_to_accessible(
-              t('generic.change'),
+              t("generic.change"),
               providers_legal_aid_application_means_housing_benefits_path(@legal_aid_application),
-              class: 'govuk-link change-link',
-              suffix: t('.heading')) %>
+              class: "govuk-link change-link",
+              suffix: t(".heading"),
+            ) %>
       </p>
     <% end %>
   </div>
 </div>
 
-<dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= t('.heading').parameterize %>">
+<dl class="govuk-summary-list govuk-!-margin-bottom-9" data-check-your-answers-section="<%= t(".heading").parameterize %>">
   <%= check_answer_no_link(
         name: :housing_benefit_question,
-        question: t('.does_your_client'),
+        question: t(".does_your_client"),
         answer: yes_no(@legal_aid_application.applicant_in_receipt_of_housing_benefit?),
         read_only: false,
-        ) %>
+      ) %>
 
   <% housing_benefit_type = TransactionType.find_by(name: "housing_benefit") %>
 
   <%= check_answer_for_regular_transactions(
         name: housing_benefit_type.label_name,
-        question: t('generic.amount'),
+        question: t("generic.amount"),
         legal_aid_application: @legal_aid_application,
-        transaction_type: housing_benefit_type
+        transaction_type: housing_benefit_type,
       ) %>
 </dl>
