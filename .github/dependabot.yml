@@ -13,10 +13,6 @@ updates:
   - dependency-name: prometheus_exporter
     versions:
     - "> 0.4.17"
-  - dependency-name: sprockets
-    versions:
-    - ">= 4.0.a"
-    - "< 4.1"
   reviewers:
   - "ministryofjustice/laa-apply-for-legal-aid"
 - package-ecosystem: npm
