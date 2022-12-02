@@ -281,7 +281,11 @@ class LegalAidApplication < ApplicationRecord
   alias_method :passported?, :applicant_receives_benefit?
 
   def non_passported?
-    !passported?
+    !passported? && !non_means_tested?
+  end
+
+  def non_means_tested?
+    applicant&.no_means_test_required?
   end
 
   def benefit_check_result_needs_updating?

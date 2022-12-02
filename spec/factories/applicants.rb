@@ -38,6 +38,22 @@ FactoryBot.define do
       armed_forces { true }
     end
 
+    trait :under_18 do
+      date_of_birth { 18.years.ago + 1.day }
+    end
+
+    trait :under_18_for_means_test_purposes do
+      age_for_means_test_purposes { 17 }
+    end
+
+    trait :under_18_as_of do
+      transient do
+        as_of { Date.current }
+      end
+
+      date_of_birth { 18.years.ago(as_of) + 1.day }
+    end
+
     trait :with_true_layer_tokens do
       after(:build) do |applicant|
         applicant.store_true_layer_token(

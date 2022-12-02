@@ -204,3 +204,28 @@ Feature: Review and print your application
     And I should not see "Childcare payments"
     And I should not see "Maintenance payments to a former partner"
     And I should not see "Payments towards legal aid in a criminal case"
+
+  Scenario: For a non-means tested journey
+    Given the feature flag for means_test_review_phase_one is enabled
+    Given I have completed a non-means tested journey with merits
+    When I view the review and print your application page
+
+    Then the following sections should exist:
+      | tag | section |
+      | h2  | Client details |
+      | h2  | What you're applying for |
+      | h2  | Delegated functions |
+      | h2  | Covered under a substantive certificate |
+      | h2  | Covered under a substantive certificate |
+      | h2  | Income, regular payments and assets |
+      | h1  | Print your application |
+
+    And I should see 'NON MEANS TESTED'
+
+    Then the following sections should not exist:
+      | tag | section |
+      | h3  | Income |
+      | h3  | Regular payments |
+      | h2  | Your client's capital |
+
+

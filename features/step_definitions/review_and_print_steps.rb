@@ -176,6 +176,23 @@ Given("I have completed a passported application with merits") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have completed a non-means tested journey with merits") do
+  @legal_aid_application = create(
+    :legal_aid_application,
+    :with_proceedings,
+    :with_under_18_applicant,
+    :with_non_means_tested_state_machine,
+    :with_merits_statement_of_case,
+    :with_opponent,
+    :with_incident,
+    :with_chances_of_success,
+  )
+
+  create :legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application
+
+  login_as @legal_aid_application.provider
+end
+
 When("I view the review and print your application page") do
   visit(providers_legal_aid_application_review_and_print_application_path(@legal_aid_application))
 end

@@ -115,6 +115,56 @@ RSpec.describe Applicant do
     end
   end
 
+  describe "#no_means_test_required?" do
+    subject { applicant.no_means_test_required? }
+
+    let(:applicant) { build(:applicant) }
+
+    context "when means_test_review_phase_one? is enabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(true) }
+
+      context "with age_for_means_test_purposes of 17" do
+        before { applicant.age_for_means_test_purposes = 17 }
+
+        it { is_expected.to be true }
+      end
+
+      context "with age_for_means_test_purposes of 18" do
+        before { applicant.age_for_means_test_purposes = 18 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of nil" do
+        before { applicant.age_for_means_test_purposes = nil }
+
+        it { is_expected.to be false }
+      end
+    end
+
+    context "when means_test_review_phase_one? is disabled" do
+      before { allow(Setting).to receive(:means_test_review_phase_one?).and_return(false) }
+
+      context "with age_for_means_test_purposes of 17" do
+        before { applicant.age_for_means_test_purposes = 17 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of 18" do
+        before { applicant.age_for_means_test_purposes = 18 }
+
+        it { is_expected.to be false }
+      end
+
+      context "with age_for_means_test_purposes of nil" do
+        before { applicant.age_for_means_test_purposes = nil }
+
+        it { is_expected.to be false }
+      end
+    end
+  end
+
   describe "#receives_financial_support?" do
     subject { legal_aid_application.applicant.receives_financial_support? }
 

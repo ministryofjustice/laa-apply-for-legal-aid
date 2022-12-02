@@ -2,13 +2,14 @@ module Providers
   class CheckBenefitsController < ProviderBaseController
     include PreDWPCheckVisible
     include ApplicantDetailsCheckable
+    include BenefitCheckSkippable
 
     helper_method :should_use_ccms?
 
     def index
       details_checked! unless details_checked? || legal_aid_application.non_passported?
       @applicant = legal_aid_application.applicant
-      return set_negative_result_and_go_forward if known_issue_prevents_benefit_check?
+      return skip_benefit_check_and_go_forward! if known_issue_prevents_benefit_check?
 
       check_benefits && return if legal_aid_application.benefit_check_result_needs_updating?
 
@@ -33,8 +34,8 @@ module Providers
       applicant.last_name.length == 1
     end
 
-    def set_negative_result_and_go_forward
-      legal_aid_application.create_benefit_check_result!(result: "skipped:known_issue")
+    def skip_benefit_check_and_go_forward!
+      mark_as_benefit_check_skipped!("known_issue")
       go_forward
     end
   end

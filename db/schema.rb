@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_22_083958) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_150745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_083958) do
     t.boolean "self_employed", default: false
     t.boolean "armed_forces", default: false
     t.boolean "has_national_insurance_number"
+    t.integer "age_for_means_test_purposes"
     t.index ["confirmation_token"], name: "index_applicants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_applicants_on_email"
     t.index ["unlock_token"], name: "index_applicants_on_unlock_token", unique: true

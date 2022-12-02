@@ -1,0 +1,18 @@
+<div class="interruption-panel">
+  <%= page_template(page_title: t(".tab_title"), column_width: :full, template: :basic) do %>
+    <h1 class="govuk-heading-m govuk-!-padding-bottom-4">
+      <% if @legal_aid_application.used_delegated_functions? %>
+        <%= t(".title.under_18_when_delegated_functions_used") %>
+      <% else %>
+        <%= t(".title.under_18_now") %>
+      <% end %>
+    </h1>
+
+    <%= next_action_buttons_with_form(
+          url: providers_legal_aid_application_confirm_non_means_tested_applications_path,
+          method: :patch,
+          show_draft: true,
+          continue_button_text: t('generic.continue')
+        ) %>
+  <% end %>
+</div>

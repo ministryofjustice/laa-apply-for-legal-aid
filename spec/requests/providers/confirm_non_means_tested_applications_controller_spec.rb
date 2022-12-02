@@ -1,0 +1,147 @@
+require "rails_helper"
+
+RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
+  let(:application_id) { application.id }
+  let(:applicant) { build(:applicant, :under_18_for_means_test_purposes) }
+
+  before do
+    allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
+  end
+
+  describe "GET /providers/applications/:legal_aid_application_id/confirm_non_means_tested_applications" do
+    subject(:request) { get "/providers/applications/#{application_id}/confirm_non_means_tested_applications" }
+
+    let(:application) do
+      create(:legal_aid_application,
+             :with_proceedings,
+             :with_applicant_and_address,
+             :at_checking_applicant_details,
+             applicant:)
+    end
+
+    context "when the provider is not authenticated" do
+      before { request }
+
+      it_behaves_like "a provider not authenticated"
+    end
+
+    context "when the provider is authenticated" do
+      before do
+        login_as application.provider
+      end
+
+      context "without delegated functions" do
+        it "updates application state and renders template successfully with expected content", :aggregate_failures do
+          expect { request }
+            .to change { application.reload.state }
+            .from("checking_applicant_details")
+            .to("applicant_details_checked")
+
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template("providers/confirm_non_means_tested_applications/show")
+          expect(page).to have_content("You do not need to do a means test as your client is under 18")
+        end
+      end
+
+      context "with delegated functions" do
+        before do
+          application.proceedings
+            .first
+            .update!(used_delegated_functions: true,
+                     used_delegated_functions_on: Date.current,
+                     used_delegated_functions_reported_on: Date.current)
+        end
+
+        it "updates application state and renders template successfully with expected content", :aggregate_failures do
+          expect { request }
+            .to change { application.reload.state }
+            .from("checking_applicant_details")
+            .to("applicant_details_checked")
+
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template("providers/confirm_non_means_tested_applications/show")
+          expect(page).to have_content("You do not need to do a means test as your client was under 18 when you first used delegated functions on this case")
+        end
+      end
+    end
+
+    describe "back link" do
+      let(:page) { providers_legal_aid_application_check_provider_answers_path(application) }
+
+      before do
+        login_as application.provider
+        get page
+        request
+      end
+
+      it "takes you back to check your answers page" do
+        expect(response.body).to have_back_link("#{page}&back=true")
+      end
+    end
+  end
+
+  describe "PATCH /providers/applications/:legal_aid_application_id/confirm_non_means_tested_applications" do
+    subject(:request) { patch "/providers/applications/#{application_id}/confirm_non_means_tested_applications", params: }
+
+    let(:application) do
+      create(:legal_aid_application,
+             :with_proceedings,
+             :with_applicant_and_address,
+             :at_applicant_details_checked,
+             applicant:)
+    end
+
+    context "when submitting with Continue button" do
+      let(:params) do
+        {
+          continue_button: "Continue",
+        }
+      end
+
+      before do
+        login_as application.provider
+        allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
+      end
+
+      it "creates a skipped benefit check result" do
+        expect { request }
+          .to change { application.reload.benefit_check_result&.result }
+          .from(nil)
+          .to("skipped:no_means_test_required")
+      end
+
+      it "creates a no assessment cfe result" do
+        expect { request }
+          .to change { application.reload.cfe_result&.income_assessment_result }
+          .from(nil)
+          .to("no_assessment")
+      end
+
+      it "updates application statre and redirects to the merits task list", :aggregate_failures do
+        expect { request }.to change { application.reload.state }.from("applicant_details_checked").to("provider_entering_merits")
+        expect(response).to redirect_to(providers_legal_aid_application_merits_task_list_path(application))
+      end
+    end
+
+    context "when submitting with Save As Draft button" do
+      let(:params) do
+        {
+          draft_button: "Save as draft",
+        }
+      end
+
+      before do
+        login_as application.provider
+      end
+
+      it "sets draft status and redirects provider to provider's applications page", :aggregate_failures do
+        expect { request }.to change { application.reload.draft? }.from(false).to(true)
+        expect(response).to redirect_to(providers_legal_aid_applications_path)
+      end
+
+      it "leaves application in \"applicant_details_checked\" state" do
+        expect { request }.not_to change { application.reload.state }.from("applicant_details_checked")
+      end
+    end
+  end
+end
