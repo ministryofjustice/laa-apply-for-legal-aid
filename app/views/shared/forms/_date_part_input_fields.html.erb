@@ -1,13 +1,11 @@
-<%
-  field_error_class = form.object.errors[field_name].present? || form.object.errors[parent_field].present? ? 'govuk-input--error' : ''
-  width = /_year\z/.match?(field_name.to_s) ? '4' : '2'
-  use_parent_as_id = false unless local_assigns[:use_parent_as_id]
-  input_id = use_parent_as_id ? parent_field : field_name
-%>
+<% field_error_class = form.object.errors[field_name].present? || form.object.errors[parent_field].present? ? "govuk-input--error" : "" %>
+<% width = field_name.to_s.end_with?("_year") ? "4" : "2" %>
+<% use_parent_as_id = false unless local_assigns[:use_parent_as_id] %>
+<% input_id = use_parent_as_id ? parent_field : field_name %>
 
 <div class="govuk-date-input__item">
   <div class="govuk-form-group">
-    <%= form.label field_name, class: ['govuk-date-input__label govuk-label'], for: input_id %>
+    <%= form.label field_name, class: ["govuk-date-input__label govuk-label"], for: input_id %>
     <%= form.text_field field_name, id: input_id, class: ["govuk-input govuk-date-input__input govuk-input--width-#{width} #{field_error_class}"], inputmode: "numeric" %>
   </div>
 </div>
