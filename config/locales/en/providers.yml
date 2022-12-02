@@ -255,7 +255,7 @@ en:
     confirm_non_means_tested_applications:
       show:
         title:
-          under_18_now: No means test required as client is under 18
+          under_18_now: You do not need to do a means test as your client is under 18
           under_18_when_delegated_functions_used: |
             You do not need to do a means test as your client was under 18
             when you first used delegated functions on this case

@@ -49,7 +49,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click 'Save and continue'
     Then I should be on a page with title "No means test required"
-    And I should be on a page showing "No means test required as client is under 18"
+    And I should be on a page showing "You do not need to do a means test as your client is under 18"
 
     When I click 'Continue'
     Then I should be on a page with title "Provide details of the case"

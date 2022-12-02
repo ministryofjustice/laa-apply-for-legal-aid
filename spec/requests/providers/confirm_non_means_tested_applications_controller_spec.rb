@@ -39,7 +39,7 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
           expect(response).to have_http_status(:success)
           expect(response).to render_template("providers/confirm_non_means_tested_applications/show")
-          expect(page).to have_content("No means test required as client is under 18")
+          expect(page).to have_content("You do not need to do a means test as your client is under 18")
         end
       end
 
