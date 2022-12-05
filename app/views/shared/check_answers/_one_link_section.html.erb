@@ -1,13 +1,13 @@
-<% read_only = local_assigns[:read_only] ? read_only : false %>
+<% read_only = false unless local_assigns[:read_only] %>
 
-<div class="govuk-grid-row" id="app-check-your-answers__<%= name %><%= answer_hash.present? ? '' : '_header' %>">
+<div class="govuk-grid-row" id="app-check-your-answers__<%= name %><%= answer_hash.present? ? "" : "_header" %>">
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m"><%= question %></h2>
   </div>
   <% if answer_hash.present? && !read_only %>
     <div class="govuk-grid-column-one-third govuk-summary-list--no-border align-text-right">
       <p>
-        <%= link_to_accessible(t('generic.change'), url, class: 'govuk-link change-link', suffix: question) %>
+        <%= link_to_accessible(t("generic.change"), url, class: "govuk-link change-link", suffix: question) %>
       </p>
     </div>
   <% end %>
@@ -21,17 +21,17 @@
               name: item.name || "#{name}_#{index}",
               question: item.label,
               answer: safe_yes_or_no(item.amount_text),
-              read_only: read_only
+              read_only:,
             ) %>
       <% end %>
 
   <% else %>
     <%= check_answer_link(
-          name: name,
-          url: url,
-          question: question,
-          answer: t('generic.none_declared'),
-          read_only: read_only
+          name:,
+          url:,
+          question:,
+          answer: t("generic.none_declared"),
+          read_only:,
         ) %>
   <% end %>
 </dl>

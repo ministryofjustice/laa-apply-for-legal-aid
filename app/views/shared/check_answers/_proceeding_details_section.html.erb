@@ -2,35 +2,35 @@
 <h2 class="govuk-heading-m"><%= proceeding.meaning %></h2>
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
   <%= check_answer_no_link(
-    name: :client_role,
-    question: t('.client_role'),
-    answer: proceeding.client_involvement_type_description
-  ) %>
+        name: :client_role,
+        question: t(".client_role"),
+        answer: proceeding.client_involvement_type_description,
+      ) %>
   <% if proceeding.used_delegated_functions %>
     <%= check_answer_no_link(
-      name: :delegated_functions_date,
-      question: t('.delegated_functions'),
-      answer: proceeding.used_delegated_functions_on&.strftime('%-d %B %Y')
-    ) %>
+          name: :delegated_functions_date,
+          question: t(".delegated_functions"),
+          answer: proceeding.used_delegated_functions_on&.strftime("%-d %B %Y"),
+        ) %>
     <%= check_answer_no_link(
-      name: :emergency_level_of_service,
-      question: t('.emergency_level_of_service'),
-      answer: proceeding.emergency_level_of_service_name
-    ) %>
+          name: :emergency_level_of_service,
+          question: t(".emergency_level_of_service"),
+          answer: proceeding.emergency_level_of_service_name,
+        ) %>
     <%= check_answer_no_link(
-      name: :emergency_scope_limits,
-      question: t('.emergency_scope_limits'),
-      answer: scope_limits(proceeding, "emergency")
-    ) %>
+          name: :emergency_scope_limits,
+          question: t(".emergency_scope_limits"),
+          answer: scope_limits(proceeding, "emergency"),
+        ) %>
   <% end %>
   <%= check_answer_no_link(
-    name: :substantive_level_of_service,
-    question: t('.substantive_level_of_service'),
-    answer: proceeding.substantive_level_of_service_name
-  ) %>
+        name: :substantive_level_of_service,
+        question: t(".substantive_level_of_service"),
+        answer: proceeding.substantive_level_of_service_name,
+      ) %>
   <%= check_answer_no_link(
-    name: :substantive_scope_limits,
-    question: t('.substantive_scope_limits'),
-    answer: scope_limits(proceeding, "substantive")
-  ) %>
+        name: :substantive_scope_limits,
+        question: t(".substantive_scope_limits"),
+        answer: scope_limits(proceeding, "substantive"),
+      ) %>
 </dl>

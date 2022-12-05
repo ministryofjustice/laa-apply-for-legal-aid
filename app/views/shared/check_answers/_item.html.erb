@@ -1,7 +1,5 @@
-<%
-  read_only = local_assigns[:read_only] ? read_only : false
-  no_border = no_border ? 'govuk-summary-list__row--no-border' : ''
-%>
+<% read_only = false unless local_assigns[:read_only] %>
+<% no_border = no_border ? "govuk-summary-list__row--no-border" : "" %>
 
 <div class="govuk-summary-list__row <%= no_border %> normal-word-break" id="app-check-your-answers__<%= name %>">
   <dt class="govuk-summary-list__key govuk-!-width-one-half">
@@ -28,7 +26,7 @@
   <% unless read_only %>
     <dd class="govuk-summary-list__actions">
       <% unless url == :show_blank_action %>
-        <%= link_to_accessible(t('generic.change'), url, class: 'govuk-link change-link', suffix: question) %>
+        <%= link_to_accessible(t("generic.change"), url, class: "govuk-link change-link", suffix: question) %>
       <% end %>
     </dd>
   <% end %>

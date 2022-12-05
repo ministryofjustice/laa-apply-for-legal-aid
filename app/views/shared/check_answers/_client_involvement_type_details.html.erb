@@ -2,7 +2,7 @@
 <%= check_answer_link(
       name: :"#{proceeding.name}_client_involvement_type",
       url: providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
-      question: t('.question'),
+      question: t(".question"),
       answer: proceeding.client_involvement_type_description,
-      read_only: read_only
+      read_only:,
     ) %>

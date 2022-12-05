@@ -4,5 +4,5 @@
       # url: send("providers_legal_aid_application_#{level_of_service}_level_of_service_path", @legal_aid_application, proceeding),
       question: t(".#{level_of_service}.question"),
       answer: proceeding.send("#{level_of_service}_level_of_service_name"),
-      read_only: read_only
+      read_only:,
     ) %>
