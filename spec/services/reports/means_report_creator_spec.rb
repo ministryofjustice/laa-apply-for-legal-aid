@@ -51,19 +51,9 @@ RSpec.describe Reports::MeansReportCreator do
         it_behaves_like "successful means_report creator"
       end
 
-      context "with a non-passported bank statement upload application" do
+      context "with non-passported bank statement upload application" do
         before do
           allow(legal_aid_application).to receive(:non_passported?).and_return(true)
-          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
-          allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(false)
-        end
-
-        it_behaves_like "successful means_report creator"
-      end
-
-      context "with non-passported enhanced bank statement upload application" do
-        before do
-          allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
           allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true)
           allow(legal_aid_application).to receive(:using_enhanced_bank_upload?).and_return(true)
         end

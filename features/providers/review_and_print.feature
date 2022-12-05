@@ -43,9 +43,8 @@ Feature: Review and print your application
       | h3  | Income |
       | h3  | Regular payments |
 
-  Scenario: For a non-passported enhanced bank statement upload journey
-    Given the feature flag for enhanced_bank_upload is enabled
-    And I have completed an enhanced bank statement upload application with merits
+  Scenario: For a non-passported bank statement upload journey
+    Given I have completed a bank statement upload application with merits
     When I view the review and print your application page
 
     Then the following sections should exist:

@@ -49,7 +49,7 @@ module CFE
         end
       end
 
-      context "when the application is non-passported with enhanced bank statement upload enabled" do
+      context "when the application is non-passported with bank statement upload" do
         let(:application) do
           create(:legal_aid_application,
                  :with_everything,
@@ -60,10 +60,6 @@ module CFE
                  vehicle:,
                  provider: build(:provider, :with_bank_statement_upload_permissions),
                  attachments: [build(:attachment, :bank_statement)])
-        end
-
-        before do
-          allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
         end
 
         it "completes process" do
@@ -200,10 +196,6 @@ module CFE
                  :applicant_entering_means,
                  provider: build(:provider, :with_bank_statement_upload_permissions),
                  attachments: [build(:attachment, :bank_statement)])
-        end
-
-        before do
-          allow(Setting).to receive(:enhanced_bank_upload?).and_return(true)
         end
 
         it "creates a submission record for the application" do

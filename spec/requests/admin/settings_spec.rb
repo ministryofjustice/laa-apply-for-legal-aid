@@ -42,7 +42,6 @@ RSpec.describe Admin::SettingsController do
           enable_ccms_submission: "true",
           enable_mini_loop: "true",
           enable_loop: "true",
-          enhanced_bank_upload: "true",
           means_test_review_phase_one: "true",
         },
       }
@@ -59,7 +58,6 @@ RSpec.describe Admin::SettingsController do
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.enable_mini_loop?).to be(true)
       expect(setting.enable_loop?).to be(true)
-      expect(setting.enhanced_bank_upload?).to be(true)
       expect(setting.means_test_review_phase_one?).to be(true)
     end
 

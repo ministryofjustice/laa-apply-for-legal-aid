@@ -24,7 +24,6 @@ module Providers
     #
     def cfe_call_required?
       return false if draft_selected? || legal_aid_application.provider_entering_merits?
-      return false if legal_aid_application.uploading_bank_statements? && !legal_aid_application.using_enhanced_bank_upload?
 
       true
     end

@@ -120,7 +120,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         end
       end
 
-      context "when enhanced bank upload journey is enabled" do
+      context "when the provider has bank statement upload permissions" do
         let(:legal_aid_application) { create(:legal_aid_application, provider_received_citizen_consent: false) }
 
         let(:next_page) do
@@ -128,7 +128,6 @@ RSpec.describe Providers::Means::StudentFinancesController do
         end
 
         before do
-          Setting.setting.update!(enhanced_bank_upload: true)
           permission = create(:permission, :bank_statement_upload)
           provider.permissions << permission
           provider.save!
@@ -143,13 +142,9 @@ RSpec.describe Providers::Means::StudentFinancesController do
         end
       end
 
-      context "when enhanced bank upload journey is disabled" do
+      context "when the provider does not have bank statement upload permissions" do
         let(:next_page) do
           providers_legal_aid_application_means_identify_types_of_outgoing_path(legal_aid_application)
-        end
-
-        before do
-          Setting.setting.update!(enhanced_bank_upload: false)
         end
 
         it "redirects to the identify types of outgoings page" do

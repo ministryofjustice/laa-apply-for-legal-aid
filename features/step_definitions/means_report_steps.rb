@@ -2,32 +2,6 @@ Given("I have completed a non-passported employed application with bank statemen
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,
-    :with_everything,
-    :with_dependant,
-    :with_cfe_empty_result,
-    :with_extra_employment_information,
-    :with_full_employment_information,
-    :with_fixed_benefits_cash_transactions,
-    :with_fixed_rent_or_mortage_cash_transactions,
-    :with_chances_of_success,
-    :assessment_submitted,
-    provider_received_citizen_consent: false,
-    attachments: [build(:attachment, :bank_statement)],
-    explicit_proceedings: %i[da002 da006],
-    set_lead_proceeding: :da002,
-  )
-
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
-  @legal_aid_application.provider.save!
-
-  login_as @legal_aid_application.provider
-end
-
-Given("I have completed a non-passported employed application with enhanced bank statement uploads") do
-  @legal_aid_application = create(
-    :legal_aid_application,
-    :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
     :with_vehicle,

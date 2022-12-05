@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Providers::Means::HousingBenefitsController do
-  before { Setting.setting.update!(enhanced_bank_upload: true) }
-
   describe "GET /providers/applications/:legal_aid_application_id/means/housing_benefits" do
     it "returns ok" do
       _housing_benefit = create(:transaction_type, :housing_benefit)
@@ -51,19 +49,6 @@ RSpec.describe Providers::Means::HousingBenefitsController do
           "providers_means_housing_benefit_form[housing_benefit_frequency]",
           with: housing_benefit.frequency,
         )
-      end
-    end
-
-    context "when the enhanced_bank_upload setting is not enabled" do
-      it "redirects to the next page" do
-        Setting.setting.update!(enhanced_bank_upload: false)
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        get providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
-
-        expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
       end
     end
 
@@ -136,19 +121,6 @@ RSpec.describe Providers::Means::HousingBenefitsController do
         expect(response).to have_http_status(:unprocessable_entity)
         expect(page).to have_css("p", class: "govuk-error-message", text: "Select yes if your client receives Housing Benefit")
         expect(legal_aid_application.reload.applicant_in_receipt_of_housing_benefit).to be_nil
-      end
-    end
-
-    context "when the enhanced_bank_upload setting is not enabled" do
-      it "redirects to the next page" do
-        Setting.setting.update!(enhanced_bank_upload: false)
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        patch providers_legal_aid_application_means_housing_benefits_path(legal_aid_application)
-
-        expect(response).to redirect_to(providers_legal_aid_application_means_cash_outgoing_path(legal_aid_application))
       end
     end
 

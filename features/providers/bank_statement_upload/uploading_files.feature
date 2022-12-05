@@ -1,9 +1,9 @@
 @javascript @clamav
-Feature: Bank statement upload
+Feature: Bank statement file upload
 
   Scenario: Uploading a file
     Given csrf is enabled
-    And I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled
+    And I have completed a non-passported employed application with bank statements as far as the open banking consent page
     And I should be on a page showing "Does your client use online banking?"
 
     When I choose 'No'
@@ -41,9 +41,8 @@ Feature: Bank statement upload
     Then I should be on a page with title "Applications"
 
   Scenario: Deleting a file
-
     Given csrf is enabled
-    And I have completed a non-passported employed application and reached the open banking consent with bank statement upload enabled
+    And I have completed a non-passported employed application with bank statements as far as the open banking consent page
     And I should be on a page showing "Does your client use online banking?"
 
     When I choose 'No'

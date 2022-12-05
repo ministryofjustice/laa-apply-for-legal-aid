@@ -1,9 +1,8 @@
-Feature: Enhanced bank upload check your answers
+Feature: Bank statement upload check your answers
   @javascript
-  Scenario: I am able to view and amend provider means answers for enhanced bank upload flow for an employed applicant
+  Scenario: I can view and change answers to means questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
-    And the feature flag for enhanced_bank_upload is enabled
-    And I have completed a non-passported employed application with enhanced bank upload as far as the end of the means section
+    And I have completed a non-passported employed application with bank statements as far as the end of the means section
     Then I should be on the "means_summary" page showing "Check your answers"
 
     And the following sections should exist:
@@ -137,10 +136,9 @@ Feature: Enhanced bank upload check your answers
     Then I should be on the "means_summary" page showing "Check your answers"
 
   @javascript
-  Scenario: On the enhanced bank upload journey, the provider has employment permissions but the applicant is unemployed
+  Scenario: On the bank upload journey, the provider has employment permissions but the applicant is unemployed
     Given csrf is enabled
-    And the feature flag for enhanced_bank_upload is enabled
-    And I have completed a non-passported non-employed application with enhanced bank upload as far as the end of the means section
+    And I have completed a non-passported non-employed application with bank statements as far as the end of the means section
     Then I should be on the "means_summary" page showing "Check your answers"
     And I should not see 'Employment income'
     And the following sections should exist:
@@ -160,5 +158,3 @@ Feature: Enhanced bank upload check your answers
       | h2  | Which assets does your client have? |
       | h2  | Restrictions on your client's assets |
       | h2  | Payments from scheme or charities |
-
-

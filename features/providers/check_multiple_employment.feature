@@ -170,4 +170,3 @@ Feature: Check multiple employment
 
     When I click 'Continue'
     Then I should be on a page showing "HMRC found a record of your client's employment"
-
