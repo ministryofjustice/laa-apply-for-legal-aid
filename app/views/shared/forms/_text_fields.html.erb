@@ -1,17 +1,17 @@
-<% field_with_error = local_assigns[:field_with_error] ? field_with_error : field_name %>
-<% group_error_class = form.object.errors[field_with_error].any? ? 'govuk-form-group--error' : '' %>
+<% field_with_error = field_name unless local_assigns[:field_with_error] %>
+<% group_error_class = form.object.errors[field_with_error].any? ? "govuk-form-group--error" : "" %>
 
-<% custom_classes = local_assigns[:class].nil? ? '' : local_assigns[:class] %>
+<% custom_classes = local_assigns[:class].nil? ? "" : local_assigns[:class] %>
 
 <div class="govuk-form-group <%= group_error_class %>">
-  <%= form.label field_name, class: ['govuk-label'] %>
-  <% hint = t(".#{field_name}_hint", default: '') %>
+  <%= form.label field_name, class: %w[govuk-label] %>
+  <% hint = t(".#{field_name}_hint", default: "") %>
   <% if !local_assigns[:hide_hint?] && hint.present? %>
-    <%= content_tag(:div, hint, id: "#{field_name}-hint".dasherize, class: ['govuk-hint']) %>
+    <%= content_tag(:div, hint, id: "#{field_name}-hint".dasherize, class: %w[govuk-hint]) %>
   <% end %>
   <% if form.object.errors[field_with_error].any? %>
-    <%= content_tag(:p, form.object.errors[field_name].first, class: ['govuk-error-message']) %>
+    <%= content_tag(:p, form.object.errors[field_name].first, class: %w[govuk-error-message]) %>
   <% end %>
-  <% input_error_class = form.object.errors[field_with_error].any? ? 'govuk-input--error' : '' %>
+  <% input_error_class = form.object.errors[field_with_error].any? ? "govuk-input--error" : "" %>
   <%= form.text_field field_name, id: field_name, class: "govuk-input #{custom_classes} #{input_error_class}" %>
 </div>

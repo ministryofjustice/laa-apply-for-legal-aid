@@ -1,9 +1,9 @@
-<% attribute_prefix = local_assigns[:attribute_prefix] ? attribute_prefix : '' %>
+<% attribute_prefix = "" unless local_assigns[:attribute_prefix] %>
 <% if model.errors.any? %>
   <div class="govuk-error-summary" tabindex="-1" data-module="govuk-error-summary">
     <div role="alert">
       <h2 class="govuk-error-summary__title">
-        <%= t('generic.errors.problem_text') %>
+        <%= t("generic.errors.problem_text") %>
       </h2>
       <div class="govuk-error-summary__body">
         <ul class="govuk-list govuk-error-summary__list">
