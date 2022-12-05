@@ -442,6 +442,7 @@ Given("I have started an application with multiple proceedings and reached the c
     :at_checking_applicant_details,
     :with_delegated_functions_on_proceedings,
     explicit_proceedings: %i[da001 se013],
+    set_lead_proceeding: :da001,
     df_options: { DA001: [10.days.ago, 10.days.ago], SE013: nil },
     substantive_application_deadline_on: 10.days.from_now,
   )
