@@ -23,7 +23,13 @@ module Flow
 
       if application_before_loop? || application_inside_proceeding_loop? || date_confirmation_required?
         case @application.provider_step
-        when "has_other_proceedings", "substantive_scope_limitations"
+        when "has_other_proceedings"
+          if @application.checking_answers? && next_incomplete_proceeding.nil?
+            :limitations
+          else
+            :client_involvement_type
+          end
+        when "substantive_scope_limitations"
           if @application.checking_answers?
             :limitations
           else
@@ -32,10 +38,10 @@ module Flow
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
-          if Setting.enable_loop?
-            current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
-          elsif @application.checking_answers?
+          if !Setting.enable_loop? && @application.checking_answers?
             :limitations
+          elsif Setting.enable_loop?
+            current_proceeding.used_delegated_functions? ? :emergency_defaults : :substantive_defaults
           else
             :client_involvement_type
           end
