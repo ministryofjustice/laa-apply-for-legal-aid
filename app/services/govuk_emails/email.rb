@@ -2,6 +2,8 @@ module GovukEmails
   class Email
     attr_reader :id
 
+    delegate :status, to: :response
+
     # states documentation:
     # https://docs.notifications.service.gov.uk/ruby.html#status-optional
     RESENDABLE_STATUS = %w[temporary-failure technical-failure].freeze
@@ -24,12 +26,10 @@ module GovukEmails
       status == PERMANENTLY_FAILED_STATUS
     end
 
-    delegate :status, to: :email
-
   private
 
-    def email
-      @email ||= govuk_notify_client.get_notification(id)
+    def response
+      @response ||= govuk_notify_client.get_notification(id)
     end
 
     def govuk_notify_client

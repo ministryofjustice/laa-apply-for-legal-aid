@@ -13,27 +13,5 @@ RSpec.describe EmailMonitorJob do
       expect(GovukEmails::Monitor).to receive(:call).with(sending.id)
       described_class.new.perform
     end
-
-    context "with no subsequent job in queue" do
-      let(:job) { double "Job", perform_later: nil }
-
-      before { allow(GovukEmails::Monitor).to receive(:call).at_least(1) }
-
-      it "schedules another job" do
-        expect(JobQueue).to receive(:enqueued?).with(described_class).and_return(false)
-        expect(described_class).to receive(:set).with(wait: EmailMonitorJob::DEFAULT_DELAY).and_return(job)
-        described_class.new.perform
-      end
-    end
-
-    context "with subsequent monitor job already in queue" do
-      before { allow(GovukEmails::Monitor).to receive(:call).at_least(1) }
-
-      it "does not schedule another job" do
-        expect(JobQueue).to receive(:enqueued?).with(described_class).and_return(true)
-        expect(described_class).not_to receive(:set)
-        described_class.new.perform
-      end
-    end
   end
 end
