@@ -6,6 +6,6 @@ module CFE
     has_many :submission_histories, -> { order(created_at: :asc) }, inverse_of: :submission
     has_one :result, class_name: "BaseResult"
 
-    delegate :passported?, :non_passported?, :using_enhanced_bank_upload?, to: :legal_aid_application
+    delegate :passported?, :non_passported?, :uploading_bank_statements?, to: :legal_aid_application
   end
 end

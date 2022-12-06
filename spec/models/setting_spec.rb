@@ -57,7 +57,6 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.enable_mini_loop?).to be false
       expect(described_class.enable_loop?).to be false
-      expect(described_class.enhanced_bank_upload?).to be true
       expect(described_class.means_test_review_phase_one?).to be false
     end
   end

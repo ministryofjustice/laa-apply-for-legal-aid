@@ -18,7 +18,7 @@ module MeansReportHelper
 
   def deductions_detail_items(legal_aid_application)
     items = [TransactionTypeItem.new(:dependants_allowance, :dependants_allowance, "deductions", false)]
-    items.append(TransactionTypeItem.new(:disregarded_state_benefits, :disregarded_state_benefits, "deductions", true)) unless legal_aid_application.using_enhanced_bank_upload?
+    items.append(TransactionTypeItem.new(:disregarded_state_benefits, :disregarded_state_benefits, "deductions", true)) unless legal_aid_application.uploading_bank_statements?
     items
   end
 
@@ -45,6 +45,6 @@ private
   end
 
   def housing_payment_addendum(legal_aid_application)
-    t("shared.means_report.item.outgoing.housing_addendum") if legal_aid_application.using_enhanced_bank_upload?
+    t("shared.means_report.item.outgoing.housing_addendum") if legal_aid_application.uploading_bank_statements?
   end
 end

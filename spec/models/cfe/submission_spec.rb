@@ -5,5 +5,5 @@ RSpec.describe CFE::Submission do
 
   it { expect(instance).to delegate_method(:passported?).to(:legal_aid_application) }
   it { expect(instance).to delegate_method(:non_passported?).to(:legal_aid_application) }
-  it { expect(instance).to delegate_method(:using_enhanced_bank_upload?).to(:legal_aid_application) }
+  it { expect(instance).to delegate_method(:uploading_bank_statements?).to(:legal_aid_application) }
 end
