@@ -26,7 +26,7 @@ module GovukEmails
     end
 
     def send_undeliverable_alerts
-      return unless HostEnv.production?
+      # return unless HostEnv.production?
 
       AlertManager.capture_message("Unable to deliver mail to #{scheduled_mail.addressee} - ScheduledMailing record #{scheduled_mail.id}")
 
