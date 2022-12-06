@@ -1,108 +1,200 @@
 require "rails_helper"
 
 RSpec.describe GovukEmails::Monitor do
-  let(:scheduled_mailing) { create(:scheduled_mailing, :processing) }
-  let(:response) { double GovukEmails::Email, status: }
-
   before do
     allow(GovukEmails::Email).to receive(:new).with(scheduled_mailing.govuk_message_id).and_return(response)
     Setting.setting.update(alert_via_sentry: true)
   end
 
+  let(:response) { instance_double(GovukEmails::Email, status:) }
+
   describe ".call" do
-    subject { described_class.call(scheduled_mailing.id) }
+    subject(:call) { described_class.call(scheduled_mailing.id) }
 
-    context "non-failure response" do
-      let(:status) { "delivered" }
+    shared_examples "a status updater job only" do
+      it "does not capture an alert message" do
+        expect(AlertManager).not_to receive(:capture_message)
+        call
+      end
 
-      it "updates the scheduled_mailing record" do
-        subject
-        expect(scheduled_mailing.reload.status).to eq "delivered"
+      it "does not schedule an undeliverable alert email" do
+        expect { call }.not_to change(ScheduledMailing, :count)
+      end
+
+      it "does not enqueue a job to send email" do
+        ActiveJob::Base.queue_adapter = :test
+        expect { call }.not_to have_enqueued_job
       end
     end
 
-    context "failure response" do
-      let(:status) { ScheduledMailing::FAILURE_STATUSES.sample }
-      let(:addressee) { scheduled_mailing.addressee }
-      let(:id) { scheduled_mailing.id }
-      let(:raven_message) { "Unable to deliver mail to #{addressee} - ScheduledMailing record #{id}" }
+    context "when on production host" do
+      before { allow(HostEnv).to receive(:production?).and_return(true) }
 
-      it "updates the scheduled_mailing record" do
-        subject
-        expect(scheduled_mailing.reload.status).to eq status
-      end
+      context "with a provider financial reminder with a \"delivered\" response from govuk notify" do
+        let(:scheduled_mailing) { create(:scheduled_mailing, :provider_financial_reminder, :processing) }
+        let(:status) { "delivered" }
 
-      context "on production host" do
-        before { allow(HostEnv).to receive(:production?).and_return(true) }
+        it_behaves_like "a status updater job only"
 
-        it "captures raven message" do
-          expect(AlertManager).to receive(:capture_message).with(raven_message)
-          subject
-        end
-
-        it "schedules an undeliverable alert email" do
-          expect { subject }.to change(ScheduledMailing, :count).by(1)
-          undeliverable_alert_mail = ScheduledMailing.order(:created_at).last
-
-          expect(undeliverable_alert_mail.legal_aid_application_id).to eq scheduled_mailing.legal_aid_application_id
-          expect(undeliverable_alert_mail.mailer_klass).to eq "UndeliverableEmailAlertMailer"
-          expect(undeliverable_alert_mail.mailer_method).to eq "notify_apply_team"
-          expect(undeliverable_alert_mail.arguments).to eq [scheduled_mailing.id]
-          expect(undeliverable_alert_mail.scheduled_at).to have_been_in_the_past
-          expect(undeliverable_alert_mail.addressee).to eq Rails.configuration.x.support_email_address
+        it "updates the scheduled_mailing record" do
+          expect { call }.to change { scheduled_mailing.reload.status }.from("processing").to("delivered")
         end
       end
 
-      context "when the failed email is a citizen start email" do
-        let(:applicant) { create(:applicant, email: "johndoe@example.net") }
-        let(:provider) { create(:provider) }
-        let(:legal_aid_application) { create(:legal_aid_application, applicant:, provider:) }
+      context "with a provider financial reminder with a \"permanent-failure\" response from govuk notify" do
+        let(:scheduled_mailing) { create(:scheduled_mailing, :provider_financial_reminder, :processing) }
+
+        let(:status) { "permanent-failure" }
+        let(:addressee) { scheduled_mailing.addressee }
+        let(:id) { scheduled_mailing.id }
+
+        it "updates the scheduled_mailing record" do
+          expect { call }.to change { scheduled_mailing.reload.status }.from("processing").to("permanent-failure")
+        end
+
+        it "captures alert message" do
+          expect(AlertManager).to receive(:capture_message).with("Unable to deliver mail to #{addressee} - ScheduledMailing record #{id}")
+          call
+        end
+
+        it "creates 1 scheduled_mailing to send alert email to the apply team", :aggregate_failures do
+          expect { call }.to change(ScheduledMailing, :count).by(1)
+
+          undelivered_mailing = ScheduledMailing.find_by(mailer_klass: "UndeliverableEmailAlertMailer")
+
+          expect(undelivered_mailing)
+            .to have_attributes(
+              legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
+              mailer_klass: "UndeliverableEmailAlertMailer",
+              mailer_method: "notify_apply_team",
+              addressee: Rails.configuration.x.support_email_address,
+              arguments: [scheduled_mailing.id],
+            )
+
+          expect(undelivered_mailing.scheduled_at).to have_been_in_the_past
+        end
+
+        it "enqueues job to send email" do
+          ActiveJob::Base.queue_adapter = :test
+          expect { call }.to have_enqueued_job(ScheduledMailingsDeliveryJob)
+                              .on_queue("default")
+                              .at(:no_wait)
+        end
+      end
+
+      context "with a citizen start email with a \"permanent-failure\" response from govuk notify" do
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 applicant: build(:applicant, email: "johndoe@example.net"),
+                 provider: build(:provider, email: "johndoes-provider@example.net"))
+        end
+
+        let(:status) { "permanent-failure" }
+
         let(:scheduled_mailing) do
           create(:scheduled_mailing,
                  :citizen_start_email,
                  :processing,
-                 addressee: applicant.email,
-                 legal_aid_application_id: legal_aid_application.id)
+                 legal_aid_application_id: legal_aid_application.id,
+                 addressee: legal_aid_application.applicant.email)
         end
-        let(:mailer_args) do
+
+        let(:expected_provider_args) do
           [
-            provider.email,
+            legal_aid_application.provider.email,
             legal_aid_application.application_ref,
-            applicant.full_name,
-            applicant.email,
+            legal_aid_application.applicant.full_name,
+            legal_aid_application.applicant.email,
           ]
         end
 
-        before { allow(HostEnv).to receive(:production?).and_return(true) }
-
-        it "schedules an email to notify the provider of the failure" do
-          expect { subject }.to change(ScheduledMailing, :count).by(2)
+        it "marks the citizen start email mailing as cancelled" do
+          expect { call }.to change { scheduled_mailing.reload.status }.from("processing").to("cancelled")
         end
 
-        it "uses the undeliverable email alert mailer and the notify_provider method with the right args" do
-          subject
-          provider_alert_mail = ScheduledMailing.order(:created_at).last
+        context "when related scheduled reminder exists" do
+          let(:citizen_financial_reminder) do
+            create(:scheduled_mailing,
+                   :citizen_financial_reminder,
+                   :waiting,
+                   legal_aid_application_id: legal_aid_application.id,
+                   addressee: legal_aid_application.applicant.email,
+                   scheduled_at: 1.day.from_now)
+          end
 
-          expect(provider_alert_mail.legal_aid_application_id).to eq scheduled_mailing.legal_aid_application_id
-          expect(provider_alert_mail.mailer_klass).to eq "UndeliverableEmailAlertMailer"
-          expect(provider_alert_mail.mailer_method).to eq "notify_provider"
-          expect(provider_alert_mail.addressee).to eq provider.email
-          expect(provider_alert_mail.arguments).to eq mailer_args
-          expect(provider_alert_mail.scheduled_at).to have_been_in_the_past
+          before do
+            citizen_financial_reminder
+          end
+
+          it "marks the related reminder mailing as cancelled" do
+            expect { call }.to change { citizen_financial_reminder.reload.status }.from("waiting").to("cancelled")
+          end
+        end
+
+        it "captures alert message" do
+          expect(AlertManager).to receive(:capture_message).with("Unable to deliver mail to #{legal_aid_application.applicant.email} - ScheduledMailing record #{scheduled_mailing.id}")
+          call
+        end
+
+        it "creates 2 more scheduled_mailings to send alert emails to the provider and apply team", :aggregate_failures do
+          expect { call }.to change(ScheduledMailing, :count).by(2)
+
+          undelivered_mailings = ScheduledMailing.where(mailer_klass: "UndeliverableEmailAlertMailer")
+
+          expect(undelivered_mailings)
+            .to match_array([
+              have_attributes(
+                legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
+                mailer_klass: "UndeliverableEmailAlertMailer",
+                mailer_method: "notify_apply_team",
+                addressee: Rails.configuration.x.support_email_address,
+                arguments: [scheduled_mailing.id],
+              ),
+              have_attributes(
+                legal_aid_application_id: scheduled_mailing.legal_aid_application_id,
+                mailer_klass: "UndeliverableEmailAlertMailer",
+                mailer_method: "notify_provider",
+                addressee: legal_aid_application.provider.email,
+                arguments: expected_provider_args,
+              ),
+            ])
+
+          expect(undelivered_mailings.map(&:scheduled_at)).to all(have_been_in_the_past)
+        end
+
+        it "enqueues 2 jobs to send emails" do
+          ActiveJob::Base.queue_adapter = :test
+          expect { call }.to have_enqueued_job(ScheduledMailingsDeliveryJob)
+                              .on_queue("default")
+                              .at(:no_wait)
+                              .twice
         end
       end
+    end
 
-      context "not on production host" do
-        before { allow(HostEnv).to receive(:production?).and_return(false) }
+    context "when not on production host with a non-failure" do
+      before { allow(HostEnv).to receive(:production?).and_return(false) }
 
-        it "does not capture raven message" do
-          expect(AlertManager).not_to receive(:capture_message)
-          subject
-        end
+      let(:status) { "sending" }
+      let(:scheduled_mailing) { create(:scheduled_mailing, :citizen_start_email, :processing) }
 
-        it "does not schedule an undeliverable alert email" do
-          expect { subject }.not_to change(ScheduledMailing, :count)
-        end
+      it_behaves_like "a status updater job only"
+
+      it "updates the scheduled_mailing record" do
+        expect { call }.to change { scheduled_mailing.reload.status }.from("processing").to("sending")
+      end
+    end
+
+    context "when not on production host with a permanent-failure for a citizen start email" do
+      before { allow(HostEnv).to receive(:production?).and_return(false) }
+
+      let(:status) { "permanent-failure" }
+      let(:scheduled_mailing) { create(:scheduled_mailing, :citizen_start_email, :processing) }
+
+      it_behaves_like "a status updater job only"
+
+      it "updates the scheduled_mailing record" do
+        expect { call }.to change { scheduled_mailing.reload.status }.from("processing").to("permanent-failure")
       end
     end
   end
