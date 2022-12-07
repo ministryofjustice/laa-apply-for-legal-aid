@@ -102,8 +102,8 @@ RSpec.describe "FinalHearingsController" do
               ).reload
             end
 
-            it "redirects to check provider answers page" do
-              expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(application_id))
+            it "continues through the sub flow" do
+              expect(response.body).to redirect_to(providers_legal_aid_application_substantive_scope_limitation_path(application_id))
             end
           end
         end

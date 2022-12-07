@@ -1,31 +1,13 @@
 <% show_client_involvment_type = false unless local_assigns.key?(:show_client_involvment_type) %>
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-  <% if Setting.enable_loop? %>
-    <% @legal_aid_application.proceedings.in_order_of_addition.each do |proceeding| %>
-      <%= render(
-            "shared/check_answers/proceeding_details",
-            proceeding:,
-            read_only:,
-          ) %>
-    <% end %>
-  <% else %>
-    <% if show_client_involvment_type %>
-      <%= check_answer_link(
-            name: :proceeding_type,
-            question: t(".section_proceeding.client_involvement_type"),
-            answer: t(".section_proceeding.client_involvement_type_applicant"),
-          ) %>
-    <% end %>
-
-    <% @legal_aid_application.proceedings_by_name.each_with_index do |proceeding, i| %>
-      <%= check_answer_link(
-            name: :"#{proceeding.name}_proceeding",
-            url: :show_blank_action,
-            question: "#{t('.proceeding')} #{i + 1}",
-            answer: proceeding.meaning,
-            read_only:,
-          ) %>
-    <% end %>
-<% end %>
+  <% @legal_aid_application.proceedings_by_name.each_with_index do |proceeding, i| %>
+    <%= check_answer_link(
+          name: :"#{proceeding.name}_proceeding",
+          url: :show_blank_action,
+          question: "#{t('.proceeding')} #{i + 1}",
+          answer: proceeding.meaning,
+          read_only:,
+        ) %>
+  <% end %>
 </dl>

@@ -8,7 +8,7 @@ module Flow
             urls.providers_legal_aid_application_client_involvement_type_path(application, proceeding)
           end,
           forward: :delegated_functions,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of CIT affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         delegated_functions: {
@@ -17,7 +17,7 @@ module Flow
             urls.providers_legal_aid_application_delegated_function_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: lambda do |application|
             Flow::ProceedingLoop.next_step(application) == :confirm_delegated_functions_date ? :confirm_delegated_functions_date : :check_provider_answers
           end,
@@ -29,7 +29,7 @@ module Flow
             urls.providers_legal_aid_application_confirm_delegated_functions_date_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: lambda do |application|
             Flow::ProceedingLoop.next_step(application) == :delegated_functions ? :delegated_functions : :check_provider_answers
           end,
@@ -43,7 +43,7 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
           end,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         substantive_defaults: {
@@ -55,7 +55,7 @@ module Flow
             proceeding = Proceeding.find(application.provider_step_params["id"])
             proceeding.accepted_substantive_defaults ? Flow::ProceedingLoop.next_step(application) : :substantive_level_of_service
           end,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         emergency_level_of_service: {
@@ -70,7 +70,7 @@ module Flow
               :emergency_scope_limitations
             end
           end,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         substantive_level_of_service: {
@@ -85,7 +85,7 @@ module Flow
               :substantive_scope_limitations
             end
           end,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         final_hearings: {
@@ -96,7 +96,7 @@ module Flow
           forward: lambda do |_application, options|
             options[:work_type].to_sym == :substantive ? :substantive_scope_limitations : :emergency_scope_limitations
           end,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         emergency_scope_limitations: {
@@ -105,7 +105,7 @@ module Flow
             urls.providers_legal_aid_application_emergency_scope_limitation_path(application, proceeding)
           end,
           forward: :substantive_defaults,
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
         substantive_scope_limitations: {
@@ -114,7 +114,7 @@ module Flow
             urls.providers_legal_aid_application_substantive_scope_limitation_path(application, proceeding)
           end,
           forward: ->(application) { Flow::ProceedingLoop.next_step(application) },
-          carry_on_sub_flow: false, # TODO: This may need changing when the full loop is implemented as a change of DF affects the LOS and scopes, defaults and otherwise
+          carry_on_sub_flow: true,
           check_answers: :check_provider_answers,
         },
       }.freeze

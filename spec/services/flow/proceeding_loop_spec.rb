@@ -187,6 +187,47 @@ RSpec.describe Flow::ProceedingLoop do
           it { is_expected.to be :substantive_defaults }
         end
       end
+
+      context "when the user is checking answers" do
+        let(:legal_aid_application) do
+          create(:legal_aid_application,
+                 :with_proceedings,
+                 :at_checking_applicant_details,
+                 :with_delegated_functions_on_proceedings,
+                 explicit_proceedings: %i[da001 se013 da005],
+                 set_lead_proceeding: :da001,
+                 df_options:,
+                 provider_step:)
+        end
+        let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.second }
+        let(:loop_on?) { true }
+
+        before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => proceeding.id }) }
+
+        context "and is on the substantive_scope_limitations page" do
+          let(:provider_step) { "substantive_scope_limitations" }
+
+          it { is_expected.to be :limitations }
+        end
+
+        context "and is on the delegated_functions page" do
+          let(:provider_step) { "delegated_functions" }
+
+          context "and the full loop is off" do
+            let(:loop_on?) { false }
+
+            it { is_expected.to be :limitations }
+          end
+        end
+
+        context "and is on the substantive_defaults page" do
+          let(:provider_step) { "substantive_defaults" }
+
+          before { proceeding.update!(accepted_substantive_defaults: true) }
+
+          it { is_expected.to be :limitations }
+        end
+      end
     end
   end
 

@@ -459,10 +459,6 @@ Feature: Civil application journeys
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     When I click 'Save and continue'
-    Then I should be on a page with title "Does the client have a National Insurance number?"
-    And I choose "Yes"
-    And I enter national insurance number 'CB987654A'
-    When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
 
   @javascript @vcr

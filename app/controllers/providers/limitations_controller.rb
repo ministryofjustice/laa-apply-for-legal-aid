@@ -4,7 +4,7 @@ module Providers
 
     def show
       @form = LegalAidApplications::EmergencyCostOverrideForm.new(model: legal_aid_application)
-      legal_aid_application.enter_applicant_details! unless legal_aid_application.entering_applicant_details?
+      legal_aid_application.enter_applicant_details! unless no_state_change_required?
     end
 
     def update
@@ -18,6 +18,10 @@ module Providers
     end
 
   private
+
+    def no_state_change_required?
+      legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
+    end
 
     def form_needs_checking?
       legal_aid_application.used_delegated_functions? || @legal_aid_application.substantive_cost_overridable?
