@@ -483,7 +483,8 @@ en:
       client_offered_undertakings:
         show:
           h1-heading: Has the client offered undertakings?
-          no-hint: Tell us why the client has not offered undertakings. This will help us assess the application
+          no-hint: Tell us why the client has not offered undertakings. This will help us assess the application.
+          yes-hint: Tell us what undertakings the client has offered and if they were accepted. This will help us assess the application.
       nature_of_urgencies:
         show:
           h1-heading: What is the nature of the urgency?

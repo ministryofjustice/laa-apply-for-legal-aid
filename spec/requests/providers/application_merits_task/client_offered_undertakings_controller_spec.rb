@@ -47,13 +47,15 @@ module Providers
           )
         end
 
-        let(:offered) { true }
-        let(:additional_information) { "" }
+        let(:offered) { "true" }
+        let(:additional_information_true) { "yes answer" }
+        let(:additional_information_false) { "" }
         let(:params) do
           {
             application_merits_task_undertaking: {
               offered:,
-              additional_information:,
+              additional_information_true:,
+              additional_information_false:,
             },
           }
         end
@@ -69,7 +71,7 @@ module Providers
         it "creates a new undertaking with the values entered" do
           expect { post_client_undertakings }.to change(::ApplicationMeritsTask::Undertaking, :count).by(1)
           expect(undertaking.offered).to be_truthy
-          expect(undertaking.additional_information).to eq ""
+          expect(undertaking.additional_information).to eq "yes answer"
         end
 
         it "sets the task to complete" do
@@ -91,8 +93,9 @@ module Providers
         end
 
         context "when incomplete" do
-          let(:offered) { false }
-          let(:additional_information) { "" }
+          let(:offered) { "false" }
+          let(:additional_information_true) { "" }
+          let(:additional_information_false) { "" }
 
           it "renders show" do
             post_client_undertakings
