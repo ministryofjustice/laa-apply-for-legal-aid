@@ -102,16 +102,47 @@ RSpec.describe Applicant do
   end
 
   describe "#age" do
-    subject { legal_aid_application.applicant.age }
+    subject(:age) { legal_aid_application.applicant.age }
 
-    let(:legal_aid_application) { build(:legal_aid_application, :with_transaction_period, :with_applicant) }
+    let(:applicant) { build(:applicant, date_of_birth: 48.years.ago) }
 
-    it "returns the age of the applicant" do
-      expect(subject).to be_a(Integer)
+    let(:legal_aid_application) do
+      build(:legal_aid_application, :with_transaction_period, applicant:)
     end
 
-    it "sets the child? value" do
-      expect(legal_aid_application.applicant.child?).to eq legal_aid_application.applicant.age < 16
+    it "returns the calculated age of the applicant" do
+      expect(age).to be 48
+    end
+
+    context "when applicant does not require a means test" do
+      before do
+        allow(Setting).to receive(:means_test_review_phase_one?).and_return(true)
+        applicant.age_for_means_test_purposes = 17
+      end
+
+      it "returns age stored in age_for_means_test_purposes" do
+        expect(age).to be 17
+      end
+    end
+  end
+
+  describe "#child?" do
+    subject(:child?) { legal_aid_application.applicant.child? }
+
+    let(:legal_aid_application) do
+      build(:legal_aid_application, :with_transaction_period, applicant:)
+    end
+
+    context "when exactly 16" do
+      let(:applicant) { build(:applicant, date_of_birth: 16.years.ago) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when 1 day before 16" do
+      let(:applicant) { build(:applicant, date_of_birth: 16.years.ago + 1.day) }
+
+      it { is_expected.to be true }
     end
   end
 

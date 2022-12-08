@@ -47,7 +47,7 @@ FactoryBot.define do
     end
 
     trait :with_under_18_applicant do
-      applicant { build(:applicant, :with_address, date_of_birth: Date.current - 16.years, age_for_means_test_purposes: 16) }
+      applicant { build(:applicant, :with_address, date_of_birth: 18.years.ago + 1.day, age_for_means_test_purposes: 17) }
     end
 
     #######################################################
@@ -560,6 +560,10 @@ FactoryBot.define do
 
     trait :with_undetermined_benefit_check_result do
       benefit_check_result { build(:benefit_check_result, :undetermined) }
+    end
+
+    trait :with_skipped_benefit_check_result do
+      benefit_check_result { build(:benefit_check_result, :skipped) }
     end
 
     trait :passported do
