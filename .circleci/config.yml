@@ -151,6 +151,9 @@ jobs:
         name: Run StandardJS
         command: yarn run standardjs
     - run:
+        name: Run Stylelint
+        command: yarn run stylelint
+    - run:
         name: Run Rubocop
         command:  bundle exec rubocop
     - run:
