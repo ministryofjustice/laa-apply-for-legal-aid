@@ -18,10 +18,11 @@
     &.disabled,
     &.active {
       padding: 0 10px;
+    }
 
-      a {
-        padding: 0;
-      }
+    &.disabled a,
+    &.active a {
+      padding: 0;
     }
 
     &.prev a:before,
