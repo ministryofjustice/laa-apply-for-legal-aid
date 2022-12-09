@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important
+
 .small-loading-image {
   height: 22px;
   vertical-align: middle;
@@ -36,3 +38,5 @@
 .show-empty {
   min-height: 1px;
 }
+
+// stylelint-enable declaration-no-important

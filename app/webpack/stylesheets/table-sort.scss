@@ -1,3 +1,5 @@
+// stylelint-disable selector-no-qualifying-type
+
 @import "~govuk-frontend/govuk/settings/all";
 
 .sort.js-sortable,
@@ -203,3 +205,5 @@ td.sortable-cell {
     padding-left: 8px;
   }
 }
+
+// stylelint-enable selector-no-qualifying-type

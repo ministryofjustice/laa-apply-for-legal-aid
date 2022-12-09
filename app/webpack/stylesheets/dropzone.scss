@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important, selector-max-id
+
 .dropzone {
   display: flex;
   margin-top: 1em;
@@ -71,3 +73,5 @@
 .govuk-notification-banner {
   word-wrap: break-word;
 }
+
+// stylelint-enable declaration-no-important, selector-max-id

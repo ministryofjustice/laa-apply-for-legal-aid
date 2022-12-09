@@ -1,3 +1,5 @@
+// stylelint-disable selector-no-qualifying-type
+
 th.table-combine_right_if_narrow .table-hidden_right_title {
   display: none;
 }
@@ -70,3 +72,5 @@ th.table-combine_right_if_narrow .table-hidden_right_title {
     text-align: right;
   }
 }
+
+// stylelint-enable selector-no-qualifying-type

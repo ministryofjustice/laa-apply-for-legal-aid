@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important
+
 @import "~govuk-frontend/govuk/settings/all";
 @import "~govuk-frontend/govuk/tools/all";
 @import "~govuk-frontend/govuk/helpers/all";
@@ -75,3 +77,5 @@
     float: right;
   }
 }
+
+// stylelint-enable declaration-no-important

@@ -1,3 +1,5 @@
+// stylelint-disable selector-max-id, selector-no-qualifying-type
+
 @import "~govuk-frontend/govuk/settings/all";
 
 .interruption-panel {
@@ -76,3 +78,5 @@
     padding: 60px;
   }
 }
+
+// stylelint-enable selector-max-id, selector-no-qualifying-type

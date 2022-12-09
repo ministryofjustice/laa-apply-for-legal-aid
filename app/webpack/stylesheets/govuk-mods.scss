@@ -1,3 +1,5 @@
+// stylelint-disable selector-no-qualifying-type
+
 @import "~govuk-frontend/govuk/settings/all";
 
 dl.govuk-list.inline-list {
@@ -27,3 +29,5 @@ dl.govuk-list.inline-list {
 .govuk-button__start-icon {
   width: 15.5px;
 }
+
+// stylelint-enable selector-no-qualifying-type

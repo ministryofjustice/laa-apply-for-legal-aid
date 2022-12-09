@@ -1,3 +1,5 @@
+// stylelint-disable selector-no-qualifying-type
+
 dl.kvp {
   position: relative;
   left: 1em;
@@ -20,3 +22,5 @@ dl.kvp dd {
   padding: 0 0 3px;
   float: right;
 }
+
+// stylelint-enable selector-no-qualifying-type

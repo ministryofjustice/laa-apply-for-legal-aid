@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important, selector-max-id, selector-no-qualifying-type
+
 @import "~govuk-frontend/govuk/settings/all";
 
 #clear-search-div {
@@ -79,3 +81,5 @@ a.black_text_on_focus {
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
 }
+
+// stylelint-enable declaration-no-important, selector-max-id, selector-no-qualifying-type

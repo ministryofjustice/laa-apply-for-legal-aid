@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important, selector-max-id, selector-no-qualifying-type
+
 #print-logo {
   display: none;
   padding-bottom: 12mm;
@@ -139,3 +141,5 @@
     position: static;
   }
 }
+
+// stylelint-enable declaration-no-important, selector-max-id, selector-no-qualifying-type

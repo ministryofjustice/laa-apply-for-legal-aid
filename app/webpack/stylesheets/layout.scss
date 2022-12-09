@@ -1,3 +1,5 @@
+// stylelint-disable selector-max-id
+
 @import "~govuk-frontend/govuk/settings/all";
 @import "~govuk-frontend/govuk/helpers/all";
 
@@ -27,3 +29,5 @@
 abbr[title] {
   text-decoration: none;
 }
+
+// stylelint-enable selector-max-id
