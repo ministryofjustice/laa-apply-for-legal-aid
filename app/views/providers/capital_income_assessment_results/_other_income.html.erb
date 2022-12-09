@@ -1,5 +1,5 @@
 <h2 class="govuk-heading-m">
-  <%= @legal_aid_application.provider.employment_permissions? && @cfe_result.jobs? ? t('.title') : t('.income') %>
+  <%= @cfe_result.jobs? ? t('.title') : t('.income') %>
 </h2>
 <table class="govuk-table">
   <tbody>

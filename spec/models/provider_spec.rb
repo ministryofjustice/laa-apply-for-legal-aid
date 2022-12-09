@@ -60,7 +60,6 @@ RSpec.describe Provider do
 
       it "returns the permission for the provider" do
         expect(provider.user_permissions).to eq [passported_permission]
-        expect(provider.employment_permissions?).to be false
       end
     end
 
