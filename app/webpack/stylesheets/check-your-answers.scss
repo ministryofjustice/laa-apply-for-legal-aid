@@ -16,17 +16,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
   }
 }
 
-.app-check-your-answers {
-  @include govuk-font(19);
-  @include govuk-responsive-margin(3, "bottom");
-  border-top: 1px solid $govuk-border-colour;
-  @include govuk-responsive-padding(3, "top");
-
-  .govuk-grid-row div:first-child {
-    font-weight: bold;
-  }
-}
-
 .app-check-your-answers--long {
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
