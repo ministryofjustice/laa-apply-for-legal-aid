@@ -1,26 +1,34 @@
 .interruption-panel {
-  background-color:#1d70b8;
-  padding:30px;
+  padding: 30px;
+  background-color: #1d70b8;
 
-  p,h1,h2,ul,label,a,a:link,a:visited {
+  p,
+  h1,
+  h2,
+  ul,
+  label,
+  a,
+  a:link,
+  a:visited {
     color: govuk-colour("white");
   }
 
   label {
-    font-size: 24px
+    font-size: 24px;
   }
 
-  .govuk-error-summary, .govuk-error-message {
+  .govuk-error-summary,
+  .govuk-error-message {
     display: none;
   }
 
   .govuk-error-summary + .govuk-grid-row .govuk-form-group {
-    border-left: 5px solid white;
     padding-left: 15px;
+    border-left: 5px solid white;
   }
 
   h2 {
-    font-size:28px;
+    font-size: 28px;
   }
 
   .maximize-text-width {
@@ -28,14 +36,16 @@
     float: none;
   }
 
-  #continue, a.white-button, button.white-button {
+  #continue,
+  a.white-button,
+  button.white-button {
     color: #1d70b8;
-    background: #fff;
-    font-weight: bold;
+    background: #ffffff;
     box-shadow: 0 2px 0 #001526;
+    font-weight: bold;
 
     &:focus {
-      background-color:#ffdd00;
+      background-color: #ffdd00;
     }
 
     &:active {
@@ -47,20 +57,20 @@
     }
   }
 
-  .govuk-radios__label::before,
-  & ::after {
-    color: govuk-colour("black");
+  .govuk-radios__label:before,
+  & :after {
     border-color: govuk-colour("black");
+    color: govuk-colour("black");
     background-color: govuk-colour("white");
   }
 
   .govuk-inset-text {
+    border-left: $govuk-border-width-wide solid govuk-colour("white");
     color: govuk-colour("white");
-    border-left: $govuk-border-width-wide solid govuk-colour("white");;
   }
 }
 @media (min-width: 769px) {
   .interruption-panel {
-    padding:60px;
+    padding: 60px;
   }
 }

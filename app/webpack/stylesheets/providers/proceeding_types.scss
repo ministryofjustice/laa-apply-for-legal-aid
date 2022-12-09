@@ -10,16 +10,16 @@
 }
 
 .hover {
+  padding-top: 2px;
   background-color: #e7f4fb;
   cursor: pointer;
-  padding-top: 2px;
 }
 
 .highlight {
-  border-bottom: 3px solid #ffdd00;
   margin-right: 1px;
+  padding: 2px 0 0;
+  border-bottom: 3px solid #ffdd00;
   background-color: #fff2d3;
-  padding: 2px 0px 0px;
 }
 
 .selected-proceeding-types {

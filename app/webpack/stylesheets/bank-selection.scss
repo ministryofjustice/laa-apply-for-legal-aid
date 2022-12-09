@@ -1,11 +1,11 @@
 .bank-selection {
   .govuk-radios__item {
     border: 1px solid #0b0c0c;
-    cursor: pointer;
     background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(left,  #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #ffffff 0%,#ffffff 31%,#ffffff 31%,#f8f8f8 31%,#f8f8f8 31%,#f8f8f8 31%,#f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #ffffff 0%,#ffffff 31%,#ffffff 31%,#f8f8f8 31%,#f8f8f8 31%,#f8f8f8 31%,#f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    cursor: pointer;
   }
 
   .govuk-radios__input {
@@ -16,8 +16,8 @@
     display: inline-block;
     width: 100px;
     height: 50px;
+    margin: 0 30px 0 20px;
     text-align: center;
-    margin: 0px 30px 0px 20px;
 
     img {
       width: 100%;
@@ -33,13 +33,13 @@
     }
   }
 
-  .govuk-radios__input + .govuk-radios__label::before {
+  .govuk-radios__input + .govuk-radios__label:before {
     top: 15px;
     left: 10px;
   }
 
-  .govuk-radios__input + .govuk-radios__label::after {
-    top:25px;
-    left: 20px
+  .govuk-radios__input + .govuk-radios__label:after {
+    top: 25px;
+    left: 20px;
   }
 }

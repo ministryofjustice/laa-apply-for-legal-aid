@@ -1,21 +1,21 @@
 @import "~govuk-frontend/govuk/settings/all";
 
 #clear-search-div {
-  padding-left: 15px;
   padding-top: 5px;
+  padding-left: 15px;
 }
 
 div.proceeding-item {
   margin: 20px 0 0;
   padding: 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 div.no-results {
   margin-left: 0;
+  padding-bottom: 20px;
   font-family: "GDS Transport", arial, sans-serif;
   font-size: 19px;
-  padding-bottom: 20px;
 }
 
 .change-postcode-link {
@@ -23,20 +23,20 @@ div.no-results {
 }
 
 .button-as-link {
-  background: none;
-  color: $govuk-link-colour;
-  border: none;
   padding: 0 !important;
+  border: none;
+  outline: none;
+  color: $govuk-link-colour;
+  background: none;
   font: inherit;
   text-decoration: underline;
   cursor: pointer;
-  outline: none;
 
   &:focus {
+    outline: 3px solid transparent;
     color: $govuk-focus-text-colour;
     background-color: $govuk-focus-colour;
     box-shadow: 0 -2px $govuk-focus-colour, 0 4px $govuk-focus-text-colour;
-    outline: 3px solid transparent;
     text-decoration: none;
   }
 }
@@ -54,8 +54,8 @@ div.no-results {
   color: white;
 }
 
-a.black_text_on_focus{
-  &:focus{ color: black; }
+a.black_text_on_focus {
+  &:focus { color: black; }
 }
 
 .target {
@@ -76,5 +76,4 @@ a.black_text_on_focus{
   -o-transform: scaleY(0);
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
-
 }

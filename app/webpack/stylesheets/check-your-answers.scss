@@ -15,6 +15,7 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
     font-weight: bold;
   }
 }
+
 .app-check-your-answers {
   @include govuk-font(19);
   @include govuk-responsive-margin(3, "bottom");
@@ -33,8 +34,8 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
   @include govuk-responsive-padding(3, "top");
 
   .govuk-grid-row div:first-child {
-    font-weight: bold;
     width: 50%;
+    font-weight: bold;
   }
 
   .govuk-grid-row div:nth-child(2) {
@@ -65,9 +66,9 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
     //border-top: 3px solid #000;
     display: table-row;
   }
+  border-top: 3px solid #000000;
+  border-bottom: 1px solid #000000;
   font-weight: bold;
-  border-top: 3px solid #000;
-  border-bottom: 1px solid #000;
 }
 
 .govuk-summary-list__key {

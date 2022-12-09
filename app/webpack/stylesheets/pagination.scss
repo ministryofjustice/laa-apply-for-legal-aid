@@ -1,14 +1,15 @@
 .pagination-container {
-  nav, .page-info {
+  nav,
+  .page-info {
     display: inline;
     line-height: 2em;
   }
+
   .page-info {
     float: right;
   }
 
   .pagy-nav .page {
-
     a {
       padding: 0 10px;
       text-decoration: none;
@@ -17,39 +18,38 @@
     &.disabled,
     &.active {
       padding: 0 10px;
-      
+
       a {
-        padding:0;
+        padding: 0;
       }
     }
-    
+
     &.prev a:before,
     &.prev.disabled:before {
+      margin-right: 4px;
       border-width: 3px 0 0 3px;
-      margin-right:4px;
     }
-    
+
     &.next a:after,
     &.next.disabled:after {
+      margin-left: 4px;
       border-width: 0 3px 3px 0;
-      margin-left:4px;
     }
   }
-  
+
   .pagy-nav .page.prev.disabled:before,
   .pagy-nav .page.next.disabled:after,
   .pagy-nav .page.prev a:before,
-  .pagy-nav .page.next a:after{
+  .pagy-nav .page.next a:after {
+    content: "";
     display: inline-block;
-    height: 10px;
     width: 10px;
-    border-style: solid;
-    color: #0b0c0c;
-    background: transparent;
+    height: 10px;
     -webkit-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    content: "";
+    border-style: solid;
+    color: #0b0c0c;
+    background: transparent;
   }
-  
 }
