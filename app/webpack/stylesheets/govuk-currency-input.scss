@@ -1,12 +1,11 @@
-/*
-  Used with:
-    <div class="govuk-currency-input">
-      <div class="govuk-currency-input__inner">
-        <span class="govuk-currency-input__inner__unit">£</span>
-        <%= form.text_field :field_name, class: 'govuk-input govuk-currency-input__inner__input' %>
-      </div>
-    </div>
-  */
+// Used with:
+//     <div class="govuk-currency-input">
+//       <div class="govuk-currency-input__inner">
+//         <span class="govuk-currency-input__inner__unit">£</span>
+//         <%= form.text_field :field_name, class: 'govuk-input govuk-currency-input__inner__input' %>
+//       </div>
+//     </div>
+
 .govuk-currency-input {
   &__inner {
     position: relative;

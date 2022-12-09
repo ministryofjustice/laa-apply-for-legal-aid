@@ -4,7 +4,6 @@
 $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 
 .moj-banner {
-  //font-size: 0; // Removes white space when using inline-block on child element.
   margin-bottom: govuk-spacing(6);
   padding: govuk-spacing(2);
   border: 5px solid govuk-colour("blue");
@@ -36,9 +35,6 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 .moj-banner__assistive {
   @include govuk-visually-hidden;
 }
-
-/* Style variants
-   ========================================================================== */
 
 .moj-banner--success {
   border-color: govuk-colour("green");

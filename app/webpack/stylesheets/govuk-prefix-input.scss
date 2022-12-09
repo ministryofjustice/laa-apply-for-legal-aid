@@ -1,12 +1,11 @@
-/*
-Used with:
-  <div class="govuk-prefix-input">
-    <div class="govuk-prefix-input__inner">
-      <span class="govuk-prefix-input__inner__unit">£</span>
-      <%= form.text_field :field_name, class: 'govuk-input govuk-prefix-input__inner__input' %>
-    </div>
-  </div>
-*/
+// Used with:
+//   <div class="govuk-prefix-input">
+//     <div class="govuk-prefix-input__inner">
+//       <span class="govuk-prefix-input__inner__unit">£</span>
+//       <%= form.text_field :field_name, class: 'govuk-input govuk-prefix-input__inner__input' %>
+//     </div>
+//   </div>
+
 .govuk-prefix-input {
   color: #0b0c0c;
   font-family: "GDS Transport", arial, sans-serif;

@@ -19,7 +19,6 @@
     width: 200mm;
   }
 
-  /* font size adjustments */
   .govuk-heading-xl {
     font-size: 8.45mm !important;
   }
@@ -40,7 +39,6 @@
     font-weight: bold;
   }
 
-  /* replacing missing bullets */
   .govuk-list.govuk-list--bullet > li > strong:before {
     content: "● ";
   }
@@ -135,9 +133,8 @@
   size: 200mm 275mm;
 }
 
-/* header overrides */
 @media print and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* IE10+ CSS styles */
+  // IE10+ CSS styles
   .print-header-wrapper {
     position: static;
   }

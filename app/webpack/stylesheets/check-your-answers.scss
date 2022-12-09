@@ -47,12 +47,7 @@ $govuk-fonts-path: "~govuk-frontend/govuk/assets/fonts/";
 }
 
 .govuk-summary-list__total-row {
-  @include govuk-media-query($until: tablet) {
-    //border-top: 3px solid #000;
-    //margin-bottom: govuk-spacing(3);
-  }
   @include govuk-media-query($from: tablet) {
-    //border-top: 3px solid #000;
     display: table-row;
   }
   border-top: 3px solid #000000;

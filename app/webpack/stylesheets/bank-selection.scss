@@ -1,10 +1,10 @@
 .bank-selection {
   .govuk-radios__item {
     border: 1px solid #0b0c0c;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: #ffffff; // Old browsers
+    background: -moz-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); // FF3.6-15
+    background: -webkit-linear-gradient(left, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); // Chrome10-25,Safari5.1-6
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 31%, #ffffff 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 31%, #f8f8f8 100%); // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
     cursor: pointer;
   }
 

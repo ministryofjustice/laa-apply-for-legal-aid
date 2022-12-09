@@ -1,6 +1,4 @@
-/********
-All screens
-/ ********/
+// All screens
 
 #navigation > li {
   max-width: 100%;
@@ -12,9 +10,7 @@ All screens
   }
 }
 
-/********
-Approx 770px+
-/ ********/
+// Approx 770px+
 
 @media (min-width: 48.0625em) {
   #navigation > li {
@@ -23,10 +19,8 @@ Approx 770px+
   }
 }
 
-/********
-1020px+
-(as per the govuk-width-container style)
-/ ********/
+// 1020px+
+// (as per the govuk-width-container style)
 
 @media (min-width: 1020px) {
   #navigation > li {
