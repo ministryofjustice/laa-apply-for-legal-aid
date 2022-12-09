@@ -9,7 +9,6 @@ Given "I have completed a non-passported employed application with bank statemen
     :provider_confirming_applicant_eligibility,
   )
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
 
@@ -35,7 +34,6 @@ Given "I have completed a non-passported employed application with bank statemen
 
   create :attachment, :bank_statement, legal_aid_application: @legal_aid_application
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
 
@@ -57,7 +55,6 @@ Given "I have completed a non-passported non-employed application with bank stat
 
   create :attachment, :bank_statement, legal_aid_application: @legal_aid_application
 
-  @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.employment.*")
   @legal_aid_application.provider.permissions << Permission.find_by(role: "application.non_passported.bank_statement_upload.*")
   @legal_aid_application.provider.save!
 

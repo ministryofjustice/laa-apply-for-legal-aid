@@ -338,8 +338,6 @@ Given("I start the means review journey with employment income for a single job 
     :provider_assessing_means,
   )
 
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
-
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -356,8 +354,6 @@ Given("I start the means review journey with no employment income from HMRC") do
     :provider_assessing_means,
     applicant: build(:applicant, :employed),
   )
-
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -376,8 +372,6 @@ Given("I start the means review journey with employment income for multiple jobs
     :with_non_passported_state_machine,
     :provider_assessing_means,
   )
-
-  @legal_aid_application.provider.permissions << Permission.where(role: "application.non_passported.employment.*").first
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(

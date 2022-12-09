@@ -4,7 +4,6 @@ Feature: Check pending employment
     Given I am logged in as a provider
     And csrf is enabled
     And an applicant named John Pending has completed his true layer interaction
-    And the system is prepped for the employed journey
 
     When I visit the applications page
     And I click link 'John Pending'
