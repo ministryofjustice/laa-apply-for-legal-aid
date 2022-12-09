@@ -55,7 +55,9 @@ div.no-results {
 }
 
 a.black_text_on_focus {
-  &:focus { color: black; }
+  &:focus {
+    color: black;
+  }
 }
 
 .target {
