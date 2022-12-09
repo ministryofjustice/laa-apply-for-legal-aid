@@ -9,6 +9,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
            :with_everything,
            :with_proceedings,
            :assessment_submitted,
+           :with_cfe_v5_result,
            explicit_proceedings: %i[da001],
            set_lead_proceeding: :da001,
            provider:)
@@ -93,7 +94,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     end
     let(:login) { login_as legal_aid_application.provider }
     let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
-    let!(:cfe_result) { create(:cfe_v4_result, :with_employments, submission: cfe_submission) }
+    let!(:cfe_result) { create(:cfe_v5_result, :with_employments, submission: cfe_submission) }
     let(:translation_path) { "shared.employment_income_table" }
 
     shared_examples "employment data is not present" do

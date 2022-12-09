@@ -77,12 +77,11 @@ RSpec.describe Providers::ApplicantEmployedController do
       end
     end
 
-    context "when the provider has employment permissions and the application is ineligible for employment journey" do
+    context "when the application is ineligible for employment journey" do
       it "redirects to the use ccms employed page" do
         applicant = create(:applicant, self_employed: true)
         legal_aid_application = create(:legal_aid_application, applicant:)
         provider = legal_aid_application.provider
-        grant_employment_journey_permissions(provider)
         login_as provider
 
         post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
@@ -92,51 +91,7 @@ RSpec.describe Providers::ApplicantEmployedController do
       end
     end
 
-    context "when the provider has employment permissions and the applicant is eligible for employment journey" do
-      it "redirects to the substantive applications page for applications that used delegated functions" do
-        legal_aid_application = create(
-          :legal_aid_application,
-          :with_proceedings,
-          :with_delegated_functions_on_proceedings,
-          df_options: { DA001: [Date.yesterday, Date.current] },
-        )
-        provider = legal_aid_application.provider
-        grant_employment_journey_permissions(provider)
-        login_as provider
-
-        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-             params: { applicant: { employed: "true" } }
-
-        expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
-      end
-
-      it "redirects to the open banking consent page for applications that have not used delegated functions" do
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        grant_employment_journey_permissions(provider)
-        login_as provider
-
-        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-             params: { applicant: { employed: "true" } }
-
-        expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
-      end
-    end
-
-    context "when the provider does not have employment permissions and the applicant is employed" do
-      it "redirects to the use ccms employed page" do
-        legal_aid_application = create(:legal_aid_application)
-        provider = legal_aid_application.provider
-        login_as provider
-
-        post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-             params: { applicant: { employed: "true" } }
-
-        expect(response).to redirect_to(providers_legal_aid_application_use_ccms_employed_index_path(legal_aid_application))
-      end
-    end
-
-    context "when the provider does not have employment permissions and the applicant is not employed" do
+    context "when the applicant is eligible for employment journey" do
       it "redirects to the substantive applications page for applications that used delegated functions" do
         legal_aid_application = create(
           :legal_aid_application,
@@ -148,7 +103,7 @@ RSpec.describe Providers::ApplicantEmployedController do
         login_as provider
 
         post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-             params: { applicant: { employed: "false" } }
+             params: { applicant: { employed: "true" } }
 
         expect(response).to redirect_to(providers_legal_aid_application_substantive_application_path(legal_aid_application))
       end
@@ -159,16 +114,10 @@ RSpec.describe Providers::ApplicantEmployedController do
         login_as provider
 
         post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application),
-             params: { applicant: { employed: "false" } }
+             params: { applicant: { employed: "true" } }
 
         expect(response).to redirect_to(providers_legal_aid_application_open_banking_consents_path(legal_aid_application))
       end
     end
-  end
-
-  def grant_employment_journey_permissions(provider)
-    permission = create(:permission, :employed)
-    provider.permissions << permission
-    provider.save!
   end
 end
