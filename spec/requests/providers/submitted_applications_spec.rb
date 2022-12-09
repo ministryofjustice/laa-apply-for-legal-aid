@@ -77,7 +77,6 @@ RSpec.describe Providers::SubmittedApplicationsController do
 
   describe "employment income table" do
     subject do
-      allow_any_instance_of(Provider).to receive(:employment_permissions?).and_return(true)
       login
       get providers_legal_aid_application_submitted_application_path(legal_aid_application)
     end
