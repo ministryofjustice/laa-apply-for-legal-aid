@@ -68,6 +68,8 @@
 <% end %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
+<div class="govuk-!-padding-bottom-8"></div>
+
 <section class="print-no-break">
   <%= render('shared/check_answers/bank_statements', bank_statements: @legal_aid_application.attachments.bank_statement_evidence, read_only: true) %>
 </section>
